@@ -1,3 +1,4 @@
+import type { MultiRangeProps } from '@viaa/avo2-components';
 import { AdminConfigManager } from '~core/config';
 import {
 	GET_ALIGN_OPTIONS,
@@ -7,6 +8,7 @@ import { GET_COLOR_OPTIONS_EXTENDED_AVO } from '~modules/content-page/const/get-
 import { GET_HEADING_SIZE_OPTIONS } from '~modules/content-page/const/get-heading-type-options';
 import type { FileUploadProps } from '~modules/shared/components/FileUpload/FileUpload';
 import { GET_ADMIN_ICON_OPTIONS } from '~modules/shared/consts/icons.consts';
+import { PHOTO_TYPES } from '~shared/helpers/files';
 import { tText } from '~shared/helpers/translation-functions';
 import type {
 	AvoImageTextBackgroundBlockComponentState,
@@ -14,15 +16,12 @@ import type {
 	DefaultContentBlockState,
 } from '../../../types/content-block.types';
 import { Color, ContentBlockEditor, ContentBlockType } from '../../../types/content-block.types';
-
 import {
 	BLOCK_FIELD_DEFAULTS,
 	BLOCK_STATE_DEFAULTS,
 	PADDING_SINGLE_VALUE_FIELD,
 	TEXT_FIELD,
 } from '../defaults';
-import type { MultiRangeProps } from '@viaa/avo2-components';
-import { PHOTO_TYPES } from '~shared/helpers/files';
 
 export const INITIAL_AVO_IMAGE_TEXT_BACKGROUND_COMPONENTS_STATE =
 	(): AvoImageTextBackgroundBlockComponentState => ({
@@ -33,7 +32,7 @@ export const INITIAL_AVO_IMAGE_TEXT_BACKGROUND_COMPONENTS_STATE =
 		textAlign: 'center',
 		textPadding: 'small',
 		contentWidth: 60,
-		contentPosition: 0,
+		contentPosition: 50,
 		foregroundColor: Color.Black,
 		backgroundColor: Color.TealBright,
 		buttonLabel: '',
