@@ -221,6 +221,7 @@ export class ContentPagesService {
 			seo_description: contentPageInfo.seoDescription || null,
 			meta_description: contentPageInfo.metaDescription || null,
 			is_protected: contentPageInfo.isProtected,
+			is_public: contentPageInfo.isPublic,
 			path: contentPageInfo.path,
 			content_type: contentPageInfo.contentType,
 			content_width: contentPageInfo.contentWidth,
