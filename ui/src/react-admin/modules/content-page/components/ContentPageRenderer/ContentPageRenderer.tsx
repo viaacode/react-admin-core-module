@@ -264,7 +264,7 @@ export const ContentPageRenderer: FunctionComponent<ContentPageDetailProps> = (p
 		if (!props.contentPageInfo) {
 			return <CenteredSpinner />;
 		}
-		if (isNil(props.contentPageInfo.id)) {
+		if (isNil(props.contentPageInfo.contentType)) {
 			return <div>Page with path {location.pathname} was not found</div>;
 		}
 		const queryParams = new URLSearchParams(window.location.search);
