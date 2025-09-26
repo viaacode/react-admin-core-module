@@ -686,7 +686,9 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 				type: ContentEditActionType.SET_BLOCK_STATE,
 				payload: {
 					index,
-					formGroupState: (Array.isArray(formGroupState) ? formGroupState[0] : formGroupState) as
+					formGroupState: (Array.isArray(formGroupState)
+						? formGroupState[stateIndex || 0]
+						: formGroupState) as
 						| SingleContentBlockComponentState
 						| RepeatedContentBlockComponentState,
 				},
@@ -698,7 +700,7 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 					index,
 					stateIndex,
 					formGroupState: Array.isArray(formGroupState)
-						? (formGroupState[0] as Partial<ContentBlockComponentState>)
+						? (formGroupState[stateIndex || 0] as Partial<ContentBlockComponentState>)
 						: formGroupState,
 				},
 			});
