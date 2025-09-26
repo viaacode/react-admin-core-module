@@ -21,11 +21,9 @@ import { parseISO, setHours, setMinutes, setSeconds } from 'date-fns';
 import type { FC } from 'react';
 import React, { useState } from 'react';
 import { BlockHeading } from '~content-blocks/BlockHeading/BlockHeading';
-import { getDatePickerDefaultProps } from '~modules/content-page/components/DatePicker/DatePicker.consts';
-
-import { getPublishedState } from '~modules/content-page/helpers';
-
 import { ToastType } from '~core/config/config.types';
+import { getDatePickerDefaultProps } from '~modules/content-page/components/DatePicker/DatePicker.consts';
+import { getPublishedState } from '~modules/content-page/helpers';
 import { showToast } from '~shared/helpers/show-toast';
 import { tHtml, tText } from '~shared/helpers/translation-functions';
 import type { ContentPageInfo, PublishOption } from '../types/content-pages.types';
@@ -78,6 +76,7 @@ const PublishContentPageModal: FC<PublishContentPageModalProps> = ({
 				isPublic,
 				publishedAt: isPublic ? publishedAtDisplay || now.toISOString() : null,
 				publishedAtDisplay: publishedAtDisplay || null,
+				depublishedAt: isPublic ? null : contentPage.depublishedAt || now.toISOString(),
 				publishAt: selectedOption === 'timebound' ? publishAt : null,
 				depublishAt: selectedOption === 'timebound' ? depublishAt : null,
 			} as ContentPageInfo;

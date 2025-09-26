@@ -1,9 +1,8 @@
 import type { Avo } from '@viaa/avo2-types';
 import type { Locale } from '~modules/translations/translations.core.types';
-import type { PickerItem } from '~shared/types/content-picker';
-
 import type { DateRange } from '~shared/components/DateRangeDropdown/DateRangeDropdown';
 import type { FilterableTableState } from '~shared/components/FilterTable/FilterTable';
+import type { PickerItem } from '~shared/types/content-picker';
 
 import type { ContentBlockConfig, DbContentBlock } from './content-block.types';
 
@@ -92,6 +91,7 @@ interface ContentPageBase {
 	publishedAtDisplay: string | null; // Contains an override date for when this page is published, this date should be displayed as the publish date instead of the actual publish date
 	publishAt: string | null;
 	depublishAt: string | null;
+	depublishedAt: string | null;
 	createdAt: string;
 	updatedAt: string | null;
 	isProtected: boolean;

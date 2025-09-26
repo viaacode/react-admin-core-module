@@ -145,37 +145,38 @@ export class ContentPagesService {
 		);
 		/* istanbul ignore next */
 		return {
-			id: gqlContentPage?.id,
-			thumbnailPath: gqlContentPage?.thumbnail_path,
-			title: gqlContentPage?.title,
+			id: gqlContentPage.id,
+			thumbnailPath: gqlContentPage.thumbnail_path,
+			title: gqlContentPage.title,
 			language: gqlContentPage.language,
 			nlParentPageId: gqlContentPage.nl_parent_page_id,
-			description: gqlContentPage?.description,
-			seoDescription: gqlContentPage?.seo_description,
-			metaDescription: gqlContentPage?.meta_description,
-			path: gqlContentPage?.path,
-			isPublic: gqlContentPage?.is_public,
-			publishedAt: gqlContentPage?.published_at,
-			publishedAtDisplay: gqlContentPage?.published_at_display,
-			publishAt: gqlContentPage?.publish_at,
-			depublishAt: gqlContentPage?.depublish_at,
-			createdAt: gqlContentPage?.created_at,
-			updatedAt: gqlContentPage?.updated_at,
-			isProtected: gqlContentPage?.is_protected,
-			contentType: gqlContentPage?.content_type as Avo.ContentPage.Type,
-			contentWidth: gqlContentPage?.content_width as ContentWidth,
+			description: gqlContentPage.description,
+			seoDescription: gqlContentPage.seo_description,
+			metaDescription: gqlContentPage.meta_description,
+			path: gqlContentPage.path,
+			isPublic: gqlContentPage.is_public,
+			publishedAt: gqlContentPage.published_at,
+			publishedAtDisplay: gqlContentPage.published_at_display,
+			publishAt: gqlContentPage.publish_at,
+			depublishAt: gqlContentPage.depublish_at,
+			depublishedAt: gqlContentPage.depublished_at,
+			createdAt: gqlContentPage.created_at,
+			updatedAt: gqlContentPage.updated_at,
+			isProtected: gqlContentPage.is_protected,
+			contentType: gqlContentPage.content_type as Avo.ContentPage.Type,
+			contentWidth: gqlContentPage.content_width as ContentWidth,
 			owner,
-			userProfileId: gqlContentPage?.user_profile_id,
-			userGroupIds: gqlContentPage?.user_group_ids?.map((groupId) => String(groupId)),
+			userProfileId: gqlContentPage.user_profile_id,
+			userGroupIds: gqlContentPage.user_group_ids?.map((groupId) => String(groupId)),
 			content_blocks: (
 				(gqlContentPage as any)?.content_blocks ||
 				(gqlContentPage as any)?.contentBlockssBycontentId ||
 				[]
 			).map(this.adaptContentBlock),
-			labels: (gqlContentPage?.content_content_labels || []).map(
+			labels: (gqlContentPage.content_content_labels || []).map(
 				(labelObj): ContentPageLabel => ({
 					id: labelObj?.content_label?.id,
-					content_type: gqlContentPage?.content_type as ContentPageType, // TODO eliminate either ContentPageType or Avo.ContentPage.Type
+					content_type: gqlContentPage.content_type as ContentPageType, // TODO eliminate either ContentPageType or Avo.ContentPage.Type
 					label: labelObj?.content_label?.label,
 					language: labelObj?.content_label?.language,
 					link_to: labelObj?.content_label?.link_to,
@@ -228,6 +229,7 @@ export class ContentPagesService {
 			depublish_at: contentPageInfo.depublishAt || null,
 			published_at: contentPageInfo.publishedAt || null,
 			published_at_display: contentPageInfo.publishedAtDisplay || null,
+			depublished_at: contentPageInfo.depublishedAt || null,
 			created_at: contentPageInfo.createdAt || null,
 			updated_at: contentPageInfo.updatedAt || null,
 			user_group_ids: contentPageInfo.userGroupIds.map((groupId) => String(groupId)),
@@ -418,6 +420,10 @@ export class ContentPagesService {
 			path
 		);
 
+		if (!contentPage) {
+			return null;
+		}
+
 		const permissions = user?.permissions || [];
 		const userId = user?.userId;
 		const canEditContentPage =
@@ -426,23 +432,9 @@ export class ContentPagesService {
 				!!userId &&
 				contentPage.owner.id === userId);
 
-		if (!contentPage) {
-			return null;
-		}
-
 		// People that can edit the content page are not restricted by the publish_at, depublish_at, is_public settings
 		if (!canEditContentPage) {
-			if (
-				contentPage.publishAt &&
-				new Date().getTime() < new Date(contentPage.publishAt).getTime()
-			) {
-				return null; // Not yet published
-			}
-
-			if (
-				contentPage.depublishAt &&
-				new Date().getTime() > new Date(contentPage.depublishAt).getTime()
-			) {
+			if (contentPage.depublishedAt) {
 				throw new BadRequestException({
 					message: 'The content page was depublished',
 					additionalInfo: {
@@ -452,8 +444,8 @@ export class ContentPagesService {
 				});
 			}
 
-			if (!contentPage.isPublic) {
-				return null;
+			if (!contentPage.publishedAt) {
+				return null; // Not yet published
 			}
 
 			// Check if content page is accessible for the user who requested the content page
