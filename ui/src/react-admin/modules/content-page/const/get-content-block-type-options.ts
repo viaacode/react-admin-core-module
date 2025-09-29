@@ -1,8 +1,8 @@
 import type { SelectOption } from '@viaa/avo2-components';
 import { AdminConfigManager } from '~core/config';
 import { tText } from '~shared/helpers/translation-functions';
-import { ContentBlockType } from '../types/content-block.types';
 import { AVO, HET_ARCHIEF } from '~shared/types';
+import { ContentBlockType } from '../types/content-block.types';
 
 export const GET_CONTENT_BLOCK_TYPE_OPTIONS: () => SelectOption<string>[] = () => {
 	const allContentBlocks: { label: string; value: ContentBlockType }[] = [
@@ -171,6 +171,10 @@ export const GET_CONTENT_BLOCK_TYPE_OPTIONS: () => SelectOption<string>[] = () =
 				HET_ARCHIEF,
 			]),
 			value: ContentBlockType.Breadcrumbs,
+		},
+		{
+			label: tText('Scroll down nudge'),
+			value: ContentBlockType.ScrollDownNudge,
 		},
 	];
 

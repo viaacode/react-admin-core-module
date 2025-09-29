@@ -25,6 +25,7 @@ import {
 	BlockProjectSpotlightWrapper,
 	BlockQuote,
 	BlockRichTextWrapper,
+	BlockScrollDownNudge,
 	BlockSpotlight,
 	BlockTagsWithLink,
 	BlockThreeClickableTiles,
@@ -75,6 +76,7 @@ export function GET_BLOCK_COMPONENT(
 		[ContentBlockType.TagsWithLink]: BlockTagsWithLink,
 		[ContentBlockType.CardsWithoutDescription]: BlockCardsWithoutDescription,
 		[ContentBlockType.MaintainersGrid]: BlockMaintainersGrid,
+		[ContentBlockType.ScrollDownNudge]: BlockScrollDownNudge,
 
 		// Het archief specific blocks
 		[ContentBlockType.HetArchiefHeaderSearch]: BlockHetArchiefHeaderSearch,

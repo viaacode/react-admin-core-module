@@ -25,6 +25,7 @@ import './ContentPagePreviewUserRoleSelector.scss';
 
 type ContentPagePreviewUserRoleSelectorProps = {
 	commonUser?: Avo.User.CommonUser;
+	onToggleMenu?: (isOpen: boolean) => void;
 };
 
 export const ContentPagePreviewUserRoleSelector: FunctionComponent<
@@ -83,6 +84,11 @@ export const ContentPagePreviewUserRoleSelector: FunctionComponent<
 		);
 	}, [userGroupOptions, queryParams.userGroupId]);
 
+	const handleOpenCloseMenu = (isOpen: boolean) => {
+		setIsMenuOpen(isOpen);
+		props.onToggleMenu?.(isOpen);
+	};
+
 	return (
 		<Dropdown
 			flyoutClassName="c-menu-content"
@@ -90,8 +96,8 @@ export const ContentPagePreviewUserRoleSelector: FunctionComponent<
 			placement="bottom-end"
 			className={props.className}
 			isOpen={isMenuOpen}
-			onOpen={() => setIsMenuOpen(true)}
-			onClose={() => setIsMenuOpen(false)}
+			onOpen={() => handleOpenCloseMenu(true)}
+			onClose={() => handleOpenCloseMenu(false)}
 		>
 			<DropdownButton>
 				{isAvo() ? (
