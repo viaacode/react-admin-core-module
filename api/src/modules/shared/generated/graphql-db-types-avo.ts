@@ -54228,6 +54228,12 @@ export enum Users_Idps_Enum {
   Hetarchief = 'HETARCHIEF',
   /** OAuth service van Klascement op oauth.klascement.be */
   Klascement = 'KLASCEMENT',
+  /** lti idp for embedding videos on external platforms without a user being logged in on the external platform */
+  LtiAnonymous = 'LTI_ANONYMOUS',
+  /** bookwidgets lti idp flow for embedding videos in their platform */
+  LtiBookwidgets = 'LTI_BOOKWIDGETS',
+  /** smartschoollti idp flow for embedding videos in their platform */
+  LtiSmartschool = 'LTI_SMARTSCHOOL',
   /** OAuth service van Smartschool op oauth.smartschool.be. */
   Smartschool = 'SMARTSCHOOL',
   /** OAuth service van de Vlaamse Overheid: ACM-IDM using the ov_account_uuid id of the user */
