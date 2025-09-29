@@ -1,3 +1,5 @@
+import { INITIAL_BREADCRUMBS_BLOCK_STATE } from '~content-blocks/BlockBreadcrumbs/BlockBreadcrumbs.editorconfig';
+import { INITIAL_CONTENT_ENCLOSE_BLOCK_STATE } from '~content-blocks/BlockContentEnclose/BlockContentEnclose.editorconfig';
 import { INITIAL_HET_ARCHIEF_HEADER_SEARCH_BLOCK_STATE } from '~content-blocks/BlockHetArchiefHeaderSearch/BlockHetArchiefHeaderSearch.editorconfig';
 import {
 	INITIAL_ANCHOR_LINKS_COMPONENTS_STATE,
@@ -27,6 +29,7 @@ import {
 	INITIAL_QUOTE_COMPONENTS_STATE,
 	INITIAL_RICH_TEXT_COMPONENTS_STATE,
 	INITIAL_RICH_TEXT_TWO_COLUMNS_COMPONENTS_STATE,
+	INITIAL_SCROLL_DOWN_NUDGE_BLOCK_STATE,
 	INITIAL_SEARCH_COMPONENTS_STATE,
 	INITIAL_SPOTLIGHT_COMPONENTS_STATE,
 	INITIAL_TAGS_WITH_LINK_COMPONENTS_STATE,
@@ -36,8 +39,6 @@ import {
 } from '~modules/content-page/components/blocks';
 import type { ContentBlockComponentState } from '../types/content-block.types';
 import { ContentBlockType } from '../types/content-block.types';
-import { INITIAL_CONTENT_ENCLOSE_BLOCK_STATE } from '~content-blocks/BlockContentEnclose/BlockContentEnclose.editorconfig';
-import { INITIAL_BREADCRUMBS_BLOCK_STATE } from '~content-blocks/BlockBreadcrumbs/BlockBreadcrumbs.editorconfig';
 
 export const CONTENT_BLOCK_INITIAL_STATE_MAP: {
 	/* eslint-disable @typescript-eslint/no-unused-vars */
@@ -82,4 +83,5 @@ export const CONTENT_BLOCK_INITIAL_STATE_MAP: {
 	[ContentBlockType.OverviewNewspaperTitles]: INITIAL_OVERVIEW_NEWSPAPER_TITLES_BLOCK_STATE,
 	[ContentBlockType.ContentEncloseGrid]: INITIAL_CONTENT_ENCLOSE_BLOCK_STATE,
 	[ContentBlockType.Breadcrumbs]: INITIAL_BREADCRUMBS_BLOCK_STATE,
+	[ContentBlockType.ScrollDownNudge]: INITIAL_SCROLL_DOWN_NUDGE_BLOCK_STATE,
 };

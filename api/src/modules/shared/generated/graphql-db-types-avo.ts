@@ -13765,6 +13765,7 @@ export type App_Content = {
   content_width: Scalars['String']['output'];
   created_at: Scalars['timestamptz']['output'];
   depublish_at?: Maybe<Scalars['timestamptz']['output']>;
+  depublished_at?: Maybe<Scalars['timestamptz']['output']>;
   description?: Maybe<Scalars['String']['output']>;
   /** An object relationship */
   enum_content_type: Lookup_Enum_Content_Types;
@@ -14641,6 +14642,7 @@ export type App_Content_Bool_Exp = {
   content_width?: InputMaybe<String_Comparison_Exp>;
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   depublish_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+  depublished_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   description?: InputMaybe<String_Comparison_Exp>;
   enum_content_type?: InputMaybe<Lookup_Enum_Content_Types_Bool_Exp>;
   header_path?: InputMaybe<String_Comparison_Exp>;
@@ -15078,6 +15080,7 @@ export type App_Content_Insert_Input = {
   content_width?: InputMaybe<Scalars['String']['input']>;
   created_at?: InputMaybe<Scalars['timestamptz']['input']>;
   depublish_at?: InputMaybe<Scalars['timestamptz']['input']>;
+  depublished_at?: InputMaybe<Scalars['timestamptz']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
   enum_content_type?: InputMaybe<Lookup_Enum_Content_Types_Obj_Rel_Insert_Input>;
   header_path?: InputMaybe<Scalars['String']['input']>;
@@ -15625,6 +15628,7 @@ export type App_Content_Max_Fields = {
   content_width?: Maybe<Scalars['String']['output']>;
   created_at?: Maybe<Scalars['timestamptz']['output']>;
   depublish_at?: Maybe<Scalars['timestamptz']['output']>;
+  depublished_at?: Maybe<Scalars['timestamptz']['output']>;
   description?: Maybe<Scalars['String']['output']>;
   header_path?: Maybe<Scalars['String']['output']>;
   id?: Maybe<Scalars['Int']['output']>;
@@ -15650,6 +15654,7 @@ export type App_Content_Max_Order_By = {
   content_width?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
   depublish_at?: InputMaybe<Order_By>;
+  depublished_at?: InputMaybe<Order_By>;
   description?: InputMaybe<Order_By>;
   header_path?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
@@ -15676,6 +15681,7 @@ export type App_Content_Min_Fields = {
   content_width?: Maybe<Scalars['String']['output']>;
   created_at?: Maybe<Scalars['timestamptz']['output']>;
   depublish_at?: Maybe<Scalars['timestamptz']['output']>;
+  depublished_at?: Maybe<Scalars['timestamptz']['output']>;
   description?: Maybe<Scalars['String']['output']>;
   header_path?: Maybe<Scalars['String']['output']>;
   id?: Maybe<Scalars['Int']['output']>;
@@ -15701,6 +15707,7 @@ export type App_Content_Min_Order_By = {
   content_width?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
   depublish_at?: InputMaybe<Order_By>;
+  depublished_at?: InputMaybe<Order_By>;
   description?: InputMaybe<Order_By>;
   header_path?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
@@ -16288,6 +16295,7 @@ export type App_Content_Order_By = {
   content_width?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
   depublish_at?: InputMaybe<Order_By>;
+  depublished_at?: InputMaybe<Order_By>;
   description?: InputMaybe<Order_By>;
   enum_content_type?: InputMaybe<Lookup_Enum_Content_Types_Order_By>;
   header_path?: InputMaybe<Order_By>;
@@ -16339,6 +16347,8 @@ export enum App_Content_Select_Column {
   CreatedAt = 'created_at',
   /** column name */
   DepublishAt = 'depublish_at',
+  /** column name */
+  DepublishedAt = 'depublished_at',
   /** column name */
   Description = 'description',
   /** column name */
@@ -16413,6 +16423,7 @@ export type App_Content_Set_Input = {
   content_width?: InputMaybe<Scalars['String']['input']>;
   created_at?: InputMaybe<Scalars['timestamptz']['input']>;
   depublish_at?: InputMaybe<Scalars['timestamptz']['input']>;
+  depublished_at?: InputMaybe<Scalars['timestamptz']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
   header_path?: InputMaybe<Scalars['String']['input']>;
   id?: InputMaybe<Scalars['Int']['input']>;
@@ -16491,6 +16502,7 @@ export type App_Content_Stream_Cursor_Value_Input = {
   content_width?: InputMaybe<Scalars['String']['input']>;
   created_at?: InputMaybe<Scalars['timestamptz']['input']>;
   depublish_at?: InputMaybe<Scalars['timestamptz']['input']>;
+  depublished_at?: InputMaybe<Scalars['timestamptz']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
   header_path?: InputMaybe<Scalars['String']['input']>;
   id?: InputMaybe<Scalars['Int']['input']>;
@@ -16539,6 +16551,8 @@ export enum App_Content_Update_Column {
   CreatedAt = 'created_at',
   /** column name */
   DepublishAt = 'depublish_at',
+  /** column name */
+  DepublishedAt = 'depublished_at',
   /** column name */
   Description = 'description',
   /** column name */
@@ -23195,6 +23209,7 @@ export enum Lookup_Enum_Content_Block_Types_Enum {
   Iframe = 'IFRAME',
   Image = 'IMAGE',
   ImageGrid = 'IMAGE_GRID',
+  ImageTextBackground = 'IMAGE_TEXT_BACKGROUND',
   ImageTitleTextButton = 'IMAGE_TITLE_TEXT_BUTTON',
   Intro = 'INTRO',
   Klaar = 'KLAAR',
@@ -23208,6 +23223,7 @@ export enum Lookup_Enum_Content_Block_Types_Enum {
   Quote = 'QUOTE',
   RichText = 'RICH_TEXT',
   RichTextTwoColumns = 'RICH_TEXT_TWO_COLUMNS',
+  ScrollDownNudge = 'SCROLL_DOWN_NUDGE',
   Search = 'SEARCH',
   Spotlight = 'SPOTLIGHT',
   Subtitle = 'SUBTITLE',
@@ -54212,12 +54228,6 @@ export enum Users_Idps_Enum {
   Hetarchief = 'HETARCHIEF',
   /** OAuth service van Klascement op oauth.klascement.be */
   Klascement = 'KLASCEMENT',
-  /** lti idp for embedding videos on external platforms without a user being logged in on the external platform */
-  LtiAnonymous = 'LTI_ANONYMOUS',
-  /** bookwidgets lti idp flow for embedding videos in their platform */
-  LtiBookwidgets = 'LTI_BOOKWIDGETS',
-  /** smartschoollti idp flow for embedding videos in their platform */
-  LtiSmartschool = 'LTI_SMARTSCHOOL',
   /** OAuth service van Smartschool op oauth.smartschool.be. */
   Smartschool = 'SMARTSCHOOL',
   /** OAuth service van de Vlaamse Overheid: ACM-IDM using the ov_account_uuid id of the user */

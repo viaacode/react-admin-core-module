@@ -162,6 +162,7 @@ export enum ContentBlockType {
 	ContentEncloseGrid = 'CONTENT_ENCLOSE_GRID',
 	Breadcrumbs = 'BREADCRUMBS',
 	AvoImageTextBackground = 'AVO_IMAGE_TEXT_BACKGROUND', // Avo
+	ScrollDownNudge = 'SCROLL_DOWN_NUDGE',
 }
 
 export enum ContentBlockEditor {
