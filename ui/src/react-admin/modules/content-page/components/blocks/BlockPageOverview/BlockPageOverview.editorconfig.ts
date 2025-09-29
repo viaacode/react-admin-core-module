@@ -32,6 +32,7 @@ export const INITIAL_PAGE_OVERVIEW_COMPONENTS_STATE =
 		contentType: 'FAQ_ITEM',
 		itemStyle: ContentItemStyle.NEWS_LIST,
 		itemAlignment: 'center',
+		imageItemAlignment: 'center',
 		showSectionTitle: true,
 		showTitle: true,
 		showDescription: true,
@@ -98,6 +99,19 @@ export const PAGE_OVERVIEW_BLOCK_CONFIG = (position = 0): ContentBlockConfig => 
 					label: tText(
 						'modules/content-page/components/blocks/block-page-overview/block-page-overview___item-alignment'
 					),
+					editorType: ContentBlockEditor.Select,
+					editorProps: {
+						options: GET_ALIGN_OPTIONS(),
+					},
+					isVisible: (config: ContentBlockConfig) => {
+						return (
+							(config.components.state as BlockPageOverviewProps).itemStyle ===
+							ContentItemStyle.GRID
+						);
+					},
+				},
+				imageItemAlignment: {
+					label: tText('Afbeelding uitlijning'),
 					editorType: ContentBlockEditor.Select,
 					editorProps: {
 						options: GET_ALIGN_OPTIONS(),

@@ -29,6 +29,7 @@ export interface BlockImageGridProps extends DefaultProps {
 	itemWidth?: CssSizeSetting;
 	fill?: 'cover' | 'contain' | 'auto';
 	align?: AlignOptions;
+	imageItemAlignment?: AlignOptions;
 	textAlign?: AlignOptions;
 	textSize?: number;
 	textMargin?: number;

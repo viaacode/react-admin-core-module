@@ -17,6 +17,7 @@ export const BlockImageGrid: FunctionComponent<BlockImageGridProps> = ({
 	itemWidth = '20rem',
 	fill = 'cover',
 	align = 'center',
+	imageItemAlignment = 'center',
 	textAlign = 'center',
 	textSize = 15,
 	textMargin = 0,
@@ -44,7 +45,7 @@ export const BlockImageGrid: FunctionComponent<BlockImageGridProps> = ({
 						height: imageHeight,
 						backgroundImage: `url(${element.source})`,
 						backgroundSize: fill,
-						backgroundPosition: align || 'left',
+						backgroundPosition: imageItemAlignment || 'center',
 					}}
 				/>
 				<div

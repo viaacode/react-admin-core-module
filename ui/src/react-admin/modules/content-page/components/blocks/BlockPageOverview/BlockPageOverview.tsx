@@ -48,6 +48,7 @@ export interface BlockPageOverviewProps extends DefaultProps {
 	centerHeader?: boolean;
 	itemStyle?: ContentItemStyle;
 	itemAlignment?: AlignOption;
+	imageItemAlignment?: AlignOption;
 	showSectionTitle?: boolean;
 	showTitle?: boolean;
 	showDescription?: boolean;
@@ -82,6 +83,7 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 	centerHeader = false,
 	itemStyle = ContentItemStyle.NEWS_LIST,
 	itemAlignment = 'left',
+	imageItemAlignment = 'center',
 	showSectionTitle = true,
 	showTitle = true,
 	showDescription = true,
@@ -206,11 +208,12 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 				)}
 				itemWidth="30.7rem"
 				imageHeight="17.2rem"
-				imageWidth="30.7rem"
+				imageWidth="100%"
 				renderLink={renderLink}
 				fill="cover"
 				textAlign="left"
 				align={itemAlignment}
+				imageItemAlignment={imageItemAlignment}
 			/>
 		);
 	};
