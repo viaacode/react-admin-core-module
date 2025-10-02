@@ -168,7 +168,7 @@ export const ContentPageRenderer: FunctionComponent<ContentPageDetailProps> = (p
 			return (
 				<a
 					href={stringifyUrl({
-						url: buildLink(AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_DETAIL'), {
+						url: buildLink(AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_EDIT'), {
 							id: props.contentPageInfo.id,
 						}),
 					})}
