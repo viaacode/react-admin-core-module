@@ -111,7 +111,9 @@ export const PAGE_OVERVIEW_BLOCK_CONFIG = (position = 0): ContentBlockConfig => 
 					},
 				},
 				imageItemAlignment: {
-					label: tText('Afbeelding uitlijning'),
+					label: tText(
+						'modules/content-page/components/blocks/block-page-overview/block-page-overview___afbeelding-uitlijning'
+					),
 					editorType: ContentBlockEditor.Select,
 					editorProps: {
 						options: GET_ALIGN_OPTIONS(),

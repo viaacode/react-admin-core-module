@@ -896,7 +896,7 @@
     "location": "react-admin/modules/content-page/const/get-color-options",
     "key": "meemoo-logo",
     "language": "nl",
-    "value": "meemoo logo",
+    "value": "meemoo-logo",
     "value_type": "TEXT"
   },
   {
@@ -2624,7 +2624,7 @@
     "location": "admin/content/views/content-overview",
     "key": "u-heeft-niet-de-juiste-rechten",
     "language": "nl",
-    "value": "Je hebt niet de juiste rechten om dit overzicht te bekijken.",
+    "value": "Je hebt niet de juiste gebruikersrechten om dit overzicht te bekijken.",
     "value_type": "TEXT"
   },
   {
@@ -2786,7 +2786,7 @@
     "location": "admin/content-page-labels/views/content-page-label-edit",
     "key": "de-invoer-is-ongeldig",
     "language": "nl",
-    "value": "De invoer is ongeldig",
+    "value": "De invoer is ongeldig.",
     "value_type": "TEXT"
   },
   {
@@ -3434,7 +3434,7 @@
     "location": "react-admin/modules/alerts/views/alerts-overview",
     "key": "nieuwe-melding-aanmaken",
     "language": "nl",
-    "value": "Nieuwe melding aanmaken",
+    "value": "Nieuwe melding aanmaken.",
     "value_type": "TEXT"
   },
   {
@@ -3830,7 +3830,7 @@
     "location": "admin/users/user",
     "key": "verwijder-alle-content",
     "language": "nl",
-    "value": "Verwijder alle content",
+    "value": "Verwijder alle content.",
     "value_type": "TEXT"
   },
   {
@@ -3866,7 +3866,7 @@
     "location": "admin/users/user",
     "key": "zet-alle-content-over-naar-een-andere-gebruiker",
     "language": "nl",
-    "value": "Zet alle content over naar een andere gebruiker",
+    "value": "Zet alle content over naar een andere gebruiker.",
     "value_type": "TEXT"
   },
   {
@@ -5234,7 +5234,7 @@
     "location": "modules/user/views/user-overview",
     "key": "bezig-met-ophalen-van-gebruikers",
     "language": "nl",
-    "value": "Bezig met ophalen van gebruikers",
+    "value": "Bezig met ophalen van gebruikers.",
     "value_type": "TEXT"
   },
   {
@@ -5243,7 +5243,7 @@
     "location": "modules/user/views/user-overview",
     "key": "bezig-met-genereren-van-de-csv",
     "language": "nl",
-    "value": "Bezig met genereren van de csv",
+    "value": "Bezig met genereren van de csv.",
     "value_type": "TEXT"
   },
   {
@@ -5263,6 +5263,15 @@
     "language": "nl",
     "value": "Het ophalen van de gebruikers is mislukt.",
     "value_type": "HTML"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "modules/user-group/const/user-group",
+    "key": "alle-content",
+    "language": "nl",
+    "value": "Alle content",
+    "value_type": "TEXT"
   },
   {
     "app": "AVO",
@@ -6107,7 +6116,7 @@
     "location": "modules/shared/components/content-picker/content-picker",
     "key": "domein-detail",
     "language": "nl",
-    "value": "Sleutelcompetentiepagina: detail",
+    "value": "Sleutelcompetentiepagina",
     "value_type": "TEXT"
   },
   {
@@ -6116,7 +6125,7 @@
     "location": "modules/shared/components/content-picker/content-picker",
     "key": "event-detail",
     "language": "nl",
-    "value": "Event: detail",
+    "value": "Event- of workshoppagina",
     "value_type": "TEXT"
   },
   {
@@ -6125,7 +6134,7 @@
     "location": "modules/shared/components/content-picker/content-picker",
     "key": "hulpfilmpje",
     "language": "nl",
-    "value": "Hulpfilmpje",
+    "value": "Hulpfilmpagina",
     "value_type": "TEXT"
   },
   {
@@ -6170,7 +6179,7 @@
     "location": "modules/shared/components/content-picker/content-picker",
     "key": "geknipte-fragmenten",
     "language": "nl",
-    "value": "Geknipte fragmenten",
+    "value": "Geknipt fragment",
     "value_type": "TEXT"
   },
   {
@@ -6215,7 +6224,7 @@
     "location": "admin/shared/components/content-picker/content-picker",
     "key": "projecten",
     "language": "nl",
-    "value": "Project",
+    "value": "Projectpagina",
     "value_type": "TEXT"
   },
   {
@@ -6629,7 +6638,7 @@
     "location": "modules/shared/components/export-all-to-csv-modal/export-all-to-csv-modal",
     "key": "het-ophalen-van-de-data-voor-de-csv-is-mislukt",
     "language": "nl",
-    "value": "Het ophalen van de data voor de csv is mislukt",
+    "value": "Het ophalen van de data voor de csv is mislukt.",
     "value_type": "TEXT"
   },
   {
@@ -7601,7 +7610,7 @@
     "location": "admin/content-block/helpers/generators/ctas",
     "key": "titel-stijl",
     "language": "nl",
-    "value": "Titel: Stijl",
+    "value": "Titel: stijl",
     "value_type": "TEXT"
   },
   {
@@ -7862,7 +7871,7 @@
     "location": "admin/content-block/helpers/generators/iframe",
     "key": "url-is-verplicht",
     "language": "nl",
-    "value": "URL is verplicht",
+    "value": "Url is verplicht.",
     "value_type": "TEXT"
   },
   {
@@ -9578,10 +9587,28 @@
   {
     "app": "AVO",
     "component": "ADMIN_CORE",
-    "location": "modules/user-group/const/user-group",
-    "key": "alle-content",
+    "location": "modules/content-page/const/get-content-block-type-options",
+    "key": "scroll-down-nudge",
     "language": "nl",
-    "value": "Alle content",
+    "value": "Scroll down nudge",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-page-overview/block-page-overview",
+    "key": "afbeelding-uitlijning",
+    "language": "nl",
+    "value": "Afbeelding uitlijning",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-scroll-down-nudge/block-scroll-down-nudge",
+    "key": "scroll-down-nudge",
+    "language": "nl",
+    "value": "Scroll down nudge",
     "value_type": "TEXT"
   },
   {
@@ -9599,7 +9626,7 @@
     "location": "app",
     "key": "je-hebt-geen-toegang-tot-de-embed-functionaliteit",
     "language": "nl",
-    "value": "Je hebt geen toegang tot de functionaliteit om audio of video te embedden in externe websites. Deze wordt (nog) niet uitgerold naar onze gebruikers.",
+    "value": "Je hebt geen toegang tot de functionaliteit om audio of video te embedden in externe websites. Deze functionaliteit wordt (nog) niet uitgerold naar onze gebruikers, dit is een pilootproject.",
     "value_type": "HTML"
   },
   {
@@ -10175,7 +10202,7 @@
     "location": "assignment/assignment",
     "key": "nieuwe-collectie",
     "language": "nl",
-    "value": "Geef je collectie een naam",
+    "value": "Geef je collectie een naam.",
     "value_type": "TEXT"
   },
   {
@@ -10679,7 +10706,7 @@
     "location": "dynamic-route-resolver/dynamic-route-resolver",
     "key": "deze-pagina-is-enkel-voor-leerlingen",
     "language": "nl",
-    "value": "Deze pagina is enkel voor leerlingen",
+    "value": "<p>Oeps! Je kan als lesgever deze pagina niet bekijken, deze is enkel raadpleegbaar door leerlingen lager en secundair. </p><p>Wil je een opdracht zien zoals leerlingen? Gebruik dan de Bekijk als leerling-knop bovenaan rechts in de opdracht, vanuit je Werkruimte.</p>",
     "value_type": "HTML"
   },
   {
@@ -10688,7 +10715,7 @@
     "location": "dynamic-route-resolver/dynamic-route-resolver",
     "key": "deze-pagina-is-niet-voor-leerlingen",
     "language": "nl",
-    "value": "Deze pagina is niet voor leerlingen",
+    "value": "Oeps! Je kan als leerling deze pagina niet bekijken. Vraag eventueel na bij je leerkracht of je de juiste link naar bv. een opdracht hebt ontvangen.",
     "value_type": "HTML"
   },
   {
@@ -10697,7 +10724,7 @@
     "location": "dynamic-route-resolver/dynamic-route-resolver",
     "key": "deze-pagina-is-enkel-voor-gebruikers-met-andere-rechten",
     "language": "nl",
-    "value": "Deze pagina is enkel voor gebruikers met andere rechten",
+    "value": "Oeps. Jij kan deze pagina niet raadplegen, je hebt hiervoor niet de juiste gebruikersrechten. Denk je dat er fout is gebeurd? Contacteer dan onze helpdesk.",
     "value_type": "HTML"
   },
   {
@@ -13838,7 +13865,7 @@
     "location": "assignment/views/assignment-detail",
     "key": "je-hebt-geen-rechten-om-deze-opdracht-te-bekijken-ben-je-een-leerling-dan-heeft-je-lesgever-de-verkeerde-link-gedeeld",
     "language": "nl",
-    "value": "<p>Je hebt geen rechten om de opdracht in deze vorm te bekijken. </p><p>Ben je een leerling? Dan heeft je leerkracht wellicht de verkeerde link gedeeld. Vraag aan jouw leerkracht om de opdracht met jou te delen als leerling.</p>",
+    "value": "<p>Je hebt geen rechten om de opdracht in deze vorm te bekijken. </p><p>Ben je een leerling? Dan heeft je leerkracht wellicht de verkeerde link gedeeld. Vraag aan jouw leerkracht om de juiste in de opdracht op te halen via de knop &#x27;Delen&#x27;.</p>",
     "value_type": "HTML"
   },
   {
@@ -13847,7 +13874,7 @@
     "location": "assignment/views/assignment-detail",
     "key": "je-hebt-geen-rechten-om-deze-pagina-te",
     "language": "nl",
-    "value": "Je hebt geen rechten om deze pagina te",
+    "value": "Je hebt geen rechten om deze pagina te bekijken.",
     "value_type": "HTML"
   },
   {
@@ -15314,7 +15341,7 @@
     "location": "authentication/components/login-options-for-teacher",
     "key": "is-jouw-account-al-gekoppeld",
     "language": "nl",
-    "value": "Is jouw account al gekoppeld? ",
+    "value": "Als jouw account al is gekoppeld: ",
     "value_type": "TEXT"
   },
   {
@@ -15332,7 +15359,7 @@
     "location": "authentication/components/login-options-for-teacher",
     "key": "itsme-of-e-id",
     "language": "nl",
-    "value": "itsme of eID",
+    "value": "Itsme of eID",
     "value_type": "TEXT"
   },
   {
@@ -15530,7 +15557,7 @@
     "location": "authentication/views/link-your-account",
     "key": "link-uw-account",
     "language": "nl",
-    "value": "Link uw account",
+    "value": "Link je account",
     "value_type": "TEXT"
   },
   {
@@ -15539,7 +15566,7 @@
     "location": "authentication/views/link-your-account",
     "key": "link-uw-account-paginabeschrijving",
     "language": "nl",
-    "value": "Link uw account paginabeschrijving",
+    "value": "Pagina om account te linken",
     "value_type": "TEXT"
   },
   {
@@ -16079,7 +16106,7 @@
     "location": "collection/components/collection-or-bundle-edit",
     "key": "verbinding-met-bewerk-server-verloren",
     "language": "nl",
-    "value": "Verbinding met bewerk server verloren",
+    "value": "Verbinding met server voor bewerken verloren.",
     "value_type": "HTML"
   },
   {
@@ -16943,7 +16970,7 @@
     "location": "collection/components/collection-or-bundle-edit-marcom",
     "key": "meest-recente-communicatie",
     "language": "nl",
-    "value": "Voeg een nieuwe communicatie-actie in",
+    "value": "Voeg een nieuwe communicatie-actie in.",
     "value_type": "TEXT"
   },
   {
@@ -17015,7 +17042,7 @@
     "location": "collection/components/collection-or-bundle-edit-marcom",
     "key": "je-kan-enkel-publiceren-naar-klascement-als-deze-collectie-publiek-staat",
     "language": "nl",
-    "value": "Je kan enkel publiceren naar KlasCement als deze collectie publiek staat, en dus vindbaar is in de zoek voor lesgevers.",
+    "value": "Je kan enkel publiceren naar KlasCement als deze collectie publiek staat, en dus vindbaar is via de zoekpagina: https://onderwijs.hetarchief.be/zoeken.",
     "value_type": "HTML"
   },
   {
@@ -17042,7 +17069,7 @@
     "location": "collection/components/collection-or-bundle-edit-marcom",
     "key": "bezig-met-publiceren-naar-klascement",
     "language": "nl",
-    "value": "Bezig met publiceren naar Klascement.",
+    "value": "Bezig met publiceren naar KlasCement.",
     "value_type": "TEXT"
   },
   {
@@ -18059,7 +18086,7 @@
     "location": "assignment/modals/create-assignment-modal",
     "key": "importeer-naar-nieuwe-opdracht",
     "language": "nl",
-    "value": "Voeg toe aan nieuwe opdracht",
+    "value": "Voeg toe aan nieuwe opdracht.",
     "value_type": "HTML"
   },
   {
@@ -18158,7 +18185,7 @@
     "location": "collection/views/collection-detail",
     "key": "je-hebt-geen-rechten-om-deze-collectie-te-bekijken",
     "language": "nl",
-    "value": "<p>Je hebt geen rechten om collecties te bekijken. </p><p>Ben je een leerling? Dan heeft je leerkracht wellicht een verkeerde link gedeeld. Vraag aan jouw leerkracht om de collectie op te nemen in een opdracht, en deze met jou te delen als leerling.</p>",
+    "value": "<p><strong>Je hebt geen rechten om collecties te bekijken. </strong></p><p>Ben je een leerling? Dan heeft je leerkracht wellicht een verkeerde link gedeeld. Vraag aan jouw leerkracht om de collectie op te nemen in een opdracht, en deze met jou te delen als leerling.</p>",
     "value_type": "HTML"
   },
   {
@@ -20597,7 +20624,7 @@
     "location": "error/views/error-view",
     "key": "de-pagina-werd-niet-gevonden-ingelogd",
     "language": "nl",
-    "value": "Oeps. Deze pagina is niet toegankelijk.<br /> De pagina die je zoekt bestaat niet, of is verhuisd of verwijderd. Vermoed je een fout? Contacteer onze helpdesk.",
+    "value": "Oeps. Deze pagina bestaat niet (meer). </br>Vermoed je een fout? Contacteer onze helpdesk.",
     "value_type": "TEXT"
   },
   {
@@ -20606,7 +20633,7 @@
     "location": "error/views/error-view",
     "key": "de-pagina-werd-niet-gevonden-niet-ingelogd",
     "language": "nl",
-    "value": "<p>Oeps. Deze pagina is niet toegankelijk.</p><p>Heb je een account? <a href=\"https://onderwijs.hetarchief.be/registreer-of-login\" target=\"_blank\">Probeer dan eerst in te loggen</a>. </p><p></p><p>Is het probleem nog niet opgelost, dan bestaat de pagina die je zoekt niet, of is ze verhuisd of verwijderd. Vermoed je een fout? Contacteer onze helpdesk.</p>",
+    "value": "<p>Oeps. Deze pagina is niet toegankelijk als je niet ingelogd bent.</p><p>Heb je een account? <a href=\"https://onderwijs.hetarchief.be/registreer-of-login\" target=\"_blank\">Probeer dan eerst in te loggen</a>. </p><p></p><p>Is het probleem nog niet opgelost, dan bestaat de pagina die je zoekt niet (meer), of is ze verhuisd. Vermoed je een fout? Contacteer dan onze helpdesk.</p>",
     "value_type": "TEXT"
   },
   {
@@ -21920,7 +21947,7 @@
     "location": "admin/assignments/views/assignments-overview-admin",
     "key": "bezig-met-ophalen-van-opdrachten",
     "language": "nl",
-    "value": "Bezig met ophalen van opdrachten",
+    "value": "Bezig met ophalen van opdrachten.",
     "value_type": "TEXT"
   },
   {
@@ -21929,7 +21956,7 @@
     "location": "admin/assignments/views/assignments-overview-admin",
     "key": "bezig-met-genereren-van-de-csv",
     "language": "nl",
-    "value": "Bezig met genereren van de csv",
+    "value": "Bezig met genereren van de csv.",
     "value_type": "TEXT"
   },
   {
@@ -22154,7 +22181,7 @@
     "location": "admin/collections-or-bundles/views/collection-or-bundle-actualisation-overview",
     "key": "bezig-met-ophalen-van-media-items",
     "language": "nl",
-    "value": "Bezig met ophalen van media items",
+    "value": "Bezig met ophalen van media items.",
     "value_type": "TEXT"
   },
   {
@@ -22163,7 +22190,7 @@
     "location": "admin/collections-or-bundles/views/collection-or-bundle-actualisation-overview",
     "key": "bezig-met-genereren-van-de-csv",
     "language": "nl",
-    "value": "Bezig met genereren van de csv",
+    "value": "Bezig met genereren van de csv.",
     "value_type": "TEXT"
   },
   {
@@ -22307,7 +22334,7 @@
     "location": "admin/collections-or-bundles/views/collection-or-bundle-marcom-overview",
     "key": "exporteren-van-alle-collecties-naar-csv",
     "language": "nl",
-    "value": "Exporteren van alle collecties naar CSV",
+    "value": "Exporteren van alle collecties naar csv.",
     "value_type": "TEXT"
   },
   {
@@ -22316,7 +22343,7 @@
     "location": "admin/collections-or-bundles/views/collection-or-bundle-marcom-overview",
     "key": "exporteren-van-alle-bundels-naar-csv",
     "language": "nl",
-    "value": "Exporteren van alle bundels naar .csv",
+    "value": "Exporteren van alle bundels naar csv.",
     "value_type": "TEXT"
   },
   {
@@ -22325,7 +22352,7 @@
     "location": "admin/collections-or-bundles/views/collection-or-bundle-marcom-overview",
     "key": "bezig-met-ophalen-van-media-items",
     "language": "nl",
-    "value": "Bezig met ophalen van media items",
+    "value": "Bezig met ophalen van media items.",
     "value_type": "TEXT"
   },
   {
@@ -22334,7 +22361,7 @@
     "location": "admin/collections-or-bundles/views/collection-or-bundle-marcom-overview",
     "key": "bezig-met-genereren-van-de-csv",
     "language": "nl",
-    "value": "Bezig met genereren van de csv",
+    "value": "Bezig met genereren van de csv.",
     "value_type": "TEXT"
   },
   {
@@ -22478,7 +22505,7 @@
     "location": "admin/collections-or-bundles/views/collection-or-bundle-quality-check-overview",
     "key": "exporteren-van-alle-collecties-naar-csv",
     "language": "nl",
-    "value": "Exporteren van alle collecties naar CSV",
+    "value": "Exporteren van alle collecties naar csv.",
     "value_type": "TEXT"
   },
   {
@@ -22487,7 +22514,7 @@
     "location": "admin/collections-or-bundles/views/collection-or-bundle-quality-check-overview",
     "key": "exporteren-van-alle-bundels-naar-csv",
     "language": "nl",
-    "value": "Exporteren van alle bundels naar CSV",
+    "value": "Exporteren van alle bundels naar csv.",
     "value_type": "TEXT"
   },
   {
@@ -22496,7 +22523,7 @@
     "location": "admin/collections-or-bundles/views/collection-or-bundle-quality-check-overview",
     "key": "bezig-met-ophalen-van-media-items",
     "language": "nl",
-    "value": "Bezig met ophalen van media items",
+    "value": "Bezig met ophalen van media items.",
     "value_type": "TEXT"
   },
   {
@@ -22505,7 +22532,7 @@
     "location": "admin/collections-or-bundles/views/collection-or-bundle-quality-check-overview",
     "key": "bezig-met-genereren-van-de-csv",
     "language": "nl",
-    "value": "Bezig met genereren van de csv",
+    "value": "Bezig met genereren van de csv.",
     "value_type": "TEXT"
   },
   {
@@ -22793,7 +22820,7 @@
     "location": "admin/collections-or-bundles/views/collections-or-bundles-overview",
     "key": "exporteren-van-alle-collecties-naar-csv",
     "language": "nl",
-    "value": "Exporteren van alle collecties naar CSV",
+    "value": "Exporteren van alle collecties naar csv.",
     "value_type": "TEXT"
   },
   {
@@ -22802,7 +22829,7 @@
     "location": "admin/collections-or-bundles/views/collections-or-bundles-overview",
     "key": "exporteren-van-alle-bundels-naar-csv",
     "language": "nl",
-    "value": "Exporteren van alle bundels naar CSV",
+    "value": "Exporteren van alle bundels naar csv.",
     "value_type": "TEXT"
   },
   {
@@ -22811,7 +22838,7 @@
     "location": "admin/collections-or-bundles/views/collections-or-bundles-overview",
     "key": "bezig-met-ophalen-van-media-items",
     "language": "nl",
-    "value": "Bezig met ophalen van media items",
+    "value": "Bezig met ophalen van media items.",
     "value_type": "TEXT"
   },
   {
@@ -22820,7 +22847,7 @@
     "location": "admin/collections-or-bundles/views/collections-or-bundles-overview",
     "key": "bezig-met-genereren-van-de-csv",
     "language": "nl",
-    "value": "Bezig met genereren van de csv",
+    "value": "Bezig met genereren van de csv.",
     "value_type": "TEXT"
   },
   {
@@ -23459,7 +23486,7 @@
     "location": "admin/interactive-tour/views/interactive-tour-overview",
     "key": "verwijder-de-rondleiding",
     "language": "nl",
-    "value": "Verwijder deze rondleiding",
+    "value": "Verwijder deze rondleiding.",
     "value_type": "TEXT"
   },
   {
@@ -23999,7 +24026,7 @@
     "location": "admin/items/views/items-overview",
     "key": "exporteren-van-alle-media-items-naar-csv",
     "language": "nl",
-    "value": "Exporteren van alle media items naar CSV",
+    "value": "Exporteren van alle media items naar csv.",
     "value_type": "TEXT"
   },
   {
@@ -24008,7 +24035,7 @@
     "location": "admin/items/views/items-overview",
     "key": "bezig-met-ophalen-van-media-items",
     "language": "nl",
-    "value": "Bezig met ophalen van media items",
+    "value": "Bezig met ophalen van media items.",
     "value_type": "TEXT"
   },
   {
@@ -24017,7 +24044,7 @@
     "location": "admin/items/views/items-overview",
     "key": "bezig-met-genereren-van-de-csv",
     "language": "nl",
-    "value": "Bezig met genereren van de csv",
+    "value": "Bezig met genereren van de csv.",
     "value_type": "TEXT"
   },
   {
@@ -24422,7 +24449,7 @@
     "location": "admin/pupil-collection/views/pupil-collections-overview",
     "key": "exporteren-van-alle-leerling-collecties-naar-csv",
     "language": "nl",
-    "value": "Exporteren van alle leerlingcollecties naar csv",
+    "value": "Exporteren van alle leerlingencollecties naar csv.",
     "value_type": "TEXT"
   },
   {
@@ -24431,7 +24458,7 @@
     "location": "admin/pupil-collection/views/pupil-collections-overview",
     "key": "bezig-met-ophalen-van-leerling-collecties",
     "language": "nl",
-    "value": "Bezig met ophalen van leerlingcollecties",
+    "value": "Bezig met ophalen van leerlingencollecties.",
     "value_type": "TEXT"
   },
   {
@@ -24440,7 +24467,7 @@
     "location": "admin/pupil-collection/views/pupil-collections-overview",
     "key": "bezig-met-genereren-van-de-csv",
     "language": "nl",
-    "value": "Bezig met genereren van de csv",
+    "value": "Bezig met genereren van de csv.",
     "value_type": "TEXT"
   },
   {
@@ -24953,7 +24980,7 @@
     "location": "admin/url-redirects/views/url-redirect-edit",
     "key": "een-oude-url-is-verplicht",
     "language": "nl",
-    "value": "Een oude url is verplicht",
+    "value": "Een oude url is verplicht.",
     "value_type": "TEXT"
   },
   {
@@ -24989,7 +25016,7 @@
     "location": "admin/url-redirects/views/url-redirect-edit",
     "key": "de-invoer-is-ongeldig",
     "language": "nl",
-    "value": "De invoer is ongeldig",
+    "value": "De invoer is ongeldig.",
     "value_type": "HTML"
   },
   {
@@ -24998,7 +25025,7 @@
     "location": "admin/url-redirects/views/url-redirect-edit",
     "key": "de-url-redirect-is-opgeslagen",
     "language": "nl",
-    "value": "De url redirect is opgeslagen",
+    "value": "De url redirect is opgeslagen.",
     "value_type": "HTML"
   },
   {
@@ -25007,7 +25034,7 @@
     "location": "admin/url-redirects/views/url-redirect-edit",
     "key": "het-opslaan-van-de-url-redirect-is-mislukt",
     "language": "nl",
-    "value": "Het opslaan van de url redirect is mislukt",
+    "value": "Het opslaan van de url redirect is mislukt.",
     "value_type": "HTML"
   },
   {
@@ -25016,7 +25043,7 @@
     "location": "admin/url-redirects/views/url-redirect-edit",
     "key": "het-ophalen-van-de-url-redirect-is-mislukt",
     "language": "nl",
-    "value": "Het ophalen van de url redirect is mislukt",
+    "value": "Het ophalen van de url redirect is mislukt.",
     "value_type": "HTML"
   },
   {
@@ -25034,7 +25061,7 @@
     "location": "admin/url-redirects/views/url-redirect-edit",
     "key": "oude-url-patroon",
     "language": "nl",
-    "value": "Oude url patroon",
+    "value": "Patroon oude url",
     "value_type": "TEXT"
   },
   {
@@ -25088,7 +25115,7 @@
     "location": "admin/url-redirects/views/url-redirect-edit",
     "key": "url-redirect-beheer-aanmaak-pagina-titel",
     "language": "nl",
-    "value": "url redirect beheer aanmaak pagina titel",
+    "value": "Url redirect aanmaken",
     "value_type": "TEXT"
   },
   {
@@ -25106,7 +25133,7 @@
     "location": "admin/url-redirects/views/url-redirect-edit",
     "key": "url-redirect-beheer-aanmaak-pagina-beschrijving",
     "language": "nl",
-    "value": "url redirect beheer aanmaak pagina beschrijving",
+    "value": "Url redirect: aanmaakpagina in beheer",
     "value_type": "TEXT"
   },
   {
@@ -25124,7 +25151,7 @@
     "location": "admin/url-redirects/views/url-redirect-overview",
     "key": "het-verwijderen-van-de-url-redirect-is-mislukt-probeer-te-herladen",
     "language": "nl",
-    "value": "Het verwijderen van de url redirect is mislukt, probeer te herladen",
+    "value": "Het verwijderen van de url redirect is mislukt, probeer te herladen.",
     "value_type": "HTML"
   },
   {
@@ -25133,7 +25160,7 @@
     "location": "admin/url-redirects/views/url-redirect-overview",
     "key": "de-url-redirect-is-verwijderd",
     "language": "nl",
-    "value": "De url redirect is verwijderd",
+    "value": "De url redirect is verwijderd.",
     "value_type": "HTML"
   },
   {
@@ -25142,7 +25169,7 @@
     "location": "admin/url-redirects/views/url-redirect-overview",
     "key": "het-verwijderen-van-de-url-redirect-is-mislukt",
     "language": "nl",
-    "value": "Het verwijderen van de url redirect is mislukt",
+    "value": "Het verwijderen van de url redirect is mislukt.",
     "value_type": "HTML"
   },
   {
@@ -25151,7 +25178,7 @@
     "location": "admin/url-redirects/views/url-redirect-overview",
     "key": "de-url-redirect-kon-niet-worden-verwijderd",
     "language": "nl",
-    "value": "De url redirect kon niet worden verwijderd",
+    "value": "De url redirect kon niet worden verwijderd.",
     "value_type": "HTML"
   },
   {
@@ -25160,7 +25187,7 @@
     "location": "admin/url-redirects/views/url-redirect-overview",
     "key": "bewerk-de-url-redirect",
     "language": "nl",
-    "value": "Bewerk de url redirect",
+    "value": "Bewerk de url redirect.",
     "value_type": "TEXT"
   },
   {
@@ -25169,7 +25196,7 @@
     "location": "admin/url-redirects/views/url-redirect-overview",
     "key": "verwijder-de-url-redirect",
     "language": "nl",
-    "value": "Verwijder de url redirect",
+    "value": "Verwijder de url redirect.",
     "value_type": "TEXT"
   },
   {
@@ -25178,7 +25205,7 @@
     "location": "admin/url-redirects/views/url-redirect-overview",
     "key": "er-zijn-nog-geen-url-redirects-aangemaakt",
     "language": "nl",
-    "value": "Er zijn nog geen url redirects aangemaakt",
+    "value": "Er zijn nog geen url redirects aangemaakt.",
     "value_type": "HTML"
   },
   {
@@ -25196,7 +25223,7 @@
     "location": "admin/url-redirects/views/url-redirect-overview",
     "key": "url-redirect-aanmaken",
     "language": "nl",
-    "value": "Url redirect aanmaken",
+    "value": "Url redirect aanmaken.",
     "value_type": "TEXT"
   },
   {
@@ -25205,7 +25232,7 @@
     "location": "admin/url-redirects/views/url-redirect-overview",
     "key": "het-ophalen-van-de-url-redirects-is-mislukt",
     "language": "nl",
-    "value": "Het ophalen van de url redirects is mislukt",
+    "value": "Het ophalen van de url redirects is mislukt.",
     "value_type": "HTML"
   },
   {
@@ -25214,7 +25241,7 @@
     "location": "admin/url-redirects/views/url-redirect-overview",
     "key": "zoek-op-nieuwe-of-oude-url",
     "language": "nl",
-    "value": "Zoek op nieuwe of oude url",
+    "value": "Zoek op nieuwe of oude url.",
     "value_type": "TEXT"
   },
   {
@@ -25223,7 +25250,7 @@
     "location": "admin/url-redirects/views/url-redirect-overview",
     "key": "er-zijn-geen-url-redirects-die-voldoen-aan-de-filters",
     "language": "nl",
-    "value": "Er zijn geen url redirects die voldoen aan de filters",
+    "value": "Er zijn geen url redirects die voldoen aan je zoekfilters.",
     "value_type": "TEXT"
   },
   {
@@ -25232,7 +25259,7 @@
     "location": "admin/url-redirects/views/url-redirect-overview",
     "key": "url-redirects-overview",
     "language": "nl",
-    "value": "Url redirects overview",
+    "value": "Url redirects overzicht",
     "value_type": "TEXT"
   },
   {
@@ -25241,7 +25268,7 @@
     "location": "admin/url-redirects/views/url-redirect-overview",
     "key": "url-redirect-toevoegen",
     "language": "nl",
-    "value": "Url redirect toevoegen",
+    "value": "Url redirect toevoegen.",
     "value_type": "TEXT"
   },
   {
@@ -25250,7 +25277,7 @@
     "location": "admin/url-redirects/views/url-redirect-overview",
     "key": "url-redirect-beheer-overview-pagina-titel",
     "language": "nl",
-    "value": "url redirect beheer overview pagina titel",
+    "value": "Url redirect overzichtspagina",
     "value_type": "TEXT"
   },
   {
@@ -25259,7 +25286,7 @@
     "location": "admin/url-redirects/views/url-redirect-overview",
     "key": "url-redirect-beheer-overview-pagina-beschrijving",
     "language": "nl",
-    "value": "url redirect beheer overview pagina beschrijving",
+    "value": "Url redirect: overzichtspagina in het beheer",
     "value_type": "TEXT"
   },
   {
@@ -27176,7 +27203,7 @@
     "location": "item/components/modals/report-item-modal",
     "key": "schending-auteursrechten",
     "language": "nl",
-    "value": "Ik vermoed een schending van auteursrechten",
+    "value": "Ik vermoed een schending van auteursrechten.",
     "value_type": "TEXT"
   },
   {
@@ -28184,7 +28211,7 @@
     "location": "shared/components/fragment-share-modal/fragment-share-modal",
     "key": "smartschool-logo",
     "language": "nl",
-    "value": "Smartschool logo",
+    "value": "Smartschool-logo",
     "value_type": "TEXT"
   },
   {
@@ -28193,7 +28220,7 @@
     "location": "shared/components/fragment-share-modal/fragment-share-modal",
     "key": "bookwidgets-logo",
     "language": "nl",
-    "value": "BookWidgets logo",
+    "value": "BookWidgets-logo",
     "value_type": "TEXT"
   },
   {
@@ -28733,7 +28760,7 @@
     "location": "shared/components/search-result/search-result",
     "key": "toggle-bookmark",
     "language": "nl",
-    "value": "toggle bookmark",
+    "value": "Maak bladwijzer",
     "value_type": "TEXT"
   },
   {
@@ -29093,7 +29120,7 @@
     "location": "shared/components/share-with-pupils/share-with-pupils",
     "key": "je-kan-de-link-enkel-delen-met-leerlingen-die-smartschool-of-leer-id-hebben",
     "language": "nl",
-    "value": "Je kan de link enkel delen met leerlingen die Smartschool of LeerID hebben.",
+    "value": "Je kan de link enkel delen met leerlingen die een Smartschool-account of LeerID hebben.",
     "value_type": "HTML"
   },
   {
@@ -30236,7 +30263,7 @@
     "location": "search/components/media-grid-wrapper/media-grid-wrapper",
     "key": "toggle-bladwijzer",
     "language": "nl",
-    "value": "Toggle bladwijzer",
+    "value": "Maak bladwijzer",
     "value_type": "TEXT"
   },
   {
@@ -30371,7 +30398,7 @@
     "location": "modules/klascement/klascement",
     "key": "je-klascement-profiel-id-is-niet-ingesteld-in-de-database-waardoor-het-publiceren-mislukt-is-zie-avo-3737",
     "language": "nl",
-    "value": "Je KlasCement profiel-id is niet ingesteld in de database waardoor het publiceren mislukt is. (zie AVO-3737)",
+    "value": "Je KlasCement profiel-id is niet ingesteld in de database, waardoor het publiceren mislukt is.",
     "value_type": "TEXT"
   },
   {
@@ -30380,7 +30407,7 @@
     "location": "modules/url-redirects/url-redirects",
     "key": "redirects-naar-andere-redirects-zijn-niet-toegestaan-bedoelde-je-from-path-to-path",
     "language": "nl",
-    "value": "Redirects naar andere redirects zijn niet toegestaan. Bedoelde je \"{{fromPath}}\" => \"{{toPath}}\"?",
+    "value": "Een redirect naar een andere pagina waarop al een redirect staat, is niet toegestaan. Bedoelde je \"{{fromPath}}\" => \"{{toPath}}\"?",
     "value_type": "TEXT"
   },
   {
@@ -30389,7 +30416,7 @@
     "location": "modules/url-redirects/url-redirects",
     "key": "redirects-naar-andere-redirects-zijn-niet-toegestaan-je-past-het-beste-de-oude-url-old-path-aan",
     "language": "nl",
-    "value": "Redirects naar andere redirects zijn niet toegestaan. Je past het beste de oude url \"{{oldPath}}\" aan",
+    "value": "Een redirect naar een andere pagina waarop al een redirect staat, is niet toegestaan. Je past best de redirect op de oude url \"{{oldPath}}\" aan.",
     "value_type": "TEXT"
   },
   {
@@ -30677,7 +30704,7 @@
     "location": "modules/auth/idps/lti/lti",
     "key": "de-login-voor-deze-embed-is-mislukt-omdat-de-gebruiker-die-gelinkt-is-aan-deze-gebruiker-van-idp-type-geen-toegang-meer-heeft-tot-het-archief-voor-onderwijs",
     "language": "nl",
-    "value": "De login voor deze embed is mislukt omdat de gebruiker die gelinkt is aan deze gebruiker van idp type geen toegang meer heeft tot Het Archief voor Onderwijs.",
+    "value": "De login voor deze embed is mislukt omdat de gebruiker met {{idpType}} die gelinkt is aan deze embed geen toegang meer heeft tot Het Archief voor Onderwijs.",
     "value_type": "TEXT"
   },
   {

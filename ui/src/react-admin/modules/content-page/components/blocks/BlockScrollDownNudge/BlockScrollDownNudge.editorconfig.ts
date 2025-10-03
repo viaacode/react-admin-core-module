@@ -18,7 +18,9 @@ export const INITIAL_SCROLL_DOWN_NUDGE_BLOCK_STATE = (): DefaultContentBlockStat
 
 export const CONTENT_SCROLL_DOWN_NUDGE_CONFIG = (position = 0): ContentBlockConfig => ({
 	position,
-	name: tText('Scroll down nudge'),
+	name: tText(
+		'modules/content-page/components/blocks/block-scroll-down-nudge/block-scroll-down-nudge___scroll-down-nudge'
+	),
 	type: ContentBlockType.ScrollDownNudge,
 	components: {
 		state: {},
