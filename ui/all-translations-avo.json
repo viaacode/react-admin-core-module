@@ -1262,6 +1262,15 @@
   {
     "app": "AVO",
     "component": "ADMIN_CORE",
+    "location": "modules/content-page/const/get-content-block-type-options",
+    "key": "scroll-down-nudge",
+    "language": "nl",
+    "value": "Scroll down nudge",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
     "location": "admin/content-block/content-block",
     "key": "voeg-een-content-blok-toe",
     "language": "nl",
@@ -8778,6 +8787,15 @@
     "app": "AVO",
     "component": "ADMIN_CORE",
     "location": "modules/content-page/components/blocks/block-page-overview/block-page-overview",
+    "key": "afbeelding-uitlijning",
+    "language": "nl",
+    "value": "Afbeelding uitlijning",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-page-overview/block-page-overview",
     "key": "toon-de-label-tussen-titels",
     "language": "nl",
     "value": "Toon de labels tussen titels.",
@@ -9024,6 +9042,15 @@
     "key": "alt-title-text",
     "language": "nl",
     "value": "Alt. titel tekst (verplicht)",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-scroll-down-nudge/block-scroll-down-nudge",
+    "key": "scroll-down-nudge",
+    "language": "nl",
+    "value": "Scroll down nudge",
     "value_type": "TEXT"
   },
   {
@@ -9582,33 +9609,6 @@
     "key": "error",
     "language": "nl",
     "value": "Error",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/const/get-content-block-type-options",
-    "key": "scroll-down-nudge",
-    "language": "nl",
-    "value": "Scroll down nudge",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-page-overview/block-page-overview",
-    "key": "afbeelding-uitlijning",
-    "language": "nl",
-    "value": "Afbeelding uitlijning",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-scroll-down-nudge/block-scroll-down-nudge",
-    "key": "scroll-down-nudge",
-    "language": "nl",
-    "value": "Scroll down nudge",
     "value_type": "TEXT"
   },
   {
@@ -18959,7 +18959,7 @@
     "location": "item/views/item",
     "key": "je-hebt-geen-rechten-om-dit-item-te-bekijken-leerling",
     "language": "nl",
-    "value": "Je hebt geen rechten om dit fragment te bekijken.\r\nVraag aan jouw leerkracht de <u>opdrachtlink</u> om dit video- of audiofragment als leerling te kunnen bekijken.",
+    "value": "Je hebt geen rechten om dit fragment te bekijken.\nVraag aan jouw leerkracht de <u>opdrachtlink</u> om dit video- of audiofragment als leerling te kunnen bekijken.",
     "value_type": "HTML"
   },
   {
