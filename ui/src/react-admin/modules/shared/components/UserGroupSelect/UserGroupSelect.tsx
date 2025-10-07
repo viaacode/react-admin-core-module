@@ -51,6 +51,10 @@ export const UserGroupSelect: FunctionComponent<UserGroupSelectProps> = ({
 		(options: string[]) => allSubgroupIds.every((subgroup) => options.includes(subgroup)),
 		[allSubgroupIds]
 	);
+	const noneSubgroupsSelected = useCallback(
+		(options: string[]) => allSubgroupIds.every((subgroup) => !options.includes(subgroup)),
+		[allSubgroupIds]
+	);
 	const atLeastOneSubgroupSelected = useCallback(
 		(options: string[]) => allSubgroupIds.some((subgroup) => options.includes(subgroup)),
 		[allSubgroupIds]
@@ -59,6 +63,13 @@ export const UserGroupSelect: FunctionComponent<UserGroupSelectProps> = ({
 	// biome-ignore lint/correctness/useExhaustiveDependencies: should only execute one time
 	useEffect(() => {
 		let newValues = [...values, ...checkedOptions];
+
+		// No subgroups are selected, but we want to have loggedInUsers
+		// We are in this case checking the values because the checkedOptions are the default selection values and not necessarily the actual selected values
+		if (noneSubgroupsSelected(values) && values.includes(SpecialPermissionGroups.loggedInUsers)) {
+			// So let's add all subgroups
+			newValues = [...newValues, ...allSubgroupIds];
+		}
 
 		if (
 			allSubgroupsSelected(newValues) &&
