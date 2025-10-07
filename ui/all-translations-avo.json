@@ -1265,7 +1265,7 @@
     "location": "modules/content-page/const/get-content-block-type-options",
     "key": "scroll-down-nudge",
     "language": "nl",
-    "value": "Scroll down nudge",
+    "value": "Scroll nudge pijltje",
     "value_type": "TEXT"
   },
   {
@@ -9050,7 +9050,7 @@
     "location": "modules/content-page/components/blocks/block-scroll-down-nudge/block-scroll-down-nudge",
     "key": "scroll-down-nudge",
     "language": "nl",
-    "value": "Scroll down nudge",
+    "value": "Scroll nudge pijltje",
     "value_type": "TEXT"
   },
   {
@@ -29120,7 +29120,7 @@
     "location": "shared/components/share-with-pupils/share-with-pupils",
     "key": "je-kan-de-link-enkel-delen-met-leerlingen-die-smartschool-of-leer-id-hebben",
     "language": "nl",
-    "value": "Je kan de link enkel delen met leerlingen die een Smartschool-account of LeerID hebben.",
+    "value": "Enkel leerlingen die een Smartschool-account of LeerID hebben kunnen deze opdrachtlink bekijken.",
     "value_type": "HTML"
   },
   {
@@ -30286,6 +30286,15 @@
   },
   {
     "app": "AVO",
+    "component": "FRONTEND",
+    "location": "search/components/search-results",
+    "key": "er-zijn-te-veel-resultaten-bij-deze-zoekopdracht-verfijn-je-vraag-via-de-zoekbalk-of-de-filters",
+    "language": "nl",
+    "value": "Er zijn te veel resultaten bij deze zoekopdracht. Verfijn je vraag via de zoekbalk of de filters.",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
     "component": "BACKEND",
     "location": "modules/auth/controller",
     "key": "het-logout-pad-voor-idp-idp-type-is-niet-gedefinieerd",
@@ -30840,6 +30849,24 @@
     "key": "fout-bij-inloggen-via-vlaamse-overheid-acm-idm",
     "language": "nl",
     "value": "fout-bij-inloggen-via-vlaamse-overheid-acm-idm",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "BACKEND",
+    "location": "modules/klascement/klascement",
+    "key": "publiceer-collection-naar-klascement-collection-description-collection-title-collection-link",
+    "language": "nl",
+    "value": "Publiceer collection naar klascement collection description collection title collection link",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "BACKEND",
+    "location": "modules/klascement/klascement",
+    "key": "publiceer-opdracht-naar-klascement-assignment-description-assignment-title-assignment-link",
+    "language": "nl",
+    "value": "Publiceer opdracht naar klascement assignment description assignment title assignment link",
     "value_type": "TEXT"
   }
 ]
