@@ -253,10 +253,9 @@ export const FilterTable: FunctionComponent<FilterTableProps> = ({
 		).then(() => reloadPreferredColumns());
 	};
 
-	// biome-ignore lint/correctness/useExhaustiveDependencies: only trigger this once at the initial page load
 	useEffect(() => {
 		handleTableStateChanged(preferredColumns, 'columns');
-	}, []);
+	}, [handleTableStateChanged, preferredColumns]);
 
 	useEffect(() => {
 		onTableStateChanged(tableState);
