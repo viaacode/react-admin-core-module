@@ -189,7 +189,7 @@ export const ContentPageRenderer: FunctionComponent<ContentPageDetailProps> = (p
 								type="link"
 								icon={IconName.edit}
 								title={tText(
-									'modules/content-page/components/content-page-renderer/content-page-renderer___bewerk-pagina'
+									'modules/content-page/components/content-page-renderer/content-page-renderer___bewerk-pagina-tooltip'
 								)}
 								label={tText(
 									'modules/content-page/components/content-page-renderer/content-page-renderer___bewerk-pagina'
