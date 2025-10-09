@@ -2444,7 +2444,7 @@
     "location": "react-admin/modules/content-page/views/content-page-edit",
     "key": "de-content-pagina-is-naar-je-klembord-gekopieerd-druk-ctrl-v-om-hem-te-plakken-op-een-bewerk-pagina",
     "language": "nl",
-    "value": "De contentpagina is gekopieerd. Druk ctrl-v om hem te plakken in een contentpagina die je aan het bewerken bent.",
+    "value": "De contentpagina is gekopieerd. Druk ctrl-v om hem te plakken in een contentpagina die je aan het bewerken bent (QAS of PRD).",
     "value_type": "TEXT"
   },
   {
@@ -3839,7 +3839,7 @@
     "location": "admin/users/user",
     "key": "verwijder-alle-content",
     "language": "nl",
-    "value": "Verwijder alle content.",
+    "value": "Verwijder alle content",
     "value_type": "TEXT"
   },
   {
@@ -4343,7 +4343,7 @@
     "location": "react-admin/modules/user/components/user-delete-modal",
     "key": "met-1-leerlingen-collectie",
     "language": "nl",
-    "value": "met 1 leerlingen collectie",
+    "value": "met 1 leerlingencollectie",
     "value_type": "HTML"
   },
   {
@@ -4352,7 +4352,7 @@
     "location": "react-admin/modules/user/components/user-delete-modal",
     "key": "met-number-of-collections-leerlingen-collecties",
     "language": "nl",
-    "value": "met {{numberOfCollections}} leerlingen collecties",
+    "value": "met {{numberOfCollections}} leerlingencollecties",
     "value_type": "HTML"
   },
   {
@@ -5853,18 +5853,18 @@
     "app": "AVO",
     "component": "ADMIN_CORE",
     "location": "modules/content-page/components/content-page-renderer/content-page-renderer",
-    "key": "bewerk-pagina",
+    "key": "bewerk-pagina-tooltip",
     "language": "nl",
-    "value": "Bewerkpagina",
+    "value": "Bewerk deze pagina in het beheer",
     "value_type": "TEXT"
   },
   {
     "app": "AVO",
     "component": "ADMIN_CORE",
     "location": "modules/content-page/components/content-page-renderer/content-page-renderer",
-    "key": "bewerk-pagina-tooltip",
+    "key": "bewerk-pagina",
     "language": "nl",
-    "value": "Bewerkpagina - tooltip",
+    "value": "Bewerken",
     "value_type": "TEXT"
   },
   {
@@ -6125,7 +6125,7 @@
     "location": "modules/shared/components/content-picker/content-picker",
     "key": "domein-detail",
     "language": "nl",
-    "value": "Sleutelcompetentiepagina",
+    "value": "Sleutelcomp. pagina",
     "value_type": "TEXT"
   },
   {
@@ -6134,7 +6134,7 @@
     "location": "modules/shared/components/content-picker/content-picker",
     "key": "event-detail",
     "language": "nl",
-    "value": "Event- of workshoppagina",
+    "value": "Eventpagina",
     "value_type": "TEXT"
   },
   {
@@ -6170,7 +6170,7 @@
     "location": "admin/content/content",
     "key": "collecties",
     "language": "nl",
-    "value": "Collecties",
+    "value": "Collectie",
     "value_type": "TEXT"
   },
   {
@@ -6179,7 +6179,7 @@
     "location": "admin/content/content",
     "key": "items",
     "language": "nl",
-    "value": "Fragmenten",
+    "value": "Fragment",
     "value_type": "TEXT"
   },
   {
@@ -6197,7 +6197,7 @@
     "location": "admin/content/content",
     "key": "bundels",
     "language": "nl",
-    "value": "Bundels",
+    "value": "Bundel",
     "value_type": "TEXT"
   },
   {
@@ -6206,7 +6206,7 @@
     "location": "react-admin/modules/shared/components/content-picker/content-picker",
     "key": "opdrachten",
     "language": "nl",
-    "value": "Opdrachten",
+    "value": "Opdracht",
     "value_type": "TEXT"
   },
   {
@@ -6314,7 +6314,7 @@
     "location": "modules/admin/shared/components/content-picker/content-picker",
     "key": "het-ophalen-van-de-opties-is-mislukt",
     "language": "nl",
-    "value": "Het ophalen van de opties is mislukt",
+    "value": "Het ophalen van de opties is mislukt.",
     "value_type": "TEXT"
   },
   {
@@ -8375,7 +8375,7 @@
     "location": "admin/content-block/helpers/generators/media-grid",
     "key": "selecteer-uit-items-en-collecties",
     "language": "nl",
-    "value": "Selecteer uit fragmenten en collecties",
+    "value": "Selecteer content",
     "value_type": "TEXT"
   },
   {
@@ -12200,7 +12200,7 @@
     "location": "admin/url-redirects/url-redirects",
     "key": "tekst",
     "language": "nl",
-    "value": "Tekst",
+    "value": "Tekst bv. /start",
     "value_type": "TEXT"
   },
   {
@@ -12209,7 +12209,7 @@
     "location": "admin/url-redirects/url-redirects",
     "key": "reguliere-expressie",
     "language": "nl",
-    "value": "Reguliere expressie",
+    "value": "Reguliere expressie bv. /faq#.*",
     "value_type": "TEXT"
   },
   {
@@ -13865,7 +13865,7 @@
     "location": "assignment/views/assignment-detail",
     "key": "je-hebt-geen-rechten-om-deze-opdracht-te-bekijken-ben-je-een-leerling-dan-heeft-je-lesgever-de-verkeerde-link-gedeeld",
     "language": "nl",
-    "value": "<p>Je hebt geen rechten om de opdracht in deze vorm te bekijken. </p><p>Ben je een leerling? Dan heeft je leerkracht wellicht de verkeerde link gedeeld. Vraag aan jouw leerkracht om de juiste in de opdracht op te halen via de knop &#x27;Delen&#x27;.</p>",
+    "value": "<p>Je hebt geen rechten om de opdracht in deze vorm te bekijken. </p><p>Ben je een leerling? Dan heeft je leerkracht wellicht de verkeerde link gedeeld. Vraag aan jouw leerkracht om de juiste link op te halen via de knop &#x27;Delen&#x27; in de opdracht.</p>",
     "value_type": "HTML"
   },
   {
@@ -14603,7 +14603,7 @@
     "location": "assignment/views/assignment-edit-marcom",
     "key": "verwijder-de-marcom-entry",
     "language": "nl",
-    "value": "Verwijder de communicatie-actie.",
+    "value": "Verwijder de communicatie-actie",
     "value_type": "TEXT"
   },
   {
@@ -16898,7 +16898,7 @@
     "location": "collection/components/collection-or-bundle-edit-marcom",
     "key": "verwijder-de-marcom-entry",
     "language": "nl",
-    "value": "Verwijder deze communicatie-actie.",
+    "value": "Verwijder deze communicatie-actie",
     "value_type": "TEXT"
   },
   {
@@ -19659,6 +19659,15 @@
     "app": "AVO",
     "component": "FRONTEND",
     "location": "search/components/search-results",
+    "key": "er-zijn-te-veel-resultaten-bij-deze-zoekopdracht-verfijn-je-vraag-via-de-zoekbalk-of-de-filters",
+    "language": "nl",
+    "value": "Er zijn te veel resultaten bij deze zoekopdracht. Verfijn je vraag via de zoekbalk of de filters.",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "search/components/search-results",
     "key": "er-zijn-geen-zoekresultaten-die-voldoen-aan-uw-filters",
     "language": "nl",
     "value": "<p>We vonden jammer genoeg geen resultaten voor jouw zoekopdracht. </p><p></p><p>Probeer een andere schrijfwijze of een synoniem, of beperk het aantal filters. Staat wat je zocht nog niet op ons platform? Vraag dan zelf een video- of audiofragment aan.</p>",
@@ -22172,7 +22181,7 @@
     "location": "admin/collections-or-bundles/views/collection-or-bundle-actualisation-overview",
     "key": "exporteren-van-alle-bundels-naar-csv",
     "language": "nl",
-    "value": "Exporteren van alle bundels naar .csv",
+    "value": "Exporteren van alle bundels naar csv.",
     "value_type": "TEXT"
   },
   {
@@ -24341,7 +24350,7 @@
     "location": "admin/pupil-collection/views/pupil-collections-overview",
     "key": "het-ophalen-van-de-leerlingencollecties-is-mislukt",
     "language": "nl",
-    "value": "Het ophalen van de leerlingencollecties is mislukt",
+    "value": "Het ophalen van de leerlingencollecties is mislukt.",
     "value_type": "HTML"
   },
   {
@@ -24431,7 +24440,7 @@
     "location": "admin/pupil-collection/views/pupil-collections-overview",
     "key": "er-zijn-geen-leerlingen-collecties-die-voldoen-aan-de-opgegeven-filters",
     "language": "nl",
-    "value": "Er zijn geen leerlingen collecties die voldoen aan de opgegeven filters",
+    "value": "Er zijn geen leerlingencollecties die voldoen aan de opgegeven filters",
     "value_type": "TEXT"
   },
   {
@@ -24998,7 +25007,7 @@
     "location": "admin/url-redirects/views/url-redirect-edit",
     "key": "een-nieuwe-url-is-verplicht",
     "language": "nl",
-    "value": "Een nieuwe url is verplicht",
+    "value": "Een nieuwe url is verplicht.",
     "value_type": "TEXT"
   },
   {
@@ -25196,7 +25205,7 @@
     "location": "admin/url-redirects/views/url-redirect-overview",
     "key": "verwijder-de-url-redirect",
     "language": "nl",
-    "value": "Verwijder de url redirect.",
+    "value": "Verwijder de url redirect",
     "value_type": "TEXT"
   },
   {
@@ -25214,7 +25223,7 @@
     "location": "admin/url-redirects/views/url-redirect-overview",
     "key": "beschrijving-hoe-een-url-redirect-toe-te-voegen",
     "language": "nl",
-    "value": "Beschrijving hoe een url redirect toe te voegen",
+    "value": "<p>Klik op de knop &#x27;Redirect aanmaken&#x27; om een nieuwe redirect voor een url in te stellen. Vul de oude en nieuwe url in en druk op opslaan. Voor een gewone redirect kies je de optie &#x27;Tekst&#x27; als patroon van de oude url, &#x27;Reguliere expressie&#x27; is voor meer technische redirects. Er is geen controle op de geldigheid van de nieuwe url, controleer dus je redirect als gewone gebruiker. </p><p>Opgelet, je kan geen redirect instellen die naar een andere redirect verwijst. In dat geval krijg je de vraag om de oorspronkelijke redirect aan te passen.</p><p>Je kan meerdere redirects aan maken die naar dezelfde nieuwe url verwijzen. Maar je per oude url slechts 1 nieuwe redirect instellen.</p>",
     "value_type": "HTML"
   },
   {
@@ -25223,7 +25232,7 @@
     "location": "admin/url-redirects/views/url-redirect-overview",
     "key": "url-redirect-aanmaken",
     "language": "nl",
-    "value": "Url redirect aanmaken.",
+    "value": "Url redirect aanmaken",
     "value_type": "TEXT"
   },
   {
@@ -25268,7 +25277,7 @@
     "location": "admin/url-redirects/views/url-redirect-overview",
     "key": "url-redirect-toevoegen",
     "language": "nl",
-    "value": "Url redirect toevoegen.",
+    "value": "Redirect aanmaken",
     "value_type": "TEXT"
   },
   {
@@ -29543,7 +29552,7 @@
     "location": "admin/content/content",
     "key": "collecties",
     "language": "nl",
-    "value": "Collecties",
+    "value": "Collectie",
     "value_type": "TEXT"
   },
   {
@@ -29561,7 +29570,7 @@
     "location": "admin/content/content",
     "key": "bundels",
     "language": "nl",
-    "value": "Bundels",
+    "value": "Bundel",
     "value_type": "TEXT"
   },
   {
@@ -30286,15 +30295,6 @@
   },
   {
     "app": "AVO",
-    "component": "FRONTEND",
-    "location": "search/components/search-results",
-    "key": "er-zijn-te-veel-resultaten-bij-deze-zoekopdracht-verfijn-je-vraag-via-de-zoekbalk-of-de-filters",
-    "language": "nl",
-    "value": "Er zijn te veel resultaten bij deze zoekopdracht. Verfijn je vraag via de zoekbalk of de filters.",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
     "component": "BACKEND",
     "location": "modules/auth/controller",
     "key": "het-logout-pad-voor-idp-idp-type-is-niet-gedefinieerd",
@@ -30405,9 +30405,27 @@
     "app": "AVO",
     "component": "BACKEND",
     "location": "modules/klascement/klascement",
+    "key": "publiceer-collection-naar-klascement-collection-description-collection-title-collection-link",
+    "language": "nl",
+    "value": "<p>\nIn deze collectie vind je video- en geluidsfragmenten over (vul onderwerp in), samen met meer context en concrete lestips.\n</p>\n<p>\n\t{{collectionDescription}}\n</p>\n<p>\n\t<a href=\"{{collectionLink}}\" target=\"_blank\">\n\t\tBekijk de collectie <strong>{{collectionTitle}}</strong> op Het Archief voor Onderwijs >\n\t</a>\n</p>",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "BACKEND",
+    "location": "modules/klascement/klascement",
     "key": "je-klascement-profiel-id-is-niet-ingesteld-in-de-database-waardoor-het-publiceren-mislukt-is-zie-avo-3737",
     "language": "nl",
     "value": "Je KlasCement profiel-id is niet ingesteld in de database, waardoor het publiceren mislukt is.",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "BACKEND",
+    "location": "modules/klascement/klascement",
+    "key": "publiceer-opdracht-naar-klascement-assignment-description-assignment-title-assignment-link",
+    "language": "nl",
+    "value": "<p>\n\t{{assignmentDescription}}\n</p>\n<p>\n\t<a href=\"{{assignmentLink}}\" target=\"_blank\">\n\t\tBekijk de voorbeeldopdracht <strong>{{assignmentTitle}}</strong> op Het Archief voor Onderwijs >\n\t</a>\n</p>",
     "value_type": "TEXT"
   },
   {
@@ -30854,19 +30872,10 @@
   {
     "app": "AVO",
     "component": "BACKEND",
-    "location": "modules/klascement/klascement",
-    "key": "publiceer-collection-naar-klascement-collection-description-collection-title-collection-link",
+    "location": "modules/url-redirects/url-redirects",
+    "key": "er-bestaat-reeds-een-redirect-met-dezelfde-oude-url-best-dat-je-deze-wijzigt",
     "language": "nl",
-    "value": "Publiceer collection naar klascement collection description collection title collection link",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "BACKEND",
-    "location": "modules/klascement/klascement",
-    "key": "publiceer-opdracht-naar-klascement-assignment-description-assignment-title-assignment-link",
-    "language": "nl",
-    "value": "Publiceer opdracht naar klascement assignment description assignment title assignment link",
+    "value": "Er bestaat reeds een redirect met dezelfde oude url, best dat je deze wijzigt",
     "value_type": "TEXT"
   }
 ]
