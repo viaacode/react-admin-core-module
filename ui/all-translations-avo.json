@@ -30295,6 +30295,69 @@
   },
   {
     "app": "AVO",
+    "component": "FRONTEND",
+    "location": "shared/components/education-levels-tag-list/education-levels-tag-list",
+    "key": "kleuter",
+    "language": "nl",
+    "value": "Kleuter",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "shared/components/education-levels-tag-list/education-levels-tag-list",
+    "key": "lager",
+    "language": "nl",
+    "value": "Lager",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "shared/components/education-levels-tag-list/education-levels-tag-list",
+    "key": "secundair",
+    "language": "nl",
+    "value": "Secundair",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "shared/components/education-levels-tag-list/education-levels-tag-list",
+    "key": "dko",
+    "language": "nl",
+    "value": "DKO",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "shared/components/education-levels-tag-list/education-levels-tag-list",
+    "key": "hoger",
+    "language": "nl",
+    "value": "Hoger",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "shared/components/education-levels-tag-list/education-levels-tag-list",
+    "key": "volwassenen",
+    "language": "nl",
+    "value": "Volwassenen",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "shared/components/education-levels-tag-list/education-levels-tag-list",
+    "key": "ander",
+    "language": "nl",
+    "value": "Ander",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
     "component": "BACKEND",
     "location": "modules/auth/controller",
     "key": "het-logout-pad-voor-idp-idp-type-is-niet-gedefinieerd",
@@ -30426,6 +30489,15 @@
     "key": "publiceer-opdracht-naar-klascement-assignment-description-assignment-title-assignment-link",
     "language": "nl",
     "value": "<p>\n\t{{assignmentDescription}}\n</p>\n<p>\n\t<a href=\"{{assignmentLink}}\" target=\"_blank\">\n\t\tBekijk de voorbeeldopdracht <strong>{{assignmentTitle}}</strong> op Het Archief voor Onderwijs >\n\t</a>\n</p>",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "BACKEND",
+    "location": "modules/url-redirects/url-redirects",
+    "key": "er-bestaat-reeds-een-redirect-met-dezelfde-oude-url-best-dat-je-deze-wijzigt",
+    "language": "nl",
+    "value": "Er bestaat reeds een redirect met dezelfde oude url, best dat je deze wijzigt",
     "value_type": "TEXT"
   },
   {
@@ -30867,15 +30939,6 @@
     "key": "fout-bij-inloggen-via-vlaamse-overheid-acm-idm",
     "language": "nl",
     "value": "fout-bij-inloggen-via-vlaamse-overheid-acm-idm",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "BACKEND",
-    "location": "modules/url-redirects/url-redirects",
-    "key": "er-bestaat-reeds-een-redirect-met-dezelfde-oude-url-best-dat-je-deze-wijzigt",
-    "language": "nl",
-    "value": "Er bestaat reeds een redirect met dezelfde oude url, best dat je deze wijzigt",
     "value_type": "TEXT"
   }
 ]
