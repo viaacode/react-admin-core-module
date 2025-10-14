@@ -27947,6 +27947,69 @@
   {
     "app": "AVO",
     "component": "FRONTEND",
+    "location": "shared/components/education-levels-tag-list/education-levels-tag-list",
+    "key": "kleuter",
+    "language": "nl",
+    "value": "kleuter",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "shared/components/education-levels-tag-list/education-levels-tag-list",
+    "key": "lager",
+    "language": "nl",
+    "value": "lager",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "shared/components/education-levels-tag-list/education-levels-tag-list",
+    "key": "secundair",
+    "language": "nl",
+    "value": "secundair",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "shared/components/education-levels-tag-list/education-levels-tag-list",
+    "key": "dko",
+    "language": "nl",
+    "value": "DKO",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "shared/components/education-levels-tag-list/education-levels-tag-list",
+    "key": "hoger",
+    "language": "nl",
+    "value": "hoger",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "shared/components/education-levels-tag-list/education-levels-tag-list",
+    "key": "volwassenen",
+    "language": "nl",
+    "value": "volwassenen",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "shared/components/education-levels-tag-list/education-levels-tag-list",
+    "key": "ander",
+    "language": "nl",
+    "value": "ander",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
     "location": "shared/components/file-upload/file-upload",
     "key": "een-geselecteerde-bestand-is-niet-toegelaten",
     "language": "nl",
@@ -30295,69 +30358,6 @@
   },
   {
     "app": "AVO",
-    "component": "FRONTEND",
-    "location": "shared/components/education-levels-tag-list/education-levels-tag-list",
-    "key": "kleuter",
-    "language": "nl",
-    "value": "Kleuter",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "shared/components/education-levels-tag-list/education-levels-tag-list",
-    "key": "lager",
-    "language": "nl",
-    "value": "Lager",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "shared/components/education-levels-tag-list/education-levels-tag-list",
-    "key": "secundair",
-    "language": "nl",
-    "value": "Secundair",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "shared/components/education-levels-tag-list/education-levels-tag-list",
-    "key": "dko",
-    "language": "nl",
-    "value": "DKO",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "shared/components/education-levels-tag-list/education-levels-tag-list",
-    "key": "hoger",
-    "language": "nl",
-    "value": "Hoger",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "shared/components/education-levels-tag-list/education-levels-tag-list",
-    "key": "volwassenen",
-    "language": "nl",
-    "value": "Volwassenen",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "shared/components/education-levels-tag-list/education-levels-tag-list",
-    "key": "ander",
-    "language": "nl",
-    "value": "Ander",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
     "component": "BACKEND",
     "location": "modules/auth/controller",
     "key": "het-logout-pad-voor-idp-idp-type-is-niet-gedefinieerd",
@@ -30497,7 +30497,7 @@
     "location": "modules/url-redirects/url-redirects",
     "key": "er-bestaat-reeds-een-redirect-met-dezelfde-oude-url-best-dat-je-deze-wijzigt",
     "language": "nl",
-    "value": "Er bestaat reeds een redirect met dezelfde oude url, best dat je deze wijzigt",
+    "value": "Er bestaat al een redirect op {{existingOldPath}}, pas deze aan ipv een nieuwe in te stellen.",
     "value_type": "TEXT"
   },
   {
@@ -30506,7 +30506,7 @@
     "location": "modules/url-redirects/url-redirects",
     "key": "redirects-naar-andere-redirects-zijn-niet-toegestaan-bedoelde-je-from-path-to-path",
     "language": "nl",
-    "value": "Een redirect naar een andere pagina waarop al een redirect staat, is niet toegestaan. Bedoelde je \"{{fromPath}}\" => \"{{toPath}}\"?",
+    "value": "Een redirect naar een andere pagina waarop al een redirect staat, is niet toegestaan. Bedoelde je {{existingOldPath}} => {{creatingNewPath}}?\n",
     "value_type": "TEXT"
   },
   {
@@ -30515,7 +30515,7 @@
     "location": "modules/url-redirects/url-redirects",
     "key": "redirects-naar-andere-redirects-zijn-niet-toegestaan-je-past-het-beste-de-oude-url-old-path-aan",
     "language": "nl",
-    "value": "Een redirect naar een andere pagina waarop al een redirect staat, is niet toegestaan. Je past best de redirect op de oude url \"{{oldPath}}\" aan.",
+    "value": "Er staat al een redirect ingesteld naar {{creatingOldPath}}. Gelieve {{existingOldPath}} te laten verwijzen naar {{creatingNewPath}}.",
     "value_type": "TEXT"
   },
   {
