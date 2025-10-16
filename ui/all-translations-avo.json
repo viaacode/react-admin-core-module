@@ -30940,5 +30940,23 @@
     "language": "nl",
     "value": "fout-bij-inloggen-via-vlaamse-overheid-acm-idm",
     "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "BACKEND",
+    "location": "modules/auth/idps/lti/lti",
+    "key": "no-platform-user-id-we-could-use-to-map-for-this-user-this-is-the-true-anonymous-flow",
+    "language": "nl",
+    "value": "No platform userId we could use to map for this user. This is the true anonymous flow",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "BACKEND",
+    "location": "modules/auth/idps/lti/lti",
+    "key": "user-was-not-yet-linked-and-the-role-of-the-user-could-not-yet-be-verified-this-is-a-semi-anonymous-flow",
+    "language": "nl",
+    "value": "User was not yet linked and the role of the user could not yet be verified. This is a semi anonymous flow.",
+    "value_type": "TEXT"
   }
 ]
