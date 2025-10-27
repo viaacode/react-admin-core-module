@@ -14936,7 +14936,7 @@
     "location": "assignment/views/assignment-overview",
     "key": "je-hebt-nog-geen-opdrachten-aangemaakt",
     "language": "nl",
-    "value": "Je hebt nog geen eigen of gedeelde opdrachten.",
+    "value": "Je hebt geen actieve eigen of gedeelde opdrachten.",
     "value_type": "HTML"
   },
   {
@@ -29192,7 +29192,7 @@
     "location": "shared/components/share-with-pupils/share-with-pupils",
     "key": "je-kan-de-link-enkel-delen-met-leerlingen-die-smartschool-of-leer-id-hebben",
     "language": "nl",
-    "value": "Enkel leerlingen die een Smartschool-account of LeerID hebben kunnen deze opdrachtlink bekijken.",
+    "value": "Enkel leerlingen die een Smartschool-account of LeerID hebben, kunnen deze opdrachtlink bekijken.",
     "value_type": "HTML"
   },
   {
@@ -30358,6 +30358,15 @@
   },
   {
     "app": "AVO",
+    "component": "FRONTEND",
+    "location": "collection/collection",
+    "key": "de-bundel-heeft-collecties-of-opdrachten-die-verwijderd-zijn",
+    "language": "nl",
+    "value": "De bundel heeft collecties of opdrachten die verwijderd zijn",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
     "component": "BACKEND",
     "location": "modules/auth/controller",
     "key": "het-logout-pad-voor-idp-idp-type-is-niet-gedefinieerd",
@@ -30506,7 +30515,7 @@
     "location": "modules/url-redirects/url-redirects",
     "key": "redirects-naar-andere-redirects-zijn-niet-toegestaan-bedoelde-je-from-path-to-path",
     "language": "nl",
-    "value": "Een redirect naar een andere pagina waarop al een redirect staat, is niet toegestaan. Bedoelde je {{existingOldPath}} => {{creatingNewPath}}?\n",
+    "value": "Een redirect naar een pagina waarop al een redirect staat, mag niet. Bedoelde je {{existingOldPath}} => {{creatingNewPath}}?\n",
     "value_type": "TEXT"
   },
   {
@@ -30792,6 +30801,15 @@
     "app": "AVO",
     "component": "BACKEND",
     "location": "modules/auth/idps/lti/lti",
+    "key": "no-platform-user-id-we-could-use-to-map-for-this-user-this-is-the-true-anonymous-flow",
+    "language": "nl",
+    "value": "No platform userId we could use to map for this user. This is the true anonymous flow",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "BACKEND",
+    "location": "modules/auth/idps/lti/lti",
     "key": "de-login-voor-deze-embed-is-mislukt-omdat-de-gebruiker-met-idp-type-die-gelinkt-is-aan-deze-embed-niet-gevonden-kon-worden-in-de-database-van-het-archief-voor-onderwijs-profile-id-avo-profile-id",
     "language": "nl",
     "value": "De login voor deze embed is mislukt omdat de gebruiker met {{idpType}} die gelinkt is aan deze embed niet gevonden kon worden in de database van Het Archief voor Onderwijs (profile id: {{avoProfileId}}}).",
@@ -30804,6 +30822,15 @@
     "key": "de-login-voor-deze-embed-is-mislukt-omdat-de-gebruiker-die-gelinkt-is-aan-deze-gebruiker-van-idp-type-geen-toegang-meer-heeft-tot-het-archief-voor-onderwijs",
     "language": "nl",
     "value": "De login voor deze embed is mislukt omdat de gebruiker met {{idpType}} die gelinkt is aan deze embed geen toegang meer heeft tot Het Archief voor Onderwijs.",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "BACKEND",
+    "location": "modules/auth/idps/lti/lti",
+    "key": "user-was-not-yet-linked-and-the-role-of-the-user-could-not-yet-be-verified-this-is-a-semi-anonymous-flow",
+    "language": "nl",
+    "value": "User was not yet linked and the role of the user could not yet be verified. This is a semi anonymous flow.",
     "value_type": "TEXT"
   },
   {
@@ -30939,24 +30966,6 @@
     "key": "fout-bij-inloggen-via-vlaamse-overheid-acm-idm",
     "language": "nl",
     "value": "fout-bij-inloggen-via-vlaamse-overheid-acm-idm",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "BACKEND",
-    "location": "modules/auth/idps/lti/lti",
-    "key": "no-platform-user-id-we-could-use-to-map-for-this-user-this-is-the-true-anonymous-flow",
-    "language": "nl",
-    "value": "No platform userId we could use to map for this user. This is the true anonymous flow",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "BACKEND",
-    "location": "modules/auth/idps/lti/lti",
-    "key": "user-was-not-yet-linked-and-the-role-of-the-user-could-not-yet-be-verified-this-is-a-semi-anonymous-flow",
-    "language": "nl",
-    "value": "User was not yet linked and the role of the user could not yet be verified. This is a semi anonymous flow.",
     "value_type": "TEXT"
   }
 ]
