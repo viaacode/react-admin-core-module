@@ -10,7 +10,7 @@ import type {
 } from '~modules/content-page/types/content-pages.types';
 import { ErrorView } from '~shared/components/error';
 import { Locale } from '../../../scripts/translation.types.mjs';
-import { ContentPageService, convertDbContentPageToContentPageInfo } from '../../client.mjs';
+import { ContentPageService, convertDbContentPageToContentPageInfo } from '../../client.js';
 import { mockCommonUser } from '../../mock-common-user';
 
 const ContentPagePreviewPage: FC<RouteComponentProps> = ({ location }) => {

@@ -17,25 +17,25 @@ export default defineConfig({
 		lib: {
 			entry: {
 				// Contains all the code that is needed to render the admin-core dashboard pages and edit pages
-				admin: resolve(__dirname, 'src/admin.mts'),
+				admin: resolve(__dirname, 'src/admin.ts'),
 				// Contains all the logic to render content pages and set the admin-core config
-				client: resolve(__dirname, 'src/client.mts'),
+				client: resolve(__dirname, 'src/client.ts'),
 			},
-			name: '@meemoo/admin-core-ui',
-			fileName: (_, entryName) => {
-				if (entryName === 'src/index') {
-					return 'index.mjs';
-				}
-				return `${entryName}.mjs`;
-			},
+			// name: '@meemoo/admin-core-ui',
+			// fileName: (_, entryName) => {
+			// 	if (entryName === 'src/index') {
+			// 		return 'index.mjs';
+			// 	}
+			// 	return `${entryName}.mjs`;
+			// },
 			formats: ['es'],
 		},
-		rollupOptions: {
-			output: {
-				entryFileNames: '[name].mjs',
-				preserveModules: true,
-			},
-		},
+		// rollupOptions: {
+		// 	output: {
+		// 		entryFileNames: '[name].mjs',
+		// 		preserveModules: true,
+		// 	},
+		// },
 		sourcemap: true,
 	},
 	define: {
