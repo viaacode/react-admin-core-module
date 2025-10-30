@@ -18,7 +18,7 @@ import {
 } from '@viaa/avo2-components';
 import type { Avo } from '@viaa/avo2-types';
 import clsx from 'clsx';
-import { cloneDeep, compact, get, sortBy } from 'lodash-es';
+import { cloneDeep, compact, get, isEqual, sortBy } from 'lodash-es';
 import React, {
 	type FunctionComponent,
 	type KeyboardEvent,
@@ -170,6 +170,7 @@ export const FilterTable: FunctionComponent<FilterTableProps> = ({
 				...(id !== 'page' ? { page: 0 } : {}), // Reset the page to 0, when any filter or sort order change is made
 			});
 
+			console.log('table state changed: ', { value, id, tableState, newTableState });
 			setTableState(newTableState, 'replace');
 		},
 		[setTableState, tableState]
@@ -254,8 +255,10 @@ export const FilterTable: FunctionComponent<FilterTableProps> = ({
 	};
 
 	useEffect(() => {
-		handleTableStateChanged(preferredColumns, 'columns');
-	}, [handleTableStateChanged, preferredColumns]);
+		if (!isEqual(preferredColumns, tableState.columns)) {
+			handleTableStateChanged(preferredColumns, 'columns');
+		}
+	}, [handleTableStateChanged, preferredColumns, tableState.columns]);
 
 	useEffect(() => {
 		onTableStateChanged(tableState);
