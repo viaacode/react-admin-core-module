@@ -113,7 +113,6 @@ interface FilterTableProps {
 	onSelectionChanged?: (selectedItemIds: (string | number)[]) => void;
 	onSelectAll?: () => void;
 	searchInputAriaLabel?: string;
-	hideTableColumnsButton?: boolean;
 }
 
 export const FilterTable: FunctionComponent<FilterTableProps> = ({
