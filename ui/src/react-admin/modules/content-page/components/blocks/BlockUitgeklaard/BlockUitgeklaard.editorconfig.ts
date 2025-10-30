@@ -52,7 +52,9 @@ export const UITGEKLAARD_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				}
 			) as ContentBlockField,
 			date: {
-				label: 'Datum',
+				label: tText(
+					'modules/content-page/components/blocks/block-uitgeklaard/block-uitgeklaard___datum'
+				),
 				editorType: ContentBlockEditor.DatePicker,
 				validator: (value: string) => {
 					const errorArray: string[] = [];
