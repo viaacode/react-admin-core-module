@@ -32,11 +32,11 @@ import { USER_QUERIES, UserQueryTypes } from './queries/users.queries';
 import { GET_TABLE_COLUMN_TO_DATABASE_ORDER_OBJECT } from './users.consts';
 import { convertUserInfoToCommonUser } from './users.converters';
 import {
-	DeleteContentCounts,
-	UserInfoOverviewAvo,
-	UserInfoOverviewHetArchief,
+	type DeleteContentCounts,
+	type UserInfoOverviewAvo,
+	type UserInfoOverviewHetArchief,
 	UserInfoType,
-	UserOverviewTableCol,
+	type UserOverviewTableCol,
 } from './users.types';
 
 export class UsersService {

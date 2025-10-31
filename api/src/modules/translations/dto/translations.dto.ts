@@ -2,7 +2,12 @@ import { ApiProperty } from '@nestjs/swagger';
 import { IsString } from 'class-validator';
 
 import { Lookup_Languages_Enum } from '../../shared/generated/graphql-db-types-hetarchief';
-import { Component, Key, Locale, Location } from '../translations.types';
+import {
+	Component,
+	Locale,
+	type TranslationKey,
+	type TranslationLocation,
+} from '../translations.types';
 
 export class UpdateTranslationDto {
 	@IsString()
@@ -23,7 +28,7 @@ export class UpdateTranslationDto {
 		description: 'The file location in which this translation occurs',
 		example: 'modules/auth/controllers/het-archief',
 	})
-	location: Location;
+	location: TranslationLocation;
 
 	@IsString()
 	@ApiProperty({
@@ -33,7 +38,7 @@ export class UpdateTranslationDto {
 			'The translation key that uniquely identifies the translation within the component and file',
 		example: 'account-configuratie',
 	})
-	key: Key;
+	key: TranslationKey;
 
 	@IsString()
 	@ApiProperty({

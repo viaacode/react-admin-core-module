@@ -1,13 +1,12 @@
 import { IconName } from '@viaa/avo2-components';
-import type { Avo } from '@viaa/avo2-types';
-import type { FC } from 'react';
 import React from 'react';
-import {useMatch} from 'react-router';
-import {AdminConfigManager} from '~core/config';
-import {getCommonUser} from '~core/config/config.selectors';
-import {ContentPageRenderer} from '~modules/content-page/components/ContentPageRenderer/ContentPageRenderer';
-import {tHtml} from '~shared/helpers/translation-functions';
-import {useGetContentPageByPath} from '../hooks/get-content-page-by-path';
+import { useMatch } from 'react-router';
+import { AdminConfigManager } from '~core/config';
+import { getCommonUser } from '~core/config/config.selectors';
+import { ContentPageRenderer } from '~modules/content-page/components/ContentPageRenderer/ContentPageRenderer';
+import { ErrorView } from '~shared/components/error';
+import { tHtml } from '~shared/helpers/translation-functions';
+import { useGetContentPageByPath } from '../hooks/get-content-page-by-path';
 
 export const ContentPageWrapper = () => {
 	const match = useMatch<'path', string>('/:path');
@@ -36,7 +35,8 @@ export const ContentPageWrapper = () => {
 	if (contentPageInfo) {
 		return (
 			<ContentPageRenderer
-                contentPageInfo={contentPageInfo} commonUser={commonUser || undefined} 
+				contentPageInfo={contentPageInfo}
+				commonUser={commonUser || undefined}
 				renderNoAccessError={() => (
 					<ErrorView
 						icon={IconName.clock}
@@ -44,7 +44,7 @@ export const ContentPageWrapper = () => {
 						message={'deze-pagina-is-enkel-voor-gebruikers-met-andere-rechten'}
 					/>
 				)}
-            />
-        );
+			/>
+		);
 	}
 };

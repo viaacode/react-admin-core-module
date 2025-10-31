@@ -21,7 +21,7 @@ import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { IPagination } from '@studiohyperdrive/pagination';
 import type { Avo } from '@viaa/avo2-types';
 import { AssetType, PermissionName } from '@viaa/avo2-types';
-import { Request } from 'express';
+import type { Request } from 'express';
 
 import { AssetsService } from '../../assets';
 import { RequireAnyPermissions } from '../../shared/decorators/require-any-permissions.decorator';
@@ -34,13 +34,13 @@ import { Locale } from '../../translations';
 import { SessionUserEntity } from '../../users/classes/session-user';
 import { CONTENT_PAGE_COPY, CONTENT_PAGE_COPY_REGEX } from '../content-pages.consts';
 import {
-	ContentOverviewTableCols,
-	ContentPageLabel,
-	ContentPagesPublishAndUnpublishResults,
-	DbContentPage,
+	type ContentOverviewTableCols,
+	type ContentPageLabel,
+	type ContentPagesPublishAndUnpublishResults,
+	type DbContentPage,
 } from '../content-pages.types';
 import { ContentPageOverviewParams } from '../dto/content-pages.dto';
-import { ContentPageQueryTypes } from '../queries/content-pages.queries';
+import type { ContentPageQueryTypes } from '../queries/content-pages.queries';
 import { ContentPagesService } from '../services/content-pages.service';
 
 @ApiTags('ContentPages')

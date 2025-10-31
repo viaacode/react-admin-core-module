@@ -5,7 +5,7 @@ import { IsArray, IsBoolean, IsNumber, IsObject, IsOptional, IsString } from 'cl
 import { Lookup_App_Content_Type_Enum } from '../../shared/generated/graphql-db-types-hetarchief';
 import { commaSeparatedStringToArray } from '../../shared/helpers/comma-separated-string-to-array';
 import { SortDirection } from '../../shared/types';
-import { SearchDateRange } from '../content-pages.types';
+import { type SearchDateRange } from '../content-pages.types';
 
 export class ContentPageFiltersDto {
 	@IsString()

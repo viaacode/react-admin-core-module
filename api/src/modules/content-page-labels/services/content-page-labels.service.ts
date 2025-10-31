@@ -2,12 +2,12 @@ import { forwardRef, Inject } from '@nestjs/common';
 import type { Avo } from '@viaa/avo2-types';
 import { isNil } from 'lodash';
 
-import { ContentPageLabel, ContentPageType, LabelObj } from '../../content-pages';
+import type { ContentPageLabel, ContentPageType, LabelObj } from '../../content-pages';
 import { DataService } from '../../data';
 import { customError } from '../../shared/helpers/custom-error';
 import { getDatabaseType } from '../../shared/helpers/get-database-type';
 import { isAvo } from '../../shared/helpers/is-avo';
-import { ContentPageLabelOverviewTableCols } from '../content-page-labels.types';
+import type { ContentPageLabelOverviewTableCols } from '../content-page-labels.types';
 import {
 	ContentPageLabelDto,
 	InsertContentPageLabelDto,

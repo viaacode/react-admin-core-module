@@ -3,7 +3,7 @@ import { Transform } from 'class-transformer';
 import { IsArray, IsOptional, IsString } from 'class-validator';
 
 import { commaSeparatedStringToArray } from '../../shared/helpers/comma-separated-string-to-array';
-import { ContentPageType, ContentPageTypeValues } from '../content-pages.types';
+import { type ContentPageType, ContentPageTypeValues } from '../content-pages.types';
 
 export class ContentLabelsRequestDto {
 	@IsString()

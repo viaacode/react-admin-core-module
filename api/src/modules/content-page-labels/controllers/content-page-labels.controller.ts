@@ -3,11 +3,11 @@ import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import type { Avo } from '@viaa/avo2-types';
 import { PermissionName } from '@viaa/avo2-types';
 
-import { ContentPageLabel, LabelObj } from '../../content-pages';
+import { type ContentPageLabel, type LabelObj } from '../../content-pages';
 import { ContentLabelsRequestDto } from '../../content-pages/dto/content-labels-request.dto';
 import { RequireAnyPermissions } from '../../shared/decorators/require-any-permissions.decorator';
 import { customError } from '../../shared/helpers/custom-error';
-import { ContentPageLabelOverviewTableCols } from '../content-page-labels.types';
+import type { ContentPageLabelOverviewTableCols } from '../content-page-labels.types';
 import {
 	ContentPageLabelDto,
 	InsertContentPageLabelDto,

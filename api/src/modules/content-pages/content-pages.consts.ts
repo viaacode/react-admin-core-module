@@ -2,7 +2,7 @@ import type { Avo } from '@viaa/avo2-types';
 
 import { isHetArchief } from '../shared/helpers/is-hetarchief';
 
-import { type ContentOverviewTableCols, type MediaPlayerPathInfo } from './content-pages.types';
+import type { ContentOverviewTableCols, MediaPlayerPathInfo } from './content-pages.types';
 
 export const CONTENT_PAGE_COPY = 'Kopie %index%: ';
 export const CONTENT_PAGE_COPY_REGEX = /^Kopie [0-9]+: /gi;

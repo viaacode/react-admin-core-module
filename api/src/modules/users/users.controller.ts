@@ -11,13 +11,13 @@ import {
 	Query,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import { PermissionName } from '@viaa/avo2-types';
 import type { Avo } from '@viaa/avo2-types';
+import { PermissionName } from '@viaa/avo2-types';
 
 import { RequireAnyPermissions } from '../shared/decorators/require-any-permissions.decorator';
 
 import { UsersService } from './users.service';
-import { DeleteContentCounts, QueryProfilesBody, UserOverviewTableCol } from './users.types';
+import type { DeleteContentCounts, QueryProfilesBody, UserOverviewTableCol } from './users.types';
 
 @ApiTags('Users')
 @Controller(process.env.ADMIN_CORE_ROUTES_PREFIX + '/users')

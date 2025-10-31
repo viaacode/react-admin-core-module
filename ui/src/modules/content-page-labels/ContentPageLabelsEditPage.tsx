@@ -1,7 +1,7 @@
-import type {FC} from 'react';
-import {useMatch} from 'react-router';
-import {ContentPageLabelEdit} from '~modules/content-page-labels/views/ContentPageLabelEdit';
-import {AdminConfigManager} from '../../client.mjs';
+import type { FC } from 'react';
+import { useMatch } from 'react-router';
+import { AdminConfigManager } from '~core/config';
+import { ContentPageLabelEdit } from '~modules/content-page-labels/views/ContentPageLabelEdit';
 
 export const ContentPageLabelsEditPage: FC = () => {
 	const match = useMatch<'id', string>(

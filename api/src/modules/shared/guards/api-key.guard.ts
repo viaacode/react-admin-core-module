@@ -1,5 +1,5 @@
 import { BadRequestException, CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
-import { Request } from 'express';
+import type { Request } from 'express';
 
 export const API_KEY_EXCEPTION = new BadRequestException(
 	'You need to provide an valid api key for this endpoint under the header "apikey"'

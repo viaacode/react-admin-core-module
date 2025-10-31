@@ -58,22 +58,22 @@ import {
 	MEDIA_PLAYER_BLOCKS,
 	TABLE_COLUMN_TO_DATABASE_ORDER_OBJECT,
 } from '../content-pages.consts';
-import {
-	type ContentOverviewTableCols,
-	type ContentPageLabel,
+import type {
+	ContentOverviewTableCols,
+	ContentPageLabel,
 	ContentPagePublishInfo,
 	ContentPagesPublishAndUnpublishResults,
-	type ContentPageType,
-	type ContentPageUser,
-	type ContentWidth,
-	type DbContentPage,
-	type GqlAvoUser,
-	type GqlContentBlock,
-	type GqlContentPage,
-	type GqlHetArchiefUser,
-	type GqlInsertOrUpdateContentPage,
-	type GqlUser,
-	type MediaItemResponse,
+	ContentPageType,
+	ContentPageUser,
+	ContentWidth,
+	DbContentPage,
+	GqlAvoUser,
+	GqlContentBlock,
+	GqlContentPage,
+	GqlHetArchiefUser,
+	GqlInsertOrUpdateContentPage,
+	GqlUser,
+	MediaItemResponse,
 } from '../content-pages.types';
 import { type ContentPageOverviewParams } from '../dto/content-pages.dto';
 import { CONTENT_PAGE_QUERIES, type ContentPageQueryTypes } from '../queries/content-pages.queries';

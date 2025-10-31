@@ -1,7 +1,7 @@
 import { CACHE_MANAGER } from '@nestjs/cache-manager';
 import { Inject, Injectable, NotFoundException, OnApplicationBootstrap } from '@nestjs/common';
 import { Cron } from '@nestjs/schedule';
-import { Cache } from 'cache-manager';
+import { type Cache } from 'cache-manager';
 import { groupBy, isEmpty, sortBy } from 'lodash';
 
 import { DataService } from '../../data';
@@ -33,14 +33,14 @@ import {
 import {
 	App,
 	Component,
-	Key,
 	KeyValueTranslations,
 	LanguageInfo,
 	Locale,
-	Location,
 	MultiLanguageTranslationEntry,
 	TRANSLATION_SEPARATOR,
 	TranslationEntry,
+	type TranslationKey,
+	type TranslationLocation,
 	ValueType,
 } from '../translations.types';
 
@@ -66,7 +66,7 @@ export class TranslationsService implements OnApplicationBootstrap {
 
 	public getFullKey(
 		translationEntry: TranslationEntry
-	): `${Component}${typeof TRANSLATION_SEPARATOR}${Location}${typeof TRANSLATION_SEPARATOR}${Key}` {
+	): `${Component}${typeof TRANSLATION_SEPARATOR}${TranslationLocation}${typeof TRANSLATION_SEPARATOR}${TranslationKey}` {
 		return `${translationEntry.component}${TRANSLATION_SEPARATOR}${translationEntry.location}${TRANSLATION_SEPARATOR}${translationEntry.key}`;
 	}
 
@@ -100,8 +100,8 @@ export class TranslationsService implements OnApplicationBootstrap {
 
 	public async upsertTranslation(
 		component: Component,
-		location: Location,
-		key: Key,
+		location: TranslationLocation,
+		key: TranslationKey,
 		languageCode: Locale,
 		value: string
 	): Promise<void> {
@@ -145,8 +145,8 @@ export class TranslationsService implements OnApplicationBootstrap {
 
 	public async insertTranslation(
 		component: Component,
-		location: Location,
-		key: Key,
+		location: TranslationLocation,
+		key: TranslationKey,
 		languageCode: Locale,
 		value: string,
 		value_type: ValueType
@@ -179,8 +179,8 @@ export class TranslationsService implements OnApplicationBootstrap {
 
 	public async updateTranslation(
 		component: Component,
-		location: Location,
-		key: Key,
+		location: TranslationLocation,
+		key: TranslationKey,
 		languageCode: Locale,
 		value: string
 	): Promise<void> {
@@ -257,8 +257,8 @@ export class TranslationsService implements OnApplicationBootstrap {
 
 	public async getTranslationsByComponentLocationKey(
 		component: Component,
-		location: Location,
-		key: Key
+		location: TranslationLocation,
+		key: TranslationKey
 	): Promise<TranslationEntry[]> {
 		const response = await this.dataService.execute<
 			GetTranslationByComponentLocationKeyQuery,

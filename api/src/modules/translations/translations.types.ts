@@ -18,8 +18,8 @@ export enum Component {
 	FRONTEND = 'FRONTEND',
 	BACKEND = 'BACKEND',
 }
-export type Location = string;
-export type Key = string;
+export type TranslationLocation = string;
+export type TranslationKey = string;
 
 export enum ValueType {
 	TEXT = 'TEXT',
@@ -31,8 +31,8 @@ export { Lookup_Languages_Enum as Locale };
 export interface TranslationEntry {
 	app: App;
 	component: Component;
-	location: Location;
-	key: Key;
+	location: TranslationLocation;
+	key: TranslationKey;
 	value: string;
 	value_type: ValueType | null;
 	language: Lookup_Languages_Enum;
@@ -40,8 +40,8 @@ export interface TranslationEntry {
 
 export interface MultiLanguageTranslationEntry {
 	component: Component;
-	location: Location;
-	key: Key;
+	location: TranslationLocation;
+	key: TranslationKey;
 	values: Record<Lookup_Languages_Enum, string>;
 	value_type: ValueType | null;
 }

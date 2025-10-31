@@ -1,7 +1,6 @@
 import { IconName } from '@viaa/avo2-components';
 import React, { type FC, useCallback, useEffect, useState } from 'react';
-import type { RouteComponentProps } from 'react-router';
-import { withRouter } from 'react-router';
+import { useLocation } from 'react-router';
 import { ContentPagePreviewUserRoleSelector } from '~modules/content-page/components/ContentPagePreviewUserRoleSelector/ContentPagePreviewUserRoleSelector';
 import { ContentPageRenderer } from '~modules/content-page/components/ContentPageRenderer/ContentPageRenderer';
 import type {
@@ -13,8 +12,9 @@ import { Locale } from '../../../scripts/translation.types.mjs';
 import { ContentPageService, convertDbContentPageToContentPageInfo } from '../../client.js';
 import { mockCommonUser } from '../../mock-common-user';
 
-const ContentPagePreviewPage: FC<RouteComponentProps> = ({ location }) => {
+export const ContentPagePreviewPage: FC = () => {
 	const [contentPageInfo, setContentPageInfo] = useState<ContentPageInfo | null>(null);
+	const location = useLocation();
 
 	const getContentPageByPath = useCallback(async () => {
 		const contentPage: DbContentPage | null =
@@ -50,5 +50,3 @@ const ContentPagePreviewPage: FC<RouteComponentProps> = ({ location }) => {
 		</>
 	);
 };
-
-export default withRouter(ContentPagePreviewPage);

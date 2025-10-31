@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsOptional, IsString } from 'class-validator';
 
-import { ContentPageType, ContentPickerType } from '../../content-pages';
+import type { ContentPageType, ContentPickerType } from '../../content-pages';
 import { LinkTarget } from '../../navigations';
 import { Locale } from '../../translations';
 

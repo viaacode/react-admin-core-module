@@ -1,8 +1,8 @@
-import type {FC} from 'react';
+import type { FC } from 'react';
 import React from 'react';
-import {useMatch} from 'react-router';
-import {NavigationBarDetail} from '~modules/navigation/views';
-import {AdminConfigManager} from '../../client.mjs';
+import { useMatch } from 'react-router';
+import { AdminConfigManager } from '~core/config';
+import { NavigationBarDetail } from '~modules/navigation/views';
 
 export const NavigationDetailPage: FC = () => {
 	const match = useMatch<'navigationBarId', string>(
