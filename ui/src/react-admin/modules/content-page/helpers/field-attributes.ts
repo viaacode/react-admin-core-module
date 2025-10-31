@@ -1,10 +1,54 @@
-import type { DatePickerProps, SelectOption } from '@viaa/avo2-components';
+import type { SelectOption } from '@viaa/avo2-components';
 import { compact, debounce, get, isArray, isNil } from 'lodash-es';
+import type { CSSProperties, ReactNode } from 'react';
+import type { ColorSelectProps } from '~modules/content-page/components/fields/ColorSelect/ColorSelect';
 import type { ContentPickerProps } from '~shared/components/ContentPicker/ContentPicker';
+import type { FileUploadProps } from '~shared/components/FileUpload/FileUpload';
+import type { MaintainerSelectProps } from '~shared/components/MaintainerSelect/MaintainerSelect';
 import type { RichTextEditorWithInternalStateWrapperProps } from '~shared/components/RichTextEditorWithInternalStateWrapper/RichTextEditorWithInternalStateWrapper';
-
+import type { UploadOrSelectVideoStillProps } from '~shared/components/UploadOrSelectVideoStill/UploadOrSelectVideoStill';
+import type { UserGroupSelectProps } from '~shared/components/UserGroupSelect/UserGroupSelect';
 import type { ContentBlockField } from '../types/content-block.types';
 import { ContentBlockEditor } from '../types/content-block.types';
+
+interface DatePickerProps {
+	children?: ReactNode;
+	disabled?: boolean;
+	required?: boolean;
+	showTimeInput?: boolean;
+	placeholder?: string;
+	value?: Date | null;
+	defaultTime?: string;
+	onChange?: (date: Date | null) => void;
+	minDate?: Date;
+	maxDate?: Date;
+	className?: string;
+	style?: CSSProperties;
+}
+
+type RichTextEditorProps = Partial<RichTextEditorWithInternalStateWrapperProps>;
+
+interface MultiRangeProps {
+	onChange: (values: number[]) => void;
+	values: number[];
+}
+
+interface CheckboxProps {
+	onChange: (checked: boolean) => void;
+	checked: boolean;
+}
+
+type FieldAttributes =
+	| ContentPickerProps
+	| DatePickerProps
+	| RichTextEditorProps
+	| ColorSelectProps
+	| FileUploadProps
+	| MultiRangeProps
+	| CheckboxProps
+	| UserGroupSelectProps
+	| MaintainerSelectProps
+	| UploadOrSelectVideoStillProps;
 
 export const generateFieldAttributes = (
 	field: ContentBlockField,
@@ -18,7 +62,7 @@ export const generateFieldAttributes = (
 	key: string,
 	// biome-ignore lint/suspicious/noExplicitAny: todo
 	state: any
-) => {
+): Partial<FieldAttributes> => {
 	switch (field.editorType) {
 		case ContentBlockEditor.TextInput:
 			return {
@@ -49,9 +93,10 @@ export const generateFieldAttributes = (
 		case ContentBlockEditor.IconPicker:
 		case ContentBlockEditor.ColorSelect:
 			return {
-				onChange: (option: SelectOption<string>) => {
+				onChange: ((option: SelectOption<string>) => {
 					onChange(get(option, 'value', ''));
-				},
+					// biome-ignore lint/suspicious/noExplicitAny: todo investigate why this cast is needed
+				}) as any,
 				value: field.editorProps.options.find((opt: SelectOption<string>) => opt.value === value),
 			};
 

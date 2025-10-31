@@ -105,7 +105,7 @@ export class ContentPagesController {
 		@Query('path') path: string,
 		@Query('onlyInfo') onlyInfo: string,
 		@Req() request: Request,
-		@Ip() ip,
+		@Ip() ip: string,
 		@SessionUser() sessionUser: SessionUserEntity
 	): Promise<DbContentPage> {
 		try {

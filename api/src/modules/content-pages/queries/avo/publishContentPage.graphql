@@ -1,7 +1,7 @@
 mutation publishContentPage($id: Int!, $publishedAt: timestamptz) {
 	update_app_content(
 		where: { id: { _eq: $id } }
-		_set: { published_at: $publishedAt, is_public: true }
+		_set: { published_at: $publishedAt, is_public: true, depublished_at: null }
 	) {
 		affected_rows
 		returning {

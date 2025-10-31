@@ -18,15 +18,20 @@ export const useGetMaintainersByContent = (
 				return [];
 			}
 
+			const usableContentType =
+				contentItemType === ContentPickerType.ITEM_WITH_CUE_POINTS
+					? ContentPickerType.ITEM
+					: contentItemType;
+
 			if (
-				contentItemType !== ContentPickerType.ITEM &&
-				contentItemType !== ContentPickerType.COLLECTION &&
-				contentItemType !== ContentPickerType.ASSIGNMENT
+				usableContentType !== ContentPickerType.ITEM &&
+				usableContentType !== ContentPickerType.COLLECTION &&
+				usableContentType !== ContentPickerType.ASSIGNMENT
 			) {
 				return [];
 			}
 
-			return OrganisationService.getMaintainersByContentItem(contentItemType, contentItemId);
+			return OrganisationService.getMaintainersByContentItem(usableContentType, contentItemId);
 		},
 		{
 			enabled: true,

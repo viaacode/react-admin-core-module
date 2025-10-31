@@ -5,7 +5,7 @@ mutation unpublishContentPage($now: timestamp) {
 			is_public: { _eq: true }
 			is_deleted: { _eq: false }
 		}
-		_set: { is_public: false, published_at: null }
+		_set: { is_public: false, depublished_at: $now, published_at: null }
 	) {
 		affected_rows
 		returning {

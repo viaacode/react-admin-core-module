@@ -1,13 +1,16 @@
-import type { ButtonAction, DefaultProps, RenderLinkFunction } from '@viaa/avo2-components';
 import {
 	Accordion,
 	AspectRatioWrapper,
 	Button,
+	type ButtonAction,
 	Column,
 	Container,
 	convertToHtml,
+	type DefaultProps,
 	Flex,
 	Grid,
+	IconName,
+	type RenderLinkFunction,
 	Spacer,
 	Tabs,
 	TagList,
@@ -32,6 +35,7 @@ import './BlockPageOverview.scss';
 import { PaginationBar } from '@meemoo/react-components';
 import type { AlignOption } from '~modules/content-page/types/content-block.types';
 import { ITEMS_PER_PAGE } from '~modules/item/items.consts';
+import { ErrorView } from '~shared/components/error';
 import Html from '~shared/components/Html/Html';
 import { GET_DEFAULT_PAGINATION_BAR_PROPS } from '~shared/components/PaginationBar/PaginationBar.consts';
 import { SanitizePreset } from '~shared/helpers/sanitize/presets';
@@ -44,6 +48,7 @@ export interface BlockPageOverviewProps extends DefaultProps {
 	centerHeader?: boolean;
 	itemStyle?: ContentItemStyle;
 	itemAlignment?: AlignOption;
+	imageItemAlignment?: AlignOption;
 	showSectionTitle?: boolean;
 	showTitle?: boolean;
 	showDescription?: boolean;
@@ -78,6 +83,7 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 	centerHeader = false,
 	itemStyle = ContentItemStyle.NEWS_LIST,
 	itemAlignment = 'left',
+	imageItemAlignment = 'center',
 	showSectionTitle = true,
 	showTitle = true,
 	showDescription = true,
@@ -202,11 +208,12 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 				)}
 				itemWidth="30.7rem"
 				imageHeight="17.2rem"
-				imageWidth="30.7rem"
+				imageWidth="100%"
 				renderLink={renderLink}
 				fill="cover"
 				textAlign="left"
 				align={itemAlignment}
+				imageItemAlignment={imageItemAlignment}
 			/>
 		);
 	};
@@ -341,7 +348,17 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 								isOpen={page.id === focusedPage?.id}
 								key={`block-page-${page.id}`}
 							>
-								<ContentPageRenderer contentPageInfo={page} commonUser={commonUser} />
+								<ContentPageRenderer
+									contentPageInfo={page}
+									commonUser={commonUser}
+									renderNoAccessError={() => (
+										<ErrorView
+											icon={IconName.clock}
+											actionButtons={['helpdesk']}
+											message={'deze-pagina-is-enkel-voor-gebruikers-met-andere-rechten'}
+										/>
+									)}
+								/>
 							</Accordion>
 						);
 					})}
@@ -390,7 +407,17 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 												key={`page-overview--page-${page.id}`}
 												className="c-content-page-overview-block__accordion--second-level"
 											>
-												<ContentPageRenderer contentPageInfo={page} commonUser={commonUser} />
+												<ContentPageRenderer
+													contentPageInfo={page}
+													commonUser={commonUser}
+													renderNoAccessError={() => (
+														<ErrorView
+															icon={IconName.clock}
+															actionButtons={['helpdesk']}
+															message={'deze-pagina-is-enkel-voor-gebruikers-met-andere-rechten'}
+														/>
+													)}
+												/>
 											</Accordion>
 										);
 									})

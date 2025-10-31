@@ -1,3 +1,6 @@
+import { IconName } from '@viaa/avo2-components';
+import type { Avo } from '@viaa/avo2-types';
+import type { FC } from 'react';
 import React from 'react';
 import {useMatch} from 'react-router';
 import {AdminConfigManager} from '~core/config';
@@ -32,7 +35,16 @@ export const ContentPageWrapper = () => {
 	}
 	if (contentPageInfo) {
 		return (
-			<ContentPageRenderer contentPageInfo={contentPageInfo} commonUser={commonUser || undefined} />
-		);
+			<ContentPageRenderer
+                contentPageInfo={contentPageInfo} commonUser={commonUser || undefined} 
+				renderNoAccessError={() => (
+					<ErrorView
+						icon={IconName.clock}
+						actionButtons={['helpdesk']}
+						message={'deze-pagina-is-enkel-voor-gebruikers-met-andere-rechten'}
+					/>
+				)}
+            />
+        );
 	}
 };

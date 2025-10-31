@@ -1,8 +1,8 @@
 import type { SelectOption } from '@viaa/avo2-components';
 import { AdminConfigManager } from '~core/config';
 import { tText } from '~shared/helpers/translation-functions';
-import { ContentBlockType } from '../types/content-block.types';
 import { AVO, HET_ARCHIEF } from '~shared/types';
+import { ContentBlockType } from '../types/content-block.types';
 
 export const GET_CONTENT_BLOCK_TYPE_OPTIONS: () => SelectOption<string>[] = () => {
 	const allContentBlocks: { label: string; value: ContentBlockType }[] = [
@@ -35,15 +35,15 @@ export const GET_CONTENT_BLOCK_TYPE_OPTIONS: () => SelectOption<string>[] = () =
 			value: ContentBlockType.IFrame,
 		},
 		{
-			label: tText('admin/content-block/content-block___klaar'),
+			label: tText('admin/content-block/content-block___klaar', undefined, [AVO]),
 			value: ContentBlockType.Klaar,
 		},
 		{
-			label: tText('admin/content-block/content-block___uitgeklaard-titel-datum'),
+			label: tText('admin/content-block/content-block___uitgeklaard-titel-datum', undefined, [AVO]),
 			value: ContentBlockType.Uitgeklaard,
 		},
 		{
-			label: tText('admin/content-block/content-block___media-tegels'),
+			label: tText('admin/content-block/content-block___media-tegels', undefined, [AVO]),
 			value: ContentBlockType.MediaGrid,
 		},
 		{
@@ -87,7 +87,7 @@ export const GET_CONTENT_BLOCK_TYPE_OPTIONS: () => SelectOption<string>[] = () =
 			value: ContentBlockType.AnchorLinks,
 		},
 		{
-			label: tText('admin/content-block/content-block___hero'),
+			label: tText('admin/content-block/content-block___hero', undefined, [AVO]),
 			value: ContentBlockType.AvoHero,
 		},
 		{
@@ -171,6 +171,10 @@ export const GET_CONTENT_BLOCK_TYPE_OPTIONS: () => SelectOption<string>[] = () =
 				HET_ARCHIEF,
 			]),
 			value: ContentBlockType.Breadcrumbs,
+		},
+		{
+			label: tText('modules/content-page/const/get-content-block-type-options___scroll-down-nudge'),
+			value: ContentBlockType.ScrollDownNudge,
 		},
 	];
 

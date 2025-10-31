@@ -47,6 +47,9 @@ export const getUserGroupTableColumns = (
 			Header: '',
 			accessor: 'label',
 			disableSortBy: true,
+			Cell: ({ row }: PermissionRow) => {
+				return <span title={row.original.description}>{row.original.label}</span>;
+			},
 		},
 		...sortBy(userGroups, (userGroup) => preferredUserGroupOrder[userGroup.label] || 0).map(
 			(group) => {
@@ -85,15 +88,24 @@ export const getAllSubgroupIds = (userGroupOptions: (Partial<UserGroup> | TagInf
 	).filter((item) => isSubUserGroup(item));
 };
 
+export const GET_ALL_CONTENT: () => Partial<UserGroup> = () => ({
+	label: tText('modules/user-group/const/user-group___alle-content'),
+	id: SpecialPermissionGroups.allContent,
+});
+
+export const GET_LOGGED_OUT_USERS: () => Partial<UserGroup> = () => ({
+	label: tText('admin/menu/components/menu-edit-form/menu-edit-form___niet-ingelogde-gebruikers'),
+	id: SpecialPermissionGroups.loggedOutUsers,
+});
+
+export const GET_LOGGED_IN_USERS: () => Partial<UserGroup> = () => ({
+	label: tText('admin/menu/components/menu-edit-form/menu-edit-form___ingelogde-gebruikers'),
+	id: SpecialPermissionGroups.loggedInUsers,
+});
+
 export const GET_SPECIAL_USER_GROUPS: () => Partial<UserGroup>[] = () => [
-	{
-		label: tText('admin/menu/components/menu-edit-form/menu-edit-form___niet-ingelogde-gebruikers'),
-		id: SpecialPermissionGroups.loggedOutUsers,
-	},
-	{
-		label: tText('admin/menu/components/menu-edit-form/menu-edit-form___ingelogde-gebruikers'),
-		id: SpecialPermissionGroups.loggedInUsers,
-	},
+	GET_LOGGED_OUT_USERS(),
+	GET_LOGGED_IN_USERS(),
 ];
 
 export const GET_SPECIAL_USER_GROUPS_IDS: () => string[] = () =>

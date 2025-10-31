@@ -1,11 +1,13 @@
-import type { IconName, MenuItemInfo, TabProps } from '@viaa/avo2-components';
 import {
 	Blankslate,
 	Button,
 	ButtonToolbar,
 	Container,
+	IconName,
 	LinkTarget,
+	type MenuItemInfo,
 	Navbar,
+	type TabProps,
 	Tabs,
 } from '@viaa/avo2-components';
 import type { Avo } from '@viaa/avo2-types';
@@ -28,14 +30,16 @@ import type { ContentPageInfo } from '~modules/content-page/types/content-pages.
 import { ContentPageAction } from '~modules/content-page/types/content-pages.types';
 import { ContentPageDetailMetaData } from '~modules/content-page/views/ContentPageDetailMetaData';
 import { Locale } from '~modules/translations/translations.core.types';
-import { Icon } from '~shared/components/Icon';
 import ConfirmModal from '~shared/components/ConfirmModal/ConfirmModal';
+import { ErrorView } from '~shared/components/error';
+import { Icon } from '~shared/components/Icon';
 import { Link } from '~shared/components/Link/Link';
 import type { LoadingInfo } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
 import { LoadingErrorLoadedComponent } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
 import MoreOptionsDropdown from '~shared/components/MoreOptionsDropdown/MoreOptionsDropdown';
 import { CustomError } from '~shared/helpers/custom-error';
 import { createDropdownMenuItem } from '~shared/helpers/dropdown';
+import { isAvo } from '~shared/helpers/is-avo';
 import { isMultiLanguageEnabled } from '~shared/helpers/is-multi-language-enabled';
 import { buildLink, navigate, navigateToAbsoluteOrRelativeUrl } from '~shared/helpers/link';
 import { showToast } from '~shared/helpers/show-toast';
@@ -43,7 +47,6 @@ import { tHtml, tText } from '~shared/helpers/translation-functions';
 import { AdminLayout } from '~shared/layouts';
 import { PermissionService } from '~shared/services/permission-service';
 import type { DefaultComponentProps } from '~shared/types/components';
-import { isAvo } from '~shared/helpers/is-avo';
 
 export const CONTENT_PAGE_COPY = 'Kopie %index%: ';
 export const CONTENT_PAGE_COPY_REGEX = /^Kopie [0-9]+: /gi;
@@ -482,6 +485,13 @@ export const ContentPageDetail: FC<ContentPageDetailProps> = ({
 						contentPageInfo={contentPageInfo}
 						commonUser={commonUser}
 						renderFakeTitle={contentPageInfo.contentType === 'FAQ_ITEM' && isAvo()}
+						renderNoAccessError={() => (
+							<ErrorView
+								icon={IconName.clock}
+								actionButtons={['helpdesk']}
+								message={'deze-pagina-is-enkel-voor-gebruikers-met-andere-rechten'}
+							/>
+						)}
 					/>
 				);
 			case 'metadata':
@@ -497,7 +507,6 @@ export const ContentPageDetail: FC<ContentPageDetailProps> = ({
 		}
 	};
 
-	// const description = contentPageInfo ? ContentPageService.getDescription(contentPageInfo) : '';
 	return (
 		<AdminLayout className={className} pageTitle={pageTitle}>
 			<AdminLayout.Back>

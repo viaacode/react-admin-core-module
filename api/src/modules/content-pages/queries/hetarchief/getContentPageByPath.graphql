@@ -6,6 +6,7 @@ query getContentPageByPath($path: String!, $language: lookup_languages_enum!) {
 		content_width
 		created_at
 		depublish_at
+		depublished_at
 		description
 		seo_description
 		meta_description

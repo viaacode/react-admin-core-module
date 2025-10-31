@@ -5,6 +5,7 @@ import {AdminConfigManager} from '~core/config';
 import {ContentPageDetailPage} from './ContentPageDetailPage';
 import {ContentPageEditPage} from './ContentPageEditPage';
 import {ContentPageOverviewPage} from './ContentPageOverviewPage';
+import ContentPagePreviewPage from './ContentPagePreviewPage';
 
 export const renderAdminContentPageRoutes = (): ReactNode[] => {
 	return [
@@ -28,5 +29,11 @@ export const renderAdminContentPageRoutes = (): ReactNode[] => {
 			Component={ContentPageEditPage}
 			key={AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_EDIT')}
 		/>,
+	];
+};
+
+export const renderAdminContentPagePreviewRoute = (): ReactNode[] => {
+	return [
+		<Route key="content-page-preview" render={() => <ContentPagePreviewPage />} exact path="*" />,
 	];
 };

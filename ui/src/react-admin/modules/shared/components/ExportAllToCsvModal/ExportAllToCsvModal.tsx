@@ -135,7 +135,9 @@ export const ExportAllToCsvModal: FunctionComponent<ExportAllToCsvModalProps> = 
 			setCsvBlob(await convertDownloadedItemsToCsvBlob(downloadedItems));
 		} catch (_error) {
 			showToast({
-				title: tText('Het ophalen van de data voor de csv is mislukt'),
+				title: tText(
+					'modules/shared/components/export-all-to-csv-modal/export-all-to-csv-modal___het-ophalen-van-de-data-voor-de-csv-is-mislukt'
+				),
 				type: ToastType.ERROR,
 			});
 			resetModal();

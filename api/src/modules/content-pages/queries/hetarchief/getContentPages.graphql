@@ -11,6 +11,7 @@ query getContentPages(
 		content_type
 		created_at
 		depublish_at
+		depublished_at
 		description
 		seo_description
 		meta_description

@@ -1,4 +1,4 @@
-import { Navbar, Select } from '@viaa/avo2-components';
+import { IconName, Navbar, Select } from '@viaa/avo2-components';
 import type { Avo } from '@viaa/avo2-types';
 import clsx from 'clsx';
 import { isNil } from 'lodash-es';
@@ -28,6 +28,7 @@ import { createKey } from '~shared/helpers/create-key';
 import { tText } from '~shared/helpers/translation-functions';
 
 import './ContentEditContentBlocks.scss';
+import { ErrorView } from '~shared/components/error';
 import { isAvo } from '~shared/helpers/is-avo';
 
 interface ContentEditContentBlocksProps {
@@ -301,6 +302,13 @@ const ContentEditContentBlocks: FunctionComponent<ContentEditContentBlocksProps>
 					activeBlockPosition={activeBlockPosition}
 					commonUser={commonUser}
 					renderFakeTitle={contentPageInfo.contentType === 'FAQ_ITEM' && isAvo()}
+					renderNoAccessError={() => (
+						<ErrorView
+							icon={IconName.clock}
+							actionButtons={['helpdesk']}
+							message={'deze-pagina-is-enkel-voor-gebruikers-met-andere-rechten'}
+						/>
+					)}
 				/>
 			</div>
 

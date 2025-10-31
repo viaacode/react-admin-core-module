@@ -1,6 +1,6 @@
-import type { FlowplayerSourceList } from '@meemoo/react-components/dist/components/FlowPlayer/FlowPlayer.types';
-import type { ReactNode } from 'react';
+import type { FlowplayerSourceList } from '@meemoo/react-components';
 import type { Avo } from '@viaa/avo2-types';
+import type { ReactNode } from 'react';
 
 /**
  * Keep in sync with avo2 client src/shared/components/FlowPlayerWrapper/FlowPlayerWrapper.tsx

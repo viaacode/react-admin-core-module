@@ -10,6 +10,7 @@ import { StringParam, useQueryParam, withDefault } from 'use-query-params';
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
 import { ContentEditForm } from '~modules/content-page/components/ContentEditForm/ContentEditForm';
+import { ContentPagePreviewUserRoleSelector } from '~modules/content-page/components/ContentPagePreviewUserRoleSelector/ContentPagePreviewUserRoleSelector';
 import { CONTENT_BLOCK_INITIAL_STATE_MAP } from '~modules/content-page/const/content-block-initial-state-map';
 import {
 	CONTENT_PAGE_SEO_DESCRIPTION_MAX_LENGTH,
@@ -49,7 +50,6 @@ import { Locale } from '~modules/translations/translations.core.types';
 import ConfirmModal from '~shared/components/ConfirmModal/ConfirmModal';
 import { ErrorView } from '~shared/components/error';
 import { Icon } from '~shared/components/Icon';
-
 import { Link } from '~shared/components/Link/Link';
 import type { LoadingInfo } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
 import { LoadingErrorLoadedComponent } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
@@ -65,7 +65,6 @@ import type { DefaultComponentProps } from '~shared/types/components';
 import { blockHasErrors } from '../helpers/block-has-errors';
 import { validateContentBlockConfig } from '../helpers/validate-content-block-config';
 import ContentEditContentBlocks from './ContentEditContentBlocks';
-
 import './ContentPageEdit.scss';
 
 const { EDIT_ANY_CONTENT_PAGES, EDIT_OWN_CONTENT_PAGES } = PermissionName;
@@ -539,7 +538,7 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 					history,
 					AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_DETAIL'),
 					{
-						id: insertedOrUpdatedContent.id,
+						id: insertedOrUpdatedContent?.id,
 					},
 					{ tab: currentTab }
 				);
@@ -579,7 +578,9 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 			contentPageState.currentContentPageInfo.description
 		);
 		if (!description) {
-			errors.description = tText('Beschrijving is verplicht');
+			errors.description = tText(
+				'modules/content-page/views/content-page-edit___beschrijving-is-verplicht'
+			);
 		}
 
 		// Disable this validation, since meemoo only wants to see the indicator, but not be prevented from saving the page
@@ -685,7 +686,9 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 				type: ContentEditActionType.SET_BLOCK_STATE,
 				payload: {
 					index,
-					formGroupState: (Array.isArray(formGroupState) ? formGroupState[0] : formGroupState) as
+					formGroupState: (Array.isArray(formGroupState)
+						? formGroupState[stateIndex || 0]
+						: formGroupState) as
 						| SingleContentBlockComponentState
 						| RepeatedContentBlockComponentState,
 				},
@@ -697,7 +700,7 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 					index,
 					stateIndex,
 					formGroupState: Array.isArray(formGroupState)
-						? (formGroupState[0] as Partial<ContentBlockComponentState>)
+						? (formGroupState[stateIndex || 0] as Partial<ContentBlockComponentState>)
 						: formGroupState,
 				},
 			});
@@ -809,35 +812,42 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 								tabs={tabs}
 								onClick={(newCurrentTab: string | number) => setCurrentTab(newCurrentTab as string)}
 							/>
-							<CopyToClipboard
-								text={JSON.stringify({
-									contentPage: contentPageState.currentContentPageInfo,
-								})}
-								onCopy={() =>
-									showToast({
-										title: tText(
-											'react-admin/modules/content-page/views/content-page-edit___gekopieerd'
-										),
-										description: tText(
-											'react-admin/modules/content-page/views/content-page-edit___de-content-pagina-is-naar-je-klembord-gekopieerd-druk-ctrl-v-om-hem-te-plakken-op-een-bewerk-pagina'
-										),
-										type: ToastType.SUCCESS,
-									})
-								}
-							>
-								<Button
-									icon={'copy' as IconName}
-									size="small"
-									title={tText(
-										'react-admin/modules/content-page/views/content-page-edit___kopieer-content-pagina'
-									)}
-									ariaLabel={tText(
-										'react-admin/modules/content-page/views/content-page-edit___kopieer-content-pagina'
-									)}
-									type="secondary"
-									className="c-content-page-edit__copy-page-button u-spacer-s"
+
+							<div className="right-side-content-page-nav">
+								<ContentPagePreviewUserRoleSelector
+									className="mr-3 content-page-usergroup-selector"
+									commonUser={commonUser}
 								/>
-							</CopyToClipboard>
+								<CopyToClipboard
+									text={JSON.stringify({
+										contentPage: contentPageState.currentContentPageInfo,
+									})}
+									onCopy={() =>
+										showToast({
+											title: tText(
+												'react-admin/modules/content-page/views/content-page-edit___gekopieerd'
+											),
+											description: tText(
+												'react-admin/modules/content-page/views/content-page-edit___de-content-pagina-is-naar-je-klembord-gekopieerd-druk-ctrl-v-om-hem-te-plakken-op-een-bewerk-pagina'
+											),
+											type: ToastType.SUCCESS,
+										})
+									}
+								>
+									<Button
+										icon={'copy' as IconName}
+										size="small"
+										title={tText(
+											'react-admin/modules/content-page/views/content-page-edit___kopieer-content-pagina'
+										)}
+										ariaLabel={tText(
+											'react-admin/modules/content-page/views/content-page-edit___kopieer-content-pagina'
+										)}
+										type="secondary"
+										className="c-content-page-edit__copy-page-button u-spacer-s"
+									/>
+								</CopyToClipboard>
+							</div>
 						</Container>
 					</Navbar>
 

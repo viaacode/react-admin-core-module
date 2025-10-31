@@ -38,6 +38,7 @@ export interface PageOverviewWrapperProps {
 	centerHeader?: boolean;
 	itemStyle?: ContentItemStyle;
 	itemAlignment?: AlignOption;
+	imageItemAlignment?: AlignOption;
 	showSectionTitle?: boolean;
 	showTitle?: boolean;
 	showDescription?: boolean;

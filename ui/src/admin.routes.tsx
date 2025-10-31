@@ -19,6 +19,7 @@ export const renderAdminRoutes = () => {
 			{renderAdminTranslationsRoutes()}
 			{renderAdminNavigationRoutes()}
 			{renderAdminUserRoutes()}
+			{renderAdminContentPagePreviewRoute()}
 			<Route path={'/:path'} Component={ContentPageWrapper} />,
 		</Routes>
 	);

@@ -129,6 +129,9 @@ export class TranslationsService implements OnApplicationBootstrap {
 			}
 
 			await this.cacheManager.reset();
+			if (component === Component.BACKEND) {
+				await this.refreshBackendTranslations();
+			}
 		} catch (err: any) {
 			throw customError('Failed to insert or update the translation', err, {
 				component,

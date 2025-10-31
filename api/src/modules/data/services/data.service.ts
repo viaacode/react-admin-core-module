@@ -29,10 +29,6 @@ export class DataService {
 				rejectUnauthorized: false,
 			},
 		};
-		console.log(
-			'Init data service with config: ',
-			JSON.stringify(dbConfig, null, process.env.SINGLE_LINE_LOGGING === 'true' ? 0 : 2)
-		);
 		this.gotInstance = got.extend(dbConfig);
 	}
 

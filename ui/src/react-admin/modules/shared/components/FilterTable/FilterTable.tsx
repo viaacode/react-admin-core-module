@@ -1,5 +1,4 @@
 import { type OrderDirection, PaginationBar } from '@meemoo/react-components';
-import { useLocalStorage } from '@uidotdev/usehooks';
 import {
 	Button,
 	type ButtonType,
@@ -19,7 +18,7 @@ import {
 } from '@viaa/avo2-components';
 import type { Avo } from '@viaa/avo2-types';
 import clsx from 'clsx';
-import { cloneDeep, compact, get, sortBy } from 'lodash-es';
+import { cloneDeep, compact, get, isEqual, sortBy } from 'lodash-es';
 import React, {
 	type FunctionComponent,
 	type KeyboardEvent,
@@ -114,7 +113,6 @@ interface FilterTableProps {
 	onSelectionChanged?: (selectedItemIds: (string | number)[]) => void;
 	onSelectAll?: () => void;
 	searchInputAriaLabel?: string;
-	hideTableColumnsButton?: boolean;
 }
 
 export const FilterTable: FunctionComponent<FilterTableProps> = ({
@@ -160,7 +158,6 @@ export const FilterTable: FunctionComponent<FilterTableProps> = ({
 	} = useGetTableColumnPreference(location.pathname);
 	const { mutateAsync: setPreferredColumns } = useUpdateTableColumnPreference(location.pathname);
 
-	// biome-ignore lint/suspicious/noExplicitAny: todo
 	const handleTableStateChanged = useCallback(
 		(value: any, id: string) => {
 			// biome-ignore lint/suspicious/noExplicitAny: todo
@@ -172,6 +169,7 @@ export const FilterTable: FunctionComponent<FilterTableProps> = ({
 				...(id !== 'page' ? { page: 0 } : {}), // Reset the page to 0, when any filter or sort order change is made
 			});
 
+			console.log('table state changed: ', { value, id, tableState, newTableState });
 			setTableState(newTableState, 'replace');
 		},
 		[setTableState, tableState]
@@ -256,8 +254,10 @@ export const FilterTable: FunctionComponent<FilterTableProps> = ({
 	};
 
 	useEffect(() => {
-		handleTableStateChanged(preferredColumns, 'columns');
-	}, [handleTableStateChanged, preferredColumns]);
+		if (!isEqual(preferredColumns, tableState.columns)) {
+			handleTableStateChanged(preferredColumns, 'columns');
+		}
+	}, [handleTableStateChanged, preferredColumns, tableState.columns]);
 
 	useEffect(() => {
 		onTableStateChanged(tableState);
@@ -433,7 +433,12 @@ export const FilterTable: FunctionComponent<FilterTableProps> = ({
 
 	const renderError = () => (
 		<ErrorView
-			message={errorMessage || tHtml('Er is iets mis gegaan bij het laden van de gegevens')}
+			message={
+				errorMessage ||
+				tHtml(
+					'modules/shared/components/filter-table/filter-table___er-is-iets-mis-gegaan-bij-het-laden-van-de-gegevens'
+				)
+			}
 			icon={IconName.alertTriangle}
 			actionButtons={['home']}
 		/>

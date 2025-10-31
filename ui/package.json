@@ -1,18 +1,32 @@
 {
   "name": "@meemoo/admin-core-ui",
-  "version": "4.5.28",
+  "version": "4.6.15",
   "private": false,
   "type": "module",
+  "files": [
+    "dist"
+  ],
+  "sideEffects": false,
   "exports": {
-    "./dist/admin.mjs": {
-      "types": "./dist/admin.d.mts",
-      "import": "./dist/admin.mjs",
-      "default": "./dist/admin.mjs"
+    "./client": {
+      "types": "./dist/client.d.ts",
+      "import": "./dist/client.js",
+      "default": "./dist/client.js"
     },
-    "./dist/client.mjs": {
-      "types": "./dist/client.d.mts",
-      "import": "./dist/client.mjs",
-      "default": "./dist/client.mjs"
+    "./admin": {
+      "types": "./dist/admin.d.ts",
+      "import": "./dist/admin.js",
+      "default": "./dist/admin.js"
+    }
+  },
+  "typesVersions": {
+    "*": {
+      "client": [
+        "dist/src/client.d.ts"
+      ],
+      "admin": [
+        "dist/src/admin.d.ts"
+      ]
     }
   },
   "scripts": {
@@ -25,6 +39,7 @@
     "copy-to-client-avo": "rimraf ../../avo2-client/node_modules/@meemoo/admin-core-ui/dist ../../avo2-client/node_modules/.cache  ../../avo2-client/node_modules/.vite && cp -r dist package.json ../../avo2-client/node_modules/@meemoo/admin-core-ui",
     "copy": "vite build && npm run copy-to-client-avo && npm run copy-to-client-hetarchief",
     "copy:avo": "vite build && npm run copy-to-client-avo",
+    "copy:hetarchief": "vite build && npm run copy-to-client-hetarchief",
     "build:analyze": "npx vite-bundle-visualizer",
     "format": "biome format --write src",
     "lint": "npm run lint:ts && npm run lint:scss",
@@ -36,24 +51,24 @@
     "backup-translations-avo-qas": "dotenv -e .env/.env.local tsx --project ./scripts/tsconfig.json scripts/backup-translations.mts -- AVO",
     "translations:extract:hetarchief": "dotenv -e .env/.env.local tsx --project ./scripts/tsconfig.json scripts/extract-and-replace-translations.mts -- HET_ARCHIEF",
     "translations:extract:avo": "dotenv -e .env/.env.local tsx --project ./scripts/tsconfig.json scripts/extract-and-replace-translations.mts -- AVO",
-    "list-of-changed-translations-hetarchief": "dotenv -e .env/.env.local tsx --project ./scripts/tsconfig.json scripts/get-list-of-changed-translations.mts -- HET_ARCHIEF v4.5.20 v4.5.23",
-    "list-commit-messages-between-tags-hetarchief": "dotenv -e .env/.env.local tsx --project ./scripts/tsconfig.json scripts/get-list-of-commit-messages-between-tags.mts -- v4.5.20 v4.5.23",
-    "list-of-changed-translations-avo": "dotenv -e .env/.env.local tsx --project ./scripts/tsconfig.json scripts/get-list-of-changed-translations.mts -- AVO v4.5.17 v4.5.18",
-    "list-commit-messages-between-tags-avo": "dotenv -e .env/.env.local tsx --project ./scripts/tsconfig.json scripts/get-list-of-commit-messages-between-tags.mts -- v4.5.17 v4.5.18",
+    "list-of-changed-translations-hetarchief": "dotenv -e .env/.env.local tsx --project ./scripts/tsconfig.json scripts/get-list-of-changed-translations.mts -- HET_ARCHIEF v4.5.23 v4.6.13",
+    "list-commit-messages-between-tags-hetarchief": "dotenv -e .env/.env.local tsx --project ./scripts/tsconfig.json scripts/get-list-of-commit-messages-between-tags.mts -- v4.5.23 v4.6.13",
+    "list-of-changed-translations-avo": "dotenv -e .env/.env.local tsx --project ./scripts/tsconfig.json scripts/get-list-of-changed-translations.mts -- AVO v4.6.3 v4.6.10",
+    "list-commit-messages-between-tags-avo": "dotenv -e .env/.env.local tsx --project ./scripts/tsconfig.json scripts/get-list-of-commit-messages-between-tags.mts -- v4.6.3 v4.6.10",
     "check-bundled-files": "npx depcruise src/react-admin --config bundle-import-rules.json --include-only \"^src\" --exclude \"(.spec.tsx?|.test.tsx?|node_modules)\"",
-    "check-bundled-files:admin.mts": "npx depcruise src/admin.mts --config bundle-import-rules.json --include-only \"^src\" --exclude \"(.spec.tsx?|.test.tsx?|node_modules)\"",
-    "check-bundled-files:client.mts": "npx depcruise src/client.mts --config bundle-import-rules.json --include-only \"^src\" --exclude \"(.spec.tsx?|.test.tsx?|node_modules)\" --output-type dot | dot -T svg > dependency-graph.svg",
+    "check-bundled-files:admin.mts": "npx depcruise src/admin.ts --config bundle-import-rules.json --include-only \"^src\" --exclude \"(.spec.tsx?|.test.tsx?|node_modules)\"",
+    "check-bundled-files:client.mts": "npx depcruise src/client.ts --config bundle-import-rules.json --include-only \"^src\" --exclude \"(.spec.tsx?|.test.tsx?|node_modules)\" --output-type dot | dot -T svg > dependency-graph.svg",
     "list-bundled-files": "npx depcruise src/react-admin --include-only \"^src\" --output-type text",
     "analyse": "source-map-explorer 'dist/index.mjs' --no-border-checks",
     "bump": "bump-package-versions --part=patch --strategy=highest ../package.json ./package.json ../api/package.json"
   },
   "peerDependencies": {
     "@hookform/resolvers": "2.9.11",
-    "@meemoo/react-components": "4.3.2",
+    "@meemoo/react-components": "4.4.3",
     "@studiohyperdrive/pagination": "1.0.0",
     "@tanstack/react-query": "4.36.1",
-    "@viaa/avo2-components": "5.1.9",
-    "@viaa/avo2-types": "3.0.22",
+    "@viaa/avo2-components": "5.2.1",
+    "@viaa/avo2-types": "3.3.0",
     "autosize": "6.0.1",
     "caniuse-lite": "^1.0.30001712",
     "capture-stack-trace": "1.0.1",

@@ -21,20 +21,36 @@ export interface PickerItem {
 
 export const GET_CONTENT_TYPE_LABELS: () => Record<Avo.Core.ContentPickerType, string> = () => ({
 	[ContentPickerType.CONTENT_PAGE]: tText('admin/content/content___content'),
-	[ContentPickerType.CONTENT_PAGE_NEWS_ITEM]: tText('Nieuws item'),
-	[ContentPickerType.CONTENT_PAGE_PAGE]: tText('Pagina'),
-	[ContentPickerType.CONTENT_PAGE_PROJECT]: tText('Project'),
-	[ContentPickerType.CONTENT_PAGE_OVERVIEW]: tText('Overzicht'),
-	[ContentPickerType.CONTENT_PAGE_DOMAIN_DETAIL]: tText('Domein detail'),
-	[ContentPickerType.CONTENT_PAGE_EVENT_DETAIL]: tText('Event detail'),
-	[ContentPickerType.CONTENT_PAGE_SCREENCAST]: tText('Hulpfilmpje'),
+	[ContentPickerType.CONTENT_PAGE_NEWS_ITEM]: tText(
+		'modules/shared/components/content-picker/content-picker___nieuws-item'
+	),
+	[ContentPickerType.CONTENT_PAGE_PAGE]: tText(
+		'modules/shared/components/content-picker/content-picker___pagina'
+	),
+	[ContentPickerType.CONTENT_PAGE_PROJECT]: tText(
+		'modules/shared/components/content-picker/content-picker___project'
+	),
+	[ContentPickerType.CONTENT_PAGE_OVERVIEW]: tText(
+		'modules/shared/components/content-picker/content-picker___overzicht'
+	),
+	[ContentPickerType.CONTENT_PAGE_DOMAIN_DETAIL]: tText(
+		'modules/shared/components/content-picker/content-picker___domein-detail'
+	),
+	[ContentPickerType.CONTENT_PAGE_EVENT_DETAIL]: tText(
+		'modules/shared/components/content-picker/content-picker___event-detail'
+	),
+	[ContentPickerType.CONTENT_PAGE_SCREENCAST]: tText(
+		'modules/shared/components/content-picker/content-picker___hulpfilmpje'
+	),
 	[ContentPickerType.NL_CONTENT_PAGE_PARENT_ID]: tText(
 		'modules/shared/components/content-picker/content-picker___nederlandse-hoofd-pagina'
 	),
 	[ContentPickerType.INTERNAL_LINK]: tText('admin/content/content___statisch'),
 	[ContentPickerType.COLLECTION]: tText('admin/content/content___collecties'),
 	[ContentPickerType.ITEM]: tText('admin/content/content___items'),
-	[ContentPickerType.ITEM_WITH_CUE_POINTS]: tText('Geknipte fragmenten'),
+	[ContentPickerType.ITEM_WITH_CUE_POINTS]: tText(
+		'modules/shared/components/content-picker/content-picker___geknipte-fragmenten'
+	),
 	[ContentPickerType.BUNDLE]: tText('admin/content/content___bundels'),
 	[ContentPickerType.ASSIGNMENT]: tText(
 		'react-admin/modules/shared/components/content-picker/content-picker___opdrachten'

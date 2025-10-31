@@ -162,6 +162,7 @@ export enum ContentBlockType {
 	ContentEncloseGrid = 'CONTENT_ENCLOSE_GRID',
 	Breadcrumbs = 'BREADCRUMBS',
 	AvoImageTextBackground = 'AVO_IMAGE_TEXT_BACKGROUND', // Avo
+	ScrollDownNudge = 'SCROLL_DOWN_NUDGE',
 }
 
 export enum ContentBlockEditor {
@@ -286,6 +287,7 @@ export interface PageOverviewBlockComponentStateFields {
 	contentType: Avo.ContentPage.Type;
 	itemStyle?: ContentItemStyle;
 	itemAlignment?: AlignOption;
+	imageItemAlignment?: AlignOption;
 	showSectionTitle?: boolean; // Title of the label that groups multiple pages
 	showTitle?: boolean; // Title of one of the pages
 	showDescription?: boolean; // Description of one of the pages
