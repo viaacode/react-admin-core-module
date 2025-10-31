@@ -49,7 +49,7 @@ export const ContentPageLabelEdit: FunctionComponent<ContentPageLabelEditProps> 
 	className,
 }) => {
 	// Hooks
-	const history = AdminConfigManager.getConfig().services.router.useHistory();
+	const navigateFunc = AdminConfigManager.getConfig().services.router.navigateFunc;
 	const [initialContentPageLabel, setInitialContentPageLabel] = useState<ContentPageLabel | null>(
 		null
 	);
@@ -116,9 +116,9 @@ export const ContentPageLabelEdit: FunctionComponent<ContentPageLabelEditProps> 
 
 	const navigateBack = () => {
 		if (isCreatePage) {
-			history.push(AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_LABEL_OVERVIEW'));
+			navigateFunc(AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_LABEL_OVERVIEW'));
 		} else {
-			navigate(history, AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_LABEL_DETAIL'), {
+			navigate(navigateFunc, AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_LABEL_DETAIL'), {
 				id: contentPageLabelId,
 			});
 		}
@@ -189,7 +189,7 @@ export const ContentPageLabelEdit: FunctionComponent<ContentPageLabelEditProps> 
 				),
 				type: ToastType.SUCCESS,
 			});
-			history.push(
+			navigateFunc(
 				buildLink(AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_LABEL_DETAIL'), {
 					id: contentPageLabel.id,
 				})

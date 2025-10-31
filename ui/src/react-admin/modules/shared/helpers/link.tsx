@@ -6,8 +6,7 @@ import { stringify } from 'query-string';
 import type { ReactNode } from 'react';
 
 import { AdminConfigManager } from '~core/config';
-import type { History } from '~core/config/config.types';
-import { ToastType } from '~core/config/config.types';
+import {NavigateFunction, ToastType} from '~core/config/config.types';
 import { getAdminCoreApiUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config';
 import { showToast } from '~shared/helpers/show-toast';
 import { tText } from '~shared/helpers/translation-functions';
@@ -50,7 +49,7 @@ export const buildLink = (
 };
 
 export const navigate = (
-	history: History,
+	navigateFunc: NavigateFunction,
 	route: string,
 	params: RouteParams = {},
 	search?: string | { [paramName: string]: string }
@@ -86,13 +85,13 @@ export const navigate = (
 		return;
 	}
 
-	history.push(builtLink);
+	navigateFunc(builtLink);
 };
 
 // TODO see if we can replace this method completely by the new SmartLink component
 export function navigateToAbsoluteOrRelativeUrl(
 	url: string,
-	history: History,
+	navigateFunc: NavigateFunction,
 	target: LinkTarget = LinkTarget.Self
 ) {
 	let fullUrl = url;
@@ -106,7 +105,7 @@ export function navigateToAbsoluteOrRelativeUrl(
 				window.location.href = fullUrl;
 			} else {
 				// relative url
-				history.push(fullUrl);
+				navigateFunc(fullUrl);
 			}
 			break;
 		default:
@@ -121,7 +120,7 @@ export function navigateToAbsoluteOrRelativeUrl(
 	}
 }
 
-export const navigateToContentType = (action: ButtonAction, history: History) => {
+export const navigateToContentType = (action: ButtonAction, navigateFunc: NavigateFunction) => {
 	if (action) {
 		const { type, value, target } = action;
 
@@ -135,14 +134,14 @@ export const navigateToContentType = (action: ButtonAction, history: History) =>
 			case 'INTERNAL_LINK':
 			case 'CONTENT_PAGE':
 			case 'PROJECTS':
-				navigateToAbsoluteOrRelativeUrl(String(value), history, resolvedTarget);
+				navigateToAbsoluteOrRelativeUrl(String(value), navigateFunc, resolvedTarget);
 				break;
 
 			case 'COLLECTION': {
 				const collectionUrl = buildLink(AdminConfigManager.getAdminRoute('COLLECTION_DETAIL'), {
 					id: value as string,
 				});
-				navigateToAbsoluteOrRelativeUrl(collectionUrl, history, resolvedTarget);
+				navigateToAbsoluteOrRelativeUrl(collectionUrl, navigateFunc, resolvedTarget);
 				break;
 			}
 
@@ -150,7 +149,7 @@ export const navigateToContentType = (action: ButtonAction, history: History) =>
 				const itemUrl = buildLink(AdminConfigManager.getAdminRoute('ITEM_DETAIL'), {
 					id: value,
 				});
-				navigateToAbsoluteOrRelativeUrl(itemUrl, history, resolvedTarget);
+				navigateToAbsoluteOrRelativeUrl(itemUrl, navigateFunc, resolvedTarget);
 				break;
 			}
 
@@ -158,7 +157,7 @@ export const navigateToContentType = (action: ButtonAction, history: History) =>
 				const bundleUrl = buildLink(AdminConfigManager.getAdminRoute('BUNDLE_DETAIL'), {
 					id: value,
 				});
-				navigateToAbsoluteOrRelativeUrl(bundleUrl, history, resolvedTarget);
+				navigateToAbsoluteOrRelativeUrl(bundleUrl, navigateFunc, resolvedTarget);
 				break;
 			}
 
@@ -167,7 +166,7 @@ export const navigateToContentType = (action: ButtonAction, history: History) =>
 					'{{PROXY_URL}}',
 					getAdminCoreApiUrl() || ''
 				);
-				navigateToAbsoluteOrRelativeUrl(externalUrl, history, resolvedTarget);
+				navigateToAbsoluteOrRelativeUrl(externalUrl, navigateFunc, resolvedTarget);
 				break;
 			}
 
@@ -175,14 +174,14 @@ export const navigateToContentType = (action: ButtonAction, history: History) =>
 				const urlWithoutQueryOrAnchor = window.location.href.split('?')[0].split('#')[0];
 				navigateToAbsoluteOrRelativeUrl(
 					`${urlWithoutQueryOrAnchor}#${value}`,
-					history,
+					navigateFunc,
 					resolvedTarget
 				);
 				break;
 			}
 
 			case 'FILE':
-				navigateToAbsoluteOrRelativeUrl(value as string, history, LinkTarget.Blank);
+				navigateToAbsoluteOrRelativeUrl(value as string, navigateFunc, LinkTarget.Blank);
 				break;
 
 			case 'SEARCH_QUERY': {
@@ -200,7 +199,7 @@ export const navigateToContentType = (action: ButtonAction, history: History) =>
 							)
 						)
 					),
-					history,
+					navigateFunc,
 					resolvedTarget
 				);
 				break;

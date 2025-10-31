@@ -44,7 +44,7 @@ export interface UserOverviewProps {
 
 export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 	// Hooks
-	const history = AdminConfigManager.getConfig().services.router.useHistory();
+	const navigateFunc = AdminConfigManager.getConfig().services.router.navigateFunc;
 	const commonUser = getCommonUser();
 
 	const [tableState, setTableState] = useState<Partial<UserTableState> | null>(null);
@@ -275,7 +275,7 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 
 	const navigateFilterToOption = (columnId: string) => (tagId: ReactText) => {
 		navigate(
-			history,
+			navigateFunc,
 			AdminConfigManager.getAdminRoute('ADMIN_USER_OVERVIEW'),
 			{},
 			{

@@ -46,7 +46,7 @@ export const BlockHetArchiefHeaderSearch: FunctionComponent<BlockHetArchiefHeade
 			query: searchTerm ? { zoekterm: searchTerm } : {},
 		});
 		// biome-ignore lint/correctness/useHookAtTopLevel: This isn't a hook, but a function in the admin core config
-		AdminConfigManager.getConfig().services.router.useHistory().push(url);
+		AdminConfigManager.getConfig().services.router.navigateFunc(url);
 	};
 
 	const handleKeyUp = (e: KeyboardEvent<HTMLInputElement>) => {

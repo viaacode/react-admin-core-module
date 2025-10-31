@@ -36,16 +36,10 @@ setDefaultOptions({ locale: nlBE });
 
 const routerConfig: AdminConfig['services']['router'] = {
 	Link: Link as FunctionComponent<LinkInfo>,
-	useHistory: () => ({
-		push: (path: string) => {
-			const navigate = useNavigate();
-			navigate(path);
-		},
-		replace: (path: string) => {
-			const navigate = useNavigate();
-			navigate(path, { replace: true });
-		},
-	}),
+	navigateFunc: (path: string, options?: {replace?: boolean}) => {
+		const navigate = useNavigate();
+		navigate(path, { replace: options?.replace || false });
+	},
 };
 
 const DUMMY_EDUCATIONAL_ORGANISATIONS: Avo.EducationOrganization.Organization[] = [
@@ -387,7 +381,7 @@ function setConfig() {
 			],
 			getCommonUser: () => mockCommonUser,
 		},
-		locale: Locale.En,
+		locale: Locale.Nl,
 		env: {
 			LDAP_DASHBOARD_PEOPLE_URL: 'https://google.com?q=people',
 			CLIENT_URL: 'http://localhost:3400',

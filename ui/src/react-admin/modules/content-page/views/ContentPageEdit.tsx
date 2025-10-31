@@ -100,7 +100,7 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 	const [isSaving, setIsSaving] = useState<boolean>(false);
 	const [hasSubmitted, setHasSubmitted] = useState<boolean>(false);
 
-	const history = AdminConfigManager.getConfig().services.router.useHistory();
+	const navigateFunc = AdminConfigManager.getConfig().services.router.navigateFunc;
 
 	const [contentTypes, isLoadingContentTypes] = useContentTypes();
 	const [currentTab, setCurrentTab] = useQueryParam(
@@ -535,7 +535,7 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 			setTimeout(() => {
 				// Delay navigation a split second so we know the onHasUnsavedChanges has run
 				navigate(
-					history,
+					navigateFunc,
 					AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_DETAIL'),
 					{
 						id: insertedOrUpdatedContent?.id,
@@ -647,9 +647,9 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 
 	const navigateBack = () => {
 		if (pageType === PageType.Create) {
-			history.push(AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_OVERVIEW'));
+			navigateFunc(AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_OVERVIEW'));
 		} else {
-			navigate(history, AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_DETAIL'), {
+			navigate(navigateFunc, AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_DETAIL'), {
 				id,
 			});
 		}

@@ -2,7 +2,7 @@ export { AdminConfigManager } from './config.class';
 export type {
 	AdminConfig,
 	EducationOrganisationService,
-	History,
+	NavigateFunction,
 	I18n,
 	IconComponentProps,
 	IconConfig,

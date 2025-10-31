@@ -32,7 +32,7 @@ export const ContentPageLabelDetail: FunctionComponent<ContentPageLabelDetailPro
 	className,
 }) => {
 	// Hooks
-	const history = AdminConfigManager.getConfig().services.router.useHistory();
+	const navigateFunc = AdminConfigManager.getConfig().services.router.navigateFunc;
 	const [contentPageLabelInfo, setContentPageLabelInfo] = useState<ContentPageLabel | null>(null);
 	const [loadingInfo, setLoadingInfo] = useState<LoadingInfo>({ state: 'loading' });
 
@@ -89,7 +89,7 @@ export const ContentPageLabelDetail: FunctionComponent<ContentPageLabelDetailPro
 	}, [contentPageLabelInfo]);
 
 	const handleEditClick = () => {
-		history.push(
+		navigateFunc(
 			buildLink(AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_LABEL_EDIT'), {
 				id: contentPageLabelId,
 			})
@@ -124,7 +124,7 @@ export const ContentPageLabelDetail: FunctionComponent<ContentPageLabelDetailPro
 							linkTo ? (
 								<Button
 									type="tertiary"
-									onClick={() => navigateToContentType(linkTo, history)}
+									onClick={() => navigateToContentType(linkTo, navigateFunc)}
 								>{`${labels[linkTo.type]} - ${decodeURIComponent(
 									String(linkTo.value)?.split('hetarchief.be')?.pop() || ''
 								)}`}</Button>

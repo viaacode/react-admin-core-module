@@ -16,6 +16,7 @@ import { tText } from '~shared/helpers/translation-functions';
 import Sidebar from './shared/components/Sidebar/Sidebar';
 
 import './App.scss';
+import {ReactRouter7Adapter} from "./shared/helpers/routes/react-router-v7-adapter-for-use-query-params";
 
 const queryClient = new QueryClient();
 
@@ -40,7 +41,7 @@ function App() {
 	return (
 		<QueryClientProvider client={queryClient}>
 			<BrowserRouter>
-				<QueryParamProvider ReactRouterRoute={Route}>
+				<QueryParamProvider adapter={ReactRouter7Adapter}>
 					<div className="App">
 						<HorizontalPageSplit widths={['15%', '85%']}>
 							<Sidebar navItems={navigationItems || undefined} className="o-app--admin__sidebar" />

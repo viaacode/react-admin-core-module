@@ -80,7 +80,7 @@ export const UserDetail: FC<UserDetailProps> = ({
 		useState<boolean>(false);
 	const [shouldSendActionEmail, setShouldSendActionEmail] = useState<boolean>(false);
 
-	const history = AdminConfigManager.getConfig().services.router.useHistory();
+	const navigateFunc = AdminConfigManager.getConfig().services.router.navigateFunc;
 
 	useEffect(() => {
 		if (!!storedProfile && isFetched) {
@@ -173,7 +173,7 @@ export const UserDetail: FC<UserDetailProps> = ({
 
 			case 'edit':
 				navigate(
-					history,
+					navigateFunc,
 					buildLink(AdminConfigManager.getAdminRoute('ADMIN_USER_EDIT'), {
 						id: id as string,
 					})
@@ -383,7 +383,7 @@ export const UserDetail: FC<UserDetailProps> = ({
 
 	// Executed when the user was deleted
 	const deleteCallback = () =>
-		navigate(history, AdminConfigManager.getAdminRoute('ADMIN_USER_OVERVIEW'));
+		navigate(navigateFunc, AdminConfigManager.getAdminRoute('ADMIN_USER_OVERVIEW'));
 
 	const renderUserDetailPage = () => {
 		const isBlocked = storedProfile?.isBlocked;

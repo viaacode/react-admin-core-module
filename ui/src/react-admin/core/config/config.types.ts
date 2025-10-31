@@ -45,7 +45,7 @@ export interface LinkInfo {
 	target?: LinkTarget;
 }
 
-export type History = ReturnType<AdminConfig['services']['router']['useHistory']>;
+export type NavigateFunction = (to: string, options?: { replace?: boolean }) => void;
 
 export interface AdminConfig {
 	// Core module configurations
@@ -70,11 +70,8 @@ export interface AdminConfig {
 		i18n: I18n;
 		educationOrganisationService: EducationOrganisationService;
 		router: {
-			// Function that returns a history like object with functions push and replace
-			useHistory: () => {
-				push: (path: string) => void;
-				replace: (path: string) => void;
-			};
+			// Function that navigates to a given route programmatically
+			navigateFunc: NavigateFunction;
 
 			// A link component, just like <Link to="">click here</Link>
 			Link: FunctionComponent<LinkInfo>;

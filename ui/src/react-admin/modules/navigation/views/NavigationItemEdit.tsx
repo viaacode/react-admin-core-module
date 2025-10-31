@@ -35,7 +35,7 @@ export const NavigationItemEdit: FC<NavigationEditProps> = ({
 	navigationItemId,
 	onGoBack,
 }) => {
-	const history = AdminConfigManager.getConfig().services.router.useHistory();
+	const navigateFunc = AdminConfigManager.getConfig().services.router.navigateFunc;
 
 	const navigationBarName = startCase(navigationBarId);
 
@@ -126,7 +126,7 @@ export const NavigationItemEdit: FC<NavigationEditProps> = ({
 				),
 			});
 
-			history.push(AdminConfigManager.getAdminRoute('ADMIN_NAVIGATION_OVERVIEW'));
+			navigateFunc(AdminConfigManager.getAdminRoute('ADMIN_NAVIGATION_OVERVIEW'));
 		}
 	}, [
 		isLoadingNavigationItems,
@@ -188,7 +188,7 @@ export const NavigationItemEdit: FC<NavigationEditProps> = ({
 					position: navigationItems.length,
 				});
 
-				navigate(history, AdminConfigManager.getAdminRoute('ADMIN_NAVIGATION_DETAIL'), {
+				navigate(navigateFunc, AdminConfigManager.getAdminRoute('ADMIN_NAVIGATION_DETAIL'), {
 					navigationBarId: currentNavigationItem?.placement as string,
 				});
 
@@ -215,7 +215,7 @@ export const NavigationItemEdit: FC<NavigationEditProps> = ({
 					} as NavigationItem,
 				]);
 
-				navigate(history, AdminConfigManager.getAdminRoute('ADMIN_NAVIGATION_DETAIL'), {
+				navigate(navigateFunc, AdminConfigManager.getAdminRoute('ADMIN_NAVIGATION_DETAIL'), {
 					navigationBarId: currentNavigationItem?.placement as string,
 				});
 
@@ -290,7 +290,7 @@ export const NavigationItemEdit: FC<NavigationEditProps> = ({
 						<Button
 							label={tText('admin/menu/views/menu-detail___annuleer')}
 							onClick={() =>
-								history.push(AdminConfigManager.getAdminRoute('ADMIN_NAVIGATION_OVERVIEW'))
+								navigateFunc(AdminConfigManager.getAdminRoute('ADMIN_NAVIGATION_OVERVIEW'))
 							}
 							type="tertiary"
 						/>

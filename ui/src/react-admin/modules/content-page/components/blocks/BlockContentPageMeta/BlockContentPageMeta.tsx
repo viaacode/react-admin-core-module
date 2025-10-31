@@ -20,7 +20,7 @@ export interface ContentPageMetaProps {
 export const BlockContentPageMeta: FunctionComponent<ContentPageMetaProps> = ({
 	contentPageInfo,
 }) => {
-	const history = AdminConfigManager.getConfig().services.router.useHistory();
+	const navigateFunc = AdminConfigManager.getConfig().services.router.navigateFunc;
 
 	const renderLabel = (labelObj: ContentPageLabel): string | ReactNode => {
 		// biome-ignore lint/suspicious/noExplicitAny: todo
@@ -29,7 +29,7 @@ export const BlockContentPageMeta: FunctionComponent<ContentPageMetaProps> = ({
 				type="inline-link"
 				onClick={() =>
 					// biome-ignore lint/suspicious/noExplicitAny: todo
-					navigateToContentType((labelObj as any).link_to, history)
+					navigateToContentType((labelObj as any).link_to, navigateFunc)
 				}
 				key={`label-link-${labelObj.label}`}
 			>

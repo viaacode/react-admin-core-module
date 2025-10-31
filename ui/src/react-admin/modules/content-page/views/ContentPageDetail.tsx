@@ -74,7 +74,7 @@ export const ContentPageDetail: FC<ContentPageDetailProps> = ({
 	commonUser,
 }) => {
 	// Hooks
-	const history = AdminConfigManager.getConfig().services.router.useHistory();
+	const navigateFunc = AdminConfigManager.getConfig().services.router.navigateFunc;
 
 	const [contentPageInfo, setContentPageInfo] = useState<ContentPageInfo | null>(null);
 	const [loadingInfo, setLoadingInfo] = useState<LoadingInfo>({ state: 'loading' });
@@ -177,7 +177,7 @@ export const ContentPageDetail: FC<ContentPageDetailProps> = ({
 		try {
 			await softDeleteContentPage(id);
 
-			history.push(AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_OVERVIEW'));
+			navigateFunc(AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_OVERVIEW'));
 			showToast({
 				title: tText('modules/content-page/views/content-page-detail___success'),
 				description: tText(
@@ -207,7 +207,7 @@ export const ContentPageDetail: FC<ContentPageDetailProps> = ({
 						preview: true,
 					},
 				});
-				navigateToAbsoluteOrRelativeUrl(path, history, LinkTarget.Blank);
+				navigateToAbsoluteOrRelativeUrl(path, navigateFunc, LinkTarget.Blank);
 			} else {
 				// For english pages, add the locale to the path
 				const path = stringifyUrl({
@@ -216,7 +216,7 @@ export const ContentPageDetail: FC<ContentPageDetailProps> = ({
 						preview: true,
 					},
 				});
-				navigateToAbsoluteOrRelativeUrl(path, history, LinkTarget.Blank);
+				navigateToAbsoluteOrRelativeUrl(path, navigateFunc, LinkTarget.Blank);
 			}
 		} else {
 			showToast({
@@ -342,7 +342,7 @@ export const ContentPageDetail: FC<ContentPageDetailProps> = ({
 				return;
 			}
 
-			history.push(
+			navigateFunc(
 				buildLink(AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_DETAIL'), {
 					id: duplicateContentPage.id,
 				})
@@ -391,7 +391,7 @@ export const ContentPageDetail: FC<ContentPageDetailProps> = ({
 					const url = buildLink(AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_DETAIL'), {
 						id: englishPageId,
 					});
-					navigate(history, url);
+					navigate(navigateFunc, url);
 				}
 				break;
 			}

@@ -44,7 +44,7 @@ export interface NavigationDetailProps {
 }
 
 export const NavigationBarDetail: FC<NavigationDetailProps> = ({ navigationBarId, onGoBack }) => {
-	const history = AdminConfigManager.getConfig().services.router.useHistory();
+	const navigateFunc = AdminConfigManager.getConfig().services.router.navigateFunc;
 
 	const [_activeItemId, setActiveItemId] = useState<string | null>(null);
 	const [isConfirmModalOpen, setIsConfirmModalOpen] = useState<boolean>(false);
@@ -126,7 +126,7 @@ export const NavigationBarDetail: FC<NavigationDetailProps> = ({ navigationBarId
 	};
 
 	const handleNavigate = (path: string, params: { [key: string]: string } = {}): void => {
-		navigate(history, path, params);
+		navigate(navigateFunc, path, params);
 	};
 
 	const handleSave = async () => {
@@ -377,7 +377,7 @@ export const NavigationBarDetail: FC<NavigationDetailProps> = ({ navigationBarId
 						<Button
 							label={tText('admin/menu/views/menu-detail___annuleer')}
 							onClick={() =>
-								history.push(AdminConfigManager.getAdminRoute('ADMIN_NAVIGATION_OVERVIEW'))
+								navigateFunc(AdminConfigManager.getAdminRoute('ADMIN_NAVIGATION_OVERVIEW'))
 							}
 							type="tertiary"
 						/>

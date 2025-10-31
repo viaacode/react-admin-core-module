@@ -96,7 +96,7 @@ export const ContentPageOverview: FunctionComponent<ContentPageOverviewProps> = 
 		string | number | null
 	>(null);
 
-	const history = AdminConfigManager.getConfig().services.router.useHistory();
+	const navigateFunc = AdminConfigManager.getConfig().services.router.navigateFunc;
 
 	const contentTypeOptions = useMemo(() => {
 		return contentTypes.map(
@@ -362,7 +362,7 @@ export const ContentPageOverview: FunctionComponent<ContentPageOverviewProps> = 
 
 	function handlePreviewClicked(page: ContentPageInfo) {
 		if (page?.path) {
-			navigateToAbsoluteOrRelativeUrl(page.path, history, LinkTarget.Blank);
+			navigateToAbsoluteOrRelativeUrl(page.path, navigateFunc, LinkTarget.Blank);
 		} else {
 			showToast({
 				title: tText(

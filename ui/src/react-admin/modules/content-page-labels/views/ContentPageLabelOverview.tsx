@@ -52,7 +52,7 @@ export const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> 
 	className,
 }) => {
 	// Hooks
-	const history = AdminConfigManager.getConfig().services.router.useHistory();
+	const navigateFunc = AdminConfigManager.getConfig().services.router.navigateFunc;
 	const [contentPageLabels, setContentPageLabels] = useState<ContentPageLabel[] | null>(null);
 	const [contentPageLabelCount, setContentPageLabelCount] = useState<number>(0);
 	const [contentPageLabelIdToDelete, setContentPageLabelIdToDelete] = useState<number | null>(null);
@@ -274,7 +274,7 @@ export const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> 
 							icon={<Icon name="info" />}
 							onClick={() =>
 								navigate(
-									history,
+									navigateFunc,
 									AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_LABEL_DETAIL'),
 									{
 										id: contentPageLabel.id,
@@ -293,7 +293,7 @@ export const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> 
 							icon={<Icon name="edit" />}
 							onClick={() =>
 								navigate(
-									history,
+									navigateFunc,
 									AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_LABEL_EDIT'),
 									{
 										id: contentPageLabel.id,
@@ -395,7 +395,7 @@ export const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> 
 						'admin/content-page-labels/views/content-page-label-overview___content-pagina-label-toevoegen'
 					)}
 					onClick={() =>
-						history.push(AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_LABEL_CREATE'))
+						navigateFunc(AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_LABEL_CREATE'))
 					}
 					variants={['primary']}
 				/>
