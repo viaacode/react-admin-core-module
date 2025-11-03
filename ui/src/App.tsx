@@ -1,63 +1,76 @@
 import { Flex } from '@viaa/avo2-components';
 import React, { useEffect, useState } from 'react';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { HorizontalPageSplit } from 'react-page-split';
-import { BrowserRouter, Route } from 'react-router-dom';
 
-import './react-admin/modules/shared/styles/main.scss';
+import { useNavigate } from 'react-router';
 import { ToastType } from '~core/config/config.types';
+import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner';
 import { CustomError } from '~shared/helpers/custom-error';
 import { showToast } from '~shared/helpers/show-toast';
+import { tText } from '~shared/helpers/translation-functions';
 import { renderAdminRoutes } from './admin.routes';
 import { GET_NAV_ITEMS } from './app.const';
-import type { NavigationItemInfo } from './shared/types';
-import { QueryParamProvider } from 'use-query-params';
-import { tText } from '~shared/helpers/translation-functions';
 import Sidebar from './shared/components/Sidebar/Sidebar';
-
+import { setAdminCoreConfig } from './shared/helpers/admin-core-config';
+import type { NavigationItemInfo } from './shared/types';
+import './react-admin/modules/shared/styles/main.scss';
 import './App.scss';
-import {ReactRouter7Adapter} from "./shared/helpers/routes/react-router-v7-adapter-for-use-query-params";
-
-const queryClient = new QueryClient();
+import { isNil } from 'lodash-es';
 
 function App() {
 	const [navigationItems, setNavigationItems] = useState<NavigationItemInfo[] | null>(null);
+	const [isAdminCoreConfigLoaded, setIsAdminCoreConfigLoaded] = useState(false);
+	const navigateFunc = useNavigate();
 
+	/**
+	 * Set admin core config
+	 */
 	useEffect(() => {
-		GET_NAV_ITEMS()
-			.then((items) => {
-				setNavigationItems(items);
-			})
-			.catch((err) => {
-				console.error(new CustomError('Failed to get nav items', err));
-				showToast({
-					title: tText('app___error'),
-					description: tText('app___het-ophalen-van-de-navigatie-items-is-mislukt'),
-					type: ToastType.ERROR,
+		setAdminCoreConfig(navigateFunc);
+		setIsAdminCoreConfigLoaded(true);
+	}, [navigateFunc]);
+
+	/**
+	 * Load navigation items
+	 */
+	useEffect(() => {
+		if (isAdminCoreConfigLoaded) {
+			GET_NAV_ITEMS()
+				.then((items) => {
+					setNavigationItems(items);
+				})
+				.catch((err) => {
+					console.error(new CustomError('Failed to get nav items', err));
+					showToast({
+						title: tText('app___error'),
+						description: tText('app___het-ophalen-van-de-navigatie-items-is-mislukt'),
+						type: ToastType.ERROR,
+					});
 				});
-			});
-	}, []);
+		}
+	}, [isAdminCoreConfigLoaded]);
 
-	return (
-		<QueryClientProvider client={queryClient}>
-			<BrowserRouter>
-				<QueryParamProvider adapter={ReactRouter7Adapter}>
-					<div className="App">
-						<HorizontalPageSplit widths={['15%', '85%']}>
-							<Sidebar navItems={navigationItems || undefined} className="o-app--admin__sidebar" />
+	const renderApp = () => {
+		if (!isAdminCoreConfigLoaded || isNil(navigationItems)) {
+			return <CenteredSpinner />;
+		}
+		return (
+			<div className="App">
+				<HorizontalPageSplit widths={['15%', '85%']}>
+					<Sidebar navItems={navigationItems || undefined} className="o-app--admin__sidebar" />
 
-							<Flex
-								className="o-app--admin__main u-flex-auto u-scroll c-scrollable"
-								orientation="vertical"
-							>
-								{renderAdminRoutes()}
-							</Flex>
-						</HorizontalPageSplit>
-					</div>
-				</QueryParamProvider>
-			</BrowserRouter>
-		</QueryClientProvider>
-	);
+					<Flex
+						className="o-app--admin__main u-flex-auto u-scroll c-scrollable"
+						orientation="vertical"
+					>
+						{renderAdminRoutes()}
+					</Flex>
+				</HorizontalPageSplit>
+			</div>
+		);
+	};
+
+	return renderApp();
 }
 
 export default App;
