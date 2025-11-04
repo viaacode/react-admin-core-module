@@ -1,8 +1,8 @@
-import type {FC} from 'react';
+import type { FC } from 'react';
 import React from 'react';
-import {useMatch} from 'react-router';
-import {AdminConfigManager} from '~core/config';
-import {NavigationItemEdit} from '~modules/navigation/views';
+import { useMatch } from 'react-router';
+import { AdminConfigManager } from '~core/config';
+import { NavigationItemEdit } from '~modules/navigation/views';
 
 export const NavigationEditPage: FC = () => {
 	const match = useMatch<'navigationItemId' | 'navigationBarId', string>(

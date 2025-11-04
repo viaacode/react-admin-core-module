@@ -46,9 +46,13 @@ export const NavigationBarOverview: FunctionComponent = () => {
 						<Button
 							icon={'eye' as IconName}
 							onClick={() =>
-								navigate(navigateFunc, AdminConfigManager.getAdminRoute('ADMIN_NAVIGATION_DETAIL'), {
-									navigationBarId: placement,
-								})
+								navigate(
+									navigateFunc,
+									AdminConfigManager.getAdminRoute('ADMIN_NAVIGATION_DETAIL'),
+									{
+										navigationBarId: placement,
+									}
+								)
 							}
 							size="small"
 							title={tText(

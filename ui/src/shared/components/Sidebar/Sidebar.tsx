@@ -1,13 +1,13 @@
 import clsx from 'clsx';
-import {flatten} from 'lodash-es';
-import type {FunctionComponent, ReactElement, ReactNode} from 'react';
+import { flatten } from 'lodash-es';
+import type { FunctionComponent, ReactElement, ReactNode } from 'react';
 import React from 'react';
-import {Link, type Location, NavLink} from 'react-router-dom';
-import type {NavigationItemInfo} from '../../types';
+import { Link, type Location, NavLink } from 'react-router-dom';
+import type { NavigationItemInfo } from '../../types';
 
 import './Sidebar.scss';
-import {useLocation} from 'react-router';
-import {tHtml} from '~shared/helpers/translation-functions';
+import { useLocation } from 'react-router';
+import { tHtml } from '~shared/helpers/translation-functions';
 
 interface SidebarProps {
 	children?: ReactNode;

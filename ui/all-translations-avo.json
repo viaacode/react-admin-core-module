@@ -9613,6 +9613,15 @@
   },
   {
     "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-uitgeklaard/block-uitgeklaard",
+    "key": "datum",
+    "language": "nl",
+    "value": "Datum",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
     "component": "FRONTEND",
     "location": "app",
     "key": "je-account-is-gekoppeld",
@@ -10226,6 +10235,24 @@
   {
     "app": "AVO",
     "component": "FRONTEND",
+    "location": "authentication/store/actions",
+    "key": "je-sessie-gaat-over-5-min-verlopen-sla-je-werk-op-en-log-opnieuw-in",
+    "language": "nl",
+    "value": "Je sessie verloopt automatisch over 5 minuten. Sla je werk op en log daarna opnieuw in.",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "authentication/store/actions",
+    "key": "ga-naar-login",
+    "language": "nl",
+    "value": "Ga naar login",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
     "location": "collection/collection",
     "key": "nieuwsbericht",
     "language": "nl",
@@ -10554,6 +10581,15 @@
     "key": "uw-tekst-items-moeten-een-titel-of-beschrijving-bevatten",
     "language": "nl",
     "value": "Je tekstblokken moeten een titel of beschrijving bevatten.",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "collection/collection",
+    "key": "de-bundel-heeft-collecties-of-opdrachten-die-verwijderd-zijn",
+    "language": "nl",
+    "value": "De bundel heeft collecties of opdrachten die verwijderd zijn",
     "value_type": "TEXT"
   },
   {
@@ -15374,15 +15410,6 @@
   {
     "app": "AVO",
     "component": "FRONTEND",
-    "location": "authentication/components/permission-guard",
-    "key": "er-ging-iets-mis-tijdens-het-controleren-van-de-rechten-van-je-account",
-    "language": "nl",
-    "value": "Er ging iets mis tijdens het controleren van de rechten gekoppeld aan je account. Contacteer ons via de Feedback-knop mocht dit probleem zich blijven voordoen.",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
     "location": "authentication/components/pupil-or-teacher-dropdown",
     "key": "ben-je-lesgever",
     "language": "nl",
@@ -15432,15 +15459,6 @@
     "key": "toegang-voor-leerlingen",
     "language": "nl",
     "value": "Toegang voor leerlingen",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "authentication/components/secured-route",
-    "key": "het-inloggen-is-mislukt-controleer-je-internet-verbinding-of-probeer-later-opnieuw",
-    "language": "nl",
-    "value": "Het inloggen is mislukt, controleer je internetverbinding of probeer het later opnieuw.",
     "value_type": "TEXT"
   },
   {
@@ -15531,24 +15549,6 @@
     "key": "screenshot-lerarenkaart-app",
     "language": "nl",
     "value": "Screenshot Lerarenkaart-app",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "authentication/store/actions",
-    "key": "je-sessie-gaat-over-5-min-verlopen-sla-je-werk-op-en-log-opnieuw-in",
-    "language": "nl",
-    "value": "Je sessie verloopt automatisch over 5 minuten. Sla je werk op en log daarna opnieuw in.",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "authentication/store/actions",
-    "key": "ga-naar-login",
-    "language": "nl",
-    "value": "Ga naar login",
     "value_type": "TEXT"
   },
   {
@@ -17300,6 +17300,60 @@
   {
     "app": "AVO",
     "component": "FRONTEND",
+    "location": "collection/views/collection-overview",
+    "key": "titel",
+    "language": "nl",
+    "value": "Titel",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "collection/components/collection-or-bundle-overview",
+    "key": "acties",
+    "language": "nl",
+    "value": "Acties",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "collection/components/collection-or-bundle-overview",
+    "key": "cover",
+    "language": "nl",
+    "value": "Hoofdafbeelding",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "collection/views/collection-overview",
+    "key": "laatst-bewerkt",
+    "language": "nl",
+    "value": "Laatst bewerkt",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "collection/collection",
+    "key": "gedeeld",
+    "language": "nl",
+    "value": "Gedeeld",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "collection/components/collection-or-bundle-overview",
+    "key": "is-publiek",
+    "language": "nl",
+    "value": "Is publiek",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
     "location": "collection/components/collection-or-bundle-overview",
     "key": "het-ophalen-van-de-collecties-is-mislukt",
     "language": "nl",
@@ -17376,60 +17430,6 @@
     "key": "bekijk-deze-bundel",
     "language": "nl",
     "value": "Bekijk deze bundel",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "collection/views/collection-overview",
-    "key": "titel",
-    "language": "nl",
-    "value": "Titel",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "collection/components/collection-or-bundle-overview",
-    "key": "acties",
-    "language": "nl",
-    "value": "Acties",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "collection/components/collection-or-bundle-overview",
-    "key": "cover",
-    "language": "nl",
-    "value": "Hoofdafbeelding",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "collection/views/collection-overview",
-    "key": "laatst-bewerkt",
-    "language": "nl",
-    "value": "Laatst bewerkt",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "collection/collection",
-    "key": "gedeeld",
-    "language": "nl",
-    "value": "Gedeeld",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "collection/components/collection-or-bundle-overview",
-    "key": "is-publiek",
-    "language": "nl",
-    "value": "Is publiek",
     "value_type": "TEXT"
   },
   {
@@ -18959,7 +18959,7 @@
     "location": "item/views/item",
     "key": "je-hebt-geen-rechten-om-dit-item-te-bekijken-leerling",
     "language": "nl",
-    "value": "Je hebt geen rechten om dit fragment te bekijken.\nVraag aan jouw leerkracht de <u>opdrachtlink</u> om dit video- of audiofragment als leerling te kunnen bekijken.",
+    "value": "Je hebt geen rechten om dit fragment te bekijken.\r\nVraag aan jouw leerkracht de <u>opdrachtlink</u> om dit video- of audiofragment als leerling te kunnen bekijken.",
     "value_type": "HTML"
   },
   {
@@ -30296,24 +30296,6 @@
   {
     "app": "AVO",
     "component": "FRONTEND",
-    "location": "search/components/media-grid-wrapper/media-grid-wrapper",
-    "key": "collectie",
-    "language": "nl",
-    "value": "collectie",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "search/components/media-grid-wrapper/media-grid-wrapper",
-    "key": "collecties",
-    "language": "nl",
-    "value": "collecties",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
     "location": "admin/content-page/components/blocks/media-grid-wrapper/media-grid-wrapper",
     "key": "bron",
     "language": "nl",
@@ -30359,10 +30341,73 @@
   {
     "app": "AVO",
     "component": "FRONTEND",
-    "location": "collection/collection",
-    "key": "de-bundel-heeft-collecties-of-opdrachten-die-verwijderd-zijn",
+    "location": "react-admin/modules/alerts/views/alerts-overview-page",
+    "key": "bewaar-wijzigingen",
     "language": "nl",
-    "value": "De bundel heeft collecties of opdrachten die verwijderd zijn",
+    "value": "Bewaar wijzigingen",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "react-admin/modules/alerts/views/alerts-overview-page",
+    "key": "annuleer",
+    "language": "nl",
+    "value": "Annuleer",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "home/views/logged-out-home",
+    "key": "het-laden-van-deze-pagina-is-mislukt-pagina-kon-niet-worden-opgehaald-van-de-server",
+    "language": "nl",
+    "value": "Het laden van deze pagina is mislukt. Pagina kon niet worden opgehaald van de server",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "home/views/logged-out-home",
+    "key": "uitgelogde-start-pagina-titel",
+    "language": "nl",
+    "value": "Uitgelogde-start-pagina-titel",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "home/views/logged-out-home",
+    "key": "uitgelogde-start-pagina-beschrijving",
+    "language": "nl",
+    "value": "Uitgelogde-start-pagina-beschrijving",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "shared/components/before-unload-prompt/before-unload-prompt",
+    "key": "ben-je-zeker-dat-je-de-pagina-wilt-verlaten",
+    "language": "nl",
+    "value": "Ben je zeker dat je de pagina wilt verlaten?",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "shared/components/before-unload-prompt/before-unload-prompt",
+    "key": "verlaten",
+    "language": "nl",
+    "value": "Verlaten",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "shared/components/before-unload-prompt/before-unload-prompt",
+    "key": "blijven",
+    "language": "nl",
+    "value": "Blijven",
     "value_type": "TEXT"
   },
   {
@@ -30479,7 +30524,7 @@
     "location": "modules/klascement/klascement",
     "key": "publiceer-collection-naar-klascement-collection-description-collection-title-collection-link",
     "language": "nl",
-    "value": "<p>\nIn deze collectie vind je video- en geluidsfragmenten over (vul onderwerp in), samen met meer context en concrete lestips.\n</p>\n<p>\n\t{{collectionDescription}}\n</p>\n<p>\n\t<a href=\"{{collectionLink}}\" target=\"_blank\">\n\t\tBekijk de collectie <strong>{{collectionTitle}}</strong> op Het Archief voor Onderwijs >\n\t</a>\n</p>",
+    "value": "<p>\r\nIn deze collectie vind je video- en geluidsfragmenten over (vul onderwerp in), samen met meer context en concrete lestips.\r\n</p>\r\n<p>\r\n\t{{collectionDescription}}\r\n</p>\r\n<p>\r\n\t<a href=\"{{collectionLink}}\" target=\"_blank\">\r\n\t\tBekijk de collectie <strong>{{collectionTitle}}</strong> op Het Archief voor Onderwijs >\r\n\t</a>\r\n</p>",
     "value_type": "TEXT"
   },
   {
@@ -30497,7 +30542,7 @@
     "location": "modules/klascement/klascement",
     "key": "publiceer-opdracht-naar-klascement-assignment-description-assignment-title-assignment-link",
     "language": "nl",
-    "value": "<p>\n\t{{assignmentDescription}}\n</p>\n<p>\n\t<a href=\"{{assignmentLink}}\" target=\"_blank\">\n\t\tBekijk de voorbeeldopdracht <strong>{{assignmentTitle}}</strong> op Het Archief voor Onderwijs >\n\t</a>\n</p>",
+    "value": "<p>\r\n\t{{assignmentDescription}}\r\n</p>\r\n<p>\r\n\t<a href=\"{{assignmentLink}}\" target=\"_blank\">\r\n\t\tBekijk de voorbeeldopdracht <strong>{{assignmentTitle}}</strong> op Het Archief voor Onderwijs >\r\n\t</a>\r\n</p>",
     "value_type": "TEXT"
   },
   {
@@ -30515,7 +30560,7 @@
     "location": "modules/url-redirects/url-redirects",
     "key": "redirects-naar-andere-redirects-zijn-niet-toegestaan-bedoelde-je-from-path-to-path",
     "language": "nl",
-    "value": "Een redirect naar een pagina waarop al een redirect staat, mag niet. Bedoelde je {{existingOldPath}} => {{creatingNewPath}}?\n",
+    "value": "Een redirect naar een pagina waarop al een redirect staat, mag niet. Bedoelde je {{existingOldPath}} => {{creatingNewPath}}?\r\n",
     "value_type": "TEXT"
   },
   {

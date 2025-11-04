@@ -1,41 +1,47 @@
-import type {IconName, TagInfo} from '@viaa/avo2-components';
-import type {Avo} from '@viaa/avo2-types';
-import {compact} from 'lodash-es';
-import type {FC, ReactText} from 'react';
-import React, {useCallback, useMemo, useState} from 'react';
+import type { IconName, TagInfo } from '@viaa/avo2-components';
+import type { Avo } from '@viaa/avo2-types';
+import { compact } from 'lodash-es';
+import type { FC, ReactText } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 
-import {AdminConfigManager} from '~core/config';
-import {getCommonUser} from '~core/config/config.selectors';
-import {ToastType} from '~core/config/config.types';
-import {generateWhereObjectArchief, generateWhereObjectAvo,} from '~modules/user/helpers/generate-filter-where-object-users';
-import {renderUserOverviewTableCellReact, renderUserOverviewTableCellText,} from '~modules/user/helpers/render-user-overview-table-cells';
-import {useGetProfiles} from '~modules/user/hooks/use-get-profiles';
-import {GET_USER_BULK_ACTIONS, GET_USER_OVERVIEW_TABLE_COLS} from '~modules/user/user.consts';
-import {UserService} from '~modules/user/user.service';
-import {useUserGroupOptions} from '~modules/user-group/hooks/useUserGroupOptions';
-import type {AddOrRemove} from '~shared/components/AddOrRemoveLinkedElementsModal/AddOrRemoveLinkedElementsModal';
+import { AdminConfigManager } from '~core/config';
+import { getCommonUser } from '~core/config/config.selectors';
+import { ToastType } from '~core/config/config.types';
+import {
+	generateWhereObjectArchief,
+	generateWhereObjectAvo,
+} from '~modules/user/helpers/generate-filter-where-object-users';
+import {
+	renderUserOverviewTableCellReact,
+	renderUserOverviewTableCellText,
+} from '~modules/user/helpers/render-user-overview-table-cells';
+import { useGetProfiles } from '~modules/user/hooks/use-get-profiles';
+import { GET_USER_BULK_ACTIONS, GET_USER_OVERVIEW_TABLE_COLS } from '~modules/user/user.consts';
+import { UserService } from '~modules/user/user.service';
+import { useUserGroupOptions } from '~modules/user-group/hooks/useUserGroupOptions';
+import type { AddOrRemove } from '~shared/components/AddOrRemoveLinkedElementsModal/AddOrRemoveLinkedElementsModal';
 import AddOrRemoveLinkedElementsModal from '~shared/components/AddOrRemoveLinkedElementsModal/AddOrRemoveLinkedElementsModal';
-import type {CheckboxOption} from '~shared/components/CheckboxDropdownModal/CheckboxDropdownModal';
-import {ExportAllToCsvModal} from '~shared/components/ExportAllToCsvModal/ExportAllToCsvModal';
-import {ErrorView} from '~shared/components/error';
-import type {FilterableColumn} from '~shared/components/FilterTable/FilterTable';
-import {CenteredSpinner} from '~shared/components/Spinner/CenteredSpinner';
-import {CustomError} from '~shared/helpers/custom-error';
-import {isHetArchief} from '~shared/helpers/is-hetarchief';
-import {navigate} from '~shared/helpers/link';
-import {setSelectedCheckboxes} from '~shared/helpers/set-selected-checkboxes';
-import {showToast} from '~shared/helpers/show-toast';
-import {tHtml, tText} from '~shared/helpers/translation-functions';
-import {useGetIdps} from '~shared/hooks/use-get-idps';
-import {useBusinessCategories} from '~shared/hooks/useBusinessCategory';
-import {useCompaniesWithUsers} from '~shared/hooks/useCompanies';
-import {useEducationLevels} from '~shared/hooks/useEducationLevels';
-import {useSubjects} from '~shared/hooks/useSubjects';
-import {SettingsService} from '~shared/services/settings-service/settings.service';
-import FilterTable, {getFilters} from '../../shared/components/FilterTable/FilterTable';
+import type { CheckboxOption } from '~shared/components/CheckboxDropdownModal/CheckboxDropdownModal';
+import { ExportAllToCsvModal } from '~shared/components/ExportAllToCsvModal/ExportAllToCsvModal';
+import { ErrorView } from '~shared/components/error';
+import type { FilterableColumn } from '~shared/components/FilterTable/FilterTable';
+import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner';
+import { CustomError } from '~shared/helpers/custom-error';
+import { isHetArchief } from '~shared/helpers/is-hetarchief';
+import { navigate } from '~shared/helpers/link';
+import { setSelectedCheckboxes } from '~shared/helpers/set-selected-checkboxes';
+import { showToast } from '~shared/helpers/show-toast';
+import { tHtml, tText } from '~shared/helpers/translation-functions';
+import { useGetIdps } from '~shared/hooks/use-get-idps';
+import { useBusinessCategories } from '~shared/hooks/useBusinessCategory';
+import { useCompaniesWithUsers } from '~shared/hooks/useCompanies';
+import { useEducationLevels } from '~shared/hooks/useEducationLevels';
+import { useSubjects } from '~shared/hooks/useSubjects';
+import { SettingsService } from '~shared/services/settings-service/settings.service';
+import FilterTable, { getFilters } from '../../shared/components/FilterTable/FilterTable';
 import UserDeleteModal from '../components/UserDeleteModal';
-import type {UserOverviewTableCol, UserTableState} from '../user.types';
-import {UserBulkAction, USERS_PER_PAGE} from '../user.types';
+import type { UserOverviewTableCol, UserTableState } from '../user.types';
+import { UserBulkAction, USERS_PER_PAGE } from '../user.types';
 import './UserOverview.scss';
 
 export interface UserOverviewProps {

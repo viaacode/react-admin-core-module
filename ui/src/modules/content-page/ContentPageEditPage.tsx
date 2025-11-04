@@ -1,8 +1,8 @@
-import type {FC} from 'react';
-import {useMatch} from 'react-router';
-import {AdminConfigManager} from '~core/config';
-import {ContentPageEdit} from '~modules/content-page/views/ContentPageEdit';
-import {mockCommonUser} from '../../mock-common-user';
+import type { FC } from 'react';
+import { useMatch } from 'react-router';
+import { AdminConfigManager } from '~core/config';
+import { ContentPageEdit } from '~modules/content-page/views/ContentPageEdit';
+import { mockCommonUser } from '../../mock-common-user';
 
 export const ContentPageEditPage: FC = () => {
 	const match = useMatch<'id', string>(AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_EDIT'));

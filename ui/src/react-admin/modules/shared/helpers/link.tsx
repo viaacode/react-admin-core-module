@@ -6,7 +6,7 @@ import { stringify } from 'query-string';
 import type { ReactNode } from 'react';
 
 import { AdminConfigManager } from '~core/config';
-import {NavigateFunction, ToastType} from '~core/config/config.types';
+import { NavigateFunction, ToastType } from '~core/config/config.types';
 import { getAdminCoreApiUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config';
 import { showToast } from '~shared/helpers/show-toast';
 import { tText } from '~shared/helpers/translation-functions';

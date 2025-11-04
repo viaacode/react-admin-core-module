@@ -1,8 +1,8 @@
-import type {FC} from 'react';
-import {useMatch} from 'react-router';
-import {AdminConfigManager} from '~core/config';
-import {ContentPageDetail} from '~modules/content-page/views/ContentPageDetail';
-import {mockCommonUser} from '../../mock-common-user';
+import type { FC } from 'react';
+import { useMatch } from 'react-router';
+import { AdminConfigManager } from '~core/config';
+import { ContentPageDetail } from '~modules/content-page/views/ContentPageDetail';
+import { mockCommonUser } from '../../mock-common-user';
 
 export const ContentPageDetailPage: FC = () => {
 	const match = useMatch<'id', string>(
