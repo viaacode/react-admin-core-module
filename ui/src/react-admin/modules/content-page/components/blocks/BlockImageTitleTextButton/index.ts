@@ -1,3 +1,3 @@
-export * from './BlockImageTitleTextButton';
-export * from './BlockImageTitleTextButton.editorconfig';
-export * from './BlockImageTitleTextButton.wrapper';
+export * from './BlockImageTitleTextButton.editorconfig.js';
+export * from './BlockImageTitleTextButton.js';
+export * from './BlockImageTitleTextButton.wrapper.js';

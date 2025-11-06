@@ -20,13 +20,13 @@ import {
 import { parseISO, setHours, setMinutes, setSeconds } from 'date-fns';
 import type { FC } from 'react';
 import React, { useState } from 'react';
-import { BlockHeading } from '~content-blocks/BlockHeading/BlockHeading';
-import { ToastType } from '~core/config/config.types';
-import { getDatePickerDefaultProps } from '~modules/content-page/components/DatePicker/DatePicker.consts';
-import { getPublishedState } from '~modules/content-page/helpers';
-import { showToast } from '~shared/helpers/show-toast';
-import { tHtml, tText } from '~shared/helpers/translation-functions';
-import type { ContentPageInfo, PublishOption } from '../types/content-pages.types';
+import { BlockHeading } from '~content-blocks/BlockHeading/BlockHeading.js';
+import { ToastType } from '~core/config/config.types.js';
+import { getDatePickerDefaultProps } from '~modules/content-page/components/DatePicker/DatePicker.consts.js';
+import { getPublishedState } from '~modules/content-page/helpers/get-published-state.js';
+import { showToast } from '~shared/helpers/show-toast.js';
+import { tHtml, tText } from '~shared/helpers/translation-functions.js';
+import type { ContentPageInfo, PublishOption } from '../types/content-pages.types.js';
 
 import './PublishContentPageModal.scss';
 

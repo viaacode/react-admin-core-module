@@ -1,23 +1,23 @@
 import { compact, isArray, isFunction, isPlainObject, sortBy } from 'lodash-es';
-import { ToastType } from '~core/config';
-import { CONTENT_BLOCK_CONFIG_MAP } from '~modules/content-page/const/content-block-config-map';
-import { RichEditorStateKey } from '~modules/content-page/const/rich-text-editor.consts';
+import { ToastType } from '~core/config/config.types.js';
+import { CONTENT_BLOCK_CONFIG_MAP } from '~modules/content-page/const/content-block-config-map.js';
+import { TEMP_BLOCK_ID_PREFIX } from '~modules/content-page/const/content-page.consts.js';
+import { RichEditorStateKey } from '~modules/content-page/const/rich-text-editor.consts.js';
 import type {
 	ContentBlockConfig,
 	ContentBlockType,
 	DbContentBlock,
-} from '~modules/content-page/types/content-block.types';
+} from '~modules/content-page/types/content-block.types.js';
 import type {
 	ContentPageInfo,
 	DbContentPage,
-} from '~modules/content-page/types/content-pages.types';
-import { CustomError } from '~shared/helpers/custom-error';
-import { mapDeep } from '~shared/helpers/map-deep/map-deep';
-import { sanitizeHtml } from '~shared/helpers/sanitize';
-import { SanitizePreset } from '~shared/helpers/sanitize/presets';
-import { showToast } from '~shared/helpers/show-toast';
-import { tText } from '~shared/helpers/translation-functions';
-import { TEMP_BLOCK_ID_PREFIX } from '~modules/content-page/const/content-page.consts';
+} from '~modules/content-page/types/content-pages.types.js';
+import { CustomError } from '~shared/helpers/custom-error.js';
+import { mapDeep } from '~shared/helpers/map-deep/map-deep.js';
+import { sanitizeHtml } from '~shared/helpers/sanitize/index.js';
+import { SanitizePreset } from '~shared/helpers/sanitize/presets/index.js';
+import { showToast } from '~shared/helpers/show-toast.js';
+import { tText } from '~shared/helpers/translation-functions.js';
 
 export function getContentPageDescriptionHtml(
 	contentPageInfo: Partial<ContentPageInfo> | undefined,

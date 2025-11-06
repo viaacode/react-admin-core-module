@@ -1,13 +1,13 @@
-export { AdminConfigManager } from './config.class';
+export { AdminConfigManager } from './config.class.js';
 export type {
 	AdminConfig,
 	EducationOrganisationService,
-	NavigateFunction,
 	I18n,
 	IconComponentProps,
 	IconConfig,
 	LinkInfo,
+	NavigateFunction,
 	ToastInfo,
 	ToastService,
-} from './config.types';
-export { ToastType } from './config.types';
+} from './config.types.js';
+export { ToastType } from './config.types.js';

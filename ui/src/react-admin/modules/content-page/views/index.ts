@@ -1,3 +1,3 @@
-export { ContentPageDetail } from './ContentPageDetail';
-export { ContentPageEdit } from './ContentPageEdit';
-export { ContentPageOverview } from './ContentPageOverview';
+export { ContentPageDetail } from './ContentPageDetail.js';
+export { ContentPageEdit } from './ContentPageEdit.js';
+export { ContentPageOverview } from './ContentPageOverview.js';

@@ -1,15 +1,13 @@
-import { tText } from '~shared/helpers/translation-functions';
+import { GET_HEADING_TYPE_OPTIONS } from '~modules/content-page/const/get-heading-type-options.js';
+import type { FileUploadProps } from '~modules/shared/components/FileUpload/FileUpload.js';
+import { tText } from '~shared/helpers/translation-functions.js';
 import type {
 	ContentBlockConfig,
 	DefaultContentBlockState,
 	ThreeClickableTilesBlockComponentState,
-} from '../../../types/content-block.types';
-import { ContentBlockEditor, ContentBlockType } from '../../../types/content-block.types';
-import { GET_HEADING_TYPE_OPTIONS } from '~modules/content-page/const/get-heading-type-options';
-
-import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, FILE_FIELD, TEXT_FIELD } from '../defaults';
-
-import type { FileUploadProps } from '~modules/shared/components/FileUpload/FileUpload';
+} from '../../../types/content-block.types.js';
+import { ContentBlockEditor, ContentBlockType } from '../../../types/content-block.types.js';
+import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, FILE_FIELD, TEXT_FIELD } from '../defaults.js';
 
 export const INITIAL_THREE_CLICKABLE_TILES_COMPONENTS_STATE =
 	(): ThreeClickableTilesBlockComponentState[] => [

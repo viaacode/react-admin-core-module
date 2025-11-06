@@ -3,10 +3,10 @@ import { Button, Container, Image } from '@viaa/avo2-components';
 import clsx from 'clsx';
 import type { CSSProperties, FunctionComponent } from 'react';
 import React from 'react';
-import type { AlignOption } from '~modules/content-page/types/content-block.types';
+import type { AlignOption } from '~modules/content-page/types/content-block.types.js';
 
 import './BlockImage.scss';
-import { generateSmartLink, SmartLink } from '~shared/components/SmartLink/SmartLink';
+import { generateSmartLink, SmartLink } from '~shared/components/SmartLink/SmartLink.js';
 
 export interface BlockImageProps extends DefaultProps {
 	imageSource: string;

@@ -1,5 +1,5 @@
 import { isString } from 'lodash-es';
-import { findValueDeep } from '~shared/helpers/find-value-deep';
+import { findValueDeep } from '~shared/helpers/find-value-deep.js';
 
 const IMAGE_EXTENSIONS = ['jpeg', 'jpg', 'png', 'gif', 'gif', 'bmp', 'tiff', 'tif', 'webp'];
 

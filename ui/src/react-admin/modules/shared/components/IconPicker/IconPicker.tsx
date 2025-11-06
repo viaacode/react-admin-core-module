@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import type { FunctionComponent } from 'react';
 import type { Props as ReactSelectProps } from 'react-select';
 import Select from 'react-select';
-import { Icon } from '~shared/components/Icon';
+import { Icon } from '~shared/components/Icon/Icon.js';
 
 import './IconPicker.scss';
 

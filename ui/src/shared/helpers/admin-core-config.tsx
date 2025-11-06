@@ -6,16 +6,16 @@ import type { FunctionComponent, ReactNode } from 'react';
 import type { NavigateFunction } from 'react-router';
 import { Link } from 'react-router-dom';
 import { AdminConfigManager, type LinkInfo, type ToastInfo } from '~core/config';
-import { ContentBlockType } from '~modules/content-page/types/content-block.types';
+import { ContentBlockType } from '~modules/content-page/types/content-block.types.js';
 import {
 	type ContentPageInfo,
 	ContentPageWidth,
-} from '~modules/content-page/types/content-pages.types';
-import { Locale } from '~modules/translations/translations.core.types';
-import { UserBulkAction } from '~modules/user/user.types';
-import Html from '~shared/components/Html/Html';
+} from '~modules/content-page/types/content-pages.types.js';
+import { Locale } from '~modules/translations/translations.core.types.js';
+import { UserBulkAction } from '~modules/user/user.types.js';
+import Html from '~shared/components/Html/Html.js';
 import { ROUTE_PARTS } from '~shared/consts';
-import { tText } from '~shared/helpers/translation-functions';
+import { tText } from '~shared/helpers/translation-functions.js';
 import { mockCommonUser } from '../../mock-common-user';
 import i18n from '../translations/i18n';
 

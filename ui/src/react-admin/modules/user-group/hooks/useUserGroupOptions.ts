@@ -1,16 +1,14 @@
 import type { MultiSelectOption } from '@meemoo/react-components';
-import { useMemo } from 'react';
-
 import type { TagInfo } from '@viaa/avo2-components';
-
-import type { CheckboxOption } from '~shared/components/CheckboxDropdownModal/CheckboxDropdownModal';
-import { useGetUserGroups } from '~modules/user-group/hooks/get-user-groups';
+import { sortBy } from 'lodash-es';
+import { useMemo } from 'react';
+import { useGetUserGroups } from '~modules/user-group/hooks/get-user-groups.js';
 import type {
 	UserGroup,
 	UserGroupWithPermissions,
-} from '~modules/user-group/types/user-group.types';
-import { GET_SPECIAL_USER_GROUPS, preferredUserGroupOrder } from '../const/user-group.const';
-import { sortBy } from 'lodash-es';
+} from '~modules/user-group/types/user-group.types.js';
+import type { CheckboxOption } from '~shared/components/CheckboxDropdownModal/CheckboxDropdownModal.js';
+import { GET_SPECIAL_USER_GROUPS, preferredUserGroupOrder } from '../const/user-group.const.js';
 
 type UseUserGroupsTriple = [
 	TagInfo[] | CheckboxOption[] | MultiSelectOption[],

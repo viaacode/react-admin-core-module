@@ -1,11 +1,11 @@
-import { CustomError } from '~shared/helpers/custom-error';
-import type { PickerItem } from '~shared/types/content-picker';
-import { parsePickerItem } from '../helpers/parse-picker';
-
-import { ContentPageService } from '~modules/content-page/services/content-page.service';
-import type { ContentPageInfo } from '~modules/content-page/types/content-pages.types';
+import { Avo } from '@viaa/avo2-types';
 import memoize from 'memoizee';
-import { MEMOIZEE_OPTIONS } from '~shared/consts/memoizee-options';
+import { ContentPageService } from '~modules/content-page/services/content-page.service.js';
+import type { ContentPageInfo } from '~modules/content-page/types/content-pages.types.js';
+import { MEMOIZEE_OPTIONS } from '~shared/consts/memoizee-options.js';
+import { CustomError } from '~shared/helpers/custom-error.js';
+import type { PickerItem } from '~shared/types/content-picker.js';
+import { parsePickerItem } from '../helpers/parse-picker.js';
 
 /**
  * All content pages can be translated into multiple languages
@@ -38,7 +38,7 @@ const parseContentPages = (raw: Partial<ContentPageInfo>[]): PickerItem[] => {
 		(item: Partial<ContentPageInfo>): PickerItem => ({
 			label: item.title || '',
 			// We use id here instead of path like for content pages, because nlParentPageId must contain an id since it cannot be changed creating the page
-			...parsePickerItem('NL_CONTENT_PAGE_PARENT_ID', item.id as string),
+			...parsePickerItem(Avo.Core.ContentPickerType.NL_CONTENT_PAGE_PARENT_ID, item.id as string),
 		})
 	);
 };

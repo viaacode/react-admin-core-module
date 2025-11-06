@@ -7,20 +7,19 @@ import {
 	TextInput,
 } from '@viaa/avo2-components';
 import type { FunctionComponent } from 'react';
-import type { ContentBlockEditor } from '~modules/content-page/types/content-block.types';
-
-import { ContentPicker } from '~shared/components/ContentPicker/ContentPicker';
-import { ContentTypeAndLabelsPicker } from '~shared/components/ContentTypeAndLabelsPicker/ContentTypeAndLabelsPicker';
-import FileUpload from '~shared/components/FileUpload/FileUpload';
-import { IconPicker } from '~shared/components/IconPicker/IconPicker';
-import { MaintainerSelect } from '~shared/components/MaintainerSelect/MaintainerSelect';
-import RichTextEditorWithInternalStateWrapper from '~shared/components/RichTextEditorWithInternalStateWrapper/RichTextEditorWithInternalStateWrapper';
-import { UploadOrSelectVideoStill } from '~shared/components/UploadOrSelectVideoStill/UploadOrSelectVideoStill';
-import { UserGroupSelect } from '~shared/components/UserGroupSelect/UserGroupSelect';
-import { PaddingSelectSingleValue } from '~modules/content-page/components/fields/PaddingSelectSingleValue/PaddingSelectSingleValue';
-import { AlignSelect } from '~modules/content-page/components/fields/AlignSelect/AlignSelect';
-import { ColorSelect } from '~modules/content-page/components/fields/ColorSelect/ColorSelect';
-import { PaddingSelectTopBottom } from '~modules/content-page/components/fields/PaddingSelectTopBottom/PaddingSelectTopBottom';
+import { AlignSelect } from '~modules/content-page/components/fields/AlignSelect/AlignSelect.js';
+import { ColorSelect } from '~modules/content-page/components/fields/ColorSelect/ColorSelect.js';
+import { PaddingSelectSingleValue } from '~modules/content-page/components/fields/PaddingSelectSingleValue/PaddingSelectSingleValue.js';
+import { PaddingSelectTopBottom } from '~modules/content-page/components/fields/PaddingSelectTopBottom/PaddingSelectTopBottom.js';
+import type { ContentBlockEditor } from '~modules/content-page/types/content-block.types.js';
+import { ContentPicker } from '~shared/components/ContentPicker/ContentPicker.js';
+import { ContentTypeAndLabelsPicker } from '~shared/components/ContentTypeAndLabelsPicker/ContentTypeAndLabelsPicker.js';
+import FileUpload from '~shared/components/FileUpload/FileUpload.js';
+import { IconPicker } from '~shared/components/IconPicker/IconPicker.js';
+import { MaintainerSelect } from '~shared/components/MaintainerSelect/MaintainerSelect.js';
+import RichTextEditorWithInternalStateWrapper from '~shared/components/RichTextEditorWithInternalStateWrapper/RichTextEditorWithInternalStateWrapper.js';
+import { UploadOrSelectVideoStill } from '~shared/components/UploadOrSelectVideoStill/UploadOrSelectVideoStill.js';
+import { UserGroupSelect } from '~shared/components/UserGroupSelect/UserGroupSelect.js';
 
 export const GET_EDITOR_TYPES_MAP = (): Record<
 	ContentBlockEditor,

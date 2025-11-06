@@ -1,6 +1,6 @@
 import type { SelectOption } from '@viaa/avo2-components';
-import type { ContentTabStyle } from '~content-blocks/BlockPageOverview/BlockPageOverview.types';
-import { tText } from '~shared/helpers/translation-functions';
+import type { ContentTabStyle } from '~content-blocks/BlockPageOverview/BlockPageOverview.types.js';
+import { tText } from '~shared/helpers/translation-functions.js';
 
 export const GET_PAGE_OVERVIEW_TAB_STYLE_OPTIONS: () => SelectOption<ContentTabStyle>[] = () => [
 	{

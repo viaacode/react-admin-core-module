@@ -1,16 +1,16 @@
 import type { Avo } from '@viaa/avo2-types';
 import { stringifyUrl } from 'query-string';
-import { AdminConfigManager } from '~core/config';
-import { CustomError } from '~shared/helpers/custom-error';
-import { fetchWithLogout, fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
+import { AdminConfigManager } from '~core/config/config.class.js';
+import { CustomError } from '~shared/helpers/custom-error.js';
+import { fetchWithLogout, fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout.js';
 import {
 	getAdminCoreApiUrl,
 	getProxyUrl,
-} from '~shared/helpers/get-proxy-url-from-admin-core-config';
-import { isAvo } from '~shared/helpers/is-avo';
-import { isHetArchief } from '~shared/helpers/is-hetarchief';
+} from '~shared/helpers/get-proxy-url-from-admin-core-config.js';
+import { isAvo } from '~shared/helpers/is-avo.js';
+import { isHetArchief } from '~shared/helpers/is-hetarchief.js';
 
-import type { DeleteContentCounts, Idp, UserOverviewTableCol } from './user.types';
+import type { DeleteContentCounts, Idp, UserOverviewTableCol } from './user.types.js';
 
 export class UserService {
 	private static getBaseUrl(): string {

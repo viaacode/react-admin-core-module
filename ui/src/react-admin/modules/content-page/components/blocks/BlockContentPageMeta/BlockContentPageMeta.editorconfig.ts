@@ -1,11 +1,11 @@
-import { tText } from '~shared/helpers/translation-functions';
+import { tText } from '~shared/helpers/translation-functions.js';
 import type {
 	ContentBlockConfig,
 	DefaultContentBlockState,
-} from '../../../types/content-block.types';
-import { ContentBlockType } from '../../../types/content-block.types';
+} from '../../../types/content-block.types.js';
+import { ContentBlockType } from '../../../types/content-block.types.js';
 
-import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS } from '../defaults';
+import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS } from '../defaults.js';
 
 export const INITIAL_CONTENT_PAGE_META_COMPONENTS_STATE = () => ({});
 

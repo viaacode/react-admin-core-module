@@ -10,11 +10,11 @@ import { Button, Column, convertToHtml, Grid, Spacer } from '@viaa/avo2-componen
 import clsx from 'clsx';
 import type { FunctionComponent } from 'react';
 import React from 'react';
-import type { RichTextButton } from '~content-blocks/BlockRichText/BlockRichText.types';
-import Html from '~shared/components/Html/Html';
-import { Icon } from '~shared/components/Icon';
-import { defaultRenderLinkFunction } from '~shared/helpers/link';
-import { SanitizePreset } from '~shared/helpers/sanitize/presets';
+import type { RichTextButton } from '~content-blocks/BlockRichText/BlockRichText.types.js';
+import Html from '~shared/components/Html/Html.js';
+import { Icon } from '~shared/components/Icon/Icon.js';
+import { defaultRenderLinkFunction } from '~shared/helpers/link.js';
+import { SanitizePreset } from '~shared/helpers/sanitize/presets/index.js';
 
 import './BlockRichText.scss';
 

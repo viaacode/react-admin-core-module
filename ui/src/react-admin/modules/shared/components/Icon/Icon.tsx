@@ -1,9 +1,8 @@
 import type { IconName } from '@viaa/avo2-components';
 import type { FC } from 'react';
 import React from 'react';
-
-import type { IconConfig } from '~core/config';
-import { AdminConfigManager } from '~core/config';
+import { AdminConfigManager } from '~core/config/config.class.js';
+import type { IconConfig } from '~core/config/config.types.js';
 
 interface IconProps {
 	name: keyof IconConfig['componentProps'] | IconName;

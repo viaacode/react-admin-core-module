@@ -6,37 +6,37 @@ import { Button, ButtonGroup, ButtonToolbar, Flex, Spacer } from '@viaa/avo2-com
 import { cloneDeep, isNil, startCase } from 'lodash-es';
 import type { FC, ReactElement, ReactNode } from 'react';
 import React, { useEffect, useRef, useState } from 'react';
-import { AdminConfigManager } from '~core/config';
-import { ToastType } from '~core/config/config.types';
-import { invalidateNavigationQueries } from '~modules/navigation/helpers/invalidate-navigation-queries';
-import { reindexNavigationItems } from '~modules/navigation/helpers/reorder-navigation-items';
-import { useGetNavigationBarItems } from '~modules/navigation/hooks/use-get-navigation-bar-items';
-import { showToast } from '~modules/shared/helpers/show-toast';
-import { useGetAllLanguages } from '~modules/translations/hooks/use-get-all-languages';
-import type { LanguageInfo } from '~modules/translations/translations.types';
-import { Icon } from '~shared/components/Icon';
-import { Loader } from '~shared/components/Loader';
+import { AdminConfigManager } from '~core/config/config.class.js';
+import { ToastType } from '~core/config/config.types.js';
+import { invalidateNavigationQueries } from '~modules/navigation/helpers/invalidate-navigation-queries.js';
+import { reindexNavigationItems } from '~modules/navigation/helpers/reorder-navigation-items.js';
+import { useGetNavigationBarItems } from '~modules/navigation/hooks/use-get-navigation-bar-items.js';
+import { showToast } from '~modules/shared/helpers/show-toast.js';
+import { useGetAllLanguages } from '~modules/translations/hooks/use-get-all-languages.js';
+import type { LanguageInfo } from '~modules/translations/translations.types.js';
 import type {
 	CheckboxDropdownModalProps,
 	CheckboxOption,
-} from '~shared/components/CheckboxDropdownModal/CheckboxDropdownModal';
-import DeleteObjectModal from '~shared/components/ConfirmModal/ConfirmModal';
-import FilterTable from '~shared/components/FilterTable/FilterTable';
-import { GET_LANGUAGE_NAMES } from '~shared/consts/language-names';
-import { CustomError } from '~shared/helpers/custom-error';
-import { isMultiLanguageEnabled } from '~shared/helpers/is-multi-language-enabled';
-import { navigate } from '~shared/helpers/link';
-import { tHtml, tText } from '~shared/helpers/translation-functions';
-import { AdminLayout } from '~shared/layouts';
-import { TableColumnDataType } from '~shared/types/table-column-data-type';
-import { TableFilterType } from '~shared/types/table-filter-types';
+} from '~shared/components/CheckboxDropdownModal/CheckboxDropdownModal.js';
+import DeleteObjectModal from '~shared/components/ConfirmModal/ConfirmModal.js';
+import FilterTable from '~shared/components/FilterTable/FilterTable.js';
+import { Icon } from '~shared/components/Icon/Icon.js';
+import { Loader } from '~shared/components/Loader/Loader.js';
+import { GET_LANGUAGE_NAMES } from '~shared/consts/language-names.js';
+import { CustomError } from '~shared/helpers/custom-error.js';
+import { isMultiLanguageEnabled } from '~shared/helpers/is-multi-language-enabled.js';
+import { navigate } from '~shared/helpers/link.js';
+import { tHtml, tText } from '~shared/helpers/translation-functions.js';
+import { AdminLayout } from '~shared/layouts/AdminLayout/AdminLayout.js';
+import { TableColumnDataType } from '~shared/types/table-column-data-type.js';
+import { TableFilterType } from '~shared/types/table-filter-types.js';
 
-import { NavigationService } from '../navigation.service';
+import { NavigationService } from '../navigation.service.js';
 import type {
 	NavigationItem,
 	NavigationItemOverviewTableCols,
 	NavigationItemsTableState,
-} from '../navigation.types';
+} from '../navigation.types.js';
 
 export interface NavigationDetailProps {
 	navigationBarId: string;

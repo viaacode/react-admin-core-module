@@ -7,28 +7,28 @@ import type { FC, Reducer } from 'react';
 import React, { useCallback, useEffect, useReducer, useState } from 'react';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import { StringParam, useQueryParam, withDefault } from 'use-query-params';
-import { AdminConfigManager } from '~core/config';
-import { ToastType } from '~core/config/config.types';
-import { ContentEditForm } from '~modules/content-page/components/ContentEditForm/ContentEditForm';
-import { ContentPagePreviewUserRoleSelector } from '~modules/content-page/components/ContentPagePreviewUserRoleSelector/ContentPagePreviewUserRoleSelector';
-import { CONTENT_BLOCK_INITIAL_STATE_MAP } from '~modules/content-page/const/content-block-initial-state-map';
+import { AdminConfigManager } from '~core/config/config.class.js';
+import { ToastType } from '~core/config/config.types.js';
+import { ContentEditForm } from '~modules/content-page/components/ContentEditForm/ContentEditForm.js';
+import { ContentPagePreviewUserRoleSelector } from '~modules/content-page/components/ContentPagePreviewUserRoleSelector/ContentPagePreviewUserRoleSelector.js';
+import { CONTENT_BLOCK_INITIAL_STATE_MAP } from '~modules/content-page/const/content-block-initial-state-map.js';
 import {
 	CONTENT_PAGE_SEO_DESCRIPTION_MAX_LENGTH,
 	CONTENT_PAGE_SEO_DESCRIPTION_MAX_LENGTH_STRING,
 	GET_CONTENT_PAGE_DETAIL_TABS,
 	TEMP_BLOCK_ID_PREFIX,
-} from '~modules/content-page/const/content-page.consts';
+} from '~modules/content-page/const/content-page.consts.js';
 import type {
 	ContentEditAction,
 	ContentPageEditState,
-} from '~modules/content-page/helpers/content-edit.reducer';
+} from '~modules/content-page/helpers/content-edit.reducer.js';
 import {
 	CONTENT_PAGE_INITIAL_STATE,
 	contentEditReducer,
-} from '~modules/content-page/helpers/content-edit.reducer';
-import { useContentTypes } from '~modules/content-page/hooks/useContentTypes';
-import { convertRichTextEditorStatesToHtml } from '~modules/content-page/services/content-page.converters';
-import { ContentPageService } from '~modules/content-page/services/content-page.service';
+} from '~modules/content-page/helpers/content-edit.reducer.js';
+import { useContentTypes } from '~modules/content-page/hooks/useContentTypes.js';
+import { convertRichTextEditorStatesToHtml } from '~modules/content-page/services/content-page.converters.js';
+import { ContentPageService } from '~modules/content-page/services/content-page.service.js';
 import type {
 	ContentBlockComponentState,
 	ContentBlockConfig,
@@ -39,32 +39,35 @@ import type {
 	ContentBlockType,
 	RepeatedContentBlockComponentState,
 	SingleContentBlockComponentState,
-} from '~modules/content-page/types/content-block.types';
+} from '~modules/content-page/types/content-block.types.js';
 import type {
 	ContentEditFormErrors,
 	ContentPageInfo,
 	ContentPageUser,
-} from '~modules/content-page/types/content-pages.types';
-import { ContentEditActionType, PageType } from '~modules/content-page/types/content-pages.types';
-import { Locale } from '~modules/translations/translations.core.types';
-import ConfirmModal from '~shared/components/ConfirmModal/ConfirmModal';
-import { ErrorView } from '~shared/components/error';
-import { Icon } from '~shared/components/Icon';
-import { Link } from '~shared/components/Link/Link';
-import type { LoadingInfo } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
-import { LoadingErrorLoadedComponent } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
-import { CustomError } from '~shared/helpers/custom-error';
-import { stripHtml } from '~shared/helpers/formatters/strip-html';
-import { getProfileId } from '~shared/helpers/get-profile-id';
-import { navigate } from '~shared/helpers/link';
-import { showToast } from '~shared/helpers/show-toast';
-import { tHtml, tText } from '~shared/helpers/translation-functions';
-import { AdminLayout } from '~shared/layouts';
-import { PermissionService } from '~shared/services/permission-service';
-import type { DefaultComponentProps } from '~shared/types/components';
-import { blockHasErrors } from '../helpers/block-has-errors';
-import { validateContentBlockConfig } from '../helpers/validate-content-block-config';
-import ContentEditContentBlocks from './ContentEditContentBlocks';
+} from '~modules/content-page/types/content-pages.types.js';
+import {
+	ContentEditActionType,
+	PageType,
+} from '~modules/content-page/types/content-pages.types.js';
+import { Locale } from '~modules/translations/translations.core.types.js';
+import ConfirmModal from '~shared/components/ConfirmModal/ConfirmModal.js';
+import { ErrorView } from '~shared/components/error/ErrorView.js';
+import { Icon } from '~shared/components/Icon/Icon.js';
+import { Link } from '~shared/components/Link/Link.js';
+import type { LoadingInfo } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent.js';
+import { LoadingErrorLoadedComponent } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent.js';
+import { CustomError } from '~shared/helpers/custom-error.js';
+import { stripHtml } from '~shared/helpers/formatters/strip-html.js';
+import { getProfileId } from '~shared/helpers/get-profile-id.js';
+import { navigate } from '~shared/helpers/link.js';
+import { showToast } from '~shared/helpers/show-toast.js';
+import { tHtml, tText } from '~shared/helpers/translation-functions.js';
+import { AdminLayout } from '~shared/layouts/AdminLayout/AdminLayout.js';
+import { PermissionService } from '~shared/services/permission-service.js';
+import type { DefaultComponentProps } from '~shared/types/components.js';
+import { blockHasErrors } from '../helpers/block-has-errors.js';
+import { validateContentBlockConfig } from '../helpers/validate-content-block-config.js';
+import ContentEditContentBlocks from './ContentEditContentBlocks.js';
 import './ContentPageEdit.scss';
 
 const { EDIT_ANY_CONTENT_PAGES, EDIT_OWN_CONTENT_PAGES } = PermissionName;

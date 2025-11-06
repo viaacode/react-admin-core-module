@@ -2,9 +2,8 @@ import type { AlignOptions, DefaultProps, HeadingType } from '@viaa/avo2-compone
 import clsx from 'clsx';
 import type { FunctionComponent } from 'react';
 import React from 'react';
-
-import { BlockHeading } from '../BlockHeading/BlockHeading';
-import { BlockRichText } from '~content-blocks/BlockRichText';
+import { BlockRichText } from '~content-blocks/BlockRichText/BlockRichText.js';
+import { BlockHeading } from '../BlockHeading/BlockHeading.js';
 
 export interface BlockIntroProps extends DefaultProps {
 	title: string;

@@ -1,11 +1,11 @@
 import type { Avo } from '@viaa/avo2-types';
 import { stringifyUrl } from 'query-string';
 
-import { CustomError } from '~shared/helpers/custom-error';
-import { fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
-import { getAdminCoreApiUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config';
+import { CustomError } from '~shared/helpers/custom-error.js';
+import { fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout.js';
+import { getAdminCoreApiUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config.js';
 
-import type { ContentTypeNumber } from './collection.types';
+import type { ContentTypeNumber } from './collection.types.js';
 
 export class CollectionService {
 	private static getBaseUrl(): string {

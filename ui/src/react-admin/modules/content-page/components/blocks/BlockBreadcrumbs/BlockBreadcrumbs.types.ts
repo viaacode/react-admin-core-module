@@ -1,4 +1,4 @@
-import type { PickerItem } from '~shared/types/content-picker';
+import type { PickerItem } from '~shared/types/content-picker.js';
 
 export type BlockBreadcrumbsProps = {
 	foregroundColor: string;

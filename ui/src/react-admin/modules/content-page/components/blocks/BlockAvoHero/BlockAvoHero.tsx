@@ -11,13 +11,13 @@ import clsx from 'clsx';
 import { isString } from 'lodash-es';
 import type { FunctionComponent, ReactNode } from 'react';
 import React from 'react';
-import { Icon } from '~shared/components/Icon/Icon';
-import { defaultRenderLinkFunction } from '~shared/helpers/link';
+import { Icon } from '~shared/components/Icon/Icon.js';
+import { defaultRenderLinkFunction } from '~shared/helpers/link.js';
 
-import { BlockHeading } from '../BlockHeading/BlockHeading';
+import { BlockHeading } from '../BlockHeading/BlockHeading.js';
 
 import './BlockAvoHero.scss';
-import Html from '~modules/shared/components/Html/Html';
+import Html from '~modules/shared/components/Html/Html.js';
 
 export interface BlockAvoHeroProps extends DefaultProps {
 	title: string;

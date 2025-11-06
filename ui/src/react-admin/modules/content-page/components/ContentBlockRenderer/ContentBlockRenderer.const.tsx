@@ -1,40 +1,42 @@
 import type { FC, FunctionComponent } from 'react';
-import { AvoHeroWrapper } from '~content-blocks/BlockAvoHero/AvoHeroWrapper';
-import { BlockHetArchiefHeaderSearch } from '~content-blocks/BlockHetArchiefHeaderSearch';
-import { AdminConfigManager } from '~core/config';
+import { AvoHeroWrapper } from '~content-blocks/BlockAvoHero/AvoHeroWrapper.js';
+import { BlockAvoImageTextBackground } from '~content-blocks/BlockAvoImageTextBackground/index.js';
+import { BlockBreadcrumbs } from '~content-blocks/BlockBreadcrumbs/index.js';
+import { BlockButtonsWrapper } from '~content-blocks/BlockButtons/index.js';
+import { BlockCardsWithoutDescription } from '~content-blocks/BlockCardsWithoutDescription/index.js';
+import { BlockContentPageMeta } from '~content-blocks/BlockContentPageMeta/index.js';
+import { BlockCTAsWrapper } from '~content-blocks/BlockCTAs/index.js';
+import { BlockEventbrite } from '~content-blocks/BlockEventbrite/index.js';
+import { BlockHeading } from '~content-blocks/BlockHeading/index.js';
+import { BlockHetArchiefHeaderSearch } from '~content-blocks/BlockHetArchiefHeaderSearch/BlockHetArchiefHeaderSearch.js';
+import { BlockHetArchiefImageTextBackground } from '~content-blocks/BlockHetArchiefImageTextBackground/index.js';
+import { BlockIFrame } from '~content-blocks/BlockIFrame/index.js';
+import { BlockImage } from '~content-blocks/BlockImage/index.js';
 import {
-	BlockAvoImageTextBackground,
-	BlockBreadcrumbs,
-	BlockButtonsWrapper,
-	BlockCardsWithoutDescription,
-	BlockContentPageMeta,
-	BlockCTAsWrapper,
-	BlockEventbrite,
-	BlockHeading,
-	BlockHetArchiefImageTextBackground,
-	BlockIFrame,
-	BlockImage,
 	BlockImageGridWrapper,
-	BlockImageTitleTextButtonWrapper,
-	BlockIntro,
-	BlockKlaar,
 	BlockLogoGridWrapper,
-	BlockMaintainersGrid,
-	BlockOverviewNewspaperTitles,
-	BlockPageOverviewWrapper,
-	BlockProjectSpotlightWrapper,
-	BlockQuote,
-	BlockRichTextWrapper,
-	BlockScrollDownNudge,
-	BlockSpotlight,
-	BlockTagsWithLink,
-	BlockThreeClickableTiles,
-	BlockUitgeklaard,
 	BlockUspGridWrapper,
-	BlockVideoTitleTextButtonWrapper,
-	BlockVideoWrapper,
-} from '~modules/content-page/components/blocks';
-import { ContentBlockType } from '~modules/content-page/types/content-block.types';
+} from '~content-blocks/BlockImageGrid/index.js';
+import { BlockImageTitleTextButtonWrapper } from '~content-blocks/BlockImageTitleTextButton/index.js';
+import { BlockIntro } from '~content-blocks/BlockIntro/index.js';
+import { BlockKlaar } from '~content-blocks/BlockKlaar/index.js';
+import { BlockMaintainersGrid } from '~content-blocks/BlockMaintainersGrid/index.js';
+import { BlockOverviewNewspaperTitles } from '~content-blocks/BlockOverviewNewspaperTitles/index.js';
+import { BlockPageOverviewWrapper } from '~content-blocks/BlockPageOverview/index.js';
+import { BlockQuote } from '~content-blocks/BlockQuote/index.js';
+import { BlockRichTextWrapper } from '~content-blocks/BlockRichText/index.js';
+import { BlockScrollDownNudge } from '~content-blocks/BlockScrollDownNudge/index.js';
+import {
+	BlockProjectSpotlightWrapper,
+	BlockSpotlight,
+} from '~content-blocks/BlockSpotlight/index.js';
+import { BlockTagsWithLink } from '~content-blocks/BlockTagsWithLink/index.js';
+import { BlockThreeClickableTiles } from '~content-blocks/BlockThreeClickableTiles/index.js';
+import { BlockUitgeklaard } from '~content-blocks/BlockUitgeklaard/index.js';
+import { BlockVideoWrapper } from '~content-blocks/BlockVideo/index.js';
+import { BlockVideoTitleTextButtonWrapper } from '~content-blocks/BlockVideoTitleTextButton/index.js';
+import { AdminConfigManager } from '~core/config/config.class.js';
+import { ContentBlockType } from '~modules/content-page/types/content-block.types.js';
 
 function loadComponentFromConfig(key: ContentBlockType): FC {
 	return (

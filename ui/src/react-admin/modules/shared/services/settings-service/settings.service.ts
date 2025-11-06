@@ -1,6 +1,6 @@
-import { fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
+import { fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout.js';
 
-import { getAdminCoreApiUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config';
+import { getAdminCoreApiUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config.js';
 
 export class SettingsService {
 	private static getBaseUrl(): string {

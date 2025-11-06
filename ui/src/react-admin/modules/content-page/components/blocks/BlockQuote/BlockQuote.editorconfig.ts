@@ -1,13 +1,13 @@
-import type { FileUploadProps } from '~shared/components/FileUpload/FileUpload';
-import { tText } from '~shared/helpers/translation-functions';
+import type { FileUploadProps } from '~shared/components/FileUpload/FileUpload.js';
+import { tText } from '~shared/helpers/translation-functions.js';
 import type {
 	ContentBlockConfig,
 	DefaultContentBlockState,
 	QuoteBlockComponentState,
-} from '../../../types/content-block.types';
-import { ContentBlockEditor, ContentBlockType } from '../../../types/content-block.types';
+} from '../../../types/content-block.types.js';
+import { ContentBlockEditor, ContentBlockType } from '../../../types/content-block.types.js';
 
-import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, FILE_FIELD, TEXT_FIELD } from '../defaults';
+import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, FILE_FIELD, TEXT_FIELD } from '../defaults.js';
 
 export const INITIAL_QUOTE_COMPONENTS_STATE = (): QuoteBlockComponentState => ({
 	quote: '',

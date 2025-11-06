@@ -4,21 +4,21 @@ import type { Draft } from 'immer';
 import { produce } from 'immer';
 import { cloneDeep, isNil } from 'lodash-es';
 import type { Reducer } from 'react';
-import { AdminConfigManager } from '~core/config';
-import { Locale } from '~modules/translations/translations.core.types';
+import { AdminConfigManager } from '~core/config/config.class.js';
+import { Locale } from '~modules/translations/translations.core.types.js';
 
-import type { ValueOf } from '~shared/types';
+import type { ValueOf } from '~shared/types/index.js';
 
 import type {
-	ContentBlockComponentsConfig,
 	ContentBlockComponentState,
+	ContentBlockComponentsConfig,
 	ContentBlockConfig,
 	ContentBlockErrors,
 	RepeatedContentBlockComponentState,
 	SingleContentBlockComponentState,
-} from '../types/content-block.types';
-import type { ContentPageInfo } from '../types/content-pages.types';
-import { ContentEditActionType, ContentPageWidth } from '../types/content-pages.types';
+} from '../types/content-block.types.js';
+import type { ContentPageInfo } from '../types/content-pages.types.js';
+import { ContentEditActionType, ContentPageWidth } from '../types/content-pages.types.js';
 
 interface SetContentPage {
 	type: ContentEditActionType.SET_CONTENT_PAGE;

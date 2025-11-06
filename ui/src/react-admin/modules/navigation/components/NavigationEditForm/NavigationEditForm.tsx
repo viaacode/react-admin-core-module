@@ -13,32 +13,32 @@ import {
 	TextArea,
 	TextInput,
 } from '@viaa/avo2-components';
-import type { Avo } from '@viaa/avo2-types';
+import { Avo } from '@viaa/avo2-types';
 import { compact, kebabCase, uniq, without } from 'lodash-es';
 import type { FunctionComponent, ReactNode } from 'react';
 import React, { useCallback, useEffect, useState } from 'react';
 import CreatableSelect from 'react-select/creatable';
-import { useGetAllLanguages } from '~modules/translations/hooks/use-get-all-languages';
-import { Locale } from '~modules/translations/translations.core.types';
-import { ContentPicker } from '~shared/components/ContentPicker/ContentPicker';
+import { useGetAllLanguages } from '~modules/translations/hooks/use-get-all-languages.js';
+import { Locale } from '~modules/translations/translations.core.types.js';
+import { ContentPicker } from '~shared/components/ContentPicker/ContentPicker.js';
 
-import { IconPicker } from '~shared/components/IconPicker/IconPicker';
-import { UserGroupSelect } from '~shared/components/UserGroupSelect/UserGroupSelect';
-import { GET_ADMIN_ICON_OPTIONS } from '~shared/consts/icons.consts';
-import { GET_LANGUAGE_NAMES } from '~shared/consts/language-names';
-import { isMultiLanguageEnabled } from '~shared/helpers/is-multi-language-enabled';
-import { tHtml, tText } from '~shared/helpers/translation-functions';
-import type { ReactSelectOption } from '~shared/types';
-import type { NavigationEditFormErrorState, NavigationItem } from '../../navigation.types';
+import { IconPicker } from '~shared/components/IconPicker/IconPicker.js';
+import { UserGroupSelect } from '~shared/components/UserGroupSelect/UserGroupSelect.js';
+import { GET_ADMIN_ICON_OPTIONS } from '~shared/consts/icons.consts.js';
+import { GET_LANGUAGE_NAMES } from '~shared/consts/language-names.js';
+import { isMultiLanguageEnabled } from '~shared/helpers/is-multi-language-enabled.js';
+import { tHtml, tText } from '~shared/helpers/translation-functions.js';
+import type { ReactSelectOption } from '~shared/types/index.js';
+import type { NavigationEditFormErrorState, NavigationItem } from '../../navigation.types.js';
 
 import './NavigationEditForm.scss';
-import { ToastType } from '~core/config';
-import { ContentPageService } from '~modules/content-page/services/content-page.service';
-import { CustomError } from '~modules/shared/helpers/custom-error';
-import { showToast } from '~modules/shared/helpers/show-toast';
-import { getAllSubgroupIds } from '~modules/user-group/const/user-group.const';
-import { useGetUserGroups } from '~modules/user-group/hooks/get-user-groups';
-import { SpecialPermissionGroups } from '~shared/types/authentication.types';
+import { ToastType } from '~core/config/config.types.js';
+import { ContentPageService } from '~modules/content-page/services/content-page.service.js';
+import { CustomError } from '~modules/shared/helpers/custom-error.js';
+import { showToast } from '~modules/shared/helpers/show-toast.js';
+import { getAllSubgroupIds } from '~modules/user-group/const/user-group.const.js';
+import { useGetUserGroups } from '~modules/user-group/hooks/get-user-groups.js';
+import { SpecialPermissionGroups } from '~shared/types/authentication.types.js';
 
 interface NavigationEditFormProps {
 	formErrors: NavigationEditFormErrorState;
@@ -266,10 +266,10 @@ export const NavigationEditForm: FunctionComponent<NavigationEditFormProps> = ({
 			>
 				<ContentPicker
 					allowedTypes={[
-						'CONTENT_PAGE',
-						'INTERNAL_LINK',
-						'EXTERNAL_LINK',
-						'CUSTOM_NAVIGATION_ELEMENTS',
+						Avo.Core.ContentPickerType.CONTENT_PAGE,
+						Avo.Core.ContentPickerType.INTERNAL_LINK,
+						Avo.Core.ContentPickerType.EXTERNAL_LINK,
+						Avo.Core.ContentPickerType.CUSTOM_NAVIGATION_ELEMENTS,
 					]}
 					value={
 						currentNavigationItem.contentType && currentNavigationItem.contentPath

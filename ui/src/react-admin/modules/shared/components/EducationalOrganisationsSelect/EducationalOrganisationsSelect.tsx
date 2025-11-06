@@ -5,11 +5,12 @@ import { pullAllBy, remove, uniq } from 'lodash-es';
 import type { FunctionComponent, ReactText } from 'react';
 import React, { useEffect, useState } from 'react';
 
-import { AdminConfigManager, ToastType } from '~core/config';
-import { AVO } from '~modules/shared/types';
-import { showToast } from '~shared/helpers/show-toast';
-import { tHtml, tText } from '~shared/helpers/translation-functions';
-import { stringsToTagList } from '../../helpers/strings-to-taglist';
+import { AdminConfigManager } from '~core/config/config.class.js';
+import { ToastType } from '~core/config/config.types.js';
+import { AVO } from '~modules/shared/types/index.js';
+import { showToast } from '~shared/helpers/show-toast.js';
+import { tHtml, tText } from '~shared/helpers/translation-functions.js';
+import { stringsToTagList } from '../../helpers/strings-to-taglist.js';
 
 export interface Tag {
 	label: string;

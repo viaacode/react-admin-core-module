@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 import { useMatch } from 'react-router';
-import { AdminConfigManager } from '~core/config';
+import { AdminConfigManager } from '~core/config/config.class.js';
 import { ContentPageEdit } from '~modules/content-page/views/ContentPageEdit';
 import { mockCommonUser } from '../../mock-common-user';
 

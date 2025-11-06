@@ -7,7 +7,7 @@ import type { NavigationItemInfo } from '../../types';
 
 import './Sidebar.scss';
 import { useLocation } from 'react-router';
-import { tHtml } from '~shared/helpers/translation-functions';
+import { tHtml } from '~shared/helpers/translation-functions.js';
 
 interface SidebarProps {
 	children?: ReactNode;

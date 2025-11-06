@@ -5,15 +5,15 @@ import { fromPairs, get, isEmpty, isNil, isString, map } from 'lodash-es';
 import { stringify } from 'query-string';
 import type { ReactNode } from 'react';
 
-import { AdminConfigManager } from '~core/config';
-import { NavigateFunction, ToastType } from '~core/config/config.types';
-import { getAdminCoreApiUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config';
-import { showToast } from '~shared/helpers/show-toast';
-import { tText } from '~shared/helpers/translation-functions';
+import { AdminConfigManager } from '~core/config/config.class.js';
+import { type NavigateFunction, ToastType } from '~core/config/config.types.js';
+import { getAdminCoreApiUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config.js';
+import { showToast } from '~shared/helpers/show-toast.js';
+import { tText } from '~shared/helpers/translation-functions.js';
 
-import { APP_PATH } from '../consts/routes.consts';
+import { APP_PATH } from '../consts/routes.consts.js';
 
-import { insideIframe } from './inside-iframe';
+import { insideIframe } from './inside-iframe.js';
 
 type RouteParams = { [key: string]: string | number | undefined };
 

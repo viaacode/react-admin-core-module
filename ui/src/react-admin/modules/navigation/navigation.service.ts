@@ -1,11 +1,11 @@
 import { stringifyUrl } from 'query-string';
-import { AdminConfigManager } from '~core/config';
-import type { Locale } from '~modules/translations/translations.core.types';
+import { AdminConfigManager } from '~core/config/config.class.js';
+import type { Locale } from '~modules/translations/translations.core.types.js';
 
-import { CustomError } from '~shared/helpers/custom-error';
-import { fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
-import { getAdminCoreApiUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config';
-import type { NavigationItem, NavigationItemUpdate } from './navigation.types';
+import { CustomError } from '~shared/helpers/custom-error.js';
+import { fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout.js';
+import { getAdminCoreApiUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config.js';
+import type { NavigationItem, NavigationItemUpdate } from './navigation.types.js';
 
 export class NavigationService {
 	private static getBaseUrl(): string {

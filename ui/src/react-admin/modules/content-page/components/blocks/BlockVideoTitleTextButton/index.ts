@@ -1,3 +1,3 @@
-export * from './BlockVideoTitleTextButton';
-export * from './BlockVideoTitleTextButton.editorconfig';
-export * from './BlockVideoTitleTextButton.wrapper';
+export * from './BlockVideoTitleTextButton.editorconfig.js';
+export * from './BlockVideoTitleTextButton.js';
+export * from './BlockVideoTitleTextButton.wrapper.js';

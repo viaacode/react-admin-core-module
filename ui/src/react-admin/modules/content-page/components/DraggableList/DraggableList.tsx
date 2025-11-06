@@ -2,12 +2,12 @@ import clsx from 'clsx';
 import { findIndex } from 'lodash-es';
 import type { FunctionComponent, ReactNode } from 'react';
 import React, { useCallback, useEffect, useState } from 'react';
-import type { DraggableItem } from './DraggableList.types';
+import type { DraggableItem } from './DraggableList.types.js';
 
 import './DraggableList.scss';
 import type { IconName } from '@viaa/avo2-components';
 import { Icon } from '@viaa/avo2-components';
-import { blockHasErrors } from '~modules/content-page/helpers/block-has-errors';
+import { blockHasErrors } from '~modules/content-page/helpers/block-has-errors.js';
 
 // TODO replace this with a generic T type
 // biome-ignore lint/suspicious/noExplicitAny: todo

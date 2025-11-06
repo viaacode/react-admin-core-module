@@ -1,12 +1,12 @@
 import { stringifyUrl } from 'query-string';
 
-import { fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
-import { getAdminCoreApiUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config';
+import { fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout.js';
+import { getAdminCoreApiUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config.js';
 import type {
 	UserGroup,
 	UserGroupUpdates,
 	UserGroupWithPermissions,
-} from '../types/user-group.types';
+} from '../types/user-group.types.js';
 
 export class UserGroupService {
 	private static getBaseUrl(): string {

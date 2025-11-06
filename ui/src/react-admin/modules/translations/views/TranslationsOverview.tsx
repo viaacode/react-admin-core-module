@@ -1,39 +1,39 @@
 /** biome-ignore-all lint/nursery/noNestedComponentDefinitions: Cell isn't a component but a property with capital letter */
 import type { RichEditorState } from '@meemoo/react-components';
 import { Button, PaginationBar, RichTextEditor, Table, TextInput } from '@meemoo/react-components';
+import { Spacer } from '@viaa/avo2-components';
 import { reverse, sortBy } from 'lodash-es';
 import type { FunctionComponent, KeyboardEvent, ReactElement, ReactNode } from 'react';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import type { Row, TableOptions } from 'react-table';
-import { ToastType } from '~core/config/config.types';
-import { useGetAllTranslations } from '~modules/translations/hooks/use-get-all-translations';
+import { ToastType } from '~core/config/config.types.js';
+import { useGetAllTranslations } from '~modules/translations/hooks/use-get-all-translations.js';
 import {
 	RICH_TEXT_EDITOR_OPTIONS,
 	TRANSLATIONS_PER_PAGE,
-} from '~modules/translations/translations.const';
-import { Locale, ValueType } from '~modules/translations/translations.core.types';
+} from '~modules/translations/translations.const.js';
+import { Locale, ValueType } from '~modules/translations/translations.core.types.js';
 import type {
 	MultiLanguageTranslationEntry,
 	TranslationsOverviewProps,
-} from '~modules/translations/translations.types';
-import Html from '~shared/components/Html/Html';
-import { Icon } from '~shared/components/Icon';
-import { Loader } from '~shared/components/Loader';
-import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner';
-import { sortingIcons } from '~shared/components/Table/Table.const';
-import { GET_LANGUAGE_NAMES } from '~shared/consts/language-names';
-import { CustomError } from '~shared/helpers/custom-error';
-import { showToast } from '~shared/helpers/show-toast';
-import { tHtml, tText } from '~shared/helpers/translation-functions';
-import { OrderDirection } from '~shared/types';
-import { getFullKey } from '../helpers/get-full-key';
-import { useGetAllLanguages } from '../hooks/use-get-all-languages';
-import { TranslationsService } from '../translations.service';
+} from '~modules/translations/translations.types.js';
+import Html from '~shared/components/Html/Html.js';
+import { Icon } from '~shared/components/Icon/Icon.js';
+import { Loader } from '~shared/components/Loader/Loader.js';
+import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner.js';
+import { sortingIcons } from '~shared/components/Table/Table.const.js';
+import { GET_LANGUAGE_NAMES } from '~shared/consts/language-names.js';
+import { CustomError } from '~shared/helpers/custom-error.js';
+import { SanitizePreset } from '~shared/helpers/sanitize/presets/index.js';
+import { showToast } from '~shared/helpers/show-toast.js';
+import { tHtml, tText } from '~shared/helpers/translation-functions.js';
+import { OrderDirection } from '~shared/types/index.js';
+import { getFullKey } from '../helpers/get-full-key.js';
+import { useGetAllLanguages } from '../hooks/use-get-all-languages.js';
+import { TranslationsService } from '../translations.service.js';
 
 import './TranslationsOverview.scss';
-import { Spacer } from '@viaa/avo2-components';
-import { SanitizePreset } from '~shared/helpers/sanitize/presets';
 
 type OrderProp = `value_${Locale}` | 'id';
 

@@ -1,2 +1,2 @@
-export * from './BlockAvoHero';
-export * from './BlockAvoHero.editorconfig';
+export * from './BlockAvoHero.editorconfig.js';
+export * from './BlockAvoHero.js';

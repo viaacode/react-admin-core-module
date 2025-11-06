@@ -6,9 +6,9 @@ import type { Props } from 'react-select';
 import Select from 'react-select';
 
 import './ColorSelect.scss';
-import type { ReactSelectOption } from '~modules/shared';
-import type { GradientColor } from '~modules/content-page/types/content-block.types';
-import { ColorSelectGradientColors } from '~modules/content-page/types/content-block.types';
+import type { GradientColor } from '~modules/content-page/types/content-block.types.js';
+import { ColorSelectGradientColors } from '~modules/content-page/types/content-block.types.js';
+import type { ReactSelectOption } from '~modules/shared/types/index.js';
 
 export interface ColorOption {
 	label: string;

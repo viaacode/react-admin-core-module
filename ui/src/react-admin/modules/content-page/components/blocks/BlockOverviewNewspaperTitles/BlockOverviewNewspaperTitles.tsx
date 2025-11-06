@@ -3,17 +3,17 @@ import { Button } from '@viaa/avo2-components';
 import { stringifyUrl } from 'query-string';
 import type { ChangeEvent, FC, KeyboardEvent } from 'react';
 import React, { useEffect, useState } from 'react';
-import { BlockHeading } from '~content-blocks/BlockHeading';
-import { Link } from '~modules/shared/components/Link';
-import { Icon } from '~shared/components/Icon';
-import { generateSmartLink } from '~shared/components/SmartLink/SmartLink';
-import { tText } from '~shared/helpers/translation-functions';
-import { HET_ARCHIEF } from '~shared/types';
+import { BlockHeading } from '~content-blocks/BlockHeading/BlockHeading.js';
+import { Link } from '~modules/shared/components/Link/Link.js';
+import { Icon } from '~shared/components/Icon/Icon.js';
+import { generateSmartLink } from '~shared/components/SmartLink/SmartLink.js';
+import { tText } from '~shared/helpers/translation-functions.js';
+import { HET_ARCHIEF } from '~shared/types/index.js';
 import type {
 	BlockOverviewNewspaperTitlesProps,
 	NewspaperTitle,
-} from './BlockOverviewNewspaperTitles.types';
-import { useGetNewspaperTitles } from './hooks/useIeObjectsNewspaperTitles';
+} from './BlockOverviewNewspaperTitles.types.js';
+import { useGetNewspaperTitles } from './hooks/useIeObjectsNewspaperTitles.js';
 
 export const BlockOverviewNewspaperTitles: FC<BlockOverviewNewspaperTitlesProps> = ({
 	title,

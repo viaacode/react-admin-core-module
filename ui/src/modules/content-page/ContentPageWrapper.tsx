@@ -1,11 +1,11 @@
 import { IconName } from '@viaa/avo2-components';
 import React from 'react';
 import { useMatch } from 'react-router';
-import { AdminConfigManager } from '~core/config';
+import { AdminConfigManager } from '~core/config/config.class.js';
 import { getCommonUser } from '~core/config/config.selectors';
-import { ContentPageRenderer } from '~modules/content-page/components/ContentPageRenderer/ContentPageRenderer';
-import { ErrorView } from '~shared/components/error';
-import { tHtml } from '~shared/helpers/translation-functions';
+import { ContentPageRenderer } from '~modules/content-page/components/ContentPageRenderer/ContentPageRenderer.js';
+import { ErrorView } from '~shared/components/error/ErrorView.js';
+import { tHtml } from '~shared/helpers/translation-functions.js';
 import { useGetContentPageByPath } from '../hooks/get-content-page-by-path';
 
 export const ContentPageWrapper = () => {

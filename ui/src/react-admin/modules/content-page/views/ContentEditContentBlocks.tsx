@@ -5,31 +5,30 @@ import { isNil } from 'lodash-es';
 import type { FunctionComponent, ReactNode } from 'react';
 import React, { useCallback, useState } from 'react';
 import { HorizontalPageSplit } from 'react-page-split';
-import ContentBlockForm from '~modules/content-page/components/ContentBlockForm/ContentBlockForm';
-import { ContentPageRenderer } from '~modules/content-page/components/ContentPageRenderer/ContentPageRenderer';
-import type { DraggableItemData } from '~modules/content-page/components/DraggableList/DraggableList';
-import DraggableList from '~modules/content-page/components/DraggableList/DraggableList';
-import { CONTENT_BLOCK_CONFIG_MAP } from '~modules/content-page/const/content-block-config-map';
-import { GET_CONTENT_BLOCK_TYPE_OPTIONS } from '~modules/content-page/const/get-content-block-type-options';
-import type { ContentEditAction } from '~modules/content-page/helpers/content-edit.reducer';
+import ContentBlockForm from '~modules/content-page/components/ContentBlockForm/ContentBlockForm.js';
+import { ContentPageRenderer } from '~modules/content-page/components/ContentPageRenderer/ContentPageRenderer.js';
+import type { DraggableItemData } from '~modules/content-page/components/DraggableList/DraggableList.js';
+import DraggableList from '~modules/content-page/components/DraggableList/DraggableList.js';
+import { CONTENT_BLOCK_CONFIG_MAP } from '~modules/content-page/const/content-block-config-map.js';
+import { GET_CONTENT_BLOCK_TYPE_OPTIONS } from '~modules/content-page/const/get-content-block-type-options.js';
+import type { ContentEditAction } from '~modules/content-page/helpers/content-edit.reducer.js';
 import type {
 	ContentBlockErrors,
 	ContentBlockStateOption,
 	ContentBlockStateType,
 	ContentBlockType,
-} from '~modules/content-page/types/content-block.types';
+} from '~modules/content-page/types/content-block.types.js';
 import type {
 	BlockClickHandler,
 	ContentPageInfo,
-} from '~modules/content-page/types/content-pages.types';
-import { ContentEditActionType } from '~modules/content-page/types/content-pages.types';
-import { Sidebar } from '~shared/components/Sidebar/Sidebar';
-import { createKey } from '~shared/helpers/create-key';
-import { tText } from '~shared/helpers/translation-functions';
-
+} from '~modules/content-page/types/content-pages.types.js';
+import { ContentEditActionType } from '~modules/content-page/types/content-pages.types.js';
+import { ErrorView } from '~shared/components/error/ErrorView.js';
+import { Sidebar } from '~shared/components/Sidebar/Sidebar.js';
+import { createKey } from '~shared/helpers/create-key.js';
+import { isAvo } from '~shared/helpers/is-avo.js';
+import { tText } from '~shared/helpers/translation-functions.js';
 import './ContentEditContentBlocks.scss';
-import { ErrorView } from '~shared/components/error';
-import { isAvo } from '~shared/helpers/is-avo';
 
 interface ContentEditContentBlocksProps {
 	contentPageInfo: Partial<ContentPageInfo>;

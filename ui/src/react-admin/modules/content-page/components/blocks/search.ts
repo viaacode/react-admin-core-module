@@ -1,8 +1,11 @@
-import { tText } from '~shared/helpers/translation-functions';
-import type { ContentBlockConfig, DefaultContentBlockState } from '../../types/content-block.types';
-import { Color, ContentBlockType } from '../../types/content-block.types';
+import { tText } from '~shared/helpers/translation-functions.js';
+import type {
+	ContentBlockConfig,
+	DefaultContentBlockState,
+} from '../../types/content-block.types.js';
+import { Color, ContentBlockType } from '../../types/content-block.types.js';
 
-import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS } from './defaults';
+import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS } from './defaults.js';
 
 export const INITIAL_SEARCH_COMPONENTS_STATE = () => ({});
 

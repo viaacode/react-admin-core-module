@@ -1,5 +1,5 @@
-import { NavigationBarDetail } from './NavigationBarDetail';
-import { NavigationItemEdit } from './NavigationItemEdit';
-import { NavigationBarOverview } from './NavigationBarOverview';
+import { NavigationBarDetail } from './NavigationBarDetail.js';
+import { NavigationBarOverview } from './NavigationBarOverview.js';
+import { NavigationItemEdit } from './NavigationItemEdit.js';
 
 export { NavigationBarDetail, NavigationItemEdit, NavigationBarOverview };

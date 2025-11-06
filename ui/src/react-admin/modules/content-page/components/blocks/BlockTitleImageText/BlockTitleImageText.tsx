@@ -2,8 +2,8 @@ import type { DefaultProps } from '@viaa/avo2-components';
 import { Container, convertToHtml, Image, Spacer } from '@viaa/avo2-components';
 import type { FunctionComponent } from 'react';
 import React from 'react';
-import Html from '~shared/components/Html/Html';
-import { SanitizePreset } from '~shared/helpers/sanitize/presets';
+import Html from '~shared/components/Html/Html.js';
+import { SanitizePreset } from '~shared/helpers/sanitize/presets/index.js';
 
 export interface BlockTitleImageTextProps extends DefaultProps {
 	title?: string;

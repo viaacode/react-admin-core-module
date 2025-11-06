@@ -1,11 +1,10 @@
-import type { Avo } from '@viaa/avo2-types';
-
-import { parsePickerItem } from '../helpers/parse-picker';
-
-import { AssignmentService } from '~modules/assignment/assignment.service';
-import type { PickerItem } from '~shared/types/content-picker';
+import { Avo } from '@viaa/avo2-types';
 import memoize from 'memoizee';
-import { MEMOIZEE_OPTIONS } from '~shared/consts/memoizee-options';
+
+import { AssignmentService } from '~modules/assignment/assignment.service.js';
+import { MEMOIZEE_OPTIONS } from '~shared/consts/memoizee-options.js';
+import type { PickerItem } from '~shared/types/content-picker.js';
+import { parsePickerItem } from '../helpers/parse-picker.js';
 
 // fetch assignments by title-wildcard
 export const retrieveAssignments = memoize(
@@ -13,7 +12,7 @@ export const retrieveAssignments = memoize(
 		const assignments: Avo.Assignment.Assignment[] | null =
 			await AssignmentService.fetchAssignmentsByTitleOrId(titleOrId, limit);
 
-		return parseAssignments('ASSIGNMENT', assignments || []);
+		return parseAssignments(Avo.Core.ContentPickerType.ASSIGNMENT, assignments || []);
 	},
 	MEMOIZEE_OPTIONS
 );

@@ -1,9 +1,9 @@
 import { compact, get, isBoolean, isNil, isString } from 'lodash-es';
 import type { ReactElement, ReactNode } from 'react';
 import React from 'react';
-import Html from '~shared/components/Html/Html';
-import { SanitizePreset } from '~shared/helpers/sanitize/presets';
-import { formatDate } from './formatters/date';
+import Html from '~shared/components/Html/Html.js';
+import { SanitizePreset } from '~shared/helpers/sanitize/presets/index.js';
+import { formatDate } from './formatters/date.js';
 
 export function renderDetailRow(
 	value: ReactNode,

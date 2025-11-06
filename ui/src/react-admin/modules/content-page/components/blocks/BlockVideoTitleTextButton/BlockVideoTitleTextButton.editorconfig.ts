@@ -1,25 +1,22 @@
 import type { CheckboxProps, TextInputProps } from '@viaa/avo2-components';
-import { GET_HEADING_TYPE_OPTIONS } from '~modules/content-page/const/get-heading-type-options';
-
-import { GET_ADMIN_ICON_OPTIONS } from '~shared/consts/icons.consts';
-import { tText } from '~shared/helpers/translation-functions';
-import { validateFlowplayerVideoUrl } from '~shared/helpers/validation';
+import { AdminConfigManager } from '~core/config/config.class.js';
+import { GET_HEADING_TYPE_OPTIONS } from '~modules/content-page/const/get-heading-type-options.js';
+import { GET_ADMIN_ICON_OPTIONS } from '~shared/consts/icons.consts.js';
+import { tText } from '~shared/helpers/translation-functions.js';
+import { validateFlowplayerVideoUrl } from '~shared/helpers/validation.js';
 import type {
 	ContentBlockConfig,
 	DefaultContentBlockState,
 	MediaPlayerTitleTextButtonBlockComponentState,
-} from '../../../types/content-block.types';
-import { ContentBlockEditor, ContentBlockType } from '../../../types/content-block.types';
-
+} from '../../../types/content-block.types.js';
+import { ContentBlockEditor, ContentBlockType } from '../../../types/content-block.types.js';
 import {
 	ALIGN_FIELD,
 	BLOCK_FIELD_DEFAULTS,
 	BLOCK_STATE_DEFAULTS,
 	ITEM_PICKER_FIELD,
 	TEXT_FIELD,
-} from '../defaults';
-
-import { AdminConfigManager } from '~core/config';
+} from '../defaults.js';
 
 export const INITIAL_MEDIA_PLAYER_TITLE_TEXT_BUTTON_COMPONENTS_STATE =
 	(): MediaPlayerTitleTextButtonBlockComponentState => ({

@@ -1,14 +1,19 @@
-import { GET_FULL_HEADING_TYPE_OPTIONS } from '~modules/content-page/const/get-heading-type-options';
-import { RICH_TEXT_EDITOR_OPTIONS_FULL_WITHOUT_ALIGN } from '~shared/consts/rich-text-editor.consts';
-import { tText } from '~shared/helpers/translation-functions';
+import { GET_FULL_HEADING_TYPE_OPTIONS } from '~modules/content-page/const/get-heading-type-options.js';
+import { RICH_TEXT_EDITOR_OPTIONS_FULL_WITHOUT_ALIGN } from '~shared/consts/rich-text-editor.consts.js';
+import { tText } from '~shared/helpers/translation-functions.js';
 import type {
 	ContentBlockConfig,
 	DefaultContentBlockState,
 	IntroBlockComponentState,
-} from '../../../types/content-block.types';
-import { ContentBlockEditor, ContentBlockType } from '../../../types/content-block.types';
+} from '../../../types/content-block.types.js';
+import { ContentBlockEditor, ContentBlockType } from '../../../types/content-block.types.js';
 
-import { ALIGN_FIELD, BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, TEXT_FIELD } from '../defaults';
+import {
+	ALIGN_FIELD,
+	BLOCK_FIELD_DEFAULTS,
+	BLOCK_STATE_DEFAULTS,
+	TEXT_FIELD,
+} from '../defaults.js';
 
 export const INITIAL_INTRO_COMPONENTS_STATE = (): IntroBlockComponentState => ({
 	title: '',

@@ -1,2 +1,2 @@
-export * from './BlockEventbrite';
-export * from './BlockEventbrite.editorconfig';
+export * from './BlockEventbrite.editorconfig.js';
+export * from './BlockEventbrite.js';

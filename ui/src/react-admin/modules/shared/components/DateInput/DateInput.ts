@@ -10,4 +10,4 @@ const DatePicker = (((ReactDatePicker.default as any).default as any) ||
 	// biome-ignore lint/suspicious/noExplicitAny: todo
 	(ReactDatePicker as any)) as typeof ReactDatePicker.default;
 
-export const DateInput = DatePicker;
+export const DateInput = DatePicker.default;

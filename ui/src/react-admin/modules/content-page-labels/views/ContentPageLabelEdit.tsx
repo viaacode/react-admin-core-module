@@ -10,33 +10,31 @@ import {
 	Spacer,
 	TextInput,
 } from '@viaa/avo2-components';
-import type { Avo } from '@viaa/avo2-types';
+import { Avo } from '@viaa/avo2-types';
 import { isNil } from 'lodash-es';
 import type { FunctionComponent } from 'react';
 import React, { useCallback, useEffect, useState } from 'react';
-import { AdminConfigManager, ToastType } from '~core/config';
-import { ContentPageLabelService } from '~modules/content-page-labels/content-page-label.service';
-import { useGetAllLanguages } from '~modules/translations/hooks/use-get-all-languages';
-import { Locale } from '~modules/translations/translations.core.types';
-import { Icon } from '~shared/components/Icon';
-import { ContentPicker } from '~shared/components/ContentPicker/ContentPicker';
-import type { LoadingInfo } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
-import { LoadingErrorLoadedComponent } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
-import { GET_LANGUAGE_NAMES } from '~shared/consts/language-names';
-import { CustomError } from '~shared/helpers/custom-error';
-import { isMultiLanguageEnabled } from '~shared/helpers/is-multi-language-enabled';
-import { buildLink, navigate } from '~shared/helpers/link';
-import { showToast } from '~shared/helpers/show-toast';
-import { tText } from '~shared/helpers/translation-functions';
-import { AdminLayout } from '~shared/layouts';
-import type { DefaultComponentProps } from '~shared/types/components';
-
-import { useContentTypes } from '../../content-page/hooks/useContentTypes';
-
+import { AdminConfigManager, ToastType } from '~core/config/index.js';
+import { ContentPageLabelService } from '~modules/content-page-labels/content-page-label.service.js';
+import { useGetAllLanguages } from '~modules/translations/hooks/use-get-all-languages.js';
+import { Locale } from '~modules/translations/translations.core.types.js';
+import { ContentPicker } from '~shared/components/ContentPicker/ContentPicker.js';
+import { Icon } from '~shared/components/Icon/Icon.js';
+import type { LoadingInfo } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent.js';
+import { LoadingErrorLoadedComponent } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent.js';
+import { GET_LANGUAGE_NAMES } from '~shared/consts/language-names.js';
+import { CustomError } from '~shared/helpers/custom-error.js';
+import { isMultiLanguageEnabled } from '~shared/helpers/is-multi-language-enabled.js';
+import { buildLink, navigate } from '~shared/helpers/link.js';
+import { showToast } from '~shared/helpers/show-toast.js';
+import { tText } from '~shared/helpers/translation-functions.js';
+import { AdminLayout } from '~shared/layouts/AdminLayout/AdminLayout.js';
+import type { DefaultComponentProps } from '~shared/types/components.js';
+import { useContentTypes } from '../../content-page/hooks/useContentTypes.js';
 import type {
 	ContentPageLabel,
 	ContentPageLabelEditFormErrorState,
-} from '../content-page-label.types';
+} from '../content-page-label.types.js';
 
 type ContentPageLabelEditProps = {
 	contentPageLabelId: string | undefined;
@@ -282,12 +280,12 @@ export const ContentPageLabelEdit: FunctionComponent<ContentPageLabelEditProps> 
 								>
 									<ContentPicker
 										allowedTypes={[
-											'CONTENT_PAGE',
-											'ITEM',
-											'COLLECTION',
-											'BUNDLE',
-											'INTERNAL_LINK',
-											'EXTERNAL_LINK',
+											Avo.Core.ContentPickerType.CONTENT_PAGE,
+											Avo.Core.ContentPickerType.ITEM,
+											Avo.Core.ContentPickerType.COLLECTION,
+											Avo.Core.ContentPickerType.BUNDLE,
+											Avo.Core.ContentPickerType.INTERNAL_LINK,
+											Avo.Core.ContentPickerType.EXTERNAL_LINK,
 										]}
 										onChange={(newLinkTo) =>
 											setContentPageLabelInfo({

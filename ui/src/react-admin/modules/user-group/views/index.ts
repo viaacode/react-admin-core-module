@@ -1,1 +1,1 @@
-export { UserGroupOverview } from './UserGroupOverview';
+export { UserGroupOverview } from './UserGroupOverview.js';

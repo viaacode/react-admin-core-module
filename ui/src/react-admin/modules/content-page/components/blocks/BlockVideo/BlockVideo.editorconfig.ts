@@ -1,21 +1,21 @@
 import type { CheckboxProps, TextInputProps } from '@viaa/avo2-components';
-import { GET_MEDIA_PLAYER_WIDTH_OPTIONS } from '~modules/content-page/const/get-media-player-width-options';
+import { GET_MEDIA_PLAYER_WIDTH_OPTIONS } from '~modules/content-page/const/get-media-player-width-options.js';
 
-import { tText } from '~shared/helpers/translation-functions';
-import { validateFlowplayerVideoUrl } from '~shared/helpers/validation';
+import { tText } from '~shared/helpers/translation-functions.js';
+import { validateFlowplayerVideoUrl } from '~shared/helpers/validation.js';
 import type {
 	ContentBlockConfig,
 	DefaultContentBlockState,
 	MediaPlayerBlockComponentState,
-} from '../../../types/content-block.types';
-import { ContentBlockEditor, ContentBlockType } from '../../../types/content-block.types';
+} from '../../../types/content-block.types.js';
+import { ContentBlockEditor, ContentBlockType } from '../../../types/content-block.types.js';
 
 import {
 	BLOCK_FIELD_DEFAULTS,
 	BLOCK_STATE_DEFAULTS,
 	ITEM_PICKER_FIELD,
 	TEXT_FIELD,
-} from '../defaults';
+} from '../defaults.js';
 
 export const INITIAL_MEDIA_PLAYER_COMPONENTS_STATE = (): MediaPlayerBlockComponentState => ({
 	title: '',

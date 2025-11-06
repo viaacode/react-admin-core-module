@@ -1,7 +1,7 @@
 import type { FunctionComponent } from 'react';
 import React from 'react';
 
-import { tText } from '~shared/helpers/translation-functions';
+import { tText } from '~shared/helpers/translation-functions.js';
 
 import type { IconName, MenuItemInfo } from '@viaa/avo2-components';
 import {

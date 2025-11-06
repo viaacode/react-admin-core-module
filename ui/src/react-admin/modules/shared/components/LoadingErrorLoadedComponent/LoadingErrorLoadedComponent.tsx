@@ -3,8 +3,8 @@ import type { Avo } from '@viaa/avo2-types';
 import type { FunctionComponent, ReactElement, ReactNode } from 'react';
 import React from 'react';
 
-import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner';
-import { tHtml } from '~shared/helpers/translation-functions';
+import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner.js';
+import { tHtml } from '~shared/helpers/translation-functions.js';
 
 export type LoadingState = 'loading' | 'loaded' | 'error';
 

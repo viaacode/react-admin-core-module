@@ -1,17 +1,17 @@
 import type { ContentPickerType } from '@viaa/avo2-types';
-import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS } from '~content-blocks/defaults';
-import { GET_FOREGROUND_COLOR_OPTIONS_ARCHIEF } from '~modules/content-page/const/get-color-options';
+import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS } from '~content-blocks/defaults.js';
+import { GET_FOREGROUND_COLOR_OPTIONS_ARCHIEF } from '~modules/content-page/const/get-color-options.js';
 import type {
 	ContentBlockConfig,
 	DefaultContentBlockState,
-} from '~modules/content-page/types/content-block.types';
+} from '~modules/content-page/types/content-block.types.js';
 import {
 	ContentBlockEditor,
 	ContentBlockType,
 	DEFAULT_BUTTON_PROPS,
-} from '~modules/content-page/types/content-block.types';
-import { tText } from '~shared/helpers/translation-functions';
-import { HET_ARCHIEF } from '~shared/types';
+} from '~modules/content-page/types/content-block.types.js';
+import { tText } from '~shared/helpers/translation-functions.js';
+import { HET_ARCHIEF } from '~shared/types/index.js';
 
 export const INITIAL_BREADCRUMBS_COMPONENTS_STATE = () => ({
 	foregroundColor: GET_FOREGROUND_COLOR_OPTIONS_ARCHIEF()[0].value,

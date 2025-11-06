@@ -1,4 +1,5 @@
 import { keysEnter, onKey, Table, TextInput } from '@meemoo/react-components';
+import { cloneDeep, remove, sortBy } from 'lodash-es';
 import type { ChangeEvent } from 'react';
 import React, {
 	forwardRef,
@@ -8,26 +9,23 @@ import React, {
 	useMemo,
 	useState,
 } from 'react';
-import { cloneDeep, remove, sortBy } from 'lodash-es';
 import type { Column, TableOptions, UseSortByColumnOptions } from 'react-table';
-import type { PermissionData } from '~modules/permissions/permissions.types';
-
-import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner';
-import { showToast } from '~shared/helpers/show-toast';
-import { tHtml, tText } from '~shared/helpers/translation-functions';
-import { useGetPermissions } from '~modules/permissions/hooks/data/get-all-permissions';
-import { CustomError } from '~shared/helpers/custom-error';
-
-import { ToastType } from '~core/config/config.types';
-import { useGetUserGroups } from '~modules/user-group/hooks/get-user-groups';
-import { useUpdateUserGroups } from '~modules/user-group/hooks/update-user-groups';
-import { getUserGroupTableColumns } from '../const/user-group.const';
+import { ToastType } from '~core/config/config.types.js';
+import { useGetPermissions } from '~modules/permissions/hooks/data/get-all-permissions.js';
+import type { PermissionData } from '~modules/permissions/permissions.types.js';
+import { useGetUserGroups } from '~modules/user-group/hooks/get-user-groups.js';
+import { useUpdateUserGroups } from '~modules/user-group/hooks/update-user-groups.js';
+import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner.js';
+import { CustomError } from '~shared/helpers/custom-error.js';
+import { showToast } from '~shared/helpers/show-toast.js';
+import { tHtml, tText } from '~shared/helpers/translation-functions.js';
+import { getUserGroupTableColumns } from '../const/user-group.const.js';
 import type {
 	UserGroupOverviewProps,
 	UserGroupOverviewRef,
 	UserGroupUpdate,
 	UserGroupWithPermissions,
-} from '../types/user-group.types';
+} from '../types/user-group.types.js';
 
 export const UserGroupOverview = forwardRef<
 	UserGroupOverviewRef | undefined,

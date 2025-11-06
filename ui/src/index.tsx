@@ -7,9 +7,9 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import { QueryParamProvider } from 'use-query-params';
-import App from './App';
-import { ReactRouter7Adapter } from './shared/helpers/routes/react-router-v7-adapter-for-use-query-params';
-import { initI18n } from './shared/translations/i18n';
+import App from './App.js';
+import { ReactRouter7Adapter } from './shared/helpers/routes/react-router-v7-adapter-for-use-query-params.js';
+import { initI18n } from './shared/translations/i18n.js';
 
 const adminCoreApiUrl = 'http://localhost:3300';
 

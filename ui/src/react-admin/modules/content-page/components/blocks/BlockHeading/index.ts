@@ -1,2 +1,2 @@
-export * from './BlockHeading';
-export * from './BlockHeading.editorconfig';
+export * from './BlockHeading.editorconfig.js';
+export * from './BlockHeading.js';

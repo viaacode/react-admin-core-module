@@ -2,15 +2,15 @@ import type { LinkTarget } from '@viaa/avo2-components';
 import type { Avo, DatabaseType } from '@viaa/avo2-types';
 import type { ComponentType, FC, FunctionComponent, MouseEvent, ReactNode } from 'react';
 
-import type { ContentBlockType } from '~modules/content-page/types/content-block.types';
+import type { ContentBlockType } from '~modules/content-page/types/content-block.types.js';
 import type {
 	ContentPageInfo,
 	ContentPageWidth,
-} from '~modules/content-page/types/content-pages.types';
-import type { App, Locale } from '~modules/translations/translations.core.types';
+} from '~modules/content-page/types/content-pages.types.js';
+import type { App, Locale } from '~modules/translations/translations.core.types.js';
 
-import type { UserBulkAction } from '~modules/user/user.types';
-import type { FlowPlayerWrapperProps } from '~shared/components/FlowPlayerWrapper/FlowPlayerWrapper.types';
+import type { UserBulkAction } from '~modules/user/user.types.js';
+import type { FlowPlayerWrapperProps } from '~shared/components/FlowPlayerWrapper/FlowPlayerWrapper.types.js';
 
 export enum ToastType {
 	ERROR = 'error',

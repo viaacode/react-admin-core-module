@@ -15,33 +15,33 @@ import nlBE from 'date-fns/locale/nl-BE/index.js';
 import { compact } from 'lodash-es';
 import type { FC, ReactText } from 'react';
 import React, { useCallback, useEffect, useState } from 'react';
-import { AdminConfigManager, ToastType } from '~core/config';
-import { useGetProfileById } from '~modules/user/hooks/use-get-profile-by-id';
-import { Icon } from '~shared/components/Icon';
-import ConfirmModal from '~shared/components/ConfirmModal/ConfirmModal';
-import { ErrorView } from '~shared/components/error';
-import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner';
-import { CustomError } from '~shared/helpers/custom-error';
-import { createDropdownMenuItem } from '~shared/helpers/dropdown';
-import { renderAvatar } from '~shared/helpers/formatters/avatar';
-import { formatDateString } from '~shared/helpers/formatters/date';
-import { idpMapsToTagList } from '~shared/helpers/idps-to-taglist';
-import { buildLink, navigate } from '~shared/helpers/link';
+import { AdminConfigManager, ToastType } from '~core/config/index.js';
+import { useGetProfileById } from '~modules/user/hooks/use-get-profile-by-id.js';
+import ConfirmModal from '~shared/components/ConfirmModal/ConfirmModal.js';
+import { ErrorView } from '~shared/components/error/ErrorView.js';
+import { Icon } from '~shared/components/Icon/Icon.js';
+import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner.js';
+import { CustomError } from '~shared/helpers/custom-error.js';
+import { createDropdownMenuItem } from '~shared/helpers/dropdown.js';
+import { renderAvatar } from '~shared/helpers/formatters/avatar.js';
+import { formatDateString } from '~shared/helpers/formatters/date.js';
+import { idpMapsToTagList } from '~shared/helpers/idps-to-taglist.js';
+import { buildLink, navigate } from '~shared/helpers/link.js';
 
 import {
 	renderDateDetailRows,
 	renderDetailRow,
 	renderSimpleDetailRows,
-} from '~shared/helpers/render-detail-fields';
-import { showToast } from '~shared/helpers/show-toast';
-import { stringsToTagList } from '~shared/helpers/strings-to-taglist';
-import { tHtml, tText } from '~shared/helpers/translation-functions';
-import { PermissionService } from '~shared/services/permission-service';
-import { AdminLayout } from '~shared/layouts';
-import TempAccessModal from '../components/TempAccessModal';
-import UserDeleteModal from '../components/UserDeleteModal';
-import { UserService } from '../user.service';
-import { Idp } from '../user.types';
+} from '~shared/helpers/render-detail-fields.js';
+import { showToast } from '~shared/helpers/show-toast.js';
+import { stringsToTagList } from '~shared/helpers/strings-to-taglist.js';
+import { tHtml, tText } from '~shared/helpers/translation-functions.js';
+import { AdminLayout } from '~shared/layouts/AdminLayout/AdminLayout.js';
+import { PermissionService } from '~shared/services/permission-service.js';
+import TempAccessModal from '../components/TempAccessModal.js';
+import UserDeleteModal from '../components/UserDeleteModal.js';
+import { UserService } from '../user.service.js';
+import { Idp } from '../user.types.js';
 
 export interface UserDetailProps {
 	id: string | null;

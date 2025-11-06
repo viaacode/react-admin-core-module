@@ -1,25 +1,24 @@
 import { Button, ButtonToolbar, IconName, Table } from '@viaa/avo2-components';
 import type { FunctionComponent } from 'react';
 import React, { useCallback, useEffect, useState } from 'react';
-import { AdminConfigManager } from '~core/config';
-import { ContentPageLabelService } from '~modules/content-page-labels/content-page-label.service';
-import type { DefaultComponentProps } from '~modules/shared/types';
-import { Icon } from '~shared/components/Icon';
-
-import { GET_CONTENT_TYPE_LABELS } from '~shared/components/ContentPicker/ContentPicker.const';
-import type { LoadingInfo } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
-import { LoadingErrorLoadedComponent } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
-import { CustomError } from '~shared/helpers/custom-error';
-import { isMultiLanguageEnabled } from '~shared/helpers/is-multi-language-enabled';
-import { buildLink, navigateToContentType } from '~shared/helpers/link';
+import { AdminConfigManager } from '~core/config/config.class.js';
+import { ContentPageLabelService } from '~modules/content-page-labels/content-page-label.service.js';
+import type { DefaultComponentProps } from '~modules/shared/types/components.js';
+import { GET_CONTENT_TYPE_LABELS } from '~shared/components/ContentPicker/ContentPicker.const.js';
+import { Icon } from '~shared/components/Icon/Icon.js';
+import type { LoadingInfo } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent.js';
+import { LoadingErrorLoadedComponent } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent.js';
+import { CustomError } from '~shared/helpers/custom-error.js';
+import { isMultiLanguageEnabled } from '~shared/helpers/is-multi-language-enabled.js';
+import { buildLink, navigateToContentType } from '~shared/helpers/link.js';
 import {
 	renderDateDetailRows,
 	renderDetailRow,
 	renderSimpleDetailRows,
-} from '~shared/helpers/render-detail-fields';
-import { tText } from '~shared/helpers/translation-functions';
-import { AdminLayout } from '~shared/layouts';
-import type { ContentPageLabel } from '../content-page-label.types';
+} from '~shared/helpers/render-detail-fields.js';
+import { tText } from '~shared/helpers/translation-functions.js';
+import { AdminLayout } from '~shared/layouts/AdminLayout/AdminLayout.js';
+import type { ContentPageLabel } from '../content-page-label.types.js';
 
 type ContentPageLabelDetailProps = {
 	contentPageLabelId: string;

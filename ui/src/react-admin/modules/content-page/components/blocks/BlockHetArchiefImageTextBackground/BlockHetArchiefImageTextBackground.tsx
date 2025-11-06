@@ -1,3 +1,5 @@
+import type { ButtonAction, ButtonType, IconName } from '@viaa/avo2-components';
+import { Button, Image } from '@viaa/avo2-components';
 import clsx from 'clsx';
 import type { FunctionComponent, ReactElement } from 'react';
 import type {
@@ -5,16 +7,14 @@ import type {
 	Color,
 	HeadingTypeOption,
 	SimpleAlignOption,
-} from '~modules/content-page/types/content-block.types';
-import type { DefaultComponentProps } from '~modules/shared/types/components';
-import { BlockHeading } from '../BlockHeading';
-import type { ButtonAction, ButtonType, IconName } from '@viaa/avo2-components';
-import { Button, Image } from '@viaa/avo2-components';
-import { generateSmartLink } from '~modules/shared/components/SmartLink/SmartLink';
-import { Icon } from '~shared/components/Icon';
+} from '~modules/content-page/types/content-block.types.js';
+import { generateSmartLink } from '~modules/shared/components/SmartLink/SmartLink.js';
+import type { DefaultComponentProps } from '~modules/shared/types/components.js';
+import { Icon } from '~shared/components/Icon/Icon.js';
+import { BlockHeading } from '../BlockHeading/BlockHeading.js';
 import './BlockHetArchiefImageTextBackground.scss';
-import type { ContentPageWidth } from '~modules/content-page/types/content-pages.types';
-import { CONTENT_PAGE_WIDTH_TO_REM } from '~modules/content-page/types/content-pages.types';
+import type { ContentPageWidth } from '~modules/content-page/types/content-pages.types.js';
+import { CONTENT_PAGE_WIDTH_TO_REM } from '~modules/content-page/types/content-pages.types.js';
 
 export interface BlockHetArchiefImageTextBackgroundProps extends DefaultComponentProps {
 	heading: string;

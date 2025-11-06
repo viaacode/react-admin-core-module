@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import type { Avo } from '@viaa/avo2-types';
-import { ContentPageService } from '~modules/content-page/services/content-page.service';
-import { QUERY_KEYS } from '~shared/types';
+import { ContentPageService } from '~modules/content-page/services/content-page.service.js';
+import { QUERY_KEYS } from '~shared/types/index.js';
 
 interface ContentPagesOverviewArgs {
 	withBlocks: boolean;

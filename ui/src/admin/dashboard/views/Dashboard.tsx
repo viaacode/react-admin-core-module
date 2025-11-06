@@ -1,5 +1,5 @@
 import React from 'react';
-import { tHtml, tText } from '~shared/helpers/translation-functions';
+import { tHtml, tText } from '~shared/helpers/translation-functions.js';
 import { AdminLayout } from '../../../react-admin/modules/shared/layouts';
 
 const Dashboard = () => {

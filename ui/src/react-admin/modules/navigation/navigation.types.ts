@@ -1,7 +1,7 @@
 import type { Avo } from '@viaa/avo2-types';
-import type { Locale } from '~modules/translations/translations.core.types';
-import type { FilterableTableState } from '~shared/components/FilterTable/FilterTable';
-import type { LinkTarget } from '~shared/components/SmartLink/SmartLink.types';
+import type { Locale } from '~modules/translations/translations.core.types.js';
+import type { FilterableTableState } from '~shared/components/FilterTable/FilterTable.js';
+import type { LinkTarget } from '~shared/components/SmartLink/SmartLink.types.js';
 
 export type NavigationOverviewTableCols = 'placement' | 'description' | 'actions';
 

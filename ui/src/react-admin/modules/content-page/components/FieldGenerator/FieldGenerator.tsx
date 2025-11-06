@@ -2,9 +2,9 @@ import { Alert } from '@meemoo/react-components';
 import { Button, Flex, FlexItem, FormGroup, IconName, Spacer } from '@viaa/avo2-components';
 import type { FunctionComponent, ReactNode } from 'react';
 import React, { Fragment } from 'react';
-import { GET_EDITOR_TYPES_MAP } from '~modules/content-page/const/editor-types.consts';
-import { generateFieldAttributes } from '~modules/content-page/helpers';
-import { Icon } from '~shared/components/Icon';
+import { GET_EDITOR_TYPES_MAP } from '~modules/content-page/const/editor-types.consts.js';
+import { generateFieldAttributes } from '~modules/content-page/helpers/field-attributes.js';
+import { Icon } from '~shared/components/Icon/Icon.js';
 import type {
 	ContentBlockComponentState,
 	ContentBlockConfig,
@@ -12,8 +12,8 @@ import type {
 	ContentBlockFieldGroup,
 	ContentBlockState,
 	ContentBlockStateType,
-} from '../../types/content-block.types';
-import { FieldGroup } from '../FieldGroup/FieldGroup';
+} from '../../types/content-block.types.js';
+import { FieldGroup } from '../FieldGroup/FieldGroup.js';
 
 interface FieldGeneratorProps {
 	fieldKey: keyof ContentBlockComponentState | keyof ContentBlockState;

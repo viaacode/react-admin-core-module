@@ -1,8 +1,8 @@
 import type { Avo } from '@viaa/avo2-types';
-import type { Locale } from '~modules/translations/translations.core.types';
+import type { Locale } from '~modules/translations/translations.core.types.js';
 
-import type { FilterableTableState } from '~shared/components/FilterTable/FilterTable';
-import type { PickerItem } from '~shared/types/content-picker';
+import type { FilterableTableState } from '~shared/components/FilterTable/FilterTable.js';
+import type { PickerItem } from '~shared/types/content-picker.js';
 
 export type ContentPageLabelOverviewTableCols =
 	| 'label'

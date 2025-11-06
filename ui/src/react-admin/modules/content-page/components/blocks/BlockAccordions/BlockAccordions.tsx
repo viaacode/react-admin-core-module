@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import type { FunctionComponent } from 'react';
 import React, { useState } from 'react';
 
-import { BlockRichText } from '../BlockRichText/BlockRichText';
+import { BlockRichText } from '../BlockRichText/BlockRichText.js';
 
 export interface BlockAccordionsProps extends DefaultProps {
 	elements: { title: string; content: string }[];

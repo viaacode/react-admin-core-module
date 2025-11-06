@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
-import { ToastType } from '~core/config/config.types';
-import { showToast } from '~shared/helpers/show-toast';
-import { tText } from '~shared/helpers/translation-functions';
-import { CustomError } from '../helpers/custom-error';
+import { ToastType } from '~core/config/config.types.js';
+import { showToast } from '~shared/helpers/show-toast.js';
+import { tText } from '~shared/helpers/translation-functions.js';
+import { CustomError } from '../helpers/custom-error.js';
 
-import { SettingsService } from '../services/settings-service/settings.service';
+import { SettingsService } from '../services/settings-service/settings.service.js';
 
 type UseEducationLevelsTuple = [string[], boolean];
 

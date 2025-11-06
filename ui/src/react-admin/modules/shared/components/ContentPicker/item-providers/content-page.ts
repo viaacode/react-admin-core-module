@@ -1,11 +1,11 @@
-import { type Avo, ContentPickerType } from '@viaa/avo2-types';
+import { Avo, ContentPickerType } from '@viaa/avo2-types';
 import memoize from 'memoizee';
-import { ContentPageService } from '~modules/content-page/services/content-page.service';
-import type { ContentPageInfo } from '~modules/content-page/types/content-pages.types';
-import { MEMOIZEE_OPTIONS } from '~shared/consts/memoizee-options';
-import { CustomError } from '~shared/helpers/custom-error';
-import type { PickerItem } from '~shared/types/content-picker';
-import { parsePickerItem } from '../helpers/parse-picker';
+import { ContentPageService } from '~modules/content-page/services/content-page.service.js';
+import type { ContentPageInfo } from '~modules/content-page/types/content-pages.types.js';
+import { MEMOIZEE_OPTIONS } from '~shared/consts/memoizee-options.js';
+import { CustomError } from '~shared/helpers/custom-error.js';
+import type { PickerItem } from '~shared/types/content-picker.js';
+import { parsePickerItem } from '../helpers/parse-picker.js';
 
 // Fetch content items from GQL
 export const retrieveContentPages = memoize(
@@ -44,7 +44,7 @@ const parseContentPages = (raw: Partial<ContentPageInfo>[]): PickerItem[] => {
 	return raw.map(
 		(item: Partial<ContentPageInfo>): PickerItem => ({
 			label: item.title || '',
-			...parsePickerItem('CONTENT_PAGE', item.path as string), // TODO enforce path in database
+			...parsePickerItem(Avo.Core.ContentPickerType.CONTENT_PAGE, item.path as string), // TODO enforce path in database
 		})
 	);
 };

@@ -1,12 +1,12 @@
 import { FormGroup } from '@viaa/avo2-components';
 import type { FunctionComponent } from 'react';
 import React, { useState } from 'react';
-import { CONTENT_PAGE_DESCRIPTION_MAX_LENGTH_STRING } from '~modules/content-page/const/content-page.consts';
+import { CONTENT_PAGE_DESCRIPTION_MAX_LENGTH_STRING } from '~modules/content-page/const/content-page.consts.js';
 
-import { RICH_TEXT_EDITOR_OPTIONS_FULL } from '~modules/shared/consts/rich-text-editor.consts';
-import RichTextEditorWithInternalStateWrapper from '~shared/components/RichTextEditorWithInternalStateWrapper/RichTextEditorWithInternalStateWrapper';
-import { stripHtml } from '~shared/helpers/formatters/strip-html';
-import { tText } from '~shared/helpers/translation-functions';
+import { RICH_TEXT_EDITOR_OPTIONS_FULL } from '~modules/shared/consts/rich-text-editor.consts.js';
+import RichTextEditorWithInternalStateWrapper from '~shared/components/RichTextEditorWithInternalStateWrapper/RichTextEditorWithInternalStateWrapper.js';
+import { stripHtml } from '~shared/helpers/formatters/strip-html.js';
+import { tText } from '~shared/helpers/translation-functions.js';
 
 interface ContentPageEditFormDescriptionProps {
 	value: string;

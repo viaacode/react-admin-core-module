@@ -1,12 +1,11 @@
-import type { Avo } from '@viaa/avo2-types';
-
-import { parsePickerItem } from '../helpers/parse-picker';
-
-import { CollectionService } from '~modules/collection/collection.service';
-import { ContentTypeNumber } from '~modules/collection/collection.types';
-import type { PickerItem } from '~shared/types/content-picker';
-import { MEMOIZEE_OPTIONS } from '~shared/consts/memoizee-options';
+import { Avo } from '@viaa/avo2-types';
 import memoize from 'memoizee';
+
+import { CollectionService } from '~modules/collection/collection.service.js';
+import { ContentTypeNumber } from '~modules/collection/collection.types.js';
+import { MEMOIZEE_OPTIONS } from '~shared/consts/memoizee-options.js';
+import type { PickerItem } from '~shared/types/content-picker.js';
+import { parsePickerItem } from '../helpers/parse-picker.js';
 
 // TODO: move fetchBundles and fetchBundlesByTitle to a separate bundle service, not collection service.
 
@@ -17,7 +16,7 @@ export const retrieveCollections = memoize(
 			? await CollectionService.fetchCollectionsByTitleOrId(titleOrId, limit)
 			: await CollectionService.fetchCollectionsOrBundles(limit, ContentTypeNumber.collection);
 
-		return parseCollections('COLLECTION', collections || []);
+		return parseCollections(Avo.Core.ContentPickerType.COLLECTION, collections || []);
 	},
 	MEMOIZEE_OPTIONS
 );
@@ -31,7 +30,7 @@ export const retrieveBundles = async (
 		? await CollectionService.fetchBundlesByTitleOrId(titleOrId, limit)
 		: await CollectionService.fetchCollectionsOrBundles(limit, ContentTypeNumber.bundle);
 
-	return parseCollections('BUNDLE', bundles || []);
+	return parseCollections(Avo.Core.ContentPickerType.BUNDLE, bundles || []);
 };
 
 // parse raw data to react-select options

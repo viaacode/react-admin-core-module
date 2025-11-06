@@ -1,7 +1,7 @@
 import { isArray, isFunction, isPlainObject } from 'lodash-es';
 import { mockObject1, mockObject2 } from '~shared/helpers/map-deep/map-deep.mocks';
 import { sanitizeHtml } from '~shared/helpers/sanitize';
-import { SanitizePreset } from '~shared/helpers/sanitize/presets';
+import { SanitizePreset } from '~shared/helpers/sanitize/presets/index.js';
 import { RichEditorStateKey } from '../../../content-page/const/rich-text-editor.consts';
 import { mapDeep } from './map-deep';
 

@@ -1,1 +1,1 @@
-export * from './string-to-tag-info';
+export * from './string-to-tag-info.js';

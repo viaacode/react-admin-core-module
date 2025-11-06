@@ -2,13 +2,13 @@ import { ProgressBar } from '@meemoo/react-components';
 import { Button, ButtonToolbar, Modal, ModalBody } from '@viaa/avo2-components';
 import React, { type FunctionComponent, useCallback, useEffect, useState } from 'react';
 import { retry as retryPromise } from 'ts-retry-promise';
-import { tText } from '~shared/helpers/translation-functions';
+import { tText } from '~shared/helpers/translation-functions.js';
 import './ExportAllToCsvModal.scss';
 import { delay, mapLimit } from 'blend-promise-utils';
 import FileSaver from 'file-saver';
 import { noop, times } from 'lodash-es';
-import { ToastType } from '~core/config';
-import { showToast } from '~shared/helpers/show-toast';
+import { ToastType } from '~core/config/config.types.js';
+import { showToast } from '~shared/helpers/show-toast.js';
 
 const ITEMS_PER_REQUEST = 100;
 const PARALLEL_REQUESTS = 6;

@@ -3,13 +3,13 @@ import type {
 	ContentBlockField,
 	DefaultContentBlockState,
 	KlaarBlockComponentState,
-} from '~modules/content-page/types/content-block.types';
+} from '~modules/content-page/types/content-block.types.js';
 import {
 	ContentBlockEditor,
 	ContentBlockType,
-} from '~modules/content-page/types/content-block.types';
-import { tText } from '~shared/helpers/translation-functions';
-import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, TEXT_FIELD } from '../defaults';
+} from '~modules/content-page/types/content-block.types.js';
+import { tText } from '~shared/helpers/translation-functions.js';
+import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, TEXT_FIELD } from '../defaults.js';
 
 export const INITIAL_UITGEKLAARD_COMPONENTS_STATE = (): KlaarBlockComponentState => ({
 	titles: [''],

@@ -1,18 +1,18 @@
-import { GET_CARD_WITHOUT_DESCRIPTION_STYLE_OPTIONS } from '~modules/content-page/const/get-card-without-description-style-options';
+import { GET_CARD_WITHOUT_DESCRIPTION_STYLE_OPTIONS } from '~modules/content-page/const/get-card-without-description-style-options.js';
 import {
 	GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF,
 	GET_BACKGROUND_COLOR_OPTIONS_AVO,
-} from '~modules/content-page/const/get-color-options';
+} from '~modules/content-page/const/get-color-options.js';
 
-import type { FileUploadProps } from '~modules/shared/components/FileUpload/FileUpload';
-import { isAvo } from '~modules/shared/helpers/is-avo';
-import { tText } from '~shared/helpers/translation-functions';
+import type { FileUploadProps } from '~modules/shared/components/FileUpload/FileUpload.js';
+import { isAvo } from '~modules/shared/helpers/is-avo.js';
+import { tText } from '~shared/helpers/translation-functions.js';
 import type {
 	CardWithoutDescriptionBlockComponentState,
 	ContentBlockConfig,
 	DefaultContentBlockState,
-} from '../../../types/content-block.types';
-import { Color, ContentBlockEditor, ContentBlockType } from '../../../types/content-block.types';
+} from '../../../types/content-block.types.js';
+import { Color, ContentBlockEditor, ContentBlockType } from '../../../types/content-block.types.js';
 
 import {
 	BACKGROUND_COLOR_FIELD,
@@ -20,7 +20,7 @@ import {
 	BLOCK_STATE_DEFAULTS,
 	FOREGROUND_COLOR_FIELD,
 	TEXT_FIELD,
-} from '../defaults';
+} from '../defaults.js';
 
 export const INITIAL_CARDS_WITHOUT_DESCRIPTION_COMPONENTS_STATE =
 	(): CardWithoutDescriptionBlockComponentState[] => [

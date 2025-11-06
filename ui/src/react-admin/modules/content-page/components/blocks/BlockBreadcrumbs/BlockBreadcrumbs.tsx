@@ -3,9 +3,9 @@ import type { FC } from 'react';
 import type {
 	BlockBreadcrumbsProps,
 	BreadCrumb,
-} from '~content-blocks/BlockBreadcrumbs/BlockBreadcrumbs.types';
-import { Icon } from '~shared/components/Icon';
-import { Link } from '~shared/components/Link';
+} from '~content-blocks/BlockBreadcrumbs/BlockBreadcrumbs.types.js';
+import { Icon } from '~shared/components/Icon/Icon.js';
+import { Link } from '~shared/components/Link/Link.js';
 
 export const BlockBreadcrumbs: FC<BlockBreadcrumbsProps> = ({ foregroundColor, elements }) => {
 	return (

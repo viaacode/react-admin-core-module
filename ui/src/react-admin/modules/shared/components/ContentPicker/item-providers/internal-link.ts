@@ -1,10 +1,9 @@
+import { Avo } from '@viaa/avo2-types';
 import { compact, sortBy } from 'lodash-es';
-import { AdminConfigManager } from '~core/config';
-import type { Locale } from '~modules/translations/translations.core.types';
-
-import type { PickerItem } from '~shared/types/content-picker';
-
-import { parsePickerItem } from '../helpers/parse-picker';
+import { AdminConfigManager } from '~core/config/config.class.js';
+import type { Locale } from '~modules/translations/translations.core.types.js';
+import type { PickerItem } from '~shared/types/content-picker.js';
+import { parsePickerItem } from '../helpers/parse-picker.js';
 
 // Return InternalLinkItems items from adminCoreConfig.staticPages
 export const retrieveInternalLinks = async (
@@ -22,7 +21,7 @@ export const retrieveInternalLinks = async (
 		if (!keyword || label.toLowerCase().includes(keyword.toLowerCase())) {
 			return {
 				label,
-				...parsePickerItem('INTERNAL_LINK', staticRoute[1]),
+				...parsePickerItem(Avo.Core.ContentPickerType.INTERNAL_LINK, staticRoute[1]),
 			};
 		}
 		return null;

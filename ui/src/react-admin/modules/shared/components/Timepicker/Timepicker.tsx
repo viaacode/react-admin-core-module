@@ -1,10 +1,9 @@
 import clsx from 'clsx';
 import type { FC } from 'react';
 import React from 'react';
-import { DateInput } from '~shared/components/DateInput/DateInput';
-
-import type { TimepickerProps } from './Timepicker.types';
-import { getDatePickerDefaultProps } from '~modules/content-page/components/DatePicker/DatePicker.consts';
+import { getDatePickerDefaultProps } from '~modules/content-page/components/DatePicker/DatePicker.consts.js';
+import { DateInput } from '~shared/components/DateInput/DateInput.js';
+import type { TimepickerProps } from './Timepicker.types.js';
 
 export const Timepicker: FC<TimepickerProps> = (props) => {
 	const { className } = props;

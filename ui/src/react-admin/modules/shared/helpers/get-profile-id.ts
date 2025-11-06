@@ -1,6 +1,6 @@
 import type { Avo } from '@viaa/avo2-types';
 
-import { CustomError } from './custom-error';
+import { CustomError } from './custom-error.js';
 
 export function getProfileId(user: Avo.User.CommonUser | undefined): string {
 	if (!user) {

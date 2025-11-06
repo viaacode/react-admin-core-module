@@ -1,3 +1,3 @@
-export * from './content-edit.reducer';
-export * from './field-attributes';
-export * from './get-published-state';
+export * from './content-edit.reducer.js';
+export * from './field-attributes.js';
+export * from './get-published-state.js';

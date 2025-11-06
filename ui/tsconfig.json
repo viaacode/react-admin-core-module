@@ -3,8 +3,8 @@
     "target": "ESNext",
     "lib": ["dom", "dom.iterable", "esnext"],
     "types": ["node", "vite/client"],
-    "module": "esnext",
-    "moduleResolution": "bundler",
+    "module": "NodeNext",
+    "moduleResolution": "nodenext",
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -19,6 +19,7 @@
     "strictFunctionTypes": true,
     "strictPropertyInitialization": true,
     "noEmit": true,
+    "outDir": "dist",
     "declaration": true,
     "jsx": "react-jsx",
     "paths": {
@@ -40,7 +41,9 @@
     }
   },
   "include": [
-    "src"
+    "src/admin.ts",
+    "src/client.ts",
+    "src/react-admin/modules/shared/types/global.d.ts"
   ],
   "exclude": [
     "node_modules"

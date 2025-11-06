@@ -1,8 +1,10 @@
-import { get } from 'lodash-es';
-
-import type { PickerItem, PickerItemControls, PickerTypeOption } from '../../types/content-picker';
-
 import type { Avo } from '@viaa/avo2-types';
+import { get } from 'lodash-es';
+import type {
+	PickerItem,
+	PickerItemControls,
+	PickerTypeOption,
+} from '../../types/content-picker.js';
 
 export function filterTypes(
 	types: PickerTypeOption[],

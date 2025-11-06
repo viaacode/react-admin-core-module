@@ -1,3 +1,3 @@
-export * from './BlockButtons';
-export * from './BlockButtons.editorconfig';
-export * from './BlockButtons.wrapper';
+export * from './BlockButtons.editorconfig.js';
+export * from './BlockButtons.js';
+export * from './BlockButtons.wrapper.js';

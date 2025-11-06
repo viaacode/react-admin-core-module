@@ -2,19 +2,19 @@ import type { ButtonAction, RenderLinkFunction } from '@viaa/avo2-components';
 import type { Avo } from '@viaa/avo2-types';
 import type { FunctionComponent } from 'react';
 import React, { useCallback, useEffect, useState } from 'react';
-import type { ImageInfo } from '~content-blocks/BlockSpotlight/BlockSpotlight';
-import { BlockSpotlight } from '~content-blocks/BlockSpotlight/BlockSpotlight';
-import { AdminConfigManager } from '~core/config';
-import { convertDbContentPageToContentPageInfo } from '~modules/content-page/services/content-page.converters';
-import type { ContentPageInfo } from '~modules/content-page/types/content-pages.types';
-import { Locale } from '~modules/translations/translations.core.types';
+import type { ImageInfo } from '~content-blocks/BlockSpotlight/BlockSpotlight.js';
+import { BlockSpotlight } from '~content-blocks/BlockSpotlight/BlockSpotlight.js';
+import { AdminConfigManager } from '~core/config/config.class.js';
+import { convertDbContentPageToContentPageInfo } from '~modules/content-page/services/content-page.converters.js';
+import type { ContentPageInfo } from '~modules/content-page/types/content-pages.types.js';
+import { Locale } from '~modules/translations/translations.core.types.js';
 
-import type { LoadingInfo } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
-import { LoadingErrorLoadedComponent } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
-import { CustomError } from '~shared/helpers/custom-error';
-import { tHtml, tText } from '~shared/helpers/translation-functions';
+import type { LoadingInfo } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent.js';
+import { LoadingErrorLoadedComponent } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent.js';
+import { CustomError } from '~shared/helpers/custom-error.js';
+import { tHtml, tText } from '~shared/helpers/translation-functions.js';
 
-import { ContentPageService } from '../../../services/content-page.service';
+import { ContentPageService } from '../../../services/content-page.service.js';
 
 interface ProjectSpotlightProps {
 	project: ButtonAction;

@@ -1,15 +1,15 @@
+import { AdminConfigManager } from '~core/config/config.class.js';
 import type {
 	Component,
 	Key,
 	Locale,
 	Location,
 	TranslationEntry,
-} from '~modules/translations/translations.core.types';
-import { CustomError } from '~shared/helpers/custom-error';
-import { fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
-import { AdminConfigManager } from '~core/config';
-import { getAdminCoreApiUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config';
-import type { LanguageInfo } from '~modules/translations/translations.types';
+} from '~modules/translations/translations.core.types.js';
+import type { LanguageInfo } from '~modules/translations/translations.types.js';
+import { CustomError } from '~shared/helpers/custom-error.js';
+import { fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout.js';
+import { getAdminCoreApiUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config.js';
 
 export class TranslationsService {
 	private static getBaseUrl(): string {

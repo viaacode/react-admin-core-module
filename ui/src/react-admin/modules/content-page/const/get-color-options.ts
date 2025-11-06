@@ -1,7 +1,7 @@
 import type { SelectOption } from '@viaa/avo2-components';
-import { tText } from '~shared/helpers/translation-functions';
-import { Color, CustomBackground, GradientColor } from '../types/content-block.types';
-import { AVO } from '~shared/types';
+import { tText } from '~shared/helpers/translation-functions.js';
+import { Color, CustomBackground, GradientColor } from '../types/content-block.types.js';
+import { AVO } from '~shared/types/index.js';
 
 const transparentOption = () => ({
 	label: tText('admin/content-block/content-block___geen'),

@@ -1,11 +1,12 @@
+import type { ButtonAction } from '@viaa/avo2-components';
+import { Avo } from '@viaa/avo2-types';
 import clsx from 'clsx';
 import type { FunctionComponent, ReactElement } from 'react';
-import type { HeadingTypeOption } from '~modules/content-page/types/content-block.types';
-import type { DefaultComponentProps } from '~modules/shared/types/components';
-import { BlockHeading } from '../BlockHeading';
-import type { ButtonAction } from '@viaa/avo2-components';
-import { SmartLink } from '~modules/shared/components/SmartLink/SmartLink';
-import { useGetMaintainerGrid } from '~content-blocks/BlockMaintainersGrid/hooks/useGetMaintainerGrid';
+import { useGetMaintainerGrid } from '~content-blocks/BlockMaintainersGrid/hooks/useGetMaintainerGrid.js';
+import type { HeadingTypeOption } from '~modules/content-page/types/content-block.types.js';
+import { SmartLink } from '~modules/shared/components/SmartLink/SmartLink.js';
+import type { DefaultComponentProps } from '~modules/shared/types/components.js';
+import { BlockHeading } from '../BlockHeading/BlockHeading.js';
 
 export interface BlockMaintainerGridProps extends DefaultComponentProps {
 	title: string;
@@ -48,7 +49,7 @@ export const BlockMaintainersGrid: FunctionComponent<BlockMaintainerGridProps> =
 						<li key={`${maintainer.homepageUrl}-${maintainer.logoUrl}-${index}`}>
 							<SmartLink
 								action={{
-									type: 'EXTERNAL_LINK',
+									type: Avo.Core.ContentPickerType.EXTERNAL_LINK,
 									value: maintainer.homepageUrl,
 								}}
 							>

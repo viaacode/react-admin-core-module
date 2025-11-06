@@ -9,13 +9,13 @@ import type {
 	HeadingSizeOption,
 	HeadingTypeOption,
 	SimpleAlignOption,
-} from '~modules/content-page/types/content-block.types';
-import { Color } from '~modules/content-page/types/content-block.types';
-import type { ContentPageWidth } from '~modules/content-page/types/content-pages.types';
-import { generateSmartLink } from '~modules/shared/components/SmartLink/SmartLink';
-import type { DefaultComponentProps } from '~modules/shared/types/components';
-import { Icon } from '~shared/components/Icon';
-import { BlockHeading } from '../BlockHeading';
+} from '~modules/content-page/types/content-block.types.js';
+import { Color } from '~modules/content-page/types/content-block.types.js';
+import type { ContentPageWidth } from '~modules/content-page/types/content-pages.types.js';
+import { generateSmartLink } from '~modules/shared/components/SmartLink/SmartLink.js';
+import type { DefaultComponentProps } from '~modules/shared/types/components.js';
+import { Icon } from '~shared/components/Icon/Icon.js';
+import { BlockHeading } from '../BlockHeading/BlockHeading.js';
 
 import './BlockAvoImageTextBackground.scss';
 

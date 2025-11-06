@@ -3,16 +3,15 @@ import { Button, Modal, ModalBody } from '@viaa/avo2-components';
 import type { Avo } from '@viaa/avo2-types';
 import clsx from 'clsx';
 import React, { type FunctionComponent, useCallback, useEffect, useState } from 'react';
-
-import { AdminConfigManager } from '~core/config';
-import { ToastType } from '~core/config/config.types';
-import { ItemsService } from '~modules/item/items.service';
-import { showToast } from '~modules/shared/helpers/show-toast';
-import { FlowPlayerWrapper } from '~shared/components/FlowPlayerWrapper/FlowPlayerWrapper';
-import type { LoadingInfo } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
-import { LoadingErrorLoadedComponent } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
-import { CustomError } from '~shared/helpers/custom-error';
-import { tHtml, tText } from '~shared/helpers/translation-functions';
+import { ToastType } from '~core/config/config.types.js';
+import { AdminConfigManager } from '~core/config/index.js';
+import { ItemsService } from '~modules/item/items.service.js';
+import { showToast } from '~modules/shared/helpers/show-toast.js';
+import { FlowPlayerWrapper } from '~shared/components/FlowPlayerWrapper/FlowPlayerWrapper.js';
+import type { LoadingInfo } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent.js';
+import { LoadingErrorLoadedComponent } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent.js';
+import { CustomError } from '~shared/helpers/custom-error.js';
+import { tHtml, tText } from '~shared/helpers/translation-functions.js';
 
 interface MediaPlayerWrapperProps {
 	item?: ButtonAction;

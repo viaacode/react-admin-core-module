@@ -21,10 +21,11 @@ const CONTENT_TYPE_TRANSLATIONS: Record<Avo.ContentType.Dutch, Avo.ContentType.E
 	audio: 'audio',
 	video: 'video',
 	collectie: 'collection',
-	map: 'bundle',
+	opdracht: 'assignment',
 	bundel: 'bundle',
 	zoek: 'search',
 	zoekopdracht: 'searchquery',
+	contentPagina: 'contentPage',
 };
 
 export function toEnglishContentType(label: Avo.ContentType.Dutch): Avo.ContentType.English {

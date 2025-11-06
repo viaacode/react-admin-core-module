@@ -1,11 +1,11 @@
 import { has, isFunction } from 'lodash-es';
-import { validateContentBlockField } from '~modules/shared/helpers/validation';
+import { validateContentBlockField } from '~modules/shared/helpers/validation.js';
 import type {
 	ContentBlockComponentState,
 	ContentBlockConfig,
 	ContentBlockErrors,
 	ContentBlockField,
-} from '../types/content-block.types';
+} from '../types/content-block.types.js';
 
 export function validateContentBlockConfig(
 	errors: ContentBlockErrors,

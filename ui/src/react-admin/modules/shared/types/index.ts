@@ -1,5 +1,5 @@
 import type { CSSProperties } from 'react';
-import { App } from '~modules/translations/translations.core.types';
+import { App } from '../../translations/translations.core.types.js';
 
 // biome-ignore lint/suspicious/noExplicitAny: todo
 export type ReactSelectOption<T = any> = {

@@ -1,11 +1,11 @@
-import { BLOCK_STATE_DEFAULTS } from '~content-blocks/defaults';
+import { BLOCK_STATE_DEFAULTS } from '~content-blocks/defaults.js';
 import {
 	type ContentBlockConfig,
 	ContentBlockEditor,
 	ContentBlockType,
 	type DefaultContentBlockState,
-} from '~modules/content-page/types/content-block.types';
-import { tText } from '~shared/helpers/translation-functions';
+} from '~modules/content-page/types/content-block.types.js';
+import { tText } from '~shared/helpers/translation-functions.js';
 
 export const INITIAL_SCROLL_DOWN_NUDGE_BLOCK_STATE = (): DefaultContentBlockState => ({
 	...BLOCK_STATE_DEFAULTS({

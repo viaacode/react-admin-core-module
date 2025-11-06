@@ -1,5 +1,5 @@
 import { compact, isArray, isNil, set, without } from 'lodash-es';
-import type { LomScheme } from '~shared/consts/lom-scheme.enum';
+import type { LomScheme } from '~shared/consts/lom-scheme.enum.js';
 
 export const NULL_FILTER = 'null';
 

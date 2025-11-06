@@ -5,17 +5,17 @@ import { compact, isString } from 'lodash-es';
 import { parse } from 'query-string';
 import type { FunctionComponent } from 'react';
 import React, { useState } from 'react';
-import { ToastType } from '~core/config/config.types';
-import { showToast } from '~shared/helpers/show-toast';
-import { tHtml, tText } from '~shared/helpers/translation-functions';
-import { AssetsService } from '~shared/services/assets-service/assets.service';
-import { CustomError } from '../../helpers/custom-error';
-import { getUrlInfo, isPhoto, isVideo, PHOTO_TYPES } from '../../helpers/files';
-import ConfirmModal from '../ConfirmModal/ConfirmModal';
-import { Loader } from '../Loader/Loader';
+import { ToastType } from '~core/config/config.types.js';
+import { showToast } from '~shared/helpers/show-toast.js';
+import { tHtml, tText } from '~shared/helpers/translation-functions.js';
+import { AssetsService } from '~shared/services/assets-service/assets.service.js';
+import { CustomError } from '../../helpers/custom-error.js';
+import { getUrlInfo, isPhoto, isVideo, PHOTO_TYPES } from '../../helpers/files.js';
+import ConfirmModal from '../ConfirmModal/ConfirmModal.js';
+import { Loader } from '../Loader/Loader.js';
 
 import './FileUpload.scss';
-import { getFileImageDimensions } from '~shared/helpers/get-file-image-dimensions';
+import { getFileImageDimensions } from '~shared/helpers/get-file-image-dimensions.js';
 
 export interface FileUploadProps {
 	icon?: IconName;

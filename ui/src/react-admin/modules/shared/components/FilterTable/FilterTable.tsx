@@ -29,29 +29,29 @@ import React, {
 	useState,
 } from 'react';
 import { useQueryParams } from 'use-query-params';
-import { isAvo } from '~modules/shared/helpers/is-avo';
-import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner';
+import { isAvo } from '~modules/shared/helpers/is-avo.js';
+import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner.js';
 
-import { tHtml, tText } from '~shared/helpers/translation-functions';
-import type { TableFilterType } from '~shared/types/table-filter-types';
+import { tHtml, tText } from '~shared/helpers/translation-functions.js';
+import type { TableFilterType } from '~shared/types/table-filter-types.js';
 
-import { KeyCode } from '../../consts/keycode';
-import { eduOrgToClientOrg } from '../../helpers/edu-org-string-to-client-org';
+import { KeyCode } from '../../consts/keycode.js';
+import { eduOrgToClientOrg } from '../../helpers/edu-org-string-to-client-org.js';
 import './FilterTable.scss';
-import { ErrorView } from '~shared/components/error';
-import { GET_DEFAULT_PAGINATION_BAR_PROPS } from '~shared/components/PaginationBar/PaginationBar.consts';
-import { toggleSortOrder } from '~shared/helpers/toggle-sort-order';
-import { useGetTableColumnPreference } from '~shared/hooks/useGetTableColumnPreference';
-import { useUpdateTableColumnPreference } from '~shared/hooks/useUpdateTableColumnPreference';
-import BooleanCheckboxDropdown from '../BooleanCheckboxDropdown/BooleanCheckboxDropdown';
-import type { CheckboxOption } from '../CheckboxDropdownModal/CheckboxDropdownModal';
-import { CheckboxDropdownModal } from '../CheckboxDropdownModal/CheckboxDropdownModal';
-import ConfirmModal from '../ConfirmModal/ConfirmModal';
-import DateRangeDropdown from '../DateRangeDropdown/DateRangeDropdown';
-import { MultiEducationalOrganisationSelectModal } from '../MultiEducationalOrganisationSelectModal/MultiEducationalOrganisationSelectModal';
-import { MultiUserSelectDropdown } from '../MultiUserSelectDropdown/MultiUserSelectDropdown';
-import { FILTER_TABLE_QUERY_PARAM_CONFIG } from './FilterTable.const';
-import { cleanupFilterTableState } from './FilterTable.utils';
+import { ErrorView } from '~shared/components/error/ErrorView.js';
+import { GET_DEFAULT_PAGINATION_BAR_PROPS } from '~shared/components/PaginationBar/PaginationBar.consts.js';
+import { toggleSortOrder } from '~shared/helpers/toggle-sort-order.js';
+import { useGetTableColumnPreference } from '~shared/hooks/useGetTableColumnPreference.js';
+import { useUpdateTableColumnPreference } from '~shared/hooks/useUpdateTableColumnPreference.js';
+import BooleanCheckboxDropdown from '../BooleanCheckboxDropdown/BooleanCheckboxDropdown.js';
+import type { CheckboxOption } from '../CheckboxDropdownModal/CheckboxDropdownModal.js';
+import { CheckboxDropdownModal } from '../CheckboxDropdownModal/CheckboxDropdownModal.js';
+import ConfirmModal from '../ConfirmModal/ConfirmModal.js';
+import DateRangeDropdown from '../DateRangeDropdown/DateRangeDropdown.js';
+import { MultiEducationalOrganisationSelectModal } from '../MultiEducationalOrganisationSelectModal/MultiEducationalOrganisationSelectModal.js';
+import { MultiUserSelectDropdown } from '../MultiUserSelectDropdown/MultiUserSelectDropdown.js';
+import { FILTER_TABLE_QUERY_PARAM_CONFIG } from './FilterTable.const.js';
+import { cleanupFilterTableState } from './FilterTable.utils.js';
 
 export interface FilterableTableState {
 	query?: string;

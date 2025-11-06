@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 import React from 'react';
 import { Route } from 'react-router-dom';
-import { AdminConfigManager } from '~core/config';
+import { AdminConfigManager } from '~core/config/config.class.js';
 import { ContentPageDetailPage } from './ContentPageDetailPage';
 import { ContentPageEditPage } from './ContentPageEditPage';
 import { ContentPageOverviewPage } from './ContentPageOverviewPage';

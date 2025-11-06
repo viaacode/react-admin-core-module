@@ -1,16 +1,21 @@
-import type { BlockEventbriteProps } from '~content-blocks/BlockEventbrite/BlockEventbrite';
+import type { BlockEventbriteProps } from '~content-blocks/BlockEventbrite/BlockEventbrite.js';
 
-import { AdminConfigManager } from '~core/config';
-import { GET_ADMIN_ICON_OPTIONS } from '~shared/consts/icons.consts';
-import { tText } from '~shared/helpers/translation-functions';
+import { AdminConfigManager } from '~core/config/config.class.js';
+import { GET_ADMIN_ICON_OPTIONS } from '~shared/consts/icons.consts.js';
+import { tText } from '~shared/helpers/translation-functions.js';
 
 import type {
 	ContentBlockConfig,
 	DefaultContentBlockState,
-} from '../../../types/content-block.types';
-import { ContentBlockEditor, ContentBlockType } from '../../../types/content-block.types';
+} from '../../../types/content-block.types.js';
+import { ContentBlockEditor, ContentBlockType } from '../../../types/content-block.types.js';
 
-import { ALIGN_FIELD, BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, TEXT_FIELD } from '../defaults';
+import {
+	ALIGN_FIELD,
+	BLOCK_FIELD_DEFAULTS,
+	BLOCK_STATE_DEFAULTS,
+	TEXT_FIELD,
+} from '../defaults.js';
 
 export const INITIAL_EVENTBRITE_COMPONENTS_STATE = (): Partial<BlockEventbriteProps> => ({
 	eventId: '',

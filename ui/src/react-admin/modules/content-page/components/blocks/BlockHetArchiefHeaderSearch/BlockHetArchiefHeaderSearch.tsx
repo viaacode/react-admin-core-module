@@ -3,12 +3,12 @@ import clsx from 'clsx';
 import { stringifyUrl } from 'query-string';
 import type { FunctionComponent, KeyboardEvent, ReactElement } from 'react';
 import React, { useEffect, useState } from 'react';
-import { AdminConfigManager } from '~core/config';
-import type { DefaultComponentProps } from '~modules/shared/types/components';
-import { Icon } from '~shared/components/Icon';
-import { KeyCode } from '~shared/consts/keycode';
-import { tText } from '~shared/helpers/translation-functions';
-import { BlockHeading } from '../BlockHeading';
+import { AdminConfigManager } from '~core/config/config.class.js';
+import type { DefaultComponentProps } from '~modules/shared/types/components.js';
+import { Icon } from '~shared/components/Icon/Icon.js';
+import { KeyCode } from '~shared/consts/keycode.js';
+import { tText } from '~shared/helpers/translation-functions.js';
+import { BlockHeading } from '../BlockHeading/BlockHeading.js';
 
 export interface BlockHetArchiefHeaderSearchProps extends DefaultComponentProps {
 	title: string;

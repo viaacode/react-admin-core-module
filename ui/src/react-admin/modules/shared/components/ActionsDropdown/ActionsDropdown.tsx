@@ -1,6 +1,3 @@
-import type { FunctionComponent } from 'react';
-import React, { useState } from 'react';
-
 import type { MenuItemInfo } from '@meemoo/react-components';
 import {
 	Button,
@@ -9,9 +6,10 @@ import {
 	DropdownContent,
 	MenuContent,
 } from '@meemoo/react-components';
-
-import { Icon } from '../Icon';
-import { tText } from '~shared/helpers/translation-functions';
+import type { FunctionComponent } from 'react';
+import React, { useState } from 'react';
+import { tText } from '~shared/helpers/translation-functions.js';
+import { Icon } from '../Icon/Icon.js';
 
 export interface ActionsDropdownProps {
 	menuItems: MenuItemInfo[] | MenuItemInfo[][];

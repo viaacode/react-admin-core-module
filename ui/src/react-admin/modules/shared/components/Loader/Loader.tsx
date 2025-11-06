@@ -3,8 +3,8 @@ import { Spinner } from '@viaa/avo2-components';
 import type { FC } from 'react';
 import React from 'react';
 
-import { AdminConfigManager } from '~core/config';
-import type { DefaultComponentProps } from '../../types';
+import { AdminConfigManager } from '~core/config/config.class.js';
+import type { DefaultComponentProps } from '../../types/components.js';
 
 export const Loader: FC<DefaultComponentProps & { fullscreen?: boolean }> = (props) => {
 	const componentsConfig = AdminConfigManager.getConfig().components;

@@ -1,11 +1,9 @@
-import type { Avo } from '@viaa/avo2-types';
-
-import type { PickerItem } from '~shared/types/content-picker';
-import { parsePickerItem } from '../helpers/parse-picker';
-
-import { ItemsService } from '~modules/item/items.service';
+import { Avo } from '@viaa/avo2-types';
 import memoize from 'memoizee';
-import { MEMOIZEE_OPTIONS } from '~shared/consts/memoizee-options';
+import { ItemsService } from '~modules/item/items.service.js';
+import { MEMOIZEE_OPTIONS } from '~shared/consts/memoizee-options.js';
+import type { PickerItem } from '~shared/types/content-picker.js';
+import { parsePickerItem } from '../helpers/parse-picker.js';
 
 // Fetch content items from GQL
 export const retrieveItems = memoize(
@@ -24,7 +22,7 @@ const parseItems = (raw: Avo.Item.Item[]): PickerItem[] => {
 	return raw.map((item: Avo.Item.Item): PickerItem => {
 		return {
 			label: item.title,
-			...parsePickerItem('ITEM', item.external_id.toString()),
+			...parsePickerItem(Avo.Core.ContentPickerType.ITEM, item.external_id.toString()),
 		};
 	});
 };

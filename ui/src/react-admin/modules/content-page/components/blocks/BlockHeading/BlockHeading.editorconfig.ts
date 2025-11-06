@@ -1,11 +1,11 @@
-import { GET_FULL_HEADING_TYPE_OPTIONS } from '~modules/content-page/const/get-heading-type-options';
-import { tText } from '~shared/helpers/translation-functions';
+import { GET_FULL_HEADING_TYPE_OPTIONS } from '~modules/content-page/const/get-heading-type-options.js';
+import { tText } from '~shared/helpers/translation-functions.js';
 import type {
 	ContentBlockConfig,
 	DefaultContentBlockState,
 	HeadingBlockComponentState,
-} from '../../../types/content-block.types';
-import { ContentBlockEditor, ContentBlockType } from '../../../types/content-block.types';
+} from '../../../types/content-block.types.js';
+import { ContentBlockEditor, ContentBlockType } from '../../../types/content-block.types.js';
 
 import {
 	ALIGN_FIELD,
@@ -13,7 +13,7 @@ import {
 	BLOCK_STATE_DEFAULTS,
 	FOREGROUND_COLOR_FIELD,
 	TEXT_FIELD,
-} from '../defaults';
+} from '../defaults.js';
 
 export const INITIAL_HEADING_COMPONENTS_STATE = (): HeadingBlockComponentState => ({
 	children: '',

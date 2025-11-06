@@ -2,17 +2,17 @@ import type { CTAProps } from '@viaa/avo2-components';
 import {
 	GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF,
 	GET_BACKGROUND_COLOR_OPTIONS_AVO,
-} from '~modules/content-page/const/get-color-options';
-import { GET_HEADING_TYPE_OPTIONS } from '~modules/content-page/const/get-heading-type-options';
-import { isAvo } from '~shared/helpers/is-avo';
+} from '~modules/content-page/const/get-color-options.js';
+import { GET_HEADING_TYPE_OPTIONS } from '~modules/content-page/const/get-heading-type-options.js';
+import { isAvo } from '~shared/helpers/is-avo.js';
 
-import { GET_ADMIN_ICON_OPTIONS } from '~shared/consts/icons.consts';
-import { tText } from '~shared/helpers/translation-functions';
+import { GET_ADMIN_ICON_OPTIONS } from '~shared/consts/icons.consts.js';
+import { tText } from '~shared/helpers/translation-functions.js';
 import type {
 	ContentBlockConfig,
 	DefaultContentBlockState,
-} from '../../../types/content-block.types';
-import { ContentBlockEditor, ContentBlockType } from '../../../types/content-block.types';
+} from '../../../types/content-block.types.js';
+import { ContentBlockEditor, ContentBlockType } from '../../../types/content-block.types.js';
 
 import {
 	BACKGROUND_COLOR_FIELD,
@@ -20,9 +20,9 @@ import {
 	BLOCK_STATE_DEFAULTS,
 	FOREGROUND_COLOR_FIELD,
 	TEXT_FIELD,
-} from '../defaults';
+} from '../defaults.js';
 
-import { AdminConfigManager } from '~core/config';
+import { AdminConfigManager } from '~core/config/config.class.js';
 
 const EMPTY_CTA: Partial<CTAProps> = {
 	headingType: 'h2',

@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 import { useMatch } from 'react-router';
-import { AdminConfigManager } from '~core/config';
+import { AdminConfigManager } from '~core/config/config.class.js';
 import { ContentPageLabelDetail } from '~modules/content-page-labels/views/ContentPageLabelDetail';
 
 export const ContentPageLabelsDetailPage: FC = () => {

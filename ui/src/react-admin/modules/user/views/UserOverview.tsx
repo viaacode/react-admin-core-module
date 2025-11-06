@@ -4,44 +4,44 @@ import { compact } from 'lodash-es';
 import type { FC, ReactText } from 'react';
 import React, { useCallback, useMemo, useState } from 'react';
 
-import { AdminConfigManager } from '~core/config';
-import { getCommonUser } from '~core/config/config.selectors';
-import { ToastType } from '~core/config/config.types';
+import { AdminConfigManager } from '~core/config/config.class.js';
+import { getCommonUser } from '~core/config/config.selectors.js';
+import { ToastType } from '~core/config/config.types.js';
 import {
 	generateWhereObjectArchief,
 	generateWhereObjectAvo,
-} from '~modules/user/helpers/generate-filter-where-object-users';
+} from '~modules/user/helpers/generate-filter-where-object-users.js';
 import {
 	renderUserOverviewTableCellReact,
 	renderUserOverviewTableCellText,
-} from '~modules/user/helpers/render-user-overview-table-cells';
-import { useGetProfiles } from '~modules/user/hooks/use-get-profiles';
-import { GET_USER_BULK_ACTIONS, GET_USER_OVERVIEW_TABLE_COLS } from '~modules/user/user.consts';
-import { UserService } from '~modules/user/user.service';
-import { useUserGroupOptions } from '~modules/user-group/hooks/useUserGroupOptions';
-import type { AddOrRemove } from '~shared/components/AddOrRemoveLinkedElementsModal/AddOrRemoveLinkedElementsModal';
-import AddOrRemoveLinkedElementsModal from '~shared/components/AddOrRemoveLinkedElementsModal/AddOrRemoveLinkedElementsModal';
-import type { CheckboxOption } from '~shared/components/CheckboxDropdownModal/CheckboxDropdownModal';
-import { ExportAllToCsvModal } from '~shared/components/ExportAllToCsvModal/ExportAllToCsvModal';
-import { ErrorView } from '~shared/components/error';
-import type { FilterableColumn } from '~shared/components/FilterTable/FilterTable';
-import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner';
-import { CustomError } from '~shared/helpers/custom-error';
-import { isHetArchief } from '~shared/helpers/is-hetarchief';
-import { navigate } from '~shared/helpers/link';
-import { setSelectedCheckboxes } from '~shared/helpers/set-selected-checkboxes';
-import { showToast } from '~shared/helpers/show-toast';
-import { tHtml, tText } from '~shared/helpers/translation-functions';
-import { useGetIdps } from '~shared/hooks/use-get-idps';
-import { useBusinessCategories } from '~shared/hooks/useBusinessCategory';
-import { useCompaniesWithUsers } from '~shared/hooks/useCompanies';
-import { useEducationLevels } from '~shared/hooks/useEducationLevels';
-import { useSubjects } from '~shared/hooks/useSubjects';
-import { SettingsService } from '~shared/services/settings-service/settings.service';
-import FilterTable, { getFilters } from '../../shared/components/FilterTable/FilterTable';
-import UserDeleteModal from '../components/UserDeleteModal';
-import type { UserOverviewTableCol, UserTableState } from '../user.types';
-import { UserBulkAction, USERS_PER_PAGE } from '../user.types';
+} from '~modules/user/helpers/render-user-overview-table-cells.js';
+import { useGetProfiles } from '~modules/user/hooks/use-get-profiles.js';
+import { GET_USER_BULK_ACTIONS, GET_USER_OVERVIEW_TABLE_COLS } from '~modules/user/user.consts.js';
+import { UserService } from '~modules/user/user.service.js';
+import { useUserGroupOptions } from '~modules/user-group/hooks/useUserGroupOptions.js';
+import type { AddOrRemove } from '~shared/components/AddOrRemoveLinkedElementsModal/AddOrRemoveLinkedElementsModal.js';
+import AddOrRemoveLinkedElementsModal from '~shared/components/AddOrRemoveLinkedElementsModal/AddOrRemoveLinkedElementsModal.js';
+import type { CheckboxOption } from '~shared/components/CheckboxDropdownModal/CheckboxDropdownModal.js';
+import { ExportAllToCsvModal } from '~shared/components/ExportAllToCsvModal/ExportAllToCsvModal.js';
+import { ErrorView } from '~shared/components/error/ErrorView.js';
+import type { FilterableColumn } from '~shared/components/FilterTable/FilterTable.js';
+import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner.js';
+import { CustomError } from '~shared/helpers/custom-error.js';
+import { isHetArchief } from '~shared/helpers/is-hetarchief.js';
+import { navigate } from '~shared/helpers/link.js';
+import { setSelectedCheckboxes } from '~shared/helpers/set-selected-checkboxes.js';
+import { showToast } from '~shared/helpers/show-toast.js';
+import { tHtml, tText } from '~shared/helpers/translation-functions.js';
+import { useGetIdps } from '~shared/hooks/use-get-idps.js';
+import { useBusinessCategories } from '~shared/hooks/useBusinessCategory.js';
+import { useCompaniesWithUsers } from '~shared/hooks/useCompanies.js';
+import { useEducationLevels } from '~shared/hooks/useEducationLevels.js';
+import { useSubjects } from '~shared/hooks/useSubjects.js';
+import { SettingsService } from '~shared/services/settings-service/settings.service.js';
+import FilterTable, { getFilters } from '../../shared/components/FilterTable/FilterTable.js';
+import UserDeleteModal from '../components/UserDeleteModal.js';
+import type { UserOverviewTableCol, UserTableState } from '../user.types.js';
+import { USERS_PER_PAGE, UserBulkAction } from '../user.types.js';
 import './UserOverview.scss';
 
 export interface UserOverviewProps {

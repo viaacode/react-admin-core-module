@@ -7,18 +7,18 @@ import { compact } from 'lodash-es';
 import type {
 	CheckboxDropdownModalProps,
 	CheckboxOption,
-} from '~shared/components/CheckboxDropdownModal/CheckboxDropdownModal';
-import type { FilterableColumn } from '~shared/components/FilterTable/FilterTable';
-import { NULL_FILTER } from '~shared/helpers/filters';
-import { normalizeTimestamp } from '~shared/helpers/formatters/date';
-import { isAvo } from '~shared/helpers/is-avo';
-import { tText } from '~shared/helpers/translation-functions';
-import { PermissionService } from '~shared/services/permission-service';
-import { TableColumnDataType } from '~shared/types/table-column-data-type';
-import { TableFilterType } from '~shared/types/table-filter-types';
-import type { UserOverviewTableCol } from './user.types';
-import { UserBulkAction } from './user.types';
-import { AVO, HET_ARCHIEF } from '~shared/types';
+} from '~shared/components/CheckboxDropdownModal/CheckboxDropdownModal.js';
+import type { FilterableColumn } from '~shared/components/FilterTable/FilterTable.js';
+import { NULL_FILTER } from '~shared/helpers/filters.js';
+import { normalizeTimestamp } from '~shared/helpers/formatters/date.js';
+import { isAvo } from '~shared/helpers/is-avo.js';
+import { tText } from '~shared/helpers/translation-functions.js';
+import { PermissionService } from '~shared/services/permission-service.js';
+import { AVO, HET_ARCHIEF } from '~shared/types/index.js';
+import { TableColumnDataType } from '~shared/types/table-column-data-type.js';
+import { TableFilterType } from '~shared/types/table-filter-types.js';
+import type { UserOverviewTableCol } from './user.types.js';
+import { UserBulkAction } from './user.types.js';
 
 type UserBulkActionOption = SelectOption<UserBulkAction> & {
 	confirm?: boolean;

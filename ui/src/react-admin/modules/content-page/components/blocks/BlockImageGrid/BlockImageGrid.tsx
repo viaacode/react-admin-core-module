@@ -5,8 +5,8 @@ import React from 'react';
 import type {
 	BlockImageGridProps,
 	GridItem,
-} from '~content-blocks/BlockImageGrid/BlockImageGrid.types';
-import { defaultRenderLinkFunction } from '~shared/helpers/link';
+} from '~content-blocks/BlockImageGrid/BlockImageGrid.types.js';
+import { defaultRenderLinkFunction } from '~shared/helpers/link.js';
 
 import './BlockImageGrid.scss';
 

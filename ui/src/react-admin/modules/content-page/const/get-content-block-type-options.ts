@@ -1,8 +1,8 @@
 import type { SelectOption } from '@viaa/avo2-components';
-import { AdminConfigManager } from '~core/config';
-import { tText } from '~shared/helpers/translation-functions';
-import { AVO, HET_ARCHIEF } from '~shared/types';
-import { ContentBlockType } from '../types/content-block.types';
+import { AdminConfigManager } from '../../../core/config/config.class.js';
+import { tText } from '../../../modules/shared/helpers/translation-functions.js';
+import { AVO, HET_ARCHIEF } from '../../../modules/shared/types/index.js';
+import { ContentBlockType } from '../types/content-block.types.js';
 
 export const GET_CONTENT_BLOCK_TYPE_OPTIONS: () => SelectOption<string>[] = () => {
 	const allContentBlocks: { label: string; value: ContentBlockType }[] = [

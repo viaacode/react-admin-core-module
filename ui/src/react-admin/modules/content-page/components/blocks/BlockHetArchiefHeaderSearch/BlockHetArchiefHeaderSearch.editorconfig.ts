@@ -1,18 +1,17 @@
-import { tText } from '~shared/helpers/translation-functions';
+import { tText } from '~shared/helpers/translation-functions.js';
+import { HET_ARCHIEF } from '~shared/types/index.js';
 import type {
 	ContentBlockConfig,
 	ContentBlockFieldGroup,
 	DefaultContentBlockState,
 	HetArchiefHeaderSearchBlockComponentState,
-} from '../../../types/content-block.types';
+} from '../../../types/content-block.types.js';
 import {
 	ContentBlockEditor,
 	ContentBlockType,
 	DEFAULT_BUTTON_PROPS,
-} from '../../../types/content-block.types';
-
-import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, TEXT_FIELD } from '../defaults';
-import { HET_ARCHIEF } from '~shared/types';
+} from '../../../types/content-block.types.js';
+import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, TEXT_FIELD } from '../defaults.js';
 
 export const INITIAL_HET_ARCHIEF_HEADER_SEARCH_COMPONENTS_STATE =
 	(): HetArchiefHeaderSearchBlockComponentState => ({

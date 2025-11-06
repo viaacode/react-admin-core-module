@@ -3,13 +3,16 @@ import clsx from 'clsx';
 import { kebabCase } from 'lodash-es';
 import type { FunctionComponent } from 'react';
 import React from 'react';
-import { BlockImageGrid } from '~content-blocks/BlockImageGrid/BlockImageGrid';
-import type { CssSizeSetting, GridItem } from '~content-blocks/BlockImageGrid/BlockImageGrid.types';
+import { BlockImageGrid } from '~content-blocks/BlockImageGrid/BlockImageGrid.js';
+import type {
+	CssSizeSetting,
+	GridItem,
+} from '~content-blocks/BlockImageGrid/BlockImageGrid.types.js';
 
 import type {
 	BlockGridFormatOption,
 	FillOption,
-} from '~modules/content-page/types/content-block.types';
+} from '~modules/content-page/types/content-block.types.js';
 
 export interface BlockImageGridWrapperProps {
 	elements: GridItem[];

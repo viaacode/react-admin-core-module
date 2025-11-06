@@ -1,5 +1,5 @@
 import type { Avo } from '@viaa/avo2-types';
-import { AdminConfigManager } from '~core/config';
+import { AdminConfigManager } from '~core/config/config.class.js';
 
 export const addDefaultAudioStillToItem = (item: Avo.Item.Item): Avo.Item.Item => {
 	if (item?.type?.label === 'audio') {

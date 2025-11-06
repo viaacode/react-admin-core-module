@@ -1,4 +1,4 @@
-import { CustomError } from './custom-error';
+import { CustomError } from './custom-error.js';
 
 const AVO_LAST_RELOAD_BECAUSE_UNAUTH = 'AVO_LAST_RELOAD_BECAUSE_UNAUTH';
 

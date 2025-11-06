@@ -1,12 +1,12 @@
 import type { CheckboxProps, MultiRangeProps } from '@viaa/avo2-components';
 
-import type { BlockPageOverviewProps } from '~modules/content-page/components/blocks';
-import { ContentItemStyle } from '~modules/content-page/components/blocks';
-import { GET_ALIGN_OPTIONS } from '~modules/content-page/const/get-align-options';
-import { GET_PAGE_OVERVIEW_ITEM_STYLE_OPTIONS } from '~modules/content-page/const/get-page-overview-item-style-options';
-import { GET_PAGE_OVERVIEW_ORDER_OPTIONS } from '~modules/content-page/const/get-page-overview-order-options';
-import { GET_PAGE_OVERVIEW_TAB_STYLE_OPTIONS } from '~modules/content-page/const/get-page-overview-tab-style-options';
-import { tText } from '~shared/helpers/translation-functions';
+import type { BlockPageOverviewProps } from '~modules/content-page/components/blocks/BlockPageOverview/BlockPageOverview.js';
+import { ContentItemStyle } from '~modules/content-page/components/blocks/BlockPageOverview/BlockPageOverview.types.js';
+import { GET_ALIGN_OPTIONS } from '~modules/content-page/const/get-align-options.js';
+import { GET_PAGE_OVERVIEW_ITEM_STYLE_OPTIONS } from '~modules/content-page/const/get-page-overview-item-style-options.js';
+import { GET_PAGE_OVERVIEW_ORDER_OPTIONS } from '~modules/content-page/const/get-page-overview-order-options.js';
+import { GET_PAGE_OVERVIEW_TAB_STYLE_OPTIONS } from '~modules/content-page/const/get-page-overview-tab-style-options.js';
+import { tText } from '~shared/helpers/translation-functions.js';
 import {
 	Color,
 	type ContentBlockConfig,
@@ -14,13 +14,13 @@ import {
 	ContentBlockType,
 	type DefaultContentBlockState,
 	type PageOverviewBlockComponentStateFields,
-} from '../../../types/content-block.types';
+} from '../../../types/content-block.types.js';
 import {
 	BACKGROUND_COLOR_FIELD,
 	BLOCK_FIELD_DEFAULTS,
 	BLOCK_STATE_DEFAULTS,
 	CONTENT_TYPE_AND_LABELS_INPUT,
-} from '../defaults';
+} from '../defaults.js';
 
 export const INITIAL_PAGE_OVERVIEW_COMPONENTS_STATE =
 	(): PageOverviewBlockComponentStateFields => ({

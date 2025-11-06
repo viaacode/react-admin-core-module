@@ -9,13 +9,13 @@ import React, {
 	useEffect,
 	useMemo,
 } from 'react';
-import { useUserGroupOptions } from '~modules/user-group/hooks/useUserGroupOptions';
-import type { UserGroup } from '~modules/user-group/types/user-group.types';
+import { useUserGroupOptions } from '~modules/user-group/hooks/useUserGroupOptions.js';
+import type { UserGroup } from '~modules/user-group/types/user-group.types.js';
 
 import './UserGroupSelect.scss';
 import { Checkbox } from '@meemoo/react-components';
-import { getAllSubgroupIds, isSubUserGroup } from '~modules/user-group/const/user-group.const';
-import { SpecialPermissionGroups } from '~shared/types/authentication.types';
+import { getAllSubgroupIds, isSubUserGroup } from '~modules/user-group/const/user-group.const.js';
+import { SpecialPermissionGroups } from '~shared/types/authentication.types.js';
 
 export interface UserGroupSelectProps {
 	label: string | undefined;

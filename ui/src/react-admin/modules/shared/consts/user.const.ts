@@ -1,5 +1,5 @@
 import type { Avo } from '@viaa/avo2-types';
-import { tText } from '~shared/helpers/translation-functions';
+import { tText } from '~shared/helpers/translation-functions.js';
 
 type UserDeleteRadioOption = { label: string; value: Avo.User.UserDeleteOption };
 export const GET_DELETE_RADIO_OPTIONS = (): UserDeleteRadioOption[] => {

@@ -1,4 +1,4 @@
-import type { FilterableTableState } from '~shared/components/FilterTable/FilterTable';
+import type { FilterableTableState } from '~shared/components/FilterTable/FilterTable.js';
 
 export enum Idp {
 	HETARCHIEF = 'HETARCHIEF',

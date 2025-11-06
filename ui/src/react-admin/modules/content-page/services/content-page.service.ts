@@ -2,27 +2,27 @@ import type { IPagination } from '@studiohyperdrive/pagination';
 import type { Avo } from '@viaa/avo2-types';
 import { kebabCase } from 'lodash-es';
 import { stringifyUrl } from 'query-string';
-import type { ContentPageOverviewParams } from '~content-blocks/BlockPageOverview/BlockPageOverview.types';
+import type { ContentPageOverviewParams } from '~content-blocks/BlockPageOverview/BlockPageOverview.types.js';
 
-import { AdminConfigManager } from '~core/config';
-import { PAGES_PER_PAGE } from '~modules/content-page/const/content-page.consts';
-import { CONTENT_PAGE_SERVICE_BASE_URL } from '~modules/content-page/services/content-page.const';
+import { AdminConfigManager } from '~core/config/config.class.js';
+import { PAGES_PER_PAGE } from '~modules/content-page/const/content-page.consts.js';
+import { CONTENT_PAGE_SERVICE_BASE_URL } from '~modules/content-page/services/content-page.const.js';
 import {
 	convertContentPageInfoToDbContentPage,
 	convertDbContentPagesToContentPageInfos,
 	convertDbContentPageToContentPageInfo,
-} from '~modules/content-page/services/content-page.converters';
-import type { Locale } from '~modules/translations/translations.core.types';
-import { CustomError } from '~shared/helpers/custom-error';
+} from '~modules/content-page/services/content-page.converters.js';
+import type { Locale } from '~modules/translations/translations.core.types.js';
+import { CustomError } from '~shared/helpers/custom-error.js';
 
-import { fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
-import { getAdminCoreApiUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config';
+import { fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout.js';
+import { getAdminCoreApiUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config.js';
 import type {
 	ContentOverviewTableCols,
 	ContentPageInfo,
 	ContentPageLabel,
 	DbContentPage,
-} from '../types/content-pages.types';
+} from '../types/content-pages.types.js';
 
 export class ContentPageService {
 	private static getBaseUrl(): string {

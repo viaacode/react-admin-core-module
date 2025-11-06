@@ -1,10 +1,10 @@
 import type { RichTextEditorControl } from '@meemoo/react-components';
 import type { Schema } from 'yup';
 import { array, mixed, object, string } from 'yup';
-import { AdminConfigManager } from '~core/config';
-import type { MaintenanceAlert } from '~modules/maintenance-alerts/maintenance-alerts.types';
-import { Locale } from '~modules/translations/translations.core.types';
-import { tText } from '~shared/helpers/translation-functions';
+import { AdminConfigManager } from '~core/config/config.class.js';
+import type { MaintenanceAlert } from '~modules/maintenance-alerts/maintenance-alerts.types.js';
+import { Locale } from '~modules/translations/translations.core.types.js';
+import { tText } from '~shared/helpers/translation-functions.js';
 
 // Yup
 

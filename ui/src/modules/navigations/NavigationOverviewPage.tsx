@@ -1,8 +1,8 @@
 import type { FunctionComponent } from 'react';
 import React from 'react';
 import { NavigationBarOverview } from '~modules/navigation/views';
-import { tText } from '~shared/helpers/translation-functions';
-import { AdminLayout } from '~shared/layouts';
+import { tText } from '~shared/helpers/translation-functions.js';
+import { AdminLayout } from '~shared/layouts/AdminLayout/AdminLayout.js';
 
 export const NavigationOverviewPage: FunctionComponent = () => {
 	const renderPageContent = () => {

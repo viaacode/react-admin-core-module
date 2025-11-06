@@ -10,10 +10,10 @@ import {
 } from '@viaa/avo2-components';
 import clsx from 'clsx';
 import type { FunctionComponent, ReactNode } from 'react';
+import Html from '~shared/components/Html/Html.js';
+import { SanitizePreset } from '~shared/helpers/sanitize/presets/index.js';
 
 import './BlockImageTitleTextButton.scss';
-import Html from '~shared/components/Html/Html';
-import { SanitizePreset } from '~shared/helpers/sanitize/presets';
 
 export interface BlockImageTitleTextButtonProps extends DefaultProps {
 	imageSource: string;

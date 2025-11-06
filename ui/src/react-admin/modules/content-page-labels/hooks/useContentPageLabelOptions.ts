@@ -1,14 +1,13 @@
 import { capitalize, orderBy, startCase } from 'lodash-es';
 import { useEffect, useState } from 'react';
-import { ContentPageLabelService } from '~modules/content-page-labels/content-page-label.service';
-import { showToast } from '~shared/helpers/show-toast';
-import { tText } from '~shared/helpers/translation-functions';
+import { ToastType } from '~core/config/config.types.js';
+import { ContentPageLabelService } from '~modules/content-page-labels/content-page-label.service.js';
+import type { CheckboxOption } from '~shared/components/CheckboxDropdownModal/CheckboxDropdownModal.js';
 
-import { CustomError } from '~shared/helpers/custom-error';
-import type { ContentPageLabel } from '../content-page-label.types';
-
-import { ToastType } from '~core/config/config.types';
-import type { CheckboxOption } from '~shared/components/CheckboxDropdownModal/CheckboxDropdownModal';
+import { CustomError } from '~shared/helpers/custom-error.js';
+import { showToast } from '~shared/helpers/show-toast.js';
+import { tText } from '~shared/helpers/translation-functions.js';
+import type { ContentPageLabel } from '../content-page-label.types.js';
 
 type UseContentPageLabelsTuple = [CheckboxOption[], boolean];
 

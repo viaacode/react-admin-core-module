@@ -1,5 +1,5 @@
-import { Locale } from '~modules/translations/translations.core.types';
-import { tText } from '~shared/helpers/translation-functions';
+import { Locale } from '~modules/translations/translations.core.types.js';
+import { tText } from '~shared/helpers/translation-functions.js';
 
 export function GET_LANGUAGE_NAMES(): Record<Locale, string> {
 	return {

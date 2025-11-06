@@ -1,6 +1,6 @@
 import { PermissionName } from '@viaa/avo2-types';
 
-import type { UserGroupWithPermissions } from '../types/user-group.types';
+import type { UserGroupWithPermissions } from '../types/user-group.types.js';
 
 export const permissionDataMock = {
 	data: {

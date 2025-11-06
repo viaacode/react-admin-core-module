@@ -1,16 +1,16 @@
 import { FormGroup, Spacer } from '@viaa/avo2-components';
 import type { FunctionComponent } from 'react';
 import React from 'react';
-import { GET_EDITOR_TYPES_MAP } from '~modules/content-page/const/editor-types.consts';
+import { GET_EDITOR_TYPES_MAP } from '~modules/content-page/const/editor-types.consts.js';
 
-import { generateFieldAttributes } from '~modules/content-page/helpers/field-attributes';
+import { generateFieldAttributes } from '~modules/content-page/helpers/field-attributes.js';
 import type {
 	ContentBlockComponentState,
 	ContentBlockEditor,
 	ContentBlockFieldGroup,
 	ContentBlockState,
 	ContentBlockStateType,
-} from '../../types/content-block.types';
+} from '../../types/content-block.types.js';
 
 interface FieldGroupProps {
 	// biome-ignore lint/suspicious/noExplicitAny: todo

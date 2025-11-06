@@ -12,34 +12,34 @@ import { without } from 'lodash-es';
 import type { FunctionComponent } from 'react';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { ValidationError } from 'yup';
-import { ToastType } from '~core/config';
-import { getDatePickerDefaultProps } from '~modules/content-page/components/DatePicker/DatePicker.consts';
-import { MaintenanceAlertsService } from '~modules/maintenance-alerts/maintenance-alerts.service';
+import { ToastType } from '~core/config/config.types.js';
+import { getDatePickerDefaultProps } from '~modules/content-page/components/DatePicker/DatePicker.consts.js';
+import { MaintenanceAlertsService } from '~modules/maintenance-alerts/maintenance-alerts.service.js';
 import type {
 	MaintenanceAlert,
 	MaintenanceAlertDto,
 	MaintenanceAlertsEditFormProps,
-} from '~modules/maintenance-alerts/maintenance-alerts.types';
-import { Icon } from '~shared/components/Icon';
-import { IconPicker } from '~modules/shared/components/IconPicker/IconPicker';
-import { useGetAllLanguages } from '~modules/translations/hooks/use-get-all-languages';
-import { Locale } from '~modules/translations/translations.core.types';
-import type { LanguageInfo } from '~modules/translations/translations.types';
-import { useUserGroupOptions } from '~modules/user-group/hooks/useUserGroupOptions';
-import { DateInput } from '~shared/components/DateInput/DateInput';
-import { Timepicker } from '~shared/components/Timepicker/Timepicker';
-import { timePickerDefaults } from '~shared/components/Timepicker/Timepicker.consts';
-import { GET_LANGUAGE_NAMES } from '~shared/consts/language-names';
-import { CustomError } from '~shared/helpers/custom-error';
-import { parseAsIsoWithoutTimezone } from '~shared/helpers/formatters/date';
-import { isMultiLanguageEnabled } from '~shared/helpers/is-multi-language-enabled';
-import { showToast } from '~shared/helpers/show-toast';
-import { tHtml, tText } from '~shared/helpers/translation-functions';
+} from '~modules/maintenance-alerts/maintenance-alerts.types.js';
+import { IconPicker } from '~modules/shared/components/IconPicker/IconPicker.js';
+import { useGetAllLanguages } from '~modules/translations/hooks/use-get-all-languages.js';
+import { Locale } from '~modules/translations/translations.core.types.js';
+import type { LanguageInfo } from '~modules/translations/translations.types.js';
+import { useUserGroupOptions } from '~modules/user-group/hooks/useUserGroupOptions.js';
+import { DateInput } from '~shared/components/DateInput/DateInput.js';
+import { Icon } from '~shared/components/Icon/Icon.js';
+import { timePickerDefaults } from '~shared/components/Timepicker/Timepicker.consts.js';
+import { Timepicker } from '~shared/components/Timepicker/Timepicker.js';
+import { GET_LANGUAGE_NAMES } from '~shared/consts/language-names.js';
+import { CustomError } from '~shared/helpers/custom-error.js';
+import { parseAsIsoWithoutTimezone } from '~shared/helpers/formatters/date.js';
+import { isMultiLanguageEnabled } from '~shared/helpers/is-multi-language-enabled.js';
+import { showToast } from '~shared/helpers/show-toast.js';
+import { tHtml, tText } from '~shared/helpers/translation-functions.js';
 import {
 	ALERTS_FORM_SCHEMA,
 	GET_ALERTS_ICON_OPTIONS,
 	RICH_TEXT_EDITOR_OPTIONS,
-} from '../maintenance-alerts.const';
+} from '../maintenance-alerts.const.js';
 
 const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProps> = ({
 	maintenanceAlert,

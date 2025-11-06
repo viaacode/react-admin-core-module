@@ -1,5 +1,4 @@
-export * from './BlockSpotlight';
-export * from './BlockSpotlight.editorconfig';
-
-export * from './BlockProjectSpotlight.editorconfig';
-export * from './BlockProjectSpotlight.wrapper';
+export * from './BlockProjectSpotlight.editorconfig.js';
+export * from './BlockProjectSpotlight.wrapper.js';
+export * from './BlockSpotlight.editorconfig.js';
+export * from './BlockSpotlight.js';

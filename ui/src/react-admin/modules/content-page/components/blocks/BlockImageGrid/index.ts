@@ -1,10 +1,8 @@
-export * from './BlockImageGrid.wrapper';
-export * from './BlockImageGrid';
-export * from './BlockImageGrid.types';
-export * from './BlockImageGrid.editorconfig';
-
-export * from './BlockUspGrid.editorconfig';
-export * from './BlockUspGrid.wrapper';
-
-export * from './BlockLogoGrid.editorconfig';
-export * from './BlockLogoGrid.wrapper';
+export * from './BlockImageGrid.editorconfig.js';
+export * from './BlockImageGrid.js';
+export * from './BlockImageGrid.types.js';
+export * from './BlockImageGrid.wrapper.js';
+export * from './BlockLogoGrid.editorconfig.js';
+export * from './BlockLogoGrid.wrapper.js';
+export * from './BlockUspGrid.editorconfig.js';
+export * from './BlockUspGrid.wrapper.js';

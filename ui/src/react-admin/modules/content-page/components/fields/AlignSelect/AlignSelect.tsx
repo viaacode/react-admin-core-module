@@ -3,7 +3,7 @@ import { Button, ButtonGroup } from '@viaa/avo2-components';
 import type { FunctionComponent } from 'react';
 import React from 'react';
 
-import type { AlignOption } from '../../../types/content-block.types';
+import type { AlignOption } from '../../../types/content-block.types.js';
 
 export interface AlignSelectProps {
 	onChange: (value: string) => void;

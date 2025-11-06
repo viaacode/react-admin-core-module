@@ -1,11 +1,10 @@
-import { UserService } from '~modules/user/user.service';
-import { CustomError } from '~shared/helpers/custom-error';
-import type { PickerItem } from '~shared/types/content-picker';
-import { parsePickerItem } from '../helpers/parse-picker';
-
-import type { Avo } from '@viaa/avo2-types';
+import { Avo } from '@viaa/avo2-types';
 import memoize from 'memoizee';
-import { MEMOIZEE_OPTIONS } from '~shared/consts/memoizee-options';
+import { UserService } from '~modules/user/user.service.js';
+import { MEMOIZEE_OPTIONS } from '~shared/consts/memoizee-options.js';
+import { CustomError } from '~shared/helpers/custom-error.js';
+import type { PickerItem } from '~shared/types/content-picker.js';
+import { parsePickerItem } from '../helpers/parse-picker.js';
 
 // Fetch profiles from GQL
 export const retrieveProfiles = memoize(
@@ -39,7 +38,7 @@ const parseProfiles = (commonUsers: Avo.User.CommonUser[]): PickerItem[] => {
 	return commonUsers.map(
 		(user): PickerItem => ({
 			label: `${user.fullName} (${user.email})`,
-			...parsePickerItem('PROFILE', user.profileId),
+			...parsePickerItem(Avo.Core.ContentPickerType.PROFILE, user.profileId),
 		})
 	);
 };

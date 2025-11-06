@@ -13,22 +13,22 @@ import {
 	ToolbarItem,
 	ToolbarRight,
 } from '@viaa/avo2-components';
-import type { Avo } from '@viaa/avo2-types';
+import { Avo } from '@viaa/avo2-types';
 import type { FunctionComponent, ReactNode } from 'react';
 import React, { useState } from 'react';
-import { AdminConfigManager } from '~core/config';
-import { ToastType } from '~core/config/config.types';
-import { Link } from '~modules/shared/components/Link';
-import { ContentPicker } from '~shared/components/ContentPicker/ContentPicker';
-import { GET_DELETE_RADIO_OPTIONS } from '~shared/consts/user.const';
-import { CustomError } from '~shared/helpers/custom-error';
-import { buildLink } from '~shared/helpers/link';
-import { showToast } from '~shared/helpers/show-toast';
-import { tHtml, tText } from '~shared/helpers/translation-functions';
-import { AVO } from '~shared/types';
-import type { PickerItem } from '~shared/types/content-picker';
-import { UserService } from '../user.service';
-import type { DeleteContentCounts } from '../user.types';
+import { AdminConfigManager } from '~core/config/config.class.js';
+import { ToastType } from '~core/config/config.types.js';
+import { Link } from '~modules/shared/components/Link/Link.js';
+import { ContentPicker } from '~shared/components/ContentPicker/ContentPicker.js';
+import { GET_DELETE_RADIO_OPTIONS } from '~shared/consts/user.const.js';
+import { CustomError } from '~shared/helpers/custom-error.js';
+import { buildLink } from '~shared/helpers/link.js';
+import { showToast } from '~shared/helpers/show-toast.js';
+import { tHtml, tText } from '~shared/helpers/translation-functions.js';
+import type { PickerItem } from '~shared/types/content-picker.js';
+import { AVO } from '~shared/types/index.js';
+import { UserService } from '../user.service.js';
+import type { DeleteContentCounts } from '../user.types.js';
 
 import './UserDeleteModal.scss';
 
@@ -515,7 +515,7 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 					{(selectedDeleteOption === 'TRANSFER_PUBLIC' ||
 						selectedDeleteOption === 'TRANSFER_ALL') && (
 						<ContentPicker
-							allowedTypes={['PROFILE']}
+							allowedTypes={[Avo.Core.ContentPickerType.PROFILE]}
 							value={transferToUser}
 							onChange={setTransferToUser}
 							placeholder={tText(

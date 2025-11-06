@@ -4,49 +4,49 @@ import { get, isNil } from 'lodash-es';
 import type { FunctionComponent } from 'react';
 import React, { useCallback, useEffect, useState } from 'react';
 
-import { AdminConfigManager, ToastType } from '~core/config';
-import { ContentPageLabelService } from '~modules/content-page-labels/content-page-label.service';
-import { ITEMS_PER_PAGE } from '~modules/item/items.consts';
-import { ErrorView } from '~modules/shared/components/error';
-import { Link } from '~modules/shared/components/Link';
-import { showToast } from '~modules/shared/helpers/show-toast';
-import type { DefaultComponentProps } from '~modules/shared/types';
+import { AdminConfigManager, ToastType } from '~core/config/index.js';
+import { ContentPageLabelService } from '~modules/content-page-labels/content-page-label.service.js';
+import { ITEMS_PER_PAGE } from '~modules/item/items.consts.js';
+import { ErrorView } from '~modules/shared/components/error/ErrorView.js';
+import { Link } from '~modules/shared/components/Link/Link.js';
+import { showToast } from '~modules/shared/helpers/show-toast.js';
+import type { DefaultComponentProps } from '~modules/shared/types/components.js';
 
-import './ContentPageLabelOverview.scss';
-import { useGetAllLanguages } from '~modules/translations/hooks/use-get-all-languages';
-import type { LanguageInfo } from '~modules/translations/translations.types';
+import { useGetAllLanguages } from '~modules/translations/hooks/use-get-all-languages.js';
+import type { LanguageInfo } from '~modules/translations/translations.types.js';
 import type {
 	CheckboxDropdownModalProps,
 	CheckboxOption,
-} from '~shared/components/CheckboxDropdownModal/CheckboxDropdownModal';
-import ConfirmModal from '~shared/components/ConfirmModal/ConfirmModal';
-import { GET_CONTENT_TYPE_LABELS } from '~shared/components/ContentPicker/ContentPicker.const';
-import type { FilterableColumn } from '~shared/components/FilterTable/FilterTable';
-import FilterTable, { getFilters } from '~shared/components/FilterTable/FilterTable';
-import { Icon } from '~shared/components/Icon';
-import type { LoadingInfo } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
-import { LoadingErrorLoadedComponent } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
-import { SmartLink } from '~shared/components/SmartLink/SmartLink';
-import { GET_LANGUAGE_NAMES } from '~shared/consts/language-names';
+} from '~shared/components/CheckboxDropdownModal/CheckboxDropdownModal.js';
+import ConfirmModal from '~shared/components/ConfirmModal/ConfirmModal.js';
+import { GET_CONTENT_TYPE_LABELS } from '~shared/components/ContentPicker/ContentPicker.const.js';
+import type { FilterableColumn } from '~shared/components/FilterTable/FilterTable.js';
+import FilterTable, { getFilters } from '~shared/components/FilterTable/FilterTable.js';
+import { Icon } from '~shared/components/Icon/Icon.js';
+import type { LoadingInfo } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent.js';
+import { LoadingErrorLoadedComponent } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent.js';
+import { SmartLink } from '~shared/components/SmartLink/SmartLink.js';
+import { GET_LANGUAGE_NAMES } from '~shared/consts/language-names.js';
 import {
 	getDateRangeFilters,
 	getMultiOptionFilters,
 	getQueryFilter,
-} from '~shared/helpers/filters';
-import { formatDate } from '~shared/helpers/formatters/date';
-import { isMultiLanguageEnabled } from '~shared/helpers/is-multi-language-enabled';
-import { buildLink, navigate } from '~shared/helpers/link';
-import { tHtml, tText } from '~shared/helpers/translation-functions';
-import { truncateTableValue } from '~shared/helpers/truncate';
-import { AdminLayout } from '~shared/layouts';
-import { TableColumnDataType } from '~shared/types/table-column-data-type';
-import { TableFilterType } from '~shared/types/table-filter-types';
-import { useContentTypes } from '../../content-page/hooks/useContentTypes';
+} from '~shared/helpers/filters.js';
+import { formatDate } from '~shared/helpers/formatters/date.js';
+import { isMultiLanguageEnabled } from '~shared/helpers/is-multi-language-enabled.js';
+import { buildLink, navigate } from '~shared/helpers/link.js';
+import { tHtml, tText } from '~shared/helpers/translation-functions.js';
+import { truncateTableValue } from '~shared/helpers/truncate.js';
+import { AdminLayout } from '~shared/layouts/AdminLayout/AdminLayout.js';
+import { TableColumnDataType } from '~shared/types/table-column-data-type.js';
+import { TableFilterType } from '~shared/types/table-filter-types.js';
+import { useContentTypes } from '../../content-page/hooks/useContentTypes.js';
 import type {
 	ContentPageLabel,
 	ContentPageLabelOverviewTableCols,
 	ContentPageLabelTableState,
-} from '../content-page-label.types';
+} from '../content-page-label.types.js';
+import './ContentPageLabelOverview.scss';
 
 export const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> = ({
 	className,

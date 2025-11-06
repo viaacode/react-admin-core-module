@@ -10,19 +10,17 @@ import {
 	Spacer,
 	TagList,
 } from '@viaa/avo2-components';
+import { Avo } from '@viaa/avo2-types';
 import clsx from 'clsx';
 import { uniqBy } from 'lodash-es';
 import type { FunctionComponent, ReactText } from 'react';
 import React, { useEffect, useState } from 'react';
-import { showToast } from '~shared/helpers/show-toast';
-
-import type { PickerItem } from '../../types/content-picker';
-import { ContentPicker } from '../ContentPicker/ContentPicker';
-
-import { ToastType } from '~core/config/config.types';
-import type { Avo } from '@viaa/avo2-types';
-import { tText } from '~shared/helpers/translation-functions';
-import { UserService } from '~modules/user/user.service';
+import { ToastType } from '~core/config/config.types.js';
+import { UserService } from '~modules/user/user.service.js';
+import { showToast } from '~shared/helpers/show-toast.js';
+import { tText } from '~shared/helpers/translation-functions.js';
+import type { PickerItem } from '../../types/content-picker.js';
+import { ContentPicker } from '../ContentPicker/ContentPicker.js';
 
 import './MultiUserSelectDropdown.scss';
 
@@ -69,7 +67,7 @@ export const MultiUserSelectDropdown: FunctionComponent<MultiUserSelectDropdownP
 							(user): PickerItem => ({
 								label: `${user?.fullName} (${user?.email})`,
 								value: user?.profileId as string,
-								type: 'PROFILE',
+								type: Avo.Core.ContentPickerType.PROFILE,
 							})
 						)
 					);
@@ -191,7 +189,7 @@ export const MultiUserSelectDropdown: FunctionComponent<MultiUserSelectDropdownP
 											}
 										}}
 										hideTargetSwitch
-										allowedTypes={['PROFILE']}
+										allowedTypes={[Avo.Core.ContentPickerType.PROFILE]}
 										hideTypeDropdown
 										placeholder={
 											placeholder ||

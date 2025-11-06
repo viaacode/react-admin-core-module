@@ -1,16 +1,19 @@
 import { type Avo, ContentPickerType } from '@viaa/avo2-types';
-import { retrieveAssignments } from '~shared/components/ContentPicker/item-providers/assignment';
-import { retrieveCustomNavigationElements } from '~shared/components/ContentPicker/item-providers/custom-navigation-elements';
-import { retrieveIeObjects } from '~shared/components/ContentPicker/item-providers/ie-objects';
-import { retrieveNlParentContentPages } from '~shared/components/ContentPicker/item-providers/nl-content-page-parent';
-import { tText } from '~shared/helpers/translation-functions';
-import type { PickerTypeOption } from '../../types/content-picker';
-import { retrieveAnchors } from './item-providers/anchors';
-import { retrieveBundles, retrieveCollections } from './item-providers/collection';
-import { retrieveContentPages, retrieveProjectContentPages } from './item-providers/content-page';
-import { retrieveInternalLinks } from './item-providers/internal-link';
-import { retrieveItems } from './item-providers/item';
-import { retrieveProfiles } from './item-providers/profile';
+import { retrieveAssignments } from '~shared/components/ContentPicker/item-providers/assignment.js';
+import { retrieveCustomNavigationElements } from '~shared/components/ContentPicker/item-providers/custom-navigation-elements.js';
+import { retrieveIeObjects } from '~shared/components/ContentPicker/item-providers/ie-objects.js';
+import { retrieveNlParentContentPages } from '~shared/components/ContentPicker/item-providers/nl-content-page-parent.js';
+import { tText } from '~shared/helpers/translation-functions.js';
+import type { PickerTypeOption } from '../../types/content-picker.js';
+import { retrieveAnchors } from './item-providers/anchors.js';
+import { retrieveBundles, retrieveCollections } from './item-providers/collection.js';
+import {
+	retrieveContentPages,
+	retrieveProjectContentPages,
+} from './item-providers/content-page.js';
+import { retrieveInternalLinks } from './item-providers/internal-link.js';
+import { retrieveItems } from './item-providers/item.js';
+import { retrieveProfiles } from './item-providers/profile.js';
 
 export interface PickerItem {
 	label?: string;

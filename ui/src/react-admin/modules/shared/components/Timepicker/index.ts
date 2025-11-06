@@ -1,1 +1,1 @@
-export { Timepicker } from './Timepicker';
+export { Timepicker } from './Timepicker.js';

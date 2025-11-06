@@ -9,12 +9,12 @@
   "sideEffects": false,
   "exports": {
     "./client": {
-      "types": "./dist/client.d.ts",
+      "types": "./dist/src/client.d.ts",
       "import": "./dist/client.js",
       "default": "./dist/client.js"
     },
     "./admin": {
-      "types": "./dist/admin.d.ts",
+      "types": "./dist/src/admin.d.ts",
       "import": "./dist/admin.js",
       "default": "./dist/admin.js"
     }
@@ -34,6 +34,7 @@
     "dev": "cross-env PORT=3400 dotenv -e .env/.env.local vite",
     "prebuild": "rimraf dist",
     "build": "vite build",
+    "build:tsc": "tsc -p ./tsconfig.json",
     "serve": "vite preview",
     "copy-to-client-hetarchief": "rimraf ../../hetarchief-client/node_modules/@meemoo/admin-core-ui/dist ../../hetarchief-client/node_modules/.cache ../../hetarchief-client/.swc ../../hetarchief-client/.next && rimraf ../../hetarchief-client/.next && cp -r dist package.json ../../hetarchief-client/node_modules/@meemoo/admin-core-ui",
     "copy-to-client-avo": "rimraf ../../avo2-client/node_modules/@meemoo/admin-core-ui/dist ../../avo2-client/node_modules/.cache  ../../avo2-client/node_modules/.vite && cp -r dist package.json ../../avo2-client/node_modules/@meemoo/admin-core-ui",
@@ -88,7 +89,7 @@
     "react-copy-to-clipboard": "5.0.4",
     "react-datepicker": "4.21.0",
     "react-dom": "18.2.0",
-    "react-hook-form": "7.46.2",
+    "react-hook-form": "7.66.0",
     "react-page-split": "0.0.7",
     "react-perfect-scrollbar": "1.5.8",
     "react-popper": "2.3.0",

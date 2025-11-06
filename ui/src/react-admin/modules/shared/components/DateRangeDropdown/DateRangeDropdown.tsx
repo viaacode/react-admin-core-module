@@ -14,15 +14,13 @@ import {
 import { format, isValid, parse, set } from 'date-fns';
 import type { FC, MouseEvent, ReactText } from 'react';
 import React, { useCallback, useEffect, useState } from 'react';
-import { getDatePickerDefaultProps } from '~modules/content-page/components/DatePicker/DatePicker.consts';
-import { DateInput } from '~shared/components/DateInput/DateInput';
-import { showToast } from '~shared/helpers/show-toast';
-
-import { reorderDate } from '../../helpers/formatters/date';
-import { renderDropdownButton } from '../CheckboxDropdownModal/CheckboxDropdownModal';
-
-import { ToastType } from '~core/config/config.types';
-import { tText } from '~shared/helpers/translation-functions';
+import { ToastType } from '~core/config/config.types.js';
+import { getDatePickerDefaultProps } from '~modules/content-page/components/DatePicker/DatePicker.consts.js';
+import { DateInput } from '~shared/components/DateInput/DateInput.js';
+import { showToast } from '~shared/helpers/show-toast.js';
+import { tText } from '~shared/helpers/translation-functions.js';
+import { reorderDate } from '../../helpers/formatters/date.js';
+import { renderDropdownButton } from '../CheckboxDropdownModal/CheckboxDropdownModal.js';
 
 export interface DateRangeDropdownProps {
 	label: string;

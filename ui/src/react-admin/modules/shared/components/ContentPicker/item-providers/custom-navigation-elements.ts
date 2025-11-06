@@ -1,9 +1,8 @@
+import { Avo } from '@viaa/avo2-types';
 import { compact, sortBy } from 'lodash-es';
-
-import { parsePickerItem } from '../helpers/parse-picker';
-
-import type { PickerItem } from '~shared/types/content-picker';
-import { AdminConfigManager } from '~core/config';
+import { AdminConfigManager } from '~core/config/config.class.js';
+import type { PickerItem } from '~shared/types/content-picker.js';
+import { parsePickerItem } from '../helpers/parse-picker.js';
 
 // Return custom navigation elements from adminCoreConfig.navigationBars.customNavigationElements
 export const retrieveCustomNavigationElements = async (
@@ -17,7 +16,10 @@ export const retrieveCustomNavigationElements = async (
 			if (!keyword || customNavigationElement.includes(keyword)) {
 				return {
 					label: customNavigationElement,
-					...parsePickerItem('CUSTOM_NAVIGATION_ELEMENTS', customNavigationElement),
+					...parsePickerItem(
+						Avo.Core.ContentPickerType.CUSTOM_NAVIGATION_ELEMENTS,
+						customNavigationElement
+					),
 				};
 			}
 			return null;

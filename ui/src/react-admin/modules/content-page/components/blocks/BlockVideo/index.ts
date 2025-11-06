@@ -1,3 +1,3 @@
-export * from './BlockVideo';
-export * from './BlockVideo.editorconfig';
-export * from './BlockVideo.wrapper';
+export * from './BlockVideo.editorconfig.js';
+export * from './BlockVideo.js';
+export * from './BlockVideo.wrapper.js';

@@ -1,6 +1,6 @@
 import { isString } from 'lodash-es';
 
-import type { CheckboxOption } from '../components/CheckboxDropdownModal/CheckboxDropdownModal';
+import type { CheckboxOption } from '../components/CheckboxDropdownModal/CheckboxDropdownModal.js';
 
 export function setSelectedCheckboxes(
 	options: CheckboxOption[] | string[],

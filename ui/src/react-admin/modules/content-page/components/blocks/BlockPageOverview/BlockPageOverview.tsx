@@ -1,3 +1,4 @@
+import { PaginationBar } from '@meemoo/react-components';
 import {
 	Accordion,
 	AspectRatioWrapper,
@@ -15,30 +16,28 @@ import {
 	Tabs,
 	TagList,
 } from '@viaa/avo2-components';
-import type { Avo } from '@viaa/avo2-types';
+import { Avo } from '@viaa/avo2-types';
 import clsx from 'clsx';
 import { format, parseISO } from 'date-fns';
 import { findIndex, flatten, uniqBy } from 'lodash-es';
 import type { FunctionComponent, ReactNode } from 'react';
 import React from 'react';
-import { BlockImageGrid } from '~content-blocks/BlockImageGrid';
-import type { GridItem } from '~content-blocks/BlockImageGrid/BlockImageGrid.types';
-import { ContentPageRenderer } from '~modules/content-page/components/ContentPageRenderer/ContentPageRenderer';
-import type { ContentPageInfo } from '~modules/content-page/types/content-pages.types';
-import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner';
-import { defaultRenderLinkFunction } from '~shared/helpers/link';
-import { BlockHeading } from '../BlockHeading/BlockHeading';
-import type { ContentTabStyle, LabelObj } from './BlockPageOverview.types';
-import { ContentItemStyle } from './BlockPageOverview.types';
-
+import { BlockImageGrid } from '~content-blocks/BlockImageGrid/BlockImageGrid.js';
+import type { GridItem } from '~content-blocks/BlockImageGrid/BlockImageGrid.types.js';
+import { ContentPageRenderer } from '~modules/content-page/components/ContentPageRenderer/ContentPageRenderer.js';
+import type { AlignOption } from '~modules/content-page/types/content-block.types.js';
+import type { ContentPageInfo } from '~modules/content-page/types/content-pages.types.js';
+import { ITEMS_PER_PAGE } from '~modules/item/items.consts.js';
+import { ErrorView } from '~shared/components/error/ErrorView.js';
+import Html from '~shared/components/Html/Html.js';
+import { GET_DEFAULT_PAGINATION_BAR_PROPS } from '~shared/components/PaginationBar/PaginationBar.consts.js';
+import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner.js';
+import { defaultRenderLinkFunction } from '~shared/helpers/link.js';
+import { SanitizePreset } from '~shared/helpers/sanitize/presets/index.js';
+import { BlockHeading } from '../BlockHeading/BlockHeading.js';
+import type { ContentTabStyle, LabelObj } from './BlockPageOverview.types.js';
+import { ContentItemStyle } from './BlockPageOverview.types.js';
 import './BlockPageOverview.scss';
-import { PaginationBar } from '@meemoo/react-components';
-import type { AlignOption } from '~modules/content-page/types/content-block.types';
-import { ITEMS_PER_PAGE } from '~modules/item/items.consts';
-import { ErrorView } from '~shared/components/error';
-import Html from '~shared/components/Html/Html';
-import { GET_DEFAULT_PAGINATION_BAR_PROPS } from '~shared/components/PaginationBar/PaginationBar.consts';
-import { SanitizePreset } from '~shared/helpers/sanitize/presets';
 
 export interface BlockPageOverviewProps extends DefaultProps {
 	tabs?: { label: string; id: number }[];
@@ -203,7 +202,7 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 						title: showTitle ? page.title : undefined,
 						text: getDescription(page),
 						source: page.thumbnailPath as string, // TODO handle undefined thumbnails
-						action: { type: 'CONTENT_PAGE', value: page.path as string },
+						action: { type: Avo.Core.ContentPickerType.CONTENT_PAGE, value: page.path as string },
 					})
 				)}
 				itemWidth="30.7rem"

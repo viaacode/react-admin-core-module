@@ -1,13 +1,13 @@
-import { tText } from '~shared/helpers/translation-functions';
-import { GET_UNDERLINED_LINK_BUTTON_TYPE_OPTIONS } from '../../const/get-underline-link-button-type-options';
+import { tText } from '~shared/helpers/translation-functions.js';
+import { GET_UNDERLINED_LINK_BUTTON_TYPE_OPTIONS } from '../../const/get-underline-link-button-type-options.js';
 import type {
 	AnchorLinksBlockComponentState,
 	AnchorLinksBlockState,
 	ContentBlockConfig,
-} from '../../types/content-block.types';
-import { ContentBlockEditor, ContentBlockType } from '../../types/content-block.types';
+} from '../../types/content-block.types.js';
+import { ContentBlockEditor, ContentBlockType } from '../../types/content-block.types.js';
 
-import { ALIGN_FIELD, BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, TEXT_FIELD } from './defaults';
+import { ALIGN_FIELD, BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, TEXT_FIELD } from './defaults.js';
 
 export const INITIAL_ANCHOR_LINKS_COMPONENTS_STATE = (): AnchorLinksBlockComponentState[] => [
 	{
