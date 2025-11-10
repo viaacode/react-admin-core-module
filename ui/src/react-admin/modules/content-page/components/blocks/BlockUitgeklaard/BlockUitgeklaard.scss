@@ -1,14 +1,14 @@
-@import "../../../../shared/styles/mixins";
-@import "../../../../shared/styles/settings/colors";
-@import "../../../../shared/styles/settings/variables";
+@use "../../../../shared/styles/mixins/klaar" as klaar;
+@use "../../../../shared/styles/settings/colors" as colors;
+@use "../../../../shared/styles/settings/variables" as variables;
 
 .uitgeklaard-header {
-  @include klaar-block(#f3aa2e, #fff, #b75b99, #b75b99);
+  @include klaar.klaar-block(#f3aa2e, #fff, #b75b99, #b75b99);
 
   &__logo,
   &__date,
   &__h1,
   &__titles {
-    font-family: $g-headings-font-family;
+    font-family: variables.$g-headings-font-family;
   }
 }

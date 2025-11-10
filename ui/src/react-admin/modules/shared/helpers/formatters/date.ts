@@ -1,6 +1,5 @@
 import { format, formatDistance, parseISO } from 'date-fns';
 import nlBE from 'date-fns/locale/nl-BE/index.js';
-import { isNumber } from 'lodash-es';
 
 type DateLike = string | Date | number;
 type DateLikeNullable = DateLike | undefined | null;
@@ -19,7 +18,7 @@ export function normalizeTimestamp(timestamp: DateLike): Date {
 	if (timestamp instanceof Date) {
 		return timestamp;
 	}
-	if (isNumber(timestamp)) {
+	if (typeof timestamp === 'number') {
 		return new Date(timestamp);
 	}
 	return parseISO(timestamp);

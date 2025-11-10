@@ -1,4 +1,5 @@
 @use "sass:math";
+@use "../../styles/settings/colors" as colors;
 
 /* stylelint-disable no-descending-specificity */
 
@@ -11,7 +12,7 @@
 /* Variables
    ========================================================================== */
 
-$c-checkbox-input-border-color: $color-gray-400 !default;
+$c-checkbox-input-border-color: colors.$color-gray-400 !default;
 $c-checkbox-input-border: 0.1rem solid $c-checkbox-input-border-color !default;
 $c-radio-input-border: 0.1rem solid $c-checkbox-input-border-color !default;
 $c-checkbox-input-border-radius: 0.3rem !default;
@@ -26,8 +27,8 @@ $c-checkbox-spacing: 0.8rem !default;
 $c-radio-spacing: 0.8rem !default;
 $c-checkbox-spacing-inline: 0.8rem !default;
 $c-radio-spacing-inline: 0.8rem !default;
-$c-checkbox-checked-color: $color-primary !default;
-$c-radio-checked-color: $color-primary !default;
+$c-checkbox-checked-color: colors.$color-primary !default;
+$c-radio-checked-color: colors.$color-primary !default;
 
 /* Labels
    ========================================================================== */

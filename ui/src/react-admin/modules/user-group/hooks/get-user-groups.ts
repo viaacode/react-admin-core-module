@@ -1,36 +1,24 @@
-import type { UseQueryResult } from '@tanstack/react-query';
 import { useQuery } from '@tanstack/react-query';
 import { UserGroupService } from '~modules/user-group/services/user-group.service.js';
-import type {
-	UserGroup,
-	UserGroupWithPermissions,
-} from '~modules/user-group/types/user-group.types.js';
 import { QUERY_KEYS } from '~shared/types/index.js';
 
 interface GetUserGroupsParams {
 	withPermissions: boolean;
 }
 
-export const useGetUserGroups = <TData = UserGroup[] | UserGroupWithPermissions[]>(
-	props: GetUserGroupsParams
-): UseQueryResult<TData> => {
-	return useQuery(
-		[QUERY_KEYS.GET_USER_GROUPS, props],
-		(props) => {
+export const useGetUserGroups = (props: GetUserGroupsParams) => {
+	return useQuery({
+		queryKey: [QUERY_KEYS.GET_USER_GROUPS, props],
+		queryFn: (props) => {
 			const userGroupsParams = props.queryKey[1] as GetUserGroupsParams;
 
 			if (userGroupsParams.withPermissions) {
-				return UserGroupService.fetchUserGroupsWithPermissions() as Promise<
-					UserGroupWithPermissions[]
-				>;
+				return UserGroupService.fetchUserGroupsWithPermissions();
 			} else {
-				return UserGroupService.fetchUserGroups() as Promise<UserGroup[]>;
+				return UserGroupService.fetchUserGroups();
 			}
 		},
-		{
-			cacheTime: Infinity,
-			staleTime: Infinity,
-			keepPreviousData: true,
-		}
-	);
+		gcTime: Infinity,
+		staleTime: Infinity,
+	});
 };

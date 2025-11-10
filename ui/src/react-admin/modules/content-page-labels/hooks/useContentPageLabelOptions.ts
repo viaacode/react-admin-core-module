@@ -1,9 +1,9 @@
-import { capitalize, orderBy, startCase } from 'lodash-es';
+import { Avo } from '@viaa/avo2-types';
+import { capitalize, orderBy, startCase } from 'es-toolkit';
 import { useEffect, useState } from 'react';
 import { ToastType } from '~core/config/config.types.js';
 import { ContentPageLabelService } from '~modules/content-page-labels/content-page-label.service.js';
 import type { CheckboxOption } from '~shared/components/CheckboxDropdownModal/CheckboxDropdownModal.js';
-
 import { CustomError } from '~shared/helpers/custom-error.js';
 import { showToast } from '~shared/helpers/show-toast.js';
 import { tText } from '~shared/helpers/translation-functions.js';
@@ -18,7 +18,13 @@ export const useContentPageLabelOptions = (): UseContentPageLabelsTuple => {
 	useEffect(() => {
 		setIsLoading(true);
 
-		ContentPageLabelService.fetchContentPageLabels(0, 'label', 'asc', {}, 10000)
+		ContentPageLabelService.fetchContentPageLabels(
+			0,
+			'label',
+			Avo.Search.OrderDirection.ASC,
+			{},
+			10000
+		)
 			.then((reply: [ContentPageLabel[], number]) => {
 				setContentPageLabelOptions(
 					orderBy(
@@ -29,7 +35,8 @@ export const useContentPageLabelOptions = (): UseContentPageLabelsTuple => {
 								checked: false,
 							})
 						),
-						['label']
+						['label'],
+						[Avo.Search.OrderDirection.ASC]
 					)
 				);
 			})

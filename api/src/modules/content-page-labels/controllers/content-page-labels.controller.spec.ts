@@ -1,4 +1,5 @@
 import { Test, type TestingModule } from '@nestjs/testing';
+import { Avo } from '@viaa/avo2-types';
 
 import { Lookup_App_Content_Type_Enum } from '../../shared/generated/graphql-db-types-hetarchief';
 import { TestingLogger } from '../../shared/logging/test-logger';
@@ -65,7 +66,7 @@ describe('ContentPageLabelsController', () => {
 				'0',
 				'20',
 				'label',
-				'asc',
+				Avo.Search.OrderDirection.ASC,
 				'{}'
 			);
 

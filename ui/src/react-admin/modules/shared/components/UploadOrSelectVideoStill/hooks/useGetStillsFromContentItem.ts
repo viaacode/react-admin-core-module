@@ -9,14 +9,13 @@ import { QUERY_KEYS } from '~shared/types/index.js';
 export const useGetStillsFromContentItem = (
 	contentItemType: ContentPickerType | null,
 	contentItemId: string | null,
-	options: { enabled?: boolean; keepPreviousData?: boolean } = {
+	options: { enabled?: boolean } = {
 		enabled: true,
-		keepPreviousData: true,
 	}
 ) => {
-	return useQuery<string[]>(
-		[QUERY_KEYS.GET_VIDEO_STILLS_FOR_CONTENT_ITEM, contentItemType, contentItemId],
-		async () => {
+	return useQuery<string[]>({
+		queryKey: [QUERY_KEYS.GET_VIDEO_STILLS_FOR_CONTENT_ITEM, contentItemType, contentItemId],
+		queryFn: async () => {
 			if (!contentItemType || !contentItemId) {
 				return [];
 			}
@@ -46,10 +45,7 @@ export const useGetStillsFromContentItem = (
 				}
 			});
 		},
-		{
-			enabled: true,
-			keepPreviousData: true,
-			...options,
-		}
-	);
+		enabled: true,
+		...options,
+	});
 };

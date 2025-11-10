@@ -40,7 +40,7 @@ export const getGqlSortDirection = (
 		case 'booleanNullsLast':
 			return BOOLEAN_NULLS_LAST_ORDER[order];
 		default:
-			return order as GraphQlSortDirections;
+			return order as unknown as GraphQlSortDirections;
 	}
 };
 
@@ -52,7 +52,9 @@ export const getOrderObject = (
 		[columnName: string]: ((order: Avo.Search.OrderDirection) => any) | null;
 	}
 ): Record<string, GraphQlSortDirections>[] => {
-	const getOrderFunc = columns[sortColumn] as ((order: GraphQlSortDirections) => any) | null;
+	const getOrderFunc = columns[sortColumn] as unknown as
+		| ((order: GraphQlSortDirections) => any)
+		| null;
 
 	if (getOrderFunc) {
 		return [getOrderFunc(getGqlSortDirection(sortOrder, tableColumnDataType))];

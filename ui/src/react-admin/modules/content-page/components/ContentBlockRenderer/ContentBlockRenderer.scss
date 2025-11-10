@@ -1,4 +1,4 @@
-@import "../../../shared/styles/settings/colors";
+@use "../../../shared/styles/settings/colors" as colors;
 
 .c-content-page-overview-block__header {
   opacity: 0;
@@ -44,20 +44,20 @@
   // Here you can overwrite styles on content-blocks for previews with a dark background
   .c-block-media-list {
     .c-meta-data__item {
-      color: $color-gray-150;
+      color: colors.$color-gray-150;
     }
   }
 
   .c-quote {
     .c-quote__text {
-      color: $color-gray-50;
+      color: colors.$color-gray-50;
     }
 
     .c-quote__author {
-      color: $color-gray-100;
+      color: colors.$color-gray-100;
 
       .c-avatar {
-        background-color: $color-gray-400;
+        background-color: colors.$color-gray-400;
       }
     }
   }

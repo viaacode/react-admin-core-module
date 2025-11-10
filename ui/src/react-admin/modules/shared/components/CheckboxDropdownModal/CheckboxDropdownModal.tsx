@@ -23,7 +23,7 @@ import {
 	ToolbarRight,
 } from '@viaa/avo2-components';
 import clsx from 'clsx';
-import { clone, compact, fromPairs, take } from 'lodash-es';
+import { clone, compact, take } from 'es-toolkit';
 import type { FunctionComponent, KeyboardEvent, MouseEvent } from 'react';
 import React, { useState } from 'react';
 import { tText } from '~shared/helpers/translation-functions.js';
@@ -76,7 +76,7 @@ export const CheckboxDropdownModal: FunctionComponent<CheckboxDropdownModalProps
 	searchInputAriaLabel,
 }) => {
 	// Computed
-	const optionsFromPairs = fromPairs(
+	const optionsFromPairs = Object.fromEntries(
 		options.map(({ checked, ...option }: CheckboxOption) => [option.id, checked])
 	);
 

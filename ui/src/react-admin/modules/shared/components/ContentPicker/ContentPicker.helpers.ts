@@ -1,5 +1,4 @@
 import type { Avo } from '@viaa/avo2-types';
-import { get } from 'lodash-es';
 import type {
 	PickerItem,
 	PickerItemControls,
@@ -16,10 +15,10 @@ export function filterTypes(
 }
 
 export function setInitialInput(type?: PickerTypeOption, initialValue?: PickerItem) {
-	switch (get(type, 'picker') as PickerItemControls) {
+	switch (type?.picker as PickerItemControls) {
 		case 'TEXT_INPUT':
 		case 'FILE_UPLOAD':
-			return get(initialValue, 'value', '');
+			return initialValue?.value || '';
 
 		default:
 			return '';
@@ -31,6 +30,6 @@ export function setInitialItem(
 	initialValue?: PickerItem
 ): PickerItem | undefined {
 	return options.find(
-		(option: PickerItem) => option.value === get(initialValue, 'value', 'EMPTY_SELECTION')
+		(option: PickerItem) => option.value === initialValue?.value || 'EMPTY_SELECTION'
 	);
 }

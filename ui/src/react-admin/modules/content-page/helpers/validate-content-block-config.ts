@@ -1,4 +1,4 @@
-import { has, isFunction } from 'lodash-es';
+import { isFunction } from 'es-toolkit';
 import { validateContentBlockField } from '~modules/shared/helpers/validation.js';
 import type {
 	ContentBlockComponentState,
@@ -34,7 +34,7 @@ export function validateContentBlockConfig(
 						);
 					}
 				});
-			} else if (has(state, key)) {
+			} else if (Object.hasOwn(state, key)) {
 				if (!(isVisible && !isVisible(config, state))) {
 					newErrors = validateContentBlockField(
 						key,

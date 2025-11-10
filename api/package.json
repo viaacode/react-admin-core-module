@@ -46,7 +46,7 @@
     "@smithy/protocol-http": "4.1.8",
     "@smithy/signature-v4": "4.2.4",
     "@studiohyperdrive/pagination": "1.0.0",
-    "@viaa/avo2-types": "3.3.0",
+    "@viaa/avo2-types": "4.0.1",
     "app-root-path": "3.0.0",
     "blend-promise-utils": "^1.28.0",
     "cache-manager": "5.2.3",
@@ -115,7 +115,7 @@
     "ts-loader": "^9.2.3",
     "ts-node": "^10.0.0",
     "tsconfig-paths": "^4.1.0",
-    "typescript": "^5.2.2"
+    "typescript": "^5.9.3"
   },
   "overrides": {
     "typescript": "^5.2.2",

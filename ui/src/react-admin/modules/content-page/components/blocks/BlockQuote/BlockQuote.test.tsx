@@ -4,7 +4,7 @@ import React from 'react';
 
 import image50x50 from '../../../static/images/50x50.jpg';
 
-import { BlockQuote } from './BlockQuote';
+import { BlockQuote } from './BlockQuote.js';
 
 const customClass = 'c-block-custom';
 const quote = loremIpsum({ count: 10 });

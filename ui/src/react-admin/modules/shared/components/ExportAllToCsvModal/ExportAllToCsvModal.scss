@@ -1,14 +1,15 @@
-@import "../../styles/settings/variables";
+@use "../../styles/settings/variables" as variables;
+@use "../../styles/settings/colors" as colors;
 
 .c-export-all-to-csv-modal {
   .c-progress-bar {
-    margin-top: $g-spacer-unit;
-    margin-bottom: $g-spacer-unit * 4;
-    background-color: $color-gray-100;
+    margin-top: variables.$g-spacer-unit;
+    margin-bottom: variables.$g-spacer-unit * 4;
+    background-color: colors.$color-gray-100;
     height: 2rem;
 
     .c-progress-bar__fill {
-      background-color: $color-teal-bright;
+      background-color: colors.$color-teal-bright;
     }
 
     .c-progress-bar__label {

@@ -3,7 +3,7 @@ import React from 'react';
 
 import imageSource from '../../../static/images/500x200.jpg';
 
-import { BlockImage } from './BlockImage';
+import { BlockImage } from './BlockImage.js';
 
 const customClass = 'c-block-custom';
 

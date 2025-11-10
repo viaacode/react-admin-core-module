@@ -1,6 +1,6 @@
 import type { FunctionComponent } from 'react';
 import React from 'react';
-import { NavigationBarOverview } from '~modules/navigation/views';
+import { NavigationBarOverview } from '~modules/navigation/views/NavigationBarOverview.js';
 import { tText } from '~shared/helpers/translation-functions.js';
 import { AdminLayout } from '~shared/layouts/AdminLayout/AdminLayout.js';
 

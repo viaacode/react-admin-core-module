@@ -1,5 +1,5 @@
 import type { Avo } from '@viaa/avo2-types';
-import { compact } from 'lodash-es';
+import { compact } from 'es-toolkit';
 import { tHtml } from '~shared/helpers/translation-functions.js';
 
 import { ROUTE_PARTS } from './routes.js';

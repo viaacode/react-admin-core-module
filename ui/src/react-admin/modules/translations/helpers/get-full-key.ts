@@ -1,6 +1,11 @@
-import type { Component, Key, Location, TranslationEntry } from '../translations.core.types.js';
-import { TRANSLATION_SEPARATOR } from '../translations.core.types.js';
-import type { MultiLanguageTranslationEntry } from '../translations.types.js';
+import type { MultiLanguageTranslationEntry } from '~modules/translations/translations.types.js';
+import {
+	type Component,
+	type Key,
+	type Location,
+	TRANSLATION_SEPARATOR,
+	type TranslationEntry,
+} from '../../../../../scripts/translation.types.js';
 
 export function getFullKey(
 	translationEntry: TranslationEntry | MultiLanguageTranslationEntry

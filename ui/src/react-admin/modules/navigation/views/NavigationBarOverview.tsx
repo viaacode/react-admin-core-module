@@ -1,6 +1,6 @@
 import type { IconName } from '@viaa/avo2-components';
 import { Button, ButtonToolbar, Table } from '@viaa/avo2-components';
-import { startCase } from 'lodash-es';
+import { startCase } from 'es-toolkit';
 import type { FunctionComponent } from 'react';
 import React from 'react';
 import { AdminConfigManager } from '~core/config/config.class.js';

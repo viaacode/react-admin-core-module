@@ -1,7 +1,7 @@
 import type { IconName } from '@viaa/avo2-components';
 import { Blankslate, Button, Flex, FlexItem, Icon, Spacer } from '@viaa/avo2-components';
 import type { Avo } from '@viaa/avo2-types';
-import { compact, isString } from 'lodash-es';
+import { compact, isString } from 'es-toolkit';
 import { parse } from 'query-string';
 import type { FunctionComponent } from 'react';
 import React, { useState } from 'react';
@@ -215,7 +215,7 @@ const FileUpload: FunctionComponent<FileUploadProps> = ({
 			return null;
 		}
 
-		return compact(urls).map((url) => {
+		return compact(urls || []).map((url) => {
 			if (isPhoto(url)) {
 				return (
 					<Spacer margin="bottom-small" key={url}>

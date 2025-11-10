@@ -1,5 +1,3 @@
-import { isArray } from 'lodash-es';
-
 import type { DateRange } from '../components/DateRangeDropdown/DateRangeDropdown.js';
 
 export const DateRangeParam = {
@@ -39,7 +37,7 @@ export const CheckboxListParam = {
 			if (!value) {
 				return [];
 			}
-			if (isArray(value)) {
+			if (Array.isArray(value)) {
 				return value as string[];
 			}
 			const newValues = value.split('~');

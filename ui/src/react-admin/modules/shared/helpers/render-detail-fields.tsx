@@ -1,4 +1,4 @@
-import { compact, get, isBoolean, isNil, isString } from 'lodash-es';
+import { compact, isBoolean, isNil, isString } from 'es-toolkit';
 import type { ReactElement, ReactNode } from 'react';
 import React from 'react';
 import Html from '~shared/components/Html/Html.js';
@@ -28,11 +28,11 @@ export function renderSimpleDetailRows<T>(
 ): ReactElement[] {
 	return compact(
 		propAndTranslations.map((propAndTranslation) => {
-			let value = get(obj, propAndTranslation[0]);
+			let value = obj?.[propAndTranslation[0]];
 			if (isBoolean(value)) {
-				value = value ? 'Ja' : 'Nee';
+				value = (value ? 'Ja' : 'Nee') as any;
 			}
-			return renderDetailRow(isNil(value) ? '-' : value, propAndTranslation[1]);
+			return renderDetailRow((isNil(value) ? '-' : value) as ReactNode, propAndTranslation[1]);
 		})
 	);
 }
@@ -43,8 +43,8 @@ export function renderDateDetailRows<T>(
 ): ReactElement[] {
 	return compact(
 		propAndTranslations.map((propAndTranslation) => {
-			const value = get(obj, propAndTranslation[0]);
-			return renderDetailRow(value ? formatDate(value) : '-', propAndTranslation[1]);
+			const value = obj?.[propAndTranslation[0]];
+			return renderDetailRow(value ? formatDate(value as any) : '-', propAndTranslation[1]);
 		})
 	);
 }

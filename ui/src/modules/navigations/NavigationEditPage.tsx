@@ -2,7 +2,7 @@ import type { FC } from 'react';
 import React from 'react';
 import { useMatch } from 'react-router';
 import { AdminConfigManager } from '~core/config/config.class.js';
-import { NavigationItemEdit } from '~modules/navigation/views';
+import { NavigationItemEdit } from '~modules/navigation/views/NavigationItemEdit.js';
 
 export const NavigationEditPage: FC = () => {
 	const match = useMatch<'navigationItemId' | 'navigationBarId', string>(

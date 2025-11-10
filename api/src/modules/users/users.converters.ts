@@ -1,6 +1,4 @@
-import { type Avo, type Idp, type PermissionName } from '@viaa/avo2-types';
-import { type EducationOrganizationSchema } from '@viaa/avo2-types/types/education-organizations';
-import { type LomSchema } from '@viaa/avo2-types/types/lom';
+import { type Avo, type PermissionName } from '@viaa/avo2-types';
 
 import { Lookup_Languages_Enum } from '../shared/generated/graphql-db-types-hetarchief';
 
@@ -80,7 +78,7 @@ export function convertUserInfoToCommonUser(
 					: null,
 				idps: Object.fromEntries(
 					(user.idpmapObjects || []).map((idpMapObject) => [
-						idpMapObject.idp as Idp,
+						idpMapObject.idp as Avo.Auth.IdpType,
 						idpMapObject.idp_user_id as string,
 					])
 				),
@@ -136,7 +134,7 @@ export function convertUserInfoToCommonUser(
 					: null,
 				idps: Object.fromEntries(
 					profile.user.idpmapObjects.map((idpMapObject) => [
-						idpMapObject.idp as Idp,
+						idpMapObject.idp as Avo.Auth.IdpType,
 						idpMapObject.idp_user_id as string,
 					])
 				),
@@ -213,7 +211,7 @@ export function convertUserInfoToCommonUser(
 					: null,
 				idps: Object.fromEntries(
 					user.idps.map((idpMapObject) => [
-						idpMapObject.idp as unknown as Idp,
+						idpMapObject.idp as unknown as Avo.Auth.IdpType,
 						idpMapObject.idp_user_id as string,
 					])
 				),
@@ -241,7 +239,7 @@ export function convertUserInfoToCommonUser(
 				},
 				idps: Object.fromEntries(
 					profile.identities?.map(
-						(identity) => [identity.identity_provider_name as Idp, null] // User ids of idp are not fetched
+						(identity) => [identity.identity_provider_name as Avo.Auth.IdpType, null] // User ids of idp are not fetched
 					)
 				),
 				organisation: {
@@ -317,8 +315,8 @@ export function convertUserInfoToCommonUser(
 						organisationId: item.organization_id,
 						unitId: item.unit_id,
 					})
-				) as EducationOrganizationSchema[],
-				loms: user.loms as LomSchema[],
+				) as Avo.EducationOrganization.Organization[],
+				loms: user.loms as Avo.Lom.Lom[],
 				isException: user.is_exception ?? false,
 				businessCategory: user.business_category ?? undefined,
 				isBlocked: user.is_blocked ?? undefined,
@@ -344,7 +342,7 @@ export function convertUserInfoToCommonUser(
 				updatedAt: user.updated_at || undefined,
 				companyId: user.company_id,
 				permissions: (user.user_group?.group?.group_permissions || []).map(
-					(item) => item.permission
+					(item) => item.permission.label
 				),
 				language: user.language,
 			} as Avo.User.CommonUser;

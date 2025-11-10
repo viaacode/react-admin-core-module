@@ -4,12 +4,15 @@ import { TableColumnPreferenceService } from '~shared/services/table-column-pref
 import { QUERY_KEYS } from '~shared/types/index.js';
 
 export const useGetTableColumnPreference = (columnKey: string) => {
-	return useQuery([QUERY_KEYS.GET_TABLE_COLUMN_PREFERENCE], async () => {
-		if (!columnKey) {
-			return [];
-		}
+	return useQuery({
+		queryKey: [QUERY_KEYS.GET_TABLE_COLUMN_PREFERENCE],
+		queryFn: async () => {
+			if (!columnKey) {
+				return [];
+			}
 
-		const formattedColumnKeys = getColumnKey(columnKey);
-		return TableColumnPreferenceService.fetchTableColumnPreference(formattedColumnKeys);
+			const formattedColumnKeys = getColumnKey(columnKey);
+			return TableColumnPreferenceService.fetchTableColumnPreference(formattedColumnKeys);
+		},
 	});
 };

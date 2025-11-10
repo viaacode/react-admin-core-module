@@ -1,17 +1,18 @@
-@import "../../../shared/styles/settings/variables";
+@use "../../../shared/styles/settings/variables" as variables;
+@use "../../../shared/styles/settings/colors" as colors;
 
 .c-menu-content {
-	background-color: $g-base-background;
-	color: $g-text-color;
-	padding: $g-spacer-unit;
-	box-shadow: 0 0 10px 0 rgba($color-gray-shadow, 0.7);
+	background-color: variables.$g-base-background;
+	color: variables.$g-text-color;
+	padding: variables.$g-spacer-unit;
+	box-shadow: 0 0 10px 0 rgba(colors.$color-gray-shadow, 0.7);
 
 
 	.c-radio-group .c-radio {
-		padding: $g-spacer-unit $g-spacer-unit * 4 $g-spacer-unit $g-spacer-unit;
+		padding: variables.$g-spacer-unit variables.$g-spacer-unit * 4 variables.$g-spacer-unit variables.$g-spacer-unit;
 	}
 
 	.c-radio input[type="radio"] {
-		margin: 0 $g-spacer-unit 0 0;
+		margin: 0 variables.$g-spacer-unit 0 0;
 	}
 }

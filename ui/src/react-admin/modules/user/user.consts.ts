@@ -2,7 +2,7 @@ import type { ButtonType, SelectOption } from '@viaa/avo2-components';
 import type { Avo } from '@viaa/avo2-types';
 import { PermissionName } from '@viaa/avo2-types';
 import { isAfter, isBefore } from 'date-fns';
-import { compact } from 'lodash-es';
+import { compact } from 'es-toolkit';
 
 import type {
 	CheckboxDropdownModalProps,

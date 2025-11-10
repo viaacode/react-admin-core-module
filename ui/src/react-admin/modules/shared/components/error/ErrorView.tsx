@@ -8,7 +8,7 @@ import {
 	ToolbarCenter,
 } from '@viaa/avo2-components';
 import type { Avo } from '@viaa/avo2-types';
-import { isNull } from 'lodash-es';
+import { isNull } from 'es-toolkit';
 import type { FunctionComponent, ReactNode } from 'react';
 import React from 'react';
 import { CustomError } from '~shared/helpers/custom-error.js';

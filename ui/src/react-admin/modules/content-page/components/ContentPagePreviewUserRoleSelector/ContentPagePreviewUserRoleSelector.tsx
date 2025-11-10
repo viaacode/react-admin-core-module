@@ -8,7 +8,7 @@ import {
 	RadioButtonGroup,
 } from '@viaa/avo2-components';
 import type { Avo } from '@viaa/avo2-types';
-import { isNil, sortBy } from 'lodash-es';
+import { isNil, sortBy } from 'es-toolkit';
 import React, { type FunctionComponent, useEffect, useMemo, useState } from 'react';
 import { StringParam, useQueryParams } from 'use-query-params';
 import {
@@ -62,7 +62,7 @@ export const ContentPagePreviewUserRoleSelector: FunctionComponent<
 		const allOptions = [
 			GET_ALL_CONTENT(),
 			GET_LOGGED_OUT_USERS(),
-			...sortBy(userGroups || [], (userGroup) => preferredUserGroupOrder[userGroup.label || '']),
+			...sortBy(userGroups || [], [(userGroup) => preferredUserGroupOrder[userGroup.label || '']]),
 		];
 
 		return allOptions.map(

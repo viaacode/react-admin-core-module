@@ -1,4 +1,5 @@
-@import "../../../../shared/styles/settings/variables";
+@use "../../../../shared/styles/settings/variables" as variables;
+@use "../../../../shared/styles/settings/colors" as colors;
 
 .c-nudge-scroll-down-wrapper {
 	position: fixed;
@@ -11,13 +12,13 @@
 	padding-bottom: 3rem;
 	align-items: end;
 	justify-content: center;
-	z-index: $g-c-local-toolbar-z;
+	z-index: variables.$g-c-local-toolbar-z;
 
 	.c-nudge-scroll-down-button{
 		border-radius: 50%;
 		animation: bounce 2s;
 		animation-iteration-count: 2;
-		box-shadow: 0 .3rem .3rem rgba($color-gray-500, 0.35);
+		box-shadow: 0 .3rem .3rem rgba(colors.$color-gray-500, 0.35);
 	}
 }
 

@@ -13,7 +13,7 @@ import {
 	TextInput,
 } from '@viaa/avo2-components';
 import { Avo, PermissionName } from '@viaa/avo2-types';
-import { compact, isNil, noop } from 'lodash-es';
+import { compact, isNil, noop } from 'es-toolkit';
 import React, { type FunctionComponent, useCallback, useEffect, useState } from 'react';
 
 import { ToastType } from '~core/config/config.types.js';

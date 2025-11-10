@@ -1,5 +1,5 @@
 import type { Avo } from '@viaa/avo2-types';
-import { compact } from 'lodash-es';
+import { compact } from 'es-toolkit';
 import { stringifyUrl } from 'query-string';
 import type { LabelObj } from '~content-blocks/BlockPageOverview/BlockPageOverview.types.js';
 import { LABELS_PER_PAGE } from '~modules/content-page-labels/content-page-label.const.js';

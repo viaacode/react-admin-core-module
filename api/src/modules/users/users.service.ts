@@ -1,6 +1,5 @@
 import { forwardRef, Inject } from '@nestjs/common';
-import type { Avo } from '@viaa/avo2-types';
-import { Idp } from '@viaa/avo2-types';
+import { Avo } from '@viaa/avo2-types';
 import { compact, flatten } from 'lodash';
 
 import { DataService } from '../data';
@@ -251,7 +250,7 @@ export class UsersService {
 		}
 	}
 
-	async fetchIdps(): Promise<Idp[]> {
+	async fetchIdps(): Promise<Avo.Auth.IdpType[]> {
 		try {
 			const response = await this.dataService.execute<
 				UserQueryTypes['GetIdpsQuery'],
@@ -263,11 +262,11 @@ export class UsersService {
 				return (
 					(response as UserQueryTypes['GetIdpsQueryHetArchief'])
 						.users_identity_provider || []
-				).map((idp) => idp.name as Idp);
+				).map((idp) => idp.name as Avo.Auth.IdpType);
 			}
 
 			return ((response as UserQueryTypes['GetIdpsQueryAvo']).users_idps || []).map(
-				(idp) => idp.value as Idp
+				(idp) => idp.value as Avo.Auth.IdpType
 			);
 		} catch (err: any) {
 			throw customError('Failed to get idps from the database', err, {

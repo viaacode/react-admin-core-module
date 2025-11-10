@@ -12,7 +12,7 @@ import {
 } from '@viaa/avo2-components';
 import type { Avo } from '@viaa/avo2-types';
 import { PermissionName } from '@viaa/avo2-types';
-import { get, noop } from 'lodash-es';
+import { noop } from 'es-toolkit';
 import { stringifyUrl } from 'query-string';
 import type { FC, ReactElement, ReactText } from 'react';
 import React, { useCallback, useEffect, useState } from 'react';
@@ -47,9 +47,6 @@ import { tHtml, tText } from '~shared/helpers/translation-functions.js';
 import { AdminLayout } from '~shared/layouts/AdminLayout/AdminLayout.js';
 import { PermissionService } from '~shared/services/permission-service.js';
 import type { DefaultComponentProps } from '~shared/types/components.js';
-
-export const CONTENT_PAGE_COPY = 'Kopie %index%: ';
-export const CONTENT_PAGE_COPY_REGEX = /^Kopie [0-9]+: /gi;
 
 const {
 	EDIT_ANY_CONTENT_PAGES,
@@ -97,11 +94,7 @@ export const ContentPageDetail: FC<ContentPageDetailProps> = ({
 	}));
 
 	const isContentProtected = contentPageInfo?.isProtected || false;
-	const pageTitle = `${tText('modules/content-page/views/content-page-detail___content')}: ${get(
-		contentPageInfo,
-		'title',
-		''
-	)}`;
+	const pageTitle = `${tText('modules/content-page/views/content-page-detail___content')}: ${contentPageInfo?.title || ''}`;
 
 	const hasPerm = (permission: PermissionName) => PermissionService.hasPerm(commonUser, permission);
 

@@ -1,7 +1,7 @@
 import { IconName, Navbar, Select } from '@viaa/avo2-components';
 import type { Avo } from '@viaa/avo2-types';
 import clsx from 'clsx';
-import { isNil } from 'lodash-es';
+import { isNil } from 'es-toolkit';
 import type { FunctionComponent, ReactNode } from 'react';
 import React, { useCallback, useState } from 'react';
 import { HorizontalPageSplit } from 'react-page-split';

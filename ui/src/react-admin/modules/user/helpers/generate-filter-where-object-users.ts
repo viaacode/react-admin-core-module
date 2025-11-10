@@ -1,4 +1,4 @@
-import { first, isNil, without } from 'lodash-es';
+import { isNil, without } from 'es-toolkit';
 import { ToastType } from '~core/config/config.types.js';
 import type { UserTableState } from '~modules/user/user.types.js';
 import { LomScheme } from '~shared/consts/lom-scheme.enum.js';
@@ -123,7 +123,7 @@ export const generateWhereObjectAvo = (
 
 		// Filter users by whether the user has a Stamboeknummer or not.
 		if (!isNil(filters.stamboek)) {
-			const hasStamboek = first(filters.stamboek) === 'true';
+			const hasStamboek = filters.stamboek?.[0] === 'true';
 			const isStamboekNull = !hasStamboek;
 
 			andFilters.push({ stamboek: { _is_null: isStamboekNull } });

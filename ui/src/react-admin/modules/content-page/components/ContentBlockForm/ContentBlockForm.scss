@@ -1,4 +1,4 @@
-@import "../../../shared/styles/settings/colors";
+@use "../../../shared/styles/settings/colors" as colors;
 
 .c-content-block-form {
   .o-form-group {
@@ -17,7 +17,7 @@
 
 .c-content-block-form__accordion {
   &.has-error {
-    border-color: $color-error;
+    border-color: colors.$color-error;
   }
 
   .c-accordion__header-title {

@@ -14,7 +14,7 @@ export const retrieveProfiles = memoize(
 				0,
 				limit,
 				'lastAccessAt',
-				'desc',
+				Avo.Search.OrderDirection.DESC,
 				'dateTime',
 				name
 					? {

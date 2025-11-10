@@ -2,7 +2,13 @@ import type { ButtonAction } from '@viaa/avo2-components';
 import { Button, Modal, ModalBody } from '@viaa/avo2-components';
 import type { Avo } from '@viaa/avo2-types';
 import clsx from 'clsx';
-import React, { type FunctionComponent, useCallback, useEffect, useState } from 'react';
+import React, {
+	type FunctionComponent,
+	type MouseEvent,
+	useCallback,
+	useEffect,
+	useState,
+} from 'react';
 import { ToastType } from '~core/config/config.types.js';
 import { AdminConfigManager } from '~core/config/index.js';
 import { ItemsService } from '~modules/item/items.service.js';
@@ -121,7 +127,7 @@ export const BlockVideoWrapper: FunctionComponent<MediaPlayerWrapperProps> = (pr
 	}, [src, mediaItem]);
 
 	const handleCopyrightClicked = (
-		evt: React.MouseEvent<HTMLElement, MouseEvent>,
+		evt: React.MouseEvent<HTMLElement>,
 		orgInfo: Avo.Organization.Organization
 	) => {
 		evt.stopPropagation();
@@ -150,7 +156,7 @@ export const BlockVideoWrapper: FunctionComponent<MediaPlayerWrapperProps> = (pr
 						org && (
 							<Button
 								type="inline-link"
-								onClick={(evt) => handleCopyrightClicked(evt, org)}
+								onClick={(evt) => handleCopyrightClicked(evt as MouseEvent<HTMLElement>, org)}
 								label={tText(
 									'react-admin/modules/content-page/components/blocks/block-video/block-video___bron'
 								)}

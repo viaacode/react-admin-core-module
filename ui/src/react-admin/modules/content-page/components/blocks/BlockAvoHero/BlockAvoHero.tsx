@@ -8,7 +8,7 @@ import type {
 } from '@viaa/avo2-components';
 import { Button, ButtonToolbar, Container, Spacer } from '@viaa/avo2-components';
 import clsx from 'clsx';
-import { isString } from 'lodash-es';
+import { isString } from 'es-toolkit';
 import type { FunctionComponent, ReactNode } from 'react';
 import React from 'react';
 import { Icon } from '~shared/components/Icon/Icon.js';

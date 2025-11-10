@@ -1,5 +1,5 @@
 import { Avo } from '@viaa/avo2-types';
-import { compact, sortBy } from 'lodash-es';
+import { compact, sortBy } from 'es-toolkit';
 import { AdminConfigManager } from '~core/config/config.class.js';
 import type { Locale } from '~modules/translations/translations.core.types.js';
 import type { PickerItem } from '~shared/types/content-picker.js';
@@ -26,5 +26,5 @@ export const retrieveInternalLinks = async (
 		}
 		return null;
 	});
-	return sortBy(compact(routeOptions), 'value').slice(0, limit);
+	return sortBy(compact(routeOptions), ['value']).slice(0, limit);
 };

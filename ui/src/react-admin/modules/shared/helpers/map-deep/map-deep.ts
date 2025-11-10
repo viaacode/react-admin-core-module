@@ -1,4 +1,4 @@
-import { isArray, isPlainObject } from 'lodash-es';
+import { isPlainObject } from 'es-toolkit';
 
 /**
  * Recursively runs over every property, and replaces it with the return value of the mapping function
@@ -35,7 +35,7 @@ export function mapDeep(
 
 		// Add next layer of props in object to the processing queue
 		if (!ignoreKey(String(key))) {
-			if (isPlainObject(value) || isArray(value)) {
+			if (isPlainObject(value) || Array.isArray(value)) {
 				propertiesToRunOver.push(
 					...Object.keys(value).map(
 						// biome-ignore lint/suspicious/noExplicitAny: todo

@@ -1,4 +1,5 @@
-import { compact, isArray, isNil, set, without } from 'lodash-es';
+import { compact, isNil, without } from 'es-toolkit';
+import { set } from 'es-toolkit/compat';
 import type { LomScheme } from '~shared/consts/lom-scheme.enum.js';
 
 export const NULL_FILTER = 'null';
@@ -92,7 +93,7 @@ export function getMultiOptionFilters<T>(
 		nestedProps || (props as string[]),
 		// biome-ignore lint/suspicious/noExplicitAny: todo
 		(prop: string, value: any) => {
-			if (isArray(value) && value.includes(NULL_FILTER)) {
+			if (Array.isArray(value) && value.includes(NULL_FILTER)) {
 				return {
 					_or: [
 						{ [prop]: { _is_null: true } }, // Empty value
@@ -133,7 +134,7 @@ export function getMultiOptionsFilters<T>(
 
 			if (
 				isNil(filterValues) ||
-				!isArray(filterValues) ||
+				!Array.isArray(filterValues) ||
 				!filterValues.length ||
 				!referenceTable
 			) {
@@ -225,7 +226,7 @@ function setNestedValues<T>(
 		props.map((prop: keyof T, index: number): any => {
 			// biome-ignore lint/suspicious/noExplicitAny: todo
 			const value = (filters as any)[prop];
-			if (!isNil(value) && (!isArray(value) || value.length)) {
+			if (!isNil(value) && (!Array.isArray(value) || value.length)) {
 				const nestedProp = nestedProps ? nestedProps[index] : String(prop);
 
 				const lastProp = nestedProp.split('.').pop() as string;

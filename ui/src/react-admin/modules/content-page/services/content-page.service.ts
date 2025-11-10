@@ -1,6 +1,6 @@
 import type { IPagination } from '@studiohyperdrive/pagination';
 import type { Avo } from '@viaa/avo2-types';
-import { kebabCase } from 'lodash-es';
+import { kebabCase } from 'es-toolkit';
 import { stringifyUrl } from 'query-string';
 import type { ContentPageOverviewParams } from '~content-blocks/BlockPageOverview/BlockPageOverview.types.js';
 
@@ -261,7 +261,10 @@ export class ContentPageService {
 	}
 
 	public static getPathOrDefault(contentPage: Partial<ContentPageInfo> | null): string {
-		return contentPage?.path || `/${kebabCase(contentPage?.title)}` || '';
+		if (contentPage?.path && contentPage?.title) {
+			return `/${kebabCase(contentPage.title)}`;
+		}
+		return '';
 	}
 
 	/**

@@ -1,9 +1,9 @@
-import {execSync} from 'node:child_process';
-import * as path from 'node:path';
-import {red} from 'console-log-colors';
-import {getDirName} from './get-dir-name.mjs';
+import { execSync } from 'node:child_process';
 import * as fs from 'node:fs/promises';
-import {uniq} from "lodash-es";
+import * as path from 'node:path';
+import { red } from 'console-log-colors';
+import { uniq } from 'es-toolkit';
+import { getDirName } from './get-dir-name.js';
 
 /**
  * fetch the list of commit messages between two git tags using the command:
@@ -32,8 +32,8 @@ async function getListOfCommitMessagesBetweenTags(oldTag?: string, newTag?: stri
 	// Remove all lines that do not contain AVO- or ARC- jira ticket numbers
 	const jiraTicketRegex = /(AVO-\d+|ARC-\d+)/;
 	const lines = result.split('\n');
-	const commitLine = uniq(lines.filter(
-		(line) => {
+	const commitLine = uniq(
+		lines.filter((line) => {
 			if (line.toLowerCase().includes('extract translations')) {
 				return false;
 			}
@@ -46,9 +46,9 @@ async function getListOfCommitMessagesBetweenTags(oldTag?: string, newTag?: stri
 			if (line.toLowerCase().endsWith('…')) {
 				return false;
 			}
-			return jiraTicketRegex.test(line)
-		}
-	));
+			return jiraTicketRegex.test(line);
+		})
+	);
 
 	// Write the simplified translations to a file
 	const outputFilePath = path.join(getDirName(), `../commit-messages.txt`);

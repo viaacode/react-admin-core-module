@@ -9,12 +9,11 @@ export const useGetContentPageByLanguageAndPath = (
 	path: string,
 	options: { enabled?: boolean; keepPreviousData?: boolean } = {
 		enabled: true,
-		keepPreviousData: true,
 	}
 ) => {
-	return useQuery(
-		[QUERY_KEYS.GET_PROFILES, language, path],
-		async (props) => {
+	return useQuery({
+		queryKey: [QUERY_KEYS.GET_PROFILES, language, path],
+		queryFn: async (props) => {
 			const language = props.queryKey[1] as Locale;
 			const path = props.queryKey[2];
 			if (!language || !path) {
@@ -27,10 +26,7 @@ export const useGetContentPageByLanguageAndPath = (
 			);
 			return dbContentPage ? convertDbContentPageToContentPageInfo(dbContentPage) : null;
 		},
-		{
-			enabled: true,
-			keepPreviousData: true,
-			...options,
-		}
-	);
+		enabled: true,
+		...options,
+	});
 };

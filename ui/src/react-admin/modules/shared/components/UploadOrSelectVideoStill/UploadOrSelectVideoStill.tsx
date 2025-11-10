@@ -9,7 +9,7 @@ import {
 } from '@viaa/avo2-components';
 import type { ContentPickerType } from '@viaa/avo2-types';
 import clsx from 'clsx';
-import { compact, noop, uniq } from 'lodash-es';
+import { compact, noop, uniq } from 'es-toolkit';
 import type { FunctionComponent, KeyboardEvent } from 'react';
 import React, { useEffect, useState } from 'react';
 import FileUpload from '~shared/components/FileUpload/FileUpload.js';

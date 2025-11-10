@@ -1,10 +1,10 @@
-import {execSync} from 'node:child_process';
-import {kebabCase} from 'lodash-es';
-import * as path from 'node:path';
-import {red} from 'console-log-colors';
-import type {App} from './translation.types.mjs';
-import {getDirName} from './get-dir-name.mjs';
+import { execSync } from 'node:child_process';
 import * as fs from 'node:fs/promises';
+import * as path from 'node:path';
+import { red } from 'console-log-colors';
+import { kebabCase } from 'es-toolkit';
+import { getDirName } from './get-dir-name.js';
+import type { App } from './translation.types.js';
 
 /**
  * fetch the list of changed translations between two git tags using the command:

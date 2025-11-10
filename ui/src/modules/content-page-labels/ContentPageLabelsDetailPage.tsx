@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import { useMatch } from 'react-router';
 import { AdminConfigManager } from '~core/config/config.class.js';
-import { ContentPageLabelDetail } from '~modules/content-page-labels/views/ContentPageLabelDetail';
+import { ContentPageLabelDetail } from '~modules/content-page-labels/views/ContentPageLabelDetail.js';
 
 export const ContentPageLabelsDetailPage: FC = () => {
 	const match = useMatch<'id', string>(

@@ -1,6 +1,6 @@
 import { Button } from '@meemoo/react-components';
 import { ButtonToolbar } from '@viaa/avo2-components';
-import { get, isNil } from 'lodash-es';
+import { isNil } from 'es-toolkit';
 import type { FunctionComponent } from 'react';
 import React, { useCallback, useEffect, useState } from 'react';
 
@@ -47,6 +47,7 @@ import type {
 	ContentPageLabelTableState,
 } from '../content-page-label.types.js';
 import './ContentPageLabelOverview.scss';
+import { Avo } from '@viaa/avo2-types';
 
 export const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> = ({
 	className,
@@ -88,7 +89,7 @@ export const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> 
 				await ContentPageLabelService.fetchContentPageLabels(
 					tableState.page || 0,
 					(tableState.sort_column || 'updated_at') as ContentPageLabelOverviewTableCols,
-					tableState.sort_order || 'desc',
+					tableState.sort_order || Avo.Search.OrderDirection.DESC,
 					generateWhereObject(getFilters(tableState))
 				);
 
@@ -119,7 +120,7 @@ export const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> 
 		(option): CheckboxOption => ({
 			id: option.value,
 			label: option.label,
-			checked: (get(tableState, 'content_type', [] as string[]) as string[]).includes(option.value),
+			checked: ((tableState?.content_type || ([] as string[])) as string[]).includes(option.value),
 		})
 	);
 	const languageOptions = (allLanguages || []).map(

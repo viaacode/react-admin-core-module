@@ -1,9 +1,9 @@
-import { isArray, isFunction, isPlainObject } from 'lodash-es';
-import { mockObject1, mockObject2 } from '~shared/helpers/map-deep/map-deep.mocks';
-import { sanitizeHtml } from '~shared/helpers/sanitize';
+import { isFunction, isPlainObject } from 'es-toolkit';
+import { mockObject1, mockObject2 } from '~shared/helpers/map-deep/map-deep.mocks.js';
+import { sanitizeHtml } from '~shared/helpers/sanitize/index.js';
 import { SanitizePreset } from '~shared/helpers/sanitize/presets/index.js';
-import { RichEditorStateKey } from '../../../content-page/const/rich-text-editor.consts';
-import { mapDeep } from './map-deep';
+import { RichEditorStateKey } from '../../../content-page/const/rich-text-editor.consts.js';
+import { mapDeep } from './map-deep.js';
 
 describe('map-deep', () => {
 	it('Should correctly map all levels of an object', () => {
@@ -14,7 +14,7 @@ describe('map-deep', () => {
 					obj[key] = new Date(value);
 				} else if (key === 'school2') {
 					// Do nothing
-				} else if (!isPlainObject(value) && !isArray(value)) {
+				} else if (!isPlainObject(value) && !Array.isArray(value)) {
 					obj[key] = value;
 				} else if (isPlainObject(value)) {
 					obj[key] = {};
@@ -52,7 +52,7 @@ describe('map-deep', () => {
 						htmlFromRichTextEditor || obj[htmlKey] || '',
 						SanitizePreset.full
 					);
-				} else if (!isPlainObject(value) && !isArray(value)) {
+				} else if (!isPlainObject(value) && !Array.isArray(value)) {
 					obj[key] = value;
 				} else if (isPlainObject(value)) {
 					obj[key] = {};

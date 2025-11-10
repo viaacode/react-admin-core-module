@@ -1,5 +1,5 @@
 import type { IPagination } from '@studiohyperdrive/pagination';
-import type { Avo } from '@viaa/avo2-types';
+import { Avo } from '@viaa/avo2-types';
 import { stringifyUrl } from 'query-string';
 import { CustomError } from '~modules/shared/helpers/custom-error.js';
 import { fetchWithLogoutJson } from '~modules/shared/helpers/fetch-with-logout.js';
@@ -20,7 +20,7 @@ export class MaintenanceAlertsService {
 		searchTerm: string | undefined,
 		languages: Locale[] | undefined,
 		orderProp: MaintenanceAlertsOverviewTableCol = 'fromDate',
-		orderDirection: Avo.Search.OrderDirection = 'asc',
+		orderDirection = Avo.Search.OrderDirection.ASC,
 		page = 0,
 		size = 10
 	): Promise<IPagination<MaintenanceAlert[]>> {

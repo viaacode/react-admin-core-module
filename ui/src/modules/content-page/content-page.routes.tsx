@@ -2,10 +2,10 @@ import type { ReactNode } from 'react';
 import React from 'react';
 import { Route } from 'react-router-dom';
 import { AdminConfigManager } from '~core/config/config.class.js';
-import { ContentPageDetailPage } from './ContentPageDetailPage';
-import { ContentPageEditPage } from './ContentPageEditPage';
-import { ContentPageOverviewPage } from './ContentPageOverviewPage';
-import { ContentPagePreviewPage } from './ContentPagePreviewPage';
+import { ContentPageDetailPage } from './ContentPageDetailPage.js';
+import { ContentPageEditPage } from './ContentPageEditPage.js';
+import { ContentPageOverviewPage } from './ContentPageOverviewPage.js';
+import { ContentPagePreviewPage } from './ContentPagePreviewPage.js';
 
 export const renderAdminContentPageRoutes = (): ReactNode[] => {
 	return [

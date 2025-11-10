@@ -2,9 +2,9 @@ import type { ReactNode } from 'react';
 import React from 'react';
 import { Route } from 'react-router-dom';
 import { AdminConfigManager } from '~core/config/config.class.js';
-import { ContentPageLabelsDetailPage } from './ContentPageLabelsDetailPage';
-import { ContentPageLabelsEditPage } from './ContentPageLabelsEditPage';
-import { ContentPageLabelsOverviewPage } from './ContentPageLabelsOverviewPage';
+import { ContentPageLabelsDetailPage } from './ContentPageLabelsDetailPage.js';
+import { ContentPageLabelsEditPage } from './ContentPageLabelsEditPage.js';
+import { ContentPageLabelsOverviewPage } from './ContentPageLabelsOverviewPage.js';
 
 export const renderAdminContentPageLabelRoutes = (): ReactNode[] => {
 	return [

@@ -1,6 +1,6 @@
 import { FormGroup } from '@viaa/avo2-components';
 import type { ContentPickerType } from '@viaa/avo2-types';
-import { noop } from 'lodash-es';
+import { noop } from 'es-toolkit';
 import type { FunctionComponent } from 'react';
 import React, { useEffect } from 'react';
 import type { ActionMeta } from 'react-select';

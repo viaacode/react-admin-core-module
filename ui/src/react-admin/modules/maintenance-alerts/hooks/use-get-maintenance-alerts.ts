@@ -12,16 +12,19 @@ import type {
 export const useGetMaintenanceAlerts = (
 	getMaintenanceAlertsArguments: Partial<MaintenanceAlertsOverviewTableState>
 ): UseQueryResult<IPagination<MaintenanceAlert[]>> => {
-	return useQuery([QUERY_KEYS.GET_ALL_ALERTS, getMaintenanceAlertsArguments], (props) => {
-		const getMaintenanceAlertsArgs = props
-			.queryKey[1] as Partial<MaintenanceAlertsOverviewTableState>;
+	return useQuery({
+		queryKey: [QUERY_KEYS.GET_ALL_ALERTS, getMaintenanceAlertsArguments],
+		queryFn: (props) => {
+			const getMaintenanceAlertsArgs = props
+				.queryKey[1] as Partial<MaintenanceAlertsOverviewTableState>;
 
-		return MaintenanceAlertsService.fetchMaintenanceAlerts(
-			getMaintenanceAlertsArgs.query,
-			getMaintenanceAlertsArgs.language,
-			getMaintenanceAlertsArgs.sort_column as MaintenanceAlertsOverviewTableCol | undefined,
-			getMaintenanceAlertsArgs.sort_order,
-			getMaintenanceAlertsArgs.page
-		);
+			return MaintenanceAlertsService.fetchMaintenanceAlerts(
+				getMaintenanceAlertsArgs.query,
+				getMaintenanceAlertsArgs.language,
+				getMaintenanceAlertsArgs.sort_column as MaintenanceAlertsOverviewTableCol | undefined,
+				getMaintenanceAlertsArgs.sort_order,
+				getMaintenanceAlertsArgs.page
+			);
+		},
 	});
 };

@@ -1,11 +1,11 @@
 @use "sass:color";
-@import "../../shared/styles/settings/colors";
+@use "../../shared/styles/settings/colors" as colors;
 
 @keyframes flash {
   from,
   50%,
   to {
-    background-color: color.adjust($color-teal-bright, $lightness: -30%);
+    background-color: color.adjust(colors.$color-teal-bright, $lightness: -30%);
   }
 
   25%,
@@ -20,7 +20,7 @@
 }
 
 .content-block-sidebar-item--highlighted {
-  border-color: $color-teal-bright;
+  border-color: colors.$color-teal-bright;
 }
 
 .content-block-sidebar__items-non-draggable {

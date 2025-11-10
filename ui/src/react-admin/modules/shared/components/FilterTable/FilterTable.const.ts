@@ -1,4 +1,4 @@
-import { compact, fromPairs } from 'lodash-es';
+import { compact } from 'es-toolkit';
 import { NumberParam, type QueryParamConfig, StringParam } from 'use-query-params';
 
 import { CheckboxListParam, DateRangeParam } from '../../helpers/query-string-converters.js';
@@ -19,7 +19,7 @@ const FILTER_TYPE_TO_QUERY_PARAM_CONVERTER = {
 export const FILTER_TABLE_QUERY_PARAM_CONFIG = (columns: FilterableColumn[]) => ({
 	page: NumberParam,
 	...cleanupFilterTableState(
-		fromPairs(
+		Object.fromEntries(
 			compact(
 				columns.map((col): [string, QueryParamConfig<any>] | null => {
 					if (col.filterType && FILTER_TYPE_TO_QUERY_PARAM_CONVERTER[col.filterType]) {

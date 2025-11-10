@@ -1,6 +1,6 @@
 import type { IconName } from '@viaa/avo2-components';
 import type { Avo } from '@viaa/avo2-types';
-import { cloneDeep, compact, isNil, isNumber, isString, sortBy } from 'lodash-es';
+import { cloneDeep, compact, isNil, isString, sortBy } from 'es-toolkit';
 import type { FunctionComponent } from 'react';
 import { useEffect } from 'react';
 import type { QueryParamConfig } from 'use-query-params';
@@ -63,7 +63,7 @@ export const BlockPageOverviewWrapper: FunctionComponent<PageOverviewWrapperProp
 			return [];
 		}
 		if (
-			isNumber(contentTypeAndTabs.selectedLabels[0]) ||
+			typeof contentTypeAndTabs.selectedLabels[0] === 'number' ||
 			isString(contentTypeAndTabs.selectedLabels[0])
 		) {
 			// new format where we save the ids of the labels instead of the full label object
@@ -85,26 +85,19 @@ export const BlockPageOverviewWrapper: FunctionComponent<PageOverviewWrapperProp
 		},
 		{
 			enabled: (contentTypeAndTabs?.selectedLabels?.length || 0) > 0,
-			keepPreviousData: true,
 		}
 	);
 
 	const { data: selectedTabObjects, isFetching: isLoadingSelectedTabObjects } =
-		useGetContentPageLabelsByTypeAndLabels(
-			{
-				selectedContentType: contentTypeAndTabs.selectedContentType,
-				queryLabels: queryParamsState.label || [],
-			},
-			{ keepPreviousData: true }
-		);
+		useGetContentPageLabelsByTypeAndLabels({
+			selectedContentType: contentTypeAndTabs.selectedContentType,
+			queryLabels: queryParamsState.label || [],
+		});
 
 	const { data: focusedPage, isFetching: isLoadingFocusedPage } =
 		useGetContentPageByLanguageAndPath(
 			AdminConfigManager.getConfig().locale || Locale.Nl,
-			queryParamsState.item,
-			{
-				keepPreviousData: true,
-			}
+			queryParamsState.item
 		);
 
 	const {
@@ -112,26 +105,23 @@ export const BlockPageOverviewWrapper: FunctionComponent<PageOverviewWrapperProp
 		isFetching: isLoadingPagesAndLabels,
 		error: errorPagesAndLabels,
 		isInitialLoading,
-	} = useGetContentPagesForPageOverviewBlock(
-		{
-			withBlocks:
-				itemStyle === ContentItemStyle.ACCORDION ||
-				itemStyle === ContentItemStyle.ACCORDION_TWO_LEVELS,
-			contentType: contentTypeAndTabs.selectedContentType,
-			labelIds: getSelectedLabelIds(),
-			selectedLabelIds: selectedTabObjects?.length
-				? selectedTabObjects.map((tab) => tab.id)
-				: getSelectedLabelIds(),
-			orderProp: sortOrder.split('__')[0],
-			orderDirection: sortOrder.split('__').pop() as Avo.Search.OrderDirection,
-			offset:
-				itemStyle === ContentItemStyle.ACCORDION_TWO_LEVELS
-					? 0
-					: queryParamsState.page * debouncedItemsPerPage,
-			limit: itemStyle === ContentItemStyle.ACCORDION_TWO_LEVELS ? 500 : debouncedItemsPerPage,
-		},
-		{ keepPreviousData: true }
-	);
+	} = useGetContentPagesForPageOverviewBlock({
+		withBlocks:
+			itemStyle === ContentItemStyle.ACCORDION ||
+			itemStyle === ContentItemStyle.ACCORDION_TWO_LEVELS,
+		contentType: contentTypeAndTabs.selectedContentType,
+		labelIds: getSelectedLabelIds(),
+		selectedLabelIds: selectedTabObjects?.length
+			? selectedTabObjects.map((tab) => tab.id)
+			: getSelectedLabelIds(),
+		orderProp: sortOrder.split('__')[0],
+		orderDirection: sortOrder.split('__').pop() as Avo.Search.OrderDirection,
+		offset:
+			itemStyle === ContentItemStyle.ACCORDION_TWO_LEVELS
+				? 0
+				: queryParamsState.page * debouncedItemsPerPage,
+		limit: itemStyle === ContentItemStyle.ACCORDION_TWO_LEVELS ? 500 : debouncedItemsPerPage,
+	});
 
 	const pages = pagesAndLabels?.items;
 	const pageCount = pagesAndLabels?.pages;
@@ -218,7 +208,7 @@ export const BlockPageOverviewWrapper: FunctionComponent<PageOverviewWrapperProp
 		// Sort labels in the order they were entered in the admin-core content page editor:
 		// https://meemoo.atlassian.net/browse/ARC-1443?focusedCommentId=40802
 		const labelIds = (contentTypeAndTabs.selectedLabels || []).map((labelId) => String(labelId));
-		return sortBy(labelsWithAtLeastOnePage, (labelObj) => labelIds.indexOf(String(labelObj.id)));
+		return sortBy(labelsWithAtLeastOnePage, [(labelObj) => labelIds.indexOf(String(labelObj.id))]);
 	};
 
 	const renderPageOverviewBlock = () => {

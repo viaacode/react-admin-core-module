@@ -3,6 +3,6 @@ import { QUERY_KEYS } from '~shared/types/index.js';
 
 export async function invalidateNavigationQueries() {
 	const client = new QueryClient();
-	await client.invalidateQueries([QUERY_KEYS.GET_NAVIGATION_ITEM]);
-	await client.invalidateQueries([QUERY_KEYS.GET_NAVIGATIONS]);
+	await client.invalidateQueries({ queryKey: [QUERY_KEYS.GET_NAVIGATION_ITEM] });
+	await client.invalidateQueries({ queryKey: [QUERY_KEYS.GET_NAVIGATIONS] });
 }

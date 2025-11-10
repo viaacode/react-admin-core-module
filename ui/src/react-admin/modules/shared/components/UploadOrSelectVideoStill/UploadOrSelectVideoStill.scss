@@ -1,5 +1,5 @@
 @use "sass:math";
-@import "../../../shared/styles/settings/colors";
+@use "../../../shared/styles/settings/colors" as colors;
 
 $image-width: 20rem;
 
@@ -20,7 +20,7 @@ $image-width: 20rem;
     cursor: pointer;
 
     &:hover {
-      outline: 0.5rem solid $color-primary;
+      outline: 0.5rem solid colors.$color-primary;
     }
 
     input {
@@ -82,7 +82,7 @@ $image-width: 20rem;
 
     &:hover,
     &--selected {
-      outline: 0.5rem solid $color-primary;
+      outline: 0.5rem solid colors.$color-primary;
     }
   }
 }

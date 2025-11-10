@@ -1,3 +1,5 @@
+@use '../../shared/styles/settings/colors.scss' as colors;
+
 .react-page-split--horizontal {
   display: flex;
   position: relative;
@@ -11,7 +13,7 @@
 
   > .react-page-split__divider--horizontal {
     position: relative;
-    background-color: rgba($color-gray-50, 0.4);
+    background-color: rgba(colors.$color-gray-50, 0.4);
     height: auto !important;
     top: 0;
     bottom: 0;

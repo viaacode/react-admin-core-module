@@ -5,8 +5,9 @@ import { retry as retryPromise } from 'ts-retry-promise';
 import { tText } from '~shared/helpers/translation-functions.js';
 import './ExportAllToCsvModal.scss';
 import { delay, mapLimit } from 'blend-promise-utils';
+import { noop } from 'es-toolkit';
+import { times } from 'es-toolkit/compat';
 import FileSaver from 'file-saver';
-import { noop, times } from 'lodash-es';
 import { ToastType } from '~core/config/config.types.js';
 import { showToast } from '~shared/helpers/show-toast.js';
 

@@ -1,5 +1,5 @@
 import { Test, type TestingModule } from '@nestjs/testing';
-import { DatabaseType } from '@viaa/avo2-types';
+import { Avo, DatabaseType } from '@viaa/avo2-types';
 
 import { DataService } from '../../data';
 import {
@@ -102,7 +102,7 @@ describe('ContentPageLabelsService', () => {
 				0,
 				20,
 				'label',
-				'asc',
+				Avo.Search.OrderDirection.ASC,
 				'{}'
 			);
 			expect(response[0].length).toBe(1);
@@ -119,7 +119,7 @@ describe('ContentPageLabelsService', () => {
 					0,
 					20,
 					'label',
-					'asc',
+					Avo.Search.OrderDirection.ASC,
 					'{}'
 				);
 				expect(response).toBeUndefined();

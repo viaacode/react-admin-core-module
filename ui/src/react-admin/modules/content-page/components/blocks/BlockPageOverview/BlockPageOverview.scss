@@ -1,4 +1,4 @@
-@import "../../../../shared/styles/settings/colors";
+@use "../../../../shared/styles/settings/colors" as colors;
 
 .c-content-page-overview-block {
   .o-flex.o-flex--center > .c-tabs {
@@ -22,7 +22,7 @@
     h3 {
       margin-top: 0;
       cursor: pointer;
-      color: $color-teal-bright;
+      color: colors.$color-teal-bright;
       font-family:
         Montserrat,
         -apple-system,

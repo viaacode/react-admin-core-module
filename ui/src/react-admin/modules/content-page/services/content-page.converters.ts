@@ -1,4 +1,4 @@
-import { compact, isArray, isFunction, isPlainObject, sortBy } from 'lodash-es';
+import { compact, isFunction, isPlainObject, sortBy } from 'es-toolkit';
 import { ToastType } from '~core/config/config.types.js';
 import { CONTENT_BLOCK_CONFIG_MAP } from '~modules/content-page/const/content-block-config-map.js';
 import { TEMP_BLOCK_ID_PREFIX } from '~modules/content-page/const/content-page.consts.js';
@@ -54,7 +54,7 @@ export function convertRichTextEditorStatesToHtml(
 					htmlFromRichTextEditor || obj[htmlKey] || '',
 					SanitizePreset.full
 				);
-			} else if (!isPlainObject(value) && !isArray(value)) {
+			} else if (!isPlainObject(value) && !Array.isArray(value)) {
 				obj[key] = value;
 			} else if (isPlainObject(value)) {
 				obj[key] = {};
@@ -87,7 +87,7 @@ export function convertDbContentPageToContentPageInfo(
 export function convertDbContentBlockToContentBlockConfig(
 	contentBlocks: DbContentBlock[]
 ): ContentBlockConfig[] {
-	const sortedContentBlocks = sortBy(contentBlocks, (c) => c.position);
+	const sortedContentBlocks = sortBy(contentBlocks, ['position']);
 
 	return compact(
 		(sortedContentBlocks || []).map((contentBlock: DbContentBlock) => {

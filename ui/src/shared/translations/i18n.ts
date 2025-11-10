@@ -1,6 +1,6 @@
+import { lowerCase, upperFirst } from 'es-toolkit';
 import I18n from 'i18next';
 import XHR from 'i18next-http-backend';
-import { lowerCase, upperFirst } from 'lodash-es';
 import { initReactI18next } from 'react-i18next';
 
 export async function initI18n(adminProxyUrl: string): Promise<void> {
@@ -31,7 +31,7 @@ export async function initI18n(adminProxyUrl: string): Promise<void> {
 				},
 				parseMissingKeyHandler: (key: string) => {
 					if (key.includes('___')) {
-						return `${upperFirst(lowerCase(key.split('___').pop()))} ***`;
+						return `${upperFirst(lowerCase(key.split('___').pop() || ''))} ***`;
 					}
 					return `${key} ***`;
 				},

@@ -18,20 +18,16 @@ export const useGetContentPagesForPageOverviewBlock = (
 	requestArgs: ContentPagesOverviewArgs,
 	options: { enabled?: boolean; keepPreviousData?: boolean } = {
 		enabled: true,
-		keepPreviousData: true,
 	}
 ) => {
-	return useQuery(
-		[QUERY_KEYS.GET_PROFILES, requestArgs],
-		(props) => {
+	return useQuery({
+		queryKey: [QUERY_KEYS.GET_PROFILES, requestArgs],
+		queryFn: (props) => {
 			return ContentPageService.getContentPagesForPageOverviewBlock(
 				props.queryKey[1] as ContentPagesOverviewArgs
 			);
 		},
-		{
-			enabled: true,
-			keepPreviousData: true,
-			...options,
-		}
-	);
+		enabled: true,
+		...options,
+	});
 };

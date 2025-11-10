@@ -10,13 +10,13 @@
   "exports": {
     "./client": {
       "types": "./dist/src/client.d.ts",
-      "import": "./dist/client.js",
-      "default": "./dist/client.js"
+      "import": "./dist/src/client.js",
+      "default": "./dist/src/client.js"
     },
     "./admin": {
       "types": "./dist/src/admin.d.ts",
-      "import": "./dist/admin.js",
-      "default": "./dist/admin.js"
+      "import": "./dist/src/admin.js",
+      "default": "./dist/src/admin.js"
     }
   },
   "typesVersions": {
@@ -34,7 +34,6 @@
     "dev": "cross-env PORT=3400 dotenv -e .env/.env.local vite",
     "prebuild": "rimraf dist",
     "build": "vite build",
-    "build:tsc": "tsc -p ./tsconfig.json",
     "serve": "vite preview",
     "copy-to-client-hetarchief": "rimraf ../../hetarchief-client/node_modules/@meemoo/admin-core-ui/dist ../../hetarchief-client/node_modules/.cache ../../hetarchief-client/.swc ../../hetarchief-client/.next && rimraf ../../hetarchief-client/.next && cp -r dist package.json ../../hetarchief-client/node_modules/@meemoo/admin-core-ui",
     "copy-to-client-avo": "rimraf ../../avo2-client/node_modules/@meemoo/admin-core-ui/dist ../../avo2-client/node_modules/.cache  ../../avo2-client/node_modules/.vite && cp -r dist package.json ../../avo2-client/node_modules/@meemoo/admin-core-ui",
@@ -48,14 +47,14 @@
     "lint:scss": "stylelint --fix src/**/*.{css,scss}",
     "test": "jest --cache",
     "type-check": "tsc --noEmit",
-    "backup-translations-hetarchief-qas": "dotenv -e .env/.env.local tsx --project ./scripts/tsconfig.json scripts/backup-translations.mts -- HET_ARCHIEF",
-    "backup-translations-avo-qas": "dotenv -e .env/.env.local tsx --project ./scripts/tsconfig.json scripts/backup-translations.mts -- AVO",
-    "translations:extract:hetarchief": "dotenv -e .env/.env.local tsx --project ./scripts/tsconfig.json scripts/extract-and-replace-translations.mts -- HET_ARCHIEF",
-    "translations:extract:avo": "dotenv -e .env/.env.local tsx --project ./scripts/tsconfig.json scripts/extract-and-replace-translations.mts -- AVO",
-    "list-of-changed-translations-hetarchief": "dotenv -e .env/.env.local tsx --project ./scripts/tsconfig.json scripts/get-list-of-changed-translations.mts -- HET_ARCHIEF v4.6.13 v4.6.15",
-    "list-commit-messages-between-tags-hetarchief": "dotenv -e .env/.env.local tsx --project ./scripts/tsconfig.json scripts/get-list-of-commit-messages-between-tags.mts -- v4.6.13 v4.6.15",
-    "list-of-changed-translations-avo": "dotenv -e .env/.env.local tsx --project ./scripts/tsconfig.json scripts/get-list-of-changed-translations.mts -- AVO v4.6.3 v4.6.10",
-    "list-commit-messages-between-tags-avo": "dotenv -e .env/.env.local tsx --project ./scripts/tsconfig.json scripts/get-list-of-commit-messages-between-tags.mts -- v4.6.3 v4.6.10",
+    "backup-translations-hetarchief-qas": "dotenv -e .env/.env.local tsx --project ./scripts/tsconfig.json scripts/backup-translations.ts -- HET_ARCHIEF",
+    "backup-translations-avo-qas": "dotenv -e .env/.env.local tsx --project ./scripts/tsconfig.json scripts/backup-translations.ts -- AVO",
+    "translations:extract:hetarchief": "dotenv -e .env/.env.local tsx --project ./scripts/tsconfig.json scripts/extract-and-replace-translations.ts -- HET_ARCHIEF",
+    "translations:extract:avo": "dotenv -e .env/.env.local tsx --project ./scripts/tsconfig.json scripts/extract-and-replace-translations.ts -- AVO",
+    "list-of-changed-translations-hetarchief": "dotenv -e .env/.env.local tsx --project ./scripts/tsconfig.json scripts/get-list-of-changed-translations.ts -- HET_ARCHIEF v4.6.13 v4.6.15",
+    "list-commit-messages-between-tags-hetarchief": "dotenv -e .env/.env.local tsx --project ./scripts/tsconfig.json scripts/get-list-of-commit-messages-between-tags.ts -- v4.6.13 v4.6.15",
+    "list-of-changed-translations-avo": "dotenv -e .env/.env.local tsx --project ./scripts/tsconfig.json scripts/get-list-of-changed-translations.ts -- AVO v4.6.3 v4.6.10",
+    "list-commit-messages-between-tags-avo": "dotenv -e .env/.env.local tsx --project ./scripts/tsconfig.json scripts/get-list-of-commit-messages-between-tags.ts -- v4.6.3 v4.6.10",
     "check-bundled-files": "npx depcruise src/react-admin --config bundle-import-rules.json --include-only \"^src\" --exclude \"(.spec.tsx?|.test.tsx?|node_modules)\"",
     "check-bundled-files:admin.mts": "npx depcruise src/admin.ts --config bundle-import-rules.json --include-only \"^src\" --exclude \"(.spec.tsx?|.test.tsx?|node_modules)\"",
     "check-bundled-files:client.mts": "npx depcruise src/client.ts --config bundle-import-rules.json --include-only \"^src\" --exclude \"(.spec.tsx?|.test.tsx?|node_modules)\" --output-type dot | dot -T svg > dependency-graph.svg",
@@ -65,11 +64,11 @@
   },
   "peerDependencies": {
     "@hookform/resolvers": "2.9.11",
-    "@meemoo/react-components": "4.4.3",
+    "@meemoo/react-components": "5.0.2",
     "@studiohyperdrive/pagination": "1.0.0",
-    "@tanstack/react-query": "4.36.1",
-    "@viaa/avo2-components": "5.2.1",
-    "@viaa/avo2-types": "3.3.0",
+    "@tanstack/react-query": "5.90.7",
+    "@viaa/avo2-components": "6.0.1",
+    "@viaa/avo2-types": "4.0.1",
     "autosize": "6.0.1",
     "caniuse-lite": "^1.0.30001712",
     "capture-stack-trace": "1.0.1",
@@ -96,7 +95,7 @@
     "react-range": "1.8.14",
     "react-router": "7.9.1",
     "react-router-dom": "7.9.1",
-    "react-select": "5.7.4",
+    "react-select": "5.10.2",
     "react-table": "7.7.0",
     "ts-retry-promise": "^0.8.1",
     "use-query-params": "2.2.1",
@@ -116,13 +115,13 @@
     "@types/lodash-es": "4.17.6",
     "@types/memoizee": "^0.4.11",
     "@types/node": "20.4.0",
-    "@types/node-fetch": "2.6.5",
+    "@types/node-fetch": "2.6.13",
     "@types/react": "18.2.22",
     "@types/react-copy-to-clipboard": "5.0.4",
     "@types/react-datepicker": "4.19.2",
     "@types/react-dom": "18.2.7",
     "@types/react-table": "7.7.20",
-    "@vitejs/plugin-react": "4.5.1",
+    "@vitejs/plugin-react": "5.1.0",
     "@wojtekmaj/enzyme-adapter-react-17": "0.8.0",
     "ajv": "8.11.0",
     "autoprefixer": "10.4.2",
@@ -142,10 +141,10 @@
     "lefthook": "^1.11.14",
     "lodash": "4.17.21",
     "lorem-ipsum": "2.0.8",
-    "node-fetch": "2.6.7",
+    "node-fetch": "3.3.2",
     "react-i18next": "11.16.2",
     "rimraf": "3.0.2",
-    "sass": "1.67.0",
+    "sass": "1.93.3",
     "source-map-explorer": "2.5.3",
     "stream": "0.0.2",
     "stylelint": "^14.16.1",
@@ -153,11 +152,11 @@
     "ts-jest": "29.1.1",
     "ts-morph": "^25.0.0",
     "tsx": "^4.19.1",
-    "typescript": "5.6.2",
-    "vite": "6.4.1",
+    "typescript": "5.9.3",
+    "vite": "7.2.2",
     "vite-plugin-css-injected-by-js": "3.5.2",
     "vite-plugin-dts": "4.5.4",
-    "vite-plugin-externalize-deps": "0.9.0",
+    "vite-plugin-externalize-deps": "0.10.0",
     "vite-plugin-svgr": "4.5.0",
     "vite-tsconfig-paths": "5.1.4",
     "web-vitals": "5.0.3"
@@ -168,11 +167,12 @@
     "@types/react": "18.2.22",
     "@types/react-dom": "18.2.7",
     "mini-css-extract-plugin": "2.4.7",
-    "typescript": "5.6.2",
+    "typescript": "5.9.3",
     "@emotion/react": "11.11.1",
     "react-router": "7.9.1",
     "react-router-dom": "7.9.1",
-    "use-query-params": "2.2.1"
+    "use-query-params": "2.2.1",
+    "@types/node": "20.4.0"
   },
   "browserslist": {
     "production": [
@@ -188,6 +188,7 @@
   },
   "dependencies": {
     "@uidotdev/usehooks": "^2.4.1",
+    "es-toolkit": "^1.41.0",
     "memoizee": "^0.4.17"
   }
 }

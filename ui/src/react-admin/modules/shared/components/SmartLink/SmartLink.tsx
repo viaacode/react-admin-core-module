@@ -1,11 +1,10 @@
 import type { ButtonAction } from '@viaa/avo2-components';
 import type { Avo } from '@viaa/avo2-types';
 import clsx from 'clsx';
-import { fromPairs, map } from 'lodash-es';
+import { map } from 'es-toolkit/compat';
 import { stringify } from 'query-string';
 import type { FunctionComponent, ReactElement, ReactNode } from 'react';
 import React from 'react';
-
 import { AdminConfigManager } from '~core/config/index.js';
 import { getAdminCoreApiUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config.js';
 import { isServerSideRendering } from '~shared/helpers/is-server-side-rendering.js';
@@ -203,7 +202,7 @@ export const SmartLink: FunctionComponent<SmartLinkProps> = ({
 							AdminConfigManager.getAdminRoute('SEARCH'),
 							{},
 							stringify(
-								fromPairs(
+								Object.fromEntries(
 									map(queryParams, (queryParamValue, queryParam) => [
 										queryParam,
 										JSON.stringify(queryParamValue),

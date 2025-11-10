@@ -1,7 +1,7 @@
 import type { ButtonAction } from '@viaa/avo2-components';
 import { Image } from '@viaa/avo2-components';
 import clsx from 'clsx';
-import { isNil } from 'lodash-es';
+import { isNil } from 'es-toolkit';
 import type { FunctionComponent, ReactElement, ReactNode } from 'react';
 import { BlockHeading } from '~content-blocks/BlockHeading/BlockHeading.js';
 import type { HeadingTypeOption } from '~modules/content-page/types/content-block.types.js';

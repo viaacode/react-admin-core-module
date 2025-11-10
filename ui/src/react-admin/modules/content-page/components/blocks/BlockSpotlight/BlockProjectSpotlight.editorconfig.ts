@@ -1,6 +1,5 @@
-import { times } from 'lodash-es';
+import { times } from 'es-toolkit/compat';
 import type { ImageInfo } from '~content-blocks/BlockSpotlight/BlockSpotlight.js';
-
 import type { ContentPickerProps } from '~shared/components/ContentPicker/ContentPicker.js';
 import type { FileUploadProps } from '~shared/components/FileUpload/FileUpload.js';
 import { tText } from '~shared/helpers/translation-functions.js';
@@ -9,7 +8,6 @@ import type {
 	DefaultContentBlockState,
 } from '../../../types/content-block.types.js';
 import { ContentBlockEditor, ContentBlockType } from '../../../types/content-block.types.js';
-
 import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, FILE_FIELD, TEXT_FIELD } from '../defaults.js';
 
 export const INITIAL_PROJECTS_SPOTLIGHT_COMPONENTS_STATE = (): ImageInfo[] =>

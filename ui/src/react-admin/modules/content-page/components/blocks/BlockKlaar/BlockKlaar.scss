@@ -1,9 +1,9 @@
-@import "../../../../shared/styles/mixins";
-@import "../../../../shared/styles/settings/colors";
-@import "../../../../shared/styles/settings/variables";
+@use "../../../../shared/styles/mixins/klaar" as klaar;
+@use "../../../../shared/styles/settings/colors" as colors;
+@use "../../../../shared/styles/settings/variables" as variables;
 
 .klaar-header {
-  @include klaar-block(#aa3ce9, #3ecf6e, #0081ff, #0081ff);
+  @include klaar.klaar-block(#aa3ce9, #3ecf6e, #0081ff, #0081ff);
 
   &__date {
     text-transform: uppercase;

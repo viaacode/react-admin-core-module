@@ -1,6 +1,6 @@
 import type { TagOption } from '@viaa/avo2-components';
 import { TagList } from '@viaa/avo2-components';
-import { noop } from 'lodash-es';
+import { noop } from 'es-toolkit';
 import type { ReactText } from 'react';
 import React from 'react';
 import type { Idp } from '~modules/user/user.types.js';

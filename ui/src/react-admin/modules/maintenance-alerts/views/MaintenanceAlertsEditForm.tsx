@@ -8,7 +8,7 @@ import {
 } from '@meemoo/react-components';
 import { format } from 'date-fns';
 import nlBE from 'date-fns/locale/nl-BE/index.js';
-import { without } from 'lodash-es';
+import { without } from 'es-toolkit';
 import type { FunctionComponent } from 'react';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { ValidationError } from 'yup';
@@ -283,7 +283,7 @@ const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProp
 							...currentMaintenanceAlert,
 							userGroups: !checked
 								? [...(currentMaintenanceAlert.userGroups || []), id]
-								: without(currentMaintenanceAlert.userGroups, id),
+								: without(currentMaintenanceAlert.userGroups || [], id),
 						});
 					}}
 					label={tText(

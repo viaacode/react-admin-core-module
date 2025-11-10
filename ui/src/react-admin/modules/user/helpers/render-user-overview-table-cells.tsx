@@ -2,7 +2,7 @@ import type { TagOption } from '@viaa/avo2-components';
 import { TagList } from '@viaa/avo2-components';
 import type { Avo } from '@viaa/avo2-types';
 import { LomSchemeType } from '@viaa/avo2-types';
-import { compact, isNil } from 'lodash-es';
+import { compact, isNil } from 'es-toolkit';
 import type { ReactNode, ReactText } from 'react';
 import { AdminConfigManager, ToastType } from '~core/config/index.js';
 import { hasTempAccess } from '~modules/user/helpers/has-temp-access.js';

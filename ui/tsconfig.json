@@ -18,8 +18,9 @@
     "strictBindCallApply": true,
     "strictFunctionTypes": true,
     "strictPropertyInitialization": true,
+    "outDir": "dist/src",
     "noEmit": true,
-    "outDir": "dist",
+    "declarationDir": "dist/src",
     "declaration": true,
     "jsx": "react-jsx",
     "paths": {
@@ -41,9 +42,8 @@
     }
   },
   "include": [
-    "src/admin.ts",
-    "src/client.ts",
-    "src/react-admin/modules/shared/types/global.d.ts"
+    "src",
+    "scripts"
   ],
   "exclude": [
     "node_modules"

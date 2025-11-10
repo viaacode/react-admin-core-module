@@ -1,6 +1,6 @@
 import type { IconName, TagInfo } from '@viaa/avo2-components';
-import type { Avo } from '@viaa/avo2-types';
-import { compact } from 'lodash-es';
+import { Avo } from '@viaa/avo2-types';
+import { compact } from 'es-toolkit';
 import type { FC, ReactText } from 'react';
 import React, { useCallback, useMemo, useState } from 'react';
 
@@ -155,7 +155,7 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 	} = useGetProfiles({
 		page: tableState?.page || 0,
 		sortColumn: (tableState?.sort_column || 'last_access_at') as UserOverviewTableCol,
-		sortOrder: tableState?.sort_order || 'desc',
+		sortOrder: tableState?.sort_order || Avo.Search.OrderDirection.DESC,
 		tableColumnDataType: getColumnType(),
 		where: generateWhereObject(getFilters(tableState), false),
 		itemsPerPage: USERS_PER_PAGE,
@@ -443,7 +443,7 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 							0,
 							0,
 							(tableState?.sort_column || 'last_access_at') as UserOverviewTableCol,
-							tableState?.sort_order || 'desc',
+							tableState?.sort_order || Avo.Search.OrderDirection.DESC,
 							getColumnType(),
 							where
 						);
@@ -458,7 +458,7 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 							offset,
 							limit,
 							(tableState?.sort_column || 'last_access_at') as UserOverviewTableCol,
-							tableState?.sort_order || 'desc',
+							tableState?.sort_order || Avo.Search.OrderDirection.DESC,
 							getColumnType(),
 							where
 						);

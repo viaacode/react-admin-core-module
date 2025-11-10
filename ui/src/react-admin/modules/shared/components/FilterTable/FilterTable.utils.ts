@@ -1,4 +1,5 @@
-import { isArray, isEmpty, isNil, isPlainObject, isString, omitBy } from 'lodash-es';
+import { isNil, isPlainObject, isString, omitBy } from 'es-toolkit';
+import { isEmpty } from 'es-toolkit/compat';
 
 // Removes all props where the value is undefined, null, [], {}, ''
 export function cleanupFilterTableState(obj: any) {
@@ -7,7 +8,7 @@ export function cleanupFilterTableState(obj: any) {
 		(value: any) =>
 			isNil(value) ||
 			(isString(value) && !value.length) ||
-			((isPlainObject(value) || isArray(value)) && isEmpty(value)) ||
+			((isPlainObject(value) || Array.isArray(value)) && isEmpty(value)) ||
 			(isPlainObject(value) && value.gte === '' && value.lte === '')
 	);
 }

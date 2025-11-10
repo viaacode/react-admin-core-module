@@ -1,7 +1,7 @@
 import type { TagInfo } from '@viaa/avo2-components';
 import { CheckboxGroup, FormGroup } from '@viaa/avo2-components';
 import clsx from 'clsx';
-import { isEmpty, uniq } from 'lodash-es';
+import { isEmpty, uniq } from 'es-toolkit/compat';
 import React, {
 	type ChangeEvent,
 	type FunctionComponent,

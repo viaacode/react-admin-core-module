@@ -2,7 +2,9 @@
 import type { RichEditorState } from '@meemoo/react-components';
 import { Button, PaginationBar, RichTextEditor, Table, TextInput } from '@meemoo/react-components';
 import { Spacer } from '@viaa/avo2-components';
-import { reverse, sortBy } from 'lodash-es';
+import { Avo } from '@viaa/avo2-types';
+import { sortBy } from 'es-toolkit';
+import { reverse } from 'es-toolkit/compat';
 import type { FunctionComponent, KeyboardEvent, ReactElement, ReactNode } from 'react';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import CopyToClipboard from 'react-copy-to-clipboard';
@@ -28,11 +30,10 @@ import { CustomError } from '~shared/helpers/custom-error.js';
 import { SanitizePreset } from '~shared/helpers/sanitize/presets/index.js';
 import { showToast } from '~shared/helpers/show-toast.js';
 import { tHtml, tText } from '~shared/helpers/translation-functions.js';
-import { OrderDirection } from '~shared/types/index.js';
+import type { TranslationEntry } from '../../../../../scripts/translation.types.js';
 import { getFullKey } from '../helpers/get-full-key.js';
 import { useGetAllLanguages } from '../hooks/use-get-all-languages.js';
 import { TranslationsService } from '../translations.service.js';
-
 import './TranslationsOverview.scss';
 
 type OrderProp = `value_${Locale}` | 'id';
@@ -49,7 +50,7 @@ export const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> 
 
 	const { data: allLanguages } = useGetAllLanguages();
 
-	// To simplify working with multi language translations, we convert the format of the server to
+	// To simplify working with multi-language translations, we convert the format of the server to
 
 	const [filteredAndPaginatedTranslations, setFilteredAndPaginatedTranslations] = useState<
 		MultiLanguageTranslationEntry[] | null
@@ -65,7 +66,9 @@ export const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> 
 	const [search, setSearch] = useState<string>('');
 	const [page, setPage] = useState<number>(0);
 	const [orderProp, setOrderProp] = useState<OrderProp | undefined>(undefined);
-	const [orderDirection, setOrderDirection] = useState<OrderDirection>(OrderDirection.asc);
+	const [orderDirection, setOrderDirection] = useState<Avo.Search.OrderDirection>(
+		Avo.Search.OrderDirection.ASC
+	);
 
 	const pageCount: number = Math.ceil(filteredTranslationsCount / TRANSLATIONS_PER_PAGE);
 
@@ -84,8 +87,7 @@ export const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> 
 		);
 		setFilteredTranslationsCount(filteredTranslations.length);
 
-		let sortedTranslations: MultiLanguageTranslationEntry[] = sortBy(
-			filteredTranslations,
+		let sortedTranslations: MultiLanguageTranslationEntry[] = sortBy(filteredTranslations, [
 			(translationEntry: MultiLanguageTranslationEntry) => {
 				if (orderProp === 'id') {
 					return getFullKey(translationEntry);
@@ -95,9 +97,9 @@ export const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> 
 					return translationEntry.values[languageCode];
 				}
 				return undefined;
-			}
-		);
-		if (orderDirection === OrderDirection.desc) {
+			},
+		]);
+		if (orderDirection === Avo.Search.OrderDirection.DESC) {
 			sortedTranslations = reverse(sortedTranslations);
 		}
 		const paginatedTranslations: MultiLanguageTranslationEntry[] = sortedTranslations.slice(
@@ -180,16 +182,19 @@ export const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> 
 		return [
 			{
 				id: orderProp,
-				desc: orderDirection !== OrderDirection.asc,
+				desc: orderDirection !== Avo.Search.OrderDirection.ASC,
 			},
 		];
 	}, [orderProp, orderDirection]);
 
 	const handleSortChange = useCallback(
-		(newOrderProp: string | undefined, newOrderDirection: OrderDirection | undefined) => {
+		(
+			newOrderProp: string | undefined,
+			newOrderDirection: Avo.Search.OrderDirection | undefined
+		) => {
 			if (newOrderProp !== orderProp || newOrderDirection !== orderDirection) {
 				setOrderProp(newOrderProp as OrderProp | undefined);
-				setOrderDirection(newOrderDirection || OrderDirection.asc);
+				setOrderDirection(newOrderDirection || Avo.Search.OrderDirection.ASC);
 				setPage(0);
 			}
 		},
@@ -246,9 +251,9 @@ export const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> 
 			id: 'key',
 			Header: tHtml('modules/translations/views/translations-overview-v-2___id'),
 			canSort: true,
-			accessorFn: (translationEntry: MultiLanguageTranslationEntry) => getFullKey(translationEntry),
-			Cell: ({ row }: { row: Row<MultiLanguageTranslationEntry> }): ReactElement => {
-				const translationEntry: MultiLanguageTranslationEntry = row.original;
+			accessorFn: (translationEntry: TranslationEntry) => getFullKey(translationEntry),
+			Cell: ({ row }: { row: Row<TranslationEntry> }): ReactElement => {
+				const translationEntry: TranslationEntry = row.original;
 				return (
 					<>
 						<div>

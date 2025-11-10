@@ -1,9 +1,9 @@
 import { mount, shallow } from 'enzyme';
 import { loremIpsum } from 'lorem-ipsum';
 import React from 'react';
-import { flowplayerMock } from '../../../../../../__mocks__/flowplayer';
+import { flowplayerMock } from '../../../../../../__mocks__/flowplayer.js';
 
-import { BlockVideoTitleTextButton } from './BlockVideoTitleTextButton';
+import { BlockVideoTitleTextButton } from './BlockVideoTitleTextButton.js';
 
 const customClass = 'c-block-custom';
 const loremIpsumText = loremIpsum({ count: 10 });

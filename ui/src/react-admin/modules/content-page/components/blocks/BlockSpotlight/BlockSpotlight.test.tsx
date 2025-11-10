@@ -1,10 +1,10 @@
 import { testRenderLink } from '@viaa/avo2-components';
 import { mount, shallow } from 'enzyme';
 import React from 'react';
-import { action } from '~shared/helpers/action';
+import { action } from '~shared/helpers/action.js';
 
-import { BlockSpotlight } from './BlockSpotlight';
-import { MOCK_SPOTLIGHT_PROJECTS } from './BlockSpotlight.mock';
+import { BlockSpotlight } from './BlockSpotlight.js';
+import { MOCK_SPOTLIGHT_PROJECTS } from './BlockSpotlight.mock.js';
 
 const BlockSpotlightExample = (
 	<BlockSpotlight

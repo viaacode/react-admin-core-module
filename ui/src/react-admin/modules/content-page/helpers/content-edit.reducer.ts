@@ -2,7 +2,7 @@ import type { RichEditorState } from '@meemoo/react-components';
 import type { Avo } from '@viaa/avo2-types';
 import type { Draft } from 'immer';
 import { produce } from 'immer';
-import { cloneDeep, isNil } from 'lodash-es';
+import { cloneDeep, isNil } from 'es-toolkit';
 import type { Reducer } from 'react';
 import { AdminConfigManager } from '~core/config/config.class.js';
 import { Locale } from '~modules/translations/translations.core.types.js';

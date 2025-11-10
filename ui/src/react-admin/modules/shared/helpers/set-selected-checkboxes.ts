@@ -1,4 +1,4 @@
-import { isString } from 'lodash-es';
+import { isString } from 'es-toolkit';
 
 import type { CheckboxOption } from '../components/CheckboxDropdownModal/CheckboxDropdownModal.js';
 

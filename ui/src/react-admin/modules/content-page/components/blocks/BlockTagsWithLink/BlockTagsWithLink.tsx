@@ -1,6 +1,7 @@
 import type { ButtonAction } from '@viaa/avo2-components';
 import clsx from 'clsx';
-import { isEmpty, isNil } from 'lodash-es';
+import { isNil } from 'es-toolkit';
+import { isEmpty } from 'es-toolkit/compat';
 import type { FunctionComponent, ReactElement, ReactNode } from 'react';
 import { SmartLink } from '~modules/shared/components/SmartLink/SmartLink.js';
 import type { DefaultComponentProps } from '~modules/shared/types/components.js';

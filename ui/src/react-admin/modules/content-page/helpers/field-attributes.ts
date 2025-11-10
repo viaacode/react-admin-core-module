@@ -1,5 +1,5 @@
 import type { SelectOption } from '@viaa/avo2-components';
-import { compact, debounce, get, isArray, isNil } from 'lodash-es';
+import { compact, debounce, isNil } from 'es-toolkit';
 import type { CSSProperties, ReactNode } from 'react';
 import type { ColorSelectProps } from '~modules/content-page/components/fields/ColorSelect/ColorSelect.js';
 import type { ContentPickerProps } from '~shared/components/ContentPicker/ContentPicker.js';
@@ -73,7 +73,7 @@ export const generateFieldAttributes = (
 						onChange(value);
 					},
 					150,
-					{ leading: true }
+					{ edges: ['leading'] }
 				),
 			};
 
@@ -94,7 +94,7 @@ export const generateFieldAttributes = (
 		case ContentBlockEditor.ColorSelect:
 			return {
 				onChange: ((option: SelectOption<string>) => {
-					onChange(get(option, 'value', ''));
+					onChange(option?.value || '');
 					// biome-ignore lint/suspicious/noExplicitAny: todo investigate why this cast is needed
 				}) as any,
 				value: field.editorProps.options.find((opt: SelectOption<string>) => opt.value === value),
@@ -129,7 +129,7 @@ export const generateFieldAttributes = (
 			return {
 				// biome-ignore lint/suspicious/noExplicitAny: todo
 				onChange: (value: any) => {
-					onChange(isArray(value) ? value[0] || 0 : value);
+					onChange(Array.isArray(value) ? value[0] || 0 : value);
 				},
 				values: [value || 0], // TODO default to min value of input field instead of 0
 			};

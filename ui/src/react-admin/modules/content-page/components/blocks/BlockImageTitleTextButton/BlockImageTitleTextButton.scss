@@ -1,7 +1,7 @@
-@import "../../../../shared/styles/settings/colors";
+@use "../../../../shared/styles/settings/colors" as colors;
 
 .c-block-image-title-text-button {
   .a-subtitle {
-    color: $color-gray-400;
+    color: colors.$color-gray-400;
   }
 }

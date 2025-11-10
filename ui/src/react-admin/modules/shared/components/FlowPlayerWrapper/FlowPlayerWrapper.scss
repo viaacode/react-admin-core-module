@@ -1,14 +1,14 @@
 @use "sass:math";
-@import "../../../shared/styles/settings/colors";
+@use "../../../shared/styles/settings/colors" as colors;
 
 $player-play-button-dimensions: 7rem;
 $player-play-button-icon-dimensions: 3rem;
 $player-easing-soft: cubic-bezier(0.62, 0.28, 0.23, 0.99);
 $c-video-player-progress-height: 6px !default;
 $c-video-player-progress-handle-size: $c-video-player-progress-height * 2.5 !default;
-$c-play-overlay-inner-bg: $color-gray-900;
+$c-play-overlay-inner-bg: colors.$color-gray-900;
 $c-spinner-fullscreen-holder-bg: rgba(#000, 0.5);
-$c-video-player-progress-inner-bg: $color-teal-bright;
+$c-video-player-progress-inner-bg: colors.$color-teal-bright;
 
 .c-video-player {
   position: relative;
@@ -17,7 +17,7 @@ $c-video-player-progress-inner-bg: $color-teal-bright;
   max-width: 100%;
 
   .a-flowplayer__text {
-    color: $color-gray-200;
+    color: colors.$color-gray-200;
   }
 }
 
@@ -61,11 +61,11 @@ $c-video-player-progress-inner-bg: $color-teal-bright;
     height: $player-play-button-dimensions;
     background-color: rgba($c-play-overlay-inner-bg, 0.5);
     border-radius: 50%;
-    box-shadow: 0 0 5px 0 rgba($color-gray-shadow, 0.5);
+    box-shadow: 0 0 5px 0 rgba(colors.$color-gray-shadow, 0.5);
 
     &:hover {
       background-color: rgba($c-play-overlay-inner-bg, 0.7);
-      box-shadow: 0 0 10px 0 rgba($color-gray-shadow, 0.7);
+      box-shadow: 0 0 10px 0 rgba(colors.$color-gray-shadow, 0.7);
       transition: 0.14s background $player-easing-soft;
     }
 
@@ -82,8 +82,8 @@ $c-video-player-progress-inner-bg: $color-teal-bright;
     left: 0;
     color: rgba(#fff, 0.67);
     padding: 0.5rem 1rem;
-    background-color: $color-teal-bright;
-    box-shadow: 0 0 5px 0 rgba($color-gray-shadow, 0.5);
+    background-color: colors.$color-teal-bright;
+    box-shadow: 0 0 5px 0 rgba(colors.$color-gray-shadow, 0.5);
     font-size: 1.2rem;
     font-weight: 500;
 

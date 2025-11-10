@@ -9,7 +9,7 @@ import {
 	Spacer,
 } from '@viaa/avo2-components';
 import type { Avo } from '@viaa/avo2-types';
-import { noop } from 'lodash-es';
+import { noop } from 'es-toolkit';
 import type { FunctionComponent } from 'react';
 import React, { useState } from 'react';
 import { BlockHeading } from '~content-blocks/BlockHeading/BlockHeading.js';

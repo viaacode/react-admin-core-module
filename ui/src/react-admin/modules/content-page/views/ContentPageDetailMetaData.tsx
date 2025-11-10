@@ -1,12 +1,12 @@
 import type { TagInfo, TagOption } from '@viaa/avo2-components';
 import { Container, Spacer, Table, TagList, Thumbnail } from '@viaa/avo2-components';
+import { Avo } from '@viaa/avo2-types';
 import { isAfter, isBefore, parseISO } from 'date-fns';
-import { compact, get } from 'lodash-es';
+import { compact } from 'es-toolkit';
 import type { FunctionComponent } from 'react';
 import React from 'react';
 import { BlockHeading } from '~content-blocks/BlockHeading/BlockHeading.js';
 import { AdminConfigManager } from '~core/config/config.class.js';
-
 import { GET_CONTENT_PAGE_WIDTH_OPTIONS } from '~modules/content-page/const/content-page.consts.js';
 import { useContentTypes } from '~modules/content-page/hooks/useContentTypes.js';
 import { getContentPageDescriptionHtml } from '~modules/content-page/services/content-page.converters.js';
@@ -69,12 +69,10 @@ export const ContentPageDetailMetaData: FunctionComponent<ContentDetailMetaDataP
 	};
 
 	const getContentPageWidthLabel = (contentPageInfo: ContentPageInfo): string => {
-		return get(
+		return (
 			GET_CONTENT_PAGE_WIDTH_OPTIONS().find(
 				(option) => option.value === contentPageInfo.contentWidth
-			),
-			'label',
-			'-'
+			)?.label || '-'
 		);
 	};
 
@@ -121,7 +119,10 @@ export const ContentPageDetailMetaData: FunctionComponent<ContentDetailMetaDataP
 					<tbody>
 						{renderDetailRow(
 							<div style={{ width: '400px' }}>
-								<Thumbnail category="item" src={contentPageInfo.thumbnailPath || undefined} />
+								<Thumbnail
+									category={Avo.ContentType.English.ITEM}
+									src={contentPageInfo.thumbnailPath || undefined}
+								/>
 							</div>,
 							tText('admin/content/views/content-detail___cover-afbeelding')
 						)}
@@ -147,10 +148,7 @@ export const ContentPageDetailMetaData: FunctionComponent<ContentDetailMetaDataP
 							['isProtected', tText('admin/content/views/content-detail___beschermde-pagina')],
 						])}
 						{renderDetailRow(
-							get(
-								contentTypes.find((type) => type.value === contentPageInfo.contentType),
-								'label'
-							) || '-',
+							contentTypes.find((type) => type.value === contentPageInfo.contentType)?.label || '-',
 							tText('admin/content/views/content-detail___content-type')
 						)}
 						{renderDetailRow(

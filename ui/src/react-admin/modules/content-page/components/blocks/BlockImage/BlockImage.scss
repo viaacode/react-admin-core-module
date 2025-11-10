@@ -1,5 +1,5 @@
-@import "../../../../shared/styles/settings/colors";
-@import "../../../../shared/styles/settings/variables";
+@use "../../../../shared/styles/settings/colors" as colors;
+@use "../../../../shared/styles/settings/variables" as variables;
 
 .o-block-image {
   padding-top: 0;
@@ -42,10 +42,10 @@
 
     .o-block-image__button {
       position: absolute;
-      bottom: $g-spacer-unit * 2;
+      bottom: variables.$g-spacer-unit * 2;
 
       &--left {
-        left: $g-spacer-unit * 2;
+        left: variables.$g-spacer-unit * 2;
       }
 
       &--center {
@@ -54,12 +54,12 @@
       }
 
       &--right {
-        right: $g-spacer-unit * 2;
+        right: variables.$g-spacer-unit * 2;
       }
     }
   }
 }
 
 .a-block-image__text {
-  color: $color-gray-200;
+  color: colors.$color-gray-200;
 }

@@ -12,12 +12,11 @@ export const useGetContentPageLabelsByTypeAndLabels = (
 	requestArgs: ContentPageLabelsRequestArgs,
 	options: { enabled?: boolean; keepPreviousData?: boolean } = {
 		enabled: true,
-		keepPreviousData: true,
 	}
 ) => {
-	return useQuery(
-		[QUERY_KEYS.GET_PROFILES, requestArgs],
-		(props) => {
+	return useQuery({
+		queryKey: [QUERY_KEYS.GET_PROFILES, requestArgs],
+		queryFn: (props) => {
 			const requestArgs = props.queryKey[1] as ContentPageLabelsRequestArgs;
 			if (requestArgs.queryLabels.length === 0) {
 				return [];
@@ -27,10 +26,7 @@ export const useGetContentPageLabelsByTypeAndLabels = (
 				requestArgs.queryLabels
 			);
 		},
-		{
-			enabled: true,
-			keepPreviousData: true,
-			...options,
-		}
-	);
+		enabled: true,
+		...options,
+	});
 };

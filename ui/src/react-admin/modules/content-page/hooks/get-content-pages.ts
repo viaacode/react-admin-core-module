@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { keepPreviousData, useQuery } from '@tanstack/react-query';
 import type { Avo } from '@viaa/avo2-types';
 import { ContentPageService } from '~modules/content-page/services/content-page.service.js';
 import type { ContentOverviewTableCols } from '~modules/content-page/types/content-pages.types.js';
@@ -14,9 +14,9 @@ interface ContentPageOverviewParams {
 }
 
 export const useGetContentPages = (contentPageOverviewParams?: ContentPageOverviewParams) => {
-	return useQuery(
-		[QUERY_KEYS.GET_PROFILES, contentPageOverviewParams],
-		(props) => {
+	return useQuery({
+		queryKey: [QUERY_KEYS.GET_PROFILES, contentPageOverviewParams],
+		queryFn: (props) => {
 			const contentPageOverviewParams = props.queryKey[1] as ContentPageOverviewParams;
 			if (!contentPageOverviewParams) {
 				return null;
@@ -29,8 +29,6 @@ export const useGetContentPages = (contentPageOverviewParams?: ContentPageOvervi
 				contentPageOverviewParams.where || {}
 			);
 		},
-		{
-			keepPreviousData: true,
-		}
-	);
+		placeholderData: keepPreviousData,
+	});
 };

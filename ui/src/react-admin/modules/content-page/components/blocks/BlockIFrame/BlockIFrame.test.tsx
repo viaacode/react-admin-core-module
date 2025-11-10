@@ -1,7 +1,7 @@
 import { mount, shallow } from 'enzyme';
 import React from 'react';
 
-import { BlockIFrame } from './BlockIFrame';
+import { BlockIFrame } from './BlockIFrame.js';
 
 describe('<BlockIFrame />', () => {
 	it('Should be able to render', () => {

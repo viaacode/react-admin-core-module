@@ -12,7 +12,7 @@ import {
 } from '@viaa/avo2-components';
 import { Avo } from '@viaa/avo2-types';
 import clsx from 'clsx';
-import { uniqBy } from 'lodash-es';
+import { uniqBy } from 'es-toolkit';
 import type { FunctionComponent, ReactText } from 'react';
 import React, { useEffect, useState } from 'react';
 import { ToastType } from '~core/config/config.types.js';
@@ -183,7 +183,10 @@ export const MultiUserSelectDropdown: FunctionComponent<MultiUserSelectDropdownP
 										onChange={(selectedProfile) => {
 											if (selectedProfile) {
 												setSelectedProfiles((selectedProfiles) =>
-													uniqBy([...selectedProfiles, selectedProfile], 'value')
+													uniqBy(
+														[...selectedProfiles, selectedProfile],
+														(pickerItem) => pickerItem.value
+													)
 												);
 												setSelectedProfile(selectedProfile);
 											}

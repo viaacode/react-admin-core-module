@@ -7,7 +7,9 @@ export const useUpdateTableColumnPreference = (
 ): UseMutationResult<void, null, string[]> => {
 	const formattedColumnKey = getColumnKey(columnKey);
 
-	return useMutation(async (columns: string[]): Promise<void> => {
-		await TableColumnPreferenceService.saveTableColumnPreference(formattedColumnKey, columns);
+	return useMutation({
+		mutationFn: async (columns: string[]): Promise<void> => {
+			await TableColumnPreferenceService.saveTableColumnPreference(formattedColumnKey, columns);
+		},
 	});
 };

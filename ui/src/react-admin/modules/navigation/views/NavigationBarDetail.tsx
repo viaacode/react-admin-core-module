@@ -3,7 +3,7 @@ import './NavigationBarOverview.scss';
 import type { IconName } from '@viaa/avo2-components';
 import { Button, ButtonGroup, ButtonToolbar, Flex, Spacer } from '@viaa/avo2-components';
 
-import { cloneDeep, isNil, startCase } from 'lodash-es';
+import { cloneDeep, isNil, startCase } from 'es-toolkit';
 import type { FC, ReactElement, ReactNode } from 'react';
 import React, { useEffect, useRef, useState } from 'react';
 import { AdminConfigManager } from '~core/config/config.class.js';

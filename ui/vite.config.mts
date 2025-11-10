@@ -9,7 +9,11 @@ import cssInjectedByJsPlugin from 'vite-plugin-css-injected-by-js';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-	plugins: [react(), viteTsconfigPaths(), dts(), externalizeDeps(), cssInjectedByJsPlugin()],
+	plugins: [react(), viteTsconfigPaths(), dts({
+
+	}), externalizeDeps(), cssInjectedByJsPlugin({
+		relativeCSSInjection: true
+	})],
 	server: {
 		port: 3400,
 	},
@@ -17,9 +21,9 @@ export default defineConfig({
 		lib: {
 			entry: {
 				// Contains all the code that is needed to render the admin-core dashboard pages and edit pages
-				admin: resolve(__dirname, 'src/admin.ts'),
+				'src/admin': resolve(__dirname, 'src/admin.ts'),
 				// Contains all the logic to render content pages and set the admin-core config
-				client: resolve(__dirname, 'src/client.ts'),
+				'src/client': resolve(__dirname, 'src/client.ts'),
 			},
 			// name: '@meemoo/admin-core-ui',
 			// fileName: (_, entryName) => {
@@ -30,13 +34,15 @@ export default defineConfig({
 			// },
 			formats: ['es'],
 		},
-		// rollupOptions: {
-		// 	output: {
-		// 		entryFileNames: '[name].mjs',
-		// 		preserveModules: true,
-		// 	},
-		// },
+		outDir: 'dist',
+		rollupOptions: {
+			output: {
+				// entryFileNames: '[name].mjs',
+				preserveModules: true,
+			},
+		},
 		sourcemap: true,
+		cssCodeSplit: true
 	},
 	define: {
 		// By default, Vite doesn't include shims for Node.js

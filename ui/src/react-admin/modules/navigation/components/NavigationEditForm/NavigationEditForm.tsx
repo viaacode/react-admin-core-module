@@ -14,7 +14,7 @@ import {
 	TextInput,
 } from '@viaa/avo2-components';
 import { Avo } from '@viaa/avo2-types';
-import { compact, kebabCase, uniq, without } from 'lodash-es';
+import { compact, kebabCase, uniq, without } from 'es-toolkit';
 import type { FunctionComponent, ReactNode } from 'react';
 import React, { useCallback, useEffect, useState } from 'react';
 import CreatableSelect from 'react-select/creatable';

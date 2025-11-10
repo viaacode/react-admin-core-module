@@ -19,7 +19,8 @@ import {
 import { Avo } from '@viaa/avo2-types';
 import clsx from 'clsx';
 import { format, parseISO } from 'date-fns';
-import { findIndex, flatten, uniqBy } from 'lodash-es';
+import { flatten, uniqBy } from 'es-toolkit';
+import { findIndex } from 'es-toolkit/compat';
 import type { FunctionComponent, ReactNode } from 'react';
 import React from 'react';
 import { BlockImageGrid } from '~content-blocks/BlockImageGrid/BlockImageGrid.js';
@@ -287,7 +288,7 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 		if (itemStyle === ContentItemStyle.GRID) {
 			const uniqueLabels: LabelObj[] = uniqBy(
 				flatten(pages.map((page): LabelObj[] => page.labels)),
-				'id'
+				(page) => page.id
 			);
 			const pagesByLabel: { [labelId: number]: ContentPageInfo[] } = Object.fromEntries(
 				uniqueLabels.map((labelObj: LabelObj): [number, ContentPageInfo[]] => {

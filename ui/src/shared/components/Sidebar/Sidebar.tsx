@@ -1,9 +1,9 @@
 import clsx from 'clsx';
-import { flatten } from 'lodash-es';
+import { flatten } from 'es-toolkit';
 import type { FunctionComponent, ReactElement, ReactNode } from 'react';
 import React from 'react';
 import { Link, type Location, NavLink } from 'react-router-dom';
-import type { NavigationItemInfo } from '../../types';
+import type { NavigationItemInfo } from '../../types/index.js';
 
 import './Sidebar.scss';
 import { useLocation } from 'react-router';

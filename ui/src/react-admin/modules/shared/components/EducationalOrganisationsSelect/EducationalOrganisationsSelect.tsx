@@ -1,10 +1,10 @@
 import { Alert, Select, Spacer } from '@viaa/avo2-components';
 import type { Avo } from '@viaa/avo2-types';
 import clsx from 'clsx';
-import { pullAllBy, remove, uniq } from 'lodash-es';
+import { remove, uniq } from 'es-toolkit';
+import { pullAllBy } from 'es-toolkit/compat';
 import type { FunctionComponent, ReactText } from 'react';
 import React, { useEffect, useState } from 'react';
-
 import { AdminConfigManager } from '~core/config/config.class.js';
 import { ToastType } from '~core/config/config.types.js';
 import { AVO } from '~modules/shared/types/index.js';

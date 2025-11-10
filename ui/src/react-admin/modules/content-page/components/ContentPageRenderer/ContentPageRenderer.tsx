@@ -1,5 +1,5 @@
 import { Button } from '@meemoo/react-components';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { keepPreviousData, QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import {
 	Button as AvoButton,
 	Container,
@@ -9,7 +9,7 @@ import {
 } from '@viaa/avo2-components';
 import { type Avo, PermissionName } from '@viaa/avo2-types';
 import clsx from 'clsx';
-import { cloneDeep, compact, intersection, isNil, noop, set } from 'lodash-es';
+import { cloneDeep, compact, intersection, isNil, noop } from 'es-toolkit';
 import { stringifyUrl } from 'query-string';
 import type { FunctionComponent, ReactNode } from 'react';
 import React from 'react';
@@ -34,6 +34,7 @@ import { ContentBlockType } from '../../types/content-block.types.js';
 import ContentBlockRenderer from '.././ContentBlockRenderer/ContentBlockRenderer.js';
 
 import './ContentPageRenderer.scss';
+import { set } from 'es-toolkit/compat';
 
 type ContentPageDetailProps = {
 	contentPageInfo: Partial<ContentPageInfo>;
@@ -48,7 +49,7 @@ const queryClient = new QueryClient({
 	defaultOptions: {
 		queries: {
 			refetchOnWindowFocus: false,
-			keepPreviousData: true,
+			placeholderData: keepPreviousData,
 			retry: 0,
 		},
 	},

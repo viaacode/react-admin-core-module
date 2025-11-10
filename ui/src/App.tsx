@@ -8,14 +8,14 @@ import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner.js';
 import { CustomError } from '~shared/helpers/custom-error.js';
 import { showToast } from '~shared/helpers/show-toast.js';
 import { tText } from '~shared/helpers/translation-functions.js';
-import { renderAdminRoutes } from './admin.routes';
-import { GET_NAV_ITEMS } from './app.const';
-import Sidebar from './shared/components/Sidebar/Sidebar';
-import { setAdminCoreConfig } from './shared/helpers/admin-core-config';
+import { renderAdminRoutes } from './admin.routes.js';
+import { GET_NAV_ITEMS } from './app.const.js';
+import Sidebar from './shared/components/Sidebar/Sidebar.js';
+import { setAdminCoreConfig } from './shared/helpers/admin-core-config.js';
 import type { NavigationItemInfo } from './shared/types/index.js';
 import './react-admin/modules/shared/styles/main.scss';
 import './App.scss';
-import { isNil } from 'lodash-es';
+import { isNil } from 'es-toolkit';
 
 function App() {
 	const [navigationItems, setNavigationItems] = useState<NavigationItemInfo[] | null>(null);

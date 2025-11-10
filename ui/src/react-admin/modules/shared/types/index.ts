@@ -18,11 +18,6 @@ export interface DefaultComponentProps {
 	style?: CSSProperties;
 }
 
-export enum OrderDirection {
-	asc = 'asc',
-	desc = 'desc',
-}
-
 export enum QUERY_KEYS {
 	GET_CONTENT_PAGE_OVERVIEW = 'GET_CONTENT_PAGE_OVERVIEW',
 	GET_CONTENT_PAGE_BY_PATH = 'GET_CONTENT_PAGE_BY_PATH',

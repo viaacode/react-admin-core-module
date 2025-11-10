@@ -1,5 +1,4 @@
-@import "./react-admin/modules/shared/styles/settings/colors";
-@import "./react-admin/modules/content-page/views/react-split-pane";
+@use "./react-admin/modules/content-page/views/react-split-pane";
 
 .o-app--admin__sidebar {
   overflow-y: auto;

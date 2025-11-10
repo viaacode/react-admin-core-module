@@ -1,11 +1,12 @@
 import { IconName } from '@viaa/avo2-components';
 import type { Avo, DatabaseType } from '@viaa/avo2-types';
 import type { TOptions } from 'i18next';
-import { capitalize, lowerCase } from 'lodash-es';
+import { capitalize, lowerCase } from 'es-toolkit';
 import type { FunctionComponent, ReactNode } from 'react';
 import type { NavigateFunction } from 'react-router';
 import { Link } from 'react-router-dom';
-import { AdminConfigManager, type LinkInfo, type ToastInfo } from '~core/config';
+import { AdminConfigManager } from '~core/config/config.class.js';
+import type { LinkInfo, ToastInfo } from '~core/config/config.types.js';
 import { ContentBlockType } from '~modules/content-page/types/content-block.types.js';
 import {
 	type ContentPageInfo,
@@ -14,10 +15,10 @@ import {
 import { Locale } from '~modules/translations/translations.core.types.js';
 import { UserBulkAction } from '~modules/user/user.types.js';
 import Html from '~shared/components/Html/Html.js';
-import { ROUTE_PARTS } from '~shared/consts';
+import { ROUTE_PARTS } from '~shared/consts/routes.js';
 import { tText } from '~shared/helpers/translation-functions.js';
-import { mockCommonUser } from '../../mock-common-user';
-import i18n from '../translations/i18n';
+import { mockCommonUser } from '../../mock-common-user.js';
+import i18n from '../translations/i18n.js';
 
 const DUMMY_EDUCATIONAL_ORGANISATIONS: Avo.EducationOrganization.Organization[] = [
 	{

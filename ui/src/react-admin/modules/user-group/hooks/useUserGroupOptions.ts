@@ -1,6 +1,6 @@
 import type { MultiSelectOption } from '@meemoo/react-components';
 import type { TagInfo } from '@viaa/avo2-components';
-import { sortBy } from 'lodash-es';
+import { sortBy } from 'es-toolkit';
 import { useMemo } from 'react';
 import { useGetUserGroups } from '~modules/user-group/hooks/get-user-groups.js';
 import type {
@@ -40,7 +40,7 @@ export const useUserGroupOptions = (
 		}
 		const allOptions = [
 			...(includeSpecialGroups ? GET_SPECIAL_USER_GROUPS() : []),
-			...sortBy(userGroups || [], (userGroup) => preferredUserGroupOrder[userGroup.label || '']),
+			...sortBy(userGroups || [], [(userGroup) => preferredUserGroupOrder[userGroup.label || '']]),
 		];
 
 		if (type === 'TagInfo') {

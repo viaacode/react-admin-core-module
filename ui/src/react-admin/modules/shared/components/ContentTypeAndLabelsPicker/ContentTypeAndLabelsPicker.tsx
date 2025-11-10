@@ -1,7 +1,7 @@
 import type { SelectOption, TagInfo } from '@viaa/avo2-components';
 import { Column, FormGroup, Grid, Select, TagsInput } from '@viaa/avo2-components';
 import type { Avo } from '@viaa/avo2-types';
-import { compact, get, isNumber, isString } from 'lodash-es';
+import { compact, isString } from 'es-toolkit';
 import type { FunctionComponent } from 'react';
 import React, { useEffect, useState } from 'react';
 import type { LabelObj } from '~content-blocks/BlockPageOverview/BlockPageOverview.types.js';
@@ -69,7 +69,7 @@ export const ContentTypeAndLabelsPicker: FunctionComponent<ContentTypeAndLabelsP
 
 	const handleLabelsChanged = (newSelectedLabels: TagInfo[]) => {
 		const newState = {
-			selectedContentType: get(value, 'selectedContentType') as Avo.ContentPage.Type,
+			selectedContentType: value?.selectedContentType as Avo.ContentPage.Type,
 			selectedLabels: (newSelectedLabels || []).map((labelOption) => labelOption.value) as
 				| string[]
 				| number[],
@@ -81,7 +81,7 @@ export const ContentTypeAndLabelsPicker: FunctionComponent<ContentTypeAndLabelsP
 		// new format where we save the ids of the labels instead of the full label object
 		// https://meemoo.atlassian.net/browse/AVO-1410
 		let selectedLabelIds: number[] | string[] = value.selectedLabels || [];
-		if (!isNumber(selectedLabelIds[0]) && !isString(selectedLabelIds[0])) {
+		if (typeof selectedLabelIds[0] !== 'number' && !isString(selectedLabelIds[0])) {
 			// Old format where we save the whole label object
 			// TODO deprecated remove when all content pages with type overview have been resaved
 			selectedLabelIds = ((value.selectedLabels || []) as unknown as LabelObj[]).map(
@@ -109,7 +109,7 @@ export const ContentTypeAndLabelsPicker: FunctionComponent<ContentTypeAndLabelsP
 					id="content-type-and-label-picker-type"
 					placeholder={tText('admin/content/components/content-picker/content-picker___type')}
 					options={contentTypes}
-					value={get(value, 'selectedContentType')}
+					value={value?.selectedContentType}
 					loading={isLoadingContentTypes}
 					onChange={handleContentTypeChanged}
 				/>

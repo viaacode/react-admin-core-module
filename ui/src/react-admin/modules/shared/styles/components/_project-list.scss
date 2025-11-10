@@ -1,3 +1,5 @@
+@use '../../styles/settings/colors' as colors;
+
 /* ==========================================================================
    Component: Project list
    ========================================================================== */
@@ -14,7 +16,7 @@
     text-decoration: none;
 
     &:hover {
-      border-bottom: 1px solid $color-primary;
+      border-bottom: 1px solid colors.$color-primary;
     }
   }
 }

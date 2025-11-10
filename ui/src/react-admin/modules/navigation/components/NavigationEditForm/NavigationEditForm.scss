@@ -1,15 +1,15 @@
-@import "../../../shared/styles/settings/variables";
+@use "../../../shared/styles/settings/variables" as variables;
 
 .m-menu-edit-form {
   .c-button-toolbar {
     display: inline-flex;
 
     > .c-badge + .c-badge {
-      margin-left: $g-spacer-unit;
+      margin-left: variables.$g-spacer-unit;
     }
   }
 
   .c-navigation-edit-form__warnings {
-    padding-top: $g-spacer-unit * 4.5;
+    padding-top: variables.$g-spacer-unit * 4.5;
   }
 }

@@ -1,4 +1,4 @@
-import { type OrderDirection, PaginationBar } from '@meemoo/react-components';
+import { PaginationBar } from '@meemoo/react-components';
 import {
 	Button,
 	type ButtonType,
@@ -18,7 +18,7 @@ import {
 } from '@viaa/avo2-components';
 import type { Avo } from '@viaa/avo2-types';
 import clsx from 'clsx';
-import { cloneDeep, compact, get, isEqual, sortBy } from 'lodash-es';
+import { cloneDeep, compact, isEqual, sortBy } from 'es-toolkit';
 import React, {
 	type FunctionComponent,
 	type KeyboardEvent,
@@ -96,7 +96,7 @@ interface FilterTableProps {
 	isLoading?: boolean;
 	isError?: boolean;
 	defaultOrderProp?: string;
-	defaultOrderDirection?: OrderDirection;
+	defaultOrderDirection?: Avo.Search.OrderDirection;
 	showPagination?: boolean;
 	showColumnsVisibility?: boolean;
 
@@ -226,7 +226,7 @@ export const FilterTable: FunctionComponent<FilterTableProps> = ({
 					? tableState.columns.includes(column.id)
 					: column.visibleByDefault,
 			})),
-			(option) => option.label
+			['label']
 		);
 	};
 
@@ -320,7 +320,7 @@ export const FilterTable: FunctionComponent<FilterTableProps> = ({
 															id={col.id}
 															label={col.label}
 															onChange={(value) => handleTableStateChanged(value, col.id)}
-															options={get(col, 'filterProps.options', []).map(
+															options={(col?.filterProps?.options || []).map(
 																(option: CheckboxOption) => ({
 																	...option,
 																	checked:
@@ -354,9 +354,9 @@ export const FilterTable: FunctionComponent<FilterTableProps> = ({
 															// biome-ignore lint/suspicious/noExplicitAny: todo
 															value={(tableState as any)[col.id]}
 															onChange={(value) => handleTableStateChanged(value, col.id)}
-															trueLabel={get(col, 'filterProps.trueLabel')}
-															falseLabel={get(col, 'filterProps.falseLabel')}
-															includeEmpty={get(col, 'filterProps.includeEmpty')}
+															trueLabel={col?.filterProps?.trueLabel}
+															falseLabel={col?.filterProps?.falseLabel}
+															includeEmpty={col?.filterProps?.includeEmpty}
 															key={`filter-${col.id}`}
 															searchInputAriaLabel={tText(
 																'modules/shared/components/filter-table/filter-table___zoekveld-checkbox-filter-aria-label'
@@ -508,15 +508,13 @@ export const FilterTable: FunctionComponent<FilterTableProps> = ({
 					isOpen={confirmBulkActionModalOpen}
 					deleteObjectCallback={handleConfirmSelectBulkAction}
 					onClose={() => setConfirmBulkActionModalOpen(false)}
-					confirmLabel={get(
-						bulkActions.find((action) => action.value === selectedBulkAction),
-						'label',
+					confirmLabel={
+						bulkActions.find((action) => action.value === selectedBulkAction)?.label ||
 						tText('admin/shared/components/filter-table/filter-table___bevestig')
-					)}
-					confirmButtonType={get(
-						bulkActions.find((action) => action.value === selectedBulkAction),
-						'confirmButtonType'
-					)}
+					}
+					confirmButtonType={
+						bulkActions.find((action) => action.value === selectedBulkAction)?.confirmButtonType
+					}
 				/>
 			)}
 		</div>

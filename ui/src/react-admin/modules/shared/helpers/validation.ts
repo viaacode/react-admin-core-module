@@ -1,5 +1,3 @@
-import { isNumber } from 'lodash-es';
-
 import { tText } from '~shared/helpers/translation-functions.js';
 
 import type { ContentBlockErrors } from '../../content-page/types/content-block.types.js';
@@ -21,7 +19,7 @@ export const validateContentBlockField = (
 	const errorArray = validator(value);
 
 	if (errorArray.length) {
-		if (isNumber(stateIndex)) {
+		if (typeof stateIndex === 'number') {
 			const errorsByKey = [...(oldErrors[fieldKey] || [])];
 			errorsByKey[stateIndex] = errorArray;
 

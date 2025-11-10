@@ -1,9 +1,9 @@
-@import "../../../../shared/styles/settings/colors";
+@use "../../../../shared/styles/settings/colors" as colors;
 
 .c-block-buttons__divider {
   width: 0.1rem;
   height: 3.2rem;
-  background-color: $color-gray-150;
+  background-color: colors.$color-gray-150;
   margin: 0;
 }
 

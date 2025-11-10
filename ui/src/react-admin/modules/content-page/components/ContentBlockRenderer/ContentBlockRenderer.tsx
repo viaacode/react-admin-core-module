@@ -1,7 +1,7 @@
 import { Container, Spacer } from '@viaa/avo2-components';
 import type { Avo } from '@viaa/avo2-types';
 import clsx from 'clsx';
-import { kebabCase, noop, omit } from 'lodash-es';
+import { kebabCase, noop, omit } from 'es-toolkit';
 import type { FunctionComponent, KeyboardEvent, RefObject } from 'react';
 import React, { useCallback, useEffect, useRef } from 'react';
 import { generateSmartLink } from '~shared/components/SmartLink/SmartLink.js';

@@ -1,6 +1,6 @@
 import type { AlignOptions, ButtonAction } from '@viaa/avo2-components';
 import clsx from 'clsx';
-import { kebabCase } from 'lodash-es';
+import { kebabCase } from 'es-toolkit';
 import type { FunctionComponent } from 'react';
 import React from 'react';
 import { BlockImageGrid } from '~content-blocks/BlockImageGrid/BlockImageGrid.js';

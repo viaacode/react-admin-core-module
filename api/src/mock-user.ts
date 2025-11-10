@@ -1,5 +1,4 @@
-import type { Avo } from '@viaa/avo2-types';
-import { Idp, PermissionName } from '@viaa/avo2-types';
+import { Avo, PermissionName } from '@viaa/avo2-types';
 
 import { type Locale } from './modules';
 
@@ -173,18 +172,22 @@ export const mockUserAvo: Avo.User.User = {
 	uid: '517aec71-cf0e-4e08-99d1-8e7e042923f7',
 	updated_at: '2022-11-28T08:23:35.658+00:00',
 	mail: 'bert.verhelst@studiohyperdrive.be',
-	idpmaps: [Idp.HETARCHIEF, Idp.HETARCHIEF, Idp.VLAAMSEOVERHEID__SUB_ID],
+	idpmaps: [
+		Avo.Auth.IdpType.HETARCHIEF,
+		Avo.Auth.IdpType.HETARCHIEF,
+		Avo.Auth.IdpType.VLAAMSEOVERHEID__SUB_ID,
+	],
 	idpmapObjects: [
 		{
-			idp: Idp.HETARCHIEF,
+			idp: Avo.Auth.IdpType.HETARCHIEF,
 			idp_user_id: '5eb99992-74a9-1039-9277-2bea2ee8ec01',
 		},
 		{
-			idp: Idp.KLASCEMENT,
+			idp: Avo.Auth.IdpType.KLASCEMENT,
 			idp_user_id: '5e7c68a6543c5',
 		},
 		{
-			idp: Idp.VLAAMSEOVERHEID__SUB_ID,
+			idp: Avo.Auth.IdpType.VLAAMSEOVERHEID__SUB_ID,
 			idp_user_id: '4d2b556cd6bffa86869507455afb0ee7329f41f2',
 		},
 	],
@@ -240,7 +243,7 @@ export const mockUserHetArchief: Avo.User.HetArchiefUser = {
 		PermissionName.VIEW_USERS,
 		PermissionName.CAN_EDIT_PROFILE_INFO,
 	],
-	idp: Idp.HETARCHIEF as any, // Definitions of Idp enum in different repos cause typescript to be confused and not recognize them as the same type
+	idp: Avo.Auth.IdpType.HETARCHIEF as any, // Definitions of Idp enum in different repos cause typescript to be confused and not recognize them as the same type
 	isKeyUser: false,
 	lastAccessAt: '2023-04-04T18:51:03.032+02:00',
 	createdAt: '2023-01-30T16:26:38.875447',

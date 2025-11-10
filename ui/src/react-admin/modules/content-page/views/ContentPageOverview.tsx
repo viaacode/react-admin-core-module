@@ -9,10 +9,10 @@ import {
 	Spacer,
 	TagList,
 } from '@viaa/avo2-components';
-import type { Avo } from '@viaa/avo2-types';
-import { PermissionName } from '@viaa/avo2-types';
+import { Avo, PermissionName } from '@viaa/avo2-types';
 import clsx from 'clsx';
-import { cloneDeep, compact, get, partition, set } from 'lodash-es';
+import { cloneDeep, compact, partition } from 'es-toolkit';
+import { get, set } from 'es-toolkit/compat';
 import type { FunctionComponent, ReactNode } from 'react';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import type { LabelObj } from '~content-blocks/BlockPageOverview/BlockPageOverview.types.js';
@@ -231,7 +231,7 @@ export const ContentPageOverview: FunctionComponent<ContentPageOverviewProps> = 
 			const [translationNotExistValues, translationDoesExistValues] = partition(
 				filters.translations,
 				(translationFilterValue) => translationFilterValue.startsWith(NOT_TRANSLATION_PREFIX)
-			) as [`${typeof NOT_TRANSLATION_PREFIX}${Locale}`[], Locale[]];
+			);
 
 			// Add filters for values: NOT_NL or NOT_EN
 			translationNotExistValues.forEach((translationNotExistValue) => {
@@ -292,7 +292,7 @@ export const ContentPageOverview: FunctionComponent<ContentPageOverviewProps> = 
 	} = useGetContentPages({
 		page: tableState.page || 0,
 		sortColumn: (tableState.sort_column as ContentOverviewTableCols) || 'updated_at',
-		sortOrder: tableState.sort_order || 'desc',
+		sortOrder: tableState.sort_order || Avo.Search.OrderDirection.DESC,
 		tableColumnDataType:
 			tableColumns.find(
 				(tableColumn: FilterableColumn) => tableColumn.id || '' === tableState.sort_column

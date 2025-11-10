@@ -6,7 +6,10 @@ import type { UserGroupUpdates } from '~modules/user-group/types/user-group.type
 export const useUpdateUserGroups = (
 	options?: UseMutationOptions<unknown, { deleted: number; updated: number }, UserGroupUpdates>
 ): UseMutationResult<unknown, { deleted: number; updated: number }, UserGroupUpdates> => {
-	return useMutation(async (json: UserGroupUpdates) => {
-		return UserGroupService.updateUserGroups(json);
-	}, options);
+	return useMutation({
+		mutationFn: async (json: UserGroupUpdates) => {
+			return UserGroupService.updateUserGroups(json);
+		},
+		...options,
+	});
 };

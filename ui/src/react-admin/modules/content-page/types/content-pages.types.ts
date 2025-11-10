@@ -61,7 +61,7 @@ export interface ContentTableState extends FilterableTableState {
 	userGroup: number[];
 	labels: number[];
 	isPublic: string[];
-	translations: TranslationFilterValue;
+	translations: TranslationFilterValue[];
 }
 
 export interface ContentPageLabel {

@@ -5,7 +5,10 @@ import { getAdminCoreApiUrl } from '~shared/helpers/get-proxy-url-from-admin-cor
 import { QUERY_KEYS } from '~shared/types/index.js';
 
 export const useGetPermissions = () => {
-	return useQuery([QUERY_KEYS.GET_ALL_PERMISSIONS], () => {
-		return fetchWithLogoutJson<PermissionData[]>(`${getAdminCoreApiUrl()}/admin/permissions`);
+	return useQuery({
+		queryKey: [QUERY_KEYS.GET_ALL_PERMISSIONS],
+		queryFn: () => {
+			return fetchWithLogoutJson<PermissionData[]>(`${getAdminCoreApiUrl()}/admin/permissions`);
+		},
 	});
 };

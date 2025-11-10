@@ -16,7 +16,7 @@ import {
 	ToolbarRight,
 } from '@viaa/avo2-components';
 import clsx from 'clsx';
-import { isNil, isNumber } from 'lodash-es';
+import { isNil } from 'es-toolkit';
 import type { FunctionComponent, ReactNode } from 'react';
 import React from 'react';
 import CopyToClipboard from 'react-copy-to-clipboard';
@@ -78,7 +78,6 @@ const ContentBlockForm: FunctionComponent<ContentBlockFormProps> = ({
 	removeComponentFromState,
 }) => {
 	const { components, block } = config;
-	const { isArray } = Array;
 	const configErrors = config.errors || {};
 
 	// Hooks
@@ -97,7 +96,7 @@ const ContentBlockForm: FunctionComponent<ContentBlockFormProps> = ({
 		};
 
 		const state = formGroupType === 'block' ? block.state : components.state;
-		const stateUpdate = isArray(state)
+		const stateUpdate = Array.isArray(state)
 			? state.map((currentState, index) => {
 					if (index === stateIndex) {
 						return { ...currentState, ...updateObject };
@@ -107,11 +106,13 @@ const ContentBlockForm: FunctionComponent<ContentBlockFormProps> = ({
 			: { ...state, ...updateObject };
 
 		const stateToCheckVisibility =
-			isArray(stateUpdate) && isNumber(stateIndex) ? stateUpdate[stateIndex] : stateUpdate;
+			Array.isArray(stateUpdate) && typeof stateIndex === 'number'
+				? stateUpdate[stateIndex]
+				: stateUpdate;
 		if (!(field.isVisible && !field.isVisible(config, stateToCheckVisibility))) {
 			handleValidation(field, key, value, stateIndex);
 		}
-		onChange(formGroupType, stateUpdate, isArray(components.state) ? stateIndex : undefined);
+		onChange(formGroupType, stateUpdate, Array.isArray(components.state) ? stateIndex : undefined);
 	};
 
 	const handleValidation = (
@@ -136,7 +137,7 @@ const ContentBlockForm: FunctionComponent<ContentBlockFormProps> = ({
 
 	const renderRemoveButton = (stateIndex: number) => {
 		const aboveMin =
-			isArray(components.state) && components.state.length > (components?.limits?.min || 1);
+			Array.isArray(components.state) && components.state.length > (components?.limits?.min || 1);
 
 		return (
 			removeComponentFromState &&
@@ -174,7 +175,7 @@ const ContentBlockForm: FunctionComponent<ContentBlockFormProps> = ({
 		// Render each state individually in a ContentBlockFormGroup
 		return (
 			<Spacer margin="top-small">
-				{isArray(formGroup.state) ? (
+				{Array.isArray(formGroup.state) ? (
 					formGroup.state.map((formGroupState: RepeatedContentBlockComponentState, stateIndex) => (
 						// biome-ignore lint/suspicious/noArrayIndexKey: We don't have a better key at this time
 						<Spacer key={stateIndex} margin="bottom">
@@ -244,7 +245,7 @@ const ContentBlockForm: FunctionComponent<ContentBlockFormProps> = ({
 		const label = (contentBlock?.components?.name || '').toLowerCase();
 		const underLimit =
 			isNil(components?.limits?.max) ||
-			(isArray(components.state) && components.state.length < (components?.limits?.max || 1));
+			(Array.isArray(components.state) && components.state.length < (components?.limits?.max || 1));
 
 		return (
 			<Accordion

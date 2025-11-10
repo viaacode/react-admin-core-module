@@ -2,7 +2,7 @@ import type { ReactNode } from 'react';
 import { Route } from 'react-router-dom';
 import { AdminConfigManager } from '~core/config/config.class.js';
 
-import { UserGroupOverview } from '~modules/user-group/views';
+import { UserGroupOverview } from '~modules/user-group/views/UserGroupOverview.js';
 
 export const renderAdminUserGroupRoutes = (): ReactNode[] => {
 	return [

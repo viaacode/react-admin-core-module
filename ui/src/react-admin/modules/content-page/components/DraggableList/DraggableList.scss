@@ -1,6 +1,6 @@
 @use "sass:math";
 @use "sass:color";
-@import "../../../shared/styles/settings/colors";
+@use "../../../shared/styles/settings/colors" as colors;
 
 $ghost-height: 0.5rem;
 
@@ -19,11 +19,11 @@ $ghost-height: 0.5rem;
 
     &.c-draggable-list__item {
       &--highlighted {
-        border-color: $color-teal-bright;
+        border-color: colors.$color-teal-bright;
       }
 
       &--error {
-        border-color: $color-error;
+        border-color: colors.$color-error;
       }
     }
   }
@@ -53,7 +53,7 @@ $ghost-height: 0.5rem;
   }
 
   .c-draggable-list__item--is-being-dragged {
-    border-color: $color-teal-bright;
+    border-color: colors.$color-teal-bright;
   }
 
   .c-draggable-list__item--target-ghost {
@@ -71,7 +71,7 @@ $ghost-height: 0.5rem;
       width: 100%;
       transition: width 0.3s ease-out;
       display: block;
-      background-color: $color-teal-bright;
+      background-color: colors.$color-teal-bright;
       border-radius: math.div($ghost-height, 2);
       animation: show-after-delay 0.05s;
     }

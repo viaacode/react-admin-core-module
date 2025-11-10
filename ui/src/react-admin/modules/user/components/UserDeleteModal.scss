@@ -1,7 +1,7 @@
-@import "../../shared/styles/settings/variables";
+@use "../../shared/styles/settings/variables" as variables;
 
 .c-user-delete-modal {
   .c-checkbox {
-    margin-top: $g-spacer-unit * 2;
+    margin-top: variables.$g-spacer-unit * 2;
   }
 }

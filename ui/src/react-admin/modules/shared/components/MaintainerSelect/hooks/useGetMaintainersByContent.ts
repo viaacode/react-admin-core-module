@@ -6,14 +6,13 @@ import { QUERY_KEYS } from '~shared/types/index.js';
 export const useGetMaintainersByContent = (
 	contentItemType: ContentPickerType | undefined | null,
 	contentItemId: string | undefined,
-	options: { enabled?: boolean; keepPreviousData?: boolean } = {
+	options: { enabled?: boolean } = {
 		enabled: true,
-		keepPreviousData: true,
 	}
 ) => {
-	return useQuery<{ id: string; name: string; logo: string | null; website: string | null }[]>(
-		[QUERY_KEYS.GET_MAINTAINERS_BY_CONTENT, contentItemType, contentItemId],
-		() => {
+	return useQuery<{ id: string; name: string; logo: string | null; website: string | null }[]>({
+		queryKey: [QUERY_KEYS.GET_MAINTAINERS_BY_CONTENT, contentItemType, contentItemId],
+		queryFn: () => {
 			if (!contentItemType || !contentItemId) {
 				return [];
 			}
@@ -33,10 +32,7 @@ export const useGetMaintainersByContent = (
 
 			return OrganisationService.getMaintainersByContentItem(usableContentType, contentItemId);
 		},
-		{
-			enabled: true,
-			keepPreviousData: true,
-			...options,
-		}
-	);
+		enabled: true,
+		...options,
+	});
 };

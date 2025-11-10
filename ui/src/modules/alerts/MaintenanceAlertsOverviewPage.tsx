@@ -1,6 +1,6 @@
-import type { FC, ReactNode } from 'react';
 import { Button, Modal } from '@meemoo/react-components';
-import { MaintenanceAlertsOverview } from '~modules/maintenance-alerts/views/MaintenanceAlertsOverview';
+import type { FC, ReactNode } from 'react';
+import { MaintenanceAlertsOverview } from '~modules/maintenance-alerts/views/MaintenanceAlertsOverview.js';
 import { tText } from '~shared/helpers/translation-functions.js';
 
 export const MaintenanceAlertsOverviewPage: FC = () => {

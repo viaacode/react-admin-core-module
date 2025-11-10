@@ -7,8 +7,8 @@
     "allowImportingTsExtensions": true
 	},
 	"files": [
-    "backup-translations.mts",
-    "execute-database-query.mts",
-    "extract-and-replace-translations.mts"
+    "backup-translations.ts",
+    "execute-database-query.ts",
+    "extract-and-replace-translations.ts"
   ]
 }

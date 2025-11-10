@@ -2,7 +2,7 @@ import type { IconName, TabProps } from '@viaa/avo2-components';
 import { Button, ButtonToolbar, Container, Navbar, Spacer, Tabs } from '@viaa/avo2-components';
 import type { Avo } from '@viaa/avo2-types';
 import { PermissionName } from '@viaa/avo2-types';
-import { cloneDeep, isNil, isString } from 'lodash-es';
+import { cloneDeep, isNil, isString } from 'es-toolkit';
 import type { FC, Reducer } from 'react';
 import React, { useCallback, useEffect, useReducer, useState } from 'react';
 import CopyToClipboard from 'react-copy-to-clipboard';

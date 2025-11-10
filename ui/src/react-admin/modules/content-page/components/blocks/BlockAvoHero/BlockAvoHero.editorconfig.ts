@@ -1,5 +1,5 @@
 import type { TextInputProps } from '@viaa/avo2-components';
-import { noop } from 'lodash-es';
+import { noop } from 'es-toolkit';
 import type { BlockAvoHeroProps } from '~content-blocks/BlockAvoHero/BlockAvoHero.js';
 import { AdminConfigManager } from '~core/config/config.class.js';
 import { GET_AVO_HERO_BACKGROUND_COLOR_OPTIONS } from '~modules/content-page/const/get-color-options.js';

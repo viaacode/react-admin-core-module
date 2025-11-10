@@ -1,4 +1,3 @@
-import type { UseQueryResult } from '@tanstack/react-query';
 import { useQuery } from '@tanstack/react-query';
 import type { Avo } from '@viaa/avo2-types';
 import { UserService } from '~modules/user/user.service.js';
@@ -18,14 +17,13 @@ export interface GetProfileArguments {
 
 export const useGetProfiles = (
 	getProfileArguments?: GetProfileArguments,
-	options: { enabled?: boolean; keepPreviousData?: boolean } = {
+	options: { enabled?: boolean } = {
 		enabled: true,
-		keepPreviousData: true,
 	}
-): UseQueryResult<[Avo.User.CommonUser[], number]> => {
-	return useQuery(
-		[QUERY_KEYS.GET_PROFILES, getProfileArguments],
-		(props) => {
+) => {
+	return useQuery({
+		queryKey: [QUERY_KEYS.GET_PROFILES, getProfileArguments],
+		queryFn: (props) => {
 			const getProfileArgs = props.queryKey[1] as GetProfileArguments;
 			if (!getProfileArgs) {
 				return null;
@@ -40,10 +38,7 @@ export const useGetProfiles = (
 				getProfileArgs.where || {}
 			);
 		},
-		{
-			enabled: true,
-			keepPreviousData: true,
-			...options,
-		}
-	);
+		enabled: true,
+		...options,
+	});
 };

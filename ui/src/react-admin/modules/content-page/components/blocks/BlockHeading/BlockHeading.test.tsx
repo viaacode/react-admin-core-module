@@ -1,7 +1,7 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 
-import { BlockHeading } from './BlockHeading/BlockHeading.js';
+import { BlockHeading } from './BlockHeading.js';
 
 describe('<BlockHeading />', () => {
 	it('Should be able to render', () => {

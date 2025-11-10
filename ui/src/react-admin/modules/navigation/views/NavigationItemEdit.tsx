@@ -1,6 +1,6 @@
 import type { TagInfo } from '@viaa/avo2-components';
 import { Button, ButtonToolbar, Flex } from '@viaa/avo2-components';
-import { compact, get, isNil, startCase, uniqBy } from 'lodash-es';
+import { compact, isNil, startCase, uniqBy } from 'es-toolkit';
 import type { FC } from 'react';
 import React, { useEffect, useState } from 'react';
 import { AdminConfigManager } from '~core/config/config.class.js';
@@ -55,8 +55,7 @@ export const NavigationItemEdit: FC<NavigationEditProps> = ({
 		isLoading: isLoadingNavigationItems,
 		isError: isErrorNavigationItems,
 	} = useGetNavigationBarItems(navigationBarId, undefined, undefined, undefined, undefined, {
-		keepPreviousData: false,
-		cacheTime: 0,
+		gcTime: 0,
 	});
 	const originalNavigationItem =
 		navigationItems?.find((navItem) => String(navItem.id) === navigationItemId) || null;
@@ -77,7 +76,7 @@ export const NavigationItemEdit: FC<NavigationEditProps> = ({
 				};
 			})
 		),
-		'value'
+		(navItem) => navItem.value
 	);
 
 	useEffect(() => {
@@ -107,6 +106,7 @@ export const NavigationItemEdit: FC<NavigationEditProps> = ({
 		}
 	}, [navigationBarId, navigationItemId, isLoadingNavigationItems, originalNavigationItem]);
 
+	// biome-ignore lint/correctness/useExhaustiveDependencies: TODO need to test the application before changing these dep arrays
 	useEffect(() => {
 		if (
 			!isLoadingNavigationItems &&
@@ -180,11 +180,8 @@ export const NavigationItemEdit: FC<NavigationEditProps> = ({
 				await NavigationService.insertNavigationItem({
 					...menuItem,
 					// Get description from existing items or use form description field
-					description: get(
-						navigationItems,
-						'[0].description',
-						currentNavigationItem?.description || ''
-					),
+					description:
+						navigationItems?.[0]?.description || currentNavigationItem?.description || '',
 					position: navigationItems.length,
 				});
 

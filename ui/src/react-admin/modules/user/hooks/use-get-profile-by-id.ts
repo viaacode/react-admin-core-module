@@ -14,14 +14,14 @@ export const useGetProfileById = (
 		(typeof QUERY_KEYS.GET_PROFILE_BY_ID)[]
 	>
 ): UseQueryResult<Avo.User.CommonUser | null> => {
-	return useQuery(
-		[QUERY_KEYS.GET_PROFILE_BY_ID],
-		() => {
+	return useQuery({
+		queryKey: [QUERY_KEYS.GET_PROFILE_BY_ID],
+		queryFn: () => {
 			if (!id) {
 				return null;
 			}
 			return UserService.getUserById(String(id));
 		},
-		options
-	);
+		...options,
+	});
 };

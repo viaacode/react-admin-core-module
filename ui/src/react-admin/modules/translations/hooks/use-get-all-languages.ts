@@ -5,7 +5,10 @@ import { TranslationsService } from '~modules/translations/translations.service.
 import type { LanguageInfo } from '~modules/translations/translations.types.js';
 
 export const useGetAllLanguages = (): UseQueryResult<LanguageInfo[]> => {
-	return useQuery([QUERY_KEYS.GET_ALL_LANGUAGES], () => {
-		return TranslationsService.fetchLanguages();
+	return useQuery({
+		queryKey: [QUERY_KEYS.GET_ALL_LANGUAGES],
+		queryFn: () => {
+			return TranslationsService.fetchLanguages();
+		},
 	});
 };
