@@ -22,7 +22,7 @@ import type {
 } from '~modules/maintenance-alerts/maintenance-alerts.types.js';
 import { IconPicker } from '~modules/shared/components/IconPicker/IconPicker.js';
 import { useGetAllLanguages } from '~modules/translations/hooks/use-get-all-languages.js';
-import { Locale } from '~modules/translations/translations.core.types.js';
+import { App, Locale } from '~modules/translations/translations.core.types.js';
 import type { LanguageInfo } from '~modules/translations/translations.types.js';
 import { useUserGroupOptions } from '~modules/user-group/hooks/useUserGroupOptions.js';
 import { DateInput } from '~shared/components/DateInput/DateInput.js';
@@ -98,9 +98,15 @@ const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProp
 			} else {
 				// Handle unexpected errors (not related to validation)
 				showToast({
-					title: tText('modules/maintenance-alerts/views/maintenance-alerts-edit-form___error'),
+					title: tText(
+						'modules/maintenance-alerts/views/maintenance-alerts-edit-form___error',
+						{},
+						[App.HET_ARCHIEF]
+					),
 					description: tText(
-						'modules/maintenance-alerts/views/maintenance-alerts-edit-form___het-valideren-van-het-formulier-is-mislukt'
+						'modules/maintenance-alerts/views/maintenance-alerts-edit-form___het-valideren-van-het-formulier-is-mislukt',
+						{},
+						[App.HET_ARCHIEF]
 					),
 					type: ToastType.ERROR,
 				});
@@ -112,18 +118,26 @@ const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProp
 	const onClickSave = async () => {
 		if (!currentMaintenanceAlert) {
 			showToast({
-				title: tText('modules/maintenance-alerts/views/maintenance-alerts-edit-form___error'),
+				title: tText('modules/maintenance-alerts/views/maintenance-alerts-edit-form___error', {}, [
+					App.HET_ARCHIEF,
+				]),
 				description: tText(
-					'modules/maintenance-alerts/views/maintenance-alerts-edit-form___het-opslaan-van-de-melding-is-mislukt'
+					'modules/maintenance-alerts/views/maintenance-alerts-edit-form___het-opslaan-van-de-melding-is-mislukt',
+					{},
+					[App.HET_ARCHIEF]
 				),
 				type: ToastType.ERROR,
 			});
 		}
 		if (!isFormValid()) {
 			showToast({
-				title: tText('modules/maintenance-alerts/views/maintenance-alerts-edit-form___error'),
+				title: tText('modules/maintenance-alerts/views/maintenance-alerts-edit-form___error', {}, [
+					App.HET_ARCHIEF,
+				]),
 				description: tText(
-					'modules/maintenance-alerts/views/maintenance-alerts-edit-form___bepaalde-velden-in-het-formulier-zijn-niet-correct-ingevuld'
+					'modules/maintenance-alerts/views/maintenance-alerts-edit-form___bepaalde-velden-in-het-formulier-zijn-niet-correct-ingevuld',
+					{},
+					[App.HET_ARCHIEF]
 				),
 				type: ToastType.ERROR,
 			});
@@ -137,9 +151,13 @@ const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProp
 				);
 
 				showToast({
-					title: tText('react-admin/modules/alerts/views/alerts-overview___succes'),
+					title: tText('react-admin/modules/alerts/views/alerts-overview___succes', {}, [
+						App.HET_ARCHIEF,
+					]),
 					description: tText(
-						'react-admin/modules/alerts/views/alerts-overview___het-aanpassen-van-de-melding-is-gelukt'
+						'react-admin/modules/alerts/views/alerts-overview___het-aanpassen-van-de-melding-is-gelukt',
+						{},
+						[App.HET_ARCHIEF]
 					),
 					type: ToastType.SUCCESS,
 				});
@@ -147,9 +165,13 @@ const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProp
 				console.error(new CustomError('Failed to update alert', err));
 
 				showToast({
-					title: tText('react-admin/modules/alerts/views/alerts-overview___error'),
+					title: tText('react-admin/modules/alerts/views/alerts-overview___error', {}, [
+						App.HET_ARCHIEF,
+					]),
 					description: tText(
-						'react-admin/modules/alerts/views/alerts-overview___het-aanpassen-van-de-melding-is-mislukt'
+						'react-admin/modules/alerts/views/alerts-overview___het-aanpassen-van-de-melding-is-mislukt',
+						{},
+						[App.HET_ARCHIEF]
 					),
 					type: ToastType.ERROR,
 				});
@@ -159,9 +181,13 @@ const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProp
 				await MaintenanceAlertsService.insertAlert(currentMaintenanceAlert as MaintenanceAlert);
 
 				showToast({
-					title: tText('react-admin/modules/alerts/views/alerts-overview___succes'),
+					title: tText('react-admin/modules/alerts/views/alerts-overview___succes', {}, [
+						App.HET_ARCHIEF,
+					]),
 					description: tText(
-						'react-admin/modules/alerts/views/alerts-overview___het-aanmaken-van-de-melding-is-gelukt'
+						'react-admin/modules/alerts/views/alerts-overview___het-aanmaken-van-de-melding-is-gelukt',
+						{},
+						[App.HET_ARCHIEF]
 					),
 					type: ToastType.SUCCESS,
 				});
@@ -169,9 +195,13 @@ const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProp
 				console.error(new CustomError('Failed to create alert', err));
 
 				showToast({
-					title: tText('react-admin/modules/alerts/views/alerts-overview___error'),
+					title: tText('react-admin/modules/alerts/views/alerts-overview___error', {}, [
+						App.HET_ARCHIEF,
+					]),
 					description: tText(
-						'react-admin/modules/alerts/views/alerts-overview___het-aanmaken-van-de-melding-is-mislukt'
+						'react-admin/modules/alerts/views/alerts-overview___het-aanmaken-van-de-melding-is-mislukt',
+						{},
+						[App.HET_ARCHIEF]
 					),
 					type: ToastType.ERROR,
 				});
@@ -188,7 +218,9 @@ const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProp
 		return (
 			<FormControl
 				id="new-alert-title"
-				label={tHtml('react-admin/modules/alerts/views/alerts-overview___titel-melding')}
+				label={tHtml('react-admin/modules/alerts/views/alerts-overview___titel-melding', {}, [
+					App.HET_ARCHIEF,
+				])}
 				errors={[errors.title]}
 			>
 				<TextInput
@@ -214,7 +246,9 @@ const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProp
 		return (
 			<FormControl
 				id="new-alert-message"
-				label={tHtml('react-admin/modules/alerts/views/alerts-overview___beschrijving')}
+				label={tHtml('react-admin/modules/alerts/views/alerts-overview___beschrijving', {}, [
+					App.HET_ARCHIEF,
+				])}
 				errors={[errors.message]}
 				key={currentMaintenanceAlert?.id}
 			>
@@ -241,7 +275,11 @@ const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProp
 		return (
 			<FormControl
 				id="new-alert-icon"
-				label={tHtml('react-admin/modules/alerts/views/alerts-overview___verduidelijkend-icoon')}
+				label={tHtml(
+					'react-admin/modules/alerts/views/alerts-overview___verduidelijkend-icoon',
+					{},
+					[App.HET_ARCHIEF]
+				)}
 				errors={[errors.type]}
 			>
 				<IconPicker
@@ -269,7 +307,9 @@ const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProp
 			<FormControl
 				id="new-alert-user-group"
 				label={tHtml(
-					'react-admin/modules/alerts/views/alerts-overview___zichtbaar-voor-gebruikersgroep'
+					'react-admin/modules/alerts/views/alerts-overview___zichtbaar-voor-gebruikersgroep',
+					{},
+					[App.HET_ARCHIEF]
 				)}
 				errors={[errors.userGroups]}
 			>
@@ -287,7 +327,9 @@ const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProp
 						});
 					}}
 					label={tText(
-						'react-admin/modules/alerts/views/alerts-overview___zichtbaar-voor-gebruikersgroep'
+						'react-admin/modules/alerts/views/alerts-overview___zichtbaar-voor-gebruikersgroep',
+						{},
+						[App.HET_ARCHIEF]
 					)}
 					iconOpen={<Icon name="angleUp" />}
 					iconClosed={<Icon name="angleDown" />}
@@ -304,7 +346,9 @@ const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProp
 		return (
 			<FormControl
 				id="new-alert-from-date"
-				label={tHtml('react-admin/modules/alerts/views/alerts-overview___zichtbaar-van')}
+				label={tHtml('react-admin/modules/alerts/views/alerts-overview___zichtbaar-van', {}, [
+					App.HET_ARCHIEF,
+				])}
 				errors={[errors.fromDate]}
 				className="c-input--date-time"
 			>
@@ -378,7 +422,9 @@ const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProp
 		return (
 			<FormControl
 				id="new-alert-until-date"
-				label={tHtml('react-admin/modules/alerts/views/alerts-overview___zichtbaar-tot')}
+				label={tHtml('react-admin/modules/alerts/views/alerts-overview___zichtbaar-tot', {}, [
+					App.HET_ARCHIEF,
+				])}
 				errors={[errors.untilDate]}
 				className="c-input--date-time"
 			>
@@ -455,7 +501,9 @@ const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProp
 		return (
 			<FormControl
 				id="new-alert-language"
-				label={tHtml('modules/maintenance-alerts/views/maintenance-alerts-edit-form___taal')}
+				label={tHtml('modules/maintenance-alerts/views/maintenance-alerts-edit-form___taal', {}, [
+					App.HET_ARCHIEF,
+				])}
 				errors={[errors.language]}
 				className="c-multilanguage-controls"
 			>
@@ -500,8 +548,12 @@ const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProp
 	return renderPopup({
 		title:
 			action === 'create'
-				? tText('react-admin/modules/alerts/views/alerts-overview___melding-aanmaken')
-				: tText('react-admin/modules/alerts/views/alerts-overview___melding-aanpassen'),
+				? tText('react-admin/modules/alerts/views/alerts-overview___melding-aanmaken', {}, [
+						App.HET_ARCHIEF,
+					])
+				: tText('react-admin/modules/alerts/views/alerts-overview___melding-aanpassen', {}, [
+						App.HET_ARCHIEF,
+					]),
 		body: renderPopupBody(),
 		isOpen: !!maintenanceAlert,
 		onSave: onClickSave,

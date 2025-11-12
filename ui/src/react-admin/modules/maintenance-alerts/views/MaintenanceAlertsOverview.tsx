@@ -32,6 +32,7 @@ import { showToast } from '~shared/helpers/show-toast.js';
 import { tHtml, tText } from '~shared/helpers/translation-functions.js';
 import { TableColumnDataType } from '~shared/types/table-column-data-type.js';
 import { TableFilterType } from '~shared/types/table-filter-types.js';
+import { App } from '../../../../../scripts/translation.types.js';
 import { MaintenanceAlertsService } from '../maintenance-alerts.service.js';
 import type {
 	MaintenanceAlert,
@@ -100,9 +101,13 @@ export const MaintenanceAlertsOverview: FunctionComponent<MaintenanceAlertsOverv
 			await MaintenanceAlertsService.deleteAlert(alertToDeleteId);
 
 			showToast({
-				title: tText('react-admin/modules/alerts/views/alerts-overview___succes'),
+				title: tText('react-admin/modules/alerts/views/alerts-overview___succes', {}, [
+					App.HET_ARCHIEF,
+				]),
 				description: tText(
-					'react-admin/modules/alerts/views/alerts-overview___het-verwijderen-van-de-melding-is-gelukt'
+					'react-admin/modules/alerts/views/alerts-overview___het-verwijderen-van-de-melding-is-gelukt',
+					{},
+					[App.HET_ARCHIEF]
 				),
 				type: ToastType.SUCCESS,
 			});
@@ -110,9 +115,13 @@ export const MaintenanceAlertsOverview: FunctionComponent<MaintenanceAlertsOverv
 			console.error(new CustomError('Failed to delete alert', err));
 
 			showToast({
-				title: tText('react-admin/modules/alerts/views/alerts-overview___error'),
+				title: tText('react-admin/modules/alerts/views/alerts-overview___error', {}, [
+					App.HET_ARCHIEF,
+				]),
 				description: tText(
-					'react-admin/modules/alerts/views/alerts-overview___het-verwijderen-van-de-melding-is-mislukt'
+					'react-admin/modules/alerts/views/alerts-overview___het-verwijderen-van-de-melding-is-mislukt',
+					{},
+					[App.HET_ARCHIEF]
 				),
 				type: ToastType.ERROR,
 			});
@@ -146,8 +155,8 @@ export const MaintenanceAlertsOverview: FunctionComponent<MaintenanceAlertsOverv
 					<Badge
 						text={
 							checkIsAlertActive(maintenanceAlert.fromDate, maintenanceAlert.untilDate)
-								? tText('modules/alerts/views/alerts-overview___actief')
-								: tText('modules/alerts/views/alerts-overview___inactief')
+								? tText('modules/alerts/views/alerts-overview___actief', {}, [App.HET_ARCHIEF])
+								: tText('modules/alerts/views/alerts-overview___inactief', {}, [App.HET_ARCHIEF])
 						}
 						variants={
 							checkIsAlertActive(maintenanceAlert.fromDate, maintenanceAlert.untilDate)
@@ -173,7 +182,9 @@ export const MaintenanceAlertsOverview: FunctionComponent<MaintenanceAlertsOverv
 								setAction('edit');
 							}}
 							title={tText(
-								'modules/maintenance-alerts/views/maintenance-alerts-overview___hover-bewerk-notificatie'
+								'modules/maintenance-alerts/views/maintenance-alerts-overview___hover-bewerk-notificatie',
+								{},
+								[App.HET_ARCHIEF]
 							)}
 						/>
 						<Button
@@ -185,7 +196,9 @@ export const MaintenanceAlertsOverview: FunctionComponent<MaintenanceAlertsOverv
 								setIsDeleteModalOpen(true);
 							}}
 							title={tText(
-								'modules/maintenance-alerts/views/maintenance-alerts-overview___hover-verwijder-notificatie'
+								'modules/maintenance-alerts/views/maintenance-alerts-overview___hover-verwijder-notificatie',
+								{},
+								[App.HET_ARCHIEF]
 							)}
 						/>
 					</>
@@ -197,26 +210,26 @@ export const MaintenanceAlertsOverview: FunctionComponent<MaintenanceAlertsOverv
 		() => [
 			{
 				id: 'title',
-				label: tText('modules/alerts/views/alerts-overview___titel-melding'),
+				label: tText('modules/alerts/views/alerts-overview___titel-melding', {}, [App.HET_ARCHIEF]),
 				sortable: true,
 				visibleByDefault: true,
 				dataType: TableColumnDataType.string,
 			},
 			{
 				id: 'fromDate',
-				label: tText('modules/alerts/views/alerts-overview___zichtbaar-van'),
+				label: tText('modules/alerts/views/alerts-overview___zichtbaar-van', {}, [App.HET_ARCHIEF]),
 				sortable: true,
 				visibleByDefault: true,
 			},
 			{
 				id: 'untilDate',
-				label: tText('modules/alerts/views/alerts-overview___zichtbaar-tot'),
+				label: tText('modules/alerts/views/alerts-overview___zichtbaar-tot', {}, [App.HET_ARCHIEF]),
 				sortable: true,
 				visibleByDefault: true,
 			},
 			{
 				id: 'status',
-				label: tText('modules/alerts/views/alerts-overview___status'),
+				label: tText('modules/alerts/views/alerts-overview___status', {}, [App.HET_ARCHIEF]),
 				sortable: true,
 				visibleByDefault: true,
 			},
@@ -224,7 +237,11 @@ export const MaintenanceAlertsOverview: FunctionComponent<MaintenanceAlertsOverv
 				? [
 						{
 							id: 'language' as const,
-							label: tText('modules/maintenance-alerts/views/maintenance-alerts-overview___taal'),
+							label: tText(
+								'modules/maintenance-alerts/views/maintenance-alerts-overview___taal',
+								{},
+								[App.HET_ARCHIEF]
+							),
 							sortable: true,
 							visibleByDefault: true,
 							filterType: TableFilterType.CheckboxDropdownModal,
@@ -237,7 +254,9 @@ export const MaintenanceAlertsOverview: FunctionComponent<MaintenanceAlertsOverv
 				: []),
 			{
 				id: 'actions',
-				tooltip: tText('admin/content-page-labels/views/content-page-label-overview___acties'),
+				tooltip: tText('admin/content-page-labels/views/content-page-label-overview___acties', {}, [
+					App.HET_ARCHIEF,
+				]),
 				visibleByDefault: true,
 			},
 		];
@@ -246,12 +265,16 @@ export const MaintenanceAlertsOverview: FunctionComponent<MaintenanceAlertsOverv
 		return (
 			<ErrorView
 				message={tHtml(
-					'modules/maintenance-alerts/views/maintenance-alerts-overview___er-zijn-nog-geen-meldingen-aangemaakt'
+					'modules/maintenance-alerts/views/maintenance-alerts-overview___er-zijn-nog-geen-meldingen-aangemaakt',
+					{},
+					[App.HET_ARCHIEF]
 				)}
 			>
 				<p>
 					{tHtml(
-						'modules/maintenance-alerts/views/maintenance-alerts-overview___er-zijn-nog-geen-meldingen-aangemaakt'
+						'modules/maintenance-alerts/views/maintenance-alerts-overview___er-zijn-nog-geen-meldingen-aangemaakt',
+						{},
+						[App.HET_ARCHIEF]
 					)}
 				</p>
 			</ErrorView>
@@ -267,7 +290,9 @@ export const MaintenanceAlertsOverview: FunctionComponent<MaintenanceAlertsOverv
 			return (
 				<>
 					{tHtml(
-						'react-admin/modules/alerts/views/alerts-overview___er-zijn-geen-meldingen-gevonden'
+						'react-admin/modules/alerts/views/alerts-overview___er-zijn-geen-meldingen-gevonden',
+						{},
+						[App.HET_ARCHIEF]
 					)}
 				</>
 			);
@@ -282,30 +307,40 @@ export const MaintenanceAlertsOverview: FunctionComponent<MaintenanceAlertsOverv
 					renderTableCell(maintenanceAlert, columnId as MaintenanceAlertsOverviewTableCol)
 				}
 				searchTextPlaceholder={tText(
-					'modules/maintenance-alerts/views/maintenance-alerts-overview___zoeken-op-titel-of-bericht'
+					'modules/maintenance-alerts/views/maintenance-alerts-overview___zoeken-op-titel-of-bericht',
+					{},
+					[App.HET_ARCHIEF]
 				)}
 				renderNoResults={renderNoResults}
 				noContentMatchingFiltersMessage={tText(
-					'modules/maintenance-alerts/views/maintenance-alerts-overview___er-zijn-geen-meldingen-gevonden-die-voldoen-aan-je-zoekterm'
+					'modules/maintenance-alerts/views/maintenance-alerts-overview___er-zijn-geen-meldingen-gevonden-die-voldoen-aan-je-zoekterm',
+					{},
+					[App.HET_ARCHIEF]
 				)}
 				itemsPerPage={ITEMS_PER_PAGE}
 				onTableStateChanged={setTableState}
 				isLoading={isLoading}
 				searchInputAriaLabel={tText(
-					'modules/maintenance-alerts/views/maintenance-alerts-overview___zoek-input-aria-label'
+					'modules/maintenance-alerts/views/maintenance-alerts-overview___zoek-input-aria-label',
+					{},
+					[App.HET_ARCHIEF]
 				)}
 			/>
 		);
 	};
 
-	const title = tText('react-admin/modules/alerts/views/alerts-overview___meldingen');
+	const title = tText('react-admin/modules/alerts/views/alerts-overview___meldingen', {}, [
+		App.HET_ARCHIEF,
+	]);
 	return (
 		<AdminLayout className={className} pageTitle={title}>
 			<AdminLayout.Actions>
 				<Button
 					iconStart={<Icon name="export" />}
 					label={tText(
-						'react-admin/modules/alerts/views/alerts-overview___nieuwe-melding-aanmaken'
+						'react-admin/modules/alerts/views/alerts-overview___nieuwe-melding-aanmaken',
+						{},
+						[App.HET_ARCHIEF]
 					)}
 					onClick={() => onClickCreate()}
 					variants="black"
@@ -324,7 +359,9 @@ export const MaintenanceAlertsOverview: FunctionComponent<MaintenanceAlertsOverv
 				<ConfirmModal
 					deleteObjectCallback={onClickDelete}
 					body={tHtml(
-						'react-admin/modules/alerts/views/alerts-overview___het-verwijderen-van-een-melding-kan-niet-ongedaan-gemaakt-worden'
+						'react-admin/modules/alerts/views/alerts-overview___het-verwijderen-van-een-melding-kan-niet-ongedaan-gemaakt-worden',
+						{},
+						[App.HET_ARCHIEF]
 					)}
 					isOpen={isDeleteModalOpen}
 					onClose={() => {

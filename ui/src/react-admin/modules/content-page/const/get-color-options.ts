@@ -1,7 +1,8 @@
 import type { SelectOption } from '@viaa/avo2-components';
 import { tText } from '~shared/helpers/translation-functions.js';
-import { Color, CustomBackground, GradientColor } from '../types/content-block.types.js';
 import { AVO } from '~shared/types/index.js';
+import { App } from '../../../../../scripts/translation.types.js';
+import { Color, CustomBackground, GradientColor } from '../types/content-block.types.js';
 
 const transparentOption = () => ({
 	label: tText('admin/content-block/content-block___geen'),
@@ -12,7 +13,7 @@ const whiteOption = () => ({
 	value: Color.White,
 });
 const gray50Option = () => ({
-	label: tText('admin/content-block/content-block___grijs'),
+	label: tText('admin/content-block/content-block___grijs', {}, [App.AVO]),
 	value: Color.Gray50,
 });
 const softBlueOption = () => ({
@@ -44,7 +45,7 @@ const yellowOption = () => ({
 	value: Color.Yellow,
 });
 const platinumOption = () => ({
-	label: tText('modules/content-page/const/content-block___platinum'),
+	label: tText('modules/content-page/const/content-block___platinum', {}, [App.HET_ARCHIEF]),
 	value: Color.Platinum,
 });
 const blackOption = () => ({
@@ -52,23 +53,27 @@ const blackOption = () => ({
 	value: Color.Black,
 });
 const neutralOption = () => ({
-	label: tText('modules/content-page/const/content-block___neutraal'),
+	label: tText('modules/content-page/const/content-block___neutraal', {}, [App.HET_ARCHIEF]),
 	value: Color.Neutral,
 });
 const zincOption = () => ({
-	label: tText('modules/content-page/const/content-block___zinc'),
+	label: tText('modules/content-page/const/content-block___zinc', {}, [App.HET_ARCHIEF]),
 	value: Color.Zinc,
 });
 const skyBlueOption = () => ({
-	label: tText('modules/content-page/const/content-block___sky-blauw'),
+	label: tText('modules/content-page/const/content-block___sky-blauw', {}, [App.HET_ARCHIEF]),
 	value: Color.SkyBlue,
 });
 const meemooLogoOption = () => ({
-	label: tText('react-admin/modules/content-page/const/get-color-options___meemoo-logo'),
+	label: tText('react-admin/modules/content-page/const/get-color-options___meemoo-logo', {}, [
+		App.HET_ARCHIEF,
+	]),
 	value: CustomBackground.MeemooLogo,
 });
 const blackWhiteGradientOption = () => ({
-	label: tText('modules/content-page/const/content-block___overgang-zwart-wit'),
+	label: tText('modules/content-page/const/content-block___overgang-zwart-wit', {}, [
+		App.HET_ARCHIEF,
+	]),
 	value: GradientColor.BlackWhite,
 });
 

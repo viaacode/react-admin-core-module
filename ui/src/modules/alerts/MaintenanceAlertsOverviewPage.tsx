@@ -1,6 +1,7 @@
 import { Button, Modal } from '@meemoo/react-components';
 import type { FC, ReactNode } from 'react';
 import { MaintenanceAlertsOverview } from '~modules/maintenance-alerts/views/MaintenanceAlertsOverview.js';
+import { App } from '~modules/translations/translations.core.types.js';
 import { tText } from '~shared/helpers/translation-functions.js';
 
 export const MaintenanceAlertsOverviewPage: FC = () => {
@@ -24,14 +25,18 @@ export const MaintenanceAlertsOverviewPage: FC = () => {
 						variants={['block', 'black']}
 						onClick={onSave}
 						label={tText(
-							'react-admin/modules/alerts/views/alerts-overview-page___bewaar-wijzigingen'
+							'react-admin/modules/alerts/views/alerts-overview-page___bewaar-wijzigingen',
+							{},
+							[App.HET_ARCHIEF]
 						)}
 					/>
 
 					<Button
 						variants={['block', 'text']}
 						onClick={onClose}
-						label={tText('react-admin/modules/alerts/views/alerts-overview-page___annuleer')}
+						label={tText('react-admin/modules/alerts/views/alerts-overview-page___annuleer', {}, [
+							App.HET_ARCHIEF,
+						])}
 					/>
 				</div>
 			);
