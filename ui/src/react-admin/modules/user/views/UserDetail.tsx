@@ -45,11 +45,7 @@ import { Idp } from '../user.types.js';
 
 export interface UserDetailProps {
 	id: string | null;
-	onSetTempAccess?: (
-		userId: string,
-		tempAccess: Avo.User.TempAccess,
-		profileId: string
-	) => Promise<void>;
+	onSetTempAccess?: (profileId: string, tempAccess: Avo.User.TempAccess) => Promise<void>;
 	onLoaded?: (user: Avo.User.CommonUser) => void;
 	onGoBack: () => void;
 	commonUser: Avo.User.CommonUser;
@@ -191,12 +187,6 @@ export const UserDetail: FC<UserDetailProps> = ({
 
 	const handleSetTempAccess = async (newTempAccess: Avo.User.TempAccess) => {
 		try {
-			const userId = storedProfile?.userId;
-
-			if (!userId) {
-				throw new CustomError('Invalid userId');
-			}
-
 			const profileId = storedProfile?.profileId;
 
 			if (!profileId) {
@@ -204,7 +194,7 @@ export const UserDetail: FC<UserDetailProps> = ({
 			}
 
 			// This callback will invoke a lot of functionality, see this method in avo2-client for more details.
-			await onSetTempAccess?.(userId, newTempAccess, profileId);
+			await onSetTempAccess?.(profileId, newTempAccess, profileId);
 			setTempAccess(newTempAccess);
 
 			await refetchProfileInfo();
