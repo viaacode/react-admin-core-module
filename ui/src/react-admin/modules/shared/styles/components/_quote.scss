@@ -45,7 +45,7 @@
   margin-right: 1.2rem;
 }
 
-@media (max-width: 400px) {
+@media (width <= 400px) {
   .c-quote__text {
     font-size: 2rem;
   }

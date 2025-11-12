@@ -34,8 +34,7 @@
 
 .c-content-edit-view__preview {
   width: 100%;
-  overflow-y: visible;
-  overflow-x: hidden;
+  overflow: hidden visible;
   background-color: white;
 
   .c-content-block-preview > .o-container {

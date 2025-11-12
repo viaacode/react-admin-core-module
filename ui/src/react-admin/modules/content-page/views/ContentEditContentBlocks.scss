@@ -2,9 +2,9 @@
 @use "../../shared/styles/settings/colors" as colors;
 
 @keyframes flash {
-  from,
+  0%,
   50%,
-  to {
+  100% {
     background-color: color.adjust(colors.$color-teal-bright, $lightness: -30%);
   }
 

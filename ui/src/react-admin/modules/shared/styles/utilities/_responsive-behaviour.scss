@@ -47,7 +47,7 @@ $main-nav-switch-bp-2: 1100px;
 .u-mq-switch-main-nav-notifications {
   display: none;
 
-  @media (min-width: 450px) {
+  @media (width >= 450px) {
     display: block;
   }
 }
@@ -55,7 +55,7 @@ $main-nav-switch-bp-2: 1100px;
 .u-mq-switch-main-nav-authentication {
   display: none;
 
-  @media (min-width: 450px) {
+  @media (width >= 450px) {
     display: block;
   }
 }
