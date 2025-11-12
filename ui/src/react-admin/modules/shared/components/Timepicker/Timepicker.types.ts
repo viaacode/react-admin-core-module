@@ -1,8 +1,10 @@
 import type { ReactNode } from 'react';
-import type { ReactDatePickerProps } from 'react-datepicker';
+import type { DatePickerProps } from 'react-datepicker';
 
 import type { DefaultComponentProps } from '../../types/components.js';
 
-export interface TimepickerProps extends DefaultComponentProps, ReactDatePickerProps {
-	children?: ReactNode;
-}
+export type TimepickerProps = DefaultComponentProps &
+	DatePickerProps & {
+		children?: ReactNode;
+		id?: string;
+	};

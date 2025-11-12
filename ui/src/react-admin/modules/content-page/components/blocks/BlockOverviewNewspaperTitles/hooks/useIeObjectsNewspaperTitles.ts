@@ -1,4 +1,4 @@
-import { keepPreviousData, useQuery } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import type { NewspaperTitle } from '~content-blocks/BlockOverviewNewspaperTitles/BlockOverviewNewspaperTitles.types.js';
 import { fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout.js';
 import { getProxyUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config.js';

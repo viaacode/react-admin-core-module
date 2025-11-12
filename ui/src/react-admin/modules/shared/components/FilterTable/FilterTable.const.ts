@@ -21,6 +21,7 @@ export const FILTER_TABLE_QUERY_PARAM_CONFIG = (columns: FilterableColumn[]) => 
 	...cleanupFilterTableState(
 		Object.fromEntries(
 			compact(
+				// biome-ignore lint/suspicious/noExplicitAny: TODO fix
 				columns.map((col): [string, QueryParamConfig<any>] | null => {
 					if (col.filterType && FILTER_TYPE_TO_QUERY_PARAM_CONVERTER[col.filterType]) {
 						return [col.id, FILTER_TYPE_TO_QUERY_PARAM_CONVERTER[col.filterType]];

@@ -159,6 +159,7 @@ export const FilterTable: FunctionComponent<FilterTableProps> = ({
 	const { mutateAsync: setPreferredColumns } = useUpdateTableColumnPreference(location.pathname);
 
 	const handleTableStateChanged = useCallback(
+		// biome-ignore lint/suspicious/noExplicitAny: TODO fix
 		(value: any, id: string) => {
 			// biome-ignore lint/suspicious/noExplicitAny: todo
 			let newTableState: any = cloneDeep(tableState);
@@ -467,6 +468,7 @@ export const FilterTable: FunctionComponent<FilterTableProps> = ({
 								sortOrder={
 									((tableState.sort_order as Avo.Search.OrderDirection) ||
 										defaultOrderDirection ||
+										// biome-ignore lint/suspicious/noExplicitAny: TODO fix
 										undefined) as any // TODO add asc_nulls_first to table sort orders
 								}
 								showCheckboxes={(!!bulkActions && !!bulkActions.length) || showCheckboxes}

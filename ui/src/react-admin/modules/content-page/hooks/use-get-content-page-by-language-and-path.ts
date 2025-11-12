@@ -7,7 +7,7 @@ import { QUERY_KEYS } from '~shared/types/index.js';
 export const useGetContentPageByLanguageAndPath = (
 	language: Locale,
 	path: string,
-	options: { enabled?: boolean; keepPreviousData?: boolean } = {
+	options: { enabled?: boolean } = {
 		enabled: true,
 	}
 ) => {

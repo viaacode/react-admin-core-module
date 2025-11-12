@@ -194,7 +194,7 @@ export const UserDetail: FC<UserDetailProps> = ({
 			}
 
 			// This callback will invoke a lot of functionality, see this method in avo2-client for more details.
-			await onSetTempAccess?.(profileId, newTempAccess, profileId);
+			await onSetTempAccess?.(profileId, newTempAccess);
 			setTempAccess(newTempAccess);
 
 			await refetchProfileInfo();

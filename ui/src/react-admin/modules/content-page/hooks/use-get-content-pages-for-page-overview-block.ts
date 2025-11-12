@@ -16,7 +16,7 @@ interface ContentPagesOverviewArgs {
 
 export const useGetContentPagesForPageOverviewBlock = (
 	requestArgs: ContentPagesOverviewArgs,
-	options: { enabled?: boolean; keepPreviousData?: boolean } = {
+	options: { enabled?: boolean } = {
 		enabled: true,
 	}
 ) => {

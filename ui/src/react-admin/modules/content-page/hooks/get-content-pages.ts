@@ -1,4 +1,4 @@
-import { keepPreviousData, useQuery } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import type { Avo } from '@viaa/avo2-types';
 import { ContentPageService } from '~modules/content-page/services/content-page.service.js';
 import type { ContentOverviewTableCols } from '~modules/content-page/types/content-pages.types.js';
@@ -29,6 +29,5 @@ export const useGetContentPages = (contentPageOverviewParams?: ContentPageOvervi
 				contentPageOverviewParams.where || {}
 			);
 		},
-		placeholderData: keepPreviousData,
 	});
 };

@@ -10,7 +10,7 @@ interface ContentPageLabelsRequestArgs {
 
 export const useGetContentPageLabelsByTypeAndLabels = (
 	requestArgs: ContentPageLabelsRequestArgs,
-	options: { enabled?: boolean; keepPreviousData?: boolean } = {
+	options: { enabled?: boolean } = {
 		enabled: true,
 	}
 ) => {

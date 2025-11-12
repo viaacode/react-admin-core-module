@@ -30,6 +30,7 @@ export function renderSimpleDetailRows<T>(
 		propAndTranslations.map((propAndTranslation) => {
 			let value = obj?.[propAndTranslation[0]];
 			if (isBoolean(value)) {
+				// biome-ignore lint/suspicious/noExplicitAny: TODO figure out why typings complain here
 				value = (value ? 'Ja' : 'Nee') as any;
 			}
 			return renderDetailRow((isNil(value) ? '-' : value) as ReactNode, propAndTranslation[1]);
@@ -44,6 +45,7 @@ export function renderDateDetailRows<T>(
 	return compact(
 		propAndTranslations.map((propAndTranslation) => {
 			const value = obj?.[propAndTranslation[0]];
+			// biome-ignore lint/suspicious/noExplicitAny: this should probably be solved with generics, but any is easier for now
 			return renderDetailRow(value ? formatDate(value as any) : '-', propAndTranslation[1]);
 		})
 	);
