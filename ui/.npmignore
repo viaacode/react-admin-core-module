@@ -1,6 +1,5 @@
 .env/
-.idea
-*.iml
+.idea/
 public/
 scripts/
 data/
