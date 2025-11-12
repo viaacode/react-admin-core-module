@@ -1,6 +1,6 @@
 {
   "name": "@meemoo/admin-core-ui",
-  "version": "5.0.0",
+  "version": "5.0.1",
   "private": false,
   "type": "module",
   "files": [
@@ -67,7 +67,7 @@
     "@meemoo/react-components": "5.0.2",
     "@studiohyperdrive/pagination": "1.0.0",
     "@tanstack/react-query": "5.90.7",
-    "@viaa/avo2-components": "6.0.1",
+    "@viaa/avo2-components": "6.0.3",
     "@viaa/avo2-types": "4.0.1",
     "autosize": "6.0.1",
     "caniuse-lite": "^1.0.30001712",
@@ -86,7 +86,7 @@
     "raf": "3.4.1",
     "react": "18.2.0",
     "react-copy-to-clipboard": "5.0.4",
-    "react-datepicker": "4.21.0",
+    "react-datepicker": "8.9.0",
     "react-dom": "18.2.0",
     "react-hook-form": "7.66.0",
     "react-page-split": "0.0.7",
@@ -118,7 +118,6 @@
     "@types/node-fetch": "2.6.13",
     "@types/react": "18.2.22",
     "@types/react-copy-to-clipboard": "5.0.4",
-    "@types/react-datepicker": "4.19.2",
     "@types/react-dom": "18.2.7",
     "@types/react-table": "7.7.20",
     "@vitejs/plugin-react": "5.1.0",
