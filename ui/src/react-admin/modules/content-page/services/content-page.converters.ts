@@ -1,4 +1,5 @@
 import { compact, isFunction, isPlainObject, sortBy } from 'es-toolkit';
+import { isEmpty } from 'es-toolkit/compat';
 import { ToastType } from '~core/config/config.types.js';
 import { CONTENT_BLOCK_CONFIG_MAP } from '~modules/content-page/const/content-block-config-map.js';
 import { TEMP_BLOCK_ID_PREFIX } from '~modules/content-page/const/content-page.consts.js';
@@ -80,13 +81,16 @@ export function convertDbContentPageToContentPageInfo(
 ): ContentPageInfo {
 	return {
 		...dbContentPage,
-		content_blocks: convertDbContentBlockToContentBlockConfig(dbContentPage.content_blocks),
+		content_blocks: convertDbContentBlockToContentBlockConfig(dbContentPage.content_blocks || []),
 	};
 }
 
 export function convertDbContentBlockToContentBlockConfig(
 	contentBlocks: DbContentBlock[]
 ): ContentBlockConfig[] {
+	if (isEmpty(contentBlocks)) {
+		return [];
+	}
 	const sortedContentBlocks = sortBy(contentBlocks, ['position']);
 
 	return compact(
