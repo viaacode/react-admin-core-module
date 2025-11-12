@@ -1,7 +1,7 @@
-import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
+import { Module } from '@nestjs/common'
+import { ConfigModule } from '@nestjs/config'
 
-import { DataService } from './services/data.service';
+import { DataService } from './services/data.service'
 
 @Module({
 	controllers: [],

@@ -1,6 +1,6 @@
-import { type ExecutionContext } from '@nestjs/common';
+import { type ExecutionContext } from '@nestjs/common'
 
-import { LoggedInGuard } from './logged-in.guard';
+import { LoggedInGuard } from './logged-in.guard'
 
 const mockExecutionContextWithSession = (session) =>
 	({
@@ -9,7 +9,7 @@ const mockExecutionContextWithSession = (session) =>
 				session,
 			}),
 		}),
-	}) as unknown as ExecutionContext;
+	}) as unknown as ExecutionContext
 
 describe('LoggedInGuard', () => {
 	it('Should allow access when user is logged in', async () => {
@@ -17,16 +17,16 @@ describe('LoggedInGuard', () => {
 			archiefUserInfo: {
 				id: 'test-user-id',
 			},
-		};
+		}
 		const canActivate = new LoggedInGuard().canActivate(
 			mockExecutionContextWithSession(session)
-		);
-		expect(canActivate).toBe(true);
-	});
+		)
+		expect(canActivate).toBe(true)
+	})
 
 	it('Should not allow access when no user is logged in', async () => {
 		expect(() =>
 			new LoggedInGuard().canActivate(mockExecutionContextWithSession({}))
-		).toThrowError();
-	});
-});
+		).toThrowError()
+	})
+})

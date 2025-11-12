@@ -1,12 +1,9 @@
 {
-	"extends": "../tsconfig.json",
-	"compilerOptions": {
-		"module": "CommonJS",
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "module": "CommonJS",
     "resolveJsonModule": true,
     "esModuleInterop": true
-	},
-	"files": [
-    "whitelist-gql-queries.ts",
-    "extract-and-replace-translations.ts"
-  ]
+  },
+  "files": ["whitelist-gql-queries.ts", "extract-and-replace-translations.ts"]
 }

@@ -1,8 +1,8 @@
-import { Controller, Get, ParseIntPipe, Query } from '@nestjs/common';
-import { ApiQuery, ApiTags } from '@nestjs/swagger';
-import type { Avo } from '@viaa/avo2-types';
+import { Controller, Get, ParseIntPipe, Query } from '@nestjs/common'
+import { ApiQuery, ApiTags } from '@nestjs/swagger'
+import type { Avo } from '@viaa/avo2-types'
 
-import { AssignmentsService } from './assignments.service';
+import { AssignmentsService } from './assignments.service'
 
 @ApiTags('Assignments')
 @Controller(process.env.ADMIN_CORE_ROUTES_PREFIX + '/assignments')
@@ -27,6 +27,6 @@ export class AssignmentsController {
 		@Query('titleOrId') titleOrId: string | undefined,
 		@Query('limit', ParseIntPipe) limit: number
 	): Promise<Avo.Assignment.Assignment[]> {
-		return this.assignmentsService.fetchPublicAssignmentsByTitleOrId(titleOrId, limit);
+		return this.assignmentsService.fetchPublicAssignmentsByTitleOrId(titleOrId, limit)
 	}
 }

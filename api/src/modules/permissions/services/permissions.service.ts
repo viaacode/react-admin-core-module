@@ -1,9 +1,9 @@
-import { forwardRef, Inject, Injectable } from '@nestjs/common';
+import { forwardRef, Inject, Injectable } from '@nestjs/common'
 
-import { DataService } from '../../data';
-import { getDatabaseType } from '../../shared/helpers/get-database-type';
-import { PermissionQueryTypes, PERMISSIONS_QUERIES } from '../permissions.consts';
-import { PermissionData } from '../permissions.types';
+import { DataService } from '../../data'
+import { getDatabaseType } from '../../shared/helpers/get-database-type'
+import { PermissionQueryTypes, PERMISSIONS_QUERIES } from '../permissions.consts'
+import { PermissionData } from '../permissions.types'
 
 @Injectable()
 export class PermissionsService {
@@ -12,7 +12,7 @@ export class PermissionsService {
 	public async getPermissions(): Promise<PermissionData[]> {
 		const response = await this.dataService.execute<
 			PermissionQueryTypes['GetPermissionsQuery']
-		>(PERMISSIONS_QUERIES[getDatabaseType()].GetPermissionsDocument);
+		>(PERMISSIONS_QUERIES[getDatabaseType()].GetPermissionsDocument)
 
 		if ((response as PermissionQueryTypes['GetPermissionsQueryAvo'])?.users_permissions) {
 			return (
@@ -23,8 +23,8 @@ export class PermissionsService {
 					name: permission.label,
 					label: permission.description,
 					description: permission.description,
-				};
-			});
+				}
+			})
 		}
 
 		if ((response as PermissionQueryTypes['GetPermissionsQueryHetArchief']).users_permission) {
@@ -36,10 +36,10 @@ export class PermissionsService {
 					label: permission.label,
 					name: permission.name,
 					description: permission.description,
-				};
-			});
+				}
+			})
 		}
 
-		return [];
+		return []
 	}
 }

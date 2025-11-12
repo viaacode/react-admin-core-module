@@ -71,4 +71,4 @@ export const FILTERED_EDUCATION_LOMS = [
 		label: 'volwassenenonderwijs',
 		scheme: 'https://w3id.org/onderwijs-vlaanderen/id/structuur',
 	},
-];
+]

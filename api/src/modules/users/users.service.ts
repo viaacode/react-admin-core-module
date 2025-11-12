@@ -1,9 +1,9 @@
-import { forwardRef, Inject } from '@nestjs/common';
-import { Avo } from '@viaa/avo2-types';
-import { compact, flatten } from 'lodash';
+import { forwardRef, Inject } from '@nestjs/common'
+import { Avo } from '@viaa/avo2-types'
+import { compact, flatten } from 'lodash'
 
-import { DataService } from '../data';
-import { AdminOrganisationsService } from '../organisations';
+import { DataService } from '../data'
+import { AdminOrganisationsService } from '../organisations'
 import {
 	BulkAddLomsToProfilesDocument,
 	BulkAddLomsToProfilesMutation,
@@ -20,23 +20,23 @@ import {
 	GetUserByIdDocument,
 	GetUserByIdQuery,
 	GetUserByIdQueryVariables,
-} from '../shared/generated/graphql-db-types-avo';
-import { customError } from '../shared/helpers/custom-error';
-import { getOrderObject } from '../shared/helpers/generate-order-gql-query';
-import { getDatabaseType } from '../shared/helpers/get-database-type';
-import { isAvo } from '../shared/helpers/is-avo';
-import { isHetArchief } from '../shared/helpers/is-hetarchief';
+} from '../shared/generated/graphql-db-types-avo'
+import { customError } from '../shared/helpers/custom-error'
+import { getOrderObject } from '../shared/helpers/generate-order-gql-query'
+import { getDatabaseType } from '../shared/helpers/get-database-type'
+import { isAvo } from '../shared/helpers/is-avo'
+import { isHetArchief } from '../shared/helpers/is-hetarchief'
 
-import { USER_QUERIES, UserQueryTypes } from './queries/users.queries';
-import { GET_TABLE_COLUMN_TO_DATABASE_ORDER_OBJECT } from './users.consts';
-import { convertUserInfoToCommonUser } from './users.converters';
+import { USER_QUERIES, UserQueryTypes } from './queries/users.queries'
+import { GET_TABLE_COLUMN_TO_DATABASE_ORDER_OBJECT } from './users.consts'
+import { convertUserInfoToCommonUser } from './users.converters'
 import {
 	type DeleteContentCounts,
 	type UserInfoOverviewAvo,
 	type UserInfoOverviewHetArchief,
 	UserInfoType,
 	type UserOverviewTableCol,
-} from './users.types';
+} from './users.types'
 
 export class UsersService {
 	constructor(
@@ -47,29 +47,29 @@ export class UsersService {
 	async getById(profileId: string): Promise<Avo.User.CommonUser> {
 		try {
 			if (!isAvo()) {
-				throw customError('Not supported for hetarchief only for avo');
+				throw customError('Not supported for hetarchief only for avo')
 			}
 
 			const response = await this.dataService.execute<
 				GetUserByIdQuery,
 				GetUserByIdQueryVariables
-			>(GetUserByIdDocument, { id: profileId });
+			>(GetUserByIdDocument, { id: profileId })
 
 			if (!response || !response.users_summary_view[0]) {
 				throw customError('Could not fetch user', null, {
 					response,
-				});
+				})
 			}
 
 			return convertUserInfoToCommonUser(
 				response.users_summary_view[0],
 				UserInfoType.UserInfoOverviewAvo
-			);
+			)
 		} catch (err: any) {
 			throw customError('Failed to get profiles from the database', err, {
 				variables: { id: profileId },
 				query: 'GetUserById',
-			});
+			})
 		}
 	}
 
@@ -81,7 +81,7 @@ export class UsersService {
 		tableColumnDataType: string,
 		where: any = {}
 	): Promise<[Avo.User.CommonUser[], number]> {
-		let variables: any;
+		let variables: any
 		try {
 			// Hetarchief doesn't have a is_deleted column yet
 			const whereWithoutDeleted = isHetArchief()
@@ -89,9 +89,9 @@ export class UsersService {
 				: {
 						...where,
 						_and: [...(where?._and || []), { is_deleted: { _eq: false } }],
-					};
+					}
 
-			const query = USER_QUERIES[getDatabaseType()].GetUsersDocument;
+			const query = USER_QUERIES[getDatabaseType()].GetUsersDocument
 			variables = {
 				offset,
 				limit,
@@ -102,20 +102,20 @@ export class UsersService {
 					tableColumnDataType,
 					GET_TABLE_COLUMN_TO_DATABASE_ORDER_OBJECT()
 				),
-			};
+			}
 
 			const response = await this.dataService.execute<UserQueryTypes['GetUsersQuery']>(
 				query,
 				variables
-			);
+			)
 
-			const avoResponse = response as UserQueryTypes['GetUsersQueryAvo'];
-			const hetArchiefResponse = response as UserQueryTypes['GetUsersQueryHetArchief'];
+			const avoResponse = response as UserQueryTypes['GetUsersQueryAvo']
+			const hetArchiefResponse = response as UserQueryTypes['GetUsersQueryHetArchief']
 
 			// Convert user format to profile format since we initially wrote the ui to deal with profiles
 			const userProfileObjects = (avoResponse?.users_summary_view ||
 				hetArchiefResponse?.users_profile ||
-				[]) as UserInfoOverviewAvo[] | UserInfoOverviewHetArchief[];
+				[]) as UserInfoOverviewAvo[] | UserInfoOverviewHetArchief[]
 
 			const profiles: Avo.User.CommonUser[] = compact(
 				userProfileObjects.map((userInfo) => {
@@ -124,27 +124,27 @@ export class UsersService {
 						isAvo()
 							? UserInfoType.UserInfoOverviewAvo
 							: UserInfoType.UserInfoOverviewHetArchief
-					);
+					)
 				})
-			);
+			)
 
 			const profileCount =
 				avoResponse?.users_summary_view_aggregate?.aggregate?.count ||
 				hetArchiefResponse?.users_profile_aggregate?.aggregate?.count ||
-				0;
+				0
 
 			if (!profiles) {
 				throw customError('Response does not contain any profiles', null, {
 					response,
-				});
+				})
 			}
 
-			return [profiles as any[], profileCount];
+			return [profiles as any[], profileCount]
 		} catch (err: any) {
 			throw customError('Failed to get profiles from the database', err, {
 				variables,
 				query: 'GET_USERS',
-			});
+			})
 		}
 	}
 
@@ -155,7 +155,7 @@ export class UsersService {
 				UserQueryTypes['GetProfileNamesQueryVariables']
 			>(USER_QUERIES[getDatabaseType()].GetProfileNamesDocument, {
 				profileIds,
-			});
+			})
 
 			/* istanbul ignore next */
 			if (isHetArchief()) {
@@ -170,7 +170,7 @@ export class UsersService {
 						fullName: profileEntry.full_name || undefined,
 						email: profileEntry.mail || undefined,
 					})
-				);
+				)
 			} else {
 				return (
 					(response as UserQueryTypes['GetProfileNamesQueryAvo'])?.users_summary_view ||
@@ -183,28 +183,28 @@ export class UsersService {
 						fullName: profileEntry.full_name || undefined,
 						email: profileEntry.mail || undefined,
 					})
-				);
+				)
 			}
 		} catch (err: any) {
 			throw customError('Failed to get profile names from the database', err, {
 				profileIds,
 				query: 'GET_PROFILE_NAMES',
-			});
+			})
 		}
 	}
 
 	async getProfileIds(
 		where?: UserQueryTypes['GetProfileIdsQueryVariables']['where']
 	): Promise<string[]> {
-		let variables: UserQueryTypes['GetProfileIdsQueryVariables'] | null = null;
+		let variables: UserQueryTypes['GetProfileIdsQueryVariables'] | null = null
 		try {
 			variables = {
 				where: where || {},
-			};
+			}
 			const response = await this.dataService.execute<
 				UserQueryTypes['GetProfileIdsQuery'],
 				UserQueryTypes['GetProfileIdsQueryVariables']
-			>(USER_QUERIES[getDatabaseType()].GetProfileIdsDocument, variables);
+			>(USER_QUERIES[getDatabaseType()].GetProfileIdsDocument, variables)
 
 			if (isAvo()) {
 				// avo
@@ -213,40 +213,40 @@ export class UsersService {
 						(response as UserQueryTypes['GetProfileIdsQueryAvo']).users_summary_view ||
 						[]
 					).map((user) => user?.profile_id)
-				);
+				)
 			}
 			// archief
 			return compact(
 				(
 					(response as UserQueryTypes['GetProfileIdsQueryHetArchief']).users_profile || []
 				).map((user) => user?.id)
-			);
+			)
 		} catch (err: any) {
 			throw customError('Failed to get profile ids from the database', err, {
 				variables,
 				query: 'GET_PROFILE_IDS',
-			});
+			})
 		}
 	}
 
 	async fetchDistinctBusinessCategories(): Promise<string[]> {
 		if (isHetArchief()) {
-			return [];
+			return []
 		}
 
 		try {
 			const response = await this.dataService.execute<
 				GetDistinctBusinessCategoriesQuery,
 				GetDistinctBusinessCategoriesQueryVariables
-			>(GetDistinctBusinessCategoriesDocument);
+			>(GetDistinctBusinessCategoriesDocument)
 
 			return compact(
 				(response.users_profiles || []).map((profile) => profile.business_category)
-			);
+			)
 		} catch (err: any) {
 			throw customError('Failed to get distinct business categories from profiles', err, {
 				query: 'GET_DISTINCT_BUSINESS_CATEGORIES',
-			});
+			})
 		}
 	}
 
@@ -255,29 +255,29 @@ export class UsersService {
 			const response = await this.dataService.execute<
 				UserQueryTypes['GetIdpsQuery'],
 				UserQueryTypes['GetIdpsQueryVariables']
-			>(USER_QUERIES[getDatabaseType()].GetIdpsDocument);
+			>(USER_QUERIES[getDatabaseType()].GetIdpsDocument)
 
 			/* istanbul ignore next */
 			if (isHetArchief()) {
 				return (
 					(response as UserQueryTypes['GetIdpsQueryHetArchief'])
 						.users_identity_provider || []
-				).map((idp) => idp.name as Avo.Auth.IdpType);
+				).map((idp) => idp.name as Avo.Auth.IdpType)
 			}
 
 			return ((response as UserQueryTypes['GetIdpsQueryAvo']).users_idps || []).map(
 				(idp) => idp.value as Avo.Auth.IdpType
-			);
+			)
 		} catch (err: any) {
 			throw customError('Failed to get idps from the database', err, {
 				query: 'GET_IDPS',
-			});
+			})
 		}
 	}
 
 	async fetchPublicAndPrivateCounts(profileIds: string[]): Promise<DeleteContentCounts> {
 		if (isHetArchief()) {
-			console.info("fetching counts isn't supported for hetarchief");
+			console.info("fetching counts isn't supported for hetarchief")
 			return {
 				publicCollections: 0,
 				privateCollections: 0,
@@ -291,7 +291,7 @@ export class UsersService {
 				privateContentPages: 0,
 				bookmarks: 0,
 				quickLanes: 0,
-			};
+			}
 		}
 
 		try {
@@ -300,7 +300,7 @@ export class UsersService {
 				GetContentCountsForUsersQueryVariables
 			>(GetContentCountsForUsersDocument, {
 				profileIds,
-			});
+			})
 
 			return {
 				publicCollections: response.publicCollections?.aggregate?.count || 0,
@@ -319,24 +319,24 @@ export class UsersService {
 					(response.collectionBookmarks?.aggregate?.count || 0) +
 					(response.itemBookmarks?.aggregate?.count || 0),
 				quickLanes: response.quickLanes?.aggregate?.count || 0,
-			};
+			}
 		} catch (err: any) {
 			throw customError('Failed to get content counts for users from the database', err, {
 				profileIds,
 				query: 'GetContentCountsForUsers',
-			});
+			})
 		}
 	}
 
 	async bulkAddLomsToProfiles(lomIds: string[], profileIds: string[]): Promise<void> {
 		if (isHetArchief()) {
-			console.info("adding subjects to profiles isn't supported for hetarchief");
-			return;
+			console.info("adding subjects to profiles isn't supported for hetarchief")
+			return
 		}
 
 		try {
 			// First remove the subjects, so we can add them without duplicate conflicts
-			await this.bulkRemoveLomsFromProfiles(lomIds, profileIds);
+			await this.bulkRemoveLomsFromProfiles(lomIds, profileIds)
 
 			// Add the subjects
 			await this.dataService.execute<
@@ -351,20 +351,20 @@ export class UsersService {
 						}))
 					)
 				),
-			});
+			})
 		} catch (err: any) {
 			throw customError('Failed to bulk add loms to profiles', err, {
 				lomIds,
 				profileIds,
 				query: 'BulkAddLomsToProfiles',
-			});
+			})
 		}
 	}
 
 	async bulkRemoveLomsFromProfiles(lomIds: string[], profileIds: string[]): Promise<void> {
 		if (isHetArchief()) {
-			console.info("removing loms from profiles isn't supported for hetarchief");
-			return;
+			console.info("removing loms from profiles isn't supported for hetarchief")
+			return
 		}
 
 		try {
@@ -374,13 +374,13 @@ export class UsersService {
 			>(BulkDeleteLomsFromProfilesDocument, {
 				lomIds,
 				profileIds,
-			});
+			})
 		} catch (err: any) {
 			throw customError('Failed to bulk delete loms from profiles', err, {
 				lomIds,
 				profileIds,
 				query: 'BulkDeleteLomsFromProfiles',
-			});
+			})
 		}
 	}
 }

@@ -1,15 +1,15 @@
-import * as util from 'node:util';
+import * as util from 'node:util'
 
-import { InternalServerErrorException } from '@nestjs/common';
+import { InternalServerErrorException } from '@nestjs/common'
 
 export function customError(
 	message: string,
 	innerException?: any,
 	additionalInfo?: Record<string, unknown>
 ) {
-	const stack = innerException?.stack || new Error().stack || '';
+	const stack = innerException?.stack || new Error().stack || ''
 
-	const singleLineLogging = process.env.SINGLE_LINE_LOGGING === 'true';
+	const singleLineLogging = process.env.SINGLE_LINE_LOGGING === 'true'
 	const json = util.inspect(
 		{
 			message,
@@ -23,7 +23,7 @@ export function customError(
 			colors: !singleLineLogging,
 			compact: singleLineLogging,
 		}
-	);
+	)
 
-	return new InternalServerErrorException(json);
+	return new InternalServerErrorException(json)
 }

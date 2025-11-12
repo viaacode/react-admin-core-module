@@ -1,10 +1,10 @@
-import { CACHE_MANAGER } from '@nestjs/cache-manager';
-import { Inject, Injectable, NotFoundException, OnApplicationBootstrap } from '@nestjs/common';
-import { Cron } from '@nestjs/schedule';
-import { type Cache } from 'cache-manager';
-import { groupBy, isEmpty, sortBy } from 'lodash';
+import { CACHE_MANAGER } from '@nestjs/cache-manager'
+import { Inject, Injectable, NotFoundException, OnApplicationBootstrap } from '@nestjs/common'
+import { Cron } from '@nestjs/schedule'
+import { type Cache } from 'cache-manager'
+import { groupBy, isEmpty, sortBy } from 'lodash'
 
-import { DataService } from '../../data';
+import { DataService } from '../../data'
 import {
 	GetAllLanguagesDocument,
 	GetAllLanguagesQuery,
@@ -23,13 +23,13 @@ import {
 	UpdateTranslationDocument,
 	UpdateTranslationMutation,
 	UpdateTranslationMutationVariables,
-} from '../../shared/generated/graphql-db-types-hetarchief';
-import { customError } from '../../shared/helpers/custom-error';
-import { isAvo } from '../../shared/helpers/is-avo';
+} from '../../shared/generated/graphql-db-types-hetarchief'
+import { customError } from '../../shared/helpers/custom-error'
+import { isAvo } from '../../shared/helpers/is-avo'
 import {
 	getTranslationFallback,
 	resolveTranslationVariables,
-} from '../../shared/helpers/translation-fallback';
+} from '../../shared/helpers/translation-fallback'
 import {
 	App,
 	Component,
@@ -42,11 +42,11 @@ import {
 	type TranslationKey,
 	type TranslationLocation,
 	ValueType,
-} from '../translations.types';
+} from '../translations.types'
 
 @Injectable()
 export class TranslationsService implements OnApplicationBootstrap {
-	private backendTranslations: Record<Locale, KeyValueTranslations>;
+	private backendTranslations: Record<Locale, KeyValueTranslations>
 
 	constructor(
 		private dataService: DataService,
@@ -55,19 +55,19 @@ export class TranslationsService implements OnApplicationBootstrap {
 
 	public async getLanguages(): Promise<LanguageInfo[]> {
 		const response =
-			await this.dataService.execute<GetAllLanguagesQuery>(GetAllLanguagesDocument);
+			await this.dataService.execute<GetAllLanguagesQuery>(GetAllLanguagesDocument)
 		return response.lookup_languages.map(
 			(language): LanguageInfo => ({
 				languageCode: language.value,
 				languageLabel: language.comment,
 			})
-		);
+		)
 	}
 
 	public getFullKey(
 		translationEntry: TranslationEntry
 	): `${Component}${typeof TRANSLATION_SEPARATOR}${TranslationLocation}${typeof TRANSLATION_SEPARATOR}${TranslationKey}` {
-		return `${translationEntry.component}${TRANSLATION_SEPARATOR}${translationEntry.location}${TRANSLATION_SEPARATOR}${translationEntry.key}`;
+		return `${translationEntry.component}${TRANSLATION_SEPARATOR}${translationEntry.location}${TRANSLATION_SEPARATOR}${translationEntry.key}`
 	}
 
 	public async getTranslations(): Promise<MultiLanguageTranslationEntry[]> {
@@ -75,10 +75,10 @@ export class TranslationsService implements OnApplicationBootstrap {
 			Component.ADMIN_CORE,
 			Component.FRONTEND,
 			Component.BACKEND,
-		]);
+		])
 		const groupedByKey: [string, TranslationEntry[]][] = Object.entries(
 			groupBy(translationEntries, this.getFullKey)
-		);
+		)
 		const multiLanguageTranslationEntries: MultiLanguageTranslationEntry[] = groupedByKey.map(
 			(translationEntryPair): MultiLanguageTranslationEntry => {
 				return {
@@ -89,13 +89,13 @@ export class TranslationsService implements OnApplicationBootstrap {
 					values: Object.fromEntries(
 						translationEntryPair[1].map((t) => [t.language, t.value])
 					) as Record<Locale, string>,
-				};
+				}
 			}
-		);
+		)
 		return sortBy(
 			multiLanguageTranslationEntries,
 			this.getFullKey
-		) as MultiLanguageTranslationEntry[];
+		) as MultiLanguageTranslationEntry[]
 	}
 
 	public async upsertTranslation(
@@ -110,10 +110,10 @@ export class TranslationsService implements OnApplicationBootstrap {
 				component,
 				location,
 				key
-			);
+			)
 			if (existingEntries.find((entry) => entry.language === languageCode)) {
 				// Update entry
-				await this.updateTranslation(component, location, key, languageCode, value);
+				await this.updateTranslation(component, location, key, languageCode, value)
 			} else {
 				// Insert entry (eg: for missing en entry where nl entry already exists
 				await this.insertTranslation(
@@ -125,12 +125,12 @@ export class TranslationsService implements OnApplicationBootstrap {
 					// Use the same value_type as the dutch translation
 					existingEntries.find((entry) => entry.language === Locale.Nl)?.value_type ||
 						ValueType.TEXT
-				);
+				)
 			}
 
-			await this.cacheManager.reset();
+			await this.cacheManager.reset()
 			if (component === Component.BACKEND) {
-				await this.refreshBackendTranslations();
+				await this.refreshBackendTranslations()
 			}
 		} catch (err: any) {
 			throw customError('Failed to insert or update the translation', err, {
@@ -139,7 +139,7 @@ export class TranslationsService implements OnApplicationBootstrap {
 				key,
 				languageCode,
 				value,
-			});
+			})
 		}
 	}
 
@@ -163,9 +163,9 @@ export class TranslationsService implements OnApplicationBootstrap {
 				languageCode,
 				value,
 				value_type,
-			});
+			})
 
-			await this.cacheManager.reset();
+			await this.cacheManager.reset()
 		} catch (err: any) {
 			throw customError('Failed to insert the translation', err, {
 				component,
@@ -173,7 +173,7 @@ export class TranslationsService implements OnApplicationBootstrap {
 				key,
 				languageCode,
 				value,
-			});
+			})
 		}
 	}
 
@@ -194,9 +194,9 @@ export class TranslationsService implements OnApplicationBootstrap {
 				key,
 				languageCode,
 				value,
-			});
+			})
 
-			await this.cacheManager.reset();
+			await this.cacheManager.reset()
 		} catch (err: any) {
 			throw customError('Failed to update the translation', err, {
 				component,
@@ -204,12 +204,12 @@ export class TranslationsService implements OnApplicationBootstrap {
 				key,
 				languageCode,
 				value,
-			});
+			})
 		}
 	}
 
 	public async onApplicationBootstrap() {
-		await this.refreshBackendTranslations();
+		await this.refreshBackendTranslations()
 	}
 
 	private convertTranslationEntriesToKeyValue(
@@ -218,19 +218,19 @@ export class TranslationsService implements OnApplicationBootstrap {
 		const groupedByLanguage = groupBy(entries, (entry) => entry.language as Locale) as Record<
 			Locale,
 			TranslationEntry[]
-		>;
+		>
 
-		const languageCodes = Object.keys(groupedByLanguage) as Locale[];
+		const languageCodes = Object.keys(groupedByLanguage) as Locale[]
 		return Object.fromEntries(
 			languageCodes.map((language) => {
 				const translationPairs = groupedByLanguage[language].map(
 					(entry): [string, string] => {
-						return [entry.location + TRANSLATION_SEPARATOR + entry.key, entry.value];
+						return [entry.location + TRANSLATION_SEPARATOR + entry.key, entry.value]
 					}
-				);
-				return [language, Object.fromEntries(translationPairs)];
+				)
+				return [language, Object.fromEntries(translationPairs)]
 			})
-		) as Record<Locale, Record<string, string>>;
+		) as Record<Locale, Record<string, string>>
 	}
 
 	public async getTranslationsByComponent(
@@ -239,20 +239,20 @@ export class TranslationsService implements OnApplicationBootstrap {
 	): Promise<TranslationEntry[]> {
 		let response:
 			| GetTranslationsByComponentsQuery
-			| GetTranslationsByComponentsAndLanguagesQuery;
+			| GetTranslationsByComponentsAndLanguagesQuery
 		if (!languageCodes) {
 			response = await this.dataService.execute<
 				GetTranslationsByComponentsQuery,
 				GetTranslationsByComponentsQueryVariables
-			>(GetTranslationsByComponentsDocument, { components });
+			>(GetTranslationsByComponentsDocument, { components })
 		} else {
 			response = await this.dataService.execute<
 				GetTranslationsByComponentsAndLanguagesQuery,
 				GetTranslationsByComponentsAndLanguagesQueryVariables
-			>(GetTranslationsByComponentsAndLanguagesDocument, { components, languageCodes });
+			>(GetTranslationsByComponentsAndLanguagesDocument, { components, languageCodes })
 		}
 
-		return response.app_translations.map(this.adapt);
+		return response.app_translations.map(this.adapt)
 	}
 
 	public async getTranslationsByComponentLocationKey(
@@ -263,9 +263,9 @@ export class TranslationsService implements OnApplicationBootstrap {
 		const response = await this.dataService.execute<
 			GetTranslationByComponentLocationKeyQuery,
 			GetTranslationByComponentLocationKeyQueryVariables
-		>(GetTranslationByComponentLocationKeyDocument, { component, location, key });
+		>(GetTranslationByComponentLocationKeyDocument, { component, location, key })
 
-		return response.app_translations.map(this.adapt);
+		return response.app_translations.map(this.adapt)
 	}
 
 	public async getFrontendTranslations(languageCode: Locale): Promise<KeyValueTranslations> {
@@ -275,16 +275,16 @@ export class TranslationsService implements OnApplicationBootstrap {
 				const translations = await this.getTranslationsByComponent(
 					[Component.FRONTEND, Component.ADMIN_CORE],
 					[languageCode]
-				);
-				return this.convertTranslationEntriesToKeyValue(translations);
+				)
+				return this.convertTranslationEntriesToKeyValue(translations)
 			}, // cache for 30 minutes (milliseconds)
 			1_800_000
-		);
+		)
 		if (!translations || isEmpty(translations)) {
-			throw new NotFoundException('No translations have been set in the database');
+			throw new NotFoundException('No translations have been set in the database')
 		}
 
-		return translations[languageCode];
+		return translations[languageCode]
 	}
 
 	/**
@@ -292,17 +292,17 @@ export class TranslationsService implements OnApplicationBootstrap {
 	 */
 	@Cron('*/30 * * * *')
 	public async refreshBackendTranslations(): Promise<void> {
-		const languages = await this.getLanguages();
+		const languages = await this.getLanguages()
 		const translationEntries = await this.getTranslationsByComponent(
 			[Component.BACKEND],
 			languages.map((language) => language.languageCode) as Locale[]
-		);
+		)
 
 		if (!translationEntries?.length) {
-			throw new NotFoundException('No backend translations have been set in the database');
+			throw new NotFoundException('No backend translations have been set in the database')
 		}
 
-		this.backendTranslations = this.convertTranslationEntriesToKeyValue(translationEntries);
+		this.backendTranslations = this.convertTranslationEntriesToKeyValue(translationEntries)
 	}
 
 	public tText(
@@ -310,11 +310,11 @@ export class TranslationsService implements OnApplicationBootstrap {
 		variables: Record<string, string | number> | null = null,
 		locale: Locale = Locale.Nl
 	): string {
-		const translation = this.backendTranslations[locale][key];
+		const translation = this.backendTranslations[locale][key]
 		if (translation) {
-			return resolveTranslationVariables(translation, variables);
+			return resolveTranslationVariables(translation, variables)
 		}
-		return getTranslationFallback(key, variables);
+		return getTranslationFallback(key, variables)
 	}
 
 	private adapt(
@@ -328,6 +328,6 @@ export class TranslationsService implements OnApplicationBootstrap {
 			language: translationEntry.language,
 			value: translationEntry.value,
 			value_type: translationEntry.value_type as ValueType,
-		};
+		}
 	}
 }

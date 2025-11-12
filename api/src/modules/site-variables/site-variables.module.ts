@@ -1,8 +1,8 @@
-import { forwardRef, Module } from '@nestjs/common';
+import { forwardRef, Module } from '@nestjs/common'
 
-import { DataModule } from '../data';
+import { DataModule } from '../data'
 
-import { SiteVariablesService } from './services/site-variables.service';
+import { SiteVariablesService } from './services/site-variables.service'
 
 @Module({
 	imports: [forwardRef(() => DataModule)],

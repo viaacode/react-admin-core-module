@@ -1,7 +1,7 @@
-import { Controller, Get } from '@nestjs/common';
-import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { Controller, Get } from '@nestjs/common'
+import { ApiOperation, ApiTags } from '@nestjs/swagger'
 
-import { StatusService } from '../services/status.service';
+import { StatusService } from '../services/status.service'
 
 @ApiTags('Status')
 @Controller()
@@ -13,7 +13,7 @@ export class StatusController {
 	})
 	@Get()
 	getStatusRoot(): Record<string, string> {
-		return this.statusService.getStatus();
+		return this.statusService.getStatus()
 	}
 
 	@ApiOperation({
@@ -21,7 +21,7 @@ export class StatusController {
 	})
 	@Get('status')
 	getStatus(): Record<string, string> {
-		return this.statusService.getStatus();
+		return this.statusService.getStatus()
 	}
 
 	@ApiOperation({
@@ -29,6 +29,6 @@ export class StatusController {
 	})
 	@Get('status-full')
 	getStatusFull(): Promise<Record<string, string>> {
-		return this.statusService.getStatusFull();
+		return this.statusService.getStatusFull()
 	}
 }

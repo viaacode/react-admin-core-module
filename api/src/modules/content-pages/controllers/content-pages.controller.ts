@@ -16,32 +16,32 @@ import {
 	Query,
 	Req,
 	UseGuards,
-} from '@nestjs/common';
-import { ApiOperation, ApiTags } from '@nestjs/swagger';
-import { IPagination } from '@studiohyperdrive/pagination';
-import type { Avo } from '@viaa/avo2-types';
-import { AssetType, PermissionName } from '@viaa/avo2-types';
-import type { Request } from 'express';
+} from '@nestjs/common'
+import { ApiOperation, ApiTags } from '@nestjs/swagger'
+import { IPagination } from '@studiohyperdrive/pagination'
+import type { Avo } from '@viaa/avo2-types'
+import { AssetType, PermissionName } from '@viaa/avo2-types'
+import type { Request } from 'express'
 
-import { AssetsService } from '../../assets';
-import { RequireAnyPermissions } from '../../shared/decorators/require-any-permissions.decorator';
-import { SessionUser } from '../../shared/decorators/user.decorator';
-import { ApiKeyGuard } from '../../shared/guards/api-key.guard';
-import { addPrefix } from '../../shared/helpers/add-route-prefix';
-import { CustomError } from '../../shared/helpers/error';
-import { logAndThrow } from '../../shared/helpers/logAndThrow';
-import { Locale } from '../../translations';
-import { SessionUserEntity } from '../../users/classes/session-user';
-import { CONTENT_PAGE_COPY, CONTENT_PAGE_COPY_REGEX } from '../content-pages.consts';
+import { AssetsService } from '../../assets'
+import { RequireAnyPermissions } from '../../shared/decorators/require-any-permissions.decorator'
+import { SessionUser } from '../../shared/decorators/user.decorator'
+import { ApiKeyGuard } from '../../shared/guards/api-key.guard'
+import { addPrefix } from '../../shared/helpers/add-route-prefix'
+import { CustomError } from '../../shared/helpers/error'
+import { logAndThrow } from '../../shared/helpers/logAndThrow'
+import { Locale } from '../../translations'
+import { SessionUserEntity } from '../../users/classes/session-user'
+import { CONTENT_PAGE_COPY, CONTENT_PAGE_COPY_REGEX } from '../content-pages.consts'
 import {
 	type ContentOverviewTableCols,
 	type ContentPageLabel,
 	type ContentPagesPublishAndUnpublishResults,
 	type DbContentPage,
-} from '../content-pages.types';
-import { ContentPageOverviewParams } from '../dto/content-pages.dto';
-import type { ContentPageQueryTypes } from '../queries/content-pages.queries';
-import { ContentPagesService } from '../services/content-pages.service';
+} from '../content-pages.types'
+import { ContentPageOverviewParams } from '../dto/content-pages.dto'
+import type { ContentPageQueryTypes } from '../queries/content-pages.queries'
+import { ContentPagesService } from '../services/content-pages.service'
 
 @ApiTags('ContentPages')
 @Controller(addPrefix(process, 'content-pages'))
@@ -64,7 +64,7 @@ export class ContentPagesController {
 		return this.contentPagesService.getContentPagesForPageOverviewBlock(
 			queryDto,
 			user.getGroupIds()
-		);
+		)
 	}
 
 	/**
@@ -93,7 +93,7 @@ export class ContentPagesController {
 			sortOrder,
 			tableColumnDataType,
 			JSON.parse(where)
-		);
+		)
 	}
 
 	@Get('by-language-and-path')
@@ -109,7 +109,7 @@ export class ContentPagesController {
 		@SessionUser() sessionUser: SessionUserEntity
 	): Promise<DbContentPage> {
 		try {
-			const user = sessionUser?.getUser();
+			const user = sessionUser?.getUser()
 			const dbContentPage =
 				await this.contentPagesService.getContentPageByLanguageAndPathForUser(
 					language || (user.language as Locale),
@@ -118,11 +118,11 @@ export class ContentPagesController {
 					request?.headers?.['Referrer'] as string,
 					ip,
 					onlyInfo === 'true'
-				);
-			return dbContentPage;
+				)
+			return dbContentPage
 		} catch (err: any) {
 			if (err?.response?.additionalInfo?.code === 'NOT_FOUND') {
-				throw new NotFoundException('The content page with path was not found');
+				throw new NotFoundException('The content page with path was not found')
 			}
 			logAndThrow(
 				new InternalServerErrorException({
@@ -136,7 +136,7 @@ export class ContentPagesController {
 						ip,
 					},
 				})
-			);
+			)
 		}
 	}
 
@@ -155,12 +155,12 @@ export class ContentPagesController {
 			request,
 			ip,
 			user
-		);
+		)
 		return {
 			exists: !!contentPage,
 			title: contentPage?.title ?? null,
 			id: contentPage?.id ?? null,
-		};
+		}
 	}
 
 	@Post('update-published-dates')
@@ -170,17 +170,17 @@ export class ContentPagesController {
 		@Headers('apikey') apikey: string
 	): Promise<{ message: string }> {
 		const response: ContentPagesPublishAndUnpublishResults =
-			await this.contentPagesService.updatePublishDates();
+			await this.contentPagesService.updatePublishDates()
 
 		const message = `content page publish dates have been updated, ${
 			response.publishedCount
 		} pages published (${response.publishedIds.join(',') || 'none'}), ${
 			response.unpublishedCount
-		} pages unpublished (${response.unpublishedIds.join(',') || 'none'})`;
-		console.log('[WEBHOOK] ' + message);
+		} pages unpublished (${response.unpublishedIds.join(',') || 'none'})`
+		console.log('[WEBHOOK] ' + message)
 		return {
 			message,
-		};
+		}
 	}
 
 	@Get('nl-parent-pages')
@@ -200,9 +200,9 @@ export class ContentPagesController {
 		| null
 	> {
 		if (title) {
-			return this.contentPagesService.getNlParentContentPagesByTitle(title, limit);
+			return this.contentPagesService.getNlParentContentPagesByTitle(title, limit)
 		} else {
-			return this.contentPagesService.getNlParentContentPages(limit);
+			return this.contentPagesService.getNlParentContentPages(limit)
 		}
 	}
 
@@ -228,9 +228,9 @@ export class ContentPagesController {
 				title,
 				contentType,
 				limit
-			);
+			)
 		} else {
-			return this.contentPagesService.getPublicContentItems(limit);
+			return this.contentPagesService.getPublicContentItems(limit)
 		}
 	}
 
@@ -250,9 +250,9 @@ export class ContentPagesController {
 		| ContentPageQueryTypes['GetPublicProjectContentPagesQueryHetArchief']['app_content_page']
 	> {
 		if (title) {
-			return this.contentPagesService.getPublicProjectContentItemsByTitle(title, limit);
+			return this.contentPagesService.getPublicProjectContentItemsByTitle(title, limit)
 		} else {
-			return this.contentPagesService.getPublicProjectContentItems(limit);
+			return this.contentPagesService.getPublicProjectContentItems(limit)
 		}
 	}
 
@@ -264,7 +264,7 @@ export class ContentPagesController {
 	public async fetchLabelsByContentType(
 		@Query('contentType') contentType: string
 	): Promise<ContentPageLabel[]> {
-		return this.contentPagesService.fetchLabelsByContentType(contentType);
+		return this.contentPagesService.fetchLabelsByContentType(contentType)
 	}
 
 	@Put('labels')
@@ -275,29 +275,29 @@ export class ContentPagesController {
 	public async insertContentLabelsLinks(
 		@Body()
 		body: {
-			contentPageId: number | string; // Numeric ids in avo, uuid's in hetarchief. We would like to switch to uuids for avo as well at some point
-			labelIds: (number | string)[];
+			contentPageId: number | string // Numeric ids in avo, uuid's in hetarchief. We would like to switch to uuids for avo as well at some point
+			labelIds: (number | string)[]
 		},
 		@SessionUser() user: SessionUserEntity
 	): Promise<void> {
 		if (!body.labelIds?.length) {
-			return;
+			return
 		}
 		if (!user.has(PermissionName.EDIT_ANY_CONTENT_PAGES)) {
 			const contentPage = await this.contentPagesService.getContentPageById(
 				String(body.contentPageId)
-			);
+			)
 			if (contentPage.userProfileId !== user.getId()) {
 				// User cannot add labels to other peoples pages
 				throw new ForbiddenException(
 					"You're not allowed to add labels to content pages that you do not own"
-				);
+				)
 			}
 		}
 
 		// Delete before inserting to avoid foreign key duplicate exceptions
-		await this.contentPagesService.deleteContentLabelsLinks(body.contentPageId, body.labelIds);
-		await this.contentPagesService.insertContentLabelsLinks(body.contentPageId, body.labelIds);
+		await this.contentPagesService.deleteContentLabelsLinks(body.contentPageId, body.labelIds)
+		await this.contentPagesService.insertContentLabelsLinks(body.contentPageId, body.labelIds)
 	}
 
 	@Delete('labels')
@@ -308,26 +308,26 @@ export class ContentPagesController {
 	public async deleteContentLabelsLinks(
 		@Body()
 		body: {
-			contentPageId: number | string; // Numeric ids in avo, uuid's in hetarchief. We would like to switch to uuids for avo as well at some point
-			labelIds: (number | string)[];
+			contentPageId: number | string // Numeric ids in avo, uuid's in hetarchief. We would like to switch to uuids for avo as well at some point
+			labelIds: (number | string)[]
 		},
 		@SessionUser() user: SessionUserEntity
 	): Promise<void> {
 		if (!body.labelIds?.length) {
-			return;
+			return
 		}
 		if (!user.has(PermissionName.EDIT_ANY_CONTENT_PAGES)) {
 			const contentPage = await this.contentPagesService.getContentPageById(
 				String(body.contentPageId)
-			);
+			)
 			if (contentPage.userProfileId !== user.getId()) {
 				// User cannot add labels to other peoples pages
 				throw new ForbiddenException(
 					"You're not allowed to add labels to content pages that you do not own"
-				);
+				)
 			}
 		}
-		await this.contentPagesService.deleteContentLabelsLinks(body.contentPageId, body.labelIds);
+		await this.contentPagesService.deleteContentLabelsLinks(body.contentPageId, body.labelIds)
 	}
 
 	@Get('types')
@@ -339,7 +339,7 @@ export class ContentPagesController {
 	public async getContentTypes(): Promise<
 		{ value: Avo.ContentPage.Type; label: string }[] | null
 	> {
-		return this.contentPagesService.getContentTypes();
+		return this.contentPagesService.getContentTypes()
 	}
 
 	@Put()
@@ -358,13 +358,13 @@ export class ContentPagesController {
 			// User cannot edit other peoples pages
 			throw new ForbiddenException(
 				"You're not allowed to create content pages for other people"
-			);
+			)
 		}
 		return this.contentPagesService.insertContentPage({
 			...contentPage,
 			// Default the owner of the content page to the current user if it is empty
 			userProfileId: contentPage.userProfileId ?? user.getUser().profileId,
-		});
+		})
 	}
 
 	@Patch()
@@ -375,7 +375,7 @@ export class ContentPagesController {
 	public async updateContentPage(
 		@Body()
 		body: {
-			contentPage: DbContentPage;
+			contentPage: DbContentPage
 		},
 		@SessionUser() user: SessionUserEntity
 	): Promise<DbContentPage | null> {
@@ -386,15 +386,15 @@ export class ContentPagesController {
 			// User cannot edit other peoples pages
 			throw new ForbiddenException(
 				"You're not allowed to edit content pages that you do not own"
-			);
+			)
 		}
-		return this.contentPagesService.updateContentPage(body.contentPage);
+		return this.contentPagesService.updateContentPage(body.contentPage)
 	}
 
 	@Delete(':id')
 	@RequireAnyPermissions(PermissionName.DELETE_ANY_CONTENT_PAGES)
 	public async deleteContentPage(@Param('id') id: string): Promise<void> {
-		await this.contentPagesService.deleteContentPage(id);
+		await this.contentPagesService.deleteContentPage(id)
 	}
 
 	@Get('access')
@@ -402,7 +402,7 @@ export class ContentPagesController {
 	public async getUserGroupsFromContentPage(
 		@Query('path') path: string
 	): Promise<(string | number)[]> {
-		return this.contentPagesService.getUserGroupsFromContentPage(path);
+		return this.contentPagesService.getUserGroupsFromContentPage(path)
 	}
 
 	@Post('/blocks/duplicate')
@@ -420,7 +420,7 @@ export class ContentPagesController {
 				contentBlockJson,
 				user.getProfileId(),
 				AssetType.CONTENT_PAGE_IMAGE
-			);
+			)
 		} catch (err) {
 			logAndThrow(
 				new InternalServerErrorException({
@@ -430,7 +430,7 @@ export class ContentPagesController {
 						contentBlockJson,
 					},
 				})
-			);
+			)
 		}
 	}
 
@@ -456,7 +456,7 @@ export class ContentPagesController {
 	): Promise<DbContentPage> {
 		try {
 			const dbContentPage: DbContentPage | null =
-				await this.contentPagesService.getContentPageById(id);
+				await this.contentPagesService.getContentPageById(id)
 			if (!dbContentPage) {
 				throw new NotFoundException({
 					message: 'Failed to duplicate content page images, because id was not found',
@@ -464,36 +464,36 @@ export class ContentPagesController {
 					additionalInfo: {
 						id,
 					},
-				});
+				})
 			}
 
 			let contentToInsert = await this.assetsService.duplicateAssetsInJsonBlob(
 				dbContentPage,
 				user.getProfileId(),
 				AssetType.CONTENT_PAGE_IMAGE
-			);
+			)
 
 			contentToInsert = {
 				...contentToInsert,
 				...overrideValues,
-			};
+			}
 
 			// update attributes specific to duplicate
-			contentToInsert.isPublic = false;
-			contentToInsert.publishedAt = null;
-			contentToInsert.depublishAt = null;
-			contentToInsert.publishAt = null;
-			contentToInsert.path = null;
-			contentToInsert.createdAt = new Date().toISOString();
-			contentToInsert.updatedAt = contentToInsert.createdAt;
-			contentToInsert.userProfileId = user.getProfileId();
+			contentToInsert.isPublic = false
+			contentToInsert.publishedAt = null
+			contentToInsert.depublishAt = null
+			contentToInsert.publishAt = null
+			contentToInsert.path = null
+			contentToInsert.createdAt = new Date().toISOString()
+			contentToInsert.updatedAt = contentToInsert.createdAt
+			contentToInsert.userProfileId = user.getProfileId()
 
 			try {
 				contentToInsert.title = await this.contentPagesService.getCopyTitleForContentPage(
 					CONTENT_PAGE_COPY,
 					CONTENT_PAGE_COPY_REGEX,
 					contentToInsert.title
-				);
+				)
 			} catch (err) {
 				const customError = new CustomError(
 					'Failed to retrieve title for duplicate content page',
@@ -501,18 +501,18 @@ export class ContentPagesController {
 					{
 						contentToInsert,
 					}
-				);
+				)
 
-				console.error(customError);
+				console.error(customError)
 
 				// fallback to simple copy title
 				contentToInsert.title = `${CONTENT_PAGE_COPY.replace(' %index%', '')}${
 					contentToInsert.title
-				}`;
+				}`
 			}
 
 			// insert duplicated collection
-			return await this.contentPagesService.insertContentPage(contentToInsert);
+			return await this.contentPagesService.insertContentPage(contentToInsert)
 		} catch (err) {
 			logAndThrow(
 				new InternalServerErrorException({
@@ -524,7 +524,7 @@ export class ContentPagesController {
 						profileId: user?.getProfileId(),
 					},
 				})
-			);
+			)
 		}
 	}
 
@@ -535,12 +535,12 @@ export class ContentPagesController {
 	)
 	public async getContentPageById(@Param('id') id: string): Promise<DbContentPage> {
 		try {
-			return await this.contentPagesService.getContentPageById(id);
+			return await this.contentPagesService.getContentPageById(id)
 		} catch (err: any) {
 			if (err?.response?.additionalInfo?.code === 'NOT_FOUND') {
-				throw new NotFoundException('The content page with id was not found');
+				throw new NotFoundException('The content page with id was not found')
 			}
-			throw err;
+			throw err
 		}
 	}
 }

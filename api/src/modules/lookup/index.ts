@@ -1,3 +1,3 @@
-export * from './lookup.module';
-export * from './lookup.controller';
-export * from './lookup.service';
+export * from './lookup.module'
+export * from './lookup.controller'
+export * from './lookup.service'

@@ -1,5 +1,5 @@
-import type { TypedDocumentNode } from '@graphql-typed-document-node/core';
-import { DatabaseType } from '@viaa/avo2-types';
+import type { TypedDocumentNode } from '@graphql-typed-document-node/core'
+import { DatabaseType } from '@viaa/avo2-types'
 
 import {
 	GetIdpsDocument as GetIdpsDocumentAvo,
@@ -14,7 +14,7 @@ import {
 	GetUsersDocument as GetUsersDocumentAvo,
 	type GetUsersQuery as GetUsersQueryAvo,
 	type GetUsersQueryVariables as GetUsersQueryVariablesAvo,
-} from '../../shared/generated/graphql-db-types-avo';
+} from '../../shared/generated/graphql-db-types-avo'
 import {
 	GetIdpsDocument as GetIdpsDocumentHetArchief,
 	type GetIdpsQuery as GetIdpsQueryHetArchief,
@@ -28,45 +28,45 @@ import {
 	GetUsersDocument as GetUsersDocumentHetArchief,
 	type GetUsersQuery as GetUsersQueryHetArchief,
 	type GetUsersQueryVariables as GetUsersQueryVariablesHetArchief,
-} from '../../shared/generated/graphql-db-types-hetarchief';
+} from '../../shared/generated/graphql-db-types-hetarchief'
 
 export type UserQueryTypes = {
-	GetProfileNamesQueryAvo: GetProfileNamesQueryAvo;
-	GetProfileNamesQueryHetArchief: GetProfileNamesQueryHetArchief;
-	GetProfileNamesQuery: GetProfileNamesQueryAvo | GetProfileNamesQueryHetArchief;
-	GetUsersQueryAvo: GetUsersQueryAvo;
-	GetUsersQueryHetArchief: GetUsersQueryHetArchief;
-	GetUsersQuery: GetUsersQueryAvo | GetUsersQueryHetArchief;
-	GetIdpsQueryAvo: GetIdpsQueryAvo;
-	GetIdpsQueryHetArchief: GetIdpsQueryHetArchief;
-	GetIdpsQuery: GetIdpsQueryAvo | GetIdpsQueryHetArchief;
-	GetProfileIdsQueryAvo: GetProfileIdsQueryAvo;
-	GetProfileIdsQueryHetArchief: GetProfileIdsQueryHetArchief;
-	GetProfileIdsQuery: GetProfileIdsQueryAvo | GetProfileIdsQueryHetArchief;
-	GetProfileNamesQueryVariablesAvo: GetProfileNamesQueryVariablesAvo;
-	GetProfileNamesQueryVariablesHetArchief: GetProfileNamesQueryVariablesHetArchief;
+	GetProfileNamesQueryAvo: GetProfileNamesQueryAvo
+	GetProfileNamesQueryHetArchief: GetProfileNamesQueryHetArchief
+	GetProfileNamesQuery: GetProfileNamesQueryAvo | GetProfileNamesQueryHetArchief
+	GetUsersQueryAvo: GetUsersQueryAvo
+	GetUsersQueryHetArchief: GetUsersQueryHetArchief
+	GetUsersQuery: GetUsersQueryAvo | GetUsersQueryHetArchief
+	GetIdpsQueryAvo: GetIdpsQueryAvo
+	GetIdpsQueryHetArchief: GetIdpsQueryHetArchief
+	GetIdpsQuery: GetIdpsQueryAvo | GetIdpsQueryHetArchief
+	GetProfileIdsQueryAvo: GetProfileIdsQueryAvo
+	GetProfileIdsQueryHetArchief: GetProfileIdsQueryHetArchief
+	GetProfileIdsQuery: GetProfileIdsQueryAvo | GetProfileIdsQueryHetArchief
+	GetProfileNamesQueryVariablesAvo: GetProfileNamesQueryVariablesAvo
+	GetProfileNamesQueryVariablesHetArchief: GetProfileNamesQueryVariablesHetArchief
 	GetProfileNamesQueryVariables:
 		| GetProfileNamesQueryVariablesAvo
-		| GetProfileNamesQueryVariablesHetArchief;
-	GetUsersQueryVariablesAvo: GetUsersQueryVariablesAvo;
-	GetUsersQueryVariablesHetArchief: GetUsersQueryVariablesHetArchief;
-	GetUsersQueryVariables: GetUsersQueryVariablesAvo | GetUsersQueryVariablesHetArchief;
-	GetIdpsQueryVariablesAvo: GetIdpsQueryVariablesAvo;
-	GetIdpsQueryVariablesHetArchief: GetIdpsQueryVariablesHetArchief;
-	GetIdpsQueryVariables: GetIdpsQueryVariablesAvo | GetIdpsQueryVariablesHetArchief;
-	GetProfileIdsQueryVariablesAvo: GetProfileIdsQueryVariablesAvo;
-	GetProfileIdsQueryVariablesHetArchief: GetProfileIdsQueryVariablesHetArchief;
+		| GetProfileNamesQueryVariablesHetArchief
+	GetUsersQueryVariablesAvo: GetUsersQueryVariablesAvo
+	GetUsersQueryVariablesHetArchief: GetUsersQueryVariablesHetArchief
+	GetUsersQueryVariables: GetUsersQueryVariablesAvo | GetUsersQueryVariablesHetArchief
+	GetIdpsQueryVariablesAvo: GetIdpsQueryVariablesAvo
+	GetIdpsQueryVariablesHetArchief: GetIdpsQueryVariablesHetArchief
+	GetIdpsQueryVariables: GetIdpsQueryVariablesAvo | GetIdpsQueryVariablesHetArchief
+	GetProfileIdsQueryVariablesAvo: GetProfileIdsQueryVariablesAvo
+	GetProfileIdsQueryVariablesHetArchief: GetProfileIdsQueryVariablesHetArchief
 	GetProfileIdsQueryVariables:
 		| GetProfileIdsQueryVariablesAvo
-		| GetProfileIdsQueryVariablesHetArchief;
-};
+		| GetProfileIdsQueryVariablesHetArchief
+}
 
 type UserQueries = {
-	GetProfileNamesDocument: TypedDocumentNode<any, any>;
-	GetUsersDocument: TypedDocumentNode<any, any>;
-	GetIdpsDocument: TypedDocumentNode<any, any>;
-	GetProfileIdsDocument: TypedDocumentNode<any, any>;
-};
+	GetProfileNamesDocument: TypedDocumentNode<any, any>
+	GetUsersDocument: TypedDocumentNode<any, any>
+	GetIdpsDocument: TypedDocumentNode<any, any>
+	GetProfileIdsDocument: TypedDocumentNode<any, any>
+}
 
 export const USER_QUERIES: Record<DatabaseType, UserQueries> = {
 	[DatabaseType.avo]: {
@@ -81,4 +81,4 @@ export const USER_QUERIES: Record<DatabaseType, UserQueries> = {
 		GetIdpsDocument: GetIdpsDocumentHetArchief,
 		GetProfileIdsDocument: GetProfileIdsDocumentHetArchief,
 	},
-};
+}

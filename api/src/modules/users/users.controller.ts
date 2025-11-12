@@ -9,15 +9,15 @@ import {
 	Patch,
 	Post,
 	Query,
-} from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
-import type { Avo } from '@viaa/avo2-types';
-import { PermissionName } from '@viaa/avo2-types';
+} from '@nestjs/common'
+import { ApiTags } from '@nestjs/swagger'
+import type { Avo } from '@viaa/avo2-types'
+import { PermissionName } from '@viaa/avo2-types'
 
-import { RequireAnyPermissions } from '../shared/decorators/require-any-permissions.decorator';
+import { RequireAnyPermissions } from '../shared/decorators/require-any-permissions.decorator'
 
-import { UsersService } from './users.service';
-import type { DeleteContentCounts, QueryProfilesBody, UserOverviewTableCol } from './users.types';
+import { UsersService } from './users.service'
+import type { DeleteContentCounts, QueryProfilesBody, UserOverviewTableCol } from './users.types'
 
 @ApiTags('Users')
 @Controller(process.env.ADMIN_CORE_ROUTES_PREFIX + '/users')
@@ -58,7 +58,7 @@ export class UsersController {
 			sortOrder,
 			tableColumnDataType,
 			JSON.parse(where)
-		);
+		)
 	}
 
 	@Post('')
@@ -78,7 +78,7 @@ export class UsersController {
 			body.sortOrder,
 			body.tableColumnDataType,
 			JSON.parse(body.where)
-		);
+		)
 	}
 
 	@Get('names')
@@ -93,25 +93,25 @@ export class UsersController {
 	async getNamesByProfileIds(
 		@Query('profileIds') profileIds: string[]
 	): Promise<Partial<Avo.User.CommonUser>[]> {
-		return this.usersService.getNamesByProfileIds(profileIds);
+		return this.usersService.getNamesByProfileIds(profileIds)
 	}
 
 	@Get('ids')
 	@RequireAnyPermissions(PermissionName.EDIT_ANY_USER)
 	async getProfileIds(@Query('where') where = '{}'): Promise<string[]> {
-		return this.usersService.getProfileIds(JSON.parse(where));
+		return this.usersService.getProfileIds(JSON.parse(where))
 	}
 
 	@Get('business-categories')
 	@RequireAnyPermissions(PermissionName.VIEW_USERS)
 	async fetchDistinctBusinessCategories(): Promise<string[]> {
-		return this.usersService.fetchDistinctBusinessCategories();
+		return this.usersService.fetchDistinctBusinessCategories()
 	}
 
 	@Get('idps')
 	@RequireAnyPermissions(PermissionName.VIEW_USERS)
 	async fetchIdps() {
-		return this.usersService.fetchIdps();
+		return this.usersService.fetchIdps()
 	}
 
 	@Get('counts')
@@ -119,7 +119,7 @@ export class UsersController {
 	async fetchPublicAndPrivateCounts(
 		@Query('profileIds') profileIds: string[]
 	): Promise<DeleteContentCounts> {
-		return this.usersService.fetchPublicAndPrivateCounts(profileIds);
+		return this.usersService.fetchPublicAndPrivateCounts(profileIds)
 	}
 
 	@Patch('loms')
@@ -127,7 +127,7 @@ export class UsersController {
 	async bulkAddLomsToProfiles(
 		@Body() body: { lomIds: string[]; profileIds: string[] }
 	): Promise<void> {
-		return this.usersService.bulkAddLomsToProfiles(body.lomIds, body.profileIds);
+		return this.usersService.bulkAddLomsToProfiles(body.lomIds, body.profileIds)
 	}
 
 	@Delete('loms')
@@ -135,7 +135,7 @@ export class UsersController {
 	async bulkRemoveLomsFromProfiles(
 		@Body() body: { lomIds: string[]; profileIds: string[] }
 	): Promise<void> {
-		return this.usersService.bulkRemoveLomsFromProfiles(body.lomIds, body.profileIds);
+		return this.usersService.bulkRemoveLomsFromProfiles(body.lomIds, body.profileIds)
 	}
 
 	@Get(':id')
@@ -146,6 +146,6 @@ export class UsersController {
 		PermissionName.VIEW_USERS_IN_SAME_COMPANY
 	)
 	async getUser(@Param('id') id: string): Promise<Avo.User.CommonUser> {
-		return this.usersService.getById(id);
+		return this.usersService.getById(id)
 	}
 }

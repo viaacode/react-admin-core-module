@@ -1,4 +1,4 @@
-import { type Locale } from '../translations';
+import { type Locale } from '../translations'
 
 export enum ContentPickerTypesEnum {
 	CONTENT_PAGE = 'CONTENT_PAGE',
@@ -18,18 +18,18 @@ export enum LinkTarget {
 }
 
 export interface NavigationItem {
-	id: string;
-	label: string;
-	placement: string;
-	description?: string | null;
-	linkTarget: LinkTarget | null;
-	iconName: string;
-	position: number;
-	contentType: string;
-	contentPath: string;
-	language: Locale;
-	tooltip?: string;
-	updatedAt: string;
-	createdAt: string;
-	userGroupIds: string[];
+	id: string
+	label: string
+	placement: string
+	description?: string | null
+	linkTarget: LinkTarget | null
+	iconName: string
+	position: number
+	contentType: string
+	contentPath: string
+	language: Locale
+	tooltip?: string
+	updatedAt: string
+	createdAt: string
+	userGroupIds: string[]
 }

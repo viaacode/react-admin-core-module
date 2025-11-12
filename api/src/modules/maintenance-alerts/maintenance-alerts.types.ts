@@ -3,25 +3,25 @@ import {
 	type FindMaintenanceAlertsQuery,
 	type InsertMaintenanceAlertMutation,
 	type UpdateMaintenanceAlertMutation,
-} from '../shared/generated/graphql-db-types-hetarchief';
-import { type Locale } from '../translations';
+} from '../shared/generated/graphql-db-types-hetarchief'
+import { type Locale } from '../translations'
 
 export class MaintenanceAlert {
-	id: string;
-	title: string;
-	message: string;
-	type: string;
-	fromDate: string;
-	untilDate: string;
-	userGroups?: string[];
-	language: Locale;
+	id: string
+	title: string
+	message: string
+	type: string
+	fromDate: string
+	untilDate: string
+	userGroups?: string[]
+	language: Locale
 }
 
 export type GqlMaintenanceAlert =
 	| FindMaintenanceAlertsQuery['app_maintenance_alerts'][0]
 	| FindMaintenanceAlertByIdQuery['app_maintenance_alerts'][0]
 	| UpdateMaintenanceAlertMutation['update_app_maintenance_alerts']['returning'][0]
-	| InsertMaintenanceAlertMutation['insert_app_maintenance_alerts_one'];
+	| InsertMaintenanceAlertMutation['insert_app_maintenance_alerts_one']
 
 export enum MaintenanceAlertOrderProp {
 	ID = 'id',

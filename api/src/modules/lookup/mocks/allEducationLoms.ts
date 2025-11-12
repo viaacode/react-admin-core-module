@@ -1,4 +1,4 @@
-import type { Avo } from '@viaa/avo2-types';
+import type { Avo } from '@viaa/avo2-types'
 
 export const ALL_EDUCATION_LOMS: Avo.Lom.LomField[] = [
 	{
@@ -410,4 +410,4 @@ export const ALL_EDUCATION_LOMS: Avo.Lom.LomField[] = [
 		broader: null,
 		scheme: 'https://w3id.org/onderwijs-vlaanderen/id/structuur',
 	},
-];
+]

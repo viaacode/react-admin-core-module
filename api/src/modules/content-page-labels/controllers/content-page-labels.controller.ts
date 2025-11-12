@@ -1,19 +1,19 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post, Put, Query } from '@nestjs/common';
-import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-import type { Avo } from '@viaa/avo2-types';
-import { PermissionName } from '@viaa/avo2-types';
+import { Body, Controller, Delete, Get, Param, Patch, Post, Put, Query } from '@nestjs/common'
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger'
+import type { Avo } from '@viaa/avo2-types'
+import { PermissionName } from '@viaa/avo2-types'
 
-import { type ContentPageLabel, type LabelObj } from '../../content-pages';
-import { ContentLabelsRequestDto } from '../../content-pages/dto/content-labels-request.dto';
-import { RequireAnyPermissions } from '../../shared/decorators/require-any-permissions.decorator';
-import { customError } from '../../shared/helpers/custom-error';
-import type { ContentPageLabelOverviewTableCols } from '../content-page-labels.types';
+import { type ContentPageLabel, type LabelObj } from '../../content-pages'
+import { ContentLabelsRequestDto } from '../../content-pages/dto/content-labels-request.dto'
+import { RequireAnyPermissions } from '../../shared/decorators/require-any-permissions.decorator'
+import { customError } from '../../shared/helpers/custom-error'
+import type { ContentPageLabelOverviewTableCols } from '../content-page-labels.types'
 import {
 	ContentPageLabelDto,
 	InsertContentPageLabelDto,
 	UpdateContentPageLabelDto,
-} from '../dto/content-page-label.dto';
-import { ContentPageLabelsService } from '../services/content-page-labels.service';
+} from '../dto/content-page-label.dto'
+import { ContentPageLabelsService } from '../services/content-page-labels.service'
 
 @ApiTags('ContentPageLabels')
 @Controller(process.env.ADMIN_CORE_ROUTES_PREFIX + '/content-page-labels')
@@ -40,7 +40,7 @@ export class ContentPageLabelsController {
 				sortColumn,
 				sortOrder,
 				JSON.parse(where)
-			);
+			)
 		} catch (err: any) {
 			throw customError('Failed to get content page labels from the database', err, {
 				offset,
@@ -48,7 +48,7 @@ export class ContentPageLabelsController {
 				sortColumn,
 				sortOrder,
 				where,
-			});
+			})
 		}
 	}
 
@@ -56,11 +56,11 @@ export class ContentPageLabelsController {
 	@Get(':id')
 	public async fetchContentPageLabelById(@Param('id') id: string): Promise<ContentPageLabel> {
 		try {
-			return this.contentPageLabelService.fetchContentPageLabelById(id);
+			return this.contentPageLabelService.fetchContentPageLabelById(id)
 		} catch (err: any) {
 			throw customError('Failed to get content page label from the database', err, {
 				id,
-			});
+			})
 		}
 	}
 
@@ -77,11 +77,11 @@ export class ContentPageLabelsController {
 		@Body() contentPageLabels: InsertContentPageLabelDto[]
 	): Promise<ContentPageLabelDto[]> {
 		try {
-			return this.contentPageLabelService.insertContentPageLabels(contentPageLabels);
+			return this.contentPageLabelService.insertContentPageLabels(contentPageLabels)
 		} catch (err: any) {
 			throw customError('Failed to insert content page labels in the database', err, {
 				contentPageLabels,
-			});
+			})
 		}
 	}
 
@@ -89,11 +89,11 @@ export class ContentPageLabelsController {
 	@RequireAnyPermissions(PermissionName.EDIT_CONTENT_PAGE_LABELS)
 	async updateContentPageLabel(@Body() contentPageLabelInfo: UpdateContentPageLabelDto) {
 		try {
-			return this.contentPageLabelService.updateContentPageLabel(contentPageLabelInfo);
+			return this.contentPageLabelService.updateContentPageLabel(contentPageLabelInfo)
 		} catch (err: any) {
 			throw customError('Failed to update content page label in the database', err, {
 				contentPageLabel: contentPageLabelInfo,
-			});
+			})
 		}
 	}
 
@@ -103,12 +103,12 @@ export class ContentPageLabelsController {
 		@Param('id') id: string
 	): Promise<{ message: 'success' }> {
 		try {
-			await this.contentPageLabelService.deleteContentPageLabel(id);
-			return { message: 'success' };
+			await this.contentPageLabelService.deleteContentPageLabel(id)
+			return { message: 'success' }
 		} catch (err: any) {
 			throw customError('Failed to delete the content page label from the database', err, {
 				id,
-			});
+			})
 		}
 	}
 
@@ -125,13 +125,13 @@ export class ContentPageLabelsController {
 			return await this.contentPageLabelService.getContentPageLabelsByTypeAndIds(
 				body.contentType,
 				(body as any).labelIds
-			);
+			)
 		}
 
 		// else labels query param is set
 		return await this.contentPageLabelService.getContentPageLabelsByTypeAndLabels(
 			body.contentType,
 			(body as any).labels
-		);
+		)
 	}
 }

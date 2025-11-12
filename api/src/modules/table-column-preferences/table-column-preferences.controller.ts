@@ -1,10 +1,10 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common'
+import { ApiTags } from '@nestjs/swagger'
 
-import { SessionUser } from '../shared/decorators/user.decorator';
-import { SessionUserEntity } from '../users/classes/session-user';
+import { SessionUser } from '../shared/decorators/user.decorator'
+import { SessionUserEntity } from '../users/classes/session-user'
 
-import { TableColumnPreferencesService } from './services/table-column-preferences.service';
+import { TableColumnPreferencesService } from './services/table-column-preferences.service'
 
 @ApiTags('TableColumnPreferences')
 @Controller(process.env.ADMIN_CORE_ROUTES_PREFIX + '/table-column-preferences')
@@ -19,7 +19,7 @@ export class TableColumnPreferencesController {
 		return this.tableColumnPreferencesService.fetchTableColumnPreference(
 			user.getProfileId(),
 			columnKey
-		);
+		)
 	}
 
 	@Post(':columnKey')
@@ -32,6 +32,6 @@ export class TableColumnPreferencesController {
 			user.getProfileId(),
 			columnKey,
 			JSON.stringify(columns)
-		);
+		)
 	}
 }

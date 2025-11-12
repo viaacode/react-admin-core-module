@@ -1,12 +1,12 @@
-import { Test, type TestingModule } from '@nestjs/testing';
+import { Test, type TestingModule } from '@nestjs/testing'
 
-import { DataService } from '../../data';
+import { DataService } from '../../data'
 
-import { UserGroupsService } from './user-groups.service';
+import { UserGroupsService } from './user-groups.service'
 
 const mockDataService = {
 	execute: jest.fn(),
-};
+}
 
 const mockUserGroupsResponse = {
 	data: {
@@ -27,10 +27,10 @@ const mockUserGroupsResponse = {
 			},
 		],
 	},
-};
+}
 
 describe('UserGroupsService', () => {
-	let userGroupsService: UserGroupsService;
+	let userGroupsService: UserGroupsService
 
 	beforeEach(async () => {
 		const module: TestingModule = await Test.createTestingModule({
@@ -41,26 +41,26 @@ describe('UserGroupsService', () => {
 					useValue: mockDataService,
 				},
 			],
-		}).compile();
+		}).compile()
 
-		userGroupsService = module.get<UserGroupsService>(UserGroupsService);
-	});
+		userGroupsService = module.get<UserGroupsService>(UserGroupsService)
+	})
 
 	it('services should be defined', () => {
-		expect(userGroupsService).toBeDefined();
-	});
+		expect(userGroupsService).toBeDefined()
+	})
 
 	describe('getUserGroups', () => {
 		it('returns user groups', async () => {
-			mockDataService.execute.mockResolvedValueOnce(mockUserGroupsResponse);
+			mockDataService.execute.mockResolvedValueOnce(mockUserGroupsResponse)
 
-			const response = await userGroupsService.getUserGroups(true);
-			expect(response.length).toBe(1);
-			expect(response[0].name).toEqual('CP_ADMIN');
-			expect(response[0].permissions.length).toBe(1);
-			expect(response[0].permissions[0].name).toBe('READ_ALL_SPACES');
-		});
-	});
+			const response = await userGroupsService.getUserGroups(true)
+			expect(response.length).toBe(1)
+			expect(response[0].name).toEqual('CP_ADMIN')
+			expect(response[0].permissions.length).toBe(1)
+			expect(response[0].permissions[0].name).toBe('READ_ALL_SPACES')
+		})
+	})
 
 	describe('updateUserGroupd', () => {
 		it('updates user group permissions', async () => {
@@ -69,15 +69,15 @@ describe('UserGroupsService', () => {
 					delete_users_group_permission: { affected_rows: 1 },
 					insert_users_group_permission: { affected_rows: 2 },
 				},
-			});
+			})
 
 			const response = await userGroupsService.updateUserGroups([
 				{ userGroupId: '1', permissionId: '2', hasPermission: false },
 				{ userGroupId: '1', permissionId: '3', hasPermission: true },
 				{ userGroupId: '1', permissionId: '4', hasPermission: true },
-			]);
-			expect(response.deleted).toEqual(1);
-			expect(response.inserted).toEqual(2);
-		});
-	});
-});
+			])
+			expect(response.deleted).toEqual(1)
+			expect(response.inserted).toEqual(2)
+		})
+	})
+})

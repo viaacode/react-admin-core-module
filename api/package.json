@@ -14,13 +14,11 @@
     "copy-to-proxy-avo": "rimraf ../../avo2-proxy/server/node_modules/@meemoo/admin-core-api/dist ../../avo2-proxy/server/node_modules/.cache && cp -r dist package.json ../../avo2-proxy/server/node_modules/@meemoo/admin-core-api",
     "copy": "npm run build && npm run copy-to-proxy-hetarchief && npm run copy-to-proxy-avo",
     "copy:avo": "npm run build && npm run copy-to-proxy-avo",
-    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "dotenv -e .env/.env.local nest start",
     "dev": "dotenv -e .env/.env.local nest start --swc",
     "start:debug": "dotenv -e .env/.env.local nest start -- --debug --watch",
-    "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --cache",
-    "lint:fix": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
-    "format:fix": "prettier --write \"src/**/*.ts\" \"src/**/*.graphql\" \"!src/generated/**/*.ts\"",
+    "lint": "biome lint --write",
+    "format": "biome format --write",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
@@ -74,12 +72,13 @@
     "rxjs": "^7.4.0",
     "saml2-js": "^3.0.1",
     "session-file-store": "^1.5.0",
-    "sharp": "^0.33.5",
+    "sharp": "^0.34.5",
     "swagger-ui-express": "^4.3.0",
-    "uuid": "^8.3.2",
+    "uuid": "^13.0.0",
     "xml-js": "^1.6.11"
   },
   "devDependencies": {
+    "@biomejs/biome": "2.3.5",
     "@graphql-codegen/cli": "^5.0.5",
     "@graphql-codegen/typed-document-node": "^5.0.13",
     "@graphql-codegen/typescript-operations": "^4.4.1",
@@ -118,7 +117,6 @@
     "typescript": "^5.9.3"
   },
   "overrides": {
-    "typescript": "^5.2.2",
     "graphql": "16.6.0"
   }
 }

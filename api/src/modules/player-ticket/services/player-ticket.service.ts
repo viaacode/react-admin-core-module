@@ -1,4 +1,4 @@
-import { CACHE_MANAGER } from '@nestjs/cache-manager';
+import { CACHE_MANAGER } from '@nestjs/cache-manager'
 import {
 	forwardRef,
 	Inject,
@@ -6,18 +6,18 @@ import {
 	InternalServerErrorException,
 	Logger,
 	NotFoundException,
-} from '@nestjs/common';
-import type { Cache } from 'cache-manager';
-import got from 'got';
-import { trimEnd } from 'lodash';
-import publicIp from 'public-ip';
+} from '@nestjs/common'
+import type { Cache } from 'cache-manager'
+import got from 'got'
+import { trimEnd } from 'lodash'
+import publicIp from 'public-ip'
 
-import { DataService } from '../../data';
+import { DataService } from '../../data'
 import {
 	GetItemBrowsePathByExternalIdDocument,
 	GetItemBrowsePathByExternalIdQuery,
 	GetItemBrowsePathByExternalIdQueryVariables,
-} from '../../shared/generated/graphql-db-types-avo';
+} from '../../shared/generated/graphql-db-types-avo'
 import {
 	GetFileByRepresentationSchemaIdentifierDocument,
 	GetFileByRepresentationSchemaIdentifierQuery,
@@ -25,21 +25,21 @@ import {
 	GetThumbnailUrlByIdDocument,
 	GetThumbnailUrlByIdQuery,
 	GetThumbnailUrlByIdQueryVariables,
-} from '../../shared/generated/graphql-db-types-hetarchief';
-import { cleanMultilineEnv } from '../../shared/helpers/env-vars';
-import { CustomError } from '../../shared/helpers/error';
-import { isHetArchief } from '../../shared/helpers/is-hetarchief';
-import { PLAYER_TICKET_EXPIRY } from '../player-ticket.consts';
-import { PlayerTicket } from '../player-ticket.types';
+} from '../../shared/generated/graphql-db-types-hetarchief'
+import { cleanMultilineEnv } from '../../shared/helpers/env-vars'
+import { CustomError } from '../../shared/helpers/error'
+import { isHetArchief } from '../../shared/helpers/is-hetarchief'
+import { PLAYER_TICKET_EXPIRY } from '../player-ticket.consts'
+import { PlayerTicket } from '../player-ticket.types'
 
 @Injectable()
 export class PlayerTicketService {
 	private logger: Logger = new Logger(PlayerTicketService.name, {
 		timestamp: true,
-	});
-	private readonly ticketServiceMaxAge: number;
-	private readonly mediaServiceUrl: string;
-	private readonly host: string;
+	})
+	private readonly ticketServiceMaxAge: number
+	private readonly mediaServiceUrl: string
+	private readonly host: string
 
 	constructor(
 		@Inject(forwardRef(() => DataService)) protected dataService: DataService,
@@ -48,9 +48,9 @@ export class PlayerTicketService {
 		// Create an HTTPS agent to handle custom TLS configuration:
 		this.ticketServiceMaxAge = parseInt(
 			process.env.TICKET_SERVICE_MAXAGE || String(PLAYER_TICKET_EXPIRY)
-		);
-		this.mediaServiceUrl = process.env.MEDIA_SERVICE_URL;
-		this.host = process.env.HOST;
+		)
+		this.mediaServiceUrl = process.env.MEDIA_SERVICE_URL
+		this.host = process.env.HOST
 	}
 
 	/**
@@ -73,14 +73,14 @@ export class PlayerTicketService {
 				: ip,
 			referer: trimEnd(referer || this.host, '/'),
 			maxage: this.ticketServiceMaxAge,
-		};
+		}
 		if (isPublicDomain) {
 			// If the domain is public, we allow any client and referer and set the maxage to 15 years
 			// This is needed so social media and chat apps can come fetch a thumbnail for the detail page of an ie object
 			// https://meemoo.atlassian.net/browse/ARC-2891
-			data.client = '';
-			data.referer = '';
-			data.maxage = 15 * 365 * 24 * 60 * 60; // 15 years in seconds
+			data.client = ''
+			data.referer = ''
+			data.maxage = 15 * 365 * 24 * 60 * 60 // 15 years in seconds
 		}
 
 		/**
@@ -88,7 +88,7 @@ export class PlayerTicketService {
 		 * then append the query params from `data`.
 		 */
 		try {
-			const baseUrl = process.env.TICKET_SERVICE_URL as string;
+			const baseUrl = process.env.TICKET_SERVICE_URL as string
 			// Use baseUrl + / + path instead of query param name to pass the browsePath
 			// Since it seems like the query param is being truncated: https://meemoo.atlassian.net/browse/ARC-2817
 			const response = await got
@@ -103,12 +103,12 @@ export class PlayerTicketService {
 						Accept: '*/*',
 					},
 				})
-				.json();
+				.json()
 
-			return response as PlayerTicket;
+			return response as PlayerTicket
 		} catch (err) {
-			console.error(err);
-			throw err;
+			console.error(err)
+			throw err
 		}
 	}
 
@@ -131,8 +131,8 @@ export class PlayerTicketService {
 			referer,
 			ip,
 			isPublicDomain
-		);
-		return token.jwt;
+		)
+		return token.jwt
 	}
 
 	/**
@@ -155,8 +155,8 @@ export class PlayerTicketService {
 					: `thumbnailToken-${browsePath}-${referer}-${ip}`,
 				() => this.getToken(browsePath, referer, ip, isPublicDomain),
 				60 * 60 * 1000 // Cache for 1 hour
-			);
-			return token.jwt;
+			)
+			return token.jwt
 		} catch (err: any) {
 			this.logger.error(
 				new CustomError('Error getting token', err, {
@@ -165,8 +165,8 @@ export class PlayerTicketService {
 					ip,
 					errorMessage: err.message,
 				})
-			);
-			throw new InternalServerErrorException('Could not get a thumbnail token');
+			)
+			throw new InternalServerErrorException('Could not get a thumbnail token')
 		}
 	}
 
@@ -183,8 +183,8 @@ export class PlayerTicketService {
 		ip: string,
 		isPublicDomain: boolean = false
 	): Promise<string> {
-		const token = await this.getPlayerToken(urlOrPath, referer, ip, isPublicDomain);
-		return `${this.mediaServiceUrl}/${this.urlToFilePath(urlOrPath)}?token=${token}`;
+		const token = await this.getPlayerToken(urlOrPath, referer, ip, isPublicDomain)
+		return `${this.mediaServiceUrl}/${this.urlToFilePath(urlOrPath)}?token=${token}`
 	}
 
 	/**
@@ -194,7 +194,7 @@ export class PlayerTicketService {
 	public async getEmbedUrl(representationOrExternalId: string): Promise<string> {
 		let response:
 			| GetFileByRepresentationSchemaIdentifierQuery
-			| GetItemBrowsePathByExternalIdQuery;
+			| GetItemBrowsePathByExternalIdQuery
 		if (isHetArchief()) {
 			// Het archief
 			response = await this.dataService.execute<
@@ -202,7 +202,7 @@ export class PlayerTicketService {
 				GetFileByRepresentationSchemaIdentifierQueryVariables
 			>(GetFileByRepresentationSchemaIdentifierDocument, {
 				id: representationOrExternalId,
-			});
+			})
 		} else {
 			// AVO
 			response = await this.dataService.execute<
@@ -210,14 +210,14 @@ export class PlayerTicketService {
 				GetItemBrowsePathByExternalIdQueryVariables
 			>(GetItemBrowsePathByExternalIdDocument, {
 				externalId: representationOrExternalId,
-			});
+			})
 		}
 
 		/* istanbul ignore next */
 		const browsePath: string =
 			(response as GetItemBrowsePathByExternalIdQuery)?.app_item_meta?.[0]?.browse_path ||
 			(response as GetFileByRepresentationSchemaIdentifierQuery)?.graph_representation?.[0]
-				?.includes?.[0]?.file?.premis_stored_at;
+				?.includes?.[0]?.file?.premis_stored_at
 		if (!browsePath) {
 			throw new NotFoundException({
 				message: 'Object embed url not found',
@@ -225,10 +225,10 @@ export class PlayerTicketService {
 				additionalInfo: {
 					id: representationOrExternalId,
 				},
-			});
+			})
 		}
 
-		return browsePath;
+		return browsePath
 	}
 
 	/**
@@ -246,7 +246,7 @@ export class PlayerTicketService {
 	): Promise<string> {
 		try {
 			if (!urlOrPath) {
-				return null;
+				return null
 			}
 			if (!referer) {
 				console.error(
@@ -255,17 +255,17 @@ export class PlayerTicketService {
 						null,
 						{ urlOrPath, referer }
 					)
-				);
-				return urlOrPath;
+				)
+				return urlOrPath
 			}
-			const browsePath = this.urlToFilePath(urlOrPath);
+			const browsePath = this.urlToFilePath(urlOrPath)
 			const token = await this.getThumbnailTokenCached(
 				browsePath,
 				referer,
 				ip,
 				isPublicDomain
-			);
-			return `${this.mediaServiceUrl}/${browsePath}?token=${token}`;
+			)
+			return `${this.mediaServiceUrl}/${browsePath}?token=${token}`
 		} catch (err) {
 			console.error(
 				new CustomError('Failed to resolveThumbnailUrl', err, {
@@ -273,8 +273,8 @@ export class PlayerTicketService {
 					referer,
 					ip,
 				})
-			);
-			return urlOrPath;
+			)
+			return urlOrPath
 		}
 	}
 
@@ -291,8 +291,8 @@ export class PlayerTicketService {
 		ip: string,
 		isPublicDomain: boolean = false
 	): Promise<string> {
-		const thumbnailPath = await this.getThumbnailPath(id);
-		return this.resolveThumbnailUrl(thumbnailPath, referer, ip, isPublicDomain);
+		const thumbnailPath = await this.getThumbnailPath(id)
+		return this.resolveThumbnailUrl(thumbnailPath, referer, ip, isPublicDomain)
 	}
 
 	/**
@@ -305,19 +305,19 @@ export class PlayerTicketService {
 			GetThumbnailUrlByIdQueryVariables
 		>(GetThumbnailUrlByIdDocument, {
 			id,
-		});
+		})
 		if (!response.graph__intellectual_entity?.[0]) {
-			throw new NotFoundException(`Object IE with id '${id}' not found`);
+			throw new NotFoundException(`Object IE with id '${id}' not found`)
 		}
 
-		const thumbnailPath = response.graph__intellectual_entity[0].schema_thumbnail_url;
+		const thumbnailPath = response.graph__intellectual_entity[0].schema_thumbnail_url
 		if (typeof thumbnailPath === 'string') {
-			return thumbnailPath;
+			return thumbnailPath
 		} else {
 			if (!thumbnailPath || !thumbnailPath[0]) {
-				return null;
+				return null
 			}
-			return thumbnailPath[0];
+			return thumbnailPath[0]
 		}
 	}
 
@@ -337,6 +337,6 @@ export class PlayerTicketService {
 				// Alto urls
 				.split(/s3(-int|-tst|-qas|-prd)?\.do\.viaa\.be\//)
 				.pop()
-		);
+		)
 	}
 }

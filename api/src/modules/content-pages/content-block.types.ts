@@ -1,11 +1,11 @@
-import type { Avo } from '@viaa/avo2-types';
+import type { Avo } from '@viaa/avo2-types'
 
 // OPTIONS
-export type AlignOption = 'left' | 'right' | 'center';
+export type AlignOption = 'left' | 'right' | 'center'
 
-export type WidthOption = 'full-width' | 'page-header' | string; // CSS width string: eg: 100%; 400px, 500px
+export type WidthOption = 'full-width' | 'page-header' | string // CSS width string: eg: 100%; 400px, 500px
 
-export type HeadingTypeOption = 'h1' | 'h2' | 'h3' | 'h4';
+export type HeadingTypeOption = 'h1' | 'h2' | 'h3' | 'h4'
 
 export enum Color {
 	White = '#FFF',
@@ -55,14 +55,14 @@ export enum Color {
 }
 
 export interface PaddingFieldState {
-	top: string;
-	bottom: string;
+	top: string
+	bottom: string
 }
 
 // CONTENT BLOCK CONFIG
 
 // if 1 block, errors is a string[]. If multiple, it is a string[] index by their stateIndex, so string[][].
-export type ContentBlockErrors = { [key: string]: (string | string[])[] };
+export type ContentBlockErrors = { [key: string]: (string | string[])[] }
 
 // must match the lookup enumeration `content_block_types` on GraphQL.
 export enum ContentBlockType {
@@ -96,126 +96,126 @@ export enum ContentBlockType {
 
 /* CONTENT BLOCK STATE */
 export interface DefaultContentBlockState {
-	backgroundColor: Color;
-	headerBackgroundColor?: Color; // css color string. eg: '#222' or 'black' or 'rgb(0, 0, 255)'
-	headerHeight?: string; // css height string. eg: '20px' or '15%'
-	padding: PaddingFieldState;
-	margin: PaddingFieldState;
-	userGroupIds: string[];
-	fullWidth?: boolean;
-	anchor?: string; // Contains an id that the user can enter, so they can link to this block using the anchor-block buttons
+	backgroundColor: Color
+	headerBackgroundColor?: Color // css color string. eg: '#222' or 'black' or 'rgb(0, 0, 255)'
+	headerHeight?: string // css height string. eg: '20px' or '15%'
+	padding: PaddingFieldState
+	margin: PaddingFieldState
+	userGroupIds: string[]
+	fullWidth?: boolean
+	anchor?: string // Contains an id that the user can enter, so they can link to this block using the anchor-block buttons
 }
 
 export interface HeadingBlockComponentState {
-	children: string;
-	type: HeadingTypeOption;
-	align: AlignOption;
+	children: string
+	type: HeadingTypeOption
+	align: AlignOption
 }
 
 export interface ImageBlockComponentState {
-	title: string;
-	text: string;
-	source: string;
-	width: WidthOption;
+	title: string
+	text: string
+	source: string
+	width: WidthOption
 }
 
 export interface ImageGridBlockComponentStateFields {
-	source: string;
-	title?: string;
-	text?: string;
-	action?: string;
+	source: string
+	title?: string
+	text?: string
+	action?: string
 }
 
 export interface PageOverviewBlockComponentStateFields {
-	tabs?: string[];
-	tabStyle?: 'ROUNDED_BADGES' | 'MENU_BAR';
-	allowMultiple?: boolean;
-	centerHeader?: boolean;
-	headerBackgroundColor?: Color;
-	contentType: Avo.ContentPage.Type;
-	itemStyle?: 'GRID' | 'NEWS_LIST' | 'PROJECT_LIST' | 'ACCORDION';
-	showTitle?: boolean;
-	showDescription?: boolean;
-	showDate?: boolean;
-	buttonLabel?: string;
-	itemsPerPage?: number;
-	navigate?: (buttonAction: string) => void;
+	tabs?: string[]
+	tabStyle?: 'ROUNDED_BADGES' | 'MENU_BAR'
+	allowMultiple?: boolean
+	centerHeader?: boolean
+	headerBackgroundColor?: Color
+	contentType: Avo.ContentPage.Type
+	itemStyle?: 'GRID' | 'NEWS_LIST' | 'PROJECT_LIST' | 'ACCORDION'
+	showTitle?: boolean
+	showDescription?: boolean
+	showDate?: boolean
+	buttonLabel?: string
+	itemsPerPage?: number
+	navigate?: (buttonAction: string) => void
 }
 
 export interface ButtonsBlockComponentState {
-	label: string;
-	icon?: string;
-	type?: string;
-	navigate?: (buttonAction: string) => void;
+	label: string
+	icon?: string
+	type?: string
+	navigate?: (buttonAction: string) => void
 }
 
 export interface RichTextBlockComponentState {
-	content: string;
+	content: string
 	// Each rich text editor state prop has to and with 'RichEditorStateKey'
 	// So this can be removed before saving the page to the database in ContentPageService.removeRichEditorStateRecursively
 	// contentRichEditorState: RichEditorState | undefined;
-	buttons?: ButtonsBlockComponentState[];
+	buttons?: ButtonsBlockComponentState[]
 }
 
 export interface AnchorLinksBlockComponentState {
-	label: string;
-	icon?: string;
-	type?: string;
-	navigate?: (buttonAction: string) => void;
+	label: string
+	icon?: string
+	type?: string
+	navigate?: (buttonAction: string) => void
 }
 
 export interface KlaarBlockComponentState {
-	titles: string[];
-	date: string;
+	titles: string[]
+	date: string
 }
 
 export interface IntroBlockComponentState {
-	title: string;
-	headingType: HeadingTypeOption;
-	content: string;
-	align: AlignOption;
+	title: string
+	headingType: HeadingTypeOption
+	content: string
+	align: AlignOption
 }
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
 export interface IFrameBlockComponentState {
-	title: string;
-	src: string;
+	title: string
+	src: string
 }
 
 export interface QuoteBlockComponentState {
-	quote: string;
-	authorName: string;
-	authorInitials: string;
-	authorImage?: string;
+	quote: string
+	authorName: string
+	authorInitials: string
+	authorImage?: string
 }
 
 export interface MediaPlayerBlockComponentState {
-	title: string;
-	item?: string;
-	autoplay: boolean;
+	title: string
+	item?: string
+	autoplay: boolean
 }
 
 export interface MediaPlayerTitleTextButtonBlockComponentState {
-	mediaTitle: string;
-	mediaItem?: string;
-	headingType: HeadingTypeOption;
-	headingTitle: string;
-	content: string;
-	buttonLabel: string;
-	buttonIcon?: string;
-	buttonType?: string;
-	buttonAction?: string;
-	align: AlignOption;
-	mediaAutoplay: boolean;
+	mediaTitle: string
+	mediaItem?: string
+	headingType: HeadingTypeOption
+	headingTitle: string
+	content: string
+	buttonLabel: string
+	buttonIcon?: string
+	buttonType?: string
+	buttonAction?: string
+	align: AlignOption
+	mediaAutoplay: boolean
 }
 
 export interface MediaGridBlockComponentState {
-	mediaItem?: string;
-	buttonLabel?: string;
-	buttonAltTitle?: string;
-	buttonIcon?: string;
-	buttonType?: string;
-	buttonAction?: string;
+	mediaItem?: string
+	buttonLabel?: string
+	buttonAltTitle?: string
+	buttonIcon?: string
+	buttonType?: string
+	buttonAction?: string
 }
 
 export type RepeatedContentBlockComponentState =
@@ -225,12 +225,12 @@ export type RepeatedContentBlockComponentState =
 	| ImageGridBlockComponentStateFields
 	| MediaGridBlockComponentState
 	| {
-			image: string;
-			title: string;
-			buttonAction?: string;
-			className?: string;
+			image: string
+			title: string
+			buttonAction?: string
+			className?: string
 	  } // project spotlight & spotlight
-	| RichTextBlockComponentState;
+	| RichTextBlockComponentState
 
 export type SingleContentBlockComponentState =
 	| HeadingBlockComponentState
@@ -245,22 +245,23 @@ export type SingleContentBlockComponentState =
 	| QuoteBlockComponentState
 	| RichTextBlockComponentState
 	| {
+			[k: string]: any
 			// Search block & content page meta
-	  };
+	  }
 
 export type ContentBlockComponentState =
 	| RepeatedContentBlockComponentState[]
-	| SingleContentBlockComponentState;
+	| SingleContentBlockComponentState
 
 export interface DbContentBlock {
-	id?: number;
-	errors?: ContentBlockErrors;
-	name: string;
-	components: ContentBlockComponentState;
-	block: DefaultContentBlockState;
-	type: ContentBlockType;
-	anchor?: string;
-	position: number;
-	createdAt: string;
-	updatedAt: string;
+	id?: number
+	errors?: ContentBlockErrors
+	name: string
+	components: ContentBlockComponentState
+	block: DefaultContentBlockState
+	type: ContentBlockType
+	anchor?: string
+	position: number
+	createdAt: string
+	updatedAt: string
 }

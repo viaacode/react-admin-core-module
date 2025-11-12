@@ -1,10 +1,10 @@
-import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import { IsNotEmpty, IsOptional, IsString } from 'class-validator'
 
 export class GraphQlQueryDto {
 	@IsString()
 	@IsNotEmpty()
-	query: string;
+	query: string
 
 	@IsOptional()
-	variables?: any;
+	variables?: any
 }

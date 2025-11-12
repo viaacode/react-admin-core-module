@@ -1,5 +1,7 @@
 query getTableColumnPreferencesForUser($profileId: uuid!, $columnKey: String!) {
-	users_table_column_preferences(where: {profile_id: {_eq: $profileId}, url_key: {_eq: $columnKey}}) {
+	users_table_column_preferences(
+		where: { profile_id: { _eq: $profileId }, url_key: { _eq: $columnKey } }
+	) {
 		id
 		url_key
 		visible_columns

@@ -39,7 +39,7 @@ export const VALID_MIME_TYPES: string[] = [
 	'application/vnd.rar',
 	'application/x-7z-compressed',
 	'application/x-tar',
-];
+]
 
 export const OPTIMIZE_INTO_WEBP_FORMATS: string[] = [
 	'image/png',
@@ -47,7 +47,7 @@ export const OPTIMIZE_INTO_WEBP_FORMATS: string[] = [
 	'image/jpeg',
 	'image/jpeg',
 	'image/bmp',
-];
+]
 
 export const EXTENSION_TO_MIME_TYPE: Record<string, string> = {
 	// images
@@ -90,4 +90,4 @@ export const EXTENSION_TO_MIME_TYPE: Record<string, string> = {
 	rar: 'application/vnd.rar',
 	'7z': 'application/x-7z-compressed',
 	tar: 'application/x-tar',
-};
+}

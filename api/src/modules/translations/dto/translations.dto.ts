@@ -1,13 +1,13 @@
-import { ApiProperty } from '@nestjs/swagger';
-import { IsString } from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger'
+import { IsString } from 'class-validator'
 
-import { Lookup_Languages_Enum } from '../../shared/generated/graphql-db-types-hetarchief';
+import { Lookup_Languages_Enum } from '../../shared/generated/graphql-db-types-hetarchief'
 import {
 	Component,
 	Locale,
 	type TranslationKey,
 	type TranslationLocation,
-} from '../translations.types';
+} from '../translations.types'
 
 export class UpdateTranslationDto {
 	@IsString()
@@ -19,7 +19,7 @@ export class UpdateTranslationDto {
 			Object.values(Component).join(', '),
 		example: 'BACKEND',
 	})
-	component: Component;
+	component: Component
 
 	@IsString()
 	@ApiProperty({
@@ -28,7 +28,7 @@ export class UpdateTranslationDto {
 		description: 'The file location in which this translation occurs',
 		example: 'modules/auth/controllers/het-archief',
 	})
-	location: TranslationLocation;
+	location: TranslationLocation
 
 	@IsString()
 	@ApiProperty({
@@ -38,7 +38,7 @@ export class UpdateTranslationDto {
 			'The translation key that uniquely identifies the translation within the component and file',
 		example: 'account-configuratie',
 	})
-	key: TranslationKey;
+	key: TranslationKey
 
 	@IsString()
 	@ApiProperty({
@@ -49,7 +49,7 @@ export class UpdateTranslationDto {
 			Object.values(Lookup_Languages_Enum).join(', '),
 		example: 'EN',
 	})
-	languageCode: Locale;
+	languageCode: Locale
 
 	@IsString()
 	@ApiProperty({
@@ -58,5 +58,5 @@ export class UpdateTranslationDto {
 			'A key-value object where the key is the translation-key, and value is the translation itself',
 		example: 'new translation value',
 	})
-	value: string;
+	value: string
 }

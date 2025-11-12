@@ -1,11 +1,11 @@
-import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
+import { Module } from '@nestjs/common'
+import { ConfigModule } from '@nestjs/config'
 
-import { DataModule } from '../data';
-import { AdminTranslationsModule } from '../translations';
+import { DataModule } from '../data'
+import { AdminTranslationsModule } from '../translations'
 
-import { AssetsController } from './controllers/assets.controller';
-import { AssetsService } from './services/assets.service';
+import { AssetsController } from './controllers/assets.controller'
+import { AssetsService } from './services/assets.service'
 
 @Module({
 	imports: [ConfigModule, AdminTranslationsModule, DataModule],

@@ -1,18 +1,18 @@
-import { Test, type TestingModule } from '@nestjs/testing';
-import { Avo } from '@viaa/avo2-types';
+import { Test, type TestingModule } from '@nestjs/testing'
+import { Avo } from '@viaa/avo2-types'
 
-import { Lookup_App_Content_Type_Enum } from '../../shared/generated/graphql-db-types-hetarchief';
-import { TestingLogger } from '../../shared/logging/test-logger';
-import { type UpdateContentPageLabelDto } from '../dto/content-page-label.dto';
+import { Lookup_App_Content_Type_Enum } from '../../shared/generated/graphql-db-types-hetarchief'
+import { TestingLogger } from '../../shared/logging/test-logger'
+import { type UpdateContentPageLabelDto } from '../dto/content-page-label.dto'
 import {
 	mockContentPageLabel1,
 	mockContentPageLabelDto,
 	mockContentPageLabelsFilteredResponse,
 	mockContentPageLabelsResponse,
-} from '../mocks/content-page-labels.mocks';
-import { ContentPageLabelsService } from '../services/content-page-labels.service';
+} from '../mocks/content-page-labels.mocks'
+import { ContentPageLabelsService } from '../services/content-page-labels.service'
 
-import { ContentPageLabelsController } from './content-page-labels.controller';
+import { ContentPageLabelsController } from './content-page-labels.controller'
 
 const mockContentPageLabelsService: Partial<
 	Record<keyof ContentPageLabelsService, jest.SpyInstance>
@@ -24,10 +24,10 @@ const mockContentPageLabelsService: Partial<
 	deleteContentPageLabel: jest.fn(),
 	getContentPageLabelsByTypeAndLabels: jest.fn(),
 	getContentPageLabelsByTypeAndIds: jest.fn(),
-};
+}
 
 describe('ContentPageLabelsController', () => {
-	let contentPageLabelsController: ContentPageLabelsController;
+	let contentPageLabelsController: ContentPageLabelsController
 
 	beforeEach(async () => {
 		const module: TestingModule = await Test.createTestingModule({
@@ -41,26 +41,26 @@ describe('ContentPageLabelsController', () => {
 			],
 		})
 			.setLogger(new TestingLogger())
-			.compile();
+			.compile()
 
 		contentPageLabelsController = module.get<ContentPageLabelsController>(
 			ContentPageLabelsController
-		);
-	});
+		)
+	})
 
 	afterEach(() => {
-		mockContentPageLabelsService.fetchContentPageLabels.mockRestore();
-	});
+		mockContentPageLabelsService.fetchContentPageLabels.mockRestore()
+	})
 
 	it('should be defined', () => {
-		expect(contentPageLabelsController).toBeDefined();
-	});
+		expect(contentPageLabelsController).toBeDefined()
+	})
 
 	describe('fetchContentPageLabels', () => {
 		it('should return content page labels', async () => {
 			mockContentPageLabelsService.fetchContentPageLabels.mockResolvedValueOnce(
 				mockContentPageLabelsResponse
-			);
+			)
 
 			const contentPageLabels = await contentPageLabelsController.fetchContentPageLabels(
 				'0',
@@ -68,101 +68,101 @@ describe('ContentPageLabelsController', () => {
 				'label',
 				Avo.Search.OrderDirection.ASC,
 				'{}'
-			);
+			)
 
-			expect(contentPageLabels).toEqual(mockContentPageLabelsResponse);
-		});
+			expect(contentPageLabels).toEqual(mockContentPageLabelsResponse)
+		})
 
 		// TODO: add test in which an error is thrown
-	});
+	})
 	describe('fetchContentPageLabelById', () => {
 		it('should return a ContentPageLabel when given an known id', async () => {
 			mockContentPageLabelsService.fetchContentPageLabelById.mockResolvedValueOnce(
 				mockContentPageLabelsResponse
-			);
+			)
 
 			const contentPageLabel = await contentPageLabelsController.fetchContentPageLabelById(
 				mockContentPageLabel1.id.toString()
-			);
+			)
 
-			expect(contentPageLabel).toEqual(mockContentPageLabelsResponse);
-		});
+			expect(contentPageLabel).toEqual(mockContentPageLabelsResponse)
+		})
 
 		// TODO: add test in which an error is thrown
-	});
+	})
 
 	describe('insertContentPageLabel', () => {
 		it('should create a ContentPageLabel', async () => {
 			mockContentPageLabelsService.insertContentPageLabels.mockResolvedValueOnce([
 				mockContentPageLabelDto,
-			]);
+			])
 
 			const contentPageLabel = await contentPageLabelsController.insertContentPageLabels([
 				mockContentPageLabelDto,
-			]);
+			])
 
-			expect(contentPageLabel).toEqual(mockContentPageLabelDto);
-		});
+			expect(contentPageLabel).toEqual(mockContentPageLabelDto)
+		})
 
 		// TODO: add test in which an error is thrown
-	});
+	})
 
 	describe('updateContentPageLabel', () => {
 		it('should update a ContentPageLabel', async () => {
 			mockContentPageLabelsService.updateContentPageLabel.mockResolvedValueOnce(
 				mockContentPageLabel1
-			);
+			)
 
 			const contentPageLabel = await contentPageLabelsController.updateContentPageLabel(
 				mockContentPageLabel1 as UpdateContentPageLabelDto
-			);
+			)
 
-			expect(contentPageLabel).toEqual(mockContentPageLabelDto);
-		});
+			expect(contentPageLabel).toEqual(mockContentPageLabelDto)
+		})
 
 		// TODO: add test in which an error is thrown
-	});
+	})
 
 	describe('deleteContentPageLabelById', () => {
 		it('should delete a ContentPageLabel when given a known id', async () => {
-			mockContentPageLabelsService.deleteContentPageLabel.mockResolvedValueOnce(true);
+			mockContentPageLabelsService.deleteContentPageLabel.mockResolvedValueOnce(true)
 
 			const response = await contentPageLabelsController.deleteContentPageLabelById(
 				mockContentPageLabel1.id.toString()
-			);
+			)
 
 			expect(response).toEqual({
 				message: 'success',
-			});
-		});
+			})
+		})
 
 		// TODO: add test in which an error is thrown
-	});
+	})
 
 	describe('getContentPageLabelsByType', () => {
 		it('should return an array of LabelObjects when labelIds are given', async () => {
 			mockContentPageLabelsService.getContentPageLabelsByTypeAndIds.mockResolvedValue(
 				mockContentPageLabelsFilteredResponse
-			);
+			)
 
 			const contentPageLabels = await contentPageLabelsController.getContentPageLabelsByType({
 				contentType: Lookup_App_Content_Type_Enum.FaqItem,
 				labelIds: ['13d00f95-5597-4470-b5ce-d3ee96212ff4'],
 				labels: ['Gebruik van het materiaal'],
-			});
-			expect(contentPageLabels).toEqual(mockContentPageLabelsFilteredResponse);
-		});
+			})
+			expect(contentPageLabels).toEqual(mockContentPageLabelsFilteredResponse)
+		})
 
 		it('should return an array of LabelObjects when labelIds are not given', async () => {
 			mockContentPageLabelsService.getContentPageLabelsByTypeAndLabels.mockResolvedValue(
 				mockContentPageLabelsFilteredResponse
-			);
+			)
 
 			const contentPageLabels = await contentPageLabelsController.getContentPageLabelsByType({
 				contentType: Lookup_App_Content_Type_Enum.FaqItem,
 				labels: ['Gebruik van het materiaal'],
-			});
-			expect(contentPageLabels).toEqual(mockContentPageLabelsFilteredResponse);
-		});
-	});
-});
+			})
+			expect(contentPageLabels).toEqual(mockContentPageLabelsFilteredResponse)
+		})
+	})
+})

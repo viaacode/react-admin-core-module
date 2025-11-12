@@ -1,24 +1,24 @@
-import type { Avo } from '@viaa/avo2-types';
+import type { Avo } from '@viaa/avo2-types'
 
 import {
 	type Order_By,
 	type Users_Summary_View_Order_By,
-} from '../shared/generated/graphql-db-types-avo';
-import { isAvo } from '../shared/helpers/is-avo';
+} from '../shared/generated/graphql-db-types-avo'
+import { isAvo } from '../shared/helpers/is-avo'
 
-import { type UserOverviewTableCol } from './users.types';
+import { type UserOverviewTableCol } from './users.types'
 
 export const GET_TABLE_COLUMN_TO_DATABASE_ORDER_OBJECT = (): Partial<{
-	[columnId in UserOverviewTableCol]: (order: Avo.Search.OrderDirection) => any;
+	[columnId in UserOverviewTableCol]: (order: Avo.Search.OrderDirection) => any
 }> => {
 	if (isAvo()) {
-		return tableColumnToDatabaseOrderObjectAvo;
+		return tableColumnToDatabaseOrderObjectAvo
 	}
-	return tableColumnToDatabaseOrderObjectHetArchief;
-};
+	return tableColumnToDatabaseOrderObjectHetArchief
+}
 
 const tableColumnToDatabaseOrderObjectAvo: {
-	[columnId in UserOverviewTableCol]: ((order: Avo.Search.OrderDirection) => any) | null;
+	[columnId in UserOverviewTableCol]: ((order: Avo.Search.OrderDirection) => any) | null
 } = {
 	firstName: (order: Avo.Search.OrderDirection): Users_Summary_View_Order_By => ({
 		first_name_lower: order as unknown as Order_By,
@@ -84,10 +84,10 @@ const tableColumnToDatabaseOrderObjectAvo: {
 	subjects: null,
 	idps: null,
 	educationalOrganisations: null,
-};
+}
 
 const tableColumnToDatabaseOrderObjectHetArchief: Partial<{
-	[columnId in UserOverviewTableCol]: (order: Avo.Search.OrderDirection) => any;
+	[columnId in UserOverviewTableCol]: (order: Avo.Search.OrderDirection) => any
 }> = {
 	firstName: (order: Avo.Search.OrderDirection) => ({
 		first_name: order,
@@ -110,4 +110,4 @@ const tableColumnToDatabaseOrderObjectHetArchief: Partial<{
 	lastAccessAt: (order: Avo.Search.OrderDirection) => ({
 		last_access_at: order,
 	}),
-};
+}

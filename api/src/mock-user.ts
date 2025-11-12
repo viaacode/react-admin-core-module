@@ -1,6 +1,6 @@
-import { Avo, PermissionName } from '@viaa/avo2-types';
+import { Avo, PermissionName } from '@viaa/avo2-types'
 
-import { type Locale } from './modules';
+import { type Locale } from './modules'
 
 export const mockUserAvo: Avo.User.User = {
 	first_name: 'Bert',
@@ -191,7 +191,7 @@ export const mockUserAvo: Avo.User.User = {
 			idp_user_id: '4d2b556cd6bffa86869507455afb0ee7329f41f2',
 		},
 	],
-} as Avo.User.User;
+} as Avo.User.User
 
 export const mockUserHetArchief: Avo.User.HetArchiefUser = {
 	// QAS
@@ -251,4 +251,4 @@ export const mockUserHetArchief: Avo.User.HetArchiefUser = {
 	maintainerId: 'OR-w66976m',
 	organisationId: null,
 	sector: null,
-};
+}

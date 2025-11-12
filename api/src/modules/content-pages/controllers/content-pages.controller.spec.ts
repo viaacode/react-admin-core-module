@@ -1,11 +1,11 @@
-import { Test, type TestingModule } from '@nestjs/testing';
-import { Avo, PermissionName } from '@viaa/avo2-types';
+import { Test, type TestingModule } from '@nestjs/testing'
+import { Avo, PermissionName } from '@viaa/avo2-types'
 
-import { PlayerTicketService } from '../../player-ticket';
-import { SessionHelper } from '../../shared/auth/session-helper';
-import { ContentPagesService } from '../services/content-pages.service';
+import { PlayerTicketService } from '../../player-ticket'
+import { SessionHelper } from '../../shared/auth/session-helper'
+import { ContentPagesService } from '../services/content-pages.service'
 
-import { ContentPagesController } from './content-pages.controller';
+import { ContentPagesController } from './content-pages.controller'
 
 export const mockUser: Avo.User.HetArchiefUser = {
 	id: 'e791ecf1-e121-4c54-9d2e-34524b6467c6',
@@ -27,7 +27,7 @@ export const mockUser: Avo.User.HetArchiefUser = {
 	organisationName: 'VRT',
 	sector: 'Publieke Omroep',
 	language: 'nl',
-};
+}
 
 const mockContentPagesService: Partial<Record<keyof ContentPagesService, jest.SpyInstance>> = {
 	adaptContentPage: jest.fn(),
@@ -38,16 +38,16 @@ const mockContentPagesService: Partial<Record<keyof ContentPagesService, jest.Sp
 	fetchItemByExternalId: jest.fn(),
 	updatePublishDates: jest.fn(),
 	getContentPagesByIds: jest.fn(),
-};
+}
 
 const mockPlayerTicketService: Partial<Record<keyof PlayerTicketService, jest.SpyInstance>> = {
 	getPlayableUrl: jest.fn(),
 	getEmbedUrl: jest.fn(),
-};
+}
 
 describe('ContentPagesController', () => {
-	let contentPagesController: ContentPagesController;
-	let sessionHelperSpy: jest.SpyInstance;
+	let contentPagesController: ContentPagesController
+	let sessionHelperSpy: jest.SpyInstance
 
 	beforeEach(async () => {
 		const module: TestingModule = await Test.createTestingModule({
@@ -63,24 +63,24 @@ describe('ContentPagesController', () => {
 					useValue: mockPlayerTicketService,
 				},
 			],
-		}).compile();
+		}).compile()
 
-		contentPagesController = module.get<ContentPagesController>(ContentPagesController);
+		contentPagesController = module.get<ContentPagesController>(ContentPagesController)
 
-		sessionHelperSpy = jest.spyOn(SessionHelper, 'getUserInfo').mockReturnValue(mockUser);
-	});
+		sessionHelperSpy = jest.spyOn(SessionHelper, 'getUserInfo').mockReturnValue(mockUser)
+	})
 
 	afterAll(async () => {
-		sessionHelperSpy.mockRestore();
-	});
+		sessionHelperSpy.mockRestore()
+	})
 
 	it('should be defined', () => {
-		expect(contentPagesController).toBeDefined();
-	});
+		expect(contentPagesController).toBeDefined()
+	})
 
 	describe('getContentPages', () => {
 		it('should return all contentPages for a specific user', async () => {
-			expect(true).toEqual(true);
-		});
-	});
-});
+			expect(true).toEqual(true)
+		})
+	})
+})

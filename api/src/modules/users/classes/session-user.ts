@@ -1,53 +1,53 @@
-import { type Avo, type PermissionName } from '@viaa/avo2-types';
+import { type Avo, type PermissionName } from '@viaa/avo2-types'
 
-import { isAvo } from '../../shared/helpers/is-avo';
-import { SpecialPermissionGroups } from '../../shared/types/types';
-import { type Locale } from '../../translations';
-import { convertUserInfoToCommonUser } from '../users.converters';
-import { UserInfoType } from '../users.types';
+import { isAvo } from '../../shared/helpers/is-avo'
+import { SpecialPermissionGroups } from '../../shared/types/types'
+import { type Locale } from '../../translations'
+import { convertUserInfoToCommonUser } from '../users.converters'
+import { UserInfoType } from '../users.types'
 
 export class SessionUserEntity {
-	protected user: Avo.User.CommonUser | undefined;
-	protected originalUser: Avo.User.HetArchiefUser | Avo.User.User;
+	protected user: Avo.User.CommonUser | undefined
+	protected originalUser: Avo.User.HetArchiefUser | Avo.User.User
 
 	public constructor(user: Avo.User.HetArchiefUser | Avo.User.User | undefined) {
-		this.originalUser = user;
+		this.originalUser = user
 		this.user = convertUserInfoToCommonUser(
 			user,
 			isAvo() ? UserInfoType.AvoUserUser : UserInfoType.HetArchiefUser
-		);
+		)
 	}
 
 	public getUser(): Avo.User.CommonUser {
-		return this.user;
+		return this.user
 	}
 
 	public getId(): string {
-		return this.user?.userId;
+		return this.user?.userId
 	}
 
 	public getProfileId(): string {
-		return this.user?.profileId;
+		return this.user?.profileId
 	}
 
 	public getLanguage(): Locale | undefined {
-		return this.user?.language as Locale | undefined;
+		return this.user?.language as Locale | undefined
 	}
 
 	public getFirstName(): string {
-		return this.user?.firstName;
+		return this.user?.firstName
 	}
 
 	public getLastName(): string {
-		return this.user?.lastName;
+		return this.user?.lastName
 	}
 
 	public getFullName(): string {
-		return this.user?.fullName;
+		return this.user?.fullName
 	}
 
 	public getMail(): string {
-		return this.user?.email;
+		return this.user?.email
 	}
 
 	/**
@@ -56,7 +56,7 @@ export class SessionUserEntity {
 	 * hetarchief: string (uuid)
 	 */
 	public getGroupId(): string {
-		return this.user?.userGroup?.id ? String(this.user?.userGroup?.id) : undefined;
+		return this.user?.userGroup?.id ? String(this.user?.userGroup?.id) : undefined
 	}
 
 	/**
@@ -68,38 +68,38 @@ export class SessionUserEntity {
 			this.getGroupId()
 				? SpecialPermissionGroups.loggedInUsers
 				: SpecialPermissionGroups.loggedOutUsers,
-		].map((group) => String(group));
+		].map((group) => String(group))
 	}
 
 	public getMaintainerId(): string {
-		return (this.originalUser as Avo.User.HetArchiefUser)?.maintainerId;
+		return (this.originalUser as Avo.User.HetArchiefUser)?.maintainerId
 	}
 
 	public getVisitorSpaceSlug(): string {
-		return (this.originalUser as Avo.User.HetArchiefUser)?.visitorSpaceSlug;
+		return (this.originalUser as Avo.User.HetArchiefUser)?.visitorSpaceSlug
 	}
 
 	public has(permission: PermissionName): boolean {
-		return this.user?.permissions?.includes(permission) || false;
+		return this.user?.permissions?.includes(permission) || false
 	}
 
 	public hasNot(permission: PermissionName): boolean {
-		return !this.has(permission);
+		return !this.has(permission)
 	}
 
 	public hasAny(permissions: PermissionName[]): boolean {
 		if (permissions.length === 0) {
-			return true;
+			return true
 		}
 
-		return permissions.some((permission) => this.has(permission));
+		return permissions.some((permission) => this.has(permission))
 	}
 
 	public hasAll(permissions: PermissionName[]): boolean {
 		if (permissions.length === 0) {
-			return true;
+			return true
 		}
 
-		return permissions.every((permission) => this.has(permission));
+		return permissions.every((permission) => this.has(permission))
 	}
 }

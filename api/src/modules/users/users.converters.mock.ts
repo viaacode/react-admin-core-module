@@ -1,4 +1,4 @@
-import { Avo, PermissionName } from '@viaa/avo2-types';
+import { Avo, PermissionName } from '@viaa/avo2-types'
 
 export const MOCK_HETARCHIEF_USER: Avo.User.HetArchiefUser = {
 	id: '31051baa-94ab-4fc2-a859-750a52774d3a',
@@ -55,4 +55,4 @@ export const MOCK_HETARCHIEF_USER: Avo.User.HetArchiefUser = {
 	maintainerId: 'OR-w66976m',
 	organisationId: 'OR-w66976m',
 	sector: 'Cultuur',
-};
+}

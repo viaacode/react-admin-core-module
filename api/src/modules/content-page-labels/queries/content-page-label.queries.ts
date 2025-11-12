@@ -1,5 +1,5 @@
-import type { TypedDocumentNode } from '@graphql-typed-document-node/core';
-import { DatabaseType } from '@viaa/avo2-types';
+import type { TypedDocumentNode } from '@graphql-typed-document-node/core'
+import { DatabaseType } from '@viaa/avo2-types'
 
 import {
 	DeleteContentPageLabelByIdDocument as DeleteContentPageLabelByIdDocumentAvo,
@@ -23,7 +23,7 @@ import {
 	UpdateContentPageLabelDocument as UpdateContentPageLabelDocumentAvo,
 	type UpdateContentPageLabelMutation as UpdateContentPageLabelMutationAvo,
 	type UpdateContentPageLabelMutationVariables as UpdateContentPageLabelMutationVariablesAvo,
-} from '../../shared/generated/graphql-db-types-avo';
+} from '../../shared/generated/graphql-db-types-avo'
 import {
 	DeleteContentPageLabelByIdDocument as DeleteContentPageLabelByIdDocumentHetArchief,
 	type DeleteContentPageLabelByIdMutation as DeleteContentPageLabelByIdMutationHetArchief,
@@ -46,88 +46,88 @@ import {
 	UpdateContentPageLabelDocument as UpdateContentPageLabelDocumentHetArchief,
 	type UpdateContentPageLabelMutation as UpdateContentPageLabelMutationHetArchief,
 	type UpdateContentPageLabelMutationVariables as UpdateContentPageLabelMutationVariablesHetArchief,
-} from '../../shared/generated/graphql-db-types-hetarchief';
+} from '../../shared/generated/graphql-db-types-hetarchief'
 
 export type ContentPageLabelQueryTypes = {
-	DeleteContentPageLabelByIdMutationAvo: DeleteContentPageLabelByIdMutationAvo;
-	DeleteContentPageLabelByIdMutationHetArchief: DeleteContentPageLabelByIdMutationHetArchief;
+	DeleteContentPageLabelByIdMutationAvo: DeleteContentPageLabelByIdMutationAvo
+	DeleteContentPageLabelByIdMutationHetArchief: DeleteContentPageLabelByIdMutationHetArchief
 	DeleteContentPageLabelByIdMutation:
 		| DeleteContentPageLabelByIdMutationAvo
-		| DeleteContentPageLabelByIdMutationHetArchief;
-	GetContentPageLabelByIdQueryAvo: GetContentPageLabelByIdQueryAvo;
-	GetContentPageLabelByIdQueryHetArchief: GetContentPageLabelByIdQueryHetArchief;
+		| DeleteContentPageLabelByIdMutationHetArchief
+	GetContentPageLabelByIdQueryAvo: GetContentPageLabelByIdQueryAvo
+	GetContentPageLabelByIdQueryHetArchief: GetContentPageLabelByIdQueryHetArchief
 	GetContentPageLabelByIdQuery:
 		| GetContentPageLabelByIdQueryAvo
-		| GetContentPageLabelByIdQueryHetArchief;
-	GetContentPageLabelsQueryAvo: GetContentPageLabelsQueryAvo;
-	GetContentPageLabelsQueryHetArchief: GetContentPageLabelsQueryHetArchief;
-	GetContentPageLabelsQuery: GetContentPageLabelsQueryAvo | GetContentPageLabelsQueryHetArchief;
-	InsertContentPageLabelMutationAvo: InsertContentPageLabelMutationAvo;
-	InsertContentPageLabelMutationHetArchief: InsertContentPageLabelMutationHetArchief;
+		| GetContentPageLabelByIdQueryHetArchief
+	GetContentPageLabelsQueryAvo: GetContentPageLabelsQueryAvo
+	GetContentPageLabelsQueryHetArchief: GetContentPageLabelsQueryHetArchief
+	GetContentPageLabelsQuery: GetContentPageLabelsQueryAvo | GetContentPageLabelsQueryHetArchief
+	InsertContentPageLabelMutationAvo: InsertContentPageLabelMutationAvo
+	InsertContentPageLabelMutationHetArchief: InsertContentPageLabelMutationHetArchief
 	InsertContentPageLabelMutation:
 		| InsertContentPageLabelMutationAvo
-		| InsertContentPageLabelMutationHetArchief;
-	UpdateContentPageLabelMutationAvo: UpdateContentPageLabelMutationAvo;
-	UpdateContentPageLabelMutationHetArchief: UpdateContentPageLabelMutationHetArchief;
+		| InsertContentPageLabelMutationHetArchief
+	UpdateContentPageLabelMutationAvo: UpdateContentPageLabelMutationAvo
+	UpdateContentPageLabelMutationHetArchief: UpdateContentPageLabelMutationHetArchief
 	UpdateContentPageLabelMutation:
 		| UpdateContentPageLabelMutationAvo
-		| UpdateContentPageLabelMutationHetArchief;
-	DeleteContentPageLabelByIdMutationVariablesAvo: DeleteContentPageLabelByIdMutationVariablesAvo;
-	DeleteContentPageLabelByIdMutationVariablesHetArchief: DeleteContentPageLabelByIdMutationVariablesHetArchief;
+		| UpdateContentPageLabelMutationHetArchief
+	DeleteContentPageLabelByIdMutationVariablesAvo: DeleteContentPageLabelByIdMutationVariablesAvo
+	DeleteContentPageLabelByIdMutationVariablesHetArchief: DeleteContentPageLabelByIdMutationVariablesHetArchief
 	DeleteContentPageLabelByIdMutationVariables:
 		| DeleteContentPageLabelByIdMutationVariablesAvo
-		| DeleteContentPageLabelByIdMutationVariablesHetArchief;
-	GetContentPageLabelByIdQueryVariablesAvo: GetContentPageLabelByIdQueryVariablesAvo;
-	GetContentPageLabelByIdQueryVariablesHetArchief: GetContentPageLabelByIdQueryVariablesHetArchief;
+		| DeleteContentPageLabelByIdMutationVariablesHetArchief
+	GetContentPageLabelByIdQueryVariablesAvo: GetContentPageLabelByIdQueryVariablesAvo
+	GetContentPageLabelByIdQueryVariablesHetArchief: GetContentPageLabelByIdQueryVariablesHetArchief
 	GetContentPageLabelByIdQueryVariables:
 		| GetContentPageLabelByIdQueryVariablesAvo
-		| GetContentPageLabelByIdQueryVariablesHetArchief;
-	GetContentPageLabelsQueryVariablesAvo: GetContentPageLabelsQueryVariablesAvo;
-	GetContentPageLabelsQueryVariablesHetArchief: GetContentPageLabelsQueryVariablesHetArchief;
+		| GetContentPageLabelByIdQueryVariablesHetArchief
+	GetContentPageLabelsQueryVariablesAvo: GetContentPageLabelsQueryVariablesAvo
+	GetContentPageLabelsQueryVariablesHetArchief: GetContentPageLabelsQueryVariablesHetArchief
 	GetContentPageLabelsQueryVariables:
 		| GetContentPageLabelsQueryVariablesAvo
-		| GetContentPageLabelsQueryVariablesHetArchief;
-	InsertContentPageLabelMutationVariablesAvo: InsertContentPageLabelMutationVariablesAvo;
-	InsertContentPageLabelMutationVariablesHetArchief: InsertContentPageLabelMutationVariablesHetArchief;
+		| GetContentPageLabelsQueryVariablesHetArchief
+	InsertContentPageLabelMutationVariablesAvo: InsertContentPageLabelMutationVariablesAvo
+	InsertContentPageLabelMutationVariablesHetArchief: InsertContentPageLabelMutationVariablesHetArchief
 	InsertContentPageLabelMutationVariables:
 		| InsertContentPageLabelMutationVariablesAvo
-		| InsertContentPageLabelMutationVariablesHetArchief;
-	UpdateContentPageLabelMutationVariablesAvo: UpdateContentPageLabelMutationVariablesAvo;
-	UpdateContentPageLabelMutationVariablesHetArchief: UpdateContentPageLabelMutationVariablesHetArchief;
+		| InsertContentPageLabelMutationVariablesHetArchief
+	UpdateContentPageLabelMutationVariablesAvo: UpdateContentPageLabelMutationVariablesAvo
+	UpdateContentPageLabelMutationVariablesHetArchief: UpdateContentPageLabelMutationVariablesHetArchief
 	UpdateContentPageLabelMutationVariables:
 		| UpdateContentPageLabelMutationVariablesAvo
-		| UpdateContentPageLabelMutationVariablesHetArchief;
-	GetContentPageLabelsByTypeAndIdsQueryAvo: GetContentPageLabelsByTypeAndIdsQueryAvo;
-	GetContentPageLabelsByTypeAndIdsQueryHetArchief: GetContentPageLabelsByTypeAndIdsQueryHetArchief;
+		| UpdateContentPageLabelMutationVariablesHetArchief
+	GetContentPageLabelsByTypeAndIdsQueryAvo: GetContentPageLabelsByTypeAndIdsQueryAvo
+	GetContentPageLabelsByTypeAndIdsQueryHetArchief: GetContentPageLabelsByTypeAndIdsQueryHetArchief
 	GetContentPageLabelsByTypeAndIdsQuery:
 		| GetContentPageLabelsByTypeAndIdsQueryAvo
-		| GetContentPageLabelsByTypeAndIdsQueryHetArchief;
-	GetContentPageLabelsByTypeAndLabelsQueryAvo: GetContentPageLabelsByTypeAndLabelsQueryAvo;
-	GetContentPageLabelsByTypeAndLabelsQueryHetArchief: GetContentPageLabelsByTypeAndLabelsQueryHetArchief;
+		| GetContentPageLabelsByTypeAndIdsQueryHetArchief
+	GetContentPageLabelsByTypeAndLabelsQueryAvo: GetContentPageLabelsByTypeAndLabelsQueryAvo
+	GetContentPageLabelsByTypeAndLabelsQueryHetArchief: GetContentPageLabelsByTypeAndLabelsQueryHetArchief
 	GetContentPageLabelsByTypeAndLabelsQuery:
 		| GetContentPageLabelsByTypeAndLabelsQueryAvo
-		| GetContentPageLabelsByTypeAndLabelsQueryHetArchief;
-	GetContentPageLabelsByTypeAndIdsQueryVariablesAvo: GetContentPageLabelsByTypeAndIdsQueryVariablesAvo;
-	GetContentPageLabelsByTypeAndIdsQueryVariablesHetArchief: GetContentPageLabelsByTypeAndIdsQueryVariablesHetArchief;
+		| GetContentPageLabelsByTypeAndLabelsQueryHetArchief
+	GetContentPageLabelsByTypeAndIdsQueryVariablesAvo: GetContentPageLabelsByTypeAndIdsQueryVariablesAvo
+	GetContentPageLabelsByTypeAndIdsQueryVariablesHetArchief: GetContentPageLabelsByTypeAndIdsQueryVariablesHetArchief
 	GetContentPageLabelsByTypeAndIdsQueryVariables:
 		| GetContentPageLabelsByTypeAndIdsQueryVariablesAvo
-		| GetContentPageLabelsByTypeAndIdsQueryVariablesHetArchief;
-	GetContentPageLabelsByTypeAndLabelsQueryVariablesAvo: GetContentPageLabelsByTypeAndLabelsQueryVariablesAvo;
-	GetContentPageLabelsByTypeAndLabelsQueryVariablesHetArchief: GetContentPageLabelsByTypeAndLabelsQueryVariablesHetArchief;
+		| GetContentPageLabelsByTypeAndIdsQueryVariablesHetArchief
+	GetContentPageLabelsByTypeAndLabelsQueryVariablesAvo: GetContentPageLabelsByTypeAndLabelsQueryVariablesAvo
+	GetContentPageLabelsByTypeAndLabelsQueryVariablesHetArchief: GetContentPageLabelsByTypeAndLabelsQueryVariablesHetArchief
 	GetContentPageLabelsByTypeAndLabelsQueryVariables:
 		| GetContentPageLabelsByTypeAndLabelsQueryVariablesAvo
-		| GetContentPageLabelsByTypeAndLabelsQueryVariablesHetArchief;
-};
+		| GetContentPageLabelsByTypeAndLabelsQueryVariablesHetArchief
+}
 
 type ContentPageLabelQueries = {
-	DeleteContentPageLabelByIdDocument: TypedDocumentNode<any, any>;
-	GetContentPageLabelByIdDocument: TypedDocumentNode<any, any>;
-	GetContentPageLabelsDocument: TypedDocumentNode<any, any>;
-	InsertContentPageLabelDocument: TypedDocumentNode<any, any>;
-	UpdateContentPageLabelDocument: TypedDocumentNode<any, any>;
-	GetContentPageLabelsByTypeAndIdsDocument: TypedDocumentNode<any, any>;
-	GetContentPageLabelsByTypeAndLabelsDocument: TypedDocumentNode<any, any>;
-};
+	DeleteContentPageLabelByIdDocument: TypedDocumentNode<any, any>
+	GetContentPageLabelByIdDocument: TypedDocumentNode<any, any>
+	GetContentPageLabelsDocument: TypedDocumentNode<any, any>
+	InsertContentPageLabelDocument: TypedDocumentNode<any, any>
+	UpdateContentPageLabelDocument: TypedDocumentNode<any, any>
+	GetContentPageLabelsByTypeAndIdsDocument: TypedDocumentNode<any, any>
+	GetContentPageLabelsByTypeAndLabelsDocument: TypedDocumentNode<any, any>
+}
 
 export const CONTENT_PAGE_LABEL_QUERIES: Record<DatabaseType, ContentPageLabelQueries> = {
 	[DatabaseType.avo]: {
@@ -150,4 +150,4 @@ export const CONTENT_PAGE_LABEL_QUERIES: Record<DatabaseType, ContentPageLabelQu
 		GetContentPageLabelsByTypeAndLabelsDocument:
 			GetContentPageLabelsByTypeAndLabelsDocumentHetArchief,
 	},
-};
+}

@@ -1,9 +1,9 @@
-import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { Type } from 'class-transformer';
-import { IsArray, IsEnum, IsNumber, IsOptional, IsString } from 'class-validator';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger'
+import { Type } from 'class-transformer'
+import { IsArray, IsEnum, IsNumber, IsOptional, IsString } from 'class-validator'
 
-import { Locale } from '../../translations';
-import { ContentPickerTypesEnum, LinkTarget, NavigationItem } from '../navigations.types';
+import { Locale } from '../../translations'
+import { ContentPickerTypesEnum, LinkTarget, NavigationItem } from '../navigations.types'
 
 export class CreateNavigationDto implements Partial<NavigationItem> {
 	@IsString()
@@ -12,7 +12,7 @@ export class CreateNavigationDto implements Partial<NavigationItem> {
 		type: String,
 		description: 'The label for this navigation item',
 	})
-	label?: string;
+	label?: string
 
 	@IsString()
 	@ApiProperty({
@@ -20,7 +20,7 @@ export class CreateNavigationDto implements Partial<NavigationItem> {
 		description: 'The icon for this navigation item',
 		default: '',
 	})
-	iconName: string;
+	iconName: string
 
 	@IsString()
 	@IsOptional()
@@ -28,7 +28,7 @@ export class CreateNavigationDto implements Partial<NavigationItem> {
 		type: String,
 		description: 'The description for this navigation item',
 	})
-	description?: string;
+	description?: string
 
 	@IsArray()
 	@IsOptional()
@@ -37,7 +37,7 @@ export class CreateNavigationDto implements Partial<NavigationItem> {
 		type: String,
 		description: 'The user group ids allowed to see this navigation item',
 	})
-	userGroupIds?: Array<string>;
+	userGroupIds?: Array<string>
 
 	@ApiProperty({
 		required: false,
@@ -50,7 +50,7 @@ export class CreateNavigationDto implements Partial<NavigationItem> {
 	@IsEnum(ContentPickerTypesEnum, {
 		message: `content_type must be one of: ${Object.values(ContentPickerTypesEnum).join(', ')}`,
 	})
-	contentType?: ContentPickerTypesEnum;
+	contentType?: ContentPickerTypesEnum
 
 	@IsString()
 	@IsOptional()
@@ -58,7 +58,7 @@ export class CreateNavigationDto implements Partial<NavigationItem> {
 		type: String,
 		description: 'The content path for this navigation item, e.g. /help',
 	})
-	contentPath?: string;
+	contentPath?: string
 
 	@IsString()
 	@IsOptional()
@@ -68,7 +68,7 @@ export class CreateNavigationDto implements Partial<NavigationItem> {
 		enum: Object.values(LinkTarget),
 		default: '_self',
 	})
-	linkTarget?: LinkTarget;
+	linkTarget?: LinkTarget
 
 	@IsNumber()
 	@Type(() => Number)
@@ -76,14 +76,14 @@ export class CreateNavigationDto implements Partial<NavigationItem> {
 		type: Number,
 		description: 'The position of this navigation item. Items are sorted by position.',
 	})
-	position: number;
+	position: number
 
 	@IsString()
 	@ApiProperty({
 		type: String,
 		description: 'The placement for this menu item: e.g. footer-links',
 	})
-	placement: string;
+	placement: string
 
 	@IsString()
 	@ApiProperty({
@@ -91,7 +91,7 @@ export class CreateNavigationDto implements Partial<NavigationItem> {
 		enum: Locale,
 		description: 'The site language for which this navigation item should be shown',
 	})
-	language: Locale;
+	language: Locale
 
 	@IsString()
 	@IsOptional()
@@ -99,7 +99,7 @@ export class CreateNavigationDto implements Partial<NavigationItem> {
 		type: String,
 		description: 'The tooltip shown for this menu item',
 	})
-	tooltip?: string;
+	tooltip?: string
 }
 
 export class UpdateNavigationDto implements Partial<NavigationItem> {
@@ -109,7 +109,7 @@ export class UpdateNavigationDto implements Partial<NavigationItem> {
 		type: String,
 		description: 'The label for this navigation item',
 	})
-	label?: string;
+	label?: string
 
 	@IsString()
 	@IsOptional()
@@ -118,7 +118,7 @@ export class UpdateNavigationDto implements Partial<NavigationItem> {
 		description: 'The icon for this navigation item',
 		default: '',
 	})
-	iconName: string;
+	iconName: string
 
 	@IsString()
 	@IsOptional()
@@ -126,7 +126,7 @@ export class UpdateNavigationDto implements Partial<NavigationItem> {
 		type: String,
 		description: 'The description for this navigation item',
 	})
-	description?: string;
+	description?: string
 
 	@IsArray()
 	@IsOptional()
@@ -135,7 +135,7 @@ export class UpdateNavigationDto implements Partial<NavigationItem> {
 		type: String,
 		description: 'The user group ids allowed to see this navigation item',
 	})
-	userGroupIds?: Array<string>;
+	userGroupIds?: Array<string>
 
 	@ApiProperty({
 		required: false,
@@ -148,7 +148,7 @@ export class UpdateNavigationDto implements Partial<NavigationItem> {
 	@IsEnum(ContentPickerTypesEnum, {
 		message: `content_type must be one of: ${Object.values(ContentPickerTypesEnum).join(', ')}`,
 	})
-	contentType?: ContentPickerTypesEnum;
+	contentType?: ContentPickerTypesEnum
 
 	@IsString()
 	@IsOptional()
@@ -156,7 +156,7 @@ export class UpdateNavigationDto implements Partial<NavigationItem> {
 		type: String,
 		description: 'The content path for this navigation item, e.g. /help',
 	})
-	contentPath?: string;
+	contentPath?: string
 
 	@IsString()
 	@IsOptional()
@@ -166,7 +166,7 @@ export class UpdateNavigationDto implements Partial<NavigationItem> {
 		default: '_self',
 		enum: Object.values(LinkTarget),
 	})
-	linkTarget?: LinkTarget;
+	linkTarget?: LinkTarget
 
 	@IsNumber()
 	@Type(() => Number)
@@ -174,14 +174,14 @@ export class UpdateNavigationDto implements Partial<NavigationItem> {
 		type: Number,
 		description: 'The position of this navigation item. Items are sorted by position.',
 	})
-	position: number;
+	position: number
 
 	@IsString()
 	@ApiProperty({
 		type: String,
 		description: 'The placement for this menu item: e.g. footer-links',
 	})
-	placement: string;
+	placement: string
 
 	@IsString()
 	@ApiProperty({
@@ -189,7 +189,7 @@ export class UpdateNavigationDto implements Partial<NavigationItem> {
 		enum: Locale,
 		description: 'The site language for which this navigation item should be shown',
 	})
-	language: Locale;
+	language: Locale
 
 	@IsString()
 	@IsOptional()
@@ -197,5 +197,5 @@ export class UpdateNavigationDto implements Partial<NavigationItem> {
 		type: String,
 		description: 'The tooltip shown for this menu item',
 	})
-	tooltip?: string;
+	tooltip?: string
 }
