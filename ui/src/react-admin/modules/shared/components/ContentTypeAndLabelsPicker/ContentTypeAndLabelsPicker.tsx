@@ -4,14 +4,14 @@ import type { Avo } from '@viaa/avo2-types';
 import { compact, isString } from 'es-toolkit';
 import type { FunctionComponent } from 'react';
 import React, { useEffect, useState } from 'react';
-import type { LabelObj } from '~content-blocks/BlockPageOverview/BlockPageOverview.types.js';
-import { ToastType } from '~core/config/config.types.js';
-import type { ContentPageLabel } from '~modules/content-page/types/content-pages.types.js';
-import { showToast } from '~shared/helpers/show-toast.js';
-import { tText } from '~shared/helpers/translation-functions.js';
-import { useContentTypes } from '../../../content-page/hooks/useContentTypes.js';
-import { ContentPageService } from '../../../content-page/services/content-page.service.js';
-import { CustomError } from '../../helpers/custom-error.js';
+import type { LabelObj } from '~content-blocks/BlockPageOverview/BlockPageOverview.types';
+import { ToastType } from '~core/config/config.types';
+import type { ContentPageLabel } from '~modules/content-page/types/content-pages.types';
+import { showToast } from '~shared/helpers/show-toast';
+import { tText } from '~shared/helpers/translation-functions';
+import { useContentTypes } from '../../../content-page/hooks/useContentTypes';
+import { ContentPageService } from '../../../content-page/services/content-page.service';
+import { CustomError } from '../../helpers/custom-error';
 
 export interface ContentTypeAndLabelsValue {
 	selectedContentType: Avo.ContentPage.Type;

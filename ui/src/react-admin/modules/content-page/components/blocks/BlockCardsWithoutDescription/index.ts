@@ -1,2 +1,2 @@
-export * from './BlockCardsWithoutDescription.editorconfig.js';
-export * from './BlockCardsWithoutDescription.js';
+export * from './BlockCardsWithoutDescription.editorconfig';
+export * from './BlockCardsWithoutDescription';

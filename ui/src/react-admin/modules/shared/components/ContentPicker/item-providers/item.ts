@@ -1,9 +1,9 @@
 import { Avo } from '@viaa/avo2-types';
 import memoize from 'memoizee';
-import { ItemsService } from '~modules/item/items.service.js';
-import { MEMOIZEE_OPTIONS } from '~shared/consts/memoizee-options.js';
-import type { PickerItem } from '~shared/types/content-picker.js';
-import { parsePickerItem } from '../helpers/parse-picker.js';
+import { ItemsService } from '~modules/item/items.service';
+import { MEMOIZEE_OPTIONS } from '~shared/consts/memoizee-options';
+import type { PickerItem } from '~shared/types/content-picker';
+import { parsePickerItem } from '../helpers/parse-picker';
 
 // Fetch content items from GQL
 export const retrieveItems = memoize(

@@ -1,12 +1,12 @@
 import type { FC, ReactNode } from 'react';
 import { useMatch } from 'react-router';
 import { Route } from 'react-router-dom';
-import { AdminConfigManager } from '~core/config/config.class.js';
-import { UserDetail } from '~modules/user/views/UserDetail.js';
-import { UserOverview } from '~modules/user/views/UserOverview.js';
-import { tText } from '~shared/helpers/translation-functions.js';
-import { AdminLayout } from '~shared/layouts/AdminLayout/AdminLayout.js';
-import { mockCommonUser } from '../../mock-common-user.js';
+import { AdminConfigManager } from '~core/config/config.class';
+import { UserDetail } from '~modules/user/views/UserDetail';
+import { UserOverview } from '~modules/user/views/UserOverview';
+import { tText } from '~shared/helpers/translation-functions';
+import { AdminLayout } from '~shared/layouts/AdminLayout/AdminLayout';
+import { mockCommonUser } from '../../mock-common-user';
 
 const UserOverviewPage: FC = () => {
 	return (

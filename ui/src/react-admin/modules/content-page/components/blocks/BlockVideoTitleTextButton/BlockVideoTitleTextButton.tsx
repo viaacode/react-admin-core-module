@@ -11,8 +11,8 @@ import {
 } from '@viaa/avo2-components';
 import type { FunctionComponent } from 'react';
 import React from 'react';
-import Html from '~shared/components/Html/Html.js';
-import { SanitizePreset } from '~shared/helpers/sanitize/presets/index.js';
+import Html from '~shared/components/Html/Html';
+import { SanitizePreset } from '~shared/helpers/sanitize/presets/index';
 
 export interface BlockVideoTitleTextButtonProps extends DefaultProps {
 	flowPlayerProps: FlowPlayerProps;

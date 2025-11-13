@@ -1,15 +1,15 @@
 import type { IPagination } from '@studiohyperdrive/pagination';
 import { Avo } from '@viaa/avo2-types';
 import { stringifyUrl } from 'query-string';
-import { CustomError } from '~modules/shared/helpers/custom-error.js';
-import { fetchWithLogoutJson } from '~modules/shared/helpers/fetch-with-logout.js';
-import type { Locale } from '~modules/translations/translations.core.types.js';
-import { getAdminCoreApiUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config.js';
+import { CustomError } from '~modules/shared/helpers/custom-error';
+import { fetchWithLogoutJson } from '~modules/shared/helpers/fetch-with-logout';
+import type { Locale } from '~modules/translations/translations.core.types';
+import { getAdminCoreApiUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config';
 import type {
 	MaintenanceAlert,
 	MaintenanceAlertDto,
 	MaintenanceAlertsOverviewTableCol,
-} from './maintenance-alerts.types.js';
+} from './maintenance-alerts.types';
 
 export class MaintenanceAlertsService {
 	private static getBaseUrl(): string {

@@ -1,20 +1,20 @@
 import type { MultiRangeProps } from '@viaa/avo2-components';
-import type { GridItem } from '~content-blocks/BlockImageGrid/BlockImageGrid.types.js';
-import type { BlockLogoGridWrapperProps } from '~content-blocks/BlockImageGrid/BlockLogoGrid.wrapper.js';
-import { GET_ALIGN_OPTIONS } from '~modules/content-page/const/get-align-options.js';
-import { GET_FILL_OPTIONS } from '~modules/content-page/const/get-fill-options.js';
-import { GET_IMAGE_GRID_FORMAT_OPTIONS } from '~modules/content-page/const/get-image-grid-format-options.js';
+import type { GridItem } from '~content-blocks/BlockImageGrid/BlockImageGrid.types';
+import type { BlockLogoGridWrapperProps } from '~content-blocks/BlockImageGrid/BlockLogoGrid.wrapper';
+import { GET_ALIGN_OPTIONS } from '~modules/content-page/const/get-align-options';
+import { GET_FILL_OPTIONS } from '~modules/content-page/const/get-fill-options';
+import { GET_IMAGE_GRID_FORMAT_OPTIONS } from '~modules/content-page/const/get-image-grid-format-options';
 
-import type { FileUploadProps } from '~shared/components/FileUpload/FileUpload.js';
-import { tText } from '~shared/helpers/translation-functions.js';
+import type { FileUploadProps } from '~shared/components/FileUpload/FileUpload';
+import { tText } from '~shared/helpers/translation-functions';
 import type {
 	ContentBlockConfig,
 	DefaultContentBlockState,
 	ImageGridBlockComponentStateFields,
-} from '../../../types/content-block.types.js';
-import { ContentBlockEditor, ContentBlockType } from '../../../types/content-block.types.js';
+} from '../../../types/content-block.types';
+import { ContentBlockEditor, ContentBlockType } from '../../../types/content-block.types';
 
-import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, FILE_FIELD, TEXT_FIELD } from '../defaults.js';
+import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, FILE_FIELD, TEXT_FIELD } from '../defaults';
 
 export const INITIAL_LOGO_GRID_COMPONENTS_STATE = (): ImageGridBlockComponentStateFields[] => [
 	{

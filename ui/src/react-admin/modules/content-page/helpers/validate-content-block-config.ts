@@ -1,11 +1,11 @@
 import { isFunction } from 'es-toolkit';
-import { validateContentBlockField } from '~modules/shared/helpers/validation.js';
+import { validateContentBlockField } from '~modules/shared/helpers/validation';
 import type {
 	ContentBlockComponentState,
 	ContentBlockConfig,
 	ContentBlockErrors,
 	ContentBlockField,
-} from '../types/content-block.types.js';
+} from '../types/content-block.types';
 
 export function validateContentBlockConfig(
 	errors: ContentBlockErrors,

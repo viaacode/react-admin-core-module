@@ -1,5 +1,5 @@
-import { AdminConfigManager } from '~core/config/config.class.js';
-import type { NavigationItemInfo } from './shared/types/index.js';
+import { AdminConfigManager } from '~core/config/config.class';
+import type { NavigationItemInfo } from './shared/types/index';
 
 export const GET_NAV_ITEMS = async (): Promise<NavigationItemInfo[]> => {
 	const i18n = AdminConfigManager.getConfig().services.i18n;

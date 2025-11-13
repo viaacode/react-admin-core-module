@@ -1,20 +1,20 @@
-import type { GridItem } from '~content-blocks/BlockImageGrid/BlockImageGrid.types.js';
-import type { BlockUspGridWrapperProps } from '~content-blocks/BlockImageGrid/BlockUspGrid.wrapper.js';
+import type { GridItem } from '~content-blocks/BlockImageGrid/BlockImageGrid.types';
+import type { BlockUspGridWrapperProps } from '~content-blocks/BlockImageGrid/BlockUspGrid.wrapper';
 
-import { AdminConfigManager } from '~core/config/config.class.js';
-import { GET_ALIGN_OPTIONS } from '~modules/content-page/const/get-align-options.js';
+import { AdminConfigManager } from '~core/config/config.class';
+import { GET_ALIGN_OPTIONS } from '~modules/content-page/const/get-align-options';
 
-import type { FileUploadProps } from '~shared/components/FileUpload/FileUpload.js';
-import { tText } from '~shared/helpers/translation-functions.js';
+import type { FileUploadProps } from '~shared/components/FileUpload/FileUpload';
+import { tText } from '~shared/helpers/translation-functions';
 
 import type {
 	ContentBlockConfig,
 	DefaultContentBlockState,
 	ImageGridBlockComponentStateFields,
-} from '../../../types/content-block.types.js';
-import { ContentBlockEditor, ContentBlockType } from '../../../types/content-block.types.js';
+} from '../../../types/content-block.types';
+import { ContentBlockEditor, ContentBlockType } from '../../../types/content-block.types';
 
-import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, FILE_FIELD, TEXT_FIELD } from '../defaults.js';
+import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, FILE_FIELD, TEXT_FIELD } from '../defaults';
 
 export const INITIAL_USP_GRID_COMPONENTS_STATE = (): ImageGridBlockComponentStateFields[] => [
 	{

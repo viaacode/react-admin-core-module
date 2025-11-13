@@ -1,7 +1,7 @@
 import type { FunctionComponent } from 'react';
 import React, { memo } from 'react';
 
-import { createKey } from '~shared/helpers/create-key.js';
+import { createKey } from '~shared/helpers/create-key';
 import type {
 	ContentBlockComponentState,
 	ContentBlockField,
@@ -9,8 +9,8 @@ import type {
 	ContentBlockMeta,
 	ContentBlockState,
 	ContentBlockStateType,
-} from '../../types/content-block.types.js';
-import { FieldGenerator } from '../FieldGenerator/FieldGenerator.js';
+} from '../../types/content-block.types';
+import { FieldGenerator } from '../FieldGenerator/FieldGenerator';
 
 interface ContentBlockFieldProps {
 	block: ContentBlockMeta; // Block metadata

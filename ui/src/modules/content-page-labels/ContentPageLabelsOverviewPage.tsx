@@ -1,4 +1,4 @@
 import type { FC } from 'react';
-import { ContentPageLabelOverview } from '~modules/content-page-labels/views/ContentPageLabelOverview.js';
+import { ContentPageLabelOverview } from '~modules/content-page-labels/views/ContentPageLabelOverview';
 
 export const ContentPageLabelsOverviewPage: FC = () => <ContentPageLabelOverview />;

@@ -5,13 +5,13 @@ import { map } from 'es-toolkit/compat';
 import { stringify } from 'query-string';
 import type { FunctionComponent, ReactElement, ReactNode } from 'react';
 import React from 'react';
-import { AdminConfigManager } from '~core/config/index.js';
-import { getAdminCoreApiUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config.js';
-import { isServerSideRendering } from '~shared/helpers/is-server-side-rendering.js';
-import { buildLink } from '~shared/helpers/link.js';
-import { insideIframe } from '../../helpers/inside-iframe.js';
-import { Link } from '../Link/Link.js';
-import { LinkTarget } from './SmartLink.types.js';
+import { AdminConfigManager } from '~core/config/index';
+import { getAdminCoreApiUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config';
+import { isServerSideRendering } from '~shared/helpers/is-server-side-rendering';
+import { buildLink } from '~shared/helpers/link';
+import { insideIframe } from '../../helpers/inside-iframe';
+import { Link } from '../Link/Link';
+import { LinkTarget } from './SmartLink.types';
 
 export interface SmartLinkProps {
 	action?: ButtonAction | null;

@@ -7,14 +7,14 @@ import type {
 	Color,
 	HeadingTypeOption,
 	SimpleAlignOption,
-} from '~modules/content-page/types/content-block.types.js';
-import { generateSmartLink } from '~modules/shared/components/SmartLink/SmartLink.js';
-import type { DefaultComponentProps } from '~modules/shared/types/components.js';
-import { Icon } from '~shared/components/Icon/Icon.js';
-import { BlockHeading } from '../BlockHeading/BlockHeading.js';
+} from '~modules/content-page/types/content-block.types';
+import { generateSmartLink } from '~modules/shared/components/SmartLink/SmartLink';
+import type { DefaultComponentProps } from '~modules/shared/types/components';
+import { Icon } from '~shared/components/Icon/Icon';
+import { BlockHeading } from '../BlockHeading/BlockHeading';
 import './BlockHetArchiefImageTextBackground.scss';
-import type { ContentPageWidth } from '~modules/content-page/types/content-pages.types.js';
-import { CONTENT_PAGE_WIDTH_TO_REM } from '~modules/content-page/types/content-pages.types.js';
+import type { ContentPageWidth } from '~modules/content-page/types/content-pages.types';
+import { CONTENT_PAGE_WIDTH_TO_REM } from '~modules/content-page/types/content-pages.types';
 
 export interface BlockHetArchiefImageTextBackgroundProps extends DefaultComponentProps {
 	heading: string;

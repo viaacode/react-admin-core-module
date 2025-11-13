@@ -64,10 +64,10 @@
   },
   "peerDependencies": {
     "@hookform/resolvers": "2.9.11",
-    "@meemoo/react-components": "5.0.4",
+    "@meemoo/react-components": "5.0.5",
     "@studiohyperdrive/pagination": "1.0.0",
     "@tanstack/react-query": "5.90.7",
-    "@viaa/avo2-components": "6.0.5",
+    "@viaa/avo2-components": "6.0.6",
     "@viaa/avo2-types": "4.0.1",
     "autosize": "6.0.1",
     "caniuse-lite": "^1.0.30001712",
@@ -99,7 +99,8 @@
     "react-table": "7.7.0",
     "ts-retry-promise": "^0.8.1",
     "use-query-params": "2.2.1",
-    "yup": "1.4.0"
+    "yup": "1.4.0",
+    "es-toolkit": "^1.41.0"
   },
   "devDependencies": {
     "@babel/preset-typescript": "7.22.15",
@@ -186,8 +187,6 @@
     ]
   },
   "dependencies": {
-    "@uidotdev/usehooks": "^2.4.1",
-    "es-toolkit": "^1.41.0",
     "memoizee": "^0.4.17"
   }
 }

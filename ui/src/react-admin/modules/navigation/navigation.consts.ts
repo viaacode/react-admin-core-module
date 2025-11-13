@@ -1,8 +1,8 @@
 import type { TableColumn } from '@viaa/avo2-components';
 import type { ReactNode } from 'react';
-import type { NavigationItem } from '~modules/navigation/navigation.types.js';
-import { LinkTarget } from '~shared/components/SmartLink/SmartLink.types.js';
-import { tText } from '~shared/helpers/translation-functions.js';
+import type { NavigationItem } from '~modules/navigation/navigation.types';
+import { LinkTarget } from '~shared/components/SmartLink/SmartLink.types';
+import { tText } from '~shared/helpers/translation-functions';
 
 export const GET_NAVIGATION_OVERVIEW_TABLE_COLS: () => TableColumn[] = () => [
 	{

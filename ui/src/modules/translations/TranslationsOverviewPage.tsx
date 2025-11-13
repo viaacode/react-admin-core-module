@@ -1,6 +1,6 @@
 import { Button, Modal } from '@meemoo/react-components';
 import type { FC, ReactNode } from 'react';
-import { TranslationsOverview } from '~modules/translations/views/TranslationsOverview.js';
+import { TranslationsOverview } from '~modules/translations/views/TranslationsOverview';
 
 export const TranslationsOverviewPage: FC = () => {
 	const renderPopup = ({

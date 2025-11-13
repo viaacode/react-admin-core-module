@@ -1,8 +1,8 @@
 import type { UseQueryOptions, UseQueryResult } from '@tanstack/react-query';
 import { useQuery } from '@tanstack/react-query';
 import type { Avo } from '@viaa/avo2-types';
-import { UserService } from '~modules/user/user.service.js';
-import { QUERY_KEYS } from '~shared/types/index.js';
+import { UserService } from '~modules/user/user.service';
+import { QUERY_KEYS } from '~shared/types/index';
 
 export const useGetProfileById = (
 	id: string | undefined | null,

@@ -2,7 +2,7 @@ import { FormGroup, Spacer } from '@viaa/avo2-components';
 import type { FunctionComponent } from 'react';
 import React, { memo } from 'react';
 
-import { createKey } from '~shared/helpers/create-key.js';
+import { createKey } from '~shared/helpers/create-key';
 import type {
 	ContentBlockBlockConfig,
 	ContentBlockComponentState,
@@ -11,8 +11,8 @@ import type {
 	ContentBlockField,
 	ContentBlockState,
 	ContentBlockStateType,
-} from '../../types/content-block.types.js';
-import ContentBlockFields from '../ContentBlockFields/ContentBlockFields.js';
+} from '../../types/content-block.types';
+import ContentBlockFields from '../ContentBlockFields/ContentBlockFields';
 
 interface ContentBlockFormGroupProps {
 	config: ContentBlockConfig;

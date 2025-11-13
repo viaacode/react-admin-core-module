@@ -1,2 +1,2 @@
-export * from './core/config/index.js';
-export * from './modules/index.js';
+export * from './core/config/index';
+export * from './modules/index';

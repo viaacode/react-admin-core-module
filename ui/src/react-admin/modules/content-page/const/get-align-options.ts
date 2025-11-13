@@ -1,8 +1,8 @@
 import type {
 	AlignOption,
 	BackgroundAlignOption,
-} from '~modules/content-page/types/content-block.types.js';
-import { tText } from '~shared/helpers/translation-functions.js';
+} from '~modules/content-page/types/content-block.types';
+import { tText } from '~shared/helpers/translation-functions';
 
 export const GET_ALIGN_OPTIONS: () => { label: string; value: AlignOption }[] = () => [
 	{

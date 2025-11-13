@@ -1,10 +1,10 @@
 import { Avo } from '@viaa/avo2-types';
 import memoize from 'memoizee';
-import { UserService } from '~modules/user/user.service.js';
-import { MEMOIZEE_OPTIONS } from '~shared/consts/memoizee-options.js';
-import { CustomError } from '~shared/helpers/custom-error.js';
-import type { PickerItem } from '~shared/types/content-picker.js';
-import { parsePickerItem } from '../helpers/parse-picker.js';
+import { UserService } from '~modules/user/user.service';
+import { MEMOIZEE_OPTIONS } from '~shared/consts/memoizee-options';
+import { CustomError } from '~shared/helpers/custom-error';
+import type { PickerItem } from '~shared/types/content-picker';
+import { parsePickerItem } from '../helpers/parse-picker';
 
 // Fetch profiles from GQL
 export const retrieveProfiles = memoize(

@@ -7,13 +7,13 @@ import type { Avo } from '@viaa/avo2-types';
 import type { FunctionComponent } from 'react';
 import React from 'react';
 
-import { ToastType } from '~core/config/config.types.js';
-import { showToast } from '~shared/helpers/show-toast.js';
-import { tText } from '~shared/helpers/translation-functions.js';
-import { AssetsService } from '~shared/services/assets-service/assets.service.js';
+import { ToastType } from '~core/config/config.types';
+import { showToast } from '~shared/helpers/show-toast';
+import { tText } from '~shared/helpers/translation-functions';
+import { AssetsService } from '~shared/services/assets-service/assets.service';
 
-import { RICH_TEXT_EDITOR_OPTIONS_DEFAULT } from '../../consts/rich-text-editor.consts.js';
-import { CustomError } from '../../helpers/custom-error.js';
+import { RICH_TEXT_EDITOR_OPTIONS_DEFAULT } from '../../consts/rich-text-editor.consts';
+import { CustomError } from '../../helpers/custom-error';
 
 import './RichTextEditorWithInternalStateWrapper.scss';
 

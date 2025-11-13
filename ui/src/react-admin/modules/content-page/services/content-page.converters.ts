@@ -1,24 +1,24 @@
 import { compact, isFunction, isPlainObject, sortBy } from 'es-toolkit';
 import { isEmpty } from 'es-toolkit/compat';
-import { ToastType } from '~core/config/config.types.js';
-import { CONTENT_BLOCK_CONFIG_MAP } from '~modules/content-page/const/content-block-config-map.js';
-import { TEMP_BLOCK_ID_PREFIX } from '~modules/content-page/const/content-page.consts.js';
-import { RichEditorStateKey } from '~modules/content-page/const/rich-text-editor.consts.js';
+import { ToastType } from '~core/config/config.types';
+import { CONTENT_BLOCK_CONFIG_MAP } from '~modules/content-page/const/content-block-config-map';
+import { TEMP_BLOCK_ID_PREFIX } from '~modules/content-page/const/content-page.consts';
+import { RichEditorStateKey } from '~modules/content-page/const/rich-text-editor.consts';
 import type {
 	ContentBlockConfig,
 	ContentBlockType,
 	DbContentBlock,
-} from '~modules/content-page/types/content-block.types.js';
+} from '~modules/content-page/types/content-block.types';
 import type {
 	ContentPageInfo,
 	DbContentPage,
-} from '~modules/content-page/types/content-pages.types.js';
-import { CustomError } from '~shared/helpers/custom-error.js';
-import { mapDeep } from '~shared/helpers/map-deep/map-deep.js';
-import { sanitizeHtml } from '~shared/helpers/sanitize/index.js';
-import { SanitizePreset } from '~shared/helpers/sanitize/presets/index.js';
-import { showToast } from '~shared/helpers/show-toast.js';
-import { tText } from '~shared/helpers/translation-functions.js';
+} from '~modules/content-page/types/content-pages.types';
+import { CustomError } from '~shared/helpers/custom-error';
+import { mapDeep } from '~shared/helpers/map-deep/map-deep';
+import { sanitizeHtml } from '~shared/helpers/sanitize/index';
+import { SanitizePreset } from '~shared/helpers/sanitize/presets/index';
+import { showToast } from '~shared/helpers/show-toast';
+import { tText } from '~shared/helpers/translation-functions';
 
 export function getContentPageDescriptionHtml(
 	contentPageInfo: Partial<ContentPageInfo> | undefined,

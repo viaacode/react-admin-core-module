@@ -1,5 +1,5 @@
 import type { SelectOption } from '@viaa/avo2-components';
-import { tText } from '~shared/helpers/translation-functions.js';
+import { tText } from '~shared/helpers/translation-functions';
 
 export type PageOverviewOrderOptions =
 	| 'published_at__asc'

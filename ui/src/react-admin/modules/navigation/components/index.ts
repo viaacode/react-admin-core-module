@@ -1,1 +1,1 @@
-export { NavigationEditForm } from './NavigationEditForm/NavigationEditForm.js';
+export { NavigationEditForm } from './NavigationEditForm/NavigationEditForm';

@@ -1,8 +1,8 @@
 import clsx from 'clsx';
 import type { FunctionComponent, ReactNode } from 'react';
 import React from 'react';
-import { tHtml } from '~shared/helpers/translation-functions.js';
-import { Link } from '../Link/Link.js';
+import { tHtml } from '~shared/helpers/translation-functions';
+import { Link } from '../Link/Link';
 
 import './Sidebar.scss';
 

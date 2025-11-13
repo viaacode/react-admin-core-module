@@ -1,5 +1,4 @@
-import * as path from 'path';
-import { resolve } from 'path';
+import { resolve } from 'node:path';
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import viteTsconfigPaths from 'vite-tsconfig-paths';
@@ -9,9 +8,7 @@ import cssInjectedByJsPlugin from 'vite-plugin-css-injected-by-js';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-	plugins: [react(), viteTsconfigPaths(), dts({
-
-	}), externalizeDeps(), cssInjectedByJsPlugin({
+	plugins: [react(), viteTsconfigPaths(), dts(), externalizeDeps(), cssInjectedByJsPlugin({
 		relativeCSSInjection: true
 	})],
 	server: {
@@ -25,19 +22,11 @@ export default defineConfig({
 				// Contains all the logic to render content pages and set the admin-core config
 				'src/client': resolve(__dirname, 'src/client.ts'),
 			},
-			// name: '@meemoo/admin-core-ui',
-			// fileName: (_, entryName) => {
-			// 	if (entryName === 'src/index') {
-			// 		return 'index.mjs';
-			// 	}
-			// 	return `${entryName}.mjs`;
-			// },
 			formats: ['es'],
 		},
 		outDir: 'dist',
 		rollupOptions: {
 			output: {
-				// entryFileNames: '[name].mjs',
 				preserveModules: true,
 			},
 		},
@@ -55,15 +44,15 @@ export default defineConfig({
 	},
 	resolve: {
 		alias: {
-			'@': path.resolve(__dirname, 'public'),
-			'~modules': path.resolve(__dirname, './src/react-admin/modules'),
-			'~shared': path.resolve(__dirname, './src/react-admin/modules/shared'),
-			'~content-blocks': path.resolve(
+			'@': resolve(__dirname, 'public'),
+			'~modules': resolve(__dirname, './src/react-admin/modules'),
+			'~shared': resolve(__dirname, './src/react-admin/modules/shared'),
+			'~content-blocks': resolve(
 				__dirname,
 				'./src/react-admin/modules/content-page/components/blocks'
 			),
-			'~generated': path.resolve(__dirname, './src/react-admin/generated'),
-			'~core': path.resolve(__dirname, './src/react-admin/core'),
+			'~generated': resolve(__dirname, './src/react-admin/generated'),
+			'~core': resolve(__dirname, './src/react-admin/core'),
 		},
 	},
 });

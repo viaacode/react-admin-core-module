@@ -1,5 +1,5 @@
-import { sanitizeHtml } from './index.js';
-import { SanitizePreset } from './presets/index.js';
+import { sanitizeHtml } from './index';
+import { SanitizePreset } from './presets/index';
 
 describe('sanitize', () => {
 	it('Should not remove p style attribute and also leave link alone', () => {

@@ -10,8 +10,8 @@ import {
 } from '@viaa/avo2-components';
 import clsx from 'clsx';
 import type { FunctionComponent, ReactNode } from 'react';
-import Html from '~shared/components/Html/Html.js';
-import { SanitizePreset } from '~shared/helpers/sanitize/presets/index.js';
+import Html from '~shared/components/Html/Html';
+import { SanitizePreset } from '~shared/helpers/sanitize/presets/index';
 
 import './BlockImageTitleTextButton.scss';
 

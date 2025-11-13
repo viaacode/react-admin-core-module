@@ -1,6 +1,6 @@
 import type { Avo } from '@viaa/avo2-types';
 import { PermissionName } from '@viaa/avo2-types';
-import { Locale } from '~modules/translations/translations.core.types.js';
+import { Locale } from '~modules/translations/translations.core.types';
 
 export const mockCommonUser: Avo.User.CommonUser = {
 	// AVO -----------------------------------------------------

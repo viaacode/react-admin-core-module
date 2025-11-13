@@ -1,15 +1,15 @@
 import type { SelectOption } from '@viaa/avo2-components';
 import { compact, debounce, isNil } from 'es-toolkit';
 import type { CSSProperties, ReactNode } from 'react';
-import type { ColorSelectProps } from '~modules/content-page/components/fields/ColorSelect/ColorSelect.js';
-import type { ContentPickerProps } from '~shared/components/ContentPicker/ContentPicker.js';
-import type { FileUploadProps } from '~shared/components/FileUpload/FileUpload.js';
-import type { MaintainerSelectProps } from '~shared/components/MaintainerSelect/MaintainerSelect.js';
-import type { RichTextEditorWithInternalStateWrapperProps } from '~shared/components/RichTextEditorWithInternalStateWrapper/RichTextEditorWithInternalStateWrapper.js';
-import type { UploadOrSelectVideoStillProps } from '~shared/components/UploadOrSelectVideoStill/UploadOrSelectVideoStill.js';
-import type { UserGroupSelectProps } from '~shared/components/UserGroupSelect/UserGroupSelect.js';
-import type { ContentBlockField } from '../types/content-block.types.js';
-import { ContentBlockEditor } from '../types/content-block.types.js';
+import type { ColorSelectProps } from '~modules/content-page/components/fields/ColorSelect/ColorSelect';
+import type { ContentPickerProps } from '~shared/components/ContentPicker/ContentPicker';
+import type { FileUploadProps } from '~shared/components/FileUpload/FileUpload';
+import type { MaintainerSelectProps } from '~shared/components/MaintainerSelect/MaintainerSelect';
+import type { RichTextEditorWithInternalStateWrapperProps } from '~shared/components/RichTextEditorWithInternalStateWrapper/RichTextEditorWithInternalStateWrapper';
+import type { UploadOrSelectVideoStillProps } from '~shared/components/UploadOrSelectVideoStill/UploadOrSelectVideoStill';
+import type { UserGroupSelectProps } from '~shared/components/UserGroupSelect/UserGroupSelect';
+import type { ContentBlockField } from '../types/content-block.types';
+import { ContentBlockEditor } from '../types/content-block.types';
 
 interface DatePickerProps {
 	children?: ReactNode;

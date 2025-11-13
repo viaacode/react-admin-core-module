@@ -3,7 +3,7 @@ import { TagList } from '@viaa/avo2-components';
 import { noop } from 'es-toolkit';
 import type { ReactText } from 'react';
 import React from 'react';
-import type { Idp } from '~modules/user/user.types.js';
+import type { Idp } from '~modules/user/user.types';
 
 /* eslint-disable @typescript-eslint/no-unused-vars */
 export const IDP_COLORS: { [idp in Idp]: string } = {

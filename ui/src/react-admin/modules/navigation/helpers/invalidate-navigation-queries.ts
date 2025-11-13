@@ -1,5 +1,5 @@
 import { QueryClient } from '@tanstack/react-query';
-import { QUERY_KEYS } from '~shared/types/index.js';
+import { QUERY_KEYS } from '~shared/types/index';
 
 export async function invalidateNavigationQueries() {
 	const client = new QueryClient();

@@ -1,13 +1,13 @@
 import { Avo } from '@viaa/avo2-types';
 import { capitalize, orderBy, startCase } from 'es-toolkit';
 import { useEffect, useState } from 'react';
-import { ToastType } from '~core/config/config.types.js';
-import { ContentPageLabelService } from '~modules/content-page-labels/content-page-label.service.js';
-import type { CheckboxOption } from '~shared/components/CheckboxDropdownModal/CheckboxDropdownModal.js';
-import { CustomError } from '~shared/helpers/custom-error.js';
-import { showToast } from '~shared/helpers/show-toast.js';
-import { tText } from '~shared/helpers/translation-functions.js';
-import type { ContentPageLabel } from '../content-page-label.types.js';
+import { ToastType } from '~core/config/config.types';
+import { ContentPageLabelService } from '~modules/content-page-labels/content-page-label.service';
+import type { CheckboxOption } from '~shared/components/CheckboxDropdownModal/CheckboxDropdownModal';
+import { CustomError } from '~shared/helpers/custom-error';
+import { showToast } from '~shared/helpers/show-toast';
+import { tText } from '~shared/helpers/translation-functions';
+import type { ContentPageLabel } from '../content-page-label.types';
 
 type UseContentPageLabelsTuple = [CheckboxOption[], boolean];
 

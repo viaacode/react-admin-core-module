@@ -1,6 +1,6 @@
 import type { SelectOption } from '@viaa/avo2-components';
-import type { BlockGridFormatOption } from '~modules/content-page/types/content-block.types.js';
-import { tText } from '~shared/helpers/translation-functions.js';
+import type { BlockGridFormatOption } from '~modules/content-page/types/content-block.types';
+import { tText } from '~shared/helpers/translation-functions';
 
 export const GET_IMAGE_GRID_FORMAT_OPTIONS: () => SelectOption<BlockGridFormatOption>[] = () => [
 	{

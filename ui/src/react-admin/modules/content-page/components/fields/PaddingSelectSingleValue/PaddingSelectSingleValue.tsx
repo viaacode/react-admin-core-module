@@ -3,7 +3,7 @@ import { Select } from '@viaa/avo2-components';
 import type { FunctionComponent } from 'react';
 import React from 'react';
 
-import { tHtml } from '~shared/helpers/translation-functions.js';
+import { tHtml } from '~shared/helpers/translation-functions';
 
 export interface PaddingSelectSingleValueProps {
 	onChange: (value: SpacerOption) => void;

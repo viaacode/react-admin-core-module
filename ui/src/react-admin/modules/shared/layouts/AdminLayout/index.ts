@@ -1,1 +1,1 @@
-export { AdminLayout } from './AdminLayout.js';
+export { AdminLayout } from './AdminLayout';

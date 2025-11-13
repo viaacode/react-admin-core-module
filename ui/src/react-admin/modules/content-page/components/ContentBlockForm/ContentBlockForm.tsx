@@ -20,12 +20,12 @@ import { isNil } from 'es-toolkit';
 import type { FunctionComponent, ReactNode } from 'react';
 import React from 'react';
 import CopyToClipboard from 'react-copy-to-clipboard';
-import { BlockHeading } from '~content-blocks/BlockHeading/BlockHeading.js';
-import { ToastType } from '~core/config/config.types.js';
-import { findImageInJson } from '~shared/helpers/find-image-in-json.js';
-import { showToast } from '~shared/helpers/show-toast.js';
-import { tText } from '~shared/helpers/translation-functions.js';
-import { validateContentBlockField } from '~shared/helpers/validation.js';
+import { BlockHeading } from '~content-blocks/BlockHeading/BlockHeading';
+import { ToastType } from '~core/config/config.types';
+import { findImageInJson } from '~shared/helpers/find-image-in-json';
+import { showToast } from '~shared/helpers/show-toast';
+import { tText } from '~shared/helpers/translation-functions';
+import { validateContentBlockField } from '~shared/helpers/validation';
 import type {
 	ContentBlockBlockConfig,
 	ContentBlockComponentState,
@@ -36,12 +36,12 @@ import type {
 	ContentBlockState,
 	ContentBlockStateType,
 	RepeatedContentBlockComponentState,
-} from '../../types/content-block.types.js';
-import ContentBlockFormGroup from '../ContentBlockFormGroup/ContentBlockFormGroup.js';
-import { REPEATABLE_CONTENT_BLOCKS } from '.././ContentBlockRenderer/ContentBlockRenderer.const.js';
+} from '../../types/content-block.types';
+import ContentBlockFormGroup from '../ContentBlockFormGroup/ContentBlockFormGroup';
+import { REPEATABLE_CONTENT_BLOCKS } from '.././ContentBlockRenderer/ContentBlockRenderer.const';
 
 import './ContentBlockForm.scss';
-import { blockHasErrors } from '~modules/content-page/helpers/block-has-errors.js';
+import { blockHasErrors } from '~modules/content-page/helpers/block-has-errors';
 
 interface ContentBlockFormProps {
 	config: ContentBlockConfig;

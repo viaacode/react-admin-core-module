@@ -1,2 +1,2 @@
-export * from './BlockIFrame.editorconfig.js';
-export * from './BlockIFrame.js';
+export * from './BlockIFrame.editorconfig';
+export * from './BlockIFrame';

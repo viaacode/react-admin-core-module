@@ -3,8 +3,8 @@ import clsx from 'clsx';
 import { isNil } from 'es-toolkit';
 import { isEmpty } from 'es-toolkit/compat';
 import type { FunctionComponent, ReactElement, ReactNode } from 'react';
-import { SmartLink } from '~modules/shared/components/SmartLink/SmartLink.js';
-import type { DefaultComponentProps } from '~modules/shared/types/components.js';
+import { SmartLink } from '~modules/shared/components/SmartLink/SmartLink';
+import type { DefaultComponentProps } from '~modules/shared/types/components';
 
 export interface BlockTagWithLinkProps {
 	label: string;

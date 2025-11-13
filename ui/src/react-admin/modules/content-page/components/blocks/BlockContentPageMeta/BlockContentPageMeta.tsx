@@ -2,15 +2,15 @@ import { Button } from '@viaa/avo2-components';
 import { format } from 'date-fns';
 import type { FunctionComponent, ReactNode } from 'react';
 import React from 'react';
-import { AdminConfigManager } from '~core/config/config.class.js';
-import { getPublishedDate } from '~modules/content-page/helpers/get-published-state.js';
+import { AdminConfigManager } from '~core/config/config.class';
+import { getPublishedDate } from '~modules/content-page/helpers/get-published-state';
 import type {
 	ContentPageInfo,
 	ContentPageLabel,
-} from '~modules/content-page/types/content-pages.types.js';
-import { normalizeTimestamp } from '~shared/helpers/formatters/date.js';
-import { navigateToContentType } from '~shared/helpers/link.js';
-import { tHtml } from '~shared/helpers/translation-functions.js';
+} from '~modules/content-page/types/content-pages.types';
+import { normalizeTimestamp } from '~shared/helpers/formatters/date';
+import { navigateToContentType } from '~shared/helpers/link';
+import { tHtml } from '~shared/helpers/translation-functions';
 
 export interface ContentPageMetaProps {
 	contentPageInfo: ContentPageInfo;

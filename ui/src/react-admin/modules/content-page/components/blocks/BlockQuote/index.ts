@@ -1,2 +1,2 @@
-export * from './BlockQuote.editorconfig.js';
-export * from './BlockQuote.js';
+export * from './BlockQuote.editorconfig';
+export * from './BlockQuote';

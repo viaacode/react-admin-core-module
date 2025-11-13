@@ -2,7 +2,7 @@ import type { SelectOption } from '@viaa/avo2-components';
 import type { Avo } from '@viaa/avo2-types';
 import { useEffect, useState } from 'react';
 
-import { ContentPageService } from '../services/content-page.service.js';
+import { ContentPageService } from '../services/content-page.service';
 
 type UseContentTypesTuple = [SelectOption<Avo.ContentPage.Type>[], boolean];
 

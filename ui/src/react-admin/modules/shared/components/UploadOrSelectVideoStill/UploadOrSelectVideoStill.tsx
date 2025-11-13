@@ -12,12 +12,12 @@ import clsx from 'clsx';
 import { compact, noop, uniq } from 'es-toolkit';
 import type { FunctionComponent, KeyboardEvent } from 'react';
 import React, { useEffect, useState } from 'react';
-import FileUpload from '~shared/components/FileUpload/FileUpload.js';
-import { Loader } from '~shared/components/Loader/Loader.js';
+import FileUpload from '~shared/components/FileUpload/FileUpload';
+import { Loader } from '~shared/components/Loader/Loader';
 
-import { useGetStillsFromContentItem } from '~shared/components/UploadOrSelectVideoStill/hooks/useGetStillsFromContentItem.js';
-import { PHOTO_TYPES } from '~shared/helpers/files.js';
-import { tText } from '~shared/helpers/translation-functions.js';
+import { useGetStillsFromContentItem } from '~shared/components/UploadOrSelectVideoStill/hooks/useGetStillsFromContentItem';
+import { PHOTO_TYPES } from '~shared/helpers/files';
+import { tText } from '~shared/helpers/translation-functions';
 
 import './UploadOrSelectVideoStill.scss';
 

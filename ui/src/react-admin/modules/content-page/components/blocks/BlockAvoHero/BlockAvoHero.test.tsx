@@ -2,7 +2,7 @@ import { mount, shallow } from 'enzyme';
 import { loremIpsum } from 'lorem-ipsum';
 import React from 'react';
 
-import { BlockAvoHero } from './BlockAvoHero.js';
+import { BlockAvoHero } from './BlockAvoHero';
 
 const customClass = 'c-block-custom';
 const title = 'Page title';

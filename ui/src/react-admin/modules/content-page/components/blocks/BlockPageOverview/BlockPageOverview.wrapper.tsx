@@ -5,23 +5,23 @@ import type { FunctionComponent } from 'react';
 import { useEffect } from 'react';
 import type { QueryParamConfig } from 'use-query-params';
 import { NumberParam, StringParam, useQueryParams } from 'use-query-params';
-import type { LabelObj } from '~content-blocks/BlockPageOverview/BlockPageOverview.types.js';
-import { ContentItemStyle } from '~content-blocks/BlockPageOverview/BlockPageOverview.types.js';
+import type { LabelObj } from '~content-blocks/BlockPageOverview/BlockPageOverview.types';
+import { ContentItemStyle } from '~content-blocks/BlockPageOverview/BlockPageOverview.types';
 
-import { AdminConfigManager } from '~core/config/config.class.js';
-import { BlockPageOverview } from '~modules/content-page/components/blocks/BlockPageOverview/BlockPageOverview.js';
-import type { PageOverviewWrapperProps } from '~modules/content-page/components/blocks/BlockPageOverview/BlockPageOverview.types.js';
-import { GET_DARK_BACKGROUND_COLOR_OPTIONS } from '~modules/content-page/const/get-color-options.js';
-import { useGetContentPageByLanguageAndPath } from '~modules/content-page/hooks/use-get-content-page-by-language-and-path.js';
-import { useGetContentPageLabelsByTypeAndIds } from '~modules/content-page/hooks/use-get-content-page-labels-by-type-and-ids.js';
-import { useGetContentPageLabelsByTypeAndLabels } from '~modules/content-page/hooks/use-get-content-page-labels-by-type-and-labels.js';
-import { useGetContentPagesForPageOverviewBlock } from '~modules/content-page/hooks/use-get-content-pages-for-page-overview-block.js';
-import type { ContentPageInfo } from '~modules/content-page/types/content-pages.types.js';
-import { Locale } from '~modules/translations/translations.core.types.js';
-import { ErrorView } from '~shared/components/error/ErrorView.js';
-import { CheckboxListParam } from '~shared/helpers/query-string-converters.js';
-import { tHtml, tText } from '~shared/helpers/translation-functions.js';
-import { useDebounce } from '~shared/hooks/useDebounce.js';
+import { AdminConfigManager } from '~core/config/config.class';
+import { BlockPageOverview } from '~modules/content-page/components/blocks/BlockPageOverview/BlockPageOverview';
+import type { PageOverviewWrapperProps } from '~modules/content-page/components/blocks/BlockPageOverview/BlockPageOverview.types';
+import { GET_DARK_BACKGROUND_COLOR_OPTIONS } from '~modules/content-page/const/get-color-options';
+import { useGetContentPageByLanguageAndPath } from '~modules/content-page/hooks/use-get-content-page-by-language-and-path';
+import { useGetContentPageLabelsByTypeAndIds } from '~modules/content-page/hooks/use-get-content-page-labels-by-type-and-ids';
+import { useGetContentPageLabelsByTypeAndLabels } from '~modules/content-page/hooks/use-get-content-page-labels-by-type-and-labels';
+import { useGetContentPagesForPageOverviewBlock } from '~modules/content-page/hooks/use-get-content-pages-for-page-overview-block';
+import type { ContentPageInfo } from '~modules/content-page/types/content-pages.types';
+import { Locale } from '~modules/translations/translations.core.types';
+import { ErrorView } from '~shared/components/error/ErrorView';
+import { CheckboxListParam } from '~shared/helpers/query-string-converters';
+import { tHtml, tText } from '~shared/helpers/translation-functions';
+import { useDebounce } from '~shared/hooks/useDebounce';
 
 export const BlockPageOverviewWrapper: FunctionComponent<PageOverviewWrapperProps> = ({
 	contentTypeAndTabs = {

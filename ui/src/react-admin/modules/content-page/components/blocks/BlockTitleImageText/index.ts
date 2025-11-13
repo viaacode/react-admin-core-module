@@ -1,1 +1,1 @@
-export * from './BlockTitleImageText.js';
+export * from './BlockTitleImageText';

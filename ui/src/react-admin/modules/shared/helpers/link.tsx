@@ -5,13 +5,13 @@ import { isNil, isString } from 'es-toolkit';
 import { isEmpty, map } from 'es-toolkit/compat';
 import { stringify } from 'query-string';
 import type { ReactNode } from 'react';
-import { AdminConfigManager } from '~core/config/config.class.js';
-import { type NavigateFunction, ToastType } from '~core/config/config.types.js';
-import { getAdminCoreApiUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config.js';
-import { showToast } from '~shared/helpers/show-toast.js';
-import { tText } from '~shared/helpers/translation-functions.js';
-import { APP_PATH } from '../consts/routes.consts.js';
-import { insideIframe } from './inside-iframe.js';
+import { AdminConfigManager } from '~core/config/config.class';
+import { type NavigateFunction, ToastType } from '~core/config/config.types';
+import { getAdminCoreApiUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config';
+import { showToast } from '~shared/helpers/show-toast';
+import { tText } from '~shared/helpers/translation-functions';
+import { APP_PATH } from '../consts/routes.consts';
+import { insideIframe } from './inside-iframe';
 
 type RouteParams = { [key: string]: string | number | undefined };
 

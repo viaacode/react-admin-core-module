@@ -1,4 +1,4 @@
-import type { NavigationItem } from '~modules/navigation/navigation.types.js';
+import type { NavigationItem } from '~modules/navigation/navigation.types';
 
 export const reindexNavigationItems = (items: NavigationItem[]): NavigationItem[] =>
 	items.map((item, index) => {

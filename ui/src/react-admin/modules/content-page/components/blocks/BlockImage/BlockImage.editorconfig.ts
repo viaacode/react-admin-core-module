@@ -1,16 +1,16 @@
-import { AdminConfigManager } from '~core/config/config.class.js';
-import { GET_ALIGN_OPTIONS } from '~modules/content-page/const/get-align-options.js';
-import { GET_WIDTH_OPTIONS } from '~modules/content-page/const/get-media-player-width-options.js';
-import type { FileUploadProps } from '~shared/components/FileUpload/FileUpload.js';
-import { tText } from '~shared/helpers/translation-functions.js';
+import { AdminConfigManager } from '~core/config/config.class';
+import { GET_ALIGN_OPTIONS } from '~modules/content-page/const/get-align-options';
+import { GET_WIDTH_OPTIONS } from '~modules/content-page/const/get-media-player-width-options';
+import type { FileUploadProps } from '~shared/components/FileUpload/FileUpload';
+import { tText } from '~shared/helpers/translation-functions';
 import type {
 	ContentBlockConfig,
 	DefaultContentBlockState,
 	ImageBlockComponentState,
-} from '../../../types/content-block.types.js';
-import { ContentBlockEditor, ContentBlockType } from '../../../types/content-block.types.js';
+} from '../../../types/content-block.types';
+import { ContentBlockEditor, ContentBlockType } from '../../../types/content-block.types';
 
-import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, FILE_FIELD, TEXT_FIELD } from '../defaults.js';
+import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, FILE_FIELD, TEXT_FIELD } from '../defaults';
 
 export const INITIAL_IMAGE_COMPONENTS_STATE = (): ImageBlockComponentState => ({
 	title: '',

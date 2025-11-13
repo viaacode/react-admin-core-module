@@ -1,5 +1,5 @@
 import { format, formatDistance, parseISO } from 'date-fns';
-import nlBE from 'date-fns/locale/nl-BE/index.js';
+import nlBE from 'date-fns/locale/nl-BE/index';
 
 type DateLike = string | Date | number;
 type DateLikeNullable = DateLike | undefined | null;

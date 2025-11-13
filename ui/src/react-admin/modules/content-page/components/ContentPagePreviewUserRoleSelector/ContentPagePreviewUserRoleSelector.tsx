@@ -15,11 +15,11 @@ import {
 	GET_ALL_CONTENT,
 	GET_LOGGED_OUT_USERS,
 	preferredUserGroupOrder,
-} from '~modules/user-group/const/user-group.const.js';
-import { useGetUserGroups } from '~modules/user-group/hooks/get-user-groups.js';
-import { isAvo } from '~shared/helpers/is-avo.js';
-import { tText } from '~shared/helpers/translation-functions.js';
-import { SpecialPermissionGroups } from '~shared/types/authentication.types.js';
+} from '~modules/user-group/const/user-group.const';
+import { useGetUserGroups } from '~modules/user-group/hooks/get-user-groups';
+import { isAvo } from '~shared/helpers/is-avo';
+import { tText } from '~shared/helpers/translation-functions';
+import { SpecialPermissionGroups } from '~shared/types/authentication.types';
 
 import './ContentPagePreviewUserRoleSelector.scss';
 

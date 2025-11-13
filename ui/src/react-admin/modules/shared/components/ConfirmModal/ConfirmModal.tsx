@@ -11,7 +11,7 @@ import {
 import type { FunctionComponent, ReactNode } from 'react';
 import React from 'react';
 
-import { tHtml, tText } from '~shared/helpers/translation-functions.js';
+import { tHtml, tText } from '~shared/helpers/translation-functions';
 
 interface ConfirmModalProps {
 	title?: string;

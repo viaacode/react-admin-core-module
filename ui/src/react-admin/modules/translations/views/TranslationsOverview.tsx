@@ -9,31 +9,31 @@ import type { FunctionComponent, KeyboardEvent, ReactElement, ReactNode } from '
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import type { Row, TableOptions } from 'react-table';
-import { ToastType } from '~core/config/config.types.js';
-import { useGetAllTranslations } from '~modules/translations/hooks/use-get-all-translations.js';
+import { ToastType } from '~core/config/config.types';
+import { useGetAllTranslations } from '~modules/translations/hooks/use-get-all-translations';
 import {
 	RICH_TEXT_EDITOR_OPTIONS,
 	TRANSLATIONS_PER_PAGE,
-} from '~modules/translations/translations.const.js';
-import { Locale, ValueType } from '~modules/translations/translations.core.types.js';
+} from '~modules/translations/translations.const';
+import { Locale, ValueType } from '~modules/translations/translations.core.types';
 import type {
 	MultiLanguageTranslationEntry,
 	TranslationsOverviewProps,
-} from '~modules/translations/translations.types.js';
-import Html from '~shared/components/Html/Html.js';
-import { Icon } from '~shared/components/Icon/Icon.js';
-import { Loader } from '~shared/components/Loader/Loader.js';
-import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner.js';
-import { sortingIcons } from '~shared/components/Table/Table.const.js';
-import { GET_LANGUAGE_NAMES } from '~shared/consts/language-names.js';
-import { CustomError } from '~shared/helpers/custom-error.js';
-import { SanitizePreset } from '~shared/helpers/sanitize/presets/index.js';
-import { showToast } from '~shared/helpers/show-toast.js';
-import { tHtml, tText } from '~shared/helpers/translation-functions.js';
-import type { TranslationEntry } from '../../../../../scripts/translation.types.js';
-import { getFullKey } from '../helpers/get-full-key.js';
-import { useGetAllLanguages } from '../hooks/use-get-all-languages.js';
-import { TranslationsService } from '../translations.service.js';
+} from '~modules/translations/translations.types';
+import Html from '~shared/components/Html/Html';
+import { Icon } from '~shared/components/Icon/Icon';
+import { Loader } from '~shared/components/Loader/Loader';
+import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner';
+import { sortingIcons } from '~shared/components/Table/Table.const';
+import { GET_LANGUAGE_NAMES } from '~shared/consts/language-names';
+import { CustomError } from '~shared/helpers/custom-error';
+import { SanitizePreset } from '~shared/helpers/sanitize/presets/index';
+import { showToast } from '~shared/helpers/show-toast';
+import { tHtml, tText } from '~shared/helpers/translation-functions';
+import type { TranslationEntry } from '../../../../../scripts/translation.types';
+import { getFullKey } from '../helpers/get-full-key';
+import { useGetAllLanguages } from '../hooks/use-get-all-languages';
+import { TranslationsService } from '../translations.service';
 import './TranslationsOverview.scss';
 
 type OrderProp = `value_${Locale}` | 'id';

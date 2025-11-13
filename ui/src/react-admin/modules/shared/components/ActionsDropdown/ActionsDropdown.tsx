@@ -8,8 +8,8 @@ import {
 } from '@meemoo/react-components';
 import type { FunctionComponent } from 'react';
 import React, { useState } from 'react';
-import { tText } from '~shared/helpers/translation-functions.js';
-import { Icon } from '../Icon/Icon.js';
+import { tText } from '~shared/helpers/translation-functions';
+import { Icon } from '../Icon/Icon';
 
 export interface ActionsDropdownProps {
 	menuItems: MenuItemInfo[] | MenuItemInfo[][];

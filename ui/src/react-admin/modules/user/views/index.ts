@@ -1,2 +1,2 @@
-export * from './UserDetail.js';
-export * from './UserOverview.js';
+export * from './UserDetail';
+export * from './UserOverview';

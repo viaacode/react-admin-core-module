@@ -1,33 +1,33 @@
-import { AdminConfigManager } from '~core/config/config.class.js';
+import { AdminConfigManager } from '~core/config/config.class';
 import {
 	GET_ALIGN_OPTIONS,
 	GET_BACKGROUND_ALIGN_OPTIONS,
 	GET_SIMPLE_ALIGN_OPTIONS,
-} from '~modules/content-page/const/get-align-options.js';
+} from '~modules/content-page/const/get-align-options';
 import {
 	GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF,
 	GET_FOREGROUND_COLOR_OPTIONS_ARCHIEF,
-} from '~modules/content-page/const/get-color-options.js';
+} from '~modules/content-page/const/get-color-options';
 import {
 	GET_FULL_HEADING_TYPE_OPTIONS,
 	GET_HEADING_SIZE_OPTIONS,
-} from '~modules/content-page/const/get-heading-type-options.js';
-import type { FileUploadProps } from '~modules/shared/components/FileUpload/FileUpload.js';
-import { GET_ADMIN_ICON_OPTIONS } from '~modules/shared/consts/icons.consts.js';
-import { tText } from '~shared/helpers/translation-functions.js';
+} from '~modules/content-page/const/get-heading-type-options';
+import type { FileUploadProps } from '~modules/shared/components/FileUpload/FileUpload';
+import { GET_ADMIN_ICON_OPTIONS } from '~modules/shared/consts/icons.consts';
+import { tText } from '~shared/helpers/translation-functions';
 import type {
 	ContentBlockConfig,
 	DefaultContentBlockState,
 	HetArchiefImageTextBackgroundBlockComponentState,
-} from '../../../types/content-block.types.js';
-import { Color, ContentBlockEditor, ContentBlockType } from '../../../types/content-block.types.js';
+} from '../../../types/content-block.types';
+import { Color, ContentBlockEditor, ContentBlockType } from '../../../types/content-block.types';
 
 import {
 	BLOCK_FIELD_DEFAULTS,
 	BLOCK_STATE_DEFAULTS,
 	PADDING_SINGLE_VALUE_FIELD,
 	TEXT_FIELD,
-} from '../defaults.js';
+} from '../defaults';
 
 export const INITIAL_HET_ARCHIEF_IMAGE_TEXT_BACKGROUND_COMPONENTS_STATE =
 	(): HetArchiefImageTextBackgroundBlockComponentState => ({

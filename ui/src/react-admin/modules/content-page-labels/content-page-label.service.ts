@@ -1,15 +1,15 @@
 import type { Avo } from '@viaa/avo2-types';
 import { compact } from 'es-toolkit';
 import { stringifyUrl } from 'query-string';
-import type { LabelObj } from '~content-blocks/BlockPageOverview/BlockPageOverview.types.js';
-import { LABELS_PER_PAGE } from '~modules/content-page-labels/content-page-label.const.js';
+import type { LabelObj } from '~content-blocks/BlockPageOverview/BlockPageOverview.types';
+import { LABELS_PER_PAGE } from '~modules/content-page-labels/content-page-label.const';
 import type {
 	ContentPageLabel,
 	ContentPageLabelOverviewTableCols,
-} from '~modules/content-page-labels/content-page-label.types.js';
-import { CustomError } from '~shared/helpers/custom-error.js';
-import { fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout.js';
-import { getAdminCoreApiUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config.js';
+} from '~modules/content-page-labels/content-page-label.types';
+import { CustomError } from '~shared/helpers/custom-error';
+import { fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
+import { getAdminCoreApiUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config';
 
 export class ContentPageLabelService {
 	private static getBaseUrl(): string {

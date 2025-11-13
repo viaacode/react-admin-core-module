@@ -3,7 +3,7 @@ import type {
 	PickerItem,
 	PickerItemControls,
 	PickerTypeOption,
-} from '../../types/content-picker.js';
+} from '../../types/content-picker';
 
 export function filterTypes(
 	types: PickerTypeOption[],

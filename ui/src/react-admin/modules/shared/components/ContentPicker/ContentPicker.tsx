@@ -7,23 +7,23 @@ import React, { useCallback, useEffect, useState } from 'react';
 import type { ActionMeta, SingleValue } from 'react-select';
 import ReactSelect from 'react-select';
 import AsyncSelect from 'react-select/async';
-import { showToast } from '~shared/helpers/show-toast.js';
-import { tHtml, tText } from '~shared/helpers/translation-functions.js';
+import { showToast } from '~shared/helpers/show-toast';
+import { tHtml, tText } from '~shared/helpers/translation-functions';
 
-import { CustomError } from '../../helpers/custom-error.js';
-import type { PickerItem, PickerTypeOption } from '../../types/content-picker.js';
-import FileUpload from '../FileUpload/FileUpload.js';
+import { CustomError } from '../../helpers/custom-error';
+import type { PickerItem, PickerTypeOption } from '../../types/content-picker';
+import FileUpload from '../FileUpload/FileUpload';
 
 import {
 	DEFAULT_ALLOWED_TYPES,
 	GET_CONTENT_TYPES,
 	REACT_SELECT_DEFAULT_OPTIONS,
-} from './ContentPicker.const.js';
-import { filterTypes, setInitialItem } from './ContentPicker.helpers.js';
+} from './ContentPicker.const';
+import { filterTypes, setInitialItem } from './ContentPicker.helpers';
 import './ContentPicker.scss';
 
-import { ToastType } from '~core/config/config.types.js';
-import { parseSearchQuery } from './helpers/parse-picker.js';
+import { ToastType } from '~core/config/config.types';
+import { parseSearchQuery } from './helpers/parse-picker';
 
 export interface ContentPickerProps {
 	allowedTypes?: Avo.Core.ContentPickerType[];

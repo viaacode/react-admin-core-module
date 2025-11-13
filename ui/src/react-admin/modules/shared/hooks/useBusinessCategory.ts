@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
-import { ToastType } from '~core/config/config.types.js';
-import { UserService } from '~modules/user/user.service.js';
-import { showToast } from '~shared/helpers/show-toast.js';
-import { tText } from '~shared/helpers/translation-functions.js';
-import { CustomError } from '../helpers/custom-error.js';
+import { ToastType } from '~core/config/config.types';
+import { UserService } from '~modules/user/user.service';
+import { showToast } from '~shared/helpers/show-toast';
+import { tText } from '~shared/helpers/translation-functions';
+import { CustomError } from '../helpers/custom-error';
 
 type UseBusinessCategoriesTuple = [string[], boolean];
 

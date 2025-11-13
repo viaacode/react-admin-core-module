@@ -1,2 +1,2 @@
-export * from './BlockIntro.editorconfig.js';
-export * from './BlockIntro.js';
+export * from './BlockIntro.editorconfig';
+export * from './BlockIntro';

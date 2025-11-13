@@ -1,6 +1,6 @@
 import type { SelectOption } from '@viaa/avo2-components';
-import { ContentItemStyle } from '~content-blocks/BlockPageOverview/BlockPageOverview.types.js';
-import { tText } from '~shared/helpers/translation-functions.js';
+import { ContentItemStyle } from '~content-blocks/BlockPageOverview/BlockPageOverview.types';
+import { tText } from '~shared/helpers/translation-functions';
 
 export const GET_PAGE_OVERVIEW_ITEM_STYLE_OPTIONS: () => SelectOption<ContentItemStyle>[] = () => [
 	{

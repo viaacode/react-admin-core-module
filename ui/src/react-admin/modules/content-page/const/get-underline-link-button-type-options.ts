@@ -1,5 +1,5 @@
 import type { ButtonType, SelectOption } from '@viaa/avo2-components';
-import { tText } from '~shared/helpers/translation-functions.js';
+import { tText } from '~shared/helpers/translation-functions';
 
 export const GET_UNDERLINED_LINK_BUTTON_TYPE_OPTIONS: () => SelectOption<ButtonType>[] = () => [
 	{

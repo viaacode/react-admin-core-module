@@ -1,11 +1,12 @@
 import { Avo } from '@viaa/avo2-types';
+// TODO remove memoize in favor of react-query caching
 import memoize from 'memoizee';
 
-import { CollectionService } from '~modules/collection/collection.service.js';
-import { ContentTypeNumber } from '~modules/collection/collection.types.js';
-import { MEMOIZEE_OPTIONS } from '~shared/consts/memoizee-options.js';
-import type { PickerItem } from '~shared/types/content-picker.js';
-import { parsePickerItem } from '../helpers/parse-picker.js';
+import { CollectionService } from '~modules/collection/collection.service';
+import { ContentTypeNumber } from '~modules/collection/collection.types';
+import { MEMOIZEE_OPTIONS } from '~shared/consts/memoizee-options';
+import type { PickerItem } from '~shared/types/content-picker';
+import { parsePickerItem } from '../helpers/parse-picker';
 
 // TODO: move fetchBundles and fetchBundlesByTitle to a separate bundle service, not collection service.
 

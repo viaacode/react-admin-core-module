@@ -1,2 +1,2 @@
-export * from './BlockThreeClickableTiles.editorconfig.js';
-export * from './BlockThreeClickableTiles.js';
+export * from './BlockThreeClickableTiles.editorconfig';
+export * from './BlockThreeClickableTiles';

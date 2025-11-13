@@ -3,14 +3,14 @@ import type { TagInfo } from '@viaa/avo2-components';
 import { compact, sortBy } from 'es-toolkit';
 import React from 'react';
 import type { Column, UseSortByColumnOptions } from 'react-table';
-import type { PermissionData } from '~modules/permissions/permissions.types.js';
+import type { PermissionData } from '~modules/permissions/permissions.types';
 import type {
 	UserGroup,
 	UserGroupWithPermissions,
-} from '~modules/user-group/types/user-group.types.js';
-import { tText } from '~shared/helpers/translation-functions.js';
-import { SpecialPermissionGroups } from '~shared/types/authentication.types.js';
-import type { PermissionRow } from '../types/user-group.types.js';
+} from '~modules/user-group/types/user-group.types';
+import { tText } from '~shared/helpers/translation-functions';
+import { SpecialPermissionGroups } from '~shared/types/authentication.types';
+import type { PermissionRow } from '../types/user-group.types';
 
 export const preferredUserGroupOrder: Record<string, number> = {
 	// Avo

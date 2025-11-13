@@ -2,11 +2,11 @@ import { Button, Column, Grid, Image } from '@viaa/avo2-components';
 import clsx from 'clsx';
 import type { FC } from 'react';
 import React from 'react';
-import { BlockHeading } from '~content-blocks/BlockHeading/BlockHeading.js';
-import { BlockRichTextWrapper } from '~content-blocks/BlockRichText/BlockRichText.wrapper.js';
-import type { ImageTitleTextButtonBlockComponentState } from '~modules/content-page/types/content-block.types.js';
-import { Icon } from '~shared/components/Icon/Icon.js';
-import { generateSmartLink } from '~shared/components/SmartLink/SmartLink.js';
+import { BlockHeading } from '~content-blocks/BlockHeading/BlockHeading';
+import { BlockRichTextWrapper } from '~content-blocks/BlockRichText/BlockRichText.wrapper';
+import type { ImageTitleTextButtonBlockComponentState } from '~modules/content-page/types/content-block.types';
+import { Icon } from '~shared/components/Icon/Icon';
+import { generateSmartLink } from '~shared/components/SmartLink/SmartLink';
 
 export const BlockImageTitleTextButtonWrapper: FC<ImageTitleTextButtonBlockComponentState> = (
 	props

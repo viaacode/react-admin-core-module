@@ -3,11 +3,11 @@ import { Image } from '@viaa/avo2-components';
 import clsx from 'clsx';
 import { isNil } from 'es-toolkit';
 import type { FunctionComponent, ReactElement, ReactNode } from 'react';
-import { BlockHeading } from '~content-blocks/BlockHeading/BlockHeading.js';
-import type { HeadingTypeOption } from '~modules/content-page/types/content-block.types.js';
-import { SmartLink } from '~modules/shared/components/SmartLink/SmartLink.js';
-import type { DefaultComponentProps } from '~modules/shared/types/components.js';
-import { Icon } from '~shared/components/Icon/Icon.js';
+import { BlockHeading } from '~content-blocks/BlockHeading/BlockHeading';
+import type { HeadingTypeOption } from '~modules/content-page/types/content-block.types';
+import { SmartLink } from '~modules/shared/components/SmartLink/SmartLink';
+import type { DefaultComponentProps } from '~modules/shared/types/components';
+import { Icon } from '~shared/components/Icon/Icon';
 
 export interface BlockClickableTilesProps {
 	title: string;

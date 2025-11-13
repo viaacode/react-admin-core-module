@@ -1,20 +1,20 @@
 import type { IconName, TabProps } from '@viaa/avo2-components';
 import type { Avo } from '@viaa/avo2-types';
 
-import { AdminConfigManager } from '~core/config/config.class.js';
-import type { ContentOverviewTableCols } from '~modules/content-page/types/content-pages.types.js';
-import { ContentPageWidth } from '~modules/content-page/types/content-pages.types.js';
+import { AdminConfigManager } from '~core/config/config.class';
+import type { ContentOverviewTableCols } from '~modules/content-page/types/content-pages.types';
+import { ContentPageWidth } from '~modules/content-page/types/content-pages.types';
 import type {
 	CheckboxDropdownModalProps,
 	CheckboxOption,
-} from '~shared/components/CheckboxDropdownModal/CheckboxDropdownModal.js';
+} from '~shared/components/CheckboxDropdownModal/CheckboxDropdownModal';
 
-import type { FilterableColumn } from '~shared/components/FilterTable/FilterTable.js';
-import { NULL_FILTER } from '~shared/helpers/filters.js';
-import { isMultiLanguageEnabled } from '~shared/helpers/is-multi-language-enabled.js';
-import { tText } from '~shared/helpers/translation-functions.js';
-import { TableColumnDataType } from '~shared/types/table-column-data-type.js';
-import { TableFilterType } from '~shared/types/table-filter-types.js';
+import type { FilterableColumn } from '~shared/components/FilterTable/FilterTable';
+import { NULL_FILTER } from '~shared/helpers/filters';
+import { isMultiLanguageEnabled } from '~shared/helpers/is-multi-language-enabled';
+import { tText } from '~shared/helpers/translation-functions';
+import { TableColumnDataType } from '~shared/types/table-column-data-type';
+import { TableFilterType } from '~shared/types/table-filter-types';
 
 export const CONTENT_PAGE_DESCRIPTION_MAX_LENGTH = 165;
 export const CONTENT_PAGE_DESCRIPTION_MAX_LENGTH_STRING = String(

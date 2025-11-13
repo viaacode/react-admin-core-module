@@ -11,8 +11,8 @@ import clsx from 'clsx';
 import { flatten } from 'es-toolkit';
 import type { FunctionComponent } from 'react';
 import React from 'react';
-import { Icon } from '~shared/components/Icon/Icon.js';
-import { defaultRenderLinkFunction } from '~shared/helpers/link.js';
+import { Icon } from '~shared/components/Icon/Icon';
+import { defaultRenderLinkFunction } from '~shared/helpers/link';
 
 import './BlockButtons.scss';
 

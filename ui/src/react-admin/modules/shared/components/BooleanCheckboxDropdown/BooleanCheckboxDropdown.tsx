@@ -1,9 +1,9 @@
 import type { FunctionComponent } from 'react';
 import React from 'react';
-import { tText } from '~shared/helpers/translation-functions.js';
-import { NULL_FILTER } from '../../helpers/filters.js';
-import type { CheckboxOption } from '../CheckboxDropdownModal/CheckboxDropdownModal.js';
-import { CheckboxDropdownModal } from '../CheckboxDropdownModal/CheckboxDropdownModal.js';
+import { tText } from '~shared/helpers/translation-functions';
+import { NULL_FILTER } from '../../helpers/filters';
+import type { CheckboxOption } from '../CheckboxDropdownModal/CheckboxDropdownModal';
+import { CheckboxDropdownModal } from '../CheckboxDropdownModal/CheckboxDropdownModal';
 
 export interface BooleanCheckboxDropdownProps {
 	label: string;

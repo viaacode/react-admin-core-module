@@ -1,21 +1,21 @@
 import type { CheckboxProps, MultiRangeProps } from '@viaa/avo2-components';
 import { Avo } from '@viaa/avo2-types';
-import { AdminConfigManager } from '~core/config/config.class.js';
+import { AdminConfigManager } from '~core/config/config.class';
 import {
 	GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF,
 	GET_COLOR_OPTIONS_EXTENDED_AVO,
-} from '~modules/content-page/const/get-color-options.js';
+} from '~modules/content-page/const/get-color-options';
 import {
 	GET_FULL_HEADING_TYPE_OPTIONS,
 	GET_HEADING_TYPE_OPTIONS,
-} from '~modules/content-page/const/get-heading-type-options.js';
-import { parseSearchQuery } from '~modules/shared/components/ContentPicker/helpers/parse-picker.js';
-import type { FileUploadProps } from '~shared/components/FileUpload/FileUpload.js';
-import type { MaintainerSelectProps } from '~shared/components/MaintainerSelect/MaintainerSelect.js';
-import { GET_ADMIN_ICON_OPTIONS } from '~shared/consts/icons.consts.js';
-import { isAvo } from '~shared/helpers/is-avo.js';
-import { tHtml, tText } from '~shared/helpers/translation-functions.js';
-import { AVO } from '~shared/types/index.js';
+} from '~modules/content-page/const/get-heading-type-options';
+import { parseSearchQuery } from '~modules/shared/components/ContentPicker/helpers/parse-picker';
+import type { FileUploadProps } from '~shared/components/FileUpload/FileUpload';
+import type { MaintainerSelectProps } from '~shared/components/MaintainerSelect/MaintainerSelect';
+import { GET_ADMIN_ICON_OPTIONS } from '~shared/consts/icons.consts';
+import { isAvo } from '~shared/helpers/is-avo';
+import { tHtml, tText } from '~shared/helpers/translation-functions';
+import { AVO } from '~shared/types/index';
 import {
 	type ContentBlockConfig,
 	ContentBlockEditor,
@@ -23,14 +23,14 @@ import {
 	ContentBlockType,
 	type MediaGridBlockComponentState,
 	type MediaGridBlockState,
-} from '../../../types/content-block.types.js';
+} from '../../../types/content-block.types';
 import {
 	BACKGROUND_COLOR_EXTENDED_FIELD,
 	BLOCK_FIELD_DEFAULTS,
 	BLOCK_STATE_DEFAULTS,
 	FOREGROUND_COLOR_FIELD,
 	TEXT_FIELD,
-} from '../defaults.js';
+} from '../defaults';
 
 export const INITIAL_MEDIA_GRID_COMPONENTS_STATE = (): MediaGridBlockComponentState[] => [{}];
 

@@ -6,7 +6,7 @@ import React, { useEffect } from 'react';
 import type { ActionMeta } from 'react-select';
 import ReactSelect from 'react-select';
 
-import { useGetMaintainersByContent } from '~shared/components/MaintainerSelect/hooks/useGetMaintainersByContent.js';
+import { useGetMaintainersByContent } from '~shared/components/MaintainerSelect/hooks/useGetMaintainersByContent';
 
 export interface MaintainerSelectProps {
 	label: string | undefined;

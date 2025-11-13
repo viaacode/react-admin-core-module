@@ -1,3 +1,3 @@
-export { ContentPageLabelDetail } from './ContentPageLabelDetail.js';
-export { ContentPageLabelEdit } from './ContentPageLabelEdit.js';
-export { ContentPageLabelOverview } from './ContentPageLabelOverview.js';
+export { ContentPageLabelDetail } from './ContentPageLabelDetail';
+export { ContentPageLabelEdit } from './ContentPageLabelEdit';
+export { ContentPageLabelOverview } from './ContentPageLabelOverview';

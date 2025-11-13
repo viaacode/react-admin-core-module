@@ -5,27 +5,27 @@ import { isAfter, isBefore, parseISO } from 'date-fns';
 import { compact } from 'es-toolkit';
 import type { FunctionComponent } from 'react';
 import React from 'react';
-import { BlockHeading } from '~content-blocks/BlockHeading/BlockHeading.js';
-import { AdminConfigManager } from '~core/config/config.class.js';
-import { GET_CONTENT_PAGE_WIDTH_OPTIONS } from '~modules/content-page/const/content-page.consts.js';
-import { useContentTypes } from '~modules/content-page/hooks/useContentTypes.js';
-import { getContentPageDescriptionHtml } from '~modules/content-page/services/content-page.converters.js';
-import type { ContentPageInfo } from '~modules/content-page/types/content-pages.types.js';
-import { useUserGroupOptions } from '~modules/user-group/hooks/useUserGroupOptions.js';
-import type { UserGroup } from '~modules/user-group/types/user-group.types.js';
-import Html from '~shared/components/Html/Html.js';
-import { Link } from '~shared/components/Link/Link.js';
-import { GET_LANGUAGE_NAMES } from '~shared/consts/language-names.js';
-import { formatDate, formatDateString } from '~shared/helpers/formatters/date.js';
-import { isMultiLanguageEnabled } from '~shared/helpers/is-multi-language-enabled.js';
-import { buildLink } from '~shared/helpers/link.js';
+import { BlockHeading } from '~content-blocks/BlockHeading/BlockHeading';
+import { AdminConfigManager } from '~core/config/config.class';
+import { GET_CONTENT_PAGE_WIDTH_OPTIONS } from '~modules/content-page/const/content-page.consts';
+import { useContentTypes } from '~modules/content-page/hooks/useContentTypes';
+import { getContentPageDescriptionHtml } from '~modules/content-page/services/content-page.converters';
+import type { ContentPageInfo } from '~modules/content-page/types/content-pages.types';
+import { useUserGroupOptions } from '~modules/user-group/hooks/useUserGroupOptions';
+import type { UserGroup } from '~modules/user-group/types/user-group.types';
+import Html from '~shared/components/Html/Html';
+import { Link } from '~shared/components/Link/Link';
+import { GET_LANGUAGE_NAMES } from '~shared/consts/language-names';
+import { formatDate, formatDateString } from '~shared/helpers/formatters/date';
+import { isMultiLanguageEnabled } from '~shared/helpers/is-multi-language-enabled';
+import { buildLink } from '~shared/helpers/link';
 import {
 	renderDateDetailRows,
 	renderDetailRow,
 	renderSimpleDetailRows,
-} from '~shared/helpers/render-detail-fields.js';
-import { SanitizePreset } from '~shared/helpers/sanitize/presets/index.js';
-import { tHtml, tText } from '~shared/helpers/translation-functions.js';
+} from '~shared/helpers/render-detail-fields';
+import { SanitizePreset } from '~shared/helpers/sanitize/presets/index';
+import { tHtml, tText } from '~shared/helpers/translation-functions';
 
 interface ContentDetailMetaDataProps {
 	contentPageInfo: ContentPageInfo;

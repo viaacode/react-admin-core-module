@@ -4,7 +4,7 @@ import React, { cloneElement } from 'react';
 
 import imageSource from '../../../static/images/1280x720.jpg';
 
-import { BlockImageTitleTextButton } from './BlockImageTitleTextButton.js';
+import { BlockImageTitleTextButton } from './BlockImageTitleTextButton';
 
 const customClass = 'c-block-custom';
 

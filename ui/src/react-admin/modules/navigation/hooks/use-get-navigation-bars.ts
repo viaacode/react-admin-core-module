@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
-import { NavigationService } from '~modules/navigation/navigation.service.js';
-import { QUERY_KEYS } from '~shared/types/index.js';
-import { reindexNavigationItems } from '../helpers/reorder-navigation-items.js';
+import { NavigationService } from '~modules/navigation/navigation.service';
+import { QUERY_KEYS } from '~shared/types/index';
+import { reindexNavigationItems } from '../helpers/reorder-navigation-items';
 
 export const useGetNavigationBars = () => {
 	return useQuery({

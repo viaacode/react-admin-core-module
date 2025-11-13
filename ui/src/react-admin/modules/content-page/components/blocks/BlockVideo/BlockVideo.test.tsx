@@ -1,8 +1,8 @@
 import { mount, shallow } from 'enzyme';
 import React from 'react';
-import { flowplayerMock } from '../../../../../../__mocks__/flowplayer.js';
+import { flowplayerMock } from '../../../../../../__mocks__/flowplayer';
 
-import { BlockVideo } from './BlockVideo.js';
+import { BlockVideo } from './BlockVideo';
 
 const customClass = 'c-block-custom';
 

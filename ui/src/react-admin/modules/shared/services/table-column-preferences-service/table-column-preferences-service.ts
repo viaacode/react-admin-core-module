@@ -1,7 +1,7 @@
-import { CustomError } from '~shared/helpers/custom-error.js';
-import { fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout.js';
-import { getAdminCoreApiUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config.js';
-import { isAvo } from '~shared/helpers/is-avo.js';
+import { CustomError } from '~shared/helpers/custom-error';
+import { fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
+import { getAdminCoreApiUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config';
+import { isAvo } from '~shared/helpers/is-avo';
 
 export class TableColumnPreferenceService {
 	private static columnsMap: Map<string, string[]> = new Map<string, string[]>();

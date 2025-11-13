@@ -26,8 +26,8 @@ import clsx from 'clsx';
 import { clone, compact, take } from 'es-toolkit';
 import type { FunctionComponent, KeyboardEvent, MouseEvent } from 'react';
 import React, { useState } from 'react';
-import { tText } from '~shared/helpers/translation-functions.js';
-import { isMobileWidth } from '../../helpers/media-query.js';
+import { tText } from '~shared/helpers/translation-functions';
+import { isMobileWidth } from '../../helpers/media-query';
 
 import './CheckboxDropdownModal.scss';
 

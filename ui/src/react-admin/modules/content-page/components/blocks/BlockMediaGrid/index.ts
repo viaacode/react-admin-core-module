@@ -1,1 +1,1 @@
-export * from './BlockMediaGrid.editorconfig.js';
+export * from './BlockMediaGrid.editorconfig';

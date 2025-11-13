@@ -6,7 +6,7 @@ import type {
 	Locale,
 	Location,
 	ValueType,
-} from '~modules/translations/translations.core.types.js';
+} from '~modules/translations/translations.core.types';
 
 export interface TranslationsOverviewProps extends DefaultProps {
 	renderPopup: (info: {

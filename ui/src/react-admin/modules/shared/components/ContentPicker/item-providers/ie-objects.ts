@@ -1,12 +1,12 @@
 import { ContentPickerType } from '@viaa/avo2-types';
 import memoize from 'memoizee';
-import type { HetArchiefIeObject } from '~modules/content-page/types/content-block.types.js';
-import { parsePickerItem } from '~shared/components/ContentPicker/helpers/parse-picker.js';
-import { MEMOIZEE_OPTIONS } from '~shared/consts/memoizee-options.js';
-import { CustomError } from '~shared/helpers/custom-error.js';
-import { fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout.js';
-import { getProxyUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config.js';
-import type { PickerItem } from '~shared/types/content-picker.js';
+import type { HetArchiefIeObject } from '~modules/content-page/types/content-block.types';
+import { parsePickerItem } from '~shared/components/ContentPicker/helpers/parse-picker';
+import { MEMOIZEE_OPTIONS } from '~shared/consts/memoizee-options';
+import { CustomError } from '~shared/helpers/custom-error';
+import { fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
+import { getProxyUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config';
+import type { PickerItem } from '~shared/types/content-picker';
 
 export const retrieveIeObjects = memoize(
 	async (title: string | null, limit = 5): Promise<PickerItem[]> => {

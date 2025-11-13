@@ -1,2 +1,2 @@
-export * from './BlockTagsWithLink.editorconfig.js';
-export * from './BlockTagsWithLink.js';
+export * from './BlockTagsWithLink.editorconfig';
+export * from './BlockTagsWithLink';

@@ -1,8 +1,8 @@
 import * as fs from 'node:fs/promises';
 import * as path from 'node:path';
 import { kebabCase } from 'es-toolkit';
-import { executeDatabaseQuery } from './execute-database-query.js';
-import { App, type TranslationEntry } from './translation.types.js';
+import { executeDatabaseQuery } from './execute-database-query';
+import { App, type TranslationEntry } from './translation.types';
 
 async function getOnlineTranslations(app: App): Promise<TranslationEntry[]> {
 	const response = await executeDatabaseQuery(

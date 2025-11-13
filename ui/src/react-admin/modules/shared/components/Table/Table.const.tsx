@@ -1,7 +1,7 @@
 import type { TableSortingIcons } from '@meemoo/react-components';
 import React from 'react';
 
-import { Icon } from '../Icon/Icon.js';
+import { Icon } from '../Icon/Icon';
 
 export const sortingIcons: TableSortingIcons = {
 	asc: <Icon className="c-sorting-icon" name="arrowUp" />,

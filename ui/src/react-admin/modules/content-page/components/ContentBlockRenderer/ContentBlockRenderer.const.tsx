@@ -1,42 +1,42 @@
 import type { FC, FunctionComponent } from 'react';
-import { AvoHeroWrapper } from '~content-blocks/BlockAvoHero/AvoHeroWrapper.js';
-import { BlockAvoImageTextBackground } from '~content-blocks/BlockAvoImageTextBackground/index.js';
-import { BlockBreadcrumbs } from '~content-blocks/BlockBreadcrumbs/index.js';
-import { BlockButtonsWrapper } from '~content-blocks/BlockButtons/index.js';
-import { BlockCardsWithoutDescription } from '~content-blocks/BlockCardsWithoutDescription/index.js';
-import { BlockContentPageMeta } from '~content-blocks/BlockContentPageMeta/index.js';
-import { BlockCTAsWrapper } from '~content-blocks/BlockCTAs/index.js';
-import { BlockEventbrite } from '~content-blocks/BlockEventbrite/index.js';
-import { BlockHeading } from '~content-blocks/BlockHeading/index.js';
-import { BlockHetArchiefHeaderSearch } from '~content-blocks/BlockHetArchiefHeaderSearch/BlockHetArchiefHeaderSearch.js';
-import { BlockHetArchiefImageTextBackground } from '~content-blocks/BlockHetArchiefImageTextBackground/index.js';
-import { BlockIFrame } from '~content-blocks/BlockIFrame/index.js';
-import { BlockImage } from '~content-blocks/BlockImage/index.js';
+import { AvoHeroWrapper } from '~content-blocks/BlockAvoHero/AvoHeroWrapper';
+import { BlockAvoImageTextBackground } from '~content-blocks/BlockAvoImageTextBackground/index';
+import { BlockBreadcrumbs } from '~content-blocks/BlockBreadcrumbs/index';
+import { BlockButtonsWrapper } from '~content-blocks/BlockButtons/index';
+import { BlockCardsWithoutDescription } from '~content-blocks/BlockCardsWithoutDescription/index';
+import { BlockContentPageMeta } from '~content-blocks/BlockContentPageMeta/index';
+import { BlockCTAsWrapper } from '~content-blocks/BlockCTAs/index';
+import { BlockEventbrite } from '~content-blocks/BlockEventbrite/index';
+import { BlockHeading } from '~content-blocks/BlockHeading/index';
+import { BlockHetArchiefHeaderSearch } from '~content-blocks/BlockHetArchiefHeaderSearch/BlockHetArchiefHeaderSearch';
+import { BlockHetArchiefImageTextBackground } from '~content-blocks/BlockHetArchiefImageTextBackground/index';
+import { BlockIFrame } from '~content-blocks/BlockIFrame/index';
+import { BlockImage } from '~content-blocks/BlockImage/index';
 import {
 	BlockImageGridWrapper,
 	BlockLogoGridWrapper,
 	BlockUspGridWrapper,
-} from '~content-blocks/BlockImageGrid/index.js';
-import { BlockImageTitleTextButtonWrapper } from '~content-blocks/BlockImageTitleTextButton/index.js';
-import { BlockIntro } from '~content-blocks/BlockIntro/index.js';
-import { BlockKlaar } from '~content-blocks/BlockKlaar/index.js';
-import { BlockMaintainersGrid } from '~content-blocks/BlockMaintainersGrid/index.js';
-import { BlockOverviewNewspaperTitles } from '~content-blocks/BlockOverviewNewspaperTitles/index.js';
-import { BlockPageOverviewWrapper } from '~content-blocks/BlockPageOverview/index.js';
-import { BlockQuote } from '~content-blocks/BlockQuote/index.js';
-import { BlockRichTextWrapper } from '~content-blocks/BlockRichText/index.js';
-import { BlockScrollDownNudge } from '~content-blocks/BlockScrollDownNudge/index.js';
+} from '~content-blocks/BlockImageGrid/index';
+import { BlockImageTitleTextButtonWrapper } from '~content-blocks/BlockImageTitleTextButton/index';
+import { BlockIntro } from '~content-blocks/BlockIntro/index';
+import { BlockKlaar } from '~content-blocks/BlockKlaar/index';
+import { BlockMaintainersGrid } from '~content-blocks/BlockMaintainersGrid/index';
+import { BlockOverviewNewspaperTitles } from '~content-blocks/BlockOverviewNewspaperTitles/index';
+import { BlockPageOverviewWrapper } from '~content-blocks/BlockPageOverview/index';
+import { BlockQuote } from '~content-blocks/BlockQuote/index';
+import { BlockRichTextWrapper } from '~content-blocks/BlockRichText/index';
+import { BlockScrollDownNudge } from '~content-blocks/BlockScrollDownNudge/index';
 import {
 	BlockProjectSpotlightWrapper,
 	BlockSpotlight,
-} from '~content-blocks/BlockSpotlight/index.js';
-import { BlockTagsWithLink } from '~content-blocks/BlockTagsWithLink/index.js';
-import { BlockThreeClickableTiles } from '~content-blocks/BlockThreeClickableTiles/index.js';
-import { BlockUitgeklaard } from '~content-blocks/BlockUitgeklaard/index.js';
-import { BlockVideoWrapper } from '~content-blocks/BlockVideo/index.js';
-import { BlockVideoTitleTextButtonWrapper } from '~content-blocks/BlockVideoTitleTextButton/index.js';
-import { AdminConfigManager } from '~core/config/config.class.js';
-import { ContentBlockType } from '~modules/content-page/types/content-block.types.js';
+} from '~content-blocks/BlockSpotlight/index';
+import { BlockTagsWithLink } from '~content-blocks/BlockTagsWithLink/index';
+import { BlockThreeClickableTiles } from '~content-blocks/BlockThreeClickableTiles/index';
+import { BlockUitgeklaard } from '~content-blocks/BlockUitgeklaard/index';
+import { BlockVideoWrapper } from '~content-blocks/BlockVideo/index';
+import { BlockVideoTitleTextButtonWrapper } from '~content-blocks/BlockVideoTitleTextButton/index';
+import { AdminConfigManager } from '~core/config/config.class';
+import { ContentBlockType } from '~modules/content-page/types/content-block.types';
 
 function loadComponentFromConfig(key: ContentBlockType): FC {
 	return (

@@ -9,15 +9,15 @@ import React, {
 	useEffect,
 	useState,
 } from 'react';
-import { ToastType } from '~core/config/config.types.js';
-import { AdminConfigManager } from '~core/config/index.js';
-import { ItemsService } from '~modules/item/items.service.js';
-import { showToast } from '~modules/shared/helpers/show-toast.js';
-import { FlowPlayerWrapper } from '~shared/components/FlowPlayerWrapper/FlowPlayerWrapper.js';
-import type { LoadingInfo } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent.js';
-import { LoadingErrorLoadedComponent } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent.js';
-import { CustomError } from '~shared/helpers/custom-error.js';
-import { tHtml, tText } from '~shared/helpers/translation-functions.js';
+import { ToastType } from '~core/config/config.types';
+import { AdminConfigManager } from '~core/config/index';
+import { ItemsService } from '~modules/item/items.service';
+import { showToast } from '~modules/shared/helpers/show-toast';
+import { FlowPlayerWrapper } from '~shared/components/FlowPlayerWrapper/FlowPlayerWrapper';
+import type { LoadingInfo } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
+import { LoadingErrorLoadedComponent } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
+import { CustomError } from '~shared/helpers/custom-error';
+import { tHtml, tText } from '~shared/helpers/translation-functions';
 
 interface MediaPlayerWrapperProps {
 	item?: ButtonAction;

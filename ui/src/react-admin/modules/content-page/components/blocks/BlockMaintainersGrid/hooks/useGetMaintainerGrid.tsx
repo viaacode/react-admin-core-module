@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
-import { OrganisationService } from '~shared/services/organization-service/organisation-service.js';
-import { QUERY_KEYS } from '~shared/types/index.js';
-import type { MaintainerGridOrganisation } from '~shared/types/organisation.types.js';
+import { OrganisationService } from '~shared/services/organization-service/organisation-service';
+import { QUERY_KEYS } from '~shared/types/index';
+import type { MaintainerGridOrganisation } from '~shared/types/organisation.types';
 
 export const useGetMaintainerGrid = (limit: number) => {
 	return useQuery<MaintainerGridOrganisation[]>({

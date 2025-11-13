@@ -1,1 +1,1 @@
-export * from './BlockAccordions.js';
+export * from './BlockAccordions';

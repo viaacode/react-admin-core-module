@@ -1,5 +1,5 @@
 import { isString } from 'es-toolkit';
-import { findValueDeep } from '~shared/helpers/find-value-deep.js';
+import { findValueDeep } from '~shared/helpers/find-value-deep';
 
 const IMAGE_EXTENSIONS = ['jpeg', 'jpg', 'png', 'gif', 'gif', 'bmp', 'tiff', 'tif', 'webp'];
 

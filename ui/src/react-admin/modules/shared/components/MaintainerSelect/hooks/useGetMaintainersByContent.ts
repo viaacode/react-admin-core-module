@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { ContentPickerType } from '@viaa/avo2-types';
-import { OrganisationService } from '~shared/services/organization-service/organisation-service.js';
-import { QUERY_KEYS } from '~shared/types/index.js';
+import { OrganisationService } from '~shared/services/organization-service/organisation-service';
+import { QUERY_KEYS } from '~shared/types/index';
 
 export const useGetMaintainersByContent = (
 	contentItemType: ContentPickerType | undefined | null,

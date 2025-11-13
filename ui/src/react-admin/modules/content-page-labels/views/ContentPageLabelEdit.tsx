@@ -14,27 +14,27 @@ import { Avo } from '@viaa/avo2-types';
 import { isNil } from 'es-toolkit';
 import type { FunctionComponent } from 'react';
 import React, { useCallback, useEffect, useState } from 'react';
-import { AdminConfigManager, ToastType } from '~core/config/index.js';
-import { ContentPageLabelService } from '~modules/content-page-labels/content-page-label.service.js';
-import { useGetAllLanguages } from '~modules/translations/hooks/use-get-all-languages.js';
-import { Locale } from '~modules/translations/translations.core.types.js';
-import { ContentPicker } from '~shared/components/ContentPicker/ContentPicker.js';
-import { Icon } from '~shared/components/Icon/Icon.js';
-import type { LoadingInfo } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent.js';
-import { LoadingErrorLoadedComponent } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent.js';
-import { GET_LANGUAGE_NAMES } from '~shared/consts/language-names.js';
-import { CustomError } from '~shared/helpers/custom-error.js';
-import { isMultiLanguageEnabled } from '~shared/helpers/is-multi-language-enabled.js';
-import { buildLink, navigate } from '~shared/helpers/link.js';
-import { showToast } from '~shared/helpers/show-toast.js';
-import { tText } from '~shared/helpers/translation-functions.js';
-import { AdminLayout } from '~shared/layouts/AdminLayout/AdminLayout.js';
-import type { DefaultComponentProps } from '~shared/types/components.js';
-import { useContentTypes } from '../../content-page/hooks/useContentTypes.js';
+import { AdminConfigManager, ToastType } from '~core/config/index';
+import { ContentPageLabelService } from '~modules/content-page-labels/content-page-label.service';
+import { useGetAllLanguages } from '~modules/translations/hooks/use-get-all-languages';
+import { Locale } from '~modules/translations/translations.core.types';
+import { ContentPicker } from '~shared/components/ContentPicker/ContentPicker';
+import { Icon } from '~shared/components/Icon/Icon';
+import type { LoadingInfo } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
+import { LoadingErrorLoadedComponent } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
+import { GET_LANGUAGE_NAMES } from '~shared/consts/language-names';
+import { CustomError } from '~shared/helpers/custom-error';
+import { isMultiLanguageEnabled } from '~shared/helpers/is-multi-language-enabled';
+import { buildLink, navigate } from '~shared/helpers/link';
+import { showToast } from '~shared/helpers/show-toast';
+import { tText } from '~shared/helpers/translation-functions';
+import { AdminLayout } from '~shared/layouts/AdminLayout/AdminLayout';
+import type { DefaultComponentProps } from '~shared/types/components';
+import { useContentTypes } from '../../content-page/hooks/useContentTypes';
 import type {
 	ContentPageLabel,
 	ContentPageLabelEditFormErrorState,
-} from '../content-page-label.types.js';
+} from '../content-page-label.types';
 
 type ContentPageLabelEditProps = {
 	contentPageLabelId: string | undefined;

@@ -1,9 +1,9 @@
 import { Avo } from '@viaa/avo2-types';
 import { compact, sortBy } from 'es-toolkit';
-import { AdminConfigManager } from '~core/config/config.class.js';
-import type { Locale } from '~modules/translations/translations.core.types.js';
-import type { PickerItem } from '~shared/types/content-picker.js';
-import { parsePickerItem } from '../helpers/parse-picker.js';
+import { AdminConfigManager } from '~core/config/config.class';
+import type { Locale } from '~modules/translations/translations.core.types';
+import type { PickerItem } from '~shared/types/content-picker';
+import { parsePickerItem } from '../helpers/parse-picker';
 
 // Return InternalLinkItems items from adminCoreConfig.staticPages
 export const retrieveInternalLinks = async (

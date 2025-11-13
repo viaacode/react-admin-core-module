@@ -1,5 +1,5 @@
 import { Avo } from '@viaa/avo2-types';
-import type { ButtonProps } from './BlockButtons.js';
+import type { ButtonProps } from './BlockButtons';
 
 export const BUTTONS_MOCK: ButtonProps[] = [
 	{

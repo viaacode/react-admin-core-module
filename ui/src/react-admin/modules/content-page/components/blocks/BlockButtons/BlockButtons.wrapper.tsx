@@ -1,9 +1,9 @@
 import type { FunctionComponent } from 'react';
 import React from 'react';
-import type { BlockButtonsProps } from '~content-blocks/BlockButtons/BlockButtons.js';
-import { BlockButtons } from '~content-blocks/BlockButtons/BlockButtons.js';
+import type { BlockButtonsProps } from '~content-blocks/BlockButtons/BlockButtons';
+import { BlockButtons } from '~content-blocks/BlockButtons/BlockButtons';
 
-import { tText } from '~shared/helpers/translation-functions.js';
+import { tText } from '~shared/helpers/translation-functions';
 
 export const BlockButtonsWrapper: FunctionComponent<BlockButtonsProps> = (props) => {
 	// Add tooltips for download buttons

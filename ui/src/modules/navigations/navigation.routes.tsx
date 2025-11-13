@@ -1,10 +1,10 @@
 import type { ReactNode } from 'react';
 import React from 'react';
 import { Route } from 'react-router-dom';
-import { AdminConfigManager } from '~core/config/config.class.js';
-import { NavigationDetailPage } from './NavigationDetailPage.js';
-import { NavigationEditPage } from './NavigationEditPage.js';
-import { NavigationOverviewPage } from './NavigationOverviewPage.js';
+import { AdminConfigManager } from '~core/config/config.class';
+import { NavigationDetailPage } from './NavigationDetailPage';
+import { NavigationEditPage } from './NavigationEditPage';
+import { NavigationOverviewPage } from './NavigationOverviewPage';
 
 export const renderAdminNavigationRoutes = (): ReactNode[] => [
 	<Route

@@ -2,8 +2,8 @@ import type { SelectOption } from '@viaa/avo2-components';
 import type {
 	HeadingSizeOption,
 	HeadingTypeOption,
-} from '~modules/content-page/types/content-block.types.js';
-import { tText } from '~shared/helpers/translation-functions.js';
+} from '~modules/content-page/types/content-block.types';
+import { tText } from '~shared/helpers/translation-functions';
 
 export const GET_HEADING_TYPE_OPTIONS: () => SelectOption<HeadingTypeOption>[] = () => [
 	{

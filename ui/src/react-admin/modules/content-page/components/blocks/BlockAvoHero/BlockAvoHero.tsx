@@ -11,13 +11,13 @@ import clsx from 'clsx';
 import { isString } from 'es-toolkit';
 import type { FunctionComponent, ReactNode } from 'react';
 import React from 'react';
-import { Icon } from '~shared/components/Icon/Icon.js';
-import { defaultRenderLinkFunction } from '~shared/helpers/link.js';
+import { Icon } from '~shared/components/Icon/Icon';
+import { defaultRenderLinkFunction } from '~shared/helpers/link';
 
-import { BlockHeading } from '../BlockHeading/BlockHeading.js';
+import { BlockHeading } from '../BlockHeading/BlockHeading';
 
 import './BlockAvoHero.scss';
-import Html from '~modules/shared/components/Html/Html.js';
+import Html from '~modules/shared/components/Html/Html';
 
 export interface BlockAvoHeroProps extends DefaultProps {
 	title: string;

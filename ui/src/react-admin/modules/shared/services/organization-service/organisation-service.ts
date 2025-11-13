@@ -1,12 +1,12 @@
 import type { ContentPickerType } from '@viaa/avo2-types';
 import { stringifyUrl } from 'query-string';
-import { CustomError } from '~shared/helpers/custom-error.js';
-import { fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout.js';
+import { CustomError } from '~shared/helpers/custom-error';
+import { fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
 import {
 	getAdminCoreApiUrl,
 	getProxyUrl,
-} from '~shared/helpers/get-proxy-url-from-admin-core-config.js';
-import type { MaintainerGridOrganisation } from '~shared/types/organisation.types.js';
+} from '~shared/helpers/get-proxy-url-from-admin-core-config';
+import type { MaintainerGridOrganisation } from '~shared/types/organisation.types';
 
 export type BasicOrganisation = {
 	or_id: string;

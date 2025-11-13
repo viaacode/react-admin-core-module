@@ -2,11 +2,11 @@ import type { ButtonAction } from '@viaa/avo2-components';
 import { Avo } from '@viaa/avo2-types';
 import clsx from 'clsx';
 import type { FunctionComponent, ReactElement } from 'react';
-import { useGetMaintainerGrid } from '~content-blocks/BlockMaintainersGrid/hooks/useGetMaintainerGrid.js';
-import type { HeadingTypeOption } from '~modules/content-page/types/content-block.types.js';
-import { SmartLink } from '~modules/shared/components/SmartLink/SmartLink.js';
-import type { DefaultComponentProps } from '~modules/shared/types/components.js';
-import { BlockHeading } from '../BlockHeading/BlockHeading.js';
+import { useGetMaintainerGrid } from '~content-blocks/BlockMaintainersGrid/hooks/useGetMaintainerGrid';
+import type { HeadingTypeOption } from '~modules/content-page/types/content-block.types';
+import { SmartLink } from '~modules/shared/components/SmartLink/SmartLink';
+import type { DefaultComponentProps } from '~modules/shared/types/components';
+import { BlockHeading } from '../BlockHeading/BlockHeading';
 
 export interface BlockMaintainerGridProps extends DefaultComponentProps {
 	title: string;

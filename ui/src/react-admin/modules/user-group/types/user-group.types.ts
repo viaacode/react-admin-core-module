@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import type { PermissionData } from '~modules/permissions/permissions.types.js';
+import type { PermissionData } from '~modules/permissions/permissions.types';
 
 export interface UserGroupOverviewProps {
 	onChangePermissions?: (hasChanges: boolean) => void;

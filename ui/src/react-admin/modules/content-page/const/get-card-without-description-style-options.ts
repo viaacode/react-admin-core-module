@@ -1,6 +1,6 @@
 import type { SelectOption } from '@viaa/avo2-components';
-import { tText } from '../../shared/helpers/translation-functions.js';
-import type { CardWithoutDescriptionStyleOption } from '../types/content-block.types.js';
+import { tText } from '../../shared/helpers/translation-functions';
+import type { CardWithoutDescriptionStyleOption } from '../types/content-block.types';
 
 export const GET_CARD_WITHOUT_DESCRIPTION_STYLE_OPTIONS: () => SelectOption<CardWithoutDescriptionStyleOption>[] =
 	() => [

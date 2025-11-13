@@ -3,7 +3,7 @@ import * as fs from 'node:fs/promises';
 import * as path from 'node:path';
 import { red } from 'console-log-colors';
 import { uniq } from 'es-toolkit';
-import { getDirName } from './get-dir-name.js';
+import { getDirName } from './get-dir-name';
 
 /**
  * fetch the list of commit messages between two git tags using the command:

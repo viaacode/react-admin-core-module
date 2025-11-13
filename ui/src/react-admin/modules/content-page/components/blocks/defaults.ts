@@ -1,28 +1,28 @@
 import type { SelectOption } from '@viaa/avo2-components';
-import { GET_ALIGN_OPTIONS } from '~modules/content-page/const/get-align-options.js';
+import { GET_ALIGN_OPTIONS } from '~modules/content-page/const/get-align-options';
 import {
 	GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF,
 	GET_BACKGROUND_COLOR_OPTIONS_AVO,
 	GET_COLOR_OPTIONS_EXTENDED_AVO,
 	GET_FOREGROUND_COLOR_OPTIONS_ARCHIEF,
 	GET_FOREGROUND_COLOR_OPTIONS_AVO,
-} from '~modules/content-page/const/get-color-options.js';
+} from '~modules/content-page/const/get-color-options';
 
-import type { FileUploadProps } from '~shared/components/FileUpload/FileUpload.js';
-import type { RichTextEditorWithInternalStateWrapperProps } from '~shared/components/RichTextEditorWithInternalStateWrapper/RichTextEditorWithInternalStateWrapper.js';
-import type { UserGroupSelectProps } from '~shared/components/UserGroupSelect/UserGroupSelect.js';
-import { RICH_TEXT_EDITOR_OPTIONS_FULL_WITHOUT_ALIGN } from '~shared/consts/rich-text-editor.consts.js';
-import { isAvo } from '~shared/helpers/is-avo.js';
-import { tText } from '~shared/helpers/translation-functions.js';
-import { SpecialPermissionGroups } from '~shared/types/authentication.types.js';
+import type { FileUploadProps } from '~shared/components/FileUpload/FileUpload';
+import type { RichTextEditorWithInternalStateWrapperProps } from '~shared/components/RichTextEditorWithInternalStateWrapper/RichTextEditorWithInternalStateWrapper';
+import type { UserGroupSelectProps } from '~shared/components/UserGroupSelect/UserGroupSelect';
+import { RICH_TEXT_EDITOR_OPTIONS_FULL_WITHOUT_ALIGN } from '~shared/consts/rich-text-editor.consts';
+import { isAvo } from '~shared/helpers/is-avo';
+import { tText } from '~shared/helpers/translation-functions';
+import { SpecialPermissionGroups } from '~shared/types/authentication.types';
 import type {
 	ContentBlockField,
 	CustomBackground,
 	DefaultContentBlockState,
 	GradientColor,
 	PaddingFieldState,
-} from '../../types/content-block.types.js';
-import { Color, ContentBlockEditor } from '../../types/content-block.types.js';
+} from '../../types/content-block.types';
+import { Color, ContentBlockEditor } from '../../types/content-block.types';
 
 // Block config defaults
 export const BLOCK_STATE_DEFAULTS = (

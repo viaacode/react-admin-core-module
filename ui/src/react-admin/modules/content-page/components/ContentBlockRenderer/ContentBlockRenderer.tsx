@@ -4,11 +4,11 @@ import clsx from 'clsx';
 import { kebabCase, noop, omit } from 'es-toolkit';
 import type { FunctionComponent, KeyboardEvent, RefObject } from 'react';
 import React, { useCallback, useEffect, useRef } from 'react';
-import { generateSmartLink } from '~shared/components/SmartLink/SmartLink.js';
+import { generateSmartLink } from '~shared/components/SmartLink/SmartLink';
 
-import { GET_DARK_BACKGROUND_COLOR_OPTIONS } from '../../const/get-color-options.js';
-import type { ContentBlockConfig } from '../../types/content-block.types.js';
-import { Color, CustomBackground } from '../../types/content-block.types.js';
+import { GET_DARK_BACKGROUND_COLOR_OPTIONS } from '../../const/get-color-options';
+import type { ContentBlockConfig } from '../../types/content-block.types';
+import { Color, CustomBackground } from '../../types/content-block.types';
 
 import {
 	CONTENT_PAGE_ACCESS_BLOCKS,
@@ -17,13 +17,13 @@ import {
 	NAVIGABLE_CONTENT_BLOCKS,
 	REPEATABLE_CONTENT_BLOCKS,
 	USER_CONTENT_BLOCKS,
-} from './ContentBlockRenderer.const.js';
+} from './ContentBlockRenderer.const';
 
 import './ContentBlockRenderer.scss';
-import { AdminConfigManager } from '~core/config/config.class.js';
-import { GENERATED_CONTENT_BLOCK_ANCHOR_PREFIX } from '~modules/content-page/const/content-block-anchors.consts.js';
-import type { ContentPageInfo } from '~modules/content-page/types/content-pages.types.js';
-import { ContentPageWidth } from '~modules/content-page/types/content-pages.types.js';
+import { AdminConfigManager } from '~core/config/config.class';
+import { GENERATED_CONTENT_BLOCK_ANCHOR_PREFIX } from '~modules/content-page/const/content-block-anchors.consts';
+import type { ContentPageInfo } from '~modules/content-page/types/content-pages.types';
+import { ContentPageWidth } from '~modules/content-page/types/content-pages.types';
 
 interface ContentBlockPreviewProps {
 	contentBlockConfig: ContentBlockConfig;

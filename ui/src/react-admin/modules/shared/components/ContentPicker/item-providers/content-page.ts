@@ -1,11 +1,12 @@
 import { Avo, ContentPickerType } from '@viaa/avo2-types';
+// TODO remove memoize in favor of react-query caching
 import memoize from 'memoizee';
-import { ContentPageService } from '~modules/content-page/services/content-page.service.js';
-import type { ContentPageInfo } from '~modules/content-page/types/content-pages.types.js';
-import { MEMOIZEE_OPTIONS } from '~shared/consts/memoizee-options.js';
-import { CustomError } from '~shared/helpers/custom-error.js';
-import type { PickerItem } from '~shared/types/content-picker.js';
-import { parsePickerItem } from '../helpers/parse-picker.js';
+import { ContentPageService } from '~modules/content-page/services/content-page.service';
+import type { ContentPageInfo } from '~modules/content-page/types/content-pages.types';
+import { MEMOIZEE_OPTIONS } from '~shared/consts/memoizee-options';
+import { CustomError } from '~shared/helpers/custom-error';
+import type { PickerItem } from '~shared/types/content-picker';
+import { parsePickerItem } from '../helpers/parse-picker';
 
 // Fetch content items from GQL
 export const retrieveContentPages = memoize(

@@ -1,21 +1,21 @@
-import type { GridItem } from '~content-blocks/BlockImageGrid/BlockImageGrid.types.js';
-import type { BlockImageGridWrapperProps } from '~content-blocks/BlockImageGrid/BlockImageGrid.wrapper.js';
+import type { GridItem } from '~content-blocks/BlockImageGrid/BlockImageGrid.types';
+import type { BlockImageGridWrapperProps } from '~content-blocks/BlockImageGrid/BlockImageGrid.wrapper';
 
-import { AdminConfigManager } from '~core/config/config.class.js';
-import { GET_ALIGN_OPTIONS } from '~modules/content-page/const/get-align-options.js';
-import { GET_FILL_OPTIONS } from '~modules/content-page/const/get-fill-options.js';
-import { GET_IMAGE_GRID_FORMAT_OPTIONS } from '~modules/content-page/const/get-image-grid-format-options.js';
+import { AdminConfigManager } from '~core/config/config.class';
+import { GET_ALIGN_OPTIONS } from '~modules/content-page/const/get-align-options';
+import { GET_FILL_OPTIONS } from '~modules/content-page/const/get-fill-options';
+import { GET_IMAGE_GRID_FORMAT_OPTIONS } from '~modules/content-page/const/get-image-grid-format-options';
 
-import type { FileUploadProps } from '~shared/components/FileUpload/FileUpload.js';
-import { tText } from '~shared/helpers/translation-functions.js';
+import type { FileUploadProps } from '~shared/components/FileUpload/FileUpload';
+import { tText } from '~shared/helpers/translation-functions';
 import type {
 	ContentBlockConfig,
 	DefaultContentBlockState,
 	ImageGridBlockComponentStateFields,
-} from '../../../types/content-block.types.js';
-import { ContentBlockEditor, ContentBlockType } from '../../../types/content-block.types.js';
+} from '../../../types/content-block.types';
+import { ContentBlockEditor, ContentBlockType } from '../../../types/content-block.types';
 
-import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, FILE_FIELD, TEXT_FIELD } from '../defaults.js';
+import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, FILE_FIELD, TEXT_FIELD } from '../defaults';
 
 export const INITIAL_IMAGE_GRID_COMPONENTS_STATE = (): ImageGridBlockComponentStateFields[] => [
 	{

@@ -4,15 +4,15 @@ import type { Avo } from '@viaa/avo2-types';
 import { PermissionName } from '@viaa/avo2-types';
 import type { FC } from 'react';
 import React from 'react';
-import { BlockHeading } from '~content-blocks/BlockHeading/BlockHeading.js';
-import { BlockRichTextWrapper } from '~content-blocks/BlockRichText/BlockRichText.wrapper.js';
-import { AdminConfigManager } from '~core/config/config.class.js';
-import type { IconConfig } from '~core/config/config.types.js';
-import { Icon } from '~shared/components/Icon/Icon.js';
-import { generateSmartLink } from '~shared/components/SmartLink/SmartLink.js';
-import { PermissionService } from '~shared/services/permission-service.js';
-import type { AlignOption, HeadingTypeOption } from '../../../types/content-block.types.js';
-import { BlockVideoWrapper } from '../BlockVideo/BlockVideo.wrapper.js';
+import { BlockHeading } from '~content-blocks/BlockHeading/BlockHeading';
+import { BlockRichTextWrapper } from '~content-blocks/BlockRichText/BlockRichText.wrapper';
+import { AdminConfigManager } from '~core/config/config.class';
+import type { IconConfig } from '~core/config/config.types';
+import { Icon } from '~shared/components/Icon/Icon';
+import { generateSmartLink } from '~shared/components/SmartLink/SmartLink';
+import { PermissionService } from '~shared/services/permission-service';
+import type { AlignOption, HeadingTypeOption } from '../../../types/content-block.types';
+import { BlockVideoWrapper } from '../BlockVideo/BlockVideo.wrapper';
 
 interface MediaPlayerTitleTextButtonWrapperProps {
 	mediaItem: ButtonAction;

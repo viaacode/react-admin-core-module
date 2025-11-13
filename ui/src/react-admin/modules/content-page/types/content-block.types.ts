@@ -9,12 +9,12 @@ import type {
 } from '@viaa/avo2-components';
 import type { Avo } from '@viaa/avo2-types';
 import type { ReactNode } from 'react';
-import type { BlockAvoHeroProps } from '~content-blocks/BlockAvoHero/BlockAvoHero.js';
+import type { BlockAvoHeroProps } from '~content-blocks/BlockAvoHero/BlockAvoHero';
 import type {
 	ContentItemStyle,
 	ContentTabStyle,
-} from '~content-blocks/BlockPageOverview/BlockPageOverview.types.js';
-import type { ImageInfo } from '~content-blocks/BlockSpotlight/BlockSpotlight.js';
+} from '~content-blocks/BlockPageOverview/BlockPageOverview.types';
+import type { ImageInfo } from '~content-blocks/BlockSpotlight/BlockSpotlight';
 
 // OPTIONS
 export type AlignOption = 'left' | 'right' | 'center';

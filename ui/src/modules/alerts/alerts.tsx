@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 import { Route } from 'react-router';
-import { AdminConfigManager } from '~core/config/config.class.js';
-import { MaintenanceAlertsOverviewPage } from './MaintenanceAlertsOverviewPage.js';
+import { AdminConfigManager } from '~core/config/config.class';
+import { MaintenanceAlertsOverviewPage } from './MaintenanceAlertsOverviewPage';
 
 export const renderAdminAlertsRoutes = (): ReactNode[] => [
 	<Route

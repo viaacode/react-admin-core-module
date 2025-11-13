@@ -1,10 +1,10 @@
 import type { Avo } from '@viaa/avo2-types';
 import { stringifyUrl } from 'query-string';
-import { fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout.js';
-import { getAdminCoreApiUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config.js';
+import { fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
+import { getAdminCoreApiUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config';
 
-import { CustomError } from '../shared/helpers/custom-error.js';
-import { addDefaultAudioStillToItem } from '../shared/helpers/default-still.js';
+import { CustomError } from '../shared/helpers/custom-error';
+import { addDefaultAudioStillToItem } from '../shared/helpers/default-still';
 
 export class ItemsService {
 	private static getBaseUrl(): string {

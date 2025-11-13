@@ -1,10 +1,11 @@
 import { Avo } from '@viaa/avo2-types';
+// TODO remove memoize in favor of react-query caching
 import memoize from 'memoizee';
 
-import { AssignmentService } from '~modules/assignment/assignment.service.js';
-import { MEMOIZEE_OPTIONS } from '~shared/consts/memoizee-options.js';
-import type { PickerItem } from '~shared/types/content-picker.js';
-import { parsePickerItem } from '../helpers/parse-picker.js';
+import { AssignmentService } from '~modules/assignment/assignment.service';
+import { MEMOIZEE_OPTIONS } from '~shared/consts/memoizee-options';
+import type { PickerItem } from '~shared/types/content-picker';
+import { parsePickerItem } from '../helpers/parse-picker';
 
 // fetch assignments by title-wildcard
 export const retrieveAssignments = memoize(

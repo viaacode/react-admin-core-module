@@ -5,20 +5,20 @@ import { capitalize, lowerCase } from 'es-toolkit';
 import type { FunctionComponent, ReactNode } from 'react';
 import type { NavigateFunction } from 'react-router';
 import { Link } from 'react-router-dom';
-import { AdminConfigManager } from '~core/config/config.class.js';
-import type { LinkInfo, ToastInfo } from '~core/config/config.types.js';
-import { ContentBlockType } from '~modules/content-page/types/content-block.types.js';
+import { AdminConfigManager } from '~core/config/config.class';
+import type { LinkInfo, ToastInfo } from '~core/config/config.types';
+import { ContentBlockType } from '~modules/content-page/types/content-block.types';
 import {
 	type ContentPageInfo,
 	ContentPageWidth,
-} from '~modules/content-page/types/content-pages.types.js';
-import { Locale } from '~modules/translations/translations.core.types.js';
-import { UserBulkAction } from '~modules/user/user.types.js';
-import Html from '~shared/components/Html/Html.js';
-import { ROUTE_PARTS } from '~shared/consts/routes.js';
-import { tText } from '~shared/helpers/translation-functions.js';
-import { mockCommonUser } from '../../mock-common-user.js';
-import i18n from '../translations/i18n.js';
+} from '~modules/content-page/types/content-pages.types';
+import { Locale } from '~modules/translations/translations.core.types';
+import { UserBulkAction } from '~modules/user/user.types';
+import Html from '~shared/components/Html/Html';
+import { ROUTE_PARTS } from '~shared/consts/routes';
+import { tText } from '~shared/helpers/translation-functions';
+import { mockCommonUser } from '../../mock-common-user';
+import i18n from '../translations/i18n';
 
 const DUMMY_EDUCATIONAL_ORGANISATIONS: Avo.EducationOrganization.Organization[] = [
 	{

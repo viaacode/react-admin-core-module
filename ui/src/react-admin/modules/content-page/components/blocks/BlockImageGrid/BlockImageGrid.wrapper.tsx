@@ -3,16 +3,16 @@ import clsx from 'clsx';
 import { kebabCase } from 'es-toolkit';
 import type { FunctionComponent } from 'react';
 import React from 'react';
-import { BlockImageGrid } from '~content-blocks/BlockImageGrid/BlockImageGrid.js';
+import { BlockImageGrid } from '~content-blocks/BlockImageGrid/BlockImageGrid';
 import type {
 	CssSizeSetting,
 	GridItem,
-} from '~content-blocks/BlockImageGrid/BlockImageGrid.types.js';
+} from '~content-blocks/BlockImageGrid/BlockImageGrid.types';
 
 import type {
 	BlockGridFormatOption,
 	FillOption,
-} from '~modules/content-page/types/content-block.types.js';
+} from '~modules/content-page/types/content-block.types';
 
 export interface BlockImageGridWrapperProps {
 	elements: GridItem[];

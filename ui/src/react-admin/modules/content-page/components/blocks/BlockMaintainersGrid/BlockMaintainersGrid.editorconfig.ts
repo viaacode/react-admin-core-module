@@ -1,16 +1,16 @@
 import type { MultiRangeProps } from '@viaa/avo2-components';
-import { tText } from '~shared/helpers/translation-functions.js';
+import { tText } from '~shared/helpers/translation-functions';
 import type {
 	ContentBlockConfig,
 	DefaultContentBlockState,
 	MaintainersGridBlockComponentState,
-} from '../../../types/content-block.types.js';
-import { ContentBlockEditor, ContentBlockType } from '../../../types/content-block.types.js';
+} from '../../../types/content-block.types';
+import { ContentBlockEditor, ContentBlockType } from '../../../types/content-block.types';
 
-import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, TEXT_FIELD } from '../defaults.js';
+import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, TEXT_FIELD } from '../defaults';
 
-import { GET_HEADING_TYPE_OPTIONS } from '~modules/content-page/const/get-heading-type-options.js';
-import { HET_ARCHIEF } from '~shared/types/index.js';
+import { GET_HEADING_TYPE_OPTIONS } from '~modules/content-page/const/get-heading-type-options';
+import { HET_ARCHIEF } from '~shared/types/index';
 
 export const INITIAL_MAINTAINERS_GRID_COMPONENTS_STATE =
 	(): MaintainersGridBlockComponentState => ({

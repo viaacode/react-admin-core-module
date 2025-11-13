@@ -1,6 +1,6 @@
 import { isString } from 'es-toolkit';
 
-import type { CheckboxOption } from '../components/CheckboxDropdownModal/CheckboxDropdownModal.js';
+import type { CheckboxOption } from '../components/CheckboxDropdownModal/CheckboxDropdownModal';
 
 export function setSelectedCheckboxes(
 	options: CheckboxOption[] | string[],

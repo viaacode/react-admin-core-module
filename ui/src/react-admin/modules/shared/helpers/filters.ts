@@ -1,6 +1,6 @@
 import { compact, isNil, without } from 'es-toolkit';
 import { set } from 'es-toolkit/compat';
-import type { LomScheme } from '~shared/consts/lom-scheme.enum.js';
+import type { LomScheme } from '~shared/consts/lom-scheme.enum';
 
 export const NULL_FILTER = 'null';
 

@@ -11,10 +11,10 @@ import type { Avo } from '@viaa/avo2-types';
 import { isNull } from 'es-toolkit';
 import type { FunctionComponent, ReactNode } from 'react';
 import React from 'react';
-import { CustomError } from '~shared/helpers/custom-error.js';
-import { isMobileWidth } from '~shared/helpers/media-query.js';
-import { tText } from '~shared/helpers/translation-functions.js';
-import { Link } from '../Link/Link.js';
+import { CustomError } from '~shared/helpers/custom-error';
+import { isMobileWidth } from '~shared/helpers/media-query';
+import { tText } from '~shared/helpers/translation-functions';
+import { Link } from '../Link/Link';
 
 import './ErrorView.scss';
 

@@ -1,6 +1,6 @@
-import { tText } from '~shared/helpers/translation-functions.js';
+import { tText } from '~shared/helpers/translation-functions';
 
-import type { ContentBlockErrors } from '../../content-page/types/content-block.types.js';
+import type { ContentBlockErrors } from '../../content-page/types/content-block.types';
 
 // Handle content-block config components/block state validation
 export const validateContentBlockField = (

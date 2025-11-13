@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import React, { type FC, useCallback, useEffect, useState } from 'react';
 
 import './BlockScrollDownNudge.scss';
-import { ROUTE_PARTS } from '~shared/consts/routes.js';
+import { ROUTE_PARTS } from '~shared/consts/routes';
 
 export const BlockScrollDownNudge: FC = () => {
 	const isAdminRoute = window.location.href.includes(ROUTE_PARTS.admin);

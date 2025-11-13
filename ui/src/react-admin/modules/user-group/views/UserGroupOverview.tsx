@@ -10,22 +10,22 @@ import React, {
 	useState,
 } from 'react';
 import type { Column, TableOptions, UseSortByColumnOptions } from 'react-table';
-import { ToastType } from '~core/config/config.types.js';
-import { useGetPermissions } from '~modules/permissions/hooks/data/get-all-permissions.js';
-import type { PermissionData } from '~modules/permissions/permissions.types.js';
-import { useGetUserGroups } from '~modules/user-group/hooks/get-user-groups.js';
-import { useUpdateUserGroups } from '~modules/user-group/hooks/update-user-groups.js';
-import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner.js';
-import { CustomError } from '~shared/helpers/custom-error.js';
-import { showToast } from '~shared/helpers/show-toast.js';
-import { tHtml, tText } from '~shared/helpers/translation-functions.js';
-import { getUserGroupTableColumns } from '../const/user-group.const.js';
+import { ToastType } from '~core/config/config.types';
+import { useGetPermissions } from '~modules/permissions/hooks/data/get-all-permissions';
+import type { PermissionData } from '~modules/permissions/permissions.types';
+import { useGetUserGroups } from '~modules/user-group/hooks/get-user-groups';
+import { useUpdateUserGroups } from '~modules/user-group/hooks/update-user-groups';
+import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner';
+import { CustomError } from '~shared/helpers/custom-error';
+import { showToast } from '~shared/helpers/show-toast';
+import { tHtml, tText } from '~shared/helpers/translation-functions';
+import { getUserGroupTableColumns } from '../const/user-group.const';
 import type {
 	UserGroupOverviewProps,
 	UserGroupOverviewRef,
 	UserGroupUpdate,
 	UserGroupWithPermissions,
-} from '../types/user-group.types.js';
+} from '../types/user-group.types';
 
 export const UserGroupOverview = forwardRef<
 	UserGroupOverviewRef | undefined,

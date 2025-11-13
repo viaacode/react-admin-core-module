@@ -1,8 +1,8 @@
 import { Button, Modal } from '@meemoo/react-components';
 import type { FC, ReactNode } from 'react';
-import { MaintenanceAlertsOverview } from '~modules/maintenance-alerts/views/MaintenanceAlertsOverview.js';
-import { App } from '~modules/translations/translations.core.types.js';
-import { tText } from '~shared/helpers/translation-functions.js';
+import { MaintenanceAlertsOverview } from '~modules/maintenance-alerts/views/MaintenanceAlertsOverview';
+import { App } from '~modules/translations/translations.core.types';
+import { tText } from '~shared/helpers/translation-functions';
 
 export const MaintenanceAlertsOverviewPage: FC = () => {
 	const renderPopup = ({

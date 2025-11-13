@@ -3,15 +3,15 @@ import { Button, ButtonToolbar, Table } from '@viaa/avo2-components';
 import { startCase } from 'es-toolkit';
 import type { FunctionComponent } from 'react';
 import React from 'react';
-import { AdminConfigManager } from '~core/config/config.class.js';
-import { useGetNavigationBars } from '~modules/navigation/hooks/use-get-navigation-bars.js';
-import { GET_NAVIGATION_OVERVIEW_TABLE_COLS } from '~modules/navigation/navigation.consts.js';
-import { Link } from '~modules/shared/components/Link/Link.js';
-import { Loader } from '~shared/components/Loader/Loader.js';
-import { buildLink, navigate } from '~shared/helpers/link.js';
-import { tHtml, tText } from '~shared/helpers/translation-functions.js';
-import { AdminLayout } from '~shared/layouts/AdminLayout/AdminLayout.js';
-import type { NavigationItem, NavigationOverviewTableCols } from '../navigation.types.js';
+import { AdminConfigManager } from '~core/config/config.class';
+import { useGetNavigationBars } from '~modules/navigation/hooks/use-get-navigation-bars';
+import { GET_NAVIGATION_OVERVIEW_TABLE_COLS } from '~modules/navigation/navigation.consts';
+import { Link } from '~modules/shared/components/Link/Link';
+import { Loader } from '~shared/components/Loader/Loader';
+import { buildLink, navigate } from '~shared/helpers/link';
+import { tHtml, tText } from '~shared/helpers/translation-functions';
+import { AdminLayout } from '~shared/layouts/AdminLayout/AdminLayout';
+import type { NavigationItem, NavigationOverviewTableCols } from '../navigation.types';
 
 export const NavigationBarOverview: FunctionComponent = () => {
 	const navigateFunc = AdminConfigManager.getConfig().services.router.navigateFunc;

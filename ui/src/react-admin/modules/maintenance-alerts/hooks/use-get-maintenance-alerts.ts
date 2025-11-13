@@ -1,13 +1,13 @@
 import type { IPagination } from '@studiohyperdrive/pagination';
 import type { UseQueryResult } from '@tanstack/react-query';
 import { useQuery } from '@tanstack/react-query';
-import type { MaintenanceAlertsOverviewTableState } from '~modules/maintenance-alerts/maintenance-alerts.types.js';
-import { QUERY_KEYS } from '~modules/shared/index.js';
-import { MaintenanceAlertsService } from '../maintenance-alerts.service.js';
+import type { MaintenanceAlertsOverviewTableState } from '~modules/maintenance-alerts/maintenance-alerts.types';
+import { QUERY_KEYS } from '~modules/shared/index';
+import { MaintenanceAlertsService } from '../maintenance-alerts.service';
 import type {
 	MaintenanceAlert,
 	MaintenanceAlertsOverviewTableCol,
-} from '../maintenance-alerts.types.js';
+} from '../maintenance-alerts.types';
 
 export const useGetMaintenanceAlerts = (
 	getMaintenanceAlertsArguments: Partial<MaintenanceAlertsOverviewTableState>

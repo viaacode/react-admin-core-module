@@ -1,9 +1,9 @@
 import { isNil, without } from 'es-toolkit';
-import { ToastType } from '~core/config/config.types.js';
-import type { UserTableState } from '~modules/user/user.types.js';
-import { LomScheme } from '~shared/consts/lom-scheme.enum.js';
-import { CustomError } from '~shared/helpers/custom-error.js';
-import { eduOrgToClientOrg } from '~shared/helpers/edu-org-string-to-client-org.js';
+import { ToastType } from '~core/config/config.types';
+import type { UserTableState } from '~modules/user/user.types';
+import { LomScheme } from '~shared/consts/lom-scheme.enum';
+import { CustomError } from '~shared/helpers/custom-error';
+import { eduOrgToClientOrg } from '~shared/helpers/edu-org-string-to-client-org';
 import {
 	getBooleanFilters,
 	getDateRangeFilters,
@@ -11,8 +11,8 @@ import {
 	getMultiOptionFilters,
 	getMultiOptionsFilters,
 	NULL_FILTER,
-} from '~shared/helpers/filters.js';
-import { showToast } from '~shared/helpers/show-toast.js';
+} from '~shared/helpers/filters';
+import { showToast } from '~shared/helpers/show-toast';
 
 export const generateWhereObjectAvo = (
 	filters: Partial<UserTableState>,

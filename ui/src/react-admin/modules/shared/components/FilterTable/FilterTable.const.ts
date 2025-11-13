@@ -1,10 +1,10 @@
 import { compact } from 'es-toolkit';
 import { NumberParam, type QueryParamConfig, StringParam } from 'use-query-params';
 
-import { CheckboxListParam, DateRangeParam } from '../../helpers/query-string-converters.js';
+import { CheckboxListParam, DateRangeParam } from '../../helpers/query-string-converters';
 
-import type { FilterableColumn } from './FilterTable.js';
-import { cleanupFilterTableState } from './FilterTable.utils.js';
+import type { FilterableColumn } from './FilterTable';
+import { cleanupFilterTableState } from './FilterTable.utils';
 
 const FILTER_TYPE_TO_QUERY_PARAM_CONVERTER = {
 	CheckboxDropdownModal: CheckboxListParam,

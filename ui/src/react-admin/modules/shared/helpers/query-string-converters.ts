@@ -1,4 +1,4 @@
-import type { DateRange } from '../components/DateRangeDropdown/DateRangeDropdown.js';
+import type { DateRange } from '../components/DateRangeDropdown/DateRangeDropdown';
 
 export const DateRangeParam = {
 	encode: (value: DateRange | undefined) => {

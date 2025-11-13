@@ -1,1 +1,1 @@
-export { ErrorView } from './ErrorView.js';
+export { ErrorView } from './ErrorView';

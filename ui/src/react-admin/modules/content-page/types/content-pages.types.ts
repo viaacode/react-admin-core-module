@@ -1,10 +1,10 @@
 import type { Avo } from '@viaa/avo2-types';
-import type { Locale } from '~modules/translations/translations.core.types.js';
-import type { DateRange } from '~shared/components/DateRangeDropdown/DateRangeDropdown.js';
-import type { FilterableTableState } from '~shared/components/FilterTable/FilterTable.js';
-import type { PickerItem } from '~shared/types/content-picker.js';
+import type { Locale } from '~modules/translations/translations.core.types';
+import type { DateRange } from '~shared/components/DateRangeDropdown/DateRangeDropdown';
+import type { FilterableTableState } from '~shared/components/FilterTable/FilterTable';
+import type { PickerItem } from '~shared/types/content-picker';
 
-import type { ContentBlockConfig, DbContentBlock } from './content-block.types.js';
+import type { ContentBlockConfig, DbContentBlock } from './content-block.types';
 
 // Pages
 export enum PageType {

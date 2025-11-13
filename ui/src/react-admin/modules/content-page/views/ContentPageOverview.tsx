@@ -15,55 +15,55 @@ import { cloneDeep, compact, partition } from 'es-toolkit';
 import { get, set } from 'es-toolkit/compat';
 import type { FunctionComponent, ReactNode } from 'react';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import type { LabelObj } from '~content-blocks/BlockPageOverview/BlockPageOverview.types.js';
+import type { LabelObj } from '~content-blocks/BlockPageOverview/BlockPageOverview.types';
 
-import { AdminConfigManager } from '~core/config/config.class.js';
-import { ToastType } from '~core/config/config.types.js';
-import { isPublic } from '~modules/content-page/helpers/get-published-state.js';
-import { useGetContentPages } from '~modules/content-page/hooks/get-content-pages.js';
-import { useGetLanguageFilterOptions } from '~modules/content-page/hooks/useGetLanguageFilterOptions.js';
-import { useContentPageLabelOptions } from '~modules/content-page-labels/hooks/useContentPageLabelOptions.js';
-import { useGetAllLanguages } from '~modules/translations/hooks/use-get-all-languages.js';
-import type { Locale } from '~modules/translations/translations.core.types.js';
-import { useUserGroupOptions } from '~modules/user-group/hooks/useUserGroupOptions.js';
-import type { UserGroupWithPermissions } from '~modules/user-group/types/user-group.types.js';
-import type { CheckboxOption } from '~shared/components/CheckboxDropdownModal/CheckboxDropdownModal.js';
-import ConfirmModal from '~shared/components/ConfirmModal/ConfirmModal.js';
-import { ErrorView } from '~shared/components/error/ErrorView.js';
-import { Icon } from '~shared/components/Icon/Icon.js';
-import { Link } from '~shared/components/Link/Link.js';
-import type { LoadingInfo } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent.js';
-import { LoadingErrorLoadedComponent } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent.js';
-import { CustomError } from '~shared/helpers/custom-error.js';
+import { AdminConfigManager } from '~core/config/config.class';
+import { ToastType } from '~core/config/config.types';
+import { isPublic } from '~modules/content-page/helpers/get-published-state';
+import { useGetContentPages } from '~modules/content-page/hooks/get-content-pages';
+import { useGetLanguageFilterOptions } from '~modules/content-page/hooks/useGetLanguageFilterOptions';
+import { useContentPageLabelOptions } from '~modules/content-page-labels/hooks/useContentPageLabelOptions';
+import { useGetAllLanguages } from '~modules/translations/hooks/use-get-all-languages';
+import type { Locale } from '~modules/translations/translations.core.types';
+import { useUserGroupOptions } from '~modules/user-group/hooks/useUserGroupOptions';
+import type { UserGroupWithPermissions } from '~modules/user-group/types/user-group.types';
+import type { CheckboxOption } from '~shared/components/CheckboxDropdownModal/CheckboxDropdownModal';
+import ConfirmModal from '~shared/components/ConfirmModal/ConfirmModal';
+import { ErrorView } from '~shared/components/error/ErrorView';
+import { Icon } from '~shared/components/Icon/Icon';
+import { Link } from '~shared/components/Link/Link';
+import type { LoadingInfo } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
+import { LoadingErrorLoadedComponent } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
+import { CustomError } from '~shared/helpers/custom-error';
 import {
 	getBooleanFilters,
 	getDateRangeFilters,
 	getMultiOptionFilters,
 	getQueryFilter,
-} from '~shared/helpers/filters.js';
-import { formatDateString } from '~shared/helpers/formatters/date.js';
-import { isAvo } from '~shared/helpers/is-avo.js';
-import { isHetArchief } from '~shared/helpers/is-hetarchief.js';
-import { buildLink, navigateToAbsoluteOrRelativeUrl } from '~shared/helpers/link.js';
-import { setSelectedCheckboxes } from '~shared/helpers/set-selected-checkboxes.js';
-import { showToast } from '~shared/helpers/show-toast.js';
-import { tHtml, tText } from '~shared/helpers/translation-functions.js';
+} from '~shared/helpers/filters';
+import { formatDateString } from '~shared/helpers/formatters/date';
+import { isAvo } from '~shared/helpers/is-avo';
+import { isHetArchief } from '~shared/helpers/is-hetarchief';
+import { buildLink, navigateToAbsoluteOrRelativeUrl } from '~shared/helpers/link';
+import { setSelectedCheckboxes } from '~shared/helpers/set-selected-checkboxes';
+import { showToast } from '~shared/helpers/show-toast';
+import { tHtml, tText } from '~shared/helpers/translation-functions';
 
 import './ContentPageOverview.scss';
-import type { FilterableColumn } from '~shared/components/FilterTable/FilterTable.js';
-import { truncateTableValue } from '~shared/helpers/truncate.js';
-import { PermissionService } from '~shared/services/permission-service.js';
-import { SpecialPermissionGroups } from '~shared/types/authentication.types.js';
-import FilterTable, { getFilters } from '../../shared/components/FilterTable/FilterTable.js';
-import { GET_OVERVIEW_COLUMNS, PAGES_PER_PAGE } from '../const/content-page.consts.js';
-import { useContentTypes } from '../hooks/useContentTypes.js';
-import { ContentPageService } from '../services/content-page.service.js';
+import type { FilterableColumn } from '~shared/components/FilterTable/FilterTable';
+import { truncateTableValue } from '~shared/helpers/truncate';
+import { PermissionService } from '~shared/services/permission-service';
+import { SpecialPermissionGroups } from '~shared/types/authentication.types';
+import FilterTable, { getFilters } from '../../shared/components/FilterTable/FilterTable';
+import { GET_OVERVIEW_COLUMNS, PAGES_PER_PAGE } from '../const/content-page.consts';
+import { useContentTypes } from '../hooks/useContentTypes';
+import { ContentPageService } from '../services/content-page.service';
 import type {
 	ContentOverviewTableCols,
 	ContentPageInfo,
 	ContentTableState,
-} from '../types/content-pages.types.js';
-import { NOT_TRANSLATION_PREFIX } from '../types/content-pages.types.js';
+} from '../types/content-pages.types';
+import { NOT_TRANSLATION_PREFIX } from '../types/content-pages.types';
 
 const { EDIT_ANY_CONTENT_PAGES, DELETE_ANY_CONTENT_PAGES, EDIT_PROTECTED_PAGE_STATUS } =
 	PermissionName;

@@ -1,10 +1,10 @@
 import type { LinkTarget } from '@viaa/avo2-components';
 import type { Avo } from '@viaa/avo2-types';
 import { parse } from 'query-string';
-import { ToastType } from '~core/config/config.types.js';
-import { showToast } from '~shared/helpers/show-toast.js';
-import { tText } from '~shared/helpers/translation-functions.js';
-import type { PickerItem } from '~shared/types/content-picker.js';
+import { ToastType } from '~core/config/config.types';
+import { showToast } from '~shared/helpers/show-toast';
+import { tText } from '~shared/helpers/translation-functions';
+import type { PickerItem } from '~shared/types/content-picker';
 
 export const parseSearchQuery = (input: string, toast = false) => {
 	try {

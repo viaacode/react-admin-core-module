@@ -1,9 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 import { compact } from 'es-toolkit';
-import { NavigationService } from '~modules/navigation/navigation.service.js';
-import type { Locale } from '~modules/translations/translations.core.types.js';
-import { QUERY_KEYS } from '~shared/types/index.js';
-import { reindexNavigationItems } from '../helpers/reorder-navigation-items.js';
+import { NavigationService } from '~modules/navigation/navigation.service';
+import type { Locale } from '~modules/translations/translations.core.types';
+import { QUERY_KEYS } from '~shared/types/index';
+import { reindexNavigationItems } from '../helpers/reorder-navigation-items';
 
 export const useGetNavigationBarItems = (
 	placement?: string,

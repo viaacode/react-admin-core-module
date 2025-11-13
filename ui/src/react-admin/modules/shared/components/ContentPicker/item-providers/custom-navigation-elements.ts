@@ -1,8 +1,8 @@
 import { Avo } from '@viaa/avo2-types';
 import { compact, sortBy } from 'es-toolkit';
-import { AdminConfigManager } from '~core/config/config.class.js';
-import type { PickerItem } from '~shared/types/content-picker.js';
-import { parsePickerItem } from '../helpers/parse-picker.js';
+import { AdminConfigManager } from '~core/config/config.class';
+import type { PickerItem } from '~shared/types/content-picker';
+import { parsePickerItem } from '../helpers/parse-picker';
 
 // Return custom navigation elements from adminCoreConfig.navigationBars.customNavigationElements
 export const retrieveCustomNavigationElements = async (

@@ -1,10 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
-import { ToastType } from '~core/config/config.types.js';
-import { UserService } from '~modules/user/user.service.js';
-import { CustomError } from '~shared/helpers/custom-error.js';
-import { showToast } from '~shared/helpers/show-toast.js';
-import { tText } from '~shared/helpers/translation-functions.js';
-import { QUERY_KEYS } from '~shared/types/index.js';
+import { ToastType } from '~core/config/config.types';
+import { UserService } from '~modules/user/user.service';
+import { CustomError } from '~shared/helpers/custom-error';
+import { showToast } from '~shared/helpers/show-toast';
+import { tText } from '~shared/helpers/translation-functions';
+import { QUERY_KEYS } from '~shared/types/index';
 
 export const useGetIdps = () => {
 	return useQuery({

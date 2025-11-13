@@ -2,43 +2,43 @@ import { Badge, Button } from '@meemoo/react-components';
 import type { IPagination } from '@studiohyperdrive/pagination';
 
 import { format, isAfter, isWithinInterval, parseISO } from 'date-fns';
-import nlBE from 'date-fns/locale/nl-BE/index.js';
+import nlBE from 'date-fns/locale/nl-BE/index';
 import type { FunctionComponent, ReactNode } from 'react';
 import { useState } from 'react';
-import { ToastType } from '~core/config/config.types.js';
-import { ITEMS_PER_PAGE } from '~modules/item/items.consts.js';
-import { useGetMaintenanceAlerts } from '~modules/maintenance-alerts/hooks/use-get-maintenance-alerts.js';
-import type { MaintenanceAlertsOverviewTableState } from '~modules/maintenance-alerts/maintenance-alerts.types.js';
-import MaintenanceAlertsEditForm from '~modules/maintenance-alerts/views/MaintenanceAlertsEditForm.js';
-import ConfirmModal from '~modules/shared/components/ConfirmModal/ConfirmModal.js';
-import { CustomError } from '~modules/shared/helpers/custom-error.js';
-import { AdminLayout } from '~modules/shared/layouts/AdminLayout/AdminLayout.js';
-import { useGetAllLanguages } from '~modules/translations/hooks/use-get-all-languages.js';
-import { Locale } from '~modules/translations/translations.core.types.js';
-import type { LanguageInfo } from '~modules/translations/translations.types.js';
+import { ToastType } from '~core/config/config.types';
+import { ITEMS_PER_PAGE } from '~modules/item/items.consts';
+import { useGetMaintenanceAlerts } from '~modules/maintenance-alerts/hooks/use-get-maintenance-alerts';
+import type { MaintenanceAlertsOverviewTableState } from '~modules/maintenance-alerts/maintenance-alerts.types';
+import MaintenanceAlertsEditForm from '~modules/maintenance-alerts/views/MaintenanceAlertsEditForm';
+import ConfirmModal from '~modules/shared/components/ConfirmModal/ConfirmModal';
+import { CustomError } from '~modules/shared/helpers/custom-error';
+import { AdminLayout } from '~modules/shared/layouts/AdminLayout/AdminLayout';
+import { useGetAllLanguages } from '~modules/translations/hooks/use-get-all-languages';
+import { Locale } from '~modules/translations/translations.core.types';
+import type { LanguageInfo } from '~modules/translations/translations.types';
 import type {
 	CheckboxDropdownModalProps,
 	CheckboxOption,
-} from '~shared/components/CheckboxDropdownModal/CheckboxDropdownModal.js';
-import { ErrorView } from '~shared/components/error/ErrorView.js';
-import type { FilterableColumn } from '~shared/components/FilterTable/FilterTable.js';
-import FilterTable from '~shared/components/FilterTable/FilterTable.js';
-import { Icon } from '~shared/components/Icon/Icon.js';
-import { Loader } from '~shared/components/Loader/Loader.js';
-import { GET_LANGUAGE_NAMES } from '~shared/consts/language-names.js';
-import { parseAsIsoWithoutTimezone } from '~shared/helpers/formatters/date.js';
-import { isMultiLanguageEnabled } from '~shared/helpers/is-multi-language-enabled.js';
-import { showToast } from '~shared/helpers/show-toast.js';
-import { tHtml, tText } from '~shared/helpers/translation-functions.js';
-import { TableColumnDataType } from '~shared/types/table-column-data-type.js';
-import { TableFilterType } from '~shared/types/table-filter-types.js';
-import { App } from '../../../../../scripts/translation.types.js';
-import { MaintenanceAlertsService } from '../maintenance-alerts.service.js';
+} from '~shared/components/CheckboxDropdownModal/CheckboxDropdownModal';
+import { ErrorView } from '~shared/components/error/ErrorView';
+import type { FilterableColumn } from '~shared/components/FilterTable/FilterTable';
+import FilterTable from '~shared/components/FilterTable/FilterTable';
+import { Icon } from '~shared/components/Icon/Icon';
+import { Loader } from '~shared/components/Loader/Loader';
+import { GET_LANGUAGE_NAMES } from '~shared/consts/language-names';
+import { parseAsIsoWithoutTimezone } from '~shared/helpers/formatters/date';
+import { isMultiLanguageEnabled } from '~shared/helpers/is-multi-language-enabled';
+import { showToast } from '~shared/helpers/show-toast';
+import { tHtml, tText } from '~shared/helpers/translation-functions';
+import { TableColumnDataType } from '~shared/types/table-column-data-type';
+import { TableFilterType } from '~shared/types/table-filter-types';
+import { App } from '../../../../../scripts/translation.types';
+import { MaintenanceAlertsService } from '../maintenance-alerts.service';
 import type {
 	MaintenanceAlert,
 	MaintenanceAlertsOverviewProps,
 	MaintenanceAlertsOverviewTableCol,
-} from '../maintenance-alerts.types.js';
+} from '../maintenance-alerts.types';
 
 export const MaintenanceAlertsOverview: FunctionComponent<MaintenanceAlertsOverviewProps> = ({
 	className,

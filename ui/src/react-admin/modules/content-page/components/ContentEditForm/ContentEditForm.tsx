@@ -16,38 +16,38 @@ import { Avo, PermissionName } from '@viaa/avo2-types';
 import { compact, isNil, noop } from 'es-toolkit';
 import React, { type FunctionComponent, useCallback, useEffect, useState } from 'react';
 
-import { ToastType } from '~core/config/config.types.js';
+import { ToastType } from '~core/config/config.types';
 import {
 	CONTENT_PAGE_SEO_DESCRIPTION_MAX_LENGTH_STRING,
 	DEFAULT_PAGES_WIDTH,
 	GET_CONTENT_PAGE_WIDTH_OPTIONS,
-} from '~modules/content-page/const/content-page.consts.js';
-import type { ContentEditAction } from '~modules/content-page/helpers/content-edit.reducer.js';
-import { ContentPageService } from '~modules/content-page/services/content-page.service.js';
+} from '~modules/content-page/const/content-page.consts';
+import type { ContentEditAction } from '~modules/content-page/helpers/content-edit.reducer';
+import { ContentPageService } from '~modules/content-page/services/content-page.service';
 import type {
 	ContentEditFormErrors,
 	ContentPageInfo,
 	ContentPageLabel,
 	ContentPageWidth,
-} from '~modules/content-page/types/content-pages.types.js';
-import { ContentEditActionType } from '~modules/content-page/types/content-pages.types.js';
-import { useGetAllLanguages } from '~modules/translations/hooks/use-get-all-languages.js';
-import type { LanguageInfo } from '~modules/translations/translations.types.js';
-import { ContentPicker } from '~shared/components/ContentPicker/ContentPicker.js';
-import FileUpload from '~shared/components/FileUpload/FileUpload.js';
-import { UserGroupSelect } from '~shared/components/UserGroupSelect/UserGroupSelect.js';
-import { GET_LANGUAGE_NAMES } from '~shared/consts/language-names.js';
-import { isMultiLanguageEnabled } from '~shared/helpers/is-multi-language-enabled.js';
-import { showToast } from '~shared/helpers/show-toast.js';
-import { tText } from '~shared/helpers/translation-functions.js';
-import type { PickerItem } from '~shared/types/content-picker.js';
-import type { ValueOf } from '~shared/types/index.js';
+} from '~modules/content-page/types/content-pages.types';
+import { ContentEditActionType } from '~modules/content-page/types/content-pages.types';
+import { useGetAllLanguages } from '~modules/translations/hooks/use-get-all-languages';
+import type { LanguageInfo } from '~modules/translations/translations.types';
+import { ContentPicker } from '~shared/components/ContentPicker/ContentPicker';
+import FileUpload from '~shared/components/FileUpload/FileUpload';
+import { UserGroupSelect } from '~shared/components/UserGroupSelect/UserGroupSelect';
+import { GET_LANGUAGE_NAMES } from '~shared/consts/language-names';
+import { isMultiLanguageEnabled } from '~shared/helpers/is-multi-language-enabled';
+import { showToast } from '~shared/helpers/show-toast';
+import { tText } from '~shared/helpers/translation-functions';
+import type { PickerItem } from '~shared/types/content-picker';
+import type { ValueOf } from '~shared/types/index';
 
 import './ContentEditForm.scss';
-import { ContentPageEditFormDescription } from '~modules/content-page/components/ContentPageEditFormDescription/ContentPageEditFormDescription.js';
-import { getAllSubgroupIds } from '~modules/user-group/const/user-group.const.js';
-import { useGetUserGroups } from '~modules/user-group/hooks/get-user-groups.js';
-import { SpecialPermissionGroups } from '~shared/types/authentication.types.js';
+import { ContentPageEditFormDescription } from '~modules/content-page/components/ContentPageEditFormDescription/ContentPageEditFormDescription';
+import { getAllSubgroupIds } from '~modules/user-group/const/user-group.const';
+import { useGetUserGroups } from '~modules/user-group/hooks/get-user-groups';
+import { SpecialPermissionGroups } from '~shared/types/authentication.types';
 
 interface ContentEditFormProps {
 	contentTypes: SelectOption<Avo.ContentPage.Type>[];

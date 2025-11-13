@@ -1,8 +1,8 @@
 import type { Avo } from '@viaa/avo2-types';
 import { compact } from 'es-toolkit';
-import { tHtml } from '~shared/helpers/translation-functions.js';
+import { tHtml } from '~shared/helpers/translation-functions';
 
-import { ROUTE_PARTS } from './routes.js';
+import { ROUTE_PARTS } from './routes';
 
 export interface RouteInfo {
 	route: string;

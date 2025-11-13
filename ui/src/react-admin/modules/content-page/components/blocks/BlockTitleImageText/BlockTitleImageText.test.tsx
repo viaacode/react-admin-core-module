@@ -4,7 +4,7 @@ import React from 'react';
 
 import imageSource from '../../../static/images/500x200.jpg';
 
-import { BlockTitleImageText } from './BlockTitleImageText.js';
+import { BlockTitleImageText } from './BlockTitleImageText';
 
 const customClass = 'c-block-custom';
 

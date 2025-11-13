@@ -3,7 +3,7 @@
  * @param duration
  */
 
-import { CustomError } from '../custom-error.js';
+import { CustomError } from '../custom-error';
 
 export function parseDuration(duration: string) {
 	const parts = duration.split(':');

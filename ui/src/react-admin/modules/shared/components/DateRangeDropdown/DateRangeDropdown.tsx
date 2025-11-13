@@ -14,13 +14,13 @@ import {
 import { format, isValid, parse, set } from 'date-fns';
 import type { FC, MouseEvent, ReactText } from 'react';
 import React, { useCallback, useEffect, useState } from 'react';
-import { ToastType } from '~core/config/config.types.js';
-import { getDatePickerDefaultProps } from '~modules/content-page/components/DatePicker/DatePicker.consts.js';
-import { DateInput } from '~shared/components/DateInput/DateInput.js';
-import { showToast } from '~shared/helpers/show-toast.js';
-import { tText } from '~shared/helpers/translation-functions.js';
-import { reorderDate } from '../../helpers/formatters/date.js';
-import { renderDropdownButton } from '../CheckboxDropdownModal/CheckboxDropdownModal.js';
+import DatePicker from 'react-datepicker';
+import { ToastType } from '~core/config/config.types';
+import { getDatePickerDefaultProps } from '~modules/content-page/components/DatePicker/DatePicker.consts';
+import { showToast } from '~shared/helpers/show-toast';
+import { tText } from '~shared/helpers/translation-functions';
+import { reorderDate } from '../../helpers/formatters/date';
+import { renderDropdownButton } from '../CheckboxDropdownModal/CheckboxDropdownModal';
 
 export interface DateRangeDropdownProps {
 	label: string;
@@ -362,7 +362,7 @@ const DateRangeDropdown: FC<DateRangeDropdownProps> = ({
 												'shared/components/date-range-dropdown/date-range-dropdown___van'
 											)}
 										>
-											<DateInput
+											<DatePicker
 												{...getDatePickerDefaultProps()}
 												selected={fromDate}
 												// biome-ignore lint/suspicious/noExplicitAny: TODO fix
@@ -377,7 +377,7 @@ const DateRangeDropdown: FC<DateRangeDropdownProps> = ({
 												'shared/components/date-range-dropdown/date-range-dropdown___tot'
 											)}
 										>
-											<DateInput
+											<DatePicker
 												{...getDatePickerDefaultProps()}
 												selected={tillDate}
 												// biome-ignore lint/suspicious/noExplicitAny: TODO fix

@@ -4,10 +4,10 @@ import type { Draft } from 'immer';
 import { produce } from 'immer';
 import { cloneDeep, isNil } from 'es-toolkit';
 import type { Reducer } from 'react';
-import { AdminConfigManager } from '~core/config/config.class.js';
-import { Locale } from '~modules/translations/translations.core.types.js';
+import { AdminConfigManager } from '~core/config/config.class';
+import { Locale } from '~modules/translations/translations.core.types';
 
-import type { ValueOf } from '~shared/types/index.js';
+import type { ValueOf } from '~shared/types/index';
 
 import type {
 	ContentBlockComponentState,
@@ -16,9 +16,9 @@ import type {
 	ContentBlockErrors,
 	RepeatedContentBlockComponentState,
 	SingleContentBlockComponentState,
-} from '../types/content-block.types.js';
-import type { ContentPageInfo } from '../types/content-pages.types.js';
-import { ContentEditActionType, ContentPageWidth } from '../types/content-pages.types.js';
+} from '../types/content-block.types';
+import type { ContentPageInfo } from '../types/content-pages.types';
+import { ContentEditActionType, ContentPageWidth } from '../types/content-pages.types';
 
 interface SetContentPage {
 	type: ContentEditActionType.SET_CONTENT_PAGE;

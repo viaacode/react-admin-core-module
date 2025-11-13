@@ -14,24 +14,24 @@ import { stringifyUrl } from 'query-string';
 import type { FunctionComponent, ReactNode } from 'react';
 import React from 'react';
 import { StringParam, useQueryParams } from 'use-query-params';
-import type { BlockImageProps } from '~content-blocks/BlockImage/BlockImage.js';
-import { AdminConfigManager } from '~core/config/config.class.js';
-import { convertRichTextEditorStatesToHtml } from '~modules/content-page/services/content-page.converters.js';
+import type { BlockImageProps } from '~content-blocks/BlockImage/BlockImage';
+import { AdminConfigManager } from '~core/config/config.class';
+import { convertRichTextEditorStatesToHtml } from '~modules/content-page/services/content-page.converters';
 import type {
 	BlockClickHandler,
 	ContentPageInfo,
-} from '~modules/content-page/types/content-pages.types.js';
-import { Icon } from '~shared/components/Icon/Icon.js';
-import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner.js';
-import { ROUTE_PARTS } from '~shared/consts/routes.js';
-import { isAvo } from '~shared/helpers/is-avo.js';
-import { buildLink } from '~shared/helpers/link.js';
-import { tText } from '~shared/helpers/translation-functions.js';
-import { PermissionService } from '~shared/services/permission-service.js';
-import { SpecialPermissionGroups } from '~shared/types/authentication.types.js';
-import type { ContentBlockConfig } from '../../types/content-block.types.js';
-import { ContentBlockType } from '../../types/content-block.types.js';
-import ContentBlockRenderer from '.././ContentBlockRenderer/ContentBlockRenderer.js';
+} from '~modules/content-page/types/content-pages.types';
+import { Icon } from '~shared/components/Icon/Icon';
+import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner';
+import { ROUTE_PARTS } from '~shared/consts/routes';
+import { isAvo } from '~shared/helpers/is-avo';
+import { buildLink } from '~shared/helpers/link';
+import { tText } from '~shared/helpers/translation-functions';
+import { PermissionService } from '~shared/services/permission-service';
+import { SpecialPermissionGroups } from '~shared/types/authentication.types';
+import type { ContentBlockConfig } from '../../types/content-block.types';
+import { ContentBlockType } from '../../types/content-block.types';
+import ContentBlockRenderer from '.././ContentBlockRenderer/ContentBlockRenderer';
 
 import './ContentPageRenderer.scss';
 import { set } from 'es-toolkit/compat';

@@ -1,10 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 import { ContentPickerType } from '@viaa/avo2-types';
 import { stringifyUrl } from 'query-string';
-import { AdminConfigManager } from '~core/config/config.class.js';
-import { fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout.js';
-import { getProxyUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config.js';
-import { QUERY_KEYS } from '~shared/types/index.js';
+import { AdminConfigManager } from '~core/config/config.class';
+import { fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
+import { getProxyUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config';
+import { QUERY_KEYS } from '~shared/types/index';
 
 export const useGetStillsFromContentItem = (
 	contentItemType: ContentPickerType | null,

@@ -3,11 +3,11 @@ import { flatten } from 'es-toolkit';
 import type { FunctionComponent, ReactElement, ReactNode } from 'react';
 import React from 'react';
 import { Link, type Location, NavLink } from 'react-router-dom';
-import type { NavigationItemInfo } from '../../types/index.js';
+import type { NavigationItemInfo } from '../../types/index';
 
 import './Sidebar.scss';
 import { useLocation } from 'react-router';
-import { tHtml } from '~shared/helpers/translation-functions.js';
+import { tHtml } from '~shared/helpers/translation-functions';
 
 interface SidebarProps {
 	children?: ReactNode;

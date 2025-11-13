@@ -1,2 +1,2 @@
-export * from './BlockImage.editorconfig.js';
-export * from './BlockImage.js';
+export * from './BlockImage.editorconfig';
+export * from './BlockImage';

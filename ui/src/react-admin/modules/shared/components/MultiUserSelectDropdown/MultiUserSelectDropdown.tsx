@@ -15,12 +15,12 @@ import clsx from 'clsx';
 import { uniqBy } from 'es-toolkit';
 import type { FunctionComponent, ReactText } from 'react';
 import React, { useEffect, useState } from 'react';
-import { ToastType } from '~core/config/config.types.js';
-import { UserService } from '~modules/user/user.service.js';
-import { showToast } from '~shared/helpers/show-toast.js';
-import { tText } from '~shared/helpers/translation-functions.js';
-import type { PickerItem } from '../../types/content-picker.js';
-import { ContentPicker } from '../ContentPicker/ContentPicker.js';
+import { ToastType } from '~core/config/config.types';
+import { UserService } from '~modules/user/user.service';
+import { showToast } from '~shared/helpers/show-toast';
+import { tText } from '~shared/helpers/translation-functions';
+import type { PickerItem } from '../../types/content-picker';
+import { ContentPicker } from '../ContentPicker/ContentPicker';
 
 import './MultiUserSelectDropdown.scss';
 

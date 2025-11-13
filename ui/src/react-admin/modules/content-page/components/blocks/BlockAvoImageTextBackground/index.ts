@@ -1,2 +1,2 @@
-export * from './BlockAvoImageTextBackground.editorconfig.js';
-export * from './BlockAvoImageTextBackground.js';
+export * from './BlockAvoImageTextBackground.editorconfig';
+export * from './BlockAvoImageTextBackground';

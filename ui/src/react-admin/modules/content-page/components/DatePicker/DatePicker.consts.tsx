@@ -1,11 +1,11 @@
 import { TextInput } from '@meemoo/react-components';
-import enGB from 'date-fns/locale/en-GB/index.js';
-import nlBE from 'date-fns/locale/nl-BE/index.js';
+import enGB from 'date-fns/locale/en-GB/index';
+import nlBE from 'date-fns/locale/nl-BE/index';
 import React from 'react';
 import type { DatePickerProps } from 'react-datepicker';
-import { AdminConfigManager } from '~core/config/config.class.js';
-import { Locale } from '~modules/translations/translations.core.types.js';
-import { Icon } from '~shared/components/Icon/Icon.js';
+import { AdminConfigManager } from '~core/config/config.class';
+import { Locale } from '~modules/translations/translations.core.types';
+import { Icon } from '~shared/components/Icon/Icon';
 
 export function getDatePickerDefaultProps(): DatePickerProps {
 	return {

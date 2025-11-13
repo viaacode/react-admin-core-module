@@ -8,8 +8,8 @@ import {
 	AdminContent,
 	AdminFiltersLeft,
 	AdminFiltersRight,
-} from './AdminLayout.slots.js';
-import type { AdminLayoutComponent } from './AdminLayout.types.js';
+} from './AdminLayout.slots';
+import type { AdminLayoutComponent } from './AdminLayout.types';
 
 export const AdminLayout: AdminLayoutComponent = ({ children, pageTitle, className }) => {
 	const actions = useSlot(AdminActions, children);

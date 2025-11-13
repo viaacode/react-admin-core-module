@@ -1,9 +1,9 @@
 import { compact, isBoolean, isNil, isString } from 'es-toolkit';
 import type { ReactElement, ReactNode } from 'react';
 import React from 'react';
-import Html from '~shared/components/Html/Html.js';
-import { SanitizePreset } from '~shared/helpers/sanitize/presets/index.js';
-import { formatDate } from './formatters/date.js';
+import Html from '~shared/components/Html/Html';
+import { SanitizePreset } from '~shared/helpers/sanitize/presets/index';
+import { formatDate } from './formatters/date';
 
 export function renderDetailRow(
 	value: ReactNode,

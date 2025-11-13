@@ -2,20 +2,20 @@ import {
 	BLOCK_FIELD_DEFAULTS,
 	BLOCK_STATE_DEFAULTS,
 	TEXT_FIELD,
-} from '~content-blocks/defaults.js';
-import { AdminConfigManager } from '~core/config/config.class.js';
-import { GET_HEADING_TYPE_OPTIONS } from '~modules/content-page/const/get-heading-type-options.js';
+} from '~content-blocks/defaults';
+import { AdminConfigManager } from '~core/config/config.class';
+import { GET_HEADING_TYPE_OPTIONS } from '~modules/content-page/const/get-heading-type-options';
 import type {
 	ContentBlockConfig,
 	DefaultContentBlockState,
-} from '~modules/content-page/types/content-block.types.js';
+} from '~modules/content-page/types/content-block.types';
 import {
 	ContentBlockEditor,
 	ContentBlockType,
-} from '~modules/content-page/types/content-block.types.js';
-import { GET_ADMIN_ICON_OPTIONS } from '~shared/consts/icons.consts.js';
-import { tText } from '~shared/helpers/translation-functions.js';
-import { HET_ARCHIEF } from '~shared/types/index.js';
+} from '~modules/content-page/types/content-block.types';
+import { GET_ADMIN_ICON_OPTIONS } from '~shared/consts/icons.consts';
+import { tText } from '~shared/helpers/translation-functions';
+import { HET_ARCHIEF } from '~shared/types/index';
 
 export const INITIAL_OVERVIEW_NEWSPAPER_TITLES_COMPONENTS_STATE = () => ({
 	title: '',

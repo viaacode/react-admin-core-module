@@ -1,3 +1,3 @@
-import Dashboard from './Dashboard.js';
+import Dashboard from './Dashboard';
 
 export { Dashboard };

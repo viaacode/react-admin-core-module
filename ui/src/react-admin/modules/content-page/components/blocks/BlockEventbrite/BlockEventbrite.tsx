@@ -3,7 +3,7 @@ import { Button } from '@viaa/avo2-components';
 import clsx from 'clsx';
 import type { FunctionComponent } from 'react';
 import React, { useEffect } from 'react';
-import { Icon } from '~shared/components/Icon/Icon.js';
+import { Icon } from '~shared/components/Icon/Icon';
 
 import './BlockEventbrite.scss';
 
@@ -30,7 +30,7 @@ export const BlockEventbrite: FunctionComponent<BlockEventbriteProps> = ({
 
 		if (!script) {
 			script = document.createElement('script');
-			script.src = 'https://www.eventbrite.com/static/widgets/eb_widgets.js';
+			script.src = 'https://www.eventbrite.com/static/widgets/eb_widgets';
 			script.id = EVENTBRITE_SCRIPT_ID;
 			document.body.appendChild(script);
 

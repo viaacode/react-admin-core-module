@@ -1,8 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
-import { convertDbContentPageToContentPageInfo } from '~modules/content-page/services/content-page.converters.js';
-import { ContentPageService } from '~modules/content-page/services/content-page.service.js';
-import type { Locale } from '~modules/translations/translations.core.types.js';
-import { QUERY_KEYS } from '~shared/types/index.js';
+import { convertDbContentPageToContentPageInfo } from '~modules/content-page/services/content-page.converters';
+import { ContentPageService } from '~modules/content-page/services/content-page.service';
+import type { Locale } from '~modules/translations/translations.core.types';
+import { QUERY_KEYS } from '~shared/types/index';
 
 export const useGetContentPageByLanguageAndPath = (
 	language: Locale,

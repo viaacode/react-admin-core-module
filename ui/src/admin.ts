@@ -1,1 +1,1 @@
-export * from './react-admin/index.js';
+export * from './react-admin/index';

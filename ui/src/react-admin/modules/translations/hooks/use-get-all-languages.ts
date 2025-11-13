@@ -1,8 +1,8 @@
 import type { UseQueryResult } from '@tanstack/react-query';
 import { useQuery } from '@tanstack/react-query';
-import { QUERY_KEYS } from '~modules/shared/index.js';
-import { TranslationsService } from '~modules/translations/translations.service.js';
-import type { LanguageInfo } from '~modules/translations/translations.types.js';
+import { QUERY_KEYS } from '~modules/shared/index';
+import { TranslationsService } from '~modules/translations/translations.service';
+import type { LanguageInfo } from '~modules/translations/translations.types';
 
 export const useGetAllLanguages = (): UseQueryResult<LanguageInfo[]> => {
 	return useQuery({

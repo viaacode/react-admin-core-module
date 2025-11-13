@@ -30,8 +30,8 @@ We can now input the src/modules/shared/translations/.../nl.json files into thei
  */
 import { Project, SyntaxKind } from 'ts-morph';
 import type { MultiLanguageTranslationEntry } from '~modules/translations/translations.types.ts';
-import { executeDatabaseQuery } from './execute-database-query.js';
-import { getDirName } from './get-dir-name.js';
+import { executeDatabaseQuery } from './execute-database-query';
+import { getDirName } from './get-dir-name';
 import {
 	App,
 	Component,
@@ -41,7 +41,7 @@ import {
 	TRANSLATION_SEPARATOR,
 	type TranslationEntry,
 	ValueType,
-} from './translation.types.js';
+} from './translation.types';
 
 const ALL_APPS = `[${App.AVO}, ${App.HET_ARCHIEF}]`;
 

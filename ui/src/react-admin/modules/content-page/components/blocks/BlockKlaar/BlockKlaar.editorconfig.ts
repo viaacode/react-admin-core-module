@@ -1,15 +1,15 @@
-import { AVO } from '~modules/shared/index.js';
-import { tText } from '~shared/helpers/translation-functions.js';
+import { AVO } from '~modules/shared/index';
+import { tText } from '~shared/helpers/translation-functions';
 
 import type {
 	ContentBlockConfig,
 	ContentBlockField,
 	DefaultContentBlockState,
 	KlaarBlockComponentState,
-} from '../../../types/content-block.types.js';
-import { ContentBlockEditor, ContentBlockType } from '../../../types/content-block.types.js';
+} from '../../../types/content-block.types';
+import { ContentBlockEditor, ContentBlockType } from '../../../types/content-block.types';
 
-import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, TEXT_FIELD } from '../defaults.js';
+import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, TEXT_FIELD } from '../defaults';
 
 export const INITIAL_KLAAR_COMPONENTS_STATE = (): KlaarBlockComponentState => ({
 	titles: [''],

@@ -1,33 +1,33 @@
 import type { TextInputProps } from '@viaa/avo2-components';
 import { noop } from 'es-toolkit';
-import type { BlockAvoHeroProps } from '~content-blocks/BlockAvoHero/BlockAvoHero.js';
-import { AdminConfigManager } from '~core/config/config.class.js';
-import { GET_AVO_HERO_BACKGROUND_COLOR_OPTIONS } from '~modules/content-page/const/get-color-options.js';
-import type { FileUploadProps } from '~shared/components/FileUpload/FileUpload.js';
-import { GET_ADMIN_ICON_OPTIONS } from '~shared/consts/icons.consts.js';
-import { RICH_TEXT_EDITOR_OPTIONS_FULL } from '~shared/consts/rich-text-editor.consts.js';
-import { PHOTO_TYPES } from '~shared/helpers/files.js';
-import { tText } from '~shared/helpers/translation-functions.js';
-import { validateFlowplayerVideoUrl } from '~shared/helpers/validation.js';
-import { AVO } from '~shared/types/index.js';
+import type { BlockAvoHeroProps } from '~content-blocks/BlockAvoHero/BlockAvoHero';
+import { AdminConfigManager } from '~core/config/config.class';
+import { GET_AVO_HERO_BACKGROUND_COLOR_OPTIONS } from '~modules/content-page/const/get-color-options';
+import type { FileUploadProps } from '~shared/components/FileUpload/FileUpload';
+import { GET_ADMIN_ICON_OPTIONS } from '~shared/consts/icons.consts';
+import { RICH_TEXT_EDITOR_OPTIONS_FULL } from '~shared/consts/rich-text-editor.consts';
+import { PHOTO_TYPES } from '~shared/helpers/files';
+import { tText } from '~shared/helpers/translation-functions';
+import { validateFlowplayerVideoUrl } from '~shared/helpers/validation';
+import { AVO } from '~shared/types/index';
 import type {
 	ContentBlockConfig,
 	ContentBlockFieldGroup,
 	DefaultContentBlockState,
-} from '../../../types/content-block.types.js';
+} from '../../../types/content-block.types';
 import {
 	Color,
 	ContentBlockEditor,
 	ContentBlockType,
 	DEFAULT_BUTTON_PROPS,
-} from '../../../types/content-block.types.js';
+} from '../../../types/content-block.types';
 import {
 	BLOCK_FIELD_DEFAULTS,
 	BLOCK_STATE_DEFAULTS,
 	FILE_FIELD,
 	FOREGROUND_COLOR_FIELD,
 	TEXT_FIELD,
-} from '../defaults.js';
+} from '../defaults';
 
 export const INITIAL_AVO_HERO_COMPONENTS_STATE = (): Partial<BlockAvoHeroProps> => ({
 	title: '',

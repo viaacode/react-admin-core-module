@@ -1,6 +1,6 @@
 import React from 'react';
-import { tHtml, tText } from '~shared/helpers/translation-functions.js';
-import { AdminLayout } from '~shared/layouts/AdminLayout/AdminLayout.js';
+import { tHtml, tText } from '~shared/helpers/translation-functions';
+import { AdminLayout } from '~shared/layouts/AdminLayout/AdminLayout';
 
 const Dashboard = () => {
 	return (

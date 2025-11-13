@@ -1,1 +1,1 @@
-export * from './AdminLayout/index.js';
+export * from './AdminLayout/index';

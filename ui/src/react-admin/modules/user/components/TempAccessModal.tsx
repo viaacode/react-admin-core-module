@@ -12,13 +12,13 @@ import type { Avo } from '@viaa/avo2-types';
 import { noop } from 'es-toolkit';
 import type { FunctionComponent } from 'react';
 import React, { useState } from 'react';
-import { BlockHeading } from '~content-blocks/BlockHeading/BlockHeading.js';
-import { ToastType } from '~core/config/config.types.js';
-import { getDatePickerDefaultProps } from '~modules/content-page/components/DatePicker/DatePicker.consts.js';
-import { toDateObject, toIsoDate } from '~shared/helpers/formatters/date.js';
-import { showToast } from '~shared/helpers/show-toast.js';
-import { tHtml, tText } from '~shared/helpers/translation-functions.js';
-import { getTempAccessValidationErrors } from '../user.consts.js';
+import { BlockHeading } from '~content-blocks/BlockHeading/BlockHeading';
+import { ToastType } from '~core/config/config.types';
+import { getDatePickerDefaultProps } from '~modules/content-page/components/DatePicker/DatePicker.consts';
+import { toDateObject, toIsoDate } from '~shared/helpers/formatters/date';
+import { showToast } from '~shared/helpers/show-toast';
+import { tHtml, tText } from '~shared/helpers/translation-functions';
+import { getTempAccessValidationErrors } from '../user.consts';
 
 interface TempAccessModalProps {
 	tempAccess: Avo.User.TempAccess | null;
