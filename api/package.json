@@ -1,6 +1,6 @@
 {
   "name": "@meemoo/admin-core-api",
-  "version": "5.0.6",
+  "version": "5.0.7",
   "description": "The backend routes to support the screens in the Admin Core dashboard",
   "author": "Bert Verhelst <bert.verhelst@studiohyperdrive.be>",
   "main": "./dist/src/index.js",
