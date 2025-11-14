@@ -5,9 +5,9 @@ import { AdminConfigManager } from '~core/config';
 import { UserDetail } from '~modules/user/views';
 
 import { UserOverview } from '~modules/user/views/UserOverview';
-import { AdminLayout } from '~shared/layouts';
 import { tText } from '~shared/helpers/translation-functions';
-import { mockCommonUser } from '../../mock-common-user';
+import { AdminLayout } from '~shared/layouts';
+import { getMockCommonUser } from '../../mock-common-user';
 
 const UserOverviewPage: FC<{ commonUser: Avo.User.CommonUser }> = ({ commonUser }) => {
 	return (
@@ -23,7 +23,11 @@ const UserDetailPage: FC = () => {
 	const params = useParams<{ id: string }>();
 
 	return (
-		<UserDetail id={params.id} commonUser={mockCommonUser} onGoBack={() => window.history.back()} />
+		<UserDetail
+			id={params.id}
+			commonUser={getMockCommonUser()}
+			onGoBack={() => window.history.back()}
+		/>
 	);
 };
 
@@ -31,7 +35,7 @@ export const renderAdminUserRoutes = (): ReactNode[] => {
 	return [
 		<Route
 			key={AdminConfigManager.getAdminRoute('ADMIN_USER_OVERVIEW')}
-			render={() => <UserOverviewPage commonUser={mockCommonUser} />}
+			render={() => <UserOverviewPage commonUser={getMockCommonUser()} />}
 			exact
 			path={AdminConfigManager.getAdminRoute('ADMIN_USER_OVERVIEW')}
 		/>,
