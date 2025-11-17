@@ -896,7 +896,7 @@
     "location": "react-admin/modules/content-page/const/get-color-options",
     "key": "meemoo-logo",
     "language": "nl",
-    "value": "meemoo-logo",
+    "value": "Logo meemoo",
     "value_type": "TEXT"
   },
   {
@@ -2444,7 +2444,7 @@
     "location": "react-admin/modules/content-page/views/content-page-edit",
     "key": "de-content-pagina-is-naar-je-klembord-gekopieerd-druk-ctrl-v-om-hem-te-plakken-op-een-bewerk-pagina",
     "language": "nl",
-    "value": "De contentpagina is gekopieerd. Druk ctrl-v om hem te plakken in een contentpagina die je aan het bewerken bent (QAS of PRD).",
+    "value": "De contentpagina is gekopieerd. Druk ctrl-v om hem te plakken in een contentpagina die je aan het bewerken bent (op QAS of PRD).",
     "value_type": "TEXT"
   },
   {
@@ -9613,6 +9613,15 @@
   },
   {
     "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-uitgeklaard/block-uitgeklaard",
+    "key": "datum",
+    "language": "nl",
+    "value": "Datum",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
     "component": "FRONTEND",
     "location": "app",
     "key": "je-account-is-gekoppeld",
@@ -10560,6 +10569,15 @@
     "app": "AVO",
     "component": "FRONTEND",
     "location": "collection/collection",
+    "key": "de-bundel-heeft-collecties-of-opdrachten-die-verwijderd-zijn",
+    "language": "nl",
+    "value": "De bundel heeft collecties of opdrachten die verwijderd zijn",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "collection/collection",
     "key": "de-bundel-heeft-niet-publieke-collecties-of-opdrachten",
     "language": "nl",
     "value": "De bundel heeft niet-publieke collecties of opdrachten.",
@@ -10724,7 +10742,7 @@
     "location": "dynamic-route-resolver/dynamic-route-resolver",
     "key": "deze-pagina-is-enkel-voor-gebruikers-met-andere-rechten",
     "language": "nl",
-    "value": "Oeps. Jij kan deze pagina niet raadplegen, je hebt hiervoor niet de juiste gebruikersrechten. Denk je dat er fout is gebeurd? Contacteer dan onze helpdesk.",
+    "value": "Oeps. Jij kan deze pagina niet raadplegen, je hebt hiervoor niet de juiste gebruikersrechten. Denk je dat er fout is gebeurd? Contacteer ons dan via de Feedback-knop.",
     "value_type": "HTML"
   },
   {
@@ -17042,7 +17060,7 @@
     "location": "collection/components/collection-or-bundle-edit-marcom",
     "key": "je-kan-enkel-publiceren-naar-klascement-als-deze-collectie-publiek-staat",
     "language": "nl",
-    "value": "Je kan enkel publiceren naar KlasCement als deze collectie publiek staat, en dus vindbaar is via de zoekpagina: https://onderwijs.hetarchief.be/zoeken.",
+    "value": "Je kan enkel publiceren naar KlasCement als deze collectie publiek staat, en dus vindbaar is via de pagina  https://onderwijs.hetarchief.be/zoeken.",
     "value_type": "HTML"
   },
   {
@@ -18959,7 +18977,7 @@
     "location": "item/views/item",
     "key": "je-hebt-geen-rechten-om-dit-item-te-bekijken-leerling",
     "language": "nl",
-    "value": "Je hebt geen rechten om dit fragment te bekijken.\nVraag aan jouw leerkracht de <u>opdrachtlink</u> om dit video- of audiofragment als leerling te kunnen bekijken.",
+    "value": "Je hebt geen rechten om dit fragment te bekijken.\r\nVraag aan jouw leerkracht de <u>opdrachtlink</u> om dit video- of audiofragment als leerling te kunnen bekijken.",
     "value_type": "HTML"
   },
   {
@@ -25223,7 +25241,7 @@
     "location": "admin/url-redirects/views/url-redirect-overview",
     "key": "beschrijving-hoe-een-url-redirect-toe-te-voegen",
     "language": "nl",
-    "value": "<p>Klik op de knop &#x27;Redirect aanmaken&#x27; om een nieuwe redirect voor een url in te stellen. Vul de oude en nieuwe url in en druk op opslaan. Voor een gewone redirect kies je de optie &#x27;Tekst&#x27; als patroon van de oude url, &#x27;Reguliere expressie&#x27; is voor meer technische redirects. Er is geen controle op de geldigheid van de nieuwe url, controleer dus je redirect als gewone gebruiker. </p><p>Opgelet, je kan geen redirect instellen die naar een andere redirect verwijst. In dat geval krijg je de vraag om de oorspronkelijke redirect aan te passen.</p><p>Je kan meerdere redirects aan maken die naar dezelfde nieuwe url verwijzen. Maar je per oude url slechts 1 nieuwe redirect instellen.</p>",
+    "value": "<p>Klik op de knop &#x27;Redirect aanmaken&#x27; om een nieuwe redirect voor een url in te stellen. Vul de oude en nieuwe url in en druk op opslaan. Voor een gewone redirect kies je de optie &#x27;Tekst&#x27; als patroon van de oude url, &#x27;Reguliere expressie&#x27; is voor meer technische redirects. Er is geen controle op de geldigheid van de nieuwe url, controleer dus zelf je redirect als gewone gebruiker!</p><p>Opgelet, je kan geen redirect instellen die naar een andere redirect verwijst. In dat geval krijg je de vraag om de oorspronkelijke redirect aan te passen.</p><p>Je kan meerdere redirects aan maken die naar dezelfde nieuwe url verwijzen. Maar je kan per oude url slechts 1 nieuwe redirect instellen.</p>",
     "value_type": "HTML"
   },
   {
@@ -28832,7 +28850,7 @@
     "location": "shared/components/search-result/search-result",
     "key": "toggle-bookmark",
     "language": "nl",
-    "value": "Maak bladwijzer",
+    "value": "Maak Bladwijzer",
     "value_type": "TEXT"
   },
   {
@@ -30296,24 +30314,6 @@
   {
     "app": "AVO",
     "component": "FRONTEND",
-    "location": "search/components/media-grid-wrapper/media-grid-wrapper",
-    "key": "collectie",
-    "language": "nl",
-    "value": "collectie",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "search/components/media-grid-wrapper/media-grid-wrapper",
-    "key": "collecties",
-    "language": "nl",
-    "value": "collecties",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
     "location": "admin/content-page/components/blocks/media-grid-wrapper/media-grid-wrapper",
     "key": "bron",
     "language": "nl",
@@ -30335,7 +30335,7 @@
     "location": "search/components/media-grid-wrapper/media-grid-wrapper",
     "key": "toggle-bladwijzer",
     "language": "nl",
-    "value": "Maak bladwijzer",
+    "value": "Maak Bladwijzer",
     "value_type": "TEXT"
   },
   {
@@ -30355,15 +30355,6 @@
     "language": "nl",
     "value": "De bron van deze videostill is <a href=\"{{organisationWebsite}}\" target=\"_blank\">{{organisationName}}</a>.",
     "value_type": "HTML"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "collection/collection",
-    "key": "de-bundel-heeft-collecties-of-opdrachten-die-verwijderd-zijn",
-    "language": "nl",
-    "value": "De bundel heeft collecties of opdrachten die verwijderd zijn",
-    "value_type": "TEXT"
   },
   {
     "app": "AVO",
@@ -30479,7 +30470,7 @@
     "location": "modules/klascement/klascement",
     "key": "publiceer-collection-naar-klascement-collection-description-collection-title-collection-link",
     "language": "nl",
-    "value": "<p>\nIn deze collectie vind je video- en geluidsfragmenten over (vul onderwerp in), samen met meer context en concrete lestips.\n</p>\n<p>\n\t{{collectionDescription}}\n</p>\n<p>\n\t<a href=\"{{collectionLink}}\" target=\"_blank\">\n\t\tBekijk de collectie <strong>{{collectionTitle}}</strong> op Het Archief voor Onderwijs >\n\t</a>\n</p>",
+    "value": "<p>\r\nIn deze collectie vind je video- en geluidsfragmenten over (vul onderwerp in), samen met meer context en concrete lestips.\r\n</p>\r\n<p>\r\n\t{{collectionDescription}}\r\n</p>\r\n<p>\r\n\t<a href=\"{{collectionLink}}\" target=\"_blank\">\r\n\t\tBekijk de collectie <strong>{{collectionTitle}}</strong> op Het Archief voor Onderwijs >\r\n\t</a>\r\n</p>",
     "value_type": "TEXT"
   },
   {
@@ -30497,7 +30488,7 @@
     "location": "modules/klascement/klascement",
     "key": "publiceer-opdracht-naar-klascement-assignment-description-assignment-title-assignment-link",
     "language": "nl",
-    "value": "<p>\n\t{{assignmentDescription}}\n</p>\n<p>\n\t<a href=\"{{assignmentLink}}\" target=\"_blank\">\n\t\tBekijk de voorbeeldopdracht <strong>{{assignmentTitle}}</strong> op Het Archief voor Onderwijs >\n\t</a>\n</p>",
+    "value": "<p>\r\n\t{{assignmentDescription}}\r\n</p>\r\n<p>\r\n\t<a href=\"{{assignmentLink}}\" target=\"_blank\">\r\n\t\tBekijk de voorbeeldopdracht <strong>{{assignmentTitle}}</strong> op Het Archief voor Onderwijs >\r\n\t</a>\r\n</p>",
     "value_type": "TEXT"
   },
   {
@@ -30506,7 +30497,7 @@
     "location": "modules/url-redirects/url-redirects",
     "key": "er-bestaat-reeds-een-redirect-met-dezelfde-oude-url-best-dat-je-deze-wijzigt",
     "language": "nl",
-    "value": "Er bestaat al een redirect op {{existingOldPath}}, pas deze aan ipv een nieuwe in te stellen.",
+    "value": "Er bestaat al een redirect op {{existingOldPath}}, pas deze aan i.p.v. een nieuwe in te stellen.",
     "value_type": "TEXT"
   },
   {
@@ -30515,7 +30506,7 @@
     "location": "modules/url-redirects/url-redirects",
     "key": "redirects-naar-andere-redirects-zijn-niet-toegestaan-bedoelde-je-from-path-to-path",
     "language": "nl",
-    "value": "Een redirect naar een pagina waarop al een redirect staat, mag niet. Bedoelde je {{existingOldPath}} => {{creatingNewPath}}?\n",
+    "value": "Een redirect naar een pagina waarop al een redirect staat, mag niet. Bedoelde je {{existingOldPath}} => {{creatingNewPath}}?\r\n",
     "value_type": "TEXT"
   },
   {
@@ -30803,7 +30794,7 @@
     "location": "modules/auth/idps/lti/lti",
     "key": "no-platform-user-id-we-could-use-to-map-for-this-user-this-is-the-true-anonymous-flow",
     "language": "nl",
-    "value": "No platform userId we could use to map for this user. This is the true anonymous flow",
+    "value": "There is no platform userID we could use to map to this user. This is the true anonymous flow.",
     "value_type": "TEXT"
   },
   {
