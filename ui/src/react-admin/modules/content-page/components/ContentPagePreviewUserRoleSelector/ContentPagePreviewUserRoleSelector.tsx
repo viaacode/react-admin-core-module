@@ -19,7 +19,7 @@ import {
 import { useGetUserGroups } from '~modules/user-group/hooks/get-user-groups';
 import { isAvo } from '~shared/helpers/is-avo';
 import { tText } from '~shared/helpers/translation-functions';
-import { SpecialPermissionGroups } from '~shared/types/authentication.types';
+import { SpecialUserGroups } from '~shared/types/authentication.types';
 
 import './ContentPagePreviewUserRoleSelector.scss';
 import { ROUTE_PARTS } from '~shared/consts';
@@ -45,14 +45,14 @@ export const ContentPagePreviewUserRoleSelector: FunctionComponent<
 			if (isNil(props.commonUser?.userGroup?.id)) {
 				// If user doesn't have a user group, show all content. Not sure if this can happen though.
 				setQueryParams({
-					userGroupId: SpecialPermissionGroups.allContent,
+					userGroupId: SpecialUserGroups.allContent,
 				});
 				return;
 			}
 			if (location.href.includes(`/${ROUTE_PARTS.admin}/`)) {
 				// If we're on the edit page of a content page, we show all content by default
 				setQueryParams({
-					userGroupId: SpecialPermissionGroups.allContent,
+					userGroupId: SpecialUserGroups.allContent,
 				});
 				return;
 			}

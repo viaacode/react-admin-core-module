@@ -1,5 +1,4 @@
 import { Button } from '@meemoo/react-components';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import {
 	Button as AvoButton,
 	Container,
@@ -17,9 +16,10 @@ import { StringParam, useQueryParams } from 'use-query-params';
 import type { BlockImageProps } from '~content-blocks/BlockImage/BlockImage';
 import { AdminConfigManager } from '~core/config';
 import { convertRichTextEditorStatesToHtml } from '~modules/content-page/services/content-page.converters';
-import type {
-	BlockClickHandler,
-	ContentPageInfo,
+import {
+	type BlockClickHandler,
+	BlockClickType,
+	type ContentPageInfo,
 } from '~modules/content-page/types/content-pages.types';
 import { Icon } from '~shared/components/Icon';
 import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner';
@@ -28,12 +28,16 @@ import { isAvo } from '~shared/helpers/is-avo';
 import { buildLink } from '~shared/helpers/link';
 import { tText } from '~shared/helpers/translation-functions';
 import { PermissionService } from '~shared/services/permission-service';
-import { SpecialPermissionGroups } from '~shared/types/authentication.types';
+import { SpecialUserGroups } from '~shared/types/authentication.types';
 import type { ContentBlockConfig } from '../../types/content-block.types';
 import { ContentBlockType } from '../../types/content-block.types';
 import ContentBlockRenderer from '.././ContentBlockRenderer/ContentBlockRenderer';
 
 import './ContentPageRenderer.scss';
+import {
+	CONTENT_PAGE_PREVIEW_QUERY_PARAM,
+	CONTENT_PAGE_USER_GROUP_ID_QUERY_PARAM,
+} from '~modules/content-page/components/ContentPageRenderer/ContentPageRenderer.consts';
 
 type ContentPageDetailProps = {
 	contentPageInfo: Partial<ContentPageInfo>;
@@ -43,16 +47,6 @@ type ContentPageDetailProps = {
 	renderFakeTitle?: boolean;
 	renderNoAccessError: () => ReactNode;
 };
-
-const queryClient = new QueryClient({
-	defaultOptions: {
-		queries: {
-			refetchOnWindowFocus: false,
-			keepPreviousData: true,
-			retry: 0,
-		},
-	},
-});
 
 export const ContentPageRenderer: FunctionComponent<ContentPageDetailProps> = (props) => {
 	const [queryParams] = useQueryParams({
@@ -118,16 +112,16 @@ export const ContentPageRenderer: FunctionComponent<ContentPageDetailProps> = (p
 		} else if (props.commonUser?.userGroup?.id) {
 			currentUserGroupIds = [
 				String(props.commonUser?.userGroup?.id),
-				SpecialPermissionGroups.loggedInUsers,
+				SpecialUserGroups.loggedInUsers,
 			];
 		} else {
-			currentUserGroupIds = [SpecialPermissionGroups.loggedOutUsers];
+			currentUserGroupIds = [SpecialUserGroups.loggedOutUsers];
 		}
 
 		contentBlockBlockConfigs = compact(
 			contentBlockBlockConfigs.map(
 				(contentBlockConfig: ContentBlockConfig): ContentBlockConfig | null => {
-					if (currentUserGroupIds.includes(SpecialPermissionGroups.allContent)) {
+					if (currentUserGroupIds.includes(SpecialUserGroups.allContent)) {
 						return contentBlockConfig;
 					}
 
@@ -154,7 +148,7 @@ export const ContentPageRenderer: FunctionComponent<ContentPageDetailProps> = (p
 
 	const renderEditButton = () => {
 		const isAdminRoute = window.location.href.includes(ROUTE_PARTS.admin);
-		const pageInPreview = window.location.href.includes('preview');
+		const pageInPreview = window.location.search.includes(`${CONTENT_PAGE_PREVIEW_QUERY_PARAM}=`);
 		const userCanEditPage = PermissionService.hasPerm(
 			props.commonUser,
 			PermissionName.EDIT_ANY_CONTENT_PAGES
@@ -226,36 +220,37 @@ export const ContentPageRenderer: FunctionComponent<ContentPageDetailProps> = (p
 	const renderContentPage = () => {
 		return (
 			<div className="c-content-page-preview">
-				<QueryClientProvider client={queryClient}>
-					{renderEditButton()}
-					{getContentBlocks(props.contentPageInfo as ContentPageInfo).map(
-						(contentBlockConfig: ContentBlockConfig) => {
-							return (
-								<ContentBlockRenderer
-									key={
-										'content-block-preview-' +
-										contentBlockConfig.type +
-										'-' +
-										contentBlockConfig.position
-									}
-									contentBlockConfig={contentBlockConfig}
-									contentPageInfo={props.contentPageInfo as ContentPageInfo}
-									className={clsx(`content-block-preview-${contentBlockConfig.position}`, {
-										'c-content-block__active':
-											contentBlockConfig.position ===
-											// biome-ignore lint/suspicious/noExplicitAny: todo
-											(props as any).activeBlockPosition,
-									})}
-									onClick={() =>
+				{renderEditButton()}
+				{getContentBlocks(props.contentPageInfo as ContentPageInfo).map(
+					(contentBlockConfig: ContentBlockConfig) => {
+						return (
+							<ContentBlockRenderer
+								key={
+									'content-block-preview-' +
+									contentBlockConfig.type +
+									'-' +
+									contentBlockConfig.position
+								}
+								contentBlockConfig={contentBlockConfig}
+								contentPageInfo={props.contentPageInfo as ContentPageInfo}
+								className={clsx(`content-block-preview-${contentBlockConfig.position}`, {
+									'c-content-block__active':
+										contentBlockConfig.position ===
 										// biome-ignore lint/suspicious/noExplicitAny: todo
-										((props as any).onBlockClicked || noop)(contentBlockConfig.position, 'preview')
-									}
-									commonUser={props.commonUser}
-								/>
-							);
-						}
-					)}
-				</QueryClientProvider>
+										(props as any).activeBlockPosition,
+								})}
+								onClick={() =>
+									// biome-ignore lint/suspicious/noExplicitAny: todo
+									((props as any).onBlockClicked || noop)(
+										contentBlockConfig.position,
+										BlockClickType.PREVIEW
+									)
+								}
+								commonUser={props.commonUser}
+							/>
+						);
+					}
+				)}
 			</div>
 		);
 	};
@@ -268,12 +263,15 @@ export const ContentPageRenderer: FunctionComponent<ContentPageDetailProps> = (p
 			return <div>Page with path {location.pathname} was not found</div>;
 		}
 		const queryParams = new URLSearchParams(window.location.search);
-		if (queryParams.get('preview') === 'true') {
-			const userGroupId = queryParams.get('userGroupId')?.split(',')[0] || '1'; // Default to meemoo admin
+		if (queryParams.get(CONTENT_PAGE_PREVIEW_QUERY_PARAM) === 'true') {
+			const userGroupId =
+				queryParams.get(CONTENT_PAGE_USER_GROUP_ID_QUERY_PARAM)?.split(',')[0] ||
+				String(props.commonUser?.userGroup?.id) ||
+				SpecialUserGroups.loggedOutUsers;
 
 			if (
 				!props.contentPageInfo.userGroupIds?.includes(userGroupId) &&
-				userGroupId !== SpecialPermissionGroups.allContent
+				userGroupId !== SpecialUserGroups.allContent
 			) {
 				return props.renderNoAccessError();
 			}

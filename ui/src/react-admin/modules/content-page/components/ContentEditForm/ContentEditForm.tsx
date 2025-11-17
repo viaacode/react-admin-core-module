@@ -48,7 +48,7 @@ import './ContentEditForm.scss';
 import { ContentPageEditFormDescription } from '~modules/content-page/components/ContentPageEditFormDescription/ContentPageEditFormDescription';
 import { getAllSubgroupIds } from '~modules/user-group/const/user-group.const';
 import { useGetUserGroups } from '~modules/user-group/hooks/get-user-groups';
-import { SpecialPermissionGroups } from '~shared/types/authentication.types';
+import { SpecialUserGroups } from '~shared/types/authentication.types';
 
 interface ContentEditFormProps {
 	contentTypes: SelectOption<Avo.ContentPage.Type>[];
@@ -193,7 +193,7 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 		? contentPageInfo.id
 			? [lastUserGroup.id]
 			: [
-					SpecialPermissionGroups.loggedInUsers,
+					SpecialUserGroups.loggedInUsers,
 					...getAllSubgroupIds(allUserGroups || []),
 					lastUserGroup.id,
 				]

@@ -38,7 +38,7 @@ import { CustomError } from '~modules/shared/helpers/custom-error';
 import { showToast } from '~modules/shared/helpers/show-toast';
 import { getAllSubgroupIds } from '~modules/user-group/const/user-group.const';
 import { useGetUserGroups } from '~modules/user-group/hooks/get-user-groups';
-import { SpecialPermissionGroups } from '~shared/types/authentication.types';
+import { SpecialUserGroups } from '~shared/types/authentication.types';
 
 interface NavigationEditFormProps {
 	formErrors: NavigationEditFormErrorState;
@@ -88,10 +88,10 @@ export const NavigationEditForm: FunctionComponent<NavigationEditFormProps> = ({
 			const allUserGroupIds: string[] = allUserGroups.map((ug) => String(ug.value));
 
 			// Add all user groups to content page user groups if content page is accessible by special user group: logged-in users
-			if (contentUserGroupIds.includes(SpecialPermissionGroups.loggedInUsers)) {
+			if (contentUserGroupIds.includes(SpecialUserGroups.loggedInUsers)) {
 				contentUserGroupIds = uniq([
 					...contentUserGroupIds,
-					...without(allUserGroupIds, SpecialPermissionGroups.loggedOutUsers),
+					...without(allUserGroupIds, SpecialUserGroups.loggedOutUsers),
 				]);
 			}
 
@@ -168,7 +168,7 @@ export const NavigationEditForm: FunctionComponent<NavigationEditFormProps> = ({
 
 	const defaultOptionSelection = currentNavigationItem?.id
 		? []
-		: [SpecialPermissionGroups.loggedInUsers, ...getAllSubgroupIds(allUserGroups || [])];
+		: [SpecialUserGroups.loggedInUsers, ...getAllSubgroupIds(allUserGroups || [])];
 
 	return (
 		<Form className="m-menu-edit-form">

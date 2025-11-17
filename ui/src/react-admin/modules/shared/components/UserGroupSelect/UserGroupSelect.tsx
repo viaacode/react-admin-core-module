@@ -15,7 +15,7 @@ import type { UserGroup } from '~modules/user-group/types/user-group.types';
 import './UserGroupSelect.scss';
 import { Checkbox } from '@meemoo/react-components';
 import { getAllSubgroupIds, isSubUserGroup } from '~modules/user-group/const/user-group.const';
-import { SpecialPermissionGroups } from '~shared/types/authentication.types';
+import { SpecialUserGroups } from '~shared/types/authentication.types';
 
 export interface UserGroupSelectProps {
 	label: string | undefined;
@@ -66,23 +66,20 @@ export const UserGroupSelect: FunctionComponent<UserGroupSelectProps> = ({
 
 		// No subgroups are selected, but we want to have loggedInUsers
 		// We are in this case checking the values because the checkedOptions are the default selection values and not necessarily the actual selected values
-		if (noneSubgroupsSelected(values) && values.includes(SpecialPermissionGroups.loggedInUsers)) {
+		if (noneSubgroupsSelected(values) && values.includes(SpecialUserGroups.loggedInUsers)) {
 			// So let's add all subgroups
 			newValues = [...newValues, ...allSubgroupIds];
 		}
 
-		if (
-			allSubgroupsSelected(newValues) &&
-			!newValues.includes(SpecialPermissionGroups.loggedInUsers)
-		) {
+		if (allSubgroupsSelected(newValues) && !newValues.includes(SpecialUserGroups.loggedInUsers)) {
 			// If all subgroups are selected but not the loggedInUsers, then we need to add this
-			newValues = [...newValues, SpecialPermissionGroups.loggedInUsers];
+			newValues = [...newValues, SpecialUserGroups.loggedInUsers];
 		} else if (
 			!allSubgroupsSelected(newValues) &&
-			newValues.includes(SpecialPermissionGroups.loggedInUsers)
+			newValues.includes(SpecialUserGroups.loggedInUsers)
 		) {
 			// Not all subgroups are selected, so removing loggedInUsers
-			newValues = newValues.filter((item) => item !== SpecialPermissionGroups.loggedInUsers);
+			newValues = newValues.filter((item) => item !== SpecialUserGroups.loggedInUsers);
 		}
 
 		onChange(uniq(newValues));
@@ -92,7 +89,7 @@ export const UserGroupSelect: FunctionComponent<UserGroupSelectProps> = ({
 		(userGroupOption: TagInfo) => {
 			// Only when this usergroup is loggedInUsers, not all user groups have been selected but at least 1 is
 			return (
-				userGroupOption.value === SpecialPermissionGroups.loggedInUsers &&
+				userGroupOption.value === SpecialUserGroups.loggedInUsers &&
 				!allSubgroupsSelected(values) &&
 				atLeastOneSubgroupSelected(values)
 			);
@@ -109,21 +106,21 @@ export const UserGroupSelect: FunctionComponent<UserGroupSelectProps> = ({
 			const newValues = [...values, userGroup];
 
 			// We are adding the loggedInUsers, so adding all subgroups as well
-			if (userGroup === SpecialPermissionGroups.loggedInUsers) {
+			if (userGroup === SpecialUserGroups.loggedInUsers) {
 				newValues.push(...allSubgroupIds);
 			} else if (allSubgroupsSelected(newValues)) {
 				// We are adding a subgroup, so making sure we have the loggedInUsers as well when all subgroups have been selected
-				newValues.push(SpecialPermissionGroups.loggedInUsers);
+				newValues.push(SpecialUserGroups.loggedInUsers);
 			}
 			onChange(uniq(newValues));
 		} else {
 			// We are removing the loggedInUsers
-			if (userGroup === SpecialPermissionGroups.loggedInUsers) {
+			if (userGroup === SpecialUserGroups.loggedInUsers) {
 				// remove all subgroups except the disabled ones
 				onChange(
 					values.filter((item) => {
 						// Do not include the loggedInUsers
-						if (item === SpecialPermissionGroups.loggedInUsers) {
+						if (item === SpecialUserGroups.loggedInUsers) {
 							return false;
 						}
 						// But always include the disabled option since they can't be deselected
@@ -139,7 +136,7 @@ export const UserGroupSelect: FunctionComponent<UserGroupSelectProps> = ({
 
 				// Not all subgroups are selected anymore, so removed the loggedInUsers as well
 				if (!allSubgroupsSelected(newValues)) {
-					onChange(newValues.filter((value) => value !== SpecialPermissionGroups.loggedInUsers));
+					onChange(newValues.filter((value) => value !== SpecialUserGroups.loggedInUsers));
 				} else {
 					onChange(newValues);
 				}

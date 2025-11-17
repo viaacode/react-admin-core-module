@@ -1,10 +1,9 @@
 import type { IconName } from '@viaa/avo2-components';
 import type { Avo } from '@viaa/avo2-types';
-import { cloneDeep, compact, isNil, isNumber, isString, sortBy } from 'lodash-es';
+import { compact, isNil, isNumber, isString, sortBy } from 'lodash-es';
 import type { FunctionComponent } from 'react';
 import { useEffect } from 'react';
-import type { QueryParamConfig } from 'use-query-params';
-import { NumberParam, StringParam, useQueryParams } from 'use-query-params';
+import { NumberParam, StringParam, useQueryParam } from 'use-query-params';
 import type { LabelObj } from '~content-blocks/BlockPageOverview/BlockPageOverview.types';
 import { ContentItemStyle } from '~content-blocks/BlockPageOverview/BlockPageOverview.types';
 
@@ -48,13 +47,9 @@ export const BlockPageOverviewWrapper: FunctionComponent<PageOverviewWrapperProp
 	renderLink,
 	commonUser,
 }) => {
-	// biome-ignore lint/suspicious/noExplicitAny: todo
-	const queryParamConfig: { [queryParamId: string]: QueryParamConfig<any> } = {
-		page: NumberParam,
-		item: StringParam,
-		label: CheckboxListParam,
-	};
-	const [queryParamsState, setQueryParamsState] = useQueryParams(queryParamConfig);
+	const [page, setPage] = useQueryParam('page', NumberParam);
+	const [item, setItem] = useQueryParam('item', StringParam);
+	const [label, setLabel] = useQueryParam('label', CheckboxListParam);
 
 	const debouncedItemsPerPage = useDebounce(itemsPerPage || 1000, 200); // Default to 1000 if itemsPerPage is zero
 
@@ -93,7 +88,7 @@ export const BlockPageOverviewWrapper: FunctionComponent<PageOverviewWrapperProp
 		useGetContentPageLabelsByTypeAndLabels(
 			{
 				selectedContentType: contentTypeAndTabs.selectedContentType,
-				queryLabels: queryParamsState.label || [],
+				queryLabels: label || [],
 			},
 			{ keepPreviousData: true }
 		);
@@ -101,9 +96,10 @@ export const BlockPageOverviewWrapper: FunctionComponent<PageOverviewWrapperProp
 	const { data: focusedPage, isFetching: isLoadingFocusedPage } =
 		useGetContentPageByLanguageAndPath(
 			AdminConfigManager.getConfig().locale || Locale.Nl,
-			queryParamsState.item,
+			item as string,
 			{
 				keepPreviousData: true,
+				enabled: !!item,
 			}
 		);
 
@@ -127,7 +123,7 @@ export const BlockPageOverviewWrapper: FunctionComponent<PageOverviewWrapperProp
 			offset:
 				itemStyle === ContentItemStyle.ACCORDION_TWO_LEVELS
 					? 0
-					: queryParamsState.page * debouncedItemsPerPage,
+					: (page || 0) * debouncedItemsPerPage,
 			limit: itemStyle === ContentItemStyle.ACCORDION_TWO_LEVELS ? 500 : debouncedItemsPerPage,
 		},
 		{ keepPreviousData: true }
@@ -139,8 +135,6 @@ export const BlockPageOverviewWrapper: FunctionComponent<PageOverviewWrapperProp
 
 	useEffect(() => {
 		if (!isInitialLoading) {
-			const { label, item } = queryParamsState;
-
 			if (isNil(label) && isNil(item)) {
 				return;
 			}
@@ -157,58 +151,33 @@ export const BlockPageOverviewWrapper: FunctionComponent<PageOverviewWrapperProp
 		}
 		// We only want to trigger a scroll down when the page loads, not when the query params change when a user clicks another page
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [isInitialLoading, queryParamsState]);
+	}, [isInitialLoading, label, item]);
 
 	// ARC-1877: fix queryparams state on initial load was an old value (or undefined)
+	// biome-ignore lint/correctness/useExhaustiveDependencies: only execute on initial load
 	useEffect(() => {
-		setQueryParamsState(
-			{
-				...queryParamsState,
-				label: queryParamsState?.label?.length ? queryParamsState.label : undefined,
-			},
-			'replace' // https://meemoo.atlassian.net/browse/AVO-3438
-		);
-		// eslint-disable-next-line
-	}, [queryParamsState, setQueryParamsState]);
+		// https://meemoo.atlassian.net/browse/AVO-3438
+		setLabel(label || undefined, 'replaceIn');
+	}, []);
 
 	const handleCurrentPageChanged = (pageIndex: number) => {
-		setQueryParamsState(
-			(oldQueryParamState) => {
-				return {
-					...cloneDeep(oldQueryParamState),
-					page: pageIndex,
-					item: undefined,
-				};
-			},
-			'replace' // https://meemoo.atlassian.net/browse/AVO-3438
-		);
+		setPage(pageIndex, 'replaceIn');
+		setItem(undefined, 'replaceIn');
 	};
 
 	const handleSelectedTabsChanged = (tabs: LabelObj[]) => {
-		setQueryParamsState(
-			(oldQueryParamState) => {
-				return {
-					...cloneDeep(oldQueryParamState),
-					label: tabs.map((tab) => tab.label),
-					page: 0,
-					item: undefined,
-				};
-			},
-			'replace' // https://meemoo.atlassian.net/browse/AVO-3438
+		setLabel(
+			tabs.map((tab) => tab.label),
+			'replaceIn'
 		);
+		setPage(0, 'replaceIn');
+		setItem(undefined, 'replaceIn');
 	};
 
 	const handleFocusedPageChanged = (newFocusedPage: ContentPageInfo | null) => {
-		setQueryParamsState(
-			(oldQueryParamState) => {
-				return {
-					...cloneDeep(oldQueryParamState),
-					page: 0,
-					item: newFocusedPage?.path,
-				};
-			},
-			'replace' // https://meemoo.atlassian.net/browse/AVO-3438
-		);
+		// https://meemoo.atlassian.net/browse/AVO-3438
+		setPage(0, 'replaceIn');
+		setItem(newFocusedPage?.path, 'replaceIn');
 	};
 
 	const getLabelsWithContent = () => {
@@ -231,7 +200,7 @@ export const BlockPageOverviewWrapper: FunctionComponent<PageOverviewWrapperProp
 				}
 				selectedTabs={selectedTabObjects || []}
 				onSelectedTabsChanged={handleSelectedTabsChanged}
-				currentPage={queryParamsState.page}
+				currentPage={page || 0}
 				onCurrentPageChanged={handleCurrentPageChanged}
 				pageCount={pageCount || 1}
 				pages={pages ?? []}

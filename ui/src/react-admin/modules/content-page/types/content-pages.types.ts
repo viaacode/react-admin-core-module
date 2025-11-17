@@ -148,7 +148,12 @@ export enum ContentEditActionType {
 	SET_CONTENT_BLOCK_ERROR = '@@admin-content-edit/SET_CONTENT_BLOCK_ERROR',
 }
 
-export type BlockClickHandler = (position: number, type: 'preview' | 'sidebar') => void;
+export enum BlockClickType {
+	PREVIEW = 'preview',
+	SIDEBAR = 'sidebar',
+}
+
+export type BlockClickHandler = (position: number, type: BlockClickType) => void;
 
 export enum ContentPageAction {
 	duplicate = 'duplicate',

@@ -18,11 +18,12 @@ import type {
 	ContentBlockStateType,
 	ContentBlockType,
 } from '~modules/content-page/types/content-block.types';
-import type {
-	BlockClickHandler,
-	ContentPageInfo,
+import {
+	type BlockClickHandler,
+	BlockClickType,
+	ContentEditActionType,
+	type ContentPageInfo,
 } from '~modules/content-page/types/content-pages.types';
-import { ContentEditActionType } from '~modules/content-page/types/content-pages.types';
 import { Sidebar } from '~shared/components/Sidebar/Sidebar';
 import { createKey } from '~shared/helpers/create-key';
 import { tText } from '~shared/helpers/translation-functions';
@@ -81,8 +82,8 @@ const ContentEditContentBlocks: FunctionComponent<ContentEditContentBlocksProps>
 		});
 
 		// Scroll preview and sidebar to the bottom
-		focusBlock(newConfig.position, 'preview');
-		focusBlock(newConfig.position, 'sidebar');
+		focusBlock(newConfig.position, BlockClickType.PREVIEW);
+		focusBlock(newConfig.position, BlockClickType.SIDEBAR);
 	};
 
 	const handleReorderContentBlock = useCallback(
@@ -103,7 +104,7 @@ const ContentEditContentBlocks: FunctionComponent<ContentEditContentBlocksProps>
 	 * @param type
 	 */
 	const scrollToBlockPosition: BlockClickHandler = useCallback(
-		(position: number, type: 'preview' | 'sidebar') => {
+		(position: number, type: BlockClickType) => {
 			const blockElem = document.querySelector(`.content-block-${type}-${position}`);
 
 			const sidebarScrollable = document.querySelector(
@@ -111,14 +112,14 @@ const ContentEditContentBlocks: FunctionComponent<ContentEditContentBlocksProps>
 			);
 			const previewScrollable = document.querySelector('.c-content-edit-view__preview');
 
-			const scrollable = type === 'sidebar' ? sidebarScrollable : previewScrollable;
+			const scrollable = type === BlockClickType.SIDEBAR ? sidebarScrollable : previewScrollable;
 			if (!blockElem || !scrollable) {
 				return;
 			}
 			const blockElemTop = blockElem.getBoundingClientRect().top;
 			const scrollableTop = scrollable.getBoundingClientRect().top;
 			const scrollTop = scrollable.scrollTop;
-			const scrollMargin = type === 'sidebar' ? 18 : 0;
+			const scrollMargin = type === BlockClickType.SIDEBAR ? 18 : 0;
 			const desiredScrollPosition = Math.round(
 				Math.max(blockElemTop - (scrollableTop - scrollTop) - scrollMargin, 0)
 			);
@@ -146,10 +147,11 @@ const ContentEditContentBlocks: FunctionComponent<ContentEditContentBlocksProps>
 	);
 
 	const focusBlock: BlockClickHandler = useCallback(
-		(position: number, type: 'preview' | 'sidebar') => {
-			toggleActiveBlock(position, type === 'preview');
+		(position: number, type: BlockClickType) => {
+			toggleActiveBlock(position, type === BlockClickType.PREVIEW);
 			setHighlightedBlockIndex(position);
-			const inverseType = type === 'preview' ? 'sidebar' : 'preview';
+			const inverseType =
+				type === BlockClickType.PREVIEW ? BlockClickType.SIDEBAR : BlockClickType.PREVIEW;
 			setTimeout(() => {
 				scrollToBlockPosition(position, inverseType);
 			}, 0);
@@ -177,7 +179,7 @@ const ContentEditContentBlocks: FunctionComponent<ContentEditContentBlocksProps>
 						length={(contentPageInfo.content_blocks || []).length}
 						hasSubmitted={hasSubmitted}
 						toggleIsAccordionOpen={() => {
-							focusBlock(itemData.position, 'sidebar');
+							focusBlock(itemData.position, BlockClickType.SIDEBAR);
 						}}
 						onChange={(
 							formGroupType: ContentBlockStateType,

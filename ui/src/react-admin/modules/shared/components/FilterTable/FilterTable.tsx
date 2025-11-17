@@ -169,7 +169,6 @@ export const FilterTable: FunctionComponent<FilterTableProps> = ({
 				...(id !== 'page' ? { page: 0 } : {}), // Reset the page to 0, when any filter or sort order change is made
 			});
 
-			console.log('table state changed: ', { value, id, tableState, newTableState });
 			setTableState(newTableState, 'replace');
 		},
 		[setTableState, tableState]
