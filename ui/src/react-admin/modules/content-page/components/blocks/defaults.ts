@@ -34,8 +34,8 @@ export const BLOCK_STATE_DEFAULTS = (
 		padding:
 			state.padding ||
 			({
-				top: 'small',
-				bottom: 'small',
+				top: 'top-small',
+				bottom: 'bottom-small',
 			} as PaddingFieldState),
 		margin:
 			state.margin ||

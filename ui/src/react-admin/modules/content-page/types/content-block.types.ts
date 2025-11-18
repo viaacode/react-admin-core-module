@@ -110,7 +110,7 @@ export const ColorSelectGradientColors: Record<GradientColor, string> = {
 };
 
 export interface PaddingFieldState {
-	top: SpacerOption;
+	top: SpacerOption; // TODO make separate types for top options and bottom options. Otherwise you can set small for the top, but it should be top-small
 	bottom: SpacerOption;
 }
 

@@ -1,3 +1,5 @@
+import type { ButtonAction, ButtonType, IconName } from '@viaa/avo2-components';
+import { Button, Image } from '@viaa/avo2-components';
 import clsx from 'clsx';
 import type { FunctionComponent, ReactElement } from 'react';
 import type {
@@ -6,12 +8,10 @@ import type {
 	HeadingTypeOption,
 	SimpleAlignOption,
 } from '~modules/content-page/types/content-block.types';
-import type { DefaultComponentProps } from '~modules/shared/types/components';
-import { BlockHeading } from '../BlockHeading';
-import type { ButtonAction, ButtonType, IconName } from '@viaa/avo2-components';
-import { Button, Image } from '@viaa/avo2-components';
 import { generateSmartLink } from '~modules/shared/components/SmartLink/SmartLink';
+import type { DefaultComponentProps } from '~modules/shared/types/components';
 import { Icon } from '~shared/components/Icon';
+import { BlockHeading } from '../BlockHeading';
 import './BlockHetArchiefImageTextBackground.scss';
 import type { ContentPageWidth } from '~modules/content-page/types/content-pages.types';
 import { CONTENT_PAGE_WIDTH_TO_REM } from '~modules/content-page/types/content-pages.types';
