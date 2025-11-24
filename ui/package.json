@@ -17,6 +17,10 @@
       "types": "./dist/admin.d.ts",
       "import": "./dist/admin.js",
       "default": "./dist/admin.js"
+    },
+    "./styles.css": {
+      "import": "./dist/admin-core-ui.css",
+      "require": "./dist/admin-core-ui.css"
     }
   },
   "typesVersions": {
@@ -157,7 +161,6 @@
     "typescript": "5.6.2",
     "use-query-params": "1.2.3",
     "vite": "6.3.5",
-    "vite-plugin-css-injected-by-js": "3.5.2",
     "vite-plugin-dts": "4.5.4",
     "vite-plugin-externalize-deps": "0.9.0",
     "vite-plugin-svgr": "4.3.0",
