@@ -9344,6 +9344,15 @@
   {
     "app": "AVO",
     "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-uitgeklaard/block-uitgeklaard",
+    "key": "datum",
+    "language": "nl",
+    "value": "Datum",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
     "location": "admin/content-block/helpers/generators/uitgeklaard",
     "key": "datum-is-verplicht",
     "language": "nl",
@@ -9609,15 +9618,6 @@
     "key": "error",
     "language": "nl",
     "value": "Error",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-uitgeklaard/block-uitgeklaard",
-    "key": "datum",
-    "language": "nl",
-    "value": "Datum",
     "value_type": "TEXT"
   },
   {
