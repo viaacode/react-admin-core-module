@@ -2,7 +2,7 @@ import type { Avo } from '@viaa/avo2-types'
 import { type Request } from 'express'
 import { get } from 'lodash'
 
-import { mockUserAvo, mockUserHetArchief } from '../../../mock-user'
+import { getMockUserAvo, getMockUserHetArchief } from '../../../mock-user'
 import { isAvo } from '../helpers/is-avo'
 import { SpecialPermissionGroups } from '../types/types'
 
@@ -16,9 +16,9 @@ export class SessionHelper {
 		/** Login user for admin-core demo app */
 		if (process.env.IS_ADMIN_CORE_DEMO_APP === 'true') {
 			if (isAvo()) {
-				return mockUserAvo
+				return getMockUserAvo()
 			} else {
-				return mockUserHetArchief
+				return getMockUserHetArchief()
 			}
 		}
 

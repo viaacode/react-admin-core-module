@@ -1,7 +1,7 @@
 import { Test, type TestingModule } from '@nestjs/testing'
 import type { Avo } from '@viaa/avo2-types'
 
-import { mockUserAvo } from '../../../mock-user'
+import { getMockUserAvo } from '../../../mock-user'
 import { mockTranslationsService } from '../../shared/helpers/mockTranslationsService'
 import { Locale, TranslationsService } from '../../translations'
 import { SessionUserEntity } from '../../users/classes/session-user'
@@ -64,7 +64,7 @@ describe('AssetsController', () => {
 				{
 					url: mockUploadUrl,
 				},
-				new SessionUserEntity(mockUserAvo)
+				new SessionUserEntity(getMockUserAvo())
 			)
 
 			expect(mockAssetsService.delete).toHaveBeenCalledTimes(1)
