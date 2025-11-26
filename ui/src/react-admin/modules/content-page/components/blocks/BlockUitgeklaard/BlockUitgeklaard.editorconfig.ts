@@ -9,6 +9,7 @@ import {
 	ContentBlockType,
 } from '~modules/content-page/types/content-block.types';
 import { tText } from '~shared/helpers/translation-functions';
+import { AVO } from '~shared/types';
 import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, TEXT_FIELD } from '../defaults';
 
 export const INITIAL_UITGEKLAARD_COMPONENTS_STATE = (): KlaarBlockComponentState => ({
@@ -53,7 +54,9 @@ export const UITGEKLAARD_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 			) as ContentBlockField,
 			date: {
 				label: tText(
-					'modules/content-page/components/blocks/block-uitgeklaard/block-uitgeklaard___datum'
+					'modules/content-page/components/blocks/block-uitgeklaard/block-uitgeklaard___datum',
+					{},
+					[AVO]
 				),
 				editorType: ContentBlockEditor.DatePicker,
 				validator: (value: string) => {
