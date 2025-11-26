@@ -53,7 +53,7 @@ import './ContentPageOverview.scss';
 import type { FilterableColumn } from '~shared/components/FilterTable/FilterTable';
 import { truncateTableValue } from '~shared/helpers/truncate';
 import { PermissionService } from '~shared/services/permission-service';
-import { SpecialPermissionGroups } from '~shared/types/authentication.types';
+import { SpecialUserGroups } from '~shared/types/authentication.types';
 import FilterTable, { getFilters } from '../../shared/components/FilterTable/FilterTable';
 import { GET_OVERVIEW_COLUMNS, PAGES_PER_PAGE } from '../const/content-page.consts';
 import { useContentTypes } from '../hooks/useContentTypes';
@@ -440,13 +440,13 @@ export const ContentPageOverview: FunctionComponent<ContentPageOverviewProps> = 
 								if (!userGroup) {
 									return null;
 								}
-								if (userGroup.id === SpecialPermissionGroups.loggedInUsers) {
+								if (userGroup.id === SpecialUserGroups.loggedInUsers) {
 									return {
 										label: tText('admin/content/views/content-overview___ingelogd'),
 										id: userGroup.id as string,
 									};
 								}
-								if (userGroup.id === SpecialPermissionGroups.loggedOutUsers) {
+								if (userGroup.id === SpecialUserGroups.loggedOutUsers) {
 									return {
 										label: tText('admin/content/views/content-overview___niet-ingelogd'),
 										id: userGroup.id as string,

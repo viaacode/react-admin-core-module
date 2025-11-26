@@ -9,7 +9,7 @@ import type {
 	UserGroupWithPermissions,
 } from '~modules/user-group/types/user-group.types';
 import { tText } from '~shared/helpers/translation-functions';
-import { SpecialPermissionGroups } from '~shared/types/authentication.types';
+import { SpecialUserGroups } from '~shared/types/authentication.types';
 import type { PermissionRow } from '../types/user-group.types';
 
 export const preferredUserGroupOrder: Record<string, number> = {
@@ -90,17 +90,17 @@ export const getAllSubgroupIds = (userGroupOptions: (Partial<UserGroup> | TagInf
 
 export const GET_ALL_CONTENT: () => Partial<UserGroup> = () => ({
 	label: tText('modules/user-group/const/user-group___alle-content'),
-	id: SpecialPermissionGroups.allContent,
+	id: SpecialUserGroups.allContent,
 });
 
 export const GET_LOGGED_OUT_USERS: () => Partial<UserGroup> = () => ({
 	label: tText('admin/menu/components/menu-edit-form/menu-edit-form___niet-ingelogde-gebruikers'),
-	id: SpecialPermissionGroups.loggedOutUsers,
+	id: SpecialUserGroups.loggedOutUsers,
 });
 
 export const GET_LOGGED_IN_USERS: () => Partial<UserGroup> = () => ({
 	label: tText('admin/menu/components/menu-edit-form/menu-edit-form___ingelogde-gebruikers'),
-	id: SpecialPermissionGroups.loggedInUsers,
+	id: SpecialUserGroups.loggedInUsers,
 });
 
 export const GET_SPECIAL_USER_GROUPS: () => Partial<UserGroup>[] = () => [

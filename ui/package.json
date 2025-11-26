@@ -17,6 +17,10 @@
       "types": "./dist/src/admin.d.ts",
       "import": "./dist/src/admin.js",
       "default": "./dist/src/admin.js"
+    },
+    "./styles.css": {
+      "import": "./dist/admin-core-ui.css",
+      "require": "./dist/admin-core-ui.css"
     }
   },
   "typesVersions": {
@@ -51,10 +55,10 @@
     "backup-translations-avo-qas": "dotenv -e .env/.env.local tsx --project ./scripts/tsconfig.json scripts/backup-translations.ts -- AVO",
     "translations:extract:hetarchief": "dotenv -e .env/.env.local tsx --project ./scripts/tsconfig.json scripts/extract-and-replace-translations.ts -- HET_ARCHIEF",
     "translations:extract:avo": "dotenv -e .env/.env.local tsx --project ./scripts/tsconfig.json scripts/extract-and-replace-translations.ts -- AVO",
-    "list-of-changed-translations-hetarchief": "dotenv -e .env/.env.local tsx --project ./scripts/tsconfig.json scripts/get-list-of-changed-translations.ts -- HET_ARCHIEF v4.6.13 v4.6.15",
-    "list-commit-messages-between-tags-hetarchief": "dotenv -e .env/.env.local tsx --project ./scripts/tsconfig.json scripts/get-list-of-commit-messages-between-tags.ts -- v4.6.13 v4.6.15",
-    "list-of-changed-translations-avo": "dotenv -e .env/.env.local tsx --project ./scripts/tsconfig.json scripts/get-list-of-changed-translations.ts -- AVO v4.6.3 v4.6.10",
-    "list-commit-messages-between-tags-avo": "dotenv -e .env/.env.local tsx --project ./scripts/tsconfig.json scripts/get-list-of-commit-messages-between-tags.ts -- v4.6.3 v4.6.10",
+    "list-of-changed-translations-hetarchief": "dotenv -e .env/.env.local tsx --project ./scripts/tsconfig.json scripts/get-list-of-changed-translations.ts -- HET_ARCHIEF v4.6.13 v4.6.21",
+    "list-commit-messages-between-tags-hetarchief": "dotenv -e .env/.env.local tsx --project ./scripts/tsconfig.json scripts/get-list-of-commit-messages-between-tags.ts -- v4.6.13 v4.6.21",
+    "list-of-changed-translations-avo": "dotenv -e .env/.env.local tsx --project ./scripts/tsconfig.json scripts/get-list-of-changed-translations.ts -- AVO v4.6.10 v4.6.16",
+    "list-commit-messages-between-tags-avo": "dotenv -e .env/.env.local tsx --project ./scripts/tsconfig.json scripts/get-list-of-commit-messages-between-tags.ts -- v4.6.10 v4.6.16",
     "check-bundled-files": "npx depcruise src/react-admin --config bundle-import-rules.json --include-only \"^src\" --exclude \"(.spec.tsx?|.test.tsx?|node_modules)\"",
     "check-bundled-files:admin.mts": "npx depcruise src/admin.ts --config bundle-import-rules.json --include-only \"^src\" --exclude \"(.spec.tsx?|.test.tsx?|node_modules)\"",
     "check-bundled-files:client.mts": "npx depcruise src/client.ts --config bundle-import-rules.json --include-only \"^src\" --exclude \"(.spec.tsx?|.test.tsx?|node_modules)\" --output-type dot | dot -T svg > dependency-graph.svg",
@@ -154,7 +158,7 @@
     "tsx": "^4.19.1",
     "typescript": "5.9.3",
     "vite": "7.2.2",
-    "vite-plugin-css-injected-by-js": "3.5.2",
+    "use-query-params": "1.2.3",
     "vite-plugin-dts": "4.5.4",
     "vite-plugin-externalize-deps": "0.10.0",
     "vite-plugin-svgr": "4.5.0",

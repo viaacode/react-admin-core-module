@@ -4,13 +4,10 @@ import react from '@vitejs/plugin-react';
 import viteTsconfigPaths from 'vite-tsconfig-paths';
 import dts from 'vite-plugin-dts';
 import { externalizeDeps } from 'vite-plugin-externalize-deps';
-import cssInjectedByJsPlugin from 'vite-plugin-css-injected-by-js';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-	plugins: [react(), viteTsconfigPaths(), dts(), externalizeDeps(), cssInjectedByJsPlugin({
-		relativeCSSInjection: true
-	})],
+	plugins: [react(), viteTsconfigPaths(), dts(), externalizeDeps()],
 	server: {
 		port: 3400,
 	},

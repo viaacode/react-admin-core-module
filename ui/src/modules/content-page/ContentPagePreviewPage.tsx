@@ -10,7 +10,7 @@ import type {
 import { ErrorView } from '~shared/components/error/ErrorView';
 import { Locale } from '../../../scripts/translation.types';
 import { ContentPageService, convertDbContentPageToContentPageInfo } from '../../client';
-import { mockCommonUser } from '../../mock-common-user';
+import { getMockCommonUser } from '../../mock-common-user';
 
 export const ContentPagePreviewPage: FC = () => {
 	const [contentPageInfo, setContentPageInfo] = useState<ContentPageInfo | null>(null);
@@ -37,7 +37,7 @@ export const ContentPagePreviewPage: FC = () => {
 			<ContentPagePreviewUserRoleSelector />
 			<ContentPageRenderer
 				contentPageInfo={contentPageInfo}
-				commonUser={mockCommonUser}
+				commonUser={getMockCommonUser()}
 				renderFakeTitle={contentPageInfo.contentType === 'FAQ_ITEM'}
 				renderNoAccessError={() => (
 					<ErrorView

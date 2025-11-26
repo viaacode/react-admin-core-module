@@ -8,6 +8,7 @@ export const mockUserAvo: Avo.User.User = {
 	full_name: 'Bert Verhelst',
 	is_blocked: false,
 	profile: {
+		// AVO
 		// id: '69ccef3b-751a-4be4-95bc-5ef365fbd504',
 		id: 'dd787a19-03f7-41b4-9b7e-c1c24b475294',
 		language: 'nl' as Locale,

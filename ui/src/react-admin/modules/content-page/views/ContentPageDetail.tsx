@@ -21,6 +21,7 @@ import { StringParam, useQueryParam, withDefault } from 'use-query-params';
 import { AdminConfigManager } from '~core/config/config.class';
 import { ToastType } from '~core/config/config.types';
 import { ContentPageRenderer } from '~modules/content-page/components/ContentPageRenderer/ContentPageRenderer';
+import { CONTENT_PAGE_PREVIEW_QUERY_PARAM } from '~modules/content-page/components/ContentPageRenderer/ContentPageRenderer.consts';
 import PublishContentPageModal from '~modules/content-page/components/PublishContentPageModal';
 import { GET_CONTENT_PAGE_DETAIL_TABS } from '~modules/content-page/const/content-page.consts';
 import { isPublic } from '~modules/content-page/helpers/get-published-state';
@@ -197,7 +198,7 @@ export const ContentPageDetail: FC<ContentPageDetailProps> = ({
 				const path = stringifyUrl({
 					url: contentPageInfo.path,
 					query: {
-						preview: true,
+						[CONTENT_PAGE_PREVIEW_QUERY_PARAM]: true,
 					},
 				});
 				navigateToAbsoluteOrRelativeUrl(path, navigateFunc, LinkTarget.Blank);
@@ -206,7 +207,7 @@ export const ContentPageDetail: FC<ContentPageDetailProps> = ({
 				const path = stringifyUrl({
 					url: `/${contentPageInfo.language}${contentPageInfo.path}`,
 					query: {
-						preview: true,
+						[CONTENT_PAGE_PREVIEW_QUERY_PARAM]: true,
 					},
 				});
 				navigateToAbsoluteOrRelativeUrl(path, navigateFunc, LinkTarget.Blank);

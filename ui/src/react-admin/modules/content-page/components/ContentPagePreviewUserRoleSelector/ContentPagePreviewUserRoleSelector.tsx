@@ -19,9 +19,10 @@ import {
 import { useGetUserGroups } from '~modules/user-group/hooks/get-user-groups';
 import { isAvo } from '~shared/helpers/is-avo';
 import { tText } from '~shared/helpers/translation-functions';
-import { SpecialPermissionGroups } from '~shared/types/authentication.types';
+import { SpecialUserGroups } from '~shared/types/authentication.types';
 
 import './ContentPagePreviewUserRoleSelector.scss';
+import { ROUTE_PARTS } from '~shared/consts';
 
 type ContentPagePreviewUserRoleSelectorProps = {
 	commonUser?: Avo.User.CommonUser;
@@ -41,12 +42,23 @@ export const ContentPagePreviewUserRoleSelector: FunctionComponent<
 	useEffect(() => {
 		// if the queryParams are missing userGroupIds, use the userGroup of the current user
 		if (isNil(queryParams?.userGroupId)) {
+			if (isNil(props.commonUser?.userGroup?.id)) {
+				// If user doesn't have a user group, show all content. Not sure if this can happen though.
+				setQueryParams({
+					userGroupId: SpecialUserGroups.allContent,
+				});
+				return;
+			}
+			if (location.href.includes(`/${ROUTE_PARTS.admin}/`)) {
+				// If we're on the edit page of a content page, we show all content by default
+				setQueryParams({
+					userGroupId: SpecialUserGroups.allContent,
+				});
+				return;
+			}
+			// For all other cases, show the page as the user's user group
 			setQueryParams({
-				userGroupId: String(
-					props.commonUser?.userGroup?.id
-						? props.commonUser?.userGroup?.id
-						: SpecialPermissionGroups.allContent
-				),
+				userGroupId: String(props.commonUser?.userGroup?.id),
 			});
 		}
 	}, [props.commonUser, setQueryParams]);

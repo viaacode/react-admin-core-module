@@ -66,22 +66,22 @@ export class PlayerTicketService {
 		ip: string,
 		isPublicDomain: boolean
 	): Promise<PlayerTicket> {
+		const resolvedIp = ['::1', '::ffff:127.0.0.1', '127.0.0.1'].includes(ip)
+			? await publicIp.v4()
+			: ip;
+		const resolvedReferer = trimEnd(referer || this.host, '/');
+		const resolvedMaxAge = this.ticketServiceMaxAge;
+		const maxAge15Years = 15 * 365 * 24 * 60 * 60; // 15 years in seconds
+
+		// If the domain is public, we allow any client and referer and set the maxage to 15 years
+		// This is needed so social media and chat apps can come fetch a thumbnail for the detail page of an ie object
+		// https://meemoo.atlassian.net/browse/ARC-2891
 		const data = {
 			app: 'hetarchief.be',
-			client: ['::1', '::ffff:127.0.0.1', '127.0.0.1'].includes(ip)
-				? await publicIp.v4()
-				: ip,
-			referer: trimEnd(referer || this.host, '/'),
-			maxage: this.ticketServiceMaxAge,
-		}
-		if (isPublicDomain) {
-			// If the domain is public, we allow any client and referer and set the maxage to 15 years
-			// This is needed so social media and chat apps can come fetch a thumbnail for the detail page of an ie object
-			// https://meemoo.atlassian.net/browse/ARC-2891
-			data.client = ''
-			data.referer = ''
-			data.maxage = 15 * 365 * 24 * 60 * 60 // 15 years in seconds
-		}
+			client: isPublicDomain ? '' : resolvedIp,
+			referer: isPublicDomain ?'': resolvedReferer,
+			maxage: isPublicDomain ? maxAge15Years : resolvedMaxAge,
+		};
 
 		/**
 		 * Build the full URL from the base TICKET_SERVICE_URL and the path;

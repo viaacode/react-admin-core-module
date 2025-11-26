@@ -12,6 +12,11 @@
   min-height: 34rem;
   margin: 0 auto;
 
+	@media (max-width: $g-bp2) {
+	  padding-left: $g-spacer-unit;
+	  padding-right: $g-spacer-unit;
+	}
+
   &.c-block-het-archief-image-text-background--left-screen {
 	position: initial;
 
@@ -139,6 +144,10 @@
 	flex-direction: column;
 	padding: variables.$g-spacer-unit * 4;
 	z-index: 1;
+
+	  @media (max-width: $g-bp2) {
+		  padding: 0;
+	  }
 
 	p {
 	  padding: unset !important;

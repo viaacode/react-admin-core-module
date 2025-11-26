@@ -6,7 +6,7 @@ import { UserDetail } from '~modules/user/views/UserDetail';
 import { UserOverview } from '~modules/user/views/UserOverview';
 import { tText } from '~shared/helpers/translation-functions';
 import { AdminLayout } from '~shared/layouts/AdminLayout/AdminLayout';
-import { mockCommonUser } from '../../mock-common-user';
+import { getMockCommonUser } from '../../mock-common-user';
 
 const UserOverviewPage: FC = () => {
 	return (
@@ -26,7 +26,7 @@ const UserDetailPage: FC = () => {
 		return null;
 	}
 	return (
-		<UserDetail id={userId} commonUser={mockCommonUser} onGoBack={() => window.history.back()} />
+		<UserDetail id={userId} commonUser={getMockCommonUser()} onGoBack={() => window.history.back()} />
 	);
 };
 

@@ -14,7 +14,7 @@ import type { UserGroupSelectProps } from '~shared/components/UserGroupSelect/Us
 import { RICH_TEXT_EDITOR_OPTIONS_FULL_WITHOUT_ALIGN } from '~shared/consts/rich-text-editor.consts';
 import { isAvo } from '~shared/helpers/is-avo';
 import { tText } from '~shared/helpers/translation-functions';
-import { SpecialPermissionGroups } from '~shared/types/authentication.types';
+import { SpecialUserGroups } from '~shared/types/authentication.types';
 import type {
 	ContentBlockField,
 	CustomBackground,
@@ -34,8 +34,8 @@ export const BLOCK_STATE_DEFAULTS = (
 		padding:
 			state.padding ||
 			({
-				top: 'small',
-				bottom: 'small',
+				top: 'top-small',
+				bottom: 'bottom-small',
 			} as PaddingFieldState),
 		margin:
 			state.margin ||
@@ -130,7 +130,7 @@ export const USER_GROUP_SELECT = (label: string, placeholder: string): ContentBl
 	editorType: ContentBlockEditor.UserGroupSelect,
 	editorProps: {
 		placeholder,
-		checkedOptions: [SpecialPermissionGroups.loggedInUsers],
+		checkedOptions: [SpecialUserGroups.loggedInUsers],
 	} as UserGroupSelectProps,
 });
 
