@@ -11,7 +11,7 @@ import {
 import type { Avo } from '@viaa/avo2-types';
 import { LomSchemeType, PermissionName } from '@viaa/avo2-types';
 import { differenceInMilliseconds, formatDuration, intervalToDuration, parseISO } from 'date-fns';
-import nlBE from 'date-fns/locale/nl-BE/index';
+import { nlBE } from 'date-fns/locale';
 import { compact } from 'es-toolkit';
 import type { FC, ReactText } from 'react';
 import React, { useCallback, useEffect, useState } from 'react';

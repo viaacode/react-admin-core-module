@@ -24,7 +24,6 @@ import {
 	ContentEditActionType,
 	type ContentPageInfo,
 } from '~modules/content-page/types/content-pages.types';
-import { ContentEditActionType } from '~modules/content-page/types/content-pages.types';
 import { ErrorView } from '~shared/components/error/ErrorView';
 import { Sidebar } from '~shared/components/Sidebar/Sidebar';
 import { createKey } from '~shared/helpers/create-key';

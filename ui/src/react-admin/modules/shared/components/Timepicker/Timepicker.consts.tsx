@@ -1,5 +1,5 @@
 import { TextInput } from '@meemoo/react-components';
-import nlBE from 'date-fns/locale/nl-BE/index';
+import { nlBE } from 'date-fns/locale';
 import type { DatePickerProps } from 'react-datepicker';
 import { Icon } from '~shared/components/Icon/Icon';
 

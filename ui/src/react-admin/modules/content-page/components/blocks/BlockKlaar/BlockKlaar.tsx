@@ -1,7 +1,7 @@
 import type { DefaultProps } from '@viaa/avo2-components';
 import clsx from 'clsx';
 import { format, parseISO } from 'date-fns';
-import nlBE from 'date-fns/locale/nl-BE/index';
+import { nlBE } from 'date-fns/locale';
 import type { FunctionComponent } from 'react';
 import React from 'react';
 

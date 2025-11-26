@@ -7,7 +7,7 @@ import {
 	TextInput,
 } from '@meemoo/react-components';
 import { format } from 'date-fns';
-import nlBE from 'date-fns/locale/nl-BE/index';
+import { nlBE } from 'date-fns/locale';
 import { without } from 'es-toolkit';
 import type { FunctionComponent } from 'react';
 import { useCallback, useEffect, useMemo, useState } from 'react';

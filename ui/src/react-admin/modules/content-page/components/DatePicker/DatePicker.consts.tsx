@@ -1,6 +1,5 @@
 import { TextInput } from '@meemoo/react-components';
-import enGB from 'date-fns/locale/en-GB/index';
-import nlBE from 'date-fns/locale/nl-BE/index';
+import { enGB, nlBE } from 'date-fns/locale';
 import React from 'react';
 import type { DatePickerProps } from 'react-datepicker';
 import { AdminConfigManager } from '~core/config/config.class';

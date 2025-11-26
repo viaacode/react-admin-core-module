@@ -36,6 +36,10 @@ import ContentBlockRenderer from '.././ContentBlockRenderer/ContentBlockRenderer
 
 import './ContentPageRenderer.scss';
 import { set } from 'es-toolkit/compat';
+import {
+	CONTENT_PAGE_PREVIEW_QUERY_PARAM,
+	CONTENT_PAGE_USER_GROUP_ID_QUERY_PARAM,
+} from '~modules/content-page/components/ContentPageRenderer/ContentPageRenderer.consts';
 
 type ContentPageDetailProps = {
 	contentPageInfo: Partial<ContentPageInfo>;

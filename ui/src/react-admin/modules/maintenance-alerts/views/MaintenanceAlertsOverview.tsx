@@ -2,7 +2,7 @@ import { Badge, Button } from '@meemoo/react-components';
 import type { IPagination } from '@studiohyperdrive/pagination';
 
 import { format, isAfter, isWithinInterval, parseISO } from 'date-fns';
-import nlBE from 'date-fns/locale/nl-BE/index';
+import { nlBE } from 'date-fns/locale';
 import type { FunctionComponent, ReactNode } from 'react';
 import { useState } from 'react';
 import { ToastType } from '~core/config/config.types';

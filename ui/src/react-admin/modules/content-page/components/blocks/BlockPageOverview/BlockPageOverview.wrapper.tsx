@@ -1,6 +1,6 @@
 import type { IconName } from '@viaa/avo2-components';
 import type { Avo } from '@viaa/avo2-types';
-import { cloneDeep, compact, isNil, isString, sortBy } from 'es-toolkit';
+import { compact, isNil, isString, sortBy } from 'es-toolkit';
 import type { FunctionComponent } from 'react';
 import { useEffect } from 'react';
 import { NumberParam, StringParam, useQueryParam } from 'use-query-params';
@@ -86,13 +86,14 @@ export const BlockPageOverviewWrapper: FunctionComponent<PageOverviewWrapperProp
 	const { data: selectedTabObjects, isFetching: isLoadingSelectedTabObjects } =
 		useGetContentPageLabelsByTypeAndLabels({
 			selectedContentType: contentTypeAndTabs.selectedContentType,
-			queryLabels: queryParamsState.label || [],
+			queryLabels: label || [],
 		});
 
 	const { data: focusedPage, isFetching: isLoadingFocusedPage } =
 		useGetContentPageByLanguageAndPath(
 			AdminConfigManager.getConfig().locale || Locale.Nl,
-			queryParamsState.item
+			item as string,
+			{ enabled: !!item }
 		);
 
 	const {
@@ -112,9 +113,7 @@ export const BlockPageOverviewWrapper: FunctionComponent<PageOverviewWrapperProp
 		orderProp: sortOrder.split('__')[0],
 		orderDirection: sortOrder.split('__').pop() as Avo.Search.OrderDirection,
 		offset:
-			itemStyle === ContentItemStyle.ACCORDION_TWO_LEVELS
-				? 0
-				: queryParamsState.page * debouncedItemsPerPage,
+			itemStyle === ContentItemStyle.ACCORDION_TWO_LEVELS ? 0 : (page || 0) * debouncedItemsPerPage,
 		limit: itemStyle === ContentItemStyle.ACCORDION_TWO_LEVELS ? 500 : debouncedItemsPerPage,
 	});
 

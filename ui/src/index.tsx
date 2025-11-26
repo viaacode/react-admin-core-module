@@ -1,8 +1,8 @@
 // noinspection ES6PreferShortImport
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import nlBE from 'date-fns/locale/nl-BE/index';
-import setDefaultOptions from 'date-fns/setDefaultOptions';
+import { setDefaultOptions } from 'date-fns';
+import { nlBE } from 'date-fns/locale';
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';

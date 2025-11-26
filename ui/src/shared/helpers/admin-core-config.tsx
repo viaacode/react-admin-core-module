@@ -1,7 +1,7 @@
 import { IconName } from '@viaa/avo2-components';
 import type { Avo, DatabaseType } from '@viaa/avo2-types';
-import type { TOptions } from 'i18next';
 import { capitalize, lowerCase } from 'es-toolkit';
+import type { TOptions } from 'i18next';
 import type { FunctionComponent, ReactNode } from 'react';
 import type { NavigateFunction } from 'react-router';
 import { Link } from 'react-router-dom';
@@ -17,7 +17,7 @@ import { UserBulkAction } from '~modules/user/user.types';
 import Html from '~shared/components/Html/Html';
 import { ROUTE_PARTS } from '~shared/consts/routes';
 import { tText } from '~shared/helpers/translation-functions';
-import { mockCommonUser } from '../../mock-common-user';
+import { getMockCommonUser } from '../../mock-common-user';
 import i18n from '../translations/i18n';
 
 const DUMMY_EDUCATIONAL_ORGANISATIONS: Avo.EducationOrganization.Organization[] = [
@@ -359,7 +359,7 @@ export function setAdminCoreConfig(navigateFunc: NavigateFunction) {
 				UserBulkAction.EXPORT_SELECTION,
 				UserBulkAction.EXPORT_ALL,
 			],
-			getCommonUser: () => mockCommonUser,
+			getCommonUser: () => getMockCommonUser(),
 		},
 		locale: Locale.Nl,
 		env: {
