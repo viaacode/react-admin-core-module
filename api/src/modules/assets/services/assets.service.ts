@@ -1,6 +1,4 @@
-import { Agent as HttpsAgent } from 'https'
-import path from 'path'
-
+import { randomUUID as uuid } from 'node:crypto'
 import { Sha256 } from '@aws-crypto/sha256-js'
 import { HeadObjectCommandOutput, S3 } from '@aws-sdk/client-s3'
 import {
@@ -18,9 +16,10 @@ import { AssetType } from '@viaa/avo2-types'
 import { mapLimit } from 'blend-promise-utils'
 import fse from 'fs-extra'
 import got, { ExtendOptions, Got } from 'got'
+import { Agent as HttpsAgent } from 'https'
 import { escapeRegExp, isNil, kebabCase } from 'lodash'
-import { v4 as uuidv4 } from 'uuid'
-
+import path from 'path'
+import { DataService } from 'src/modules/data/services/data.service'
 import {
 	GetContentAssetDocument,
 	GetContentAssetQuery,
@@ -32,11 +31,9 @@ import {
 	UpdateContentAssetMutation,
 	UpdateContentAssetMutationVariables,
 } from '../../shared/generated/graphql-db-types-hetarchief'
+import { CustomError } from '../../shared/helpers/error'
 import { EXTENSION_TO_MIME_TYPE } from '../assets.consts'
 import { AssetToken } from '../assets.types'
-
-import { DataService } from 'src/modules/data/services/data.service'
-import { CustomError } from '../../shared/helpers/error'
 
 export const UUID_LENGTH = 35
 
@@ -218,7 +215,7 @@ export class AssetsService {
 	): Promise<string> {
 		const parsedFilename = path.parse(file.originalname)
 		const key = `${assetFiletype}/${
-			preferredKey ?? `${kebabCase(parsedFilename.name)}-${uuidv4()}${parsedFilename.ext}`
+			preferredKey ?? `${kebabCase(parsedFilename.name)}-${uuid()}${parsedFilename.ext}`
 		}`
 
 		return this.uploadToObjectStore(key, file)
@@ -382,7 +379,7 @@ export class AssetsService {
 					additionalInfo: { bucketName: bucket, url },
 				})
 			}
-			const newId = uuidv4()
+			const newId = uuid()
 			const parts = path.parse(key)
 			newKey =
 				copyKey ||

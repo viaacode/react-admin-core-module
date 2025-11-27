@@ -74,11 +74,10 @@
     "session-file-store": "^1.5.0",
     "sharp": "^0.34.5",
     "swagger-ui-express": "^4.3.0",
-    "uuid": "^13.0.0",
     "xml-js": "^1.6.11"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.3.5",
+    "@biomejs/biome": "2.3.8",
     "@graphql-codegen/cli": "^5.0.5",
     "@graphql-codegen/typed-document-node": "^5.0.13",
     "@graphql-codegen/typescript-operations": "^4.4.1",
