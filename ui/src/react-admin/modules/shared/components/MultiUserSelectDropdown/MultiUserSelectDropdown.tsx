@@ -10,19 +10,17 @@ import {
 	Spacer,
 	TagList,
 } from '@viaa/avo2-components';
+import type { Avo } from '@viaa/avo2-types';
 import clsx from 'clsx';
 import { uniqBy } from 'lodash-es';
 import type { FunctionComponent, ReactText } from 'react';
 import React, { useEffect, useState } from 'react';
+import { ToastType } from '~core/config/config.types';
+import { UserService } from '~modules/user/user.service';
 import { showToast } from '~shared/helpers/show-toast';
-
+import { tText } from '~shared/helpers/translation-functions';
 import type { PickerItem } from '../../types/content-picker';
 import { ContentPicker } from '../ContentPicker/ContentPicker';
-
-import { ToastType } from '~core/config/config.types';
-import type { Avo } from '@viaa/avo2-types';
-import { tText } from '~shared/helpers/translation-functions';
-import { UserService } from '~modules/user/user.service';
 
 import './MultiUserSelectDropdown.scss';
 
@@ -61,7 +59,7 @@ export const MultiUserSelectDropdown: FunctionComponent<MultiUserSelectDropdownP
 	}, [selectedProfile]);
 
 	useEffect(() => {
-		if (values.length) {
+		if (values?.length) {
 			UserService.getNamesByProfileIds(values)
 				.then((users: Partial<Avo.User.CommonUser>[]) => {
 					setSelectedProfiles(

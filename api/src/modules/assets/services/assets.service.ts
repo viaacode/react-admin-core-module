@@ -87,12 +87,19 @@ export class AssetsService {
 			try {
 				this.token = await this.gotInstance.post<AssetToken>('', {
 					resolveBodyOnly: true, // this is duplicate but fixes a typing error
-				});
-			} catch (err) {
+				})
+			} catch (err: any) {
 				throw new InternalServerErrorException({
 					message: 'Failed to get s3 token for the asset service',
 					innerException: err,
-				});
+					additionalInfo: {
+						message: err?.message,
+						status: err?.status,
+						statusCode: err?.statusCode,
+						error: err?.error,
+						body: err?.response?.body
+					},
+				})
 			}
 		}
 		return {
@@ -123,10 +130,6 @@ export class AssetsService {
 	 */
 	private async getS3Client(): Promise<S3> {
 		try {
-			this.token = await this.gotInstance.post<AssetToken>('', {
-				resolveBodyOnly: true, // this is duplicate but fixes a typing error
-			});
-
 			const agent = new HttpsAgent({
 				keepAlive: true,
 				maxSockets: 50,
