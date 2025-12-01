@@ -7,7 +7,6 @@ import {
 	NumberParam,
 	type QueryParamConfig,
 	StringParam,
-	useQueryParam,
 	useQueryParams,
 	withDefault,
 } from 'use-query-params';
@@ -181,7 +180,7 @@ export const BlockPageOverviewWrapper: FunctionComponent<PageOverviewWrapperProp
 		setQueryParamsState(
 			{
 				...queryParamsState,
-				pageIndex: pageIndex,
+				page: pageIndex,
 				item: undefined,
 			},
 			'replaceIn'
