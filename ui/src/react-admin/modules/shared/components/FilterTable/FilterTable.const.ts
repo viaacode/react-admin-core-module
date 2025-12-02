@@ -1,8 +1,7 @@
 import { compact } from 'es-toolkit';
-import { NumberParam, type QueryParamConfig, StringParam } from 'use-query-params';
-
+import type { QueryParamConfig } from 'serialize-query-params';
+import { NumberParam, StringParam } from '~shared/helpers/use-query-params-ssr';
 import { CheckboxListParam, DateRangeParam } from '../../helpers/query-string-converters';
-
 import type { FilterableColumn } from './FilterTable';
 import { cleanupFilterTableState } from './FilterTable.utils';
 

@@ -6,7 +6,7 @@ import { nlBE } from 'date-fns/locale';
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
-import { QueryParamProvider } from 'use-query-params';
+import { QueryParamProvider } from '~shared/helpers/use-query-params-ssr';
 import App from './App';
 import { ReactRouter7Adapter } from './shared/helpers/routes/react-router-v7-adapter-for-use-query-params';
 import { initI18n } from './shared/translations/i18n';

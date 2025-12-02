@@ -10,7 +10,6 @@ import {
 import type { Avo } from '@viaa/avo2-types';
 import { isNil, sortBy } from 'es-toolkit';
 import React, { type FunctionComponent, useEffect, useMemo, useState } from 'react';
-import { StringParam, useQueryParams } from 'use-query-params';
 import {
 	GET_ALL_CONTENT,
 	GET_LOGGED_OUT_USERS,
@@ -23,6 +22,7 @@ import { SpecialUserGroups } from '~shared/types/authentication.types';
 
 import './ContentPagePreviewUserRoleSelector.scss';
 import { ROUTE_PARTS } from '~shared/consts';
+import { StringParam, useQueryParams } from '~shared/helpers/use-query-params-ssr';
 
 type ContentPagePreviewUserRoleSelectorProps = {
 	commonUser?: Avo.User.CommonUser;

@@ -3,7 +3,6 @@ import type { Avo } from '@viaa/avo2-types';
 import { compact, isNil, isString, sortBy } from 'es-toolkit';
 import type { FunctionComponent } from 'react';
 import { useEffect } from 'react';
-import { NumberParam, StringParam, useQueryParam } from 'use-query-params';
 import type { LabelObj } from '~content-blocks/BlockPageOverview/BlockPageOverview.types';
 import { ContentItemStyle } from '~content-blocks/BlockPageOverview/BlockPageOverview.types';
 
@@ -20,6 +19,7 @@ import { Locale } from '~modules/translations/translations.core.types';
 import { ErrorView } from '~shared/components/error/ErrorView';
 import { CheckboxListParam } from '~shared/helpers/query-string-converters';
 import { tHtml, tText } from '~shared/helpers/translation-functions';
+import { NumberParam, StringParam, useQueryParam } from '~shared/helpers/use-query-params-ssr';
 import { useDebounce } from '~shared/hooks/useDebounce';
 
 export const BlockPageOverviewWrapper: FunctionComponent<PageOverviewWrapperProps> = ({

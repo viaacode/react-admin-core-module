@@ -82,7 +82,7 @@
     "date-fns-tz": "3.2.0",
     "es-toolkit": "^1.41.0",
     "file-saver": "2.0.5",
-    "i18next-http-backend": "1.4.1",
+    "i18next-http-backend": "3.0.2",
     "immer": "9.0.12",
     "isomorphic-dompurify": "2.16.0",
     "marked": "4.0.15",
@@ -102,7 +102,7 @@
     "react-select": "5.10.2",
     "react-table": "7.7.0",
     "ts-retry-promise": "^0.8.1",
-    "use-query-params": "2.2.1",
+    "use-query-params": "2.2.2",
     "yup": "1.4.0"
   },
   "devDependencies": {
@@ -145,7 +145,7 @@
     "lodash": "4.17.21",
     "lorem-ipsum": "2.0.8",
     "node-fetch": "3.3.2",
-    "react-i18next": "11.16.2",
+    "react-i18next": "16.3.5",
     "rimraf": "3.0.2",
     "sass": "1.93.3",
     "source-map-explorer": "2.5.3",

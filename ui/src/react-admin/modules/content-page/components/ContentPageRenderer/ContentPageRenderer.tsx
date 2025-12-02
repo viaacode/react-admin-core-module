@@ -1,5 +1,4 @@
 import { Button } from '@meemoo/react-components';
-import { keepPreviousData, QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import {
 	Button as AvoButton,
 	Container,
@@ -13,7 +12,6 @@ import { cloneDeep, compact, intersection, isNil, noop } from 'es-toolkit';
 import { stringifyUrl } from 'query-string';
 import type { FunctionComponent, ReactNode } from 'react';
 import React from 'react';
-import { StringParam, useQueryParams } from 'use-query-params';
 import type { BlockImageProps } from '~content-blocks/BlockImage/BlockImage';
 import { AdminConfigManager } from '~core/config/config.class';
 import { convertRichTextEditorStatesToHtml } from '~modules/content-page/services/content-page.converters';
@@ -40,6 +38,7 @@ import {
 	CONTENT_PAGE_PREVIEW_QUERY_PARAM,
 	CONTENT_PAGE_USER_GROUP_ID_QUERY_PARAM,
 } from '~modules/content-page/components/ContentPageRenderer/ContentPageRenderer.consts';
+import { StringParam, useQueryParams } from '~shared/helpers/use-query-params-ssr';
 
 type ContentPageDetailProps = {
 	contentPageInfo: Partial<ContentPageInfo>;

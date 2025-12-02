@@ -6,7 +6,6 @@ import { cloneDeep, isNil, isString } from 'es-toolkit';
 import type { FC, Reducer } from 'react';
 import React, { useCallback, useEffect, useReducer, useState } from 'react';
 import CopyToClipboard from 'react-copy-to-clipboard';
-import { StringParam, useQueryParam, withDefault } from 'use-query-params';
 import { AdminConfigManager } from '~core/config/config.class';
 import { ToastType } from '~core/config/config.types';
 import { ContentEditForm } from '~modules/content-page/components/ContentEditForm/ContentEditForm';
@@ -45,10 +44,7 @@ import type {
 	ContentPageInfo,
 	ContentPageUser,
 } from '~modules/content-page/types/content-pages.types';
-import {
-	ContentEditActionType,
-	PageType,
-} from '~modules/content-page/types/content-pages.types';
+import { ContentEditActionType, PageType } from '~modules/content-page/types/content-pages.types';
 import { Locale } from '~modules/translations/translations.core.types';
 import ConfirmModal from '~shared/components/ConfirmModal/ConfirmModal';
 import { ErrorView } from '~shared/components/error/ErrorView';
@@ -69,6 +65,7 @@ import { blockHasErrors } from '../helpers/block-has-errors';
 import { validateContentBlockConfig } from '../helpers/validate-content-block-config';
 import ContentEditContentBlocks from './ContentEditContentBlocks';
 import './ContentPageEdit.scss';
+import { StringParam, useQueryParam, withDefault } from '~shared/helpers/use-query-params-ssr';
 
 const { EDIT_ANY_CONTENT_PAGES, EDIT_OWN_CONTENT_PAGES } = PermissionName;
 

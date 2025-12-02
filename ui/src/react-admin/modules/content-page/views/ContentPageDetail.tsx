@@ -16,8 +16,6 @@ import { noop } from 'es-toolkit';
 import { stringifyUrl } from 'query-string';
 import type { FC, ReactElement, ReactText } from 'react';
 import React, { useCallback, useEffect, useState } from 'react';
-import { StringParam, useQueryParam, withDefault } from 'use-query-params';
-
 import { AdminConfigManager } from '~core/config/config.class';
 import { ToastType } from '~core/config/config.types';
 import { ContentPageRenderer } from '~modules/content-page/components/ContentPageRenderer/ContentPageRenderer';
@@ -45,6 +43,7 @@ import { isMultiLanguageEnabled } from '~shared/helpers/is-multi-language-enable
 import { buildLink, navigate, navigateToAbsoluteOrRelativeUrl } from '~shared/helpers/link';
 import { showToast } from '~shared/helpers/show-toast';
 import { tHtml, tText } from '~shared/helpers/translation-functions';
+import { StringParam, useQueryParam, withDefault } from '~shared/helpers/use-query-params-ssr';
 import { AdminLayout } from '~shared/layouts/AdminLayout/AdminLayout';
 import { PermissionService } from '~shared/services/permission-service';
 import type { DefaultComponentProps } from '~shared/types/components';

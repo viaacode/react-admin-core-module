@@ -28,7 +28,6 @@ import React, {
 	useEffect,
 	useState,
 } from 'react';
-import { useQueryParams } from 'use-query-params';
 import { isAvo } from '~modules/shared/helpers/is-avo';
 import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner';
 
@@ -41,6 +40,7 @@ import './FilterTable.scss';
 import { ErrorView } from '~shared/components/error/ErrorView';
 import { GET_DEFAULT_PAGINATION_BAR_PROPS } from '~shared/components/PaginationBar/PaginationBar.consts';
 import { toggleSortOrder } from '~shared/helpers/toggle-sort-order';
+import { useQueryParams } from '~shared/helpers/use-query-params-ssr';
 import { useGetTableColumnPreference } from '~shared/hooks/useGetTableColumnPreference';
 import { useUpdateTableColumnPreference } from '~shared/hooks/useUpdateTableColumnPreference';
 import BooleanCheckboxDropdown from '../BooleanCheckboxDropdown/BooleanCheckboxDropdown';
