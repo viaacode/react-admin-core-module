@@ -26,24 +26,28 @@ export const DateRangeParam = {
 };
 
 export const CheckboxListParam = {
-	encode: (value: string[] | undefined) => {
+	encode: (value: string[] | undefined): string | undefined => {
 		if (!value) {
-			return;
+			return undefined;
 		}
 		return value.join('~');
 	},
 	decode: (value: string | (string | null)[] | null | undefined): string[] | undefined => {
 		try {
 			if (!value) {
-				return [];
+				return undefined;
 			}
 			if (Array.isArray(value)) {
-				return value as string[];
+				if (value.length) {
+					return value as string[];
+				} else {
+					return undefined;
+				}
 			}
 			const newValues = value.split('~');
 			return newValues?.length ? newValues : undefined;
 		} catch (_err) {
-			return;
+			return undefined;
 		}
 	},
 };

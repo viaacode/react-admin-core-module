@@ -59,7 +59,7 @@ export const MultiUserSelectDropdown: FunctionComponent<MultiUserSelectDropdownP
 	}, [selectedProfile]);
 
 	useEffect(() => {
-		if (values.length) {
+		if (values?.length) {
 			UserService.getNamesByProfileIds(values)
 				.then((users: Partial<Avo.User.CommonUser>[]) => {
 					setSelectedProfiles(

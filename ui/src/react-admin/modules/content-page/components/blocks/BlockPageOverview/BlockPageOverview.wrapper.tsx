@@ -47,9 +47,13 @@ export const BlockPageOverviewWrapper: FunctionComponent<PageOverviewWrapperProp
 	renderLink,
 	commonUser,
 }) => {
-	const [page, setPage] = useQueryParam('page', NumberParam);
-	const [item, setItem] = useQueryParam('item', StringParam);
-	const [label, setLabel] = useQueryParam('label', CheckboxListParam);
+	// biome-ignore lint/suspicious/noExplicitAny: todo
+	const queryParamConfig: { [queryParamId: string]: QueryParamConfig<any> } = {
+		page: withDefault(NumberParam, 0),
+		item: withDefault(StringParam, undefined),
+		label: withDefault(CheckboxListParam, undefined),
+	};
+	const [queryParamsState, setQueryParamsState] = useQueryParams(queryParamConfig);
 
 	const debouncedItemsPerPage = useDebounce(itemsPerPage || 1000, 200); // Default to 1000 if itemsPerPage is zero
 
@@ -86,14 +90,16 @@ export const BlockPageOverviewWrapper: FunctionComponent<PageOverviewWrapperProp
 	const { data: selectedTabObjects, isFetching: isLoadingSelectedTabObjects } =
 		useGetContentPageLabelsByTypeAndLabels({
 			selectedContentType: contentTypeAndTabs.selectedContentType,
-			queryLabels: label || [],
+				queryLabels: queryParamsState.label || [],
 		});
 
 	const { data: focusedPage, isFetching: isLoadingFocusedPage } =
 		useGetContentPageByLanguageAndPath(
 			AdminConfigManager.getConfig().locale || Locale.Nl,
 			item as string,
-			{ enabled: !!item }
+			{
+				enabled: !!queryParamsState.item,
+			}
 		);
 
 	const {
@@ -101,21 +107,25 @@ export const BlockPageOverviewWrapper: FunctionComponent<PageOverviewWrapperProp
 		isFetching: isLoadingPagesAndLabels,
 		error: errorPagesAndLabels,
 		isInitialLoading,
-	} = useGetContentPagesForPageOverviewBlock({
-		withBlocks:
-			itemStyle === ContentItemStyle.ACCORDION ||
-			itemStyle === ContentItemStyle.ACCORDION_TWO_LEVELS,
-		contentType: contentTypeAndTabs.selectedContentType,
-		labelIds: getSelectedLabelIds(),
-		selectedLabelIds: selectedTabObjects?.length
-			? selectedTabObjects.map((tab) => tab.id)
-			: getSelectedLabelIds(),
-		orderProp: sortOrder.split('__')[0],
-		orderDirection: sortOrder.split('__').pop() as Avo.Search.OrderDirection,
-		offset:
-			itemStyle === ContentItemStyle.ACCORDION_TWO_LEVELS ? 0 : (page || 0) * debouncedItemsPerPage,
-		limit: itemStyle === ContentItemStyle.ACCORDION_TWO_LEVELS ? 500 : debouncedItemsPerPage,
-	});
+	} = useGetContentPagesForPageOverviewBlock(
+		{
+			withBlocks:
+				itemStyle === ContentItemStyle.ACCORDION ||
+				itemStyle === ContentItemStyle.ACCORDION_TWO_LEVELS,
+			contentType: contentTypeAndTabs.selectedContentType,
+			labelIds: getSelectedLabelIds(),
+			selectedLabelIds: selectedTabObjects?.length
+				? selectedTabObjects.map((tab) => tab.id)
+				: getSelectedLabelIds(),
+			orderProp: sortOrder.split('__')[0],
+			orderDirection: sortOrder.split('__').pop() as Avo.Search.OrderDirection,
+			offset:
+				itemStyle === ContentItemStyle.ACCORDION_TWO_LEVELS
+					? 0
+					: (queryParamsState.page || 0) * debouncedItemsPerPage,
+			limit: itemStyle === ContentItemStyle.ACCORDION_TWO_LEVELS ? 500 : debouncedItemsPerPage,
+		},
+	);
 
 	const pages = pagesAndLabels?.items;
 	const pageCount = pagesAndLabels?.pages;
@@ -123,12 +133,12 @@ export const BlockPageOverviewWrapper: FunctionComponent<PageOverviewWrapperProp
 
 	useEffect(() => {
 		if (!isInitialLoading) {
-			if (isNil(label) && isNil(item)) {
+			if (isNil(queryParamsState.label) && isNil(queryParamsState.item)) {
 				return;
 			}
 
 			const selector =
-				!isNil(label) && !isNil(item)
+				!isNil(queryParamsState.label) && !isNil(queryParamsState.item)
 					? '.c-content-page-overview-block__accordion--first-level:not(.c-accordion--closed) .c-content-page-overview-block__accordion--second-level:not(.c-accordion--closed)'
 					: '.c-content-page-overview-block__accordion--first-level:not(.c-accordion--closed)';
 
@@ -139,33 +149,54 @@ export const BlockPageOverviewWrapper: FunctionComponent<PageOverviewWrapperProp
 		}
 		// We only want to trigger a scroll down when the page loads, not when the query params change when a user clicks another page
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [isInitialLoading, label, item]);
+	}, [isInitialLoading, queryParamsState.label, queryParamsState.item]);
 
 	// ARC-1877: fix queryparams state on initial load was an old value (or undefined)
 	// biome-ignore lint/correctness/useExhaustiveDependencies: only execute on initial load
 	useEffect(() => {
 		// https://meemoo.atlassian.net/browse/AVO-3438
-		setLabel(label || undefined, 'replaceIn');
+		setQueryParamsState(
+			{
+				...queryParamsState,
+				label: queryParamsState.label || undefined,
+			},
+			'replaceIn'
+		);
 	}, []);
 
 	const handleCurrentPageChanged = (pageIndex: number) => {
-		setPage(pageIndex, 'replaceIn');
-		setItem(undefined, 'replaceIn');
+		setQueryParamsState(
+			{
+				...queryParamsState,
+				page: pageIndex,
+				item: undefined,
+			},
+			'replaceIn'
+		);
 	};
 
 	const handleSelectedTabsChanged = (tabs: LabelObj[]) => {
-		setLabel(
-			tabs.map((tab) => tab.label),
+		setQueryParamsState(
+			{
+				...queryParamsState,
+				label: tabs.map((tab) => tab.label),
+				page: undefined,
+				item: undefined,
+			},
 			'replaceIn'
 		);
-		setPage(0, 'replaceIn');
-		setItem(undefined, 'replaceIn');
 	};
 
 	const handleFocusedPageChanged = (newFocusedPage: ContentPageInfo | null) => {
 		// https://meemoo.atlassian.net/browse/AVO-3438
-		setPage(0, 'replaceIn');
-		setItem(newFocusedPage?.path, 'replaceIn');
+		setQueryParamsState(
+			{
+				...queryParamsState,
+				page: undefined,
+				item: newFocusedPage?.path,
+			},
+			'replaceIn'
+		);
 	};
 
 	const getLabelsWithContent = () => {
@@ -188,7 +219,7 @@ export const BlockPageOverviewWrapper: FunctionComponent<PageOverviewWrapperProp
 				}
 				selectedTabs={selectedTabObjects || []}
 				onSelectedTabsChanged={handleSelectedTabsChanged}
-				currentPage={page || 0}
+				currentPage={queryParamsState.page || 0}
 				onCurrentPageChanged={handleCurrentPageChanged}
 				pageCount={pageCount || 1}
 				pages={pages ?? []}
