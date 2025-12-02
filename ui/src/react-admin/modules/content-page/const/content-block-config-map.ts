@@ -1,9 +1,9 @@
 import { ANCHOR_LINKS_BLOCK_CONFIG } from '~content-blocks/anchor-links';
-import { AVO_HERO_BLOCK_CONFIG } from '~content-blocks/BlockAvoHero/index';
-import { AVO_IMAGE_TEXT_BACKGROUND_BLOCK_CONFIG } from '~content-blocks/BlockAvoImageTextBackground/index';
-import { CONTENT_BREADCRUMBS_CONFIG } from '~content-blocks/BlockBreadcrumbs/index';
-import { BUTTONS_BLOCK_CONFIG } from '~content-blocks/BlockButtons/index';
-import { CARDS_WITHOUT_DESCRIPTION_BLOCK_CONFIG } from '~content-blocks/BlockCardsWithoutDescription/index';
+import { AVO_HERO_BLOCK_CONFIG } from '~content-blocks/BlockAvoHero';
+import { AVO_IMAGE_TEXT_BACKGROUND_BLOCK_CONFIG } from '~content-blocks/BlockAvoImageTextBackground';
+import { CONTENT_BREADCRUMBS_CONFIG } from '~content-blocks/BlockBreadcrumbs';
+import { BUTTONS_BLOCK_CONFIG } from '~content-blocks/BlockButtons';
+import { CARDS_WITHOUT_DESCRIPTION_BLOCK_CONFIG } from '~content-blocks/BlockCardsWithoutDescription';
 import { CONTENT_ENCLOSE_BLOCK_CONFIG } from '~content-blocks/BlockContentEnclose/index';
 import { CONTENT_PAGE_META_BLOCK_CONFIG } from '~content-blocks/BlockContentPageMeta/index';
 import { CTAS_BLOCK_CONFIG } from '~content-blocks/BlockCTAs/index';

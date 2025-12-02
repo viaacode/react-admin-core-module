@@ -1,1 +1,2 @@
-export * from './react-admin/index';
+export * from './react-admin';
+import './styles.scss';

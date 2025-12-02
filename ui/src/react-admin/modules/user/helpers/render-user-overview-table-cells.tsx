@@ -4,7 +4,7 @@ import type { Avo } from '@viaa/avo2-types';
 import { LomSchemeType } from '@viaa/avo2-types';
 import { compact, isNil } from 'es-toolkit';
 import type { ReactNode, ReactText } from 'react';
-import { AdminConfigManager, ToastType } from '~core/config/index';
+import { AdminConfigManager, ToastType } from '~core/config';
 import { hasTempAccess } from '~modules/user/helpers/has-temp-access';
 import type { Idp, UserOverviewTableCol, UserTableState } from '~modules/user/user.types';
 import ActionsDropdown from '~shared/components/ActionsDropdown/ActionsDropdown';

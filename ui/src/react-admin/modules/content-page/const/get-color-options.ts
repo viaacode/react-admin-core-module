@@ -1,6 +1,6 @@
 import type { SelectOption } from '@viaa/avo2-components';
 import { tText } from '~shared/helpers/translation-functions';
-import { AVO } from '~shared/types/index';
+import { AVO } from '~shared/types';
 import { App } from '../../../../../scripts/translation.types';
 import { Color, CustomBackground, GradientColor } from '../types/content-block.types';
 

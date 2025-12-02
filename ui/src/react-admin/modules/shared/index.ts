@@ -1,2 +1,2 @@
-export * from './consts/index';
-export * from './types/index';
+export * from './consts';
+export * from './types';

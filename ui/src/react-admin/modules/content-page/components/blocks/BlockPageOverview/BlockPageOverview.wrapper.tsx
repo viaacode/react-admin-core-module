@@ -3,9 +3,9 @@ import type { Avo } from '@viaa/avo2-types';
 import { compact, isNil, isString, sortBy } from 'es-toolkit';
 import type { FunctionComponent } from 'react';
 import { useEffect } from 'react';
+import type { QueryParamConfig } from 'serialize-query-params';
 import type { LabelObj } from '~content-blocks/BlockPageOverview/BlockPageOverview.types';
 import { ContentItemStyle } from '~content-blocks/BlockPageOverview/BlockPageOverview.types';
-
 import { AdminConfigManager } from '~core/config/config.class';
 import { BlockPageOverview } from '~modules/content-page/components/blocks/BlockPageOverview/BlockPageOverview';
 import type { PageOverviewWrapperProps } from '~modules/content-page/components/blocks/BlockPageOverview/BlockPageOverview.types';
@@ -19,7 +19,12 @@ import { Locale } from '~modules/translations/translations.core.types';
 import { ErrorView } from '~shared/components/error/ErrorView';
 import { CheckboxListParam } from '~shared/helpers/query-string-converters';
 import { tHtml, tText } from '~shared/helpers/translation-functions';
-import { NumberParam, StringParam, useQueryParam } from '~shared/helpers/use-query-params-ssr';
+import {
+	NumberParam,
+	StringParam,
+	useQueryParams,
+	withDefault,
+} from '~shared/helpers/use-query-params-ssr';
 import { useDebounce } from '~shared/hooks/useDebounce';
 
 export const BlockPageOverviewWrapper: FunctionComponent<PageOverviewWrapperProps> = ({
@@ -90,13 +95,13 @@ export const BlockPageOverviewWrapper: FunctionComponent<PageOverviewWrapperProp
 	const { data: selectedTabObjects, isFetching: isLoadingSelectedTabObjects } =
 		useGetContentPageLabelsByTypeAndLabels({
 			selectedContentType: contentTypeAndTabs.selectedContentType,
-				queryLabels: queryParamsState.label || [],
+			queryLabels: queryParamsState.label || [],
 		});
 
 	const { data: focusedPage, isFetching: isLoadingFocusedPage } =
 		useGetContentPageByLanguageAndPath(
 			AdminConfigManager.getConfig().locale || Locale.Nl,
-			item as string,
+			queryParamsState.item as string,
 			{
 				enabled: !!queryParamsState.item,
 			}
@@ -107,25 +112,23 @@ export const BlockPageOverviewWrapper: FunctionComponent<PageOverviewWrapperProp
 		isFetching: isLoadingPagesAndLabels,
 		error: errorPagesAndLabels,
 		isInitialLoading,
-	} = useGetContentPagesForPageOverviewBlock(
-		{
-			withBlocks:
-				itemStyle === ContentItemStyle.ACCORDION ||
-				itemStyle === ContentItemStyle.ACCORDION_TWO_LEVELS,
-			contentType: contentTypeAndTabs.selectedContentType,
-			labelIds: getSelectedLabelIds(),
-			selectedLabelIds: selectedTabObjects?.length
-				? selectedTabObjects.map((tab) => tab.id)
-				: getSelectedLabelIds(),
-			orderProp: sortOrder.split('__')[0],
-			orderDirection: sortOrder.split('__').pop() as Avo.Search.OrderDirection,
-			offset:
-				itemStyle === ContentItemStyle.ACCORDION_TWO_LEVELS
-					? 0
-					: (queryParamsState.page || 0) * debouncedItemsPerPage,
-			limit: itemStyle === ContentItemStyle.ACCORDION_TWO_LEVELS ? 500 : debouncedItemsPerPage,
-		},
-	);
+	} = useGetContentPagesForPageOverviewBlock({
+		withBlocks:
+			itemStyle === ContentItemStyle.ACCORDION ||
+			itemStyle === ContentItemStyle.ACCORDION_TWO_LEVELS,
+		contentType: contentTypeAndTabs.selectedContentType,
+		labelIds: getSelectedLabelIds(),
+		selectedLabelIds: selectedTabObjects?.length
+			? selectedTabObjects.map((tab) => tab.id)
+			: getSelectedLabelIds(),
+		orderProp: sortOrder.split('__')[0],
+		orderDirection: sortOrder.split('__').pop() as Avo.Search.OrderDirection,
+		offset:
+			itemStyle === ContentItemStyle.ACCORDION_TWO_LEVELS
+				? 0
+				: (queryParamsState.page || 0) * debouncedItemsPerPage,
+		limit: itemStyle === ContentItemStyle.ACCORDION_TWO_LEVELS ? 500 : debouncedItemsPerPage,
+	});
 
 	const pages = pagesAndLabels?.items;
 	const pageCount = pagesAndLabels?.pages;

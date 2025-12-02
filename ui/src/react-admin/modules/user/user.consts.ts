@@ -14,7 +14,7 @@ import { normalizeTimestamp } from '~shared/helpers/formatters/date';
 import { isAvo } from '~shared/helpers/is-avo';
 import { tText } from '~shared/helpers/translation-functions';
 import { PermissionService } from '~shared/services/permission-service';
-import { AVO, HET_ARCHIEF } from '~shared/types/index';
+import { AVO, HET_ARCHIEF } from '~shared/types';
 import { TableColumnDataType } from '~shared/types/table-column-data-type';
 import { TableFilterType } from '~shared/types/table-filter-types';
 import type { UserOverviewTableCol } from './user.types';

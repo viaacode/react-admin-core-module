@@ -11,7 +11,7 @@ import {
 import clsx from 'clsx';
 import type { FunctionComponent, ReactNode } from 'react';
 import Html from '~shared/components/Html/Html';
-import { SanitizePreset } from '~shared/helpers/sanitize/presets/index';
+import { SanitizePreset } from '~shared/helpers/sanitize/presets';
 
 import './BlockImageTitleTextButton.scss';
 

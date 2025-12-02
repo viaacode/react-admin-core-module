@@ -54,3 +54,5 @@ export {
 	convertDbContentPagesToContentPageInfos,
 	convertDbContentPageToContentPageInfo,
 } from './react-admin/modules/content-page/services/content-page.converters';
+
+import './styles.scss';

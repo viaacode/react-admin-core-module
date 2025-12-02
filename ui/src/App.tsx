@@ -12,7 +12,7 @@ import { renderAdminRoutes } from './admin.routes';
 import { GET_NAV_ITEMS } from './app.const';
 import Sidebar from './shared/components/Sidebar/Sidebar';
 import { setAdminCoreConfig } from './shared/helpers/admin-core-config';
-import type { NavigationItemInfo } from './shared/types/index';
+import type { NavigationItemInfo } from './shared/types';
 import './react-admin/modules/shared/styles/main.scss';
 import './App.scss';
 import { isNil } from 'es-toolkit';

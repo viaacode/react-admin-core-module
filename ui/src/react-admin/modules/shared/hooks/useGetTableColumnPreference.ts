@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { getColumnKey } from '~shared/components/FilterTable/FilterTable.utils';
 import { TableColumnPreferenceService } from '~shared/services/table-column-preferences-service/table-column-preferences-service';
-import { QUERY_KEYS } from '~shared/types/index';
+import { QUERY_KEYS } from '~shared/types';
 
 export const useGetTableColumnPreference = (columnKey: string) => {
 	return useQuery({

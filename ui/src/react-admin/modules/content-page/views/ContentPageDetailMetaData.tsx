@@ -24,7 +24,7 @@ import {
 	renderDetailRow,
 	renderSimpleDetailRows,
 } from '~shared/helpers/render-detail-fields';
-import { SanitizePreset } from '~shared/helpers/sanitize/presets/index';
+import { SanitizePreset } from '~shared/helpers/sanitize/presets';
 import { tHtml, tText } from '~shared/helpers/translation-functions';
 
 interface ContentDetailMetaDataProps {

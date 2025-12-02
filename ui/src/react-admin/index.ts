@@ -1,2 +1,2 @@
-export * from './core/config/index';
-export * from './modules/index';
+export * from './core/config';
+export * from './modules';

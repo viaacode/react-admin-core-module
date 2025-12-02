@@ -15,7 +15,7 @@ import type { MaintainerSelectProps } from '~shared/components/MaintainerSelect/
 import { GET_ADMIN_ICON_OPTIONS } from '~shared/consts/icons.consts';
 import { isAvo } from '~shared/helpers/is-avo';
 import { tHtml, tText } from '~shared/helpers/translation-functions';
-import { AVO } from '~shared/types/index';
+import { AVO } from '~shared/types';
 import {
 	type ContentBlockConfig,
 	ContentBlockEditor,

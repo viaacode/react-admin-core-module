@@ -15,8 +15,8 @@ import type {
 } from '~modules/content-page/types/content-pages.types';
 import { CustomError } from '~shared/helpers/custom-error';
 import { mapDeep } from '~shared/helpers/map-deep/map-deep';
-import { sanitizeHtml } from '~shared/helpers/sanitize/index';
-import { SanitizePreset } from '~shared/helpers/sanitize/presets/index';
+import { sanitizeHtml } from '~shared/helpers/sanitize';
+import { SanitizePreset } from '~shared/helpers/sanitize/presets';
 import { showToast } from '~shared/helpers/show-toast';
 import { tText } from '~shared/helpers/translation-functions';
 

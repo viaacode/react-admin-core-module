@@ -57,7 +57,8 @@ export { NavigationBarDetail } from './navigation/views/NavigationBarDetail';
 // Navigation
 export { NavigationBarOverview } from './navigation/views/NavigationBarOverview';
 export { NavigationItemEdit } from './navigation/views/NavigationItemEdit';
-export { FILTER_TABLE_QUERY_PARAM_CONFIG } from './shared/components/FilterTable/FilterTable.const';
+// STOPGAP
+export type { DefaultComponentProps, ValueOf } from './shared';
 // FilterTable
 export {
 	type FilterableColumn,
@@ -65,6 +66,7 @@ export {
 	FilterTable,
 	getFilters,
 } from './shared/components/FilterTable/FilterTable';
+export { FILTER_TABLE_QUERY_PARAM_CONFIG } from './shared/components/FilterTable/FilterTable.const';
 export { cleanupFilterTableState } from './shared/components/FilterTable/FilterTable.utils';
 // Flowplayer wrapper
 export type {
@@ -72,11 +74,9 @@ export type {
 	FlowPlayerWrapperProps,
 } from './shared/components/FlowPlayerWrapper/FlowPlayerWrapper.types';
 // Helpers
-export { sanitizeHtml } from './shared/helpers/sanitize/index';
-export { SanitizePreset } from './shared/helpers/sanitize/presets/index';
+export { sanitizeHtml } from './shared/helpers/sanitize';
+export { SanitizePreset } from './shared/helpers/sanitize/presets';
 export { toggleSortOrder } from './shared/helpers/toggle-sort-order';
-// STOPGAP
-export type { DefaultComponentProps, ValueOf } from './shared/index';
 export { AssetsService } from './shared/services/assets-service/assets.service';
 export { TableFilterType } from './shared/types/table-filter-types';
 // Translations

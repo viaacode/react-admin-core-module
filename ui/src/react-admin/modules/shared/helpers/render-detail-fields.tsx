@@ -2,7 +2,7 @@ import { compact, isBoolean, isNil, isString } from 'es-toolkit';
 import type { ReactElement, ReactNode } from 'react';
 import React from 'react';
 import Html from '~shared/components/Html/Html';
-import { SanitizePreset } from '~shared/helpers/sanitize/presets/index';
+import { SanitizePreset } from '~shared/helpers/sanitize/presets';
 import { formatDate } from './formatters/date';
 
 export function renderDetailRow(

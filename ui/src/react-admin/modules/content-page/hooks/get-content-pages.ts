@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import type { Avo } from '@viaa/avo2-types';
 import { ContentPageService } from '~modules/content-page/services/content-page.service';
 import type { ContentOverviewTableCols } from '~modules/content-page/types/content-pages.types';
-import { QUERY_KEYS } from '~shared/types/index';
+import { QUERY_KEYS } from '~shared/types';
 
 interface ContentPageOverviewParams {
 	page: number;

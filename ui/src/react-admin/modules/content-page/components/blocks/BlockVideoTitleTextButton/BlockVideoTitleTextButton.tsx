@@ -12,7 +12,7 @@ import {
 import type { FunctionComponent } from 'react';
 import React from 'react';
 import Html from '~shared/components/Html/Html';
-import { SanitizePreset } from '~shared/helpers/sanitize/presets/index';
+import { SanitizePreset } from '~shared/helpers/sanitize/presets';
 
 export interface BlockVideoTitleTextButtonProps extends DefaultProps {
 	flowPlayerProps: FlowPlayerProps;

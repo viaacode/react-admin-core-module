@@ -34,7 +34,7 @@ import Html from '~shared/components/Html/Html';
 import { GET_DEFAULT_PAGINATION_BAR_PROPS } from '~shared/components/PaginationBar/PaginationBar.consts';
 import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner';
 import { defaultRenderLinkFunction } from '~shared/helpers/link';
-import { SanitizePreset } from '~shared/helpers/sanitize/presets/index';
+import { SanitizePreset } from '~shared/helpers/sanitize/presets';
 import { BlockHeading } from '../BlockHeading/BlockHeading';
 import type { ContentTabStyle, LabelObj } from './BlockPageOverview.types';
 import { ContentItemStyle } from './BlockPageOverview.types';

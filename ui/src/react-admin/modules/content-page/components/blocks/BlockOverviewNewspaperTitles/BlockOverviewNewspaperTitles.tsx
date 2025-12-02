@@ -8,7 +8,7 @@ import { Link } from '~modules/shared/components/Link/Link';
 import { Icon } from '~shared/components/Icon/Icon';
 import { generateSmartLink } from '~shared/components/SmartLink/SmartLink';
 import { tText } from '~shared/helpers/translation-functions';
-import { HET_ARCHIEF } from '~shared/types/index';
+import { HET_ARCHIEF } from '~shared/types';
 import type {
 	BlockOverviewNewspaperTitlesProps,
 	NewspaperTitle,

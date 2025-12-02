@@ -15,7 +15,7 @@ import { nlBE } from 'date-fns/locale';
 import { compact } from 'es-toolkit';
 import type { FC, ReactText } from 'react';
 import React, { useCallback, useEffect, useState } from 'react';
-import { AdminConfigManager, ToastType } from '~core/config/index';
+import { AdminConfigManager, ToastType } from '~core/config';
 import { useGetProfileById } from '~modules/user/hooks/use-get-profile-by-id';
 import ConfirmModal from '~shared/components/ConfirmModal/ConfirmModal';
 import { ErrorView } from '~shared/components/error/ErrorView';

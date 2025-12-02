@@ -1,5 +1,5 @@
 import { tText } from '~shared/helpers/translation-functions';
-import { HET_ARCHIEF } from '~shared/types/index';
+import { HET_ARCHIEF } from '~shared/types';
 import type {
 	ContentBlockConfig,
 	ContentBlockFieldGroup,

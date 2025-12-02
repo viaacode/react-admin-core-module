@@ -25,8 +25,8 @@ import { CustomError } from '~shared/helpers/custom-error';
 import { buildLink } from '~shared/helpers/link';
 import { showToast } from '~shared/helpers/show-toast';
 import { tHtml, tText } from '~shared/helpers/translation-functions';
+import { AVO } from '~shared/types';
 import type { PickerItem } from '~shared/types/content-picker';
-import { AVO } from '~shared/types/index';
 import { UserService } from '../user.service';
 import type { DeleteContentCounts } from '../user.types';
 

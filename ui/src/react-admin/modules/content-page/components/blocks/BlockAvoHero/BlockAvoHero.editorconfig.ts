@@ -9,7 +9,7 @@ import { RICH_TEXT_EDITOR_OPTIONS_FULL } from '~shared/consts/rich-text-editor.c
 import { PHOTO_TYPES } from '~shared/helpers/files';
 import { tText } from '~shared/helpers/translation-functions';
 import { validateFlowplayerVideoUrl } from '~shared/helpers/validation';
-import { AVO } from '~shared/types/index';
+import { AVO } from '~shared/types';
 import type {
 	ContentBlockConfig,
 	ContentBlockFieldGroup,

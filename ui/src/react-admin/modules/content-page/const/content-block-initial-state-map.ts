@@ -1,43 +1,43 @@
 import { INITIAL_ANCHOR_LINKS_COMPONENTS_STATE } from '~content-blocks/anchor-links';
-import { INITIAL_AVO_HERO_COMPONENTS_STATE } from '~content-blocks/BlockAvoHero/index';
-import { INITIAL_AVO_IMAGE_TEXT_BACKGROUND_BLOCK_STATE } from '~content-blocks/BlockAvoImageTextBackground/index';
+import { INITIAL_AVO_HERO_COMPONENTS_STATE } from '~content-blocks/BlockAvoHero';
+import { INITIAL_AVO_IMAGE_TEXT_BACKGROUND_BLOCK_STATE } from '~content-blocks/BlockAvoImageTextBackground';
 import { INITIAL_BREADCRUMBS_BLOCK_STATE } from '~content-blocks/BlockBreadcrumbs/BlockBreadcrumbs.editorconfig';
-import { INITIAL_BUTTONS_COMPONENTS_STATE } from '~content-blocks/BlockButtons/index';
-import { INITIAL_CARDS_WITHOUT_DESCRIPTION_COMPONENTS_STATE } from '~content-blocks/BlockCardsWithoutDescription/index';
+import { INITIAL_BUTTONS_COMPONENTS_STATE } from '~content-blocks/BlockButtons';
+import { INITIAL_CARDS_WITHOUT_DESCRIPTION_COMPONENTS_STATE } from '~content-blocks/BlockCardsWithoutDescription';
 import { INITIAL_CONTENT_ENCLOSE_BLOCK_STATE } from '~content-blocks/BlockContentEnclose/BlockContentEnclose.editorconfig';
-import { INITIAL_CONTENT_PAGE_META_COMPONENTS_STATE } from '~content-blocks/BlockContentPageMeta/index';
-import { INITIAL_CTAS_COMPONENTS_STATE } from '~content-blocks/BlockCTAs/index';
-import { INITIAL_EVENTBRITE_COMPONENTS_STATE } from '~content-blocks/BlockEventbrite/index';
-import { INITIAL_HEADING_COMPONENTS_STATE } from '~content-blocks/BlockHeading/index';
+import { INITIAL_CONTENT_PAGE_META_COMPONENTS_STATE } from '~content-blocks/BlockContentPageMeta';
+import { INITIAL_CTAS_COMPONENTS_STATE } from '~content-blocks/BlockCTAs';
+import { INITIAL_EVENTBRITE_COMPONENTS_STATE } from '~content-blocks/BlockEventbrite';
+import { INITIAL_HEADING_COMPONENTS_STATE } from '~content-blocks/BlockHeading';
 import { INITIAL_HET_ARCHIEF_HEADER_SEARCH_BLOCK_STATE } from '~content-blocks/BlockHetArchiefHeaderSearch/BlockHetArchiefHeaderSearch.editorconfig';
-import { INITIAL_HET_ARCHIEF_IMAGE_TEXT_BACKGROUND_BLOCK_STATE } from '~content-blocks/BlockHetArchiefImageTextBackground/index';
-import { INITIAL_IFRAME_COMPONENTS_STATE } from '~content-blocks/BlockIFrame/index';
-import { INITIAL_IMAGE_COMPONENTS_STATE } from '~content-blocks/BlockImage/index';
+import { INITIAL_HET_ARCHIEF_IMAGE_TEXT_BACKGROUND_BLOCK_STATE } from '~content-blocks/BlockHetArchiefImageTextBackground';
+import { INITIAL_IFRAME_COMPONENTS_STATE } from '~content-blocks/BlockIFrame';
+import { INITIAL_IMAGE_COMPONENTS_STATE } from '~content-blocks/BlockImage';
 import {
 	INITIAL_IMAGE_GRID_COMPONENTS_STATE,
 	INITIAL_LOGO_GRID_COMPONENTS_STATE,
 	INITIAL_USP_GRID_COMPONENTS_STATE,
-} from '~content-blocks/BlockImageGrid/index';
-import { INITIAL_IMAGE_TITLE_TEXT_BUTTON_BLOCK_STATE } from '~content-blocks/BlockImageTitleTextButton/index';
-import { INITIAL_INTRO_COMPONENTS_STATE } from '~content-blocks/BlockIntro/index';
-import { INITIAL_KLAAR_COMPONENTS_STATE } from '~content-blocks/BlockKlaar/index';
-import { INITIAL_MAINTAINERS_GRID_BLOCK_STATE } from '~content-blocks/BlockMaintainersGrid/index';
-import { INITIAL_MEDIA_GRID_COMPONENTS_STATE } from '~content-blocks/BlockMediaGrid/index';
-import { INITIAL_OVERVIEW_NEWSPAPER_TITLES_BLOCK_STATE } from '~content-blocks/BlockOverviewNewspaperTitles/index';
-import { INITIAL_PAGE_OVERVIEW_COMPONENTS_STATE } from '~content-blocks/BlockPageOverview/index';
-import { INITIAL_QUOTE_COMPONENTS_STATE } from '~content-blocks/BlockQuote/index';
+} from '~content-blocks/BlockImageGrid';
+import { INITIAL_IMAGE_TITLE_TEXT_BUTTON_BLOCK_STATE } from '~content-blocks/BlockImageTitleTextButton';
+import { INITIAL_INTRO_COMPONENTS_STATE } from '~content-blocks/BlockIntro';
+import { INITIAL_KLAAR_COMPONENTS_STATE } from '~content-blocks/BlockKlaar';
+import { INITIAL_MAINTAINERS_GRID_BLOCK_STATE } from '~content-blocks/BlockMaintainersGrid';
+import { INITIAL_MEDIA_GRID_COMPONENTS_STATE } from '~content-blocks/BlockMediaGrid';
+import { INITIAL_OVERVIEW_NEWSPAPER_TITLES_BLOCK_STATE } from '~content-blocks/BlockOverviewNewspaperTitles';
+import { INITIAL_PAGE_OVERVIEW_COMPONENTS_STATE } from '~content-blocks/BlockPageOverview';
+import { INITIAL_QUOTE_COMPONENTS_STATE } from '~content-blocks/BlockQuote';
 import {
 	INITIAL_RICH_TEXT_COMPONENTS_STATE,
 	INITIAL_RICH_TEXT_TWO_COLUMNS_COMPONENTS_STATE,
-} from '~content-blocks/BlockRichText/index';
-import { INITIAL_SCROLL_DOWN_NUDGE_BLOCK_STATE } from '~content-blocks/BlockScrollDownNudge/index';
+} from '~content-blocks/BlockRichText';
+import { INITIAL_SCROLL_DOWN_NUDGE_BLOCK_STATE } from '~content-blocks/BlockScrollDownNudge';
 import {
 	INITIAL_PROJECTS_SPOTLIGHT_COMPONENTS_STATE,
 	INITIAL_SPOTLIGHT_COMPONENTS_STATE,
-} from '~content-blocks/BlockSpotlight/index';
-import { INITIAL_TAGS_WITH_LINK_COMPONENTS_STATE } from '~content-blocks/BlockTagsWithLink/index';
-import { INITIAL_THREE_CLICKABLE_TILES_COMPONENTS_STATE } from '~content-blocks/BlockThreeClickableTiles/index';
-import { INITIAL_UITGEKLAARD_BLOCK_STATE } from '~content-blocks/BlockUitgeklaard/index';
+} from '~content-blocks/BlockSpotlight';
+import { INITIAL_TAGS_WITH_LINK_COMPONENTS_STATE } from '~content-blocks/BlockTagsWithLink';
+import { INITIAL_THREE_CLICKABLE_TILES_COMPONENTS_STATE } from '~content-blocks/BlockThreeClickableTiles';
+import { INITIAL_UITGEKLAARD_BLOCK_STATE } from '~content-blocks/BlockUitgeklaard';
 import { INITIAL_MEDIA_PLAYER_COMPONENTS_STATE } from '~content-blocks/BlockVideo/index';
 import { INITIAL_MEDIA_PLAYER_TITLE_TEXT_BUTTON_COMPONENTS_STATE } from '~content-blocks/BlockVideoTitleTextButton/index';
 import { INITIAL_SEARCH_COMPONENTS_STATE } from '~content-blocks/search';

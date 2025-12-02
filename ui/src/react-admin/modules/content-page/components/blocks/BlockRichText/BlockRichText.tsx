@@ -14,7 +14,7 @@ import type { RichTextButton } from '~content-blocks/BlockRichText/BlockRichText
 import Html from '~shared/components/Html/Html';
 import { Icon } from '~shared/components/Icon/Icon';
 import { defaultRenderLinkFunction } from '~shared/helpers/link';
-import { SanitizePreset } from '~shared/helpers/sanitize/presets/index';
+import { SanitizePreset } from '~shared/helpers/sanitize/presets';
 
 import './BlockRichText.scss';
 

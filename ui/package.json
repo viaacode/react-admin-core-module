@@ -19,8 +19,8 @@
       "default": "./dist/src/admin.js"
     },
     "./styles.css": {
-      "import": "./dist/admin-core-ui.css",
-      "require": "./dist/admin-core-ui.css"
+      "import": "./dist/src/styles.css",
+      "require": "./dist/src/styles.css"
     }
   },
   "typesVersions": {
@@ -74,6 +74,7 @@
     "@viaa/avo2-components": "6.0.9",
     "@viaa/avo2-types": "4.0.2",
     "autosize": "6.0.1",
+    "blend-promise-utils": "1.29.2",
     "caniuse-lite": "^1.0.30001712",
     "capture-stack-trace": "1.0.1",
     "clsx": "2.0.0",
@@ -128,7 +129,6 @@
     "@wojtekmaj/enzyme-adapter-react-17": "0.8.0",
     "ajv": "8.11.0",
     "autoprefixer": "10.4.2",
-    "blend-promise-utils": "^1.29.2",
     "bump-package-versions": "^1.0.7",
     "console-log-colors": "^0.5.0",
     "cross-env": "7.0.3",
@@ -159,7 +159,6 @@
     "use-query-params": "2.2.2",
     "vite": "7.2.2",
     "vite-plugin-dts": "4.5.4",
-    "vite-plugin-externalize-deps": "0.10.0",
     "vite-plugin-svgr": "4.5.0",
     "vite-tsconfig-paths": "5.1.4",
     "web-vitals": "5.0.3"

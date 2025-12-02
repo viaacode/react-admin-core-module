@@ -1,13 +1,13 @@
 import type { RichEditorState } from '@meemoo/react-components';
 import type { Avo } from '@viaa/avo2-types';
+import { cloneDeep, isNil } from 'es-toolkit';
 import type { Draft } from 'immer';
 import { produce } from 'immer';
-import { cloneDeep, isNil } from 'es-toolkit';
 import type { Reducer } from 'react';
 import { AdminConfigManager } from '~core/config/config.class';
 import { Locale } from '~modules/translations/translations.core.types';
 
-import type { ValueOf } from '~shared/types/index';
+import type { ValueOf } from '~shared/types';
 
 import type {
 	ContentBlockComponentState,

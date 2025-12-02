@@ -1,4 +1,4 @@
-import { AVO } from '~modules/shared/index';
+import { AVO } from '~modules/shared';
 import { tText } from '~shared/helpers/translation-functions';
 
 import type {

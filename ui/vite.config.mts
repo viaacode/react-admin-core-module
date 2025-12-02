@@ -3,11 +3,13 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import viteTsconfigPaths from 'vite-tsconfig-paths';
 import dts from 'vite-plugin-dts';
-import { externalizeDeps } from 'vite-plugin-externalize-deps';
+import pkg from './package.json';
+
+const peerDependencies: string[] = Object.keys(pkg.peerDependencies);
 
 // https://vitejs.dev/config/
 export default defineConfig({
-	plugins: [react(), viteTsconfigPaths(), dts(), externalizeDeps()],
+	plugins: [react(), viteTsconfigPaths(), dts()],
 	server: {
 		port: 3400,
 	},
@@ -23,9 +25,9 @@ export default defineConfig({
 		},
 		outDir: 'dist',
 		rollupOptions: {
-			output: {
-				preserveModules: true,
-			},
+			// Ensure we don't bundle peer-dependencies
+			// The clients have to install these themselves
+			external: peerDependencies,
 		},
 		sourcemap: true,
 		cssCodeSplit: true

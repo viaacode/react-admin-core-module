@@ -4,7 +4,7 @@ import { convertDbContentPageToContentPageInfo } from '~modules/content-page/ser
 import { ContentPageService } from '~modules/content-page/services/content-page.service';
 import type { ContentPageInfo } from '~modules/content-page/types/content-pages.types';
 import type { Locale } from '~modules/translations/translations.core.types';
-import { QUERY_KEYS } from '~shared/types/index';
+import { QUERY_KEYS } from '~shared/types';
 
 export const useGetContentPageByPath = (
 	language: Locale,

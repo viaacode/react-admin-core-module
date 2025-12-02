@@ -4,7 +4,7 @@ import { stringifyUrl } from 'query-string';
 import { AdminConfigManager } from '~core/config/config.class';
 import { fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
 import { getProxyUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config';
-import { QUERY_KEYS } from '~shared/types/index';
+import { QUERY_KEYS } from '~shared/types';
 
 export const useGetStillsFromContentItem = (
 	contentItemType: ContentPickerType | null,

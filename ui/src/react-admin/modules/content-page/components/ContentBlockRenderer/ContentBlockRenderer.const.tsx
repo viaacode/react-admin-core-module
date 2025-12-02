@@ -1,35 +1,32 @@
 import type { FC, FunctionComponent } from 'react';
 import { AvoHeroWrapper } from '~content-blocks/BlockAvoHero/AvoHeroWrapper';
-import { BlockAvoImageTextBackground } from '~content-blocks/BlockAvoImageTextBackground/index';
-import { BlockBreadcrumbs } from '~content-blocks/BlockBreadcrumbs/index';
-import { BlockButtonsWrapper } from '~content-blocks/BlockButtons/index';
-import { BlockCardsWithoutDescription } from '~content-blocks/BlockCardsWithoutDescription/index';
-import { BlockContentPageMeta } from '~content-blocks/BlockContentPageMeta/index';
-import { BlockCTAsWrapper } from '~content-blocks/BlockCTAs/index';
-import { BlockEventbrite } from '~content-blocks/BlockEventbrite/index';
-import { BlockHeading } from '~content-blocks/BlockHeading/index';
+import { BlockAvoImageTextBackground } from '~content-blocks/BlockAvoImageTextBackground';
+import { BlockBreadcrumbs } from '~content-blocks/BlockBreadcrumbs';
+import { BlockButtonsWrapper } from '~content-blocks/BlockButtons';
+import { BlockCardsWithoutDescription } from '~content-blocks/BlockCardsWithoutDescription';
+import { BlockContentPageMeta } from '~content-blocks/BlockContentPageMeta';
+import { BlockCTAsWrapper } from '~content-blocks/BlockCTAs';
+import { BlockEventbrite } from '~content-blocks/BlockEventbrite';
+import { BlockHeading } from '~content-blocks/BlockHeading';
 import { BlockHetArchiefHeaderSearch } from '~content-blocks/BlockHetArchiefHeaderSearch/BlockHetArchiefHeaderSearch';
-import { BlockHetArchiefImageTextBackground } from '~content-blocks/BlockHetArchiefImageTextBackground/index';
-import { BlockIFrame } from '~content-blocks/BlockIFrame/index';
-import { BlockImage } from '~content-blocks/BlockImage/index';
+import { BlockHetArchiefImageTextBackground } from '~content-blocks/BlockHetArchiefImageTextBackground';
+import { BlockIFrame } from '~content-blocks/BlockIFrame';
+import { BlockImage } from '~content-blocks/BlockImage';
 import {
 	BlockImageGridWrapper,
 	BlockLogoGridWrapper,
 	BlockUspGridWrapper,
-} from '~content-blocks/BlockImageGrid/index';
-import { BlockImageTitleTextButtonWrapper } from '~content-blocks/BlockImageTitleTextButton/index';
-import { BlockIntro } from '~content-blocks/BlockIntro/index';
-import { BlockKlaar } from '~content-blocks/BlockKlaar/index';
-import { BlockMaintainersGrid } from '~content-blocks/BlockMaintainersGrid/index';
-import { BlockOverviewNewspaperTitles } from '~content-blocks/BlockOverviewNewspaperTitles/index';
-import { BlockPageOverviewWrapper } from '~content-blocks/BlockPageOverview/index';
-import { BlockQuote } from '~content-blocks/BlockQuote/index';
-import { BlockRichTextWrapper } from '~content-blocks/BlockRichText/index';
+} from '~content-blocks/BlockImageGrid';
+import { BlockImageTitleTextButtonWrapper } from '~content-blocks/BlockImageTitleTextButton';
+import { BlockIntro } from '~content-blocks/BlockIntro';
+import { BlockKlaar } from '~content-blocks/BlockKlaar';
+import { BlockMaintainersGrid } from '~content-blocks/BlockMaintainersGrid';
+import { BlockOverviewNewspaperTitles } from '~content-blocks/BlockOverviewNewspaperTitles';
+import { BlockPageOverviewWrapper } from '~content-blocks/BlockPageOverview';
+import { BlockQuote } from '~content-blocks/BlockQuote';
+import { BlockRichTextWrapper } from '~content-blocks/BlockRichText';
 import { BlockScrollDownNudge } from '~content-blocks/BlockScrollDownNudge/index';
-import {
-	BlockProjectSpotlightWrapper,
-	BlockSpotlight,
-} from '~content-blocks/BlockSpotlight/index';
+import { BlockProjectSpotlightWrapper, BlockSpotlight } from '~content-blocks/BlockSpotlight/index';
 import { BlockTagsWithLink } from '~content-blocks/BlockTagsWithLink/index';
 import { BlockThreeClickableTiles } from '~content-blocks/BlockThreeClickableTiles/index';
 import { BlockUitgeklaard } from '~content-blocks/BlockUitgeklaard/index';

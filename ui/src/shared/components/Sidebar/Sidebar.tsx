@@ -3,7 +3,7 @@ import { flatten } from 'es-toolkit';
 import type { FunctionComponent, ReactElement, ReactNode } from 'react';
 import React from 'react';
 import { Link, type Location, NavLink } from 'react-router-dom';
-import type { NavigationItemInfo } from '../../types/index';
+import type { NavigationItemInfo } from '../../types';
 
 import './Sidebar.scss';
 import { useLocation } from 'react-router';

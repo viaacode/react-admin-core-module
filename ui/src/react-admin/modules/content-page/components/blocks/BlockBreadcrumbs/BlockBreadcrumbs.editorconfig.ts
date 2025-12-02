@@ -11,7 +11,7 @@ import {
 	DEFAULT_BUTTON_PROPS,
 } from '~modules/content-page/types/content-block.types';
 import { tText } from '~shared/helpers/translation-functions';
-import { HET_ARCHIEF } from '~shared/types/index';
+import { HET_ARCHIEF } from '~shared/types';
 
 export const INITIAL_BREADCRUMBS_COMPONENTS_STATE = () => ({
 	foregroundColor: GET_FOREGROUND_COLOR_OPTIONS_ARCHIEF()[0].value,

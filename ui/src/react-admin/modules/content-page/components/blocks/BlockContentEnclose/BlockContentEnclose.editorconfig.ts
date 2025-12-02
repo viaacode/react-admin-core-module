@@ -1,9 +1,5 @@
 import type { ContentPickerType } from '@viaa/avo2-types';
-import {
-	BLOCK_FIELD_DEFAULTS,
-	BLOCK_STATE_DEFAULTS,
-	TEXT_FIELD,
-} from '~content-blocks/defaults';
+import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, TEXT_FIELD } from '~content-blocks/defaults';
 import { AdminConfigManager } from '~core/config/config.class';
 import { GET_HEADING_TYPE_OPTIONS } from '~modules/content-page/const/get-heading-type-options';
 import type {
@@ -17,7 +13,7 @@ import {
 } from '~modules/content-page/types/content-block.types';
 import { GET_ADMIN_ICON_OPTIONS } from '~shared/consts/icons.consts';
 import { tText } from '~shared/helpers/translation-functions';
-import { HET_ARCHIEF } from '~shared/types/index';
+import { HET_ARCHIEF } from '~shared/types';
 
 export const INITIAL_CONTENT_ENCLOSE_COMPONENTS_STATE = () => ({
 	title: '',

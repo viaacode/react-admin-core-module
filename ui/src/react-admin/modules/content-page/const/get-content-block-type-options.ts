@@ -1,7 +1,7 @@
 import type { SelectOption } from '@viaa/avo2-components';
 import { AdminConfigManager } from '../../../core/config/config.class';
 import { tText } from '../../../modules/shared/helpers/translation-functions';
-import { AVO, HET_ARCHIEF } from '../../../modules/shared/types/index';
+import { AVO, HET_ARCHIEF } from '../../../modules/shared/types';
 import { ContentBlockType } from '../types/content-block.types';
 
 export const GET_CONTENT_BLOCK_TYPE_OPTIONS: () => SelectOption<string>[] = () => {

@@ -3,7 +3,7 @@ import type { Avo } from '@viaa/avo2-types';
 import { UserService } from '~modules/user/user.service';
 import type { UserOverviewTableCol } from '~modules/user/user.types';
 import { USERS_PER_PAGE } from '~modules/user/user.types';
-import { QUERY_KEYS } from '~shared/types/index';
+import { QUERY_KEYS } from '~shared/types';
 
 export interface GetProfileArguments {
 	page: number;

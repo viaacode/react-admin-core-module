@@ -40,8 +40,8 @@ import { GET_LANGUAGE_NAMES } from '~shared/consts/language-names';
 import { isMultiLanguageEnabled } from '~shared/helpers/is-multi-language-enabled';
 import { showToast } from '~shared/helpers/show-toast';
 import { tText } from '~shared/helpers/translation-functions';
+import type { ValueOf } from '~shared/types';
 import type { PickerItem } from '~shared/types/content-picker';
-import type { ValueOf } from '~shared/types/index';
 
 import './ContentEditForm.scss';
 import { ContentPageEditFormDescription } from '~modules/content-page/components/ContentPageEditFormDescription/ContentPageEditFormDescription';

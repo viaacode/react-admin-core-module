@@ -9,8 +9,8 @@ import React, {
 	useEffect,
 	useState,
 } from 'react';
+import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
-import { AdminConfigManager } from '~core/config/index';
 import { ItemsService } from '~modules/item/items.service';
 import { showToast } from '~modules/shared/helpers/show-toast';
 import { FlowPlayerWrapper } from '~shared/components/FlowPlayerWrapper/FlowPlayerWrapper';

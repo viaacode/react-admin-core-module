@@ -2,7 +2,7 @@ import type { ButtonAction, ButtonType, IconName, SpacerOption } from '@viaa/avo
 import { Button, Image } from '@viaa/avo2-components';
 import clsx from 'clsx';
 import type { FunctionComponent, ReactElement } from 'react';
-import React, { useEffect, useState } from 'react';
+import { createRef, useEffect, useState } from 'react';
 import type {
 	AlignOption,
 	BackgroundAlignOption,
@@ -93,7 +93,7 @@ export const BlockAvoImageTextBackground: FunctionComponent<BlockAvoImageTextBac
 	buttonIcon,
 	buttonIconAlignment = 'left',
 }): ReactElement => {
-	const ref = React.createRef<HTMLDivElement>();
+	const ref = createRef<HTMLDivElement>();
 	const computedTextAlign = textAlign || IMAGE_ALIGN_TO_TEXT_ALIGN[backgroundAlignment];
 
 	const [blockWidth, setBlockWidth] = useState<number | null>(null); // pixels
