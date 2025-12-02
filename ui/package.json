@@ -19,8 +19,8 @@
       "default": "./dist/src/admin.js"
     },
     "./styles.css": {
-      "import": "./dist/src/styles.css",
-      "require": "./dist/src/styles.css"
+      "import": "./dist/styles.css",
+      "require": "./dist/styles.css"
     }
   },
   "typesVersions": {
