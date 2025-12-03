@@ -20,6 +20,7 @@ import {
 	StatusModule,
 	TableColumnPreferencesModule,
 	UsersModule,
+	VideoStillsModule,
 } from './modules';
 import { isAvo } from './modules/shared/helpers/is-avo';
 import { isHetArchief } from './modules/shared/helpers/is-hetarchief';
@@ -40,6 +41,7 @@ import { isHetArchief } from './modules/shared/helpers/is-hetarchief';
 		SiteVariablesModule,
 		StatusModule,
 		UsersModule,
+		VideoStillsModule,
 		...(isAvo() ? [AssignmentsModule] : []),
 		...(isAvo() ? [CollectionsModule] : []),
 		...(isAvo() ? [ItemsModule] : []),
