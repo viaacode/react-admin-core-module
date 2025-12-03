@@ -12,6 +12,7 @@ import got from 'got';
 import { trimEnd } from 'lodash';
 import publicIp from 'public-ip';
 
+import { ContentTypeNumber } from '../../collections';
 import { DataService } from '../../data';
 import {
 	GetItemBrowsePathByExternalIdDocument,
@@ -29,6 +30,7 @@ import {
 import { cleanMultilineEnv } from '../../shared/helpers/env-vars';
 import { CustomError } from '../../shared/helpers/error';
 import { isHetArchief } from '../../shared/helpers/is-hetarchief';
+import { mapToMediaType } from '../../shared/helpers/mapToMediaType';
 import { PLAYER_TICKET_EXPIRY } from '../player-ticket.consts';
 import { PlayerTicket } from '../player-ticket.types';
 
@@ -79,7 +81,7 @@ export class PlayerTicketService {
 		const data = {
 			app: 'hetarchief.be',
 			client: isPublicDomain ? '' : resolvedIp,
-			referer: isPublicDomain ?'': resolvedReferer,
+			referer: isPublicDomain ? '' : resolvedReferer,
 			maxage: isPublicDomain ? maxAge15Years : resolvedMaxAge,
 		};
 
@@ -192,6 +194,17 @@ export class PlayerTicketService {
 	 * @param representationOrExternalId
 	 */
 	public async getEmbedUrl(representationOrExternalId: string): Promise<string> {
+		return (await this.getEmbedUrlAndType(representationOrExternalId)).browsePath;
+	}
+
+	/**
+	 * Get the url of the media file for the current representation or external id of an ie object
+	 * @param representationOrExternalId
+	 */
+	public async getEmbedUrlAndType(representationOrExternalId: string): Promise<{
+		browsePath: string;
+		type: 'audio' | 'video' | 'other';
+	}> {
 		let response:
 			| GetFileByRepresentationSchemaIdentifierQuery
 			| GetItemBrowsePathByExternalIdQuery;
@@ -218,6 +231,11 @@ export class PlayerTicketService {
 			(response as GetItemBrowsePathByExternalIdQuery)?.app_item_meta?.[0]?.browse_path ||
 			(response as GetFileByRepresentationSchemaIdentifierQuery)?.graph_representation?.[0]
 				?.includes?.[0]?.file?.premis_stored_at;
+		const fileType: string | ContentTypeNumber =
+			(response as GetItemBrowsePathByExternalIdQuery)?.app_item_meta?.[0]?.type_id ||
+			(response as GetFileByRepresentationSchemaIdentifierQuery)?.graph_representation?.[0]
+				?.represents?.dctermsFormat?.[0]?.dcterms_format;
+
 		if (!browsePath) {
 			throw new NotFoundException({
 				message: 'Object embed url not found',
@@ -228,7 +246,7 @@ export class PlayerTicketService {
 			});
 		}
 
-		return browsePath;
+		return { browsePath, type: mapToMediaType(fileType) };
 	}
 
 	/**
