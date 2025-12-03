@@ -2,8 +2,9 @@ import { Injectable, InternalServerErrorException, Logger } from '@nestjs/common
 import { type Avo } from '@viaa/avo2-types';
 import * as promiseUtils from 'blend-promise-utils';
 import { addSeconds } from 'date-fns';
-import got, { type ExtendOptions, type Got } from 'got';
+import got, { type Got } from 'got';
 import { find, isNil, last } from 'lodash';
+import { stringify } from 'query-string';
 
 import { PlayerTicketService } from '../player-ticket';
 import { toMilliseconds } from '../shared/helpers/duration';
@@ -29,19 +30,7 @@ export class VideoStillsService {
 	private gotInstance: Got;
 
 	constructor(protected playerTicketService: PlayerTicketService) {
-		const gotOptions: ExtendOptions = {
-			prefixUrl: process.env.VIDEO_STILLS_TOKEN_ENDPOINT,
-			resolveBodyOnly: true,
-			username: process.env.VIDEO_STILLS_TOKEN_USERNAME,
-			password: process.env.VIDEO_STILLS_TOKEN_PASSWORD,
-			responseType: 'json',
-			headers: {
-				'Content-Type': 'application/x-www-form-urlencoded',
-				'cache-control': 'no-cache',
-				'X-User-Secret-Key-Meta': process.env.ASSET_SERVER_TOKEN_SECRET,
-			},
-		};
-		this.gotInstance = got.extend(gotOptions);
+		this.gotInstance = got.extend({});
 	}
 
 	private async getAccessToken() {
@@ -51,10 +40,24 @@ export class VideoStillsService {
 			const fiveMinutes = 5 * 60 * 1000;
 
 			if (!this.token || tokenExpiry - fiveMinutes < now) {
-				this.token = await this.gotInstance.post<VideoStillToken>('', {
-					resolveBodyOnly: true, // this is duplicate but fixes a typing error
+				const response = await this.gotInstance.post<VideoStillToken>('', {
+					prefixUrl: process.env.VIDEO_STILLS_TOKEN_ENDPOINT,
+					resolveBodyOnly: true,
+					headers: {
+						'Content-Type': 'application/x-www-form-urlencoded',
+					},
+					responseType: 'json',
+					body: stringify({
+						username: process.env.VIDEO_STILLS_TOKEN_USERNAME as string,
+						password: process.env.VIDEO_STILLS_TOKEN_PASSWORD as string,
+						client_id: process.env.VIDEO_STILLS_TOKEN_CLIENT_ID as string,
+						client_secret: process.env.VIDEO_STILLS_TOKEN_CLIENT_SECRET as string,
+					}),
 				});
-				this.token.expires_at = addSeconds(new Date(), this.token.expires_in);
+				this.token = {
+					...response,
+					expires_at: addSeconds(new Date(), response.expires_in),
+				};
 			}
 			return this.token.access_token as string;
 		} catch (err) {
@@ -83,15 +86,14 @@ export class VideoStillsService {
 		const config: Record<string, any> | null = null;
 		try {
 			const accessToken = await this.getAccessToken();
-			const response = await got.get<VideoStillRaw[]>('', {
-				method: 'get',
-				hostname: process.env.VIDEO_STILLS_ENDPOINT,
-				path: `/${objectId}/keyframes`,
-				headers: {
-					Authorization: `Bearer ${accessToken}`,
-				},
-			});
-			const videoStills: VideoStillRaw[] = response.body;
+			const videoStills = (await got
+				.get(`${process.env.VIDEO_STILLS_ENDPOINT as string}/${objectId}/keyframes`, {
+					resolveBodyOnly: true,
+					headers: {
+						Authorization: `Bearer ${accessToken}`,
+					},
+				})
+				.json()) as VideoStillRaw[];
 			return videoStills.map((videoStill: VideoStillRaw): VideoStill => {
 				return {
 					thumbnailImagePath: videoStill.ThumbnailImagePath,
