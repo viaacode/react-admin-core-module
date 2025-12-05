@@ -26,11 +26,11 @@ import { GET_LANGUAGE_NAMES } from '~shared/consts/language-names';
 import { CustomError } from '~shared/helpers/custom-error';
 import { isMultiLanguageEnabled } from '~shared/helpers/is-multi-language-enabled';
 import { navigate } from '~shared/helpers/link';
+import { navigateFunc } from '~shared/helpers/navigate-fnc';
 import { tHtml, tText } from '~shared/helpers/translation-functions';
 import { AdminLayout } from '~shared/layouts/AdminLayout/AdminLayout';
 import { TableColumnDataType } from '~shared/types/table-column-data-type';
 import { TableFilterType } from '~shared/types/table-filter-types';
-
 import { NavigationService } from '../navigation.service';
 import type {
 	NavigationItem,
@@ -44,8 +44,6 @@ export interface NavigationDetailProps {
 }
 
 export const NavigationBarDetail: FC<NavigationDetailProps> = ({ navigationBarId, onGoBack }) => {
-	const navigateFunc = AdminConfigManager.getConfig().services.router.navigateFunc;
-
 	const [_activeItemId, setActiveItemId] = useState<string | null>(null);
 	const [isConfirmModalOpen, setIsConfirmModalOpen] = useState<boolean>(false);
 	const [idToDelete, setIdToDelete] = useState<string | null>(null);
@@ -126,7 +124,7 @@ export const NavigationBarDetail: FC<NavigationDetailProps> = ({ navigationBarId
 	};
 
 	const handleNavigate = (path: string, params: { [key: string]: string } = {}): void => {
-		navigate(navigateFunc, path, params);
+		navigate(path, params);
 	};
 
 	const handleSave = async () => {

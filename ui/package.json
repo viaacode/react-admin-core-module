@@ -21,6 +21,10 @@
     "./styles.css": {
       "import": "./dist/styles.css",
       "require": "./dist/styles.css"
+    },
+    "./admin.css": {
+      "import": "./dist/admin.css",
+      "require": "./dist/admin.css"
     }
   },
   "typesVersions": {
@@ -71,7 +75,7 @@
     "@meemoo/react-components": "5.0.8",
     "@studiohyperdrive/pagination": "1.0.0",
     "@tanstack/react-query": "5.90.7",
-    "@viaa/avo2-components": "6.0.9",
+    "@viaa/avo2-components": "6.0.10",
     "@viaa/avo2-types": "4.0.2",
     "autosize": "6.0.1",
     "blend-promise-utils": "1.29.2",
@@ -94,16 +98,15 @@
     "react-datepicker": "8.9.0",
     "react-dom": "18.2.0",
     "react-hook-form": "7.66.0",
-    "react-page-split": "0.0.7",
     "react-perfect-scrollbar": "1.5.8",
     "react-popper": "2.3.0",
     "react-range": "1.8.14",
+    "react-resizable-panels": "3.0.6",
     "react-router": "7.9.1",
     "react-router-dom": "7.9.1",
     "react-select": "5.10.2",
     "react-table": "7.7.0",
     "ts-retry-promise": "^0.8.1",
-    "use-query-params": "2.2.2",
     "yup": "1.4.0"
   },
   "devDependencies": {
@@ -156,7 +159,6 @@
     "ts-morph": "^25.0.0",
     "tsx": "^4.19.1",
     "typescript": "5.9.3",
-    "use-query-params": "2.2.2",
     "vite": "7.2.2",
     "vite-plugin-dts": "4.5.4",
     "vite-plugin-svgr": "4.5.0",

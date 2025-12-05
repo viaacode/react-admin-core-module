@@ -19,8 +19,6 @@ export interface ContentPageMetaProps {
 export const BlockContentPageMeta: FunctionComponent<ContentPageMetaProps> = ({
 	contentPageInfo,
 }) => {
-	const navigateFunc = AdminConfigManager.getConfig().services.router.navigateFunc;
-
 	const renderLabel = (labelObj: ContentPageLabel): string | ReactNode => {
 		// biome-ignore lint/suspicious/noExplicitAny: todo
 		return (labelObj as any).link_to ? (
@@ -28,7 +26,7 @@ export const BlockContentPageMeta: FunctionComponent<ContentPageMetaProps> = ({
 				type="inline-link"
 				onClick={() =>
 					// biome-ignore lint/suspicious/noExplicitAny: todo
-					navigateToContentType((labelObj as any).link_to, navigateFunc)
+					navigateToContentType((labelObj as any).link_to)
 				}
 				key={`label-link-${labelObj.label}`}
 			>

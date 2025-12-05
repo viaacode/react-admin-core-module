@@ -18,7 +18,7 @@ import {
 } from '@viaa/avo2-components';
 import type { Avo } from '@viaa/avo2-types';
 import clsx from 'clsx';
-import { cloneDeep, compact, isEqual, sortBy } from 'es-toolkit';
+import { compact, isEqual, isNil, sortBy } from 'es-toolkit';
 import React, {
 	type FunctionComponent,
 	type KeyboardEvent,
@@ -37,10 +37,14 @@ import type { TableFilterType } from '~shared/types/table-filter-types';
 import { KeyCode } from '../../consts/keycode';
 import { eduOrgToClientOrg } from '../../helpers/edu-org-string-to-client-org';
 import './FilterTable.scss';
+import { isEmpty } from 'es-toolkit/compat';
+import { AdminConfigManager } from '~core/config';
 import { ErrorView } from '~shared/components/error/ErrorView';
+import { GET_FILTER_TABLE_QUERY_PARAM_CONFIG } from '~shared/components/FilterTable/FilterTable.const';
 import { GET_DEFAULT_PAGINATION_BAR_PROPS } from '~shared/components/PaginationBar/PaginationBar.consts';
+import { navigate } from '~shared/helpers/link';
+import { navigateFunc } from '~shared/helpers/navigate-fnc';
 import { toggleSortOrder } from '~shared/helpers/toggle-sort-order';
-import { useQueryParams } from '~shared/helpers/use-query-params-ssr';
 import { useGetTableColumnPreference } from '~shared/hooks/useGetTableColumnPreference';
 import { useUpdateTableColumnPreference } from '~shared/hooks/useUpdateTableColumnPreference';
 import BooleanCheckboxDropdown from '../BooleanCheckboxDropdown/BooleanCheckboxDropdown';
@@ -50,7 +54,6 @@ import ConfirmModal from '../ConfirmModal/ConfirmModal';
 import DateRangeDropdown from '../DateRangeDropdown/DateRangeDropdown';
 import { MultiEducationalOrganisationSelectModal } from '../MultiEducationalOrganisationSelectModal/MultiEducationalOrganisationSelectModal';
 import { MultiUserSelectDropdown } from '../MultiUserSelectDropdown/MultiUserSelectDropdown';
-import { FILTER_TABLE_QUERY_PARAM_CONFIG } from './FilterTable.const';
 import { cleanupFilterTableState } from './FilterTable.utils';
 
 export interface FilterableTableState {
@@ -149,7 +152,39 @@ export const FilterTable: FunctionComponent<FilterTableProps> = ({
 	const [searchTerm, setSearchTerm] = useState<string>('');
 	const [selectedBulkAction, setSelectedBulkAction] = useState<string | null>(null);
 	const [confirmBulkActionModalOpen, setConfirmBulkActionModalOpen] = useState<boolean>(false);
-	const [tableState, setTableState] = useQueryParams(FILTER_TABLE_QUERY_PARAM_CONFIG(columns));
+	const queryParamsConfig = GET_FILTER_TABLE_QUERY_PARAM_CONFIG(columns);
+	// biome-ignore lint/suspicious/noExplicitAny: many possible options to list here
+	const getTableState = useCallback((): Record<string, any> => {
+		// biome-ignore lint/suspicious/noExplicitAny: many possible options to list here
+		const tableState: Record<string, any> = {};
+		for (const queryParamKey in queryParamsConfig) {
+			const queryParamValueRaw = new URLSearchParams(location.search).get(queryParamKey);
+			const queryParamEncoderDecoder = queryParamsConfig[queryParamKey];
+			const queryParamValue = queryParamEncoderDecoder.decode(queryParamValueRaw || undefined);
+			if (!isNil(queryParamValue)) {
+				tableState[queryParamKey] = queryParamValue;
+			}
+		}
+		return tableState;
+	}, [queryParamsConfig]);
+	const setTableState = useCallback(
+		// biome-ignore lint/suspicious/noExplicitAny: many possible options to list here
+		(newTableState: Record<string, any>) => {
+			const url = new URL(window.location.href);
+			for (const queryParamKey in queryParamsConfig) {
+				const queryParamValue = newTableState[queryParamKey];
+				const queryParamValueEncoded = queryParamsConfig[queryParamKey].encode(queryParamValue);
+				if (isNil(queryParamValueEncoded)) {
+					url.searchParams.delete(queryParamKey);
+				} else {
+					url.searchParams.set(queryParamKey, queryParamValueEncoded || '');
+				}
+			}
+			navigateFunc(url, { replace: true });
+			onTableStateChanged(newTableState);
+		},
+		[queryParamsConfig, onTableStateChanged]
+	);
 
 	const {
 		data: preferredColumns,
@@ -162,31 +197,35 @@ export const FilterTable: FunctionComponent<FilterTableProps> = ({
 		// biome-ignore lint/suspicious/noExplicitAny: TODO fix
 		(value: any, id: string) => {
 			// biome-ignore lint/suspicious/noExplicitAny: todo
-			let newTableState: any = cloneDeep(tableState);
-
-			newTableState = cleanupFilterTableState({
-				...newTableState,
+			const oldTableState: any = getTableState();
+			// biome-ignore lint/suspicious/noExplicitAny: todo
+			const newTableState: any = cleanupFilterTableState({
+				...oldTableState,
 				[id]: value,
 				...(id !== 'page' ? { page: 0 } : {}), // Reset the page to 0, when any filter or sort order change is made
 			});
 
-			setTableState(newTableState, 'replace');
+			console.log('setting new table state for filter table: ', newTableState);
+			if (isEqual(oldTableState, newTableState)) {
+				return;
+			}
+			setTableState(newTableState);
 		},
-		[setTableState, tableState]
+		[setTableState, getTableState]
 	);
 
 	const handleSortOrderChanged = (columnId: string) => {
 		// biome-ignore lint/suspicious/noExplicitAny: todo
-		let newTableState: any = cloneDeep(tableState);
+		let newTableState: any = getTableState();
 
 		newTableState = cleanupFilterTableState({
 			...newTableState,
 			page: 0,
 			sort_column: columnId,
-			sort_order: toggleSortOrder(tableState.sort_order),
+			sort_order: toggleSortOrder(newTableState.sort_order),
 		});
 
-		setTableState(newTableState, 'replace');
+		setTableState(newTableState);
 	};
 
 	const handleKeyUp = (e: KeyboardEvent<HTMLInputElement>) => {
@@ -219,6 +258,7 @@ export const FilterTable: FunctionComponent<FilterTableProps> = ({
 
 	const getColumnOptions = (): CheckboxOption[] => {
 		// Get columns from query string list of columns, or use columns visible by default
+		const tableState = getTableState();
 		return sortBy(
 			columns.map((column) => ({
 				id: column.id,
@@ -232,6 +272,7 @@ export const FilterTable: FunctionComponent<FilterTableProps> = ({
 	};
 
 	const getSelectedColumns = (): FilterableColumn[] => {
+		const tableState = getTableState();
 		if (!!tableState.columns && !!tableState.columns.length) {
 			// Return the columns in the order they are specified in the query params
 			return compact(
@@ -254,17 +295,14 @@ export const FilterTable: FunctionComponent<FilterTableProps> = ({
 	};
 
 	useEffect(() => {
-		if (!isEqual(preferredColumns, tableState.columns)) {
+		const tableState = getTableState();
+		if (!isEqual(preferredColumns || [], tableState.columns || [])) {
 			handleTableStateChanged(preferredColumns, 'columns');
 		}
-	}, [handleTableStateChanged, preferredColumns, tableState.columns]);
-
-	useEffect(() => {
-		onTableStateChanged(tableState);
-		setSearchTerm(tableState.query || '');
-	}, [onTableStateChanged, tableState]);
+	}, [handleTableStateChanged, preferredColumns, getTableState]);
 
 	const renderFilters = () => {
+		const tableState = getTableState();
 		const page = tableState.page || 0;
 		const from = page * itemsPerPage + 1;
 		const to = Math.min(page * itemsPerPage + itemsPerPage, dataCount);
@@ -446,7 +484,7 @@ export const FilterTable: FunctionComponent<FilterTableProps> = ({
 
 	return (
 		<div className={clsx('c-filter-table', className)}>
-			{!data.length && !getFilters(tableState) ? (
+			{!data.length && !getFilters(getTableState()) ? (
 				renderNoResults()
 			) : (
 				<>
@@ -464,9 +502,9 @@ export const FilterTable: FunctionComponent<FilterTableProps> = ({
 								renderCell={renderCell}
 								rowKey={rowKey}
 								variant={variant}
-								sortColumn={tableState.sort_column || defaultOrderProp || undefined}
+								sortColumn={getTableState().sort_column || defaultOrderProp || undefined}
 								sortOrder={
-									((tableState.sort_order as Avo.Search.OrderDirection) ||
+									((getTableState().sort_order as Avo.Search.OrderDirection) ||
 										defaultOrderDirection ||
 										// biome-ignore lint/suspicious/noExplicitAny: TODO fix
 										undefined) as any // TODO add asc_nulls_first to table sort orders
@@ -481,7 +519,7 @@ export const FilterTable: FunctionComponent<FilterTableProps> = ({
 								<Spacer margin="top-large">
 									<PaginationBar
 										{...GET_DEFAULT_PAGINATION_BAR_PROPS()}
-										startItem={(tableState.page || 0) * itemsPerPage}
+										startItem={(getTableState().page || 0) * itemsPerPage}
 										itemsPerPage={itemsPerPage}
 										totalItems={dataCount}
 										onPageChange={(newPage: number) => handleTableStateChanged(newPage, 'page')}

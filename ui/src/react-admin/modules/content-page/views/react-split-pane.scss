@@ -1,6 +1,6 @@
 @use '../../shared/styles/settings/colors.scss' as colors;
 
-.react-page-split--horizontal {
+[data-panel-group][data-panel-group-direction="horizontal"] {
   display: flex;
   position: relative;
 
@@ -10,7 +10,11 @@
     min-width: 10px;
   }
 
-  > .react-page-split__divider--horizontal {
+  [role="separator"] {
+    width: 1.5rem;
+  }
+
+  > [role="separator"][data-panel-group-direction="horizontal"] {
     position: relative;
     background-color: rgba(colors.$color-gray-50, 0.4);
     height: auto !important;

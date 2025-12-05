@@ -7,6 +7,7 @@ import { AdminConfigManager } from '~core/config/config.class';
 import type { DefaultComponentProps } from '~modules/shared/types/components';
 import { Icon } from '~shared/components/Icon/Icon';
 import { KeyCode } from '~shared/consts/keycode';
+import { navigateFunc } from '~shared/helpers/navigate-fnc';
 import { tText } from '~shared/helpers/translation-functions';
 import { BlockHeading } from '../BlockHeading/BlockHeading';
 
@@ -45,7 +46,7 @@ export const BlockHetArchiefHeaderSearch: FunctionComponent<BlockHetArchiefHeade
 			url: AdminConfigManager.getConfig().routes.SEARCH || '/zoeken',
 			query: searchTerm ? { zoekterm: searchTerm } : {},
 		});
-		AdminConfigManager.getConfig().services.router.navigateFunc(url);
+		navigateFunc(url);
 	};
 
 	const handleKeyUp = (e: KeyboardEvent<HTMLInputElement>) => {

@@ -66,7 +66,7 @@ export {
 	FilterTable,
 	getFilters,
 } from './shared/components/FilterTable/FilterTable';
-export { FILTER_TABLE_QUERY_PARAM_CONFIG } from './shared/components/FilterTable/FilterTable.const';
+export { GET_FILTER_TABLE_QUERY_PARAM_CONFIG } from './shared/components/FilterTable/FilterTable.const';
 export { cleanupFilterTableState } from './shared/components/FilterTable/FilterTable.utils';
 // Flowplayer wrapper
 export type {

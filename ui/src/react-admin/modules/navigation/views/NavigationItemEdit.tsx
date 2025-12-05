@@ -14,10 +14,10 @@ import { Icon } from '~shared/components/Icon/Icon';
 import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner';
 import { CustomError } from '~shared/helpers/custom-error';
 import { navigate } from '~shared/helpers/link';
+import { navigateFunc } from '~shared/helpers/navigate-fnc';
 import { showToast } from '~shared/helpers/show-toast';
 import { tHtml, tText } from '~shared/helpers/translation-functions';
 import { AdminLayout } from '~shared/layouts/AdminLayout/AdminLayout';
-
 import { NavigationEditForm } from '../components/NavigationEditForm/NavigationEditForm';
 import { GET_PAGE_TYPES_LANG } from '../navigation.consts';
 import { NavigationService } from '../navigation.service';
@@ -35,8 +35,6 @@ export const NavigationItemEdit: FC<NavigationEditProps> = ({
 	navigationItemId,
 	onGoBack,
 }) => {
-	const navigateFunc = AdminConfigManager.getConfig().services.router.navigateFunc;
-
 	const navigationBarName = startCase(navigationBarId);
 
 	// Hooks
@@ -185,7 +183,7 @@ export const NavigationItemEdit: FC<NavigationEditProps> = ({
 					position: navigationItems.length,
 				});
 
-				navigate(navigateFunc, AdminConfigManager.getAdminRoute('ADMIN_NAVIGATION_DETAIL'), {
+				navigate(AdminConfigManager.getAdminRoute('ADMIN_NAVIGATION_DETAIL'), {
 					navigationBarId: currentNavigationItem?.placement as string,
 				});
 
@@ -212,7 +210,7 @@ export const NavigationItemEdit: FC<NavigationEditProps> = ({
 					} as NavigationItem,
 				]);
 
-				navigate(navigateFunc, AdminConfigManager.getAdminRoute('ADMIN_NAVIGATION_DETAIL'), {
+				navigate(AdminConfigManager.getAdminRoute('ADMIN_NAVIGATION_DETAIL'), {
 					navigationBarId: currentNavigationItem?.placement as string,
 				});
 

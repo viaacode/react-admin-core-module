@@ -12,12 +12,10 @@ export const ContentPageEditPage: FC = () => {
 		return null;
 	}
 	return (
-		<>
-			<ContentPageEdit
-				id={contentPageId}
-				commonUser={getMockCommonUser()}
-				onGoBack={() => window.history.back()}
-			/>
-		</>
+		<ContentPageEdit
+			id={contentPageId}
+			commonUser={getMockCommonUser()}
+			onGoBack={() => window.history.back()}
+		/>
 	);
 };

@@ -1,7 +1,7 @@
 import { Flex } from '@viaa/avo2-components';
+import { isNil } from 'es-toolkit';
 import React, { useEffect, useState } from 'react';
-import { HorizontalPageSplit } from 'react-page-split';
-
+import { Panel, PanelGroup, PanelResizeHandle } from 'react-resizable-panels';
 import { useNavigate } from 'react-router';
 import { ToastType } from '~core/config/config.types';
 import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner';
@@ -15,7 +15,6 @@ import { setAdminCoreConfig } from './shared/helpers/admin-core-config';
 import type { NavigationItemInfo } from './shared/types';
 import './react-admin/modules/shared/styles/main.scss';
 import './App.scss';
-import { isNil } from 'es-toolkit';
 
 function App() {
 	const [navigationItems, setNavigationItems] = useState<NavigationItemInfo[] | null>(null);
@@ -56,16 +55,24 @@ function App() {
 		}
 		return (
 			<div className="App">
-				<HorizontalPageSplit widths={['15%', '85%']}>
-					<Sidebar navItems={navigationItems || undefined} className="o-app--admin__sidebar" />
-
-					<Flex
-						className="o-app--admin__main u-flex-auto u-scroll c-scrollable"
-						orientation="vertical"
-					>
-						{renderAdminRoutes()}
-					</Flex>
-				</HorizontalPageSplit>
+				<PanelGroup
+					autoSaveId="admin-dashboard"
+					direction="horizontal"
+					className="m-resizable-panels"
+				>
+					<Panel defaultSize={15}>
+						<Sidebar navItems={navigationItems || undefined} className="o-app--admin__sidebar" />
+					</Panel>
+					<PanelResizeHandle />
+					<Panel>
+						<Flex
+							className="o-app--admin__main u-flex-auto u-scroll c-scrollable"
+							orientation="vertical"
+						>
+							{renderAdminRoutes()}
+						</Flex>
+					</Panel>
+				</PanelGroup>
 			</div>
 		);
 	};

@@ -65,9 +65,11 @@ import { blockHasErrors } from '../helpers/block-has-errors';
 import { validateContentBlockConfig } from '../helpers/validate-content-block-config';
 import ContentEditContentBlocks from './ContentEditContentBlocks';
 import './ContentPageEdit.scss';
-import { StringParam, useQueryParam, withDefault } from '~shared/helpers/use-query-params-ssr';
+import { navigateFunc } from '~shared/helpers/navigate-fnc';
 
 const { EDIT_ANY_CONTENT_PAGES, EDIT_OWN_CONTENT_PAGES } = PermissionName;
+
+export const CONTENT_PAGE_EDIT_TAB_QUERY_PARAM = 'tab';
 
 export type ContentPageEditProps = DefaultComponentProps & {
 	id: string | undefined;
@@ -99,14 +101,15 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 	});
 	const [isSaving, setIsSaving] = useState<boolean>(false);
 	const [hasSubmitted, setHasSubmitted] = useState<boolean>(false);
-
-	const navigateFunc = AdminConfigManager.getConfig().services.router.navigateFunc;
-
 	const [contentTypes, isLoadingContentTypes] = useContentTypes();
-	const [currentTab, setCurrentTab] = useQueryParam(
-		'tab',
-		withDefault(StringParam, GET_CONTENT_PAGE_DETAIL_TABS()[0].id as string)
-	);
+	const currentTab =
+		new URLSearchParams(location.search).get(CONTENT_PAGE_EDIT_TAB_QUERY_PARAM) ||
+		(GET_CONTENT_PAGE_DETAIL_TABS()[0].id as string);
+	const setCurrentTab = (tabId: string) => {
+		const url = new URL(window.location.href);
+		url.searchParams.set(CONTENT_PAGE_EDIT_TAB_QUERY_PARAM, tabId);
+		navigateFunc(url, { replace: true });
+	};
 	const tabs = GET_CONTENT_PAGE_DETAIL_TABS().map((tab: TabProps) => ({
 		...tab,
 		active: tab.id === currentTab,
@@ -535,7 +538,6 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 			setTimeout(() => {
 				// Delay navigation a split second so we know the onHasUnsavedChanges has run
 				navigate(
-					navigateFunc,
 					AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_DETAIL'),
 					{
 						id: insertedOrUpdatedContent?.id,
@@ -649,7 +651,7 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 		if (pageType === PageType.Create) {
 			navigateFunc(AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_OVERVIEW'));
 		} else {
-			navigate(navigateFunc, AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_DETAIL'), {
+			navigate(AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_DETAIL'), {
 				id,
 			});
 		}

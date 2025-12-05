@@ -4,7 +4,6 @@ import clsx from 'clsx';
 import { isNil } from 'es-toolkit';
 import type { FunctionComponent, ReactNode } from 'react';
 import React, { useCallback, useState } from 'react';
-import { HorizontalPageSplit } from 'react-page-split';
 import ContentBlockForm from '~modules/content-page/components/ContentBlockForm/ContentBlockForm';
 import { ContentPageRenderer } from '~modules/content-page/components/ContentPageRenderer/ContentPageRenderer';
 import type { DraggableItemData } from '~modules/content-page/components/DraggableList/DraggableList';
@@ -30,6 +29,7 @@ import { createKey } from '~shared/helpers/create-key';
 import { isAvo } from '~shared/helpers/is-avo';
 import { tText } from '~shared/helpers/translation-functions';
 import './ContentEditContentBlocks.scss';
+import { Panel, PanelGroup, PanelResizeHandle } from 'react-resizable-panels';
 
 interface ContentEditContentBlocksProps {
 	contentPageInfo: Partial<ContentPageInfo>;
@@ -107,7 +107,7 @@ const ContentEditContentBlocks: FunctionComponent<ContentEditContentBlocksProps>
 			const blockElem = document.querySelector(`.content-block-${type}-${position}`);
 
 			const sidebarScrollable = document.querySelector(
-				'.m-edit-content-blocks .react-page-split__divider + .react-page-split__panel'
+				'.m-edit-content-blocks [role="separator"] + [data-panel]'
 			);
 			const previewScrollable = document.querySelector('.c-content-edit-view__preview');
 
@@ -292,42 +292,47 @@ const ContentEditContentBlocks: FunctionComponent<ContentEditContentBlocksProps>
 	);
 
 	return (
-		<HorizontalPageSplit
+		<PanelGroup
+			autoSaveId="admin-dashboard"
+			direction="horizontal"
 			className="m-resizable-panels m-edit-content-blocks"
-			widths={['60%', '40%']}
 		>
-			<div className="c-content-edit-view__preview">
-				<ContentPageRenderer
-					contentPageInfo={contentPageInfo}
-					onBlockClicked={focusBlock}
-					activeBlockPosition={activeBlockPosition}
-					commonUser={commonUser}
-					renderFakeTitle={contentPageInfo.contentType === 'FAQ_ITEM' && isAvo()}
-					renderNoAccessError={() => (
-						<ErrorView
-							icon={IconName.clock}
-							actionButtons={['helpdesk']}
-							message={'deze-pagina-is-enkel-voor-gebruikers-met-andere-rechten'}
-						/>
-					)}
-				/>
-			</div>
-
-			<Sidebar className="c-content-edit-view__sidebar" light>
-				<Navbar background="alt">
-					<Select
-						options={GET_CONTENT_BLOCK_TYPE_OPTIONS()}
-						onChange={(value) => handleAddContentBlock(value as ContentBlockType)}
-						placeholder={tText(
-							'admin/content/views/content-edit-content-blocks___voeg-een-content-blok-toe'
+			<Panel defaultSize={60}>
+				<div className="c-content-edit-view__preview">
+					<ContentPageRenderer
+						contentPageInfo={contentPageInfo}
+						onBlockClicked={focusBlock}
+						activeBlockPosition={activeBlockPosition}
+						commonUser={commonUser}
+						renderFakeTitle={contentPageInfo.contentType === 'FAQ_ITEM' && isAvo()}
+						renderNoAccessError={() => (
+							<ErrorView
+								icon={IconName.clock}
+								actionButtons={['helpdesk']}
+								message={'deze-pagina-is-enkel-voor-gebruikers-met-andere-rechten'}
+							/>
 						)}
-						// biome-ignore lint/suspicious/noExplicitAny: todo
-						value={null as any}
 					/>
-				</Navbar>
-				<div className="c-scrollable">{renderedContentBlockForms()}</div>
-			</Sidebar>
-		</HorizontalPageSplit>
+				</div>
+			</Panel>
+			<PanelResizeHandle />
+			<Panel defaultSize={40}>
+				<Sidebar className="c-content-edit-view__sidebar" light>
+					<Navbar background="alt">
+						<Select
+							options={GET_CONTENT_BLOCK_TYPE_OPTIONS()}
+							onChange={(value) => handleAddContentBlock(value as ContentBlockType)}
+							placeholder={tText(
+								'admin/content/views/content-edit-content-blocks___voeg-een-content-blok-toe'
+							)}
+							// biome-ignore lint/suspicious/noExplicitAny: todo
+							value={null as any}
+						/>
+					</Navbar>
+					<div className="c-scrollable">{renderedContentBlockForms()}</div>
+				</Sidebar>
+			</Panel>
+		</PanelGroup>
 	);
 };
 

@@ -48,12 +48,12 @@ import type {
 } from '../content-page-label.types';
 import './ContentPageLabelOverview.scss';
 import { Avo } from '@viaa/avo2-types';
+import { navigateFunc } from '~shared/helpers/navigate-fnc';
 
 export const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> = ({
 	className,
 }) => {
 	// Hooks
-	const navigateFunc = AdminConfigManager.getConfig().services.router.navigateFunc;
 	const [contentPageLabels, setContentPageLabels] = useState<ContentPageLabel[] | null>(null);
 	const [contentPageLabelCount, setContentPageLabelCount] = useState<number>(0);
 	const [contentPageLabelIdToDelete, setContentPageLabelIdToDelete] = useState<number | null>(null);
@@ -274,13 +274,9 @@ export const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> 
 						<Button
 							icon={<Icon name="info" />}
 							onClick={() =>
-								navigate(
-									navigateFunc,
-									AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_LABEL_DETAIL'),
-									{
-										id: contentPageLabel.id,
-									}
-								)
+								navigate(AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_LABEL_DETAIL'), {
+									id: contentPageLabel.id,
+								})
 							}
 							aria-label={tText(
 								'admin/content-page-labels/views/content-page-label-overview___bekijk-de-details-van-deze-content-pagina-label'
@@ -293,13 +289,9 @@ export const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> 
 						<Button
 							icon={<Icon name="edit" />}
 							onClick={() =>
-								navigate(
-									navigateFunc,
-									AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_LABEL_EDIT'),
-									{
-										id: contentPageLabel.id,
-									}
-								)
+								navigate(AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_LABEL_EDIT'), {
+									id: contentPageLabel.id,
+								})
 							}
 							aria-label={tText(
 								'admin/content-page-labels/views/content-page-label-overview___bewerk-deze-content-pagina-label'

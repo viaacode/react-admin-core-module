@@ -1,6 +1,6 @@
 import type { IconName, TagInfo } from '@viaa/avo2-components';
 import { Avo } from '@viaa/avo2-types';
-import { compact } from 'es-toolkit';
+import { compact, isEqual } from 'es-toolkit';
 import type { FC, ReactText } from 'react';
 import React, { useCallback, useMemo, useState } from 'react';
 
@@ -43,6 +43,7 @@ import UserDeleteModal from '../components/UserDeleteModal';
 import type { UserOverviewTableCol, UserTableState } from '../user.types';
 import { USERS_PER_PAGE, UserBulkAction } from '../user.types';
 import './UserOverview.scss';
+import { navigateFunc } from '~shared/helpers/navigate-fnc';
 
 export interface UserOverviewProps {
 	customFormatDate?: (date: Date | string) => string;
@@ -50,7 +51,6 @@ export interface UserOverviewProps {
 
 export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 	// Hooks
-	const navigateFunc = AdminConfigManager.getConfig().services.router.navigateFunc;
 	const commonUser = getCommonUser();
 
 	const [tableState, setTableState] = useState<Partial<UserTableState> | null>(null);
@@ -281,7 +281,6 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 
 	const navigateFilterToOption = (columnId: string) => (tagId: ReactText) => {
 		navigate(
-			navigateFunc,
 			AdminConfigManager.getAdminRoute('ADMIN_USER_OVERVIEW'),
 			{},
 			{
@@ -377,7 +376,9 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 					)}
 					itemsPerPage={USERS_PER_PAGE}
 					onTableStateChanged={(newState) => {
-						setTableState(newState);
+						if (!isEqual(newState, tableState)) {
+							setTableState(newState);
+						}
 					}}
 					renderNoResults={renderNoResults}
 					isLoading={isLoading}

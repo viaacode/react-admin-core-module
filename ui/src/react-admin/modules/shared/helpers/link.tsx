@@ -8,6 +8,7 @@ import type { ReactNode } from 'react';
 import { AdminConfigManager } from '~core/config/config.class';
 import { type NavigateFunction, ToastType } from '~core/config/config.types';
 import { getAdminCoreApiUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config';
+import { navigateFunc } from '~shared/helpers/navigate-fnc';
 import { showToast } from '~shared/helpers/show-toast';
 import { tText } from '~shared/helpers/translation-functions';
 import { APP_PATH } from '../consts/routes.consts';
@@ -47,7 +48,6 @@ export const buildLink = (
 };
 
 export const navigate = (
-	navigateFunc: NavigateFunction,
 	route: string,
 	params: RouteParams = {},
 	search?: string | { [paramName: string]: string }
@@ -87,11 +87,7 @@ export const navigate = (
 };
 
 // TODO see if we can replace this method completely by the new SmartLink component
-export function navigateToAbsoluteOrRelativeUrl(
-	url: string,
-	navigateFunc: NavigateFunction,
-	target: LinkTarget = LinkTarget.Self
-) {
+export function navigateToAbsoluteOrRelativeUrl(url: string, target: LinkTarget = LinkTarget.Self) {
 	let fullUrl = url;
 	if (url.startsWith('www.')) {
 		fullUrl = `//${url}`;
@@ -118,7 +114,7 @@ export function navigateToAbsoluteOrRelativeUrl(
 	}
 }
 
-export const navigateToContentType = (action: ButtonAction, navigateFunc: NavigateFunction) => {
+export const navigateToContentType = (action: ButtonAction) => {
 	if (action) {
 		const { type, value, target } = action;
 
@@ -132,14 +128,14 @@ export const navigateToContentType = (action: ButtonAction, navigateFunc: Naviga
 			case 'INTERNAL_LINK':
 			case 'CONTENT_PAGE':
 			case 'PROJECTS':
-				navigateToAbsoluteOrRelativeUrl(String(value), navigateFunc, resolvedTarget);
+				navigateToAbsoluteOrRelativeUrl(String(value), resolvedTarget);
 				break;
 
 			case 'COLLECTION': {
 				const collectionUrl = buildLink(AdminConfigManager.getAdminRoute('COLLECTION_DETAIL'), {
 					id: value as string,
 				});
-				navigateToAbsoluteOrRelativeUrl(collectionUrl, navigateFunc, resolvedTarget);
+				navigateToAbsoluteOrRelativeUrl(collectionUrl, resolvedTarget);
 				break;
 			}
 
@@ -147,7 +143,7 @@ export const navigateToContentType = (action: ButtonAction, navigateFunc: Naviga
 				const itemUrl = buildLink(AdminConfigManager.getAdminRoute('ITEM_DETAIL'), {
 					id: value,
 				});
-				navigateToAbsoluteOrRelativeUrl(itemUrl, navigateFunc, resolvedTarget);
+				navigateToAbsoluteOrRelativeUrl(itemUrl, resolvedTarget);
 				break;
 			}
 
@@ -155,7 +151,7 @@ export const navigateToContentType = (action: ButtonAction, navigateFunc: Naviga
 				const bundleUrl = buildLink(AdminConfigManager.getAdminRoute('BUNDLE_DETAIL'), {
 					id: value,
 				});
-				navigateToAbsoluteOrRelativeUrl(bundleUrl, navigateFunc, resolvedTarget);
+				navigateToAbsoluteOrRelativeUrl(bundleUrl, resolvedTarget);
 				break;
 			}
 
@@ -164,22 +160,18 @@ export const navigateToContentType = (action: ButtonAction, navigateFunc: Naviga
 					'{{PROXY_URL}}',
 					getAdminCoreApiUrl() || ''
 				);
-				navigateToAbsoluteOrRelativeUrl(externalUrl, navigateFunc, resolvedTarget);
+				navigateToAbsoluteOrRelativeUrl(externalUrl, resolvedTarget);
 				break;
 			}
 
 			case 'ANCHOR_LINK': {
 				const urlWithoutQueryOrAnchor = window.location.href.split('?')[0].split('#')[0];
-				navigateToAbsoluteOrRelativeUrl(
-					`${urlWithoutQueryOrAnchor}#${value}`,
-					navigateFunc,
-					resolvedTarget
-				);
+				navigateToAbsoluteOrRelativeUrl(`${urlWithoutQueryOrAnchor}#${value}`, resolvedTarget);
 				break;
 			}
 
 			case 'FILE':
-				navigateToAbsoluteOrRelativeUrl(value as string, navigateFunc, LinkTarget.Blank);
+				navigateToAbsoluteOrRelativeUrl(value as string, LinkTarget.Blank);
 				break;
 
 			case 'SEARCH_QUERY': {
@@ -197,7 +189,6 @@ export const navigateToContentType = (action: ButtonAction, navigateFunc: Naviga
 							)
 						)
 					),
-					navigateFunc,
 					resolvedTarget
 				);
 				break;

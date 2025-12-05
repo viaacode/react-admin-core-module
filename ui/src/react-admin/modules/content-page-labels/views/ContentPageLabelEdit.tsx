@@ -26,6 +26,7 @@ import { GET_LANGUAGE_NAMES } from '~shared/consts/language-names';
 import { CustomError } from '~shared/helpers/custom-error';
 import { isMultiLanguageEnabled } from '~shared/helpers/is-multi-language-enabled';
 import { buildLink, navigate } from '~shared/helpers/link';
+import { navigateFunc } from '~shared/helpers/navigate-fnc';
 import { showToast } from '~shared/helpers/show-toast';
 import { tText } from '~shared/helpers/translation-functions';
 import { AdminLayout } from '~shared/layouts/AdminLayout/AdminLayout';
@@ -47,7 +48,6 @@ export const ContentPageLabelEdit: FunctionComponent<ContentPageLabelEditProps> 
 	className,
 }) => {
 	// Hooks
-	const navigateFunc = AdminConfigManager.getConfig().services.router.navigateFunc;
 	const [initialContentPageLabel, setInitialContentPageLabel] = useState<ContentPageLabel | null>(
 		null
 	);
@@ -116,7 +116,7 @@ export const ContentPageLabelEdit: FunctionComponent<ContentPageLabelEditProps> 
 		if (isCreatePage) {
 			navigateFunc(AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_LABEL_OVERVIEW'));
 		} else {
-			navigate(navigateFunc, AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_LABEL_DETAIL'), {
+			navigate(AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_LABEL_DETAIL'), {
 				id: contentPageLabelId,
 			});
 		}

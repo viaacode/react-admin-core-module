@@ -38,7 +38,6 @@ import {
 	CONTENT_PAGE_PREVIEW_QUERY_PARAM,
 	CONTENT_PAGE_USER_GROUP_ID_QUERY_PARAM,
 } from '~modules/content-page/components/ContentPageRenderer/ContentPageRenderer.consts';
-import { StringParam, useQueryParams } from '~shared/helpers/use-query-params-ssr';
 
 type ContentPageDetailProps = {
 	contentPageInfo: Partial<ContentPageInfo>;
@@ -50,10 +49,6 @@ type ContentPageDetailProps = {
 };
 
 export const ContentPageRenderer: FunctionComponent<ContentPageDetailProps> = (props) => {
-	const [queryParams] = useQueryParams({
-		userGroupId: StringParam,
-	});
-
 	const getContentBlocks = (contentPageInfo: ContentPageInfo) => {
 		// Convert editor states to html
 		let contentBlockBlockConfigs = convertRichTextEditorStatesToHtml(
@@ -108,8 +103,9 @@ export const ContentPageRenderer: FunctionComponent<ContentPageDetailProps> = (p
 
 		// Only accept content blocks for which the user is authorized
 		let currentUserGroupIds: string[];
-		if (!isNil(queryParams?.userGroupId)) {
-			currentUserGroupIds = [queryParams.userGroupId];
+		const userGroupId = new URLSearchParams(location.search).get('userGroupId');
+		if (!isNil(userGroupId)) {
+			currentUserGroupIds = [userGroupId];
 		} else if (props.commonUser?.userGroup?.id) {
 			currentUserGroupIds = [
 				String(props.commonUser?.userGroup?.id),

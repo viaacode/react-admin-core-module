@@ -1,6 +1,43 @@
+import { isNil } from 'es-toolkit';
 import type { DateRange } from '../components/DateRangeDropdown/DateRangeDropdown';
 
-export const DateRangeParam = {
+export interface QueryParamEncoderDecoder<T> {
+	encode: (value: T | undefined) => string | undefined;
+	decode: (value: string | undefined) => T | undefined;
+}
+
+export const NumberParam: QueryParamEncoderDecoder<number> = {
+	encode: (value: number | undefined): string | undefined => {
+		if (isNil(value)) {
+			return undefined;
+		}
+		return value.toString();
+	},
+	decode: (value: string | undefined): number | undefined => {
+		if (isNil(value)) {
+			return undefined;
+		}
+		const parsed = parseInt(value);
+		return Number.isNaN(parsed) ? undefined : parsed;
+	},
+};
+
+export const StringParam: QueryParamEncoderDecoder<string> = {
+	encode: (value: string | undefined) => {
+		if (value === undefined) {
+			return;
+		}
+		return value;
+	},
+	decode: (value: string | undefined): string | undefined => {
+		if (!value) {
+			return undefined;
+		}
+		return value;
+	},
+};
+
+export const DateRangeParam: QueryParamEncoderDecoder<DateRange> = {
 	encode: (value: DateRange | undefined) => {
 		if (!value) {
 			return;
@@ -25,7 +62,7 @@ export const DateRangeParam = {
 	},
 };
 
-export const CheckboxListParam = {
+export const CheckboxListParam: QueryParamEncoderDecoder<string[]> = {
 	encode: (value: string[] | undefined): string | undefined => {
 		if (!value) {
 			return undefined;

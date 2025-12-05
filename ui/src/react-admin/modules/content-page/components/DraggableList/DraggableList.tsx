@@ -1,13 +1,12 @@
+import type { IconName } from '@viaa/avo2-components';
+import { Icon } from '@viaa/avo2-components';
 import clsx from 'clsx';
 import { findIndex } from 'es-toolkit/compat';
 import type { FunctionComponent, ReactNode } from 'react';
 import React, { useCallback, useEffect, useState } from 'react';
-import type { DraggableItem } from './DraggableList.types';
-
-import './DraggableList.scss';
-import type { IconName } from '@viaa/avo2-components';
-import { Icon } from '@viaa/avo2-components';
 import { blockHasErrors } from '~modules/content-page/helpers/block-has-errors';
+import type { DraggableItem } from './DraggableList.types';
+import './DraggableList.scss';
 
 // TODO replace this with a generic T type
 // biome-ignore lint/suspicious/noExplicitAny: todo

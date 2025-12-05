@@ -9,7 +9,7 @@ import {
 } from '@viaa/avo2-components';
 import type { Avo } from '@viaa/avo2-types';
 import { isNil, sortBy } from 'es-toolkit';
-import React, { type FunctionComponent, useEffect, useMemo, useState } from 'react';
+import React, { type FunctionComponent, useCallback, useEffect, useMemo, useState } from 'react';
 import {
 	GET_ALL_CONTENT,
 	GET_LOGGED_OUT_USERS,
@@ -21,8 +21,9 @@ import { tText } from '~shared/helpers/translation-functions';
 import { SpecialUserGroups } from '~shared/types/authentication.types';
 
 import './ContentPagePreviewUserRoleSelector.scss';
+import { AdminConfigManager } from '~core/config';
 import { ROUTE_PARTS } from '~shared/consts';
-import { StringParam, useQueryParams } from '~shared/helpers/use-query-params-ssr';
+import { navigateFunc } from '~shared/helpers/navigate-fnc';
 
 type ContentPagePreviewUserRoleSelectorProps = {
 	commonUser?: Avo.User.CommonUser;
@@ -33,35 +34,31 @@ export const ContentPagePreviewUserRoleSelector: FunctionComponent<
 	ContentPagePreviewUserRoleSelectorProps & DefaultProps
 > = (props) => {
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
-	const [queryParams, setQueryParams] = useQueryParams({
-		// Using stringParam so we can make a difference between none selected and missing parameter
-		userGroupId: StringParam,
-	});
+	const userGroupId = new URLSearchParams(location.search).get('userGroupId');
+	const setUserGroupId = useCallback((id: string) => {
+		const url = new URL(window.location.href);
+		url.searchParams.set('userGroupId', id);
+		navigateFunc(url, { replace: true });
+	}, []);
 
 	// biome-ignore lint/correctness/useExhaustiveDependencies: Only run this once
 	useEffect(() => {
 		// if the queryParams are missing userGroupIds, use the userGroup of the current user
-		if (isNil(queryParams?.userGroupId)) {
+		if (isNil(userGroupId)) {
 			if (isNil(props.commonUser?.userGroup?.id)) {
 				// If user doesn't have a user group, show all content. Not sure if this can happen though.
-				setQueryParams({
-					userGroupId: SpecialUserGroups.allContent,
-				});
+				setUserGroupId(SpecialUserGroups.allContent);
 				return;
 			}
 			if (location.href.includes(`/${ROUTE_PARTS.admin}/`)) {
 				// If we're on the edit page of a content page, we show all content by default
-				setQueryParams({
-					userGroupId: SpecialUserGroups.allContent,
-				});
+				setUserGroupId(SpecialUserGroups.allContent);
 				return;
 			}
 			// For all other cases, show the page as the user's user group
-			setQueryParams({
-				userGroupId: String(props.commonUser?.userGroup?.id),
-			});
+			setUserGroupId(String(props.commonUser?.userGroup?.id));
 		}
-	}, [props.commonUser, setQueryParams]);
+	}, [props.commonUser, setUserGroupId]);
 
 	const { data: userGroups, isLoading } = useGetUserGroups({
 		withPermissions: false,
@@ -86,15 +83,14 @@ export const ContentPagePreviewUserRoleSelector: FunctionComponent<
 	}, [userGroups, isLoading]);
 
 	const buttonLabel = useMemo(() => {
-		const selection = (userGroupOptions || []).find(
-			(item) => item.value === queryParams.userGroupId
-		)?.label as string;
+		const selection = (userGroupOptions || []).find((item) => item.value === userGroupId)
+			?.label as string;
 
 		return tText(
 			'modules/content-page/components/content-page-preview-user-role-selector/content-page-preview-user-role-selector___preview-als-selected-user-group',
 			{ selectedUserGroup: selection }
 		);
-	}, [userGroupOptions, queryParams.userGroupId]);
+	}, [userGroupOptions, userGroupId]);
 
 	const handleOpenCloseMenu = (isOpen: boolean) => {
 		setIsMenuOpen(isOpen);
@@ -131,10 +127,8 @@ export const ContentPagePreviewUserRoleSelector: FunctionComponent<
 			<DropdownContent>
 				<RadioButtonGroup
 					options={userGroupOptions}
-					value={queryParams?.userGroupId || null}
-					onChange={(userGroupId: string) => {
-						setQueryParams({ userGroupId });
-					}}
+					value={userGroupId || null}
+					onChange={setUserGroupId}
 				/>
 			</DropdownContent>
 		</Dropdown>

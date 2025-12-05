@@ -11,7 +11,7 @@ import {
 } from '@viaa/avo2-components';
 import { Avo, PermissionName } from '@viaa/avo2-types';
 import clsx from 'clsx';
-import { cloneDeep, compact, partition } from 'es-toolkit';
+import { cloneDeep, compact, isEqual, partition } from 'es-toolkit';
 import { get, set } from 'es-toolkit/compat';
 import type { FunctionComponent, ReactNode } from 'react';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
@@ -95,8 +95,6 @@ export const ContentPageOverview: FunctionComponent<ContentPageOverviewProps> = 
 	const [selectedDropdownContentPageId, setSelectedDropdownContentPageId] = useState<
 		string | number | null
 	>(null);
-
-	const navigateFunc = AdminConfigManager.getConfig().services.router.navigateFunc;
 
 	const contentTypeOptions = useMemo(() => {
 		return contentTypes.map(
@@ -362,7 +360,7 @@ export const ContentPageOverview: FunctionComponent<ContentPageOverviewProps> = 
 
 	function handlePreviewClicked(page: ContentPageInfo) {
 		if (page?.path) {
-			navigateToAbsoluteOrRelativeUrl(page.path, navigateFunc, LinkTarget.Blank);
+			navigateToAbsoluteOrRelativeUrl(page.path, LinkTarget.Blank);
 		} else {
 			showToast({
 				title: tText(
@@ -635,7 +633,9 @@ export const ContentPageOverview: FunctionComponent<ContentPageOverviewProps> = 
 					renderCell={renderTableCell as any}
 					className="c-content-overview__table"
 					onTableStateChanged={(newState) => {
-						setTableState(newState);
+						if (!isEqual(newState, tableState)) {
+							setTableState(newState);
+						}
 					}}
 					isLoading={isLoading}
 					searchInputAriaLabel={tText(

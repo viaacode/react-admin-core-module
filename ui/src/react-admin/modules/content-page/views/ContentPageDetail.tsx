@@ -41,9 +41,9 @@ import { createDropdownMenuItem } from '~shared/helpers/dropdown';
 import { isAvo } from '~shared/helpers/is-avo';
 import { isMultiLanguageEnabled } from '~shared/helpers/is-multi-language-enabled';
 import { buildLink, navigate, navigateToAbsoluteOrRelativeUrl } from '~shared/helpers/link';
+import { navigateFunc } from '~shared/helpers/navigate-fnc';
 import { showToast } from '~shared/helpers/show-toast';
 import { tHtml, tText } from '~shared/helpers/translation-functions';
-import { StringParam, useQueryParam, withDefault } from '~shared/helpers/use-query-params-ssr';
 import { AdminLayout } from '~shared/layouts/AdminLayout/AdminLayout';
 import { PermissionService } from '~shared/services/permission-service';
 import type { DefaultComponentProps } from '~shared/types/components';
@@ -55,6 +55,8 @@ const {
 	UNPUBLISH_ANY_CONTENT_PAGE,
 	PUBLISH_ANY_CONTENT_PAGE,
 } = PermissionName;
+
+export const CONTENT_PAGE_DETAIL_TAB_QUERY_PARAM = 'tab';
 
 export type ContentPageDetailProps = DefaultComponentProps & {
 	id: string;
@@ -71,8 +73,6 @@ export const ContentPageDetail: FC<ContentPageDetailProps> = ({
 	commonUser,
 }) => {
 	// Hooks
-	const navigateFunc = AdminConfigManager.getConfig().services.router.navigateFunc;
-
 	const [contentPageInfo, setContentPageInfo] = useState<ContentPageInfo | null>(null);
 	const [loadingInfo, setLoadingInfo] = useState<LoadingInfo>({ state: 'loading' });
 	const [isConfirmModalOpen, setIsConfirmModalOpen] = useState<boolean>(false);
@@ -83,11 +83,14 @@ export const ContentPageDetail: FC<ContentPageDetailProps> = ({
 	);
 
 	const { mutateAsync: softDeleteContentPage } = useSoftDeleteContentPage();
-
-	const [currentTab, setCurrentTab] = useQueryParam(
-		'tab',
-		withDefault(StringParam, GET_CONTENT_PAGE_DETAIL_TABS()[0].id as string)
-	);
+	const currentTab =
+		new URLSearchParams(location.search).get(CONTENT_PAGE_DETAIL_TAB_QUERY_PARAM) ||
+		(GET_CONTENT_PAGE_DETAIL_TABS()[0].id as string);
+	const setCurrentTab = useCallback((tabId: string) => {
+		const url = new URL(window.location.href);
+		url.searchParams.set(CONTENT_PAGE_DETAIL_TAB_QUERY_PARAM, tabId);
+		navigateFunc(url, { replace: true });
+	}, []);
 	const tabs = GET_CONTENT_PAGE_DETAIL_TABS().map((tab: TabProps) => ({
 		...tab,
 		active: tab.id === currentTab,
@@ -200,7 +203,7 @@ export const ContentPageDetail: FC<ContentPageDetailProps> = ({
 						[CONTENT_PAGE_PREVIEW_QUERY_PARAM]: true,
 					},
 				});
-				navigateToAbsoluteOrRelativeUrl(path, navigateFunc, LinkTarget.Blank);
+				navigateToAbsoluteOrRelativeUrl(path, LinkTarget.Blank);
 			} else {
 				// For english pages, add the locale to the path
 				const path = stringifyUrl({
@@ -209,7 +212,7 @@ export const ContentPageDetail: FC<ContentPageDetailProps> = ({
 						[CONTENT_PAGE_PREVIEW_QUERY_PARAM]: true,
 					},
 				});
-				navigateToAbsoluteOrRelativeUrl(path, navigateFunc, LinkTarget.Blank);
+				navigateToAbsoluteOrRelativeUrl(path, LinkTarget.Blank);
 			}
 		} else {
 			showToast({
@@ -384,7 +387,7 @@ export const ContentPageDetail: FC<ContentPageDetailProps> = ({
 					const url = buildLink(AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_DETAIL'), {
 						id: englishPageId,
 					});
-					navigate(navigateFunc, url);
+					navigate(url);
 				}
 				break;
 			}

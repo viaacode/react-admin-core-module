@@ -10,11 +10,9 @@ import { Link } from '~modules/shared/components/Link/Link';
 import { Loader } from '~shared/components/Loader/Loader';
 import { buildLink, navigate } from '~shared/helpers/link';
 import { tHtml, tText } from '~shared/helpers/translation-functions';
-import { AdminLayout } from '~shared/layouts/AdminLayout/AdminLayout';
 import type { NavigationItem, NavigationOverviewTableCols } from '../navigation.types';
 
 export const NavigationBarOverview: FunctionComponent = () => {
-	const navigateFunc = AdminConfigManager.getConfig().services.router.navigateFunc;
 	const {
 		data: navigationItems,
 		isLoading: isLoadingNavigationItems,
@@ -44,13 +42,9 @@ export const NavigationBarOverview: FunctionComponent = () => {
 						<Button
 							icon={'eye' as IconName}
 							onClick={() =>
-								navigate(
-									navigateFunc,
-									AdminConfigManager.getAdminRoute('ADMIN_NAVIGATION_DETAIL'),
-									{
-										navigationBarId: placement,
-									}
-								)
+								navigate(AdminConfigManager.getAdminRoute('ADMIN_NAVIGATION_DETAIL'), {
+									navigationBarId: placement,
+								})
 							}
 							size="small"
 							title={tText(
@@ -64,13 +58,9 @@ export const NavigationBarOverview: FunctionComponent = () => {
 						<Button
 							icon={'plus' as IconName}
 							onClick={() =>
-								navigate(
-									navigateFunc,
-									AdminConfigManager.getAdminRoute('ADMIN_NAVIGATION_ITEM_CREATE'),
-									{
-										navigationBarId: placement,
-									}
-								)
+								navigate(AdminConfigManager.getAdminRoute('ADMIN_NAVIGATION_ITEM_CREATE'), {
+									navigationBarId: placement,
+								})
 							}
 							size="small"
 							title={tText(
@@ -105,21 +95,16 @@ export const NavigationBarOverview: FunctionComponent = () => {
 		}
 
 		const columns = GET_NAVIGATION_OVERVIEW_TABLE_COLS();
-		const title = tText('admin/menu/views/menu-overview___navigatie-overzicht');
 		return (
-			<AdminLayout pageTitle={title}>
-				<AdminLayout.Content>
-					<Table
-						columns={columns}
-						data={navigationItems}
-						renderCell={(rowData: Partial<NavigationItem>, columnId: string) =>
-							renderTableCell(rowData, columnId as NavigationOverviewTableCols)
-						}
-						rowKey="id"
-						variant="bordered"
-					/>
-				</AdminLayout.Content>
-			</AdminLayout>
+			<Table
+				columns={columns}
+				data={navigationItems}
+				renderCell={(rowData: Partial<NavigationItem>, columnId: string) =>
+					renderTableCell(rowData, columnId as NavigationOverviewTableCols)
+				}
+				rowKey="id"
+				variant="bordered"
+			/>
 		);
 	};
 

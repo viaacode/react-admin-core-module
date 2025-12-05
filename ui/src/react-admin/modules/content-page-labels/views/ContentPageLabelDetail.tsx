@@ -11,6 +11,7 @@ import { LoadingErrorLoadedComponent } from '~shared/components/LoadingErrorLoad
 import { CustomError } from '~shared/helpers/custom-error';
 import { isMultiLanguageEnabled } from '~shared/helpers/is-multi-language-enabled';
 import { buildLink, navigateToContentType } from '~shared/helpers/link';
+import { navigateFunc } from '~shared/helpers/navigate-fnc';
 import {
 	renderDateDetailRows,
 	renderDetailRow,
@@ -31,7 +32,6 @@ export const ContentPageLabelDetail: FunctionComponent<ContentPageLabelDetailPro
 	className,
 }) => {
 	// Hooks
-	const navigateFunc = AdminConfigManager.getConfig().services.router.navigateFunc;
 	const [contentPageLabelInfo, setContentPageLabelInfo] = useState<ContentPageLabel | null>(null);
 	const [loadingInfo, setLoadingInfo] = useState<LoadingInfo>({ state: 'loading' });
 
@@ -123,7 +123,7 @@ export const ContentPageLabelDetail: FunctionComponent<ContentPageLabelDetailPro
 							linkTo ? (
 								<Button
 									type="tertiary"
-									onClick={() => navigateToContentType(linkTo, navigateFunc)}
+									onClick={() => navigateToContentType(linkTo)}
 								>{`${labels[linkTo.type]} - ${decodeURIComponent(
 									String(linkTo.value)?.split('hetarchief.be')?.pop() || ''
 								)}`}</Button>
