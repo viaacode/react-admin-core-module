@@ -18,7 +18,7 @@ import { Link } from '~shared/components/Link/Link';
 import { GET_LANGUAGE_NAMES } from '~shared/consts/language-names';
 import { formatDate, formatDateString } from '~shared/helpers/formatters/date';
 import { isMultiLanguageEnabled } from '~shared/helpers/is-multi-language-enabled';
-import { buildLink } from '~shared/helpers/link';
+import { buildLink } from '~shared/helpers/routing/link';
 import {
 	renderDateDetailRows,
 	renderDetailRow,

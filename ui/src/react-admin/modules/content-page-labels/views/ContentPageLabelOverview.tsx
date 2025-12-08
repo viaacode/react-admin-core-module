@@ -34,7 +34,7 @@ import {
 } from '~shared/helpers/filters';
 import { formatDate } from '~shared/helpers/formatters/date';
 import { isMultiLanguageEnabled } from '~shared/helpers/is-multi-language-enabled';
-import { buildLink, navigate } from '~shared/helpers/link';
+import { buildLink, navigate } from '~shared/helpers/routing/link';
 import { tHtml, tText } from '~shared/helpers/translation-functions';
 import { truncateTableValue } from '~shared/helpers/truncate';
 import { AdminLayout } from '~shared/layouts/AdminLayout/AdminLayout';

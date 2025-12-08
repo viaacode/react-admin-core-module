@@ -22,7 +22,7 @@ import { Link } from '~modules/shared/components/Link/Link';
 import { ContentPicker } from '~shared/components/ContentPicker/ContentPicker';
 import { GET_DELETE_RADIO_OPTIONS } from '~shared/consts/user.const';
 import { CustomError } from '~shared/helpers/custom-error';
-import { buildLink } from '~shared/helpers/link';
+import { buildLink } from '~shared/helpers/routing/link';
 import { showToast } from '~shared/helpers/show-toast';
 import { tHtml, tText } from '~shared/helpers/translation-functions';
 import { AVO } from '~shared/types';

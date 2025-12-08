@@ -1,5 +1,5 @@
 import { isNil } from 'es-toolkit';
-import type { DateRange } from '../components/DateRangeDropdown/DateRangeDropdown';
+import type { DateRange } from '../../components/DateRangeDropdown/DateRangeDropdown';
 
 export interface QueryParamEncoderDecoder<T> {
 	encode: (value: T | undefined) => string | undefined;

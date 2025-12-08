@@ -22,9 +22,8 @@ import {
 } from '~modules/content-page/types/content-pages.types';
 import { Icon } from '~shared/components/Icon/Icon';
 import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner';
-import { ROUTE_PARTS } from '~shared/consts/routes';
 import { isAvo } from '~shared/helpers/is-avo';
-import { buildLink } from '~shared/helpers/link';
+import { buildLink } from '~shared/helpers/routing/link';
 import { tText } from '~shared/helpers/translation-functions';
 import { PermissionService } from '~shared/services/permission-service';
 import { SpecialUserGroups } from '~shared/types/authentication.types';
@@ -38,6 +37,9 @@ import {
 	CONTENT_PAGE_PREVIEW_QUERY_PARAM,
 	CONTENT_PAGE_USER_GROUP_ID_QUERY_PARAM,
 } from '~modules/content-page/components/ContentPageRenderer/ContentPageRenderer.consts';
+import { isAdminRoute } from '~shared/helpers/routing/is-admin-route';
+import { isContentPagePreview } from '~shared/helpers/routing/is-content-page-preview';
+import { isServerSideRendering } from '~shared/helpers/routing/is-server-side-rendering';
 
 type ContentPageDetailProps = {
 	contentPageInfo: Partial<ContentPageInfo>;
@@ -144,14 +146,15 @@ export const ContentPageRenderer: FunctionComponent<ContentPageDetailProps> = (p
 	};
 
 	const renderEditButton = () => {
-		const isAdminRoute = window.location.href.includes(ROUTE_PARTS.admin);
-		const pageInPreview = window.location.search.includes(`${CONTENT_PAGE_PREVIEW_QUERY_PARAM}=`);
+		if (isServerSideRendering()) {
+			return null;
+		}
 		const userCanEditPage = PermissionService.hasPerm(
 			props.commonUser,
 			PermissionName.EDIT_ANY_CONTENT_PAGES
 		);
 
-		if (isAdminRoute || pageInPreview || !userCanEditPage) {
+		if (isAdminRoute() || isContentPagePreview() || !userCanEditPage) {
 			return <></>;
 		}
 
@@ -259,20 +262,24 @@ export const ContentPageRenderer: FunctionComponent<ContentPageDetailProps> = (p
 		if (isNil(props.contentPageInfo.contentType)) {
 			return <div>Page with path {location.pathname} was not found</div>;
 		}
-		const queryParams = new URLSearchParams(window.location.search);
-		if (queryParams.get(CONTENT_PAGE_PREVIEW_QUERY_PARAM) === 'true') {
-			const userGroupId =
-				queryParams.get(CONTENT_PAGE_USER_GROUP_ID_QUERY_PARAM)?.split(',')[0] ||
-				String(props.commonUser?.userGroup?.id) ||
-				SpecialUserGroups.loggedOutUsers;
+		if (!isServerSideRendering()) {
+			// bOnly execute this if not serverside rendering
+			const queryParams = new URLSearchParams(window.location.search);
+			if (queryParams.get(CONTENT_PAGE_PREVIEW_QUERY_PARAM) === 'true') {
+				const userGroupId =
+					queryParams.get(CONTENT_PAGE_USER_GROUP_ID_QUERY_PARAM)?.split(',')[0] ||
+					String(props.commonUser?.userGroup?.id) ||
+					SpecialUserGroups.loggedOutUsers;
 
-			if (
-				!props.contentPageInfo.userGroupIds?.includes(userGroupId) &&
-				userGroupId !== SpecialUserGroups.allContent
-			) {
-				return props.renderNoAccessError();
+				if (
+					!props.contentPageInfo.userGroupIds?.includes(userGroupId) &&
+					userGroupId !== SpecialUserGroups.allContent
+				) {
+					return props.renderNoAccessError();
+				}
 			}
 		}
+
 		return renderContentPage();
 	};
 	return renderPage();

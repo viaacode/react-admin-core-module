@@ -4,10 +4,9 @@ import React, { type FC, useCallback, useEffect, useState } from 'react';
 
 import './BlockScrollDownNudge.scss';
 import { ROUTE_PARTS } from '~shared/consts/routes';
+import { isAdminRoute } from '~shared/helpers/routing/is-admin-route';
 
 export const BlockScrollDownNudge: FC = () => {
-	const isAdminRoute = window.location.href.includes(ROUTE_PARTS.admin);
-
 	const [visible, setVisible] = useState<boolean>(false);
 	const [sizing, setSizing] = useState<
 		| {
@@ -63,7 +62,7 @@ export const BlockScrollDownNudge: FC = () => {
 	return (
 		<div
 			className={clsx('c-nudge-scroll-down-wrapper', {
-				'c-nudge-scroll-down-wrapper--hidden': !isAdminRoute && !visible,
+				'c-nudge-scroll-down-wrapper--hidden': !isAdminRoute() && !visible,
 			})}
 			style={sizing || {}}
 		>

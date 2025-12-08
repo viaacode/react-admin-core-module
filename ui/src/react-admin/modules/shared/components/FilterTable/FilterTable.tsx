@@ -42,7 +42,7 @@ import { AdminConfigManager } from '~core/config';
 import { ErrorView } from '~shared/components/error/ErrorView';
 import { GET_FILTER_TABLE_QUERY_PARAM_CONFIG } from '~shared/components/FilterTable/FilterTable.const';
 import { GET_DEFAULT_PAGINATION_BAR_PROPS } from '~shared/components/PaginationBar/PaginationBar.consts';
-import { navigate } from '~shared/helpers/link';
+import { navigate } from '~shared/helpers/routing/link';
 import { navigateFunc } from '~shared/helpers/navigate-fnc';
 import { toggleSortOrder } from '~shared/helpers/toggle-sort-order';
 import { useGetTableColumnPreference } from '~shared/hooks/useGetTableColumnPreference';

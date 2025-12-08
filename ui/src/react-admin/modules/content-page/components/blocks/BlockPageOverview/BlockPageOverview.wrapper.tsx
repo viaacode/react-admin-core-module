@@ -20,7 +20,7 @@ import {
 	CheckboxListParam,
 	NumberParam,
 	StringParam,
-} from '~shared/helpers/query-string-converters';
+} from '~shared/helpers/routing/query-string-converters';
 import { tHtml, tText } from '~shared/helpers/translation-functions';
 import { useDebounce } from '~shared/hooks/useDebounce';
 

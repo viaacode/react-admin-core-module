@@ -6,7 +6,7 @@ import type {
 	BlockImageGridProps,
 	GridItem,
 } from '~content-blocks/BlockImageGrid/BlockImageGrid.types';
-import { defaultRenderLinkFunction } from '~shared/helpers/link';
+import { defaultRenderLinkFunction } from '~shared/helpers/routing/link';
 
 import './BlockImageGrid.scss';
 

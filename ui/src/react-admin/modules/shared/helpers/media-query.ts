@@ -1,4 +1,4 @@
-import { isServerSideRendering } from '~shared/helpers/is-server-side-rendering';
+import { isServerSideRendering } from '~shared/helpers/routing/is-server-side-rendering';
 
 export function isMobileWidth() {
 	if (isServerSideRendering()) {

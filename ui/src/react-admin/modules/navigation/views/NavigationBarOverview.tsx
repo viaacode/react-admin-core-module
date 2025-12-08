@@ -8,7 +8,7 @@ import { useGetNavigationBars } from '~modules/navigation/hooks/use-get-navigati
 import { GET_NAVIGATION_OVERVIEW_TABLE_COLS } from '~modules/navigation/navigation.consts';
 import { Link } from '~modules/shared/components/Link/Link';
 import { Loader } from '~shared/components/Loader/Loader';
-import { buildLink, navigate } from '~shared/helpers/link';
+import { buildLink, navigate } from '~shared/helpers/routing/link';
 import { tHtml, tText } from '~shared/helpers/translation-functions';
 import type { NavigationItem, NavigationOverviewTableCols } from '../navigation.types';
 

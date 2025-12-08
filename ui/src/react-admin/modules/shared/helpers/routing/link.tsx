@@ -6,13 +6,13 @@ import { isEmpty, map } from 'es-toolkit/compat';
 import { stringify } from 'query-string';
 import type { ReactNode } from 'react';
 import { AdminConfigManager } from '~core/config/config.class';
-import { type NavigateFunction, ToastType } from '~core/config/config.types';
+import { ToastType } from '~core/config/config.types';
 import { getAdminCoreApiUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config';
 import { navigateFunc } from '~shared/helpers/navigate-fnc';
 import { showToast } from '~shared/helpers/show-toast';
 import { tText } from '~shared/helpers/translation-functions';
-import { APP_PATH } from '../consts/routes.consts';
-import { insideIframe } from './inside-iframe';
+import { APP_PATH } from '../../consts/routes.consts';
+import { isInsideIframe } from './is-inside-iframe';
 
 type RouteParams = { [key: string]: string | number | undefined };
 
@@ -119,7 +119,7 @@ export const navigateToContentType = (action: ButtonAction) => {
 		const { type, value, target } = action;
 
 		let resolvedTarget = target;
-		if (insideIframe()) {
+		if (isInsideIframe()) {
 			// Klaar page inside smartschool iframe must open all links in new window: https://meemoo.atlassian.net/browse/AVO-1354
 			resolvedTarget = LinkTarget.Blank;
 		}

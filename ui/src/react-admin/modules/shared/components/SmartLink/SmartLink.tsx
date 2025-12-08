@@ -5,11 +5,11 @@ import { map } from 'es-toolkit/compat';
 import { stringify } from 'query-string';
 import type { FunctionComponent, ReactElement, ReactNode } from 'react';
 import React from 'react';
-import { AdminConfigManager } from '~core/config/index';
+import { AdminConfigManager } from '~core/config';
 import { getAdminCoreApiUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config';
-import { isServerSideRendering } from '~shared/helpers/is-server-side-rendering';
-import { buildLink } from '~shared/helpers/link';
-import { insideIframe } from '../../helpers/inside-iframe';
+import { isServerSideRendering } from '~shared/helpers/routing/is-server-side-rendering';
+import { buildLink } from '~shared/helpers/routing/link';
+import { isInsideIframe } from '../../helpers/routing/is-inside-iframe';
 import { Link } from '../Link/Link';
 import { LinkTarget } from './SmartLink.types';
 
@@ -130,7 +130,7 @@ export const SmartLink: FunctionComponent<SmartLinkProps> = ({
 			}
 
 			let resolvedTarget = target;
-			if (!isServerSideRendering() && insideIframe()) {
+			if (!isServerSideRendering() && isInsideIframe()) {
 				// Klaar page inside smartschool iframe must open all links in new window: https://meemoo.atlassian.net/browse/AVO-1354
 				resolvedTarget = LinkTarget.Blank;
 			}

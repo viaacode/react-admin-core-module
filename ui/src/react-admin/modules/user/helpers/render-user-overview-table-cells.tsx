@@ -13,7 +13,7 @@ import { Link } from '~shared/components/Link/Link';
 import { formatDateString } from '~shared/helpers/formatters/date';
 import { idpMapsToTagList } from '~shared/helpers/idps-to-taglist';
 import { isAvo } from '~shared/helpers/is-avo';
-import { buildLink } from '~shared/helpers/link';
+import { buildLink } from '~shared/helpers/routing/link';
 import { showToast } from '~shared/helpers/show-toast';
 import { stringsToTagList } from '~shared/helpers/strings-to-taglist';
 import { tHtml, tText } from '~shared/helpers/translation-functions';

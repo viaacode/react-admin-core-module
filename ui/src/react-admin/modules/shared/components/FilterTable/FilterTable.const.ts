@@ -6,7 +6,7 @@ import {
 	NumberParam,
 	type QueryParamEncoderDecoder,
 	StringParam,
-} from '../../helpers/query-string-converters';
+} from '../../helpers/routing/query-string-converters';
 import type { FilterableColumn } from './FilterTable';
 import { cleanupFilterTableState } from './FilterTable.utils';
 

@@ -13,7 +13,7 @@ import type { UserGroup } from '~modules/user-group/types/user-group.types';
 import { Icon } from '~shared/components/Icon/Icon';
 import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner';
 import { CustomError } from '~shared/helpers/custom-error';
-import { navigate } from '~shared/helpers/link';
+import { navigate } from '~shared/helpers/routing/link';
 import { navigateFunc } from '~shared/helpers/navigate-fnc';
 import { showToast } from '~shared/helpers/show-toast';
 import { tHtml, tText } from '~shared/helpers/translation-functions';

@@ -3,7 +3,7 @@ import { CTA } from '@viaa/avo2-components';
 import clsx from 'clsx';
 import type { FunctionComponent } from 'react';
 import React from 'react';
-import { defaultRenderLinkFunction } from '~shared/helpers/link';
+import { defaultRenderLinkFunction } from '~shared/helpers/routing/link';
 
 export interface BlockCTAsProps extends DefaultProps {
 	elements: CTAProps[];

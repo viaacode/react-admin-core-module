@@ -12,7 +12,7 @@ import { flatten } from 'es-toolkit';
 import type { FunctionComponent } from 'react';
 import React from 'react';
 import { Icon } from '~shared/components/Icon/Icon';
-import { defaultRenderLinkFunction } from '~shared/helpers/link';
+import { defaultRenderLinkFunction } from '~shared/helpers/routing/link';
 
 import './BlockButtons.scss';
 

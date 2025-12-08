@@ -9,7 +9,7 @@ import type {
 	ContentPageLabel,
 } from '~modules/content-page/types/content-pages.types';
 import { normalizeTimestamp } from '~shared/helpers/formatters/date';
-import { navigateToContentType } from '~shared/helpers/link';
+import { navigateToContentType } from '~shared/helpers/routing/link';
 import { tHtml } from '~shared/helpers/translation-functions';
 
 export interface ContentPageMetaProps {

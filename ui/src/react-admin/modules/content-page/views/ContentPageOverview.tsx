@@ -44,7 +44,7 @@ import {
 import { formatDateString } from '~shared/helpers/formatters/date';
 import { isAvo } from '~shared/helpers/is-avo';
 import { isHetArchief } from '~shared/helpers/is-hetarchief';
-import { buildLink, navigateToAbsoluteOrRelativeUrl } from '~shared/helpers/link';
+import { buildLink, navigateToAbsoluteOrRelativeUrl } from '~shared/helpers/routing/link';
 import { setSelectedCheckboxes } from '~shared/helpers/set-selected-checkboxes';
 import { showToast } from '~shared/helpers/show-toast';
 import { tHtml, tText } from '~shared/helpers/translation-functions';

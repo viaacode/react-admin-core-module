@@ -55,7 +55,7 @@ import { LoadingErrorLoadedComponent } from '~shared/components/LoadingErrorLoad
 import { CustomError } from '~shared/helpers/custom-error';
 import { stripHtml } from '~shared/helpers/formatters/strip-html';
 import { getProfileId } from '~shared/helpers/get-profile-id';
-import { navigate } from '~shared/helpers/link';
+import { navigate } from '~shared/helpers/routing/link';
 import { showToast } from '~shared/helpers/show-toast';
 import { tHtml, tText } from '~shared/helpers/translation-functions';
 import { AdminLayout } from '~shared/layouts/AdminLayout/AdminLayout';

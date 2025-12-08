@@ -26,7 +26,7 @@ import { createDropdownMenuItem } from '~shared/helpers/dropdown';
 import { renderAvatar } from '~shared/helpers/formatters/avatar';
 import { formatDateString } from '~shared/helpers/formatters/date';
 import { idpMapsToTagList } from '~shared/helpers/idps-to-taglist';
-import { buildLink, navigate } from '~shared/helpers/link';
+import { buildLink, navigate } from '~shared/helpers/routing/link';
 
 import {
 	renderDateDetailRows,

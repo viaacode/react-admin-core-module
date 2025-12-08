@@ -13,7 +13,7 @@ import React from 'react';
 import type { RichTextButton } from '~content-blocks/BlockRichText/BlockRichText.types';
 import Html from '~shared/components/Html/Html';
 import { Icon } from '~shared/components/Icon/Icon';
-import { defaultRenderLinkFunction } from '~shared/helpers/link';
+import { defaultRenderLinkFunction } from '~shared/helpers/routing/link';
 import { SanitizePreset } from '~shared/helpers/sanitize/presets';
 
 import './BlockRichText.scss';

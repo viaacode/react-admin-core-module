@@ -28,7 +28,7 @@ import type { FilterableColumn } from '~shared/components/FilterTable/FilterTabl
 import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner';
 import { CustomError } from '~shared/helpers/custom-error';
 import { isHetArchief } from '~shared/helpers/is-hetarchief';
-import { navigate } from '~shared/helpers/link';
+import { navigate } from '~shared/helpers/routing/link';
 import { setSelectedCheckboxes } from '~shared/helpers/set-selected-checkboxes';
 import { showToast } from '~shared/helpers/show-toast';
 import { tHtml, tText } from '~shared/helpers/translation-functions';
