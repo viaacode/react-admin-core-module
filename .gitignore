@@ -251,3 +251,5 @@ bundle-stats.html
 .graphqlconfig
 schema.graphql
 
+# git hooks
+/.husky
