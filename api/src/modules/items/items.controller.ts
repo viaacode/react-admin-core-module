@@ -1,11 +1,11 @@
-import { Controller, Get, Param, ParseIntPipe, Query } from '@nestjs/common'
-import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger'
-import type { Avo } from '@viaa/avo2-types'
-import { PermissionName } from '@viaa/avo2-types'
+import { Controller, Get, Param, ParseIntPipe, Query } from '@nestjs/common';
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import type { Avo } from '@viaa/avo2-types';
+import { PermissionName } from '@viaa/avo2-types';
 
-import { RequireAnyPermissions } from '../shared/decorators/require-any-permissions.decorator'
+import { RequireAnyPermissions } from '../shared/decorators/require-any-permissions.decorator';
 
-import { ItemsService } from './items.service'
+import { ItemsService } from './items.service';
 
 @ApiTags('Items')
 @Controller(process.env.ADMIN_CORE_ROUTES_PREFIX + '/items')
@@ -23,9 +23,9 @@ export class ItemsController {
 		@Query('titleOrExternalId') titleOrExternalId: string | undefined
 	): Promise<Avo.Item.Item[] | null> {
 		if (!titleOrExternalId) {
-			return this.itemsService.fetchPublicItems(limit)
+			return this.itemsService.fetchPublicItems(limit);
 		} else {
-			return this.itemsService.fetchPublicItemsByTitleOrExternalId(titleOrExternalId, limit)
+			return this.itemsService.fetchPublicItemsByTitleOrExternalId(titleOrExternalId, limit);
 		}
 	}
 
@@ -36,7 +36,7 @@ export class ItemsController {
 		@Query('subjectIds') subjectIds: string[],
 		@Query('relationType') relationType: Avo.Collection.RelationType
 	): Promise<Avo.Collection.RelationEntry<Avo.Item.Item | Avo.Collection.Collection>[]> {
-		return this.itemsService.fetchRelationsBySubject(type, subjectIds, relationType)
+		return this.itemsService.fetchRelationsBySubject(type, subjectIds, relationType);
 	}
 
 	// Allowed for all users
@@ -52,20 +52,19 @@ export class ItemsController {
 	public async fetchItemUuidByExternalId(
 		@Query('externalId') externalId: string
 	): Promise<string | null> {
-		return this.itemsService.fetchItemUuidByExternalId(externalId)
+		return this.itemsService.fetchItemUuidByExternalId(externalId);
 	}
 
 	@ApiOperation({ description: 'Get one media item by externalId or uuid' })
 	@ApiResponse({
 		status: 200,
-		description:
-			'Returns the item that was requested, throws an error if the item was not found',
+		description: 'Returns the item that was requested, throws an error if the item was not found',
 		isArray: false,
 	})
 	@Get(':id')
 	public async fetchItemByUuidOrExternalId(
 		@Param('id') id: string
 	): Promise<Partial<Avo.Item.Item>> {
-		return this.itemsService.fetchItemOrReplacement(id)
+		return this.itemsService.fetchItemOrReplacement(id);
 	}
 }

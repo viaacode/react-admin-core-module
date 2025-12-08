@@ -1,6 +1,6 @@
-import { Avo, PermissionName } from '@viaa/avo2-types'
+import { Avo, PermissionName } from '@viaa/avo2-types';
 
-import { type Locale } from './modules'
+import { type Locale } from './modules';
 
 export function getMockUserAvo(): Avo.User.User {
 	return {
@@ -16,7 +16,8 @@ export function getMockUserAvo(): Avo.User.User {
 			alias: 'bert_verhelst',
 			title: 'Developer1',
 			alternative_email: 'verhelstbert@gmail.comaaaaaaa',
-			avatar: 'https://assets-qas.hetarchief.be//avo2/PROFILE_AVATAR/bert-359813c0-3b43-11ed-937e-adfb7fd0632b.jpg',
+			avatar:
+				'https://assets-qas.hetarchief.be//avo2/PROFILE_AVATAR/bert-359813c0-3b43-11ed-937e-adfb7fd0632b.jpg',
 			created_at: '2019-10-23T16:22:47.543339+00:00',
 			stamboek: '',
 			bio: 'Ik ben een developer bij Studio Hyperdrive',
@@ -193,7 +194,7 @@ export function getMockUserAvo(): Avo.User.User {
 				idp_user_id: '4d2b556cd6bffa86869507455afb0ee7329f41f2',
 			},
 		],
-	} as Avo.User.User
+	} as Avo.User.User;
 }
 
 export function getMockUserHetArchief(): Avo.User.HetArchiefUser {
@@ -202,7 +203,7 @@ export function getMockUserHetArchief(): Avo.User.HetArchiefUser {
 		// id: 'd285a546-b42b-4fb3-bfa7-ef8be9208bc0',
 		// LOCAL DB
 		id: '04e902a8-86e1-4dfa-b9d4-d2db1d772fa1',
-			fullName: 'meemoo Admin',
+		fullName: 'meemoo Admin',
 		firstName: 'meemoo',
 		lastName: 'Admin',
 		email: 'hetarchief2.0+bztmeemooadmin@meemoo.be',
@@ -211,42 +212,42 @@ export function getMockUserHetArchief(): Avo.User.HetArchiefUser {
 		groupId: '0b281484-76cd-45a9-b6ce-68a0ea7f4b26',
 		groupName: 'MEEMOO_ADMIN',
 		permissions: [
-		PermissionName.APPROVE_DENY_ALL_VISIT_REQUESTS,
-		PermissionName.CANCEL_OWN_VISIT_REQUEST,
-		PermissionName.CREATE_CONTENT_PAGES,
-		PermissionName.CREATE_SPACES,
-		PermissionName.CREATE_VISIT_REQUEST,
-		PermissionName.DELETE_ANY_CONTENT_PAGES,
-		PermissionName.EDIT_ALL_SPACES_STATUS,
-		PermissionName.EDIT_ANY_CONTENT_PAGES,
-		PermissionName.EDIT_CONTENT_PAGE_AUTHOR,
-		PermissionName.EDIT_CONTENT_PAGE_LABELS,
-		PermissionName.EDIT_NAVIGATION_BARS,
-		PermissionName.EDIT_PERMISSION_GROUPS,
-		PermissionName.EDIT_PROTECTED_PAGE_STATUS,
-		PermissionName.EDIT_TRANSLATIONS,
-		PermissionName.EDIT_USER_GROUPS,
-		PermissionName.EXPORT_OBJECT,
-		PermissionName.MANAGE_ACCOUNT,
-		PermissionName.MANAGE_FOLDERS,
-		PermissionName.PUBLISH_ANY_CONTENT_PAGE,
-		PermissionName.READ_ALL_SPACES,
-		PermissionName.READ_ALL_VISIT_REQUESTS,
-		PermissionName.READ_PERSONAL_APPROVED_VISIT_REQUESTS,
-		PermissionName.SEARCH_ALL_OBJECTS,
-		PermissionName.SEARCH_OBJECTS,
-		PermissionName.UNPUBLISH_ANY_CONTENT_PAGE,
-		PermissionName.UPDATE_ALL_SPACES,
-		PermissionName.VIEW_ADMIN_DASHBOARD,
-		PermissionName.VIEW_ANY_MAINTENANCE_ALERTS,
-		PermissionName.CREATE_MATERIAL_REQUESTS,
-		PermissionName.DELETE_OWN_MATERIAL_REQUESTS,
-		PermissionName.EDIT_OWN_MATERIAL_REQUESTS,
-		PermissionName.VIEW_ANY_MATERIAL_REQUESTS,
-		PermissionName.VIEW_OWN_MATERIAL_REQUESTS,
-		PermissionName.VIEW_USERS,
-		PermissionName.CAN_EDIT_PROFILE_INFO,
-	],
+			PermissionName.APPROVE_DENY_ALL_VISIT_REQUESTS,
+			PermissionName.CANCEL_OWN_VISIT_REQUEST,
+			PermissionName.CREATE_CONTENT_PAGES,
+			PermissionName.CREATE_SPACES,
+			PermissionName.CREATE_VISIT_REQUEST,
+			PermissionName.DELETE_ANY_CONTENT_PAGES,
+			PermissionName.EDIT_ALL_SPACES_STATUS,
+			PermissionName.EDIT_ANY_CONTENT_PAGES,
+			PermissionName.EDIT_CONTENT_PAGE_AUTHOR,
+			PermissionName.EDIT_CONTENT_PAGE_LABELS,
+			PermissionName.EDIT_NAVIGATION_BARS,
+			PermissionName.EDIT_PERMISSION_GROUPS,
+			PermissionName.EDIT_PROTECTED_PAGE_STATUS,
+			PermissionName.EDIT_TRANSLATIONS,
+			PermissionName.EDIT_USER_GROUPS,
+			PermissionName.EXPORT_OBJECT,
+			PermissionName.MANAGE_ACCOUNT,
+			PermissionName.MANAGE_FOLDERS,
+			PermissionName.PUBLISH_ANY_CONTENT_PAGE,
+			PermissionName.READ_ALL_SPACES,
+			PermissionName.READ_ALL_VISIT_REQUESTS,
+			PermissionName.READ_PERSONAL_APPROVED_VISIT_REQUESTS,
+			PermissionName.SEARCH_ALL_OBJECTS,
+			PermissionName.SEARCH_OBJECTS,
+			PermissionName.UNPUBLISH_ANY_CONTENT_PAGE,
+			PermissionName.UPDATE_ALL_SPACES,
+			PermissionName.VIEW_ADMIN_DASHBOARD,
+			PermissionName.VIEW_ANY_MAINTENANCE_ALERTS,
+			PermissionName.CREATE_MATERIAL_REQUESTS,
+			PermissionName.DELETE_OWN_MATERIAL_REQUESTS,
+			PermissionName.EDIT_OWN_MATERIAL_REQUESTS,
+			PermissionName.VIEW_ANY_MATERIAL_REQUESTS,
+			PermissionName.VIEW_OWN_MATERIAL_REQUESTS,
+			PermissionName.VIEW_USERS,
+			PermissionName.CAN_EDIT_PROFILE_INFO,
+		],
 		idp: Avo.Auth.IdpType.HETARCHIEF as any, // Definitions of Idp enum in different repos cause typescript to be confused and not recognize them as the same type
 		isKeyUser: false,
 		lastAccessAt: '2023-04-04T18:51:03.032+02:00',
@@ -255,5 +256,5 @@ export function getMockUserHetArchief(): Avo.User.HetArchiefUser {
 		maintainerId: 'OR-w66976m',
 		organisationId: null,
 		sector: null,
-	}
+	};
 }

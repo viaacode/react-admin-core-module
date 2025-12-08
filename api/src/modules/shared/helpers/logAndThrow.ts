@@ -1,9 +1,9 @@
-import { type InternalServerErrorException } from '@nestjs/common'
+import { type InternalServerErrorException } from '@nestjs/common';
 
 export function logAndThrow(err: InternalServerErrorException): never {
-	console.error(err)
+	console.error(err);
 	throw {
 		...err,
 		innerException: undefined,
-	}
+	};
 }

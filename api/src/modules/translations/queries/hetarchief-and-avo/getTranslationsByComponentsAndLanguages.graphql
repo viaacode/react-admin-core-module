@@ -2,9 +2,7 @@ query getTranslationsByComponentsAndLanguages(
 	$components: [String!]!
 	$languageCodes: [lookup_languages_enum!]!
 ) {
-	app_translations(
-		where: { component: { _in: $components }, language: { _in: $languageCodes } }
-	) {
+	app_translations(where: { component: { _in: $components }, language: { _in: $languageCodes } }) {
 		component
 		key
 		language

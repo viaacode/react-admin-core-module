@@ -1,9 +1,9 @@
-import { forwardRef, Module } from '@nestjs/common'
+import { forwardRef, Module } from '@nestjs/common';
 
-import { DataModule } from '../data'
+import { DataModule } from '../data';
 
-import { ContentPageLabelsController } from './controllers/content-page-labels.controller'
-import { ContentPageLabelsService } from './services/content-page-labels.service'
+import { ContentPageLabelsController } from './controllers/content-page-labels.controller';
+import { ContentPageLabelsService } from './services/content-page-labels.service';
 
 @Module({
 	controllers: [ContentPageLabelsController],

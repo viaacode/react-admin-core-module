@@ -18,4 +18,4 @@ export const USER_GROUP_ORDER = [
 	'eindredacteur',
 	'medewerker meemoo',
 	'beheerder',
-]
+];

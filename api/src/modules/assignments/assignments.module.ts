@@ -1,8 +1,8 @@
-import { forwardRef, Module } from '@nestjs/common'
+import { forwardRef, Module } from '@nestjs/common';
 
-import { DataModule } from '../data'
-import { AssignmentsController } from './assignments.controller'
-import { AssignmentsService } from './assignments.service'
+import { DataModule } from '../data';
+import { AssignmentsController } from './assignments.controller';
+import { AssignmentsService } from './assignments.service';
 
 @Module({
 	controllers: [AssignmentsController],

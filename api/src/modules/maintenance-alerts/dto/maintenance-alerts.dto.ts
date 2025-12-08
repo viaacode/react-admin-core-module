@@ -1,10 +1,10 @@
-import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger'
-import { Type } from 'class-transformer'
-import { IsArray, IsNumber, IsOptional, IsString } from 'class-validator'
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { Type } from 'class-transformer';
+import { IsArray, IsNumber, IsOptional, IsString } from 'class-validator';
 
-import { SortDirection } from '../../shared/types'
-import { Locale } from '../../translations'
-import { MaintenanceAlertOrderProp, MaintenanceAlertType } from '../maintenance-alerts.types'
+import { SortDirection } from '../../shared/types';
+import { Locale } from '../../translations';
+import { MaintenanceAlertOrderProp, MaintenanceAlertType } from '../maintenance-alerts.types';
 
 export class MaintenanceAlertsQueryDto {
 	@IsNumber()
@@ -15,7 +15,7 @@ export class MaintenanceAlertsQueryDto {
 		description: 'Which page of results to fetch. Counting starts at 1',
 		default: 1,
 	})
-	page? = 1
+	page? = 1;
 
 	@IsNumber()
 	@Type(() => Number)
@@ -25,7 +25,7 @@ export class MaintenanceAlertsQueryDto {
 		description: 'The max. number of results to return',
 		default: 10,
 	})
-	size? = 10
+	size? = 10;
 
 	@IsString()
 	@Type(() => String)
@@ -36,7 +36,7 @@ export class MaintenanceAlertsQueryDto {
 		default: 'createdAt',
 		enum: MaintenanceAlertOrderProp,
 	})
-	orderProp? = MaintenanceAlertOrderProp.FROM_DATE
+	orderProp? = MaintenanceAlertOrderProp.FROM_DATE;
 
 	@IsString()
 	@Type(() => String)
@@ -47,7 +47,7 @@ export class MaintenanceAlertsQueryDto {
 		default: SortDirection.desc,
 		enum: [SortDirection.asc, SortDirection.desc],
 	})
-	orderDirection? = SortDirection.desc
+	orderDirection? = SortDirection.desc;
 
 	@IsString()
 	@Type(() => String)
@@ -56,7 +56,7 @@ export class MaintenanceAlertsQueryDto {
 		type: String,
 		description: 'Search term to search for in the maintenance alerts',
 	})
-	searchTerm?: string
+	searchTerm?: string;
 
 	@IsString()
 	@Type(() => String)
@@ -65,7 +65,7 @@ export class MaintenanceAlertsQueryDto {
 		type: String,
 		description: 'comma separated list of languages to filter the maintenance alerts by',
 	})
-	languages?: string
+	languages?: string;
 }
 
 export class CreateMaintenanceAlertDto {
@@ -76,7 +76,7 @@ export class CreateMaintenanceAlertDto {
 		description: 'The title of the maintenance alert',
 		example: 'Gepland onderhoud',
 	})
-	title: string
+	title: string;
 
 	@IsString()
 	@Type(() => String)
@@ -85,7 +85,7 @@ export class CreateMaintenanceAlertDto {
 		description: 'The message of the maintenance alert',
 		example: 'Opgelet! Tussen 25 en 27 februari plannen we een onderhoud aan Het archief.',
 	})
-	message: string
+	message: string;
 
 	@IsString()
 	@ApiProperty({
@@ -95,7 +95,7 @@ export class CreateMaintenanceAlertDto {
 			'The type of the maintenance alert, mainly used to determine the icon/styling that should be shown in the UI',
 		example: 'alert',
 	})
-	type: MaintenanceAlertType
+	type: MaintenanceAlertType;
 
 	@IsArray()
 	@IsString({ each: true })
@@ -105,7 +105,7 @@ export class CreateMaintenanceAlertDto {
 		description: 'The title of the maintenance alert',
 		example: ['1a1bd2fa-535d-49e3-8a1d-3d8564edafff'],
 	})
-	userGroups: string[]
+	userGroups: string[];
 
 	@IsString()
 	@Type(() => String)
@@ -114,7 +114,7 @@ export class CreateMaintenanceAlertDto {
 		description: 'The start date the maintenance alert should be shown',
 		example: '2022-02-25T16:36:06.045845',
 	})
-	fromDate: string
+	fromDate: string;
 
 	@IsString()
 	@Type(() => String)
@@ -123,7 +123,7 @@ export class CreateMaintenanceAlertDto {
 		description: 'The end date the maintenance alert should be shown',
 		example: '2022-02-27T16:36:06.045845',
 	})
-	untilDate: string
+	untilDate: string;
 
 	@IsString()
 	@Type(() => String)
@@ -132,7 +132,7 @@ export class CreateMaintenanceAlertDto {
 		description: 'Language of the maintenance alert',
 		enum: Locale,
 	})
-	language: Locale
+	language: Locale;
 }
 
 export class UpdateMaintenanceAlertDto {
@@ -144,7 +144,7 @@ export class UpdateMaintenanceAlertDto {
 		description: 'The title of the maintenance alert',
 		example: 'Gepland onderhoud',
 	})
-	title?: string
+	title?: string;
 
 	@IsString()
 	@Type(() => String)
@@ -154,7 +154,7 @@ export class UpdateMaintenanceAlertDto {
 		description: 'The message of the maintenance alert',
 		example: 'Opgelet! Tussen 25 en 27 februari plannen we een onderhoud aan Het archief.',
 	})
-	message?: string
+	message?: string;
 
 	@IsString()
 	@ApiPropertyOptional({
@@ -164,7 +164,7 @@ export class UpdateMaintenanceAlertDto {
 			'The type of the maintenance alert, mainly used to determine the icon/styling that should be shown in the UI',
 		example: 'alert',
 	})
-	type: MaintenanceAlertType
+	type: MaintenanceAlertType;
 
 	@IsArray()
 	@IsString({ each: true })
@@ -175,7 +175,7 @@ export class UpdateMaintenanceAlertDto {
 		description: 'The title of the maintenance alert',
 		example: ['1a1bd2fa-535d-49e3-8a1d-3d8564edafff'],
 	})
-	userGroups?: string[]
+	userGroups?: string[];
 
 	@IsString()
 	@Type(() => String)
@@ -185,7 +185,7 @@ export class UpdateMaintenanceAlertDto {
 		description: 'The start date the maintenance alert should be shown',
 		example: '2022-02-25T16:36:06.045845',
 	})
-	fromDate?: string
+	fromDate?: string;
 
 	@IsString()
 	@Type(() => String)
@@ -195,7 +195,7 @@ export class UpdateMaintenanceAlertDto {
 		description: 'The end date the maintenance alert should be shown',
 		example: '2022-02-27T16:36:06.045845',
 	})
-	untilDate?: string
+	untilDate?: string;
 
 	@IsString()
 	@Type(() => String)
@@ -204,5 +204,5 @@ export class UpdateMaintenanceAlertDto {
 		description: 'Language of the maintenance alert',
 		enum: Locale,
 	})
-	language: Locale
+	language: Locale;
 }

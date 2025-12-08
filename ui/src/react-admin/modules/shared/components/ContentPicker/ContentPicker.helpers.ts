@@ -1,9 +1,5 @@
 import type { Avo } from '@viaa/avo2-types';
-import type {
-	PickerItem,
-	PickerItemControls,
-	PickerTypeOption,
-} from '../../types/content-picker';
+import type { PickerItem, PickerItemControls, PickerTypeOption } from '../../types/content-picker';
 
 export function filterTypes(
 	types: PickerTypeOption[],

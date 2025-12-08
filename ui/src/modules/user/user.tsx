@@ -26,7 +26,11 @@ const UserDetailPage: FC = () => {
 		return null;
 	}
 	return (
-		<UserDetail id={userId} commonUser={getMockCommonUser()} onGoBack={() => window.history.back()} />
+		<UserDetail
+			id={userId}
+			commonUser={getMockCommonUser()}
+			onGoBack={() => window.history.back()}
+		/>
 	);
 };
 

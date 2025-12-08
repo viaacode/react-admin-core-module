@@ -1,11 +1,11 @@
-import { Test, type TestingModule } from '@nestjs/testing'
+import { Test, type TestingModule } from '@nestjs/testing';
 
-import { DataService } from '../../data'
-import { SpecialPermissionGroups } from '../../shared/types/types'
-import { Locale } from '../../translations'
-import { type NavigationQueryTypes } from '../queries/navigation.queries'
+import { DataService } from '../../data';
+import { SpecialPermissionGroups } from '../../shared/types/types';
+import { Locale } from '../../translations';
+import { type NavigationQueryTypes } from '../queries/navigation.queries';
 
-import { AdminNavigationsService } from './admin-navigations.service'
+import { AdminNavigationsService } from './admin-navigations.service';
 
 const mockNavigationElement1 = {
 	content_path: '/gebruiksvoorwaarden',
@@ -23,14 +23,14 @@ const mockNavigationElement1 = {
 	content_id: null,
 	language: Locale.Nl,
 	tooltip: null,
-}
+};
 
 const mockDataService = {
 	execute: jest.fn(),
-}
+};
 
 describe('NavigationsService', () => {
-	let navigationsService: AdminNavigationsService
+	let navigationsService: AdminNavigationsService;
 
 	beforeEach(async () => {
 		const module: TestingModule = await Test.createTestingModule({
@@ -41,36 +41,36 @@ describe('NavigationsService', () => {
 					useValue: mockDataService,
 				},
 			],
-		}).compile()
+		}).compile();
 
-		navigationsService = module.get<AdminNavigationsService>(AdminNavigationsService)
-	})
+		navigationsService = module.get<AdminNavigationsService>(AdminNavigationsService);
+	});
 
 	it('services should be defined', () => {
-		expect(navigationsService).toBeDefined()
-	})
+		expect(navigationsService).toBeDefined();
+	});
 
 	it('should adapt navigation to client side object', () => {
-		const navigationInfo = navigationsService.adapt(mockNavigationElement1)
-		expect(navigationInfo).toBeDefined()
-		expect(navigationInfo.id).toEqual(mockNavigationElement1.id)
-		expect(navigationInfo.contentPath).toEqual(mockNavigationElement1.content_path)
-	})
+		const navigationInfo = navigationsService.adapt(mockNavigationElement1);
+		expect(navigationInfo).toBeDefined();
+		expect(navigationInfo.id).toEqual(mockNavigationElement1.id);
+		expect(navigationInfo.contentPath).toEqual(mockNavigationElement1.content_path);
+	});
 
 	it('returns a paginated response with all navigations by placement', async () => {
 		const mockData: NavigationQueryTypes['GetNavigationItemsByPlacementQueryHetArchief'] = {
 			app_navigation: [
 				mockNavigationElement1,
 			] as NavigationQueryTypes['GetNavigationItemsByPlacementQueryHetArchief']['app_navigation'],
-		}
-		mockDataService.execute.mockResolvedValueOnce({ data: mockData })
+		};
+		mockDataService.execute.mockResolvedValueOnce({ data: mockData });
 		const response = await navigationsService.findNavigationBarItemsByPlacementId(
 			mockNavigationElement1.placement,
 			[Locale.Nl]
-		)
-		expect(response.length).toBe(1)
-		expect(response[0].placement).toEqual(mockNavigationElement1.placement)
-	})
+		);
+		expect(response.length).toBe(1);
+		expect(response[0].placement).toEqual(mockNavigationElement1.placement);
+	});
 
 	describe('findById', () => {
 		it('returns a single navigation', async () => {
@@ -78,30 +78,30 @@ describe('NavigationsService', () => {
 				app_navigation: [
 					mockNavigationElement1,
 				] as NavigationQueryTypes['GetNavigationItemByIdQueryHetArchief']['app_navigation'],
-			}
-			mockDataService.execute.mockResolvedValueOnce({ data: mockData })
-			const response = await navigationsService.findElementById(mockNavigationElement1.id)
-			expect(response.id).toBe(mockNavigationElement1.id)
-		})
+			};
+			mockDataService.execute.mockResolvedValueOnce({ data: mockData });
+			const response = await navigationsService.findElementById(mockNavigationElement1.id);
+			expect(response.id).toBe(mockNavigationElement1.id);
+		});
 
 		it('throws a notfoundexception if the navigation was not found', async () => {
 			const mockData: NavigationQueryTypes['GetNavigationItemByIdQuery'] = {
 				app_navigation:
 					[] as NavigationQueryTypes['GetNavigationItemByIdQueryHetArchief']['app_navigation'],
-			}
-			mockDataService.execute.mockResolvedValueOnce({ data: mockData })
-			let error
+			};
+			mockDataService.execute.mockResolvedValueOnce({ data: mockData });
+			let error;
 			try {
-				await navigationsService.findElementById('unknown-id')
+				await navigationsService.findElementById('unknown-id');
 			} catch (e) {
-				error = e
+				error = e;
 			}
 			expect(error.response).toEqual({
 				message: 'Not Found',
 				statusCode: 404,
-			})
-		})
-	})
+			});
+		});
+	});
 
 	describe('create', () => {
 		it('can create a new navigation', async () => {
@@ -110,19 +110,19 @@ describe('NavigationsService', () => {
 					id: '1',
 					icon_name: 'plus',
 				} as NavigationQueryTypes['InsertNavigationItemMutationHetArchief']['insert_app_navigation_one'],
-			}
-			mockDataService.execute.mockResolvedValueOnce({ data: mockData })
+			};
+			mockDataService.execute.mockResolvedValueOnce({ data: mockData });
 			const response = await navigationsService.insertElement({
 				label: 'test-create-nav',
 				iconName: 'plus',
 				placement: 'footer-links',
 				position: 1,
 				language: Locale.Nl,
-			})
-			expect(response.id).toBe('1')
-			expect(response.iconName).toBe('plus')
-		})
-	})
+			});
+			expect(response.id).toBe('1');
+			expect(response.iconName).toBe('plus');
+		});
+	});
 
 	describe('update', () => {
 		it('can update an existing navigation', async () => {
@@ -131,19 +131,19 @@ describe('NavigationsService', () => {
 					id: '1',
 					icon_name: 'plus',
 				} as NavigationQueryTypes['UpdateNavigationItemByIdMutationHetArchief']['update_app_navigation_by_pk'],
-			}
-			mockDataService.execute.mockResolvedValueOnce({ data: mockData })
+			};
+			mockDataService.execute.mockResolvedValueOnce({ data: mockData });
 			const response = await navigationsService.updateElement('1', {
 				label: 'test-create-nav',
 				iconName: 'plus',
 				placement: 'footer-links',
 				position: 1,
 				language: Locale.Nl,
-			})
-			expect(response.id).toBe('1')
-			expect(response.iconName).toBe('plus')
-		})
-	})
+			});
+			expect(response.id).toBe('1');
+			expect(response.iconName).toBe('plus');
+		});
+	});
 
 	describe('delete', () => {
 		it('can delete a navigation', async () => {
@@ -151,10 +151,10 @@ describe('NavigationsService', () => {
 				delete_app_navigation: {
 					affected_rows: 1,
 				},
-			}
-			mockDataService.execute.mockResolvedValueOnce({ data: mockData })
-			const response = await navigationsService.deleteElement('1')
-			expect(response.affectedRows).toBe(1)
-		})
-	})
-})
+			};
+			mockDataService.execute.mockResolvedValueOnce({ data: mockData });
+			const response = await navigationsService.deleteElement('1');
+			expect(response.affectedRows).toBe(1);
+		});
+	});
+});

@@ -1,9 +1,9 @@
-import { forwardRef, Module } from '@nestjs/common'
+import { forwardRef, Module } from '@nestjs/common';
 
-import { DataModule } from '../data'
+import { DataModule } from '../data';
 
-import { TableColumnPreferencesService } from './services/table-column-preferences.service'
-import { TableColumnPreferencesController } from './table-column-preferences.controller'
+import { TableColumnPreferencesService } from './services/table-column-preferences.service';
+import { TableColumnPreferencesController } from './table-column-preferences.controller';
 
 @Module({
 	controllers: [TableColumnPreferencesController],

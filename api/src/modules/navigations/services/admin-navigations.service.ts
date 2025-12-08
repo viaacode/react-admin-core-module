@@ -1,17 +1,17 @@
-import { forwardRef, Inject, Injectable, NotFoundException } from '@nestjs/common'
-import { compact } from 'lodash'
+import { forwardRef, Inject, Injectable, NotFoundException } from '@nestjs/common';
+import { compact } from 'lodash';
 
-import { DataService } from '../../data'
-import { getDatabaseType } from '../../shared/helpers/get-database-type'
-import { DeleteResponse } from '../../shared/types/types'
-import { Locale } from '../../translations'
-import { CreateNavigationDto } from '../dto/navigations.dto'
-import { LinkTarget, NavigationItem } from '../navigations.types'
+import { DataService } from '../../data';
+import { getDatabaseType } from '../../shared/helpers/get-database-type';
+import { DeleteResponse } from '../../shared/types/types';
+import { Locale } from '../../translations';
+import { CreateNavigationDto } from '../dto/navigations.dto';
+import { LinkTarget, NavigationItem } from '../navigations.types';
 import {
 	NAVIGATION_QUERIES,
 	NavigationEntry,
 	NavigationQueryTypes,
-} from '../queries/navigation.queries'
+} from '../queries/navigation.queries';
 
 @Injectable()
 export class AdminNavigationsService {
@@ -34,7 +34,7 @@ export class AdminNavigationsService {
 			updatedAt: navigationEntry?.updated_at,
 			createdAt: navigationEntry?.created_at,
 			userGroupIds: navigationEntry?.user_group_ids?.map((groupId) => String(groupId)),
-		}
+		};
 	}
 
 	public adaptToDbFormat(navigationItem: Partial<NavigationItem>): NavigationEntry {
@@ -54,7 +54,7 @@ export class AdminNavigationsService {
 			updated_at: navigationItem?.updatedAt,
 			created_at: navigationItem?.createdAt,
 			user_group_ids: navigationItem?.userGroupIds?.map((groupId) => String(groupId)),
-		}
+		};
 	}
 
 	public async insertElement(navigationItem: CreateNavigationDto): Promise<NavigationItem> {
@@ -63,14 +63,14 @@ export class AdminNavigationsService {
 			NavigationQueryTypes['InsertNavigationItemMutationVariables']
 		>(NAVIGATION_QUERIES[getDatabaseType()].InsertNavigationItemDocument, {
 			navigationItem: this.adaptToDbFormat(navigationItem),
-		})
+		});
 
 		return this.adapt(
 			(response as NavigationQueryTypes['InsertNavigationItemMutationAvo'])
 				.insert_app_content_nav_elements_one ||
 				(response as NavigationQueryTypes['InsertNavigationItemMutationHetArchief'])
 					.insert_app_navigation_one
-		)
+		);
 	}
 
 	public async updateElement(
@@ -83,14 +83,14 @@ export class AdminNavigationsService {
 		>(NAVIGATION_QUERIES[getDatabaseType()].UpdateNavigationItemByIdDocument, {
 			id,
 			navigationItem: this.adaptToDbFormat(navigationItem),
-		})
+		});
 
 		return this.adapt(
 			(response as NavigationQueryTypes['InsertNavigationItemMutationAvo'])
 				.insert_app_content_nav_elements_one ||
 				(response as NavigationQueryTypes['InsertNavigationItemMutationHetArchief'])
 					.insert_app_navigation_one
-		)
+		);
 	}
 
 	public async deleteElement(id: string): Promise<DeleteResponse> {
@@ -99,7 +99,7 @@ export class AdminNavigationsService {
 			NavigationQueryTypes['DeleteNavigationItemMutationVariables']
 		>(NAVIGATION_QUERIES[getDatabaseType()].DeleteNavigationItemDocument, {
 			id,
-		})
+		});
 
 		return {
 			affectedRows:
@@ -108,13 +108,13 @@ export class AdminNavigationsService {
 				(response as NavigationQueryTypes['DeleteNavigationItemMutationHetArchief'])
 					.delete_app_navigation?.affected_rows ||
 				0,
-		}
+		};
 	}
 
 	public async findNavigationBars(): Promise<NavigationItem[]> {
 		const navigationsResponse = await this.dataService.execute<
 			NavigationQueryTypes['GetNavigationBarsQuery']
-		>(NAVIGATION_QUERIES[getDatabaseType()].GetNavigationBarsDocument)
+		>(NAVIGATION_QUERIES[getDatabaseType()].GetNavigationBarsDocument);
 
 		return (
 			(navigationsResponse as NavigationQueryTypes['GetNavigationBarsQueryAvo'])
@@ -122,7 +122,7 @@ export class AdminNavigationsService {
 			(navigationsResponse as NavigationQueryTypes['GetNavigationBarsQueryHetArchief'])
 				.app_navigation ||
 			[]
-		).map(this.adapt)
+		).map(this.adapt);
 	}
 
 	public async findNavigationBarItemsByPlacementId(
@@ -134,21 +134,17 @@ export class AdminNavigationsService {
 	): Promise<NavigationItem[]> {
 		let navigationsResponse:
 			| NavigationQueryTypes['GetNavigationItemsByPlacementAndLanguageQuery']
-			| NavigationQueryTypes['GetNavigationItemsByPlacementQuery']
+			| NavigationQueryTypes['GetNavigationItemsByPlacementQuery'];
 
 		if (languages?.length) {
 			navigationsResponse = await this.dataService.execute<
 				NavigationQueryTypes['GetNavigationItemsByPlacementAndLanguageQuery'],
 				NavigationQueryTypes['GetNavigationItemsByPlacementAndLanguageQueryVariables']
-			>(
-				NAVIGATION_QUERIES[getDatabaseType()]
-					.GetNavigationItemsByPlacementAndLanguageDocument,
-				{
-					placement,
-					languages,
-					orderBy: { [orderProperty]: orderDirection },
-				}
-			)
+			>(NAVIGATION_QUERIES[getDatabaseType()].GetNavigationItemsByPlacementAndLanguageDocument, {
+				placement,
+				languages,
+				orderBy: { [orderProperty]: orderDirection },
+			});
 		} else {
 			navigationsResponse = await this.dataService.execute<
 				NavigationQueryTypes['GetNavigationItemsByPlacementQuery'],
@@ -156,26 +152,25 @@ export class AdminNavigationsService {
 			>(NAVIGATION_QUERIES[getDatabaseType()].GetNavigationItemsByPlacementDocument, {
 				placement,
 				orderBy: { [orderProperty]: orderDirection },
-			})
+			});
 		}
 
 		const navItems = (
 			(navigationsResponse as NavigationQueryTypes['GetNavigationItemsByPlacementQueryAvo'])
 				.app_content_nav_elements ||
-			(
-				navigationsResponse as NavigationQueryTypes['GetNavigationItemsByPlacementQueryHetArchief']
-			).app_navigation ||
+			(navigationsResponse as NavigationQueryTypes['GetNavigationItemsByPlacementQueryHetArchief'])
+				.app_navigation ||
 			[]
-		).map(this.adapt)
+		).map(this.adapt);
 
 		if (!searchTerm) {
-			return navItems
+			return navItems;
 		}
 
 		return navItems.filter((item) => {
-			const searchTermLower = searchTerm.toLowerCase()
-			return item.label?.toLowerCase().includes(searchTermLower)
-		})
+			const searchTermLower = searchTerm.toLowerCase();
+			return item.label?.toLowerCase().includes(searchTermLower);
+		});
 	}
 
 	public async findAllNavigationBarItems(language?: Locale): Promise<NavigationItem[]> {
@@ -184,7 +179,7 @@ export class AdminNavigationsService {
 			NavigationQueryTypes['GetAllNavigationItemsQueryVariables']
 		>(NAVIGATION_QUERIES[process.env.DATABASE_APPLICATION_TYPE].GetAllNavigationItemsDocument, {
 			languages: compact([language]),
-		})
+		});
 
 		return (
 			(navigationsResponse as NavigationQueryTypes['GetAllNavigationItemsQueryAvo'])
@@ -192,7 +187,7 @@ export class AdminNavigationsService {
 			(navigationsResponse as NavigationQueryTypes['GetAllNavigationItemsQueryHetArchief'])
 				.app_navigation ||
 			[]
-		).map(this.adapt)
+		).map(this.adapt);
 	}
 
 	public async findElementById(id: string | number): Promise<NavigationItem> {
@@ -201,20 +196,20 @@ export class AdminNavigationsService {
 			NavigationQueryTypes['GetNavigationItemByIdQueryVariables']
 		>(NAVIGATION_QUERIES[getDatabaseType()].GetNavigationItemByIdDocument, {
 			id,
-		})
+		});
 		const item =
 			(navigationResponse as NavigationQueryTypes['GetNavigationItemByIdQueryAvo'])
 				?.app_content_nav_elements?.[0] ||
 			(navigationResponse as NavigationQueryTypes['GetNavigationItemByIdQueryHetArchief'])
-				?.app_navigation?.[0]
+				?.app_navigation?.[0];
 
 		if (!item) {
 			throw new NotFoundException({
 				message: 'Item with id was not found',
 				additionalInfo: { id },
-			})
+			});
 		}
 
-		return this.adapt(item)
+		return this.adapt(item);
 	}
 }

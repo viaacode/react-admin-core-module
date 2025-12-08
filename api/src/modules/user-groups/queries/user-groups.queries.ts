@@ -1,5 +1,5 @@
-import { type TypedDocumentNode } from '@graphql-typed-document-node/core'
-import { DatabaseType } from '@viaa/avo2-types'
+import { type TypedDocumentNode } from '@graphql-typed-document-node/core';
+import { DatabaseType } from '@viaa/avo2-types';
 
 import {
 	GetUserGroupsDocument as GetUserGroupsDocumentAvo,
@@ -11,7 +11,7 @@ import {
 	UpdateUserGroupsPermissionsDocument as UpdateUserGroupsPermissionsDocumentAvo,
 	type UpdateUserGroupsPermissionsMutation as UpdateUserGroupsPermissionsMutationAvo,
 	type UpdateUserGroupsPermissionsMutationVariables as UpdateUserGroupsPermissionsMutationVariablesAvo,
-} from '../../shared/generated/graphql-db-types-avo'
+} from '../../shared/generated/graphql-db-types-avo';
 import {
 	GetUserGroupsDocument as GetUserGroupsDocumentHetArchief,
 	GetUserGroupsPermissionsDocument as GetUserGroupsPermissionsDocumentHetArchief,
@@ -22,49 +22,49 @@ import {
 	UpdateUserGroupsPermissionsDocument as UpdateUserGroupsPermissionsDocumentHetArchief,
 	type UpdateUserGroupsPermissionsMutation as UpdateUserGroupsPermissionsMutationHetArchief,
 	type UpdateUserGroupsPermissionsMutationVariables as UpdateUserGroupsPermissionsMutationVariablesHetArchief,
-} from '../../shared/generated/graphql-db-types-hetarchief'
+} from '../../shared/generated/graphql-db-types-hetarchief';
 
 export type UserGroupQueryTypes = {
-	GetUserGroupsPermissionsQueryAvo: GetUserGroupsPermissionsQueryAvo
-	GetUserGroupsPermissionsQueryHetArchief: GetUserGroupsPermissionsQueryHetArchief
+	GetUserGroupsPermissionsQueryAvo: GetUserGroupsPermissionsQueryAvo;
+	GetUserGroupsPermissionsQueryHetArchief: GetUserGroupsPermissionsQueryHetArchief;
 	GetUserGroupsPermissionsQuery:
 		| GetUserGroupsPermissionsQueryAvo
-		| GetUserGroupsPermissionsQueryHetArchief
+		| GetUserGroupsPermissionsQueryHetArchief;
 
-	GetUserGroupsPermissionsQueryVariablesAvo: GetUserGroupsPermissionsQueryVariablesAvo
-	GetUserGroupsPermissionsQueryVariablesHetArchief: GetUserGroupsPermissionsQueryVariablesHetArchief
+	GetUserGroupsPermissionsQueryVariablesAvo: GetUserGroupsPermissionsQueryVariablesAvo;
+	GetUserGroupsPermissionsQueryVariablesHetArchief: GetUserGroupsPermissionsQueryVariablesHetArchief;
 	GetUserGroupsPermissionsQueryVariables:
 		| GetUserGroupsPermissionsQueryVariablesAvo
-		| GetUserGroupsPermissionsQueryVariablesHetArchief
+		| GetUserGroupsPermissionsQueryVariablesHetArchief;
 
-	GetUserGroupsQueryAvo: GetUserGroupsQueryAvo
-	GetUserGroupsQueryHetArchief: GetUserGroupsQueryHetArchief
-	GetUserGroupsQuery: GetUserGroupsQueryAvo | GetUserGroupsQueryHetArchief
+	GetUserGroupsQueryAvo: GetUserGroupsQueryAvo;
+	GetUserGroupsQueryHetArchief: GetUserGroupsQueryHetArchief;
+	GetUserGroupsQuery: GetUserGroupsQueryAvo | GetUserGroupsQueryHetArchief;
 
-	GetUserGroupsQueryVariablesAvo: GetUserGroupsQueryVariablesAvo
-	GetUserGroupsQueryVariablesHetArchief: GetUserGroupsQueryVariablesHetArchief
+	GetUserGroupsQueryVariablesAvo: GetUserGroupsQueryVariablesAvo;
+	GetUserGroupsQueryVariablesHetArchief: GetUserGroupsQueryVariablesHetArchief;
 	GetUserGroupsQueryVariables:
 		| GetUserGroupsQueryVariablesAvo
-		| GetUserGroupsQueryVariablesHetArchief
+		| GetUserGroupsQueryVariablesHetArchief;
 
-	UpdateUserGroupsPermissionsMutationAvo: UpdateUserGroupsPermissionsMutationAvo
-	UpdateUserGroupsPermissionsMutationHetArchief: UpdateUserGroupsPermissionsMutationHetArchief
+	UpdateUserGroupsPermissionsMutationAvo: UpdateUserGroupsPermissionsMutationAvo;
+	UpdateUserGroupsPermissionsMutationHetArchief: UpdateUserGroupsPermissionsMutationHetArchief;
 	UpdateUserGroupsPermissionsMutation:
 		| UpdateUserGroupsPermissionsMutationAvo
-		| UpdateUserGroupsPermissionsMutationHetArchief
+		| UpdateUserGroupsPermissionsMutationHetArchief;
 
-	UpdateUserGroupsPermissionsMutationVariablesAvo: UpdateUserGroupsPermissionsMutationVariablesAvo
-	UpdateUserGroupsPermissionsMutationVariablesHetArchief: UpdateUserGroupsPermissionsMutationVariablesHetArchief
+	UpdateUserGroupsPermissionsMutationVariablesAvo: UpdateUserGroupsPermissionsMutationVariablesAvo;
+	UpdateUserGroupsPermissionsMutationVariablesHetArchief: UpdateUserGroupsPermissionsMutationVariablesHetArchief;
 	UpdateUserGroupsPermissionsMutationVariables:
 		| UpdateUserGroupsPermissionsMutationVariablesAvo
-		| UpdateUserGroupsPermissionsMutationVariablesHetArchief
-}
+		| UpdateUserGroupsPermissionsMutationVariablesHetArchief;
+};
 
 type UserGroupsQueries = {
-	GetUserGroupsDocument: TypedDocumentNode<any, any>
-	GetUserGroupsPermissionsDocument: TypedDocumentNode<any, any>
-	UpdateUserGroupsPermissionsDocument: TypedDocumentNode<any, any>
-}
+	GetUserGroupsDocument: TypedDocumentNode<any, any>;
+	GetUserGroupsPermissionsDocument: TypedDocumentNode<any, any>;
+	UpdateUserGroupsPermissionsDocument: TypedDocumentNode<any, any>;
+};
 
 export const USER_GROUP_QUERIES: Record<DatabaseType, UserGroupsQueries> = {
 	[DatabaseType.avo]: {
@@ -77,4 +77,4 @@ export const USER_GROUP_QUERIES: Record<DatabaseType, UserGroupsQueries> = {
 		GetUserGroupsDocument: GetUserGroupsDocumentHetArchief,
 		UpdateUserGroupsPermissionsDocument: UpdateUserGroupsPermissionsDocumentHetArchief,
 	},
-}
+};

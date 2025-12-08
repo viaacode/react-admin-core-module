@@ -1,9 +1,9 @@
-import { ApiPropertyOptional } from '@nestjs/swagger'
-import { Transform } from 'class-transformer'
-import { IsArray, IsOptional, IsString } from 'class-validator'
+import { ApiPropertyOptional } from '@nestjs/swagger';
+import { Transform } from 'class-transformer';
+import { IsArray, IsOptional, IsString } from 'class-validator';
 
-import { commaSeparatedStringToArray } from '../../shared/helpers/comma-separated-string-to-array'
-import { type ContentPageType, ContentPageTypeValues } from '../content-pages.types'
+import { commaSeparatedStringToArray } from '../../shared/helpers/comma-separated-string-to-array';
+import { type ContentPageType, ContentPageTypeValues } from '../content-pages.types';
 
 export class ContentLabelsRequestDto {
 	@IsString()
@@ -14,7 +14,7 @@ export class ContentLabelsRequestDto {
 		).join(', ')}]`,
 		default: ContentPageTypeValues.Pagina,
 	})
-	contentType: ContentPageType
+	contentType: ContentPageType;
 
 	@IsArray()
 	@IsOptional()
@@ -25,7 +25,7 @@ export class ContentLabelsRequestDto {
 		required: false,
 		example: ['1a1bd2fa-535d-49e3-8a1d-3d8564edafff'],
 	})
-	labelIds?: string[]
+	labelIds?: string[];
 
 	@IsArray()
 	@IsOptional()
@@ -36,5 +36,5 @@ export class ContentLabelsRequestDto {
 		required: false,
 		example: ['Aanmelden'],
 	})
-	labels?: string[]
+	labels?: string[];
 }

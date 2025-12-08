@@ -1,25 +1,25 @@
-import { randomUUID as uuid } from 'node:crypto'
-import { Sha256 } from '@aws-crypto/sha256-js'
-import { HeadObjectCommandOutput, S3 } from '@aws-sdk/client-s3'
+import { randomUUID as uuid } from 'node:crypto';
+import { Sha256 } from '@aws-crypto/sha256-js';
+import { HeadObjectCommandOutput, S3 } from '@aws-sdk/client-s3';
 import {
 	forwardRef,
 	Inject,
 	Injectable,
 	InternalServerErrorException,
 	Logger,
-} from '@nestjs/common'
-import { Cron } from '@nestjs/schedule'
-import { NodeHttpHandler } from '@smithy/node-http-handler'
-import { HttpRequest } from '@smithy/protocol-http'
-import { SignatureV4 } from '@smithy/signature-v4'
-import { AssetType } from '@viaa/avo2-types'
-import { mapLimit } from 'blend-promise-utils'
-import fse from 'fs-extra'
-import got, { ExtendOptions, Got } from 'got'
-import { Agent as HttpsAgent } from 'https'
-import { escapeRegExp, isNil, kebabCase } from 'lodash'
-import path from 'path'
-import { DataService } from 'src/modules/data/services/data.service'
+} from '@nestjs/common';
+import { Cron } from '@nestjs/schedule';
+import { NodeHttpHandler } from '@smithy/node-http-handler';
+import { HttpRequest } from '@smithy/protocol-http';
+import { SignatureV4 } from '@smithy/signature-v4';
+import { AssetType } from '@viaa/avo2-types';
+import { mapLimit } from 'blend-promise-utils';
+import fse from 'fs-extra';
+import got, { ExtendOptions, Got } from 'got';
+import { Agent as HttpsAgent } from 'https';
+import { escapeRegExp, isNil, kebabCase } from 'lodash';
+import path from 'path';
+import { DataService } from 'src/modules/data/services/data.service';
 import {
 	GetContentAssetDocument,
 	GetContentAssetQuery,
@@ -30,20 +30,20 @@ import {
 	UpdateContentAssetDocument,
 	UpdateContentAssetMutation,
 	UpdateContentAssetMutationVariables,
-} from '../../shared/generated/graphql-db-types-hetarchief'
-import { CustomError } from '../../shared/helpers/error'
-import { EXTENSION_TO_MIME_TYPE } from '../assets.consts'
-import { AssetToken } from '../assets.types'
+} from '../../shared/generated/graphql-db-types-hetarchief';
+import { CustomError } from '../../shared/helpers/error';
+import { EXTENSION_TO_MIME_TYPE } from '../assets.consts';
+import { AssetToken } from '../assets.types';
 
-export const UUID_LENGTH = 35
+export const UUID_LENGTH = 35;
 
 @Injectable()
 export class AssetsService {
-	private logger: Logger = new Logger(AssetsService.name, { timestamp: true })
-	private token: AssetToken
+	private logger: Logger = new Logger(AssetsService.name, { timestamp: true });
+	private token: AssetToken;
 
-	private gotInstance: Got
-	private s3: S3
+	private gotInstance: Got;
+	private s3: S3;
 
 	constructor(@Inject(forwardRef(() => DataService)) protected dataService: DataService) {
 		const gotOptions: ExtendOptions = {
@@ -56,15 +56,15 @@ export class AssetsService {
 				'cache-control': 'no-cache',
 				'X-User-Secret-Key-Meta': process.env.ASSET_SERVER_TOKEN_SECRET,
 			},
-		}
-		this.gotInstance = got.extend(gotOptions)
+		};
+		this.gotInstance = got.extend(gotOptions);
 	}
 
 	@Cron('0 4 * * *')
 	public async emptyUploadFolder(): Promise<boolean> {
 		try {
-			await fse.emptyDir(process.env.TEMP_ASSET_FOLDER)
-			this.logger.log(`CRON: upload folder '${process.env.TEMP_ASSET_FOLDER}' emptied`)
+			await fse.emptyDir(process.env.TEMP_ASSET_FOLDER);
+			this.logger.log(`CRON: upload folder '${process.env.TEMP_ASSET_FOLDER}' emptied`);
 		} catch (err) {
 			this.logger.error(
 				new CustomError(
@@ -72,23 +72,23 @@ export class AssetsService {
 					err,
 					{}
 				)
-			)
-			return false
+			);
+			return false;
 		}
 
-		return true
+		return true;
 	}
 
 	private async getValidToken(): Promise<{ accessKeyId: string; secretAccessKey: string }> {
-		const tokenExpiry = new Date(this.token?.expiration).getTime()
-		const now = new Date().getTime()
-		const fiveMinutes = 5 * 60 * 1000
+		const tokenExpiry = new Date(this.token?.expiration).getTime();
+		const now = new Date().getTime();
+		const fiveMinutes = 5 * 60 * 1000;
 		if (!this.token || tokenExpiry - fiveMinutes < now) {
 			// Take 5 minutes margin, to ensure we get a new token well before it expires
 			try {
 				this.token = await this.gotInstance.post<AssetToken>('', {
 					resolveBodyOnly: true, // this is duplicate but fixes a typing error
-				})
+				});
 			} catch (err: any) {
 				throw new InternalServerErrorException({
 					message: 'Failed to get s3 token for the asset service',
@@ -98,15 +98,15 @@ export class AssetsService {
 						status: err?.status,
 						statusCode: err?.statusCode,
 						error: err?.error,
-						body: err?.response?.body
+						body: err?.response?.body,
 					},
-				})
+				});
 			}
 		}
 		return {
 			accessKeyId: this.token.token,
 			secretAccessKey: this.token.secret,
-		}
+		};
 	}
 
 	/**
@@ -135,7 +135,7 @@ export class AssetsService {
 				keepAlive: true,
 				maxSockets: 50,
 				timeout: 30000, // socket timeout
-			})
+			});
 			this.s3 = new S3({
 				credentials: await this.getValidToken(),
 
@@ -149,15 +149,15 @@ export class AssetsService {
 					connectionTimeout: 5000, // time to establish TCP connection (ms)
 					requestTimeout: 10000, // time to wait for data once connected (ms)
 				}),
-			})
+			});
 
-			return this.s3
+			return this.s3;
 		} catch (err) {
 			throw new InternalServerErrorException({
 				message: 'Failed to get s3 client',
 				innerException: err,
 				token: this.token,
-			})
+			});
 		}
 	}
 
@@ -166,22 +166,22 @@ export class AssetsService {
 	 */
 	public async metadata(key: string): Promise<HeadObjectCommandOutput | null> {
 		try {
-			const s3Client: S3 = await this.getS3Client()
+			const s3Client: S3 = await this.getS3Client();
 			return await s3Client.headObject({
 				Key: key,
 				Bucket: process.env.ASSET_SERVER_BUCKET_NAME as string,
-			})
+			});
 		} catch (err: any) {
 			if (err && ['NotFound', 'Forbidden'].includes(err.name)) {
-				return null
+				return null;
 			} else if (err) {
 				const error = new InternalServerErrorException({
 					message: 'Failed to get metadata of object on the asset service',
 					innerException: err,
 					additionalInfo: { s3Key: key },
-				})
-				console.error(error)
-				throw error
+				});
+				console.error(error);
+				throw error;
 			}
 			const error = new InternalServerErrorException({
 				message: 'Failed to get metadata of object on the asset service',
@@ -189,9 +189,9 @@ export class AssetsService {
 				additionalInfo: {
 					key,
 				},
-			})
-			console.error(error)
-			throw error
+			});
+			console.error(error);
+			throw error;
 		}
 	}
 
@@ -201,14 +201,14 @@ export class AssetsService {
 		ownerId: string,
 		preferredKey?: string
 	): Promise<string> {
-		const url = await this.upload(assetFiletype, file, preferredKey)
-		const contentAsset = await this.getAssetEntryFromDb(url)
+		const url = await this.upload(assetFiletype, file, preferredKey);
+		const contentAsset = await this.getAssetEntryFromDb(url);
 		if (contentAsset) {
-			await this.updateAssetEntryInDb(ownerId, assetFiletype, url)
+			await this.updateAssetEntryInDb(ownerId, assetFiletype, url);
 		} else {
-			await this.addAssetEntryToDb(ownerId, assetFiletype, url)
+			await this.addAssetEntryToDb(ownerId, assetFiletype, url);
 		}
-		return url
+		return url;
 	}
 
 	private async upload(
@@ -216,27 +216,27 @@ export class AssetsService {
 		file: any,
 		preferredKey?: string
 	): Promise<string> {
-		const parsedFilename = path.parse(file.originalname)
+		const parsedFilename = path.parse(file.originalname);
 		const key = `${assetFiletype}/${
 			preferredKey ?? `${kebabCase(parsedFilename.name)}-${uuid()}${parsedFilename.ext}`
-		}`
+		}`;
 
-		return this.uploadToObjectStore(key, file)
+		return this.uploadToObjectStore(key, file);
 	}
 
 	public async uploadToObjectStore(key: string, file: any): Promise<string> {
 		try {
-			let fileBody: Buffer
+			let fileBody: Buffer;
 			if (file.buffer) {
-				fileBody = file.buffer
+				fileBody = file.buffer;
 			} else {
-				fileBody = await fse.readFile(file.path)
+				fileBody = await fse.readFile(file.path);
 			}
 
-			const region = 'eu-west-1'
-			const endpoint = process.env.ASSET_SERVER_ENDPOINT as string
-			const bucket = process.env.ASSET_SERVER_BUCKET_NAME as string
-			const { accessKeyId, secretAccessKey } = await this.getValidToken()
+			const region = 'eu-west-1';
+			const endpoint = process.env.ASSET_SERVER_ENDPOINT as string;
+			const bucket = process.env.ASSET_SERVER_BUCKET_NAME as string;
+			const { accessKeyId, secretAccessKey } = await this.getValidToken();
 
 			/**
 			 * Something causes the putObject to hang when using the assets service from the proxy
@@ -261,18 +261,18 @@ export class AssetsService {
 					// No authorization headers yet, we'll add them by signing
 				},
 				body: fileBody,
-			})
+			});
 
 			const signer = new SignatureV4({
 				credentials: { accessKeyId, secretAccessKey },
 				region,
 				service: 's3', // "s3" is important here
 				sha256: Sha256,
-			})
+			});
 
-			const signed = await signer.sign(httpRequest)
+			const signed = await signer.sign(httpRequest);
 
-			const uploadUrl = `${signed.hostname}${signed.path}`
+			const uploadUrl = `${signed.hostname}${signed.path}`;
 
 			await got.put(uploadUrl, {
 				body: signed.body,
@@ -281,7 +281,7 @@ export class AssetsService {
 					...signed.headers,
 					'x-amz-acl': 'public-read',
 				},
-			})
+			});
 
 			if (!file.buffer) {
 				fse.unlink(file.path)?.catch((err) =>
@@ -289,21 +289,21 @@ export class AssetsService {
 						message: 'Failed to remove file from tmp folder after upload to s3',
 						innerException: err,
 					})
-				)
+				);
 			}
 
-			const url = new URL(process.env.ASSET_SERVER_ENDPOINT)
-			url.pathname = (process.env.ASSET_SERVER_BUCKET_NAME as string) + '/' + key
-			return url.href
+			const url = new URL(process.env.ASSET_SERVER_ENDPOINT);
+			url.pathname = (process.env.ASSET_SERVER_BUCKET_NAME as string) + '/' + key;
+			return url.href;
 		} catch (err) {
 			const error = {
 				message: 'Failed to upload asset to the s3 asset service',
 				error: err,
-			}
-			this.logger.error(error)
+			};
+			this.logger.error(error);
 			throw new InternalServerErrorException(
 				JSON.stringify(error, null, process.env.SINGLE_LINE_LOGGING === 'true' ? 0 : 2)
-			)
+			);
 		}
 	}
 
@@ -316,7 +316,7 @@ export class AssetsService {
 	 * @param url
 	 */
 	public getKeyFromUrl(url: string): string | null {
-		return url.split(`/${process.env.ASSET_SERVER_BUCKET_NAME as string}/`).pop() || null
+		return url.split(`/${process.env.ASSET_SERVER_BUCKET_NAME as string}/`).pop() || null;
 	}
 
 	/**
@@ -330,24 +330,24 @@ export class AssetsService {
 	public getUrlFromKey(key: string): string {
 		return `${process.env.ASSET_SERVER_ENDPOINT as string}/${
 			process.env.ASSET_SERVER_BUCKET_NAME as string
-		}/${key}`
+		}/${key}`;
 	}
 
 	public async delete(url: string): Promise<boolean> {
 		try {
-			const s3Client: S3 = await this.getS3Client()
+			const s3Client: S3 = await this.getS3Client();
 			await s3Client.deleteObject({
 				Key: url.split(`/${process.env.ASSET_SERVER_BUCKET_NAME}/`).pop(),
 				Bucket: process.env.ASSET_SERVER_BUCKET_NAME,
-			})
-			return true
+			});
+			return true;
 		} catch (err) {
 			const error = new InternalServerErrorException({
 				message: 'Failed to delete asset from S3',
 				error: err,
-			})
-			this.logger.error(error)
-			throw error
+			});
+			this.logger.error(error);
+			throw error;
 		}
 	}
 
@@ -357,9 +357,9 @@ export class AssetsService {
 		ownerId: string,
 		copyKey?: string
 	): Promise<string> {
-		const copiedUrl = await this.copy(url, copyKey)
-		await this.addAssetEntryToDb(ownerId, assetFiletype, copiedUrl)
-		return copiedUrl
+		const copiedUrl = await this.copy(url, copyKey);
+		await this.addAssetEntryToDb(ownerId, assetFiletype, copiedUrl);
+		return copiedUrl;
 	}
 
 	/**
@@ -368,29 +368,29 @@ export class AssetsService {
 	 * @param copyKey the name of the copied file, if not passed, an uuid will be appended to the original file name
 	 */
 	private async copy(url: string, copyKey?: string | undefined): Promise<string> {
-		const bucket = process.env.ASSET_SERVER_BUCKET_NAME as string
-		let newKey: string | null = null
-		let key: string | null = null
+		const bucket = process.env.ASSET_SERVER_BUCKET_NAME as string;
+		let newKey: string | null = null;
+		let key: string | null = null;
 		try {
-			const s3Client: S3 = await this.getS3Client()
-			key = this.getKeyFromUrl(url)
+			const s3Client: S3 = await this.getS3Client();
+			key = this.getKeyFromUrl(url);
 			if (!key) {
 				throw new InternalServerErrorException({
 					message:
 						'Failed to copy file at url, because we failed to extract the file path from the url after the bucket location',
 					innerException: null,
 					additionalInfo: { bucketName: bucket, url },
-				})
+				});
 			}
-			const newId = uuid()
-			const parts = path.parse(key)
+			const newId = uuid();
+			const parts = path.parse(key);
 			newKey =
 				copyKey ||
 				parts.dir +
 					'/' +
 					parts.name.substring(0, parts.name.length - UUID_LENGTH) +
 					newId +
-					parts.ext
+					parts.ext;
 
 			if (url.includes(process.env.ASSET_SERVER_ENDPOINT)) {
 				// Asset is located on the same asset server as the current environment (eg: copy content block from QAS content page to content page on QAS)
@@ -399,18 +399,18 @@ export class AssetsService {
 					Key: newKey,
 					Bucket: bucket,
 					CopySource: `${bucket}/${key}`,
-				})
+				});
 			} else {
 				// Asset is located on a different asset server than the current environment (eg: copy content block from PRD content page to content page on QAS)
 				// Download the asset and upload it again to the asset service of this environment
-				const response = await got.get(url).buffer()
+				const response = await got.get(url).buffer();
 				await s3Client.putObject({
 					Key: newKey,
 					Bucket: bucket,
 					Body: response,
-				})
+				});
 			}
-			return this.getUrlFromKey(newKey as string)
+			return this.getUrlFromKey(newKey as string);
 		} catch (err) {
 			const error = {
 				message: 'Failed to copy file on s3',
@@ -421,9 +421,9 @@ export class AssetsService {
 					bucket,
 					copySource: `${bucket}/${key}`,
 				},
-			}
-			console.error(JSON.stringify(error))
-			throw new InternalServerErrorException(error)
+			};
+			console.error(JSON.stringify(error));
+			throw new InternalServerErrorException(error);
 		}
 	}
 
@@ -432,23 +432,23 @@ export class AssetsService {
 		ownerId: string,
 		assetType: AssetType
 	): Promise<any> {
-		let jsonBlobString = JSON.stringify(jsonBlob)
+		let jsonBlobString = JSON.stringify(jsonBlob);
 		const assetUrlsRegex = new RegExp(
 			`(${process.env.ASSET_SERVER_ENDPOINTS_ALL_ENVS.split(',')
 				.map(escapeRegExp)
 				.join('|')})/${escapeRegExp(process.env.ASSET_SERVER_BUCKET_NAME)}/[^"\\\\]+`,
 			'g'
-		)
-		const urls = jsonBlobString.match(assetUrlsRegex)
+		);
+		const urls = jsonBlobString.match(assetUrlsRegex);
 
-		let newUrls: string[] = []
-		const failedUrls: string[] = []
+		let newUrls: string[] = [];
+		const failedUrls: string[] = [];
 		if (urls && !isNil(ownerId)) {
 			newUrls = await mapLimit(urls, 5, async (url: string) => {
 				try {
-					return await this.copyAndTrack(assetType, url, ownerId)
+					return await this.copyAndTrack(assetType, url, ownerId);
 				} catch (err) {
-					failedUrls.push(url)
+					failedUrls.push(url);
 					console.error(
 						JSON.stringify({
 							message: 'Failed to copy and track asset url',
@@ -457,14 +457,14 @@ export class AssetsService {
 								url,
 							},
 						})
-					)
-					return null
+					);
+					return null;
 				}
-			})
+			});
 
 			newUrls.forEach((newUrl: string, index: number) => {
-				jsonBlobString = jsonBlobString?.replace(urls[index], newUrl) || null
-			})
+				jsonBlobString = jsonBlobString?.replace(urls[index], newUrl) || null;
+			});
 		}
 
 		if (failedUrls.length > 0) {
@@ -474,10 +474,10 @@ export class AssetsService {
 				additionalInfo: {
 					failedUrls,
 				},
-			})
+			});
 		}
 
-		return JSON.parse(jsonBlobString)
+		return JSON.parse(jsonBlobString);
 	}
 
 	public async addAssetEntryToDb(ownerId: string, type: AssetType, url: string): Promise<void> {
@@ -487,34 +487,30 @@ export class AssetsService {
 			label: url,
 			description: null as string | null,
 			path: url,
-		}
-		await this.dataService.execute<
-			InsertContentAssetMutation,
-			InsertContentAssetMutationVariables
-		>(InsertContentAssetDocument, {
-			asset,
-		})
+		};
+		await this.dataService.execute<InsertContentAssetMutation, InsertContentAssetMutationVariables>(
+			InsertContentAssetDocument,
+			{
+				asset,
+			}
+		);
 	}
 
-	public async updateAssetEntryInDb(
-		ownerId: string,
-		type: AssetType,
-		url: string
-	): Promise<void> {
+	public async updateAssetEntryInDb(ownerId: string, type: AssetType, url: string): Promise<void> {
 		const asset = {
 			owner_id: ownerId,
 			content_asset_type_id: type,
 			label: url,
 			description: null as string | null,
 			path: url,
-		}
-		await this.dataService.execute<
-			UpdateContentAssetMutation,
-			UpdateContentAssetMutationVariables
-		>(UpdateContentAssetDocument, {
-			path: url,
-			asset,
-		})
+		};
+		await this.dataService.execute<UpdateContentAssetMutation, UpdateContentAssetMutationVariables>(
+			UpdateContentAssetDocument,
+			{
+				path: url,
+				asset,
+			}
+		);
 	}
 
 	public async getAssetEntryFromDb(
@@ -525,7 +521,7 @@ export class AssetsService {
 			GetContentAssetQueryVariables
 		>(GetContentAssetDocument, {
 			path: url,
-		})
-		return response.app_content_assets[0]
+		});
+		return response.app_content_assets[0];
 	}
 }

@@ -1,22 +1,22 @@
-import { forwardRef, Inject } from '@nestjs/common'
-import type { Avo } from '@viaa/avo2-types'
-import { isNil } from 'lodash'
+import { forwardRef, Inject } from '@nestjs/common';
+import type { Avo } from '@viaa/avo2-types';
+import { isNil } from 'lodash';
 
-import type { ContentPageLabel, ContentPageType, LabelObj } from '../../content-pages'
-import { DataService } from '../../data'
-import { customError } from '../../shared/helpers/custom-error'
-import { getDatabaseType } from '../../shared/helpers/get-database-type'
-import { isAvo } from '../../shared/helpers/is-avo'
-import type { ContentPageLabelOverviewTableCols } from '../content-page-labels.types'
+import type { ContentPageLabel, ContentPageType, LabelObj } from '../../content-pages';
+import { DataService } from '../../data';
+import { customError } from '../../shared/helpers/custom-error';
+import { getDatabaseType } from '../../shared/helpers/get-database-type';
+import { isAvo } from '../../shared/helpers/is-avo';
+import type { ContentPageLabelOverviewTableCols } from '../content-page-labels.types';
 import {
 	ContentPageLabelDto,
 	InsertContentPageLabelDto,
 	UpdateContentPageLabelDto,
-} from '../dto/content-page-label.dto'
+} from '../dto/content-page-label.dto';
 import {
 	CONTENT_PAGE_LABEL_QUERIES,
 	ContentPageLabelQueryTypes,
-} from '../queries/content-page-label.queries'
+} from '../queries/content-page-label.queries';
 
 export class ContentPageLabelsService {
 	constructor(@Inject(forwardRef(() => DataService)) protected dataService: DataService) {}
@@ -28,19 +28,18 @@ export class ContentPageLabelsService {
 		sortOrder: Avo.Search.OrderDirection,
 		where: any
 	): Promise<[ContentPageLabel[], number]> {
-		let variables: ContentPageLabelQueryTypes['GetContentPageLabelsQueryVariables'] | null =
-			null
+		let variables: ContentPageLabelQueryTypes['GetContentPageLabelsQueryVariables'] | null = null;
 		try {
 			variables = {
 				where,
 				offset,
 				limit,
 				orderBy: [{ [sortColumn]: sortOrder }],
-			}
+			};
 			const response = await this.dataService.execute<
 				ContentPageLabelQueryTypes['GetContentPageLabelsQuery'],
 				ContentPageLabelQueryTypes['GetContentPageLabelsQueryVariables']
-			>(CONTENT_PAGE_LABEL_QUERIES[getDatabaseType()].GetContentPageLabelsDocument, variables)
+			>(CONTENT_PAGE_LABEL_QUERIES[getDatabaseType()].GetContentPageLabelsDocument, variables);
 
 			/* istanbul ignore next */
 			const contentPageLabels: ContentPageLabel[] = (
@@ -59,43 +58,40 @@ export class ContentPageLabelsService {
 					created_at: labelObj?.created_at,
 					updated_at: labelObj?.updated_at,
 				})
-			)
+			);
 			const contentPageLabelCount: number =
 				(response as ContentPageLabelQueryTypes['GetContentPageLabelsQueryAvo'])
 					.app_content_labels_aggregate?.aggregate?.count ||
 				(response as ContentPageLabelQueryTypes['GetContentPageLabelsQueryHetArchief'])
 					.app_content_label_aggregate?.aggregate?.count ||
-				0
+				0;
 
 			if (!contentPageLabels) {
 				throw customError('Response does not contain any content page labels', null, {
 					response,
-				})
+				});
 			}
 
-			return [contentPageLabels, contentPageLabelCount]
+			return [contentPageLabels, contentPageLabelCount];
 		} catch (err: any) {
 			throw customError('Failed to get content page labels from the database', err, {
 				variables,
 				query: 'GET_CONTENT_PAGE_LABELS',
-			})
+			});
 		}
 	}
 
 	public async fetchContentPageLabelById(id: string): Promise<ContentPageLabel> {
 		let variables: ContentPageLabelQueryTypes['GetContentPageLabelByIdQueryVariables'] | null =
-			null
+			null;
 		try {
 			variables = {
 				id: isAvo() ? parseInt(id) : id,
-			}
+			};
 			const response = await this.dataService.execute<
 				ContentPageLabelQueryTypes['GetContentPageLabelByIdQuery'],
 				ContentPageLabelQueryTypes['GetContentPageLabelByIdQueryVariables']
-			>(
-				CONTENT_PAGE_LABEL_QUERIES[getDatabaseType()].GetContentPageLabelByIdDocument,
-				variables
-			)
+			>(CONTENT_PAGE_LABEL_QUERIES[getDatabaseType()].GetContentPageLabelByIdDocument, variables);
 
 			/* istanbul ignore next */
 			const contentPageLabelRaw =
@@ -103,12 +99,12 @@ export class ContentPageLabelsService {
 					.app_content_labels?.[0] ||
 				(response as ContentPageLabelQueryTypes['GetContentPageLabelByIdQueryHetArchief'])
 					.app_content_label?.[0] ||
-				null
+				null;
 
 			if (!contentPageLabelRaw) {
 				throw customError('Response does not contain any content page labels', null, {
 					response,
-				})
+				});
 			}
 			return {
 				label: contentPageLabelRaw.label,
@@ -118,12 +114,12 @@ export class ContentPageLabelsService {
 				link_to: contentPageLabelRaw.link_to,
 				created_at: contentPageLabelRaw.created_at,
 				updated_at: contentPageLabelRaw.updated_at,
-			}
+			};
 		} catch (err: any) {
 			throw customError('Failed to get content page labels from the database', err, {
 				variables,
 				query: 'GET_CONTENT_PAGE_LABELS',
-			})
+			});
 		}
 	}
 
@@ -143,25 +139,25 @@ export class ContentPageLabelsService {
 					created_at: new Date().toISOString(),
 					updated_at: new Date().toISOString(),
 				})),
-			})
+			});
 			const contentPageLabelsResponse =
 				(response as ContentPageLabelQueryTypes['InsertContentPageLabelMutationAvo'])
 					.insert_app_content_labels?.returning ||
 				(response as ContentPageLabelQueryTypes['InsertContentPageLabelMutationHetArchief'])
-					.insert_app_content_label?.returning
+					.insert_app_content_label?.returning;
 			if (isNil(contentPageLabelsResponse)) {
 				throw customError(
 					'Response from database does not contain the inserted content page labels',
 					null,
 					{ response }
-				)
+				);
 			}
-			return contentPageLabelsResponse as ContentPageLabelDto[]
+			return contentPageLabelsResponse as ContentPageLabelDto[];
 		} catch (err: any) {
 			throw customError('Failed to insert content page labels in the database', err, {
 				contentPageLabels,
 				query: 'InsertContentPageLabel',
-			})
+			});
 		}
 	}
 
@@ -181,25 +177,25 @@ export class ContentPageLabelsService {
 					updated_at: new Date().toISOString(),
 				},
 				contentPageLabelId: contentPageLabelInfo.id,
-			})
+			});
 			const contentPageLabelResponse =
 				(response as ContentPageLabelQueryTypes['UpdateContentPageLabelMutationAvo'])
 					.update_app_content_labels?.returning?.[0] ||
 				(response as ContentPageLabelQueryTypes['UpdateContentPageLabelMutationHetArchief'])
-					.update_app_content_label?.returning?.[0]
+					.update_app_content_label?.returning?.[0];
 			if (isNil(contentPageLabelResponse)) {
 				throw customError(
 					'Response from database does not contain the id of the inserted content page label',
 					null,
 					{ response }
-				)
+				);
 			}
-			return contentPageLabelResponse as ContentPageLabelDto
+			return contentPageLabelResponse as ContentPageLabelDto;
 		} catch (err: any) {
 			throw customError('Failed to update content page label in the database', err, {
 				contentPageLabel: contentPageLabelInfo,
 				query: 'UPDATE_CONTENT_PAGE_LABEL',
-			})
+			});
 		}
 	}
 
@@ -210,12 +206,12 @@ export class ContentPageLabelsService {
 				ContentPageLabelQueryTypes['DeleteContentPageLabelByIdMutationVariables']
 			>(CONTENT_PAGE_LABEL_QUERIES[getDatabaseType()].DeleteContentPageLabelByIdDocument, {
 				id: isAvo() ? parseInt(id) : id,
-			})
+			});
 		} catch (err: any) {
 			throw customError('Failed to delete content page label from the database', err, {
 				query: 'DeleteContentPageLabelByIdMutation',
 				id,
-			})
+			});
 		}
 	}
 
@@ -226,21 +222,17 @@ export class ContentPageLabelsService {
 		const response = await this.dataService.execute<
 			ContentPageLabelQueryTypes['GetContentPageLabelsByTypeAndLabelsQuery'],
 			ContentPageLabelQueryTypes['GetContentPageLabelsByTypeAndLabelsQueryVariables']
-		>(
-			CONTENT_PAGE_LABEL_QUERIES[getDatabaseType()]
-				.GetContentPageLabelsByTypeAndLabelsDocument,
-			{
-				contentType,
-				labels,
-			}
-		)
+		>(CONTENT_PAGE_LABEL_QUERIES[getDatabaseType()].GetContentPageLabelsByTypeAndLabelsDocument, {
+			contentType,
+			labels,
+		});
 
 		const responseAvo =
-			response as ContentPageLabelQueryTypes['GetContentPageLabelsByTypeAndLabelsQueryAvo']
+			response as ContentPageLabelQueryTypes['GetContentPageLabelsByTypeAndLabelsQueryAvo'];
 		const responseHetArchief =
-			response as ContentPageLabelQueryTypes['GetContentPageLabelsByTypeAndLabelsQueryHetArchief']
+			response as ContentPageLabelQueryTypes['GetContentPageLabelsByTypeAndLabelsQueryHetArchief'];
 
-		return responseAvo.app_content_labels || responseHetArchief.app_content_label || []
+		return responseAvo.app_content_labels || responseHetArchief.app_content_label || [];
 	}
 
 	public async getContentPageLabelsByTypeAndIds(
@@ -248,7 +240,7 @@ export class ContentPageLabelsService {
 		labelIds: (string | number)[]
 	): Promise<LabelObj[]> {
 		if (!labelIds.length) {
-			return []
+			return [];
 		}
 		const response = await this.dataService.execute<
 			ContentPageLabelQueryTypes['GetContentPageLabelsByTypeAndIdsQuery'],
@@ -256,15 +248,14 @@ export class ContentPageLabelsService {
 		>(CONTENT_PAGE_LABEL_QUERIES[getDatabaseType()].GetContentPageLabelsByTypeAndIdsDocument, {
 			contentType,
 			labelIds: labelIds as any,
-		})
+		});
 
 		return (
-			(
-				response as ContentPageLabelQueryTypes['GetContentPageLabelsByTypeAndIdsQueryHetArchief']
-			).app_content_label ||
+			(response as ContentPageLabelQueryTypes['GetContentPageLabelsByTypeAndIdsQueryHetArchief'])
+				.app_content_label ||
 			(response as ContentPageLabelQueryTypes['GetContentPageLabelsByTypeAndIdsQueryAvo'])
 				.app_content_labels ||
 			[]
-		)
+		);
 	}
 }

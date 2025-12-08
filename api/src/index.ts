@@ -1,2 +1,2 @@
-export * from './modules'
-export * from './admin-core.module'
+export * from './modules';
+export * from './admin-core.module';

@@ -1,13 +1,13 @@
-import { type Avo, type PermissionName } from '@viaa/avo2-types'
+import { type Avo, type PermissionName } from '@viaa/avo2-types';
 
-import { Lookup_Languages_Enum } from '../shared/generated/graphql-db-types-hetarchief'
+import { Lookup_Languages_Enum } from '../shared/generated/graphql-db-types-hetarchief';
 
 import {
 	type UserInfoCommonUserAvo,
 	type UserInfoOverviewAvo,
 	type UserInfoOverviewHetArchief,
 	UserInfoType,
-} from './users.types'
+} from './users.types';
 
 /**
  * This function should convert all user info objects to a single format
@@ -34,12 +34,12 @@ export function convertUserInfoToCommonUser(
 	userInfoType: UserInfoType
 ): Avo.User.CommonUser | undefined {
 	if (!userInfo) {
-		return undefined
+		return undefined;
 	}
 	switch (userInfoType) {
 		case UserInfoType.AvoUserUser: {
 			// Avo.User.User: Avo user object with linked profile
-			const user = userInfo as Avo.User.User
+			const user = userInfo as Avo.User.User;
 			return {
 				profileId: user.profile.id,
 				avatar: user?.profile?.avatar,
@@ -53,9 +53,7 @@ export function convertUserInfoToCommonUser(
 				userGroup: {
 					name: undefined,
 					label: undefined,
-					id: user?.profile?.userGroupIds?.[0]
-						? String(user.profile.userGroupIds[0])
-						: undefined,
+					id: user?.profile?.userGroupIds?.[0] ? String(user.profile.userGroupIds[0]) : undefined,
 				},
 				userId: user.uid,
 				uid: user.uid,
@@ -90,12 +88,12 @@ export function convertUserInfoToCommonUser(
 				companyId: user.profile.company_id,
 				permissions: user.profile.permissions as PermissionName[],
 				language: user.profile.language,
-			}
+			};
 		}
 
 		case UserInfoType.AvoUserProfile: {
 			// Avo profile with linked user
-			const profile = userInfo as Avo.User.Profile
+			const profile = userInfo as Avo.User.Profile;
 			return {
 				profileId: profile.id,
 				avatar: profile?.avatar,
@@ -146,12 +144,12 @@ export function convertUserInfoToCommonUser(
 				companyId: profile.company_id,
 				permissions: profile.permissions as PermissionName[],
 				language: profile.language,
-			}
+			};
 		}
 
 		case UserInfoType.UserInfoOverviewAvo: {
 			// Avo user summary table info
-			const user = userInfo as UserInfoOverviewAvo
+			const user = userInfo as UserInfoOverviewAvo;
 			return {
 				profileId: user.profile_id,
 				avatar: user?.profile?.avatar,
@@ -215,12 +213,12 @@ export function convertUserInfoToCommonUser(
 						idpMapObject.idp_user_id as string,
 					])
 				),
-			}
+			};
 		}
 
 		case UserInfoType.UserInfoOverviewHetArchief: {
 			// UserInfoOverviewHetArchief: overview user for admin-dashboard
-			const profile = userInfo as UserInfoOverviewHetArchief
+			const profile = userInfo as UserInfoOverviewHetArchief;
 			return {
 				profileId: profile.id,
 				email: profile.mail ?? undefined,
@@ -228,9 +226,7 @@ export function convertUserInfoToCommonUser(
 				lastName: profile.last_name ?? undefined,
 				fullName:
 					profile.full_name ??
-					(profile.first_name
-						? [profile.first_name, profile.last_name].join(' ')
-						: undefined),
+					(profile.first_name ? [profile.first_name, profile.last_name].join(' ') : undefined),
 				language: profile.language,
 				userGroup: {
 					id: profile.group?.id,
@@ -250,12 +246,12 @@ export function convertUserInfoToCommonUser(
 				},
 				loms: [],
 				lastAccessAt: profile.last_access_at,
-			}
+			};
 		}
 
 		case UserInfoType.HetArchiefUser: {
 			// HetArchiefUser: hetArchief user info mapped by the hetarchief proxy
-			const user = userInfo as Avo.User.HetArchiefUser
+			const user = userInfo as Avo.User.HetArchiefUser;
 			return {
 				profileId: user.id,
 				uid: user.id,
@@ -280,12 +276,12 @@ export function convertUserInfoToCommonUser(
 				lastAccessAt: user.lastAccessAt,
 				permissions: user.permissions,
 				createdAt: user.createdAt,
-			} as Avo.User.CommonUser
+			} as Avo.User.CommonUser;
 		}
 
 		case UserInfoType.UserInfoCommonUserAvo: {
 			// UserInfoCommonUserAvo: user info coming from the common_users tables in AVO
-			const user = userInfo as UserInfoCommonUserAvo
+			const user = userInfo as UserInfoCommonUserAvo;
 
 			return {
 				profileId: user.profile_id,
@@ -310,12 +306,10 @@ export function convertUserInfoToCommonUser(
 				createdAt: user.created_at,
 				avatar: user?.avatar,
 				stamboek: user.stamboek ?? undefined,
-				educationalOrganisations: (user.profile_educational_organizations ?? []).map(
-					(item) => ({
-						organisationId: item.organization_id,
-						unitId: item.unit_id,
-					})
-				) as Avo.EducationOrganization.Organization[],
+				educationalOrganisations: (user.profile_educational_organizations ?? []).map((item) => ({
+					organisationId: item.organization_id,
+					unitId: item.unit_id,
+				})) as Avo.EducationOrganization.Organization[],
 				loms: user.loms as Avo.Lom.Lom[],
 				isException: user.is_exception ?? false,
 				businessCategory: user.business_category ?? undefined,
@@ -345,7 +339,7 @@ export function convertUserInfoToCommonUser(
 					(item) => item.permission.label
 				),
 				language: user.language,
-			} as Avo.User.CommonUser
+			} as Avo.User.CommonUser;
 		}
 
 		default:
@@ -356,6 +350,6 @@ export function convertUserInfoToCommonUser(
 						userInfoType,
 					},
 				})
-			)
+			);
 	}
 }

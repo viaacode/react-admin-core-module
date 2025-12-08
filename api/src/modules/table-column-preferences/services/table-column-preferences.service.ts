@@ -1,6 +1,6 @@
-import { forwardRef, Inject, Injectable } from '@nestjs/common'
+import { forwardRef, Inject, Injectable } from '@nestjs/common';
 
-import { DataService } from '../../data'
+import { DataService } from '../../data';
 import {
 	GetTableColumnPreferencesForUserDocument,
 	GetTableColumnPreferencesForUserQuery,
@@ -11,22 +11,19 @@ import {
 	UpdateTableColumnPreferencesForUserDocument,
 	UpdateTableColumnPreferencesForUserMutation,
 	UpdateTableColumnPreferencesForUserMutationVariables,
-} from '../../shared/generated/graphql-db-types-avo'
-import { customError } from '../../shared/helpers/custom-error'
-import { GqlTableColumnPreference } from '../table-column-preferences.types'
+} from '../../shared/generated/graphql-db-types-avo';
+import { customError } from '../../shared/helpers/custom-error';
+import { GqlTableColumnPreference } from '../table-column-preferences.types';
 
 @Injectable()
 export class TableColumnPreferencesService {
 	constructor(@Inject(forwardRef(() => DataService)) protected dataService: DataService) {}
 
 	public getColumnsFromPreference(dbTableColumnPreference?: GqlTableColumnPreference): string[] {
-		return JSON.parse(dbTableColumnPreference?.visible_columns || '[]')
+		return JSON.parse(dbTableColumnPreference?.visible_columns || '[]');
 	}
 
-	public async fetchTableColumnPreference(
-		profileId: string,
-		columnKey: string
-	): Promise<string[]> {
+	public async fetchTableColumnPreference(profileId: string, columnKey: string): Promise<string[]> {
 		try {
 			const response = await this.dataService.execute<
 				GetTableColumnPreferencesForUserQuery,
@@ -34,13 +31,13 @@ export class TableColumnPreferencesService {
 			>(GetTableColumnPreferencesForUserDocument, {
 				profileId,
 				columnKey,
-			})
+			});
 
-			return this.getColumnsFromPreference(response?.users_table_column_preferences?.[0])
+			return this.getColumnsFromPreference(response?.users_table_column_preferences?.[0]);
 		} catch (err: any) {
 			throw customError('Failed to get table column preference from the database', err, {
 				query: 'GetTableColumnPreferencesForUser',
-			})
+			});
 		}
 	}
 
@@ -56,17 +53,17 @@ export class TableColumnPreferencesService {
 			>(GetTableColumnPreferencesForUserDocument, {
 				profileId,
 				columnKey,
-			})
+			});
 
 			if (existingPreference?.users_table_column_preferences?.length) {
-				return this.updateExistingTableColumnPreference(profileId, columnKey, columns)
+				return this.updateExistingTableColumnPreference(profileId, columnKey, columns);
 			}
 
-			return this.insertTableColumnPreference(profileId, columnKey, columns)
+			return this.insertTableColumnPreference(profileId, columnKey, columns);
 		} catch (err: any) {
 			throw customError('Failed to save table column preference from the database', err, {
 				method: 'saveTableColumnPreference',
-			})
+			});
 		}
 	}
 
@@ -83,15 +80,15 @@ export class TableColumnPreferencesService {
 				profileId,
 				columnKey,
 				columns,
-			})
+			});
 
 			return this.getColumnsFromPreference(
 				response?.insert_users_table_column_preferences?.returning?.[0]
-			)
+			);
 		} catch (err: any) {
 			throw customError('Failed to insert table column preference to the database', err, {
 				query: 'InsertTableColumnPreferencesForUserDocument',
-			})
+			});
 		}
 	}
 
@@ -108,15 +105,15 @@ export class TableColumnPreferencesService {
 				profileId,
 				columnKey,
 				columns,
-			})
+			});
 
 			return this.getColumnsFromPreference(
 				response?.update_users_table_column_preferences?.returning?.[0]
-			)
+			);
 		} catch (err: any) {
 			throw customError('Failed to update table column preference in the database', err, {
 				query: 'UpdateTableColumnPreferencesForUserDocument',
-			})
+			});
 		}
 	}
 }

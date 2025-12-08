@@ -1,13 +1,13 @@
-import { HttpException, HttpStatus } from '@nestjs/common'
+import { HttpException, HttpStatus } from '@nestjs/common';
 
 export class DuplicateKeyException extends HttpException {
-	public data: any
+	public data: any;
 
 	constructor(data: any) {
 		super(
 			HttpException.createBody({ message: 'Duplicate Key Exception', data }),
 			HttpStatus.INTERNAL_SERVER_ERROR
-		)
-		this.data = data
+		);
+		this.data = data;
 	}
 }

@@ -8,12 +8,7 @@ import type {
 } from '../../../types/content-block.types';
 import { ContentBlockEditor, ContentBlockType } from '../../../types/content-block.types';
 
-import {
-	ALIGN_FIELD,
-	BLOCK_FIELD_DEFAULTS,
-	BLOCK_STATE_DEFAULTS,
-	TEXT_FIELD,
-} from '../defaults';
+import { ALIGN_FIELD, BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, TEXT_FIELD } from '../defaults';
 
 export const INITIAL_INTRO_COMPONENTS_STATE = (): IntroBlockComponentState => ({
 	title: '',

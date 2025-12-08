@@ -1,12 +1,12 @@
-import { Avo, PermissionName } from '@viaa/avo2-types'
+import { Avo, PermissionName } from '@viaa/avo2-types';
 
 import {
 	type FindMaintenanceAlertByIdQuery,
 	type FindMaintenanceAlertsQuery,
 	Lookup_Languages_Enum,
-} from '../../shared/generated/graphql-db-types-hetarchief'
-import { type CreateMaintenanceAlertDto } from '../dto/maintenance-alerts.dto'
-import { type MaintenanceAlert, MaintenanceAlertType } from '../maintenance-alerts.types'
+} from '../../shared/generated/graphql-db-types-hetarchief';
+import { type CreateMaintenanceAlertDto } from '../dto/maintenance-alerts.dto';
+import { type MaintenanceAlert, MaintenanceAlertType } from '../maintenance-alerts.types';
 
 export const mockGqlMaintenanceAlert1: FindMaintenanceAlertsQuery['app_maintenance_alerts'][0] = {
 	id: '29f9eac3-0c7e-48ec-9216-3a3af7487766',
@@ -23,7 +23,7 @@ export const mockGqlMaintenanceAlert1: FindMaintenanceAlertsQuery['app_maintenan
 		'c56d95aa-e918-47ca-b102-486c9449fc4a',
 	],
 	language: Lookup_Languages_Enum.Nl,
-}
+};
 
 export const mockGqlMaintenanceAlert2: FindMaintenanceAlertByIdQuery['app_maintenance_alerts'][0] =
 	{
@@ -41,7 +41,7 @@ export const mockGqlMaintenanceAlert2: FindMaintenanceAlertByIdQuery['app_mainte
 			'c56d95aa-e918-47ca-b102-486c9449fc4a',
 		],
 		language: Lookup_Languages_Enum.Nl,
-	}
+	};
 
 export const mockMaintenanceAlert1: MaintenanceAlert = {
 	id: '29f9eac3-0c7e-48ec-9216-3a3af7487766',
@@ -58,7 +58,7 @@ export const mockMaintenanceAlert1: MaintenanceAlert = {
 		'c56d95aa-e918-47ca-b102-486c9449fc4a',
 	],
 	language: Lookup_Languages_Enum.Nl,
-}
+};
 
 export const mockMaintenanceAlert2: MaintenanceAlert = {
 	id: '17741a72-807e-43d0-9869-176593171938',
@@ -75,7 +75,7 @@ export const mockMaintenanceAlert2: MaintenanceAlert = {
 		'c56d95aa-e918-47ca-b102-486c9449fc4a',
 	],
 	language: Lookup_Languages_Enum.Nl,
-}
+};
 
 export const mockMaintenanceAlert3Faulty: MaintenanceAlert = {
 	id: '17741a72-807e-43d0-9869-176593171938',
@@ -92,7 +92,7 @@ export const mockMaintenanceAlert3Faulty: MaintenanceAlert = {
 		'c56d95aa-e918-47ca-b102-486c9449fc4a',
 	],
 	language: Lookup_Languages_Enum.Nl,
-}
+};
 
 export const mockNewMaintenanceAlert: CreateMaintenanceAlertDto = {
 	title: mockGqlMaintenanceAlert1.title,
@@ -102,11 +102,11 @@ export const mockNewMaintenanceAlert: CreateMaintenanceAlertDto = {
 	fromDate: mockGqlMaintenanceAlert1.from_date,
 	untilDate: mockGqlMaintenanceAlert1.until_date,
 	language: mockGqlMaintenanceAlert1.language,
-}
+};
 
 export const mockMaintenanceAlertsResponse = {
 	items: [mockMaintenanceAlert1, mockMaintenanceAlert2, mockMaintenanceAlert3Faulty],
-}
+};
 
 export const mockUser: Avo.User.HetArchiefUser = {
 	id: 'e791ecf1-e121-4c54-9d2e-34524b6467c6',
@@ -128,4 +128,4 @@ export const mockUser: Avo.User.HetArchiefUser = {
 	organisationId: 'OR-rf5kf25',
 	organisationName: 'VRT',
 	sector: 'Publieke Omroep',
-}
+};

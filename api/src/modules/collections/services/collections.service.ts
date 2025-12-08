@@ -1,7 +1,7 @@
-import { forwardRef, Inject, InternalServerErrorException } from '@nestjs/common'
-import type { Avo } from '@viaa/avo2-types'
+import { forwardRef, Inject, InternalServerErrorException } from '@nestjs/common';
+import type { Avo } from '@viaa/avo2-types';
 
-import { DataService } from '../../data'
+import { DataService } from '../../data';
 import {
 	GetPublicCollectionsByIdDocument,
 	GetPublicCollectionsByIdQuery,
@@ -12,9 +12,9 @@ import {
 	GetPublicCollectionsDocument,
 	GetPublicCollectionsQuery,
 	GetPublicCollectionsQueryVariables,
-} from '../../shared/generated/graphql-db-types-avo'
-import { isUuid } from '../../shared/helpers/uuid'
-import { ContentTypeNumber } from '../collections.types'
+} from '../../shared/generated/graphql-db-types-avo';
+import { isUuid } from '../../shared/helpers/uuid';
+import { ContentTypeNumber } from '../collections.types';
 
 export class CollectionsService {
 	constructor(@Inject(forwardRef(() => DataService)) protected dataService: DataService) {}
@@ -35,9 +35,9 @@ export class CollectionsService {
 			const response = await this.dataService.execute<
 				GetPublicCollectionsQuery,
 				GetPublicCollectionsQueryVariables
-			>(GetPublicCollectionsDocument, { limit, typeId })
+			>(GetPublicCollectionsDocument, { limit, typeId });
 
-			return (response.app_collections || []) as Avo.Collection.Collection[]
+			return (response.app_collections || []) as Avo.Collection.Collection[];
 		} catch (err: any) {
 			throw new InternalServerErrorException({
 				message: 'Het ophalen van de collecties is mislukt.',
@@ -46,7 +46,7 @@ export class CollectionsService {
 					query: 'GET_PUBLIC_COLLECTIONS',
 					variables: { limit },
 				},
-			})
+			});
 		}
 	}
 
@@ -56,31 +56,29 @@ export class CollectionsService {
 		limit: number
 	): Promise<Avo.Collection.Collection[]> {
 		try {
-			const isUuidFormat = isUuid(titleOrId)
+			const isUuidFormat = isUuid(titleOrId);
 			const variables: Partial<
 				GetPublicCollectionsByIdQueryVariables | GetPublicCollectionsByTitleQueryVariables
 			> = {
 				limit,
 				typeId: isCollection ? ContentTypeNumber.collection : ContentTypeNumber.bundle,
-			}
+			};
 			if (isUuidFormat) {
-				;(variables as GetPublicCollectionsByIdQueryVariables).id = titleOrId
+				(variables as GetPublicCollectionsByIdQueryVariables).id = titleOrId;
 			} else {
-				;(variables as GetPublicCollectionsByTitleQueryVariables).title = `%${titleOrId}%`
+				(variables as GetPublicCollectionsByTitleQueryVariables).title = `%${titleOrId}%`;
 			}
 
 			const response = await this.dataService.execute<
 				GetPublicCollectionsByIdQuery | GetPublicCollectionsByTitleQuery,
 				GetPublicCollectionsByIdQueryVariables | GetPublicCollectionsByTitleQueryVariables
 			>(
-				isUuidFormat
-					? GetPublicCollectionsByIdDocument
-					: GetPublicCollectionsByTitleDocument,
+				isUuidFormat ? GetPublicCollectionsByIdDocument : GetPublicCollectionsByTitleDocument,
 				variables as
 					| GetPublicCollectionsByIdQueryVariables
 					| GetPublicCollectionsByTitleQueryVariables
-			)
-			return response.app_collections as Avo.Collection.Collection[]
+			);
+			return response.app_collections as Avo.Collection.Collection[];
 		} catch (err: any) {
 			throw new InternalServerErrorException({
 				message: 'Failed to fetch collections or bundles',
@@ -89,7 +87,7 @@ export class CollectionsService {
 					query: 'GET_PUBLIC_COLLECTIONS_BY_ID or GET_PUBLIC_COLLECTIONS_BY_TITLE',
 					variables: { titleOrId, isCollection, limit },
 				},
-			})
+			});
 		}
 	}
 
@@ -105,7 +103,7 @@ export class CollectionsService {
 		titleOrId: string,
 		limit: number
 	): Promise<Avo.Collection.Collection[]> {
-		return this.fetchCollectionsOrBundlesByTitleOrId(true, titleOrId, limit)
+		return this.fetchCollectionsOrBundlesByTitleOrId(true, titleOrId, limit);
 	}
 
 	/**
@@ -120,6 +118,6 @@ export class CollectionsService {
 		titleOrId: string,
 		limit: number
 	): Promise<Avo.Collection.Collection[]> {
-		return this.fetchCollectionsOrBundlesByTitleOrId(false, titleOrId, limit)
+		return this.fetchCollectionsOrBundlesByTitleOrId(false, titleOrId, limit);
 	}
 }

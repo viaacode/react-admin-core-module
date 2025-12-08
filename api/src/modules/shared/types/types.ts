@@ -1,5 +1,5 @@
 export interface DeleteResponse {
-	affectedRows: number
+	affectedRows: number;
 }
 
 export enum SpecialPermissionGroups {
@@ -8,10 +8,10 @@ export enum SpecialPermissionGroups {
 }
 
 export interface Recipient {
-	id: string
-	email: string
+	id: string;
+	email: string;
 }
 
 export interface UpdateResponse {
-	affectedRows: number
+	affectedRows: number;
 }

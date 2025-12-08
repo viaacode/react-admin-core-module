@@ -1,9 +1,9 @@
-import { ApiProperty } from '@nestjs/swagger'
-import { IsOptional, IsString } from 'class-validator'
+import { ApiProperty } from '@nestjs/swagger';
+import { IsOptional, IsString } from 'class-validator';
 
-import type { ContentPageType, ContentPickerType } from '../../content-pages'
-import { LinkTarget } from '../../navigations'
-import { Locale } from '../../translations'
+import type { ContentPageType, ContentPickerType } from '../../content-pages';
+import { LinkTarget } from '../../navigations';
+import { Locale } from '../../translations';
 
 export class PickerItemDto {
 	@IsString()
@@ -11,19 +11,19 @@ export class PickerItemDto {
 	@ApiProperty({
 		type: String,
 	})
-	label?: string
+	label?: string;
 
 	@IsString()
 	@ApiProperty({
 		type: String,
 	})
-	type: ContentPickerType
+	type: ContentPickerType;
 
 	@IsString()
 	@ApiProperty({
 		type: String,
 	})
-	value: string
+	value: string;
 
 	@IsString()
 	@ApiProperty({
@@ -31,7 +31,7 @@ export class PickerItemDto {
 		enum: Object.values(LinkTarget),
 		default: LinkTarget.SELF,
 	})
-	target?: LinkTarget
+	target?: LinkTarget;
 }
 
 export class InsertContentPageLabelDto {
@@ -39,20 +39,20 @@ export class InsertContentPageLabelDto {
 	@ApiProperty({
 		type: String,
 	})
-	label: string
+	label: string;
 
 	@IsString()
 	@ApiProperty({
 		type: String,
 	})
-	content_type: ContentPageType
+	content_type: ContentPageType;
 
 	@IsString()
 	@ApiProperty({
 		type: String,
 		enum: Locale,
 	})
-	language: Locale
+	language: Locale;
 
 	@IsString()
 	@IsOptional()
@@ -60,7 +60,7 @@ export class InsertContentPageLabelDto {
 		type: String,
 		required: false,
 	})
-	link_to?: PickerItemDto | null = null
+	link_to?: PickerItemDto | null = null;
 }
 
 export class UpdateContentPageLabelDto {
@@ -69,32 +69,32 @@ export class UpdateContentPageLabelDto {
 		type: String,
 		description: 'The id of the content page label',
 	})
-	id: string
+	id: string;
 
 	@IsString()
 	@ApiProperty({
 		type: String,
 	})
-	label: string
+	label: string;
 
 	@IsString()
 	@ApiProperty({
 		type: String,
 	})
-	content_type: ContentPageType
+	content_type: ContentPageType;
 
 	@IsString()
 	@ApiProperty({
 		type: String,
 		enum: Locale,
 	})
-	language: Locale
+	language: Locale;
 
 	@IsOptional()
 	@ApiProperty({
 		required: false,
 	})
-	link_to?: PickerItemDto | null = null
+	link_to?: PickerItemDto | null = null;
 }
 
 export class ContentPageLabelDto {
@@ -103,42 +103,42 @@ export class ContentPageLabelDto {
 		type: String,
 		description: 'The id of the content page label',
 	})
-	id: string
+	id: string;
 
 	@IsString()
 	@ApiProperty({
 		type: String,
 	})
-	label: string
+	label: string;
 
 	@IsString()
 	@ApiProperty({
 		type: String,
 	})
-	content_type: ContentPageType
+	content_type: ContentPageType;
 
 	@IsString()
 	@ApiProperty({
 		type: String,
 	})
-	link_to: PickerItemDto | null
+	link_to: PickerItemDto | null;
 
 	@IsString()
 	@ApiProperty({
 		type: String,
 		enum: Locale,
 	})
-	language: Locale
+	language: Locale;
 
 	@IsString()
 	@ApiProperty({
 		type: String,
 	})
-	created_at: string
+	created_at: string;
 
 	@IsString()
 	@ApiProperty({
 		type: String,
 	})
-	updated_at: string
+	updated_at: string;
 }

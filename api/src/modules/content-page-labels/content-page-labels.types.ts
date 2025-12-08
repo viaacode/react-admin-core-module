@@ -4,4 +4,4 @@ export type ContentPageLabelOverviewTableCols =
 	| 'link_to'
 	| 'created_at'
 	| 'updated_at'
-	| 'actions'
+	| 'actions';

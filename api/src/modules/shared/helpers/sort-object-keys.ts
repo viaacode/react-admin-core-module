@@ -2,7 +2,7 @@ export function sortObjectKeys(objToSort: Record<string, any>): Record<string, a
 	return Object.keys(objToSort)
 		.sort()
 		.reduce((obj: Record<string, string>, key) => {
-			obj[key] = objToSort[key]
-			return obj
-		}, {})
+			obj[key] = objToSort[key];
+			return obj;
+		}, {});
 }

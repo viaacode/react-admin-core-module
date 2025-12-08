@@ -1,5 +1,5 @@
-import { type TypedDocumentNode } from '@graphql-typed-document-node/core'
-import { DatabaseType } from '@viaa/avo2-types'
+import { type TypedDocumentNode } from '@graphql-typed-document-node/core';
+import { DatabaseType } from '@viaa/avo2-types';
 
 import {
 	GetSiteVariableByNameDocument as GetSiteVariableByNameDocumentAvo,
@@ -8,7 +8,7 @@ import {
 	UpdateSiteVariableByNameDocument as UpdateSiteVariableByNameDocumentAvo,
 	type UpdateSiteVariableByNameMutation as UpdateSiteVariableByNameMutationAvo,
 	type UpdateSiteVariableByNameMutationVariables as UpdateSiteVariableByNameMutationVariablesAvo,
-} from '../shared/generated/graphql-db-types-avo'
+} from '../shared/generated/graphql-db-types-avo';
 import {
 	GetSiteVariableByNameDocument as GetSiteVariableByNameDocumentHetArchief,
 	type GetSiteVariableByNameQuery as GetSiteVariableByNameQueryHetArchief,
@@ -16,36 +16,36 @@ import {
 	UpdateSiteVariableByNameDocument as UpdateSiteVariableByNameDocumentHetArchief,
 	type UpdateSiteVariableByNameMutation as UpdateSiteVariableByNameMutationHetArchief,
 	type UpdateSiteVariableByNameMutationVariables as UpdateSiteVariableByNameMutationVariablesHetArchief,
-} from '../shared/generated/graphql-db-types-hetarchief'
+} from '../shared/generated/graphql-db-types-hetarchief';
 
 export type SiteVariableQueryTypes = {
-	GetSiteVariableByNameQueryAvo: GetSiteVariableByNameQueryAvo
-	GetSiteVariableByNameQueryHetArchief: GetSiteVariableByNameQueryHetArchief
-	GetSiteVariableByNameQuery: GetSiteVariableByNameQueryAvo | GetSiteVariableByNameQueryHetArchief
+	GetSiteVariableByNameQueryAvo: GetSiteVariableByNameQueryAvo;
+	GetSiteVariableByNameQueryHetArchief: GetSiteVariableByNameQueryHetArchief;
+	GetSiteVariableByNameQuery: GetSiteVariableByNameQueryAvo | GetSiteVariableByNameQueryHetArchief;
 
-	GetSiteVariableByNameQueryVariablesAvo: GetSiteVariableByNameQueryVariablesAvo
-	GetSiteVariableByNameQueryVariablesHetArchief: GetSiteVariableByNameQueryVariablesHetArchief
+	GetSiteVariableByNameQueryVariablesAvo: GetSiteVariableByNameQueryVariablesAvo;
+	GetSiteVariableByNameQueryVariablesHetArchief: GetSiteVariableByNameQueryVariablesHetArchief;
 	GetSiteVariableByNameQueryVariables:
 		| GetSiteVariableByNameQueryVariablesAvo
-		| GetSiteVariableByNameQueryVariablesHetArchief
+		| GetSiteVariableByNameQueryVariablesHetArchief;
 
-	UpdateSiteVariableByNameMutationAvo: UpdateSiteVariableByNameMutationAvo
-	UpdateSiteVariableByNameMutationHetArchief: UpdateSiteVariableByNameMutationHetArchief
+	UpdateSiteVariableByNameMutationAvo: UpdateSiteVariableByNameMutationAvo;
+	UpdateSiteVariableByNameMutationHetArchief: UpdateSiteVariableByNameMutationHetArchief;
 	UpdateSiteVariableByNameMutation:
 		| UpdateSiteVariableByNameMutationAvo
-		| UpdateSiteVariableByNameMutationHetArchief
+		| UpdateSiteVariableByNameMutationHetArchief;
 
-	UpdateSiteVariableByNameMutationVariablesAvo: UpdateSiteVariableByNameMutationVariablesAvo
-	UpdateSiteVariableByNameMutationVariablesHetArchief: UpdateSiteVariableByNameMutationVariablesHetArchief
+	UpdateSiteVariableByNameMutationVariablesAvo: UpdateSiteVariableByNameMutationVariablesAvo;
+	UpdateSiteVariableByNameMutationVariablesHetArchief: UpdateSiteVariableByNameMutationVariablesHetArchief;
 	UpdateSiteVariableByNameMutationVariables:
 		| UpdateSiteVariableByNameMutationVariablesAvo
-		| UpdateSiteVariableByNameMutationVariablesHetArchief
-}
+		| UpdateSiteVariableByNameMutationVariablesHetArchief;
+};
 
 type SiteVariableQueries = {
-	GetSiteVariableByNameDocument: TypedDocumentNode<any, any>
-	UpdateSiteVariableByNameDocument: TypedDocumentNode<any, any>
-}
+	GetSiteVariableByNameDocument: TypedDocumentNode<any, any>;
+	UpdateSiteVariableByNameDocument: TypedDocumentNode<any, any>;
+};
 
 export const SITE_VARIABLE_QUERIES: Record<DatabaseType, SiteVariableQueries> = {
 	[DatabaseType.avo]: {
@@ -56,4 +56,4 @@ export const SITE_VARIABLE_QUERIES: Record<DatabaseType, SiteVariableQueries> = 
 		GetSiteVariableByNameDocument: GetSiteVariableByNameDocumentHetArchief,
 		UpdateSiteVariableByNameDocument: UpdateSiteVariableByNameDocumentHetArchief,
 	},
-}
+};

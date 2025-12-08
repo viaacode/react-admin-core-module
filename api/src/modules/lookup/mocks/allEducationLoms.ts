@@ -1,4 +1,4 @@
-import type { Avo } from '@viaa/avo2-types'
+import type { Avo } from '@viaa/avo2-types';
 
 export const ALL_EDUCATION_LOMS: Avo.Lom.LomField[] = [
 	{
@@ -68,29 +68,25 @@ export const ALL_EDUCATION_LOMS: Avo.Lom.LomField[] = [
 	{
 		id: 'https://w3id.org/onderwijs-vlaanderen/id/structuur/buitengewoon-secundair-opleidingsvorm-1',
 		label: 'buitengewoon secundair opleidingsvorm 1',
-		broader:
-			'https://w3id.org/onderwijs-vlaanderen/id/structuur/buitengewoon-secundair-onderwijs',
+		broader: 'https://w3id.org/onderwijs-vlaanderen/id/structuur/buitengewoon-secundair-onderwijs',
 		scheme: 'https://w3id.org/onderwijs-vlaanderen/id/structuur',
 	},
 	{
 		id: 'https://w3id.org/onderwijs-vlaanderen/id/structuur/buitengewoon-secundair-opleidingsvorm-2',
 		label: 'buitengewoon secundair opleidingsvorm 2',
-		broader:
-			'https://w3id.org/onderwijs-vlaanderen/id/structuur/buitengewoon-secundair-onderwijs',
+		broader: 'https://w3id.org/onderwijs-vlaanderen/id/structuur/buitengewoon-secundair-onderwijs',
 		scheme: 'https://w3id.org/onderwijs-vlaanderen/id/structuur',
 	},
 	{
 		id: 'https://w3id.org/onderwijs-vlaanderen/id/structuur/buitengewoon-secundair-opleidingsvorm-3',
 		label: 'buitengewoon secundair opleidingsvorm 3',
-		broader:
-			'https://w3id.org/onderwijs-vlaanderen/id/structuur/buitengewoon-secundair-onderwijs',
+		broader: 'https://w3id.org/onderwijs-vlaanderen/id/structuur/buitengewoon-secundair-onderwijs',
 		scheme: 'https://w3id.org/onderwijs-vlaanderen/id/structuur',
 	},
 	{
 		id: 'https://w3id.org/onderwijs-vlaanderen/id/structuur/buitengewoon-secundair-opleidingsvorm-4',
 		label: 'buitengewoon secundair opleidingsvorm 4',
-		broader:
-			'https://w3id.org/onderwijs-vlaanderen/id/structuur/buitengewoon-secundair-onderwijs',
+		broader: 'https://w3id.org/onderwijs-vlaanderen/id/structuur/buitengewoon-secundair-onderwijs',
 		scheme: 'https://w3id.org/onderwijs-vlaanderen/id/structuur',
 	},
 	{
@@ -228,8 +224,7 @@ export const ALL_EDUCATION_LOMS: Avo.Lom.LomField[] = [
 	{
 		id: 'https://w3id.org/onderwijs-vlaanderen/id/structuur/secundair-2e-graad-arbeidsmarkt-bso',
 		label: 'secundair 2e graad finaliteit arbeidsmarkt bso',
-		broader:
-			'https://w3id.org/onderwijs-vlaanderen/id/structuur/secundair-2e-graad-arbeidsmarkt',
+		broader: 'https://w3id.org/onderwijs-vlaanderen/id/structuur/secundair-2e-graad-arbeidsmarkt',
 		scheme: 'https://w3id.org/onderwijs-vlaanderen/id/structuur',
 	},
 	{
@@ -295,8 +290,7 @@ export const ALL_EDUCATION_LOMS: Avo.Lom.LomField[] = [
 	{
 		id: 'https://w3id.org/onderwijs-vlaanderen/id/structuur/secundair-3e-graad-3e-leerjaar-arbeidsmarkt',
 		label: 'secundair 3e graad 3e leerjaar finaliteit arbeidsmarkt',
-		broader:
-			'https://w3id.org/onderwijs-vlaanderen/id/structuur/secundair-3e-graad-3e-leerjaar',
+		broader: 'https://w3id.org/onderwijs-vlaanderen/id/structuur/secundair-3e-graad-3e-leerjaar',
 		scheme: 'https://w3id.org/onderwijs-vlaanderen/id/structuur',
 	},
 	{
@@ -315,8 +309,7 @@ export const ALL_EDUCATION_LOMS: Avo.Lom.LomField[] = [
 	{
 		id: 'https://w3id.org/onderwijs-vlaanderen/id/structuur/secundair-3e-graad-arbeidsmarkt-bso',
 		label: 'secundair 3e graad finaliteit arbeidsmarkt bso',
-		broader:
-			'https://w3id.org/onderwijs-vlaanderen/id/structuur/secundair-3e-graad-arbeidsmarkt',
+		broader: 'https://w3id.org/onderwijs-vlaanderen/id/structuur/secundair-3e-graad-arbeidsmarkt',
 		scheme: 'https://w3id.org/onderwijs-vlaanderen/id/structuur',
 	},
 	{
@@ -388,8 +381,7 @@ export const ALL_EDUCATION_LOMS: Avo.Lom.LomField[] = [
 	{
 		id: 'https://w3id.org/onderwijs-vlaanderen/id/structuur/secundair-7e-leerjaar',
 		label: 'secundair 7e leerjaar',
-		broader:
-			'https://w3id.org/onderwijs-vlaanderen/id/structuur/secundair-3e-graad-3e-leerjaar',
+		broader: 'https://w3id.org/onderwijs-vlaanderen/id/structuur/secundair-3e-graad-3e-leerjaar',
 		scheme: 'https://w3id.org/onderwijs-vlaanderen/id/structuur',
 	},
 	{
@@ -410,4 +402,4 @@ export const ALL_EDUCATION_LOMS: Avo.Lom.LomField[] = [
 		broader: null,
 		scheme: 'https://w3id.org/onderwijs-vlaanderen/id/structuur',
 	},
-]
+];

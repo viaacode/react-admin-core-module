@@ -8,13 +8,13 @@ import {
 	Query,
 	Req,
 	UseGuards,
-} from '@nestjs/common'
-import { ApiTags } from '@nestjs/swagger'
+} from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 
-import { LoggedInGuard } from '../shared/guards/logged-in.guard'
+import { LoggedInGuard } from '../shared/guards/logged-in.guard';
 
-import { GetPlayableUrlDto } from './dto/GetPlayableUrlDto.dto'
-import { PlayerTicketService } from './services/player-ticket.service'
+import { GetPlayableUrlDto } from './dto/GetPlayableUrlDto.dto';
+import { PlayerTicketService } from './services/player-ticket.service';
 
 @ApiTags('Player Ticket')
 @Controller(process.env.ADMIN_CORE_ROUTES_PREFIX + '/player-ticket')
@@ -31,19 +31,19 @@ export class PlayerTicketController {
 		if (!queryParams.externalId && !queryParams.externalIds && !queryParams.browsePath) {
 			throw new BadRequestException(
 				'Either query param externalId or browsePath is required to fetch a playable url'
-			)
+			);
 		}
-		const referrer = request.header('Referer') || 'referer-not-defined'
+		const referrer = request.header('Referer') || 'referer-not-defined';
 		if (queryParams.externalId) {
-			return this.getPlayableUrlByExternalId(queryParams.externalId, referrer, ip)
+			return this.getPlayableUrlByExternalId(queryParams.externalId, referrer, ip);
 		} else if (queryParams.externalIds) {
 			return Promise.all(
 				queryParams.externalIds
 					.split(',')
 					.map((externalId) => this.getPlayableUrlByExternalId(externalId, referrer, ip))
-			)
+			);
 		} else {
-			return this.getPlayableUrlFromBrowsePath(queryParams.browsePath, referrer, ip)
+			return this.getPlayableUrlFromBrowsePath(queryParams.browsePath, referrer, ip);
 		}
 	}
 
@@ -60,13 +60,13 @@ export class PlayerTicketController {
 		ip: string
 	): Promise<string> {
 		try {
-			const browsePath = await this.playerTicketService.getEmbedUrl(externalId)
+			const browsePath = await this.playerTicketService.getEmbedUrl(externalId);
 			if (!browsePath) {
 				throw new NotFoundException({
 					message: 'Object with external id was not found',
-				})
+				});
 			}
-			return this.getPlayableUrlFromBrowsePath(browsePath, referrer, ip)
+			return this.getPlayableUrlFromBrowsePath(browsePath, referrer, ip);
 		} catch (err: any) {
 			throw new InternalServerErrorException({
 				message: 'Failed to get player ticket',
@@ -75,7 +75,7 @@ export class PlayerTicketController {
 					externalId,
 					referrer,
 				},
-			})
+			});
 		}
 	}
 
@@ -92,7 +92,7 @@ export class PlayerTicketController {
 	): Promise<string> {
 		try {
 			const fileRepresentationSchemaIdentifier: string | undefined =
-				this.playerTicketService.urlToFilePath(browsePath)
+				this.playerTicketService.urlToFilePath(browsePath);
 
 			if (!fileRepresentationSchemaIdentifier) {
 				throw new InternalServerErrorException({
@@ -102,14 +102,14 @@ export class PlayerTicketController {
 						browsePath,
 						objectName: fileRepresentationSchemaIdentifier,
 					},
-				})
+				});
 			}
 
 			return this.playerTicketService.getPlayableUrl(
 				fileRepresentationSchemaIdentifier,
 				referrer,
 				ip
-			)
+			);
 		} catch (err: any) {
 			throw new InternalServerErrorException({
 				message: 'Failed to get player ticket',
@@ -117,7 +117,7 @@ export class PlayerTicketController {
 				additionalInfo: {
 					referrer,
 				},
-			})
+			});
 		}
 	}
 
@@ -134,7 +134,7 @@ export class PlayerTicketController {
 		@Ip() ip: string
 	): Promise<string> {
 		try {
-			return await this.playerTicketService.getPlayerToken(urlOrPath, referrer, ip, false)
+			return await this.playerTicketService.getPlayerToken(urlOrPath, referrer, ip, false);
 		} catch (err: any) {
 			throw new InternalServerErrorException({
 				message: 'Failed to get ticket for file path',
@@ -144,7 +144,7 @@ export class PlayerTicketController {
 					referrer,
 					ip,
 				},
-			})
+			});
 		}
 	}
 }

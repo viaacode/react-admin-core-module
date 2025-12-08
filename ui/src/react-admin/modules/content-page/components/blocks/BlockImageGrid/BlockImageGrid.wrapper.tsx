@@ -4,10 +4,7 @@ import { kebabCase } from 'es-toolkit';
 import type { FunctionComponent } from 'react';
 import React from 'react';
 import { BlockImageGrid } from '~content-blocks/BlockImageGrid/BlockImageGrid';
-import type {
-	CssSizeSetting,
-	GridItem,
-} from '~content-blocks/BlockImageGrid/BlockImageGrid.types';
+import type { CssSizeSetting, GridItem } from '~content-blocks/BlockImageGrid/BlockImageGrid.types';
 
 import type {
 	BlockGridFormatOption,

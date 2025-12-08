@@ -1,17 +1,17 @@
-import { Body, Controller, Delete, Get, Param, Patch, Put, Query } from '@nestjs/common'
-import { ApiOperation, ApiTags } from '@nestjs/swagger'
-import { PermissionName } from '@viaa/avo2-types'
-import { groupBy, intersection } from 'lodash'
+import { Body, Controller, Delete, Get, Param, Patch, Put, Query } from '@nestjs/common';
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { PermissionName } from '@viaa/avo2-types';
+import { groupBy, intersection } from 'lodash';
 
-import { RequireAnyPermissions } from '../../shared/decorators/require-any-permissions.decorator'
-import { SessionUser } from '../../shared/decorators/user.decorator'
-import { addPrefix } from '../../shared/helpers/add-route-prefix'
-import { DeleteResponse, SpecialPermissionGroups } from '../../shared/types/types'
-import { Locale } from '../../translations'
-import { SessionUserEntity } from '../../users/classes/session-user'
-import { CreateNavigationDto, UpdateNavigationDto } from '../dto/navigations.dto'
-import { NavigationItem } from '../navigations.types'
-import { AdminNavigationsService } from '../services/admin-navigations.service'
+import { RequireAnyPermissions } from '../../shared/decorators/require-any-permissions.decorator';
+import { SessionUser } from '../../shared/decorators/user.decorator';
+import { addPrefix } from '../../shared/helpers/add-route-prefix';
+import { DeleteResponse, SpecialPermissionGroups } from '../../shared/types/types';
+import { Locale } from '../../translations';
+import { SessionUserEntity } from '../../users/classes/session-user';
+import { CreateNavigationDto, UpdateNavigationDto } from '../dto/navigations.dto';
+import { NavigationItem } from '../navigations.types';
+import { AdminNavigationsService } from '../services/admin-navigations.service';
 
 // TODO these routes are currently not used by the admin-core
 // Currently the admin core does all navigation manipulations through the data route
@@ -27,7 +27,7 @@ export class AdminNavigationsController {
 	@Get()
 	@RequireAnyPermissions(PermissionName.EDIT_NAVIGATION_BARS)
 	public async getNavigationBarsOverview(): Promise<NavigationItem[]> {
-		return await this.adminNavigationsService.findNavigationBars()
+		return await this.adminNavigationsService.findNavigationBars();
 	}
 
 	@ApiOperation({
@@ -40,14 +40,14 @@ export class AdminNavigationsController {
 	): Promise<Record<string, NavigationItem[]>> {
 		const allNavigationItems = await this.adminNavigationsService.findAllNavigationBarItems(
 			(language || Locale.Nl) as unknown as Locale
-		)
+		);
 
 		// filter based on logged in / logged out
 		const allowedUserGroups = user.getGroupId()
 			? [SpecialPermissionGroups.loggedInUsers, user.getGroupId()]
-			: [SpecialPermissionGroups.loggedOutUsers]
+			: [SpecialPermissionGroups.loggedOutUsers];
 
-		const visibleItems: NavigationItem[] = []
+		const visibleItems: NavigationItem[] = [];
 		allNavigationItems.forEach((navigationItem: NavigationItem) => {
 			if (navigationItem.userGroupIds?.length) {
 				// If the page doesn't have any groups specified, it isn't visible for anyone
@@ -58,12 +58,12 @@ export class AdminNavigationsController {
 					).length
 				) {
 					// The logged-in user has at least one user group that is required to view the nav item
-					visibleItems.push(navigationItem)
+					visibleItems.push(navigationItem);
 				}
 			}
-		})
+		});
 
-		return groupBy(visibleItems, 'placement')
+		return groupBy(visibleItems, 'placement');
 	}
 
 	@ApiOperation({
@@ -74,7 +74,7 @@ export class AdminNavigationsController {
 	public async createNavigationElement(
 		@Body() createNavigationDto: CreateNavigationDto
 	): Promise<NavigationItem> {
-		return await this.adminNavigationsService.insertElement(createNavigationDto)
+		return await this.adminNavigationsService.insertElement(createNavigationDto);
 	}
 
 	@ApiOperation({
@@ -86,7 +86,7 @@ export class AdminNavigationsController {
 		@Param('id') id: string,
 		@Body() updateNavigationDto: UpdateNavigationDto
 	): Promise<NavigationItem> {
-		return await this.adminNavigationsService.updateElement(id, updateNavigationDto)
+		return await this.adminNavigationsService.updateElement(id, updateNavigationDto);
 	}
 
 	@ApiOperation({
@@ -95,7 +95,7 @@ export class AdminNavigationsController {
 	@Delete('items/:id')
 	@RequireAnyPermissions(PermissionName.EDIT_NAVIGATION_BARS)
 	public async deleteNavigationElement(@Param('id') id: string): Promise<DeleteResponse> {
-		return this.adminNavigationsService.deleteElement(id)
+		return this.adminNavigationsService.deleteElement(id);
 	}
 
 	@ApiOperation({
@@ -104,7 +104,7 @@ export class AdminNavigationsController {
 	@Get('items/:id')
 	@RequireAnyPermissions(PermissionName.EDIT_NAVIGATION_BARS)
 	public async getNavigationElementById(@Param('id') id: string): Promise<NavigationItem> {
-		return await this.adminNavigationsService.findElementById(id)
+		return await this.adminNavigationsService.findElementById(id);
 	}
 
 	@ApiOperation({
@@ -125,6 +125,6 @@ export class AdminNavigationsController {
 			searchTerm,
 			orderProperty,
 			orderDirection
-		)
+		);
 	}
 }

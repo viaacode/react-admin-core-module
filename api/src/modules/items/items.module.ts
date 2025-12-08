@@ -1,11 +1,11 @@
-import { forwardRef, Module } from '@nestjs/common'
+import { forwardRef, Module } from '@nestjs/common';
 
-import { DataModule } from '../data'
-import { AdminOrganisationsModule } from '../organisations'
-import { PlayerTicketModule } from '../player-ticket'
+import { DataModule } from '../data';
+import { AdminOrganisationsModule } from '../organisations';
+import { PlayerTicketModule } from '../player-ticket';
 
-import { ItemsController } from './items.controller'
-import { ItemsService } from './items.service'
+import { ItemsController } from './items.controller';
+import { ItemsService } from './items.service';
 
 @Module({
 	controllers: [ItemsController],

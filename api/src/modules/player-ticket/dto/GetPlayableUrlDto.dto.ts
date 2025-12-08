@@ -1,5 +1,5 @@
-import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger'
-import { IsOptional, IsString } from 'class-validator'
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { IsOptional, IsString } from 'class-validator';
 
 export class GetPlayableUrlDto {
 	@IsString()
@@ -11,7 +11,7 @@ export class GetPlayableUrlDto {
 		example: '8k74t8bn2s',
 		required: false,
 	})
-	externalId: string | undefined
+	externalId: string | undefined;
 
 	@IsString()
 	@IsOptional()
@@ -22,7 +22,7 @@ export class GetPlayableUrlDto {
 		example: '8k74t8bn2s,rx9380v41s,3n20c62616',
 		required: false,
 	})
-	externalIds: string | undefined
+	externalIds: string | undefined;
 
 	@IsString()
 	@IsOptional()
@@ -34,5 +34,5 @@ export class GetPlayableUrlDto {
 			'https://media.viaa.be/play/v2/TESTBEELD/78ee1e6127e2439b8f1a1815e61033bf322499cdd71f421bafc21330ff670e81/browse.mp4',
 		required: false,
 	})
-	browsePath: string | undefined
+	browsePath: string | undefined;
 }

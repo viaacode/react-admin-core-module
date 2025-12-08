@@ -1,6 +1,6 @@
-import { ApiProperty } from '@nestjs/swagger'
-import { Type } from 'class-transformer'
-import { IsArray, IsBoolean, IsUUID, ValidateNested } from 'class-validator'
+import { ApiProperty } from '@nestjs/swagger';
+import { Type } from 'class-transformer';
+import { IsArray, IsBoolean, IsUUID, ValidateNested } from 'class-validator';
 
 export class UpdatePermission {
 	@IsUUID()
@@ -9,7 +9,7 @@ export class UpdatePermission {
 		description: 'The permissionId (uuid) to add/remove from the user group',
 		example: 'b53def44-7b00-402c-9014-e2fd3e3db06c',
 	})
-	permissionId: string
+	permissionId: string;
 
 	@IsUUID()
 	@ApiProperty({
@@ -17,7 +17,7 @@ export class UpdatePermission {
 		description: 'The permission group (uuid) to update',
 		example: 'c56d95aa-e918-47ca-b102-486c9449fc4a',
 	})
-	userGroupId: string
+	userGroupId: string;
 
 	@IsBoolean()
 	@ApiProperty({
@@ -26,7 +26,7 @@ export class UpdatePermission {
 			'Whether to add this permission to the group (true) or remove it from the group (false)',
 		example: true,
 	})
-	hasPermission: boolean
+	hasPermission: boolean;
 }
 
 export class UpdateUserGroupsDto {
@@ -55,5 +55,5 @@ export class UpdateUserGroupsDto {
 			},
 		] as UpdatePermission[],
 	})
-	updates: UpdatePermission[]
+	updates: UpdatePermission[];
 }

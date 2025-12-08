@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common'
+import { Module } from '@nestjs/common';
 
 import {
 	AdminNavigationsModule,
@@ -22,8 +22,8 @@ import {
 	UsersModule,
 	VideoStillsModule,
 } from './modules';
-import { isAvo } from './modules/shared/helpers/is-avo'
-import { isHetArchief } from './modules/shared/helpers/is-hetarchief'
+import { isAvo } from './modules/shared/helpers/is-avo';
+import { isHetArchief } from './modules/shared/helpers/is-hetarchief';
 
 @Module({
 	imports: [

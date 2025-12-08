@@ -1,5 +1,5 @@
-import type { TypedDocumentNode } from '@graphql-typed-document-node/core'
-import { DatabaseType } from '@viaa/avo2-types'
+import type { TypedDocumentNode } from '@graphql-typed-document-node/core';
+import { DatabaseType } from '@viaa/avo2-types';
 
 import {
 	DeleteNavigationItemDocument as DeleteNavigationItemDocumentAvo,
@@ -26,7 +26,7 @@ import {
 	UpdateNavigationItemByIdDocument as UpdateNavigationItemByIdDocumentAvo,
 	type UpdateNavigationItemByIdMutation as UpdateNavigationItemByIdMutationAvo,
 	type UpdateNavigationItemByIdMutationVariables as UpdateNavigationItemByIdMutationVariablesAvo,
-} from '../../shared/generated/graphql-db-types-avo'
+} from '../../shared/generated/graphql-db-types-avo';
 import {
 	DeleteNavigationItemDocument as DeleteNavigationItemDocumentHetArchief,
 	type DeleteNavigationItemMutation as DeleteNavigationItemMutationHetArchief,
@@ -52,102 +52,102 @@ import {
 	UpdateNavigationItemByIdDocument as UpdateNavigationItemByIdDocumentHetArchief,
 	type UpdateNavigationItemByIdMutation as UpdateNavigationItemByIdMutationHetArchief,
 	type UpdateNavigationItemByIdMutationVariables as UpdateNavigationItemByIdMutationVariablesHetArchief,
-} from '../../shared/generated/graphql-db-types-hetarchief'
+} from '../../shared/generated/graphql-db-types-hetarchief';
 
 export type NavigationQueryTypes = {
 	DeleteNavigationItemMutation:
 		| DeleteNavigationItemMutationAvo
-		| DeleteNavigationItemMutationHetArchief
+		| DeleteNavigationItemMutationHetArchief;
 	DeleteNavigationItemMutationVariables:
 		| DeleteNavigationItemMutationVariablesAvo
-		| DeleteNavigationItemMutationVariablesHetArchief
-	DeleteNavigationItemMutationAvo: DeleteNavigationItemMutationAvo
-	DeleteNavigationItemMutationVariablesAvo: DeleteNavigationItemMutationVariablesAvo
-	DeleteNavigationItemMutationHetArchief: DeleteNavigationItemMutationHetArchief
-	DeleteNavigationItemMutationVariablesHetArchief: DeleteNavigationItemMutationVariablesHetArchief
+		| DeleteNavigationItemMutationVariablesHetArchief;
+	DeleteNavigationItemMutationAvo: DeleteNavigationItemMutationAvo;
+	DeleteNavigationItemMutationVariablesAvo: DeleteNavigationItemMutationVariablesAvo;
+	DeleteNavigationItemMutationHetArchief: DeleteNavigationItemMutationHetArchief;
+	DeleteNavigationItemMutationVariablesHetArchief: DeleteNavigationItemMutationVariablesHetArchief;
 
-	GetNavigationBarsQuery: GetNavigationBarsQueryAvo | GetNavigationBarsQueryHetArchief
+	GetNavigationBarsQuery: GetNavigationBarsQueryAvo | GetNavigationBarsQueryHetArchief;
 	GetNavigationBarsQueryVariables:
 		| GetNavigationBarsQueryVariablesAvo
-		| GetNavigationBarsQueryVariablesHetArchief
-	GetNavigationBarsQueryAvo: GetNavigationBarsQueryAvo
-	GetNavigationBarsQueryVariablesAvo: GetNavigationBarsQueryVariablesAvo
-	GetNavigationBarsQueryHetArchief: GetNavigationBarsQueryHetArchief
-	GetNavigationBarsQueryVariablesHetArchief: GetNavigationBarsQueryVariablesHetArchief
+		| GetNavigationBarsQueryVariablesHetArchief;
+	GetNavigationBarsQueryAvo: GetNavigationBarsQueryAvo;
+	GetNavigationBarsQueryVariablesAvo: GetNavigationBarsQueryVariablesAvo;
+	GetNavigationBarsQueryHetArchief: GetNavigationBarsQueryHetArchief;
+	GetNavigationBarsQueryVariablesHetArchief: GetNavigationBarsQueryVariablesHetArchief;
 
-	GetNavigationItemByIdQuery: GetNavigationItemByIdQueryAvo | GetNavigationItemByIdQueryHetArchief
+	GetNavigationItemByIdQuery: GetNavigationItemByIdQueryAvo | GetNavigationItemByIdQueryHetArchief;
 	GetNavigationItemByIdQueryVariables:
 		| GetNavigationItemByIdQueryVariablesAvo
-		| GetNavigationItemByIdQueryVariablesHetArchief
-	GetNavigationItemByIdQueryAvo: GetNavigationItemByIdQueryAvo
-	GetNavigationItemByIdQueryVariablesAvo: GetNavigationItemByIdQueryVariablesAvo
-	GetNavigationItemByIdQueryHetArchief: GetNavigationItemByIdQueryHetArchief
-	GetNavigationItemByIdQueryVariablesHetArchief: GetNavigationItemByIdQueryVariablesHetArchief
+		| GetNavigationItemByIdQueryVariablesHetArchief;
+	GetNavigationItemByIdQueryAvo: GetNavigationItemByIdQueryAvo;
+	GetNavigationItemByIdQueryVariablesAvo: GetNavigationItemByIdQueryVariablesAvo;
+	GetNavigationItemByIdQueryHetArchief: GetNavigationItemByIdQueryHetArchief;
+	GetNavigationItemByIdQueryVariablesHetArchief: GetNavigationItemByIdQueryVariablesHetArchief;
 
-	GetAllNavigationItemsQuery: GetAllNavigationItemsQueryAvo | GetAllNavigationItemsQueryHetArchief
+	GetAllNavigationItemsQuery: GetAllNavigationItemsQueryAvo | GetAllNavigationItemsQueryHetArchief;
 	GetAllNavigationItemsQueryVariables:
 		| GetAllNavigationItemsQueryVariablesAvo
-		| GetAllNavigationItemsQueryVariablesHetArchief
-	GetAllNavigationItemsQueryAvo: GetAllNavigationItemsQueryAvo
-	GetAllNavigationItemsQueryVariablesAvo: GetAllNavigationItemsQueryVariablesAvo
-	GetAllNavigationItemsQueryHetArchief: GetAllNavigationItemsQueryHetArchief
-	GetAllNavigationItemsQueryVariablesHetArchief: GetAllNavigationItemsQueryVariablesHetArchief
+		| GetAllNavigationItemsQueryVariablesHetArchief;
+	GetAllNavigationItemsQueryAvo: GetAllNavigationItemsQueryAvo;
+	GetAllNavigationItemsQueryVariablesAvo: GetAllNavigationItemsQueryVariablesAvo;
+	GetAllNavigationItemsQueryHetArchief: GetAllNavigationItemsQueryHetArchief;
+	GetAllNavigationItemsQueryVariablesHetArchief: GetAllNavigationItemsQueryVariablesHetArchief;
 
 	GetNavigationItemsByPlacementQuery:
 		| GetNavigationItemsByPlacementQueryAvo
-		| GetNavigationItemsByPlacementQueryHetArchief
+		| GetNavigationItemsByPlacementQueryHetArchief;
 	GetNavigationItemsByPlacementQueryVariables:
 		| GetNavigationItemsByPlacementQueryVariablesAvo
-		| GetNavigationItemsByPlacementQueryVariablesHetArchief
-	GetNavigationItemsByPlacementQueryAvo: GetNavigationItemsByPlacementQueryAvo
-	GetNavigationItemsByPlacementQueryVariablesAvo: GetNavigationItemsByPlacementQueryVariablesAvo
-	GetNavigationItemsByPlacementQueryHetArchief: GetNavigationItemsByPlacementQueryHetArchief
-	GetNavigationItemsByPlacementQueryVariablesHetArchief: GetNavigationItemsByPlacementQueryVariablesHetArchief
+		| GetNavigationItemsByPlacementQueryVariablesHetArchief;
+	GetNavigationItemsByPlacementQueryAvo: GetNavigationItemsByPlacementQueryAvo;
+	GetNavigationItemsByPlacementQueryVariablesAvo: GetNavigationItemsByPlacementQueryVariablesAvo;
+	GetNavigationItemsByPlacementQueryHetArchief: GetNavigationItemsByPlacementQueryHetArchief;
+	GetNavigationItemsByPlacementQueryVariablesHetArchief: GetNavigationItemsByPlacementQueryVariablesHetArchief;
 
 	GetNavigationItemsByPlacementAndLanguageQuery:
 		| GetNavigationItemsByPlacementAndLanguageQueryAvo
-		| GetNavigationItemsByPlacementAndLanguageQueryHetArchief
+		| GetNavigationItemsByPlacementAndLanguageQueryHetArchief;
 	GetNavigationItemsByPlacementAndLanguageQueryVariables:
 		| GetNavigationItemsByPlacementAndLanguageQueryVariablesAvo
-		| GetNavigationItemsByPlacementAndLanguageQueryVariablesHetArchief
-	GetNavigationItemsByPlacementAndLanguageQueryAvo: GetNavigationItemsByPlacementAndLanguageQueryAvo
-	GetNavigationItemsByPlacementAndLanguageQueryVariablesAvo: GetNavigationItemsByPlacementAndLanguageQueryVariablesAvo
-	GetNavigationItemsByPlacementAndLanguageQueryHetArchief: GetNavigationItemsByPlacementAndLanguageQueryHetArchief
-	GetNavigationItemsByPlacementAndLanguageQueryVariablesHetArchief: GetNavigationItemsByPlacementAndLanguageQueryVariablesHetArchief
+		| GetNavigationItemsByPlacementAndLanguageQueryVariablesHetArchief;
+	GetNavigationItemsByPlacementAndLanguageQueryAvo: GetNavigationItemsByPlacementAndLanguageQueryAvo;
+	GetNavigationItemsByPlacementAndLanguageQueryVariablesAvo: GetNavigationItemsByPlacementAndLanguageQueryVariablesAvo;
+	GetNavigationItemsByPlacementAndLanguageQueryHetArchief: GetNavigationItemsByPlacementAndLanguageQueryHetArchief;
+	GetNavigationItemsByPlacementAndLanguageQueryVariablesHetArchief: GetNavigationItemsByPlacementAndLanguageQueryVariablesHetArchief;
 
 	InsertNavigationItemMutation:
 		| InsertNavigationItemMutationAvo
-		| InsertNavigationItemMutationHetArchief
+		| InsertNavigationItemMutationHetArchief;
 	InsertNavigationItemMutationVariables:
 		| InsertNavigationItemMutationVariablesAvo
-		| InsertNavigationItemMutationVariablesHetArchief
-	InsertNavigationItemMutationAvo: InsertNavigationItemMutationAvo
-	InsertNavigationItemMutationVariablesAvo: InsertNavigationItemMutationVariablesAvo
-	InsertNavigationItemMutationHetArchief: InsertNavigationItemMutationHetArchief
-	InsertNavigationItemMutationVariablesHetArchief: InsertNavigationItemMutationVariablesHetArchief
+		| InsertNavigationItemMutationVariablesHetArchief;
+	InsertNavigationItemMutationAvo: InsertNavigationItemMutationAvo;
+	InsertNavigationItemMutationVariablesAvo: InsertNavigationItemMutationVariablesAvo;
+	InsertNavigationItemMutationHetArchief: InsertNavigationItemMutationHetArchief;
+	InsertNavigationItemMutationVariablesHetArchief: InsertNavigationItemMutationVariablesHetArchief;
 
 	UpdateNavigationItemByIdMutation:
 		| UpdateNavigationItemByIdMutationAvo
-		| UpdateNavigationItemByIdMutationHetArchief
+		| UpdateNavigationItemByIdMutationHetArchief;
 	UpdateNavigationItemByIdMutationVariables:
 		| UpdateNavigationItemByIdMutationVariablesAvo
-		| UpdateNavigationItemByIdMutationVariablesHetArchief
-	UpdateNavigationItemByIdMutationAvo: UpdateNavigationItemByIdMutationAvo
-	UpdateNavigationItemByIdMutationVariablesAvo: UpdateNavigationItemByIdMutationVariablesAvo
-	UpdateNavigationItemByIdMutationHetArchief: UpdateNavigationItemByIdMutationHetArchief
-	UpdateNavigationItemByIdMutationVariablesHetArchief: UpdateNavigationItemByIdMutationVariablesHetArchief
-}
+		| UpdateNavigationItemByIdMutationVariablesHetArchief;
+	UpdateNavigationItemByIdMutationAvo: UpdateNavigationItemByIdMutationAvo;
+	UpdateNavigationItemByIdMutationVariablesAvo: UpdateNavigationItemByIdMutationVariablesAvo;
+	UpdateNavigationItemByIdMutationHetArchief: UpdateNavigationItemByIdMutationHetArchief;
+	UpdateNavigationItemByIdMutationVariablesHetArchief: UpdateNavigationItemByIdMutationVariablesHetArchief;
+};
 
 type NavigationQueries = {
-	DeleteNavigationItemDocument: TypedDocumentNode<any, any>
-	GetNavigationBarsDocument: TypedDocumentNode<any, any>
-	GetAllNavigationItemsDocument: TypedDocumentNode<any, any>
-	GetNavigationItemByIdDocument: TypedDocumentNode<any, any>
-	GetNavigationItemsByPlacementDocument: TypedDocumentNode<any, any>
-	GetNavigationItemsByPlacementAndLanguageDocument: TypedDocumentNode<any, any>
-	InsertNavigationItemDocument: TypedDocumentNode<any, any>
-	UpdateNavigationItemByIdDocument: TypedDocumentNode<any, any>
-}
+	DeleteNavigationItemDocument: TypedDocumentNode<any, any>;
+	GetNavigationBarsDocument: TypedDocumentNode<any, any>;
+	GetAllNavigationItemsDocument: TypedDocumentNode<any, any>;
+	GetNavigationItemByIdDocument: TypedDocumentNode<any, any>;
+	GetNavigationItemsByPlacementDocument: TypedDocumentNode<any, any>;
+	GetNavigationItemsByPlacementAndLanguageDocument: TypedDocumentNode<any, any>;
+	InsertNavigationItemDocument: TypedDocumentNode<any, any>;
+	UpdateNavigationItemByIdDocument: TypedDocumentNode<any, any>;
+};
 
 export const NAVIGATION_QUERIES: Record<DatabaseType, NavigationQueries> = {
 	[DatabaseType.avo]: {
@@ -172,7 +172,7 @@ export const NAVIGATION_QUERIES: Record<DatabaseType, NavigationQueries> = {
 		InsertNavigationItemDocument: InsertNavigationItemDocumentHetArchief,
 		UpdateNavigationItemByIdDocument: UpdateNavigationItemByIdDocumentHetArchief,
 	},
-}
+};
 
 export type NavigationEntry =
 	| InsertNavigationItemMutationAvo['insert_app_content_nav_elements_one']
@@ -184,4 +184,4 @@ export type NavigationEntry =
 	| GetNavigationItemByIdQueryAvo['app_content_nav_elements'][0]
 	| GetNavigationItemByIdQueryHetArchief['app_navigation'][0]
 	| GetNavigationItemsByPlacementQueryAvo['app_content_nav_elements'][0]
-	| GetNavigationItemsByPlacementQueryHetArchief['app_navigation'][0]
+	| GetNavigationItemsByPlacementQueryHetArchief['app_navigation'][0];

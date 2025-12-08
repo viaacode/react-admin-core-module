@@ -1,4 +1,4 @@
-import path from 'path'
+import path from 'path';
 
 import {
 	BadRequestException,
@@ -14,16 +14,16 @@ import {
 	UploadedFile,
 	UseGuards,
 	UseInterceptors,
-} from '@nestjs/common'
-import { FileInterceptor } from '@nestjs/platform-express'
-import { ApiBody, ApiConsumes, ApiOperation, ApiTags } from '@nestjs/swagger'
-import type { Avo } from '@viaa/avo2-types'
-import { AssetType, PermissionName } from '@viaa/avo2-types'
-import sharp from 'sharp'
+} from '@nestjs/common';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { ApiBody, ApiConsumes, ApiOperation, ApiTags } from '@nestjs/swagger';
+import type { Avo } from '@viaa/avo2-types';
+import { AssetType, PermissionName } from '@viaa/avo2-types';
+import sharp from 'sharp';
 
-import { DataService } from '../../data'
-import { RequireAnyPermissions } from '../../shared/decorators/require-any-permissions.decorator'
-import { SessionUser } from '../../shared/decorators/user.decorator'
+import { DataService } from '../../data';
+import { RequireAnyPermissions } from '../../shared/decorators/require-any-permissions.decorator';
+import { SessionUser } from '../../shared/decorators/user.decorator';
 import {
 	DeleteContentAssetDocument,
 	DeleteContentAssetMutation,
@@ -31,13 +31,13 @@ import {
 	GetContentAssetOwnerIdDocument,
 	GetContentAssetOwnerIdQuery,
 	GetContentAssetOwnerIdQueryVariables,
-} from '../../shared/generated/graphql-db-types-hetarchief'
-import { LoggedInGuard } from '../../shared/guards/logged-in.guard'
-import { TranslationsService } from '../../translations'
-import { SessionUserEntity } from '../../users/classes/session-user'
-import { OPTIMIZE_INTO_WEBP_FORMATS, VALID_MIME_TYPES } from '../assets.consts'
-import { DeleteAssetDto } from '../dto/assets.dto'
-import { AssetsService } from '../services/assets.service'
+} from '../../shared/generated/graphql-db-types-hetarchief';
+import { LoggedInGuard } from '../../shared/guards/logged-in.guard';
+import { TranslationsService } from '../../translations';
+import { SessionUserEntity } from '../../users/classes/session-user';
+import { OPTIMIZE_INTO_WEBP_FORMATS, VALID_MIME_TYPES } from '../assets.consts';
+import { DeleteAssetDto } from '../dto/assets.dto';
+import { AssetsService } from '../services/assets.service';
 
 // TODO use this assets service also for the HetArchief site instead of the hetarchief own assets service
 // Advantages:
@@ -48,7 +48,7 @@ import { AssetsService } from '../services/assets.service'
 @Controller(process.env.ADMIN_CORE_ROUTES_PREFIX + '/assets')
 @RequireAnyPermissions(PermissionName.EDIT_ANY_CONTENT_PAGES, PermissionName.EDIT_OWN_CONTENT_PAGES)
 export class AssetsController {
-	private logger: Logger = new Logger(AssetsController.name, { timestamp: true })
+	private logger: Logger = new Logger(AssetsController.name, { timestamp: true });
 
 	constructor(
 		private assetsService: AssetsService,
@@ -93,17 +93,17 @@ export class AssetsController {
 					{},
 					sessionUser.getLanguage()
 				)
-			)
+			);
 		}
 		if (!this.isValidFileType(file)) {
 			throw new BadRequestException({
 				message: 'Invalid file extension',
 				additionalInfo: { mimetype: file.mimetype },
-			})
+			});
 		}
 
 		try {
-			let optimizedFile = file
+			let optimizedFile = file;
 			if (OPTIMIZE_INTO_WEBP_FORMATS.includes(file.mimetype)) {
 				optimizedFile = {
 					...file,
@@ -116,14 +116,14 @@ export class AssetsController {
 						.toBuffer(),
 					originalname: path.parse(file.originalname).name + '.webp',
 					mimetype: 'image/webp',
-				}
+				};
 			}
 			const url = await this.assetsService.uploadAndTrack(
 				(uploadAssetInfo.type || AssetType.CONTENT_PAGE_IMAGE) as AssetType,
 				optimizedFile,
 				uploadAssetInfo.ownerId
-			)
-			return { url }
+			);
+			return { url };
 		} catch (err) {
 			const error = {
 				message: 'Failed to upload file to asset server',
@@ -134,9 +134,9 @@ export class AssetsController {
 						buffer: '<<omitted>>',
 					},
 				},
-			}
-			this.logger.error(JSON.stringify(error))
-			throw new InternalServerErrorException(error)
+			};
+			this.logger.error(JSON.stringify(error));
+			throw new InternalServerErrorException(error);
 		}
 	}
 
@@ -155,7 +155,7 @@ export class AssetsController {
 	// }
 
 	isValidFileType(file: { mimetype: string }): boolean {
-		return VALID_MIME_TYPES.includes(file.mimetype)
+		return VALID_MIME_TYPES.includes(file.mimetype);
 	}
 
 	async info(url: string): Promise<GetContentAssetOwnerIdQuery['app_content_assets'][0]> {
@@ -165,14 +165,14 @@ export class AssetsController {
 				GetContentAssetOwnerIdQueryVariables
 			>(GetContentAssetOwnerIdDocument, {
 				url,
-			})
-			return response.app_content_assets?.[0]
+			});
+			return response.app_content_assets?.[0];
 		} catch (err) {
 			throw new InternalServerErrorException({
 				message: 'Failed to fetch asset info from the graphql database',
 				innerException: err,
 				additionalInfo: { url },
-			})
+			});
 		}
 	}
 
@@ -187,14 +187,14 @@ export class AssetsController {
 	): Promise<{ status: 'deleted' } | BadRequestException> {
 		try {
 			if (!(await this.hasPermissionToDeleteAsset(deleteAssetDto.url, user))) {
-				throw new UnauthorizedException('You are not allowed to delete this file')
+				throw new UnauthorizedException('You are not allowed to delete this file');
 			}
-			await this.assetsService.delete(deleteAssetDto.url)
+			await this.assetsService.delete(deleteAssetDto.url);
 			await this.dataService.execute<
 				DeleteContentAssetMutation,
 				DeleteContentAssetMutationVariables
-			>(DeleteContentAssetDocument, { url: deleteAssetDto.url })
-			return { status: 'deleted' }
+			>(DeleteContentAssetDocument, { url: deleteAssetDto.url });
+			return { status: 'deleted' };
 		} catch (err) {
 			const error = new InternalServerErrorException({
 				message: 'Failed to delete asset file',
@@ -202,34 +202,34 @@ export class AssetsController {
 				additionalInfo: {
 					body: deleteAssetDto,
 				},
-			})
-			this.logger.error(error)
-			throw error
+			});
+			this.logger.error(error);
+			throw error;
 		}
 	}
 
 	private async hasPermissionToDeleteAsset(url: string, @SessionUser() user: SessionUserEntity) {
-		const assetInfo = await this.info(url)
-		const userPermissions = user.getUser().permissions
+		const assetInfo = await this.info(url);
+		const userPermissions = user.getUser().permissions;
 		if (!assetInfo) {
-			throw new BadRequestException('The requested file was not found in the avo database')
+			throw new BadRequestException('The requested file was not found in the avo database');
 		}
 		if (assetInfo.owner_id === user.getProfileId()) {
-			return true
+			return true;
 		}
 		if (
 			assetInfo.content_asset_type_id === AssetType.BUNDLE_COVER &&
 			(userPermissions.includes(PermissionName.EDIT_OWN_BUNDLES) ||
 				userPermissions.includes(PermissionName.EDIT_ANY_BUNDLES))
 		) {
-			return true
+			return true;
 		}
 		if (
 			assetInfo.content_asset_type_id === AssetType.COLLECTION_COVER &&
 			(userPermissions.includes(PermissionName.EDIT_OWN_COLLECTIONS) ||
 				userPermissions.includes(PermissionName.EDIT_ANY_COLLECTIONS))
 		) {
-			return true
+			return true;
 		}
 		if (
 			[
@@ -242,20 +242,20 @@ export class AssetsController {
 			(userPermissions.includes(PermissionName.EDIT_OWN_CONTENT_PAGES) ||
 				userPermissions.includes(PermissionName.EDIT_ANY_CONTENT_PAGES))
 		) {
-			return true
+			return true;
 		}
 		if (
 			assetInfo.content_asset_type_id === AssetType.ASSIGNMENT_DESCRIPTION_IMAGE &&
 			(userPermissions.includes(PermissionName.EDIT_OWN_ASSIGNMENTS) ||
 				userPermissions.includes(PermissionName.EDIT_ANY_ASSIGNMENTS))
 		) {
-			return true
+			return true;
 		}
 		if (
 			assetInfo.content_asset_type_id === AssetType.INTERACTIVE_TOUR_IMAGE &&
 			userPermissions.includes(PermissionName.EDIT_INTERACTIVE_TOURS)
 		) {
-			return true
+			return true;
 		}
 		if (
 			[AssetType.ITEM_SUBTITLE, AssetType.ITEM_NOTE_IMAGE].includes(
@@ -263,17 +263,15 @@ export class AssetsController {
 			) &&
 			userPermissions.includes(PermissionName.VIEW_ITEMS_OVERVIEW)
 		) {
-			return true
+			return true;
 		}
 		if (
-			[AssetType.KLASCEMENT_VIDEO_IMAGE].includes(
-				assetInfo.content_asset_type_id as AssetType
-			) &&
+			[AssetType.KLASCEMENT_VIDEO_IMAGE].includes(assetInfo.content_asset_type_id as AssetType) &&
 			(userPermissions.includes(PermissionName.PUBLISH_COLLECTION_TO_KLASCEMENT) ||
 				userPermissions.includes(PermissionName.PUBLISH_ASSIGNMENT_TO_KLASCEMENT))
 		) {
-			return true
+			return true;
 		}
-		return false
+		return false;
 	}
 }

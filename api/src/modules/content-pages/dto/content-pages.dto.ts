@@ -1,11 +1,11 @@
-import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger'
-import { Transform, Type } from 'class-transformer'
-import { IsArray, IsBoolean, IsNumber, IsObject, IsOptional, IsString } from 'class-validator'
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { Transform, Type } from 'class-transformer';
+import { IsArray, IsBoolean, IsNumber, IsObject, IsOptional, IsString } from 'class-validator';
 
-import { Lookup_App_Content_Type_Enum } from '../../shared/generated/graphql-db-types-hetarchief'
-import { commaSeparatedStringToArray } from '../../shared/helpers/comma-separated-string-to-array'
-import { SortDirection } from '../../shared/types'
-import { type SearchDateRange } from '../content-pages.types'
+import { Lookup_App_Content_Type_Enum } from '../../shared/generated/graphql-db-types-hetarchief';
+import { commaSeparatedStringToArray } from '../../shared/helpers/comma-separated-string-to-array';
+import { SortDirection } from '../../shared/types';
+import { type SearchDateRange } from '../content-pages.types';
 
 export class ContentPageFiltersDto {
 	@IsString()
@@ -16,7 +16,7 @@ export class ContentPageFiltersDto {
 			'The text to search for in the title, description and abstract of the media items.',
 		default: '',
 	})
-	query?: string
+	query?: string;
 
 	@IsArray()
 	@IsOptional()
@@ -29,7 +29,7 @@ export class ContentPageFiltersDto {
 		required: false,
 		example: [Lookup_App_Content_Type_Enum.Pagina],
 	})
-	contentTypes?: string[]
+	contentTypes?: string[];
 
 	@IsArray()
 	@IsOptional()
@@ -40,7 +40,7 @@ export class ContentPageFiltersDto {
 		required: false,
 		example: ['69ccef3b-751a-4be4-95bc-5ef365fbd504'],
 	})
-	userProfileIds?: string[]
+	userProfileIds?: string[];
 
 	@IsArray()
 	@IsOptional()
@@ -51,7 +51,7 @@ export class ContentPageFiltersDto {
 		required: false,
 		example: ['69ccef3b-751a-4be4-95bc-5ef365fbd504'],
 	})
-	userGroupIds?: string[]
+	userGroupIds?: string[];
 
 	@IsObject()
 	@IsOptional()
@@ -61,7 +61,7 @@ export class ContentPageFiltersDto {
 		required: false,
 		example: { gte: '2021-12-30T23:00:00.000Z' },
 	})
-	createdAt?: SearchDateRange
+	createdAt?: SearchDateRange;
 
 	@IsObject()
 	@IsOptional()
@@ -71,7 +71,7 @@ export class ContentPageFiltersDto {
 		required: false,
 		example: { gte: '2021-12-30T23:00:00.000Z' },
 	})
-	updatedAt?: SearchDateRange
+	updatedAt?: SearchDateRange;
 
 	@IsBoolean()
 	@IsOptional()
@@ -82,7 +82,7 @@ export class ContentPageFiltersDto {
 		required: false,
 		example: { gte: '2021-12-30T23:00:00.000Z' },
 	})
-	isPublic?: boolean
+	isPublic?: boolean;
 
 	@IsObject()
 	@IsOptional()
@@ -92,7 +92,7 @@ export class ContentPageFiltersDto {
 		required: false,
 		example: { gte: '2021-12-30T23:00:00.000Z' },
 	})
-	publishedAt?: SearchDateRange
+	publishedAt?: SearchDateRange;
 
 	@IsObject()
 	@IsOptional()
@@ -102,7 +102,7 @@ export class ContentPageFiltersDto {
 		required: false,
 		example: { gte: '2021-12-30T23:00:00.000Z' },
 	})
-	publishAt?: SearchDateRange
+	publishAt?: SearchDateRange;
 
 	@IsObject()
 	@IsOptional()
@@ -112,7 +112,7 @@ export class ContentPageFiltersDto {
 		required: false,
 		example: { gte: '2021-12-30T23:00:00.000Z' },
 	})
-	depublishAt?: SearchDateRange
+	depublishAt?: SearchDateRange;
 
 	@IsArray()
 	@IsOptional()
@@ -123,7 +123,7 @@ export class ContentPageFiltersDto {
 		required: false,
 		example: ['69ccef3b-751a-4be4-95bc-5ef365fbd504'],
 	})
-	labelIds?: string[]
+	labelIds?: string[];
 }
 
 export class ContentPagesQueryDto {
@@ -135,7 +135,7 @@ export class ContentPagesQueryDto {
 		description: 'Filters to specify which content pages you want to receive',
 		default: undefined,
 	})
-	filters? = undefined
+	filters? = undefined;
 
 	@IsBoolean()
 	@Type(() => Boolean)
@@ -145,7 +145,7 @@ export class ContentPagesQueryDto {
 		description: 'Also include the content blocks for each page',
 		default: false,
 	})
-	withBlocks? = false
+	withBlocks? = false;
 
 	@IsNumber()
 	@Type(() => Number)
@@ -155,7 +155,7 @@ export class ContentPagesQueryDto {
 		description: 'Which page of results to fetch. Counting starts at 1',
 		default: 1,
 	})
-	page? = 1
+	page? = 1;
 
 	@IsNumber()
 	@Type(() => Number)
@@ -165,7 +165,7 @@ export class ContentPagesQueryDto {
 		description: 'The max. number of results to return',
 		default: 10,
 	})
-	size? = 10
+	size? = 10;
 
 	@IsString()
 	@Type(() => String)
@@ -203,7 +203,7 @@ export class ContentPagesQueryDto {
 			'seo_image_path',
 		],
 	})
-	orderProp? = 'title_lower'
+	orderProp? = 'title_lower';
 
 	@IsString()
 	@Type(() => String)
@@ -214,7 +214,7 @@ export class ContentPagesQueryDto {
 		default: SortDirection.asc,
 		enum: SortDirection,
 	})
-	orderDirection? = SortDirection.asc
+	orderDirection? = SortDirection.asc;
 }
 
 export class ContentPageOverviewParams {
@@ -226,7 +226,7 @@ export class ContentPageOverviewParams {
 		description: 'Also include the content blocks for each page',
 		default: false,
 	})
-	withBlocks? = false
+	withBlocks? = false;
 
 	@IsString()
 	@ApiProperty({
@@ -234,7 +234,7 @@ export class ContentPageOverviewParams {
 		description: 'Type of the content pages you want to fetch. eg: PAGINA, FAQ_ITEM, ...',
 		example: 'FAQ_ITEM',
 	})
-	contentType: string
+	contentType: string;
 
 	@IsArray()
 	@IsOptional()
@@ -246,7 +246,7 @@ export class ContentPageOverviewParams {
 		required: false,
 		example: ['69ccef3b-751a-4be4-95bc-5ef365fbd504'],
 	})
-	labelIds?: (string | number)[]
+	labelIds?: (string | number)[];
 
 	@IsArray()
 	@IsOptional()
@@ -257,7 +257,7 @@ export class ContentPageOverviewParams {
 		required: false,
 		example: ['69ccef3b-751a-4be4-95bc-5ef365fbd504'],
 	})
-	selectedLabelIds?: (string | number)[]
+	selectedLabelIds?: (string | number)[];
 
 	@IsString()
 	@Type(() => String)
@@ -294,7 +294,7 @@ export class ContentPageOverviewParams {
 			'seo_image_path',
 		],
 	})
-	orderProp? = 'title'
+	orderProp? = 'title';
 
 	@IsString()
 	@Type(() => String)
@@ -305,7 +305,7 @@ export class ContentPageOverviewParams {
 		default: SortDirection.asc,
 		enum: SortDirection,
 	})
-	orderDirection? = SortDirection.asc
+	orderDirection? = SortDirection.asc;
 
 	@IsNumber()
 	@Type(() => Number)
@@ -315,7 +315,7 @@ export class ContentPageOverviewParams {
 		description: 'How many results to skip before returning the results',
 		default: 0,
 	})
-	offset? = 0
+	offset? = 0;
 
 	@IsNumber()
 	@Type(() => Number)
@@ -325,5 +325,5 @@ export class ContentPageOverviewParams {
 		description: 'The max. number of results to return',
 		default: 10,
 	})
-	limit? = 10
+	limit? = 10;
 }

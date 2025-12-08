@@ -1,31 +1,30 @@
-import { NestFactory } from '@nestjs/core'
-import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger'
-import { json } from 'express'
-import helmet from 'helmet'
+import { NestFactory } from '@nestjs/core';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { json } from 'express';
+import helmet from 'helmet';
 
-import packageJson from '../package.json'
+import packageJson from '../package.json';
 
-import { AdminCoreModule } from './admin-core.module'
+import { AdminCoreModule } from './admin-core.module';
 
 async function bootstrap() {
-	const app = await NestFactory.create(AdminCoreModule)
-	const port = process.env.PORT || 3300
+	const app = await NestFactory.create(AdminCoreModule);
+	const port = process.env.PORT || 3300;
 
 	/** Security */
 	app.enableCors({
 		origin: (origin: string, callback: (err: Error, allow: boolean) => void) => {
 			// whitelist not enabled
-			callback(null, true)
+			callback(null, true);
 		},
 		credentials: true,
-		allowedHeaders:
-			'X-Requested-With, Content-Type, authorization, Origin, Accept, cache-control',
+		allowedHeaders: 'X-Requested-With, Content-Type, authorization, Origin, Accept, cache-control',
 		methods: 'GET, POST, OPTIONS, PATCH, PUT, DELETE',
-	})
-	app.use(helmet())
+	});
+	app.use(helmet());
 
 	/** Increase POST json body size */
-	app.use(json({ limit: '500kb' }))
+	app.use(json({ limit: '500kb' }));
 
 	/** Swagger docs **/
 	if (process.env.ENVIRONMENT !== 'production') {
@@ -34,13 +33,13 @@ async function bootstrap() {
 			.setDescription('Documentatie voor de Admin Core api calls')
 			.setVersion(packageJson.version)
 			.addCookieAuth('connect.sid')
-			.build()
-		const document = SwaggerModule.createDocument(app, swaggerConfig)
-		SwaggerModule.setup('docs', app, document)
+			.build();
+		const document = SwaggerModule.createDocument(app, swaggerConfig);
+		SwaggerModule.setup('docs', app, document);
 	}
 
 	/** All good, start listening */
-	await app.listen(port)
+	await app.listen(port);
 }
 
-bootstrap()
+bootstrap();

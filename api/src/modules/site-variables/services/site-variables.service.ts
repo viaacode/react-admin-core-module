@@ -1,9 +1,9 @@
-import { forwardRef, Inject, Injectable } from '@nestjs/common'
+import { forwardRef, Inject, Injectable } from '@nestjs/common';
 
-import { DataService } from '../../data'
-import { getDatabaseType } from '../../shared/helpers/get-database-type'
-import { UpdateResponse } from '../../shared/types/types'
-import { SITE_VARIABLE_QUERIES, SiteVariableQueryTypes } from '../site-variables.consts'
+import { DataService } from '../../data';
+import { getDatabaseType } from '../../shared/helpers/get-database-type';
+import { UpdateResponse } from '../../shared/types/types';
+import { SITE_VARIABLE_QUERIES, SiteVariableQueryTypes } from '../site-variables.consts';
 
 @Injectable()
 export class SiteVariablesService {
@@ -15,15 +15,15 @@ export class SiteVariablesService {
 			SiteVariableQueryTypes['GetSiteVariableByNameQueryVariables']
 		>(SITE_VARIABLE_QUERIES[getDatabaseType()].GetSiteVariableByNameDocument, {
 			name: variable,
-		})
+		});
 
 		/* istanbul ignore next */
 		return (
 			(response as SiteVariableQueryTypes['GetSiteVariableByNameQueryAvo'])
 				?.app_site_variables_by_pk?.value ||
-			(response as SiteVariableQueryTypes['GetSiteVariableByNameQueryHetArchief'])
-				?.app_config_by_pk?.value
-		)
+			(response as SiteVariableQueryTypes['GetSiteVariableByNameQueryHetArchief'])?.app_config_by_pk
+				?.value
+		);
 	}
 
 	public async updateSiteVariable(variable: string, value: any): Promise<UpdateResponse> {
@@ -33,7 +33,7 @@ export class SiteVariablesService {
 		>(SITE_VARIABLE_QUERIES[getDatabaseType()].UpdateSiteVariableByNameDocument, {
 			name: variable,
 			data: { value },
-		})
+		});
 
 		/* istanbul ignore next */
 		return {
@@ -43,6 +43,6 @@ export class SiteVariablesService {
 				(response as SiteVariableQueryTypes['UpdateSiteVariableByNameMutationHetArchief'])
 					?.update_app_config?.affected_rows ||
 				0,
-		}
+		};
 	}
 }

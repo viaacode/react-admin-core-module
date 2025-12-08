@@ -1,12 +1,12 @@
-import { Test, type TestingModule } from '@nestjs/testing'
+import { Test, type TestingModule } from '@nestjs/testing';
 
-import { DataService } from '../../data'
+import { DataService } from '../../data';
 
-import { PermissionsService } from './permissions.service'
+import { PermissionsService } from './permissions.service';
 
 const mockDataService = {
 	execute: jest.fn(),
-}
+};
 
 const mockPermissionsResponse = {
 	data: {
@@ -15,15 +15,14 @@ const mockPermissionsResponse = {
 				id: '2dd3ec17-5439-4fc7-aa6c-cc8dfd3b937f',
 				label: 'Bezoekersruimtes: Alle bezoekersruimtes bekijken',
 				name: 'READ_ALL_SPACES',
-				description:
-					'Deze gebruiker kan de alle bezoekersruimtes bekijken, inclusief inactieve',
+				description: 'Deze gebruiker kan de alle bezoekersruimtes bekijken, inclusief inactieve',
 			},
 		],
 	},
-}
+};
 
 describe('PermissionsService', () => {
-	let permissionsService: PermissionsService
+	let permissionsService: PermissionsService;
 
 	beforeEach(async () => {
 		const module: TestingModule = await Test.createTestingModule({
@@ -34,21 +33,21 @@ describe('PermissionsService', () => {
 					useValue: mockDataService,
 				},
 			],
-		}).compile()
+		}).compile();
 
-		permissionsService = module.get<PermissionsService>(PermissionsService)
-	})
+		permissionsService = module.get<PermissionsService>(PermissionsService);
+	});
 
 	it('services should be defined', () => {
-		expect(permissionsService).toBeDefined()
-	})
+		expect(permissionsService).toBeDefined();
+	});
 
 	describe('getPermissions', () => {
 		it('returns permissions', async () => {
-			mockDataService.execute.mockResolvedValueOnce(mockPermissionsResponse)
+			mockDataService.execute.mockResolvedValueOnce(mockPermissionsResponse);
 
-			const response = await permissionsService.getPermissions()
-			expect(response).toEqual(mockPermissionsResponse.data.users_permission)
-		})
-	})
-})
+			const response = await permissionsService.getPermissions();
+			expect(response).toEqual(mockPermissionsResponse.data.users_permission);
+		});
+	});
+});
