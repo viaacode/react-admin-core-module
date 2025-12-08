@@ -10,8 +10,7 @@ import { type Avo, PermissionName } from '@viaa/avo2-types';
 import clsx from 'clsx';
 import { cloneDeep, compact, intersection, isNil, noop } from 'es-toolkit';
 import { stringifyUrl } from 'query-string';
-import type { FunctionComponent, ReactNode } from 'react';
-import React from 'react';
+import React, { type FunctionComponent, type ReactNode } from 'react';
 import type { BlockImageProps } from '~content-blocks/BlockImage/BlockImage';
 import { AdminConfigManager } from '~core/config/config.class';
 import { convertRichTextEditorStatesToHtml } from '~modules/content-page/services/content-page.converters';
@@ -48,6 +47,7 @@ type ContentPageDetailProps = {
 	commonUser?: Avo.User.CommonUser;
 	renderFakeTitle?: boolean;
 	renderNoAccessError: () => ReactNode;
+	userGroupId?: string | null;
 };
 
 export const ContentPageRenderer: FunctionComponent<ContentPageDetailProps> = (props) => {
@@ -105,9 +105,8 @@ export const ContentPageRenderer: FunctionComponent<ContentPageDetailProps> = (p
 
 		// Only accept content blocks for which the user is authorized
 		let currentUserGroupIds: string[];
-		const userGroupId = new URLSearchParams(location.search).get('userGroupId');
-		if (!isNil(userGroupId)) {
-			currentUserGroupIds = [userGroupId];
+		if (!isNil(props.userGroupId)) {
+			currentUserGroupIds = [props.userGroupId];
 		} else if (props.commonUser?.userGroup?.id) {
 			currentUserGroupIds = [
 				String(props.commonUser?.userGroup?.id),

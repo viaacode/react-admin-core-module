@@ -34,7 +34,10 @@ export const ContentPagePreviewUserRoleSelector: FunctionComponent<
 	ContentPagePreviewUserRoleSelectorProps & DefaultProps
 > = (props) => {
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
-	const userGroupId = new URLSearchParams(location.search).get('userGroupId');
+	const getUserGroupId = useCallback(
+		() => new URLSearchParams(location.search).get('userGroupId'),
+		[]
+	);
 	const setUserGroupId = useCallback((id: string) => {
 		const url = new URL(window.location.href);
 		url.searchParams.set('userGroupId', id);
@@ -44,7 +47,7 @@ export const ContentPagePreviewUserRoleSelector: FunctionComponent<
 	// biome-ignore lint/correctness/useExhaustiveDependencies: Only run this once
 	useEffect(() => {
 		// if the queryParams are missing userGroupIds, use the userGroup of the current user
-		if (isNil(userGroupId)) {
+		if (isNil(getUserGroupId())) {
 			if (isNil(props.commonUser?.userGroup?.id)) {
 				// If user doesn't have a user group, show all content. Not sure if this can happen though.
 				setUserGroupId(SpecialUserGroups.allContent);
@@ -83,14 +86,14 @@ export const ContentPagePreviewUserRoleSelector: FunctionComponent<
 	}, [userGroups, isLoading]);
 
 	const buttonLabel = useMemo(() => {
-		const selection = (userGroupOptions || []).find((item) => item.value === userGroupId)
+		const selection = (userGroupOptions || []).find((item) => item.value === getUserGroupId())
 			?.label as string;
 
 		return tText(
 			'modules/content-page/components/content-page-preview-user-role-selector/content-page-preview-user-role-selector___preview-als-selected-user-group',
 			{ selectedUserGroup: selection }
 		);
-	}, [userGroupOptions, userGroupId]);
+	}, [userGroupOptions, getUserGroupId]);
 
 	const handleOpenCloseMenu = (isOpen: boolean) => {
 		setIsMenuOpen(isOpen);
@@ -127,7 +130,7 @@ export const ContentPagePreviewUserRoleSelector: FunctionComponent<
 			<DropdownContent>
 				<RadioButtonGroup
 					options={userGroupOptions}
-					value={userGroupId || null}
+					value={getUserGroupId() || null}
 					onChange={setUserGroupId}
 				/>
 			</DropdownContent>

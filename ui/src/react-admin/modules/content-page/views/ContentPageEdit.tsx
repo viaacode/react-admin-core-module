@@ -102,18 +102,22 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 	const [isSaving, setIsSaving] = useState<boolean>(false);
 	const [hasSubmitted, setHasSubmitted] = useState<boolean>(false);
 	const [contentTypes, isLoadingContentTypes] = useContentTypes();
-	const currentTab =
-		new URLSearchParams(location.search).get(CONTENT_PAGE_EDIT_TAB_QUERY_PARAM) ||
-		(GET_CONTENT_PAGE_DETAIL_TABS()[0].id as string);
+	const getCurrentTab = useCallback(
+		() =>
+			new URLSearchParams(location.search).get(CONTENT_PAGE_EDIT_TAB_QUERY_PARAM) ||
+			(GET_CONTENT_PAGE_DETAIL_TABS()[0].id as string),
+		[]
+	);
 	const setCurrentTab = (tabId: string) => {
 		const url = new URL(window.location.href);
 		url.searchParams.set(CONTENT_PAGE_EDIT_TAB_QUERY_PARAM, tabId);
 		navigateFunc(url, { replace: true });
 	};
-	const tabs = GET_CONTENT_PAGE_DETAIL_TABS().map((tab: TabProps) => ({
-		...tab,
-		active: tab.id === currentTab,
-	}));
+	const getTabs = () =>
+		GET_CONTENT_PAGE_DETAIL_TABS().map((tab: TabProps) => ({
+			...tab,
+			active: tab.id === getCurrentTab(),
+		}));
 
 	const hasPerm = useCallback(
 		(permission: PermissionName) => PermissionService.hasPerm(commonUser, permission),
@@ -542,7 +546,7 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 					{
 						id: insertedOrUpdatedContent?.id,
 					},
-					{ tab: currentTab }
+					{ tab: getCurrentTab() }
 				);
 			}, 10);
 		} catch (err) {
@@ -714,7 +718,7 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 		if (!contentPageState.currentContentPageInfo || !contentPageState.initialContentPageInfo) {
 			return;
 		}
-		switch (currentTab) {
+		switch (getCurrentTab()) {
 			case 'inhoud':
 				return (
 					<ContentEditContentBlocks
@@ -811,7 +815,7 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 					>
 						<Container mode="horizontal">
 							<Tabs
-								tabs={tabs}
+								tabs={getTabs()}
 								onClick={(newCurrentTab: string | number) => setCurrentTab(newCurrentTab as string)}
 							/>
 

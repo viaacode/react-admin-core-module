@@ -83,18 +83,22 @@ export const ContentPageDetail: FC<ContentPageDetailProps> = ({
 	);
 
 	const { mutateAsync: softDeleteContentPage } = useSoftDeleteContentPage();
-	const currentTab =
-		new URLSearchParams(location.search).get(CONTENT_PAGE_DETAIL_TAB_QUERY_PARAM) ||
-		(GET_CONTENT_PAGE_DETAIL_TABS()[0].id as string);
+	const getCurrentTab = useCallback(
+		() =>
+			new URLSearchParams(location.search).get(CONTENT_PAGE_DETAIL_TAB_QUERY_PARAM) ||
+			(GET_CONTENT_PAGE_DETAIL_TABS()[0].id as string),
+		[]
+	);
 	const setCurrentTab = useCallback((tabId: string) => {
 		const url = new URL(window.location.href);
 		url.searchParams.set(CONTENT_PAGE_DETAIL_TAB_QUERY_PARAM, tabId);
 		navigateFunc(url, { replace: true });
 	}, []);
-	const tabs = GET_CONTENT_PAGE_DETAIL_TABS().map((tab: TabProps) => ({
-		...tab,
-		active: tab.id === currentTab,
-	}));
+	const getTabs = () =>
+		GET_CONTENT_PAGE_DETAIL_TABS().map((tab: TabProps) => ({
+			...tab,
+			active: tab.id === getCurrentTab(),
+		}));
 
 	const isContentProtected = contentPageInfo?.isProtected || false;
 	const pageTitle = `${tText('modules/content-page/views/content-page-detail___content')}: ${contentPageInfo?.title || ''}`;
@@ -406,7 +410,7 @@ export const ContentPageDetail: FC<ContentPageDetailProps> = ({
 			url: buildLink(AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_EDIT'), {
 				id,
 			}),
-			query: { tab: currentTab },
+			query: { tab: getCurrentTab() },
 		});
 	};
 
@@ -474,7 +478,7 @@ export const ContentPageDetail: FC<ContentPageDetailProps> = ({
 			return null;
 		}
 
-		switch (currentTab) {
+		switch (getCurrentTab()) {
 			case 'inhoud':
 				return (
 					<ContentPageRenderer
@@ -515,7 +519,7 @@ export const ContentPageDetail: FC<ContentPageDetailProps> = ({
 				<Navbar background="alt" placement="top" autoHeight>
 					<Container mode="horizontal">
 						<Tabs
-							tabs={tabs}
+							tabs={getTabs()}
 							onClick={(newCurrentTab: string | number) => setCurrentTab(newCurrentTab as string)}
 						/>
 					</Container>
