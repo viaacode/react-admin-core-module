@@ -12,7 +12,7 @@ import got from 'got'
 import { trimEnd } from 'lodash'
 import publicIp from 'public-ip'
 
-import { ContentTypeNumber } from '../../collections';
+import { ContentTypeNumber } from '../../collections'
 import { DataService } from '../../data'
 import {
 	GetItemBrowsePathByExternalIdDocument,
@@ -30,6 +30,7 @@ import {
 import { cleanMultilineEnv } from '../../shared/helpers/env-vars'
 import { CustomError } from '../../shared/helpers/error'
 import { isHetArchief } from '../../shared/helpers/is-hetarchief'
+import { mapToMediaType } from '../../shared/helpers/mapToMediaType'
 import { PLAYER_TICKET_EXPIRY } from '../player-ticket.consts'
 import { PlayerTicket } from '../player-ticket.types'
 
@@ -69,10 +70,10 @@ export class PlayerTicketService {
 	): Promise<PlayerTicket> {
 		const resolvedIp = ['::1', '::ffff:127.0.0.1', '127.0.0.1'].includes(ip)
 			? await publicIp.v4()
-			: ip;
-		const resolvedReferer = trimEnd(referer || this.host, '/');
-		const resolvedMaxAge = this.ticketServiceMaxAge;
-		const maxAge15Years = 15 * 365 * 24 * 60 * 60; // 15 years in seconds
+			: ip
+		const resolvedReferer = trimEnd(referer || this.host, '/')
+		const resolvedMaxAge = this.ticketServiceMaxAge
+		const maxAge15Years = 15 * 365 * 24 * 60 * 60 // 15 years in seconds
 
 		// If the domain is public, we allow any client and referer and set the maxage to 15 years
 		// This is needed so social media and chat apps can come fetch a thumbnail for the detail page of an ie object
@@ -82,7 +83,7 @@ export class PlayerTicketService {
 			client: isPublicDomain ? '' : resolvedIp,
 			referer: isPublicDomain ? '' : resolvedReferer,
 			maxage: isPublicDomain ? maxAge15Years : resolvedMaxAge,
-		};
+		}
 
 		/**
 		 * Build the full URL from the base TICKET_SERVICE_URL and the path;
@@ -193,7 +194,7 @@ export class PlayerTicketService {
 	 * @param representationOrExternalId
 	 */
 	public async getEmbedUrl(representationOrExternalId: string): Promise<string> {
-		return (await this.getEmbedUrlAndType(representationOrExternalId)).browsePath;
+		return (await this.getEmbedUrlAndType(representationOrExternalId)).browsePath
 	}
 
 	/**
@@ -201,8 +202,8 @@ export class PlayerTicketService {
 	 * @param representationOrExternalId
 	 */
 	public async getEmbedUrlAndType(representationOrExternalId: string): Promise<{
-		browsePath: string;
-		type: 'audio' | 'video' | 'other';
+		browsePath: string
+		type: 'audio' | 'video' | 'other'
 	}> {
 		let response:
 			| GetFileByRepresentationSchemaIdentifierQuery
@@ -229,11 +230,11 @@ export class PlayerTicketService {
 		const browsePath: string =
 			(response as GetItemBrowsePathByExternalIdQuery)?.app_item_meta?.[0]?.browse_path ||
 			(response as GetFileByRepresentationSchemaIdentifierQuery)?.graph_representation?.[0]
-				?.includes?.[0]?.file?.premis_stored_at;
+				?.includes?.[0]?.file?.premis_stored_at
 		const fileType: string | ContentTypeNumber =
 			(response as GetItemBrowsePathByExternalIdQuery)?.app_item_meta?.[0]?.type_id ||
 			(response as GetFileByRepresentationSchemaIdentifierQuery)?.graph_representation?.[0]
-				?.represents?.dctermsFormat?.[0]?.dcterms_format;
+				?.represents?.dctermsFormat?.[0]?.dcterms_format
 
 		if (!browsePath) {
 			throw new NotFoundException({
@@ -245,7 +246,7 @@ export class PlayerTicketService {
 			})
 		}
 
-		return { browsePath, type: mapToMediaType(fileType) };
+		return { browsePath, type: mapToMediaType(fileType) }
 	}
 
 	/**
