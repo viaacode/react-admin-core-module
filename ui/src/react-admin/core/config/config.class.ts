@@ -8,6 +8,11 @@ export class AdminConfigManager {
 	}
 
 	public static getConfig(): AdminConfig {
+		if (!AdminConfigManager.config) {
+			throw new Error(
+				'AdminConfigManager: Trying to read admin-core config before it has been set.'
+			);
+		}
 		return AdminConfigManager.config || {};
 	}
 
