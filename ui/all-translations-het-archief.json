@@ -36237,42 +36237,6 @@
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
-    "key": "pas-je-aanvraag-aan",
-    "language": "nl",
-    "value": "Pas je aanvraag aan",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
-    "key": "pas-je-aanvraag-aan",
-    "language": "en",
-    "value": "Pas je aanvraag aan",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
-    "key": "aanvraag",
-    "language": "nl",
-    "value": "Aanvraag",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
-    "key": "aanvraag",
-    "language": "en",
-    "value": "Aanvraag",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "ik-wil-dit-materiaal-downloaden-en-hergebruiken",
     "language": "nl",
     "value": "Ik wil dit materiaal downloaden en hergebruiken",
@@ -36303,6 +36267,42 @@
     "key": "materiaal",
     "language": "en",
     "value": "Materiaal",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
+    "key": "pas-je-aanvraag-aan",
+    "language": "nl",
+    "value": "Pas je aanvraag aan",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
+    "key": "pas-je-aanvraag-aan",
+    "language": "en",
+    "value": "Pas je aanvraag aan",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
+    "key": "aanvraag",
+    "language": "nl",
+    "value": "Aanvraag",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
+    "key": "aanvraag",
+    "language": "en",
+    "value": "Aanvraag",
     "value_type": "TEXT"
   },
   {
