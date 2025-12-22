@@ -72,7 +72,7 @@ pipeline {
 								npm --registry=https://registry.npmjs.org install
 								cd ui
 								npm --registry=https://registry.npmjs.org install
-								npm run build || exit 1
+								NO_COLOR=true npm run build || exit 1
 								cd ..
 							'''
 							} // end script Build ui
@@ -113,7 +113,7 @@ pipeline {
 							script {
 								sh '''
 								#!/bin/bash
-								cd api && npm --registry=https://registry.npmjs.org install && npm run build && cd .. || exit 1
+								cd api && npm --registry=https://registry.npmjs.org install && NO_COLOR=true npm run build && cd .. || exit 1
 							'''
 							} // end script Build api
 
@@ -129,7 +129,7 @@ pipeline {
 									cp .npmrc ./api
 									cd api
 									npm config fix
-									npm publish --tag legacy-v4
+									npm publish
 									rm -f .npmrc
 									cd ..
 									echo "removing .npmrc for installto nexus not seems @viaa:registry=.."
