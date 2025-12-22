@@ -89,7 +89,7 @@ pipeline {
 											cp .npmrc ./ui
 											cd ui
 											npm config fix
-											npm publish
+											npm publish --tag legacy-v4
 											rm -f .npmrc
 											cd ..
 										'''
