@@ -129,7 +129,7 @@ pipeline {
 									cp .npmrc ./api
 									cd api
 									npm config fix
-									npm publish
+									npm publish --tag legacy-v4
 									rm -f .npmrc
 									cd ..
 									echo "removing .npmrc for installto nexus not seems @viaa:registry=.."
