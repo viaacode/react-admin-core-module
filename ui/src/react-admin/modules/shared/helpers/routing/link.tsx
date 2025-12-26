@@ -11,7 +11,6 @@ import { getAdminCoreApiUrl } from '~shared/helpers/get-proxy-url-from-admin-cor
 import { navigateFunc } from '~shared/helpers/navigate-fnc';
 import { showToast } from '~shared/helpers/show-toast';
 import { tText } from '~shared/helpers/translation-functions';
-import { APP_PATH } from '../../consts/routes.consts';
 import { isInsideIframe } from './is-inside-iframe';
 
 type RouteParams = { [key: string]: string | number | undefined };
@@ -178,7 +177,7 @@ export const navigateToContentType = (action: ButtonAction) => {
 				const queryParams = JSON.parse(value as string);
 				navigateToAbsoluteOrRelativeUrl(
 					buildLink(
-						APP_PATH.SEARCH.route,
+						AdminConfigManager.getConfig().routes.SEARCH || '/zoeken',
 						{},
 						stringify(
 							Object.fromEntries(
