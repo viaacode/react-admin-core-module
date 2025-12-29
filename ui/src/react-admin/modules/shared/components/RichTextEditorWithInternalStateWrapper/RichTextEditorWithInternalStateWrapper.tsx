@@ -3,7 +3,7 @@ import type {
 	RichTextEditorWithInternalStateProps,
 } from '@meemoo/react-components';
 import { RichTextEditorWithInternalState } from '@meemoo/react-components';
-import type { Avo } from '@viaa/avo2-types';
+
 import type { FunctionComponent } from 'react';
 import React from 'react';
 
@@ -16,9 +16,10 @@ import { RICH_TEXT_EDITOR_OPTIONS_DEFAULT } from '../../consts/rich-text-editor.
 import { CustomError } from '../../helpers/custom-error';
 
 import './RichTextEditorWithInternalStateWrapper.scss';
+import type { AvoFileUploadAssetType } from '@viaa/avo2-types';
 
 export type RichTextEditorWithInternalStateWrapperProps = RichTextEditorWithInternalStateProps & {
-	fileType?: Avo.FileUpload.AssetType; // Required to enable file upload
+	fileType?: AvoFileUploadAssetType; // Required to enable file upload
 	ownerId?: string;
 };
 

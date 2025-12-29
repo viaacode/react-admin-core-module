@@ -1,5 +1,5 @@
-import { type TypedDocumentNode } from '@graphql-typed-document-node/core';
-import { DatabaseType } from '@viaa/avo2-types';
+import type { TypedDocumentNode } from '@graphql-typed-document-node/core';
+import { AvoCoreDatabaseType } from '@viaa/avo2-types';
 
 import {
 	GetSiteVariableByNameDocument as GetSiteVariableByNameDocumentAvo,
@@ -47,12 +47,12 @@ type SiteVariableQueries = {
 	UpdateSiteVariableByNameDocument: TypedDocumentNode<any, any>;
 };
 
-export const SITE_VARIABLE_QUERIES: Record<DatabaseType, SiteVariableQueries> = {
-	[DatabaseType.avo]: {
+export const SITE_VARIABLE_QUERIES: Record<AvoCoreDatabaseType, SiteVariableQueries> = {
+	[AvoCoreDatabaseType.avo]: {
 		GetSiteVariableByNameDocument: GetSiteVariableByNameDocumentAvo,
 		UpdateSiteVariableByNameDocument: UpdateSiteVariableByNameDocumentAvo,
 	},
-	[DatabaseType.hetArchief]: {
+	[AvoCoreDatabaseType.hetArchief]: {
 		GetSiteVariableByNameDocument: GetSiteVariableByNameDocumentHetArchief,
 		UpdateSiteVariableByNameDocument: UpdateSiteVariableByNameDocumentHetArchief,
 	},

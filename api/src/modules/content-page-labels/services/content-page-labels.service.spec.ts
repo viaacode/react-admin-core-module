@@ -1,5 +1,5 @@
 import { Test, type TestingModule } from '@nestjs/testing';
-import { Avo, DatabaseType } from '@viaa/avo2-types';
+import { AvoCoreDatabaseType, AvoSearchOrderDirection } from '@viaa/avo2-types';
 
 import { DataService } from '../../data';
 import {
@@ -68,7 +68,7 @@ describe('ContentPageLabelsService', () => {
 	const env = process.env;
 
 	beforeEach(async () => {
-		process.env.DATABASE_APPLICATION_TYPE = DatabaseType.hetArchief;
+		process.env.DATABASE_APPLICATION_TYPE = AvoCoreDatabaseType.hetArchief;
 		const module: TestingModule = await Test.createTestingModule({
 			providers: [
 				ContentPageLabelsService,
@@ -102,7 +102,7 @@ describe('ContentPageLabelsService', () => {
 				0,
 				20,
 				'label',
-				Avo.Search.OrderDirection.ASC,
+				AvoSearchOrderDirection.ASC,
 				'{}'
 			);
 			expect(response[0].length).toBe(1);
@@ -119,7 +119,7 @@ describe('ContentPageLabelsService', () => {
 					0,
 					20,
 					'label',
-					Avo.Search.OrderDirection.ASC,
+					AvoSearchOrderDirection.ASC,
 					'{}'
 				);
 				expect(response).toBeUndefined();

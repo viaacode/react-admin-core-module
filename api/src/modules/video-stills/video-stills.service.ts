@@ -1,22 +1,20 @@
 import { Injectable, InternalServerErrorException, Logger } from '@nestjs/common';
-import { type Avo } from '@viaa/avo2-types';
+import type { AvoStillsStillInfo } from '@viaa/avo2-types';
 import * as promiseUtils from 'blend-promise-utils';
 import { addSeconds } from 'date-fns';
 import got, { type Got } from 'got';
 import { find, isNil, last } from 'lodash';
 import { stringify } from 'query-string';
-
 import { PlayerTicketService } from '../player-ticket';
 import { toMilliseconds } from '../shared/helpers/duration';
 import { logAndThrow } from '../shared/helpers/logAndThrow';
-
 import { DEFAULT_AUDIO_STILL } from './video-stills.consts';
-import {
-	type ObjectNameInfo,
-	type ObjectNameInfoAndStills,
-	type VideoStill,
-	type VideoStillRaw,
-	type VideoStillToken,
+import type {
+	ObjectNameInfo,
+	ObjectNameInfoAndStills,
+	VideoStill,
+	VideoStillRaw,
+	VideoStillToken,
 } from './video-stills.types';
 import type { StillRequest } from './video-stills.validation';
 
@@ -120,7 +118,7 @@ export class VideoStillsService {
 	 */
 	public async getFirstVideoStills(
 		stillRequests: StillRequest[]
-	): Promise<(Avo.Stills.StillInfo | null)[]> {
+	): Promise<(AvoStillsStillInfo | null)[]> {
 		try {
 			// Get browse paths for all items
 			const objectNameInfos: (ObjectNameInfo | null)[] = await promiseUtils.mapLimit(
@@ -137,7 +135,7 @@ export class VideoStillsService {
 			);
 			// Get first video still for each video after their startTime
 			return allVideoStills.map(
-				(objectNameInfo: ObjectNameInfoAndStills | null): Avo.Stills.StillInfo | null => {
+				(objectNameInfo: ObjectNameInfoAndStills | null): AvoStillsStillInfo | null => {
 					if (!objectNameInfo || objectNameInfo.type === 'other') {
 						return null;
 					}

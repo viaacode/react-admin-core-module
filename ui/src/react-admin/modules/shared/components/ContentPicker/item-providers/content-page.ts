@@ -1,4 +1,4 @@
-import { Avo, ContentPickerType } from '@viaa/avo2-types';
+import { AvoCoreContentPickerType } from '@viaa/avo2-types';
 // TODO remove memoize in favor of react-query caching
 import memoize from 'memoizee';
 import { ContentPageService } from '~modules/content-page/services/content-page.service';
@@ -10,7 +10,11 @@ import { parsePickerItem } from '../helpers/parse-picker';
 
 // Fetch content items from GQL
 export const retrieveContentPages = memoize(
-	async (title: string | null, limit = 5, type: ContentPickerType): Promise<PickerItem[]> => {
+	async (
+		title: string | null,
+		limit = 5,
+		type: AvoCoreContentPickerType
+	): Promise<PickerItem[]> => {
 		const pageType = mapContentPickerTypeToPageType(type);
 		try {
 			const contentItems: ContentPageInfo[] | null = title
@@ -45,28 +49,28 @@ const parseContentPages = (raw: Partial<ContentPageInfo>[]): PickerItem[] => {
 	return raw.map(
 		(item: Partial<ContentPageInfo>): PickerItem => ({
 			label: item.title || '',
-			...parsePickerItem(Avo.Core.ContentPickerType.CONTENT_PAGE, item.path as string), // TODO enforce path in database
+			...parsePickerItem(AvoCoreContentPickerType.CONTENT_PAGE, item.path as string), // TODO enforce path in database
 		})
 	);
 };
 
 const mapContentPickerTypeToPageType = (
-	pickerType: Avo.Core.ContentPickerType
+	pickerType: AvoCoreContentPickerType
 ): string | undefined => {
 	switch (pickerType) {
-		case ContentPickerType.CONTENT_PAGE_NEWS_ITEM:
+		case AvoCoreContentPickerType.CONTENT_PAGE_NEWS_ITEM:
 			return 'NIEUWS_ITEM';
-		case ContentPickerType.CONTENT_PAGE_PAGE:
+		case AvoCoreContentPickerType.CONTENT_PAGE_PAGE:
 			return 'PAGINA';
-		case ContentPickerType.CONTENT_PAGE_PROJECT:
+		case AvoCoreContentPickerType.CONTENT_PAGE_PROJECT:
 			return 'PROJECT';
-		case ContentPickerType.CONTENT_PAGE_OVERVIEW:
+		case AvoCoreContentPickerType.CONTENT_PAGE_OVERVIEW:
 			return 'OVERZICHT';
-		case ContentPickerType.CONTENT_PAGE_DOMAIN_DETAIL:
+		case AvoCoreContentPickerType.CONTENT_PAGE_DOMAIN_DETAIL:
 			return 'DOMEIN_DETAIL';
-		case ContentPickerType.CONTENT_PAGE_EVENT_DETAIL:
+		case AvoCoreContentPickerType.CONTENT_PAGE_EVENT_DETAIL:
 			return 'EVENT_DETAIL';
-		case ContentPickerType.CONTENT_PAGE_SCREENCAST:
+		case AvoCoreContentPickerType.CONTENT_PAGE_SCREENCAST:
 			return 'SCREENCAST';
 
 		default:

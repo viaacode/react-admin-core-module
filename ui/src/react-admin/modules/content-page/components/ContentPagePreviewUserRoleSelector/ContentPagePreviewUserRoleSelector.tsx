@@ -7,7 +7,7 @@ import {
 	IconName,
 	RadioButtonGroup,
 } from '@viaa/avo2-components';
-import type { Avo } from '@viaa/avo2-types';
+
 import { isNil, sortBy } from 'es-toolkit';
 import React, { type FunctionComponent, useCallback, useEffect, useMemo, useState } from 'react';
 import {
@@ -21,12 +21,12 @@ import { tText } from '~shared/helpers/translation-functions';
 import { SpecialUserGroups } from '~shared/types/authentication.types';
 
 import './ContentPagePreviewUserRoleSelector.scss';
-import { AdminConfigManager } from '~core/config';
+import type { AvoUserCommonUser } from '@viaa/avo2-types';
 import { ROUTE_PARTS } from '~shared/consts';
 import { navigateFunc } from '~shared/helpers/navigate-fnc';
 
 type ContentPagePreviewUserRoleSelectorProps = {
-	commonUser?: Avo.User.CommonUser;
+	commonUser?: AvoUserCommonUser;
 	onToggleMenu?: (isOpen: boolean) => void;
 };
 

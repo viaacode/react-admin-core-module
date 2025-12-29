@@ -1,9 +1,8 @@
-import type { Avo } from '@viaa/avo2-types';
+import type { AvoContentPageType } from '@viaa/avo2-types';
 import type { Locale } from '~modules/translations/translations.core.types';
 import type { DateRange } from '~shared/components/DateRangeDropdown/DateRangeDropdown';
 import type { FilterableTableState } from '~shared/components/FilterTable/FilterTable';
 import type { PickerItem } from '~shared/types/content-picker';
-
 import type { ContentBlockConfig, DbContentBlock } from './content-block.types';
 
 // Pages
@@ -67,7 +66,7 @@ export interface ContentTableState extends FilterableTableState {
 export interface ContentPageLabel {
 	id: number;
 	label: string;
-	content_type: Avo.ContentPage.Type;
+	content_type: AvoContentPageType;
 	language: Locale;
 	link_to: PickerItem | null;
 	created_at: string;
@@ -95,7 +94,7 @@ interface ContentPageBase {
 	createdAt: string;
 	updatedAt: string | null;
 	isProtected: boolean;
-	contentType: Avo.ContentPage.Type;
+	contentType: AvoContentPageType;
 	contentWidth: ContentPageWidth;
 	owner: ContentPageUser;
 	userProfileId: string | null;

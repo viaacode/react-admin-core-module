@@ -1,14 +1,12 @@
 import type { RichEditorState } from '@meemoo/react-components';
-import type { Avo } from '@viaa/avo2-types';
+import { AvoContentPageType, type AvoUserCommonUser } from '@viaa/avo2-types';
 import { cloneDeep, isNil } from 'es-toolkit';
 import type { Draft } from 'immer';
 import { produce } from 'immer';
 import type { Reducer } from 'react';
 import { AdminConfigManager } from '~core/config/config.class';
 import { Locale } from '~modules/translations/translations.core.types';
-
 import type { ValueOf } from '~shared/types';
-
 import type {
 	ContentBlockComponentState,
 	ContentBlockComponentsConfig,
@@ -114,7 +112,7 @@ export interface ContentPageEditState {
 }
 
 export const CONTENT_PAGE_INITIAL_STATE = (
-	user: Avo.User.CommonUser
+	user: AvoUserCommonUser
 ): ContentPageInfoEditOrCreate => {
 	return {
 		thumbnailPath: null,
@@ -125,7 +123,7 @@ export const CONTENT_PAGE_INITIAL_STATE = (
 		metaDescription: '',
 		isProtected: false,
 		path: '',
-		contentType: 'PAGINA',
+		contentType: AvoContentPageType.PROJECT,
 		contentWidth:
 			AdminConfigManager.getConfig()?.contentPage?.defaultPageWidth || ContentPageWidth.EXTRA_LARGE,
 		publishAt: '',

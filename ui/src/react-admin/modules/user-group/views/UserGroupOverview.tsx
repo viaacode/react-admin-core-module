@@ -287,7 +287,7 @@ export const UserGroupOverview = forwardRef<
 	};
 
 	if (isLoadingUserGroups || isLoadingPermissions) {
-		return <CenteredSpinner />;
+		return <CenteredSpinner locationId="user-group-overview--loading" />;
 	}
 	if (isErrorUserGroups || isErrorPermissions) {
 		return (

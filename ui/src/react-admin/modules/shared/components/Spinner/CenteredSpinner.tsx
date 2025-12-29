@@ -1,13 +1,17 @@
 import { Container, Flex } from '@viaa/avo2-components';
 import type { FC } from 'react';
 import React from 'react';
-import { Loader } from '../Loader/Loader';
+import { Loading } from '../Loading/Loading';
 
-export const CenteredSpinner: FC = () => {
+interface CenteredSpinnerProps {
+	locationId: string;
+}
+
+export const CenteredSpinner: FC<CenteredSpinnerProps> = ({ locationId }) => {
 	return (
 		<Container mode="vertical">
 			<Flex orientation="horizontal" center>
-				<Loader />
+				<Loading locationId={locationId} />
 			</Flex>
 		</Container>
 	);

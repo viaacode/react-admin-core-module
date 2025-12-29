@@ -1,33 +1,30 @@
 import { forwardRef, Inject } from '@nestjs/common';
-import { Avo } from '@viaa/avo2-types';
+import type { AvoAuthIdpType, AvoSearchOrderDirection, AvoUserCommonUser } from '@viaa/avo2-types';
 import { compact, flatten } from 'lodash';
-
 import { DataService } from '../data';
-import { AdminOrganisationsService } from '../organisations';
 import {
 	BulkAddLomsToProfilesDocument,
-	BulkAddLomsToProfilesMutation,
-	BulkAddLomsToProfilesMutationVariables,
+	type BulkAddLomsToProfilesMutation,
+	type BulkAddLomsToProfilesMutationVariables,
 	BulkDeleteLomsFromProfilesDocument,
-	BulkDeleteLomsFromProfilesMutation,
-	BulkDeleteLomsFromProfilesMutationVariables,
+	type BulkDeleteLomsFromProfilesMutation,
+	type BulkDeleteLomsFromProfilesMutationVariables,
 	GetContentCountsForUsersDocument,
-	GetContentCountsForUsersQuery,
-	GetContentCountsForUsersQueryVariables,
+	type GetContentCountsForUsersQuery,
+	type GetContentCountsForUsersQueryVariables,
 	GetDistinctBusinessCategoriesDocument,
-	GetDistinctBusinessCategoriesQuery,
-	GetDistinctBusinessCategoriesQueryVariables,
+	type GetDistinctBusinessCategoriesQuery,
+	type GetDistinctBusinessCategoriesQueryVariables,
 	GetUserByIdDocument,
-	GetUserByIdQuery,
-	GetUserByIdQueryVariables,
+	type GetUserByIdQuery,
+	type GetUserByIdQueryVariables,
 } from '../shared/generated/graphql-db-types-avo';
 import { customError } from '../shared/helpers/custom-error';
 import { getOrderObject } from '../shared/helpers/generate-order-gql-query';
 import { getDatabaseType } from '../shared/helpers/get-database-type';
 import { isAvo } from '../shared/helpers/is-avo';
 import { isHetArchief } from '../shared/helpers/is-hetarchief';
-
-import { USER_QUERIES, UserQueryTypes } from './queries/users.queries';
+import { USER_QUERIES, type UserQueryTypes } from './queries/users.queries';
 import { GET_TABLE_COLUMN_TO_DATABASE_ORDER_OBJECT } from './users.consts';
 import { convertUserInfoToCommonUser } from './users.converters';
 import {
@@ -39,12 +36,9 @@ import {
 } from './users.types';
 
 export class UsersService {
-	constructor(
-		@Inject(forwardRef(() => DataService)) protected dataService: DataService,
-		protected adminOrganisationsService: AdminOrganisationsService
-	) {}
+	constructor(@Inject(forwardRef(() => DataService)) protected dataService: DataService) {}
 
-	async getById(profileId: string): Promise<Avo.User.CommonUser> {
+	async getById(profileId: string): Promise<AvoUserCommonUser> {
 		try {
 			if (!isAvo()) {
 				throw customError('Not supported for hetarchief only for avo');
@@ -77,10 +71,10 @@ export class UsersService {
 		offset: number,
 		limit: number,
 		sortColumn: UserOverviewTableCol,
-		sortOrder: Avo.Search.OrderDirection,
+		sortOrder: AvoSearchOrderDirection,
 		tableColumnDataType: string,
 		where: any = {}
-	): Promise<[Avo.User.CommonUser[], number]> {
+	): Promise<[AvoUserCommonUser[], number]> {
 		let variables: any;
 		try {
 			// Hetarchief doesn't have a is_deleted column yet
@@ -117,7 +111,7 @@ export class UsersService {
 				hetArchiefResponse?.users_profile ||
 				[]) as UserInfoOverviewAvo[] | UserInfoOverviewHetArchief[];
 
-			const profiles: Avo.User.CommonUser[] = compact(
+			const profiles: AvoUserCommonUser[] = compact(
 				userProfileObjects.map((userInfo) => {
 					return convertUserInfoToCommonUser(
 						userInfo,
@@ -146,7 +140,7 @@ export class UsersService {
 		}
 	}
 
-	async getNamesByProfileIds(profileIds: string[]): Promise<Partial<Avo.User.CommonUser>[]> {
+	async getNamesByProfileIds(profileIds: string[]): Promise<Partial<AvoUserCommonUser>[]> {
 		try {
 			const response = await this.dataService.execute<
 				UserQueryTypes['GetProfileNamesQuery'],
@@ -162,7 +156,7 @@ export class UsersService {
 				).map(
 					(
 						profileEntry: UserQueryTypes['GetProfileNamesQueryHetArchief']['users_profile'][0]
-					): Partial<Avo.User.CommonUser> => ({
+					): Partial<AvoUserCommonUser> => ({
 						profileId: profileEntry.id,
 						fullName: profileEntry.full_name || undefined,
 						email: profileEntry.mail || undefined,
@@ -174,7 +168,7 @@ export class UsersService {
 				).map(
 					(
 						profileEntry: UserQueryTypes['GetProfileNamesQueryAvo']['users_summary_view'][0]
-					): Partial<Avo.User.CommonUser> => ({
+					): Partial<AvoUserCommonUser> => ({
 						profileId: profileEntry.profile_id,
 						fullName: profileEntry.full_name || undefined,
 						email: profileEntry.mail || undefined,
@@ -243,7 +237,7 @@ export class UsersService {
 		}
 	}
 
-	async fetchIdps(): Promise<Avo.Auth.IdpType[]> {
+	async fetchIdps(): Promise<AvoAuthIdpType[]> {
 		try {
 			const response = await this.dataService.execute<
 				UserQueryTypes['GetIdpsQuery'],
@@ -254,11 +248,11 @@ export class UsersService {
 			if (isHetArchief()) {
 				return (
 					(response as UserQueryTypes['GetIdpsQueryHetArchief']).users_identity_provider || []
-				).map((idp) => idp.name as Avo.Auth.IdpType);
+				).map((idp) => idp.name as AvoAuthIdpType);
 			}
 
 			return ((response as UserQueryTypes['GetIdpsQueryAvo']).users_idps || []).map(
-				(idp) => idp.value as Avo.Auth.IdpType
+				(idp) => idp.value as AvoAuthIdpType
 			);
 		} catch (err: any) {
 			throw customError('Failed to get idps from the database', err, {

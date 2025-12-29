@@ -1,5 +1,5 @@
 import type { TypedDocumentNode } from '@graphql-typed-document-node/core';
-import { DatabaseType } from '@viaa/avo2-types';
+import { AvoCoreDatabaseType } from '@viaa/avo2-types';
 
 import {
 	DeleteNavigationItemDocument as DeleteNavigationItemDocumentAvo,
@@ -149,8 +149,8 @@ type NavigationQueries = {
 	UpdateNavigationItemByIdDocument: TypedDocumentNode<any, any>;
 };
 
-export const NAVIGATION_QUERIES: Record<DatabaseType, NavigationQueries> = {
-	[DatabaseType.avo]: {
+export const NAVIGATION_QUERIES: Record<AvoCoreDatabaseType, NavigationQueries> = {
+	[AvoCoreDatabaseType.avo]: {
 		DeleteNavigationItemDocument: DeleteNavigationItemDocumentAvo,
 		GetNavigationBarsDocument: GetNavigationBarsDocumentAvo,
 		GetAllNavigationItemsDocument: GetAllNavigationItemsDocumentAvo,
@@ -161,7 +161,7 @@ export const NAVIGATION_QUERIES: Record<DatabaseType, NavigationQueries> = {
 		InsertNavigationItemDocument: InsertNavigationItemDocumentAvo,
 		UpdateNavigationItemByIdDocument: UpdateNavigationItemByIdDocumentAvo,
 	},
-	[DatabaseType.hetArchief]: {
+	[AvoCoreDatabaseType.hetArchief]: {
 		DeleteNavigationItemDocument: DeleteNavigationItemDocumentHetArchief,
 		GetNavigationBarsDocument: GetNavigationBarsDocumentHetArchief,
 		GetAllNavigationItemsDocument: GetAllNavigationItemsDocumentHetArchief,

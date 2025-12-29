@@ -38,8 +38,8 @@ import {
 import { INITIAL_TAGS_WITH_LINK_COMPONENTS_STATE } from '~content-blocks/BlockTagsWithLink';
 import { INITIAL_THREE_CLICKABLE_TILES_COMPONENTS_STATE } from '~content-blocks/BlockThreeClickableTiles';
 import { INITIAL_UITGEKLAARD_BLOCK_STATE } from '~content-blocks/BlockUitgeklaard';
-import { INITIAL_MEDIA_PLAYER_COMPONENTS_STATE } from '~content-blocks/BlockVideo/index';
-import { INITIAL_MEDIA_PLAYER_TITLE_TEXT_BUTTON_COMPONENTS_STATE } from '~content-blocks/BlockVideoTitleTextButton/index';
+import { INITIAL_MEDIA_PLAYER_COMPONENTS_STATE } from '~content-blocks/BlockVideo';
+import { INITIAL_MEDIA_PLAYER_TITLE_TEXT_BUTTON_COMPONENTS_STATE } from '~content-blocks/BlockVideoTitleTextButton';
 import { INITIAL_SEARCH_COMPONENTS_STATE } from '~content-blocks/search';
 import type { ContentBlockComponentState } from '../types/content-block.types';
 import { ContentBlockType } from '../types/content-block.types';

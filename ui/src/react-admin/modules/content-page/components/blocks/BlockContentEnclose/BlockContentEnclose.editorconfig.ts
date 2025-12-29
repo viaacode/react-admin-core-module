@@ -1,4 +1,4 @@
-import type { ContentPickerType } from '@viaa/avo2-types';
+import type { AvoCoreContentPickerType } from '@viaa/avo2-types';
 import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, TEXT_FIELD } from '~content-blocks/defaults';
 import { AdminConfigManager } from '~core/config/config.class';
 import { GET_HEADING_TYPE_OPTIONS } from '~modules/content-page/const/get-heading-type-options';
@@ -129,7 +129,7 @@ export const CONTENT_ENCLOSE_BLOCK_CONFIG = (position = 0): ContentBlockConfig =
 						'EXTERNAL_LINK',
 						'ANCHOR_LINK',
 						'FILE',
-					] as ContentPickerType[],
+					] as AvoCoreContentPickerType[],
 				},
 			},
 			elements: {
@@ -147,7 +147,7 @@ export const CONTENT_ENCLOSE_BLOCK_CONFIG = (position = 0): ContentBlockConfig =
 						),
 						editorType: ContentBlockEditor.ContentPicker,
 						editorProps: {
-							allowedTypes: ['CONTENT_PAGE', 'IE_OBJECT'] as ContentPickerType[],
+							allowedTypes: ['CONTENT_PAGE', 'IE_OBJECT'] as AvoCoreContentPickerType[],
 						},
 					},
 				},

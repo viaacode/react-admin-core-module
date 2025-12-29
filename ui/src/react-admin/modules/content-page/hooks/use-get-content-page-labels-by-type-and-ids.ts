@@ -1,10 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
-import type { Avo } from '@viaa/avo2-types';
+import type { AvoContentPageType } from '@viaa/avo2-types';
 import { ContentPageLabelService } from '~modules/content-page-labels/content-page-label.service';
 import { QUERY_KEYS } from '~shared/types';
 
 interface ContentPageLabelsRequestArgs {
-	selectedContentType: Avo.ContentPage.Type;
+	selectedContentType: AvoContentPageType;
 	getSelectedLabelIds: number[] | string[];
 }
 

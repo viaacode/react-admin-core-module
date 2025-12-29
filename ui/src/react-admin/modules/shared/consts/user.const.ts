@@ -1,7 +1,7 @@
-import type { Avo } from '@viaa/avo2-types';
+import type { AvoUserUserDeleteOption } from '@viaa/avo2-types';
 import { tText } from '~shared/helpers/translation-functions';
 
-type UserDeleteRadioOption = { label: string; value: Avo.User.UserDeleteOption };
+type UserDeleteRadioOption = { label: string; value: AvoUserUserDeleteOption };
 export const GET_DELETE_RADIO_OPTIONS = (): UserDeleteRadioOption[] => {
 	return [
 		{

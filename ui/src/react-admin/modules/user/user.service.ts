@@ -1,4 +1,10 @@
-import type { Avo } from '@viaa/avo2-types';
+import type {
+	AvoSearchOrderDirection,
+	AvoUserBulkBlockUsersBody,
+	AvoUserBulkDeleteUsersBody,
+	AvoUserCommonUser,
+	AvoUserUserDeleteOption,
+} from '@viaa/avo2-types';
 import { stringifyUrl } from 'query-string';
 import { AdminConfigManager } from '~core/config/config.class';
 import { CustomError } from '~shared/helpers/custom-error';
@@ -9,7 +15,6 @@ import {
 } from '~shared/helpers/get-proxy-url-from-admin-core-config';
 import { isAvo } from '~shared/helpers/is-avo';
 import { isHetArchief } from '~shared/helpers/is-hetarchief';
-
 import type { DeleteContentCounts, Idp, UserOverviewTableCol } from './user.types';
 
 export class UserService {
@@ -17,9 +22,9 @@ export class UserService {
 		return `${getAdminCoreApiUrl()}/admin/users`;
 	}
 
-	static async getUserById(id: string): Promise<Avo.User.CommonUser> {
+	static async getUserById(id: string): Promise<AvoUserCommonUser> {
 		try {
-			return fetchWithLogoutJson<Avo.User.CommonUser>(
+			return fetchWithLogoutJson<AvoUserCommonUser>(
 				stringifyUrl({
 					url: `${UserService.getBaseUrl()}/${id}`,
 				}),
@@ -37,11 +42,11 @@ export class UserService {
 		offset: number,
 		limit: number,
 		sortColumn: UserOverviewTableCol,
-		sortOrder: Avo.Search.OrderDirection,
+		sortOrder: AvoSearchOrderDirection,
 		tableColumnDataType: string,
 		// biome-ignore lint/suspicious/noExplicitAny: todo
 		where: any = {}
-	): Promise<[Avo.User.CommonUser[], number]> {
+	): Promise<[AvoUserCommonUser[], number]> {
 		try {
 			return fetchWithLogoutJson(UserService.getBaseUrl(), {
 				method: 'POST',
@@ -66,7 +71,7 @@ export class UserService {
 		}
 	}
 
-	static async getNamesByProfileIds(profileIds: string[]): Promise<Partial<Avo.User.CommonUser>[]> {
+	static async getNamesByProfileIds(profileIds: string[]): Promise<Partial<AvoUserCommonUser>[]> {
 		try {
 			return fetchWithLogoutJson(
 				stringifyUrl({
@@ -113,7 +118,7 @@ export class UserService {
 		let url: string | undefined;
 		try {
 			url = `${getProxyUrl()}/user/bulk-block`;
-			const body: Avo.User.BulkBlockUsersBody = {
+			const body: AvoUserBulkBlockUsersBody = {
 				profileIds,
 				isBlocked,
 				sendEmail: !!sendEmail,
@@ -156,7 +161,7 @@ export class UserService {
 
 	static async bulkDeleteUsers(
 		profileIds: string[],
-		deleteOption: Avo.User.UserDeleteOption,
+		deleteOption: AvoUserUserDeleteOption,
 		sendEmail: boolean,
 		transferToProfileId?: string
 	): Promise<void> {
@@ -164,7 +169,7 @@ export class UserService {
 
 		try {
 			url = `${getProxyUrl()}/user/bulk-delete`;
-			const body: Avo.User.BulkDeleteUsersBody = {
+			const body: AvoUserBulkDeleteUsersBody = {
 				profileIds,
 				deleteOption,
 				sendEmail,

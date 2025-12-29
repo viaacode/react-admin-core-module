@@ -1,12 +1,10 @@
 import { Test, type TestingModule } from '@nestjs/testing';
-import type { Avo } from '@viaa/avo2-types';
-
+import type { AvoFileUploadUploadAssetInfo } from '@viaa/avo2-types';
 import { getMockUserAvo } from '../../../mock-user';
 import { mockTranslationsService } from '../../shared/helpers/mockTranslationsService';
 import { Locale, TranslationsService } from '../../translations';
 import { SessionUserEntity } from '../../users/classes/session-user';
 import { AssetsService } from '../services/assets.service';
-
 import { AssetsController } from './assets.controller';
 
 const mockAssetsService: Partial<Record<keyof AssetsService, jest.SpyInstance>> = {
@@ -48,7 +46,7 @@ describe('AssetsController', () => {
 
 			const response = await assetsController.uploadAsset(
 				{} as any,
-				{} as Avo.FileUpload.UploadAssetInfo,
+				{} as AvoFileUploadUploadAssetInfo,
 				{ getLanguage: () => Locale.Nl } as any
 			);
 

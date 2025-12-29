@@ -1,4 +1,4 @@
-import type { Avo } from '@viaa/avo2-types';
+import type { AvoContentPageType, AvoSearchOrderDirection } from '@viaa/avo2-types';
 import { compact } from 'es-toolkit';
 import { stringifyUrl } from 'query-string';
 import type { LabelObj } from '~content-blocks/BlockPageOverview/BlockPageOverview.types';
@@ -19,7 +19,7 @@ export class ContentPageLabelService {
 	public static async fetchContentPageLabels(
 		page: number,
 		sortColumn: ContentPageLabelOverviewTableCols,
-		sortOrder: Avo.Search.OrderDirection,
+		sortOrder: AvoSearchOrderDirection,
 		// biome-ignore lint/suspicious/noExplicitAny: todo
 		where: any,
 		itemsPerPage: number = LABELS_PER_PAGE
@@ -119,7 +119,7 @@ export class ContentPageLabelService {
 	}
 
 	static async getContentPageLabelsByTypeAndLabels(
-		contentType: Avo.ContentPage.Type,
+		contentType: AvoContentPageType,
 		labels: string[]
 	): Promise<LabelObj[]> {
 		try {
@@ -143,7 +143,7 @@ export class ContentPageLabelService {
 	}
 
 	static async getContentPageLabelsByTypeAndIds(
-		contentType: Avo.ContentPage.Type,
+		contentType: AvoContentPageType,
 		labelIds: number[] | string[]
 	): Promise<LabelObj[]> {
 		try {

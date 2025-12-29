@@ -2,7 +2,7 @@
 import type { RichEditorState } from '@meemoo/react-components';
 import { Button, PaginationBar, RichTextEditor, Table, TextInput } from '@meemoo/react-components';
 import { Spacer } from '@viaa/avo2-components';
-import { Avo } from '@viaa/avo2-types';
+
 import { sortBy } from 'es-toolkit';
 import { reverse } from 'es-toolkit/compat';
 import type { FunctionComponent, KeyboardEvent, ReactElement, ReactNode } from 'react';
@@ -22,12 +22,12 @@ import type {
 } from '~modules/translations/translations.types';
 import Html from '~shared/components/Html/Html';
 import { Icon } from '~shared/components/Icon/Icon';
-import { Loader } from '~shared/components/Loader/Loader';
+import { Loading } from '~shared/components/Loading/Loading';
 import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner';
 import { sortingIcons } from '~shared/components/Table/Table.const';
 import { GET_LANGUAGE_NAMES } from '~shared/consts/language-names';
 import { CustomError } from '~shared/helpers/custom-error';
-import { SanitizePreset } from '~shared/helpers/sanitize/presets/index';
+import { SanitizePreset } from '~shared/helpers/sanitize/presets';
 import { showToast } from '~shared/helpers/show-toast';
 import { tHtml, tText } from '~shared/helpers/translation-functions';
 import type { TranslationEntry } from '../../../../../scripts/translation.types';
@@ -35,6 +35,7 @@ import { getFullKey } from '../helpers/get-full-key';
 import { useGetAllLanguages } from '../hooks/use-get-all-languages';
 import { TranslationsService } from '../translations.service';
 import './TranslationsOverview.scss';
+import { AvoSearchOrderDirection } from '@viaa/avo2-types';
 
 type OrderProp = `value_${Locale}` | 'id';
 
@@ -66,8 +67,8 @@ export const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> 
 	const [search, setSearch] = useState<string>('');
 	const [page, setPage] = useState<number>(0);
 	const [orderProp, setOrderProp] = useState<OrderProp | undefined>(undefined);
-	const [orderDirection, setOrderDirection] = useState<Avo.Search.OrderDirection>(
-		Avo.Search.OrderDirection.ASC
+	const [orderDirection, setOrderDirection] = useState<AvoSearchOrderDirection>(
+		AvoSearchOrderDirection.ASC
 	);
 
 	const pageCount: number = Math.ceil(filteredTranslationsCount / TRANSLATIONS_PER_PAGE);
@@ -99,7 +100,7 @@ export const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> 
 				return undefined;
 			},
 		]);
-		if (orderDirection === Avo.Search.OrderDirection.DESC) {
+		if (orderDirection === AvoSearchOrderDirection.DESC) {
 			sortedTranslations = reverse(sortedTranslations);
 		}
 		const paginatedTranslations: MultiLanguageTranslationEntry[] = sortedTranslations.slice(
@@ -182,19 +183,16 @@ export const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> 
 		return [
 			{
 				id: orderProp,
-				desc: orderDirection !== Avo.Search.OrderDirection.ASC,
+				desc: orderDirection !== AvoSearchOrderDirection.ASC,
 			},
 		];
 	}, [orderProp, orderDirection]);
 
 	const handleSortChange = useCallback(
-		(
-			newOrderProp: string | undefined,
-			newOrderDirection: Avo.Search.OrderDirection | undefined
-		) => {
+		(newOrderProp: string | undefined, newOrderDirection: AvoSearchOrderDirection | undefined) => {
 			if (newOrderProp !== orderProp || newOrderDirection !== orderDirection) {
 				setOrderProp(newOrderProp as OrderProp | undefined);
-				setOrderDirection(newOrderDirection || Avo.Search.OrderDirection.ASC);
+				setOrderDirection(newOrderDirection || AvoSearchOrderDirection.ASC);
 				setPage(0);
 			}
 		},
@@ -307,7 +305,7 @@ export const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> 
 
 	const renderTranslationsTable = (): ReactNode => {
 		if (!filteredAndPaginatedTranslations) {
-			return <Loader />;
+			return <Loading locationId="translations-overview--loading2" />;
 		}
 		if (!filteredAndPaginatedTranslations.length) {
 			return (
@@ -387,7 +385,7 @@ export const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> 
 	};
 
 	if (isLoadingTranslations) {
-		return <CenteredSpinner />;
+		return <CenteredSpinner locationId="translations-overview--loading" />;
 	}
 	return (
 		<div className={className}>

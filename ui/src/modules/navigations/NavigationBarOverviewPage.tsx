@@ -4,7 +4,7 @@ import { NavigationBarOverview } from '~modules/navigation/views/NavigationBarOv
 import { tText } from '~shared/helpers/translation-functions';
 import { AdminLayout } from '~shared/layouts/AdminLayout/AdminLayout';
 
-export const NavigationOverviewPage: FunctionComponent = () => {
+export const NavigationBarOverviewPage: FunctionComponent = () => {
 	const renderPageContent = () => {
 		return (
 			<AdminLayout pageTitle={tText('admin/menu/views/menu-overview___navigatie-overzicht')}>

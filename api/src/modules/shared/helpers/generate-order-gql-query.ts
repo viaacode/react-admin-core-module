@@ -1,4 +1,4 @@
-import type { Avo } from '@viaa/avo2-types';
+import type { AvoSearchOrderDirection } from '@viaa/avo2-types';
 
 export enum GraphQlSortDirections {
 	asc_nulls_last = 'asc_nulls_last',
@@ -9,25 +9,25 @@ export enum GraphQlSortDirections {
 	desc = 'desc',
 }
 
-const DEFAULT_NULL_ORDER: Record<Avo.Search.OrderDirection, GraphQlSortDirections> = {
+const DEFAULT_NULL_ORDER: Record<AvoSearchOrderDirection, GraphQlSortDirections> = {
 	asc: GraphQlSortDirections.asc_nulls_last,
 	desc: GraphQlSortDirections.desc_nulls_first,
 };
 
 // Reverse order so asc sorts [true false null], and desc sorts [null false true]
-const BOOLEAN_ORDER: Record<Avo.Search.OrderDirection, GraphQlSortDirections> = {
+const BOOLEAN_ORDER: Record<AvoSearchOrderDirection, GraphQlSortDirections> = {
 	asc: GraphQlSortDirections.desc_nulls_last,
 	desc: GraphQlSortDirections.asc_nulls_first,
 };
 
 // temp_access edge case
-const BOOLEAN_NULLS_LAST_ORDER: Record<Avo.Search.OrderDirection, GraphQlSortDirections> = {
+const BOOLEAN_NULLS_LAST_ORDER: Record<AvoSearchOrderDirection, GraphQlSortDirections> = {
 	asc: GraphQlSortDirections.desc_nulls_last,
 	desc: GraphQlSortDirections.asc_nulls_last,
 };
 
 export const getGqlSortDirection = (
-	order: Avo.Search.OrderDirection,
+	order: AvoSearchOrderDirection,
 	tableColumnDataType: string
 ): GraphQlSortDirections => {
 	switch (tableColumnDataType) {
@@ -46,10 +46,10 @@ export const getGqlSortDirection = (
 
 export const getOrderObject = (
 	sortColumn: string,
-	sortOrder: Avo.Search.OrderDirection,
+	sortOrder: AvoSearchOrderDirection,
 	tableColumnDataType: string,
 	columns: {
-		[columnName: string]: ((order: Avo.Search.OrderDirection) => any) | null;
+		[columnName: string]: ((order: AvoSearchOrderDirection) => any) | null;
 	}
 ): Record<string, GraphQlSortDirections>[] => {
 	const getOrderFunc = columns[sortColumn] as unknown as

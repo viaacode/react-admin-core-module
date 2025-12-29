@@ -9,21 +9,22 @@ import {
 	Spacer,
 	TagList,
 } from '@viaa/avo2-components';
-import type { Avo } from '@viaa/avo2-types';
+
 import clsx from 'clsx';
 import type { FunctionComponent, MouseEvent } from 'react';
 import React, { useEffect, useState } from 'react';
 import { tHtml, tText } from '~shared/helpers/translation-functions';
-import { AVO } from '~shared/types/index';
+import { AVO } from '~shared/types';
 import { NULL_FILTER } from '../../helpers/filters';
 import { EducationalOrganisationsSelect } from '../EducationalOrganisationsSelect/EducationalOrganisationsSelect';
 
 import './MultiEducationalOrganisationSelectModal.scss';
+import type { AvoEducationOrganizationOrganization } from '@viaa/avo2-types';
 
 export interface MultiEducationalOrganisationSelectModalProps {
 	label: string;
 	id: string;
-	values: Avo.EducationOrganization.Organization[];
+	values: AvoEducationOrganizationOrganization[];
 	disabled?: boolean;
 	onChange: (organisations: string[], id: string) => void;
 	showSelectedValuesOnCollapsed?: boolean;
@@ -35,7 +36,7 @@ export const MultiEducationalOrganisationSelectModal: FunctionComponent<
 	const [isOpen, setIsOpen] = useState<boolean>(false);
 	const [includeEmpty, setIncludeEmpty] = useState<boolean>(false);
 	const [selectedOrganisations, setSelectedOrganisations] =
-		useState<Avo.EducationOrganization.Organization[]>(values);
+		useState<AvoEducationOrganizationOrganization[]>(values);
 
 	useEffect(() => {
 		setSelectedOrganisations(values.filter((org) => org.organisationLabel !== NULL_FILTER));

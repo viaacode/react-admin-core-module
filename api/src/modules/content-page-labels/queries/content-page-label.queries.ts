@@ -1,5 +1,5 @@
 import type { TypedDocumentNode } from '@graphql-typed-document-node/core';
-import { DatabaseType } from '@viaa/avo2-types';
+import { AvoCoreDatabaseType } from '@viaa/avo2-types';
 
 import {
 	DeleteContentPageLabelByIdDocument as DeleteContentPageLabelByIdDocumentAvo,
@@ -129,8 +129,8 @@ type ContentPageLabelQueries = {
 	GetContentPageLabelsByTypeAndLabelsDocument: TypedDocumentNode<any, any>;
 };
 
-export const CONTENT_PAGE_LABEL_QUERIES: Record<DatabaseType, ContentPageLabelQueries> = {
-	[DatabaseType.avo]: {
+export const CONTENT_PAGE_LABEL_QUERIES: Record<AvoCoreDatabaseType, ContentPageLabelQueries> = {
+	[AvoCoreDatabaseType.avo]: {
 		DeleteContentPageLabelByIdDocument: DeleteContentPageLabelByIdDocumentAvo,
 		GetContentPageLabelByIdDocument: GetContentPageLabelByIdDocumentAvo,
 		GetContentPageLabelsDocument: GetContentPageLabelsDocumentAvo,
@@ -139,7 +139,7 @@ export const CONTENT_PAGE_LABEL_QUERIES: Record<DatabaseType, ContentPageLabelQu
 		GetContentPageLabelsByTypeAndIdsDocument: GetContentPageLabelsByTypeAndIdsDocumentAvo,
 		GetContentPageLabelsByTypeAndLabelsDocument: GetContentPageLabelsByTypeAndLabelsDocumentAvo,
 	},
-	[DatabaseType.hetArchief]: {
+	[AvoCoreDatabaseType.hetArchief]: {
 		DeleteContentPageLabelByIdDocument: DeleteContentPageLabelByIdDocumentHetArchief,
 		GetContentPageLabelByIdDocument: GetContentPageLabelByIdDocumentHetArchief,
 		GetContentPageLabelsDocument: GetContentPageLabelsDocumentHetArchief,

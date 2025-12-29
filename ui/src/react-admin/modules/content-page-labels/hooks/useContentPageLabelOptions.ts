@@ -1,4 +1,4 @@
-import { Avo } from '@viaa/avo2-types';
+import { AvoSearchOrderDirection } from '@viaa/avo2-types';
 import { capitalize, orderBy, startCase } from 'es-toolkit';
 import { useEffect, useState } from 'react';
 import { ToastType } from '~core/config/config.types';
@@ -21,7 +21,7 @@ export const useContentPageLabelOptions = (): UseContentPageLabelsTuple => {
 		ContentPageLabelService.fetchContentPageLabels(
 			0,
 			'label',
-			Avo.Search.OrderDirection.ASC,
+			AvoSearchOrderDirection.ASC,
 			{},
 			10000
 		)
@@ -36,7 +36,7 @@ export const useContentPageLabelOptions = (): UseContentPageLabelsTuple => {
 							})
 						),
 						['label'],
-						[Avo.Search.OrderDirection.ASC]
+						[AvoSearchOrderDirection.ASC]
 					)
 				);
 			})

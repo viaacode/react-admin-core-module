@@ -1,5 +1,5 @@
 import type { CheckboxProps, MultiRangeProps } from '@viaa/avo2-components';
-import { Avo } from '@viaa/avo2-types';
+import { AvoCoreContentPickerType } from '@viaa/avo2-types';
 import { AdminConfigManager } from '~core/config/config.class';
 import {
 	GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF,
@@ -45,8 +45,8 @@ export const INITIAL_MEDIA_GRID_BLOCK_STATE = (): MediaGridBlockState => ({
 	ctaTitle: '',
 	ctaContent: '',
 	ctaButtonLabel: '',
-	ctaButtonAction: { type: Avo.Core.ContentPickerType.ITEM, value: '' },
-	searchQuery: { type: Avo.Core.ContentPickerType.SEARCH_QUERY, value: '' },
+	ctaButtonAction: { type: AvoCoreContentPickerType.ITEM, value: '' },
+	searchQuery: { type: AvoCoreContentPickerType.SEARCH_QUERY, value: '' },
 	searchQueryLimit: '8',
 });
 
@@ -85,7 +85,7 @@ export const MEDIA_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 						'CONTENT_PAGE_DOMAIN_DETAIL',
 						'CONTENT_PAGE_EVENT_DETAIL',
 						'CONTENT_PAGE_SCREENCAST',
-					] as Avo.Core.ContentPickerType[],
+					] as AvoCoreContentPickerType[],
 				},
 				fieldsToResetOnChange: ['startCuePoint', 'endCuePoint'],
 			},
@@ -264,7 +264,7 @@ export const MEDIA_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				),
 				editorType: ContentBlockEditor.ContentPicker,
 				editorProps: {
-					allowedTypes: ['SEARCH_QUERY'] as Avo.Core.ContentPickerType[],
+					allowedTypes: ['SEARCH_QUERY'] as AvoCoreContentPickerType[],
 					hideTypeDropdown: true,
 				},
 				note: tHtml(

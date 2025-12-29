@@ -1,6 +1,6 @@
 import type { SelectOption, TagInfo } from '@viaa/avo2-components';
 import { Column, FormGroup, Grid, Select, TagsInput } from '@viaa/avo2-components';
-import type { Avo } from '@viaa/avo2-types';
+import type { AvoContentPageType } from '@viaa/avo2-types';
 import { compact, isString } from 'es-toolkit';
 import type { FunctionComponent } from 'react';
 import React, { useEffect, useState } from 'react';
@@ -14,7 +14,7 @@ import { ContentPageService } from '../../../content-page/services/content-page.
 import { CustomError } from '../../helpers/custom-error';
 
 export interface ContentTypeAndLabelsValue {
-	selectedContentType: Avo.ContentPage.Type;
+	selectedContentType: AvoContentPageType;
 	selectedLabels: string[] | number[] | null;
 }
 
@@ -62,14 +62,14 @@ export const ContentTypeAndLabelsPicker: FunctionComponent<ContentTypeAndLabelsP
 
 	const handleContentTypeChanged = (selectedValue: string) => {
 		onChange({
-			selectedContentType: selectedValue as Avo.ContentPage.Type,
+			selectedContentType: selectedValue as AvoContentPageType,
 			selectedLabels: null,
 		});
 	};
 
 	const handleLabelsChanged = (newSelectedLabels: TagInfo[]) => {
 		const newState = {
-			selectedContentType: value?.selectedContentType as Avo.ContentPage.Type,
+			selectedContentType: value?.selectedContentType as AvoContentPageType,
 			selectedLabels: (newSelectedLabels || []).map((labelOption) => labelOption.value) as
 				| string[]
 				| number[],

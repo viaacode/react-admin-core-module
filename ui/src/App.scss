@@ -12,3 +12,31 @@
   height: auto;
   background-color: rgb(0 0 0 / 50%);
 }
+
+.admin-app__navbar {
+  height: 60px;
+  background-color: #283d4e;
+  color: white;
+  padding-left: 20px;
+  display: flex;
+  align-items: center;
+
+  h1 {
+	color: rgba(255, 255, 255, 0.5);
+  }
+
+  a {
+	margin-left: 20px;
+	padding: 8px 16px;
+	background-color: transparent;
+	color: white;
+	text-decoration: none;
+	border-radius: 4px;
+	height: 40px;
+	margin-right: 10px;
+
+	&:hover {
+	  background-color: rgba(255, 255, 255, 0.1);
+	}
+  }
+}

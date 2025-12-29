@@ -1,15 +1,14 @@
 import type { SelectOption } from '@viaa/avo2-components';
-import type { Avo } from '@viaa/avo2-types';
+import type { AvoContentPageType } from '@viaa/avo2-types';
 import { useEffect, useState } from 'react';
-
 import { ContentPageService } from '../services/content-page.service';
 
-type UseContentTypesTuple = [SelectOption<Avo.ContentPage.Type>[], boolean];
+type UseContentTypesTuple = [SelectOption<AvoContentPageType>[], boolean];
 
 export const useContentTypes = (): UseContentTypesTuple => {
-	const [contentTypeOptions, setContentTypeOptions] = useState<
-		SelectOption<Avo.ContentPage.Type>[]
-	>([]);
+	const [contentTypeOptions, setContentTypeOptions] = useState<SelectOption<AvoContentPageType>[]>(
+		[]
+	);
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 
 	useEffect(() => {

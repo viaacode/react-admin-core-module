@@ -1,6 +1,6 @@
 import type { UseQueryResult } from '@tanstack/react-query';
 import { useQuery } from '@tanstack/react-query';
-import { QUERY_KEYS } from '~modules/shared/index';
+import { QUERY_KEYS } from '~modules/shared';
 import { TranslationsService } from '~modules/translations/translations.service';
 import type { LanguageInfo } from '~modules/translations/translations.types';
 

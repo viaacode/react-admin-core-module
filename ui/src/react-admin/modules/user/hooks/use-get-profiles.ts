@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import type { Avo } from '@viaa/avo2-types';
+import type { AvoSearchOrderDirection } from '@viaa/avo2-types';
 import { UserService } from '~modules/user/user.service';
 import type { UserOverviewTableCol } from '~modules/user/user.types';
 import { USERS_PER_PAGE } from '~modules/user/user.types';
@@ -8,7 +8,7 @@ import { QUERY_KEYS } from '~shared/types';
 export interface GetProfileArguments {
 	page: number;
 	sortColumn: UserOverviewTableCol;
-	sortOrder: Avo.Search.OrderDirection;
+	sortOrder: AvoSearchOrderDirection;
 	tableColumnDataType: string;
 	// biome-ignore lint/suspicious/noExplicitAny: todo
 	where: any;

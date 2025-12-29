@@ -1,12 +1,11 @@
-import type { Avo } from '@viaa/avo2-types';
-
+import type { AvoUserCommonUser } from '@viaa/avo2-types';
 import { convertUserInfoToCommonUser } from './users.converters';
 import { MOCK_HETARCHIEF_USER } from './users.converters.mock';
 import { UserInfoType } from './users.types';
 
 describe('User converter helpers', () => {
 	it('should convert HetArchiefUser to CommonUser format', () => {
-		const commonUser: Avo.User.CommonUser = convertUserInfoToCommonUser(
+		const commonUser: AvoUserCommonUser = convertUserInfoToCommonUser(
 			MOCK_HETARCHIEF_USER,
 			UserInfoType.HetArchiefUser
 		);

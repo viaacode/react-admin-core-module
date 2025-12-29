@@ -1,5 +1,5 @@
-import { type TypedDocumentNode } from '@graphql-typed-document-node/core';
-import { DatabaseType } from '@viaa/avo2-types';
+import type { TypedDocumentNode } from '@graphql-typed-document-node/core';
+import { AvoCoreDatabaseType } from '@viaa/avo2-types';
 
 import {
 	GetUserGroupsDocument as GetUserGroupsDocumentAvo,
@@ -66,13 +66,13 @@ type UserGroupsQueries = {
 	UpdateUserGroupsPermissionsDocument: TypedDocumentNode<any, any>;
 };
 
-export const USER_GROUP_QUERIES: Record<DatabaseType, UserGroupsQueries> = {
-	[DatabaseType.avo]: {
+export const USER_GROUP_QUERIES: Record<AvoCoreDatabaseType, UserGroupsQueries> = {
+	[AvoCoreDatabaseType.avo]: {
 		GetUserGroupsPermissionsDocument: GetUserGroupsPermissionsDocumentAvo,
 		GetUserGroupsDocument: GetUserGroupsDocumentAvo,
 		UpdateUserGroupsPermissionsDocument: UpdateUserGroupsPermissionsDocumentAvo,
 	},
-	[DatabaseType.hetArchief]: {
+	[AvoCoreDatabaseType.hetArchief]: {
 		GetUserGroupsPermissionsDocument: GetUserGroupsPermissionsDocumentHetArchief,
 		GetUserGroupsDocument: GetUserGroupsDocumentHetArchief,
 		UpdateUserGroupsPermissionsDocument: UpdateUserGroupsPermissionsDocumentHetArchief,

@@ -16,7 +16,7 @@ import {
 	ToolbarLeft,
 	ToolbarRight,
 } from '@viaa/avo2-components';
-import type { Avo } from '@viaa/avo2-types';
+
 import clsx from 'clsx';
 import { compact, isEqual, isNil, sortBy } from 'es-toolkit';
 import React, {
@@ -37,13 +37,14 @@ import type { TableFilterType } from '~shared/types/table-filter-types';
 import { KeyCode } from '../../consts/keycode';
 import { eduOrgToClientOrg } from '../../helpers/edu-org-string-to-client-org';
 import './FilterTable.scss';
+import type { AvoSearchOrderDirection } from '@viaa/avo2-types';
 import { isEmpty } from 'es-toolkit/compat';
 import { AdminConfigManager } from '~core/config';
 import { ErrorView } from '~shared/components/error/ErrorView';
 import { GET_FILTER_TABLE_QUERY_PARAM_CONFIG } from '~shared/components/FilterTable/FilterTable.const';
 import { GET_DEFAULT_PAGINATION_BAR_PROPS } from '~shared/components/PaginationBar/PaginationBar.consts';
-import { navigate } from '~shared/helpers/routing/link';
 import { navigateFunc } from '~shared/helpers/navigate-fnc';
+import { navigate } from '~shared/helpers/routing/link';
 import { toggleSortOrder } from '~shared/helpers/toggle-sort-order';
 import { useGetTableColumnPreference } from '~shared/hooks/useGetTableColumnPreference';
 import { useUpdateTableColumnPreference } from '~shared/hooks/useUpdateTableColumnPreference';
@@ -59,7 +60,7 @@ import { cleanupFilterTableState } from './FilterTable.utils';
 export interface FilterableTableState {
 	query?: string;
 	sort_column: string;
-	sort_order: Avo.Search.OrderDirection;
+	sort_order: AvoSearchOrderDirection;
 	page: number;
 }
 
@@ -99,7 +100,7 @@ interface FilterTableProps {
 	isLoading?: boolean;
 	isError?: boolean;
 	defaultOrderProp?: string;
-	defaultOrderDirection?: Avo.Search.OrderDirection;
+	defaultOrderDirection?: AvoSearchOrderDirection;
 	showPagination?: boolean;
 	showColumnsVisibility?: boolean;
 
@@ -479,6 +480,7 @@ export const FilterTable: FunctionComponent<FilterTableProps> = ({
 			}
 			icon={IconName.alertTriangle}
 			actionButtons={['home']}
+			locationId="filter-table__error"
 		/>
 	);
 
@@ -504,7 +506,7 @@ export const FilterTable: FunctionComponent<FilterTableProps> = ({
 								variant={variant}
 								sortColumn={getTableState().sort_column || defaultOrderProp || undefined}
 								sortOrder={
-									((getTableState().sort_order as Avo.Search.OrderDirection) ||
+									((getTableState().sort_order as AvoSearchOrderDirection) ||
 										defaultOrderDirection ||
 										// biome-ignore lint/suspicious/noExplicitAny: TODO fix
 										undefined) as any // TODO add asc_nulls_first to table sort orders
@@ -533,7 +535,9 @@ export const FilterTable: FunctionComponent<FilterTableProps> = ({
 								</Spacer>
 							)}
 						</div>
-						{(isLoading || isLoadingColumnPreferences) && <CenteredSpinner />}
+						{(isLoading || isLoadingColumnPreferences) && (
+							<CenteredSpinner locationId="filter-table--loading" />
+						)}
 					</div>
 				</>
 			)}

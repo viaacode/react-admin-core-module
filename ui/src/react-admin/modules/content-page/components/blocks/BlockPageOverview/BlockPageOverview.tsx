@@ -16,7 +16,7 @@ import {
 	Tabs,
 	TagList,
 } from '@viaa/avo2-components';
-import { Avo } from '@viaa/avo2-types';
+
 import clsx from 'clsx';
 import { format, parseISO } from 'date-fns';
 import { flatten, uniqBy } from 'es-toolkit';
@@ -39,6 +39,7 @@ import { BlockHeading } from '../BlockHeading/BlockHeading';
 import type { ContentTabStyle, LabelObj } from './BlockPageOverview.types';
 import { ContentItemStyle } from './BlockPageOverview.types';
 import './BlockPageOverview.scss';
+import { AvoCoreContentPickerType, type AvoUserCommonUser } from '@viaa/avo2-types';
 
 export interface BlockPageOverviewProps extends DefaultProps {
 	tabs?: { label: string; id: number }[];
@@ -68,7 +69,7 @@ export interface BlockPageOverviewProps extends DefaultProps {
 	onFocusedPageChanged: (newFocusedPage: ContentPageInfo | null) => void;
 	getLabelLink?: (label: string) => string | null;
 	renderLink?: RenderLinkFunction;
-	commonUser?: Avo.User.CommonUser;
+	commonUser?: AvoUserCommonUser;
 	isLoadingLabelObjs: boolean;
 	isLoadingSelectedTabObjects: boolean;
 	isLoadingFocusedPage: boolean;
@@ -203,7 +204,7 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 						title: showTitle ? page.title : undefined,
 						text: getDescription(page),
 						source: page.thumbnailPath as string, // TODO handle undefined thumbnails
-						action: { type: Avo.Core.ContentPickerType.CONTENT_PAGE, value: page.path as string },
+						action: { type: AvoCoreContentPickerType.CONTENT_PAGE, value: page.path as string },
 					})
 				)}
 				itemWidth="30.7rem"
@@ -356,6 +357,7 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 											icon={IconName.clock}
 											actionButtons={['helpdesk']}
 											message={'deze-pagina-is-enkel-voor-gebruikers-met-andere-rechten'}
+											locationId="block-page-overview--no-access"
 										/>
 									)}
 								/>
@@ -388,7 +390,7 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 								className="c-content-page-overview-block__accordion--first-level"
 							>
 								{isLoadingPagesAndLabels ? (
-									<CenteredSpinner />
+									<CenteredSpinner locationId="block-page-overview--loading" />
 								) : (
 									allPages.map((page) => {
 										return (
@@ -415,6 +417,7 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 															icon={IconName.clock}
 															actionButtons={['helpdesk']}
 															message={'deze-pagina-is-enkel-voor-gebruikers-met-andere-rechten'}
+															locationId="block-page-overview__no-access"
 														/>
 													)}
 												/>

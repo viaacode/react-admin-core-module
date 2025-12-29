@@ -10,8 +10,8 @@ import {
 	type TabProps,
 	Tabs,
 } from '@viaa/avo2-components';
-import type { Avo } from '@viaa/avo2-types';
-import { PermissionName } from '@viaa/avo2-types';
+
+import { type AvoUserCommonUser, PermissionName } from '@viaa/avo2-types';
 import { noop } from 'es-toolkit';
 import { stringifyUrl } from 'query-string';
 import type { FC, ReactElement, ReactText } from 'react';
@@ -62,7 +62,7 @@ export type ContentPageDetailProps = DefaultComponentProps & {
 	id: string;
 	loaded?: (item: ContentPageInfo) => void;
 	onGoBack: () => void;
-	commonUser: Avo.User.CommonUser;
+	commonUser: AvoUserCommonUser;
 };
 
 export const ContentPageDetail: FC<ContentPageDetailProps> = ({
@@ -490,6 +490,7 @@ export const ContentPageDetail: FC<ContentPageDetailProps> = ({
 								icon={IconName.clock}
 								actionButtons={['helpdesk']}
 								message={'deze-pagina-is-enkel-voor-gebruikers-met-andere-rechten'}
+								locationId="content-page-detail__no-access"
 							/>
 						)}
 					/>
@@ -528,6 +529,7 @@ export const ContentPageDetail: FC<ContentPageDetailProps> = ({
 					loadingInfo={loadingInfo}
 					dataObject={contentPageInfo}
 					render={() => renderContentDetail(contentPageInfo)}
+					locationId="content-page-detail"
 				/>
 				<ConfirmModal
 					deleteObjectCallback={handleDelete}

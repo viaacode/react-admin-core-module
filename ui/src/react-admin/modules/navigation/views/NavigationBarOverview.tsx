@@ -7,7 +7,7 @@ import { AdminConfigManager } from '~core/config/config.class';
 import { useGetNavigationBars } from '~modules/navigation/hooks/use-get-navigation-bars';
 import { GET_NAVIGATION_OVERVIEW_TABLE_COLS } from '~modules/navigation/navigation.consts';
 import { Link } from '~modules/shared/components/Link/Link';
-import { Loader } from '~shared/components/Loader/Loader';
+import { Loading } from '~shared/components/Loading/Loading';
 import { buildLink, navigate } from '~shared/helpers/routing/link';
 import { tHtml, tText } from '~shared/helpers/translation-functions';
 import type { NavigationItem, NavigationOverviewTableCols } from '../navigation.types';
@@ -110,7 +110,7 @@ export const NavigationBarOverview: FunctionComponent = () => {
 
 	const renderPageContent = () => {
 		if (isLoadingNavigationItems) {
-			return <Loader />;
+			return <Loading locationId="navigation-bar-overview--loading" />;
 		}
 		if (isErrorNavigationItems) {
 			return (

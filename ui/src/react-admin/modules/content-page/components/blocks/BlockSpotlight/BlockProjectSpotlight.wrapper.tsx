@@ -1,5 +1,5 @@
 import type { ButtonAction, RenderLinkFunction } from '@viaa/avo2-components';
-import type { Avo } from '@viaa/avo2-types';
+import type { AvoUserCommonUser } from '@viaa/avo2-types';
 import type { FunctionComponent } from 'react';
 import React, { useCallback, useEffect, useState } from 'react';
 import type { ImageInfo } from '~content-blocks/BlockSpotlight/BlockSpotlight';
@@ -8,12 +8,10 @@ import { AdminConfigManager } from '~core/config/config.class';
 import { convertDbContentPageToContentPageInfo } from '~modules/content-page/services/content-page.converters';
 import type { ContentPageInfo } from '~modules/content-page/types/content-pages.types';
 import { Locale } from '~modules/translations/translations.core.types';
-
 import type { LoadingInfo } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
 import { LoadingErrorLoadedComponent } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
 import { CustomError } from '~shared/helpers/custom-error';
 import { tHtml, tText } from '~shared/helpers/translation-functions';
-
 import { ContentPageService } from '../../../services/content-page.service';
 
 interface ProjectSpotlightProps {
@@ -25,7 +23,7 @@ interface ProjectSpotlightProps {
 interface ProjectSpotlightWrapperProps {
 	elements: ProjectSpotlightProps[];
 	renderLink: RenderLinkFunction;
-	commonUser?: Avo.User.CommonUser;
+	commonUser?: AvoUserCommonUser;
 }
 
 export const BlockProjectSpotlightWrapper: FunctionComponent<ProjectSpotlightWrapperProps> = ({
@@ -122,6 +120,7 @@ export const BlockProjectSpotlightWrapper: FunctionComponent<ProjectSpotlightWra
 			dataObject={projectContentPages}
 			render={renderBlockProjectSpotlight}
 			showSpinner={false}
+			locationId="block-project-spotlight-wrapper"
 		/>
 	);
 };

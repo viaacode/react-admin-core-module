@@ -1,5 +1,5 @@
 import type { CheckboxProps, MultiRangeProps } from '@viaa/avo2-components';
-
+import { AvoContentPageType } from '@viaa/avo2-types';
 import type { BlockPageOverviewProps } from '~modules/content-page/components/blocks/BlockPageOverview/BlockPageOverview';
 import { ContentItemStyle } from '~modules/content-page/components/blocks/BlockPageOverview/BlockPageOverview.types';
 import { GET_ALIGN_OPTIONS } from '~modules/content-page/const/get-align-options';
@@ -29,7 +29,7 @@ export const INITIAL_PAGE_OVERVIEW_COMPONENTS_STATE =
 		allowMultiple: false,
 		centerHeader: false,
 		headerBackgroundColor: Color.Transparent,
-		contentType: 'FAQ_ITEM',
+		contentType: AvoContentPageType.FAQ_ITEM,
 		itemStyle: ContentItemStyle.NEWS_LIST,
 		itemAlignment: 'center',
 		imageItemAlignment: 'center',

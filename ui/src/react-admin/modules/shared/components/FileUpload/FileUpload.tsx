@@ -1,6 +1,6 @@
 import type { IconName } from '@viaa/avo2-components';
 import { Blankslate, Button, Flex, FlexItem, Icon, Spacer } from '@viaa/avo2-components';
-import type { Avo } from '@viaa/avo2-types';
+
 import { compact, isString } from 'es-toolkit';
 import { parse } from 'query-string';
 import type { FunctionComponent } from 'react';
@@ -12,9 +12,10 @@ import { AssetsService } from '~shared/services/assets-service/assets.service';
 import { CustomError } from '../../helpers/custom-error';
 import { getUrlInfo, isPhoto, isVideo, PHOTO_TYPES } from '../../helpers/files';
 import ConfirmModal from '../ConfirmModal/ConfirmModal';
-import { Loader } from '../Loader/Loader';
+import { Loading } from '../Loading/Loading';
 
 import './FileUpload.scss';
+import type { AvoFileUploadAssetType } from '@viaa/avo2-types';
 import { getFileImageDimensions } from '~shared/helpers/get-file-image-dimensions';
 
 export interface FileUploadProps {
@@ -22,7 +23,7 @@ export interface FileUploadProps {
 	label?: string;
 	allowedTypes?: string[];
 	allowMulti?: boolean;
-	assetType: Avo.FileUpload.AssetType;
+	assetType: AvoFileUploadAssetType;
 	ownerId: string;
 	urls: string[] | null;
 	showDeleteButton?: boolean;
@@ -308,7 +309,7 @@ const FileUpload: FunctionComponent<FileUploadProps> = ({
 						</FlexItem>
 					</Flex>
 				) : (
-					<Loader fullscreen={false} />
+					<Loading fullscreen={false} locationId="file-upload--processing" />
 				))}
 			<ConfirmModal
 				title={tText(

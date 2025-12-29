@@ -1,5 +1,3 @@
-import path from 'path';
-
 import {
 	BadRequestException,
 	Body,
@@ -17,8 +15,12 @@ import {
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { ApiBody, ApiConsumes, ApiOperation, ApiTags } from '@nestjs/swagger';
-import type { Avo } from '@viaa/avo2-types';
-import { AssetType, PermissionName } from '@viaa/avo2-types';
+import {
+	AvoFileUploadAssetType,
+	type AvoFileUploadUploadAssetInfo,
+	PermissionName,
+} from '@viaa/avo2-types';
+import path from 'path';
 import sharp from 'sharp';
 
 import { DataService } from '../../data';
@@ -26,15 +28,15 @@ import { RequireAnyPermissions } from '../../shared/decorators/require-any-permi
 import { SessionUser } from '../../shared/decorators/user.decorator';
 import {
 	DeleteContentAssetDocument,
-	DeleteContentAssetMutation,
-	DeleteContentAssetMutationVariables,
+	type DeleteContentAssetMutation,
+	type DeleteContentAssetMutationVariables,
 	GetContentAssetOwnerIdDocument,
-	GetContentAssetOwnerIdQuery,
-	GetContentAssetOwnerIdQueryVariables,
+	type GetContentAssetOwnerIdQuery,
+	type GetContentAssetOwnerIdQueryVariables,
 } from '../../shared/generated/graphql-db-types-hetarchief';
 import { LoggedInGuard } from '../../shared/guards/logged-in.guard';
 import { TranslationsService } from '../../translations';
-import { SessionUserEntity } from '../../users/classes/session-user';
+import type { SessionUserEntity } from '../../users/classes/session-user';
 import { OPTIMIZE_INTO_WEBP_FORMATS, VALID_MIME_TYPES } from '../assets.consts';
 import { DeleteAssetDto } from '../dto/assets.dto';
 import { AssetsService } from '../services/assets.service';
@@ -83,7 +85,7 @@ export class AssetsController {
 	)
 	async uploadAsset(
 		@UploadedFile() file: any & { originalname: string; mimetype: string },
-		@Body() uploadAssetInfo: Avo.FileUpload.UploadAssetInfo,
+		@Body() uploadAssetInfo: AvoFileUploadUploadAssetInfo,
 		@SessionUser() sessionUser: SessionUserEntity
 	): Promise<{ url: string }> {
 		if (!file) {
@@ -119,7 +121,7 @@ export class AssetsController {
 				};
 			}
 			const url = await this.assetsService.uploadAndTrack(
-				(uploadAssetInfo.type || AssetType.CONTENT_PAGE_IMAGE) as AssetType,
+				uploadAssetInfo.type || AvoFileUploadAssetType.CONTENT_PAGE_IMAGE,
 				optimizedFile,
 				uploadAssetInfo.ownerId
 			);
@@ -148,7 +150,7 @@ export class AssetsController {
 	// async duplicate(url: string, ownerId: string): Promise<string> {
 	// 	const assetInfo = await this.info(url);
 	// 	return this.assetsService.copyAndTrack(
-	// 		assetInfo.content_asset_type_id as AssetType,
+	// 		assetInfo.content_asset_type_id as AvoFileUploadAssetType,
 	// 		url,
 	// 		ownerId
 	// 	);
@@ -218,14 +220,14 @@ export class AssetsController {
 			return true;
 		}
 		if (
-			assetInfo.content_asset_type_id === AssetType.BUNDLE_COVER &&
+			assetInfo.content_asset_type_id === AvoFileUploadAssetType.BUNDLE_COVER &&
 			(userPermissions.includes(PermissionName.EDIT_OWN_BUNDLES) ||
 				userPermissions.includes(PermissionName.EDIT_ANY_BUNDLES))
 		) {
 			return true;
 		}
 		if (
-			assetInfo.content_asset_type_id === AssetType.COLLECTION_COVER &&
+			assetInfo.content_asset_type_id === AvoFileUploadAssetType.COLLECTION_COVER &&
 			(userPermissions.includes(PermissionName.EDIT_OWN_COLLECTIONS) ||
 				userPermissions.includes(PermissionName.EDIT_ANY_COLLECTIONS))
 		) {
@@ -233,40 +235,42 @@ export class AssetsController {
 		}
 		if (
 			[
-				AssetType.CONTENT_PAGE_COVER,
-				AssetType.CONTENT_PAGE_IMAGE,
-				AssetType.CONTENT_BLOCK_FILE,
-				AssetType.CONTENT_BLOCK_IMAGE,
-				AssetType.CONTENT_PAGE_DESCRIPTION_IMAGE,
-			].includes(assetInfo.content_asset_type_id as AssetType) &&
+				AvoFileUploadAssetType.CONTENT_PAGE_COVER,
+				AvoFileUploadAssetType.CONTENT_PAGE_IMAGE,
+				AvoFileUploadAssetType.CONTENT_BLOCK_FILE,
+				AvoFileUploadAssetType.CONTENT_BLOCK_IMAGE,
+				AvoFileUploadAssetType.CONTENT_PAGE_DESCRIPTION_IMAGE,
+			].includes(assetInfo.content_asset_type_id as AvoFileUploadAssetType) &&
 			(userPermissions.includes(PermissionName.EDIT_OWN_CONTENT_PAGES) ||
 				userPermissions.includes(PermissionName.EDIT_ANY_CONTENT_PAGES))
 		) {
 			return true;
 		}
 		if (
-			assetInfo.content_asset_type_id === AssetType.ASSIGNMENT_DESCRIPTION_IMAGE &&
+			assetInfo.content_asset_type_id === AvoFileUploadAssetType.ASSIGNMENT_DESCRIPTION_IMAGE &&
 			(userPermissions.includes(PermissionName.EDIT_OWN_ASSIGNMENTS) ||
 				userPermissions.includes(PermissionName.EDIT_ANY_ASSIGNMENTS))
 		) {
 			return true;
 		}
 		if (
-			assetInfo.content_asset_type_id === AssetType.INTERACTIVE_TOUR_IMAGE &&
+			assetInfo.content_asset_type_id === AvoFileUploadAssetType.INTERACTIVE_TOUR_IMAGE &&
 			userPermissions.includes(PermissionName.EDIT_INTERACTIVE_TOURS)
 		) {
 			return true;
 		}
 		if (
-			[AssetType.ITEM_SUBTITLE, AssetType.ITEM_NOTE_IMAGE].includes(
-				assetInfo.content_asset_type_id as AssetType
+			[AvoFileUploadAssetType.ITEM_SUBTITLE, AvoFileUploadAssetType.ITEM_NOTE_IMAGE].includes(
+				assetInfo.content_asset_type_id as AvoFileUploadAssetType
 			) &&
 			userPermissions.includes(PermissionName.VIEW_ITEMS_OVERVIEW)
 		) {
 			return true;
 		}
 		if (
-			[AssetType.KLASCEMENT_VIDEO_IMAGE].includes(assetInfo.content_asset_type_id as AssetType) &&
+			[AvoFileUploadAssetType.KLASCEMENT_VIDEO_IMAGE].includes(
+				assetInfo.content_asset_type_id as AvoFileUploadAssetType
+			) &&
 			(userPermissions.includes(PermissionName.PUBLISH_COLLECTION_TO_KLASCEMENT) ||
 				userPermissions.includes(PermissionName.PUBLISH_ASSIGNMENT_TO_KLASCEMENT))
 		) {

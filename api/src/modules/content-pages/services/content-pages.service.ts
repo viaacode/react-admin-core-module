@@ -8,19 +8,25 @@ import {
 } from '@nestjs/common';
 import type { IPagination } from '@studiohyperdrive/pagination';
 import { Pagination } from '@studiohyperdrive/pagination';
-import type { Avo } from '@viaa/avo2-types';
-import { PermissionName } from '@viaa/avo2-types';
+
+import {
+	type AvoContentPageType,
+	type AvoItemItem,
+	type AvoSearchOrderDirection,
+	type AvoUserCommonUser,
+	PermissionName,
+} from '@viaa/avo2-types';
 import { mapLimit } from 'blend-promise-utils';
 import { compact, escapeRegExp, fromPairs, intersection, keys, set, uniq, without } from 'lodash';
 
-import { AssetsService } from '../../assets';
+import { AssetsService } from '../../assets/services/assets.service';
 import { DataService } from '../../data';
 import { PlayerTicketService } from '../../player-ticket';
 import { SessionHelper } from '../../shared/auth/session-helper';
 import {
 	type App_Content_Blocks_Insert_Input,
 	type App_Content_Blocks_Set_Input as App_Content_Blocks_Set_Input_Avo,
-	App_Content_Bool_Exp,
+	type App_Content_Bool_Exp,
 	GetCollectionTileByIdDocument,
 	type GetCollectionTileByIdQuery,
 	type GetCollectionTileByIdQueryVariables,
@@ -31,18 +37,18 @@ import {
 	GetItemTileByIdDocument,
 	type GetItemTileByIdQuery,
 	type GetItemTileByIdQueryVariables,
-	InputMaybe,
+	type InputMaybe,
 	type Lookup_Enum_Content_Block_Types_Enum,
-	Lookup_Enum_Content_Types_Enum,
+	type Lookup_Enum_Content_Types_Enum,
 	Order_By,
-	PublishContentPageMutation as PublishContentPageMutationAvo,
-	UnpublishContentPageMutation as UnpublishContentPageMutationAvo,
+	type PublishContentPageMutation as PublishContentPageMutationAvo,
+	type UnpublishContentPageMutation as UnpublishContentPageMutationAvo,
 } from '../../shared/generated/graphql-db-types-avo';
-import {
+import type {
 	App_Content_Block_Insert_Input,
-	type App_Content_Block_Set_Input as App_Content_Block_Set_Input_HetArchief,
+	App_Content_Block_Set_Input as App_Content_Block_Set_Input_HetArchief,
 	App_Content_Page_Bool_Exp,
-	type GetContentPagesToPublishQuery as GetContentPagesToPublishQueryHetArchief,
+	GetContentPagesToPublishQuery as GetContentPagesToPublishQueryHetArchief,
 	PublishContentPageMutation as PublishContentPageMutationHetArchief,
 	UnpublishContentPageMutation as UnpublishContentPageMutationHetArchief,
 } from '../../shared/generated/graphql-db-types-hetarchief';
@@ -52,7 +58,7 @@ import { getDatabaseType } from '../../shared/helpers/get-database-type';
 import { isAvo } from '../../shared/helpers/is-avo';
 import { isHetArchief } from '../../shared/helpers/is-hetarchief';
 import { Locale } from '../../translations';
-import { type ContentBlockType, type DbContentBlock } from '../content-block.types';
+import type { ContentBlockType, DbContentBlock } from '../content-block.types';
 import {
 	DEFAULT_AUDIO_STILL,
 	MEDIA_PLAYER_BLOCKS,
@@ -75,7 +81,7 @@ import type {
 	GqlUser,
 	MediaItemResponse,
 } from '../content-pages.types';
-import { type ContentPageOverviewParams } from '../dto/content-pages.dto';
+import type { ContentPageOverviewParams } from '../dto/content-pages.dto';
 import { CONTENT_PAGE_QUERIES, type ContentPageQueryTypes } from '../queries/content-pages.queries';
 
 @Injectable()
@@ -161,7 +167,7 @@ export class ContentPagesService {
 			createdAt: gqlContentPage.created_at,
 			updatedAt: gqlContentPage.updated_at,
 			isProtected: gqlContentPage.is_protected,
-			contentType: gqlContentPage.content_type as Avo.ContentPage.Type,
+			contentType: gqlContentPage.content_type as AvoContentPageType,
 			contentWidth: gqlContentPage.content_width as ContentWidth,
 			owner,
 			userProfileId: gqlContentPage.user_profile_id,
@@ -174,7 +180,7 @@ export class ContentPagesService {
 			labels: (gqlContentPage.content_content_labels || []).map(
 				(labelObj): ContentPageLabel => ({
 					id: labelObj?.content_label?.id,
-					content_type: gqlContentPage.content_type as ContentPageType, // TODO eliminate either ContentPageType or Avo.ContentPage.Type
+					content_type: gqlContentPage.content_type as ContentPageType, // TODO eliminate either ContentPageType or AvoContentPageType
 					label: labelObj?.content_label?.label,
 					language: labelObj?.content_label?.language,
 					link_to: labelObj?.content_label?.link_to,
@@ -406,7 +412,7 @@ export class ContentPagesService {
 	public async getContentPageByLanguageAndPathForUser(
 		language: Locale,
 		path: string,
-		user?: Avo.User.CommonUser,
+		user?: AvoUserCommonUser,
 		referrer?: string,
 		ip = '',
 		onlyInfo = false
@@ -493,7 +499,7 @@ export class ContentPagesService {
 		};
 	}
 
-	public async fetchItemByExternalId(externalId: string): Promise<Partial<Avo.Item.Item> | null> {
+	public async fetchItemByExternalId(externalId: string): Promise<Partial<AvoItemItem> | null> {
 		if (isHetArchief()) {
 			throw new InternalServerErrorException({
 				message:
@@ -511,7 +517,7 @@ export class ContentPagesService {
 			externalId,
 		});
 
-		return (response.app_item_meta?.[0] || null) as Partial<Avo.Item.Item> | null;
+		return (response.app_item_meta?.[0] || null) as Partial<AvoItemItem> | null;
 	}
 
 	public async updatePublishDates(): Promise<ContentPagesPublishAndUnpublishResults> {
@@ -818,7 +824,7 @@ export class ContentPagesService {
 		return this.adaptContentPage(dbContentPage);
 	}
 
-	public async getContentTypes(): Promise<{ value: Avo.ContentPage.Type; label: string }[] | null> {
+	public async getContentTypes(): Promise<{ value: AvoContentPageType; label: string }[] | null> {
 		try {
 			const response = await this.dataService.execute<
 				ContentPageQueryTypes['GetContentTypesQuery']
@@ -831,7 +837,7 @@ export class ContentPagesService {
 			return (contentTypes || []).map((obj) => ({
 				value: obj.value,
 				label: obj.description || (obj as any).comment,
-			})) as { value: Avo.ContentPage.Type; label: string }[] | null;
+			})) as { value: AvoContentPageType; label: string }[] | null;
 		} catch (err: any) {
 			throw customError('Failed to retrieve content types.', err, {
 				query: CONTENT_PAGE_QUERIES[getDatabaseType()].GetContentTypesDocument,
@@ -919,7 +925,7 @@ export class ContentPagesService {
 		offset: number,
 		limit: number,
 		sortColumn: ContentOverviewTableCols,
-		sortOrder: Avo.Search.OrderDirection,
+		sortOrder: AvoSearchOrderDirection,
 		tableColumnDataType: string,
 		where: App_Content_Bool_Exp | App_Content_Page_Bool_Exp
 	): Promise<[DbContentPage[], number]> {
@@ -1185,7 +1191,9 @@ export class ContentPagesService {
 		contentBlockConfigs: App_Content_Blocks_Insert_Input[]
 	): Promise<Partial<DbContentBlock>[] | null> {
 		try {
-			(contentBlockConfigs || []).forEach((block) => (block.content_id = contentId));
+			(contentBlockConfigs || []).forEach((block) => {
+				block.content_id = contentId;
+			});
 
 			const variables: ContentPageQueryTypes['InsertContentBlocksMutationVariables'] = {
 				contentBlocks: this.cleanContentBlocksBeforeDatabaseInsert(contentBlockConfigs) as any, // TODO Figure out why type doesn't work

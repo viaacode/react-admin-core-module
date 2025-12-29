@@ -1,7 +1,13 @@
 import { Controller, Get, Param, ParseIntPipe, Query } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-import type { Avo } from '@viaa/avo2-types';
-import { PermissionName } from '@viaa/avo2-types';
+
+import {
+	type AvoCollectionCollection,
+	type AvoCollectionRelationEntry,
+	type AvoCollectionRelationType,
+	type AvoItemItem,
+	PermissionName,
+} from '@viaa/avo2-types';
 
 import { RequireAnyPermissions } from '../shared/decorators/require-any-permissions.decorator';
 
@@ -21,7 +27,7 @@ export class ItemsController {
 	public async fetchPublicItems(
 		@Query('limit', ParseIntPipe) limit: number,
 		@Query('titleOrExternalId') titleOrExternalId: string | undefined
-	): Promise<Avo.Item.Item[] | null> {
+	): Promise<AvoItemItem[] | null> {
 		if (!titleOrExternalId) {
 			return this.itemsService.fetchPublicItems(limit);
 		} else {
@@ -34,8 +40,8 @@ export class ItemsController {
 	public async fetchRelationsBySubject(
 		@Query('type') type: 'collection' | 'item',
 		@Query('subjectIds') subjectIds: string[],
-		@Query('relationType') relationType: Avo.Collection.RelationType
-	): Promise<Avo.Collection.RelationEntry<Avo.Item.Item | Avo.Collection.Collection>[]> {
+		@Query('relationType') relationType: AvoCollectionRelationType
+	): Promise<AvoCollectionRelationEntry<AvoItemItem | AvoCollectionCollection>[]> {
 		return this.itemsService.fetchRelationsBySubject(type, subjectIds, relationType);
 	}
 
@@ -62,9 +68,7 @@ export class ItemsController {
 		isArray: false,
 	})
 	@Get(':id')
-	public async fetchItemByUuidOrExternalId(
-		@Param('id') id: string
-	): Promise<Partial<Avo.Item.Item>> {
+	public async fetchItemByUuidOrExternalId(@Param('id') id: string): Promise<Partial<AvoItemItem>> {
 		return this.itemsService.fetchItemOrReplacement(id);
 	}
 }

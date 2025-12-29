@@ -1,4 +1,4 @@
-import { ContentPickerType } from '@viaa/avo2-types';
+import { AvoCoreContentPickerType } from '@viaa/avo2-types';
 import memoize from 'memoizee';
 import type { HetArchiefIeObject } from '~modules/content-page/types/content-block.types';
 import { parsePickerItem } from '~shared/components/ContentPicker/helpers/parse-picker';
@@ -37,7 +37,7 @@ const parseIeObjects = (raw: Partial<HetArchiefIeObject>[]): PickerItem[] => {
 	return raw.map(
 		(item: Partial<HetArchiefIeObject>): PickerItem => ({
 			label: item.name || '',
-			...parsePickerItem(ContentPickerType.IE_OBJECT, item.schemaIdentifier as string), // TODO enforce path in database
+			...parsePickerItem(AvoCoreContentPickerType.IE_OBJECT, item.schemaIdentifier as string), // TODO enforce path in database
 		})
 	);
 };

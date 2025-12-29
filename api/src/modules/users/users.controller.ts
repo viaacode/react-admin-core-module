@@ -11,8 +11,12 @@ import {
 	Query,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import type { Avo } from '@viaa/avo2-types';
-import { PermissionName } from '@viaa/avo2-types';
+
+import {
+	type AvoSearchOrderDirection,
+	type AvoUserCommonUser,
+	PermissionName,
+} from '@viaa/avo2-types';
 
 import { RequireAnyPermissions } from '../shared/decorators/require-any-permissions.decorator';
 
@@ -47,10 +51,10 @@ export class UsersController {
 		@Query('offset') offset: string,
 		@Query('limit') limit: string,
 		@Query('sortColumn') sortColumn: UserOverviewTableCol,
-		@Query('sortOrder') sortOrder: Avo.Search.OrderDirection,
+		@Query('sortOrder') sortOrder: AvoSearchOrderDirection,
 		@Query('tableColumnDataType') tableColumnDataType: string,
 		@Query('where') where = '{}'
-	): Promise<[Avo.User.CommonUser[], number]> {
+	): Promise<[AvoUserCommonUser[], number]> {
 		return this.usersService.getProfiles(
 			parseInt(offset || '0'),
 			parseInt(limit || '50'),
@@ -68,7 +72,7 @@ export class UsersController {
 		PermissionName.EDIT_ANY_COLLECTIONS,
 		PermissionName.VIEW_USERS_IN_SAME_COMPANY
 	)
-	async getProfilesPost(@Body() body: QueryProfilesBody): Promise<[Avo.User.CommonUser[], number]> {
+	async getProfilesPost(@Body() body: QueryProfilesBody): Promise<[AvoUserCommonUser[], number]> {
 		return this.usersService.getProfiles(
 			parseInt(body.offset || '0'),
 			parseInt(body.limit || '50'),
@@ -90,7 +94,7 @@ export class UsersController {
 	)
 	async getNamesByProfileIds(
 		@Query('profileIds') profileIds: string[]
-	): Promise<Partial<Avo.User.CommonUser>[]> {
+	): Promise<Partial<AvoUserCommonUser>[]> {
 		return this.usersService.getNamesByProfileIds(profileIds);
 	}
 
@@ -143,7 +147,7 @@ export class UsersController {
 		PermissionName.EDIT_ANY_COLLECTIONS,
 		PermissionName.VIEW_USERS_IN_SAME_COMPANY
 	)
-	async getUser(@Param('id') id: string): Promise<Avo.User.CommonUser> {
+	async getUser(@Param('id') id: string): Promise<AvoUserCommonUser> {
 		return this.usersService.getById(id);
 	}
 }

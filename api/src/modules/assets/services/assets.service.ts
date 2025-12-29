@@ -1,6 +1,6 @@
 import { randomUUID as uuid } from 'node:crypto';
 import { Sha256 } from '@aws-crypto/sha256-js';
-import { HeadObjectCommandOutput, S3 } from '@aws-sdk/client-s3';
+import { type HeadObjectCommandOutput, S3 } from '@aws-sdk/client-s3';
 import {
 	forwardRef,
 	Inject,
@@ -12,28 +12,28 @@ import { Cron } from '@nestjs/schedule';
 import { NodeHttpHandler } from '@smithy/node-http-handler';
 import { HttpRequest } from '@smithy/protocol-http';
 import { SignatureV4 } from '@smithy/signature-v4';
-import { AssetType } from '@viaa/avo2-types';
+import type { AvoFileUploadAssetType } from '@viaa/avo2-types';
 import { mapLimit } from 'blend-promise-utils';
 import fse from 'fs-extra';
-import got, { ExtendOptions, Got } from 'got';
+import got, { type ExtendOptions, type Got } from 'got';
 import { Agent as HttpsAgent } from 'https';
 import { escapeRegExp, isNil, kebabCase } from 'lodash';
 import path from 'path';
 import { DataService } from 'src/modules/data/services/data.service';
 import {
 	GetContentAssetDocument,
-	GetContentAssetQuery,
-	GetContentAssetQueryVariables,
+	type GetContentAssetQuery,
+	type GetContentAssetQueryVariables,
 	InsertContentAssetDocument,
-	InsertContentAssetMutation,
-	InsertContentAssetMutationVariables,
+	type InsertContentAssetMutation,
+	type InsertContentAssetMutationVariables,
 	UpdateContentAssetDocument,
-	UpdateContentAssetMutation,
-	UpdateContentAssetMutationVariables,
+	type UpdateContentAssetMutation,
+	type UpdateContentAssetMutationVariables,
 } from '../../shared/generated/graphql-db-types-hetarchief';
 import { CustomError } from '../../shared/helpers/error';
 import { EXTENSION_TO_MIME_TYPE } from '../assets.consts';
-import { AssetToken } from '../assets.types';
+import type { AssetToken } from '../assets.types';
 
 export const UUID_LENGTH = 35;
 
@@ -81,7 +81,7 @@ export class AssetsService {
 
 	private async getValidToken(): Promise<{ accessKeyId: string; secretAccessKey: string }> {
 		const tokenExpiry = new Date(this.token?.expiration).getTime();
-		const now = new Date().getTime();
+		const now = Date.now();
 		const fiveMinutes = 5 * 60 * 1000;
 		if (!this.token || tokenExpiry - fiveMinutes < now) {
 			// Take 5 minutes margin, to ensure we get a new token well before it expires
@@ -196,7 +196,7 @@ export class AssetsService {
 	}
 
 	public async uploadAndTrack(
-		assetFiletype: AssetType,
+		assetFiletype: AvoFileUploadAssetType,
 		file: any,
 		ownerId: string,
 		preferredKey?: string
@@ -212,7 +212,7 @@ export class AssetsService {
 	}
 
 	private async upload(
-		assetFiletype: AssetType,
+		assetFiletype: AvoFileUploadAssetType,
 		file: any,
 		preferredKey?: string
 	): Promise<string> {
@@ -352,7 +352,7 @@ export class AssetsService {
 	}
 
 	public async copyAndTrack(
-		assetFiletype: AssetType,
+		assetFiletype: AvoFileUploadAssetType,
 		url: string,
 		ownerId: string,
 		copyKey?: string
@@ -430,7 +430,7 @@ export class AssetsService {
 	public async duplicateAssetsInJsonBlob(
 		jsonBlob: any,
 		ownerId: string,
-		assetType: AssetType
+		assetType: AvoFileUploadAssetType
 	): Promise<any> {
 		let jsonBlobString = JSON.stringify(jsonBlob);
 		const assetUrlsRegex = new RegExp(
@@ -480,7 +480,11 @@ export class AssetsService {
 		return JSON.parse(jsonBlobString);
 	}
 
-	public async addAssetEntryToDb(ownerId: string, type: AssetType, url: string): Promise<void> {
+	public async addAssetEntryToDb(
+		ownerId: string,
+		type: AvoFileUploadAssetType,
+		url: string
+	): Promise<void> {
 		const asset = {
 			owner_id: ownerId,
 			content_asset_type_id: type,
@@ -496,7 +500,11 @@ export class AssetsService {
 		);
 	}
 
-	public async updateAssetEntryInDb(ownerId: string, type: AssetType, url: string): Promise<void> {
+	public async updateAssetEntryInDb(
+		ownerId: string,
+		type: AvoFileUploadAssetType,
+		url: string
+	): Promise<void> {
 		const asset = {
 			owner_id: ownerId,
 			content_asset_type_id: type,

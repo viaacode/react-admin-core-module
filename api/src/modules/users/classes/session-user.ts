@@ -1,16 +1,21 @@
-import { type Avo, type PermissionName } from '@viaa/avo2-types';
+import type {
+	AvoUserCommonUser,
+	AvoUserHetArchiefUser,
+	AvoUserUser,
+	PermissionName,
+} from '@viaa/avo2-types';
 
 import { isAvo } from '../../shared/helpers/is-avo';
 import { SpecialPermissionGroups } from '../../shared/types/types';
-import { type Locale } from '../../translations';
+import type { Locale } from '../../translations';
 import { convertUserInfoToCommonUser } from '../users.converters';
 import { UserInfoType } from '../users.types';
 
 export class SessionUserEntity {
-	protected user: Avo.User.CommonUser | undefined;
-	protected originalUser: Avo.User.HetArchiefUser | Avo.User.User;
+	protected user: AvoUserCommonUser | undefined;
+	protected originalUser: AvoUserHetArchiefUser | AvoUserUser;
 
-	public constructor(user: Avo.User.HetArchiefUser | Avo.User.User | undefined) {
+	public constructor(user: AvoUserHetArchiefUser | AvoUserUser | undefined) {
 		this.originalUser = user;
 		this.user = convertUserInfoToCommonUser(
 			user,
@@ -18,7 +23,7 @@ export class SessionUserEntity {
 		);
 	}
 
-	public getUser(): Avo.User.CommonUser {
+	public getUser(): AvoUserCommonUser {
 		return this.user;
 	}
 
@@ -72,11 +77,11 @@ export class SessionUserEntity {
 	}
 
 	public getMaintainerId(): string {
-		return (this.originalUser as Avo.User.HetArchiefUser)?.maintainerId;
+		return (this.originalUser as AvoUserHetArchiefUser)?.maintainerId;
 	}
 
 	public getVisitorSpaceSlug(): string {
-		return (this.originalUser as Avo.User.HetArchiefUser)?.visitorSpaceSlug;
+		return (this.originalUser as AvoUserHetArchiefUser)?.visitorSpaceSlug;
 	}
 
 	public has(permission: PermissionName): boolean {

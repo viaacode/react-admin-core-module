@@ -1,6 +1,6 @@
-import { Avo, PermissionName } from '@viaa/avo2-types';
+import { AvoAuthIdpType, type AvoUserHetArchiefUser, PermissionName } from '@viaa/avo2-types';
 
-export const MOCK_HETARCHIEF_USER: Avo.User.HetArchiefUser = {
+export const MOCK_HETARCHIEF_USER: AvoUserHetArchiefUser = {
 	id: '31051baa-94ab-4fc2-a859-750a52774d3a',
 	fullName: 'meemoo Admin',
 	firstName: 'meemoo',
@@ -47,7 +47,7 @@ export const MOCK_HETARCHIEF_USER: Avo.User.HetArchiefUser = {
 		PermissionName.VIEW_USERS,
 		PermissionName.CAN_EDIT_PROFILE_INFO,
 	],
-	idp: Avo.Auth.IdpType.HETARCHIEF as any, // Definitions of Idp enum in different repos cause typescript to be confused and not recognize them as the same type
+	idp: AvoAuthIdpType.HETARCHIEF, // Definitions of Idp enum in different repos cause typescript to be confused and not recognize them as the same type
 	isKeyUser: false,
 	lastAccessAt: '2023-05-09T10:18:02.11+02:00',
 	createdAt: '2023-01-30T16:26:38.875447',

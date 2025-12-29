@@ -1,4 +1,4 @@
-import type { ContentPickerType } from '@viaa/avo2-types';
+import type { AvoCoreContentPickerType } from '@viaa/avo2-types';
 import { stringifyUrl } from 'query-string';
 import { CustomError } from '~shared/helpers/custom-error';
 import { fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
@@ -28,9 +28,9 @@ export class OrganisationService {
 
 	static getMaintainersByContentItem(
 		contentItemType:
-			| ContentPickerType.ITEM
-			| ContentPickerType.COLLECTION
-			| ContentPickerType.ASSIGNMENT,
+			| AvoCoreContentPickerType.ITEM
+			| AvoCoreContentPickerType.COLLECTION
+			| AvoCoreContentPickerType.ASSIGNMENT,
 		contentItemId: string
 	): Promise<{ name: string; id: string; logo: string; website: string }[]> {
 		return fetchWithLogoutJson(

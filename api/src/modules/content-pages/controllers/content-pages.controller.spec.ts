@@ -1,5 +1,5 @@
 import { Test, type TestingModule } from '@nestjs/testing';
-import { Avo, PermissionName } from '@viaa/avo2-types';
+import { AvoAuthIdpType, type AvoUserHetArchiefUser, PermissionName } from '@viaa/avo2-types';
 
 import { PlayerTicketService } from '../../player-ticket';
 import { SessionHelper } from '../../shared/auth/session-helper';
@@ -7,13 +7,14 @@ import { ContentPagesService } from '../services/content-pages.service';
 
 import { ContentPagesController } from './content-pages.controller';
 
-export const mockUser: Avo.User.HetArchiefUser = {
+// biome-ignore lint/suspicious/noExportsInTest: only used inside test files
+export const mockUser: AvoUserHetArchiefUser = {
 	id: 'e791ecf1-e121-4c54-9d2e-34524b6467c6',
 	firstName: 'Test',
 	lastName: 'Testers',
 	fullName: 'Test Testers',
 	email: 'test.testers@meemoo.be',
-	idp: Avo.Auth.IdpType.HETARCHIEF as any, // Definitions of Idp enum in different repos cause typescript to be confused and not recognize them as the same type
+	idp: AvoAuthIdpType.HETARCHIEF,
 	acceptedTosAt: '1997-01-01T00:00:00.000Z',
 	groupId: 'c56d95aa-e918-47ca-b102-486c9449fc4a',
 	groupName: 'CP_ADMIN',

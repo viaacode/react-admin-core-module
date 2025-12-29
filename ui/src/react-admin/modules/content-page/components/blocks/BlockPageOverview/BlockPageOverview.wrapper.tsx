@@ -1,5 +1,5 @@
 import type { IconName } from '@viaa/avo2-components';
-import type { Avo } from '@viaa/avo2-types';
+import { AvoContentPageType, type AvoSearchOrderDirection } from '@viaa/avo2-types';
 import { compact, isNil, isString, sortBy } from 'es-toolkit';
 import { type FunctionComponent, useCallback, useEffect } from 'react';
 import type { LabelObj } from '~content-blocks/BlockPageOverview/BlockPageOverview.types';
@@ -26,7 +26,7 @@ import { useDebounce } from '~shared/hooks/useDebounce';
 
 export const BlockPageOverviewWrapper: FunctionComponent<PageOverviewWrapperProps> = ({
 	contentTypeAndTabs = {
-		selectedContentType: 'PROJECT',
+		selectedContentType: AvoContentPageType.PROJECT,
 		selectedLabels: null,
 	},
 	tabStyle = 'MENU_BAR',
@@ -140,7 +140,7 @@ export const BlockPageOverviewWrapper: FunctionComponent<PageOverviewWrapperProp
 			? selectedTabObjects.map((tab) => tab.id)
 			: getSelectedLabelIds(),
 		orderProp: sortOrder.split('__')[0],
-		orderDirection: sortOrder.split('__').pop() as Avo.Search.OrderDirection,
+		orderDirection: sortOrder.split('__').pop() as AvoSearchOrderDirection,
 		offset:
 			itemStyle === ContentItemStyle.ACCORDION_TWO_LEVELS
 				? 0
@@ -280,6 +280,7 @@ export const BlockPageOverviewWrapper: FunctionComponent<PageOverviewWrapperProp
 				message={tHtml(
 					'react-admin/modules/content-page/components/blocks/block-page-overview/block-page-overview___error'
 				)}
+				locationId="block-page-overview-wrapper__error"
 			>
 				<p>
 					{tHtml(

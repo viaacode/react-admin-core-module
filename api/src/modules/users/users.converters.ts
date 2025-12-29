@@ -1,4 +1,14 @@
-import { type Avo, type PermissionName } from '@viaa/avo2-types';
+import type {
+	AvoAuthIdpType,
+	AvoEducationOrganizationOrganization,
+	AvoLomLom,
+	AvoOrganizationOrganization,
+	AvoUserCommonUser,
+	AvoUserHetArchiefUser,
+	AvoUserProfile,
+	AvoUserUser,
+	PermissionName,
+} from '@viaa/avo2-types';
 
 import { Lookup_Languages_Enum } from '../shared/generated/graphql-db-types-hetarchief';
 
@@ -13,33 +23,33 @@ import {
  * This function should convert all user info objects to a single format
  *
  * Existing user info objects are:
- * - Avo.User.User
- * - Avo.User.Profile
+ * - AvoUserUser
+ * - AvoUserProfile
  * - UserInfoOverviewAvo
  * - UserInfoOverviewHetArchief
- * - Avo.User.HetArchiefUser (already mapped to camelCase by the hetarchief proxy service)
+ * - AvoUserHetArchiefUser (already mapped to camelCase by the hetarchief proxy service)
  *
  * @param userInfo
  * @param userInfoType
  */
 export function convertUserInfoToCommonUser(
 	userInfo:
-		| Avo.User.User
-		| Avo.User.Profile
+		| AvoUserUser
+		| AvoUserProfile
 		| UserInfoOverviewAvo
 		| UserInfoOverviewHetArchief
-		| Avo.User.HetArchiefUser
+		| AvoUserHetArchiefUser
 		| Partial<UserInfoCommonUserAvo>
 		| undefined,
 	userInfoType: UserInfoType
-): Avo.User.CommonUser | undefined {
+): AvoUserCommonUser | undefined {
 	if (!userInfo) {
 		return undefined;
 	}
 	switch (userInfoType) {
 		case UserInfoType.AvoUserUser: {
-			// Avo.User.User: Avo user object with linked profile
-			const user = userInfo as Avo.User.User;
+			// AvoUserUser: Avo user object with linked profile
+			const user = userInfo as AvoUserUser;
 			return {
 				profileId: user.profile.id,
 				avatar: user?.profile?.avatar,
@@ -76,7 +86,7 @@ export function convertUserInfoToCommonUser(
 					: null,
 				idps: Object.fromEntries(
 					(user.idpmapObjects || []).map((idpMapObject) => [
-						idpMapObject.idp as Avo.Auth.IdpType,
+						idpMapObject.idp as AvoAuthIdpType,
 						idpMapObject.idp_user_id as string,
 					])
 				),
@@ -93,7 +103,7 @@ export function convertUserInfoToCommonUser(
 
 		case UserInfoType.AvoUserProfile: {
 			// Avo profile with linked user
-			const profile = userInfo as Avo.User.Profile;
+			const profile = userInfo as AvoUserProfile;
 			return {
 				profileId: profile.id,
 				avatar: profile?.avatar,
@@ -132,7 +142,7 @@ export function convertUserInfoToCommonUser(
 					: null,
 				idps: Object.fromEntries(
 					profile.user.idpmapObjects.map((idpMapObject) => [
-						idpMapObject.idp as Avo.Auth.IdpType,
+						idpMapObject.idp as AvoAuthIdpType,
 						idpMapObject.idp_user_id as string,
 					])
 				),
@@ -159,10 +169,10 @@ export function convertUserInfoToCommonUser(
 							name: user.organization.name,
 							or_id: user.organization.or_id,
 							logo_url: user.organization.logo_url,
-						} as Avo.Organization.Organization)
+						} as AvoOrganizationOrganization)
 					: undefined,
 				educationalOrganisations: (user.educational_organizations ?? []).map(
-					(org): Avo.EducationOrganization.Organization => ({
+					(org): AvoEducationOrganizationOrganization => ({
 						organisationId: org.organization_id,
 						organisationLabel:
 							(org.organization as any)?.ldap_description ??
@@ -209,7 +219,7 @@ export function convertUserInfoToCommonUser(
 					: null,
 				idps: Object.fromEntries(
 					user.idps.map((idpMapObject) => [
-						idpMapObject.idp as unknown as Avo.Auth.IdpType,
+						idpMapObject.idp as unknown as AvoAuthIdpType,
 						idpMapObject.idp_user_id as string,
 					])
 				),
@@ -235,7 +245,7 @@ export function convertUserInfoToCommonUser(
 				},
 				idps: Object.fromEntries(
 					profile.identities?.map(
-						(identity) => [identity.identity_provider_name as Avo.Auth.IdpType, null] // User ids of idp are not fetched
+						(identity) => [identity.identity_provider_name as AvoAuthIdpType, null] // User ids of idp are not fetched
 					)
 				),
 				organisation: {
@@ -251,7 +261,7 @@ export function convertUserInfoToCommonUser(
 
 		case UserInfoType.HetArchiefUser: {
 			// HetArchiefUser: hetArchief user info mapped by the hetarchief proxy
-			const user = userInfo as Avo.User.HetArchiefUser;
+			const user = userInfo as AvoUserHetArchiefUser;
 			return {
 				profileId: user.id,
 				uid: user.id,
@@ -276,7 +286,7 @@ export function convertUserInfoToCommonUser(
 				lastAccessAt: user.lastAccessAt,
 				permissions: user.permissions,
 				createdAt: user.createdAt,
-			} as Avo.User.CommonUser;
+			} as AvoUserCommonUser;
 		}
 
 		case UserInfoType.UserInfoCommonUserAvo: {
@@ -309,8 +319,8 @@ export function convertUserInfoToCommonUser(
 				educationalOrganisations: (user.profile_educational_organizations ?? []).map((item) => ({
 					organisationId: item.organization_id,
 					unitId: item.unit_id,
-				})) as Avo.EducationOrganization.Organization[],
-				loms: user.loms as Avo.Lom.Lom[],
+				})) as AvoEducationOrganizationOrganization[],
+				loms: user.loms as AvoLomLom[],
 				isException: user.is_exception ?? false,
 				businessCategory: user.business_category ?? undefined,
 				isBlocked: user.is_blocked ?? undefined,
@@ -339,7 +349,7 @@ export function convertUserInfoToCommonUser(
 					(item) => item.permission.label
 				),
 				language: user.language,
-			} as Avo.User.CommonUser;
+			} as AvoUserCommonUser;
 		}
 
 		default:

@@ -1,6 +1,6 @@
-import type { Avo } from '@viaa/avo2-types';
+import type { AvoEducationOrganizationOrganization } from '@viaa/avo2-types';
 
-export function eduOrgToClientOrg(orgs: string[]): Avo.EducationOrganization.Organization[] {
+export function eduOrgToClientOrg(orgs: string[]): AvoEducationOrganizationOrganization[] {
 	return (orgs || []).map((org) => {
 		const parts = org.split(':');
 		return {

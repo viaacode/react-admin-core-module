@@ -18,9 +18,14 @@ import {
 	UseGuards,
 } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
-import { IPagination } from '@studiohyperdrive/pagination';
-import type { Avo } from '@viaa/avo2-types';
-import { AssetType, PermissionName } from '@viaa/avo2-types';
+import type { IPagination } from '@studiohyperdrive/pagination';
+
+import {
+	type AvoContentPageType,
+	AvoFileUploadAssetType,
+	type AvoSearchOrderDirection,
+	PermissionName,
+} from '@viaa/avo2-types';
 import type { Request } from 'express';
 
 import { AssetsService } from '../../assets';
@@ -30,16 +35,16 @@ import { ApiKeyGuard } from '../../shared/guards/api-key.guard';
 import { addPrefix } from '../../shared/helpers/add-route-prefix';
 import { CustomError } from '../../shared/helpers/error';
 import { logAndThrow } from '../../shared/helpers/logAndThrow';
-import { Locale } from '../../translations';
-import { SessionUserEntity } from '../../users/classes/session-user';
+import type { Locale } from '../../translations';
+import type { SessionUserEntity } from '../../users/classes/session-user';
 import { CONTENT_PAGE_COPY, CONTENT_PAGE_COPY_REGEX } from '../content-pages.consts';
-import {
-	type ContentOverviewTableCols,
-	type ContentPageLabel,
-	type ContentPagesPublishAndUnpublishResults,
-	type DbContentPage,
+import type {
+	ContentOverviewTableCols,
+	ContentPageLabel,
+	ContentPagesPublishAndUnpublishResults,
+	DbContentPage,
 } from '../content-pages.types';
-import { ContentPageOverviewParams } from '../dto/content-pages.dto';
+import type { ContentPageOverviewParams } from '../dto/content-pages.dto';
 import type { ContentPageQueryTypes } from '../queries/content-pages.queries';
 import { ContentPagesService } from '../services/content-pages.service';
 
@@ -82,7 +87,7 @@ export class ContentPagesController {
 		@Query('offset', ParseIntPipe) offset: number,
 		@Query('limit', ParseIntPipe) limit: number,
 		@Query('sortColumn') sortColumn: ContentOverviewTableCols,
-		@Query('sortOrder') sortOrder: Avo.Search.OrderDirection,
+		@Query('sortOrder') sortOrder: AvoSearchOrderDirection,
 		@Query('tableColumnDataType') tableColumnDataType: string,
 		@Query('where') where: string
 	): Promise<[DbContentPage[], number]> {
@@ -335,7 +340,7 @@ export class ContentPagesController {
 		PermissionName.EDIT_OWN_CONTENT_PAGES,
 		PermissionName.EDIT_CONTENT_PAGE_LABELS
 	)
-	public async getContentTypes(): Promise<{ value: Avo.ContentPage.Type; label: string }[] | null> {
+	public async getContentTypes(): Promise<{ value: AvoContentPageType; label: string }[] | null> {
 		return this.contentPagesService.getContentTypes();
 	}
 
@@ -412,7 +417,7 @@ export class ContentPagesController {
 			return await this.assetsService.duplicateAssetsInJsonBlob(
 				contentBlockJson,
 				user.getProfileId(),
-				AssetType.CONTENT_PAGE_IMAGE
+				AvoFileUploadAssetType.CONTENT_PAGE_IMAGE
 			);
 		} catch (err) {
 			logAndThrow(
@@ -463,7 +468,7 @@ export class ContentPagesController {
 			let contentToInsert = await this.assetsService.duplicateAssetsInJsonBlob(
 				dbContentPage,
 				user.getProfileId(),
-				AssetType.CONTENT_PAGE_IMAGE
+				AvoFileUploadAssetType.CONTENT_PAGE_IMAGE
 			);
 
 			contentToInsert = {

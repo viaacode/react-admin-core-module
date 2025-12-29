@@ -13,7 +13,7 @@ import {
 	TextArea,
 	TextInput,
 } from '@viaa/avo2-components';
-import { Avo } from '@viaa/avo2-types';
+
 import { compact, kebabCase, uniq, without } from 'es-toolkit';
 import type { FunctionComponent, ReactNode } from 'react';
 import React, { useCallback, useEffect, useState } from 'react';
@@ -28,10 +28,11 @@ import { GET_ADMIN_ICON_OPTIONS } from '~shared/consts/icons.consts';
 import { GET_LANGUAGE_NAMES } from '~shared/consts/language-names';
 import { isMultiLanguageEnabled } from '~shared/helpers/is-multi-language-enabled';
 import { tHtml, tText } from '~shared/helpers/translation-functions';
-import type { ReactSelectOption } from '~shared/types/index';
+import type { ReactSelectOption } from '~shared/types';
 import type { NavigationEditFormErrorState, NavigationItem } from '../../navigation.types';
 
 import './NavigationEditForm.scss';
+import { AvoCoreContentPickerType } from '@viaa/avo2-types';
 import { ToastType } from '~core/config/config.types';
 import { ContentPageService } from '~modules/content-page/services/content-page.service';
 import { CustomError } from '~modules/shared/helpers/custom-error';
@@ -266,15 +267,15 @@ export const NavigationEditForm: FunctionComponent<NavigationEditFormProps> = ({
 			>
 				<ContentPicker
 					allowedTypes={[
-						Avo.Core.ContentPickerType.CONTENT_PAGE,
-						Avo.Core.ContentPickerType.INTERNAL_LINK,
-						Avo.Core.ContentPickerType.EXTERNAL_LINK,
-						Avo.Core.ContentPickerType.CUSTOM_NAVIGATION_ELEMENTS,
+						AvoCoreContentPickerType.CONTENT_PAGE,
+						AvoCoreContentPickerType.INTERNAL_LINK,
+						AvoCoreContentPickerType.EXTERNAL_LINK,
+						AvoCoreContentPickerType.CUSTOM_NAVIGATION_ELEMENTS,
 					]}
 					value={
 						currentNavigationItem.contentType && currentNavigationItem.contentPath
 							? {
-									type: currentNavigationItem.contentType as Avo.Core.ContentPickerType,
+									type: currentNavigationItem.contentType as AvoCoreContentPickerType,
 									label: currentNavigationItem.contentPath.toString(),
 									value: currentNavigationItem.contentPath.toString(),
 									target: currentNavigationItem.linkTarget || undefined,

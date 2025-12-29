@@ -1,8 +1,8 @@
 import { FormGroup } from '@viaa/avo2-components';
+import { AvoFileUploadAssetType } from '@viaa/avo2-types';
 import type { FunctionComponent } from 'react';
 import React, { useState } from 'react';
 import { CONTENT_PAGE_DESCRIPTION_MAX_LENGTH_STRING } from '~modules/content-page/const/content-page.consts';
-
 import { RICH_TEXT_EDITOR_OPTIONS_FULL } from '~modules/shared/consts/rich-text-editor.consts';
 import RichTextEditorWithInternalStateWrapper from '~shared/components/RichTextEditorWithInternalStateWrapper/RichTextEditorWithInternalStateWrapper';
 import { stripHtml } from '~shared/helpers/formatters/strip-html';
@@ -43,7 +43,7 @@ export const ContentPageEditFormDescription: FunctionComponent<
 					onChange(description);
 				}}
 				controls={RICH_TEXT_EDITOR_OPTIONS_FULL}
-				fileType="CONTENT_PAGE_DESCRIPTION_IMAGE"
+				fileType={AvoFileUploadAssetType.CONTENT_PAGE_DESCRIPTION_IMAGE}
 				id="description"
 			/>
 		</FormGroup>

@@ -1,8 +1,7 @@
 import type { IconName } from '@viaa/avo2-components';
-import type { Avo } from '@viaa/avo2-types';
+import type { AvoAuthErrorActionButton } from '@viaa/avo2-types';
 import type { FunctionComponent, ReactElement, ReactNode } from 'react';
 import React from 'react';
-
 import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner';
 import { tHtml } from '~shared/helpers/translation-functions';
 
@@ -11,7 +10,7 @@ export type LoadingState = 'loading' | 'loaded' | 'error';
 export interface ErrorViewQueryParams {
 	message?: ReactNode | string;
 	icon?: IconName;
-	actionButtons?: Avo.Auth.ErrorActionButton[];
+	actionButtons?: AvoAuthErrorActionButton[];
 }
 
 export interface LoadingInfo extends ErrorViewQueryParams {
@@ -25,6 +24,7 @@ export interface LoadingErrorLoadedComponentProps {
 	// biome-ignore lint/suspicious/noExplicitAny: todo
 	dataObject: any | undefined | null;
 	render: () => ReactElement | null;
+	locationId: string;
 }
 
 /**
@@ -34,6 +34,7 @@ export interface LoadingErrorLoadedComponentProps {
  * @param showSpinner
  * @param dataObject
  * @param render
+ * @param locationId
  * @constructor
  */
 export const LoadingErrorLoadedComponent: FunctionComponent<LoadingErrorLoadedComponentProps> = ({
@@ -42,6 +43,7 @@ export const LoadingErrorLoadedComponent: FunctionComponent<LoadingErrorLoadedCo
 	showSpinner = true,
 	dataObject,
 	render,
+	locationId,
 }) => {
 	const renderError = () => (
 		// <ErrorView
@@ -55,6 +57,8 @@ export const LoadingErrorLoadedComponent: FunctionComponent<LoadingErrorLoadedCo
 		// 	actionButtons={loadingInfo.actionButtons || ['home']}
 		// />
 		<>
+			locationId: {locationId}
+			<br />
 			{loadingInfo.message ||
 				tHtml(
 					'shared/components/loading-error-loaded-component/loading-error-loaded-component___er-is-iets-mis-gegaan-bij-het-laden-van-de-gegevens'
@@ -80,6 +84,6 @@ export const LoadingErrorLoadedComponent: FunctionComponent<LoadingErrorLoadedCo
 				</>
 			);
 		default:
-			return showSpinner ? <CenteredSpinner /> : null;
+			return showSpinner ? <CenteredSpinner locationId={locationId} /> : null;
 	}
 };

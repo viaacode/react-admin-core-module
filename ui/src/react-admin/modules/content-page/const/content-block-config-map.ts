@@ -4,41 +4,41 @@ import { AVO_IMAGE_TEXT_BACKGROUND_BLOCK_CONFIG } from '~content-blocks/BlockAvo
 import { CONTENT_BREADCRUMBS_CONFIG } from '~content-blocks/BlockBreadcrumbs';
 import { BUTTONS_BLOCK_CONFIG } from '~content-blocks/BlockButtons';
 import { CARDS_WITHOUT_DESCRIPTION_BLOCK_CONFIG } from '~content-blocks/BlockCardsWithoutDescription';
-import { CONTENT_ENCLOSE_BLOCK_CONFIG } from '~content-blocks/BlockContentEnclose/index';
-import { CONTENT_PAGE_META_BLOCK_CONFIG } from '~content-blocks/BlockContentPageMeta/index';
-import { CTAS_BLOCK_CONFIG } from '~content-blocks/BlockCTAs/index';
-import { EVENTBRITE_BLOCK_CONFIG } from '~content-blocks/BlockEventbrite/index';
-import { HEADING_BLOCK_CONFIG } from '~content-blocks/BlockHeading/index';
+import { CONTENT_ENCLOSE_BLOCK_CONFIG } from '~content-blocks/BlockContentEnclose';
+import { CONTENT_PAGE_META_BLOCK_CONFIG } from '~content-blocks/BlockContentPageMeta';
+import { CTAS_BLOCK_CONFIG } from '~content-blocks/BlockCTAs';
+import { EVENTBRITE_BLOCK_CONFIG } from '~content-blocks/BlockEventbrite';
+import { HEADING_BLOCK_CONFIG } from '~content-blocks/BlockHeading';
 import { HET_ARCHIEF_HEADER_SEARCH_BLOCK_CONFIG } from '~content-blocks/BlockHetArchiefHeaderSearch/BlockHetArchiefHeaderSearch.editorconfig';
-import { HET_ARCHIEF_IMAGE_TEXT_BACKGROUND_BLOCK_CONFIG } from '~content-blocks/BlockHetArchiefImageTextBackground/index';
-import { IFRAME_BLOCK_CONFIG } from '~content-blocks/BlockIFrame/index';
-import { IMAGE_BLOCK_CONFIG } from '~content-blocks/BlockImage/index';
+import { HET_ARCHIEF_IMAGE_TEXT_BACKGROUND_BLOCK_CONFIG } from '~content-blocks/BlockHetArchiefImageTextBackground';
+import { IFRAME_BLOCK_CONFIG } from '~content-blocks/BlockIFrame';
+import { IMAGE_BLOCK_CONFIG } from '~content-blocks/BlockImage';
 import {
 	IMAGE_GRID_BLOCK_CONFIG,
 	LOGO_GRID_BLOCK_CONFIG,
 	USP_GRID_BLOCK_CONFIG,
-} from '~content-blocks/BlockImageGrid/index';
-import { IMAGE_TITLE_TEXT_BUTTON_BLOCK_CONFIG } from '~content-blocks/BlockImageTitleTextButton/index';
-import { INTRO_BLOCK_CONFIG } from '~content-blocks/BlockIntro/index';
-import { KLAAR_BLOCK_CONFIG } from '~content-blocks/BlockKlaar/index';
-import { MAINTAINERS_GRID_BLOCK_CONFIG } from '~content-blocks/BlockMaintainersGrid/index';
-import { MEDIA_GRID_BLOCK_CONFIG } from '~content-blocks/BlockMediaGrid/index';
-import { OVERVIEW_NEWSPAPER_TITLES_BLOCK_CONFIG } from '~content-blocks/BlockOverviewNewspaperTitles/index';
-import { QUOTE_BLOCK_CONFIG } from '~content-blocks/BlockQuote/index';
+} from '~content-blocks/BlockImageGrid';
+import { IMAGE_TITLE_TEXT_BUTTON_BLOCK_CONFIG } from '~content-blocks/BlockImageTitleTextButton';
+import { INTRO_BLOCK_CONFIG } from '~content-blocks/BlockIntro';
+import { KLAAR_BLOCK_CONFIG } from '~content-blocks/BlockKlaar';
+import { MAINTAINERS_GRID_BLOCK_CONFIG } from '~content-blocks/BlockMaintainersGrid';
+import { MEDIA_GRID_BLOCK_CONFIG } from '~content-blocks/BlockMediaGrid';
+import { OVERVIEW_NEWSPAPER_TITLES_BLOCK_CONFIG } from '~content-blocks/BlockOverviewNewspaperTitles';
+import { QUOTE_BLOCK_CONFIG } from '~content-blocks/BlockQuote';
 import {
 	RICH_TEXT_BLOCK_CONFIG,
 	RICH_TEXT_TWO_COLUMNS_BLOCK_CONFIG,
-} from '~content-blocks/BlockRichText/index';
-import { CONTENT_SCROLL_DOWN_NUDGE_CONFIG } from '~content-blocks/BlockScrollDownNudge/index';
+} from '~content-blocks/BlockRichText';
+import { CONTENT_SCROLL_DOWN_NUDGE_CONFIG } from '~content-blocks/BlockScrollDownNudge';
 import {
 	PROJECTS_SPOTLIGHT_BLOCK_CONFIG,
 	SPOTLIGHT_BLOCK_CONFIG,
-} from '~content-blocks/BlockSpotlight/index';
-import { TAGS_WITH_LINK_BLOCK_CONFIG } from '~content-blocks/BlockTagsWithLink/index';
-import { THREE_CLICKABLE_TILES_BLOCK_CONFIG } from '~content-blocks/BlockThreeClickableTiles/index';
-import { UITGEKLAARD_BLOCK_CONFIG } from '~content-blocks/BlockUitgeklaard/index';
-import { MEDIA_PLAYER_BLOCK_CONFIG } from '~content-blocks/BlockVideo/index';
-import { MEDIA_PLAYER_TITLE_TEXT_BUTTON_BLOCK_CONFIG } from '~content-blocks/BlockVideoTitleTextButton/index';
+} from '~content-blocks/BlockSpotlight';
+import { TAGS_WITH_LINK_BLOCK_CONFIG } from '~content-blocks/BlockTagsWithLink';
+import { THREE_CLICKABLE_TILES_BLOCK_CONFIG } from '~content-blocks/BlockThreeClickableTiles';
+import { UITGEKLAARD_BLOCK_CONFIG } from '~content-blocks/BlockUitgeklaard';
+import { MEDIA_PLAYER_BLOCK_CONFIG } from '~content-blocks/BlockVideo';
+import { MEDIA_PLAYER_TITLE_TEXT_BUTTON_BLOCK_CONFIG } from '~content-blocks/BlockVideoTitleTextButton';
 import { SEARCH_BLOCK_CONFIG } from '~content-blocks/search';
 import { PAGE_OVERVIEW_BLOCK_CONFIG } from '~modules/content-page/components/blocks/BlockPageOverview/BlockPageOverview.editorconfig';
 import type { ContentBlockConfig } from '../types/content-block.types';

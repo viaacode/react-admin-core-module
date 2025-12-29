@@ -4,7 +4,7 @@ import { useMatch } from 'react-router';
 import { AdminConfigManager } from '~core/config/config.class';
 import { NavigationItemEdit } from '~modules/navigation/views/NavigationItemEdit';
 
-export const NavigationEditPage: FC = () => {
+export const NavigationItemEditPage: FC = () => {
 	const match = useMatch<'navigationItemId' | 'navigationBarId', string>(
 		AdminConfigManager.getConfig().routes.ADMIN_NAVIGATION_ITEM_EDIT
 	);

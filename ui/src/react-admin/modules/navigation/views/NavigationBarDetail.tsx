@@ -21,12 +21,12 @@ import type {
 import DeleteObjectModal from '~shared/components/ConfirmModal/ConfirmModal';
 import FilterTable from '~shared/components/FilterTable/FilterTable';
 import { Icon } from '~shared/components/Icon/Icon';
-import { Loader } from '~shared/components/Loader/Loader';
+import { Loading } from '~shared/components/Loading/Loading';
 import { GET_LANGUAGE_NAMES } from '~shared/consts/language-names';
 import { CustomError } from '~shared/helpers/custom-error';
 import { isMultiLanguageEnabled } from '~shared/helpers/is-multi-language-enabled';
-import { navigate } from '~shared/helpers/routing/link';
 import { navigateFunc } from '~shared/helpers/navigate-fnc';
+import { navigate } from '~shared/helpers/routing/link';
 import { tHtml, tText } from '~shared/helpers/translation-functions';
 import { AdminLayout } from '~shared/layouts/AdminLayout/AdminLayout';
 import { TableColumnDataType } from '~shared/types/table-column-data-type';
@@ -346,7 +346,7 @@ export const NavigationBarDetail: FC<NavigationDetailProps> = ({ navigationBarId
 
 	const renderPageContent = () => {
 		if (isLoadingNavigationItems) {
-			return <Loader />;
+			return <Loading locationId="navigation-bar-detail--loading" />;
 		}
 		if (isErrorNavigationItems) {
 			return (

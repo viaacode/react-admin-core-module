@@ -10,13 +10,13 @@ import type { LoadingInfo } from '~shared/components/LoadingErrorLoadedComponent
 import { LoadingErrorLoadedComponent } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
 import { CustomError } from '~shared/helpers/custom-error';
 import { isMultiLanguageEnabled } from '~shared/helpers/is-multi-language-enabled';
-import { buildLink, navigateToContentType } from '~shared/helpers/routing/link';
 import { navigateFunc } from '~shared/helpers/navigate-fnc';
 import {
 	renderDateDetailRows,
 	renderDetailRow,
 	renderSimpleDetailRows,
 } from '~shared/helpers/render-detail-fields';
+import { buildLink, navigateToContentType } from '~shared/helpers/routing/link';
 import { tText } from '~shared/helpers/translation-functions';
 import { AdminLayout } from '~shared/layouts/AdminLayout/AdminLayout';
 import type { ContentPageLabel } from '../content-page-label.types';
@@ -191,6 +191,7 @@ export const ContentPageLabelDetail: FunctionComponent<ContentPageLabelDetailPro
 				loadingInfo={loadingInfo}
 				dataObject={contentPageLabelInfo}
 				render={renderPage}
+				locationId="content-page-label-detail"
 			/>
 		</>
 	);

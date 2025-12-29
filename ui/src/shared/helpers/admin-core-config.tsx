@@ -1,12 +1,12 @@
 import { IconName } from '@viaa/avo2-components';
-import type { Avo, DatabaseType } from '@viaa/avo2-types';
+import type { AvoCoreDatabaseType, AvoEducationOrganizationOrganization } from '@viaa/avo2-types';
 import { capitalize, lowerCase } from 'es-toolkit';
 import type { TOptions } from 'i18next';
 import type { FunctionComponent, ReactNode } from 'react';
 import type { NavigateFunction } from 'react-router';
 import { Link } from 'react-router-dom';
 import { AdminConfigManager } from '~core/config/config.class';
-import type { LinkInfo, ToastInfo } from '~core/config/config.types';
+import type { AdminConfig, LinkInfo, ToastInfo } from '~core/config/config.types';
 import { ContentBlockType } from '~modules/content-page/types/content-block.types';
 import {
 	type ContentPageInfo,
@@ -20,7 +20,7 @@ import { tText } from '~shared/helpers/translation-functions';
 import { getMockCommonUser } from '../../mock-common-user';
 import i18n from '../translations/i18n';
 
-const DUMMY_EDUCATIONAL_ORGANISATIONS: Avo.EducationOrganization.Organization[] = [
+const DUMMY_EDUCATIONAL_ORGANISATIONS: AvoEducationOrganizationOrganization[] = [
 	{
 		organisationId: '50674',
 		organisationLabel: 'Academie de Kunstbrug Gent',
@@ -47,9 +47,8 @@ const DUMMY_EDUCATIONAL_ORGANISATIONS: Avo.EducationOrganization.Organization[] 
 	},
 ];
 
-export function setAdminCoreConfig(navigateFunc: NavigateFunction) {
-	// only used for starting admin-core separately
-	AdminConfigManager.setConfig({
+export function getAdminCoreConfig(navigateFunc: NavigateFunction): AdminConfig {
+	return {
 		contentPage: {
 			availableContentBlocks: [
 				ContentBlockType.Heading,
@@ -153,7 +152,9 @@ export function setAdminCoreConfig(navigateFunc: NavigateFunction) {
 		},
 		components: {
 			loader: {
-				component: null,
+				component: (props: any) => {
+					return <div data-location-id={props.locationId}>Loading...</div>;
+				},
 			},
 			defaultAudioStill: 'FAKE_DEFAULT_AUDIO_STILL',
 			enableMultiLanguage: true,
@@ -316,11 +317,7 @@ export function setAdminCoreConfig(navigateFunc: NavigateFunction) {
 			},
 		},
 		routes: {
-			ADMIN_ALERTS_OVERVIEW: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.alerts}`,
-			ADMIN_ASSIGNMENTS_OVERVIEW: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.assignments}`,
-			ADMIN_ASSIGNMENT_PUPIL_COLLECTIONS_OVERVIEW: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.pupilCollections}`,
-			ADMIN_BUNDLES_OVERVIEW: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.bundles}`,
-			ADMIN_COLLECTIONS_OVERVIEW: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.collections}`,
+			ADMIN_DASHBOARD: `/${ROUTE_PARTS.admin}`,
 			ADMIN_CONTENT_PAGE_CREATE: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.content}/${ROUTE_PARTS.create}`,
 			ADMIN_CONTENT_PAGE_DETAIL: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.content}/:id`,
 			ADMIN_CONTENT_PAGE_EDIT: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.content}/:id/${ROUTE_PARTS.edit}`,
@@ -335,13 +332,20 @@ export function setAdminCoreConfig(navigateFunc: NavigateFunction) {
 			ADMIN_NAVIGATION_ITEM_EDIT: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.navigation}/:navigationBarId/:navigationItemId/${ROUTE_PARTS.edit}`,
 			ADMIN_NAVIGATION_OVERVIEW: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.navigation}`,
 			ADMIN_TRANSLATIONS_OVERVIEW: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.translations}`,
-			ADMIN_USER_DETAIL: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.users}/:id`,
 			ADMIN_USER_EDIT: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.users}/:id/${ROUTE_PARTS.edit}`,
 			ADMIN_USER_GROUP_CREATE: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.userGroup}/${ROUTE_PARTS.create}`,
 			ADMIN_USER_GROUP_DETAIL: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.userGroup}/:id`,
 			ADMIN_USER_GROUP_EDIT: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.userGroup}/:id/${ROUTE_PARTS.edit}`,
 			ADMIN_USER_GROUP_OVERVIEW: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.userGroup}`,
 			ADMIN_USER_OVERVIEW: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.users}`,
+			ADMIN_MAINTENANCE_ALERTS_OVERVIEW: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.alerts}`,
+
+			// Avo specific routes
+			ADMIN_USER_DETAIL: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.users}/:id`,
+			ADMIN_ASSIGNMENTS_OVERVIEW: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.assignments}`,
+			ADMIN_ASSIGNMENT_PUPIL_COLLECTIONS_OVERVIEW: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.pupilCollections}`,
+			ADMIN_BUNDLES_OVERVIEW: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.bundles}`,
+			ADMIN_COLLECTIONS_OVERVIEW: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.collections}`,
 			ASSIGNMENT_DETAIL: `/${ROUTE_PARTS.workspace}/${ROUTE_PARTS.assignments}/:id`,
 			BUNDLE_DETAIL: `/${ROUTE_PARTS.bundles}/:id`,
 			BUNDLE_EDIT: `/${ROUTE_PARTS.bundles}/:id/${ROUTE_PARTS.edit}`,
@@ -366,7 +370,12 @@ export function setAdminCoreConfig(navigateFunc: NavigateFunction) {
 			LDAP_DASHBOARD_PEOPLE_URL: 'https://google.com?q=people',
 			CLIENT_URL: 'http://localhost:3400',
 			// https://vite.dev/config/shared-options#envprefix
-			DATABASE_APPLICATION_TYPE: import.meta.env.DATABASE_APPLICATION_TYPE as DatabaseType,
+			DATABASE_APPLICATION_TYPE: import.meta.env.DATABASE_APPLICATION_TYPE as AvoCoreDatabaseType,
 		},
-	});
+	};
+}
+
+export function setAdminCoreConfig(navigateFunc: NavigateFunction) {
+	// only used for starting admin-core separately
+	AdminConfigManager.setConfig(getAdminCoreConfig(navigateFunc));
 }

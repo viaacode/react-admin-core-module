@@ -12,27 +12,27 @@ import got from 'got';
 import { trimEnd } from 'lodash';
 import publicIp from 'public-ip';
 
-import { ContentTypeNumber } from '../../collections';
+import type { ContentTypeNumber } from '../../collections';
 import { DataService } from '../../data';
 import {
 	GetItemBrowsePathByExternalIdDocument,
-	GetItemBrowsePathByExternalIdQuery,
-	GetItemBrowsePathByExternalIdQueryVariables,
+	type GetItemBrowsePathByExternalIdQuery,
+	type GetItemBrowsePathByExternalIdQueryVariables,
 } from '../../shared/generated/graphql-db-types-avo';
 import {
 	GetFileByRepresentationSchemaIdentifierDocument,
-	GetFileByRepresentationSchemaIdentifierQuery,
-	GetFileByRepresentationSchemaIdentifierQueryVariables,
+	type GetFileByRepresentationSchemaIdentifierQuery,
+	type GetFileByRepresentationSchemaIdentifierQueryVariables,
 	GetThumbnailUrlByIdDocument,
-	GetThumbnailUrlByIdQuery,
-	GetThumbnailUrlByIdQueryVariables,
+	type GetThumbnailUrlByIdQuery,
+	type GetThumbnailUrlByIdQueryVariables,
 } from '../../shared/generated/graphql-db-types-hetarchief';
 import { cleanMultilineEnv } from '../../shared/helpers/env-vars';
 import { CustomError } from '../../shared/helpers/error';
 import { isHetArchief } from '../../shared/helpers/is-hetarchief';
 import { mapToMediaType } from '../../shared/helpers/mapToMediaType';
 import { PLAYER_TICKET_EXPIRY } from '../player-ticket.consts';
-import { PlayerTicket } from '../player-ticket.types';
+import type { PlayerTicket } from '../player-ticket.types';
 
 @Injectable()
 export class PlayerTicketService {

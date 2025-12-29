@@ -1,5 +1,5 @@
 import type { ButtonAction } from '@viaa/avo2-components';
-import type { Avo } from '@viaa/avo2-types';
+import type { AvoCoreContentPickerType } from '@viaa/avo2-types';
 import clsx from 'clsx';
 import { map } from 'es-toolkit/compat';
 import { stringify } from 'query-string';
@@ -135,7 +135,7 @@ export const SmartLink: FunctionComponent<SmartLinkProps> = ({
 				resolvedTarget = LinkTarget.Blank;
 			}
 
-			switch (type as Avo.Core.ContentPickerType) {
+			switch (type as AvoCoreContentPickerType) {
 				case 'INTERNAL_LINK':
 				case 'CONTENT_PAGE':
 				case 'CONTENT_PAGE_NEWS_ITEM':

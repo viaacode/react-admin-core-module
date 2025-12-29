@@ -1,16 +1,16 @@
 import type { LinkTarget } from '@viaa/avo2-components';
-import type { Avo } from '@viaa/avo2-types';
+import type { AvoCoreContentPickerType } from '@viaa/avo2-types';
 
 export type PickerItemControls = 'SELECT' | 'TEXT_INPUT' | 'FILE_UPLOAD';
 
 export interface PickerItem {
 	label?: string;
-	type: Avo.Core.ContentPickerType;
+	type: AvoCoreContentPickerType;
 	value: string;
 	target?: LinkTarget;
 }
 
-export interface PickerTypeOption<T = Avo.Core.ContentPickerType> {
+export interface PickerTypeOption<T = AvoCoreContentPickerType> {
 	value: T;
 	label: string;
 	disabled?: boolean;
@@ -18,7 +18,7 @@ export interface PickerTypeOption<T = Avo.Core.ContentPickerType> {
 	fetch?: (
 		keyword: string | null,
 		limit: number,
-		pickerType?: Avo.Core.ContentPickerType
+		pickerType?: AvoCoreContentPickerType
 	) => Promise<PickerItem[]>;
 	placeholder?: string;
 }

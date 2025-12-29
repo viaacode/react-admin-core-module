@@ -1,4 +1,4 @@
-import type { Avo } from '@viaa/avo2-types';
+import type { AvoFileUploadAssetInfo, AvoFileUploadAssetType } from '@viaa/avo2-types';
 import { CustomError } from '~shared/helpers/custom-error';
 import { fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
 import { getAdminCoreApiUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config';
@@ -6,7 +6,7 @@ import { getAdminCoreApiUrl } from '~shared/helpers/get-proxy-url-from-admin-cor
 export class AssetsService {
 	public static async uploadFile(
 		file: File,
-		assetType: Avo.FileUpload.AssetType,
+		assetType: AvoFileUploadAssetType,
 		ownerId: string
 	): Promise<string> {
 		let url: string | undefined;
@@ -21,7 +21,7 @@ export class AssetsService {
 			formData.append('type', assetType as any);
 			formData.append('content', file, file.name);
 
-			const data = await fetchWithLogoutJson<Avo.FileUpload.AssetInfo>(url, {
+			const data = await fetchWithLogoutJson<AvoFileUploadAssetInfo>(url, {
 				method: 'POST',
 				headers: {
 					// 'content-type': 'multipart/form-data',

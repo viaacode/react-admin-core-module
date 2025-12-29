@@ -12,7 +12,13 @@ import {
 	TextArea,
 	TextInput,
 } from '@viaa/avo2-components';
-import { Avo, PermissionName } from '@viaa/avo2-types';
+import {
+	type AvoContentPageType,
+	AvoCoreContentPickerType,
+	AvoFileUploadAssetType,
+	type AvoUserCommonUser,
+	PermissionName,
+} from '@viaa/avo2-types';
 import { compact, isNil, noop } from 'es-toolkit';
 import React, { type FunctionComponent, useCallback, useEffect, useState } from 'react';
 
@@ -50,11 +56,11 @@ import { useGetUserGroups } from '~modules/user-group/hooks/get-user-groups';
 import { SpecialUserGroups } from '~shared/types/authentication.types';
 
 interface ContentEditFormProps {
-	contentTypes: SelectOption<Avo.ContentPage.Type>[];
+	contentTypes: SelectOption<AvoContentPageType>[];
 	formErrors: ContentEditFormErrors;
 	contentPageInfo: Omit<ContentPageInfo, 'id'> & { id?: string | number };
 	changeContentPageState: (action: ContentEditAction) => void;
-	commonUser: Avo.User.CommonUser;
+	commonUser: AvoUserCommonUser;
 }
 
 export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
@@ -88,7 +94,7 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 			return {
 				label: parentPageInfo.title,
 				value: String(parentPageInfo.id),
-				type: Avo.Core.ContentPickerType.CONTENT_PAGE,
+				type: AvoCoreContentPickerType.CONTENT_PAGE,
 				target: undefined,
 			};
 		}
@@ -170,13 +176,13 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 
 	const mapTagsToLabels = (
 		tags: TagInfo[],
-		contentType: Avo.ContentPage.Type | undefined
+		contentType: AvoContentPageType | undefined
 	): Partial<ContentPageLabel>[] => {
 		return (tags || []).map(
 			(tag): Partial<ContentPageLabel> => ({
 				label: tag.label,
 				id: tag.value as number,
-				content_type: contentType as Avo.ContentPage.Type,
+				content_type: contentType as AvoContentPageType,
 			})
 		);
 	};
@@ -184,7 +190,7 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 	// Render
 	const owner: PickerItem | undefined = {
 		label: contentPageInfo.owner?.fullName,
-		type: Avo.Core.ContentPickerType.PROFILE,
+		type: AvoCoreContentPickerType.PROFILE,
 		value: contentPageInfo.owner?.id,
 	};
 	const lastUserGroup = allUserGroups?.at(-1);
@@ -215,7 +221,7 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 									<FileUpload
 										ownerId={commonUser.profileId}
 										urls={compact([contentPageInfo.thumbnailPath])}
-										assetType="CONTENT_PAGE_COVER"
+										assetType={AvoFileUploadAssetType.CONTENT_PAGE_COVER}
 										allowMulti={false}
 										label={tText(
 											'admin/content/components/content-edit-form/content-edit-form___cover-afbeelding'
@@ -340,7 +346,7 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 												placeholder={tText(
 													'admin/content/components/content-edit-form/content-edit-form___selecteer-een-auteur'
 												)}
-												allowedTypes={[Avo.Core.ContentPickerType.PROFILE]}
+												allowedTypes={[AvoCoreContentPickerType.PROFILE]}
 												value={owner}
 												onChange={(item: PickerItem | null) => {
 													if (!item) {
@@ -452,7 +458,7 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 												const nlParentPageId = newNlParentPage?.value;
 												changeContentPageProp('nlParentPageId', nlParentPageId);
 											}}
-											allowedTypes={[Avo.Core.ContentPickerType.NL_CONTENT_PAGE_PARENT_ID]}
+											allowedTypes={[AvoCoreContentPickerType.NL_CONTENT_PAGE_PARENT_ID]}
 											hideTypeDropdown
 											hideTargetSwitch
 											placeholder={tText(

@@ -4,7 +4,7 @@ import { useMatch } from 'react-router';
 import { AdminConfigManager } from '~core/config/config.class';
 import { NavigationBarDetail } from '~modules/navigation/views/NavigationBarDetail';
 
-export const NavigationDetailPage: FC = () => {
+export const NavigationBarDetailPage: FC = () => {
 	const match = useMatch<'navigationBarId', string>(
 		AdminConfigManager.getAdminRoute('ADMIN_NAVIGATION_DETAIL')
 	);

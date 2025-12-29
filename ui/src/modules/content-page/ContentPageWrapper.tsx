@@ -42,6 +42,7 @@ export const ContentPageWrapper = () => {
 						icon={IconName.clock}
 						actionButtons={['helpdesk']}
 						message={'deze-pagina-is-enkel-voor-gebruikers-met-andere-rechten'}
+						locationId="content-page-wrapper"
 					/>
 				)}
 			/>

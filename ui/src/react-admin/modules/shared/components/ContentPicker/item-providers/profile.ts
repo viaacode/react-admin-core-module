@@ -1,4 +1,8 @@
-import { Avo } from '@viaa/avo2-types';
+import {
+	AvoCoreContentPickerType,
+	AvoSearchOrderDirection,
+	type AvoUserCommonUser,
+} from '@viaa/avo2-types';
 import memoize from 'memoizee';
 import { UserService } from '~modules/user/user.service';
 import { MEMOIZEE_OPTIONS } from '~shared/consts/memoizee-options';
@@ -10,11 +14,11 @@ import { parsePickerItem } from '../helpers/parse-picker';
 export const retrieveProfiles = memoize(
 	async (name: string | null, limit = 5): Promise<PickerItem[]> => {
 		try {
-			const response: [Avo.User.CommonUser[], number] = await UserService.getProfiles(
+			const response: [AvoUserCommonUser[], number] = await UserService.getProfiles(
 				0,
 				limit,
 				'lastAccessAt',
-				Avo.Search.OrderDirection.DESC,
+				AvoSearchOrderDirection.DESC,
 				'dateTime',
 				name
 					? {
@@ -34,11 +38,11 @@ export const retrieveProfiles = memoize(
 );
 
 // Convert profiles to react-select options
-const parseProfiles = (commonUsers: Avo.User.CommonUser[]): PickerItem[] => {
+const parseProfiles = (commonUsers: AvoUserCommonUser[]): PickerItem[] => {
 	return commonUsers.map(
 		(user): PickerItem => ({
 			label: `${user.fullName} (${user.email})`,
-			...parsePickerItem(Avo.Core.ContentPickerType.PROFILE, user.profileId),
+			...parsePickerItem(AvoCoreContentPickerType.PROFILE, user.profileId),
 		})
 	);
 };

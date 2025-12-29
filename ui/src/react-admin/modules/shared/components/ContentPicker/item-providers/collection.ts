@@ -1,7 +1,6 @@
-import { Avo } from '@viaa/avo2-types';
+import { type AvoCollectionCollection, AvoCoreContentPickerType } from '@viaa/avo2-types';
 // TODO remove memoize in favor of react-query caching
 import memoize from 'memoizee';
-
 import { CollectionService } from '~modules/collection/collection.service';
 import { ContentTypeNumber } from '~modules/collection/collection.types';
 import { MEMOIZEE_OPTIONS } from '~shared/consts/memoizee-options';
@@ -13,11 +12,11 @@ import { parsePickerItem } from '../helpers/parse-picker';
 // fetch collections by title-wildcard
 export const retrieveCollections = memoize(
 	async (titleOrId: string | null, limit = 5): Promise<PickerItem[]> => {
-		const collections: Avo.Collection.Collection[] | null = titleOrId
+		const collections: AvoCollectionCollection[] | null = titleOrId
 			? await CollectionService.fetchCollectionsByTitleOrId(titleOrId, limit)
 			: await CollectionService.fetchCollectionsOrBundles(limit, ContentTypeNumber.collection);
 
-		return parseCollections(Avo.Core.ContentPickerType.COLLECTION, collections || []);
+		return parseCollections(AvoCoreContentPickerType.COLLECTION, collections || []);
 	},
 	MEMOIZEE_OPTIONS
 );
@@ -27,20 +26,20 @@ export const retrieveBundles = async (
 	titleOrId: string | null,
 	limit = 5
 ): Promise<PickerItem[]> => {
-	const bundles: Avo.Collection.Collection[] | null = titleOrId
+	const bundles: AvoCollectionCollection[] | null = titleOrId
 		? await CollectionService.fetchBundlesByTitleOrId(titleOrId, limit)
 		: await CollectionService.fetchCollectionsOrBundles(limit, ContentTypeNumber.bundle);
 
-	return parseCollections(Avo.Core.ContentPickerType.BUNDLE, bundles || []);
+	return parseCollections(AvoCoreContentPickerType.BUNDLE, bundles || []);
 };
 
 // parse raw data to react-select options
 const parseCollections = (
-	type: Avo.Core.ContentPickerType,
-	raw: Avo.Collection.Collection[]
+	type: AvoCoreContentPickerType,
+	raw: AvoCollectionCollection[]
 ): PickerItem[] => {
 	return raw.map(
-		(item: Avo.Collection.Collection): PickerItem => ({
+		(item: AvoCollectionCollection): PickerItem => ({
 			label: item.title,
 			...parsePickerItem(type, item.id.toString()),
 		})

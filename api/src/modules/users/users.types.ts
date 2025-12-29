@@ -1,17 +1,15 @@
-import type { Avo } from '@viaa/avo2-types';
-
-import {
-	type GetCommonUserByIdQuery,
-	type GetUserByIdQuery,
+import type { AvoSearchOrderDirection } from '@viaa/avo2-types';
+import type {
+	GetCommonUserByIdQuery,
+	GetUserByIdQuery,
 } from '../shared/generated/graphql-db-types-avo';
-
 import type { UserQueryTypes } from './queries/users.queries';
 
 export interface QueryProfilesBody {
 	offset: string;
 	limit: string;
 	sortColumn: UserOverviewTableCol;
-	sortOrder: Avo.Search.OrderDirection;
+	sortOrder: AvoSearchOrderDirection;
 	tableColumnDataType: string;
 	where: string;
 }

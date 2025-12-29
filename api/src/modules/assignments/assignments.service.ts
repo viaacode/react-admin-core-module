@@ -1,11 +1,10 @@
 import { forwardRef, Inject } from '@nestjs/common';
-import type { Avo } from '@viaa/avo2-types';
-
+import type { AvoAssignmentAssignment } from '@viaa/avo2-types';
 import { DataService } from '../data';
 import {
 	GetPublicAssignmentsByTitleOrIdDocument,
-	GetPublicAssignmentsByTitleOrIdQuery,
-	GetPublicAssignmentsByTitleOrIdQueryVariables,
+	type GetPublicAssignmentsByTitleOrIdQuery,
+	type GetPublicAssignmentsByTitleOrIdQueryVariables,
 } from '../shared/generated/graphql-db-types-avo';
 import { customError } from '../shared/helpers/custom-error';
 import { logAndThrow } from '../shared/helpers/logAndThrow';
@@ -19,7 +18,7 @@ export class AssignmentsService {
 	public async fetchPublicAssignmentsByTitleOrId(
 		titleOrId: string | null,
 		limit: number
-	): Promise<Avo.Assignment.Assignment[]> {
+	): Promise<AvoAssignmentAssignment[]> {
 		try {
 			const variables: GetPublicAssignmentsByTitleOrIdQueryVariables = {
 				title: `%${titleOrId ?? ''}%`,
@@ -31,7 +30,7 @@ export class AssignmentsService {
 				GetPublicAssignmentsByTitleOrIdQueryVariables
 			>(GetPublicAssignmentsByTitleOrIdDocument, variables);
 
-			return (response.app_assignments_v2 || []) as Avo.Assignment.Assignment[];
+			return (response.app_assignments_v2 || []) as AvoAssignmentAssignment[];
 		} catch (err) {
 			logAndThrow(
 				customError('Failed to fetch assignment by title or id', err, {

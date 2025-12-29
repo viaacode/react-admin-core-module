@@ -1,6 +1,5 @@
-import type { Avo } from '@viaa/avo2-types';
+import type { AvoContentPageType } from '@viaa/avo2-types';
 import type { Locale } from '~modules/translations/translations.core.types';
-
 import type { FilterableTableState } from '~shared/components/FilterTable/FilterTable';
 import type { PickerItem } from '~shared/types/content-picker';
 
@@ -16,7 +15,7 @@ export type ContentPageLabelOverviewTableCols =
 export interface ContentPageLabel {
 	id: number;
 	label: string;
-	content_type: Avo.ContentPage.Type;
+	content_type: AvoContentPageType;
 	language: Locale;
 	link_to: PickerItem | null;
 	created_at: string;
@@ -32,7 +31,7 @@ export interface ContentPageLabelEditFormErrorState {
 
 export interface ContentPageLabelTableState extends FilterableTableState {
 	label: string;
-	content_type: Avo.ContentPage.Type | null;
+	content_type: AvoContentPageType | null;
 	language: Locale[];
 	link_to: PickerItem | null;
 	created_at: string;

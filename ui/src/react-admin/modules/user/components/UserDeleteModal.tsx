@@ -13,7 +13,7 @@ import {
 	ToolbarItem,
 	ToolbarRight,
 } from '@viaa/avo2-components';
-import { Avo } from '@viaa/avo2-types';
+
 import type { FunctionComponent, ReactNode } from 'react';
 import React, { useState } from 'react';
 import { AdminConfigManager } from '~core/config/config.class';
@@ -31,6 +31,7 @@ import { UserService } from '../user.service';
 import type { DeleteContentCounts } from '../user.types';
 
 import './UserDeleteModal.scss';
+import { AvoCoreContentPickerType, type AvoUserUserDeleteOption } from '@viaa/avo2-types';
 
 interface UserDeleteModalProps {
 	selectedProfileIds: string[];
@@ -53,7 +54,7 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 	const [transferToUser, setTransferToUser] = useState<PickerItem | null>(null);
 	const [transferToUserError, setTransferToUserError] = useState<string | undefined>();
 	const [selectedDeleteOption, setSelectedDeleteOption] =
-		useState<Avo.User.UserDeleteOption>('DELETE_ALL');
+		useState<AvoUserUserDeleteOption>('DELETE_ALL');
 	const [deleteConfirmModalOpen, setDeleteConfirmModalOpen] = useState<boolean>(false);
 	const [deleteContentCounts, setDeleteContentCounts] = useState<DeleteContentCounts | null>(null);
 	const [shouldSendEmail, setShouldSendEmail] = useState<boolean>(false);
@@ -515,7 +516,7 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 					{(selectedDeleteOption === 'TRANSFER_PUBLIC' ||
 						selectedDeleteOption === 'TRANSFER_ALL') && (
 						<ContentPicker
-							allowedTypes={[Avo.Core.ContentPickerType.PROFILE]}
+							allowedTypes={[AvoCoreContentPickerType.PROFILE]}
 							value={transferToUser}
 							onChange={setTransferToUser}
 							placeholder={tText(

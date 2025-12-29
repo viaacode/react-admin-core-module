@@ -1,7 +1,6 @@
 import { Controller, Get, ParseIntPipe, Query } from '@nestjs/common';
 import { ApiQuery, ApiTags } from '@nestjs/swagger';
-import type { Avo } from '@viaa/avo2-types';
-
+import type { AvoAssignmentAssignment } from '@viaa/avo2-types';
 import { AssignmentsService } from './assignments.service';
 
 @ApiTags('Assignments')
@@ -26,7 +25,7 @@ export class AssignmentsController {
 	public async fetchPublicAssignmentsByTitleOrId(
 		@Query('titleOrId') titleOrId: string | undefined,
 		@Query('limit', ParseIntPipe) limit: number
-	): Promise<Avo.Assignment.Assignment[]> {
+	): Promise<AvoAssignmentAssignment[]> {
 		return this.assignmentsService.fetchPublicAssignmentsByTitleOrId(titleOrId, limit);
 	}
 }

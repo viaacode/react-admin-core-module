@@ -6,7 +6,7 @@ import {
 	Toolbar,
 	ToolbarRight,
 } from '@viaa/avo2-components';
-import { type Avo, PermissionName } from '@viaa/avo2-types';
+import { type AvoUserCommonUser, PermissionName } from '@viaa/avo2-types';
 import clsx from 'clsx';
 import { cloneDeep, compact, intersection, isNil, noop } from 'es-toolkit';
 import { stringifyUrl } from 'query-string';
@@ -44,7 +44,7 @@ type ContentPageDetailProps = {
 	contentPageInfo: Partial<ContentPageInfo>;
 	activeBlockPosition?: number | null;
 	onBlockClicked?: BlockClickHandler;
-	commonUser?: Avo.User.CommonUser;
+	commonUser?: AvoUserCommonUser;
 	renderFakeTitle?: boolean;
 	renderNoAccessError: () => ReactNode;
 	userGroupId?: string | null;
@@ -256,7 +256,7 @@ export const ContentPageRenderer: FunctionComponent<ContentPageDetailProps> = (p
 
 	const renderPage = () => {
 		if (!props.contentPageInfo) {
-			return <CenteredSpinner />;
+			return <CenteredSpinner locationId="content-page-renderer--loading" />;
 		}
 		if (isNil(props.contentPageInfo.contentType)) {
 			return <div>Page with path {location.pathname} was not found</div>;

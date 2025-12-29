@@ -1,11 +1,11 @@
-import { Avo, PermissionName } from '@viaa/avo2-types';
+import { AvoAuthIdpType, type AvoUserHetArchiefUser, PermissionName } from '@viaa/avo2-types';
 
 import {
 	type FindMaintenanceAlertByIdQuery,
 	type FindMaintenanceAlertsQuery,
 	Lookup_Languages_Enum,
 } from '../../shared/generated/graphql-db-types-hetarchief';
-import { type CreateMaintenanceAlertDto } from '../dto/maintenance-alerts.dto';
+import { CreateMaintenanceAlertDto } from '../dto/maintenance-alerts.dto';
 import { type MaintenanceAlert, MaintenanceAlertType } from '../maintenance-alerts.types';
 
 export const mockGqlMaintenanceAlert1: FindMaintenanceAlertsQuery['app_maintenance_alerts'][0] = {
@@ -13,7 +13,7 @@ export const mockGqlMaintenanceAlert1: FindMaintenanceAlertsQuery['app_maintenan
 	title: 'Gepland onderhoud',
 	message:
 		'Opgelet! Tussen 25 en 27 februari plannen we een onderhoud aan Het archief. Je zal dus tijdenlijk niet kunnen inloggen Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.',
-	type: MaintenanceAlertType.QUESTION as any,
+	type: MaintenanceAlertType.QUESTION,
 	from_date: '2022-02-25T16:36:06.045845',
 	until_date: '2022-02-27T16:36:06.045845',
 	user_groups: [
@@ -31,7 +31,7 @@ export const mockGqlMaintenanceAlert2: FindMaintenanceAlertByIdQuery['app_mainte
 		title: 'Gepland onderhoud',
 		message:
 			'Opgelet! Tussen 25 en 27 maart plannen we een onderhoud aan Het archief. Je zal dus tijdenlijk niet kunnen inloggen Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.',
-		type: MaintenanceAlertType.EXCLAMATION as any,
+		type: MaintenanceAlertType.EXCLAMATION,
 		from_date: '2022-02-25T16:36:06.045845',
 		until_date: '2022-02-27T16:36:06.045845',
 		user_groups: [
@@ -108,14 +108,14 @@ export const mockMaintenanceAlertsResponse = {
 	items: [mockMaintenanceAlert1, mockMaintenanceAlert2, mockMaintenanceAlert3Faulty],
 };
 
-export const mockUser: Avo.User.HetArchiefUser = {
+export const mockUser: AvoUserHetArchiefUser = {
 	id: 'e791ecf1-e121-4c54-9d2e-34524b6467c6',
 	firstName: 'Test',
 	lastName: 'Testers',
 	fullName: 'Test Testers',
 	email: 'test.testers@meemoo.be',
 	language: 'nl',
-	idp: Avo.Auth.IdpType.HETARCHIEF as any, // Definitions of Idp enum in different repos cause typescript to be confused and not recognize them as the same type
+	idp: AvoAuthIdpType.HETARCHIEF, // Definitions of Idp enum in different repos cause typescript to be confused and not recognize them as the same type
 	acceptedTosAt: '1997-01-01T00:00:00.000Z',
 	groupId: 'c56d95aa-e918-47ca-b102-486c9449fc4a',
 	groupName: 'CP_ADMIN',

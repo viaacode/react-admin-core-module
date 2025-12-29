@@ -1,10 +1,10 @@
 import type { ButtonAction } from '@viaa/avo2-components';
-import { Avo } from '@viaa/avo2-types';
+import { AvoCoreContentPickerType } from '@viaa/avo2-types';
 import image500x200 from '../../../static/images/500x200.jpg';
 import type { ImageInfo } from './BlockSpotlight';
 
 const MOCK_BUTTON_ACTION: ButtonAction = {
-	type: Avo.Core.ContentPickerType.EXTERNAL_LINK,
+	type: AvoCoreContentPickerType.EXTERNAL_LINK,
 	value: 'http://google.com',
 };
 

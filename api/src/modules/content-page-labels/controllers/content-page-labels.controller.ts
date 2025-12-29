@@ -1,17 +1,17 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post, Put, Query } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-import type { Avo } from '@viaa/avo2-types';
-import { PermissionName } from '@viaa/avo2-types';
 
-import { type ContentPageLabel, type LabelObj } from '../../content-pages';
+import { type AvoSearchOrderDirection, PermissionName } from '@viaa/avo2-types';
+
+import type { ContentPageLabel, LabelObj } from '../../content-pages';
 import { ContentLabelsRequestDto } from '../../content-pages/dto/content-labels-request.dto';
 import { RequireAnyPermissions } from '../../shared/decorators/require-any-permissions.decorator';
 import { customError } from '../../shared/helpers/custom-error';
 import type { ContentPageLabelOverviewTableCols } from '../content-page-labels.types';
 import {
 	ContentPageLabelDto,
-	InsertContentPageLabelDto,
-	UpdateContentPageLabelDto,
+	type InsertContentPageLabelDto,
+	type UpdateContentPageLabelDto,
 } from '../dto/content-page-label.dto';
 import { ContentPageLabelsService } from '../services/content-page-labels.service';
 
@@ -30,7 +30,7 @@ export class ContentPageLabelsController {
 		@Query('offset') offset: string,
 		@Query('limit') limit: string,
 		@Query('sortColumn') sortColumn: ContentPageLabelOverviewTableCols,
-		@Query('sortOrder') sortOrder: Avo.Search.OrderDirection,
+		@Query('sortOrder') sortOrder: AvoSearchOrderDirection,
 		@Query('where') where: string
 	): Promise<[ContentPageLabel[], number]> {
 		try {

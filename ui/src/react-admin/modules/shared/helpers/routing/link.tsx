@@ -1,6 +1,6 @@
 import type { ButtonAction } from '@viaa/avo2-components';
 import { LinkTarget } from '@viaa/avo2-components';
-import type { Avo } from '@viaa/avo2-types';
+import type { AvoCoreContentPickerType } from '@viaa/avo2-types';
 import { isNil, isString } from 'es-toolkit';
 import { isEmpty, map } from 'es-toolkit/compat';
 import { stringify } from 'query-string';
@@ -123,7 +123,7 @@ export const navigateToContentType = (action: ButtonAction) => {
 			resolvedTarget = LinkTarget.Blank;
 		}
 
-		switch (type as Avo.Core.ContentPickerType) {
+		switch (type as AvoCoreContentPickerType) {
 			case 'INTERNAL_LINK':
 			case 'CONTENT_PAGE':
 			case 'PROJECTS':

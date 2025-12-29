@@ -7,13 +7,13 @@ import {
 	ModalBody,
 	ModalFooterRight,
 } from '@viaa/avo2-components';
-import type { ContentPickerType } from '@viaa/avo2-types';
+import { type AvoCoreContentPickerType, AvoFileUploadAssetType } from '@viaa/avo2-types';
 import clsx from 'clsx';
 import { compact, noop, uniq } from 'es-toolkit';
 import type { FunctionComponent, KeyboardEvent } from 'react';
 import React, { useEffect, useState } from 'react';
 import FileUpload from '~shared/components/FileUpload/FileUpload';
-import { Loader } from '~shared/components/Loader/Loader';
+import { Loading } from '~shared/components/Loading/Loading';
 
 import { useGetStillsFromContentItem } from '~shared/components/UploadOrSelectVideoStill/hooks/useGetStillsFromContentItem';
 import { PHOTO_TYPES } from '~shared/helpers/files';
@@ -28,9 +28,9 @@ export interface UploadOrSelectVideoStillProps {
 	required: boolean;
 	onChange: (selectedMaintainerId: string | null) => void;
 	contentItemType:
-		| ContentPickerType.ITEM
-		| ContentPickerType.COLLECTION
-		| ContentPickerType.ASSIGNMENT
+		| AvoCoreContentPickerType.ITEM
+		| AvoCoreContentPickerType.COLLECTION
+		| AvoCoreContentPickerType.ASSIGNMENT
 		| null; // Limit maintainer options based on the selected item, collection or assignment
 	contentItemId: string | null; // Limit maintainer options based on the selected item, collection or assignment
 }
@@ -81,7 +81,7 @@ export const UploadOrSelectVideoStill: FunctionComponent<UploadOrSelectVideoStil
 			className="c-upload-or-select-video-still"
 		>
 			<FileUpload
-				assetType="CONTENT_BLOCK_IMAGE"
+				assetType={AvoFileUploadAssetType.CONTENT_BLOCK_IMAGE}
 				ownerId=""
 				urls={compact([selectedStill])}
 				onChange={(newValue: string[] | null) => onChange(newValue?.[0] || null)}
@@ -103,7 +103,7 @@ export const UploadOrSelectVideoStill: FunctionComponent<UploadOrSelectVideoStil
 			>
 				<ModalBody>
 					<FileUpload
-						assetType="CONTENT_BLOCK_IMAGE"
+						assetType={AvoFileUploadAssetType.CONTENT_BLOCK_IMAGE}
 						ownerId=""
 						urls={[value]}
 						onChange={handleUploadedStillChanged}
@@ -135,7 +135,7 @@ export const UploadOrSelectVideoStill: FunctionComponent<UploadOrSelectVideoStil
 					))}
 					{isFetching && (
 						<div className="c-upload-or-select-video-still__spinner">
-							<Loader />
+							<Loading locationId="upload-or-select-video-still--loading" />
 						</div>
 					)}
 				</ModalBody>

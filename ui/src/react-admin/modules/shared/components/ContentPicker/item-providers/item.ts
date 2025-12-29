@@ -1,4 +1,4 @@
-import { Avo } from '@viaa/avo2-types';
+import { AvoCoreContentPickerType, type AvoItemItem } from '@viaa/avo2-types';
 import memoize from 'memoizee';
 import { ItemsService } from '~modules/item/items.service';
 import { MEMOIZEE_OPTIONS } from '~shared/consts/memoizee-options';
@@ -8,7 +8,7 @@ import { parsePickerItem } from '../helpers/parse-picker';
 // Fetch content items from GQL
 export const retrieveItems = memoize(
 	async (titleOrExternalId: string | null, limit = 5): Promise<PickerItem[]> => {
-		const items: Avo.Item.Item[] | null = titleOrExternalId
+		const items: AvoItemItem[] | null = titleOrExternalId
 			? await ItemsService.fetchPublicItemsByTitleOrExternalId(titleOrExternalId, limit)
 			: await ItemsService.fetchPublicItems(limit);
 
@@ -18,11 +18,11 @@ export const retrieveItems = memoize(
 );
 
 // Parse raw content items to react-select options
-const parseItems = (raw: Avo.Item.Item[]): PickerItem[] => {
-	return raw.map((item: Avo.Item.Item): PickerItem => {
+const parseItems = (raw: AvoItemItem[]): PickerItem[] => {
+	return raw.map((item: AvoItemItem): PickerItem => {
 		return {
 			label: item.title,
-			...parsePickerItem(Avo.Core.ContentPickerType.ITEM, item.external_id.toString()),
+			...parsePickerItem(AvoCoreContentPickerType.ITEM, item.external_id.toString()),
 		};
 	});
 };

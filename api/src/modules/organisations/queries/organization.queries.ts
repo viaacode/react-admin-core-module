@@ -1,5 +1,5 @@
-import { type TypedDocumentNode } from '@graphql-typed-document-node/core';
-import { DatabaseType } from '@viaa/avo2-types';
+import type { TypedDocumentNode } from '@graphql-typed-document-node/core';
+import { AvoCoreDatabaseType } from '@viaa/avo2-types';
 
 import {
 	GetOrganisationsDocument as GetOrganisationsDocumentAvo,
@@ -40,12 +40,12 @@ type OrganisationQueries = {
 	GetOrganisationsWithUsersDocument: TypedDocumentNode<any, any>;
 };
 
-export const ORGANISATION_QUERIES: Record<DatabaseType, OrganisationQueries> = {
-	[DatabaseType.avo]: {
+export const ORGANISATION_QUERIES: Record<AvoCoreDatabaseType, OrganisationQueries> = {
+	[AvoCoreDatabaseType.avo]: {
 		GetOrganisationsDocument: GetOrganisationsDocumentAvo,
 		GetOrganisationsWithUsersDocument: GetOrganisationsWithUsersDocumentAvo,
 	},
-	[DatabaseType.hetArchief]: {
+	[AvoCoreDatabaseType.hetArchief]: {
 		GetOrganisationsDocument: GetOrganisationsDocumentHetArchief,
 		GetOrganisationsWithUsersDocument: GetOrganisationsWithUsersDocumentHetArchief,
 	},

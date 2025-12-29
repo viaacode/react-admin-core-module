@@ -25,13 +25,13 @@ import { BlockOverviewNewspaperTitles } from '~content-blocks/BlockOverviewNewsp
 import { BlockPageOverviewWrapper } from '~content-blocks/BlockPageOverview';
 import { BlockQuote } from '~content-blocks/BlockQuote';
 import { BlockRichTextWrapper } from '~content-blocks/BlockRichText';
-import { BlockScrollDownNudge } from '~content-blocks/BlockScrollDownNudge/index';
-import { BlockProjectSpotlightWrapper, BlockSpotlight } from '~content-blocks/BlockSpotlight/index';
-import { BlockTagsWithLink } from '~content-blocks/BlockTagsWithLink/index';
-import { BlockThreeClickableTiles } from '~content-blocks/BlockThreeClickableTiles/index';
-import { BlockUitgeklaard } from '~content-blocks/BlockUitgeklaard/index';
-import { BlockVideoWrapper } from '~content-blocks/BlockVideo/index';
-import { BlockVideoTitleTextButtonWrapper } from '~content-blocks/BlockVideoTitleTextButton/index';
+import { BlockScrollDownNudge } from '~content-blocks/BlockScrollDownNudge';
+import { BlockProjectSpotlightWrapper, BlockSpotlight } from '~content-blocks/BlockSpotlight';
+import { BlockTagsWithLink } from '~content-blocks/BlockTagsWithLink';
+import { BlockThreeClickableTiles } from '~content-blocks/BlockThreeClickableTiles';
+import { BlockUitgeklaard } from '~content-blocks/BlockUitgeklaard';
+import { BlockVideoWrapper } from '~content-blocks/BlockVideo';
+import { BlockVideoTitleTextButtonWrapper } from '~content-blocks/BlockVideoTitleTextButton';
 import { AdminConfigManager } from '~core/config/config.class';
 import { ContentBlockType } from '~modules/content-page/types/content-block.types';
 

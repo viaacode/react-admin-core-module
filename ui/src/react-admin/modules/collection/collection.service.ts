@@ -1,10 +1,8 @@
-import type { Avo } from '@viaa/avo2-types';
+import type { AvoCollectionCollection } from '@viaa/avo2-types';
 import { stringifyUrl } from 'query-string';
-
 import { CustomError } from '~shared/helpers/custom-error';
 import { fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
 import { getAdminCoreApiUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config';
-
 import type { ContentTypeNumber } from './collection.types';
 
 export class CollectionService {
@@ -22,7 +20,7 @@ export class CollectionService {
 	static async fetchCollectionsOrBundles(
 		limit: number,
 		typeId: ContentTypeNumber
-	): Promise<Avo.Collection.Collection[]> {
+	): Promise<AvoCollectionCollection[]> {
 		return await fetchWithLogoutJson(
 			stringifyUrl({
 				url: `${CollectionService.getBaseUrl()}/public`,
@@ -39,7 +37,7 @@ export class CollectionService {
 		isCollection: boolean,
 		titleOrId: string,
 		limit: number
-	): Promise<Avo.Collection.Collection[]> {
+	): Promise<AvoCollectionCollection[]> {
 		return fetchWithLogoutJson(
 			stringifyUrl({
 				url: CollectionService.getBaseUrl(),
@@ -64,7 +62,7 @@ export class CollectionService {
 	static async fetchCollectionsByTitleOrId(
 		titleOrId: string,
 		limit: number
-	): Promise<Avo.Collection.Collection[]> {
+	): Promise<AvoCollectionCollection[]> {
 		return CollectionService.fetchCollectionsOrBundlesByTitleOrId(true, titleOrId, limit);
 	}
 
@@ -79,7 +77,7 @@ export class CollectionService {
 	static async fetchBundlesByTitleOrId(
 		titleOrId: string,
 		limit: number
-	): Promise<Avo.Collection.Collection[]> {
+	): Promise<AvoCollectionCollection[]> {
 		return CollectionService.fetchCollectionsOrBundlesByTitleOrId(false, titleOrId, limit);
 	}
 
@@ -99,7 +97,7 @@ export class CollectionService {
 		type: 'collection' | 'bundle',
 		assignmentUuid: string | undefined,
 		includeFragments = true
-	): Promise<Avo.Collection.Collection | null> {
+	): Promise<AvoCollectionCollection | null> {
 		try {
 			return fetchWithLogoutJson(
 				stringifyUrl({

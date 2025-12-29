@@ -45,7 +45,7 @@
     "@smithy/protocol-http": "4.1.8",
     "@smithy/signature-v4": "4.2.4",
     "@studiohyperdrive/pagination": "1.0.0",
-    "@viaa/avo2-types": "4.0.5",
+    "@viaa/avo2-types": "5.0.8",
     "app-root-path": "3.0.0",
     "blend-promise-utils": "^1.28.0",
     "cache-manager": "5.2.3",

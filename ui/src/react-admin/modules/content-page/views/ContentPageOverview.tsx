@@ -9,7 +9,7 @@ import {
 	Spacer,
 	TagList,
 } from '@viaa/avo2-components';
-import { Avo, PermissionName } from '@viaa/avo2-types';
+import { AvoSearchOrderDirection, type AvoUserCommonUser, PermissionName } from '@viaa/avo2-types';
 import clsx from 'clsx';
 import { cloneDeep, compact, isEqual, partition } from 'es-toolkit';
 import { get, set } from 'es-toolkit/compat';
@@ -69,7 +69,7 @@ const { EDIT_ANY_CONTENT_PAGES, DELETE_ANY_CONTENT_PAGES, EDIT_PROTECTED_PAGE_ST
 	PermissionName;
 
 interface ContentPageOverviewProps {
-	commonUser?: Avo.User.CommonUser;
+	commonUser?: AvoUserCommonUser;
 }
 
 export const ContentPageOverview: FunctionComponent<ContentPageOverviewProps> = ({
@@ -290,7 +290,7 @@ export const ContentPageOverview: FunctionComponent<ContentPageOverviewProps> = 
 	} = useGetContentPages({
 		page: tableState.page || 0,
 		sortColumn: (tableState.sort_column as ContentOverviewTableCols) || 'updated_at',
-		sortOrder: tableState.sort_order || Avo.Search.OrderDirection.DESC,
+		sortOrder: tableState.sort_order || AvoSearchOrderDirection.DESC,
 		tableColumnDataType:
 			tableColumns.find(
 				(tableColumn: FilterableColumn) => tableColumn.id || '' === tableState.sort_column
@@ -593,6 +593,7 @@ export const ContentPageOverview: FunctionComponent<ContentPageOverviewProps> = 
 			<ErrorView
 				message={tText('admin/content/views/content-overview___er-is-nog-geen-content-aangemaakt')}
 				actionButtons={undefined}
+				locationId="content-page-overview__no-results"
 			>
 				<p>
 					{tHtml('admin/content/views/content-overview___beschrijving-hoe-content-toe-te-voegen')}
@@ -675,6 +676,7 @@ export const ContentPageOverview: FunctionComponent<ContentPageOverviewProps> = 
 			loadingInfo={loadingInfo}
 			dataObject={contentPages}
 			render={renderContentOverview}
+			locationId="content-page-overview"
 		/>
 	);
 };

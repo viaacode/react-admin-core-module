@@ -1,21 +1,20 @@
 import { forwardRef, Inject } from '@nestjs/common';
-import type { Avo } from '@viaa/avo2-types';
+import type { AvoSearchOrderDirection } from '@viaa/avo2-types';
 import { isNil } from 'lodash';
-
 import type { ContentPageLabel, ContentPageType, LabelObj } from '../../content-pages';
 import { DataService } from '../../data';
 import { customError } from '../../shared/helpers/custom-error';
 import { getDatabaseType } from '../../shared/helpers/get-database-type';
 import { isAvo } from '../../shared/helpers/is-avo';
 import type { ContentPageLabelOverviewTableCols } from '../content-page-labels.types';
-import {
+import type {
 	ContentPageLabelDto,
 	InsertContentPageLabelDto,
 	UpdateContentPageLabelDto,
 } from '../dto/content-page-label.dto';
 import {
 	CONTENT_PAGE_LABEL_QUERIES,
-	ContentPageLabelQueryTypes,
+	type ContentPageLabelQueryTypes,
 } from '../queries/content-page-label.queries';
 
 export class ContentPageLabelsService {
@@ -25,7 +24,7 @@ export class ContentPageLabelsService {
 		offset: number,
 		limit: number,
 		sortColumn: ContentPageLabelOverviewTableCols,
-		sortOrder: Avo.Search.OrderDirection,
+		sortOrder: AvoSearchOrderDirection,
 		where: any
 	): Promise<[ContentPageLabel[], number]> {
 		let variables: ContentPageLabelQueryTypes['GetContentPageLabelsQueryVariables'] | null = null;

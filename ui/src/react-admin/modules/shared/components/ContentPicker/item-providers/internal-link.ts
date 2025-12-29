@@ -1,4 +1,4 @@
-import { Avo } from '@viaa/avo2-types';
+import { AvoCoreContentPickerType } from '@viaa/avo2-types';
 import { compact, sortBy } from 'es-toolkit';
 import { AdminConfigManager } from '~core/config/config.class';
 import type { Locale } from '~modules/translations/translations.core.types';
@@ -21,7 +21,7 @@ export const retrieveInternalLinks = async (
 		if (!keyword || label.toLowerCase().includes(keyword.toLowerCase())) {
 			return {
 				label,
-				...parsePickerItem(Avo.Core.ContentPickerType.INTERNAL_LINK, staticRoute[1]),
+				...parsePickerItem(AvoCoreContentPickerType.INTERNAL_LINK, staticRoute[1]),
 			};
 		}
 		return null;

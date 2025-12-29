@@ -1,5 +1,5 @@
 import type { FlowplayerSourceList } from '@meemoo/react-components';
-import type { Avo } from '@viaa/avo2-types';
+import type { AvoItemItem } from '@viaa/avo2-types';
 import type { ReactNode } from 'react';
 
 /**
@@ -22,7 +22,7 @@ export type FlowPlayerWrapperProps = {
 	duration?: string;
 	external_id?: string;
 	issuedDate?: string;
-	item?: Avo.Item.Item;
+	item?: AvoItemItem;
 	cuePointsVideo?: CuePoints;
 	cuePointsLabel?: CuePoints;
 	onEnded?: () => void;

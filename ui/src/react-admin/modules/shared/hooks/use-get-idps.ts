@@ -4,7 +4,7 @@ import { UserService } from '~modules/user/user.service';
 import { CustomError } from '~shared/helpers/custom-error';
 import { showToast } from '~shared/helpers/show-toast';
 import { tText } from '~shared/helpers/translation-functions';
-import { QUERY_KEYS } from '~shared/types/index';
+import { QUERY_KEYS } from '~shared/types';
 
 export const useGetIdps = () => {
 	return useQuery({

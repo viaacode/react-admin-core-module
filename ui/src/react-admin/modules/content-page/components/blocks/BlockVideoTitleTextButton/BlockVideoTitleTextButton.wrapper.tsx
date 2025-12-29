@@ -1,7 +1,11 @@
 import type { ButtonAction, ButtonType } from '@viaa/avo2-components';
 import { Button, Column, Grid } from '@viaa/avo2-components';
-import type { Avo } from '@viaa/avo2-types';
-import { PermissionName } from '@viaa/avo2-types';
+
+import {
+	type AvoOrganizationOrganization,
+	type AvoUserCommonUser,
+	PermissionName,
+} from '@viaa/avo2-types';
 import type { FC } from 'react';
 import React from 'react';
 import { BlockHeading } from '~content-blocks/BlockHeading/BlockHeading';
@@ -21,7 +25,7 @@ interface MediaPlayerTitleTextButtonWrapperProps {
 	mediaTitle: string;
 	mediaExternalId: string;
 	mediaIssued?: string;
-	mediaOrganisation?: Avo.Organization.Organization;
+	mediaOrganisation?: AvoOrganizationOrganization;
 	mediaDuration?: string;
 	mediaAutoplay?: boolean;
 	headingType: HeadingTypeOption;
@@ -33,7 +37,7 @@ interface MediaPlayerTitleTextButtonWrapperProps {
 	buttonType?: ButtonType;
 	buttonAction?: ButtonAction;
 	align: AlignOption;
-	commonUser?: Avo.User.CommonUser;
+	commonUser?: AvoUserCommonUser;
 	showCopyright?: boolean;
 }
 

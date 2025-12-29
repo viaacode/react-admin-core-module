@@ -1,5 +1,5 @@
-import { type TypedDocumentNode } from '@graphql-typed-document-node/core';
-import { DatabaseType } from '@viaa/avo2-types';
+import type { TypedDocumentNode } from '@graphql-typed-document-node/core';
+import { AvoCoreDatabaseType } from '@viaa/avo2-types';
 
 import {
 	GetPermissionsDocument as GetPermissionsDocumentAvo,
@@ -20,11 +20,11 @@ type PermissionsQueries = {
 	GetPermissionsDocument: TypedDocumentNode<any, any>;
 };
 
-export const PERMISSIONS_QUERIES: Record<DatabaseType, PermissionsQueries> = {
-	[DatabaseType.avo]: {
+export const PERMISSIONS_QUERIES: Record<AvoCoreDatabaseType, PermissionsQueries> = {
+	[AvoCoreDatabaseType.avo]: {
 		GetPermissionsDocument: GetPermissionsDocumentAvo,
 	},
-	[DatabaseType.hetArchief]: {
+	[AvoCoreDatabaseType.hetArchief]: {
 		GetPermissionsDocument: GetPermissionsDocumentHetArchief,
 	},
 };

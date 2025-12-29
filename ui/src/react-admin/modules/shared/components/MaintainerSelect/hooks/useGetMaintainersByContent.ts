@@ -1,10 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
-import { ContentPickerType } from '@viaa/avo2-types';
+import { AvoCoreContentPickerType } from '@viaa/avo2-types';
 import { OrganisationService } from '~shared/services/organization-service/organisation-service';
-import { QUERY_KEYS } from '~shared/types/index';
+import { QUERY_KEYS } from '~shared/types';
 
 export const useGetMaintainersByContent = (
-	contentItemType: ContentPickerType | undefined | null,
+	contentItemType: AvoCoreContentPickerType | undefined | null,
 	contentItemId: string | undefined,
 	options: { enabled?: boolean } = {
 		enabled: true,
@@ -18,14 +18,14 @@ export const useGetMaintainersByContent = (
 			}
 
 			const usableContentType =
-				contentItemType === ContentPickerType.ITEM_WITH_CUE_POINTS
-					? ContentPickerType.ITEM
+				contentItemType === AvoCoreContentPickerType.ITEM_WITH_CUE_POINTS
+					? AvoCoreContentPickerType.ITEM
 					: contentItemType;
 
 			if (
-				usableContentType !== ContentPickerType.ITEM &&
-				usableContentType !== ContentPickerType.COLLECTION &&
-				usableContentType !== ContentPickerType.ASSIGNMENT
+				usableContentType !== AvoCoreContentPickerType.ITEM &&
+				usableContentType !== AvoCoreContentPickerType.COLLECTION &&
+				usableContentType !== AvoCoreContentPickerType.ASSIGNMENT
 			) {
 				return [];
 			}

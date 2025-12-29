@@ -24,7 +24,7 @@ import { ErrorView } from '~shared/components/error/ErrorView';
 import type { FilterableColumn } from '~shared/components/FilterTable/FilterTable';
 import FilterTable from '~shared/components/FilterTable/FilterTable';
 import { Icon } from '~shared/components/Icon/Icon';
-import { Loader } from '~shared/components/Loader/Loader';
+import { Loading } from '~shared/components/Loading/Loading';
 import { GET_LANGUAGE_NAMES } from '~shared/consts/language-names';
 import { parseAsIsoWithoutTimezone } from '~shared/helpers/formatters/date';
 import { isMultiLanguageEnabled } from '~shared/helpers/is-multi-language-enabled';
@@ -269,6 +269,7 @@ export const MaintenanceAlertsOverview: FunctionComponent<MaintenanceAlertsOverv
 					{},
 					[App.HET_ARCHIEF]
 				)}
+				locationId="maintenance-alerts-overview--no-results"
 			>
 				<p>
 					{tHtml(
@@ -283,7 +284,7 @@ export const MaintenanceAlertsOverview: FunctionComponent<MaintenanceAlertsOverv
 
 	const renderAlertsTable = (alerts: IPagination<MaintenanceAlert[]>): ReactNode => {
 		if (!alerts) {
-			return <Loader />;
+			return <Loading locationId="maintanance-alerts--loading" />;
 		}
 
 		if (!alerts.items.length) {

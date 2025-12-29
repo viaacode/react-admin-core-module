@@ -1,6 +1,6 @@
-import type { Avo } from '@viaa/avo2-types';
-
 // OPTIONS
+import type { AvoContentPageType } from '@viaa/avo2-types';
+
 export type AlignOption = 'left' | 'right' | 'center';
 
 export type WidthOption = 'full-width' | 'page-header' | string; // CSS width string: eg: 100%; 400px, 500px
@@ -132,7 +132,7 @@ export interface PageOverviewBlockComponentStateFields {
 	allowMultiple?: boolean;
 	centerHeader?: boolean;
 	headerBackgroundColor?: Color;
-	contentType: Avo.ContentPage.Type;
+	contentType: AvoContentPageType;
 	itemStyle?: 'GRID' | 'NEWS_LIST' | 'PROJECT_LIST' | 'ACCORDION';
 	showTitle?: boolean;
 	showDescription?: boolean;

@@ -1,9 +1,9 @@
-import type { Avo } from '@viaa/avo2-types';
+import type { AvoCoreContentPickerType } from '@viaa/avo2-types';
 import type { PickerItem, PickerItemControls, PickerTypeOption } from '../../types/content-picker';
 
 export function filterTypes(
 	types: PickerTypeOption[],
-	allowedTypes: Avo.Core.ContentPickerType[]
+	allowedTypes: AvoCoreContentPickerType[]
 ): PickerTypeOption[] {
 	return types.filter((option: PickerTypeOption) => {
 		return allowedTypes.length ? allowedTypes.includes(option.value) : option.value;

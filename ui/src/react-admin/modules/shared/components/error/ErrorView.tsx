@@ -1,64 +1,114 @@
-import type { IconName } from '@viaa/avo2-components';
 import {
 	Blankslate,
 	Button,
 	ButtonToolbar,
 	Container,
+	IconName,
 	Toolbar,
 	ToolbarCenter,
 } from '@viaa/avo2-components';
-import type { Avo } from '@viaa/avo2-types';
-import { isNull } from 'es-toolkit';
-import type { FunctionComponent, ReactNode } from 'react';
-import React from 'react';
-import { CustomError } from '~shared/helpers/custom-error';
-import { isMobileWidth } from '~shared/helpers/media-query';
-import { tText } from '~shared/helpers/translation-functions';
-import { Link } from '../Link/Link';
+import type { AvoAuthErrorActionButton } from '@viaa/avo2-types';
+import { compact, isNil, isString, uniq } from 'es-toolkit';
+import queryString from 'query-string';
+import type { FC, ReactNode } from 'react';
+import { useLocation } from 'react-router-dom';
 
 import './ErrorView.scss';
+import { Loading } from '~shared/components/Loading';
+import { ROUTE_PARTS } from '~shared/consts';
+import { CustomError } from '~shared/helpers/custom-error.ts';
+import { isMobileWidth } from '~shared/helpers/media-query.ts';
+import { tText } from '~shared/helpers/translation-functions.ts';
+
+type ErrorActionButton = AvoAuthErrorActionButton | 'help';
 
 interface ErrorViewProps {
 	message?: string | ReactNode;
 	icon?: IconName;
-	actionButtons?: Avo.Auth.ErrorActionButton[] | null;
+	actionButtons?: ErrorActionButton[];
 	children?: ReactNode;
+	locationId: string;
 }
 
-export const ErrorView: FunctionComponent<ErrorViewProps> = ({
+export function redirectToHelp(): void {
+	window.location.href = `/${ROUTE_PARTS.help}`;
+}
+
+export const ErrorView: FC<ErrorViewProps> = ({
 	message,
 	icon,
 	children = null,
-	actionButtons,
+	actionButtons = [],
+	locationId,
 }) => {
-	const messageText: string | ReactNode = message || '';
-	const errorMessage: string | ReactNode = messageText;
-	const errorIcon = (icon || 'search') as IconName;
-	const actionButtonsResolved = isNull(actionButtons) ? [] : actionButtons || [];
+	const location = useLocation();
 
-	if (!message) {
+	const queryParams = queryString.parse((location.search || '').substring(1));
+
+	if (queryParams.logout === 'true') {
+		// redirect to log-out route and afterward redirect back to the error page
+		console.log('Redirecting to server logout page...');
+		// redirectToServerLogoutPage(
+		// 	location,
+		// 	`/error?${queryString.stringify(omit(queryParams, ['logout']))}`
+		// );
+		return <Loading locationId={locationId} />;
+	}
+
+	const messageText: string | ReactNode = (queryParams.message as string) || message || '';
+	const errorMessage: string | ReactNode = isNil(messageText)
+		? tText('error/views/error-view___de-pagina-werd-niet-gevonden-ingelogd')
+		: messageText;
+	const errorIcon: IconName = (queryParams.icon as IconName | undefined) || icon || IconName.search;
+	const buttons = uniq([
+		...actionButtons,
+		...(Array.isArray(queryParams.actionButtons) ? queryParams.actionButtons : []),
+		...(isString(queryParams.actionButtons)
+			? queryParams.actionButtons
+					.split(',')
+					.map((button) => button.trim())
+					.filter((button) => !!button)
+			: []),
+	]);
+
+	if (!(queryParams.message || message)) {
 		console.error(
 			new CustomError('Error view without error message', null, {
+				queryParams,
 				message,
 				icon,
-				actionButtonsResolved,
+				actionButtons,
 			})
 		);
 	}
 
-	const renderButtons = () => {
+	const goToHome = () => {
+		console.log('Redirecting to home page...');
+		// redirectToLoggedInHome(location);
+	};
+
+	const renderButtons = (btns: string[]) => {
+		if (btns.length === 0) {
+			return null;
+		}
 		const buttons = (
 			<>
-				{actionButtonsResolved?.includes('home') && (
-					<Link to="/">
-						<Button label={tText('error/views/error-view___ga-terug-naar-de-homepagina')} />
-					</Link>
+				{btns.includes('home') && (
+					<Button
+						onClick={goToHome}
+						label={tText('error/views/error-view___ga-terug-naar-de-homepagina')}
+					/>
 				)}
-				{actionButtonsResolved?.includes('helpdesk') && (
+				{btns.includes('help') && (
+					<Button
+						onClick={() => redirectToHelp()}
+						label={tText('error/views/error-view___ga-naar-de-hulppagina')}
+					/>
+				)}
+				{btns.includes('helpdesk') && (
 					<Button
 						type="danger"
-						// biome-ignore lint/suspicious/noExplicitAny: todo
-						onClick={() => (window as any).zE('webWidget', 'toggle')}
+						onClick={() => window.zE('webWidget', 'toggle')}
 						label={tText('error/views/error-view___contacteer-de-helpdesk')}
 					/>
 				)}
@@ -80,11 +130,19 @@ export const ErrorView: FunctionComponent<ErrorViewProps> = ({
 	return (
 		<Container mode="vertical" background="alt" className="m-error-view">
 			<Container size="medium" mode="horizontal">
-				<Blankslate body="" icon={errorIcon} title={errorMessage} className="c-content">
+				<Blankslate
+					body=""
+					icon={errorIcon}
+					title={errorMessage}
+					className="c-content"
+					data-location-id={locationId}
+				>
 					{children}
-					{renderButtons()}
+					{renderButtons(compact(buttons))}
 				</Blankslate>
 			</Container>
 		</Container>
 	);
 };
+
+export default ErrorView;

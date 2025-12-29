@@ -1,15 +1,15 @@
 import { useQuery } from '@tanstack/react-query';
-import type { Avo } from '@viaa/avo2-types';
+import type { AvoContentPageType, AvoSearchOrderDirection } from '@viaa/avo2-types';
 import { ContentPageService } from '~modules/content-page/services/content-page.service';
 import { QUERY_KEYS } from '~shared/types';
 
 interface ContentPagesOverviewArgs {
 	withBlocks: boolean;
-	contentType: Avo.ContentPage.Type;
+	contentType: AvoContentPageType;
 	labelIds: string[] | number[];
 	selectedLabelIds: string[] | number[];
 	orderProp: string;
-	orderDirection: Avo.Search.OrderDirection;
+	orderDirection: AvoSearchOrderDirection;
 	offset: number;
 	limit: number;
 }

@@ -16,6 +16,10 @@ export class AdminConfigManager {
 		return AdminConfigManager.config || {};
 	}
 
+	public static isConfigSet(): boolean {
+		return !!AdminConfigManager.config;
+	}
+
 	public static getAdminRoute(name: keyof AdminConfig['routes']): string {
 		if (AdminConfigManager.config.routes[name]) {
 			return AdminConfigManager.config.routes[name] as string;

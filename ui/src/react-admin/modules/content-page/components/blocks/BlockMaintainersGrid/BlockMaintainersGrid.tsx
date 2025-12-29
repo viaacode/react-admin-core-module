@@ -1,5 +1,5 @@
 import type { ButtonAction } from '@viaa/avo2-components';
-import { Avo } from '@viaa/avo2-types';
+import { AvoCoreContentPickerType } from '@viaa/avo2-types';
 import clsx from 'clsx';
 import type { FunctionComponent, ReactElement } from 'react';
 import { useGetMaintainerGrid } from '~content-blocks/BlockMaintainersGrid/hooks/useGetMaintainerGrid';
@@ -49,7 +49,7 @@ export const BlockMaintainersGrid: FunctionComponent<BlockMaintainerGridProps> =
 						<li key={`${maintainer.homepageUrl}-${maintainer.logoUrl}-${index}`}>
 							<SmartLink
 								action={{
-									type: Avo.Core.ContentPickerType.EXTERNAL_LINK,
+									type: AvoCoreContentPickerType.EXTERNAL_LINK,
 									value: maintainer.homepageUrl,
 								}}
 							>

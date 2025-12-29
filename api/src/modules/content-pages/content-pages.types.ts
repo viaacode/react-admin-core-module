@@ -1,7 +1,6 @@
-import type { Avo } from '@viaa/avo2-types';
-
-import { type Media } from '../media/media.types';
-import { type LinkTarget } from '../navigations';
+import type { AvoContentPageType } from '@viaa/avo2-types';
+import type { Media } from '../media/media.types';
+import type { LinkTarget } from '../navigations';
 import {
 	type GetContentByIdQuery as GetContentByIdQueryAvo,
 	type GetContentPageByPathQuery as GetContentPageByPathQueryAvo,
@@ -16,10 +15,9 @@ import {
 	type GetContentPagesWithBlocksQuery as GetContentPagesWithBlocksQueryHetArchief,
 	Lookup_App_Content_Type_Enum,
 } from '../shared/generated/graphql-db-types-hetarchief';
-import { type Locale } from '../translations';
-
-import { type DbContentBlock } from './content-block.types';
-import { type ContentPageQueryTypes } from './queries/content-pages.queries';
+import type { Locale } from '../translations';
+import type { DbContentBlock } from './content-block.types';
+import type { ContentPageQueryTypes } from './queries/content-pages.queries';
 
 type ContentPickerTypeAvo =
 	| 'COLLECTION'
@@ -78,7 +76,7 @@ interface ContentPageBase {
 	createdAt: string;
 	updatedAt: string | null;
 	isProtected: boolean;
-	contentType: Avo.ContentPage.Type;
+	contentType: AvoContentPageType;
 	contentWidth: ContentWidth;
 	owner: ContentPageUser;
 	userProfileId: string | null;

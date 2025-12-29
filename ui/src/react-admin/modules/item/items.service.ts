@@ -1,8 +1,7 @@
-import type { Avo } from '@viaa/avo2-types';
+import type { AvoItemItem } from '@viaa/avo2-types';
 import { stringifyUrl } from 'query-string';
 import { fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
 import { getAdminCoreApiUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config';
-
 import { CustomError } from '../shared/helpers/custom-error';
 import { addDefaultAudioStillToItem } from '../shared/helpers/default-still';
 
@@ -11,9 +10,9 @@ export class ItemsService {
 		return `${getAdminCoreApiUrl()}/admin/items`;
 	}
 
-	public static async fetchItemById(uuidOrExternalId: string): Promise<Avo.Item.Item> {
+	public static async fetchItemById(uuidOrExternalId: string): Promise<AvoItemItem> {
 		try {
-			const rawItem: Avo.Item.Item | null = await fetchWithLogoutJson<Avo.Item.Item>(
+			const rawItem: AvoItemItem | null = await fetchWithLogoutJson<AvoItemItem>(
 				stringifyUrl({
 					url: `${ItemsService.getBaseUrl()}/${uuidOrExternalId}`,
 				})
@@ -33,7 +32,7 @@ export class ItemsService {
 		}
 	}
 
-	public static async fetchPublicItems(limit: number): Promise<Avo.Item.Item[] | null> {
+	public static async fetchPublicItems(limit: number): Promise<AvoItemItem[] | null> {
 		return fetchWithLogoutJson(
 			stringifyUrl({
 				url: ItemsService.getBaseUrl(),
@@ -47,7 +46,7 @@ export class ItemsService {
 	public static async fetchPublicItemsByTitleOrExternalId(
 		titleOrExternalId: string,
 		limit: number
-	): Promise<Avo.Item.Item[]> {
+	): Promise<AvoItemItem[]> {
 		try {
 			return fetchWithLogoutJson(
 				stringifyUrl({

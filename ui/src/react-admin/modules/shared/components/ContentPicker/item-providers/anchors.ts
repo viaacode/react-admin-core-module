@@ -1,5 +1,5 @@
 import { LinkTarget } from '@viaa/avo2-components';
-import { Avo } from '@viaa/avo2-types';
+import { AvoCoreContentPickerType } from '@viaa/avo2-types';
 import { GENERATED_CONTENT_BLOCK_ANCHOR_PREFIX } from '~modules/content-page/const/content-block-anchors.consts';
 import { CustomError } from '~shared/helpers/custom-error';
 import type { PickerItem } from '~shared/types/content-picker';
@@ -27,7 +27,7 @@ const parseAnchors = (anchorIds: string[]): PickerItem[] => {
 	return anchorIds.map(
 		(anchorId): PickerItem => ({
 			label: anchorId,
-			type: Avo.Core.ContentPickerType.ANCHOR_LINK,
+			type: AvoCoreContentPickerType.ANCHOR_LINK,
 			value: anchorId,
 			target: LinkTarget.Self,
 		})

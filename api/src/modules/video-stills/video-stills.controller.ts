@@ -7,16 +7,14 @@ import {
 	UseGuards,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import type { Avo } from '@viaa/avo2-types';
-import { ValidationResult } from 'joi';
-
+import type { AvoStillsStillInfo } from '@viaa/avo2-types';
+import type { ValidationResult } from 'joi';
 import { SessionUser } from '../shared/decorators/user.decorator';
 import { LoggedInGuard } from '../shared/guards/logged-in.guard';
 import { addPrefix } from '../shared/helpers/add-route-prefix';
 import { logAndThrow } from '../shared/helpers/logAndThrow';
 import { TranslationsService } from '../translations';
 import { SessionUserEntity } from '../users/classes/session-user';
-
 import { VideoStillsService } from './video-stills.service';
 import { type StillRequest, stillRequestValidation } from './video-stills.validation';
 
@@ -36,7 +34,7 @@ export class VideoStillsController {
 	async getVideoStills(
 		@Body() stillRequests: StillRequest[],
 		@SessionUser() sessionUser: SessionUserEntity
-	): Promise<(Avo.Stills.StillInfo | null)[]> {
+	): Promise<(AvoStillsStillInfo | null)[]> {
 		// Check inputs
 		if (!stillRequests || !stillRequests.length) {
 			throw new BadRequestException(

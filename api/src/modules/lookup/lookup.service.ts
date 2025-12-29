@@ -1,7 +1,6 @@
 import { forwardRef, Inject, Injectable } from '@nestjs/common';
-import { type Avo } from '@viaa/avo2-types';
+import type { AvoLomLomField } from '@viaa/avo2-types';
 import { sortBy } from 'lodash';
-
 import { DataService } from '../data';
 import {
 	GetEducationLevelsDocument,
@@ -18,7 +17,7 @@ import { isHetArchief } from '../shared/helpers/is-hetarchief';
 export class LookupService {
 	constructor(@Inject(forwardRef(() => DataService)) protected dataService: DataService) {}
 
-	public async fetchSubjects(): Promise<Avo.Lom.LomField[]> {
+	public async fetchSubjects(): Promise<AvoLomLomField[]> {
 		// not available for archief
 		if (isHetArchief()) {
 			return [];
@@ -43,7 +42,7 @@ export class LookupService {
 		}
 	}
 
-	public async fetchThemes(): Promise<Avo.Lom.LomField[]> {
+	public async fetchThemes(): Promise<AvoLomLomField[]> {
 		// not available for archief
 		if (isHetArchief()) {
 			return [];
@@ -67,7 +66,7 @@ export class LookupService {
 		}
 	}
 
-	public async fetchEducationLevels(): Promise<Avo.Lom.LomField[]> {
+	public async fetchEducationLevels(): Promise<AvoLomLomField[]> {
 		// not available for archief
 		if (isHetArchief()) {
 			return [];
@@ -93,7 +92,7 @@ export class LookupService {
 		}
 	}
 
-	public static blacklistLoms(loms: Avo.Lom.LomField[]): Avo.Lom.LomField[] {
+	public static blacklistLoms(loms: AvoLomLomField[]): AvoLomLomField[] {
 		// Blacklist certain thesaurus values, so we match witch the list meemoo wants: https://meemoo.atlassian.net/browse/AVO-2753
 		const BLACKLIST_NODE_AND_KEEP_CHILDREN = [
 			'https://w3id.org/onderwijs-vlaanderen/id/structuur/basisonderwijs',

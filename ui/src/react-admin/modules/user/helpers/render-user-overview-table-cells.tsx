@@ -1,7 +1,11 @@
 import type { TagOption } from '@viaa/avo2-components';
 import { TagList } from '@viaa/avo2-components';
-import type { Avo } from '@viaa/avo2-types';
-import { LomSchemeType } from '@viaa/avo2-types';
+
+import {
+	type AvoEducationOrganizationOrganization,
+	AvoLomLomSchemeType,
+	type AvoUserCommonUser,
+} from '@viaa/avo2-types';
 import { compact, isNil } from 'es-toolkit';
 import type { ReactNode, ReactText } from 'react';
 import { AdminConfigManager, ToastType } from '~core/config';
@@ -29,7 +33,7 @@ const handleOptionClicked = (profileId: string) => {
 };
 
 export function renderUserOverviewTableCellReact(
-	tableRowCommonUser: Avo.User.CommonUser,
+	tableRowCommonUser: AvoUserCommonUser,
 	columnId: UserOverviewTableCol,
 	info: {
 		history: History;
@@ -114,7 +118,7 @@ export function renderUserOverviewTableCellReact(
 		case 'educationLevels': {
 			const labels = compact(
 				(tableRowCommonUser?.loms ?? [])
-					.filter((lom) => lom.lom?.scheme === LomSchemeType.structure)
+					.filter((lom) => lom.lom?.scheme === AvoLomLomSchemeType.structure)
 					.map((lom) => lom.lom?.label)
 			);
 			return stringsToTagList(labels, null, info.navigateFilterToOption(columnId)) || '-';
@@ -123,14 +127,14 @@ export function renderUserOverviewTableCellReact(
 		case 'subjects': {
 			const labels = compact(
 				(tableRowCommonUser?.loms ?? [])
-					.filter((lom) => lom.lom?.scheme === LomSchemeType.subject)
+					.filter((lom) => lom.lom?.scheme === AvoLomLomSchemeType.subject)
 					.map((lom) => lom.lom?.label)
 			);
 			return stringsToTagList(labels, null, info.navigateFilterToOption(columnId)) || '-';
 		}
 
 		case 'educationalOrganisations': {
-			const orgs: Avo.EducationOrganization.Organization[] =
+			const orgs: AvoEducationOrganizationOrganization[] =
 				tableRowCommonUser.educationalOrganisations ?? [];
 			const tags = orgs.map(
 				(org): TagOption => ({
@@ -174,7 +178,7 @@ export function renderUserOverviewTableCellReact(
 }
 
 export function renderUserOverviewTableCellText(
-	tableRowCommonUser: Avo.User.CommonUser,
+	tableRowCommonUser: AvoUserCommonUser,
 	columnId: UserOverviewTableCol,
 	info: {
 		tableState: UserTableState;
@@ -240,7 +244,7 @@ export function renderUserOverviewTableCellText(
 		case 'educationLevels': {
 			const labels = compact(
 				(tableRowCommonUser?.loms ?? [])
-					.filter((lom) => lom.lom?.scheme === LomSchemeType.structure)
+					.filter((lom) => lom.lom?.scheme === AvoLomLomSchemeType.structure)
 					.map((lom) => lom.lom?.label)
 			);
 			return labels?.join(', ') || '';
@@ -249,14 +253,14 @@ export function renderUserOverviewTableCellText(
 		case 'subjects': {
 			const labels = compact(
 				(tableRowCommonUser?.loms ?? [])
-					.filter((lom) => lom.lom?.scheme === LomSchemeType.subject)
+					.filter((lom) => lom.lom?.scheme === AvoLomLomSchemeType.subject)
 					.map((lom) => lom.lom?.label)
 			);
 			return labels?.join(', ') || '';
 		}
 
 		case 'educationalOrganisations': {
-			const orgs: Avo.EducationOrganization.Organization[] =
+			const orgs: AvoEducationOrganizationOrganization[] =
 				tableRowCommonUser.educationalOrganisations ?? [];
 			return orgs
 				.map((org): string => org.organisationLabel || org.unitId || org.organisationId)

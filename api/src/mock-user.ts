@@ -1,8 +1,13 @@
-import { Avo, PermissionName } from '@viaa/avo2-types';
+import {
+	AvoAuthIdpType,
+	type AvoUserHetArchiefUser,
+	type AvoUserUser,
+	PermissionName,
+} from '@viaa/avo2-types';
 
-import { type Locale } from './modules';
+import type { Locale } from './modules';
 
-export function getMockUserAvo(): Avo.User.User {
+export function getMockUserAvo(): AvoUserUser {
 	return {
 		first_name: 'Bert',
 		last_name: 'Verhelst',
@@ -176,28 +181,28 @@ export function getMockUserAvo(): Avo.User.User {
 		updated_at: '2022-11-28T08:23:35.658+00:00',
 		mail: 'bert.verhelst@studiohyperdrive.be',
 		idpmaps: [
-			Avo.Auth.IdpType.HETARCHIEF,
-			Avo.Auth.IdpType.HETARCHIEF,
-			Avo.Auth.IdpType.VLAAMSEOVERHEID__SUB_ID,
+			AvoAuthIdpType.HETARCHIEF,
+			AvoAuthIdpType.HETARCHIEF,
+			AvoAuthIdpType.VLAAMSEOVERHEID__SUB_ID,
 		],
 		idpmapObjects: [
 			{
-				idp: Avo.Auth.IdpType.HETARCHIEF,
+				idp: AvoAuthIdpType.HETARCHIEF,
 				idp_user_id: '5eb99992-74a9-1039-9277-2bea2ee8ec01',
 			},
 			{
-				idp: Avo.Auth.IdpType.KLASCEMENT,
+				idp: AvoAuthIdpType.KLASCEMENT,
 				idp_user_id: '5e7c68a6543c5',
 			},
 			{
-				idp: Avo.Auth.IdpType.VLAAMSEOVERHEID__SUB_ID,
+				idp: AvoAuthIdpType.VLAAMSEOVERHEID__SUB_ID,
 				idp_user_id: '4d2b556cd6bffa86869507455afb0ee7329f41f2',
 			},
 		],
-	} as Avo.User.User;
+	} as AvoUserUser;
 }
 
-export function getMockUserHetArchief(): Avo.User.HetArchiefUser {
+export function getMockUserHetArchief(): AvoUserHetArchiefUser {
 	return {
 		// QAS
 		// id: 'd285a546-b42b-4fb3-bfa7-ef8be9208bc0',
@@ -248,7 +253,7 @@ export function getMockUserHetArchief(): Avo.User.HetArchiefUser {
 			PermissionName.VIEW_USERS,
 			PermissionName.CAN_EDIT_PROFILE_INFO,
 		],
-		idp: Avo.Auth.IdpType.HETARCHIEF as any, // Definitions of Idp enum in different repos cause typescript to be confused and not recognize them as the same type
+		idp: AvoAuthIdpType.HETARCHIEF as any, // Definitions of Idp enum in different repos cause typescript to be confused and not recognize them as the same type
 		isKeyUser: false,
 		lastAccessAt: '2023-04-04T18:51:03.032+02:00',
 		createdAt: '2023-01-30T16:26:38.875447',

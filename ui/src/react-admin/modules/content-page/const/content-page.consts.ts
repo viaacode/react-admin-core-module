@@ -1,6 +1,5 @@
 import type { IconName, TabProps } from '@viaa/avo2-components';
-import type { Avo } from '@viaa/avo2-types';
-
+import { AvoContentPageType } from '@viaa/avo2-types';
 import { AdminConfigManager } from '~core/config/config.class';
 import type { ContentOverviewTableCols } from '~modules/content-page/types/content-pages.types';
 import { ContentPageWidth } from '~modules/content-page/types/content-pages.types';
@@ -8,7 +7,6 @@ import type {
 	CheckboxDropdownModalProps,
 	CheckboxOption,
 } from '~shared/components/CheckboxDropdownModal/CheckboxDropdownModal';
-
 import type { FilterableColumn } from '~shared/components/FilterTable/FilterTable';
 import { NULL_FILTER } from '~shared/helpers/filters';
 import { isMultiLanguageEnabled } from '~shared/helpers/is-multi-language-enabled';
@@ -204,8 +202,8 @@ export const GET_CONTENT_PAGE_WIDTH_OPTIONS = () => [
 	},
 ];
 
-export const DEFAULT_PAGES_WIDTH: { [key in ContentPageWidth]: Avo.ContentPage.Type[] } = {
-	[ContentPageWidth.EXTRA_LARGE]: ['PROJECT'],
+export const DEFAULT_PAGES_WIDTH: { [key in ContentPageWidth]: AvoContentPageType[] } = {
+	[ContentPageWidth.EXTRA_LARGE]: [AvoContentPageType.PROJECT],
 	[ContentPageWidth.LARGE]: [],
-	[ContentPageWidth.MEDIUM]: ['NIEUWS_ITEM'],
+	[ContentPageWidth.MEDIUM]: [AvoContentPageType.NIEUWS_ITEM],
 };

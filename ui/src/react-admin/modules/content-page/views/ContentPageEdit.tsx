@@ -1,7 +1,7 @@
 import type { IconName, TabProps } from '@viaa/avo2-components';
 import { Button, ButtonToolbar, Container, Navbar, Spacer, Tabs } from '@viaa/avo2-components';
-import type { Avo } from '@viaa/avo2-types';
-import { PermissionName } from '@viaa/avo2-types';
+
+import { type AvoContentPageBlock, type AvoUserCommonUser, PermissionName } from '@viaa/avo2-types';
 import { cloneDeep, isNil, isString } from 'es-toolkit';
 import type { FC, Reducer } from 'react';
 import React, { useCallback, useEffect, useReducer, useState } from 'react';
@@ -75,7 +75,7 @@ export type ContentPageEditProps = DefaultComponentProps & {
 	id: string | undefined;
 	onGoBack: () => void;
 	onHasUnsavedChangesChanged?: (hasUnsavedChanges: boolean) => void;
-	commonUser: Avo.User.CommonUser;
+	commonUser: AvoUserCommonUser;
 };
 
 export const ContentPageEdit: FC<ContentPageEditProps> = ({
@@ -200,7 +200,7 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 	}, [id, commonUser, hasPerm]);
 
 	const handlePasteBlock = useCallback(
-		async (newBlockConfig: Partial<Avo.ContentPage.Block>) => {
+		async (newBlockConfig: Partial<AvoContentPageBlock>) => {
 			const spinnerToastId = showToast({
 				title: tText('react-admin/modules/content-page/views/content-page-edit___bezig'),
 				description: tText(
@@ -763,6 +763,7 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 						'react-admin/modules/content-page/views/content-page-edit___je-hebt-geen-rechten-om-deze-content-pagina-aan-te-passen-titel'
 					)}
 					actionButtons={undefined}
+					locationId="content-page-edit__no-permission"
 				>
 					<p>
 						{tHtml('admin/content/views/content-overview___beschrijving-hoe-content-toe-te-voegen')}
@@ -883,6 +884,7 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 			loadingInfo={loadingInfo}
 			dataObject={contentPageState.currentContentPageInfo}
 			render={renderEditContentPage}
+			locationId="content-page-edit"
 		/>
 	);
 };

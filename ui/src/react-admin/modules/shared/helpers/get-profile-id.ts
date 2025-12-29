@@ -1,8 +1,7 @@
-import type { Avo } from '@viaa/avo2-types';
-
+import type { AvoUserCommonUser } from '@viaa/avo2-types';
 import { CustomError } from './custom-error';
 
-export function getProfileId(user: Avo.User.CommonUser | undefined): string {
+export function getProfileId(user: AvoUserCommonUser | undefined): string {
 	if (!user) {
 		throw new CustomError('Failed to get profile id because the logged in user is undefined');
 	}

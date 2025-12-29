@@ -1,6 +1,6 @@
 import type { ButtonAction } from '@viaa/avo2-components';
 import { Button, Modal, ModalBody } from '@viaa/avo2-components';
-import type { Avo } from '@viaa/avo2-types';
+import type { AvoItemItem, AvoOrganizationOrganization, AvoUserCommonUser } from '@viaa/avo2-types';
 import clsx from 'clsx';
 import React, {
 	type FunctionComponent,
@@ -29,10 +29,10 @@ interface MediaPlayerWrapperProps {
 	annotationTitle?: string;
 	annotationText?: string;
 	issued?: string;
-	organisation?: Avo.Organization.Organization;
+	organisation?: AvoOrganizationOrganization;
 	width?: string;
 	autoplay?: boolean;
-	commonUser?: Avo.User.CommonUser;
+	commonUser?: AvoUserCommonUser;
 	showCopyright?: boolean;
 	seekable?: boolean;
 	ui?: number;
@@ -68,10 +68,8 @@ export const BlockVideoWrapper: FunctionComponent<MediaPlayerWrapperProps> = (pr
 		state: 'loading',
 	});
 	const [videoStill, setVideoStill] = useState<string>();
-	const [mediaItem, setMediaItem] = useState<Avo.Item.Item | null>(null);
-	const [activeCopyright, setActiveCopyright] = useState<Avo.Organization.Organization | null>(
-		null
-	);
+	const [mediaItem, setMediaItem] = useState<AvoItemItem | null>(null);
+	const [activeCopyright, setActiveCopyright] = useState<AvoOrganizationOrganization | null>(null);
 
 	const org = organisation || mediaItem?.organisation;
 
@@ -128,7 +126,7 @@ export const BlockVideoWrapper: FunctionComponent<MediaPlayerWrapperProps> = (pr
 
 	const handleCopyrightClicked = (
 		evt: React.MouseEvent<HTMLElement>,
-		orgInfo: Avo.Organization.Organization
+		orgInfo: AvoOrganizationOrganization
 	) => {
 		evt.stopPropagation();
 		evt.preventDefault();
@@ -146,7 +144,7 @@ export const BlockVideoWrapper: FunctionComponent<MediaPlayerWrapperProps> = (pr
 									title: title || mediaItem?.title || '',
 									issued: issued || mediaItem?.issued || '',
 									organisation: organisation || mediaItem?.organisation || '',
-								} as Avo.Item.Item)
+								} as AvoItemItem)
 							: undefined
 					}
 					src={src}
@@ -212,6 +210,7 @@ export const BlockVideoWrapper: FunctionComponent<MediaPlayerWrapperProps> = (pr
 			loadingInfo={loadingInfo}
 			dataObject={item || src}
 			render={renderVideoPlayer}
+			locationId="block-video-wrapper"
 		/>
 	);
 };

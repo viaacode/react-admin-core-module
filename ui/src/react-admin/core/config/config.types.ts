@@ -1,5 +1,9 @@
 import type { LinkTarget } from '@viaa/avo2-components';
-import type { Avo, DatabaseType } from '@viaa/avo2-types';
+import type {
+	AvoCoreDatabaseType,
+	AvoEducationOrganizationOrganization,
+	AvoUserCommonUser,
+} from '@viaa/avo2-types';
 import type { ComponentType, FC, FunctionComponent, MouseEvent, ReactNode } from 'react';
 
 import type { ContentBlockType } from '~modules/content-page/types/content-block.types';
@@ -21,7 +25,7 @@ export enum ToastType {
 
 export interface ToastInfo {
 	title?: string;
-	description?: string;
+	description?: string | ReactNode;
 	type: ToastType;
 }
 
@@ -101,7 +105,7 @@ export interface AdminConfig {
 	};
 	users?: {
 		bulkActions?: UserBulkAction[];
-		getCommonUser: () => Avo.User.CommonUser | null;
+		getCommonUser: () => AvoUserCommonUser | null;
 	};
 	database: {
 		proxyUrl: string;
@@ -110,7 +114,7 @@ export interface AdminConfig {
 		adminCoreApiUrl?: string;
 	};
 	routes: {
-		ADMIN_ALERTS_OVERVIEW: string;
+		ADMIN_DASHBOARD: string;
 		ADMIN_CONTENT_PAGE_CREATE: string;
 		ADMIN_CONTENT_PAGE_DETAIL: string;
 		ADMIN_CONTENT_PAGE_EDIT: string;
@@ -132,6 +136,7 @@ export interface AdminConfig {
 		ADMIN_USER_GROUP_EDIT: string;
 		ADMIN_USER_GROUP_OVERVIEW: string;
 		ADMIN_USER_OVERVIEW: string;
+		ADMIN_MAINTENANCE_ALERTS_OVERVIEW: string;
 
 		// Optional values only needed for avo
 		BUNDLE_DETAIL?: string;
@@ -150,7 +155,7 @@ export interface AdminConfig {
 	env: {
 		LDAP_DASHBOARD_PEOPLE_URL?: string;
 		CLIENT_URL: string;
-		DATABASE_APPLICATION_TYPE: DatabaseType;
+		DATABASE_APPLICATION_TYPE: AvoCoreDatabaseType;
 	};
 }
 
@@ -200,7 +205,7 @@ export interface EducationOrganisationService {
 	fetchEducationOrganisations(
 		city: string | null,
 		zipCode: string | null
-	): Promise<Avo.EducationOrganization.Organization[]>;
+	): Promise<AvoEducationOrganizationOrganization[]>;
 
 	fetchEducationOrganisationName(organisationId: string, unitId?: string): Promise<string | null>;
 }

@@ -1,7 +1,7 @@
 import type { CSSProperties, FunctionComponent } from 'react';
 import React from 'react';
-import { sanitizeHtml } from '../../helpers/sanitize/index';
-import { SanitizePreset } from '../../helpers/sanitize/presets/index';
+import { sanitizeHtml } from '../../helpers/sanitize';
+import { SanitizePreset } from '../../helpers/sanitize/presets';
 
 export interface HtmlProps {
 	content: string;

@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { QUERY_KEYS } from '~modules/shared/index';
+import { QUERY_KEYS } from '~modules/shared';
 import { TranslationsService } from '~modules/translations/translations.service';
 
 export const useGetAllTranslations = () => {

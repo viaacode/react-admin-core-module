@@ -8,6 +8,7 @@ import type {
 	DbContentPage,
 } from '~modules/content-page/types/content-pages.types';
 import { ErrorView } from '~shared/components/error/ErrorView';
+import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner.tsx';
 import { Locale } from '../../../scripts/translation.types';
 import { ContentPageService, convertDbContentPageToContentPageInfo } from '../../client';
 import { getMockCommonUser } from '../../mock-common-user';
@@ -30,7 +31,7 @@ export const ContentPagePreviewPage: FC = () => {
 	}, [getContentPageByPath]);
 
 	if (!contentPageInfo) {
-		return <div>Loading...</div>;
+		return <CenteredSpinner locationId="content-page-preview-page--loading" />;
 	}
 	return (
 		<>
@@ -44,6 +45,7 @@ export const ContentPagePreviewPage: FC = () => {
 						icon={IconName.clock}
 						actionButtons={['helpdesk']}
 						message={'deze-pagina-is-enkel-voor-gebruikers-met-andere-rechten'}
+						locationId="content-page-preview__no-access-error"
 					/>
 				)}
 			/>

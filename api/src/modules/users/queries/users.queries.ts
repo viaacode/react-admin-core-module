@@ -1,5 +1,5 @@
 import type { TypedDocumentNode } from '@graphql-typed-document-node/core';
-import { DatabaseType } from '@viaa/avo2-types';
+import { AvoCoreDatabaseType } from '@viaa/avo2-types';
 
 import {
 	GetIdpsDocument as GetIdpsDocumentAvo,
@@ -68,14 +68,14 @@ type UserQueries = {
 	GetProfileIdsDocument: TypedDocumentNode<any, any>;
 };
 
-export const USER_QUERIES: Record<DatabaseType, UserQueries> = {
-	[DatabaseType.avo]: {
+export const USER_QUERIES: Record<AvoCoreDatabaseType, UserQueries> = {
+	[AvoCoreDatabaseType.avo]: {
 		GetProfileNamesDocument: GetProfileNamesDocumentAvo,
 		GetUsersDocument: GetUsersDocumentAvo,
 		GetIdpsDocument: GetIdpsDocumentAvo,
 		GetProfileIdsDocument: GetProfileIdsDocumentAvo,
 	},
-	[DatabaseType.hetArchief]: {
+	[AvoCoreDatabaseType.hetArchief]: {
 		GetProfileNamesDocument: GetProfileNamesDocumentHetArchief,
 		GetUsersDocument: GetUsersDocumentHetArchief,
 		GetIdpsDocument: GetIdpsDocumentHetArchief,

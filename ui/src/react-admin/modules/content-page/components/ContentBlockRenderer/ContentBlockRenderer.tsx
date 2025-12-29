@@ -1,5 +1,5 @@
 import { Container, Spacer } from '@viaa/avo2-components';
-import type { Avo } from '@viaa/avo2-types';
+
 import clsx from 'clsx';
 import { kebabCase, noop, omit } from 'es-toolkit';
 import type { FunctionComponent, KeyboardEvent, RefObject } from 'react';
@@ -20,6 +20,7 @@ import {
 } from './ContentBlockRenderer.const';
 
 import './ContentBlockRenderer.scss';
+import type { AvoUserCommonUser } from '@viaa/avo2-types';
 import { AdminConfigManager } from '~core/config/config.class';
 import { GENERATED_CONTENT_BLOCK_ANCHOR_PREFIX } from '~modules/content-page/const/content-block-anchors.consts';
 import type { ContentPageInfo } from '~modules/content-page/types/content-pages.types';
@@ -30,7 +31,7 @@ interface ContentBlockPreviewProps {
 	contentPageInfo: Partial<ContentPageInfo>;
 	onClick: () => void;
 	className?: string;
-	commonUser?: Avo.User.CommonUser;
+	commonUser?: AvoUserCommonUser;
 }
 
 /* eslint-enable @typescript-eslint/no-unused-vars */

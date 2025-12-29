@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { UserGroupService } from '~modules/user-group/services/user-group.service';
-import { QUERY_KEYS } from '~shared/types/index';
+import { QUERY_KEYS } from '~shared/types';
 
 interface GetUserGroupsParams {
 	withPermissions: boolean;

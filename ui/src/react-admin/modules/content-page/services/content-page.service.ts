@@ -1,9 +1,8 @@
 import type { IPagination } from '@studiohyperdrive/pagination';
-import type { Avo } from '@viaa/avo2-types';
+import type { AvoContentPageType, AvoSearchOrderDirection } from '@viaa/avo2-types';
 import { kebabCase } from 'es-toolkit';
 import { stringifyUrl } from 'query-string';
 import type { ContentPageOverviewParams } from '~content-blocks/BlockPageOverview/BlockPageOverview.types';
-
 import { AdminConfigManager } from '~core/config/config.class';
 import { PAGES_PER_PAGE } from '~modules/content-page/const/content-page.consts';
 import { CONTENT_PAGE_SERVICE_BASE_URL } from '~modules/content-page/services/content-page.const';
@@ -14,7 +13,6 @@ import {
 } from '~modules/content-page/services/content-page.converters';
 import type { Locale } from '~modules/translations/translations.core.types';
 import { CustomError } from '~shared/helpers/custom-error';
-
 import { fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
 import { getAdminCoreApiUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config';
 import type {
@@ -107,7 +105,7 @@ export class ContentPageService {
 	}
 
 	public static async getContentTypes(): Promise<
-		{ value: Avo.ContentPage.Type; label: string }[] | null
+		{ value: AvoContentPageType; label: string }[] | null
 	> {
 		return fetchWithLogoutJson(`${ContentPageService.getBaseUrl()}/types`, {
 			throwOnNullResponse: true,
@@ -171,7 +169,7 @@ export class ContentPageService {
 	public static async fetchContentPages(
 		page: number,
 		sortColumn: ContentOverviewTableCols,
-		sortOrder: Avo.Search.OrderDirection,
+		sortOrder: AvoSearchOrderDirection,
 		tableColumnDataType: string,
 		// biome-ignore lint/suspicious/noExplicitAny: todo
 		where: any

@@ -1,9 +1,12 @@
 import type { IconName, TagInfo } from '@viaa/avo2-components';
-import { Avo } from '@viaa/avo2-types';
+import {
+	type AvoOrganizationOrganization,
+	AvoSearchOrderDirection,
+	type AvoUserCommonUser,
+} from '@viaa/avo2-types';
 import { compact, isEqual } from 'es-toolkit';
 import type { FC, ReactText } from 'react';
 import React, { useCallback, useMemo, useState } from 'react';
-
 import { AdminConfigManager } from '~core/config/config.class';
 import { getCommonUser } from '~core/config/config.selectors';
 import { ToastType } from '~core/config/config.types';
@@ -43,7 +46,6 @@ import UserDeleteModal from '../components/UserDeleteModal';
 import type { UserOverviewTableCol, UserTableState } from '../user.types';
 import { USERS_PER_PAGE, UserBulkAction } from '../user.types';
 import './UserOverview.scss';
-import { navigateFunc } from '~shared/helpers/navigate-fnc';
 
 export interface UserOverviewProps {
 	customFormatDate?: (date: Date | string) => string;
@@ -80,7 +82,7 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 					(tableState?.userGroup ?? []) as string[]
 				),
 				companyOptions: companies.map(
-					(option: Partial<Avo.Organization.Organization>): CheckboxOption => ({
+					(option: Partial<AvoOrganizationOrganization>): CheckboxOption => ({
 						id: option.or_id as string,
 						label: option.name as string,
 						checked: ((tableState?.organisation ?? []) as string[]).includes(String(option.or_id)),
@@ -155,7 +157,7 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 	} = useGetProfiles({
 		page: tableState?.page || 0,
 		sortColumn: (tableState?.sort_column || 'last_access_at') as UserOverviewTableCol,
-		sortOrder: tableState?.sort_order || Avo.Search.OrderDirection.DESC,
+		sortOrder: tableState?.sort_order || AvoSearchOrderDirection.DESC,
 		tableColumnDataType: getColumnType(),
 		where: generateWhereObject(getFilters(tableState), false),
 		itemsPerPage: USERS_PER_PAGE,
@@ -344,6 +346,7 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 		return (
 			<ErrorView
 				message={tHtml('admin/users/views/user-overview___er-bestaan-nog-geen-gebruikers')}
+				locationId="user-overview__no-users"
 			>
 				<p>
 					{tHtml(
@@ -361,7 +364,7 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 					columns={columns}
 					data={profiles || []}
 					dataCount={profileCount || 0}
-					renderCell={(rowData: Avo.User.CommonUser, columnId: string) =>
+					renderCell={(rowData: AvoUserCommonUser, columnId: string) =>
 						renderUserOverviewTableCellReact(rowData, columnId as UserOverviewTableCol, {
 							navigateFilterToOption,
 							history,
@@ -393,7 +396,7 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 						bulkActions,
 						selectedProfileIds?.length > 0
 					)}
-					rowKey={(row: Avo.User.CommonUser) => row?.profileId || row?.userId || row?.email || ''}
+					rowKey={(row: AvoUserCommonUser) => row?.profileId || row?.userId || row?.email || ''}
 					className="u-spacer-bottom-l u-useroverview-table"
 					searchInputAriaLabel={tText('modules/user/views/user-overview___zoek-input-aria-label')}
 				/>
@@ -444,7 +447,7 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 							0,
 							0,
 							(tableState?.sort_column || 'last_access_at') as UserOverviewTableCol,
-							tableState?.sort_order || Avo.Search.OrderDirection.DESC,
+							tableState?.sort_order || AvoSearchOrderDirection.DESC,
 							getColumnType(),
 							where
 						);
@@ -459,7 +462,7 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 							offset,
 							limit,
 							(tableState?.sort_column || 'last_access_at') as UserOverviewTableCol,
-							tableState?.sort_order || Avo.Search.OrderDirection.DESC,
+							tableState?.sort_order || AvoSearchOrderDirection.DESC,
 							getColumnType(),
 							where
 						);
@@ -495,7 +498,7 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 	};
 
 	if (isLoadingProfiles) {
-		return <CenteredSpinner />;
+		return <CenteredSpinner locationId="user-overview--loading-profiles" />;
 	}
 	if (isErrorProfiles) {
 		return (
@@ -505,6 +508,7 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 				)}
 				icon={'alertTriangle' as IconName}
 				actionButtons={['home', 'helpdesk']}
+				locationId="user-overview__error-profiles"
 			/>
 		);
 	}

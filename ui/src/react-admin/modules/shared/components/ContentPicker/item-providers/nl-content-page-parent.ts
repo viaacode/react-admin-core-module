@@ -1,4 +1,4 @@
-import { Avo } from '@viaa/avo2-types';
+import { AvoCoreContentPickerType } from '@viaa/avo2-types';
 import memoize from 'memoizee';
 import { ContentPageService } from '~modules/content-page/services/content-page.service';
 import type { ContentPageInfo } from '~modules/content-page/types/content-pages.types';
@@ -38,7 +38,7 @@ const parseContentPages = (raw: Partial<ContentPageInfo>[]): PickerItem[] => {
 		(item: Partial<ContentPageInfo>): PickerItem => ({
 			label: item.title || '',
 			// We use id here instead of path like for content pages, because nlParentPageId must contain an id since it cannot be changed creating the page
-			...parsePickerItem(Avo.Core.ContentPickerType.NL_CONTENT_PAGE_PARENT_ID, item.id as string),
+			...parsePickerItem(AvoCoreContentPickerType.NL_CONTENT_PAGE_PARENT_ID, item.id as string),
 		})
 	);
 };

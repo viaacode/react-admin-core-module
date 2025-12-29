@@ -1,4 +1,4 @@
-import { Avo } from '@viaa/avo2-types';
+import { AvoCoreContentPickerType } from '@viaa/avo2-types';
 import { compact, sortBy } from 'es-toolkit';
 import { AdminConfigManager } from '~core/config/config.class';
 import type { PickerItem } from '~shared/types/content-picker';
@@ -17,7 +17,7 @@ export const retrieveCustomNavigationElements = async (
 				return {
 					label: customNavigationElement,
 					...parsePickerItem(
-						Avo.Core.ContentPickerType.CUSTOM_NAVIGATION_ELEMENTS,
+						AvoCoreContentPickerType.CUSTOM_NAVIGATION_ELEMENTS,
 						customNavigationElement
 					),
 				};

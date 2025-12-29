@@ -1,5 +1,5 @@
 import type { TypedDocumentNode } from '@graphql-typed-document-node/core';
-import { DatabaseType } from '@viaa/avo2-types';
+import { AvoCoreDatabaseType } from '@viaa/avo2-types';
 
 import {
 	DeleteContentBlockDocument as DeleteContentBlockDocumentAvo,
@@ -416,8 +416,8 @@ type ContentPageQueries = {
 	GetNlParentContentPagesByTitleDocument: TypedDocumentNode<any, any>;
 };
 
-export const CONTENT_PAGE_QUERIES: Record<DatabaseType, ContentPageQueries> = {
-	[DatabaseType.avo]: {
+export const CONTENT_PAGE_QUERIES: Record<AvoCoreDatabaseType, ContentPageQueries> = {
+	[AvoCoreDatabaseType.avo]: {
 		DeleteContentBlockDocument: DeleteContentBlockDocumentAvo,
 		DeleteContentLabelLinksDocument: DeleteContentLabelLinksDocumentAvo,
 		GetContentByIdDocument: GetContentByIdDocumentAvo,
@@ -444,7 +444,7 @@ export const CONTENT_PAGE_QUERIES: Record<DatabaseType, ContentPageQueries> = {
 		GetNlParentContentPagesDocument: GetNlParentContentPagesDocumentAvo,
 		GetNlParentContentPagesByTitleDocument: GetNlParentContentPagesByTitleDocumentAvo,
 	},
-	[DatabaseType.hetArchief]: {
+	[AvoCoreDatabaseType.hetArchief]: {
 		DeleteContentBlockDocument: DeleteContentBlockDocumentHetArchief,
 		DeleteContentLabelLinksDocument: DeleteContentLabelLinksDocumentHetArchief,
 		GetContentByIdDocument: GetContentByIdDocumentHetArchief,

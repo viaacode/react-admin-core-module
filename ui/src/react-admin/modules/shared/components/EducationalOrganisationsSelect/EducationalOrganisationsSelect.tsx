@@ -1,5 +1,5 @@
 import { Alert, Select, Spacer } from '@viaa/avo2-components';
-import type { Avo } from '@viaa/avo2-types';
+import type { AvoEducationOrganizationOrganization } from '@viaa/avo2-types';
 import clsx from 'clsx';
 import { remove, uniq } from 'es-toolkit';
 import { pullAllBy } from 'es-toolkit/compat';
@@ -7,7 +7,7 @@ import type { FunctionComponent, ReactText } from 'react';
 import React, { useEffect, useState } from 'react';
 import { AdminConfigManager } from '~core/config/config.class';
 import { ToastType } from '~core/config/config.types';
-import { AVO } from '~modules/shared/types/index';
+import { AVO } from '~modules/shared/types';
 import { showToast } from '~shared/helpers/show-toast';
 import { tHtml, tText } from '~shared/helpers/translation-functions';
 import { stringsToTagList } from '../../helpers/strings-to-taglist';
@@ -18,8 +18,8 @@ export interface Tag {
 }
 
 export interface EducationalOrganisationsSelectProps {
-	organisations: Avo.EducationOrganization.Organization[];
-	onChange: (organisations: Avo.EducationOrganization.Organization[]) => void;
+	organisations: AvoEducationOrganizationOrganization[];
+	onChange: (organisations: AvoEducationOrganizationOrganization[]) => void;
 	disabled?: boolean;
 	showSelectedValuesOnCollapsed?: boolean;
 }
@@ -29,7 +29,7 @@ export const EducationalOrganisationsSelect: FunctionComponent<
 > = ({ organisations, onChange, disabled = false }) => {
 	const [cities, setCities] = useState<string[]>([]);
 	const [organisationsInCity, setOrganisationsInCity] = useState<
-		Avo.EducationOrganization.Organization[]
+		AvoEducationOrganizationOrganization[]
 	>([]);
 	const [selectedCity, setSelectedCity] = useState<string>('');
 	const [organizationsLoadingState, setOrganizationsLoadingState] = useState<
@@ -38,7 +38,7 @@ export const EducationalOrganisationsSelect: FunctionComponent<
 
 	// Cache organizations since the user will probably select multiple schools in the same city
 	const [organisationsCache, setOrganisationsCache] = useState<{
-		[cityAndZipCode: string]: Avo.EducationOrganization.Organization[];
+		[cityAndZipCode: string]: AvoEducationOrganizationOrganization[];
 	}>({});
 
 	useEffect(() => {
@@ -73,7 +73,7 @@ export const EducationalOrganisationsSelect: FunctionComponent<
 				}
 				setOrganizationsLoadingState('loading');
 				const [city, zipCode] = selectedCity.split(/[()]/g).map((s) => s.trim());
-				let orgs: Avo.EducationOrganization.Organization[];
+				let orgs: AvoEducationOrganizationOrganization[];
 				if (organisationsCache[selectedCity]) {
 					// get from cache
 					orgs = [...organisationsCache[selectedCity]];
@@ -121,7 +121,7 @@ export const EducationalOrganisationsSelect: FunctionComponent<
 
 	const onSelectedOrganisationChanged = (orgLabel: string) => {
 		const selectedOrg = organisationsInCity.find(
-			(org: Avo.EducationOrganization.Organization) => org.organisationLabel === orgLabel
+			(org: AvoEducationOrganizationOrganization) => org.organisationLabel === orgLabel
 		);
 		if (!selectedOrg) {
 			showToast({
@@ -139,7 +139,7 @@ export const EducationalOrganisationsSelect: FunctionComponent<
 			});
 			return;
 		}
-		const selectedOrgs: Avo.EducationOrganization.Organization[] = [
+		const selectedOrgs: AvoEducationOrganizationOrganization[] = [
 			...organisations,
 			...[selectedOrg],
 		];
@@ -172,7 +172,7 @@ export const EducationalOrganisationsSelect: FunctionComponent<
 				value: '',
 				disabled: true,
 			},
-			...organisationsInCity.map((org: Avo.EducationOrganization.Organization) => ({
+			...organisationsInCity.map((org: AvoEducationOrganizationOrganization) => ({
 				label: org.organisationLabel,
 				value: org.organisationLabel,
 			})),

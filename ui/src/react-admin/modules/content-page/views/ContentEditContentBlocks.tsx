@@ -1,5 +1,5 @@
 import { IconName, Navbar, Select } from '@viaa/avo2-components';
-import type { Avo } from '@viaa/avo2-types';
+
 import clsx from 'clsx';
 import { isNil } from 'es-toolkit';
 import type { FunctionComponent, ReactNode } from 'react';
@@ -29,6 +29,7 @@ import { createKey } from '~shared/helpers/create-key';
 import { isAvo } from '~shared/helpers/is-avo';
 import { tText } from '~shared/helpers/translation-functions';
 import './ContentEditContentBlocks.scss';
+import type { AvoUserCommonUser } from '@viaa/avo2-types';
 import { Panel, PanelGroup, PanelResizeHandle } from 'react-resizable-panels';
 
 interface ContentEditContentBlocksProps {
@@ -44,7 +45,7 @@ interface ContentEditContentBlocksProps {
 	) => void;
 	addComponentToState: (index: number, blockType: ContentBlockType) => void;
 	removeComponentFromState: (index: number, stateIndex: number) => void;
-	commonUser: Avo.User.CommonUser;
+	commonUser: AvoUserCommonUser;
 }
 
 const ContentEditContentBlocks: FunctionComponent<ContentEditContentBlocksProps> = ({
@@ -310,6 +311,7 @@ const ContentEditContentBlocks: FunctionComponent<ContentEditContentBlocksProps>
 								icon={IconName.clock}
 								actionButtons={['helpdesk']}
 								message={'deze-pagina-is-enkel-voor-gebruikers-met-andere-rechten'}
+								locationId="content-edit-content-blocks___no-access"
 							/>
 						)}
 					/>

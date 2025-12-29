@@ -1,5 +1,5 @@
 import { FormGroup } from '@viaa/avo2-components';
-import type { ContentPickerType } from '@viaa/avo2-types';
+import type { AvoCoreContentPickerType } from '@viaa/avo2-types';
 import { noop } from 'es-toolkit';
 import type { FunctionComponent } from 'react';
 import React, { useEffect } from 'react';
@@ -15,7 +15,7 @@ export interface MaintainerSelectProps {
 	value: string;
 	required: boolean;
 	onChange: (selectedMaintainerId: string | null) => void;
-	contentItemType: ContentPickerType | null; // Limit maintainer options based on the selected item, collection or assignment
+	contentItemType: AvoCoreContentPickerType | null; // Limit maintainer options based on the selected item, collection or assignment
 	contentItemId: string | null; // Limit maintainer options based on the selected item, collection or assignment
 	extraSelectOptions: { label: string; value: string }[];
 }

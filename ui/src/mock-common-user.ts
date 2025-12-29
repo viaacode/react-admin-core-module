@@ -1,9 +1,8 @@
-import type { Avo } from '@viaa/avo2-types';
-import { PermissionName } from '@viaa/avo2-types';
+import { type AvoUserCommonUser, PermissionName } from '@viaa/avo2-types';
 import { Locale } from '~modules/translations/translations.core.types';
 import { isAvo } from '~shared/helpers/is-avo';
 
-export function getMockCommonUser(): Avo.User.CommonUser {
+export function getMockCommonUser(): AvoUserCommonUser {
 	return {
 		...(isAvo()
 			? {

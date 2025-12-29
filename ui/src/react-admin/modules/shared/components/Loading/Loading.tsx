@@ -6,7 +6,9 @@ import React from 'react';
 import { AdminConfigManager } from '~core/config/config.class';
 import type { DefaultComponentProps } from '../../types/components';
 
-export const Loader: FC<DefaultComponentProps & { fullscreen?: boolean }> = (props) => {
+export const Loading: FC<DefaultComponentProps & { fullscreen?: boolean; locationId?: string }> = (
+	props
+) => {
 	const componentsConfig = AdminConfigManager.getConfig().components;
 
 	if (componentsConfig?.loader.component) {

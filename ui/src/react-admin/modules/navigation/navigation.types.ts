@@ -1,4 +1,4 @@
-import type { Avo } from '@viaa/avo2-types';
+import type { AvoCoreContentPickerType } from '@viaa/avo2-types';
 import type { Locale } from '~modules/translations/translations.core.types';
 import type { FilterableTableState } from '~shared/components/FilterTable/FilterTable';
 import type { LinkTarget } from '~shared/components/SmartLink/SmartLink.types';
@@ -36,7 +36,7 @@ export interface NavigationItem extends NavigationBar {
 	iconName: string;
 	label: string | null;
 	userGroupIds: string[] | null;
-	contentType: Avo.Core.ContentPickerType | null;
+	contentType: AvoCoreContentPickerType | null;
 	contentPath: string | null;
 	linkTarget: LinkTarget | null;
 	position: number;

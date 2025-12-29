@@ -10,11 +10,11 @@ import {
 	Spacer,
 	TextInput,
 } from '@viaa/avo2-components';
-import { Avo } from '@viaa/avo2-types';
+import { type AvoContentPageType, AvoCoreContentPickerType } from '@viaa/avo2-types';
 import { isNil } from 'es-toolkit';
 import type { FunctionComponent } from 'react';
 import React, { useCallback, useEffect, useState } from 'react';
-import { AdminConfigManager, ToastType } from '~core/config/index';
+import { AdminConfigManager, ToastType } from '~core/config';
 import { ContentPageLabelService } from '~modules/content-page-labels/content-page-label.service';
 import { useGetAllLanguages } from '~modules/translations/hooks/use-get-all-languages';
 import { Locale } from '~modules/translations/translations.core.types';
@@ -25,8 +25,8 @@ import { LoadingErrorLoadedComponent } from '~shared/components/LoadingErrorLoad
 import { GET_LANGUAGE_NAMES } from '~shared/consts/language-names';
 import { CustomError } from '~shared/helpers/custom-error';
 import { isMultiLanguageEnabled } from '~shared/helpers/is-multi-language-enabled';
-import { buildLink, navigate } from '~shared/helpers/routing/link';
 import { navigateFunc } from '~shared/helpers/navigate-fnc';
+import { buildLink, navigate } from '~shared/helpers/routing/link';
 import { showToast } from '~shared/helpers/show-toast';
 import { tText } from '~shared/helpers/translation-functions';
 import { AdminLayout } from '~shared/layouts/AdminLayout/AdminLayout';
@@ -247,7 +247,7 @@ export const ContentPageLabelEdit: FunctionComponent<ContentPageLabelEditProps> 
 										onChange={(newContentType) =>
 											setContentPageLabelInfo({
 												...contentPageLabelInfo,
-												content_type: newContentType as Avo.ContentPage.Type,
+												content_type: newContentType as AvoContentPageType,
 											})
 										}
 									/>
@@ -280,12 +280,12 @@ export const ContentPageLabelEdit: FunctionComponent<ContentPageLabelEditProps> 
 								>
 									<ContentPicker
 										allowedTypes={[
-											Avo.Core.ContentPickerType.CONTENT_PAGE,
-											Avo.Core.ContentPickerType.ITEM,
-											Avo.Core.ContentPickerType.COLLECTION,
-											Avo.Core.ContentPickerType.BUNDLE,
-											Avo.Core.ContentPickerType.INTERNAL_LINK,
-											Avo.Core.ContentPickerType.EXTERNAL_LINK,
+											AvoCoreContentPickerType.CONTENT_PAGE,
+											AvoCoreContentPickerType.ITEM,
+											AvoCoreContentPickerType.COLLECTION,
+											AvoCoreContentPickerType.BUNDLE,
+											AvoCoreContentPickerType.INTERNAL_LINK,
+											AvoCoreContentPickerType.EXTERNAL_LINK,
 										]}
 										onChange={(newLinkTo) =>
 											setContentPageLabelInfo({
@@ -359,6 +359,7 @@ export const ContentPageLabelEdit: FunctionComponent<ContentPageLabelEditProps> 
 				loadingInfo={loadingInfo}
 				dataObject={contentPageLabelInfo}
 				render={renderPage}
+				locationId="content-page-label-edit"
 			/>
 		</>
 	);

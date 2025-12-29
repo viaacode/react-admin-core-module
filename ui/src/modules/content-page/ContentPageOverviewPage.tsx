@@ -1,13 +1,10 @@
 import { Button, Flex } from '@viaa/avo2-components';
-import type { Avo } from '@viaa/avo2-types';
+import type { AvoUserCommonUser } from '@viaa/avo2-types';
 import type { FC } from 'react';
 import { AdminConfigManager } from '~core/config/config.class';
-
 import { ContentPageOverview } from '~modules/content-page/views/ContentPageOverview';
 
-export const ContentPageOverviewPage: FC<{ commonUser?: Avo.User.CommonUser }> = ({
-	commonUser,
-}) => {
+export const ContentPageOverviewPage: FC<{ commonUser?: AvoUserCommonUser }> = ({ commonUser }) => {
 	return (
 		<>
 			<Flex>

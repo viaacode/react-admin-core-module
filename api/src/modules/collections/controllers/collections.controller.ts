@@ -1,11 +1,13 @@
 import { Controller, Get, ParseBoolPipe, ParseIntPipe, Query } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import type { Avo } from '@viaa/avo2-types';
+
 import { PermissionName } from '@viaa/avo2-types';
 
 import { RequireAnyPermissions } from '../../shared/decorators/require-any-permissions.decorator';
-import { ContentTypeNumber } from '../collections.types';
+import type { ContentTypeNumber } from '../collections.types';
 import { CollectionsService } from '../services/collections.service';
+
+class AvoCollectionCollection {}
 
 @ApiTags('Collections')
 @Controller(process.env.ADMIN_CORE_ROUTES_PREFIX + '/collections')
@@ -21,7 +23,7 @@ export class CollectionsController {
 	public async fetchCollectionsOrBundles(
 		@Query('limit', ParseIntPipe) limit: number,
 		@Query('typeId', ParseIntPipe) typeId: ContentTypeNumber
-	): Promise<Avo.Collection.Collection[]> {
+	): Promise<AvoCollectionCollection[]> {
 		return this.collectionsService.fetchCollectionsOrBundles(limit, typeId);
 	}
 
@@ -30,7 +32,7 @@ export class CollectionsController {
 		@Query('isCollection', ParseBoolPipe) isCollection: boolean,
 		@Query('titleOrId') titleOrId: string,
 		@Query('limit', ParseIntPipe) limit: number
-	): Promise<Avo.Collection.Collection[]> {
+	): Promise<AvoCollectionCollection[]> {
 		if (isCollection) {
 			return this.collectionsService.fetchCollectionsByTitleOrId(titleOrId, limit);
 		} else {

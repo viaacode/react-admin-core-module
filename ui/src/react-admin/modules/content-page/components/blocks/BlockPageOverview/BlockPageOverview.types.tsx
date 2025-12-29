@@ -1,5 +1,5 @@
 import type { RenderLinkFunction } from '@viaa/avo2-components';
-import type { Avo } from '@viaa/avo2-types';
+import type { AvoSearchOrderDirection, AvoUserCommonUser } from '@viaa/avo2-types';
 import type { PageOverviewOrderOptions } from '~modules/content-page/const/get-page-overview-order-options';
 import type { AlignOption, Color } from '~modules/content-page/types/content-block.types';
 import type { ContentTypeAndLabelsValue } from '~shared/components/ContentTypeAndLabelsPicker/ContentTypeAndLabelsPicker';
@@ -26,7 +26,7 @@ export interface ContentPageOverviewParams {
 	// Selected tabs for which we should fetch content page items
 	selectedLabelIds: number[] | string[]; // Strings for uuid's on hetarchief, and numbers for ids in avo
 	orderProp?: string;
-	orderDirection?: Avo.Search.OrderDirection;
+	orderDirection?: AvoSearchOrderDirection;
 	offset: number;
 	limit: number;
 }
@@ -49,5 +49,5 @@ export interface PageOverviewWrapperProps {
 	sortOrder?: PageOverviewOrderOptions;
 	headerBackgroundColor: Color;
 	renderLink: RenderLinkFunction;
-	commonUser?: Avo.User.CommonUser;
+	commonUser?: AvoUserCommonUser;
 }

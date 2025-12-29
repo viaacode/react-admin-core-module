@@ -1,29 +1,33 @@
 import { forwardRef, Inject } from '@nestjs/common';
-import type { Avo } from '@viaa/avo2-types';
-
+import type {
+	AvoCollectionCollection,
+	AvoCollectionRelationEntry,
+	AvoCollectionRelationType,
+	AvoItemItem,
+} from '@viaa/avo2-types';
 import { DataService } from '../data';
 import {
 	FetchCollectionRelationsBySubjectsDocument,
-	FetchCollectionRelationsBySubjectsQuery,
-	FetchCollectionRelationsBySubjectsQueryVariables,
+	type FetchCollectionRelationsBySubjectsQuery,
+	type FetchCollectionRelationsBySubjectsQueryVariables,
 	FetchItemRelationsBySubjectsDocument,
-	FetchItemRelationsBySubjectsQuery,
-	FetchItemRelationsBySubjectsQueryVariables,
+	type FetchItemRelationsBySubjectsQuery,
+	type FetchItemRelationsBySubjectsQueryVariables,
 	FetchItemUuidByExternalIdDocument,
-	FetchItemUuidByExternalIdQuery,
-	FetchItemUuidByExternalIdQueryVariables,
+	type FetchItemUuidByExternalIdQuery,
+	type FetchItemUuidByExternalIdQueryVariables,
 	GetItemDetailsByExternalIdDocument,
-	GetItemDetailsByExternalIdQuery,
-	GetItemDetailsByExternalIdQueryVariables,
+	type GetItemDetailsByExternalIdQuery,
+	type GetItemDetailsByExternalIdQueryVariables,
 	GetItemDetailsByUuidDocument,
-	GetItemDetailsByUuidQuery,
-	GetItemDetailsByUuidQueryVariables,
+	type GetItemDetailsByUuidQuery,
+	type GetItemDetailsByUuidQueryVariables,
 	GetPublicItemsByTitleOrExternalIdDocument,
-	GetPublicItemsByTitleOrExternalIdQuery,
-	GetPublicItemsByTitleOrExternalIdQueryVariables,
+	type GetPublicItemsByTitleOrExternalIdQuery,
+	type GetPublicItemsByTitleOrExternalIdQueryVariables,
 	GetPublicItemsDocument,
-	GetPublicItemsQuery,
-	GetPublicItemsQueryVariables,
+	type GetPublicItemsQuery,
+	type GetPublicItemsQueryVariables,
 } from '../shared/generated/graphql-db-types-avo';
 import { customError } from '../shared/helpers/custom-error';
 import { isUuid } from '../shared/helpers/uuid';
@@ -31,17 +35,17 @@ import { isUuid } from '../shared/helpers/uuid';
 export class ItemsService {
 	constructor(@Inject(forwardRef(() => DataService)) protected dataService: DataService) {}
 
-	public async fetchPublicItems(limit: number): Promise<Avo.Item.Item[] | null> {
+	public async fetchPublicItems(limit: number): Promise<AvoItemItem[] | null> {
 		const response = await this.dataService.execute<
 			GetPublicItemsQuery,
 			GetPublicItemsQueryVariables
 		>(GetPublicItemsDocument, { limit });
-		return response.app_item_meta as Avo.Item.Item[] | null;
+		return response.app_item_meta as AvoItemItem[] | null;
 	}
 
-	private async fetchItemById(uuidOrExternalId: string): Promise<Partial<Avo.Item.Item>> {
+	private async fetchItemById(uuidOrExternalId: string): Promise<Partial<AvoItemItem>> {
 		try {
-			let response;
+			let response: GetItemDetailsByUuidQuery | GetItemDetailsByExternalIdQuery;
 			if (isUuid(uuidOrExternalId)) {
 				response = await this.dataService.execute<
 					GetItemDetailsByUuidQuery,
@@ -66,7 +70,7 @@ export class ItemsService {
 				});
 			}
 
-			return rawItem as unknown as Partial<Avo.Item.Item>;
+			return rawItem as unknown as Partial<AvoItemItem>;
 		} catch (err: any) {
 			throw customError('Failed to get the item by id from the database', err, {
 				uuidOrExternalId,
@@ -76,7 +80,7 @@ export class ItemsService {
 
 	public async fetchItemOrReplacement(
 		uuidOrExternalId: string
-	): Promise<(Avo.Item.Item & { replacement_for?: string }) | null> {
+	): Promise<(AvoItemItem & { replacement_for?: string }) | null> {
 		try {
 			let item = await this.fetchItemById(uuidOrExternalId);
 
@@ -85,17 +89,17 @@ export class ItemsService {
 			if (replacedByItemUid) {
 				const replacementItem = await this.fetchItemById(replacedByItemUid);
 				(replacementItem as any).replacement_for = item.external_id;
-				item = replacementItem as (Avo.Item.Item & { replacement_for?: string }) | null;
+				item = replacementItem as (AvoItemItem & { replacement_for?: string }) | null;
 			}
 
 			// Return the depublish reason if the item has a depublish reason
 			if (item.depublish_reason) {
 				return {
 					depublish_reason: item.depublish_reason,
-				} as Avo.Item.Item;
+				} as AvoItemItem;
 			}
 
-			return (item || null) as unknown as (Avo.Item.Item & { replacement_for?: string }) | null;
+			return (item || null) as unknown as (AvoItemItem & { replacement_for?: string }) | null;
 		} catch (err: any) {
 			throw customError('Failed to get item or replacement or depublish reason', err, {
 				uuidOrExternalId,
@@ -106,8 +110,8 @@ export class ItemsService {
 	public async fetchRelationsBySubject(
 		type: 'collection' | 'item',
 		subjectIds: string[],
-		relationType: Avo.Collection.RelationType
-	): Promise<Avo.Collection.RelationEntry<Avo.Item.Item | Avo.Collection.Collection>[]> {
+		relationType: AvoCollectionRelationType
+	): Promise<AvoCollectionRelationEntry<AvoItemItem | AvoCollectionCollection>[]> {
 		let variables: any = null;
 		const isCollection = type === 'collection';
 		try {
@@ -127,10 +131,10 @@ export class ItemsService {
 			);
 			if (isCollection) {
 				return ((response as FetchCollectionRelationsBySubjectsQuery).app_collection_relations ||
-					[]) as Avo.Collection.RelationEntry<Avo.Collection.Collection>[];
+					[]) as AvoCollectionRelationEntry<AvoCollectionCollection>[];
 			} else {
 				return ((response as FetchItemRelationsBySubjectsQuery).app_item_relations ||
-					[]) as Avo.Collection.RelationEntry<Avo.Item.Item>[];
+					[]) as AvoCollectionRelationEntry<AvoItemItem>[];
 			}
 		} catch (err: any) {
 			throw customError('Failed to get relation from the database', err, {
@@ -153,7 +157,7 @@ export class ItemsService {
 	public async fetchPublicItemsByTitleOrExternalId(
 		titleOrExternalId: string,
 		limit: number
-	): Promise<Avo.Item.Item[]> {
+	): Promise<AvoItemItem[]> {
 		try {
 			const response = await this.dataService.execute<
 				GetPublicItemsByTitleOrExternalIdQuery,
@@ -170,7 +174,7 @@ export class ItemsService {
 				items = response.itemsByTitle || [];
 			}
 
-			return items as Avo.Item.Item[];
+			return items as AvoItemItem[];
 		} catch (err: any) {
 			throw customError('Failed to fetch items by title or external id', err, {
 				titleOrExternalId,

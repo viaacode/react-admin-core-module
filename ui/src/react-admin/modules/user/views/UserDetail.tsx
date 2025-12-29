@@ -8,8 +8,14 @@ import {
 	Table,
 	TagList,
 } from '@viaa/avo2-components';
-import type { Avo } from '@viaa/avo2-types';
-import { LomSchemeType, PermissionName } from '@viaa/avo2-types';
+
+import {
+	type AvoEducationOrganizationOrganization,
+	AvoLomLomSchemeType,
+	type AvoUserCommonUser,
+	type AvoUserTempAccess,
+	PermissionName,
+} from '@viaa/avo2-types';
 import { differenceInMilliseconds, formatDuration, intervalToDuration, parseISO } from 'date-fns';
 import { nlBE } from 'date-fns/locale';
 import { compact } from 'es-toolkit';
@@ -26,13 +32,12 @@ import { createDropdownMenuItem } from '~shared/helpers/dropdown';
 import { renderAvatar } from '~shared/helpers/formatters/avatar';
 import { formatDateString } from '~shared/helpers/formatters/date';
 import { idpMapsToTagList } from '~shared/helpers/idps-to-taglist';
-import { buildLink, navigate } from '~shared/helpers/routing/link';
-
 import {
 	renderDateDetailRows,
 	renderDetailRow,
 	renderSimpleDetailRows,
 } from '~shared/helpers/render-detail-fields';
+import { buildLink, navigate } from '~shared/helpers/routing/link';
 import { showToast } from '~shared/helpers/show-toast';
 import { stringsToTagList } from '~shared/helpers/strings-to-taglist';
 import { tHtml, tText } from '~shared/helpers/translation-functions';
@@ -45,10 +50,10 @@ import { Idp } from '../user.types';
 
 export interface UserDetailProps {
 	id: string | null;
-	onSetTempAccess?: (profileId: string, tempAccess: Avo.User.TempAccess) => Promise<void>;
-	onLoaded?: (user: Avo.User.CommonUser) => void;
+	onSetTempAccess?: (profileId: string, tempAccess: AvoUserTempAccess) => Promise<void>;
+	onLoaded?: (user: AvoUserCommonUser) => void;
 	onGoBack: () => void;
-	commonUser: Avo.User.CommonUser;
+	commonUser: AvoUserCommonUser;
 }
 
 export const UserDetail: FC<UserDetailProps> = ({
@@ -66,7 +71,7 @@ export const UserDetail: FC<UserDetailProps> = ({
 		refetch: refetchProfileInfo,
 		isFetched,
 	} = useGetProfileById(id);
-	const [tempAccess, setTempAccess] = useState<Avo.User.TempAccess | null>(null);
+	const [tempAccess, setTempAccess] = useState<AvoUserTempAccess | null>(null);
 	const [isOptionsMenuOpen, setIsOptionsMenuOpen] = useState<boolean>(false);
 	const [isTempAccessModalOpen, setIsTempAccessModalOpen] = useState<boolean>(false);
 	const [userDeleteModalOpen, setUserDeleteModalOpen] = useState<boolean>(false);
@@ -182,7 +187,7 @@ export const UserDetail: FC<UserDetailProps> = ({
 		}
 	};
 
-	const handleSetTempAccess = async (newTempAccess: Avo.User.TempAccess) => {
+	const handleSetTempAccess = async (newTempAccess: AvoUserTempAccess) => {
 		try {
 			const profileId = storedProfile?.profileId;
 
@@ -265,7 +270,7 @@ export const UserDetail: FC<UserDetailProps> = ({
 								renderAvatar(storedProfile, { small: false }),
 								tText('admin/users/views/user-detail___avatar')
 							)}
-							{renderSimpleDetailRows<Avo.User.CommonUser>(storedProfile, [
+							{renderSimpleDetailRows<AvoUserCommonUser>(storedProfile, [
 								['firstName', tText('admin/users/views/user-detail___voornaam')],
 								['lastName', tText('admin/users/views/user-detail___achternaam')],
 								['alias', tText('admin/users/views/user-detail___gebruikersnaam')],
@@ -282,17 +287,17 @@ export const UserDetail: FC<UserDetailProps> = ({
 								userGroup ? userGroup.label : '-',
 								tText('admin/users/views/user-detail___gebruikersgroep')
 							)}
-							{renderDateDetailRows<Avo.User.CommonUser>(storedProfile, [
+							{renderDateDetailRows<AvoUserCommonUser>(storedProfile, [
 								['createdAt', tText('admin/users/views/user-detail___aangemaakt-op')],
 								['updatedAt', tText('admin/users/views/user-detail___aangepast-op')],
 								['lastAccessAt', tText('admin/users/views/user-detail___laatste-toegang')],
 							])}
-							{renderSimpleDetailRows<Avo.User.CommonUser>(storedProfile, [
+							{renderSimpleDetailRows<AvoUserCommonUser>(storedProfile, [
 								['businessCategory', tText('admin/users/views/user-detail___oormerk')],
 								['isException', tText('admin/users/views/user-detail___uitzonderingsaccount')],
 								['isBlocked', tText('admin/users/views/user-detail___geblokkeerd')],
 							])}
-							{renderDateDetailRows<Avo.User.CommonUser>(storedProfile, [
+							{renderDateDetailRows<AvoUserCommonUser>(storedProfile, [
 								['blockedAt', tText('admin/users/views/user-detail___laatst-geblokeerd-op')],
 								['unblockedAt', tText('admin/users/views/user-detail___laatst-gedeblokkeerd-op')],
 							])}
@@ -314,7 +319,7 @@ export const UserDetail: FC<UserDetailProps> = ({
 								stringsToTagList(
 									compact(
 										(storedProfile?.loms || [])
-											.filter((lom) => lom.lom?.scheme === LomSchemeType.structure)
+											.filter((lom) => lom.lom?.scheme === AvoLomLomSchemeType.structure)
 											.map((lom) => lom.lom?.label)
 									)
 								) || '-',
@@ -324,7 +329,7 @@ export const UserDetail: FC<UserDetailProps> = ({
 								stringsToTagList(
 									compact(
 										(storedProfile?.loms || [])
-											.filter((lom) => lom.lom?.scheme === LomSchemeType.theme)
+											.filter((lom) => lom.lom?.scheme === AvoLomLomSchemeType.theme)
 											.map((lom) => lom.lom?.label)
 									)
 								) || '-',
@@ -334,7 +339,7 @@ export const UserDetail: FC<UserDetailProps> = ({
 								stringsToTagList(
 									compact(
 										(storedProfile?.loms || [])
-											.filter((lom) => lom.lom?.scheme === LomSchemeType.subject)
+											.filter((lom) => lom.lom?.scheme === AvoLomLomSchemeType.subject)
 											.map((lom) => lom.lom?.label)
 									)
 								) || '-',
@@ -346,7 +351,7 @@ export const UserDetail: FC<UserDetailProps> = ({
 										closable={false}
 										swatches={false}
 										tags={storedProfile.educationalOrganisations.map(
-											(item: Avo.EducationOrganization.Organization) => ({
+											(item: AvoEducationOrganizationOrganization) => ({
 												label: item.organisationLabel,
 												id: item.organisationId,
 											})
@@ -523,7 +528,7 @@ export const UserDetail: FC<UserDetailProps> = ({
 	};
 
 	if (isLoading) {
-		return <CenteredSpinner />;
+		return <CenteredSpinner locationId="user-detail--loading" />;
 	}
 	if (isError) {
 		return (
@@ -532,6 +537,7 @@ export const UserDetail: FC<UserDetailProps> = ({
 					'admin/users/views/user-detail___het-ophalen-van-de-gebruiker-info-is-mislukt'
 				)}
 				icon={'alertTriangle' as IconName}
+				locationId="user-detail__error"
 			/>
 		);
 	}

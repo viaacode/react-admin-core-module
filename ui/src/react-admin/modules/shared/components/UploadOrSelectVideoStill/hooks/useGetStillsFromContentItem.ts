@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { ContentPickerType } from '@viaa/avo2-types';
+import { AvoCoreContentPickerType } from '@viaa/avo2-types';
 import { stringifyUrl } from 'query-string';
 import { AdminConfigManager } from '~core/config/config.class';
 import { fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
@@ -7,7 +7,7 @@ import { getProxyUrl } from '~shared/helpers/get-proxy-url-from-admin-core-confi
 import { QUERY_KEYS } from '~shared/types';
 
 export const useGetStillsFromContentItem = (
-	contentItemType: ContentPickerType | null,
+	contentItemType: AvoCoreContentPickerType | null,
 	contentItemId: string | null,
 	options: { enabled?: boolean } = {
 		enabled: true,
@@ -21,10 +21,10 @@ export const useGetStillsFromContentItem = (
 			}
 
 			if (
-				contentItemType !== ContentPickerType.ITEM &&
-				contentItemType !== ContentPickerType.ITEM_WITH_CUE_POINTS &&
-				contentItemType !== ContentPickerType.COLLECTION &&
-				contentItemType !== ContentPickerType.ASSIGNMENT
+				contentItemType !== AvoCoreContentPickerType.ITEM &&
+				contentItemType !== AvoCoreContentPickerType.ITEM_WITH_CUE_POINTS &&
+				contentItemType !== AvoCoreContentPickerType.COLLECTION &&
+				contentItemType !== AvoCoreContentPickerType.ASSIGNMENT
 			) {
 				return [];
 			}

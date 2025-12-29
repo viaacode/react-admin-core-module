@@ -10,7 +10,7 @@ import {
 	Spacer,
 	TagList,
 } from '@viaa/avo2-components';
-import { Avo } from '@viaa/avo2-types';
+
 import clsx from 'clsx';
 import { uniqBy } from 'es-toolkit';
 import type { FunctionComponent, ReactText } from 'react';
@@ -23,6 +23,7 @@ import type { PickerItem } from '../../types/content-picker';
 import { ContentPicker } from '../ContentPicker/ContentPicker';
 
 import './MultiUserSelectDropdown.scss';
+import { AvoCoreContentPickerType, type AvoUserCommonUser } from '@viaa/avo2-types';
 
 export interface Tag {
 	label: string;
@@ -61,13 +62,13 @@ export const MultiUserSelectDropdown: FunctionComponent<MultiUserSelectDropdownP
 	useEffect(() => {
 		if (values?.length) {
 			UserService.getNamesByProfileIds(values)
-				.then((users: Partial<Avo.User.CommonUser>[]) => {
+				.then((users: Partial<AvoUserCommonUser>[]) => {
 					setSelectedProfiles(
 						users.map(
 							(user): PickerItem => ({
 								label: `${user?.fullName} (${user?.email})`,
 								value: user?.profileId as string,
-								type: Avo.Core.ContentPickerType.PROFILE,
+								type: AvoCoreContentPickerType.PROFILE,
 							})
 						)
 					);
@@ -192,7 +193,7 @@ export const MultiUserSelectDropdown: FunctionComponent<MultiUserSelectDropdownP
 											}
 										}}
 										hideTargetSwitch
-										allowedTypes={[Avo.Core.ContentPickerType.PROFILE]}
+										allowedTypes={[AvoCoreContentPickerType.PROFILE]}
 										hideTypeDropdown
 										placeholder={
 											placeholder ||

@@ -3,7 +3,7 @@ import I18n from 'i18next';
 import XHR from 'i18next-http-backend';
 import { initReactI18next } from 'react-i18next';
 
-export async function initI18n(adminProxyUrl: string): Promise<void> {
+export async function loadTranslations(adminProxyUrl: string): Promise<void> {
 	return new Promise<void>((resolve) => {
 		I18n.use(XHR)
 			.use(initReactI18next) // passes i18n down to react-i18next

@@ -4,7 +4,7 @@ import { isNil } from 'es-toolkit';
 import type { FunctionComponent } from 'react';
 import React, { useCallback, useEffect, useState } from 'react';
 
-import { AdminConfigManager, ToastType } from '~core/config/index';
+import { AdminConfigManager, ToastType } from '~core/config';
 import { ContentPageLabelService } from '~modules/content-page-labels/content-page-label.service';
 import { ITEMS_PER_PAGE } from '~modules/item/items.consts';
 import { ErrorView } from '~modules/shared/components/error/ErrorView';
@@ -47,7 +47,8 @@ import type {
 	ContentPageLabelTableState,
 } from '../content-page-label.types';
 import './ContentPageLabelOverview.scss';
-import { Avo } from '@viaa/avo2-types';
+
+import { AvoSearchOrderDirection } from '@viaa/avo2-types';
 import { navigateFunc } from '~shared/helpers/navigate-fnc';
 
 export const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> = ({
@@ -89,7 +90,7 @@ export const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> 
 				await ContentPageLabelService.fetchContentPageLabels(
 					tableState.page || 0,
 					(tableState.sort_column || 'updated_at') as ContentPageLabelOverviewTableCols,
-					tableState.sort_order || Avo.Search.OrderDirection.DESC,
+					tableState.sort_order || AvoSearchOrderDirection.DESC,
 					generateWhereObject(getFilters(tableState))
 				);
 
@@ -326,6 +327,7 @@ export const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> 
 				message={tHtml(
 					'admin/content-page-labels/views/content-page-label-overview___er-zijn-nog-geen-content-pagina-labels-aangemaakt'
 				)}
+				locationId="content-page-label-overview__no-results"
 			>
 				<p>
 					{tHtml(
@@ -398,6 +400,7 @@ export const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> 
 					loadingInfo={loadingInfo}
 					dataObject={contentPageLabels}
 					render={renderContentPageLabelTable}
+					locationId="content-page-label-overview"
 				/>
 			</AdminLayout.Content>
 		</AdminLayout>

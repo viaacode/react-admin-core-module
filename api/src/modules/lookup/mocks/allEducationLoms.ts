@@ -1,6 +1,6 @@
-import type { Avo } from '@viaa/avo2-types';
+import type { AvoLomLomField } from '@viaa/avo2-types';
 
-export const ALL_EDUCATION_LOMS: Avo.Lom.LomField[] = [
+export const ALL_EDUCATION_LOMS: AvoLomLomField[] = [
 	{
 		id: 'https://w3id.org/onderwijs-vlaanderen/id/structuur/basiseducatie',
 		label: 'basiseducatie',

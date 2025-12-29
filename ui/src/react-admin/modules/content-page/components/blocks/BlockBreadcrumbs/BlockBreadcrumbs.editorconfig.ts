@@ -1,4 +1,4 @@
-import type { ContentPickerType } from '@viaa/avo2-types';
+import type { AvoCoreContentPickerType } from '@viaa/avo2-types';
 import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS } from '~content-blocks/defaults';
 import { GET_FOREGROUND_COLOR_OPTIONS_ARCHIEF } from '~modules/content-page/const/get-color-options';
 import type {
@@ -80,7 +80,7 @@ export const CONTENT_BREADCRUMBS_CONFIG = (position = 0): ContentBlockConfig => 
 								'CONTENT_PAGE',
 								'INTERNAL_LINK',
 								'EXTERNAL_LINK',
-							] as ContentPickerType[],
+							] as AvoCoreContentPickerType[],
 						},
 					},
 				},

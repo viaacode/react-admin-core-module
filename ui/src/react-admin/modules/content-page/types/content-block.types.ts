@@ -7,7 +7,7 @@ import type {
 	IconName,
 	SpacerOption,
 } from '@viaa/avo2-components';
-import type { Avo } from '@viaa/avo2-types';
+import type { AvoContentPageType } from '@viaa/avo2-types';
 import type { ReactNode } from 'react';
 import type { BlockAvoHeroProps } from '~content-blocks/BlockAvoHero/BlockAvoHero';
 import type {
@@ -284,7 +284,7 @@ export interface PageOverviewBlockComponentStateFields {
 	allowMultiple?: boolean;
 	centerHeader?: boolean;
 	headerBackgroundColor?: Color;
-	contentType: Avo.ContentPage.Type;
+	contentType: AvoContentPageType;
 	itemStyle?: ContentItemStyle;
 	itemAlignment?: AlignOption;
 	imageItemAlignment?: AlignOption;

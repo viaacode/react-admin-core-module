@@ -1,6 +1,6 @@
 import type { TagInfo, TagOption } from '@viaa/avo2-components';
 import { Container, Spacer, Table, TagList, Thumbnail } from '@viaa/avo2-components';
-import { Avo } from '@viaa/avo2-types';
+import { AvoContentTypeEnglish } from '@viaa/avo2-types';
 import { isAfter, isBefore, parseISO } from 'date-fns';
 import { compact } from 'es-toolkit';
 import type { FunctionComponent } from 'react';
@@ -18,12 +18,12 @@ import { Link } from '~shared/components/Link/Link';
 import { GET_LANGUAGE_NAMES } from '~shared/consts/language-names';
 import { formatDate, formatDateString } from '~shared/helpers/formatters/date';
 import { isMultiLanguageEnabled } from '~shared/helpers/is-multi-language-enabled';
-import { buildLink } from '~shared/helpers/routing/link';
 import {
 	renderDateDetailRows,
 	renderDetailRow,
 	renderSimpleDetailRows,
 } from '~shared/helpers/render-detail-fields';
+import { buildLink } from '~shared/helpers/routing/link';
 import { SanitizePreset } from '~shared/helpers/sanitize/presets';
 import { tHtml, tText } from '~shared/helpers/translation-functions';
 
@@ -120,7 +120,7 @@ export const ContentPageDetailMetaData: FunctionComponent<ContentDetailMetaDataP
 						{renderDetailRow(
 							<div style={{ width: '400px' }}>
 								<Thumbnail
-									category={Avo.ContentType.English.ITEM}
+									category={AvoContentTypeEnglish.ITEM}
 									src={contentPageInfo.thumbnailPath || undefined}
 								/>
 							</div>,

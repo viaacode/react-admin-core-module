@@ -1,7 +1,5 @@
-import type { Avo } from '@viaa/avo2-types';
-
+import type { AvoSearchOrderDirection } from '@viaa/avo2-types';
 import { isHetArchief } from '../shared/helpers/is-hetarchief';
-
 import type { ContentOverviewTableCols, MediaPlayerPathInfo } from './content-pages.types';
 
 export const CONTENT_PAGE_COPY = 'Kopie %index%: ';
@@ -35,33 +33,33 @@ export const MEDIA_PLAYER_BLOCKS: { [blockType: string]: MediaPlayerPathInfo } =
 export const DEFAULT_AUDIO_STILL = '/images/audio-still.svg';
 
 export const TABLE_COLUMN_TO_DATABASE_ORDER_OBJECT: Partial<{
-	[columnId in ContentOverviewTableCols]: (order: Avo.Search.OrderDirection) => any;
+	[columnId in ContentOverviewTableCols]: (order: AvoSearchOrderDirection) => any;
 }> = {
-	contentType: (order: Avo.Search.OrderDirection) => {
+	contentType: (order: AvoSearchOrderDirection) => {
 		return { content_type: order };
 	},
-	createdAt: (order: Avo.Search.OrderDirection) => {
+	createdAt: (order: AvoSearchOrderDirection) => {
 		return { created_at: order };
 	},
-	updatedAt: (order: Avo.Search.OrderDirection) => {
+	updatedAt: (order: AvoSearchOrderDirection) => {
 		return { updated_at: order };
 	},
-	isPublic: (order: Avo.Search.OrderDirection) => {
+	isPublic: (order: AvoSearchOrderDirection) => {
 		return { is_public: order };
 	},
-	publishedAt: (order: Avo.Search.OrderDirection) => {
+	publishedAt: (order: AvoSearchOrderDirection) => {
 		return { published_at: order };
 	},
-	publishAt: (order: Avo.Search.OrderDirection) => {
+	publishAt: (order: AvoSearchOrderDirection) => {
 		return { publish_at: order };
 	},
-	depublishAt: (order: Avo.Search.OrderDirection) => {
+	depublishAt: (order: AvoSearchOrderDirection) => {
 		return { depublish_at: order };
 	},
-	userGroupIds: (order: Avo.Search.OrderDirection) => {
+	userGroupIds: (order: AvoSearchOrderDirection) => {
 		return { user_group_ids: order };
 	},
-	userProfileId: (order: Avo.Search.OrderDirection) => {
+	userProfileId: (order: AvoSearchOrderDirection) => {
 		if (isHetArchief()) {
 			return {
 				owner_profile: { first_name: order },
@@ -71,7 +69,7 @@ export const TABLE_COLUMN_TO_DATABASE_ORDER_OBJECT: Partial<{
 			profile: { usersByuserId: { first_name: order } },
 		};
 	},
-	authorUserGroup: (order: Avo.Search.OrderDirection) => {
+	authorUserGroup: (order: AvoSearchOrderDirection) => {
 		if (isHetArchief()) {
 			return {
 				owner_profile: { group: { name: order } },

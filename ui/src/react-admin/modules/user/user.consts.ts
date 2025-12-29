@@ -1,6 +1,6 @@
 import type { ButtonType, SelectOption } from '@viaa/avo2-components';
-import type { Avo } from '@viaa/avo2-types';
-import { PermissionName } from '@viaa/avo2-types';
+
+import { type AvoUserCommonUser, type AvoUserTempAccess, PermissionName } from '@viaa/avo2-types';
 import { isAfter, isBefore } from 'date-fns';
 import { compact } from 'es-toolkit';
 
@@ -27,7 +27,7 @@ type UserBulkActionOption = SelectOption<UserBulkAction> & {
 };
 
 export const GET_USER_OVERVIEW_TABLE_COLS: (props: {
-	commonUser?: Avo.User.CommonUser;
+	commonUser?: AvoUserCommonUser;
 	userGroupOptions: CheckboxOption[];
 	companyOptions: CheckboxOption[];
 	businessCategoryOptions: CheckboxOption[];
@@ -58,7 +58,7 @@ export const GET_USER_OVERVIEW_TABLE_COLS: (props: {
 };
 
 const getAvoColumns = (
-	user: Avo.User.CommonUser | undefined,
+	user: AvoUserCommonUser | undefined,
 	userGroupOptions: CheckboxOption[],
 	companyOptions: CheckboxOption[],
 	businessCategoryOptions: CheckboxOption[],
@@ -371,7 +371,7 @@ const getHetArchiefColumns = (
 ];
 
 export const GET_USER_BULK_ACTIONS = (
-	user: Avo.User.CommonUser | undefined,
+	user: AvoUserCommonUser | undefined,
 	bulkActions: UserBulkAction[],
 	hasSelection: boolean
 ): UserBulkActionOption[] => {
@@ -445,20 +445,18 @@ function getError<T>(rule: ValidationRule<T>, object: T) {
 	return rule.error(object);
 }
 
-function GET_TEMP_ACCESS_VALIDATION_RULES_FOR_SAVE(): ValidationRule<
-	Partial<Avo.User.TempAccess>
->[] {
+function GET_TEMP_ACCESS_VALIDATION_RULES_FOR_SAVE(): ValidationRule<Partial<AvoUserTempAccess>>[] {
 	return [
 		{
 			// until cannot be null and must be in the future
 			error: tText('admin/users/user___de-einddatum-is-verplicht-en-moet-in-de-toekomst-liggen'),
-			isValid: (tempAccess: Partial<Avo.User.TempAccess>) =>
+			isValid: (tempAccess: Partial<AvoUserTempAccess>) =>
 				!!tempAccess.until && isAfter(normalizeTimestamp(tempAccess.until), new Date()),
 		},
 		{
 			// When both from and until date are set, the from date must be < the until date
 			error: tText('admin/users/user___de-startdatum-moet-voor-de-einddatum-liggen'),
-			isValid: (tempAccess: Partial<Avo.User.TempAccess>) => {
+			isValid: (tempAccess: Partial<AvoUserTempAccess>) => {
 				return tempAccess.from
 					? !!tempAccess.until &&
 							isBefore(normalizeTimestamp(tempAccess.from), normalizeTimestamp(tempAccess.until))
@@ -468,7 +466,7 @@ function GET_TEMP_ACCESS_VALIDATION_RULES_FOR_SAVE(): ValidationRule<
 	];
 }
 
-export const getTempAccessValidationErrors = (tempAccess: Avo.User.TempAccess): string[] => {
+export const getTempAccessValidationErrors = (tempAccess: AvoUserTempAccess): string[] => {
 	const validationErrors = [...GET_TEMP_ACCESS_VALIDATION_RULES_FOR_SAVE()].map((rule) => {
 		return rule.isValid(tempAccess) ? null : getError(rule, tempAccess);
 	});
