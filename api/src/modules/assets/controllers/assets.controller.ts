@@ -234,6 +234,27 @@ export class AssetsController {
 			return true;
 		}
 		if (
+			assetInfo.content_asset_type_id === AvoFileUploadAssetType.BUNDLE_OG_IMAGE &&
+			(userPermissions.includes(PermissionName.EDIT_OWN_BUNDLES) ||
+				userPermissions.includes(PermissionName.EDIT_ANY_BUNDLES))
+		) {
+			return true;
+		}
+		if (
+			assetInfo.content_asset_type_id === AvoFileUploadAssetType.COLLECTION_OG_IMAGE &&
+			(userPermissions.includes(PermissionName.EDIT_OWN_COLLECTIONS) ||
+				userPermissions.includes(PermissionName.EDIT_ANY_COLLECTIONS))
+		) {
+			return true;
+		}
+		if (
+			assetInfo.content_asset_type_id === AvoFileUploadAssetType.ASSIGNMENT_OG_IMAGE &&
+			(userPermissions.includes(PermissionName.EDIT_OWN_ASSIGNMENTS) ||
+				userPermissions.includes(PermissionName.EDIT_ANY_ASSIGNMENTS))
+		) {
+			return true;
+		}
+		if (
 			[
 				AvoFileUploadAssetType.CONTENT_PAGE_COVER,
 				AvoFileUploadAssetType.CONTENT_PAGE_IMAGE,
