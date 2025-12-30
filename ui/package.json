@@ -1,6 +1,6 @@
 {
   "name": "@meemoo/admin-core-ui",
-  "version": "5.1.4",
+  "version": "5.1.5",
   "private": false,
   "type": "module",
   "files": [
@@ -72,7 +72,7 @@
   },
   "peerDependencies": {
     "@hookform/resolvers": "2.9.11",
-    "@meemoo/react-components": "5.0.21",
+    "@meemoo/react-components": "5.0.22",
     "@studiohyperdrive/pagination": "1.0.0",
     "@tanstack/react-query": "5.90.7",
     "@viaa/avo2-components": "6.1.9",
