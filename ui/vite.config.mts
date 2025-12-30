@@ -7,6 +7,12 @@ import pkg from './package.json';
 
 const peerDependencies: string[] = Object.keys(pkg.peerDependencies);
 
+const external = [
+	...peerDependencies,
+	'react/jsx-runtime',
+	'react/jsx-dev-runtime',
+];
+
 // https://vitejs.dev/config/
 export default defineConfig({
 	plugins: [react(), viteTsconfigPaths(), dts()],
@@ -25,7 +31,10 @@ export default defineConfig({
 		},
 		outDir: 'dist',
 		sourcemap: true,
-		cssCodeSplit: true
+		cssCodeSplit: true,
+		rollupOptions: {
+			external,
+		},
 	},
 	define: {
 		// By default, Vite doesn't include shims for Node.js
@@ -37,49 +46,7 @@ export default defineConfig({
 		),
 	},
 	resolve: {
-		dedupe: [
-			'@hookform/resolvers',
-			'@meemoo/react-components',
-			'@studiohyperdrive/pagination',
-			'@tanstack/react-query',
-			'@viaa/avo2-components',
-			'@viaa/avo2-types',
-			'autosize',
-			'blend-promise-utils',
-			'braft-editor',
-			'braft-extensions',
-			'caniuse-lite',
-			'capture-stack-trace',
-			'clsx',
-			'copy-to-clipboard',
-			'date-fns',
-			'date-fns-tz',
-			'draft-js',
-			'es-toolkit',
-			'file-saver',
-			'i18next-http-backend',
-			'immer',
-			'isomorphic-dompurify',
-			'js-beautify',
-			'marked',
-			'query-string',
-			'raf',
-			'react',
-			'react-copy-to-clipboard',
-			'react-datepicker',
-			'react-dom',
-			'react-hook-form',
-			'react-perfect-scrollbar',
-			'react-popper',
-			'react-range',
-			'react-resizable-panels',
-			'react-router',
-			'react-router-dom',
-			'react-select',
-			'react-table',
-			'ts-retry-promise',
-			'yup',
-		],
+		dedupe: peerDependencies,
 		alias: {
 			'@': resolve(__dirname, 'public'),
 			'~modules': resolve(__dirname, './src/react-admin/modules'),
