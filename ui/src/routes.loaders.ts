@@ -1,4 +1,5 @@
 import { noop } from 'es-toolkit';
+import { AdminConfigManager } from '~core/config';
 import { getAdminCoreApiUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config';
 import { setAdminCoreConfig } from './shared/helpers/admin-core-config';
 import { loadTranslations } from './shared/translations/i18n';
@@ -7,7 +8,9 @@ export async function initAppLoader() {
 	try {
 		// Set admin-core config with dummy navigate function during SSR
 		// The config will be set again in the client after hydration
-		setAdminCoreConfig(noop);
+		if (!AdminConfigManager.isConfigSet()) {
+			setAdminCoreConfig(noop);
+		}
 
 		await Promise.all([
 			// Fetch login state
