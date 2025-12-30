@@ -76,12 +76,14 @@ export interface ContentPageLabel {
 interface ContentPageBase {
 	id: number | string;
 	thumbnailPath: string | null;
+	seo_image_path: string | null;
 	title: string;
 	language: Locale;
 	nlParentPageId: string | number | null; // number is still used by avo, but we want to switch to uuids at some point
 	// biome-ignore lint/suspicious/noExplicitAny: todo
 	description_state?: any | undefined; // Only used during interaction with rich text editor
 	description: string | null;
+	seoTitle: string | null;
 	seoDescription: string | null;
 	metaDescription: string | null;
 	path: string | null;
