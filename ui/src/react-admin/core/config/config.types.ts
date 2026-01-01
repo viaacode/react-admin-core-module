@@ -52,7 +52,7 @@ export interface LinkInfo {
 	target?: LinkTarget;
 }
 
-export type NavigateFunction = (to: string, options?: { replace?: boolean }) => void;
+export type NavigateFunction = (to: string, options?: { replace?: boolean }) => Promise<void>;
 
 export interface AdminConfig {
 	// Core module configurations

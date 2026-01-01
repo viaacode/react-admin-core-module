@@ -14,5 +14,7 @@ export const useGetTableColumnPreference = (columnKey: string) => {
 			const formattedColumnKeys = getColumnKey(columnKey);
 			return TableColumnPreferenceService.fetchTableColumnPreference(formattedColumnKeys);
 		},
+		refetchOnMount: false,
+		refetchOnWindowFocus: false,
 	});
 };

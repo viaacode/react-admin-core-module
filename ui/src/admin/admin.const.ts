@@ -1,5 +1,5 @@
 import { PermissionName } from '@viaa/avo2-types';
-import { noop } from 'es-toolkit';
+import { asyncNoop } from 'es-toolkit';
 import { AdminConfigManager, ToastType } from '~core/config';
 import { ContentPageService } from '~modules/content-page/services/content-page.service.ts';
 import { CustomError } from '~shared/helpers/custom-error.ts';
@@ -100,7 +100,7 @@ async function getContentPageDetailRouteByPath(
 				page,
 			});
 		}
-		return buildLink(getAdminCoreConfig(noop).routes.ADMIN_CONTENT_PAGE_DETAIL, {
+		return buildLink(getAdminCoreConfig(asyncNoop).routes.ADMIN_CONTENT_PAGE_DETAIL, {
 			id: page.id,
 		});
 	} catch (err) {

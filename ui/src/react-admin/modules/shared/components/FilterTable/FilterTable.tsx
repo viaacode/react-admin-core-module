@@ -26,6 +26,7 @@ import React, {
 	type ReactNode,
 	useCallback,
 	useEffect,
+	useMemo,
 	useState,
 } from 'react';
 import { isAvo } from '~modules/shared/helpers/is-avo';
@@ -38,13 +39,10 @@ import { KeyCode } from '../../consts/keycode';
 import { eduOrgToClientOrg } from '../../helpers/edu-org-string-to-client-org';
 import './FilterTable.scss';
 import type { AvoSearchOrderDirection } from '@viaa/avo2-types';
-import { isEmpty } from 'es-toolkit/compat';
-import { AdminConfigManager } from '~core/config';
 import { ErrorView } from '~shared/components/error/ErrorView';
 import { GET_FILTER_TABLE_QUERY_PARAM_CONFIG } from '~shared/components/FilterTable/FilterTable.const';
 import { GET_DEFAULT_PAGINATION_BAR_PROPS } from '~shared/components/PaginationBar/PaginationBar.consts';
 import { navigateFunc } from '~shared/helpers/navigate-fnc';
-import { navigate } from '~shared/helpers/routing/link';
 import { toggleSortOrder } from '~shared/helpers/toggle-sort-order';
 import { useGetTableColumnPreference } from '~shared/hooks/useGetTableColumnPreference';
 import { useUpdateTableColumnPreference } from '~shared/hooks/useUpdateTableColumnPreference';
@@ -153,7 +151,27 @@ export const FilterTable: FunctionComponent<FilterTableProps> = ({
 	const [searchTerm, setSearchTerm] = useState<string>('');
 	const [selectedBulkAction, setSelectedBulkAction] = useState<string | null>(null);
 	const [confirmBulkActionModalOpen, setConfirmBulkActionModalOpen] = useState<boolean>(false);
-	const queryParamsConfig = GET_FILTER_TABLE_QUERY_PARAM_CONFIG(columns);
+	const queryParamsConfig = useMemo(() => GET_FILTER_TABLE_QUERY_PARAM_CONFIG(columns), [columns]);
+
+	// Fetch column preferences from the database for this route and user
+	const { data: preferredColumns, isLoading: isLoadingColumnPreferences } =
+		useGetTableColumnPreference(location.pathname);
+	const { mutateAsync: setPreferredColumns } = useUpdateTableColumnPreference(location.pathname);
+
+	/**
+	 * Sort column ids according to the default order in the column config array of the filterTable
+	 * @param columnIds
+	 */
+	const sortColumns = useCallback(
+		(columnIds: string[]) => {
+			// Order the selected columns from the modal according to the default order in the column const array
+			// This way, when a user selects columns, they will be in the default order
+			// But if an array is set by modifying the query params, then the order from the query params will be kept
+			return columns.filter((column) => columnIds.includes(column.id)).map((column) => column.id);
+		},
+		[columns]
+	);
+
 	// biome-ignore lint/suspicious/noExplicitAny: many possible options to list here
 	const getTableState = useCallback((): Record<string, any> => {
 		// biome-ignore lint/suspicious/noExplicitAny: many possible options to list here
@@ -166,11 +184,14 @@ export const FilterTable: FunctionComponent<FilterTableProps> = ({
 				tableState[queryParamKey] = queryParamValue;
 			}
 		}
+		if (!tableState.columns && preferredColumns && preferredColumns.length > 0) {
+			tableState.columns = sortColumns(preferredColumns);
+		}
 		return tableState;
-	}, [queryParamsConfig]);
+	}, [queryParamsConfig, preferredColumns, sortColumns]);
 	const setTableState = useCallback(
 		// biome-ignore lint/suspicious/noExplicitAny: many possible options to list here
-		(newTableState: Record<string, any>) => {
+		async (newTableState: Record<string, any>) => {
 			const url = new URL(window.location.href);
 			for (const queryParamKey in queryParamsConfig) {
 				const queryParamValue = newTableState[queryParamKey];
@@ -181,38 +202,31 @@ export const FilterTable: FunctionComponent<FilterTableProps> = ({
 					url.searchParams.set(queryParamKey, queryParamValueEncoded || '');
 				}
 			}
-			navigateFunc(url, { replace: true });
+			if (window.location.href === url.href) {
+				// If the url wouldn't change, don't update it to prevent an infinite loop
+				return;
+			}
+			console.log('BEFORE navigate:', window.location.search, url);
+			await navigateFunc(url, { replace: true });
+			queueMicrotask(() => console.log('AFTER navigate:', window.location.search));
 			onTableStateChanged(newTableState);
 		},
 		[queryParamsConfig, onTableStateChanged]
 	);
 
-	const {
-		data: preferredColumns,
-		isLoading: isLoadingColumnPreferences,
-		refetch: reloadPreferredColumns,
-	} = useGetTableColumnPreference(location.pathname);
-	const { mutateAsync: setPreferredColumns } = useUpdateTableColumnPreference(location.pathname);
-
 	const handleTableStateChanged = useCallback(
 		// biome-ignore lint/suspicious/noExplicitAny: TODO fix
 		(value: any, id: string) => {
 			// biome-ignore lint/suspicious/noExplicitAny: todo
-			const oldTableState: any = getTableState();
-			// biome-ignore lint/suspicious/noExplicitAny: todo
 			const newTableState: any = cleanupFilterTableState({
-				...oldTableState,
 				[id]: value,
 				...(id !== 'page' ? { page: 0 } : {}), // Reset the page to 0, when any filter or sort order change is made
 			});
 
 			console.log('setting new table state for filter table: ', newTableState);
-			if (isEqual(oldTableState, newTableState)) {
-				return;
-			}
 			setTableState(newTableState);
 		},
-		[setTableState, getTableState]
+		[setTableState]
 	);
 
 	const handleSortOrderChanged = (columnId: string) => {
@@ -286,21 +300,11 @@ export const FilterTable: FunctionComponent<FilterTableProps> = ({
 		return columns.filter((column) => column.visibleByDefault);
 	};
 
-	const updateSelectedColumns = (selectedColumns: string[]) => {
-		// Order the selected columns from the modal according to the default order in the column const array
-		// This way, when a user selects columns, they will be in the default order
-		// But if an array is set by modifying the query params, then the order from the query params will be kept
-		setPreferredColumns(
-			columns.filter((column) => selectedColumns.includes(column.id)).map((column) => column.id)
-		).then(() => reloadPreferredColumns());
+	const updateSelectedColumns = async (selectedColumns: string[]) => {
+		const orderedSelectedColumns = sortColumns(selectedColumns);
+		handleTableStateChanged(orderedSelectedColumns, 'columns');
+		await setPreferredColumns(orderedSelectedColumns);
 	};
-
-	useEffect(() => {
-		const tableState = getTableState();
-		if (!isEqual(preferredColumns || [], tableState.columns || [])) {
-			handleTableStateChanged(preferredColumns, 'columns');
-		}
-	}, [handleTableStateChanged, preferredColumns, getTableState]);
 
 	const renderFilters = () => {
 		const tableState = getTableState();

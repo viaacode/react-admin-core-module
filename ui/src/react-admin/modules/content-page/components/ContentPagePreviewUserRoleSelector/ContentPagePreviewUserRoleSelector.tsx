@@ -38,10 +38,10 @@ export const ContentPagePreviewUserRoleSelector: FunctionComponent<
 		() => new URLSearchParams(location.search).get('userGroupId'),
 		[]
 	);
-	const setUserGroupId = useCallback((id: string) => {
+	const setUserGroupId = useCallback(async (id: string) => {
 		const url = new URL(window.location.href);
 		url.searchParams.set('userGroupId', id);
-		navigateFunc(url, { replace: true });
+		await navigateFunc(url, { replace: true });
 	}, []);
 
 	// biome-ignore lint/correctness/useExhaustiveDependencies: Only run this once

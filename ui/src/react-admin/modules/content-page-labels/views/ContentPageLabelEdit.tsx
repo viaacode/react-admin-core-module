@@ -112,9 +112,9 @@ export const ContentPageLabelEdit: FunctionComponent<ContentPageLabelEditProps> 
 		}
 	}, [contentPageLabelInfo]);
 
-	const navigateBack = () => {
+	const navigateBack = async () => {
 		if (isCreatePage) {
-			navigateFunc(AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_LABEL_OVERVIEW'));
+			await navigateFunc(AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_LABEL_OVERVIEW'));
 		} else {
 			navigate(AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_LABEL_DETAIL'), {
 				id: contentPageLabelId,
@@ -187,7 +187,7 @@ export const ContentPageLabelEdit: FunctionComponent<ContentPageLabelEditProps> 
 				),
 				type: ToastType.SUCCESS,
 			});
-			navigateFunc(
+			await navigateFunc(
 				buildLink(AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_LABEL_DETAIL'), {
 					id: contentPageLabel.id,
 				})

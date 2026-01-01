@@ -1,10 +1,11 @@
 import { AdminConfigManager } from '~core/config';
 
-export function navigateFunc(to: string | URL, options?: { replace?: boolean }) {
+export async function navigateFunc(to: string | URL, options?: { replace?: boolean }) {
 	const navigateFunc = AdminConfigManager.getConfig().services.router.navigateFunc;
 	if (typeof to === 'string') {
-		navigateFunc(to, options);
+		await navigateFunc(to, options);
 	} else {
-		navigateFunc(`${to.pathname}?${to.searchParams.toString()}`, options);
+		const newUrl = `${to.pathname}?${to.searchParams.toString()}`;
+		await navigateFunc(newUrl, options);
 	}
 }

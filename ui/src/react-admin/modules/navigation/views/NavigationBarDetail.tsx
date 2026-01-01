@@ -374,8 +374,8 @@ export const NavigationBarDetail: FC<NavigationDetailProps> = ({ navigationBarId
 					<ButtonToolbar>
 						<Button
 							label={tText('admin/menu/views/menu-detail___annuleer')}
-							onClick={() =>
-								navigateFunc(AdminConfigManager.getAdminRoute('ADMIN_NAVIGATION_OVERVIEW'))
+							onClick={async () =>
+								await navigateFunc(AdminConfigManager.getAdminRoute('ADMIN_NAVIGATION_OVERVIEW'))
 							}
 							type="tertiary"
 						/>

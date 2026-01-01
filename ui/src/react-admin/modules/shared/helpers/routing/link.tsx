@@ -46,7 +46,7 @@ export const buildLink = (
 	return search ? `${builtLink}?${isString(search) ? search : stringify(search)}` : builtLink;
 };
 
-export const navigate = (
+export const navigate = async (
 	route: string,
 	params: RouteParams = {},
 	search?: string | { [paramName: string]: string }
@@ -82,11 +82,14 @@ export const navigate = (
 		return;
 	}
 
-	navigateFunc(builtLink);
+	await navigateFunc(builtLink);
 };
 
 // TODO see if we can replace this method completely by the new SmartLink component
-export function navigateToAbsoluteOrRelativeUrl(url: string, target: LinkTarget = LinkTarget.Self) {
+export async function navigateToAbsoluteOrRelativeUrl(
+	url: string,
+	target: LinkTarget = LinkTarget.Self
+) {
 	let fullUrl = url;
 	if (url.startsWith('www.')) {
 		fullUrl = `//${url}`;
@@ -98,7 +101,7 @@ export function navigateToAbsoluteOrRelativeUrl(url: string, target: LinkTarget 
 				window.location.href = fullUrl;
 			} else {
 				// relative url
-				navigateFunc(fullUrl);
+				await navigateFunc(fullUrl);
 			}
 			break;
 		default:

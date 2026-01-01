@@ -108,10 +108,10 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 			(GET_CONTENT_PAGE_DETAIL_TABS()[0].id as string),
 		[]
 	);
-	const setCurrentTab = (tabId: string) => {
+	const setCurrentTab = async (tabId: string) => {
 		const url = new URL(window.location.href);
 		url.searchParams.set(CONTENT_PAGE_EDIT_TAB_QUERY_PARAM, tabId);
-		navigateFunc(url, { replace: true });
+		await navigateFunc(url, { replace: true });
 	};
 	const getTabs = () =>
 		GET_CONTENT_PAGE_DETAIL_TABS().map((tab: TabProps) => ({
@@ -651,9 +651,9 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 		return !blockHasErrors(errors);
 	};
 
-	const navigateBack = () => {
+	const navigateBack = async () => {
 		if (pageType === PageType.Create) {
-			navigateFunc(AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_OVERVIEW'));
+			await navigateFunc(AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_OVERVIEW'));
 		} else {
 			navigate(AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_DETAIL'), {
 				id,

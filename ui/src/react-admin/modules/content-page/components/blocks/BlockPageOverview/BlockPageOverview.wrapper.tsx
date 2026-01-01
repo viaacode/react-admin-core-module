@@ -64,7 +64,7 @@ export const BlockPageOverviewWrapper: FunctionComponent<PageOverviewWrapperProp
 			url.searchParams.delete(name);
 		}
 	};
-	const setQueryParams = (newParams: { page?: number; item?: string; label?: string[] }) => {
+	const setQueryParams = async (newParams: { page?: number; item?: string; label?: string[] }) => {
 		const url = new URL(window.location.href);
 		if (Object.keys(newParams).includes('page')) {
 			setQueryParam(url, 'page', NumberParam.encode(newParams.page) as string);
@@ -75,7 +75,7 @@ export const BlockPageOverviewWrapper: FunctionComponent<PageOverviewWrapperProp
 		if (newParams.label) {
 			setQueryParam(url, 'label', CheckboxListParam.encode(newParams.label) as string);
 		}
-		navigateFunc(url, { replace: true });
+		await navigateFunc(url, { replace: true });
 	};
 
 	const debouncedItemsPerPage = useDebounce(itemsPerPage || 1000, 200); // Default to 1000 if itemsPerPage is zero

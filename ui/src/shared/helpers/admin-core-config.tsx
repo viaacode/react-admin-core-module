@@ -3,10 +3,9 @@ import type { AvoCoreDatabaseType, AvoEducationOrganizationOrganization } from '
 import { capitalize, lowerCase } from 'es-toolkit';
 import type { TOptions } from 'i18next';
 import type { FunctionComponent, ReactNode } from 'react';
-import type { NavigateFunction } from 'react-router';
 import { Link } from 'react-router-dom';
 import { AdminConfigManager } from '~core/config/config.class';
-import type { AdminConfig, LinkInfo, ToastInfo } from '~core/config/config.types';
+import type { AdminConfig, LinkInfo, NavigateFunction, ToastInfo } from '~core/config/config.types';
 import { ContentBlockType } from '~modules/content-page/types/content-block.types';
 import {
 	type ContentPageInfo,

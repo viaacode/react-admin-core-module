@@ -89,10 +89,10 @@ export const ContentPageDetail: FC<ContentPageDetailProps> = ({
 			(GET_CONTENT_PAGE_DETAIL_TABS()[0].id as string),
 		[]
 	);
-	const setCurrentTab = useCallback((tabId: string) => {
+	const setCurrentTab = useCallback(async (tabId: string) => {
 		const url = new URL(window.location.href);
 		url.searchParams.set(CONTENT_PAGE_DETAIL_TAB_QUERY_PARAM, tabId);
-		navigateFunc(url, { replace: true });
+		await navigateFunc(url, { replace: true });
 	}, []);
 	const getTabs = () =>
 		GET_CONTENT_PAGE_DETAIL_TABS().map((tab: TabProps) => ({
@@ -177,7 +177,7 @@ export const ContentPageDetail: FC<ContentPageDetailProps> = ({
 		try {
 			await softDeleteContentPage(id);
 
-			navigateFunc(AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_OVERVIEW'));
+			await navigateFunc(AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_OVERVIEW'));
 			showToast({
 				title: tText('modules/content-page/views/content-page-detail___success'),
 				description: tText(
@@ -342,7 +342,7 @@ export const ContentPageDetail: FC<ContentPageDetailProps> = ({
 				return;
 			}
 
-			navigateFunc(
+			await navigateFunc(
 				buildLink(AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_DETAIL'), {
 					id: duplicateContentPage.id,
 				})

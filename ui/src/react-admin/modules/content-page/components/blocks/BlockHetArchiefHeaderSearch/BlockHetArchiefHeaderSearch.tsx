@@ -41,17 +41,17 @@ export const BlockHetArchiefHeaderSearch: FunctionComponent<BlockHetArchiefHeade
 		};
 	}, [subtitles.length]);
 
-	const navigateToSearchPage = () => {
+	const navigateToSearchPage = async () => {
 		const url = stringifyUrl({
 			url: AdminConfigManager.getConfig().routes.SEARCH || '/zoeken',
 			query: searchTerm ? { zoekterm: searchTerm } : {},
 		});
-		navigateFunc(url);
+		await navigateFunc(url);
 	};
 
-	const handleKeyUp = (e: KeyboardEvent<HTMLInputElement>) => {
+	const handleKeyUp = async (e: KeyboardEvent<HTMLInputElement>) => {
 		if (e.keyCode === KeyCode.Enter) {
-			navigateToSearchPage();
+			await navigateToSearchPage();
 		}
 	};
 

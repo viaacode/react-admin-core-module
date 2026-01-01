@@ -389,8 +389,8 @@ export const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> 
 					label={tText(
 						'admin/content-page-labels/views/content-page-label-overview___content-pagina-label-toevoegen'
 					)}
-					onClick={() =>
-						navigateFunc(AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_LABEL_CREATE'))
+					onClick={async () =>
+						await navigateFunc(AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_LABEL_CREATE'))
 					}
 					variants={['primary']}
 				/>

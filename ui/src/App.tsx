@@ -1,4 +1,4 @@
-import { noop } from 'es-toolkit';
+import { asyncNoop } from 'es-toolkit';
 import React, { useEffect, useState } from 'react';
 import { Outlet, useNavigate } from 'react-router';
 import { Link } from '~shared/components/Link';
@@ -6,6 +6,7 @@ import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner';
 import { getAdminCoreConfig, setAdminCoreConfig } from './shared/helpers/admin-core-config';
 import './react-admin/modules/shared/styles/main.scss';
 import './App.scss';
+import type { NavigateFunction } from '~core/config';
 
 function App() {
 	const [isAdminCoreConfigLoaded, setIsAdminCoreConfigLoaded] = useState(false);
@@ -15,7 +16,7 @@ function App() {
 	 * Set admin core config
 	 */
 	useEffect(() => {
-		setAdminCoreConfig(navigateFunc);
+		setAdminCoreConfig(navigateFunc as NavigateFunction);
 		setIsAdminCoreConfigLoaded(true);
 	}, [navigateFunc]);
 
@@ -26,7 +27,7 @@ function App() {
 		return (
 			<div className="admin-app__navbar">
 				<h1>Navigation bar</h1>
-				<Link to={getAdminCoreConfig(noop).routes.ADMIN_DASHBOARD}>beheer</Link>
+				<Link to={getAdminCoreConfig(asyncNoop).routes.ADMIN_DASHBOARD}>beheer</Link>
 			</div>
 		);
 	};

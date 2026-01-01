@@ -87,8 +87,8 @@ export const ContentPageLabelDetail: FunctionComponent<ContentPageLabelDetailPro
 		}
 	}, [contentPageLabelInfo]);
 
-	const handleEditClick = () => {
-		navigateFunc(
+	const handleEditClick = async () => {
+		await navigateFunc(
 			buildLink(AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_LABEL_EDIT'), {
 				id: contentPageLabelId,
 			})
