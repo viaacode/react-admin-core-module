@@ -338,7 +338,12 @@ export class ContentPageService {
 			}
 			return dbContentPage;
 		} catch (err) {
-			throw new CustomError('Failed to get content page by language and path', err);
+			throw new CustomError('Failed to get content page by language and path', err, {
+				language,
+				path,
+				onlyInfo,
+				baseUrl: ContentPageService.getBaseUrl(),
+			});
 		}
 	}
 

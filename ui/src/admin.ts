@@ -1,2 +1,2 @@
 export * from './react-admin';
-import './styles.scss';
+import './admin-core-demo-app-styles.scss';
