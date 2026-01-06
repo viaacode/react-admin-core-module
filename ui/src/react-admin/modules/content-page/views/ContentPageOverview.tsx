@@ -9,15 +9,16 @@ import {
 	Spacer,
 	TagList,
 } from '@viaa/avo2-components';
-import { AvoSearchOrderDirection, type AvoUserCommonUser, PermissionName } from '@viaa/avo2-types';
+import { AvoSearchOrderDirection, PermissionName } from '@viaa/avo2-types';
 import clsx from 'clsx';
 import { cloneDeep, compact, isEqual, partition } from 'es-toolkit';
 import { get, set } from 'es-toolkit/compat';
-import type { FunctionComponent, ReactNode } from 'react';
+import type { FC, ReactNode } from 'react';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import type { LabelObj } from '~content-blocks/BlockPageOverview/BlockPageOverview.types';
 
 import { AdminConfigManager } from '~core/config/config.class';
+import { getCommonUser } from '~core/config/config.selectors.ts';
 import { ToastType } from '~core/config/config.types';
 import { isPublic } from '~modules/content-page/helpers/get-published-state';
 import { useGetContentPages } from '~modules/content-page/hooks/get-content-pages';
@@ -30,6 +31,7 @@ import type { UserGroupWithPermissions } from '~modules/user-group/types/user-gr
 import type { CheckboxOption } from '~shared/components/CheckboxDropdownModal/CheckboxDropdownModal';
 import ConfirmModal from '~shared/components/ConfirmModal/ConfirmModal';
 import { ErrorView } from '~shared/components/error/ErrorView';
+import type { FilterableColumn } from '~shared/components/FilterTable/FilterTable';
 import { Icon } from '~shared/components/Icon/Icon';
 import { Link } from '~shared/components/Link/Link';
 import type { LoadingInfo } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
@@ -48,9 +50,6 @@ import { buildLink, navigateToAbsoluteOrRelativeUrl } from '~shared/helpers/rout
 import { setSelectedCheckboxes } from '~shared/helpers/set-selected-checkboxes';
 import { showToast } from '~shared/helpers/show-toast';
 import { tHtml, tText } from '~shared/helpers/translation-functions';
-
-import './ContentPageOverview.scss';
-import type { FilterableColumn } from '~shared/components/FilterTable/FilterTable';
 import { truncateTableValue } from '~shared/helpers/truncate';
 import { PermissionService } from '~shared/services/permission-service';
 import { SpecialUserGroups } from '~shared/types/authentication.types';
@@ -64,18 +63,14 @@ import type {
 	ContentTableState,
 } from '../types/content-pages.types';
 import { NOT_TRANSLATION_PREFIX } from '../types/content-pages.types';
+import './ContentPageOverview.scss';
 
 const { EDIT_ANY_CONTENT_PAGES, DELETE_ANY_CONTENT_PAGES, EDIT_PROTECTED_PAGE_STATUS } =
 	PermissionName;
 
-interface ContentPageOverviewProps {
-	commonUser?: AvoUserCommonUser;
-}
-
-export const ContentPageOverview: FunctionComponent<ContentPageOverviewProps> = ({
-	commonUser,
-}) => {
+export const ContentPageOverview: FC = () => {
 	// Hooks
+	const commonUser = getCommonUser();
 	const [contentToDelete, setContentToDelete] = useState<ContentPageInfo | null>(null);
 	const [isConfirmModalOpen, setIsConfirmModalOpen] = useState<boolean>(false);
 	const [isNotAdminModalOpen, setIsNotAdminModalOpen] = useState<boolean>(false);

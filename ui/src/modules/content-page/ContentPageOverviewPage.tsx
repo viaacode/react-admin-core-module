@@ -1,10 +1,9 @@
 import { Button, Flex } from '@viaa/avo2-components';
-import type { AvoUserCommonUser } from '@viaa/avo2-types';
 import type { FC } from 'react';
 import { AdminConfigManager } from '~core/config/config.class';
 import { ContentPageOverview } from '~modules/content-page/views/ContentPageOverview';
 
-export const ContentPageOverviewPage: FC<{ commonUser?: AvoUserCommonUser }> = ({ commonUser }) => {
+export const ContentPageOverviewPage: FC = () => {
 	return (
 		<>
 			<Flex>
@@ -13,7 +12,7 @@ export const ContentPageOverviewPage: FC<{ commonUser?: AvoUserCommonUser }> = (
 					<Button type="primary">Nieuwe pagina</Button>
 				</a>
 			</Flex>
-			<ContentPageOverview commonUser={commonUser} />
+			<ContentPageOverview />
 		</>
 	);
 };
