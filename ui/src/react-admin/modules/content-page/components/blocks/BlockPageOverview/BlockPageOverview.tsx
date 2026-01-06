@@ -69,7 +69,6 @@ export interface BlockPageOverviewProps extends DefaultProps {
 	onFocusedPageChanged: (newFocusedPage: ContentPageInfo | null) => void;
 	getLabelLink?: (label: string) => string | null;
 	renderLink?: RenderLinkFunction;
-	commonUser?: AvoUserCommonUser;
 	isLoadingLabelObjs: boolean;
 	isLoadingSelectedTabObjects: boolean;
 	isLoadingFocusedPage: boolean;
@@ -104,7 +103,6 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 	onFocusedPageChanged,
 	getLabelLink,
 	renderLink = defaultRenderLinkFunction,
-	commonUser,
 	isLoadingPagesAndLabels,
 }) => {
 	const allLabelObj = { label: allLabel, id: -2 };
@@ -351,7 +349,6 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 							>
 								<ContentPageRenderer
 									contentPageInfo={page}
-									commonUser={commonUser}
 									renderNoAccessError={() => (
 										<ErrorView
 											icon={IconName.clock}
@@ -411,7 +408,6 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 											>
 												<ContentPageRenderer
 													contentPageInfo={page}
-													commonUser={commonUser}
 													renderNoAccessError={() => (
 														<ErrorView
 															icon={IconName.clock}

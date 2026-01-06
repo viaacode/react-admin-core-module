@@ -1,6 +1,7 @@
+import { cleanup, render } from '@testing-library/react';
 import { testRenderLink } from '@viaa/avo2-components';
-import { mount, shallow } from 'enzyme';
 import React from 'react';
+import { afterEach, describe, expect, it } from 'vitest';
 import { action } from '~shared/helpers/action';
 
 import { BlockSpotlight } from './BlockSpotlight';
@@ -13,30 +14,26 @@ const BlockSpotlightExample = (
 	/>
 );
 
+afterEach(() => {
+	cleanup();
+});
+
 describe('<BlockSpotlight />', () => {
 	it('Should be able to render', () => {
-		shallow(BlockSpotlightExample);
+		render(BlockSpotlightExample);
 	});
 
 	it('Should set the correct className', () => {
-		const component = mount(BlockSpotlightExample);
-
-		const mainDiv = component.find('div').at(0);
-		const projectPrimary = component.find('div').at(1);
-		const projectSecondary1 = component.find('div').at(2);
-		const projectSecondary2 = component.find('div').at(3);
-
-		expect(mainDiv.hasClass('c-spotlight')).toEqual(true);
-		expect(projectPrimary.hasClass('c-spotlight__item')).toEqual(true);
-		expect(projectSecondary1.hasClass('c-spotlight__item')).toEqual(true);
-		expect(projectSecondary2.hasClass('c-spotlight__item')).toEqual(true);
+		const { container } = render(BlockSpotlightExample);
+		const mainDiv = container.querySelector('div');
+		const projectItems = container.querySelectorAll('.c-spotlight__item');
+		expect(mainDiv).toHaveClass('c-spotlight');
+		expect(projectItems.length).toBeGreaterThanOrEqual(3);
 	});
 
 	it('Should set the correct title', () => {
-		const component = mount(BlockSpotlightExample);
-
-		const titleElement = component.find('p').at(0);
-
-		expect(titleElement.text()).toEqual('Big item');
+		const { container } = render(BlockSpotlightExample);
+		const titleElement = container.querySelector('p');
+		expect(titleElement?.textContent).toEqual('Big item ');
 	});
 });

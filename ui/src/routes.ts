@@ -21,12 +21,12 @@ import { UserDetailPage } from './modules/user/UserDetailPage';
 import { UserEditPage } from './modules/user/UserEditPage.tsx';
 import { UserOverviewPage } from './modules/user/UserOverviewPage';
 import { UserGroupOverview } from './react-admin';
-import { initAppLoader } from './routes.loaders';
+import { fetchContentPageLoader, initAppLoader, passUrlLoader } from './routes.loaders';
 import { ErrorBoundary } from './shared/components/ErrorBoundary/ErrorBoundary';
 import { getAdminCoreConfig } from './shared/helpers/admin-core-config';
 
 async function logRoutesMiddleware({ request }: Parameters<MiddlewareFunction>[0]) {
-	console.log(`${request.method} ${request.url}`);
+	console.info(`${request.method} ${request.url}`);
 }
 
 const APP_ROUTES: RouteObject[] = [
@@ -57,6 +57,7 @@ const APP_ROUTES: RouteObject[] = [
 			{
 				id: 'homepage',
 				path: `/`,
+				loader: fetchContentPageLoader,
 				Component: ContentPagePreviewPage,
 			},
 			////////////////////////////////////////////////////////////////////////////////////////
@@ -66,6 +67,7 @@ const APP_ROUTES: RouteObject[] = [
 			{
 				id: 'content-page-preview-path',
 				path: '*',
+				loader: fetchContentPageLoader,
 				Component: ContentPagePreviewPage,
 			},
 		],
@@ -93,6 +95,7 @@ function getAdminRoutes(): RouteObject[] {
 			id: 'ContentPageEditPage-create',
 			Component: ContentPageEditPage,
 			path: getAdminCoreConfig(asyncNoop).routes.ADMIN_CONTENT_PAGE_CREATE,
+			loader: passUrlLoader,
 			ErrorBoundary: () => ErrorBoundary('ContentPageEditPage-create--route'),
 			hasErrorBoundary: true,
 		},
@@ -100,6 +103,7 @@ function getAdminRoutes(): RouteObject[] {
 			id: 'ContentPageEditPage-edit',
 			Component: ContentPageEditPage,
 			path: getAdminCoreConfig(asyncNoop).routes.ADMIN_CONTENT_PAGE_EDIT,
+			loader: passUrlLoader,
 			ErrorBoundary: () => ErrorBoundary('ContentPageEditPage-edit--route'),
 			hasErrorBoundary: true,
 		},

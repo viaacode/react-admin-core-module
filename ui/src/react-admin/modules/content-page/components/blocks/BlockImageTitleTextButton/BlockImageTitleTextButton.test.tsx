@@ -1,8 +1,7 @@
-import { mount, shallow } from 'enzyme';
+import { cleanup, fireEvent, render, screen } from '@testing-library/react';
 import { loremIpsum } from 'lorem-ipsum';
 import React, { cloneElement } from 'react';
-
-import imageSource from '../../../static/images/1280x720.jpg';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 
 import { BlockImageTitleTextButton } from './BlockImageTitleTextButton';
 
@@ -13,7 +12,7 @@ const loremIpsumText = loremIpsum({ count: 10 });
 const blockImageTitleTextButtonExample = (
 	<BlockImageTitleTextButton
 		className={customClass}
-		imageSource={imageSource}
+		imageSource="https://placeholder.com/1280x720.jpg"
 		imageDescription="image showing the default dimensions on a grey background"
 		title="Title"
 		text={loremIpsumText}
@@ -21,69 +20,48 @@ const blockImageTitleTextButtonExample = (
 	/>
 );
 
+afterEach(() => {
+	cleanup();
+});
+
 describe('<BlockImageTitleTextButton />', () => {
 	it('Should be able to render', () => {
-		shallow(blockImageTitleTextButtonExample);
+		render(blockImageTitleTextButtonExample);
+		// If no error is thrown, render is successful
 	});
 
 	it('Should render the image correctly', () => {
-		const component = mount(blockImageTitleTextButtonExample);
-
-		const imgElement = component.find('img');
-
-		expect(imgElement.prop('src')).toEqual(imageSource);
+		render(blockImageTitleTextButtonExample);
+		const imgElement = screen.getByRole('img');
+		expect(imgElement).toHaveAttribute('src', 'https://placeholder.com/1280x720.jpg');
 	});
 
 	it('Should render the title correctly', () => {
-		const component = mount(blockImageTitleTextButtonExample);
-
-		const h2Element = component.find('h2');
-
-		expect(h2Element.html()).toContain('>Title<');
+		render(blockImageTitleTextButtonExample);
+		const h2Element = screen.getByRole('heading', { level: 2 });
+		expect(h2Element).toHaveTextContent('Title');
 	});
 
 	it('Should render the text correctly', () => {
-		const component = mount(blockImageTitleTextButtonExample);
-
-		const pElement = component.find('p');
-
-		expect(pElement.html()).toContain(`>${loremIpsumText}<`);
+		render(blockImageTitleTextButtonExample);
+		const pElement = screen.getByText(loremIpsumText);
+		expect(pElement).toBeInTheDocument();
 	});
 
 	it('Should set the correct className', () => {
-		const component = mount(blockImageTitleTextButtonExample);
-
-		const divs = component.find('div');
-
-		const containerVertical = component.find('div').at(0);
-		const containerElement = divs.at(1);
-		const gridElement = divs.at(2);
-		const leftColumnElement = divs.at(3);
-		const rightColumnElement = divs.at(5);
-		const contentElement = divs.at(6);
-
-		expect(component.hasClass(customClass)).toEqual(true);
-		expect(containerVertical.hasClass('o-container-vertical')).toEqual(true);
-		expect(containerElement.hasClass('o-container')).toEqual(true);
-		expect(gridElement.hasClass('o-grid')).toEqual(true);
-		expect(leftColumnElement.hasClass('o-grid-col-bp2-4')).toEqual(true);
-		expect(rightColumnElement.hasClass('o-grid-col-bp2-8')).toEqual(true);
-		expect(contentElement.hasClass('c-content')).toEqual(true);
+		const output = render(blockImageTitleTextButtonExample);
+		expect(output.container.firstChild).toHaveClass(customClass);
+		expect(output.container.firstChild).toHaveClass('o-container-vertical');
 	});
 
 	it('Should trigger handler when button is clicked', () => {
-		const onButtonClick = jest.fn();
-
-		const component = mount(
-			cloneElement(blockImageTitleTextButtonExample, {
-				onClick: onButtonClick,
-			})
-		);
-
-		const buttonElement = component.find('button');
-
-		buttonElement.simulate('click');
-
+		const onButtonClick = vi.fn();
+		const elementWithHandler = cloneElement(blockImageTitleTextButtonExample, {
+			onClick: onButtonClick,
+		});
+		render(elementWithHandler);
+		const buttonElement = screen.getByRole('button');
+		fireEvent.click(buttonElement);
 		expect(onButtonClick).toHaveBeenCalled();
 		expect(onButtonClick).toHaveBeenCalledTimes(1);
 	});

@@ -47,7 +47,6 @@ export const BlockPageOverviewWrapper: FunctionComponent<PageOverviewWrapperProp
 	sortOrder = 'published_at__desc',
 	headerBackgroundColor,
 	renderLink,
-	commonUser,
 }) => {
 	const getQueryParams = useCallback(() => {
 		const queryParams = new URLSearchParams(location.search);
@@ -264,7 +263,6 @@ export const BlockPageOverviewWrapper: FunctionComponent<PageOverviewWrapperProp
 					return `${newsLink}?label=${encodeURIComponent(label)}`;
 				}}
 				renderLink={renderLink}
-				commonUser={commonUser}
 				isLoadingLabelObjs={isLoadingLabelObjs}
 				isLoadingSelectedTabObjects={isLoadingSelectedTabObjects}
 				isLoadingFocusedPage={isLoadingFocusedPage}

@@ -331,7 +331,7 @@ async function combineTranslations(
 	// Console log translations that were found in the json file but not in the code
 	if (removedTranslationKeys.length > 0) {
 		console.warn('The following translation keys were removed:');
-		console.log(`\t${removedTranslationKeys.map((key) => key.trim()).join('\n\t')}`);
+		console.info(`\t${removedTranslationKeys.map((key) => key.trim()).join('\n\t')}`);
 	}
 
 	// Combine the translations in the json with the freshly extracted translations from the code

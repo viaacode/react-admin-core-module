@@ -1,6 +1,7 @@
-import { mount, shallow } from 'enzyme';
+import { cleanup, render } from '@testing-library/react';
 import { loremIpsum } from 'lorem-ipsum';
 import React from 'react';
+import { afterEach, describe, expect, it } from 'vitest';
 
 import { BlockAvoHero } from './BlockAvoHero';
 
@@ -18,13 +19,17 @@ const BlockAvoHeroExample = (
 	/>
 );
 
+afterEach(() => {
+	cleanup();
+});
+
 describe('<BlockAvoHero />', () => {
 	it('Should be able to render', () => {
-		shallow(BlockAvoHeroExample);
+		render(BlockAvoHeroExample);
 	});
 
 	it('Should set the correct className', () => {
-		const component = mount(BlockAvoHeroExample);
-		expect(component.hasClass(customClass)).toEqual(true);
+		const output = render(BlockAvoHeroExample);
+		expect(output.container.firstChild).toHaveClass(customClass);
 	});
 });

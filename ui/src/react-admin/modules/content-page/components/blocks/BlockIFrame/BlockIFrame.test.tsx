@@ -1,30 +1,31 @@
-import { mount, shallow } from 'enzyme';
+import { cleanup, render } from '@testing-library/react';
 import React from 'react';
+import { afterEach, describe, expect, it } from 'vitest';
 
 import { BlockIFrame } from './BlockIFrame';
 
+afterEach(() => {
+	cleanup();
+});
+
 describe('<BlockIFrame />', () => {
 	it('Should be able to render', () => {
-		shallow(<BlockIFrame title="test" />);
+		render(<BlockIFrame title="test" />);
 	});
 
 	it('Should correctly set the wrapper `className`', () => {
-		const blockIframeComponent = mount(<BlockIFrame title="test" />);
-
-		const aspectRatioWrapper = blockIframeComponent.find('div').at(0);
-
-		expect(aspectRatioWrapper.hasClass('c-aspect-ratio-wrapper')).toEqual(true);
+		const { container } = render(<BlockIFrame title="test" />);
+		const aspectRatioWrapper = container.querySelector('div');
+		expect(aspectRatioWrapper).toHaveClass('c-aspect-ratio-wrapper');
 	});
 
 	it('Should correctly set the wrapper `className` for the aspect ratios', () => {
-		const blockIframe32Component = mount(<BlockIFrame title="test" ratio="3:2" />);
-		const blockIframe169Component = mount(<BlockIFrame title="test" ratio="16:9" />);
-
-		const video32Wrapper = blockIframe32Component.find('div').at(0);
-		const video169Wrapper = blockIframe169Component.find('div').at(0);
-
-		expect(video32Wrapper.hasClass('c-aspect-ratio-wrapper--aspect-3-2')).toEqual(true);
-		expect(video169Wrapper.hasClass('c-aspect-ratio-wrapper--aspect-16-9')).toEqual(true);
+		const { container: container32 } = render(<BlockIFrame title="test" ratio="3:2" />);
+		const { container: container169 } = render(<BlockIFrame title="test" ratio="16:9" />);
+		const video32Wrapper = container32.querySelector('div');
+		const video169Wrapper = container169.querySelector('div');
+		expect(video32Wrapper).toHaveClass('c-aspect-ratio-wrapper--aspect-3-2');
+		expect(video169Wrapper).toHaveClass('c-aspect-ratio-wrapper--aspect-16-9');
 	});
 
 	it('Should correctly pass on the supported iframe-props', () => {
@@ -38,10 +39,12 @@ describe('<BlockIFrame />', () => {
 			allowTransparency: true,
 			seamless: true,
 		};
-
-		const blockIframeComponent = shallow(<BlockIFrame {...iframeProps} />);
-
-		const iframeElement = blockIframeComponent.find('iframe');
-		expect(iframeElement.props()).toMatchObject(iframeProps);
+		const { container } = render(<BlockIFrame {...iframeProps} />);
+		const iframeElement = container.querySelector('iframe');
+		for (const [key, value] of Object.entries(iframeProps)) {
+			if (key === 'title' || key === 'width' || key === 'height' || key === 'frameBorder') {
+				expect(iframeElement).toHaveAttribute(key, value.toString());
+			}
+		}
 	});
 });

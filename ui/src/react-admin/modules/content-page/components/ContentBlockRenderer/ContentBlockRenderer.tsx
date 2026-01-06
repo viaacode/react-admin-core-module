@@ -22,6 +22,7 @@ import {
 import './ContentBlockRenderer.scss';
 import type { AvoUserCommonUser } from '@viaa/avo2-types';
 import { AdminConfigManager } from '~core/config/config.class';
+import { getCommonUser } from '~core/config/config.selectors.ts';
 import { GENERATED_CONTENT_BLOCK_ANCHOR_PREFIX } from '~modules/content-page/const/content-block-anchors.consts';
 import type { ContentPageInfo } from '~modules/content-page/types/content-pages.types';
 import { ContentPageWidth } from '~modules/content-page/types/content-pages.types';
@@ -31,7 +32,6 @@ interface ContentBlockPreviewProps {
 	contentPageInfo: Partial<ContentPageInfo>;
 	onClick: () => void;
 	className?: string;
-	commonUser?: AvoUserCommonUser;
 }
 
 /* eslint-enable @typescript-eslint/no-unused-vars */
@@ -41,8 +41,8 @@ const ContentBlockRenderer: FunctionComponent<ContentBlockPreviewProps> = ({
 	contentPageInfo,
 	onClick = noop,
 	className,
-	commonUser,
 }) => {
+	const commonUser = getCommonUser();
 	const blockState = contentBlockConfig?.block?.state;
 	const componentState = contentBlockConfig?.components?.state;
 	const pageWidth =

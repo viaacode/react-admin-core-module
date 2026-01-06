@@ -1,7 +1,7 @@
 import type { IconName, TabProps } from '@viaa/avo2-components';
 import { Button, ButtonToolbar, Container, Navbar, Spacer, Tabs } from '@viaa/avo2-components';
 
-import { type AvoContentPageBlock, type AvoUserCommonUser, PermissionName } from '@viaa/avo2-types';
+import { type AvoContentPageBlock, PermissionName } from '@viaa/avo2-types';
 import { cloneDeep, isNil, isString } from 'es-toolkit';
 import type { FC, Reducer } from 'react';
 import React, { useCallback, useEffect, useReducer, useState } from 'react';
@@ -65,7 +65,9 @@ import { blockHasErrors } from '../helpers/block-has-errors';
 import { validateContentBlockConfig } from '../helpers/validate-content-block-config';
 import ContentEditContentBlocks from './ContentEditContentBlocks';
 import './ContentPageEdit.scss';
+import { getCommonUser } from '~core/config/config.selectors.ts';
 import { navigateFunc } from '~shared/helpers/navigate-fnc';
+import { isServerSideRendering } from '~shared/helpers/routing/is-server-side-rendering.ts';
 
 const { EDIT_ANY_CONTENT_PAGES, EDIT_OWN_CONTENT_PAGES } = PermissionName;
 
@@ -75,7 +77,7 @@ export type ContentPageEditProps = DefaultComponentProps & {
 	id: string | undefined;
 	onGoBack: () => void;
 	onHasUnsavedChangesChanged?: (hasUnsavedChanges: boolean) => void;
-	commonUser: AvoUserCommonUser;
+	url: string;
 };
 
 export const ContentPageEdit: FC<ContentPageEditProps> = ({
@@ -83,9 +85,10 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 	className,
 	onGoBack,
 	onHasUnsavedChangesChanged,
-	commonUser,
+	url,
 }) => {
 	// Hooks
+	const commonUser = getCommonUser();
 	const [contentPageState, changeContentPageState] = useReducer<
 		Reducer<ContentPageEditState, ContentEditAction>
 	>(contentEditReducer, {
@@ -102,12 +105,15 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 	const [isSaving, setIsSaving] = useState<boolean>(false);
 	const [hasSubmitted, setHasSubmitted] = useState<boolean>(false);
 	const [contentTypes, isLoadingContentTypes] = useContentTypes();
-	const getCurrentTab = useCallback(
-		() =>
+	const getCurrentTab = useCallback(() => {
+		if (isServerSideRendering()) {
+			return GET_CONTENT_PAGE_DETAIL_TABS()[0].id as string;
+		}
+		return (
 			new URLSearchParams(location.search).get(CONTENT_PAGE_EDIT_TAB_QUERY_PARAM) ||
-			(GET_CONTENT_PAGE_DETAIL_TABS()[0].id as string),
-		[]
-	);
+			(GET_CONTENT_PAGE_DETAIL_TABS()[0].id as string)
+		);
+	}, []);
 	const setCurrentTab = async (tabId: string) => {
 		const url = new URL(window.location.href);
 		url.searchParams.set(CONTENT_PAGE_EDIT_TAB_QUERY_PARAM, tabId);
@@ -126,6 +132,12 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 
 	const fetchContentPage = useCallback(async () => {
 		try {
+			if (!commonUser) {
+				console.error(
+					"Can't fetch content page in ContentPageEdit because commonUser is undefined"
+				);
+				return;
+			}
 			if (
 				isNil(id) ||
 				id === AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_CREATE').split('/').pop()
@@ -268,14 +280,14 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 			newContentPageConfig.nlParentPageId = null;
 
 			// Set author to current user
-			newContentPageConfig.userProfileId = commonUser.profileId;
+			newContentPageConfig.userProfileId = commonUser?.profileId || null;
 			newContentPageConfig.owner = {
-				id: commonUser.profileId,
-				fullName: commonUser.fullName,
-				firstName: commonUser.firstName,
-				lastName: commonUser.lastName,
-				groupId: commonUser.userGroup?.id,
-				groupName: commonUser.userGroup?.name,
+				id: commonUser?.profileId,
+				fullName: commonUser?.fullName,
+				firstName: commonUser?.firstName,
+				lastName: commonUser?.lastName,
+				groupId: commonUser?.userGroup?.id,
+				groupName: commonUser?.userGroup?.name,
 			} as ContentPageUser;
 
 			newContentPageConfig.updatedAt = new Date().toISOString();
@@ -318,12 +330,12 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 			});
 		},
 		[
-			commonUser.firstName,
-			commonUser.fullName,
-			commonUser.lastName,
-			commonUser.profileId,
-			commonUser.userGroup?.id,
-			commonUser.userGroup?.name,
+			commonUser?.firstName,
+			commonUser?.fullName,
+			commonUser?.lastName,
+			commonUser?.profileId,
+			commonUser?.userGroup?.id,
+			commonUser?.userGroup?.name,
 			contentPageState.currentContentPageInfo?.content_blocks,
 			contentPageState.currentContentPageInfo?.createdAt,
 			contentPageState.currentContentPageInfo?.id,
@@ -729,7 +741,6 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 						changeContentPageState={changeContentPageState}
 						onRemove={openDeleteModal}
 						onSave={handleStateSave}
-						commonUser={commonUser}
 					/>
 				);
 			case 'metadata':
@@ -739,7 +750,6 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 						formErrors={formErrors}
 						contentPageInfo={contentPageState.currentContentPageInfo}
 						changeContentPageState={changeContentPageState}
-						commonUser={commonUser}
 					/>
 				);
 			default:
@@ -822,8 +832,8 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 
 							<div className="right-side-content-page-nav">
 								<ContentPagePreviewUserRoleSelector
+									url={url}
 									className="mr-3 content-page-usergroup-selector"
-									commonUser={commonUser}
 								/>
 								<CopyToClipboard
 									text={JSON.stringify({

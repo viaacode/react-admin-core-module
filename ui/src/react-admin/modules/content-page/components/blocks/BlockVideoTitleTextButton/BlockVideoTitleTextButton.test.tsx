@@ -1,6 +1,7 @@
-import { mount, shallow } from 'enzyme';
+import { cleanup, render, screen } from '@testing-library/react';
 import { loremIpsum } from 'lorem-ipsum';
 import React from 'react';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import { flowplayerMock } from '../../../../../../__mocks__/flowplayer';
 
 import { BlockVideoTitleTextButton } from './BlockVideoTitleTextButton';
@@ -19,32 +20,44 @@ const blockVideoTitleTextButtonExample = (
 	/>
 );
 
+afterEach(() => {
+	cleanup();
+});
+
+// Mock FlowPlayer
+vi.mock('@meemoo/react-components', async () => {
+	const actual = await vi.importActual<any>('@meemoo/react-components');
+	return {
+		...actual,
+		FlowPlayer: (props: any) => (
+			<div data-testid="flowplayer-mock">
+				{/* optionally expose something for assertions */}
+				{props?.title ? <div data-testid="flowplayer-title">{props.title}</div> : null}
+			</div>
+		),
+	};
+});
+
 describe('<BlockVideoTitleTextButton />', () => {
 	it('Should be able to render', () => {
-		shallow(blockVideoTitleTextButtonExample);
+		render(blockVideoTitleTextButtonExample);
 	});
 
 	it('Should render the title correctly', () => {
-		const component = mount(blockVideoTitleTextButtonExample);
-
-		const h2Element = component.find('h2');
-
-		expect(h2Element.html()).toContain('>Title<');
+		render(blockVideoTitleTextButtonExample);
+		const h2Element = screen.getByRole('heading', { level: 2, hidden: true });
+		expect(h2Element).toHaveTextContent('Title');
 	});
 
 	it('Should render the title link correctly', () => {
-		const component = mount(blockVideoTitleTextButtonExample);
-
-		const anchorElement = component.find('a');
-
-		expect(anchorElement.prop('href')).toEqual(titleLink);
+		render(blockVideoTitleTextButtonExample);
+		const anchorElement = screen.getByRole('link', { name: 'Title', hidden: true });
+		expect(anchorElement).toHaveAttribute('href', titleLink);
 	});
 
 	it('Should render the text correctly', () => {
-		const component = mount(blockVideoTitleTextButtonExample);
-
-		const pElement = component.find('p');
-
-		expect(pElement.html()).toContain(`>${loremIpsumText}<`);
+		render(blockVideoTitleTextButtonExample);
+		const pElement = screen.getByText(loremIpsumText);
+		expect(pElement).toBeInTheDocument();
 	});
 });

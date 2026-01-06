@@ -74,5 +74,5 @@ async function main() {
 }
 
 main()
-	.then(() => console.log('Done!'))
+	.then(() => console.info('Done!'))
 	.catch((error) => console.error(red(`Error: ${error.message}`)));

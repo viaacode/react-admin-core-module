@@ -49,5 +49,4 @@ export interface PageOverviewWrapperProps {
 	sortOrder?: PageOverviewOrderOptions;
 	headerBackgroundColor: Color;
 	renderLink: RenderLinkFunction;
-	commonUser?: AvoUserCommonUser;
 }

@@ -2,9 +2,8 @@ import type { FC } from 'react';
 import { useMatch } from 'react-router';
 import { AdminConfigManager } from '~core/config/config.class';
 import { ContentPageEdit } from '~modules/content-page/views/ContentPageEdit';
-import { getMockCommonUser } from '../../mock-common-user';
 
-export const ContentPageEditPage: FC = () => {
+export const ContentPageEditPage: FC<{ url?: string }> = ({ url }) => {
 	const match = useMatch<'id', string>(AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_EDIT'));
 	const contentPageId = match?.params.id;
 
@@ -14,7 +13,7 @@ export const ContentPageEditPage: FC = () => {
 	return (
 		<ContentPageEdit
 			id={contentPageId}
-			commonUser={getMockCommonUser()}
+			url={url as string}
 			onGoBack={() => window.history.back()}
 		/>
 	);

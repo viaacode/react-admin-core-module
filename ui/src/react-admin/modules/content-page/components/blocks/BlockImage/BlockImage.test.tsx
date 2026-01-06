@@ -1,7 +1,6 @@
-import { mount, shallow } from 'enzyme';
+import { cleanup, render, screen } from '@testing-library/react';
 import React from 'react';
-
-import imageSource from '../../../static/images/500x200.jpg';
+import { afterEach, describe, expect, it } from 'vitest';
 
 import { BlockImage } from './BlockImage';
 
@@ -10,7 +9,7 @@ const customClass = 'c-block-custom';
 const blockImageExample = (
 	<BlockImage
 		className={customClass}
-		imageSource={imageSource}
+		imageSource="https://placeholder.com/500x200.jpg"
 		imageDescription="image showing the default dimensions on a grey background"
 		title="example title"
 		text="example text"
@@ -18,45 +17,37 @@ const blockImageExample = (
 	/>
 );
 
+afterEach(() => {
+	cleanup();
+});
+
 describe('<BlockImage />', () => {
 	it('Should be able to render', () => {
-		shallow(blockImageExample);
+		render(blockImageExample);
 	});
 
 	it('Should render the image correctly', () => {
-		const component = mount(blockImageExample);
-
-		const imgElement = component.find('img');
-
-		expect(imgElement.prop('src')).toEqual(imageSource);
+		render(blockImageExample);
+		const imgElement = screen.getByRole('img');
+		expect(imgElement).toHaveAttribute('src', 'https://placeholder.com/500x200.jpg');
 	});
 
 	it('Should set the correct className', () => {
-		const component = mount(blockImageExample);
-
-		const verticalContainerElement = component.find('div').at(0);
-		const imgWrapperElement = component.find('div').at(1);
-
-		expect(component.hasClass(customClass)).toEqual(true);
-		expect(verticalContainerElement.hasClass('o-container-vertical')).toEqual(true);
-		expect(imgWrapperElement.hasClass('c-image--full')).toEqual(true);
+		const output = render(blockImageExample);
+		expect(output.container.firstChild).toHaveClass(customClass);
+		expect(output.container.firstChild).toHaveClass('o-block-image');
 	});
 
 	it('Should set the correct width', () => {
-		const component = mount(blockImageExample);
-
-		const verticalContainerElement = component.find('div').at(0);
-
-		expect(verticalContainerElement.hasClass('o-image-block-width-400px')).toEqual(true);
+		const output = render(blockImageExample);
+		expect(output.container.firstChild).toHaveClass('o-block-image__400px');
 	});
 
 	it('Should set the correct title and text', () => {
-		const component = mount(blockImageExample);
-
-		const titleElement = component.find('h3').at(0);
-		const textElement = component.find('p').at(0);
-
-		expect(titleElement.text()).toEqual('© example title');
-		expect(textElement.text()).toEqual('example text');
+		render(blockImageExample);
+		const titleElement = screen.getByText('© example title');
+		const textElement = screen.getByText('example text');
+		expect(titleElement).toBeInTheDocument();
+		expect(textElement).toBeInTheDocument();
 	});
 });

@@ -41,6 +41,7 @@ import { createDropdownMenuItem } from '~shared/helpers/dropdown';
 import { isAvo } from '~shared/helpers/is-avo';
 import { isMultiLanguageEnabled } from '~shared/helpers/is-multi-language-enabled';
 import { navigateFunc } from '~shared/helpers/navigate-fnc';
+import { isServerSideRendering } from '~shared/helpers/routing/is-server-side-rendering.ts';
 import { buildLink, navigate, navigateToAbsoluteOrRelativeUrl } from '~shared/helpers/routing/link';
 import { showToast } from '~shared/helpers/show-toast';
 import { tHtml, tText } from '~shared/helpers/translation-functions';
@@ -83,12 +84,15 @@ export const ContentPageDetail: FC<ContentPageDetailProps> = ({
 	);
 
 	const { mutateAsync: softDeleteContentPage } = useSoftDeleteContentPage();
-	const getCurrentTab = useCallback(
-		() =>
+	const getCurrentTab = useCallback(() => {
+		if (isServerSideRendering()) {
+			return GET_CONTENT_PAGE_DETAIL_TABS()[0].id as string;
+		}
+		return (
 			new URLSearchParams(location.search).get(CONTENT_PAGE_DETAIL_TAB_QUERY_PARAM) ||
-			(GET_CONTENT_PAGE_DETAIL_TABS()[0].id as string),
-		[]
-	);
+			(GET_CONTENT_PAGE_DETAIL_TABS()[0].id as string)
+		);
+	}, []);
 	const setCurrentTab = useCallback(async (tabId: string) => {
 		const url = new URL(window.location.href);
 		url.searchParams.set(CONTENT_PAGE_DETAIL_TAB_QUERY_PARAM, tabId);
@@ -483,7 +487,6 @@ export const ContentPageDetail: FC<ContentPageDetailProps> = ({
 				return (
 					<ContentPageRenderer
 						contentPageInfo={contentPageInfo}
-						commonUser={commonUser}
 						renderFakeTitle={contentPageInfo.contentType === 'FAQ_ITEM' && isAvo()}
 						renderNoAccessError={() => (
 							<ErrorView

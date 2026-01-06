@@ -31,6 +31,7 @@ import { tText } from '~shared/helpers/translation-functions';
 import './ContentEditContentBlocks.scss';
 import type { AvoUserCommonUser } from '@viaa/avo2-types';
 import { Panel, PanelGroup, PanelResizeHandle } from 'react-resizable-panels';
+import { getCommonUser } from '~core/config/config.selectors.ts';
 
 interface ContentEditContentBlocksProps {
 	contentPageInfo: Partial<ContentPageInfo>;
@@ -45,7 +46,6 @@ interface ContentEditContentBlocksProps {
 	) => void;
 	addComponentToState: (index: number, blockType: ContentBlockType) => void;
 	removeComponentFromState: (index: number, stateIndex: number) => void;
-	commonUser: AvoUserCommonUser;
 }
 
 const ContentEditContentBlocks: FunctionComponent<ContentEditContentBlocksProps> = ({
@@ -56,8 +56,8 @@ const ContentEditContentBlocks: FunctionComponent<ContentEditContentBlocksProps>
 	onSave,
 	addComponentToState,
 	removeComponentFromState,
-	commonUser,
 }) => {
+	const commonUser = getCommonUser();
 	const _contentBlockIds = (contentPageInfo.content_blocks || []).map((item) => item.id);
 
 	// Hooks
@@ -304,7 +304,6 @@ const ContentEditContentBlocks: FunctionComponent<ContentEditContentBlocksProps>
 						contentPageInfo={contentPageInfo}
 						onBlockClicked={focusBlock}
 						activeBlockPosition={activeBlockPosition}
-						commonUser={commonUser}
 						renderFakeTitle={contentPageInfo.contentType === 'FAQ_ITEM' && isAvo()}
 						renderNoAccessError={() => (
 							<ErrorView

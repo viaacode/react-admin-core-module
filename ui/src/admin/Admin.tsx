@@ -18,8 +18,6 @@ import type { NavigationItemInfo } from '../shared/types';
 import { GET_NAV_ITEMS } from './admin.const';
 
 import 'react-datepicker/dist/react-datepicker.css'; // TODO: lazy-load
-import '@meemoo/admin-core-ui/admin.css';
-import '@meemoo/admin-core-ui/styles.css';
 import '../react-admin/modules/shared/styles/main.scss';
 import './Admin.scss';
 

@@ -43,6 +43,7 @@ import { ErrorView } from '~shared/components/error/ErrorView';
 import { GET_FILTER_TABLE_QUERY_PARAM_CONFIG } from '~shared/components/FilterTable/FilterTable.const';
 import { GET_DEFAULT_PAGINATION_BAR_PROPS } from '~shared/components/PaginationBar/PaginationBar.consts';
 import { navigateFunc } from '~shared/helpers/navigate-fnc';
+import { isServerSideRendering } from '~shared/helpers/routing/is-server-side-rendering.ts';
 import { toggleSortOrder } from '~shared/helpers/toggle-sort-order';
 import { useGetTableColumnPreference } from '~shared/hooks/useGetTableColumnPreference';
 import { useUpdateTableColumnPreference } from '~shared/hooks/useUpdateTableColumnPreference';
@@ -174,6 +175,9 @@ export const FilterTable: FunctionComponent<FilterTableProps> = ({
 
 	// biome-ignore lint/suspicious/noExplicitAny: many possible options to list here
 	const getTableState = useCallback((): Record<string, any> => {
+		if (isServerSideRendering()) {
+			return {};
+		}
 		// biome-ignore lint/suspicious/noExplicitAny: many possible options to list here
 		const tableState: Record<string, any> = {};
 		for (const queryParamKey in queryParamsConfig) {
@@ -206,9 +210,7 @@ export const FilterTable: FunctionComponent<FilterTableProps> = ({
 				// If the url wouldn't change, don't update it to prevent an infinite loop
 				return;
 			}
-			console.log('BEFORE navigate:', window.location.search, url);
 			await navigateFunc(url, { replace: true });
-			queueMicrotask(() => console.log('AFTER navigate:', window.location.search));
 			onTableStateChanged(newTableState);
 		},
 		[queryParamsConfig, onTableStateChanged]
@@ -223,7 +225,6 @@ export const FilterTable: FunctionComponent<FilterTableProps> = ({
 				...(id !== 'page' ? { page: 0 } : {}), // Reset the page to 0, when any filter or sort order change is made
 			});
 
-			console.log('setting new table state for filter table: ', newTableState);
 			setTableState(newTableState);
 		},
 		[setTableState]

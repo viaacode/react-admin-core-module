@@ -1,4 +1,5 @@
-import { sanitizeHtml } from '.';
+import { describe, expect, it } from 'vitest';
+import { sanitizeHtml } from './index';
 import { SanitizePreset } from './presets';
 
 describe('sanitize', () => {

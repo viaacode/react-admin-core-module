@@ -1,14 +1,13 @@
-import { shallow } from 'enzyme';
+import { cleanup, render } from '@testing-library/react';
 import { loremIpsum } from 'lorem-ipsum';
 import React from 'react';
-
-import image50x50 from '../../../static/images/50x50.jpg';
+import { afterEach, describe, it } from 'vitest';
 
 import { BlockQuote } from './BlockQuote';
 
 const customClass = 'c-block-custom';
 const quote = loremIpsum({ count: 10 });
-const authorImage = image50x50;
+const authorImage = 'https://placeholder.com/500x200.jpg';
 const authorName = loremIpsum({ count: 2 });
 const authorInitials = 'AE';
 
@@ -22,8 +21,12 @@ const quoteExample = (
 	/>
 );
 
+afterEach(() => {
+	cleanup();
+});
+
 describe('<BlockQuote />', () => {
 	it('Should be able to render', () => {
-		shallow(quoteExample);
+		render(quoteExample);
 	});
 });

@@ -47,8 +47,9 @@ export const BlockAvoHero: FunctionComponent<BlockAvoHeroProps> = ({
 	buttons = [],
 	textBelowButtons,
 	renderLink = defaultRenderLinkFunction,
+	className,
 }) => (
-	<Container mode="vertical" size="large">
+	<Container mode="vertical" size="large" className={className}>
 		<div className="c-tri__half-split" />
 		<div className="c-tri__tr" />
 		<div className="c-tri__bl" />

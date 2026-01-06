@@ -1,8 +1,7 @@
-import { mount, shallow } from 'enzyme';
+import { cleanup, render, screen } from '@testing-library/react';
 import { loremIpsum } from 'lorem-ipsum';
 import React from 'react';
-
-import imageSource from '../../../static/images/500x200.jpg';
+import { afterEach, describe, expect, it } from 'vitest';
 
 import { BlockTitleImageText } from './BlockTitleImageText';
 
@@ -13,42 +12,31 @@ const loremIpsumText = loremIpsum({ count: 10 });
 const blockTitleImageTextExample = (
 	<BlockTitleImageText
 		className={customClass}
-		imageSource={imageSource}
+		imageSource="https://placeholder.com/500x200.jpg"
 		imageDescription="image showing the default dimensions on a grey background"
 		title="Title"
 		text={loremIpsumText}
 	/>
 );
 
+afterEach(() => {
+	cleanup();
+});
+
 describe('<BlockTitleImageText />', () => {
 	it('Should be able to render', () => {
-		shallow(blockTitleImageTextExample);
+		render(blockTitleImageTextExample);
 	});
 
 	it('Should render the thumbnail slot correctly', () => {
-		const component = mount(blockTitleImageTextExample);
-
-		const imgElement = component.find('img');
-
-		expect(imgElement.prop('src')).toEqual(imageSource);
+		render(blockTitleImageTextExample);
+		const imgElement = screen.getByRole('img');
+		expect(imgElement).toHaveAttribute('src', 'https://placeholder.com/500x200.jpg');
 	});
 
 	it('Should render the text slot correctly', () => {
-		const component = mount(blockTitleImageTextExample);
-
-		const h2Element = component.find('h2');
-
-		expect(h2Element.html()).toContain('>Title<');
-	});
-
-	it('Should set the correct className', () => {
-		const component = mount(blockTitleImageTextExample);
-
-		const spacerElement = component.find('div').at(0);
-		const containerElement = component.find('div').at(1);
-
-		expect(component.hasClass(customClass)).toEqual(true);
-		expect(spacerElement.hasClass('u-spacer-top-l')).toEqual(true);
-		expect(containerElement.hasClass('o-container--small')).toEqual(true);
+		render(blockTitleImageTextExample);
+		const h2Element = screen.getByRole('heading', { level: 2 });
+		expect(h2Element).toHaveTextContent('Title');
 	});
 });

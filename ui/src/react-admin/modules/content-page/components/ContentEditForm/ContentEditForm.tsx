@@ -16,7 +16,6 @@ import {
 	type AvoContentPageType,
 	AvoCoreContentPickerType,
 	AvoFileUploadAssetType,
-	type AvoUserCommonUser,
 	PermissionName,
 } from '@viaa/avo2-types';
 import { compact, isNil, noop } from 'es-toolkit';
@@ -50,6 +49,7 @@ import type { ValueOf } from '~shared/types';
 import type { PickerItem } from '~shared/types/content-picker';
 
 import './ContentEditForm.scss';
+import { getCommonUser } from '~core/config/config.selectors.ts';
 import { ContentPageEditFormDescription } from '~modules/content-page/components/ContentPageEditFormDescription/ContentPageEditFormDescription';
 import { getAllSubgroupIds } from '~modules/user-group/const/user-group.const';
 import { useGetUserGroups } from '~modules/user-group/hooks/get-user-groups';
@@ -60,7 +60,6 @@ interface ContentEditFormProps {
 	formErrors: ContentEditFormErrors;
 	contentPageInfo: Omit<ContentPageInfo, 'id'> & { id?: string | number };
 	changeContentPageState: (action: ContentEditAction) => void;
-	commonUser: AvoUserCommonUser;
 }
 
 export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
@@ -68,9 +67,9 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 	formErrors,
 	contentPageInfo,
 	changeContentPageState,
-	commonUser,
 }) => {
 	// Hooks
+	const commonUser = getCommonUser();
 	const [contentTypeLabels, setContentTypeLabels] = useState<ContentPageLabel[]>([]);
 	const { data: allLanguages } = useGetAllLanguages();
 	const allLanguageOptions = (allLanguages || []).map(
@@ -204,6 +203,9 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 				]
 		: [];
 
+	if (!commonUser) {
+		return null;
+	}
 	return (
 		<Container mode="vertical" size="small">
 			<Container mode="horizontal">
@@ -219,7 +221,7 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 									className="field-thumbnail-path"
 								>
 									<FileUpload
-										ownerId={commonUser.profileId}
+										ownerId={commonUser?.profileId}
 										urls={compact([contentPageInfo.thumbnailPath])}
 										assetType={AvoFileUploadAssetType.CONTENT_PAGE_COVER}
 										allowMulti={false}

@@ -1,18 +1,11 @@
 import type { DOMPurifyI } from 'dompurify';
-import { isServerSideRendering } from '~shared/helpers/routing/is-server-side-rendering.ts';
+import { isServerSideRendering } from '~shared/helpers/routing/is-server-side-rendering';
 import type { SanitizePreset } from './presets';
 import sanitizePresets from './presets';
 
 function normalizeModule(requiredModule: any): DOMPurifyI {
 	return requiredModule?.default || requiredModule;
 }
-
-// async function initDOMPurifyWithJSDOM(): Promise<DOMPurifyI> {
-// 	const initDomPurify = (await import('dompurify')) as unknown as (win: any) => DOMPurifyI;
-// 	const { JSDOM } = await import('jsdom').then((module) => module?.default || module);
-// 	const { window } = new JSDOM('<!DOCTYPE html>');
-// 	return initDomPurify(window);
-// }
 
 let domPurify: DOMPurifyI;
 /**

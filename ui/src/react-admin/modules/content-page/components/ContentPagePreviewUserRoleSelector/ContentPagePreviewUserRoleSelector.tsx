@@ -9,46 +9,60 @@ import {
 } from '@viaa/avo2-components';
 
 import { isNil, sortBy } from 'es-toolkit';
-import React, { type FunctionComponent, useCallback, useEffect, useMemo, useState } from 'react';
+import React, {
+	type FC,
+	type FunctionComponent,
+	useCallback,
+	useEffect,
+	useMemo,
+	useState,
+} from 'react';
+import { getCommonUser } from '~core/config/config.selectors.ts';
 import {
 	GET_ALL_CONTENT,
 	GET_LOGGED_OUT_USERS,
 	preferredUserGroupOrder,
 } from '~modules/user-group/const/user-group.const';
 import { useGetUserGroups } from '~modules/user-group/hooks/get-user-groups';
+import { ROUTE_PARTS } from '~shared/consts';
 import { isAvo } from '~shared/helpers/is-avo';
+import { navigateFunc } from '~shared/helpers/navigate-fnc';
 import { tText } from '~shared/helpers/translation-functions';
 import { SpecialUserGroups } from '~shared/types/authentication.types';
-
 import './ContentPagePreviewUserRoleSelector.scss';
-import type { AvoUserCommonUser } from '@viaa/avo2-types';
-import { ROUTE_PARTS } from '~shared/consts';
-import { navigateFunc } from '~shared/helpers/navigate-fnc';
+import { CONTENT_PAGE_USER_GROUP_ID_QUERY_PARAM } from '~modules/content-page/components/ContentPageRenderer/ContentPageRenderer.consts.tsx';
+import { isServerSideRendering } from '~shared/helpers/routing/is-server-side-rendering.ts';
 
 type ContentPagePreviewUserRoleSelectorProps = {
-	commonUser?: AvoUserCommonUser;
 	onToggleMenu?: (isOpen: boolean) => void;
+	url: string;
 };
 
-export const ContentPagePreviewUserRoleSelector: FunctionComponent<
+export const ContentPagePreviewUserRoleSelector: FC<
 	ContentPagePreviewUserRoleSelectorProps & DefaultProps
 > = (props) => {
+	const commonUser = getCommonUser();
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
-	const getUserGroupId = useCallback(
-		() => new URLSearchParams(location.search).get('userGroupId'),
-		[]
-	);
-	const setUserGroupId = useCallback(async (id: string) => {
-		const url = new URL(window.location.href);
-		url.searchParams.set('userGroupId', id);
-		await navigateFunc(url, { replace: true });
+	const getUserGroupId = useCallback(() => {
+		if (isServerSideRendering()) {
+			return;
+		}
+		return new URLSearchParams(location.search).get(CONTENT_PAGE_USER_GROUP_ID_QUERY_PARAM);
 	}, []);
+	const setUserGroupId = useCallback(
+		async (id: string) => {
+			const url = new URL(props.url);
+			url.searchParams.set(CONTENT_PAGE_USER_GROUP_ID_QUERY_PARAM, id);
+			await navigateFunc(url, { replace: true });
+		},
+		[props.url]
+	);
 
 	// biome-ignore lint/correctness/useExhaustiveDependencies: Only run this once
 	useEffect(() => {
 		// if the queryParams are missing userGroupIds, use the userGroup of the current user
 		if (isNil(getUserGroupId())) {
-			if (isNil(props.commonUser?.userGroup?.id)) {
+			if (isNil(commonUser?.userGroup?.id)) {
 				// If user doesn't have a user group, show all content. Not sure if this can happen though.
 				setUserGroupId(SpecialUserGroups.allContent);
 				return;
@@ -59,9 +73,9 @@ export const ContentPagePreviewUserRoleSelector: FunctionComponent<
 				return;
 			}
 			// For all other cases, show the page as the user's user group
-			setUserGroupId(String(props.commonUser?.userGroup?.id));
+			setUserGroupId(String(commonUser?.userGroup?.id));
 		}
-	}, [props.commonUser, setUserGroupId]);
+	}, [setUserGroupId]);
 
 	const { data: userGroups, isLoading } = useGetUserGroups({
 		withPermissions: false,

@@ -6,7 +6,7 @@ import {
 	Toolbar,
 	ToolbarRight,
 } from '@viaa/avo2-components';
-import { type AvoUserCommonUser, PermissionName } from '@viaa/avo2-types';
+import { PermissionName } from '@viaa/avo2-types';
 import clsx from 'clsx';
 import { cloneDeep, compact, intersection, isNil, noop } from 'es-toolkit';
 import { stringifyUrl } from 'query-string';
@@ -32,10 +32,12 @@ import ContentBlockRenderer from '.././ContentBlockRenderer/ContentBlockRenderer
 
 import './ContentPageRenderer.scss';
 import { set } from 'es-toolkit/compat';
+import { getCommonUser } from '~core/config/config.selectors.ts';
 import {
 	CONTENT_PAGE_PREVIEW_QUERY_PARAM,
 	CONTENT_PAGE_USER_GROUP_ID_QUERY_PARAM,
 } from '~modules/content-page/components/ContentPageRenderer/ContentPageRenderer.consts';
+import { hasAccessUserGroups } from '~shared/helpers/has-access-user-groups.ts';
 import { isAdminRoute } from '~shared/helpers/routing/is-admin-route';
 import { isContentPagePreview } from '~shared/helpers/routing/is-content-page-preview';
 import { isServerSideRendering } from '~shared/helpers/routing/is-server-side-rendering';
@@ -44,13 +46,14 @@ type ContentPageDetailProps = {
 	contentPageInfo: Partial<ContentPageInfo>;
 	activeBlockPosition?: number | null;
 	onBlockClicked?: BlockClickHandler;
-	commonUser?: AvoUserCommonUser;
 	renderFakeTitle?: boolean;
 	renderNoAccessError: () => ReactNode;
 	userGroupId?: string | null;
 };
 
 export const ContentPageRenderer: FunctionComponent<ContentPageDetailProps> = (props) => {
+	const commonUser = getCommonUser();
+
 	const getContentBlocks = (contentPageInfo: ContentPageInfo) => {
 		// Convert editor states to html
 		let contentBlockBlockConfigs = convertRichTextEditorStatesToHtml(
@@ -107,11 +110,8 @@ export const ContentPageRenderer: FunctionComponent<ContentPageDetailProps> = (p
 		let currentUserGroupIds: string[];
 		if (!isNil(props.userGroupId)) {
 			currentUserGroupIds = [props.userGroupId];
-		} else if (props.commonUser?.userGroup?.id) {
-			currentUserGroupIds = [
-				String(props.commonUser?.userGroup?.id),
-				SpecialUserGroups.loggedInUsers,
-			];
+		} else if (commonUser?.userGroup?.id) {
+			currentUserGroupIds = [String(commonUser?.userGroup?.id), SpecialUserGroups.loggedInUsers];
 		} else {
 			currentUserGroupIds = [SpecialUserGroups.loggedOutUsers];
 		}
@@ -149,7 +149,7 @@ export const ContentPageRenderer: FunctionComponent<ContentPageDetailProps> = (p
 			return null;
 		}
 		const userCanEditPage = PermissionService.hasPerm(
-			props.commonUser,
+			commonUser,
 			PermissionName.EDIT_ANY_CONTENT_PAGES
 		);
 
@@ -245,7 +245,6 @@ export const ContentPageRenderer: FunctionComponent<ContentPageDetailProps> = (p
 										BlockClickType.PREVIEW
 									)
 								}
-								commonUser={props.commonUser}
 							/>
 						);
 					}
@@ -262,18 +261,14 @@ export const ContentPageRenderer: FunctionComponent<ContentPageDetailProps> = (p
 			return <div>Page with path {location.pathname} was not found</div>;
 		}
 		if (!isServerSideRendering()) {
-			// bOnly execute this if not serverside rendering
+			// Only execute this if not serverside rendering
 			const queryParams = new URLSearchParams(window.location.search);
 			if (queryParams.get(CONTENT_PAGE_PREVIEW_QUERY_PARAM) === 'true') {
 				const userGroupId =
 					queryParams.get(CONTENT_PAGE_USER_GROUP_ID_QUERY_PARAM)?.split(',')[0] ||
-					String(props.commonUser?.userGroup?.id) ||
+					String(commonUser?.userGroup?.id) ||
 					SpecialUserGroups.loggedOutUsers;
-
-				if (
-					!props.contentPageInfo.userGroupIds?.includes(userGroupId) &&
-					userGroupId !== SpecialUserGroups.allContent
-				) {
+				if (!hasAccessUserGroups(userGroupId, props.contentPageInfo.userGroupIds)) {
 					return props.renderNoAccessError();
 				}
 			}
