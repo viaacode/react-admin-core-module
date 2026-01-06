@@ -14,7 +14,7 @@ export const ContentPagePreviewPage: FC = () => {
 		url: string;
 	}>();
 	const contentPageInfo =
-		contentPageInfoFromRoute.contentPage as unknown as Partial<ContentPageInfo>;
+		contentPageInfoFromRoute?.contentPage as unknown as Partial<ContentPageInfo>;
 
 	if (!contentPageInfo) {
 		return <CenteredSpinner locationId="content-page-preview-page--loading" />;

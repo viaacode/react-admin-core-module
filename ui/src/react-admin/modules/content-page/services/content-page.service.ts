@@ -308,11 +308,12 @@ export class ContentPageService {
 	 * @param language The language the user is currently using the site in. eg: NL or EN
 	 * @param path The path to identify the content page including the leading slash. eg: /over
 	 * @param onlyInfo only include info about the content page, do not resolve media info inside the content page blocks
-	 */
+	 * @param headers headers to pass along to the proxy when making the request (optional for client requests, only needed for ssr)	 */
 	public static async getContentPageByLanguageAndPath(
 		language: Locale,
 		path: string,
-		onlyInfo = false
+		onlyInfo = false,
+		headers: Record<string, string> = {}
 	): Promise<DbContentPage | null> {
 		try {
 			let url = `${ContentPageService.getBaseUrl()}/by-language-and-path`;
@@ -331,7 +332,10 @@ export class ContentPageService {
 						path,
 						onlyInfo: onlyInfo ? 'true' : 'false',
 					},
-				})
+				}),
+				{
+					headers,
+				}
 			);
 			if (!dbContentPage) {
 				return null;

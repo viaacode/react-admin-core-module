@@ -266,8 +266,7 @@ export const ContentPageRenderer: FunctionComponent<ContentPageDetailProps> = (p
 			if (queryParams.get(CONTENT_PAGE_PREVIEW_QUERY_PARAM) === 'true') {
 				const userGroupId =
 					queryParams.get(CONTENT_PAGE_USER_GROUP_ID_QUERY_PARAM)?.split(',')[0] ||
-					String(commonUser?.userGroup?.id) ||
-					SpecialUserGroups.loggedOutUsers;
+					SpecialUserGroups.allContent;
 				if (!hasAccessUserGroups(userGroupId, props.contentPageInfo.userGroupIds)) {
 					return props.renderNoAccessError();
 				}
