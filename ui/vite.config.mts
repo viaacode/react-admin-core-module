@@ -28,12 +28,26 @@ export default defineConfig({
 				'src/client': resolve(__dirname, 'src/client.ts'),
 			},
 			formats: ['es'],
+			// Keep js filenames without hash, so we can import them in the client
+			fileName: (format, name) => `${name}.js`,
 		},
 		outDir: 'dist',
 		sourcemap: true,
 		cssCodeSplit: true,
 		rollupOptions: {
 			external,
+			output: {
+				// Keep the css filenames the same, so we can import them with stable names in the client
+				assetFileNames: (assetInfo) => {
+					if (assetInfo.names[0]?.endsWith('.css')) {
+						// Map current output name -> desired output name
+						if (assetInfo.names[0] === 'user.css') return 'client.css'
+						if (assetInfo.names[0] === 'admin.css') return 'admin.css'
+						return '[name][extname]'
+					}
+					return 'assets/[name][extname]'
+				},
+			},
 		},
 	},
 	define: {

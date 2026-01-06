@@ -55,4 +55,3 @@ export {
 	convertDbContentPageToContentPageInfo,
 } from './react-admin/modules/content-page/services/content-page.converters';
 
-import './admin-core-demo-app-styles.scss';

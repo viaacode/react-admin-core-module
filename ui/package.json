@@ -18,9 +18,9 @@
       "import": "./dist/src/admin.js",
       "default": "./dist/src/admin.js"
     },
-    "./styles.css": {
-      "import": "./dist/styles.css",
-      "require": "./dist/styles.css"
+    "./client.css": {
+      "import": "./dist/client.css",
+      "require": "./dist/client.css"
     },
     "./admin.css": {
       "import": "./dist/admin.css",

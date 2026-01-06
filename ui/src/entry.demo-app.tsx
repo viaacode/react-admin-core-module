@@ -9,6 +9,8 @@ import { RouterProvider } from 'react-router';
 import { createBrowserRouter } from 'react-router-dom';
 import ALL_APP_ROUTES from './routes';
 
+import './admin-core-demo-app-styles.scss';
+
 // Set moment language to Dutch
 setDefaultOptions({
 	locale: nlBE,
