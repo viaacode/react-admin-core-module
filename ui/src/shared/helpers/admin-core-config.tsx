@@ -376,9 +376,5 @@ export function getAdminCoreConfig(navigateFunc: NavigateFunction): AdminConfig 
 
 export function setAdminCoreConfig(navigateFunc: NavigateFunction) {
 	// only used for starting admin-core separately
-	console.log('Setting admin core config', {
-		config: getAdminCoreConfig(navigateFunc),
-		navigateFunc: navigateFunc,
-	});
 	AdminConfigManager.setConfig(getAdminCoreConfig(navigateFunc));
 }
