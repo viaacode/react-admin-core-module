@@ -235,9 +235,13 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 								<Column size={itemStyle === ContentItemStyle.NEWS_LIST ? '2-5' : '2-4'}>
 									<Spacer margin="bottom-large">
 										<AspectRatioWrapper
-											style={{
-												backgroundImage: `url(${page.thumbnailPath})`,
-											}}
+											style={
+												page.thumbnailPath
+													? {
+															backgroundImage: `url(${page.thumbnailPath})`,
+														}
+													: {}
+											}
 											aspect={itemStyle === ContentItemStyle.NEWS_LIST ? 1.78 : 2.5} // 500 x 280 or 528 x 211
 										/>
 									</Spacer>
