@@ -1,12 +1,15 @@
 import { asyncNoop } from 'es-toolkit';
 import React, { useEffect, useState } from 'react';
 import { Outlet, useNavigate } from 'react-router';
+import type { NavigateFunction } from '~core/config';
 import { Link } from '~shared/components/Link';
 import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner';
 import { getAdminCoreConfig, setAdminCoreConfig } from './shared/helpers/admin-core-config';
+
+import '@viaa/avo2-components/styles.css';
+import '@meemoo/react-components/styles.css';
 import './react-admin/modules/shared/styles/main.scss';
 import './App.scss';
-import type { NavigateFunction } from '~core/config';
 
 function App() {
 	const [isAdminCoreConfigLoaded, setIsAdminCoreConfigLoaded] = useState(false);
