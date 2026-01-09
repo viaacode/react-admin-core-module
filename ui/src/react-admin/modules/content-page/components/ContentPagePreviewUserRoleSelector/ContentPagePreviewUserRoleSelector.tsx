@@ -9,14 +9,7 @@ import {
 } from '@viaa/avo2-components';
 
 import { isNil, sortBy } from 'es-toolkit';
-import React, {
-	type FC,
-	type FunctionComponent,
-	useCallback,
-	useEffect,
-	useMemo,
-	useState,
-} from 'react';
+import React, { type FC, useCallback, useEffect, useMemo, useState } from 'react';
 import { getCommonUser } from '~core/config/config.selectors.ts';
 import {
 	GET_ALL_CONTENT,

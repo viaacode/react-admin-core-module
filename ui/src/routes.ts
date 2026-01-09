@@ -1,4 +1,4 @@
-import { asyncNoop, noop } from 'es-toolkit';
+import { asyncNoop } from 'es-toolkit';
 import { type MiddlewareFunction, type RouteObject, redirect } from 'react-router';
 import { Loading } from '~shared/components/Loading/Loading';
 import { ROUTE_PARTS } from '~shared/consts';

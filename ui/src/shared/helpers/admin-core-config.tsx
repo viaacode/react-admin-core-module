@@ -1,4 +1,4 @@
-import { IconName } from '@viaa/avo2-components';
+import { type DefaultProps, IconName } from '@viaa/avo2-components';
 import type { AvoCoreDatabaseType, AvoEducationOrganizationOrganization } from '@viaa/avo2-types';
 import { capitalize, lowerCase } from 'es-toolkit';
 import type { TOptions } from 'i18next';
@@ -45,6 +45,20 @@ const DUMMY_EDUCATIONAL_ORGANISATIONS: AvoEducationOrganizationOrganization[] = 
 		unitStreet: 'Ottogracht Kunstencampus 4',
 	},
 ];
+
+interface AvoSpinnerProps extends DefaultProps {
+	children?: ReactNode;
+	size?: 'large';
+	light?: boolean;
+}
+
+interface HetArchiefLoadingProps extends DefaultProps {
+	children?: ReactNode;
+	fullscreen?: boolean;
+	mode?: 'light' | 'dark';
+	centeredHorizontally?: boolean;
+	owner: string; // Used to identify which loader is shown
+}
 
 export function getAdminCoreConfig(navigateFunc: NavigateFunction): AdminConfig {
 	return {
@@ -151,8 +165,9 @@ export function getAdminCoreConfig(navigateFunc: NavigateFunction): AdminConfig 
 		},
 		components: {
 			loader: {
-				component: (props: any) => {
-					return <div data-location-id={props.locationId}>Loading...</div>;
+				component: (props: AvoSpinnerProps | HetArchiefLoadingProps) => {
+					// biome-ignore lint/suspicious/noExplicitAny: locationId parameter still needs to be added to avo and hetarchief spinners
+					return <div data-location-id={(props as any).locationId}>Loading...</div>;
 				},
 			},
 			defaultAudioStill: 'FAKE_DEFAULT_AUDIO_STILL',

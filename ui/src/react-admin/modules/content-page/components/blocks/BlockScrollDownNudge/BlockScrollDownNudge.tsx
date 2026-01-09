@@ -2,9 +2,8 @@ import { Button, IconName } from '@viaa/avo2-components';
 import clsx from 'clsx';
 import React, { type FC, useCallback, useEffect, useState } from 'react';
 
-import './BlockScrollDownNudge.scss';
-import { ROUTE_PARTS } from '~shared/consts/routes';
 import { isAdminRoute } from '~shared/helpers/routing/is-admin-route';
+import './BlockScrollDownNudge.scss';
 
 export const BlockScrollDownNudge: FC = () => {
 	const [visible, setVisible] = useState<boolean>(false);

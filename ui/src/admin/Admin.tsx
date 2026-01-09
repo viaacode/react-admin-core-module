@@ -39,7 +39,7 @@ export const Admin: FC = () => {
 				.then((navItems) => {
 					setNavigationItems(navItems);
 				})
-				.catch((err: any) => {
+				.catch((err: Error) => {
 					console.error(new CustomError('Failed to get nav items', err));
 					showToast({
 						type: ToastType.ERROR,

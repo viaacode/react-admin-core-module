@@ -4,12 +4,15 @@ import clsx from 'clsx';
 import { kebabCase, noop, omit } from 'es-toolkit';
 import type { FunctionComponent, KeyboardEvent, RefObject } from 'react';
 import React, { useCallback, useEffect, useRef } from 'react';
+import { AdminConfigManager } from '~core/config/config.class';
+import { getCommonUser } from '~core/config/config.selectors.ts';
+import { GENERATED_CONTENT_BLOCK_ANCHOR_PREFIX } from '~modules/content-page/const/content-block-anchors.consts';
+import type { ContentPageInfo } from '~modules/content-page/types/content-pages.types';
+import { ContentPageWidth } from '~modules/content-page/types/content-pages.types';
 import { generateSmartLink } from '~shared/components/SmartLink/SmartLink';
-
 import { GET_DARK_BACKGROUND_COLOR_OPTIONS } from '../../const/get-color-options';
 import type { ContentBlockConfig } from '../../types/content-block.types';
 import { Color, CustomBackground } from '../../types/content-block.types';
-
 import {
 	CONTENT_PAGE_ACCESS_BLOCKS,
 	GET_BLOCK_COMPONENT,
@@ -18,14 +21,7 @@ import {
 	REPEATABLE_CONTENT_BLOCKS,
 	USER_CONTENT_BLOCKS,
 } from './ContentBlockRenderer.const';
-
 import './ContentBlockRenderer.scss';
-import type { AvoUserCommonUser } from '@viaa/avo2-types';
-import { AdminConfigManager } from '~core/config/config.class';
-import { getCommonUser } from '~core/config/config.selectors.ts';
-import { GENERATED_CONTENT_BLOCK_ANCHOR_PREFIX } from '~modules/content-page/const/content-block-anchors.consts';
-import type { ContentPageInfo } from '~modules/content-page/types/content-pages.types';
-import { ContentPageWidth } from '~modules/content-page/types/content-pages.types';
 
 interface ContentBlockPreviewProps {
 	contentBlockConfig: ContentBlockConfig;

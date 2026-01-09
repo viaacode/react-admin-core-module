@@ -1,5 +1,5 @@
 import type { RenderLinkFunction } from '@viaa/avo2-components';
-import type { AvoSearchOrderDirection, AvoUserCommonUser } from '@viaa/avo2-types';
+import type { AvoSearchOrderDirection } from '@viaa/avo2-types';
 import type { PageOverviewOrderOptions } from '~modules/content-page/const/get-page-overview-order-options';
 import type { AlignOption, Color } from '~modules/content-page/types/content-block.types';
 import type { ContentTypeAndLabelsValue } from '~shared/components/ContentTypeAndLabelsPicker/ContentTypeAndLabelsPicker';

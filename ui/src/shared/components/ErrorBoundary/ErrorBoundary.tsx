@@ -5,6 +5,7 @@ import { useRouteError } from 'react-router';
 import './ErrorBoundary.scss';
 
 export function ErrorBoundary(locationId: string) {
+	// biome-ignore lint/suspicious/noExplicitAny: We don't know what errors can be thrown in advance
 	const error = useRouteError() as any;
 
 	// Lazy load ErrorView to prevent tText to be called who has a chain to the admin-core which uses use-query-params as commonJs with vite 7 cannot load

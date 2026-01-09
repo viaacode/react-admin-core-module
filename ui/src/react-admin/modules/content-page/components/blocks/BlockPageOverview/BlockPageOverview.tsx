@@ -39,7 +39,7 @@ import { BlockHeading } from '../BlockHeading/BlockHeading';
 import type { ContentTabStyle, LabelObj } from './BlockPageOverview.types';
 import { ContentItemStyle } from './BlockPageOverview.types';
 import './BlockPageOverview.scss';
-import { AvoCoreContentPickerType, type AvoUserCommonUser } from '@viaa/avo2-types';
+import { AvoCoreContentPickerType } from '@viaa/avo2-types';
 
 export interface BlockPageOverviewProps extends DefaultProps {
 	tabs?: { label: string; id: number }[];

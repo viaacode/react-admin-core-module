@@ -1,4 +1,4 @@
-import { asyncNoop, noop } from 'es-toolkit';
+import { asyncNoop } from 'es-toolkit';
 import type { LoaderFunctionArgs } from 'react-router';
 import { AdminConfigManager } from '~core/config';
 import { convertDbContentPageToContentPageInfo } from '~modules/content-page/services/content-page.converters.ts';
@@ -30,6 +30,7 @@ export async function initAppLoader() {
 	}
 }
 
+// biome-ignore lint/suspicious/noExplicitAny: don't know what type this should be
 export async function fetchContentPageLoader(args: LoaderFunctionArgs<any>) {
 	try {
 		// Load content page for the requested path
@@ -41,6 +42,7 @@ export async function fetchContentPageLoader(args: LoaderFunctionArgs<any>) {
 			};
 		}
 		const dbContentPage = await ContentPageService.getContentPageByLanguageAndPath(
+			// biome-ignore lint/suspicious/noExplicitAny: Any because sometimes there is a mismatch between Locale in admin-core and Locale in client app
 			Locale.Nl as any,
 			path
 		);
@@ -63,6 +65,7 @@ export async function fetchContentPageLoader(args: LoaderFunctionArgs<any>) {
 	}
 }
 
+// biome-ignore lint/suspicious/noExplicitAny: This loader is used by multiple routes
 export async function passUrlLoader(args: LoaderFunctionArgs<any>) {
 	return {
 		url: args.request.url,

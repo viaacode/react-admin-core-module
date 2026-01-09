@@ -2,7 +2,6 @@ import { Button } from '@viaa/avo2-components';
 import { format } from 'date-fns';
 import type { FunctionComponent, ReactNode } from 'react';
 import React from 'react';
-import { AdminConfigManager } from '~core/config/config.class';
 import { getPublishedDate } from '~modules/content-page/helpers/get-published-state';
 import type {
 	ContentPageInfo,

@@ -26,9 +26,11 @@ afterEach(() => {
 
 // Mock FlowPlayer
 vi.mock('@meemoo/react-components', async () => {
+	// biome-ignore lint/suspicious/noExplicitAny: This is a test, we don't want to type out all props
 	const actual = await vi.importActual<any>('@meemoo/react-components');
 	return {
 		...actual,
+		// biome-ignore lint/suspicious/noExplicitAny: This is a test, we don't want to type out all props
 		FlowPlayer: (props: any) => (
 			<div data-testid="flowplayer-mock">
 				{/* optionally expose something for assertions */}

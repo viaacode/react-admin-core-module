@@ -48,13 +48,14 @@
     "copy": "vite build && npm run copy-to-client-avo && npm run copy-to-client-hetarchief",
     "copy:avo": "vite build && npm run copy-to-client-avo",
     "copy:hetarchief": "vite build && npm run copy-to-client-hetarchief",
-    "build:analyze": "npx vite-bundle-visualizer",
     "lint": "npm run lint:ts && npm run lint:scss",
     "lint:ts": "biome lint --write .",
     "lint:scss": "stylelint --fix src/**/*.{css,scss}",
     "format": "biome format --write src",
     "test": "jest --cache",
     "type-check": "tsc --noEmit",
+    "build:analyze": "npx vite-bundle-visualizer",
+    "analyse": "source-map-explorer 'dist/index.mjs' --no-border-checks",
     "backup-translations-hetarchief-qas": "dotenv -e .env/.env.local tsx --project ./scripts/tsconfig.json scripts/backup-translations.ts -- HET_ARCHIEF",
     "backup-translations-avo-qas": "dotenv -e .env/.env.local tsx --project ./scripts/tsconfig.json scripts/backup-translations.ts -- AVO",
     "translations:extract:hetarchief": "dotenv -e .env/.env.local tsx --project ./scripts/tsconfig.json scripts/extract-and-replace-translations.ts -- HET_ARCHIEF",
@@ -67,7 +68,6 @@
     "check-bundled-files:admin.mts": "npx depcruise src/admin.ts --config bundle-import-rules.json --include-only \"^src\" --exclude \"(.spec.tsx?|.test.tsx?|node_modules)\"",
     "check-bundled-files:client.mts": "npx depcruise src/client.ts --config bundle-import-rules.json --include-only \"^src\" --exclude \"(.spec.tsx?|.test.tsx?|node_modules)\" --output-type dot | dot -T svg > dependency-graph.svg",
     "list-bundled-files": "npx depcruise src/react-admin --include-only \"^src\" --output-type text",
-    "analyse": "source-map-explorer 'dist/index.mjs' --no-border-checks",
     "bump": "bump-package-versions --part=patch --strategy=highest ../package.json ./package.json ../api/package.json"
   },
   "peerDependencies": {

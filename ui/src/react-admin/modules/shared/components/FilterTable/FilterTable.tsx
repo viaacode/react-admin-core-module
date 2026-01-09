@@ -18,14 +18,13 @@ import {
 } from '@viaa/avo2-components';
 
 import clsx from 'clsx';
-import { compact, isEqual, isNil, sortBy } from 'es-toolkit';
+import { compact, isNil, sortBy } from 'es-toolkit';
 import React, {
 	type FunctionComponent,
 	type KeyboardEvent,
 	type ReactElement,
 	type ReactNode,
 	useCallback,
-	useEffect,
 	useMemo,
 	useState,
 } from 'react';

@@ -3,6 +3,7 @@ import { isServerSideRendering } from '~shared/helpers/routing/is-server-side-re
 import type { SanitizePreset } from './presets';
 import sanitizePresets from './presets';
 
+// biome-ignore lint/suspicious/noExplicitAny: This is a generic function that can be used for multiple types
 function normalizeModule(requiredModule: any): DOMPurifyI {
 	return requiredModule?.default || requiredModule;
 }

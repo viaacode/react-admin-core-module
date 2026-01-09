@@ -4,6 +4,7 @@ import clsx from 'clsx';
 import { isNil } from 'es-toolkit';
 import type { FunctionComponent, ReactNode } from 'react';
 import React, { useCallback, useState } from 'react';
+import { Panel, PanelGroup, PanelResizeHandle } from 'react-resizable-panels';
 import ContentBlockForm from '~modules/content-page/components/ContentBlockForm/ContentBlockForm';
 import { ContentPageRenderer } from '~modules/content-page/components/ContentPageRenderer/ContentPageRenderer';
 import type { DraggableItemData } from '~modules/content-page/components/DraggableList/DraggableList';
@@ -29,9 +30,6 @@ import { createKey } from '~shared/helpers/create-key';
 import { isAvo } from '~shared/helpers/is-avo';
 import { tText } from '~shared/helpers/translation-functions';
 import './ContentEditContentBlocks.scss';
-import type { AvoUserCommonUser } from '@viaa/avo2-types';
-import { Panel, PanelGroup, PanelResizeHandle } from 'react-resizable-panels';
-import { getCommonUser } from '~core/config/config.selectors.ts';
 
 interface ContentEditContentBlocksProps {
 	contentPageInfo: Partial<ContentPageInfo>;
@@ -57,9 +55,6 @@ const ContentEditContentBlocks: FunctionComponent<ContentEditContentBlocksProps>
 	addComponentToState,
 	removeComponentFromState,
 }) => {
-	const commonUser = getCommonUser();
-	const _contentBlockIds = (contentPageInfo.content_blocks || []).map((item) => item.id);
-
 	// Hooks
 	// This is the block that is being edited with the form sidebar accordion opened up
 	const [activeBlockPosition, setActiveBlockPosition] = useState<number | null>(null);
@@ -319,7 +314,7 @@ const ContentEditContentBlocks: FunctionComponent<ContentEditContentBlocksProps>
 			<PanelResizeHandle />
 			<Panel defaultSize={40}>
 				<Sidebar className="c-content-edit-view__sidebar" light>
-					<Navbar background="alt">
+					<Navbar background={'alt'}>
 						<Select
 							options={GET_CONTENT_BLOCK_TYPE_OPTIONS()}
 							onChange={(value) => handleAddContentBlock(value as ContentBlockType)}
