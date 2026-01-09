@@ -777,15 +777,6 @@
     "app": "AVO",
     "component": "ADMIN_CORE",
     "location": "admin/content-block/content-block",
-    "key": "grijs",
-    "language": "nl",
-    "value": "Grijs",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "admin/content-block/content-block",
     "key": "zachtblauw",
     "language": "nl",
     "value": "Zachtblauw",
@@ -849,63 +840,9 @@
     "app": "AVO",
     "component": "ADMIN_CORE",
     "location": "modules/content-page/const/content-block",
-    "key": "platinum",
-    "language": "nl",
-    "value": "Platinum",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/const/content-block",
     "key": "zwart",
     "language": "nl",
     "value": "Zwart",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/const/content-block",
-    "key": "neutraal",
-    "language": "nl",
-    "value": "Neutraal",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/const/content-block",
-    "key": "zinc",
-    "language": "nl",
-    "value": "Zinc",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/const/content-block",
-    "key": "sky-blauw",
-    "language": "nl",
-    "value": "Sky blauw",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/content-page/const/get-color-options",
-    "key": "meemoo-logo",
-    "language": "nl",
-    "value": "Logo meemoo",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/const/content-block",
-    "key": "overgang-zwart-wit",
-    "language": "nl",
-    "value": "Overgang zwart wit",
     "value_type": "TEXT"
   },
   {
@@ -924,6 +861,15 @@
     "key": "donker-grijs",
     "language": "nl",
     "value": "Donkergrijs",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "admin/content-block/content-block",
+    "key": "grijs",
+    "language": "nl",
+    "value": "Grijs",
     "value_type": "TEXT"
   },
   {
@@ -3116,348 +3062,6 @@
   {
     "app": "AVO",
     "component": "ADMIN_CORE",
-    "location": "modules/maintenance-alerts/views/maintenance-alerts-edit-form",
-    "key": "error",
-    "language": "nl",
-    "value": "Error",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "modules/maintenance-alerts/views/maintenance-alerts-edit-form",
-    "key": "het-valideren-van-het-formulier-is-mislukt",
-    "language": "nl",
-    "value": "Het valideren van het formulier is mislukt",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "modules/maintenance-alerts/views/maintenance-alerts-edit-form",
-    "key": "het-opslaan-van-de-melding-is-mislukt",
-    "language": "nl",
-    "value": "Het opslaan van de melding is mislukt.",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "modules/maintenance-alerts/views/maintenance-alerts-edit-form",
-    "key": "bepaalde-velden-in-het-formulier-zijn-niet-correct-ingevuld",
-    "language": "nl",
-    "value": "Bepaalde velden in het formulier zijn niet correct ingevuld.",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/alerts/views/alerts-overview",
-    "key": "succes",
-    "language": "nl",
-    "value": "Succes",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/alerts/views/alerts-overview",
-    "key": "het-aanpassen-van-de-melding-is-gelukt",
-    "language": "nl",
-    "value": "Het aanpassen van de melding is gelukt",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/alerts/views/alerts-overview",
-    "key": "error",
-    "language": "nl",
-    "value": "Error",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/alerts/views/alerts-overview",
-    "key": "het-aanpassen-van-de-melding-is-mislukt",
-    "language": "nl",
-    "value": "Het aanpassen van de melding is mislukt.",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/alerts/views/alerts-overview",
-    "key": "het-aanmaken-van-de-melding-is-gelukt",
-    "language": "nl",
-    "value": "Het aanmaken van de melding is gelukt",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/alerts/views/alerts-overview",
-    "key": "het-aanmaken-van-de-melding-is-mislukt",
-    "language": "nl",
-    "value": "Het aanmaken van de melding is mislukt.",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/alerts/views/alerts-overview",
-    "key": "titel-melding",
-    "language": "nl",
-    "value": "Titel melding",
-    "value_type": "HTML"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/alerts/views/alerts-overview",
-    "key": "beschrijving",
-    "language": "nl",
-    "value": "Beschrijving",
-    "value_type": "HTML"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/alerts/views/alerts-overview",
-    "key": "verduidelijkend-icoon",
-    "language": "nl",
-    "value": "Verduidelijkend icoon",
-    "value_type": "HTML"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/alerts/views/alerts-overview",
-    "key": "zichtbaar-voor-gebruikersgroep",
-    "language": "nl",
-    "value": "Zichtbaar voor gebruikersgroep",
-    "value_type": "HTML"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/alerts/views/alerts-overview",
-    "key": "zichtbaar-van",
-    "language": "nl",
-    "value": "Zichtbaar van",
-    "value_type": "HTML"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/alerts/views/alerts-overview",
-    "key": "zichtbaar-tot",
-    "language": "nl",
-    "value": "Zichtbaar tot",
-    "value_type": "HTML"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "modules/maintenance-alerts/views/maintenance-alerts-edit-form",
-    "key": "taal",
-    "language": "nl",
-    "value": "Taal",
-    "value_type": "HTML"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/alerts/views/alerts-overview",
-    "key": "melding-aanmaken",
-    "language": "nl",
-    "value": "Melding aanmaken",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/alerts/views/alerts-overview",
-    "key": "melding-aanpassen",
-    "language": "nl",
-    "value": "Melding aanpassen",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/alerts/views/alerts-overview",
-    "key": "het-verwijderen-van-de-melding-is-gelukt",
-    "language": "nl",
-    "value": "Het verwijderen van de melding is gelukt.",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/alerts/views/alerts-overview",
-    "key": "het-verwijderen-van-de-melding-is-mislukt",
-    "language": "nl",
-    "value": "Het verwijderen van de melding is mislukt.",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "modules/alerts/views/alerts-overview",
-    "key": "actief",
-    "language": "nl",
-    "value": "Actief",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "modules/alerts/views/alerts-overview",
-    "key": "inactief",
-    "language": "nl",
-    "value": "Inactief",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "modules/maintenance-alerts/views/maintenance-alerts-overview",
-    "key": "hover-bewerk-notificatie",
-    "language": "nl",
-    "value": "Mouse-over bewerk notificatie",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "modules/maintenance-alerts/views/maintenance-alerts-overview",
-    "key": "hover-verwijder-notificatie",
-    "language": "nl",
-    "value": "Mouse-over verwijder notificatie",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "modules/alerts/views/alerts-overview",
-    "key": "titel-melding",
-    "language": "nl",
-    "value": "Titel melding",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "modules/alerts/views/alerts-overview",
-    "key": "zichtbaar-van",
-    "language": "nl",
-    "value": "Zichtbaar van",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "modules/alerts/views/alerts-overview",
-    "key": "zichtbaar-tot",
-    "language": "nl",
-    "value": "Zichtbaar tot",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "modules/alerts/views/alerts-overview",
-    "key": "status",
-    "language": "nl",
-    "value": "Status",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "modules/maintenance-alerts/views/maintenance-alerts-overview",
-    "key": "taal",
-    "language": "nl",
-    "value": "Taal",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "modules/maintenance-alerts/views/maintenance-alerts-overview",
-    "key": "er-zijn-nog-geen-meldingen-aangemaakt",
-    "language": "nl",
-    "value": "Er zijn nog geen meldingen aangemaakt",
-    "value_type": "HTML"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/alerts/views/alerts-overview",
-    "key": "er-zijn-geen-meldingen-gevonden",
-    "language": "nl",
-    "value": "Er zijn geen meldingen gevonden",
-    "value_type": "HTML"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "modules/maintenance-alerts/views/maintenance-alerts-overview",
-    "key": "zoeken-op-titel-of-bericht",
-    "language": "nl",
-    "value": "Zoeken op titel of bericht",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "modules/maintenance-alerts/views/maintenance-alerts-overview",
-    "key": "er-zijn-geen-meldingen-gevonden-die-voldoen-aan-je-zoekterm",
-    "language": "nl",
-    "value": "Er zijn geen meldingen gevonden die voldoen aan je zoekterm",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "modules/maintenance-alerts/views/maintenance-alerts-overview",
-    "key": "zoek-input-aria-label",
-    "language": "nl",
-    "value": "Zoek input aria label",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/alerts/views/alerts-overview",
-    "key": "meldingen",
-    "language": "nl",
-    "value": "Meldingen",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/alerts/views/alerts-overview",
-    "key": "nieuwe-melding-aanmaken",
-    "language": "nl",
-    "value": "Nieuwe melding aanmaken.",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/alerts/views/alerts-overview",
-    "key": "het-verwijderen-van-een-melding-kan-niet-ongedaan-gemaakt-worden",
-    "language": "nl",
-    "value": "Het verwijderen van een melding kan niet ongedaan gemaakt worden.",
-    "value_type": "HTML"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
     "location": "modules/navigation/views/navigation-detail",
     "key": "success",
     "language": "nl",
@@ -3683,15 +3287,6 @@
   {
     "app": "AVO",
     "component": "ADMIN_CORE",
-    "location": "admin/menu/views/menu-overview",
-    "key": "navigatie-overzicht",
-    "language": "nl",
-    "value": "Navigatie: overzicht",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
     "location": "modules/navigation/views/navigation-overview",
     "key": "het-ophalen-van-de-navigatie-balken-is-mislukt",
     "language": "nl",
@@ -3827,15 +3422,6 @@
   {
     "app": "AVO",
     "component": "ADMIN_CORE",
-    "location": "constants",
-    "key": "het-archief-voor-onderwijs",
-    "language": "nl",
-    "value": "Het Archief voor Onderwijs",
-    "value_type": "HTML"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
     "location": "admin/users/user",
     "key": "verwijder-alle-content",
     "language": "nl",
@@ -3876,24 +3462,6 @@
     "key": "zet-alle-content-over-naar-een-andere-gebruiker",
     "language": "nl",
     "value": "Zet alle content over naar een andere gebruiker.",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "modules/admin/shared/helpers/link",
-    "key": "error",
-    "language": "nl",
-    "value": "Error",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "shared/helpers/link",
-    "key": "de-navigatie-is-afgebroken-wegens-foutieve-parameters",
-    "language": "nl",
-    "value": "De navigatie is afgebroken wegens foute parameters.",
     "value_type": "TEXT"
   },
   {
@@ -7076,6 +6644,24 @@
   {
     "app": "AVO",
     "component": "ADMIN_CORE",
+    "location": "modules/admin/shared/helpers/link",
+    "key": "error",
+    "language": "nl",
+    "value": "Error",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "shared/helpers/link",
+    "key": "de-navigatie-is-afgebroken-wegens-foutieve-parameters",
+    "language": "nl",
+    "value": "De navigatie is afgebroken wegens foute parameters.",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
     "location": "admin/content-block/helpers/generators/hero",
     "key": "hero",
     "language": "nl",
@@ -9623,10 +9209,19 @@
   {
     "app": "AVO",
     "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-uitgeklaard/block-uitgeklaard",
-    "key": "datum",
+    "location": "error/views/error-view",
+    "key": "de-pagina-werd-niet-gevonden-ingelogd",
     "language": "nl",
-    "value": "Datum",
+    "value": "De pagina werd niet gevonden ingelogd",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "error/views/error-view",
+    "key": "ga-naar-de-hulppagina",
+    "language": "nl",
+    "value": "Ga naar de hulppagina",
     "value_type": "TEXT"
   },
   {
@@ -9682,15 +9277,6 @@
     "language": "nl",
     "value": "Er zijn nog niet-opgeslagen wijzigingen, weet je zeker dat je de pagina wil verlaten?",
     "value_type": "HTML"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "constants",
-    "key": "het-archief-voor-onderwijs",
-    "language": "nl",
-    "value": "Het Archief voor Onderwijs",
-    "value_type": "TEXT"
   },
   {
     "app": "AVO",
@@ -10911,15 +10497,6 @@
     "app": "AVO",
     "component": "FRONTEND",
     "location": "settings/settings",
-    "key": "ik-wil-berichten-over-workshops-en-events-ontvangen",
-    "language": "nl",
-    "value": "Ik wil berichten over workshops en events ontvangen.",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "settings/settings",
     "key": "ik-krijg-graag-berichten-om-actief-mee-te-werken-aan-het-archief-voor-onderwijs",
     "language": "nl",
     "value": "Ik krijg graag berichten om actief mee te werken aan Het Archief voor Onderwijs.",
@@ -12120,6 +11697,24 @@
     "key": "gedeeld-op",
     "language": "nl",
     "value": "Gedeeld op",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "react-admin/modules/alerts/views/alerts-overview-page",
+    "key": "bewaar-wijzigingen",
+    "language": "nl",
+    "value": "Bewaar wijzigingen",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "react-admin/modules/alerts/views/alerts-overview-page",
+    "key": "annuleer",
+    "language": "nl",
+    "value": "Annuleer",
     "value_type": "TEXT"
   },
   {
@@ -14232,15 +13827,6 @@
     "app": "AVO",
     "component": "FRONTEND",
     "location": "assignment/views/assignment-detail",
-    "key": "opdracht-detail-pagina-titel",
-    "language": "nl",
-    "value": "Opdracht detail",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "assignment/views/assignment-detail",
     "key": "je-hebt-geen-toegang",
     "language": "nl",
     "value": "Je hebt geen toegang",
@@ -14254,15 +13840,6 @@
     "language": "nl",
     "value": "Je hebt geen rechten (meer) om deze opdracht te bekijken. Denk je dat je wel toegang zou moeten hebben? Bekijk dan hieronder waar het eventueel misgelopen kan zijn, en contacteer de eigenaar van de opdracht indien mogelijk.",
     "value_type": "HTML"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "assignment/views/assignment-detail",
-    "key": "opdracht-detail-pagina-beschrijving",
-    "language": "nl",
-    "value": "Opdracht detail pagina beschrijving",
-    "value_type": "TEXT"
   },
   {
     "app": "AVO",
@@ -14298,6 +13875,15 @@
     "key": "deel-deze-opdracht-met-collegas",
     "language": "nl",
     "value": "Deel deze opdracht met collega's",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "assignment/views/assignment-detail",
+    "key": "opdracht-detail-pagina-titel",
+    "language": "nl",
+    "value": "Opdracht detail",
     "value_type": "TEXT"
   },
   {
@@ -15663,24 +15249,6 @@
     "app": "AVO",
     "component": "FRONTEND",
     "location": "authentication/views/register-or-login",
-    "key": "registratie-of-login-pagina-titel",
-    "language": "nl",
-    "value": "Account aanmaken of inloggen",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "authentication/views/register-or-login",
-    "key": "registratie-of-login-pagina-beschrijving",
-    "language": "nl",
-    "value": "Maak gratis een account aan of log in als je al een account hebt.",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "authentication/views/register-or-login",
     "key": "welkom-op-het-archief-voor-onderwijs",
     "language": "nl",
     "value": "Welkom op Het Archief voor Onderwijs",
@@ -15969,15 +15537,6 @@
     "app": "AVO",
     "component": "FRONTEND",
     "location": "bundle/views/bundle-detail",
-    "key": "bundel-detail-titel-fallback",
-    "language": "nl",
-    "value": "Bundel - detailpagina",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "bundle/views/bundle-detail",
     "key": "openbare-bundel",
     "language": "nl",
     "value": "Bundel",
@@ -16045,6 +15604,15 @@
     "language": "nl",
     "value": "<p>Je hebt geen rechten om collectiebundels te bekijken. </p><p>Ben je een leerling? Dan heeft je leerkracht wellicht een verkeerde link gedeeld. Vraag aan jouw leerkracht om fragmenten of een collectie op te nemen in een opdracht, en deze met jou te delen als leerling.</p>",
     "value_type": "HTML"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "bundle/views/bundle-detail",
+    "key": "bundel-detail-titel-fallback",
+    "language": "nl",
+    "value": "Bundel - detailpagina",
+    "value_type": "TEXT"
   },
   {
     "app": "AVO",
@@ -18426,24 +17994,6 @@
     "app": "AVO",
     "component": "FRONTEND",
     "location": "embed-code/components/embed-code-overview",
-    "key": "er-is-onvoldoende-informatie-beschikbaar-om-ingesloten-fragmenten-op-te-halen",
-    "language": "nl",
-    "value": "Er is onvoldoende informatie beschikbaar om de embedded fragmenten op te halen.",
-    "value_type": "HTML"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "embed-code/components/embed-code-overview",
-    "key": "het-ophalen-van-je-ingesloten-fragmenten-is-mislukt",
-    "language": "nl",
-    "value": "Het ophalen van je embedded fragmenten is mislukt.",
-    "value_type": "HTML"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "embed-code/components/embed-code-overview",
     "key": "het-fragment-werd-succesvol-gedupliceerd",
     "language": "nl",
     "value": "Het fragment werd succesvol gedupliceerd.",
@@ -18942,6 +18492,33 @@
     "key": "ingelogde-start-pagina-beschrijving",
     "language": "nl",
     "value": "Startpagina voor lesgevers: vind beeld en geluid op maat van je lessen.",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "home/views/logged-out-home",
+    "key": "het-laden-van-deze-pagina-is-mislukt-pagina-kon-niet-worden-opgehaald-van-de-server",
+    "language": "nl",
+    "value": "Het laden van deze pagina is mislukt. Pagina kon niet worden opgehaald van de server",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "home/views/logged-out-home",
+    "key": "uitgelogde-start-pagina-titel",
+    "language": "nl",
+    "value": "Uitgelogde-start-pagina-titel",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "home/views/logged-out-home",
+    "key": "uitgelogde-start-pagina-beschrijving",
+    "language": "nl",
+    "value": "Uitgelogde-start-pagina-beschrijving",
     "value_type": "TEXT"
   },
   {
@@ -19744,15 +19321,6 @@
     "language": "nl",
     "value": "Kopieer de link naar deze zoekresultaten",
     "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "search/views/search",
-    "key": "je-hebt-geen-rechten-om-te-zoeken",
-    "language": "nl",
-    "value": "Je hebt momenteel geen rechten om materiaal te zoeken op het platform.",
-    "value_type": "HTML"
   },
   {
     "app": "AVO",
@@ -23432,7 +23000,7 @@
     "location": "admin/interactive-tour/views/interactive-tour-edit",
     "key": "hoe-kopieer-je-een-css-selector",
     "language": "nl",
-    "value": "Zo kopieer je een element selector: <ul> <li> Klik rechts op een element op de webpagina </li> <li>Kies 'Inspecteren'</li> <li> Klik rechts op de geselecteerde html-code in het nieuwe venster </li> <li> Kies kopieer &gt; kopieer selector </li> <li>Plak de waarde in dit veld</li> </ul>",
+    "value": "<p>Zo kopieer je een element selector: </p><ul><li> Klik rechts op een element op de webpagina </li><li>Kies &#x27;Inspecteren&#x27;</li><li> Klik rechts op de geselecteerde html-code in het nieuwe venster </li><li> Kies kopieer &gt; kopieer selector </li><li>Plak de waarde in dit veld</li></ul>",
     "value_type": "HTML"
   },
   {
@@ -24707,24 +24275,6 @@
   {
     "app": "AVO",
     "component": "FRONTEND",
-    "location": "admin/shared/helpers/render-detail-fields",
-    "key": "ja",
-    "language": "nl",
-    "value": "Ja",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "admin/shared/helpers/render-detail-fields",
-    "key": "nee",
-    "language": "nl",
-    "value": "Nee",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
     "location": "admin/shared/hoc/with-admin-core-config",
     "key": "notificatie",
     "language": "nl",
@@ -24918,6 +24468,24 @@
     "key": "leerling-link-geel-inline",
     "language": "nl",
     "value": "Leerling link geel (inline)",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/shared/helpers/render-detail-fields",
+    "key": "ja",
+    "language": "nl",
+    "value": "Ja",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/shared/helpers/render-detail-fields",
+    "key": "nee",
+    "language": "nl",
+    "value": "Nee",
     "value_type": "TEXT"
   },
   {
@@ -25931,6 +25499,60 @@
   {
     "app": "AVO",
     "component": "FRONTEND",
+    "location": "authentication/views/registration-flow/l-8-accept-conditions",
+    "key": "het-ophalen-van-de-gebruikers-en-privacy-voorwaarden-is-mislukt",
+    "language": "nl",
+    "value": "Het ophalen van de gebruiks- en privacyvoorwaarden is mislukt.",
+    "value_type": "HTML"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "authentication/views/registration-flow/l-8-accept-conditions",
+    "key": "het-opslaan-van-de-accepteer-condities-is-mislukt",
+    "language": "nl",
+    "value": "Het aanvaarden van de voorwaarden kon niet worden opgeslagen.",
+    "value_type": "HTML"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "authentication/views/registration-flow/l-8-accept-conditions",
+    "key": "accepteer-voorwaarden",
+    "language": "nl",
+    "value": "Accepteer voorwaarden",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "authentication/views/registration-flow/l-8-accept-conditions",
+    "key": "accepteer-de-gebruiks-en-privacy-voorwaarden",
+    "language": "nl",
+    "value": "Accepteer de gebruiks- en privacyvoorwaarden",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "authentication/views/registration-flow/l-8-accept-conditions",
+    "key": "voorwaarden-pagina-titel",
+    "language": "nl",
+    "value": "Voorwaarden aanvaarden",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "authentication/views/registration-flow/l-8-accept-conditions",
+    "key": "voorwaarden-pagina-beschrijving",
+    "language": "nl",
+    "value": "Gebruiks- en privacyvoorwaarden aanvaarden.",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
     "location": "authentication/views/registration-flow/accept-elementary-pupil-conditions",
     "key": "het-opslaan-van-je-voorkeuren-is-niet-gelukt",
     "language": "nl",
@@ -25990,177 +25612,6 @@
     "language": "nl",
     "value": "Ga verder",
     "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "authentication/views/registration-flow/l-8-accept-conditions",
-    "key": "het-ophalen-van-de-gebruikers-en-privacy-voorwaarden-is-mislukt",
-    "language": "nl",
-    "value": "Het ophalen van de gebruiks- en privacyvoorwaarden is mislukt.",
-    "value_type": "HTML"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "authentication/views/registration-flow/l-8-accept-conditions",
-    "key": "het-opslaan-van-de-accepteer-condities-is-mislukt",
-    "language": "nl",
-    "value": "Het aanvaarden van de voorwaarden kon niet worden opgeslagen.",
-    "value_type": "HTML"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "authentication/views/registration-flow/l-8-accept-conditions",
-    "key": "accepteer-voorwaarden",
-    "language": "nl",
-    "value": "Accepteer voorwaarden",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "authentication/views/registration-flow/l-8-accept-conditions",
-    "key": "accepteer-de-gebruiks-en-privacy-voorwaarden",
-    "language": "nl",
-    "value": "Accepteer de gebruiks- en privacyvoorwaarden",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "authentication/views/registration-flow/l-8-accept-conditions",
-    "key": "voorwaarden-pagina-titel",
-    "language": "nl",
-    "value": "Voorwaarden aanvaarden",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "authentication/views/registration-flow/l-8-accept-conditions",
-    "key": "voorwaarden-pagina-beschrijving",
-    "language": "nl",
-    "value": "Gebruiks- en privacyvoorwaarden aanvaarden.",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "authentication/views/registration-flow/r-10-student-teacher",
-    "key": "student-lesgever-pagina-titel",
-    "language": "nl",
-    "value": "Toegang voor student-lesgevers",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "authentication/views/registration-flow/r-10-student-teacher",
-    "key": "student-lesgever-pagina-beschrijving",
-    "language": "nl",
-    "value": "Student-lesgevers: toegang aanvragen",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "authentication/views/registration-flow/r-10-student-teacher",
-    "key": "ga-terug-naar-de-manuele-account-aanvraag-pagina",
-    "language": "nl",
-    "value": "Ga terug",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "authentication/views/registration-flow/r-10-student-teacher",
-    "key": "het-archief-voor-onderwijs-voor-student-leerkrachten",
-    "language": "nl",
-    "value": "Toegang voor studenten aan een Vlaamse lerarenopleiding.",
-    "value_type": "HTML"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "authentication/views/registration-flow/r-10-student-teacher",
-    "key": "student-teacher-description",
-    "language": "nl",
-    "value": "<p></p><h3>1. Ik ben medewerker van een Vlaamse lerarenopleiding. Hoe kan ik toegang geven aan studenten?</h3><p></p><ul><li>Bezorg ons vóór midden oktober de lijst(en) van studenten die zijn ingeschreven in het nieuwe academiejaar. Dat kan via <a href=\"mailto:vragen@onderwijs.hetarchief.be\">vragen@onderwijs.hetarchief.be</a>.<br/> </li><li>We ontvangen de lijst graag in een csv- of excel-bestand.<br/> </li><li>Per student bevat de lijst in aparte kolommen de volgende gegevens: voornaam, naam, e-mailadres (bv. voornaam.naam@student.onderwijsinstelling.be), naam onderwijsinstelling, naam opleiding (bv. bachelor in het onderwijs: lager onderwijs).<br/> </li><li>Bevestig formeel in je e-mail dat elk adres in de lijst bij een student aan een Vlaamse lerarenopleiding hoort.<br/> </li></ul><p><strong>Belangrijk!</strong> Als hogeschool of universiteit ben je zelf verantwoordelijk voor het verkrijgen van de toestemming van elke student. Hij of zij moet jou eerst expliciet de goedkeuring geven om zijn of haar voornaam, naam, e-mailadres, naam van de onderwijsinstelling en opleiding met meemoo te delen. Pas dan mag je de lijsten doorgeven aan ons en kunnen we een studentenaccount aanmaken.</p><h4>Je hebt ons de lijst bezorgd. Wat is de volgende stap?</h4><ul><li>Wij maken de accounts aan voor nieuwe studenten. We behandelen deze aanvragen doorgaans binnen een week. <br/> </li><li>Gedeactiveerde accounts van voortstuderende studenten zoeken we op en activeren we opnieuw op basis van het e-mailadres.<br/> </li><li>We bezorgen de aanvrager en de studenten een bericht zodra hun account (opnieuw) actief is.<br/> </li></ul><p></p><h3>2. Ik ben student aan een Vlaamse lerarenopleiding. Hoe krijg ik toegang tot Het Archief voor Onderwijs?</h3><p></p><p>Elk jaar vanaf augustus contacteren we de lerarenopleidingen aan Vlaamse hogescholen. We vragen hen om ons de studentenlijsten van het komend academiejaar te bezorgen. Op basis daarvan maken we de studentenaccounts aan op Het Archief voor Onderwijs, of activeren we bestaande accounts opnieuw. We doen dit op basis van het e-mailadres dat aangemaakt werd door jouw school (bv. voornaam.naam@student.onderwijsinstelling.be). Is je account actief, dan ontvang je op dit e-mailadres een bevestiging.</p><p>Eind oktober nog geen bevestigingsmail in je mailbox? Meld dit aan je docent of een medewerker van je lerarenopleiding. Via <a href=\"mailto:vragen@onderwijs.hetarchief.be\">vragen@onderwijs.hetarchief.be</a> bezorgt hij of zij ons volgende gegevens: jouw e-mailadres (verbonden aan je opleiding) en de bevestiging dat jij student aan een Vlaamse lerarenopleiding bent. Is je account aangemaakt, dan ontvang je van ons een e-mailbericht.</p><p>Je account is geldig voor één academiejaar. Zolang je studeert aan een lerarenopleiding, wordt het elk jaar in oktober verlengd.</p><p></p><h3>3. Waarom werd mijn studentenaccount tijdelijk geblokkeerd?</h3><p></p><p>Je account is maar geldig voor één academiejaar en wordt begin oktober tijdelijk geblokkeerd. Na elk academiejaar gaan we eerst na of je opnieuw bent ingeschreven aan een lerarenopleiding. Is dat het geval, dan wordt je account opnieuw geactiveerd. </p><p>Waarom dit zo is? Omdat alleen effectief ingeschreven studenten kunnen inloggen. Dat heeft te maken met het auteursrecht en afspraken met partners. Deze bepalen dat Het Archief voor Onderwijs enkel toegankelijk is voor lesgevers aan een Vlaamse erkende onderwijsinstelling en studenten aan een Vlaamse lerarenopleiding.</p><p>Als controle deactiveren we na de examenperiode in september (tijdelijk) de studentenaccounts van het voorbije academiejaar. Vervolgens bezorgen de hogescholen ons de gegevens van de nieuwe en voortstuderende studenten van het nieuwe academiejaar.</p><p></p><h3>4. Ik wil opnieuw toegang als student. Wat moet ik doen?</h3><h4> &gt;&gt; Je studeert verder voor leerkracht?</h4><p>Dan ben je in het nieuwe academiejaar opnieuw welkom op Het Archief voor Onderwijs! Je vindt er als leerkracht-in-wording een inspirerend aanbod beeld- en geluidsmateriaal voor je opdrachten, stages en lesvoorbereidingen.</p><p>De hogeschool brengt je account opnieuw in orde. Zij bezorgen ons jouw gegevens en de bevestiging dat jij opnieuw bent ingeschreven. Beschikken we over de juiste informatie, dan activeren we je account opnieuw. Je ontvangt hiervan een bevestigingsmail. </p><p>Eind oktober nog niets in je mailbox? Meld dit aan je docent of een medewerker van je lerarenopleiding. Via <a href=\"mailto:vragen@onderwijs.hetarchief.be\">vragen@onderwijs.hetarchief.be</a> bezorgt hij of zij ons volgende gegevens: jouw e-mailadres (verbonden aan je opleiding) en de bevestiging dat jij student in een Vlaamse lerarenopleiding bent. Is je account aangemaakt, dan ontvang je van ons een e-mailbericht.</p><h4> &gt;&gt; Je bent afgestudeerd als leerkracht?</h4><p>Proficiat! Zodra je aan de slag bent als lesgever aan een Vlaamse erkende onderwijsinstelling, activeren we opnieuw je account op Het Archief voor Onderwijs.</p><p>Wat moet je doen? Stuur een e-mail naar <a href=\"mailto:vragen@onderwijs.hetarchief.be\">vragen@onderwijs.hetarchief.be</a>. Vermeld je naam, e-mailadres en Lerarenkaart-nummer (dit vind je in de Lerarenkaart-app van Klasse). Is je account opnieuw actief, dan ontvang je van ons een bericht. Je kunt ook zelf online een nieuw account aanmaken, maar dan verlies je de bestaande collecties en voorkeuren op je studentenaccount.</p><p>Nog even wachten op die eerste job in het onderwijs? Geen nood! We houden je account, collecties en voorkeuren nog even bij.</p><h4> &gt;&gt; Je bent gestopt met je lerarenopleiding?</h4><p>Jammer, maar dan krijg je geen toegang meer tot Het Archief voor Onderwijs. Ons platform is enkel toegankelijk voor studenten aan een Vlaamse lerarenopleiding en lesgevers aan een Vlaamse erkende onderwijsinstelling.</p>",
-    "value_type": "HTML"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "authentication/views/registration-flow/r-3-stamboek",
-    "key": "stamboek-pagina-titel",
-    "language": "nl",
-    "value": "Account aanmaken met Lerarenkaart-nummer",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "authentication/views/registration-flow/r-3-stamboek",
-    "key": "stamboek-pagina-beschrijving",
-    "language": "nl",
-    "value": "Lerarenkaart-nummer",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "authentication/views/registration-flow/r-3-stamboek",
-    "key": "geef-hieronder-je-lerarenkaart-of-stamboeknummer-in",
-    "language": "nl",
-    "value": "Geef hieronder je Lerarenkaart-nummer in.",
-    "value_type": "HTML"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "authentication/views/registration-flow/r-3-stamboek",
-    "key": "zo-gaan-wij-na-of-jij-een-actieve-lesgever-bent-aan-een-vlaamse-erkende-onderwijsinstelling",
-    "language": "nl",
-    "value": "Zo gaan wij na of jij een actieve lesgever bent aan een Vlaamse erkende onderwijsinstelling.",
-    "value_type": "HTML"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "authentication/views/registration-flow/r-3-stamboek",
-    "key": "waarom-hebben-jullie-mijn-stamboeknummer-nodig",
-    "language": "nl",
-    "value": "Waarom hebben jullie mijn Lerarenkaart-nummer nodig?",
-    "value_type": "HTML"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "authentication/views/registration-flow/r-3-stamboek",
-    "key": "lerarenkaart-of-stamboeknummer",
-    "language": "nl",
-    "value": "Lerarenkaart-nummer",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "authentication/views/registration-flow/r-3-stamboek",
-    "key": "account-aanmaken",
-    "language": "nl",
-    "value": "Account aanmaken",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "authentication/views/registration-flow/r-3-stamboek",
-    "key": "ik-ben-lesgever-en-heb-nog-geen-lerarenkaart-of-stamboeknummer",
-    "language": "nl",
-    "value": "Ik ben lesgever en heb (nog) geen Lerarenkaart-nummer.",
-    "value_type": "HTML"
   },
   {
     "app": "AVO",
@@ -26359,6 +25810,123 @@
     "language": "nl",
     "value": "Op deze pagina vind je alle informatie over het aanvragen van een account zonder Lerarenkaart-nummer. Hieronder kan je het formulier invullen en je aanvraag verzenden.",
     "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "authentication/views/registration-flow/r-3-stamboek",
+    "key": "stamboek-pagina-titel",
+    "language": "nl",
+    "value": "Account aanmaken met Lerarenkaart-nummer",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "authentication/views/registration-flow/r-3-stamboek",
+    "key": "stamboek-pagina-beschrijving",
+    "language": "nl",
+    "value": "Lerarenkaart-nummer",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "authentication/views/registration-flow/r-3-stamboek",
+    "key": "geef-hieronder-je-lerarenkaart-of-stamboeknummer-in",
+    "language": "nl",
+    "value": "Geef hieronder je Lerarenkaart-nummer in.",
+    "value_type": "HTML"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "authentication/views/registration-flow/r-3-stamboek",
+    "key": "zo-gaan-wij-na-of-jij-een-actieve-lesgever-bent-aan-een-vlaamse-erkende-onderwijsinstelling",
+    "language": "nl",
+    "value": "Zo gaan wij na of jij een actieve lesgever bent aan een Vlaamse erkende onderwijsinstelling.",
+    "value_type": "HTML"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "authentication/views/registration-flow/r-3-stamboek",
+    "key": "waarom-hebben-jullie-mijn-stamboeknummer-nodig",
+    "language": "nl",
+    "value": "Waarom hebben jullie mijn Lerarenkaart-nummer nodig?",
+    "value_type": "HTML"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "authentication/views/registration-flow/r-3-stamboek",
+    "key": "lerarenkaart-of-stamboeknummer",
+    "language": "nl",
+    "value": "Lerarenkaart-nummer",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "authentication/views/registration-flow/r-3-stamboek",
+    "key": "account-aanmaken",
+    "language": "nl",
+    "value": "Account aanmaken",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "authentication/views/registration-flow/r-3-stamboek",
+    "key": "ik-ben-lesgever-en-heb-nog-geen-lerarenkaart-of-stamboeknummer",
+    "language": "nl",
+    "value": "Ik ben lesgever en heb (nog) geen Lerarenkaart-nummer.",
+    "value_type": "HTML"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "authentication/views/registration-flow/r-10-student-teacher",
+    "key": "student-lesgever-pagina-titel",
+    "language": "nl",
+    "value": "Toegang voor student-lesgevers",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "authentication/views/registration-flow/r-10-student-teacher",
+    "key": "student-lesgever-pagina-beschrijving",
+    "language": "nl",
+    "value": "Student-lesgevers: toegang aanvragen",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "authentication/views/registration-flow/r-10-student-teacher",
+    "key": "ga-terug-naar-de-manuele-account-aanvraag-pagina",
+    "language": "nl",
+    "value": "Ga terug",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "authentication/views/registration-flow/r-10-student-teacher",
+    "key": "het-archief-voor-onderwijs-voor-student-leerkrachten",
+    "language": "nl",
+    "value": "Toegang voor studenten aan een Vlaamse lerarenopleiding.",
+    "value_type": "HTML"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "authentication/views/registration-flow/r-10-student-teacher",
+    "key": "student-teacher-description",
+    "language": "nl",
+    "value": "<p></p><h3>1. Ik ben medewerker van een Vlaamse lerarenopleiding. Hoe kan ik toegang geven aan studenten?</h3><p></p><ul><li>Bezorg ons vóór midden oktober de lijst(en) van studenten die zijn ingeschreven in het nieuwe academiejaar. Dat kan via <a href=\"mailto:vragen@onderwijs.hetarchief.be\">vragen@onderwijs.hetarchief.be</a>.<br/> </li><li>We ontvangen de lijst graag in een csv- of excel-bestand.<br/> </li><li>Per student bevat de lijst in aparte kolommen de volgende gegevens: voornaam, naam, e-mailadres (bv. voornaam.naam@student.onderwijsinstelling.be), naam onderwijsinstelling, naam opleiding (bv. bachelor in het onderwijs: lager onderwijs).<br/> </li><li>Bevestig formeel in je e-mail dat elk adres in de lijst bij een student aan een Vlaamse lerarenopleiding hoort.<br/> </li></ul><p><strong>Belangrijk!</strong> Als hogeschool of universiteit ben je zelf verantwoordelijk voor het verkrijgen van de toestemming van elke student. Hij of zij moet jou eerst expliciet de goedkeuring geven om zijn of haar voornaam, naam, e-mailadres, naam van de onderwijsinstelling en opleiding met meemoo te delen. Pas dan mag je de lijsten doorgeven aan ons en kunnen we een studentenaccount aanmaken.</p><h4>Je hebt ons de lijst bezorgd. Wat is de volgende stap?</h4><ul><li>Wij maken de accounts aan voor nieuwe studenten. We behandelen deze aanvragen doorgaans binnen een week. <br/> </li><li>Gedeactiveerde accounts van voortstuderende studenten zoeken we op en activeren we opnieuw op basis van het e-mailadres.<br/> </li><li>We bezorgen de aanvrager en de studenten een bericht zodra hun account (opnieuw) actief is.<br/> </li></ul><p></p><h3>2. Ik ben student aan een Vlaamse lerarenopleiding. Hoe krijg ik toegang tot Het Archief voor Onderwijs?</h3><p></p><p>Elk jaar vanaf augustus contacteren we de lerarenopleidingen aan Vlaamse hogescholen. We vragen hen om ons de studentenlijsten van het komend academiejaar te bezorgen. Op basis daarvan maken we de studentenaccounts aan op Het Archief voor Onderwijs, of activeren we bestaande accounts opnieuw. We doen dit op basis van het e-mailadres dat aangemaakt werd door jouw school (bv. voornaam.naam@student.onderwijsinstelling.be). Is je account actief, dan ontvang je op dit e-mailadres een bevestiging.</p><p>Eind oktober nog geen bevestigingsmail in je mailbox? Meld dit aan je docent of een medewerker van je lerarenopleiding. Via <a href=\"mailto:vragen@onderwijs.hetarchief.be\">vragen@onderwijs.hetarchief.be</a> bezorgt hij of zij ons volgende gegevens: jouw e-mailadres (verbonden aan je opleiding) en de bevestiging dat jij student aan een Vlaamse lerarenopleiding bent. Is je account aangemaakt, dan ontvang je van ons een e-mailbericht.</p><p>Je account is geldig voor één academiejaar. Zolang je studeert aan een lerarenopleiding, wordt het elk jaar in oktober verlengd.</p><p></p><h3>3. Waarom werd mijn studentenaccount tijdelijk geblokkeerd?</h3><p></p><p>Je account is maar geldig voor één academiejaar en wordt begin oktober tijdelijk geblokkeerd. Na elk academiejaar gaan we eerst na of je opnieuw bent ingeschreven aan een lerarenopleiding. Is dat het geval, dan wordt je account opnieuw geactiveerd. </p><p>Waarom dit zo is? Omdat alleen effectief ingeschreven studenten kunnen inloggen. Dat heeft te maken met het auteursrecht en afspraken met partners. Deze bepalen dat Het Archief voor Onderwijs enkel toegankelijk is voor lesgevers aan een Vlaamse erkende onderwijsinstelling en studenten aan een Vlaamse lerarenopleiding.</p><p>Als controle deactiveren we na de examenperiode in september (tijdelijk) de studentenaccounts van het voorbije academiejaar. Vervolgens bezorgen de hogescholen ons de gegevens van de nieuwe en voortstuderende studenten van het nieuwe academiejaar.</p><p></p><h3>4. Ik wil opnieuw toegang als student. Wat moet ik doen?</h3><h4> &gt;&gt; Je studeert verder voor leerkracht?</h4><p>Dan ben je in het nieuwe academiejaar opnieuw welkom op Het Archief voor Onderwijs! Je vindt er als leerkracht-in-wording een inspirerend aanbod beeld- en geluidsmateriaal voor je opdrachten, stages en lesvoorbereidingen.</p><p>De hogeschool brengt je account opnieuw in orde. Zij bezorgen ons jouw gegevens en de bevestiging dat jij opnieuw bent ingeschreven. Beschikken we over de juiste informatie, dan activeren we je account opnieuw. Je ontvangt hiervan een bevestigingsmail. </p><p>Eind oktober nog niets in je mailbox? Meld dit aan je docent of een medewerker van je lerarenopleiding. Via <a href=\"mailto:vragen@onderwijs.hetarchief.be\">vragen@onderwijs.hetarchief.be</a> bezorgt hij of zij ons volgende gegevens: jouw e-mailadres (verbonden aan je opleiding) en de bevestiging dat jij student in een Vlaamse lerarenopleiding bent. Is je account aangemaakt, dan ontvang je van ons een e-mailbericht.</p><h4> &gt;&gt; Je bent afgestudeerd als leerkracht?</h4><p>Proficiat! Zodra je aan de slag bent als lesgever aan een Vlaamse erkende onderwijsinstelling, activeren we opnieuw je account op Het Archief voor Onderwijs.</p><p>Wat moet je doen? Stuur een e-mail naar <a href=\"mailto:vragen@onderwijs.hetarchief.be\">vragen@onderwijs.hetarchief.be</a>. Vermeld je naam, e-mailadres en Lerarenkaart-nummer (dit vind je in de Lerarenkaart-app van Klasse). Is je account opnieuw actief, dan ontvang je van ons een bericht. Je kunt ook zelf online een nieuw account aanmaken, maar dan verlies je de bestaande collecties en voorkeuren op je studentenaccount.</p><p>Nog even wachten op die eerste job in het onderwijs? Geen nood! We houden je account, collecties en voorkeuren nog even bij.</p><h4> &gt;&gt; Je bent gestopt met je lerarenopleiding?</h4><p>Jammer, maar dan krijg je geen toegang meer tot Het Archief voor Onderwijs. Ons platform is enkel toegankelijk voor studenten aan een Vlaamse lerarenopleiding en lesgevers aan een Vlaamse erkende onderwijsinstelling.</p>",
+    "value_type": "HTML"
   },
   {
     "app": "AVO",
@@ -27507,9 +27075,36 @@
     "app": "AVO",
     "component": "FRONTEND",
     "location": "shared/components/before-unload-prompt/before-unload-prompt",
+    "key": "ben-je-zeker-dat-je-de-pagina-wilt-verlaten",
+    "language": "nl",
+    "value": "Ben je zeker dat je de pagina wilt verlaten?",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "shared/components/before-unload-prompt/before-unload-prompt",
     "key": "er-zijn-nog-niet-opgeslagen-wijzigingen-weet-u-zeker-dat-u-de-pagina-wil-verlaten",
     "language": "nl",
     "value": "Er zijn nog niet-opgeslagen wijzigingen. Weet je zeker dat je de pagina wil verlaten?",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "shared/components/before-unload-prompt/before-unload-prompt",
+    "key": "verlaten",
+    "language": "nl",
+    "value": "Verlaten",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "shared/components/before-unload-prompt/before-unload-prompt",
+    "key": "blijven",
+    "language": "nl",
+    "value": "Blijven",
     "value_type": "TEXT"
   },
   {
@@ -30350,74 +29945,38 @@
   {
     "app": "AVO",
     "component": "FRONTEND",
-    "location": "react-admin/modules/alerts/views/alerts-overview-page",
-    "key": "bewaar-wijzigingen",
+    "location": "collection/components/collection-or-bundle-edit-publication-details",
+    "key": "og-afbeelding-1200-x-630-px",
     "language": "nl",
-    "value": "Bewaar wijzigingen",
+    "value": "OG afbeelding (1200 x 630 px)",
     "value_type": "TEXT"
   },
   {
     "app": "AVO",
     "component": "FRONTEND",
-    "location": "react-admin/modules/alerts/views/alerts-overview-page",
-    "key": "annuleer",
+    "location": "collection/components/collection-or-bundle-edit-publication-details",
+    "key": "upload-een-og-afbeelding",
     "language": "nl",
-    "value": "Annuleer",
+    "value": "Upload een OG afbeelding",
     "value_type": "TEXT"
   },
   {
     "app": "AVO",
     "component": "FRONTEND",
-    "location": "home/views/logged-out-home",
-    "key": "het-laden-van-deze-pagina-is-mislukt-pagina-kon-niet-worden-opgehaald-van-de-server",
+    "location": "admin/menu/views/menu-overview",
+    "key": "navigatie-overzicht",
     "language": "nl",
-    "value": "Het laden van deze pagina is mislukt. Pagina kon niet worden opgehaald van de server",
+    "value": "Navigatie overzicht",
     "value_type": "TEXT"
   },
   {
     "app": "AVO",
     "component": "FRONTEND",
-    "location": "home/views/logged-out-home",
-    "key": "uitgelogde-start-pagina-titel",
+    "location": "assignment/views/assignment-response-edit/assignment-response-edit-page",
+    "key": "de-opdracht-is-niet-gevonden",
     "language": "nl",
-    "value": "Uitgelogde-start-pagina-titel",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "home/views/logged-out-home",
-    "key": "uitgelogde-start-pagina-beschrijving",
-    "language": "nl",
-    "value": "Uitgelogde-start-pagina-beschrijving",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "shared/components/before-unload-prompt/before-unload-prompt",
-    "key": "ben-je-zeker-dat-je-de-pagina-wilt-verlaten",
-    "language": "nl",
-    "value": "Ben je zeker dat je de pagina wilt verlaten?",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "shared/components/before-unload-prompt/before-unload-prompt",
-    "key": "verlaten",
-    "language": "nl",
-    "value": "Verlaten",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "shared/components/before-unload-prompt/before-unload-prompt",
-    "key": "blijven",
-    "language": "nl",
-    "value": "Blijven",
-    "value_type": "TEXT"
+    "value": "De opdracht is niet gevonden",
+    "value_type": "HTML"
   },
   {
     "app": "AVO",
