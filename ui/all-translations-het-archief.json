@@ -19481,7 +19481,7 @@
     "location": "pages/nieuwsbrief/index",
     "key": "nieuwsbrief-omschrijving",
     "language": "nl",
-    "value": "Ik wil graag maximaal 3 keer per jaar een nieuwsbrief ontvangen van hetarchief.be met informatie over nieuwe mogelijkheden op het platform en inspiratie voor mijn zoektocht naar digitaal archiefmateriaal.\r\n\r\nIk stem in met de verwerking van mijn persoonsgegevens overeenkomstig het privacybeleid.",
+    "value": "Ik wil graag maximaal 3 keer per jaar een nieuwsbrief ontvangen van hetarchief.be met informatie over nieuwe mogelijkheden op het platform en inspiratie voor mijn zoektocht naar digitaal archiefmateriaal.\n\nIk stem in met de verwerking van mijn persoonsgegevens overeenkomstig het privacybeleid.",
     "value_type": "TEXT"
   },
   {
@@ -19490,7 +19490,7 @@
     "location": "pages/nieuwsbrief/index",
     "key": "nieuwsbrief-omschrijving",
     "language": "en",
-    "value": "I would like to receive a newsletter from archive.be at most 3 times a year with information about new possibilities on the platform and inspiration for my search for digital archival material. \r\n\r\nI agree with the processing of my personal data in accordance with the privacy policy.",
+    "value": "I would like to receive a newsletter from archive.be at most 3 times a year with information about new possibilities on the platform and inspiration for my search for digital archival material. \n\nI agree with the processing of my personal data in accordance with the privacy policy.",
     "value_type": "TEXT"
   },
   {
@@ -20453,7 +20453,7 @@
     "location": "modules/cp/const/material-requests",
     "key": "filter-status-new",
     "language": "nl",
-    "value": "Filter status new",
+    "value": "Nieuw",
     "value_type": "TEXT"
   },
   {
@@ -20462,7 +20462,7 @@
     "location": "modules/cp/const/material-requests",
     "key": "filter-status-new",
     "language": "en",
-    "value": "Filter status new",
+    "value": "New",
     "value_type": "TEXT"
   },
   {
@@ -20471,7 +20471,7 @@
     "location": "modules/cp/const/material-requests",
     "key": "filter-status-pending",
     "language": "nl",
-    "value": "Filter status pending",
+    "value": "In behandeling",
     "value_type": "TEXT"
   },
   {
@@ -20480,7 +20480,7 @@
     "location": "modules/cp/const/material-requests",
     "key": "filter-status-pending",
     "language": "en",
-    "value": "Filter status pending",
+    "value": "Pending",
     "value_type": "TEXT"
   },
   {
@@ -20489,7 +20489,7 @@
     "location": "modules/cp/const/material-requests",
     "key": "filter-status-approved",
     "language": "nl",
-    "value": "Filter status approved",
+    "value": "Goedgekeurd",
     "value_type": "TEXT"
   },
   {
@@ -20498,7 +20498,7 @@
     "location": "modules/cp/const/material-requests",
     "key": "filter-status-approved",
     "language": "en",
-    "value": "Filter status approved",
+    "value": "Approved",
     "value_type": "TEXT"
   },
   {
@@ -20507,7 +20507,7 @@
     "location": "modules/cp/const/material-requests",
     "key": "filter-status-denied",
     "language": "nl",
-    "value": "Filter status denied",
+    "value": "Geweigerd",
     "value_type": "TEXT"
   },
   {
@@ -20516,7 +20516,7 @@
     "location": "modules/cp/const/material-requests",
     "key": "filter-status-denied",
     "language": "en",
-    "value": "Filter status denied",
+    "value": "Denied",
     "value_type": "TEXT"
   },
   {
@@ -20525,7 +20525,7 @@
     "location": "modules/cp/const/material-requests",
     "key": "filter-status-cancelled",
     "language": "nl",
-    "value": "Filter status cancelled",
+    "value": "Geannuleerd",
     "value_type": "TEXT"
   },
   {
@@ -20534,25 +20534,7 @@
     "location": "modules/cp/const/material-requests",
     "key": "filter-status-cancelled",
     "language": "en",
-    "value": "Filter status cancelled",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/cp/const/material-requests",
-    "key": "filter-status-none",
-    "language": "nl",
-    "value": "Filter status none",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/cp/const/material-requests",
-    "key": "filter-status-none",
-    "language": "en",
-    "value": "Filter status none",
+    "value": "Cancelled",
     "value_type": "TEXT"
   },
   {
@@ -20561,7 +20543,7 @@
     "location": "modules/cp/const/material-requests",
     "key": "filter-download-url-yes",
     "language": "nl",
-    "value": "Filter download url yes",
+    "value": "Ja",
     "value_type": "TEXT"
   },
   {
@@ -20570,7 +20552,7 @@
     "location": "modules/cp/const/material-requests",
     "key": "filter-download-url-yes",
     "language": "en",
-    "value": "Filter download url yes",
+    "value": "Yes",
     "value_type": "TEXT"
   },
   {
@@ -20579,7 +20561,7 @@
     "location": "modules/cp/const/material-requests",
     "key": "filter-download-url-no",
     "language": "nl",
-    "value": "Filter download url no",
+    "value": "Nee",
     "value_type": "TEXT"
   },
   {
@@ -20588,7 +20570,7 @@
     "location": "modules/cp/const/material-requests",
     "key": "filter-download-url-no",
     "language": "en",
-    "value": "Filter download url no",
+    "value": "No",
     "value_type": "TEXT"
   },
   {
@@ -22305,42 +22287,6 @@
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
     "location": "modules/admin/const/material-requests",
-    "key": "naam",
-    "language": "nl",
-    "value": "naam",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/admin/const/material-requests",
-    "key": "naam",
-    "language": "en",
-    "value": "name",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/admin/const/material-requests",
-    "key": "emailadres",
-    "language": "nl",
-    "value": "e-mailadres",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/admin/const/material-requests",
-    "key": "emailadres",
-    "language": "en",
-    "value": "e-mail address",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/admin/const/material-requests",
     "key": "aanbieder",
     "language": "nl",
     "value": "aanbieder",
@@ -23762,6 +23708,42 @@
   {
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
+    "location": "modules/cp/const/material-requests",
+    "key": "aanvrager",
+    "language": "nl",
+    "value": "Aanvrager",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/cp/const/material-requests",
+    "key": "aanvrager",
+    "language": "en",
+    "value": "Aanvrager",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/cp/const/material-requests",
+    "key": "titel-materiaal",
+    "language": "nl",
+    "value": "Titel materiaal",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/cp/const/material-requests",
+    "key": "titel-materiaal",
+    "language": "en",
+    "value": "Titel materiaal",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
     "location": "modules/cp/const/requests",
     "key": "volledige-toegang",
     "language": "nl",
@@ -24171,6 +24153,150 @@
     "key": "ga-naar-mijn-uitgaande-materiaalaanvragen",
     "language": "en",
     "value": "Ga naar mijn uitgaande materiaalaanvragen",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/cp/views/cp-admin-material-requests",
+    "key": "type",
+    "language": "nl",
+    "value": "Type",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/cp/views/cp-admin-material-requests",
+    "key": "type",
+    "language": "en",
+    "value": "Type",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/cp/views/cp-admin-material-requests",
+    "key": "type-aanvraag",
+    "language": "nl",
+    "value": "Type aanvraag",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/cp/views/cp-admin-material-requests",
+    "key": "type-aanvraag",
+    "language": "en",
+    "value": "Type aanvraag",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/cp/views/cp-admin-material-requests",
+    "key": "pas-toe",
+    "language": "nl",
+    "value": "Pas toe",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/cp/views/cp-admin-material-requests",
+    "key": "pas-toe",
+    "language": "en",
+    "value": "Pas toe",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/cp/views/cp-admin-material-requests",
+    "key": "reset",
+    "language": "nl",
+    "value": "Reset",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/cp/views/cp-admin-material-requests",
+    "key": "reset",
+    "language": "en",
+    "value": "Reset",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/cp/views/cp-admin-material-requests",
+    "key": "status",
+    "language": "nl",
+    "value": "Status",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/cp/views/cp-admin-material-requests",
+    "key": "status",
+    "language": "en",
+    "value": "Status",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/cp/views/cp-admin-material-requests",
+    "key": "status-aanvraag",
+    "language": "nl",
+    "value": "Status aanvraag",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/cp/views/cp-admin-material-requests",
+    "key": "status-aanvraag",
+    "language": "en",
+    "value": "Status aanvraag",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/cp/views/cp-admin-material-requests",
+    "key": "download",
+    "language": "nl",
+    "value": "Download",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/cp/views/cp-admin-material-requests",
+    "key": "download",
+    "language": "en",
+    "value": "Download",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/cp/views/cp-admin-material-requests",
+    "key": "aanvraag-met-download",
+    "language": "nl",
+    "value": "Aanvraag met download",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/cp/views/cp-admin-material-requests",
+    "key": "aanvraag-met-download",
+    "language": "en",
+    "value": "Aanvraag met download",
     "value_type": "TEXT"
   },
   {
@@ -24683,7 +24809,7 @@
     "location": "modules/material-requests/const/index",
     "key": "status-new",
     "language": "nl",
-    "value": "status-new",
+    "value": "Nieuw",
     "value_type": "TEXT"
   },
   {
@@ -24692,7 +24818,7 @@
     "location": "modules/material-requests/const/index",
     "key": "status-new",
     "language": "en",
-    "value": "status-new",
+    "value": "New",
     "value_type": "TEXT"
   },
   {
@@ -24701,7 +24827,7 @@
     "location": "modules/material-requests/const/index",
     "key": "status-pending",
     "language": "nl",
-    "value": "status-pending",
+    "value": "In behandeling",
     "value_type": "TEXT"
   },
   {
@@ -24710,7 +24836,7 @@
     "location": "modules/material-requests/const/index",
     "key": "status-pending",
     "language": "en",
-    "value": "status-pending",
+    "value": "Pending",
     "value_type": "TEXT"
   },
   {
@@ -24719,7 +24845,7 @@
     "location": "modules/material-requests/const/index",
     "key": "status-approved",
     "language": "nl",
-    "value": "status-approved",
+    "value": "Goedgekeurd",
     "value_type": "TEXT"
   },
   {
@@ -24728,7 +24854,7 @@
     "location": "modules/material-requests/const/index",
     "key": "status-approved",
     "language": "en",
-    "value": "status-approved",
+    "value": "Approved",
     "value_type": "TEXT"
   },
   {
@@ -24737,7 +24863,7 @@
     "location": "modules/material-requests/const/index",
     "key": "status-denied",
     "language": "nl",
-    "value": "status-denied",
+    "value": "Geweigerd",
     "value_type": "TEXT"
   },
   {
@@ -24746,7 +24872,7 @@
     "location": "modules/material-requests/const/index",
     "key": "status-denied",
     "language": "en",
-    "value": "status-denied",
+    "value": "Denied",
     "value_type": "TEXT"
   },
   {
@@ -24755,7 +24881,7 @@
     "location": "modules/material-requests/const/index",
     "key": "status-cancelled",
     "language": "nl",
-    "value": "status-cancelled",
+    "value": "Geannuleerd",
     "value_type": "TEXT"
   },
   {
@@ -24764,7 +24890,7 @@
     "location": "modules/material-requests/const/index",
     "key": "status-cancelled",
     "language": "en",
-    "value": "status-cancelled",
+    "value": "Cancelled",
     "value_type": "TEXT"
   },
   {
@@ -24791,7 +24917,7 @@
     "location": "modules/material-requests/const/index",
     "key": "download-quality-normal",
     "language": "nl",
-    "value": "download-quality-normal",
+    "value": "Afspeelkwaliteit",
     "value_type": "TEXT"
   },
   {
@@ -24800,7 +24926,7 @@
     "location": "modules/material-requests/const/index",
     "key": "download-quality-normal",
     "language": "en",
-    "value": "download-quality-normal",
+    "value": "Afspeelkwaliteit (engels)",
     "value_type": "TEXT"
   },
   {
@@ -24809,7 +24935,7 @@
     "location": "modules/material-requests/const/index",
     "key": "download-quality-high",
     "language": "nl",
-    "value": "download-quality-high",
+    "value": "Hogere kwaliteit",
     "value_type": "TEXT"
   },
   {
@@ -24818,7 +24944,7 @@
     "location": "modules/material-requests/const/index",
     "key": "download-quality-high",
     "language": "en",
-    "value": "download-quality-high",
+    "value": "Hogere kwaliteit (engels)",
     "value_type": "TEXT"
   },
   {
@@ -24827,7 +24953,7 @@
     "location": "modules/material-requests/const/index",
     "key": "intended-usage-intern",
     "language": "nl",
-    "value": "intended-usage-intern",
+    "value": "Intern gebruik zonder vergoeding of financieel voordeel: mijn organisatie gaat geen vergoeding vragen of beoogt geen financieel voordeel met het interne gebruik van dit materiaal. Het materiaal wordt niet gebruikt op een manier die een financieel of zakelijk voordeel creëert voor de organisatie; inclusief gebruik voor onderwijs en educatieve doeleinden, culturele doeleinden (zoals vertoning in musea), en evenals voor niet-commercieel onderzoek worden beschouwd als niet-commerciële exploitatie.",
     "value_type": "TEXT"
   },
   {
@@ -24836,7 +24962,7 @@
     "location": "modules/material-requests/const/index",
     "key": "intended-usage-intern",
     "language": "en",
-    "value": "intended-usage-intern",
+    "value": "Intern gebruik zonder vergoeding of financieel voordeel: mijn organisatie gaat geen vergoeding vragen of beoogt geen financieel voordeel met het interne gebruik van dit materiaal. Het materiaal wordt niet gebruikt op een manier die een financieel of zakelijk voordeel creëert voor de organisatie; inclusief gebruik voor onderwijs en educatieve doeleinden, culturele doeleinden (zoals vertoning in musea), en evenals voor niet-commercieel onderzoek worden beschouwd als niet-commerciële exploitatie. (engels)",
     "value_type": "TEXT"
   },
   {
@@ -24845,7 +24971,7 @@
     "location": "modules/material-requests/const/index",
     "key": "intended-usage-non-commercial",
     "language": "nl",
-    "value": "intended-usage-non-commercial",
+    "value": "Extern gebruik zonder direct commercieel voordeel: ook voor extern gebruik",
     "value_type": "TEXT"
   },
   {
@@ -24854,7 +24980,7 @@
     "location": "modules/material-requests/const/index",
     "key": "intended-usage-non-commercial",
     "language": "en",
-    "value": "intended-usage-non-commercial",
+    "value": "Extern gebruik zonder direct commercieel voordeel: ook voor extern gebruik (engels)",
     "value_type": "TEXT"
   },
   {
@@ -24863,7 +24989,7 @@
     "location": "modules/material-requests/const/index",
     "key": "intended-usage-commercial",
     "language": "nl",
-    "value": "intended-usage-commercial",
+    "value": "Directe commerciële exploitatie: vergoeding gelinkt aan je aankoop",
     "value_type": "TEXT"
   },
   {
@@ -24872,7 +24998,7 @@
     "location": "modules/material-requests/const/index",
     "key": "intended-usage-commercial",
     "language": "en",
-    "value": "intended-usage-commercial",
+    "value": "Directe commerciële exploitatie: vergoeding gelinkt aan je aankoop (engels)",
     "value_type": "TEXT"
   },
   {
@@ -24881,7 +25007,7 @@
     "location": "modules/material-requests/const/index",
     "key": "distribution-access-intern",
     "language": "nl",
-    "value": "distribution-access-intern",
+    "value": "Enkel binnen de organisatie",
     "value_type": "TEXT"
   },
   {
@@ -24890,7 +25016,7 @@
     "location": "modules/material-requests/const/index",
     "key": "distribution-access-intern",
     "language": "en",
-    "value": "distribution-access-intern",
+    "value": "Enkel binnen de organisatie (engels)",
     "value_type": "TEXT"
   },
   {
@@ -24899,7 +25025,7 @@
     "location": "modules/material-requests/const/index",
     "key": "distribution-access-intern-extern",
     "language": "nl",
-    "value": "distribution-access-intern-extern",
+    "value": "Organisatie en externe gebruikers",
     "value_type": "TEXT"
   },
   {
@@ -24908,7 +25034,7 @@
     "location": "modules/material-requests/const/index",
     "key": "distribution-access-intern-extern",
     "language": "en",
-    "value": "distribution-access-intern-extern",
+    "value": "Organisatie en externe gebruikers (engels)",
     "value_type": "TEXT"
   },
   {
@@ -24917,7 +25043,7 @@
     "location": "modules/material-requests/const/index",
     "key": "distribution-type-digital-offline",
     "language": "nl",
-    "value": "distribution-type-digital-offline",
+    "value": "Digitale ontsluiting via een vast medium zonder netwerkverbinding (bv. DVD, USB-stick, …)",
     "value_type": "TEXT"
   },
   {
@@ -24935,7 +25061,7 @@
     "location": "modules/material-requests/const/index",
     "key": "distribution-type-digital-online",
     "language": "nl",
-    "value": "distribution-type-digital-online",
+    "value": "Digitale ontsluiting via netwerkverbinding, namelijk via:",
     "value_type": "TEXT"
   },
   {
@@ -24953,7 +25079,7 @@
     "location": "modules/material-requests/const/index",
     "key": "distribution-type-other",
     "language": "nl",
-    "value": "distribution-type-other",
+    "value": "Andere, namelijk:",
     "value_type": "TEXT"
   },
   {
@@ -24971,7 +25097,7 @@
     "location": "modules/material-requests/const/index",
     "key": "distribution-digital-online-internal",
     "language": "nl",
-    "value": "distribution-digital-online-internal",
+    "value": "een besloten dienst (website of app)",
     "value_type": "TEXT"
   },
   {
@@ -24989,7 +25115,7 @@
     "location": "modules/material-requests/const/index",
     "key": "distribution-digital-online-no-auth",
     "language": "nl",
-    "value": "distribution-digital-online-no-auth",
+    "value": "een publiek toegankelijke dienst (website of app) zonder authenticatie van de gebruikers",
     "value_type": "TEXT"
   },
   {
@@ -25007,7 +25133,7 @@
     "location": "modules/material-requests/const/index",
     "key": "distribution-digital-online-with-auth",
     "language": "nl",
-    "value": "distribution-digital-online-with-auth",
+    "value": "een publiek toegankelijke dienst (website of app) mét authenticatie van de gebruikers",
     "value_type": "TEXT"
   },
   {
@@ -25025,7 +25151,7 @@
     "location": "modules/material-requests/const/index",
     "key": "material-request-editing-none",
     "language": "nl",
-    "value": "material-request-editing-none",
+    "value": "Mijn organisatie zal geen wijzigingen aanbrengen",
     "value_type": "TEXT"
   },
   {
@@ -25043,7 +25169,7 @@
     "location": "modules/material-requests/const/index",
     "key": "material-request-editing-with-changes",
     "language": "nl",
-    "value": "material-request-editing-with-changes",
+    "value": "Mijn organisatie zal het bronmateriaal wijzigen",
     "value_type": "TEXT"
   },
   {
@@ -25061,7 +25187,7 @@
     "location": "modules/material-requests/const/index",
     "key": "geographical-usage-completely-local",
     "language": "nl",
-    "value": "geographical-usage-completely-local",
+    "value": "Integraal gericht op de Vlaamse of Belgische markt",
     "value_type": "TEXT"
   },
   {
@@ -25079,7 +25205,7 @@
     "location": "modules/material-requests/const/index",
     "key": "geographical-usage-not-completely-local",
     "language": "nl",
-    "value": "geographical-usage-not-completely-local",
+    "value": "Niet integraal gericht op de Vlaamse of Belgische markt",
     "value_type": "TEXT"
   },
   {
@@ -25088,7 +25214,7 @@
     "location": "modules/material-requests/const/index",
     "key": "geographical-usage-not-completely-local",
     "language": "en",
-    "value": "geographical-usage-not-completely-local",
+    "value": "Niet integraal gericht op de Vlaamse of Belgische markt (engels)",
     "value_type": "TEXT"
   },
   {
@@ -25097,7 +25223,7 @@
     "location": "modules/material-requests/const/index",
     "key": "time-usage-unlimited",
     "language": "nl",
-    "value": "time-usage-unlimited",
+    "value": "Onbeperkt",
     "value_type": "TEXT"
   },
   {
@@ -25106,7 +25232,7 @@
     "location": "modules/material-requests/const/index",
     "key": "time-usage-unlimited",
     "language": "en",
-    "value": "time-usage-unlimited",
+    "value": "Onbeperkt (engels)",
     "value_type": "TEXT"
   },
   {
@@ -25115,7 +25241,7 @@
     "location": "modules/material-requests/const/index",
     "key": "time-usage-in-time",
     "language": "nl",
-    "value": "time-usage-in-time",
+    "value": "Beperkte periode",
     "value_type": "TEXT"
   },
   {
@@ -25133,7 +25259,7 @@
     "location": "modules/material-requests/const/index",
     "key": "copyright-display-same-time-with-object",
     "language": "nl",
-    "value": "copyright-display-same-time-with-object",
+    "value": "Gelijktijdig met object",
     "value_type": "TEXT"
   },
   {
@@ -25151,7 +25277,7 @@
     "location": "modules/material-requests/const/index",
     "key": "copyright-display-around-object",
     "language": "nl",
-    "value": "copyright-display-around-object",
+    "value": "Vermelding bij object, niet noodzakelijk gelijktijdig",
     "value_type": "TEXT"
   },
   {
@@ -25169,7 +25295,7 @@
     "location": "modules/material-requests/const/index",
     "key": "copyright-display-none",
     "language": "nl",
-    "value": "copyright-display-none",
+    "value": "Geen vermelding",
     "value_type": "TEXT"
   },
   {
@@ -26804,6 +26930,42 @@
   {
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
+    "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
+    "key": "goedkeuren",
+    "language": "nl",
+    "value": "Goedkeuren",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
+    "key": "goedkeuren",
+    "language": "en",
+    "value": "Goedkeuren",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
+    "key": "afkeuren",
+    "language": "nl",
+    "value": "Afkeuren",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
+    "key": "afkeuren",
+    "language": "en",
+    "value": "Afkeuren",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
     "location": "modules/account/components/material-request-detail-blade/material-requests",
     "key": "sluit",
     "language": "nl",
@@ -26879,7 +27041,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
     "key": "download-is-verlopen-op",
     "language": "nl",
-    "value": "Download is verlopen op",
+    "value": "Download is verlopen op {{downloadExpirationDate}}",
     "value_type": "TEXT"
   },
   {
@@ -26888,7 +27050,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
     "key": "download-is-verlopen-op",
     "language": "en",
-    "value": "Download is verlopen op",
+    "value": "Download is verlopen op {{downloadExpirationDate}}",
     "value_type": "TEXT"
   },
   {
@@ -26915,7 +27077,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
     "key": "aangevraagd-op",
     "language": "nl",
-    "value": "Aangevraagd op",
+    "value": "Aangevraagd op {{requestedAt}}",
     "value_type": "TEXT"
   },
   {
@@ -26924,7 +27086,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
     "key": "aangevraagd-op",
     "language": "en",
-    "value": "Aangevraagd op",
+    "value": "Aangevraagd op {{requestedAt}}",
     "value_type": "TEXT"
   },
   {
@@ -26933,7 +27095,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
     "key": "goedgekeurd-op",
     "language": "nl",
-    "value": "Goedgekeurd op",
+    "value": "Goedgekeurd op {{approvedAt}}",
     "value_type": "TEXT"
   },
   {
@@ -26942,7 +27104,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
     "key": "goedgekeurd-op",
     "language": "en",
-    "value": "Goedgekeurd op",
+    "value": "Goedgekeurd op {{approvedAt}}",
     "value_type": "TEXT"
   },
   {
@@ -26951,7 +27113,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
     "key": "geweigerd-op",
     "language": "nl",
-    "value": "Geweigerd op",
+    "value": "Geweigerd op {{deniedAt}}",
     "value_type": "TEXT"
   },
   {
@@ -26960,7 +27122,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
     "key": "geweigerd-op",
     "language": "en",
-    "value": "Geweigerd op",
+    "value": "Geweigerd op {{deniedAt}}",
     "value_type": "TEXT"
   },
   {
@@ -26969,7 +27131,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
     "key": "geannulleerd-op",
     "language": "nl",
-    "value": "Geannulleerd op",
+    "value": "Geannulleerd op {{cancelledAt}}",
     "value_type": "TEXT"
   },
   {
@@ -26978,7 +27140,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
     "key": "geannulleerd-op",
     "language": "en",
-    "value": "Geannulleerd op",
+    "value": "Geannulleerd op {{cancelledAt}}",
     "value_type": "TEXT"
   },
   {
@@ -27236,6 +27398,60 @@
   {
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
+    "location": "modules/account/components/material-request-status-update-blade/material-request-status-update-blade",
+    "key": "aanvraag",
+    "language": "nl",
+    "value": "Aanvraag",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-status-update-blade/material-request-status-update-blade",
+    "key": "aanvraag",
+    "language": "en",
+    "value": "Aanvraag",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-status-update-blade/material-request-status-update-blade",
+    "key": "aanvraag-goedkeuren",
+    "language": "nl",
+    "value": "Aanvraag goedkeuren",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-status-update-blade/material-request-status-update-blade",
+    "key": "aanvraag-goedkeuren",
+    "language": "en",
+    "value": "Aanvraag goedkeuren",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-status-update-blade/material-request-status-update-blade",
+    "key": "aanvraag-afkeuren",
+    "language": "nl",
+    "value": "Aanvraag afkeuren",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-status-update-blade/material-request-status-update-blade",
+    "key": "aanvraag-afkeuren",
+    "language": "en",
+    "value": "Aanvraag afkeuren",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
     "location": "modules/visitor-space/components/material-request-blade/material-request-blade",
     "key": "annuleer",
     "language": "nl",
@@ -27311,7 +27527,7 @@
     "location": "modules/account/components/material-request-term-agreement-blade/material-request-term-agreement-blade",
     "key": "aanvullende-gebruiksvoorwaarden-bij-aanvragen-inhoud",
     "language": "nl",
-    "value": "Aanvullende gebruiksvoorwaarden bij aanvragen inhoud",
+    "value": "<p style=\"text-align:start;\" size=\"2\" _root=\"[object Object]\" __ownerid=\"undefined\" __hash=\"undefined\" __altered=\"false\">Gepubliceerd op 29 september 2025</p><p style=\"text-align:start;text-indent:2em;\" data-renderer-start-pos=\"222\" data-local-id=\"2998c8bb-3f18-4d65-8993-a4b946ce76a1\"> </p><p></p><p></p><p><strong>Over het aanvraagformulier</strong></p><p>Via dit aanvraagformulier kan je bij de aanbieder toelating vragen om audiovisueel materiaal te hergebruiken. Het is belangrijk dat je alle informatie in dit aanvraagformulier controleert en naar waarheid invult. Zo kan de aanbieder jouw aanvraag behandelen en eventueel toelating verlenen. Je kan de status van je aanvraag volgen via het platform.  </p><p></p><p></p><p></p><p><strong>Over meemoo en het platform</strong></p><p>Je begrijpt en erkent dat: </p><ul><li>jouw aanvraag enkel betrekking heeft op het gebruik dat je expliciet hebt beschreven in het hergebruikformulier. Wanneer je een nieuw gebruik plant, dat niet meer gedekt wordt door je gemaakte  beschrijving, zal je een nieuwe aanvraag moeten indienen. </li><li>Het meemoo-platform je materiaal kan tonen om het te kunnen evalueren en aanvragen te richten tot de aanbieders. Jij en jouw organisatie  krijgen geen rechten op het materiaal op basis van deze functionaliteit, of op basis van de verzending van dit formulier. Jij en jouw organisatie zullen zich onthouden van enig ander gebruik van dat materiaal, totdat je een expliciet bevestigend antwoord ontvangt van de aanbieder, en de eventuele gevraagde vergoeding hebt betaald. Elk ander gebruik is volledig op eigen risico. </li><li>Meemoo enkel optreedt als tussenpersoon die communicatie tussen jou en de aanbieders van het materiaal vergemakkelijkt. Meemoo kan zelf geen toelatingen verlenen met betrekking tot het materiaal.</li></ul>",
     "value_type": "HTML"
   },
   {
@@ -27599,7 +27815,7 @@
     "location": "modules/account/components/personal-info/personal-info",
     "key": "requester-capacity-education",
     "language": "nl",
-    "value": "requester-capacity-education",
+    "value": "Ik ben verbonden aan een onderwijsinstelling, als student, onderzoeker of lesgever",
     "value_type": "TEXT"
   },
   {
@@ -27608,7 +27824,7 @@
     "location": "modules/account/components/personal-info/personal-info",
     "key": "requester-capacity-education",
     "language": "en",
-    "value": "requester-capacity-education",
+    "value": "I am connected to an educational institution as a student, researcher or teacher",
     "value_type": "TEXT"
   },
   {
@@ -27617,7 +27833,7 @@
     "location": "modules/account/components/personal-info/personal-info",
     "key": "requester-capacity-work",
     "language": "nl",
-    "value": "requester-capacity-work",
+    "value": "Ik vraag de fragmenten op in het kader van mijn beroep (uitgezonderd onderwijs)",
     "value_type": "TEXT"
   },
   {
@@ -27626,7 +27842,7 @@
     "location": "modules/account/components/personal-info/personal-info",
     "key": "requester-capacity-work",
     "language": "en",
-    "value": "requester-capacity-work",
+    "value": "I'm making a request for professional use (excluding education)",
     "value_type": "TEXT"
   },
   {
@@ -27635,7 +27851,7 @@
     "location": "modules/account/components/personal-info/personal-info",
     "key": "requester-capacity-private-researcher",
     "language": "nl",
-    "value": "requester-capacity-private-researcher",
+    "value": "Ik vraag de fragmenten aan in het kader van privé-onderzoek",
     "value_type": "TEXT"
   },
   {
@@ -27644,7 +27860,7 @@
     "location": "modules/account/components/personal-info/personal-info",
     "key": "requester-capacity-private-researcher",
     "language": "en",
-    "value": "requester-capacity-private-researcher",
+    "value": "I am making a request in the context of private research",
     "value_type": "TEXT"
   },
   {
@@ -27653,7 +27869,7 @@
     "location": "modules/account/components/personal-info/personal-info",
     "key": "requester-capacity-other",
     "language": "nl",
-    "value": "requester-capacity-other",
+    "value": "Andere",
     "value_type": "TEXT"
   },
   {
@@ -27662,7 +27878,7 @@
     "location": "modules/account/components/personal-info/personal-info",
     "key": "requester-capacity-other",
     "language": "en",
-    "value": "requester-capacity-other",
+    "value": "Others",
     "value_type": "TEXT"
   },
   {
@@ -27689,7 +27905,7 @@
     "location": "modules/account/components/personal-info/personal-info",
     "key": "aanpassing-van-jouw-gegevens-aanvragen-hyperlink",
     "language": "nl",
-    "value": "Aanpassing van jouw gegevens aanvragen - hyperlink",
+    "value": "mailto:support@meemoo.be",
     "value_type": "TEXT"
   },
   {
@@ -27698,7 +27914,7 @@
     "location": "modules/account/components/personal-info/personal-info",
     "key": "aanpassing-van-jouw-gegevens-aanvragen-hyperlink",
     "language": "en",
-    "value": "Aanpassing van jouw gegevens aanvragen - hyperlink",
+    "value": "mailto:support@meemoo.be",
     "value_type": "TEXT"
   },
   {
@@ -27707,7 +27923,7 @@
     "location": "modules/account/components/personal-info/personal-info",
     "key": "aanpassing-van-jouw-gegevens-aanvragen-label",
     "language": "nl",
-    "value": "Aanpassing van jouw gegevens aanvragen - label",
+    "value": "Aanpassing van jouw gegevens aanvragen",
     "value_type": "TEXT"
   },
   {
@@ -27716,7 +27932,7 @@
     "location": "modules/account/components/personal-info/personal-info",
     "key": "aanpassing-van-jouw-gegevens-aanvragen-label",
     "language": "en",
-    "value": "Aanpassing van jouw gegevens aanvragen - label",
+    "value": "Aanpassing van jouw gegevens aanvragen (engels)",
     "value_type": "TEXT"
   },
   {
@@ -40736,7 +40952,7 @@
   {
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
-    "location": "modules/cp/const/material-requests",
+    "location": "modules/admin/const/material-requests",
     "key": "aanvrager",
     "language": "nl",
     "value": "Aanvrager",
@@ -40745,7 +40961,7 @@
   {
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
-    "location": "modules/cp/const/material-requests",
+    "location": "modules/admin/const/material-requests",
     "key": "aanvrager",
     "language": "en",
     "value": "Aanvrager",
@@ -40754,7 +40970,7 @@
   {
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
-    "location": "modules/cp/const/material-requests",
+    "location": "modules/admin/const/material-requests",
     "key": "titel-materiaal",
     "language": "nl",
     "value": "Titel materiaal",
@@ -40763,7 +40979,7 @@
   {
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
-    "location": "modules/cp/const/material-requests",
+    "location": "modules/admin/const/material-requests",
     "key": "titel-materiaal",
     "language": "en",
     "value": "Titel materiaal",
@@ -40772,79 +40988,7 @@
   {
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
-    "location": "modules/cp/views/cp-admin-material-requests",
-    "key": "type",
-    "language": "nl",
-    "value": "Type",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/cp/views/cp-admin-material-requests",
-    "key": "type",
-    "language": "en",
-    "value": "Type",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/cp/views/cp-admin-material-requests",
-    "key": "type-aanvraag",
-    "language": "nl",
-    "value": "Type aanvraag",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/cp/views/cp-admin-material-requests",
-    "key": "type-aanvraag",
-    "language": "en",
-    "value": "Type aanvraag",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/cp/views/cp-admin-material-requests",
-    "key": "pas-toe",
-    "language": "nl",
-    "value": "Pas toe",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/cp/views/cp-admin-material-requests",
-    "key": "pas-toe",
-    "language": "en",
-    "value": "Pas toe",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/cp/views/cp-admin-material-requests",
-    "key": "reset",
-    "language": "nl",
-    "value": "Reset",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/cp/views/cp-admin-material-requests",
-    "key": "reset",
-    "language": "en",
-    "value": "Reset",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/cp/views/cp-admin-material-requests",
+    "location": "modules/admin/const/material-requests",
     "key": "status",
     "language": "nl",
     "value": "Status",
@@ -40853,7 +40997,7 @@
   {
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
-    "location": "modules/cp/views/cp-admin-material-requests",
+    "location": "modules/admin/const/material-requests",
     "key": "status",
     "language": "en",
     "value": "Status",
@@ -40862,61 +41006,7 @@
   {
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
-    "location": "modules/cp/views/cp-admin-material-requests",
-    "key": "status-aanvraag",
-    "language": "nl",
-    "value": "Status aanvraag",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/cp/views/cp-admin-material-requests",
-    "key": "status-aanvraag",
-    "language": "en",
-    "value": "Status aanvraag",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/cp/views/cp-admin-material-requests",
-    "key": "pas-toe",
-    "language": "nl",
-    "value": "Pas toe",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/cp/views/cp-admin-material-requests",
-    "key": "pas-toe",
-    "language": "en",
-    "value": "Pas toe",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/cp/views/cp-admin-material-requests",
-    "key": "reset",
-    "language": "nl",
-    "value": "Reset",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/cp/views/cp-admin-material-requests",
-    "key": "reset",
-    "language": "en",
-    "value": "Reset",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/cp/views/cp-admin-material-requests",
+    "location": "modules/admin/const/material-requests",
     "key": "download",
     "language": "nl",
     "value": "Download",
@@ -40925,7 +41015,7 @@
   {
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
-    "location": "modules/cp/views/cp-admin-material-requests",
+    "location": "modules/admin/const/material-requests",
     "key": "download",
     "language": "en",
     "value": "Download",
@@ -40934,25 +41024,43 @@
   {
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
-    "location": "modules/cp/views/cp-admin-material-requests",
-    "key": "aanvraag-met-download",
+    "location": "pages/admin/materiaalaanvragen/index",
+    "key": "type",
     "language": "nl",
-    "value": "Aanvraag met download",
+    "value": "Type",
     "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
-    "location": "modules/cp/views/cp-admin-material-requests",
-    "key": "aanvraag-met-download",
+    "location": "pages/admin/materiaalaanvragen/index",
+    "key": "type",
     "language": "en",
-    "value": "Aanvraag met download",
+    "value": "Type",
     "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
-    "location": "modules/cp/views/cp-admin-material-requests",
+    "location": "pages/admin/materiaalaanvragen/index",
+    "key": "type-aanvraag",
+    "language": "nl",
+    "value": "Type aanvraag",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "pages/admin/materiaalaanvragen/index",
+    "key": "type-aanvraag",
+    "language": "en",
+    "value": "Type aanvraag",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "pages/admin/materiaalaanvragen/index",
     "key": "pas-toe",
     "language": "nl",
     "value": "Pas toe",
@@ -40961,7 +41069,7 @@
   {
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
-    "location": "modules/cp/views/cp-admin-material-requests",
+    "location": "pages/admin/materiaalaanvragen/index",
     "key": "pas-toe",
     "language": "en",
     "value": "Pas toe",
@@ -40970,7 +41078,7 @@
   {
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
-    "location": "modules/cp/views/cp-admin-material-requests",
+    "location": "pages/admin/materiaalaanvragen/index",
     "key": "reset",
     "language": "nl",
     "value": "Reset",
@@ -40979,7 +41087,7 @@
   {
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
-    "location": "modules/cp/views/cp-admin-material-requests",
+    "location": "pages/admin/materiaalaanvragen/index",
     "key": "reset",
     "language": "en",
     "value": "Reset",
@@ -40988,127 +41096,199 @@
   {
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
-    "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
-    "key": "goedkeuren",
+    "location": "pages/admin/materiaalaanvragen/index",
+    "key": "status",
     "language": "nl",
-    "value": "Goedkeuren",
+    "value": "Status",
     "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
-    "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
-    "key": "goedkeuren",
+    "location": "pages/admin/materiaalaanvragen/index",
+    "key": "status",
     "language": "en",
-    "value": "Goedkeuren",
+    "value": "Status",
     "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
-    "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
-    "key": "afkeuren",
+    "location": "pages/admin/materiaalaanvragen/index",
+    "key": "status-aanvraag",
     "language": "nl",
-    "value": "Afkeuren",
+    "value": "Status aanvraag",
     "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
-    "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
-    "key": "afkeuren",
+    "location": "pages/admin/materiaalaanvragen/index",
+    "key": "status-aanvraag",
     "language": "en",
-    "value": "Afkeuren",
+    "value": "Status aanvraag",
     "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
-    "location": "modules/account/components/material-request-status-update-blade/material-request-status-update-blade",
-    "key": "aanvraag",
+    "location": "pages/admin/materiaalaanvragen/index",
+    "key": "pas-toe",
     "language": "nl",
-    "value": "Aanvraag",
+    "value": "Pas toe",
     "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
-    "location": "modules/account/components/material-request-status-update-blade/material-request-status-update-blade",
-    "key": "aanvraag",
+    "location": "pages/admin/materiaalaanvragen/index",
+    "key": "pas-toe",
     "language": "en",
-    "value": "Aanvraag",
+    "value": "Pas toe",
     "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
-    "location": "modules/account/components/material-request-status-update-blade/material-request-status-update-blade",
-    "key": "aanvraag-goedkeuren",
+    "location": "pages/admin/materiaalaanvragen/index",
+    "key": "reset",
     "language": "nl",
-    "value": "Aanvraag goedkeuren",
+    "value": "Reset",
     "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
-    "location": "modules/account/components/material-request-status-update-blade/material-request-status-update-blade",
-    "key": "aanvraag-goedkeuren",
+    "location": "pages/admin/materiaalaanvragen/index",
+    "key": "reset",
     "language": "en",
-    "value": "Aanvraag goedkeuren",
+    "value": "Reset",
     "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
-    "location": "modules/account/components/material-request-status-update-blade/material-request-status-update-blade",
-    "key": "aanvraag-afkeuren",
+    "location": "pages/admin/materiaalaanvragen/index",
+    "key": "download",
     "language": "nl",
-    "value": "Aanvraag afkeuren",
+    "value": "Download",
     "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
-    "location": "modules/account/components/material-request-status-update-blade/material-request-status-update-blade",
-    "key": "aanvraag-afkeuren",
+    "location": "pages/admin/materiaalaanvragen/index",
+    "key": "download",
     "language": "en",
-    "value": "Aanvraag afkeuren",
+    "value": "Download",
     "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
-    "location": "modules/account/components/material-request-status-update-blade/material-request-status-update-blade",
-    "key": "aanvraag-goedkeuren",
+    "location": "pages/admin/materiaalaanvragen/index",
+    "key": "aanvraag-met-download",
     "language": "nl",
-    "value": "Aanvraag goedkeuren",
+    "value": "Aanvraag met download",
     "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
-    "location": "modules/account/components/material-request-status-update-blade/material-request-status-update-blade",
-    "key": "aanvraag-goedkeuren",
+    "location": "pages/admin/materiaalaanvragen/index",
+    "key": "aanvraag-met-download",
     "language": "en",
-    "value": "Aanvraag goedkeuren",
+    "value": "Aanvraag met download",
     "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
-    "location": "modules/account/components/material-request-status-update-blade/material-request-status-update-blade",
-    "key": "aanvraag-afkeuren",
+    "location": "pages/admin/materiaalaanvragen/index",
+    "key": "pas-toe",
     "language": "nl",
-    "value": "Aanvraag afkeuren",
+    "value": "Pas toe",
     "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
-    "location": "modules/account/components/material-request-status-update-blade/material-request-status-update-blade",
-    "key": "aanvraag-afkeuren",
+    "location": "pages/admin/materiaalaanvragen/index",
+    "key": "pas-toe",
     "language": "en",
-    "value": "Aanvraag afkeuren",
+    "value": "Pas toe",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "pages/admin/materiaalaanvragen/index",
+    "key": "reset",
+    "language": "nl",
+    "value": "Reset",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "pages/admin/materiaalaanvragen/index",
+    "key": "reset",
+    "language": "en",
+    "value": "Reset",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "pages/admin/materiaalaanvragen/index",
+    "key": "aanbieder-aanvraag",
+    "language": "nl",
+    "value": "Aanbieder aanvraag",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "pages/admin/materiaalaanvragen/index",
+    "key": "aanbieder-aanvraag",
+    "language": "en",
+    "value": "Aanbieder aanvraag",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "pages/admin/materiaalaanvragen/index",
+    "key": "pas-toe",
+    "language": "nl",
+    "value": "Pas toe",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "pages/admin/materiaalaanvragen/index",
+    "key": "pas-toe",
+    "language": "en",
+    "value": "Pas toe",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "pages/admin/materiaalaanvragen/index",
+    "key": "reset",
+    "language": "nl",
+    "value": "Reset",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "pages/admin/materiaalaanvragen/index",
+    "key": "reset",
+    "language": "en",
+    "value": "Reset",
     "value_type": "TEXT"
   },
   {
