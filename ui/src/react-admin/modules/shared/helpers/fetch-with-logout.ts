@@ -1,3 +1,4 @@
+import { isServerSideRendering } from '~shared/helpers/routing/is-server-side-rendering.ts';
 import { CustomError } from './custom-error';
 
 const AVO_LAST_RELOAD_BECAUSE_UNAUTH = 'AVO_LAST_RELOAD_BECAUSE_UNAUTH';
@@ -96,7 +97,10 @@ export async function fetchWithLogoutJson<ResponseType>(
 }
 
 export function goToLoginBecauseOfUnauthorizedError() {
-	const lastReloadDate = localStorage?.getItem(AVO_LAST_RELOAD_BECAUSE_UNAUTH);
+	if (isServerSideRendering()) {
+		return;
+	}
+	const lastReloadDate: string | null = localStorage?.getItem(AVO_LAST_RELOAD_BECAUSE_UNAUTH);
 	if (!lastReloadDate || new Date(lastReloadDate).getTime() < Date.now() - 5 * 60 * 1000) {
 		if (localStorage) {
 			localStorage.setItem(AVO_LAST_RELOAD_BECAUSE_UNAUTH, new Date().toISOString());

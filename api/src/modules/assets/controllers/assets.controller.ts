@@ -255,6 +255,12 @@ export class AssetsController {
 			return true;
 		}
 		if (
+			assetInfo.content_asset_type_id === AvoFileUploadAssetType.ITEM_OG_IMAGE &&
+			userPermissions.includes(PermissionName.VIEW_ITEMS_OVERVIEW)
+		) {
+			return true;
+		}
+		if (
 			[
 				AvoFileUploadAssetType.CONTENT_PAGE_COVER,
 				AvoFileUploadAssetType.CONTENT_PAGE_IMAGE,
