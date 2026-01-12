@@ -261,6 +261,13 @@ export class AssetsController {
 			return true;
 		}
 		if (
+			assetInfo.content_asset_type_id === AvoFileUploadAssetType.CONTENT_PAGE_OG_IMAGE &&
+			(userPermissions.includes(PermissionName.EDIT_ANY_CONTENT_PAGES) ||
+				userPermissions.includes(PermissionName.EDIT_OWN_CONTENT_PAGES))
+		) {
+			return true;
+		}
+		if (
 			[
 				AvoFileUploadAssetType.CONTENT_PAGE_COVER,
 				AvoFileUploadAssetType.CONTENT_PAGE_IMAGE,

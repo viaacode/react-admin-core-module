@@ -64,6 +64,7 @@ interface ContentPageBase {
 	language: Locale;
 	nlParentPageId: number | string;
 	description: string | null;
+	seo_image_path: string | null;
 	seoDescription: string | null;
 	metaDescription: string | null;
 	path: string | null;

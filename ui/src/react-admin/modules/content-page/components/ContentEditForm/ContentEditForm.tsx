@@ -209,10 +209,10 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 	return (
 		<Container mode="vertical" size="small">
 			<Container mode="horizontal">
-				<Container size="medium">
+				<Container size="full-width">
 					<Form className="c-content-edit-form">
 						<Grid>
-							<Column size="12">
+							<Column size="7">
 								<FormGroup
 									error={formErrors.thumbnailPath}
 									label={tText(
@@ -233,7 +233,24 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 									/>
 								</FormGroup>
 							</Column>
-							<Column size="12">
+							<Column size="5">
+								<FormGroup
+									error={formErrors.thumbnailPath}
+									label={tText('Afbeelding voor SEO (aanbevolen 1200 x 630)')}
+									className="field-seo-image-path"
+								>
+									<FileUpload
+										ownerId={commonUser?.profileId}
+										urls={compact([contentPageInfo.seo_image_path])}
+										assetType={AvoFileUploadAssetType.CONTENT_PAGE_OG_IMAGE}
+										allowMulti={false}
+										label={tText('Seo afbeelding')}
+										onChange={(urls: string[]) => changeContentPageProp('seo_image_path', urls[0])}
+										onDeleteFile={noop} // images will be deleted from the assets service when the user saves the content page
+									/>
+								</FormGroup>
+							</Column>
+							<Column size="7">
 								<FormGroup
 									error={formErrors.title}
 									label={tText(
@@ -250,7 +267,11 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 									/>
 								</FormGroup>
 							</Column>
-							<Column size="12">
+							<Column size="5">
+								{/* Empty for keeping the area next to title empty */}
+								<>&nbsp;</>
+							</Column>
+							<Column size="7">
 								<ContentPageEditFormDescription
 									value={contentPageInfo.description || ''}
 									onChange={(html: string) => {
@@ -261,7 +282,7 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 									className="field-description"
 								></ContentPageEditFormDescription>
 							</Column>
-							<Column size="12">
+							<Column size="5">
 								<FormGroup
 									error={formErrors.seoDescription}
 									label={
@@ -286,8 +307,6 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 										)}
 									/>
 								</FormGroup>
-							</Column>
-							<Column size="12">
 								<FormGroup
 									error={formErrors.metaDescription}
 									label={tText(
@@ -306,19 +325,25 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 								</FormGroup>
 							</Column>
 							{commonUser?.permissions?.includes(PermissionName.EDIT_PROTECTED_PAGE_STATUS) && (
-								<Column size="12">
-									<FormGroup error={formErrors.isProtected} className="field-is-protected">
-										<Checkbox
-											checked={contentPageInfo.isProtected}
-											label={tText(
-												'admin/content/components/content-edit-form/content-edit-form___beschermde-pagina'
-											)}
-											onChange={(value) => changeContentPageProp('isProtected', value)}
-										/>
-									</FormGroup>
-								</Column>
+								<>
+									<Column size="7">
+										<FormGroup error={formErrors.isProtected} className="field-is-protected">
+											<Checkbox
+												checked={contentPageInfo.isProtected}
+												label={tText(
+													'admin/content/components/content-edit-form/content-edit-form___beschermde-pagina'
+												)}
+												onChange={(value) => changeContentPageProp('isProtected', value)}
+											/>
+										</FormGroup>
+									</Column>
+									<Column size="5">
+										{/* Empty for keeping the area next to title empty */}
+										<>&nbsp;</>
+									</Column>
+								</>
 							)}
-							<Column size="12">
+							<Column size="7">
 								<FormGroup
 									error={formErrors.path}
 									label={tText(
@@ -333,34 +358,44 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 									/>
 								</FormGroup>
 							</Column>
+							<Column size="5">
+								{/* Empty for keeping the area next to title empty */}
+								<>&nbsp;</>
+							</Column>
 							{commonUser?.permissions?.includes(PermissionName.EDIT_CONTENT_PAGE_AUTHOR) &&
 								!!commonUser && (
-									<Column size="12">
-										<FormGroup
-											error={formErrors.userProfileId}
-											label={tText('admin/content/views/content-detail___auteur')}
-											required
-											className="field-user-profile-id"
-										>
-											<ContentPicker
-												hideTargetSwitch
-												hideTypeDropdown
-												placeholder={tText(
-													'admin/content/components/content-edit-form/content-edit-form___selecteer-een-auteur'
-												)}
-												allowedTypes={[AvoCoreContentPickerType.PROFILE]}
-												value={owner}
-												onChange={(item: PickerItem | null) => {
-													if (!item) {
-														return;
-													}
-													changeContentPageProp('userProfileId', item.value);
-												}}
-											/>
-										</FormGroup>
-									</Column>
+									<>
+										<Column size="7">
+											<FormGroup
+												error={formErrors.userProfileId}
+												label={tText('admin/content/views/content-detail___auteur')}
+												required
+												className="field-user-profile-id"
+											>
+												<ContentPicker
+													hideTargetSwitch
+													hideTypeDropdown
+													placeholder={tText(
+														'admin/content/components/content-edit-form/content-edit-form___selecteer-een-auteur'
+													)}
+													allowedTypes={[AvoCoreContentPickerType.PROFILE]}
+													value={owner}
+													onChange={(item: PickerItem | null) => {
+														if (!item) {
+															return;
+														}
+														changeContentPageProp('userProfileId', item.value);
+													}}
+												/>
+											</FormGroup>
+										</Column>
+										<Column size="5">
+											{/* Empty for keeping the area next to title empty */}
+											<>&nbsp;</>
+										</Column>
+									</>
 								)}
-							<Column size="3-6">
+							<Column size="7">
 								<FormGroup
 									error={formErrors.contentType}
 									label={tText(
@@ -375,8 +410,6 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 										value={contentPageInfo.contentType}
 									/>
 								</FormGroup>
-							</Column>
-							<Column size="3-6">
 								<FormGroup
 									error={formErrors.contentWidth}
 									label={tText(
@@ -390,8 +423,6 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 										value={contentPageInfo.contentWidth}
 									/>
 								</FormGroup>
-							</Column>
-							<Column size="12">
 								<FormGroup
 									label={tText(
 										'admin/content/components/content-edit-form/content-edit-form___labels'
@@ -421,8 +452,12 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 									/>
 								</FormGroup>
 							</Column>
+							<Column size="5">
+								{/* Empty for keeping the area next to title empty */}
+								<>&nbsp;</>
+							</Column>
 							{isMultiLanguageEnabled() && (
-								<Column size="6">
+								<Column size="7">
 									<FormGroup
 										label={tText(
 											'modules/content-page/components/content-edit-form/content-edit-form___taal'
@@ -447,7 +482,7 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 								</Column>
 							)}
 							{isMultiLanguageEnabled() && (
-								<Column size="6" className="c-multilanguage-controls">
+								<Column size="5" className="c-multilanguage-controls">
 									<FormGroup
 										label={tText(
 											'modules/content-page/components/content-edit-form/content-edit-form___nederlandse-hoofd-pagina'
@@ -471,7 +506,7 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 								</Column>
 							)}
 							{!isLoadingAllUserGroups && !isNil(lastUserGroup?.id) && (
-								<Column size="12">
+								<Column size="7">
 									<UserGroupSelect
 										label={tText(
 											'admin/content/components/content-edit-form/content-edit-form___zichtbaar-voor'

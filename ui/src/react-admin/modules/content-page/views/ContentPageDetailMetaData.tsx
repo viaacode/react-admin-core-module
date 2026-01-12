@@ -126,6 +126,15 @@ export const ContentPageDetailMetaData: FunctionComponent<ContentDetailMetaDataP
 							</div>,
 							tText('admin/content/views/content-detail___cover-afbeelding')
 						)}
+						{renderDetailRow(
+							<div style={{ width: '400px' }}>
+								<Thumbnail
+									category={AvoContentTypeEnglish.ITEM}
+									src={contentPageInfo.seo_image_path || undefined}
+								/>
+							</div>,
+							tText('Seo afbeelding')
+						)}
 						{renderSimpleDetailRows<ContentPageInfo>(contentPageInfo, [
 							['title', tText('admin/content/views/content-detail___titel')],
 						])}
