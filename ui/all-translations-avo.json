@@ -9226,6 +9226,33 @@
   },
   {
     "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/views/content-page-detail-meta-data",
+    "key": "seo-afbeelding",
+    "language": "nl",
+    "value": "Seo afbeelding",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/content-edit-form/content-edit-form",
+    "key": "afbeelding-voor-seo-aanbevolen-1200-x-630",
+    "language": "nl",
+    "value": "Afbeelding voor SEO (aanbevolen 1200 x 630)",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/content-edit-form/content-edit-form",
+    "key": "seo-afbeelding",
+    "language": "nl",
+    "value": "Seo afbeelding",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
     "component": "FRONTEND",
     "location": "app",
     "key": "je-account-is-gekoppeld",
@@ -12399,6 +12426,24 @@
     "key": "kies-een-afbeelding-om-te-gebruiken-als-hoofdafbeelding-van-deze-opdracht",
     "language": "nl",
     "value": "Kies een afbeelding om te gebruiken als hoofdafbeelding van deze opdracht.",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "assignment/components/assignment-meta-data-form-editable",
+    "key": "og-afbeelding-1200-x-630-px",
+    "language": "nl",
+    "value": "OG afbeelding (1200x630px)",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "assignment/components/assignment-meta-data-form-editable",
+    "key": "upload-een-og-afbeelding",
+    "language": "nl",
+    "value": "Upload een OG afbeelding",
     "value_type": "TEXT"
   },
   {
@@ -23267,6 +23312,24 @@
   {
     "app": "AVO",
     "component": "FRONTEND",
+    "location": "admin/items/views/item-detail-admin",
+    "key": "opgeslagen",
+    "language": "nl",
+    "value": "Opgeslagen",
+    "value_type": "HTML"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/items/views/item-detail-admin",
+    "key": "het-opslaan-van-de-opmerkingen-seo-afbeelding-is-mislukt",
+    "language": "nl",
+    "value": "Het opslaan van de opmerkingen/seo afbeelding is mislukt",
+    "value_type": "HTML"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
     "location": "admin/items/views/item-detail",
     "key": "ga-naar-de-collectie-detail-pagina",
     "language": "nl",
@@ -23415,6 +23478,24 @@
     "key": "opmerkingen",
     "language": "nl",
     "value": "Opmerkingen",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/items/views/item-detail-admin",
+    "key": "afbeelding-voor-seo-fb",
+    "language": "nl",
+    "value": "Afbeelding voor SEO/FB",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/items/views/item-detail-admin",
+    "key": "opslaan",
+    "language": "nl",
+    "value": "Opslaan",
     "value_type": "TEXT"
   },
   {
@@ -29950,60 +30031,6 @@
     "language": "nl",
     "value": "De bron van deze videostill is <a href=\"{{organisationWebsite}}\" target=\"_blank\">{{organisationName}}</a>.",
     "value_type": "HTML"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "assignment/components/assignment-meta-data-form-editable",
-    "key": "og-afbeelding-1200-x-630-px",
-    "language": "nl",
-    "value": "OG afbeelding (1200x630px)",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "assignment/components/assignment-meta-data-form-editable",
-    "key": "upload-een-og-afbeelding",
-    "language": "nl",
-    "value": "Upload een OG afbeelding",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "admin/items/views/item-detail-admin",
-    "key": "opgeslagen",
-    "language": "nl",
-    "value": "Opgeslagen",
-    "value_type": "HTML"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "admin/items/views/item-detail-admin",
-    "key": "het-opslaan-van-de-opmerkingen-seo-afbeelding-is-mislukt",
-    "language": "nl",
-    "value": "Het opslaan van de opmerkingen/seo afbeelding is mislukt",
-    "value_type": "HTML"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "admin/items/views/item-detail-admin",
-    "key": "afbeelding-voor-seo-fb",
-    "language": "nl",
-    "value": "Afbeelding voor SEO/FB",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "admin/items/views/item-detail-admin",
-    "key": "opslaan",
-    "language": "nl",
-    "value": "Opslaan",
-    "value_type": "TEXT"
   },
   {
     "app": "AVO",

@@ -133,7 +133,7 @@ export const ContentPageDetailMetaData: FunctionComponent<ContentDetailMetaDataP
 									src={contentPageInfo.seo_image_path || undefined}
 								/>
 							</div>,
-							tText('Seo afbeelding')
+							tText('modules/content-page/views/content-page-detail-meta-data___seo-afbeelding')
 						)}
 						{renderSimpleDetailRows<ContentPageInfo>(contentPageInfo, [
 							['title', tText('admin/content/views/content-detail___titel')],

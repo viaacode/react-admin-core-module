@@ -236,7 +236,9 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 							<Column size="5">
 								<FormGroup
 									error={formErrors.thumbnailPath}
-									label={tText('Afbeelding voor SEO (aanbevolen 1200 x 630)')}
+									label={tText(
+										'modules/content-page/components/content-edit-form/content-edit-form___afbeelding-voor-seo-aanbevolen-1200-x-630'
+									)}
 									className="field-seo-image-path"
 								>
 									<FileUpload
@@ -244,7 +246,9 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 										urls={compact([contentPageInfo.seo_image_path])}
 										assetType={AvoFileUploadAssetType.CONTENT_PAGE_OG_IMAGE}
 										allowMulti={false}
-										label={tText('Seo afbeelding')}
+										label={tText(
+											'modules/content-page/components/content-edit-form/content-edit-form___seo-afbeelding'
+										)}
 										onChange={(urls: string[]) => changeContentPageProp('seo_image_path', urls[0])}
 										onDeleteFile={noop} // images will be deleted from the assets service when the user saves the content page
 									/>
