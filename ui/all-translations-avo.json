@@ -6186,9 +6186,27 @@
     "app": "AVO",
     "component": "ADMIN_CORE",
     "location": "error/views/error-view",
+    "key": "de-pagina-werd-niet-gevonden-ingelogd",
+    "language": "nl",
+    "value": "De pagina werd niet gevonden ingelogd",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "error/views/error-view",
     "key": "ga-terug-naar-de-homepagina",
     "language": "nl",
     "value": "Ga terug naar de homepagina",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "error/views/error-view",
+    "key": "ga-naar-de-hulppagina",
+    "language": "nl",
+    "value": "Ga naar de hulppagina",
     "value_type": "TEXT"
   },
   {
@@ -9204,24 +9222,6 @@
     "key": "error",
     "language": "nl",
     "value": "Error",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "error/views/error-view",
-    "key": "de-pagina-werd-niet-gevonden-ingelogd",
-    "language": "nl",
-    "value": "De pagina werd niet gevonden ingelogd",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "error/views/error-view",
-    "key": "ga-naar-de-hulppagina",
-    "language": "nl",
-    "value": "Ga naar de hulppagina",
     "value_type": "TEXT"
   },
   {
@@ -16805,6 +16805,24 @@
   {
     "app": "AVO",
     "component": "FRONTEND",
+    "location": "collection/components/collection-or-bundle-edit-publication-details",
+    "key": "og-afbeelding-1200-x-630-px",
+    "language": "nl",
+    "value": "OG afbeelding (1200 x 630 px)",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "collection/components/collection-or-bundle-edit-publication-details",
+    "key": "upload-een-og-afbeelding",
+    "language": "nl",
+    "value": "Upload een OG afbeelding",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
     "location": "collection/components/collection-or-bundle-edit-quality-check",
     "key": "taalcheck",
     "language": "nl",
@@ -23250,24 +23268,6 @@
     "app": "AVO",
     "component": "FRONTEND",
     "location": "admin/items/views/item-detail",
-    "key": "opmerkingen-opgeslagen",
-    "language": "nl",
-    "value": "Opmerkingen opgeslagen",
-    "value_type": "HTML"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "admin/items/views/item-detail",
-    "key": "het-opslaan-van-de-opmerkingen-is-mislukt",
-    "language": "nl",
-    "value": "Het opslaan van de opmerkingen is mislukt.",
-    "value_type": "HTML"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "admin/items/views/item-detail",
     "key": "ga-naar-de-collectie-detail-pagina",
     "language": "nl",
     "value": "Ga naar de collectie detailpagina",
@@ -23406,15 +23406,6 @@
     "key": "ondertitels",
     "language": "nl",
     "value": "Ondertitels",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "admin/items/views/item-detail",
-    "key": "opmerkingen-opslaan",
-    "language": "nl",
-    "value": "Opmerkingen opslaan",
     "value_type": "TEXT"
   },
   {
@@ -23847,6 +23838,15 @@
     "key": "menu-beheer-detail-pagina-beschrijving",
     "language": "nl",
     "value": "Menu beheer - detailpagina",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/menu/views/menu-overview",
+    "key": "navigatie-overzicht",
+    "language": "nl",
+    "value": "Navigatie overzicht",
     "value_type": "TEXT"
   },
   {
@@ -25494,6 +25494,15 @@
     "key": "het-ophalen-van-de-opdracht-is-mislukt",
     "language": "nl",
     "value": "Het ophalen van de opdracht is mislukt.",
+    "value_type": "HTML"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "assignment/views/assignment-response-edit/assignment-response-edit-page",
+    "key": "de-opdracht-is-niet-gevonden",
+    "language": "nl",
+    "value": "De opdracht is niet gevonden",
     "value_type": "HTML"
   },
   {
@@ -29945,16 +29954,16 @@
   {
     "app": "AVO",
     "component": "FRONTEND",
-    "location": "collection/components/collection-or-bundle-edit-publication-details",
+    "location": "assignment/components/assignment-meta-data-form-editable",
     "key": "og-afbeelding-1200-x-630-px",
     "language": "nl",
-    "value": "OG afbeelding (1200 x 630 px)",
+    "value": "OG afbeelding (1200x630px)",
     "value_type": "TEXT"
   },
   {
     "app": "AVO",
     "component": "FRONTEND",
-    "location": "collection/components/collection-or-bundle-edit-publication-details",
+    "location": "assignment/components/assignment-meta-data-form-editable",
     "key": "upload-een-og-afbeelding",
     "language": "nl",
     "value": "Upload een OG afbeelding",
@@ -29963,20 +29972,38 @@
   {
     "app": "AVO",
     "component": "FRONTEND",
-    "location": "admin/menu/views/menu-overview",
-    "key": "navigatie-overzicht",
+    "location": "admin/items/views/item-detail-admin",
+    "key": "opgeslagen",
     "language": "nl",
-    "value": "Navigatie overzicht",
+    "value": "Opgeslagen",
+    "value_type": "HTML"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/items/views/item-detail-admin",
+    "key": "het-opslaan-van-de-opmerkingen-seo-afbeelding-is-mislukt",
+    "language": "nl",
+    "value": "Het opslaan van de opmerkingen/seo afbeelding is mislukt",
+    "value_type": "HTML"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/items/views/item-detail-admin",
+    "key": "afbeelding-voor-seo-fb",
+    "language": "nl",
+    "value": "Afbeelding voor SEO/FB",
     "value_type": "TEXT"
   },
   {
     "app": "AVO",
     "component": "FRONTEND",
-    "location": "assignment/views/assignment-response-edit/assignment-response-edit-page",
-    "key": "de-opdracht-is-niet-gevonden",
+    "location": "admin/items/views/item-detail-admin",
+    "key": "opslaan",
     "language": "nl",
-    "value": "De opdracht is niet gevonden",
-    "value_type": "HTML"
+    "value": "Opslaan",
+    "value_type": "TEXT"
   },
   {
     "app": "AVO",
