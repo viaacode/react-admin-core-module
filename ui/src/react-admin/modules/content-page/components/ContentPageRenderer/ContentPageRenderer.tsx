@@ -124,7 +124,7 @@ export const ContentPageRenderer: FunctionComponent<ContentPageDetailProps> = (p
 					}
 
 					const blockUserGroupIds: (string | number)[] = (
-						contentBlockConfig.block.state.userGroupIds || []
+						contentBlockConfig?.block?.state?.userGroupIds || []
 					).map(String);
 
 					if (blockUserGroupIds.length) {

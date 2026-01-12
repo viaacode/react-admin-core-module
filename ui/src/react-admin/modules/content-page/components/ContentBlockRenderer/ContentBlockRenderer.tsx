@@ -11,8 +11,12 @@ import type { ContentPageInfo } from '~modules/content-page/types/content-pages.
 import { ContentPageWidth } from '~modules/content-page/types/content-pages.types';
 import { generateSmartLink } from '~shared/components/SmartLink/SmartLink';
 import { GET_DARK_BACKGROUND_COLOR_OPTIONS } from '../../const/get-color-options';
-import type { ContentBlockConfig } from '../../types/content-block.types';
-import { Color, CustomBackground } from '../../types/content-block.types';
+import {
+	Color,
+	type ContentBlockConfig,
+	type ContentBlockState,
+	CustomBackground,
+} from '../../types/content-block.types';
 import {
 	CONTENT_PAGE_ACCESS_BLOCKS,
 	GET_BLOCK_COMPONENT,
@@ -39,7 +43,7 @@ const ContentBlockRenderer: FunctionComponent<ContentBlockPreviewProps> = ({
 	className,
 }) => {
 	const commonUser = getCommonUser();
-	const blockState = contentBlockConfig?.block?.state;
+	const blockState = contentBlockConfig?.block?.state as ContentBlockState | undefined;
 	const componentState = contentBlockConfig?.components?.state;
 	const pageWidth =
 		contentPageInfo.contentWidth?.toUpperCase() ||
@@ -54,7 +58,7 @@ const ContentBlockRenderer: FunctionComponent<ContentBlockPreviewProps> = ({
 	const headerBgRef: RefObject<HTMLDivElement> = useRef<HTMLDivElement>(null);
 
 	// biome-ignore lint/suspicious/noExplicitAny: todo
-	const blockStateProps: { [key: string]: any } = omit(blockState, IGNORE_BLOCK_LEVEL_PROPS);
+	const blockStateProps: { [key: string]: any } = omit(blockState || {}, IGNORE_BLOCK_LEVEL_PROPS);
 
 	const getHeaderHeight = useCallback((): string | null => {
 		if (!blockRef.current) {
@@ -115,7 +119,9 @@ const ContentBlockRenderer: FunctionComponent<ContentBlockPreviewProps> = ({
 		};
 	}
 
-	const hasDarkBg = GET_DARK_BACKGROUND_COLOR_OPTIONS().includes(blockState.backgroundColor);
+	const hasDarkBg = GET_DARK_BACKGROUND_COLOR_OPTIONS().includes(
+		blockState?.backgroundColor || ('' as unknown as Color)
+	);
 	const anchor =
 		blockState?.anchor?.replaceAll(' ', '-') ||
 		GENERATED_CONTENT_BLOCK_ANCHOR_PREFIX + contentBlockConfig.id;
@@ -128,15 +134,15 @@ const ContentBlockRenderer: FunctionComponent<ContentBlockPreviewProps> = ({
 				`c-content-block__${kebabCase(contentBlockConfig.type)}`,
 				{
 					'c-content-block__meemoo-custom-background':
-						blockState.backgroundColor === CustomBackground.MeemooLogo, // https://meemoo.atlassian.net/browse/ARC-1237
+						blockState?.backgroundColor === CustomBackground.MeemooLogo, // https://meemoo.atlassian.net/browse/ARC-1237
 				}
 			)}
 			style={{
 				background:
-					blockState.backgroundColor === CustomBackground.MeemooLogo
+					blockState?.backgroundColor === CustomBackground.MeemooLogo
 						? Color.Transparent
-						: blockState.backgroundColor,
-				...(blockState.headerBackgroundColor !== Color.Transparent ? { zIndex: 1 } : {}),
+						: blockState?.backgroundColor,
+				...(blockState?.headerBackgroundColor !== Color.Transparent ? { zIndex: 1 } : {}),
 			}}
 			data-anchor={anchor}
 			ref={blockRef}
@@ -165,10 +171,10 @@ const ContentBlockRenderer: FunctionComponent<ContentBlockPreviewProps> = ({
 					className="c-content-block__header-bg-color"
 					ref={headerBgRef}
 					style={{
-						background: blockState.headerBackgroundColor,
+						background: blockState?.headerBackgroundColor,
 					}}
 				/>
-				{blockState.fullWidth ? (
+				{blockState?.fullWidth ? (
 					<PreviewComponent {...componentStateProps} {...blockStateProps} pageWidth={pageWidth} />
 				) : (
 					<Container

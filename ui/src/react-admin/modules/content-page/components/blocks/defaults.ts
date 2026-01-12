@@ -29,21 +29,21 @@ export const BLOCK_STATE_DEFAULTS = (
 	state: Partial<DefaultContentBlockState> = {}
 ): DefaultContentBlockState => {
 	return {
-		backgroundColor: state.backgroundColor || Color.Transparent,
-		headerBackgroundColor: state.headerBackgroundColor || Color.Transparent,
+		backgroundColor: state?.backgroundColor || Color.Transparent,
+		headerBackgroundColor: state?.headerBackgroundColor || Color.Transparent,
 		padding:
-			state.padding ||
+			state?.padding ||
 			({
 				top: 'top-small',
 				bottom: 'bottom-small',
 			} as PaddingFieldState),
 		margin:
-			state.margin ||
+			state?.margin ||
 			({
 				top: 'none',
 				bottom: 'none',
 			} as PaddingFieldState),
-		userGroupIds: state.userGroupIds || [],
+		userGroupIds: state?.userGroupIds || [],
 	};
 };
 
