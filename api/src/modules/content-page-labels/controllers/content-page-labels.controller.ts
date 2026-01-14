@@ -10,8 +10,8 @@ import { customError } from '../../shared/helpers/custom-error';
 import type { ContentPageLabelOverviewTableCols } from '../content-page-labels.types';
 import {
 	ContentPageLabelDto,
-	type InsertContentPageLabelDto,
-	type UpdateContentPageLabelDto,
+	InsertContentPageLabelDto,
+	UpdateContentPageLabelDto,
 } from '../dto/content-page-label.dto';
 import { ContentPageLabelsService } from '../services/content-page-labels.service';
 

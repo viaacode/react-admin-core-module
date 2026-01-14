@@ -81,7 +81,7 @@ import type {
 	GqlUser,
 	MediaItemResponse,
 } from '../content-pages.types';
-import type { ContentPageOverviewParams } from '../dto/content-pages.dto';
+import { ContentPageOverviewParams } from '../dto/content-pages.dto';
 import { CONTENT_PAGE_QUERIES, type ContentPageQueryTypes } from '../queries/content-pages.queries';
 
 @Injectable()

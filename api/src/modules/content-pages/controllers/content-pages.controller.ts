@@ -44,7 +44,7 @@ import type {
 	ContentPagesPublishAndUnpublishResults,
 	DbContentPage,
 } from '../content-pages.types';
-import type { ContentPageOverviewParams } from '../dto/content-pages.dto';
+import { ContentPageOverviewParams } from '../dto/content-pages.dto';
 import type { ContentPageQueryTypes } from '../queries/content-pages.queries';
 import { ContentPagesService } from '../services/content-pages.service';
 
