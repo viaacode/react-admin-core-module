@@ -351,12 +351,14 @@ export const MaintenanceAlertsOverview: FunctionComponent<MaintenanceAlertsOverv
 			<AdminLayout.Content>
 				<div className={className}>{maintenanceAlerts && renderAlertsTable(maintenanceAlerts)}</div>
 
-				<MaintenanceAlertsEditForm
-					renderPopup={renderPopup}
-					maintenanceAlert={activeMaintenanceAlert}
-					action={action}
-					onClose={handleCloseEditPopup}
-				></MaintenanceAlertsEditForm>
+				{activeMaintenanceAlert && (
+					<MaintenanceAlertsEditForm
+						renderPopup={renderPopup}
+						maintenanceAlert={activeMaintenanceAlert}
+						action={action}
+						onClose={handleCloseEditPopup}
+					></MaintenanceAlertsEditForm>
+				)}
 				<ConfirmModal
 					deleteObjectCallback={onClickDelete}
 					body={tHtml(

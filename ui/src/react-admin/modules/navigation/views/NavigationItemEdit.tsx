@@ -1,6 +1,6 @@
 import type { TagInfo } from '@viaa/avo2-components';
 import { Button, ButtonToolbar, Flex } from '@viaa/avo2-components';
-import { compact, isNil, startCase, uniqBy } from 'es-toolkit';
+import { compact, isNil, noop, startCase, uniqBy } from 'es-toolkit';
 import type { FC } from 'react';
 import React, { useEffect, useState } from 'react';
 import { AdminConfigManager } from '~core/config/config.class';
@@ -124,7 +124,7 @@ export const NavigationItemEdit: FC<NavigationEditProps> = ({
 				),
 			});
 
-			navigateFunc(AdminConfigManager.getAdminRoute('ADMIN_NAVIGATION_OVERVIEW'));
+			navigateFunc(AdminConfigManager.getAdminRoute('ADMIN_NAVIGATION_OVERVIEW')).then(noop);
 		}
 	}, [
 		isLoadingNavigationItems,

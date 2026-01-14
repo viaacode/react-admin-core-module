@@ -75,6 +75,9 @@ export const LoadingErrorLoadedComponent: FunctionComponent<LoadingErrorLoadedCo
 			if (dataObject) {
 				return render();
 			}
+			console.error(
+				`LoadingErrorLoadedComponent: dataObject is null or undefined at locationId: ${locationId}`
+			);
 			return (
 				<>
 					{notFoundError ||

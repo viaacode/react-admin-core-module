@@ -96,7 +96,7 @@ export const ContentPageDetail: FC<ContentPageDetailProps> = ({
 	const setCurrentTab = useCallback(async (tabId: string) => {
 		const url = new URL(window.location.href);
 		url.searchParams.set(CONTENT_PAGE_DETAIL_TAB_QUERY_PARAM, tabId);
-		await navigateFunc(url, { replace: true });
+		await navigateFunc(url.toString(), { replace: true });
 	}, []);
 	const getTabs = () =>
 		GET_CONTENT_PAGE_DETAIL_TABS().map((tab: TabProps) => ({

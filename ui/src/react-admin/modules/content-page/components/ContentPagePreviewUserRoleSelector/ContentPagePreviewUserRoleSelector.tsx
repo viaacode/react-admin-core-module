@@ -46,7 +46,7 @@ export const ContentPagePreviewUserRoleSelector: FC<
 		async (id: string) => {
 			const url = new URL(props.url);
 			url.searchParams.set(CONTENT_PAGE_USER_GROUP_ID_QUERY_PARAM, id);
-			await navigateFunc(url, { replace: true });
+			await navigateFunc(url.toString(), { replace: true });
 		},
 		[props.url]
 	);

@@ -209,7 +209,7 @@ export const FilterTable: FunctionComponent<FilterTableProps> = ({
 				// If the url wouldn't change, don't update it to prevent an infinite loop
 				return;
 			}
-			await navigateFunc(url, { replace: true });
+			await navigateFunc(url.toString(), { replace: true });
 			onTableStateChanged(newTableState);
 		},
 		[queryParamsConfig, onTableStateChanged]

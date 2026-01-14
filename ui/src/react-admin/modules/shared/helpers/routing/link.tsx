@@ -68,7 +68,7 @@ export const navigate = async (
 	}
 
 	// Abort navigation if link build fails
-	const builtLink = buildLink(route, params, search);
+	const builtLink: string = buildLink(route, params, search);
 
 	if (isEmpty(builtLink)) {
 		showToast({
@@ -90,7 +90,7 @@ export async function navigateToAbsoluteOrRelativeUrl(
 	url: string,
 	target: LinkTarget = LinkTarget.Self
 ) {
-	let fullUrl = url;
+	let fullUrl: string = url;
 	if (url.startsWith('www.')) {
 		fullUrl = `//${url}`;
 	}
