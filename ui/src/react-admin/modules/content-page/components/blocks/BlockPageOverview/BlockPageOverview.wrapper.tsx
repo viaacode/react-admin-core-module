@@ -74,7 +74,7 @@ export const BlockPageOverviewWrapper: FunctionComponent<PageOverviewWrapperProp
 		if (newParams.label) {
 			setQueryParam(url, 'label', CheckboxListParam.encode(newParams.label) as string);
 		}
-		await navigateFunc(url.toString(), { replace: true });
+		await navigateFunc(`${url.pathname}?${url.searchParams.toString()}`, { replace: true });
 	};
 
 	const debouncedItemsPerPage = useDebounce(itemsPerPage || 1000, 200); // Default to 1000 if itemsPerPage is zero

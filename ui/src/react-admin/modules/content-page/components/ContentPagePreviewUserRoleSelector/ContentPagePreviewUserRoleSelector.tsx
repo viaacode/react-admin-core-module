@@ -23,6 +23,7 @@ import { navigateFunc } from '~shared/helpers/navigate-fnc';
 import { tText } from '~shared/helpers/translation-functions';
 import { SpecialUserGroups } from '~shared/types/authentication.types';
 import './ContentPagePreviewUserRoleSelector.scss';
+import { stringifyUrl } from 'query-string';
 import { CONTENT_PAGE_USER_GROUP_ID_QUERY_PARAM } from '~modules/content-page/components/ContentPageRenderer/ContentPageRenderer.consts.tsx';
 import { isServerSideRendering } from '~shared/helpers/routing/is-server-side-rendering.ts';
 
@@ -46,7 +47,8 @@ export const ContentPagePreviewUserRoleSelector: FC<
 		async (id: string) => {
 			const url = new URL(props.url);
 			url.searchParams.set(CONTENT_PAGE_USER_GROUP_ID_QUERY_PARAM, id);
-			await navigateFunc(url.toString(), { replace: true });
+			const newUrl = `${url.pathname}?${url.searchParams.toString()}`;
+			await navigateFunc(newUrl, { replace: true });
 		},
 		[props.url]
 	);

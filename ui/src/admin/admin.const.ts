@@ -3,6 +3,7 @@ import { asyncNoop } from 'es-toolkit';
 import { AdminConfigManager, ToastType } from '~core/config';
 import { ContentPageService } from '~modules/content-page/services/content-page.service.ts';
 import { CustomError } from '~shared/helpers/custom-error.ts';
+import { isAvo } from '~shared/helpers/is-avo.ts';
 import { buildLink } from '~shared/helpers/routing/link.tsx';
 import { showToast } from '~shared/helpers/show-toast.ts';
 import { tText } from '~shared/helpers/translation-functions.ts';
@@ -116,11 +117,14 @@ async function getContentPageDetailRouteByPath(
 }
 
 export const GET_NAV_ITEMS = async (userPermissions: string[]): Promise<NavigationItemInfo[]> => {
-	const contentPageQuickLinkRoutes = await Promise.all([
-		getContentPageDetailRouteByPath('/', true),
-		getContentPageDetailRouteByPath('/leerlingen', true),
-		getContentPageDetailRouteByPath('/start', true),
-	]);
+	let contentPageQuickLinkRoutes: string[] = [];
+	if (isAvo()) {
+		contentPageQuickLinkRoutes = await Promise.all([
+			getContentPageDetailRouteByPath('/', true),
+			getContentPageDetailRouteByPath('/leerlingen', true),
+			getContentPageDetailRouteByPath('/start', true),
+		]);
+	}
 	return [
 		...getUserNavItems(userPermissions),
 		...hasPermissions([PermissionName.EDIT_NAVIGATION_BARS], 'OR', userPermissions, {
@@ -138,7 +142,7 @@ export const GET_NAV_ITEMS = async (userPermissions: string[]): Promise<Navigati
 			exact: false,
 			subLinks: [
 				// Only show the startpages to the users that can edit all pages
-				...(userPermissions.includes(PermissionName.EDIT_ANY_CONTENT_PAGES)
+				...(isAvo() && userPermissions.includes(PermissionName.EDIT_ANY_CONTENT_PAGES)
 					? [
 							{
 								label: tText('admin/admin___start-uitgelogd'),

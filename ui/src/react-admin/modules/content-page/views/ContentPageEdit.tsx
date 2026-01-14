@@ -117,7 +117,7 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 	const setCurrentTab = async (tabId: string) => {
 		const url = new URL(window.location.href);
 		url.searchParams.set(CONTENT_PAGE_EDIT_TAB_QUERY_PARAM, tabId);
-		await navigateFunc(url.toString(), { replace: true });
+		await navigateFunc(`${url.pathname}?${url.searchParams.toString()}`, { replace: true });
 	};
 	const getTabs = () =>
 		GET_CONTENT_PAGE_DETAIL_TABS().map((tab: TabProps) => ({
