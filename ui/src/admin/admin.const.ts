@@ -117,7 +117,7 @@ async function getContentPageDetailRouteByPath(
 }
 
 export const GET_NAV_ITEMS = async (userPermissions: string[]): Promise<NavigationItemInfo[]> => {
-	let contentPageQuickLinkRoutes: string[] = [];
+	let contentPageQuickLinkRoutes: (string | undefined)[] = [];
 	if (isAvo()) {
 		contentPageQuickLinkRoutes = await Promise.all([
 			getContentPageDetailRouteByPath('/', true),
