@@ -185,6 +185,12 @@ export const generateWhereObjectArchief = (
 			);
 		}
 
+		if (!isNil(filters.isEvaluator)) {
+			andFilters.push(
+				...getBooleanFilters<Partial<UserTableState>>(filters, ['isEvaluator'], ['is_evaluator'])
+			);
+		}
+
 		andFilters.push(...getMultiOptionFilters(filters, ['userGroup'], ['group_id']));
 
 		andFilters.push(

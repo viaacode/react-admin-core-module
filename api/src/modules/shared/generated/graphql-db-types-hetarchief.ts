@@ -2550,7 +2550,12 @@ export type App_Material_Requests = {
   cancelled_at?: Maybe<Scalars['timestamp']['output']>;
   created_at: Scalars['timestamp']['output'];
   denied_at?: Maybe<Scalars['timestamp']['output']>;
+  download_available_at?: Maybe<Scalars['timestamp']['output']>;
+  download_job_id?: Maybe<Scalars['String']['output']>;
+  download_retries: Scalars['Int']['output'];
+  download_status?: Maybe<Lookup_App_Material_Request_Download_Status_Enum>;
   download_url?: Maybe<Scalars['String']['output']>;
+  group_id?: Maybe<Scalars['uuid']['output']>;
   id: Scalars['uuid']['output'];
   ie_object_id: Scalars['String']['output'];
   ie_object_representation_id?: Maybe<Scalars['String']['output']>;
@@ -2609,9 +2614,17 @@ export type App_Material_Requests_Aggregate = {
 /** aggregate fields of "app.material_requests" */
 export type App_Material_Requests_Aggregate_Fields = {
   __typename?: 'app_material_requests_aggregate_fields';
+  avg?: Maybe<App_Material_Requests_Avg_Fields>;
   count: Scalars['Int']['output'];
   max?: Maybe<App_Material_Requests_Max_Fields>;
   min?: Maybe<App_Material_Requests_Min_Fields>;
+  stddev?: Maybe<App_Material_Requests_Stddev_Fields>;
+  stddev_pop?: Maybe<App_Material_Requests_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<App_Material_Requests_Stddev_Samp_Fields>;
+  sum?: Maybe<App_Material_Requests_Sum_Fields>;
+  var_pop?: Maybe<App_Material_Requests_Var_Pop_Fields>;
+  var_samp?: Maybe<App_Material_Requests_Var_Samp_Fields>;
+  variance?: Maybe<App_Material_Requests_Variance_Fields>;
 };
 
 
@@ -2619,6 +2632,12 @@ export type App_Material_Requests_Aggregate_Fields = {
 export type App_Material_Requests_Aggregate_FieldsCountArgs = {
   columns?: InputMaybe<Array<App_Material_Requests_Select_Column>>;
   distinct?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+/** aggregate avg on columns */
+export type App_Material_Requests_Avg_Fields = {
+  __typename?: 'app_material_requests_avg_fields';
+  download_retries?: Maybe<Scalars['Float']['output']>;
 };
 
 /** Boolean expression to filter rows from the table "app.material_requests". All fields are combined with a logical 'AND'. */
@@ -2630,7 +2649,12 @@ export type App_Material_Requests_Bool_Exp = {
   cancelled_at?: InputMaybe<Timestamp_Comparison_Exp>;
   created_at?: InputMaybe<Timestamp_Comparison_Exp>;
   denied_at?: InputMaybe<Timestamp_Comparison_Exp>;
+  download_available_at?: InputMaybe<Timestamp_Comparison_Exp>;
+  download_job_id?: InputMaybe<String_Comparison_Exp>;
+  download_retries?: InputMaybe<Int_Comparison_Exp>;
+  download_status?: InputMaybe<Lookup_App_Material_Request_Download_Status_Enum_Comparison_Exp>;
   download_url?: InputMaybe<String_Comparison_Exp>;
+  group_id?: InputMaybe<Uuid_Comparison_Exp>;
   id?: InputMaybe<Uuid_Comparison_Exp>;
   ie_object_id?: InputMaybe<String_Comparison_Exp>;
   ie_object_representation_id?: InputMaybe<String_Comparison_Exp>;
@@ -2659,13 +2683,23 @@ export enum App_Material_Requests_Constraint {
   MaterialRequestsPkey = 'material_requests_pkey'
 }
 
+/** input type for incrementing numeric columns in table "app.material_requests" */
+export type App_Material_Requests_Inc_Input = {
+  download_retries?: InputMaybe<Scalars['Int']['input']>;
+};
+
 /** input type for inserting data into table "app.material_requests" */
 export type App_Material_Requests_Insert_Input = {
   approved_at?: InputMaybe<Scalars['timestamp']['input']>;
   cancelled_at?: InputMaybe<Scalars['timestamp']['input']>;
   created_at?: InputMaybe<Scalars['timestamp']['input']>;
   denied_at?: InputMaybe<Scalars['timestamp']['input']>;
+  download_available_at?: InputMaybe<Scalars['timestamp']['input']>;
+  download_job_id?: InputMaybe<Scalars['String']['input']>;
+  download_retries?: InputMaybe<Scalars['Int']['input']>;
+  download_status?: InputMaybe<Lookup_App_Material_Request_Download_Status_Enum>;
   download_url?: InputMaybe<Scalars['String']['input']>;
+  group_id?: InputMaybe<Scalars['uuid']['input']>;
   id?: InputMaybe<Scalars['uuid']['input']>;
   ie_object_id?: InputMaybe<Scalars['String']['input']>;
   ie_object_representation_id?: InputMaybe<Scalars['String']['input']>;
@@ -2694,7 +2728,11 @@ export type App_Material_Requests_Max_Fields = {
   cancelled_at?: Maybe<Scalars['timestamp']['output']>;
   created_at?: Maybe<Scalars['timestamp']['output']>;
   denied_at?: Maybe<Scalars['timestamp']['output']>;
+  download_available_at?: Maybe<Scalars['timestamp']['output']>;
+  download_job_id?: Maybe<Scalars['String']['output']>;
+  download_retries?: Maybe<Scalars['Int']['output']>;
   download_url?: Maybe<Scalars['String']['output']>;
+  group_id?: Maybe<Scalars['uuid']['output']>;
   id?: Maybe<Scalars['uuid']['output']>;
   ie_object_id?: Maybe<Scalars['String']['output']>;
   ie_object_representation_id?: Maybe<Scalars['String']['output']>;
@@ -2714,7 +2752,11 @@ export type App_Material_Requests_Min_Fields = {
   cancelled_at?: Maybe<Scalars['timestamp']['output']>;
   created_at?: Maybe<Scalars['timestamp']['output']>;
   denied_at?: Maybe<Scalars['timestamp']['output']>;
+  download_available_at?: Maybe<Scalars['timestamp']['output']>;
+  download_job_id?: Maybe<Scalars['String']['output']>;
+  download_retries?: Maybe<Scalars['Int']['output']>;
   download_url?: Maybe<Scalars['String']['output']>;
+  group_id?: Maybe<Scalars['uuid']['output']>;
   id?: Maybe<Scalars['uuid']['output']>;
   ie_object_id?: Maybe<Scalars['String']['output']>;
   ie_object_representation_id?: Maybe<Scalars['String']['output']>;
@@ -2749,7 +2791,12 @@ export type App_Material_Requests_Order_By = {
   cancelled_at?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
   denied_at?: InputMaybe<Order_By>;
+  download_available_at?: InputMaybe<Order_By>;
+  download_job_id?: InputMaybe<Order_By>;
+  download_retries?: InputMaybe<Order_By>;
+  download_status?: InputMaybe<Order_By>;
   download_url?: InputMaybe<Order_By>;
+  group_id?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   ie_object_id?: InputMaybe<Order_By>;
   ie_object_representation_id?: InputMaybe<Order_By>;
@@ -2787,7 +2834,17 @@ export enum App_Material_Requests_Select_Column {
   /** column name */
   DeniedAt = 'denied_at',
   /** column name */
+  DownloadAvailableAt = 'download_available_at',
+  /** column name */
+  DownloadJobId = 'download_job_id',
+  /** column name */
+  DownloadRetries = 'download_retries',
+  /** column name */
+  DownloadStatus = 'download_status',
+  /** column name */
   DownloadUrl = 'download_url',
+  /** column name */
+  GroupId = 'group_id',
   /** column name */
   Id = 'id',
   /** column name */
@@ -2824,7 +2881,12 @@ export type App_Material_Requests_Set_Input = {
   cancelled_at?: InputMaybe<Scalars['timestamp']['input']>;
   created_at?: InputMaybe<Scalars['timestamp']['input']>;
   denied_at?: InputMaybe<Scalars['timestamp']['input']>;
+  download_available_at?: InputMaybe<Scalars['timestamp']['input']>;
+  download_job_id?: InputMaybe<Scalars['String']['input']>;
+  download_retries?: InputMaybe<Scalars['Int']['input']>;
+  download_status?: InputMaybe<Lookup_App_Material_Request_Download_Status_Enum>;
   download_url?: InputMaybe<Scalars['String']['input']>;
+  group_id?: InputMaybe<Scalars['uuid']['input']>;
   id?: InputMaybe<Scalars['uuid']['input']>;
   ie_object_id?: InputMaybe<Scalars['String']['input']>;
   ie_object_representation_id?: InputMaybe<Scalars['String']['input']>;
@@ -2839,6 +2901,24 @@ export type App_Material_Requests_Set_Input = {
   status_motivation?: InputMaybe<Scalars['String']['input']>;
   type?: InputMaybe<Lookup_App_Material_Request_Type_Enum>;
   updated_at?: InputMaybe<Scalars['timestamp']['input']>;
+};
+
+/** aggregate stddev on columns */
+export type App_Material_Requests_Stddev_Fields = {
+  __typename?: 'app_material_requests_stddev_fields';
+  download_retries?: Maybe<Scalars['Float']['output']>;
+};
+
+/** aggregate stddev_pop on columns */
+export type App_Material_Requests_Stddev_Pop_Fields = {
+  __typename?: 'app_material_requests_stddev_pop_fields';
+  download_retries?: Maybe<Scalars['Float']['output']>;
+};
+
+/** aggregate stddev_samp on columns */
+export type App_Material_Requests_Stddev_Samp_Fields = {
+  __typename?: 'app_material_requests_stddev_samp_fields';
+  download_retries?: Maybe<Scalars['Float']['output']>;
 };
 
 /** Streaming cursor of the table "app_material_requests" */
@@ -2855,7 +2935,12 @@ export type App_Material_Requests_Stream_Cursor_Value_Input = {
   cancelled_at?: InputMaybe<Scalars['timestamp']['input']>;
   created_at?: InputMaybe<Scalars['timestamp']['input']>;
   denied_at?: InputMaybe<Scalars['timestamp']['input']>;
+  download_available_at?: InputMaybe<Scalars['timestamp']['input']>;
+  download_job_id?: InputMaybe<Scalars['String']['input']>;
+  download_retries?: InputMaybe<Scalars['Int']['input']>;
+  download_status?: InputMaybe<Lookup_App_Material_Request_Download_Status_Enum>;
   download_url?: InputMaybe<Scalars['String']['input']>;
+  group_id?: InputMaybe<Scalars['uuid']['input']>;
   id?: InputMaybe<Scalars['uuid']['input']>;
   ie_object_id?: InputMaybe<Scalars['String']['input']>;
   ie_object_representation_id?: InputMaybe<Scalars['String']['input']>;
@@ -2872,6 +2957,12 @@ export type App_Material_Requests_Stream_Cursor_Value_Input = {
   updated_at?: InputMaybe<Scalars['timestamp']['input']>;
 };
 
+/** aggregate sum on columns */
+export type App_Material_Requests_Sum_Fields = {
+  __typename?: 'app_material_requests_sum_fields';
+  download_retries?: Maybe<Scalars['Int']['output']>;
+};
+
 /** update columns of table "app.material_requests" */
 export enum App_Material_Requests_Update_Column {
   /** column name */
@@ -2883,7 +2974,17 @@ export enum App_Material_Requests_Update_Column {
   /** column name */
   DeniedAt = 'denied_at',
   /** column name */
+  DownloadAvailableAt = 'download_available_at',
+  /** column name */
+  DownloadJobId = 'download_job_id',
+  /** column name */
+  DownloadRetries = 'download_retries',
+  /** column name */
+  DownloadStatus = 'download_status',
+  /** column name */
   DownloadUrl = 'download_url',
+  /** column name */
+  GroupId = 'group_id',
   /** column name */
   Id = 'id',
   /** column name */
@@ -2915,10 +3016,30 @@ export enum App_Material_Requests_Update_Column {
 }
 
 export type App_Material_Requests_Updates = {
+  /** increments the numeric columns with given value of the filtered values */
+  _inc?: InputMaybe<App_Material_Requests_Inc_Input>;
   /** sets the columns of the filtered rows to the given values */
   _set?: InputMaybe<App_Material_Requests_Set_Input>;
   /** filter the rows which have to be updated */
   where: App_Material_Requests_Bool_Exp;
+};
+
+/** aggregate var_pop on columns */
+export type App_Material_Requests_Var_Pop_Fields = {
+  __typename?: 'app_material_requests_var_pop_fields';
+  download_retries?: Maybe<Scalars['Float']['output']>;
+};
+
+/** aggregate var_samp on columns */
+export type App_Material_Requests_Var_Samp_Fields = {
+  __typename?: 'app_material_requests_var_samp_fields';
+  download_retries?: Maybe<Scalars['Float']['output']>;
+};
+
+/** aggregate variance on columns */
+export type App_Material_Requests_Variance_Fields = {
+  __typename?: 'app_material_requests_variance_fields';
+  download_retries?: Maybe<Scalars['Float']['output']>;
 };
 
 /** columns and relationships of "app.navigation" */
@@ -18028,6 +18149,160 @@ export type Lookup_App_Content_Type_Updates = {
   where: Lookup_App_Content_Type_Bool_Exp;
 };
 
+/** the status of the MAM jobs to export the requested media */
+export type Lookup_App_Material_Request_Download_Status = {
+  __typename?: 'lookup_app_material_request_download_status';
+  comment: Scalars['String']['output'];
+  value: Scalars['String']['output'];
+};
+
+/** aggregated selection of "lookup.app_material_request_download_status" */
+export type Lookup_App_Material_Request_Download_Status_Aggregate = {
+  __typename?: 'lookup_app_material_request_download_status_aggregate';
+  aggregate?: Maybe<Lookup_App_Material_Request_Download_Status_Aggregate_Fields>;
+  nodes: Array<Lookup_App_Material_Request_Download_Status>;
+};
+
+/** aggregate fields of "lookup.app_material_request_download_status" */
+export type Lookup_App_Material_Request_Download_Status_Aggregate_Fields = {
+  __typename?: 'lookup_app_material_request_download_status_aggregate_fields';
+  count: Scalars['Int']['output'];
+  max?: Maybe<Lookup_App_Material_Request_Download_Status_Max_Fields>;
+  min?: Maybe<Lookup_App_Material_Request_Download_Status_Min_Fields>;
+};
+
+
+/** aggregate fields of "lookup.app_material_request_download_status" */
+export type Lookup_App_Material_Request_Download_Status_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Lookup_App_Material_Request_Download_Status_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+/** Boolean expression to filter rows from the table "lookup.app_material_request_download_status". All fields are combined with a logical 'AND'. */
+export type Lookup_App_Material_Request_Download_Status_Bool_Exp = {
+  _and?: InputMaybe<Array<Lookup_App_Material_Request_Download_Status_Bool_Exp>>;
+  _not?: InputMaybe<Lookup_App_Material_Request_Download_Status_Bool_Exp>;
+  _or?: InputMaybe<Array<Lookup_App_Material_Request_Download_Status_Bool_Exp>>;
+  comment?: InputMaybe<String_Comparison_Exp>;
+  value?: InputMaybe<String_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "lookup.app_material_request_download_status" */
+export enum Lookup_App_Material_Request_Download_Status_Constraint {
+  /** unique or primary key constraint on columns "value" */
+  AppMaterialRequestDownloadStatusPkey = 'app_material_request_download_status_pkey'
+}
+
+export enum Lookup_App_Material_Request_Download_Status_Enum {
+  /** download job failed */
+  Failed = 'FAILED',
+  /** download was triggered, but job has not been fetched yet */
+  New = 'NEW',
+  /** download was triggered, and mam export job is in progress */
+  Pending = 'PENDING',
+  /** download job succeeded, download_url filled in */
+  Succeeded = 'SUCCEEDED'
+}
+
+/** Boolean expression to compare columns of type "lookup_app_material_request_download_status_enum". All fields are combined with logical 'AND'. */
+export type Lookup_App_Material_Request_Download_Status_Enum_Comparison_Exp = {
+  _eq?: InputMaybe<Lookup_App_Material_Request_Download_Status_Enum>;
+  _in?: InputMaybe<Array<Lookup_App_Material_Request_Download_Status_Enum>>;
+  _is_null?: InputMaybe<Scalars['Boolean']['input']>;
+  _neq?: InputMaybe<Lookup_App_Material_Request_Download_Status_Enum>;
+  _nin?: InputMaybe<Array<Lookup_App_Material_Request_Download_Status_Enum>>;
+};
+
+/** input type for inserting data into table "lookup.app_material_request_download_status" */
+export type Lookup_App_Material_Request_Download_Status_Insert_Input = {
+  comment?: InputMaybe<Scalars['String']['input']>;
+  value?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** aggregate max on columns */
+export type Lookup_App_Material_Request_Download_Status_Max_Fields = {
+  __typename?: 'lookup_app_material_request_download_status_max_fields';
+  comment?: Maybe<Scalars['String']['output']>;
+  value?: Maybe<Scalars['String']['output']>;
+};
+
+/** aggregate min on columns */
+export type Lookup_App_Material_Request_Download_Status_Min_Fields = {
+  __typename?: 'lookup_app_material_request_download_status_min_fields';
+  comment?: Maybe<Scalars['String']['output']>;
+  value?: Maybe<Scalars['String']['output']>;
+};
+
+/** response of any mutation on the table "lookup.app_material_request_download_status" */
+export type Lookup_App_Material_Request_Download_Status_Mutation_Response = {
+  __typename?: 'lookup_app_material_request_download_status_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int']['output'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Lookup_App_Material_Request_Download_Status>;
+};
+
+/** on_conflict condition type for table "lookup.app_material_request_download_status" */
+export type Lookup_App_Material_Request_Download_Status_On_Conflict = {
+  constraint: Lookup_App_Material_Request_Download_Status_Constraint;
+  update_columns?: Array<Lookup_App_Material_Request_Download_Status_Update_Column>;
+  where?: InputMaybe<Lookup_App_Material_Request_Download_Status_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "lookup.app_material_request_download_status". */
+export type Lookup_App_Material_Request_Download_Status_Order_By = {
+  comment?: InputMaybe<Order_By>;
+  value?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: lookup.app_material_request_download_status */
+export type Lookup_App_Material_Request_Download_Status_Pk_Columns_Input = {
+  value: Scalars['String']['input'];
+};
+
+/** select columns of table "lookup.app_material_request_download_status" */
+export enum Lookup_App_Material_Request_Download_Status_Select_Column {
+  /** column name */
+  Comment = 'comment',
+  /** column name */
+  Value = 'value'
+}
+
+/** input type for updating data in table "lookup.app_material_request_download_status" */
+export type Lookup_App_Material_Request_Download_Status_Set_Input = {
+  comment?: InputMaybe<Scalars['String']['input']>;
+  value?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** Streaming cursor of the table "lookup_app_material_request_download_status" */
+export type Lookup_App_Material_Request_Download_Status_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Lookup_App_Material_Request_Download_Status_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Lookup_App_Material_Request_Download_Status_Stream_Cursor_Value_Input = {
+  comment?: InputMaybe<Scalars['String']['input']>;
+  value?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** update columns of table "lookup.app_material_request_download_status" */
+export enum Lookup_App_Material_Request_Download_Status_Update_Column {
+  /** column name */
+  Comment = 'comment',
+  /** column name */
+  Value = 'value'
+}
+
+export type Lookup_App_Material_Request_Download_Status_Updates = {
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<Lookup_App_Material_Request_Download_Status_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Lookup_App_Material_Request_Download_Status_Bool_Exp;
+};
+
 /** columns and relationships of "lookup.app_material_request_requester_capacity" */
 export type Lookup_App_Material_Request_Requester_Capacity = {
   __typename?: 'lookup_app_material_request_requester_capacity';
@@ -21369,6 +21644,10 @@ export type Mutation_Root = {
   delete_lookup_app_content_type?: Maybe<Lookup_App_Content_Type_Mutation_Response>;
   /** delete single row from the table: "lookup.app_content_type" */
   delete_lookup_app_content_type_by_pk?: Maybe<Lookup_App_Content_Type>;
+  /** delete data from the table: "lookup.app_material_request_download_status" */
+  delete_lookup_app_material_request_download_status?: Maybe<Lookup_App_Material_Request_Download_Status_Mutation_Response>;
+  /** delete single row from the table: "lookup.app_material_request_download_status" */
+  delete_lookup_app_material_request_download_status_by_pk?: Maybe<Lookup_App_Material_Request_Download_Status>;
   /** delete data from the table: "lookup.app_material_request_requester_capacity" */
   delete_lookup_app_material_request_requester_capacity?: Maybe<Lookup_App_Material_Request_Requester_Capacity_Mutation_Response>;
   /** delete single row from the table: "lookup.app_material_request_requester_capacity" */
@@ -21653,6 +21932,10 @@ export type Mutation_Root = {
   insert_lookup_app_content_type?: Maybe<Lookup_App_Content_Type_Mutation_Response>;
   /** insert a single row into the table: "lookup.app_content_type" */
   insert_lookup_app_content_type_one?: Maybe<Lookup_App_Content_Type>;
+  /** insert data into the table: "lookup.app_material_request_download_status" */
+  insert_lookup_app_material_request_download_status?: Maybe<Lookup_App_Material_Request_Download_Status_Mutation_Response>;
+  /** insert a single row into the table: "lookup.app_material_request_download_status" */
+  insert_lookup_app_material_request_download_status_one?: Maybe<Lookup_App_Material_Request_Download_Status>;
   /** insert data into the table: "lookup.app_material_request_requester_capacity" */
   insert_lookup_app_material_request_requester_capacity?: Maybe<Lookup_App_Material_Request_Requester_Capacity_Mutation_Response>;
   /** insert a single row into the table: "lookup.app_material_request_requester_capacity" */
@@ -22029,6 +22312,12 @@ export type Mutation_Root = {
   update_lookup_app_content_type_by_pk?: Maybe<Lookup_App_Content_Type>;
   /** update multiples rows of table: "lookup.app_content_type" */
   update_lookup_app_content_type_many?: Maybe<Array<Maybe<Lookup_App_Content_Type_Mutation_Response>>>;
+  /** update data of the table: "lookup.app_material_request_download_status" */
+  update_lookup_app_material_request_download_status?: Maybe<Lookup_App_Material_Request_Download_Status_Mutation_Response>;
+  /** update single row of the table: "lookup.app_material_request_download_status" */
+  update_lookup_app_material_request_download_status_by_pk?: Maybe<Lookup_App_Material_Request_Download_Status>;
+  /** update multiples rows of table: "lookup.app_material_request_download_status" */
+  update_lookup_app_material_request_download_status_many?: Maybe<Array<Maybe<Lookup_App_Material_Request_Download_Status_Mutation_Response>>>;
   /** update data of the table: "lookup.app_material_request_requester_capacity" */
   update_lookup_app_material_request_requester_capacity?: Maybe<Lookup_App_Material_Request_Requester_Capacity_Mutation_Response>;
   /** update single row of the table: "lookup.app_material_request_requester_capacity" */
@@ -22759,6 +23048,18 @@ export type Mutation_RootDelete_Lookup_App_Content_TypeArgs = {
 
 /** mutation root */
 export type Mutation_RootDelete_Lookup_App_Content_Type_By_PkArgs = {
+  value: Scalars['String']['input'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Lookup_App_Material_Request_Download_StatusArgs = {
+  where: Lookup_App_Material_Request_Download_Status_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Lookup_App_Material_Request_Download_Status_By_PkArgs = {
   value: Scalars['String']['input'];
 };
 
@@ -23709,6 +24010,20 @@ export type Mutation_RootInsert_Lookup_App_Content_Type_OneArgs = {
 
 
 /** mutation root */
+export type Mutation_RootInsert_Lookup_App_Material_Request_Download_StatusArgs = {
+  objects: Array<Lookup_App_Material_Request_Download_Status_Insert_Input>;
+  on_conflict?: InputMaybe<Lookup_App_Material_Request_Download_Status_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Lookup_App_Material_Request_Download_Status_OneArgs = {
+  object: Lookup_App_Material_Request_Download_Status_Insert_Input;
+  on_conflict?: InputMaybe<Lookup_App_Material_Request_Download_Status_On_Conflict>;
+};
+
+
+/** mutation root */
 export type Mutation_RootInsert_Lookup_App_Material_Request_Requester_CapacityArgs = {
   objects: Array<Lookup_App_Material_Request_Requester_Capacity_Insert_Input>;
   on_conflict?: InputMaybe<Lookup_App_Material_Request_Requester_Capacity_On_Conflict>;
@@ -24258,6 +24573,7 @@ export type Mutation_RootUpdate_App_Material_Request_Reuse_Form_Values_ManyArgs 
 
 /** mutation root */
 export type Mutation_RootUpdate_App_Material_RequestsArgs = {
+  _inc?: InputMaybe<App_Material_Requests_Inc_Input>;
   _set?: InputMaybe<App_Material_Requests_Set_Input>;
   where: App_Material_Requests_Bool_Exp;
 };
@@ -24265,6 +24581,7 @@ export type Mutation_RootUpdate_App_Material_RequestsArgs = {
 
 /** mutation root */
 export type Mutation_RootUpdate_App_Material_Requests_By_PkArgs = {
+  _inc?: InputMaybe<App_Material_Requests_Inc_Input>;
   _set?: InputMaybe<App_Material_Requests_Set_Input>;
   pk_columns: App_Material_Requests_Pk_Columns_Input;
 };
@@ -25048,6 +25365,26 @@ export type Mutation_RootUpdate_Lookup_App_Content_Type_By_PkArgs = {
 /** mutation root */
 export type Mutation_RootUpdate_Lookup_App_Content_Type_ManyArgs = {
   updates: Array<Lookup_App_Content_Type_Updates>;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Lookup_App_Material_Request_Download_StatusArgs = {
+  _set?: InputMaybe<Lookup_App_Material_Request_Download_Status_Set_Input>;
+  where: Lookup_App_Material_Request_Download_Status_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Lookup_App_Material_Request_Download_Status_By_PkArgs = {
+  _set?: InputMaybe<Lookup_App_Material_Request_Download_Status_Set_Input>;
+  pk_columns: Lookup_App_Material_Request_Download_Status_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Lookup_App_Material_Request_Download_Status_ManyArgs = {
+  updates: Array<Lookup_App_Material_Request_Download_Status_Updates>;
 };
 
 
@@ -26224,6 +26561,12 @@ export type Query_Root = {
   lookup_app_content_type_aggregate: Lookup_App_Content_Type_Aggregate;
   /** fetch data from the table: "lookup.app_content_type" using primary key columns */
   lookup_app_content_type_by_pk?: Maybe<Lookup_App_Content_Type>;
+  /** fetch data from the table: "lookup.app_material_request_download_status" */
+  lookup_app_material_request_download_status: Array<Lookup_App_Material_Request_Download_Status>;
+  /** fetch aggregated fields from the table: "lookup.app_material_request_download_status" */
+  lookup_app_material_request_download_status_aggregate: Lookup_App_Material_Request_Download_Status_Aggregate;
+  /** fetch data from the table: "lookup.app_material_request_download_status" using primary key columns */
+  lookup_app_material_request_download_status_by_pk?: Maybe<Lookup_App_Material_Request_Download_Status>;
   /** fetch data from the table: "lookup.app_material_request_requester_capacity" */
   lookup_app_material_request_requester_capacity: Array<Lookup_App_Material_Request_Requester_Capacity>;
   /** fetch aggregated fields from the table: "lookup.app_material_request_requester_capacity" */
@@ -28124,6 +28467,29 @@ export type Query_RootLookup_App_Content_Type_By_PkArgs = {
 };
 
 
+export type Query_RootLookup_App_Material_Request_Download_StatusArgs = {
+  distinct_on?: InputMaybe<Array<Lookup_App_Material_Request_Download_Status_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Lookup_App_Material_Request_Download_Status_Order_By>>;
+  where?: InputMaybe<Lookup_App_Material_Request_Download_Status_Bool_Exp>;
+};
+
+
+export type Query_RootLookup_App_Material_Request_Download_Status_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Lookup_App_Material_Request_Download_Status_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Lookup_App_Material_Request_Download_Status_Order_By>>;
+  where?: InputMaybe<Lookup_App_Material_Request_Download_Status_Bool_Exp>;
+};
+
+
+export type Query_RootLookup_App_Material_Request_Download_Status_By_PkArgs = {
+  value: Scalars['String']['input'];
+};
+
+
 export type Query_RootLookup_App_Material_Request_Requester_CapacityArgs = {
   distinct_on?: InputMaybe<Array<Lookup_App_Material_Request_Requester_Capacity_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -29281,6 +29647,14 @@ export type Subscription_Root = {
   lookup_app_content_type_by_pk?: Maybe<Lookup_App_Content_Type>;
   /** fetch data from the table in a streaming manner: "lookup.app_content_type" */
   lookup_app_content_type_stream: Array<Lookup_App_Content_Type>;
+  /** fetch data from the table: "lookup.app_material_request_download_status" */
+  lookup_app_material_request_download_status: Array<Lookup_App_Material_Request_Download_Status>;
+  /** fetch aggregated fields from the table: "lookup.app_material_request_download_status" */
+  lookup_app_material_request_download_status_aggregate: Lookup_App_Material_Request_Download_Status_Aggregate;
+  /** fetch data from the table: "lookup.app_material_request_download_status" using primary key columns */
+  lookup_app_material_request_download_status_by_pk?: Maybe<Lookup_App_Material_Request_Download_Status>;
+  /** fetch data from the table in a streaming manner: "lookup.app_material_request_download_status" */
+  lookup_app_material_request_download_status_stream: Array<Lookup_App_Material_Request_Download_Status>;
   /** fetch data from the table: "lookup.app_material_request_requester_capacity" */
   lookup_app_material_request_requester_capacity: Array<Lookup_App_Material_Request_Requester_Capacity>;
   /** fetch aggregated fields from the table: "lookup.app_material_request_requester_capacity" */
@@ -31807,6 +32181,36 @@ export type Subscription_RootLookup_App_Content_Type_StreamArgs = {
   batch_size: Scalars['Int']['input'];
   cursor: Array<InputMaybe<Lookup_App_Content_Type_Stream_Cursor_Input>>;
   where?: InputMaybe<Lookup_App_Content_Type_Bool_Exp>;
+};
+
+
+export type Subscription_RootLookup_App_Material_Request_Download_StatusArgs = {
+  distinct_on?: InputMaybe<Array<Lookup_App_Material_Request_Download_Status_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Lookup_App_Material_Request_Download_Status_Order_By>>;
+  where?: InputMaybe<Lookup_App_Material_Request_Download_Status_Bool_Exp>;
+};
+
+
+export type Subscription_RootLookup_App_Material_Request_Download_Status_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Lookup_App_Material_Request_Download_Status_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Lookup_App_Material_Request_Download_Status_Order_By>>;
+  where?: InputMaybe<Lookup_App_Material_Request_Download_Status_Bool_Exp>;
+};
+
+
+export type Subscription_RootLookup_App_Material_Request_Download_Status_By_PkArgs = {
+  value: Scalars['String']['input'];
+};
+
+
+export type Subscription_RootLookup_App_Material_Request_Download_Status_StreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<Lookup_App_Material_Request_Download_Status_Stream_Cursor_Input>>;
+  where?: InputMaybe<Lookup_App_Material_Request_Download_Status_Bool_Exp>;
 };
 
 
@@ -35200,7 +35604,7 @@ export type GetUsersQueryVariables = Exact<{
 }>;
 
 
-export type GetUsersQuery = { __typename?: 'query_root', users_profile: Array<{ __typename?: 'users_profile', id: any, full_name?: string | null, first_name?: string | null, last_name?: string | null, mail?: string | null, last_access_at?: any | null, language: Lookup_Languages_Enum, group?: { __typename?: 'users_group', label: string, name: string, id: any } | null, identities: Array<{ __typename?: 'users_identity', identity_provider_name: string }>, organisation?: { __typename?: 'graph_organization', id: string, org_identifier: string, skos_pref_label?: string | null, foaf_homepage?: string | null, ha_org_has_logo?: string | null } | null }>, users_profile_aggregate: { __typename?: 'users_profile_aggregate', aggregate?: { __typename?: 'users_profile_aggregate_fields', count: number } | null } };
+export type GetUsersQuery = { __typename?: 'query_root', users_profile: Array<{ __typename?: 'users_profile', id: any, full_name?: string | null, first_name?: string | null, last_name?: string | null, mail?: string | null, last_access_at?: any | null, language: Lookup_Languages_Enum, is_key_user: boolean, is_evaluator: boolean, group?: { __typename?: 'users_group', label: string, name: string, id: any } | null, identities: Array<{ __typename?: 'users_identity', identity_provider_name: string }>, organisation?: { __typename?: 'graph_organization', id: string, org_identifier: string, skos_pref_label?: string | null, foaf_homepage?: string | null, ha_org_has_logo?: string | null } | null }>, users_profile_aggregate: { __typename?: 'users_profile_aggregate', aggregate?: { __typename?: 'users_profile_aggregate_fields', count: number } | null } };
 
 
 export const DeleteContentAssetDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"deleteContentAsset"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"url"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"delete_app_content_assets"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"path"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"url"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"affected_rows"}}]}}]}}]} as unknown as DocumentNode<DeleteContentAssetMutation, DeleteContentAssetMutationVariables>;
@@ -35276,4 +35680,4 @@ export const UpdateUserGroupsPermissionsDocument = {"kind":"Document","definitio
 export const GetIdpsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getIdps"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"users_identity_provider"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]} as unknown as DocumentNode<GetIdpsQuery, GetIdpsQueryVariables>;
 export const GetProfileIdsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getProfileIds"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"where"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"users_profile_bool_exp"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"users_profile"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"where"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<GetProfileIdsQuery, GetProfileIdsQueryVariables>;
 export const GetProfileNamesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getProfileNames"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"profileIds"}},"type":{"kind":"NonNullType","type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"users_profile"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_in"},"value":{"kind":"Variable","name":{"kind":"Name","value":"profileIds"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"full_name"}},{"kind":"Field","name":{"kind":"Name","value":"mail"}}]}},{"kind":"Field","name":{"kind":"Name","value":"users_profile_aggregate"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_in"},"value":{"kind":"Variable","name":{"kind":"Name","value":"profileIds"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"aggregate"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"count"}}]}}]}}]}}]} as unknown as DocumentNode<GetProfileNamesQuery, GetProfileNamesQueryVariables>;
-export const GetUsersDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getUsers"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"offset"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"limit"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"orderBy"}},"type":{"kind":"NonNullType","type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"users_profile_order_by"}}}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"where"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"users_profile_bool_exp"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"users_profile"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"offset"},"value":{"kind":"Variable","name":{"kind":"Name","value":"offset"}}},{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}},{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"Variable","name":{"kind":"Name","value":"orderBy"}}},{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"where"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"full_name"}},{"kind":"Field","name":{"kind":"Name","value":"first_name"}},{"kind":"Field","name":{"kind":"Name","value":"last_name"}},{"kind":"Field","name":{"kind":"Name","value":"mail"}},{"kind":"Field","name":{"kind":"Name","value":"last_access_at"}},{"kind":"Field","name":{"kind":"Name","value":"language"}},{"kind":"Field","name":{"kind":"Name","value":"group"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"identities"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"identity_provider_name"}}]}},{"kind":"Field","name":{"kind":"Name","value":"organisation"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"org_identifier"}},{"kind":"Field","name":{"kind":"Name","value":"skos_pref_label"}},{"kind":"Field","name":{"kind":"Name","value":"foaf_homepage"}},{"kind":"Field","name":{"kind":"Name","value":"ha_org_has_logo"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"users_profile_aggregate"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"where"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"aggregate"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"count"}}]}}]}}]}}]} as unknown as DocumentNode<GetUsersQuery, GetUsersQueryVariables>;
+export const GetUsersDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getUsers"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"offset"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"limit"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"orderBy"}},"type":{"kind":"NonNullType","type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"users_profile_order_by"}}}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"where"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"users_profile_bool_exp"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"users_profile"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"offset"},"value":{"kind":"Variable","name":{"kind":"Name","value":"offset"}}},{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}},{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"Variable","name":{"kind":"Name","value":"orderBy"}}},{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"where"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"full_name"}},{"kind":"Field","name":{"kind":"Name","value":"first_name"}},{"kind":"Field","name":{"kind":"Name","value":"last_name"}},{"kind":"Field","name":{"kind":"Name","value":"mail"}},{"kind":"Field","name":{"kind":"Name","value":"last_access_at"}},{"kind":"Field","name":{"kind":"Name","value":"language"}},{"kind":"Field","name":{"kind":"Name","value":"is_key_user"}},{"kind":"Field","name":{"kind":"Name","value":"is_evaluator"}},{"kind":"Field","name":{"kind":"Name","value":"group"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"identities"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"identity_provider_name"}}]}},{"kind":"Field","name":{"kind":"Name","value":"organisation"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"org_identifier"}},{"kind":"Field","name":{"kind":"Name","value":"skos_pref_label"}},{"kind":"Field","name":{"kind":"Name","value":"foaf_homepage"}},{"kind":"Field","name":{"kind":"Name","value":"ha_org_has_logo"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"users_profile_aggregate"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"where"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"aggregate"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"count"}}]}}]}}]}}]} as unknown as DocumentNode<GetUsersQuery, GetUsersQueryVariables>;

@@ -12,6 +12,8 @@ query getUsers(
 		mail
 		last_access_at
 		language
+		is_key_user
+		is_evaluator
 		group {
 			label
 			name

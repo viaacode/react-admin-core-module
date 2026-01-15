@@ -45,6 +45,7 @@ export function renderUserOverviewTableCellReact(
 	const isBlocked = tableRowCommonUser?.isBlocked;
 	// biome-ignore lint/suspicious/noExplicitAny: todo
 	const isKeyUser = (tableRowCommonUser as any)?.isKeyUser ?? false;
+	const isEvaluator = (tableRowCommonUser as any)?.isEvaluator ?? false;
 
 	switch (columnId) {
 		case 'fullName':
@@ -69,6 +70,9 @@ export function renderUserOverviewTableCellReact(
 
 		case 'isKeyUser':
 			return isKeyUser ? 'Ja' : 'Nee';
+
+		case 'isEvaluator':
+			return isEvaluator ? 'Ja' : 'Nee';
 
 		case 'blockedAt':
 			return formatDateString(tableRowCommonUser?.blockedAt) || '-';
@@ -188,6 +192,7 @@ export function renderUserOverviewTableCellText(
 	const isBlocked = tableRowCommonUser?.isBlocked;
 	// biome-ignore lint/suspicious/noExplicitAny: todo
 	const isKeyUser = (tableRowCommonUser as any)?.isKeyUser ?? false;
+	const isEvaluator = (tableRowCommonUser as any)?.isEvaluator ?? false;
 
 	switch (columnId) {
 		case 'fullName':
@@ -201,6 +206,9 @@ export function renderUserOverviewTableCellText(
 
 		case 'isKeyUser':
 			return isKeyUser ? 'Ja' : 'Nee';
+
+		case 'isEvaluator':
+			return isEvaluator ? 'Ja' : 'Nee';
 
 		case 'blockedAt':
 			return formatDateString(tableRowCommonUser?.blockedAt) || '';

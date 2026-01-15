@@ -49,6 +49,7 @@ export const MOCK_HETARCHIEF_USER: AvoUserHetArchiefUser = {
 	],
 	idp: AvoAuthIdpType.HETARCHIEF, // Definitions of Idp enum in different repos cause typescript to be confused and not recognize them as the same type
 	isKeyUser: false,
+	isEvaluator: false,
 	lastAccessAt: '2023-05-09T10:18:02.11+02:00',
 	createdAt: '2023-01-30T16:26:38.875447',
 	organisationName: 'meemoo',

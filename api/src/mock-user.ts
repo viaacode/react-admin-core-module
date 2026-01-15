@@ -255,6 +255,7 @@ export function getMockUserHetArchief(): AvoUserHetArchiefUser {
 		],
 		idp: AvoAuthIdpType.HETARCHIEF as any, // Definitions of Idp enum in different repos cause typescript to be confused and not recognize them as the same type
 		isKeyUser: false,
+		isEvaluator: false,
 		lastAccessAt: '2023-04-04T18:51:03.032+02:00',
 		createdAt: '2023-01-30T16:26:38.875447',
 		organisationName: null,
