@@ -313,7 +313,7 @@ export const FilterTable: FunctionComponent<FilterTableProps> = ({
 		const to = Math.min(page * itemsPerPage + itemsPerPage, dataCount);
 		const hasFilters = columns.some((col) => col.filterType);
 		const showLeftFilters = hasFilters || !!bulkActions;
-		const showRightColumns = isAvo() && showColumnsVisibility;
+		const showRightColumns = showColumnsVisibility;
 		const showToolbar = showLeftFilters || showRightColumns;
 
 		return (
