@@ -15,13 +15,7 @@
 /* Generic: CSS reset, box-sizing, global CSS tweaks
    ========================================================================== */
 
-@use "./generic/reset" as reset;
 @use "./generic/global" as global;
-
-/* Elements: element selectors, CMS-generated content
-   ========================================================================== */
-
-@use "./elements/base" as base;
 
 /* Objects: layout-related CSS, grid, SVG icons frame, flexbox classes
    ========================================================================== */

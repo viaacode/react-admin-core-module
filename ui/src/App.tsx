@@ -8,6 +8,7 @@ import { getAdminCoreConfig, setAdminCoreConfig } from './shared/helpers/admin-c
 
 import '@viaa/avo2-components/styles.css';
 import '@meemoo/react-components/styles.css';
+import './shared/styles/demo-app-styles.scss';
 import './react-admin/modules/shared/styles/main.scss';
 import './App.scss';
 
