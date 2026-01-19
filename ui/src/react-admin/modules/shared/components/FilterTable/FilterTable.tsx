@@ -25,10 +25,10 @@ import React, {
 	type ReactElement,
 	type ReactNode,
 	useCallback,
+	useEffect,
 	useMemo,
 	useState,
 } from 'react';
-import { isAvo } from '~modules/shared/helpers/is-avo';
 import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner';
 
 import { tHtml, tText } from '~shared/helpers/translation-functions';
@@ -41,6 +41,7 @@ import type { AvoSearchOrderDirection } from '@viaa/avo2-types';
 import { ErrorView } from '~shared/components/error/ErrorView';
 import { GET_FILTER_TABLE_QUERY_PARAM_CONFIG } from '~shared/components/FilterTable/FilterTable.const';
 import { GET_DEFAULT_PAGINATION_BAR_PROPS } from '~shared/components/PaginationBar/PaginationBar.consts';
+import { isHetArchief } from '~shared/helpers/is-hetarchief.ts';
 import { navigateFunc } from '~shared/helpers/navigate-fnc';
 import { isServerSideRendering } from '~shared/helpers/routing/is-server-side-rendering.ts';
 import { toggleSortOrder } from '~shared/helpers/toggle-sort-order';
@@ -490,61 +491,57 @@ export const FilterTable: FunctionComponent<FilterTableProps> = ({
 
 	return (
 		<div className={clsx('c-filter-table', className)}>
-			{!data.length && !getFilters(getTableState()) ? (
-				renderNoResults()
-			) : (
-				<>
-					{renderFilters()}
-					<div className="c-filter-table__loading-wrapper">
-						<div style={{ opacity: isLoading || isLoadingColumnPreferences ? 0.2 : 1 }}>
-							<Table
-								columns={getSelectedColumns()}
-								data={data}
-								emptyStateMessage={!isError ? (noContentMatchingFiltersMessage as string) : ''}
-								onColumnClick={(columnId) => {
-									handleSortOrderChanged(columnId);
+			{renderFilters()}
+			<div className="c-filter-table__loading-wrapper">
+				<div style={{ opacity: isLoading || isLoadingColumnPreferences ? 0.2 : 1 }}>
+					<Table
+						columns={getSelectedColumns()}
+						data={data}
+						isLoading={isLoading}
+						emptyStateMessage={!isError ? (noContentMatchingFiltersMessage as string) : ''}
+						onColumnClick={(columnId) => {
+							handleSortOrderChanged(columnId);
+						}}
+						enableRowFocusOnClick={isHetArchief()}
+						onRowClick={onRowClick}
+						renderCell={renderCell}
+						rowKey={rowKey}
+						variant={variant}
+						sortColumn={getTableState().sort_column || defaultOrderProp || undefined}
+						sortOrder={
+							((getTableState().sort_order as AvoSearchOrderDirection) ||
+								defaultOrderDirection ||
+								// biome-ignore lint/suspicious/noExplicitAny: TODO fix
+								undefined) as any // TODO add asc_nulls_first to table sort orders
+						}
+						showCheckboxes={(!!bulkActions && !!bulkActions.length) || showCheckboxes}
+						selectedItemIds={selectedItemIds || undefined}
+						onSelectionChanged={onSelectionChanged}
+						onSelectAll={onSelectAll}
+					/>
+					{isError && renderError()}
+					{showPagination && (
+						<Spacer margin="top-large">
+							<PaginationBar
+								{...GET_DEFAULT_PAGINATION_BAR_PROPS()}
+								startItem={(getTableState().page || 0) * itemsPerPage}
+								itemsPerPage={itemsPerPage}
+								totalItems={dataCount}
+								onPageChange={(newPage: number) => handleTableStateChanged(newPage, 'page')}
+								onScrollToTop={() => {
+									const filterTable = document.querySelector('.c-filter-table');
+									const scrollable = filterTable?.closest('.c-scrollable');
+									scrollable?.scrollTo(0, 0);
+									window?.scrollTo(0, 0);
 								}}
-								onRowClick={onRowClick}
-								renderCell={renderCell}
-								rowKey={rowKey}
-								variant={variant}
-								sortColumn={getTableState().sort_column || defaultOrderProp || undefined}
-								sortOrder={
-									((getTableState().sort_order as AvoSearchOrderDirection) ||
-										defaultOrderDirection ||
-										// biome-ignore lint/suspicious/noExplicitAny: TODO fix
-										undefined) as any // TODO add asc_nulls_first to table sort orders
-								}
-								showCheckboxes={(!!bulkActions && !!bulkActions.length) || showCheckboxes}
-								selectedItemIds={selectedItemIds || undefined}
-								onSelectionChanged={onSelectionChanged}
-								onSelectAll={onSelectAll}
 							/>
-							{isError && renderError()}
-							{showPagination && (
-								<Spacer margin="top-large">
-									<PaginationBar
-										{...GET_DEFAULT_PAGINATION_BAR_PROPS()}
-										startItem={(getTableState().page || 0) * itemsPerPage}
-										itemsPerPage={itemsPerPage}
-										totalItems={dataCount}
-										onPageChange={(newPage: number) => handleTableStateChanged(newPage, 'page')}
-										onScrollToTop={() => {
-											const filterTable = document.querySelector('.c-filter-table');
-											const scrollable = filterTable?.closest('.c-scrollable');
-											scrollable?.scrollTo(0, 0);
-											window?.scrollTo(0, 0);
-										}}
-									/>
-								</Spacer>
-							)}
-						</div>
-						{(isLoading || isLoadingColumnPreferences) && (
-							<CenteredSpinner locationId="filter-table--loading" />
-						)}
-					</div>
-				</>
-			)}
+						</Spacer>
+					)}
+				</div>
+				{(isLoading || isLoadingColumnPreferences) && (
+					<CenteredSpinner locationId="filter-table--loading" />
+				)}
+			</div>
 			{!!bulkActions && !!bulkActions.length && (
 				<ConfirmModal
 					title={tText(

@@ -102,6 +102,8 @@ export const NavigationBarOverview: FunctionComponent = () => {
 				renderCell={(rowData: Partial<NavigationItem>, columnId: string) =>
 					renderTableCell(rowData, columnId as NavigationOverviewTableCols)
 				}
+				isLoading={isLoadingNavigationItems}
+				enableRowFocusOnClick={true}
 				rowKey="id"
 				variant="bordered"
 			/>

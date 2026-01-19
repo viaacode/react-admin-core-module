@@ -190,7 +190,7 @@ export function renderUserOverviewTableCellText(
 		tableState: UserTableState;
 		customFormatDate?: (date: Date | string) => string;
 	}
-): string {
+): string | ReactNode {
 	const isBlocked = tableRowCommonUser?.isBlocked;
 	// biome-ignore lint/suspicious/noExplicitAny: todo
 	const isKeyUser = (tableRowCommonUser as any)?.isKeyUser ?? false;
@@ -210,7 +210,7 @@ export function renderUserOverviewTableCellText(
 			return isKeyUser ? tText('sleutelgebruiker - Ja') : tText('sleutelgebruiker - Nee');
 
 		case 'isEvaluator':
-			return isKeyUser ? tText('beoordelaar - Ja') : tText('beoordelaar - Nee');
+			return isEvaluator ? tText('beoordelaar - Ja') : tText('beoordelaar - Nee');
 
 		case 'blockedAt':
 			return formatDateString(tableRowCommonUser?.blockedAt) || '';

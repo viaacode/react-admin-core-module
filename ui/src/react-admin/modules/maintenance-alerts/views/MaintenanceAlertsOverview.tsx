@@ -282,28 +282,12 @@ export const MaintenanceAlertsOverview: FunctionComponent<MaintenanceAlertsOverv
 		);
 	};
 
-	const renderAlertsTable = (alerts: IPagination<MaintenanceAlert[]>): ReactNode => {
-		if (!alerts) {
-			return <Loading locationId="maintanance-alerts--loading" />;
-		}
-
-		if (!alerts.items.length) {
-			return (
-				<>
-					{tHtml(
-						'react-admin/modules/alerts/views/alerts-overview___er-zijn-geen-meldingen-gevonden',
-						{},
-						[App.HET_ARCHIEF]
-					)}
-				</>
-			);
-		}
-
+	const renderAlertsTable = (alerts?: IPagination<MaintenanceAlert[]>): ReactNode => {
 		return (
 			<FilterTable
 				columns={getMaintenanceAlertOverviewTableCols()}
-				data={alerts.items || []}
-				dataCount={alerts.total}
+				data={alerts?.items || []}
+				dataCount={alerts?.total ?? 0}
 				renderCell={(maintenanceAlert: MaintenanceAlert, columnId: string) =>
 					renderTableCell(maintenanceAlert, columnId as MaintenanceAlertsOverviewTableCol)
 				}
@@ -349,7 +333,7 @@ export const MaintenanceAlertsOverview: FunctionComponent<MaintenanceAlertsOverv
 			</AdminLayout.Actions>
 
 			<AdminLayout.Content>
-				<div className={className}>{maintenanceAlerts && renderAlertsTable(maintenanceAlerts)}</div>
+				<div className={className}>{renderAlertsTable(maintenanceAlerts)}</div>
 
 				{activeMaintenanceAlert && (
 					<MaintenanceAlertsEditForm

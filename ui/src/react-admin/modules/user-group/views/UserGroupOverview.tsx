@@ -17,6 +17,7 @@ import { useGetUserGroups } from '~modules/user-group/hooks/get-user-groups';
 import { useUpdateUserGroups } from '~modules/user-group/hooks/update-user-groups';
 import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner';
 import { CustomError } from '~shared/helpers/custom-error';
+import { isHetArchief } from '~shared/helpers/is-hetarchief.ts';
 import { showToast } from '~shared/helpers/show-toast';
 import { tHtml, tText } from '~shared/helpers/translation-functions';
 import { getUserGroupTableColumns } from '../const/user-group.const';
@@ -270,17 +271,15 @@ export const UserGroupOverview = forwardRef<
 				/>
 				<Table
 					options={
-						// TODO: fix type hinting
-						/* eslint-disable @typescript-eslint/ban-types */
 						{
 							columns,
 							data: searchResults || permissions || [],
 							initialState: {
 								pageSize: permissions?.length,
 							},
-						} as TableOptions<object>
-						/* eslint-enable @typescript-eslint/ban-types */
+						} as TableOptions<Record<'id', string | number> & Record<string, any>>
 					}
+					enableRowFocusOnClick={isHetArchief()}
 				/>
 			</div>
 		);
