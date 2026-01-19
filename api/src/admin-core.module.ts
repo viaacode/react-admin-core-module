@@ -22,6 +22,7 @@ import {
 	UsersModule,
 	VideoStillsModule,
 } from './modules';
+import { MediahavenModule } from './modules/mediahaven/mediahaven.module';
 import { isAvo } from './modules/shared/helpers/is-avo';
 import { isHetArchief } from './modules/shared/helpers/is-hetarchief';
 
@@ -42,6 +43,7 @@ import { isHetArchief } from './modules/shared/helpers/is-hetarchief';
 		StatusModule,
 		UsersModule,
 		VideoStillsModule,
+		MediahavenModule,
 		...(isAvo() ? [AssignmentsModule] : []),
 		...(isAvo() ? [CollectionsModule] : []),
 		...(isAvo() ? [ItemsModule] : []),
