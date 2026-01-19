@@ -1,12 +1,13 @@
 import { type ExecutionContext } from '@nestjs/common';
 import { PermissionName } from '@viaa/avo2-types';
+import { vi } from 'vitest';
 
 import { PermissionGuard } from './permission.guard';
 
 const mockExecutionContextWithPermissions = (permissions) =>
 	({
-		switchToHttp: jest.fn().mockReturnValue({
-			getRequest: jest.fn().mockReturnValue({
+		switchToHttp: vi.fn().mockReturnValue({
+			getRequest: vi.fn().mockReturnValue({
 				session: {
 					archiefUserInfo: {
 						id: 'test-user-id',
@@ -15,15 +16,15 @@ const mockExecutionContextWithPermissions = (permissions) =>
 				},
 			}),
 		}),
-		getClass: jest.fn(),
-		getHandler: jest.fn(),
+		getClass: vi.fn(),
+		getHandler: vi.fn(),
 	}) as unknown as ExecutionContext;
 
 const mockReflector = {
-	get: jest.fn(),
-	getAll: jest.fn(),
-	getAllAndMerge: jest.fn(),
-	getAllAndOverride: jest.fn(),
+	get: vi.fn(),
+	getAll: vi.fn(),
+	getAllAndMerge: vi.fn(),
+	getAllAndOverride: vi.fn(),
 };
 
 describe('PermissionGuard', () => {

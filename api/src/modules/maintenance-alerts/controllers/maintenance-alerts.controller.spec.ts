@@ -1,4 +1,5 @@
 import { Test, type TestingModule } from '@nestjs/testing';
+import { vi, type MockInstance } from 'vitest';
 
 import { Lookup_Languages_Enum } from '../../shared/generated/graphql-db-types-hetarchief';
 import { TestingLogger } from '../../shared/logging/test-logger';
@@ -16,13 +17,13 @@ import { MaintenanceAlertsService } from '../services/maintenance-alerts.service
 import { MaintenanceAlertsController } from './maintenance-alerts.controller';
 
 const mockMaintenanceAlertsService: Partial<
-	Record<keyof MaintenanceAlertsService, jest.SpyInstance>
+	Record<keyof MaintenanceAlertsService, MockInstance>
 > = {
-	findAll: jest.fn(),
-	findById: jest.fn(),
-	createMaintenanceAlert: jest.fn(),
-	updateMaintenanceAlert: jest.fn(),
-	deleteMaintenanceAlert: jest.fn(),
+	findAll: vi.fn(),
+	findById: vi.fn(),
+	createMaintenanceAlert: vi.fn(),
+	updateMaintenanceAlert: vi.fn(),
+	deleteMaintenanceAlert: vi.fn(),
 };
 
 describe('MaintenanceAlertsController', () => {

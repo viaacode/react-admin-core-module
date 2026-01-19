@@ -1,5 +1,6 @@
 import { CACHE_MANAGER } from '@nestjs/cache-manager';
 import { Test, type TestingModule } from '@nestjs/testing';
+import { vi, type MockInstance } from 'vitest';
 
 import { DataService } from '../../data';
 import { type UpdateResponse } from '../../shared/types/types';
@@ -8,11 +9,11 @@ import { Component, Locale } from '../translations.types';
 import { TranslationsService } from './translations.service';
 
 const mockDataService = {
-	execute: jest.fn(),
+	execute: vi.fn(),
 };
 
-const mockCacheManager: Partial<Record<'wrap', jest.SpyInstance>> = {
-	wrap: jest.fn().mockImplementation((key: string, func: () => any): any => {
+const mockCacheManager: Partial<Record<'wrap', MockInstance>> = {
+	wrap: vi.fn().mockImplementation((key: string, func: () => any): any => {
 		return func();
 	}) as any,
 };

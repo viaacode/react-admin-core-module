@@ -1,5 +1,6 @@
 import { Test, type TestingModule } from '@nestjs/testing';
 import { AvoSearchOrderDirection } from '@viaa/avo2-types';
+import { vi, type MockInstance } from 'vitest';
 import { Lookup_App_Content_Type_Enum } from '../../shared/generated/graphql-db-types-hetarchief';
 import { TestingLogger } from '../../shared/logging/test-logger';
 import { UpdateContentPageLabelDto } from '../dto/content-page-label.dto';
@@ -13,15 +14,15 @@ import { ContentPageLabelsService } from '../services/content-page-labels.servic
 import { ContentPageLabelsController } from './content-page-labels.controller';
 
 const mockContentPageLabelsService: Partial<
-	Record<keyof ContentPageLabelsService, jest.SpyInstance>
+	Record<keyof ContentPageLabelsService, MockInstance>
 > = {
-	fetchContentPageLabels: jest.fn(),
-	fetchContentPageLabelById: jest.fn(),
-	insertContentPageLabels: jest.fn(),
-	updateContentPageLabel: jest.fn(),
-	deleteContentPageLabel: jest.fn(),
-	getContentPageLabelsByTypeAndLabels: jest.fn(),
-	getContentPageLabelsByTypeAndIds: jest.fn(),
+	fetchContentPageLabels: vi.fn(),
+	fetchContentPageLabelById: vi.fn(),
+	insertContentPageLabels: vi.fn(),
+	updateContentPageLabel: vi.fn(),
+	deleteContentPageLabel: vi.fn(),
+	getContentPageLabelsByTypeAndLabels: vi.fn(),
+	getContentPageLabelsByTypeAndIds: vi.fn(),
 };
 
 describe('ContentPageLabelsController', () => {

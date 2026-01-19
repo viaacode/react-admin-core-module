@@ -1,5 +1,6 @@
 import { Test, type TestingModule } from '@nestjs/testing';
 import { AvoCoreDatabaseType, AvoSearchOrderDirection } from '@viaa/avo2-types';
+import { vi, type MockInstance } from 'vitest';
 
 import { DataService } from '../../data';
 import {
@@ -23,8 +24,8 @@ import {
 
 import { ContentPageLabelsService } from './content-page-labels.service';
 
-const mockDataService: Partial<Record<keyof DataService, jest.SpyInstance>> = {
-	execute: jest.fn(),
+const mockDataService: Partial<Record<keyof DataService, MockInstance>> = {
+	execute: vi.fn(),
 };
 
 const getDefaultContentPageLabelsResponse = (): {

@@ -1,4 +1,5 @@
 import { Test, type TestingModule } from '@nestjs/testing';
+import { vi, type MockInstance } from 'vitest';
 import { Lookup_Languages_Enum } from '../../shared/generated/graphql-db-types-hetarchief';
 
 import { type UpdateResponse } from '../../shared/types/types';
@@ -8,9 +9,9 @@ import { Component } from '../translations.types';
 
 import { TranslationsController } from './translations.controller';
 
-const mockTranslationsService: Partial<Record<keyof TranslationsService, jest.SpyInstance>> = {
-	getTranslations: jest.fn(),
-	updateTranslation: jest.fn(),
+const mockTranslationsService: Partial<Record<keyof TranslationsService, MockInstance>> = {
+	getTranslations: vi.fn(),
+	updateTranslation: vi.fn(),
 };
 
 describe('TranslationsController', () => {

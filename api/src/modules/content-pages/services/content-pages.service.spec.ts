@@ -1,4 +1,5 @@
 import { Test, type TestingModule } from '@nestjs/testing';
+import { vi, type MockInstance } from 'vitest';
 
 import { DataService } from '../../data';
 import { AdminOrganisationsService } from '../../organisations';
@@ -6,19 +7,19 @@ import { PlayerTicketService } from '../../player-ticket';
 
 import { ContentPagesService } from './content-pages.service';
 
-const mockDataService: Partial<Record<keyof DataService, jest.SpyInstance>> = {
-	execute: jest.fn(),
+const mockDataService: Partial<Record<keyof DataService, MockInstance>> = {
+	execute: vi.fn(),
 };
 
-const mockPlayerTicketService: Partial<Record<keyof PlayerTicketService, jest.SpyInstance>> = {
-	getPlayableUrl: jest.fn(),
-	getEmbedUrl: jest.fn(),
+const mockPlayerTicketService: Partial<Record<keyof PlayerTicketService, MockInstance>> = {
+	getPlayableUrl: vi.fn(),
+	getEmbedUrl: vi.fn(),
 };
 
-const mockOrganisationsService: Partial<Record<keyof AdminOrganisationsService, jest.SpyInstance>> =
+const mockOrganisationsService: Partial<Record<keyof AdminOrganisationsService, MockInstance>> =
 	{
-		getOrganisation: jest.fn(),
-		adapt: jest.fn(),
+		getOrganisation: vi.fn(),
+		adapt: vi.fn(),
 	};
 
 describe('ContentPagesService', () => {

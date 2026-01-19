@@ -253,3 +253,5 @@ schema.graphql
 
 # git hooks
 /.husky
+
+api/.claude/

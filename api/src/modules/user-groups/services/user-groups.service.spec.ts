@@ -1,11 +1,12 @@
 import { Test, type TestingModule } from '@nestjs/testing';
+import { vi } from 'vitest';
 
 import { DataService } from '../../data';
 
 import { UserGroupsService } from './user-groups.service';
 
 const mockDataService = {
-	execute: jest.fn(),
+	execute: vi.fn(),
 };
 
 const mockUserGroupsResponse = {

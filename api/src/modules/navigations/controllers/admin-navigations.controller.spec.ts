@@ -1,4 +1,5 @@
 import { Test, type TestingModule } from '@nestjs/testing';
+import { vi, type MockInstance } from 'vitest';
 
 import { type DeleteResponse } from '../../shared/types/types';
 import { Locale } from '../../translations';
@@ -17,12 +18,12 @@ const mockNavigationsResponse = {
 	],
 };
 
-const mockNavigationsService: Partial<Record<keyof AdminNavigationsService, jest.SpyInstance>> = {
-	findNavigationBars: jest.fn(),
-	findElementById: jest.fn(),
-	insertElement: jest.fn(),
-	updateElement: jest.fn(),
-	deleteElement: jest.fn(),
+const mockNavigationsService: Partial<Record<keyof AdminNavigationsService, MockInstance>> = {
+	findNavigationBars: vi.fn(),
+	findElementById: vi.fn(),
+	insertElement: vi.fn(),
+	updateElement: vi.fn(),
+	deleteElement: vi.fn(),
 };
 
 describe('NavigationsController', () => {

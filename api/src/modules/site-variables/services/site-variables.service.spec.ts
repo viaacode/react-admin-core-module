@@ -1,4 +1,5 @@
 import { Test, type TestingModule } from '@nestjs/testing';
+import { vi } from 'vitest';
 
 import { DataService } from '../../data';
 import {
@@ -9,7 +10,7 @@ import {
 import { SiteVariablesService } from './site-variables.service';
 
 const mockDataService = {
-	execute: jest.fn(),
+	execute: vi.fn(),
 };
 
 describe('SiteVariablesService', () => {

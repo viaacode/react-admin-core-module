@@ -3,6 +3,7 @@ import { Test, type TestingModule } from '@nestjs/testing';
 import { type Cache } from 'cache-manager';
 import { addHours } from 'date-fns';
 import nock from 'nock';
+import { vi, type MockInstance } from 'vitest';
 
 import { DataService } from '../../data';
 import {
@@ -19,11 +20,11 @@ const FAKE_MEDIA_SERVICE_URL = 'http://mediaservice';
 const FAKE_HOST = 'http://localhost';
 
 const mockDataService = {
-	execute: jest.fn(),
+	execute: vi.fn(),
 };
 
-const mockCacheManager: Partial<Record<keyof Cache, jest.SpyInstance>> = {
-	wrap: jest.fn(),
+const mockCacheManager: Partial<Record<keyof Cache, MockInstance>> = {
+	wrap: vi.fn(),
 };
 
 const mockPlayerTicket: PlayerTicket = {
@@ -243,7 +244,7 @@ describe('PlayerTicketService', () => {
 
 	describe('resolveThumbnailUrl', () => {
 		it('does not get a token for an invalid path', async () => {
-			const getThumbnailTokenSpy = jest.spyOn(playerTicketService, 'getThumbnailTokenCached');
+			const getThumbnailTokenSpy = vi.spyOn(playerTicketService, 'getThumbnailTokenCached');
 
 			const url = await playerTicketService.resolveThumbnailUrl('', 'referer', '');
 			expect(url).toBeNull();
@@ -253,7 +254,7 @@ describe('PlayerTicketService', () => {
 		});
 
 		it('does not get a token for an invalid referer', async () => {
-			const getThumbnailTokenSpy = jest.spyOn(playerTicketService, 'getThumbnailTokenCached');
+			const getThumbnailTokenSpy = vi.spyOn(playerTicketService, 'getThumbnailTokenCached');
 
 			const url = await playerTicketService.resolveThumbnailUrl('http://thumbnail.jpg', null, '');
 			expect(url).toEqual('http://thumbnail.jpg');

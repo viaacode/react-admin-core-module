@@ -1,4 +1,5 @@
 import { Test, type TestingModule } from '@nestjs/testing';
+import { vi } from 'vitest';
 
 import { DataService } from '../../data';
 import { SpecialPermissionGroups } from '../../shared/types/types';
@@ -26,7 +27,7 @@ const mockNavigationElement1 = {
 };
 
 const mockDataService = {
-	execute: jest.fn(),
+	execute: vi.fn(),
 };
 
 describe('NavigationsService', () => {

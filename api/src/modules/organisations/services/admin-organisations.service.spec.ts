@@ -1,4 +1,5 @@
 import { Test, type TestingModule } from '@nestjs/testing';
+import { vi } from 'vitest';
 
 import { DataService } from '../../data';
 import { type GetOrganisationsQuery as GetOrganisationQueryAvo } from '../../shared/generated/graphql-db-types-avo';
@@ -33,7 +34,7 @@ const mockGqlAvOOrganisation = {
 };
 
 const mockDataService = {
-	execute: jest.fn(),
+	execute: vi.fn(),
 };
 
 describe('OrganisationsService', () => {

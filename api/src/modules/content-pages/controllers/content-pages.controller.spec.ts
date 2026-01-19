@@ -1,5 +1,6 @@
 import { Test, type TestingModule } from '@nestjs/testing';
 import { AvoAuthIdpType, type AvoUserHetArchiefUser, PermissionName } from '@viaa/avo2-types';
+import { vi, type MockInstance } from 'vitest';
 
 import { PlayerTicketService } from '../../player-ticket';
 import { SessionHelper } from '../../shared/auth/session-helper';
@@ -31,25 +32,25 @@ export const mockUser: AvoUserHetArchiefUser = {
 	language: 'nl',
 };
 
-const mockContentPagesService: Partial<Record<keyof ContentPagesService, jest.SpyInstance>> = {
-	adaptContentPage: jest.fn(),
-	adaptContentBlock: jest.fn(),
-	getContentPagesForPageOverviewBlock: jest.fn(),
-	getContentPageByLanguageAndPath: jest.fn(),
-	fetchCollectionOrItem: jest.fn(),
-	fetchItemByExternalId: jest.fn(),
-	updatePublishDates: jest.fn(),
-	getContentPagesByIds: jest.fn(),
+const mockContentPagesService: Partial<Record<keyof ContentPagesService, MockInstance>> = {
+	adaptContentPage: vi.fn(),
+	adaptContentBlock: vi.fn(),
+	getContentPagesForPageOverviewBlock: vi.fn(),
+	getContentPageByLanguageAndPath: vi.fn(),
+	fetchCollectionOrItem: vi.fn(),
+	fetchItemByExternalId: vi.fn(),
+	updatePublishDates: vi.fn(),
+	getContentPagesByIds: vi.fn(),
 };
 
-const mockPlayerTicketService: Partial<Record<keyof PlayerTicketService, jest.SpyInstance>> = {
-	getPlayableUrl: jest.fn(),
-	getEmbedUrl: jest.fn(),
+const mockPlayerTicketService: Partial<Record<keyof PlayerTicketService, MockInstance>> = {
+	getPlayableUrl: vi.fn(),
+	getEmbedUrl: vi.fn(),
 };
 
 describe('ContentPagesController', () => {
 	let contentPagesController: ContentPagesController;
-	let sessionHelperSpy: jest.SpyInstance;
+	let sessionHelperSpy: MockInstance;
 
 	beforeEach(async () => {
 		const module: TestingModule = await Test.createTestingModule({
@@ -69,7 +70,7 @@ describe('ContentPagesController', () => {
 
 		contentPagesController = module.get<ContentPagesController>(ContentPagesController);
 
-		sessionHelperSpy = jest.spyOn(SessionHelper, 'getUserInfo').mockReturnValue(mockUser);
+		sessionHelperSpy = vi.spyOn(SessionHelper, 'getUserInfo').mockReturnValue(mockUser);
 	});
 
 	afterAll(async () => {

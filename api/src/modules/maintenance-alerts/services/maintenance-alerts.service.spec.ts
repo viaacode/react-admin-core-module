@@ -1,4 +1,5 @@
 import { Test, type TestingModule } from '@nestjs/testing';
+import { vi, type MockInstance } from 'vitest';
 
 import { DataService } from '../../data';
 import { TestingLogger } from '../../shared/logging/test-logger';
@@ -20,8 +21,8 @@ import {
 	type UpdateMaintenanceAlertMutation,
 } from 'src/modules/shared/generated/graphql-db-types-hetarchief';
 
-const mockDataService: Partial<Record<keyof DataService, jest.SpyInstance>> = {
-	execute: jest.fn(),
+const mockDataService: Partial<Record<keyof DataService, MockInstance>> = {
+	execute: vi.fn(),
 };
 
 const getDefaultMaintenanceAlertsResponse = (): {

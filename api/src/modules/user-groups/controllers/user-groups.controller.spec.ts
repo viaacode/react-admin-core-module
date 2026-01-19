@@ -1,12 +1,13 @@
 import { Test, type TestingModule } from '@nestjs/testing';
+import { vi, type MockInstance } from 'vitest';
 
 import { UserGroupsService } from '../services/user-groups.service';
 
 import { UserGroupsController } from './user-groups.controller';
 
-const mockUserGroupsService: Partial<Record<keyof UserGroupsService, jest.SpyInstance>> = {
-	getUserGroups: jest.fn(),
-	updateUserGroups: jest.fn(),
+const mockUserGroupsService: Partial<Record<keyof UserGroupsService, MockInstance>> = {
+	getUserGroups: vi.fn(),
+	updateUserGroups: vi.fn(),
 };
 
 const mockUserGroupsResponse = [

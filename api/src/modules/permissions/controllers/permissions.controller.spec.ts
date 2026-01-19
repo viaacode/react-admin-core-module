@@ -1,11 +1,12 @@
 import { Test, type TestingModule } from '@nestjs/testing';
+import { vi, type MockInstance } from 'vitest';
 
 import { PermissionsService } from '../services/permissions.service';
 
 import { PermissionsController } from './permissions.controller';
 
-const mockPermissionsService: Partial<Record<keyof PermissionsService, jest.SpyInstance>> = {
-	getPermissions: jest.fn(),
+const mockPermissionsService: Partial<Record<keyof PermissionsService, MockInstance>> = {
+	getPermissions: vi.fn(),
 };
 
 const mockPermissionsResponse = [
