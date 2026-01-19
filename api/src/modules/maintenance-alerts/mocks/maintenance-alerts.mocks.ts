@@ -121,6 +121,7 @@ export const mockUser: AvoUserHetArchiefUser = {
 	groupName: 'CP_ADMIN',
 	permissions: [PermissionName.VIEW_ANY_MAINTENANCE_ALERTS],
 	isKeyUser: false,
+	isEvaluator: false,
 	visitorSpaceSlug: 'vrt',
 	maintainerId: 'OR-rf5kf25',
 	createdAt: '2023-03-08T08:00:00',

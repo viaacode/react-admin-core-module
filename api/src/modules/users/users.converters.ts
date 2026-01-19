@@ -248,6 +248,8 @@ export function convertUserInfoToCommonUser(
 						(identity) => [identity.identity_provider_name as AvoAuthIdpType, null] // User ids of idp are not fetched
 					)
 				),
+				isKeyUser: profile.is_key_user,
+				isEvaluator: profile.is_evaluator,
 				organisation: {
 					name: profile.organisation?.skos_pref_label,
 					or_id: profile.organisation?.org_identifier,
@@ -276,6 +278,8 @@ export function convertUserInfoToCommonUser(
 					name: user.groupName,
 					label: user.groupName,
 				},
+				isKeyUser: user.isKeyUser,
+				isEvaluator: user.isEvaluator,
 				idps: { [user.idp]: null },
 				organisation: {
 					or_id: user.maintainerId || user.organisationId,

@@ -45,6 +45,7 @@ export function renderUserOverviewTableCellReact(
 	const isBlocked = tableRowCommonUser?.isBlocked;
 	// biome-ignore lint/suspicious/noExplicitAny: todo
 	const isKeyUser = (tableRowCommonUser as any)?.isKeyUser ?? false;
+	const isEvaluator = (tableRowCommonUser as any)?.isEvaluator ?? false;
 
 	switch (columnId) {
 		case 'fullName':
@@ -65,10 +66,13 @@ export function renderUserOverviewTableCellReact(
 			return truncateTableValue(tableRowCommonUser?.email);
 
 		case 'isBlocked':
-			return isBlocked ? 'Ja' : 'Nee';
+			return isBlocked ? tText('geblokkeerd - Ja') : tText('geblokkeerd - Nee');
 
 		case 'isKeyUser':
-			return isKeyUser ? 'Ja' : 'Nee';
+			return isKeyUser ? tText('sleutelgebruiker - Ja') : tText('sleutelgebruiker - Nee');
+
+		case 'isEvaluator':
+			return isEvaluator ? tText('beoordelaar - Ja') : tText('beoordelaar - Nee');
 
 		case 'blockedAt':
 			return formatDateString(tableRowCommonUser?.blockedAt) || '-';
@@ -77,7 +81,9 @@ export function renderUserOverviewTableCellReact(
 			return formatDateString(tableRowCommonUser?.unblockedAt) || '-';
 
 		case 'isException':
-			return tableRowCommonUser?.isException ? 'Ja' : 'Nee';
+			return tableRowCommonUser?.isException
+				? tText('uitzondering - Ja')
+				: tText('uitzondering - Nee');
 
 		case 'organisation':
 			return tableRowCommonUser?.organisation?.name || '-';
@@ -188,6 +194,7 @@ export function renderUserOverviewTableCellText(
 	const isBlocked = tableRowCommonUser?.isBlocked;
 	// biome-ignore lint/suspicious/noExplicitAny: todo
 	const isKeyUser = (tableRowCommonUser as any)?.isKeyUser ?? false;
+	const isEvaluator = (tableRowCommonUser as any)?.isEvaluator ?? false;
 
 	switch (columnId) {
 		case 'fullName':
@@ -197,10 +204,13 @@ export function renderUserOverviewTableCellText(
 			return tableRowCommonUser?.email || '';
 
 		case 'isBlocked':
-			return isBlocked ? 'Ja' : 'Nee';
+			return isBlocked ? tText('geblokkeerd - Ja') : tText('geblokkeerd - Nee');
 
 		case 'isKeyUser':
-			return isKeyUser ? 'Ja' : 'Nee';
+			return isKeyUser ? tText('sleutelgebruiker - Ja') : tText('sleutelgebruiker - Nee');
+
+		case 'isEvaluator':
+			return isKeyUser ? tText('beoordelaar - Ja') : tText('beoordelaar - Nee');
 
 		case 'blockedAt':
 			return formatDateString(tableRowCommonUser?.blockedAt) || '';
@@ -209,7 +219,9 @@ export function renderUserOverviewTableCellText(
 			return formatDateString(tableRowCommonUser?.unblockedAt) || '';
 
 		case 'isException':
-			return tableRowCommonUser?.isException ? 'Ja' : 'Nee';
+			return tableRowCommonUser?.isException
+				? tText('uitzondering - Ja')
+				: tText('uitzondering - Nee');
 
 		case 'organisation':
 			return tableRowCommonUser?.organisation?.name || '';
@@ -227,9 +239,9 @@ export function renderUserOverviewTableCellText(
 		}
 		case 'tempAccess': {
 			if (hasTempAccess(tableRowCommonUser?.tempAccess)) {
-				return 'Ja';
+				return tHtml('admin/users/views/user-overview___tijdelijke-toegang-ja');
 			} else {
-				return 'Nee';
+				return tHtml('admin/users/views/user-overview___tijdelijke-toegang-nee');
 			}
 		}
 		case 'tempAccessFrom':
