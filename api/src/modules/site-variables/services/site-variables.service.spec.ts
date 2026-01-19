@@ -1,5 +1,5 @@
 import { Test, type TestingModule } from '@nestjs/testing';
-import { vi } from 'vitest';
+import { vi, describe, it, expect, beforeEach } from 'vitest';
 
 import { DataService } from '../../data';
 import {
@@ -17,6 +17,8 @@ describe('SiteVariablesService', () => {
 	let siteVariablesService: SiteVariablesService;
 
 	beforeEach(async () => {
+		mockDataService.execute.mockReset();
+
 		const module: TestingModule = await Test.createTestingModule({
 			providers: [
 				SiteVariablesService,
@@ -44,7 +46,7 @@ describe('SiteVariablesService', () => {
 					},
 				},
 			};
-			mockDataService.execute.mockResolvedValueOnce({ data: mockData });
+			mockDataService.execute.mockResolvedValueOnce(mockData);
 			const response =
 				await siteVariablesService.getSiteVariable<Record<string, string>>('variable-name');
 			expect(response.key).toEqual('value');
@@ -58,7 +60,7 @@ describe('SiteVariablesService', () => {
 					affected_rows: 1,
 				},
 			};
-			mockDataService.execute.mockResolvedValueOnce({ data: mockData });
+			mockDataService.execute.mockResolvedValueOnce(mockData);
 			const response = await siteVariablesService.updateSiteVariable('variable-name', 'new-value');
 			expect(response).toEqual({ affectedRows: 1 });
 		});

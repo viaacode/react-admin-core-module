@@ -1,31 +1,38 @@
 import { type ExecutionContext } from '@nestjs/common';
-import { vi } from 'vitest';
+import { vi, describe, it, expect, beforeEach, afterEach } from 'vitest';
 
 import { LoggedInGuard } from './logged-in.guard';
 
-const mockExecutionContextWithSession = (session) =>
-	({
-		switchToHttp: vi.fn().mockReturnValue({
-			getRequest: vi.fn().mockReturnValue({
-				session,
-			}),
-		}),
-	}) as unknown as ExecutionContext;
+const createMockExecutionContext = (session: any): ExecutionContext => {
+	const mockGetRequest = vi.fn().mockReturnValue({ session, headers: {} });
+	const mockSwitchToHttp = vi.fn().mockReturnValue({ getRequest: mockGetRequest });
+	return { switchToHttp: mockSwitchToHttp } as unknown as ExecutionContext;
+};
 
 describe('LoggedInGuard', () => {
-	it('Should allow access when user is logged in', async () => {
+	const originalEnv = process.env.IS_ADMIN_CORE_DEMO_APP;
+
+	beforeEach(() => {
+		process.env.IS_ADMIN_CORE_DEMO_APP = 'false';
+	});
+
+	afterEach(() => {
+		process.env.IS_ADMIN_CORE_DEMO_APP = originalEnv;
+	});
+
+	it('Should allow access when user is logged in', () => {
 		const session = {
 			archiefUserInfo: {
 				id: 'test-user-id',
 			},
 		};
-		const canActivate = new LoggedInGuard().canActivate(mockExecutionContextWithSession(session));
+		const context = createMockExecutionContext(session);
+		const canActivate = new LoggedInGuard().canActivate(context);
 		expect(canActivate).toBe(true);
 	});
 
-	it('Should not allow access when no user is logged in', async () => {
-		expect(() =>
-			new LoggedInGuard().canActivate(mockExecutionContextWithSession({}))
-		).toThrowError();
+	it('Should not allow access when no user is logged in', () => {
+		const context = createMockExecutionContext({});
+		expect(() => new LoggedInGuard().canActivate(context)).toThrow();
 	});
 });

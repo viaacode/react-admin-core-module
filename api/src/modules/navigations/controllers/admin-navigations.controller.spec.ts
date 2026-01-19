@@ -1,5 +1,5 @@
 import { Test, type TestingModule } from '@nestjs/testing';
-import { vi, type MockInstance } from 'vitest';
+import { vi, type MockInstance, describe, it, expect, beforeEach } from 'vitest';
 
 import { type DeleteResponse } from '../../shared/types/types';
 import { Locale } from '../../translations';
@@ -30,6 +30,12 @@ describe('NavigationsController', () => {
 	let navigationsController: AdminNavigationsController;
 
 	beforeEach(async () => {
+		mockNavigationsService.findNavigationBars.mockReset();
+		mockNavigationsService.findElementById.mockReset();
+		mockNavigationsService.insertElement.mockReset();
+		mockNavigationsService.updateElement.mockReset();
+		mockNavigationsService.deleteElement.mockReset();
+
 		const module: TestingModule = await Test.createTestingModule({
 			controllers: [AdminNavigationsController],
 			imports: [],

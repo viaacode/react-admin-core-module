@@ -1,5 +1,5 @@
 import { Test, type TestingModule } from '@nestjs/testing';
-import { vi, type MockInstance } from 'vitest';
+import { vi, type MockInstance, describe, it, expect, beforeEach } from 'vitest';
 
 import { UserGroupsService } from '../services/user-groups.service';
 
@@ -30,6 +30,9 @@ describe('UserGroupsController', () => {
 	let userGroupsController: UserGroupsController;
 
 	beforeEach(async () => {
+		mockUserGroupsService.getUserGroups.mockReset();
+		mockUserGroupsService.updateUserGroups.mockReset();
+
 		const module: TestingModule = await Test.createTestingModule({
 			controllers: [UserGroupsController],
 			imports: [],

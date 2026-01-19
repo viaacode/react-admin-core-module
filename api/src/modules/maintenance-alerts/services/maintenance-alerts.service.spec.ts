@@ -1,5 +1,5 @@
 import { Test, type TestingModule } from '@nestjs/testing';
-import { vi, type MockInstance } from 'vitest';
+import { vi, type MockInstance, describe, it, expect, beforeEach, afterEach } from 'vitest';
 
 import { DataService } from '../../data';
 import { TestingLogger } from '../../shared/logging/test-logger';
@@ -98,7 +98,7 @@ describe('MaintenanceAlertsService', () => {
 			expect(adapted.type).toEqual(mockGqlMaintenanceAlert1.type);
 			expect(adapted.fromDate).toEqual(mockGqlMaintenanceAlert1.from_date);
 			expect(adapted.untilDate).toEqual(mockGqlMaintenanceAlert1.until_date);
-			expect(adapted.userGroups).toEqual(undefined);
+			expect(adapted.userGroups).toEqual(mockGqlMaintenanceAlert1.user_groups);
 		});
 
 		it('returns null when the maintenance alert does not exist', () => {

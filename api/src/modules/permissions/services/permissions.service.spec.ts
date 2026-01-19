@@ -1,5 +1,5 @@
 import { Test, type TestingModule } from '@nestjs/testing';
-import { vi } from 'vitest';
+import { vi, describe, it, expect, beforeEach } from 'vitest';
 
 import { DataService } from '../../data';
 
@@ -10,22 +10,22 @@ const mockDataService = {
 };
 
 const mockPermissionsResponse = {
-	data: {
-		users_permission: [
-			{
-				id: '2dd3ec17-5439-4fc7-aa6c-cc8dfd3b937f',
-				label: 'Bezoekersruimtes: Alle bezoekersruimtes bekijken',
-				name: 'READ_ALL_SPACES',
-				description: 'Deze gebruiker kan de alle bezoekersruimtes bekijken, inclusief inactieve',
-			},
-		],
-	},
+	users_permission: [
+		{
+			id: '2dd3ec17-5439-4fc7-aa6c-cc8dfd3b937f',
+			label: 'Bezoekersruimtes: Alle bezoekersruimtes bekijken',
+			name: 'READ_ALL_SPACES',
+			description: 'Deze gebruiker kan de alle bezoekersruimtes bekijken, inclusief inactieve',
+		},
+	],
 };
 
 describe('PermissionsService', () => {
 	let permissionsService: PermissionsService;
 
 	beforeEach(async () => {
+		mockDataService.execute.mockReset();
+
 		const module: TestingModule = await Test.createTestingModule({
 			providers: [
 				PermissionsService,
@@ -48,7 +48,7 @@ describe('PermissionsService', () => {
 			mockDataService.execute.mockResolvedValueOnce(mockPermissionsResponse);
 
 			const response = await permissionsService.getPermissions();
-			expect(response).toEqual(mockPermissionsResponse.data.users_permission);
+			expect(response).toEqual(mockPermissionsResponse.users_permission);
 		});
 	});
 });

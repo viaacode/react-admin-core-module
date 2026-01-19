@@ -1,68 +1,50 @@
 import { type ExecutionContext } from '@nestjs/common';
-import { vi } from 'vitest';
+import { vi, describe, it, expect, beforeEach } from 'vitest';
 
 import { API_KEY_EXCEPTION, ApiKeyGuard } from './api-key.guard';
 
 const mockApiKey = 'MySecretApiKey';
 
-const mockExecutionContextCorrect = {
-	switchToHttp: vi.fn().mockReturnValue({
-		getRequest: vi.fn().mockReturnValue({
-			header: (headerName: string) => {
-				if (headerName === 'apikey') {
-					return mockApiKey;
-				} else {
-					return undefined;
-				}
-			},
-		}),
-	}),
-} as unknown as ExecutionContext;
-
-const mockExecutionContextNotSet = {
-	switchToHttp: vi.fn().mockReturnValue({
-		getRequest: vi.fn().mockReturnValue({
-			header: () => {
-				return undefined;
-			},
-		}),
-	}),
-} as unknown as ExecutionContext;
-
-const mockExecutionContextWrong = {
-	switchToHttp: vi.fn().mockReturnValue({
-		getRequest: vi.fn().mockReturnValue({
-			header: (headerName: string) => {
-				if (headerName === 'apikey') {
-					return 'wrongApiKey';
-				} else {
-					return undefined;
-				}
-			},
-		}),
-	}),
-} as unknown as ExecutionContext;
+const createMockExecutionContext = (apiKeyValue: string | undefined): ExecutionContext => {
+	const mockGetRequest = vi.fn().mockReturnValue({
+		header: (headerName: string) => {
+			if (headerName === 'apikey') {
+				return apiKeyValue;
+			}
+			return undefined;
+		},
+	});
+	const mockSwitchToHttp = vi.fn().mockReturnValue({ getRequest: mockGetRequest });
+	return { switchToHttp: mockSwitchToHttp } as unknown as ExecutionContext;
+};
 
 describe('ApiKeyGuard', () => {
-	it('Should allow access when apiKey header is set', async () => {
-		const canActivateRoute: boolean = new ApiKeyGuard().canActivate(mockExecutionContextCorrect);
+	beforeEach(() => {
+		process.env.PROXY_API_KEY = mockApiKey;
+	});
+
+	it('Should allow access when apiKey header is set', () => {
+		const context = createMockExecutionContext(mockApiKey);
+		const canActivateRoute = new ApiKeyGuard().canActivate(context);
 		expect(canActivateRoute).toBe(true);
 	});
 
-	it('Should not allow access when apiKey header is not set', async () => {
+	it('Should not allow access when apiKey header is not set', () => {
+		const context = createMockExecutionContext(undefined);
 		let error: any;
 		try {
-			new ApiKeyGuard().canActivate(mockExecutionContextNotSet);
+			new ApiKeyGuard().canActivate(context);
 		} catch (err: any) {
 			error = err;
 		}
 		expect(error).toBe(API_KEY_EXCEPTION);
 	});
 
-	it('Should not allow access when apiKey header is wrong', async () => {
+	it('Should not allow access when apiKey header is wrong', () => {
+		const context = createMockExecutionContext('wrongApiKey');
 		let error: any;
 		try {
-			new ApiKeyGuard().canActivate(mockExecutionContextWrong);
+			new ApiKeyGuard().canActivate(context);
 		} catch (err: any) {
 			error = err;
 		}

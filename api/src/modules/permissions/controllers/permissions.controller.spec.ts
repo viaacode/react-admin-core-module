@@ -1,5 +1,5 @@
 import { Test, type TestingModule } from '@nestjs/testing';
-import { vi, type MockInstance } from 'vitest';
+import { vi, type MockInstance, describe, it, expect, beforeEach } from 'vitest';
 
 import { PermissionsService } from '../services/permissions.service';
 
@@ -22,6 +22,8 @@ describe('PermissionsController', () => {
 	let permissionsController: PermissionsController;
 
 	beforeEach(async () => {
+		mockPermissionsService.getPermissions.mockReset();
+
 		const module: TestingModule = await Test.createTestingModule({
 			controllers: [PermissionsController],
 			imports: [],

@@ -1,5 +1,5 @@
 import { Test, type TestingModule } from '@nestjs/testing';
-import { vi } from 'vitest';
+import { vi, describe, it, expect, beforeEach } from 'vitest';
 
 import { DataService } from '../../data';
 
@@ -10,30 +10,32 @@ const mockDataService = {
 };
 
 const mockUserGroupsResponse = {
-	data: {
-		users_group: [
-			{
-				name: 'CP_ADMIN',
-				permissions: [
-					{
-						permission: {
-							id: '2dd3ec17-5439-4fc7-aa6c-cc8dfd3b937f',
-							label: 'Bezoekersruimtes: Alle bezoekersruimtes bekijken',
-							name: 'READ_ALL_SPACES',
-							description:
-								'Deze gebruiker kan de alle bezoekersruimtes bekijken, inclusief inactieve',
-						},
+	users_group: [
+		{
+			id: '1',
+			label: 'CP_ADMIN',
+			name: 'CP_ADMIN',
+			permissions: [
+				{
+					permission: {
+						id: '2dd3ec17-5439-4fc7-aa6c-cc8dfd3b937f',
+						label: 'Bezoekersruimtes: Alle bezoekersruimtes bekijken',
+						name: 'READ_ALL_SPACES',
+						description:
+							'Deze gebruiker kan de alle bezoekersruimtes bekijken, inclusief inactieve',
 					},
-				],
-			},
-		],
-	},
+				},
+			],
+		},
+	],
 };
 
 describe('UserGroupsService', () => {
 	let userGroupsService: UserGroupsService;
 
 	beforeEach(async () => {
+		mockDataService.execute.mockReset();
+
 		const module: TestingModule = await Test.createTestingModule({
 			providers: [
 				UserGroupsService,
@@ -66,10 +68,8 @@ describe('UserGroupsService', () => {
 	describe('updateUserGroupd', () => {
 		it('updates user group permissions', async () => {
 			mockDataService.execute.mockResolvedValueOnce({
-				data: {
-					delete_users_group_permission: { affected_rows: 1 },
-					insert_users_group_permission: { affected_rows: 2 },
-				},
+				delete_users_group_permission: { affected_rows: 1 },
+				insert_users_group_permission: { affected_rows: 2 },
 			});
 
 			const response = await userGroupsService.updateUserGroups([

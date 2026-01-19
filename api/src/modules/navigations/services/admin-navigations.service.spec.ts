@@ -1,5 +1,5 @@
 import { Test, type TestingModule } from '@nestjs/testing';
-import { vi } from 'vitest';
+import { vi, describe, it, expect, beforeEach } from 'vitest';
 
 import { DataService } from '../../data';
 import { SpecialPermissionGroups } from '../../shared/types/types';
@@ -34,6 +34,8 @@ describe('NavigationsService', () => {
 	let navigationsService: AdminNavigationsService;
 
 	beforeEach(async () => {
+		mockDataService.execute.mockReset();
+
 		const module: TestingModule = await Test.createTestingModule({
 			providers: [
 				AdminNavigationsService,
@@ -64,7 +66,7 @@ describe('NavigationsService', () => {
 				mockNavigationElement1,
 			] as NavigationQueryTypes['GetNavigationItemsByPlacementQueryHetArchief']['app_navigation'],
 		};
-		mockDataService.execute.mockResolvedValueOnce({ data: mockData });
+		mockDataService.execute.mockResolvedValueOnce(mockData);
 		const response = await navigationsService.findNavigationBarItemsByPlacementId(
 			mockNavigationElement1.placement,
 			[Locale.Nl]
@@ -80,7 +82,7 @@ describe('NavigationsService', () => {
 					mockNavigationElement1,
 				] as NavigationQueryTypes['GetNavigationItemByIdQueryHetArchief']['app_navigation'],
 			};
-			mockDataService.execute.mockResolvedValueOnce({ data: mockData });
+			mockDataService.execute.mockResolvedValueOnce(mockData);
 			const response = await navigationsService.findElementById(mockNavigationElement1.id);
 			expect(response.id).toBe(mockNavigationElement1.id);
 		});
@@ -90,7 +92,7 @@ describe('NavigationsService', () => {
 				app_navigation:
 					[] as NavigationQueryTypes['GetNavigationItemByIdQueryHetArchief']['app_navigation'],
 			};
-			mockDataService.execute.mockResolvedValueOnce({ data: mockData });
+			mockDataService.execute.mockResolvedValueOnce(mockData);
 			let error;
 			try {
 				await navigationsService.findElementById('unknown-id');
@@ -112,7 +114,7 @@ describe('NavigationsService', () => {
 					icon_name: 'plus',
 				} as NavigationQueryTypes['InsertNavigationItemMutationHetArchief']['insert_app_navigation_one'],
 			};
-			mockDataService.execute.mockResolvedValueOnce({ data: mockData });
+			mockDataService.execute.mockResolvedValueOnce(mockData);
 			const response = await navigationsService.insertElement({
 				label: 'test-create-nav',
 				iconName: 'plus',
@@ -133,7 +135,7 @@ describe('NavigationsService', () => {
 					icon_name: 'plus',
 				} as NavigationQueryTypes['UpdateNavigationItemByIdMutationHetArchief']['update_app_navigation_by_pk'],
 			};
-			mockDataService.execute.mockResolvedValueOnce({ data: mockData });
+			mockDataService.execute.mockResolvedValueOnce(mockData);
 			const response = await navigationsService.updateElement('1', {
 				label: 'test-create-nav',
 				iconName: 'plus',
@@ -153,7 +155,7 @@ describe('NavigationsService', () => {
 					affected_rows: 1,
 				},
 			};
-			mockDataService.execute.mockResolvedValueOnce({ data: mockData });
+			mockDataService.execute.mockResolvedValueOnce(mockData);
 			const response = await navigationsService.deleteElement('1');
 			expect(response.affectedRows).toBe(1);
 		});

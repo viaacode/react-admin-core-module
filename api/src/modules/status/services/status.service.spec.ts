@@ -1,18 +1,18 @@
 import { Test, type TestingModule } from '@nestjs/testing';
-import { vi, type MockInstance } from 'vitest';
+import { vi, type MockInstance, describe, it, expect, beforeEach } from 'vitest';
 
 import packageJson from '../../../../package.json';
-import { DataService } from '../../data';
+import { TranslationsService } from '../../translations';
 import { TestingLogger } from '../../shared/logging/test-logger';
 
 import { StatusService } from './status.service';
 
-const mockDataService: Partial<Record<keyof DataService, MockInstance>> = {
-	execute: vi.fn(),
+const mockTranslationsService: Partial<Record<keyof TranslationsService, MockInstance>> = {
+	getFrontendTranslations: vi.fn(),
 };
 
 const mockStatus = {
-	name: 'HetArchief proxy service',
+	name: 'Admin Core api',
 	version: packageJson.version,
 };
 
@@ -20,12 +20,14 @@ describe('StatusService', () => {
 	let statusService: StatusService;
 
 	beforeEach(async () => {
+		mockTranslationsService.getFrontendTranslations.mockReset();
+
 		const app: TestingModule = await Test.createTestingModule({
 			providers: [
 				StatusService,
 				{
-					provide: DataService,
-					useValue: mockDataService,
+					provide: TranslationsService,
+					useValue: mockTranslationsService,
 				},
 			],
 		})
@@ -42,34 +44,29 @@ describe('StatusService', () => {
 	});
 
 	describe('getStatusFull', () => {
-		it('should return the name and version of the app and the graphql and elasticsearch connectivity', async () => {
-			mockDataService.execute.mockReturnValueOnce({
-				data: { object_ie: [{ schema_identifier: '1' }] },
+		it('should return the name and version of the app and the graphql connectivity', async () => {
+			mockTranslationsService.getFrontendTranslations.mockResolvedValueOnce({
+				key: 'value',
 			});
 			expect(await statusService.getStatusFull()).toEqual({
 				...mockStatus,
 				graphql: 'reachable',
-				elasticsearch: 'reachable',
 			});
 		});
 
-		it('should return graphql and elasticsearch unreachable if no data is returned', async () => {
-			mockDataService.execute.mockResolvedValueOnce({
-				data: { object_ie: [] },
-			});
+		it('should return graphql unreachable if no data is returned', async () => {
+			mockTranslationsService.getFrontendTranslations.mockResolvedValueOnce({});
 			expect(await statusService.getStatusFull()).toEqual({
 				...mockStatus,
 				graphql: 'not accessible',
-				elasticsearch: 'not accessible',
 			});
 		});
 
-		it('should return graphql and elasticsearch unreachable if throw error', async () => {
-			mockDataService.execute.mockRejectedValueOnce({ message: 'timeout' });
+		it('should return graphql unreachable if throw error', async () => {
+			mockTranslationsService.getFrontendTranslations.mockRejectedValueOnce({ message: 'timeout' });
 			expect(await statusService.getStatusFull()).toEqual({
 				...mockStatus,
 				graphql: 'not accessible',
-				elasticsearch: 'not accessible',
 			});
 		});
 	});

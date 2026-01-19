@@ -1,10 +1,9 @@
 import { CACHE_MANAGER } from '@nestjs/cache-manager';
 import { Test, type TestingModule } from '@nestjs/testing';
-import { vi, type MockInstance } from 'vitest';
+import { vi, type MockInstance, describe, it, expect, beforeEach, afterEach } from 'vitest';
 
 import { DataService } from '../../data';
-import { type UpdateResponse } from '../../shared/types/types';
-import { Component, Locale } from '../translations.types';
+import { Component, Locale, ValueType } from '../translations.types';
 
 import { TranslationsService } from './translations.service';
 
@@ -12,18 +11,22 @@ const mockDataService = {
 	execute: vi.fn(),
 };
 
-const mockCacheManager: Partial<Record<'wrap', MockInstance>> = {
-	wrap: vi.fn().mockImplementation((key: string, func: () => any): any => {
-		return func();
-	}) as any,
+const mockCacheManager = {
+	wrap: vi.fn(),
+	reset: vi.fn(),
 };
 
 describe('TranslationsService', () => {
 	let translationsService: TranslationsService;
 
 	beforeEach(async () => {
+		mockDataService.execute.mockReset();
+		mockCacheManager.wrap.mockReset();
+		mockCacheManager.reset.mockReset();
+
 		const module: TestingModule = await Test.createTestingModule({
 			providers: [
+				TranslationsService,
 				{
 					provide: DataService,
 					useValue: mockDataService,
@@ -47,63 +50,66 @@ describe('TranslationsService', () => {
 			mockCacheManager.wrap.mockResolvedValueOnce(undefined);
 			let error;
 			try {
-				await translationsService.getTranslations();
+				await translationsService.getFrontendTranslations(Locale.Nl);
 			} catch (e) {
 				error = e;
 			}
 
 			expect(error.message).toEqual('No translations have been set in the database');
 		});
+
+		it('returns translations when they exist', async () => {
+			const mockTranslations = {
+				nl: {
+					'modules/test___key': 'value',
+				},
+			};
+			mockCacheManager.wrap.mockResolvedValueOnce(mockTranslations);
+			const response = await translationsService.getFrontendTranslations(Locale.Nl);
+			expect(response).toEqual({ 'modules/test___key': 'value' });
+		});
 	});
 
 	describe('getTranslations', () => {
 		it('returns translations', async () => {
-			const mockData1 = {
-				key: 'FE-translation',
+			const mockTranslations = {
+				app_translations: [
+					{
+						component: Component.FRONTEND,
+						location: 'modules/test',
+						key: 'testKey',
+						language: Locale.Nl,
+						value: 'test value',
+						value_type: ValueType.TEXT,
+					},
+				],
 			};
-			const mockData2 = {
-				key: 'AC-translation',
-			};
-			const mockData3 = {
-				key: 'BE-translation',
-			};
-			mockDataService.execute
-				.mockResolvedValueOnce(mockData1)
-				.mockResolvedValueOnce(mockData2)
-				.mockResolvedValueOnce(mockData3);
+			mockDataService.execute.mockResolvedValueOnce(mockTranslations);
 			const response = await translationsService.getTranslations();
-			expect(response['TRANSLATIONS_FRONTEND']).toEqual({
-				key: 'FE-translation',
-			});
-			expect(response['TRANSLATIONS_ADMIN_CORE']).toEqual({
-				key: 'AC-translation',
-			});
-			expect(response['TRANSLATIONS_BACKEND']).toEqual({
-				key: 'BE-translation',
-			});
+			expect(response.length).toBe(1);
+			expect(response[0].key).toEqual('testKey');
 		});
 
-		it('returns nothing on empty translations', async () => {
-			mockDataService.execute.mockResolvedValue(undefined);
+		it('returns empty array when no translations exist', async () => {
+			mockDataService.execute.mockResolvedValueOnce({ app_translations: [] });
 			const response = await translationsService.getTranslations();
-			expect(response).toEqual({});
+			expect(response).toEqual([]);
 		});
 	});
 
-	describe('updateSiteVariable', () => {
+	describe('updateTranslation', () => {
 		it('can update the translations', async () => {
-			const mockData: UpdateResponse = {
-				affectedRows: 1,
-			};
-			mockDataService.execute.mockResolvedValueOnce(mockData);
-			const response = await translationsService.updateTranslation(
+			mockDataService.execute.mockResolvedValueOnce({});
+			mockCacheManager.reset.mockResolvedValueOnce(undefined);
+			await translationsService.updateTranslation(
 				Component.FRONTEND,
 				'modules/admin/const/requests',
 				'status',
 				Locale.Nl,
 				'new value'
 			);
-			expect(response).toEqual({ affectedRows: 1 });
+			expect(mockDataService.execute).toHaveBeenCalled();
+			expect(mockCacheManager.reset).toHaveBeenCalled();
 		});
 	});
 });

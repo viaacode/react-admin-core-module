@@ -1,5 +1,5 @@
 import { Test, type TestingModule } from '@nestjs/testing';
-import { vi, type MockInstance } from 'vitest';
+import { vi, type MockInstance, describe, it, expect, beforeEach } from 'vitest';
 
 import { StatusService } from '../services/status.service';
 
@@ -11,14 +11,17 @@ const mockStatusService: Partial<Record<keyof StatusService, MockInstance>> = {
 };
 
 const mockStatus = {
-	name: 'HetArchief proxy service',
-	version: '0.10.0',
+	name: 'Admin Core api',
+	version: '1.0.0',
 };
 
 describe('StatusController', () => {
 	let statusController: StatusController;
 
 	beforeEach(async () => {
+		mockStatusService.getStatus.mockReset();
+		mockStatusService.getStatusFull.mockReset();
+
 		const app: TestingModule = await Test.createTestingModule({
 			controllers: [StatusController],
 			providers: [
