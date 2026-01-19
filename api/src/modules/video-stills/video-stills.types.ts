@@ -11,14 +11,6 @@ export interface VideoStillRaw {
 	PreviewImagePath: string;
 }
 
-export interface VideoStillToken {
-	refresh_token: string;
-	token_type: string;
-	access_token: string;
-	expires_in: number;
-	expires_at: Date;
-}
-
 export interface ObjectNameInfo {
 	externalId: string;
 	type: 'audio' | 'video' | 'other';

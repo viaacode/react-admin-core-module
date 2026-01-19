@@ -1,10 +1,9 @@
 import { Injectable, InternalServerErrorException, Logger } from '@nestjs/common';
 import type { AvoStillsStillInfo } from '@viaa/avo2-types';
 import * as promiseUtils from 'blend-promise-utils';
-import { addSeconds } from 'date-fns';
-import got, { type Got } from 'got';
+import got from 'got';
 import { find, isNil, last } from 'lodash';
-import { stringify } from 'query-string';
+import { MediahavenService } from '../mediahaven/services/mediahaven.service';
 import { PlayerTicketService } from '../player-ticket';
 import { toMilliseconds } from '../shared/helpers/duration';
 import { logAndThrow } from '../shared/helpers/logAndThrow';
@@ -14,7 +13,6 @@ import type {
 	ObjectNameInfoAndStills,
 	VideoStill,
 	VideoStillRaw,
-	VideoStillToken,
 } from './video-stills.types';
 import type { StillRequest } from './video-stills.validation';
 
@@ -24,55 +22,19 @@ export class VideoStillsService {
 		timestamp: true,
 	});
 
-	private token: VideoStillToken | null = null;
-	private gotInstance: Got;
-
-	constructor(protected playerTicketService: PlayerTicketService) {
-		this.gotInstance = got.extend({});
-	}
+	constructor(
+		protected playerTicketService: PlayerTicketService,
+		protected mediahavenService: MediahavenService
+	) {}
 
 	private async getAccessToken() {
-		try {
-			const tokenExpiry = new Date(this.token?.expires_at).getTime();
-			const now = new Date().getTime();
-			const fiveMinutes = 5 * 60 * 1000;
-
-			if (!this.token || tokenExpiry - fiveMinutes < now) {
-				const response = await this.gotInstance.post<VideoStillToken>('', {
-					prefixUrl: process.env.VIDEO_STILLS_TOKEN_ENDPOINT,
-					resolveBodyOnly: true,
-					headers: {
-						'Content-Type': 'application/x-www-form-urlencoded',
-					},
-					responseType: 'json',
-					body: stringify({
-						username: process.env.VIDEO_STILLS_TOKEN_USERNAME as string,
-						password: process.env.VIDEO_STILLS_TOKEN_PASSWORD as string,
-						client_id: process.env.VIDEO_STILLS_TOKEN_CLIENT_ID as string,
-						client_secret: process.env.VIDEO_STILLS_TOKEN_CLIENT_SECRET as string,
-					}),
-				});
-				this.token = {
-					...response,
-					expires_at: addSeconds(new Date(), response.expires_in),
-				};
-			}
-			return this.token.access_token as string;
-		} catch (err) {
-			logAndThrow(
-				new InternalServerErrorException({
-					message: 'Failed to get stills service token',
-					innerException: err,
-					additionalInfo: {
-						endpoint: process.env.VIDEO_STILLS_TOKEN_ENDPOINT as string,
-						username: process.env.VIDEO_STILLS_TOKEN_USERNAME as string,
-						password: process.env.VIDEO_STILLS_TOKEN_PASSWORD as string,
-						client_id: process.env.VIDEO_STILLS_TOKEN_CLIENT_ID as string,
-						client_secret: process.env.VIDEO_STILLS_TOKEN_CLIENT_SECRET as string,
-					},
-				})
-			);
-		}
+		return await this.mediahavenService.getAccessToken({
+			tokenEndpoint: process.env.VIDEO_STILLS_TOKEN_ENDPOINT as string,
+			username: process.env.VIDEO_STILLS_TOKEN_USERNAME as string,
+			password: process.env.VIDEO_STILLS_TOKEN_PASSWORD as string,
+			clientId: process.env.VIDEO_STILLS_TOKEN_CLIENT_ID as string,
+			clientSecret: process.env.VIDEO_STILLS_TOKEN_CLIENT_SECRET as string,
+		});
 	}
 
 	/**
