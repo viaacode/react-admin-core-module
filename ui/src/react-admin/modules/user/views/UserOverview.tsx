@@ -44,7 +44,7 @@ import { SettingsService } from '~shared/services/settings-service/settings.serv
 import FilterTable, { getFilters } from '../../shared/components/FilterTable/FilterTable';
 import UserDeleteModal from '../components/UserDeleteModal';
 import type { UserOverviewTableCol, UserTableState } from '../user.types';
-import { USERS_PER_PAGE, UserBulkAction } from '../user.types';
+import { UserBulkAction, USERS_PER_PAGE } from '../user.types';
 import './UserOverview.scss';
 
 export interface UserOverviewProps {
@@ -384,7 +384,7 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 						}
 					}}
 					renderNoResults={renderNoResults}
-					isLoading={isLoading}
+					isLoading={isLoading || isLoadingProfiles}
 					showCheckboxes={!!bulkActions.length}
 					selectedItemIds={selectedProfileIds}
 					onSelectionChanged={setSelectedProfileIds as (ids: ReactText[]) => void}
@@ -497,9 +497,6 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 		);
 	};
 
-	if (isLoadingProfiles) {
-		return <CenteredSpinner locationId="user-overview--loading-profiles" />;
-	}
 	if (isErrorProfiles) {
 		return (
 			<ErrorView

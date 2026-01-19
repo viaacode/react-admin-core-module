@@ -1,6 +1,12 @@
 import { ProgressBar } from '@meemoo/react-components';
 import { Button, ButtonToolbar, Modal, ModalBody } from '@viaa/avo2-components';
-import React, { type FunctionComponent, useCallback, useEffect, useState } from 'react';
+import React, {
+	type FunctionComponent,
+	type ReactNode,
+	useCallback,
+	useEffect,
+	useState,
+} from 'react';
 import { retry as retryPromise } from 'ts-retry-promise';
 import { tText } from '~shared/helpers/translation-functions';
 import './ExportAllToCsvModal.scss';
@@ -24,7 +30,7 @@ interface ExportAllToCsvModalProps {
 	// biome-ignore lint/suspicious/noExplicitAny: todo
 	fetchMoreItems: (offset: number, limit: number) => Promise<any>;
 	// biome-ignore lint/suspicious/noExplicitAny: todo
-	renderValue: (item: any, columnId: string) => string;
+	renderValue: (item: any, columnId: string) => string | ReactNode;
 	columns: { label: string; id: string }[];
 	exportFileName: string;
 	itemsPerRequest?: number;
@@ -86,7 +92,10 @@ export const ExportAllToCsvModal: FunctionComponent<ExportAllToCsvModalProps> = 
 				for (const { id: columnId } of columns) {
 					// We're using the same render function as the admin dashboard table to render the values
 					// This way we can be sure the values are formatted the same way in the csv as in the table
-					const csvCellValue = (renderValue(item, columnId) || '').replace(/"/g, '""');
+					const renderedValue = renderValue(item, columnId) || '';
+					const isString = typeof renderedValue === 'string';
+
+					const csvCellValue = isString ? renderedValue.replace(/"/g, '""') : '';
 					if (!csvCellValue || csvCellValue === '-') {
 						csvCellValues.push('');
 					} else {

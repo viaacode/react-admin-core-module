@@ -13,8 +13,7 @@ import { AvoSearchOrderDirection, PermissionName } from '@viaa/avo2-types';
 import clsx from 'clsx';
 import { cloneDeep, compact, isEqual, partition } from 'es-toolkit';
 import { get, set } from 'es-toolkit/compat';
-import type { FC, ReactNode } from 'react';
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { type FC, type ReactNode, useCallback, useEffect, useMemo, useState } from 'react';
 import type { LabelObj } from '~content-blocks/BlockPageOverview/BlockPageOverview.types';
 
 import { AdminConfigManager } from '~core/config/config.class';
@@ -34,8 +33,6 @@ import { ErrorView } from '~shared/components/error/ErrorView';
 import type { FilterableColumn } from '~shared/components/FilterTable/FilterTable';
 import { Icon } from '~shared/components/Icon/Icon';
 import { Link } from '~shared/components/Link/Link';
-import type { LoadingInfo } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
-import { LoadingErrorLoadedComponent } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
 import { CustomError } from '~shared/helpers/custom-error';
 import {
 	getBooleanFilters,
@@ -75,9 +72,6 @@ export const ContentPageOverview: FC = () => {
 	const [isConfirmModalOpen, setIsConfirmModalOpen] = useState<boolean>(false);
 	const [isNotAdminModalOpen, setIsNotAdminModalOpen] = useState<boolean>(false);
 	const [tableState, setTableState] = useState<Partial<ContentTableState>>({});
-	const [loadingInfo, setLoadingInfo] = useState<LoadingInfo>({
-		state: 'loading',
-	});
 	const [userGroupOptions, userGroups] = useUserGroupOptions('CheckboxOption', false, true) as [
 		CheckboxOption[],
 		UserGroupWithPermissions[],
@@ -281,6 +275,7 @@ export const ContentPageOverview: FC = () => {
 	const {
 		data: contentPageResponse,
 		isLoading,
+		isError,
 		refetch: refetchContentPages,
 	} = useGetContentPages({
 		page: tableState.page || 0,
@@ -294,12 +289,6 @@ export const ContentPageOverview: FC = () => {
 	});
 	const contentPages = contentPageResponse?.[0] || null;
 	const contentPageCount = contentPageResponse?.[1] || 0;
-
-	useEffect(() => {
-		if (contentPages) {
-			setLoadingInfo({ state: 'loaded' });
-		}
-	}, [contentPages]);
 
 	// Methods
 	const handleDelete = async () => {
@@ -666,12 +655,16 @@ export const ContentPageOverview: FC = () => {
 		);
 	};
 
-	return (
-		<LoadingErrorLoadedComponent
-			loadingInfo={loadingInfo}
-			dataObject={contentPages}
-			render={renderContentOverview}
-			locationId="content-page-overview"
-		/>
-	);
+	if (isError) {
+		return (
+			<ErrorView
+				message={tHtml('Het ophalen van de content paginas is mislukt')}
+				icon={'alertTriangle' as IconName}
+				actionButtons={['home', 'helpdesk']}
+				locationId="content-page-overview__error"
+			/>
+		);
+	}
+
+	return renderContentOverview();
 };
