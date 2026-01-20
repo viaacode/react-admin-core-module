@@ -1,11 +1,10 @@
 import { Test, type TestingModule } from '@nestjs/testing';
-import { vi, describe, it, expect, beforeEach } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { DataService } from '../../data';
 import { SpecialPermissionGroups } from '../../shared/types/types';
 import { Locale } from '../../translations';
 import { type NavigationQueryTypes } from '../queries/navigation.queries';
-
 import { AdminNavigationsService } from './admin-navigations.service';
 
 const mockNavigationElement1 = {
@@ -99,9 +98,10 @@ describe('NavigationsService', () => {
 			} catch (e) {
 				error = e;
 			}
+			expect(error.status).toEqual(404);
 			expect(error.response).toEqual({
-				message: 'Not Found',
-				statusCode: 404,
+				message: 'Item with id was not found',
+				additionalInfo: { id: 'unknown-id' },
 			});
 		});
 	});
@@ -129,11 +129,11 @@ describe('NavigationsService', () => {
 
 	describe('update', () => {
 		it('can update an existing navigation', async () => {
-			const mockData: NavigationQueryTypes['UpdateNavigationItemByIdMutation'] = {
-				update_app_navigation_by_pk: {
+			const mockData: NavigationQueryTypes['InsertNavigationItemMutationHetArchief'] = {
+				insert_app_navigation_one: {
 					id: '1',
 					icon_name: 'plus',
-				} as NavigationQueryTypes['UpdateNavigationItemByIdMutationHetArchief']['update_app_navigation_by_pk'],
+				} as NavigationQueryTypes['InsertNavigationItemMutationHetArchief']['insert_app_navigation_one'],
 			};
 			mockDataService.execute.mockResolvedValueOnce(mockData);
 			const response = await navigationsService.updateElement('1', {
