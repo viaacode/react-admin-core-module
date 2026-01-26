@@ -658,7 +658,9 @@ export const ContentPageOverview: FC = () => {
 	if (isError) {
 		return (
 			<ErrorView
-				message={tHtml('Het ophalen van de content paginas is mislukt')}
+				message={tHtml(
+					'modules/content-page/views/content-page-overview___het-ophalen-van-de-content-paginas-is-mislukt'
+				)}
 				icon={'alertTriangle' as IconName}
 				actionButtons={['home', 'helpdesk']}
 				locationId="content-page-overview__error"

@@ -66,13 +66,19 @@ export function renderUserOverviewTableCellReact(
 			return truncateTableValue(tableRowCommonUser?.email);
 
 		case 'isBlocked':
-			return isBlocked ? tText('geblokkeerd - Ja') : tText('geblokkeerd - Nee');
+			return isBlocked
+				? tText('modules/user/helpers/render-user-overview-table-cells___geblokkeerd-ja')
+				: tText('modules/user/helpers/render-user-overview-table-cells___geblokkeerd-nee');
 
 		case 'isKeyUser':
-			return isKeyUser ? tText('sleutelgebruiker - Ja') : tText('sleutelgebruiker - Nee');
+			return isKeyUser
+				? tText('modules/user/helpers/render-user-overview-table-cells___sleutelgebruiker-ja')
+				: tText('modules/user/helpers/render-user-overview-table-cells___sleutelgebruiker-nee');
 
 		case 'isEvaluator':
-			return isEvaluator ? tText('beoordelaar - Ja') : tText('beoordelaar - Nee');
+			return isEvaluator
+				? tText('modules/user/helpers/render-user-overview-table-cells___beoordelaar-ja')
+				: tText('modules/user/helpers/render-user-overview-table-cells___beoordelaar-nee');
 
 		case 'blockedAt':
 			return formatDateString(tableRowCommonUser?.blockedAt) || '-';
@@ -82,8 +88,8 @@ export function renderUserOverviewTableCellReact(
 
 		case 'isException':
 			return tableRowCommonUser?.isException
-				? tText('uitzondering - Ja')
-				: tText('uitzondering - Nee');
+				? tText('modules/user/helpers/render-user-overview-table-cells___uitzondering-ja')
+				: tText('modules/user/helpers/render-user-overview-table-cells___uitzondering-nee');
 
 		case 'organisation':
 			return tableRowCommonUser?.organisation?.name || '-';
@@ -204,13 +210,19 @@ export function renderUserOverviewTableCellText(
 			return tableRowCommonUser?.email || '';
 
 		case 'isBlocked':
-			return isBlocked ? tText('geblokkeerd - Ja') : tText('geblokkeerd - Nee');
+			return isBlocked
+				? tText('modules/user/helpers/render-user-overview-table-cells___geblokkeerd-ja')
+				: tText('modules/user/helpers/render-user-overview-table-cells___geblokkeerd-nee');
 
 		case 'isKeyUser':
-			return isKeyUser ? tText('sleutelgebruiker - Ja') : tText('sleutelgebruiker - Nee');
+			return isKeyUser
+				? tText('modules/user/helpers/render-user-overview-table-cells___sleutelgebruiker-ja')
+				: tText('modules/user/helpers/render-user-overview-table-cells___sleutelgebruiker-nee');
 
 		case 'isEvaluator':
-			return isEvaluator ? tText('beoordelaar - Ja') : tText('beoordelaar - Nee');
+			return isEvaluator
+				? tText('modules/user/helpers/render-user-overview-table-cells___beoordelaar-ja')
+				: tText('modules/user/helpers/render-user-overview-table-cells___beoordelaar-nee');
 
 		case 'blockedAt':
 			return formatDateString(tableRowCommonUser?.blockedAt) || '';
@@ -220,8 +232,8 @@ export function renderUserOverviewTableCellText(
 
 		case 'isException':
 			return tableRowCommonUser?.isException
-				? tText('uitzondering - Ja')
-				: tText('uitzondering - Nee');
+				? tText('modules/user/helpers/render-user-overview-table-cells___uitzondering-ja')
+				: tText('modules/user/helpers/render-user-overview-table-cells___uitzondering-nee');
 
 		case 'organisation':
 			return tableRowCommonUser?.organisation?.name || '';

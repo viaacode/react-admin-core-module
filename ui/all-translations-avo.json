@@ -1919,6 +1919,15 @@
   {
     "app": "AVO",
     "component": "ADMIN_CORE",
+    "location": "modules/content-page/views/content-page-detail-meta-data",
+    "key": "seo-afbeelding",
+    "language": "nl",
+    "value": "Seo afbeelding",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
     "location": "admin/content/views/content-detail",
     "key": "titel",
     "language": "nl",
@@ -2589,6 +2598,15 @@
     "key": "contacteer-een-van-de-admins-om-deze-pagina-te-kunnen-verwijderen",
     "language": "nl",
     "value": "Contacteer een van de beheerders om deze pagina te kunnen verwijderen.",
+    "value_type": "HTML"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/views/content-page-overview",
+    "key": "het-ophalen-van-de-content-paginas-is-mislukt",
+    "language": "nl",
+    "value": "Het ophalen van de content paginas is mislukt",
     "value_type": "HTML"
   },
   {
@@ -4151,6 +4169,78 @@
   {
     "app": "AVO",
     "component": "ADMIN_CORE",
+    "location": "modules/user/helpers/render-user-overview-table-cells",
+    "key": "geblokkeerd-ja",
+    "language": "nl",
+    "value": "geblokkeerd - Ja",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "modules/user/helpers/render-user-overview-table-cells",
+    "key": "geblokkeerd-nee",
+    "language": "nl",
+    "value": "geblokkeerd - Nee",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "modules/user/helpers/render-user-overview-table-cells",
+    "key": "sleutelgebruiker-ja",
+    "language": "nl",
+    "value": "sleutelgebruiker - Ja",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "modules/user/helpers/render-user-overview-table-cells",
+    "key": "sleutelgebruiker-nee",
+    "language": "nl",
+    "value": "sleutelgebruiker - Nee",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "modules/user/helpers/render-user-overview-table-cells",
+    "key": "beoordelaar-ja",
+    "language": "nl",
+    "value": "beoordelaar - Ja",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "modules/user/helpers/render-user-overview-table-cells",
+    "key": "beoordelaar-nee",
+    "language": "nl",
+    "value": "beoordelaar - Nee",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "modules/user/helpers/render-user-overview-table-cells",
+    "key": "uitzondering-ja",
+    "language": "nl",
+    "value": "uitzondering - Ja",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "modules/user/helpers/render-user-overview-table-cells",
+    "key": "uitzondering-nee",
+    "language": "nl",
+    "value": "uitzondering - Nee",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
     "location": "admin/users/views/user-overview",
     "key": "tijdelijke-toegang-ja",
     "language": "nl",
@@ -5240,6 +5330,24 @@
   {
     "app": "AVO",
     "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/content-edit-form/content-edit-form",
+    "key": "afbeelding-voor-seo-aanbevolen-1200-x-630",
+    "language": "nl",
+    "value": "Afbeelding voor SEO (aanbevolen 1200 x 630)",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/content-edit-form/content-edit-form",
+    "key": "seo-afbeelding",
+    "language": "nl",
+    "value": "Seo afbeelding",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
     "location": "admin/content/components/content-edit-form/content-edit-form",
     "key": "titel",
     "language": "nl",
@@ -6188,7 +6296,7 @@
     "location": "error/views/error-view",
     "key": "de-pagina-werd-niet-gevonden-ingelogd",
     "language": "nl",
-    "value": "De pagina werd niet gevonden ingelogd",
+    "value": "De pagina werd niet gevonden (ingelogd).",
     "value_type": "TEXT"
   },
   {
@@ -6206,7 +6314,7 @@
     "location": "error/views/error-view",
     "key": "ga-naar-de-hulppagina",
     "language": "nl",
-    "value": "Ga naar de hulppagina",
+    "value": "Ga naar de hulppagina.",
     "value_type": "TEXT"
   },
   {
@@ -9086,7 +9194,7 @@
     "location": "react-admin/modules/content-page/components/blocks/block-video/block-video",
     "key": "bekijk-de-copyright-info-van-deze-afbeelding",
     "language": "nl",
-    "value": "Bekijk de bronvermelding van deze afbeelding",
+    "value": "Bekijk de bronvermelding van deze afbeelding.",
     "value_type": "TEXT"
   },
   {
@@ -9222,33 +9330,6 @@
     "key": "error",
     "language": "nl",
     "value": "Error",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/views/content-page-detail-meta-data",
-    "key": "seo-afbeelding",
-    "language": "nl",
-    "value": "Seo afbeelding",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/content-edit-form/content-edit-form",
-    "key": "afbeelding-voor-seo-aanbevolen-1200-x-630",
-    "language": "nl",
-    "value": "Afbeelding voor SEO (aanbevolen 1200 x 630)",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/content-edit-form/content-edit-form",
-    "key": "seo-afbeelding",
-    "language": "nl",
-    "value": "Seo afbeelding",
     "value_type": "TEXT"
   },
   {
@@ -11741,7 +11822,7 @@
     "location": "react-admin/modules/alerts/views/alerts-overview-page",
     "key": "annuleer",
     "language": "nl",
-    "value": "Annuleer",
+    "value": "Annuleren",
     "value_type": "TEXT"
   },
   {
@@ -12434,7 +12515,7 @@
     "location": "assignment/components/assignment-meta-data-form-editable",
     "key": "og-afbeelding-1200-x-630-px",
     "language": "nl",
-    "value": "OG afbeelding (1200x630px)",
+    "value": "OG afbeelding (1200 x 630 px)",
     "value_type": "TEXT"
   },
   {
@@ -15314,7 +15395,7 @@
     "location": "collection/components/collection-or-bundle-edit-admin",
     "key": "ga-naar-de-bundel-detail-pagina",
     "language": "nl",
-    "value": "Ga naar de bundel detailpagina",
+    "value": "Ga naar de detailpagina van de bundel.",
     "value_type": "TEXT"
   },
   {
@@ -18518,7 +18599,7 @@
     "location": "error/views/error-view",
     "key": "ga-naar-de-hulppagina",
     "language": "nl",
-    "value": "Ga naar de hulppagina",
+    "value": "Ga naar de hulppagina.",
     "value_type": "TEXT"
   },
   {
@@ -18527,7 +18608,7 @@
     "location": "error/views/error-view",
     "key": "ga-naar-de-startpagina",
     "language": "nl",
-    "value": "Ga naar de startpagina",
+    "value": "Ga naar de startpagina.",
     "value_type": "TEXT"
   },
   {
@@ -18563,7 +18644,7 @@
     "location": "home/views/logged-out-home",
     "key": "het-laden-van-deze-pagina-is-mislukt-pagina-kon-niet-worden-opgehaald-van-de-server",
     "language": "nl",
-    "value": "Het laden van deze pagina is mislukt. Pagina kon niet worden opgehaald van de server",
+    "value": "Het laden van deze pagina is mislukt. De pagina kon niet worden opgehaald van de server.",
     "value_type": "TEXT"
   },
   {
@@ -23153,7 +23234,7 @@
     "location": "admin/interactive-tour/views/interactive-tour-overview",
     "key": "beschrijving-hoe-interactieve-tours-toe-voegen",
     "language": "nl",
-    "value": "Beschrijving hoe rondleidingen toevoegen",
+    "value": "<p>Maak een nieuwe rondleiding aan via &#x27;Rondleiding toevoegen&#x27;. Voeg daarna verschillende stappen toe, waarbij je het e<span style=\"color:#2b414f\"><span style=\"font-size:15px\"><span style=\"background-color:#ffffff\">lement selecteert op de pagina waarop de rondleiding moet staan via de css selector onderaan elke stap. Daarna kan je titel en tekst toevoegen. Test je rondleiding grondig!</span></span></span></p>",
     "value_type": "HTML"
   },
   {
@@ -23333,7 +23414,7 @@
     "location": "admin/items/views/item-detail",
     "key": "ga-naar-de-collectie-detail-pagina",
     "language": "nl",
-    "value": "Ga naar de collectie detailpagina",
+    "value": "Ga naar de detailpagina van de collectie.",
     "value_type": "TEXT"
   },
   {
@@ -23342,7 +23423,7 @@
     "location": "admin/items/views/item-detail",
     "key": "ga-naar-de-opdracht-detail-pagina",
     "language": "nl",
-    "value": "Ga naar de opdracht detail pagina",
+    "value": "Ga naar de detailpagina van de opdracht.",
     "value_type": "TEXT"
   },
   {
@@ -23927,7 +24008,7 @@
     "location": "admin/menu/views/menu-overview",
     "key": "navigatie-overzicht",
     "language": "nl",
-    "value": "Navigatie overzicht",
+    "value": "Navigatie - overzicht",
     "value_type": "TEXT"
   },
   {
@@ -25475,7 +25556,7 @@
     "location": "assignment/views/assignment-response-edit",
     "key": "de-opdracht-is-niet-gevonden",
     "language": "nl",
-    "value": "De opdracht is niet gevonden",
+    "value": "De opdracht is niet gevonden.",
     "value_type": "HTML"
   },
   {
@@ -25583,7 +25664,7 @@
     "location": "assignment/views/assignment-response-edit/assignment-response-edit-page",
     "key": "de-opdracht-is-niet-gevonden",
     "language": "nl",
-    "value": "De opdracht is niet gevonden",
+    "value": "De opdracht is niet gevonden.",
     "value_type": "HTML"
   },
   {
@@ -27167,7 +27248,7 @@
     "location": "shared/components/before-unload-prompt/before-unload-prompt",
     "key": "ben-je-zeker-dat-je-de-pagina-wilt-verlaten",
     "language": "nl",
-    "value": "Ben je zeker dat je de pagina wilt verlaten?",
+    "value": "Ben je zeker dat je de pagina wil verlaten?",
     "value_type": "TEXT"
   },
   {
@@ -28526,7 +28607,7 @@
     "location": "shared/components/search-result/search-result",
     "key": "toggle-bookmark",
     "language": "nl",
-    "value": "Maak Bladwijzer",
+    "value": "Maak bladwijzer",
     "value_type": "TEXT"
   },
   {
@@ -30011,7 +30092,7 @@
     "location": "search/components/media-grid-wrapper/media-grid-wrapper",
     "key": "toggle-bladwijzer",
     "language": "nl",
-    "value": "Maak Bladwijzer",
+    "value": "Maak bladwijzer",
     "value_type": "TEXT"
   },
   {
@@ -30173,7 +30254,7 @@
     "location": "modules/url-redirects/url-redirects",
     "key": "er-bestaat-reeds-een-redirect-met-dezelfde-oude-url-best-dat-je-deze-wijzigt",
     "language": "nl",
-    "value": "Er bestaat al een redirect op {{existingOldPath}}, pas deze aan i.p.v. een nieuwe in te stellen.",
+    "value": "Er bestaat reeds een redirect op {{existingOldPath}}, pas deze aan i.p.v. een nieuwe in te stellen.",
     "value_type": "TEXT"
   },
   {
