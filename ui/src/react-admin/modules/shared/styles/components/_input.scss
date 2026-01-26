@@ -1,27 +1,6 @@
 @use "../../styles/settings/variables" as variables;
 @use "../../styles/settings/colors" as colors;
 
-/* ==========================================================================
-   Component: Text Field
-   ---
-   Styles for text inputs
-   ========================================================================== */
-
-/* Mixins
-   ========================================================================== */
-
-@mixin textfield-focus {
-  &:focus {
-    outline: 0;
-    border-color: variables.$c-input-accent-color;
-    box-shadow: inset 0 0 0 0.1rem variables.$c-input-accent-color;
-  }
-}
-
-@mixin textfield-transition {
-  transition: all 0.15s ease-in-out;
-}
-
 /* Component
    ========================================================================== */
 
