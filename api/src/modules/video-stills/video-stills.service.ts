@@ -50,7 +50,7 @@ export class VideoStillsService {
 				.get(`${process.env.VIDEO_STILLS_ENDPOINT as string}/${objectId}/keyframes`, {
 					resolveBodyOnly: true,
 					headers: {
-						Authorization: `Bearer ${accessToken}`,
+						Authorization: `Bearer ${accessToken.token.access_token}`,
 					},
 				})
 				.json()) as VideoStillRaw[];
