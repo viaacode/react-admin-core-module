@@ -11,16 +11,22 @@ export interface VideoStillRaw {
 	PreviewImagePath: string;
 }
 
+export enum StillsObjectType {
+	audio = 'audio',
+	video = 'video',
+	other = 'other',
+}
+
 export interface ObjectNameInfo {
-	externalId: string;
-	type: 'audio' | 'video' | 'other';
+	id: string | undefined;
+	type: StillsObjectType;
 	objectName: string;
 	startTime: number;
 }
 
 export interface ObjectNameInfoAndStills {
-	externalId: string;
-	type: 'audio' | 'video' | 'other';
+	id: string | undefined;
+	type: StillsObjectType;
 	objectName: string;
 	startTime: number;
 	videoStills: VideoStill[];

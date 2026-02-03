@@ -1,0 +1,16 @@
+query getFileByById($fileId: String) {
+	graph_file(where: { id: { _eq: $fileId } }) {
+		premis_stored_at
+		isRootOf {
+			includes(limit: 1) {
+				representation {
+					represents {
+						dctermsFormat {
+							dcterms_format
+						}
+					}
+				}
+			}
+		}
+	}
+}

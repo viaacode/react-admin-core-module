@@ -8,13 +8,19 @@ import { PlayerTicketService } from '../player-ticket';
 import { toMilliseconds } from '../shared/helpers/duration';
 import { logAndThrow } from '../shared/helpers/logAndThrow';
 import { DEFAULT_AUDIO_STILL } from './video-stills.consts';
-import type {
+import {
 	ObjectNameInfo,
 	ObjectNameInfoAndStills,
+	StillsObjectType,
 	VideoStill,
 	VideoStillRaw,
 } from './video-stills.types';
-import type { StillRequest } from './video-stills.validation';
+import type {
+	StillRequest,
+	StillRequestByExternalId,
+	StillRequestByFileId,
+	StillRequestByStoredAt,
+} from './video-stills.validation';
 
 @Injectable()
 export class VideoStillsService {
@@ -134,21 +140,36 @@ export class VideoStillsService {
 	}
 
 	private async getObjectNameInfo(stillRequest: StillRequest): Promise<ObjectNameInfo | null> {
-		const item = await this.playerTicketService.getEmbedUrlAndType(stillRequest.externalId);
+		let id =
+			(stillRequest as StillRequestByExternalId).externalId ||
+			(stillRequest as StillRequestByFileId).fileId;
+		let storedAt: string | undefined = (stillRequest as StillRequestByStoredAt).storedAt;
+		let type: StillsObjectType;
+		if (!storedAt) {
+			// Fetch extra info to fetch the stills
+			const item = await this.playerTicketService.getEmbedUrlAndType(id);
 
-		if (!item) {
-			return null;
+			if (!item) {
+				return null;
+			}
+			storedAt = item.browsePath;
+			type = item.type as StillsObjectType;
+		} else {
+			// Use storedAt directly
+			id = (stillRequest as StillRequestByStoredAt).id;
+			storedAt = (stillRequest as StillRequestByStoredAt).storedAt;
+			type = (stillRequest as StillRequestByStoredAt).type;
 		}
 
-		const objectName = this.extractObjectName(item.browsePath);
+		const objectName = this.extractObjectName(storedAt);
 		const startTime = stillRequest.startTime;
 		if (!objectName || isNil(startTime) || startTime === 0) {
 			return null;
 		}
 
 		return {
-			externalId: stillRequest.externalId,
-			type: item.type,
+			id,
+			type,
 			objectName,
 			startTime,
 		};

@@ -15,6 +15,7 @@ import { addPrefix } from '../shared/helpers/add-route-prefix';
 import { logAndThrow } from '../shared/helpers/logAndThrow';
 import { TranslationsService } from '../translations';
 import { SessionUserEntity } from '../users/classes/session-user';
+import { VideoStillRequestBodyDto } from './video-stills.dto';
 import { VideoStillsService } from './video-stills.service';
 import { type StillRequest, stillRequestValidation } from './video-stills.validation';
 
@@ -32,11 +33,11 @@ export class VideoStillsController {
 	 */
 	@Post()
 	async getVideoStills(
-		@Body() stillRequests: StillRequest[],
+		@Body() body: VideoStillRequestBodyDto,
 		@SessionUser() sessionUser: SessionUserEntity
 	): Promise<(AvoStillsStillInfo | null)[]> {
 		// Check inputs
-		if (!stillRequests || !stillRequests.length) {
+		if (!body.requests || !body.requests.length) {
 			throw new BadRequestException(
 				this.translationsService.tText(
 					'No still requests were passed to the video-stills route',
@@ -45,28 +46,31 @@ export class VideoStillsController {
 				)
 			);
 		}
-		const validationResult: ValidationResult<StillRequest[]> =
-			stillRequestValidation.validate(stillRequests);
+		const validationResult: ValidationResult<StillRequest[]> = stillRequestValidation.validate(
+			body.requests
+		);
 		if (validationResult.error) {
 			throw new BadRequestException(
 				this.translationsService.tText(
 					"The still requests array doesn't have the expected format",
-					{ validationResult: JSON.stringify(validationResult.error) },
+					{},
 					sessionUser.getLanguage()
-				)
+				) +
+					': ' +
+					JSON.stringify({ validationResult: JSON.stringify(validationResult.error) })
 			);
 		}
 
 		// Execute controller
 		try {
-			return await this.videoStillsService.getFirstVideoStills(stillRequests);
+			return await this.videoStillsService.getFirstVideoStills(body.requests as StillRequest[]);
 		} catch (err) {
 			logAndThrow(
 				new InternalServerErrorException({
 					message: 'Failed during get video stills route',
 					innerException: err,
 					additionalInfo: {
-						stillRequests,
+						videoStillRequests: body.requests,
 					},
 				})
 			);

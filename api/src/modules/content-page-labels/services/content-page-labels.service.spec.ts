@@ -1,6 +1,6 @@
 import { Test, type TestingModule } from '@nestjs/testing';
 import { AvoCoreDatabaseType, AvoSearchOrderDirection } from '@viaa/avo2-types';
-import { vi, type MockInstance } from 'vitest';
+import { type MockInstance, vi } from 'vitest';
 
 import { DataService } from '../../data';
 import {
@@ -150,7 +150,7 @@ describe('ContentPageLabelsService', () => {
 
 			try {
 				await contentPageLabelsService.fetchContentPageLabelById('unknown-id');
-				fail(new Error('fetchContentPageLabelById should have thrown an error for unknown ids'));
+				throw new Error('fetchContentPageLabelById should have thrown an error for unknown ids');
 			} catch (error: any) {
 				expect(error).toBeDefined();
 				expect(error.response.message).toEqual(
@@ -189,7 +189,7 @@ describe('ContentPageLabelsService', () => {
 
 			try {
 				await contentPageLabelsService.insertContentPageLabels([new ContentPageLabelDto()]);
-				fail(new Error('insertContentPageLabel should have thrown an error when null is returned'));
+				throw new Error('insertContentPageLabel should have thrown an error when null is returned');
 			} catch (error: any) {
 				expect(error).toBeDefined();
 				expect(error.response.message).toEqual(
@@ -227,7 +227,7 @@ describe('ContentPageLabelsService', () => {
 
 			try {
 				await contentPageLabelsService.updateContentPageLabel(new ContentPageLabelDto());
-				fail(new Error('updateContentPageLabel should have thrown an error when null is returned'));
+				throw new Error('updateContentPageLabel should have thrown an error when null is returned');
 			} catch (error: any) {
 				expect(error).toBeDefined();
 				expect(error.response.message).toEqual(

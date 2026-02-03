@@ -3,11 +3,11 @@ import { Test, type TestingModule } from '@nestjs/testing';
 import { type Cache } from 'cache-manager';
 import { addHours } from 'date-fns';
 import nock from 'nock';
-import { vi, type MockInstance } from 'vitest';
+import { type MockInstance, vi } from 'vitest';
 
 import { DataService } from '../../data';
 import {
-	type GetFileByRepresentationSchemaIdentifierQuery,
+	GetFileByByIdQuery,
 	type GetThumbnailUrlByIdQuery,
 } from '../../shared/generated/graphql-db-types-hetarchief';
 import { TestingLogger } from '../../shared/logging/test-logger';
@@ -101,8 +101,23 @@ describe('PlayerTicketService', () => {
 
 	describe('getEmbedUrl', () => {
 		it('returns the embedUrl for an item', async () => {
-			const mockData: GetFileByRepresentationSchemaIdentifierQuery = {
-				graph_representation: [{ includes: [{ file: { premis_stored_at: 'vrt/item-1' } }] }],
+			const mockData: GetFileByByIdQuery = {
+				graph_file: [
+					{
+						premis_stored_at: 'vrt/item-1',
+						isRootOf: [
+							{
+								includes: [
+									{
+										representation: {
+											represents: { dctermsFormat: [{ dcterms_format: 'video' }] },
+										},
+									},
+								],
+							},
+						],
+					},
+				],
 			};
 			mockDataService.execute.mockResolvedValueOnce(mockData);
 			const url = await playerTicketService.getEmbedUrl('vrt-id');
@@ -110,8 +125,23 @@ describe('PlayerTicketService', () => {
 		});
 
 		it('returns the embedUrl for an avo item', async () => {
-			const mockData: GetFileByRepresentationSchemaIdentifierQuery = {
-				graph_representation: [{ includes: [{ file: { premis_stored_at: 'vrt/item-1' } }] }],
+			const mockData: GetFileByByIdQuery = {
+				graph_file: [
+					{
+						premis_stored_at: 'vrt/item-1',
+						isRootOf: [
+							{
+								includes: [
+									{
+										representation: {
+											represents: { dctermsFormat: [{ dcterms_format: 'video' }] },
+										},
+									},
+								],
+							},
+						],
+					},
+				],
 			};
 			mockDataService.execute.mockResolvedValueOnce(mockData);
 			const url = await playerTicketService.getEmbedUrl('vrt-id');
@@ -119,14 +149,16 @@ describe('PlayerTicketService', () => {
 		});
 
 		it('throws a not found exception if the item was not found', async () => {
-			const mockData: GetFileByRepresentationSchemaIdentifierQuery = {
-				graph_representation: [{ includes: [] }],
+			const mockData: GetFileByByIdQuery = {
+				graph_file: [],
 			};
 			mockDataService.execute.mockResolvedValueOnce(mockData);
-			let error;
+			// biome-ignore lint/suspicious/noExplicitAny: any error type could be thrown
+			let error: any;
 			try {
 				await playerTicketService.getEmbedUrl('unknown-id');
-			} catch (e) {
+				// biome-ignore lint/suspicious/noExplicitAny: any error type could be thrown
+			} catch (e: any) {
 				error = e;
 			}
 			expect(error.response).toEqual({
@@ -210,7 +242,8 @@ describe('PlayerTicketService', () => {
 
 		it('throws an InternalServerErrorException on error', async () => {
 			mockCacheManager.wrap.mockRejectedValueOnce('error');
-			let error;
+			// biome-ignore lint/suspicious/noExplicitAny: any error type could be thrown
+			let error: any;
 			try {
 				await playerTicketService.getThumbnailTokenCached(
 					'/TESTBEELD/keyframes_all',
@@ -231,7 +264,7 @@ describe('PlayerTicketService', () => {
 				graph__intellectual_entity: [{ schema_thumbnail_url: 'vrt/item-1' }],
 			};
 			mockDataService.execute.mockResolvedValueOnce(mockData);
-			const getThumbnailTokenSpy = jest
+			const getThumbnailTokenSpy = vi
 				.spyOn(playerTicketService, 'getThumbnailTokenCached')
 				.mockResolvedValueOnce(mockPlayerTicket.jwt);
 
@@ -279,7 +312,8 @@ describe('PlayerTicketService', () => {
 				graph__intellectual_entity: [],
 			};
 			mockDataService.execute.mockResolvedValueOnce(mockData);
-			let error;
+			// biome-ignore lint/suspicious/noExplicitAny: any error type could be thrown
+			let error: any;
 			try {
 				await playerTicketService.getThumbnailPath('unknown-id');
 			} catch (e) {

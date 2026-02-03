@@ -20,9 +20,9 @@ import {
 	type GetItemBrowsePathByExternalIdQueryVariables,
 } from '../../shared/generated/graphql-db-types-avo';
 import {
-	GetFileByRepresentationSchemaIdentifierDocument,
-	type GetFileByRepresentationSchemaIdentifierQuery,
-	type GetFileByRepresentationSchemaIdentifierQueryVariables,
+	GetFileByByIdDocument,
+	GetFileByByIdQuery,
+	GetFileByByIdQueryVariables,
 	GetThumbnailUrlByIdDocument,
 	type GetThumbnailUrlByIdQuery,
 	type GetThumbnailUrlByIdQueryVariables,
@@ -194,47 +194,46 @@ export class PlayerTicketService {
 
 	/**
 	 * Get the url of the media file for the current representation or external id of an ie object
-	 * @param representationOrExternalId
+	 * @param fileOrExternalId
 	 */
-	public async getEmbedUrlAndType(representationOrExternalId: string): Promise<{
+	public async getEmbedUrlAndType(fileOrExternalId: string): Promise<{
 		browsePath: string;
 		type: 'audio' | 'video' | 'other';
 	}> {
-		let response: GetFileByRepresentationSchemaIdentifierQuery | GetItemBrowsePathByExternalIdQuery;
+		let response: GetFileByByIdQuery | GetItemBrowsePathByExternalIdQuery;
 		if (isHetArchief()) {
 			// Het archief
-			response = await this.dataService.execute<
-				GetFileByRepresentationSchemaIdentifierQuery,
-				GetFileByRepresentationSchemaIdentifierQueryVariables
-			>(GetFileByRepresentationSchemaIdentifierDocument, {
-				id: representationOrExternalId,
-			});
+			response = await this.dataService.execute<GetFileByByIdQuery, GetFileByByIdQueryVariables>(
+				GetFileByByIdDocument,
+				{
+					fileId: fileOrExternalId,
+				}
+			);
 		} else {
 			// AVO
 			response = await this.dataService.execute<
 				GetItemBrowsePathByExternalIdQuery,
 				GetItemBrowsePathByExternalIdQueryVariables
 			>(GetItemBrowsePathByExternalIdDocument, {
-				externalId: representationOrExternalId,
+				externalId: fileOrExternalId,
 			});
 		}
 
 		/* istanbul ignore next */
 		const browsePath: string =
 			(response as GetItemBrowsePathByExternalIdQuery)?.app_item_meta?.[0]?.browse_path ||
-			(response as GetFileByRepresentationSchemaIdentifierQuery)?.graph_representation?.[0]
-				?.includes?.[0]?.file?.premis_stored_at;
+			(response as GetFileByByIdQuery)?.graph_file?.[0]?.premis_stored_at;
 		const fileType: string | ContentTypeNumber =
 			(response as GetItemBrowsePathByExternalIdQuery)?.app_item_meta?.[0]?.type_id ||
-			(response as GetFileByRepresentationSchemaIdentifierQuery)?.graph_representation?.[0]
-				?.represents?.dctermsFormat?.[0]?.dcterms_format;
+			(response as GetFileByByIdQuery)?.graph_file?.[0]?.isRootOf?.[0]?.includes?.[0]
+				?.representation?.represents?.dctermsFormat?.[0]?.dcterms_format;
 
 		if (!browsePath) {
 			throw new NotFoundException({
 				message: 'Object embed url not found',
 				innerException: null,
 				additionalInfo: {
-					id: representationOrExternalId,
+					id: fileOrExternalId,
 				},
 			});
 		}
@@ -267,6 +266,10 @@ export class PlayerTicketService {
 						{ urlOrPath, referer }
 					)
 				);
+				return urlOrPath;
+			}
+			if (urlOrPath.includes('?token=')) {
+				// URL already has a token
 				return urlOrPath;
 			}
 			const browsePath = this.urlToFilePath(urlOrPath);

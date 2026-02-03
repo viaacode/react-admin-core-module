@@ -1,7 +1,6 @@
-import { randomUUID } from 'crypto';
-
 import { TypedDocumentNode } from '@graphql-typed-document-node/core';
 import { Injectable, InternalServerErrorException, Logger } from '@nestjs/common';
+import { randomUUID } from 'crypto';
 import got, { Got, Options } from 'got';
 import { ASTNode } from 'graphql/language/ast';
 import { print } from 'graphql/language/printer';

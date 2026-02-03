@@ -2570,6 +2570,7 @@ export type App_Material_Requests = {
   /** An object relationship */
   objectRepresentation?: Maybe<Graph_Representation>;
   organisation?: Maybe<Scalars['String']['output']>;
+  organisation_sector?: Maybe<Scalars['String']['output']>;
   profile_id: Scalars['uuid']['output'];
   reason: Scalars['String']['output'];
   requested_at?: Maybe<Scalars['timestamp']['output']>;
@@ -2665,6 +2666,7 @@ export type App_Material_Requests_Bool_Exp = {
   name?: InputMaybe<String_Comparison_Exp>;
   objectRepresentation?: InputMaybe<Graph_Representation_Bool_Exp>;
   organisation?: InputMaybe<String_Comparison_Exp>;
+  organisation_sector?: InputMaybe<String_Comparison_Exp>;
   profile_id?: InputMaybe<Uuid_Comparison_Exp>;
   reason?: InputMaybe<String_Comparison_Exp>;
   requested_at?: InputMaybe<Timestamp_Comparison_Exp>;
@@ -2709,6 +2711,7 @@ export type App_Material_Requests_Insert_Input = {
   name?: InputMaybe<Scalars['String']['input']>;
   objectRepresentation?: InputMaybe<Graph_Representation_Obj_Rel_Insert_Input>;
   organisation?: InputMaybe<Scalars['String']['input']>;
+  organisation_sector?: InputMaybe<Scalars['String']['input']>;
   profile_id?: InputMaybe<Scalars['uuid']['input']>;
   reason?: InputMaybe<Scalars['String']['input']>;
   requested_at?: InputMaybe<Scalars['timestamp']['input']>;
@@ -2738,6 +2741,7 @@ export type App_Material_Requests_Max_Fields = {
   ie_object_representation_id?: Maybe<Scalars['String']['output']>;
   name?: Maybe<Scalars['String']['output']>;
   organisation?: Maybe<Scalars['String']['output']>;
+  organisation_sector?: Maybe<Scalars['String']['output']>;
   profile_id?: Maybe<Scalars['uuid']['output']>;
   reason?: Maybe<Scalars['String']['output']>;
   requested_at?: Maybe<Scalars['timestamp']['output']>;
@@ -2762,6 +2766,7 @@ export type App_Material_Requests_Min_Fields = {
   ie_object_representation_id?: Maybe<Scalars['String']['output']>;
   name?: Maybe<Scalars['String']['output']>;
   organisation?: Maybe<Scalars['String']['output']>;
+  organisation_sector?: Maybe<Scalars['String']['output']>;
   profile_id?: Maybe<Scalars['uuid']['output']>;
   reason?: Maybe<Scalars['String']['output']>;
   requested_at?: Maybe<Scalars['timestamp']['output']>;
@@ -2806,6 +2811,7 @@ export type App_Material_Requests_Order_By = {
   name?: InputMaybe<Order_By>;
   objectRepresentation?: InputMaybe<Graph_Representation_Order_By>;
   organisation?: InputMaybe<Order_By>;
+  organisation_sector?: InputMaybe<Order_By>;
   profile_id?: InputMaybe<Order_By>;
   reason?: InputMaybe<Order_By>;
   requested_at?: InputMaybe<Order_By>;
@@ -2858,6 +2864,8 @@ export enum App_Material_Requests_Select_Column {
   /** column name */
   Organisation = 'organisation',
   /** column name */
+  OrganisationSector = 'organisation_sector',
+  /** column name */
   ProfileId = 'profile_id',
   /** column name */
   Reason = 'reason',
@@ -2893,6 +2901,7 @@ export type App_Material_Requests_Set_Input = {
   is_pending?: InputMaybe<Scalars['Boolean']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
   organisation?: InputMaybe<Scalars['String']['input']>;
+  organisation_sector?: InputMaybe<Scalars['String']['input']>;
   profile_id?: InputMaybe<Scalars['uuid']['input']>;
   reason?: InputMaybe<Scalars['String']['input']>;
   requested_at?: InputMaybe<Scalars['timestamp']['input']>;
@@ -2947,6 +2956,7 @@ export type App_Material_Requests_Stream_Cursor_Value_Input = {
   is_pending?: InputMaybe<Scalars['Boolean']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
   organisation?: InputMaybe<Scalars['String']['input']>;
+  organisation_sector?: InputMaybe<Scalars['String']['input']>;
   profile_id?: InputMaybe<Scalars['uuid']['input']>;
   reason?: InputMaybe<Scalars['String']['input']>;
   requested_at?: InputMaybe<Scalars['timestamp']['input']>;
@@ -2997,6 +3007,8 @@ export enum App_Material_Requests_Update_Column {
   Name = 'name',
   /** column name */
   Organisation = 'organisation',
+  /** column name */
+  OrganisationSector = 'organisation_sector',
   /** column name */
   ProfileId = 'profile_id',
   /** column name */
@@ -35473,12 +35485,12 @@ export type GetPermissionsQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type GetPermissionsQuery = { __typename?: 'query_root', users_permission: Array<{ __typename?: 'users_permission', id: any, label: string, name: string, description?: string | null }> };
 
-export type GetFileByRepresentationSchemaIdentifierQueryVariables = Exact<{
-  id?: InputMaybe<Scalars['String']['input']>;
+export type GetFileByByIdQueryVariables = Exact<{
+  fileId?: InputMaybe<Scalars['String']['input']>;
 }>;
 
 
-export type GetFileByRepresentationSchemaIdentifierQuery = { __typename?: 'query_root', graph_representation: Array<{ __typename?: 'graph_representation', represents?: { __typename?: 'graph_intellectual_entity', dctermsFormat: Array<{ __typename?: 'graph_dcterms_format', dcterms_format: string }> } | null, includes: Array<{ __typename?: 'graph_includes', file: { __typename?: 'graph_file', premis_stored_at?: string | null } }> }> };
+export type GetFileByByIdQuery = { __typename?: 'query_root', graph_file: Array<{ __typename?: 'graph_file', premis_stored_at?: string | null, isRootOf: Array<{ __typename?: 'graph_representation', includes: Array<{ __typename?: 'graph_includes', representation: { __typename?: 'graph_representation', represents?: { __typename?: 'graph_intellectual_entity', dctermsFormat: Array<{ __typename?: 'graph_dcterms_format', dcterms_format: string }> } | null } }> }> }> };
 
 export type GetThumbnailUrlByIdQueryVariables = Exact<{
   id: Scalars['String']['input'];
@@ -35663,7 +35675,7 @@ export const GetOrganisationsDocument = {"kind":"Document","definitions":[{"kind
 export const GetOrganisationsForMaintainerGridDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getOrganisationsForMaintainerGrid"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"graph_organization"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"org_identifier"}},{"kind":"Field","name":{"kind":"Name","value":"skos_pref_label"}},{"kind":"Field","name":{"kind":"Name","value":"ha_org_has_logo"}},{"kind":"Field","name":{"kind":"Name","value":"foaf_homepage"}},{"kind":"Field","name":{"kind":"Name","value":"skos_alt_label"}}]}}]}}]} as unknown as DocumentNode<GetOrganisationsForMaintainerGridQuery, GetOrganisationsForMaintainerGridQueryVariables>;
 export const GetOrganisationsWithUsersDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getOrganisationsWithUsers"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"graph_organization"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"distinct_on"},"value":{"kind":"EnumValue","value":"org_identifier"}},{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"users"},"value":{"kind":"ObjectValue","fields":[]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"org_identifier"}},{"kind":"Field","name":{"kind":"Name","value":"skos_pref_label"}}]}}]}}]} as unknown as DocumentNode<GetOrganisationsWithUsersQuery, GetOrganisationsWithUsersQueryVariables>;
 export const GetPermissionsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getPermissions"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"users_permission"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"label"},"value":{"kind":"EnumValue","value":"asc"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}}]}}]} as unknown as DocumentNode<GetPermissionsQuery, GetPermissionsQueryVariables>;
-export const GetFileByRepresentationSchemaIdentifierDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getFileByRepresentationSchemaIdentifier"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"graph_representation"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"represents"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"dctermsFormat"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"dcterms_format"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"includes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"file"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"premis_stored_at"}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetFileByRepresentationSchemaIdentifierQuery, GetFileByRepresentationSchemaIdentifierQueryVariables>;
+export const GetFileByByIdDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getFileByById"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"fileId"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"graph_file"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"fileId"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"premis_stored_at"}},{"kind":"Field","name":{"kind":"Name","value":"isRootOf"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"includes"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"IntValue","value":"1"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"representation"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"represents"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"dctermsFormat"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"dcterms_format"}}]}}]}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetFileByByIdQuery, GetFileByByIdQueryVariables>;
 export const GetThumbnailUrlByIdDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getThumbnailUrlById"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"graph__intellectual_entity"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"schema_identifier"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"schema_identifier"}},{"kind":"Field","name":{"kind":"Name","value":"schema_thumbnail_url"}}]}}]}}]} as unknown as DocumentNode<GetThumbnailUrlByIdQuery, GetThumbnailUrlByIdQueryVariables>;
 export const GetSiteVariableByNameDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getSiteVariableByName"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"name"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"app_config_by_pk"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"name"},"value":{"kind":"Variable","name":{"kind":"Name","value":"name"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"value"}}]}}]}}]} as unknown as DocumentNode<GetSiteVariableByNameQuery, GetSiteVariableByNameQueryVariables>;
 export const UpdateSiteVariableByNameDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"updateSiteVariableByName"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"name"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"data"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"app_config_set_input"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"update_app_config"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"name"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"name"}}}]}}]}},{"kind":"Argument","name":{"kind":"Name","value":"_set"},"value":{"kind":"Variable","name":{"kind":"Name","value":"data"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"affected_rows"}}]}}]}}]} as unknown as DocumentNode<UpdateSiteVariableByNameMutation, UpdateSiteVariableByNameMutationVariables>;
