@@ -49,7 +49,6 @@ export class VideoStillsService {
 	 * @param objectId
 	 */
 	public async getVideoStills(objectId: string): Promise<VideoStill[]> {
-		const config: Record<string, any> | null = null;
 		try {
 			const accessToken = await this.getAccessToken();
 			const videoStills = (await got
@@ -72,9 +71,6 @@ export class VideoStillsService {
 				new InternalServerErrorException({
 					message: 'Failed to get stills from video stills service',
 					innerException: err,
-					additionalInfo: {
-						config,
-					},
 				})
 			);
 		}

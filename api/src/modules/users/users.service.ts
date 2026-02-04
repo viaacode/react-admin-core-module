@@ -59,7 +59,7 @@ export class UsersService {
 				response.users_summary_view[0],
 				UserInfoType.UserInfoOverviewAvo
 			);
-		} catch (err: any) {
+		} catch (err) {
 			throw customError('Failed to get profiles from the database', err, {
 				variables: { id: profileId },
 				query: 'GetUserById',
@@ -73,8 +73,10 @@ export class UsersService {
 		sortColumn: UserOverviewTableCol,
 		sortOrder: AvoSearchOrderDirection,
 		tableColumnDataType: string,
+		// biome-ignore lint/suspicious/noExplicitAny: todo
 		where: any = {}
 	): Promise<[AvoUserCommonUser[], number]> {
+		// biome-ignore lint/suspicious/noExplicitAny: todo
 		let variables: any;
 		try {
 			// Hetarchief doesn't have a is_deleted column yet
@@ -131,8 +133,9 @@ export class UsersService {
 				});
 			}
 
+			// biome-ignore lint/suspicious/noExplicitAny: todo
 			return [profiles as any[], profileCount];
-		} catch (err: any) {
+		} catch (err) {
 			throw customError('Failed to get profiles from the database', err, {
 				variables,
 				query: 'GET_USERS',
@@ -175,7 +178,7 @@ export class UsersService {
 					})
 				);
 			}
-		} catch (err: any) {
+		} catch (err) {
 			throw customError('Failed to get profile names from the database', err, {
 				profileIds,
 				query: 'GET_PROFILE_NAMES',
@@ -210,7 +213,7 @@ export class UsersService {
 					(user) => user?.id
 				)
 			);
-		} catch (err: any) {
+		} catch (err) {
 			throw customError('Failed to get profile ids from the database', err, {
 				variables,
 				query: 'GET_PROFILE_IDS',
@@ -230,7 +233,7 @@ export class UsersService {
 			>(GetDistinctBusinessCategoriesDocument);
 
 			return compact((response.users_profiles || []).map((profile) => profile.business_category));
-		} catch (err: any) {
+		} catch (err) {
 			throw customError('Failed to get distinct business categories from profiles', err, {
 				query: 'GET_DISTINCT_BUSINESS_CATEGORIES',
 			});
@@ -254,7 +257,7 @@ export class UsersService {
 			return ((response as UserQueryTypes['GetIdpsQueryAvo']).users_idps || []).map(
 				(idp) => idp.value as AvoAuthIdpType
 			);
-		} catch (err: any) {
+		} catch (err) {
 			throw customError('Failed to get idps from the database', err, {
 				query: 'GET_IDPS',
 			});
@@ -306,7 +309,7 @@ export class UsersService {
 					(response.itemBookmarks?.aggregate?.count || 0),
 				quickLanes: response.quickLanes?.aggregate?.count || 0,
 			};
-		} catch (err: any) {
+		} catch (err) {
 			throw customError('Failed to get content counts for users from the database', err, {
 				profileIds,
 				query: 'GetContentCountsForUsers',
@@ -338,7 +341,7 @@ export class UsersService {
 					)
 				),
 			});
-		} catch (err: any) {
+		} catch (err) {
 			throw customError('Failed to bulk add loms to profiles', err, {
 				lomIds,
 				profileIds,
@@ -361,7 +364,7 @@ export class UsersService {
 				lomIds,
 				profileIds,
 			});
-		} catch (err: any) {
+		} catch (err) {
 			throw customError('Failed to bulk delete loms from profiles', err, {
 				lomIds,
 				profileIds,

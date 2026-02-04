@@ -132,7 +132,7 @@ export class ContentPagesService {
 		/* istanbul ignore next */
 		return {
 			id: mergedUser?.uid,
-			fullName: mergedUser?.full_name ?? mergedUser?.first_name + ' ' + mergedUser?.last_name,
+			fullName: mergedUser?.full_name ?? `${mergedUser?.first_name} ${mergedUser?.last_name}`,
 			firstName: mergedUser?.first_name,
 			lastName: mergedUser?.last_name,
 			groupId: String(mergedUser?.profile_user_group?.group?.id ?? mergedUser?.group?.id),
@@ -145,9 +145,16 @@ export class ContentPagesService {
 			return null;
 		}
 		const owner = this.adaptUser(
+			// biome-ignore lint/suspicious/noExplicitAny: todo
 			(gqlContentPage as any)?.owner_profile || (gqlContentPage as any)?.profile
 		);
 		/* istanbul ignore next */
+		const contentBlocks =
+			// biome-ignore lint/suspicious/noExplicitAny: todo
+			(gqlContentPage as any)?.content_blocks ||
+			// biome-ignore lint/suspicious/noExplicitAny: todo
+			(gqlContentPage as any)?.contentBlockssBycontentId ||
+			[];
 		return {
 			id: gqlContentPage.id,
 			thumbnailPath: gqlContentPage.thumbnail_path,
@@ -173,13 +180,10 @@ export class ContentPagesService {
 			owner,
 			userProfileId: gqlContentPage.user_profile_id,
 			userGroupIds: gqlContentPage.user_group_ids?.map((groupId) => String(groupId)),
-			content_blocks: (
-				(gqlContentPage as any)?.content_blocks ||
-				(gqlContentPage as any)?.contentBlockssBycontentId ||
-				[]
-			).map(this.adaptContentBlock),
+			content_blocks: contentBlocks.map(this.adaptContentBlock),
 			labels: (gqlContentPage.content_content_labels || []).map(
-				(labelObj): ContentPageLabel => ({
+				// biome-ignore lint/suspicious/noExplicitAny: todo
+				(labelObj: any): ContentPageLabel => ({
 					id: labelObj?.content_label?.id,
 					content_type: gqlContentPage.content_type as ContentPageType, // TODO eliminate either ContentPageType or AvoContentPageType
 					label: labelObj?.content_label?.label,
@@ -201,6 +205,7 @@ export class ContentPagesService {
 		};
 	}
 
+	// biome-ignore lint/suspicious/noExplicitAny: label id mismatch between avo and hetarchief
 	private getLabelFilter(labelIds: (string | number)[]): any[] {
 		if (labelIds.length) {
 			// The user selected some block labels at the top of the page overview component
@@ -274,7 +279,7 @@ export class ContentPagesService {
 							return [
 								{
 									user_group_ids: {
-										_contains: parseInt(userGroupId),
+										_contains: parseInt(userGroupId, 10),
 									},
 								},
 								{
@@ -313,7 +318,7 @@ export class ContentPagesService {
 					{
 						content: {
 							user_group_ids: {
-								_contains: parseInt(userGroupId),
+								_contains: parseInt(userGroupId, 10),
 							},
 						},
 					},
@@ -353,6 +358,7 @@ export class ContentPagesService {
 			withBlocks
 				? CONTENT_PAGE_QUERIES[getDatabaseType()].GetContentPagesWithBlocksDocument
 				: CONTENT_PAGE_QUERIES[getDatabaseType()].GetContentPagesDocument,
+			// biome-ignore lint/suspicious/noExplicitAny: too complex to type
 			variables as any
 		);
 
@@ -382,6 +388,7 @@ export class ContentPagesService {
 				total: count,
 			}),
 			labelCounts: fromPairs(
+				// biome-ignore lint/suspicious/noExplicitAny: todo
 				contentPageLabels.map((labelInfo: any): [number, number] => [
 					labelInfo?.id,
 					labelInfo?.content_content_labels_aggregate?.aggregate?.count ||
@@ -610,6 +617,7 @@ export class ContentPagesService {
 				keys(MEDIA_PLAYER_BLOCKS).includes(contentBlock.type)
 			) || [];
 		if (mediaPlayerBlocks.length) {
+			// biome-ignore lint/suspicious/noExplicitAny: todo
 			await mapLimit(mediaPlayerBlocks, 2, async (mediaPlayerBlock: any) => {
 				try {
 					const blockInfo = MEDIA_PLAYER_BLOCKS[mediaPlayerBlock.content_block_type];
@@ -617,7 +625,7 @@ export class ContentPagesService {
 					if (externalId) {
 						const itemInfo = await this.fetchItemByExternalId(externalId);
 						let videoSrc: string | undefined;
-						if (itemInfo && itemInfo.browse_path) {
+						if (itemInfo?.browse_path) {
 							videoSrc = await this.playerTicketService.getPlayableUrl(
 								itemInfo.browse_path,
 								referrer || 'http://localhost:3200/',
@@ -640,19 +648,22 @@ export class ContentPagesService {
 						].forEach((props) => {
 							if (
 								itemInfo &&
+								// biome-ignore lint/suspicious/noExplicitAny: todo
 								(itemInfo as any)[props[0]] &&
 								!mediaPlayerBlock?.blockInfo?.[props[1]]
 							) {
 								if (props[0] === 'thumbnail_path' && itemInfo.type.label === 'audio') {
 									// Replace poster for audio items with default still
+									// biome-ignore lint/suspicious/noExplicitAny: todo
 									set(mediaPlayerBlock, (blockInfo as any)[props[1]], DEFAULT_AUDIO_STILL);
 								} else {
+									// biome-ignore lint/suspicious/noExplicitAny: todo
 									set(mediaPlayerBlock, (blockInfo as any)[props[1]], (itemInfo as any)[props[0]]);
 								}
 							}
 						});
 					}
-				} catch (err: any) {
+				} catch (err) {
 					this.logger.error({
 						message: 'Failed to resolve media grid content',
 						innerException: err,
@@ -680,6 +691,7 @@ export class ContentPagesService {
 			limit,
 		});
 
+		// biome-ignore lint/suspicious/noExplicitAny: todo
 		return (response as any).app_content || (response as any).app_content_page;
 	}
 
@@ -699,6 +711,7 @@ export class ContentPagesService {
 			title,
 		});
 
+		// biome-ignore lint/suspicious/noExplicitAny: todo
 		return (response as any).app_content || (response as any).app_content_page;
 	}
 
@@ -718,6 +731,7 @@ export class ContentPagesService {
 			where: { is_public: { _eq: true }, is_deleted: { _eq: false } },
 		});
 
+		// biome-ignore lint/suspicious/noExplicitAny: todo
 		return (response as any).app_content || (response as any).app_content_page;
 	}
 
@@ -756,11 +770,11 @@ export class ContentPagesService {
 		};
 
 		if (title) {
-			whereClause['title'] = { _ilike: `%${title}%` };
+			whereClause.title = { _ilike: `%${title}%` };
 		}
 
 		if (contentType) {
-			whereClause['content_type'] = { _eq: contentType as Lookup_Enum_Content_Types_Enum };
+			whereClause.content_type = { _eq: contentType as Lookup_Enum_Content_Types_Enum };
 		}
 
 		const response = await this.dataService.execute<
@@ -809,7 +823,7 @@ export class ContentPagesService {
 			ContentPageQueryTypes['GetContentByIdQuery'],
 			ContentPageQueryTypes['GetContentByIdQueryVariables']
 		>(CONTENT_PAGE_QUERIES[getDatabaseType()].GetContentByIdDocument, {
-			id: isAvo() ? parseInt(id) : id,
+			id: isAvo() ? parseInt(id, 10) : id,
 		});
 
 		const dbContentPage = ((response as ContentPageQueryTypes['GetContentByIdQueryAvo'])
@@ -838,9 +852,10 @@ export class ContentPagesService {
 
 			return (contentTypes || []).map((obj) => ({
 				value: obj.value,
+				// biome-ignore lint/suspicious/noExplicitAny: todo
 				label: obj.description || (obj as any).comment,
 			})) as { value: AvoContentPageType; label: string }[] | null;
-		} catch (err: any) {
+		} catch (err) {
 			throw customError('Failed to retrieve content types.', err, {
 				query: CONTENT_PAGE_QUERIES[getDatabaseType()].GetContentTypesDocument,
 			});
@@ -856,6 +871,7 @@ export class ContentPagesService {
 				contentType,
 			});
 
+			// biome-ignore lint/suspicious/noExplicitAny: todo
 			const labels = (response as any).app_content_labels || (response as any).app_content_label;
 
 			if (!labels) {
@@ -865,7 +881,7 @@ export class ContentPagesService {
 			}
 
 			return labels;
-		} catch (err: any) {
+		} catch (err) {
 			throw customError('Failed to get content labels by content type from database', err, {
 				variables: {
 					contentType,
@@ -879,6 +895,7 @@ export class ContentPagesService {
 		contentPageId: number | string, // Numeric ids in avo, uuid's in hetarchief. We would like to switch to uuids for avo as well at some point
 		labelIds: (number | string)[]
 	): Promise<void> {
+		// biome-ignore lint/suspicious/noExplicitAny: todo
 		let variables: any;
 		try {
 			variables = {
@@ -892,7 +909,7 @@ export class ContentPagesService {
 				ContentPageQueryTypes['InsertContentLabelLinksMutation'],
 				ContentPageQueryTypes['InsertContentLabelLinksMutationVariables']
 			>(CONTENT_PAGE_QUERIES[getDatabaseType()].InsertContentLabelLinksDocument, variables);
-		} catch (err: any) {
+		} catch (err) {
 			throw customError('Failed to insert content label links in the database', err, {
 				variables,
 				query: 'INSERT_CONTENT_LABEL_LINKS',
@@ -912,7 +929,7 @@ export class ContentPagesService {
 				labelIds,
 				contentPageId,
 			});
-		} catch (err: any) {
+		} catch (err) {
 			throw customError('Failed to insert content label links in the database', err, {
 				variables: {
 					labelIds,
@@ -934,6 +951,7 @@ export class ContentPagesService {
 		let variables: ContentPageQueryTypes['GetContentPagesQueryVariables'] | null = null;
 		try {
 			variables = {
+				// biome-ignore lint/suspicious/noExplicitAny: todo
 				where: where as any,
 				offset,
 				limit,
@@ -970,7 +988,7 @@ export class ContentPagesService {
 
 			const contentPages: DbContentPage[] = dbContentPages.map(this.adaptContentPage.bind(this));
 			return [contentPages, dbContentPageCount];
-		} catch (err: any) {
+		} catch (err) {
 			throw customError('Failed to get content pages from the database', err, {
 				variables,
 				query: 'GET_CONTENT_PAGES',
@@ -986,6 +1004,7 @@ export class ContentPagesService {
 				ContentPageQueryTypes['InsertContentMutation'],
 				ContentPageQueryTypes['InsertContentMutationVariables']
 			>(CONTENT_PAGE_QUERIES[getDatabaseType()].InsertContentDocument, {
+				// biome-ignore lint/suspicious/noExplicitAny: todo
 				contentPage: dbContentPage as any,
 			});
 
@@ -1006,7 +1025,7 @@ export class ContentPagesService {
 
 			// Insert content-blocks
 			let contentBlockConfigs: Partial<DbContentBlock>[] | null = null;
-			if (contentPage.content_blocks && contentPage.content_blocks.length) {
+			if (contentPage.content_blocks?.length) {
 				contentBlockConfigs = await this.insertContentBlocks(id, contentPage.content_blocks);
 
 				if (!contentBlockConfigs) {
@@ -1016,7 +1035,7 @@ export class ContentPagesService {
 			}
 
 			return this.getContentPageById(String(id));
-		} catch (err: any) {
+		} catch (err) {
 			throw new InternalServerErrorException(
 				customError('Failed to insert content page into the database', err, {
 					contentPage,
@@ -1061,6 +1080,7 @@ export class ContentPagesService {
 			>(CONTENT_PAGE_QUERIES[getDatabaseType()].UpdateContentPageWithBlocksAndLabelsDocument, {
 				id: contentPage.id,
 				contentPage: dbContentPage,
+				// biome-ignore lint/suspicious/noExplicitAny: todo
 				contentBlocks: contentBlocks as any[], // Mismatch between block types for avo and hetarchief
 				contentLabelLinks: contentPageLabelLinks,
 			});
@@ -1086,7 +1106,7 @@ export class ContentPagesService {
 			);
 
 			return contentPage;
-		} catch (err: any) {
+		} catch (err) {
 			const error = customError('Failed to update content page', err, {
 				contentPage,
 			});
@@ -1106,7 +1126,7 @@ export class ContentPagesService {
 				id,
 				path: `${contentPage.path}-${id}`,
 			});
-		} catch (err: any) {
+		} catch (err) {
 			throw customError('Failed to delete content page from the database', err, {
 				id,
 				query: CONTENT_PAGE_QUERIES[getDatabaseType()].SoftDeleteContentDocument,
@@ -1127,10 +1147,11 @@ export class ContentPagesService {
 				ContentPageQueryTypes['UpdateContentBlockMutation'],
 				ContentPageQueryTypes['UpdateContentBlockMutationVariables']
 			>(CONTENT_PAGE_QUERIES[getDatabaseType()].UpdateContentBlockDocument, {
+				// biome-ignore lint/suspicious/noExplicitAny: todo
 				contentBlock: contentBlockConfig as any,
 				id: contentBlockConfig.id as number,
 			});
-		} catch (err: any) {
+		} catch (err) {
 			throw customError('Failed to update content block', err, {
 				contentBlockConfig,
 			});
@@ -1150,7 +1171,7 @@ export class ContentPagesService {
 			>(CONTENT_PAGE_QUERIES[getDatabaseType()].DeleteContentBlockDocument, {
 				id,
 			});
-		} catch (err: any) {
+		} catch (err) {
 			throw customError('Failed to delete content block', err, { id });
 		}
 	}
@@ -1160,9 +1181,12 @@ export class ContentPagesService {
 			id?: number;
 			name: string;
 			type: string;
+			// biome-ignore lint/suspicious/noExplicitAny: error can be any type
 			errors: any;
 			position: number;
+			// biome-ignore lint/suspicious/noExplicitAny: todo
 			block: any;
+			// biome-ignore lint/suspicious/noExplicitAny: todo
 			components: any;
 			content_id: number;
 		}>[]
@@ -1198,6 +1222,7 @@ export class ContentPagesService {
 			});
 
 			const variables: ContentPageQueryTypes['InsertContentBlocksMutationVariables'] = {
+				// biome-ignore lint/suspicious/noExplicitAny: todo
 				contentBlocks: this.cleanContentBlocksBeforeDatabaseInsert(contentBlockConfigs) as any, // TODO Figure out why type doesn't work
 			};
 			const response = await this.dataService.execute<
@@ -1216,7 +1241,7 @@ export class ContentPagesService {
 				...block,
 				id: ids[index],
 			}));
-		} catch (err: any) {
+		} catch (err) {
 			throw customError('Failed to insert content blocks', err, {
 				contentId,
 				contentBlockConfigs,
@@ -1249,6 +1274,7 @@ export class ContentPagesService {
 		return hetArchiefResponse.app_content_page?.[0]?.user_group_ids || [];
 	}
 
+	// biome-ignore lint/suspicious/noExplicitAny: todo
 	public getImageUrlsFromJsonBlob(jsonBlob: any): string[] {
 		const jsonString = JSON.stringify(jsonBlob);
 

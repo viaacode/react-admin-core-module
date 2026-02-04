@@ -92,7 +92,8 @@ describe('NavigationsService', () => {
 					[] as NavigationQueryTypes['GetNavigationItemByIdQueryHetArchief']['app_navigation'],
 			};
 			mockDataService.execute.mockResolvedValueOnce(mockData);
-			let error;
+			// biome-ignore lint/suspicious/noExplicitAny: todo
+			let error: any;
 			try {
 				await navigationsService.findElementById('unknown-id');
 			} catch (e) {

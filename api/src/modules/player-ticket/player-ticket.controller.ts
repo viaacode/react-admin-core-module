@@ -17,7 +17,7 @@ import { GetPlayableUrlDto } from './dto/GetPlayableUrlDto.dto';
 import { PlayerTicketService } from './services/player-ticket.service';
 
 @ApiTags('Player Ticket')
-@Controller(process.env.ADMIN_CORE_ROUTES_PREFIX + '/player-ticket')
+@Controller(`${process.env.ADMIN_CORE_ROUTES_PREFIX}/player-ticket`)
 export class PlayerTicketController {
 	constructor(private playerTicketService: PlayerTicketService) {}
 
@@ -67,7 +67,7 @@ export class PlayerTicketController {
 				});
 			}
 			return this.getPlayableUrlFromBrowsePath(browsePath, referrer, ip);
-		} catch (err: any) {
+		} catch (err) {
 			throw new InternalServerErrorException({
 				message: 'Failed to get player ticket',
 				innerException: err,
@@ -110,7 +110,7 @@ export class PlayerTicketController {
 				referrer,
 				ip
 			);
-		} catch (err: any) {
+		} catch (err) {
 			throw new InternalServerErrorException({
 				message: 'Failed to get player ticket',
 				innerException: err,
@@ -135,7 +135,7 @@ export class PlayerTicketController {
 	): Promise<string> {
 		try {
 			return await this.playerTicketService.getPlayerToken(urlOrPath, referrer, ip, false);
-		} catch (err: any) {
+		} catch (err) {
 			throw new InternalServerErrorException({
 				message: 'Failed to get ticket for file path',
 				innerException: err,

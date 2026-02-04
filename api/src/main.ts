@@ -13,7 +13,7 @@ async function bootstrap() {
 
 	/** Security */
 	app.enableCors({
-		origin: (origin: string, callback: (err: Error, allow: boolean) => void) => {
+		origin: (_origin: string, callback: (err: Error, allow: boolean) => void) => {
 			// whitelist not enabled
 			callback(null, true);
 		},

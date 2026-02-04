@@ -49,7 +49,8 @@ export class PlayerTicketService {
 	) {
 		// Create an HTTPS agent to handle custom TLS configuration:
 		this.ticketServiceMaxAge = parseInt(
-			process.env.TICKET_SERVICE_MAXAGE || String(PLAYER_TICKET_EXPIRY)
+			process.env.TICKET_SERVICE_MAXAGE || String(PLAYER_TICKET_EXPIRY),
+			10
 		);
 		this.mediaServiceUrl = process.env.MEDIA_SERVICE_URL;
 		this.host = process.env.HOST;
@@ -94,7 +95,7 @@ export class PlayerTicketService {
 			// Use baseUrl + / + path instead of query param name to pass the browsePath
 			// Since it seems like the query param is being truncated: https://meemoo.atlassian.net/browse/ARC-2817
 			const response = await got
-				.get(baseUrl + '/' + path, {
+				.get(`${baseUrl}/${path}`, {
 					https: {
 						certificate: cleanMultilineEnv(process.env.TICKET_SERVICE_CERT),
 						key: cleanMultilineEnv(process.env.TICKET_SERVICE_KEY),
@@ -154,6 +155,7 @@ export class PlayerTicketService {
 				60 * 60 * 1000 // Cache for 1 hour
 			);
 			return token.jwt;
+			// biome-ignore lint/suspicious/noExplicitAny: error can be any type
 		} catch (err: any) {
 			this.logger.error(
 				new CustomError('Error getting token', err, {

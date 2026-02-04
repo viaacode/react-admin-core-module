@@ -1,6 +1,6 @@
 import { type ExecutionContext } from '@nestjs/common';
 import { PermissionName } from '@viaa/avo2-types';
-import { vi, describe, it, expect, beforeEach, afterEach } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { PermissionGuard } from './permission.guard';
 
@@ -23,6 +23,7 @@ const createMockExecutionContext = (permissions: PermissionName[]): ExecutionCon
 };
 
 describe('PermissionGuard', () => {
+	// biome-ignore lint/suspicious/noExplicitAny: mock
 	let mockReflector: any;
 	const originalEnv = process.env.IS_ADMIN_CORE_DEMO_APP;
 
@@ -44,7 +45,10 @@ describe('PermissionGuard', () => {
 
 	it('Should allow access when the user has all required permissions', () => {
 		mockReflector.get.mockReturnValueOnce([PermissionName.SEARCH, PermissionName.SEARCH_OBJECTS]);
-		const context = createMockExecutionContext([PermissionName.SEARCH, PermissionName.SEARCH_OBJECTS]);
+		const context = createMockExecutionContext([
+			PermissionName.SEARCH,
+			PermissionName.SEARCH_OBJECTS,
+		]);
 		const canActivate = new PermissionGuard(mockReflector).canActivate(context);
 		expect(canActivate).toBe(true);
 	});
@@ -72,7 +76,10 @@ describe('PermissionGuard', () => {
 			.mockReturnValueOnce([])
 			.mockReturnValueOnce([])
 			.mockReturnValueOnce([PermissionName.SEARCH, PermissionName.SEARCH_OBJECTS]);
-		const context = createMockExecutionContext([PermissionName.SEARCH, PermissionName.SEARCH_OBJECTS]);
+		const context = createMockExecutionContext([
+			PermissionName.SEARCH,
+			PermissionName.SEARCH_OBJECTS,
+		]);
 		const canActivate = new PermissionGuard(mockReflector).canActivate(context);
 		expect(canActivate).toBe(true);
 	});

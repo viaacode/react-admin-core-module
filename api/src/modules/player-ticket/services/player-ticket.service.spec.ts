@@ -37,7 +37,7 @@ const mockPlayerTicket: PlayerTicket = {
 		fragment: null,
 		expiration: addHours(new Date(), 4).toISOString(),
 		aud: '',
-		exp: new Date().getTime() + 5000000,
+		exp: Date.now() + 5000000,
 		sub: '',
 	},
 };
@@ -214,10 +214,10 @@ describe('PlayerTicketService', () => {
 				})
 				.reply(200, {
 					...mockPlayerTicket,
-					jwt: mockPlayerTicket.jwt + '15j', // Simulate a 15 year token
+					jwt: `${mockPlayerTicket.jwt}15j`, // Simulate a 15 year token
 				});
 			const token = await playerTicketService.getPlayerToken('vrt/browse.mp4', undefined, '', true);
-			expect(token).toEqual(mockPlayerTicket.jwt + '15j');
+			expect(token).toEqual(`${mockPlayerTicket.jwt}15j`);
 		});
 	});
 
@@ -229,7 +229,7 @@ describe('PlayerTicketService', () => {
 				.query(true)
 				.reply(200, mockPlayerTicket);
 
-			mockCacheManager.wrap.mockImplementationOnce(async (key, fn) => {
+			mockCacheManager.wrap.mockImplementationOnce(async (_key, fn) => {
 				return await fn();
 			});
 			const token = await playerTicketService.getThumbnailTokenCached(

@@ -37,7 +37,7 @@ export class CollectionsService {
 			>(GetPublicCollectionsDocument, { limit, typeId });
 
 			return (response.app_collections || []) as AvoCollectionCollection[];
-		} catch (err: any) {
+		} catch (err) {
 			throw new InternalServerErrorException({
 				message: 'Het ophalen van de collecties is mislukt.',
 				innerException: err,
@@ -78,7 +78,7 @@ export class CollectionsService {
 					| GetPublicCollectionsByTitleQueryVariables
 			);
 			return response.app_collections as AvoCollectionCollection[];
-		} catch (err: any) {
+		} catch (err) {
 			throw new InternalServerErrorException({
 				message: 'Failed to fetch collections or bundles',
 				innerException: err,

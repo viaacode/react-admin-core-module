@@ -1,8 +1,9 @@
 import { type ExecutionContext } from '@nestjs/common';
-import { vi, describe, it, expect, beforeEach, afterEach } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { LoggedInGuard } from './logged-in.guard';
 
+// biome-ignore lint/suspicious/noExplicitAny: mock
 const createMockExecutionContext = (session: any): ExecutionContext => {
 	const mockGetRequest = vi.fn().mockReturnValue({ session, headers: {} });
 	const mockSwitchToHttp = vi.fn().mockReturnValue({ getRequest: mockGetRequest });

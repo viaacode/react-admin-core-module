@@ -35,7 +35,7 @@ export class LookupService {
 			}));
 
 			return sortBy(subjects, (subject) => subject.label.toLowerCase());
-		} catch (err: any) {
+		} catch (err) {
 			throw customError('Failed to get subjects from the database', err, {
 				query: 'getSubjects',
 			});
@@ -59,7 +59,7 @@ export class LookupService {
 			}));
 
 			return sortBy(themes, (theme) => theme.label.toLowerCase());
-		} catch (err: any) {
+		} catch (err) {
 			throw customError('Failed to get themes from the database', err, {
 				query: 'getThemes',
 			});
@@ -85,7 +85,7 @@ export class LookupService {
 			}));
 
 			return LookupService.blacklistLoms(educationLevels);
-		} catch (err: any) {
+		} catch (err) {
 			throw customError('Failed to get education levels from the database', err, {
 				query: 'getEducationLevels',
 			});

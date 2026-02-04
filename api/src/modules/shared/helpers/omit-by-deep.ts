@@ -1,3 +1,4 @@
+// biome-ignore-all lint/suspicious/noExplicitAny: can be used for any object
 import _ from 'lodash';
 
 export function omitByDeep(

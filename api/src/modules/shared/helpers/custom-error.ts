@@ -4,6 +4,7 @@ import { InternalServerErrorException } from '@nestjs/common';
 
 export function customError(
 	message: string,
+	// biome-ignore lint/suspicious/noExplicitAny: todo
 	innerException?: any,
 	additionalInfo?: Record<string, unknown>
 ) {

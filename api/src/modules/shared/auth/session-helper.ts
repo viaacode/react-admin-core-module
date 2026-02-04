@@ -22,7 +22,8 @@ export class SessionHelper {
 			}
 		}
 
-		const session = request['session'];
+		// biome-ignore lint/suspicious/noExplicitAny: todo
+		const session = (request as any).session;
 
 		if (!session) {
 			return null;

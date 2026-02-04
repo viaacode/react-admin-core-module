@@ -8,7 +8,7 @@ import { BasicOrganisation } from './admin-organisations.types';
 import { AdminOrganisationsService } from './services/admin-organisations.service';
 
 @ApiTags('Organisations')
-@Controller(process.env.ADMIN_CORE_ROUTES_PREFIX + '/organisations')
+@Controller(`${process.env.ADMIN_CORE_ROUTES_PREFIX}/organisations`)
 export class AdminOrganisationsController {
 	constructor(protected adminOrganisationsService: AdminOrganisationsService) {}
 

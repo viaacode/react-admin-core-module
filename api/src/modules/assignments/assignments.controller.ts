@@ -4,7 +4,7 @@ import type { AvoAssignmentAssignment } from '@viaa/avo2-types';
 import { AssignmentsService } from './assignments.service';
 
 @ApiTags('Assignments')
-@Controller(process.env.ADMIN_CORE_ROUTES_PREFIX + '/assignments')
+@Controller(`${process.env.ADMIN_CORE_ROUTES_PREFIX}/assignments`)
 export class AssignmentsController {
 	constructor(private assignmentsService: AssignmentsService) {}
 

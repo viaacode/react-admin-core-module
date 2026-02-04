@@ -48,8 +48,6 @@ query getContentPageByPath($path: String!, $language: lookup_languages_enum!) {
 		}
 		updated_at
 		user_group_ids
-		content_width
-		user_group_ids
 		content_content_labels {
 			content_label {
 				id

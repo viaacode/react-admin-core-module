@@ -24,7 +24,7 @@ import { UsersService } from './users.service';
 import type { DeleteContentCounts, QueryProfilesBody, UserOverviewTableCol } from './users.types';
 
 @ApiTags('Users')
-@Controller(process.env.ADMIN_CORE_ROUTES_PREFIX + '/users')
+@Controller(`${process.env.ADMIN_CORE_ROUTES_PREFIX}/users`)
 export class UsersController {
 	constructor(
 		@Inject(forwardRef(() => UsersService))
@@ -56,8 +56,8 @@ export class UsersController {
 		@Query('where') where = '{}'
 	): Promise<[AvoUserCommonUser[], number]> {
 		return this.usersService.getProfiles(
-			parseInt(offset || '0'),
-			parseInt(limit || '50'),
+			parseInt(offset || '0', 10),
+			parseInt(limit || '50', 10),
 			sortColumn,
 			sortOrder,
 			tableColumnDataType,
@@ -74,8 +74,8 @@ export class UsersController {
 	)
 	async getProfilesPost(@Body() body: QueryProfilesBody): Promise<[AvoUserCommonUser[], number]> {
 		return this.usersService.getProfiles(
-			parseInt(body.offset || '0'),
-			parseInt(body.limit || '50'),
+			parseInt(body.offset || '0', 10),
+			parseInt(body.limit || '50', 10),
 			body.sortColumn,
 			body.sortOrder,
 			body.tableColumnDataType,

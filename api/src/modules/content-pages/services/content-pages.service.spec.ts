@@ -16,11 +16,10 @@ const mockPlayerTicketService: Partial<Record<keyof PlayerTicketService, MockIns
 	getEmbedUrl: vi.fn(),
 };
 
-const mockOrganisationsService: Partial<Record<keyof AdminOrganisationsService, MockInstance>> =
-	{
-		getOrganisation: vi.fn(),
-		adapt: vi.fn(),
-	};
+const mockOrganisationsService: Partial<Record<keyof AdminOrganisationsService, MockInstance>> = {
+	getOrganisation: vi.fn(),
+	adapt: vi.fn(),
+};
 
 describe('ContentPagesService', () => {
 	let contentPagesService: ContentPagesService;

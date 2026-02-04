@@ -1,17 +1,4 @@
 import { Test, type TestingModule } from '@nestjs/testing';
-import { vi, type MockInstance, describe, it, expect, beforeEach, afterEach } from 'vitest';
-
-import { DataService } from '../../data';
-import { TestingLogger } from '../../shared/logging/test-logger';
-import { MaintenanceAlertType } from '../maintenance-alerts.types';
-import {
-	mockGqlMaintenanceAlert1,
-	mockGqlMaintenanceAlert2,
-	mockNewMaintenanceAlert,
-} from '../mocks/maintenance-alerts.mocks';
-
-import { MaintenanceAlertsService } from './maintenance-alerts.service';
-
 import {
 	type DeleteMaintenanceAlertMutation,
 	type FindMaintenanceAlertByIdQuery,
@@ -20,6 +7,16 @@ import {
 	Lookup_Languages_Enum,
 	type UpdateMaintenanceAlertMutation,
 } from 'src/modules/shared/generated/graphql-db-types-hetarchief';
+import { afterEach, beforeEach, describe, expect, it, type MockInstance, vi } from 'vitest';
+import { DataService } from '../../data';
+import { TestingLogger } from '../../shared/logging/test-logger';
+import { MaintenanceAlertType } from '../maintenance-alerts.types';
+import {
+	mockGqlMaintenanceAlert1,
+	mockGqlMaintenanceAlert2,
+	mockNewMaintenanceAlert,
+} from '../mocks/maintenance-alerts.mocks';
+import { MaintenanceAlertsService } from './maintenance-alerts.service';
 
 const mockDataService: Partial<Record<keyof DataService, MockInstance>> = {
 	execute: vi.fn(),
@@ -29,6 +26,7 @@ const getDefaultMaintenanceAlertsResponse = (): {
 	app_maintenance_alerts: FindMaintenanceAlertsQuery[];
 	app_maintenance_alerts_aggregate: { aggregate: { count: number } };
 } => ({
+	// biome-ignore lint/suspicious/noExplicitAny: mock
 	app_maintenance_alerts: [mockGqlMaintenanceAlert1 as any],
 	app_maintenance_alerts_aggregate: {
 		aggregate: {
@@ -41,6 +39,7 @@ const getDefaultMaintenanceAlertsByIdResponse = (): {
 	app_maintenance_alerts: FindMaintenanceAlertByIdQuery[];
 	app_maintenance_alerts_aggregate: { aggregate: { count: number } };
 } => ({
+	// biome-ignore lint/suspicious/noExplicitAny: mock
 	app_maintenance_alerts: [mockGqlMaintenanceAlert2 as any],
 	app_maintenance_alerts_aggregate: {
 		aggregate: {
@@ -150,8 +149,9 @@ describe('MaintenanceAlertsService', () => {
 
 			try {
 				await maintenanceAlertsService.findById('unknown-id');
-			} catch (error: any) {
-				expect(error.response).toEqual({
+				// biome-ignore lint/suspicious/noExplicitAny: error can be any type
+			} catch (err: any) {
+				expect(err.response).toEqual({
 					error: 'Not Found',
 					message: "Maintenance Alert with id 'unknown-id' not found",
 					statusCode: 404,

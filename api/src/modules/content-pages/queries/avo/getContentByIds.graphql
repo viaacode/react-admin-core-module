@@ -30,7 +30,6 @@ query getContentByIds($ids: [Int!]!) {
 		updated_at
 		user_group_ids
 		user_profile_id
-		user_group_ids
 		profile {
 			organisation {
 				logo_url

@@ -1,6 +1,6 @@
 import { Test, type TestingModule } from '@nestjs/testing';
 import type { AvoFileUploadUploadAssetInfo } from '@viaa/avo2-types';
-import { vi, type MockInstance } from 'vitest';
+import { type MockInstance, vi } from 'vitest';
 import { getMockUserAvo } from '../../../mock-user';
 import { mockTranslationsService } from '../../shared/helpers/mockTranslationsService';
 import { Locale, TranslationsService } from '../../translations';
@@ -46,8 +46,10 @@ describe('AssetsController', () => {
 			mockAssetsService.uploadAndTrack.mockResolvedValueOnce(mockUploadUrl);
 
 			const response = await assetsController.uploadAsset(
+				// biome-ignore lint/suspicious/noExplicitAny: tests
 				{} as any,
 				{} as AvoFileUploadUploadAssetInfo,
+				// biome-ignore lint/suspicious/noExplicitAny: tests
 				{ getLanguage: () => Locale.Nl } as any
 			);
 

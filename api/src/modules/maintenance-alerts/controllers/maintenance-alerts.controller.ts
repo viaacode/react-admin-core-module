@@ -45,23 +45,24 @@ export class MaintenanceAlertsController {
 		@SessionUser() user: SessionUserEntity
 	): Promise<IPagination<MaintenanceAlert>> {
 		try {
+			const maintenanceAlertResponse = await this.maintenanceAlertsService.findAll(queryDto, true);
 
-		// Filter alerts to only include the ones for the current user group
-		maintenanceAlertResponse.items = maintenanceAlertResponse.items.filter((alert) => {
-			return intersection(alert.userGroups, user.getGroupIds()).length > 0;
-		});
+			// Filter alerts to only include the ones for the current user group
+			maintenanceAlertResponse.items = maintenanceAlertResponse.items.filter((alert) => {
+				return intersection(alert.userGroups, user.getGroupIds()).length > 0;
+			});
 
-		// Remove user group ids, since the user doesn't need to know this
-		maintenanceAlertResponse.items = maintenanceAlertResponse.items.map((item) =>
-			omit(item, 'userGroupIds')
-		);
+			// Remove user group ids, since the user doesn't need to know this
+			maintenanceAlertResponse.items = maintenanceAlertResponse.items.map((item) =>
+				omit(item, 'userGroupIds')
+			);
 
-		// Remove alerts where the end date comes before the start date
-		maintenanceAlertResponse.items = maintenanceAlertResponse.items.filter((alert) =>
-			isAfter(new Date(alert.untilDate), new Date(alert.fromDate))
-		);
+			// Remove alerts where the end date comes before the start date
+			maintenanceAlertResponse.items = maintenanceAlertResponse.items.filter((alert) =>
+				isAfter(new Date(alert.untilDate), new Date(alert.fromDate))
+			);
 
-		return maintenanceAlertResponse;
+			return maintenanceAlertResponse;
 		} catch (err) {
 			const error = new CustomError('Failed to fetch personal maintenance alerts', err, {
 				queryDto,

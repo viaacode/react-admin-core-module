@@ -1,5 +1,5 @@
 import { type ExecutionContext } from '@nestjs/common';
-import { vi, describe, it, expect, beforeEach } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { API_KEY_EXCEPTION, ApiKeyGuard } from './api-key.guard';
 
@@ -31,10 +31,11 @@ describe('ApiKeyGuard', () => {
 
 	it('Should not allow access when apiKey header is not set', () => {
 		const context = createMockExecutionContext(undefined);
+		// biome-ignore lint/suspicious/noExplicitAny: mock
 		let error: any;
 		try {
 			new ApiKeyGuard().canActivate(context);
-		} catch (err: any) {
+		} catch (err) {
 			error = err;
 		}
 		expect(error).toBe(API_KEY_EXCEPTION);
@@ -42,10 +43,11 @@ describe('ApiKeyGuard', () => {
 
 	it('Should not allow access when apiKey header is wrong', () => {
 		const context = createMockExecutionContext('wrongApiKey');
+		// biome-ignore lint/suspicious/noExplicitAny: mock
 		let error: any;
 		try {
 			new ApiKeyGuard().canActivate(context);
-		} catch (err: any) {
+		} catch (err) {
 			error = err;
 		}
 		expect(error).toBe(API_KEY_EXCEPTION);

@@ -1,6 +1,6 @@
 import { CACHE_MANAGER } from '@nestjs/cache-manager';
 import { Test, type TestingModule } from '@nestjs/testing';
-import { vi, type MockInstance, describe, it, expect, beforeEach, afterEach } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { DataService } from '../../data';
 import { Component, Locale, ValueType } from '../translations.types';
@@ -48,7 +48,8 @@ describe('TranslationsService', () => {
 	describe('getFrontendTranslations', () => {
 		it('throws an exception if no translations were set', async () => {
 			mockCacheManager.wrap.mockResolvedValueOnce(undefined);
-			let error;
+			// biome-ignore lint/suspicious/noExplicitAny: error can be any type
+			let error: any;
 			try {
 				await translationsService.getFrontendTranslations(Locale.Nl);
 			} catch (e) {

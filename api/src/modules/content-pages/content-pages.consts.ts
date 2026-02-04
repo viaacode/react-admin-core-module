@@ -33,6 +33,7 @@ export const MEDIA_PLAYER_BLOCKS: { [blockType: string]: MediaPlayerPathInfo } =
 export const DEFAULT_AUDIO_STILL = '/images/audio-still.svg';
 
 export const TABLE_COLUMN_TO_DATABASE_ORDER_OBJECT: Partial<{
+	// biome-ignore lint/suspicious/noExplicitAny: order object can be different for each property
 	[columnId in ContentOverviewTableCols]: (order: AvoSearchOrderDirection) => any;
 }> = {
 	contentType: (order: AvoSearchOrderDirection) => {

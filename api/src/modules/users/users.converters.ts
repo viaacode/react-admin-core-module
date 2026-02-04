@@ -175,14 +175,18 @@ export function convertUserInfoToCommonUser(
 					(org): AvoEducationOrganizationOrganization => ({
 						organisationId: org.organization_id,
 						organisationLabel:
+							// biome-ignore lint/suspicious/noExplicitAny: todo
 							(org.organization as any)?.ldap_description ??
+							// biome-ignore lint/suspicious/noExplicitAny: todo
 							(org.organization as any)?.ldap_content?.attributes?.description?.[0] ??
 							(org.unit_id || 'Onbekend label'),
 						unitId: org.unit_id ?? null,
+						// biome-ignore lint/suspicious/noExplicitAny: todo
 						unitStreet: (org.organization as any)?.ldap_content?.units?.[0]?.attributes
 							?.street?.[0],
 					})
 				),
+				// biome-ignore lint/suspicious/noExplicitAny: todo
 				loms: (user.loms || []) as any[],
 				isException: user.is_exception ?? undefined,
 				businessCategory: user.business_category ?? undefined,

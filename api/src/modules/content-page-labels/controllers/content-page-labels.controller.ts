@@ -16,7 +16,7 @@ import {
 import { ContentPageLabelsService } from '../services/content-page-labels.service';
 
 @ApiTags('ContentPageLabels')
-@Controller(process.env.ADMIN_CORE_ROUTES_PREFIX + '/content-page-labels')
+@Controller(`${process.env.ADMIN_CORE_ROUTES_PREFIX}/content-page-labels`)
 export class ContentPageLabelsController {
 	constructor(private contentPageLabelService: ContentPageLabelsService) {}
 
@@ -35,13 +35,13 @@ export class ContentPageLabelsController {
 	): Promise<[ContentPageLabel[], number]> {
 		try {
 			return this.contentPageLabelService.fetchContentPageLabels(
-				parseInt(offset || '0'),
-				parseInt(limit || '20'),
+				parseInt(offset || '0', 10),
+				parseInt(limit || '20', 10),
 				sortColumn,
 				sortOrder,
 				JSON.parse(where)
 			);
-		} catch (err: any) {
+		} catch (err) {
 			throw customError('Failed to get content page labels from the database', err, {
 				offset,
 				limit,
@@ -57,7 +57,7 @@ export class ContentPageLabelsController {
 	public async fetchContentPageLabelById(@Param('id') id: string): Promise<ContentPageLabel> {
 		try {
 			return this.contentPageLabelService.fetchContentPageLabelById(id);
-		} catch (err: any) {
+		} catch (err) {
 			throw customError('Failed to get content page label from the database', err, {
 				id,
 			});
@@ -78,7 +78,7 @@ export class ContentPageLabelsController {
 	): Promise<ContentPageLabelDto[]> {
 		try {
 			return this.contentPageLabelService.insertContentPageLabels(contentPageLabels);
-		} catch (err: any) {
+		} catch (err) {
 			throw customError('Failed to insert content page labels in the database', err, {
 				contentPageLabels,
 			});
@@ -90,7 +90,7 @@ export class ContentPageLabelsController {
 	async updateContentPageLabel(@Body() contentPageLabelInfo: UpdateContentPageLabelDto) {
 		try {
 			return this.contentPageLabelService.updateContentPageLabel(contentPageLabelInfo);
-		} catch (err: any) {
+		} catch (err) {
 			throw customError('Failed to update content page label in the database', err, {
 				contentPageLabel: contentPageLabelInfo,
 			});
@@ -105,7 +105,7 @@ export class ContentPageLabelsController {
 		try {
 			await this.contentPageLabelService.deleteContentPageLabel(id);
 			return { message: 'success' };
-		} catch (err: any) {
+		} catch (err) {
 			throw customError('Failed to delete the content page label from the database', err, {
 				id,
 			});
@@ -121,9 +121,11 @@ export class ContentPageLabelsController {
 	})
 	@Post('')
 	async getContentPageLabelsByType(@Body() body: ContentLabelsRequestDto): Promise<LabelObj[]> {
+		// biome-ignore lint/suspicious/noExplicitAny: check object properties
 		if ((body as any).labelIds) {
 			return await this.contentPageLabelService.getContentPageLabelsByTypeAndIds(
 				body.contentType,
+				// biome-ignore lint/suspicious/noExplicitAny: check object properties
 				(body as any).labelIds
 			);
 		}
@@ -131,6 +133,7 @@ export class ContentPageLabelsController {
 		// else labels query param is set
 		return await this.contentPageLabelService.getContentPageLabelsByTypeAndLabels(
 			body.contentType,
+			// biome-ignore lint/suspicious/noExplicitAny: check object properties
 			(body as any).labels
 		);
 	}

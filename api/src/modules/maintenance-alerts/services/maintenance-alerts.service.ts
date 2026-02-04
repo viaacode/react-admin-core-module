@@ -67,53 +67,57 @@ export class MaintenanceAlertsService {
 		onlyActive: boolean
 	): Promise<IPagination<MaintenanceAlert>> {
 		try {
-		const { offset, limit } = PaginationHelper.convertPagination(page, size);
+			const { page, size, orderProp, orderDirection, languages, searchTerm } = inputQuery;
+			const { offset, limit } = PaginationHelper.convertPagination(page, size);
 
-		const whereAndFilter = [];
-		if (onlyActive) {
-			whereAndFilter.push(
-				{
-					from_date: { _lte: new Date().toISOString() },
-				},
-				{
-					until_date: { _gte: new Date().toISOString() },
-				}
-			);
-		}
-		if (languages?.length) {
-			whereAndFilter.push({ language: { _in: languages.split(',') as Locale[] } });
-		}
-		if (searchTerm) {
-			whereAndFilter.push({
-				_or: [{ title: { _ilike: `%${searchTerm}%` } }, { message: { _ilike: `%${searchTerm}%` } }],
+			const whereAndFilter = [];
+			if (onlyActive) {
+				whereAndFilter.push(
+					{
+						from_date: { _lte: new Date().toISOString() },
+					},
+					{
+						until_date: { _gte: new Date().toISOString() },
+					}
+				);
+			}
+			if (languages?.length) {
+				whereAndFilter.push({ language: { _in: languages.split(',') as Locale[] } });
+			}
+			if (searchTerm) {
+				whereAndFilter.push({
+					_or: [
+						{ title: { _ilike: `%${searchTerm}%` } },
+						{ message: { _ilike: `%${searchTerm}%` } },
+					],
+				});
+			}
+			const where: FindMaintenanceAlertsQueryVariables['where'] = whereAndFilter.length
+				? {
+						_and: whereAndFilter,
+					}
+				: {};
+
+			const maintenanceAlertsResponse = await this.dataService.execute<
+				FindMaintenanceAlertsQuery,
+				FindMaintenanceAlertsQueryVariables
+			>(FindMaintenanceAlertsDocument, {
+				where,
+				offset,
+				limit: Number(limit),
+				orderBy: set(
+					{},
+					ORDER_PROP_TO_DB_PROP[orderProp] || ORDER_PROP_TO_DB_PROP.fromDate,
+					orderDirection || SortDirection.desc
+				),
 			});
-		}
-		const where: FindMaintenanceAlertsQueryVariables['where'] = whereAndFilter.length
-			? {
-					_and: whereAndFilter,
-				}
-			: {};
 
-		const maintenanceAlertsResponse = await this.dataService.execute<
-			FindMaintenanceAlertsQuery,
-			FindMaintenanceAlertsQueryVariables
-		>(FindMaintenanceAlertsDocument, {
-			where,
-			offset,
-			limit: Number(limit),
-			orderBy: set(
-				{},
-				ORDER_PROP_TO_DB_PROP[orderProp] || ORDER_PROP_TO_DB_PROP['fromDate'],
-				orderDirection || SortDirection.desc
-			),
-		});
-
-		return Pagination<MaintenanceAlert>({
-			items: maintenanceAlertsResponse.app_maintenance_alerts.map(this.adapt),
-			page,
-			size,
-			total: maintenanceAlertsResponse.app_maintenance_alerts_aggregate.aggregate.count,
-		});
+			return Pagination<MaintenanceAlert>({
+				items: maintenanceAlertsResponse.app_maintenance_alerts.map(this.adapt),
+				page,
+				size,
+				total: maintenanceAlertsResponse.app_maintenance_alerts_aggregate.aggregate.count,
+			});
 		} catch (err) {
 			const error = new CustomError('Failed to fetch maintenance alerts', err, {
 				inputQuery,

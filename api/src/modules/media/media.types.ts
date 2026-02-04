@@ -35,6 +35,7 @@ export interface Representation {
 export interface Media {
 	schemaIdentifier: string; // Unique id per object
 	meemooIdentifier: string; // PID (not unique per object)
+	// biome-ignore lint/suspicious/noExplicitAny: todo
 	premisIdentifier: any;
 	premisIsPartOf?: string;
 	series?: string[];
@@ -52,8 +53,11 @@ export interface Media {
 	name: string;
 	description: string;
 	abstract: string;
+	// biome-ignore lint/suspicious/noExplicitAny: todo
 	creator: any;
+	// biome-ignore lint/suspicious/noExplicitAny: todo
 	actor?: any;
+	// biome-ignore lint/suspicious/noExplicitAny: todo
 	publisher: any;
 	spatial: string;
 	temporal: string;
@@ -65,6 +69,7 @@ export interface Media {
 	thumbnailUrl: string;
 	// embedUrl: string;
 	duration: string;
+	// biome-ignore lint/suspicious/noExplicitAny: todo
 	license: any;
 	meemooMediaObjectId?: string;
 	dateCreated: string;

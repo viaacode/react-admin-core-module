@@ -49,12 +49,13 @@ export const getOrderObject = (
 	sortOrder: AvoSearchOrderDirection,
 	tableColumnDataType: string,
 	columns: {
+		// biome-ignore lint/suspicious/noExplicitAny: todo
 		[columnName: string]: ((order: AvoSearchOrderDirection) => any) | null;
 	}
 ): Record<string, GraphQlSortDirections>[] => {
 	const getOrderFunc = columns[sortColumn] as unknown as
-		| ((order: GraphQlSortDirections) => any)
-		| null;
+		// biome-ignore lint/suspicious/noExplicitAny: todo
+		((order: GraphQlSortDirections) => any) | null;
 
 	if (getOrderFunc) {
 		return [getOrderFunc(getGqlSortDirection(sortOrder, tableColumnDataType))];

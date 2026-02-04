@@ -1,3 +1,4 @@
+// biome-ignore lint/complexity/noStaticOnlyClass: ignore
 export class PaginationHelper {
 	/**
 	 * Convert page and size to offset and limit

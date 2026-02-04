@@ -59,10 +59,10 @@ export class AdminOrganisationsService {
 				OrganisationQueryTypes['GetOrganisationsWithUsersQuery']
 			>(ORGANISATION_QUERIES[getDatabaseType()].GetOrganisationsWithUsersDocument);
 
-			let organisations;
+			let organisations: BasicOrganisation[];
 			if (isAvo()) {
 				organisations = (response as OrganisationQueryTypes['GetOrganisationsWithUsersQueryAvo'])
-					.shared_organisations_with_users;
+					.shared_organisations_with_users as BasicOrganisation[];
 
 				if (!organisations) {
 					throw customError('Response does not contain any organisations', null, {
@@ -79,7 +79,7 @@ export class AdminOrganisationsService {
 			}
 
 			return sortBy(organisations, 'name');
-		} catch (err: any) {
+		} catch (err) {
 			throw customError('Failed to get organisations from the database', err, {
 				query: 'GetOrganisationsWithUsers',
 			});

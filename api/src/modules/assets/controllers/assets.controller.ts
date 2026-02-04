@@ -1,3 +1,4 @@
+import path from 'node:path';
 import {
 	BadRequestException,
 	Body,
@@ -20,7 +21,6 @@ import {
 	type AvoFileUploadUploadAssetInfo,
 	PermissionName,
 } from '@viaa/avo2-types';
-import path from 'path';
 import sharp from 'sharp';
 
 import { DataService } from '../../data';
@@ -47,7 +47,7 @@ import { AssetsService } from '../services/assets.service';
 // Uploaded assets are also tracked in the database in the app_content_assets table
 @UseGuards(LoggedInGuard)
 @ApiTags('Assets')
-@Controller(process.env.ADMIN_CORE_ROUTES_PREFIX + '/assets')
+@Controller(`${process.env.ADMIN_CORE_ROUTES_PREFIX}/assets`)
 @RequireAnyPermissions(PermissionName.EDIT_ANY_CONTENT_PAGES, PermissionName.EDIT_OWN_CONTENT_PAGES)
 export class AssetsController {
 	private logger: Logger = new Logger(AssetsController.name, { timestamp: true });
@@ -84,6 +84,7 @@ export class AssetsController {
 		PermissionName.EDIT_OWN_CONTENT_PAGES
 	)
 	async uploadAsset(
+		// biome-ignore lint/suspicious/noExplicitAny: todo
 		@UploadedFile() file: any & { originalname: string; mimetype: string },
 		@Body() uploadAssetInfo: AvoFileUploadUploadAssetInfo,
 		@SessionUser() sessionUser: SessionUserEntity
@@ -116,7 +117,7 @@ export class AssetsController {
 					})
 						.webp({})
 						.toBuffer(),
-					originalname: path.parse(file.originalname).name + '.webp',
+					originalname: `${path.parse(file.originalname).name}.webp`,
 					mimetype: 'image/webp',
 				};
 			}

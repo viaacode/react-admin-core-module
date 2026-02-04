@@ -26,6 +26,7 @@ export class SiteVariablesService {
 		);
 	}
 
+	// biome-ignore lint/suspicious/noExplicitAny: can be any value
 	public async updateSiteVariable(variable: string, value: any): Promise<UpdateResponse> {
 		const response = await this.dataService.execute<
 			SiteVariableQueryTypes['UpdateSiteVariableByNameMutation'],

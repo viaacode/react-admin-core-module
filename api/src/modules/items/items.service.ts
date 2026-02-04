@@ -28,6 +28,7 @@ import {
 	GetPublicItemsDocument,
 	type GetPublicItemsQuery,
 	type GetPublicItemsQueryVariables,
+	Lookup_Enum_Relation_Types_Enum,
 } from '../shared/generated/graphql-db-types-avo';
 import { customError } from '../shared/helpers/custom-error';
 import { isUuid } from '../shared/helpers/uuid';
@@ -71,7 +72,7 @@ export class ItemsService {
 			}
 
 			return rawItem as unknown as Partial<AvoItemItem>;
-		} catch (err: any) {
+		} catch (err) {
 			throw customError('Failed to get the item by id from the database', err, {
 				uuidOrExternalId,
 			});
@@ -88,6 +89,7 @@ export class ItemsService {
 			const replacedByItemUid = item?.relations?.[0]?.object || null;
 			if (replacedByItemUid) {
 				const replacementItem = await this.fetchItemById(replacedByItemUid);
+				// biome-ignore lint/suspicious/noExplicitAny: todo
 				(replacementItem as any).replacement_for = item.external_id;
 				item = replacementItem as (AvoItemItem & { replacement_for?: string }) | null;
 			}
@@ -100,7 +102,7 @@ export class ItemsService {
 			}
 
 			return (item || null) as unknown as (AvoItemItem & { replacement_for?: string }) | null;
-		} catch (err: any) {
+		} catch (err) {
 			throw customError('Failed to get item or replacement or depublish reason', err, {
 				uuidOrExternalId,
 			});
@@ -112,12 +114,12 @@ export class ItemsService {
 		subjectIds: string[],
 		relationType: AvoCollectionRelationType
 	): Promise<AvoCollectionRelationEntry<AvoItemItem | AvoCollectionCollection>[]> {
-		let variables: any = null;
+		let variables: FetchCollectionRelationsBySubjectsQueryVariables | null = null;
 		const isCollection = type === 'collection';
 		try {
 			variables = {
-				relationType,
-				...(subjectIds ? { subjectIds } : {}),
+				relationType: relationType as Lookup_Enum_Relation_Types_Enum,
+				subjectIds: subjectIds || [],
 			};
 			const response = await this.dataService.execute<
 				FetchCollectionRelationsBySubjectsQuery | FetchItemRelationsBySubjectsQuery,
@@ -136,7 +138,7 @@ export class ItemsService {
 				return ((response as FetchItemRelationsBySubjectsQuery).app_item_relations ||
 					[]) as AvoCollectionRelationEntry<AvoItemItem>[];
 			}
-		} catch (err: any) {
+		} catch (err) {
 			throw customError('Failed to get relation from the database', err, {
 				variables,
 				query: isCollection
@@ -175,7 +177,7 @@ export class ItemsService {
 			}
 
 			return items as AvoItemItem[];
-		} catch (err: any) {
+		} catch (err) {
 			throw customError('Failed to fetch items by title or external id', err, {
 				titleOrExternalId,
 				limit,

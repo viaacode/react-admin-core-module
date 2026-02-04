@@ -1,6 +1,6 @@
+import { randomUUID } from 'node:crypto';
 import { TypedDocumentNode } from '@graphql-typed-document-node/core';
 import { Injectable, InternalServerErrorException, Logger } from '@nestjs/common';
-import { randomUUID } from 'crypto';
 import got, { Got, Options } from 'got';
 import { ASTNode } from 'graphql/language/ast';
 import { print } from 'graphql/language/printer';
@@ -35,6 +35,7 @@ export class DataService {
 	 * execute a (GraphQl) query
 	 */
 	public async execute<QueryType, QueryVariablesType = void>(
+		// biome-ignore lint/suspicious/noExplicitAny: any query type
 		query: string | TypedDocumentNode<any, any>,
 		variables?: QueryVariablesType
 	): Promise<QueryType> {
@@ -64,7 +65,8 @@ export class DataService {
 					customError(`GraphQl query failed`, null, {
 						query: isString(query)
 							? query
-							: ((query as TypedDocumentNode<any, any>)?.definitions?.[0] as any)?.name?.value,
+							: // biome-ignore lint/suspicious/noExplicitAny: any query type
+								((query as TypedDocumentNode<any, any>)?.definitions?.[0] as any)?.name?.value,
 						variables,
 						graphqlErrors: data.errors,
 					})
@@ -78,6 +80,7 @@ export class DataService {
 				throw new InternalServerErrorException(data);
 			}
 			return data.data;
+			// biome-ignore lint/suspicious/noExplicitAny: error can be any type
 		} catch (err: any) {
 			if (err instanceof DuplicateKeyException) {
 				throw err;
@@ -88,7 +91,8 @@ export class DataService {
 					requestUrl: err?.request?.requestUrl,
 					query: isString(query)
 						? query
-						: ((query as TypedDocumentNode<any, any>)?.definitions?.[0] as any)?.name?.value,
+						: // biome-ignore lint/suspicious/noExplicitAny: any query type
+							((query as TypedDocumentNode<any, any>)?.definitions?.[0] as any)?.name?.value,
 					variables,
 				})
 			);

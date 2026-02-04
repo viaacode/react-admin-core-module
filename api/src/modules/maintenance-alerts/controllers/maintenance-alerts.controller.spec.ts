@@ -16,15 +16,14 @@ import { MaintenanceAlertsService } from '../services/maintenance-alerts.service
 
 import { MaintenanceAlertsController } from './maintenance-alerts.controller';
 
-const mockMaintenanceAlertsService: Partial<
-	Record<keyof MaintenanceAlertsService, MockInstance>
-> = {
-	findAll: vi.fn(),
-	findById: vi.fn(),
-	createMaintenanceAlert: vi.fn(),
-	updateMaintenanceAlert: vi.fn(),
-	deleteMaintenanceAlert: vi.fn(),
-};
+const mockMaintenanceAlertsService: Partial<Record<keyof MaintenanceAlertsService, MockInstance>> =
+	{
+		findAll: vi.fn(),
+		findById: vi.fn(),
+		createMaintenanceAlert: vi.fn(),
+		updateMaintenanceAlert: vi.fn(),
+		deleteMaintenanceAlert: vi.fn(),
+	};
 
 describe('MaintenanceAlertsController', () => {
 	let maintenanceAlertsController: MaintenanceAlertsController;

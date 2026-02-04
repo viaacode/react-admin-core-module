@@ -30,7 +30,6 @@ query getContentByIds($ids: [uuid!]!) {
 		updated_at
 		user_group_ids
 		user_profile_id
-		user_group_ids
 		owner_profile {
 			id
 			full_name

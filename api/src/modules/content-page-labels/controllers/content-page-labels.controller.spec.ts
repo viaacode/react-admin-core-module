@@ -13,17 +13,16 @@ import {
 import { ContentPageLabelsService } from '../services/content-page-labels.service';
 import { ContentPageLabelsController } from './content-page-labels.controller';
 
-const mockContentPageLabelsService: Partial<
-	Record<keyof ContentPageLabelsService, MockInstance>
-> = {
-	fetchContentPageLabels: vi.fn(),
-	fetchContentPageLabelById: vi.fn(),
-	insertContentPageLabels: vi.fn(),
-	updateContentPageLabel: vi.fn(),
-	deleteContentPageLabel: vi.fn(),
-	getContentPageLabelsByTypeAndLabels: vi.fn(),
-	getContentPageLabelsByTypeAndIds: vi.fn(),
-};
+const mockContentPageLabelsService: Partial<Record<keyof ContentPageLabelsService, MockInstance>> =
+	{
+		fetchContentPageLabels: vi.fn(),
+		fetchContentPageLabelById: vi.fn(),
+		insertContentPageLabels: vi.fn(),
+		updateContentPageLabel: vi.fn(),
+		deleteContentPageLabel: vi.fn(),
+		getContentPageLabelsByTypeAndLabels: vi.fn(),
+		getContentPageLabelsByTypeAndIds: vi.fn(),
+	};
 
 describe('ContentPageLabelsController', () => {
 	let contentPageLabelsController: ContentPageLabelsController;

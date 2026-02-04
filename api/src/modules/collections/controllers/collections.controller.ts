@@ -10,7 +10,7 @@ import { CollectionsService } from '../services/collections.service';
 class AvoCollectionCollection {}
 
 @ApiTags('Collections')
-@Controller(process.env.ADMIN_CORE_ROUTES_PREFIX + '/collections')
+@Controller(`${process.env.ADMIN_CORE_ROUTES_PREFIX}/collections`)
 export class CollectionsController {
 	constructor(private collectionsService: CollectionsService) {}
 

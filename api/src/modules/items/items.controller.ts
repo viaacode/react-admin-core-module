@@ -14,7 +14,7 @@ import { RequireAnyPermissions } from '../shared/decorators/require-any-permissi
 import { ItemsService } from './items.service';
 
 @ApiTags('Items')
-@Controller(process.env.ADMIN_CORE_ROUTES_PREFIX + '/items')
+@Controller(`${process.env.ADMIN_CORE_ROUTES_PREFIX}/items`)
 export class ItemsController {
 	constructor(protected itemsService: ItemsService) {}
 

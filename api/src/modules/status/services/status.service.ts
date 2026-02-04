@@ -31,7 +31,7 @@ export class StatusService {
 
 			/* istanbul ignore next */
 			return !!Object.keys(translations)[0];
-		} catch (err: any) {
+		} catch (err) {
 			this.logger.error(err);
 			return false;
 		}

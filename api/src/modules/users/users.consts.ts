@@ -7,6 +7,7 @@ import { isAvo } from '../shared/helpers/is-avo';
 import type { UserOverviewTableCol } from './users.types';
 
 export const GET_TABLE_COLUMN_TO_DATABASE_ORDER_OBJECT = (): Partial<{
+	// biome-ignore lint/suspicious/noExplicitAny: todo
 	[columnId in UserOverviewTableCol]: (order: AvoSearchOrderDirection) => any;
 }> => {
 	if (isAvo()) {
@@ -16,6 +17,7 @@ export const GET_TABLE_COLUMN_TO_DATABASE_ORDER_OBJECT = (): Partial<{
 };
 
 const tableColumnToDatabaseOrderObjectAvo: {
+	// biome-ignore lint/suspicious/noExplicitAny: todo
 	[columnId in UserOverviewTableCol]: ((order: AvoSearchOrderDirection) => any) | null;
 } = {
 	firstName: (order: AvoSearchOrderDirection): Users_Summary_View_Order_By => ({
@@ -85,6 +87,7 @@ const tableColumnToDatabaseOrderObjectAvo: {
 };
 
 const tableColumnToDatabaseOrderObjectHetArchief: Partial<{
+	// biome-ignore lint/suspicious/noExplicitAny: todo
 	[columnId in UserOverviewTableCol]: (order: AvoSearchOrderDirection) => any;
 }> = {
 	firstName: (order: AvoSearchOrderDirection) => ({

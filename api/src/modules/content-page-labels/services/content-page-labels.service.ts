@@ -25,6 +25,7 @@ export class ContentPageLabelsService {
 		limit: number,
 		sortColumn: ContentPageLabelOverviewTableCols,
 		sortOrder: AvoSearchOrderDirection,
+		// biome-ignore lint/suspicious/noExplicitAny: where can by complex object
 		where: any
 	): Promise<[ContentPageLabel[], number]> {
 		let variables: ContentPageLabelQueryTypes['GetContentPageLabelsQueryVariables'] | null = null;
@@ -72,7 +73,7 @@ export class ContentPageLabelsService {
 			}
 
 			return [contentPageLabels, contentPageLabelCount];
-		} catch (err: any) {
+		} catch (err) {
 			throw customError('Failed to get content page labels from the database', err, {
 				variables,
 				query: 'GET_CONTENT_PAGE_LABELS',
@@ -85,7 +86,7 @@ export class ContentPageLabelsService {
 			null;
 		try {
 			variables = {
-				id: isAvo() ? parseInt(id) : id,
+				id: isAvo() ? parseInt(id, 10) : id,
 			};
 			const response = await this.dataService.execute<
 				ContentPageLabelQueryTypes['GetContentPageLabelByIdQuery'],
@@ -114,7 +115,7 @@ export class ContentPageLabelsService {
 				created_at: contentPageLabelRaw.created_at,
 				updated_at: contentPageLabelRaw.updated_at,
 			};
-		} catch (err: any) {
+		} catch (err) {
 			throw customError('Failed to get content page labels from the database', err, {
 				variables,
 				query: 'GET_CONTENT_PAGE_LABELS',
@@ -133,6 +134,7 @@ export class ContentPageLabelsService {
 				contentPageLabels: contentPageLabels.map((contentPageLabel) => ({
 					label: contentPageLabel.label,
 					content_type: contentPageLabel.content_type,
+					// biome-ignore lint/suspicious/noExplicitAny: locale from other repo complains about types
 					language: contentPageLabel.language as any,
 					link_to: contentPageLabel.link_to || null,
 					created_at: new Date().toISOString(),
@@ -152,7 +154,7 @@ export class ContentPageLabelsService {
 				);
 			}
 			return contentPageLabelsResponse as ContentPageLabelDto[];
-		} catch (err: any) {
+		} catch (err) {
 			throw customError('Failed to insert content page labels in the database', err, {
 				contentPageLabels,
 				query: 'InsertContentPageLabel',
@@ -170,7 +172,8 @@ export class ContentPageLabelsService {
 			>(CONTENT_PAGE_LABEL_QUERIES[getDatabaseType()].UpdateContentPageLabelDocument, {
 				contentPageLabel: {
 					label: contentPageLabelInfo.label,
-					content_type: contentPageLabelInfo.content_type as any, // Differences in avo <-> hetarchief
+					// biome-ignore lint/suspicious/noExplicitAny: Differences in avo <-> hetarchief
+					content_type: contentPageLabelInfo.content_type as any,
 					language: contentPageLabelInfo.language,
 					link_to: contentPageLabelInfo.link_to || null,
 					updated_at: new Date().toISOString(),
@@ -190,7 +193,7 @@ export class ContentPageLabelsService {
 				);
 			}
 			return contentPageLabelResponse as ContentPageLabelDto;
-		} catch (err: any) {
+		} catch (err) {
 			throw customError('Failed to update content page label in the database', err, {
 				contentPageLabel: contentPageLabelInfo,
 				query: 'UPDATE_CONTENT_PAGE_LABEL',
@@ -204,9 +207,9 @@ export class ContentPageLabelsService {
 				ContentPageLabelQueryTypes['DeleteContentPageLabelByIdMutation'],
 				ContentPageLabelQueryTypes['DeleteContentPageLabelByIdMutationVariables']
 			>(CONTENT_PAGE_LABEL_QUERIES[getDatabaseType()].DeleteContentPageLabelByIdDocument, {
-				id: isAvo() ? parseInt(id) : id,
+				id: isAvo() ? parseInt(id, 10) : id,
 			});
-		} catch (err: any) {
+		} catch (err) {
 			throw customError('Failed to delete content page label from the database', err, {
 				query: 'DeleteContentPageLabelByIdMutation',
 				id,
@@ -246,6 +249,7 @@ export class ContentPageLabelsService {
 			ContentPageLabelQueryTypes['GetContentPageLabelsByTypeAndIdsQueryVariables']
 		>(CONTENT_PAGE_LABEL_QUERIES[getDatabaseType()].GetContentPageLabelsByTypeAndIdsDocument, {
 			contentType,
+			// biome-ignore lint/suspicious/noExplicitAny: avo vs hetarchief number vs uuid
 			labelIds: labelIds as any,
 		});
 

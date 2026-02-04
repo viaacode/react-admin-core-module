@@ -1,11 +1,13 @@
 import { randomUUID as uuid } from 'node:crypto';
-import util from 'util';
+import util from 'node:util';
 
 import { omitByDeep } from './omit-by-deep';
 
 export class CustomError {
 	public message: string;
+	// biome-ignore lint/suspicious/noExplicitAny: todo
 	public innerException: any | null;
+	// biome-ignore lint/suspicious/noExplicitAny: todo
 	public additionalInfo: any | null;
 	public identifier: string = uuid();
 	public name = 'Error';
@@ -15,7 +17,9 @@ export class CustomError {
 
 	constructor(
 		message = 'Something went wrong',
+		// biome-ignore lint/suspicious/noExplicitAny: todo
 		innerException: any = null,
+		// biome-ignore lint/suspicious/noExplicitAny: todo
 		additionalInfo: any = null
 	) {
 		this.message = message;
@@ -30,7 +34,9 @@ export class CustomError {
 		}
 		if (innerException && !(innerException instanceof CustomError)) {
 			this.innerException = {
+				// biome-ignore lint/suspicious/noExplicitAny: todo
 				message: (innerException as any).message,
+				// biome-ignore lint/suspicious/noExplicitAny: todo
 				stack: (innerException as any).stack,
 			};
 		}

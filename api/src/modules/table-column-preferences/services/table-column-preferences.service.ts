@@ -34,7 +34,7 @@ export class TableColumnPreferencesService {
 			});
 
 			return this.getColumnsFromPreference(response?.users_table_column_preferences?.[0]);
-		} catch (err: any) {
+		} catch (err) {
 			throw customError('Failed to get table column preference from the database', err, {
 				query: 'GetTableColumnPreferencesForUser',
 			});
@@ -60,7 +60,7 @@ export class TableColumnPreferencesService {
 			}
 
 			return this.insertTableColumnPreference(profileId, columnKey, columns);
-		} catch (err: any) {
+		} catch (err) {
 			throw customError('Failed to save table column preference from the database', err, {
 				method: 'saveTableColumnPreference',
 			});
@@ -85,7 +85,7 @@ export class TableColumnPreferencesService {
 			return this.getColumnsFromPreference(
 				response?.insert_users_table_column_preferences?.returning?.[0]
 			);
-		} catch (err: any) {
+		} catch (err) {
 			throw customError('Failed to insert table column preference to the database', err, {
 				query: 'InsertTableColumnPreferencesForUserDocument',
 			});
@@ -110,7 +110,7 @@ export class TableColumnPreferencesService {
 			return this.getColumnsFromPreference(
 				response?.update_users_table_column_preferences?.returning?.[0]
 			);
-		} catch (err: any) {
+		} catch (err) {
 			throw customError('Failed to update table column preference in the database', err, {
 				query: 'UpdateTableColumnPreferencesForUserDocument',
 			});

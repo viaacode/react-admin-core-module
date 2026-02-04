@@ -1,6 +1,5 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/no-empty-function */
+// biome-ignore-all lint/suspicious/noExplicitAny: todo
+// biome-ignore-all lint/correctness/noUnusedFunctionParameters: todo
 
 import { type LoggerService } from '@nestjs/common';
 

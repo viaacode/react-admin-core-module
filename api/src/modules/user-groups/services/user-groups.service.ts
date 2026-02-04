@@ -48,7 +48,7 @@ export class UserGroupsService {
 	private customSortUserGroups = <T extends { label: string }>(userGroups: T[]): T[] => {
 		return sortBy(userGroups, (userGroup) => {
 			const label = userGroup.label.toLowerCase();
-			const index = USER_GROUP_ORDER.findIndex((userGroupName) => userGroupName === label);
+			const index = USER_GROUP_ORDER.indexOf(label);
 
 			return `${String(index).padStart(2, '0')}-${label}`;
 		});
@@ -106,7 +106,7 @@ export class UserGroupsService {
 					.map((update) => {
 						if (isAvo()) {
 							return {
-								user_group_id: { _eq: parseInt(update.userGroupId) },
+								user_group_id: { _eq: parseInt(update.userGroupId, 10) },
 								permission_id: { _eq: update.permissionId },
 							};
 						} else {
@@ -122,7 +122,7 @@ export class UserGroupsService {
 				.map((update) => {
 					if (isAvo()) {
 						return {
-							user_group_id: parseInt(update.userGroupId),
+							user_group_id: parseInt(update.userGroupId, 10),
 							permission_id: update.permissionId,
 						};
 					} else {

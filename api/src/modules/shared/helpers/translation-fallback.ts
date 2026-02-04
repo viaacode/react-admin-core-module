@@ -14,9 +14,9 @@ export function getTranslationFallback(
 		return resolveTranslationVariables(translation, variables);
 	}
 	if (key.includes('___')) {
-		return key.split('___')[1].replace('-', ' ') + ' ***';
+		return `${key.split('___')[1].replace('-', ' ')} ***`;
 	} else {
-		return key + ' ***';
+		return `${key} ***`;
 	}
 }
 
@@ -28,7 +28,7 @@ export function resolveTranslationVariables(
 	Object.keys(variables || {}).forEach((variableName) => {
 		resolvedTranslation = resolvedTranslation.replace(
 			new RegExp(`{{${variableName}}}`, 'g'),
-			String((variables || {})[variableName])
+			String(variables?.[variableName])
 		);
 	});
 	return resolvedTranslation;

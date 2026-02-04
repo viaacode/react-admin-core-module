@@ -120,12 +120,19 @@ export type ContentPageLabelQueryTypes = {
 };
 
 type ContentPageLabelQueries = {
+	// biome-ignore lint/suspicious/noExplicitAny: too complex to type
 	DeleteContentPageLabelByIdDocument: TypedDocumentNode<any, any>;
+	// biome-ignore lint/suspicious/noExplicitAny: too complex to type
 	GetContentPageLabelByIdDocument: TypedDocumentNode<any, any>;
+	// biome-ignore lint/suspicious/noExplicitAny: too complex to type
 	GetContentPageLabelsDocument: TypedDocumentNode<any, any>;
+	// biome-ignore lint/suspicious/noExplicitAny: too complex to type
 	InsertContentPageLabelDocument: TypedDocumentNode<any, any>;
+	// biome-ignore lint/suspicious/noExplicitAny: too complex to type
 	UpdateContentPageLabelDocument: TypedDocumentNode<any, any>;
+	// biome-ignore lint/suspicious/noExplicitAny: too complex to type
 	GetContentPageLabelsByTypeAndIdsDocument: TypedDocumentNode<any, any>;
+	// biome-ignore lint/suspicious/noExplicitAny: too complex to type
 	GetContentPageLabelsByTypeAndLabelsDocument: TypedDocumentNode<any, any>;
 };
 

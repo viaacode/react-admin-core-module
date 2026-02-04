@@ -4,7 +4,6 @@ import {
 	Delete,
 	ForbiddenException,
 	Get,
-	Headers,
 	InternalServerErrorException,
 	Ip,
 	NotFoundException,
@@ -115,15 +114,15 @@ export class ContentPagesController {
 	): Promise<DbContentPage> {
 		try {
 			const user = sessionUser?.getUser();
-			const dbContentPage = await this.contentPagesService.getContentPageByLanguageAndPathForUser(
+			return await this.contentPagesService.getContentPageByLanguageAndPathForUser(
 				language || (user.language as Locale),
 				path,
 				user,
-				request?.headers?.['Referrer'] as string,
+				request?.headers?.Referrer as string,
 				ip,
 				onlyInfo === 'true'
 			);
-			return dbContentPage;
+			// biome-ignore lint/suspicious/noExplicitAny: error can be any type
 		} catch (err: any) {
 			if (err?.response?.additionalInfo?.code === 'NOT_FOUND') {
 				throw new NotFoundException('The content page with path was not found');
@@ -169,10 +168,7 @@ export class ContentPagesController {
 
 	@Post('update-published-dates')
 	@UseGuards(ApiKeyGuard)
-	async updatePublishDates(
-		// eslint-disable-next-line @typescript-eslint/no-unused-vars
-		@Headers('apikey') apikey: string
-	): Promise<{ message: string }> {
+	async updatePublishDates(): Promise<{ message: string }> {
 		const response: ContentPagesPublishAndUnpublishResults =
 			await this.contentPagesService.updatePublishDates();
 
@@ -181,7 +177,7 @@ export class ContentPagesController {
 		} pages published (${response.publishedIds.join(',') || 'none'}), ${
 			response.unpublishedCount
 		} pages unpublished (${response.unpublishedIds.join(',') || 'none'})`;
-		console.log('[WEBHOOK] ' + message);
+		console.log(`[WEBHOOK] ${message}`);
 		return {
 			message,
 		};
@@ -409,6 +405,7 @@ export class ContentPagesController {
 		PermissionName.EDIT_OWN_CONTENT_PAGES
 	)
 	async duplicateContentBlockImages(
+		// biome-ignore lint/suspicious/noExplicitAny: json blob for content page
 		@Body() contentBlockJson: any,
 		@SessionUser() user: SessionUserEntity
 	): Promise<DbContentPage> {
@@ -534,6 +531,7 @@ export class ContentPagesController {
 	public async getContentPageById(@Param('id') id: string): Promise<DbContentPage> {
 		try {
 			return await this.contentPagesService.getContentPageById(id);
+			// biome-ignore lint/suspicious/noExplicitAny: error can be any type
 		} catch (err: any) {
 			if (err?.response?.additionalInfo?.code === 'NOT_FOUND') {
 				throw new NotFoundException('The content page with id was not found');

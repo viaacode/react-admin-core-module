@@ -7,7 +7,7 @@ import { SessionUserEntity } from '../users/classes/session-user';
 import { TableColumnPreferencesService } from './services/table-column-preferences.service';
 
 @ApiTags('TableColumnPreferences')
-@Controller(process.env.ADMIN_CORE_ROUTES_PREFIX + '/table-column-preferences')
+@Controller(`${process.env.ADMIN_CORE_ROUTES_PREFIX}/table-column-preferences`)
 export class TableColumnPreferencesController {
 	constructor(protected tableColumnPreferencesService: TableColumnPreferencesService) {}
 

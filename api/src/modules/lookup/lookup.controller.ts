@@ -4,7 +4,7 @@ import type { AvoLomLomField } from '@viaa/avo2-types';
 import { LookupService } from './lookup.service';
 
 @ApiTags('Lookup')
-@Controller(process.env.ADMIN_CORE_ROUTES_PREFIX + '/lookup')
+@Controller(`${process.env.ADMIN_CORE_ROUTES_PREFIX}/lookup`)
 export class LookupController {
 	constructor(private lookupService: LookupService) {}
 

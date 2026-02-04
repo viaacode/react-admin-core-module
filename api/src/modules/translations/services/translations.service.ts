@@ -131,7 +131,7 @@ export class TranslationsService implements OnApplicationBootstrap {
 			if (component === Component.BACKEND) {
 				await this.refreshBackendTranslations();
 			}
-		} catch (err: any) {
+		} catch (err) {
 			throw customError('Failed to insert or update the translation', err, {
 				component,
 				location,
@@ -165,7 +165,7 @@ export class TranslationsService implements OnApplicationBootstrap {
 			);
 
 			await this.cacheManager.reset();
-		} catch (err: any) {
+		} catch (err) {
 			throw customError('Failed to insert the translation', err, {
 				component,
 				location,
@@ -196,7 +196,7 @@ export class TranslationsService implements OnApplicationBootstrap {
 			);
 
 			await this.cacheManager.reset();
-		} catch (err: any) {
+		} catch (err) {
 			throw customError('Failed to update the translation', err, {
 				component,
 				location,
@@ -265,7 +265,7 @@ export class TranslationsService implements OnApplicationBootstrap {
 
 	public async getFrontendTranslations(languageCode: Locale): Promise<KeyValueTranslations> {
 		const translations = await this.cacheManager.wrap(
-			'FRONTEND_TRANSLATIONS_' + languageCode,
+			`FRONTEND_TRANSLATIONS_${languageCode}`,
 			async () => {
 				const translations = await this.getTranslationsByComponent(
 					[Component.FRONTEND, Component.ADMIN_CORE],

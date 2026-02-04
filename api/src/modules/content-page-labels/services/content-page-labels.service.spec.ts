@@ -32,6 +32,7 @@ const getDefaultContentPageLabelsResponse = (): {
 	app_content_label: GetContentPageLabelsQuery[];
 	app_content_label_aggregate: { aggregate: { count: number } };
 } => ({
+	// biome-ignore lint/suspicious/noExplicitAny: avo vs hetarchief number vs uuid
 	app_content_label: [mockGqlContentPageLabel1 as any],
 	app_content_label_aggregate: {
 		aggregate: {
@@ -56,6 +57,7 @@ const getDefaultContentPageLabelsByIdResponse = (): {
 	app_content_label: GetContentPageLabelByIdQuery[];
 	app_content_label_aggregate: { aggregate: { count: number } };
 } => ({
+	// biome-ignore lint/suspicious/noExplicitAny: avo vs hetarchief number vs uuid
 	app_content_label: [mockGqlContentPageLabel2 as any],
 	app_content_label_aggregate: {
 		aggregate: {
@@ -124,6 +126,7 @@ describe('ContentPageLabelsService', () => {
 					'{}'
 				);
 				expect(response).toBeUndefined();
+				// biome-ignore lint/suspicious/noExplicitAny: error can be any type
 			} catch (error: any) {
 				expect(error).toBeDefined();
 				expect(error.response.message).toContain(
@@ -151,6 +154,7 @@ describe('ContentPageLabelsService', () => {
 			try {
 				await contentPageLabelsService.fetchContentPageLabelById('unknown-id');
 				throw new Error('fetchContentPageLabelById should have thrown an error for unknown ids');
+				// biome-ignore lint/suspicious/noExplicitAny: error can be any type
 			} catch (error: any) {
 				expect(error).toBeDefined();
 				expect(error.response.message).toEqual(
@@ -190,6 +194,7 @@ describe('ContentPageLabelsService', () => {
 			try {
 				await contentPageLabelsService.insertContentPageLabels([new ContentPageLabelDto()]);
 				throw new Error('insertContentPageLabel should have thrown an error when null is returned');
+				// biome-ignore lint/suspicious/noExplicitAny: error can be any type
 			} catch (error: any) {
 				expect(error).toBeDefined();
 				expect(error.response.message).toEqual(
@@ -228,6 +233,7 @@ describe('ContentPageLabelsService', () => {
 			try {
 				await contentPageLabelsService.updateContentPageLabel(new ContentPageLabelDto());
 				throw new Error('updateContentPageLabel should have thrown an error when null is returned');
+				// biome-ignore lint/suspicious/noExplicitAny: error can be any type
 			} catch (error: any) {
 				expect(error).toBeDefined();
 				expect(error.response.message).toEqual(
@@ -246,6 +252,7 @@ describe('ContentPageLabelsService', () => {
 
 			try {
 				await contentPageLabelsService.deleteContentPageLabel(mockContentPageLabel1.id.toString());
+				// biome-ignore lint/suspicious/noExplicitAny: error can be any type
 			} catch (error: any) {
 				expect(error).toBeUndefined();
 			}
@@ -256,6 +263,7 @@ describe('ContentPageLabelsService', () => {
 
 			try {
 				await contentPageLabelsService.deleteContentPageLabel('unknown-id');
+				// biome-ignore lint/suspicious/noExplicitAny: error can be any type
 			} catch (error: any) {
 				expect(error).toBeDefined();
 				expect(error.response.message).toEqual(

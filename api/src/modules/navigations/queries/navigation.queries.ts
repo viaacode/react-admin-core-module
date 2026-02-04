@@ -1,3 +1,4 @@
+// biome-ignore-all lint/suspicious/noExplicitAny: any query
 import type { TypedDocumentNode } from '@graphql-typed-document-node/core';
 import { AvoCoreDatabaseType } from '@viaa/avo2-types';
 

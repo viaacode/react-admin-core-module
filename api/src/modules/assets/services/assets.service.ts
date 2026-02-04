@@ -1,4 +1,6 @@
 import { randomUUID as uuid } from 'node:crypto';
+import { Agent as HttpsAgent } from 'node:https';
+import path from 'node:path';
 import { Sha256 } from '@aws-crypto/sha256-js';
 import { type HeadObjectCommandOutput, S3 } from '@aws-sdk/client-s3';
 import {
@@ -16,9 +18,7 @@ import type { AvoFileUploadAssetType } from '@viaa/avo2-types';
 import { mapLimit } from 'blend-promise-utils';
 import fse from 'fs-extra';
 import got, { type ExtendOptions, type Got } from 'got';
-import { Agent as HttpsAgent } from 'https';
 import { escapeRegExp, isNil, kebabCase } from 'lodash';
-import path from 'path';
 import { DataService } from 'src/modules/data/services/data.service';
 import {
 	GetContentAssetDocument,
@@ -89,6 +89,7 @@ export class AssetsService {
 				this.token = await this.gotInstance.post<AssetToken>('', {
 					resolveBodyOnly: true, // this is duplicate but fixes a typing error
 				});
+				// biome-ignore lint/suspicious/noExplicitAny: error can be any type
 			} catch (err: any) {
 				throw new InternalServerErrorException({
 					message: 'Failed to get s3 token for the asset service',
@@ -171,6 +172,7 @@ export class AssetsService {
 				Key: key,
 				Bucket: process.env.ASSET_SERVER_BUCKET_NAME as string,
 			});
+			// biome-ignore lint/suspicious/noExplicitAny: error can be any type
 		} catch (err: any) {
 			if (err && ['NotFound', 'Forbidden'].includes(err.name)) {
 				return null;
@@ -197,6 +199,7 @@ export class AssetsService {
 
 	public async uploadAndTrack(
 		assetFiletype: AvoFileUploadAssetType,
+		// biome-ignore lint/suspicious/noExplicitAny: any file
 		file: any,
 		ownerId: string,
 		preferredKey?: string
@@ -213,6 +216,7 @@ export class AssetsService {
 
 	private async upload(
 		assetFiletype: AvoFileUploadAssetType,
+		// biome-ignore lint/suspicious/noExplicitAny: any file
 		file: any,
 		preferredKey?: string
 	): Promise<string> {
@@ -224,6 +228,7 @@ export class AssetsService {
 		return this.uploadToObjectStore(key, file);
 	}
 
+	// biome-ignore lint/suspicious/noExplicitAny: jany file
 	public async uploadToObjectStore(key: string, file: any): Promise<string> {
 		try {
 			let fileBody: Buffer;
@@ -293,7 +298,7 @@ export class AssetsService {
 			}
 
 			const url = new URL(process.env.ASSET_SERVER_ENDPOINT);
-			url.pathname = (process.env.ASSET_SERVER_BUCKET_NAME as string) + '/' + key;
+			url.pathname = `${process.env.ASSET_SERVER_BUCKET_NAME as string}/${key}`;
 			return url.href;
 		} catch (err) {
 			const error = {
@@ -428,9 +433,11 @@ export class AssetsService {
 	}
 
 	public async duplicateAssetsInJsonBlob(
+		// biome-ignore lint/suspicious/noExplicitAny: json blob
 		jsonBlob: any,
 		ownerId: string,
 		assetType: AvoFileUploadAssetType
+		// biome-ignore lint/suspicious/noExplicitAny: json blob
 	): Promise<any> {
 		let jsonBlobString = JSON.stringify(jsonBlob);
 		const assetUrlsRegex = new RegExp(

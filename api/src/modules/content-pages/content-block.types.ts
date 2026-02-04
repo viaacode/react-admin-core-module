@@ -245,8 +245,8 @@ export type SingleContentBlockComponentState =
 	| QuoteBlockComponentState
 	| RichTextBlockComponentState
 	| {
+			// biome-ignore lint/suspicious/noExplicitAny: Search block & content page meta
 			[k: string]: any;
-			// Search block & content page meta
 	  };
 
 export type ContentBlockComponentState =

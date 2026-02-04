@@ -35,9 +35,11 @@ export function getMockUserAvo(): AvoUserUser {
 				logo_url: 'https://assets-qas.viaa.be/images/OR-h41jm1d',
 				name: 'meemoo - Het Archief voor Onderwijs',
 				or_id: 'OR-h41jm1d',
+				// biome-ignore lint/suspicious/noExplicitAny: mock
 			} as any,
 			loms: [],
 			user: undefined,
+			// biome-ignore lint/suspicious/noExplicitAny: avo is numbers, hetarchief are strings
 			userGroupIds: ['1'] as any,
 			temp_access: null,
 			permissions: [
@@ -170,12 +172,13 @@ export function getMockUserAvo(): AvoUserUser {
 			],
 			educationLevels: ['Deeltijds kunstonderwijs', 'Secundair onderwijs'],
 			subjects: ['autotechniek', 'burgerzin'],
+			// biome-ignore lint/suspicious/noExplicitAny: organisation needs more fields but this is a mock
 			organizations: [{ organizationId: 'OR-b853h7v', unitId: null, label: 'VDAB' } as any],
 		},
 		created_at: '2019-10-23T16:21:17.984884+00:00',
 		expires_at: null,
 		last_access_at: '2022-11-28T14:14:44.713+00:00',
-		role: { label: 'Beheerder', name: 'admin' } as any,
+		role: { label: 'Beheerder', name: 'admin' },
 		role_id: 1,
 		uid: '517aec71-cf0e-4e08-99d1-8e7e042923f7',
 		updated_at: '2022-11-28T08:23:35.658+00:00',
@@ -253,7 +256,8 @@ export function getMockUserHetArchief(): AvoUserHetArchiefUser {
 			PermissionName.VIEW_USERS,
 			PermissionName.CAN_EDIT_PROFILE_INFO,
 		],
-		idp: AvoAuthIdpType.HETARCHIEF as any, // Definitions of Idp enum in different repos cause typescript to be confused and not recognize them as the same type
+		// biome-ignore lint/suspicious/noExplicitAny: Definitions of Idp enum in different repos cause typescript to be confused and not recognize them as the same type
+		idp: AvoAuthIdpType.HETARCHIEF as any,
 		isKeyUser: false,
 		isEvaluator: false,
 		lastAccessAt: '2023-04-04T18:51:03.032+02:00',
