@@ -1298,24 +1298,6 @@
   {
     "app": "HET_ARCHIEF",
     "component": "ADMIN_CORE",
-    "location": "admin/content-block/content-block",
-    "key": "grijs",
-    "language": "nl",
-    "value": "Grijs",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "admin/content-block/content-block",
-    "key": "grijs",
-    "language": "en",
-    "value": "Grey",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
     "location": "modules/content-page/const/content-block",
     "key": "zeegroen",
     "language": "nl",
@@ -1335,24 +1317,6 @@
     "app": "HET_ARCHIEF",
     "component": "ADMIN_CORE",
     "location": "modules/content-page/const/content-block",
-    "key": "platinum",
-    "language": "nl",
-    "value": "Platinum",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/const/content-block",
-    "key": "platinum",
-    "language": "en",
-    "value": "Platinum",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/const/content-block",
     "key": "zwart",
     "language": "nl",
     "value": "Zwart",
@@ -1365,96 +1329,6 @@
     "key": "zwart",
     "language": "en",
     "value": "Black",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/const/content-block",
-    "key": "neutraal",
-    "language": "nl",
-    "value": "Neutraal",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/const/content-block",
-    "key": "neutraal",
-    "language": "en",
-    "value": "Neutral",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/const/content-block",
-    "key": "zinc",
-    "language": "nl",
-    "value": "Zinc",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/const/content-block",
-    "key": "zinc",
-    "language": "en",
-    "value": "Zinc",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/const/content-block",
-    "key": "sky-blauw",
-    "language": "nl",
-    "value": "Lichtblauw",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/const/content-block",
-    "key": "sky-blauw",
-    "language": "en",
-    "value": "Sky blue",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/content-page/const/get-color-options",
-    "key": "meemoo-logo",
-    "language": "nl",
-    "value": "meemoo logo",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/content-page/const/get-color-options",
-    "key": "meemoo-logo",
-    "language": "en",
-    "value": "meemoo logo",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/const/content-block",
-    "key": "overgang-zwart-wit",
-    "language": "nl",
-    "value": "Overgang zwart-wit",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/const/content-block",
-    "key": "overgang-zwart-wit",
-    "language": "en",
-    "value": "Black and white transition",
     "value_type": "TEXT"
   },
   {
@@ -5726,690 +5600,6 @@
   {
     "app": "HET_ARCHIEF",
     "component": "ADMIN_CORE",
-    "location": "modules/maintenance-alerts/views/maintenance-alerts-edit-form",
-    "key": "error",
-    "language": "nl",
-    "value": "Fout",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/maintenance-alerts/views/maintenance-alerts-edit-form",
-    "key": "error",
-    "language": "en",
-    "value": "Error",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/maintenance-alerts/views/maintenance-alerts-edit-form",
-    "key": "het-valideren-van-het-formulier-is-mislukt",
-    "language": "nl",
-    "value": "Het valideren van het formulier is mislukt.",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/maintenance-alerts/views/maintenance-alerts-edit-form",
-    "key": "het-valideren-van-het-formulier-is-mislukt",
-    "language": "en",
-    "value": "Failed to validate te notification.",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/maintenance-alerts/views/maintenance-alerts-edit-form",
-    "key": "het-opslaan-van-de-melding-is-mislukt",
-    "language": "nl",
-    "value": "Het opslaan van de melding is mislukt",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/maintenance-alerts/views/maintenance-alerts-edit-form",
-    "key": "het-opslaan-van-de-melding-is-mislukt",
-    "language": "en",
-    "value": "Failed to save the notification",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/maintenance-alerts/views/maintenance-alerts-edit-form",
-    "key": "bepaalde-velden-in-het-formulier-zijn-niet-correct-ingevuld",
-    "language": "nl",
-    "value": "Bepaalde velden in het formulier zijn niet correct ingevuld.",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/maintenance-alerts/views/maintenance-alerts-edit-form",
-    "key": "bepaalde-velden-in-het-formulier-zijn-niet-correct-ingevuld",
-    "language": "en",
-    "value": "This form contains errors",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/alerts/views/alerts-overview",
-    "key": "succes",
-    "language": "nl",
-    "value": "Succes",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/alerts/views/alerts-overview",
-    "key": "succes",
-    "language": "en",
-    "value": "Success",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/alerts/views/alerts-overview",
-    "key": "het-aanpassen-van-de-melding-is-gelukt",
-    "language": "nl",
-    "value": "Het aanpassen van de melding is gelukt",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/alerts/views/alerts-overview",
-    "key": "het-aanpassen-van-de-melding-is-gelukt",
-    "language": "en",
-    "value": "Editing the notification was successful",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/alerts/views/alerts-overview",
-    "key": "error",
-    "language": "nl",
-    "value": "Error",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/alerts/views/alerts-overview",
-    "key": "error",
-    "language": "en",
-    "value": "Error",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/alerts/views/alerts-overview",
-    "key": "het-aanpassen-van-de-melding-is-mislukt",
-    "language": "nl",
-    "value": "Het aanpassen van de melding is mislukt",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/alerts/views/alerts-overview",
-    "key": "het-aanpassen-van-de-melding-is-mislukt",
-    "language": "en",
-    "value": "Editing the notification has failed",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/alerts/views/alerts-overview",
-    "key": "het-aanmaken-van-de-melding-is-gelukt",
-    "language": "nl",
-    "value": "Het aanmaken van de melding is gelukt",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/alerts/views/alerts-overview",
-    "key": "het-aanmaken-van-de-melding-is-gelukt",
-    "language": "en",
-    "value": "Creating the notification was successful",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/alerts/views/alerts-overview",
-    "key": "het-aanmaken-van-de-melding-is-mislukt",
-    "language": "nl",
-    "value": "Het aanmaken van de melding is mislukt",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/alerts/views/alerts-overview",
-    "key": "het-aanmaken-van-de-melding-is-mislukt",
-    "language": "en",
-    "value": "Creating the notification has failed",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/alerts/views/alerts-overview",
-    "key": "titel-melding",
-    "language": "nl",
-    "value": "Titel melding",
-    "value_type": "HTML"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/alerts/views/alerts-overview",
-    "key": "titel-melding",
-    "language": "en",
-    "value": "Title notification",
-    "value_type": "HTML"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/alerts/views/alerts-overview",
-    "key": "beschrijving",
-    "language": "nl",
-    "value": "Beschrijving",
-    "value_type": "HTML"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/alerts/views/alerts-overview",
-    "key": "beschrijving",
-    "language": "en",
-    "value": "Description",
-    "value_type": "HTML"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/alerts/views/alerts-overview",
-    "key": "verduidelijkend-icoon",
-    "language": "nl",
-    "value": "Verduidelijkend icoon",
-    "value_type": "HTML"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/alerts/views/alerts-overview",
-    "key": "verduidelijkend-icoon",
-    "language": "en",
-    "value": "Related icon",
-    "value_type": "HTML"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/alerts/views/alerts-overview",
-    "key": "zichtbaar-voor-gebruikersgroep",
-    "language": "nl",
-    "value": "Zichtbaar voor gebruikersgroep",
-    "value_type": "HTML"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/alerts/views/alerts-overview",
-    "key": "zichtbaar-voor-gebruikersgroep",
-    "language": "en",
-    "value": "Visible for user group",
-    "value_type": "HTML"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/alerts/views/alerts-overview",
-    "key": "zichtbaar-van",
-    "language": "nl",
-    "value": "Zichtbaar van",
-    "value_type": "HTML"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/alerts/views/alerts-overview",
-    "key": "zichtbaar-van",
-    "language": "en",
-    "value": "Visible from",
-    "value_type": "HTML"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/alerts/views/alerts-overview",
-    "key": "zichtbaar-tot",
-    "language": "nl",
-    "value": "Zichtbaar tot",
-    "value_type": "HTML"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/alerts/views/alerts-overview",
-    "key": "zichtbaar-tot",
-    "language": "en",
-    "value": "Visible until",
-    "value_type": "HTML"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/maintenance-alerts/views/maintenance-alerts-edit-form",
-    "key": "taal",
-    "language": "nl",
-    "value": "Taal",
-    "value_type": "HTML"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/maintenance-alerts/views/maintenance-alerts-edit-form",
-    "key": "taal",
-    "language": "en",
-    "value": "Language",
-    "value_type": "HTML"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/alerts/views/alerts-overview",
-    "key": "melding-aanmaken",
-    "language": "nl",
-    "value": "Melding aanmaken",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/alerts/views/alerts-overview",
-    "key": "melding-aanmaken",
-    "language": "en",
-    "value": "Create a notification",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/alerts/views/alerts-overview",
-    "key": "melding-aanpassen",
-    "language": "nl",
-    "value": "Melding aanpassen",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/alerts/views/alerts-overview",
-    "key": "melding-aanpassen",
-    "language": "en",
-    "value": "Edit notification",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/alerts/views/alerts-overview",
-    "key": "het-verwijderen-van-de-melding-is-gelukt",
-    "language": "nl",
-    "value": "Het verwijderen van de melding is gelukt",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/alerts/views/alerts-overview",
-    "key": "het-verwijderen-van-de-melding-is-gelukt",
-    "language": "en",
-    "value": "Removing the notification was successful",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/alerts/views/alerts-overview",
-    "key": "het-verwijderen-van-de-melding-is-mislukt",
-    "language": "nl",
-    "value": "Het verwijderen van de melding is mislukt",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/alerts/views/alerts-overview",
-    "key": "het-verwijderen-van-de-melding-is-mislukt",
-    "language": "en",
-    "value": "Removing the notification has failed",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/alerts/views/alerts-overview",
-    "key": "actief",
-    "language": "nl",
-    "value": "Actief",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/alerts/views/alerts-overview",
-    "key": "actief",
-    "language": "en",
-    "value": "Active",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/alerts/views/alerts-overview",
-    "key": "inactief",
-    "language": "nl",
-    "value": "Inactief",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/alerts/views/alerts-overview",
-    "key": "inactief",
-    "language": "en",
-    "value": "Inactive",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/maintenance-alerts/views/maintenance-alerts-overview",
-    "key": "hover-bewerk-notificatie",
-    "language": "nl",
-    "value": "Bewerk notificatie",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/maintenance-alerts/views/maintenance-alerts-overview",
-    "key": "hover-bewerk-notificatie",
-    "language": "en",
-    "value": "Edit notification",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/maintenance-alerts/views/maintenance-alerts-overview",
-    "key": "hover-verwijder-notificatie",
-    "language": "nl",
-    "value": "Verwijder notificatie",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/maintenance-alerts/views/maintenance-alerts-overview",
-    "key": "hover-verwijder-notificatie",
-    "language": "en",
-    "value": "Remove notification",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/alerts/views/alerts-overview",
-    "key": "titel-melding",
-    "language": "nl",
-    "value": "Titel melding",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/alerts/views/alerts-overview",
-    "key": "titel-melding",
-    "language": "en",
-    "value": "Title notification",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/alerts/views/alerts-overview",
-    "key": "zichtbaar-van",
-    "language": "nl",
-    "value": "Zichtbaar van",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/alerts/views/alerts-overview",
-    "key": "zichtbaar-van",
-    "language": "en",
-    "value": "Visible from",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/alerts/views/alerts-overview",
-    "key": "zichtbaar-tot",
-    "language": "nl",
-    "value": "Zichtbaar tot",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/alerts/views/alerts-overview",
-    "key": "zichtbaar-tot",
-    "language": "en",
-    "value": "Visible up to",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/alerts/views/alerts-overview",
-    "key": "status",
-    "language": "nl",
-    "value": "Status",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/alerts/views/alerts-overview",
-    "key": "status",
-    "language": "en",
-    "value": "Status",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/maintenance-alerts/views/maintenance-alerts-overview",
-    "key": "taal",
-    "language": "nl",
-    "value": "Taal",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/maintenance-alerts/views/maintenance-alerts-overview",
-    "key": "taal",
-    "language": "en",
-    "value": "Language",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/maintenance-alerts/views/maintenance-alerts-overview",
-    "key": "er-zijn-nog-geen-meldingen-aangemaakt",
-    "language": "nl",
-    "value": "Er zijn nog geen meldingen aangemaakt",
-    "value_type": "HTML"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/maintenance-alerts/views/maintenance-alerts-overview",
-    "key": "er-zijn-nog-geen-meldingen-aangemaakt",
-    "language": "en",
-    "value": "No notifications have been created yet",
-    "value_type": "HTML"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/alerts/views/alerts-overview",
-    "key": "er-zijn-geen-meldingen-gevonden",
-    "language": "nl",
-    "value": "Er zijn geen meldingen gevonden",
-    "value_type": "HTML"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/alerts/views/alerts-overview",
-    "key": "er-zijn-geen-meldingen-gevonden",
-    "language": "en",
-    "value": "No notifications found",
-    "value_type": "HTML"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/maintenance-alerts/views/maintenance-alerts-overview",
-    "key": "zoeken-op-titel-of-bericht",
-    "language": "nl",
-    "value": "Zoeken op titel of bericht",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/maintenance-alerts/views/maintenance-alerts-overview",
-    "key": "zoeken-op-titel-of-bericht",
-    "language": "en",
-    "value": "Search by title or message",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/maintenance-alerts/views/maintenance-alerts-overview",
-    "key": "er-zijn-geen-meldingen-gevonden-die-voldoen-aan-je-zoekterm",
-    "language": "nl",
-    "value": "Er zijn geen meldingen gevonden die voldoen aan je zoekterm",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/maintenance-alerts/views/maintenance-alerts-overview",
-    "key": "er-zijn-geen-meldingen-gevonden-die-voldoen-aan-je-zoekterm",
-    "language": "en",
-    "value": "No notifications were found that match your search term",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/maintenance-alerts/views/maintenance-alerts-overview",
-    "key": "zoek-input-aria-label",
-    "language": "nl",
-    "value": "Doorzoek de meldingen",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/maintenance-alerts/views/maintenance-alerts-overview",
-    "key": "zoek-input-aria-label",
-    "language": "en",
-    "value": "Search notifications",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/alerts/views/alerts-overview",
-    "key": "meldingen",
-    "language": "nl",
-    "value": "Meldingen",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/alerts/views/alerts-overview",
-    "key": "meldingen",
-    "language": "en",
-    "value": "Notifications",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/alerts/views/alerts-overview",
-    "key": "nieuwe-melding-aanmaken",
-    "language": "nl",
-    "value": "Nieuwe melding aanmaken",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/alerts/views/alerts-overview",
-    "key": "nieuwe-melding-aanmaken",
-    "language": "en",
-    "value": "Create a new notification",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/alerts/views/alerts-overview",
-    "key": "het-verwijderen-van-een-melding-kan-niet-ongedaan-gemaakt-worden",
-    "language": "nl",
-    "value": "Het verwijderen van een melding kan niet ongedaan gemaakt worden",
-    "value_type": "HTML"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/alerts/views/alerts-overview",
-    "key": "het-verwijderen-van-een-melding-kan-niet-ongedaan-gemaakt-worden",
-    "language": "en",
-    "value": "Removing a notification cannot be undone",
-    "value_type": "HTML"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
     "location": "modules/navigation/views/navigation-detail",
     "key": "success",
     "language": "nl",
@@ -6860,24 +6050,6 @@
   {
     "app": "HET_ARCHIEF",
     "component": "ADMIN_CORE",
-    "location": "admin/menu/views/menu-overview",
-    "key": "navigatie-overzicht",
-    "language": "nl",
-    "value": "Navigatie overzicht",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "admin/menu/views/menu-overview",
-    "key": "navigatie-overzicht",
-    "language": "en",
-    "value": "Navigation overview",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
     "location": "modules/navigation/views/navigation-overview",
     "key": "het-ophalen-van-de-navigatie-balken-is-mislukt",
     "language": "nl",
@@ -7148,24 +6320,6 @@
   {
     "app": "HET_ARCHIEF",
     "component": "ADMIN_CORE",
-    "location": "constants",
-    "key": "het-archief-voor-onderwijs",
-    "language": "nl",
-    "value": "Het Archief voor Onderwijs",
-    "value_type": "HTML"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "constants",
-    "key": "het-archief-voor-onderwijs",
-    "language": "en",
-    "value": "The Archive for Education",
-    "value_type": "HTML"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
     "location": "admin/users/user",
     "key": "verwijder-alle-content",
     "language": "nl",
@@ -7251,42 +6405,6 @@
     "key": "zet-alle-content-over-naar-een-andere-gebruiker",
     "language": "en",
     "value": "Move all content to another user",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/admin/shared/helpers/link",
-    "key": "error",
-    "language": "nl",
-    "value": "Error",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/admin/shared/helpers/link",
-    "key": "error",
-    "language": "en",
-    "value": "Error",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "shared/helpers/link",
-    "key": "de-navigatie-is-afgebroken-wegens-foutieve-parameters",
-    "language": "nl",
-    "value": "De navigatie is afgebroken wegens foute parameters.",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "shared/helpers/link",
-    "key": "de-navigatie-is-afgebroken-wegens-foutieve-parameters",
-    "language": "en",
-    "value": "Navigation has been interrupted due to faulty parameters.",
     "value_type": "TEXT"
   },
   {
@@ -13034,6 +12152,42 @@
   {
     "app": "HET_ARCHIEF",
     "component": "ADMIN_CORE",
+    "location": "modules/admin/shared/helpers/link",
+    "key": "error",
+    "language": "nl",
+    "value": "Error",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/admin/shared/helpers/link",
+    "key": "error",
+    "language": "en",
+    "value": "Error",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "shared/helpers/link",
+    "key": "de-navigatie-is-afgebroken-wegens-foutieve-parameters",
+    "language": "nl",
+    "value": "De navigatie is afgebroken wegens foute parameters.",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "shared/helpers/link",
+    "key": "de-navigatie-is-afgebroken-wegens-foutieve-parameters",
+    "language": "en",
+    "value": "Navigation has been interrupted due to faulty parameters.",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
     "location": "admin/content-block/helpers/generators/hero",
     "key": "alt-title-text",
     "language": "nl",
@@ -17929,6 +17083,420 @@
   },
   {
     "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "admin/users/user",
+    "key": "beoordelaar",
+    "language": "nl",
+    "value": "Beoordelaar",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "admin/users/user",
+    "key": "beoordelaar",
+    "language": "en",
+    "value": "Beoordelaar",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/views/content-page-detail-meta-data",
+    "key": "seo-afbeelding",
+    "language": "nl",
+    "value": "Seo afbeelding",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/views/content-page-detail-meta-data",
+    "key": "seo-afbeelding",
+    "language": "en",
+    "value": "Seo afbeelding",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/views/content-page-overview",
+    "key": "het-ophalen-van-de-content-paginas-is-mislukt",
+    "language": "nl",
+    "value": "Het ophalen van de content paginas is mislukt",
+    "value_type": "HTML"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/views/content-page-overview",
+    "key": "het-ophalen-van-de-content-paginas-is-mislukt",
+    "language": "en",
+    "value": "Het ophalen van de content paginas is mislukt",
+    "value_type": "HTML"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/user/helpers/render-user-overview-table-cells",
+    "key": "geblokkeerd-ja",
+    "language": "nl",
+    "value": "Geblokkeerd ja",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/user/helpers/render-user-overview-table-cells",
+    "key": "geblokkeerd-ja",
+    "language": "en",
+    "value": "Geblokkeerd ja",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/user/helpers/render-user-overview-table-cells",
+    "key": "geblokkeerd-nee",
+    "language": "nl",
+    "value": "Geblokkeerd nee",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/user/helpers/render-user-overview-table-cells",
+    "key": "geblokkeerd-nee",
+    "language": "en",
+    "value": "Geblokkeerd nee",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/user/helpers/render-user-overview-table-cells",
+    "key": "sleutelgebruiker-ja",
+    "language": "nl",
+    "value": "Sleutelgebruiker ja",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/user/helpers/render-user-overview-table-cells",
+    "key": "sleutelgebruiker-ja",
+    "language": "en",
+    "value": "Sleutelgebruiker ja",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/user/helpers/render-user-overview-table-cells",
+    "key": "sleutelgebruiker-nee",
+    "language": "nl",
+    "value": "Sleutelgebruiker nee",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/user/helpers/render-user-overview-table-cells",
+    "key": "sleutelgebruiker-nee",
+    "language": "en",
+    "value": "Sleutelgebruiker nee",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/user/helpers/render-user-overview-table-cells",
+    "key": "beoordelaar-ja",
+    "language": "nl",
+    "value": "Beoordelaar ja",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/user/helpers/render-user-overview-table-cells",
+    "key": "beoordelaar-ja",
+    "language": "en",
+    "value": "Beoordelaar ja",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/user/helpers/render-user-overview-table-cells",
+    "key": "beoordelaar-nee",
+    "language": "nl",
+    "value": "Beoordelaar nee",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/user/helpers/render-user-overview-table-cells",
+    "key": "beoordelaar-nee",
+    "language": "en",
+    "value": "Beoordelaar nee",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/user/helpers/render-user-overview-table-cells",
+    "key": "uitzondering-ja",
+    "language": "nl",
+    "value": "Uitzondering ja",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/user/helpers/render-user-overview-table-cells",
+    "key": "uitzondering-ja",
+    "language": "en",
+    "value": "Uitzondering ja",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/user/helpers/render-user-overview-table-cells",
+    "key": "uitzondering-nee",
+    "language": "nl",
+    "value": "Uitzondering nee",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/user/helpers/render-user-overview-table-cells",
+    "key": "uitzondering-nee",
+    "language": "en",
+    "value": "Uitzondering nee",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/user/helpers/render-user-overview-table-cells",
+    "key": "geblokkeerd-ja",
+    "language": "nl",
+    "value": "Geblokkeerd ja",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/user/helpers/render-user-overview-table-cells",
+    "key": "geblokkeerd-ja",
+    "language": "en",
+    "value": "Geblokkeerd ja",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/user/helpers/render-user-overview-table-cells",
+    "key": "geblokkeerd-nee",
+    "language": "nl",
+    "value": "Geblokkeerd nee",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/user/helpers/render-user-overview-table-cells",
+    "key": "geblokkeerd-nee",
+    "language": "en",
+    "value": "Geblokkeerd nee",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/user/helpers/render-user-overview-table-cells",
+    "key": "sleutelgebruiker-ja",
+    "language": "nl",
+    "value": "Sleutelgebruiker ja",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/user/helpers/render-user-overview-table-cells",
+    "key": "sleutelgebruiker-ja",
+    "language": "en",
+    "value": "Sleutelgebruiker ja",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/user/helpers/render-user-overview-table-cells",
+    "key": "sleutelgebruiker-nee",
+    "language": "nl",
+    "value": "Sleutelgebruiker nee",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/user/helpers/render-user-overview-table-cells",
+    "key": "sleutelgebruiker-nee",
+    "language": "en",
+    "value": "Sleutelgebruiker nee",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/user/helpers/render-user-overview-table-cells",
+    "key": "beoordelaar-ja",
+    "language": "nl",
+    "value": "Beoordelaar ja",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/user/helpers/render-user-overview-table-cells",
+    "key": "beoordelaar-ja",
+    "language": "en",
+    "value": "Beoordelaar ja",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/user/helpers/render-user-overview-table-cells",
+    "key": "beoordelaar-nee",
+    "language": "nl",
+    "value": "Beoordelaar nee",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/user/helpers/render-user-overview-table-cells",
+    "key": "beoordelaar-nee",
+    "language": "en",
+    "value": "Beoordelaar nee",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/user/helpers/render-user-overview-table-cells",
+    "key": "uitzondering-ja",
+    "language": "nl",
+    "value": "Uitzondering ja",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/user/helpers/render-user-overview-table-cells",
+    "key": "uitzondering-ja",
+    "language": "en",
+    "value": "Uitzondering ja",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/user/helpers/render-user-overview-table-cells",
+    "key": "uitzondering-nee",
+    "language": "nl",
+    "value": "Uitzondering nee",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/user/helpers/render-user-overview-table-cells",
+    "key": "uitzondering-nee",
+    "language": "en",
+    "value": "Uitzondering nee",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/content-edit-form/content-edit-form",
+    "key": "afbeelding-voor-seo-aanbevolen-1200-x-630",
+    "language": "nl",
+    "value": "Afbeelding voor seo aanbevolen 1200 x 630",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/content-edit-form/content-edit-form",
+    "key": "afbeelding-voor-seo-aanbevolen-1200-x-630",
+    "language": "en",
+    "value": "Afbeelding voor seo aanbevolen 1200 x 630",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/content-edit-form/content-edit-form",
+    "key": "seo-afbeelding",
+    "language": "nl",
+    "value": "Seo afbeelding",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/content-edit-form/content-edit-form",
+    "key": "seo-afbeelding",
+    "language": "en",
+    "value": "Seo afbeelding",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "error/views/error-view",
+    "key": "de-pagina-werd-niet-gevonden-ingelogd",
+    "language": "nl",
+    "value": "De pagina werd niet gevonden ingelogd",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "error/views/error-view",
+    "key": "de-pagina-werd-niet-gevonden-ingelogd",
+    "language": "en",
+    "value": "De pagina werd niet gevonden ingelogd",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "error/views/error-view",
+    "key": "ga-naar-de-hulppagina",
+    "language": "nl",
+    "value": "Ga naar de hulppagina",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "error/views/error-view",
+    "key": "ga-naar-de-hulppagina",
+    "language": "en",
+    "value": "Ga naar de hulppagina",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
     "component": "FRONTEND",
     "location": "pages/404",
     "key": "niet-gevonden",
@@ -20687,7 +20255,7 @@
     "location": "modules/cp/const/material-requests",
     "key": "request-name",
     "language": "nl",
-    "value": "Request name",
+    "value": "Naam aanvraag",
     "value_type": "TEXT"
   },
   {
@@ -20714,7 +20282,7 @@
     "location": "modules/account/utils/create-label-value-material-request-reuse-form",
     "key": "bedoeld-gebruik",
     "language": "en",
-    "value": "Bedoeld gebruik",
+    "value": "Intended use",
     "value_type": "TEXT"
   },
   {
@@ -20732,7 +20300,7 @@
     "location": "modules/account/utils/create-label-value-material-request-reuse-form",
     "key": "ontsluiting-materiaal",
     "language": "en",
-    "value": "Ontsluiting materiaal",
+    "value": "Accessibility of material",
     "value_type": "TEXT"
   },
   {
@@ -20750,7 +20318,7 @@
     "location": "modules/account/utils/create-label-value-material-request-reuse-form",
     "key": "type-ontsluiting",
     "language": "en",
-    "value": "Type ontsluiting",
+    "value": "Type of access",
     "value_type": "TEXT"
   },
   {
@@ -20768,7 +20336,7 @@
     "location": "modules/account/utils/create-label-value-material-request-reuse-form",
     "key": "wijzigingen",
     "language": "en",
-    "value": "Wijzigingen",
+    "value": "Edits",
     "value_type": "TEXT"
   },
   {
@@ -20786,7 +20354,7 @@
     "location": "modules/account/utils/create-label-value-material-request-reuse-form",
     "key": "geografisch-hergebruik",
     "language": "en",
-    "value": "Geografisch hergebruik",
+    "value": "Use by location",
     "value_type": "TEXT"
   },
   {
@@ -20804,7 +20372,7 @@
     "location": "modules/account/utils/create-label-value-material-request-reuse-form",
     "key": "gebruik-doorheen-de-tijd",
     "language": "en",
-    "value": "Gebruik doorheen de tijd",
+    "value": "Timeline of use",
     "value_type": "TEXT"
   },
   {
@@ -20948,7 +20516,7 @@
     "location": "modules/account/views/account-my-application-list",
     "key": "geen-aanvragen-te-vervolledigen",
     "language": "en",
-    "value": "Geen aanvragen te vervolledigen",
+    "value": "No requests to complete",
     "value_type": "HTML"
   },
   {
@@ -20984,7 +20552,7 @@
     "location": "modules/account/views/account-my-application-list",
     "key": "reden-van-aanvraag",
     "language": "en",
-    "value": "Reden van aanvraag",
+    "value": "Reason for request",
     "value_type": "TEXT"
   },
   {
@@ -21002,7 +20570,7 @@
     "location": "modules/account/views/account-my-application-list",
     "key": "materiaal-selectie",
     "language": "en",
-    "value": "Materiaal selectie",
+    "value": "Material selection",
     "value_type": "TEXT"
   },
   {
@@ -21020,7 +20588,7 @@
     "location": "modules/account/views/account-my-application-list",
     "key": "downloadkwaliteit",
     "language": "en",
-    "value": "Downloadkwaliteit",
+    "value": "Download quality",
     "value_type": "TEXT"
   },
   {
@@ -21056,7 +20624,7 @@
     "location": "modules/account/views/account-my-application-list",
     "key": "aanvraaglijst",
     "language": "en",
-    "value": "Aanvraaglijst",
+    "value": "Request list",
     "value_type": "TEXT"
   },
   {
@@ -21074,7 +20642,7 @@
     "location": "modules/account/views/account-my-application-list",
     "key": "aanvraaglijst-meta-titel",
     "language": "en",
-    "value": "Aanvraaglijst meta titel",
+    "value": "Request list meta title",
     "value_type": "TEXT"
   },
   {
@@ -21083,7 +20651,7 @@
     "location": "modules/account/views/account-my-application-list",
     "key": "aanvraaglijst-meta-omschrijving",
     "language": "nl",
-    "value": "Aanvraaglijst meta omschrijving",
+    "value": "Aanvraaglijst meta-omschrijving",
     "value_type": "TEXT"
   },
   {
@@ -21092,8 +20660,80 @@
     "location": "modules/account/views/account-my-application-list",
     "key": "aanvraaglijst-meta-omschrijving",
     "language": "en",
-    "value": "Aanvraaglijst meta omschrijving",
+    "value": "Request list metadescription",
     "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/application-list-sent/application-list-sent",
+    "key": "je-aanvraag-werd-verstuurd",
+    "language": "nl",
+    "value": "Je aanvraag werd verstuurd",
+    "value_type": "HTML"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/application-list-sent/application-list-sent",
+    "key": "je-aanvraag-werd-verstuurd",
+    "language": "en",
+    "value": "Your request has been sent",
+    "value_type": "HTML"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/application-list-sent/application-list-sent",
+    "key": "we-houden-je-op-de-hoogte-van-je-aanvragen-ondertussen-kan-je",
+    "language": "nl",
+    "value": "We houden je op de hoogte van je aanvragen. Ondertussen kan je ...",
+    "value_type": "HTML"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/application-list-sent/application-list-sent",
+    "key": "we-houden-je-op-de-hoogte-van-je-aanvragen-ondertussen-kan-je",
+    "language": "en",
+    "value": "We&#x27;ll keep you informed about your item requests. In the meantime, you can ...",
+    "value_type": "HTML"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/application-list-sent/application-list-sent",
+    "key": "zoeken-in-de-catalogus",
+    "language": "nl",
+    "value": "Zoeken in de catalogus",
+    "value_type": "HTML"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/application-list-sent/application-list-sent",
+    "key": "zoeken-in-de-catalogus",
+    "language": "en",
+    "value": "Search in the catalogue",
+    "value_type": "HTML"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/application-list-sent/application-list-sent",
+    "key": "mijn-materiaalaanvragen-raadplegen",
+    "language": "nl",
+    "value": "Mijn materiaalaanvragen raadplegen",
+    "value_type": "HTML"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/application-list-sent/application-list-sent",
+    "key": "mijn-materiaalaanvragen-raadplegen",
+    "language": "en",
+    "value": "Check my item requests",
+    "value_type": "HTML"
   },
   {
     "app": "HET_ARCHIEF",
@@ -21731,7 +21371,7 @@
     "location": "modules/account/views/account-my-material-requests",
     "key": "ga-naar-de-alle-materiaalaanvragen",
     "language": "nl",
-    "value": "Ga naar de alle materiaalaanvragen",
+    "value": "Ga naar alle materiaalaanvragen",
     "value_type": "TEXT"
   },
   {
@@ -21740,7 +21380,7 @@
     "location": "modules/account/views/account-my-material-requests",
     "key": "ga-naar-de-alle-materiaalaanvragen",
     "language": "en",
-    "value": "Ga naar de alle materiaalaanvragen",
+    "value": "See all material requests",
     "value_type": "TEXT"
   },
   {
@@ -21758,7 +21398,7 @@
     "location": "modules/account/views/account-my-material-requests",
     "key": "ga-naar-de-inkomende-materiaalaanvragen-van-mijn-organisatie",
     "language": "en",
-    "value": "Ga naar de inkomende materiaalaanvragen van mijn organisatie",
+    "value": "See all incoming requests for my organisation",
     "value_type": "TEXT"
   },
   {
@@ -21812,7 +21452,7 @@
     "location": "modules/account/views/account-my-material-requests",
     "key": "type-aanvraag",
     "language": "en",
-    "value": "Type aanvraag",
+    "value": "Request type",
     "value_type": "TEXT"
   },
   {
@@ -21830,7 +21470,7 @@
     "location": "modules/account/views/account-my-material-requests",
     "key": "pas-toe",
     "language": "en",
-    "value": "Pas toe",
+    "value": "Apply",
     "value_type": "TEXT"
   },
   {
@@ -21884,7 +21524,7 @@
     "location": "modules/account/views/account-my-material-requests",
     "key": "status-aanvraag",
     "language": "en",
-    "value": "Status aanvraag",
+    "value": "Request status",
     "value_type": "TEXT"
   },
   {
@@ -21920,7 +21560,7 @@
     "location": "modules/account/views/account-my-material-requests",
     "key": "aanvraag-met-download",
     "language": "en",
-    "value": "Aanvraag met download",
+    "value": "Request with download",
     "value_type": "TEXT"
   },
   {
@@ -21938,7 +21578,7 @@
     "location": "modules/account/views/account-my-material-requests",
     "key": "zoek",
     "language": "en",
-    "value": "Zoek",
+    "value": "Search",
     "value_type": "TEXT"
   },
   {
@@ -22287,6 +21927,24 @@
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
     "location": "modules/admin/const/material-requests",
+    "key": "aanvrager",
+    "language": "nl",
+    "value": "Aanvrager",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/const/material-requests",
+    "key": "aanvrager",
+    "language": "en",
+    "value": "Applicant",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/const/material-requests",
     "key": "aanbieder",
     "language": "nl",
     "value": "aanbieder",
@@ -22299,6 +21957,24 @@
     "key": "aanbieder",
     "language": "en",
     "value": "organsiation",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/const/material-requests",
+    "key": "titel-materiaal",
+    "language": "nl",
+    "value": "Titel materiaal",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/const/material-requests",
+    "key": "titel-materiaal",
+    "language": "en",
+    "value": "Title material",
     "value_type": "TEXT"
   },
   {
@@ -22335,6 +22011,42 @@
     "key": "type",
     "language": "en",
     "value": "type",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/const/material-requests",
+    "key": "status",
+    "language": "nl",
+    "value": "Status",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/const/material-requests",
+    "key": "status",
+    "language": "en",
+    "value": "Status",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/const/material-requests",
+    "key": "download",
+    "language": "nl",
+    "value": "Download",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/const/material-requests",
+    "key": "download",
+    "language": "en",
+    "value": "Download",
     "value_type": "TEXT"
   },
   {
@@ -23295,6 +23007,150 @@
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
     "location": "pages/admin/materiaalaanvragen/index",
+    "key": "type",
+    "language": "nl",
+    "value": "Type",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "pages/admin/materiaalaanvragen/index",
+    "key": "type",
+    "language": "en",
+    "value": "Type",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "pages/admin/materiaalaanvragen/index",
+    "key": "type-aanvraag",
+    "language": "nl",
+    "value": "Type aanvraag",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "pages/admin/materiaalaanvragen/index",
+    "key": "type-aanvraag",
+    "language": "en",
+    "value": "Type aanvraag",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "pages/admin/materiaalaanvragen/index",
+    "key": "pas-toe",
+    "language": "nl",
+    "value": "Pas toe",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "pages/admin/materiaalaanvragen/index",
+    "key": "pas-toe",
+    "language": "en",
+    "value": "Pas toe",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "pages/admin/materiaalaanvragen/index",
+    "key": "reset",
+    "language": "nl",
+    "value": "Reset",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "pages/admin/materiaalaanvragen/index",
+    "key": "reset",
+    "language": "en",
+    "value": "Reset",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "pages/admin/materiaalaanvragen/index",
+    "key": "status",
+    "language": "nl",
+    "value": "Status",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "pages/admin/materiaalaanvragen/index",
+    "key": "status",
+    "language": "en",
+    "value": "Status",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "pages/admin/materiaalaanvragen/index",
+    "key": "status-aanvraag",
+    "language": "nl",
+    "value": "Status aanvraag",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "pages/admin/materiaalaanvragen/index",
+    "key": "status-aanvraag",
+    "language": "en",
+    "value": "Status aanvraag",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "pages/admin/materiaalaanvragen/index",
+    "key": "download",
+    "language": "nl",
+    "value": "Download",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "pages/admin/materiaalaanvragen/index",
+    "key": "download",
+    "language": "en",
+    "value": "Download",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "pages/admin/materiaalaanvragen/index",
+    "key": "aanvraag-met-download",
+    "language": "nl",
+    "value": "Aanvraag met download",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "pages/admin/materiaalaanvragen/index",
+    "key": "aanvraag-met-download",
+    "language": "en",
+    "value": "Aanvraag met download",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "pages/admin/materiaalaanvragen/index",
     "key": "aanbieder",
     "language": "nl",
     "value": "Aanbieder",
@@ -23307,6 +23163,24 @@
     "key": "aanbieder",
     "language": "en",
     "value": "Organsiation",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "pages/admin/materiaalaanvragen/index",
+    "key": "aanbieder-aanvraag",
+    "language": "nl",
+    "value": "Aanbieder aanvraag",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "pages/admin/materiaalaanvragen/index",
+    "key": "aanbieder-aanvraag",
+    "language": "en",
+    "value": "Aanbieder aanvraag",
     "value_type": "TEXT"
   },
   {
@@ -23720,7 +23594,7 @@
     "location": "modules/cp/const/material-requests",
     "key": "aanvrager",
     "language": "en",
-    "value": "Aanvrager",
+    "value": "Applicant",
     "value_type": "TEXT"
   },
   {
@@ -23738,7 +23612,7 @@
     "location": "modules/cp/const/material-requests",
     "key": "titel-materiaal",
     "language": "en",
-    "value": "Titel materiaal",
+    "value": "Title material",
     "value_type": "TEXT"
   },
   {
@@ -24152,7 +24026,7 @@
     "location": "modules/cp/views/cp-admin-material-requests",
     "key": "ga-naar-mijn-uitgaande-materiaalaanvragen",
     "language": "en",
-    "value": "Ga naar mijn uitgaande materiaalaanvragen",
+    "value": "Check my outgoing material requests",
     "value_type": "TEXT"
   },
   {
@@ -24188,7 +24062,7 @@
     "location": "modules/cp/views/cp-admin-material-requests",
     "key": "type-aanvraag",
     "language": "en",
-    "value": "Type aanvraag",
+    "value": "Request type",
     "value_type": "TEXT"
   },
   {
@@ -24206,7 +24080,7 @@
     "location": "modules/cp/views/cp-admin-material-requests",
     "key": "pas-toe",
     "language": "en",
-    "value": "Pas toe",
+    "value": "Apply",
     "value_type": "TEXT"
   },
   {
@@ -24260,7 +24134,7 @@
     "location": "modules/cp/views/cp-admin-material-requests",
     "key": "status-aanvraag",
     "language": "en",
-    "value": "Status aanvraag",
+    "value": "Request status",
     "value_type": "TEXT"
   },
   {
@@ -24296,7 +24170,7 @@
     "location": "modules/cp/views/cp-admin-material-requests",
     "key": "aanvraag-met-download",
     "language": "en",
-    "value": "Aanvraag met download",
+    "value": "Request with download",
     "value_type": "TEXT"
   },
   {
@@ -24899,7 +24773,7 @@
     "location": "modules/material-requests/const/index",
     "key": "status-none",
     "language": "nl",
-    "value": "status-none",
+    "value": "geen status",
     "value_type": "TEXT"
   },
   {
@@ -24908,7 +24782,7 @@
     "location": "modules/material-requests/const/index",
     "key": "status-none",
     "language": "en",
-    "value": "status-none",
+    "value": "status none",
     "value_type": "TEXT"
   },
   {
@@ -24926,7 +24800,7 @@
     "location": "modules/material-requests/const/index",
     "key": "download-quality-normal",
     "language": "en",
-    "value": "Afspeelkwaliteit (engels)",
+    "value": "Playback quality",
     "value_type": "TEXT"
   },
   {
@@ -24944,7 +24818,7 @@
     "location": "modules/material-requests/const/index",
     "key": "download-quality-high",
     "language": "en",
-    "value": "Hogere kwaliteit (engels)",
+    "value": "Higher quality",
     "value_type": "TEXT"
   },
   {
@@ -24953,7 +24827,7 @@
     "location": "modules/material-requests/const/index",
     "key": "intended-usage-intern",
     "language": "nl",
-    "value": "Intern gebruik zonder vergoeding of financieel voordeel: mijn organisatie gaat geen vergoeding vragen of beoogt geen financieel voordeel met het interne gebruik van dit materiaal. Het materiaal wordt niet gebruikt op een manier die een financieel of zakelijk voordeel creëert voor de organisatie; inclusief gebruik voor onderwijs en educatieve doeleinden, culturele doeleinden (zoals vertoning in musea), en evenals voor niet-commercieel onderzoek worden beschouwd als niet-commerciële exploitatie.",
+    "value": "Intern gebruik zonder vergoeding of financieel voordeel",
     "value_type": "TEXT"
   },
   {
@@ -24962,7 +24836,7 @@
     "location": "modules/material-requests/const/index",
     "key": "intended-usage-intern",
     "language": "en",
-    "value": "Intern gebruik zonder vergoeding of financieel voordeel: mijn organisatie gaat geen vergoeding vragen of beoogt geen financieel voordeel met het interne gebruik van dit materiaal. Het materiaal wordt niet gebruikt op een manier die een financieel of zakelijk voordeel creëert voor de organisatie; inclusief gebruik voor onderwijs en educatieve doeleinden, culturele doeleinden (zoals vertoning in musea), en evenals voor niet-commercieel onderzoek worden beschouwd als niet-commerciële exploitatie. (engels)",
+    "value": "Internal use without compensation or financial benefit",
     "value_type": "TEXT"
   },
   {
@@ -24980,7 +24854,7 @@
     "location": "modules/material-requests/const/index",
     "key": "intended-usage-non-commercial",
     "language": "en",
-    "value": "Extern gebruik zonder direct commercieel voordeel: ook voor extern gebruik (engels)",
+    "value": "External use without a direct commercial advantage: also for external use",
     "value_type": "TEXT"
   },
   {
@@ -24998,7 +24872,7 @@
     "location": "modules/material-requests/const/index",
     "key": "intended-usage-commercial",
     "language": "en",
-    "value": "Directe commerciële exploitatie: vergoeding gelinkt aan je aankoop (engels)",
+    "value": "Direct commercial exploitation: compensation linked to your purchase",
     "value_type": "TEXT"
   },
   {
@@ -25016,7 +24890,7 @@
     "location": "modules/material-requests/const/index",
     "key": "distribution-access-intern",
     "language": "en",
-    "value": "Enkel binnen de organisatie (engels)",
+    "value": "Internal access only",
     "value_type": "TEXT"
   },
   {
@@ -25034,7 +24908,7 @@
     "location": "modules/material-requests/const/index",
     "key": "distribution-access-intern-extern",
     "language": "en",
-    "value": "Organisatie en externe gebruikers (engels)",
+    "value": "Internal and external access",
     "value_type": "TEXT"
   },
   {
@@ -25052,7 +24926,7 @@
     "location": "modules/material-requests/const/index",
     "key": "distribution-type-digital-offline",
     "language": "en",
-    "value": "distribution-type-digital-offline",
+    "value": "Digital distribution via a medium without internet connection (DVD, USB-storage)",
     "value_type": "TEXT"
   },
   {
@@ -25070,7 +24944,7 @@
     "location": "modules/material-requests/const/index",
     "key": "distribution-type-digital-online",
     "language": "en",
-    "value": "distribution-type-digital-online",
+    "value": "Digital distribution via network connection, namely:",
     "value_type": "TEXT"
   },
   {
@@ -25088,7 +24962,7 @@
     "location": "modules/material-requests/const/index",
     "key": "distribution-type-other",
     "language": "en",
-    "value": "distribution-type-other",
+    "value": "Other, namely; ",
     "value_type": "TEXT"
   },
   {
@@ -25124,7 +24998,7 @@
     "location": "modules/material-requests/const/index",
     "key": "distribution-digital-online-no-auth",
     "language": "en",
-    "value": "distribution-digital-online-no-auth",
+    "value": "a publicly accessible service (website or app) without user authentication",
     "value_type": "TEXT"
   },
   {
@@ -25142,7 +25016,7 @@
     "location": "modules/material-requests/const/index",
     "key": "distribution-digital-online-with-auth",
     "language": "en",
-    "value": "distribution-digital-online-with-auth",
+    "value": "a publicly accessible service (website or app) with user authentication",
     "value_type": "TEXT"
   },
   {
@@ -25160,7 +25034,7 @@
     "location": "modules/material-requests/const/index",
     "key": "material-request-editing-none",
     "language": "en",
-    "value": "material-request-editing-none",
+    "value": "My organisation will not alter or edit the material",
     "value_type": "TEXT"
   },
   {
@@ -25178,7 +25052,7 @@
     "location": "modules/material-requests/const/index",
     "key": "material-request-editing-with-changes",
     "language": "en",
-    "value": "material-request-editing-with-changes",
+    "value": "My organisation will edit the source material",
     "value_type": "TEXT"
   },
   {
@@ -25196,7 +25070,7 @@
     "location": "modules/material-requests/const/index",
     "key": "geographical-usage-completely-local",
     "language": "en",
-    "value": "geographical-usage-completely-local",
+    "value": "Focused on the local Flemish or Belgian market",
     "value_type": "TEXT"
   },
   {
@@ -25214,7 +25088,7 @@
     "location": "modules/material-requests/const/index",
     "key": "geographical-usage-not-completely-local",
     "language": "en",
-    "value": "Niet integraal gericht op de Vlaamse of Belgische markt (engels)",
+    "value": "Not entirely focused on the local Flemish or Belgian market",
     "value_type": "TEXT"
   },
   {
@@ -25232,7 +25106,7 @@
     "location": "modules/material-requests/const/index",
     "key": "time-usage-unlimited",
     "language": "en",
-    "value": "Onbeperkt (engels)",
+    "value": "Unlimited",
     "value_type": "TEXT"
   },
   {
@@ -25250,7 +25124,7 @@
     "location": "modules/material-requests/const/index",
     "key": "time-usage-in-time",
     "language": "en",
-    "value": "time-usage-in-time",
+    "value": "Time-restricted",
     "value_type": "TEXT"
   },
   {
@@ -26498,78 +26372,6 @@
   {
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
-    "location": "modules/account/components/application-list-sent/application-list-sent",
-    "key": "je-aanvraag-werd-verstuurd",
-    "language": "nl",
-    "value": "Je aanvraag werd verstuurd",
-    "value_type": "HTML"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/application-list-sent/application-list-sent",
-    "key": "je-aanvraag-werd-verstuurd",
-    "language": "en",
-    "value": "Je aanvraag werd verstuurd",
-    "value_type": "HTML"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/application-list-sent/application-list-sent",
-    "key": "we-houden-je-op-de-hoogte-van-je-aanvragen-ondertussen-kan-je",
-    "language": "nl",
-    "value": "We houden je op de hoogte van je aanvragen. Ondertussen kan je...",
-    "value_type": "HTML"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/application-list-sent/application-list-sent",
-    "key": "we-houden-je-op-de-hoogte-van-je-aanvragen-ondertussen-kan-je",
-    "language": "en",
-    "value": "We houden je op de hoogte van je aanvragen. Ondertussen kan je...",
-    "value_type": "HTML"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/application-list-sent/application-list-sent",
-    "key": "zoeken-in-de-catalogus",
-    "language": "nl",
-    "value": "Zoeken in de catalogus",
-    "value_type": "HTML"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/application-list-sent/application-list-sent",
-    "key": "zoeken-in-de-catalogus",
-    "language": "en",
-    "value": "Zoeken in de catalogus",
-    "value_type": "HTML"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/application-list-sent/application-list-sent",
-    "key": "mijn-materiaalaanvragen-raadplegen",
-    "language": "nl",
-    "value": "Mijn materiaalaanvragen raadplegen",
-    "value_type": "HTML"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/application-list-sent/application-list-sent",
-    "key": "mijn-materiaalaanvragen-raadplegen",
-    "language": "en",
-    "value": "Mijn materiaalaanvragen raadplegen",
-    "value_type": "HTML"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
     "location": "pages/account/mijn-mappen/folder-slug/index",
     "key": "nieuwe-map-aanmaken",
     "language": "nl",
@@ -26906,7 +26708,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
     "key": "er-ging-iets-mis",
     "language": "en",
-    "value": "Er ging iets mis",
+    "value": "Something went wrong",
     "value_type": "TEXT"
   },
   {
@@ -26924,7 +26726,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
     "key": "er-ging-iets-mis-tijdens-het-annuleren-van-de-aanvraag",
     "language": "en",
-    "value": "Er ging iets mis tijdens het annuleren van de aanvraag",
+    "value": "Something went wrong when cancelling your request",
     "value_type": "TEXT"
   },
   {
@@ -26942,7 +26744,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
     "key": "goedkeuren",
     "language": "en",
-    "value": "Goedkeuren",
+    "value": "Approve",
     "value_type": "TEXT"
   },
   {
@@ -26960,7 +26762,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
     "key": "afkeuren",
     "language": "en",
-    "value": "Afkeuren",
+    "value": "Deny",
     "value_type": "TEXT"
   },
   {
@@ -26996,7 +26798,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
     "key": "annuleer-aanvraag",
     "language": "en",
-    "value": "Annuleer aanvraag",
+    "value": "Cancel request",
     "value_type": "TEXT"
   },
   {
@@ -27005,7 +26807,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
     "key": "downlooad-materiaal",
     "language": "nl",
-    "value": "Downlooad materiaal",
+    "value": "Download materiaal",
     "value_type": "TEXT"
   },
   {
@@ -27014,7 +26816,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
     "key": "downlooad-materiaal",
     "language": "en",
-    "value": "Downlooad materiaal",
+    "value": "Download material",
     "value_type": "TEXT"
   },
   {
@@ -27032,7 +26834,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
     "key": "download-in-voorbereiding",
     "language": "en",
-    "value": "Download in voorbereiding",
+    "value": "Preparing download",
     "value_type": "TEXT"
   },
   {
@@ -27050,7 +26852,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
     "key": "download-is-verlopen-op",
     "language": "en",
-    "value": "Download is verlopen op {{downloadExpirationDate}}",
+    "value": "Download is expired on {{downloadExpirationDate}}",
     "value_type": "TEXT"
   },
   {
@@ -27059,7 +26861,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
     "key": "download-is-beschikbaar-tot-en-met",
     "language": "nl",
-    "value": "Download is beschikbaar tot en met",
+    "value": "Download is beschikbaar tot en met {{downloadExpirationDate}}",
     "value_type": "TEXT"
   },
   {
@@ -27068,7 +26870,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
     "key": "download-is-beschikbaar-tot-en-met",
     "language": "en",
-    "value": "Download is beschikbaar tot en met",
+    "value": "Download is available until {{downloadExpirationDate}} (engels)",
     "value_type": "TEXT"
   },
   {
@@ -27086,7 +26888,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
     "key": "aangevraagd-op",
     "language": "en",
-    "value": "Aangevraagd op {{requestedAt}}",
+    "value": "Requested at {{requestedAt}}",
     "value_type": "TEXT"
   },
   {
@@ -27104,7 +26906,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
     "key": "goedgekeurd-op",
     "language": "en",
-    "value": "Goedgekeurd op {{approvedAt}}",
+    "value": "Approved on {{approvedAt}}",
     "value_type": "TEXT"
   },
   {
@@ -27122,7 +26924,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
     "key": "geweigerd-op",
     "language": "en",
-    "value": "Geweigerd op {{deniedAt}}",
+    "value": "Denied on {{deniedAt}}",
     "value_type": "TEXT"
   },
   {
@@ -27140,7 +26942,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
     "key": "geannulleerd-op",
     "language": "en",
-    "value": "Geannulleerd op {{cancelledAt}}",
+    "value": "Cancelled on {{cancelledAt}}",
     "value_type": "TEXT"
   },
   {
@@ -27158,7 +26960,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
     "key": "motivatie",
     "language": "en",
-    "value": "Motivatie",
+    "value": "Motivation",
     "value_type": "TEXT"
   },
   {
@@ -27176,7 +26978,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
     "key": "fragment-resolutie",
     "language": "en",
-    "value": "Fragment resolutie",
+    "value": "Fragment resolution",
     "value_type": "TEXT"
   },
   {
@@ -27212,7 +27014,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
     "key": "naam-aanvraag",
     "language": "en",
-    "value": "Naam aanvraag",
+    "value": "Request name",
     "value_type": "TEXT"
   },
   {
@@ -27230,7 +27032,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
     "key": "aanvrager",
     "language": "en",
-    "value": "Aanvrager",
+    "value": "Applicant",
     "value_type": "TEXT"
   },
   {
@@ -27248,7 +27050,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
     "key": "aanvragende-organisatie",
     "language": "en",
-    "value": "Aanvragende organisatie",
+    "value": "Organisation making the request",
     "value_type": "TEXT"
   },
   {
@@ -27302,7 +27104,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
     "key": "verder-werken",
     "language": "en",
-    "value": "Verder werken",
+    "value": "Continue your work",
     "value_type": "HTML"
   },
   {
@@ -27320,7 +27122,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
     "key": "ja-ik-ben-zeker",
     "language": "en",
-    "value": "Ja, ik ben zeker",
+    "value": "Yes, I&#x27;m sure",
     "value_type": "HTML"
   },
   {
@@ -27338,7 +27140,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
     "key": "ben-je-zeker-dat-je-deze-aanvraag-wil-annuleren",
     "language": "en",
-    "value": "Ben je zeker dat je deze aanvraag wil annuleren?",
+    "value": "Are you sure you want to cancel this request?",
     "value_type": "HTML"
   },
   {
@@ -27356,7 +27158,7 @@
     "location": "modules/account/components/material-request-download-button/material-request-download-button",
     "key": "download-materiaal",
     "language": "en",
-    "value": "download materiaal",
+    "value": "download material",
     "value_type": "TEXT"
   },
   {
@@ -27410,7 +27212,7 @@
     "location": "modules/account/components/material-request-status-update-blade/material-request-status-update-blade",
     "key": "aanvraag",
     "language": "en",
-    "value": "Aanvraag",
+    "value": "Request",
     "value_type": "TEXT"
   },
   {
@@ -27428,7 +27230,7 @@
     "location": "modules/account/components/material-request-status-update-blade/material-request-status-update-blade",
     "key": "aanvraag-goedkeuren",
     "language": "en",
-    "value": "Aanvraag goedkeuren",
+    "value": "Approve request",
     "value_type": "TEXT"
   },
   {
@@ -27446,7 +27248,7 @@
     "location": "modules/account/components/material-request-status-update-blade/material-request-status-update-blade",
     "key": "aanvraag-afkeuren",
     "language": "en",
-    "value": "Aanvraag afkeuren",
+    "value": "Deny request",
     "value_type": "TEXT"
   },
   {
@@ -27482,7 +27284,7 @@
     "location": "modules/account/components/material-request-term-agreement-blade/material-request-term-agreement-blade",
     "key": "aanvullende-gebruiksvoorwaarden-bij-aanvragen",
     "language": "en",
-    "value": "Aanvullende gebruiksvoorwaarden bij aanvragen",
+    "value": "Additional terms of use for requests",
     "value_type": "TEXT"
   },
   {
@@ -27500,7 +27302,7 @@
     "location": "modules/account/components/material-request-term-agreement-blade/material-request-term-agreement-blade",
     "key": "sluit",
     "language": "en",
-    "value": "Sluit",
+    "value": "Close",
     "value_type": "TEXT"
   },
   {
@@ -27518,7 +27320,7 @@
     "location": "modules/account/components/material-request-term-agreement-blade/material-request-term-agreement-blade",
     "key": "ik-ga-akkoord",
     "language": "en",
-    "value": "Ik ga akkoord",
+    "value": "I agree",
     "value_type": "TEXT"
   },
   {
@@ -27527,7 +27329,7 @@
     "location": "modules/account/components/material-request-term-agreement-blade/material-request-term-agreement-blade",
     "key": "aanvullende-gebruiksvoorwaarden-bij-aanvragen-inhoud",
     "language": "nl",
-    "value": "<p style=\"text-align:start;\" size=\"2\" _root=\"[object Object]\" __ownerid=\"undefined\" __hash=\"undefined\" __altered=\"false\">Gepubliceerd op 29 september 2025</p><p style=\"text-align:start;text-indent:2em;\" data-renderer-start-pos=\"222\" data-local-id=\"2998c8bb-3f18-4d65-8993-a4b946ce76a1\"> </p><p></p><p></p><p><strong>Over het aanvraagformulier</strong></p><p>Via dit aanvraagformulier kan je bij de aanbieder toelating vragen om audiovisueel materiaal te hergebruiken. Het is belangrijk dat je alle informatie in dit aanvraagformulier controleert en naar waarheid invult. Zo kan de aanbieder jouw aanvraag behandelen en eventueel toelating verlenen. Je kan de status van je aanvraag volgen via het platform.  </p><p></p><p></p><p></p><p><strong>Over meemoo en het platform</strong></p><p>Je begrijpt en erkent dat: </p><ul><li>jouw aanvraag enkel betrekking heeft op het gebruik dat je expliciet hebt beschreven in het hergebruikformulier. Wanneer je een nieuw gebruik plant, dat niet meer gedekt wordt door je gemaakte  beschrijving, zal je een nieuwe aanvraag moeten indienen. </li><li>Het meemoo-platform je materiaal kan tonen om het te kunnen evalueren en aanvragen te richten tot de aanbieders. Jij en jouw organisatie  krijgen geen rechten op het materiaal op basis van deze functionaliteit, of op basis van de verzending van dit formulier. Jij en jouw organisatie zullen zich onthouden van enig ander gebruik van dat materiaal, totdat je een expliciet bevestigend antwoord ontvangt van de aanbieder, en de eventuele gevraagde vergoeding hebt betaald. Elk ander gebruik is volledig op eigen risico. </li><li>Meemoo enkel optreedt als tussenpersoon die communicatie tussen jou en de aanbieders van het materiaal vergemakkelijkt. Meemoo kan zelf geen toelatingen verlenen met betrekking tot het materiaal.</li></ul>",
+    "value": "<p style=\"text-align:start;\" size=\"2\" _root=\"[object Object]\" __ownerid=\"undefined\" __hash=\"undefined\" __altered=\"false\">Gepubliceerd op 29 september 2025</p><p style=\"text-align:start;text-indent:2em;\" data-renderer-start-pos=\"222\" data-local-id=\"2998c8bb-3f18-4d65-8993-a4b946ce76a1\"> </p><p></p><p></p><p><strong>Over het aanvraagformulier</strong></p><p>Via dit aanvraagformulier kan je bij de aanbieder toelating vragen om audiovisueel materiaal te hergebruiken. Het is belangrijk dat je alle informatie in dit aanvraagformulier controleert en naar waarheid invult. Zo kan de aanbieder jouw aanvraag behandelen en eventueel toelating verlenen. Je kan de status van je aanvraag volgen via het platform.  </p><p></p><p></p><p></p><p><strong>Over meemoo en het platform</strong></p><p>Je begrijpt en erkent dat: </p><ul><li>jouw aanvraag enkel betrekking heeft op het gebruik dat je expliciet hebt beschreven in het hergebruikformulier. Wanneer je een nieuw gebruik plant, dat niet meer gedekt wordt door je gemaakte  beschrijving, zal je een nieuwe aanvraag moeten indienen; </li><li>het meemoo-platform je materiaal kan tonen om het te kunnen evalueren en aanvragen te richten tot de aanbieders. Jij en jouw organisatie  krijgen geen rechten op het materiaal op basis van deze functionaliteit, of op basis van de verzending van dit formulier. Jij en jouw organisatie zullen zich onthouden van enig ander gebruik van dat materiaal, totdat je een expliciet bevestigend antwoord ontvangt van de aanbieder, en de eventuele gevraagde vergoeding hebt betaald. Elk ander gebruik is volledig op eigen risico; </li><li>meemoo enkel optreedt als tussenpersoon die communicatie tussen jou en de aanbieders van het materiaal vergemakkelijkt. Meemoo kan zelf geen toelatingen verlenen met betrekking tot het materiaal.</li></ul>",
     "value_type": "HTML"
   },
   {
@@ -27536,7 +27338,7 @@
     "location": "modules/account/components/material-request-term-agreement-blade/material-request-term-agreement-blade",
     "key": "aanvullende-gebruiksvoorwaarden-bij-aanvragen-inhoud",
     "language": "en",
-    "value": "Aanvullende gebruiksvoorwaarden bij aanvragen inhoud",
+    "value": "<p>Published on the 29th of september 2025</p><p></p><p></p><p></p><p><strong>About the application form</strong><br/>With this application form, you can request authorisation to use audiovisual material of an organisation. It is important that you check all of the information in this form, and that you fill them in truthfully. That way, the organisation that manages your application can process - and potentially approve - your request more easily. You can track the status of your application on this platform.</p><p></p><p><strong>About meemoo and the platform</strong></p><p>You understand and acknowledge that:</p><ul><li>your application only applies to the use described in the application form. If you plan to use the material for anything else, you will have to make a new application;</li><li>the meemoo-platform will allow you to consult material in order to make an informed decision before making a request. No rights are given to you or your organisation based on this functionality or based on the making of a request for material. You and your organisation will refrain from using the material <span style=\"color:#000000\"><span style=\"font-size:16px\"><span style=\"background-color:#ffffff\">in any other way </span></span></span>until you have received the approval of the organisation that manages it, and until you have paid the compensation required (if any). Any other use is at your own risk;</li><li>meemoo is only an intermediary and facilitator in the communication between you and the organisation that manages the requested material. Meemoo cannot approve applications for audiovisual material.</li></ul>",
     "value_type": "HTML"
   },
   {
@@ -27554,7 +27356,7 @@
     "location": "modules/account/components/personal-info/personal-info",
     "key": "er-zijn-geen-aanvragen-te-vervolledigen",
     "language": "en",
-    "value": "Er zijn geen aanvragen te vervolledigen",
+    "value": "There are no requests to complete",
     "value_type": "TEXT"
   },
   {
@@ -27563,7 +27365,7 @@
     "location": "modules/account/components/personal-info/personal-info",
     "key": "de-hoedanigheid-is-verplicht",
     "language": "nl",
-    "value": "De hoedanigheid is verplicht",
+    "value": "De rol is verplicht",
     "value_type": "TEXT"
   },
   {
@@ -27572,7 +27374,7 @@
     "location": "modules/account/components/personal-info/personal-info",
     "key": "de-hoedanigheid-is-verplicht",
     "language": "en",
-    "value": "De hoedanigheid is verplicht",
+    "value": "Role is required",
     "value_type": "TEXT"
   },
   {
@@ -27581,7 +27383,7 @@
     "location": "modules/account/components/personal-info/personal-info",
     "key": "de-aanvraag-naam-is-verplicht",
     "language": "nl",
-    "value": "De aanvraag naam is verplicht",
+    "value": "De aanvraagnaam is verplicht",
     "value_type": "TEXT"
   },
   {
@@ -27590,7 +27392,7 @@
     "location": "modules/account/components/personal-info/personal-info",
     "key": "de-aanvraag-naam-is-verplicht",
     "language": "en",
-    "value": "De aanvraag naam is verplicht",
+    "value": "An request name is required",
     "value_type": "TEXT"
   },
   {
@@ -27608,7 +27410,7 @@
     "location": "modules/account/components/personal-info/personal-info",
     "key": "keur-de-aanvullende-gebruiksvoorwaarden-bij-aanvragen-goed",
     "language": "en",
-    "value": "Keur de aanvullende gebruiksvoorwaarden bij aanvragen goed.",
+    "value": "Agree to the additional terms of use for requests.",
     "value_type": "TEXT"
   },
   {
@@ -27626,7 +27428,7 @@
     "location": "modules/account/components/personal-info/personal-info",
     "key": "ik-nam-kennis-en-ga-akkoord-met-de",
     "language": "en",
-    "value": "Ik nam kennis en ga akkoord met de",
+    "value": "I have read and agree to the",
     "value_type": "TEXT"
   },
   {
@@ -27644,7 +27446,7 @@
     "location": "modules/account/components/personal-info/personal-info",
     "key": "aanvullende-gebruiksvoorwaarden-bij-aanvragen",
     "language": "en",
-    "value": "Aanvullende gebruiksvoorwaarden bij aanvragen",
+    "value": "Additional terms of use for requests",
     "value_type": "TEXT"
   },
   {
@@ -27662,7 +27464,7 @@
     "location": "modules/account/components/personal-info/personal-info",
     "key": "ik-wens-me-in-te-schrijven-voor-de-nieuwsbrief",
     "language": "en",
-    "value": "Ik wens me in te schrijven voor de nieuwsbrief",
+    "value": "I would like to sign up for the newsletter",
     "value_type": "HTML"
   },
   {
@@ -27680,7 +27482,7 @@
     "location": "modules/account/components/personal-info/personal-info",
     "key": "er-ging-iets-mis",
     "language": "en",
-    "value": "er-ging-iets-mis",
+    "value": "something-went-wrong",
     "value_type": "TEXT"
   },
   {
@@ -27698,7 +27500,7 @@
     "location": "modules/account/components/personal-info/personal-info",
     "key": "er-ging-iets-mis-tijdens-het-versturen",
     "language": "en",
-    "value": "er-ging-iets-mis-tijdens-het-versturen",
+    "value": "something-went-wrong-sending-your-request",
     "value_type": "TEXT"
   },
   {
@@ -27716,7 +27518,7 @@
     "location": "modules/account/components/personal-info/personal-info",
     "key": "verstuur-aanvraag",
     "language": "en",
-    "value": "Verstuur aanvraag",
+    "value": "Send request",
     "value_type": "TEXT"
   },
   {
@@ -27734,7 +27536,7 @@
     "location": "modules/account/components/personal-info/personal-info",
     "key": "keer-terug",
     "language": "en",
-    "value": "Keer terug",
+    "value": "Go back",
     "value_type": "TEXT"
   },
   {
@@ -27752,7 +27554,7 @@
     "location": "modules/account/components/personal-info/personal-info",
     "key": "naam-aanvraag",
     "language": "en",
-    "value": "Naam aanvraag",
+    "value": "Request name",
     "value_type": "TEXT"
   },
   {
@@ -27770,7 +27572,7 @@
     "location": "modules/account/components/personal-info/personal-info",
     "key": "door-je-aanvraag-een-naam-te-geven-behoud-je-het-overzicht-van-de-objecten-die-samen-in-een-aanvraag-uitgevoerd-werden",
     "language": "en",
-    "value": "Door je aanvraag een naam te geven behoud je het overzicht van de objecten die samen in één aanvraag uitgevoerd werden.",
+    "value": "By naming your request, you create a concise overview of the individual items that are a part of one request. ",
     "value_type": "TEXT"
   },
   {
@@ -27788,7 +27590,7 @@
     "location": "modules/account/components/personal-info/personal-info",
     "key": "met-deze-naam-groepeer-je-al-je-huidige-aanvragen-in-je-lijst-dit-is-handig-om-later-het-overzicht-te-behouden",
     "language": "en",
-    "value": "Met deze naam groepeer je al je huidige aanvragen in je lijst. Dit is handig om later het overzicht te behouden.",
+    "value": "Use this name to group all of the items in your request list. This is useful for keeping a clean overview.",
     "value_type": "TEXT"
   },
   {
@@ -27806,7 +27608,7 @@
     "location": "modules/account/components/personal-info/personal-info",
     "key": "jouw-rol",
     "language": "en",
-    "value": "Jouw rol",
+    "value": "Your role",
     "value_type": "TEXT"
   },
   {
@@ -27878,7 +27680,7 @@
     "location": "modules/account/components/personal-info/personal-info",
     "key": "requester-capacity-other",
     "language": "en",
-    "value": "Others",
+    "value": "Other",
     "value_type": "TEXT"
   },
   {
@@ -27932,7 +27734,7 @@
     "location": "modules/account/components/personal-info/personal-info",
     "key": "aanpassing-van-jouw-gegevens-aanvragen-label",
     "language": "en",
-    "value": "Aanpassing van jouw gegevens aanvragen (engels)",
+    "value": "Request changes to your data",
     "value_type": "TEXT"
   },
   {
@@ -27950,7 +27752,7 @@
     "location": "modules/account/components/personal-info/personal-info",
     "key": "over-jou",
     "language": "en",
-    "value": "Over jou",
+    "value": "About you",
     "value_type": "TEXT"
   },
   {
@@ -27968,7 +27770,7 @@
     "location": "modules/account/components/personal-info/personal-info",
     "key": "jouw-organisatie",
     "language": "en",
-    "value": "Jouw organisatie",
+    "value": "your organisation",
     "value_type": "TEXT"
   },
   {
@@ -30380,7 +30182,7 @@
     "location": "modules/home/components/request-access-blade/request-access-blade",
     "key": "reden-van-aanvraag-is-een-verplicht-veld",
     "language": "en",
-    "value": "'Reason for application' is a mandatory field.",
+    "value": "'Reason for request' is a mandatory field.",
     "value_type": "TEXT"
   },
   {
@@ -30542,7 +30344,7 @@
     "location": "modules/home/components/request-access-blade/request-access-blade",
     "key": "reden-van-aanvraag",
     "language": "en",
-    "value": "Reason for application",
+    "value": "Reason for request",
     "value_type": "HTML"
   },
   {
@@ -32630,7 +32432,7 @@
     "location": "modules/navigation/components/material-request-center-blade/material-request-center-blade",
     "key": "aanvraaglijst",
     "language": "en",
-    "value": "Application list",
+    "value": "Request list",
     "value_type": "TEXT"
   },
   {
@@ -32648,7 +32450,7 @@
     "location": "modules/navigation/components/material-request-center-blade/material-request-center-blade",
     "key": "vraag-dit-materiaal-rechtstreeks-aan-bij-de-aanbieder-s",
     "language": "en",
-    "value": "Vraag dit materiaal rechtstreeks aan bij de aanbieder(s).",
+    "value": "Request this material directly from the organisation(s) that manage(s) it.",
     "value_type": "TEXT"
   },
   {
@@ -32810,7 +32612,7 @@
     "location": "modules/navigation/components/material-request-center-blade/material-request-center-blade",
     "key": "ben-je-zeker-dat-je-deze-aanvraag-wil-verwijderen-de-informatie-in-het-hergebruikformulier-zal-hiermee-ook-verwijderd-worden",
     "language": "en",
-    "value": "Ben je zeker dat je deze aanvraag wil verwijderen? De informatie in het hergebruikformulier zal hiermee ook verwijderd worden.",
+    "value": "Are you sure you want to cancel this request? This will also delete the information from the form about usage.",
     "value_type": "HTML"
   },
   {
@@ -33386,7 +33188,7 @@
     "location": "modules/shared/components/approve-request-blade/approve-request-blade",
     "key": "er-is-reeds-een-goedgekeurde-aanvraag-voor-deze-periode",
     "language": "en",
-    "value": "There is already an approved application for this period",
+    "value": "There is already an approved request for this period",
     "value_type": "HTML"
   },
   {
@@ -33404,7 +33206,7 @@
     "location": "modules/shared/components/approve-request-blade/approve-request-blade",
     "key": "navigeer-naar-de-reeds-goedgekeurde-aanvraag-voor-deze-periode",
     "language": "en",
-    "value": "Navigate to the already approved application for this period.",
+    "value": "Navigate to the already approved request for this period.",
     "value_type": "TEXT"
   },
   {
@@ -33422,7 +33224,7 @@
     "location": "modules/shared/components/approve-request-blade/approve-request-blade",
     "key": "bekijk-deze-aanvraag",
     "language": "en",
-    "value": "Review this application",
+    "value": "Review this request",
     "value_type": "HTML"
   },
   {
@@ -33566,7 +33368,7 @@
     "location": "modules/shared/components/confirm-modal-before-unload/confirm-modal-before-unload",
     "key": "er-zijn-nog-niet-opgeslagen-wijzigingen-weet-je-zeker-dat-je-de-pagina-wil-verlaten",
     "language": "en",
-    "value": "Er zijn nog niet opgeslagen wijzigingen. Weet je zeker dat je de pagina wil verlaten?",
+    "value": "Some of your changes have not been saved yet. Are you sure you want to leave this page?",
     "value_type": "TEXT"
   },
   {
@@ -33584,7 +33386,7 @@
     "location": "modules/shared/components/confirm-modal-before-unload/confirm-modal-before-unload",
     "key": "verder-werken",
     "language": "en",
-    "value": "Continue working",
+    "value": "Continue your work",
     "value_type": "TEXT"
   },
   {
@@ -33593,7 +33395,7 @@
     "location": "modules/shared/components/confirm-modal-before-unload/confirm-modal-before-unload",
     "key": "ja-ik-ben-zeker",
     "language": "nl",
-    "value": "Ja, ik ben zeker",
+    "value": "Ja, ik ben het zeker",
     "value_type": "TEXT"
   },
   {
@@ -33872,7 +33674,7 @@
     "location": "modules/shared/components/media-card/media-card",
     "key": "er-ging-iets-mis-beschrijving",
     "language": "en",
-    "value": "Something went wrong when sending in your application. Try it again later.",
+    "value": "Something went wrong when sending in your request. Try it again later.",
     "value_type": "TEXT"
   },
   {
@@ -34259,7 +34061,7 @@
     "location": "modules/shared/components/material-request-information/material-request-information",
     "key": "meer-informatie-over-aanvragen",
     "language": "nl",
-    "value": "Meer informatie over aanvragen",
+    "value": "<p><a href=\"https://qas.hetarchief.be/meer-informatie-over-aanvragen\" target=\"_blank\">Meer informatie over aanvragen</a></p>",
     "value_type": "HTML"
   },
   {
@@ -34268,7 +34070,7 @@
     "location": "modules/shared/components/material-request-information/material-request-information",
     "key": "meer-informatie-over-aanvragen",
     "language": "en",
-    "value": "Meer informatie over aanvragen",
+    "value": "<p><a href=\"https://qas.hetarchief.be/en/more-information-about-material-requests\" target=\"_blank\">More information about material requests</a></p>",
     "value_type": "HTML"
   },
   {
@@ -35168,7 +34970,7 @@
     "location": "modules/cp/components/request-status-chip/request-status-chip",
     "key": "open-aanvraag",
     "language": "en",
-    "value": "Open application",
+    "value": "Open request",
     "value_type": "HTML"
   },
   {
@@ -35582,7 +35384,7 @@
     "location": "modules/shared/components/visit-detail-blade/visit-detail-blade",
     "key": "er-ging-iets-mis-beschrijving",
     "language": "en",
-    "value": "Something went wrong while sending your application. Try it again later.",
+    "value": "Something went wrong while sending your request. Try it again later.",
     "value_type": "TEXT"
   },
   {
@@ -37238,7 +37040,7 @@
     "location": "modules/visitor-space/components/material-request-blade/material-request-blade",
     "key": "vul-bijkomende-informatie-aan-mobile",
     "language": "en",
-    "value": "Vul info aan",
+    "value": "Please fill in all the info",
     "value_type": "TEXT"
   },
   {
@@ -37256,7 +37058,7 @@
     "location": "modules/visitor-space/components/material-request-blade/material-request-blade",
     "key": "vul-bijkomende-informatie-aan",
     "language": "en",
-    "value": "Vul bijkomende informatie aan",
+    "value": "Please fill in the additional information",
     "value_type": "TEXT"
   },
   {
@@ -37328,7 +37130,7 @@
     "location": "modules/visitor-space/components/material-request-blade/material-request-blade",
     "key": "je-hebt-al-op-dit-materiaal-al-een-aanvraag-van-dit-type-ingediend-je-kan-wachten-op-de-behandeling-van-deze-aanvraag-of-ze-nog-annuleren-indien-de-aanbieder-ze-nog-niet-bekeken-heeft",
     "language": "en",
-    "value": "Je hebt al op dit materiaal al een aanvraag van dit type ingediend. Je kan wachten op de behandeling van deze aanvraag, of ze nog annuleren, indien de aanbieder ze nog niet bekeken heeft.",
+    "value": "You have already submitted a request of this type for this material. You can wait while your request is pending, or you can cancel it if the organisation is not yet in the process of handling your request.",
     "value_type": "TEXT"
   },
   {
@@ -37400,7 +37202,7 @@
     "location": "modules/visitor-space/components/material-request-blade/material-request-blade",
     "key": "hergebruikformulier-is-ingevuld",
     "language": "en",
-    "value": "Hergebruikformulier is ingevuld",
+    "value": "Form on intended use has been filled out",
     "value_type": "TEXT"
   },
   {
@@ -37418,7 +37220,7 @@
     "location": "modules/visitor-space/components/material-request-blade/material-request-blade",
     "key": "je-hebt-al-op-dit-materiaal-een-formulier-voor-hergebruik-ingevuld-als-je-het-type-aanvraag-verandert-zal-de-informatie-in-dit-formulier-onherroepelijk-verwijderd-worden-je-kan-de-inhoud-van-het-formulier-aanpassen-door-op-de-onderstaande-link-te-klikken",
     "language": "en",
-    "value": "Je hebt al op dit materiaal een formulier voor hergebruik ingevuld. Als je het type aanvraag verandert zal de informatie in dit formulier onherroepelijk verwijderd worden. Je kan de inhoud van het formulier aanpassen door op de onderstaande link te klikken.",
+    "value": "You have already filled out a form for intended use for this material. If you change the type of your request, this information will be lost. You can edit the content of the form by clicking on the link below.",
     "value_type": "TEXT"
   },
   {
@@ -37544,7 +37346,7 @@
     "location": "modules/visitor-space/components/material-request-blade/material-request-blade",
     "key": "je-hebt-al-op-dit-materiaal-een-formulier-voor-hergebruik-ingevuld-als-je-het-type-aanvraag-verandert-zal-de-informatie-in-dit-formulier-onherroepelijk-verwijderd-worden",
     "language": "en",
-    "value": "Je hebt al op dit materiaal een formulier voor hergebruik ingevuld. Als je het type aanvraag verandert zal de informatie in dit formulier onherroepelijk verwijderd worden.",
+    "value": "You have already filled out a form for intended use for this material. If you change the type of your request, the information in this form will be lost.",
     "value_type": "TEXT"
   },
   {
@@ -37652,7 +37454,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "bedoeld-gebruik-error-verplicht",
     "language": "en",
-    "value": "Duid aan welk gebruik van het materiaal voorzien is. (engels)",
+    "value": "Please indicate your intended use for this material",
     "value_type": "TEXT"
   },
   {
@@ -37670,7 +37472,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "bedoeld-gebruik-beschrijving-error-verplicht",
     "language": "en",
-    "value": "Bedoeld gebruik beschrijving - error verplicht",
+    "value": "Please describe your intended use of the material",
     "value_type": "TEXT"
   },
   {
@@ -38291,7 +38093,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "downloadkwaliteit-hogere-kwaliteit-omschrijving",
     "language": "nl",
-    "value": "<p><span style=\"font-size:10ptpx\"><span style=\"color:#000000\">Hoogst beschikbare kwaliteit</span></span></p>",
+    "value": "Hoogst beschikbare kwaliteit",
     "value_type": "HTML"
   },
   {
@@ -38300,7 +38102,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "downloadkwaliteit-hogere-kwaliteit-omschrijving",
     "language": "en",
-    "value": "<p><span style=\"color:#000000\">Hoogst beschikbare kwaliteit (engels)</span></p>",
+    "value": "Hoogst beschikbare kwaliteit (engels)",
     "value_type": "HTML"
   },
   {
@@ -38318,7 +38120,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "bedoeld-gebruik-beschrijving-label",
     "language": "en",
-    "value": "Beschrijf in eigen woorden waarvoor u het materiaal wenst te gebruiken (engels)",
+    "value": "Describe in your own words what you want to use this material for",
     "value_type": "TEXT"
   },
   {
@@ -38336,7 +38138,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "bedoeld-gebruik-beschrijving-vraag",
     "language": "en",
-    "value": "Beschrijf in eigen woorden waarvoor je het materiaal wenst te gebruiken. (engels)",
+    "value": "Describe in your own words what you intend to use this material for",
     "value_type": "TEXT"
   },
   {
@@ -38381,7 +38183,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "bedoeld-gebruik-intern-gebruik-zonder-vergoeding-label",
     "language": "nl",
-    "value": "Intern gebruik zonder vergoeding of financieel voordeel: mijn organisatie gaat geen vergoeding vragen of beoogt geen financieel voordeel met het interne gebruik van dit materiaal. Het materiaal wordt niet gebruikt op een manier die een financieel of zakelijk voordeel creëert voor de organisatie; inclusief gebruik voor onderwijs en educatieve doeleinden, culturele doeleinden (zoals vertoning in musea), en evenals voor niet-commercieel onderzoek worden beschouwd als niet-commerciële exploitatie.",
+    "value": "Intern gebruik zonder vergoeding of financieel voordeel",
     "value_type": "TEXT"
   },
   {
@@ -38390,7 +38192,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "bedoeld-gebruik-intern-gebruik-zonder-vergoeding-label",
     "language": "en",
-    "value": "Intern gebruik zonder vergoeding of financieel voordeel: mijn organisatie gaat geen vergoeding vragen of beoogt geen financieel voordeel met het interne gebruik van dit materiaal. Het materiaal wordt niet gebruikt op een manier die een financieel of zakelijk voordeel creëert voor de organisatie; inclusief gebruik voor onderwijs en educatieve doeleinden, culturele doeleinden (zoals vertoning in musea), en evenals voor niet-commercieel onderzoek worden beschouwd als niet-commerciële exploitatie. (engels)",
+    "value": "Internal use without compensation or financial benefit",
     "value_type": "TEXT"
   },
   {
@@ -38399,7 +38201,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "bedoeld-gebruik-intern-gebruik-zonder-omschrijving",
     "language": "nl",
-    "value": "Intern gebruik zonder vergoeding of financieel voordeel",
+    "value": "Intern gebruik zonder vergoeding of financieel voordeel: mijn organisatie gaat geen vergoeding vragen of beoogt geen financieel voordeel met het interne gebruik van dit materiaal. Het materiaal wordt niet gebruikt op een manier die een financieel of zakelijk voordeel creëert voor de organisatie; inclusief gebruik voor onderwijs en educatieve doeleinden, culturele doeleinden (zoals vertoning in musea), en evenals voor niet-commercieel onderzoek worden beschouwd als niet-commerciële exploitatie.",
     "value_type": "HTML"
   },
   {
@@ -38408,7 +38210,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "bedoeld-gebruik-intern-gebruik-zonder-omschrijving",
     "language": "en",
-    "value": "Intern gebruik zonder vergoeding of financieel voordeel (engels)",
+    "value": "Internal use without compensation or financial benefit: my organisation will not ask for a compensation or has no financial goal with the internal use of this material. The material will not be used in a way that will create financial gains or a competitive advantage for the organisation; including use for education and educational purposes, cultural purposes (like museum exhibitions), or non-commercial research. These will be considered non-commercial exploitation.",
     "value_type": "HTML"
   },
   {
@@ -38426,7 +38228,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "bedoeld-gebruik-extern-gebruik-zonder-direct-commercieel-voordeel-label",
     "language": "en",
-    "value": "Extern gebruik zonder direct commercieel voordeel: ook voor extern gebruik (engels)",
+    "value": "External use without a direct commercial advantage: also for external use",
     "value_type": "TEXT"
   },
   {
@@ -38435,7 +38237,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "bedoeld-gebruik-extern-gebruik-zonder-direct-commercieel-voordeel-omschrijving",
     "language": "nl",
-    "value": "<p>Extern gebruik zonder direct commercieel voordeel omschrijving: <span style=\"font-size:10ptpx\"><span style=\"color:#000000\">er wordt geen vergoeding gevraagd van derden in verband met het materiaal, maar het gebruik creëert een indirect financieel of zakelijk voordeel voor de organisatie (bijvoorbeeld gebruik voor reclamedoeleinden, op websites van een bedrijf of op ander promotioneel materiaal</span></span></p>",
+    "value": "Er wordt geen vergoeding gevraagd van derden in verband met het materiaal, maar het gebruik creëert een indirect financieel of zakelijk voordeel voor de organisatie (bijvoorbeeld gebruik voor reclamedoeleinden, op websites van een bedrijf of op ander promotioneel materiaal)",
     "value_type": "HTML"
   },
   {
@@ -38444,7 +38246,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "bedoeld-gebruik-extern-gebruik-zonder-direct-commercieel-voordeel-omschrijving",
     "language": "en",
-    "value": "<p>Extern gebruik zonder direct commercieel voordeel omschrijving: <span style=\"color:#000000\">er wordt geen vergoeding gevraagd van derden in verband met het materiaal, maar het gebruik creëert een indirect financieel of zakelijk voordeel voor de organisatie (bijvoorbeeld gebruik voor reclamedoeleinden, op websites van een bedrijf of op ander promotioneel materiaal (engels)</span></p>",
+    "value": "No compensation is sought from third parties in connection with the material, but the use creates an indirect financial or business benefit for the organization (for example, use for advertising purposes, on company websites, or on other promotional materials)",
     "value_type": "HTML"
   },
   {
@@ -38462,7 +38264,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "bedoeld-gebruik-directe-commerciele-exploitatie-label",
     "language": "en",
-    "value": "Directe commerciële exploitatie: vergoeding gelinkt aan je aankoop (engels)",
+    "value": "Direct commercial exploitation: compensation linked to your purchase",
     "value_type": "TEXT"
   },
   {
@@ -38471,7 +38273,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "bedoeld-gebruik-directe-commerciele-exploitatie-omschrijving",
     "language": "nl",
-    "value": "<p>Directe commerciële exploitatie: <span style=\"font-size:10ptpx\"><span style=\"color:#000000\">er wordt een vergoeding gevraagd van derden die niet gericht is op het materiaal als dusdanig, maar die wel betrekking heeft op het materiaal, hetzij rechtstreeks, hetzij onrechtstreeks via goederen producten of diensten waarin het materiaal herkenbaar wordt geïntegreerd (inclusief bijvoorbeeld merchandising, of uitzending / streaming via commerciële media van een werk waarin het materiaal werd geïntegreerd)</span></span></p>",
+    "value": "Directe commerciële exploitatie: er wordt een vergoeding gevraagd van derden die niet gericht is op het materiaal als dusdanig, maar die wel betrekking heeft op het materiaal, hetzij rechtstreeks, hetzij onrechtstreeks via goederen producten of diensten waarin het materiaal herkenbaar wordt geïntegreerd (inclusief bijvoorbeeld merchandising, of uitzending / streaming via commerciële media van een werk waarin het materiaal werd geïntegreerd)",
     "value_type": "HTML"
   },
   {
@@ -38480,7 +38282,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "bedoeld-gebruik-directe-commerciele-exploitatie-omschrijving",
     "language": "en",
-    "value": "<p>Directe commerciële exploitatie: <span style=\"color:#000000\">er wordt een vergoeding gevraagd van derden die niet gericht is op het materiaal als dusdanig, maar die wel betrekking heeft op het materiaal, hetzij rechtstreeks, hetzij onrechtstreeks via goederen producten of diensten waarin het materiaal herkenbaar wordt geïntegreerd (inclusief bijvoorbeeld merchandising, of uitzending / streaming via commerciële media van een werk waarin het materiaal werd geïntegreerd) (engels)</span></p>",
+    "value": "Directe commerciële exploitatie: er wordt een vergoeding gevraagd van derden die niet gericht is op het materiaal als dusdanig, maar die wel betrekking heeft op het materiaal, hetzij rechtstreeks, hetzij onrechtstreeks via goederen producten of diensten waarin het materiaal herkenbaar wordt geïntegreerd (inclusief bijvoorbeeld merchandising, of uitzending / streaming via commerciële media van een werk waarin het materiaal werd geïntegreerd) (engels)",
     "value_type": "HTML"
   },
   {
@@ -38543,7 +38345,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "ontsluiting-materiaal-enkel-binnen-de-organisatie-omschrijving",
     "language": "nl",
-    "value": "<p style=\"text-align:justify;\" dir=\"ltr\"><span style=\"font-size:10ptpx\"><span style=\"color:#000000\">Het materiaal wordt enkel binnen de organisatie gebruikt of getoond. Dit wil zeggen dat het materiaal enkel toegankelijk zal zijn voor medewerkers van de organisatie (bv. personeel), en/of voor tijdelijke bezoekers van de organisatie (bijvoorbeeld voor bezoekers van een museum) zonder dat deze bezoekers een kopie van het materiaal zullen mogen meenemen. Het materiaal wordt dus niet permanent verspreid naar derden. </span></span></p>",
+    "value": "Het materiaal wordt enkel binnen de organisatie gebruikt of getoond. Dit wil zeggen dat het materiaal enkel toegankelijk zal zijn voor medewerkers van de organisatie (bv. personeel), en/of voor tijdelijke bezoekers van de organisatie (bijvoorbeeld voor bezoekers van een museum) zonder dat deze bezoekers een kopie van het materiaal zullen mogen meenemen. Het materiaal wordt dus niet permanent verspreid naar derden. ",
     "value_type": "HTML"
   },
   {
@@ -38552,7 +38354,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "ontsluiting-materiaal-enkel-binnen-de-organisatie-omschrijving",
     "language": "en",
-    "value": "<p style=\"text-align:justify;\" dir=\"ltr\"><span style=\"color:#000000\">Het materiaal wordt enkel binnen de organisatie gebruikt of getoond. Dit wil zeggen dat het materiaal enkel toegankelijk zal zijn voor medewerkers van de organisatie (bv. personeel), en/of voor tijdelijke bezoekers van de organisatie (bijvoorbeeld voor bezoekers van een museum) zonder dat deze bezoekers een kopie van het materiaal zullen mogen meenemen. Het materiaal wordt dus niet permanent verspreid naar derden. (engels)</span></p>",
+    "value": "Het materiaal wordt enkel binnen de organisatie gebruikt of getoond. Dit wil zeggen dat het materiaal enkel toegankelijk zal zijn voor medewerkers van de organisatie (bv. personeel), en/of voor tijdelijke bezoekers van de organisatie (bijvoorbeeld voor bezoekers van een museum) zonder dat deze bezoekers een kopie van het materiaal zullen mogen meenemen. Het materiaal wordt dus niet permanent verspreid naar derden. (engels)",
     "value_type": "HTML"
   },
   {
@@ -38579,7 +38381,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "ontsluiting-materiaal-organisatie-en-externe-gebruikers-omschrijving",
     "language": "nl",
-    "value": "<p><span style=\"font-size:10ptpx\"><span style=\"color:#000000\">Het materiaal wordt ook gebruikt door, of getoond aan, andere personen dan de medewerkers en eventuele tijdelijke bezoekers van de organisatie.</span></span></p>",
+    "value": "Het materiaal wordt ook gebruikt door, of getoond aan, andere personen dan de medewerkers en eventuele tijdelijke bezoekers van de organisatie.",
     "value_type": "HTML"
   },
   {
@@ -38588,7 +38390,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "ontsluiting-materiaal-organisatie-en-externe-gebruikers-omschrijving",
     "language": "en",
-    "value": "<p><span style=\"color:#000000\">Het materiaal wordt ook gebruikt door, of getoond aan, andere personen dan de medewerkers en eventuele tijdelijke bezoekers van de organisatie. (engels)</span></p>",
+    "value": "Het materiaal wordt ook gebruikt door, of getoond aan, andere personen dan de medewerkers en eventuele tijdelijke bezoekers van de organisatie. (engels)",
     "value_type": "HTML"
   },
   {
@@ -38660,7 +38462,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "type-ontsluiting-digitale-ontsluiting-via-een-vast-medium-omschrijving",
     "language": "en",
-    "value": "Type ontsluiting - Digitale ontsluiting via een vast medium omschrijving",
+    "value": "Type ontsluiting - Digitale ontsluiting via een vast medium omschrijving (engels)",
     "value_type": "HTML"
   },
   {
@@ -38822,7 +38624,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "type-ontsluiting-andere-omschrijving",
     "language": "en",
-    "value": "Type ontsluiting - Andere omschrijving",
+    "value": "Type ontsluiting - Andere omschrijving (engels)",
     "value_type": "HTML"
   },
   {
@@ -38885,7 +38687,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "wijziging-materiaal-geen-wijzigingen-omschrijving",
     "language": "nl",
-    "value": "<p style=\"text-align:left;\" size=\"2\" _root=\"[object Object]\" __ownerid=\"undefined\" __hash=\"undefined\" __altered=\"false\">Ter verduidelijking: De volgende vormen van gebruik worden niet als wijziging beschouwd: </p><ul><li>Inkorting of hergebruik van slechts een deel van het aangevraagde materiaal. </li><li>Technische wijzigingen om de beeld- of audiokwaliteit van het materiaal te verbeteren worden. </li><li>Integratie van ongewijzigd bronmateriaal in een documentaire.</li><li>Aanbieden van materiaal in interactieve diensten waarbij gebruikers van die diensten zelf de weergave van het materiaal tijdelijk kunnen wijzigen voor eigen doeleinden (vb. binnen een app, kiosk, of binnen een interactieve website, bijvoorbeeld met gebruik van H5P-technologie).</li></ul>",
+    "value": "<p>Ter verduidelijking: De volgende vormen van gebruik worden niet als wijziging beschouwd: </p><ul><li>Inkorting of hergebruik van slechts een deel van het aangevraagde materiaal. </li><li>Technische wijzigingen om de beeld- of audiokwaliteit van het materiaal te verbeteren worden. </li><li>Integratie van ongewijzigd bronmateriaal in een documentaire.</li><li>Aanbieden van materiaal in interactieve diensten waarbij gebruikers van die diensten zelf de weergave van het materiaal tijdelijk kunnen wijzigen voor eigen doeleinden (vb. binnen een app, kiosk, of binnen een interactieve website, bijvoorbeeld met gebruik van H5P-technologie).</li></ul>",
     "value_type": "HTML"
   },
   {
@@ -38894,7 +38696,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "wijziging-materiaal-geen-wijzigingen-omschrijving",
     "language": "en",
-    "value": "<p style=\"text-align:left;\" size=\"2\" _root=\"[object Object]\" __ownerid=\"undefined\" __hash=\"undefined\" __altered=\"false\">Ter verduidelijking: De volgende vormen van gebruik worden niet als wijziging beschouwd: </p><ul><li>Inkorting of hergebruik van slechts een deel van het aangevraagde materiaal. </li><li>Technische wijzigingen om de beeld- of audiokwaliteit van het materiaal te verbeteren worden. </li><li>Integratie van ongewijzigd bronmateriaal in een documentaire.</li><li>Aanbieden van materiaal in interactieve diensten waarbij gebruikers van die diensten zelf de weergave van het materiaal tijdelijk kunnen wijzigen voor eigen doeleinden (vb. binnen een app, kiosk, of binnen een interactieve website, bijvoorbeeld met gebruik van H5P-technologie). (engels)</li></ul>",
+    "value": "<p>Ter verduidelijking: De volgende vormen van gebruik worden niet als wijziging beschouwd: </p><ul><li>Inkorting of hergebruik van slechts een deel van het aangevraagde materiaal. </li><li>Technische wijzigingen om de beeld- of audiokwaliteit van het materiaal te verbeteren worden. </li><li>Integratie van ongewijzigd bronmateriaal in een documentaire.</li><li>Aanbieden van materiaal in interactieve diensten waarbij gebruikers van die diensten zelf de weergave van het materiaal tijdelijk kunnen wijzigen voor eigen doeleinden (vb. binnen een app, kiosk, of binnen een interactieve website, bijvoorbeeld met gebruik van H5P-technologie). (engels)</li></ul>",
     "value_type": "HTML"
   },
   {
@@ -38921,7 +38723,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "wijziging-materiaal-de-organisatie-zal-het-bronmateriaal-wijzigen-omschrijving",
     "language": "nl",
-    "value": "<p><span style=\"font-size:10ptpx\"><span style=\"color:#000000\">Het materiaal wordt verspreid zoals het wordt ontvangen. </span></span></p>",
+    "value": "Het materiaal wordt verspreid zoals het wordt ontvangen.",
     "value_type": "HTML"
   },
   {
@@ -38930,7 +38732,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "wijziging-materiaal-de-organisatie-zal-het-bronmateriaal-wijzigen-omschrijving",
     "language": "en",
-    "value": "<p><span style=\"color:#000000\">Het materiaal wordt verspreid zoals het wordt ontvangen. (engels)</span></p>",
+    "value": "Het materiaal wordt verspreid zoals het wordt ontvangen. (engels)",
     "value_type": "HTML"
   },
   {
@@ -39020,7 +38822,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "geografisch-gebruik-niet-integraal-gericht-op-vlaamse-of-belgische-markt-label",
     "language": "en",
-    "value": "Niet integraal gericht op de Vlaamse of Belgische markt (engels)",
+    "value": "Not entirely focused on the local Flemish or Belgian market",
     "value_type": "TEXT"
   },
   {
@@ -39029,7 +38831,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "geografisch-gebruik-niet-integraal-gericht-op-vlaamse-of-belgische-markt-omschrijving",
     "language": "nl",
-    "value": "<p><span style=\"font-size:10ptpx\"><span style=\"color:#000000\">Hergebruik is niet integraal of hoofdzakelijk gericht op de Vlaamse of Belgische markt</span></span></p>",
+    "value": "Hergebruik is niet integraal of hoofdzakelijk gericht op de Vlaamse of Belgische markt.",
     "value_type": "HTML"
   },
   {
@@ -39038,7 +38840,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "geografisch-gebruik-niet-integraal-gericht-op-vlaamse-of-belgische-markt-omschrijving",
     "language": "en",
-    "value": "<p><span style=\"color:#000000\">Hergebruik is niet integraal of hoofdzakelijk gericht op de Vlaamse of Belgische markt (engels)</span></p>",
+    "value": "Hergebruik is niet integraal of hoofdzakelijk gericht op de Vlaamse of Belgische markt. (engels)",
     "value_type": "HTML"
   },
   {
@@ -39092,7 +38894,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "gebruik-in-de-tijd-onbeperkt-label",
     "language": "en",
-    "value": "Onbeperkt (engels)",
+    "value": "Unlimited",
     "value_type": "TEXT"
   },
   {
@@ -39101,7 +38903,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "gebruik-in-de-tijd-onbeperkt-omschrijving",
     "language": "nl",
-    "value": "<p><span style=\"font-size:10ptpx\"><span style=\"color:#000000\">De gevraagde toelating is onbeperkt in de tijd.</span></span></p>",
+    "value": "De gevraagde toelating is onbeperkt in de tijd.",
     "value_type": "HTML"
   },
   {
@@ -39110,7 +38912,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "gebruik-in-de-tijd-onbeperkt-omschrijving",
     "language": "en",
-    "value": "<p><span style=\"color:#000000\">De gevraagde toelating is onbeperkt in de tijd. (engels)</span></p>",
+    "value": "De gevraagde toelating is onbeperkt in de tijd. (engels)",
     "value_type": "HTML"
   },
   {
@@ -39128,7 +38930,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "gebruik-in-de-tijd-beperkte-periode-label",
     "language": "en",
-    "value": "Beperkte periode (engels)",
+    "value": "Time-restricted",
     "value_type": "TEXT"
   },
   {
@@ -39137,7 +38939,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "gebruik-in-de-tijd-beperkte-periode-omschrijving",
     "language": "nl",
-    "value": "<p><span style=\"font-size:10ptpx\"><span style=\"color:#000000\">De gevraagde toelating heeft betrekking op een beperkte periode.</span></span></p>",
+    "value": "De gevraagde toelating heeft betrekking op een beperkte periode.",
     "value_type": "HTML"
   },
   {
@@ -39146,7 +38948,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "gebruik-in-de-tijd-beperkte-periode-omschrijving",
     "language": "en",
-    "value": "<p><span style=\"color:#000000\">De gevraagde toelating heeft betrekking op een beperkte periode. (engels)</span></p>",
+    "value": "De gevraagde toelating heeft betrekking op een beperkte periode. (engels)",
     "value_type": "HTML"
   },
   {
@@ -39209,7 +39011,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "bronvermelding-gelijktijdig-met-object-omschrijving",
     "language": "nl",
-    "value": "<p><span style=\"font-size:10ptpx\"><span style=\"color:#000000\">De bron zal worden vermeld gelijktijdig met het materiaal zelf (d.w.z. op het moment dat het materiaal getoond wordt)</span></span></p>",
+    "value": "De bron zal worden vermeld gelijktijdig met het materiaal zelf (d.w.z. op het moment dat het materiaal getoond wordt)",
     "value_type": "HTML"
   },
   {
@@ -39218,7 +39020,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "bronvermelding-gelijktijdig-met-object-omschrijving",
     "language": "en",
-    "value": "<p><span style=\"color:#000000\">De bron zal worden vermeld gelijktijdig met het materiaal zelf (d.w.z. op het moment dat het materiaal getoond wordt) (engels)</span></p>",
+    "value": "De bron zal worden vermeld gelijktijdig met het materiaal zelf (d.w.z. op het moment dat het materiaal getoond wordt) (engels)",
     "value_type": "HTML"
   },
   {
@@ -39245,7 +39047,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "bronvermelding-vermelding-bij-object-niet-noodzakelijk-gelijktijdig-omschrijving",
     "language": "nl",
-    "value": "<p style=\"text-align:justify;\" dir=\"ltr\"><span style=\"font-size:10ptpx\"><span style=\"color:#000000\">De bron zal worden vermeld bij het materiaal, maar niet noodzakelijk op het moment van tonen van het materiaal (bv. op een eindgeneriek, of in een bronnensectie van een boek of website).</span></span></p>",
+    "value": "De bron zal worden vermeld bij het materiaal, maar niet noodzakelijk op het moment van tonen van het materiaal (bv. op een eindgeneriek, of in een bronnensectie van een boek of website).",
     "value_type": "HTML"
   },
   {
@@ -39254,7 +39056,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "bronvermelding-vermelding-bij-object-niet-noodzakelijk-gelijktijdig-omschrijving",
     "language": "en",
-    "value": "<p style=\"text-align:justify;\" dir=\"ltr\"><span style=\"color:#000000\">De bron zal worden vermeld bij het materiaal, maar niet noodzakelijk op het moment van tonen van het materiaal (bv. op een eindgeneriek, of in een bronnensectie van een boek of website). (engels)</span></p>",
+    "value": "De bron zal worden vermeld bij het materiaal, maar niet noodzakelijk op het moment van tonen van het materiaal (bv. op een eindgeneriek, of in een bronnensectie van een boek of website). (engels)",
     "value_type": "HTML"
   },
   {
@@ -39281,7 +39083,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "bronvermelding-geen-vermelding-omschrijving",
     "language": "nl",
-    "value": "<p><span style=\"color:#000000\">De bron zal niet worden vermeld.</span></p>",
+    "value": "De bron zal niet worden vermeld.",
     "value_type": "HTML"
   },
   {
@@ -39290,7 +39092,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "bronvermelding-geen-vermelding-omschrijving",
     "language": "en",
-    "value": "<p><span style=\"color:#000000\">De bron zal niet worden vermeld.</span> (engels)</p>",
+    "value": "De bron zal niet worden vermeld.(engels)",
     "value_type": "HTML"
   },
   {
@@ -40952,343 +40754,73 @@
   {
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
-    "location": "modules/admin/const/material-requests",
-    "key": "aanvrager",
+    "location": "modules/account/views/account-my-application-list",
+    "key": "volledig-bestand",
     "language": "nl",
-    "value": "Aanvrager",
+    "value": "Volledig bestand",
     "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
-    "location": "modules/admin/const/material-requests",
-    "key": "aanvrager",
+    "location": "modules/account/views/account-my-application-list",
+    "key": "volledig-bestand",
     "language": "en",
-    "value": "Aanvrager",
+    "value": "Volledig bestand",
     "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
-    "location": "modules/admin/const/material-requests",
-    "key": "titel-materiaal",
+    "location": "pages/account/mijn-profiel/index",
+    "key": "gebruikersrechten-beoordelaar-titel",
     "language": "nl",
-    "value": "Titel materiaal",
+    "value": "Gebruikersrechten beoordelaar titel",
     "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
-    "location": "modules/admin/const/material-requests",
-    "key": "titel-materiaal",
+    "location": "pages/account/mijn-profiel/index",
+    "key": "gebruikersrechten-beoordelaar-titel",
     "language": "en",
-    "value": "Titel materiaal",
+    "value": "Gebruikersrechten beoordelaar titel",
     "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
-    "location": "modules/admin/const/material-requests",
-    "key": "status",
+    "location": "pages/account/mijn-profiel/index",
+    "key": "gebruikersrechten-beoordelaar-omschrijving",
     "language": "nl",
-    "value": "Status",
-    "value_type": "TEXT"
+    "value": "Gebruikersrechten beoordelaar omschrijving",
+    "value_type": "HTML"
   },
   {
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
-    "location": "modules/admin/const/material-requests",
-    "key": "status",
+    "location": "pages/account/mijn-profiel/index",
+    "key": "gebruikersrechten-beoordelaar-omschrijving",
     "language": "en",
-    "value": "Status",
-    "value_type": "TEXT"
+    "value": "Gebruikersrechten beoordelaar omschrijving",
+    "value_type": "HTML"
   },
   {
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
-    "location": "modules/admin/const/material-requests",
-    "key": "download",
+    "location": "modules/admin/views/navigation/admin-navigation-overview-page",
+    "key": "navigatie",
     "language": "nl",
-    "value": "Download",
+    "value": "Navigatie",
     "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
-    "location": "modules/admin/const/material-requests",
-    "key": "download",
+    "location": "modules/admin/views/navigation/admin-navigation-overview-page",
+    "key": "navigatie",
     "language": "en",
-    "value": "Download",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/admin/materiaalaanvragen/index",
-    "key": "type",
-    "language": "nl",
-    "value": "Type",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/admin/materiaalaanvragen/index",
-    "key": "type",
-    "language": "en",
-    "value": "Type",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/admin/materiaalaanvragen/index",
-    "key": "type-aanvraag",
-    "language": "nl",
-    "value": "Type aanvraag",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/admin/materiaalaanvragen/index",
-    "key": "type-aanvraag",
-    "language": "en",
-    "value": "Type aanvraag",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/admin/materiaalaanvragen/index",
-    "key": "pas-toe",
-    "language": "nl",
-    "value": "Pas toe",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/admin/materiaalaanvragen/index",
-    "key": "pas-toe",
-    "language": "en",
-    "value": "Pas toe",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/admin/materiaalaanvragen/index",
-    "key": "reset",
-    "language": "nl",
-    "value": "Reset",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/admin/materiaalaanvragen/index",
-    "key": "reset",
-    "language": "en",
-    "value": "Reset",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/admin/materiaalaanvragen/index",
-    "key": "status",
-    "language": "nl",
-    "value": "Status",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/admin/materiaalaanvragen/index",
-    "key": "status",
-    "language": "en",
-    "value": "Status",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/admin/materiaalaanvragen/index",
-    "key": "status-aanvraag",
-    "language": "nl",
-    "value": "Status aanvraag",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/admin/materiaalaanvragen/index",
-    "key": "status-aanvraag",
-    "language": "en",
-    "value": "Status aanvraag",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/admin/materiaalaanvragen/index",
-    "key": "pas-toe",
-    "language": "nl",
-    "value": "Pas toe",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/admin/materiaalaanvragen/index",
-    "key": "pas-toe",
-    "language": "en",
-    "value": "Pas toe",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/admin/materiaalaanvragen/index",
-    "key": "reset",
-    "language": "nl",
-    "value": "Reset",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/admin/materiaalaanvragen/index",
-    "key": "reset",
-    "language": "en",
-    "value": "Reset",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/admin/materiaalaanvragen/index",
-    "key": "download",
-    "language": "nl",
-    "value": "Download",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/admin/materiaalaanvragen/index",
-    "key": "download",
-    "language": "en",
-    "value": "Download",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/admin/materiaalaanvragen/index",
-    "key": "aanvraag-met-download",
-    "language": "nl",
-    "value": "Aanvraag met download",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/admin/materiaalaanvragen/index",
-    "key": "aanvraag-met-download",
-    "language": "en",
-    "value": "Aanvraag met download",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/admin/materiaalaanvragen/index",
-    "key": "pas-toe",
-    "language": "nl",
-    "value": "Pas toe",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/admin/materiaalaanvragen/index",
-    "key": "pas-toe",
-    "language": "en",
-    "value": "Pas toe",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/admin/materiaalaanvragen/index",
-    "key": "reset",
-    "language": "nl",
-    "value": "Reset",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/admin/materiaalaanvragen/index",
-    "key": "reset",
-    "language": "en",
-    "value": "Reset",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/admin/materiaalaanvragen/index",
-    "key": "aanbieder-aanvraag",
-    "language": "nl",
-    "value": "Aanbieder aanvraag",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/admin/materiaalaanvragen/index",
-    "key": "aanbieder-aanvraag",
-    "language": "en",
-    "value": "Aanbieder aanvraag",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/admin/materiaalaanvragen/index",
-    "key": "pas-toe",
-    "language": "nl",
-    "value": "Pas toe",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/admin/materiaalaanvragen/index",
-    "key": "pas-toe",
-    "language": "en",
-    "value": "Pas toe",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/admin/materiaalaanvragen/index",
-    "key": "reset",
-    "language": "nl",
-    "value": "Reset",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/admin/materiaalaanvragen/index",
-    "key": "reset",
-    "language": "en",
-    "value": "Reset",
+    "value": "Navigatie",
     "value_type": "TEXT"
   },
   {
