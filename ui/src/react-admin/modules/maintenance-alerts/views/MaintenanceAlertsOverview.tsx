@@ -24,7 +24,6 @@ import { ErrorView } from '~shared/components/error/ErrorView';
 import type { FilterableColumn } from '~shared/components/FilterTable/FilterTable';
 import FilterTable from '~shared/components/FilterTable/FilterTable';
 import { Icon } from '~shared/components/Icon/Icon';
-import { Loading } from '~shared/components/Loading/Loading';
 import { GET_LANGUAGE_NAMES } from '~shared/consts/language-names';
 import { parseAsIsoWithoutTimezone } from '~shared/helpers/formatters/date';
 import { isMultiLanguageEnabled } from '~shared/helpers/is-multi-language-enabled';

@@ -8,6 +8,8 @@ import { intersection, omit } from 'lodash';
 import { RequireAnyPermissions } from '../../shared/decorators/require-any-permissions.decorator';
 import { SessionUser } from '../../shared/decorators/user.decorator';
 import { addPrefix } from '../../shared/helpers/add-route-prefix';
+import { CustomError } from '../../shared/helpers/error';
+import { logAndThrow } from '../../shared/helpers/logAndThrow';
 import { SessionUserEntity } from '../../users/classes/session-user';
 import {
 	CreateMaintenanceAlertDto,
@@ -42,7 +44,7 @@ export class MaintenanceAlertsController {
 		@Query() queryDto: MaintenanceAlertsQueryDto,
 		@SessionUser() user: SessionUserEntity
 	): Promise<IPagination<MaintenanceAlert>> {
-		const maintenanceAlertResponse = await this.maintenanceAlertsService.findAll(queryDto, true);
+		try {
 
 		// Filter alerts to only include the ones for the current user group
 		maintenanceAlertResponse.items = maintenanceAlertResponse.items.filter((alert) => {
@@ -60,6 +62,13 @@ export class MaintenanceAlertsController {
 		);
 
 		return maintenanceAlertResponse;
+		} catch (err) {
+			const error = new CustomError('Failed to fetch personal maintenance alerts', err, {
+				queryDto,
+				userId: user.getId(),
+			});
+			logAndThrow(error);
+		}
 	}
 
 	@Get(':id')

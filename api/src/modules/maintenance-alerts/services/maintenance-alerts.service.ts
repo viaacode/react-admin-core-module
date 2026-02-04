@@ -27,6 +27,7 @@ import {
 	UpdateMaintenanceAlertMutation,
 	UpdateMaintenanceAlertMutationVariables,
 } from '../../shared/generated/graphql-db-types-hetarchief';
+import { CustomError } from '../../shared/helpers/error';
 import { PaginationHelper } from '../../shared/helpers/pagination';
 import { SortDirection } from '../../shared/types';
 import { Locale } from '../../translations';
@@ -65,7 +66,7 @@ export class MaintenanceAlertsService {
 		inputQuery: MaintenanceAlertsQueryDto,
 		onlyActive: boolean
 	): Promise<IPagination<MaintenanceAlert>> {
-		const { page, size, orderProp, orderDirection, languages, searchTerm } = inputQuery;
+		try {
 		const { offset, limit } = PaginationHelper.convertPagination(page, size);
 
 		const whereAndFilter = [];
@@ -113,6 +114,13 @@ export class MaintenanceAlertsService {
 			size,
 			total: maintenanceAlertsResponse.app_maintenance_alerts_aggregate.aggregate.count,
 		});
+		} catch (err) {
+			const error = new CustomError('Failed to fetch maintenance alerts', err, {
+				inputQuery,
+			});
+			console.error(error);
+			throw error;
+		}
 	}
 
 	public async findById(id: string): Promise<MaintenanceAlert> {

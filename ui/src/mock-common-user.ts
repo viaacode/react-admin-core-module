@@ -186,6 +186,7 @@ export function getMockCommonUser(): AvoUserCommonUser {
 			PermissionName.EDIT_ANY_PUPIL_COLLECTIONS,
 			PermissionName.DELETE_ANY_PUPIL_COLLECTIONS,
 			PermissionName.SEARCH_IN_ASSIGNMENT,
+			PermissionName.VIEW_ANY_MAINTENANCE_ALERTS,
 		],
 	};
 }

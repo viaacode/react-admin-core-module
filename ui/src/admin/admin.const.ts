@@ -183,5 +183,12 @@ export const GET_NAV_ITEMS = async (userPermissions: string[]): Promise<Navigati
 			key: 'translations',
 			exact: false,
 		}),
+		...hasPermissions([PermissionName.VIEW_ANY_MAINTENANCE_ALERTS], 'OR', userPermissions, {
+			label: tText('Meldingen'),
+			location: AdminConfigManager.getConfig().routes.ADMIN_MAINTENANCE_ALERTS_OVERVIEW,
+			target: '_self',
+			key: 'maintenance-alerts',
+			exact: false,
+		}),
 	];
 };
