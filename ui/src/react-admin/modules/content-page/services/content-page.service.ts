@@ -259,7 +259,10 @@ export class ContentPageService {
 	}
 
 	public static getPathOrDefault(contentPage: Partial<ContentPageInfo> | null): string {
-		if (contentPage?.path && contentPage?.title) {
+		if (contentPage?.path) {
+			return contentPage?.path;
+		}
+		if (!contentPage?.path && contentPage?.title) {
 			return `/${kebabCase(contentPage.title)}`;
 		}
 		return '';
