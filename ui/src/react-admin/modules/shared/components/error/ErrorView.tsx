@@ -11,7 +11,6 @@ import type { AvoAuthErrorActionButton } from '@viaa/avo2-types';
 import { compact, isNil, isString, uniq } from 'es-toolkit';
 import queryString from 'query-string';
 import type { FC, ReactNode } from 'react';
-import { useLocation } from 'react-router-dom';
 
 import './ErrorView.scss';
 import { Loading } from '~shared/components/Loading';
@@ -41,9 +40,7 @@ export const ErrorView: FC<ErrorViewProps> = ({
 	actionButtons = [],
 	locationId,
 }) => {
-	const location = useLocation();
-
-	const queryParams = queryString.parse((location.search || '').substring(1));
+	const queryParams = queryString.parse(window.location.search.substring(1));
 
 	if (queryParams.logout === 'true') {
 		// redirect to log-out route and afterward redirect back to the error page

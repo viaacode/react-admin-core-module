@@ -53,6 +53,7 @@ import { getCommonUser } from '~core/config/config.selectors.ts';
 import { ContentPageEditFormDescription } from '~modules/content-page/components/ContentPageEditFormDescription/ContentPageEditFormDescription';
 import { getAllSubgroupIds } from '~modules/user-group/const/user-group.const';
 import { useGetUserGroups } from '~modules/user-group/hooks/get-user-groups';
+import { isAvo } from '~shared/helpers/is-avo.ts';
 import { SpecialUserGroups } from '~shared/types/authentication.types';
 
 interface ContentEditFormProps {
@@ -81,6 +82,7 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 	const { data: allUserGroups, isLoading: isLoadingAllUserGroups } = useGetUserGroups({
 		withPermissions: false,
 	});
+	const lastUserGroup = allUserGroups?.at(-1);
 
 	const getParentPagePickerItem = (): PickerItem | null => {
 		if (contentPageInfo.nlParentPageId) {
@@ -187,21 +189,438 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 	};
 
 	// Render
-	const owner: PickerItem | undefined = {
-		label: contentPageInfo.owner?.fullName,
-		type: AvoCoreContentPickerType.PROFILE,
-		value: contentPageInfo.owner?.id,
+	const renderCoverImageField = () => {
+		return (
+			<FormGroup
+				error={formErrors.thumbnailPath}
+				label={tText(
+					'admin/content/components/content-edit-form/content-edit-form___cover-afbeelding'
+				)}
+				className="field-thumbnail-path"
+			>
+				<FileUpload
+					ownerId={commonUser?.profileId as string}
+					urls={compact([contentPageInfo.thumbnailPath])}
+					assetType={AvoFileUploadAssetType.CONTENT_PAGE_COVER}
+					allowMulti={false}
+					label={tText(
+						'admin/content/components/content-edit-form/content-edit-form___cover-afbeelding'
+					)}
+					onChange={(urls: string[]) => changeContentPageProp('thumbnailPath', urls[0])}
+					onDeleteFile={noop} // images will be deleted from the assets service when the user saves the content page
+				/>
+			</FormGroup>
+		);
 	};
-	const lastUserGroup = allUserGroups?.at(-1);
-	const defaultOptionSelection = lastUserGroup
-		? contentPageInfo.id
-			? [lastUserGroup.id]
-			: [
-					SpecialUserGroups.loggedInUsers,
-					...getAllSubgroupIds(allUserGroups || []),
-					lastUserGroup.id,
-				]
-		: [];
+
+	const renderSeoImageField = () => {
+		return (
+			<FormGroup
+				error={formErrors.thumbnailPath}
+				label={tText(
+					'modules/content-page/components/content-edit-form/content-edit-form___afbeelding-voor-seo-aanbevolen-1200-x-630'
+				)}
+				className="field-seo-image-path"
+			>
+				<FileUpload
+					ownerId={commonUser?.profileId as string}
+					urls={compact([contentPageInfo.seo_image_path])}
+					assetType={AvoFileUploadAssetType.CONTENT_PAGE_OG_IMAGE}
+					allowMulti={false}
+					label={tText(
+						'modules/content-page/components/content-edit-form/content-edit-form___seo-afbeelding'
+					)}
+					onChange={(urls: string[]) => changeContentPageProp('seo_image_path', urls[0])}
+					onDeleteFile={noop} // images will be deleted from the assets service when the user saves the content page
+				/>
+			</FormGroup>
+		);
+	};
+
+	const renderTitleField = () => {
+		return (
+			<FormGroup
+				error={formErrors.title}
+				label={tText('admin/content/components/content-edit-form/content-edit-form___titel')}
+				required
+				className="field-title"
+			>
+				<TextInput
+					onChange={(value) => {
+						changeContentPageProp('title', value);
+					}}
+					value={contentPageInfo.title}
+				/>
+			</FormGroup>
+		);
+	};
+
+	const renderDescriptionField = () => {
+		return (
+			<ContentPageEditFormDescription
+				value={contentPageInfo.description || ''}
+				onChange={(html: string) => {
+					changeContentPageProp('description', html);
+				}}
+				required
+				formError={formErrors.description}
+				className="field-description"
+			></ContentPageEditFormDescription>
+		);
+	};
+
+	const renderSeoDescriptionField = () => {
+		return (
+			<FormGroup
+				error={formErrors.seoDescription}
+				label={
+					tText(
+						'modules/content-page/components/content-edit-form/content-edit-form___beschrijving-voor-seo',
+						{
+							maxLength: CONTENT_PAGE_SEO_DESCRIPTION_MAX_LENGTH_STRING,
+						}
+					) +
+					` (${
+						contentPageInfo.seoDescription?.length || 0
+					} / ${CONTENT_PAGE_SEO_DESCRIPTION_MAX_LENGTH_STRING})`
+				}
+				className="field-seo-description"
+			>
+				<TextArea
+					value={contentPageInfo.seoDescription || ''}
+					onChange={(newValue) => changeContentPageProp('seoDescription', newValue)}
+					height="auto"
+					placeholder={tText(
+						'admin/content/components/content-edit-form/content-edit-form___omschijving-voor-de-google-de-pagina-omschrijving-wordt-gebruikt-indien-dit-veld-niet-ingevuld-is'
+					)}
+				/>
+			</FormGroup>
+		);
+	};
+
+	const renderMetaDescriptionField = () => {
+		return (
+			<FormGroup
+				error={formErrors.metaDescription}
+				label={tText(
+					'admin/content/components/content-edit-form/content-edit-form___beschrijving-voor-export-bv-klaar-nieuwsbrief'
+				)}
+				className="field-meta-description"
+			>
+				<TextArea
+					value={contentPageInfo.metaDescription || ''}
+					onChange={(newValue) => changeContentPageProp('metaDescription', newValue)}
+					height="auto"
+					placeholder={tText(
+						'admin/content/components/content-edit-form/content-edit-form___omschrijving-bij-het-exporteren-van-deze-pagina-bijvoorbeeld-als-de-beschrijving-van-de-nieuwsbrief-voor-klaar'
+					)}
+				/>
+			</FormGroup>
+		);
+	};
+
+	const renderIsProtectedField = () => {
+		return (
+			<FormGroup error={formErrors.isProtected} className="field-is-protected">
+				<Checkbox
+					checked={contentPageInfo.isProtected}
+					label={tText(
+						'admin/content/components/content-edit-form/content-edit-form___beschermde-pagina'
+					)}
+					onChange={(value) => changeContentPageProp('isProtected', value)}
+				/>
+			</FormGroup>
+		);
+	};
+
+	const renderPathField = () => {
+		return (
+			<FormGroup
+				error={formErrors.path}
+				label={tText('admin/content/components/content-edit-form/content-edit-form___url')}
+				required
+				className="field-path"
+			>
+				<TextInput
+					onChange={(value) => changeContentPageProp('path', value)}
+					value={ContentPageService.getPathOrDefault(contentPageInfo)}
+				/>
+			</FormGroup>
+		);
+	};
+
+	const renderAuthorField = () => {
+		const owner: PickerItem | undefined = {
+			label: contentPageInfo.owner?.fullName,
+			type: AvoCoreContentPickerType.PROFILE,
+			value: contentPageInfo.owner?.id,
+		};
+		return (
+			<FormGroup
+				error={formErrors.userProfileId}
+				label={tText('admin/content/views/content-detail___auteur')}
+				required
+				className="field-user-profile-id"
+			>
+				<ContentPicker
+					hideTargetSwitch
+					hideTypeDropdown
+					placeholder={tText(
+						'admin/content/components/content-edit-form/content-edit-form___selecteer-een-auteur'
+					)}
+					allowedTypes={[AvoCoreContentPickerType.PROFILE]}
+					value={owner}
+					onChange={(item: PickerItem | null) => {
+						if (!item) {
+							return;
+						}
+						changeContentPageProp('userProfileId', item.value);
+					}}
+				/>
+			</FormGroup>
+		);
+	};
+
+	const renderContentTypeField = () => {
+		return (
+			<FormGroup
+				error={formErrors.contentType}
+				label={tText('admin/content/components/content-edit-form/content-edit-form___content-type')}
+				required
+				className="field-content-type"
+			>
+				<Select
+					onChange={handleContentTypeChange}
+					options={contentTypeOptions}
+					value={contentPageInfo.contentType}
+				/>
+			</FormGroup>
+		);
+	};
+
+	const renderContentWidthField = () => {
+		return (
+			<FormGroup
+				error={formErrors.contentWidth}
+				label={tText(
+					'admin/content/components/content-edit-form/content-edit-form___content-breedte'
+				)}
+				className="field-contentWidth"
+			>
+				<Select
+					onChange={(value) => changeContentPageProp('contentWidth', value)}
+					options={GET_CONTENT_PAGE_WIDTH_OPTIONS()}
+					value={contentPageInfo.contentWidth}
+				/>
+			</FormGroup>
+		);
+	};
+
+	const renderLabelsField = () => {
+		return (
+			<FormGroup
+				label={tText('admin/content/components/content-edit-form/content-edit-form___labels')}
+				className="field-labels"
+			>
+				<TagsInput
+					value={mapLabelsToTags(contentPageInfo.labels || [])}
+					options={mapLabelsToTags(contentTypeLabels)}
+					placeholder={
+						contentPageInfo.contentType
+							? tText(
+									'admin/content/components/content-edit-form/content-edit-form___kies-of-maak-een-label-optioneel'
+								)
+							: tText(
+									'admin/content/components/content-edit-form/content-edit-form___kies-eerst-het-type-pagina'
+								)
+					}
+					allowMulti
+					onChange={(values) =>
+						changeContentPageProp(
+							'labels',
+							mapTagsToLabels(values, contentPageInfo.contentType) as ContentPageLabel[]
+						)
+					}
+					disabled={!contentPageInfo.contentType}
+				/>
+			</FormGroup>
+		);
+	};
+
+	const renderLanguageField = () => {
+		return (
+			<FormGroup
+				label={tText('modules/content-page/components/content-edit-form/content-edit-form___taal')}
+				className="field-language"
+			>
+				<Select
+					options={allLanguageOptions}
+					value={contentPageInfo.language}
+					onChange={(newLanguage) => {
+						changeContentPageProp('language', newLanguage);
+					}}
+					placeholder={tText(
+						'modules/content-page/components/content-edit-form/content-edit-form___selecteer-de-taal-van-de-pagina'
+					)}
+					required
+					aria-label={tText(
+						'modules/content-page/components/content-edit-form/content-edit-form___selecteer-de-taal-van-de-pagina'
+					)}
+				></Select>
+			</FormGroup>
+		);
+	};
+
+	const renderDutchParentPageField = () => {
+		return (
+			<FormGroup
+				label={tText(
+					'modules/content-page/components/content-edit-form/content-edit-form___nederlandse-hoofd-pagina'
+				)}
+				className="field-nl-parent-page"
+			>
+				<ContentPicker
+					value={getParentPagePickerItem()}
+					onChange={(newNlParentPage) => {
+						const nlParentPageId = newNlParentPage?.value;
+						changeContentPageProp('nlParentPageId', nlParentPageId);
+					}}
+					allowedTypes={[AvoCoreContentPickerType.NL_CONTENT_PAGE_PARENT_ID]}
+					hideTypeDropdown
+					hideTargetSwitch
+					placeholder={tText(
+						'modules/content-page/components/content-edit-form/content-edit-form___leeg-indien-dit-de-hoofd-pagina-is'
+					)}
+				></ContentPicker>
+			</FormGroup>
+		);
+	};
+
+	const renderUserGroupsField = () => {
+		const defaultOptionSelection = lastUserGroup
+			? contentPageInfo.id
+				? [lastUserGroup.id]
+				: [
+						SpecialUserGroups.loggedInUsers,
+						...getAllSubgroupIds(allUserGroups || []),
+						lastUserGroup.id,
+					]
+			: [];
+		return (
+			<UserGroupSelect
+				label={tText(
+					'admin/content/components/content-edit-form/content-edit-form___zichtbaar-voor'
+				)}
+				error={formErrors.userGroupIds}
+				values={contentPageInfo.userGroupIds || []}
+				required={false}
+				onChange={(userGroupIds: string[]) => changeContentPageProp('userGroupIds', userGroupIds)}
+				checkedOptions={defaultOptionSelection}
+				disabledOptions={lastUserGroup?.id ? [lastUserGroup.id] : []}
+				className="field-user-group-ids"
+			/>
+		);
+	};
+
+	const renderAvoEditGrid = () => {
+		return (
+			<Grid>
+				<Column size="7">{renderCoverImageField()}</Column>
+				<Column size="5">{renderSeoImageField()}</Column>
+				<Column size="7">{renderTitleField()}</Column>
+				<Column size="5">
+					{/* Empty for keeping the area next to title empty */}
+					<>&nbsp;</>
+				</Column>
+				<Column size="7">{renderDescriptionField()}</Column>
+				<Column size="5">
+					{renderSeoDescriptionField()}
+					{renderMetaDescriptionField()}
+				</Column>
+				{commonUser?.permissions?.includes(PermissionName.EDIT_PROTECTED_PAGE_STATUS) && (
+					<>
+						<Column size="7">{renderIsProtectedField()}</Column>
+						<Column size="5">
+							{/* Empty for keeping the area next to title empty */}
+							<>&nbsp;</>
+						</Column>
+					</>
+				)}
+				<Column size="7">{renderPathField()}</Column>
+				<Column size="5">
+					{/* Empty for keeping the area next to title empty */}
+					<>&nbsp;</>
+				</Column>
+				{commonUser?.permissions?.includes(PermissionName.EDIT_CONTENT_PAGE_AUTHOR) &&
+					!!commonUser && (
+						<>
+							<Column size="7">{renderAuthorField()}</Column>
+							<Column size="5">
+								{/* Empty for keeping the area next to title empty */}
+								<>&nbsp;</>
+							</Column>
+						</>
+					)}
+				<Column size="7">
+					{renderContentTypeField()}
+					{renderContentWidthField()}
+					{renderLabelsField()}
+				</Column>
+				<Column size="5">
+					{/* Empty for keeping the area next to title empty */}
+					<>&nbsp;</>
+				</Column>
+				{isMultiLanguageEnabled() && <Column size="7">{renderLanguageField()}</Column>}
+				{isMultiLanguageEnabled() && (
+					<Column size="5" className="c-multilanguage-controls">
+						{renderDutchParentPageField()}
+					</Column>
+				)}
+				{!isLoadingAllUserGroups && !isNil(lastUserGroup?.id) && (
+					<Column size="7">{renderUserGroupsField()}</Column>
+				)}
+			</Grid>
+		);
+	};
+
+	const renderHetarchiefEditGrid = () => {
+		return (
+			<Grid>
+				<Column size="12">{renderCoverImageField()}</Column>
+				<Column size="12">{renderTitleField()}</Column>
+				<Column size="12">{renderDescriptionField()}</Column>
+				{commonUser?.permissions?.includes(PermissionName.EDIT_PROTECTED_PAGE_STATUS) && (
+					<Column size="12">{renderIsProtectedField()}</Column>
+				)}
+				<Column size="12">{renderPathField()}</Column>
+				{commonUser?.permissions?.includes(PermissionName.EDIT_CONTENT_PAGE_AUTHOR) && (
+					<Column size="12">{renderAuthorField()}</Column>
+				)}
+				<Column size="12">
+					{renderContentTypeField()}
+					{renderContentWidthField()}
+					{renderLabelsField()}
+				</Column>
+				{isMultiLanguageEnabled() && <Column size="7">{renderLanguageField()}</Column>}
+				{isMultiLanguageEnabled() && (
+					<Column size="5" className="c-multilanguage-controls">
+						{renderDutchParentPageField()}
+					</Column>
+				)}
+				{!isLoadingAllUserGroups && !isNil(lastUserGroup?.id) && (
+					<Column size="12">{renderUserGroupsField()}</Column>
+				)}
+			</Grid>
+		);
+	};
+
+	const renderEditGrid = () => {
+		if (isAvo()) {
+			return renderAvoEditGrid();
+		} else {
+			return renderHetarchiefEditGrid();
+		}
+	};
 
 	if (!commonUser) {
 		return null;
@@ -209,326 +628,8 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 	return (
 		<Container mode="vertical" size="small">
 			<Container mode="horizontal">
-				<Container size="full-width">
-					<Form className="c-content-edit-form">
-						<Grid>
-							<Column size="7">
-								<FormGroup
-									error={formErrors.thumbnailPath}
-									label={tText(
-										'admin/content/components/content-edit-form/content-edit-form___cover-afbeelding'
-									)}
-									className="field-thumbnail-path"
-								>
-									<FileUpload
-										ownerId={commonUser?.profileId}
-										urls={compact([contentPageInfo.thumbnailPath])}
-										assetType={AvoFileUploadAssetType.CONTENT_PAGE_COVER}
-										allowMulti={false}
-										label={tText(
-											'admin/content/components/content-edit-form/content-edit-form___cover-afbeelding'
-										)}
-										onChange={(urls: string[]) => changeContentPageProp('thumbnailPath', urls[0])}
-										onDeleteFile={noop} // images will be deleted from the assets service when the user saves the content page
-									/>
-								</FormGroup>
-							</Column>
-							<Column size="5">
-								<FormGroup
-									error={formErrors.thumbnailPath}
-									label={tText(
-										'modules/content-page/components/content-edit-form/content-edit-form___afbeelding-voor-seo-aanbevolen-1200-x-630'
-									)}
-									className="field-seo-image-path"
-								>
-									<FileUpload
-										ownerId={commonUser?.profileId}
-										urls={compact([contentPageInfo.seo_image_path])}
-										assetType={AvoFileUploadAssetType.CONTENT_PAGE_OG_IMAGE}
-										allowMulti={false}
-										label={tText(
-											'modules/content-page/components/content-edit-form/content-edit-form___seo-afbeelding'
-										)}
-										onChange={(urls: string[]) => changeContentPageProp('seo_image_path', urls[0])}
-										onDeleteFile={noop} // images will be deleted from the assets service when the user saves the content page
-									/>
-								</FormGroup>
-							</Column>
-							<Column size="7">
-								<FormGroup
-									error={formErrors.title}
-									label={tText(
-										'admin/content/components/content-edit-form/content-edit-form___titel'
-									)}
-									required
-									className="field-title"
-								>
-									<TextInput
-										onChange={(value) => {
-											changeContentPageProp('title', value);
-										}}
-										value={contentPageInfo.title}
-									/>
-								</FormGroup>
-							</Column>
-							<Column size="5">
-								{/* Empty for keeping the area next to title empty */}
-								<>&nbsp;</>
-							</Column>
-							<Column size="7">
-								<ContentPageEditFormDescription
-									value={contentPageInfo.description || ''}
-									onChange={(html: string) => {
-										changeContentPageProp('description', html);
-									}}
-									required
-									formError={formErrors.description}
-									className="field-description"
-								></ContentPageEditFormDescription>
-							</Column>
-							<Column size="5">
-								<FormGroup
-									error={formErrors.seoDescription}
-									label={
-										tText(
-											'modules/content-page/components/content-edit-form/content-edit-form___beschrijving-voor-seo',
-											{
-												maxLength: CONTENT_PAGE_SEO_DESCRIPTION_MAX_LENGTH_STRING,
-											}
-										) +
-										` (${
-											contentPageInfo.seoDescription?.length || 0
-										} / ${CONTENT_PAGE_SEO_DESCRIPTION_MAX_LENGTH_STRING})`
-									}
-									className="field-seo-description"
-								>
-									<TextArea
-										value={contentPageInfo.seoDescription || ''}
-										onChange={(newValue) => changeContentPageProp('seoDescription', newValue)}
-										height="auto"
-										placeholder={tText(
-											'admin/content/components/content-edit-form/content-edit-form___omschijving-voor-de-google-de-pagina-omschrijving-wordt-gebruikt-indien-dit-veld-niet-ingevuld-is'
-										)}
-									/>
-								</FormGroup>
-								<FormGroup
-									error={formErrors.metaDescription}
-									label={tText(
-										'admin/content/components/content-edit-form/content-edit-form___beschrijving-voor-export-bv-klaar-nieuwsbrief'
-									)}
-									className="field-meta-description"
-								>
-									<TextArea
-										value={contentPageInfo.metaDescription || ''}
-										onChange={(newValue) => changeContentPageProp('metaDescription', newValue)}
-										height="auto"
-										placeholder={tText(
-											'admin/content/components/content-edit-form/content-edit-form___omschrijving-bij-het-exporteren-van-deze-pagina-bijvoorbeeld-als-de-beschrijving-van-de-nieuwsbrief-voor-klaar'
-										)}
-									/>
-								</FormGroup>
-							</Column>
-							{commonUser?.permissions?.includes(PermissionName.EDIT_PROTECTED_PAGE_STATUS) && (
-								<>
-									<Column size="7">
-										<FormGroup error={formErrors.isProtected} className="field-is-protected">
-											<Checkbox
-												checked={contentPageInfo.isProtected}
-												label={tText(
-													'admin/content/components/content-edit-form/content-edit-form___beschermde-pagina'
-												)}
-												onChange={(value) => changeContentPageProp('isProtected', value)}
-											/>
-										</FormGroup>
-									</Column>
-									<Column size="5">
-										{/* Empty for keeping the area next to title empty */}
-										<>&nbsp;</>
-									</Column>
-								</>
-							)}
-							<Column size="7">
-								<FormGroup
-									error={formErrors.path}
-									label={tText(
-										'admin/content/components/content-edit-form/content-edit-form___url'
-									)}
-									required
-									className="field-path"
-								>
-									<TextInput
-										onChange={(value) => changeContentPageProp('path', value)}
-										value={ContentPageService.getPathOrDefault(contentPageInfo)}
-									/>
-								</FormGroup>
-							</Column>
-							<Column size="5">
-								{/* Empty for keeping the area next to title empty */}
-								<>&nbsp;</>
-							</Column>
-							{commonUser?.permissions?.includes(PermissionName.EDIT_CONTENT_PAGE_AUTHOR) &&
-								!!commonUser && (
-									<>
-										<Column size="7">
-											<FormGroup
-												error={formErrors.userProfileId}
-												label={tText('admin/content/views/content-detail___auteur')}
-												required
-												className="field-user-profile-id"
-											>
-												<ContentPicker
-													hideTargetSwitch
-													hideTypeDropdown
-													placeholder={tText(
-														'admin/content/components/content-edit-form/content-edit-form___selecteer-een-auteur'
-													)}
-													allowedTypes={[AvoCoreContentPickerType.PROFILE]}
-													value={owner}
-													onChange={(item: PickerItem | null) => {
-														if (!item) {
-															return;
-														}
-														changeContentPageProp('userProfileId', item.value);
-													}}
-												/>
-											</FormGroup>
-										</Column>
-										<Column size="5">
-											{/* Empty for keeping the area next to title empty */}
-											<>&nbsp;</>
-										</Column>
-									</>
-								)}
-							<Column size="7">
-								<FormGroup
-									error={formErrors.contentType}
-									label={tText(
-										'admin/content/components/content-edit-form/content-edit-form___content-type'
-									)}
-									required
-									className="field-content-type"
-								>
-									<Select
-										onChange={handleContentTypeChange}
-										options={contentTypeOptions}
-										value={contentPageInfo.contentType}
-									/>
-								</FormGroup>
-								<FormGroup
-									error={formErrors.contentWidth}
-									label={tText(
-										'admin/content/components/content-edit-form/content-edit-form___content-breedte'
-									)}
-									className="field-contentWidth"
-								>
-									<Select
-										onChange={(value) => changeContentPageProp('contentWidth', value)}
-										options={GET_CONTENT_PAGE_WIDTH_OPTIONS()}
-										value={contentPageInfo.contentWidth}
-									/>
-								</FormGroup>
-								<FormGroup
-									label={tText(
-										'admin/content/components/content-edit-form/content-edit-form___labels'
-									)}
-									className="field-labels"
-								>
-									<TagsInput
-										value={mapLabelsToTags(contentPageInfo.labels || [])}
-										options={mapLabelsToTags(contentTypeLabels)}
-										placeholder={
-											contentPageInfo.contentType
-												? tText(
-														'admin/content/components/content-edit-form/content-edit-form___kies-of-maak-een-label-optioneel'
-													)
-												: tText(
-														'admin/content/components/content-edit-form/content-edit-form___kies-eerst-het-type-pagina'
-													)
-										}
-										allowMulti
-										onChange={(values) =>
-											changeContentPageProp(
-												'labels',
-												mapTagsToLabels(values, contentPageInfo.contentType) as ContentPageLabel[]
-											)
-										}
-										disabled={!contentPageInfo.contentType}
-									/>
-								</FormGroup>
-							</Column>
-							<Column size="5">
-								{/* Empty for keeping the area next to title empty */}
-								<>&nbsp;</>
-							</Column>
-							{isMultiLanguageEnabled() && (
-								<Column size="7">
-									<FormGroup
-										label={tText(
-											'modules/content-page/components/content-edit-form/content-edit-form___taal'
-										)}
-										className="field-language"
-									>
-										<Select
-											options={allLanguageOptions}
-											value={contentPageInfo.language}
-											onChange={(newLanguage) => {
-												changeContentPageProp('language', newLanguage);
-											}}
-											placeholder={tText(
-												'modules/content-page/components/content-edit-form/content-edit-form___selecteer-de-taal-van-de-pagina'
-											)}
-											required
-											aria-label={tText(
-												'modules/content-page/components/content-edit-form/content-edit-form___selecteer-de-taal-van-de-pagina'
-											)}
-										></Select>
-									</FormGroup>
-								</Column>
-							)}
-							{isMultiLanguageEnabled() && (
-								<Column size="5" className="c-multilanguage-controls">
-									<FormGroup
-										label={tText(
-											'modules/content-page/components/content-edit-form/content-edit-form___nederlandse-hoofd-pagina'
-										)}
-										className="field-nl-parent-page"
-									>
-										<ContentPicker
-											value={getParentPagePickerItem()}
-											onChange={(newNlParentPage) => {
-												const nlParentPageId = newNlParentPage?.value;
-												changeContentPageProp('nlParentPageId', nlParentPageId);
-											}}
-											allowedTypes={[AvoCoreContentPickerType.NL_CONTENT_PAGE_PARENT_ID]}
-											hideTypeDropdown
-											hideTargetSwitch
-											placeholder={tText(
-												'modules/content-page/components/content-edit-form/content-edit-form___leeg-indien-dit-de-hoofd-pagina-is'
-											)}
-										></ContentPicker>
-									</FormGroup>
-								</Column>
-							)}
-							{!isLoadingAllUserGroups && !isNil(lastUserGroup?.id) && (
-								<Column size="7">
-									<UserGroupSelect
-										label={tText(
-											'admin/content/components/content-edit-form/content-edit-form___zichtbaar-voor'
-										)}
-										error={formErrors.userGroupIds}
-										values={contentPageInfo.userGroupIds || []}
-										required={false}
-										onChange={(userGroupIds: string[]) =>
-											changeContentPageProp('userGroupIds', userGroupIds)
-										}
-										checkedOptions={defaultOptionSelection}
-										disabledOptions={[lastUserGroup.id]}
-										className="field-user-group-ids"
-									/>
-								</Column>
-							)}
-						</Grid>
-					</Form>
+				<Container size={isAvo() ? 'full-width' : 'medium'}>
+					<Form className="c-content-edit-form">{renderEditGrid()}</Form>
 				</Container>
 			</Container>
 		</Container>
