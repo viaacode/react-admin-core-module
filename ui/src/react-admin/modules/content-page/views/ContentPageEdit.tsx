@@ -127,7 +127,7 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 
 	const hasPerm = useCallback(
 		(permission: PermissionName) => {
-			return PermissionService.hasPerm(commonUser, permission)
+			return PermissionService.hasPerm(commonUser, permission);
 		},
 		[commonUser]
 	);
