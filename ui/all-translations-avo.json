@@ -1922,7 +1922,7 @@
     "location": "modules/content-page/views/content-page-detail-meta-data",
     "key": "seo-afbeelding",
     "language": "nl",
-    "value": "Seo afbeelding",
+    "value": "SEO-afbeelding",
     "value_type": "TEXT"
   },
   {
@@ -2309,7 +2309,7 @@
     "location": "modules/content-page/views/content-page-edit",
     "key": "de-seo-beschrijving-mag-maximaal-max-length-tekens-bevatten",
     "language": "nl",
-    "value": "De seo-beschrijving mag maximaal 158 tekens bevatten.",
+    "value": "De SEO-beschrijving mag maximaal 158 tekens bevatten.",
     "value_type": "TEXT"
   },
   {
@@ -5333,7 +5333,7 @@
     "location": "modules/content-page/components/content-edit-form/content-edit-form",
     "key": "afbeelding-voor-seo-aanbevolen-1200-x-630",
     "language": "nl",
-    "value": "Afbeelding voor SEO (aanbevolen 1200 x 630)",
+    "value": "Afbeelding voor SEO (1200 x 630 px aanbevolen)",
     "value_type": "TEXT"
   },
   {
@@ -5342,7 +5342,7 @@
     "location": "modules/content-page/components/content-edit-form/content-edit-form",
     "key": "seo-afbeelding",
     "language": "nl",
-    "value": "Seo afbeelding",
+    "value": "SEO-afbeelding",
     "value_type": "TEXT"
   },
   {
@@ -5360,7 +5360,7 @@
     "location": "modules/content-page/components/content-edit-form/content-edit-form",
     "key": "beschrijving-voor-seo",
     "language": "nl",
-    "value": "Beschrijving voor seo",
+    "value": "Beschrijving voor SEO",
     "value_type": "TEXT"
   },
   {
@@ -6296,7 +6296,7 @@
     "location": "error/views/error-view",
     "key": "de-pagina-werd-niet-gevonden-ingelogd",
     "language": "nl",
-    "value": "De pagina werd niet gevonden (ingelogd).",
+    "value": "De pagina werd niet gevonden of er deed zich een onverwachte fout voor. Contacteer onze Helpdesk via de Feedback-knop als dit probleem zich blijft voordoen.",
     "value_type": "TEXT"
   },
   {
@@ -12515,7 +12515,7 @@
     "location": "assignment/components/assignment-meta-data-form-editable",
     "key": "og-afbeelding-1200-x-630-px",
     "language": "nl",
-    "value": "OG afbeelding (1200 x 630 px)",
+    "value": "OG afbeelding (1200 x 630 px aanbevolen)",
     "value_type": "TEXT"
   },
   {
@@ -16934,7 +16934,7 @@
     "location": "collection/components/collection-or-bundle-edit-publication-details",
     "key": "og-afbeelding-1200-x-630-px",
     "language": "nl",
-    "value": "OG afbeelding (1200 x 630 px)",
+    "value": "OG afbeelding (1200 x 630 px aanbevolen)",
     "value_type": "TEXT"
   },
   {
@@ -18653,7 +18653,7 @@
     "location": "home/views/logged-out-home",
     "key": "uitgelogde-start-pagina-titel",
     "language": "nl",
-    "value": "Uitgelogde-start-pagina-titel",
+    "value": "Welkom op Het Archief voor Onderwijs, dé onderwijsbeeldbank van Vlaanderen.",
     "value_type": "TEXT"
   },
   {
@@ -18662,7 +18662,7 @@
     "location": "home/views/logged-out-home",
     "key": "uitgelogde-start-pagina-beschrijving",
     "language": "nl",
-    "value": "Uitgelogde-start-pagina-beschrijving",
+    "value": "Op Het Archief voor Onderwijs vind je als lesgever audio en video voor je lessen - gratis en reclamevrij - naast kant-en-klare lesideeën en workshops.",
     "value_type": "TEXT"
   },
   {
@@ -21049,15 +21049,6 @@
     "language": "nl",
     "value": "Type",
     "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "workspace/views/quick-lane-overview",
-    "key": "er-is-onvoldoende-informatie-beschikbaar-om-gedeelde-links-op-te-halen",
-    "language": "nl",
-    "value": "Er is onvoldoende informatie beschikbaar om gedeelde links op te halen.",
-    "value_type": "HTML"
   },
   {
     "app": "AVO",
@@ -23567,7 +23558,7 @@
     "location": "admin/items/views/item-detail-admin",
     "key": "afbeelding-voor-seo-fb",
     "language": "nl",
-    "value": "Afbeelding voor SEO/FB",
+    "value": "Afbeelding voor SEO / Facebook",
     "value_type": "TEXT"
   },
   {
