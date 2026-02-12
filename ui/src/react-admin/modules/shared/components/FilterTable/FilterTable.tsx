@@ -219,14 +219,17 @@ export const FilterTable: FunctionComponent<FilterTableProps> = ({
 		// biome-ignore lint/suspicious/noExplicitAny: TODO fix
 		(value: any, id: string) => {
 			// biome-ignore lint/suspicious/noExplicitAny: todo
-			const newTableState: any = cleanupFilterTableState({
+			let newTableState: any = getTableState();
+
+			newTableState = cleanupFilterTableState({
+				...newTableState,
 				[id]: value,
 				...(id !== 'page' ? { page: 0 } : {}), // Reset the page to 0, when any filter or sort order change is made
 			});
 
 			setTableState(newTableState);
 		},
-		[setTableState]
+		[setTableState, getTableState]
 	);
 
 	const handleSortOrderChanged = (columnId: string) => {
