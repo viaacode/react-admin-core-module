@@ -134,6 +134,9 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 
 	const fetchContentPage = useCallback(async () => {
 		try {
+			if (contentPageState.currentContentPageInfo) {
+				return; // Content page already loaded
+			}
 			if (!commonUser) {
 				console.error(
 					"Can't fetch content page in ContentPageEdit because commonUser is undefined"
@@ -211,7 +214,7 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 				type: ToastType.ERROR,
 			});
 		}
-	}, [id, commonUser, hasPerm]);
+	}, [id, commonUser, hasPerm, contentPageState.currentContentPageInfo]);
 
 	const handlePasteBlock = useCallback(
 		async (newBlockConfig: Partial<AvoContentPageBlock>) => {
@@ -553,6 +556,8 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 				),
 				type: ToastType.SUCCESS,
 			});
+
+			onHasUnsavedChangesChanged?.(false);
 			setTimeout(() => {
 				// Delay navigation a split second so we know the onHasUnsavedChanges has run
 				navigate(
