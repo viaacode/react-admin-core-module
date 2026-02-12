@@ -13,7 +13,7 @@ export const ContentPageEditPage: FC<{ url?: string }> = ({ url }) => {
 	return (
 		<ContentPageEdit
 			id={contentPageId}
-			url={url as string}
+			url={(url || window.location.href) as string}
 			onGoBack={() => window.history.back()}
 		/>
 	);
