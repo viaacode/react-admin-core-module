@@ -2,7 +2,8 @@
 @use "./react-split-pane";
 
 .c-content-edit-view__sidebar {
-  height: auto;
+  display: flex;
+  flex-direction: column;
 
   > .o-sidebar__content {
     .c-select__control .c-select__placeholder {
