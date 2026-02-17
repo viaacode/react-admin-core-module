@@ -51,14 +51,17 @@ export class VideoStillsService {
 	public async getVideoStills(objectId: string): Promise<VideoStill[]> {
 		try {
 			const accessToken = await this.getAccessToken();
-			const videoStills = (await got
-				.get(`${process.env.VIDEO_STILLS_ENDPOINT as string}/${objectId}/keyframes`, {
+			const videoStills = await got.get<VideoStillRaw[]>(
+				`${process.env.VIDEO_STILLS_ENDPOINT as string}/${objectId}/keyframes`,
+				{
 					resolveBodyOnly: true,
+					responseType: 'json',
 					headers: {
 						Authorization: `Bearer ${accessToken.token.access_token}`,
 					},
-				})
-				.json()) as VideoStillRaw[];
+				}
+			);
+
 			return videoStills.map((videoStill: VideoStillRaw): VideoStill => {
 				return {
 					thumbnailImagePath: videoStill.ThumbnailImagePath,
