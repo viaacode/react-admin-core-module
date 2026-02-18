@@ -41,7 +41,7 @@ export const BlockCardsWithoutDescription: FunctionComponent<BlockCardsWithoutDe
 				{image && (
 					<Image
 						src={image}
-						alt={title}
+						alt=""
 						className={`c-block-cards-without-description__image c-block-cards-without-description__image--${style}`}
 					/>
 				)}

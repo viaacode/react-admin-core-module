@@ -454,6 +454,7 @@ export const ContentPageDetail: FC<ContentPageDetailProps> = ({
 						<Button
 							label={tText('admin/content/views/content-detail___bewerken')}
 							title={tText('admin/content/views/content-detail___bewerk-deze-content-pagina')}
+							tabIndex={-1}
 						/>
 					</Link>
 				)}

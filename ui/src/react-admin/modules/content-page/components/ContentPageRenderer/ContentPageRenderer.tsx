@@ -187,6 +187,7 @@ export const ContentPageRenderer: FunctionComponent<ContentPageDetailProps> = (p
 								label={tText(
 									'modules/content-page/components/content-page-renderer/content-page-renderer___bewerk-pagina'
 								)}
+								tabIndex={-1}
 							/>
 						)}
 					</Container>
@@ -209,6 +210,7 @@ export const ContentPageRenderer: FunctionComponent<ContentPageDetailProps> = (p
 								'modules/content-page/components/content-page-renderer/content-page-renderer___bewerk-pagina'
 							)}
 							variants="text"
+							tabIndex={-1}
 						/>
 					)}
 				</ToolbarRight>

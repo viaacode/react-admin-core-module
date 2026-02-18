@@ -17,6 +17,7 @@ export interface SmartLinkProps {
 	action?: ButtonAction | null;
 	removeStyles?: boolean;
 	title?: string;
+	ariaLabel?: string;
 	className?: string;
 	children: ReactNode;
 }
@@ -27,6 +28,7 @@ export const SmartLink: FunctionComponent<SmartLinkProps> = ({
 	title,
 	children,
 	className,
+	ariaLabel,
 }) => {
 	const renderLink = (
 		url: string,
@@ -60,6 +62,7 @@ export const SmartLink: FunctionComponent<SmartLinkProps> = ({
 							href={fullUrl}
 							target={LinkTarget.Self}
 							title={title}
+							aria-label={ariaLabel}
 							className={clsx(className, { 'a-link__no-styles': removeStyles })}
 							onClick={() => AdminConfigManager.getConfig().handlers.onExternalLink(fullUrl)}
 						>
@@ -73,6 +76,7 @@ export const SmartLink: FunctionComponent<SmartLinkProps> = ({
 						to={fullUrl}
 						target={LinkTarget.Self}
 						title={title}
+						aria-label={ariaLabel}
 						className={clsx(className, { 'a-link__no-styles': removeStyles })}
 						onClick={(_evt) => {
 							AdminConfigManager.getConfig().handlers.onExternalLink(fullUrl);

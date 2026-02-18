@@ -6,6 +6,7 @@ import { useGetMaintainerGrid } from '~content-blocks/BlockMaintainersGrid/hooks
 import type { HeadingTypeOption } from '~modules/content-page/types/content-block.types';
 import { SmartLink } from '~modules/shared/components/SmartLink/SmartLink';
 import type { DefaultComponentProps } from '~modules/shared/types/components';
+import { tText } from '~shared/helpers/translation-functions.ts';
 import { BlockHeading } from '../BlockHeading/BlockHeading';
 
 export interface BlockMaintainerGridProps extends DefaultComponentProps {
@@ -52,10 +53,13 @@ export const BlockMaintainersGrid: FunctionComponent<BlockMaintainerGridProps> =
 									type: AvoCoreContentPickerType.EXTERNAL_LINK,
 									value: maintainer.homepageUrl,
 								}}
+								ariaLabel={tText('Ga naar aanbieder {{maintainerName}}', {
+									maintainerName: maintainer.name,
+								})}
 							>
 								<img
 									src={maintainer.logoUrl}
-									alt={'Maintainer logo link'}
+									alt=""
 									className="c-block-maintainers-grid__image"
 								></img>
 							</SmartLink>
