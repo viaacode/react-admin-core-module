@@ -73,7 +73,7 @@ export const BlockHetArchiefHeaderSearch: FunctionComponent<BlockHetArchiefHeade
 			</div>
 			<div>
 				<TextInput
-					id={`block-hetarchief-headersearch__search-input}`}
+					id="block-hetarchief-headersearch__search-input"
 					ariaLabel={searchAriaLabel}
 					placeholder={tText(
 						'react-admin/modules/content-page/components/blocks/block-het-archief-header-search/block-het-archief-header-search___start-je-zoektocht'
