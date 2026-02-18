@@ -6,6 +6,5 @@ import type { DefaultComponentProps } from '../../types/components';
 export type TimepickerProps = DefaultComponentProps &
 	DatePickerProps & {
 		children?: ReactNode;
-		id?: string;
-		ariaLabel: string;
+		id: string;
 	};

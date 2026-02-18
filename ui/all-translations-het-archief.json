@@ -17353,6 +17353,1068 @@
   },
   {
     "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/const/content-block",
+    "key": "platinum",
+    "language": "nl",
+    "value": "Platinum",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/const/content-block",
+    "key": "platinum",
+    "language": "en",
+    "value": "Platinum",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/const/content-block",
+    "key": "neutraal",
+    "language": "nl",
+    "value": "Neutraal",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/const/content-block",
+    "key": "neutraal",
+    "language": "en",
+    "value": "Neutraal",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/const/content-block",
+    "key": "zinc",
+    "language": "nl",
+    "value": "Zinc",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/const/content-block",
+    "key": "zinc",
+    "language": "en",
+    "value": "Zinc",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/const/content-block",
+    "key": "sky-blauw",
+    "language": "nl",
+    "value": "Sky blauw",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/const/content-block",
+    "key": "sky-blauw",
+    "language": "en",
+    "value": "Sky blauw",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/content-page/const/get-color-options",
+    "key": "meemoo-logo",
+    "language": "nl",
+    "value": "Meemoo logo",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/content-page/const/get-color-options",
+    "key": "meemoo-logo",
+    "language": "en",
+    "value": "Meemoo logo",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/const/content-block",
+    "key": "overgang-zwart-wit",
+    "language": "nl",
+    "value": "Overgang zwart wit",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/const/content-block",
+    "key": "overgang-zwart-wit",
+    "language": "en",
+    "value": "Overgang zwart wit",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/maintenance-alerts/views/maintenance-alerts-edit-form",
+    "key": "error",
+    "language": "nl",
+    "value": "Error",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/maintenance-alerts/views/maintenance-alerts-edit-form",
+    "key": "error",
+    "language": "en",
+    "value": "Error",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/maintenance-alerts/views/maintenance-alerts-edit-form",
+    "key": "het-valideren-van-het-formulier-is-mislukt",
+    "language": "nl",
+    "value": "Het valideren van het formulier is mislukt",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/maintenance-alerts/views/maintenance-alerts-edit-form",
+    "key": "het-valideren-van-het-formulier-is-mislukt",
+    "language": "en",
+    "value": "Het valideren van het formulier is mislukt",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/maintenance-alerts/views/maintenance-alerts-edit-form",
+    "key": "error",
+    "language": "nl",
+    "value": "Error",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/maintenance-alerts/views/maintenance-alerts-edit-form",
+    "key": "error",
+    "language": "en",
+    "value": "Error",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/maintenance-alerts/views/maintenance-alerts-edit-form",
+    "key": "het-opslaan-van-de-melding-is-mislukt",
+    "language": "nl",
+    "value": "Het opslaan van de melding is mislukt",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/maintenance-alerts/views/maintenance-alerts-edit-form",
+    "key": "het-opslaan-van-de-melding-is-mislukt",
+    "language": "en",
+    "value": "Het opslaan van de melding is mislukt",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/maintenance-alerts/views/maintenance-alerts-edit-form",
+    "key": "error",
+    "language": "nl",
+    "value": "Error",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/maintenance-alerts/views/maintenance-alerts-edit-form",
+    "key": "error",
+    "language": "en",
+    "value": "Error",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/maintenance-alerts/views/maintenance-alerts-edit-form",
+    "key": "bepaalde-velden-in-het-formulier-zijn-niet-correct-ingevuld",
+    "language": "nl",
+    "value": "Bepaalde velden in het formulier zijn niet correct ingevuld",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/maintenance-alerts/views/maintenance-alerts-edit-form",
+    "key": "bepaalde-velden-in-het-formulier-zijn-niet-correct-ingevuld",
+    "language": "en",
+    "value": "Bepaalde velden in het formulier zijn niet correct ingevuld",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/alerts/views/alerts-overview",
+    "key": "succes",
+    "language": "nl",
+    "value": "Succes",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/alerts/views/alerts-overview",
+    "key": "succes",
+    "language": "en",
+    "value": "Succes",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/alerts/views/alerts-overview",
+    "key": "het-aanpassen-van-de-melding-is-gelukt",
+    "language": "nl",
+    "value": "Het aanpassen van de melding is gelukt",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/alerts/views/alerts-overview",
+    "key": "het-aanpassen-van-de-melding-is-gelukt",
+    "language": "en",
+    "value": "Het aanpassen van de melding is gelukt",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/alerts/views/alerts-overview",
+    "key": "error",
+    "language": "nl",
+    "value": "Error",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/alerts/views/alerts-overview",
+    "key": "error",
+    "language": "en",
+    "value": "Error",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/alerts/views/alerts-overview",
+    "key": "het-aanpassen-van-de-melding-is-mislukt",
+    "language": "nl",
+    "value": "Het aanpassen van de melding is mislukt",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/alerts/views/alerts-overview",
+    "key": "het-aanpassen-van-de-melding-is-mislukt",
+    "language": "en",
+    "value": "Het aanpassen van de melding is mislukt",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/alerts/views/alerts-overview",
+    "key": "succes",
+    "language": "nl",
+    "value": "Succes",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/alerts/views/alerts-overview",
+    "key": "succes",
+    "language": "en",
+    "value": "Succes",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/alerts/views/alerts-overview",
+    "key": "het-aanmaken-van-de-melding-is-gelukt",
+    "language": "nl",
+    "value": "Het aanmaken van de melding is gelukt",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/alerts/views/alerts-overview",
+    "key": "het-aanmaken-van-de-melding-is-gelukt",
+    "language": "en",
+    "value": "Het aanmaken van de melding is gelukt",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/alerts/views/alerts-overview",
+    "key": "error",
+    "language": "nl",
+    "value": "Error",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/alerts/views/alerts-overview",
+    "key": "error",
+    "language": "en",
+    "value": "Error",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/alerts/views/alerts-overview",
+    "key": "het-aanmaken-van-de-melding-is-mislukt",
+    "language": "nl",
+    "value": "Het aanmaken van de melding is mislukt",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/alerts/views/alerts-overview",
+    "key": "het-aanmaken-van-de-melding-is-mislukt",
+    "language": "en",
+    "value": "Het aanmaken van de melding is mislukt",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/alerts/views/alerts-overview",
+    "key": "titel-melding",
+    "language": "nl",
+    "value": "Titel melding",
+    "value_type": "HTML"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/alerts/views/alerts-overview",
+    "key": "titel-melding",
+    "language": "en",
+    "value": "Titel melding",
+    "value_type": "HTML"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/maintenance-alerts/views/maintenance-alerts-edit-form",
+    "key": "titel-melding-input-aria-label",
+    "language": "nl",
+    "value": "Titel melding [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/maintenance-alerts/views/maintenance-alerts-edit-form",
+    "key": "titel-melding-input-aria-label",
+    "language": "en",
+    "value": "Titel melding [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/alerts/views/alerts-overview",
+    "key": "beschrijving",
+    "language": "nl",
+    "value": "Beschrijving",
+    "value_type": "HTML"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/alerts/views/alerts-overview",
+    "key": "beschrijving",
+    "language": "en",
+    "value": "Beschrijving",
+    "value_type": "HTML"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/alerts/views/alerts-overview",
+    "key": "verduidelijkend-icoon",
+    "language": "nl",
+    "value": "Verduidelijkend icoon",
+    "value_type": "HTML"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/alerts/views/alerts-overview",
+    "key": "verduidelijkend-icoon",
+    "language": "en",
+    "value": "Verduidelijkend icoon",
+    "value_type": "HTML"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/alerts/views/alerts-overview",
+    "key": "zichtbaar-voor-gebruikersgroep",
+    "language": "nl",
+    "value": "Zichtbaar voor gebruikersgroep",
+    "value_type": "HTML"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/alerts/views/alerts-overview",
+    "key": "zichtbaar-voor-gebruikersgroep",
+    "language": "en",
+    "value": "Zichtbaar voor gebruikersgroep",
+    "value_type": "HTML"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/alerts/views/alerts-overview",
+    "key": "zichtbaar-voor-gebruikersgroep",
+    "language": "nl",
+    "value": "Zichtbaar voor gebruikersgroep",
+    "value_type": "HTML"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/alerts/views/alerts-overview",
+    "key": "zichtbaar-voor-gebruikersgroep",
+    "language": "en",
+    "value": "Zichtbaar voor gebruikersgroep",
+    "value_type": "HTML"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/alerts/views/alerts-overview",
+    "key": "zichtbaar-van",
+    "language": "nl",
+    "value": "Zichtbaar van",
+    "value_type": "HTML"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/alerts/views/alerts-overview",
+    "key": "zichtbaar-van",
+    "language": "en",
+    "value": "Zichtbaar van",
+    "value_type": "HTML"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/maintenance-alerts/views/maintenance-alerts-edit-form",
+    "key": "zichtbaar-vanaf-tijd-input-aria-label",
+    "language": "nl",
+    "value": "Zichtbaar vanaf tijd [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/maintenance-alerts/views/maintenance-alerts-edit-form",
+    "key": "zichtbaar-vanaf-tijd-input-aria-label",
+    "language": "en",
+    "value": "Zichtbaar vanaf tijd [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/alerts/views/alerts-overview",
+    "key": "zichtbaar-tot",
+    "language": "nl",
+    "value": "Zichtbaar tot",
+    "value_type": "HTML"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/alerts/views/alerts-overview",
+    "key": "zichtbaar-tot",
+    "language": "en",
+    "value": "Zichtbaar tot",
+    "value_type": "HTML"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/maintenance-alerts/views/maintenance-alerts-edit-form",
+    "key": "zichtbaar-tot-tijd-input-aria-label",
+    "language": "nl",
+    "value": "Zichtbaar tot tijd [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/maintenance-alerts/views/maintenance-alerts-edit-form",
+    "key": "zichtbaar-tot-tijd-input-aria-label",
+    "language": "en",
+    "value": "Zichtbaar tot tijd [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/maintenance-alerts/views/maintenance-alerts-edit-form",
+    "key": "taal",
+    "language": "nl",
+    "value": "Taal",
+    "value_type": "HTML"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/maintenance-alerts/views/maintenance-alerts-edit-form",
+    "key": "taal",
+    "language": "en",
+    "value": "Taal",
+    "value_type": "HTML"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/alerts/views/alerts-overview",
+    "key": "melding-aanmaken",
+    "language": "nl",
+    "value": "Melding aanmaken",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/alerts/views/alerts-overview",
+    "key": "melding-aanmaken",
+    "language": "en",
+    "value": "Melding aanmaken",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/alerts/views/alerts-overview",
+    "key": "melding-aanpassen",
+    "language": "nl",
+    "value": "Melding aanpassen",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/alerts/views/alerts-overview",
+    "key": "melding-aanpassen",
+    "language": "en",
+    "value": "Melding aanpassen",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/alerts/views/alerts-overview",
+    "key": "succes",
+    "language": "nl",
+    "value": "Succes",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/alerts/views/alerts-overview",
+    "key": "succes",
+    "language": "en",
+    "value": "Succes",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/alerts/views/alerts-overview",
+    "key": "het-verwijderen-van-de-melding-is-gelukt",
+    "language": "nl",
+    "value": "Het verwijderen van de melding is gelukt",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/alerts/views/alerts-overview",
+    "key": "het-verwijderen-van-de-melding-is-gelukt",
+    "language": "en",
+    "value": "Het verwijderen van de melding is gelukt",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/alerts/views/alerts-overview",
+    "key": "error",
+    "language": "nl",
+    "value": "Error",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/alerts/views/alerts-overview",
+    "key": "error",
+    "language": "en",
+    "value": "Error",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/alerts/views/alerts-overview",
+    "key": "het-verwijderen-van-de-melding-is-mislukt",
+    "language": "nl",
+    "value": "Het verwijderen van de melding is mislukt",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/alerts/views/alerts-overview",
+    "key": "het-verwijderen-van-de-melding-is-mislukt",
+    "language": "en",
+    "value": "Het verwijderen van de melding is mislukt",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/alerts/views/alerts-overview",
+    "key": "actief",
+    "language": "nl",
+    "value": "Actief",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/alerts/views/alerts-overview",
+    "key": "actief",
+    "language": "en",
+    "value": "Actief",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/alerts/views/alerts-overview",
+    "key": "inactief",
+    "language": "nl",
+    "value": "Inactief",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/alerts/views/alerts-overview",
+    "key": "inactief",
+    "language": "en",
+    "value": "Inactief",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/maintenance-alerts/views/maintenance-alerts-overview",
+    "key": "hover-bewerk-notificatie",
+    "language": "nl",
+    "value": "Hover bewerk notificatie",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/maintenance-alerts/views/maintenance-alerts-overview",
+    "key": "hover-bewerk-notificatie",
+    "language": "en",
+    "value": "Hover bewerk notificatie",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/maintenance-alerts/views/maintenance-alerts-overview",
+    "key": "hover-verwijder-notificatie",
+    "language": "nl",
+    "value": "Hover verwijder notificatie",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/maintenance-alerts/views/maintenance-alerts-overview",
+    "key": "hover-verwijder-notificatie",
+    "language": "en",
+    "value": "Hover verwijder notificatie",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/alerts/views/alerts-overview",
+    "key": "titel-melding",
+    "language": "nl",
+    "value": "Titel melding",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/alerts/views/alerts-overview",
+    "key": "titel-melding",
+    "language": "en",
+    "value": "Titel melding",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/alerts/views/alerts-overview",
+    "key": "zichtbaar-van",
+    "language": "nl",
+    "value": "Zichtbaar van",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/alerts/views/alerts-overview",
+    "key": "zichtbaar-van",
+    "language": "en",
+    "value": "Zichtbaar van",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/alerts/views/alerts-overview",
+    "key": "zichtbaar-tot",
+    "language": "nl",
+    "value": "Zichtbaar tot",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/alerts/views/alerts-overview",
+    "key": "zichtbaar-tot",
+    "language": "en",
+    "value": "Zichtbaar tot",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/alerts/views/alerts-overview",
+    "key": "status",
+    "language": "nl",
+    "value": "Status",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/alerts/views/alerts-overview",
+    "key": "status",
+    "language": "en",
+    "value": "Status",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/maintenance-alerts/views/maintenance-alerts-overview",
+    "key": "taal",
+    "language": "nl",
+    "value": "Taal",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/maintenance-alerts/views/maintenance-alerts-overview",
+    "key": "taal",
+    "language": "en",
+    "value": "Taal",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/maintenance-alerts/views/maintenance-alerts-overview",
+    "key": "er-zijn-nog-geen-meldingen-aangemaakt",
+    "language": "nl",
+    "value": "Er zijn nog geen meldingen aangemaakt",
+    "value_type": "HTML"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/maintenance-alerts/views/maintenance-alerts-overview",
+    "key": "er-zijn-nog-geen-meldingen-aangemaakt",
+    "language": "en",
+    "value": "Er zijn nog geen meldingen aangemaakt",
+    "value_type": "HTML"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/maintenance-alerts/views/maintenance-alerts-overview",
+    "key": "er-zijn-nog-geen-meldingen-aangemaakt",
+    "language": "nl",
+    "value": "Er zijn nog geen meldingen aangemaakt",
+    "value_type": "HTML"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/maintenance-alerts/views/maintenance-alerts-overview",
+    "key": "er-zijn-nog-geen-meldingen-aangemaakt",
+    "language": "en",
+    "value": "Er zijn nog geen meldingen aangemaakt",
+    "value_type": "HTML"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/maintenance-alerts/views/maintenance-alerts-overview",
+    "key": "zoeken-op-titel-of-bericht",
+    "language": "nl",
+    "value": "Zoeken op titel of bericht",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/maintenance-alerts/views/maintenance-alerts-overview",
+    "key": "zoeken-op-titel-of-bericht",
+    "language": "en",
+    "value": "Zoeken op titel of bericht",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/maintenance-alerts/views/maintenance-alerts-overview",
+    "key": "er-zijn-geen-meldingen-gevonden-die-voldoen-aan-je-zoekterm",
+    "language": "nl",
+    "value": "Er zijn geen meldingen gevonden die voldoen aan je zoekterm",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/maintenance-alerts/views/maintenance-alerts-overview",
+    "key": "er-zijn-geen-meldingen-gevonden-die-voldoen-aan-je-zoekterm",
+    "language": "en",
+    "value": "Er zijn geen meldingen gevonden die voldoen aan je zoekterm",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/maintenance-alerts/views/maintenance-alerts-overview",
+    "key": "zoek-input-aria-label",
+    "language": "nl",
+    "value": "Zoek input aria label",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/maintenance-alerts/views/maintenance-alerts-overview",
+    "key": "zoek-input-aria-label",
+    "language": "en",
+    "value": "Zoek input aria label",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/alerts/views/alerts-overview",
+    "key": "meldingen",
+    "language": "nl",
+    "value": "Meldingen",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/alerts/views/alerts-overview",
+    "key": "meldingen",
+    "language": "en",
+    "value": "Meldingen",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/alerts/views/alerts-overview",
+    "key": "nieuwe-melding-aanmaken",
+    "language": "nl",
+    "value": "Nieuwe melding aanmaken",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/alerts/views/alerts-overview",
+    "key": "nieuwe-melding-aanmaken",
+    "language": "en",
+    "value": "Nieuwe melding aanmaken",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/alerts/views/alerts-overview",
+    "key": "het-verwijderen-van-een-melding-kan-niet-ongedaan-gemaakt-worden",
+    "language": "nl",
+    "value": "Het verwijderen van een melding kan niet ongedaan gemaakt worden",
+    "value_type": "HTML"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/alerts/views/alerts-overview",
+    "key": "het-verwijderen-van-een-melding-kan-niet-ongedaan-gemaakt-worden",
+    "language": "en",
+    "value": "Het verwijderen van een melding kan niet ongedaan gemaakt worden",
+    "value_type": "HTML"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/translations/views/translations-overview",
+    "key": "zoek-vertaling-input-aria-label",
+    "language": "nl",
+    "value": "Zoek vertaling [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/translations/views/translations-overview",
+    "key": "zoek-vertaling-input-aria-label",
+    "language": "en",
+    "value": "Zoek vertaling [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/user/helpers/render-user-overview-table-cells",
+    "key": "acties-voor-gebruiker-user-name",
+    "language": "nl",
+    "value": "Acties voor gebruiker {{userName}}",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/user/helpers/render-user-overview-table-cells",
+    "key": "acties-voor-gebruiker-user-name",
+    "language": "en",
+    "value": "Acties voor gebruiker {{userName}}",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/date-picker/date-picker",
+    "key": "datum-input-aria-label",
+    "language": "nl",
+    "value": "Datum [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/date-picker/date-picker",
+    "key": "datum-input-aria-label",
+    "language": "en",
+    "value": "Datum [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/shared/components/filter-table/filter-table",
+    "key": "from-to-van-total-resultaten",
+    "language": "nl",
+    "value": "{{from}}-{{to}} van {{total}} resultaten",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/shared/components/filter-table/filter-table",
+    "key": "from-to-van-total-resultaten",
+    "language": "en",
+    "value": "{{from}}-{{to}} van {{total}} resultaten",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-overview-newspaper-titles/block-overview-newspaper-titles",
+    "key": "zoek-kranten-op-titel-input-aria-label",
+    "language": "nl",
+    "value": "Zoek kranten op titel [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-overview-newspaper-titles/block-overview-newspaper-titles",
+    "key": "zoek-kranten-op-titel-input-aria-label",
+    "language": "en",
+    "value": "Zoek kranten op titel [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
     "component": "FRONTEND",
     "location": "pages/404",
     "key": "niet-gevonden",
@@ -18024,7 +19086,7 @@
     "key": "dit-object-is-onderdeel-van-dit-hoofdobject",
     "language": "nl",
     "value": "Dit object is onderdeel van dit hoofdobject",
-    "value_type": "HTML"
+    "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
@@ -18033,7 +19095,7 @@
     "key": "dit-object-is-onderdeel-van-dit-hoofdobject",
     "language": "en",
     "value": "This object is a part of this main object",
-    "value_type": "HTML"
+    "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
@@ -18042,7 +19104,7 @@
     "key": "dit-object-heeft-1-fragment",
     "language": "nl",
     "value": "Dit object heeft 1 fragment",
-    "value_type": "HTML"
+    "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
@@ -18051,7 +19113,7 @@
     "key": "dit-object-heeft-1-fragment",
     "language": "en",
     "value": "This object has 1 fragment",
-    "value_type": "HTML"
+    "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
@@ -18060,7 +19122,7 @@
     "key": "dit-object-heeft-amount-fragmenten",
     "language": "nl",
     "value": "Dit object heeft {{amount}} fragmenten",
-    "value_type": "HTML"
+    "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
@@ -18069,7 +19131,7 @@
     "key": "dit-object-heeft-amount-fragmenten",
     "language": "en",
     "value": "This object consists of {{amount}} fragments",
-    "value_type": "HTML"
+    "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
@@ -19356,7 +20418,7 @@
     "key": "annuleer",
     "language": "nl",
     "value": "Annuleer",
-    "value_type": "HTML"
+    "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
@@ -19365,7 +20427,7 @@
     "key": "annuleer",
     "language": "en",
     "value": "Cancel",
-    "value_type": "HTML"
+    "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
@@ -19374,7 +20436,7 @@
     "key": "aanvaarden",
     "language": "nl",
     "value": "Aanvaarden",
-    "value_type": "HTML"
+    "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
@@ -19383,7 +20445,7 @@
     "key": "aanvaarden",
     "language": "en",
     "value": "Accept",
-    "value_type": "HTML"
+    "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
@@ -20598,7 +21660,7 @@
     "key": "zoeken-in-de-catalogus",
     "language": "nl",
     "value": "Zoeken in de catalogus",
-    "value_type": "HTML"
+    "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
@@ -20607,7 +21669,7 @@
     "key": "zoeken-in-de-catalogus",
     "language": "en",
     "value": "Search in the catalogue",
-    "value_type": "HTML"
+    "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
@@ -20616,7 +21678,7 @@
     "key": "mijn-materiaalaanvragen-raadplegen",
     "language": "nl",
     "value": "Mijn materiaalaanvragen raadplegen",
-    "value_type": "HTML"
+    "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
@@ -20625,7 +21687,7 @@
     "key": "mijn-materiaalaanvragen-raadplegen",
     "language": "en",
     "value": "Check my item requests",
-    "value_type": "HTML"
+    "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
@@ -20796,7 +21858,7 @@
     "key": "verwijderen",
     "language": "nl",
     "value": "Verwijderen",
-    "value_type": "HTML"
+    "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
@@ -20805,7 +21867,7 @@
     "key": "verwijderen",
     "language": "en",
     "value": "Delete",
-    "value_type": "HTML"
+    "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
@@ -20814,7 +21876,7 @@
     "key": "verplaatsen",
     "language": "nl",
     "value": "Verplaatsen",
-    "value_type": "HTML"
+    "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
@@ -20823,7 +21885,7 @@
     "key": "verplaatsen",
     "language": "en",
     "value": "Move",
-    "value_type": "HTML"
+    "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
@@ -21120,7 +22182,7 @@
     "key": "annuleren",
     "language": "nl",
     "value": "Annuleren",
-    "value_type": "HTML"
+    "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
@@ -21129,7 +22191,7 @@
     "key": "annuleren",
     "language": "en",
     "value": "Cancel",
-    "value_type": "HTML"
+    "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
@@ -21921,6 +22983,24 @@
     "key": "aanvrager",
     "language": "en",
     "value": "Applicant",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/const/material-requests",
+    "key": "materiaal",
+    "language": "nl",
+    "value": "Materiaal",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/const/material-requests",
+    "key": "materiaal",
+    "language": "en",
+    "value": "Materiaal",
     "value_type": "TEXT"
   },
   {
@@ -27168,7 +28248,7 @@
     "key": "verder-werken",
     "language": "nl",
     "value": "Verder werken",
-    "value_type": "HTML"
+    "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
@@ -27177,7 +28257,7 @@
     "key": "verder-werken",
     "language": "en",
     "value": "Continue your work",
-    "value_type": "HTML"
+    "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
@@ -27186,7 +28266,7 @@
     "key": "ja-ik-ben-zeker",
     "language": "nl",
     "value": "Ja, ik ben zeker",
-    "value_type": "HTML"
+    "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
@@ -27195,7 +28275,7 @@
     "key": "ja-ik-ben-zeker",
     "language": "en",
     "value": "Yes, I&#x27;m sure",
-    "value_type": "HTML"
+    "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
@@ -28554,7 +29634,7 @@
     "key": "annuleren",
     "language": "nl",
     "value": "Annuleren",
-    "value_type": "HTML"
+    "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
@@ -28563,7 +29643,7 @@
     "key": "annuleren",
     "language": "en",
     "value": "Cancel",
-    "value_type": "HTML"
+    "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
@@ -28572,7 +29652,7 @@
     "key": "wijzigingen-opslaan",
     "language": "nl",
     "value": "Wijzigingen opslaan",
-    "value_type": "HTML"
+    "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
@@ -28581,7 +29661,7 @@
     "key": "wijzigingen-opslaan",
     "language": "en",
     "value": "Save changes",
-    "value_type": "HTML"
+    "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
@@ -28950,7 +30030,7 @@
     "key": "nieuwe-bezoekersruimte",
     "language": "nl",
     "value": "Bezoekersruimte toevoegen",
-    "value_type": "HTML"
+    "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
@@ -28959,7 +30039,7 @@
     "key": "nieuwe-bezoekersruimte",
     "language": "en",
     "value": "Add visitor space",
-    "value_type": "HTML"
+    "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
@@ -29094,7 +30174,7 @@
     "key": "inloggen-met-het-archief-account",
     "language": "nl",
     "value": "Inloggen",
-    "value_type": "HTML"
+    "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
@@ -29103,7 +30183,7 @@
     "key": "inloggen-met-het-archief-account",
     "language": "en",
     "value": "Log in",
-    "value_type": "HTML"
+    "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
@@ -29130,7 +30210,7 @@
     "key": "registreer-je-hier",
     "language": "nl",
     "value": "Registreer je hier",
-    "value_type": "HTML"
+    "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
@@ -29139,7 +30219,7 @@
     "key": "registreer-je-hier",
     "language": "en",
     "value": "Register here",
-    "value_type": "HTML"
+    "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
@@ -29436,7 +30516,7 @@
     "key": "annuleer",
     "language": "nl",
     "value": "Annuleer",
-    "value_type": "HTML"
+    "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
@@ -29445,7 +30525,7 @@
     "key": "annuleer",
     "language": "en",
     "value": "Cancel",
-    "value_type": "HTML"
+    "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
@@ -29454,7 +30534,7 @@
     "key": "bewaar-wijzigingen",
     "language": "nl",
     "value": "Bewaar wijzigingen",
-    "value_type": "HTML"
+    "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
@@ -29463,7 +30543,7 @@
     "key": "bewaar-wijzigingen",
     "language": "en",
     "value": "Save changes",
-    "value_type": "HTML"
+    "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
@@ -29472,7 +30552,7 @@
     "key": "annuleren",
     "language": "nl",
     "value": "Annuleren",
-    "value_type": "HTML"
+    "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
@@ -29481,7 +30561,7 @@
     "key": "annuleren",
     "language": "en",
     "value": "Cancel",
-    "value_type": "HTML"
+    "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
@@ -29490,7 +30570,7 @@
     "key": "opslaan",
     "language": "nl",
     "value": "Opslaan",
-    "value_type": "HTML"
+    "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
@@ -29499,7 +30579,7 @@
     "key": "opslaan",
     "language": "en",
     "value": "Save",
-    "value_type": "HTML"
+    "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
@@ -29670,7 +30750,7 @@
     "key": "verwijder-afbeelding",
     "language": "nl",
     "value": "Verwijder afbeelding",
-    "value_type": "HTML"
+    "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
@@ -29679,7 +30759,7 @@
     "key": "verwijder-afbeelding",
     "language": "en",
     "value": "Delete image",
-    "value_type": "HTML"
+    "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
@@ -33000,7 +34080,7 @@
     "key": "verwijderen",
     "language": "nl",
     "value": "Verwijderen",
-    "value_type": "HTML"
+    "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
@@ -33009,7 +34089,7 @@
     "key": "verwijderen",
     "language": "en",
     "value": "Delete",
-    "value_type": "HTML"
+    "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
@@ -33018,7 +34098,7 @@
     "key": "annuleren",
     "language": "nl",
     "value": "Annuleren",
-    "value_type": "HTML"
+    "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
@@ -33027,7 +34107,7 @@
     "key": "annuleren",
     "language": "en",
     "value": "Cancel",
-    "value_type": "HTML"
+    "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
@@ -33720,7 +34800,7 @@
     "key": "nee",
     "language": "nl",
     "value": "Nee",
-    "value_type": "HTML"
+    "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
@@ -33729,7 +34809,7 @@
     "key": "nee",
     "language": "en",
     "value": "No",
-    "value_type": "HTML"
+    "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
@@ -33738,7 +34818,7 @@
     "key": "ja",
     "language": "nl",
     "value": "Ja",
-    "value_type": "HTML"
+    "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
@@ -33747,7 +34827,7 @@
     "key": "ja",
     "language": "en",
     "value": "Yes",
-    "value_type": "HTML"
+    "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
@@ -34098,7 +35178,7 @@
     "key": "ga-naar-de-homepage",
     "language": "nl",
     "value": "Ga naar de startpagina",
-    "value_type": "HTML"
+    "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
@@ -34107,7 +35187,7 @@
     "key": "ga-naar-de-homepage",
     "language": "en",
     "value": "Go to homepage",
-    "value_type": "HTML"
+    "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
@@ -34188,7 +35268,7 @@
     "key": "verken-de-publieke-catalogus",
     "language": "nl",
     "value": "Verken de publieke catalogus",
-    "value_type": "HTML"
+    "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
@@ -34197,7 +35277,7 @@
     "key": "verken-de-publieke-catalogus",
     "language": "en",
     "value": "Explore the public catalog",
-    "value_type": "HTML"
+    "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
@@ -34206,7 +35286,7 @@
     "key": "zoek-verder-in-het-archief-van-organisation-name",
     "language": "nl",
     "value": "Zoek verder in het archief van {{organisationName}}",
-    "value_type": "HTML"
+    "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
@@ -34215,7 +35295,7 @@
     "key": "zoek-verder-in-het-archief-van-organisation-name",
     "language": "en",
     "value": "Zoek verder in het archief van {{organisationName}}",
-    "value_type": "HTML"
+    "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
@@ -34278,7 +35358,7 @@
     "key": "zoek-in-de-publieke-catalogus",
     "language": "nl",
     "value": "Zoek in de publieke catalogus",
-    "value_type": "HTML"
+    "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
@@ -34287,7 +35367,7 @@
     "key": "zoek-in-de-publieke-catalogus",
     "language": "en",
     "value": "Search in the public catalogue",
-    "value_type": "HTML"
+    "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
@@ -36906,7 +37986,7 @@
     "key": "nieuwe-stelling",
     "language": "nl",
     "value": "Voeg filter toe",
-    "value_type": "HTML"
+    "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
@@ -36915,7 +37995,7 @@
     "key": "nieuwe-stelling",
     "language": "en",
     "value": "Add filter",
-    "value_type": "HTML"
+    "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
@@ -37983,6 +39063,42 @@
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
     "location": "modules/visitor-space/components/material-request-blade/material-request-blade",
+    "key": "type-aanvraag-wijzigen",
+    "language": "nl",
+    "value": "Type aanvraag wijzigen",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/material-request-blade/material-request-blade",
+    "key": "type-aanvraag-wijzigen",
+    "language": "en",
+    "value": "Edit the request type",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/material-request-blade/material-request-blade",
+    "key": "annuleren",
+    "language": "nl",
+    "value": "Annuleren",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/material-request-blade/material-request-blade",
+    "key": "annuleren",
+    "language": "en",
+    "value": "Cancel",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/material-request-blade/material-request-blade",
     "key": "je-hebt-al-op-dit-materiaal-een-formulier-voor-hergebruik-ingevuld-als-je-het-type-aanvraag-verandert-zal-de-informatie-in-dit-formulier-onherroepelijk-verwijderd-worden",
     "language": "nl",
     "value": "Je hebt al op dit materiaal een formulier voor hergebruik ingevuld. Als je het type aanvraag verandert zal de informatie in dit formulier onherroepelijk verwijderd worden.",
@@ -37996,42 +39112,6 @@
     "language": "en",
     "value": "You have already filled out a form for intended use for this material. If you change the type of your request, the information in this form will be lost.",
     "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/material-request-blade/material-request-blade",
-    "key": "type-aanvraag-wijzigen",
-    "language": "nl",
-    "value": "Type aanvraag wijzigen",
-    "value_type": "HTML"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/material-request-blade/material-request-blade",
-    "key": "type-aanvraag-wijzigen",
-    "language": "en",
-    "value": "Edit the request type",
-    "value_type": "HTML"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/material-request-blade/material-request-blade",
-    "key": "annuleren",
-    "language": "nl",
-    "value": "Annuleren",
-    "value_type": "HTML"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/material-request-blade/material-request-blade",
-    "key": "annuleren",
-    "language": "en",
-    "value": "Cancel",
-    "value_type": "HTML"
   },
   {
     "app": "HET_ARCHIEF",
@@ -38084,7 +39164,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "downloadkwaliteit-error-verplicht",
     "language": "en",
-    "value": "Duid aan in welke kwaliteit je het materiaal wil ontvangen. (engels)",
+    "value": "Please indicate your preferred playback quality",
     "value_type": "TEXT"
   },
   {
@@ -38228,7 +39308,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "geografisch-gebruik-error-verplicht",
     "language": "en",
-    "value": "Duid aan wat het geografisch gebruik van het materiaal zal zijn. (engels)",
+    "value": "Please indicate where the material will be used geographically.",
     "value_type": "TEXT"
   },
   {
@@ -38246,7 +39326,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "gebruik-in-de-tijd-error-verplicht",
     "language": "en",
-    "value": "Geef het geplande gebruik doorheen de tijd aan. (engels)",
+    "value": "Please state your intended use throughout the requested period.",
     "value_type": "TEXT"
   },
   {
@@ -38264,7 +39344,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "gebruik-in-de-tijd-startdatum-error-verplicht",
     "language": "en",
-    "value": "Geef het geplande gebruik doorheen de tijd aan. (engels)",
+    "value": "Please state your intended use throughout the requested period.",
     "value_type": "TEXT"
   },
   {
@@ -38282,7 +39362,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "gebruik-in-de-tijd-einddatum-error-verplicht",
     "language": "en",
-    "value": "Geef het geplande gebruik doorheen de tijd aan. (engels)",
+    "value": "Please state your intended use throughout the requested period.",
     "value_type": "TEXT"
   },
   {
@@ -38291,7 +39371,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "gebruik-in-de-tijd-einddatum-error-einddatum-voor-startdatum",
     "language": "nl",
-    "value": "De eind datum moet na de start datum vallen.",
+    "value": "De einddatum moet na de startdatum vallen.",
     "value_type": "TEXT"
   },
   {
@@ -38300,7 +39380,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "gebruik-in-de-tijd-einddatum-error-einddatum-voor-startdatum",
     "language": "en",
-    "value": "De eind datum moet na de start datum vallen. (engels)",
+    "value": "The end date must be after the start date.",
     "value_type": "TEXT"
   },
   {
@@ -38426,7 +39506,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "er-ging-iets-mis",
     "language": "en",
-    "value": "Er ging iets mis (engels)",
+    "value": "An error occurred",
     "value_type": "TEXT"
   },
   {
@@ -38444,7 +39524,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "er-ging-iets-mis-tijdens-het-opslaan",
     "language": "en",
-    "value": "Er ging iets mis tijdens het opslaan (engels)",
+    "value": "An error occurred while saving",
     "value_type": "TEXT"
   },
   {
@@ -38588,7 +39668,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "er-bestaat-reeds-een-hergebruiksformulier-met-deze-informatie",
     "language": "en",
-    "value": "Er bestaat reeds een hergebruiksformulier met deze informatie (engels)",
+    "value": "A form for intended use with this information already exists",
     "value_type": "TEXT"
   },
   {
@@ -38606,7 +39686,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "je-hebt-voor-dit-materiaal-een-formulier-voor-hergebruik-ingevuld-met-exact-dezelfde-vereisten-gelieve-een-ander-fragment-of-een-andere-downloadkwaliteit-te-selecteren",
     "language": "en",
-    "value": "Je hebt voor dit materiaal een formulier voor hergebruik ingevuld met exact dezelfde vereisten. Gelieve een ander fragment of een andere downloadkwaliteit te selecteren (engels)",
+    "value": "You have filled in a form for intended use with the exact same parameters. Please select a different fragment or a different download quality",
     "value_type": "TEXT"
   },
   {
@@ -38660,7 +39740,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "downloadkwaliteit-label",
     "language": "en",
-    "value": "Downloadkwaliteit (engels)",
+    "value": "Download quality",
     "value_type": "TEXT"
   },
   {
@@ -38678,7 +39758,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "downloadkwaliteit-vraag",
     "language": "en",
-    "value": "In welke kwaliteit wil je het materiaal ontvangen? (engels)",
+    "value": "In what quality do you wish to receive the material?",
     "value_type": "TEXT"
   },
   {
@@ -38696,7 +39776,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "downloadkwaliteit-afspeelkwaliteit-label",
     "language": "en",
-    "value": "Afspeelkwaliteit (engels)",
+    "value": "Playback quality",
     "value_type": "TEXT"
   },
   {
@@ -38714,7 +39794,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "downloadkwaliteit-afspeelkwaliteit-omschrijving",
     "language": "en",
-    "value": "Afspeelkwaliteit omschrijving (engels)",
+    "value": "Playback quality description",
     "value_type": "HTML"
   },
   {
@@ -38732,7 +39812,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "downloadkwaliteit-hogere-kwaliteit-label",
     "language": "en",
-    "value": "Hogere kwaliteit (engels)",
+    "value": "Higher quality",
     "value_type": "TEXT"
   },
   {
@@ -38750,7 +39830,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "downloadkwaliteit-hogere-kwaliteit-omschrijving",
     "language": "en",
-    "value": "Hoogst beschikbare kwaliteit (engels)",
+    "value": "Highest available quality",
     "value_type": "HTML"
   },
   {
@@ -39398,7 +40478,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "geografisch-gebruik-label",
     "language": "en",
-    "value": "Geografisch gebruik (engels)",
+    "value": "Geographical use",
     "value_type": "TEXT"
   },
   {
@@ -39434,7 +40514,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "geografisch-gebruik-integraal-gericht-op-vlaamse-of-belgische-markt-label",
     "language": "en",
-    "value": "Integraal gericht op de Vlaamse of Belgische markt (engels)",
+    "value": "Entirely focussed on the Flemish or Belgian market",
     "value_type": "TEXT"
   },
   {
@@ -39452,7 +40532,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "geografisch-gebruik-integraal-gericht-op-vlaamse-of-belgische-markt-omschrijving",
     "language": "en",
-    "value": "Ter verduidelijking: het hergebruik is integraal of hoofdzakelijk gericht op de Vlaamse/Belgische markt als uit de presentatie of de keuze van de doelgroep blijkt dat in de praktijk deze markt wordt geviseerd. Bv. presentaties in Belgische/Vlaamse musea voldoen hieraan; of gebruik op websites met uitsluitend interfaces in de officiële talen. (engels)",
+    "value": "To clarify: the intended use is entirely or mainly focussed on the Flemish/Belgian market if it is clear from the presentation or choice of target audience that this market is the focus. E.g. presentation in Belgian or Flemish museums is compliant; or the use on websites that only have an interface in the official languages.",
     "value_type": "HTML"
   },
   {
@@ -39488,7 +40568,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "geografisch-gebruik-niet-integraal-gericht-op-vlaamse-of-belgische-markt-omschrijving",
     "language": "en",
-    "value": "Hergebruik is niet integraal of hoofdzakelijk gericht op de Vlaamse of Belgische markt. (engels)",
+    "value": "The intended use is not entirely or mainly focussed on the Flemish or Belgian market.",
     "value_type": "HTML"
   },
   {
@@ -39506,7 +40586,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "gebruik-in-de-tijd-label",
     "language": "en",
-    "value": "Gebruik in de tijd (engels)",
+    "value": "Use over time",
     "value_type": "TEXT"
   },
   {
@@ -39560,7 +40640,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "gebruik-in-de-tijd-onbeperkt-omschrijving",
     "language": "en",
-    "value": "De gevraagde toelating is onbeperkt in de tijd. (engels)",
+    "value": "The requested access is not time-restricted.",
     "value_type": "HTML"
   },
   {
@@ -39596,7 +40676,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "gebruik-in-de-tijd-beperkte-periode-omschrijving",
     "language": "en",
-    "value": "De gevraagde toelating heeft betrekking op een beperkte periode. (engels)",
+    "value": "The request for access is time-restricted.",
     "value_type": "HTML"
   },
   {
@@ -39632,7 +40712,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "bronvermelding-vraag",
     "language": "en",
-    "value": "Op welke manier is de bronvermelding voorzien? (engels)",
+    "value": "How will the source citations be published?",
     "value_type": "TEXT"
   },
   {
@@ -39704,7 +40784,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "bronvermelding-vermelding-bij-object-niet-noodzakelijk-gelijktijdig-omschrijving",
     "language": "en",
-    "value": "De bron zal worden vermeld bij het materiaal, maar niet noodzakelijk op het moment van tonen van het materiaal (bv. op een eindgeneriek, of in een bronnensectie van een boek of website). (engels)",
+    "value": "The source will be cited with the material, but not necessarily simultaneously (e.g. in the closing credits, or in the notes of a book or website)",
     "value_type": "HTML"
   },
   {
@@ -39758,7 +40838,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "ik-wil-dit-materiaal-downloaden-en-hergebruiken",
     "language": "en",
-    "value": "Ik wil dit materiaal downloaden en hergebruiken (engels)",
+    "value": "I want to download and use this material",
     "value_type": "TEXT"
   },
   {
@@ -41298,7 +42378,7 @@
     "key": "vraag-toegang-aan",
     "language": "nl",
     "value": "Vraag toegang aan",
-    "value_type": "HTML"
+    "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
@@ -41307,7 +42387,7 @@
     "key": "vraag-toegang-aan",
     "language": "en",
     "value": "Request access",
-    "value_type": "HTML"
+    "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
@@ -41352,7 +42432,7 @@
     "key": "reset",
     "language": "nl",
     "value": "Reset",
-    "value_type": "HTML"
+    "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
@@ -41361,7 +42441,7 @@
     "key": "reset",
     "language": "en",
     "value": "Reset",
-    "value_type": "HTML"
+    "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
@@ -41370,7 +42450,7 @@
     "key": "pas-toe",
     "language": "nl",
     "value": "Pas toe",
-    "value_type": "HTML"
+    "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
@@ -41379,7 +42459,7 @@
     "key": "pas-toe",
     "language": "en",
     "value": "Okay",
-    "value_type": "HTML"
+    "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
@@ -41388,7 +42468,7 @@
     "key": "filters",
     "language": "nl",
     "value": "Filters",
-    "value_type": "HTML"
+    "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
@@ -41397,7 +42477,7 @@
     "key": "filters",
     "language": "en",
     "value": "Filters",
-    "value_type": "HTML"
+    "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
@@ -41406,7 +42486,7 @@
     "key": "zoekresultaten",
     "language": "nl",
     "value": "Zoekresultaten",
-    "value_type": "HTML"
+    "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
@@ -41415,7 +42495,7 @@
     "key": "zoekresultaten",
     "language": "en",
     "value": "Search results",
-    "value_type": "HTML"
+    "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
@@ -41456,19 +42536,1873 @@
   {
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
-    "location": "modules/admin/const/material-requests",
-    "key": "materiaal",
+    "location": "modules/ie-objects/object-detail-page",
+    "key": "sluit-deze-melding-button-aria-label",
     "language": "nl",
-    "value": "Materiaal",
+    "value": "Sluit deze melding [BUTTON_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/object-detail-page",
+    "key": "sluit-deze-melding-button-aria-label",
+    "language": "en",
+    "value": "Sluit deze melding [BUTTON_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/object-detail-page",
+    "key": "zoek-tekst-in-deze-krant-input-aria-label",
+    "language": "nl",
+    "value": "Zoek tekst in deze krant [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/object-detail-page",
+    "key": "zoek-tekst-in-deze-krant-input-aria-label",
+    "language": "en",
+    "value": "Zoek tekst in deze krant [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/object-detail-page",
+    "key": "ga-terug-naar-de-zoekresultaten-button-aria-label",
+    "language": "nl",
+    "value": "Ga terug naar de zoekresultaten [BUTTON_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/object-detail-page",
+    "key": "ga-terug-naar-de-zoekresultaten-button-aria-label",
+    "language": "en",
+    "value": "Ga terug naar de zoekresultaten [BUTTON_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/object-detail-page",
+    "key": "voeg-dit-object-toe-aan-een-map-blade-aria-label",
+    "language": "nl",
+    "value": "Voeg dit object toe aan een map [BLADE_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/object-detail-page",
+    "key": "voeg-dit-object-toe-aan-een-map-blade-aria-label",
+    "language": "en",
+    "value": "Voeg dit object toe aan een map [BLADE_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/object-detail-page",
+    "key": "rapporteer-iets-dat-foutief-is-met-dit-object-blade-aria-label",
+    "language": "nl",
+    "value": "Rapporteer iets dat foutief is met dit object [BLADE_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/object-detail-page",
+    "key": "rapporteer-iets-dat-foutief-is-met-dit-object-blade-aria-label",
+    "language": "en",
+    "value": "Rapporteer iets dat foutief is met dit object [BLADE_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/object-detail-page",
+    "key": "vraag-toegang-tot-dit-object-aan-blade-aria-label",
+    "language": "nl",
+    "value": "Vraag toegang tot dit object aan [BLADE_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/object-detail-page",
+    "key": "vraag-toegang-tot-dit-object-aan-blade-aria-label",
+    "language": "en",
+    "value": "Vraag toegang tot dit object aan [BLADE_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/object-detail-page",
+    "key": "download-je-selectie-als-afbeelding-blade-aria-label",
+    "language": "nl",
+    "value": "Download je selectie als afbeelding [BLADE_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/object-detail-page",
+    "key": "download-je-selectie-als-afbeelding-blade-aria-label",
+    "language": "en",
+    "value": "Download je selectie als afbeelding [BLADE_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/iiif-viewer/iiif-viewer",
+    "key": "zoek-tekst-in-deze-krant-input-aria-label",
+    "language": "nl",
+    "value": "Zoek tekst in deze krant [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/iiif-viewer/iiif-viewer",
+    "key": "zoek-tekst-in-deze-krant-input-aria-label",
+    "language": "en",
+    "value": "Zoek tekst in deze krant [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/iiif-viewer/iiif-viewer",
+    "key": "go-to-newspaper-page-page-number-alt-label",
+    "language": "nl",
+    "value": "go to newspaper page {{pageNumber}} alt label",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/iiif-viewer/iiif-viewer",
+    "key": "go-to-newspaper-page-page-number-alt-label",
+    "language": "en",
+    "value": "go to newspaper page {{pageNumber}} alt label",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/iiif-viewer/iiif-viewer",
+    "key": "go-to-newspaper-page-page-number",
+    "language": "nl",
+    "value": "go to newspaper page {{pageNumber}}",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/iiif-viewer/iiif-viewer",
+    "key": "go-to-newspaper-page-page-number",
+    "language": "en",
+    "value": "go to newspaper page {{pageNumber}}",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/newsletter/newsletter-page",
+    "key": "voornaam-input-aria-label",
+    "language": "nl",
+    "value": "Voornaam [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/newsletter/newsletter-page",
+    "key": "voornaam-input-aria-label",
+    "language": "en",
+    "value": "Voornaam [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/newsletter/newsletter-page",
+    "key": "achternaam-input-aria-label",
+    "language": "nl",
+    "value": "Achternaam [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/newsletter/newsletter-page",
+    "key": "achternaam-input-aria-label",
+    "language": "en",
+    "value": "Achternaam [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/newsletter/newsletter-page",
+    "key": "email-input-aria-label",
+    "language": "nl",
+    "value": "Email [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/newsletter/newsletter-page",
+    "key": "email-input-aria-label",
+    "language": "en",
+    "value": "Email [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/search/search-page",
+    "key": "voeg-object-toe-aan-map-blade-aria-label",
+    "language": "nl",
+    "value": "Voeg object toe aan map [BLADE_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/search/search-page",
+    "key": "voeg-object-toe-aan-map-blade-aria-label",
+    "language": "en",
+    "value": "Voeg object toe aan map [BLADE_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/views/account-my-folders",
+    "key": "voeg-dit-object-toe-aan-een-map-blade-aria-label",
+    "language": "nl",
+    "value": "Voeg dit object toe aan een map [BLADE_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/views/account-my-folders",
+    "key": "voeg-dit-object-toe-aan-een-map-blade-aria-label",
+    "language": "en",
+    "value": "Voeg dit object toe aan een map [BLADE_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/views/account-my-material-requests",
+    "key": "zoek-naar-materiaal-aanvraag-input-aria-label",
+    "language": "nl",
+    "value": "Zoek naar materiaal aanvraag [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/views/account-my-material-requests",
+    "key": "zoek-naar-materiaal-aanvraag-input-aria-label",
+    "language": "en",
+    "value": "Zoek naar materiaal aanvraag [INPUT_ARIA_LABEL]",
     "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
     "location": "modules/admin/const/material-requests",
-    "key": "materiaal",
+    "key": "kopieer-het-email-adres-van-de-aanvrager-naar-je-klemboard",
+    "language": "nl",
+    "value": "Kopieer het email adres van de aanvrager naar je klemboard",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/const/material-requests",
+    "key": "kopieer-het-email-adres-van-de-aanvrager-naar-je-klemboard",
     "language": "en",
-    "value": "Materiaal",
+    "value": "Kopieer het email adres van de aanvrager naar je klemboard",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/const/requests",
+    "key": "kopieer-het-email-adres-van-de-bezoeker-naar-je-klemboard",
+    "language": "nl",
+    "value": "Kopieer het email adres van de bezoeker naar je klemboard",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/const/requests",
+    "key": "kopieer-het-email-adres-van-de-bezoeker-naar-je-klemboard",
+    "language": "en",
+    "value": "Kopieer het email adres van de bezoeker naar je klemboard",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/admin-active-visitors",
+    "key": "zoek-actieve-bezoekers-input-aria-label",
+    "language": "nl",
+    "value": "Zoek actieve bezoekers [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/admin-active-visitors",
+    "key": "zoek-actieve-bezoekers-input-aria-label",
+    "language": "en",
+    "value": "Zoek actieve bezoekers [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/admin-active-visitors",
+    "key": "materiaal-aanvraag-aanpassen-blade-aria-label",
+    "language": "nl",
+    "value": "Materiaal aanvraag aanpassen [BLADE_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/admin-active-visitors",
+    "key": "materiaal-aanvraag-aanpassen-blade-aria-label",
+    "language": "en",
+    "value": "Materiaal aanvraag aanpassen [BLADE_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/maintenance-alerts-page",
+    "key": "bewerk-een-onderhoudsmelding-blade-aria-label",
+    "language": "nl",
+    "value": "Bewerk een onderhoudsmelding [BLADE_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/maintenance-alerts-page",
+    "key": "bewerk-een-onderhoudsmelding-blade-aria-label",
+    "language": "en",
+    "value": "Bewerk een onderhoudsmelding [BLADE_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/cp/const/material-requests",
+    "key": "kopieer-het-email-adres-van-de-aanvrager-naar-je-klemboard",
+    "language": "nl",
+    "value": "Kopieer het email adres van de aanvrager naar je klemboard",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/cp/const/material-requests",
+    "key": "kopieer-het-email-adres-van-de-aanvrager-naar-je-klemboard",
+    "language": "en",
+    "value": "Kopieer het email adres van de aanvrager naar je klemboard",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/cp/const/requests",
+    "key": "kopieer-het-email-adres-van-de-bezoeker-naar-je-klemboard",
+    "language": "nl",
+    "value": "Kopieer het email adres van de bezoeker naar je klemboard",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/cp/const/requests",
+    "key": "kopieer-het-email-adres-van-de-bezoeker-naar-je-klemboard",
+    "language": "en",
+    "value": "Kopieer het email adres van de bezoeker naar je klemboard",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/cp/const/visitors",
+    "key": "kopieer-het-email-adres-van-de-bezoeker-naar-je-klemboard",
+    "language": "nl",
+    "value": "Kopieer het email adres van de bezoeker naar je klemboard",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/cp/const/visitors",
+    "key": "kopieer-het-email-adres-van-de-bezoeker-naar-je-klemboard",
+    "language": "en",
+    "value": "Kopieer het email adres van de bezoeker naar je klemboard",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/cp/views/cp-admin-material-requests",
+    "key": "zoek-materiaal-aanvragen-input-aria-label",
+    "language": "nl",
+    "value": "Zoek materiaal aanvragen [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/cp/views/cp-admin-material-requests",
+    "key": "zoek-materiaal-aanvragen-input-aria-label",
+    "language": "en",
+    "value": "Zoek materiaal aanvragen [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/cp/views/cp-admin-visitors",
+    "key": "zoek-bezoekers-input-aria-label",
+    "language": "nl",
+    "value": "Zoek bezoekers [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/cp/views/cp-admin-visitors",
+    "key": "zoek-bezoekers-input-aria-label",
+    "language": "en",
+    "value": "Zoek bezoekers [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/cp/views/cp-admin-visitors",
+    "key": "materiaal-aanvraag-goedkeuren-blade-aria-label",
+    "language": "nl",
+    "value": "Materiaal aanvraag goedkeuren [BLADE_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/cp/views/cp-admin-visitors",
+    "key": "materiaal-aanvraag-goedkeuren-blade-aria-label",
+    "language": "en",
+    "value": "Materiaal aanvraag goedkeuren [BLADE_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/create-folder-button/create-folder-button",
+    "key": "nieuwe-map-naam-input-aria-label",
+    "language": "nl",
+    "value": "Nieuwe map naam [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/create-folder-button/create-folder-button",
+    "key": "nieuwe-map-naam-input-aria-label",
+    "language": "en",
+    "value": "Nieuwe map naam [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/edit-folder-blade/edit-folder-blade",
+    "key": "map-aanpassen-blade-aria-label",
+    "language": "nl",
+    "value": "Map aanpassen [BLADE_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/edit-folder-blade/edit-folder-blade",
+    "key": "map-aanpassen-blade-aria-label",
+    "language": "en",
+    "value": "Map aanpassen [BLADE_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/edit-folder-blade/edit-folder-blade",
+    "key": "naam-van-de-map-input-aria-label",
+    "language": "nl",
+    "value": "Naam van de map [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/edit-folder-blade/edit-folder-blade",
+    "key": "naam-van-de-map-input-aria-label",
+    "language": "en",
+    "value": "Naam van de map [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/edit-folder-blade/edit-folder-blade",
+    "key": "beschrijving-van-de-map-input-aria-label",
+    "language": "nl",
+    "value": "Beschrijving van de map [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/edit-folder-blade/edit-folder-blade",
+    "key": "beschrijving-van-de-map-input-aria-label",
+    "language": "en",
+    "value": "Beschrijving van de map [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
+    "key": "alt-text-of-the-thumbnail-of-the-material-thats-being-requested",
+    "language": "nl",
+    "value": "alt text of the thumbnail of the material that's being requested",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
+    "key": "alt-text-of-the-thumbnail-of-the-material-thats-being-requested",
+    "language": "en",
+    "value": "alt text of the thumbnail of the material that's being requested",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
+    "key": "materiaal-aanvraag-detail-blade-aria-label",
+    "language": "nl",
+    "value": "Materiaal aanvraag detail [BLADE_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
+    "key": "materiaal-aanvraag-detail-blade-aria-label",
+    "language": "en",
+    "value": "Materiaal aanvraag detail [BLADE_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-status-update-blade/material-request-status-update-blade",
+    "key": "materiaal-aanvraag-goedkeuren-of-afkeuren-blade-aria-label",
+    "language": "nl",
+    "value": "Materiaal aanvraag goedkeuren of afkeuren [BLADE_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-status-update-blade/material-request-status-update-blade",
+    "key": "materiaal-aanvraag-goedkeuren-of-afkeuren-blade-aria-label",
+    "language": "en",
+    "value": "Materiaal aanvraag goedkeuren of afkeuren [BLADE_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-status-update-blade/material-request-status-update-blade",
+    "key": "motivatie-voor-het-goedkeuren-of-afkeuren-van-de-aanvraag-input-aria-label",
+    "language": "nl",
+    "value": "Motivatie voor het goedkeuren of afkeuren van de aanvraag [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-status-update-blade/material-request-status-update-blade",
+    "key": "motivatie-voor-het-goedkeuren-of-afkeuren-van-de-aanvraag-input-aria-label",
+    "language": "en",
+    "value": "Motivatie voor het goedkeuren of afkeuren van de aanvraag [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-term-agreement-blade/material-request-term-agreement-blade",
+    "key": "aanvullende-gebruikersvoorwaarden-voor-materiaal-aanvragen-blade-aria-label",
+    "language": "nl",
+    "value": "Aanvullende gebruikersvoorwaarden voor materiaal aanvragen [BLADE_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-term-agreement-blade/material-request-term-agreement-blade",
+    "key": "aanvullende-gebruikersvoorwaarden-voor-materiaal-aanvragen-blade-aria-label",
+    "language": "en",
+    "value": "Aanvullende gebruikersvoorwaarden voor materiaal aanvragen [BLADE_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/personal-info/personal-info",
+    "key": "aanvraag-groeperingsnaam-input-aria-label",
+    "language": "nl",
+    "value": "Aanvraag groeperingsnaam [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/personal-info/personal-info",
+    "key": "aanvraag-groeperingsnaam-input-aria-label",
+    "language": "en",
+    "value": "Aanvraag groeperingsnaam [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/personal-info/personal-info",
+    "key": "bewerk-je-gegevens-button-aria-label",
+    "language": "nl",
+    "value": "Bewerk je gegevens [BUTTON_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/personal-info/personal-info",
+    "key": "bewerk-je-gegevens-button-aria-label",
+    "language": "en",
+    "value": "Bewerk je gegevens [BUTTON_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/personal-info/personal-info",
+    "key": "organisatie-naam-input-aria-label",
+    "language": "nl",
+    "value": "Organisatie naam [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/personal-info/personal-info",
+    "key": "organisatie-naam-input-aria-label",
+    "language": "en",
+    "value": "Organisatie naam [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/translations/admin-translations-overview-page",
+    "key": "vertaling-bewerken-blade-aria-label",
+    "language": "nl",
+    "value": "Vertaling bewerken [BLADE_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/translations/admin-translations-overview-page",
+    "key": "vertaling-bewerken-blade-aria-label",
+    "language": "en",
+    "value": "Vertaling bewerken [BLADE_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/visitor-spaces/admin-visitor-spaces-overview",
+    "key": "zoek-naar-bezoekersruimtes-input-aria-label",
+    "language": "nl",
+    "value": "Zoek naar bezoekersruimtes [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/visitor-spaces/admin-visitor-spaces-overview",
+    "key": "zoek-naar-bezoekersruimtes-input-aria-label",
+    "language": "en",
+    "value": "Zoek naar bezoekersruimtes [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/cp/components/visitor-space-settings/visitor-space-settings",
+    "key": "naam-van-de-bezoekersruimte-als-slug-in-de-url-input-aria-label",
+    "language": "nl",
+    "value": "Naam van de bezoekersruimte als slug in de url [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/cp/components/visitor-space-settings/visitor-space-settings",
+    "key": "naam-van-de-bezoekersruimte-als-slug-in-de-url-input-aria-label",
+    "language": "en",
+    "value": "Naam van de bezoekersruimte als slug in de url [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/home/components/logged-in-visitor-spaces-home/logged-in-visitor-spaces-home",
+    "key": "vraag-een-bezoek-aan-bij-de-bezoekersruimte-aan-blade-aria-label",
+    "language": "nl",
+    "value": "Vraag een bezoek aan bij de bezoekersruimte aan [BLADE_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/home/components/logged-in-visitor-spaces-home/logged-in-visitor-spaces-home",
+    "key": "vraag-een-bezoek-aan-bij-de-bezoekersruimte-aan-blade-aria-label",
+    "language": "en",
+    "value": "Vraag een bezoek aan bij de bezoekersruimte aan [BLADE_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/home/components/logged-in-visitor-spaces-home/logged-in-visitor-spaces-home",
+    "key": "vraag-een-bezoek-aan-bij-de-bezoekersruimte-aan-blade-aria-label",
+    "language": "nl",
+    "value": "Vraag een bezoek aan bij de bezoekersruimte aan [BLADE_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/home/components/logged-in-visitor-spaces-home/logged-in-visitor-spaces-home",
+    "key": "vraag-een-bezoek-aan-bij-de-bezoekersruimte-aan-blade-aria-label",
+    "language": "en",
+    "value": "Vraag een bezoek aan bij de bezoekersruimte aan [BLADE_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/home/components/logged-in-visitor-spaces-home/logged-in-visitor-spaces-home",
+    "key": "aanvraag-bezoekersruimte-annuleren-blade-aria-label",
+    "language": "nl",
+    "value": "Aanvraag bezoekersruimte annuleren [BLADE_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/home/components/logged-in-visitor-spaces-home/logged-in-visitor-spaces-home",
+    "key": "aanvraag-bezoekersruimte-annuleren-blade-aria-label",
+    "language": "en",
+    "value": "Aanvraag bezoekersruimte annuleren [BLADE_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/home/components/process-visit-blade/process-visit-blade",
+    "key": "aanuleer-je-aanvraag-om-een-bezoekersruimte-te-komen-bezoeken-blade-aria-label",
+    "language": "nl",
+    "value": "Aanuleer je aanvraag om een bezoekersruimte te komen bezoeken [BLADE_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/home/components/process-visit-blade/process-visit-blade",
+    "key": "aanuleer-je-aanvraag-om-een-bezoekersruimte-te-komen-bezoeken-blade-aria-label",
+    "language": "en",
+    "value": "Aanuleer je aanvraag om een bezoekersruimte te komen bezoeken [BLADE_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/home/components/request-access-blade/request-access-blade",
+    "key": "reden-voor-bezoekersaanvraag-input-aria-label",
+    "language": "nl",
+    "value": "Reden voor bezoekersaanvraag [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/home/components/request-access-blade/request-access-blade",
+    "key": "reden-voor-bezoekersaanvraag-input-aria-label",
+    "language": "en",
+    "value": "Reden voor bezoekersaanvraag [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/home/components/request-access-blade/request-access-blade",
+    "key": "wanneer-wil-je-de-bezoekersruimte-bezoeken-input-aria-label",
+    "language": "nl",
+    "value": "Wanneer wil je de bezoekersruimte bezoeken? [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/home/components/request-access-blade/request-access-blade",
+    "key": "wanneer-wil-je-de-bezoekersruimte-bezoeken-input-aria-label",
+    "language": "en",
+    "value": "Wanneer wil je de bezoekersruimte bezoeken? [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/home/components/visitor-space-cards-with-search/visitor-space-cards-with-search",
+    "key": "zoek-bezoekersruimte-input-aria-label",
+    "language": "nl",
+    "value": "Zoek bezoekersruimte [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/home/components/visitor-space-cards-with-search/visitor-space-cards-with-search",
+    "key": "zoek-bezoekersruimte-input-aria-label",
+    "language": "en",
+    "value": "Zoek bezoekersruimte [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/home/components/visitor-space-cards-with-search/visitor-space-cards-with-search",
+    "key": "toon-alle-total-bezoekerruimtes",
+    "language": "nl",
+    "value": "Toon alle {{total}} bezoekerruimtes",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/home/components/visitor-space-cards-with-search/visitor-space-cards-with-search",
+    "key": "toon-alle-total-bezoekerruimtes",
+    "language": "en",
+    "value": "Toon alle {{total}} bezoekerruimtes",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/names-list/names-list",
+    "key": "zoek-naar-een-persoonsnaam-in-deze-krant-input-aria-label",
+    "language": "nl",
+    "value": "Zoek naar een persoonsnaam in deze krant [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/names-list/names-list",
+    "key": "zoek-naar-een-persoonsnaam-in-deze-krant-input-aria-label",
+    "language": "en",
+    "value": "Zoek naar een persoonsnaam in deze krant [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata",
+    "key": "lees-de-volledige-waarde-van-het-metadata-veld-selected-metadata-field-name-blade-aria-label",
+    "language": "nl",
+    "value": "Lees de volledige waarde van het metadata veld {{selectedMetadataFieldName}} [BLADE_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata",
+    "key": "lees-de-volledige-waarde-van-het-metadata-veld-selected-metadata-field-name-blade-aria-label",
+    "language": "en",
+    "value": "Lees de volledige waarde van het metadata veld {{selectedMetadataFieldName}} [BLADE_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/navigation/components/material-request-center-blade/material-request-center-blade",
+    "key": "pas-je-materiaal-aanvraag-aan",
+    "language": "nl",
+    "value": "Pas je materiaal aanvraag aan",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/navigation/components/material-request-center-blade/material-request-center-blade",
+    "key": "pas-je-materiaal-aanvraag-aan",
+    "language": "en",
+    "value": "Pas je materiaal aanvraag aan",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/navigation/components/material-request-center-blade/material-request-center-blade",
+    "key": "jouw-nog-te-verzenden-materiaal-aanvragen-blade-aria-label",
+    "language": "nl",
+    "value": "Jouw nog te verzenden materiaal aanvragen [BLADE_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/navigation/components/material-request-center-blade/material-request-center-blade",
+    "key": "jouw-nog-te-verzenden-materiaal-aanvragen-blade-aria-label",
+    "language": "en",
+    "value": "Jouw nog te verzenden materiaal aanvragen [BLADE_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/shared/components/approve-request-blade/approve-request-blade",
+    "key": "toegang-vanaf-datum-input-aria-label",
+    "language": "nl",
+    "value": "Toegang vanaf datum [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/shared/components/approve-request-blade/approve-request-blade",
+    "key": "toegang-vanaf-datum-input-aria-label",
+    "language": "en",
+    "value": "Toegang vanaf datum [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/shared/components/approve-request-blade/approve-request-blade",
+    "key": "toegang-vanaf-tijd-input-aria-label",
+    "language": "nl",
+    "value": "Toegang vanaf tijd [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/shared/components/approve-request-blade/approve-request-blade",
+    "key": "toegang-vanaf-tijd-input-aria-label",
+    "language": "en",
+    "value": "Toegang vanaf tijd [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/shared/components/approve-request-blade/approve-request-blade",
+    "key": "toegang-tot-datum-input-aria-label",
+    "language": "nl",
+    "value": "Toegang tot datum [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/shared/components/approve-request-blade/approve-request-blade",
+    "key": "toegang-tot-datum-input-aria-label",
+    "language": "en",
+    "value": "Toegang tot datum [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/shared/components/approve-request-blade/approve-request-blade",
+    "key": "toegang-tot-tijd-input-aria-label",
+    "language": "nl",
+    "value": "Toegang tot tijd [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/shared/components/approve-request-blade/approve-request-blade",
+    "key": "toegang-tot-tijd-input-aria-label",
+    "language": "en",
+    "value": "Toegang tot tijd [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/shared/components/approve-request-blade/approve-request-blade",
+    "key": "opmerking-input-aria-label",
+    "language": "nl",
+    "value": "Opmerking [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/shared/components/approve-request-blade/approve-request-blade",
+    "key": "opmerking-input-aria-label",
+    "language": "en",
+    "value": "Opmerking [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/shared/components/decline-request-blade/decline-request-blade",
+    "key": "reden-voor-weigering-input-aria-label",
+    "language": "nl",
+    "value": "Reden voor weigering [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/shared/components/decline-request-blade/decline-request-blade",
+    "key": "reden-voor-weigering-input-aria-label",
+    "language": "en",
+    "value": "Reden voor weigering [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/shared/components/error-no-access-to-object/error-no-access-to-object",
+    "key": "geen-toegang-tot-dit-object-vraag-toegang-aan-blade-aria-label",
+    "language": "nl",
+    "value": "Geen toegang tot dit object, vraag toegang aan [BLADE_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/shared/components/error-no-access-to-object/error-no-access-to-object",
+    "key": "geen-toegang-tot-dit-object-vraag-toegang-aan-blade-aria-label",
+    "language": "en",
+    "value": "Geen toegang tot dit object, vraag toegang aan [BLADE_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/shared/components/media-card/media-card",
+    "key": "image-of-the-media-object",
+    "language": "nl",
+    "value": "image of the media object",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/shared/components/media-card/media-card",
+    "key": "image-of-the-media-object",
+    "language": "en",
+    "value": "image of the media object",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/shared/components/media-card/media-card",
+    "key": "vraag-een-bezoek-aan-bij-de-bezoekersruimte-aan-blade-aria-label",
+    "language": "nl",
+    "value": "Vraag een bezoek aan bij de bezoekersruimte aan [BLADE_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/shared/components/media-card/media-card",
+    "key": "vraag-een-bezoek-aan-bij-de-bezoekersruimte-aan-blade-aria-label",
+    "language": "en",
+    "value": "Vraag een bezoek aan bij de bezoekersruimte aan [BLADE_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/shared/components/notification-center/notification-center",
+    "key": "bekijk-je-notificaties-blade-aria-label",
+    "language": "nl",
+    "value": "Bekijk je notificaties [BLADE_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/shared/components/notification-center/notification-center",
+    "key": "bekijk-je-notificaties-blade-aria-label",
+    "language": "en",
+    "value": "Bekijk je notificaties [BLADE_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/shared/components/process-request-blade/process-request-blade",
+    "key": "aanvraag-bezoekersruimte-goedkeuren-blade-aria-label",
+    "language": "nl",
+    "value": "Aanvraag bezoekersruimte goedkeuren [BLADE_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/shared/components/process-request-blade/process-request-blade",
+    "key": "aanvraag-bezoekersruimte-goedkeuren-blade-aria-label",
+    "language": "en",
+    "value": "Aanvraag bezoekersruimte goedkeuren [BLADE_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/shared/components/process-request-blade/process-request-blade",
+    "key": "aanvraag-bezoekersruimte-weigeren-blade-aria-label",
+    "language": "nl",
+    "value": "Aanvraag bezoekersruimte weigeren [BLADE_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/shared/components/process-request-blade/process-request-blade",
+    "key": "aanvraag-bezoekersruimte-weigeren-blade-aria-label",
+    "language": "en",
+    "value": "Aanvraag bezoekersruimte weigeren [BLADE_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/shared/components/share-folder-blade/share-folder-blade",
+    "key": "deel-een-map-met-iemand-anders-blade-aria-label",
+    "language": "nl",
+    "value": "Deel een map met iemand anders [BLADE_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/shared/components/share-folder-blade/share-folder-blade",
+    "key": "deel-een-map-met-iemand-anders-blade-aria-label",
+    "language": "en",
+    "value": "Deel een map met iemand anders [BLADE_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/shared/components/share-folder-blade/share-folder-blade",
+    "key": "email-adres-van-de-persoon-waarmee-je-de-map-wilt-delen-input-aria-label",
+    "language": "nl",
+    "value": "Email adres van de persoon waarmee je de map wilt delen [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/shared/components/share-folder-blade/share-folder-blade",
+    "key": "email-adres-van-de-persoon-waarmee-je-de-map-wilt-delen-input-aria-label",
+    "language": "en",
+    "value": "Email adres van de persoon waarmee je de map wilt delen [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/shared/components/share-folder-blade/share-folder-blade",
+    "key": "deel-link-van-de-map-input-aria-label",
+    "language": "nl",
+    "value": "Deel link van de map [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/shared/components/share-folder-blade/share-folder-blade",
+    "key": "deel-link-van-de-map-input-aria-label",
+    "language": "en",
+    "value": "Deel link van de map [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/shared/components/share-folder-blade/share-folder-blade",
+    "key": "kopieer-de-map-deel-link-naar-je-klemboard",
+    "language": "nl",
+    "value": "Kopieer de map deel link naar je klemboard",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/shared/components/share-folder-blade/share-folder-blade",
+    "key": "kopieer-de-map-deel-link-naar-je-klemboard",
+    "language": "en",
+    "value": "Kopieer de map deel link naar je klemboard",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/shared/components/visit-detail-blade/visit-detail-blade",
+    "key": "vraag-een-bezoek-aan-bij-de-bezoekersruimte-aan-blade-aria-label",
+    "language": "nl",
+    "value": "Vraag een bezoek aan bij de bezoekersruimte aan [BLADE_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/shared/components/visit-detail-blade/visit-detail-blade",
+    "key": "vraag-een-bezoek-aan-bij-de-bezoekersruimte-aan-blade-aria-label",
+    "language": "en",
+    "value": "Vraag een bezoek aan bij de bezoekersruimte aan [BLADE_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/shared/components/visit-detail-blade/visit-detail-blade",
+    "key": "vraag-een-bezoek-aan-bij-de-bezoekersruimte-aan-blade-aria-label",
+    "language": "nl",
+    "value": "Vraag een bezoek aan bij de bezoekersruimte aan [BLADE_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/shared/components/visit-detail-blade/visit-detail-blade",
+    "key": "vraag-een-bezoek-aan-bij-de-bezoekersruimte-aan-blade-aria-label",
+    "language": "en",
+    "value": "Vraag een bezoek aan bij de bezoekersruimte aan [BLADE_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/shared/layouts/app-layout/app-layout",
+    "key": "sluit-deze-melding-button-aria-label",
+    "language": "nl",
+    "value": "Sluit deze melding [BUTTON_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/shared/layouts/app-layout/app-layout",
+    "key": "sluit-deze-melding-button-aria-label",
+    "language": "en",
+    "value": "Sluit deze melding [BUTTON_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visit-requests/components/visit-requests-overview/visit-requests-overview",
+    "key": "zoek-bezoekers-aanvragen-input-aria-label",
+    "language": "nl",
+    "value": "Zoek bezoekers aanvragen [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visit-requests/components/visit-requests-overview/visit-requests-overview",
+    "key": "zoek-bezoekers-aanvragen-input-aria-label",
+    "language": "en",
+    "value": "Zoek bezoekers aanvragen [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visit-requests/components/visit-requests-overview/visit-requests-overview",
+    "key": "materiaal-aanvraag-behandelen-blade-aria-label",
+    "language": "nl",
+    "value": "Materiaal aanvraag behandelen [BLADE_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visit-requests/components/visit-requests-overview/visit-requests-overview",
+    "key": "materiaal-aanvraag-behandelen-blade-aria-label",
+    "language": "en",
+    "value": "Materiaal aanvraag behandelen [BLADE_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/advanced-filter-fields/advanced-filter-fields",
+    "key": "zoek-field-name-input-aria-label",
+    "language": "nl",
+    "value": "Zoek {{fieldName}} [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/advanced-filter-fields/advanced-filter-fields",
+    "key": "zoek-field-name-input-aria-label",
+    "language": "en",
+    "value": "Zoek {{fieldName}} [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/date-range-input/date-range-input",
+    "key": "vanaf-datum-input-aria-label",
+    "language": "nl",
+    "value": "Vanaf datum [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/date-range-input/date-range-input",
+    "key": "vanaf-datum-input-aria-label",
+    "language": "en",
+    "value": "Vanaf datum [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/date-range-input/date-range-input",
+    "key": "tot-datum-input-aria-label",
+    "language": "nl",
+    "value": "Tot datum [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/date-range-input/date-range-input",
+    "key": "tot-datum-input-aria-label",
+    "language": "en",
+    "value": "Tot datum [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/duration-filter-form/duration-filter-form",
+    "key": "duur-bereik-input-aria-label",
+    "language": "nl",
+    "value": "Duur bereik [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/duration-filter-form/duration-filter-form",
+    "key": "duur-bereik-input-aria-label",
+    "language": "en",
+    "value": "Duur bereik [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/duration-filter-form/duration-filter-form",
+    "key": "duurtijd-input-aria-label",
+    "language": "nl",
+    "value": "Duurtijd [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/duration-filter-form/duration-filter-form",
+    "key": "duurtijd-input-aria-label",
+    "language": "en",
+    "value": "Duurtijd [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/genre-filter-form/genre-filter-form",
+    "key": "zoek-genres-input-aria-label",
+    "language": "nl",
+    "value": "Zoek genres [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/genre-filter-form/genre-filter-form",
+    "key": "zoek-genres-input-aria-label",
+    "language": "en",
+    "value": "Zoek genres [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/language-filter-form/language-filter-form",
+    "key": "zoek-op-taal-input-aria-label",
+    "language": "nl",
+    "value": "Zoek op taal [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/language-filter-form/language-filter-form",
+    "key": "zoek-op-taal-input-aria-label",
+    "language": "en",
+    "value": "Zoek op taal [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/maintainer-filter-form/maintainer-filter-form",
+    "key": "zoek-op-aanbieder-input-aria-label",
+    "language": "nl",
+    "value": "Zoek op aanbieder [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/maintainer-filter-form/maintainer-filter-form",
+    "key": "zoek-op-aanbieder-input-aria-label",
+    "language": "en",
+    "value": "Zoek op aanbieder [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/material-card/material-card",
+    "key": "image-of-the-media-object",
+    "language": "nl",
+    "value": "image of the media object",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/material-card/material-card",
+    "key": "image-of-the-media-object",
+    "language": "en",
+    "value": "image of the media object",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/material-request-blade/material-request-blade",
+    "key": "reden-van-aanvraag-input-aria-label",
+    "language": "nl",
+    "value": "Reden van aanvraag [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/material-request-blade/material-request-blade",
+    "key": "reden-van-aanvraag-input-aria-label",
+    "language": "en",
+    "value": "Reden van aanvraag [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/material-request-blade/material-request-blade",
+    "key": "vraag-materiaal-aan-blade-aria-label",
+    "language": "nl",
+    "value": "Vraag materiaal aan [BLADE_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/material-request-blade/material-request-blade",
+    "key": "vraag-materiaal-aan-blade-aria-label",
+    "language": "en",
+    "value": "Vraag materiaal aan [BLADE_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
+    "key": "start-tijd-van-de-video-audio-selectie-input-aria-label",
+    "language": "nl",
+    "value": "Start tijd van de video/audio selectie [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
+    "key": "start-tijd-van-de-video-audio-selectie-input-aria-label",
+    "language": "en",
+    "value": "Start tijd van de video/audio selectie [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
+    "key": "eind-tijd-van-de-video-audio-selectie-input-aria-label",
+    "language": "nl",
+    "value": "Eind tijd van de video/audio selectie [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
+    "key": "eind-tijd-van-de-video-audio-selectie-input-aria-label",
+    "language": "en",
+    "value": "Eind tijd van de video/audio selectie [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
+    "key": "beschrijving-van-het-bedoelde-gebruik-van-het-materiaal-input-aria-label",
+    "language": "nl",
+    "value": "Beschrijving van het bedoelde gebruik van het materiaal [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
+    "key": "beschrijving-van-het-bedoelde-gebruik-van-het-materiaal-input-aria-label",
+    "language": "en",
+    "value": "Beschrijving van het bedoelde gebruik van het materiaal [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
+    "key": "geef-hier-een-uitleg-over-het-type-ontsluiting-dat-je-wenst-te-gebruiken-input-aria-label",
+    "language": "nl",
+    "value": "Geef hier een uitleg over het type ontsluiting dat je wenst te gebruiken [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
+    "key": "geef-hier-een-uitleg-over-het-type-ontsluiting-dat-je-wenst-te-gebruiken-input-aria-label",
+    "language": "en",
+    "value": "Geef hier een uitleg over het type ontsluiting dat je wenst te gebruiken [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
+    "key": "geef-hier-een-uitleg-over-het-geografisch-gebruik-dat-je-wenst-te-gebruiken-input-aria-label",
+    "language": "nl",
+    "value": "Geef hier een uitleg over het geografisch gebruik dat je wenst te gebruiken [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
+    "key": "geef-hier-een-uitleg-over-het-geografisch-gebruik-dat-je-wenst-te-gebruiken-input-aria-label",
+    "language": "en",
+    "value": "Geef hier een uitleg over het geografisch gebruik dat je wenst te gebruiken [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
+    "key": "materiaal-download-en-hergebruik-aanvragen-blade-aria-label",
+    "language": "nl",
+    "value": "Materiaal download en hergebruik aanvragen [BLADE_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
+    "key": "materiaal-download-en-hergebruik-aanvragen-blade-aria-label",
+    "language": "en",
+    "value": "Materiaal download en hergebruik aanvragen [BLADE_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/medium-filter-form/medium-filter-form",
+    "key": "zoek-op-medium",
+    "language": "nl",
+    "value": "Zoek op medium",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/medium-filter-form/medium-filter-form",
+    "key": "zoek-op-medium",
+    "language": "en",
+    "value": "Zoek op medium",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/release-date-filter-form/release-date-filter-form",
+    "key": "release-datum",
+    "language": "nl",
+    "value": "Release datum",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/release-date-filter-form/release-date-filter-form",
+    "key": "release-datum",
+    "language": "en",
+    "value": "Release datum",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/release-date-filter-form/release-date-filter-form",
+    "key": "release-datum-input-aria-label",
+    "language": "nl",
+    "value": "Release datum [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/release-date-filter-form/release-date-filter-form",
+    "key": "release-datum-input-aria-label",
+    "language": "en",
+    "value": "Release datum [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/release-date-filter-form/release-date-filter-form",
+    "key": "release-datum",
+    "language": "nl",
+    "value": "Release datum",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/release-date-filter-form/release-date-filter-form",
+    "key": "release-datum",
+    "language": "en",
+    "value": "Release datum",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/report-blade/report-blade",
+    "key": "beschrijf-het-probleem-input-aria-label",
+    "language": "nl",
+    "value": "Beschrijf het probleem [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/report-blade/report-blade",
+    "key": "beschrijf-het-probleem-input-aria-label",
+    "language": "en",
+    "value": "Beschrijf het probleem [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/report-blade/report-blade",
+    "key": "jouw-email-adres-input-aria-label",
+    "language": "nl",
+    "value": "Jouw email adres [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/report-blade/report-blade",
+    "key": "jouw-email-adres-input-aria-label",
+    "language": "en",
+    "value": "Jouw email adres [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/visitor-space-navigation/visitor-space-navigation",
+    "key": "kopieer-het-emailadres-naar-je-klemboard",
+    "language": "nl",
+    "value": "Kopieer het emailadres naar je klemboard",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/visitor-space-navigation/visitor-space-navigation",
+    "key": "kopieer-het-emailadres-naar-je-klemboard",
+    "language": "en",
+    "value": "Kopieer het emailadres naar je klemboard",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/visitor-space-navigation/visitor-space-navigation",
+    "key": "kopieer-het-telefoonnummer-naar-je-klemboard",
+    "language": "nl",
+    "value": "Kopieer het telefoonnummer naar je klemboard",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/visitor-space-navigation/visitor-space-navigation",
+    "key": "kopieer-het-telefoonnummer-naar-je-klemboard",
+    "language": "en",
+    "value": "Kopieer het telefoonnummer naar je klemboard",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/visitor-space-navigation/visitor-space-navigation",
+    "key": "ga-terug-naar-de-zoekresultaten",
+    "language": "nl",
+    "value": "Ga terug naar de zoekresultaten",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/visitor-space-navigation/visitor-space-navigation",
+    "key": "ga-terug-naar-de-zoekresultaten",
+    "language": "en",
+    "value": "Ga terug naar de zoekresultaten",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/shared/components/visitor-space-card/visitor-space-card-controls/visitor-space-card-controls",
+    "key": "toon-contact-informatie-van-deze-bezoekersruimte-button-aria-label",
+    "language": "nl",
+    "value": "Toon contact informatie van deze bezoekersruimte [BUTTON_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/shared/components/visitor-space-card/visitor-space-card-controls/visitor-space-card-controls",
+    "key": "toon-contact-informatie-van-deze-bezoekersruimte-button-aria-label",
+    "language": "en",
+    "value": "Toon contact informatie van deze bezoekersruimte [BUTTON_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/shared/components/visitor-space-card/visitor-space-card-controls/visitor-space-card-controls",
+    "key": "kopieer-het-email-adres-van-de-bezoekersruimte-naar-je-klemboard",
+    "language": "nl",
+    "value": "Kopieer het email adres van de bezoekersruimte naar je klemboard",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/shared/components/visitor-space-card/visitor-space-card-controls/visitor-space-card-controls",
+    "key": "kopieer-het-email-adres-van-de-bezoekersruimte-naar-je-klemboard",
+    "language": "en",
+    "value": "Kopieer het email adres van de bezoekersruimte naar je klemboard",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/shared/components/visitor-space-card/visitor-space-card-controls/visitor-space-card-controls",
+    "key": "kopieer-het-telefoonnummer-van-de-bezoekersruimte-naar-je-klemboard",
+    "language": "nl",
+    "value": "Kopieer het telefoonnummer van de bezoekersruimte naar je klemboard",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/shared/components/visitor-space-card/visitor-space-card-controls/visitor-space-card-controls",
+    "key": "kopieer-het-telefoonnummer-van-de-bezoekersruimte-naar-je-klemboard",
+    "language": "en",
+    "value": "Kopieer het telefoonnummer van de bezoekersruimte naar je klemboard",
     "value_type": "TEXT"
   },
   {

@@ -404,7 +404,9 @@ export const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> 
 				placeholder={tText(
 					'modules/translations/views/translations-overview-v-2___zoek-op-id-of-waarde'
 				)}
-				ariaLabel={tText('Zoek vertaling [INPUT_ARIA_LABEL]')}
+				ariaLabel={tText(
+					'modules/translations/views/translations-overview___zoek-vertaling-input-aria-label'
+				)}
 			></TextInput>
 			{renderTranslationsTable()}
 			{renderPopup({

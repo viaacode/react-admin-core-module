@@ -166,7 +166,7 @@ const PublishContentPageModal: FC<PublishContentPageModalProps> = ({
 							label={tText('admin/content/components/share-content-page-modal___publiceren-op')}
 						>
 							<DatePicker
-								{...getDatePickerDefaultProps}
+								{...getDatePickerDefaultProps('publish-content-page-modal__publish-at')}
 								value={publishAt ? parseISO(publishAt) : undefined}
 								onChange={(date) => setPublishAt(date ? date.toISOString() : null)}
 								showTimeInput={false}
@@ -177,7 +177,7 @@ const PublishContentPageModal: FC<PublishContentPageModalProps> = ({
 							label={tText('admin/content/components/share-content-page-modal___depubliceren-op')}
 						>
 							<DatePicker
-								{...getDatePickerDefaultProps}
+								{...getDatePickerDefaultProps('publish-content-page-modal__depublish-at')}
 								value={depublishAt ? parseISO(depublishAt) : undefined}
 								onChange={(date) => setDepublishAt(date ? date.toISOString() : null)}
 								showTimeInput={false}
@@ -195,7 +195,7 @@ const PublishContentPageModal: FC<PublishContentPageModalProps> = ({
 				>
 					<Spacer margin={['left-large', 'top']}>
 						<DatePicker
-							{...getDatePickerDefaultProps}
+							{...getDatePickerDefaultProps('publish-content-page-modal__published-at-display')}
 							value={getPublishedAtDisplayDate()}
 							onChange={(date) =>
 								setPublishedAtDisplay(

@@ -363,7 +363,9 @@ const DateRangeDropdown: FC<DateRangeDropdownProps> = ({
 											)}
 										>
 											<DatePicker
-												{...getDatePickerDefaultProps()}
+												{...getDatePickerDefaultProps(
+													`date-range-dropdown--${id}__from-datepicker`
+												)}
 												selected={fromDate}
 												// biome-ignore lint/suspicious/noExplicitAny: TODO fix
 												onChange={((value: Date | null) => handleDateChange(value, 'gte')) as any}
@@ -378,7 +380,9 @@ const DateRangeDropdown: FC<DateRangeDropdownProps> = ({
 											)}
 										>
 											<DatePicker
-												{...getDatePickerDefaultProps()}
+												{...getDatePickerDefaultProps(
+													`date-range-dropdown--${id}__till-datepicker`
+												)}
 												selected={tillDate}
 												// biome-ignore lint/suspicious/noExplicitAny: TODO fix
 												onChange={((value: Date | null) => handleDateChange(value, 'lte')) as any}

@@ -6,7 +6,6 @@ import React, { useEffect, useState } from 'react';
 import { AdminConfigManager } from '~core/config/config.class';
 import type { DefaultComponentProps } from '~modules/shared/types/components';
 import { Icon } from '~shared/components/Icon/Icon';
-import { KeyCode } from '~shared/consts/keycode';
 import { navigateFunc } from '~shared/helpers/navigate-fnc';
 import { tText } from '~shared/helpers/translation-functions';
 import { BlockHeading } from '../BlockHeading/BlockHeading';
@@ -74,7 +73,7 @@ export const BlockHetArchiefHeaderSearch: FunctionComponent<BlockHetArchiefHeade
 			</div>
 			<div>
 				<TextInput
-					id="block-hetarchief-headersearch__search-input"
+					id={`block-hetarchief-headersearch__search-input}`}
 					ariaLabel={searchAriaLabel}
 					placeholder={tText(
 						'react-admin/modules/content-page/components/blocks/block-het-archief-header-search/block-het-archief-header-search___start-je-zoektocht'

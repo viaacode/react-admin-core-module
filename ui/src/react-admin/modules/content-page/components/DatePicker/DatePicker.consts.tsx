@@ -7,8 +7,9 @@ import { Locale } from '~modules/translations/translations.core.types';
 import { Icon } from '~shared/components/Icon/Icon';
 import { tText } from '~shared/helpers/translation-functions.ts';
 
-export function getDatePickerDefaultProps(): DatePickerProps {
+export function getDatePickerDefaultProps(id: string): DatePickerProps {
 	return {
+		id,
 		wrapperClassName: 'c-datepicker',
 		calendarClassName: 'c-datepicker',
 		popperClassName: 'c-datepicker',
@@ -21,9 +22,11 @@ export function getDatePickerDefaultProps(): DatePickerProps {
 		placeholderText: 'dd/mm/jjjj',
 		customInput: (
 			<TextInput
-				id="date-picker__input-field"
+				id={`${id}__date-picker__input-field`}
 				iconStart={<Icon name="calendar" />}
-				ariaLabel={tText('Datum [INPUT_ARIA_LABEL]')}
+				ariaLabel={tText(
+					'modules/content-page/components/date-picker/date-picker___datum-input-aria-label'
+				)}
 				value=""
 			/>
 		),

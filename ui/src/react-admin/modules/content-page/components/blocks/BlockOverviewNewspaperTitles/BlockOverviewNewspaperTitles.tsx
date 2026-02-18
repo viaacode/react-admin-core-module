@@ -73,7 +73,9 @@ export const BlockOverviewNewspaperTitles: FC<BlockOverviewNewspaperTitlesProps>
 					</div>
 				}
 				onChange={(value: ChangeEvent<HTMLInputElement>) => setSearchInput(value.target.value)}
-				ariaLabel={tText('Zoek kranten op titel [INPUT_ARIA_LABEL]')}
+				ariaLabel={tText(
+					'modules/content-page/components/blocks/block-overview-newspaper-titles/block-overview-newspaper-titles___zoek-kranten-op-titel-input-aria-label'
+				)}
 			/>
 			<ul className="c-newspaper-titles__list">
 				{newspaperData?.map((item: NewspaperTitle) => (

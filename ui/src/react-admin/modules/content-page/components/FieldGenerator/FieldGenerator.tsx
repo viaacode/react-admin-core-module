@@ -118,7 +118,6 @@ export const FieldGenerator: FunctionComponent<FieldGeneratorProps> = ({
 					icon={<Icon name={IconName.alertTriangle} />}
 					variants="info"
 					id={`field--${field.label}__alert`}
-					closeButtonLabel=""
 				/>
 			</Spacer>
 		);
