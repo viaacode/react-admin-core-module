@@ -114,6 +114,8 @@ function getTranslationEntryFromCallExpression(
 	const apps: AppsList = compact(
 		(appsParam || ALL_APPS)
 			.replace(/[[\]]/g, '')
+			.replace('App.HET_ARCHIEF', App.HET_ARCHIEF)
+			.replace('App.AVO', App.AVO)
 			.split(',')
 			.map((app: string) => app.trim())
 	) as AppsList;
