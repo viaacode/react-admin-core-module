@@ -254,11 +254,12 @@ export const UserGroupOverview = forwardRef<
 		return (
 			<div className={className}>
 				<TextInput
+					id="user-group-overview__search-input"
 					placeholder={tText('modules/user-group/views/user-group-overview___zoek')}
-					aria-label={tText('modules/user-group/views/user-group-overview___zoekveld-aria-label')}
+					ariaLabel={tText('modules/user-group/views/user-group-overview___zoekveld-aria-label')}
 					value={search}
 					onChange={onSearchChange}
-					onKeyDown={(e) => onKey(e, [...keysEnter], () => onSearchSubmit(search))}
+					onEnter={() => onSearchSubmit(search)}
 					iconEnd={renderSearchButtons?.(search)}
 					variants={[
 						'md',

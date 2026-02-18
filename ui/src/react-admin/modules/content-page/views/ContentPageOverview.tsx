@@ -505,6 +505,7 @@ export const ContentPageOverview: FC = () => {
 							onOpen={() => setSelectedDropdownContentPageId(contentPage.id)}
 							onClose={() => setSelectedDropdownContentPageId(null)}
 							placement="bottom-end"
+							id={`content-page-overview__actions-dropdown--${contentPage.id}`}
 						>
 							<DropdownButton>
 								<Button

@@ -234,6 +234,7 @@ const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProp
 						});
 					}}
 					onBlur={isFormValid}
+					ariaLabel={tText('Titel melding [INPUT_ARIA_LABEL]')}
 				/>
 			</FormControl>
 		);
@@ -334,6 +335,7 @@ const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProp
 					iconOpen={<Icon name="angleUp" />}
 					iconClosed={<Icon name="angleDown" />}
 					iconCheck={<Icon name="check" />}
+					id="maintenance-alerts-edit-form__user-groups-select"
 				/>
 			</FormControl>
 		);
@@ -417,6 +419,7 @@ const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProp
 								})
 							: undefined
 					}
+					ariaLabel={tText('Zichtbaar vanaf tijd [INPUT_ARIA_LABEL]')}
 				/>
 			</FormControl>
 		);
@@ -500,6 +503,7 @@ const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProp
 								})
 							: undefined
 					}
+					ariaLabel={tText('Zichtbaar tot tijd [INPUT_ARIA_LABEL]')}
 				/>
 			</FormControl>
 		);

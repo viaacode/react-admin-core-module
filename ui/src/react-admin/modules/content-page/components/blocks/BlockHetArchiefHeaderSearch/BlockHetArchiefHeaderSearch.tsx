@@ -49,12 +49,6 @@ export const BlockHetArchiefHeaderSearch: FunctionComponent<BlockHetArchiefHeade
 		await navigateFunc(url);
 	};
 
-	const handleKeyUp = async (e: KeyboardEvent<HTMLInputElement>) => {
-		if (e.keyCode === KeyCode.Enter) {
-			await navigateToSearchPage();
-		}
-	};
-
 	return (
 		<article className={clsx('c-block-het-archief-header-search', className)}>
 			<div className="c-block-het-archief-header-search__header">
@@ -80,25 +74,26 @@ export const BlockHetArchiefHeaderSearch: FunctionComponent<BlockHetArchiefHeade
 			</div>
 			<div>
 				<TextInput
-					aria-label={searchAriaLabel}
+					id="block-hetarchief-headersearch__search-input"
+					ariaLabel={searchAriaLabel}
 					placeholder={tText(
 						'react-admin/modules/content-page/components/blocks/block-het-archief-header-search/block-het-archief-header-search___start-je-zoektocht'
 					)}
 					iconEnd={
-						<div
+						<button
 							onClick={navigateToSearchPage}
-							onKeyUp={(evt: KeyboardEvent) => {
+							onKeyUp={async (evt: KeyboardEvent) => {
 								if (evt.key === 'Enter') {
-									navigateToSearchPage();
+									await navigateToSearchPage();
 								}
 							}}
+							type="submit"
 						>
 							<Icon name="filter" />
-						</div>
+						</button>
 					}
 					onChange={(evt) => setSearchTerm(evt.target.value)}
-					// biome-ignore lint/suspicious/noExplicitAny: todo
-					onKeyUp={handleKeyUp as any}
+					onEnter={navigateToSearchPage}
 					value={searchTerm}
 				/>
 				<p>{textBelowSearch}</p>

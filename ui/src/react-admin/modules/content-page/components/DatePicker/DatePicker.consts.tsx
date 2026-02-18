@@ -5,6 +5,7 @@ import type { DatePickerProps } from 'react-datepicker';
 import { AdminConfigManager } from '~core/config/config.class';
 import { Locale } from '~modules/translations/translations.core.types';
 import { Icon } from '~shared/components/Icon/Icon';
+import { tText } from '~shared/helpers/translation-functions.ts';
 
 export function getDatePickerDefaultProps(): DatePickerProps {
 	return {
@@ -18,7 +19,14 @@ export function getDatePickerDefaultProps(): DatePickerProps {
 		calendarStartDay: 1,
 		dateFormat: 'dd/MM/yyyy',
 		placeholderText: 'dd/mm/jjjj',
-		customInput: <TextInput iconStart={<Icon name="calendar" />} />,
+		customInput: (
+			<TextInput
+				id="date-picker__input-field"
+				iconStart={<Icon name="calendar" />}
+				ariaLabel={tText('Datum [INPUT_ARIA_LABEL]')}
+				value=""
+			/>
+		),
 		popperPlacement: 'bottom-start',
 		locale: { [Locale.Nl]: nlBE, [Locale.En]: enGB }[AdminConfigManager.getConfig().locale],
 		minDate: undefined,

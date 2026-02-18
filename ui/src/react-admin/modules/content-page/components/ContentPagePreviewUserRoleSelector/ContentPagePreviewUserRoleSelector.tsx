@@ -118,6 +118,7 @@ export const ContentPagePreviewUserRoleSelector: FC<
 			isOpen={isMenuOpen}
 			onOpen={() => handleOpenCloseMenu(true)}
 			onClose={() => handleOpenCloseMenu(false)}
+			id="content-page-preview__user-role-selector__dropdown"
 		>
 			<DropdownButton>
 				{isAvo() ? (

@@ -9,6 +9,6 @@ export const timePickerDefaults: DatePickerProps = {
 	showTimeSelectOnly: true,
 	timeIntervals: 15,
 	autoComplete: 'off', // html prop
-	customInput: <TextInput iconStart={<Icon name="clock" />} />,
+	customInput: <TextInput iconStart={<Icon name="clock" />} ariaLabel="" value="" id="" />,
 	locale: nlBE,
 };

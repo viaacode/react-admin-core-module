@@ -181,6 +181,9 @@ export function renderUserOverviewTableCellReact(
 						},
 					]}
 					onOptionClicked={() => handleOptionClicked(tableRowCommonUser.profileId)}
+					ariaLabel={tText('Acties voor gebruiker {{userName}}', {
+						userName: tableRowCommonUser?.fullName || '',
+					})}
 				/>
 			);
 

@@ -113,7 +113,13 @@ export const FieldGenerator: FunctionComponent<FieldGeneratorProps> = ({
 
 		return (
 			<Spacer margin="top">
-				<Alert content={field.note} icon={<Icon name={IconName.alertTriangle} />} variants="info" />
+				<Alert
+					content={field.note}
+					icon={<Icon name={IconName.alertTriangle} />}
+					variants="info"
+					id={`field--${field.label}__alert`}
+					closeButtonLabel=""
+				/>
 			</Spacer>
 		);
 	};

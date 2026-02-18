@@ -392,6 +392,7 @@ export const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> 
 	return (
 		<div className={className}>
 			<TextInput
+				id="translation-overview__search-input"
 				type="search"
 				aria-label={tText('modules/translations/views/translations-overview___zoekveld-aria-label')}
 				iconEnd={<Icon name="filter" />}
@@ -403,6 +404,7 @@ export const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> 
 				placeholder={tText(
 					'modules/translations/views/translations-overview-v-2___zoek-op-id-of-waarde'
 				)}
+				ariaLabel={tText('Zoek vertaling [INPUT_ARIA_LABEL]')}
 			></TextInput>
 			{renderTranslationsTable()}
 			{renderPopup({
