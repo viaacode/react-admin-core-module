@@ -794,6 +794,7 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 									title={tText(
 										'admin/content/views/content-overview___maak-een-nieuwe-content-pagina-aan'
 									)}
+									tabIndex={-1}
 								/>
 							</Link>
 						</Spacer>

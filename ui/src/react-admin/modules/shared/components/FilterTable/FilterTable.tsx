@@ -342,7 +342,14 @@ export const FilterTable: FunctionComponent<FilterTableProps> = ({
 						</FormGroup>
 						<Spacer margin="left-small">
 							<p className="c-body-1 u-text-muted">
-								{from}-{to} van {dataCount} resultaten
+								{tText(
+									'modules/shared/components/filter-table/filter-table___from-to-van-total-resultaten',
+									{
+										from: String(from),
+										to: String(to),
+										total: String(dataCount),
+									}
+								)}
 							</p>
 						</Spacer>
 					</Form>

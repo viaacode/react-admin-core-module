@@ -28,7 +28,7 @@ import type { LanguageInfo } from '~modules/translations/translations.types';
 import { useUserGroupOptions } from '~modules/user-group/hooks/useUserGroupOptions';
 import { Icon } from '~shared/components/Icon/Icon';
 import { Timepicker } from '~shared/components/Timepicker/Timepicker';
-import { timePickerDefaults } from '~shared/components/Timepicker/Timepicker.consts';
+import { getTimePickerDefaults } from '~shared/components/Timepicker/Timepicker.consts';
 import { GET_LANGUAGE_NAMES } from '~shared/consts/language-names';
 import { CustomError } from '~shared/helpers/custom-error';
 import { parseAsIsoWithoutTimezone } from '~shared/helpers/formatters/date';
@@ -234,6 +234,9 @@ const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProp
 						});
 					}}
 					onBlur={isFormValid}
+					ariaLabel={tText(
+						'modules/maintenance-alerts/views/maintenance-alerts-edit-form___titel-melding-input-aria-label'
+					)}
 				/>
 			</FormControl>
 		);
@@ -334,6 +337,7 @@ const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProp
 					iconOpen={<Icon name="angleUp" />}
 					iconClosed={<Icon name="angleDown" />}
 					iconCheck={<Icon name="check" />}
+					id="maintenance-alerts-edit-form__user-groups-select"
 				/>
 			</FormControl>
 		);
@@ -353,7 +357,7 @@ const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProp
 				className="c-input--date-time"
 			>
 				<DatePicker
-					{...getDatePickerDefaultProps()}
+					{...getDatePickerDefaultProps('maintenance-alerts-edit-form__from-date-picker')}
 					id="new-alert-from-date"
 					name="fromDate"
 					onBlur={isFormValid}
@@ -386,8 +390,12 @@ const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProp
 				/>
 
 				<Timepicker
-					{...timePickerDefaults}
-					id="new-alert-from-time"
+					{...getTimePickerDefaults(
+						'maintenance-alerts-edit-form__from-time',
+						tText(
+							'modules/maintenance-alerts/views/maintenance-alerts-edit-form___zichtbaar-vanaf-tijd-input-aria-label'
+						)
+					)}
 					name="fromDate"
 					onBlur={isFormValid}
 					onChange={
@@ -436,7 +444,7 @@ const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProp
 				className="c-input--date-time"
 			>
 				<DatePicker
-					{...getDatePickerDefaultProps()}
+					{...getDatePickerDefaultProps('maintenance-alerts-edit-form__until-date-picker')}
 					id="new-alert-until-date"
 					name="untilDate"
 					onBlur={isFormValid}
@@ -469,8 +477,12 @@ const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProp
 				/>
 
 				<Timepicker
-					{...timePickerDefaults}
-					id="new-alert-until-time"
+					{...getTimePickerDefaults(
+						'maintenance-alerts-edit-form__until-time',
+						tText(
+							'modules/maintenance-alerts/views/maintenance-alerts-edit-form___zichtbaar-tot-tijd-input-aria-label'
+						)
+					)}
 					name="untilDate"
 					onBlur={isFormValid}
 					onChange={

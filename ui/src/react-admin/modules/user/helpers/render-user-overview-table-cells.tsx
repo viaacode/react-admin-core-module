@@ -181,6 +181,12 @@ export function renderUserOverviewTableCellReact(
 						},
 					]}
 					onOptionClicked={() => handleOptionClicked(tableRowCommonUser.profileId)}
+					ariaLabel={tText(
+						'modules/user/helpers/render-user-overview-table-cells___acties-voor-gebruiker-user-name',
+						{
+							userName: tableRowCommonUser?.fullName || '',
+						}
+					)}
 				/>
 			);
 

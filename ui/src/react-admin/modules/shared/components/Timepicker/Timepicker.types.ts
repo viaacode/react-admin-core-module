@@ -6,5 +6,5 @@ import type { DefaultComponentProps } from '../../types/components';
 export type TimepickerProps = DefaultComponentProps &
 	DatePickerProps & {
 		children?: ReactNode;
-		id?: string;
+		id: string;
 	};

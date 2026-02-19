@@ -505,6 +505,7 @@ export const ContentPageOverview: FC = () => {
 							onOpen={() => setSelectedDropdownContentPageId(contentPage.id)}
 							onClose={() => setSelectedDropdownContentPageId(null)}
 							placement="bottom-end"
+							id={`content-page-overview__actions-dropdown--${contentPage.id}`}
 						>
 							<DropdownButton>
 								<Button
@@ -526,6 +527,7 @@ export const ContentPageOverview: FC = () => {
 										label={tText('admin/content/views/content-overview___bekijk-content')}
 										ariaLabel={tText('admin/content/views/content-overview___bekijk-content')}
 										type="secondary"
+										tabIndex={-1}
 									/>
 								</Link>
 								<AvoButton
@@ -549,6 +551,7 @@ export const ContentPageOverview: FC = () => {
 										label={tText('admin/content/views/content-overview___pas-content-aan')}
 										ariaLabel={tText('admin/content/views/content-overview___pas-content-aan')}
 										type="secondary"
+										tabIndex={-1}
 									/>
 								</Link>
 								{hasPerm(DELETE_ANY_CONTENT_PAGES) && (
@@ -591,6 +594,7 @@ export const ContentPageOverview: FC = () => {
 								title={tText(
 									'admin/content/views/content-overview___maak-een-nieuwe-content-pagina-aan'
 								)}
+								tabIndex={-1}
 							/>
 						</Link>
 					</Spacer>

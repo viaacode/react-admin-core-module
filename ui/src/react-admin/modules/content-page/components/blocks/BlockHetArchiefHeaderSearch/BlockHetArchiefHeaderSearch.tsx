@@ -6,7 +6,6 @@ import React, { useEffect, useState } from 'react';
 import { AdminConfigManager } from '~core/config/config.class';
 import type { DefaultComponentProps } from '~modules/shared/types/components';
 import { Icon } from '~shared/components/Icon/Icon';
-import { KeyCode } from '~shared/consts/keycode';
 import { navigateFunc } from '~shared/helpers/navigate-fnc';
 import { tText } from '~shared/helpers/translation-functions';
 import { BlockHeading } from '../BlockHeading/BlockHeading';
@@ -49,12 +48,6 @@ export const BlockHetArchiefHeaderSearch: FunctionComponent<BlockHetArchiefHeade
 		await navigateFunc(url);
 	};
 
-	const handleKeyUp = async (e: KeyboardEvent<HTMLInputElement>) => {
-		if (e.keyCode === KeyCode.Enter) {
-			await navigateToSearchPage();
-		}
-	};
-
 	return (
 		<article className={clsx('c-block-het-archief-header-search', className)}>
 			<div className="c-block-het-archief-header-search__header">
@@ -80,25 +73,29 @@ export const BlockHetArchiefHeaderSearch: FunctionComponent<BlockHetArchiefHeade
 			</div>
 			<div>
 				<TextInput
-					aria-label={searchAriaLabel}
+					id="block-hetarchief-header-search__search-input"
+					ariaLabel={searchAriaLabel}
 					placeholder={tText(
 						'react-admin/modules/content-page/components/blocks/block-het-archief-header-search/block-het-archief-header-search___start-je-zoektocht'
 					)}
 					iconEnd={
-						<div
+						<button
 							onClick={navigateToSearchPage}
-							onKeyUp={(evt: KeyboardEvent) => {
+							onKeyUp={async (evt: KeyboardEvent) => {
 								if (evt.key === 'Enter') {
-									navigateToSearchPage();
+									await navigateToSearchPage();
 								}
 							}}
+							type="submit"
+							aria-label={tText(
+								'modules/content-page/components/blocks/block-het-archief-header-search/block-het-archief-header-search___zoek-in-de-publieke-catalogus-input-aria-label'
+							)}
 						>
 							<Icon name="filter" />
-						</div>
+						</button>
 					}
 					onChange={(evt) => setSearchTerm(evt.target.value)}
-					// biome-ignore lint/suspicious/noExplicitAny: todo
-					onKeyUp={handleKeyUp as any}
+					onEnter={navigateToSearchPage}
 					value={searchTerm}
 				/>
 				<p>{textBelowSearch}</p>

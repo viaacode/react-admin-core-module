@@ -14,11 +14,13 @@ import { Icon } from '../Icon/Icon';
 export interface ActionsDropdownProps {
 	menuItems: MenuItemInfo[] | MenuItemInfo[][];
 	onOptionClicked: (menuItemId: string | number) => void;
+	ariaLabel: string;
 }
 
 const ActionsDropdown: FunctionComponent<ActionsDropdownProps> = ({
 	menuItems,
 	onOptionClicked,
+	ariaLabel,
 }) => {
 	const [isOpen, setIsOpen] = useState(false);
 
@@ -36,6 +38,7 @@ const ActionsDropdown: FunctionComponent<ActionsDropdownProps> = ({
 			onOpen={() => setIsOpen(true)}
 			onClose={() => setIsOpen(false)}
 			placement="bottom-end"
+			id={`actions-dropdown--${ariaLabel}`}
 		>
 			<DropdownButton>
 				<Button

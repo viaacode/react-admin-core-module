@@ -32,10 +32,7 @@ export const BlockOverviewNewspaperTitles: FC<BlockOverviewNewspaperTitlesProps>
 		setNewspaperData(data);
 	}, [data]);
 
-	const onSearch = (e: KeyboardEvent<HTMLInputElement>) => {
-		if (e.key !== 'Enter') {
-			return;
-		}
+	const onSearch = () => {
 		const filteredData = data?.filter((newsPaper) =>
 			newsPaper.title.toLowerCase().includes(searchInput.toLowerCase())
 		);
@@ -62,7 +59,8 @@ export const BlockOverviewNewspaperTitles: FC<BlockOverviewNewspaperTitlesProps>
 					)}
 			</div>
 			<TextInput
-				onKeyUp={onSearch}
+				id="block-overview-newspaper-tiles__search-input"
+				onEnter={onSearch}
 				value={searchInput}
 				placeholder={tText(
 					'modules/content-page/components/blocks/block-overview-newspaper-titles/block-overview-newspaper-titles___zoek-op-titel',
@@ -75,6 +73,9 @@ export const BlockOverviewNewspaperTitles: FC<BlockOverviewNewspaperTitlesProps>
 					</div>
 				}
 				onChange={(value: ChangeEvent<HTMLInputElement>) => setSearchInput(value.target.value)}
+				ariaLabel={tText(
+					'modules/content-page/components/blocks/block-overview-newspaper-titles/block-overview-newspaper-titles___zoek-kranten-op-titel-input-aria-label'
+				)}
 			/>
 			<ul className="c-newspaper-titles__list">
 				{newspaperData?.map((item: NewspaperTitle) => (

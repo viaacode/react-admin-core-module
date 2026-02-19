@@ -10,9 +10,10 @@ export const Timepicker: FC<TimepickerProps> = (props) => {
 
 	const classNames = clsx(className, 'c-datepicker', 'c-datepicker--time');
 
+	const defaultProps = getDatePickerDefaultProps(props.id);
 	return (
 		<DatePicker
-			locale={getDatePickerDefaultProps().locale}
+			locale={defaultProps.locale}
 			wrapperClassName={classNames}
 			calendarClassName={classNames}
 			popperClassName={classNames}
