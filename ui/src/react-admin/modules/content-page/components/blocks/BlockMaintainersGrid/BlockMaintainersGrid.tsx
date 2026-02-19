@@ -53,9 +53,12 @@ export const BlockMaintainersGrid: FunctionComponent<BlockMaintainerGridProps> =
 									type: AvoCoreContentPickerType.EXTERNAL_LINK,
 									value: maintainer.homepageUrl,
 								}}
-								ariaLabel={tText('Ga naar aanbieder {{maintainerName}}', {
-									maintainerName: maintainer.name,
-								})}
+								ariaLabel={tText(
+									'modules/content-page/components/blocks/block-maintainers-grid/block-maintainers-grid___ga-naar-aanbieder-maintainer-name',
+									{
+										maintainerName: maintainer.name,
+									}
+								)}
 							>
 								<img
 									src={maintainer.logoUrl}

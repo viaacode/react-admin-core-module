@@ -260,7 +260,10 @@ export const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> 
 					<SmartLink
 						action={linkTo}
 						removeStyles={false}
-						ariaLabel={tText('Ga naar label link: {{linkTo}}', { linkTo: linkTo.value })}
+						ariaLabel={tText(
+							'modules/content-page-labels/views/content-page-label-overview___ga-naar-label-link-link-to',
+							{ linkTo: linkTo.value }
+						)}
 					>{`${labels[linkTo.type]} - ${decodeURIComponent(
 						String(linkTo.value)?.split('hetarchief.be')?.pop() || ''
 					)}`}</SmartLink>

@@ -87,6 +87,9 @@ export const BlockHetArchiefHeaderSearch: FunctionComponent<BlockHetArchiefHeade
 								}
 							}}
 							type="submit"
+							aria-label={tText(
+								'modules/content-page/components/blocks/block-het-archief-header-search/block-het-archief-header-search___zoek-in-de-publieke-catalogus-input-aria-label'
+							)}
 						>
 							<Icon name="filter" />
 						</button>
