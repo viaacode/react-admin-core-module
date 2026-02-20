@@ -28461,6 +28461,24 @@
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
     "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
+    "key": "download-voorbereiding-gefaald",
+    "language": "nl",
+    "value": "Download voorbereiding gefaald",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
+    "key": "download-voorbereiding-gefaald",
+    "language": "en",
+    "value": "Download voorbereiding gefaald",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
     "key": "download-is-verlopen-op",
     "language": "nl",
     "value": "Download is verlopen op {{downloadExpirationDate}}",
@@ -28833,6 +28851,96 @@
     "key": "ben-je-zeker-dat-je-deze-aanvraag-wil-annuleren",
     "language": "en",
     "value": "Are you sure you want to cancel this request?",
+    "value_type": "HTML"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-download-blade/material-request-download-blade",
+    "key": "download-is-klaar",
+    "language": "nl",
+    "value": "Download is klaar",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-download-blade/material-request-download-blade",
+    "key": "download-is-klaar",
+    "language": "en",
+    "value": "Download is klaar",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-download-blade/material-request-download-blade",
+    "key": "download-is-klaar-blade-aria-label",
+    "language": "nl",
+    "value": "Download is klaar blade [ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-download-blade/material-request-download-blade",
+    "key": "download-is-klaar-blade-aria-label",
+    "language": "en",
+    "value": "Download is klaar blade [ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-download-blade/material-request-download-blade",
+    "key": "download",
+    "language": "nl",
+    "value": "Download",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-download-blade/material-request-download-blade",
+    "key": "download",
+    "language": "en",
+    "value": "Download",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-download-blade/material-request-download-blade",
+    "key": "download-mobiel",
+    "language": "nl",
+    "value": "Download mobiel",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-download-blade/material-request-download-blade",
+    "key": "download-mobiel",
+    "language": "en",
+    "value": "Download mobiel",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-download-blade/material-request-download-blade",
+    "key": "je-kan-je-download-nu-downloaden",
+    "language": "nl",
+    "value": "Je kan je download nu downloaden",
+    "value_type": "HTML"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-download-blade/material-request-download-blade",
+    "key": "je-kan-je-download-nu-downloaden",
+    "language": "en",
+    "value": "Je kan je download nu downloaden",
     "value_type": "HTML"
   },
   {
@@ -44350,114 +44458,6 @@
     "language": "en",
     "value": "Close",
     "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
-    "key": "download-voorbereiding-gefaald",
-    "language": "nl",
-    "value": "Download voorbereiding gefaald",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
-    "key": "download-voorbereiding-gefaald",
-    "language": "en",
-    "value": "Download voorbereiding gefaald",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-download-blade/material-request-download-blade",
-    "key": "download-is-klaar",
-    "language": "nl",
-    "value": "Download is klaar",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-download-blade/material-request-download-blade",
-    "key": "download-is-klaar",
-    "language": "en",
-    "value": "Download is klaar",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-download-blade/material-request-download-blade",
-    "key": "download-is-klaar-blade-aria-label",
-    "language": "nl",
-    "value": "Download is klaar blade [ARIA_LABEL]",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-download-blade/material-request-download-blade",
-    "key": "download-is-klaar-blade-aria-label",
-    "language": "en",
-    "value": "Download is klaar blade [ARIA_LABEL]",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-download-blade/material-request-download-blade",
-    "key": "download",
-    "language": "nl",
-    "value": "Download",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-download-blade/material-request-download-blade",
-    "key": "download",
-    "language": "en",
-    "value": "Download",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-download-blade/material-request-download-blade",
-    "key": "download-mobiel",
-    "language": "nl",
-    "value": "Download mobiel",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-download-blade/material-request-download-blade",
-    "key": "download-mobiel",
-    "language": "en",
-    "value": "Download mobiel",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-download-blade/material-request-download-blade",
-    "key": "je-kan-je-download-nu-downloaden",
-    "language": "nl",
-    "value": "Je kan je download nu downloaden",
-    "value_type": "HTML"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-download-blade/material-request-download-blade",
-    "key": "je-kan-je-download-nu-downloaden",
-    "language": "en",
-    "value": "Je kan je download nu downloaden",
-    "value_type": "HTML"
   },
   {
     "app": "HET_ARCHIEF",
