@@ -5564,6 +5564,24 @@
   {
     "app": "HET_ARCHIEF",
     "component": "ADMIN_CORE",
+    "location": "modules/content-page-labels/views/content-page-label-overview",
+    "key": "ga-naar-label-link-link-to",
+    "language": "nl",
+    "value": "Ga naar label link: {{linkTo}}",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page-labels/views/content-page-label-overview",
+    "key": "ga-naar-label-link-link-to",
+    "language": "en",
+    "value": "Ga naar label link: {{linkTo}}",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
     "location": "admin/content-page-labels/views/content-page-label-overview",
     "key": "bekijk-de-details-van-deze-content-pagina-label",
     "language": "nl",
@@ -15050,6 +15068,24 @@
   {
     "app": "HET_ARCHIEF",
     "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-het-archief-header-search/block-het-archief-header-search",
+    "key": "zoek-in-de-publieke-catalogus-input-aria-label",
+    "language": "nl",
+    "value": "Zoek in de publieke catalogus [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-het-archief-header-search/block-het-archief-header-search",
+    "key": "zoek-in-de-publieke-catalogus-input-aria-label",
+    "language": "en",
+    "value": "Zoek in de publieke catalogus [INPUT_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
     "location": "modules/content-page/components/blocks/block-het-archief-image-text-background/block-het-archief-image-text-background",
     "key": "titel-grootte",
     "language": "nl",
@@ -16197,6 +16233,24 @@
     "key": "zichtbare-items",
     "language": "en",
     "value": "Visible items",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-maintainers-grid/block-maintainers-grid",
+    "key": "ga-naar-aanbieder-maintainer-name",
+    "language": "nl",
+    "value": "Ga naar aanbieder {{maintainerName}}",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-maintainers-grid/block-maintainers-grid",
+    "key": "ga-naar-aanbieder-maintainer-name",
+    "language": "en",
+    "value": "Ga naar aanbieder {{maintainerName}}",
     "value_type": "TEXT"
   },
   {
@@ -18271,60 +18325,6 @@
   },
   {
     "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page-labels/views/content-page-label-overview",
-    "key": "ga-naar-label-link-link-to",
-    "language": "nl",
-    "value": "Ga naar label link: {{linkTo}}",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page-labels/views/content-page-label-overview",
-    "key": "ga-naar-label-link-link-to",
-    "language": "en",
-    "value": "Ga naar label link: {{linkTo}}",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-het-archief-header-search/block-het-archief-header-search",
-    "key": "zoek-in-de-publieke-catalogus-input-aria-label",
-    "language": "nl",
-    "value": "Zoek in de publieke catalogus [INPUT_ARIA_LABEL]",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-het-archief-header-search/block-het-archief-header-search",
-    "key": "zoek-in-de-publieke-catalogus-input-aria-label",
-    "language": "en",
-    "value": "Zoek in de publieke catalogus [INPUT_ARIA_LABEL]",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-maintainers-grid/block-maintainers-grid",
-    "key": "ga-naar-aanbieder-maintainer-name",
-    "language": "nl",
-    "value": "Ga naar aanbieder {{maintainerName}}",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-maintainers-grid/block-maintainers-grid",
-    "key": "ga-naar-aanbieder-maintainer-name",
-    "language": "en",
-    "value": "Ga naar aanbieder {{maintainerName}}",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
     "component": "FRONTEND",
     "location": "pages/404",
     "key": "niet-gevonden",
@@ -20198,6 +20198,24 @@
   {
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
+    "location": "modules/search/search-page",
+    "key": "meer-info-over-enkel-voor-onderzoek-doeleinden-link-aria-label",
+    "language": "nl",
+    "value": "Meer info over enkel voor onderzoek doeleinden [LINK_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/search/search-page",
+    "key": "meer-info-over-enkel-voor-onderzoek-doeleinden-link-aria-label",
+    "language": "en",
+    "value": "Meer info over enkel voor onderzoek doeleinden [LINK_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
     "location": "pages/slug/index",
     "key": "meer-info",
     "language": "nl",
@@ -21800,6 +21818,24 @@
   {
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
+    "location": "modules/account/views/account-my-application-list-sent",
+    "key": "ga-naar-zoeken-in-de-catalogus",
+    "language": "nl",
+    "value": "Ga naar zoeken in de catalogus",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/views/account-my-application-list-sent",
+    "key": "ga-naar-zoeken-in-de-catalogus",
+    "language": "en",
+    "value": "Ga naar zoeken in de catalogus",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
     "location": "modules/account/components/application-list-sent/application-list-sent",
     "key": "zoeken-in-de-catalogus",
     "language": "nl",
@@ -21813,6 +21849,24 @@
     "key": "zoeken-in-de-catalogus",
     "language": "en",
     "value": "Search in the catalogue",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/views/account-my-application-list-sent",
+    "key": "ga-naar-mijn-materiaal-aanvragen-link-aria-label",
+    "language": "nl",
+    "value": "Ga naar mijn materiaal aanvragen [LINK_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/views/account-my-application-list-sent",
+    "key": "ga-naar-mijn-materiaal-aanvragen-link-aria-label",
+    "language": "en",
+    "value": "Ga naar mijn materiaal aanvragen [LINK_ARIA_LABEL]",
     "value_type": "TEXT"
   },
   {
@@ -28407,42 +28461,6 @@
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
     "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
-    "key": "downlooad-materiaal",
-    "language": "nl",
-    "value": "Download materiaal",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
-    "key": "downlooad-materiaal",
-    "language": "en",
-    "value": "Download material",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
-    "key": "download-in-voorbereiding",
-    "language": "nl",
-    "value": "Download in voorbereiding",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
-    "key": "download-in-voorbereiding",
-    "language": "en",
-    "value": "Preparing download",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
     "key": "download-is-verlopen-op",
     "language": "nl",
     "value": "Download is verlopen op {{downloadExpirationDate}}",
@@ -28473,6 +28491,42 @@
     "key": "download-is-beschikbaar-tot-en-met",
     "language": "en",
     "value": "Download is available until {{downloadExpirationDate}} (engels)",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
+    "key": "downlooad-materiaal",
+    "language": "nl",
+    "value": "Download materiaal",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
+    "key": "downlooad-materiaal",
+    "language": "en",
+    "value": "Download material",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
+    "key": "download-in-voorbereiding",
+    "language": "nl",
+    "value": "Download in voorbereiding",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
+    "key": "download-in-voorbereiding",
+    "language": "en",
+    "value": "Preparing download",
     "value_type": "TEXT"
   },
   {
@@ -28734,7 +28788,7 @@
     "key": "verder-werken",
     "language": "nl",
     "value": "Verder werken",
-    "value_type": "TEXT"
+    "value_type": "HTML"
   },
   {
     "app": "HET_ARCHIEF",
@@ -28743,7 +28797,7 @@
     "key": "verder-werken",
     "language": "en",
     "value": "Continue your work",
-    "value_type": "TEXT"
+    "value_type": "HTML"
   },
   {
     "app": "HET_ARCHIEF",
@@ -28752,7 +28806,7 @@
     "key": "ja-ik-ben-zeker",
     "language": "nl",
     "value": "Ja, ik ben zeker",
-    "value_type": "TEXT"
+    "value_type": "HTML"
   },
   {
     "app": "HET_ARCHIEF",
@@ -28761,7 +28815,7 @@
     "key": "ja-ik-ben-zeker",
     "language": "en",
     "value": "Yes, I&#x27;m sure",
-    "value_type": "TEXT"
+    "value_type": "HTML"
   },
   {
     "app": "HET_ARCHIEF",
@@ -33135,6 +33189,42 @@
     "key": "volgende",
     "language": "en",
     "value": "Next",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata",
+    "key": "ga-naar-de-vorige-krant-in-dezelfde-serie-link-aria-label",
+    "language": "nl",
+    "value": "Ga naar de vorige krant in dezelfde serie [LINK_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata",
+    "key": "ga-naar-de-vorige-krant-in-dezelfde-serie-link-aria-label",
+    "language": "en",
+    "value": "Ga naar de vorige krant in dezelfde serie [LINK_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata",
+    "key": "ga-naar-de-volgende-krant-in-dezelfde-serie-link-aria-label",
+    "language": "nl",
+    "value": "Ga naar de volgende krant in dezelfde serie [LINK_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata",
+    "key": "ga-naar-de-volgende-krant-in-dezelfde-serie-link-aria-label",
+    "language": "en",
+    "value": "Ga naar de volgende krant in dezelfde serie [LINK_ARIA_LABEL]",
     "value_type": "TEXT"
   },
   {
@@ -38356,6 +38446,24 @@
     "language": "en",
     "value": "When would you like to explore the archival material of this organisation?",
     "value_type": "HTML"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/shared/layouts/app-layout/app-layout",
+    "key": "ga-naar-de-homepage-link-aria-label",
+    "language": "nl",
+    "value": "Ga naar de homepage [LINK_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/shared/layouts/app-layout/app-layout",
+    "key": "ga-naar-de-homepage-link-aria-label",
+    "language": "en",
+    "value": "Ga naar de homepage [LINK_ARIA_LABEL]",
+    "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
@@ -44246,110 +44354,110 @@
   {
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
-    "location": "modules/search/search-page",
-    "key": "meer-info-over-enkel-voor-onderzoek-doeleinden-link-aria-label",
+    "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
+    "key": "download-voorbereiding-gefaald",
     "language": "nl",
-    "value": "Meer info over enkel voor onderzoek doeleinden [LINK_ARIA_LABEL]",
+    "value": "Download voorbereiding gefaald",
     "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
-    "location": "modules/search/search-page",
-    "key": "meer-info-over-enkel-voor-onderzoek-doeleinden-link-aria-label",
+    "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
+    "key": "download-voorbereiding-gefaald",
     "language": "en",
-    "value": "Meer info over enkel voor onderzoek doeleinden [LINK_ARIA_LABEL]",
+    "value": "Download voorbereiding gefaald",
     "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
-    "location": "modules/account/views/account-my-application-list-sent",
-    "key": "ga-naar-zoeken-in-de-catalogus",
+    "location": "modules/account/components/material-request-download-blade/material-request-download-blade",
+    "key": "download-is-klaar",
     "language": "nl",
-    "value": "Ga naar zoeken in de catalogus",
+    "value": "Download is klaar",
     "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
-    "location": "modules/account/views/account-my-application-list-sent",
-    "key": "ga-naar-zoeken-in-de-catalogus",
+    "location": "modules/account/components/material-request-download-blade/material-request-download-blade",
+    "key": "download-is-klaar",
     "language": "en",
-    "value": "Ga naar zoeken in de catalogus",
+    "value": "Download is klaar",
     "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
-    "location": "modules/account/views/account-my-application-list-sent",
-    "key": "ga-naar-mijn-materiaal-aanvragen-link-aria-label",
+    "location": "modules/account/components/material-request-download-blade/material-request-download-blade",
+    "key": "download-is-klaar-blade-aria-label",
     "language": "nl",
-    "value": "Ga naar mijn materiaal aanvragen [LINK_ARIA_LABEL]",
+    "value": "Download is klaar blade [ARIA_LABEL]",
     "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
-    "location": "modules/account/views/account-my-application-list-sent",
-    "key": "ga-naar-mijn-materiaal-aanvragen-link-aria-label",
+    "location": "modules/account/components/material-request-download-blade/material-request-download-blade",
+    "key": "download-is-klaar-blade-aria-label",
     "language": "en",
-    "value": "Ga naar mijn materiaal aanvragen [LINK_ARIA_LABEL]",
+    "value": "Download is klaar blade [ARIA_LABEL]",
     "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
-    "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata",
-    "key": "ga-naar-de-vorige-krant-in-dezelfde-serie-link-aria-label",
+    "location": "modules/account/components/material-request-download-blade/material-request-download-blade",
+    "key": "download",
     "language": "nl",
-    "value": "Ga naar de vorige krant in dezelfde serie [LINK_ARIA_LABEL]",
+    "value": "Download",
     "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
-    "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata",
-    "key": "ga-naar-de-vorige-krant-in-dezelfde-serie-link-aria-label",
+    "location": "modules/account/components/material-request-download-blade/material-request-download-blade",
+    "key": "download",
     "language": "en",
-    "value": "Ga naar de vorige krant in dezelfde serie [LINK_ARIA_LABEL]",
+    "value": "Download",
     "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
-    "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata",
-    "key": "ga-naar-de-volgende-krant-in-dezelfde-serie-link-aria-label",
+    "location": "modules/account/components/material-request-download-blade/material-request-download-blade",
+    "key": "download-mobiel",
     "language": "nl",
-    "value": "Ga naar de volgende krant in dezelfde serie [LINK_ARIA_LABEL]",
+    "value": "Download mobiel",
     "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
-    "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata",
-    "key": "ga-naar-de-volgende-krant-in-dezelfde-serie-link-aria-label",
+    "location": "modules/account/components/material-request-download-blade/material-request-download-blade",
+    "key": "download-mobiel",
     "language": "en",
-    "value": "Ga naar de volgende krant in dezelfde serie [LINK_ARIA_LABEL]",
+    "value": "Download mobiel",
     "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
-    "location": "modules/shared/layouts/app-layout/app-layout",
-    "key": "ga-naar-de-homepage-link-aria-label",
+    "location": "modules/account/components/material-request-download-blade/material-request-download-blade",
+    "key": "je-kan-je-download-nu-downloaden",
     "language": "nl",
-    "value": "Ga naar de homepage [LINK_ARIA_LABEL]",
-    "value_type": "TEXT"
+    "value": "Je kan je download nu downloaden",
+    "value_type": "HTML"
   },
   {
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
-    "location": "modules/shared/layouts/app-layout/app-layout",
-    "key": "ga-naar-de-homepage-link-aria-label",
+    "location": "modules/account/components/material-request-download-blade/material-request-download-blade",
+    "key": "je-kan-je-download-nu-downloaden",
     "language": "en",
-    "value": "Ga naar de homepage [LINK_ARIA_LABEL]",
-    "value_type": "TEXT"
+    "value": "Je kan je download nu downloaden",
+    "value_type": "HTML"
   },
   {
     "app": "HET_ARCHIEF",
