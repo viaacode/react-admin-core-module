@@ -45,6 +45,7 @@ import { navigateFunc } from '~shared/helpers/navigate-fnc';
 import { isServerSideRendering } from '~shared/helpers/routing/is-server-side-rendering.ts';
 import { toggleSortOrder } from '~shared/helpers/toggle-sort-order';
 import { useGetTableColumnPreference } from '~shared/hooks/useGetTableColumnPreference';
+import { useLocation } from '~shared/hooks/useLocation.ts';
 import { useUpdateTableColumnPreference } from '~shared/hooks/useUpdateTableColumnPreference';
 import BooleanCheckboxDropdown from '../BooleanCheckboxDropdown/BooleanCheckboxDropdown';
 import type { CheckboxOption } from '../CheckboxDropdownModal/CheckboxDropdownModal';
@@ -146,17 +147,17 @@ export const FilterTable: FunctionComponent<FilterTableProps> = ({
 	defaultOrderProp,
 	defaultOrderDirection,
 }) => {
-	// Holds the text while the user is typing, once they press the search button or enter it will be copied to the tableState.query
+	// Holds the text while the user is typing, once they press the search button or press the enter-key, it will be copied to the tableState.query
 	// This avoids doing a database query on every key press
 	const [searchTerm, setSearchTerm] = useState<string>('');
 	const [selectedBulkAction, setSelectedBulkAction] = useState<string | null>(null);
 	const [confirmBulkActionModalOpen, setConfirmBulkActionModalOpen] = useState<boolean>(false);
 	const queryParamsConfig = useMemo(() => GET_FILTER_TABLE_QUERY_PARAM_CONFIG(columns), [columns]);
-
 	// Fetch column preferences from the database for this route and user
+	const location = useLocation();
 	const { data: preferredColumns, isLoading: isLoadingColumnPreferences } =
-		useGetTableColumnPreference(location.pathname);
-	const { mutateAsync: setPreferredColumns } = useUpdateTableColumnPreference(location.pathname);
+		useGetTableColumnPreference(location?.pathname);
+	const { mutateAsync: setPreferredColumns } = useUpdateTableColumnPreference();
 
 	/**
 	 * Sort column ids according to the default order in the column config array of the filterTable
@@ -180,7 +181,7 @@ export const FilterTable: FunctionComponent<FilterTableProps> = ({
 		// biome-ignore lint/suspicious/noExplicitAny: many possible options to list here
 		const tableState: Record<string, any> = {};
 		for (const queryParamKey in queryParamsConfig) {
-			const queryParamValueRaw = new URLSearchParams(location.search).get(queryParamKey);
+			const queryParamValueRaw = new URLSearchParams(location?.search).get(queryParamKey);
 			const queryParamEncoderDecoder = queryParamsConfig[queryParamKey];
 			const queryParamValue = queryParamEncoderDecoder.decode(queryParamValueRaw || undefined);
 			if (!isNil(queryParamValue)) {
@@ -191,7 +192,8 @@ export const FilterTable: FunctionComponent<FilterTableProps> = ({
 			tableState.columns = sortColumns(preferredColumns);
 		}
 		return tableState;
-	}, [queryParamsConfig, preferredColumns, sortColumns]);
+	}, [queryParamsConfig, preferredColumns, sortColumns, location]);
+
 	const setTableState = useCallback(
 		// biome-ignore lint/suspicious/noExplicitAny: many possible options to list here
 		async (newTableState: Record<string, any>) => {
@@ -306,7 +308,10 @@ export const FilterTable: FunctionComponent<FilterTableProps> = ({
 	const updateSelectedColumns = async (selectedColumns: string[]) => {
 		const orderedSelectedColumns = sortColumns(selectedColumns);
 		handleTableStateChanged(orderedSelectedColumns, 'columns');
-		await setPreferredColumns(orderedSelectedColumns);
+		await setPreferredColumns({
+			columnKey: location?.pathname as string,
+			columns: orderedSelectedColumns,
+		});
 	};
 
 	const renderFilters = () => {
