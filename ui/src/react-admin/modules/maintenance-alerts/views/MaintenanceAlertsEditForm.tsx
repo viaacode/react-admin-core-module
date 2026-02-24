@@ -212,9 +212,6 @@ const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProp
 	};
 
 	const renderedTitle = useMemo(() => {
-		if (!currentMaintenanceAlert) {
-			return null;
-		}
 		return (
 			<FormControl
 				id="new-alert-title"
@@ -243,9 +240,6 @@ const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProp
 	}, [isFormValid, currentMaintenanceAlert, errors.title]);
 
 	const renderedMessage = useMemo(() => {
-		if (!currentMaintenanceAlert) {
-			return null;
-		}
 		return (
 			<FormControl
 				id="new-alert-message"
@@ -272,9 +266,6 @@ const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProp
 	}, [currentMaintenanceAlert, errors.message, maintenanceAlert?.id, isFormValid]);
 
 	const renderedIcon = useMemo(() => {
-		if (!currentMaintenanceAlert) {
-			return null;
-		}
 		return (
 			<FormControl
 				id="new-alert-icon"
@@ -303,9 +294,6 @@ const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProp
 	}, [currentMaintenanceAlert, errors.type]);
 
 	const renderedUserGroup = useMemo(() => {
-		if (!currentMaintenanceAlert) {
-			return null;
-		}
 		return (
 			<FormControl
 				id="new-alert-user-group"
@@ -325,8 +313,8 @@ const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProp
 						setCurrentMaintenanceAlert({
 							...currentMaintenanceAlert,
 							userGroups: !checked
-								? [...(currentMaintenanceAlert.userGroups || []), id]
-								: without(currentMaintenanceAlert.userGroups || [], id),
+								? [...(currentMaintenanceAlert?.userGroups || []), id]
+								: without(currentMaintenanceAlert?.userGroups || [], id),
 						});
 					}}
 					label={tText(
@@ -344,9 +332,6 @@ const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProp
 	}, [currentMaintenanceAlert, errors.userGroups, userGroupOptions]);
 
 	const renderedFrom = useMemo(() => {
-		if (!currentMaintenanceAlert) {
-			return null;
-		}
 		return (
 			<FormControl
 				id="new-alert-from-date"
@@ -365,7 +350,7 @@ const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProp
 						((newFromDates: Date[] | null) => {
 							const newFromDate = newFromDates?.[0] || null;
 							if (newFromDate) {
-								const oldFromDate: Date | null = currentMaintenanceAlert.fromDate
+								const oldFromDate: Date | null = currentMaintenanceAlert?.fromDate
 									? parseAsIsoWithoutTimezone(currentMaintenanceAlert.fromDate)
 									: null;
 								setCurrentMaintenanceAlert({
@@ -383,7 +368,7 @@ const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProp
 						}) as any
 					}
 					selected={
-						currentMaintenanceAlert.fromDate
+						currentMaintenanceAlert?.fromDate
 							? parseAsIsoWithoutTimezone(currentMaintenanceAlert.fromDate)
 							: new Date()
 					}
@@ -401,7 +386,7 @@ const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProp
 					onChange={
 						((newFromTime: Date | null) => {
 							if (newFromTime) {
-								const oldFromDate: Date = currentMaintenanceAlert.fromDate
+								const oldFromDate: Date = currentMaintenanceAlert?.fromDate
 									? parseAsIsoWithoutTimezone(currentMaintenanceAlert.fromDate)
 									: new Date();
 								setCurrentMaintenanceAlert({
@@ -419,7 +404,7 @@ const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProp
 						}) as any
 					}
 					value={
-						currentMaintenanceAlert.fromDate
+						currentMaintenanceAlert?.fromDate
 							? format(parseAsIsoWithoutTimezone(currentMaintenanceAlert.fromDate), 'HH:mm', {
 									locale: nlBE,
 								})
@@ -431,9 +416,6 @@ const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProp
 	}, [isFormValid, currentMaintenanceAlert, errors.fromDate]);
 
 	const renderedUntil = useMemo(() => {
-		if (!currentMaintenanceAlert) {
-			return null;
-		}
 		return (
 			<FormControl
 				id="new-alert-until-date"
@@ -452,7 +434,7 @@ const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProp
 						((newUntilDates: Date[] | null) => {
 							const newUntilDate = newUntilDates?.[0] || null;
 							if (newUntilDate) {
-								const oldUntilDate: Date | null = currentMaintenanceAlert.untilDate
+								const oldUntilDate: Date | null = currentMaintenanceAlert?.untilDate
 									? parseAsIsoWithoutTimezone(currentMaintenanceAlert.untilDate)
 									: null;
 								setCurrentMaintenanceAlert({
@@ -470,7 +452,7 @@ const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProp
 						}) as any
 					}
 					selected={
-						currentMaintenanceAlert.untilDate
+						currentMaintenanceAlert?.untilDate
 							? parseAsIsoWithoutTimezone(currentMaintenanceAlert.untilDate)
 							: new Date()
 					}
@@ -488,7 +470,7 @@ const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProp
 					onChange={
 						((newUntilTime: Date | null) => {
 							if (newUntilTime) {
-								const oldUntilDate: Date = currentMaintenanceAlert.untilDate
+								const oldUntilDate: Date = currentMaintenanceAlert?.untilDate
 									? parseAsIsoWithoutTimezone(currentMaintenanceAlert.untilDate)
 									: new Date();
 								setCurrentMaintenanceAlert({
@@ -506,7 +488,7 @@ const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProp
 						}) as any
 					}
 					value={
-						currentMaintenanceAlert.untilDate
+						currentMaintenanceAlert?.untilDate
 							? format(parseAsIsoWithoutTimezone(currentMaintenanceAlert.untilDate), 'HH:mm', {
 									locale: nlBE,
 								})
@@ -518,9 +500,6 @@ const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProp
 	}, [isFormValid, currentMaintenanceAlert, errors.untilDate]);
 
 	const renderedLanguage = useMemo(() => {
-		if (!currentMaintenanceAlert) {
-			return null;
-		}
 		if (!isMultiLanguageEnabled()) {
 			return null;
 		}
@@ -545,7 +524,7 @@ const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProp
 						});
 					}}
 					value={
-						languageOptions.find((option) => option.value === currentMaintenanceAlert.language) ||
+						languageOptions.find((option) => option.value === currentMaintenanceAlert?.language) ||
 						languageOptions.find((option) => option.value === Locale.Nl)
 					}
 				/>
@@ -554,7 +533,7 @@ const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProp
 	}, [currentMaintenanceAlert, errors.language, languageOptions]);
 
 	const renderPopupBody = () => {
-		if (!maintenanceAlert) {
+		if (!currentMaintenanceAlert) {
 			return;
 		}
 
