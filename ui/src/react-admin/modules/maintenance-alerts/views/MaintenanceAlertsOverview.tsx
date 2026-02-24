@@ -177,8 +177,8 @@ export const MaintenanceAlertsOverview: FunctionComponent<MaintenanceAlertsOverv
 							className="u-color-neutral"
 							variants="text"
 							onClick={() => {
-								setActiveMaintenanceAlert(maintenanceAlert);
 								setAction('edit');
+								setActiveMaintenanceAlert(maintenanceAlert);
 							}}
 							title={tText(
 								'modules/maintenance-alerts/views/maintenance-alerts-overview___hover-bewerk-notificatie',
@@ -334,14 +334,12 @@ export const MaintenanceAlertsOverview: FunctionComponent<MaintenanceAlertsOverv
 			<AdminLayout.Content>
 				<div className={className}>{renderAlertsTable(maintenanceAlerts)}</div>
 
-				{activeMaintenanceAlert && (
-					<MaintenanceAlertsEditForm
-						renderPopup={renderPopup}
-						maintenanceAlert={activeMaintenanceAlert}
-						action={action}
-						onClose={handleCloseEditPopup}
-					></MaintenanceAlertsEditForm>
-				)}
+				<MaintenanceAlertsEditForm
+					renderPopup={renderPopup}
+					maintenanceAlert={activeMaintenanceAlert}
+					action={action}
+					onClose={handleCloseEditPopup}
+				></MaintenanceAlertsEditForm>
 				<ConfirmModal
 					deleteObjectCallback={onClickDelete}
 					body={tHtml(
