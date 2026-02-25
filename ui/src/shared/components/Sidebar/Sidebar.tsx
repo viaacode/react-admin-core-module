@@ -28,8 +28,8 @@ const Sidebar: FunctionComponent<SidebarProps> = ({
 
 	const isActiveClass = (item: NavigationItemInfo, location: Location): boolean => {
 		return (
-			(!!item.location && item.location === location.pathname && !item.exact) ||
-			(!!item.location && item.location === location.pathname + location.search && !!item.exact)
+			(!!item.location && item.location === location?.pathname && !item.exact) ||
+			(!!item.location && item.location === location?.pathname + location?.search && !!item.exact)
 		);
 	};
 

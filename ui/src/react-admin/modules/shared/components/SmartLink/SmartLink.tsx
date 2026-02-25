@@ -30,6 +30,8 @@ export const SmartLink: FunctionComponent<SmartLinkProps> = ({
 	className,
 	ariaLabel,
 }) => {
+	const location = useLocation();
+
 	const renderLink = (
 		url: string,
 		target: LinkTarget = LinkTarget.Self,
@@ -191,7 +193,7 @@ export const SmartLink: FunctionComponent<SmartLinkProps> = ({
 				}
 
 				case 'ANCHOR_LINK': {
-					const urlWithoutQueryOrAnchor = window.location.href.split('?')[0].split('#')[0];
+					const urlWithoutQueryOrAnchor = location?.href.split('?')[0].split('#')[0];
 					return renderLink(`${urlWithoutQueryOrAnchor}#${value}`, resolvedTarget, true);
 				}
 

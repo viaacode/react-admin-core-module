@@ -41,6 +41,7 @@ import { hasAccessUserGroups } from '~shared/helpers/has-access-user-groups.ts';
 import { isAdminRoute } from '~shared/helpers/routing/is-admin-route';
 import { isContentPagePreview } from '~shared/helpers/routing/is-content-page-preview';
 import { isServerSideRendering } from '~shared/helpers/routing/is-server-side-rendering';
+import { useLocation } from '~shared/hooks/useLocation.ts';
 
 type ContentPageDetailProps = {
 	contentPageInfo: Partial<ContentPageInfo>;
@@ -53,6 +54,7 @@ type ContentPageDetailProps = {
 
 export const ContentPageRenderer: FunctionComponent<ContentPageDetailProps> = (props) => {
 	const commonUser = getCommonUser();
+	const location = useLocation();
 
 	const getContentBlocks = (contentPageInfo: ContentPageInfo) => {
 		// Convert editor states to html
@@ -260,7 +262,7 @@ export const ContentPageRenderer: FunctionComponent<ContentPageDetailProps> = (p
 			return <CenteredSpinner locationId="content-page-renderer--loading" />;
 		}
 		if (isNil(props.contentPageInfo.contentType)) {
-			return <div>Page with path {location.pathname} was not found</div>;
+			return <div>Page with path {location?.pathname} was not found</div>;
 		}
 		if (!isServerSideRendering()) {
 			// Only execute this if not serverside rendering

@@ -14,6 +14,7 @@ import { AdminConfigManager } from '~core/config/config.class';
 import type { IconConfig } from '~core/config/config.types';
 import { Icon } from '~shared/components/Icon/Icon';
 import { generateSmartLink } from '~shared/components/SmartLink/SmartLink';
+import { useLocation } from '~shared/hooks/useLocation.ts';
 import { PermissionService } from '~shared/services/permission-service';
 import type { AlignOption, HeadingTypeOption } from '../../../types/content-block.types';
 import { BlockVideoWrapper } from '../BlockVideo/BlockVideo.wrapper';
@@ -67,6 +68,7 @@ export const BlockVideoTitleTextButtonWrapper: FC<MediaPlayerTitleTextButtonWrap
 		showCopyright,
 	} = props;
 
+	const location = useLocation();
 	const shouldTitleLink =
 		PermissionService.hasPerm(commonUser, PermissionName.VIEW_ANY_PUBLISHED_ITEMS) && !!mediaItem;
 
@@ -75,7 +77,7 @@ export const BlockVideoTitleTextButtonWrapper: FC<MediaPlayerTitleTextButtonWrap
 	const showCopyrightNotice =
 		showCopyright &&
 		(!commonUser ||
-			location.pathname.startsWith(
+			location?.pathname.startsWith(
 				AdminConfigManager.getConfig().routes.ADMIN_CONTENT_PAGE_OVERVIEW
 			));
 

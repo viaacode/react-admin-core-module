@@ -88,6 +88,7 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 	url,
 }) => {
 	// Hooks
+	const location = useLocation();
 	const commonUser = getCommonUser();
 	const [contentPageState, changeContentPageState] = useReducer<
 		Reducer<ContentPageEditState, ContentEditAction>
@@ -110,12 +111,15 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 			return GET_CONTENT_PAGE_DETAIL_TABS()[0].id as string;
 		}
 		return (
-			new URLSearchParams(location.search).get(CONTENT_PAGE_EDIT_TAB_QUERY_PARAM) ||
+			new URLSearchParams(location?.search).get(CONTENT_PAGE_EDIT_TAB_QUERY_PARAM) ||
 			(GET_CONTENT_PAGE_DETAIL_TABS()[0].id as string)
 		);
-	}, []);
+	}, [location]);
 	const setCurrentTab = async (tabId: string) => {
-		const url = new URL(window.location.href);
+		if (!location?.href) {
+			return;
+		}
+		const url = new URL(location.href);
 		url.searchParams.set(CONTENT_PAGE_EDIT_TAB_QUERY_PARAM, tabId);
 		await navigateFunc(`${url.pathname}?${url.searchParams.toString()}`, { replace: true });
 	};

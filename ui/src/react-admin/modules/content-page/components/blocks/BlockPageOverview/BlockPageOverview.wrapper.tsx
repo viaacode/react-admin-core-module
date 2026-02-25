@@ -1,6 +1,6 @@
 import type { IconName } from '@viaa/avo2-components';
 import { AvoContentPageType, type AvoSearchOrderDirection } from '@viaa/avo2-types';
-import { compact, isNil, isString, sortBy } from 'es-toolkit';
+import { compact, isNil, isString, noop, sortBy } from 'es-toolkit';
 import { type FunctionComponent, useCallback, useEffect } from 'react';
 import type { LabelObj } from '~content-blocks/BlockPageOverview/BlockPageOverview.types';
 import { ContentItemStyle } from '~content-blocks/BlockPageOverview/BlockPageOverview.types';
@@ -23,6 +23,7 @@ import {
 } from '~shared/helpers/routing/query-string-converters';
 import { tHtml, tText } from '~shared/helpers/translation-functions';
 import { useDebounce } from '~shared/hooks/useDebounce';
+import { useLocation } from '~shared/hooks/useLocation.ts';
 
 export const BlockPageOverviewWrapper: FunctionComponent<PageOverviewWrapperProps> = ({
 	contentTypeAndTabs = {
@@ -48,14 +49,15 @@ export const BlockPageOverviewWrapper: FunctionComponent<PageOverviewWrapperProp
 	headerBackgroundColor,
 	renderLink,
 }) => {
+	const location = useLocation();
 	const getQueryParams = useCallback(() => {
-		const queryParams = new URLSearchParams(location.search);
+		const queryParams = new URLSearchParams(location?.search || '');
 		return {
 			page: NumberParam.decode(queryParams.get('page') || undefined),
 			item: StringParam.decode(queryParams.get('item') || undefined),
 			label: CheckboxListParam.decode(queryParams.get('label') || undefined),
 		};
-	}, []);
+	}, [location]);
 	const setQueryParam = (url: URL, name: string, value: string) => {
 		if (value) {
 			url.searchParams.set(name, value);
@@ -64,7 +66,10 @@ export const BlockPageOverviewWrapper: FunctionComponent<PageOverviewWrapperProp
 		}
 	};
 	const setQueryParams = async (newParams: { page?: number; item?: string; label?: string[] }) => {
-		const url = new URL(window.location.href);
+		if (!location?.href) {
+			return;
+		}
+		const url = new URL(location.href);
 		if (Object.keys(newParams).includes('page')) {
 			setQueryParam(url, 'page', NumberParam.encode(newParams.page) as string);
 		}
@@ -177,14 +182,14 @@ export const BlockPageOverviewWrapper: FunctionComponent<PageOverviewWrapperProp
 		// https://meemoo.atlassian.net/browse/AVO-3438
 		setQueryParams({
 			label: getQueryParams().label || undefined,
-		});
+		}).then(noop);
 	}, []);
 
 	const handleCurrentPageChanged = (pageIndex: number) => {
 		setQueryParams({
 			page: pageIndex,
 			item: undefined,
-		});
+		}).then(noop);
 	};
 
 	const handleSelectedTabsChanged = (tabs: LabelObj[]) => {
@@ -192,7 +197,7 @@ export const BlockPageOverviewWrapper: FunctionComponent<PageOverviewWrapperProp
 			label: tabs.map((tab) => tab.label),
 			page: undefined,
 			item: undefined,
-		});
+		}).then(noop);
 	};
 
 	const handleFocusedPageChanged = (newFocusedPage: ContentPageInfo | null) => {
@@ -200,7 +205,7 @@ export const BlockPageOverviewWrapper: FunctionComponent<PageOverviewWrapperProp
 		setQueryParams({
 			page: undefined,
 			item: newFocusedPage?.path || undefined,
-		});
+		}).then(noop);
 	};
 
 	const getLabelsWithContent = () => {

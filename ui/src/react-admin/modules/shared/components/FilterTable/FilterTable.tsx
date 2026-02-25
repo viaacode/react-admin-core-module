@@ -197,7 +197,10 @@ export const FilterTable: FunctionComponent<FilterTableProps> = ({
 	const setTableState = useCallback(
 		// biome-ignore lint/suspicious/noExplicitAny: many possible options to list here
 		async (newTableState: Record<string, any>) => {
-			const url = new URL(window.location.href);
+			if (!location?.href) {
+				return;
+			}
+			const url = new URL(location.href);
 			for (const queryParamKey in queryParamsConfig) {
 				const queryParamValue = newTableState[queryParamKey];
 				const queryParamValueEncoded = queryParamsConfig[queryParamKey].encode(queryParamValue);
@@ -207,14 +210,14 @@ export const FilterTable: FunctionComponent<FilterTableProps> = ({
 					url.searchParams.set(queryParamKey, queryParamValueEncoded || '');
 				}
 			}
-			if (window.location.href === url.href) {
+			if (location.href === url.href) {
 				// If the url wouldn't change, don't update it to prevent an infinite loop
 				return;
 			}
 			await navigateFunc(`${url.pathname}?${url.searchParams.toString()}`, { replace: true });
 			onTableStateChanged(newTableState);
 		},
-		[queryParamsConfig, onTableStateChanged]
+		[queryParamsConfig, onTableStateChanged, location]
 	);
 
 	const handleTableStateChanged = useCallback(

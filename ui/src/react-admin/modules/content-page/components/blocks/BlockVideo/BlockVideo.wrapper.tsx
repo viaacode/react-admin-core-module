@@ -18,6 +18,7 @@ import type { LoadingInfo } from '~shared/components/LoadingErrorLoadedComponent
 import { LoadingErrorLoadedComponent } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
 import { CustomError } from '~shared/helpers/custom-error';
 import { tHtml, tText } from '~shared/helpers/translation-functions';
+import { useLocation } from '~shared/hooks/useLocation.ts';
 
 interface MediaPlayerWrapperProps {
 	item?: ButtonAction;
@@ -64,6 +65,7 @@ export const BlockVideoWrapper: FunctionComponent<MediaPlayerWrapperProps> = (pr
 		onEnded,
 	} = props;
 
+	const location = useLocation();
 	const [loadingInfo, setLoadingInfo] = useState<LoadingInfo>({
 		state: 'loading',
 	});
@@ -78,7 +80,7 @@ export const BlockVideoWrapper: FunctionComponent<MediaPlayerWrapperProps> = (pr
 	const showCopyrightNotice =
 		showCopyright &&
 		(!commonUser ||
-			location.pathname.startsWith(
+			location?.pathname.startsWith(
 				AdminConfigManager.getConfig().routes.ADMIN_CONTENT_PAGE_OVERVIEW
 			));
 
