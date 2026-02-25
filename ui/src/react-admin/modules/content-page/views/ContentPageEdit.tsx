@@ -68,6 +68,7 @@ import './ContentPageEdit.scss';
 import { getCommonUser } from '~core/config/config.selectors.ts';
 import { navigateFunc } from '~shared/helpers/navigate-fnc';
 import { isServerSideRendering } from '~shared/helpers/routing/is-server-side-rendering.ts';
+import { useLocation } from '~shared/hooks/useLocation.ts';
 
 const { EDIT_ANY_CONTENT_PAGES, EDIT_OWN_CONTENT_PAGES } = PermissionName;
 

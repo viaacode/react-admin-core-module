@@ -9,6 +9,7 @@ import { AdminConfigManager } from '~core/config';
 import { getAdminCoreApiUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config';
 import { isServerSideRendering } from '~shared/helpers/routing/is-server-side-rendering';
 import { buildLink } from '~shared/helpers/routing/link';
+import { useLocation } from '~shared/hooks/useLocation.ts';
 import { isInsideIframe } from '../../helpers/routing/is-inside-iframe';
 import { Link } from '../Link/Link';
 import { LinkTarget } from './SmartLink.types';

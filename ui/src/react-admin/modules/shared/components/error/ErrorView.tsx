@@ -46,9 +46,10 @@ export const ErrorView: FC<ErrorViewProps> = ({
 	locationId,
 }) => {
 	const location = useLocation();
-	const queryParams = isServerSideRendering()
-		? {}
-		: queryString.parse(location?.search.substring(1));
+	const queryParams =
+		isServerSideRendering() || !location?.search
+			? {}
+			: queryString.parse(location?.search.substring(1));
 
 	if (queryParams.logout === 'true') {
 		// redirect to log-out route and afterward redirect back to the error page
