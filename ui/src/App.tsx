@@ -27,7 +27,7 @@ function App() {
 	}, [navigateFunc]);
 
 	const renderNavigationBar = () => {
-		if (location?.pathname.startsWith('/admin')) {
+		if (!location || location.pathname.startsWith('/admin')) {
 			return null;
 		}
 		return (
