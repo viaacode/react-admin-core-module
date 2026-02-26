@@ -777,6 +777,15 @@
     "app": "AVO",
     "component": "ADMIN_CORE",
     "location": "admin/content-block/content-block",
+    "key": "grijs",
+    "language": "nl",
+    "value": "Grijs",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "admin/content-block/content-block",
     "key": "zachtblauw",
     "language": "nl",
     "value": "Zachtblauw",
@@ -861,15 +870,6 @@
     "key": "donker-grijs",
     "language": "nl",
     "value": "Donkergrijs",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "admin/content-block/content-block",
-    "key": "grijs",
-    "language": "nl",
-    "value": "Grijs",
     "value_type": "TEXT"
   },
   {
@@ -2981,6 +2981,15 @@
   {
     "app": "AVO",
     "component": "ADMIN_CORE",
+    "location": "modules/content-page-labels/views/content-page-label-overview",
+    "key": "ga-naar-label-link-link-to",
+    "language": "nl",
+    "value": "Ga naar label link link to",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
     "location": "admin/content-page-labels/views/content-page-label-overview",
     "key": "bekijk-de-details-van-deze-content-pagina-label",
     "language": "nl",
@@ -3075,6 +3084,33 @@
     "key": "content-pagina-label-toevoegen",
     "language": "nl",
     "value": "Contentpaginalabel toevoegen",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "modules/maintenance-alerts/views/maintenance-alerts-edit-form",
+    "key": "titel-melding-input-aria-label",
+    "language": "nl",
+    "value": "Titel melding input aria label",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "modules/maintenance-alerts/views/maintenance-alerts-edit-form",
+    "key": "zichtbaar-vanaf-tijd-input-aria-label",
+    "language": "nl",
+    "value": "Zichtbaar vanaf tijd input aria label",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "modules/maintenance-alerts/views/maintenance-alerts-edit-form",
+    "key": "zichtbaar-tot-tijd-input-aria-label",
+    "language": "nl",
+    "value": "Zichtbaar tot tijd input aria label",
     "value_type": "TEXT"
   },
   {
@@ -3746,6 +3782,15 @@
   {
     "app": "AVO",
     "component": "ADMIN_CORE",
+    "location": "modules/translations/views/translations-overview",
+    "key": "zoek-vertaling-input-aria-label",
+    "language": "nl",
+    "value": "Zoek vertaling input aria label",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
     "location": "modules/translations/views/translations-overview-v-2",
     "key": "vertaling-aanpassen",
     "language": "nl",
@@ -4263,6 +4308,15 @@
     "key": "geen-uuid",
     "language": "nl",
     "value": "Geen uuid",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "modules/user/helpers/render-user-overview-table-cells",
+    "key": "acties-voor-gebruiker-user-name",
+    "language": "nl",
+    "value": "Acties voor gebruiker user name",
     "value_type": "TEXT"
   },
   {
@@ -5546,6 +5600,15 @@
   {
     "app": "AVO",
     "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/date-picker/date-picker",
+    "key": "datum-input-aria-label",
+    "language": "nl",
+    "value": "Datum input aria label",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
     "location": "admin/menu/views/menu-edit",
     "key": "het-navigatie-item-zal-zichtbaar-zijn-voor-gebruikers-die-geen-toegang-hebben-tot-de-geselecteerde-pagina",
     "language": "nl",
@@ -6504,6 +6567,15 @@
     "key": "zoeken",
     "language": "nl",
     "value": "Zoeken",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "modules/shared/components/filter-table/filter-table",
+    "key": "from-to-van-total-resultaten",
+    "language": "nl",
+    "value": "From to van total resultaten",
     "value_type": "TEXT"
   },
   {
@@ -7499,6 +7571,15 @@
   {
     "app": "AVO",
     "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-het-archief-header-search/block-het-archief-header-search",
+    "key": "zoek-in-de-publieke-catalogus-input-aria-label",
+    "language": "nl",
+    "value": "Zoek in de publieke catalogus input aria label",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
     "location": "modules/content-page/components/blocks/block-het-archief-image-text-background/block-het-archief-image-text-background",
     "key": "titel-grootte",
     "language": "nl",
@@ -8066,6 +8147,15 @@
   {
     "app": "AVO",
     "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-maintainers-grid/block-maintainers-grid",
+    "key": "ga-naar-aanbieder-maintainer-name",
+    "language": "nl",
+    "value": "Ga naar aanbieder maintainer name",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
     "location": "admin/content-block/helpers/generators/media-grid",
     "key": "media-tegels",
     "language": "nl",
@@ -8421,6 +8511,15 @@
     "key": "cta-achtergrond-afbeelding",
     "language": "nl",
     "value": "CTA achtergrond: afbeelding",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-overview-newspaper-titles/block-overview-newspaper-titles",
+    "key": "zoek-kranten-op-titel-input-aria-label",
+    "language": "nl",
+    "value": "Zoek kranten op titel input aria label",
     "value_type": "TEXT"
   },
   {
@@ -15044,7 +15143,7 @@
     "location": "authentication/components/login-options",
     "key": "nog-geen-account",
     "language": "nl",
-    "value": "Nog geen account?",
+    "value": "Nog geen gratis account?",
     "value_type": "TEXT"
   },
   {
@@ -15386,7 +15485,7 @@
     "location": "authentication/views/register-or-login",
     "key": "maak-een-gratis-account-aan-en-verrijk-je-lessen-met-beeld-en-geluid-op-maat-van-de-klas",
     "language": "nl",
-    "value": "Dé online beeldbank boordevol filmpjes, video’s en audiofragmenten op maat van de klas.",
+    "value": "Dé Vlaamse onderwijsbeeldbank boordevol filmpjes, luisterfragmenten en ondersteunend didactisch lesmateriaal.",
     "value_type": "HTML"
   },
   {
@@ -18086,7 +18185,7 @@
     "location": "embed/components/register-or-login",
     "key": "nog-geen-account",
     "language": "nl",
-    "value": "Nog geen account?",
+    "value": "Nog geen gratis account?",
     "value_type": "HTML"
   },
   {
@@ -30103,6 +30202,15 @@
     "language": "nl",
     "value": "De bron van deze videostill is <a href=\"{{organisationWebsite}}\" target=\"_blank\">{{organisationName}}</a>.",
     "value_type": "HTML"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "user-item-request-form/views/educational-author-item-request-form",
+    "key": "organisatie",
+    "language": "nl",
+    "value": "Organisatie",
+    "value_type": "TEXT"
   },
   {
     "app": "AVO",
