@@ -4,6 +4,7 @@ import { Outlet, useNavigate } from 'react-router';
 import type { NavigateFunction } from '~core/config';
 import { Link } from '~shared/components/Link';
 import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner';
+import { useLocation } from '~shared/hooks/useLocation.ts';
 import { getAdminCoreConfig, setAdminCoreConfig } from './shared/helpers/admin-core-config';
 
 import '@viaa/avo2-components/styles.css';
@@ -15,6 +16,7 @@ import './App.scss';
 function App() {
 	const [isAdminCoreConfigLoaded, setIsAdminCoreConfigLoaded] = useState(false);
 	const navigateFunc = useNavigate();
+	const location = useLocation();
 
 	/**
 	 * Set admin core config
@@ -25,7 +27,7 @@ function App() {
 	}, [navigateFunc]);
 
 	const renderNavigationBar = () => {
-		if (location.pathname.startsWith('/admin')) {
+		if (!location || location.pathname.startsWith('/admin')) {
 			return null;
 		}
 		return (

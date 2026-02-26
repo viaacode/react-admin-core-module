@@ -9,6 +9,7 @@ import { AdminConfigManager } from '~core/config';
 import { getAdminCoreApiUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config';
 import { isServerSideRendering } from '~shared/helpers/routing/is-server-side-rendering';
 import { buildLink } from '~shared/helpers/routing/link';
+import { useLocation } from '~shared/hooks/useLocation.ts';
 import { isInsideIframe } from '../../helpers/routing/is-inside-iframe';
 import { Link } from '../Link/Link';
 import { LinkTarget } from './SmartLink.types';
@@ -30,6 +31,8 @@ export const SmartLink: FunctionComponent<SmartLinkProps> = ({
 	className,
 	ariaLabel,
 }) => {
+	const location = useLocation();
+
 	const renderLink = (
 		url: string,
 		target: LinkTarget = LinkTarget.Self,
@@ -191,7 +194,7 @@ export const SmartLink: FunctionComponent<SmartLinkProps> = ({
 				}
 
 				case 'ANCHOR_LINK': {
-					const urlWithoutQueryOrAnchor = window.location.href.split('?')[0].split('#')[0];
+					const urlWithoutQueryOrAnchor = location?.href.split('?')[0].split('#')[0];
 					return renderLink(`${urlWithoutQueryOrAnchor}#${value}`, resolvedTarget, true);
 				}
 

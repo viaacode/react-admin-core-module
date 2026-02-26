@@ -45,6 +45,7 @@ import { isServerSideRendering } from '~shared/helpers/routing/is-server-side-re
 import { buildLink, navigate, navigateToAbsoluteOrRelativeUrl } from '~shared/helpers/routing/link';
 import { showToast } from '~shared/helpers/show-toast';
 import { tHtml, tText } from '~shared/helpers/translation-functions';
+import { useLocation } from '~shared/hooks/useLocation.ts';
 import { AdminLayout } from '~shared/layouts/AdminLayout/AdminLayout';
 import { PermissionService } from '~shared/services/permission-service';
 import type { DefaultComponentProps } from '~shared/types/components';
@@ -74,6 +75,7 @@ export const ContentPageDetail: FC<ContentPageDetailProps> = ({
 	commonUser,
 }) => {
 	// Hooks
+	const location = useLocation();
 	const [contentPageInfo, setContentPageInfo] = useState<ContentPageInfo | null>(null);
 	const [loadingInfo, setLoadingInfo] = useState<LoadingInfo>({ state: 'loading' });
 	const [isConfirmModalOpen, setIsConfirmModalOpen] = useState<boolean>(false);
@@ -89,15 +91,21 @@ export const ContentPageDetail: FC<ContentPageDetailProps> = ({
 			return GET_CONTENT_PAGE_DETAIL_TABS()[0].id as string;
 		}
 		return (
-			new URLSearchParams(location.search).get(CONTENT_PAGE_DETAIL_TAB_QUERY_PARAM) ||
+			new URLSearchParams(location?.search).get(CONTENT_PAGE_DETAIL_TAB_QUERY_PARAM) ||
 			(GET_CONTENT_PAGE_DETAIL_TABS()[0].id as string)
 		);
-	}, []);
-	const setCurrentTab = useCallback(async (tabId: string) => {
-		const url = new URL(window.location.href);
-		url.searchParams.set(CONTENT_PAGE_DETAIL_TAB_QUERY_PARAM, tabId);
-		await navigateFunc(`${url.pathname}?${url.searchParams.toString()}`, { replace: true });
-	}, []);
+	}, [location]);
+	const setCurrentTab = useCallback(
+		async (tabId: string) => {
+			if (!location?.href) {
+				return;
+			}
+			const url = new URL(location.href);
+			url.searchParams.set(CONTENT_PAGE_DETAIL_TAB_QUERY_PARAM, tabId);
+			await navigateFunc(`${url.pathname}?${url.searchParams.toString()}`, { replace: true });
+		},
+		[location]
+	);
 	const getTabs = () =>
 		GET_CONTENT_PAGE_DETAIL_TABS().map((tab: TabProps) => ({
 			...tab,

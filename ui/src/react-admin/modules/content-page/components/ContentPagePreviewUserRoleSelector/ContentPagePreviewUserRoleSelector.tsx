@@ -26,6 +26,7 @@ import './ContentPagePreviewUserRoleSelector.scss';
 import { stringifyUrl } from 'query-string';
 import { CONTENT_PAGE_USER_GROUP_ID_QUERY_PARAM } from '~modules/content-page/components/ContentPageRenderer/ContentPageRenderer.consts.tsx';
 import { isServerSideRendering } from '~shared/helpers/routing/is-server-side-rendering.ts';
+import { useLocation } from '~shared/hooks/useLocation.ts';
 
 type ContentPagePreviewUserRoleSelectorProps = {
 	onToggleMenu?: (isOpen: boolean) => void;
@@ -35,14 +36,15 @@ type ContentPagePreviewUserRoleSelectorProps = {
 export const ContentPagePreviewUserRoleSelector: FC<
 	ContentPagePreviewUserRoleSelectorProps & DefaultProps
 > = (props) => {
+	const location = useLocation();
 	const commonUser = getCommonUser();
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
 	const getUserGroupId = useCallback(() => {
 		if (isServerSideRendering()) {
 			return;
 		}
-		return new URLSearchParams(location.search).get(CONTENT_PAGE_USER_GROUP_ID_QUERY_PARAM);
-	}, []);
+		return new URLSearchParams(location?.search).get(CONTENT_PAGE_USER_GROUP_ID_QUERY_PARAM);
+	}, [location]);
 	const setUserGroupId = useCallback(
 		async (id: string) => {
 			const url = new URL(props.url);
@@ -62,7 +64,7 @@ export const ContentPagePreviewUserRoleSelector: FC<
 				setUserGroupId(SpecialUserGroups.allContent);
 				return;
 			}
-			if (location.href.includes(`/${ROUTE_PARTS.admin}/`)) {
+			if (location?.href.includes(`/${ROUTE_PARTS.admin}/`)) {
 				// If we're on the edit page of a content page, we show all content by default
 				setUserGroupId(SpecialUserGroups.allContent);
 				return;

@@ -19,6 +19,7 @@ import { CustomError } from '~shared/helpers/custom-error.ts';
 import { isMobileWidth } from '~shared/helpers/media-query.ts';
 import { isServerSideRendering } from '~shared/helpers/routing/is-server-side-rendering.ts';
 import { tText } from '~shared/helpers/translation-functions.ts';
+import { useLocation } from '~shared/hooks/useLocation.ts';
 
 type ErrorActionButton = AvoAuthErrorActionButton | 'help';
 
@@ -44,9 +45,11 @@ export const ErrorView: FC<ErrorViewProps> = ({
 	actionButtons = [],
 	locationId,
 }) => {
-	const queryParams = isServerSideRendering()
-		? {}
-		: queryString.parse(window.location.search.substring(1));
+	const location = useLocation();
+	const queryParams =
+		isServerSideRendering() || !location?.search
+			? {}
+			: queryString.parse(location?.search.substring(1));
 
 	if (queryParams.logout === 'true') {
 		// redirect to log-out route and afterward redirect back to the error page
