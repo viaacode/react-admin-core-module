@@ -4217,7 +4217,7 @@
     "location": "modules/user/helpers/render-user-overview-table-cells",
     "key": "geblokkeerd-ja",
     "language": "nl",
-    "value": "geblokkeerd - Ja",
+    "value": "Ja",
     "value_type": "TEXT"
   },
   {
@@ -4226,43 +4226,7 @@
     "location": "modules/user/helpers/render-user-overview-table-cells",
     "key": "geblokkeerd-nee",
     "language": "nl",
-    "value": "geblokkeerd - Nee",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "modules/user/helpers/render-user-overview-table-cells",
-    "key": "sleutelgebruiker-ja",
-    "language": "nl",
-    "value": "sleutelgebruiker - Ja",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "modules/user/helpers/render-user-overview-table-cells",
-    "key": "sleutelgebruiker-nee",
-    "language": "nl",
-    "value": "sleutelgebruiker - Nee",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "modules/user/helpers/render-user-overview-table-cells",
-    "key": "beoordelaar-ja",
-    "language": "nl",
-    "value": "beoordelaar - Ja",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "modules/user/helpers/render-user-overview-table-cells",
-    "key": "beoordelaar-nee",
-    "language": "nl",
-    "value": "beoordelaar - Nee",
+    "value": "Nee",
     "value_type": "TEXT"
   },
   {
@@ -4271,7 +4235,7 @@
     "location": "modules/user/helpers/render-user-overview-table-cells",
     "key": "uitzondering-ja",
     "language": "nl",
-    "value": "uitzondering - Ja",
+    "value": "Ja",
     "value_type": "TEXT"
   },
   {
@@ -4280,7 +4244,7 @@
     "location": "modules/user/helpers/render-user-overview-table-cells",
     "key": "uitzondering-nee",
     "language": "nl",
-    "value": "uitzondering - Nee",
+    "value": "Nee",
     "value_type": "TEXT"
   },
   {
@@ -6575,7 +6539,7 @@
     "location": "modules/shared/components/filter-table/filter-table",
     "key": "from-to-van-total-resultaten",
     "language": "nl",
-    "value": "From to van total resultaten",
+    "value": "{{from}} - {{to}} van {{total}} resultaten",
     "value_type": "TEXT"
   },
   {
@@ -20604,6 +20568,15 @@
     "app": "AVO",
     "component": "FRONTEND",
     "location": "user-item-request-form/views/educational-author-item-request-form",
+    "key": "organisatie",
+    "language": "nl",
+    "value": "Organisatie",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "user-item-request-form/views/educational-author-item-request-form",
     "key": "naam-methode",
     "language": "nl",
     "value": "Naam methode",
@@ -30202,15 +30175,6 @@
     "language": "nl",
     "value": "De bron van deze videostill is <a href=\"{{organisationWebsite}}\" target=\"_blank\">{{organisationName}}</a>.",
     "value_type": "HTML"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "user-item-request-form/views/educational-author-item-request-form",
-    "key": "organisatie",
-    "language": "nl",
-    "value": "Organisatie",
-    "value_type": "TEXT"
   },
   {
     "app": "AVO",

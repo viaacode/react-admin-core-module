@@ -22,6 +22,7 @@ import { showToast } from '~shared/helpers/show-toast';
 import { stringsToTagList } from '~shared/helpers/strings-to-taglist';
 import { tHtml, tText } from '~shared/helpers/translation-functions';
 import { truncateTableValue } from '~shared/helpers/truncate';
+import { AVO, HET_ARCHIEF } from '~shared/types';
 
 const handleOptionClicked = (profileId: string) => {
 	navigator.clipboard.writeText(profileId);
@@ -72,13 +73,23 @@ export function renderUserOverviewTableCellReact(
 
 		case 'isKeyUser':
 			return isKeyUser
-				? tText('modules/user/helpers/render-user-overview-table-cells___sleutelgebruiker-ja')
-				: tText('modules/user/helpers/render-user-overview-table-cells___sleutelgebruiker-nee');
+				? tText('modules/user/helpers/render-user-overview-table-cells___sleutelgebruiker-ja', {}, [
+						HET_ARCHIEF,
+					])
+				: tText(
+						'modules/user/helpers/render-user-overview-table-cells___sleutelgebruiker-nee',
+						{},
+						[HET_ARCHIEF]
+					);
 
 		case 'isEvaluator':
 			return isEvaluator
-				? tText('modules/user/helpers/render-user-overview-table-cells___beoordelaar-ja')
-				: tText('modules/user/helpers/render-user-overview-table-cells___beoordelaar-nee');
+				? tText('modules/user/helpers/render-user-overview-table-cells___beoordelaar-ja', {}, [
+						HET_ARCHIEF,
+					])
+				: tText('modules/user/helpers/render-user-overview-table-cells___beoordelaar-nee', {}, [
+						HET_ARCHIEF,
+					]);
 
 		case 'blockedAt':
 			return formatDateString(tableRowCommonUser?.blockedAt) || '-';
@@ -88,8 +99,12 @@ export function renderUserOverviewTableCellReact(
 
 		case 'isException':
 			return tableRowCommonUser?.isException
-				? tText('modules/user/helpers/render-user-overview-table-cells___uitzondering-ja')
-				: tText('modules/user/helpers/render-user-overview-table-cells___uitzondering-nee');
+				? tText('modules/user/helpers/render-user-overview-table-cells___uitzondering-ja', {}, [
+						AVO,
+					])
+				: tText('modules/user/helpers/render-user-overview-table-cells___uitzondering-nee', {}, [
+						AVO,
+					]);
 
 		case 'organisation':
 			return tableRowCommonUser?.organisation?.name || '-';
@@ -217,18 +232,30 @@ export function renderUserOverviewTableCellText(
 
 		case 'isBlocked':
 			return isBlocked
-				? tText('modules/user/helpers/render-user-overview-table-cells___geblokkeerd-ja')
-				: tText('modules/user/helpers/render-user-overview-table-cells___geblokkeerd-nee');
+				? tText('modules/user/helpers/render-user-overview-table-cells___geblokkeerd-ja', {}, [AVO])
+				: tText('modules/user/helpers/render-user-overview-table-cells___geblokkeerd-nee', {}, [
+						AVO,
+					]);
 
 		case 'isKeyUser':
 			return isKeyUser
-				? tText('modules/user/helpers/render-user-overview-table-cells___sleutelgebruiker-ja')
-				: tText('modules/user/helpers/render-user-overview-table-cells___sleutelgebruiker-nee');
+				? tText('modules/user/helpers/render-user-overview-table-cells___sleutelgebruiker-ja', {}, [
+						HET_ARCHIEF,
+					])
+				: tText(
+						'modules/user/helpers/render-user-overview-table-cells___sleutelgebruiker-nee',
+						{},
+						[HET_ARCHIEF]
+					);
 
 		case 'isEvaluator':
 			return isEvaluator
-				? tText('modules/user/helpers/render-user-overview-table-cells___beoordelaar-ja')
-				: tText('modules/user/helpers/render-user-overview-table-cells___beoordelaar-nee');
+				? tText('modules/user/helpers/render-user-overview-table-cells___beoordelaar-ja', {}, [
+						HET_ARCHIEF,
+					])
+				: tText('modules/user/helpers/render-user-overview-table-cells___beoordelaar-nee', {}, [
+						HET_ARCHIEF,
+					]);
 
 		case 'blockedAt':
 			return formatDateString(tableRowCommonUser?.blockedAt) || '';
@@ -238,8 +265,12 @@ export function renderUserOverviewTableCellText(
 
 		case 'isException':
 			return tableRowCommonUser?.isException
-				? tText('modules/user/helpers/render-user-overview-table-cells___uitzondering-ja')
-				: tText('modules/user/helpers/render-user-overview-table-cells___uitzondering-nee');
+				? tText('modules/user/helpers/render-user-overview-table-cells___uitzondering-ja', {}, [
+						AVO,
+					])
+				: tText('modules/user/helpers/render-user-overview-table-cells___uitzondering-nee', {}, [
+						AVO,
+					]);
 
 		case 'organisation':
 			return tableRowCommonUser?.organisation?.name || '';
@@ -257,9 +288,9 @@ export function renderUserOverviewTableCellText(
 		}
 		case 'tempAccess': {
 			if (hasTempAccess(tableRowCommonUser?.tempAccess)) {
-				return tHtml('admin/users/views/user-overview___tijdelijke-toegang-ja');
+				return tHtml('admin/users/views/user-overview___tijdelijke-toegang-ja', {}, [AVO]);
 			} else {
-				return tHtml('admin/users/views/user-overview___tijdelijke-toegang-nee');
+				return tHtml('admin/users/views/user-overview___tijdelijke-toegang-nee', {}, [AVO]);
 			}
 		}
 		case 'tempAccessFrom':
