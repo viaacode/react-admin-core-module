@@ -16,14 +16,14 @@ import { uniqBy } from 'es-toolkit';
 import type { FunctionComponent, ReactText } from 'react';
 import React, { useEffect, useState } from 'react';
 import { ToastType } from '~core/config/config.types';
-import { UserService } from '~modules/user/user.service';
 import { showToast } from '~shared/helpers/show-toast';
 import { tText } from '~shared/helpers/translation-functions';
+import { useGetNamesByProfileIds } from './hooks/useGetNamesByProfileIds';
 import type { PickerItem } from '../../types/content-picker';
 import { ContentPicker } from '../ContentPicker/ContentPicker';
 
 import './MultiUserSelectDropdown.scss';
-import { AvoCoreContentPickerType, type AvoUserCommonUser } from '@viaa/avo2-types';
+import { AvoCoreContentPickerType } from '@viaa/avo2-types';
 
 export interface Tag {
 	label: string;
@@ -53,6 +53,8 @@ export const MultiUserSelectDropdown: FunctionComponent<MultiUserSelectDropdownP
 	const [selectedProfiles, setSelectedProfiles] = useState<PickerItem[]>([]);
 	const [selectedProfile, setSelectedProfile] = useState<PickerItem | undefined>(undefined);
 
+	const { data: users, error } = useGetNamesByProfileIds(values);
+
 	useEffect(() => {
 		if (selectedProfile) {
 			setSelectedProfile(undefined);
@@ -60,41 +62,41 @@ export const MultiUserSelectDropdown: FunctionComponent<MultiUserSelectDropdownP
 	}, [selectedProfile]);
 
 	useEffect(() => {
-		if (values?.length) {
-			UserService.getNamesByProfileIds(values)
-				.then((users: Partial<AvoUserCommonUser>[]) => {
-					setSelectedProfiles(
-						users.map(
-							(user): PickerItem => ({
-								label: `${user?.fullName} (${user?.email})`,
-								value: user?.profileId as string,
-								type: AvoCoreContentPickerType.PROFILE,
-							})
-						)
-					);
-				})
-				.catch((err: Error) => {
-					console.error(
-						new Error(
-							JSON.stringify({
-								message: 'Failed to fetch profile name info for profile ids',
-								innerException: err,
-								additionalInfo: values,
-							})
-						)
-					);
-					showToast({
-						title: tText(
-							'modules/admin/shared/components/multi-user-select-dropdown/multi-user-select-dropdown___error'
-						),
-						description: tText(
-							'shared/components/multi-user-select-dropdown/multi-user-select-dropdown___het-ophalen-van-de-gebruikersaccount-namen-is-mislukt'
-						),
-						type: ToastType.ERROR,
-					});
-				});
+		if (users?.length) {
+			setSelectedProfiles(
+				users.map(
+					(user): PickerItem => ({
+						label: `${user?.fullName} (${user?.email})`,
+						value: user?.profileId as string,
+						type: AvoCoreContentPickerType.PROFILE,
+					})
+				)
+			);
 		}
-	}, [values]);
+	}, [users]);
+
+	useEffect(() => {
+		if (error) {
+			console.error(
+				new Error(
+					JSON.stringify({
+						message: 'Failed to fetch profile name info for profile ids',
+						innerException: error,
+						additionalInfo: values,
+					})
+				)
+			);
+			showToast({
+				title: tText(
+					'modules/admin/shared/components/multi-user-select-dropdown/multi-user-select-dropdown___error'
+				),
+				description: tText(
+					'shared/components/multi-user-select-dropdown/multi-user-select-dropdown___het-ophalen-van-de-gebruikersaccount-namen-is-mislukt'
+				),
+				type: ToastType.ERROR,
+			});
+		}
+	}, [error, values]);
 
 	const closeDropdown = () => {
 		setSelectedProfiles([]);

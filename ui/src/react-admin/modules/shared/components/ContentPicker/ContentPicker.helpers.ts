@@ -25,7 +25,8 @@ export function setInitialItem(
 	options: PickerItem[],
 	initialValue?: PickerItem
 ): PickerItem | undefined {
-	return options.find(
-		(option: PickerItem) => option.value === initialValue?.value || 'EMPTY_SELECTION'
-	);
+	if (!initialValue?.value) {
+		return undefined;
+	}
+	return options.find((option: PickerItem) => option.value === initialValue.value);
 }
