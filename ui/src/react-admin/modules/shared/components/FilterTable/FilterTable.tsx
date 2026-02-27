@@ -31,7 +31,7 @@ import React, {
 import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner';
 
 import { tHtml, tText } from '~shared/helpers/translation-functions';
-import type { TableFilterType } from '~shared/types/table-filter-types';
+import { TableFilterType } from '~shared/types/table-filter-types';
 
 import { KeyCode } from '../../consts/keycode';
 import { eduOrgToClientOrg } from '../../helpers/edu-org-string-to-client-org';
@@ -375,7 +375,7 @@ export const FilterTable: FunctionComponent<FilterTableProps> = ({
 											}
 
 											switch (col.filterType) {
-												case 'CheckboxDropdownModal':
+												case TableFilterType.CheckboxDropdownModal:
 													return (
 														<CheckboxDropdownModal
 															{...(col.filterProps || {})}
@@ -394,7 +394,7 @@ export const FilterTable: FunctionComponent<FilterTableProps> = ({
 														/>
 													);
 
-												case 'DateRangeDropdown':
+												case TableFilterType.DateRangeDropdown:
 													return (
 														<DateRangeDropdown
 															{...(col.filterProps || {})}
@@ -407,7 +407,7 @@ export const FilterTable: FunctionComponent<FilterTableProps> = ({
 														/>
 													);
 
-												case 'BooleanCheckboxDropdown':
+												case TableFilterType.BooleanCheckboxDropdown:
 													return (
 														<BooleanCheckboxDropdown
 															{...(col.filterProps || {})}
@@ -426,7 +426,7 @@ export const FilterTable: FunctionComponent<FilterTableProps> = ({
 														/>
 													);
 
-												case 'MultiUserSelectDropdown':
+												case TableFilterType.MultiUserSelectDropdown:
 													return (
 														<MultiUserSelectDropdown
 															{...(col.filterProps || {})}
@@ -440,7 +440,7 @@ export const FilterTable: FunctionComponent<FilterTableProps> = ({
 														/>
 													);
 
-												case 'MultiEducationalOrganisationSelectModal':
+												case TableFilterType.MultiEducationalOrganisationSelectModal:
 													return (
 														<MultiEducationalOrganisationSelectModal
 															{...(col.filterProps || {})}
