@@ -34815,6 +34815,24 @@
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
     "location": "modules/navigation/components/material-request-center/material-request-center-button",
+    "key": "openstaande-materiaal-aanvragen",
+    "language": "nl",
+    "value": "Openstaande materiaal aanvragen",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/navigation/components/material-request-center/material-request-center-button",
+    "key": "openstaande-materiaal-aanvragen",
+    "language": "en",
+    "value": "Openstaande materiaal aanvragen",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/navigation/components/material-request-center/material-request-center-button",
     "key": "hover-materiaal-aanvragen",
     "language": "nl",
     "value": "Bekijk je aanvraag",
@@ -44403,24 +44421,6 @@
     "key": "sluiten",
     "language": "en",
     "value": "Close",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/navigation/components/material-request-center/material-request-center-button",
-    "key": "openstaande-materiaal-aanvragen",
-    "language": "nl",
-    "value": "Openstaande materiaal aanvragen",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/navigation/components/material-request-center/material-request-center-button",
-    "key": "openstaande-materiaal-aanvragen",
-    "language": "en",
-    "value": "Openstaande materiaal aanvragen",
     "value_type": "TEXT"
   },
   {
