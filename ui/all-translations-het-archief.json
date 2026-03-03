@@ -8408,42 +8408,6 @@
   {
     "app": "HET_ARCHIEF",
     "component": "ADMIN_CORE",
-    "location": "modules/user/helpers/render-user-overview-table-cells",
-    "key": "uitzondering-ja",
-    "language": "nl",
-    "value": "Uitzondering ja",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/user/helpers/render-user-overview-table-cells",
-    "key": "uitzondering-ja",
-    "language": "en",
-    "value": "Uitzondering ja",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/user/helpers/render-user-overview-table-cells",
-    "key": "uitzondering-nee",
-    "language": "nl",
-    "value": "Uitzondering nee",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/user/helpers/render-user-overview-table-cells",
-    "key": "uitzondering-nee",
-    "language": "en",
-    "value": "Uitzondering nee",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
     "location": "admin/users/views/user-overview",
     "key": "tijdelijke-toegang-ja",
     "language": "nl",
@@ -20324,24 +20288,6 @@
   {
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
-    "location": "modules/visitor-space/components/visitor-space-search-page/visitor-space-search-page",
-    "key": "pages-bezoekersruimte-zoeken-zoek-info",
-    "language": "nl",
-    "value": "<p>Je zoekresultaten zijn afhankelijk van alle ingegeven trefwoorden en ingestelde filters.<br/></p><p><a href=\"https://hetarchief.be/zoeken-op-hetarchief-be\" target=\"_blank\">Meer daarover vind je hier &gt;</a></p>",
-    "value_type": "HTML"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/visitor-space-search-page/visitor-space-search-page",
-    "key": "pages-bezoekersruimte-zoeken-zoek-info",
-    "language": "en",
-    "value": "<p>Your search results are attained through a combination of all entered keywords and set filters.</p><p><a href=\"https://hetarchief.be/en/searching-on-thearchives-be\" target=\"_blank\">Learn more about the search here &gt;</a></p>",
-    "value_type": "HTML"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
     "location": "modules/search/search-page",
     "key": "geavanceerde-filters",
     "language": "nl",
@@ -24350,7 +24296,7 @@
     "location": "pages/admin/materiaalaanvragen/index",
     "key": "type-aanvraag",
     "language": "en",
-    "value": "Type aanvraag",
+    "value": "Type of request",
     "value_type": "TEXT"
   },
   {
@@ -24422,7 +24368,7 @@
     "location": "pages/admin/materiaalaanvragen/index",
     "key": "status-aanvraag",
     "language": "en",
-    "value": "Status aanvraag",
+    "value": "Request status",
     "value_type": "TEXT"
   },
   {
@@ -24458,7 +24404,7 @@
     "location": "pages/admin/materiaalaanvragen/index",
     "key": "aanvraag-met-download",
     "language": "en",
-    "value": "Aanvraag met download",
+    "value": "Request with download",
     "value_type": "TEXT"
   },
   {
@@ -24494,7 +24440,7 @@
     "location": "pages/admin/materiaalaanvragen/index",
     "key": "aanbieder-aanvraag",
     "language": "en",
-    "value": "Aanbieder aanvraag",
+    "value": "Organisation making the request",
     "value_type": "TEXT"
   },
   {
@@ -28463,7 +28409,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
     "key": "download-voorbereiding-gefaald",
     "language": "nl",
-    "value": "Download voorbereiding gefaald",
+    "value": "Download voorbereiding gefaald. Neem contact op via support@meemoo.be.",
     "value_type": "TEXT"
   },
   {
@@ -28472,7 +28418,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
     "key": "download-voorbereiding-gefaald",
     "language": "en",
-    "value": "Download voorbereiding gefaald",
+    "value": "Download preparation failed. Contact us on support@meemoo.be.",
     "value_type": "TEXT"
   },
   {
@@ -28607,7 +28553,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
     "key": "geannulleerd-op",
     "language": "nl",
-    "value": "Geannulleerd op {{cancelledAt}}",
+    "value": "Geannuleerd op {{cancelledAt}}",
     "value_type": "TEXT"
   },
   {
@@ -32253,24 +32199,6 @@
     "key": "aanvraag-bezoekersruimte-annuleren-blade-aria-label",
     "language": "en",
     "value": "Aanvraag bezoekersruimte annuleren [BLADE_ARIA_LABEL]",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/home/components/logged-out-home/logged-out-home",
-    "key": "hero-alt",
-    "language": "nl",
-    "value": "Hero alt",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/home/components/logged-out-home/logged-out-home",
-    "key": "hero-alt",
-    "language": "en",
-    "value": "Hero alt",
     "value_type": "TEXT"
   },
   {
@@ -40370,7 +40298,7 @@
     "location": "modules/visitor-space/components/material-request-blade/material-request-blade",
     "key": "vul-bijkomende-informatie-aan-mobile",
     "language": "en",
-    "value": "Please fill in all the info",
+    "value": "Fill in all the info",
     "value_type": "TEXT"
   },
   {
@@ -40748,7 +40676,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "video-start-knippunt-error-verplicht",
     "language": "en",
-    "value": "Een starttijd is verplicht. (engels)",
+    "value": "Choosing a start time is required.",
     "value_type": "TEXT"
   },
   {
@@ -40766,7 +40694,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "video-start-knippunt-error-eindtijd-gelijk-aan-of-voor-starttijd",
     "language": "en",
-    "value": "De starttijd moet voor de eindtijd liggen. (engels)",
+    "value": "The start time should be before the end time.",
     "value_type": "TEXT"
   },
   {
@@ -40856,7 +40784,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "type-ontsluiting-error-verplicht",
     "language": "en",
-    "value": "Duid over welk type ontsluiting het gaat. (engels)",
+    "value": "Indicate the type of intended use.",
     "value_type": "TEXT"
   },
   {
@@ -40874,7 +40802,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "type-ontsluiting-digitale-ontsluiting-via-netwerkverbinding-error-verplicht",
     "language": "en",
-    "value": "Duid over welk type ontsluiting het gaat. (engels)",
+    "value": "Please indicate the intended use",
     "value_type": "TEXT"
   },
   {
@@ -40910,7 +40838,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "wijziging-materiaal-error-verplicht",
     "language": "en",
-    "value": "Geef aan of je wijzigingen aan het materiaal zal maken. (engels)",
+    "value": "Please indicate whether you will be editing the material.",
     "value_type": "TEXT"
   },
   {
@@ -41054,7 +40982,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "verstuur-je-aanvraag-of-zoek-verder-naar-digitaal-erfgoed",
     "language": "en",
-    "value": "Verstuur je aanvraag of zoek verder naar digitaal erfgoed (engels)",
+    "value": "Send your request or keep looking for digital heritage",
     "value_type": "TEXT"
   },
   {
@@ -41108,7 +41036,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "wijzigingen-toegepast",
     "language": "en",
-    "value": "Wijzigingen toegepast (engels)",
+    "value": "Changes have been applied",
     "value_type": "TEXT"
   },
   {
@@ -41216,7 +41144,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "wijzigingen-opslaan",
     "language": "en",
-    "value": "Wijzigingen opslaan (engels)",
+    "value": "Save changes",
     "value_type": "TEXT"
   },
   {
@@ -41234,7 +41162,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "wijzigingen-opslaan-mobiel",
     "language": "en",
-    "value": "Wijzigingen opslaan mobiel",
+    "value": "Save changes",
     "value_type": "TEXT"
   },
   {
@@ -41252,7 +41180,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "voeg-toe-aan-aanvraaglijst-zoek-verder",
     "language": "en",
-    "value": "Voeg toe aan aanvraaglijst & zoek verder (engels)",
+    "value": "Add to your list of requests and keep looking",
     "value_type": "TEXT"
   },
   {
@@ -41261,7 +41189,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "voeg-toe-aan-aanvraaglijst-zoek-verder-mobiel",
     "language": "nl",
-    "value": "Voeg toe aan aanvraaglijst zoek verder mobiel",
+    "value": "Voeg toe en zoek verder",
     "value_type": "TEXT"
   },
   {
@@ -41270,7 +41198,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "voeg-toe-aan-aanvraaglijst-zoek-verder-mobiel",
     "language": "en",
-    "value": "Voeg toe aan aanvraaglijst zoek verder mobiel",
+    "value": "Add to list and keep looking",
     "value_type": "TEXT"
   },
   {
@@ -41810,7 +41738,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "type-ontsluiting-label",
     "language": "en",
-    "value": "Type ontsluiting (engels)",
+    "value": "Type of access",
     "value_type": "TEXT"
   },
   {
@@ -41828,7 +41756,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "type-ontsluiting-vraag",
     "language": "en",
-    "value": "Hoe zal het materiaal gebruikt of getoond worden? (engels)",
+    "value": "How will the material be used or shown?",
     "value_type": "TEXT"
   },
   {
@@ -41855,7 +41783,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "type-ontsluiting-digitale-ontsluiting-via-een-vast-medium-omschrijving",
     "language": "nl",
-    "value": "Type ontsluiting - Digitale ontsluiting via een vast medium omschrijving",
+    "value": "Type ontsluiting - Digitale ontsluiting via een vast medium",
     "value_type": "HTML"
   },
   {
@@ -41864,7 +41792,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "type-ontsluiting-digitale-ontsluiting-via-een-vast-medium-omschrijving",
     "language": "en",
-    "value": "Type of access - Digital access via a physical medium description",
+    "value": "Type of access - Digital access via a physical medium",
     "value_type": "HTML"
   },
   {
@@ -41882,7 +41810,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "type-ontsluiting-digitale-ontsluiting-via-netwerkverbinding-label",
     "language": "en",
-    "value": "Digitale ontsluiting via netwerkverbinding, namelijk via:  (engels)",
+    "value": "Digital access via network connection, namely via:",
     "value_type": "TEXT"
   },
   {
@@ -41909,7 +41837,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "type-ontsluiting-digitale-ontsluiting-via-netwerkverbinding-een-besloten-dienst-omschrijving",
     "language": "nl",
-    "value": "Type ontsluiting - Digitale ontsluiting via netwerkverbinding - Een besloten dienst omschrijving",
+    "value": "Type ontsluiting - Digitale ontsluiting via netwerkverbinding - Een besloten dienst",
     "value_type": "TEXT"
   },
   {
@@ -41918,7 +41846,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "type-ontsluiting-digitale-ontsluiting-via-netwerkverbinding-een-besloten-dienst-omschrijving",
     "language": "en",
-    "value": "Type of access - Digital access via network connection - A private service description",
+    "value": "Type of access - Digital access via network connection - A private service",
     "value_type": "TEXT"
   },
   {
@@ -41936,7 +41864,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "type-ontsluiting-digitale-ontsluiting-via-netwerkverbinding-publiek-zonder-authenticatie-label",
     "language": "en",
-    "value": "een publiek toegankelijke dienst (website of app) zonder authenticatie van de gebruikers (engels)",
+    "value": "a publicly accessible service (website or app) without authentication of the users",
     "value_type": "TEXT"
   },
   {
@@ -41945,7 +41873,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "type-ontsluiting-digitale-ontsluiting-via-netwerkverbinding-publiek-zonder-authenticatie-omschrijving",
     "language": "nl",
-    "value": "Type ontsluiting - Digitale ontsluiting via netwerkverbinding - Publiek zonder authenticatie omschrijving",
+    "value": "Type ontsluiting - Digitale ontsluiting via netwerkverbinding - Publiek zonder authenticatie",
     "value_type": "TEXT"
   },
   {
@@ -41954,7 +41882,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "type-ontsluiting-digitale-ontsluiting-via-netwerkverbinding-publiek-zonder-authenticatie-omschrijving",
     "language": "en",
-    "value": "Type ontsluiting - Digitale ontsluiting via netwerkverbinding - Publiek zonder authenticatie omschrijving",
+    "value": "Type of access - Digital access via network connection - Publicly without authentication",
     "value_type": "TEXT"
   },
   {
@@ -41972,7 +41900,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "type-ontsluiting-digitale-ontsluiting-via-netwerkverbinding-publiek-met-authenticatie-label",
     "language": "en",
-    "value": "een publiek toegankelijke dienst (website of app) mét authenticatie van de gebruikers (engels)",
+    "value": "a publicly accessible service (website or app) with authentication of the users",
     "value_type": "TEXT"
   },
   {
@@ -41990,7 +41918,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "type-ontsluiting-digitale-ontsluiting-via-netwerkverbinding-publiek-met-authenticatie-omschrijving",
     "language": "en",
-    "value": "een publiek toegankelijke dienst (website of app) mét authenticatie van de gebruikers, dus met voorafgaande registratie waarbij gebruikers zich moeten identificeren. (engels)",
+    "value": "a publicly accessible service (website or app) with authentication of the users, more specifically with preceding registration that requires users to identify themselves.",
     "value_type": "TEXT"
   },
   {
@@ -42017,7 +41945,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "type-ontsluiting-andere-omschrijving",
     "language": "nl",
-    "value": "Type ontsluiting - Andere omschrijving",
+    "value": "Type ontsluiting - Andere ",
     "value_type": "HTML"
   },
   {
@@ -42026,7 +41954,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "type-ontsluiting-andere-omschrijving",
     "language": "en",
-    "value": "Type of access - Other discription",
+    "value": "Type of access - Other ",
     "value_type": "HTML"
   },
   {
@@ -42062,7 +41990,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "wijziging-materiaal-label",
     "language": "en",
-    "value": "Wijziging materiaal (engels)",
+    "value": "Edit material",
     "value_type": "TEXT"
   },
   {
@@ -42071,7 +41999,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "wijziging-materiaal-vraag",
     "language": "nl",
-    "value": "Wijziging materiaal vraag",
+    "value": "Wil je het materiaal wijzigen?",
     "value_type": "TEXT"
   },
   {
@@ -42080,7 +42008,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "wijziging-materiaal-vraag",
     "language": "en",
-    "value": "Wijziging materiaal vraag",
+    "value": "Will you edit the material?",
     "value_type": "TEXT"
   },
   {
@@ -42098,7 +42026,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "wijziging-materiaal-geen-wijzigingen-label",
     "language": "en",
-    "value": "Mijn organisatie zal geen wijzigingen aanbrengen (engels)",
+    "value": "My organisation will not edit the material",
     "value_type": "TEXT"
   },
   {
@@ -42116,7 +42044,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "wijziging-materiaal-geen-wijzigingen-omschrijving",
     "language": "en",
-    "value": "<p>Ter verduidelijking: De volgende vormen van gebruik worden niet als wijziging beschouwd: </p><ul><li>Inkorting of hergebruik van slechts een deel van het aangevraagde materiaal. </li><li>Technische wijzigingen om de beeld- of audiokwaliteit van het materiaal te verbeteren worden. </li><li>Integratie van ongewijzigd bronmateriaal in een documentaire.</li><li>Aanbieden van materiaal in interactieve diensten waarbij gebruikers van die diensten zelf de weergave van het materiaal tijdelijk kunnen wijzigen voor eigen doeleinden (vb. binnen een app, kiosk, of binnen een interactieve website, bijvoorbeeld met gebruik van H5P-technologie). (engels)</li></ul>",
+    "value": "<p>To clarify: The following forms of use will not be considered as edited:</p><ul><li>Shortening or using only a selection of the requested material.</li><li>Technical alterations to the sound or image quality in order to improve it.</li><li>Integration of unedited source material in a documentary.</li><li>Offering access to the material through interactive services that allow the user of those services to edit the display of the material temporarily for personal use (e.g. in an app, or an interactive website, with HP5 technology for instance).</li></ul>",
     "value_type": "HTML"
   },
   {
@@ -42890,7 +42818,7 @@
     "location": "modules/visitor-space/components/radio-button-accordion/radio-button-accordion",
     "key": "close-accordion",
     "language": "en",
-    "value": "Sluit accordeon (engels)",
+    "value": "Close accordeon menu",
     "value_type": "TEXT"
   },
   {
@@ -44138,6 +44066,24 @@
   {
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
+    "location": "modules/visitor-space/components/visitor-space-search-page/visitor-space-search-page",
+    "key": "pages-bezoekersruimte-zoeken-zoek-info",
+    "language": "nl",
+    "value": "<p>Je zoekresultaten zijn afhankelijk van alle ingegeven trefwoorden en ingestelde filters.<br/></p><p><a href=\"https://hetarchief.be/zoeken-op-hetarchief-be\" target=\"_blank\">Meer daarover vind je hier &gt;</a></p>",
+    "value_type": "HTML"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/visitor-space-search-page/visitor-space-search-page",
+    "key": "pages-bezoekersruimte-zoeken-zoek-info",
+    "language": "en",
+    "value": "<p>Your search results are attained through a combination of all entered keywords and set filters.</p><p><a href=\"https://hetarchief.be/en/searching-on-thearchives-be\" target=\"_blank\">Learn more about the search here &gt;</a></p>",
+    "value_type": "HTML"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
     "location": "modules/shared/components/visitor-space-card/visitor-space-card-controls/visitor-space-card-controls",
     "key": "geen-contactgegevens-beschikbaar",
     "language": "nl",
@@ -44457,6 +44403,24 @@
     "key": "sluiten",
     "language": "en",
     "value": "Close",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/navigation/components/material-request-center/material-request-center-button",
+    "key": "openstaande-materiaal-aanvragen",
+    "language": "nl",
+    "value": "Openstaande materiaal aanvragen",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/navigation/components/material-request-center/material-request-center-button",
+    "key": "openstaande-materiaal-aanvragen",
+    "language": "en",
+    "value": "Openstaande materiaal aanvragen",
     "value_type": "TEXT"
   },
   {
