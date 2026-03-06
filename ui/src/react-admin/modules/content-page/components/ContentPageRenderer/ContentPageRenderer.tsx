@@ -10,7 +10,7 @@ import { PermissionName } from '@viaa/avo2-types';
 import clsx from 'clsx';
 import { cloneDeep, compact, intersection, isNil, noop } from 'es-toolkit';
 import { stringifyUrl } from 'query-string';
-import React, { type FunctionComponent, type ReactNode } from 'react';
+import React, { type FunctionComponent, type ReactNode, useEffect, useState } from 'react';
 import type { BlockImageProps } from '~content-blocks/BlockImage/BlockImage';
 import { AdminConfigManager } from '~core/config/config.class';
 import { convertRichTextEditorStatesToHtml } from '~modules/content-page/services/content-page.converters';
@@ -55,6 +55,11 @@ type ContentPageDetailProps = {
 export const ContentPageRenderer: FunctionComponent<ContentPageDetailProps> = (props) => {
 	const commonUser = getCommonUser();
 	const location = useLocation();
+	const [mounted, setMounted] = useState(false);
+
+	useEffect(() => {
+		setMounted(true);
+	}, []);
 
 	const getContentBlocks = (contentPageInfo: ContentPageInfo) => {
 		// Convert editor states to html
@@ -147,9 +152,7 @@ export const ContentPageRenderer: FunctionComponent<ContentPageDetailProps> = (p
 	};
 
 	const renderEditButton = () => {
-		if (isServerSideRendering()) {
-			return null;
-		}
+		if (!mounted) return null; // don't render during server side rendering
 		const userCanEditPage = PermissionService.hasPerm(
 			commonUser,
 			PermissionName.EDIT_ANY_CONTENT_PAGES
