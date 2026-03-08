@@ -3,7 +3,7 @@ import type { AvoCoreContentPickerType } from '@viaa/avo2-types';
 import clsx from 'clsx';
 import { map } from 'es-toolkit/compat';
 import { stringify } from 'query-string';
-import type { FunctionComponent, ReactElement, ReactNode } from 'react';
+import { type FunctionComponent, type ReactElement, type ReactNode, useEffect, useState } from 'react';
 import React from 'react';
 import { AdminConfigManager } from '~core/config';
 import { getAdminCoreApiUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config';
@@ -32,6 +32,12 @@ export const SmartLink: FunctionComponent<SmartLinkProps> = ({
 	ariaLabel,
 }) => {
 	const location = useLocation();
+
+	// Defer link wrapping to after hydration to avoid invalid HTML nesting
+	// (e.g. <a><button>) which causes browsers to restructure the DOM,
+	// breaking React SSR hydration.
+	const [mounted, setMounted] = useState(false);
+	useEffect(() => setMounted(true), []);
 
 	const renderLink = (
 		url: string,
@@ -129,6 +135,9 @@ export const SmartLink: FunctionComponent<SmartLinkProps> = ({
 
 	// biome-ignore lint/suspicious/noExplicitAny: todo
 	const renderSmartLink = (): ReactElement<any, any> | null => {
+		if (!mounted) {
+			return <>{children}</>;
+		}
 		if (action) {
 			const { type, value, target } = action;
 
