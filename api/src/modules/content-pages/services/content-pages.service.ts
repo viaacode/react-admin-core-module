@@ -264,7 +264,6 @@ export class ContentPagesService {
 			offset,
 			limit,
 		} = inputQuery;
-		const now = new Date().toISOString();
 		const where: App_Content_Bool_Exp | App_Content_Page_Bool_Exp = {
 			_and: [
 				{
