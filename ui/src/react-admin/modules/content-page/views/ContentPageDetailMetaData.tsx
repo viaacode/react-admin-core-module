@@ -17,6 +17,7 @@ import Html from '~shared/components/Html/Html';
 import { Link } from '~shared/components/Link/Link';
 import { GET_LANGUAGE_NAMES } from '~shared/consts/language-names';
 import { formatDate, formatDateString } from '~shared/helpers/formatters/date';
+import { isAvo } from '~shared/helpers/is-avo.ts';
 import { isMultiLanguageEnabled } from '~shared/helpers/is-multi-language-enabled';
 import {
 	renderDateDetailRows,
@@ -126,15 +127,16 @@ export const ContentPageDetailMetaData: FunctionComponent<ContentDetailMetaDataP
 							</div>,
 							tText('admin/content/views/content-detail___cover-afbeelding')
 						)}
-						{renderDetailRow(
-							<div style={{ width: '400px' }}>
-								<Thumbnail
-									category={AvoContentTypeEnglish.ITEM}
-									src={contentPageInfo.seo_image_path || undefined}
-								/>
-							</div>,
-							tText('modules/content-page/views/content-page-detail-meta-data___seo-afbeelding')
-						)}
+						{isAvo() &&
+							renderDetailRow(
+								<div style={{ width: '400px' }}>
+									<Thumbnail
+										category={AvoContentTypeEnglish.ITEM}
+										src={contentPageInfo.seo_image_path || undefined}
+									/>
+								</div>,
+								tText('modules/content-page/views/content-page-detail-meta-data___seo-afbeelding')
+							)}
 						{renderSimpleDetailRows<ContentPageInfo>(contentPageInfo, [
 							['title', tText('admin/content/views/content-detail___titel')],
 						])}

@@ -589,6 +589,7 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 				<Column size="12">{renderCoverImageField()}</Column>
 				<Column size="12">{renderTitleField()}</Column>
 				<Column size="12">{renderDescriptionField()}</Column>
+				<Column size="12">{renderSeoDescriptionField()}</Column>
 				{commonUser?.permissions?.includes(PermissionName.EDIT_PROTECTED_PAGE_STATUS) && (
 					<Column size="12">{renderIsProtectedField()}</Column>
 				)}
@@ -596,14 +597,12 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 				{commonUser?.permissions?.includes(PermissionName.EDIT_CONTENT_PAGE_AUTHOR) && (
 					<Column size="12">{renderAuthorField()}</Column>
 				)}
-				<Column size="12">
-					{renderContentTypeField()}
-					{renderContentWidthField()}
-					{renderLabelsField()}
-				</Column>
-				{isMultiLanguageEnabled() && <Column size="7">{renderLanguageField()}</Column>}
+				<Column size="6">{renderContentTypeField()}</Column>
+				<Column size="6">{renderContentWidthField()}</Column>
+				<Column size="12">{renderLabelsField()}</Column>
+				{isMultiLanguageEnabled() && <Column size="6">{renderLanguageField()}</Column>}
 				{isMultiLanguageEnabled() && (
-					<Column size="5" className="c-multilanguage-controls">
+					<Column size="6" className="c-multilanguage-controls">
 						{renderDutchParentPageField()}
 					</Column>
 				)}
