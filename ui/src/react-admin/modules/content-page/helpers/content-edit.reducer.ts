@@ -6,10 +6,11 @@ import { produce } from 'immer';
 import type { Reducer } from 'react';
 import { AdminConfigManager } from '~core/config/config.class';
 import { Locale } from '~modules/translations/translations.core.types';
+import { isAvo } from '~shared/helpers/is-avo.ts';
 import type { ValueOf } from '~shared/types';
 import type {
-	ContentBlockComponentState,
 	ContentBlockComponentsConfig,
+	ContentBlockComponentState,
 	ContentBlockConfig,
 	ContentBlockErrors,
 	RepeatedContentBlockComponentState,
@@ -125,7 +126,7 @@ export const CONTENT_PAGE_INITIAL_STATE = (
 		metaDescription: '',
 		isProtected: false,
 		path: '',
-		contentType: AvoContentPageType.PROJECT,
+		contentType: isAvo() ? AvoContentPageType.PROJECT : AvoContentPageType.PAGINA,
 		contentWidth:
 			AdminConfigManager.getConfig()?.contentPage?.defaultPageWidth || ContentPageWidth.EXTRA_LARGE,
 		publishAt: '',
