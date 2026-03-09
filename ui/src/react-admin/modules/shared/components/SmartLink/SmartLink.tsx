@@ -3,7 +3,13 @@ import type { AvoCoreContentPickerType } from '@viaa/avo2-types';
 import clsx from 'clsx';
 import { map } from 'es-toolkit/compat';
 import { stringify } from 'query-string';
-import { type FunctionComponent, type ReactElement, type ReactNode, useEffect, useState } from 'react';
+import {
+	type FunctionComponent,
+	type ReactElement,
+	type ReactNode,
+	useEffect,
+	useState,
+} from 'react';
 import React from 'react';
 import { AdminConfigManager } from '~core/config';
 import { getAdminCoreApiUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config';

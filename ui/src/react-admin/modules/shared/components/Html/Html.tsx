@@ -30,8 +30,7 @@ const Html: FunctionComponent<HtmlProps> = ({
 
 	// Avoid invalid nesting (e.g. <p><p>…</p></p>) which causes SSR hydration
 	// mismatches because the browser's HTML parser auto-closes the outer <p>.
-	const Type =
-		type === 'p' && BLOCK_ELEMENT_REGEX.test(content) ? 'div' : type;
+	const Type = type === 'p' && BLOCK_ELEMENT_REGEX.test(content) ? 'div' : type;
 
 	return (
 		<Type

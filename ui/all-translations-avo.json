@@ -5351,7 +5351,7 @@
     "location": "modules/content-page/components/content-edit-form/content-edit-form",
     "key": "afbeelding-voor-seo-aanbevolen-1200-x-630",
     "language": "nl",
-    "value": "Afbeelding voor SEO (1200 x 630 px aanbevolen)",
+    "value": "Afbeelding voor SEO / SoMe (1200 x 630 px aanbevolen)",
     "value_type": "TEXT"
   },
   {
@@ -10994,7 +10994,7 @@
     "location": "admin/assignments/assignments",
     "key": "bookmarks",
     "language": "nl",
-    "value": "Bookmarks",
+    "value": "Bladwijzers",
     "value_type": "TEXT"
   },
   {
@@ -12578,7 +12578,7 @@
     "location": "assignment/components/assignment-meta-data-form-editable",
     "key": "og-afbeelding-1200-x-630-px",
     "language": "nl",
-    "value": "OG afbeelding (1200 x 630 px aanbevolen)",
+    "value": "SoMe / OG afbeelding (1200 x 630 px aanbevolen)",
     "value_type": "TEXT"
   },
   {
@@ -12587,7 +12587,7 @@
     "location": "assignment/components/assignment-meta-data-form-editable",
     "key": "upload-een-og-afbeelding",
     "language": "nl",
-    "value": "Upload een OG afbeelding",
+    "value": "Upload een SoMe / OG afbeelding",
     "value_type": "TEXT"
   },
   {
@@ -15503,7 +15503,7 @@
     "location": "bundle/views/bundle-detail",
     "key": "het-ophalen-van-het-aantal-keer-bekeken-gebookmarked-is-mislukt",
     "language": "nl",
-    "value": "Het ophalen van het aantal keer bekeken / aangemaaakt als bladwijzer is mislukt.",
+    "value": "Het ophalen van het aantal keer bekeken / aangemaakt als bladwijzer is mislukt.",
     "value_type": "HTML"
   },
   {
@@ -15726,6 +15726,33 @@
     "app": "AVO",
     "component": "FRONTEND",
     "location": "bundle/views/bundle-detail",
+    "key": "ben-je-zeker-dat-je-deze-bundel-wil-verwijderen",
+    "language": "nl",
+    "value": "Ben je zeker dat je deze bundel wil verwijderen?",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "bundle/views/bundle-detail",
+    "key": "deze-actie-kan-niet-ongedaan-gemaakt-worden",
+    "language": "nl",
+    "value": "Opgelet! Deze actie kan niet ongedaan gemaakt worden.",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "bundle/views/bundle-detail",
+    "key": "deel-deze-bundel",
+    "language": "nl",
+    "value": "Deel deze bundel",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "bundle/views/bundle-detail",
     "key": "openbare-bundel",
     "language": "nl",
     "value": "Bundel",
@@ -15756,33 +15783,6 @@
     "key": "opdrachten-in-deze-bundel",
     "language": "nl",
     "value": "Opdrachten in deze bundel",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "bundle/views/bundle-detail",
-    "key": "ben-je-zeker-dat-je-deze-bundel-wil-verwijderen",
-    "language": "nl",
-    "value": "Ben je zeker dat je deze bundel wil verwijderen?",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "bundle/views/bundle-detail",
-    "key": "deze-actie-kan-niet-ongedaan-gemaakt-worden",
-    "language": "nl",
-    "value": "Opgelet! Deze actie kan niet ongedaan gemaakt worden.",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "bundle/views/bundle-detail",
-    "key": "deel-deze-bundel",
-    "language": "nl",
-    "value": "Deel deze bundel",
     "value_type": "TEXT"
   },
   {
@@ -16320,6 +16320,15 @@
     "app": "AVO",
     "component": "FRONTEND",
     "location": "collection/components/collection-or-bundle-edit",
+    "key": "door-inactiviteit-zal-de-collectie-zichzelf-sluiten",
+    "language": "nl",
+    "value": "Door inactiviteit zal de collectie zichzelf sluiten.",
+    "value_type": "HTML"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "collection/components/collection-or-bundle-edit",
     "key": "je-hebt-geen-toegang",
     "language": "nl",
     "value": "Je hebt geen toegang",
@@ -16414,15 +16423,6 @@
     "language": "nl",
     "value": "Bijvoorbeeld: 39057b95-92c9-446f-944b-6459a6194d8e",
     "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "collection/components/collection-or-bundle-edit",
-    "key": "door-inactiviteit-zal-de-collectie-zichzelf-sluiten",
-    "language": "nl",
-    "value": "Door inactiviteit zal de collectie zichzelf sluiten.",
-    "value_type": "HTML"
   },
   {
     "app": "AVO",
@@ -16997,7 +16997,7 @@
     "location": "collection/components/collection-or-bundle-edit-publication-details",
     "key": "og-afbeelding-1200-x-630-px",
     "language": "nl",
-    "value": "OG afbeelding (1200 x 630 px aanbevolen)",
+    "value": "SoMe / OG afbeelding (1200 x 630 px aanbevolen)",
     "value_type": "TEXT"
   },
   {
@@ -17006,7 +17006,7 @@
     "location": "collection/components/collection-or-bundle-edit-publication-details",
     "key": "upload-een-og-afbeelding",
     "language": "nl",
-    "value": "Upload een OG afbeelding",
+    "value": "Upload een SoMe / OG afbeelding",
     "value_type": "TEXT"
   },
   {
@@ -18725,7 +18725,7 @@
     "location": "home/views/logged-out-home",
     "key": "uitgelogde-start-pagina-beschrijving",
     "language": "nl",
-    "value": "Op Het Archief voor Onderwijs vind je als lesgever audio en video voor je lessen - gratis en reclamevrij - naast kant-en-klare lesideeën en workshops.",
+    "value": "Op Het Archief voor Onderwijs vind je als lesgever audio en video voor je lessen van meer dan 70 Vlaamse aanbieders - gratis, reclamevrij en links verdwijnen niet! Met deze content maken we ook kant-en-klaar audiovisueel lesmateriaal en geven we workshops.",
     "value_type": "TEXT"
   },
   {
@@ -20975,7 +20975,7 @@
     "location": "workspace/views/bookmarks-overview",
     "key": "zoek-een-item-en-maak-er-een-bladwijzer-van",
     "language": "nl",
-    "value": "Zoek een fragment en maak er een bladwijzer van.",
+    "value": "Zoek een fragment en maak er een bladwijzer voor aan.",
     "value_type": "TEXT"
   },
   {
@@ -23297,7 +23297,7 @@
     "location": "admin/interactive-tour/views/interactive-tour-overview",
     "key": "beschrijving-hoe-interactieve-tours-toe-voegen",
     "language": "nl",
-    "value": "<p>Maak een nieuwe rondleiding aan via &#x27;Rondleiding toevoegen&#x27;. Voeg daarna verschillende stappen toe, waarbij je het e<span style=\"color:#2b414f\"><span style=\"font-size:15px\"><span style=\"background-color:#ffffff\">lement selecteert op de pagina waarop de rondleiding moet staan via de css selector onderaan elke stap. Daarna kan je titel en tekst toevoegen. Test je rondleiding grondig!</span></span></span></p>",
+    "value": "Maak een nieuwe rondleiding aan via &#x27;Rondleiding toevoegen&#x27;. Voeg daarna verschillende stappen toe, waarbij je het element selecteert op de pagina waarop de rondleiding moet staan via de css selector onderaan elke stap. Daarna kan je titel en tekst toevoegen. Test je rondleiding grondig!",
     "value_type": "HTML"
   },
   {
@@ -23468,7 +23468,7 @@
     "location": "admin/items/views/item-detail-admin",
     "key": "het-opslaan-van-de-opmerkingen-seo-afbeelding-is-mislukt",
     "language": "nl",
-    "value": "Het opslaan van de opmerkingen/seo afbeelding is mislukt",
+    "value": "Het opslaan van de opmerkingen / OG-afbeelding is mislukt",
     "value_type": "HTML"
   },
   {
@@ -23630,7 +23630,7 @@
     "location": "admin/items/views/item-detail-admin",
     "key": "afbeelding-voor-seo-fb",
     "language": "nl",
-    "value": "Afbeelding voor SEO / Facebook",
+    "value": "Afbeelding voor sociale media / SEO",
     "value_type": "TEXT"
   },
   {
@@ -30174,6 +30174,15 @@
     "key": "deze-afbeelding-valt-onder-copyright-van-organisation-name",
     "language": "nl",
     "value": "De bron van deze videostill is <a href=\"{{organisationWebsite}}\" target=\"_blank\">{{organisationName}}</a>.",
+    "value_type": "HTML"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "assignment/views/assignment-detail",
+    "key": "de-opdracht-was-verwijderd",
+    "language": "nl",
+    "value": "De opdracht was verwijderd",
     "value_type": "HTML"
   },
   {
