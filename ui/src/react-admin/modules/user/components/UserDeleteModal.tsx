@@ -13,7 +13,7 @@ import {
 	ToolbarItem,
 	ToolbarRight,
 } from '@viaa/avo2-components';
-
+import { AvoCoreContentPickerType, type AvoUserUserDeleteOption } from '@viaa/avo2-types';
 import type { FunctionComponent, ReactNode } from 'react';
 import React, { useState } from 'react';
 import { AdminConfigManager } from '~core/config/config.class';
@@ -29,9 +29,7 @@ import { AVO } from '~shared/types';
 import type { PickerItem } from '~shared/types/content-picker';
 import { UserService } from '../user.service';
 import type { DeleteContentCounts } from '../user.types';
-
 import './UserDeleteModal.scss';
-import { AvoCoreContentPickerType, type AvoUserUserDeleteOption } from '@viaa/avo2-types';
 
 interface UserDeleteModalProps {
 	selectedProfileIds: string[];

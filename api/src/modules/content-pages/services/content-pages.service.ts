@@ -299,15 +299,9 @@ export class ContentPagesService {
 					}),
 				},
 				...this.getLabelFilter(selectedLabelIds || []),
-				// publish state
-				{
-					_or: [
-						{ is_public: { _eq: true } },
-						{ publish_at: { _is_null: true }, depublish_at: { _gte: now } },
-						{ publish_at: { _lte: now }, depublish_at: { _is_null: true } },
-						{ publish_at: { _lte: now }, depublish_at: { _gte: now } },
-					],
-				},
+				// published state
+				// Only check is_public boolean, since the publish_at and depublish_at should be interpreted by the cron job which then sets published_at and is_public
+				{ is_public: { _eq: true } },
 				{ is_deleted: { _eq: false } },
 			],
 		};
