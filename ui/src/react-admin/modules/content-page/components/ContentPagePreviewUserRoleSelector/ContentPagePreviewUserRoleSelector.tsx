@@ -23,8 +23,8 @@ import { navigateFunc } from '~shared/helpers/navigate-fnc';
 import { tText } from '~shared/helpers/translation-functions';
 import { SpecialUserGroups } from '~shared/types/authentication.types';
 import './ContentPagePreviewUserRoleSelector.scss';
-import { stringifyUrl } from 'query-string';
 import { CONTENT_PAGE_USER_GROUP_ID_QUERY_PARAM } from '~modules/content-page/components/ContentPageRenderer/ContentPageRenderer.consts.tsx';
+import { isHetArchief } from '~shared/helpers/is-hetarchief.ts';
 import { isServerSideRendering } from '~shared/helpers/routing/is-server-side-rendering.ts';
 import { useLocation } from '~shared/hooks/useLocation.ts';
 
@@ -40,13 +40,16 @@ export const ContentPagePreviewUserRoleSelector: FC<
 	const commonUser = getCommonUser();
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
 	const getUserGroupId = useCallback(() => {
-		if (isServerSideRendering()) {
+		if (isServerSideRendering() || isHetArchief()) {
 			return;
 		}
 		return new URLSearchParams(location?.search).get(CONTENT_PAGE_USER_GROUP_ID_QUERY_PARAM);
 	}, [location]);
 	const setUserGroupId = useCallback(
 		async (id: string) => {
+			if (isServerSideRendering() || isHetArchief()) {
+				return;
+			}
 			const url = new URL(props.url);
 			url.searchParams.set(CONTENT_PAGE_USER_GROUP_ID_QUERY_PARAM, id);
 			const newUrl = `${url.pathname}?${url.searchParams.toString()}`;
@@ -73,6 +76,10 @@ export const ContentPagePreviewUserRoleSelector: FC<
 			setUserGroupId(String(commonUser?.userGroup?.id));
 		}
 	}, [setUserGroupId]);
+
+	if (isHetArchief()) {
+		return null;
+	}
 
 	const { data: userGroups, isLoading } = useGetUserGroups({
 		withPermissions: false,
