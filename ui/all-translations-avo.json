@@ -13719,6 +13719,15 @@
     "app": "AVO",
     "component": "FRONTEND",
     "location": "assignment/views/assignment-detail",
+    "key": "de-opdracht-was-verwijderd",
+    "language": "nl",
+    "value": "De opdracht was verwijderd",
+    "value_type": "HTML"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "assignment/views/assignment-detail",
     "key": "ophalen-van-permissies-is-mislukt",
     "language": "nl",
     "value": "Ophalen van permissies is mislukt.",
@@ -30174,15 +30183,6 @@
     "key": "deze-afbeelding-valt-onder-copyright-van-organisation-name",
     "language": "nl",
     "value": "De bron van deze videostill is <a href=\"{{organisationWebsite}}\" target=\"_blank\">{{organisationName}}</a>.",
-    "value_type": "HTML"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "assignment/views/assignment-detail",
-    "key": "de-opdracht-was-verwijderd",
-    "language": "nl",
-    "value": "De opdracht was verwijderd",
     "value_type": "HTML"
   },
   {
