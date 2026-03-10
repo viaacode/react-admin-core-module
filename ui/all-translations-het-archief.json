@@ -28067,7 +28067,7 @@
     "location": "modules/account/components/edit-folder-blade/edit-folder-blade",
     "key": "bewaar-mobiel",
     "language": "nl",
-    "value": "Bewaar mobiel",
+    "value": "Bewaa",
     "value_type": "TEXT"
   },
   {
@@ -28103,7 +28103,7 @@
     "location": "modules/account/components/edit-folder-blade/edit-folder-blade",
     "key": "sluit-mobiel",
     "language": "nl",
-    "value": "Sluit mobiel",
+    "value": "Sluit",
     "value_type": "TEXT"
   },
   {
@@ -28283,7 +28283,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
     "key": "goedkeuren-mobiel",
     "language": "nl",
-    "value": "Goedkeuren mobiel",
+    "value": "Goedkeuren",
     "value_type": "TEXT"
   },
   {
@@ -28319,7 +28319,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
     "key": "afkeuren-mobiel",
     "language": "nl",
-    "value": "Afkeuren mobiel",
+    "value": "Afkeuren",
     "value_type": "TEXT"
   },
   {
@@ -28391,7 +28391,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
     "key": "annuleer-aanvraag-mobiel",
     "language": "nl",
-    "value": "Annuleer aanvraag mobiel",
+    "value": "Annuleer aanvraag",
     "value_type": "TEXT"
   },
   {
@@ -34997,7 +34997,7 @@
     "location": "modules/navigation/components/material-request-center-blade/material-request-center-blade",
     "key": "werk-je-aanvraag-af-mobiel",
     "language": "nl",
-    "value": "Werk je aanvraag af mobiel",
+    "value": "Werk je aanvraag af",
     "value_type": "TEXT"
   },
   {
