@@ -1,9 +1,9 @@
 import { Button } from '@meemoo/react-components';
-import { ButtonToolbar } from '@viaa/avo2-components';
+import { ButtonToolbar, Container } from '@viaa/avo2-components';
+import { AvoSearchOrderDirection } from '@viaa/avo2-types';
 import { isNil } from 'es-toolkit';
 import type { FunctionComponent } from 'react';
 import React, { useCallback, useEffect, useState } from 'react';
-
 import { AdminConfigManager, ToastType } from '~core/config';
 import { ContentPageLabelService } from '~modules/content-page-labels/content-page-label.service';
 import { ITEMS_PER_PAGE } from '~modules/item/items.consts';
@@ -11,7 +11,6 @@ import { ErrorView } from '~modules/shared/components/error/ErrorView';
 import { Link } from '~modules/shared/components/Link/Link';
 import { showToast } from '~modules/shared/helpers/show-toast';
 import type { DefaultComponentProps } from '~modules/shared/types/components';
-
 import { useGetAllLanguages } from '~modules/translations/hooks/use-get-all-languages';
 import type { LanguageInfo } from '~modules/translations/translations.types';
 import type {
@@ -34,6 +33,7 @@ import {
 } from '~shared/helpers/filters';
 import { formatDate } from '~shared/helpers/formatters/date';
 import { isMultiLanguageEnabled } from '~shared/helpers/is-multi-language-enabled';
+import { navigateFunc } from '~shared/helpers/navigate-fnc';
 import { buildLink, navigate } from '~shared/helpers/routing/link';
 import { tHtml, tText } from '~shared/helpers/translation-functions';
 import { truncateTableValue } from '~shared/helpers/truncate';
@@ -47,9 +47,6 @@ import type {
 	ContentPageLabelTableState,
 } from '../content-page-label.types';
 import './ContentPageLabelOverview.scss';
-
-import { AvoSearchOrderDirection } from '@viaa/avo2-types';
-import { navigateFunc } from '~shared/helpers/navigate-fnc';
 
 export const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> = ({
 	className,
@@ -345,7 +342,7 @@ export const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> 
 
 	const renderContentPageLabelTable = () => {
 		return (
-			<>
+			<Container mode="horizontal" size="full-width">
 				<FilterTable
 					columns={getContentPageLabelOverviewTableCols()}
 					data={contentPageLabels || []}
@@ -378,7 +375,7 @@ export const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> 
 						'admin/content-page-labels/views/content-page-label-overview___deze-actie-kan-niet-ongedaan-gemaakt-worden'
 					)}
 				/>
-			</>
+			</Container>
 		);
 	};
 
