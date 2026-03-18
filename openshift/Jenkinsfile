@@ -82,17 +82,16 @@ pipeline {
 								try {
 									echo "Publishing admin-core-ui package to registry"
 									configFileProvider([configFile(fileId: "npmrc", variable: 'configFile')]) {
-										sh "cat $configFile > .npmrc"
-									}
-									sh '''
+									    sh '''
 											#/bin/bash
-											cp .npmrc ./ui
+											cp "$configFile" ui/.npmrc
 											cd ui
 											npm config fix
 											npm publish
 											rm -f .npmrc
 											cd ..
 										'''
+									}
 								} catch (err) {
 									echo "Error message: ${err.getMessage()}"
 									if (err.getMessage().contains("Repository does not allow updating assets")) {
@@ -122,19 +121,16 @@ pipeline {
 								try {
 									echo "Publishing admin-core-api package to registry"
 									configFileProvider([configFile(fileId: "npmrc", variable: 'configFile')]) {
-										sh "cat $configFile > .npmrc"
-									}
-									sh '''
-									#/bin/bash
-									cp .npmrc ./api
-									cd api
-									npm config fix
-									npm publish
-									rm -f .npmrc
-									cd ..
-									echo "removing .npmrc for installto nexus not seems @viaa:registry=.."
-									rm -f .npmrc
-								'''
+                                        sh '''
+                                            #/bin/bash
+                                            cp "$configFile" api/.npmrc
+                                            cd api
+                                            npm config fix
+                                            npm publish
+                                            rm -f .npmrc
+                                            cd ..
+                                        '''
+                                    }
 								} catch (err) {
 									echo "Error message: ${err.getMessage()}"
 									if (err.getMessage().contains("Repository does not allow updating assets")) {
