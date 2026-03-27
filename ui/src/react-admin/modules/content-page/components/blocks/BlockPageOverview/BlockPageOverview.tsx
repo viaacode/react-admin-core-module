@@ -40,6 +40,7 @@ import type { ContentTabStyle, LabelObj } from './BlockPageOverview.types';
 import { ContentItemStyle } from './BlockPageOverview.types';
 import './BlockPageOverview.scss';
 import { AvoCoreContentPickerType } from '@viaa/avo2-types';
+import type { ContentPageLabel } from '~modules/content-page-labels/content-page-label.types.ts';
 
 export interface BlockPageOverviewProps extends DefaultProps {
 	tabs?: { label: string; id: number }[];
@@ -137,9 +138,8 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 		onSelectedTabsChanged(newSelectedTabs.filter((tab) => tab.id !== allLabelObj.id));
 	};
 
-	// biome-ignore lint/suspicious/noExplicitAny: todo
-	const renderLabel = (labelObj: any) => {
-		const labelLink = getLabelLink?.(labelObj.label);
+	const renderLabel = (labelObj: ContentPageLabel) => {
+		const labelLink = labelObj.link_to?.value || getLabelLink?.(labelObj.label);
 		if (labelLink) {
 			return `<a href="${labelLink}" class="c-content-page__label c-content-page__label--link">${labelObj.label}</a>`;
 		}
