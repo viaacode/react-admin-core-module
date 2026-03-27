@@ -25,6 +25,7 @@ import React, {
 	type ReactElement,
 	type ReactNode,
 	useCallback,
+	useEffect,
 	useMemo,
 	useState,
 } from 'react';
@@ -173,7 +174,12 @@ export const FilterTable: FunctionComponent<FilterTableProps> = ({
 		[columns]
 	);
 
+	/**
+	 * This way of getting the query params is quite hacky
+	 * We need to find a better way, but it's hard to do when avo and hetarchief use different routing frameworks (react-router vs nextjs router)
+	 */
 	// biome-ignore lint/suspicious/noExplicitAny: many possible options to list here
+	// biome-ignore lint/correctness/useExhaustiveDependencies: location is used to trigger re-evaluations, window.location is used to definitely get the latest query params
 	const getTableState = useCallback((): Record<string, any> => {
 		if (isServerSideRendering()) {
 			return {};
@@ -181,7 +187,7 @@ export const FilterTable: FunctionComponent<FilterTableProps> = ({
 		// biome-ignore lint/suspicious/noExplicitAny: many possible options to list here
 		const tableState: Record<string, any> = {};
 		for (const queryParamKey in queryParamsConfig) {
-			const queryParamValueRaw = new URLSearchParams(location?.search).get(queryParamKey);
+			const queryParamValueRaw = new URLSearchParams(window.location.search).get(queryParamKey);
 			const queryParamEncoderDecoder = queryParamsConfig[queryParamKey];
 			const queryParamValue = queryParamEncoderDecoder.decode(queryParamValueRaw || undefined);
 			if (!isNil(queryParamValue)) {
@@ -236,6 +242,16 @@ export const FilterTable: FunctionComponent<FilterTableProps> = ({
 		},
 		[setTableState, getTableState]
 	);
+
+	/**
+	 * Trigger table state changed one time when the page loads, to ensure table results are in sync with the url query params
+	 */
+
+	// biome-ignore lint/correctness/useExhaustiveDependencies: only ever trigger this one time at page load irrespective of the dependencies
+	useEffect(() => {
+		const newTableState = cleanupFilterTableState(getTableState());
+		onTableStateChanged(newTableState);
+	}, []);
 
 	const handleSortOrderChanged = (columnId: string) => {
 		// biome-ignore lint/suspicious/noExplicitAny: todo

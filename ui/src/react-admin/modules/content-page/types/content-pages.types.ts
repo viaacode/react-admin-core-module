@@ -38,12 +38,12 @@ export type ContentOverviewTableCols =
 	| 'createdAt'
 	| 'updatedAt'
 	| 'isPublic'
-	| 'translations'
 	| 'publishedAt'
 	| 'publishAt'
 	| 'depublishAt'
 	| 'labels'
 	| 'userGroupIds'
+	| 'translations'
 	| 'actions';
 
 export const NOT_TRANSLATION_PREFIX = 'NOT_';
