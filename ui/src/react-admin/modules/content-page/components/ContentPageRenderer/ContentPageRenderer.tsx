@@ -49,7 +49,6 @@ type ContentPageDetailProps = {
 	onBlockClicked?: BlockClickHandler;
 	renderFakeTitle?: boolean;
 	renderNoAccessError: () => ReactNode;
-	userGroupId?: string | null;
 };
 
 export const ContentPageRenderer: FunctionComponent<ContentPageDetailProps> = (props) => {
@@ -115,8 +114,11 @@ export const ContentPageRenderer: FunctionComponent<ContentPageDetailProps> = (p
 
 		// Only accept content blocks for which the user is authorized
 		let currentUserGroupIds: string[];
-		if (!isNil(props.userGroupId)) {
-			currentUserGroupIds = [props.userGroupId];
+		const userGroupId = new URLSearchParams(location?.search || '').get(
+			CONTENT_PAGE_USER_GROUP_ID_QUERY_PARAM
+		);
+		if (!isNil(userGroupId)) {
+			currentUserGroupIds = [userGroupId];
 		} else if (commonUser?.userGroup?.id) {
 			currentUserGroupIds = [String(commonUser?.userGroup?.id), SpecialUserGroups.loggedInUsers];
 		} else {

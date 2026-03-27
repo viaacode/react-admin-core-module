@@ -874,7 +874,7 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 											'react-admin/modules/content-page/views/content-page-edit___kopieer-content-pagina'
 										)}
 										type="secondary"
-										className="c-content-page-edit__copy-page-button u-spacer-s"
+										className="c-content-page-edit__copy-page-button"
 									/>
 								</CopyToClipboard>
 							</div>

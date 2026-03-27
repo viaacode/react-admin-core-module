@@ -8,10 +8,12 @@ export function useLocation() {
 	}, []);
 
 	const handlePopState = useCallback(() => {
-		if (location?.pathname !== window.location.pathname) {
+		const { pathname, search, hash } = window.location;
+
+		if (location?.pathname !== pathname || location?.search !== search || location?.hash !== hash) {
 			setLocation(window.location);
 		}
-	}, [location?.pathname]);
+	}, [location?.pathname, location?.search, location?.hash]);
 
 	useEffect(() => {
 		setLocationOnInit();

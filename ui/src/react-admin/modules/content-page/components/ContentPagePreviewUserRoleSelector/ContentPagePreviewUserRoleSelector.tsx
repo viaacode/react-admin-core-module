@@ -41,8 +41,9 @@ export const ContentPagePreviewUserRoleSelector: FC<
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
 	const getUserGroupId = useCallback(() => {
 		if (isServerSideRendering() || isHetArchief()) {
-			return;
+			return null;
 		}
+
 		return new URLSearchParams(location?.search).get(CONTENT_PAGE_USER_GROUP_ID_QUERY_PARAM);
 	}, [location]);
 	const setUserGroupId = useCallback(
@@ -77,10 +78,6 @@ export const ContentPagePreviewUserRoleSelector: FC<
 		}
 	}, [setUserGroupId]);
 
-	if (isHetArchief()) {
-		return null;
-	}
-
 	const { data: userGroups, isLoading } = useGetUserGroups({
 		withPermissions: false,
 	});
@@ -103,7 +100,7 @@ export const ContentPagePreviewUserRoleSelector: FC<
 		);
 	}, [userGroups, isLoading]);
 
-	const buttonLabel = useMemo(() => {
+	const getButtonLabel = () => {
 		const selection = (userGroupOptions || []).find((item) => item.value === getUserGroupId())
 			?.label as string;
 
@@ -111,48 +108,53 @@ export const ContentPagePreviewUserRoleSelector: FC<
 			'modules/content-page/components/content-page-preview-user-role-selector/content-page-preview-user-role-selector___preview-als-selected-user-group',
 			{ selectedUserGroup: selection }
 		);
-	}, [userGroupOptions, getUserGroupId]);
+	};
 
 	const handleOpenCloseMenu = (isOpen: boolean) => {
 		setIsMenuOpen(isOpen);
 		props.onToggleMenu?.(isOpen);
 	};
 
+	if (isHetArchief()) {
+		return null;
+	}
 	return (
-		<Dropdown
-			flyoutClassName="c-menu-content"
-			menuWidth="fit-content"
-			placement="bottom-end"
-			className={props.className}
-			isOpen={isMenuOpen}
-			onOpen={() => handleOpenCloseMenu(true)}
-			onClose={() => handleOpenCloseMenu(false)}
-			id="content-page-preview__user-role-selector__dropdown"
-		>
-			<DropdownButton>
-				{isAvo() ? (
-					<AvoButton
-						icon={IconName.eye}
-						type="borderless"
-						label={buttonLabel}
-						onClick={() => setIsMenuOpen(!isMenuOpen)}
+		<div className="c-content-page-preview-user-role-selector">
+			<Dropdown
+				flyoutClassName="c-menu-content"
+				menuWidth="fit-content"
+				placement="bottom-start"
+				className={props.className}
+				isOpen={isMenuOpen}
+				onOpen={() => handleOpenCloseMenu(true)}
+				onClose={() => handleOpenCloseMenu(false)}
+				id="content-page-preview__user-role-selector__dropdown"
+			>
+				<DropdownButton>
+					{isAvo() ? (
+						<AvoButton
+							icon={IconName.eye}
+							type="secondary"
+							label={getButtonLabel()}
+							onClick={() => setIsMenuOpen(!isMenuOpen)}
+						/>
+					) : (
+						<Button
+							iconStart={<Icon name={IconName.eye} />}
+							label={getButtonLabel()}
+							variants="text"
+							onClick={() => setIsMenuOpen(!isMenuOpen)}
+						/>
+					)}
+				</DropdownButton>
+				<DropdownContent>
+					<RadioButtonGroup
+						options={userGroupOptions}
+						value={getUserGroupId() || null}
+						onChange={setUserGroupId}
 					/>
-				) : (
-					<Button
-						iconStart={<Icon name={IconName.eye} />}
-						label={buttonLabel}
-						variants="text"
-						onClick={() => setIsMenuOpen(!isMenuOpen)}
-					/>
-				)}
-			</DropdownButton>
-			<DropdownContent>
-				<RadioButtonGroup
-					options={userGroupOptions}
-					value={getUserGroupId() || null}
-					onChange={setUserGroupId}
-				/>
-			</DropdownContent>
-		</Dropdown>
+				</DropdownContent>
+			</Dropdown>
+		</div>
 	);
 };
