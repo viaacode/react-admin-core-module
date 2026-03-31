@@ -53,6 +53,10 @@ export class TranslationsService implements OnApplicationBootstrap {
 		@Inject(CACHE_MANAGER) private cacheManager: Cache
 	) {}
 
+	public async onApplicationBootstrap() {
+		await this.refreshBackendTranslations();
+	}
+
 	public async getLanguages(): Promise<LanguageInfo[]> {
 		const response = await this.dataService.execute<GetAllLanguagesQuery>(GetAllLanguagesDocument);
 		return response.lookup_languages.map(
@@ -205,10 +209,6 @@ export class TranslationsService implements OnApplicationBootstrap {
 				value,
 			});
 		}
-	}
-
-	public async onApplicationBootstrap() {
-		await this.refreshBackendTranslations();
 	}
 
 	private convertTranslationEntriesToKeyValue(

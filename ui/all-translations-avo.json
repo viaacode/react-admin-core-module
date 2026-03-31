@@ -16880,7 +16880,7 @@
     "location": "collection/components/collection-or-bundle-edit-marcom",
     "key": "alternatieve-tekst-voor-de-afbeelding",
     "language": "nl",
-    "value": "Alternatieve tekst voor de afbeelding",
+    "value": "Alternatieve tekst voor de afbeelding (slechtzienden, niet laden, ...)",
     "value_type": "TEXT"
   },
   {
@@ -20786,7 +20786,7 @@
     "location": "user-item-request-form/views/user-item-request-form",
     "key": "vul-onderstaand-formulier-in",
     "language": "nl",
-    "value": "<p></p><p>Vul onderstaand formulier in. Wij gaan na of we de aangevraagde fragmenten kunnen publiceren op ons platform. Bekijk voor elke aanvraag aandachtig de <strong>voorwaarden tot publicatie </strong>verderop op deze pagina.</p><p><strong>Tip: </strong>ben je zeker dat het door jou gezochte fragment niet op ons platform staat? Misschien heeft het ondertussen een andere titel? Of is er een gelijkaardig fragment dat je in de plaats kunt gebruiken?</p>",
+    "value": "<p></p><p>Gelieve onderstaand formulier zo volledig mogelijk in te vullen. Bekijk vooraf aandachtig de <strong>voorwaarden tot publicatie </strong>verderop op deze pagina. Opgelet! Momenteel ervaren we een lagere personeelsbezetting. Enkel wanneer hetzelfde fragment door meerdere leerkrachten wordt aangevraagd, onderzoeken we of een publicatie mogelijk is. </p><p><strong>Tip: </strong>Ben je zeker dat het door jou gezochte fragment niet op ons platform staat? Misschien heeft het ondertussen een andere titel? Of is er een gelijkaardig fragment dat je in de plaats kunt gebruiken?</p>",
     "value_type": "HTML"
   },
   {
@@ -27227,96 +27227,6 @@
   {
     "app": "AVO",
     "component": "FRONTEND",
-    "location": "shared/components/acmidm-nudge-modal/acmidm-nudge-modal",
-    "key": "snel-veilig-en-makkelijk-inloggen",
-    "language": "nl",
-    "value": "Snel, veilig en makkelijk inloggen?",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "shared/components/acmidm-nudge-modal/acmidm-nudge-modal",
-    "key": "snel-en-makkelijk-inloggen-met",
-    "language": "nl",
-    "value": "Snel en makkelijk inloggen met ",
-    "value_type": "HTML"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "shared/components/acmidm-nudge-modal/acmidm-nudge-modal",
-    "key": "itsme-e-id-of-een-digitale-sleutel",
-    "language": "nl",
-    "value": "itsme, eID of een digitale sleutel",
-    "value_type": "HTML"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "shared/components/acmidm-nudge-modal/acmidm-nudge-modal",
-    "key": "koppel-dan-snel-je-leerling-id-aan-je-bestaande-account",
-    "language": "nl",
-    "value": "Heb je al een LeerID via je school, koppel het dan aan je bestaande account.",
-    "value_type": "HTML"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "shared/components/acmidm-nudge-modal/acmidm-nudge-modal",
-    "key": "koppel-dan-direct-je-burgerprofiel-aan-je-bestaande-account",
-    "language": "nl",
-    "value": "Koppel dan direct je burgerprofiel aan je bestaande account.",
-    "value_type": "HTML"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "shared/components/acmidm-nudge-modal/acmidm-nudge-modal",
-    "key": "leerling-id",
-    "language": "nl",
-    "value": "LeerID",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "shared/components/acmidm-nudge-modal/acmidm-nudge-modal",
-    "key": "itsme",
-    "language": "nl",
-    "value": "itsme",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "shared/components/acmidm-nudge-modal/acmidm-nudge-modal",
-    "key": "e-id-of-een-digitale-sleutel",
-    "language": "nl",
-    "value": "eID of een digitale sleutel",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "shared/components/acmidm-nudge-modal/acmidm-nudge-modal",
-    "key": "nu-even-niet",
-    "language": "nl",
-    "value": "Nu even niet",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "shared/components/acmidm-nudge-modal/acmidm-nudge-modal",
-    "key": "niet-meer-weergeven",
-    "language": "nl",
-    "value": "Niet meer weergeven",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
     "location": "shared/components/before-unload-prompt/before-unload-prompt",
     "key": "ben-je-zeker-dat-je-de-pagina-wilt-verlaten",
     "language": "nl",
@@ -27943,6 +27853,96 @@
     "language": "nl",
     "value": "Opgelet! Deze actie kan niet ongedaan gemaakt worden.",
     "value_type": "HTML"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "shared/components/acmidm-nudge-modal/acmidm-nudge-modal",
+    "key": "snel-veilig-en-makkelijk-inloggen",
+    "language": "nl",
+    "value": "Snel, veilig en makkelijk inloggen?",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "shared/components/acmidm-nudge-modal/acmidm-nudge-modal",
+    "key": "snel-en-makkelijk-inloggen-met",
+    "language": "nl",
+    "value": "Snel en makkelijk inloggen met ",
+    "value_type": "HTML"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "shared/components/acmidm-nudge-modal/acmidm-nudge-modal",
+    "key": "itsme-e-id-of-een-digitale-sleutel",
+    "language": "nl",
+    "value": "itsme, eID of een digitale sleutel",
+    "value_type": "HTML"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "shared/components/acmidm-nudge-modal/acmidm-nudge-modal",
+    "key": "koppel-dan-snel-je-leerling-id-aan-je-bestaande-account",
+    "language": "nl",
+    "value": "Heb je al een LeerID via je school, koppel het dan aan je bestaande account.",
+    "value_type": "HTML"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "shared/components/acmidm-nudge-modal/acmidm-nudge-modal",
+    "key": "koppel-dan-direct-je-burgerprofiel-aan-je-bestaande-account",
+    "language": "nl",
+    "value": "Koppel dan direct je burgerprofiel aan je bestaande account.",
+    "value_type": "HTML"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "shared/components/acmidm-nudge-modal/acmidm-nudge-modal",
+    "key": "leerling-id",
+    "language": "nl",
+    "value": "LeerID",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "shared/components/acmidm-nudge-modal/acmidm-nudge-modal",
+    "key": "itsme",
+    "language": "nl",
+    "value": "itsme",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "shared/components/acmidm-nudge-modal/acmidm-nudge-modal",
+    "key": "e-id-of-een-digitale-sleutel",
+    "language": "nl",
+    "value": "eID of een digitale sleutel",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "shared/components/acmidm-nudge-modal/acmidm-nudge-modal",
+    "key": "nu-even-niet",
+    "language": "nl",
+    "value": "Nu even niet",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "shared/components/acmidm-nudge-modal/acmidm-nudge-modal",
+    "key": "niet-meer-weergeven",
+    "language": "nl",
+    "value": "Niet meer weergeven",
+    "value_type": "TEXT"
   },
   {
     "app": "AVO",
