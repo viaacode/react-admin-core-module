@@ -33,7 +33,7 @@ import {
 } from '../../shared/generated/graphql-db-types-hetarchief';
 import { CustomError } from '../../shared/helpers/error';
 import { EXTENSION_TO_MIME_TYPE } from '../assets.consts';
-import type { AssetToken } from '../assets.types';
+import type { AssetToken, UploadFile, UploadFileByBuffer, UploadFileByPath } from '../assets.types';
 
 export const UUID_LENGTH = 35;
 
@@ -199,8 +199,7 @@ export class AssetsService {
 
 	public async uploadAndTrack(
 		assetFiletype: AvoFileUploadAssetType,
-		// biome-ignore lint/suspicious/noExplicitAny: any file
-		file: any,
+		file: UploadFile,
 		ownerId: string,
 		preferredKey?: string
 	): Promise<string> {
@@ -216,8 +215,7 @@ export class AssetsService {
 
 	private async upload(
 		assetFiletype: AvoFileUploadAssetType,
-		// biome-ignore lint/suspicious/noExplicitAny: any file
-		file: any,
+		file: UploadFile,
 		preferredKey?: string
 	): Promise<string> {
 		const parsedFilename = path.parse(file.originalname);
@@ -228,14 +226,13 @@ export class AssetsService {
 		return this.uploadToObjectStore(key, file);
 	}
 
-	// biome-ignore lint/suspicious/noExplicitAny: jany file
-	public async uploadToObjectStore(key: string, file: any): Promise<string> {
+	public async uploadToObjectStore(key: string, file: UploadFile): Promise<string> {
 		try {
 			let fileBody: Buffer;
-			if (file.buffer) {
-				fileBody = file.buffer;
+			if ((file as UploadFileByBuffer).buffer) {
+				fileBody = (file as UploadFileByBuffer).buffer;
 			} else {
-				fileBody = await fse.readFile(file.path);
+				fileBody = await fse.readFile((file as UploadFileByPath).path);
 			}
 
 			const region = 'eu-west-1';
@@ -288,8 +285,8 @@ export class AssetsService {
 				},
 			});
 
-			if (!file.buffer) {
-				fse.unlink(file.path)?.catch((err) =>
+			if (!(file as UploadFileByBuffer).buffer) {
+				fse.unlink((file as UploadFileByPath).path)?.catch((err) =>
 					this.logger.error({
 						message: 'Failed to remove file from tmp folder after upload to s3',
 						innerException: err,
