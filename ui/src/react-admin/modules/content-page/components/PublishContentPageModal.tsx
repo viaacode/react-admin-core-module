@@ -203,7 +203,7 @@ const PublishContentPageModal: FC<PublishContentPageModalProps> = ({
 								)
 							}
 						/>
-						<Tooltip position="right">
+						<Tooltip position="right" id="publish-content-page-modal__published-at-display-tooltip">
 							<TooltipTrigger>
 								<Icon className="a-info-icon" name={'info' as IconName} size="small" />
 							</TooltipTrigger>
