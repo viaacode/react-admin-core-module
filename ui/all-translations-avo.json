@@ -9848,6 +9848,15 @@
   {
     "app": "AVO",
     "component": "FRONTEND",
+    "location": "assignment/assignment",
+    "key": "de-opdracht-deadline-is-reeds-verlopen",
+    "language": "nl",
+    "value": "De opdracht deadline is reeds verlopen",
+    "value_type": "HTML"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
     "location": "assignment/views/assignment-detail",
     "key": "de-opdracht-is-nog-niet-beschikbaar",
     "language": "nl",
@@ -14034,6 +14043,15 @@
     "app": "AVO",
     "component": "FRONTEND",
     "location": "assignment/views/assignment-detail",
+    "key": "deel-deze-opdracht-met-collegas",
+    "language": "nl",
+    "value": "Deel deze opdracht met collega's",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "assignment/views/assignment-detail",
     "key": "je-hebt-geen-toegang",
     "language": "nl",
     "value": "Je hebt geen toegang",
@@ -14073,15 +14091,6 @@
     "key": "weigeren",
     "language": "nl",
     "value": "Weigeren",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "assignment/views/assignment-detail",
-    "key": "deel-deze-opdracht-met-collegas",
-    "language": "nl",
-    "value": "Deel deze opdracht met collega's",
     "value_type": "TEXT"
   },
   {
@@ -15753,24 +15762,6 @@
     "app": "AVO",
     "component": "FRONTEND",
     "location": "bundle/views/bundle-detail",
-    "key": "openbare-bundel",
-    "language": "nl",
-    "value": "Bundel",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "bundle/views/bundle-detail",
-    "key": "prive-bundel",
-    "language": "nl",
-    "value": "Privé-bundel",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "bundle/views/bundle-detail",
     "key": "collecties-in-deze-bundel",
     "language": "nl",
     "value": "Collecties in deze bundel",
@@ -15783,6 +15774,24 @@
     "key": "opdrachten-in-deze-bundel",
     "language": "nl",
     "value": "Opdrachten in deze bundel",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "bundle/views/bundle-detail",
+    "key": "openbare-bundel",
+    "language": "nl",
+    "value": "Bundel",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "bundle/views/bundle-detail",
+    "key": "prive-bundel",
+    "language": "nl",
+    "value": "Privé-bundel",
     "value_type": "TEXT"
   },
   {
@@ -19029,42 +19038,6 @@
     "app": "AVO",
     "component": "FRONTEND",
     "location": "item/views/item-detail",
-    "key": "uitgezonden-op",
-    "language": "nl",
-    "value": "Uitgezonden op",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "item/views/item-detail",
-    "key": "reeks",
-    "language": "nl",
-    "value": "Reeks:",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "item/views/item",
-    "key": "metadata",
-    "language": "nl",
-    "value": "Publicatiedetails",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "item/views/item",
-    "key": "bekijk-ook",
-    "language": "nl",
-    "value": "Bekijk ook",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "item/views/item-detail",
     "key": "voeg-toe-aan-bestaande-opdracht",
     "language": "nl",
     "value": "Voeg toe aan bestaande opdracht",
@@ -19122,6 +19095,42 @@
     "key": "ben-je-zeker-dat-je-het-fragment-wil-toevoegen-aan-deze-opdracht",
     "language": "nl",
     "value": "Ben je zeker dat je het fragment wil toevoegen aan deze opdracht?",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "item/views/item-detail",
+    "key": "uitgezonden-op",
+    "language": "nl",
+    "value": "Uitgezonden op",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "item/views/item-detail",
+    "key": "reeks",
+    "language": "nl",
+    "value": "Reeks:",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "item/views/item",
+    "key": "metadata",
+    "language": "nl",
+    "value": "Publicatiedetails",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "item/views/item",
+    "key": "bekijk-ook",
+    "language": "nl",
+    "value": "Bekijk ook",
     "value_type": "TEXT"
   },
   {
@@ -30174,15 +30183,6 @@
     "key": "deze-afbeelding-valt-onder-copyright-van-organisation-name",
     "language": "nl",
     "value": "De bron van deze videostill is <a href=\"{{organisationWebsite}}\" target=\"_blank\">{{organisationName}}</a>.",
-    "value_type": "HTML"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "assignment/assignment",
-    "key": "de-opdracht-deadline-is-reeds-verlopen",
-    "language": "nl",
-    "value": "De opdracht deadline is reeds verlopen",
     "value_type": "HTML"
   },
   {
