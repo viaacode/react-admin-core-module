@@ -5999,7 +5999,7 @@
     "location": "admin/shared/components/content-picker/content-picker",
     "key": "selecteer-een-item",
     "language": "nl",
-    "value": "Selecteer een content-item",
+    "value": "Selecteer een optie",
     "value_type": "TEXT"
   },
   {
@@ -9849,6 +9849,15 @@
     "app": "AVO",
     "component": "FRONTEND",
     "location": "assignment/views/assignment-detail",
+    "key": "de-opdracht-is-nog-niet-beschikbaar",
+    "language": "nl",
+    "value": "De opdracht is nog niet beschikbaar.",
+    "value_type": "HTML"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "assignment/views/assignment-detail",
     "key": "de-opdracht-werd-verwijderd",
     "language": "nl",
     "value": "De opdracht werd verwijderd.",
@@ -9857,10 +9866,10 @@
   {
     "app": "AVO",
     "component": "FRONTEND",
-    "location": "assignment/views/assignment-detail",
-    "key": "de-opdracht-is-nog-niet-beschikbaar",
+    "location": "assignment/views/assignment-responses",
+    "key": "je-hebt-geen-rechten-om-deze-opdracht-te-bekijken",
     "language": "nl",
-    "value": "De opdracht is nog niet beschikbaar.",
+    "value": "Je hebt geen rechten om deze opdracht te bekijken.",
     "value_type": "HTML"
   },
   {
@@ -14919,24 +14928,6 @@
     "key": "er-ging-iets-mis-tijdens-het-controleren-van-de-rechten-van-je-account",
     "language": "nl",
     "value": "Er ging iets mis tijdens het controleren van de rechten toegekend aan je account. Contacteer ons via de Feedback-knop mocht dit probleem zich blijven voordoen.",
-    "value_type": "HTML"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "assignment/views/assignment-responses",
-    "key": "je-hebt-geen-rechten-om-deze-opdracht-te-bekijken",
-    "language": "nl",
-    "value": "Je hebt geen rechten om deze opdracht te bekijken.",
-    "value_type": "HTML"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "assignment/views/assignment-responses",
-    "key": "het-ophalen-van-de-opdracht-is-mislukt",
-    "language": "nl",
-    "value": "Het ophalen van de opdracht is mislukt.",
     "value_type": "HTML"
   },
   {
@@ -29597,7 +29588,7 @@
     "location": "admin/shared/components/content-picker/content-picker",
     "key": "selecteer-een-item",
     "language": "nl",
-    "value": "Selecteer een content-item",
+    "value": "Selecteer een optie",
     "value_type": "TEXT"
   },
   {
@@ -30183,6 +30174,15 @@
     "key": "deze-afbeelding-valt-onder-copyright-van-organisation-name",
     "language": "nl",
     "value": "De bron van deze videostill is <a href=\"{{organisationWebsite}}\" target=\"_blank\">{{organisationName}}</a>.",
+    "value_type": "HTML"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "assignment/assignment",
+    "key": "de-opdracht-deadline-is-reeds-verlopen",
+    "language": "nl",
+    "value": "De opdracht deadline is reeds verlopen",
     "value_type": "HTML"
   },
   {
