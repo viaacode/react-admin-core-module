@@ -28256,7 +28256,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
     "key": "info-aanvraag",
     "language": "en",
-    "value": "Info aanvraag",
+    "value": "Request info",
     "value_type": "TEXT"
   },
   {
@@ -28274,7 +28274,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
     "key": "conversatie",
     "language": "en",
-    "value": "Conversatie",
+    "value": "Conversation",
     "value_type": "TEXT"
   },
   {
@@ -28382,7 +28382,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
     "key": "download-beschikbaar-van-tot",
     "language": "en",
-    "value": "Download beschikbaar van {{availableAt}} tot {{expiresAt}}",
+    "value": "Download available from {{availableAt}} until {{expiresAt}}",
     "value_type": "TEXT"
   },
   {
@@ -28400,7 +28400,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
     "key": "voorwaarden-verstuurd-op",
     "language": "en",
-    "value": "Voorwaarden verstuurd op",
+    "value": "Conditions sent on",
     "value_type": "TEXT"
   },
   {
@@ -28418,7 +28418,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
     "key": "voorwaarden-aanvaard-op",
     "language": "en",
-    "value": "Voorwaarden aanvaard op",
+    "value": "Conditions accepted on",
     "value_type": "TEXT"
   },
   {
@@ -28436,7 +28436,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-content-info",
     "key": "geschiedenis",
     "language": "en",
-    "value": "Geschiedenis",
+    "value": "History",
     "value_type": "TEXT"
   },
   {
@@ -28544,7 +28544,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-content-info",
     "key": "type-aanvraag",
     "language": "en",
-    "value": "Type aanvraag",
+    "value": "Type of request",
     "value_type": "TEXT"
   },
   {
@@ -28598,7 +28598,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-conversation",
     "key": "er-ging-iets-mis",
     "language": "en",
-    "value": "Er ging iets mis",
+    "value": "Something went wrong",
     "value_type": "TEXT"
   },
   {
@@ -28616,7 +28616,61 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-conversation",
     "key": "het-bericht-kon-niet-worden-verzonden",
     "language": "en",
-    "value": "Het bericht kon niet worden verzonden",
+    "value": "The message was not sent",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-detail-blade/material-request-conversation",
+    "key": "je-hebt-een-nieuwe-aanvraag-tot-hergebruik-verstuurd-naar-name-start-hieronder-je-conversatie",
+    "language": "nl",
+    "value": "Je hebt een nieuwe aanvraag tot hergebruik verstuurd naar {{name}}. Start hieronder je conversatie.",
+    "value_type": "HTML"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-detail-blade/material-request-conversation",
+    "key": "je-hebt-een-nieuwe-aanvraag-tot-hergebruik-verstuurd-naar-name-start-hieronder-je-conversatie",
+    "language": "en",
+    "value": "You have sent a new request for audiovisual material to {{name}}. Start your conversation below.",
+    "value_type": "HTML"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-detail-blade/material-request-conversation",
+    "key": "je-hebt-een-nieuwe-aanvraag-tot-hergebruik-ontvangen-van-name-start-hieronder-je-conversatie",
+    "language": "nl",
+    "value": "Je hebt een nieuwe aanvraag tot hergebruik ontvangen van {{name}}. Start hieronder je conversatie.",
+    "value_type": "HTML"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-detail-blade/material-request-conversation",
+    "key": "je-hebt-een-nieuwe-aanvraag-tot-hergebruik-ontvangen-van-name-start-hieronder-je-conversatie",
+    "language": "en",
+    "value": "You have received a new request for audiovisual material from {{name}}. Start your conversation below.",
+    "value_type": "HTML"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
+    "key": "typ-je-bericht",
+    "language": "nl",
+    "value": "Typ je bericht",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
+    "key": "typ-je-bericht",
+    "language": "en",
+    "value": "Type your message",
     "value_type": "TEXT"
   },
   {
@@ -28626,7 +28680,7 @@
     "key": "name-annuleerde-de-aanvraag",
     "language": "nl",
     "value": "{{name}} annuleerde de aanvraag.",
-    "value_type": "TEXT"
+    "value_type": "HTML"
   },
   {
     "app": "HET_ARCHIEF",
@@ -28634,116 +28688,8 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-conversation",
     "key": "name-annuleerde-de-aanvraag",
     "language": "en",
-    "value": "{{name}} annuleerde de aanvraag.",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-detail-blade/material-request-conversation",
-    "key": "name-keurde-de-aanvraag-af-met-de-volgende-boodschap",
-    "language": "nl",
-    "value": "{{name}} keurde de aanvraag af met de volgende boodschap:",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-detail-blade/material-request-conversation",
-    "key": "name-keurde-de-aanvraag-af-met-de-volgende-boodschap",
-    "language": "en",
-    "value": "{{name}} keurde de aanvraag af met de volgende boodschap:",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-detail-blade/material-request-conversation",
-    "key": "name-keurde-de-aanvraag-af",
-    "language": "nl",
-    "value": "{{name}} keurde de aanvraag af.",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-detail-blade/material-request-conversation",
-    "key": "name-keurde-de-aanvraag-af",
-    "language": "en",
-    "value": "{{name}} keurde de aanvraag af.",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-detail-blade/material-request-conversation",
-    "key": "name-keurde-de-aanvraag-goed-met-de-volgende-boodschap",
-    "language": "nl",
-    "value": "{{name}} keurde de aanvraag goed met de volgende boodschap:",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-detail-blade/material-request-conversation",
-    "key": "name-keurde-de-aanvraag-goed-met-de-volgende-boodschap",
-    "language": "en",
-    "value": "{{name}} keurde de aanvraag goed met de volgende boodschap:",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-detail-blade/material-request-conversation",
-    "key": "name-keurde-de-aanvraag-goed",
-    "language": "nl",
-    "value": "{{name}} keurde de aanvraag goed.",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-detail-blade/material-request-conversation",
-    "key": "name-keurde-de-aanvraag-goed",
-    "language": "en",
-    "value": "{{name}} keurde de aanvraag goed.",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-detail-blade/material-request-conversation",
-    "key": "download-is-verlopen",
-    "language": "nl",
-    "value": "Download is verlopen",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-detail-blade/material-request-conversation",
-    "key": "download-is-verlopen",
-    "language": "en",
-    "value": "Download is verlopen",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-detail-blade/material-request-conversation",
-    "key": "de-download-is-niet-langer-beschikbaar-dus-deze-aanvraag-wordt-afgesloten",
-    "language": "nl",
-    "value": "De download is niet langer beschikbaar, dus deze aanvraag wordt afgesloten.",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-detail-blade/material-request-conversation",
-    "key": "de-download-is-niet-langer-beschikbaar-dus-deze-aanvraag-wordt-afgesloten",
-    "language": "en",
-    "value": "De download is niet langer beschikbaar, dus deze aanvraag wordt afgesloten.",
-    "value_type": "TEXT"
+    "value": "{{name}} cancelled the request.",
+    "value_type": "HTML"
   },
   {
     "app": "HET_ARCHIEF",
@@ -28752,7 +28698,7 @@
     "key": "het-aangevraagde-materiaal-is-beschikbaar-voor-download",
     "language": "nl",
     "value": "Het aangevraagde materiaal is beschikbaar voor download",
-    "value_type": "TEXT"
+    "value_type": "HTML"
   },
   {
     "app": "HET_ARCHIEF",
@@ -28760,8 +28706,8 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-conversation",
     "key": "het-aangevraagde-materiaal-is-beschikbaar-voor-download",
     "language": "en",
-    "value": "Het aangevraagde materiaal is beschikbaar voor download",
-    "value_type": "TEXT"
+    "value": "The requested material is now available to download",
+    "value_type": "HTML"
   },
   {
     "app": "HET_ARCHIEF",
@@ -28787,8 +28733,8 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-conversation",
     "key": "de-download-is-beschikbaar-tot-en-met",
     "language": "nl",
-    "value": "De download is beschikbaar tot en met",
-    "value_type": "TEXT"
+    "value": "De download is beschikbaar tot en met {{date}}",
+    "value_type": "HTML"
   },
   {
     "app": "HET_ARCHIEF",
@@ -28796,62 +28742,116 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-conversation",
     "key": "de-download-is-beschikbaar-tot-en-met",
     "language": "en",
-    "value": "De download is beschikbaar tot en met",
-    "value_type": "TEXT"
+    "value": "The download is available until {{date}}",
+    "value_type": "HTML"
   },
   {
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
     "location": "modules/account/components/material-request-detail-blade/material-request-conversation",
-    "key": "je-hebt-een-nieuwe-aanvraag-tot-hergebruik-verstuurd-naar-name-start-hieronder-je-conversatie",
+    "key": "download-is-verlopen",
     "language": "nl",
-    "value": "Je hebt een nieuwe aanvraag tot hergebruik verstuurd naar {{name}}. Start hieronder je conversatie.",
+    "value": "Download has expired",
     "value_type": "HTML"
   },
   {
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
     "location": "modules/account/components/material-request-detail-blade/material-request-conversation",
-    "key": "je-hebt-een-nieuwe-aanvraag-tot-hergebruik-verstuurd-naar-name-start-hieronder-je-conversatie",
+    "key": "download-is-verlopen",
     "language": "en",
-    "value": "Je hebt een nieuwe aanvraag tot hergebruik verstuurd naar {{name}}. Start hieronder je conversatie.",
+    "value": "Download has expired",
     "value_type": "HTML"
   },
   {
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
     "location": "modules/account/components/material-request-detail-blade/material-request-conversation",
-    "key": "je-hebt-een-nieuwe-aanvraag-tot-hergebruik-ontvangen-van-name-start-hieronder-je-conversatie",
+    "key": "de-download-is-niet-langer-beschikbaar-dus-deze-aanvraag-wordt-afgesloten",
     "language": "nl",
-    "value": "Je hebt een nieuwe aanvraag tot hergebruik ontvangen van {{name}}. Start hieronder je conversatie.",
+    "value": "De download is niet langer beschikbaar, dus deze aanvraag wordt afgesloten.",
     "value_type": "HTML"
   },
   {
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
     "location": "modules/account/components/material-request-detail-blade/material-request-conversation",
-    "key": "je-hebt-een-nieuwe-aanvraag-tot-hergebruik-ontvangen-van-name-start-hieronder-je-conversatie",
+    "key": "de-download-is-niet-langer-beschikbaar-dus-deze-aanvraag-wordt-afgesloten",
     "language": "en",
-    "value": "Je hebt een nieuwe aanvraag tot hergebruik ontvangen van {{name}}. Start hieronder je conversatie.",
+    "value": "The download is no longer available, so this request is closed.",
     "value_type": "HTML"
   },
   {
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
-    "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
-    "key": "typ-je-bericht",
+    "location": "modules/account/components/material-request-detail-blade/material-request-conversation",
+    "key": "name-keurde-de-aanvraag-goed-met-de-volgende-boodschap",
     "language": "nl",
-    "value": "Typ je bericht",
-    "value_type": "TEXT"
+    "value": "{{name}} keurde de aanvraag goed met de volgende boodschap:",
+    "value_type": "HTML"
   },
   {
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
-    "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
-    "key": "typ-je-bericht",
+    "location": "modules/account/components/material-request-detail-blade/material-request-conversation",
+    "key": "name-keurde-de-aanvraag-goed-met-de-volgende-boodschap",
     "language": "en",
-    "value": "Typ je bericht",
-    "value_type": "TEXT"
+    "value": "{{name}} approved the request with the following message:",
+    "value_type": "HTML"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-detail-blade/material-request-conversation",
+    "key": "name-keurde-de-aanvraag-af-met-de-volgende-boodschap",
+    "language": "nl",
+    "value": "{{name}} keurde de aanvraag af met de volgende boodschap:",
+    "value_type": "HTML"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-detail-blade/material-request-conversation",
+    "key": "name-keurde-de-aanvraag-af-met-de-volgende-boodschap",
+    "language": "en",
+    "value": "{{name}} denied the request with the following motivation:",
+    "value_type": "HTML"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-detail-blade/material-request-conversation",
+    "key": "name-keurde-de-aanvraag-goed",
+    "language": "nl",
+    "value": "{{name}} keurde de aanvraag goed.",
+    "value_type": "HTML"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-detail-blade/material-request-conversation",
+    "key": "name-keurde-de-aanvraag-goed",
+    "language": "en",
+    "value": "{{name}} approved the request.",
+    "value_type": "HTML"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-detail-blade/material-request-conversation",
+    "key": "name-keurde-de-aanvraag-af",
+    "language": "nl",
+    "value": "{{name}} keurde de aanvraag af.",
+    "value_type": "HTML"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-detail-blade/material-request-conversation",
+    "key": "name-keurde-de-aanvraag-af",
+    "language": "en",
+    "value": "{{name}} denied the request.",
+    "value_type": "HTML"
   },
   {
     "app": "HET_ARCHIEF",
@@ -28895,7 +28895,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
     "key": "download-voorbereiding-gefaald",
     "language": "nl",
-    "value": "Download voorbereiding gefaald. Neem contact op via support@meemoo.be.",
+    "value": "Voorbereiding download gefaald. Neem contact op via support@meemoo.be.",
     "value_type": "TEXT"
   },
   {
@@ -28904,7 +28904,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
     "key": "download-voorbereiding-gefaald",
     "language": "en",
-    "value": "Download preparation failed. Contact us on support@meemoo.be.",
+    "value": "Download preparation failed. Contact us at support@meemoo.be.",
     "value_type": "TEXT"
   },
   {
@@ -28913,7 +28913,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
     "key": "download-verlopen-op-mobiel",
     "language": "nl",
-    "value": "Download verlopen op mobiel",
+    "value": "Download verlopen",
     "value_type": "TEXT"
   },
   {
@@ -28922,7 +28922,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
     "key": "download-verlopen-op-mobiel",
     "language": "en",
-    "value": "Download verlopen op mobiel",
+    "value": "Download expired",
     "value_type": "TEXT"
   },
   {
@@ -29030,7 +29030,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
     "key": "voorwaarden-evalueren-mobiel",
     "language": "en",
-    "value": "Voorwaarden evalueren mobiel",
+    "value": "Evaluate conditions",
     "value_type": "TEXT"
   },
   {
@@ -29048,7 +29048,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
     "key": "voorwaarden-evalueren",
     "language": "en",
-    "value": "Voorwaarden evalueren",
+    "value": "Evaluate conditions",
     "value_type": "TEXT"
   },
   {
@@ -29057,7 +29057,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
     "key": "download-beschikbaar-maken-mobiel",
     "language": "nl",
-    "value": "Download beschikbaar maken mobiel",
+    "value": "Download beschikbaar maken",
     "value_type": "TEXT"
   },
   {
@@ -29066,7 +29066,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
     "key": "download-beschikbaar-maken-mobiel",
     "language": "en",
-    "value": "Download beschikbaar maken mobiel",
+    "value": "Make download available",
     "value_type": "TEXT"
   },
   {
@@ -29084,7 +29084,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
     "key": "download-beschikbaar-maken",
     "language": "en",
-    "value": "Download beschikbaar maken",
+    "value": "Make download available",
     "value_type": "TEXT"
   },
   {
@@ -29093,7 +29093,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
     "key": "aanvraag-beoordelen-mobiel",
     "language": "nl",
-    "value": "Aanvraag beoordelen mobiel",
+    "value": "Aanvraag beoordelen",
     "value_type": "TEXT"
   },
   {
@@ -29102,7 +29102,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
     "key": "aanvraag-beoordelen-mobiel",
     "language": "en",
-    "value": "Aanvraag beoordelen mobiel",
+    "value": "Review request",
     "value_type": "TEXT"
   },
   {
@@ -29120,7 +29120,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
     "key": "aanvraag-beoordelen",
     "language": "en",
-    "value": "Aanvraag beoordelen",
+    "value": "Review request",
     "value_type": "TEXT"
   },
   {
@@ -29156,7 +29156,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
     "key": "aanvraag-aan",
     "language": "en",
-    "value": "Aanvraag aan",
+    "value": "Request for",
     "value_type": "TEXT"
   },
   {
@@ -29174,7 +29174,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
     "key": "aanvraag-van",
     "language": "en",
-    "value": "Aanvraag van",
+    "value": "Request from",
     "value_type": "TEXT"
   },
   {
@@ -29318,7 +29318,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
     "key": "keer-terug",
     "language": "en",
-    "value": "Keer terug",
+    "value": "Go back",
     "value_type": "TEXT"
   },
   {
@@ -29336,7 +29336,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-documents",
     "key": "naam-document",
     "language": "en",
-    "value": "Naam document",
+    "value": "Name document",
     "value_type": "TEXT"
   },
   {
@@ -29354,7 +29354,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-documents",
     "key": "opent-in-nieuw-venster",
     "language": "en",
-    "value": "Opent in nieuw venster",
+    "value": "Opens in new tab",
     "value_type": "TEXT"
   },
   {
@@ -29372,7 +29372,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-documents",
     "key": "datum",
     "language": "en",
-    "value": "Datum",
+    "value": "Date",
     "value_type": "TEXT"
   },
   {
@@ -29390,7 +29390,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-documents",
     "key": "download-alles",
     "language": "en",
-    "value": "Download alles",
+    "value": "Download all",
     "value_type": "TEXT"
   },
   {
@@ -29408,7 +29408,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-documents",
     "key": "fout-bij-laden",
     "language": "en",
-    "value": "Fout bij laden",
+    "value": "Error during loading",
     "value_type": "TEXT"
   },
   {
@@ -29426,7 +29426,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-documents",
     "key": "geen-documenten",
     "language": "en",
-    "value": "Geen documenten",
+    "value": "No documents",
     "value_type": "TEXT"
   },
   {
@@ -29570,7 +29570,7 @@
     "location": "modules/account/components/material-request-evaluator-options/material-request-evaluator-options",
     "key": "kies-voor-de-gewenste-optie-om-de-aanvraag-te-beoordelen",
     "language": "en",
-    "value": "Kies voor de gewenste optie om de aanvraag te beoordelen.",
+    "value": "Choose your preferred option for reviewing this request",
     "value_type": "TEXT"
   },
   {
@@ -29867,7 +29867,7 @@
     "location": "modules/account/components/material-request-status-update-blade/material-request-status-update-blade",
     "key": "motivatie-aanvraag-goedkeuren",
     "language": "nl",
-    "value": "Motivatie aanvraag goedkeuren",
+    "value": "Motivatie voor goedkeuren",
     "value_type": "TEXT"
   },
   {
@@ -29876,7 +29876,7 @@
     "location": "modules/account/components/material-request-status-update-blade/material-request-status-update-blade",
     "key": "motivatie-aanvraag-goedkeuren",
     "language": "en",
-    "value": "Motivatie aanvraag goedkeuren",
+    "value": "Motivation for approval",
     "value_type": "TEXT"
   },
   {
@@ -29885,7 +29885,7 @@
     "location": "modules/account/components/material-request-status-update-blade/material-request-status-update-blade",
     "key": "motivatie-aanvraag-afkeuren",
     "language": "nl",
-    "value": "Motivatie aanvraag afkeuren",
+    "value": "Motivatie voor afkeuren",
     "value_type": "TEXT"
   },
   {
@@ -29894,7 +29894,7 @@
     "location": "modules/account/components/material-request-status-update-blade/material-request-status-update-blade",
     "key": "motivatie-aanvraag-afkeuren",
     "language": "en",
-    "value": "Motivatie aanvraag afkeuren",
+    "value": "Motivation for refusal",
     "value_type": "TEXT"
   },
   {
@@ -35636,7 +35636,7 @@
     "location": "modules/navigation/components/material-request-center/material-request-center-button",
     "key": "openstaande-materiaal-aanvragen",
     "language": "en",
-    "value": "Openstaande materiaal aanvragen",
+    "value": "Material requests to review",
     "value_type": "TEXT"
   },
   {
@@ -41981,7 +41981,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "wijzigingen-opslaan-mobiel",
     "language": "nl",
-    "value": "Wijzigingen opslaan mobiel",
+    "value": "Wijzigingen opslaan",
     "value_type": "TEXT"
   },
   {
@@ -42773,7 +42773,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "type-ontsluiting-andere-omschrijving",
     "language": "nl",
-    "value": "Type ontsluiting - Andere ",
+    "value": "Type ontsluiting - Andere",
     "value_type": "HTML"
   },
   {
