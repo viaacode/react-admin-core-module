@@ -3,7 +3,7 @@ import { Button, ButtonToolbar, Container, Navbar, Spacer, Tabs } from '@viaa/av
 
 import { type AvoContentPageBlock, PermissionName } from '@viaa/avo2-types';
 import { cloneDeep, isNil, isString } from 'es-toolkit';
-import type { FC, Reducer } from 'react';
+import type { FC } from 'react';
 import React, { useCallback, useEffect, useReducer, useState } from 'react';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import { AdminConfigManager } from '~core/config/config.class';
@@ -92,7 +92,8 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 	const location = useLocation();
 	const commonUser = getCommonUser();
 	const [contentPageState, changeContentPageState] = useReducer<
-		Reducer<ContentPageEditState, ContentEditAction>
+		ContentPageEditState,
+		[ContentEditAction]
 	>(contentEditReducer, {
 		currentContentPageInfo: null,
 		initialContentPageInfo: null,

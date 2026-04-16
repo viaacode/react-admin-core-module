@@ -25,7 +25,6 @@ export async function loadTranslations(adminProxyUrl: string): Promise<void> {
 				interpolation: {
 					escapeValue: false,
 				},
-				initImmediate: true,
 				react: {
 					useSuspense: false,
 				},
