@@ -14,7 +14,7 @@ import {
 import { type AvoUserCommonUser, PermissionName } from '@viaa/avo2-types';
 import { noop } from 'es-toolkit';
 import { stringifyUrl } from 'query-string';
-import type { FC, ReactElement, ReactText } from 'react';
+import type { FC, ReactElement } from 'react';
 import React, { useCallback, useEffect, useState } from 'react';
 import { AdminConfigManager } from '~core/config/config.class';
 import { ToastType } from '~core/config/config.types';
@@ -49,6 +49,8 @@ import { useLocation } from '~shared/hooks/useLocation.ts';
 import { AdminLayout } from '~shared/layouts/AdminLayout/AdminLayout';
 import { PermissionService } from '~shared/services/permission-service';
 import type { DefaultComponentProps } from '~shared/types/components';
+
+type ReactText = string | number;
 
 const {
 	EDIT_ANY_CONTENT_PAGES,

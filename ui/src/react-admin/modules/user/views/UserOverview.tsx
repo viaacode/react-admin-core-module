@@ -5,7 +5,7 @@ import {
 	type AvoUserCommonUser,
 } from '@viaa/avo2-types';
 import { compact, isEqual } from 'es-toolkit';
-import type { FC, ReactText } from 'react';
+import type { FC } from 'react';
 import React, { useCallback, useMemo, useState } from 'react';
 import { AdminConfigManager } from '~core/config/config.class';
 import { getCommonUser } from '~core/config/config.selectors';
@@ -50,6 +50,8 @@ import './UserOverview.scss';
 export interface UserOverviewProps {
 	customFormatDate?: (date: Date | string) => string;
 }
+
+type ReactText = string | number;
 
 export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 	// Hooks

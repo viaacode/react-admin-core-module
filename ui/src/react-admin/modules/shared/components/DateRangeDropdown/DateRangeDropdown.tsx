@@ -12,7 +12,7 @@ import {
 	TextInput,
 } from '@viaa/avo2-components';
 import { format, isValid, parse, set } from 'date-fns';
-import type { FC, MouseEvent, ReactText } from 'react';
+import type { FC, MouseEvent } from 'react';
 import React, { useCallback, useEffect, useState } from 'react';
 import DatePicker from 'react-datepicker';
 import { ToastType } from '~core/config/config.types';
@@ -47,6 +47,8 @@ const DEFAULT_FUTURE_DATE_RANGE = {
 	gte: new Date().toISOString(),
 	lte: '',
 };
+
+type ReactText = string | number;
 
 const DateRangeDropdown: FC<DateRangeDropdownProps> = ({
 	label,

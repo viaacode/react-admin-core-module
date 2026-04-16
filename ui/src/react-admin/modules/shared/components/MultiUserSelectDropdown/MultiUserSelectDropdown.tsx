@@ -13,7 +13,7 @@ import {
 
 import clsx from 'clsx';
 import { uniqBy } from 'es-toolkit';
-import type { FunctionComponent, ReactText } from 'react';
+import type { FunctionComponent } from 'react';
 import React, { useEffect, useState } from 'react';
 import { ToastType } from '~core/config/config.types';
 import { showToast } from '~shared/helpers/show-toast';
@@ -29,6 +29,8 @@ export interface Tag {
 	label: string;
 	id: string;
 }
+
+type ReactText = string | number;
 
 export interface MultiUserSelectDropdownProps {
 	label: string;
