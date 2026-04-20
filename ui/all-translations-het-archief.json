@@ -29829,6 +29829,42 @@
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
     "location": "modules/account/components/material-request-status-update-blade/material-request-status-update-blade",
+    "key": "aanvraag-goedkeuren-titel",
+    "language": "nl",
+    "value": "Aanvraag goedkeuren titel",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-status-update-blade/material-request-status-update-blade",
+    "key": "aanvraag-goedkeuren-titel",
+    "language": "en",
+    "value": "Aanvraag goedkeuren titel",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-status-update-blade/material-request-status-update-blade",
+    "key": "aanvraag-afkeuren-titel",
+    "language": "nl",
+    "value": "Aanvraag afkeuren titel",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-status-update-blade/material-request-status-update-blade",
+    "key": "aanvraag-afkeuren-titel",
+    "language": "en",
+    "value": "Aanvraag afkeuren titel",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-status-update-blade/material-request-status-update-blade",
     "key": "materiaal-aanvraag-goedkeuren-of-afkeuren-blade-aria-label",
     "language": "nl",
     "value": "Materiaal aanvraag goedkeuren of afkeuren [BLADE_ARIA_LABEL]",
@@ -29842,6 +29878,42 @@
     "language": "en",
     "value": "Materiaal aanvraag goedkeuren of afkeuren [BLADE_ARIA_LABEL]",
     "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-status-update-blade/material-request-status-update-blade",
+    "key": "aanvraag-goedkeuren-description",
+    "language": "nl",
+    "value": "Aanvraag goedkeuren description",
+    "value_type": "HTML"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-status-update-blade/material-request-status-update-blade",
+    "key": "aanvraag-goedkeuren-description",
+    "language": "en",
+    "value": "Aanvraag goedkeuren description",
+    "value_type": "HTML"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-status-update-blade/material-request-status-update-blade",
+    "key": "aanvraag-afkeuren-description",
+    "language": "nl",
+    "value": "Aanvraag afkeuren description",
+    "value_type": "HTML"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-status-update-blade/material-request-status-update-blade",
+    "key": "aanvraag-afkeuren-description",
+    "language": "en",
+    "value": "Aanvraag afkeuren description",
+    "value_type": "HTML"
   },
   {
     "app": "HET_ARCHIEF",
@@ -44858,6 +44930,42 @@
   {
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
+    "location": "modules/account/components/material-request-detail-blade/message-file-upload/message-file-upload",
+    "key": "niet-alle-bestanden-zijn-correct",
+    "language": "nl",
+    "value": "Niet alle bestanden zijn correct",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-detail-blade/message-file-upload/message-file-upload",
+    "key": "niet-alle-bestanden-zijn-correct",
+    "language": "en",
+    "value": "Niet alle bestanden zijn correct",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-detail-blade/message-file-upload/message-file-upload",
+    "key": "sommige-bestanden-voldoen-niet-aan-de-vereisten-max-30-mb-toegestane-types-pdf-doc-x-xls-x-jpg-png-csv",
+    "language": "nl",
+    "value": "Sommige bestanden voldoen niet aan de vereisten (max. 30MB, toegestane types: PDF, DOC(X), XLS(X), JPG, PNG, CSV).",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-detail-blade/message-file-upload/message-file-upload",
+    "key": "sommige-bestanden-voldoen-niet-aan-de-vereisten-max-30-mb-toegestane-types-pdf-doc-x-xls-x-jpg-png-csv",
+    "language": "en",
+    "value": "Sommige bestanden voldoen niet aan de vereisten (max. 30MB, toegestane types: PDF, DOC(X), XLS(X), JPG, PNG, CSV).",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
     "location": "modules/navigation/components/navigation/navigation-link/navigation-link",
     "key": "navigeer-naar-een-pagina",
     "language": "nl",
@@ -45231,114 +45339,6 @@
     "key": "sluiten",
     "language": "en",
     "value": "Close",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-status-update-blade/material-request-status-update-blade",
-    "key": "aanvraag-goedkeuren-titel",
-    "language": "nl",
-    "value": "Aanvraag goedkeuren titel",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-status-update-blade/material-request-status-update-blade",
-    "key": "aanvraag-goedkeuren-titel",
-    "language": "en",
-    "value": "Aanvraag goedkeuren titel",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-status-update-blade/material-request-status-update-blade",
-    "key": "aanvraag-afkeuren-titel",
-    "language": "nl",
-    "value": "Aanvraag afkeuren titel",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-status-update-blade/material-request-status-update-blade",
-    "key": "aanvraag-afkeuren-titel",
-    "language": "en",
-    "value": "Aanvraag afkeuren titel",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-status-update-blade/material-request-status-update-blade",
-    "key": "aanvraag-goedkeuren-description",
-    "language": "nl",
-    "value": "Aanvraag goedkeuren description",
-    "value_type": "HTML"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-status-update-blade/material-request-status-update-blade",
-    "key": "aanvraag-goedkeuren-description",
-    "language": "en",
-    "value": "Aanvraag goedkeuren description",
-    "value_type": "HTML"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-status-update-blade/material-request-status-update-blade",
-    "key": "aanvraag-afkeuren-description",
-    "language": "nl",
-    "value": "Aanvraag afkeuren description",
-    "value_type": "HTML"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-status-update-blade/material-request-status-update-blade",
-    "key": "aanvraag-afkeuren-description",
-    "language": "en",
-    "value": "Aanvraag afkeuren description",
-    "value_type": "HTML"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-detail-blade/message-file-upload/message-file-upload",
-    "key": "niet-alle-bestanden-zijn-correct",
-    "language": "nl",
-    "value": "Niet alle bestanden zijn correct",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-detail-blade/message-file-upload/message-file-upload",
-    "key": "niet-alle-bestanden-zijn-correct",
-    "language": "en",
-    "value": "Niet alle bestanden zijn correct",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-detail-blade/message-file-upload/message-file-upload",
-    "key": "sommige-bestanden-voldoen-niet-aan-de-vereisten-max-30-mb-toegestane-types-pdf-doc-x-xls-x-jpg-png-csv",
-    "language": "nl",
-    "value": "Sommige bestanden voldoen niet aan de vereisten (max. 30MB, toegestane types: PDF, DOC(X), XLS(X), JPG, PNG, CSV).",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-detail-blade/message-file-upload/message-file-upload",
-    "key": "sommige-bestanden-voldoen-niet-aan-de-vereisten-max-30-mb-toegestane-types-pdf-doc-x-xls-x-jpg-png-csv",
-    "language": "en",
-    "value": "Sommige bestanden voldoen niet aan de vereisten (max. 30MB, toegestane types: PDF, DOC(X), XLS(X), JPG, PNG, CSV).",
     "value_type": "TEXT"
   },
   {
