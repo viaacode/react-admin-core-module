@@ -320,7 +320,7 @@
     "location": "admin/users/user",
     "key": "beoordelaar",
     "language": "en",
-    "value": "Beoordelaar",
+    "value": "Reviewer",
     "value_type": "TEXT"
   },
   {
@@ -3443,7 +3443,7 @@
     "location": "modules/content-page/views/content-page-detail-meta-data",
     "key": "seo-afbeelding",
     "language": "nl",
-    "value": "Seo afbeelding",
+    "value": "SEO afbeelding",
     "value_type": "TEXT"
   },
   {
@@ -3452,7 +3452,7 @@
     "location": "modules/content-page/views/content-page-detail-meta-data",
     "key": "seo-afbeelding",
     "language": "en",
-    "value": "Seo afbeelding",
+    "value": "SEO image",
     "value_type": "TEXT"
   },
   {
@@ -4820,7 +4820,7 @@
     "location": "modules/content-page/views/content-page-overview",
     "key": "het-ophalen-van-de-content-paginas-is-mislukt",
     "language": "en",
-    "value": "Het ophalen van de content paginas is mislukt",
+    "value": "Page retrieval has failed",
     "value_type": "HTML"
   },
   {
@@ -8303,7 +8303,7 @@
     "location": "modules/user/helpers/render-user-overview-table-cells",
     "key": "geblokkeerd-ja",
     "language": "nl",
-    "value": "Geblokkeerd ja",
+    "value": "Ja",
     "value_type": "TEXT"
   },
   {
@@ -8312,7 +8312,7 @@
     "location": "modules/user/helpers/render-user-overview-table-cells",
     "key": "geblokkeerd-ja",
     "language": "en",
-    "value": "Geblokkeerd ja",
+    "value": "Yes",
     "value_type": "TEXT"
   },
   {
@@ -8321,7 +8321,7 @@
     "location": "modules/user/helpers/render-user-overview-table-cells",
     "key": "geblokkeerd-nee",
     "language": "nl",
-    "value": "Geblokkeerd nee",
+    "value": "Nee",
     "value_type": "TEXT"
   },
   {
@@ -8330,7 +8330,7 @@
     "location": "modules/user/helpers/render-user-overview-table-cells",
     "key": "geblokkeerd-nee",
     "language": "en",
-    "value": "Geblokkeerd nee",
+    "value": "No",
     "value_type": "TEXT"
   },
   {
@@ -10607,7 +10607,7 @@
     "location": "modules/content-page/components/content-edit-form/content-edit-form",
     "key": "afbeelding-voor-seo-aanbevolen-1200-x-630",
     "language": "nl",
-    "value": "Afbeelding voor seo aanbevolen 1200 x 630",
+    "value": "Afbeelding voor SEO aanbevolen 1200 x 630",
     "value_type": "TEXT"
   },
   {
@@ -10616,7 +10616,7 @@
     "location": "modules/content-page/components/content-edit-form/content-edit-form",
     "key": "afbeelding-voor-seo-aanbevolen-1200-x-630",
     "language": "en",
-    "value": "Afbeelding voor seo aanbevolen 1200 x 630",
+    "value": "Image for SEO, recommended: 1200 x 630",
     "value_type": "TEXT"
   },
   {
@@ -10634,7 +10634,7 @@
     "location": "modules/content-page/components/content-edit-form/content-edit-form",
     "key": "seo-afbeelding",
     "language": "en",
-    "value": "Seo afbeelding",
+    "value": "SEO image",
     "value_type": "TEXT"
   },
   {
@@ -12389,7 +12389,7 @@
     "location": "error/views/error-view",
     "key": "de-pagina-werd-niet-gevonden-ingelogd",
     "language": "nl",
-    "value": "De pagina werd niet gevonden ingelogd",
+    "value": "De pagina werd niet gevonden",
     "value_type": "TEXT"
   },
   {
@@ -12398,7 +12398,7 @@
     "location": "error/views/error-view",
     "key": "de-pagina-werd-niet-gevonden-ingelogd",
     "language": "en",
-    "value": "De pagina werd niet gevonden ingelogd",
+    "value": "Page was not found",
     "value_type": "TEXT"
   },
   {
@@ -12434,7 +12434,7 @@
     "location": "error/views/error-view",
     "key": "ga-naar-de-hulppagina",
     "language": "en",
-    "value": "Ga naar de hulppagina",
+    "value": "Go to help page",
     "value_type": "TEXT"
   },
   {
@@ -19364,7 +19364,7 @@
     "location": "modules/ie-objects/object-detail-page",
     "key": "selectie-is-klaar",
     "language": "en",
-    "value": "Selectie is klaar",
+    "value": "Selection is ready",
     "value_type": "TEXT"
   },
   {
@@ -19391,7 +19391,7 @@
     "location": "modules/ie-objects/object-detail-page",
     "key": "downloed-selection-mobiel",
     "language": "nl",
-    "value": "Downloed selection mobiel",
+    "value": "Download selectie",
     "value_type": "TEXT"
   },
   {
@@ -19400,7 +19400,7 @@
     "location": "modules/ie-objects/object-detail-page",
     "key": "downloed-selection-mobiel",
     "language": "en",
-    "value": "Downloed selection mobiel",
+    "value": "Download selection",
     "value_type": "TEXT"
   },
   {
@@ -21452,7 +21452,7 @@
     "location": "modules/account/utils/create-label-value-material-request-reuse-form",
     "key": "bronvermelding",
     "language": "en",
-    "value": "Bronvermelding",
+    "value": "Source citation",
     "value_type": "TEXT"
   },
   {
@@ -22460,7 +22460,7 @@
     "location": "modules/account/views/account-my-material-requests",
     "key": "zoek-naar-materiaal-aanvraag-input-aria-label",
     "language": "en",
-    "value": "Zoek naar materiaal aanvraag [INPUT_ARIA_LABEL]",
+    "value": "Search for material request\n[INPUT_ARIA_LABEL]",
     "value_type": "TEXT"
   },
   {
@@ -22568,7 +22568,7 @@
     "location": "modules/account/views/account-my-application-list",
     "key": "volledig-bestand",
     "language": "en",
-    "value": "Volledig bestand",
+    "value": "Complete file",
     "value_type": "TEXT"
   },
   {
@@ -24314,7 +24314,7 @@
     "location": "pages/admin/materiaalaanvragen/index",
     "key": "pas-toe",
     "language": "en",
-    "value": "Pas toe",
+    "value": "Apply",
     "value_type": "TEXT"
   },
   {
@@ -24575,7 +24575,7 @@
     "location": "modules/admin/views/maintenance-alerts-page",
     "key": "bewaar-wijzigingen-mobiel",
     "language": "nl",
-    "value": "Bewaar wijzigingen mobiel",
+    "value": "Bewaar wijzigingen",
     "value_type": "TEXT"
   },
   {
@@ -24584,7 +24584,7 @@
     "location": "modules/admin/views/maintenance-alerts-page",
     "key": "bewaar-wijzigingen-mobiel",
     "language": "en",
-    "value": "Bewaar wijzigingen mobiel",
+    "value": "Save changes",
     "value_type": "TEXT"
   },
   {
@@ -24611,7 +24611,7 @@
     "location": "modules/admin/views/maintenance-alerts-page",
     "key": "annuleer-mobiel",
     "language": "nl",
-    "value": "Annuleer mobiel",
+    "value": "Annuleer",
     "value_type": "TEXT"
   },
   {
@@ -24620,7 +24620,7 @@
     "location": "modules/admin/views/maintenance-alerts-page",
     "key": "annuleer-mobiel",
     "language": "en",
-    "value": "Annuleer mobiel",
+    "value": "Cancel",
     "value_type": "TEXT"
   },
   {
@@ -26420,7 +26420,7 @@
     "location": "modules/material-requests/const/index",
     "key": "distribution-digital-online-internal",
     "language": "en",
-    "value": "distribution-digital-online-internal",
+    "value": "a private service (website or app)",
     "value_type": "TEXT"
   },
   {
@@ -26582,7 +26582,7 @@
     "location": "modules/material-requests/const/index",
     "key": "copyright-display-same-time-with-object",
     "language": "en",
-    "value": "copyright-display-same-time-with-object",
+    "value": "Simultaneous with object",
     "value_type": "TEXT"
   },
   {
@@ -26600,7 +26600,7 @@
     "location": "modules/material-requests/const/index",
     "key": "copyright-display-around-object",
     "language": "en",
-    "value": "copyright-display-around-object",
+    "value": "Copyright status for object, not necessarily simultaneous",
     "value_type": "TEXT"
   },
   {
@@ -26609,7 +26609,7 @@
     "location": "modules/material-requests/const/index",
     "key": "copyright-display-none",
     "language": "nl",
-    "value": "Geen vermelding",
+    "value": "Geen vermelding auteursrecht",
     "value_type": "TEXT"
   },
   {
@@ -26618,7 +26618,7 @@
     "location": "modules/material-requests/const/index",
     "key": "copyright-display-none",
     "language": "en",
-    "value": "copyright-display-none",
+    "value": "No copyright mention",
     "value_type": "TEXT"
   },
   {
@@ -28085,7 +28085,7 @@
     "location": "modules/account/components/edit-folder-blade/edit-folder-blade",
     "key": "bewaar-mobiel",
     "language": "nl",
-    "value": "Bewaa",
+    "value": "Bewaar",
     "value_type": "TEXT"
   },
   {
@@ -28094,7 +28094,7 @@
     "location": "modules/account/components/edit-folder-blade/edit-folder-blade",
     "key": "bewaar-mobiel",
     "language": "en",
-    "value": "Bewaar mobiel",
+    "value": "Save",
     "value_type": "TEXT"
   },
   {
@@ -28130,7 +28130,7 @@
     "location": "modules/account/components/edit-folder-blade/edit-folder-blade",
     "key": "sluit-mobiel",
     "language": "en",
-    "value": "Sluit mobiel",
+    "value": "Close",
     "value_type": "TEXT"
   },
   {
@@ -28310,7 +28310,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
     "key": "aangevraagd-op",
     "language": "en",
-    "value": "Requested at {{requestedAt}}",
+    "value": "Requested on {{requestedAt}}",
     "value_type": "TEXT"
   },
   {
@@ -28994,7 +28994,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
     "key": "annuleer-aanvraag-mobiel",
     "language": "en",
-    "value": "Annuleer aanvraag mobiel",
+    "value": "Cancel request",
     "value_type": "TEXT"
   },
   {
@@ -29201,7 +29201,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
     "key": "sluit-mobiel",
     "language": "nl",
-    "value": "Sluit mobiel",
+    "value": "Sluit",
     "value_type": "TEXT"
   },
   {
@@ -29210,7 +29210,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
     "key": "sluit-mobiel",
     "language": "en",
-    "value": "Sluit mobiel",
+    "value": "Close",
     "value_type": "TEXT"
   },
   {
@@ -29759,7 +29759,7 @@
     "location": "modules/account/components/material-request-status-update-blade/material-request-status-update-blade",
     "key": "aanvraag-goedkeuren-mobiel",
     "language": "nl",
-    "value": "Aanvraag goedkeuren mobiel",
+    "value": "Aanvraag goedkeuren",
     "value_type": "TEXT"
   },
   {
@@ -29768,7 +29768,7 @@
     "location": "modules/account/components/material-request-status-update-blade/material-request-status-update-blade",
     "key": "aanvraag-goedkeuren-mobiel",
     "language": "en",
-    "value": "Aanvraag goedkeuren mobiel",
+    "value": "Approve request",
     "value_type": "TEXT"
   },
   {
@@ -29777,7 +29777,7 @@
     "location": "modules/account/components/material-request-status-update-blade/material-request-status-update-blade",
     "key": "aanvraag-afkeuren-mobiel",
     "language": "nl",
-    "value": "Aanvraag afkeuren mobiel",
+    "value": "Aanvraag afkeuren",
     "value_type": "TEXT"
   },
   {
@@ -29786,7 +29786,7 @@
     "location": "modules/account/components/material-request-status-update-blade/material-request-status-update-blade",
     "key": "aanvraag-afkeuren-mobiel",
     "language": "en",
-    "value": "Aanvraag afkeuren mobiel",
+    "value": "Deny request",
     "value_type": "TEXT"
   },
   {
@@ -29813,7 +29813,7 @@
     "location": "modules/account/components/material-request-status-update-blade/material-request-status-update-blade",
     "key": "annuleer-mobiel",
     "language": "nl",
-    "value": "Annuleer mobiel",
+    "value": "Annuleer",
     "value_type": "TEXT"
   },
   {
@@ -29822,25 +29822,7 @@
     "location": "modules/account/components/material-request-status-update-blade/material-request-status-update-blade",
     "key": "annuleer-mobiel",
     "language": "en",
-    "value": "Annuleer mobiel",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-status-update-blade/material-request-status-update-blade",
-    "key": "aanvraag",
-    "language": "nl",
-    "value": "Aanvraag",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-status-update-blade/material-request-status-update-blade",
-    "key": "aanvraag",
-    "language": "en",
-    "value": "Request",
+    "value": "Cancel",
     "value_type": "TEXT"
   },
   {
@@ -29939,7 +29921,7 @@
     "location": "modules/account/components/material-request-term-agreement-blade/material-request-term-agreement-blade",
     "key": "ik-ga-akkoord-mobiel",
     "language": "nl",
-    "value": "Ik ga akkoord mobiel",
+    "value": "Ik ga akkoord",
     "value_type": "TEXT"
   },
   {
@@ -29948,7 +29930,7 @@
     "location": "modules/account/components/material-request-term-agreement-blade/material-request-term-agreement-blade",
     "key": "ik-ga-akkoord-mobiel",
     "language": "en",
-    "value": "Ik ga akkoord mobiel",
+    "value": "I agree",
     "value_type": "TEXT"
   },
   {
@@ -29975,7 +29957,7 @@
     "location": "modules/account/components/material-request-term-agreement-blade/material-request-term-agreement-blade",
     "key": "sluit-mobiel",
     "language": "nl",
-    "value": "Sluit mobiel",
+    "value": "Sluit",
     "value_type": "TEXT"
   },
   {
@@ -29984,7 +29966,7 @@
     "location": "modules/account/components/material-request-term-agreement-blade/material-request-term-agreement-blade",
     "key": "sluit-mobiel",
     "language": "en",
-    "value": "Sluit mobiel",
+    "value": "Close",
     "value_type": "TEXT"
   },
   {
@@ -30389,7 +30371,7 @@
     "location": "modules/account/components/personal-info/personal-info",
     "key": "verstuur-aanvraag-mobiel",
     "language": "nl",
-    "value": "verstuur aanvraag mobiel",
+    "value": "Verstuur aanvraag",
     "value_type": "TEXT"
   },
   {
@@ -30398,7 +30380,7 @@
     "location": "modules/account/components/personal-info/personal-info",
     "key": "verstuur-aanvraag-mobiel",
     "language": "en",
-    "value": "verstuur aanvraag mobiel",
+    "value": "Send request",
     "value_type": "TEXT"
   },
   {
@@ -30425,7 +30407,7 @@
     "location": "modules/account/components/personal-info/personal-info",
     "key": "keer-terug-mobiel",
     "language": "nl",
-    "value": "keer terug mobiel",
+    "value": "Keer terug",
     "value_type": "TEXT"
   },
   {
@@ -30434,7 +30416,7 @@
     "location": "modules/account/components/personal-info/personal-info",
     "key": "keer-terug-mobiel",
     "language": "en",
-    "value": "keer terug mobiel",
+    "value": "Go back",
     "value_type": "TEXT"
   },
   {
@@ -31064,7 +31046,7 @@
     "location": "modules/admin/views/navigation/admin-navigation-overview-page",
     "key": "navigatie",
     "language": "en",
-    "value": "Navigatie",
+    "value": "Navigation",
     "value_type": "TEXT"
   },
   {
@@ -31217,7 +31199,7 @@
     "location": "modules/admin/views/translations/admin-translations-overview-page",
     "key": "bewaar-wijzigingen-mobiel",
     "language": "nl",
-    "value": "Bewaar wijzigingen mobiel",
+    "value": "Bewaar wijzigingen",
     "value_type": "TEXT"
   },
   {
@@ -31226,7 +31208,7 @@
     "location": "modules/admin/views/translations/admin-translations-overview-page",
     "key": "bewaar-wijzigingen-mobiel",
     "language": "en",
-    "value": "Bewaar wijzigingen mobiel",
+    "value": "Save changes",
     "value_type": "TEXT"
   },
   {
@@ -31235,7 +31217,7 @@
     "location": "modules/admin/views/translations/admin-translations-overview-page",
     "key": "annuleer-mobiel",
     "language": "nl",
-    "value": "Annuleer mobiel",
+    "value": "Annuleer",
     "value_type": "TEXT"
   },
   {
@@ -31244,7 +31226,7 @@
     "location": "modules/admin/views/translations/admin-translations-overview-page",
     "key": "annuleer-mobiel",
     "language": "en",
-    "value": "Annuleer mobiel",
+    "value": "Cancel",
     "value_type": "TEXT"
   },
   {
@@ -32621,7 +32603,7 @@
     "location": "modules/home/components/cancel-visit-blade/cancel-visit-blade",
     "key": "ja-annuleer-bezoek-mobiel",
     "language": "nl",
-    "value": "Ja annuleer bezoek mobiel",
+    "value": "Ja, annuleer bezoek.",
     "value_type": "TEXT"
   },
   {
@@ -32630,7 +32612,7 @@
     "location": "modules/home/components/cancel-visit-blade/cancel-visit-blade",
     "key": "ja-annuleer-bezoek-mobiel",
     "language": "en",
-    "value": "Ja annuleer bezoek mobiel",
+    "value": "Yes, cancel visit.",
     "value_type": "TEXT"
   },
   {
@@ -32657,7 +32639,7 @@
     "location": "modules/home/components/cancel-visit-blade/cancel-visit-blade",
     "key": "sluit-mobiel",
     "language": "nl",
-    "value": "Sluit mobiel",
+    "value": "Sluit",
     "value_type": "TEXT"
   },
   {
@@ -32666,7 +32648,7 @@
     "location": "modules/home/components/cancel-visit-blade/cancel-visit-blade",
     "key": "sluit-mobiel",
     "language": "en",
-    "value": "Sluit mobiel",
+    "value": "Close",
     "value_type": "TEXT"
   },
   {
@@ -32927,7 +32909,7 @@
     "location": "modules/home/components/logged-in-visitor-spaces-home/logged-in-visitor-spaces-home",
     "key": "ga-naar-de-homepage-mobiel",
     "language": "nl",
-    "value": "Ga naar de homepage mobiel",
+    "value": "Ga naar homepage",
     "value_type": "TEXT"
   },
   {
@@ -32936,7 +32918,7 @@
     "location": "modules/home/components/logged-in-visitor-spaces-home/logged-in-visitor-spaces-home",
     "key": "ga-naar-de-homepage-mobiel",
     "language": "en",
-    "value": "Ga naar de homepage mobiel",
+    "value": "Go to homepage",
     "value_type": "TEXT"
   },
   {
@@ -32954,7 +32936,7 @@
     "location": "modules/home/components/request-access-blade/request-access-blade",
     "key": "vraag-toegang-aan",
     "language": "en",
-    "value": "Ask for access",
+    "value": "Request access",
     "value_type": "TEXT"
   },
   {
@@ -33125,7 +33107,7 @@
     "location": "modules/home/components/process-visit-blade/process-visit-blade",
     "key": "annuleer-bezoek-mobiel",
     "language": "nl",
-    "value": "Annuleer bezoek mobiel",
+    "value": "Annuleer bezoek",
     "value_type": "TEXT"
   },
   {
@@ -33134,7 +33116,7 @@
     "location": "modules/home/components/process-visit-blade/process-visit-blade",
     "key": "annuleer-bezoek-mobiel",
     "language": "en",
-    "value": "Annuleer bezoek mobiel",
+    "value": "Cancel visit",
     "value_type": "TEXT"
   },
   {
@@ -33161,7 +33143,7 @@
     "location": "modules/home/components/process-visit-blade/process-visit-blade",
     "key": "sluit-mobiel",
     "language": "nl",
-    "value": "Sluit mobiel",
+    "value": "Sluit",
     "value_type": "TEXT"
   },
   {
@@ -33170,7 +33152,7 @@
     "location": "modules/home/components/process-visit-blade/process-visit-blade",
     "key": "sluit-mobiel",
     "language": "en",
-    "value": "Sluit mobiel",
+    "value": "Close",
     "value_type": "TEXT"
   },
   {
@@ -33206,7 +33188,7 @@
     "location": "modules/home/components/request-access-blade/request-access-blade",
     "key": "reden-van-aanvraag-is-een-verplicht-veld",
     "language": "en",
-    "value": "'Reason for request' is a mandatory field.",
+    "value": "'Reason for request' is required.",
     "value_type": "TEXT"
   },
   {
@@ -33287,7 +33269,7 @@
     "location": "modules/home/components/request-access-blade/request-access-blade",
     "key": "verstuur-mobiel",
     "language": "nl",
-    "value": "Verstuur mobiel",
+    "value": "Verstuur",
     "value_type": "TEXT"
   },
   {
@@ -33296,7 +33278,7 @@
     "location": "modules/home/components/request-access-blade/request-access-blade",
     "key": "verstuur-mobiel",
     "language": "en",
-    "value": "Verstuur mobiel",
+    "value": "Send",
     "value_type": "TEXT"
   },
   {
@@ -33323,7 +33305,7 @@
     "location": "modules/home/components/request-access-blade/request-access-blade",
     "key": "annuleer-mobiel",
     "language": "nl",
-    "value": "Annuleer mobiel",
+    "value": "Annuleer",
     "value_type": "TEXT"
   },
   {
@@ -33332,7 +33314,7 @@
     "location": "modules/home/components/request-access-blade/request-access-blade",
     "key": "annuleer-mobiel",
     "language": "en",
-    "value": "Annuleer mobiel",
+    "value": "Cancel",
     "value_type": "TEXT"
   },
   {
@@ -35276,7 +35258,7 @@
     "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata",
     "key": "sluit",
     "language": "en",
-    "value": "Sluit",
+    "value": "Close",
     "value_type": "TEXT"
   },
   {
@@ -35285,7 +35267,7 @@
     "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata",
     "key": "sluit-mobiel",
     "language": "nl",
-    "value": "Sluit mobiel",
+    "value": "Sluit",
     "value_type": "TEXT"
   },
   {
@@ -35294,7 +35276,7 @@
     "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata",
     "key": "sluit-mobiel",
     "language": "en",
-    "value": "Sluit mobiel",
+    "value": "Close",
     "value_type": "TEXT"
   },
   {
@@ -35771,7 +35753,7 @@
     "location": "modules/navigation/components/material-request-center-blade/material-request-center-blade",
     "key": "sluit-mobiel",
     "language": "nl",
-    "value": "Sluit mobiel",
+    "value": "Sluit",
     "value_type": "TEXT"
   },
   {
@@ -35780,7 +35762,7 @@
     "location": "modules/navigation/components/material-request-center-blade/material-request-center-blade",
     "key": "sluit-mobiel",
     "language": "en",
-    "value": "Sluit mobiel",
+    "value": "Close",
     "value_type": "TEXT"
   },
   {
@@ -35807,7 +35789,7 @@
     "location": "modules/navigation/components/material-request-center-blade/material-request-center-blade",
     "key": "werk-je-aanvraag-af-mobiel",
     "language": "nl",
-    "value": "Werk je aanvraag af",
+    "value": "Werk aanvraag af",
     "value_type": "TEXT"
   },
   {
@@ -35816,7 +35798,7 @@
     "location": "modules/navigation/components/material-request-center-blade/material-request-center-blade",
     "key": "werk-je-aanvraag-af-mobiel",
     "language": "en",
-    "value": "Werk je aanvraag af mobiel",
+    "value": "Complete request",
     "value_type": "TEXT"
   },
   {
@@ -36365,7 +36347,7 @@
     "location": "modules/shared/components/approve-request-blade/approve-request-blade",
     "key": "keur-goed-mobiel",
     "language": "nl",
-    "value": "Keur goed mobiel",
+    "value": "Goedkeuren",
     "value_type": "TEXT"
   },
   {
@@ -36374,7 +36356,7 @@
     "location": "modules/shared/components/approve-request-blade/approve-request-blade",
     "key": "keur-goed-mobiel",
     "language": "en",
-    "value": "Keur goed mobiel",
+    "value": "Approve",
     "value_type": "TEXT"
   },
   {
@@ -36401,7 +36383,7 @@
     "location": "modules/shared/components/approve-request-blade/approve-request-blade",
     "key": "annuleer-mobiel",
     "language": "nl",
-    "value": "Annuleer mobiel",
+    "value": "Annuleer",
     "value_type": "TEXT"
   },
   {
@@ -36410,7 +36392,7 @@
     "location": "modules/shared/components/approve-request-blade/approve-request-blade",
     "key": "annuleer-mobiel",
     "language": "en",
-    "value": "Annuleer mobiel",
+    "value": "Cancel",
     "value_type": "TEXT"
   },
   {
@@ -36680,7 +36662,7 @@
     "location": "modules/shared/components/blade/blade-content",
     "key": "er-staan-fouten-in-dit-formulier-corrigeer-deze-en-probeer-het-opnieuw",
     "language": "en",
-    "value": "Er staan fouten in dit formulier. Corrigeer deze en probeer het opnieuw.",
+    "value": "There are errors in this form. Please correct them and try again.",
     "value_type": "HTML"
   },
   {
@@ -36914,7 +36896,7 @@
     "location": "modules/cp/components/decline-request-blade/decline-request-blade",
     "key": "keur-af",
     "language": "en",
-    "value": "Refuse",
+    "value": "Decline",
     "value_type": "TEXT"
   },
   {
@@ -36923,7 +36905,7 @@
     "location": "modules/shared/components/decline-request-blade/decline-request-blade",
     "key": "keur-af-mobiel",
     "language": "nl",
-    "value": "Keur af mobiel",
+    "value": "Afkeuren",
     "value_type": "TEXT"
   },
   {
@@ -36932,7 +36914,7 @@
     "location": "modules/shared/components/decline-request-blade/decline-request-blade",
     "key": "keur-af-mobiel",
     "language": "en",
-    "value": "Keur af mobiel",
+    "value": "Decline",
     "value_type": "TEXT"
   },
   {
@@ -36959,7 +36941,7 @@
     "location": "modules/shared/components/decline-request-blade/decline-request-blade",
     "key": "annuleer-mobiel",
     "language": "nl",
-    "value": "Annuleer mobiel",
+    "value": "Annuleer",
     "value_type": "TEXT"
   },
   {
@@ -36968,7 +36950,7 @@
     "location": "modules/shared/components/decline-request-blade/decline-request-blade",
     "key": "annuleer-mobiel",
     "language": "en",
-    "value": "Annuleer mobiel",
+    "value": "Cancel",
     "value_type": "TEXT"
   },
   {
@@ -36986,7 +36968,7 @@
     "location": "modules/cp/components/decline-request-blade/decline-request-blade",
     "key": "aanvraag-afkeuren",
     "language": "en",
-    "value": "Refuse request",
+    "value": "Decline request",
     "value_type": "TEXT"
   },
   {
@@ -38039,7 +38021,7 @@
     "location": "modules/shared/components/notification-center/notification-center",
     "key": "markeer-alles-als-gelezen-mobiel",
     "language": "nl",
-    "value": "Markeer alles als gelezen mobiel",
+    "value": "Markeer als gelezen",
     "value_type": "TEXT"
   },
   {
@@ -38048,7 +38030,7 @@
     "location": "modules/shared/components/notification-center/notification-center",
     "key": "markeer-alles-als-gelezen-mobiel",
     "language": "en",
-    "value": "Markeer alles als gelezen mobiel",
+    "value": "Mark as read",
     "value_type": "TEXT"
   },
   {
@@ -38426,7 +38408,7 @@
     "location": "modules/cp/components/process-request-blade/process-request-blade",
     "key": "sluit",
     "language": "en",
-    "value": "Sluit",
+    "value": "Close",
     "value_type": "TEXT"
   },
   {
@@ -38435,7 +38417,7 @@
     "location": "modules/shared/components/process-request-blade/process-request-blade",
     "key": "sluit-mobiel",
     "language": "nl",
-    "value": "Sluit mobiel",
+    "value": "Sluit",
     "value_type": "TEXT"
   },
   {
@@ -38444,7 +38426,7 @@
     "location": "modules/shared/components/process-request-blade/process-request-blade",
     "key": "sluit-mobiel",
     "language": "en",
-    "value": "Sluit mobiel",
+    "value": "Close",
     "value_type": "TEXT"
   },
   {
@@ -38489,7 +38471,7 @@
     "location": "modules/shared/components/process-request-blade/process-request-blade",
     "key": "aanpassen-mobiel",
     "language": "nl",
-    "value": "Aanpassen mobiel",
+    "value": "Aanpassen",
     "value_type": "TEXT"
   },
   {
@@ -38498,7 +38480,7 @@
     "location": "modules/shared/components/process-request-blade/process-request-blade",
     "key": "aanpassen-mobiel",
     "language": "en",
-    "value": "Aanpassen mobiel",
+    "value": "Edit",
     "value_type": "TEXT"
   },
   {
@@ -38507,7 +38489,7 @@
     "location": "modules/shared/components/process-request-blade/process-request-blade",
     "key": "goedkeuren-mobiel",
     "language": "nl",
-    "value": "Goedkeuren mobiel",
+    "value": "Goedkeuren",
     "value_type": "TEXT"
   },
   {
@@ -38516,7 +38498,7 @@
     "location": "modules/shared/components/process-request-blade/process-request-blade",
     "key": "goedkeuren-mobiel",
     "language": "en",
-    "value": "Goedkeuren mobiel",
+    "value": "Approve",
     "value_type": "TEXT"
   },
   {
@@ -38534,7 +38516,7 @@
     "location": "modules/cp/components/process-request-blade/process-request-blade",
     "key": "weigeren",
     "language": "en",
-    "value": "Refuse",
+    "value": "Decline",
     "value_type": "TEXT"
   },
   {
@@ -38543,7 +38525,7 @@
     "location": "modules/shared/components/process-request-blade/process-request-blade",
     "key": "weigeren-mobiel",
     "language": "nl",
-    "value": "Weigeren mobiel",
+    "value": "Weigeren",
     "value_type": "TEXT"
   },
   {
@@ -38552,7 +38534,7 @@
     "location": "modules/shared/components/process-request-blade/process-request-blade",
     "key": "weigeren-mobiel",
     "language": "en",
-    "value": "Weigeren mobiel",
+    "value": "Decline",
     "value_type": "TEXT"
   },
   {
@@ -38813,7 +38795,7 @@
     "location": "modules/shared/components/share-folder-blade/share-folder-blade",
     "key": "sluit-mobiel",
     "language": "nl",
-    "value": "Sluit mobiel",
+    "value": "Sluit",
     "value_type": "TEXT"
   },
   {
@@ -38822,7 +38804,7 @@
     "location": "modules/shared/components/share-folder-blade/share-folder-blade",
     "key": "sluit-mobiel",
     "language": "en",
-    "value": "Sluit mobiel",
+    "value": "Close",
     "value_type": "TEXT"
   },
   {
@@ -39137,7 +39119,7 @@
     "location": "modules/shared/components/visit-detail-blade/visit-detail-blade",
     "key": "plan-bezoek-mobiel",
     "language": "nl",
-    "value": "Plan bezoek mobiel",
+    "value": "Plan bezoek",
     "value_type": "TEXT"
   },
   {
@@ -39146,7 +39128,7 @@
     "location": "modules/shared/components/visit-detail-blade/visit-detail-blade",
     "key": "plan-bezoek-mobiel",
     "language": "en",
-    "value": "Plan bezoek mobiel",
+    "value": "Plan visit",
     "value_type": "TEXT"
   },
   {
@@ -39173,7 +39155,7 @@
     "location": "modules/shared/components/visit-detail-blade/visit-detail-blade",
     "key": "sluit-mobiel",
     "language": "nl",
-    "value": "Sluit mobiel",
+    "value": "Sluit",
     "value_type": "TEXT"
   },
   {
@@ -39182,7 +39164,7 @@
     "location": "modules/shared/components/visit-detail-blade/visit-detail-blade",
     "key": "sluit-mobiel",
     "language": "en",
-    "value": "Sluit mobiel",
+    "value": "Close",
     "value_type": "TEXT"
   },
   {
@@ -39929,7 +39911,7 @@
     "location": "modules/visitor-space/components/add-to-folder-blade/add-to-folder-blade",
     "key": "voeg-toe-mobiel",
     "language": "nl",
-    "value": "Voeg toe mobiel",
+    "value": "Voeg toe",
     "value_type": "TEXT"
   },
   {
@@ -39938,7 +39920,7 @@
     "location": "modules/visitor-space/components/add-to-folder-blade/add-to-folder-blade",
     "key": "voeg-toe-mobiel",
     "language": "en",
-    "value": "Voeg toe mobiel",
+    "value": "Add to",
     "value_type": "TEXT"
   },
   {
@@ -39965,7 +39947,7 @@
     "location": "modules/visitor-space/components/add-to-folder-blade/add-to-folder-blade",
     "key": "annuleer-mobiel",
     "language": "nl",
-    "value": "Annuleer mobiel",
+    "value": "Annuleer",
     "value_type": "TEXT"
   },
   {
@@ -39974,7 +39956,7 @@
     "location": "modules/visitor-space/components/add-to-folder-blade/add-to-folder-blade",
     "key": "annuleer-mobiel",
     "language": "en",
-    "value": "Annuleer mobiel",
+    "value": "Cancel",
     "value_type": "TEXT"
   },
   {
@@ -41081,7 +41063,7 @@
     "location": "modules/visitor-space/components/material-request-blade/material-request-blade",
     "key": "wijzigingen-opslaan-mobiel",
     "language": "nl",
-    "value": "Wijzigingen opslaan mobiel",
+    "value": "Wijzigingen opslaan",
     "value_type": "TEXT"
   },
   {
@@ -41090,7 +41072,7 @@
     "location": "modules/visitor-space/components/material-request-blade/material-request-blade",
     "key": "wijzigingen-opslaan-mobiel",
     "language": "en",
-    "value": "Wijzigingen opslaan mobiel",
+    "value": "Save changes",
     "value_type": "TEXT"
   },
   {
@@ -41099,7 +41081,7 @@
     "location": "modules/visitor-space/components/material-request-blade/material-request-blade",
     "key": "annuleer-mobiel",
     "language": "nl",
-    "value": "Annuleer mobiel",
+    "value": "Annuleer",
     "value_type": "TEXT"
   },
   {
@@ -41108,7 +41090,7 @@
     "location": "modules/visitor-space/components/material-request-blade/material-request-blade",
     "key": "annuleer-mobiel",
     "language": "en",
-    "value": "Annuleer mobiel",
+    "value": "Cancel",
     "value_type": "TEXT"
   },
   {
@@ -41837,7 +41819,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "wijzigingen-success",
     "language": "nl",
-    "value": "Wijzigingen success",
+    "value": "Wijzigingen succesvol",
     "value_type": "TEXT"
   },
   {
@@ -41846,7 +41828,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "wijzigingen-success",
     "language": "en",
-    "value": "Wijzigingen success (engels)",
+    "value": "Edit successful",
     "value_type": "TEXT"
   },
   {
@@ -42242,7 +42224,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "downloadkwaliteit-hogere-kwaliteit-omschrijving",
     "language": "en",
-    "value": "For professional usage which requires specific software. Not necessarily of a higher playback quality as the playback copy.",
+    "value": "For professional use which requires specific software. Not necessarily of a higher playback quality as the playback copy.",
     "value_type": "HTML"
   },
   {
@@ -42440,7 +42422,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "bedoeld-gebruik-directe-commerciele-exploitatie-omschrijving",
     "language": "en",
-    "value": "Directe commerciële exploitatie: er wordt een vergoeding gevraagd van derden die niet gericht is op het materiaal als dusdanig, maar die wel betrekking heeft op het materiaal, hetzij rechtstreeks, hetzij onrechtstreeks via goederen producten of diensten waarin het materiaal herkenbaar wordt geïntegreerd (inclusief bijvoorbeeld merchandising, of uitzending / streaming via commerciële media van een werk waarin het materiaal werd geïntegreerd) (engels)",
+    "value": "<p>Direct commercial exploitation: compensation is asked of a third party, not related to the material as such, but only related to the material as it is directly or indirectly recognizably integrated in other goods or services (including merchandising, broadcasting or streaming in <span style=\"color:#000000\"><span style=\"font-size:16px\"><span style=\"background-color:#ffffff\">commercial media</span></span></span> of a work that has integrated the material)</p>",
     "value_type": "HTML"
   },
   {
@@ -43646,7 +43628,7 @@
     "location": "modules/visitor-space/components/radio-button-accordion/radio-button-accordion",
     "key": "open-accordion",
     "language": "en",
-    "value": "Open accordeon (engels)",
+    "value": "Open accordeon",
     "value_type": "TEXT"
   },
   {
@@ -44033,7 +44015,7 @@
     "location": "modules/visitor-space/components/report-blade/report-blade",
     "key": "rapporteer-mobiel",
     "language": "nl",
-    "value": "Rapporteer mobiel",
+    "value": "Probleem melden",
     "value_type": "TEXT"
   },
   {
@@ -44042,7 +44024,7 @@
     "location": "modules/visitor-space/components/report-blade/report-blade",
     "key": "rapporteer-mobiel",
     "language": "en",
-    "value": "Rapporteer mobiel",
+    "value": "Report issue",
     "value_type": "TEXT"
   },
   {
@@ -44069,7 +44051,7 @@
     "location": "modules/visitor-space/components/report-blade/report-blade",
     "key": "annuleer-mobiel",
     "language": "nl",
-    "value": "Annuleer mobiel",
+    "value": "Annuleer",
     "value_type": "TEXT"
   },
   {
@@ -44078,7 +44060,7 @@
     "location": "modules/visitor-space/components/report-blade/report-blade",
     "key": "annuleer-mobiel",
     "language": "en",
-    "value": "Annuleer mobiel",
+    "value": "Cancel",
     "value_type": "TEXT"
   },
   {
@@ -45253,11 +45235,119 @@
   },
   {
     "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-status-update-blade/material-request-status-update-blade",
+    "key": "aanvraag-goedkeuren-titel",
+    "language": "nl",
+    "value": "Aanvraag goedkeuren titel",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-status-update-blade/material-request-status-update-blade",
+    "key": "aanvraag-goedkeuren-titel",
+    "language": "en",
+    "value": "Aanvraag goedkeuren titel",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-status-update-blade/material-request-status-update-blade",
+    "key": "aanvraag-afkeuren-titel",
+    "language": "nl",
+    "value": "Aanvraag afkeuren titel",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-status-update-blade/material-request-status-update-blade",
+    "key": "aanvraag-afkeuren-titel",
+    "language": "en",
+    "value": "Aanvraag afkeuren titel",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-status-update-blade/material-request-status-update-blade",
+    "key": "aanvraag-goedkeuren-description",
+    "language": "nl",
+    "value": "Aanvraag goedkeuren description",
+    "value_type": "HTML"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-status-update-blade/material-request-status-update-blade",
+    "key": "aanvraag-goedkeuren-description",
+    "language": "en",
+    "value": "Aanvraag goedkeuren description",
+    "value_type": "HTML"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-status-update-blade/material-request-status-update-blade",
+    "key": "aanvraag-afkeuren-description",
+    "language": "nl",
+    "value": "Aanvraag afkeuren description",
+    "value_type": "HTML"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-status-update-blade/material-request-status-update-blade",
+    "key": "aanvraag-afkeuren-description",
+    "language": "en",
+    "value": "Aanvraag afkeuren description",
+    "value_type": "HTML"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-detail-blade/message-file-upload/message-file-upload",
+    "key": "niet-alle-bestanden-zijn-correct",
+    "language": "nl",
+    "value": "Niet alle bestanden zijn correct",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-detail-blade/message-file-upload/message-file-upload",
+    "key": "niet-alle-bestanden-zijn-correct",
+    "language": "en",
+    "value": "Niet alle bestanden zijn correct",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-detail-blade/message-file-upload/message-file-upload",
+    "key": "sommige-bestanden-voldoen-niet-aan-de-vereisten-max-30-mb-toegestane-types-pdf-doc-x-xls-x-jpg-png-csv",
+    "language": "nl",
+    "value": "Sommige bestanden voldoen niet aan de vereisten (max. 30MB, toegestane types: PDF, DOC(X), XLS(X), JPG, PNG, CSV).",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-detail-blade/message-file-upload/message-file-upload",
+    "key": "sommige-bestanden-voldoen-niet-aan-de-vereisten-max-30-mb-toegestane-types-pdf-doc-x-xls-x-jpg-png-csv",
+    "language": "en",
+    "value": "Sommige bestanden voldoen niet aan de vereisten (max. 30MB, toegestane types: PDF, DOC(X), XLS(X), JPG, PNG, CSV).",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
     "component": "BACKEND",
     "location": "modules/material-requests/const/index",
     "key": "download-quality-normal",
     "language": "nl",
-    "value": "Download quality normal",
+    "value": "Afspeelkopie",
     "value_type": "TEXT"
   },
   {
@@ -45266,7 +45356,7 @@
     "location": "modules/material-requests/const/index",
     "key": "download-quality-normal",
     "language": "en",
-    "value": "Download quality normal",
+    "value": "Playback copy",
     "value_type": "TEXT"
   },
   {
@@ -45275,7 +45365,7 @@
     "location": "modules/material-requests/const/index",
     "key": "download-quality-high",
     "language": "nl",
-    "value": "Download quality high",
+    "value": "Originele kopie",
     "value_type": "TEXT"
   },
   {
@@ -45284,7 +45374,7 @@
     "location": "modules/material-requests/const/index",
     "key": "download-quality-high",
     "language": "en",
-    "value": "Download quality high",
+    "value": "Original copy",
     "value_type": "TEXT"
   },
   {
@@ -45293,7 +45383,7 @@
     "location": "modules/material-requests/const/index",
     "key": "intended-usage-intern",
     "language": "nl",
-    "value": "Intended usage intern",
+    "value": "Bedoeld voor intern gebruik",
     "value_type": "TEXT"
   },
   {
@@ -45302,7 +45392,7 @@
     "location": "modules/material-requests/const/index",
     "key": "intended-usage-intern",
     "language": "en",
-    "value": "Intended usage intern",
+    "value": "Intended for internal use",
     "value_type": "TEXT"
   },
   {
@@ -45311,7 +45401,7 @@
     "location": "modules/material-requests/const/index",
     "key": "intended-usage-non-commercial",
     "language": "nl",
-    "value": "Intended usage non commercial",
+    "value": "Bedoeld voor niet-commercieel gebruik",
     "value_type": "TEXT"
   },
   {
@@ -45329,7 +45419,7 @@
     "location": "modules/material-requests/const/index",
     "key": "intended-usage-commercial",
     "language": "nl",
-    "value": "Intended usage commercial",
+    "value": "Bedoeld voor commercieel gebruik",
     "value_type": "TEXT"
   },
   {
@@ -45347,7 +45437,7 @@
     "location": "modules/material-requests/const/index",
     "key": "distribution-access-intern",
     "language": "nl",
-    "value": "Distribution access intern",
+    "value": "Interne verspreiding",
     "value_type": "TEXT"
   },
   {
@@ -45356,7 +45446,7 @@
     "location": "modules/material-requests/const/index",
     "key": "distribution-access-intern",
     "language": "en",
-    "value": "Distribution access intern",
+    "value": "Internal publication",
     "value_type": "TEXT"
   },
   {
@@ -45365,7 +45455,7 @@
     "location": "modules/material-requests/const/index",
     "key": "distribution-access-intern-extern",
     "language": "nl",
-    "value": "Distribution access intern extern",
+    "value": "Interne en externe verspreiding",
     "value_type": "TEXT"
   },
   {
@@ -45374,7 +45464,7 @@
     "location": "modules/material-requests/const/index",
     "key": "distribution-access-intern-extern",
     "language": "en",
-    "value": "Distribution access intern extern",
+    "value": "Internal and external publication",
     "value_type": "TEXT"
   },
   {
@@ -45383,7 +45473,7 @@
     "location": "modules/material-requests/const/index",
     "key": "distribution-type-digital-offline",
     "language": "nl",
-    "value": "Distribution type digital offline",
+    "value": "Offline digitale verspreiding",
     "value_type": "TEXT"
   },
   {
@@ -45392,7 +45482,7 @@
     "location": "modules/material-requests/const/index",
     "key": "distribution-type-digital-offline",
     "language": "en",
-    "value": "Distribution type digital offline",
+    "value": "Offline digital publication",
     "value_type": "TEXT"
   },
   {
@@ -45401,7 +45491,7 @@
     "location": "modules/material-requests/const/index",
     "key": "distribution-type-digital-online",
     "language": "nl",
-    "value": "Distribution type digital online",
+    "value": "Online digitale verspreiding",
     "value_type": "TEXT"
   },
   {
@@ -45410,7 +45500,7 @@
     "location": "modules/material-requests/const/index",
     "key": "distribution-type-digital-online",
     "language": "en",
-    "value": "Distribution type digital online",
+    "value": "Online digital publication",
     "value_type": "TEXT"
   },
   {
@@ -45419,7 +45509,7 @@
     "location": "modules/material-requests/const/index",
     "key": "distribution-type-other",
     "language": "nl",
-    "value": "Distribution type other",
+    "value": "Ander verspreidingstype",
     "value_type": "TEXT"
   },
   {
@@ -45428,7 +45518,7 @@
     "location": "modules/material-requests/const/index",
     "key": "distribution-type-other",
     "language": "en",
-    "value": "Distribution type other",
+    "value": "Other publication type",
     "value_type": "TEXT"
   },
   {
@@ -45437,7 +45527,7 @@
     "location": "modules/material-requests/const/index",
     "key": "distribution-digital-online-internal",
     "language": "nl",
-    "value": "Distribution digital online internal",
+    "value": "Interne digitale online verspreiding",
     "value_type": "TEXT"
   },
   {
@@ -45446,7 +45536,7 @@
     "location": "modules/material-requests/const/index",
     "key": "distribution-digital-online-internal",
     "language": "en",
-    "value": "Distribution digital online internal",
+    "value": "Internal digital online publication",
     "value_type": "TEXT"
   },
   {
@@ -45455,7 +45545,7 @@
     "location": "modules/material-requests/const/index",
     "key": "distribution-digital-online-no-auth",
     "language": "nl",
-    "value": "Distribution digital online no auth",
+    "value": "Digitale online verspreiding zonder authenticatie",
     "value_type": "TEXT"
   },
   {
@@ -45464,7 +45554,7 @@
     "location": "modules/material-requests/const/index",
     "key": "distribution-digital-online-no-auth",
     "language": "en",
-    "value": "Distribution digital online no auth",
+    "value": "Digital online publication without authentication",
     "value_type": "TEXT"
   },
   {
@@ -45473,7 +45563,7 @@
     "location": "modules/material-requests/const/index",
     "key": "distribution-digital-online-with-auth",
     "language": "nl",
-    "value": "Distribution digital online with auth",
+    "value": "Digitale online verspreiding met authenticatie",
     "value_type": "TEXT"
   },
   {
@@ -45482,7 +45572,7 @@
     "location": "modules/material-requests/const/index",
     "key": "distribution-digital-online-with-auth",
     "language": "en",
-    "value": "Distribution digital online with auth",
+    "value": "Digital online publication with authentication",
     "value_type": "TEXT"
   },
   {
@@ -45491,7 +45581,7 @@
     "location": "modules/material-requests/const/index",
     "key": "material-request-editing-none",
     "language": "nl",
-    "value": "Material request editing none",
+    "value": "Materiaalaanvraag voor ongewijzigd gebruik",
     "value_type": "TEXT"
   },
   {
@@ -45500,7 +45590,7 @@
     "location": "modules/material-requests/const/index",
     "key": "material-request-editing-none",
     "language": "en",
-    "value": "Material request editing none",
+    "value": "Material request for non-edited use",
     "value_type": "TEXT"
   },
   {
@@ -45509,7 +45599,7 @@
     "location": "modules/material-requests/const/index",
     "key": "material-request-editing-with-changes",
     "language": "nl",
-    "value": "Material request editing with changes",
+    "value": "Materiaalaanvraag met bedoeling om wijzigingen aan te brengen",
     "value_type": "TEXT"
   },
   {
@@ -45518,7 +45608,7 @@
     "location": "modules/material-requests/const/index",
     "key": "material-request-editing-with-changes",
     "language": "en",
-    "value": "Material request editing with changes",
+    "value": "Material request with the intention to edit the material",
     "value_type": "TEXT"
   },
   {
@@ -45527,7 +45617,7 @@
     "location": "modules/material-requests/const/index",
     "key": "geographical-usage-completely-local",
     "language": "nl",
-    "value": "Geographical usage completely local",
+    "value": "Geografisch gebruik volledig lokaal",
     "value_type": "TEXT"
   },
   {
@@ -45545,7 +45635,7 @@
     "location": "modules/material-requests/const/index",
     "key": "geographical-usage-not-completely-local",
     "language": "nl",
-    "value": "Geographical usage not completely local",
+    "value": "Geografisch gebruik niet volledig lokaal",
     "value_type": "TEXT"
   },
   {
@@ -45563,7 +45653,7 @@
     "location": "modules/material-requests/const/index",
     "key": "time-usage-unlimited",
     "language": "nl",
-    "value": "Time usage unlimited",
+    "value": "Gebruik niet beperkt in tijd",
     "value_type": "TEXT"
   },
   {
@@ -45599,7 +45689,7 @@
     "location": "modules/material-requests/const/index",
     "key": "copyright-display-same-time-with-object",
     "language": "nl",
-    "value": "Copyright display same time with object",
+    "value": "Vermelding auteursrecht gelijktijdig met object",
     "value_type": "TEXT"
   },
   {
@@ -45608,7 +45698,7 @@
     "location": "modules/material-requests/const/index",
     "key": "copyright-display-same-time-with-object",
     "language": "en",
-    "value": "Copyright display same time with object",
+    "value": "Copyright mention simultaneous with object",
     "value_type": "TEXT"
   },
   {
@@ -45617,7 +45707,7 @@
     "location": "modules/material-requests/const/index",
     "key": "copyright-display-around-object",
     "language": "nl",
-    "value": "Copyright display around object",
+    "value": "Copyright vermelding bij object",
     "value_type": "TEXT"
   },
   {
@@ -45626,7 +45716,7 @@
     "location": "modules/material-requests/const/index",
     "key": "copyright-display-around-object",
     "language": "en",
-    "value": "Copyright display around object",
+    "value": "Copyright status for object",
     "value_type": "TEXT"
   },
   {
@@ -45635,7 +45725,7 @@
     "location": "modules/material-requests/const/index",
     "key": "copyright-display-none",
     "language": "nl",
-    "value": "Copyright display none",
+    "value": "Geen vermelding auteursrecht",
     "value_type": "TEXT"
   },
   {
@@ -45644,7 +45734,7 @@
     "location": "modules/material-requests/const/index",
     "key": "copyright-display-none",
     "language": "en",
-    "value": "Copyright display none",
+    "value": "No copyright mention",
     "value_type": "TEXT"
   },
   {
@@ -46580,7 +46670,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
     "key": "aangevraagd-op",
     "language": "en",
-    "value": "Aangevraagd op",
+    "value": "Requested on",
     "value_type": "TEXT"
   },
   {
