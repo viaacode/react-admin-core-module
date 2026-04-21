@@ -25635,24 +25635,6 @@
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
     "location": "pages/beheer/instellingen/index",
-    "key": "geen-maintainer-id-gevonden",
-    "language": "nl",
-    "value": "Geen organisatie-ID gevonden",
-    "value_type": "HTML"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/beheer/instellingen/index",
-    "key": "geen-maintainer-id-gevonden",
-    "language": "en",
-    "value": "No organisation-ID found",
-    "value_type": "HTML"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/beheer/instellingen/index",
     "key": "instellingen",
     "language": "nl",
     "value": "Instellingen",
@@ -25666,6 +25648,24 @@
     "language": "en",
     "value": "Settings",
     "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/cp/views/cp-admin-settings-page",
+    "key": "aanbieder-maintainer-name-met-or-id-maintainer-id-heeft-geen-bezoekersruimte-op-hetarchief-be",
+    "language": "nl",
+    "value": "Aanbieder {{maintainerName}} met or-id {{maintainerId}} heeft geen bezoekersruimte op hetarchief.be.",
+    "value_type": "HTML"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/cp/views/cp-admin-settings-page",
+    "key": "aanbieder-maintainer-name-met-or-id-maintainer-id-heeft-geen-bezoekersruimte-op-hetarchief-be",
+    "language": "en",
+    "value": "Aanbieder {{maintainerName}} met or-id {{maintainerId}} heeft geen bezoekersruimte op hetarchief.be.",
+    "value_type": "HTML"
   },
   {
     "app": "HET_ARCHIEF",
