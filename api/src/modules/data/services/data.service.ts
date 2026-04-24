@@ -7,7 +7,7 @@ import { print } from 'graphql/language/printer';
 import { isString } from 'lodash';
 
 import { DuplicateKeyException } from '../../shared/exceptions/duplicate-key.exception';
-import { customError } from '../../shared/helpers/custom-error';
+import { CustomError } from '../../shared/helpers/error';
 import { GraphQlResponse } from '../types';
 
 @Injectable()
@@ -61,23 +61,22 @@ export class DataService {
 				this.logger.log(`[ADMIN_CORE] ${id}, Response from graphql query: ${JSON.stringify(data)}`);
 			}
 			if (data.errors) {
-				this.logger.error(
-					customError(`GraphQl query failed`, null, {
-						query: isString(query)
-							? query
-							: // biome-ignore lint/suspicious/noExplicitAny: any query type
-								((query as TypedDocumentNode<any, any>)?.definitions?.[0] as any)?.name?.value,
-						variables,
-						graphqlErrors: data.errors,
-					})
-				);
+				const error = new CustomError(`GraphQl query failed`, null, {
+					query: isString(query)
+						? query
+						: // biome-ignore lint/suspicious/noExplicitAny: any query type
+							((query as TypedDocumentNode<any, any>)?.definitions?.[0] as any)?.name?.value,
+					variables,
+					graphqlErrors: data.errors,
+				});
+				console.log(error);
 				if (data.errors[0]?.extensions?.code === 'constraint-violation') {
 					throw new DuplicateKeyException({
 						message: data.errors[0].message,
 						path: data.errors[0].extensions.path,
 					});
 				}
-				throw new InternalServerErrorException(data);
+				throw error;
 			}
 			return data.data;
 			// biome-ignore lint/suspicious/noExplicitAny: error can be any type
@@ -86,21 +85,15 @@ export class DataService {
 				throw err;
 			}
 
-			this.logger.error(
-				customError('Failed to get data from database', err, {
-					requestUrl: err?.request?.requestUrl,
-					query: isString(query)
-						? query
-						: // biome-ignore lint/suspicious/noExplicitAny: any query type
-							((query as TypedDocumentNode<any, any>)?.definitions?.[0] as any)?.name?.value,
-					variables,
-				})
-			);
-
-			throw new InternalServerErrorException(
-				null,
-				'Failed to get data from database, check the logs for more information.'
-			);
+			const error = new CustomError('Failed to get data from database', err, {
+				requestUrl: err?.request?.requestUrl,
+				query: isString(query)
+					? query
+					: // biome-ignore lint/suspicious/noExplicitAny: any query type
+						((query as TypedDocumentNode<any, any>)?.definitions?.[0] as any)?.name?.value,
+				variables,
+			});
+			throw error;
 		}
 	}
 }

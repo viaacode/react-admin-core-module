@@ -12,7 +12,7 @@ import {
 	UpdateTableColumnPreferencesForUserMutation,
 	UpdateTableColumnPreferencesForUserMutationVariables,
 } from '../../shared/generated/graphql-db-types-avo';
-import { customError } from '../../shared/helpers/custom-error';
+import { CustomError } from '../../shared/helpers/error';
 import { GqlTableColumnPreference } from '../table-column-preferences.types';
 
 @Injectable()
@@ -35,7 +35,7 @@ export class TableColumnPreferencesService {
 
 			return this.getColumnsFromPreference(response?.users_table_column_preferences?.[0]);
 		} catch (err) {
-			throw customError('Failed to get table column preference from the database', err, {
+			throw new CustomError('Failed to get table column preference from the database', err, {
 				query: 'GetTableColumnPreferencesForUser',
 			});
 		}
@@ -61,7 +61,7 @@ export class TableColumnPreferencesService {
 
 			return this.insertTableColumnPreference(profileId, columnKey, columns);
 		} catch (err) {
-			throw customError('Failed to save table column preference from the database', err, {
+			throw new CustomError('Failed to save table column preference from the database', err, {
 				method: 'saveTableColumnPreference',
 			});
 		}
@@ -86,7 +86,7 @@ export class TableColumnPreferencesService {
 				response?.insert_users_table_column_preferences?.returning?.[0]
 			);
 		} catch (err) {
-			throw customError('Failed to insert table column preference to the database', err, {
+			throw new CustomError('Failed to insert table column preference to the database', err, {
 				query: 'InsertTableColumnPreferencesForUserDocument',
 			});
 		}
@@ -111,7 +111,7 @@ export class TableColumnPreferencesService {
 				response?.update_users_table_column_preferences?.returning?.[0]
 			);
 		} catch (err) {
-			throw customError('Failed to update table column preference in the database', err, {
+			throw new CustomError('Failed to update table column preference in the database', err, {
 				query: 'UpdateTableColumnPreferencesForUserDocument',
 			});
 		}

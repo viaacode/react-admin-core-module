@@ -20,11 +20,13 @@ export class CustomError {
 		// biome-ignore lint/suspicious/noExplicitAny: todo
 		innerException: any = null,
 		// biome-ignore lint/suspicious/noExplicitAny: todo
-		additionalInfo: any = null
+		additionalInfo: any = null,
+		httpStatusCode: number = 500
 	) {
 		this.message = message;
 		this.innerException = innerException;
 		this.additionalInfo = additionalInfo;
+		this.statusCode = httpStatusCode;
 		Error.captureStackTrace(this, this.constructor);
 
 		if (innerException && typeof innerException.stack === 'string') {

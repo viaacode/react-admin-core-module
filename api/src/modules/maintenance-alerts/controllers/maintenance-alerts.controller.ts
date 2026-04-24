@@ -9,7 +9,6 @@ import { RequireAnyPermissions } from '../../shared/decorators/require-any-permi
 import { SessionUser } from '../../shared/decorators/user.decorator';
 import { addPrefix } from '../../shared/helpers/add-route-prefix';
 import { CustomError } from '../../shared/helpers/error';
-import { logAndThrow } from '../../shared/helpers/logAndThrow';
 import { SessionUserEntity } from '../../users/classes/session-user';
 import {
 	CreateMaintenanceAlertDto,
@@ -68,7 +67,9 @@ export class MaintenanceAlertsController {
 				queryDto,
 				userId: user.getId(),
 			});
-			logAndThrow(error);
+			console.log(error);
+			error.innerException = null;
+			throw error;
 		}
 	}
 

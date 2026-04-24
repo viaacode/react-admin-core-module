@@ -6,7 +6,7 @@ import { find, isNil, last } from 'lodash';
 import { MediahavenService } from '../mediahaven/services/mediahaven.service';
 import { PlayerTicketService } from '../player-ticket';
 import { toMilliseconds } from '../shared/helpers/duration';
-import { logAndThrow } from '../shared/helpers/logAndThrow';
+import { CustomError } from '../shared/helpers/error';
 import { DEFAULT_AUDIO_STILL } from './video-stills.consts';
 import {
 	ObjectNameInfo,
@@ -70,12 +70,12 @@ export class VideoStillsService {
 				};
 			});
 		} catch (err) {
-			logAndThrow(
-				new InternalServerErrorException({
-					message: 'Failed to get stills from video stills service',
-					innerException: err,
-				})
-			);
+			const error = new CustomError('Failed to get stills from video stills service', err, {
+				objectId,
+			});
+			console.log(error);
+			error.innerException = null;
+			throw error;
 		}
 	}
 

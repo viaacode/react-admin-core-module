@@ -6,8 +6,7 @@ import {
 	type GetPublicAssignmentsByTitleOrIdQuery,
 	type GetPublicAssignmentsByTitleOrIdQueryVariables,
 } from '../shared/generated/graphql-db-types-avo';
-import { customError } from '../shared/helpers/custom-error';
-import { logAndThrow } from '../shared/helpers/logAndThrow';
+import { CustomError } from '../shared/helpers/error';
 import { isUuid } from '../shared/helpers/uuid';
 
 export class AssignmentsService {
@@ -32,13 +31,14 @@ export class AssignmentsService {
 
 			return (response.app_assignments_v2 || []) as AvoAssignmentAssignment[];
 		} catch (err) {
-			logAndThrow(
-				customError('Failed to fetch assignment by title or id', err, {
-					titleOrId,
-					limit,
-					query: 'GetPublicAssignmentsByTitleOrId',
-				})
-			);
+			const error = new CustomError('Failed to fetch assignment by title or id', err, {
+				titleOrId,
+				limit,
+				query: 'GetPublicAssignmentsByTitleOrId',
+			});
+			console.log(error);
+			error.innerException = null;
+			throw error;
 		}
 	}
 }

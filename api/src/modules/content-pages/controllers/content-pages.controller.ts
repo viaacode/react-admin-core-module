@@ -33,7 +33,6 @@ import { SessionUser } from '../../shared/decorators/user.decorator';
 import { ApiKeyGuard } from '../../shared/guards/api-key.guard';
 import { addPrefix } from '../../shared/helpers/add-route-prefix';
 import { CustomError } from '../../shared/helpers/error';
-import { logAndThrow } from '../../shared/helpers/logAndThrow';
 import type { Locale } from '../../translations';
 import type { SessionUserEntity } from '../../users/classes/session-user';
 import { CONTENT_PAGE_COPY, CONTENT_PAGE_COPY_REGEX } from '../content-pages.consts';
@@ -127,19 +126,16 @@ export class ContentPagesController {
 			if (err?.response?.additionalInfo?.code === 'NOT_FOUND') {
 				throw new NotFoundException('The content page with path was not found');
 			}
-			logAndThrow(
-				new InternalServerErrorException({
-					message: 'Failed to get content page by language and path',
-					innerException: err,
-					additionalInfo: {
-						language,
-						path,
-						onlyInfo,
-						profileId: sessionUser?.getProfileId(),
-						ip,
-					},
-				})
-			);
+			const error = new CustomError('Failed to get content page by language and path', err, {
+				language,
+				path,
+				onlyInfo,
+				profileId: sessionUser?.getProfileId(),
+				ip,
+			});
+			console.log(error);
+			error.innerException = null;
+			throw error;
 		}
 	}
 
@@ -417,15 +413,12 @@ export class ContentPagesController {
 				AvoFileUploadAssetType.CONTENT_PAGE_IMAGE
 			);
 		} catch (err) {
-			logAndThrow(
-				new InternalServerErrorException({
-					message: 'Failed to duplicate assets in content block json',
-					innerException: err,
-					additionalInfo: {
-						contentBlockJson,
-					},
-				})
-			);
+			const error = new CustomError('Failed to duplicate assets in content block json', err, {
+				contentBlockJson,
+			});
+			console.log(error);
+			error.innerException = null;
+			throw error;
 		}
 	}
 
@@ -509,17 +502,14 @@ export class ContentPagesController {
 			// insert duplicated collection
 			return await this.contentPagesService.insertContentPage(contentToInsert);
 		} catch (err) {
-			logAndThrow(
-				new InternalServerErrorException({
-					message: 'Failed to duplicate content page',
-					innerException: err,
-					additionalInfo: {
-						id,
-						overrideValues,
-						profileId: user?.getProfileId(),
-					},
-				})
-			);
+			const error = new CustomError('Failed to duplicate content page', err, {
+				id,
+				overrideValues,
+				profileId: user?.getProfileId(),
+			});
+			console.log(error);
+			error.innerException = null;
+			throw error;
 		}
 	}
 

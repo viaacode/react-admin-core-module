@@ -24,7 +24,7 @@ import {
 	UpdateTranslationMutation,
 	UpdateTranslationMutationVariables,
 } from '../../shared/generated/graphql-db-types-hetarchief';
-import { customError } from '../../shared/helpers/custom-error';
+import { CustomError } from '../../shared/helpers/error';
 import { isAvo } from '../../shared/helpers/is-avo';
 import {
 	getTranslationFallback,
@@ -136,7 +136,7 @@ export class TranslationsService implements OnApplicationBootstrap {
 				await this.refreshBackendTranslations();
 			}
 		} catch (err) {
-			throw customError('Failed to insert or update the translation', err, {
+			throw new CustomError('Failed to insert or update the translation', err, {
 				component,
 				location,
 				key,
@@ -170,7 +170,7 @@ export class TranslationsService implements OnApplicationBootstrap {
 
 			await this.cacheManager.reset();
 		} catch (err) {
-			throw customError('Failed to insert the translation', err, {
+			throw new CustomError('Failed to insert the translation', err, {
 				component,
 				location,
 				key,
@@ -201,7 +201,7 @@ export class TranslationsService implements OnApplicationBootstrap {
 
 			await this.cacheManager.reset();
 		} catch (err) {
-			throw customError('Failed to update the translation', err, {
+			throw new CustomError('Failed to update the translation', err, {
 				component,
 				location,
 				key,
