@@ -28760,7 +28760,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-conversation",
     "key": "download-is-verlopen",
     "language": "en",
-    "value": "Download has expired",
+    "value": "Download has expired on {{date}}",
     "value_type": "HTML"
   },
   {
@@ -29093,7 +29093,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
     "key": "aanvraag-beoordelen-mobiel",
     "language": "nl",
-    "value": "Aanvraag beoordelen",
+    "value": "Beoordelen",
     "value_type": "TEXT"
   },
   {
@@ -29102,7 +29102,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
     "key": "aanvraag-beoordelen-mobiel",
     "language": "en",
-    "value": "Review request",
+    "value": "Review",
     "value_type": "TEXT"
   },
   {
@@ -29489,7 +29489,7 @@
     "location": "modules/account/components/material-request-download-blade/material-request-download-blade",
     "key": "download-mobiel",
     "language": "nl",
-    "value": "Download mobiel",
+    "value": "Download",
     "value_type": "TEXT"
   },
   {
@@ -29498,7 +29498,7 @@
     "location": "modules/account/components/material-request-download-blade/material-request-download-blade",
     "key": "download-mobiel",
     "language": "en",
-    "value": "Download mobiel",
+    "value": "Download",
     "value_type": "TEXT"
   },
   {
@@ -29972,6 +29972,132 @@
   {
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
+    "location": "modules/account/components/material-request-term-agreement-blade/material-request-term-agreement-blade",
+    "key": "ik-ga-akkoord",
+    "language": "nl",
+    "value": "Ik ga akkoord",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-term-agreement-blade/material-request-term-agreement-blade",
+    "key": "ik-ga-akkoord",
+    "language": "en",
+    "value": "I agree",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-term-agreement-blade/material-request-term-agreement-blade",
+    "key": "ik-ga-akkoord-mobiel",
+    "language": "nl",
+    "value": "Ik ga akkoord",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-term-agreement-blade/material-request-term-agreement-blade",
+    "key": "ik-ga-akkoord-mobiel",
+    "language": "en",
+    "value": "I agree",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-term-agreement-blade/material-request-term-agreement-blade",
+    "key": "sluit",
+    "language": "nl",
+    "value": "Sluit",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-term-agreement-blade/material-request-term-agreement-blade",
+    "key": "sluit",
+    "language": "en",
+    "value": "Close",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-term-agreement-blade/material-request-term-agreement-blade",
+    "key": "sluit-mobiel",
+    "language": "nl",
+    "value": "Sluit",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-term-agreement-blade/material-request-term-agreement-blade",
+    "key": "sluit-mobiel",
+    "language": "en",
+    "value": "Close",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-term-agreement-blade/material-request-term-agreement-blade",
+    "key": "aanvullende-gebruiksvoorwaarden-bij-aanvragen",
+    "language": "nl",
+    "value": "Aanvullende gebruiksvoorwaarden bij aanvragen",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-term-agreement-blade/material-request-term-agreement-blade",
+    "key": "aanvullende-gebruiksvoorwaarden-bij-aanvragen",
+    "language": "en",
+    "value": "Additional terms of use for requests",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-term-agreement-blade/material-request-term-agreement-blade",
+    "key": "aanvullende-gebruikersvoorwaarden-voor-materiaal-aanvragen-blade-aria-label",
+    "language": "nl",
+    "value": "Aanvullende gebruikersvoorwaarden voor materiaal aanvragen [BLADE_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-term-agreement-blade/material-request-term-agreement-blade",
+    "key": "aanvullende-gebruikersvoorwaarden-voor-materiaal-aanvragen-blade-aria-label",
+    "language": "en",
+    "value": "Aanvullende gebruikersvoorwaarden voor materiaal aanvragen [BLADE_ARIA_LABEL]",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-term-agreement-blade/material-request-term-agreement-blade",
+    "key": "aanvullende-gebruiksvoorwaarden-bij-aanvragen-inhoud",
+    "language": "nl",
+    "value": "<p style=\"text-align:start;\" size=\"2\" _root=\"[object Object]\" __ownerid=\"undefined\" __hash=\"undefined\" __altered=\"false\">Gepubliceerd op 29 september 2025</p><p style=\"text-align:start;text-indent:2em;\" data-renderer-start-pos=\"222\" data-local-id=\"2998c8bb-3f18-4d65-8993-a4b946ce76a1\"> </p><p></p><p></p><p><strong>Over het aanvraagformulier</strong></p><p>Via dit aanvraagformulier kan je bij de aanbieder toelating vragen om audiovisueel materiaal te hergebruiken. Het is belangrijk dat je alle informatie in dit aanvraagformulier controleert en naar waarheid invult. Zo kan de aanbieder jouw aanvraag behandelen en eventueel toelating verlenen. Je kan de status van je aanvraag volgen via het platform.  </p><p></p><p></p><p></p><p><strong>Over meemoo en het platform</strong></p><p>Je begrijpt en erkent dat: </p><ul><li>jouw aanvraag enkel betrekking heeft op het gebruik dat je expliciet hebt beschreven in het hergebruikformulier. Wanneer je een nieuw gebruik plant, dat niet meer gedekt wordt door je gemaakte  beschrijving, zal je een nieuwe aanvraag moeten indienen; </li><li>het meemoo-platform je materiaal kan tonen om het te kunnen evalueren en aanvragen te richten tot de aanbieders. Jij en jouw organisatie  krijgen geen rechten op het materiaal op basis van deze functionaliteit, of op basis van de verzending van dit formulier. Jij en jouw organisatie zullen zich onthouden van enig ander gebruik van dat materiaal, totdat je een expliciet bevestigend antwoord ontvangt van de aanbieder, en de eventuele gevraagde vergoeding hebt betaald. Elk ander gebruik is volledig op eigen risico; </li><li>meemoo enkel optreedt als tussenpersoon die communicatie tussen jou en de aanbieders van het materiaal vergemakkelijkt. Meemoo kan zelf geen toelatingen verlenen met betrekking tot het materiaal.</li></ul>",
+    "value_type": "HTML"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-term-agreement-blade/material-request-term-agreement-blade",
+    "key": "aanvullende-gebruiksvoorwaarden-bij-aanvragen-inhoud",
+    "language": "en",
+    "value": "<p>Published on the 29th of september 2025</p><p></p><p></p><p></p><p><strong>About the application form</strong><br/>With this application form, you can request authorisation to use audiovisual material of an organisation. It is important that you check all of the information in this form, and that you fill them in truthfully. That way, the organisation that manages your application can process - and potentially approve - your request more easily. You can track the status of your application on this platform.</p><p></p><p><strong>About meemoo and the platform</strong></p><p>You understand and acknowledge that:</p><ul><li>your application only applies to the use described in the application form. If you plan to use the material for anything else, you will have to make a new application;</li><li>the meemoo-platform will allow you to consult material in order to make an informed decision before making a request. No rights are given to you or your organisation based on this functionality or based on the making of a request for material. You and your organisation will refrain from using the material <span style=\"color:#000000\"><span style=\"font-size:16px\"><span style=\"background-color:#ffffff\">in any other way </span></span></span>until you have received the approval of the organisation that manages it, and until you have paid the compensation required (if any). Any other use is at your own risk;</li><li>meemoo is only an intermediary and facilitator in the communication between you and the organisation that manages the requested material. Meemoo cannot approve applications for audiovisual material.</li></ul>",
+    "value_type": "HTML"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
     "location": "modules/account/components/personal-info/personal-info",
     "key": "er-zijn-geen-aanvragen-te-vervolledigen",
     "language": "nl",
@@ -30021,6 +30147,60 @@
     "key": "de-aanvraag-naam-is-verplicht",
     "language": "en",
     "value": "An request name is required",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/personal-info/personal-info",
+    "key": "keur-de-aanvullende-gebruiksvoorwaarden-bij-aanvragen-goed",
+    "language": "nl",
+    "value": "Keur de aanvullende gebruiksvoorwaarden bij aanvragen goed.",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/personal-info/personal-info",
+    "key": "keur-de-aanvullende-gebruiksvoorwaarden-bij-aanvragen-goed",
+    "language": "en",
+    "value": "Agree to the additional terms of use for requests.",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/personal-info/personal-info",
+    "key": "ik-nam-kennis-en-ga-akkoord-met-de",
+    "language": "nl",
+    "value": "Ik nam kennis en ga akkoord met de",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/personal-info/personal-info",
+    "key": "ik-nam-kennis-en-ga-akkoord-met-de",
+    "language": "en",
+    "value": "I have read and agree to the",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/personal-info/personal-info",
+    "key": "aanvullende-gebruiksvoorwaarden-bij-aanvragen",
+    "language": "nl",
+    "value": "Aanvullende gebruiksvoorwaarden bij aanvragen",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/personal-info/personal-info",
+    "key": "aanvullende-gebruiksvoorwaarden-bij-aanvragen",
+    "language": "en",
+    "value": "Additional terms of use for requests",
     "value_type": "TEXT"
   },
   {
@@ -30333,42 +30513,6 @@
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
     "location": "modules/account/components/personal-info/personal-info",
-    "key": "over-jou",
-    "language": "nl",
-    "value": "Over jou",
-    "value_type": "HTML"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/personal-info/personal-info",
-    "key": "over-jou",
-    "language": "en",
-    "value": "About you",
-    "value_type": "HTML"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/personal-info/personal-info",
-    "key": "jouw-organisatie",
-    "language": "nl",
-    "value": "Jouw organisatie",
-    "value_type": "HTML"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/personal-info/personal-info",
-    "key": "jouw-organisatie",
-    "language": "en",
-    "value": "your organisation",
-    "value_type": "HTML"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/personal-info/personal-info",
     "key": "aanpassing-van-jouw-gegevens-aanvragen-hyperlink",
     "language": "nl",
     "value": "mailto:support@meemoo.be",
@@ -30418,6 +30562,42 @@
     "language": "en",
     "value": "Request changes to your data",
     "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/personal-info/personal-info",
+    "key": "over-jou",
+    "language": "nl",
+    "value": "Over jou",
+    "value_type": "HTML"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/personal-info/personal-info",
+    "key": "over-jou",
+    "language": "en",
+    "value": "About you",
+    "value_type": "HTML"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/personal-info/personal-info",
+    "key": "jouw-organisatie",
+    "language": "nl",
+    "value": "Jouw organisatie",
+    "value_type": "HTML"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/personal-info/personal-info",
+    "key": "jouw-organisatie",
+    "language": "en",
+    "value": "your organisation",
+    "value_type": "HTML"
   },
   {
     "app": "HET_ARCHIEF",
@@ -42305,7 +42485,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "bedoeld-gebruik-directe-commerciele-exploitatie-omschrijving",
     "language": "nl",
-    "value": "Directe commerciële exploitatie: er wordt een vergoeding gevraagd van derden die niet gericht is op het materiaal als dusdanig, maar die wel betrekking heeft op het materiaal, hetzij rechtstreeks, hetzij onrechtstreeks via goederen producten of diensten waarin het materiaal herkenbaar wordt geïntegreerd (inclusief bijvoorbeeld merchandising, of uitzending / streaming via commerciële media van een werk waarin het materiaal werd geïntegreerd)",
+    "value": "Er wordt een vergoeding gevraagd van derden die niet gericht is op het materiaal als dusdanig, maar die wel betrekking heeft op het materiaal, hetzij rechtstreeks, hetzij onrechtstreeks via goederen producten of diensten waarin het materiaal herkenbaar wordt geïntegreerd (inclusief bijvoorbeeld merchandising, of uitzending / streaming via commerciële media van een werk waarin het materiaal werd geïntegreerd)",
     "value_type": "HTML"
   },
   {
@@ -42314,7 +42494,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "bedoeld-gebruik-directe-commerciele-exploitatie-omschrijving",
     "language": "en",
-    "value": "<p>Direct commercial exploitation: compensation is asked of a third party, not related to the material as such, but only related to the material as it is directly or indirectly recognizably integrated in other goods or services (including merchandising, broadcasting or streaming in <span style=\"color:#000000\"><span style=\"font-size:16px\"><span style=\"background-color:#ffffff\">commercial media</span></span></span> of a work that has integrated the material)</p>",
+    "value": "<p>A compensation is asked of a third party, not related to the material as such, but only related to the material as it is directly or indirectly recognizably integrated in other goods or services (including merchandising, broadcasting or streaming in <span style=\"color:#000000\"><span style=\"font-size:16px\"><span style=\"background-color:#ffffff\">commercial media</span></span></span> of a work that has integrated the material)</p>",
     "value_type": "HTML"
   },
   {
@@ -45164,164 +45344,38 @@
   {
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
-    "location": "modules/account/views/account-my-material-requests",
-    "key": "toon-gearchiveerde-aanvragen",
+    "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
+    "key": "start-slider-aria-label",
     "language": "nl",
-    "value": "Toon gearchiveerde aanvragen",
+    "value": "startSliderAriaLabel",
     "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
-    "location": "modules/account/views/account-my-material-requests",
-    "key": "toon-gearchiveerde-aanvragen",
+    "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
+    "key": "start-slider-aria-label",
     "language": "en",
-    "value": "Toon gearchiveerde aanvragen",
+    "value": "startSliderAriaLabel",
     "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
-    "location": "pages/admin/materiaalaanvragen/index",
-    "key": "toon-gearchiveerde-aanvragen",
+    "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
+    "key": "end-slider-aria-label",
     "language": "nl",
-    "value": "Toon gearchiveerde aanvragen",
+    "value": "endSliderAriaLabel",
     "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
-    "location": "pages/admin/materiaalaanvragen/index",
-    "key": "toon-gearchiveerde-aanvragen",
+    "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
+    "key": "end-slider-aria-label",
     "language": "en",
-    "value": "Toon gearchiveerde aanvragen",
+    "value": "endSliderAriaLabel",
     "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/cp/views/cp-admin-material-requests",
-    "key": "toon-gearchiveerde-aanvragen",
-    "language": "nl",
-    "value": "Toon gearchiveerde aanvragen",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/cp/views/cp-admin-material-requests",
-    "key": "toon-gearchiveerde-aanvragen",
-    "language": "en",
-    "value": "Toon gearchiveerde aanvragen",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
-    "key": "gearchiveerde-aanvraag",
-    "language": "nl",
-    "value": "Gearchiveerde aanvraag",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
-    "key": "gearchiveerde-aanvraag",
-    "language": "en",
-    "value": "Gearchiveerde aanvraag",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/personal-info/personal-info",
-    "key": "ik-nam-kennis-en-ga-akkoord-met-de-aanvullende-gebruiksvoorwaarden-bij-aanvragen-hyperlink-sleutelgebruiker",
-    "language": "nl",
-    "value": "Ik nam kennis en ga akkoord met de Aanvullende gebruiksvoorwaarden bij aanvragen - hyperlink - sleutelgebruiker",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/personal-info/personal-info",
-    "key": "ik-nam-kennis-en-ga-akkoord-met-de-aanvullende-gebruiksvoorwaarden-bij-aanvragen-hyperlink-sleutelgebruiker",
-    "language": "en",
-    "value": "Ik nam kennis en ga akkoord met de Aanvullende gebruiksvoorwaarden bij aanvragen - hyperlink - sleutelgebruiker",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/personal-info/personal-info",
-    "key": "ik-nam-kennis-en-ga-akkoord-met-de-aanvullende-gebruiksvoorwaarden-bij-aanvragen-hyperlink",
-    "language": "nl",
-    "value": "Ik nam kennis en ga akkoord met de Aanvullende gebruiksvoorwaarden bij aanvragen - hyperlink",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/personal-info/personal-info",
-    "key": "ik-nam-kennis-en-ga-akkoord-met-de-aanvullende-gebruiksvoorwaarden-bij-aanvragen-hyperlink",
-    "language": "en",
-    "value": "Ik nam kennis en ga akkoord met de Aanvullende gebruiksvoorwaarden bij aanvragen - hyperlink",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/personal-info/personal-info",
-    "key": "ik-nam-kennis-en-ga-akkoord-met-de-aanvullende-gebruiksvoorwaarden-bij-aanvragen-aria-label",
-    "language": "nl",
-    "value": "Ik nam kennis en ga akkoord met de Aanvullende gebruiksvoorwaarden bij aanvragen - aria label",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/personal-info/personal-info",
-    "key": "ik-nam-kennis-en-ga-akkoord-met-de-aanvullende-gebruiksvoorwaarden-bij-aanvragen-aria-label",
-    "language": "en",
-    "value": "Ik nam kennis en ga akkoord met de Aanvullende gebruiksvoorwaarden bij aanvragen - aria label",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/personal-info/personal-info",
-    "key": "ik-nam-kennis-en-ga-akkoord-met-de-aanvullende-gebruiksvoorwaarden-bij-aanvragen",
-    "language": "nl",
-    "value": "Ik nam kennis en ga akkoord met de Aanvullende gebruiksvoorwaarden bij aanvragen",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/personal-info/personal-info",
-    "key": "ik-nam-kennis-en-ga-akkoord-met-de-aanvullende-gebruiksvoorwaarden-bij-aanvragen",
-    "language": "en",
-    "value": "Ik nam kennis en ga akkoord met de Aanvullende gebruiksvoorwaarden bij aanvragen",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/shared/components/material-request-information/material-request-information",
-    "key": "meer-informatie-over-aanvragen-sleutel-gebruiker",
-    "language": "nl",
-    "value": "Meer informatie over aanvragen sleutel gebruiker",
-    "value_type": "HTML"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/shared/components/material-request-information/material-request-information",
-    "key": "meer-informatie-over-aanvragen-sleutel-gebruiker",
-    "language": "en",
-    "value": "Meer informatie over aanvragen sleutel gebruiker",
-    "value_type": "HTML"
   },
   {
     "app": "HET_ARCHIEF",
