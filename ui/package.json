@@ -1,6 +1,6 @@
 {
   "name": "@meemoo/admin-core-ui",
-  "version": "5.2.65",
+  "version": "5.2.66",
   "private": false,
   "type": "module",
   "files": [
@@ -60,8 +60,8 @@
     "backup-translations-avo-qas": "dotenv -e .env/.env.local tsx --project ./scripts/tsconfig.json scripts/backup-translations.ts -- AVO",
     "translations:extract:hetarchief": "dotenv -e .env/.env.local tsx --project ./scripts/tsconfig.json scripts/extract-and-replace-translations.ts -- HET_ARCHIEF",
     "translations:extract:avo": "dotenv -e .env/.env.local tsx --project ./scripts/tsconfig.json scripts/extract-and-replace-translations.ts -- AVO",
-    "list-of-changed-translations-hetarchief": "dotenv -e .env/.env.local tsx --project ./scripts/tsconfig.json scripts/get-list-of-changed-translations.ts -- HET_ARCHIEF v5.2.48 v5.2.58",
-    "list-commit-messages-between-tags-hetarchief": "dotenv -e .env/.env.local tsx --project ./scripts/tsconfig.json scripts/get-list-of-commit-messages-between-tags.ts -- v5.2.48 v5.2.58",
+    "list-of-changed-translations-hetarchief": "dotenv -e .env/.env.local tsx --project ./scripts/tsconfig.json scripts/get-list-of-changed-translations.ts -- HET_ARCHIEF v5.2.64 v5.2.65",
+    "list-commit-messages-between-tags-hetarchief": "dotenv -e .env/.env.local tsx --project ./scripts/tsconfig.json scripts/get-list-of-commit-messages-between-tags.ts -- v5.2.64 v5.2.65",
     "list-of-changed-translations-avo": "dotenv -e .env/.env.local tsx --project ./scripts/tsconfig.json scripts/get-list-of-changed-translations.ts -- AVO v5.2.26 v5.2.32",
     "list-commit-messages-between-tags-avo": "dotenv -e .env/.env.local tsx --project ./scripts/tsconfig.json scripts/get-list-of-commit-messages-between-tags.ts -- v5.2.26 v5.2.32",
     "check-bundled-files": "npx depcruise src/react-admin --config bundle-import-rules.json --include-only \"^src\" --exclude \"(.spec.tsx?|.test.tsx?|node_modules)\"",
@@ -73,7 +73,7 @@
   "peerDependencies": {
     "@emotion/react": "11.11.1",
     "@hookform/resolvers": "2.9.11",
-    "@meemoo/react-components": "5.1.30",
+    "@meemoo/react-components": "5.1.31",
     "@studiohyperdrive/pagination": "1.0.0",
     "@floating-ui/react": "0.27.18",
     "@tanstack/react-query": "5.90.8",
