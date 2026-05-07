@@ -20075,7 +20075,7 @@
     "location": "pages/nieuwsbrief/index",
     "key": "nieuwsbrief-omschrijving",
     "language": "nl",
-    "value": "Ik wil graag maximaal 3 keer per jaar een nieuwsbrief ontvangen van hetarchief.be met informatie over nieuwe mogelijkheden op het platform en inspiratie voor mijn zoektocht naar digitaal archiefmateriaal.\r\n\r\nIk stem in met de verwerking van mijn persoonsgegevens overeenkomstig het privacybeleid.",
+    "value": "Ik wil graag maximaal 3 keer per jaar een nieuwsbrief ontvangen van hetarchief.be met informatie over nieuwe mogelijkheden op het platform en inspiratie voor mijn zoektocht naar digitaal archiefmateriaal.\n\nIk stem in met de verwerking van mijn persoonsgegevens overeenkomstig het privacybeleid.",
     "value_type": "TEXT"
   },
   {
@@ -20661,6 +20661,60 @@
     "key": "mijn-materiaalaanvragen",
     "language": "en",
     "value": "My requests",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/const/index",
+    "key": "alle-materiaalaanvragen",
+    "language": "nl",
+    "value": "Alle materiaalaanvragen",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/const/index",
+    "key": "alle-materiaalaanvragen",
+    "language": "en",
+    "value": "Alle materiaalaanvragen",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/const/index",
+    "key": "inkomende-materiaalaanvragen",
+    "language": "nl",
+    "value": "Inkomende materiaalaanvragen",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/const/index",
+    "key": "inkomende-materiaalaanvragen",
+    "language": "en",
+    "value": "Incoming material requests",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/const/index",
+    "key": "mijn-uitgaande-materiaalaanvragen",
+    "language": "nl",
+    "value": "Mijn uitgaande materiaalaanvragen",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/const/index",
+    "key": "mijn-uitgaande-materiaalaanvragen",
+    "language": "en",
+    "value": "Mijn uitgaande materiaalaanvragen",
     "value_type": "TEXT"
   },
   {
@@ -22478,7 +22532,7 @@
     "location": "modules/account/views/account-my-material-requests",
     "key": "zoek-naar-materiaal-aanvraag-input-aria-label",
     "language": "en",
-    "value": "Search for material request\r\n[INPUT_ARIA_LABEL]",
+    "value": "Search for material request\n[INPUT_ARIA_LABEL]",
     "value_type": "TEXT"
   },
   {
@@ -23703,6 +23757,24 @@
     "key": "groepen-en-permissies",
     "language": "en",
     "value": "Groups and permissions",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/const/routing",
+    "key": "mijn-uitgaande-materiaalaanvragen",
+    "language": "nl",
+    "value": "Mijn uitgaande materiaalaanvragen",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/const/routing",
+    "key": "mijn-uitgaande-materiaalaanvragen",
+    "language": "en",
+    "value": "Mijn uitgaande materiaalaanvragen",
     "value_type": "TEXT"
   },
   {
@@ -24945,6 +25017,24 @@
     "key": "naar-mijn-bezoekerstool",
     "language": "en",
     "value": "My visitor space",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/cp/const/index",
+    "key": "inkomende-materiaalaanvragen",
+    "language": "nl",
+    "value": "Inkomende materiaalaanvragen",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/cp/const/index",
+    "key": "inkomende-materiaalaanvragen",
+    "language": "en",
+    "value": "Incoming material requests",
     "value_type": "TEXT"
   },
   {
@@ -28298,6 +28388,672 @@
   {
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
+    "location": "modules/account/components/material-request-additional-conditions-blade/material-request-additional-conditions-blade",
+    "key": "toestemming-rechthebbende",
+    "language": "nl",
+    "value": "Toestemming rechthebbende",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-additional-conditions-blade/material-request-additional-conditions-blade",
+    "key": "toestemming-rechthebbende",
+    "language": "en",
+    "value": "Toestemming rechthebbende",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-additional-conditions-blade/material-request-additional-conditions-blade",
+    "key": "beschrijf-hier-welke-toestemming-de-aanvrager-moet-verkrijgen-van-de-rechthebbende",
+    "language": "nl",
+    "value": "Beschrijf hier welke toestemming de aanvrager moet verkrijgen van de rechthebbende.",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-additional-conditions-blade/material-request-additional-conditions-blade",
+    "key": "beschrijf-hier-welke-toestemming-de-aanvrager-moet-verkrijgen-van-de-rechthebbende",
+    "language": "en",
+    "value": "Beschrijf hier welke toestemming de aanvrager moet verkrijgen van de rechthebbende.",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-additional-conditions-blade/material-request-additional-conditions-blade",
+    "key": "beschrijf-de-voorwaarde",
+    "language": "nl",
+    "value": "Beschrijf de voorwaarde...",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-additional-conditions-blade/material-request-additional-conditions-blade",
+    "key": "beschrijf-de-voorwaarde",
+    "language": "en",
+    "value": "Beschrijf de voorwaarde...",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-additional-conditions-blade/material-request-additional-conditions-blade",
+    "key": "naamsvermelding",
+    "language": "nl",
+    "value": "Naamsvermelding",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-additional-conditions-blade/material-request-additional-conditions-blade",
+    "key": "naamsvermelding",
+    "language": "en",
+    "value": "Naamsvermelding",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-additional-conditions-blade/material-request-additional-conditions-blade",
+    "key": "beschrijf-hier-hoe-de-aanvrager-de-naamsvermelding-moet-uitvoeren",
+    "language": "nl",
+    "value": "Beschrijf hier hoe de aanvrager de naamsvermelding moet uitvoeren.",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-additional-conditions-blade/material-request-additional-conditions-blade",
+    "key": "beschrijf-hier-hoe-de-aanvrager-de-naamsvermelding-moet-uitvoeren",
+    "language": "en",
+    "value": "Beschrijf hier hoe de aanvrager de naamsvermelding moet uitvoeren.",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-additional-conditions-blade/material-request-additional-conditions-blade",
+    "key": "betaling",
+    "language": "nl",
+    "value": "Betaling",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-additional-conditions-blade/material-request-additional-conditions-blade",
+    "key": "betaling",
+    "language": "en",
+    "value": "Betaling",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-additional-conditions-blade/material-request-additional-conditions-blade",
+    "key": "beschrijf-hier-welke-betaling-de-aanvrager-moet-uitvoeren",
+    "language": "nl",
+    "value": "Beschrijf hier welke betaling de aanvrager moet uitvoeren.",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-additional-conditions-blade/material-request-additional-conditions-blade",
+    "key": "beschrijf-hier-welke-betaling-de-aanvrager-moet-uitvoeren",
+    "language": "en",
+    "value": "Beschrijf hier welke betaling de aanvrager moet uitvoeren.",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-additional-conditions-blade/material-request-additional-conditions-blade",
+    "key": "extra-gebruiksbeperking",
+    "language": "nl",
+    "value": "Extra gebruiksbeperking",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-additional-conditions-blade/material-request-additional-conditions-blade",
+    "key": "extra-gebruiksbeperking",
+    "language": "en",
+    "value": "Extra gebruiksbeperking",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-additional-conditions-blade/material-request-additional-conditions-blade",
+    "key": "beschrijf-hier-welke-extra-gebruiksbeperkingen-van-toepassing-zijn",
+    "language": "nl",
+    "value": "Beschrijf hier welke extra gebruiksbeperkingen van toepassing zijn.",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-additional-conditions-blade/material-request-additional-conditions-blade",
+    "key": "beschrijf-hier-welke-extra-gebruiksbeperkingen-van-toepassing-zijn",
+    "language": "en",
+    "value": "Beschrijf hier welke extra gebruiksbeperkingen van toepassing zijn.",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-additional-conditions-blade/material-request-additional-conditions-blade",
+    "key": "naar-volgende-stap",
+    "language": "nl",
+    "value": "Naar volgende stap",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-additional-conditions-blade/material-request-additional-conditions-blade",
+    "key": "naar-volgende-stap",
+    "language": "en",
+    "value": "Naar volgende stap",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-additional-conditions-blade/material-request-additional-conditions-blade",
+    "key": "naar-volgende-stap-mobile",
+    "language": "nl",
+    "value": "Naar volgende stap - mobile",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-additional-conditions-blade/material-request-additional-conditions-blade",
+    "key": "naar-volgende-stap-mobile",
+    "language": "en",
+    "value": "Naar volgende stap - mobile",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-additional-conditions-blade/material-request-additional-conditions-blade",
+    "key": "annuleer",
+    "language": "nl",
+    "value": "Annuleer",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-additional-conditions-blade/material-request-additional-conditions-blade",
+    "key": "annuleer",
+    "language": "en",
+    "value": "Annuleer",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-additional-conditions-blade/material-request-additional-conditions-blade",
+    "key": "annuleer-mobile",
+    "language": "nl",
+    "value": "Annuleer - mobile",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-additional-conditions-blade/material-request-additional-conditions-blade",
+    "key": "annuleer-mobile",
+    "language": "en",
+    "value": "Annuleer - mobile",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-additional-conditions-blade/material-request-additional-conditions-blade",
+    "key": "bijkomende-voorwaarden",
+    "language": "nl",
+    "value": "Bijkomende voorwaarden",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-additional-conditions-blade/material-request-additional-conditions-blade",
+    "key": "bijkomende-voorwaarden",
+    "language": "en",
+    "value": "Bijkomende voorwaarden",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-additional-conditions-blade/material-request-additional-conditions-blade",
+    "key": "bijkomende-voorwaarden-aria-label",
+    "language": "nl",
+    "value": "Bijkomende voorwaarden - aria label",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-additional-conditions-blade/material-request-additional-conditions-blade",
+    "key": "bijkomende-voorwaarden-aria-label",
+    "language": "en",
+    "value": "Bijkomende voorwaarden - aria label",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-additional-conditions-blade/material-request-additional-conditions-blade",
+    "key": "stap-1-van-2",
+    "language": "nl",
+    "value": "Stap 1 van 2",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-additional-conditions-blade/material-request-additional-conditions-blade",
+    "key": "stap-1-van-2",
+    "language": "en",
+    "value": "Stap 1 van 2",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-additional-conditions-blade/material-request-additional-conditions-blade",
+    "key": "selecteer-en-beschrijf-welke-bijkomende-voorwaarden-je-wil-opleggen-je-voorstel-wordt-naar-de-aanvrager-gestuurd-die-de-bijkomende-voorwaarden-kan-nalezen-en-accepteren",
+    "language": "nl",
+    "value": "Selecteer en beschrijf welke bijkomende voorwaarden je wil opleggen. Je voorstel wordt naar de aanvrager gestuurd, die de bijkomende voorwaarden kan nalezen en accepteren.",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-additional-conditions-blade/material-request-additional-conditions-blade",
+    "key": "selecteer-en-beschrijf-welke-bijkomende-voorwaarden-je-wil-opleggen-je-voorstel-wordt-naar-de-aanvrager-gestuurd-die-de-bijkomende-voorwaarden-kan-nalezen-en-accepteren",
+    "language": "en",
+    "value": "Selecteer en beschrijf welke bijkomende voorwaarden je wil opleggen. Je voorstel wordt naar de aanvrager gestuurd, die de bijkomende voorwaarden kan nalezen en accepteren.",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-additional-conditions-blade/material-request-additional-conditions-blade",
+    "key": "voorwaarden",
+    "language": "nl",
+    "value": "Voorwaarden",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-additional-conditions-blade/material-request-additional-conditions-blade",
+    "key": "voorwaarden",
+    "language": "en",
+    "value": "Voorwaarden",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-additional-conditions-blade/material-request-additional-conditions-blade",
+    "key": "selecteer-minstens-1-voorwaarde",
+    "language": "nl",
+    "value": "Selecteer minstens 1 voorwaarde",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-additional-conditions-blade/material-request-additional-conditions-blade",
+    "key": "selecteer-minstens-1-voorwaarde",
+    "language": "en",
+    "value": "Selecteer minstens 1 voorwaarde",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-additional-conditions-resolution-blade/material-request-additional-conditions-resolution-blade",
+    "key": "bijkomende-voorwaarden-opgelegd",
+    "language": "nl",
+    "value": "bijkomende voorwaarden opgelegd",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-additional-conditions-resolution-blade/material-request-additional-conditions-resolution-blade",
+    "key": "bijkomende-voorwaarden-opgelegd",
+    "language": "en",
+    "value": "bijkomende voorwaarden opgelegd",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-additional-conditions-resolution-blade/material-request-additional-conditions-resolution-blade",
+    "key": "de-bijkomende-voorwaarden-zijn-succesvol-opgelegd",
+    "language": "nl",
+    "value": "de bijkomende voorwaarden zijn succesvol opgelegd.",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-additional-conditions-resolution-blade/material-request-additional-conditions-resolution-blade",
+    "key": "de-bijkomende-voorwaarden-zijn-succesvol-opgelegd",
+    "language": "en",
+    "value": "de bijkomende voorwaarden zijn succesvol opgelegd.",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-additional-conditions-resolution-blade/material-request-additional-conditions-resolution-blade",
+    "key": "er-ging-iets-mis",
+    "language": "nl",
+    "value": "er ging iets mis",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-additional-conditions-resolution-blade/material-request-additional-conditions-resolution-blade",
+    "key": "er-ging-iets-mis",
+    "language": "en",
+    "value": "er ging iets mis",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-additional-conditions-resolution-blade/material-request-additional-conditions-resolution-blade",
+    "key": "er-ging-iets-mis-tijdens-het-opleggen-van-de-bijkomende-voorwaarden",
+    "language": "nl",
+    "value": "Er ging iets mis tijdens het opleggen van de bijkomende voorwaarden.",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-additional-conditions-resolution-blade/material-request-additional-conditions-resolution-blade",
+    "key": "er-ging-iets-mis-tijdens-het-opleggen-van-de-bijkomende-voorwaarden",
+    "language": "en",
+    "value": "Er ging iets mis tijdens het opleggen van de bijkomende voorwaarden.",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-additional-conditions-resolution-blade/material-request-additional-conditions-resolution-blade",
+    "key": "bijkomende-voorwaarden-opleggen",
+    "language": "nl",
+    "value": "Bijkomende voorwaarden opleggen",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-additional-conditions-resolution-blade/material-request-additional-conditions-resolution-blade",
+    "key": "bijkomende-voorwaarden-opleggen",
+    "language": "en",
+    "value": "Bijkomende voorwaarden opleggen",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-additional-conditions-resolution-blade/material-request-additional-conditions-resolution-blade",
+    "key": "bijkomende-voorwaarden-opleggen-mobile",
+    "language": "nl",
+    "value": "Bijkomende voorwaarden opleggen - mobile",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-additional-conditions-resolution-blade/material-request-additional-conditions-resolution-blade",
+    "key": "bijkomende-voorwaarden-opleggen-mobile",
+    "language": "en",
+    "value": "Bijkomende voorwaarden opleggen - mobile",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-additional-conditions-resolution-blade/material-request-additional-conditions-resolution-blade",
+    "key": "keer-terug",
+    "language": "nl",
+    "value": "Keer terug",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-additional-conditions-resolution-blade/material-request-additional-conditions-resolution-blade",
+    "key": "keer-terug",
+    "language": "en",
+    "value": "Keer terug",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-additional-conditions-resolution-blade/material-request-additional-conditions-resolution-blade",
+    "key": "keer-terug-mobile",
+    "language": "nl",
+    "value": "Keer terug - mobile",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-additional-conditions-resolution-blade/material-request-additional-conditions-resolution-blade",
+    "key": "keer-terug-mobile",
+    "language": "en",
+    "value": "Keer terug - mobile",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-additional-conditions-resolution-blade/material-request-additional-conditions-resolution-blade",
+    "key": "bijkomende-voorwaarden",
+    "language": "nl",
+    "value": "Bijkomende voorwaarden",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-additional-conditions-resolution-blade/material-request-additional-conditions-resolution-blade",
+    "key": "bijkomende-voorwaarden",
+    "language": "en",
+    "value": "Bijkomende voorwaarden",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-additional-conditions-resolution-blade/material-request-additional-conditions-resolution-blade",
+    "key": "bijkomende-voorwaarden-aria-label",
+    "language": "nl",
+    "value": "Bijkomende voorwaarden - aria label",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-additional-conditions-resolution-blade/material-request-additional-conditions-resolution-blade",
+    "key": "bijkomende-voorwaarden-aria-label",
+    "language": "en",
+    "value": "Bijkomende voorwaarden - aria label",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-additional-conditions-resolution-blade/material-request-additional-conditions-resolution-blade",
+    "key": "stap-2-van-2",
+    "language": "nl",
+    "value": "Stap 2 van 2",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-additional-conditions-resolution-blade/material-request-additional-conditions-resolution-blade",
+    "key": "stap-2-van-2",
+    "language": "en",
+    "value": "Stap 2 van 2",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-additional-conditions-resolution-blade/material-request-additional-conditions-resolution-blade",
+    "key": "duid-het-gewenst-verloop-aan-na-het-doorsturen-van-het-voorstel-met-bijkomende-voorwaarden-wanneer-de-aanvrager-de-voorwaarden-aanvaardt-wil-ik-dat",
+    "language": "nl",
+    "value": "Duid het gewenst verloop aan na het doorsturen van het voorstel met bijkomende voorwaarden. Wanneer de aanvrager de voorwaarden aanvaardt, wil ik dat:",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-additional-conditions-resolution-blade/material-request-additional-conditions-resolution-blade",
+    "key": "duid-het-gewenst-verloop-aan-na-het-doorsturen-van-het-voorstel-met-bijkomende-voorwaarden-wanneer-de-aanvrager-de-voorwaarden-aanvaardt-wil-ik-dat",
+    "language": "en",
+    "value": "Duid het gewenst verloop aan na het doorsturen van het voorstel met bijkomende voorwaarden. Wanneer de aanvrager de voorwaarden aanvaardt, wil ik dat:",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-additional-conditions-resolution-blade/material-request-additional-conditions-resolution-blade",
+    "key": "de-aanvraag-automatisch-wordt-goedgekeurd",
+    "language": "nl",
+    "value": "De aanvraag automatisch wordt goedgekeurd",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-additional-conditions-resolution-blade/material-request-additional-conditions-resolution-blade",
+    "key": "de-aanvraag-automatisch-wordt-goedgekeurd",
+    "language": "en",
+    "value": "De aanvraag automatisch wordt goedgekeurd",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-additional-conditions-resolution-blade/material-request-additional-conditions-resolution-blade",
+    "key": "de-aanvraag-automatisch-wordt-goedgekeurd-aria-label",
+    "language": "nl",
+    "value": "De aanvraag automatisch wordt goedgekeurd - aria label",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-additional-conditions-resolution-blade/material-request-additional-conditions-resolution-blade",
+    "key": "de-aanvraag-automatisch-wordt-goedgekeurd-aria-label",
+    "language": "en",
+    "value": "De aanvraag automatisch wordt goedgekeurd - aria label",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-additional-conditions-resolution-blade/material-request-additional-conditions-resolution-blade",
+    "key": "in-dit-geval-zal-het-materiaal-onmiddelijk-klaargemaakt-worden-voor-download",
+    "language": "nl",
+    "value": "In dit geval zal het materiaal onmiddelijk klaargemaakt worden voor download.",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-additional-conditions-resolution-blade/material-request-additional-conditions-resolution-blade",
+    "key": "in-dit-geval-zal-het-materiaal-onmiddelijk-klaargemaakt-worden-voor-download",
+    "language": "en",
+    "value": "In dit geval zal het materiaal onmiddelijk klaargemaakt worden voor download.",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-additional-conditions-resolution-blade/material-request-additional-conditions-resolution-blade",
+    "key": "de-aanvraag-automatisch-wordt-afgekeurd",
+    "language": "nl",
+    "value": "De aanvraag wordt manueel goedgekeurd",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-additional-conditions-resolution-blade/material-request-additional-conditions-resolution-blade",
+    "key": "de-aanvraag-automatisch-wordt-afgekeurd",
+    "language": "en",
+    "value": "De aanvraag automatisch wordt afgekeurd",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-additional-conditions-resolution-blade/material-request-additional-conditions-resolution-blade",
+    "key": "in-dit-geval-zal-je-eerst-nog-manueel-de-finale-goedkeuring-moeten-geven-vooraleer-het-materiaal-klaargemaakt-wordt-voor-download",
+    "language": "nl",
+    "value": "In dit geval zal je eerst nog manueel de finale goedkeuring moeten geven vooraleer het materiaal klaargemaakt wordt voor download.",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-additional-conditions-resolution-blade/material-request-additional-conditions-resolution-blade",
+    "key": "in-dit-geval-zal-je-eerst-nog-manueel-de-finale-goedkeuring-moeten-geven-vooraleer-het-materiaal-klaargemaakt-wordt-voor-download",
+    "language": "en",
+    "value": "In dit geval zal je eerst nog manueel de finale goedkeuring moeten geven vooraleer het materiaal klaargemaakt wordt voor download.",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-additional-conditions-resolution-blade/material-request-additional-conditions-resolution-blade",
+    "key": "selecteer-een-van-de-opties",
+    "language": "nl",
+    "value": "Selecteer één van de opties",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-additional-conditions-resolution-blade/material-request-additional-conditions-resolution-blade",
+    "key": "selecteer-een-van-de-opties",
+    "language": "en",
+    "value": "Selecteer één van de opties",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
     "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
     "key": "info-aanvraag",
     "language": "nl",
@@ -28445,7 +29201,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
     "key": "voorwaarden-verstuurd-op",
     "language": "nl",
-    "value": "Voorwaarden verstuurd op",
+    "value": "Voorwaarden verstuurd op {{date}}",
     "value_type": "TEXT"
   },
   {
@@ -28454,7 +29210,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
     "key": "voorwaarden-verstuurd-op",
     "language": "en",
-    "value": "Conditions sent on",
+    "value": "Conditions sent on {{date}}",
     "value_type": "TEXT"
   },
   {
@@ -28491,6 +29247,78 @@
     "key": "geschiedenis",
     "language": "en",
     "value": "History",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-detail-blade/material-request-content-info",
+    "key": "toestemming-rechthebbende-content-info",
+    "language": "nl",
+    "value": "Toestemming rechthebbende - content info",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-detail-blade/material-request-content-info",
+    "key": "toestemming-rechthebbende-content-info",
+    "language": "en",
+    "value": "Toestemming rechthebbende - content info",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-detail-blade/material-request-content-info",
+    "key": "naamsvermelding-content-info",
+    "language": "nl",
+    "value": "Naamsvermelding - content info",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-detail-blade/material-request-content-info",
+    "key": "naamsvermelding-content-info",
+    "language": "en",
+    "value": "Naamsvermelding - content info",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-detail-blade/material-request-content-info",
+    "key": "betaling-content-info",
+    "language": "nl",
+    "value": "Betaling - content info",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-detail-blade/material-request-content-info",
+    "key": "betaling-content-info",
+    "language": "en",
+    "value": "Betaling - content info",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-detail-blade/material-request-content-info",
+    "key": "extra-gebruiksbeperking-content-info",
+    "language": "nl",
+    "value": "Extra gebruiksbeperking - content info",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-detail-blade/material-request-content-info",
+    "key": "extra-gebruiksbeperking-content-info",
+    "language": "en",
+    "value": "Extra gebruiksbeperking - content info",
     "value_type": "TEXT"
   },
   {
@@ -28833,6 +29661,42 @@
     "key": "de-download-is-niet-langer-beschikbaar-dus-deze-aanvraag-wordt-afgesloten",
     "language": "en",
     "value": "The download is no longer available, so this request is closed.",
+    "value_type": "HTML"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-detail-blade/material-request-conversation-message",
+    "key": "de-aanvraag-werd-afgesloten-hieronder-vind-je-een-samenvatting-alle-documenten-worden-nog-tot-en-met-date-bijgehouden",
+    "language": "nl",
+    "value": "De aanvraag werd afgesloten, hieronder vind je een samenvatting. Alle documenten worden nog tot en met {{date}} bijgehouden",
+    "value_type": "HTML"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-detail-blade/material-request-conversation-message",
+    "key": "de-aanvraag-werd-afgesloten-hieronder-vind-je-een-samenvatting-alle-documenten-worden-nog-tot-en-met-date-bijgehouden",
+    "language": "en",
+    "value": "De aanvraag werd afgesloten, hieronder vind je een samenvatting. Alle documenten worden nog tot en met {{date}} bijgehouden",
+    "value_type": "HTML"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-detail-blade/material-request-conversation-message",
+    "key": "strong-name-strong-stuurde-bijkomende-gebruiksvoorwaarden",
+    "language": "nl",
+    "value": "<p><span style=\"color:#000000\"><span style=\"font-size:16px\"><span style=\"background-color:#ffffff\"><strong>{{name}}</strong></span></span></span> stuurde bijkomende gebruiksvoorwaarden</p>",
+    "value_type": "HTML"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-detail-blade/material-request-conversation-message",
+    "key": "strong-name-strong-stuurde-bijkomende-gebruiksvoorwaarden",
+    "language": "en",
+    "value": "<strong>{{name}}</strong> stuurde bijkomende gebruiksvoorwaarden",
     "value_type": "HTML"
   },
   {
@@ -29391,6 +30255,78 @@
     "key": "keer-terug",
     "language": "en",
     "value": "Go back",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
+    "key": "onopgeslagen-wijzigingen",
+    "language": "nl",
+    "value": "Onopgeslagen wijzigingen",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
+    "key": "onopgeslagen-wijzigingen",
+    "language": "en",
+    "value": "Onopgeslagen wijzigingen",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
+    "key": "er-zijn-nog-onopgeslagen-wijzigingen-in-de-bijkomende-gebruiksvoorwaarden-weet-je-zeker-dat-je-wil-annuleren",
+    "language": "nl",
+    "value": "Er zijn nog onopgeslagen wijzigingen in de bijkomende gebruiksvoorwaarden. Weet je zeker dat je wil annuleren?",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
+    "key": "er-zijn-nog-onopgeslagen-wijzigingen-in-de-bijkomende-gebruiksvoorwaarden-weet-je-zeker-dat-je-wil-annuleren",
+    "language": "en",
+    "value": "Er zijn nog onopgeslagen wijzigingen in de bijkomende gebruiksvoorwaarden. Weet je zeker dat je wil annuleren?",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
+    "key": "ja-annuleer-wijzigingen-in-de-bijkomende-gebruiksvoorwaarden",
+    "language": "nl",
+    "value": "Ja, annuleer wijzigingen in de bijkomende gebruiksvoorwaarden",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
+    "key": "ja-annuleer-wijzigingen-in-de-bijkomende-gebruiksvoorwaarden",
+    "language": "en",
+    "value": "Ja, annuleer wijzigingen in de bijkomende gebruiksvoorwaarden",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
+    "key": "nee-behoud-wijzigingen-in-de-bijkomende-gebruiksvoorwaarden",
+    "language": "nl",
+    "value": "Nee, behoud wijzigingen in de bijkomende gebruiksvoorwaarden",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
+    "key": "nee-behoud-wijzigingen-in-de-bijkomende-gebruiksvoorwaarden",
+    "language": "en",
+    "value": "Nee, behoud wijzigingen in de bijkomende gebruiksvoorwaarden",
     "value_type": "TEXT"
   },
   {
@@ -36700,6 +37636,60 @@
     "language": "en",
     "value": "There are errors in this form. Please correct them and try again.",
     "value_type": "HTML"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/shared/components/checkbox-accordion/checkbox-accordion",
+    "key": "sluit-accordion",
+    "language": "nl",
+    "value": "Sluit accordion",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/shared/components/checkbox-accordion/checkbox-accordion",
+    "key": "sluit-accordion",
+    "language": "en",
+    "value": "Sluit accordion",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/shared/components/checkbox-accordion/checkbox-accordion",
+    "key": "open-accordion",
+    "language": "nl",
+    "value": "Open accordion",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/shared/components/checkbox-accordion/checkbox-accordion",
+    "key": "open-accordion",
+    "language": "en",
+    "value": "Open accordion",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/shared/components/checkbox-accordion/checkbox-accordion",
+    "key": "dit-veld-is-verplicht",
+    "language": "nl",
+    "value": "Dit veld is verplicht",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/shared/components/checkbox-accordion/checkbox-accordion",
+    "key": "dit-veld-is-verplicht",
+    "language": "en",
+    "value": "Dit veld is verplicht",
+    "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
@@ -45321,1068 +46311,6 @@
     "key": "sluiten",
     "language": "en",
     "value": "Close",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/const/index",
-    "key": "alle-materiaalaanvragen",
-    "language": "nl",
-    "value": "Alle materiaalaanvragen",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/const/index",
-    "key": "alle-materiaalaanvragen",
-    "language": "en",
-    "value": "Alle materiaalaanvragen",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/const/index",
-    "key": "inkomende-materiaalaanvragen",
-    "language": "nl",
-    "value": "Inkomende materiaalaanvragen",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/const/index",
-    "key": "inkomende-materiaalaanvragen",
-    "language": "en",
-    "value": "Inkomende materiaalaanvragen",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/const/index",
-    "key": "mijn-uitgaande-materiaalaanvragen",
-    "language": "nl",
-    "value": "Mijn uitgaande materiaalaanvragen",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/const/index",
-    "key": "mijn-uitgaande-materiaalaanvragen",
-    "language": "en",
-    "value": "Mijn uitgaande materiaalaanvragen",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/admin/const/routing",
-    "key": "mijn-uitgaande-materiaalaanvragen",
-    "language": "nl",
-    "value": "Mijn uitgaande materiaalaanvragen",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/admin/const/routing",
-    "key": "mijn-uitgaande-materiaalaanvragen",
-    "language": "en",
-    "value": "Mijn uitgaande materiaalaanvragen",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/cp/const/index",
-    "key": "inkomende-materiaalaanvragen",
-    "language": "nl",
-    "value": "Inkomende materiaalaanvragen",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/cp/const/index",
-    "key": "inkomende-materiaalaanvragen",
-    "language": "en",
-    "value": "Inkomende materiaalaanvragen",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/const/index",
-    "key": "mijn-uitgaande-materiaalaanvragen",
-    "language": "nl",
-    "value": "Mijn uitgaande materiaalaanvragen",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/const/index",
-    "key": "mijn-uitgaande-materiaalaanvragen",
-    "language": "en",
-    "value": "Mijn uitgaande materiaalaanvragen",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-additional-conditions-blade/material-request-additional-conditions-blade",
-    "key": "toestemming-rechthebbende",
-    "language": "nl",
-    "value": "Toestemming rechthebbende",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-additional-conditions-blade/material-request-additional-conditions-blade",
-    "key": "toestemming-rechthebbende",
-    "language": "en",
-    "value": "Toestemming rechthebbende",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-additional-conditions-blade/material-request-additional-conditions-blade",
-    "key": "beschrijf-hier-welke-toestemming-de-aanvrager-moet-verkrijgen-van-de-rechthebbende",
-    "language": "nl",
-    "value": "Beschrijf hier welke toestemming de aanvrager moet verkrijgen van de rechthebbende.",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-additional-conditions-blade/material-request-additional-conditions-blade",
-    "key": "beschrijf-hier-welke-toestemming-de-aanvrager-moet-verkrijgen-van-de-rechthebbende",
-    "language": "en",
-    "value": "Beschrijf hier welke toestemming de aanvrager moet verkrijgen van de rechthebbende.",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-additional-conditions-blade/material-request-additional-conditions-blade",
-    "key": "beschrijf-de-voorwaarde",
-    "language": "nl",
-    "value": "Beschrijf de voorwaarde...",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-additional-conditions-blade/material-request-additional-conditions-blade",
-    "key": "beschrijf-de-voorwaarde",
-    "language": "en",
-    "value": "Beschrijf de voorwaarde...",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-additional-conditions-blade/material-request-additional-conditions-blade",
-    "key": "naamsvermelding",
-    "language": "nl",
-    "value": "Naamsvermelding",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-additional-conditions-blade/material-request-additional-conditions-blade",
-    "key": "naamsvermelding",
-    "language": "en",
-    "value": "Naamsvermelding",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-additional-conditions-blade/material-request-additional-conditions-blade",
-    "key": "beschrijf-hier-hoe-de-aanvrager-de-naamsvermelding-moet-uitvoeren",
-    "language": "nl",
-    "value": "Beschrijf hier hoe de aanvrager de naamsvermelding moet uitvoeren.",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-additional-conditions-blade/material-request-additional-conditions-blade",
-    "key": "beschrijf-hier-hoe-de-aanvrager-de-naamsvermelding-moet-uitvoeren",
-    "language": "en",
-    "value": "Beschrijf hier hoe de aanvrager de naamsvermelding moet uitvoeren.",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-additional-conditions-blade/material-request-additional-conditions-blade",
-    "key": "beschrijf-de-voorwaarde",
-    "language": "nl",
-    "value": "Beschrijf de voorwaarde...",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-additional-conditions-blade/material-request-additional-conditions-blade",
-    "key": "beschrijf-de-voorwaarde",
-    "language": "en",
-    "value": "Beschrijf de voorwaarde...",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-additional-conditions-blade/material-request-additional-conditions-blade",
-    "key": "betaling",
-    "language": "nl",
-    "value": "Betaling",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-additional-conditions-blade/material-request-additional-conditions-blade",
-    "key": "betaling",
-    "language": "en",
-    "value": "Betaling",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-additional-conditions-blade/material-request-additional-conditions-blade",
-    "key": "beschrijf-hier-welke-betaling-de-aanvrager-moet-uitvoeren",
-    "language": "nl",
-    "value": "Beschrijf hier welke betaling de aanvrager moet uitvoeren.",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-additional-conditions-blade/material-request-additional-conditions-blade",
-    "key": "beschrijf-hier-welke-betaling-de-aanvrager-moet-uitvoeren",
-    "language": "en",
-    "value": "Beschrijf hier welke betaling de aanvrager moet uitvoeren.",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-additional-conditions-blade/material-request-additional-conditions-blade",
-    "key": "beschrijf-de-voorwaarde",
-    "language": "nl",
-    "value": "Beschrijf de voorwaarde...",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-additional-conditions-blade/material-request-additional-conditions-blade",
-    "key": "beschrijf-de-voorwaarde",
-    "language": "en",
-    "value": "Beschrijf de voorwaarde...",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-additional-conditions-blade/material-request-additional-conditions-blade",
-    "key": "extra-gebruiksbeperking",
-    "language": "nl",
-    "value": "Extra gebruiksbeperking",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-additional-conditions-blade/material-request-additional-conditions-blade",
-    "key": "extra-gebruiksbeperking",
-    "language": "en",
-    "value": "Extra gebruiksbeperking",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-additional-conditions-blade/material-request-additional-conditions-blade",
-    "key": "beschrijf-hier-welke-extra-gebruiksbeperkingen-van-toepassing-zijn",
-    "language": "nl",
-    "value": "Beschrijf hier welke extra gebruiksbeperkingen van toepassing zijn.",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-additional-conditions-blade/material-request-additional-conditions-blade",
-    "key": "beschrijf-hier-welke-extra-gebruiksbeperkingen-van-toepassing-zijn",
-    "language": "en",
-    "value": "Beschrijf hier welke extra gebruiksbeperkingen van toepassing zijn.",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-additional-conditions-blade/material-request-additional-conditions-blade",
-    "key": "beschrijf-de-voorwaarde",
-    "language": "nl",
-    "value": "Beschrijf de voorwaarde...",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-additional-conditions-blade/material-request-additional-conditions-blade",
-    "key": "beschrijf-de-voorwaarde",
-    "language": "en",
-    "value": "Beschrijf de voorwaarde...",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-additional-conditions-blade/material-request-additional-conditions-blade",
-    "key": "naar-volgende-stap",
-    "language": "nl",
-    "value": "Naar volgende stap",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-additional-conditions-blade/material-request-additional-conditions-blade",
-    "key": "naar-volgende-stap",
-    "language": "en",
-    "value": "Naar volgende stap",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-additional-conditions-blade/material-request-additional-conditions-blade",
-    "key": "naar-volgende-stap-mobile",
-    "language": "nl",
-    "value": "Naar volgende stap - mobile",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-additional-conditions-blade/material-request-additional-conditions-blade",
-    "key": "naar-volgende-stap-mobile",
-    "language": "en",
-    "value": "Naar volgende stap - mobile",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-additional-conditions-blade/material-request-additional-conditions-blade",
-    "key": "annuleer",
-    "language": "nl",
-    "value": "Annuleer",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-additional-conditions-blade/material-request-additional-conditions-blade",
-    "key": "annuleer",
-    "language": "en",
-    "value": "Annuleer",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-additional-conditions-blade/material-request-additional-conditions-blade",
-    "key": "annuleer-mobile",
-    "language": "nl",
-    "value": "Annuleer - mobile",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-additional-conditions-blade/material-request-additional-conditions-blade",
-    "key": "annuleer-mobile",
-    "language": "en",
-    "value": "Annuleer - mobile",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-additional-conditions-blade/material-request-additional-conditions-blade",
-    "key": "bijkomende-voorwaarden",
-    "language": "nl",
-    "value": "Bijkomende voorwaarden",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-additional-conditions-blade/material-request-additional-conditions-blade",
-    "key": "bijkomende-voorwaarden",
-    "language": "en",
-    "value": "Bijkomende voorwaarden",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-additional-conditions-blade/material-request-additional-conditions-blade",
-    "key": "bijkomende-voorwaarden-aria-label",
-    "language": "nl",
-    "value": "Bijkomende voorwaarden - aria label",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-additional-conditions-blade/material-request-additional-conditions-blade",
-    "key": "bijkomende-voorwaarden-aria-label",
-    "language": "en",
-    "value": "Bijkomende voorwaarden - aria label",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-additional-conditions-blade/material-request-additional-conditions-blade",
-    "key": "stap-1-van-2",
-    "language": "nl",
-    "value": "Stap 1 van 2",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-additional-conditions-blade/material-request-additional-conditions-blade",
-    "key": "stap-1-van-2",
-    "language": "en",
-    "value": "Stap 1 van 2",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-additional-conditions-blade/material-request-additional-conditions-blade",
-    "key": "selecteer-en-beschrijf-welke-bijkomende-voorwaarden-je-wil-opleggen-je-voorstel-wordt-naar-de-aanvrager-gestuurd-die-de-bijkomende-voorwaarden-kan-nalezen-en-accepteren",
-    "language": "nl",
-    "value": "Selecteer en beschrijf welke bijkomende voorwaarden je wil opleggen. Je voorstel wordt naar de aanvrager gestuurd, die de bijkomende voorwaarden kan nalezen en accepteren.",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-additional-conditions-blade/material-request-additional-conditions-blade",
-    "key": "selecteer-en-beschrijf-welke-bijkomende-voorwaarden-je-wil-opleggen-je-voorstel-wordt-naar-de-aanvrager-gestuurd-die-de-bijkomende-voorwaarden-kan-nalezen-en-accepteren",
-    "language": "en",
-    "value": "Selecteer en beschrijf welke bijkomende voorwaarden je wil opleggen. Je voorstel wordt naar de aanvrager gestuurd, die de bijkomende voorwaarden kan nalezen en accepteren.",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-additional-conditions-blade/material-request-additional-conditions-blade",
-    "key": "voorwaarden",
-    "language": "nl",
-    "value": "Voorwaarden",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-additional-conditions-blade/material-request-additional-conditions-blade",
-    "key": "voorwaarden",
-    "language": "en",
-    "value": "Voorwaarden",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-additional-conditions-blade/material-request-additional-conditions-blade",
-    "key": "selecteer-minstens-1-voorwaarde",
-    "language": "nl",
-    "value": "Selecteer minstens 1 voorwaarde",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-additional-conditions-blade/material-request-additional-conditions-blade",
-    "key": "selecteer-minstens-1-voorwaarde",
-    "language": "en",
-    "value": "Selecteer minstens 1 voorwaarde",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-additional-conditions-resolution-blade/material-request-additional-conditions-resolution-blade",
-    "key": "bijkomende-voorwaarden-opgelegd",
-    "language": "nl",
-    "value": "bijkomende voorwaarden opgelegd",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-additional-conditions-resolution-blade/material-request-additional-conditions-resolution-blade",
-    "key": "bijkomende-voorwaarden-opgelegd",
-    "language": "en",
-    "value": "bijkomende voorwaarden opgelegd",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-additional-conditions-resolution-blade/material-request-additional-conditions-resolution-blade",
-    "key": "de-bijkomende-voorwaarden-zijn-succesvol-opgelegd",
-    "language": "nl",
-    "value": "de bijkomende voorwaarden zijn succesvol opgelegd.",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-additional-conditions-resolution-blade/material-request-additional-conditions-resolution-blade",
-    "key": "de-bijkomende-voorwaarden-zijn-succesvol-opgelegd",
-    "language": "en",
-    "value": "de bijkomende voorwaarden zijn succesvol opgelegd.",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-additional-conditions-resolution-blade/material-request-additional-conditions-resolution-blade",
-    "key": "er-ging-iets-mis",
-    "language": "nl",
-    "value": "er ging iets mis",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-additional-conditions-resolution-blade/material-request-additional-conditions-resolution-blade",
-    "key": "er-ging-iets-mis",
-    "language": "en",
-    "value": "er ging iets mis",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-additional-conditions-resolution-blade/material-request-additional-conditions-resolution-blade",
-    "key": "er-ging-iets-mis-tijdens-het-opleggen-van-de-bijkomende-voorwaarden",
-    "language": "nl",
-    "value": "Er ging iets mis tijdens het opleggen van de bijkomende voorwaarden.",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-additional-conditions-resolution-blade/material-request-additional-conditions-resolution-blade",
-    "key": "er-ging-iets-mis-tijdens-het-opleggen-van-de-bijkomende-voorwaarden",
-    "language": "en",
-    "value": "Er ging iets mis tijdens het opleggen van de bijkomende voorwaarden.",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-additional-conditions-resolution-blade/material-request-additional-conditions-resolution-blade",
-    "key": "bijkomende-voorwaarden-opleggen",
-    "language": "nl",
-    "value": "Bijkomende voorwaarden opleggen",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-additional-conditions-resolution-blade/material-request-additional-conditions-resolution-blade",
-    "key": "bijkomende-voorwaarden-opleggen",
-    "language": "en",
-    "value": "Bijkomende voorwaarden opleggen",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-additional-conditions-resolution-blade/material-request-additional-conditions-resolution-blade",
-    "key": "bijkomende-voorwaarden-opleggen-mobile",
-    "language": "nl",
-    "value": "Bijkomende voorwaarden opleggen - mobile",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-additional-conditions-resolution-blade/material-request-additional-conditions-resolution-blade",
-    "key": "bijkomende-voorwaarden-opleggen-mobile",
-    "language": "en",
-    "value": "Bijkomende voorwaarden opleggen - mobile",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-additional-conditions-resolution-blade/material-request-additional-conditions-resolution-blade",
-    "key": "keer-terug",
-    "language": "nl",
-    "value": "Keer terug",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-additional-conditions-resolution-blade/material-request-additional-conditions-resolution-blade",
-    "key": "keer-terug",
-    "language": "en",
-    "value": "Keer terug",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-additional-conditions-resolution-blade/material-request-additional-conditions-resolution-blade",
-    "key": "keer-terug-mobile",
-    "language": "nl",
-    "value": "Keer terug - mobile",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-additional-conditions-resolution-blade/material-request-additional-conditions-resolution-blade",
-    "key": "keer-terug-mobile",
-    "language": "en",
-    "value": "Keer terug - mobile",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-additional-conditions-resolution-blade/material-request-additional-conditions-resolution-blade",
-    "key": "bijkomende-voorwaarden",
-    "language": "nl",
-    "value": "Bijkomende voorwaarden",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-additional-conditions-resolution-blade/material-request-additional-conditions-resolution-blade",
-    "key": "bijkomende-voorwaarden",
-    "language": "en",
-    "value": "Bijkomende voorwaarden",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-additional-conditions-resolution-blade/material-request-additional-conditions-resolution-blade",
-    "key": "bijkomende-voorwaarden-aria-label",
-    "language": "nl",
-    "value": "Bijkomende voorwaarden - aria label",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-additional-conditions-resolution-blade/material-request-additional-conditions-resolution-blade",
-    "key": "bijkomende-voorwaarden-aria-label",
-    "language": "en",
-    "value": "Bijkomende voorwaarden - aria label",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-additional-conditions-resolution-blade/material-request-additional-conditions-resolution-blade",
-    "key": "stap-2-van-2",
-    "language": "nl",
-    "value": "Stap 2 van 2",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-additional-conditions-resolution-blade/material-request-additional-conditions-resolution-blade",
-    "key": "stap-2-van-2",
-    "language": "en",
-    "value": "Stap 2 van 2",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-additional-conditions-resolution-blade/material-request-additional-conditions-resolution-blade",
-    "key": "duid-het-gewenst-verloop-aan-na-het-doorsturen-van-het-voorstel-met-bijkomende-voorwaarden-wanneer-de-aanvrager-de-voorwaarden-aanvaardt-wil-ik-dat",
-    "language": "nl",
-    "value": "Duid het gewenst verloop aan na het doorsturen van het voorstel met bijkomende voorwaarden. Wanneer de aanvrager de voorwaarden aanvaardt, wil ik dat:",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-additional-conditions-resolution-blade/material-request-additional-conditions-resolution-blade",
-    "key": "duid-het-gewenst-verloop-aan-na-het-doorsturen-van-het-voorstel-met-bijkomende-voorwaarden-wanneer-de-aanvrager-de-voorwaarden-aanvaardt-wil-ik-dat",
-    "language": "en",
-    "value": "Duid het gewenst verloop aan na het doorsturen van het voorstel met bijkomende voorwaarden. Wanneer de aanvrager de voorwaarden aanvaardt, wil ik dat:",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-additional-conditions-resolution-blade/material-request-additional-conditions-resolution-blade",
-    "key": "de-aanvraag-automatisch-wordt-goedgekeurd",
-    "language": "nl",
-    "value": "De aanvraag automatisch wordt goedgekeurd",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-additional-conditions-resolution-blade/material-request-additional-conditions-resolution-blade",
-    "key": "de-aanvraag-automatisch-wordt-goedgekeurd",
-    "language": "en",
-    "value": "De aanvraag automatisch wordt goedgekeurd",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-additional-conditions-resolution-blade/material-request-additional-conditions-resolution-blade",
-    "key": "de-aanvraag-automatisch-wordt-goedgekeurd-aria-label",
-    "language": "nl",
-    "value": "De aanvraag automatisch wordt goedgekeurd - aria label",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-additional-conditions-resolution-blade/material-request-additional-conditions-resolution-blade",
-    "key": "de-aanvraag-automatisch-wordt-goedgekeurd-aria-label",
-    "language": "en",
-    "value": "De aanvraag automatisch wordt goedgekeurd - aria label",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-additional-conditions-resolution-blade/material-request-additional-conditions-resolution-blade",
-    "key": "in-dit-geval-zal-het-materiaal-onmiddelijk-klaargemaakt-worden-voor-download",
-    "language": "nl",
-    "value": "In dit geval zal het materiaal onmiddelijk klaargemaakt worden voor download.",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-additional-conditions-resolution-blade/material-request-additional-conditions-resolution-blade",
-    "key": "in-dit-geval-zal-het-materiaal-onmiddelijk-klaargemaakt-worden-voor-download",
-    "language": "en",
-    "value": "In dit geval zal het materiaal onmiddelijk klaargemaakt worden voor download.",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-additional-conditions-resolution-blade/material-request-additional-conditions-resolution-blade",
-    "key": "de-aanvraag-automatisch-wordt-afgekeurd",
-    "language": "nl",
-    "value": "De aanvraag automatisch wordt afgekeurd",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-additional-conditions-resolution-blade/material-request-additional-conditions-resolution-blade",
-    "key": "de-aanvraag-automatisch-wordt-afgekeurd",
-    "language": "en",
-    "value": "De aanvraag automatisch wordt afgekeurd",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-additional-conditions-resolution-blade/material-request-additional-conditions-resolution-blade",
-    "key": "in-dit-geval-zal-je-eerst-nog-manueel-de-finale-goedkeuring-moeten-geven-vooraleer-het-materiaal-klaargemaakt-wordt-voor-download",
-    "language": "nl",
-    "value": "In dit geval zal je eerst nog manueel de finale goedkeuring moeten geven vooraleer het materiaal klaargemaakt wordt voor download.",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-additional-conditions-resolution-blade/material-request-additional-conditions-resolution-blade",
-    "key": "in-dit-geval-zal-je-eerst-nog-manueel-de-finale-goedkeuring-moeten-geven-vooraleer-het-materiaal-klaargemaakt-wordt-voor-download",
-    "language": "en",
-    "value": "In dit geval zal je eerst nog manueel de finale goedkeuring moeten geven vooraleer het materiaal klaargemaakt wordt voor download.",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-additional-conditions-resolution-blade/material-request-additional-conditions-resolution-blade",
-    "key": "selecteer-een-van-de-opties",
-    "language": "nl",
-    "value": "Selecteer één van de opties",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-additional-conditions-resolution-blade/material-request-additional-conditions-resolution-blade",
-    "key": "selecteer-een-van-de-opties",
-    "language": "en",
-    "value": "Selecteer één van de opties",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-detail-blade/material-request-content-info",
-    "key": "toestemming-rechthebbende-content-info",
-    "language": "nl",
-    "value": "Toestemming rechthebbende - content info",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-detail-blade/material-request-content-info",
-    "key": "toestemming-rechthebbende-content-info",
-    "language": "en",
-    "value": "Toestemming rechthebbende - content info",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-detail-blade/material-request-content-info",
-    "key": "naamsvermelding-content-info",
-    "language": "nl",
-    "value": "Naamsvermelding - content info",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-detail-blade/material-request-content-info",
-    "key": "naamsvermelding-content-info",
-    "language": "en",
-    "value": "Naamsvermelding - content info",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-detail-blade/material-request-content-info",
-    "key": "betaling-content-info",
-    "language": "nl",
-    "value": "Betaling - content info",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-detail-blade/material-request-content-info",
-    "key": "betaling-content-info",
-    "language": "en",
-    "value": "Betaling - content info",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-detail-blade/material-request-content-info",
-    "key": "extra-gebruiksbeperking-content-info",
-    "language": "nl",
-    "value": "Extra gebruiksbeperking - content info",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-detail-blade/material-request-content-info",
-    "key": "extra-gebruiksbeperking-content-info",
-    "language": "en",
-    "value": "Extra gebruiksbeperking - content info",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-detail-blade/material-request-conversation-message",
-    "key": "de-aanvraag-werd-afgesloten-hieronder-vind-je-een-samenvatting-alle-documenten-worden-nog-tot-en-met-date-bijgehouden",
-    "language": "nl",
-    "value": "De aanvraag werd afgesloten, hieronder vind je een samenvatting. Alle documenten worden nog tot en met {{date}} bijgehouden",
-    "value_type": "HTML"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-detail-blade/material-request-conversation-message",
-    "key": "de-aanvraag-werd-afgesloten-hieronder-vind-je-een-samenvatting-alle-documenten-worden-nog-tot-en-met-date-bijgehouden",
-    "language": "en",
-    "value": "De aanvraag werd afgesloten, hieronder vind je een samenvatting. Alle documenten worden nog tot en met {{date}} bijgehouden",
-    "value_type": "HTML"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-detail-blade/material-request-conversation-message",
-    "key": "strong-name-strong-stuurde-bijkomende-gebruiksvoorwaarden",
-    "language": "nl",
-    "value": "<strong>{{name}}</strong> stuurde bijkomende gebruiksvoorwaarden",
-    "value_type": "HTML"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-detail-blade/material-request-conversation-message",
-    "key": "strong-name-strong-stuurde-bijkomende-gebruiksvoorwaarden",
-    "language": "en",
-    "value": "<strong>{{name}}</strong> stuurde bijkomende gebruiksvoorwaarden",
-    "value_type": "HTML"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
-    "key": "onopgeslagen-wijzigingen",
-    "language": "nl",
-    "value": "Onopgeslagen wijzigingen",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
-    "key": "onopgeslagen-wijzigingen",
-    "language": "en",
-    "value": "Onopgeslagen wijzigingen",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
-    "key": "er-zijn-nog-onopgeslagen-wijzigingen-in-de-bijkomende-gebruiksvoorwaarden-weet-je-zeker-dat-je-wil-annuleren",
-    "language": "nl",
-    "value": "Er zijn nog onopgeslagen wijzigingen in de bijkomende gebruiksvoorwaarden. Weet je zeker dat je wil annuleren?",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
-    "key": "er-zijn-nog-onopgeslagen-wijzigingen-in-de-bijkomende-gebruiksvoorwaarden-weet-je-zeker-dat-je-wil-annuleren",
-    "language": "en",
-    "value": "Er zijn nog onopgeslagen wijzigingen in de bijkomende gebruiksvoorwaarden. Weet je zeker dat je wil annuleren?",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
-    "key": "ja-annuleer-wijzigingen-in-de-bijkomende-gebruiksvoorwaarden",
-    "language": "nl",
-    "value": "Ja, annuleer wijzigingen in de bijkomende gebruiksvoorwaarden",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
-    "key": "ja-annuleer-wijzigingen-in-de-bijkomende-gebruiksvoorwaarden",
-    "language": "en",
-    "value": "Ja, annuleer wijzigingen in de bijkomende gebruiksvoorwaarden",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
-    "key": "nee-behoud-wijzigingen-in-de-bijkomende-gebruiksvoorwaarden",
-    "language": "nl",
-    "value": "Nee, behoud wijzigingen in de bijkomende gebruiksvoorwaarden",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
-    "key": "nee-behoud-wijzigingen-in-de-bijkomende-gebruiksvoorwaarden",
-    "language": "en",
-    "value": "Nee, behoud wijzigingen in de bijkomende gebruiksvoorwaarden",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/shared/components/checkbox-accordion/checkbox-accordion",
-    "key": "sluit-accordion",
-    "language": "nl",
-    "value": "Sluit accordion",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/shared/components/checkbox-accordion/checkbox-accordion",
-    "key": "sluit-accordion",
-    "language": "en",
-    "value": "Sluit accordion",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/shared/components/checkbox-accordion/checkbox-accordion",
-    "key": "open-accordion",
-    "language": "nl",
-    "value": "Open accordion",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/shared/components/checkbox-accordion/checkbox-accordion",
-    "key": "open-accordion",
-    "language": "en",
-    "value": "Open accordion",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/shared/components/checkbox-accordion/checkbox-accordion",
-    "key": "dit-veld-is-verplicht",
-    "language": "nl",
-    "value": "Dit veld is verplicht",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/shared/components/checkbox-accordion/checkbox-accordion",
-    "key": "dit-veld-is-verplicht",
-    "language": "en",
-    "value": "Dit veld is verplicht",
     "value_type": "TEXT"
   },
   {
