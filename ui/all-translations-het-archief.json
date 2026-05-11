@@ -18650,6 +18650,24 @@
   {
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
+    "location": "modules/ie-objects/const/index",
+    "key": "metadata-aria-label",
+    "language": "nl",
+    "value": "Metadata aria label",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/const/index",
+    "key": "metadata-aria-label",
+    "language": "en",
+    "value": "Metadata aria label",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
     "location": "modules/ie-objects/ie-objects",
     "key": "ocr",
     "language": "nl",
@@ -18663,6 +18681,24 @@
     "key": "ocr",
     "language": "en",
     "value": "OCR",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/ie-objects",
+    "key": "ocr-aria-label",
+    "language": "nl",
+    "value": "Ocr aria label",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/ie-objects",
+    "key": "ocr-aria-label",
+    "language": "en",
+    "value": "Ocr aria label",
     "value_type": "TEXT"
   },
   {
@@ -25149,6 +25185,24 @@
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
     "location": "modules/cp/const/requests",
+    "key": "alle-aria-label",
+    "language": "nl",
+    "value": "Alle aria label",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/cp/const/requests",
+    "key": "alle-aria-label",
+    "language": "en",
+    "value": "Alle aria label",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/cp/const/requests",
     "key": "open",
     "language": "nl",
     "value": "Open",
@@ -25161,6 +25215,24 @@
     "key": "open",
     "language": "en",
     "value": "Open",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/cp/const/requests",
+    "key": "open-aria-label",
+    "language": "nl",
+    "value": "Open aria label",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/cp/const/requests",
+    "key": "open-aria-label",
+    "language": "en",
+    "value": "Open aria label",
     "value_type": "TEXT"
   },
   {
@@ -25185,6 +25257,24 @@
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
     "location": "modules/cp/const/requests",
+    "key": "goedgekeurd-aria-label",
+    "language": "nl",
+    "value": "Goedgekeurd aria label",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/cp/const/requests",
+    "key": "goedgekeurd-aria-label",
+    "language": "en",
+    "value": "Goedgekeurd aria label",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/cp/const/requests",
     "key": "geweigerd",
     "language": "nl",
     "value": "Geweigerd",
@@ -25203,6 +25293,24 @@
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
     "location": "modules/cp/const/requests",
+    "key": "geweigerd-aria-label",
+    "language": "nl",
+    "value": "Geweigerd aria label",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/cp/const/requests",
+    "key": "geweigerd-aria-label",
+    "language": "en",
+    "value": "Geweigerd aria label",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/cp/const/requests",
     "key": "geannuleerd",
     "language": "nl",
     "value": "Geannuleerd",
@@ -25215,6 +25323,24 @@
     "key": "geannuleerd",
     "language": "en",
     "value": "Cancelled",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/cp/const/requests",
+    "key": "geannuleerd-aria-label",
+    "language": "nl",
+    "value": "Geannuleerd aria label",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/cp/const/requests",
+    "key": "geannuleerd-aria-label",
+    "language": "en",
+    "value": "Geannuleerd aria label",
     "value_type": "TEXT"
   },
   {
@@ -25365,6 +25491,24 @@
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
     "location": "modules/cp/const/visitors",
+    "key": "alle-aria-label",
+    "language": "nl",
+    "value": "Alle aria label",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/cp/const/visitors",
+    "key": "alle-aria-label",
+    "language": "en",
+    "value": "Alle aria label",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/cp/const/visitors",
     "key": "actief",
     "language": "nl",
     "value": "Actief",
@@ -25383,6 +25527,24 @@
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
     "location": "modules/cp/const/visitors",
+    "key": "actief-aria-label",
+    "language": "nl",
+    "value": "Actief aria label",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/cp/const/visitors",
+    "key": "actief-aria-label",
+    "language": "en",
+    "value": "Actief aria label",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/cp/const/visitors",
     "key": "historiek",
     "language": "nl",
     "value": "Historiek",
@@ -25395,6 +25557,24 @@
     "key": "historiek",
     "language": "en",
     "value": "History",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/cp/const/visitors",
+    "key": "historiek-aria-label",
+    "language": "nl",
+    "value": "Historiek aria label",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/cp/const/visitors",
+    "key": "historiek-aria-label",
+    "language": "en",
+    "value": "Historiek aria label",
     "value_type": "TEXT"
   },
   {
@@ -27453,6 +27633,24 @@
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
     "location": "modules/visitor-space/const/index",
+    "key": "alles-aria-label",
+    "language": "nl",
+    "value": "Alles aria label",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/const/index",
+    "key": "alles-aria-label",
+    "language": "en",
+    "value": "Alles aria label",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/const/index",
     "key": "in-aanvraag",
     "language": "nl",
     "value": "In aanvraag",
@@ -27465,6 +27663,24 @@
     "key": "in-aanvraag",
     "language": "en",
     "value": "On request",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/const/index",
+    "key": "in-aanvraag-aria-label",
+    "language": "nl",
+    "value": "In aanvraag aria label",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/const/index",
+    "key": "in-aanvraag-aria-label",
+    "language": "en",
+    "value": "In aanvraag aria label",
     "value_type": "TEXT"
   },
   {
@@ -27489,6 +27705,24 @@
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
     "location": "modules/visitor-space/const/index",
+    "key": "gepubliceerd-aria-label",
+    "language": "nl",
+    "value": "Gepubliceerd aria label",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/const/index",
+    "key": "gepubliceerd-aria-label",
+    "language": "en",
+    "value": "Gepubliceerd aria label",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/const/index",
     "key": "gedepubliceerd",
     "language": "nl",
     "value": "Gedepubliceerd",
@@ -27501,6 +27735,24 @@
     "key": "gedepubliceerd",
     "language": "en",
     "value": "Published",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/const/index",
+    "key": "gedepubliceerd-aria-label",
+    "language": "nl",
+    "value": "Gedepubliceerd aria label",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/const/index",
+    "key": "gedepubliceerd-aria-label",
+    "language": "en",
+    "value": "Gedepubliceerd aria label",
     "value_type": "TEXT"
   },
   {
@@ -27831,6 +28083,24 @@
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
     "location": "modules/visitor-space/const/index",
+    "key": "videos-aria-label",
+    "language": "nl",
+    "value": "Videos aria label",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/const/index",
+    "key": "videos-aria-label",
+    "language": "en",
+    "value": "Videos aria label",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/const/index",
     "key": "audio",
     "language": "nl",
     "value": "Audio",
@@ -27843,6 +28113,24 @@
     "key": "audio",
     "language": "en",
     "value": "Audio",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/const/index",
+    "key": "audio-aria-label",
+    "language": "nl",
+    "value": "Audio aria label",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/const/index",
+    "key": "audio-aria-label",
+    "language": "en",
+    "value": "Audio aria label",
     "value_type": "TEXT"
   },
   {
@@ -27861,6 +28149,24 @@
     "key": "krant",
     "language": "en",
     "value": "Newspaper",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/const/visitor-space-tabs",
+    "key": "krant-aria-label",
+    "language": "nl",
+    "value": "Krant aria label",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/const/visitor-space-tabs",
+    "key": "krant-aria-label",
+    "language": "en",
+    "value": "Krant aria label",
     "value_type": "TEXT"
   },
   {
@@ -29037,6 +29343,24 @@
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
     "location": "modules/account/components/material-request-additional-conditions-resolution-blade/material-request-additional-conditions-resolution-blade",
+    "key": "de-aanvraag-moet-expliciet-worden-goedgekeurd-aria-label",
+    "language": "nl",
+    "value": "De aanvraag moet expliciet worden goedgekeurd aria label",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-additional-conditions-resolution-blade/material-request-additional-conditions-resolution-blade",
+    "key": "de-aanvraag-moet-expliciet-worden-goedgekeurd-aria-label",
+    "language": "en",
+    "value": "De aanvraag moet expliciet worden goedgekeurd aria label",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-additional-conditions-resolution-blade/material-request-additional-conditions-resolution-blade",
     "key": "selecteer-een-van-de-opties",
     "language": "nl",
     "value": "Selecteer één van de opties",
@@ -29073,6 +29397,24 @@
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
     "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
+    "key": "info-aanvraag-aria-label",
+    "language": "nl",
+    "value": "Info aanvraag aria label",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
+    "key": "info-aanvraag-aria-label",
+    "language": "en",
+    "value": "Info aanvraag aria label",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
     "key": "conversatie",
     "language": "nl",
     "value": "Conversatie",
@@ -29091,6 +29433,24 @@
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
     "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
+    "key": "conversatie-aria-label",
+    "language": "nl",
+    "value": "Conversatie aria label",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
+    "key": "conversatie-aria-label",
+    "language": "en",
+    "value": "Conversatie aria label",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
     "key": "documenten",
     "language": "nl",
     "value": "Documenten",
@@ -29103,6 +29463,24 @@
     "key": "documenten",
     "language": "en",
     "value": "Documenten",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
+    "key": "documenten-aria-label",
+    "language": "nl",
+    "value": "Documenten aria label",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
+    "key": "documenten-aria-label",
+    "language": "en",
+    "value": "Documenten aria label",
     "value_type": "TEXT"
   },
   {
@@ -29201,7 +29579,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
     "key": "voorwaarden-verstuurd-op",
     "language": "nl",
-    "value": "Voorwaarden verstuurd op {{date}}",
+    "value": "Voorwaarden verstuurd op {{sentAt}}",
     "value_type": "TEXT"
   },
   {
@@ -29210,7 +29588,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
     "key": "voorwaarden-verstuurd-op",
     "language": "en",
-    "value": "Conditions sent on {{date}}",
+    "value": "Conditions sent on {{sentAt}}",
     "value_type": "TEXT"
   },
   {
@@ -29553,6 +29931,24 @@
     "key": "typ-je-bericht",
     "language": "en",
     "value": "Type your message",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-detail-blade/material-request-conversation-input",
+    "key": "bericht-versturen",
+    "language": "nl",
+    "value": "Bericht versturen",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-detail-blade/material-request-conversation-input",
+    "key": "bericht-versturen",
+    "language": "en",
+    "value": "Bericht versturen",
     "value_type": "TEXT"
   },
   {
@@ -30297,24 +30693,6 @@
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
     "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
-    "key": "ja-annuleer-wijzigingen-in-de-bijkomende-gebruiksvoorwaarden",
-    "language": "nl",
-    "value": "Ja, annuleer wijzigingen in de bijkomende gebruiksvoorwaarden",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
-    "key": "ja-annuleer-wijzigingen-in-de-bijkomende-gebruiksvoorwaarden",
-    "language": "en",
-    "value": "Ja, annuleer wijzigingen in de bijkomende gebruiksvoorwaarden",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
     "key": "nee-behoud-wijzigingen-in-de-bijkomende-gebruiksvoorwaarden",
     "language": "nl",
     "value": "Nee, behoud wijzigingen in de bijkomende gebruiksvoorwaarden",
@@ -30327,6 +30705,24 @@
     "key": "nee-behoud-wijzigingen-in-de-bijkomende-gebruiksvoorwaarden",
     "language": "en",
     "value": "Nee, behoud wijzigingen in de bijkomende gebruiksvoorwaarden",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
+    "key": "ja-annuleer-wijzigingen-in-de-bijkomende-gebruiksvoorwaarden",
+    "language": "nl",
+    "value": "Ja, annuleer wijzigingen in de bijkomende gebruiksvoorwaarden",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
+    "key": "ja-annuleer-wijzigingen-in-de-bijkomende-gebruiksvoorwaarden",
+    "language": "en",
+    "value": "Ja, annuleer wijzigingen in de bijkomende gebruiksvoorwaarden",
     "value_type": "TEXT"
   },
   {
@@ -38667,6 +39063,96 @@
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
     "location": "modules/shared/components/media-card/media-card",
+    "key": "audio-aria-label",
+    "language": "nl",
+    "value": "Audio aria label",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/shared/components/media-card/media-card",
+    "key": "audio-aria-label",
+    "language": "en",
+    "value": "Audio aria label",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/shared/components/media-card/media-card",
+    "key": "video-aria-label",
+    "language": "nl",
+    "value": "Video aria label",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/shared/components/media-card/media-card",
+    "key": "video-aria-label",
+    "language": "en",
+    "value": "Video aria label",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/shared/components/media-card/media-card",
+    "key": "krant-aria-label",
+    "language": "nl",
+    "value": "Krant aria label",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/shared/components/media-card/media-card",
+    "key": "krant-aria-label",
+    "language": "en",
+    "value": "Krant aria label",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/shared/components/media-card/media-card",
+    "key": "afbeelding-aria-label",
+    "language": "nl",
+    "value": "Afbeelding aria label",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/shared/components/media-card/media-card",
+    "key": "afbeelding-aria-label",
+    "language": "en",
+    "value": "Afbeelding aria label",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/shared/components/media-card/media-card",
+    "key": "object-type-niet-gekend-aria-label",
+    "language": "nl",
+    "value": "Object type niet gekend aria label",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/shared/components/media-card/media-card",
+    "key": "object-type-niet-gekend-aria-label",
+    "language": "en",
+    "value": "Object type niet gekend aria label",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/shared/components/media-card/media-card",
     "key": "je-bent-niet-ingelogd",
     "language": "nl",
     "value": "Je bent niet ingelogd.",
@@ -45938,6 +46424,24 @@
   {
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
+    "location": "modules/account/components/material-request-detail-blade/message-file-upload/message-file-upload",
+    "key": "voeg-bijlages-toe-aan-het-bericht-dat-je-wil-versturen",
+    "language": "nl",
+    "value": "Voeg bijlages toe aan het bericht dat je wil versturen",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-detail-blade/message-file-upload/message-file-upload",
+    "key": "voeg-bijlages-toe-aan-het-bericht-dat-je-wil-versturen",
+    "language": "en",
+    "value": "Voeg bijlages toe aan het bericht dat je wil versturen",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
     "location": "modules/navigation/components/navigation/navigation-link/navigation-link",
     "key": "navigeer-naar-een-pagina",
     "language": "nl",
@@ -46311,528 +46815,6 @@
     "key": "sluiten",
     "language": "en",
     "value": "Close",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/const/index",
-    "key": "metadata-aria-label",
-    "language": "nl",
-    "value": "Metadata aria label",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/const/index",
-    "key": "metadata-aria-label",
-    "language": "en",
-    "value": "Metadata aria label",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/ie-objects",
-    "key": "ocr-aria-label",
-    "language": "nl",
-    "value": "Ocr aria label",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/ie-objects",
-    "key": "ocr-aria-label",
-    "language": "en",
-    "value": "Ocr aria label",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/cp/const/requests",
-    "key": "alle-aria-label",
-    "language": "nl",
-    "value": "Alle aria label",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/cp/const/requests",
-    "key": "alle-aria-label",
-    "language": "en",
-    "value": "Alle aria label",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/cp/const/requests",
-    "key": "open-aria-label",
-    "language": "nl",
-    "value": "Open aria label",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/cp/const/requests",
-    "key": "open-aria-label",
-    "language": "en",
-    "value": "Open aria label",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/cp/const/requests",
-    "key": "goedgekeurd-aria-label",
-    "language": "nl",
-    "value": "Goedgekeurd aria label",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/cp/const/requests",
-    "key": "goedgekeurd-aria-label",
-    "language": "en",
-    "value": "Goedgekeurd aria label",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/cp/const/requests",
-    "key": "geweigerd-aria-label",
-    "language": "nl",
-    "value": "Geweigerd aria label",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/cp/const/requests",
-    "key": "geweigerd-aria-label",
-    "language": "en",
-    "value": "Geweigerd aria label",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/cp/const/requests",
-    "key": "geannuleerd-aria-label",
-    "language": "nl",
-    "value": "Geannuleerd aria label",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/cp/const/requests",
-    "key": "geannuleerd-aria-label",
-    "language": "en",
-    "value": "Geannuleerd aria label",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/cp/const/visitors",
-    "key": "alle-aria-label",
-    "language": "nl",
-    "value": "Alle aria label",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/cp/const/visitors",
-    "key": "alle-aria-label",
-    "language": "en",
-    "value": "Alle aria label",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/cp/const/visitors",
-    "key": "actief-aria-label",
-    "language": "nl",
-    "value": "Actief aria label",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/cp/const/visitors",
-    "key": "actief-aria-label",
-    "language": "en",
-    "value": "Actief aria label",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/cp/const/visitors",
-    "key": "historiek-aria-label",
-    "language": "nl",
-    "value": "Historiek aria label",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/cp/const/visitors",
-    "key": "historiek-aria-label",
-    "language": "en",
-    "value": "Historiek aria label",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/const/index",
-    "key": "alles-aria-label",
-    "language": "nl",
-    "value": "Alles aria label",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/const/index",
-    "key": "alles-aria-label",
-    "language": "en",
-    "value": "Alles aria label",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/const/index",
-    "key": "in-aanvraag-aria-label",
-    "language": "nl",
-    "value": "In aanvraag aria label",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/const/index",
-    "key": "in-aanvraag-aria-label",
-    "language": "en",
-    "value": "In aanvraag aria label",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/const/index",
-    "key": "gepubliceerd-aria-label",
-    "language": "nl",
-    "value": "Gepubliceerd aria label",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/const/index",
-    "key": "gepubliceerd-aria-label",
-    "language": "en",
-    "value": "Gepubliceerd aria label",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/const/index",
-    "key": "gedepubliceerd-aria-label",
-    "language": "nl",
-    "value": "Gedepubliceerd aria label",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/const/index",
-    "key": "gedepubliceerd-aria-label",
-    "language": "en",
-    "value": "Gedepubliceerd aria label",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/const/index",
-    "key": "alles-aria-label",
-    "language": "nl",
-    "value": "Alles aria label",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/const/index",
-    "key": "alles-aria-label",
-    "language": "en",
-    "value": "Alles aria label",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/const/index",
-    "key": "videos-aria-label",
-    "language": "nl",
-    "value": "Videos aria label",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/const/index",
-    "key": "videos-aria-label",
-    "language": "en",
-    "value": "Videos aria label",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/const/index",
-    "key": "audio-aria-label",
-    "language": "nl",
-    "value": "Audio aria label",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/const/index",
-    "key": "audio-aria-label",
-    "language": "en",
-    "value": "Audio aria label",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/const/visitor-space-tabs",
-    "key": "krant-aria-label",
-    "language": "nl",
-    "value": "Krant aria label",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/const/visitor-space-tabs",
-    "key": "krant-aria-label",
-    "language": "en",
-    "value": "Krant aria label",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-additional-conditions-resolution-blade/material-request-additional-conditions-resolution-blade",
-    "key": "de-aanvraag-moet-expliciet-worden-goedgekeurd-aria-label",
-    "language": "nl",
-    "value": "De aanvraag moet expliciet worden goedgekeurd aria label",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-additional-conditions-resolution-blade/material-request-additional-conditions-resolution-blade",
-    "key": "de-aanvraag-moet-expliciet-worden-goedgekeurd-aria-label",
-    "language": "en",
-    "value": "De aanvraag moet expliciet worden goedgekeurd aria label",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
-    "key": "info-aanvraag-aria-label",
-    "language": "nl",
-    "value": "Info aanvraag aria label",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
-    "key": "info-aanvraag-aria-label",
-    "language": "en",
-    "value": "Info aanvraag aria label",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
-    "key": "conversatie-aria-label",
-    "language": "nl",
-    "value": "Conversatie aria label",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
-    "key": "conversatie-aria-label",
-    "language": "en",
-    "value": "Conversatie aria label",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
-    "key": "documenten-aria-label",
-    "language": "nl",
-    "value": "Documenten aria label",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
-    "key": "documenten-aria-label",
-    "language": "en",
-    "value": "Documenten aria label",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-detail-blade/material-request-conversation-input",
-    "key": "bericht-versturen",
-    "language": "nl",
-    "value": "Bericht versturen",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-detail-blade/material-request-conversation-input",
-    "key": "bericht-versturen",
-    "language": "en",
-    "value": "Bericht versturen",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/shared/components/media-card/media-card",
-    "key": "audio-aria-label",
-    "language": "nl",
-    "value": "Audio aria label",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/shared/components/media-card/media-card",
-    "key": "audio-aria-label",
-    "language": "en",
-    "value": "Audio aria label",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/shared/components/media-card/media-card",
-    "key": "video-aria-label",
-    "language": "nl",
-    "value": "Video aria label",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/shared/components/media-card/media-card",
-    "key": "video-aria-label",
-    "language": "en",
-    "value": "Video aria label",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/shared/components/media-card/media-card",
-    "key": "krant-aria-label",
-    "language": "nl",
-    "value": "Krant aria label",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/shared/components/media-card/media-card",
-    "key": "krant-aria-label",
-    "language": "en",
-    "value": "Krant aria label",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/shared/components/media-card/media-card",
-    "key": "afbeelding-aria-label",
-    "language": "nl",
-    "value": "Afbeelding aria label",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/shared/components/media-card/media-card",
-    "key": "afbeelding-aria-label",
-    "language": "en",
-    "value": "Afbeelding aria label",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/shared/components/media-card/media-card",
-    "key": "object-type-niet-gekend-aria-label",
-    "language": "nl",
-    "value": "Object type niet gekend aria label",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/shared/components/media-card/media-card",
-    "key": "object-type-niet-gekend-aria-label",
-    "language": "en",
-    "value": "Object type niet gekend aria label",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-detail-blade/message-file-upload/message-file-upload",
-    "key": "voeg-bijlages-toe-aan-het-bericht-dat-je-wil-versturen",
-    "language": "nl",
-    "value": "Voeg bijlages toe aan het bericht dat je wil versturen",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-detail-blade/message-file-upload/message-file-upload",
-    "key": "voeg-bijlages-toe-aan-het-bericht-dat-je-wil-versturen",
-    "language": "en",
-    "value": "Voeg bijlages toe aan het bericht dat je wil versturen",
     "value_type": "TEXT"
   },
   {
