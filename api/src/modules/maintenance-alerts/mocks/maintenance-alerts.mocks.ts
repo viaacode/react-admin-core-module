@@ -129,4 +129,8 @@ export const mockUser: AvoUserHetArchiefUser = {
 	organisationId: 'OR-rf5kf25',
 	organisationName: 'VRT',
 	sector: 'Publieke Omroep',
+	organisationVAT: 'BE 0244.142.664',
+	organisationAddress: 'Auguste Reyerslaan 52',
+	organisationPostalCode: '1043',
+	organisationLocality: 'Brussel',
 };

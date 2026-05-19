@@ -266,5 +266,9 @@ export function getMockUserHetArchief(): AvoUserHetArchiefUser {
 		maintainerId: 'OR-w66976m',
 		organisationId: null,
 		sector: null,
+		organisationAddress: null,
+		organisationPostalCode: null,
+		organisationLocality: null,
+		organisationVAT: null,
 	};
 }
