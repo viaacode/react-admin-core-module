@@ -193,15 +193,15 @@ export const generateWhereObjectArchief = (
 
 		andFilters.push(...getMultiOptionFilters(filters, ['userGroup'], ['group_id']));
 
-		andFilters.push(
-			...getMultiOptionsFilters(
+		andFilters.push({
+			_or: getMultiOptionsFilters(
 				filters,
 				['idps', 'organisation'],
 				['identities', 'organisation'],
 				['identity_provider_name', 'org_identifier'],
 				true
-			)
-		);
+			)[0],
+		});
 
 		andFilters.push(...getDateRangeFilters(filters, ['lastAccessAt'], ['last_access_at']));
 
