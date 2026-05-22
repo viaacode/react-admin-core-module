@@ -25,13 +25,11 @@ query getUserById($id: uuid!) {
 		}
 		profile {
 			avatar
-			alias
 			title
 			business_category
 			updated_at
 			created_at
 			bio
-			alternative_email
 			usersByuserId {
 				full_name
 				first_name
