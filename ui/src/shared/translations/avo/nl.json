@@ -626,7 +626,6 @@
   "admin/users/views/user-detail___gebruiker-is-geblokkeerd": "Gebruiker is geblokkeerd",
   "admin/users/views/user-detail___gebruiker-is-gedeblokkeerd": "Gebruiker is opnieuw geactiveerd",
   "admin/users/views/user-detail___gebruikersgroep": "Gebruikersgroep",
-  "admin/users/views/user-detail___gebruikersnaam": "Gebruikersnaam",
   "admin/users/views/user-detail___gelinked-aan": "Toegang via",
   "admin/users/views/user-detail___het-ophalen-van-de-gebruiker-info-is-mislukt": "Het ophalen van de gebruikersinformatie is mislukt.",
   "admin/users/views/user-detail___het-updaten-van-de-gebruiker-is-mislukt": "Het bijwerken van de gebruiker is mislukt.",

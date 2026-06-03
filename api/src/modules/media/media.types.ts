@@ -18,7 +18,7 @@ export interface MediaFile {
 	schemaIdentifier: string;
 	ebucoreMediaType: string;
 	ebucoreIsMediaFragmentOf: string;
-	embedUrl: string;
+	browseUrl: string;
 }
 
 export interface Representation {
@@ -67,7 +67,7 @@ export interface Media {
 	dctermsMedium: string;
 	inLanguage: string[];
 	thumbnailUrl: string;
-	// embedUrl: string;
+	// browseUrl: string;
 	duration: string;
 	// biome-ignore lint/suspicious/noExplicitAny: todo
 	license: any;

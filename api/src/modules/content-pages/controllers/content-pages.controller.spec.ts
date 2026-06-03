@@ -1,6 +1,6 @@
 import { Test, type TestingModule } from '@nestjs/testing';
 import { AvoAuthIdpType, type AvoUserHetArchiefUser, PermissionName } from '@viaa/avo2-types';
-import { vi, type MockInstance } from 'vitest';
+import { type MockInstance, vi } from 'vitest';
 
 import { PlayerTicketService } from '../../player-ticket';
 import { SessionHelper } from '../../shared/auth/session-helper';
@@ -28,6 +28,10 @@ export const mockUser: AvoUserHetArchiefUser = {
 	lastAccessAt: '2023-03-08T08:00:00',
 	organisationId: 'OR-rf5kf25',
 	organisationName: 'VRT',
+	organisationAddress: 'Hasseltsebaan 42',
+	organisationLocality: 'Hasselt',
+	organisationPostalCode: '3500',
+	organisationVAT: 'BE 0403.226.721',
 	sector: 'Publieke Omroep',
 	language: 'nl',
 };
@@ -45,7 +49,7 @@ const mockContentPagesService: Partial<Record<keyof ContentPagesService, MockIns
 
 const mockPlayerTicketService: Partial<Record<keyof PlayerTicketService, MockInstance>> = {
 	getPlayableUrl: vi.fn(),
-	getEmbedUrl: vi.fn(),
+	getBrowseUrl: vi.fn(),
 };
 
 describe('ContentPagesController', () => {

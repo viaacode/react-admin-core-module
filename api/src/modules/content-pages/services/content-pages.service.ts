@@ -619,11 +619,10 @@ export class ContentPagesService {
 						const itemInfo = await this.fetchItemByExternalId(externalId);
 						let videoSrc: string | undefined;
 						if (itemInfo?.browse_path) {
-							videoSrc = await this.playerTicketService.getPlayableUrl(
-								itemInfo.browse_path,
-								referrer || 'http://localhost:3200/',
-								ip
-							);
+							videoSrc = await this.playerTicketService.getPlayableUrl(itemInfo.browse_path, {
+								referer: referrer || 'http://localhost:3200/',
+								ip,
+							});
 						}
 
 						// Copy all required properties to be able to render the video player without having to use the data route to fetch item information

@@ -144,7 +144,7 @@ export class ContentPagesController {
 		@Query('language') language: Locale,
 		@Query('path') path: string,
 		@Req() request: Request,
-		@Ip() ip,
+		@Ip() ip: string,
 		@SessionUser() user: SessionUserEntity
 	): Promise<{ exists: boolean; title: string; id: number | string }> {
 		const contentPage = await this.getContentPageByLanguageAndPath(

@@ -16,7 +16,7 @@
     "copy:avo": "npm run build && npm run copy-to-proxy-avo",
     "copy:hetarchief": "npm run build && npm run copy-to-proxy-hetarchief",
     "start": "dotenv -e .env/.env.local nest start",
-    "dev": "dotenv -e .env/.env.local nest start --swc",
+    "dev": "dotenv -e .env/.env.local nest start --builder tsc",
     "start:debug": "dotenv -e .env/.env.local nest start -- --debug --watch",
     "lint": "biome lint --write",
     "format": "biome format --write",

@@ -1,5 +1,6 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { IsOptional, IsString } from 'class-validator';
+import { Type } from 'class-transformer';
+import { IsNumber, IsOptional, IsString } from 'class-validator';
 
 export class GetPlayableUrlDto {
 	@IsString()
@@ -35,4 +36,24 @@ export class GetPlayableUrlDto {
 		required: false,
 	})
 	browsePath: string | undefined;
+
+	@IsString()
+	@IsOptional()
+	@ApiProperty({
+		type: String,
+		description: 'The start time of the fragment is seconds',
+		example: '124',
+		required: false,
+	})
+	startTime: string | undefined;
+
+	@IsString()
+	@IsOptional()
+	@ApiProperty({
+		type: String,
+		description: 'The end time of the fragment is seconds',
+		example: '456',
+		required: false,
+	})
+	endTime: string | undefined;
 }
