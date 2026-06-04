@@ -173,13 +173,7 @@ export class PlayerTicketService {
 	 */
 	public async getPlayableUrl(urlOrPath: string, options: PlayerTokenOptions): Promise<string> {
 		const token = await this.getPlayerToken(urlOrPath, options);
-		return stringifyUrl({
-			url: `${this.mediaServiceUrl}/${this.urlToFilePath(urlOrPath)}`,
-			query: {
-				token,
-				t: options.endTime ? `${options.startTime},${options.endTime}` : undefined,
-			},
-		});
+		return `${this.mediaServiceUrl}/${this.urlToFilePath(urlOrPath)}?token=${token}${options.endTime ? `&t=${options.startTime},${options.endTime}` : ''}`;
 	}
 
 	/**
