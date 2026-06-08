@@ -146,7 +146,7 @@ export class PlayerTicketService {
 			const token = await this.cacheManager.wrap(
 				options.isPublicDomain
 					? `thumbnailToken-${browsePath}`
-					: `thumbnailToken-${browsePath}-${options.endTime}-${options.ip}`,
+					: `thumbnailToken-${browsePath}-${options.startTime || 'none'}-${options.endTime || 'none'}-${options.ip}`,
 				() => this.getToken(browsePath, options),
 				60 * 60 * 1000 // Cache for 1 hour
 			);
