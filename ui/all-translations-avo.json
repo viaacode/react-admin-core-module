@@ -4413,15 +4413,6 @@
     "app": "AVO",
     "component": "ADMIN_CORE",
     "location": "admin/users/views/user-detail",
-    "key": "gebruikersnaam",
-    "language": "nl",
-    "value": "Gebruikersnaam",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "admin/users/views/user-detail",
     "key": "functie",
     "language": "nl",
     "value": "Functie",
@@ -10679,7 +10670,7 @@
     "location": "settings/settings",
     "key": "ik-ontvang-graag-tips-en-inspiratie-voor-mijn-lessen-en-nieuws-van-partners",
     "language": "nl",
-    "value": "Ik ontvang graag tips en inspiratie voor mijn lessen en nieuws van partners.",
+    "value": "Ik ontvang graag tot 7 keer per jaar lesinspiratie, nieuws en updates over het gratis vormingsaanbod.",
     "value_type": "TEXT"
   },
   {
@@ -10688,7 +10679,7 @@
     "location": "settings/settings",
     "key": "ik-krijg-graag-berichten-om-actief-mee-te-werken-aan-het-archief-voor-onderwijs",
     "language": "nl",
-    "value": "Ik krijg graag berichten om actief mee te werken aan Het Archief voor Onderwijs.",
+    "value": "Ik wil graag actief meewerken aan Het Archief voor Onderwijs door bijvoorbeeld bevragingen in te vullen of in een focusgroep te zitten. Jullie mogen me daarvoor ook contacteren.",
     "value_type": "TEXT"
   },
   {
@@ -14423,7 +14414,7 @@
     "location": "assignment/views/assignment-edit-marcom",
     "key": "publiceren-naar-klascement-gelukt",
     "language": "nl",
-    "value": "Publiceren naar KlasCement gelukt",
+    "value": "Publiceren naar KlasCement gelukt.",
     "value_type": "TEXT"
   },
   {
@@ -16664,7 +16655,7 @@
     "location": "collection/components/collection-or-bundle-edit-marcom",
     "key": "publiceren-naar-klascement-mislukt",
     "language": "nl",
-    "value": "Publiceren naar KlasCement is mislukt.",
+    "value": "Publiceren naar KlasCement is mislukt",
     "value_type": "TEXT"
   },
   {
@@ -19136,6 +19127,15 @@
   {
     "app": "AVO",
     "component": "FRONTEND",
+    "location": "shared/components/loading-error-loaded-component/loading-error-loaded-component",
+    "key": "er-is-iets-mis-gegaan-bij-het-laden-van-de-gegevens",
+    "language": "nl",
+    "value": "Er is iets misgegaan bij het laden van de gegevens. Contacteer ons via de Feedback-knop mocht dit probleem zich blijven voordoen.",
+    "value_type": "HTML"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
     "location": "item/views/item-detail",
     "key": "item-detail-pagina-titel-fallback",
     "language": "nl",
@@ -19769,7 +19769,7 @@
     "location": "settings/components/profile",
     "key": "ik-ontvang-graag-per-e-mail-tips-en-inspiratie-voor-mijn-lessen-vacatures-gratis-workshops-en-nieuws-van-partners",
     "language": "nl",
-    "value": "Ik ontvang graag per e-mail tips en inspiratie voor mijn lessen, vacatures, gratis workshops en nieuws van partners.",
+    "value": "Ik ontvang graag per e-mail tips en inspiratie voor mijn lessen, vacatures, gratis workshops en lesmateriaal van partners.",
     "value_type": "TEXT"
   },
   {
@@ -27212,7 +27212,7 @@
     "location": "settings/components/email",
     "key": "e-mail-nieuwsbrief-voorkeuren-beschrijving",
     "language": "nl",
-    "value": "Tips en inspiratie voor je lessen, workshops, vacatures, nieuws van de partners waarmee we werken aan beeld en geluid op maat van jouw klas, en dit recht in je mailbox? Schrijf je hieronder in voor onze nieuwsbrief en andere e-mailcommunicatie. Je kan je voorkeuren altijd aanpassen.",
+    "value": "Lesideeën, workshops, vacatures en updates over nieuw beeld en geluid op maat van jouw lessen, en dit recht in je mailbox? Schrijf je hieronder in voor onze nieuwsbrief en laat weten waarvoor we je mogen contacteren. Je kan je voorkeuren altijd aanpassen.",
     "value_type": "HTML"
   },
   {
@@ -27221,7 +27221,7 @@
     "location": "settings/components/email/email",
     "key": "we-kunnen-je-wel-nog-account-gerelateerde-mails-sturen-zoals-wachtwoord-opnieuw-instellen",
     "language": "nl",
-    "value": "Daarnaast ontvang je ook mails wanneer je bijvoorbeeld een nieuw wachtwoord aanvraagt, je account geblokkeerd, geactiveerd of verwijderd wordt, of wanneer we technische storingen of belangrijke nieuwe functionaliteiten aankondigen. We sturen je ook informatie die jou helpt je eerste stappen te zetten op ons platform. Raadpleeg de <a href=\"https://onderwijs.hetarchief.be/privacy-voorwaarden\" target=\"_blank\">privacyverklaring</a> bij vragen over ons e-mailbeleid of je privacy.",
+    "value": "<p>Daarnaast ontvang je ook mails wanneer je bijvoorbeeld een nieuw wachtwoord aanvraagt, je account geblokkeerd, ge(de)activeerd of verwijderd wordt, of wanneer we technische storingen of belangrijke nieuwe functionaliteiten aankondigen. We sturen je ook informatie die jou helpt je eerste stappen te zetten op ons platform. Raadpleeg de <a href=\"https://onderwijs.hetarchief.be/privacy-voorwaarden\" target=\"_blank\">privacyverklaring</a> bij vragen over ons e-mailbeleid of je privacy.</p>",
     "value_type": "HTML"
   },
   {
@@ -28362,15 +28362,6 @@
     "app": "AVO",
     "component": "FRONTEND",
     "location": "shared/components/loading-error-loaded-component/loading-error-loaded-component",
-    "key": "er-is-iets-mis-gegaan-bij-het-laden-van-de-gegevens",
-    "language": "nl",
-    "value": "Er is iets misgegaan bij het laden van de gegevens. Contacteer ons via de Feedback-knop mocht dit probleem zich blijven voordoen.",
-    "value_type": "HTML"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "shared/components/loading-error-loaded-component/loading-error-loaded-component",
     "key": "het-gevraagde-object-is-niet-gevonden",
     "language": "nl",
     "value": "Het gevraagde object is niet gevonden. Contacteer ons via de Feedback-knop mocht dit probleem zich blijven voordoen.",
@@ -29274,15 +29265,6 @@
     "key": "je-moet-een-vervang-item-selecteren",
     "language": "nl",
     "value": "Je moet een vervangend item selecteren.",
-    "value_type": "HTML"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "admin/items/components/depublish-item-modal/depublish-item-modal",
-    "key": "het-bepalen-van-de-id-van-het-vervang-item-is-mislukt",
-    "language": "nl",
-    "value": "Het bepalen van de id van het vervangend item is mislukt.",
     "value_type": "HTML"
   },
   {

@@ -146,7 +146,7 @@ export class VideoStillsService {
 		let type: StillsObjectType;
 		if (!storedAt) {
 			// Fetch extra info to fetch the stills
-			const item = await this.playerTicketService.getEmbedUrlAndType(id);
+			const item = await this.playerTicketService.getBrowseUrlAndType(id);
 
 			if (!item) {
 				return null;

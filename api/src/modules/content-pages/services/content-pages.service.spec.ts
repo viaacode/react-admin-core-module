@@ -1,5 +1,5 @@
 import { Test, type TestingModule } from '@nestjs/testing';
-import { vi, type MockInstance } from 'vitest';
+import { type MockInstance, vi } from 'vitest';
 
 import { DataService } from '../../data';
 import { AdminOrganisationsService } from '../../organisations';
@@ -13,7 +13,7 @@ const mockDataService: Partial<Record<keyof DataService, MockInstance>> = {
 
 const mockPlayerTicketService: Partial<Record<keyof PlayerTicketService, MockInstance>> = {
 	getPlayableUrl: vi.fn(),
-	getEmbedUrl: vi.fn(),
+	getBrowseUrl: vi.fn(),
 };
 
 const mockOrganisationsService: Partial<Record<keyof AdminOrganisationsService, MockInstance>> = {

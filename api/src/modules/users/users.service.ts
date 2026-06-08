@@ -60,7 +60,7 @@ export class UsersService {
 				UserInfoType.UserInfoOverviewAvo
 			);
 		} catch (err) {
-			throw new CustomError('Failed to get profiles from the database', err, {
+			throw new CustomError('Failed to get profile from the database', err, {
 				variables: { id: profileId },
 				query: 'GetUserById',
 			});
