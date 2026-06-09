@@ -200,7 +200,7 @@ export function getMockUserAvo(): AvoUserUser {
 				idp_user_id: '4d2b556cd6bffa86869507455afb0ee7329f41f2',
 			},
 		],
-	} as AvoUserUser;
+	} as unknown as AvoUserUser;
 }
 
 export function getMockUserHetArchief(): AvoUserHetArchiefUser {

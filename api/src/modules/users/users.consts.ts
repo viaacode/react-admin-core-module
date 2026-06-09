@@ -84,6 +84,8 @@ const tableColumnToDatabaseOrderObjectAvo: {
 	subjects: null,
 	idps: null,
 	educationalOrganisations: null,
+	isKeyUser: null,
+	isEvaluator: null,
 };
 
 const tableColumnToDatabaseOrderObjectHetArchief: Partial<{
@@ -110,5 +112,11 @@ const tableColumnToDatabaseOrderObjectHetArchief: Partial<{
 	}),
 	lastAccessAt: (order: AvoSearchOrderDirection) => ({
 		last_access_at: order,
+	}),
+	isKeyUser: (order: AvoSearchOrderDirection) => ({
+		is_key_user: order as unknown as Order_By,
+	}),
+	isEvaluator: (order: AvoSearchOrderDirection) => ({
+		is_evaluator: order as unknown as Order_By,
 	}),
 };
