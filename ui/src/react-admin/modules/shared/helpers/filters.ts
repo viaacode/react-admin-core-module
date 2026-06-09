@@ -150,7 +150,7 @@ export function getMultiOptionsFilters<T>(
 				nullFilters = [
 					{
 						_not: {
-							[nestedPathParts[0]]: {}, // empty value => no reference table entries exist
+							[referenceTable]: {}, // empty value => no reference table entries exist
 						},
 					},
 				];
