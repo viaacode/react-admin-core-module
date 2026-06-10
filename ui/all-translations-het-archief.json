@@ -30029,7 +30029,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-conversation-message",
     "key": "name-aanvaardde-de-bijkomende-gebruiksvoorwaarden-aanvrager",
     "language": "nl",
-    "value": "Name aanvaardde de bijkomende gebruiksvoorwaarden aanvrager",
+    "value": "{{name}} aanvaardde de bijkomende gebruiksvoorwaarden.",
     "value_type": "HTML"
   },
   {
@@ -30038,7 +30038,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-conversation-message",
     "key": "name-aanvaardde-de-bijkomende-gebruiksvoorwaarden-aanvrager",
     "language": "en",
-    "value": "Name aanvaardde de bijkomende gebruiksvoorwaarden aanvrager",
+    "value": "{{name}} accepted the additional conditions for use.",
     "value_type": "HTML"
   },
   {
@@ -48039,24 +48039,6 @@
     "key": "sluiten",
     "language": "en",
     "value": "Close",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/404",
-    "key": "dit-is-een-test",
-    "language": "nl",
-    "value": "Dit is een test",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/404",
-    "key": "dit-is-een-test",
-    "language": "en",
-    "value": "Dit is een test",
     "value_type": "TEXT"
   },
   {
