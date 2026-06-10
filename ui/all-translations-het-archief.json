@@ -26096,7 +26096,7 @@
     "location": "modules/visitor-space/const/rights-filter",
     "key": "auteursrechtelijke-bescherming-niet-bepaald",
     "language": "en",
-    "value": "Auteursrechtelijke bescherming niet bepaald",
+    "value": "Copyright protection not determined",
     "value_type": "TEXT"
   },
   {
@@ -26114,7 +26114,7 @@
     "location": "modules/visitor-space/const/rights-filter",
     "key": "rechthebbenden-niet-lokaliseerbaar-of-niet-identificeerbaar",
     "language": "en",
-    "value": "Rechthebbende(n) niet lokaliseerbaar of niet-identificeerbaar",
+    "value": "Rights holder(s) not traceable or not identifiable",
     "value_type": "TEXT"
   },
   {
@@ -26132,7 +26132,7 @@
     "location": "modules/visitor-space/const/rights-filter",
     "key": "auteursrechtelijk-beschermd",
     "language": "en",
-    "value": "Auteursrechtelijk beschermd",
+    "value": "Protected by copyright",
     "value_type": "TEXT"
   },
   {
@@ -26411,7 +26411,7 @@
     "location": "modules/material-requests/const/index",
     "key": "toestemming-rechthebbende-evaluate-conditions-blade",
     "language": "nl",
-    "value": "Toestemming rechthebbende - evaluate conditions blade",
+    "value": "Toestemming rechthebbende",
     "value_type": "TEXT"
   },
   {
@@ -26420,7 +26420,7 @@
     "location": "modules/material-requests/const/index",
     "key": "toestemming-rechthebbende-evaluate-conditions-blade",
     "language": "en",
-    "value": "Toestemming rechthebbende - evaluate conditions blade",
+    "value": "Approval rights holder",
     "value_type": "TEXT"
   },
   {
@@ -26429,7 +26429,7 @@
     "location": "modules/material-requests/const/index",
     "key": "naamsvermelding-evaluate-conditions-blade",
     "language": "nl",
-    "value": "Naamsvermelding - evaluate conditions blade",
+    "value": "Naamsvermelding",
     "value_type": "TEXT"
   },
   {
@@ -26438,7 +26438,7 @@
     "location": "modules/material-requests/const/index",
     "key": "naamsvermelding-evaluate-conditions-blade",
     "language": "en",
-    "value": "Naamsvermelding - evaluate conditions blade",
+    "value": "Attribution",
     "value_type": "TEXT"
   },
   {
@@ -26447,7 +26447,7 @@
     "location": "modules/material-requests/const/index",
     "key": "betaling-evaluate-conditions-blade",
     "language": "nl",
-    "value": "Betaling - evaluate conditions blade",
+    "value": "Betaling",
     "value_type": "TEXT"
   },
   {
@@ -26456,7 +26456,7 @@
     "location": "modules/material-requests/const/index",
     "key": "betaling-evaluate-conditions-blade",
     "language": "en",
-    "value": "Betaling - evaluate conditions blade",
+    "value": "Payment",
     "value_type": "TEXT"
   },
   {
@@ -26465,7 +26465,7 @@
     "location": "modules/material-requests/const/index",
     "key": "extra-gebruiksbeperking-evaluate-conditions-blade",
     "language": "nl",
-    "value": "Extra gebruiksbeperking - evaluate conditions blade",
+    "value": "Extra gebruiksbeperking",
     "value_type": "TEXT"
   },
   {
@@ -26474,7 +26474,7 @@
     "location": "modules/material-requests/const/index",
     "key": "extra-gebruiksbeperking-evaluate-conditions-blade",
     "language": "en",
-    "value": "Extra gebruiksbeperking - evaluate conditions blade",
+    "value": "Extra conditions for use",
     "value_type": "TEXT"
   },
   {
@@ -27626,7 +27626,7 @@
     "location": "modules/visitor-space/const/rights-filter",
     "key": "publiek-domein",
     "language": "en",
-    "value": "Publiek domein",
+    "value": "Public domain",
     "value_type": "TEXT"
   },
   {
@@ -27644,7 +27644,7 @@
     "location": "modules/visitor-space/const/rights-filter",
     "key": "niet-auteursrechtelijk-beschermd-met-contractuele-voorwaarden",
     "language": "en",
-    "value": "Niet auteursrechtelijk beschermd met contractuele voorwaarden",
+    "value": "Not protected by copyright with contractual conditions",
     "value_type": "TEXT"
   },
   {
@@ -27734,7 +27734,7 @@
     "location": "modules/visitor-space/const/rights-filter",
     "key": "auteursrechtelijke-status-niet-geevalueerd",
     "language": "en",
-    "value": "Auteursrechtelijke status niet geëvalueerd",
+    "value": "Copyright status not evaluated",
     "value_type": "TEXT"
   },
   {
@@ -27752,7 +27752,7 @@
     "location": "modules/visitor-space/const/rights-filter",
     "key": "eu-verweesd-werk",
     "language": "en",
-    "value": "EU verweesd werk",
+    "value": "EU orphan work",
     "value_type": "TEXT"
   },
   {
@@ -27968,7 +27968,7 @@
     "location": "modules/visitor-space/const/visitor-space-filters",
     "key": "herbruikbaarheid",
     "language": "en",
-    "value": "Herbruikbaarheid",
+    "value": "Useability",
     "value_type": "TEXT"
   },
   {
@@ -28706,7 +28706,7 @@
     "location": "modules/account/components/material-request-additional-conditions-blade/material-request-additional-conditions-blade",
     "key": "naamsvermelding",
     "language": "en",
-    "value": "Naamsvermelding",
+    "value": "Attribution",
     "value_type": "TEXT"
   },
   {
@@ -28814,7 +28814,7 @@
     "location": "modules/account/components/material-request-additional-conditions-blade/material-request-additional-conditions-blade",
     "key": "naar-volgende-stap",
     "language": "en",
-    "value": "Naar volgende stap",
+    "value": "Te the next step",
     "value_type": "TEXT"
   },
   {
@@ -29210,7 +29210,7 @@
     "location": "modules/account/components/material-request-additional-conditions-resolution-blade/material-request-additional-conditions-resolution-blade",
     "key": "goedkeuring",
     "language": "en",
-    "value": "Goedkeuring",
+    "value": "Approval",
     "value_type": "TEXT"
   },
   {
@@ -29327,7 +29327,7 @@
     "location": "modules/account/components/material-request-additional-conditions-resolution-blade/material-request-additional-conditions-resolution-blade",
     "key": "de-aanvraag-moet-expliciet-worden-goedgekeurd-aria-label",
     "language": "nl",
-    "value": "De aanvraag moet expliciet worden goedgekeurd aria label",
+    "value": "De aanvraag moet expliciet worden goedgekeurd",
     "value_type": "TEXT"
   },
   {
@@ -29336,7 +29336,7 @@
     "location": "modules/account/components/material-request-additional-conditions-resolution-blade/material-request-additional-conditions-resolution-blade",
     "key": "de-aanvraag-moet-expliciet-worden-goedgekeurd-aria-label",
     "language": "en",
-    "value": "De aanvraag moet expliciet worden goedgekeurd aria label",
+    "value": "This request requires explicit approval",
     "value_type": "TEXT"
   },
   {
@@ -29858,7 +29858,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-conversation-input",
     "key": "bericht-versturen",
     "language": "en",
-    "value": "Bericht versturen",
+    "value": "Send message",
     "value_type": "TEXT"
   },
   {
@@ -30020,13 +30020,31 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-conversation-message",
     "key": "voorwaarden-evalueren",
     "language": "en",
-    "value": "Voorwaarden evalueren",
+    "value": "Evaluate conditions",
     "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
     "location": "modules/account/components/material-request-detail-blade/material-request-conversation-message",
+    "key": "name-aanvaardde-de-bijkomende-gebruiksvoorwaarden-aanvrager",
+    "language": "nl",
+    "value": "Name aanvaardde de bijkomende gebruiksvoorwaarden aanvrager",
+    "value_type": "HTML"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-detail-blade/material-request-conversation-message",
+    "key": "name-aanvaardde-de-bijkomende-gebruiksvoorwaarden-aanvrager",
+    "language": "en",
+    "value": "Name aanvaardde de bijkomende gebruiksvoorwaarden aanvrager",
+    "value_type": "HTML"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-detail-blade/material-request-conversation-message",
     "key": "name-aanvaardde-de-bijkomende-gebruiksvoorwaarden-de-download-wordt-beschikbaar-gemaakt-na-finale-goedkeuring-van-de-aanbieder",
     "language": "nl",
     "value": "{{name}} aanvaardde de bijkomende gebruiksvoorwaarden. De download wordt beschikbaar gemaakt na finale goedkeuring van de aanbieder.",
@@ -30038,7 +30056,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-conversation-message",
     "key": "name-aanvaardde-de-bijkomende-gebruiksvoorwaarden-de-download-wordt-beschikbaar-gemaakt-na-finale-goedkeuring-van-de-aanbieder",
     "language": "en",
-    "value": "{{name}} aanvaardde de bijkomende gebruiksvoorwaarden. De download wordt beschikbaar gemaakt na finale goedkeuring van de aanbieder.",
+    "value": "{{name}} accepted the additional conditions. The download will be available after the final approval by the organisation that manages the item.",
     "value_type": "HTML"
   },
   {
@@ -30047,7 +30065,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-conversation-message",
     "key": "name-aanvaardde-de-bijkomende-gebruiksvoorwaarden",
     "language": "nl",
-    "value": "{{name}} aanvaardde de bijkomende gebruiksvoorwaarden",
+    "value": "{{name}} aanvaardde de bijkomende gebruiksvoorwaarden. De download wordt automatisch beschikbaar gemaakt.",
     "value_type": "HTML"
   },
   {
@@ -30056,7 +30074,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-conversation-message",
     "key": "name-aanvaardde-de-bijkomende-gebruiksvoorwaarden",
     "language": "en",
-    "value": "{{name}} aanvaardde de bijkomende gebruiksvoorwaarden",
+    "value": "{{name}} accepted the additional conditions",
     "value_type": "HTML"
   },
   {
@@ -30218,7 +30236,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
     "key": "er-ging-iets-mis-tijdens-het-beschikbaar-maken-van-de-download",
     "language": "en",
-    "value": "Er ging iets mis tijdens het beschikbaar maken van de download",
+    "value": "An error occurred when making the item available for download",
     "value_type": "TEXT"
   },
   {
@@ -30236,7 +30254,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
     "key": "download-beschikbaar-maken-gelukt",
     "language": "en",
-    "value": "Download beschikbaar maken gelukt",
+    "value": "The item is now available for download",
     "value_type": "TEXT"
   },
   {
@@ -30254,7 +30272,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
     "key": "de-download-wordt-nu-voorbereid",
     "language": "en",
-    "value": "De download wordt nu voorbereid",
+    "value": "The download is being prepared",
     "value_type": "TEXT"
   },
   {
@@ -30767,7 +30785,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
     "key": "ben-je-zeker-dat-je-de-download-beschikbaar-wil-maken",
     "language": "nl",
-    "value": "Ben je zeker dat je de download beschikbaar wil maken",
+    "value": "Ben je zeker dat je de download beschikbaar wil maken?",
     "value_type": "TEXT"
   },
   {
@@ -30776,7 +30794,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
     "key": "ben-je-zeker-dat-je-de-download-beschikbaar-wil-maken",
     "language": "en",
-    "value": "Ben je zeker dat je de download beschikbaar wil maken",
+    "value": "Are you sure you want to make this item available for download?",
     "value_type": "TEXT"
   },
   {
@@ -30785,7 +30803,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
     "key": "ja-download-beschikbaar-maken",
     "language": "nl",
-    "value": "Ja download beschikbaar maken",
+    "value": "Ja, download beschikbaar maken",
     "value_type": "TEXT"
   },
   {
@@ -30794,7 +30812,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
     "key": "ja-download-beschikbaar-maken",
     "language": "en",
-    "value": "Ja download beschikbaar maken",
+    "value": "Yes, make the item available for download",
     "value_type": "TEXT"
   },
   {
@@ -30812,7 +30830,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
     "key": "annuleren",
     "language": "en",
-    "value": "Annuleren",
+    "value": "Cancel",
     "value_type": "TEXT"
   },
   {
@@ -31046,7 +31064,7 @@
     "location": "modules/account/components/material-request-evaluate-conditions-blade/material-request-evaluate-conditions-blade",
     "key": "voorwaarden-geaccepteerd",
     "language": "en",
-    "value": "Voorwaarden geaccepteerd",
+    "value": "Conditions accepted",
     "value_type": "TEXT"
   },
   {
@@ -31064,7 +31082,7 @@
     "location": "modules/account/components/material-request-evaluate-conditions-blade/material-request-evaluate-conditions-blade",
     "key": "de-bijkomende-voorwaarden-zijn-geaccepteerd",
     "language": "en",
-    "value": "De bijkomende voorwaarden zijn geaccepteerd.",
+    "value": "The additional conditions have been accepted.",
     "value_type": "TEXT"
   },
   {
@@ -31082,7 +31100,7 @@
     "location": "modules/account/components/material-request-evaluate-conditions-blade/material-request-evaluate-conditions-blade",
     "key": "er-ging-iets-mis",
     "language": "en",
-    "value": "Er ging iets mis",
+    "value": "Something went wrong",
     "value_type": "TEXT"
   },
   {
@@ -31100,7 +31118,7 @@
     "location": "modules/account/components/material-request-evaluate-conditions-blade/material-request-evaluate-conditions-blade",
     "key": "er-ging-iets-mis-bij-het-accepteren-van-de-voorwaarden",
     "language": "en",
-    "value": "Er ging iets mis bij het accepteren van de voorwaarden.",
+    "value": "An error occurred when accepting the conditions.",
     "value_type": "TEXT"
   },
   {
@@ -31118,7 +31136,7 @@
     "location": "modules/account/components/material-request-evaluate-conditions-blade/material-request-evaluate-conditions-blade",
     "key": "aanvraag-geannuleerd",
     "language": "en",
-    "value": "Aanvraag geannuleerd",
+    "value": "Request cancelled",
     "value_type": "TEXT"
   },
   {
@@ -31136,7 +31154,7 @@
     "location": "modules/account/components/material-request-evaluate-conditions-blade/material-request-evaluate-conditions-blade",
     "key": "de-aanvraag-is-geannuleerd",
     "language": "en",
-    "value": "De aanvraag is geannuleerd.",
+    "value": "The request is cancelled.",
     "value_type": "TEXT"
   },
   {
@@ -31154,7 +31172,7 @@
     "location": "modules/account/components/material-request-evaluate-conditions-blade/material-request-evaluate-conditions-blade",
     "key": "er-ging-iets-mis-bij-het-annuleren-van-de-aanvraag",
     "language": "en",
-    "value": "Er ging iets mis bij het annuleren van de aanvraag.",
+    "value": "An error occurred while cancelling the request.",
     "value_type": "TEXT"
   },
   {
@@ -31172,6 +31190,15 @@
     "location": "modules/account/components/material-request-evaluate-conditions-blade/material-request-evaluate-conditions-blade",
     "key": "voorwaarden-accepteren",
     "language": "en",
+    "value": "Accept conditions",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-evaluate-conditions-blade/material-request-evaluate-conditions-blade",
+    "key": "voorwaarden-accepteren-mobile",
+    "language": "nl",
     "value": "Voorwaarden accepteren",
     "value_type": "TEXT"
   },
@@ -31180,17 +31207,8 @@
     "component": "FRONTEND",
     "location": "modules/account/components/material-request-evaluate-conditions-blade/material-request-evaluate-conditions-blade",
     "key": "voorwaarden-accepteren-mobile",
-    "language": "nl",
-    "value": "Voorwaarden accepteren - mobile",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-evaluate-conditions-blade/material-request-evaluate-conditions-blade",
-    "key": "voorwaarden-accepteren-mobile",
     "language": "en",
-    "value": "Voorwaarden accepteren - mobile",
+    "value": "Accept conditions",
     "value_type": "TEXT"
   },
   {
@@ -31208,6 +31226,15 @@
     "location": "modules/account/components/material-request-evaluate-conditions-blade/material-request-evaluate-conditions-blade",
     "key": "aanvraag-annuleren",
     "language": "en",
+    "value": "Cancel request",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-evaluate-conditions-blade/material-request-evaluate-conditions-blade",
+    "key": "aanvraag-annuleren-mobile",
+    "language": "nl",
     "value": "Aanvraag annuleren",
     "value_type": "TEXT"
   },
@@ -31216,17 +31243,8 @@
     "component": "FRONTEND",
     "location": "modules/account/components/material-request-evaluate-conditions-blade/material-request-evaluate-conditions-blade",
     "key": "aanvraag-annuleren-mobile",
-    "language": "nl",
-    "value": "Aanvraag annuleren - mobile",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-evaluate-conditions-blade/material-request-evaluate-conditions-blade",
-    "key": "aanvraag-annuleren-mobile",
     "language": "en",
-    "value": "Aanvraag annuleren - mobile",
+    "value": "Cancel request",
     "value_type": "TEXT"
   },
   {
@@ -31244,7 +31262,7 @@
     "location": "modules/account/components/material-request-evaluate-conditions-blade/material-request-evaluate-conditions-blade",
     "key": "bijkomende-voorwaarden-evalueren",
     "language": "en",
-    "value": "Bijkomende voorwaarden evalueren",
+    "value": "Evaluate additional conditions",
     "value_type": "TEXT"
   },
   {
@@ -31262,7 +31280,7 @@
     "location": "modules/account/components/material-request-evaluate-conditions-blade/material-request-evaluate-conditions-blade",
     "key": "de-aanbieder-legt-de-volgende-bijkomende-gebruiksvoorwaarden-op-vooraleer-de-aanvraag-kan-goedgekeurd-worden-deze-komen-bovenop-de-voorwaarden-die-zijn-ingevuld-in-het-originele-hergebruikformulier",
     "language": "en",
-    "value": "De aanbieder legt de volgende bijkomende gebruiksvoorwaarden op vooraleer de aanvraag kan goedgekeurd worden deze komen bovenop de voorwaarden die zijn ingevuld in het originele hergebruikformulier",
+    "value": "The organisation that manages this item imposes the following additional conditions for use, on top of the ones stated in the original request form.",
     "value_type": "TEXT"
   },
   {
@@ -31280,7 +31298,7 @@
     "location": "modules/account/components/material-request-evaluate-conditions-blade/material-request-evaluate-conditions-blade",
     "key": "ben-je-zeker-dat-je-deze-aanvraag-wilt-annuleren-deze-actie-kan-niet-ongedaan-gemaakt-worden",
     "language": "en",
-    "value": "Ben je zeker dat je deze aanvraag wilt annuleren? Deze actie kan niet ongedaan gemaakt worden.",
+    "value": "Are you sure you wish to cancel this request? This action cannot be undone.",
     "value_type": "TEXT"
   },
   {
@@ -31298,7 +31316,7 @@
     "location": "modules/account/components/material-request-evaluate-conditions-blade/material-request-evaluate-conditions-blade",
     "key": "nee-keer-terug",
     "language": "en",
-    "value": "Nee, keer terug",
+    "value": "No, go back",
     "value_type": "TEXT"
   },
   {
@@ -31316,7 +31334,7 @@
     "location": "modules/account/components/material-request-evaluate-conditions-blade/material-request-evaluate-conditions-blade",
     "key": "ja-annuleer-aanvraag",
     "language": "en",
-    "value": "Ja, annuleer aanvraag",
+    "value": "Yes, cancel request",
     "value_type": "TEXT"
   },
   {
@@ -31766,7 +31784,7 @@
     "location": "modules/account/components/material-request-status-update-blade/material-request-status-update-blade",
     "key": "afkeuren-en-bijkomende-gebruiksvoorwaarden-verwijderen",
     "language": "en",
-    "value": "Afkeuren en bijkomende gebruiksvoorwaarden verwijderen",
+    "value": "Reject and delete additional conditions",
     "value_type": "TEXT"
   },
   {
@@ -31784,7 +31802,7 @@
     "location": "modules/account/components/material-request-status-update-blade/material-request-status-update-blade",
     "key": "als-je-de-aanvraag-afkeurt-worden-de-verzonden-bijkomende-gebruiksvoorwaarden-verwijderd-weet-je-zeker-dat-je-wil-doorgaan",
     "language": "en",
-    "value": "Als je de aanvraag afkeurt, worden de verzonden bijkomende gebruiksvoorwaarden verwijderd. Weet je zeker dat je wil doorgaan?",
+    "value": "If you reject the request, the additional conditions will be deleted. Do you wish to continue?",
     "value_type": "TEXT"
   },
   {
@@ -31802,7 +31820,7 @@
     "location": "modules/account/components/material-request-status-update-blade/material-request-status-update-blade",
     "key": "nee-keer-terug-en-behoud-bijkomende-gebruiksvoorwaarden",
     "language": "en",
-    "value": "Nee, keer terug en behoud bijkomende gebruiksvoorwaarden",
+    "value": "No, go back and save the additional conditions",
     "value_type": "TEXT"
   },
   {
@@ -31820,7 +31838,7 @@
     "location": "modules/account/components/material-request-status-update-blade/material-request-status-update-blade",
     "key": "ja-aanvraag-afkeuren-en-verwijder-bijkomende-gebruiksvoorwaarden",
     "language": "en",
-    "value": "Ja, aanvraag afkeuren en verwijder bijkomende gebruiksvoorwaarden",
+    "value": "Yes, reject the request and delete the additional conditions",
     "value_type": "TEXT"
   },
   {
@@ -32891,7 +32909,7 @@
     "location": "modules/admin/views/organisations/admin-organisations-page",
     "key": "organisatie-bijgewerkt-success-toast",
     "language": "nl",
-    "value": "Organisatie bijgewerkt - success toast",
+    "value": "Organisatie bijgewerkt ",
     "value_type": "TEXT"
   },
   {
@@ -32900,7 +32918,7 @@
     "location": "modules/admin/views/organisations/admin-organisations-page",
     "key": "organisatie-bijgewerkt-success-toast",
     "language": "en",
-    "value": "Organisatie bijgewerkt - success toast",
+    "value": "Organisation updated",
     "value_type": "TEXT"
   },
   {
@@ -32909,7 +32927,7 @@
     "location": "modules/admin/views/organisations/admin-organisations-page",
     "key": "de-organisatie-is-succesvol-bijgewerkt-success-toast",
     "language": "nl",
-    "value": "De organisatie is succesvol bijgewerkt. - success toast",
+    "value": "De organisatie is succesvol bijgewerkt.",
     "value_type": "TEXT"
   },
   {
@@ -32918,7 +32936,7 @@
     "location": "modules/admin/views/organisations/admin-organisations-page",
     "key": "de-organisatie-is-succesvol-bijgewerkt-success-toast",
     "language": "en",
-    "value": "De organisatie is succesvol bijgewerkt. - success toast",
+    "value": "The organisation has been updated successfully.",
     "value_type": "TEXT"
   },
   {
@@ -32927,7 +32945,7 @@
     "location": "modules/admin/views/organisations/admin-organisations-page",
     "key": "er-ging-iets-mis-error-toast",
     "language": "nl",
-    "value": "Er ging iets mis - error toast",
+    "value": "Er ging iets mis",
     "value_type": "TEXT"
   },
   {
@@ -32936,7 +32954,7 @@
     "location": "modules/admin/views/organisations/admin-organisations-page",
     "key": "er-ging-iets-mis-error-toast",
     "language": "en",
-    "value": "Er ging iets mis - error toast",
+    "value": "An error occurred",
     "value_type": "TEXT"
   },
   {
@@ -32945,7 +32963,7 @@
     "location": "modules/admin/views/organisations/admin-organisations-page",
     "key": "het-bijwerken-van-de-organisatie-is-mislukt-probeer-het-later-opnieuw-error-toast",
     "language": "nl",
-    "value": "Het bijwerken van de organisatie is mislukt. Probeer het later opnieuw. - error toast",
+    "value": "Het bijwerken van de organisatie is mislukt. Probeer het later opnieuw.",
     "value_type": "TEXT"
   },
   {
@@ -32954,7 +32972,7 @@
     "location": "modules/admin/views/organisations/admin-organisations-page",
     "key": "het-bijwerken-van-de-organisatie-is-mislukt-probeer-het-later-opnieuw-error-toast",
     "language": "en",
-    "value": "Het bijwerken van de organisatie is mislukt. Probeer het later opnieuw. - error toast",
+    "value": "Updating the organisation has failed. Please try again later.",
     "value_type": "TEXT"
   },
   {
@@ -32963,7 +32981,7 @@
     "location": "modules/admin/views/organisations/admin-organisations-page",
     "key": "organisatie-naam-table-header",
     "language": "nl",
-    "value": "Organisatie naam - table header",
+    "value": "Organisatie naam",
     "value_type": "TEXT"
   },
   {
@@ -32972,7 +32990,7 @@
     "location": "modules/admin/views/organisations/admin-organisations-page",
     "key": "organisatie-naam-table-header",
     "language": "en",
-    "value": "Organisatie naam - table header",
+    "value": "Organisation name",
     "value_type": "TEXT"
   },
   {
@@ -32981,7 +32999,7 @@
     "location": "modules/admin/views/organisations/admin-organisations-page",
     "key": "organisatie-id-table-header",
     "language": "nl",
-    "value": "Organisatie ID - table header",
+    "value": "Organisatie ID ",
     "value_type": "TEXT"
   },
   {
@@ -32990,7 +33008,7 @@
     "location": "modules/admin/views/organisations/admin-organisations-page",
     "key": "organisatie-id-table-header",
     "language": "en",
-    "value": "Organisatie ID - table header",
+    "value": "Organisation ID ",
     "value_type": "TEXT"
   },
   {
@@ -32999,7 +33017,7 @@
     "location": "modules/admin/views/organisations/admin-organisations-page",
     "key": "slug-table-header",
     "language": "nl",
-    "value": "Slug - table header",
+    "value": "Slug ",
     "value_type": "TEXT"
   },
   {
@@ -33008,7 +33026,7 @@
     "location": "modules/admin/views/organisations/admin-organisations-page",
     "key": "slug-table-header",
     "language": "en",
-    "value": "Slug - table header",
+    "value": "Slug ",
     "value_type": "TEXT"
   },
   {
@@ -33017,7 +33035,7 @@
     "location": "modules/admin/views/organisations/admin-organisations-page",
     "key": "edit-organisatie-aria-label",
     "language": "nl",
-    "value": "edit organisatie - aria label",
+    "value": "Wijzig de organisatie",
     "value_type": "TEXT"
   },
   {
@@ -33026,7 +33044,7 @@
     "location": "modules/admin/views/organisations/admin-organisations-page",
     "key": "edit-organisatie-aria-label",
     "language": "en",
-    "value": "edit organisatie - aria label",
+    "value": "Edit the organisation",
     "value_type": "TEXT"
   },
   {
@@ -33044,7 +33062,7 @@
     "location": "modules/admin/views/organisations/admin-organisations-page",
     "key": "er-zijn-geen-organisaties-gevonden",
     "language": "en",
-    "value": "Er zijn geen organisaties gevonden",
+    "value": "No organisations found",
     "value_type": "TEXT"
   },
   {
@@ -33053,7 +33071,7 @@
     "location": "modules/admin/views/organisations/admin-organisations-page",
     "key": "bewaar-wijzigingen-org-edit-blade",
     "language": "nl",
-    "value": "Bewaar wijzigingen - org edit blade",
+    "value": "Bewaar wijzigingen",
     "value_type": "TEXT"
   },
   {
@@ -33062,7 +33080,7 @@
     "location": "modules/admin/views/organisations/admin-organisations-page",
     "key": "bewaar-wijzigingen-org-edit-blade",
     "language": "en",
-    "value": "Bewaar wijzigingen - org edit blade",
+    "value": "Save changes",
     "value_type": "TEXT"
   },
   {
@@ -33071,7 +33089,7 @@
     "location": "modules/admin/views/organisations/admin-organisations-page",
     "key": "bewaar-wijzigingen-org-edit-blade-mobile",
     "language": "nl",
-    "value": "Bewaar wijzigingen - org edit blade - mobile",
+    "value": "Bewaar wijzigingen",
     "value_type": "TEXT"
   },
   {
@@ -33080,7 +33098,7 @@
     "location": "modules/admin/views/organisations/admin-organisations-page",
     "key": "bewaar-wijzigingen-org-edit-blade-mobile",
     "language": "en",
-    "value": "Bewaar wijzigingen - org edit blade - mobile",
+    "value": "Save changes",
     "value_type": "TEXT"
   },
   {
@@ -33089,7 +33107,7 @@
     "location": "modules/admin/views/organisations/admin-organisations-page",
     "key": "annuleer-org-edit-blade",
     "language": "nl",
-    "value": "Annuleer - org edit blade",
+    "value": "Annuleer ",
     "value_type": "TEXT"
   },
   {
@@ -33098,7 +33116,7 @@
     "location": "modules/admin/views/organisations/admin-organisations-page",
     "key": "annuleer-org-edit-blade",
     "language": "en",
-    "value": "Annuleer - org edit blade",
+    "value": "Cancel",
     "value_type": "TEXT"
   },
   {
@@ -33107,7 +33125,7 @@
     "location": "modules/admin/views/organisations/admin-organisations-page",
     "key": "annuleer-org-edit-blade-mobile",
     "language": "nl",
-    "value": "Annuleer - org edit blade - mobile",
+    "value": "Annuleer ",
     "value_type": "TEXT"
   },
   {
@@ -33116,7 +33134,7 @@
     "location": "modules/admin/views/organisations/admin-organisations-page",
     "key": "annuleer-org-edit-blade-mobile",
     "language": "en",
-    "value": "Annuleer - org edit blade - mobile",
+    "value": "Cancel",
     "value_type": "TEXT"
   },
   {
@@ -33125,7 +33143,7 @@
     "location": "modules/admin/views/organisations/admin-organisations-page",
     "key": "organisatie-bewerken-edit-blade-titel",
     "language": "nl",
-    "value": "Organisatie bewerken - edit blade titel",
+    "value": "Organisatie bewerken",
     "value_type": "TEXT"
   },
   {
@@ -33134,7 +33152,7 @@
     "location": "modules/admin/views/organisations/admin-organisations-page",
     "key": "organisatie-bewerken-edit-blade-titel",
     "language": "en",
-    "value": "Organisatie bewerken - edit blade titel",
+    "value": "Edit organisation",
     "value_type": "TEXT"
   },
   {
@@ -33143,7 +33161,7 @@
     "location": "modules/admin/views/organisations/admin-organisations-page",
     "key": "organisatie-bewerken-blade-aria-label",
     "language": "nl",
-    "value": "Organisatie bewerken - blade aria label",
+    "value": "Organisatie bewerken",
     "value_type": "TEXT"
   },
   {
@@ -33152,7 +33170,7 @@
     "location": "modules/admin/views/organisations/admin-organisations-page",
     "key": "organisatie-bewerken-blade-aria-label",
     "language": "en",
-    "value": "Organisatie bewerken - blade aria label",
+    "value": "Edit organisation",
     "value_type": "TEXT"
   },
   {
@@ -33161,7 +33179,7 @@
     "location": "modules/admin/views/organisations/admin-organisations-page",
     "key": "organisatie-edit-blade",
     "language": "nl",
-    "value": "Organisatie - edit blade",
+    "value": "Organisatie",
     "value_type": "TEXT"
   },
   {
@@ -33170,7 +33188,7 @@
     "location": "modules/admin/views/organisations/admin-organisations-page",
     "key": "organisatie-edit-blade",
     "language": "en",
-    "value": "Organisatie - edit blade",
+    "value": "Organisation",
     "value_type": "TEXT"
   },
   {
@@ -33179,7 +33197,7 @@
     "location": "modules/admin/views/organisations/admin-organisations-page",
     "key": "organisatie-id-edit-blade",
     "language": "nl",
-    "value": "Organisatie ID - edit blade",
+    "value": "Organisatie ID",
     "value_type": "TEXT"
   },
   {
@@ -33188,7 +33206,7 @@
     "location": "modules/admin/views/organisations/admin-organisations-page",
     "key": "organisatie-id-edit-blade",
     "language": "en",
-    "value": "Organisatie ID - edit blade",
+    "value": "Organisation ID ",
     "value_type": "TEXT"
   },
   {
@@ -33197,7 +33215,7 @@
     "location": "modules/admin/views/organisations/admin-organisations-page",
     "key": "slug-edit-blade",
     "language": "nl",
-    "value": "Slug - edit blade",
+    "value": "Slug",
     "value_type": "TEXT"
   },
   {
@@ -33206,7 +33224,7 @@
     "location": "modules/admin/views/organisations/admin-organisations-page",
     "key": "slug-edit-blade",
     "language": "en",
-    "value": "Slug - edit blade",
+    "value": "Slug",
     "value_type": "TEXT"
   },
   {
@@ -33215,7 +33233,7 @@
     "location": "modules/admin/views/organisations/admin-organisations-page",
     "key": "organisatie-slug-input-edit-blade",
     "language": "nl",
-    "value": "Organisatie slug input - edit blade",
+    "value": "Organisatie slug input",
     "value_type": "TEXT"
   },
   {
@@ -33224,7 +33242,7 @@
     "location": "modules/admin/views/organisations/admin-organisations-page",
     "key": "organisatie-slug-input-edit-blade",
     "language": "en",
-    "value": "Organisatie slug input - edit blade",
+    "value": "Organisation slug input",
     "value_type": "TEXT"
   },
   {
@@ -33233,7 +33251,7 @@
     "location": "modules/admin/views/organisations/admin-organisations-page",
     "key": "zoekbalk-aria-label",
     "language": "nl",
-    "value": "Zoekbalk - aria label",
+    "value": "Zoekbalk",
     "value_type": "TEXT"
   },
   {
@@ -33242,7 +33260,7 @@
     "location": "modules/admin/views/organisations/admin-organisations-page",
     "key": "zoekbalk-aria-label",
     "language": "en",
-    "value": "Zoekbalk - aria label",
+    "value": "Search bar",
     "value_type": "TEXT"
   },
   {
@@ -33260,7 +33278,7 @@
     "location": "modules/admin/views/organisations/admin-organisations-page",
     "key": "zoek-op-naam-id-of-slug",
     "language": "en",
-    "value": "Zoek op naam, ID, of slug",
+    "value": "Search for name, ID or slug",
     "value_type": "TEXT"
   },
   {
@@ -36302,7 +36320,7 @@
     "location": "modules/ie-objects/ie-objects",
     "key": "rechthebbende",
     "language": "en",
-    "value": "Rechthebbende",
+    "value": "Rights holder",
     "value_type": "TEXT"
   },
   {
@@ -36320,7 +36338,7 @@
     "location": "modules/ie-objects/ie-objects",
     "key": "licentiegever",
     "language": "en",
-    "value": "Licentiegever",
+    "value": "Licencor",
     "value_type": "TEXT"
   },
   {
@@ -41621,7 +41639,7 @@
     "location": "modules/shared/services/notifications-service/notifications",
     "key": "er-is-een-nieuwe-materiaalaanvraag-mobiel",
     "language": "nl",
-    "value": "Er is een nieuwe materiaalaanvraag - mobiel",
+    "value": "Er is een nieuwe aanvraag",
     "value_type": "TEXT"
   },
   {
@@ -41630,7 +41648,7 @@
     "location": "modules/shared/services/notifications-service/notifications",
     "key": "er-is-een-nieuwe-materiaalaanvraag-mobiel",
     "language": "en",
-    "value": "Er is een nieuwe materiaalaanvraag - mobiel",
+    "value": "There is a new request",
     "value_type": "TEXT"
   },
   {
@@ -41648,7 +41666,7 @@
     "location": "modules/shared/services/notifications-service/notifications",
     "key": "er-is-een-nieuwe-materiaalaanvraag",
     "language": "en",
-    "value": "Er is een nieuwe materiaalaanvraag",
+    "value": "There is a new material request",
     "value_type": "TEXT"
   },
   {
@@ -41657,7 +41675,7 @@
     "location": "modules/shared/services/notifications-service/notifications",
     "key": "er-is-een-materiaalaanvraag-geannuleerd-mobiel",
     "language": "nl",
-    "value": "Er is een materiaalaanvraag geannuleerd - mobiel",
+    "value": "Er is een materiaalaanvraag geannuleerd.",
     "value_type": "TEXT"
   },
   {
@@ -41666,7 +41684,7 @@
     "location": "modules/shared/services/notifications-service/notifications",
     "key": "er-is-een-materiaalaanvraag-geannuleerd-mobiel",
     "language": "en",
-    "value": "Er is een materiaalaanvraag geannuleerd - mobiel",
+    "value": "A material request has been cancelled",
     "value_type": "TEXT"
   },
   {
@@ -41684,7 +41702,7 @@
     "location": "modules/shared/services/notifications-service/notifications",
     "key": "er-is-een-materiaalaanvraag-geannuleerd",
     "language": "en",
-    "value": "Er is een materiaalaanvraag geannuleerd.",
+    "value": "A material request has been cancelled",
     "value_type": "TEXT"
   },
   {
@@ -41693,7 +41711,7 @@
     "location": "modules/shared/services/notifications-service/notifications",
     "key": "jouw-aanvraag-voor-een-digitaal-materiaal-werd-goedgekeurd-mobiel",
     "language": "nl",
-    "value": "Jouw aanvraag voor een digitaal materiaal werd goedgekeurd - mobiel",
+    "value": "Jouw aanvraag werd goedgekeurd",
     "value_type": "TEXT"
   },
   {
@@ -41702,7 +41720,7 @@
     "location": "modules/shared/services/notifications-service/notifications",
     "key": "jouw-aanvraag-voor-een-digitaal-materiaal-werd-goedgekeurd-mobiel",
     "language": "en",
-    "value": "Jouw aanvraag voor een digitaal materiaal werd goedgekeurd - mobiel",
+    "value": "Your request has been approved.",
     "value_type": "TEXT"
   },
   {
@@ -41711,7 +41729,7 @@
     "location": "modules/shared/services/notifications-service/notifications",
     "key": "jouw-aanvraag-voor-een-digitaal-materiaal-werd-goedgekeurd",
     "language": "nl",
-    "value": "Jouw aanvraag voor een digitaal materiaal werd goedgekeurd.",
+    "value": "Jouw aanvraag voor digitaal materiaal werd goedgekeurd.",
     "value_type": "TEXT"
   },
   {
@@ -41720,7 +41738,7 @@
     "location": "modules/shared/services/notifications-service/notifications",
     "key": "jouw-aanvraag-voor-een-digitaal-materiaal-werd-goedgekeurd",
     "language": "en",
-    "value": "Jouw aanvraag voor een digitaal materiaal werd goedgekeurd.",
+    "value": "Your request for digital material has been approved.",
     "value_type": "TEXT"
   },
   {
@@ -41729,7 +41747,7 @@
     "location": "modules/shared/services/notifications-service/notifications",
     "key": "jouw-aanvraag-voor-een-digitaal-materiaal-werd-afgekeurd-mobiel",
     "language": "nl",
-    "value": "Jouw aanvraag voor een digitaal materiaal werd afgekeurd - mobiel",
+    "value": "Jouw aanvraag werd afgekeurd.",
     "value_type": "TEXT"
   },
   {
@@ -41738,7 +41756,7 @@
     "location": "modules/shared/services/notifications-service/notifications",
     "key": "jouw-aanvraag-voor-een-digitaal-materiaal-werd-afgekeurd-mobiel",
     "language": "en",
-    "value": "Jouw aanvraag voor een digitaal materiaal werd afgekeurd - mobiel",
+    "value": "Your request has been rejected.",
     "value_type": "TEXT"
   },
   {
@@ -41747,7 +41765,7 @@
     "location": "modules/shared/services/notifications-service/notifications",
     "key": "jouw-aanvraag-voor-een-digitaal-materiaal-werd-afgekeurd",
     "language": "nl",
-    "value": "Jouw aanvraag voor een digitaal materiaal werd afgekeurd.",
+    "value": "Jouw aanvraag voor digitaal materiaal werd afgekeurd.",
     "value_type": "TEXT"
   },
   {
@@ -41756,7 +41774,7 @@
     "location": "modules/shared/services/notifications-service/notifications",
     "key": "jouw-aanvraag-voor-een-digitaal-materiaal-werd-afgekeurd",
     "language": "en",
-    "value": "Jouw aanvraag voor een digitaal materiaal werd afgekeurd.",
+    "value": "Your request for digital material has been rejected.",
     "value_type": "TEXT"
   },
   {
@@ -41765,7 +41783,7 @@
     "location": "modules/shared/services/notifications-service/notifications",
     "key": "er-is-digitaal-materiaal-beschikbaar-voor-download-mobiel",
     "language": "nl",
-    "value": "Er is digitaal materiaal beschikbaar voor download - mobiel",
+    "value": "Er is digitaal materiaal beschikbaar voor download.",
     "value_type": "TEXT"
   },
   {
@@ -41774,7 +41792,7 @@
     "location": "modules/shared/services/notifications-service/notifications",
     "key": "er-is-digitaal-materiaal-beschikbaar-voor-download-mobiel",
     "language": "en",
-    "value": "Er is digitaal materiaal beschikbaar voor download - mobiel",
+    "value": "There are digital items available for download.",
     "value_type": "TEXT"
   },
   {
@@ -41792,7 +41810,7 @@
     "location": "modules/shared/services/notifications-service/notifications",
     "key": "er-is-digitaal-materiaal-beschikbaar-voor-download",
     "language": "en",
-    "value": "Er is digitaal materiaal beschikbaar voor download.",
+    "value": "There are digital items available for download.",
     "value_type": "TEXT"
   },
   {
@@ -41801,7 +41819,7 @@
     "location": "modules/shared/services/notifications-service/notifications",
     "key": "de-downloadtermijn-van-je-aangevraagde-object-vervalt-binnenkort-mobiel",
     "language": "nl",
-    "value": "De downloadtermijn van je aangevraagde object vervalt binnenkort - mobiel",
+    "value": "De downloadtermijn vervalt binnenkort",
     "value_type": "TEXT"
   },
   {
@@ -41810,7 +41828,7 @@
     "location": "modules/shared/services/notifications-service/notifications",
     "key": "de-downloadtermijn-van-je-aangevraagde-object-vervalt-binnenkort-mobiel",
     "language": "en",
-    "value": "De downloadtermijn van je aangevraagde object vervalt binnenkort - mobiel",
+    "value": "The download period is about to expire",
     "value_type": "TEXT"
   },
   {
@@ -41828,7 +41846,7 @@
     "location": "modules/shared/services/notifications-service/notifications",
     "key": "de-downloadtermijn-van-je-aangevraagde-object-vervalt-binnenkort",
     "language": "en",
-    "value": "De downloadtermijn van je aangevraagde object vervalt binnenkort.",
+    "value": "The download period for your requested item is about to expire ",
     "value_type": "TEXT"
   },
   {
@@ -41837,7 +41855,7 @@
     "location": "modules/shared/services/notifications-service/notifications",
     "key": "jouw-digitaal-materiaal-werd-door-een-aanvrager-gedownload-mobiel",
     "language": "nl",
-    "value": "Jouw digitaal materiaal werd door een aanvrager gedownload - mobiel",
+    "value": "Jouw digitaal materiaal werd door een aanvrager gedownload.",
     "value_type": "TEXT"
   },
   {
@@ -41846,7 +41864,7 @@
     "location": "modules/shared/services/notifications-service/notifications",
     "key": "jouw-digitaal-materiaal-werd-door-een-aanvrager-gedownload-mobiel",
     "language": "en",
-    "value": "Jouw digitaal materiaal werd door een aanvrager gedownload - mobiel",
+    "value": "Your digital material has been downloaded.",
     "value_type": "TEXT"
   },
   {
@@ -41864,7 +41882,7 @@
     "location": "modules/shared/services/notifications-service/notifications",
     "key": "jouw-digitaal-materiaal-werd-door-een-aanvrager-gedownload",
     "language": "en",
-    "value": "Jouw digitaal materiaal werd door een aanvrager gedownload.",
+    "value": "Your digital material has been downloaded.",
     "value_type": "TEXT"
   },
   {
@@ -41873,7 +41891,7 @@
     "location": "modules/shared/services/notifications-service/notifications",
     "key": "er-zijn-bijkomende-gebruiksvoorwaarden-gestuurd-voor-je-aanvraag-mobiel",
     "language": "nl",
-    "value": "Er zijn bijkomende gebruiksvoorwaarden gestuurd voor je aanvraag - mobiel",
+    "value": "Er zijn bijkomende voorwaarden gestuurd voor je aanvraag.",
     "value_type": "TEXT"
   },
   {
@@ -41882,7 +41900,7 @@
     "location": "modules/shared/services/notifications-service/notifications",
     "key": "er-zijn-bijkomende-gebruiksvoorwaarden-gestuurd-voor-je-aanvraag-mobiel",
     "language": "en",
-    "value": "Er zijn bijkomende gebruiksvoorwaarden gestuurd voor je aanvraag - mobiel",
+    "value": "Additional conditions have been sent for your request.",
     "value_type": "TEXT"
   },
   {
@@ -41900,7 +41918,7 @@
     "location": "modules/shared/services/notifications-service/notifications",
     "key": "er-zijn-bijkomende-gebruiksvoorwaarden-gestuurd-voor-je-aanvraag",
     "language": "en",
-    "value": "Er zijn bijkomende gebruiksvoorwaarden gestuurd voor je aanvraag.",
+    "value": "Additional conditions for use have been sent for your request.",
     "value_type": "TEXT"
   },
   {
@@ -41909,7 +41927,7 @@
     "location": "modules/shared/services/notifications-service/notifications",
     "key": "jouw-bijkomende-gebruiksvoorwaarden-werden-aanvaard-mobiel",
     "language": "nl",
-    "value": "Jouw bijkomende gebruiksvoorwaarden werden aanvaard - mobiel",
+    "value": "Jouw bijkomende gebruiksvoorwaarden werden aanvaard.",
     "value_type": "TEXT"
   },
   {
@@ -41918,7 +41936,7 @@
     "location": "modules/shared/services/notifications-service/notifications",
     "key": "jouw-bijkomende-gebruiksvoorwaarden-werden-aanvaard-mobiel",
     "language": "en",
-    "value": "Jouw bijkomende gebruiksvoorwaarden werden aanvaard - mobiel",
+    "value": "Your additional conditions for use have been accepted.",
     "value_type": "TEXT"
   },
   {
@@ -41936,7 +41954,7 @@
     "location": "modules/shared/services/notifications-service/notifications",
     "key": "jouw-bijkomende-gebruiksvoorwaarden-werden-aanvaard",
     "language": "en",
-    "value": "Jouw bijkomende gebruiksvoorwaarden werden aanvaard.",
+    "value": "Your additional conditions for use have been accepted.",
     "value_type": "TEXT"
   },
   {
@@ -41945,7 +41963,7 @@
     "location": "modules/shared/services/notifications-service/notifications",
     "key": "name-stuurde-een-aanvraag-in-voor-jouw-digitaal-materiaal-mobiel",
     "language": "nl",
-    "value": "{{name}} stuurde een aanvraag in voor jouw digitaal materiaal. - mobiel",
+    "value": "{{name}} stuurde een aanvraag in voor jouw digitaal materiaal. ",
     "value_type": "TEXT"
   },
   {
@@ -41954,7 +41972,7 @@
     "location": "modules/shared/services/notifications-service/notifications",
     "key": "name-stuurde-een-aanvraag-in-voor-jouw-digitaal-materiaal-mobiel",
     "language": "en",
-    "value": "{{name}} stuurde een aanvraag in voor jouw digitaal materiaal. - mobiel",
+    "value": "{{name}} sent a request for digital material from you.",
     "value_type": "TEXT"
   },
   {
@@ -41972,7 +41990,7 @@
     "location": "modules/shared/services/notifications-service/notifications",
     "key": "name-stuurde-een-aanvraag-in-voor-jouw-digitaal-materiaal",
     "language": "en",
-    "value": "{{name}} stuurde een aanvraag in voor jouw digitaal materiaal.",
+    "value": "{{name}} sent a request for digital material from you.",
     "value_type": "TEXT"
   },
   {
@@ -41981,7 +41999,7 @@
     "location": "modules/shared/services/notifications-service/notifications",
     "key": "name-annuleerde-een-materiaalaanvraag-voor-jouw-digitaal-materiaal-mobiel",
     "language": "nl",
-    "value": "{{name}} annuleerde een materiaalaanvraag voor jouw digitaal materiaal. - mobiel",
+    "value": "{{name}} annuleerde een materiaalaanvraag voor jouw digitaal materiaal. ",
     "value_type": "TEXT"
   },
   {
@@ -41990,7 +42008,7 @@
     "location": "modules/shared/services/notifications-service/notifications",
     "key": "name-annuleerde-een-materiaalaanvraag-voor-jouw-digitaal-materiaal-mobiel",
     "language": "en",
-    "value": "{{name}} annuleerde een materiaalaanvraag voor jouw digitaal materiaal. - mobiel",
+    "value": "{{name}} cancelled a request for digital material.",
     "value_type": "TEXT"
   },
   {
@@ -42008,7 +42026,7 @@
     "location": "modules/shared/services/notifications-service/notifications",
     "key": "name-annuleerde-een-materiaalaanvraag-voor-jouw-digitaal-materiaal",
     "language": "en",
-    "value": "{{name}} annuleerde een materiaalaanvraag voor jouw digitaal materiaal.",
+    "value": "{{name}} cancelled a request for digital material.",
     "value_type": "TEXT"
   },
   {
@@ -42017,7 +42035,7 @@
     "location": "modules/shared/services/notifications-service/notifications",
     "key": "maintainer-keurde-jouw-aanvraag-voor-hun-digitaal-materiaal-goed-mobiel",
     "language": "nl",
-    "value": "{{maintainer}} keurde jouw aanvraag voor hun digitaal materiaal goed. - mobiel",
+    "value": "{{maintainer}} keurde jouw aanvraag goed.",
     "value_type": "TEXT"
   },
   {
@@ -42026,7 +42044,7 @@
     "location": "modules/shared/services/notifications-service/notifications",
     "key": "maintainer-keurde-jouw-aanvraag-voor-hun-digitaal-materiaal-goed-mobiel",
     "language": "en",
-    "value": "{{maintainer}} keurde jouw aanvraag voor hun digitaal materiaal goed. - mobiel",
+    "value": "{{maintainer}} approved your request.",
     "value_type": "TEXT"
   },
   {
@@ -42044,7 +42062,7 @@
     "location": "modules/shared/services/notifications-service/notifications",
     "key": "maintainer-keurde-jouw-aanvraag-voor-hun-digitaal-materiaal-goed",
     "language": "en",
-    "value": "{{maintainer}} keurde jouw aanvraag voor hun digitaal materiaal goed.",
+    "value": "{{maintainer}} approved your request for digital material.",
     "value_type": "TEXT"
   },
   {
@@ -42053,7 +42071,7 @@
     "location": "modules/shared/services/notifications-service/notifications",
     "key": "maintainer-keurde-jouw-aanvraag-voor-hun-digitaal-materiaal-af-mobiel",
     "language": "nl",
-    "value": "{{maintainer}} keurde jouw aanvraag voor hun digitaal materiaal af. - mobiel",
+    "value": "{{maintainer}} keurde jouw aanvraag af.",
     "value_type": "TEXT"
   },
   {
@@ -42062,7 +42080,7 @@
     "location": "modules/shared/services/notifications-service/notifications",
     "key": "maintainer-keurde-jouw-aanvraag-voor-hun-digitaal-materiaal-af-mobiel",
     "language": "en",
-    "value": "{{maintainer}} keurde jouw aanvraag voor hun digitaal materiaal af. - mobiel",
+    "value": "{{maintainer}} rejected your request.",
     "value_type": "TEXT"
   },
   {
@@ -42080,7 +42098,7 @@
     "location": "modules/shared/services/notifications-service/notifications",
     "key": "maintainer-keurde-jouw-aanvraag-voor-hun-digitaal-materiaal-af",
     "language": "en",
-    "value": "{{maintainer}} keurde jouw aanvraag voor hun digitaal materiaal af.",
+    "value": "{{maintainer}} rejected your request for digital material.",
     "value_type": "TEXT"
   },
   {
@@ -42089,7 +42107,7 @@
     "location": "modules/shared/services/notifications-service/notifications",
     "key": "je-kan-het-digitaal-materiaal-van-maintainer-dat-je-aangevraagd-hebt-nu-downloaden-mobiel",
     "language": "nl",
-    "value": "Je kan het digitaal materiaal van {{maintainer}} dat je aangevraagd hebt nu downloaden.- mobiel",
+    "value": "Je kan het digitaal materiaal van {{maintainer}} nu downloaden.",
     "value_type": "TEXT"
   },
   {
@@ -42098,7 +42116,7 @@
     "location": "modules/shared/services/notifications-service/notifications",
     "key": "je-kan-het-digitaal-materiaal-van-maintainer-dat-je-aangevraagd-hebt-nu-downloaden-mobiel",
     "language": "en",
-    "value": "Je kan het digitaal materiaal van {{maintainer}} dat je aangevraagd hebt nu downloaden.- mobiel",
+    "value": "You can now download the material from {{maintainer}}.",
     "value_type": "TEXT"
   },
   {
@@ -42116,7 +42134,7 @@
     "location": "modules/shared/services/notifications-service/notifications",
     "key": "je-kan-het-digitaal-materiaal-van-maintainer-dat-je-aangevraagd-hebt-nu-downloaden",
     "language": "en",
-    "value": "Je kan het digitaal materiaal van {{maintainer}} dat je aangevraagd hebt nu downloaden.",
+    "value": "You can now download the requested material from {{maintainer}}.",
     "value_type": "TEXT"
   },
   {
@@ -42125,7 +42143,7 @@
     "location": "modules/shared/services/notifications-service/notifications",
     "key": "je-kan-het-digitaal-materiaal-van-maintainer-dat-je-aangevraagd-hebt-nog-maar-7-dagen-downloaden-vooraleer-het-vervalt-mobiel",
     "language": "nl",
-    "value": "Je kan het digitaal materiaal van {{maintainer}} dat je aangevraagd hebt nog maar 7 dagen downloaden vooraleer het vervalt.- mobiel",
+    "value": "Je kan het digitaal materiaal van {{maintainer}} nog maar 7 dagen downloaden vooraleer het vervalt.",
     "value_type": "TEXT"
   },
   {
@@ -42134,7 +42152,7 @@
     "location": "modules/shared/services/notifications-service/notifications",
     "key": "je-kan-het-digitaal-materiaal-van-maintainer-dat-je-aangevraagd-hebt-nog-maar-7-dagen-downloaden-vooraleer-het-vervalt-mobiel",
     "language": "en",
-    "value": "Je kan het digitaal materiaal van {{maintainer}} dat je aangevraagd hebt nog maar 7 dagen downloaden vooraleer het vervalt.- mobiel",
+    "value": "You can download the material from {{maintainer}} for another 7 days, before it expires.",
     "value_type": "TEXT"
   },
   {
@@ -42152,7 +42170,7 @@
     "location": "modules/shared/services/notifications-service/notifications",
     "key": "je-kan-het-digitaal-materiaal-van-maintainer-dat-je-aangevraagd-hebt-nog-maar-7-dagen-downloaden-vooraleer-het-vervalt",
     "language": "en",
-    "value": "Je kan het digitaal materiaal van {{maintainer}} dat je aangevraagd hebt nog maar 7 dagen downloaden vooraleer het vervalt.",
+    "value": "You can download the requested material from {{maintainer}} for another 7 days, before it expires.",
     "value_type": "TEXT"
   },
   {
@@ -42161,7 +42179,7 @@
     "location": "modules/shared/services/notifications-service/notifications",
     "key": "name-heeft-n-a-v-een-goedgekeurde-aanvraag-jouw-digitaal-materiaal-gedownload-mobiel",
     "language": "nl",
-    "value": "{{name}} heeft n.a.v. een goedgekeurde aanvraag jouw digitaal materiaal gedownload. - mobiel",
+    "value": "{{name}} heeft na goedkeuring van een aanvraag jouw digitaal materiaal gedownload.",
     "value_type": "TEXT"
   },
   {
@@ -42170,7 +42188,7 @@
     "location": "modules/shared/services/notifications-service/notifications",
     "key": "name-heeft-n-a-v-een-goedgekeurde-aanvraag-jouw-digitaal-materiaal-gedownload-mobiel",
     "language": "en",
-    "value": "{{name}} heeft n.a.v. een goedgekeurde aanvraag jouw digitaal materiaal gedownload. - mobiel",
+    "value": "{{name}} has downloaded your digital material following the approval of their request.",
     "value_type": "TEXT"
   },
   {
@@ -42179,7 +42197,7 @@
     "location": "modules/shared/services/notifications-service/notifications",
     "key": "name-heeft-n-a-v-een-goedgekeurde-aanvraag-jouw-digitaal-materiaal-gedownload",
     "language": "nl",
-    "value": "{{name}} heeft n.a.v. een goedgekeurde aanvraag jouw digitaal materiaal gedownload.",
+    "value": "{{name}} heeft naar aanleiding van een goedgekeurde aanvraag jouw digitaal materiaal gedownload.",
     "value_type": "TEXT"
   },
   {
@@ -42188,7 +42206,7 @@
     "location": "modules/shared/services/notifications-service/notifications",
     "key": "name-heeft-n-a-v-een-goedgekeurde-aanvraag-jouw-digitaal-materiaal-gedownload",
     "language": "en",
-    "value": "{{name}} heeft n.a.v. een goedgekeurde aanvraag jouw digitaal materiaal gedownload.",
+    "value": "{{name}} has downloaded your digital material following the approval of their request.",
     "value_type": "TEXT"
   },
   {
@@ -42197,7 +42215,7 @@
     "location": "modules/shared/services/notifications-service/notifications",
     "key": "maintainer-legt-voor-jouw-aanvraag-voor-hun-digitaal-materiaal-bijkomende-gebruikersvoorwaarden-op-mobiel",
     "language": "nl",
-    "value": "{{maintainer}} legt voor jouw aanvraag voor hun digitaal materiaal bijkomende gebruikersvoorwaarden op. - mobiel",
+    "value": "{{maintainer}} legt voor jouw aanvraag  bijkomende gebruiksvoorwaarden op.",
     "value_type": "TEXT"
   },
   {
@@ -42206,7 +42224,7 @@
     "location": "modules/shared/services/notifications-service/notifications",
     "key": "maintainer-legt-voor-jouw-aanvraag-voor-hun-digitaal-materiaal-bijkomende-gebruikersvoorwaarden-op-mobiel",
     "language": "en",
-    "value": "{{maintainer}} legt voor jouw aanvraag voor hun digitaal materiaal bijkomende gebruikersvoorwaarden op. - mobiel",
+    "value": "{{maintainer}} has imposed additional conditions for your request.",
     "value_type": "TEXT"
   },
   {
@@ -42215,7 +42233,7 @@
     "location": "modules/shared/services/notifications-service/notifications",
     "key": "maintainer-legt-voor-jouw-aanvraag-voor-hun-digitaal-materiaal-bijkomende-gebruikersvoorwaarden-op",
     "language": "nl",
-    "value": "{{maintainer}} legt voor jouw aanvraag voor hun digitaal materiaal bijkomende gebruikersvoorwaarden op.",
+    "value": "{{maintainer}} legt voor jouw aanvraag voor hun digitaal materiaal bijkomende gebruiksvoorwaarden op.",
     "value_type": "TEXT"
   },
   {
@@ -42224,7 +42242,7 @@
     "location": "modules/shared/services/notifications-service/notifications",
     "key": "maintainer-legt-voor-jouw-aanvraag-voor-hun-digitaal-materiaal-bijkomende-gebruikersvoorwaarden-op",
     "language": "en",
-    "value": "{{maintainer}} legt voor jouw aanvraag voor hun digitaal materiaal bijkomende gebruikersvoorwaarden op.",
+    "value": "{{maintainer}} has imposed additional conditions for the use of the digital material you requested.",
     "value_type": "TEXT"
   },
   {
@@ -42233,7 +42251,7 @@
     "location": "modules/shared/services/notifications-service/notifications",
     "key": "name-aanvaardt-jouw-bijkomende-gebruikersvoorwaarden-voor-een-materiaalaanvraag-voor-jouw-digitaal-materiaal-mobiel",
     "language": "nl",
-    "value": "{{name}} aanvaardt jouw bijkomende gebruikersvoorwaarden voor een materiaalaanvraag voor jouw digitaal materiaal. - mobiel",
+    "value": "{{name}} aanvaardt jouw bijkomende gebruikersvoorwaarden voor een materiaalaanvraag voor jouw digitaal materiaal.",
     "value_type": "TEXT"
   },
   {
@@ -42242,7 +42260,7 @@
     "location": "modules/shared/services/notifications-service/notifications",
     "key": "name-aanvaardt-jouw-bijkomende-gebruikersvoorwaarden-voor-een-materiaalaanvraag-voor-jouw-digitaal-materiaal-mobiel",
     "language": "en",
-    "value": "{{name}} aanvaardt jouw bijkomende gebruikersvoorwaarden voor een materiaalaanvraag voor jouw digitaal materiaal. - mobiel",
+    "value": "{{name}} accepts your additional conditions for the use of the digital material they have requested from you.",
     "value_type": "TEXT"
   },
   {
@@ -42260,7 +42278,7 @@
     "location": "modules/shared/services/notifications-service/notifications",
     "key": "name-aanvaardt-jouw-bijkomende-gebruikersvoorwaarden-voor-een-materiaalaanvraag-voor-jouw-digitaal-materiaal",
     "language": "en",
-    "value": "{{name}} aanvaardt jouw bijkomende gebruikersvoorwaarden voor een materiaalaanvraag voor jouw digitaal materiaal.",
+    "value": "{{name}} accepts your additional conditions for the use of the digital material they have requested from you.",
     "value_type": "TEXT"
   },
   {
@@ -46832,7 +46850,7 @@
     "location": "modules/visitor-space/components/reusability-filter-form",
     "key": "vrij-herbruikbaar",
     "language": "en",
-    "value": "Vrij herbruikbaar",
+    "value": "Free to use",
     "value_type": "TEXT"
   },
   {
@@ -46850,7 +46868,7 @@
     "location": "modules/visitor-space/components/reusability-filter-form",
     "key": "herbruikbaar-onder-voorwaarden",
     "language": "en",
-    "value": "Herbruikbaar onder voorwaarden",
+    "value": "Free to use under conditions",
     "value_type": "TEXT"
   },
   {
@@ -46868,7 +46886,7 @@
     "location": "modules/visitor-space/components/reusability-filter-form",
     "key": "misschien-herbruikbaar",
     "language": "en",
-    "value": "Misschien herbruikbaar",
+    "value": "Possibly free to use",
     "value_type": "TEXT"
   },
   {
@@ -47318,7 +47336,7 @@
     "location": "modules/visitor-space/utils/advanced-filters/metadata",
     "key": "rechten",
     "language": "en",
-    "value": "Rechten",
+    "value": "Rights",
     "value_type": "TEXT"
   },
   {
@@ -47570,7 +47588,7 @@
     "location": "modules/visitor-space/utils/map-filters/map-filters",
     "key": "herbruikbaarheid",
     "language": "en",
-    "value": "Herbruikbaarheid",
+    "value": "Reusability",
     "value_type": "TEXT"
   },
   {
@@ -47642,7 +47660,7 @@
     "location": "modules/account/components/material-request-detail-blade/message-file-upload/message-file-upload",
     "key": "voeg-bijlages-toe-aan-het-bericht-dat-je-wil-versturen",
     "language": "en",
-    "value": "Voeg bijlages toe aan het bericht dat je wil versturen",
+    "value": "Add attachments to the message you want to send",
     "value_type": "TEXT"
   },
   {
@@ -48022,24 +48040,6 @@
     "language": "en",
     "value": "Close",
     "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-detail-blade/material-request-conversation-message",
-    "key": "name-aanvaardde-de-bijkomende-gebruiksvoorwaarden-aanvrager",
-    "language": "nl",
-    "value": "Name aanvaardde de bijkomende gebruiksvoorwaarden aanvrager",
-    "value_type": "HTML"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-detail-blade/material-request-conversation-message",
-    "key": "name-aanvaardde-de-bijkomende-gebruiksvoorwaarden-aanvrager",
-    "language": "en",
-    "value": "Name aanvaardde de bijkomende gebruiksvoorwaarden aanvrager",
-    "value_type": "HTML"
   },
   {
     "app": "HET_ARCHIEF",
@@ -49064,7 +49064,7 @@
     "location": "modules/material-request-messages/services/material-request-pdf-generator",
     "key": "materiaal",
     "language": "en",
-    "value": "Material\n",
+    "value": "Material\r\n",
     "value_type": "TEXT"
   },
   {
@@ -49361,7 +49361,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
     "key": "voorwaarden-verstuurd-op",
     "language": "nl",
-    "value": "Voorwaarden verstuurd op {{sendAt}}",
+    "value": "Voorwaarden verstuurd op {{sentAt}}",
     "value_type": "TEXT"
   },
   {
@@ -49370,7 +49370,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
     "key": "voorwaarden-verstuurd-op",
     "language": "en",
-    "value": "Conditions sent on {{sendAt}}",
+    "value": "Conditions sent on {{sentAt}}",
     "value_type": "TEXT"
   },
   {
