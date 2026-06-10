@@ -7,11 +7,17 @@ import { getDirName } from './get-dir-name';
 import type { App } from './translation.types';
 
 /**
- * fetch the list of changed translations between two git tags using the command:
- * git diff v4.3.80..v4.3.82 --no-ext-diff --unified=0 --exit-code -a --no-prefix all-translations-het-archief.sql
- * then replace this regex: ^(@@|-).*?\n with an empty string
- * then replace this regex: ^\+INSERT\s+INTO\s+app\.translations.*?VALUES\s*\('[^']*',\s*'([^']+)',\s*'([^']+)',.*$ with $1___$2
- * then write the file to translation-changes.txt
+ * Fetch the list of *new* translations between two git tags (i.e. translations that were added,
+ * not ones whose database value was merely updated).
+ *
+ * Strategy:
+ *   1. Run: git diff <oldTag>..<newTag> --no-ext-diff --unified=0 -a --no-prefix all-translations-<app>.sql
+ *   2. Collect the location+key of every deleted row (lines starting with `-`).
+ *      These represent translations whose value changed in the database — they already existed.
+ *   3. Collect the location+key of every added row (lines starting with `+`).
+ *      Filter out any key that also appears in the deleted set.
+ *      What remains are genuinely new translation keys.
+ *   4. Write the unique new keys in `location___key` format to translation-changes-<app>.txt.
  *
  * @param app AVO or HET_ARCHIEF
  * @param oldTag the old git tag to compare. eg: v3.2.25
@@ -38,29 +44,28 @@ async function getListOfChangedTranslations(
 		return;
 	}
 
-	// Remove all lines that start with @@ or - (the diff headers)
-	// Only keep the additions (lines starting with +)
-	const additionsOnlyRegex = /^(@@|-).*?\n/gm;
-	const additions = result.replaceAll(additionsOnlyRegex, '');
+	// Extract keys from deleted rows — these represent updated (not new) translations
+	const deletionRegex =
+		/^-INSERT\s+INTO\s+app\.translations.*?VALUES\s*\('[^']*',\s*'([^']+)',\s*'([^']+)',/gm;
+	const deletedKeys = new Set<string>();
+	let match: RegExpExecArray | null;
+	while ((match = deletionRegex.exec(result)) !== null) {
+		deletedKeys.add(`${match[1]}___${match[2]}`);
+	}
 
-	// Trim the first 3 lines
-	const additionsWithoutFirstThree = additions.split('\n').slice(3).join('\n');
-
-	// Convert the sql to simple translation keys of shape location___key
-	const simplifyTranslationKeysRegex =
-		/(\n|^)\+INSERT\s+INTO\s+app\.translations.*?VALUES\s*\('[^']*',\s*'([^']+)',\s*'([^']+)',.*?(\r|\n|$)/gm;
-	const simplifiedTranslations = additionsWithoutFirstThree.replaceAll(
-		simplifyTranslationKeysRegex,
-		(_wholeString, _unused, location, key) => {
-			return `${location}___${key}\n`;
+	// Extract keys from added rows, keeping only those absent from deletedKeys (truly new translations)
+	const additionRegex =
+		/^\+INSERT\s+INTO\s+app\.translations.*?VALUES\s*\('[^']*',\s*'([^']+)',\s*'([^']+)',/gm;
+	const newTranslationKeys: string[] = [];
+	while ((match = additionRegex.exec(result)) !== null) {
+		const key = `${match[1]}___${match[2]}`;
+		if (!deletedKeys.has(key)) {
+			newTranslationKeys.push(key);
 		}
-	);
+	}
 
-	// Unique lines
-	let uniqueTranslations = Array.from(
-		new Set(simplifiedTranslations.split('\n').filter(Boolean))
-	).join('\n');
-	uniqueTranslations = uniqueTranslations.replace('\\ No newline at end of file', '');
+	// Unique keys
+	const uniqueTranslations = Array.from(new Set(newTranslationKeys)).join('\n');
 
 	// Write the simplified translations to a file
 	const outputFilePath = path.join(getDirName(), `../translation-changes-${kebabCase(app)}.txt`);

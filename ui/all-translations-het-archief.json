@@ -20048,7 +20048,7 @@
     "location": "pages/nieuwsbrief/index",
     "key": "nieuwsbrief",
     "language": "en",
-    "value": "News letter",
+    "value": "Newsletter",
     "value_type": "TEXT"
   },
   {
@@ -48039,6 +48039,24 @@
     "key": "sluiten",
     "language": "en",
     "value": "Close",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "pages/404",
+    "key": "dit-is-een-test",
+    "language": "nl",
+    "value": "Dit is een test",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "pages/404",
+    "key": "dit-is-een-test",
+    "language": "en",
+    "value": "Dit is een test",
     "value_type": "TEXT"
   },
   {
