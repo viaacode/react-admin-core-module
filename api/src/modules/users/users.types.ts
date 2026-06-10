@@ -24,6 +24,8 @@ export type UserOverviewTableCol =
 	| 'businessCategory'
 	| 'isException'
 	| 'isBlocked'
+	| 'isKeyUser'
+	| 'isEvaluator'
 	| 'blockedAt'
 	| 'unblockedAt'
 	| 'stamboek'
