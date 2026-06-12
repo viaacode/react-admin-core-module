@@ -26537,7 +26537,7 @@
     "location": "modules/material-requests/const/index",
     "key": "intended-usage-non-commercial",
     "language": "nl",
-    "value": "Extern gebruik zonder direct commercieel voordeel: ook voor extern gebruik",
+    "value": "Extern gebruik zonder direct commercieel voordeel: ook voor extern gebruik.",
     "value_type": "TEXT"
   },
   {
@@ -26546,7 +26546,7 @@
     "location": "modules/material-requests/const/index",
     "key": "intended-usage-non-commercial",
     "language": "en",
-    "value": "External use without a direct commercial advantage: also for external use",
+    "value": "External use without a direct commercial advantage: also for external use.",
     "value_type": "TEXT"
   },
   {
@@ -26555,7 +26555,7 @@
     "location": "modules/material-requests/const/index",
     "key": "intended-usage-commercial",
     "language": "nl",
-    "value": "Directe commerciële exploitatie: vergoeding gelinkt aan je aankoop",
+    "value": "Directe commerciële exploitatie: vergoeding gelinkt aan je aankoop.",
     "value_type": "TEXT"
   },
   {
@@ -26564,7 +26564,7 @@
     "location": "modules/material-requests/const/index",
     "key": "intended-usage-commercial",
     "language": "en",
-    "value": "Direct commercial exploitation: compensation linked to your purchase",
+    "value": "Direct commercial exploitation: compensation linked to your purchase.",
     "value_type": "TEXT"
   },
   {
@@ -30074,7 +30074,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-conversation-message",
     "key": "name-aanvaardde-de-bijkomende-gebruiksvoorwaarden",
     "language": "en",
-    "value": "{{name}} accepted the additional conditions",
+    "value": "{{name}} accepted the additional conditions. The download will be made available automatically.",
     "value_type": "HTML"
   },
   {
@@ -31271,7 +31271,7 @@
     "location": "modules/account/components/material-request-evaluate-conditions-blade/material-request-evaluate-conditions-blade",
     "key": "de-aanbieder-legt-de-volgende-bijkomende-gebruiksvoorwaarden-op-vooraleer-de-aanvraag-kan-goedgekeurd-worden-deze-komen-bovenop-de-voorwaarden-die-zijn-ingevuld-in-het-originele-hergebruikformulier",
     "language": "nl",
-    "value": "De aanbieder legt de volgende bijkomende gebruiksvoorwaarden op vooraleer de aanvraag kan goedgekeurd worden deze komen bovenop de voorwaarden die zijn ingevuld in het originele hergebruikformulier",
+    "value": "De aanbieder legt de volgende bijkomende gebruiksvoorwaarden op vooraleer de aanvraag kan goedgekeurd worden. Deze komen bovenop de voorwaarden die zijn ingevuld in het originele hergebruikformulier",
     "value_type": "TEXT"
   },
   {
@@ -44915,7 +44915,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "bedoeld-gebruik-beschrijving-label",
     "language": "nl",
-    "value": "Beschrijf in eigen woorden waarvoor u het materiaal wenst te gebruiken",
+    "value": "Beschrijf in eigen woorden waarvoor je het materiaal wenst te gebruiken",
     "value_type": "TEXT"
   },
   {
@@ -45023,7 +45023,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "bedoeld-gebruik-intern-gebruik-zonder-omschrijving",
     "language": "nl",
-    "value": "Intern gebruik zonder vergoeding of financieel voordeel: mijn organisatie gaat geen vergoeding vragen of beoogt geen financieel voordeel met het interne gebruik van dit materiaal. Het materiaal wordt niet gebruikt op een manier die een financieel of zakelijk voordeel creëert voor de organisatie; inclusief gebruik voor onderwijs en educatieve doeleinden, culturele doeleinden (zoals vertoning in musea), en evenals voor niet-commercieel onderzoek worden beschouwd als niet-commerciële exploitatie.",
+    "value": "Intern gebruik zonder vergoeding of financieel voordeel: mijn organisatie zal geen vergoeding vragen of beoogt geen financieel voordeel met het interne gebruik van dit materiaal. Het materiaal wordt niet gebruikt op een manier die een financieel of zakelijk voordeel creëert voor de organisatie. Gebruik voor onderwijs en educatieve doeleinden, culturele doeleinden (zoals vertoning in musea) en niet-commercieel onderzoek wordt beschouwd als niet-commerciële exploitatie.",
     "value_type": "HTML"
   },
   {
@@ -45032,7 +45032,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "bedoeld-gebruik-intern-gebruik-zonder-omschrijving",
     "language": "en",
-    "value": "Internal use without compensation or financial benefit: my organisation will not ask for a compensation or has no financial goal with the internal use of this material. The material will not be used in a way that will create financial gains or a competitive advantage for the organisation; including use for education and educational purposes, cultural purposes (like museum exhibitions), or non-commercial research. These will be considered non-commercial exploitation.",
+    "value": "Internal use without compensation or financial benefit: my organisation will not ask for a compensation or has no financial goal with the internal use of this material. The material will not be used in a way that will create financial gains or a competitive advantage for the organisation. Use for education and educational purposes, cultural purposes (like museum exhibitions), or non-commercial research will be considered non-commercial exploitation.",
     "value_type": "HTML"
   },
   {
@@ -45041,7 +45041,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "bedoeld-gebruik-extern-gebruik-zonder-direct-commercieel-voordeel-label",
     "language": "nl",
-    "value": "Extern gebruik zonder direct commercieel voordeel: ook voor extern gebruik",
+    "value": "Extern gebruik zonder direct commercieel voordeel: ook voor extern gebruik.",
     "value_type": "TEXT"
   },
   {
@@ -45050,7 +45050,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "bedoeld-gebruik-extern-gebruik-zonder-direct-commercieel-voordeel-label",
     "language": "en",
-    "value": "External use without a direct commercial advantage: also for external use",
+    "value": "External use without a direct commercial advantage: also for external use.",
     "value_type": "TEXT"
   },
   {
@@ -45077,7 +45077,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "bedoeld-gebruik-directe-commerciele-exploitatie-label",
     "language": "nl",
-    "value": "Directe commerciële exploitatie: vergoeding gelinkt aan je aankoop",
+    "value": "Directe commerciële exploitatie: vergoeding gelinkt aan je aankoop.",
     "value_type": "TEXT"
   },
   {
@@ -45086,7 +45086,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "bedoeld-gebruik-directe-commerciele-exploitatie-label",
     "language": "en",
-    "value": "Direct commercial exploitation: compensation linked to your purchase",
+    "value": "Direct commercial exploitation: compensation linked to your purchase.",
     "value_type": "TEXT"
   },
   {
@@ -45527,7 +45527,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "wijziging-materiaal-geen-wijzigingen-omschrijving",
     "language": "nl",
-    "value": "<p>Ter verduidelijking: De volgende vormen van gebruik worden niet als wijziging beschouwd: </p><ul><li>Inkorting of hergebruik van slechts een deel van het aangevraagde materiaal. </li><li>Technische wijzigingen om de beeld- of audiokwaliteit van het materiaal te verbeteren worden. </li><li>Integratie van ongewijzigd bronmateriaal in een documentaire.</li><li>Aanbieden van materiaal in interactieve diensten waarbij gebruikers van die diensten zelf de weergave van het materiaal tijdelijk kunnen wijzigen voor eigen doeleinden (vb. binnen een app, kiosk, of binnen een interactieve website, bijvoorbeeld met gebruik van H5P-technologie).</li></ul>",
+    "value": "<p>Ter verduidelijking: De volgende vormen van gebruik worden niet als wijziging beschouwd: </p><ul><li>Inkorting of hergebruik van slechts een deel van het aangevraagde materiaal. </li><li>Technische wijzigingen om de beeld- of audiokwaliteit van het materiaal te verbeteren. </li><li>Integratie van ongewijzigd bronmateriaal in een documentaire.</li><li>Aanbieden van materiaal in interactieve diensten waarbij gebruikers van die diensten zelf de weergave van het materiaal tijdelijk kunnen wijzigen voor eigen doeleinden (vb. binnen een app, kiosk, of binnen een interactieve website, bijvoorbeeld met gebruik van H5P-technologie).</li></ul>",
     "value_type": "HTML"
   },
   {
@@ -45689,7 +45689,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "geef-hier-een-uitleg-over-het-geografisch-gebruik-dat-je-wenst-te-gebruiken-input-aria-label",
     "language": "nl",
-    "value": "Geef hier een uitleg over het geografisch gebruik dat je wenst te gebruiken [INPUT_ARIA_LABEL]",
+    "value": "Geef hier een uitleg over het geografisch gebruik dat je wenst te gebruiken ",
     "value_type": "TEXT"
   },
   {
@@ -45698,7 +45698,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "geef-hier-een-uitleg-over-het-geografisch-gebruik-dat-je-wenst-te-gebruiken-input-aria-label",
     "language": "en",
-    "value": "Geef hier een uitleg over het geografisch gebruik dat je wenst te gebruiken [INPUT_ARIA_LABEL]",
+    "value": "Geef hier een uitleg over het geografisch gebruik dat je wenst te gebruiken ",
     "value_type": "TEXT"
   },
   {
@@ -45869,7 +45869,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "bronvermelding-gelijktijdig-met-object-omschrijving",
     "language": "nl",
-    "value": "De bron zal worden vermeld gelijktijdig met het materiaal zelf (d.w.z. op het moment dat het materiaal getoond wordt)",
+    "value": "De bron zal worden vermeld gelijktijdig met het materiaal zelf (d.w.z. op het moment dat het materiaal getoond wordt).",
     "value_type": "HTML"
   },
   {
@@ -45878,7 +45878,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "bronvermelding-gelijktijdig-met-object-omschrijving",
     "language": "en",
-    "value": "The source citation will be given, simultaneous with the material (so while the material is shown)",
+    "value": "The source citation will be given, simultaneous with the material (so while the material is shown).",
     "value_type": "HTML"
   },
   {
@@ -45914,7 +45914,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "bronvermelding-vermelding-bij-object-niet-noodzakelijk-gelijktijdig-omschrijving",
     "language": "en",
-    "value": "The source will be cited with the material, but not necessarily simultaneously (e.g. in the closing credits, or in the notes of a book or website)",
+    "value": "The source will be cited with the material, but not necessarily simultaneously (e.g. in the closing credits, or in the notes of a book or website).",
     "value_type": "HTML"
   },
   {
@@ -48893,7 +48893,7 @@
     "location": "modules/material-request-messages/services/material-request-pdf-generator",
     "key": "bedoeld-gebruik-beschrijving-label",
     "language": "nl",
-    "value": "Beschrijf in eigen woorden waarvoor u het materiaal wenst te gebruiken",
+    "value": "Beschrijf in eigen woorden waarvoor je het materiaal wenst te gebruiken",
     "value_type": "TEXT"
   },
   {
