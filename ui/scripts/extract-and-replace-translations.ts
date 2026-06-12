@@ -189,7 +189,7 @@ async function extractTranslationsFromCodeFiles(
 	const total = sourceFiles.length;
 	for (let i = 0; i < total; i++) {
 		const sourceFile = sourceFiles[i];
-		onProgress?.(Math.round((i / total) * 80), sourceFile.getBaseName());
+		onProgress?.(10 + Math.round(((i + 1) / total) * 70), sourceFile.getBaseName());
 
 		// Find all tHtml() and tText() function calls
 		const translationFunctionCalls = sourceFile
@@ -489,7 +489,7 @@ function resolvePath(...filePaths: string[]): string {
 }
 
 async function formatCode(codePath: string) {
-	await execAsync(`cd ${codePath} && npm run format`);
+	await execAsync('npm run format', { cwd: codePath });
 }
 
 async function extractAvoAdminCoreTranslations(
@@ -669,7 +669,7 @@ async function extractTranslations() {
 	console.warn = capture;
 	console.error = capture;
 
-	let allTranslations: TranslationEntry[];
+	let allTranslations: TranslationEntry[] = [];
 	try {
 		const allOnlineTranslations = await getOnlineTranslations(app);
 		totalBar.update(0, { pct: pct(0), label: pad('total'), status: '0/3 done' });
@@ -697,13 +697,10 @@ async function extractTranslations() {
 		console.info = origInfo;
 		console.warn = origWarn;
 		console.error = origError;
-	}
-
-	multiBar.stop();
-
-	// Flush buffered output now that the progress bars are done
-	for (const msg of logBuffer) {
-		origInfo(msg);
+		multiBar.stop();
+		for (const msg of logBuffer) {
+			origInfo(msg);
+		}
 	}
 
 	// Output all translations as sql file
