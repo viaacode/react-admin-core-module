@@ -14,9 +14,19 @@
       right: 10px;
       top: 6px;
     }
-
-    .c-tooltip[data-popper-placement^="right"] > .c-tooltip__arrow {
-      left: -4px;
-    }
   }
+}
+
+.p-content-page-publish-modal {
+	.c-tooltip-component {
+		background-color: #edeff2;
+		border: 1px solid #557891;
+		border-radius: 0.3rem;
+		padding: 0.8rem;
+		color: black;
+		font-size: 1.2rem;
+		line-height: 1.428; // 20px equivalent
+		user-select: none;
+		pointer-events: none;
+		margin: 0 !important;	}
 }

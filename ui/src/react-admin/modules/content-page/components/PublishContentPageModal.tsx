@@ -1,3 +1,4 @@
+import { Tooltip, TooltipContent, TooltipTrigger } from '@meemoo/react-components';
 import type { IconName } from '@viaa/avo2-components';
 import {
 	Button,
@@ -13,9 +14,6 @@ import {
 	Toolbar,
 	ToolbarItem,
 	ToolbarRight,
-	Tooltip,
-	TooltipContent,
-	TooltipTrigger,
 } from '@viaa/avo2-components';
 import { parseISO, setHours, setMinutes, setSeconds } from 'date-fns';
 import type { FC } from 'react';
@@ -203,7 +201,12 @@ const PublishContentPageModal: FC<PublishContentPageModalProps> = ({
 								)
 							}
 						/>
-						<Tooltip position="right" id="publish-content-page-modal__published-at-display-tooltip">
+						<Tooltip
+							position="top"
+							arrowStrokeWidth={1}
+							arrowStrokeColor="#557891"
+							arrowFillColor="#edeff2"
+						>
 							<TooltipTrigger>
 								<Icon className="a-info-icon" name={'info' as IconName} size="small" />
 							</TooltipTrigger>
