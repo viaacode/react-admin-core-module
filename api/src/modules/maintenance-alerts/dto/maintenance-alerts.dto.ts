@@ -13,9 +13,9 @@ export class MaintenanceAlertsQueryDto {
 	@ApiPropertyOptional({
 		type: Number,
 		description: 'Which page of results to fetch. Counting starts at 1',
-		default: 1,
+		default: 0,
 	})
-	page? = 1;
+	page? = 0;
 
 	@IsNumber()
 	@Type(() => Number)
