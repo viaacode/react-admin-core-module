@@ -1,10 +1,14 @@
 // noinspection ES6PreferShortImport
 
-import { execSync } from 'node:child_process';
+import { exec } from 'node:child_process';
 import * as fs from 'node:fs/promises';
 import * as path from 'node:path';
+import { promisify } from 'node:util';
+import cliProgress from 'cli-progress';
 import { green, grey, red, yellow } from 'console-log-colors';
 import { compact, intersection, kebabCase, lowerCase, trim, upperFirst, without } from 'lodash-es';
+
+const execAsync = promisify(exec);
 /**
  This script runs over all the code and looks for either:
 tHtml('Aanvraagformulier')
@@ -44,6 +48,8 @@ import {
 } from './translation.types';
 
 const ALL_APPS = `[${App.AVO}, ${App.HET_ARCHIEF}]`;
+
+type ProgressCallback = (pct: number, status: string) => void;
 
 export function getFullKey(
 	translationEntry: TranslationEntry | MultiLanguageTranslationEntry
@@ -162,31 +168,28 @@ async function extractTranslationsFromCodeFiles(
 	component: Component,
 	oldTranslations: Record<string, string>,
 	oldTranslationsJsonPath: string,
-	tsConfigFilePath?: string
+	tsConfigFilePath?: string,
+	onProgress?: ProgressCallback
 ): Promise<TranslationEntry[]> {
 	const tsProject = new Project({
 		tsConfigFilePath,
 	});
 
 	const sourceCodeTranslations: TranslationEntry[] = [];
-	const sourceFiles = tsProject.getSourceFiles();
-	for (const sourceFile of sourceFiles) {
-		if (!(sourceFile.getBaseName().endsWith('.ts') || sourceFile.getBaseName().endsWith('.tsx'))) {
-			continue; // Skip non-typescript files
-		}
-		if (
-			sourceFile.getBaseNameWithoutExtension().includes('.test') ||
-			sourceFile.getBaseNameWithoutExtension().includes('.spec') ||
-			sourceFile.isDeclarationFile()
-		) {
-			continue; // Skip test and declaration files
-		}
+	const sourceFiles = tsProject.getSourceFiles().filter((sourceFile) => {
+		return (
+			(sourceFile.getBaseName().endsWith('.ts') || sourceFile.getBaseName().endsWith('.tsx')) &&
+			!sourceFile.getBaseNameWithoutExtension().includes('.test') &&
+			!sourceFile.getBaseNameWithoutExtension().includes('.spec') &&
+			!sourceFile.isDeclarationFile() &&
+			sourceFile.getFilePath().startsWith(rootFolderPath)
+		);
+	});
 
-		if (!sourceFile.getFilePath().startsWith(rootFolderPath)) {
-			continue; // Skip files outside the root folder
-		}
-
-		// Find and extract translations, replace strings with translation keys
+	const total = sourceFiles.length;
+	for (let i = 0; i < total; i++) {
+		const sourceFile = sourceFiles[i];
+		onProgress?.(10 + Math.round(((i + 1) / total) * 70), sourceFile.getBaseName());
 
 		// Find all tHtml() and tText() function calls
 		const translationFunctionCalls = sourceFile
@@ -248,6 +251,7 @@ async function extractTranslationsFromCodeFiles(
 			}
 		});
 	}
+	onProgress?.(85, 'saving...');
 	await tsProject.save();
 
 	return sourceCodeTranslations;
@@ -418,13 +422,14 @@ async function updateTranslations(
 	app: App,
 	component: Component,
 	outputJsonFile: string,
-	tsConfigPath?: string
+	allOnlineTranslations: TranslationEntry[],
+	tsConfigPath?: string,
+	onProgress?: ProgressCallback
 ): Promise<TranslationEntry[]> {
 	try {
-		const onlineTranslations = (await getOnlineTranslations(app)).filter(
-			(t) => t.component === component
-		);
+		const onlineTranslations = allOnlineTranslations.filter((t) => t.component === component);
 
+		onProgress?.(5, 'reading existing translations...');
 		const nlJsonTranslations: Record<string, string> = JSON.parse(
 			(await fs.readFile(path.resolve(rootFolderPath, outputJsonFile))).toString()
 		);
@@ -449,16 +454,20 @@ async function updateTranslations(
 			component,
 			nlJsonTranslations,
 			resolvePath(rootFolderPath, outputJsonFile),
-			tsConfigPath
+			tsConfigPath,
+			onProgress
 		);
 
-		return await combineTranslations(
+		onProgress?.(90, 'combining translations...');
+		const result = await combineTranslations(
 			nlJsonTranslationEntries,
 			sourceCodeTranslations,
 			onlineTranslations,
 			path.join(rootFolderPath, outputJsonFile),
 			app
 		);
+		onProgress?.(95, 'done');
+		return result;
 	} catch (err) {
 		throw new Error(
 			JSON.stringify({
@@ -479,94 +488,122 @@ function resolvePath(...filePaths: string[]): string {
 	return path.resolve(getDirName(), ...filePaths).replace(/\\/g, '/');
 }
 
-function formatCode(path: string) {
-	process.stdout.write(grey('Formatting code...'));
-	execSync(`cd ${path} && npm run format`);
-	console.info(green('done\n'));
+async function formatCode(codePath: string) {
+	await execAsync('npm run format', { cwd: codePath });
 }
 
-async function extractAvoAdminCoreTranslations() {
-	// AVO admin-core
-	console.info('Extracting AVO admin-core translations...');
-	const avoAdminCoreTranslations = await updateTranslations(
+async function extractAvoAdminCoreTranslations(
+	allOnlineTranslations: TranslationEntry[],
+	onProgress?: ProgressCallback
+) {
+	const translations = await updateTranslations(
 		resolvePath('../src/react-admin'),
 		App.AVO,
 		Component.ADMIN_CORE,
 		'../shared/translations/avo/nl.json',
-		resolvePath('../tsconfig.json')
+		allOnlineTranslations,
+		resolvePath('../tsconfig.json'),
+		onProgress
 	);
-	formatCode(resolvePath('../'));
-	return avoAdminCoreTranslations;
+	onProgress?.(97, 'formatting...');
+	await formatCode(resolvePath('../'));
+	onProgress?.(100, 'done');
+	return translations;
 }
 
-async function extractAvoClientTranslations() {
-	// AVO client
-	console.info('Extracting AVO client translations...');
-	const avoClientTranslations = await updateTranslations(
+async function extractAvoClientTranslations(
+	allOnlineTranslations: TranslationEntry[],
+	onProgress?: ProgressCallback
+) {
+	const translations = await updateTranslations(
 		resolvePath('../../../avo2-client/src'),
 		App.AVO,
 		Component.FRONTEND,
 		'shared/translations/nl.json',
-		resolvePath('../../../avo2-client/tsconfig.json')
+		allOnlineTranslations,
+		resolvePath('../../../avo2-client/tsconfig.json'),
+		onProgress
 	);
-	formatCode(resolvePath('../../../avo2-client'));
-	return avoClientTranslations;
+	onProgress?.(97, 'formatting...');
+	await formatCode(resolvePath('../../../avo2-client'));
+	onProgress?.(100, 'done');
+	return translations;
 }
 
-async function extractAvoProxyTranslations() {
-	// AVO proxy
-	console.info('Extracting AVO admin-core translations...');
-	const avoProxyTranslations = await updateTranslations(
+async function extractAvoProxyTranslations(
+	allOnlineTranslations: TranslationEntry[],
+	onProgress?: ProgressCallback
+) {
+	const translations = await updateTranslations(
 		resolvePath('../../../avo2-proxy/server/src'),
 		App.AVO,
 		Component.BACKEND,
 		'shared/translations/nl.json',
-		resolvePath('../../../avo2-proxy/server/tsconfig.json')
+		allOnlineTranslations,
+		resolvePath('../../../avo2-proxy/server/tsconfig.json'),
+		onProgress
 	);
-	formatCode(resolvePath('../../../avo2-proxy/server'));
-	return avoProxyTranslations;
+	onProgress?.(97, 'formatting...');
+	await formatCode(resolvePath('../../../avo2-proxy/server'));
+	onProgress?.(100, 'done');
+	return translations;
 }
 
-async function extractHetArchiefAdminCoreTranslations() {
-	// HetArchief admin-core
-	console.info('Extracting HET_ARCHIEF admin-core translations...');
-	const hetArchiefAdminCoreTranslations = await updateTranslations(
+async function extractHetArchiefAdminCoreTranslations(
+	allOnlineTranslations: TranslationEntry[],
+	onProgress?: ProgressCallback
+) {
+	const translations = await updateTranslations(
 		resolvePath('../src/react-admin'),
 		App.HET_ARCHIEF,
 		Component.ADMIN_CORE,
 		'../shared/translations/hetArchief/nl.json',
-		resolvePath('../tsconfig.json')
+		allOnlineTranslations,
+		resolvePath('../tsconfig.json'),
+		onProgress
 	);
-	formatCode(resolvePath('../'));
-	return hetArchiefAdminCoreTranslations;
+	onProgress?.(97, 'formatting...');
+	await formatCode(resolvePath('../'));
+	onProgress?.(100, 'done');
+	return translations;
 }
 
-async function extractHetArchiefClientTranslations() {
-	// HetArchief client
-	console.info('Extracting HET_ARCHIEF client translations...');
-	const hetArchiefClientTranslations = await updateTranslations(
+async function extractHetArchiefClientTranslations(
+	allOnlineTranslations: TranslationEntry[],
+	onProgress?: ProgressCallback
+) {
+	const translations = await updateTranslations(
 		resolvePath('../../../hetarchief-client/src'),
 		App.HET_ARCHIEF,
 		Component.FRONTEND,
 		'../public/locales/nl/common.json',
-		resolvePath('../../../hetarchief-client/tsconfig.json')
+		allOnlineTranslations,
+		resolvePath('../../../hetarchief-client/tsconfig.json'),
+		onProgress
 	);
-	formatCode(resolvePath('../../../hetarchief-client'));
-	return hetArchiefClientTranslations;
+	onProgress?.(97, 'formatting...');
+	await formatCode(resolvePath('../../../hetarchief-client'));
+	onProgress?.(100, 'done');
+	return translations;
 }
 
-async function extractHetArchiefProxyTranslations() {
-	// HetArchief proxy
-	console.info('Extracting HET_ARCHIEF proxy translations...');
-	const hetArchiefProxyTranslations = await updateTranslations(
+async function extractHetArchiefProxyTranslations(
+	allOnlineTranslations: TranslationEntry[],
+	onProgress?: ProgressCallback
+) {
+	const translations = await updateTranslations(
 		resolvePath('../../../hetarchief-proxy/src'),
 		App.HET_ARCHIEF,
 		Component.BACKEND,
 		'shared/i18n/locales/nl.json',
-		resolvePath('../../../hetarchief-proxy/tsconfig.json')
+		allOnlineTranslations,
+		resolvePath('../../../hetarchief-proxy/tsconfig.json'),
+		onProgress
 	);
-	formatCode(resolvePath('../../../hetarchief-proxy'));
-	return hetArchiefProxyTranslations;
+	onProgress?.(97, 'formatting...');
+	await formatCode(resolvePath('../../../hetarchief-proxy'));
+	onProgress?.(100, 'done');
+	return translations;
 }
 
 async function extractTranslations() {
@@ -577,28 +614,93 @@ async function extractTranslations() {
 		);
 	}
 
-	let allTranslations: TranslationEntry[];
-	if (app === App.AVO) {
-		const avoAdminCoreTranslations = await extractAvoAdminCoreTranslations();
-		const avoClientTranslations = await extractAvoClientTranslations();
-		const avoProxyTranslations = await extractAvoProxyTranslations();
+	const labels =
+		app === App.AVO
+			? ['admin-core', 'avo-client', 'avo-proxy']
+			: ['admin-core', 'hetarchief-client', 'hetarchief-proxy'];
 
-		allTranslations = [
-			...avoAdminCoreTranslations,
-			...avoClientTranslations,
-			...avoProxyTranslations,
-		];
-	} else {
-		// HET_ARCHIEF
-		const hetArchiefAdminCoreTranslations = await extractHetArchiefAdminCoreTranslations();
-		const hetArchiefClientTranslations = await extractHetArchiefClientTranslations();
-		const hetArchiefProxyTranslations = await extractHetArchiefProxyTranslations();
+	const labelWidth = Math.max('total'.length, ...labels.map((l) => l.length));
+	const pad = (s: string) => s.padEnd(labelWidth);
+	const pct = (n: number) => `${String(n).padStart(3)}%`;
 
-		allTranslations = [
-			...hetArchiefAdminCoreTranslations,
-			...hetArchiefClientTranslations,
-			...hetArchiefProxyTranslations,
-		];
+	const multiBar = new cliProgress.MultiBar(
+		{
+			clearOnComplete: false,
+			hideCursor: true,
+			format: ' {bar} {pct} | {label} | {status}',
+		},
+		cliProgress.Presets.shades_classic
+	);
+
+	const DIM = '\x1b[2m';
+	const RESET = '\x1b[0m';
+	const dimFormat = ` ${DIM}{bar} {pct} | {label} | {status}${RESET}`;
+
+	const totalBar = multiBar.create(100, 0, { pct: pct(0), label: pad('total'), status: 'fetching online translations...' });
+	const bars = labels.map((label) =>
+		multiBar.create(100, 0, { pct: pct(0), label: pad(label), status: 'waiting...' }, { format: dimFormat })
+	);
+
+	// Track each bar's percentage so we can compute a total
+	const pcts = [0, 0, 0];
+	const makeOnProgress =
+		(index: number): ProgressCallback =>
+		(value, status) => {
+			pcts[index] = value;
+			bars[index].update(value, { pct: pct(value), label: pad(labels[index]), status });
+			const total = Math.round(pcts.reduce((a, b) => a + b, 0) / pcts.length);
+			totalBar.update(total, {
+				pct: pct(total),
+				label: pad('total'),
+				status: `${pcts.filter((p) => p === 100).length}/${pcts.length} done`,
+			});
+		};
+
+	// Buffer console output so it doesn't trample the progress bars mid-render
+	const logBuffer: string[] = [];
+	const origLog = console.log.bind(console);
+	const origInfo = console.info.bind(console);
+	const origWarn = console.warn.bind(console);
+	const origError = console.error.bind(console);
+	// biome-ignore lint/suspicious/noExplicitAny: intentional console override
+	const capture = (...args: any[]) => logBuffer.push(args.map(String).join(' '));
+	console.log = capture;
+	console.info = capture;
+	console.warn = capture;
+	console.error = capture;
+
+	let allTranslations: TranslationEntry[] = [];
+	try {
+		const allOnlineTranslations = await getOnlineTranslations(app);
+		totalBar.update(0, { pct: pct(0), label: pad('total'), status: '0/3 done' });
+
+		if (app === App.AVO) {
+			[...Array(3).keys()].forEach((i) => makeOnProgress(i)(0, 'starting...'));
+			const [adminCore, client, proxy] = await Promise.all([
+				extractAvoAdminCoreTranslations(allOnlineTranslations, makeOnProgress(0)),
+				extractAvoClientTranslations(allOnlineTranslations, makeOnProgress(1)),
+				extractAvoProxyTranslations(allOnlineTranslations, makeOnProgress(2)),
+			]);
+			allTranslations = [...adminCore, ...client, ...proxy];
+		} else {
+			// HET_ARCHIEF
+			[...Array(3).keys()].forEach((i) => makeOnProgress(i)(0, 'starting...'));
+			const [adminCore, client, proxy] = await Promise.all([
+				extractHetArchiefAdminCoreTranslations(allOnlineTranslations, makeOnProgress(0)),
+				extractHetArchiefClientTranslations(allOnlineTranslations, makeOnProgress(1)),
+				extractHetArchiefProxyTranslations(allOnlineTranslations, makeOnProgress(2)),
+			]);
+			allTranslations = [...adminCore, ...client, ...proxy];
+		}
+	} finally {
+		console.log = origLog;
+		console.info = origInfo;
+		console.warn = origWarn;
+		console.error = origError;
+		multiBar.stop();
+		for (const msg of logBuffer) {
+			origInfo(msg);
+		}
 	}
 
 	// Output all translations as sql file
