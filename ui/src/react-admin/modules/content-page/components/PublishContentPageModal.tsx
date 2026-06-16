@@ -1,4 +1,3 @@
-import { Tooltip, TooltipContent, TooltipTrigger } from '@meemoo/react-components';
 import type { IconName } from '@viaa/avo2-components';
 import {
 	Button,
@@ -22,6 +21,7 @@ import { BlockHeading } from '~content-blocks/BlockHeading/BlockHeading';
 import { ToastType } from '~core/config/config.types';
 import { getDatePickerDefaultProps } from '~modules/content-page/components/DatePicker/DatePicker.consts';
 import { getPublishedState } from '~modules/content-page/helpers/get-published-state';
+import { Tooltip, TooltipContent, TooltipTrigger } from '~shared/components/Tooltip/Tooltip.tsx';
 import { showToast } from '~shared/helpers/show-toast';
 import { tHtml, tText } from '~shared/helpers/translation-functions';
 import type { ContentPageInfo, PublishOption } from '../types/content-pages.types';
@@ -201,12 +201,7 @@ const PublishContentPageModal: FC<PublishContentPageModalProps> = ({
 								)
 							}
 						/>
-						<Tooltip
-							position="top"
-							arrowStrokeWidth={1}
-							arrowStrokeColor="#557891"
-							arrowFillColor="#edeff2"
-						>
+						<Tooltip position="top">
 							<TooltipTrigger>
 								<Icon className="a-info-icon" name={'info' as IconName} size="small" />
 							</TooltipTrigger>

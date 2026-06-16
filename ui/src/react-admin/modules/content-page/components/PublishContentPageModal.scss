@@ -1,32 +1,5 @@
 .c-content-page-publish-modal__display-date {
-  margin-top: 3.2rem;
-
   .o-form-group__label {
     font-weight: 500;
   }
-
-  .u-spacer {
-    position: relative;
-    display: inline-block;
-
-    .c-tooltip-trigger {
-      position: absolute;
-      right: 10px;
-      top: 6px;
-    }
-  }
-}
-
-.p-content-page-publish-modal {
-	.c-tooltip-component {
-		background-color: #edeff2;
-		border: 1px solid #557891;
-		border-radius: 0.3rem;
-		padding: 0.8rem;
-		color: black;
-		font-size: 1.2rem;
-		line-height: 1.428; // 20px equivalent
-		user-select: none;
-		pointer-events: none;
-		margin: 0 !important;	}
 }
