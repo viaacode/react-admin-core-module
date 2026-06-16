@@ -6,6 +6,11 @@ import { kebabCase } from 'es-toolkit';
 import { getDirName } from './get-dir-name';
 import type { App } from './translation.types';
 
+const GIT_CHANGE_DELETE_TRANSLATION_REGEX =
+	/^-INSERT\s+INTO\s+app\.translations.*?VALUES\s*\('[^']*',\s*'([^']+)',\s*'([^']+)',/gm;
+const GIT_CHANGE_ADDITION_TRANSLATION_REGEX =
+	/^\+INSERT\s+INTO\s+app\.translations.*?VALUES\s*\('[^']*',\s*'([^']+)',\s*'([^']+)',/gm;
+
 /**
  * Fetch the list of *new* translations between two git tags (i.e. translations that were added,
  * not ones whose database value was merely updated).
@@ -44,24 +49,23 @@ async function getListOfChangedTranslations(
 		return;
 	}
 
-	// Extract keys from deleted rows — these represent updated (not new) translations
-	const deletionRegex =
-		/^-INSERT\s+INTO\s+app\.translations.*?VALUES\s*\('[^']*',\s*'([^']+)',\s*'([^']+)',/gm;
+	// Extract keys from deleted row: these represent updated (not new) translations
 	const deletedKeys = new Set<string>();
-	let match: RegExpExecArray | null;
-	while ((match = deletionRegex.exec(result)) !== null) {
+	let match: RegExpExecArray | null = GIT_CHANGE_DELETE_TRANSLATION_REGEX.exec(result);
+	while (match !== null) {
 		deletedKeys.add(`${match[1]}___${match[2]}`);
+		match = GIT_CHANGE_DELETE_TRANSLATION_REGEX.exec(result);
 	}
 
-	// Extract keys from added rows, keeping only those absent from deletedKeys (truly new translations)
-	const additionRegex =
-		/^\+INSERT\s+INTO\s+app\.translations.*?VALUES\s*\('[^']*',\s*'([^']+)',\s*'([^']+)',/gm;
+	// Extract keys from added rows: keeping only those absent from deletedKeys (truly new translations)
 	const newTranslationKeys: string[] = [];
-	while ((match = additionRegex.exec(result)) !== null) {
+	match = GIT_CHANGE_ADDITION_TRANSLATION_REGEX.exec(result);
+	while (match !== null) {
 		const key = `${match[1]}___${match[2]}`;
 		if (!deletedKeys.has(key)) {
 			newTranslationKeys.push(key);
 		}
+		match = GIT_CHANGE_ADDITION_TRANSLATION_REGEX.exec(result);
 	}
 
 	// Unique keys
