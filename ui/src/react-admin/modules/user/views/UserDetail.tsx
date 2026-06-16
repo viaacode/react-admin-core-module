@@ -277,10 +277,6 @@ export const UserDetail: FC<UserDetailProps> = ({
 								['bio', tText('admin/users/views/user-detail___bio')],
 								['stamboek', tText('admin/users/views/user-detail___stamboek-nummer')],
 								['email', tText('admin/users/views/user-detail___primair-email-adres')],
-								[
-									'alternativeEmail',
-									tText('admin/users/views/user-detail___secundair-email-adres'),
-								],
 							])}
 							{renderDetailRow(
 								userGroup ? userGroup.label : '-',

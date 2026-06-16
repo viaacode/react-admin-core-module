@@ -13,9 +13,6 @@ import {
 	Toolbar,
 	ToolbarItem,
 	ToolbarRight,
-	Tooltip,
-	TooltipContent,
-	TooltipTrigger,
 } from '@viaa/avo2-components';
 import { parseISO, setHours, setMinutes, setSeconds } from 'date-fns';
 import type { FC } from 'react';
@@ -24,6 +21,7 @@ import { BlockHeading } from '~content-blocks/BlockHeading/BlockHeading';
 import { ToastType } from '~core/config/config.types';
 import { getDatePickerDefaultProps } from '~modules/content-page/components/DatePicker/DatePicker.consts';
 import { getPublishedState } from '~modules/content-page/helpers/get-published-state';
+import { Tooltip, TooltipContent, TooltipTrigger } from '~shared/components/Tooltip/Tooltip.tsx';
 import { showToast } from '~shared/helpers/show-toast';
 import { tHtml, tText } from '~shared/helpers/translation-functions';
 import type { ContentPageInfo, PublishOption } from '../types/content-pages.types';
@@ -203,7 +201,7 @@ const PublishContentPageModal: FC<PublishContentPageModalProps> = ({
 								)
 							}
 						/>
-						<Tooltip position="right" id="publish-content-page-modal__published-at-display-tooltip">
+						<Tooltip position="top">
 							<TooltipTrigger>
 								<Icon className="a-info-icon" name={'info' as IconName} size="small" />
 							</TooltipTrigger>
