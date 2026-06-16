@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Header, Param, Post } from '@nestjs/common';
 import { ApiOperation, ApiParam, ApiTags } from '@nestjs/swagger';
 import { PermissionName } from '@viaa/avo2-types';
 
@@ -24,6 +24,7 @@ export class TranslationsController {
 	 * @param languageCode
 	 */
 	@Get(':languageCode.json')
+	@Header('Cache-Control', 'public, max-age=1800, must-revalidate')
 	@ApiParam({
 		name: 'languageCode',
 		enum: [
