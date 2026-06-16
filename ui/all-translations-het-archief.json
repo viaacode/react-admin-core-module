@@ -8805,24 +8805,6 @@
     "app": "HET_ARCHIEF",
     "component": "ADMIN_CORE",
     "location": "admin/users/views/user-detail",
-    "key": "secundair-email-adres",
-    "language": "nl",
-    "value": "Secundair emailadres",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "admin/users/views/user-detail",
-    "key": "secundair-email-adres",
-    "language": "en",
-    "value": "Secondary email address",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "admin/users/views/user-detail",
     "key": "gebruikersgroep",
     "language": "nl",
     "value": "Gebruikersgroep",
@@ -48039,6 +48021,24 @@
     "key": "sluiten",
     "language": "en",
     "value": "Close",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-detail-blade/material-request-content-info",
+    "key": "pid",
+    "language": "nl",
+    "value": "Pid",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-detail-blade/material-request-content-info",
+    "key": "pid",
+    "language": "en",
+    "value": "Pid",
     "value_type": "TEXT"
   },
   {
