@@ -1,6 +1,6 @@
 {
   "name": "@meemoo/admin-core-ui",
-  "version": "5.2.83",
+  "version": "5.2.84",
   "private": false,
   "type": "module",
   "files": [
@@ -74,7 +74,7 @@
     "@emotion/react": "11.11.1",
     "@floating-ui/react": "0.27.18",
     "@hookform/resolvers": "2.9.11",
-    "@meemoo/react-components": "5.1.38",
+    "@meemoo/react-components": "5.1.39",
     "@studiohyperdrive/pagination": "1.0.0",
     "@tanstack/react-query": "5.90.8",
     "@viaa/avo2-components": "6.2.15",
