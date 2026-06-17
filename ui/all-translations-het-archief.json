@@ -21245,7 +21245,7 @@
     "location": "modules/cp/const/material-requests",
     "key": "aangevraagd-op",
     "language": "nl",
-    "value": "aangevraagd op",
+    "value": "Aangevraagd op",
     "value_type": "TEXT"
   },
   {
@@ -21254,7 +21254,7 @@
     "location": "modules/cp/const/material-requests",
     "key": "aangevraagd-op",
     "language": "en",
-    "value": "requested on",
+    "value": "Requested on",
     "value_type": "TEXT"
   },
   {
@@ -29702,6 +29702,24 @@
   {
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
+    "location": "modules/account/components/material-request-detail-blade/material-request-content-info",
+    "key": "pid",
+    "language": "nl",
+    "value": "Pid",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-detail-blade/material-request-content-info",
+    "key": "pid",
+    "language": "en",
+    "value": "Pid",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
     "location": "modules/account/components/material-request-detail-blade/material-requests",
     "key": "reden",
     "language": "nl",
@@ -30039,24 +30057,6 @@
     "key": "name-aanvaardde-de-bijkomende-gebruiksvoorwaarden-de-download-wordt-beschikbaar-gemaakt-na-finale-goedkeuring-van-de-aanbieder",
     "language": "en",
     "value": "{{name}} accepted the additional conditions. The download will be available after the final approval by the organisation that manages the item.",
-    "value_type": "HTML"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-detail-blade/material-request-conversation-message",
-    "key": "name-aanvaardde-de-bijkomende-gebruiksvoorwaarden",
-    "language": "nl",
-    "value": "{{name}} aanvaardde de bijkomende gebruiksvoorwaarden. De download wordt automatisch beschikbaar gemaakt.",
-    "value_type": "HTML"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-detail-blade/material-request-conversation-message",
-    "key": "name-aanvaardde-de-bijkomende-gebruiksvoorwaarden",
-    "language": "en",
-    "value": "{{name}} accepted the additional conditions. The download will be made available automatically.",
     "value_type": "HTML"
   },
   {
@@ -31019,7 +31019,7 @@
     "location": "modules/account/components/material-request-download-button/material-request-download-button",
     "key": "download-materiaal",
     "language": "nl",
-    "value": "download materiaal",
+    "value": "Download materiaal",
     "value_type": "TEXT"
   },
   {
@@ -31028,7 +31028,7 @@
     "location": "modules/account/components/material-request-download-button/material-request-download-button",
     "key": "download-materiaal",
     "language": "en",
-    "value": "download material",
+    "value": "Download material",
     "value_type": "TEXT"
   },
   {
@@ -48025,24 +48025,6 @@
   },
   {
     "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-detail-blade/material-request-content-info",
-    "key": "pid",
-    "language": "nl",
-    "value": "Pid",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/material-request-detail-blade/material-request-content-info",
-    "key": "pid",
-    "language": "en",
-    "value": "Pid",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
     "component": "BACKEND",
     "location": "modules/material-requests/const/index",
     "key": "download-quality-normal",
@@ -49064,7 +49046,7 @@
     "location": "modules/material-request-messages/services/material-request-pdf-generator",
     "key": "materiaal",
     "language": "en",
-    "value": "Material\r\n",
+    "value": "Material",
     "value_type": "TEXT"
   },
   {
