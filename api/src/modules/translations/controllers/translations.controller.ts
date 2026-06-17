@@ -24,7 +24,7 @@ export class TranslationsController {
 	 * @param languageCode
 	 */
 	@Get(':languageCode.json')
-	@Header('Cache-Control', 'public, max-age=1800, must-revalidate')
+	@Header('Cache-Control', 'public, max-age=1800, must-revalidate') // 30 minutes
 	@ApiParam({
 		name: 'languageCode',
 		enum: [
