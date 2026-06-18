@@ -1,24 +1,18 @@
-import type {
-	RichTextEditorUploadInfo,
-	RichTextEditorWithInternalStateProps,
-} from '@meemoo/react-components';
-import { RichTextEditorWithInternalState } from '@meemoo/react-components';
-
+import type { RichTextEditorProps, RichTextEditorUploadInfo } from '@meemoo/react-components';
+import { RichTextEditor } from '@meemoo/react-components';
+import type { AvoFileUploadAssetType } from '@viaa/avo2-types';
 import type { FunctionComponent } from 'react';
 import React from 'react';
-
 import { ToastType } from '~core/config/config.types';
 import { showToast } from '~shared/helpers/show-toast';
 import { tText } from '~shared/helpers/translation-functions';
 import { AssetsService } from '~shared/services/assets-service/assets.service';
-
 import { RICH_TEXT_EDITOR_OPTIONS_DEFAULT } from '../../consts/rich-text-editor.consts';
 import { CustomError } from '../../helpers/custom-error';
 
-import './RichTextEditorWithInternalStateWrapper.scss';
-import type { AvoFileUploadAssetType } from '@viaa/avo2-types';
+import './RichTextEditorWrapper.scss';
 
-export type RichTextEditorWithInternalStateWrapperProps = RichTextEditorWithInternalStateProps & {
+export type RichTextEditorWrapperProps = RichTextEditorProps & {
 	fileType?: AvoFileUploadAssetType; // Required to enable file upload
 	ownerId?: string;
 };
@@ -28,15 +22,13 @@ export type RichTextEditorWithInternalStateWrapperProps = RichTextEditorWithInte
  * @param props
  * @constructor
  */
-const RichTextEditorWithInternalStateWrapper: FunctionComponent<
-	RichTextEditorWithInternalStateWrapperProps
-> = (props) => {
+const RichTextEditorWrapper: FunctionComponent<RichTextEditorWrapperProps> = (props) => {
 	const { controls, fileType, ownerId, value, onChange, ...rest } = props;
 
 	if ((controls || []).includes('media') && !fileType) {
 		console.error(
 			new CustomError(
-				'Trying to initialize RichTextEditorWithInternalStateWrapper component with media without fileType',
+				'Trying to initialize RichTextEditorWrapper component with media without fileType',
 				null,
 				props
 			)
@@ -82,7 +74,7 @@ const RichTextEditorWithInternalStateWrapper: FunctionComponent<
 		: undefined;
 
 	return (
-		<RichTextEditorWithInternalState
+		<RichTextEditor
 			{...rest}
 			controls={controls || RICH_TEXT_EDITOR_OPTIONS_DEFAULT}
 			// biome-ignore lint/suspicious/noExplicitAny: todo
@@ -95,4 +87,4 @@ const RichTextEditorWithInternalStateWrapper: FunctionComponent<
 	);
 };
 
-export default RichTextEditorWithInternalStateWrapper;
+export default RichTextEditorWrapper;

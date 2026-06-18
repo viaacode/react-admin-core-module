@@ -25,5 +25,5 @@ export const RICH_TEXT_EDITOR_OPTIONS: RichTextEditorControl[] = [
 	'list-ol',
 	'separator',
 	'remove-styles',
-	'editHtml',
+	'edit-html',
 ];

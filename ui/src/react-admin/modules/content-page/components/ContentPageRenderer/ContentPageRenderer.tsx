@@ -13,7 +13,6 @@ import { stringifyUrl } from 'query-string';
 import React, { type FunctionComponent, type ReactNode, useEffect, useState } from 'react';
 import type { BlockImageProps } from '~content-blocks/BlockImage/BlockImage';
 import { AdminConfigManager } from '~core/config/config.class';
-import { convertRichTextEditorStatesToHtml } from '~modules/content-page/services/content-page.converters';
 import {
 	type BlockClickHandler,
 	BlockClickType,
@@ -61,12 +60,9 @@ export const ContentPageRenderer: FunctionComponent<ContentPageDetailProps> = (p
 	}, []);
 
 	const getContentBlocks = (contentPageInfo: ContentPageInfo) => {
-		// Convert editor states to html
-		let contentBlockBlockConfigs = convertRichTextEditorStatesToHtml(
-			contentPageInfo.content_blocks || []
-		);
+		let contentBlockBlockConfigs = contentPageInfo.content_blocks || [];
 
-		// images can have a setting to go full width
+		// images can have a setting to go full width,
 		// So we need to set the block prop: fullWidth to true if we find an image block with size setting: pageWidth
 		contentBlockBlockConfigs = contentBlockBlockConfigs.map((contentBlockConfig) => {
 			const width = (contentBlockConfig.components.state as BlockImageProps)?.width;
@@ -81,7 +77,7 @@ export const ContentPageRenderer: FunctionComponent<ContentPageDetailProps> = (p
 			return contentBlockConfig;
 		});
 
-		// Add page title as header block for faq items. Only for Avo
+		// Add page a title as a header block for faq items. Only for Avo
 		if (props.renderFakeTitle) {
 			contentBlockBlockConfigs = [
 				{

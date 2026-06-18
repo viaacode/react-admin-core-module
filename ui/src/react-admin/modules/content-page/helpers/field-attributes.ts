@@ -5,7 +5,7 @@ import type { ColorSelectProps } from '~modules/content-page/components/fields/C
 import type { ContentPickerProps } from '~shared/components/ContentPicker/ContentPicker';
 import type { FileUploadProps } from '~shared/components/FileUpload/FileUpload';
 import type { MaintainerSelectProps } from '~shared/components/MaintainerSelect/MaintainerSelect';
-import type { RichTextEditorWithInternalStateWrapperProps } from '~shared/components/RichTextEditorWithInternalStateWrapper/RichTextEditorWithInternalStateWrapper';
+import type { RichTextEditorWrapperProps } from '~shared/components/RichTextEditorWrapper/RichTextEditorWrapper';
 import type { UploadOrSelectVideoStillProps } from '~shared/components/UploadOrSelectVideoStill/UploadOrSelectVideoStill';
 import type { UserGroupSelectProps } from '~shared/components/UserGroupSelect/UserGroupSelect';
 import type { ContentBlockField } from '../types/content-block.types';
@@ -26,7 +26,7 @@ interface DatePickerProps {
 	style?: CSSProperties;
 }
 
-type RichTextEditorProps = Partial<RichTextEditorWithInternalStateWrapperProps>;
+type RichTextEditorProps = Partial<RichTextEditorWrapperProps>;
 
 interface MultiRangeProps {
 	onChange: (values: number[]) => void;
@@ -111,7 +111,7 @@ export const generateFieldAttributes = (
 				onChange: (newValue: string) => {
 					onChange(newValue, key);
 				},
-			} as Partial<RichTextEditorWithInternalStateWrapperProps>;
+			} as Partial<RichTextEditorWrapperProps>;
 		}
 
 		case ContentBlockEditor.FileUpload: {

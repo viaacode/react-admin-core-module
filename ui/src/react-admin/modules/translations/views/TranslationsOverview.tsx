@@ -1,5 +1,4 @@
 /** biome-ignore-all lint/nursery/noNestedComponentDefinitions: Cell isn't a component but a property with capital letter */
-import type { RichEditorState } from '@meemoo/react-components';
 import { Button, PaginationBar, RichTextEditor, Table, TextInput } from '@meemoo/react-components';
 import { Spacer } from '@viaa/avo2-components';
 
@@ -61,8 +60,7 @@ export const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> 
 	const [activeTranslationEntry, setActiveTranslationEntry] =
 		useState<MultiLanguageTranslationEntry | null>(null);
 	const [activeTranslationLanguage, setActiveTranslationLanguage] = useState<Locale>(Locale.Nl);
-	const [activeTranslationEditorState, setActiveTranslationEditorState] =
-		useState<RichEditorState | null>(null);
+	const [activeTranslationHtmlValue, setActiveTranslationHtmlValue] = useState<string | null>(null);
 	const [activeTranslationTextValue, setActiveTranslationTextValue] = useState<string | null>(null);
 
 	const [search, setSearch] = useState<string>('');
@@ -128,7 +126,7 @@ export const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> 
 			let value =
 				activeTranslationEntry.value_type === ValueType.TEXT
 					? activeTranslationTextValue || ''
-					: activeTranslationEditorState?.toHTML() || '';
+					: activeTranslationHtmlValue || '';
 
 			// Simplify value if only wrapped with <p></p> tag and otherwise no html
 			if (
@@ -155,7 +153,7 @@ export const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> 
 
 			setActiveTranslationEntry(null);
 			setActiveTranslationTextValue(null);
-			setActiveTranslationEditorState(null);
+			setActiveTranslationHtmlValue(null);
 
 			showToast({
 				title: tText('modules/translations/views/translations-overview___success'),
@@ -293,7 +291,7 @@ export const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> 
 								<Html
 									content={value}
 									sanitizePreset={SanitizePreset.link}
-									className="c-content"
+									className="c-rich-text-editor__content"
 								></Html>
 							)}
 							{translationEntry.value_type === ValueType.TEXT && <span>{value}</span>}
@@ -369,9 +367,8 @@ export const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> 
 				</CopyToClipboard>
 				{activeTranslationEntry.value_type === ValueType.HTML && (
 					<RichTextEditor
-						onChange={setActiveTranslationEditorState}
-						state={activeTranslationEditorState || undefined}
-						initialHtml={activeTranslationEntry.values[activeTranslationLanguage]}
+						value={activeTranslationTextValue || undefined}
+						onChange={setActiveTranslationTextValue}
 						controls={RICH_TEXT_EDITOR_OPTIONS}
 					></RichTextEditor>
 				)}
@@ -417,7 +414,6 @@ export const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> 
 				onClose: () => {
 					setActiveTranslationEntry(null);
 					setActiveTranslationTextValue(null);
-					setActiveTranslationEditorState(null);
 				},
 			})}
 		</div>

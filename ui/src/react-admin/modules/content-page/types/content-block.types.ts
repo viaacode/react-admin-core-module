@@ -1,4 +1,3 @@
-import type { RichEditorState } from '@meemoo/react-components';
 import type {
 	ButtonAction,
 	ButtonType,
@@ -306,9 +305,6 @@ export interface ButtonsBlockComponentState {
 
 export interface RichTextBlockComponentState {
 	content: string;
-	// Each rich text editor state prop has to and with 'RichEditorStateKey'
-	// So this can be removed before saving the page to the database in ContentPageService.removeRichEditorStateRecursively
-	contentRichEditorState: RichEditorState | undefined;
 	buttons?: ButtonsBlockComponentState[];
 }
 

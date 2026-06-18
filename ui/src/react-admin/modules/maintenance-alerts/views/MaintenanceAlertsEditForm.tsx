@@ -3,7 +3,7 @@ import {
 	FormControl,
 	MultiSelect,
 	ReactSelect,
-	RichTextEditorWithInternalState,
+	RichTextEditor,
 	TextInput,
 } from '@meemoo/react-components';
 import { format } from 'date-fns';
@@ -252,7 +252,7 @@ const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProp
 				errors={[errors.message]}
 				key={currentMaintenanceAlert?.id}
 			>
-				<RichTextEditorWithInternalState
+				<RichTextEditor
 					value={currentMaintenanceAlert?.message}
 					controls={RICH_TEXT_EDITOR_OPTIONS}
 					key={maintenanceAlert?.id}
@@ -263,7 +263,7 @@ const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProp
 						});
 					}}
 					onBlur={isFormValid}
-				></RichTextEditorWithInternalState>
+				></RichTextEditor>
 			</FormControl>
 		);
 	}, [currentMaintenanceAlert, errors.message, maintenanceAlert?.id, isFormValid]);

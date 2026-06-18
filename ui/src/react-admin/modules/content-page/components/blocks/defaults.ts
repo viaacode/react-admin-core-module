@@ -9,7 +9,7 @@ import {
 } from '~modules/content-page/const/get-color-options';
 
 import type { FileUploadProps } from '~shared/components/FileUpload/FileUpload';
-import type { RichTextEditorWithInternalStateWrapperProps } from '~shared/components/RichTextEditorWithInternalStateWrapper/RichTextEditorWithInternalStateWrapper';
+import type { RichTextEditorWrapperProps } from '~shared/components/RichTextEditorWrapper/RichTextEditorWrapper';
 import type { UserGroupSelectProps } from '~shared/components/UserGroupSelect/UserGroupSelect';
 import { RICH_TEXT_EDITOR_OPTIONS_FULL_WITHOUT_ALIGN } from '~shared/consts/rich-text-editor.consts';
 import { isAvo } from '~shared/helpers/is-avo';
@@ -163,7 +163,7 @@ export const TEXT_FIELD = (
 	editorProps: {
 		controls: [...RICH_TEXT_EDITOR_OPTIONS_FULL_WITHOUT_ALIGN, 'media'],
 		fileType: 'CONTENT_BLOCK_IMAGE',
-	} as Partial<RichTextEditorWithInternalStateWrapperProps>,
+	} as Partial<RichTextEditorWrapperProps>,
 	...propOverride,
 });
 

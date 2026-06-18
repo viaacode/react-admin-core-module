@@ -19,7 +19,7 @@ export const BlockIntro: FunctionComponent<BlockIntroProps> = ({
 	align = 'left',
 	headingType = 'h1',
 }) => (
-	<div className={clsx(className, 'c-content', `u-text-${align}`)}>
+	<div className={clsx(className, 'c-rich-text-editor__content', `u-text-${align}`)}>
 		{title && (
 			<BlockHeading className="o-container-vertical-title__title" type={headingType}>
 				{title}
