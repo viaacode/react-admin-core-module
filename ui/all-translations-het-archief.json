@@ -21476,6 +21476,24 @@
   {
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
+    "location": "modules/account/views/account-my-application-list",
+    "key": "volledig-bestand",
+    "language": "nl",
+    "value": "Volledig bestand",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/views/account-my-application-list",
+    "key": "volledig-bestand",
+    "language": "en",
+    "value": "Complete file",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
     "location": "pages/account/map-delen/folder-id/index",
     "key": "gelukt",
     "language": "nl",
@@ -22587,24 +22605,6 @@
     "key": "materiaal-selectie",
     "language": "en",
     "value": "Material selection",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/views/account-my-application-list",
-    "key": "volledig-bestand",
-    "language": "nl",
-    "value": "Volledig bestand",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/views/account-my-application-list",
-    "key": "volledig-bestand",
-    "language": "en",
-    "value": "Complete file",
     "value_type": "TEXT"
   },
   {

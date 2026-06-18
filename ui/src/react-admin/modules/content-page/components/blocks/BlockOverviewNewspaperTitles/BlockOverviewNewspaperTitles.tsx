@@ -74,7 +74,9 @@ export const BlockOverviewNewspaperTitles: FC<BlockOverviewNewspaperTitlesProps>
 				}
 				onChange={(value: ChangeEvent<HTMLInputElement>) => setSearchInput(value.target.value)}
 				ariaLabel={tText(
-					'modules/content-page/components/blocks/block-overview-newspaper-titles/block-overview-newspaper-titles___zoek-kranten-op-titel-input-aria-label'
+					'modules/content-page/components/blocks/block-overview-newspaper-titles/block-overview-newspaper-titles___zoek-kranten-op-titel-input-aria-label',
+					{},
+					[HET_ARCHIEF]
 				)}
 			/>
 			<ul className="c-newspaper-titles__list">
