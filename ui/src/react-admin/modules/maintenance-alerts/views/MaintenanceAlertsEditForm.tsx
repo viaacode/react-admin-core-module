@@ -53,7 +53,15 @@ const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProp
 	const { data: allLanguages } = useGetAllLanguages();
 
 	const [currentMaintenanceAlert, setCurrentMaintenanceAlert] =
-		useState<Partial<MaintenanceAlert> | null>(maintenanceAlert);
+		useState<Partial<MaintenanceAlert> | null>({
+			...maintenanceAlert,
+			fromDate: maintenanceAlert?.fromDate
+				? parseAsIsoWithoutTimezone(maintenanceAlert.fromDate).toISOString()
+				: undefined,
+			untilDate: maintenanceAlert?.untilDate
+				? parseAsIsoWithoutTimezone(maintenanceAlert.untilDate).toISOString()
+				: undefined,
+		});
 	const [errors, setErrors] = useState<Partial<Record<keyof MaintenanceAlert, string>>>({});
 
 	const languageOptions = (allLanguages || []).map(
@@ -83,6 +91,82 @@ const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProp
 		onClose();
 		updateFormState();
 	};
+
+	const handleNewFromDate = ((newFromDate: Date | null) => {
+		if (newFromDate) {
+			const oldFromDate: Date | null = currentMaintenanceAlert?.fromDate
+				? parseAsIsoWithoutTimezone(currentMaintenanceAlert.fromDate)
+				: null;
+			setCurrentMaintenanceAlert({
+				...currentMaintenanceAlert,
+				fromDate: new Date(
+					newFromDate.getFullYear(),
+					newFromDate.getMonth(),
+					newFromDate.getDate(),
+					oldFromDate?.getHours() || 0,
+					oldFromDate?.getMinutes() || 0
+				).toISOString(),
+			});
+		}
+		// biome-ignore lint/suspicious/noExplicitAny: TODO fix
+	}) as any;
+
+	const handleNewFromTime = ((newFromTime: Date | null) => {
+		if (newFromTime) {
+			const oldFromDate: Date = currentMaintenanceAlert?.fromDate
+				? parseAsIsoWithoutTimezone(currentMaintenanceAlert.fromDate)
+				: new Date();
+			setCurrentMaintenanceAlert({
+				...currentMaintenanceAlert,
+				fromDate: new Date(
+					oldFromDate?.getFullYear(),
+					oldFromDate?.getMonth(),
+					oldFromDate?.getDate(),
+					newFromTime.getHours(),
+					newFromTime.getMinutes()
+				).toISOString(),
+			});
+		}
+		// biome-ignore lint/suspicious/noExplicitAny: TODO fix
+	}) as any;
+
+	const handleNewUntilDate = ((newUntilDate: Date | null) => {
+		if (newUntilDate) {
+			const oldUntilDate: Date | null = currentMaintenanceAlert?.untilDate
+				? parseAsIsoWithoutTimezone(currentMaintenanceAlert.untilDate)
+				: null;
+			setCurrentMaintenanceAlert({
+				...currentMaintenanceAlert,
+				untilDate: new Date(
+					newUntilDate.getFullYear(),
+					newUntilDate.getMonth(),
+					newUntilDate.getDate(),
+					oldUntilDate?.getHours() || 23,
+					oldUntilDate?.getMinutes() || 59
+				).toISOString(),
+			});
+		}
+		// biome-ignore lint/suspicious/noExplicitAny: TODO fix
+	}) as any;
+
+	const handleNewUntilTime = ((newUntilTime: Date | null) => {
+		if (newUntilTime) {
+			const oldUntilDate: Date = currentMaintenanceAlert?.untilDate
+				? parseAsIsoWithoutTimezone(currentMaintenanceAlert.untilDate)
+				: new Date();
+			setCurrentMaintenanceAlert({
+				...currentMaintenanceAlert,
+				untilDate: new Date(
+					oldUntilDate?.getFullYear(),
+					oldUntilDate?.getMonth(),
+					oldUntilDate?.getDate(),
+					newUntilTime.getHours(),
+					newUntilTime.getMinutes()
+				).toISOString(),
+			});
+		}
+		// biome-ignore lint/suspicious/noExplicitAny: TODO fix
+	}) as any;
 
 	const isFormValid = useCallback((): boolean => {
 		try {
@@ -349,31 +433,11 @@ const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProp
 					id="new-alert-from-date"
 					name="fromDate"
 					onBlur={isFormValid}
-					onChange={
-						((newFromDates: Date[] | null) => {
-							const newFromDate = newFromDates?.[0] || null;
-							if (newFromDate) {
-								const oldFromDate: Date | null = currentMaintenanceAlert?.fromDate
-									? parseAsIsoWithoutTimezone(currentMaintenanceAlert.fromDate)
-									: null;
-								setCurrentMaintenanceAlert({
-									...currentMaintenanceAlert,
-									fromDate: new Date(
-										newFromDate.getFullYear(),
-										newFromDate.getMonth(),
-										newFromDate.getDate(),
-										oldFromDate?.getHours() || 0,
-										oldFromDate?.getMinutes() || 0
-									).toISOString(),
-								});
-							}
-							// biome-ignore lint/suspicious/noExplicitAny: TODO fix
-						}) as any
-					}
+					onChange={handleNewFromDate}
 					selected={
 						currentMaintenanceAlert?.fromDate
-							? parseAsIsoWithoutTimezone(currentMaintenanceAlert.fromDate)
-							: new Date()
+							? new Date(currentMaintenanceAlert.fromDate)
+							: null
 					}
 				/>
 
@@ -388,26 +452,7 @@ const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProp
 					)}
 					name="fromDate"
 					onBlur={isFormValid}
-					onChange={
-						((newFromTime: Date | null) => {
-							if (newFromTime) {
-								const oldFromDate: Date = currentMaintenanceAlert?.fromDate
-									? parseAsIsoWithoutTimezone(currentMaintenanceAlert.fromDate)
-									: new Date();
-								setCurrentMaintenanceAlert({
-									...currentMaintenanceAlert,
-									fromDate: new Date(
-										oldFromDate?.getFullYear(),
-										oldFromDate?.getMonth(),
-										oldFromDate?.getDate(),
-										newFromTime.getHours(),
-										newFromTime.getMinutes()
-									).toISOString(),
-								});
-							}
-							// biome-ignore lint/suspicious/noExplicitAny: TODO fix
-						}) as any
-					}
+					onChange={handleNewFromTime}
 					value={
 						currentMaintenanceAlert?.fromDate
 							? format(parseAsIsoWithoutTimezone(currentMaintenanceAlert.fromDate), 'HH:mm', {
@@ -418,7 +463,7 @@ const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProp
 				/>
 			</FormControl>
 		);
-	}, [isFormValid, currentMaintenanceAlert, errors.fromDate]);
+	}, [isFormValid, currentMaintenanceAlert, errors.fromDate, handleNewFromDate, handleNewFromTime]);
 
 	const renderedUntil = useMemo(() => {
 		return (
@@ -435,31 +480,11 @@ const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProp
 					id="new-alert-until-date"
 					name="untilDate"
 					onBlur={isFormValid}
-					onChange={
-						((newUntilDates: Date[] | null) => {
-							const newUntilDate = newUntilDates?.[0] || null;
-							if (newUntilDate) {
-								const oldUntilDate: Date | null = currentMaintenanceAlert?.untilDate
-									? parseAsIsoWithoutTimezone(currentMaintenanceAlert.untilDate)
-									: null;
-								setCurrentMaintenanceAlert({
-									...currentMaintenanceAlert,
-									untilDate: new Date(
-										newUntilDate.getFullYear(),
-										newUntilDate.getMonth(),
-										newUntilDate.getDate(),
-										oldUntilDate?.getHours() || 23,
-										oldUntilDate?.getMinutes() || 59
-									).toISOString(),
-								});
-							}
-							// biome-ignore lint/suspicious/noExplicitAny: TODO fix
-						}) as any
-					}
+					onChange={handleNewUntilDate}
 					selected={
 						currentMaintenanceAlert?.untilDate
-							? parseAsIsoWithoutTimezone(currentMaintenanceAlert.untilDate)
-							: new Date()
+							? new Date(currentMaintenanceAlert.untilDate)
+							: null
 					}
 				/>
 
@@ -474,26 +499,7 @@ const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProp
 					)}
 					name="untilDate"
 					onBlur={isFormValid}
-					onChange={
-						((newUntilTime: Date | null) => {
-							if (newUntilTime) {
-								const oldUntilDate: Date = currentMaintenanceAlert?.untilDate
-									? parseAsIsoWithoutTimezone(currentMaintenanceAlert.untilDate)
-									: new Date();
-								setCurrentMaintenanceAlert({
-									...currentMaintenanceAlert,
-									untilDate: new Date(
-										oldUntilDate?.getFullYear(),
-										oldUntilDate?.getMonth(),
-										oldUntilDate?.getDate(),
-										newUntilTime.getHours(),
-										newUntilTime.getMinutes()
-									).toISOString(),
-								});
-							}
-							// biome-ignore lint/suspicious/noExplicitAny: TODO fix
-						}) as any
-					}
+					onChange={handleNewUntilTime}
 					value={
 						currentMaintenanceAlert?.untilDate
 							? format(parseAsIsoWithoutTimezone(currentMaintenanceAlert.untilDate), 'HH:mm', {
@@ -504,7 +510,13 @@ const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProp
 				/>
 			</FormControl>
 		);
-	}, [isFormValid, currentMaintenanceAlert, errors.untilDate]);
+	}, [
+		isFormValid,
+		currentMaintenanceAlert,
+		errors.untilDate,
+		handleNewUntilDate,
+		handleNewUntilTime,
+	]);
 
 	const renderedLanguage = useMemo(() => {
 		if (!isMultiLanguageEnabled()) {
