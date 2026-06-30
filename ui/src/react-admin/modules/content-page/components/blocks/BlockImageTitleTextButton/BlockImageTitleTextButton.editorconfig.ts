@@ -50,13 +50,12 @@ export const IMAGE_TITLE_TEXT_BUTTON_BLOCK_CONFIG = (position = 0): ContentBlock
 				),
 				editorType: ContentBlockEditor.ContentPicker,
 			},
-			imageAlt: TEXT_FIELD(undefined, {
-				label: tText(
-					'admin/content-block/helpers/generators/image-title-text-button___alt-tekst-voor-de-afbeelding'
-				),
-				editorType: ContentBlockEditor.TextInput,
-				validator: undefined,
-			}),
+			imageAlt: TEXT_FIELD({
+                label: tText(
+                    'admin/content-block/helpers/generators/image-title-text-button___alt-tekst-voor-de-afbeelding'
+                ),
+                validator: undefined,
+            }),
 			imagePosition: {
 				label: tText(
 					'admin/content-block/helpers/generators/image-title-text-button___positie-van-de-afbeelding'
@@ -66,11 +65,10 @@ export const IMAGE_TITLE_TEXT_BUTTON_BLOCK_CONFIG = (position = 0): ContentBlock
 					options: GET_ALIGN_OPTIONS().filter((option) => ['left', 'right'].includes(option.value)),
 				},
 			},
-			headingTitle: TEXT_FIELD(undefined, {
-				label: tText('admin/content-block/helpers/generators/heading___titel'),
-				editorType: ContentBlockEditor.TextInput,
-				validator: undefined,
-			}),
+			headingTitle: TEXT_FIELD({
+                label: tText('admin/content-block/helpers/generators/heading___titel'),
+                validator: undefined,
+            }),
 			headingType: {
 				label: tText('admin/content-block/helpers/generators/heading___stijl'),
 				editorType: ContentBlockEditor.Select,
@@ -86,18 +84,16 @@ export const IMAGE_TITLE_TEXT_BUTTON_BLOCK_CONFIG = (position = 0): ContentBlock
 					options: AdminConfigManager.getConfig().components.buttonTypes(),
 				},
 			},
-			buttonLabel: {
+			buttonLabel: TEXT_FIELD({
 				label: tText('admin/content-block/helpers/generators/ctas___knop-tekst'),
-				editorType: ContentBlockEditor.TextInput,
-				validator: undefined,
-			},
-			buttonAltTitle: TEXT_FIELD(undefined, {
-				label: tText(
-					'admin/content-block/helpers/generators/media-player-title-text-button___alt-title-text'
-				),
-				editorType: ContentBlockEditor.TextInput,
 				validator: undefined,
 			}),
+			buttonAltTitle: TEXT_FIELD({
+                label: tText(
+                    'admin/content-block/helpers/generators/media-player-title-text-button___alt-title-text'
+                ),
+                validator: undefined,
+            }),
 			buttonIcon: {
 				label: tText('admin/content-block/helpers/generators/ctas___knop-icoon'),
 				editorType: ContentBlockEditor.IconPicker,

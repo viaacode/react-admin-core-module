@@ -28,17 +28,12 @@ export const IFRAME_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 	components: {
 		state: INITIAL_IFRAME_COMPONENTS_STATE(),
 		fields: {
-			title: TEXT_FIELD(
-				tText('admin/content-block/helpers/generators/iframe___titel-is-verplicht'),
-				{
-					label: tText('admin/content-block/helpers/generators/iframe___titel'),
-					editorType: ContentBlockEditor.TextInput,
-				}
-			),
-			src: TEXT_FIELD(tText('admin/content-block/helpers/generators/iframe___url-is-verplicht'), {
+			title: TEXT_FIELD({
+				label: tText('admin/content-block/helpers/generators/iframe___titel'),
+			}, tText('admin/content-block/helpers/generators/iframe___titel-is-verplicht')),
+			src: TEXT_FIELD({
 				label: tText('admin/content-block/helpers/generators/iframe___url'),
-				editorType: ContentBlockEditor.TextInput,
-			}),
+			}, tText('admin/content-block/helpers/generators/iframe___url-is-verplicht')),
 		},
 	},
 	block: {

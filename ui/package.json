@@ -202,5 +202,8 @@
   "dependencies": {
     "jsdom": "27.4.0",
     "memoizee": "^0.4.17"
+  },
+  "allowScripts": {
+    "@parcel/watcher@2.5.1": true
   }
 }

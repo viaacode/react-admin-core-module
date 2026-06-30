@@ -32,11 +32,10 @@ export const EVENTBRITE_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 	components: {
 		state: INITIAL_EVENTBRITE_COMPONENTS_STATE(),
 		fields: {
-			eventId: TEXT_FIELD(undefined, {
-				label: tText('admin/content-block/helpers/generators/eventbrite___event-id'),
-				editorType: ContentBlockEditor.TextInput,
-				validator: undefined,
-			}),
+			eventId: TEXT_FIELD({
+                label: tText('admin/content-block/helpers/generators/eventbrite___event-id'),
+                validator: undefined,
+            }),
 			type: {
 				label: tText('admin/content-block/helpers/generators/buttons___type'),
 				editorType: ContentBlockEditor.Select,
@@ -44,13 +43,9 @@ export const EVENTBRITE_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 					options: AdminConfigManager.getConfig().components.buttonTypes(),
 				},
 			},
-			label: TEXT_FIELD(
-				tText('admin/content-block/helpers/generators/buttons___knoptekst-is-verplicht'),
-				{
-					label: tText('admin/content-block/helpers/generators/buttons___tekst'),
-					editorType: ContentBlockEditor.TextInput,
-				}
-			),
+			label: TEXT_FIELD({
+                label: tText('admin/content-block/helpers/generators/buttons___tekst'),
+            }, tText('admin/content-block/helpers/generators/buttons___knoptekst-is-verplicht')),
 			icon: {
 				label: tText('admin/content-block/helpers/generators/buttons___icoon'),
 				editorType: ContentBlockEditor.IconPicker,

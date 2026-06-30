@@ -435,9 +435,7 @@ const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProp
 					onBlur={isFormValid}
 					onChange={handleNewFromDate}
 					selected={
-						currentMaintenanceAlert?.fromDate
-							? new Date(currentMaintenanceAlert.fromDate)
-							: null
+						currentMaintenanceAlert?.fromDate ? new Date(currentMaintenanceAlert.fromDate) : null
 					}
 				/>
 
@@ -482,9 +480,7 @@ const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProp
 					onBlur={isFormValid}
 					onChange={handleNewUntilDate}
 					selected={
-						currentMaintenanceAlert?.untilDate
-							? new Date(currentMaintenanceAlert.untilDate)
-							: null
+						currentMaintenanceAlert?.untilDate ? new Date(currentMaintenanceAlert.untilDate) : null
 					}
 				/>
 

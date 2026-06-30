@@ -29,13 +29,9 @@ export const INTRO_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 	components: {
 		state: INITIAL_INTRO_COMPONENTS_STATE(),
 		fields: {
-			title: TEXT_FIELD(
-				tText('admin/content-block/helpers/generators/intro___titel-is-verplicht'),
-				{
-					label: tText('admin/content-block/helpers/generators/intro___titel'),
-					editorType: ContentBlockEditor.TextInput,
-				}
-			),
+			title: TEXT_FIELD({
+				label: tText('admin/content-block/helpers/generators/intro___titel'),
+			}, tText('admin/content-block/helpers/generators/intro___titel-is-verplicht')),
 			headingType: {
 				label: tText('admin/content-block/helpers/generators/heading___stijl'),
 				editorType: ContentBlockEditor.Select,
@@ -43,17 +39,14 @@ export const INTRO_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 					options: GET_FULL_HEADING_TYPE_OPTIONS(),
 				},
 			},
-			content: TEXT_FIELD(
-				tText('admin/content-block/helpers/generators/intro___tekst-is-verplicht'),
-				{
-					label: tText('admin/content-block/helpers/generators/defaults___tekst'),
-					editorType: ContentBlockEditor.RICH_TEXT_EDITOR,
-					editorProps: {
-						controls: [...RICH_TEXT_EDITOR_OPTIONS_FULL_WITHOUT_ALIGN, 'media'],
-						fileType: 'CONTENT_BLOCK_IMAGE',
-					},
-				}
-			),
+			content: TEXT_FIELD({
+				label: tText('admin/content-block/helpers/generators/defaults___tekst'),
+				editorType: ContentBlockEditor.RICH_TEXT_EDITOR,
+				editorProps: {
+					controls: [...RICH_TEXT_EDITOR_OPTIONS_FULL_WITHOUT_ALIGN, 'media'],
+					fileType: 'CONTENT_BLOCK_IMAGE',
+				},
+			}, tText('admin/content-block/helpers/generators/intro___tekst-is-verplicht')),
 			align: ALIGN_FIELD(tText('admin/content-block/helpers/generators/intro___uitlijning')),
 		},
 	},

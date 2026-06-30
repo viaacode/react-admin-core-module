@@ -34,15 +34,13 @@ export const RICH_TEXT_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 		},
 		state: INITIAL_RICH_TEXT_COMPONENTS_STATE(),
 		fields: {
-			content: TEXT_FIELD(
-				tText('admin/content-block/helpers/generators/rich-text___tekst-is-verplicht'),
-				{
-					editorProps: {
-						controls: [...RICH_TEXT_EDITOR_OPTIONS_FULL, 'media'],
-						fileType: 'CONTENT_BLOCK_IMAGE',
-					},
-				}
-			),
+			content: TEXT_FIELD({
+				editorType: ContentBlockEditor.RICH_TEXT_EDITOR,
+				editorProps: {
+					controls: [...RICH_TEXT_EDITOR_OPTIONS_FULL, 'media'],
+					fileType: 'CONTENT_BLOCK_IMAGE',
+				},
+			}, tText('admin/content-block/helpers/generators/rich-text___tekst-is-verplicht')),
 		},
 	},
 	block: {

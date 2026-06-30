@@ -42,25 +42,24 @@ export const MEDIA_PLAYER_TITLE_TEXT_BUTTON_BLOCK_CONFIG = (position = 0): Conte
 	components: {
 		state: INITIAL_MEDIA_PLAYER_TITLE_TEXT_BUTTON_COMPONENTS_STATE(),
 		fields: {
-			mediaTitle: {
+			mediaTitle: TEXT_FIELD({
 				label: tText(
 					'admin/content-block/helpers/generators/media-player-title-text-button___video-of-audio-item-toegankelijkheidstitel'
 				),
-				editorType: ContentBlockEditor.TextInput,
-			},
-			mediaItem: ITEM_PICKER_FIELD(),
-			mediaSrc: TEXT_FIELD(undefined, {
-				label: tText(
-					'admin/content-block/helpers/generators/media-player-title-text-button___eigen-video-url-van-flowplayer-com-optioneel'
-				),
-				editorType: ContentBlockEditor.TextInput,
-				validator: validateFlowplayerVideoUrl,
-				editorProps: {
-					placeholder: tText(
-						'admin/content-block/helpers/generators/media-player-title-text-button___bv-https-cdn-flowplayer-com-hls-playlist-m-3-u-8'
-					),
-				} as TextInputProps,
+				validator: undefined
 			}),
+			mediaItem: ITEM_PICKER_FIELD(),
+			mediaSrc: TEXT_FIELD({
+                label: tText(
+                    'admin/content-block/helpers/generators/media-player-title-text-button___eigen-video-url-van-flowplayer-com-optioneel'
+                ),
+                validator: validateFlowplayerVideoUrl,
+                editorProps: {
+                    placeholder: tText(
+                        'admin/content-block/helpers/generators/media-player-title-text-button___bv-https-cdn-flowplayer-com-hls-playlist-m-3-u-8'
+                    ),
+                } as TextInputProps,
+            }, undefined),
 			mediaPoster: {
 				label: tText(
 					'admin/content-block/helpers/generators/media-player-title-text-button___eigen-poster-uploaden-optioneel'
@@ -83,13 +82,9 @@ export const MEDIA_PLAYER_TITLE_TEXT_BUTTON_BLOCK_CONFIG = (position = 0): Conte
 					),
 				} as CheckboxProps,
 			},
-			headingTitle: TEXT_FIELD(
-				tText('admin/content-block/helpers/generators/heading___titel-is-verplicht'),
-				{
-					label: tText('admin/content-block/helpers/generators/heading___titel'),
-					editorType: ContentBlockEditor.TextInput,
-				}
-			),
+			headingTitle: TEXT_FIELD({
+                label: tText('admin/content-block/helpers/generators/heading___titel'),
+            }, tText('admin/content-block/helpers/generators/heading___titel-is-verplicht')),
 			headingType: {
 				label: tText('admin/content-block/helpers/generators/heading___stijl'),
 				editorType: ContentBlockEditor.Select,
@@ -105,17 +100,16 @@ export const MEDIA_PLAYER_TITLE_TEXT_BUTTON_BLOCK_CONFIG = (position = 0): Conte
 					options: AdminConfigManager.getConfig().components.buttonTypes(),
 				},
 			},
-			buttonLabel: {
+			buttonLabel: TEXT_FIELD({
 				label: tText('admin/content-block/helpers/generators/ctas___knop-tekst'),
-				editorType: ContentBlockEditor.TextInput,
-			},
-			buttonAltTitle: TEXT_FIELD(undefined, {
-				label: tText(
-					'admin/content-block/helpers/generators/media-player-title-text-button___alt-title-text'
-				),
-				editorType: ContentBlockEditor.TextInput,
-				validator: undefined,
+				validator: undefined
 			}),
+			buttonAltTitle: TEXT_FIELD({
+                label: tText(
+                    'admin/content-block/helpers/generators/media-player-title-text-button___alt-title-text'
+                ),
+                validator: undefined,
+            }, undefined),
 			buttonIcon: {
 				label: tText('admin/content-block/helpers/generators/ctas___knop-icoon'),
 				editorType: ContentBlockEditor.IconPicker,

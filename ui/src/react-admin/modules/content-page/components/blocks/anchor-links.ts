@@ -35,13 +35,9 @@ export const ANCHOR_LINKS_BLOCK_CONFIG = (position = 0): ContentBlockConfig => (
 		name: tText('admin/content-block/helpers/generators/anchor-links___link'),
 		state: INITIAL_ANCHOR_LINKS_COMPONENTS_STATE(),
 		fields: {
-			label: TEXT_FIELD(
-				tText('admin/content-block/helpers/generators/buttons___knoptekst-is-verplicht'),
-				{
-					label: tText('admin/content-block/helpers/generators/buttons___tekst'),
-					editorType: ContentBlockEditor.TextInput,
-				}
-			),
+			label: TEXT_FIELD({
+				label: tText('admin/content-block/helpers/generators/buttons___tekst'),
+			}, tText('admin/content-block/helpers/generators/buttons___knoptekst-is-verplicht')),
 			type: {
 				label: tText('admin/content-block/helpers/generators/anchor-links___kleur'),
 				editorType: ContentBlockEditor.Select,

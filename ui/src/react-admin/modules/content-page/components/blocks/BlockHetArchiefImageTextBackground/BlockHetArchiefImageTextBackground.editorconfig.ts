@@ -67,18 +67,12 @@ export const HET_ARCHIEF_IMAGE_TEXT_BACKGROUND_BLOCK_CONFIG = (
 	components: {
 		state: INITIAL_HET_ARCHIEF_IMAGE_TEXT_BACKGROUND_COMPONENTS_STATE(),
 		fields: {
-			heading: TEXT_FIELD(
-				tText(
-					'admin/content-block/helpers/image-text-background/image-text-background___titel-is-verplicht'
-				),
-				{
-					label: tText(
-						'admin/content-block/helpers/image-text-background/image-text-background___titel-tekst'
-					),
-					editorType: ContentBlockEditor.TextInput,
-					validator: undefined,
-				}
-			),
+			heading: TEXT_FIELD({
+                label: tText(
+                    'admin/content-block/helpers/image-text-background/image-text-background___titel-tekst'
+                ),
+                validator: undefined,
+            }),
 			headingType: {
 				label: tText(
 					'admin/content-block/helpers/image-text-background/image-text-background___titel-stijl'
@@ -97,10 +91,9 @@ export const HET_ARCHIEF_IMAGE_TEXT_BACKGROUND_BLOCK_CONFIG = (
 					options: GET_HEADING_SIZE_OPTIONS(),
 				},
 			},
-			content: TEXT_FIELD(undefined, {
-				editorType: ContentBlockEditor.TextInput,
-				validator: undefined,
-			}),
+			content: TEXT_FIELD({
+                validator: undefined,
+            }),
 			textAlign: {
 				label: tText('admin/content-block/helpers/generators/image-grid___text-alignatie'),
 				editorType: ContentBlockEditor.Select,
@@ -157,7 +150,6 @@ export const HET_ARCHIEF_IMAGE_TEXT_BACKGROUND_BLOCK_CONFIG = (
 				label: tText(
 					'modules/content-page/components/blocks/block-het-archief-image-text-background/block-het-archief-image-text-background___afbeelding-alt-tekst'
 				),
-				editorType: ContentBlockEditor.TextInput,
 				editorProps: {
 					validator: undefined,
 				},
@@ -171,19 +163,18 @@ export const HET_ARCHIEF_IMAGE_TEXT_BACKGROUND_BLOCK_CONFIG = (
 					options: AdminConfigManager.getConfig().components.buttonTypes(),
 				},
 			},
-			buttonLabel: {
+			buttonLabel: TEXT_FIELD({
 				label: tText(
 					'admin/content-block/helpers/image-text-background/image-text-background___knop-tekst'
 				),
-				editorType: ContentBlockEditor.TextInput,
-			},
-			buttonAltTitle: TEXT_FIELD(undefined, {
-				label: tText(
-					'admin/content-block/helpers/image-text-background/image-text-background___alt-title-text'
-				),
-				editorType: ContentBlockEditor.TextInput,
-				validator: undefined,
+				validator: undefined
 			}),
+			buttonAltTitle: TEXT_FIELD({
+                label: tText(
+                    'admin/content-block/helpers/image-text-background/image-text-background___alt-title-text'
+                ),
+                validator: undefined,
+            }),
 			buttonAction: {
 				label: tText(
 					'admin/content-block/helpers/image-text-background/image-text-background___knop-actie'

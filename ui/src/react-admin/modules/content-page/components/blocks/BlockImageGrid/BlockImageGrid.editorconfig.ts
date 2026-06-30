@@ -64,31 +64,26 @@ export const IMAGE_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 					} as FileUploadProps,
 				}
 			),
-			title: TEXT_FIELD(undefined, {
-				label: tText('admin/content-block/helpers/generators/image-grid___titel'),
-				editorType: ContentBlockEditor.TextInput,
-				validator: undefined,
-			}),
-			text: TEXT_FIELD(undefined, {
-				label: tText('admin/content-block/helpers/generators/image-grid___tekst'),
-				editorType: ContentBlockEditor.TextInput,
-				validator: undefined,
-			}),
-			buttonLabel: TEXT_FIELD(undefined, {
-				label: tText('admin/content-block/helpers/generators/image-grid___knop-tekst'),
-				editorType: ContentBlockEditor.TextInput,
-				validator: undefined,
-			}),
-			buttonAltTitle: TEXT_FIELD(undefined, {
-				label: tText('admin/content-block/helpers/generators/image-grid___alt-title-text'),
-				editorType: ContentBlockEditor.TextInput,
-				validator: undefined,
-			}),
-			buttonTitle: TEXT_FIELD(undefined, {
-				label: tText('admin/content-block/helpers/generators/image-grid___knop-tooltip'),
-				editorType: ContentBlockEditor.TextInput,
-				validator: undefined,
-			}),
+			title: TEXT_FIELD({
+                label: tText('admin/content-block/helpers/generators/image-grid___titel'),
+                validator: undefined,
+            }),
+			text: TEXT_FIELD({
+                label: tText('admin/content-block/helpers/generators/image-grid___tekst'),
+                validator: undefined,
+            }),
+			buttonLabel: TEXT_FIELD({
+                label: tText('admin/content-block/helpers/generators/image-grid___knop-tekst'),
+                validator: undefined,
+            }),
+			buttonAltTitle: TEXT_FIELD({
+                label: tText('admin/content-block/helpers/generators/image-grid___alt-title-text'),
+                validator: undefined,
+            }),
+			buttonTitle: TEXT_FIELD({
+                label: tText('admin/content-block/helpers/generators/image-grid___knop-tooltip'),
+                validator: undefined,
+            }),
 			buttonType: {
 				label: tText('admin/content-block/helpers/generators/image-grid___knop-type-kleur'),
 				editorType: ContentBlockEditor.Select,

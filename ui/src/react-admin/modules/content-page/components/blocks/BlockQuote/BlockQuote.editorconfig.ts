@@ -30,23 +30,17 @@ export const QUOTE_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 	components: {
 		state: INITIAL_QUOTE_COMPONENTS_STATE(),
 		fields: {
-			quote: TEXT_FIELD(
-				tText('admin/content-block/helpers/generators/quote___quote-is-verplicht'),
-				{
-					label: tText('admin/content-block/helpers/generators/quote___quote'),
-					editorType: ContentBlockEditor.TextInput,
-				}
-			),
-			authorName: TEXT_FIELD(undefined, {
-				label: tText('admin/content-block/helpers/generators/quote___auteur'),
-				editorType: ContentBlockEditor.TextInput,
-				validator: undefined,
-			}),
-			authorInitials: TEXT_FIELD(undefined, {
-				label: tText('admin/content-block/helpers/generators/quote___initialen'),
-				editorType: ContentBlockEditor.TextInput,
-				validator: undefined,
-			}),
+			quote: TEXT_FIELD({
+                label: tText('admin/content-block/helpers/generators/quote___quote'),
+            }, tText('admin/content-block/helpers/generators/quote___quote-is-verplicht')),
+			authorName: TEXT_FIELD({
+                label: tText('admin/content-block/helpers/generators/quote___auteur'),
+                validator: undefined,
+            }, undefined),
+			authorInitials: TEXT_FIELD({
+                label: tText('admin/content-block/helpers/generators/quote___initialen'),
+                validator: undefined,
+            }, undefined),
 			authorImage: FILE_FIELD(
 				tText('admin/content-block/helpers/generators/image___een-afbeelding-is-verplicht'),
 				{

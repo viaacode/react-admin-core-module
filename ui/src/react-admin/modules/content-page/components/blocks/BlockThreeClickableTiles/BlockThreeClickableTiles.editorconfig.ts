@@ -44,15 +44,11 @@ export const THREE_CLICKABLE_TILES_BLOCK_CONFIG = (position = 0): ContentBlockCo
 					editorProps: { assetType: 'CONTENT_BLOCK_IMAGE' } as FileUploadProps,
 				}
 			),
-			title: TEXT_FIELD(
-				tText(
-					'admin/content-block/helpers/generators/three-clickable-tiles___subtitel-is-verplicht'
-				),
-				{
-					label: tText('admin/content-block/helpers/generators/three-clickable-tiles___subtitel'),
-					editorType: ContentBlockEditor.TextInput,
-				}
-			),
+			title: TEXT_FIELD({
+                label: tText('admin/content-block/helpers/generators/three-clickable-tiles___subtitel'),
+            }, tText(
+                'admin/content-block/helpers/generators/three-clickable-tiles___subtitel-is-verplicht'
+            )),
 			titleType: {
 				label: tText('admin/content-block/helpers/generators/heading___type'),
 				editorType: ContentBlockEditor.Select,

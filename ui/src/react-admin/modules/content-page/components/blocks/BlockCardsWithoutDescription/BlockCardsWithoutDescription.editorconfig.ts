@@ -47,17 +47,13 @@ export const CARDS_WITHOUT_DESCRIPTION_BLOCK_CONFIG = (position = 0): ContentBlo
 			'react-admin/modules/content-page/components/blocks/block-cards-without-description/block-cards-without-description___card'
 		),
 		fields: {
-			title: TEXT_FIELD(
-				tText(
-					'react-admin/modules/content-page/components/blocks/block-cards-without-description/block-cards-without-description___label-is-verplicht'
+			title: TEXT_FIELD({
+				label: tText(
+					'react-admin/modules/content-page/components/blocks/block-cards-without-description/block-cards-without-description___label'
 				),
-				{
-					label: tText(
-						'react-admin/modules/content-page/components/blocks/block-cards-without-description/block-cards-without-description___label'
-					),
-					editorType: ContentBlockEditor.TextInput,
-				}
-			),
+			}, tText(
+				'react-admin/modules/content-page/components/blocks/block-cards-without-description/block-cards-without-description___label-is-verplicht'
+			)),
 			image: {
 				label: tText(
 					'react-admin/modules/content-page/components/blocks/block-cards-without-description/block-cards-without-description___image'

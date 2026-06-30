@@ -50,11 +50,10 @@ export const LOGO_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 		name: tText('admin/content-block/helpers/generators/image-grid___item'),
 		state: INITIAL_LOGO_GRID_COMPONENTS_STATE(),
 		fields: {
-			textAbove: TEXT_FIELD(undefined, {
-				label: tText('admin/content-block/helpers/generators/logo-grid___tekst-boven-afbeelding'),
-				editorType: ContentBlockEditor.TextInput,
-				validator: undefined,
-			}),
+			textAbove: TEXT_FIELD({
+                label: tText('admin/content-block/helpers/generators/logo-grid___tekst-boven-afbeelding'),
+                validator: undefined,
+            }, undefined),
 			source: FILE_FIELD(
 				tText('admin/content-block/helpers/generators/image-grid___een-afbeelding-is-verplicht'),
 				{

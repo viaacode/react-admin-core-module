@@ -25,13 +25,9 @@ export const TAGS_WITH_LINK_BLOCK_CONFIG = (position = 0): ContentBlockConfig =>
 		state: INITIAL_TAGS_WITH_LINK_COMPONENTS_STATE(),
 		name: tText('admin/content-block/helpers/generators/tag-with-link___tag'),
 		fields: {
-			label: TEXT_FIELD(
-				tText('admin/content-block/helpers/generators/tag-with-link___label-is-verplicht'),
-				{
-					label: tText('admin/content-block/helpers/generators/tag-with-link___label'),
-					editorType: ContentBlockEditor.TextInput,
-				}
-			),
+			label: TEXT_FIELD({
+                label: tText('admin/content-block/helpers/generators/tag-with-link___label'),
+            }, tText('admin/content-block/helpers/generators/tag-with-link___label-is-verplicht')),
 			link: {
 				label: tText('admin/content-block/helpers/generators/tag-with-link___link'),
 				editorType: ContentBlockEditor.ContentPicker,

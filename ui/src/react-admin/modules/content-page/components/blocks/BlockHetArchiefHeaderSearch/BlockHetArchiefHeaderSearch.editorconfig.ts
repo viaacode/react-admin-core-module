@@ -34,21 +34,17 @@ export const HET_ARCHIEF_HEADER_SEARCH_BLOCK_CONFIG = (position = 0): ContentBlo
 	components: {
 		state: INITIAL_HET_ARCHIEF_HEADER_SEARCH_COMPONENTS_STATE(),
 		fields: {
-			title: TEXT_FIELD(
-				tText(
-					'react-admin/modules/content-page/components/blocks/block-het-archief-header-search/block-het-archief-header-search___is-verplicht',
-					{},
-					[HET_ARCHIEF]
-				),
-				{
-					label: tText(
-						'react-admin/modules/content-page/components/blocks/block-het-archief-header-search/block-het-archief-header-search___titel',
-						{},
-						[HET_ARCHIEF]
-					),
-					editorType: ContentBlockEditor.TextInput,
-				}
-			),
+			title: TEXT_FIELD({
+                label: tText(
+                    'react-admin/modules/content-page/components/blocks/block-het-archief-header-search/block-het-archief-header-search___titel',
+                    {},
+                    [HET_ARCHIEF]
+                ),
+            }, tText(
+                'react-admin/modules/content-page/components/blocks/block-het-archief-header-search/block-het-archief-header-search___is-verplicht',
+                {},
+                [HET_ARCHIEF]
+            )),
 			subtitles: {
 				label: tText(
 					'react-admin/modules/content-page/components/blocks/block-het-archief-header-search/block-het-archief-header-search___animatie-teksten',
@@ -56,14 +52,14 @@ export const HET_ARCHIEF_HEADER_SEARCH_BLOCK_CONFIG = (position = 0): ContentBlo
 					[HET_ARCHIEF]
 				),
 				fields: {
-					label: {
+					label: TEXT_FIELD({
 						label: tText(
 							'react-admin/modules/content-page/components/blocks/block-het-archief-header-search/block-het-archief-header-search___animatie-tekst',
 							{},
 							[HET_ARCHIEF]
 						),
-						editorType: ContentBlockEditor.TextInput,
-					},
+						validator: undefined
+					}),
 				},
 				type: 'fieldGroup',
 				repeat: {
@@ -80,29 +76,24 @@ export const HET_ARCHIEF_HEADER_SEARCH_BLOCK_CONFIG = (position = 0): ContentBlo
 					),
 				},
 			} as ContentBlockFieldGroup,
-			textBelowSearch: TEXT_FIELD(undefined, {
-				label: tText(
-					'react-admin/modules/content-page/components/blocks/block-het-archief-header-search/block-het-archief-header-search___tekst-onder-zoekveld',
-					{},
-					[HET_ARCHIEF]
-				),
-				editorType: ContentBlockEditor.TextInput,
-			}),
-			searchAriaLabel: TEXT_FIELD(
-				tText(
-					'modules/content-page/components/blocks/block-het-archief-header-search/block-het-archief-header-search___aria-label-verplicht',
-					{},
-					[HET_ARCHIEF]
-				),
-				{
-					label: tText(
-						'modules/content-page/components/blocks/block-het-archief-header-search/block-het-archief-header-search___aria-label-voor-zoekveld',
-						{},
-						[HET_ARCHIEF]
-					),
-					editorType: ContentBlockEditor.TextInput,
-				}
-			),
+			textBelowSearch: TEXT_FIELD({
+                label: tText(
+                    'react-admin/modules/content-page/components/blocks/block-het-archief-header-search/block-het-archief-header-search___tekst-onder-zoekveld',
+                    {},
+                    [HET_ARCHIEF]
+                ),
+            }),
+			searchAriaLabel: TEXT_FIELD({
+                label: tText(
+                    'modules/content-page/components/blocks/block-het-archief-header-search/block-het-archief-header-search___aria-label-voor-zoekveld',
+                    {},
+                    [HET_ARCHIEF]
+                ),
+            }, tText(
+                'modules/content-page/components/blocks/block-het-archief-header-search/block-het-archief-header-search___aria-label-verplicht',
+                {},
+                [HET_ARCHIEF]
+            )),
 		},
 	},
 	block: {

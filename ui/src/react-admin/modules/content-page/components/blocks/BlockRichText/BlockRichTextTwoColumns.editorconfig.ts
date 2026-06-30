@@ -53,17 +53,15 @@ export const RICH_TEXT_TWO_COLUMNS_BLOCK_CONFIG = (position = 0): ContentBlockCo
 		state: INITIAL_RICH_TEXT_TWO_COLUMNS_COMPONENTS_STATE(),
 		fields: {
 			content: {
-				...TEXT_FIELD(
-					tText(
-						'admin/content-block/helpers/generators/rich-text-two-columns___tekst-is-verplicht'
-					),
-					{
-						editorProps: {
-							controls: [...RICH_TEXT_EDITOR_OPTIONS_FULL, 'media'],
-							fileType: 'CONTENT_BLOCK_IMAGE',
-						},
-					}
-				),
+				...TEXT_FIELD({
+					editorType: ContentBlockEditor.RICH_TEXT_EDITOR,
+					editorProps: {
+						controls: [...RICH_TEXT_EDITOR_OPTIONS_FULL, 'media'],
+						fileType: 'CONTENT_BLOCK_IMAGE',
+					},
+				}, tText(
+					'admin/content-block/helpers/generators/rich-text-two-columns___tekst-is-verplicht'
+				)),
 			},
 			buttons: {
 				label: tText('admin/content-block/helpers/generators/rich-text-two-columns___knop'),
@@ -75,20 +73,15 @@ export const RICH_TEXT_TWO_COLUMNS_BLOCK_CONFIG = (position = 0): ContentBlockCo
 							options: AdminConfigManager.getConfig().components.buttonTypes(),
 						},
 					},
-					label: TEXT_FIELD(
-						tText('admin/content-block/helpers/generators/buttons___knoptekst-is-verplicht'),
-						{
-							label: tText('admin/content-block/helpers/generators/buttons___tekst'),
-							editorType: ContentBlockEditor.TextInput,
-						}
-					),
-					altTitle: TEXT_FIELD(undefined, {
+					label: TEXT_FIELD({
+						label: tText('admin/content-block/helpers/generators/buttons___tekst'),
+					}, tText('admin/content-block/helpers/generators/buttons___knoptekst-is-verplicht')),
+					altTitle: TEXT_FIELD({
 						label: tText(
 							'admin/content-block/helpers/generators/rich-text-two-columns___alt-title-text'
 						),
-						editorType: ContentBlockEditor.TextInput,
 						validator: undefined,
-					}),
+					}, undefined),
 					icon: {
 						label: tText('admin/content-block/helpers/generators/buttons___icoon'),
 						editorType: ContentBlockEditor.IconPicker,
