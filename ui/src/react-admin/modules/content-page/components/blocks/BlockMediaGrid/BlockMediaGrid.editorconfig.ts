@@ -90,50 +90,47 @@ export const MEDIA_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				fieldsToResetOnChange: ['startCuePoint', 'endCuePoint'],
 			},
 			startCuePoint: TEXT_FIELD(
-				tText(
-					'modules/content-page/components/blocks/block-media-grid/block-media-grid___startknippunt-is-verplicht',
-					{},
-					[AVO]
-				),
 				{
 					label: tText(
 						'modules/content-page/components/blocks/block-media-grid/block-media-grid___startknippunt-seconden',
 						{},
 						[AVO]
 					),
-					editorType: ContentBlockEditor.TextInput,
 					editorProps: {
 						type: 'number',
 					},
 					isVisible: cuePointsIsVisible,
-				}
-			),
-			endCuePoint: TEXT_FIELD(
+				},
 				tText(
-					'modules/content-page/components/blocks/block-media-grid/block-media-grid___eindknippunt-is-verplicht',
+					'modules/content-page/components/blocks/block-media-grid/block-media-grid___startknippunt-is-verplicht',
 					{},
 					[AVO]
-				),
+				)
+			),
+			endCuePoint: TEXT_FIELD(
 				{
 					label: tText(
 						'modules/content-page/components/blocks/block-media-grid/block-media-grid___eindknippunt-seconden',
 						{},
 						[AVO]
 					),
-					editorType: ContentBlockEditor.TextInput,
 					editorProps: {
 						type: 'number',
 					},
 					isVisible: cuePointsIsVisible,
-				}
+				},
+				tText(
+					'modules/content-page/components/blocks/block-media-grid/block-media-grid___eindknippunt-is-verplicht',
+					{},
+					[AVO]
+				)
 			),
-			mediaItemLabel: TEXT_FIELD(undefined, {
+			mediaItemLabel: TEXT_FIELD({
 				label: tText(
 					'modules/content-page/components/blocks/block-media-grid/block-media-grid___alternatieve-titel',
 					{},
 					[AVO]
 				),
-				editorType: ContentBlockEditor.TextInput,
 				validator: undefined,
 			}),
 			copyrightImage: {
@@ -179,16 +176,14 @@ export const MEDIA_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 					return errorArray;
 				},
 			},
-			buttonLabel: TEXT_FIELD(undefined, {
+			buttonLabel: TEXT_FIELD({
 				label: tText('admin/content-block/helpers/generators/media-grid___knop-tekst', {}, [AVO]),
-				editorType: ContentBlockEditor.TextInput,
 				validator: undefined,
 			}),
-			buttonAltTitle: TEXT_FIELD(undefined, {
+			buttonAltTitle: TEXT_FIELD({
 				label: tText('admin/content-block/helpers/generators/media-grid___alt-title-text', {}, [
 					AVO,
 				]),
-				editorType: ContentBlockEditor.TextInput,
 				validator: undefined,
 			}),
 			buttonIcon: {
@@ -214,11 +209,10 @@ export const MEDIA_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 	block: {
 		state: INITIAL_MEDIA_GRID_BLOCK_STATE(),
 		fields: {
-			title: TEXT_FIELD(undefined, {
+			title: TEXT_FIELD({
 				label: tText('admin/content-block/helpers/generators/media-grid___algemene-titel', {}, [
 					AVO,
 				]),
-				editorType: ContentBlockEditor.TextInput,
 				validator: undefined,
 			}),
 			titleType: {
@@ -232,20 +226,18 @@ export const MEDIA_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 					options: GET_HEADING_TYPE_OPTIONS(),
 				},
 			},
-			buttonLabel: TEXT_FIELD(undefined, {
+			buttonLabel: TEXT_FIELD({
 				label: tText(
 					'admin/content-block/helpers/generators/media-grid___algemene-knop-tekst',
 					{},
 					[AVO]
 				),
-				editorType: ContentBlockEditor.TextInput,
 				validator: undefined,
 			}),
-			buttonAltTitle: TEXT_FIELD(undefined, {
+			buttonAltTitle: TEXT_FIELD({
 				label: tText('admin/content-block/helpers/generators/media-grid___alt-title-text', {}, [
 					AVO,
 				]),
-				editorType: ContentBlockEditor.TextInput,
 				validator: undefined,
 			}),
 			buttonAction: {
@@ -326,9 +318,8 @@ export const MEDIA_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 						(component) => component.mediaItem?.type === 'ITEM_WITH_CUE_POINTS'
 					),
 			},
-			ctaTitle: TEXT_FIELD(undefined, {
+			ctaTitle: TEXT_FIELD({
 				label: tText('admin/content-block/helpers/generators/media-grid___cta-titel', {}, [AVO]),
-				editorType: ContentBlockEditor.TextInput,
 				validator: undefined,
 			}),
 			ctaTitleColor: FOREGROUND_COLOR_FIELD(
@@ -350,7 +341,7 @@ export const MEDIA_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 					options: GET_FULL_HEADING_TYPE_OPTIONS(),
 				},
 			},
-			ctaContent: TEXT_FIELD(undefined, {
+			ctaContent: TEXT_FIELD({
 				label: tText('admin/content-block/helpers/generators/media-grid___cta-omschrijving', {}, [
 					AVO,
 				]),
@@ -362,20 +353,18 @@ export const MEDIA_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 					AVO,
 				])
 			),
-			ctaButtonLabel: TEXT_FIELD(undefined, {
+			ctaButtonLabel: TEXT_FIELD({
 				label: tText('admin/content-block/helpers/generators/media-grid___cta-knop-tekst', {}, [
 					AVO,
 				]),
-				editorType: ContentBlockEditor.TextInput,
 				validator: undefined,
 			}),
-			ctaButtonAltTitle: TEXT_FIELD(undefined, {
+			ctaButtonAltTitle: TEXT_FIELD({
 				label: tText(
 					'admin/content-block/helpers/generators/media-grid___alt-button-title-text',
 					{},
 					[AVO]
 				),
-				editorType: ContentBlockEditor.TextInput,
 				validator: undefined,
 			}),
 			ctaButtonIcon: {

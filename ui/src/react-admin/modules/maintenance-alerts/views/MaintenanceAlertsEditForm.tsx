@@ -23,7 +23,7 @@ import type {
 } from '~modules/maintenance-alerts/maintenance-alerts.types';
 import { IconPicker } from '~modules/shared/components/IconPicker/IconPicker';
 import { useGetAllLanguages } from '~modules/translations/hooks/use-get-all-languages';
-import { App, Locale } from '~modules/translations/translations.core.types';
+import { Locale } from '~modules/translations/translations.core.types';
 import type { LanguageInfo } from '~modules/translations/translations.types';
 import { useUserGroupOptions } from '~modules/user-group/hooks/useUserGroupOptions';
 import { Icon } from '~shared/components/Icon/Icon';

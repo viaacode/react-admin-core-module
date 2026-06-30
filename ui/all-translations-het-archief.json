@@ -25952,7 +25952,7 @@
     "location": "modules/cp/views/cp-admin-visitors",
     "key": "materiaal-aanvraag-goedkeuren-blade-aria-label",
     "language": "en",
-    "value": "Materiaal aanvraag goedkeuren [BLADE_ARIA_LABEL]",
+    "value": "Approve material request [BLADE_ARIA_LABEL]",
     "value_type": "TEXT"
   },
   {
@@ -28616,7 +28616,7 @@
     "location": "modules/account/components/edit-folder-blade/edit-folder-blade",
     "key": "beschrijving-van-de-map-input-aria-label",
     "language": "en",
-    "value": "Beschrijving van de map [INPUT_ARIA_LABEL]",
+    "value": "Description of the folder [INPUT_ARIA_LABEL]",
     "value_type": "TEXT"
   },
   {
@@ -29705,7 +29705,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-content-info",
     "key": "pid",
     "language": "nl",
-    "value": "Pid",
+    "value": "PID",
     "value_type": "TEXT"
   },
   {
@@ -29714,7 +29714,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-content-info",
     "key": "pid",
     "language": "en",
-    "value": "Pid",
+    "value": "PID",
     "value_type": "TEXT"
   },
   {
@@ -29824,6 +29824,24 @@
     "language": "en",
     "value": "The message was not sent",
     "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-detail-blade/material-request-conversation-input",
+    "key": "er-zijn-bestanden-geselecteerd-maar-nog-niet-verzonden",
+    "language": "nl",
+    "value": "Er zijn bestanden geselecteerd maar nog niet verzonden",
+    "value_type": "HTML"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/material-request-detail-blade/material-request-conversation-input",
+    "key": "er-zijn-bestanden-geselecteerd-maar-nog-niet-verzonden",
+    "language": "en",
+    "value": "Er zijn bestanden geselecteerd maar nog niet verzonden",
+    "value_type": "HTML"
   },
   {
     "app": "HET_ARCHIEF",
@@ -30092,7 +30110,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-conversation-message",
     "key": "name-weigerde-de-bijkomende-gebruiksvoorwaarden-de-aanvraag-wordt-afgesloten",
     "language": "en",
-    "value": "{{name}} weigerde de bijkomende gebruiksvoorwaarden. De aanvraag wordt afgesloten.",
+    "value": "{{name}} refused the additional conditions. The request will be closed.",
     "value_type": "HTML"
   },
   {
@@ -30326,7 +30344,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
     "key": "download-is-beschikbaar-tot-en-met",
     "language": "en",
-    "value": "Download is available until {{downloadExpirationDate}} (engels)",
+    "value": "Download is available until {{downloadExpirationDate}}",
     "value_type": "TEXT"
   },
   {
@@ -31334,7 +31352,7 @@
     "location": "modules/account/components/material-request-evaluator-options/material-request-evaluator-options",
     "key": "aanvraag-beoordelen-descriptive-title",
     "language": "en",
-    "value": "Aanvraag beoordelen descriptive title",
+    "value": "Make a decision about the request",
     "value_type": "TEXT"
   },
   {
@@ -31388,7 +31406,7 @@
     "location": "modules/account/components/material-request-evaluator-options/material-request-evaluator-options",
     "key": "goedkeuren-knop-beschrijving",
     "language": "en",
-    "value": "Goedkeuren knop beschrijving",
+    "value": "In this case the material will be made available for download immediately.",
     "value_type": "TEXT"
   },
   {
@@ -31415,7 +31433,7 @@
     "location": "modules/account/components/material-request-evaluator-options/material-request-evaluator-options",
     "key": "goedkeuren-mit-voorwaarden-knop-beschrijving",
     "language": "nl",
-    "value": "Goedkeuren mits voorwaarden beschrijving",
+    "value": "In dit geval kunt u bijkomende gebruiksvoorwaarden opleggen voordat goedkeuring gegeven kan worden.",
     "value_type": "TEXT"
   },
   {
@@ -31424,7 +31442,7 @@
     "location": "modules/account/components/material-request-evaluator-options/material-request-evaluator-options",
     "key": "goedkeuren-mit-voorwaarden-knop-beschrijving",
     "language": "en",
-    "value": "Goedkeuren mit voorwaarden knop beschrijving",
+    "value": "In this case you may impose additional conditions prior to approval.",
     "value_type": "TEXT"
   },
   {
@@ -31451,7 +31469,7 @@
     "location": "modules/account/components/material-request-evaluator-options/material-request-evaluator-options",
     "key": "afkeuren-knop-beschrijving",
     "language": "nl",
-    "value": "Afkeuren knop beschrijving",
+    "value": "In dit geval wordt de materiaalaanvraag onmiddellijk gesloten.",
     "value_type": "TEXT"
   },
   {
@@ -31460,7 +31478,7 @@
     "location": "modules/account/components/material-request-evaluator-options/material-request-evaluator-options",
     "key": "afkeuren-knop-beschrijving",
     "language": "en",
-    "value": "Afkeuren knop beschrijving",
+    "value": "In this case the request will be closed immediately.",
     "value_type": "TEXT"
   },
   {
@@ -31622,7 +31640,7 @@
     "location": "modules/account/components/material-request-status-update-blade/material-request-status-update-blade",
     "key": "aanvraag-goedkeuren-titel",
     "language": "en",
-    "value": "Aanvraag goedkeuren titel",
+    "value": "Approve request",
     "value_type": "TEXT"
   },
   {
@@ -31658,7 +31676,7 @@
     "location": "modules/account/components/material-request-status-update-blade/material-request-status-update-blade",
     "key": "materiaal-aanvraag-goedkeuren-of-afkeuren-blade-aria-label",
     "language": "en",
-    "value": "Materiaal aanvraag goedkeuren of afkeuren [BLADE_ARIA_LABEL]",
+    "value": "Approve or reject request [BLADE_ARIA_LABEL]",
     "value_type": "TEXT"
   },
   {
@@ -31676,7 +31694,7 @@
     "location": "modules/account/components/material-request-status-update-blade/material-request-status-update-blade",
     "key": "aanvraag-goedkeuren-description",
     "language": "en",
-    "value": "Aanvraag goedkeuren description",
+    "value": "<p>The request will be approved immediately and the download will be prepared for the requester.</p><p></p><p>If you wish to impose additional conditions, return from this page and select the option &quot;Additinal conditions&quot;.</p>",
     "value_type": "HTML"
   },
   {

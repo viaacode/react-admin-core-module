@@ -49,14 +49,16 @@ export const CONTENT_ENCLOSE_BLOCK_CONFIG = (position = 0): ContentBlockConfig =
 	components: {
 		state: INITIAL_CONTENT_ENCLOSE_COMPONENTS_STATE(),
 		fields: {
-			title: TEXT_FIELD('title', {
-				label: tText(
-					'modules/content-page/components/blocks/block-content-enclose/block-content-enclose___title',
-					undefined,
-					[HET_ARCHIEF]
-				),
-				editorType: ContentBlockEditor.TextInput,
-			}),
+			title: TEXT_FIELD(
+				{
+					label: tText(
+						'modules/content-page/components/blocks/block-content-enclose/block-content-enclose___title',
+						undefined,
+						[HET_ARCHIEF]
+					),
+				},
+				tText('Titel is verplicht')
+			),
 			titleType: {
 				label: tText(
 					'modules/content-page/components/blocks/block-content-enclose/block-content-enclose___titletype',
@@ -68,14 +70,14 @@ export const CONTENT_ENCLOSE_BLOCK_CONFIG = (position = 0): ContentBlockConfig =
 					options: GET_HEADING_TYPE_OPTIONS(),
 				},
 			},
-			description: {
+			description: TEXT_FIELD({
 				label: tText(
 					'modules/content-page/components/blocks/block-content-enclose/block-content-enclose___beschrijving',
 					undefined,
 					[HET_ARCHIEF]
 				),
-				editorType: ContentBlockEditor.TextInput,
-			},
+				validator: undefined,
+			}),
 			buttonType: {
 				label: tText(
 					'modules/content-page/components/blocks/block-content-enclose/block-content-enclose___button-type',
@@ -87,21 +89,19 @@ export const CONTENT_ENCLOSE_BLOCK_CONFIG = (position = 0): ContentBlockConfig =
 					options: AdminConfigManager.getConfig().components.buttonTypes(),
 				},
 			},
-			buttonLabel: TEXT_FIELD(undefined, {
+			buttonLabel: TEXT_FIELD({
 				label: tText(
 					'modules/content-page/components/blocks/block-content-enclose/block-content-enclose___button-label',
 					undefined,
 					[HET_ARCHIEF]
 				),
-				editorType: ContentBlockEditor.TextInput,
 			}),
-			buttonAltTitle: TEXT_FIELD(undefined, {
+			buttonAltTitle: TEXT_FIELD({
 				label: tText(
 					'modules/content-page/components/blocks/block-content-enclose/block-content-enclose___button-alt-title',
 					undefined,
 					[HET_ARCHIEF]
 				),
-				editorType: ContentBlockEditor.TextInput,
 			}),
 			buttonIcon: {
 				label: tText(

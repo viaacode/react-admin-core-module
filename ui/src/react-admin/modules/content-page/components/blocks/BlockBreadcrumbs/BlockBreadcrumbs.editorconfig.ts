@@ -1,5 +1,5 @@
 import type { AvoCoreContentPickerType } from '@viaa/avo2-types';
-import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS } from '~content-blocks/defaults';
+import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, TEXT_FIELD } from '~content-blocks/defaults';
 import { GET_FOREGROUND_COLOR_OPTIONS_ARCHIEF } from '~modules/content-page/const/get-color-options';
 import type {
 	ContentBlockConfig,
@@ -60,14 +60,13 @@ export const CONTENT_BREADCRUMBS_CONFIG = (position = 0): ContentBlockConfig => 
 			elements: {
 				label: 'breadcrumb',
 				fields: {
-					label: {
+					label: TEXT_FIELD({
 						label: tText(
 							'modules/content-page/components/blocks/block-breadcrumbs/block-breadcrumbs___label',
 							{},
 							[HET_ARCHIEF]
 						),
-						editorType: ContentBlockEditor.TextInput,
-					},
+					}),
 					link: {
 						label: tText(
 							'modules/content-page/components/blocks/block-breadcrumbs/block-breadcrumbs___link',

@@ -50,9 +50,8 @@ export const SPOTLIGHT_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 					} as FileUploadProps,
 				}
 			),
-			title: TEXT_FIELD(undefined, {
+			title: TEXT_FIELD({
 				label: tText('admin/content-block/helpers/generators/spotlight___titel'),
-				editorType: ContentBlockEditor.TextInput,
 				validator: undefined,
 			}),
 			buttonAction: {

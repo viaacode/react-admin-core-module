@@ -64,8 +64,9 @@ export const BLOCK_FIELD_DEFAULTS = () => ({
 	),
 
 	// Used to link to this block from inside the same page using the anchors-block
-	anchor: INPUT_FIELD({
+	anchor: TEXT_FIELD({
 		label: tText('admin/content-block/helpers/generators/defaults___anchor-id'),
+		validator: undefined,
 	}),
 });
 
@@ -143,11 +144,11 @@ export const ALIGN_FIELD = (label: string): ContentBlockField => ({
 });
 
 export const TEXT_FIELD = (
-	emptyFieldValidatorMessage?: string,
-	propOverride?: Partial<ContentBlockField>
+	propOverride?: Partial<ContentBlockField>,
+	emptyFieldValidatorMessage?: string
 ): ContentBlockField => ({
 	label: tText('admin/content-block/helpers/generators/defaults___tekst'),
-	editorType: ContentBlockEditor.RICH_TEXT_EDITOR,
+	editorType: ContentBlockEditor.TextInput, // Default text input type. also supported: textarea and rich text editor
 	validator: (value: string) => {
 		const errorArray: string[] = [];
 
@@ -164,12 +165,6 @@ export const TEXT_FIELD = (
 		controls: [...RICH_TEXT_EDITOR_OPTIONS_FULL_WITHOUT_ALIGN, 'media'],
 		fileType: 'CONTENT_BLOCK_IMAGE',
 	} as Partial<RichTextEditorWithInternalStateWrapperProps>,
-	...propOverride,
-});
-
-export const INPUT_FIELD = (propOverride?: Partial<ContentBlockField>): ContentBlockField => ({
-	label: tText('admin/content-block/helpers/generators/defaults___tekst'),
-	editorType: ContentBlockEditor.TextInput,
 	...propOverride,
 });
 

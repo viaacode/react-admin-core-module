@@ -37,16 +37,14 @@ export const IMAGE_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 	components: {
 		state: INITIAL_IMAGE_COMPONENTS_STATE(),
 		fields: {
-			title: {
+			title: TEXT_FIELD({
 				label: tText('admin/content-block/helpers/generators/image___bijschift-titel'),
-				editorType: ContentBlockEditor.TextInput,
 				validator: undefined,
-			},
-			text: {
+			}),
+			text: TEXT_FIELD({
 				label: tText('admin/content-block/helpers/generators/image___bijschrift-beschrijving'),
-				editorType: ContentBlockEditor.TextInput,
 				validator: undefined,
-			},
+			}),
 			imageSource: FILE_FIELD(
 				tText('admin/content-block/helpers/generators/image___een-afbeelding-is-verplicht'),
 				{
@@ -88,11 +86,10 @@ export const IMAGE_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 					],
 				},
 			},
-			imageAlt: TEXT_FIELD(undefined, {
+			imageAlt: TEXT_FIELD({
 				label: tText(
 					'react-admin/modules/content-page/components/blocks/block-image/block-image___alt-tekst-voor-de-afbeelding'
 				),
-				editorType: ContentBlockEditor.TextInput,
 				validator: undefined,
 			}),
 			buttonType: {
@@ -105,21 +102,19 @@ export const IMAGE_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				},
 			},
 			buttonLabel: TEXT_FIELD(
-				tText(
-					'react-admin/modules/content-page/components/blocks/block-image/block-image___knoptekst-is-verplicht'
-				),
 				{
 					label: tText(
 						'react-admin/modules/content-page/components/blocks/block-image/block-image___knop-tekst'
 					),
-					editorType: ContentBlockEditor.TextInput,
-				}
+				},
+				tText(
+					'react-admin/modules/content-page/components/blocks/block-image/block-image___knoptekst-is-verplicht'
+				)
 			),
-			buttonAltTitle: TEXT_FIELD(undefined, {
+			buttonAltTitle: TEXT_FIELD({
 				label: tText(
 					'react-admin/modules/content-page/components/blocks/block-image/block-image___alt-knop-text'
 				),
-				editorType: ContentBlockEditor.TextInput,
 			}),
 			buttonAction: {
 				label: tText(

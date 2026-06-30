@@ -45,13 +45,12 @@ export const THREE_CLICKABLE_TILES_BLOCK_CONFIG = (position = 0): ContentBlockCo
 				}
 			),
 			title: TEXT_FIELD(
-				tText(
-					'admin/content-block/helpers/generators/three-clickable-tiles___subtitel-is-verplicht'
-				),
 				{
 					label: tText('admin/content-block/helpers/generators/three-clickable-tiles___subtitel'),
-					editorType: ContentBlockEditor.TextInput,
-				}
+				},
+				tText(
+					'admin/content-block/helpers/generators/three-clickable-tiles___subtitel-is-verplicht'
+				)
 			),
 			titleType: {
 				label: tText('admin/content-block/helpers/generators/heading___type'),

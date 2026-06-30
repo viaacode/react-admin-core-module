@@ -46,6 +46,7 @@ export function renderUserOverviewTableCellReact(
 	const isBlocked = tableRowCommonUser?.isBlocked;
 	// biome-ignore lint/suspicious/noExplicitAny: todo
 	const isKeyUser = (tableRowCommonUser as any)?.isKeyUser ?? false;
+	// biome-ignore lint/suspicious/noExplicitAny: todo
 	const isEvaluator = (tableRowCommonUser as any)?.isEvaluator ?? false;
 
 	switch (columnId) {
@@ -221,6 +222,7 @@ export function renderUserOverviewTableCellText(
 	const isBlocked = tableRowCommonUser?.isBlocked;
 	// biome-ignore lint/suspicious/noExplicitAny: todo
 	const isKeyUser = (tableRowCommonUser as any)?.isKeyUser ?? false;
+	// biome-ignore lint/suspicious/noExplicitAny: todo
 	const isEvaluator = (tableRowCommonUser as any)?.isEvaluator ?? false;
 
 	switch (columnId) {

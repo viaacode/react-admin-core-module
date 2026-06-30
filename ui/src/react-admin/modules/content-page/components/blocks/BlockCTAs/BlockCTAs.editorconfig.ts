@@ -62,16 +62,17 @@ export const CTAS_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				},
 			},
 			heading: TEXT_FIELD(
-				tText('admin/content-block/helpers/generators/ctas___titel-is-verplicht'),
 				{
 					label: tText('admin/content-block/helpers/generators/ctas___titel-tekst'),
-					editorType: ContentBlockEditor.TextInput,
-				}
+				},
+				tText('admin/content-block/helpers/generators/ctas___titel-is-verplicht')
 			),
 			headingColor: FOREGROUND_COLOR_FIELD(
 				tText('admin/content-block/helpers/generators/ctas___titel-kleur')
 			),
-			content: TEXT_FIELD(),
+			content: TEXT_FIELD({
+				editorType: ContentBlockEditor.RICH_TEXT_EDITOR,
+			}),
 			contentColor: FOREGROUND_COLOR_FIELD(
 				tText('admin/content-block/helpers/generators/ctas___tekst-kleur')
 			),
@@ -83,15 +84,13 @@ export const CTAS_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				},
 			},
 			buttonLabel: TEXT_FIELD(
-				tText('admin/content-block/helpers/generators/ctas___knoptekst-is-verplicht'),
 				{
 					label: tText('admin/content-block/helpers/generators/ctas___knop-tekst'),
-					editorType: ContentBlockEditor.TextInput,
-				}
+				},
+				tText('admin/content-block/helpers/generators/ctas___knoptekst-is-verplicht')
 			),
-			buttonAltTitle: TEXT_FIELD(undefined, {
+			buttonAltTitle: TEXT_FIELD({
 				label: tText('admin/content-block/helpers/generators/ctas___alt-button-text'),
-				editorType: ContentBlockEditor.TextInput,
 			}),
 			buttonIcon: {
 				label: tText('admin/content-block/helpers/generators/ctas___knop-icoon'),

@@ -37,21 +37,19 @@ export const MEDIA_PLAYER_BLOCK_CONFIG = (position = 0): ContentBlockConfig => (
 	components: {
 		state: INITIAL_MEDIA_PLAYER_COMPONENTS_STATE(),
 		fields: {
-			title: TEXT_FIELD(undefined, {
+			title: TEXT_FIELD({
 				label: tText(
 					'admin/content-block/helpers/generators/media-player___toegankelijkheidstitel'
 				),
 				validator: undefined,
-				editorType: ContentBlockEditor.TextInput,
 			}),
 			item: ITEM_PICKER_FIELD(undefined, {
 				validator: undefined,
 			}),
-			src: TEXT_FIELD(undefined, {
+			src: TEXT_FIELD({
 				label: tText(
 					'admin/content-block/helpers/generators/media-player___eigen-video-url-van-flowplayer-com-optioneel'
 				),
-				editorType: ContentBlockEditor.TextInput,
 				validator: validateFlowplayerVideoUrl,
 				editorProps: {
 					placeholder: tText(
@@ -73,20 +71,18 @@ export const MEDIA_PLAYER_BLOCK_CONFIG = (position = 0): ContentBlockConfig => (
 					),
 				} as CheckboxProps,
 			},
-			annotationTitle: {
+			annotationTitle: TEXT_FIELD({
 				label: tText(
 					'modules/content-page/components/blocks/block-video/block-video___bijschift-titel'
 				),
-				editorType: ContentBlockEditor.TextInput,
 				validator: undefined,
-			},
-			annotationText: {
+			}),
+			annotationText: TEXT_FIELD({
 				label: tText(
 					'modules/content-page/components/blocks/block-video/block-video___bijschrift-beschrijving'
 				),
-				editorType: ContentBlockEditor.TextInput,
 				validator: undefined,
-			},
+			}),
 			width: {
 				label: tText('admin/content-block/helpers/generators/media-player___breedte'),
 				editorType: ContentBlockEditor.Select,
