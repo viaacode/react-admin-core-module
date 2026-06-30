@@ -38,25 +38,25 @@ export const MEDIA_PLAYER_BLOCK_CONFIG = (position = 0): ContentBlockConfig => (
 		state: INITIAL_MEDIA_PLAYER_COMPONENTS_STATE(),
 		fields: {
 			title: TEXT_FIELD({
-                label: tText(
-                    'admin/content-block/helpers/generators/media-player___toegankelijkheidstitel'
-                ),
-                validator: undefined,
-            }),
+				label: tText(
+					'admin/content-block/helpers/generators/media-player___toegankelijkheidstitel'
+				),
+				validator: undefined,
+			}),
 			item: ITEM_PICKER_FIELD(undefined, {
 				validator: undefined,
 			}),
 			src: TEXT_FIELD({
-                label: tText(
-                    'admin/content-block/helpers/generators/media-player___eigen-video-url-van-flowplayer-com-optioneel'
-                ),
-                validator: validateFlowplayerVideoUrl,
-                editorProps: {
-                    placeholder: tText(
-                        'admin/content-block/helpers/generators/media-player___bv-https-cdn-flowplayer-com-hls-playlist-m-3-u-8'
-                    ),
-                } as TextInputProps,
-            }),
+				label: tText(
+					'admin/content-block/helpers/generators/media-player___eigen-video-url-van-flowplayer-com-optioneel'
+				),
+				validator: validateFlowplayerVideoUrl,
+				editorProps: {
+					placeholder: tText(
+						'admin/content-block/helpers/generators/media-player___bv-https-cdn-flowplayer-com-hls-playlist-m-3-u-8'
+					),
+				} as TextInputProps,
+			}),
 			poster: {
 				label: tText(
 					'react-admin/modules/content-page/components/blocks/block-video/block-video___poster'

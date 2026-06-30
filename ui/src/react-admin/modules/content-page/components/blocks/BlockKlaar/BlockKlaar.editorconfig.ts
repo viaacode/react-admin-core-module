@@ -35,22 +35,25 @@ export const KLAAR_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 		},
 		state: INITIAL_KLAAR_COMPONENTS_STATE(),
 		fields: {
-			titles: TEXT_FIELD({
-				label: tText('admin/content-block/helpers/generators/klaar___titel', {}, [AVO]),
-				repeat: {
-					defaultState: '',
-					addButtonLabel: tText(
-						'admin/content-block/helpers/generators/klaar___voeg-titel-toe',
-						{},
-						[AVO]
-					),
-					deleteButtonLabel: tText(
-						'admin/content-block/helpers/generators/klaar___verwijder-titel',
-						{},
-						[AVO]
-					),
+			titles: TEXT_FIELD(
+				{
+					label: tText('admin/content-block/helpers/generators/klaar___titel', {}, [AVO]),
+					repeat: {
+						defaultState: '',
+						addButtonLabel: tText(
+							'admin/content-block/helpers/generators/klaar___voeg-titel-toe',
+							{},
+							[AVO]
+						),
+						deleteButtonLabel: tText(
+							'admin/content-block/helpers/generators/klaar___verwijder-titel',
+							{},
+							[AVO]
+						),
+					},
 				},
-			}, tText('admin/content-block/helpers/generators/klaar___titel-is-verplicht', {}, [AVO])) as ContentBlockField,
+				tText('admin/content-block/helpers/generators/klaar___titel-is-verplicht', {}, [AVO])
+			) as ContentBlockField,
 			date: {
 				label: 'Datum',
 				editorType: ContentBlockEditor.DatePicker,

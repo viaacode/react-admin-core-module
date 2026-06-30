@@ -58,7 +58,7 @@ export const AVO_HERO_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 			title: TEXT_FIELD({
 				label: tText('admin/content-block/helpers/generators/hero___titel', {}, [AVO]),
 				validator: undefined,
-			}, undefined),
+			}),
 			titleColor: FOREGROUND_COLOR_FIELD(
 				tText('admin/content-block/helpers/generators/hero___titel-kleur', {}, [AVO])
 			),
@@ -66,7 +66,7 @@ export const AVO_HERO_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				label: tText('admin/content-block/helpers/generators/hero___beschrijving', {}, [AVO]),
 				editorType: ContentBlockEditor.TextArea,
 				validator: undefined,
-			}, undefined),
+			}),
 			contentColor: FOREGROUND_COLOR_FIELD(
 				tText('admin/content-block/helpers/generators/hero___beschrijving-kleur', {}, [AVO])
 			),
@@ -81,15 +81,18 @@ export const AVO_HERO_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 							options: AdminConfigManager.getConfig().components.buttonTypes(),
 						},
 					},
-					label: TEXT_FIELD({
-						label: tText('admin/content-block/helpers/generators/buttons___tekst', {}, [AVO]),
-					}, tText('admin/content-block/helpers/generators/buttons___knoptekst-is-verplicht', {}, [
-						AVO,
-					])),
+					label: TEXT_FIELD(
+						{
+							label: tText('admin/content-block/helpers/generators/buttons___tekst', {}, [AVO]),
+						},
+						tText('admin/content-block/helpers/generators/buttons___knoptekst-is-verplicht', {}, [
+							AVO,
+						])
+					),
 					altTitle: TEXT_FIELD({
 						label: tText('admin/content-block/helpers/generators/hero___alt-title-text'),
 						validator: undefined,
-					}, undefined),
+					}),
 					icon: {
 						label: tText('admin/content-block/helpers/generators/buttons___icoon', {}, [AVO]),
 						editorType: ContentBlockEditor.IconPicker,
@@ -125,7 +128,7 @@ export const AVO_HERO_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 					controls: RICH_TEXT_EDITOR_OPTIONS_FULL,
 				},
 				validator: undefined,
-			}, undefined),
+			}),
 			src: TEXT_FIELD({
 				label: tText(
 					'admin/content-block/helpers/generators/hero___eigen-video-url-van-flowplayer-com',
@@ -140,7 +143,7 @@ export const AVO_HERO_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 						[AVO]
 					),
 				} as TextInputProps,
-			}, undefined),
+			}),
 			poster: FILE_FIELD(undefined, {
 				label: tText('admin/content-block/helpers/generators/hero___eigen-poster-uploaden', {}, [
 					AVO,

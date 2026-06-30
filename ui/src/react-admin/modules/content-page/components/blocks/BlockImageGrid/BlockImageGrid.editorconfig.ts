@@ -65,25 +65,25 @@ export const IMAGE_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				}
 			),
 			title: TEXT_FIELD({
-                label: tText('admin/content-block/helpers/generators/image-grid___titel'),
-                validator: undefined,
-            }),
+				label: tText('admin/content-block/helpers/generators/image-grid___titel'),
+				validator: undefined,
+			}),
 			text: TEXT_FIELD({
-                label: tText('admin/content-block/helpers/generators/image-grid___tekst'),
-                validator: undefined,
-            }),
+				label: tText('admin/content-block/helpers/generators/image-grid___tekst'),
+				validator: undefined,
+			}),
 			buttonLabel: TEXT_FIELD({
-                label: tText('admin/content-block/helpers/generators/image-grid___knop-tekst'),
-                validator: undefined,
-            }),
+				label: tText('admin/content-block/helpers/generators/image-grid___knop-tekst'),
+				validator: undefined,
+			}),
 			buttonAltTitle: TEXT_FIELD({
-                label: tText('admin/content-block/helpers/generators/image-grid___alt-title-text'),
-                validator: undefined,
-            }),
+				label: tText('admin/content-block/helpers/generators/image-grid___alt-title-text'),
+				validator: undefined,
+			}),
 			buttonTitle: TEXT_FIELD({
-                label: tText('admin/content-block/helpers/generators/image-grid___knop-tooltip'),
-                validator: undefined,
-            }),
+				label: tText('admin/content-block/helpers/generators/image-grid___knop-tooltip'),
+				validator: undefined,
+			}),
 			buttonType: {
 				label: tText('admin/content-block/helpers/generators/image-grid___knop-type-kleur'),
 				editorType: ContentBlockEditor.Select,

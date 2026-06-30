@@ -66,7 +66,7 @@ export const BLOCK_FIELD_DEFAULTS = () => ({
 	// Used to link to this block from inside the same page using the anchors-block
 	anchor: TEXT_FIELD({
 		label: tText('admin/content-block/helpers/generators/defaults___anchor-id'),
-		validator: undefined
+		validator: undefined,
 	}),
 });
 

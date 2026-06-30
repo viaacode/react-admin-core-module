@@ -36,9 +36,12 @@ export const HEADING_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 	components: {
 		state: INITIAL_HEADING_COMPONENTS_STATE(),
 		fields: {
-			children: TEXT_FIELD({
-                label: tText('admin/content-block/helpers/generators/heading___titel'),
-            }, tText('admin/content-block/helpers/generators/heading___titel-is-verplicht')),
+			children: TEXT_FIELD(
+				{
+					label: tText('admin/content-block/helpers/generators/heading___titel'),
+				},
+				tText('admin/content-block/helpers/generators/heading___titel-is-verplicht')
+			),
 			color: FOREGROUND_COLOR_FIELD(
 				tText('admin/content-block/helpers/generators/heading___titel-kleur')
 			),

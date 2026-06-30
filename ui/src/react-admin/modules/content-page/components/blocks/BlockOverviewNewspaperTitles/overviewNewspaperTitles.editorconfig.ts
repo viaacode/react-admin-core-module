@@ -39,17 +39,20 @@ export const OVERVIEW_NEWSPAPER_TITLES_BLOCK_CONFIG = (position = 0): ContentBlo
 	components: {
 		state: INITIAL_OVERVIEW_NEWSPAPER_TITLES_COMPONENTS_STATE(),
 		fields: {
-			title: TEXT_FIELD({
-                label: tText(
-                    'modules/content-page/components/blocks/overview-newspaper-titles___titel',
-                    undefined,
-                    [HET_ARCHIEF]
-                ),
-            }, tText(
-                'modules/content-page/components/blocks/overview-newspaper-titles___is-verplicht',
-                undefined,
-                [HET_ARCHIEF]
-            )),
+			title: TEXT_FIELD(
+				{
+					label: tText(
+						'modules/content-page/components/blocks/overview-newspaper-titles___titel',
+						undefined,
+						[HET_ARCHIEF]
+					),
+				},
+				tText(
+					'modules/content-page/components/blocks/overview-newspaper-titles___is-verplicht',
+					undefined,
+					[HET_ARCHIEF]
+				)
+			),
 			titleType: {
 				label: tText(
 					'modules/content-page/components/blocks/overview-newspaper-titles___titel-grootte',
@@ -72,24 +75,27 @@ export const OVERVIEW_NEWSPAPER_TITLES_BLOCK_CONFIG = (position = 0): ContentBlo
 					options: AdminConfigManager.getConfig().components.buttonTypes(),
 				},
 			},
-			buttonLabel: TEXT_FIELD({
-                label: tText(
-                    'modules/content-page/components/blocks/block-overview-newspaper-titles/overview-newspaper-titles___knop-tekst',
-                    undefined,
-                    [HET_ARCHIEF]
-                ),
-            }, tText(
-                'modules/content-page/components/blocks/block-overview-newspaper-titles/overview-newspaper-titles___knoptekst-is-verplicht',
-                undefined,
-                [HET_ARCHIEF]
-            )),
+			buttonLabel: TEXT_FIELD(
+				{
+					label: tText(
+						'modules/content-page/components/blocks/block-overview-newspaper-titles/overview-newspaper-titles___knop-tekst',
+						undefined,
+						[HET_ARCHIEF]
+					),
+				},
+				tText(
+					'modules/content-page/components/blocks/block-overview-newspaper-titles/overview-newspaper-titles___knoptekst-is-verplicht',
+					undefined,
+					[HET_ARCHIEF]
+				)
+			),
 			buttonAltTitle: TEXT_FIELD({
-                label: tText(
-                    'modules/content-page/components/blocks/block-overview-newspaper-titles/overview-newspaper-titles___alternative',
-                    undefined,
-                    [HET_ARCHIEF]
-                ),
-            }),
+				label: tText(
+					'modules/content-page/components/blocks/block-overview-newspaper-titles/overview-newspaper-titles___alternative',
+					undefined,
+					[HET_ARCHIEF]
+				),
+			}),
 			buttonIcon: {
 				label: tText(
 					'modules/content-page/components/blocks/block-overview-newspaper-titles/overview-newspaper-titles___knop-icoon',

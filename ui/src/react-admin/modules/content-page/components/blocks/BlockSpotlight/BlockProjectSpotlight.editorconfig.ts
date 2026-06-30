@@ -60,11 +60,11 @@ export const PROJECTS_SPOTLIGHT_BLOCK_CONFIG = (position = 0): ContentBlockConfi
 				validator: undefined,
 			}),
 			customTitle: TEXT_FIELD({
-                label: tText(
-                    'admin/content-block/helpers/generators/project-spotlight___aangepaste-titel-optioneel'
-                ),
-                validator: undefined,
-            }),
+				label: tText(
+					'admin/content-block/helpers/generators/project-spotlight___aangepaste-titel-optioneel'
+				),
+				validator: undefined,
+			}),
 		},
 	},
 	block: {

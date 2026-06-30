@@ -49,13 +49,16 @@ export const CONTENT_ENCLOSE_BLOCK_CONFIG = (position = 0): ContentBlockConfig =
 	components: {
 		state: INITIAL_CONTENT_ENCLOSE_COMPONENTS_STATE(),
 		fields: {
-			title: TEXT_FIELD({
-				label: tText(
-					'modules/content-page/components/blocks/block-content-enclose/block-content-enclose___title',
-					undefined,
-					[HET_ARCHIEF]
-				),
-			}, tText('Titel is verplicht')),
+			title: TEXT_FIELD(
+				{
+					label: tText(
+						'modules/content-page/components/blocks/block-content-enclose/block-content-enclose___title',
+						undefined,
+						[HET_ARCHIEF]
+					),
+				},
+				tText('Titel is verplicht')
+			),
 			titleType: {
 				label: tText(
 					'modules/content-page/components/blocks/block-content-enclose/block-content-enclose___titletype',
@@ -73,7 +76,7 @@ export const CONTENT_ENCLOSE_BLOCK_CONFIG = (position = 0): ContentBlockConfig =
 					undefined,
 					[HET_ARCHIEF]
 				),
-				validator: undefined
+				validator: undefined,
 			}),
 			buttonType: {
 				label: tText(

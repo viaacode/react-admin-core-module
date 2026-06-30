@@ -127,7 +127,6 @@ export const FilterTable: FunctionComponent<FilterTableProps> = ({
 	searchTextPlaceholder,
 	noContentMatchingFiltersMessage,
 	errorMessage,
-	renderNoResults,
 	renderCell,
 	className,
 	onTableStateChanged,

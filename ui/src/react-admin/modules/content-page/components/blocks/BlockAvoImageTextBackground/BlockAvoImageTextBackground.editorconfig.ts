@@ -59,14 +59,17 @@ export const AVO_IMAGE_TEXT_BACKGROUND_BLOCK_CONFIG = (position = 0): ContentBlo
 	components: {
 		state: INITIAL_AVO_IMAGE_TEXT_BACKGROUND_COMPONENTS_STATE(),
 		fields: {
-			heading: TEXT_FIELD({
-				label: tText(
-					'admin/content-block/helpers/image-text-background/image-text-background___titel-tekst'
-				),
-				validator: undefined,
-			}, tText(
-				'admin/content-block/helpers/image-text-background/image-text-background___titel-is-verplicht'
-			)),
+			heading: TEXT_FIELD(
+				{
+					label: tText(
+						'admin/content-block/helpers/image-text-background/image-text-background___titel-tekst'
+					),
+					validator: undefined,
+				},
+				tText(
+					'admin/content-block/helpers/image-text-background/image-text-background___titel-is-verplicht'
+				)
+			),
 			headingType: {
 				label: tText(
 					'admin/content-block/helpers/image-text-background/image-text-background___titel-stijl'

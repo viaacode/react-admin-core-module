@@ -89,44 +89,50 @@ export const MEDIA_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				},
 				fieldsToResetOnChange: ['startCuePoint', 'endCuePoint'],
 			},
-			startCuePoint: TEXT_FIELD({
-                label: tText(
-                    'modules/content-page/components/blocks/block-media-grid/block-media-grid___startknippunt-seconden',
-                    {},
-                    [AVO]
-                ),
-                editorProps: {
-                    type: 'number',
-                },
-                isVisible: cuePointsIsVisible,
-            }, tText(
-                'modules/content-page/components/blocks/block-media-grid/block-media-grid___startknippunt-is-verplicht',
-                {},
-                [AVO]
-            )),
-			endCuePoint: TEXT_FIELD({
-                label: tText(
-                    'modules/content-page/components/blocks/block-media-grid/block-media-grid___eindknippunt-seconden',
-                    {},
-                    [AVO]
-                ),
-                editorProps: {
-                    type: 'number',
-                },
-                isVisible: cuePointsIsVisible,
-            }, tText(
-                'modules/content-page/components/blocks/block-media-grid/block-media-grid___eindknippunt-is-verplicht',
-                {},
-                [AVO]
-            )),
+			startCuePoint: TEXT_FIELD(
+				{
+					label: tText(
+						'modules/content-page/components/blocks/block-media-grid/block-media-grid___startknippunt-seconden',
+						{},
+						[AVO]
+					),
+					editorProps: {
+						type: 'number',
+					},
+					isVisible: cuePointsIsVisible,
+				},
+				tText(
+					'modules/content-page/components/blocks/block-media-grid/block-media-grid___startknippunt-is-verplicht',
+					{},
+					[AVO]
+				)
+			),
+			endCuePoint: TEXT_FIELD(
+				{
+					label: tText(
+						'modules/content-page/components/blocks/block-media-grid/block-media-grid___eindknippunt-seconden',
+						{},
+						[AVO]
+					),
+					editorProps: {
+						type: 'number',
+					},
+					isVisible: cuePointsIsVisible,
+				},
+				tText(
+					'modules/content-page/components/blocks/block-media-grid/block-media-grid___eindknippunt-is-verplicht',
+					{},
+					[AVO]
+				)
+			),
 			mediaItemLabel: TEXT_FIELD({
-                label: tText(
-                    'modules/content-page/components/blocks/block-media-grid/block-media-grid___alternatieve-titel',
-                    {},
-                    [AVO]
-                ),
-                validator: undefined,
-            }),
+				label: tText(
+					'modules/content-page/components/blocks/block-media-grid/block-media-grid___alternatieve-titel',
+					{},
+					[AVO]
+				),
+				validator: undefined,
+			}),
 			copyrightImage: {
 				label: tText(
 					'react-admin/modules/content-page/components/blocks/block-media-grid/block-media-grid___afbeelding',
@@ -171,15 +177,15 @@ export const MEDIA_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				},
 			},
 			buttonLabel: TEXT_FIELD({
-                label: tText('admin/content-block/helpers/generators/media-grid___knop-tekst', {}, [AVO]),
-                validator: undefined,
-            }),
+				label: tText('admin/content-block/helpers/generators/media-grid___knop-tekst', {}, [AVO]),
+				validator: undefined,
+			}),
 			buttonAltTitle: TEXT_FIELD({
-                label: tText('admin/content-block/helpers/generators/media-grid___alt-title-text', {}, [
-                    AVO,
-                ]),
-                validator: undefined,
-            }),
+				label: tText('admin/content-block/helpers/generators/media-grid___alt-title-text', {}, [
+					AVO,
+				]),
+				validator: undefined,
+			}),
 			buttonIcon: {
 				label: tText('admin/content-block/helpers/generators/media-grid___knop-icoon', {}, [AVO]),
 				editorType: ContentBlockEditor.IconPicker,
@@ -204,11 +210,11 @@ export const MEDIA_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 		state: INITIAL_MEDIA_GRID_BLOCK_STATE(),
 		fields: {
 			title: TEXT_FIELD({
-                label: tText('admin/content-block/helpers/generators/media-grid___algemene-titel', {}, [
-                    AVO,
-                ]),
-                validator: undefined,
-            }),
+				label: tText('admin/content-block/helpers/generators/media-grid___algemene-titel', {}, [
+					AVO,
+				]),
+				validator: undefined,
+			}),
 			titleType: {
 				label: tText(
 					'modules/content-page/components/blocks/block-media-grid/block-media-grid___stijl',
@@ -221,19 +227,19 @@ export const MEDIA_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				},
 			},
 			buttonLabel: TEXT_FIELD({
-                label: tText(
-                    'admin/content-block/helpers/generators/media-grid___algemene-knop-tekst',
-                    {},
-                    [AVO]
-                ),
-                validator: undefined,
-            }),
+				label: tText(
+					'admin/content-block/helpers/generators/media-grid___algemene-knop-tekst',
+					{},
+					[AVO]
+				),
+				validator: undefined,
+			}),
 			buttonAltTitle: TEXT_FIELD({
-                label: tText('admin/content-block/helpers/generators/media-grid___alt-title-text', {}, [
-                    AVO,
-                ]),
-                validator: undefined,
-            }),
+				label: tText('admin/content-block/helpers/generators/media-grid___alt-title-text', {}, [
+					AVO,
+				]),
+				validator: undefined,
+			}),
 			buttonAction: {
 				label: tText(
 					'admin/content-block/helpers/generators/media-grid___algemene-knop-actie',
@@ -313,9 +319,9 @@ export const MEDIA_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 					),
 			},
 			ctaTitle: TEXT_FIELD({
-                label: tText('admin/content-block/helpers/generators/media-grid___cta-titel', {}, [AVO]),
-                validator: undefined,
-            }),
+				label: tText('admin/content-block/helpers/generators/media-grid___cta-titel', {}, [AVO]),
+				validator: undefined,
+			}),
 			ctaTitleColor: FOREGROUND_COLOR_FIELD(
 				tText('admin/content-block/helpers/generators/media-grid___cta-titel-kleur', {}, [AVO])
 			),
@@ -336,31 +342,31 @@ export const MEDIA_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				},
 			},
 			ctaContent: TEXT_FIELD({
-                label: tText('admin/content-block/helpers/generators/media-grid___cta-omschrijving', {}, [
-                    AVO,
-                ]),
-                editorType: ContentBlockEditor.TextArea,
-                validator: undefined,
-            }),
+				label: tText('admin/content-block/helpers/generators/media-grid___cta-omschrijving', {}, [
+					AVO,
+				]),
+				editorType: ContentBlockEditor.TextArea,
+				validator: undefined,
+			}),
 			ctaContentColor: FOREGROUND_COLOR_FIELD(
 				tText('admin/content-block/helpers/generators/media-grid___cta-omschrijving-kleur', {}, [
 					AVO,
 				])
 			),
 			ctaButtonLabel: TEXT_FIELD({
-                label: tText('admin/content-block/helpers/generators/media-grid___cta-knop-tekst', {}, [
-                    AVO,
-                ]),
-                validator: undefined,
-            }),
+				label: tText('admin/content-block/helpers/generators/media-grid___cta-knop-tekst', {}, [
+					AVO,
+				]),
+				validator: undefined,
+			}),
 			ctaButtonAltTitle: TEXT_FIELD({
-                label: tText(
-                    'admin/content-block/helpers/generators/media-grid___alt-button-title-text',
-                    {},
-                    [AVO]
-                ),
-                validator: undefined,
-            }),
+				label: tText(
+					'admin/content-block/helpers/generators/media-grid___alt-button-title-text',
+					{},
+					[AVO]
+				),
+				validator: undefined,
+			}),
 			ctaButtonIcon: {
 				label: tText('admin/content-block/helpers/generators/media-grid___cta-knop-icoon', {}, [
 					AVO,

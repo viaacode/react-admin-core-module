@@ -1,5 +1,5 @@
 import type { AvoCoreContentPickerType } from '@viaa/avo2-types';
-import {BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, TEXT_FIELD} from '~content-blocks/defaults';
+import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, TEXT_FIELD } from '~content-blocks/defaults';
 import { GET_FOREGROUND_COLOR_OPTIONS_ARCHIEF } from '~modules/content-page/const/get-color-options';
 import type {
 	ContentBlockConfig,

@@ -101,13 +101,16 @@ export const IMAGE_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 					options: AdminConfigManager.getConfig().components.buttonTypes(),
 				},
 			},
-			buttonLabel: TEXT_FIELD({
-				label: tText(
-					'react-admin/modules/content-page/components/blocks/block-image/block-image___knop-tekst'
-				),
-			}, tText(
-				'react-admin/modules/content-page/components/blocks/block-image/block-image___knoptekst-is-verplicht'
-			)),
+			buttonLabel: TEXT_FIELD(
+				{
+					label: tText(
+						'react-admin/modules/content-page/components/blocks/block-image/block-image___knop-tekst'
+					),
+				},
+				tText(
+					'react-admin/modules/content-page/components/blocks/block-image/block-image___knoptekst-is-verplicht'
+				)
+			),
 			buttonAltTitle: TEXT_FIELD({
 				label: tText(
 					'react-admin/modules/content-page/components/blocks/block-image/block-image___alt-knop-text'

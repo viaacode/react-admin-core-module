@@ -51,9 +51,9 @@ export const LOGO_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 		state: INITIAL_LOGO_GRID_COMPONENTS_STATE(),
 		fields: {
 			textAbove: TEXT_FIELD({
-                label: tText('admin/content-block/helpers/generators/logo-grid___tekst-boven-afbeelding'),
-                validator: undefined,
-            }, undefined),
+				label: tText('admin/content-block/helpers/generators/logo-grid___tekst-boven-afbeelding'),
+				validator: undefined,
+			}),
 			source: FILE_FIELD(
 				tText('admin/content-block/helpers/generators/image-grid___een-afbeelding-is-verplicht'),
 				{

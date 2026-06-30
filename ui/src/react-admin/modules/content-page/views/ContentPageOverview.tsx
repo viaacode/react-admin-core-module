@@ -13,7 +13,7 @@ import { AvoSearchOrderDirection, PermissionName } from '@viaa/avo2-types';
 import clsx from 'clsx';
 import { cloneDeep, compact, isEqual, partition } from 'es-toolkit';
 import { get, set } from 'es-toolkit/compat';
-import React, { type FC, type ReactNode, useCallback, useEffect, useMemo, useState } from 'react';
+import React, { type FC, type ReactNode, useCallback, useMemo, useState } from 'react';
 import type { LabelObj } from '~content-blocks/BlockPageOverview/BlockPageOverview.types';
 
 import { AdminConfigManager } from '~core/config/config.class';

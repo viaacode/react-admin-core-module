@@ -1,4 +1,4 @@
-import { keysEnter, onKey, Table, TextInput } from '@meemoo/react-components';
+import { Table, TextInput } from '@meemoo/react-components';
 import { cloneDeep, remove, sortBy } from 'es-toolkit';
 import type { ChangeEvent } from 'react';
 import React, {
@@ -278,6 +278,7 @@ export const UserGroupOverview = forwardRef<
 							initialState: {
 								pageSize: permissions?.length,
 							},
+							// biome-ignore lint/suspicious/noExplicitAny: todo
 						} as TableOptions<Record<'id', string | number> & Record<string, any>>
 					}
 					enableRowFocusOnClick={isHetArchief()}

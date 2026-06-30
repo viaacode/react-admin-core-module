@@ -19,7 +19,8 @@ import {
 	BACKGROUND_COLOR_FIELD,
 	BLOCK_FIELD_DEFAULTS,
 	BLOCK_STATE_DEFAULTS,
-	CONTENT_TYPE_AND_LABELS_INPUT, TEXT_FIELD,
+	CONTENT_TYPE_AND_LABELS_INPUT,
+	TEXT_FIELD,
 } from '../defaults';
 
 export const INITIAL_PAGE_OVERVIEW_COMPONENTS_STATE =
@@ -174,11 +175,11 @@ export const PAGE_OVERVIEW_BLOCK_CONFIG = (position = 0): ContentBlockConfig => 
 					label: tText(
 						'admin/content-block/helpers/generators/page-overview___label-voor-de-button-lijst-item'
 					),
-					validator: undefined
+					validator: undefined,
 				}),
 				buttonAltTitle: TEXT_FIELD({
 					label: tText('admin/content-block/helpers/generators/page-overview___alt-title-text'),
-					validator: undefined
+					validator: undefined,
 				}),
 				itemsPerPage: {
 					label: tText('admin/content-block/helpers/generators/page-overview___items-per-pagina'),

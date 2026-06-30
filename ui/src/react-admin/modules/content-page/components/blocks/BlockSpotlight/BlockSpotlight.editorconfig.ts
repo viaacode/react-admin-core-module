@@ -51,9 +51,9 @@ export const SPOTLIGHT_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				}
 			),
 			title: TEXT_FIELD({
-                label: tText('admin/content-block/helpers/generators/spotlight___titel'),
-                validator: undefined,
-            }, undefined),
+				label: tText('admin/content-block/helpers/generators/spotlight___titel'),
+				validator: undefined,
+			}),
 			buttonAction: {
 				label: tText('admin/content-block/helpers/generators/spotlight___link'),
 				editorType: ContentBlockEditor.ContentPicker,

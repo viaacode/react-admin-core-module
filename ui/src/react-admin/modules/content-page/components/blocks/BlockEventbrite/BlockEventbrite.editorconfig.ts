@@ -33,9 +33,9 @@ export const EVENTBRITE_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 		state: INITIAL_EVENTBRITE_COMPONENTS_STATE(),
 		fields: {
 			eventId: TEXT_FIELD({
-                label: tText('admin/content-block/helpers/generators/eventbrite___event-id'),
-                validator: undefined,
-            }),
+				label: tText('admin/content-block/helpers/generators/eventbrite___event-id'),
+				validator: undefined,
+			}),
 			type: {
 				label: tText('admin/content-block/helpers/generators/buttons___type'),
 				editorType: ContentBlockEditor.Select,
@@ -43,9 +43,12 @@ export const EVENTBRITE_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 					options: AdminConfigManager.getConfig().components.buttonTypes(),
 				},
 			},
-			label: TEXT_FIELD({
-                label: tText('admin/content-block/helpers/generators/buttons___tekst'),
-            }, tText('admin/content-block/helpers/generators/buttons___knoptekst-is-verplicht')),
+			label: TEXT_FIELD(
+				{
+					label: tText('admin/content-block/helpers/generators/buttons___tekst'),
+				},
+				tText('admin/content-block/helpers/generators/buttons___knoptekst-is-verplicht')
+			),
 			icon: {
 				label: tText('admin/content-block/helpers/generators/buttons___icoon'),
 				editorType: ContentBlockEditor.IconPicker,

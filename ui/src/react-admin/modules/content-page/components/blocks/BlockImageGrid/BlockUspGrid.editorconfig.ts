@@ -59,19 +59,19 @@ export const USP_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				}
 			),
 			title: TEXT_FIELD({
-                label: tText('admin/content-block/helpers/generators/image-grid___titel'),
-            }),
+				label: tText('admin/content-block/helpers/generators/image-grid___titel'),
+			}),
 			text: TEXT_FIELD({
-                label: tText('admin/content-block/helpers/generators/image-grid___tekst'),
-            }),
+				label: tText('admin/content-block/helpers/generators/image-grid___tekst'),
+			}),
 			buttonLabel: TEXT_FIELD({
-                label: tText('admin/content-block/helpers/generators/image-grid___knop-tekst'),
-                validator: undefined,
-            }),
+				label: tText('admin/content-block/helpers/generators/image-grid___knop-tekst'),
+				validator: undefined,
+			}),
 			buttonTitle: TEXT_FIELD({
-                label: tText('admin/content-block/helpers/generators/image-grid___knop-tooltip'),
-                validator: undefined,
-            }),
+				label: tText('admin/content-block/helpers/generators/image-grid___knop-tooltip'),
+				validator: undefined,
+			}),
 			buttonType: {
 				label: tText('admin/content-block/helpers/generators/image-grid___knop-type-kleur'),
 				editorType: ContentBlockEditor.Select,
@@ -81,9 +81,9 @@ export const USP_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				validator: undefined,
 			},
 			buttonAltTitle: TEXT_FIELD({
-                label: tText('admin/content-block/helpers/generators/usp-grid___alt-title-text'),
-                validator: undefined,
-            }),
+				label: tText('admin/content-block/helpers/generators/usp-grid___alt-title-text'),
+				validator: undefined,
+			}),
 			action: {
 				label: tText('admin/content-block/helpers/generators/image-grid___link'),
 				editorType: ContentBlockEditor.ContentPicker,
