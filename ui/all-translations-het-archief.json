@@ -10011,24 +10011,6 @@
     "app": "HET_ARCHIEF",
     "component": "ADMIN_CORE",
     "location": "admin/content-block/helpers/generators/buttons",
-    "key": "knoptekst-is-verplicht",
-    "language": "nl",
-    "value": "Knoptekst is verplicht.",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "admin/content-block/helpers/generators/buttons",
-    "key": "knoptekst-is-verplicht",
-    "language": "en",
-    "value": "Headline is required.",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "admin/content-block/helpers/generators/buttons",
     "key": "tekst",
     "language": "nl",
     "value": "Tekst",
@@ -10041,6 +10023,24 @@
     "key": "tekst",
     "language": "en",
     "value": "Text",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "admin/content-block/helpers/generators/buttons",
+    "key": "knoptekst-is-verplicht",
+    "language": "nl",
+    "value": "Knoptekst is verplicht.",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "admin/content-block/helpers/generators/buttons",
+    "key": "knoptekst-is-verplicht",
+    "language": "en",
+    "value": "Headline is required.",
     "value_type": "TEXT"
   },
   {
@@ -13341,24 +13341,6 @@
     "app": "HET_ARCHIEF",
     "component": "ADMIN_CORE",
     "location": "admin/content-block/helpers/image-text-background/image-text-background",
-    "key": "titel-is-verplicht",
-    "language": "nl",
-    "value": "Titel is verplicht",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "admin/content-block/helpers/image-text-background/image-text-background",
-    "key": "titel-is-verplicht",
-    "language": "en",
-    "value": "Title is required",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "admin/content-block/helpers/image-text-background/image-text-background",
     "key": "titel-tekst",
     "language": "nl",
     "value": "Titel tekst",
@@ -13371,6 +13353,24 @@
     "key": "titel-tekst",
     "language": "en",
     "value": "Title text",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "admin/content-block/helpers/image-text-background/image-text-background",
+    "key": "titel-is-verplicht",
+    "language": "nl",
+    "value": "Titel is verplicht",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "admin/content-block/helpers/image-text-background/image-text-background",
+    "key": "titel-is-verplicht",
+    "language": "en",
+    "value": "Title is required",
     "value_type": "TEXT"
   },
   {
@@ -13989,6 +13989,24 @@
     "app": "HET_ARCHIEF",
     "component": "ADMIN_CORE",
     "location": "react-admin/modules/content-page/components/blocks/block-cards-without-description/block-cards-without-description",
+    "key": "label",
+    "language": "nl",
+    "value": "Label",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/content-page/components/blocks/block-cards-without-description/block-cards-without-description",
+    "key": "label",
+    "language": "en",
+    "value": "Label",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/content-page/components/blocks/block-cards-without-description/block-cards-without-description",
     "key": "label-is-verplicht",
     "language": "nl",
     "value": "Label is verplicht",
@@ -14001,24 +14019,6 @@
     "key": "label-is-verplicht",
     "language": "en",
     "value": "Label is required",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/content-page/components/blocks/block-cards-without-description/block-cards-without-description",
-    "key": "label",
-    "language": "nl",
-    "value": "Label",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/content-page/components/blocks/block-cards-without-description/block-cards-without-description",
-    "key": "label",
-    "language": "en",
-    "value": "Label",
     "value_type": "TEXT"
   },
   {
@@ -14493,24 +14493,6 @@
     "app": "HET_ARCHIEF",
     "component": "ADMIN_CORE",
     "location": "admin/content-block/helpers/generators/ctas",
-    "key": "titel-is-verplicht",
-    "language": "nl",
-    "value": "Titel is verplicht",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "admin/content-block/helpers/generators/ctas",
-    "key": "titel-is-verplicht",
-    "language": "en",
-    "value": "Title is required",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "admin/content-block/helpers/generators/ctas",
     "key": "titel-tekst",
     "language": "nl",
     "value": "Titel: Tekst",
@@ -14523,6 +14505,24 @@
     "key": "titel-tekst",
     "language": "en",
     "value": "Title: Text",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "admin/content-block/helpers/generators/ctas",
+    "key": "titel-is-verplicht",
+    "language": "nl",
+    "value": "Titel is verplicht",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "admin/content-block/helpers/generators/ctas",
+    "key": "titel-is-verplicht",
+    "language": "en",
+    "value": "Title is required",
     "value_type": "TEXT"
   },
   {
@@ -14583,24 +14583,6 @@
     "app": "HET_ARCHIEF",
     "component": "ADMIN_CORE",
     "location": "admin/content-block/helpers/generators/ctas",
-    "key": "knoptekst-is-verplicht",
-    "language": "nl",
-    "value": "Knoptekst is verplicht",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "admin/content-block/helpers/generators/ctas",
-    "key": "knoptekst-is-verplicht",
-    "language": "en",
-    "value": "Headline is required.",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "admin/content-block/helpers/generators/ctas",
     "key": "knop-tekst",
     "language": "nl",
     "value": "Knop: Tekst",
@@ -14613,6 +14595,24 @@
     "key": "knop-tekst",
     "language": "en",
     "value": "Button: Text",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "admin/content-block/helpers/generators/ctas",
+    "key": "knoptekst-is-verplicht",
+    "language": "nl",
+    "value": "Knoptekst is verplicht",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "admin/content-block/helpers/generators/ctas",
+    "key": "knoptekst-is-verplicht",
+    "language": "en",
+    "value": "Headline is required.",
     "value_type": "TEXT"
   },
   {
@@ -14817,24 +14817,6 @@
     "app": "HET_ARCHIEF",
     "component": "ADMIN_CORE",
     "location": "react-admin/modules/content-page/components/blocks/block-het-archief-header-search/block-het-archief-header-search",
-    "key": "is-verplicht",
-    "language": "nl",
-    "value": "Is verplicht",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/content-page/components/blocks/block-het-archief-header-search/block-het-archief-header-search",
-    "key": "is-verplicht",
-    "language": "en",
-    "value": "This is required",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/content-page/components/blocks/block-het-archief-header-search/block-het-archief-header-search",
     "key": "titel",
     "language": "nl",
     "value": "Titel",
@@ -14847,6 +14829,24 @@
     "key": "titel",
     "language": "en",
     "value": "Title",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/content-page/components/blocks/block-het-archief-header-search/block-het-archief-header-search",
+    "key": "is-verplicht",
+    "language": "nl",
+    "value": "Is verplicht",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/content-page/components/blocks/block-het-archief-header-search/block-het-archief-header-search",
+    "key": "is-verplicht",
+    "language": "en",
+    "value": "This is required",
     "value_type": "TEXT"
   },
   {
@@ -14943,24 +14943,6 @@
     "app": "HET_ARCHIEF",
     "component": "ADMIN_CORE",
     "location": "modules/content-page/components/blocks/block-het-archief-header-search/block-het-archief-header-search",
-    "key": "aria-label-verplicht",
-    "language": "nl",
-    "value": "aria label verplicht",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-het-archief-header-search/block-het-archief-header-search",
-    "key": "aria-label-verplicht",
-    "language": "en",
-    "value": "aria label required",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-het-archief-header-search/block-het-archief-header-search",
     "key": "aria-label-voor-zoekveld",
     "language": "nl",
     "value": "Aria label voor zoekveld",
@@ -14973,6 +14955,24 @@
     "key": "aria-label-voor-zoekveld",
     "language": "en",
     "value": "Aria label for search input",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-het-archief-header-search/block-het-archief-header-search",
+    "key": "aria-label-verplicht",
+    "language": "nl",
+    "value": "aria label verplicht",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-het-archief-header-search/block-het-archief-header-search",
+    "key": "aria-label-verplicht",
+    "language": "en",
+    "value": "aria label required",
     "value_type": "TEXT"
   },
   {
@@ -15159,24 +15159,6 @@
     "app": "HET_ARCHIEF",
     "component": "ADMIN_CORE",
     "location": "admin/content-block/helpers/generators/iframe",
-    "key": "titel-is-verplicht",
-    "language": "nl",
-    "value": "Alt-tekst is verplicht voor SEO en slechtzienden.",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "admin/content-block/helpers/generators/iframe",
-    "key": "titel-is-verplicht",
-    "language": "en",
-    "value": "Alternative text is required for SEO and the blind.",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "admin/content-block/helpers/generators/iframe",
     "key": "titel",
     "language": "nl",
     "value": "Alt-tekst",
@@ -15195,6 +15177,42 @@
     "app": "HET_ARCHIEF",
     "component": "ADMIN_CORE",
     "location": "admin/content-block/helpers/generators/iframe",
+    "key": "titel-is-verplicht",
+    "language": "nl",
+    "value": "Alt-tekst is verplicht voor SEO en slechtzienden.",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "admin/content-block/helpers/generators/iframe",
+    "key": "titel-is-verplicht",
+    "language": "en",
+    "value": "Alternative text is required for SEO and the blind.",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "admin/content-block/helpers/generators/iframe",
+    "key": "url",
+    "language": "nl",
+    "value": "URL",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "admin/content-block/helpers/generators/iframe",
+    "key": "url",
+    "language": "en",
+    "value": "URL",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "admin/content-block/helpers/generators/iframe",
     "key": "url-is-verplicht",
     "language": "nl",
     "value": "URL is verplicht",
@@ -15207,24 +15225,6 @@
     "key": "url-is-verplicht",
     "language": "en",
     "value": "URL is required.",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "admin/content-block/helpers/generators/iframe",
-    "key": "url",
-    "language": "nl",
-    "value": "URL",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "admin/content-block/helpers/generators/iframe",
-    "key": "url",
-    "language": "en",
-    "value": "URL",
     "value_type": "TEXT"
   },
   {
@@ -15393,24 +15393,6 @@
     "app": "HET_ARCHIEF",
     "component": "ADMIN_CORE",
     "location": "react-admin/modules/content-page/components/blocks/block-image/block-image",
-    "key": "knoptekst-is-verplicht",
-    "language": "nl",
-    "value": "Knoptekst is verplicht",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/content-page/components/blocks/block-image/block-image",
-    "key": "knoptekst-is-verplicht",
-    "language": "en",
-    "value": "Button text is required",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/content-page/components/blocks/block-image/block-image",
     "key": "knop-tekst",
     "language": "nl",
     "value": "Knop tekst",
@@ -15423,6 +15405,24 @@
     "key": "knop-tekst",
     "language": "en",
     "value": "Button text",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/content-page/components/blocks/block-image/block-image",
+    "key": "knoptekst-is-verplicht",
+    "language": "nl",
+    "value": "Knoptekst is verplicht",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/content-page/components/blocks/block-image/block-image",
+    "key": "knoptekst-is-verplicht",
+    "language": "en",
+    "value": "Button text is required",
     "value_type": "TEXT"
   },
   {
@@ -15951,24 +15951,6 @@
     "app": "HET_ARCHIEF",
     "component": "ADMIN_CORE",
     "location": "admin/content-block/helpers/generators/intro",
-    "key": "titel-is-verplicht",
-    "language": "nl",
-    "value": "Titel is verplicht.",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "admin/content-block/helpers/generators/intro",
-    "key": "titel-is-verplicht",
-    "language": "en",
-    "value": "Title is required.",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "admin/content-block/helpers/generators/intro",
     "key": "titel",
     "language": "nl",
     "value": "Titel (H1)",
@@ -15981,6 +15963,24 @@
     "key": "titel",
     "language": "en",
     "value": "Title (H1)",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "admin/content-block/helpers/generators/intro",
+    "key": "titel-is-verplicht",
+    "language": "nl",
+    "value": "Titel is verplicht.",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "admin/content-block/helpers/generators/intro",
+    "key": "titel-is-verplicht",
+    "language": "en",
+    "value": "Title is required.",
     "value_type": "TEXT"
   },
   {
@@ -16041,24 +16041,6 @@
     "app": "HET_ARCHIEF",
     "component": "ADMIN_CORE",
     "location": "react-admin/modules/content-page/components/blocks/block-maintainers-grid/block-maintainers-grid",
-    "key": "is-verplicht",
-    "language": "nl",
-    "value": "is-verplicht",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/content-page/components/blocks/block-maintainers-grid/block-maintainers-grid",
-    "key": "is-verplicht",
-    "language": "en",
-    "value": "is required",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/content-page/components/blocks/block-maintainers-grid/block-maintainers-grid",
     "key": "titel",
     "language": "nl",
     "value": "Titel",
@@ -16071,6 +16053,24 @@
     "key": "titel",
     "language": "en",
     "value": "Title",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/content-page/components/blocks/block-maintainers-grid/block-maintainers-grid",
+    "key": "is-verplicht",
+    "language": "nl",
+    "value": "is-verplicht",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/content-page/components/blocks/block-maintainers-grid/block-maintainers-grid",
+    "key": "is-verplicht",
+    "language": "en",
+    "value": "is required",
     "value_type": "TEXT"
   },
   {
@@ -16239,24 +16239,6 @@
     "app": "HET_ARCHIEF",
     "component": "ADMIN_CORE",
     "location": "modules/content-page/components/blocks/overview-newspaper-titles",
-    "key": "is-verplicht",
-    "language": "nl",
-    "value": "Verplicht",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/overview-newspaper-titles",
-    "key": "is-verplicht",
-    "language": "en",
-    "value": "Required",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/overview-newspaper-titles",
     "key": "titel",
     "language": "nl",
     "value": "Titel",
@@ -16269,6 +16251,24 @@
     "key": "titel",
     "language": "en",
     "value": "Title",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/overview-newspaper-titles",
+    "key": "is-verplicht",
+    "language": "nl",
+    "value": "Verplicht",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/overview-newspaper-titles",
+    "key": "is-verplicht",
+    "language": "en",
+    "value": "Required",
     "value_type": "TEXT"
   },
   {
@@ -16311,24 +16311,6 @@
     "app": "HET_ARCHIEF",
     "component": "ADMIN_CORE",
     "location": "modules/content-page/components/blocks/block-overview-newspaper-titles/overview-newspaper-titles",
-    "key": "knoptekst-is-verplicht",
-    "language": "nl",
-    "value": "Knoptekst is verplicht",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-overview-newspaper-titles/overview-newspaper-titles",
-    "key": "knoptekst-is-verplicht",
-    "language": "en",
-    "value": "Button text is required",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-overview-newspaper-titles/overview-newspaper-titles",
     "key": "knop-tekst",
     "language": "nl",
     "value": "Knop tekst",
@@ -16341,6 +16323,24 @@
     "key": "knop-tekst",
     "language": "en",
     "value": "Button text",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-overview-newspaper-titles/overview-newspaper-titles",
+    "key": "knoptekst-is-verplicht",
+    "language": "nl",
+    "value": "Knoptekst is verplicht",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-overview-newspaper-titles/overview-newspaper-titles",
+    "key": "knoptekst-is-verplicht",
+    "language": "en",
+    "value": "Button text is required",
     "value_type": "TEXT"
   },
   {
@@ -17391,6 +17391,24 @@
     "app": "HET_ARCHIEF",
     "component": "ADMIN_CORE",
     "location": "admin/content-block/helpers/generators/tag-with-link",
+    "key": "label",
+    "language": "nl",
+    "value": "Label",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "admin/content-block/helpers/generators/tag-with-link",
+    "key": "label",
+    "language": "en",
+    "value": "Label",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "admin/content-block/helpers/generators/tag-with-link",
     "key": "label-is-verplicht",
     "language": "nl",
     "value": "Label is verplicht",
@@ -17403,24 +17421,6 @@
     "key": "label-is-verplicht",
     "language": "en",
     "value": "Label is required",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "admin/content-block/helpers/generators/tag-with-link",
-    "key": "label",
-    "language": "nl",
-    "value": "Label",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "admin/content-block/helpers/generators/tag-with-link",
-    "key": "label",
-    "language": "en",
-    "value": "Label",
     "value_type": "TEXT"
   },
   {
@@ -17517,24 +17517,6 @@
     "app": "HET_ARCHIEF",
     "component": "ADMIN_CORE",
     "location": "admin/content-block/helpers/generators/three-clickable-tiles",
-    "key": "subtitel-is-verplicht",
-    "language": "nl",
-    "value": "Subtitel is verplicht",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "admin/content-block/helpers/generators/three-clickable-tiles",
-    "key": "subtitel-is-verplicht",
-    "language": "en",
-    "value": "Subtitle is required",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "admin/content-block/helpers/generators/three-clickable-tiles",
     "key": "subtitel",
     "language": "nl",
     "value": "Subtitel",
@@ -17547,6 +17529,24 @@
     "key": "subtitel",
     "language": "en",
     "value": "Subtitle",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "admin/content-block/helpers/generators/three-clickable-tiles",
+    "key": "subtitel-is-verplicht",
+    "language": "nl",
+    "value": "Subtitel is verplicht",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "admin/content-block/helpers/generators/three-clickable-tiles",
+    "key": "subtitel-is-verplicht",
+    "language": "en",
+    "value": "Subtitle is required",
     "value_type": "TEXT"
   },
   {
@@ -17625,24 +17625,6 @@
     "app": "HET_ARCHIEF",
     "component": "ADMIN_CORE",
     "location": "admin/content-block/helpers/generators/uitgeklaard",
-    "key": "titel-is-verplicht",
-    "language": "nl",
-    "value": "Titel is verplicht",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "admin/content-block/helpers/generators/uitgeklaard",
-    "key": "titel-is-verplicht",
-    "language": "en",
-    "value": "Title is required",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "admin/content-block/helpers/generators/uitgeklaard",
     "key": "titel",
     "language": "nl",
     "value": "Titel",
@@ -17691,6 +17673,24 @@
     "key": "verwijder-titel",
     "language": "en",
     "value": "Remove title",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "admin/content-block/helpers/generators/uitgeklaard",
+    "key": "titel-is-verplicht",
+    "language": "nl",
+    "value": "Titel is verplicht",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "admin/content-block/helpers/generators/uitgeklaard",
+    "key": "titel-is-verplicht",
+    "language": "en",
+    "value": "Title is required",
     "value_type": "TEXT"
   },
   {
@@ -18249,6 +18249,24 @@
     "key": "gelieve-een-correcte-zoekfilter-link-in-te-vullen",
     "language": "en",
     "value": "Please enter a correct search filter link.",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-content-enclose/block-content-enclose",
+    "key": "titel-is-verplicht",
+    "language": "nl",
+    "value": "Titel is verplicht",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-content-enclose/block-content-enclose",
+    "key": "titel-is-verplicht",
+    "language": "en",
+    "value": "Titel is verplicht",
     "value_type": "TEXT"
   },
   {
@@ -20039,7 +20057,7 @@
     "location": "pages/nieuwsbrief/index",
     "key": "nieuwsbrief-omschrijving",
     "language": "nl",
-    "value": "Ik wil graag maximaal 3 keer per jaar een nieuwsbrief ontvangen van hetarchief.be met informatie over nieuwe mogelijkheden op het platform en inspiratie voor mijn zoektocht naar digitaal archiefmateriaal.\r\n\r\nIk stem in met de verwerking van mijn persoonsgegevens overeenkomstig het privacybeleid.",
+    "value": "Ik wil graag maximaal 3 keer per jaar een nieuwsbrief ontvangen van hetarchief.be met informatie over nieuwe mogelijkheden op het platform en inspiratie voor mijn zoektocht naar digitaal archiefmateriaal.\n\nIk stem in met de verwerking van mijn persoonsgegevens overeenkomstig het privacybeleid.",
     "value_type": "TEXT"
   },
   {
@@ -20048,7 +20066,7 @@
     "location": "pages/nieuwsbrief/index",
     "key": "nieuwsbrief-omschrijving",
     "language": "en",
-    "value": "I would like to receive a newsletter from thearchives.be at most 3 times a year with information about new possibilities on the platform and inspiration for my search for digital archival material. \r\n\r\nI agree with the processing of my personal data in accordance with the privacy policy.",
+    "value": "I would like to receive a newsletter from thearchives.be at most 3 times a year with information about new possibilities on the platform and inspiration for my search for digital archival material. \n\nI agree with the processing of my personal data in accordance with the privacy policy.",
     "value_type": "TEXT"
   },
   {
@@ -22514,7 +22532,7 @@
     "location": "modules/account/views/account-my-material-requests",
     "key": "zoek-naar-materiaal-aanvraag-input-aria-label",
     "language": "en",
-    "value": "Search for material request\r\n[INPUT_ARIA_LABEL]",
+    "value": "Search for material request\n[INPUT_ARIA_LABEL]",
     "value_type": "TEXT"
   },
   {
@@ -26402,7 +26420,7 @@
     "location": "modules/material-requests/const/index",
     "key": "toestemming-rechthebbende-evaluate-conditions-blade",
     "language": "en",
-    "value": "Approval rights holder",
+    "value": "Permission of rights holder",
     "value_type": "TEXT"
   },
   {
@@ -26807,7 +26825,7 @@
     "location": "modules/material-requests/const/index",
     "key": "copyright-display-same-time-with-object",
     "language": "nl",
-    "value": "Gelijktijdig met object",
+    "value": "Gelijktijdig met object.",
     "value_type": "TEXT"
   },
   {
@@ -26816,7 +26834,7 @@
     "location": "modules/material-requests/const/index",
     "key": "copyright-display-same-time-with-object",
     "language": "en",
-    "value": "Simultaneous with object",
+    "value": "Simultaneous with object.",
     "value_type": "TEXT"
   },
   {
@@ -29534,7 +29552,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-content-info",
     "key": "toestemming-rechthebbende-content-info",
     "language": "en",
-    "value": "Permission rights holder",
+    "value": "Permission of rights holder",
     "value_type": "TEXT"
   },
   {
@@ -31343,7 +31361,7 @@
     "location": "modules/account/components/material-request-evaluator-options/material-request-evaluator-options",
     "key": "aanvraag-beoordelen-descriptive-title",
     "language": "nl",
-    "value": "Aanvraag beoordelen descriptive title",
+    "value": "Aanvraag beoordelen",
     "value_type": "TEXT"
   },
   {
@@ -39803,7 +39821,7 @@
     "location": "modules/shared/components/material-request-information/material-request-information",
     "key": "meer-informatie-over-aanvragen-sleutel-gebruiker",
     "language": "nl",
-    "value": "Meer informatie over aanvragen sleutel gebruiker",
+    "value": "Meer informatie over aanvragen",
     "value_type": "HTML"
   },
   {
@@ -44915,7 +44933,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "bedoeld-gebruik-beschrijving-label",
     "language": "nl",
-    "value": "Beschrijf in eigen woorden waarvoor je het materiaal wenst te gebruiken",
+    "value": "Beschrijf in eigen woorden waarvoor je het materiaal wenst te gebruiken.",
     "value_type": "TEXT"
   },
   {
@@ -44924,7 +44942,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "bedoeld-gebruik-beschrijving-label",
     "language": "en",
-    "value": "Describe in your own words what you want to use this material for",
+    "value": "Describe in your own words what you want to use this material for.",
     "value_type": "TEXT"
   },
   {
@@ -45023,7 +45041,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "bedoeld-gebruik-intern-gebruik-zonder-omschrijving",
     "language": "nl",
-    "value": "Intern gebruik zonder vergoeding of financieel voordeel: mijn organisatie zal geen vergoeding vragen of beoogt geen financieel voordeel met het interne gebruik van dit materiaal. Het materiaal wordt niet gebruikt op een manier die een financieel of zakelijk voordeel creëert voor de organisatie. Gebruik voor onderwijs en educatieve doeleinden, culturele doeleinden (zoals vertoning in musea) en niet-commercieel onderzoek wordt beschouwd als niet-commerciële exploitatie.",
+    "value": "Mijn organisatie zal geen vergoeding vragen of beoogt geen financieel voordeel met het interne gebruik van dit materiaal. Het materiaal wordt niet gebruikt op een manier die een financieel of zakelijk voordeel creëert voor de organisatie. Gebruik voor onderwijs en educatieve doeleinden, culturele doeleinden (zoals vertoning in musea) en niet-commercieel onderzoek wordt beschouwd als niet-commerciële exploitatie.",
     "value_type": "HTML"
   },
   {
@@ -45032,7 +45050,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "bedoeld-gebruik-intern-gebruik-zonder-omschrijving",
     "language": "en",
-    "value": "Internal use without compensation or financial benefit: my organisation will not ask for a compensation or has no financial goal with the internal use of this material. The material will not be used in a way that will create financial gains or a competitive advantage for the organisation. Use for education and educational purposes, cultural purposes (like museum exhibitions), or non-commercial research will be considered non-commercial exploitation.",
+    "value": "My organisation will not ask for a compensation or has no financial goal with the internal use of this material. The material will not be used in a way that will create financial gains or a competitive advantage for the organisation. Use for education and educational purposes, cultural purposes (like museum exhibitions), or non-commercial research will be considered non-commercial exploitation.",
     "value_type": "HTML"
   },
   {
@@ -45095,7 +45113,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "bedoeld-gebruik-directe-commerciele-exploitatie-omschrijving",
     "language": "nl",
-    "value": "Er wordt een vergoeding gevraagd van derden die niet gericht is op het materiaal als dusdanig, maar die wel betrekking heeft op het materiaal, hetzij rechtstreeks, hetzij onrechtstreeks via goederen producten of diensten waarin het materiaal herkenbaar wordt geïntegreerd (inclusief bijvoorbeeld merchandising, of uitzending / streaming via commerciële media van een werk waarin het materiaal werd geïntegreerd)",
+    "value": "Er wordt een vergoeding gevraagd van derden die niet gericht is op het materiaal als dusdanig, maar die wel betrekking heeft op het materiaal, hetzij rechtstreeks, hetzij onrechtstreeks via goederen producten of diensten waarin het materiaal herkenbaar wordt geïntegreerd (inclusief bijvoorbeeld merchandising, of uitzending / streaming via commerciële media van een werk waarin het materiaal werd geïntegreerd).",
     "value_type": "HTML"
   },
   {
@@ -45104,7 +45122,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "bedoeld-gebruik-directe-commerciele-exploitatie-omschrijving",
     "language": "en",
-    "value": "<p>A compensation is asked of a third party, not related to the material as such, but only related to the material as it is directly or indirectly recognizably integrated in other goods or services (including merchandising, broadcasting or streaming in <span style=\"color:#000000\"><span style=\"font-size:16px\"><span style=\"background-color:#ffffff\">commercial media</span></span></span> of a work that has integrated the material)</p>",
+    "value": "<p>A compensation is asked of a third party, not related to the material as such, but only related to the material as it is directly or indirectly recognizably integrated in other goods or services (including merchandising, broadcasting or streaming in <span style=\"color:#000000\"><span style=\"font-size:16px\"><span style=\"background-color:#ffffff\">commercial media</span></span></span> of a work that has integrated the material).</p>",
     "value_type": "HTML"
   },
   {
@@ -45725,7 +45743,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "gebruik-in-de-tijd-vraag",
     "language": "nl",
-    "value": "Hoe lang mag dit materiaal gebruikt worden?",
+    "value": "Hoe lang wil je toestemming om het materiaal te gebruiken?",
     "value_type": "TEXT"
   },
   {
@@ -45734,7 +45752,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "gebruik-in-de-tijd-vraag",
     "language": "en",
-    "value": "How long can this material be used?",
+    "value": "For how long do you want permission to reuse the material?",
     "value_type": "TEXT"
   },
   {
@@ -45851,7 +45869,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "bronvermelding-gelijktijdig-met-object-label",
     "language": "nl",
-    "value": "Gelijktijdig met object",
+    "value": "Gelijktijdig met object.",
     "value_type": "TEXT"
   },
   {
@@ -45860,7 +45878,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "bronvermelding-gelijktijdig-met-object-label",
     "language": "en",
-    "value": "Simultaneous with object",
+    "value": "Simultaneous with object.",
     "value_type": "TEXT"
   },
   {
@@ -48389,7 +48407,7 @@
     "location": "modules/material-requests/const/index",
     "key": "copyright-display-same-time-with-object",
     "language": "nl",
-    "value": "Vermelding auteursrecht gelijktijdig met object",
+    "value": "Vermelding auteursrecht gelijktijdig met object.",
     "value_type": "TEXT"
   },
   {
@@ -48398,7 +48416,7 @@
     "location": "modules/material-requests/const/index",
     "key": "copyright-display-same-time-with-object",
     "language": "en",
-    "value": "Copyright mention simultaneous with object",
+    "value": "Copyright mention simultaneous with object.",
     "value_type": "TEXT"
   },
   {
@@ -48497,7 +48515,7 @@
     "location": "modules/material-request-messages/services/material-request-pdf-generator",
     "key": "toestemming-licentiehouder",
     "language": "nl",
-    "value": "Toestemming licentiehouder",
+    "value": "Toestemming rechthebbende",
     "value_type": "TEXT"
   },
   {
@@ -48506,7 +48524,7 @@
     "location": "modules/material-request-messages/services/material-request-pdf-generator",
     "key": "toestemming-licentiehouder",
     "language": "en",
-    "value": "Permission licenseholder",
+    "value": "Permission of rights holder",
     "value_type": "TEXT"
   },
   {
@@ -48893,7 +48911,7 @@
     "location": "modules/material-request-messages/services/material-request-pdf-generator",
     "key": "bedoeld-gebruik-beschrijving-label",
     "language": "nl",
-    "value": "Beschrijf in eigen woorden waarvoor je het materiaal wenst te gebruiken",
+    "value": "Beschrijf in eigen woorden waarvoor je het materiaal wenst te gebruiken.",
     "value_type": "TEXT"
   },
   {
@@ -48902,7 +48920,7 @@
     "location": "modules/material-request-messages/services/material-request-pdf-generator",
     "key": "bedoeld-gebruik-beschrijving-label",
     "language": "en",
-    "value": "Describe in your own words for what you want to use the material",
+    "value": "Describe in your own words for what you want to use the material.",
     "value_type": "TEXT"
   },
   {

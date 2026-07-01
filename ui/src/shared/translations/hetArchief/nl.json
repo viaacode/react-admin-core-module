@@ -667,6 +667,7 @@
   "modules/content-page/components/blocks/block-content-enclose/block-content-enclose___content-enclose": "Content insluiten",
   "modules/content-page/components/blocks/block-content-enclose/block-content-enclose___content-insluiten": "Content insluiten",
   "modules/content-page/components/blocks/block-content-enclose/block-content-enclose___content-item": "Content item",
+  "modules/content-page/components/blocks/block-content-enclose/block-content-enclose___titel-is-verplicht": "Titel is verplicht",
   "modules/content-page/components/blocks/block-content-enclose/block-content-enclose___title": "titel",
   "modules/content-page/components/blocks/block-content-enclose/block-content-enclose___titletype": "titeltype",
   "modules/content-page/components/blocks/block-content-enclose/block-content-enclose___verwijder-object": "verwijder object",
