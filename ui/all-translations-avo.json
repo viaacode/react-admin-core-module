@@ -293,7 +293,7 @@
     "location": "admin/users/user",
     "key": "educatieve-organisaties",
     "language": "nl",
-    "value": "Educatieve organisaties",
+    "value": "Educatieve organisatie",
     "value_type": "TEXT"
   },
   {
@@ -2570,7 +2570,7 @@
     "location": "modules/content-page/views/content-page-overview",
     "key": "zoek-input-aria-label",
     "language": "nl",
-    "value": "Zoek input aria label",
+    "value": "Invulveld zoeken aria label",
     "value_type": "TEXT"
   },
   {
@@ -2984,7 +2984,7 @@
     "location": "modules/content-page-labels/views/content-page-label-overview",
     "key": "ga-naar-label-link-link-to",
     "language": "nl",
-    "value": "Ga naar label link link to",
+    "value": "Ga naar paginalink voor dit label {{linkTo}}",
     "value_type": "TEXT"
   },
   {
@@ -3047,7 +3047,7 @@
     "location": "modules/content-page-labels/views/content-page-label-overview",
     "key": "zoek-input-aria-label",
     "language": "nl",
-    "value": "Zoek input aria label",
+    "value": "Invulveld zoeken aria label",
     "value_type": "TEXT"
   },
   {
@@ -3084,33 +3084,6 @@
     "key": "content-pagina-label-toevoegen",
     "language": "nl",
     "value": "Contentpaginalabel toevoegen",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "modules/maintenance-alerts/views/maintenance-alerts-edit-form",
-    "key": "titel-melding-input-aria-label",
-    "language": "nl",
-    "value": "Titel melding input aria label",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "modules/maintenance-alerts/views/maintenance-alerts-edit-form",
-    "key": "zichtbaar-vanaf-tijd-input-aria-label",
-    "language": "nl",
-    "value": "Zichtbaar vanaf tijd input aria label",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "modules/maintenance-alerts/views/maintenance-alerts-edit-form",
-    "key": "zichtbaar-tot-tijd-input-aria-label",
-    "language": "nl",
-    "value": "Zichtbaar tot tijd input aria label",
     "value_type": "TEXT"
   },
   {
@@ -3785,7 +3758,7 @@
     "location": "modules/translations/views/translations-overview",
     "key": "zoek-vertaling-input-aria-label",
     "language": "nl",
-    "value": "Zoek vertaling input aria label",
+    "value": "Invulveld zoeken in vertalingen aria label",
     "value_type": "TEXT"
   },
   {
@@ -4280,7 +4253,7 @@
     "location": "modules/user/helpers/render-user-overview-table-cells",
     "key": "acties-voor-gebruiker-user-name",
     "language": "nl",
-    "value": "Acties voor gebruiker user name",
+    "value": "Acties voor gebruiker {{userName}}",
     "value_type": "TEXT"
   },
   {
@@ -4449,15 +4422,6 @@
     "app": "AVO",
     "component": "ADMIN_CORE",
     "location": "admin/users/views/user-detail",
-    "key": "secundair-email-adres",
-    "language": "nl",
-    "value": "Tweede e-mailadres",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "admin/users/views/user-detail",
     "key": "gebruikersgroep",
     "language": "nl",
     "value": "Gebruikersgroep",
@@ -4595,7 +4559,7 @@
     "location": "admin/users/views/user-detail",
     "key": "educatieve-organisaties",
     "language": "nl",
-    "value": "Educatieve organisaties",
+    "value": "Educatieve organisatie",
     "value_type": "TEXT"
   },
   {
@@ -4865,7 +4829,7 @@
     "location": "modules/user/views/user-overview",
     "key": "zoek-input-aria-label",
     "language": "nl",
-    "value": "Zoek input aria label",
+    "value": "Invulveld zoeken aria label",
     "value_type": "TEXT"
   },
   {
@@ -5061,18 +5025,18 @@
     "app": "AVO",
     "component": "ADMIN_CORE",
     "location": "admin/content-block/helpers/generators/buttons",
-    "key": "knoptekst-is-verplicht",
+    "key": "tekst",
     "language": "nl",
-    "value": "Knoptekst is verplicht.",
+    "value": "Tekst",
     "value_type": "TEXT"
   },
   {
     "app": "AVO",
     "component": "ADMIN_CORE",
     "location": "admin/content-block/helpers/generators/buttons",
-    "key": "tekst",
+    "key": "knoptekst-is-verplicht",
     "language": "nl",
-    "value": "Tekst",
+    "value": "Knoptekst is verplicht.",
     "value_type": "TEXT"
   },
   {
@@ -5558,7 +5522,7 @@
     "location": "modules/content-page/components/date-picker/date-picker",
     "key": "datum-input-aria-label",
     "language": "nl",
-    "value": "Datum input aria label",
+    "value": "Invulveld datum aria label",
     "value_type": "TEXT"
   },
   {
@@ -6647,7 +6611,7 @@
     "location": "shared/components/multi-educational-organisation-select-modal/multi-educational-organisation-select-modal",
     "key": "educatieve-organisaties",
     "language": "nl",
-    "value": "Educatieve organisaties",
+    "value": "Educatieve organisatie",
     "value_type": "TEXT"
   },
   {
@@ -6978,18 +6942,18 @@
     "app": "AVO",
     "component": "ADMIN_CORE",
     "location": "admin/content-block/helpers/image-text-background/image-text-background",
-    "key": "titel-is-verplicht",
+    "key": "titel-tekst",
     "language": "nl",
-    "value": "Titel is verplicht",
+    "value": "Titel tekst",
     "value_type": "TEXT"
   },
   {
     "app": "AVO",
     "component": "ADMIN_CORE",
     "location": "admin/content-block/helpers/image-text-background/image-text-background",
-    "key": "titel-tekst",
+    "key": "titel-is-verplicht",
     "language": "nl",
-    "value": "Titel tekst",
+    "value": "Titel is verplicht",
     "value_type": "TEXT"
   },
   {
@@ -7221,18 +7185,18 @@
     "app": "AVO",
     "component": "ADMIN_CORE",
     "location": "react-admin/modules/content-page/components/blocks/block-cards-without-description/block-cards-without-description",
-    "key": "label-is-verplicht",
+    "key": "label",
     "language": "nl",
-    "value": "Label is verplicht",
+    "value": "Label",
     "value_type": "TEXT"
   },
   {
     "app": "AVO",
     "component": "ADMIN_CORE",
     "location": "react-admin/modules/content-page/components/blocks/block-cards-without-description/block-cards-without-description",
-    "key": "label",
+    "key": "label-is-verplicht",
     "language": "nl",
-    "value": "Label",
+    "value": "Label is verplicht",
     "value_type": "TEXT"
   },
   {
@@ -7365,18 +7329,18 @@
     "app": "AVO",
     "component": "ADMIN_CORE",
     "location": "admin/content-block/helpers/generators/ctas",
-    "key": "titel-is-verplicht",
+    "key": "titel-tekst",
     "language": "nl",
-    "value": "Titel is verplicht",
+    "value": "Titel: Tekst",
     "value_type": "TEXT"
   },
   {
     "app": "AVO",
     "component": "ADMIN_CORE",
     "location": "admin/content-block/helpers/generators/ctas",
-    "key": "titel-tekst",
+    "key": "titel-is-verplicht",
     "language": "nl",
-    "value": "Titel: Tekst",
+    "value": "Titel is verplicht",
     "value_type": "TEXT"
   },
   {
@@ -7410,18 +7374,18 @@
     "app": "AVO",
     "component": "ADMIN_CORE",
     "location": "admin/content-block/helpers/generators/ctas",
-    "key": "knoptekst-is-verplicht",
+    "key": "knop-tekst",
     "language": "nl",
-    "value": "Knoptekst is verplicht",
+    "value": "Knop: Tekst",
     "value_type": "TEXT"
   },
   {
     "app": "AVO",
     "component": "ADMIN_CORE",
     "location": "admin/content-block/helpers/generators/ctas",
-    "key": "knop-tekst",
+    "key": "knoptekst-is-verplicht",
     "language": "nl",
-    "value": "Knop: Tekst",
+    "value": "Knoptekst is verplicht",
     "value_type": "TEXT"
   },
   {
@@ -7517,24 +7481,6 @@
   {
     "app": "AVO",
     "component": "ADMIN_CORE",
-    "location": "react-admin/modules/content-page/components/blocks/block-het-archief-header-search/block-het-archief-header-search",
-    "key": "start-je-zoektocht",
-    "language": "nl",
-    "value": "Start je zoektocht",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-het-archief-header-search/block-het-archief-header-search",
-    "key": "zoek-in-de-publieke-catalogus-input-aria-label",
-    "language": "nl",
-    "value": "Zoek in de publieke catalogus input aria label",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
     "location": "modules/content-page/components/blocks/block-het-archief-image-text-background/block-het-archief-image-text-background",
     "key": "titel-grootte",
     "language": "nl",
@@ -7608,15 +7554,6 @@
     "app": "AVO",
     "component": "ADMIN_CORE",
     "location": "admin/content-block/helpers/generators/iframe",
-    "key": "titel-is-verplicht",
-    "language": "nl",
-    "value": "Alt. tekst is verplicht voor SEO en slechtzienden.",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "admin/content-block/helpers/generators/iframe",
     "key": "titel",
     "language": "nl",
     "value": "Alt. tekst (verplicht)",
@@ -7626,9 +7563,9 @@
     "app": "AVO",
     "component": "ADMIN_CORE",
     "location": "admin/content-block/helpers/generators/iframe",
-    "key": "url-is-verplicht",
+    "key": "titel-is-verplicht",
     "language": "nl",
-    "value": "Url is verplicht.",
+    "value": "Alt. tekst is verplicht voor SEO en slechtzienden.",
     "value_type": "TEXT"
   },
   {
@@ -7638,6 +7575,15 @@
     "key": "url",
     "language": "nl",
     "value": "URL",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "admin/content-block/helpers/generators/iframe",
+    "key": "url-is-verplicht",
+    "language": "nl",
+    "value": "Url is verplicht.",
     "value_type": "TEXT"
   },
   {
@@ -7725,18 +7671,18 @@
     "app": "AVO",
     "component": "ADMIN_CORE",
     "location": "react-admin/modules/content-page/components/blocks/block-image/block-image",
-    "key": "knoptekst-is-verplicht",
+    "key": "knop-tekst",
     "language": "nl",
-    "value": "Knoptekst is verplicht",
+    "value": "Knop tekst",
     "value_type": "TEXT"
   },
   {
     "app": "AVO",
     "component": "ADMIN_CORE",
     "location": "react-admin/modules/content-page/components/blocks/block-image/block-image",
-    "key": "knop-tekst",
+    "key": "knoptekst-is-verplicht",
     "language": "nl",
-    "value": "Knop tekst",
+    "value": "Knoptekst is verplicht",
     "value_type": "TEXT"
   },
   {
@@ -8004,18 +7950,18 @@
     "app": "AVO",
     "component": "ADMIN_CORE",
     "location": "admin/content-block/helpers/generators/intro",
-    "key": "titel-is-verplicht",
+    "key": "titel",
     "language": "nl",
-    "value": "Titel is verplicht.",
+    "value": "Titel (H1)",
     "value_type": "TEXT"
   },
   {
     "app": "AVO",
     "component": "ADMIN_CORE",
     "location": "admin/content-block/helpers/generators/intro",
-    "key": "titel",
+    "key": "titel-is-verplicht",
     "language": "nl",
-    "value": "Titel (H1)",
+    "value": "Titel is verplicht.",
     "value_type": "TEXT"
   },
   {
@@ -8058,15 +8004,6 @@
     "app": "AVO",
     "component": "ADMIN_CORE",
     "location": "admin/content-block/helpers/generators/klaar",
-    "key": "titel-is-verplicht",
-    "language": "nl",
-    "value": "Titel is verplicht.",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "admin/content-block/helpers/generators/klaar",
     "key": "titel",
     "language": "nl",
     "value": "Titel",
@@ -8094,6 +8031,15 @@
     "app": "AVO",
     "component": "ADMIN_CORE",
     "location": "admin/content-block/helpers/generators/klaar",
+    "key": "titel-is-verplicht",
+    "language": "nl",
+    "value": "Titel is verplicht.",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "admin/content-block/helpers/generators/klaar",
     "key": "datum-is-verplicht",
     "language": "nl",
     "value": "Datum is verplicht.",
@@ -8105,7 +8051,7 @@
     "location": "modules/content-page/components/blocks/block-maintainers-grid/block-maintainers-grid",
     "key": "ga-naar-aanbieder-maintainer-name",
     "language": "nl",
-    "value": "Ga naar aanbieder maintainer name",
+    "value": "Ga naar aanbieder {{maintainerName}}",
     "value_type": "TEXT"
   },
   {
@@ -8139,15 +8085,6 @@
     "app": "AVO",
     "component": "ADMIN_CORE",
     "location": "modules/content-page/components/blocks/block-media-grid/block-media-grid",
-    "key": "startknippunt-is-verplicht",
-    "language": "nl",
-    "value": "Startknip is verplicht!",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-media-grid/block-media-grid",
     "key": "startknippunt-seconden",
     "language": "nl",
     "value": "Startknip in seconden",
@@ -8157,9 +8094,9 @@
     "app": "AVO",
     "component": "ADMIN_CORE",
     "location": "modules/content-page/components/blocks/block-media-grid/block-media-grid",
-    "key": "eindknippunt-is-verplicht",
+    "key": "startknippunt-is-verplicht",
     "language": "nl",
-    "value": "Eindknip is verplicht!",
+    "value": "Startknip is verplicht!",
     "value_type": "TEXT"
   },
   {
@@ -8169,6 +8106,15 @@
     "key": "eindknippunt-seconden",
     "language": "nl",
     "value": "Eindknip in seconden",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-media-grid/block-media-grid",
+    "key": "eindknippunt-is-verplicht",
+    "language": "nl",
+    "value": "Eindknip is verplicht!",
     "value_type": "TEXT"
   },
   {
@@ -8466,15 +8412,6 @@
     "key": "cta-achtergrond-afbeelding",
     "language": "nl",
     "value": "CTA achtergrond: afbeelding",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-overview-newspaper-titles/block-overview-newspaper-titles",
-    "key": "zoek-kranten-op-titel-input-aria-label",
-    "language": "nl",
-    "value": "Zoek kranten op titel input aria label",
     "value_type": "TEXT"
   },
   {
@@ -8958,18 +8895,18 @@
     "app": "AVO",
     "component": "ADMIN_CORE",
     "location": "admin/content-block/helpers/generators/tag-with-link",
-    "key": "label-is-verplicht",
+    "key": "label",
     "language": "nl",
-    "value": "Label is verplicht",
+    "value": "Label",
     "value_type": "TEXT"
   },
   {
     "app": "AVO",
     "component": "ADMIN_CORE",
     "location": "admin/content-block/helpers/generators/tag-with-link",
-    "key": "label",
+    "key": "label-is-verplicht",
     "language": "nl",
-    "value": "Label",
+    "value": "Label is verplicht",
     "value_type": "TEXT"
   },
   {
@@ -9021,18 +8958,18 @@
     "app": "AVO",
     "component": "ADMIN_CORE",
     "location": "admin/content-block/helpers/generators/three-clickable-tiles",
-    "key": "subtitel-is-verplicht",
+    "key": "subtitel",
     "language": "nl",
-    "value": "Subtitel is verplicht",
+    "value": "Subtitel",
     "value_type": "TEXT"
   },
   {
     "app": "AVO",
     "component": "ADMIN_CORE",
     "location": "admin/content-block/helpers/generators/three-clickable-tiles",
-    "key": "subtitel",
+    "key": "subtitel-is-verplicht",
     "language": "nl",
-    "value": "Subtitel",
+    "value": "Subtitel is verplicht",
     "value_type": "TEXT"
   },
   {
@@ -9075,15 +9012,6 @@
     "app": "AVO",
     "component": "ADMIN_CORE",
     "location": "admin/content-block/helpers/generators/uitgeklaard",
-    "key": "titel-is-verplicht",
-    "language": "nl",
-    "value": "Titel is verplicht",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "admin/content-block/helpers/generators/uitgeklaard",
     "key": "titel",
     "language": "nl",
     "value": "Titel",
@@ -9105,6 +9033,15 @@
     "key": "verwijder-titel",
     "language": "nl",
     "value": "Verwijder titel",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "admin/content-block/helpers/generators/uitgeklaard",
+    "key": "titel-is-verplicht",
+    "language": "nl",
+    "value": "Titel is verplicht",
     "value_type": "TEXT"
   },
   {
@@ -9388,6 +9325,15 @@
   },
   {
     "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-content-enclose/block-content-enclose",
+    "key": "titel-is-verplicht",
+    "language": "nl",
+    "value": "Titel is verplicht",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
     "component": "FRONTEND",
     "location": "app",
     "key": "je-account-is-gekoppeld",
@@ -9599,7 +9545,7 @@
     "location": "admin/admin",
     "key": "leerlingencollecties",
     "language": "nl",
-    "value": "Leerlingencollecties",
+    "value": "Reacties / llncollecties",
     "value_type": "TEXT"
   },
   {
@@ -9842,7 +9788,7 @@
     "location": "assignment/assignment",
     "key": "de-opdracht-deadline-is-reeds-verlopen",
     "language": "nl",
-    "value": "De opdracht deadline is reeds verlopen",
+    "value": "De deadline van de opdracht is reeds verlopen.",
     "value_type": "HTML"
   },
   {
@@ -10985,7 +10931,7 @@
     "location": "admin/assignments/assignments",
     "key": "leerlingencollecties",
     "language": "nl",
-    "value": "Leerlingencollecties",
+    "value": "Reacties / llncollecties",
     "value_type": "TEXT"
   },
   {
@@ -13709,15 +13655,6 @@
   {
     "app": "AVO",
     "component": "FRONTEND",
-    "location": "assignment/views/assignment-detail",
-    "key": "je-hebt-geen-rechten-om-deze-pagina-te",
-    "language": "nl",
-    "value": "Je hebt geen rechten om deze pagina te bekijken.",
-    "value_type": "HTML"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
     "location": "assignment/views/assignment-edit",
     "key": "het-ophalen-van-de-opdracht-is-mislukt",
     "language": "nl",
@@ -13740,15 +13677,6 @@
     "key": "ophalen-van-permissies-is-mislukt",
     "language": "nl",
     "value": "Ophalen van permissies is mislukt.",
-    "value_type": "HTML"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "assignment/views/assignment-detail",
-    "key": "het-ophalen-van-het-aantal-keer-bekeken-gebookmarked-is-mislukt",
-    "language": "nl",
-    "value": "Het ophalen van het aantal keer bekeken gebookmarked is mislukt.",
     "value_type": "HTML"
   },
   {
@@ -15501,15 +15429,6 @@
     "app": "AVO",
     "component": "FRONTEND",
     "location": "bundle/views/bundle-detail",
-    "key": "het-ophalen-van-het-aantal-keer-bekeken-gebookmarked-is-mislukt",
-    "language": "nl",
-    "value": "Het ophalen van het aantal keer bekeken / aangemaakt als bladwijzer is mislukt.",
-    "value_type": "HTML"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "bundle/views/bundle-detail",
     "key": "het-ophalen-van-de-gerelateerde-bundels-is-mislukt",
     "language": "nl",
     "value": "Het ophalen van de gerelateerde bundels is mislukt.",
@@ -15928,15 +15847,6 @@
     "language": "nl",
     "value": "Deze bundel kon niet worden gevonden.",
     "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "collection/views/collection-detail",
-    "key": "het-ophalen-van-het-aantal-keer-bekeken-gebookmarked-is-mislukt",
-    "language": "nl",
-    "value": "Het ophalen van het aantal keer bekeken / aangemaakt als bladwijzer is mislukt.",
-    "value_type": "HTML"
   },
   {
     "app": "AVO",
@@ -18786,15 +18696,6 @@
     "app": "AVO",
     "component": "FRONTEND",
     "location": "item/views/item-detail",
-    "key": "het-ophalen-van-het-aantal-keer-bekeken-gebookmarked-is-mislukt",
-    "language": "nl",
-    "value": "Het ophalen van het aantal keer bekeken / aangemaakt als bladwijzer is mislukt.",
-    "value_type": "HTML"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "item/views/item-detail",
     "key": "het-ophalen-van-het-item-is-mislukt",
     "language": "nl",
     "value": "Het ophalen van het fragment is mislukt. Contacteer ons via de Feedback-knop mocht dit probleem zich blijven voordoen.",
@@ -19974,15 +19875,6 @@
     "app": "AVO",
     "component": "FRONTEND",
     "location": "settings/components/profile",
-    "key": "schermnaam-is-reeds-in-gebruik",
-    "language": "nl",
-    "value": "Deze schermnaam is reeds in gebruik, kies een andere naam.",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "settings/components/profile",
     "key": "opgeslagen",
     "language": "nl",
     "value": "Opgeslagen",
@@ -20067,24 +19959,6 @@
     "key": "achternaam",
     "language": "nl",
     "value": "Achternaam",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "settings/components/profile",
-    "key": "nickname",
-    "language": "nl",
-    "value": "Schermnaam",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "settings/components/profile",
-    "key": "een-unieke-gebruikersnaam",
-    "language": "nl",
-    "value": "Een unieke schermnaam.",
     "value_type": "TEXT"
   },
   {
@@ -25238,15 +25112,6 @@
   {
     "app": "AVO",
     "component": "FRONTEND",
-    "location": "admin/users/views/user-detail",
-    "key": "gebruikersnaam",
-    "language": "nl",
-    "value": "Gebruikersnaam",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
     "location": "admin/users/views/user-edit",
     "key": "bewerk-gebruiker",
     "language": "nl",
@@ -28427,7 +28292,7 @@
     "location": "shared/components/multi-educational-organisation-select-modal/multi-educational-organisation-select-modal",
     "key": "educatieve-organisaties",
     "language": "nl",
-    "value": "Educatieve organisaties",
+    "value": "Educatieve organisatie",
     "value_type": "HTML"
   },
   {
@@ -29535,15 +29400,6 @@
     "key": "het-ophalen-van-de-opties-is-mislukt",
     "language": "nl",
     "value": "Het ophalen van de opties is mislukt.",
-    "value_type": "HTML"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "admin/shared/components/content-picker/content-picker",
-    "key": "voor-deze-content-pagina-is-geen-pad-geconfigureerd",
-    "language": "nl",
-    "value": "Voor deze contentpagina is geen pad geconfigureerd.",
     "value_type": "HTML"
   },
   {
