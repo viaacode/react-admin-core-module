@@ -112,11 +112,12 @@
     "yup": "1.4.0"
   },
   "devDependencies": {
+    "@babel/core": "7.29.0",
+    "@babel/plugin-transform-runtime": "7.29.0",
     "@babel/preset-typescript": "7.22.15",
     "@biomejs/biome": "2.0.0",
     "@commitlint/cli": "16.1.0",
     "@commitlint/config-conventional": "16.0.0",
-    "@rolldown/binding-darwin-arm64": "^1.0.0-rc.12",
     "@testing-library/jest-dom": "6.9.1",
     "@testing-library/react": "16.3.2",
     "@testing-library/user-event": "14.6.1",
