@@ -1,4 +1,3 @@
-import type { RichEditorState } from '@meemoo/react-components';
 import type { SelectOption, TagInfo } from '@viaa/avo2-components';
 import {
 	Checkbox,
@@ -105,7 +104,7 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 	const changeContentPageProp = useCallback(
 		(
 			propName: keyof ContentPageInfo | 'description_state',
-			propValue: ValueOf<ContentPageInfo> | RichEditorState | string
+			propValue: ValueOf<ContentPageInfo> | string
 		) =>
 			changeContentPageState({
 				type: ContentEditActionType.SET_CONTENT_PAGE_PROP,

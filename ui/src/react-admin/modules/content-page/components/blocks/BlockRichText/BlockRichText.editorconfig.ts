@@ -13,7 +13,6 @@ import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, TEXT_FIELD } from '../defau
 
 export const INITIAL_RICH_TEXT_COMPONENTS_STATE = (): RichTextBlockComponentState => ({
 	content: '',
-	contentRichEditorState: undefined,
 });
 
 export const INITIAL_RICH_TEXT_BLOCK_STATE = (): DefaultContentBlockState =>

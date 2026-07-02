@@ -140,7 +140,7 @@ export const ErrorView: FC<ErrorViewProps> = ({
 					body=""
 					icon={errorIcon}
 					title={errorMessage}
-					className="c-content"
+					className="c-rich-text-editor__content"
 					data-location-id={locationId}
 				>
 					{children}

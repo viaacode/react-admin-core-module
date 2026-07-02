@@ -1,4 +1,3 @@
-import type { RichEditorState } from '@meemoo/react-components';
 import { AvoContentPageType, type AvoUserCommonUser } from '@viaa/avo2-types';
 import { cloneDeep, isNil } from 'es-toolkit';
 import type { Draft } from 'immer';
@@ -9,8 +8,8 @@ import { Locale } from '~modules/translations/translations.core.types';
 import { isAvo } from '~shared/helpers/is-avo.ts';
 import type { ValueOf } from '~shared/types';
 import type {
-	ContentBlockComponentsConfig,
 	ContentBlockComponentState,
+	ContentBlockComponentsConfig,
 	ContentBlockConfig,
 	ContentBlockErrors,
 	RepeatedContentBlockComponentState,
@@ -31,7 +30,7 @@ interface SetContentPageProp {
 	type: ContentEditActionType.SET_CONTENT_PAGE_PROP;
 	payload: {
 		propName: keyof ContentPageInfo | 'description_state';
-		propValue: ValueOf<ContentPageInfoEditOrCreate> | RichEditorState | string;
+		propValue: ValueOf<ContentPageInfoEditOrCreate> | string;
 	};
 }
 

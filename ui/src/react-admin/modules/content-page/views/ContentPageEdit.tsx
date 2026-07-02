@@ -26,7 +26,6 @@ import {
 	contentEditReducer,
 } from '~modules/content-page/helpers/content-edit.reducer';
 import { useContentTypes } from '~modules/content-page/hooks/useContentTypes';
-import { convertRichTextEditorStatesToHtml } from '~modules/content-page/services/content-page.converters';
 import { ContentPageService } from '~modules/content-page/services/content-page.service';
 import type {
 	ContentBlockComponentState,
@@ -440,11 +439,7 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 				setHasSubmitted(true);
 			}
 
-			// Remove rich text editor states, since they are also saved as html,
-			// and we don't want those states to end up in the database
-			const blockConfigs: ContentBlockConfig[] = content_blocks
-				? convertRichTextEditorStatesToHtml(content_blocks)
-				: [];
+			const blockConfigs: ContentBlockConfig[] = content_blocks || [];
 
 			// Run validators on to check untouched inputs
 			blockConfigs.forEach((config, configIndex) => {

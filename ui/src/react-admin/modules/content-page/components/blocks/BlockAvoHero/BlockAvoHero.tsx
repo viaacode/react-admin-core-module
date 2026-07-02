@@ -59,7 +59,7 @@ export const BlockAvoHero: FunctionComponent<BlockAvoHeroProps> = ({
 				<BlockHeading type="h2" color={titleColor} className="c-home-hero__title">
 					{title}
 				</BlockHeading>
-				<div className="c-content c-content--inverse">
+				<div className="c-rich-text-editor__content c-content--inverse">
 					<p className="c-body-1--spaced" style={{ color: contentColor }}>
 						{content}
 					</p>

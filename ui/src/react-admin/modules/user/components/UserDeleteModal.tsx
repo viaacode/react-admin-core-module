@@ -430,7 +430,7 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 				)}
 
 				{!!countOutputs.length && (
-					<Spacer margin="top" className="c-content">
+					<Spacer margin="top" className="c-rich-text-editor__content">
 						<strong>
 							{tText(
 								'react-admin/modules/user/components/user-delete-modal___deze-inhoud-zal-verwijderd-worden',
