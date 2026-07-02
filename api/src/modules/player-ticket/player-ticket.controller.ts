@@ -5,15 +5,18 @@ import {
 	InternalServerErrorException,
 	Ip,
 	NotFoundException,
+	ParseIntPipe,
 	Query,
 	Req,
 	UseGuards,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 
-import { LoggedInGuard } from '../shared/guards/logged-in.guard';
+// import { LoggedInGuard } from '../shared/guards/logged-in.guard';
 
+import { LoggedInGuard } from '../shared/guards/logged-in.guard';
 import { GetPlayableUrlDto } from './dto/GetPlayableUrlDto.dto';
+import { PlayerTokenOptions } from './player-ticket.types';
 import { PlayerTicketService } from './services/player-ticket.service';
 
 @ApiTags('Player Ticket')
@@ -25,25 +28,48 @@ export class PlayerTicketController {
 	@UseGuards(LoggedInGuard)
 	public async getPlayableUrl(
 		@Query() queryParams: GetPlayableUrlDto,
-		@Req() request,
-		@Ip() ip
+		@Req() request: Request,
+		@Ip() ip: string
 	): Promise<string | string[]> {
 		if (!queryParams.externalId && !queryParams.externalIds && !queryParams.browsePath) {
 			throw new BadRequestException(
 				'Either query param externalId or browsePath is required to fetch a playable url'
 			);
 		}
-		const referrer = request.header('Referer') || 'referer-not-defined';
+		const startTime = /[0-9]+/.test(queryParams.startTime)
+			? Number.parseInt(queryParams.startTime, 10)
+			: undefined;
+		const endTime = /[0-9]+/.test(queryParams.endTime)
+			? Number.parseInt(queryParams.endTime, 10)
+			: undefined;
+		// biome-ignore lint/suspicious/noExplicitAny: get header
+		const referer = (request as any).header('Referer') || 'referer-not-defined';
 		if (queryParams.externalId) {
-			return this.getPlayableUrlByExternalId(queryParams.externalId, referrer, ip);
+			return this.getPlayableUrlByExternalId(queryParams.externalId, {
+				referer,
+				ip,
+				isPublicDomain: false,
+				startTime,
+				endTime,
+			});
 		} else if (queryParams.externalIds) {
 			return Promise.all(
-				queryParams.externalIds
-					.split(',')
-					.map((externalId) => this.getPlayableUrlByExternalId(externalId, referrer, ip))
+				queryParams.externalIds.split(',').map((externalId) =>
+					this.getPlayableUrlByExternalId(externalId, {
+						referer,
+						ip,
+						startTime,
+						endTime,
+					})
+				)
 			);
 		} else {
-			return this.getPlayableUrlFromBrowsePath(queryParams.browsePath, referrer, ip);
+			return this.getPlayableUrlFromBrowsePath(queryParams.browsePath, {
+				referer,
+				ip,
+				startTime,
+				endTime,
+			});
 		}
 	}
 
@@ -51,29 +77,30 @@ export class PlayerTicketController {
 	 * Gets a playable url for a given media item
 	 * https://viaadocumentation.atlassian.net/wiki/spaces/SI/pages/1063453019/Media+Service
 	 * @param externalId external_id of the media item that you want to view
-	 * @param referrer
-	 * @param ip
+	 * @param options
 	 */
 	public async getPlayableUrlByExternalId(
 		externalId: string,
-		referrer: string,
-		ip: string
+		options: PlayerTokenOptions
 	): Promise<string> {
 		try {
-			const browsePath = await this.playerTicketService.getEmbedUrl(externalId);
-			if (!browsePath) {
+			const objectInfo = await this.playerTicketService.getBrowseUrlAndType(externalId);
+			if (!objectInfo?.browsePath) {
 				throw new NotFoundException({
 					message: 'Object with external id was not found',
 				});
 			}
-			return this.getPlayableUrlFromBrowsePath(browsePath, referrer, ip);
+			return this.getPlayableUrlFromBrowsePath(objectInfo.browsePath, {
+				...options,
+				startTime: options.startTime || objectInfo.startTime,
+			});
 		} catch (err) {
 			throw new InternalServerErrorException({
 				message: 'Failed to get player ticket',
 				innerException: err,
 				additionalInfo: {
 					externalId,
-					referrer,
+					options,
 				},
 			});
 		}
@@ -82,13 +109,11 @@ export class PlayerTicketController {
 	/**
 	 * Generates a playable url for a video
 	 * @param browsePath
-	 * @param referrer
-	 * @param ip
+	 * @param options
 	 */
 	public async getPlayableUrlFromBrowsePath(
 		browsePath: string,
-		referrer: string,
-		ip: string
+		options: PlayerTokenOptions
 	): Promise<string> {
 		try {
 			const fileRepresentationSchemaIdentifier: string | undefined =
@@ -105,17 +130,14 @@ export class PlayerTicketController {
 				});
 			}
 
-			return this.playerTicketService.getPlayableUrl(
-				fileRepresentationSchemaIdentifier,
-				referrer,
-				ip
-			);
+			return this.playerTicketService.getPlayableUrl(fileRepresentationSchemaIdentifier, options);
 		} catch (err) {
 			throw new InternalServerErrorException({
 				message: 'Failed to get player ticket',
 				innerException: err,
 				additionalInfo: {
-					referrer,
+					browsePath,
+					options,
 				},
 			});
 		}
@@ -124,24 +146,34 @@ export class PlayerTicketController {
 	/**
 	 * Generates a ticket for a file path
 	 * @param urlOrPath eg: image/3/public%252FOR-1c1tf48%252F13%252F13cdb1aa21704313a6ded7da5fabf53f0a9571a68c6540e18725440376c089c2813e3eec887041e1ab908a4c20a46d15.jp2
-	 * @param referrer
+	 * @param referer
 	 * @param ip
+	 * @param startTime
+	 * @param endTime
 	 */
 	@Get('token')
 	public async getTicketServiceTokenForFilePath(
 		@Query('filePath') urlOrPath: string,
-		@Query('referrer') referrer: string,
-		@Ip() ip: string
+		@Query('referer') referer: string,
+		@Ip() ip: string,
+		@Query('startTime', ParseIntPipe) startTime: number,
+		@Query('endTime', ParseIntPipe) endTime: number
 	): Promise<string> {
 		try {
-			return await this.playerTicketService.getPlayerToken(urlOrPath, referrer, ip, false);
+			return await this.playerTicketService.getPlayerToken(urlOrPath, {
+				referer,
+				ip,
+				isPublicDomain: false,
+				startTime,
+				endTime,
+			});
 		} catch (err) {
 			throw new InternalServerErrorException({
 				message: 'Failed to get ticket for file path',
 				innerException: err,
 				additionalInfo: {
 					filePath: urlOrPath,
-					referrer,
+					referer,
 					ip,
 				},
 			});

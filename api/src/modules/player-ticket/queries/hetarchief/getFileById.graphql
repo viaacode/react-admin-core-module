@@ -12,5 +12,9 @@ query getFileByById($fileId: String) {
 				}
 			}
 		}
+		hasMediaFragment {
+			schema_start_time
+			schema_end_time
+		}
 	}
 }

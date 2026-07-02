@@ -8,6 +8,7 @@ import type { DefaultComponentProps } from '~modules/shared/types/components';
 import { Icon } from '~shared/components/Icon/Icon';
 import { navigateFunc } from '~shared/helpers/navigate-fnc';
 import { tText } from '~shared/helpers/translation-functions';
+import { HET_ARCHIEF } from '~shared/types';
 import { BlockHeading } from '../BlockHeading/BlockHeading';
 
 export interface BlockHetArchiefHeaderSearchProps extends DefaultComponentProps {
@@ -76,7 +77,9 @@ export const BlockHetArchiefHeaderSearch: FunctionComponent<BlockHetArchiefHeade
 					id="block-hetarchief-header-search__search-input"
 					ariaLabel={searchAriaLabel}
 					placeholder={tText(
-						'react-admin/modules/content-page/components/blocks/block-het-archief-header-search/block-het-archief-header-search___start-je-zoektocht'
+						'react-admin/modules/content-page/components/blocks/block-het-archief-header-search/block-het-archief-header-search___start-je-zoektocht',
+						{},
+						[HET_ARCHIEF]
 					)}
 					iconEnd={
 						<button
@@ -88,7 +91,9 @@ export const BlockHetArchiefHeaderSearch: FunctionComponent<BlockHetArchiefHeade
 							}}
 							type="submit"
 							aria-label={tText(
-								'modules/content-page/components/blocks/block-het-archief-header-search/block-het-archief-header-search___zoek-in-de-publieke-catalogus-input-aria-label'
+								'modules/content-page/components/blocks/block-het-archief-header-search/block-het-archief-header-search___zoek-in-de-publieke-catalogus-input-aria-label',
+								{},
+								[HET_ARCHIEF]
 							)}
 						>
 							<Icon name="filter" />

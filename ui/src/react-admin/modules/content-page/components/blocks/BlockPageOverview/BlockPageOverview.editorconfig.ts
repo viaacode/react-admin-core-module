@@ -20,6 +20,7 @@ import {
 	BLOCK_FIELD_DEFAULTS,
 	BLOCK_STATE_DEFAULTS,
 	CONTENT_TYPE_AND_LABELS_INPUT,
+	TEXT_FIELD,
 } from '../defaults';
 
 export const INITIAL_PAGE_OVERVIEW_COMPONENTS_STATE =
@@ -170,16 +171,16 @@ export const PAGE_OVERVIEW_BLOCK_CONFIG = (position = 0): ContentBlockConfig => 
 						);
 					},
 				},
-				buttonLabel: {
+				buttonLabel: TEXT_FIELD({
 					label: tText(
 						'admin/content-block/helpers/generators/page-overview___label-voor-de-button-lijst-item'
 					),
-					editorType: ContentBlockEditor.TextInput,
-				},
-				buttonAltTitle: {
+					validator: undefined,
+				}),
+				buttonAltTitle: TEXT_FIELD({
 					label: tText('admin/content-block/helpers/generators/page-overview___alt-title-text'),
-					editorType: ContentBlockEditor.TextInput,
-				},
+					validator: undefined,
+				}),
 				itemsPerPage: {
 					label: tText('admin/content-block/helpers/generators/page-overview___items-per-pagina'),
 					editorType: ContentBlockEditor.MultiRange,

@@ -80,7 +80,10 @@ describe('PlayerTicketService', () => {
 	describe('getPlayableUrl', () => {
 		it('returns a playable url', async () => {
 			nock(FAKE_TICKET_SERVICE_URL).get('/vrt/item-1').query(true).reply(200, mockPlayerTicket);
-			const url = await playerTicketService.getPlayableUrl('vrt/item-1', 'referer', '');
+			const url = await playerTicketService.getPlayableUrl('vrt/item-1', {
+				referer: 'referer',
+				ip: '',
+			});
 			expect(url).toEqual(`${FAKE_MEDIA_SERVICE_URL}/vrt/item-1?token=${mockPlayerTicket.jwt}`);
 		});
 
@@ -94,13 +97,16 @@ describe('PlayerTicketService', () => {
 					maxage: 14401,
 				})
 				.reply(200, mockPlayerTicket);
-			const url = await playerTicketService.getPlayableUrl('vrt/item-1', undefined, '');
+			const url = await playerTicketService.getPlayableUrl('vrt/item-1', {
+				referer: undefined,
+				ip: '',
+			});
 			expect(url).toEqual(`${FAKE_MEDIA_SERVICE_URL}/vrt/item-1?token=${mockPlayerTicket.jwt}`);
 		});
 	});
 
-	describe('getEmbedUrl', () => {
-		it('returns the embedUrl for an item', async () => {
+	describe('getBrowseUrl', () => {
+		it('returns the browseUrl for an item', async () => {
 			const mockData: GetFileByByIdQuery = {
 				graph_file: [
 					{
@@ -116,15 +122,16 @@ describe('PlayerTicketService', () => {
 								],
 							},
 						],
+						hasMediaFragment: [],
 					},
 				],
 			};
 			mockDataService.execute.mockResolvedValueOnce(mockData);
-			const url = await playerTicketService.getEmbedUrl('vrt-id');
-			expect(url).toEqual('vrt/item-1');
+			const info = await playerTicketService.getBrowseUrlAndType('vrt-id');
+			expect(info.browsePath).toEqual('vrt/item-1');
 		});
 
-		it('returns the embedUrl for an avo item', async () => {
+		it('returns the browseUrl and start and end time for an item', async () => {
 			const mockData: GetFileByByIdQuery = {
 				graph_file: [
 					{
@@ -140,12 +147,46 @@ describe('PlayerTicketService', () => {
 								],
 							},
 						],
+						hasMediaFragment: [
+							{
+								schema_start_time: 10,
+								schema_end_time: 20,
+							},
+						],
 					},
 				],
 			};
 			mockDataService.execute.mockResolvedValueOnce(mockData);
-			const url = await playerTicketService.getEmbedUrl('vrt-id');
-			expect(url).toEqual('vrt/item-1');
+			const info = await playerTicketService.getBrowseUrlAndType('vrt-id');
+			expect(info.browsePath).toEqual('vrt/item-1');
+			expect(info.type).toEqual('video');
+			expect(info.startTime).toEqual(10);
+			expect(info.endTime).toEqual(20);
+		});
+
+		it('returns the browseUrl for an avo item', async () => {
+			const mockData: GetFileByByIdQuery = {
+				graph_file: [
+					{
+						premis_stored_at: 'vrt/item-1',
+						isRootOf: [
+							{
+								includes: [
+									{
+										representation: {
+											represents: { dctermsFormat: [{ dcterms_format: 'video' }] },
+										},
+									},
+								],
+							},
+						],
+						hasMediaFragment: [],
+					},
+				],
+			};
+			mockDataService.execute.mockResolvedValueOnce(mockData);
+			const info = await playerTicketService.getBrowseUrlAndType('vrt-id');
+			expect(info.browsePath).toEqual('vrt/item-1');
 		});
 
 		it('throws a not found exception if the item was not found', async () => {
@@ -156,7 +197,7 @@ describe('PlayerTicketService', () => {
 			// biome-ignore lint/suspicious/noExplicitAny: any error type could be thrown
 			let error: any;
 			try {
-				await playerTicketService.getEmbedUrl('unknown-id');
+				await playerTicketService.getBrowseUrlAndType('unknown-id');
 				// biome-ignore lint/suspicious/noExplicitAny: any error type could be thrown
 			} catch (e: any) {
 				error = e;
@@ -166,7 +207,7 @@ describe('PlayerTicketService', () => {
 					id: 'unknown-id',
 				},
 				innerException: null,
-				message: 'Object embed url not found',
+				message: 'Object browse url not found',
 			});
 		});
 	});
@@ -175,12 +216,11 @@ describe('PlayerTicketService', () => {
 		it('returns a token for a playable item', async () => {
 			nock(FAKE_TICKET_SERVICE_URL).get('/vrt/browse.mp4').query(true).reply(200, mockPlayerTicket);
 
-			const token = await playerTicketService.getPlayerToken(
-				'vrt/browse.mp4',
-				'referer',
-				'',
-				false
-			);
+			const token = await playerTicketService.getPlayerToken('vrt/browse.mp4', {
+				referer: 'referer',
+				ip: '',
+				isPublicDomain: false,
+			});
 			expect(token).toEqual(mockPlayerTicket.jwt);
 		});
 
@@ -194,12 +234,11 @@ describe('PlayerTicketService', () => {
 					maxage: 14401,
 				})
 				.reply(200, mockPlayerTicket);
-			const token = await playerTicketService.getPlayerToken(
-				'vrt/browse.mp4',
-				undefined,
-				'',
-				false
-			);
+			const token = await playerTicketService.getPlayerToken('vrt/browse.mp4', {
+				referer: undefined,
+				ip: '',
+				isPublicDomain: false,
+			});
 			expect(token).toEqual(mockPlayerTicket.jwt);
 		});
 
@@ -216,7 +255,11 @@ describe('PlayerTicketService', () => {
 					...mockPlayerTicket,
 					jwt: `${mockPlayerTicket.jwt}15j`, // Simulate a 15 year token
 				});
-			const token = await playerTicketService.getPlayerToken('vrt/browse.mp4', undefined, '', true);
+			const token = await playerTicketService.getPlayerToken('vrt/browse.mp4', {
+				referer: undefined,
+				ip: '',
+				isPublicDomain: true,
+			});
 			expect(token).toEqual(`${mockPlayerTicket.jwt}15j`);
 		});
 	});
@@ -232,11 +275,10 @@ describe('PlayerTicketService', () => {
 			mockCacheManager.wrap.mockImplementationOnce(async (_key, fn) => {
 				return await fn();
 			});
-			const token = await playerTicketService.getThumbnailTokenCached(
-				'TESTBEELD/keyframes_all',
-				'referer',
-				'127.0.0.1'
-			);
+			const token = await playerTicketService.getThumbnailTokenCached('TESTBEELD/keyframes_all', {
+				referer: 'referer',
+				ip: '127.0.0.1',
+			});
 			expect(token).toEqual(mockPlayerTicket);
 		});
 
@@ -245,11 +287,10 @@ describe('PlayerTicketService', () => {
 			// biome-ignore lint/suspicious/noExplicitAny: any error type could be thrown
 			let error: any;
 			try {
-				await playerTicketService.getThumbnailTokenCached(
-					'/TESTBEELD/keyframes_all',
-					'referer',
-					'127.0.0.1'
-				);
+				await playerTicketService.getThumbnailTokenCached('/TESTBEELD/keyframes_all', {
+					referer: 'referer',
+					ip: '127.0.0.1',
+				});
 			} catch (e) {
 				error = e;
 			}
@@ -268,7 +309,10 @@ describe('PlayerTicketService', () => {
 				.spyOn(playerTicketService, 'getThumbnailTokenCached')
 				.mockResolvedValueOnce(mockPlayerTicket.jwt);
 
-			const url = await playerTicketService.getThumbnailUrl('vrt-id', 'referer', '');
+			const url = await playerTicketService.getThumbnailUrl('vrt-id', {
+				referer: 'referer',
+				ip: '',
+			});
 			expect(url).toEqual(`${FAKE_MEDIA_SERVICE_URL}/vrt/item-1?token=${mockPlayerTicket.jwt}`);
 
 			getThumbnailTokenSpy.mockRestore();
@@ -279,7 +323,7 @@ describe('PlayerTicketService', () => {
 		it('does not get a token for an invalid path', async () => {
 			const getThumbnailTokenSpy = vi.spyOn(playerTicketService, 'getThumbnailTokenCached');
 
-			const url = await playerTicketService.resolveThumbnailUrl('', 'referer', '');
+			const url = await playerTicketService.resolveThumbnailUrl('', { referer: 'referer', ip: '' });
 			expect(url).toBeNull();
 			expect(getThumbnailTokenSpy).not.toBeCalled();
 
@@ -289,7 +333,10 @@ describe('PlayerTicketService', () => {
 		it('does not get a token for an invalid referer', async () => {
 			const getThumbnailTokenSpy = vi.spyOn(playerTicketService, 'getThumbnailTokenCached');
 
-			const url = await playerTicketService.resolveThumbnailUrl('http://thumbnail.jpg', null, '');
+			const url = await playerTicketService.resolveThumbnailUrl('http://thumbnail.jpg', {
+				referer: null,
+				ip: '',
+			});
 			expect(url).toEqual('http://thumbnail.jpg');
 			expect(getThumbnailTokenSpy).not.toBeCalled();
 

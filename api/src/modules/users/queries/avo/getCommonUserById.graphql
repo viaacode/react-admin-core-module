@@ -17,7 +17,6 @@ query getCommonUserById($id: uuid!) {
 		is_exception
 		stamboek
 		avatar
-		alias
 		title
 		updated_at
 		created_at

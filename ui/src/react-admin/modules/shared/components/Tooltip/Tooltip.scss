@@ -1,0 +1,27 @@
+@use "../../../shared/styles/settings/colors" as colors;
+
+.c-tooltip-avo {
+	background-color: colors.$color-gray-50;
+	border: 1px solid colors.$color-gray-400;
+	border-radius: 0.3rem;
+	padding: 0.8rem;
+	color: black;
+	font-size: 1.2rem;
+	line-height: 1.428; // 20px equivalent
+	margin: 0 !important;
+}
+
+.c-tooltip-hetarchief {
+	background-color: colors.$color-gray-1000;
+	border: 1px solid colors.$color-gray-1000;
+	max-width: 19rem !important;
+	padding: 0.5rem;
+	color: colors.$white;
+	font-size: 1.3rem;
+	font-weight: 100;
+	line-height: 1.428; // 20px equivalent
+	transition:
+			opacity 0.2s ease-in-out,
+			visibility 0.2s linear 0.2s;
+	margin: 0 !important;
+}

@@ -41,19 +41,18 @@ export const MAINTAINERS_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig 
 		state: INITIAL_MAINTAINERS_GRID_COMPONENTS_STATE(),
 		fields: {
 			title: TEXT_FIELD(
-				tText(
-					'react-admin/modules/content-page/components/blocks/block-maintainers-grid/block-maintainers-grid___is-verplicht',
-					{},
-					[HET_ARCHIEF]
-				),
 				{
 					label: tText(
 						'react-admin/modules/content-page/components/blocks/block-maintainers-grid/block-maintainers-grid___titel',
 						{},
 						[HET_ARCHIEF]
 					),
-					editorType: ContentBlockEditor.TextInput,
-				}
+				},
+				tText(
+					'react-admin/modules/content-page/components/blocks/block-maintainers-grid/block-maintainers-grid___is-verplicht',
+					{},
+					[HET_ARCHIEF]
+				)
 			),
 			titleType: {
 				label: tText(
@@ -66,22 +65,20 @@ export const MAINTAINERS_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig 
 					options: GET_HEADING_TYPE_OPTIONS(),
 				},
 			},
-			subtitle: TEXT_FIELD(undefined, {
+			subtitle: TEXT_FIELD({
 				label: tText(
 					'react-admin/modules/content-page/components/blocks/block-maintainers-grid/block-maintainers-grid___subtitel',
 					{},
 					[HET_ARCHIEF]
 				),
-				editorType: ContentBlockEditor.TextInput,
 			}),
-			buttonLabel: {
+			buttonLabel: TEXT_FIELD({
 				label: tText(
 					'react-admin/modules/content-page/components/blocks/block-maintainers-grid/block-maintainers-grid___link-tekst',
 					{},
 					[HET_ARCHIEF]
 				),
-				editorType: ContentBlockEditor.TextInput,
-			},
+			}),
 			buttonAction: {
 				label: tText(
 					'react-admin/modules/content-page/components/blocks/block-maintainers-grid/block-maintainers-grid___link-actie',

@@ -50,11 +50,10 @@ export const IMAGE_TITLE_TEXT_BUTTON_BLOCK_CONFIG = (position = 0): ContentBlock
 				),
 				editorType: ContentBlockEditor.ContentPicker,
 			},
-			imageAlt: TEXT_FIELD(undefined, {
+			imageAlt: TEXT_FIELD({
 				label: tText(
 					'admin/content-block/helpers/generators/image-title-text-button___alt-tekst-voor-de-afbeelding'
 				),
-				editorType: ContentBlockEditor.TextInput,
 				validator: undefined,
 			}),
 			imagePosition: {
@@ -66,9 +65,8 @@ export const IMAGE_TITLE_TEXT_BUTTON_BLOCK_CONFIG = (position = 0): ContentBlock
 					options: GET_ALIGN_OPTIONS().filter((option) => ['left', 'right'].includes(option.value)),
 				},
 			},
-			headingTitle: TEXT_FIELD(undefined, {
+			headingTitle: TEXT_FIELD({
 				label: tText('admin/content-block/helpers/generators/heading___titel'),
-				editorType: ContentBlockEditor.TextInput,
 				validator: undefined,
 			}),
 			headingType: {
@@ -86,16 +84,14 @@ export const IMAGE_TITLE_TEXT_BUTTON_BLOCK_CONFIG = (position = 0): ContentBlock
 					options: AdminConfigManager.getConfig().components.buttonTypes(),
 				},
 			},
-			buttonLabel: {
+			buttonLabel: TEXT_FIELD({
 				label: tText('admin/content-block/helpers/generators/ctas___knop-tekst'),
-				editorType: ContentBlockEditor.TextInput,
 				validator: undefined,
-			},
-			buttonAltTitle: TEXT_FIELD(undefined, {
+			}),
+			buttonAltTitle: TEXT_FIELD({
 				label: tText(
 					'admin/content-block/helpers/generators/media-player-title-text-button___alt-title-text'
 				),
-				editorType: ContentBlockEditor.TextInput,
 				validator: undefined,
 			}),
 			buttonIcon: {

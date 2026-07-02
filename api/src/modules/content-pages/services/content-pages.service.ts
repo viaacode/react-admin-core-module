@@ -52,7 +52,7 @@ import type {
 	PublishContentPageMutation as PublishContentPageMutationHetArchief,
 	UnpublishContentPageMutation as UnpublishContentPageMutationHetArchief,
 } from '../../shared/generated/graphql-db-types-hetarchief';
-import { customError } from '../../shared/helpers/custom-error';
+import { CustomError } from '../../shared/helpers/error';
 import { getOrderObject } from '../../shared/helpers/generate-order-gql-query';
 import { getDatabaseType } from '../../shared/helpers/get-database-type';
 import { isAvo } from '../../shared/helpers/is-avo';
@@ -619,11 +619,10 @@ export class ContentPagesService {
 						const itemInfo = await this.fetchItemByExternalId(externalId);
 						let videoSrc: string | undefined;
 						if (itemInfo?.browse_path) {
-							videoSrc = await this.playerTicketService.getPlayableUrl(
-								itemInfo.browse_path,
-								referrer || 'http://localhost:3200/',
-								ip
-							);
+							videoSrc = await this.playerTicketService.getPlayableUrl(itemInfo.browse_path, {
+								referer: referrer || 'http://localhost:3200/',
+								ip,
+							});
 						}
 
 						// Copy all required properties to be able to render the video player without having to use the data route to fetch item information
@@ -825,10 +824,15 @@ export class ContentPagesService {
 			[])?.[0];
 
 		if (!dbContentPage) {
-			throw customError('No content page found with provided id', null, {
-				id,
-				code: 'NOT_FOUND',
-			});
+			throw new CustomError(
+				'No content page found with provided id',
+				null,
+				{
+					id,
+					code: 'NOT_FOUND',
+				},
+				404
+			);
 		}
 		return this.adaptContentPage(dbContentPage);
 	}
@@ -849,7 +853,7 @@ export class ContentPagesService {
 				label: obj.description || (obj as any).comment,
 			})) as { value: AvoContentPageType; label: string }[] | null;
 		} catch (err) {
-			throw customError('Failed to retrieve content types.', err, {
+			throw new CustomError('Failed to retrieve content types.', err, {
 				query: CONTENT_PAGE_QUERIES[getDatabaseType()].GetContentTypesDocument,
 			});
 		}
@@ -868,14 +872,14 @@ export class ContentPagesService {
 			const labels = (response as any).app_content_labels || (response as any).app_content_label;
 
 			if (!labels) {
-				throw customError('The response does not contain any labels', null, {
+				throw new CustomError('The response does not contain any labels', null, {
 					response,
 				});
 			}
 
 			return labels;
 		} catch (err) {
-			throw customError('Failed to get content labels by content type from database', err, {
+			throw new CustomError('Failed to get content labels by content type from database', err, {
 				variables: {
 					contentType,
 				},
@@ -903,7 +907,7 @@ export class ContentPagesService {
 				ContentPageQueryTypes['InsertContentLabelLinksMutationVariables']
 			>(CONTENT_PAGE_QUERIES[getDatabaseType()].InsertContentLabelLinksDocument, variables);
 		} catch (err) {
-			throw customError('Failed to insert content label links in the database', err, {
+			throw new CustomError('Failed to insert content label links in the database', err, {
 				variables,
 				query: 'INSERT_CONTENT_LABEL_LINKS',
 			});
@@ -923,7 +927,7 @@ export class ContentPagesService {
 				contentPageId,
 			});
 		} catch (err) {
-			throw customError('Failed to insert content label links in the database', err, {
+			throw new CustomError('Failed to insert content label links in the database', err, {
 				variables: {
 					labelIds,
 					contentPageId,
@@ -974,7 +978,7 @@ export class ContentPagesService {
 				0;
 
 			if (!dbContentPages) {
-				throw customError('Response did not contain any content pages', null, {
+				throw new CustomError('Response did not contain any content pages', null, {
 					response,
 				});
 			}
@@ -982,7 +986,7 @@ export class ContentPagesService {
 			const contentPages: DbContentPage[] = dbContentPages.map(this.adaptContentPage.bind(this));
 			return [contentPages, dbContentPageCount];
 		} catch (err) {
-			throw customError('Failed to get content pages from the database', err, {
+			throw new CustomError('Failed to get content pages from the database', err, {
 				variables,
 				query: 'GET_CONTENT_PAGES',
 			});
@@ -1009,10 +1013,12 @@ export class ContentPagesService {
 				null;
 
 			if (!id) {
-				throw new InternalServerErrorException(
-					customError('Failed to insert content page, received no id from the database', null, {
+				throw new CustomError(
+					'Failed to insert content page, received no id from the database',
+					null,
+					{
 						response,
-					})
+					}
 				);
 			}
 
@@ -1029,11 +1035,9 @@ export class ContentPagesService {
 
 			return this.getContentPageById(String(id));
 		} catch (err) {
-			throw new InternalServerErrorException(
-				customError('Failed to insert content page into the database', err, {
-					contentPage,
-				})
-			);
+			throw new CustomError('Failed to insert content page into the database', err, {
+				contentPage,
+			});
 		}
 	}
 
@@ -1086,7 +1090,7 @@ export class ContentPagesService {
 				).update_app_content_page?.affected_rows ||
 				null;
 			if (!updatedContent) {
-				throw customError('Content page update returned empty response', null, response);
+				throw new CustomError('Content page update returned empty response', null, response);
 			}
 
 			// Delete images from s3 that are present in the initialContentPage and no longer present in the updated contentPage
@@ -1100,11 +1104,11 @@ export class ContentPagesService {
 
 			return contentPage;
 		} catch (err) {
-			const error = customError('Failed to update content page', err, {
+			const error = new CustomError('Failed to update content page', err, {
 				contentPage,
 			});
 			console.error(error);
-			throw new InternalServerErrorException(error);
+			throw error;
 		}
 	}
 
@@ -1120,7 +1124,7 @@ export class ContentPagesService {
 				path: `${contentPage.path}-${id}`,
 			});
 		} catch (err) {
-			throw customError('Failed to delete content page from the database', err, {
+			throw new CustomError('Failed to delete content page from the database', err, {
 				id,
 				query: CONTENT_PAGE_QUERIES[getDatabaseType()].SoftDeleteContentDocument,
 			});
@@ -1145,7 +1149,7 @@ export class ContentPagesService {
 				id: contentBlockConfig.id as number,
 			});
 		} catch (err) {
-			throw customError('Failed to update content block', err, {
+			throw new CustomError('Failed to update content block', err, {
 				contentBlockConfig,
 			});
 		}
@@ -1165,7 +1169,7 @@ export class ContentPagesService {
 				id,
 			});
 		} catch (err) {
-			throw customError('Failed to delete content block', err, { id });
+			throw new CustomError('Failed to delete content block', err, { id });
 		}
 	}
 
@@ -1235,7 +1239,7 @@ export class ContentPagesService {
 				id: ids[index],
 			}));
 		} catch (err) {
-			throw customError('Failed to insert content blocks', err, {
+			throw new CustomError('Failed to insert content blocks', err, {
 				contentId,
 				contentBlockConfigs,
 			});

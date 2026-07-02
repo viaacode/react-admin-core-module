@@ -1,18 +1,11 @@
-import {
-	BadRequestException,
-	Body,
-	Controller,
-	InternalServerErrorException,
-	Post,
-	UseGuards,
-} from '@nestjs/common';
+import { BadRequestException, Body, Controller, Post, UseGuards } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import type { AvoStillsStillInfo } from '@viaa/avo2-types';
 import type { ValidationResult } from 'joi';
 import { SessionUser } from '../shared/decorators/user.decorator';
 import { LoggedInGuard } from '../shared/guards/logged-in.guard';
 import { addPrefix } from '../shared/helpers/add-route-prefix';
-import { logAndThrow } from '../shared/helpers/logAndThrow';
+import { CustomError } from '../shared/helpers/error';
 import { TranslationsService } from '../translations';
 import { SessionUserEntity } from '../users/classes/session-user';
 import { VideoStillRequestBodyDto } from './video-stills.dto';
@@ -65,15 +58,12 @@ export class VideoStillsController {
 		try {
 			return await this.videoStillsService.getFirstVideoStills(body.requests as StillRequest[]);
 		} catch (err) {
-			logAndThrow(
-				new InternalServerErrorException({
-					message: 'Failed during get video stills route',
-					innerException: err,
-					additionalInfo: {
-						videoStillRequests: body.requests,
-					},
-				})
-			);
+			const error = new CustomError('Failed during get video stills route', err, {
+				videoStillRequests: body.requests,
+			});
+			console.log(error);
+			error.innerException = null;
+			throw error;
 		}
 	}
 }

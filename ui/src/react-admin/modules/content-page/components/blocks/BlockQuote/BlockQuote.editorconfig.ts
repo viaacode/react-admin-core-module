@@ -5,7 +5,7 @@ import type {
 	DefaultContentBlockState,
 	QuoteBlockComponentState,
 } from '../../../types/content-block.types';
-import { ContentBlockEditor, ContentBlockType } from '../../../types/content-block.types';
+import { ContentBlockType } from '../../../types/content-block.types';
 
 import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, FILE_FIELD, TEXT_FIELD } from '../defaults';
 
@@ -31,20 +31,17 @@ export const QUOTE_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 		state: INITIAL_QUOTE_COMPONENTS_STATE(),
 		fields: {
 			quote: TEXT_FIELD(
-				tText('admin/content-block/helpers/generators/quote___quote-is-verplicht'),
 				{
 					label: tText('admin/content-block/helpers/generators/quote___quote'),
-					editorType: ContentBlockEditor.TextInput,
-				}
+				},
+				tText('admin/content-block/helpers/generators/quote___quote-is-verplicht')
 			),
-			authorName: TEXT_FIELD(undefined, {
+			authorName: TEXT_FIELD({
 				label: tText('admin/content-block/helpers/generators/quote___auteur'),
-				editorType: ContentBlockEditor.TextInput,
 				validator: undefined,
 			}),
-			authorInitials: TEXT_FIELD(undefined, {
+			authorInitials: TEXT_FIELD({
 				label: tText('admin/content-block/helpers/generators/quote___initialen'),
-				editorType: ContentBlockEditor.TextInput,
 				validator: undefined,
 			}),
 			authorImage: FILE_FIELD(

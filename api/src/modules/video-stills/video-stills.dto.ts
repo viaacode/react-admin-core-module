@@ -31,7 +31,7 @@ export class VideoStillRequestDto {
 	type?: 'video' | 'audio' | 'image';
 
 	@ApiProperty({
-		description: 'Start time in milliseconds (option &, 2, 3)',
+		description: 'Start time in milliseconds (option 1, 2, 3)',
 		example: 15000,
 		required: true,
 	})

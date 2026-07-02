@@ -60,16 +60,15 @@ export const AVO_IMAGE_TEXT_BACKGROUND_BLOCK_CONFIG = (position = 0): ContentBlo
 		state: INITIAL_AVO_IMAGE_TEXT_BACKGROUND_COMPONENTS_STATE(),
 		fields: {
 			heading: TEXT_FIELD(
-				tText(
-					'admin/content-block/helpers/image-text-background/image-text-background___titel-is-verplicht'
-				),
 				{
 					label: tText(
 						'admin/content-block/helpers/image-text-background/image-text-background___titel-tekst'
 					),
-					editorType: ContentBlockEditor.TextInput,
 					validator: undefined,
-				}
+				},
+				tText(
+					'admin/content-block/helpers/image-text-background/image-text-background___titel-is-verplicht'
+				)
 			),
 			headingType: {
 				label: tText(
@@ -94,8 +93,7 @@ export const AVO_IMAGE_TEXT_BACKGROUND_BLOCK_CONFIG = (position = 0): ContentBlo
 					options: GET_HEADING_SIZE_OPTIONS(),
 				},
 			},
-			content: TEXT_FIELD(undefined, {
-				editorType: ContentBlockEditor.TextInput,
+			content: TEXT_FIELD({
 				validator: undefined,
 			}),
 			textAlign: {
@@ -172,20 +170,18 @@ export const AVO_IMAGE_TEXT_BACKGROUND_BLOCK_CONFIG = (position = 0): ContentBlo
 					imageDimensions: { width: 1920, height: 385 },
 				} as FileUploadProps,
 			},
-			imageAttribution: {
+			imageAttribution: TEXT_FIELD({
 				label: tText(
 					'modules/content-page/components/blocks/block-image-text-background/block-image-text-background___bijschrift-bronvermelding'
 				),
-				editorType: ContentBlockEditor.TextInput,
 				validator: undefined,
-			},
-			imageAttributionText: {
+			}),
+			imageAttributionText: TEXT_FIELD({
 				label: tText(
 					'modules/content-page/components/blocks/block-image-text-background/block-image-text-background___bijschrift-beschrijving'
 				),
-				editorType: ContentBlockEditor.TextInput,
 				validator: undefined,
-			},
+			}),
 			buttonType: {
 				label: tText(
 					'admin/content-block/helpers/image-text-background/image-text-background___knop-type'
@@ -195,17 +191,15 @@ export const AVO_IMAGE_TEXT_BACKGROUND_BLOCK_CONFIG = (position = 0): ContentBlo
 					options: AdminConfigManager.getConfig().components.buttonTypes(),
 				},
 			},
-			buttonLabel: {
+			buttonLabel: TEXT_FIELD({
 				label: tText(
 					'admin/content-block/helpers/image-text-background/image-text-background___knop-tekst'
 				),
-				editorType: ContentBlockEditor.TextInput,
-			},
-			buttonAltTitle: TEXT_FIELD(undefined, {
+			}),
+			buttonAltTitle: TEXT_FIELD({
 				label: tText(
 					'admin/content-block/helpers/image-text-background/image-text-background___alt-title-text'
 				),
-				editorType: ContentBlockEditor.TextInput,
 				validator: undefined,
 			}),
 			buttonAction: {

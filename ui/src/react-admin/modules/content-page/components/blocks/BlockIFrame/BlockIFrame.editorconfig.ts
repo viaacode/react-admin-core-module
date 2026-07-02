@@ -4,7 +4,7 @@ import type {
 	DefaultContentBlockState,
 	IFrameBlockComponentState,
 } from '../../../types/content-block.types';
-import { ContentBlockEditor, ContentBlockType } from '../../../types/content-block.types';
+import { ContentBlockType } from '../../../types/content-block.types';
 
 import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, TEXT_FIELD } from '../defaults';
 
@@ -29,16 +29,17 @@ export const IFRAME_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 		state: INITIAL_IFRAME_COMPONENTS_STATE(),
 		fields: {
 			title: TEXT_FIELD(
-				tText('admin/content-block/helpers/generators/iframe___titel-is-verplicht'),
 				{
 					label: tText('admin/content-block/helpers/generators/iframe___titel'),
-					editorType: ContentBlockEditor.TextInput,
-				}
+				},
+				tText('admin/content-block/helpers/generators/iframe___titel-is-verplicht')
 			),
-			src: TEXT_FIELD(tText('admin/content-block/helpers/generators/iframe___url-is-verplicht'), {
-				label: tText('admin/content-block/helpers/generators/iframe___url'),
-				editorType: ContentBlockEditor.TextInput,
-			}),
+			src: TEXT_FIELD(
+				{
+					label: tText('admin/content-block/helpers/generators/iframe___url'),
+				},
+				tText('admin/content-block/helpers/generators/iframe___url-is-verplicht')
+			),
 		},
 	},
 	block: {

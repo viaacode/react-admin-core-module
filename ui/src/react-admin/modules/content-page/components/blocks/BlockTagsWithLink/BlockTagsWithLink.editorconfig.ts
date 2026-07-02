@@ -26,11 +26,10 @@ export const TAGS_WITH_LINK_BLOCK_CONFIG = (position = 0): ContentBlockConfig =>
 		name: tText('admin/content-block/helpers/generators/tag-with-link___tag'),
 		fields: {
 			label: TEXT_FIELD(
-				tText('admin/content-block/helpers/generators/tag-with-link___label-is-verplicht'),
 				{
 					label: tText('admin/content-block/helpers/generators/tag-with-link___label'),
-					editorType: ContentBlockEditor.TextInput,
-				}
+				},
+				tText('admin/content-block/helpers/generators/tag-with-link___label-is-verplicht')
 			),
 			link: {
 				label: tText('admin/content-block/helpers/generators/tag-with-link___link'),

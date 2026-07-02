@@ -90,10 +90,8 @@ export function convertUserInfoToCommonUser(
 						idpMapObject.idp_user_id as string,
 					])
 				),
-				alias: user.profile.alias || undefined,
 				title: user.profile.title || undefined,
 				bio: user.profile.bio || undefined,
-				alternativeEmail: user.profile.alternative_email,
 				updatedAt: user.profile.updated_at || undefined,
 				companyId: user.profile.company_id,
 				permissions: user.profile.permissions as PermissionName[],
@@ -146,10 +144,8 @@ export function convertUserInfoToCommonUser(
 						idpMapObject.idp_user_id as string,
 					])
 				),
-				alias: profile.alias || undefined,
 				title: profile.title || undefined,
 				bio: profile.bio || undefined,
-				alternativeEmail: profile?.alternative_email,
 				updatedAt: profile.updated_at || undefined,
 				companyId: profile.company_id,
 				permissions: profile.permissions as PermissionName[],
@@ -206,8 +202,6 @@ export function convertUserInfoToCommonUser(
 				firstName: user.first_name ?? undefined,
 				lastName: user.last_name ?? undefined,
 				title: user.profile?.title ?? undefined,
-				alias: user.profile?.alias ?? undefined,
-				alternativeEmail: user.profile?.alternative_email ?? undefined,
 				bio: user.profile?.bio ?? undefined,
 				isBlocked: user.is_blocked ?? undefined,
 				blockedAt: user.blocked_at?.date,
@@ -347,10 +341,8 @@ export function convertUserInfoToCommonUser(
 						idpMapObject.idp_user_id as string,
 					])
 				),
-				alias: user.alias || undefined,
 				title: user.title || undefined,
 				bio: user.bio || undefined,
-				alternativeEmail: user.mail || undefined,
 				updatedAt: user.updated_at || undefined,
 				companyId: user.company_id,
 				permissions: (user.user_group?.group?.group_permissions || []).map(

@@ -30,7 +30,7 @@ import {
 	type GetPublicItemsQueryVariables,
 	Lookup_Enum_Relation_Types_Enum,
 } from '../shared/generated/graphql-db-types-avo';
-import { customError } from '../shared/helpers/custom-error';
+import { CustomError } from '../shared/helpers/error';
 import { isUuid } from '../shared/helpers/uuid';
 
 export class ItemsService {
@@ -66,16 +66,26 @@ export class ItemsService {
 			const rawItem = response.app_item_meta?.[0];
 
 			if (!rawItem) {
-				throw customError('Response does not contain an item', null, {
-					response,
-				});
+				throw new CustomError(
+					'Response does not contain an item',
+					null,
+					{
+						response,
+					},
+					404
+				);
 			}
 
 			return rawItem as unknown as Partial<AvoItemItem>;
 		} catch (err) {
-			throw customError('Failed to get the item by id from the database', err, {
-				uuidOrExternalId,
-			});
+			throw new CustomError(
+				'Failed to get the item by id from the database',
+				err,
+				{
+					uuidOrExternalId,
+				},
+				500
+			);
 		}
 	}
 
@@ -103,7 +113,7 @@ export class ItemsService {
 
 			return (item || null) as unknown as (AvoItemItem & { replacement_for?: string }) | null;
 		} catch (err) {
-			throw customError('Failed to get item or replacement or depublish reason', err, {
+			throw new CustomError('Failed to get item or replacement or depublish reason', err, {
 				uuidOrExternalId,
 			});
 		}
@@ -139,7 +149,7 @@ export class ItemsService {
 					[]) as AvoCollectionRelationEntry<AvoItemItem>[];
 			}
 		} catch (err) {
-			throw customError('Failed to get relation from the database', err, {
+			throw new CustomError('Failed to get relation from the database', err, {
 				variables,
 				query: isCollection
 					? 'FETCH_COLLECTION_RELATIONS_BY_OBJECTS or FETCH_COLLECTION_RELATIONS_BY_SUBJECTS'
@@ -178,7 +188,7 @@ export class ItemsService {
 
 			return items as AvoItemItem[];
 		} catch (err) {
-			throw customError('Failed to fetch items by title or external id', err, {
+			throw new CustomError('Failed to fetch items by title or external id', err, {
 				titleOrExternalId,
 				limit,
 				query: 'GET_PUBLIC_ITEMS_BY_TITLE_OR_EXTERNAL_ID',

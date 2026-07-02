@@ -529,7 +529,7 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 				<Column size="5">{renderSeoImageField()}</Column>
 				<Column size="7">{renderTitleField()}</Column>
 				<Column size="5">
-					{/* Empty for keeping the area next to title empty */}
+					{/** biome-ignore lint/complexity/noUselessFragments: Empty for keeping the area next to title empty */}
 					<>&nbsp;</>
 				</Column>
 				<Column size="7">{renderDescriptionField()}</Column>
@@ -541,14 +541,14 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 					<>
 						<Column size="7">{renderIsProtectedField()}</Column>
 						<Column size="5">
-							{/* Empty for keeping the area next to title empty */}
+							{/** biome-ignore lint/complexity/noUselessFragments: Empty for keeping the area next to title empty */}
 							<>&nbsp;</>
 						</Column>
 					</>
 				)}
 				<Column size="7">{renderPathField()}</Column>
 				<Column size="5">
-					{/* Empty for keeping the area next to title empty */}
+					{/** biome-ignore lint/complexity/noUselessFragments: Empty for keeping the area next to title empty */}
 					<>&nbsp;</>
 				</Column>
 				{commonUser?.permissions?.includes(PermissionName.EDIT_CONTENT_PAGE_AUTHOR) &&
@@ -556,7 +556,7 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 						<>
 							<Column size="7">{renderAuthorField()}</Column>
 							<Column size="5">
-								{/* Empty for keeping the area next to title empty */}
+								{/** biome-ignore lint/complexity/noUselessFragments: Empty for keeping the area next to title empty */}
 								<>&nbsp;</>
 							</Column>
 						</>
@@ -567,7 +567,7 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 					{renderLabelsField()}
 				</Column>
 				<Column size="5">
-					{/* Empty for keeping the area next to title empty */}
+					{/** biome-ignore lint/complexity/noUselessFragments: Empty for keeping the area next to title empty */}
 					<>&nbsp;</>
 				</Column>
 				{isMultiLanguageEnabled() && <Column size="7">{renderLanguageField()}</Column>}

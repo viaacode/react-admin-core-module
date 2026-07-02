@@ -1,7 +1,7 @@
 import { TextInput } from '@meemoo/react-components';
 import { Button } from '@viaa/avo2-components';
 import { stringifyUrl } from 'query-string';
-import type { ChangeEvent, FC, KeyboardEvent } from 'react';
+import type { ChangeEvent, FC } from 'react';
 import React, { useEffect, useState } from 'react';
 import { BlockHeading } from '~content-blocks/BlockHeading/BlockHeading';
 import { Link } from '~modules/shared/components/Link/Link';
@@ -74,7 +74,9 @@ export const BlockOverviewNewspaperTitles: FC<BlockOverviewNewspaperTitlesProps>
 				}
 				onChange={(value: ChangeEvent<HTMLInputElement>) => setSearchInput(value.target.value)}
 				ariaLabel={tText(
-					'modules/content-page/components/blocks/block-overview-newspaper-titles/block-overview-newspaper-titles___zoek-kranten-op-titel-input-aria-label'
+					'modules/content-page/components/blocks/block-overview-newspaper-titles/block-overview-newspaper-titles___zoek-kranten-op-titel-input-aria-label',
+					{},
+					[HET_ARCHIEF]
 				)}
 			/>
 			<ul className="c-newspaper-titles__list">

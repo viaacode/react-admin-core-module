@@ -56,4 +56,8 @@ export const MOCK_HETARCHIEF_USER: AvoUserHetArchiefUser = {
 	maintainerId: 'OR-w66976m',
 	organisationId: 'OR-w66976m',
 	sector: 'Cultuur',
+	organisationVAT: 'BE 0885.957.616',
+	organisationAddress: 'Fernand Scribedreef 1',
+	organisationPostalCode: '9000',
+	organisationLocality: 'Gent',
 };

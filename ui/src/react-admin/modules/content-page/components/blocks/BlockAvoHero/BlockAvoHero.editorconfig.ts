@@ -55,15 +55,14 @@ export const AVO_HERO_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 	components: {
 		state: INITIAL_AVO_HERO_COMPONENTS_STATE(),
 		fields: {
-			title: TEXT_FIELD(undefined, {
+			title: TEXT_FIELD({
 				label: tText('admin/content-block/helpers/generators/hero___titel', {}, [AVO]),
-				editorType: ContentBlockEditor.TextInput,
 				validator: undefined,
 			}),
 			titleColor: FOREGROUND_COLOR_FIELD(
 				tText('admin/content-block/helpers/generators/hero___titel-kleur', {}, [AVO])
 			),
-			content: TEXT_FIELD(undefined, {
+			content: TEXT_FIELD({
 				label: tText('admin/content-block/helpers/generators/hero___beschrijving', {}, [AVO]),
 				editorType: ContentBlockEditor.TextArea,
 				validator: undefined,
@@ -83,17 +82,15 @@ export const AVO_HERO_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 						},
 					},
 					label: TEXT_FIELD(
-						tText('admin/content-block/helpers/generators/buttons___knoptekst-is-verplicht', {}, [
-							AVO,
-						]),
 						{
 							label: tText('admin/content-block/helpers/generators/buttons___tekst', {}, [AVO]),
-							editorType: ContentBlockEditor.TextInput,
-						}
+						},
+						tText('admin/content-block/helpers/generators/buttons___knoptekst-is-verplicht', {}, [
+							AVO,
+						])
 					),
-					altTitle: TEXT_FIELD(undefined, {
+					altTitle: TEXT_FIELD({
 						label: tText('admin/content-block/helpers/generators/hero___alt-title-text'),
-						editorType: ContentBlockEditor.TextInput,
 						validator: undefined,
 					}),
 					icon: {
@@ -124,20 +121,20 @@ export const AVO_HERO_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				},
 			} as ContentBlockFieldGroup,
 
-			textBelowButtons: TEXT_FIELD(undefined, {
+			textBelowButtons: TEXT_FIELD({
 				label: tText('admin/content-block/helpers/generators/hero___text-onder-knoppen', {}, [AVO]),
+				editorType: ContentBlockEditor.RICH_TEXT_EDITOR,
 				editorProps: {
 					controls: RICH_TEXT_EDITOR_OPTIONS_FULL,
 				},
 				validator: undefined,
 			}),
-			src: TEXT_FIELD(undefined, {
+			src: TEXT_FIELD({
 				label: tText(
 					'admin/content-block/helpers/generators/hero___eigen-video-url-van-flowplayer-com',
 					{},
 					[AVO]
 				),
-				editorType: ContentBlockEditor.TextInput,
 				validator: validateFlowplayerVideoUrl,
 				editorProps: {
 					placeholder: tText(
@@ -160,13 +157,12 @@ export const AVO_HERO_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 					onDeleteFile: noop, // images will be deleted from the assets service when the user saves the content page
 				} as Partial<FileUploadProps>,
 			}),
-			altText: TEXT_FIELD(undefined, {
+			altText: TEXT_FIELD({
 				label: tText(
 					'admin/content-block/helpers/generators/hero___alt-tekst-voor-video-afbeelding',
 					{},
 					[AVO]
 				),
-				editorType: ContentBlockEditor.TextInput,
 				validator: undefined,
 			}),
 		},

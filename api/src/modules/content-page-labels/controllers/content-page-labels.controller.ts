@@ -6,7 +6,7 @@ import { type AvoSearchOrderDirection, PermissionName } from '@viaa/avo2-types';
 import type { ContentPageLabel, LabelObj } from '../../content-pages';
 import { ContentLabelsRequestDto } from '../../content-pages/dto/content-labels-request.dto';
 import { RequireAnyPermissions } from '../../shared/decorators/require-any-permissions.decorator';
-import { customError } from '../../shared/helpers/custom-error';
+import { CustomError } from '../../shared/helpers/error';
 import type { ContentPageLabelOverviewTableCols } from '../content-page-labels.types';
 import {
 	ContentPageLabelDto,
@@ -42,7 +42,7 @@ export class ContentPageLabelsController {
 				JSON.parse(where)
 			);
 		} catch (err) {
-			throw customError('Failed to get content page labels from the database', err, {
+			throw new CustomError('Failed to get content page labels from the database', err, {
 				offset,
 				limit,
 				sortColumn,
@@ -58,7 +58,7 @@ export class ContentPageLabelsController {
 		try {
 			return this.contentPageLabelService.fetchContentPageLabelById(id);
 		} catch (err) {
-			throw customError('Failed to get content page label from the database', err, {
+			throw new CustomError('Failed to get content page label from the database', err, {
 				id,
 			});
 		}
@@ -79,7 +79,7 @@ export class ContentPageLabelsController {
 		try {
 			return this.contentPageLabelService.insertContentPageLabels(contentPageLabels);
 		} catch (err) {
-			throw customError('Failed to insert content page labels in the database', err, {
+			throw new CustomError('Failed to insert content page labels in the database', err, {
 				contentPageLabels,
 			});
 		}
@@ -91,7 +91,7 @@ export class ContentPageLabelsController {
 		try {
 			return this.contentPageLabelService.updateContentPageLabel(contentPageLabelInfo);
 		} catch (err) {
-			throw customError('Failed to update content page label in the database', err, {
+			throw new CustomError('Failed to update content page label in the database', err, {
 				contentPageLabel: contentPageLabelInfo,
 			});
 		}
@@ -106,7 +106,7 @@ export class ContentPageLabelsController {
 			await this.contentPageLabelService.deleteContentPageLabel(id);
 			return { message: 'success' };
 		} catch (err) {
-			throw customError('Failed to delete the content page label from the database', err, {
+			throw new CustomError('Failed to delete the content page label from the database', err, {
 				id,
 			});
 		}

@@ -1,6 +1,6 @@
 {
   "name": "@meemoo/admin-core-ui",
-  "version": "5.2.57",
+  "version": "5.2.90",
   "private": false,
   "type": "module",
   "files": [
@@ -60,10 +60,10 @@
     "backup-translations-avo-qas": "dotenv -e .env/.env.local tsx --project ./scripts/tsconfig.json scripts/backup-translations.ts -- AVO",
     "translations:extract:hetarchief": "dotenv -e .env/.env.local tsx --project ./scripts/tsconfig.json scripts/extract-and-replace-translations.ts -- HET_ARCHIEF",
     "translations:extract:avo": "dotenv -e .env/.env.local tsx --project ./scripts/tsconfig.json scripts/extract-and-replace-translations.ts -- AVO",
-    "list-of-changed-translations-hetarchief": "dotenv -e .env/.env.local tsx --project ./scripts/tsconfig.json scripts/get-list-of-changed-translations.ts -- HET_ARCHIEF v5.2.32 v5.2.38",
-    "list-commit-messages-between-tags-hetarchief": "dotenv -e .env/.env.local tsx --project ./scripts/tsconfig.json scripts/get-list-of-commit-messages-between-tags.ts -- v5.2.32 v5.2.38",
-    "list-of-changed-translations-avo": "dotenv -e .env/.env.local tsx --project ./scripts/tsconfig.json scripts/get-list-of-changed-translations.ts -- AVO v5.2.26 v5.2.32",
-    "list-commit-messages-between-tags-avo": "dotenv -e .env/.env.local tsx --project ./scripts/tsconfig.json scripts/get-list-of-commit-messages-between-tags.ts -- v5.2.26 v5.2.32",
+    "list-of-changed-translations-hetarchief": "dotenv -e .env/.env.local tsx --project ./scripts/tsconfig.json scripts/get-list-of-changed-translations.ts -- HET_ARCHIEF v5.2.87 v5.2.89",
+    "list-commit-messages-between-tags-hetarchief": "dotenv -e .env/.env.local tsx --project ./scripts/tsconfig.json scripts/get-list-of-commit-messages-between-tags.ts -- v5.2.87 v5.2.89",
+    "list-of-changed-translations-avo": "dotenv -e .env/.env.local tsx --project ./scripts/tsconfig.json scripts/get-list-of-changed-translations.ts -- AVO v5.2.87 v5.2.90",
+    "list-commit-messages-between-tags-avo": "dotenv -e .env/.env.local tsx --project ./scripts/tsconfig.json scripts/get-list-of-commit-messages-between-tags.ts -- v5.2.87 v5.2.90",
     "check-bundled-files": "npx depcruise src/react-admin --config bundle-import-rules.json --include-only \"^src\" --exclude \"(.spec.tsx?|.test.tsx?|node_modules)\"",
     "check-bundled-files:admin.mts": "npx depcruise src/admin.ts --config bundle-import-rules.json --include-only \"^src\" --exclude \"(.spec.tsx?|.test.tsx?|node_modules)\"",
     "check-bundled-files:client.mts": "npx depcruise src/client.ts --config bundle-import-rules.json --include-only \"^src\" --exclude \"(.spec.tsx?|.test.tsx?|node_modules)\" --output-type dot | dot -T svg > dependency-graph.svg",
@@ -120,6 +120,7 @@
     "@testing-library/jest-dom": "6.9.1",
     "@testing-library/react": "16.3.2",
     "@testing-library/user-event": "14.6.1",
+    "@types/cli-progress": "^3.11.6",
     "@types/dompurify": "3.0.5",
     "@types/enzyme": "3.10.13",
     "@types/file-saver": "2.0.5",
@@ -137,6 +138,7 @@
     "ajv": "8.11.0",
     "autoprefixer": "10.4.2",
     "bump-package-versions": "1.0.7",
+    "cli-progress": "^3.12.0",
     "console-log-colors": "0.5.0",
     "cross-env": "7.0.3",
     "dependency-cruiser": "13.1.5",
@@ -185,5 +187,8 @@
   "dependencies": {
     "jsdom": "27.4.0",
     "memoizee": "0.4.17"
+  },
+  "allowScripts": {
+    "@parcel/watcher@2.5.1": true
   }
 }

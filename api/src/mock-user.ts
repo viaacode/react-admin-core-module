@@ -18,9 +18,7 @@ export function getMockUserAvo(): AvoUserUser {
 			// id: '69ccef3b-751a-4be4-95bc-5ef365fbd504',
 			id: 'dd787a19-03f7-41b4-9b7e-c1c24b475294',
 			language: 'nl' as Locale,
-			alias: 'bert_verhelst',
 			title: 'Developer1',
-			alternative_email: 'verhelstbert@gmail.comaaaaaaa',
 			avatar:
 				'https://assets-qas.hetarchief.be//avo2/PROFILE_AVATAR/bert-359813c0-3b43-11ed-937e-adfb7fd0632b.jpg',
 			created_at: '2019-10-23T16:22:47.543339+00:00',
@@ -202,7 +200,7 @@ export function getMockUserAvo(): AvoUserUser {
 				idp_user_id: '4d2b556cd6bffa86869507455afb0ee7329f41f2',
 			},
 		],
-	} as AvoUserUser;
+	} as unknown as AvoUserUser;
 }
 
 export function getMockUserHetArchief(): AvoUserHetArchiefUser {
@@ -266,5 +264,9 @@ export function getMockUserHetArchief(): AvoUserHetArchiefUser {
 		maintainerId: 'OR-w66976m',
 		organisationId: null,
 		sector: null,
+		organisationAddress: null,
+		organisationPostalCode: null,
+		organisationLocality: null,
+		organisationVAT: null,
 	};
 }

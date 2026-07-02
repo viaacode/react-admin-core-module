@@ -37,10 +37,8 @@ export const UITGEKLAARD_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 		state: INITIAL_UITGEKLAARD_COMPONENTS_STATE(),
 		fields: {
 			titles: TEXT_FIELD(
-				tText('admin/content-block/helpers/generators/uitgeklaard___titel-is-verplicht'),
 				{
 					label: tText('admin/content-block/helpers/generators/uitgeklaard___titel'),
-					editorType: ContentBlockEditor.TextInput,
 					repeat: {
 						defaultState: '',
 						addButtonLabel: tText(
@@ -50,7 +48,8 @@ export const UITGEKLAARD_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 							'admin/content-block/helpers/generators/uitgeklaard___verwijder-titel'
 						),
 					},
-				}
+				},
+				tText('admin/content-block/helpers/generators/uitgeklaard___titel-is-verplicht')
 			) as ContentBlockField,
 			date: {
 				label: tText(

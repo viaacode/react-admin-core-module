@@ -28,7 +28,6 @@ import type { CheckboxOption } from '~shared/components/CheckboxDropdownModal/Ch
 import { ExportAllToCsvModal } from '~shared/components/ExportAllToCsvModal/ExportAllToCsvModal';
 import { ErrorView } from '~shared/components/error/ErrorView';
 import type { FilterableColumn } from '~shared/components/FilterTable/FilterTable';
-import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner';
 import { CustomError } from '~shared/helpers/custom-error';
 import { isHetArchief } from '~shared/helpers/is-hetarchief';
 import { navigate } from '~shared/helpers/routing/link';
@@ -44,7 +43,7 @@ import { SettingsService } from '~shared/services/settings-service/settings.serv
 import FilterTable, { getFilters } from '../../shared/components/FilterTable/FilterTable';
 import UserDeleteModal from '../components/UserDeleteModal';
 import type { UserOverviewTableCol, UserTableState } from '../user.types';
-import { UserBulkAction, USERS_PER_PAGE } from '../user.types';
+import { USERS_PER_PAGE, UserBulkAction } from '../user.types';
 import './UserOverview.scss';
 
 export interface UserOverviewProps {

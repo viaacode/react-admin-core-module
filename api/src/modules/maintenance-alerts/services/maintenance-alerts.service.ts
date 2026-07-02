@@ -28,7 +28,6 @@ import {
 	UpdateMaintenanceAlertMutationVariables,
 } from '../../shared/generated/graphql-db-types-hetarchief';
 import { CustomError } from '../../shared/helpers/error';
-import { PaginationHelper } from '../../shared/helpers/pagination';
 import { SortDirection } from '../../shared/types';
 import { Locale } from '../../translations';
 import {
@@ -68,7 +67,7 @@ export class MaintenanceAlertsService {
 	): Promise<IPagination<MaintenanceAlert>> {
 		try {
 			const { page, size, orderProp, orderDirection, languages, searchTerm } = inputQuery;
-			const { offset, limit } = PaginationHelper.convertPagination(page, size);
+			const offset = page * size;
 
 			const whereAndFilter = [];
 			if (onlyActive) {
@@ -104,7 +103,7 @@ export class MaintenanceAlertsService {
 			>(FindMaintenanceAlertsDocument, {
 				where,
 				offset,
-				limit: Number(limit),
+				limit: Number(size),
 				orderBy: set(
 					{},
 					ORDER_PROP_TO_DB_PROP[orderProp] || ORDER_PROP_TO_DB_PROP.fromDate,
