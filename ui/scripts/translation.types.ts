@@ -28,6 +28,7 @@ export interface TranslationEntry {
 	language: Locale;
 	value: string;
 	value_type: ValueType | null;
+	id: string;
 }
 
 export const TRANSLATION_SEPARATOR = '___';

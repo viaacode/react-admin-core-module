@@ -1,4 +1,4 @@
-import { Table, TextInput } from '@meemoo/react-components';
+import { type Column, Table, TextInput } from '@meemoo/react-components';
 import { cloneDeep, remove, sortBy } from 'es-toolkit';
 import type { ChangeEvent } from 'react';
 import React, {
@@ -9,7 +9,6 @@ import React, {
 	useMemo,
 	useState,
 } from 'react';
-import type { Column, TableOptions, UseSortByColumnOptions } from 'react-table';
 import { ToastType } from '~core/config/config.types';
 import { useGetPermissions } from '~modules/permissions/hooks/data/get-all-permissions';
 import type { PermissionData } from '~modules/permissions/permissions.types';
@@ -238,8 +237,7 @@ export const UserGroupOverview = forwardRef<
 	 * Render
 	 */
 
-	const columns = useMemo((): (Column<PermissionData> &
-		UseSortByColumnOptions<PermissionData>)[] => {
+	const columns = useMemo((): Column<PermissionData>[] => {
 		if (!currentUserGroups) {
 			return [];
 		}
@@ -271,16 +269,15 @@ export const UserGroupOverview = forwardRef<
 					]}
 				/>
 				<Table
-					options={
-						{
-							columns,
-							data: searchResults || permissions || [],
-							initialState: {
+					options={{
+						columns,
+						data: searchResults || permissions || [],
+						initialState: {
+							pagination: {
 								pageSize: permissions?.length,
 							},
-							// biome-ignore lint/suspicious/noExplicitAny: todo
-						} as TableOptions<Record<'id', string | number> & Record<string, any>>
-					}
+						},
+					}}
 					enableRowFocusOnClick={isHetArchief()}
 				/>
 			</div>

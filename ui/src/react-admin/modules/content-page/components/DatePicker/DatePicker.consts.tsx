@@ -1,4 +1,5 @@
 import { TextInput } from '@meemoo/react-components';
+import type { DefaultProps } from '@viaa/avo2-components';
 import { enGB, nlBE } from 'date-fns/locale';
 import React from 'react';
 import type { DatePickerProps } from 'react-datepicker';
@@ -7,7 +8,27 @@ import { Locale } from '~modules/translations/translations.core.types';
 import { Icon } from '~shared/components/Icon/Icon';
 import { tText } from '~shared/helpers/translation-functions.ts';
 
-export function getDatePickerDefaultProps(id: string): DatePickerProps {
+export interface DatePickerPropsSchema extends DefaultProps {
+	id: DatePickerProps['id'];
+	wrapperClassName?: DatePickerProps['wrapperClassName'];
+	calendarClassName?: DatePickerProps['calendarClassName'];
+	popperClassName?: DatePickerProps['popperClassName'];
+	showPopperArrow?: DatePickerProps['showPopperArrow'];
+	showMonthDropdown?: DatePickerProps['showMonthDropdown'];
+	showYearDropdown?: DatePickerProps['showYearDropdown'];
+	dropdownMode?: DatePickerProps['dropdownMode'];
+	calendarStartDay?: DatePickerProps['calendarStartDay'];
+	dateFormat: DatePickerProps['dateFormat'];
+	placeholderText?: DatePickerProps['placeholderText'];
+	customInput: DatePickerProps['customInput'];
+	popperPlacement?: DatePickerProps['popperPlacement'];
+	locale: DatePickerProps['locale'];
+	onChange?: (date: Date | null) => void;
+	minDate?: Date;
+	maxDate?: Date;
+}
+
+export function getDatePickerDefaultProps(id: string): DatePickerPropsSchema {
 	return {
 		id,
 		wrapperClassName: 'c-datepicker',

@@ -1,12 +1,9 @@
 import { TextInput } from '@meemoo/react-components';
 import { nlBE } from 'date-fns/locale';
-import type { DatePickerProps } from 'react-datepicker';
 import { Icon } from '~shared/components/Icon/Icon';
+import type { TimepickerProps } from './Timepicker.types.ts';
 
-export function getTimePickerDefaults(
-	id: string,
-	ariaLabel: string
-): DatePickerProps & { id: string } {
+export function getTimePickerDefaults(id: string, ariaLabel: string): TimepickerProps {
 	return {
 		id: id,
 		dateFormat: 'HH:mm',

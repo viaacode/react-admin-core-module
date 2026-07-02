@@ -1,8 +1,7 @@
-import { Checkbox } from '@meemoo/react-components';
+import { Checkbox, type Column } from '@meemoo/react-components';
 import type { TagInfo } from '@viaa/avo2-components';
 import { compact, sortBy } from 'es-toolkit';
 import React from 'react';
-import type { Column, UseSortByColumnOptions } from 'react-table';
 import type { PermissionData } from '~modules/permissions/permissions.types';
 import type {
 	UserGroup,
@@ -41,24 +40,24 @@ export const preferredUserGroupOrder: Record<string, number> = {
 export const getUserGroupTableColumns = (
 	userGroups: UserGroupWithPermissions[],
 	updateUserGroup: (groupId: string, permissionId: string | number, value: boolean) => void
-): (Column<PermissionData> & UseSortByColumnOptions<PermissionData>)[] => {
+): Column<PermissionData>[] => {
 	return [
 		{
-			Header: '',
-			accessor: 'label',
-			disableSortBy: true,
-			Cell: ({ row }: PermissionRow) => {
+			header: '',
+			accessorKey: 'label',
+			enableSorting: false,
+			cell: ({ row }: PermissionRow) => {
 				return <span title={row.original.description}>{row.original.label}</span>;
 			},
 		},
 		...sortBy(userGroups, [(userGroup) => preferredUserGroupOrder[userGroup.label] || 0]).map(
 			(group) => {
 				return {
-					Header: () => <span>{group?.label || ''}</span>,
+					header: () => <span>{group?.label || ''}</span>,
 					id: `${group?.name}-${group?.id}`,
-					accessor: (row: PermissionData) => row.name,
-					disableSortBy: true,
-					Cell: ({ row }: PermissionRow) => {
+					accessorFn: (row: PermissionData) => row.name,
+					enableSorting: false,
+					cell: ({ row }: PermissionRow) => {
 						const isChecked = !!group?.permissions?.find(
 							(permission: PermissionData) => permission.id === row.original.id
 						);

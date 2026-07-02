@@ -13,7 +13,6 @@ export const Timepicker: FC<TimepickerProps> = (props) => {
 	const defaultProps = getDatePickerDefaultProps(props.id);
 	return (
 		<DatePicker
-			locale={defaultProps.locale}
 			wrapperClassName={classNames}
 			calendarClassName={classNames}
 			popperClassName={classNames}
@@ -21,10 +20,11 @@ export const Timepicker: FC<TimepickerProps> = (props) => {
 			showMonthDropdown
 			showYearDropdown
 			showTimeInput
-			showTimeSelectOnly
 			dropdownMode="select"
 			timeFormat="HH:mm"
 			{...props}
+			showTimeSelectOnly={props.showTimeSelectOnly ?? true}
+			locale={props.locale ?? defaultProps.locale}
 		/>
 	);
 };

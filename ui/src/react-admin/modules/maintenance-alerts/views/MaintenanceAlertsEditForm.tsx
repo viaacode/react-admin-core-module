@@ -441,7 +441,7 @@ const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProp
 					id="new-alert-from-date"
 					name="fromDate"
 					onBlur={isFormValid}
-					onChange={handleNewFromDate}
+					onChange={handleNewFromDate as (date: Date | null) => void}
 					selected={
 						currentMaintenanceAlert?.fromDate ? new Date(currentMaintenanceAlert.fromDate) : null
 					}

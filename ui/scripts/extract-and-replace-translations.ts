@@ -9,6 +9,7 @@ import { green, grey, red, yellow } from 'console-log-colors';
 import { compact, intersection, kebabCase, lowerCase, trim, upperFirst, without } from 'lodash-es';
 
 const execAsync = promisify(exec);
+
 /**
  This script runs over all the code and looks for either:
 tHtml('Aanvraagformulier')
@@ -145,6 +146,7 @@ function getTranslationEntryFromCallExpression(
 		const key = formattedKey.split(TRANSLATION_SEPARATOR)[1];
 
 		return {
+			id: '',
 			app,
 			component,
 			location,
@@ -374,6 +376,7 @@ async function combineTranslations(
 		languages.forEach((languageCode) => {
 			const onlineTranslation = onlineTranslations.find((t) => t.language === languageCode);
 			const entry: TranslationEntry = {
+				id: '',
 				app: sourceCodeTranslation?.app || nlOnlineTranslation?.app || nlJsonTranslation?.app,
 				component:
 					sourceCodeTranslation?.component ||
@@ -436,6 +439,7 @@ async function updateTranslations(
 		const nlJsonTranslationEntries = Object.entries(nlJsonTranslations).map(
 			(entry): TranslationEntry => {
 				return {
+					id: '',
 					app,
 					component,
 					location: entry[0].split(TRANSLATION_SEPARATOR)[0],
@@ -636,9 +640,18 @@ async function extractTranslations() {
 	const RESET = '\x1b[0m';
 	const dimFormat = ` ${DIM}{bar} {pct} | {label} | {status}${RESET}`;
 
-	const totalBar = multiBar.create(100, 0, { pct: pct(0), label: pad('total'), status: 'fetching online translations...' });
+	const totalBar = multiBar.create(100, 0, {
+		pct: pct(0),
+		label: pad('total'),
+		status: 'fetching online translations...',
+	});
 	const bars = labels.map((label) =>
-		multiBar.create(100, 0, { pct: pct(0), label: pad(label), status: 'waiting...' }, { format: dimFormat })
+		multiBar.create(
+			100,
+			0,
+			{ pct: pct(0), label: pad(label), status: 'waiting...' },
+			{ format: dimFormat }
+		)
 	);
 
 	// Track each bar's percentage so we can compute a total
