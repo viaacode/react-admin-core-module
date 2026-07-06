@@ -117,5 +117,12 @@
   },
   "overrides": {
     "graphql": "16.6.0"
+  },
+  "allowScripts": {
+    "@nestjs/core@9.4.3": true,
+    "@swc/core@1.11.13": true,
+    "esbuild@0.27.2": true,
+    "fsevents@2.3.3": true,
+    "sharp@0.34.5": true
   }
 }
