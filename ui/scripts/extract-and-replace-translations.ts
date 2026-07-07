@@ -6,7 +6,8 @@ import * as path from 'node:path';
 import { promisify } from 'node:util';
 import cliProgress from 'cli-progress';
 import { green, grey, red, yellow } from 'console-log-colors';
-import { compact, intersection, kebabCase, lowerCase, trim, upperFirst, without } from 'lodash-es';
+import { compact, intersection, kebabCase, lowerCase, upperFirst, without } from 'es-toolkit';
+import { trim } from 'es-toolkit/compat';
 
 const execAsync = promisify(exec);
 

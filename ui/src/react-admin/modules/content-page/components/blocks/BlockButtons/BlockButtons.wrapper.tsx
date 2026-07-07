@@ -15,11 +15,11 @@ export const BlockButtonsWrapper: FunctionComponent<BlockButtonsProps> = (props)
 				...element,
 				tooltip: tText(
 					'admin/content-block/components/wrappers/buttons-wrapper/buttons-wrapper___gebruik-rechtermuisknop-en-kies-save-om-het-bestand-te-downloaden'
-				)
-			}
+				),
+			};
 		}
 
-		return element
+		return element;
 	});
 
 	return <BlockButtons {...props} elements={resolvedElements} />;
