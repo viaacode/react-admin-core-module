@@ -38563,6 +38563,46 @@
     "id": "",
     "app": "AVO",
     "component": "FRONTEND",
+    "location": "shared/components/time-crop-controls/time-crop-controls-wrapper",
+    "key": "start-tijd-van-de-video-audio-selectie-input-aria-label",
+    "language": "nl",
+    "value": "start-tijd-van-de-video-audio-selectie-input-aria-label",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "shared/components/time-crop-controls/time-crop-controls-wrapper",
+    "key": "eind-tijd-van-de-video-audio-selectie-input-aria-label",
+    "language": "nl",
+    "value": "eind-tijd-van-de-video-audio-selectie-input-aria-label",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "shared/components/time-crop-controls/time-crop-controls-wrapper",
+    "key": "start-tijd-van-de-video-audio-selectie-input-aria-label",
+    "language": "nl",
+    "value": "start-tijd-van-de-video-audio-selectie-input-aria-label",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "shared/components/time-crop-controls/time-crop-controls-wrapper",
+    "key": "eind-tijd-van-de-video-audio-selectie-input-aria-label",
+    "language": "nl",
+    "value": "eind-tijd-van-de-video-audio-selectie-input-aria-label",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "AVO",
+    "component": "FRONTEND",
     "location": "admin/interactive-tour/views/interactive-tour-edit",
     "key": "de-interactieve-tour-is-nog-niet-geladen",
     "language": "nl",
@@ -39703,41 +39743,21 @@
     "id": "",
     "app": "AVO",
     "component": "FRONTEND",
-    "location": "shared/components/time-crop-controls/time-crop-controls-wrapper",
-    "key": "start-tijd-van-de-video-audio-selectie-input-aria-label",
+    "location": "item/components/modals/add-to-collection-modal",
+    "key": "de-ingevulde-starttijd-heeft-niet-het-correcte-formaat-uu-mm-ss",
     "language": "nl",
-    "value": "start-tijd-van-de-video-audio-selectie-input-aria-label",
-    "value_type": "TEXT"
+    "value": "De ingevulde starttijd heeft niet het correcte formaat (uu:mm:ss).",
+    "value_type": "HTML"
   },
   {
     "id": "",
     "app": "AVO",
     "component": "FRONTEND",
-    "location": "shared/components/time-crop-controls/time-crop-controls-wrapper",
-    "key": "eind-tijd-van-de-video-audio-selectie-input-aria-label",
+    "location": "item/components/modals/add-to-collection-modal",
+    "key": "de-ingevulde-eidntijd-heeft-niet-het-correcte-formaat-uu-mm-ss",
     "language": "nl",
-    "value": "eind-tijd-van-de-video-audio-selectie-input-aria-label",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "shared/components/time-crop-controls/time-crop-controls-wrapper",
-    "key": "start-tijd-van-de-video-audio-selectie-input-aria-label",
-    "language": "nl",
-    "value": "start-tijd-van-de-video-audio-selectie-input-aria-label",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "shared/components/time-crop-controls/time-crop-controls-wrapper",
-    "key": "eind-tijd-van-de-video-audio-selectie-input-aria-label",
-    "language": "nl",
-    "value": "eind-tijd-van-de-video-audio-selectie-input-aria-label",
-    "value_type": "TEXT"
+    "value": "De ingevulde eindtijd heeft niet het correcte formaat (uu:mm:ss).",
+    "value_type": "HTML"
   },
   {
     "id": "",
