@@ -204,6 +204,11 @@
     "memoizee": "^0.4.17"
   },
   "allowScripts": {
-    "@parcel/watcher@2.5.1": true
+    "@parcel/watcher@2.5.1": true,
+    "es5-ext@0.10.64": true,
+    "esbuild@0.25.5": true,
+    "fsevents@2.3.3": true,
+    "lefthook@1.11.14": true,
+    "esbuild@0.23.1": true
   }
 }

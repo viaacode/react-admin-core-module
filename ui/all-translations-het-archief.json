@@ -4739,7 +4739,7 @@
     "location": "modules/content-page/views/content-page-overview",
     "key": "zoek-input-aria-label",
     "language": "nl",
-    "value": "Doorzoek contentpagina's",
+    "value": "Doorzoek hier de contentpagina's",
     "value_type": "TEXT"
   },
   {
@@ -4748,7 +4748,7 @@
     "location": "modules/content-page/views/content-page-overview",
     "key": "zoek-input-aria-label",
     "language": "en",
-    "value": "Search content pages",
+    "value": "Search content pages here",
     "value_type": "TEXT"
   },
   {
@@ -6071,7 +6071,7 @@
     "location": "modules/maintenance-alerts/views/maintenance-alerts-edit-form",
     "key": "zichtbaar-vanaf-tijd-input-aria-label",
     "language": "nl",
-    "value": "Zichtbaar vanaf tijd [INPUT_ARIA_LABEL]",
+    "value": "Hier kan je instellen vanaf wanneer het zichtbaar is",
     "value_type": "TEXT"
   },
   {
@@ -6080,7 +6080,7 @@
     "location": "modules/maintenance-alerts/views/maintenance-alerts-edit-form",
     "key": "zichtbaar-vanaf-tijd-input-aria-label",
     "language": "en",
-    "value": "Zichtbaar vanaf tijd [INPUT_ARIA_LABEL]",
+    "value": "Here you can specify when this will become visible",
     "value_type": "TEXT"
   },
   {
@@ -6107,7 +6107,7 @@
     "location": "modules/maintenance-alerts/views/maintenance-alerts-edit-form",
     "key": "zichtbaar-tot-tijd-input-aria-label",
     "language": "nl",
-    "value": "Zichtbaar tot tijd [INPUT_ARIA_LABEL]",
+    "value": "Hier kan je instellen tot wanneer het zichtbaar is",
     "value_type": "TEXT"
   },
   {
@@ -6116,7 +6116,7 @@
     "location": "modules/maintenance-alerts/views/maintenance-alerts-edit-form",
     "key": "zichtbaar-tot-tijd-input-aria-label",
     "language": "en",
-    "value": "Zichtbaar tot tijd [INPUT_ARIA_LABEL]",
+    "value": "Here you can specify until when this will be visible",
     "value_type": "TEXT"
   },
   {
@@ -6431,7 +6431,7 @@
     "location": "modules/maintenance-alerts/views/maintenance-alerts-overview",
     "key": "zoek-input-aria-label",
     "language": "nl",
-    "value": "Zoek input aria label",
+    "value": "Zoek hier input",
     "value_type": "TEXT"
   },
   {
@@ -6440,7 +6440,7 @@
     "location": "modules/maintenance-alerts/views/maintenance-alerts-overview",
     "key": "zoek-input-aria-label",
     "language": "en",
-    "value": "Zoek input aria label",
+    "value": "Search for input here",
     "value_type": "TEXT"
   },
   {
@@ -7799,7 +7799,7 @@
     "location": "modules/translations/views/translations-overview",
     "key": "zoekveld-aria-label",
     "language": "nl",
-    "value": "Zoek een vertaling",
+    "value": "Zoek hier een vertaling",
     "value_type": "TEXT"
   },
   {
@@ -7808,7 +7808,7 @@
     "location": "modules/translations/views/translations-overview",
     "key": "zoekveld-aria-label",
     "language": "en",
-    "value": "Search a translation",
+    "value": "Search for a translation here",
     "value_type": "TEXT"
   },
   {
@@ -7835,7 +7835,7 @@
     "location": "modules/translations/views/translations-overview",
     "key": "zoek-vertaling-input-aria-label",
     "language": "nl",
-    "value": "Zoek vertaling [INPUT_ARIA_LABEL]",
+    "value": "Zoek hier een vertaling",
     "value_type": "TEXT"
   },
   {
@@ -7844,7 +7844,7 @@
     "location": "modules/translations/views/translations-overview",
     "key": "zoek-vertaling-input-aria-label",
     "language": "en",
-    "value": "Zoek vertaling [INPUT_ARIA_LABEL]",
+    "value": "Search for a translation here",
     "value_type": "TEXT"
   },
   {
@@ -11003,7 +11003,7 @@
     "location": "modules/content-page/components/date-picker/date-picker",
     "key": "datum-input-aria-label",
     "language": "nl",
-    "value": "Datum [INPUT_ARIA_LABEL]",
+    "value": "Kies hier de datum",
     "value_type": "TEXT"
   },
   {
@@ -11012,7 +11012,7 @@
     "location": "modules/content-page/components/date-picker/date-picker",
     "key": "datum-input-aria-label",
     "language": "en",
-    "value": "Datum [INPUT_ARIA_LABEL]",
+    "value": "Specify the date here",
     "value_type": "TEXT"
   },
   {
@@ -12803,7 +12803,7 @@
     "location": "modules/shared/components/filter-table/filter-table",
     "key": "zoekveld-checkbox-filter-aria-label",
     "language": "nl",
-    "value": "zoekveld checkbox filter aria label",
+    "value": "zoekveld checkbox filter",
     "value_type": "TEXT"
   },
   {
@@ -12812,7 +12812,7 @@
     "location": "modules/shared/components/filter-table/filter-table",
     "key": "zoekveld-checkbox-filter-aria-label",
     "language": "en",
-    "value": "Search bar checkbox filter aria label",
+    "value": "Search bar checkbox filter",
     "value_type": "TEXT"
   },
   {
@@ -14151,6 +14151,24 @@
     "app": "HET_ARCHIEF",
     "component": "ADMIN_CORE",
     "location": "modules/content-page/components/blocks/block-content-enclose/block-content-enclose",
+    "key": "titel-is-verplicht",
+    "language": "nl",
+    "value": "Titel is verplicht",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-content-enclose/block-content-enclose",
+    "key": "titel-is-verplicht",
+    "language": "en",
+    "value": "Titel is verplicht",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-content-enclose/block-content-enclose",
     "key": "titletype",
     "language": "nl",
     "value": "titeltype",
@@ -14954,7 +14972,7 @@
     "location": "modules/content-page/components/blocks/block-het-archief-header-search/block-het-archief-header-search",
     "key": "aria-label-voor-zoekveld",
     "language": "en",
-    "value": "Aria label for search input",
+    "value": "Aria label for search",
     "value_type": "TEXT"
   },
   {
@@ -14999,7 +15017,7 @@
     "location": "modules/content-page/components/blocks/block-het-archief-header-search/block-het-archief-header-search",
     "key": "zoek-in-de-publieke-catalogus-input-aria-label",
     "language": "nl",
-    "value": "Zoek in de publieke catalogus [INPUT_ARIA_LABEL]",
+    "value": "Hiermee kan je zoeken in de publieke catalogus ",
     "value_type": "TEXT"
   },
   {
@@ -15008,7 +15026,7 @@
     "location": "modules/content-page/components/blocks/block-het-archief-header-search/block-het-archief-header-search",
     "key": "zoek-in-de-publieke-catalogus-input-aria-label",
     "language": "en",
-    "value": "Zoek in de publieke catalogus [INPUT_ARIA_LABEL]",
+    "value": "This will allow you to search the public catalogue",
     "value_type": "TEXT"
   },
   {
@@ -16205,7 +16223,7 @@
     "location": "modules/content-page/components/blocks/block-overview-newspaper-titles/block-overview-newspaper-titles",
     "key": "zoek-kranten-op-titel-input-aria-label",
     "language": "nl",
-    "value": "Zoek kranten op titel [INPUT_ARIA_LABEL]",
+    "value": "Hier kan je kranten zoeken op titel",
     "value_type": "TEXT"
   },
   {
@@ -16214,7 +16232,7 @@
     "location": "modules/content-page/components/blocks/block-overview-newspaper-titles/block-overview-newspaper-titles",
     "key": "zoek-kranten-op-titel-input-aria-label",
     "language": "en",
-    "value": "Zoek kranten op titel [INPUT_ARIA_LABEL]",
+    "value": "This will allow you to search newspapers by title",
     "value_type": "TEXT"
   },
   {
@@ -18253,24 +18271,6 @@
   },
   {
     "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-content-enclose/block-content-enclose",
-    "key": "titel-is-verplicht",
-    "language": "nl",
-    "value": "Titel is verplicht",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-content-enclose/block-content-enclose",
-    "key": "titel-is-verplicht",
-    "language": "en",
-    "value": "Titel is verplicht",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
     "component": "FRONTEND",
     "location": "pages/404",
     "key": "niet-gevonden",
@@ -19031,7 +19031,7 @@
     "location": "modules/ie-objects/object-detail-page",
     "key": "zoek-tekst-in-deze-krant-input-aria-label",
     "language": "nl",
-    "value": "Zoek tekst in deze krant [INPUT_ARIA_LABEL]",
+    "value": "Zoek hier door de tekst in deze krant ",
     "value_type": "TEXT"
   },
   {
@@ -19040,7 +19040,7 @@
     "location": "modules/ie-objects/object-detail-page",
     "key": "zoek-tekst-in-deze-krant-input-aria-label",
     "language": "en",
-    "value": "Zoek tekst in deze krant [INPUT_ARIA_LABEL]",
+    "value": "Search the text of the newspaper here",
     "value_type": "TEXT"
   },
   {
@@ -19157,7 +19157,7 @@
     "location": "modules/ie-objects/object-detail-page",
     "key": "ga-terug-naar-de-zoekresultaten-button-aria-label",
     "language": "nl",
-    "value": "Ga terug naar de zoekresultaten [BUTTON_ARIA_LABEL]",
+    "value": "Hiermee ga je terug naar de zoekresultaten",
     "value_type": "TEXT"
   },
   {
@@ -19166,7 +19166,7 @@
     "location": "modules/ie-objects/object-detail-page",
     "key": "ga-terug-naar-de-zoekresultaten-button-aria-label",
     "language": "en",
-    "value": "Ga terug naar de zoekresultaten [BUTTON_ARIA_LABEL]",
+    "value": "This will allow you to navigate back to your search results",
     "value_type": "TEXT"
   },
   {
@@ -19265,7 +19265,7 @@
     "location": "modules/ie-objects/object-detail-page",
     "key": "voeg-dit-object-toe-aan-een-map-blade-aria-label",
     "language": "nl",
-    "value": "Voeg dit object toe aan een map [BLADE_ARIA_LABEL]",
+    "value": "Voeg hiermee dit object toe aan een map ",
     "value_type": "TEXT"
   },
   {
@@ -19274,7 +19274,7 @@
     "location": "modules/ie-objects/object-detail-page",
     "key": "voeg-dit-object-toe-aan-een-map-blade-aria-label",
     "language": "en",
-    "value": "Voeg dit object toe aan een map [BLADE_ARIA_LABEL]",
+    "value": "This will add this object to a folder",
     "value_type": "TEXT"
   },
   {
@@ -19283,7 +19283,7 @@
     "location": "modules/ie-objects/object-detail-page",
     "key": "rapporteer-iets-dat-foutief-is-met-dit-object-blade-aria-label",
     "language": "nl",
-    "value": "Rapporteer iets dat foutief is met dit object [BLADE_ARIA_LABEL]",
+    "value": "Rapporteer iets dat foutief is met dit object",
     "value_type": "TEXT"
   },
   {
@@ -19292,7 +19292,7 @@
     "location": "modules/ie-objects/object-detail-page",
     "key": "rapporteer-iets-dat-foutief-is-met-dit-object-blade-aria-label",
     "language": "en",
-    "value": "Rapporteer iets dat foutief is met dit object [BLADE_ARIA_LABEL]",
+    "value": "Report if there is something wrong with this object",
     "value_type": "TEXT"
   },
   {
@@ -19301,7 +19301,7 @@
     "location": "modules/ie-objects/object-detail-page",
     "key": "vraag-toegang-tot-dit-object-aan-blade-aria-label",
     "language": "nl",
-    "value": "Vraag toegang tot dit object aan [BLADE_ARIA_LABEL]",
+    "value": "Vraag toegang tot dit object aan",
     "value_type": "TEXT"
   },
   {
@@ -19310,7 +19310,7 @@
     "location": "modules/ie-objects/object-detail-page",
     "key": "vraag-toegang-tot-dit-object-aan-blade-aria-label",
     "language": "en",
-    "value": "Vraag toegang tot dit object aan [BLADE_ARIA_LABEL]",
+    "value": "Request access to this object",
     "value_type": "TEXT"
   },
   {
@@ -19319,7 +19319,7 @@
     "location": "modules/ie-objects/object-detail-page",
     "key": "download-je-selectie-als-afbeelding-blade-aria-label",
     "language": "nl",
-    "value": "Download je selectie als afbeelding [BLADE_ARIA_LABEL]",
+    "value": "Download hier je selectie als afbeelding ",
     "value_type": "TEXT"
   },
   {
@@ -19328,7 +19328,7 @@
     "location": "modules/ie-objects/object-detail-page",
     "key": "download-je-selectie-als-afbeelding-blade-aria-label",
     "language": "en",
-    "value": "Download je selectie als afbeelding [BLADE_ARIA_LABEL]",
+    "value": "Download your selection as an image here",
     "value_type": "TEXT"
   },
   {
@@ -19463,7 +19463,7 @@
     "location": "modules/iiif-viewer/iiif-viewer",
     "key": "zoek-tekst-in-deze-krant-input-aria-label",
     "language": "nl",
-    "value": "Zoek tekst in deze krant [INPUT_ARIA_LABEL]",
+    "value": "Zoek tekst in deze krant",
     "value_type": "TEXT"
   },
   {
@@ -19472,7 +19472,7 @@
     "location": "modules/iiif-viewer/iiif-viewer",
     "key": "zoek-tekst-in-deze-krant-input-aria-label",
     "language": "en",
-    "value": "Zoek tekst in deze krant [INPUT_ARIA_LABEL]",
+    "value": "Search the text in this newspaper",
     "value_type": "TEXT"
   },
   {
@@ -19877,7 +19877,7 @@
     "location": "modules/newsletter/newsletter-page",
     "key": "voornaam-input-aria-label",
     "language": "nl",
-    "value": "Voornaam [INPUT_ARIA_LABEL]",
+    "value": "Voornaam",
     "value_type": "TEXT"
   },
   {
@@ -19886,7 +19886,7 @@
     "location": "modules/newsletter/newsletter-page",
     "key": "voornaam-input-aria-label",
     "language": "en",
-    "value": "Voornaam [INPUT_ARIA_LABEL]",
+    "value": "First name",
     "value_type": "TEXT"
   },
   {
@@ -19913,7 +19913,7 @@
     "location": "modules/newsletter/newsletter-page",
     "key": "achternaam-input-aria-label",
     "language": "nl",
-    "value": "Achternaam [INPUT_ARIA_LABEL]",
+    "value": "Achternaam",
     "value_type": "TEXT"
   },
   {
@@ -19922,7 +19922,7 @@
     "location": "modules/newsletter/newsletter-page",
     "key": "achternaam-input-aria-label",
     "language": "en",
-    "value": "Achternaam [INPUT_ARIA_LABEL]",
+    "value": "Last name",
     "value_type": "TEXT"
   },
   {
@@ -19949,7 +19949,7 @@
     "location": "modules/newsletter/newsletter-page",
     "key": "email-input-aria-label",
     "language": "nl",
-    "value": "Email [INPUT_ARIA_LABEL]",
+    "value": "E-mail",
     "value_type": "TEXT"
   },
   {
@@ -19958,7 +19958,7 @@
     "location": "modules/newsletter/newsletter-page",
     "key": "email-input-aria-label",
     "language": "en",
-    "value": "Email [INPUT_ARIA_LABEL]",
+    "value": "Email",
     "value_type": "TEXT"
   },
   {
@@ -20147,7 +20147,7 @@
     "location": "modules/search/search-page",
     "key": "meer-info-over-enkel-voor-onderzoek-doeleinden-link-aria-label",
     "language": "nl",
-    "value": "Meer info over enkel voor onderzoek doeleinden [LINK_ARIA_LABEL]",
+    "value": "Meer info over wat 'enkel voor onderzoeksdoeleinden' betekent ",
     "value_type": "TEXT"
   },
   {
@@ -20156,7 +20156,7 @@
     "location": "modules/search/search-page",
     "key": "meer-info-over-enkel-voor-onderzoek-doeleinden-link-aria-label",
     "language": "en",
-    "value": "Meer info over enkel voor onderzoek doeleinden [LINK_ARIA_LABEL]",
+    "value": "More info about what is meant by 'only for research'",
     "value_type": "TEXT"
   },
   {
@@ -20381,7 +20381,7 @@
     "location": "modules/search/search-page",
     "key": "voeg-object-toe-aan-map-blade-aria-label",
     "language": "nl",
-    "value": "Voeg object toe aan map [BLADE_ARIA_LABEL]",
+    "value": "Voeg object toe aan map",
     "value_type": "TEXT"
   },
   {
@@ -20390,7 +20390,7 @@
     "location": "modules/search/search-page",
     "key": "voeg-object-toe-aan-map-blade-aria-label",
     "language": "en",
-    "value": "Voeg object toe aan map [BLADE_ARIA_LABEL]",
+    "value": "Add object to a folder",
     "value_type": "TEXT"
   },
   {
@@ -22127,7 +22127,7 @@
     "location": "modules/account/views/account-my-folders",
     "key": "voeg-dit-object-toe-aan-een-map-blade-aria-label",
     "language": "nl",
-    "value": "Voeg dit object toe aan een map [BLADE_ARIA_LABEL]",
+    "value": "Hiermee voeg je dit object toe aan een map",
     "value_type": "TEXT"
   },
   {
@@ -22136,7 +22136,7 @@
     "location": "modules/account/views/account-my-folders",
     "key": "voeg-dit-object-toe-aan-een-map-blade-aria-label",
     "language": "en",
-    "value": "Voeg dit object toe aan een map [BLADE_ARIA_LABEL]",
+    "value": "This will add the object to a folder",
     "value_type": "TEXT"
   },
   {
@@ -22523,7 +22523,7 @@
     "location": "modules/account/views/account-my-material-requests",
     "key": "zoek-naar-materiaal-aanvraag-input-aria-label",
     "language": "nl",
-    "value": "Zoek naar materiaal aanvraag [INPUT_ARIA_LABEL]",
+    "value": "Zoek hier naar een materiaalaanvraag ",
     "value_type": "TEXT"
   },
   {
@@ -22532,7 +22532,7 @@
     "location": "modules/account/views/account-my-material-requests",
     "key": "zoek-naar-materiaal-aanvraag-input-aria-label",
     "language": "en",
-    "value": "Search for material request\n[INPUT_ARIA_LABEL]",
+    "value": "Search for material request here",
     "value_type": "TEXT"
   },
   {
@@ -22775,7 +22775,7 @@
     "location": "modules/account/views/account-my-application-list-sent",
     "key": "ga-naar-mijn-materiaal-aanvragen-link-aria-label",
     "language": "nl",
-    "value": "Ga naar mijn materiaal aanvragen [LINK_ARIA_LABEL]",
+    "value": "Ga naar mijn materiaalaanvragen ",
     "value_type": "TEXT"
   },
   {
@@ -22784,7 +22784,7 @@
     "location": "modules/account/views/account-my-application-list-sent",
     "key": "ga-naar-mijn-materiaal-aanvragen-link-aria-label",
     "language": "en",
-    "value": "Ga naar mijn materiaal aanvragen [LINK_ARIA_LABEL]",
+    "value": "Proceed to my material requests",
     "value_type": "TEXT"
   },
   {
@@ -24179,7 +24179,7 @@
     "location": "modules/admin/views/admin-active-visitors",
     "key": "zoek-actieve-bezoekers-input-aria-label",
     "language": "nl",
-    "value": "Zoek actieve bezoekers [INPUT_ARIA_LABEL]",
+    "value": "Zoek hier naar actieve bezoekers",
     "value_type": "TEXT"
   },
   {
@@ -24188,7 +24188,7 @@
     "location": "modules/admin/views/admin-active-visitors",
     "key": "zoek-actieve-bezoekers-input-aria-label",
     "language": "en",
-    "value": "Zoek actieve bezoekers [INPUT_ARIA_LABEL]",
+    "value": "Find active users here",
     "value_type": "TEXT"
   },
   {
@@ -24287,7 +24287,7 @@
     "location": "modules/admin/views/admin-active-visitors",
     "key": "materiaal-aanvraag-aanpassen-blade-aria-label",
     "language": "nl",
-    "value": "Materiaal aanvraag aanpassen [BLADE_ARIA_LABEL]",
+    "value": "Pas je materiaalaanvraag hier aan",
     "value_type": "TEXT"
   },
   {
@@ -24296,7 +24296,7 @@
     "location": "modules/admin/views/admin-active-visitors",
     "key": "materiaal-aanvraag-aanpassen-blade-aria-label",
     "language": "en",
-    "value": "Materiaal aanvraag aanpassen [BLADE_ARIA_LABEL]",
+    "value": "Edit your material request here",
     "value_type": "TEXT"
   },
   {
@@ -24719,7 +24719,7 @@
     "location": "modules/admin/views/maintenance-alerts-page",
     "key": "bewerk-een-onderhoudsmelding-blade-aria-label",
     "language": "nl",
-    "value": "Bewerk een onderhoudsmelding [BLADE_ARIA_LABEL]",
+    "value": "Bewerk een onderhoudsmelding hier",
     "value_type": "TEXT"
   },
   {
@@ -24728,7 +24728,7 @@
     "location": "modules/admin/views/maintenance-alerts-page",
     "key": "bewerk-een-onderhoudsmelding-blade-aria-label",
     "language": "en",
-    "value": "Bewerk een onderhoudsmelding [BLADE_ARIA_LABEL]",
+    "value": "Edit a maintenance alert here",
     "value_type": "TEXT"
   },
   {
@@ -25709,7 +25709,7 @@
     "location": "modules/cp/views/cp-admin-material-requests",
     "key": "zoek-materiaal-aanvragen-input-aria-label",
     "language": "nl",
-    "value": "Zoek materiaal aanvragen [INPUT_ARIA_LABEL]",
+    "value": "Zoek materiaalaanvragen",
     "value_type": "TEXT"
   },
   {
@@ -25718,7 +25718,7 @@
     "location": "modules/cp/views/cp-admin-material-requests",
     "key": "zoek-materiaal-aanvragen-input-aria-label",
     "language": "en",
-    "value": "Zoek materiaal aanvragen [INPUT_ARIA_LABEL]",
+    "value": "Find material requests",
     "value_type": "TEXT"
   },
   {
@@ -25943,7 +25943,7 @@
     "location": "modules/cp/views/cp-admin-visitors",
     "key": "zoek-bezoekers-input-aria-label",
     "language": "nl",
-    "value": "Zoek bezoekers [INPUT_ARIA_LABEL]",
+    "value": "Zoek bezoekers ",
     "value_type": "TEXT"
   },
   {
@@ -25952,7 +25952,7 @@
     "location": "modules/cp/views/cp-admin-visitors",
     "key": "zoek-bezoekers-input-aria-label",
     "language": "en",
-    "value": "Zoek bezoekers [INPUT_ARIA_LABEL]",
+    "value": "Find visitors",
     "value_type": "TEXT"
   },
   {
@@ -25961,7 +25961,7 @@
     "location": "modules/cp/views/cp-admin-visitors",
     "key": "materiaal-aanvraag-goedkeuren-blade-aria-label",
     "language": "nl",
-    "value": "Materiaal aanvraag goedkeuren [BLADE_ARIA_LABEL]",
+    "value": "Materiaalaanvraag goedkeuren ",
     "value_type": "TEXT"
   },
   {
@@ -25970,7 +25970,7 @@
     "location": "modules/cp/views/cp-admin-visitors",
     "key": "materiaal-aanvraag-goedkeuren-blade-aria-label",
     "language": "en",
-    "value": "Approve material request [BLADE_ARIA_LABEL]",
+    "value": "Approve material request ",
     "value_type": "TEXT"
   },
   {
@@ -26393,7 +26393,7 @@
     "location": "modules/material-requests/const/index",
     "key": "status-none",
     "language": "nl",
-    "value": "geen status",
+    "value": "Deze aanvraag wordt per mail afgehandeld",
     "value_type": "TEXT"
   },
   {
@@ -26402,7 +26402,7 @@
     "location": "modules/material-requests/const/index",
     "key": "status-none",
     "language": "en",
-    "value": "status none",
+    "value": "This request will be handled via e-mail",
     "value_type": "TEXT"
   },
   {
@@ -28265,7 +28265,7 @@
     "location": "modules/account/components/create-folder-button/create-folder-button",
     "key": "nieuwe-map-naam-input-aria-label",
     "language": "nl",
-    "value": "Nieuwe map naam [INPUT_ARIA_LABEL]",
+    "value": "Maak een nieuwe map aan",
     "value_type": "TEXT"
   },
   {
@@ -28274,7 +28274,7 @@
     "location": "modules/account/components/create-folder-button/create-folder-button",
     "key": "nieuwe-map-naam-input-aria-label",
     "language": "en",
-    "value": "Nieuwe map naam [INPUT_ARIA_LABEL]",
+    "value": "Create a new folder",
     "value_type": "TEXT"
   },
   {
@@ -28553,7 +28553,7 @@
     "location": "modules/account/components/edit-folder-blade/edit-folder-blade",
     "key": "map-aanpassen-blade-aria-label",
     "language": "nl",
-    "value": "Map aanpassen [BLADE_ARIA_LABEL]",
+    "value": "Map aanpassen",
     "value_type": "TEXT"
   },
   {
@@ -28562,7 +28562,7 @@
     "location": "modules/account/components/edit-folder-blade/edit-folder-blade",
     "key": "map-aanpassen-blade-aria-label",
     "language": "en",
-    "value": "Map aanpassen [BLADE_ARIA_LABEL]",
+    "value": "Edit folder",
     "value_type": "TEXT"
   },
   {
@@ -28589,7 +28589,7 @@
     "location": "modules/account/components/edit-folder-blade/edit-folder-blade",
     "key": "naam-van-de-map-input-aria-label",
     "language": "nl",
-    "value": "Naam van de map [INPUT_ARIA_LABEL]",
+    "value": "Naam van de map",
     "value_type": "TEXT"
   },
   {
@@ -28598,7 +28598,7 @@
     "location": "modules/account/components/edit-folder-blade/edit-folder-blade",
     "key": "naam-van-de-map-input-aria-label",
     "language": "en",
-    "value": "Naam van de map [INPUT_ARIA_LABEL]",
+    "value": "Folder name",
     "value_type": "TEXT"
   },
   {
@@ -28625,7 +28625,7 @@
     "location": "modules/account/components/edit-folder-blade/edit-folder-blade",
     "key": "beschrijving-van-de-map-input-aria-label",
     "language": "nl",
-    "value": "Beschrijving van de map [INPUT_ARIA_LABEL]",
+    "value": "Dit is de beschrijving van de map ",
     "value_type": "TEXT"
   },
   {
@@ -28634,7 +28634,7 @@
     "location": "modules/account/components/edit-folder-blade/edit-folder-blade",
     "key": "beschrijving-van-de-map-input-aria-label",
     "language": "en",
-    "value": "Description of the folder [INPUT_ARIA_LABEL]",
+    "value": "This is the description of the folder",
     "value_type": "TEXT"
   },
   {
@@ -29633,7 +29633,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
     "key": "fragment-resolutie",
     "language": "nl",
-    "value": "Fragment resolutie",
+    "value": "Fragment",
     "value_type": "TEXT"
   },
   {
@@ -29642,7 +29642,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
     "key": "fragment-resolutie",
     "language": "en",
-    "value": "Fragment resolution",
+    "value": "Fragment",
     "value_type": "TEXT"
   },
   {
@@ -29858,7 +29858,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-conversation-input",
     "key": "er-zijn-bestanden-geselecteerd-maar-nog-niet-verzonden",
     "language": "en",
-    "value": "Er zijn bestanden geselecteerd maar nog niet verzonden",
+    "value": "Attachments have been selected but not yet sent.",
     "value_type": "HTML"
   },
   {
@@ -30623,7 +30623,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
     "key": "materiaal-aanvraag-detail-blade-aria-label",
     "language": "nl",
-    "value": "Materiaal aanvraag detail [BLADE_ARIA_LABEL]",
+    "value": "Materiaal aanvraag detail",
     "value_type": "TEXT"
   },
   {
@@ -30632,7 +30632,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
     "key": "materiaal-aanvraag-detail-blade-aria-label",
     "language": "en",
-    "value": "Materiaal aanvraag detail [BLADE_ARIA_LABEL]",
+    "value": "Material request detail",
     "value_type": "TEXT"
   },
   {
@@ -30695,7 +30695,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
     "key": "materiaal-aanvraag-evaluation-detail-blade-aria-label",
     "language": "nl",
-    "value": "Materiaal aanvraag evaluation detail blade aria label",
+    "value": "Dit is om een materiaalaanvraag te evalueren",
     "value_type": "TEXT"
   },
   {
@@ -30704,7 +30704,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
     "key": "materiaal-aanvraag-evaluation-detail-blade-aria-label",
     "language": "en",
-    "value": "Materiaal aanvraag evaluation detail blade aria label",
+    "value": "You can evaluate a material request here",
     "value_type": "TEXT"
   },
   {
@@ -30983,7 +30983,7 @@
     "location": "modules/account/components/material-request-download-blade/material-request-download-blade",
     "key": "download-is-klaar-blade-aria-label",
     "language": "nl",
-    "value": "Download is klaar blade [ARIA_LABEL]",
+    "value": "Dit geeft aan dat je download klaar is",
     "value_type": "TEXT"
   },
   {
@@ -30992,7 +30992,7 @@
     "location": "modules/account/components/material-request-download-blade/material-request-download-blade",
     "key": "download-is-klaar-blade-aria-label",
     "language": "en",
-    "value": "Download is klaar blade [ARIA_LABEL]",
+    "value": "This is a notification that your download is ready",
     "value_type": "TEXT"
   },
   {
@@ -31685,7 +31685,7 @@
     "location": "modules/account/components/material-request-status-update-blade/material-request-status-update-blade",
     "key": "materiaal-aanvraag-goedkeuren-of-afkeuren-blade-aria-label",
     "language": "nl",
-    "value": "Materiaal aanvraag goedkeuren of afkeuren [BLADE_ARIA_LABEL]",
+    "value": "Hier kan de een materiaalaanvraag goedkeuren of afkeuren",
     "value_type": "TEXT"
   },
   {
@@ -31694,7 +31694,7 @@
     "location": "modules/account/components/material-request-status-update-blade/material-request-status-update-blade",
     "key": "materiaal-aanvraag-goedkeuren-of-afkeuren-blade-aria-label",
     "language": "en",
-    "value": "Approve or reject request [BLADE_ARIA_LABEL]",
+    "value": "You can approve or reject the request here",
     "value_type": "TEXT"
   },
   {
@@ -31775,7 +31775,7 @@
     "location": "modules/account/components/material-request-status-update-blade/material-request-status-update-blade",
     "key": "motivatie-voor-het-goedkeuren-of-afkeuren-van-de-aanvraag-input-aria-label",
     "language": "nl",
-    "value": "Motivatie voor het goedkeuren of afkeuren van de aanvraag [INPUT_ARIA_LABEL]",
+    "value": "Geef hier je motivatie voor het goedkeuren of afkeuren van de materiaalaanvraag",
     "value_type": "TEXT"
   },
   {
@@ -31784,7 +31784,7 @@
     "location": "modules/account/components/material-request-status-update-blade/material-request-status-update-blade",
     "key": "motivatie-voor-het-goedkeuren-of-afkeuren-van-de-aanvraag-input-aria-label",
     "language": "en",
-    "value": "Motivatie voor het goedkeuren of afkeuren van de aanvraag [INPUT_ARIA_LABEL]",
+    "value": "Enter your motivation for approving or rejecting the request here",
     "value_type": "TEXT"
   },
   {
@@ -32009,7 +32009,7 @@
     "location": "modules/account/components/personal-info/personal-info",
     "key": "aanvraag-groeperingsnaam-input-aria-label",
     "language": "nl",
-    "value": "Aanvraag groeperingsnaam [INPUT_ARIA_LABEL]",
+    "value": "Dit is de groeperingsnaam voor de aanvraag",
     "value_type": "TEXT"
   },
   {
@@ -32018,7 +32018,7 @@
     "location": "modules/account/components/personal-info/personal-info",
     "key": "aanvraag-groeperingsnaam-input-aria-label",
     "language": "en",
-    "value": "Aanvraag groeperingsnaam [INPUT_ARIA_LABEL]",
+    "value": "This is the group name for this request",
     "value_type": "TEXT"
   },
   {
@@ -32243,7 +32243,7 @@
     "location": "modules/account/components/personal-info/personal-info",
     "key": "ik-nam-kennis-en-ga-akkoord-met-de-aanvullende-gebruiksvoorwaarden-bij-aanvragen-aria-label",
     "language": "nl",
-    "value": "Hier stat dat je kennis hebt genomen en akkoord gaat met de Aanvullende gebruiksvoorwaarden bij aanvragen",
+    "value": "Hier staat dat je kennis hebt genomen en akkoord gaat met de Aanvullende gebruiksvoorwaarden bij aanvragen",
     "value_type": "TEXT"
   },
   {
@@ -32351,7 +32351,7 @@
     "location": "modules/account/components/personal-info/personal-info",
     "key": "bewerk-je-gegevens-button-aria-label",
     "language": "nl",
-    "value": "Bewerk je gegevens [BUTTON_ARIA_LABEL]",
+    "value": "Bewerk hier je gegevens ",
     "value_type": "TEXT"
   },
   {
@@ -32360,7 +32360,7 @@
     "location": "modules/account/components/personal-info/personal-info",
     "key": "bewerk-je-gegevens-button-aria-label",
     "language": "en",
-    "value": "Bewerk je gegevens [BUTTON_ARIA_LABEL]",
+    "value": "Edit your data here",
     "value_type": "TEXT"
   },
   {
@@ -32369,7 +32369,7 @@
     "location": "modules/account/components/personal-info/personal-info",
     "key": "organisatie-naam-input-aria-label",
     "language": "nl",
-    "value": "Organisatie naam [INPUT_ARIA_LABEL]",
+    "value": "Dit is de naam van de organisatie",
     "value_type": "TEXT"
   },
   {
@@ -32378,7 +32378,7 @@
     "location": "modules/account/components/personal-info/personal-info",
     "key": "organisatie-naam-input-aria-label",
     "language": "en",
-    "value": "Organisatie naam [INPUT_ARIA_LABEL]",
+    "value": "This is the organisation name",
     "value_type": "TEXT"
   },
   {
@@ -33449,7 +33449,7 @@
     "location": "modules/admin/views/translations/admin-translations-overview-page",
     "key": "vertaling-bewerken-blade-aria-label",
     "language": "nl",
-    "value": "Vertaling bewerken [BLADE_ARIA_LABEL]",
+    "value": "Bewerk de vertaling hier",
     "value_type": "TEXT"
   },
   {
@@ -33458,7 +33458,7 @@
     "location": "modules/admin/views/translations/admin-translations-overview-page",
     "key": "vertaling-bewerken-blade-aria-label",
     "language": "en",
-    "value": "Vertaling bewerken [BLADE_ARIA_LABEL]",
+    "value": "Edit the translation here",
     "value_type": "TEXT"
   },
   {
@@ -33791,7 +33791,7 @@
     "location": "modules/admin/views/visitor-spaces/admin-visitor-spaces-overview",
     "key": "zoek-naar-bezoekersruimtes-input-aria-label",
     "language": "nl",
-    "value": "Zoek naar bezoekersruimtes [INPUT_ARIA_LABEL]",
+    "value": "Zoek naar bezoekersruimtes",
     "value_type": "TEXT"
   },
   {
@@ -33800,7 +33800,7 @@
     "location": "modules/admin/views/visitor-spaces/admin-visitor-spaces-overview",
     "key": "zoek-naar-bezoekersruimtes-input-aria-label",
     "language": "en",
-    "value": "Zoek naar bezoekersruimtes [INPUT_ARIA_LABEL]",
+    "value": "Find a visitor's space",
     "value_type": "TEXT"
   },
   {
@@ -34403,7 +34403,7 @@
     "location": "modules/cp/components/visitor-space-settings/visitor-space-settings",
     "key": "naam-van-de-bezoekersruimte-als-slug-in-de-url-input-aria-label",
     "language": "nl",
-    "value": "Naam van de bezoekersruimte als slug in de url [INPUT_ARIA_LABEL]",
+    "value": "Dit is de naam van de bezoekersruimte als slug in de url ",
     "value_type": "TEXT"
   },
   {
@@ -34412,7 +34412,7 @@
     "location": "modules/cp/components/visitor-space-settings/visitor-space-settings",
     "key": "naam-van-de-bezoekersruimte-als-slug-in-de-url-input-aria-label",
     "language": "en",
-    "value": "Naam van de bezoekersruimte als slug in de url [INPUT_ARIA_LABEL]",
+    "value": "This is the name of the visitor's space as a slug in the url",
     "value_type": "TEXT"
   },
   {
@@ -35159,7 +35159,7 @@
     "location": "modules/home/components/logged-in-visitor-spaces-home/logged-in-visitor-spaces-home",
     "key": "vraag-een-bezoek-aan-bij-de-bezoekersruimte-aan-blade-aria-label",
     "language": "nl",
-    "value": "Vraag een bezoek aan bij de bezoekersruimte aan [BLADE_ARIA_LABEL]",
+    "value": "Hiermee vraag je een bezoek aan bij een organisatie",
     "value_type": "TEXT"
   },
   {
@@ -35168,7 +35168,7 @@
     "location": "modules/home/components/logged-in-visitor-spaces-home/logged-in-visitor-spaces-home",
     "key": "vraag-een-bezoek-aan-bij-de-bezoekersruimte-aan-blade-aria-label",
     "language": "en",
-    "value": "Vraag een bezoek aan bij de bezoekersruimte aan [BLADE_ARIA_LABEL]",
+    "value": "This will allow you to request a visit to an organisation's visitor's space",
     "value_type": "TEXT"
   },
   {
@@ -35195,7 +35195,7 @@
     "location": "modules/home/components/logged-in-visitor-spaces-home/logged-in-visitor-spaces-home",
     "key": "aanvraag-bezoekersruimte-annuleren-blade-aria-label",
     "language": "nl",
-    "value": "Aanvraag bezoekersruimte annuleren [BLADE_ARIA_LABEL]",
+    "value": "Hiermee annuleer je de aanvraag voor een bezoek",
     "value_type": "TEXT"
   },
   {
@@ -35204,7 +35204,7 @@
     "location": "modules/home/components/logged-in-visitor-spaces-home/logged-in-visitor-spaces-home",
     "key": "aanvraag-bezoekersruimte-annuleren-blade-aria-label",
     "language": "en",
-    "value": "Aanvraag bezoekersruimte annuleren [BLADE_ARIA_LABEL]",
+    "value": "This will cancel your visit request",
     "value_type": "TEXT"
   },
   {
@@ -35375,7 +35375,7 @@
     "location": "modules/home/components/process-visit-blade/process-visit-blade",
     "key": "aanuleer-je-aanvraag-om-een-bezoekersruimte-te-komen-bezoeken-blade-aria-label",
     "language": "nl",
-    "value": "Aanuleer je aanvraag om een bezoekersruimte te komen bezoeken [BLADE_ARIA_LABEL]",
+    "value": "Dit zal je aanvraag om een bezoekersruimte te bezoeken annuleren",
     "value_type": "TEXT"
   },
   {
@@ -35384,7 +35384,7 @@
     "location": "modules/home/components/process-visit-blade/process-visit-blade",
     "key": "aanuleer-je-aanvraag-om-een-bezoekersruimte-te-komen-bezoeken-blade-aria-label",
     "language": "en",
-    "value": "Aanuleer je aanvraag om een bezoekersruimte te komen bezoeken [BLADE_ARIA_LABEL]",
+    "value": "This will cancel your request to visit a visitor's space",
     "value_type": "TEXT"
   },
   {
@@ -35555,7 +35555,7 @@
     "location": "modules/home/components/request-access-blade/request-access-blade",
     "key": "reden-voor-bezoekersaanvraag-input-aria-label",
     "language": "nl",
-    "value": "Reden voor bezoekersaanvraag [INPUT_ARIA_LABEL]",
+    "value": "Geef hier de reden voor je bezoek",
     "value_type": "TEXT"
   },
   {
@@ -35564,7 +35564,7 @@
     "location": "modules/home/components/request-access-blade/request-access-blade",
     "key": "reden-voor-bezoekersaanvraag-input-aria-label",
     "language": "en",
-    "value": "Reden voor bezoekersaanvraag [INPUT_ARIA_LABEL]",
+    "value": "State the motivation for your visit here",
     "value_type": "TEXT"
   },
   {
@@ -35591,7 +35591,7 @@
     "location": "modules/home/components/request-access-blade/request-access-blade",
     "key": "wanneer-wil-je-de-bezoekersruimte-bezoeken-input-aria-label",
     "language": "nl",
-    "value": "Wanneer wil je de bezoekersruimte bezoeken? [INPUT_ARIA_LABEL]",
+    "value": "Geef aan wanneer je jouw bezoek wil plannen",
     "value_type": "TEXT"
   },
   {
@@ -35600,7 +35600,7 @@
     "location": "modules/home/components/request-access-blade/request-access-blade",
     "key": "wanneer-wil-je-de-bezoekersruimte-bezoeken-input-aria-label",
     "language": "en",
-    "value": "Wanneer wil je de bezoekersruimte bezoeken? [INPUT_ARIA_LABEL]",
+    "value": "Indicate when you want to make your visit",
     "value_type": "TEXT"
   },
   {
@@ -35681,7 +35681,7 @@
     "location": "modules/home/components/visitor-space-cards-with-search/visitor-space-cards-with-search",
     "key": "zoek-bezoekersruimte-input-aria-label",
     "language": "nl",
-    "value": "Zoek bezoekersruimte [INPUT_ARIA_LABEL]",
+    "value": "Zoek bezoekersruimte ",
     "value_type": "TEXT"
   },
   {
@@ -35690,7 +35690,7 @@
     "location": "modules/home/components/visitor-space-cards-with-search/visitor-space-cards-with-search",
     "key": "zoek-bezoekersruimte-input-aria-label",
     "language": "en",
-    "value": "Zoek bezoekersruimte [INPUT_ARIA_LABEL]",
+    "value": "Find a visitor's space",
     "value_type": "TEXT"
   },
   {
@@ -36005,7 +36005,7 @@
     "location": "modules/ie-objects/components/names-list/names-list",
     "key": "zoek-naar-een-persoonsnaam-in-deze-krant-input-aria-label",
     "language": "nl",
-    "value": "Zoek naar een persoonsnaam in deze krant [INPUT_ARIA_LABEL]",
+    "value": "Hiermee zoek je naar een persoonsnaam in deze krant",
     "value_type": "TEXT"
   },
   {
@@ -36014,7 +36014,7 @@
     "location": "modules/ie-objects/components/names-list/names-list",
     "key": "zoek-naar-een-persoonsnaam-in-deze-krant-input-aria-label",
     "language": "en",
-    "value": "Zoek naar een persoonsnaam in deze krant [INPUT_ARIA_LABEL]",
+    "value": "This will allow you to search for a person's name in this newspaper",
     "value_type": "TEXT"
   },
   {
@@ -36239,7 +36239,7 @@
     "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata",
     "key": "ga-naar-de-vorige-krant-in-dezelfde-serie-link-aria-label",
     "language": "nl",
-    "value": "Ga naar de vorige krant in dezelfde serie [LINK_ARIA_LABEL]",
+    "value": "Ga naar de vorige krant in dezelfde serie ",
     "value_type": "TEXT"
   },
   {
@@ -36248,7 +36248,7 @@
     "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata",
     "key": "ga-naar-de-vorige-krant-in-dezelfde-serie-link-aria-label",
     "language": "en",
-    "value": "Ga naar de vorige krant in dezelfde serie [LINK_ARIA_LABEL]",
+    "value": "Skip to the next newspaper in this series",
     "value_type": "TEXT"
   },
   {
@@ -36257,7 +36257,7 @@
     "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata",
     "key": "ga-naar-de-volgende-krant-in-dezelfde-serie-link-aria-label",
     "language": "nl",
-    "value": "Ga naar de volgende krant in dezelfde serie [LINK_ARIA_LABEL]",
+    "value": "Hiermee ga je naar de volgende krant in dezelfde serie ",
     "value_type": "TEXT"
   },
   {
@@ -36266,7 +36266,7 @@
     "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata",
     "key": "ga-naar-de-volgende-krant-in-dezelfde-serie-link-aria-label",
     "language": "en",
-    "value": "Ga naar de volgende krant in dezelfde serie [LINK_ARIA_LABEL]",
+    "value": "This will let you toggle to the next newspaper in this series",
     "value_type": "TEXT"
   },
   {
@@ -37535,7 +37535,7 @@
     "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata",
     "key": "lees-de-volledige-waarde-van-het-metadata-veld-selected-metadata-field-name-blade-aria-label",
     "language": "nl",
-    "value": "Lees de volledige waarde van het metadata veld {{selectedMetadataFieldName}} [BLADE_ARIA_LABEL]",
+    "value": "Lees de volledige waarde van het metadata veld {{selectedMetadataFieldName}}",
     "value_type": "TEXT"
   },
   {
@@ -37544,7 +37544,7 @@
     "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata",
     "key": "lees-de-volledige-waarde-van-het-metadata-veld-selected-metadata-field-name-blade-aria-label",
     "language": "en",
-    "value": "Lees de volledige waarde van het metadata veld {{selectedMetadataFieldName}} [BLADE_ARIA_LABEL]",
+    "value": "Read the entire value of this metadata field {{selectedMetadataFieldName}}",
     "value_type": "TEXT"
   },
   {
@@ -38093,7 +38093,7 @@
     "location": "modules/navigation/components/material-request-center-blade/material-request-center-blade",
     "key": "jouw-nog-te-verzenden-materiaal-aanvragen-blade-aria-label",
     "language": "nl",
-    "value": "Jouw nog te verzenden materiaal aanvragen [BLADE_ARIA_LABEL]",
+    "value": "Dit zijn jouw nog te verzenden materiaalaanvragen",
     "value_type": "TEXT"
   },
   {
@@ -38102,7 +38102,7 @@
     "location": "modules/navigation/components/material-request-center-blade/material-request-center-blade",
     "key": "jouw-nog-te-verzenden-materiaal-aanvragen-blade-aria-label",
     "language": "en",
-    "value": "Jouw nog te verzenden materiaal aanvragen [BLADE_ARIA_LABEL]",
+    "value": "These are your material requests that have not been sent yet",
     "value_type": "TEXT"
   },
   {
@@ -38651,7 +38651,7 @@
     "location": "modules/shared/components/approve-request-blade/approve-request-blade",
     "key": "toegang-vanaf-datum-input-aria-label",
     "language": "nl",
-    "value": "Toegang vanaf datum [INPUT_ARIA_LABEL]",
+    "value": "Toegang vanaf datum",
     "value_type": "TEXT"
   },
   {
@@ -38660,7 +38660,7 @@
     "location": "modules/shared/components/approve-request-blade/approve-request-blade",
     "key": "toegang-vanaf-datum-input-aria-label",
     "language": "en",
-    "value": "Toegang vanaf datum [INPUT_ARIA_LABEL]",
+    "value": "Access from date",
     "value_type": "TEXT"
   },
   {
@@ -38669,7 +38669,7 @@
     "location": "modules/shared/components/approve-request-blade/approve-request-blade",
     "key": "toegang-vanaf-tijd-input-aria-label",
     "language": "nl",
-    "value": "Toegang vanaf tijd [INPUT_ARIA_LABEL]",
+    "value": "Toegang vanaf tijd ",
     "value_type": "TEXT"
   },
   {
@@ -38678,7 +38678,7 @@
     "location": "modules/shared/components/approve-request-blade/approve-request-blade",
     "key": "toegang-vanaf-tijd-input-aria-label",
     "language": "en",
-    "value": "Toegang vanaf tijd [INPUT_ARIA_LABEL]",
+    "value": "Access from time",
     "value_type": "TEXT"
   },
   {
@@ -38687,7 +38687,7 @@
     "location": "modules/shared/components/approve-request-blade/approve-request-blade",
     "key": "toegang-tot-datum-input-aria-label",
     "language": "nl",
-    "value": "Toegang tot datum [INPUT_ARIA_LABEL]",
+    "value": "Toegang tot datum",
     "value_type": "TEXT"
   },
   {
@@ -38696,7 +38696,7 @@
     "location": "modules/shared/components/approve-request-blade/approve-request-blade",
     "key": "toegang-tot-datum-input-aria-label",
     "language": "en",
-    "value": "Toegang tot datum [INPUT_ARIA_LABEL]",
+    "value": "Access until date",
     "value_type": "TEXT"
   },
   {
@@ -38705,7 +38705,7 @@
     "location": "modules/shared/components/approve-request-blade/approve-request-blade",
     "key": "toegang-tot-tijd-input-aria-label",
     "language": "nl",
-    "value": "Toegang tot tijd [INPUT_ARIA_LABEL]",
+    "value": "Toegang tot tijd",
     "value_type": "TEXT"
   },
   {
@@ -38714,7 +38714,7 @@
     "location": "modules/shared/components/approve-request-blade/approve-request-blade",
     "key": "toegang-tot-tijd-input-aria-label",
     "language": "en",
-    "value": "Toegang tot tijd [INPUT_ARIA_LABEL]",
+    "value": "Access until time",
     "value_type": "TEXT"
   },
   {
@@ -38723,7 +38723,7 @@
     "location": "modules/shared/components/approve-request-blade/approve-request-blade",
     "key": "opmerking-input-aria-label",
     "language": "nl",
-    "value": "Opmerking [INPUT_ARIA_LABEL]",
+    "value": "Opmerking",
     "value_type": "TEXT"
   },
   {
@@ -38732,7 +38732,7 @@
     "location": "modules/shared/components/approve-request-blade/approve-request-blade",
     "key": "opmerking-input-aria-label",
     "language": "en",
-    "value": "Opmerking [INPUT_ARIA_LABEL]",
+    "value": "Remark",
     "value_type": "TEXT"
   },
   {
@@ -39299,7 +39299,7 @@
     "location": "modules/shared/components/decline-request-blade/decline-request-blade",
     "key": "reden-voor-weigering-input-aria-label",
     "language": "nl",
-    "value": "Reden voor weigering [INPUT_ARIA_LABEL]",
+    "value": "Dit is de reden voor weigering",
     "value_type": "TEXT"
   },
   {
@@ -39308,7 +39308,7 @@
     "location": "modules/shared/components/decline-request-blade/decline-request-blade",
     "key": "reden-voor-weigering-input-aria-label",
     "language": "en",
-    "value": "Reden voor weigering [INPUT_ARIA_LABEL]",
+    "value": "This is the reason for rejection",
     "value_type": "TEXT"
   },
   {
@@ -39497,7 +39497,7 @@
     "location": "modules/shared/components/error-no-access-to-object/error-no-access-to-object",
     "key": "geen-toegang-tot-dit-object-vraag-toegang-aan-blade-aria-label",
     "language": "nl",
-    "value": "Geen toegang tot dit object, vraag toegang aan [BLADE_ARIA_LABEL]",
+    "value": "Geen toegang tot dit object, vraag toegang aan",
     "value_type": "TEXT"
   },
   {
@@ -39506,7 +39506,7 @@
     "location": "modules/shared/components/error-no-access-to-object/error-no-access-to-object",
     "key": "geen-toegang-tot-dit-object-vraag-toegang-aan-blade-aria-label",
     "language": "en",
-    "value": "Geen toegang tot dit object, vraag toegang aan [BLADE_ARIA_LABEL]",
+    "value": "No access to this object, request access now",
     "value_type": "TEXT"
   },
   {
@@ -39821,7 +39821,7 @@
     "location": "modules/shared/components/material-request-information/material-request-information",
     "key": "meer-informatie-over-aanvragen-sleutel-gebruiker",
     "language": "nl",
-    "value": "Meer informatie over aanvragen",
+    "value": "<p><a href=\"/nl/meer-informatie-over-aanvragen-sleutelgebruikers\" target=\"_blank\">Meer informatie over aanvragen</a></p>",
     "value_type": "HTML"
   },
   {
@@ -39830,7 +39830,7 @@
     "location": "modules/shared/components/material-request-information/material-request-information",
     "key": "meer-informatie-over-aanvragen-sleutel-gebruiker",
     "language": "en",
-    "value": "More information on requests by key user",
+    "value": "<p><a href=\"/en/more-info-on-material-requests-key-user\" target=\"_blank\">More information on requests by key user</a></p>",
     "value_type": "HTML"
   },
   {
@@ -39839,7 +39839,7 @@
     "location": "modules/shared/components/material-request-information/material-request-information",
     "key": "meer-informatie-over-aanvragen",
     "language": "nl",
-    "value": "<p><a href=\"https://qas.hetarchief.be/meer-informatie-over-aanvragen\" target=\"_blank\">Meer informatie over aanvragen</a></p>",
+    "value": "<p><a href=\"/nl/meer-informatie-over-aanvragen\" target=\"_blank\">Meer informatie over aanvragen</a></p>",
     "value_type": "HTML"
   },
   {
@@ -39848,7 +39848,7 @@
     "location": "modules/shared/components/material-request-information/material-request-information",
     "key": "meer-informatie-over-aanvragen",
     "language": "en",
-    "value": "<p><a href=\"https://qas.hetarchief.be/en/more-information-about-material-requests\" target=\"_blank\">More information about material requests</a></p>",
+    "value": "<p><a href=\"/en/more-information-about-material-requests\" target=\"_blank\">More information about material requests</a></p>",
     "value_type": "HTML"
   },
   {
@@ -40181,7 +40181,7 @@
     "location": "modules/shared/components/media-card/media-card",
     "key": "vraag-een-bezoek-aan-bij-de-bezoekersruimte-aan-blade-aria-label",
     "language": "nl",
-    "value": "Vraag een bezoek aan bij de bezoekersruimte aan [BLADE_ARIA_LABEL]",
+    "value": "Vraag hier een bezoek aan bij de bezoekersruimte ",
     "value_type": "TEXT"
   },
   {
@@ -40190,7 +40190,7 @@
     "location": "modules/shared/components/media-card/media-card",
     "key": "vraag-een-bezoek-aan-bij-de-bezoekersruimte-aan-blade-aria-label",
     "language": "en",
-    "value": "Vraag een bezoek aan bij de bezoekersruimte aan [BLADE_ARIA_LABEL]",
+    "value": "Request a visit to a visitor's space here",
     "value_type": "TEXT"
   },
   {
@@ -40505,7 +40505,7 @@
     "location": "modules/shared/components/notification-center/notification-center",
     "key": "bekijk-je-notificaties-blade-aria-label",
     "language": "nl",
-    "value": "Bekijk je notificaties [BLADE_ARIA_LABEL]",
+    "value": "Bekijk je notificaties hier",
     "value_type": "TEXT"
   },
   {
@@ -40514,7 +40514,7 @@
     "location": "modules/shared/components/notification-center/notification-center",
     "key": "bekijk-je-notificaties-blade-aria-label",
     "language": "en",
-    "value": "Bekijk je notificaties [BLADE_ARIA_LABEL]",
+    "value": "Check your notifications here",
     "value_type": "TEXT"
   },
   {
@@ -40883,7 +40883,7 @@
     "location": "modules/shared/components/process-request-blade/process-request-blade",
     "key": "aanvraag-bezoekersruimte-goedkeuren-blade-aria-label",
     "language": "nl",
-    "value": "Aanvraag bezoekersruimte goedkeuren [BLADE_ARIA_LABEL]",
+    "value": "Aanvraag bezoekersruimte goedkeuren",
     "value_type": "TEXT"
   },
   {
@@ -40892,7 +40892,7 @@
     "location": "modules/shared/components/process-request-blade/process-request-blade",
     "key": "aanvraag-bezoekersruimte-goedkeuren-blade-aria-label",
     "language": "en",
-    "value": "Aanvraag bezoekersruimte goedkeuren [BLADE_ARIA_LABEL]",
+    "value": "Approve request for a visit",
     "value_type": "TEXT"
   },
   {
@@ -40901,7 +40901,7 @@
     "location": "modules/shared/components/process-request-blade/process-request-blade",
     "key": "aanvraag-bezoekersruimte-weigeren-blade-aria-label",
     "language": "nl",
-    "value": "Aanvraag bezoekersruimte weigeren [BLADE_ARIA_LABEL]",
+    "value": "Aanvraag bezoekersruimte weigeren",
     "value_type": "TEXT"
   },
   {
@@ -40910,7 +40910,7 @@
     "location": "modules/shared/components/process-request-blade/process-request-blade",
     "key": "aanvraag-bezoekersruimte-weigeren-blade-aria-label",
     "language": "en",
-    "value": "Aanvraag bezoekersruimte weigeren [BLADE_ARIA_LABEL]",
+    "value": "Deny request for a visit",
     "value_type": "TEXT"
   },
   {
@@ -41189,7 +41189,7 @@
     "location": "modules/shared/components/share-folder-blade/share-folder-blade",
     "key": "deel-een-map-met-iemand-anders-blade-aria-label",
     "language": "nl",
-    "value": "Deel een map met iemand anders [BLADE_ARIA_LABEL]",
+    "value": "Deel een map met iemand anders",
     "value_type": "TEXT"
   },
   {
@@ -41198,7 +41198,7 @@
     "location": "modules/shared/components/share-folder-blade/share-folder-blade",
     "key": "deel-een-map-met-iemand-anders-blade-aria-label",
     "language": "en",
-    "value": "Deel een map met iemand anders [BLADE_ARIA_LABEL]",
+    "value": "Share a folder with someone else",
     "value_type": "TEXT"
   },
   {
@@ -41225,7 +41225,7 @@
     "location": "modules/shared/components/share-folder-blade/share-folder-blade",
     "key": "email-adres-van-de-persoon-waarmee-je-de-map-wilt-delen-input-aria-label",
     "language": "nl",
-    "value": "Email adres van de persoon waarmee je de map wilt delen [INPUT_ARIA_LABEL]",
+    "value": "Geef hier het e-mailadres van de persoon waarmee je de map wilt delen",
     "value_type": "TEXT"
   },
   {
@@ -41234,7 +41234,7 @@
     "location": "modules/shared/components/share-folder-blade/share-folder-blade",
     "key": "email-adres-van-de-persoon-waarmee-je-de-map-wilt-delen-input-aria-label",
     "language": "en",
-    "value": "Email adres van de persoon waarmee je de map wilt delen [INPUT_ARIA_LABEL]",
+    "value": "Enter the email address of the person you want to share the folder with",
     "value_type": "TEXT"
   },
   {
@@ -41279,7 +41279,7 @@
     "location": "modules/shared/components/share-folder-blade/share-folder-blade",
     "key": "deel-link-van-de-map-input-aria-label",
     "language": "nl",
-    "value": "Deel link van de map [INPUT_ARIA_LABEL]",
+    "value": "Deel link van de map",
     "value_type": "TEXT"
   },
   {
@@ -41288,7 +41288,7 @@
     "location": "modules/shared/components/share-folder-blade/share-folder-blade",
     "key": "deel-link-van-de-map-input-aria-label",
     "language": "en",
-    "value": "Deel link van de map [INPUT_ARIA_LABEL]",
+    "value": "Share the link to a folder",
     "value_type": "TEXT"
   },
   {
@@ -41333,7 +41333,7 @@
     "location": "modules/shared/components/tag-search-bar/tag-search-bar",
     "key": "zoekbalk-aria-label",
     "language": "nl",
-    "value": "zoekbalk aria label",
+    "value": "zoekbalk",
     "value_type": "TEXT"
   },
   {
@@ -41342,7 +41342,7 @@
     "location": "modules/shared/components/tag-search-bar/tag-search-bar",
     "key": "zoekbalk-aria-label",
     "language": "en",
-    "value": "Search bar aria label",
+    "value": "Search bar ",
     "value_type": "TEXT"
   },
   {
@@ -41513,7 +41513,7 @@
     "location": "modules/shared/components/visit-detail-blade/visit-detail-blade",
     "key": "vraag-een-bezoek-aan-bij-de-bezoekersruimte-aan-blade-aria-label",
     "language": "nl",
-    "value": "Vraag een bezoek aan bij de bezoekersruimte aan [BLADE_ARIA_LABEL]",
+    "value": "Vraag een bezoek aan bij de bezoekersruimte",
     "value_type": "TEXT"
   },
   {
@@ -41522,7 +41522,7 @@
     "location": "modules/shared/components/visit-detail-blade/visit-detail-blade",
     "key": "vraag-een-bezoek-aan-bij-de-bezoekersruimte-aan-blade-aria-label",
     "language": "en",
-    "value": "Vraag een bezoek aan bij de bezoekersruimte aan [BLADE_ARIA_LABEL]",
+    "value": "Request a visit to this visitor's space",
     "value_type": "TEXT"
   },
   {
@@ -41621,7 +41621,7 @@
     "location": "modules/shared/layouts/app-layout/app-layout",
     "key": "ga-naar-de-homepage-link-aria-label",
     "language": "nl",
-    "value": "Ga naar de homepage [LINK_ARIA_LABEL]",
+    "value": "Ga naar de homepage",
     "value_type": "TEXT"
   },
   {
@@ -41630,7 +41630,7 @@
     "location": "modules/shared/layouts/app-layout/app-layout",
     "key": "ga-naar-de-homepage-link-aria-label",
     "language": "en",
-    "value": "Ga naar de homepage [LINK_ARIA_LABEL]",
+    "value": "Go to the home page",
     "value_type": "TEXT"
   },
   {
@@ -41639,7 +41639,7 @@
     "location": "modules/shared/layouts/app-layout/app-layout",
     "key": "sluit-deze-melding-button-aria-label",
     "language": "nl",
-    "value": "Sluit deze melding [BUTTON_ARIA_LABEL]",
+    "value": "Sluit deze melding",
     "value_type": "TEXT"
   },
   {
@@ -41648,7 +41648,7 @@
     "location": "modules/shared/layouts/app-layout/app-layout",
     "key": "sluit-deze-melding-button-aria-label",
     "language": "en",
-    "value": "Sluit deze melding [BUTTON_ARIA_LABEL]",
+    "value": "Close this notification",
     "value_type": "TEXT"
   },
   {
@@ -42521,7 +42521,7 @@
     "location": "modules/visit-requests/components/visit-requests-overview/visit-requests-overview",
     "key": "zoekbalk-aria-label",
     "language": "nl",
-    "value": "zoekbalk aria label",
+    "value": "zoekbalk",
     "value_type": "TEXT"
   },
   {
@@ -42530,7 +42530,7 @@
     "location": "modules/visit-requests/components/visit-requests-overview/visit-requests-overview",
     "key": "zoekbalk-aria-label",
     "language": "en",
-    "value": "Search bar aria label",
+    "value": "Search bar ",
     "value_type": "TEXT"
   },
   {
@@ -42557,7 +42557,7 @@
     "location": "modules/visit-requests/components/visit-requests-overview/visit-requests-overview",
     "key": "zoek-bezoekers-aanvragen-input-aria-label",
     "language": "nl",
-    "value": "Zoek bezoekers aanvragen [INPUT_ARIA_LABEL]",
+    "value": "Zoek bezoekaanvragen",
     "value_type": "TEXT"
   },
   {
@@ -42566,7 +42566,7 @@
     "location": "modules/visit-requests/components/visit-requests-overview/visit-requests-overview",
     "key": "zoek-bezoekers-aanvragen-input-aria-label",
     "language": "en",
-    "value": "Zoek bezoekers aanvragen [INPUT_ARIA_LABEL]",
+    "value": "Find requests for visits",
     "value_type": "TEXT"
   },
   {
@@ -42575,7 +42575,7 @@
     "location": "modules/visit-requests/components/visit-requests-overview/visit-requests-overview",
     "key": "materiaal-aanvraag-behandelen-blade-aria-label",
     "language": "nl",
-    "value": "Materiaal aanvraag behandelen [BLADE_ARIA_LABEL]",
+    "value": "Materiaal aanvraag behandelen",
     "value_type": "TEXT"
   },
   {
@@ -42584,7 +42584,7 @@
     "location": "modules/visit-requests/components/visit-requests-overview/visit-requests-overview",
     "key": "materiaal-aanvraag-behandelen-blade-aria-label",
     "language": "en",
-    "value": "Materiaal aanvraag behandelen [BLADE_ARIA_LABEL]",
+    "value": "Manage material request",
     "value_type": "TEXT"
   },
   {
@@ -43025,7 +43025,7 @@
     "location": "modules/visitor-space/components/advanced-filter-fields/advanced-filter-fields",
     "key": "zoek-field-name-input-aria-label",
     "language": "nl",
-    "value": "Zoek {{fieldName}} [INPUT_ARIA_LABEL]",
+    "value": "Zoek {{fieldName}}",
     "value_type": "TEXT"
   },
   {
@@ -43034,7 +43034,7 @@
     "location": "modules/visitor-space/components/advanced-filter-fields/advanced-filter-fields",
     "key": "zoek-field-name-input-aria-label",
     "language": "en",
-    "value": "Zoek {{fieldName}} [INPUT_ARIA_LABEL]",
+    "value": "Search for {{fieldName}}",
     "value_type": "TEXT"
   },
   {
@@ -43349,7 +43349,7 @@
     "location": "modules/visitor-space/components/date-range-input/date-range-input",
     "key": "vanaf-datum-input-aria-label",
     "language": "nl",
-    "value": "Vanaf datum [INPUT_ARIA_LABEL]",
+    "value": "Vanaf datum",
     "value_type": "TEXT"
   },
   {
@@ -43358,7 +43358,7 @@
     "location": "modules/visitor-space/components/date-range-input/date-range-input",
     "key": "vanaf-datum-input-aria-label",
     "language": "en",
-    "value": "Vanaf datum [INPUT_ARIA_LABEL]",
+    "value": "From date",
     "value_type": "TEXT"
   },
   {
@@ -43385,7 +43385,7 @@
     "location": "modules/visitor-space/components/date-range-input/date-range-input",
     "key": "tot-datum-input-aria-label",
     "language": "nl",
-    "value": "Tot datum [INPUT_ARIA_LABEL]",
+    "value": "Tot datum",
     "value_type": "TEXT"
   },
   {
@@ -43394,7 +43394,7 @@
     "location": "modules/visitor-space/components/date-range-input/date-range-input",
     "key": "tot-datum-input-aria-label",
     "language": "en",
-    "value": "Tot datum [INPUT_ARIA_LABEL]",
+    "value": "Until date",
     "value_type": "TEXT"
   },
   {
@@ -43583,7 +43583,7 @@
     "location": "modules/visitor-space/components/maintainer-filter-form/maintainer-filter-form",
     "key": "zoek-op-aanbieder-input-aria-label",
     "language": "nl",
-    "value": "Zoek op aanbieder [INPUT_ARIA_LABEL]",
+    "value": "Zoek hier op aanbieder",
     "value_type": "TEXT"
   },
   {
@@ -43592,7 +43592,7 @@
     "location": "modules/visitor-space/components/maintainer-filter-form/maintainer-filter-form",
     "key": "zoek-op-aanbieder-input-aria-label",
     "language": "en",
-    "value": "Search by organisation [INPUT_ARIA_LABEL]",
+    "value": "Search by organisation here",
     "value_type": "TEXT"
   },
   {
@@ -43943,7 +43943,7 @@
     "location": "modules/visitor-space/components/material-request-blade/material-request-blade",
     "key": "reden-van-aanvraag-input-aria-label",
     "language": "nl",
-    "value": "Reden van aanvraag [INPUT_ARIA_LABEL]",
+    "value": "Reden van aanvraag ",
     "value_type": "TEXT"
   },
   {
@@ -43952,7 +43952,7 @@
     "location": "modules/visitor-space/components/material-request-blade/material-request-blade",
     "key": "reden-van-aanvraag-input-aria-label",
     "language": "en",
-    "value": "Reden van aanvraag [INPUT_ARIA_LABEL]",
+    "value": "Reason for request",
     "value_type": "TEXT"
   },
   {
@@ -44015,7 +44015,7 @@
     "location": "modules/visitor-space/components/material-request-blade/material-request-blade",
     "key": "vraag-materiaal-aan-blade-aria-label",
     "language": "nl",
-    "value": "Vraag materiaal aan [BLADE_ARIA_LABEL]",
+    "value": "Vraag materiaal aan ",
     "value_type": "TEXT"
   },
   {
@@ -44024,7 +44024,7 @@
     "location": "modules/visitor-space/components/material-request-blade/material-request-blade",
     "key": "vraag-materiaal-aan-blade-aria-label",
     "language": "en",
-    "value": "Vraag materiaal aan [BLADE_ARIA_LABEL]",
+    "value": "Request material",
     "value_type": "TEXT"
   },
   {
@@ -44789,7 +44789,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "start-tijd-van-de-video-audio-selectie-input-aria-label",
     "language": "nl",
-    "value": "Start tijd van de video/audio selectie [INPUT_ARIA_LABEL]",
+    "value": "Starttijd van de video/audio selectie ",
     "value_type": "TEXT"
   },
   {
@@ -44798,7 +44798,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "start-tijd-van-de-video-audio-selectie-input-aria-label",
     "language": "en",
-    "value": "Start tijd van de video/audio selectie [INPUT_ARIA_LABEL]",
+    "value": "Start time of the video/audio selection",
     "value_type": "TEXT"
   },
   {
@@ -44807,7 +44807,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "eind-tijd-van-de-video-audio-selectie-input-aria-label",
     "language": "nl",
-    "value": "Eind tijd van de video/audio selectie [INPUT_ARIA_LABEL]",
+    "value": "Eindtijd van de video/audio selectie ",
     "value_type": "TEXT"
   },
   {
@@ -44816,7 +44816,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "eind-tijd-van-de-video-audio-selectie-input-aria-label",
     "language": "en",
-    "value": "Eind tijd van de video/audio selectie [INPUT_ARIA_LABEL]",
+    "value": "End time of the video/audio selection",
     "value_type": "TEXT"
   },
   {
@@ -44969,7 +44969,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "beschrijving-van-het-bedoelde-gebruik-van-het-materiaal-input-aria-label",
     "language": "nl",
-    "value": "Beschrijving van het bedoelde gebruik van het materiaal [INPUT_ARIA_LABEL]",
+    "value": "Dit is de beschrijving van het bedoelde gebruik van het materiaal",
     "value_type": "TEXT"
   },
   {
@@ -44978,7 +44978,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "beschrijving-van-het-bedoelde-gebruik-van-het-materiaal-input-aria-label",
     "language": "en",
-    "value": "Beschrijving van het bedoelde gebruik van het materiaal [INPUT_ARIA_LABEL]",
+    "value": "This is the description of the intended use of the material",
     "value_type": "TEXT"
   },
   {
@@ -45275,7 +45275,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "type-ontsluiting-digitale-ontsluiting-via-een-vast-medium-label",
     "language": "nl",
-    "value": "Digitale ontsluiting via een vast medium zonder netwerkverbinding (bv. DVD, USB-stick, …)",
+    "value": "Digitale ontsluiting via een vast medium zonder netwerkverbinding",
     "value_type": "TEXT"
   },
   {
@@ -45284,7 +45284,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "type-ontsluiting-digitale-ontsluiting-via-een-vast-medium-label",
     "language": "en",
-    "value": "Digital access via a physical medium without internet connection (e.g. DVD, USB-drive)",
+    "value": "Digital access via a physical medium without internet connection",
     "value_type": "TEXT"
   },
   {
@@ -45293,7 +45293,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "type-ontsluiting-digitale-ontsluiting-via-een-vast-medium-omschrijving",
     "language": "nl",
-    "value": "Type ontsluiting - Digitale ontsluiting via een vast medium",
+    "value": "Dit is ontsluiting via bijvoorbeeld een DVD, een USB-stick, of een tablet zonder internetverbinding.",
     "value_type": "HTML"
   },
   {
@@ -45302,7 +45302,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "type-ontsluiting-digitale-ontsluiting-via-een-vast-medium-omschrijving",
     "language": "en",
-    "value": "Type of access - Digital access via a physical medium",
+    "value": "This a type of access via for instance a DVD, a USB-stick or a tablet without an internet connection.",
     "value_type": "HTML"
   },
   {
@@ -45347,7 +45347,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "type-ontsluiting-digitale-ontsluiting-via-netwerkverbinding-een-besloten-dienst-omschrijving",
     "language": "nl",
-    "value": "Type ontsluiting - Digitale ontsluiting via netwerkverbinding - Een besloten dienst",
+    "value": "Dit is ontsluiting via een platform waartoe een vooraf gedefinieerde, selecte groep toegang heeft (bijvoorbeeld binnen een organisatie of specifieke community, een intranet).",
     "value_type": "TEXT"
   },
   {
@@ -45356,7 +45356,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "type-ontsluiting-digitale-ontsluiting-via-netwerkverbinding-een-besloten-dienst-omschrijving",
     "language": "en",
-    "value": "Type of access - Digital access via network connection - A private service",
+    "value": "This is a type of access via a platform to which only a predefined, select group of people have access (within an organisation or community, for instance an intranet).",
     "value_type": "TEXT"
   },
   {
@@ -45383,7 +45383,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "type-ontsluiting-digitale-ontsluiting-via-netwerkverbinding-publiek-zonder-authenticatie-omschrijving",
     "language": "nl",
-    "value": "Type ontsluiting - Digitale ontsluiting via netwerkverbinding - Publiek zonder authenticatie",
+    "value": "Dit is een type ontsluiting via een publiek toegankelijke dienst (website of app), waarvoor iedereen een account kan aanmaken en waar gebruikers zich ook niet hoeven te identificeren om toegang te krijgen tot het materiaal.",
     "value_type": "TEXT"
   },
   {
@@ -45392,7 +45392,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "type-ontsluiting-digitale-ontsluiting-via-netwerkverbinding-publiek-zonder-authenticatie-omschrijving",
     "language": "en",
-    "value": "Type of access - Digital access via network connection - Publicly without authentication",
+    "value": "This is a type of access via a publicly accessible sercice (website or app), for which anyone can make an account and where users do not need to identify themselves in order to gain access to the material.",
     "value_type": "TEXT"
   },
   {
@@ -45419,7 +45419,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "type-ontsluiting-digitale-ontsluiting-via-netwerkverbinding-publiek-met-authenticatie-omschrijving",
     "language": "nl",
-    "value": "een publiek toegankelijke dienst (website of app) mét authenticatie van de gebruikers, dus met voorafgaande registratie waarbij gebruikers zich moeten identificeren.",
+    "value": "Dit is ontsluiting via een publiek toegankelijke dienst (website of app) waarvoor iedereen een account kan aanmaken om toegang te krijgen (mogelijks mits betaling). Toegang tot het materiaal is mogelijk mits authenticatie van de gebruiker.",
     "value_type": "TEXT"
   },
   {
@@ -45428,7 +45428,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "type-ontsluiting-digitale-ontsluiting-via-netwerkverbinding-publiek-met-authenticatie-omschrijving",
     "language": "en",
-    "value": "a publicly accessible service (website or app) with authentication of the users, more specifically with preceding registration that requires users to identify themselves.",
+    "value": "This is a type of access via a publicly accessible service (website or app) for which anyone can make an account in order to gain access (possibly after payment). Access to the material is possible after authentication of the user.",
     "value_type": "TEXT"
   },
   {
@@ -45473,7 +45473,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "geef-hier-een-uitleg-over-het-type-ontsluiting-dat-je-wenst-te-gebruiken-input-aria-label",
     "language": "nl",
-    "value": "Geef hier een uitleg over het type ontsluiting dat je wenst te gebruiken [INPUT_ARIA_LABEL]",
+    "value": "Geef hier een uitleg over het type ontsluiting dat je voor ogen hebt",
     "value_type": "TEXT"
   },
   {
@@ -45482,7 +45482,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "geef-hier-een-uitleg-over-het-type-ontsluiting-dat-je-wenst-te-gebruiken-input-aria-label",
     "language": "en",
-    "value": "Geef hier een uitleg over het type ontsluiting dat je wenst te gebruiken [INPUT_ARIA_LABEL]",
+    "value": "Please explain the type of use and publication you intend with this material",
     "value_type": "TEXT"
   },
   {
@@ -45689,7 +45689,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "geografisch-gebruik-niet-integraal-gericht-op-vlaamse-of-belgische-markt-omschrijving",
     "language": "nl",
-    "value": "Hergebruik is niet integraal of hoofdzakelijk gericht op de Vlaamse of Belgische markt.",
+    "value": "Als het gebruik niet integraal of hoofdzakelijk gericht is op de Vlaamse of Belgische markt, laat hier dan weten in welke andere landen of regio&#x27;s het materiaal zal gebruikt worden:",
     "value_type": "HTML"
   },
   {
@@ -45698,7 +45698,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "geografisch-gebruik-niet-integraal-gericht-op-vlaamse-of-belgische-markt-omschrijving",
     "language": "en",
-    "value": "The intended use is not entirely or mainly focussed on the Flemish or Belgian market.",
+    "value": "If the intended use is not entirely or mainly focussed on the Flemish or Belgian market, please let us know in which specific countries or regions it will be used:",
     "value_type": "HTML"
   },
   {
@@ -45707,7 +45707,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "geef-hier-een-uitleg-over-het-geografisch-gebruik-dat-je-wenst-te-gebruiken-input-aria-label",
     "language": "nl",
-    "value": "Geef hier een uitleg over het geografisch gebruik dat je wenst te gebruiken ",
+    "value": "Geef hier een uitleg over het geografisch gebruik",
     "value_type": "TEXT"
   },
   {
@@ -45716,7 +45716,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "geef-hier-een-uitleg-over-het-geografisch-gebruik-dat-je-wenst-te-gebruiken-input-aria-label",
     "language": "en",
-    "value": "Geef hier een uitleg over het geografisch gebruik dat je wenst te gebruiken ",
+    "value": "Please clarify the geographical use",
     "value_type": "TEXT"
   },
   {
@@ -45995,7 +45995,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "materiaal-download-en-hergebruik-aanvragen-blade-aria-label",
     "language": "nl",
-    "value": "Materiaal download en hergebruik aanvragen [BLADE_ARIA_LABEL]",
+    "value": "Materiaal download en hergebruik aanvragen ",
     "value_type": "TEXT"
   },
   {
@@ -46004,7 +46004,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "materiaal-download-en-hergebruik-aanvragen-blade-aria-label",
     "language": "en",
-    "value": "Materiaal download en hergebruik aanvragen [BLADE_ARIA_LABEL]",
+    "value": "Request the downloading and re-use of the material",
     "value_type": "TEXT"
   },
   {
@@ -46445,7 +46445,7 @@
     "location": "modules/visitor-space/components/release-date-filter-form/release-date-filter-form",
     "key": "release-datum-input-aria-label",
     "language": "nl",
-    "value": "Release datum [INPUT_ARIA_LABEL]",
+    "value": "Release datum ",
     "value_type": "TEXT"
   },
   {
@@ -46454,7 +46454,7 @@
     "location": "modules/visitor-space/components/release-date-filter-form/release-date-filter-form",
     "key": "release-datum-input-aria-label",
     "language": "en",
-    "value": "Release datum [INPUT_ARIA_LABEL]",
+    "value": "Release date",
     "value_type": "TEXT"
   },
   {
@@ -46805,7 +46805,7 @@
     "location": "modules/visitor-space/components/report-blade/report-blade",
     "key": "beschrijf-het-probleem-input-aria-label",
     "language": "nl",
-    "value": "Beschrijf het probleem [INPUT_ARIA_LABEL]",
+    "value": "Beschrijf hier het probleem",
     "value_type": "TEXT"
   },
   {
@@ -46814,7 +46814,7 @@
     "location": "modules/visitor-space/components/report-blade/report-blade",
     "key": "beschrijf-het-probleem-input-aria-label",
     "language": "en",
-    "value": "Beschrijf het probleem [INPUT_ARIA_LABEL]",
+    "value": "Describe the problem here",
     "value_type": "TEXT"
   },
   {
@@ -46841,7 +46841,7 @@
     "location": "modules/visitor-space/components/report-blade/report-blade",
     "key": "jouw-email-adres-input-aria-label",
     "language": "nl",
-    "value": "Jouw email adres [INPUT_ARIA_LABEL]",
+    "value": "Jouw e-mailadres ",
     "value_type": "TEXT"
   },
   {
@@ -46850,7 +46850,7 @@
     "location": "modules/visitor-space/components/report-blade/report-blade",
     "key": "jouw-email-adres-input-aria-label",
     "language": "en",
-    "value": "Jouw email adres [INPUT_ARIA_LABEL]",
+    "value": "Your email address",
     "value_type": "TEXT"
   },
   {
@@ -48062,6 +48062,132 @@
   {
     "app": "HET_ARCHIEF",
     "component": "BACKEND",
+    "location": "modules/campaign-monitor/services/campaign-monitor",
+    "key": "ik-wil-dit-object-bekijken-beluisteren",
+    "language": "nl",
+    "value": "Ik wil dit object bekijken/beluisteren",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "BACKEND",
+    "location": "modules/campaign-monitor/services/campaign-monitor",
+    "key": "ik-wil-dit-object-bekijken-beluisteren",
+    "language": "en",
+    "value": "I want to look at/listen to this",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "BACKEND",
+    "location": "modules/campaign-monitor/services/campaign-monitor",
+    "key": "ik-wil-dit-object-hergebruiken",
+    "language": "nl",
+    "value": "Ik wil dit object hergebruiken",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "BACKEND",
+    "location": "modules/campaign-monitor/services/campaign-monitor",
+    "key": "ik-wil-dit-object-hergebruiken",
+    "language": "en",
+    "value": "I want to reuse this object",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "BACKEND",
+    "location": "modules/campaign-monitor/services/campaign-monitor",
+    "key": "ik-wil-meer-info-over-dit-object",
+    "language": "nl",
+    "value": "Ik wil meer info over dit object",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "BACKEND",
+    "location": "modules/campaign-monitor/services/campaign-monitor",
+    "key": "ik-wil-meer-info-over-dit-object",
+    "language": "en",
+    "value": "I want more information about this object",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "BACKEND",
+    "location": "modules/campaign-monitor/services/campaign-monitor",
+    "key": "andere",
+    "language": "nl",
+    "value": "Andere",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "BACKEND",
+    "location": "modules/campaign-monitor/services/campaign-monitor",
+    "key": "andere",
+    "language": "en",
+    "value": "Other",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "BACKEND",
+    "location": "modules/campaign-monitor/services/campaign-monitor",
+    "key": "ik-vraag-de-fragmenten-op-in-het-kader-van-mijn-beroep-uitgezonderd-onderwijs",
+    "language": "nl",
+    "value": "Ik vraag de fragmenten op in het kader van mijn beroep (uitgezonderd onderwijs)",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "BACKEND",
+    "location": "modules/campaign-monitor/services/campaign-monitor",
+    "key": "ik-vraag-de-fragmenten-op-in-het-kader-van-mijn-beroep-uitgezonderd-onderwijs",
+    "language": "en",
+    "value": "I request the item(s) for professional purposes (excluding education)",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "BACKEND",
+    "location": "modules/campaign-monitor/services/campaign-monitor",
+    "key": "ik-vraag-de-fragmenten-aan-in-het-kader-van-prive-onderzoek",
+    "language": "nl",
+    "value": "Ik vraag de fragmenten aan in het kader van privé-onderzoek",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "BACKEND",
+    "location": "modules/campaign-monitor/services/campaign-monitor",
+    "key": "ik-vraag-de-fragmenten-aan-in-het-kader-van-prive-onderzoek",
+    "language": "en",
+    "value": "I request the item(s) in the context of private research",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "BACKEND",
+    "location": "modules/campaign-monitor/services/campaign-monitor",
+    "key": "ik-ben-verbonden-aan-een-onderwijsinstelling-als-student-onderzoeker-of-lesgever",
+    "language": "nl",
+    "value": "Ik ben verbonden aan een onderwijsinstelling, als student, onderzoeker of lesgever",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "BACKEND",
+    "location": "modules/campaign-monitor/services/campaign-monitor",
+    "key": "ik-ben-verbonden-aan-een-onderwijsinstelling-als-student-onderzoeker-of-lesgever",
+    "language": "en",
+    "value": "I am connected to an educational institution as a student, researcher or teacher",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "BACKEND",
     "location": "modules/material-requests/const/index",
     "key": "download-quality-normal",
     "language": "nl",
@@ -48674,132 +48800,6 @@
   {
     "app": "HET_ARCHIEF",
     "component": "BACKEND",
-    "location": "modules/campaign-monitor/services/campaign-monitor",
-    "key": "ik-wil-dit-object-bekijken-beluisteren",
-    "language": "nl",
-    "value": "Ik wil dit object bekijken/beluisteren",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "BACKEND",
-    "location": "modules/campaign-monitor/services/campaign-monitor",
-    "key": "ik-wil-dit-object-bekijken-beluisteren",
-    "language": "en",
-    "value": "I want to look at/listen to this",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "BACKEND",
-    "location": "modules/campaign-monitor/services/campaign-monitor",
-    "key": "ik-wil-dit-object-hergebruiken",
-    "language": "nl",
-    "value": "Ik wil dit object hergebruiken",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "BACKEND",
-    "location": "modules/campaign-monitor/services/campaign-monitor",
-    "key": "ik-wil-dit-object-hergebruiken",
-    "language": "en",
-    "value": "I want to reuse this object",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "BACKEND",
-    "location": "modules/campaign-monitor/services/campaign-monitor",
-    "key": "ik-wil-meer-info-over-dit-object",
-    "language": "nl",
-    "value": "Ik wil meer info over dit object",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "BACKEND",
-    "location": "modules/campaign-monitor/services/campaign-monitor",
-    "key": "ik-wil-meer-info-over-dit-object",
-    "language": "en",
-    "value": "I want more information about this object",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "BACKEND",
-    "location": "modules/campaign-monitor/services/campaign-monitor",
-    "key": "andere",
-    "language": "nl",
-    "value": "Andere",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "BACKEND",
-    "location": "modules/campaign-monitor/services/campaign-monitor",
-    "key": "andere",
-    "language": "en",
-    "value": "Other",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "BACKEND",
-    "location": "modules/campaign-monitor/services/campaign-monitor",
-    "key": "ik-vraag-de-fragmenten-op-in-het-kader-van-mijn-beroep-uitgezonderd-onderwijs",
-    "language": "nl",
-    "value": "Ik vraag de fragmenten op in het kader van mijn beroep (uitgezonderd onderwijs)",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "BACKEND",
-    "location": "modules/campaign-monitor/services/campaign-monitor",
-    "key": "ik-vraag-de-fragmenten-op-in-het-kader-van-mijn-beroep-uitgezonderd-onderwijs",
-    "language": "en",
-    "value": "I request the item(s) for professional purposes (excluding education)",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "BACKEND",
-    "location": "modules/campaign-monitor/services/campaign-monitor",
-    "key": "ik-vraag-de-fragmenten-aan-in-het-kader-van-prive-onderzoek",
-    "language": "nl",
-    "value": "Ik vraag de fragmenten aan in het kader van privé-onderzoek",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "BACKEND",
-    "location": "modules/campaign-monitor/services/campaign-monitor",
-    "key": "ik-vraag-de-fragmenten-aan-in-het-kader-van-prive-onderzoek",
-    "language": "en",
-    "value": "I request the item(s) in the context of private research",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "BACKEND",
-    "location": "modules/campaign-monitor/services/campaign-monitor",
-    "key": "ik-ben-verbonden-aan-een-onderwijsinstelling-als-student-onderzoeker-of-lesgever",
-    "language": "nl",
-    "value": "Ik ben verbonden aan een onderwijsinstelling, als student, onderzoeker of lesgever",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "BACKEND",
-    "location": "modules/campaign-monitor/services/campaign-monitor",
-    "key": "ik-ben-verbonden-aan-een-onderwijsinstelling-als-student-onderzoeker-of-lesgever",
-    "language": "en",
-    "value": "I am connected to an educational institution as a student, researcher or teacher",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "BACKEND",
     "location": "modules/material-request-messages/services/material-request-pdf-generator",
     "key": "volledig-materiaal",
     "language": "nl",
@@ -49307,7 +49307,7 @@
     "location": "modules/material-request-messages/services/material-request-pdf-generator",
     "key": "reuse-form-values",
     "language": "nl",
-    "value": "Overzicht hergebruiksformulier velden",
+    "value": "Overzicht hergebruikformulier",
     "value_type": "TEXT"
   },
   {
@@ -49316,7 +49316,7 @@
     "location": "modules/material-request-messages/services/material-request-pdf-generator",
     "key": "reuse-form-values",
     "language": "en",
-    "value": "Overview reuse form values",
+    "value": "Overview reuse form",
     "value_type": "TEXT"
   },
   {
