@@ -58,7 +58,10 @@ const ContentBlockRenderer: FunctionComponent<ContentBlockPreviewProps> = ({
 	const headerBgRef: RefObject<HTMLDivElement | null> = useRef<HTMLDivElement | null>(null);
 
 	// biome-ignore lint/suspicious/noExplicitAny: todo
-	const blockStateProps: { [key: string]: any } = omit((blockState ?? {}) as Record<string, unknown>, IGNORE_BLOCK_LEVEL_PROPS);
+	const blockStateProps: { [key: string]: any } = omit(
+		(blockState ?? {}) as Record<string, unknown>,
+		IGNORE_BLOCK_LEVEL_PROPS
+	);
 
 	const getHeaderHeight = useCallback((): string | null => {
 		if (!blockRef.current) {
