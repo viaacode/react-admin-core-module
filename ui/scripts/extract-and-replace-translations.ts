@@ -89,8 +89,60 @@ function getFormattedTranslation(translation: string) {
 	return translation.trim().replace(/\t\t(\t)+/g, ' ');
 }
 
-function getFallbackTranslation(key: string): string {
-	return `${upperFirst(lowerCase(key.split(TRANSLATION_SEPARATOR).pop() || ''))}`;
+function extractInterpolationVariables(interpolationParam: string | undefined): string[] {
+	if (!interpolationParam) return [];
+	return [...interpolationParam.matchAll(/\b(\w+)\s*:/g)].map((match) => match[1]);
+}
+
+/**
+ * Restores `{{variable}}` placeholders in a fallback translation string generated from a key.
+ *
+ * When a translation key like `path___this-is-a-translation-for-user-name` is converted to a
+ * human-readable fallback (`This is a translation for user name`), any interpolation variables
+ * that were part of the original translation (e.g. `{{userName}}`) are lost because the key was
+ * derived via `kebabCase`, which strips the `{{}}` braces and lowercases the name.
+ *
+ * This function recovers them by stripping all non-alphanumeric characters from each variable name
+ * and finding the consecutive word sequence in the fallback whose stripped form matches. For
+ * example, variable `username` matches the phrase `user name` (stripped: `username`) and replaces
+ * it with `{{username}}`.
+ *
+ * @param fallback - The human-readable fallback string produced from the translation key.
+ * @param variables - The interpolation variable names extracted from the `tText`/`tHtml` call's
+ *   second parameter (e.g. `['username', 'count']` from `{username: user.name, count: items.length}`).
+ * @returns The fallback string with matched word sequences replaced by `{{variableName}}` placeholders.
+ */
+function reconstructVariablesInFallback(fallback: string, variables: string[]): string {
+	let result = fallback;
+	for (const varName of variables) {
+		const normalizedVar = varName.toLowerCase().replace(/[^a-z0-9]/g, '');
+		const words = result.split(/\s+/);
+		let replaced = false;
+		outer: for (let len = words.length; len >= 1; len--) {
+			for (let start = 0; start <= words.length - len; start++) {
+				const phrase = words.slice(start, start + len).join(' ');
+				const normalizedPhrase = phrase.toLowerCase().replace(/[^a-z0-9]/g, '');
+				if (normalizedPhrase === normalizedVar) {
+					const escaped = phrase.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+					result = result.replace(new RegExp(escaped, 'i'), `{{${varName}}}`);
+					replaced = true;
+					break outer;
+				}
+			}
+		}
+		if (!replaced) {
+			console.warn(
+				yellow(`Could not reconstruct variable {{${varName}}} in fallback translation: "${result}"`)
+			);
+		}
+	}
+	return result;
+}
+
+function getFallbackTranslation(key: string, variables: string[] = []): string {
+	const fallback = `${upperFirst(lowerCase(key.split(TRANSLATION_SEPARATOR).pop()))}`;
+	if (variables.length === 0) return fallback;
+	return reconstructVariablesInFallback(fallback, variables);
 }
 
 function simplifyHtmlValue(value: string): string {
@@ -108,6 +160,7 @@ function getTranslationEntryFromCallExpression(
 	tFunction: 'tText' | 'tHtml',
 	translationTextOrKey: string,
 	appsParam: string | undefined,
+	interpolationParam: string | undefined,
 	app: App,
 	component: Component,
 	relativeFilePath: string,
@@ -146,6 +199,7 @@ function getTranslationEntryFromCallExpression(
 		const location = formattedKey.split(TRANSLATION_SEPARATOR)[0];
 		const key = formattedKey.split(TRANSLATION_SEPARATOR)[1];
 
+		const variables = extractInterpolationVariables(interpolationParam);
 		return {
 			id: '',
 			app,
@@ -156,7 +210,7 @@ function getTranslationEntryFromCallExpression(
 			value:
 				(hasKeyAlready
 					? getFormattedTranslation(
-							oldTranslations[formattedKey] || getFallbackTranslation(formattedKey)
+							oldTranslations[formattedKey] || getFallbackTranslation(formattedKey, variables)
 						)
 					: formattedTranslation) || '',
 			value_type: tFunction === 'tHtml' ? ValueType.HTML : ValueType.TEXT,
@@ -241,6 +295,7 @@ async function extractTranslationsFromCodeFiles(
 				functionCallName,
 				trim(firstParameter.getText(), '\'"``'),
 				params[2],
+				params[1],
 				app,
 				component,
 				sourceFile.getFilePath().substring(rootFolderPath.length + 1),
