@@ -90,7 +90,7 @@ function getFormattedTranslation(translation: string) {
 }
 
 function getFallbackTranslation(key: string): string {
-	return `${upperFirst(lowerCase(key.split(TRANSLATION_SEPARATOR).pop()))}`;
+	return `${upperFirst(lowerCase(key.split(TRANSLATION_SEPARATOR).pop() || ''))}`;
 }
 
 function simplifyHtmlValue(value: string): string {
