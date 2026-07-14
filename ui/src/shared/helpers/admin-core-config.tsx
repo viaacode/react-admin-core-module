@@ -60,7 +60,8 @@ interface HetArchiefLoadingProps extends DefaultProps {
 	owner: string; // Used to identify which loader is shown
 }
 
-export function getAdminCoreConfig(navigateFunc: NavigateFunction): AdminConfig {
+export function getAdminCoreConfigForLocalTestApp(navigateFunc: NavigateFunction): AdminConfig {
+	console.log("This method should only be used for the local setup of the admin-core-ui. Please use ui/src/react-admin/core/config/config.class.ts - getConfig() for everything else")
 	return {
 		contentPage: {
 			availableContentBlocks: [
@@ -391,5 +392,5 @@ export function getAdminCoreConfig(navigateFunc: NavigateFunction): AdminConfig 
 
 export function setAdminCoreConfig(navigateFunc: NavigateFunction) {
 	// only used for starting admin-core separately
-	AdminConfigManager.setConfig(getAdminCoreConfig(navigateFunc));
+	AdminConfigManager.setConfig(getAdminCoreConfigForLocalTestApp(navigateFunc));
 }

@@ -5,7 +5,7 @@ import type { NavigateFunction } from '~core/config';
 import { Link } from '~shared/components/Link';
 import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner';
 import { useLocation } from '~shared/hooks/useLocation.ts';
-import { getAdminCoreConfig, setAdminCoreConfig } from './shared/helpers/admin-core-config';
+import { getAdminCoreConfigForLocalTestApp, setAdminCoreConfig } from './shared/helpers/admin-core-config';
 
 import '@viaa/avo2-components/styles.css';
 import '@meemoo/react-components/styles.css';
@@ -33,7 +33,7 @@ function App() {
 		return (
 			<div className="admin-app__navbar">
 				<h1>Navigation bar</h1>
-				<Link to={getAdminCoreConfig(asyncNoop).routes.ADMIN_DASHBOARD}>beheer</Link>
+				<Link to={getAdminCoreConfigForLocalTestApp(asyncNoop).routes.ADMIN_DASHBOARD}>beheer</Link>
 			</div>
 		);
 	};
