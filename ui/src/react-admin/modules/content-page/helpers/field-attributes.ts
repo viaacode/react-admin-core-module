@@ -111,6 +111,7 @@ export const generateFieldAttributes = (
 				onChange: (newValue: string) => {
 					onChange(newValue, key);
 				},
+				enabledHeadings: ['h2', 'h3', 'h4', 'h5', 'h6', 'normal'],
 			} as Partial<RichTextEditorWrapperProps>;
 		}
 

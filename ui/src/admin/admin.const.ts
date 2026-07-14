@@ -8,7 +8,7 @@ import { buildLink } from '~shared/helpers/routing/link.tsx';
 import { showToast } from '~shared/helpers/show-toast.ts';
 import { tText } from '~shared/helpers/translation-functions.ts';
 import { Locale } from '../../scripts/translation.types.ts';
-import { getAdminCoreConfig } from '../shared/helpers/admin-core-config.tsx';
+import { getAdminCoreConfigForLocalTestApp } from '../shared/helpers/admin-core-config.tsx';
 import type { NavigationItemInfo } from '../shared/types';
 
 function getNavWithSubLinks(
@@ -101,7 +101,7 @@ async function getContentPageDetailRouteByPath(
 				page,
 			});
 		}
-		return buildLink(getAdminCoreConfig(asyncNoop).routes.ADMIN_CONTENT_PAGE_DETAIL, {
+		return buildLink(getAdminCoreConfigForLocalTestApp(asyncNoop).routes.ADMIN_CONTENT_PAGE_DETAIL, {
 			id: page.id,
 		});
 	} catch (err) {

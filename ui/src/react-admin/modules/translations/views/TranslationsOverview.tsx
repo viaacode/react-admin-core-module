@@ -42,6 +42,7 @@ import { TranslationsService } from '../translations.service';
 import './TranslationsOverview.scss';
 import { AvoSearchOrderDirection } from '@viaa/avo2-types';
 import { isHetArchief } from '~shared/helpers/is-hetarchief.ts';
+import {AdminConfigManager} from "~core/config";
 
 type OrderProp = `value_${Locale}` | 'id';
 
@@ -384,6 +385,7 @@ export const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> 
 						value={activeTranslationTextValue || undefined}
 						onChange={setActiveTranslationTextValue}
 						controls={RICH_TEXT_EDITOR_OPTIONS}
+						locale={AdminConfigManager.getConfig().locale}
 					></RichTextEditor>
 				)}
 				{activeTranslationEntry.value_type === ValueType.TEXT && (

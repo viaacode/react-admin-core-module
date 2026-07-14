@@ -41,6 +41,7 @@ import {
 	GET_ALERTS_ICON_OPTIONS,
 	RICH_TEXT_EDITOR_OPTIONS,
 } from '../maintenance-alerts.const';
+import {AdminConfigManager} from "~core/config";
 
 const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProps> = ({
 	maintenanceAlert,
@@ -355,6 +356,7 @@ const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProp
 						});
 					}}
 					onBlur={isFormValid}
+					locale={AdminConfigManager.getConfig().locale}
 				></RichTextEditor>
 			</FormControl>
 		);

@@ -16,6 +16,7 @@ export const basic: DOMPurify.Config = {
 		'b',
 		'i',
 		'u',
+		's',
 		'strong',
 		'em',
 		'strike',
