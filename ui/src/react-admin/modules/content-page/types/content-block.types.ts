@@ -94,6 +94,18 @@ export enum Color {
 	Zinc = '#ADADAD',
 	SkyBlue = '#C3DDE6',
 	Juniper = '#678588',
+
+	// Tertiary colors
+	OldPink = '#9B6072',
+	Lavender = '#A293AF',
+	Lila = '#c6c2e0',
+	BlossomPink = '#E694B3',
+	Coral = '#E89B88',
+	LightBlue = '#BDDEE7',
+	Sage = '#91A9A7',
+	Pistachio = '#B8BE9A',
+	SandBeige = '#EDD6C4',
+	Mustard = '#EFCA6A',
 }
 
 export enum GradientColor {

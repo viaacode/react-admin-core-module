@@ -76,6 +76,46 @@ const blackWhiteGradientOption = () => ({
 	]),
 	value: GradientColor.BlackWhite,
 });
+const oldPinkOption = () => ({
+	label: tText('modules/content-page/const/content-block___oud-roze', {}, [App.HET_ARCHIEF]),
+	value: Color.OldPink,
+});
+const lavenderOption = () => ({
+	label: tText('modules/content-page/const/content-block___lavendel', {}, [App.HET_ARCHIEF]),
+	value: Color.Lavender,
+});
+const lilaOption = () => ({
+	label: tText('modules/content-page/const/content-block___lila', {}, [App.HET_ARCHIEF]),
+	value: Color.Lila,
+});
+const blossomPinkOption = () => ({
+	label: tText('modules/content-page/const/content-block___bloesem-roze', {}, [App.HET_ARCHIEF]),
+	value: Color.BlossomPink,
+});
+const coralOption = () => ({
+	label: tText('modules/content-page/const/content-block___koraal-oranje', {}, [App.HET_ARCHIEF]),
+	value: Color.Coral,
+});
+const lightBlueOption = () => ({
+	label: tText('modules/content-page/const/content-block___poederblauw', {}, [App.HET_ARCHIEF]),
+	value: Color.LightBlue,
+});
+const sageOption = () => ({
+	label: tText('modules/content-page/const/content-block___salie-groen', {}, [App.HET_ARCHIEF]),
+	value: Color.Sage,
+});
+const pistachioOption = () => ({
+	label: tText('modules/content-page/const/content-block___pistache-groen', {}, [App.HET_ARCHIEF]),
+	value: Color.Pistachio,
+});
+const sandBeigeOption = () => ({
+	label: tText('modules/content-page/const/content-block___zand-beige', {}, [App.HET_ARCHIEF]),
+	value: Color.SandBeige,
+});
+const mustardOption = () => ({
+	label: tText('modules/content-page/const/content-block___honing-geel', {}, [App.HET_ARCHIEF]),
+	value: Color.Mustard,
+});
 
 //
 export const GET_BACKGROUND_COLOR_OPTIONS_AVO: () => SelectOption<Color>[] = () => [
@@ -102,6 +142,16 @@ export const GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF: () => SelectOption<
 	skyBlueOption(),
 	meemooLogoOption(),
 	blackWhiteGradientOption(),
+	oldPinkOption(),
+	lavenderOption(),
+	lilaOption(),
+	blossomPinkOption(),
+	coralOption(),
+	lightBlueOption(),
+	sageOption(),
+	pistachioOption(),
+	sandBeigeOption(),
+	mustardOption(),
 ];
 
 export const GET_AVO_HERO_BACKGROUND_COLOR_OPTIONS: () => SelectOption<Color>[] = () => [
