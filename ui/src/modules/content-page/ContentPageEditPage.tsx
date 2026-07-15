@@ -6,10 +6,11 @@ import { useLocation } from '~shared/hooks/useLocation.ts';
 
 export const ContentPageEditPage: FC<{ url?: string }> = ({ url }) => {
 	const location = useLocation();
-	const match = useMatch<'id', string>(AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_EDIT'));
-	const contentPageId = match?.params.id;
+	const editMatch = useMatch<'id', string>(AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_EDIT'));
+	const createMatch = useMatch(AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_CREATE'));
+	const contentPageId = editMatch?.params.id;
 
-	if (!contentPageId) {
+	if (!contentPageId && !createMatch) {
 		return null;
 	}
 	return (
