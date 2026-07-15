@@ -775,7 +775,15 @@ async function extractTranslations() {
 	// Output all translations as sql file
 	const sqlFilePath = path.resolve(`./all-translations-${kebabCase(app)}.sql`);
 	console.info(`Writing SQL file: ${sqlFilePath}`);
-	let sql: string = allTranslations
+	const uniqueTranslations = [
+		...new Map(
+			allTranslations.map((t) => [
+				`${t.component}|${t.location}|${t.key}|${t.language}`,
+				t,
+			])
+		).values(),
+	];
+	let sql: string = uniqueTranslations
 		.map((translationEntry) => {
 			const component = `'${translationEntry.component}'`;
 			const location = `'${translationEntry.location}'`;
@@ -792,9 +800,9 @@ async function extractTranslations() {
 	console.info(`Writing json file: ${sqlFilePath.replace('.sql', '.json')}`);
 	await fs.writeFile(
 		sqlFilePath.replace('.sql', '.json'),
-		JSON.stringify(allTranslations, null, 2)
+		JSON.stringify(uniqueTranslations, null, 2)
 	);
-	console.info(green(`Finished writing ${allTranslations.length} translations`));
+	console.info(green(`Finished writing ${uniqueTranslations.length} translations`));
 }
 
 extractTranslations().catch((err) => {
