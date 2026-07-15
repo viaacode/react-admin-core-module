@@ -26514,16 +26514,6 @@
     "app": "AVO",
     "component": "FRONTEND",
     "location": "settings/components/account",
-    "key": "wijzig-gegevens",
-    "language": "nl",
-    "value": "Wijzig mijn gegevens",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "settings/components/account",
     "key": "achternaam",
     "language": "nl",
     "value": "Achternaam",
@@ -38563,6 +38553,26 @@
     "id": "",
     "app": "AVO",
     "component": "FRONTEND",
+    "location": "item/components/modals/add-to-collection-modal",
+    "key": "de-ingevulde-starttijd-heeft-niet-het-correcte-formaat-uu-mm-ss",
+    "language": "nl",
+    "value": "De ingevulde starttijd heeft niet het correcte formaat (uu:mm:ss).",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "item/components/modals/add-to-collection-modal",
+    "key": "de-ingevulde-eidntijd-heeft-niet-het-correcte-formaat-uu-mm-ss",
+    "language": "nl",
+    "value": "De ingevulde eindtijd heeft niet het correcte formaat (uu:mm:ss).",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "AVO",
+    "component": "FRONTEND",
     "location": "shared/components/time-crop-controls/time-crop-controls-wrapper",
     "key": "start-tijd-van-de-video-audio-selectie-input-aria-label",
     "language": "nl",
@@ -39737,26 +39747,6 @@
     "key": "deze-afbeelding-valt-onder-copyright-van-organisation-name",
     "language": "nl",
     "value": "De bron van deze videostill is <a href=\"{{organisationWebsite}}\" target=\"_blank\">{{organisationName}}</a>.",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "item/components/modals/add-to-collection-modal",
-    "key": "de-ingevulde-starttijd-heeft-niet-het-correcte-formaat-uu-mm-ss",
-    "language": "nl",
-    "value": "De ingevulde starttijd heeft niet het correcte formaat (uu:mm:ss).",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "item/components/modals/add-to-collection-modal",
-    "key": "de-ingevulde-eidntijd-heeft-niet-het-correcte-formaat-uu-mm-ss",
-    "language": "nl",
-    "value": "De ingevulde eindtijd heeft niet het correcte formaat (uu:mm:ss).",
     "value_type": "HTML"
   },
   {

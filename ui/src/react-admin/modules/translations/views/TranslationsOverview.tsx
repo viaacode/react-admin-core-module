@@ -42,7 +42,7 @@ import { TranslationsService } from '../translations.service';
 import './TranslationsOverview.scss';
 import { AvoSearchOrderDirection } from '@viaa/avo2-types';
 import { isHetArchief } from '~shared/helpers/is-hetarchief.ts';
-import {AdminConfigManager} from "~core/config";
+import { AdminConfigManager } from '~core/config';
 
 type OrderProp = `value_${Locale}` | 'id';
 

@@ -5,7 +5,10 @@ import type { NavigateFunction } from '~core/config';
 import { Link } from '~shared/components/Link';
 import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner';
 import { useLocation } from '~shared/hooks/useLocation.ts';
-import { getAdminCoreConfigForLocalTestApp, setAdminCoreConfig } from './shared/helpers/admin-core-config';
+import {
+	getAdminCoreConfigForLocalTestApp,
+	setAdminCoreConfig,
+} from './shared/helpers/admin-core-config';
 
 import '@viaa/avo2-components/styles.css';
 import '@meemoo/react-components/styles.css';

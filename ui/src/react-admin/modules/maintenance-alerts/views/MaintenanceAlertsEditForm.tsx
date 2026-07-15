@@ -41,7 +41,7 @@ import {
 	GET_ALERTS_ICON_OPTIONS,
 	RICH_TEXT_EDITOR_OPTIONS,
 } from '../maintenance-alerts.const';
-import {AdminConfigManager} from "~core/config";
+import { AdminConfigManager } from '~core/config';
 
 const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProps> = ({
 	maintenanceAlert,

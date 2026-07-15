@@ -11,7 +11,7 @@ import { RICH_TEXT_EDITOR_OPTIONS_DEFAULT } from '../../consts/rich-text-editor.
 import { CustomError } from '../../helpers/custom-error';
 
 import './RichTextEditorWrapper.scss';
-import {AdminConfigManager} from "~core/config";
+import { AdminConfigManager } from '~core/config';
 
 export type RichTextEditorWrapperProps = RichTextEditorProps & {
 	fileType?: AvoFileUploadAssetType; // Required to enable file upload
