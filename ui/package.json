@@ -1,6 +1,6 @@
 {
   "name": "@meemoo/admin-core-ui",
-  "version": "6.0.4",
+  "version": "6.0.5",
   "private": false,
   "type": "module",
   "files": [
@@ -87,7 +87,7 @@
     "copy-to-clipboard": "3.3.1",
     "date-fns": "3.6.0",
     "date-fns-tz": "3.2.0",
-    "dompurify": "3.1.7",
+    "dompurify": "3.4.12",
     "es-toolkit": "1.41.0",
     "file-saver": "2.0.5",
     "i18next-http-backend": "3.0.2",
