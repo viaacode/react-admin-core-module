@@ -176,6 +176,14 @@ export const GET_CONTENT_BLOCK_TYPE_OPTIONS: () => SelectOption<string>[] = () =
 			label: tText('modules/content-page/const/get-content-block-type-options___scroll-down-nudge'),
 			value: ContentBlockType.ScrollDownNudge,
 		},
+		{
+			label: tText(
+				'modules/content-page/const/get-content-block-type-options___overzicht-met-carousel',
+				{},
+				[HET_ARCHIEF]
+			),
+			value: ContentBlockType.OverviewWithCarousel,
+		},
 	];
 
 	// Only show the content blocks that the client enabled through the config object

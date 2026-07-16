@@ -45,9 +45,9 @@
     "serve": "vite preview",
     "copy-to-client-hetarchief": "rimraf ../../hetarchief-client/node_modules/@meemoo/admin-core-ui/dist ../../hetarchief-client/node_modules/.cache ../../hetarchief-client/.swc ../../hetarchief-client/.next && rimraf ../../hetarchief-client/.next && cp -r dist package.json ../../hetarchief-client/node_modules/@meemoo/admin-core-ui",
     "copy-to-client-avo": "rimraf ../../avo2-client/node_modules/@meemoo/admin-core-ui/dist ../../avo2-client/node_modules/.cache  ../../avo2-client/node_modules/.vite && cp -r dist package.json ../../avo2-client/node_modules/@meemoo/admin-core-ui",
-    "copy": "vite build && npm run copy-to-client-avo && npm run copy-to-client-hetarchief",
-    "copy:avo": "vite build && npm run copy-to-client-avo",
-    "copy:hetarchief": "vite build && npm run copy-to-client-hetarchief",
+    "copy": "npm run build && npm run copy-to-client-avo && npm run copy-to-client-hetarchief",
+    "copy:avo": "npm run build && npm run copy-to-client-avo",
+    "copy:hetarchief": "npm run build && npm run copy-to-client-hetarchief",
     "lint": "npm run lint:ts && npm run lint:scss",
     "lint:ts": "biome lint --write .",
     "lint:scss": "stylelint --fix src/**/*.{css,scss}",
@@ -188,7 +188,8 @@
   },
   "dependencies": {
     "jsdom": "27.4.0",
-    "memoizee": "0.4.17"
+    "memoizee": "0.4.17",
+    "swiper": "14.0.5"
   },
   "allowScripts": {
     "@parcel/watcher@2.5.1": true,

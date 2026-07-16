@@ -1,4 +1,4 @@
-import { ANCHOR_LINKS_BLOCK_CONFIG } from '~content-blocks/anchor-links';
+import { ANCHOR_LINKS_BLOCK_CONFIG } from '~content-blocks/anchor-links.ts';
 import { AVO_HERO_BLOCK_CONFIG } from '~content-blocks/BlockAvoHero';
 import { AVO_IMAGE_TEXT_BACKGROUND_BLOCK_CONFIG } from '~content-blocks/BlockAvoImageTextBackground';
 import { CONTENT_BREADCRUMBS_CONFIG } from '~content-blocks/BlockBreadcrumbs';
@@ -24,6 +24,7 @@ import { KLAAR_BLOCK_CONFIG } from '~content-blocks/BlockKlaar';
 import { MAINTAINERS_GRID_BLOCK_CONFIG } from '~content-blocks/BlockMaintainersGrid';
 import { MEDIA_GRID_BLOCK_CONFIG } from '~content-blocks/BlockMediaGrid';
 import { OVERVIEW_NEWSPAPER_TITLES_BLOCK_CONFIG } from '~content-blocks/BlockOverviewNewspaperTitles';
+import { CONTENT_OVERVIEW_WITH_CAROUSEL_CONFIG } from '~content-blocks/BlockOverviewWithCarousel';
 import { QUOTE_BLOCK_CONFIG } from '~content-blocks/BlockQuote';
 import {
 	RICH_TEXT_BLOCK_CONFIG,
@@ -85,4 +86,5 @@ export const CONTENT_BLOCK_CONFIG_MAP: Record<
 	[ContentBlockType.ContentEncloseGrid]: CONTENT_ENCLOSE_BLOCK_CONFIG,
 	[ContentBlockType.Breadcrumbs]: CONTENT_BREADCRUMBS_CONFIG,
 	[ContentBlockType.ScrollDownNudge]: CONTENT_SCROLL_DOWN_NUDGE_CONFIG,
+	[ContentBlockType.OverviewWithCarousel]: CONTENT_OVERVIEW_WITH_CAROUSEL_CONFIG,
 };

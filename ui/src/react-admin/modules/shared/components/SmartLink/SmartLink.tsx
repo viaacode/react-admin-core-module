@@ -26,6 +26,7 @@ export interface SmartLinkProps {
 	ariaLabel?: string;
 	className?: string;
 	children: ReactNode;
+	tabIndex?: number;
 }
 
 export const SmartLink: FunctionComponent<SmartLinkProps> = ({
@@ -35,6 +36,7 @@ export const SmartLink: FunctionComponent<SmartLinkProps> = ({
 	children,
 	className,
 	ariaLabel,
+	tabIndex,
 }) => {
 	const location = useLocation();
 
@@ -79,6 +81,7 @@ export const SmartLink: FunctionComponent<SmartLinkProps> = ({
 							aria-label={ariaLabel}
 							className={clsx(className, { 'a-link__no-styles': removeStyles })}
 							onClick={() => AdminConfigManager.getConfig().handlers.onExternalLink(fullUrl)}
+							tabIndex={tabIndex}
 						>
 							{children}
 						</a>
@@ -101,6 +104,7 @@ export const SmartLink: FunctionComponent<SmartLinkProps> = ({
 								scrollTo({ top: 0 });
 							}
 						}}
+						tabIndex={tabIndex}
 					>
 						{children}
 					</Link>
@@ -117,6 +121,7 @@ export const SmartLink: FunctionComponent<SmartLinkProps> = ({
 							title={title}
 							className={clsx(className, { 'a-link__no-styles': removeStyles })}
 							onClick={() => AdminConfigManager.getConfig().handlers.onExternalLink(fullUrl)}
+							tabIndex={tabIndex}
 						>
 							{children}
 						</a>
@@ -131,6 +136,7 @@ export const SmartLink: FunctionComponent<SmartLinkProps> = ({
 						title={title}
 						className={clsx(className, { 'a-link__no-styles': removeStyles })}
 						onClick={() => AdminConfigManager.getConfig().handlers.onExternalLink(fullUrl)}
+						tabIndex={tabIndex}
 					>
 						{children}
 					</a>
@@ -249,7 +255,8 @@ export const generateSmartLink = (
 	action: ButtonAction | null | undefined,
 	children: ReactNode,
 	title?: string,
-	className?: string
+	className?: string,
+	tabIndex?: number
 	// biome-ignore lint/suspicious/noExplicitAny: todo
 ): ReactElement<any, any> | null => {
 	return (
@@ -258,6 +265,7 @@ export const generateSmartLink = (
 			title={title}
 			className={className}
 			key={`smart-link-${action?.value}-${title}-${className}`}
+			tabIndex={tabIndex}
 		>
 			{children}
 		</SmartLink>

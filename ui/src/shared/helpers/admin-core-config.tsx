@@ -94,6 +94,7 @@ export function getAdminCoreConfigForLocalTestApp(navigateFunc: NavigateFunction
 				// ContentBlockType.OverviewNewspaperTitles,
 				// ContentBlockType.ContentEncloseGrid,
 				// ContentBlockType.Breadcrumbs,
+				ContentBlockType.OverviewWithCarousel,
 			],
 			defaultPageWidth: ContentPageWidth.LARGE,
 			onSaveContentPage: async (contentPageInfo: ContentPageInfo) => {
@@ -138,6 +139,7 @@ export function getAdminCoreConfigForLocalTestApp(navigateFunc: NavigateFunction
 				sortTable: { name: 'sort-table' },
 				arrowDown: { name: 'arrow-down' },
 				arrowRight: { name: 'arrow-right' },
+				arrowLeft: { name: 'arrow-left' },
 				chevronLeft: { name: 'chevron-left' },
 				check: { name: 'check' },
 				calendar: { name: 'calendar' },

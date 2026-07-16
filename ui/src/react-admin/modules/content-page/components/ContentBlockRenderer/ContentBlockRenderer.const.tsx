@@ -22,6 +22,7 @@ import { BlockIntro } from '~content-blocks/BlockIntro';
 import { BlockKlaar } from '~content-blocks/BlockKlaar';
 import { BlockMaintainersGrid } from '~content-blocks/BlockMaintainersGrid';
 import { BlockOverviewNewspaperTitles } from '~content-blocks/BlockOverviewNewspaperTitles';
+import { BlockOverviewWithCarousel } from '~content-blocks/BlockOverviewWithCarousel/BlockOverviewWithCarousel.tsx';
 import { BlockPageOverviewWrapper } from '~content-blocks/BlockPageOverview';
 import { BlockQuote } from '~content-blocks/BlockQuote';
 import { BlockRichTextWrapper } from '~content-blocks/BlockRichText';
@@ -85,6 +86,7 @@ export function GET_BLOCK_COMPONENT(
 		),
 		[ContentBlockType.Breadcrumbs]: BlockBreadcrumbs,
 		[ContentBlockType.HetArchiefImageTextBackground]: BlockHetArchiefImageTextBackground,
+		[ContentBlockType.OverviewWithCarousel]: BlockOverviewWithCarousel,
 
 		// Avo specific blocks
 		[ContentBlockType.MediaGrid]: loadComponentFromConfig(ContentBlockType.MediaGrid),
