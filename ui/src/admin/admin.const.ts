@@ -101,9 +101,12 @@ async function getContentPageDetailRouteByPath(
 				page,
 			});
 		}
-		return buildLink(getAdminCoreConfigForLocalTestApp(asyncNoop).routes.ADMIN_CONTENT_PAGE_DETAIL, {
-			id: page.id,
-		});
+		return buildLink(
+			getAdminCoreConfigForLocalTestApp(asyncNoop).routes.ADMIN_CONTENT_PAGE_DETAIL,
+			{
+				id: page.id,
+			}
+		);
 	} catch (err) {
 		console.error(new CustomError('Failed to fetch content page by pad', err, { path }));
 		showToast({

@@ -52,6 +52,8 @@
     "lint:ts": "biome lint --write .",
     "lint:scss": "stylelint --fix src/**/*.{css,scss}",
     "format": "biome format --write src",
+    "biome": "biome ci",
+    "biome:fix": "biome check --write",
     "test": "vitest",
     "type-check": "tsc --noEmit",
     "build:analyze": "npx vite-bundle-visualizer",

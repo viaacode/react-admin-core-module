@@ -1,2 +1,2 @@
-export * from './BlockAvoImageTextBackground.editorconfig';
 export * from './BlockAvoImageTextBackground';
+export * from './BlockAvoImageTextBackground.editorconfig';

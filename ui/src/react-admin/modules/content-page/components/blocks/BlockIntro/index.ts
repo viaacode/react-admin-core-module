@@ -1,2 +1,2 @@
-export * from './BlockIntro.editorconfig';
 export * from './BlockIntro';
+export * from './BlockIntro.editorconfig';

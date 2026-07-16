@@ -1,2 +1,2 @@
-export * from './BlockHetArchiefImageTextBackground.editorconfig';
 export * from './BlockHetArchiefImageTextBackground';
+export * from './BlockHetArchiefImageTextBackground.editorconfig';

@@ -13,6 +13,7 @@ import type { FunctionComponent } from 'react';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import DatePicker from 'react-datepicker';
 import { ValidationError } from 'yup';
+import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
 import { getDatePickerDefaultProps } from '~modules/content-page/components/DatePicker/DatePicker.consts';
 import { MaintenanceAlertsService } from '~modules/maintenance-alerts/maintenance-alerts.service';
@@ -41,7 +42,6 @@ import {
 	GET_ALERTS_ICON_OPTIONS,
 	RICH_TEXT_EDITOR_OPTIONS,
 } from '../maintenance-alerts.const';
-import {AdminConfigManager} from "~core/config";
 
 const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProps> = ({
 	maintenanceAlert,
