@@ -6,13 +6,16 @@ import { GET_EDITOR_TYPES_MAP } from '~modules/content-page/const/editor-types.c
 import { generateFieldAttributes } from '~modules/content-page/helpers/field-attributes';
 import type {
 	ContentBlockComponentState,
+	ContentBlockConfig,
 	ContentBlockEditor,
 	ContentBlockFieldGroup,
+	ContentBlockFieldGroupErrors,
 	ContentBlockState,
 	ContentBlockStateType,
 } from '../../types/content-block.types';
 
 interface FieldGroupProps {
+	config: ContentBlockConfig;
 	// biome-ignore lint/suspicious/noExplicitAny: todo
 	globalState: any;
 	globalStateIndex: number;
@@ -27,6 +30,7 @@ interface FieldGroupProps {
 }
 
 export const FieldGroup: FunctionComponent<FieldGroupProps> = ({
+	config,
 	globalState,
 	globalStateIndex,
 	fieldKey,
@@ -37,6 +41,9 @@ export const FieldGroup: FunctionComponent<FieldGroupProps> = ({
 	handleChange,
 }) => {
 	const { fields } = fieldGroup;
+
+	const groupErrors = config.errors?.[fieldKey] as ContentBlockFieldGroupErrors | undefined;
+	const elementErrors = groupErrors?.[fieldGroupStateIndex];
 
 	const handleFieldGroupStateChange = (
 		// biome-ignore lint/suspicious/noExplicitAny: todo
@@ -87,7 +94,7 @@ export const FieldGroup: FunctionComponent<FieldGroupProps> = ({
 
 				return (
 					<Spacer margin="top" key={`${fieldKey}-${fieldState[0]}-${fieldIndex}`}>
-						<FormGroup label={`${fieldState[1].label}`}>
+						<FormGroup label={`${fieldState[1].label}`} error={elementErrors?.[fieldState[0]]}>
 							<Spacer margin="top-small">
 								<EditorComponents {...editorProps} />
 							</Spacer>

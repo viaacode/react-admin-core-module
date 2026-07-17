@@ -20,7 +20,7 @@ export const validateContentBlockField = (
 
 	if (errorArray.length) {
 		if (typeof stateIndex === 'number') {
-			const errorsByKey = [...(oldErrors[fieldKey] || [])];
+			const errorsByKey = [...((oldErrors[fieldKey] as (string | string[])[]) || [])];
 			errorsByKey[stateIndex] = errorArray;
 
 			return {

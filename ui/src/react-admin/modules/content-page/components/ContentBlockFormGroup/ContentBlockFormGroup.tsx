@@ -9,6 +9,7 @@ import type {
 	ContentBlockComponentsConfig,
 	ContentBlockConfig,
 	ContentBlockField,
+	ContentBlockFieldGroup,
 	ContentBlockState,
 	ContentBlockStateType,
 } from '../../types/content-block.types';
@@ -41,12 +42,16 @@ const ContentBlockFormGroup: FunctionComponent<ContentBlockFormGroupProps> = ({
 }) => (
 	<div className="c-content-block-form-group">
 		{Object.keys(formGroup.fields).map((key: string, formGroupIndex: number) => {
-			let error: string[];
+			let error: string[] | undefined;
 			const configErrors = config.errors || {};
 			const stateKey = key as keyof ContentBlockComponentState | keyof ContentBlockState;
 			const formErrorsForBlock = configErrors[stateKey];
+			const isFieldGroup = (formGroup.fields[key] as ContentBlockFieldGroup).type === 'fieldGroup';
 
-			if (typeof stateIndex === 'number') {
+			if (isFieldGroup) {
+				// Field group errors are nested per element and rendered inside the group itself
+				error = undefined;
+			} else if (typeof stateIndex === 'number') {
 				error = (formErrorsForBlock?.[stateIndex] || []) as string[];
 			} else {
 				error = formErrorsForBlock as string[];
