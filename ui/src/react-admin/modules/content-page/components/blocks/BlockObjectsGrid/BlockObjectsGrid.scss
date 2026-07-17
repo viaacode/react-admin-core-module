@@ -2,24 +2,22 @@
 @use "../../../../shared/styles/settings/colors" as colors;
 
 .c-block-objects-grid {
-	// Number of grid columns per breakpoint. The count is responsive (see FA); a fixed
-	// landscape tile always spans 2 of these columns.
+	// Number of grid columns per breakpoint. The count is responsive (see FA) but capped at 4
+	// columns; a fixed landscape tile always spans 2 of these columns.
 	--c-objects-grid-columns: 2;
 
-	@media (min-width: variables.$g-bp1) {
-		--c-objects-grid-columns: 3;
-	}
+	// All tiles share this height (standard tiles are 1 column wide, fixed tiles 2), so every
+	// tile lines up regardless of type.
+	--c-objects-grid-row-height: 22rem;
 
 	@media (min-width: variables.$g-bp2) {
-		--c-objects-grid-columns: 4;
+		--c-objects-grid-columns: 3;
+		--c-objects-grid-row-height: 28rem;
 	}
 
 	@media (min-width: variables.$g-bp3) {
-		--c-objects-grid-columns: 5;
-	}
-
-	@media (min-width: variables.$g-bp4) {
-		--c-objects-grid-columns: 6;
+		--c-objects-grid-columns: 4;
+		--c-objects-grid-row-height: 32rem;
 	}
 
 	&__title {
@@ -33,6 +31,7 @@
 	&__grid {
 		display: grid;
 		grid-template-columns: repeat(var(--c-objects-grid-columns), minmax(0, 1fr));
+		grid-auto-rows: var(--c-objects-grid-row-height);
 		gap: 1.6rem;
 		list-style: none;
 		margin: 0;
@@ -43,7 +42,8 @@
 		display: flex;
 		min-width: 0;
 
-		// Fixed positions are shown as a landscape tile that occupies 2 standard positions.
+		// Fixed positions are shown as a landscape tile that occupies 2 standard positions
+		// (2 columns), at the same height as every other tile.
 		&--fixed {
 			grid-column: span 2;
 		}
@@ -53,6 +53,7 @@
 		display: flex;
 		flex-direction: column;
 		width: 100%;
+		height: 100%;
 		min-width: 0;
 		text-decoration: none;
 		color: inherit;
@@ -70,13 +71,10 @@
 		overflow: hidden;
 		background-color: colors.$color-gray-100;
 
-		// Standard position: portrait 9:16.
-		aspect-ratio: 9 / 16;
-
-		.c-block-objects-grid__tile--fixed & {
-			// Fixed position: landscape 16:9.
-			aspect-ratio: 16 / 9;
-		}
+		// Fill the tile height above the title bar; the image is cropped with object-fit: cover,
+		// so a 1-column (portrait) and a 2-column (landscape) tile end up exactly the same height.
+		flex: 1 1 auto;
+		min-height: 0;
 
 		&--audio {
 			display: flex;
