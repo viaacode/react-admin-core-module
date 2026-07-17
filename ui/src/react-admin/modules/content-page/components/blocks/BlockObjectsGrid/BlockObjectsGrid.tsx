@@ -81,11 +81,13 @@ export const BlockObjectsGrid: FunctionComponent<BlockObjectsGridProps> = ({
 						)}
 					</div>
 					<div className="c-block-objects-grid__tile-titlebar">
+						<div className="c-block-objects-grid__tile-titlebar-left">
+							<span className="c-block-objects-grid__tile-title">{item.name}</span>
+							{item.maintainerName && (
+								<span className="c-block-objects-grid__tile-maintainer">{item.maintainerName}</span>
+							)}
+						</div>
 						{iconName && <Icon className="c-block-objects-grid__tile-type-icon" name={iconName} />}
-						<span className="c-block-objects-grid__tile-title">{item.name}</span>
-						{item.maintainerName && (
-							<span className="c-block-objects-grid__tile-maintainer">{item.maintainerName}</span>
-						)}
 					</div>
 				</SmartLink>
 			</li>
@@ -94,7 +96,19 @@ export const BlockObjectsGrid: FunctionComponent<BlockObjectsGridProps> = ({
 
 	const fixedObjects = data?.fixedObjects ?? [];
 	const objects = data?.objects ?? [];
-	const hasObjects = fixedObjects.length > 0 || objects.length > 0;
+
+	// Interleave order (see functional analysis): the first fixed object, then 2 random results,
+	// then the remaining fixed objects, then the rest of the random results.
+	// e.g. F1, R, R, F2, F3, R, R, … — with fixed tiles spanning 2 columns this puts F1 on row 1
+	// and F2/F3 on row 2.
+	const [firstFixed, ...restFixed] = fixedObjects;
+	const orderedTiles: { item: ObjectsGridItem; isFixed: boolean }[] = [
+		...(firstFixed ? [{ item: firstFixed, isFixed: true }] : []),
+		...objects.slice(0, 2).map((item) => ({ item, isFixed: false })),
+		...restFixed.map((item) => ({ item, isFixed: true })),
+		...objects.slice(2).map((item) => ({ item, isFixed: false })),
+	];
+	const hasObjects = orderedTiles.length > 0;
 
 	return (
 		<section
@@ -141,8 +155,7 @@ export const BlockObjectsGrid: FunctionComponent<BlockObjectsGridProps> = ({
 
 			{hasObjects && (
 				<ul className="c-block-objects-grid__grid">
-					{fixedObjects.map((item) => renderTile(item, true))}
-					{objects.map((item) => renderTile(item, false))}
+					{orderedTiles.map(({ item, isFixed }) => renderTile(item, isFixed))}
 				</ul>
 			)}
 
