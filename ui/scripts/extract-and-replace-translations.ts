@@ -140,7 +140,7 @@ function reconstructVariablesInFallback(fallback: string, variables: string[]): 
 }
 
 function getFallbackTranslation(key: string, variables: string[] = []): string {
-	const fallback = `${upperFirst(lowerCase(key.split(TRANSLATION_SEPARATOR).pop()))}`;
+	const fallback = `${upperFirst(lowerCase(key.split(TRANSLATION_SEPARATOR).pop() as string))}`;
 	if (variables.length === 0) return fallback;
 	return reconstructVariablesInFallback(fallback, variables);
 }
@@ -777,10 +777,7 @@ async function extractTranslations() {
 	console.info(`Writing SQL file: ${sqlFilePath}`);
 	const uniqueTranslations = [
 		...new Map(
-			allTranslations.map((t) => [
-				`${t.component}|${t.location}|${t.key}|${t.language}`,
-				t,
-			])
+			allTranslations.map((t) => [`${t.component}|${t.location}|${t.key}|${t.language}`, t])
 		).values(),
 	];
 	let sql: string = uniqueTranslations
