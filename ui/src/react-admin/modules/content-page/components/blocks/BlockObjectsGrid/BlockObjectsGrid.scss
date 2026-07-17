@@ -20,7 +20,7 @@
 		--c-objects-grid-row-height: 32rem;
 	}
 
-	&__title {
+	.c-block-objects-grid__title {
 		color: colors.$color-gray-1000;
 		font-family: SofiaPro, sans-serif;
 		font-size: 2.4rem;
@@ -28,7 +28,7 @@
 		margin-bottom: 2.2rem;
 	}
 
-	&__grid {
+	.c-block-objects-grid__grid {
 		display: grid;
 		grid-template-columns: repeat(var(--c-objects-grid-columns), minmax(0, 1fr));
 		grid-auto-rows: var(--c-objects-grid-row-height);
@@ -38,7 +38,7 @@
 		padding: 0;
 	}
 
-	&__tile {
+	.c-block-objects-grid__tile {
 		display: flex;
 		min-width: 0;
 
@@ -49,7 +49,7 @@
 		}
 	}
 
-	&__tile-link {
+	.c-block-objects-grid__tile-link {
 		display: flex;
 		flex-direction: column;
 		width: 100%;
@@ -65,7 +65,7 @@
 		}
 	}
 
-	&__tile-media {
+	.c-block-objects-grid__tile-media {
 		position: relative;
 		width: 100%;
 		overflow: hidden;
@@ -93,7 +93,7 @@
 		}
 	}
 
-	&__tile-image {
+	.c-block-objects-grid__tile-image {
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
@@ -102,7 +102,7 @@
 		transition: transform 0.5s ease-out;
 	}
 
-	&__tile-placeholder {
+	.c-block-objects-grid__tile-placeholder {
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -114,56 +114,80 @@
 
 	// Desktop-only zoom-in on hover (see FA). Pointer devices only, never affects keyboard focus.
 	@media (hover: hover) {
-		&__tile-link:hover .c-block-objects-grid__tile-image {
+		.c-block-objects-grid__tile-link:hover .c-block-objects-grid__tile-image {
 			transform: scale(1.1);
 		}
 	}
 
-	&__tile-titlebar {
+	.c-block-objects-grid__tile-titlebar {
 		display: flex;
-		align-items: center;
+		align-items: flex-start;
 		gap: 0.8rem;
+		height: 9.6rem;
+		flex-shrink: 0;
 
 		// Black bar with white text/icons (see FA) — contrast ratio 21:1.
 		background-color: colors.$color-gray-1000;
 		color: colors.$white;
-		padding: 0.8rem 1.2rem;
+		padding: 1.6rem;
 	}
 
-	&__tile-type-icon {
-		flex-shrink: 0;
-		font-size: 1.6rem;
-		line-height: 1;
-	}
-
-	&__tile-title {
+	.c-block-objects-grid__tile-titlebar-left {
+		display: flex;
+		flex-direction: column;
 		flex: 1 1 auto;
 		min-width: 0;
+	}
+
+	.c-block-objects-grid__tile-type-icon {
+		flex-shrink: 0;
+		width: 2.2rem;
+		height: 2.2rem;
+		font-size: 2.2rem;
+		line-height: 1;
+
+		@media (min-width: variables.$g-bp2) {
+			width: 2.4rem;
+			height: 2.4rem;
+			font-size: 2.4rem;
+		}
+	}
+
+	.c-block-objects-grid__tile-title {
 		font-family: SofiaPro, sans-serif;
 		font-size: 1.4rem;
-		font-weight: 700;
+		font-weight: 800;
+		line-height: 2rem;
+		display: -webkit-box;
+		-webkit-line-clamp: 2;
+		-webkit-box-orient: vertical;
 		overflow: hidden;
-		text-overflow: ellipsis;
-		white-space: nowrap;
+
+		@media (min-width: variables.$g-bp2) {
+			font-size: 1.6rem;
+		}
 	}
 
-	&__tile-maintainer {
-		flex-shrink: 0;
-		font-size: 1.2rem;
+	.c-block-objects-grid__tile-maintainer {
+		font-size: 1.4rem;
 		font-weight: 400;
-		max-width: 40%;
+		line-height: 2rem;
 		overflow: hidden;
 		text-overflow: ellipsis;
 		white-space: nowrap;
+
+		@media (min-width: variables.$g-bp2) {
+			font-size: 1.6rem;
+		}
 	}
 
-	&__footer {
+	.c-block-objects-grid__footer {
 		display: flex;
 		justify-content: center;
 		margin-top: 2.4rem;
 	}
 
-	&__cta {
+	.c-block-objects-grid__cta {
 		display: inline-flex;
 		align-items: center;
 		padding: 1.2rem 2.4rem;
@@ -181,7 +205,7 @@
 	}
 
 	// Visually hidden but available to screen readers (for the aria-live status messages).
-	&__sr-only {
+	.c-block-objects-grid__sr-only {
 		position: absolute;
 		width: 1px;
 		height: 1px;
