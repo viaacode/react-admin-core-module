@@ -21,6 +21,7 @@ import { BlockImageTitleTextButtonWrapper } from '~content-blocks/BlockImageTitl
 import { BlockIntro } from '~content-blocks/BlockIntro';
 import { BlockKlaar } from '~content-blocks/BlockKlaar';
 import { BlockMaintainersGrid } from '~content-blocks/BlockMaintainersGrid';
+import { BlockObjectsGrid } from '~content-blocks/BlockObjectsGrid';
 import { BlockOverviewNewspaperTitles } from '~content-blocks/BlockOverviewNewspaperTitles';
 import { BlockOverviewWithCarousel } from '~content-blocks/BlockOverviewWithCarousel/BlockOverviewWithCarousel.tsx';
 import { BlockPageOverviewWrapper } from '~content-blocks/BlockPageOverview';
@@ -87,6 +88,7 @@ export function GET_BLOCK_COMPONENT(
 		[ContentBlockType.Breadcrumbs]: BlockBreadcrumbs,
 		[ContentBlockType.HetArchiefImageTextBackground]: BlockHetArchiefImageTextBackground,
 		[ContentBlockType.OverviewWithCarousel]: BlockOverviewWithCarousel,
+		[ContentBlockType.ObjectsGrid]: BlockObjectsGrid,
 
 		// Avo specific blocks
 		[ContentBlockType.MediaGrid]: loadComponentFromConfig(ContentBlockType.MediaGrid),
@@ -104,7 +106,7 @@ export function GET_BLOCK_COMPONENT(
  */
 export const REPEATABLE_CONTENT_BLOCKS = [
 	ContentBlockType.AnchorLinks,
-	ContentBlockType.Buttons,
+	// ContentBlockType.Buttons, // migrated to mechanism B (fieldGroup `elements`) - ARC-3779
 	ContentBlockType.CTAs,
 	ContentBlockType.ImageGrid,
 	ContentBlockType.MediaGrid,
@@ -142,6 +144,7 @@ export const NAVIGABLE_CONTENT_BLOCKS = [
 	ContentBlockType.OverviewNewspaperTitles,
 	ContentBlockType.ContentEncloseGrid,
 	ContentBlockType.Breadcrumbs,
+	ContentBlockType.ObjectsGrid,
 ];
 
 /**

@@ -75,9 +75,19 @@ export function convertDbContentBlockToContentBlockConfig(
 			}
 			const cleanConfig = configForType(contentBlock.position);
 
+			// Lazy migration of the repetition mechanism A -> B (see components/blocks/README.md).
+			// Mechanism A stores `components` as a bare array; mechanism B stores it as an object
+			// with the repeated entries under an `elements` field group. A block is considered
+			// "migrated" once its editorconfig returns an object state (B). When that block still
+			// has legacy array data in the DB, we wrap it under `elements` here; on the next save
+			// it is persisted in shape B. Blocks whose editorconfig is still array-shaped (A) are
+			// left untouched.
 			const rawComponentState = components;
+			const configExpectsArray = Array.isArray(cleanConfig.components.state);
 			const componentState = Array.isArray(rawComponentState)
-				? rawComponentState
+				? configExpectsArray
+					? rawComponentState // block not yet migrated -> keep shape A untouched
+					: { ...cleanConfig.components.state, elements: rawComponentState } // legacy A data, config is now B -> migrate
 				: { ...cleanConfig.components.state, ...rawComponentState };
 
 			return {

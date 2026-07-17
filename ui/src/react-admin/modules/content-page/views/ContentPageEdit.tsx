@@ -26,6 +26,7 @@ import {
 	contentEditReducer,
 } from '~modules/content-page/helpers/content-edit.reducer';
 import { useContentTypes } from '~modules/content-page/hooks/useContentTypes';
+import { convertDbContentBlockToContentBlockConfig } from '~modules/content-page/services/content-page.converters';
 import { ContentPageService } from '~modules/content-page/services/content-page.service';
 import type {
 	ContentBlockComponentState,
@@ -35,6 +36,8 @@ import type {
 	ContentBlockStateOption,
 	ContentBlockStateType,
 	ContentBlockType,
+	DbContentBlock,
+	DefaultContentBlockState,
 	RepeatedContentBlockComponentState,
 	SingleContentBlockComponentState,
 } from '~modules/content-page/types/content-block.types';
@@ -231,17 +234,37 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 				type: ToastType.SPINNER,
 			});
 
+			// Re-hydrate the pasted block through the DB->config converter so it gets fresh
+			// field definitions (validators/isVisible functions are lost across the clipboard
+			// JSON round-trip) and is upgraded to the current repetition mechanism (A->B).
+			// See components/blocks/README.md.
+			const pasted = newBlockConfig as unknown as ContentBlockConfig;
+			const [rehydratedBlock] = convertDbContentBlockToContentBlockConfig([
+				{
+					type: pasted.type,
+					name: pasted.name,
+					anchor: pasted.anchor,
+					position: pasted.position ?? 0,
+					// A pasted block is a ContentBlockConfig (components = { state, fields }); fall
+					// back to a raw DB shape (components = state) for any other pasted payload.
+					components: (pasted.components?.state ??
+						pasted.components) as ContentBlockComponentState,
+					block: (pasted.block?.state ?? pasted.block) as DefaultContentBlockState,
+				} as DbContentBlock,
+			]);
+			const blockToAdd = (rehydratedBlock ?? newBlockConfig) as Partial<AvoContentPageBlock>;
+
 			// Remove id before duplicating
-			delete newBlockConfig.id;
+			delete blockToAdd.id;
 
 			// Ensure block is added at the bottom of the page
-			newBlockConfig.position = (
+			blockToAdd.position = (
 				contentPageState?.currentContentPageInfo?.content_blocks || []
 			).length;
 
 			// Duplicate the assets used in this content block, so it is no longer linked to the original content block
 			const newBlockConfigWithDuplicatedAssets =
-				await ContentPageService.duplicateContentImages(newBlockConfig);
+				await ContentPageService.duplicateContentImages(blockToAdd);
 
 			// Temp id until this block is saved into the database
 			newBlockConfigWithDuplicatedAssets.id = TEMP_BLOCK_ID_PREFIX + Date.now();
