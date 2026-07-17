@@ -1,2 +1,2 @@
-export * from './BlockUitgeklaard.editorconfig';
 export * from './BlockUitgeklaard';
+export * from './BlockUitgeklaard.editorconfig';

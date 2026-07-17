@@ -1,2 +1,2 @@
-export * from './BlockHetArchiefHeaderSearch.editorconfig';
 export * from './BlockHetArchiefHeaderSearch';
+export * from './BlockHetArchiefHeaderSearch.editorconfig';

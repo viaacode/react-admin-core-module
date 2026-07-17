@@ -2,10 +2,8 @@ import type { SelectOption, SpacerOption } from '@viaa/avo2-components';
 import { Form, FormGroup, Select } from '@viaa/avo2-components';
 import type { FunctionComponent } from 'react';
 import React from 'react';
-
-import type { PaddingFieldState } from '../../../types/content-block.types';
-
 import { tHtml } from '~shared/helpers/translation-functions';
+import type { PaddingFieldState } from '../../../types/content-block.types';
 
 import './PaddingSelectTopBottom.scss';
 

@@ -1,12 +1,12 @@
 {
-	"extends": "../tsconfig.json",
-	"compilerOptions": {
-		"module": "ES2022",
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "module": "ES2022",
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "allowImportingTsExtensions": true
-	},
-	"files": [
+  },
+  "files": [
     "backup-translations.ts",
     "execute-database-query.ts",
     "extract-and-replace-translations.ts"

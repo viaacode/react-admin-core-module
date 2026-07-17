@@ -1,6 +1,3 @@
-import type { FunctionComponent } from 'react';
-import React, { useState } from 'react';
-
 import type { TagInfo } from '@viaa/avo2-components';
 import {
 	Button,
@@ -16,6 +13,8 @@ import {
 	ToolbarItem,
 	ToolbarRight,
 } from '@viaa/avo2-components';
+import type { FunctionComponent } from 'react';
+import React, { useState } from 'react';
 import { tText } from '~shared/helpers/translation-functions';
 
 export type AddOrRemove = 'add' | 'remove';

@@ -1,0 +1,199 @@
+@use "sass:math";
+@use "../../../../shared/styles/settings/variables" as variables;
+@use "../../../../shared/styles/settings/colors" as colors;
+
+.c-block-overview-with-carousel {
+	.c-block-overview-with-carousel__header {
+		width: 100%;
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 1.6rem;
+		margin-bottom: 2.2rem;
+		justify-content: space-between;
+
+		@media (max-width: variables.$g-bp2) {
+			margin-bottom: 2.4rem;
+			gap: 1.2rem;
+		}
+
+		&-title {
+			color: colors.$color-gray-1000;
+			font-family: "SofiaPro";
+			font-size: 2.4rem;
+			font-style: normal;
+			font-weight: 800;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+			width: fit-content;
+		}
+
+		&-actions {
+			display: flex;
+			align-items: center;
+			gap: 1.6rem;
+			min-width: 0;
+
+			.c-button {
+				margin: 0 !important;
+			}
+
+			// Only the buttonLabel button (a direct child) may shrink/truncate,
+			// the prev/next nav group keeps its natural size.
+			> a {
+				min-width: 0;
+				flex-shrink: 1;
+
+				> .c-button {
+					min-width: 0;
+					width: 100%;
+
+					.c-button__content {
+						min-width: 0;
+						width: 100%;
+					}
+
+					.c-button__label {
+						font-weight: 700; // since sm buttons loose this
+						overflow: hidden;
+						text-overflow: ellipsis;
+						white-space: nowrap;
+					}
+				}
+			}
+		}
+
+		&-nav {
+			display: flex;
+			align-items: center;
+			gap: .8rem;
+			margin-left: auto;
+			flex-shrink: 0;
+		}
+
+		@media (max-width: variables.$g-bp2) {
+			flex-direction: column;
+			align-items: stretch;
+
+			&-title {
+				margin-right: 0;
+			}
+
+			&-actions {
+				width: 100%;
+			}
+		}
+	}
+
+	&__wrapper {
+		overflow: visible !important;
+	}
+
+	&__slide {
+		display: flex !important;
+		flex-direction: column;
+		height: 36.8rem !important;
+
+		a {
+			text-decoration: none;
+
+			&:focus-visible {
+				outline: 2px solid colors.$color-ocean-green;
+			}
+		}
+
+		&:hover {
+			.c-block-overview-with-carousel__slide-image > img {
+				transform: scale(1.1);
+			}
+		}
+
+		&-image {
+			flex: auto;
+			width: 100%;
+		}
+
+		&__portrait {
+			width: 28rem !important;
+
+			.c-block-overview-with-carousel__slide-image {
+				min-height: 28rem;
+			}
+
+			.c-block-overview-with-carousel__slide-description {
+				flex: unset;
+			}
+		}
+
+		&__round {
+			width: 28rem !important;
+			border-radius: 140px 140px 0 0;
+
+			.c-block-overview-with-carousel__slide-image {
+				height: 28rem;
+				clip-path: circle();
+				flex: initial;
+			}
+		}
+
+		&__landscape {
+			aspect-ratio: 16/9;
+			max-width: 64rem;
+
+			.c-block-overview-with-carousel__slide-description {
+				display: inline-flex;
+				max-width: 87.5%;
+				align-items: flex-start;
+				position: absolute;
+			}
+
+			.c-block-overview-with-carousel__slide-text {
+				font-size: 3.2rem;
+				font-style: normal;
+				font-weight: 800;
+				line-height: 4.0rem;
+			}
+		}
+
+		&-image {
+			width: 100%;
+			height: 100%;
+			overflow: hidden;
+
+			> img {
+				object-fit: cover;
+				object-position: center;
+				width: 100%;
+				height: 100%;
+				transition: transform 0.5s ease-out;
+			}
+		}
+
+		&-description {
+			flex: 1 1 auto;
+			min-height: 0;
+			display: flex;
+			align-items: end;
+			padding: 1.6rem 2.4rem;
+		}
+
+		&-text {
+			display: -webkit-box;
+			-webkit-box-orient: vertical;
+			-webkit-line-clamp: 2;
+			line-clamp: 2;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			width: 100%;
+
+			color: colors.$color-gray-1000;
+			font-family: "SofiaPro";
+			font-size: 1.8rem;
+			font-style: normal;
+			font-weight: 800;
+			line-height: 2.8rem;
+		}
+	}
+}

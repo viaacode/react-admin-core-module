@@ -18,9 +18,9 @@ import React, { useEffect, useState } from 'react';
 import { ToastType } from '~core/config/config.types';
 import { showToast } from '~shared/helpers/show-toast';
 import { tText } from '~shared/helpers/translation-functions';
-import { useGetNamesByProfileIds } from './hooks/useGetNamesByProfileIds';
 import type { PickerItem } from '../../types/content-picker';
 import { ContentPicker } from '../ContentPicker/ContentPicker';
+import { useGetNamesByProfileIds } from './hooks/useGetNamesByProfileIds';
 
 import './MultiUserSelectDropdown.scss';
 import { AvoCoreContentPickerType } from '@viaa/avo2-types';

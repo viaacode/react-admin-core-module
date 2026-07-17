@@ -1,2 +1,2 @@
-export * from './BlockMaintainersGrid.editorconfig';
 export * from './BlockMaintainersGrid';
+export * from './BlockMaintainersGrid.editorconfig';
