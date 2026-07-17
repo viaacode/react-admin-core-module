@@ -1,0 +1,46 @@
+@use "sass:math";
+@use "../../../../shared/styles/settings/variables" as variables;
+@use "../../../../shared/styles/settings/colors" as colors;
+
+.c-block-homepage-banner {
+	&__content {
+		width: 75%;
+		display: flex;
+		flex-direction: column;
+		gap: 3.2rem;
+
+		&--left,
+		&--center {
+			margin-right: auto;
+		}
+
+		&--right,
+		&--center {
+			margin-left: auto;
+		}
+
+		&-title {
+			color: colors.$color-gray-1000;
+
+			/* H4 */
+			font-family: "SofiaPro" !important;
+			font-size: 3.2rem  !important;
+			font-style: normal !important;
+			font-weight: 800 !important;
+			line-height: 4rem !important;
+			width: 100%;
+			white-space: wrap;
+		}
+
+		&-text {
+			color: colors.$neutral;
+
+			/* H4 */
+			font-family: "SofiaPro" !important;
+			font-size: 1.8rem !important;
+			font-style: normal !important;
+			font-weight: 500 !important;
+			line-height: 2.8rem !important;
+		}
+	}
+}
