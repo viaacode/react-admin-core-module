@@ -58,12 +58,19 @@ export class TranslationsService implements OnApplicationBootstrap {
 	}
 
 	public async getLanguages(): Promise<LanguageInfo[]> {
-		const response = await this.dataService.execute<GetAllLanguagesQuery>(GetAllLanguagesDocument);
-		return response.lookup_languages.map(
-			(language): LanguageInfo => ({
-				languageCode: language.value,
-				languageLabel: language.comment,
-			})
+		return this.cacheManager.wrap(
+			'LANGUAGES',
+			async () => {
+				const response =
+					await this.dataService.execute<GetAllLanguagesQuery>(GetAllLanguagesDocument);
+				return response.lookup_languages.map(
+					(language): LanguageInfo => ({
+						languageCode: language.value,
+						languageLabel: language.comment,
+					})
+				);
+			},
+			86_400_000 // 24 hours
 		);
 	}
 
