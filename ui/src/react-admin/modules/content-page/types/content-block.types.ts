@@ -127,9 +127,21 @@ export interface PaddingFieldState {
 
 // CONTENT BLOCK CONFIG
 
-// if 1 block, errors is a string[]. If multiple, it is a string[] index by their stateIndex, so string[][].
-export type ContentBlockErrors = { [key: string]: (string | string[])[] };
+// Errors for a repeated field group (mechanism B, e.g. `elements`): one entry per
+// element index, each mapping an inner field key to its error messages.
+export type ContentBlockFieldGroupErrors = Record<string, string[]>[];
 
+// if 1 block, errors is a string[]. If multiple, it is a string[] index by their stateIndex, so string[][].
+// For a repeated field group the value is a ContentBlockFieldGroupErrors instead.
+export type ContentBlockErrors = {
+	[key: string]: (string | string[])[] | ContentBlockFieldGroupErrors;
+};
+
+/**
+ * @deprecated Legacy: bounds the array-valued `components.state` repetition mechanism (A).
+ * For new blocks use the `fieldGroup` + `repeat` mechanism (B) and put `min`/`max` on the
+ * `ContentBlockFieldGroup` instead. See `components/blocks/README.md`.
+ */
 export interface ContentBlockComponentsLimits {
 	min?: number;
 	max?: number;

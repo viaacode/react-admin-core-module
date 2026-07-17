@@ -63,6 +63,7 @@ export const FieldGenerator: FunctionComponent<FieldGeneratorProps> = ({
 					</FlexItem>
 				</Flex>
 				<FieldGroup
+					config={config}
 					globalState={currentState}
 					globalStateIndex={stateIndex || 0}
 					fieldKey={fieldKey}

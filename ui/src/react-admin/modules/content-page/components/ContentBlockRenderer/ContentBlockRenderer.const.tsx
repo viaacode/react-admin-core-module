@@ -96,6 +96,12 @@ export function GET_BLOCK_COMPONENT(
 	return blocks[type];
 }
 
+/**
+ * @deprecated Legacy allowlist for the array-valued `components.state` repetition
+ * mechanism (A). Do NOT add new block types here. For new blocks use the `fieldGroup` +
+ * `repeat` mechanism (B), which is config-driven and needs no allowlist.
+ * See `components/blocks/README.md`.
+ */
 export const REPEATABLE_CONTENT_BLOCKS = [
 	ContentBlockType.AnchorLinks,
 	ContentBlockType.Buttons,
