@@ -47,6 +47,7 @@ export interface LinkInfo {
 	className?: string;
 	to?: string;
 	onClick?: (evt: MouseEvent) => void;
+	onKeyUp?: (evt: KeyboardEvent) => void;
 	title?: string;
 	children: ReactNode;
 	target?: LinkTarget;
