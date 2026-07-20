@@ -175,6 +175,7 @@ export enum ContentBlockType {
 	AvoImageTextBackground = 'AVO_IMAGE_TEXT_BACKGROUND', // Avo
 	ScrollDownNudge = 'SCROLL_DOWN_NUDGE',
 	OverviewWithCarousel = 'OVERVIEW_WITH_CAROUSEL',
+	HetArchiefVideo = 'HETARCHIEF_VIDEO',
 }
 
 export enum ContentBlockEditor {
@@ -359,6 +360,21 @@ export interface MediaPlayerBlockComponentState {
 	autoplay: boolean;
 }
 
+export interface HetArchiefVideoBlockComponentState {
+	title: string;
+	item?: ButtonAction;
+	poster?: string;
+	showCopyright?: boolean;
+	annotationTitle?: string;
+	annotationText?: string;
+	width?: string;
+	autoplay: boolean;
+	/** Start time of the fragment to play, in seconds */
+	startTime?: string;
+	/** End time of the fragment to play, in seconds */
+	endTime?: string;
+}
+
 export interface MediaPlayerTitleTextButtonBlockComponentState {
 	align: AlignOption;
 	buttonAction?: ButtonAction;
@@ -443,6 +459,7 @@ export type SingleContentBlockComponentState =
 	| KlaarBlockComponentState
 	| MediaPlayerBlockComponentState
 	| MediaPlayerTitleTextButtonBlockComponentState
+	| HetArchiefVideoBlockComponentState
 	| PageOverviewBlockComponentStateFields
 	| QuoteBlockComponentState
 	| RichTextBlockComponentState

@@ -10,6 +10,7 @@ import { BlockEventbrite } from '~content-blocks/BlockEventbrite';
 import { BlockHeading } from '~content-blocks/BlockHeading';
 import { BlockHetArchiefHeaderSearch } from '~content-blocks/BlockHetArchiefHeaderSearch/BlockHetArchiefHeaderSearch';
 import { BlockHetArchiefImageTextBackground } from '~content-blocks/BlockHetArchiefImageTextBackground';
+import { BlockHetArchiefVideoWrapper } from '~content-blocks/BlockHetArchiefVideo';
 import { BlockIFrame } from '~content-blocks/BlockIFrame';
 import { BlockImage } from '~content-blocks/BlockImage';
 import {
@@ -77,6 +78,7 @@ export function GET_BLOCK_COMPONENT(
 		[ContentBlockType.CardsWithoutDescription]: BlockCardsWithoutDescription,
 		[ContentBlockType.MaintainersGrid]: BlockMaintainersGrid,
 		[ContentBlockType.ScrollDownNudge]: BlockScrollDownNudge,
+		[ContentBlockType.HetArchiefVideo]: BlockHetArchiefVideoWrapper,
 
 		// Het archief specific blocks
 		[ContentBlockType.HetArchiefHeaderSearch]: BlockHetArchiefHeaderSearch,
@@ -147,6 +149,7 @@ export const USER_CONTENT_BLOCKS = [
 	ContentBlockType.PageOverview,
 	ContentBlockType.MediaGrid,
 	ContentBlockType.ProjectsSpotlight,
+	ContentBlockType.HetArchiefVideo,
 ];
 
 /**
