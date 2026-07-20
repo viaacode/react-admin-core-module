@@ -5,7 +5,7 @@ import { CustomError } from '~shared/helpers/custom-error';
 import { fetchWithLogout, fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
 import { getProxyUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config';
 import type { PickerItem } from '~shared/types/content-picker';
-import { type ObjectsGridItem, ObjectsGridItemType } from './BlockObjectsGrid.types';
+import { type ObjectsGridItem, ObjectsGridItemType, OrderProperty } from './BlockObjectsGrid.types';
 
 /**
  * How many query-result objects to request. The grid shows 4 rows and the number of columns
@@ -60,6 +60,8 @@ const mapRawToGridItem = (raw: RawIeObject): ObjectsGridItem => ({
  * own filter logic, which the admin-core cannot import — the client depends on the admin-core,
  * not the other way around), and is passed in through the admin-core config as
  * `services.search.searchUrlToApiUrl`.
+ *
+ * Notice: this doesn't work inside the demo app, since the client doesn't pass us the conversion url function
  */
 export const parseSearchQueryToSearchBody = (
 	searchQuery: string,
@@ -121,11 +123,13 @@ export const getObjectsGridItems = async (
 	limit = DEFAULT_OBJECTS_GRID_LIMIT
 ): Promise<ObjectsGridData> => {
 	try {
+		const apiSearchQueryParams = parseSearchQueryToSearchBody(searchQuery, limit);
+		// Grid needs to show random items, except for the fixed items
+		apiSearchQueryParams.orderProp = OrderProperty.RANDOM;
+
 		const [fixedObjects, objects] = await Promise.all([
 			getFixedObjects(fixedItems),
-			searchQuery
-				? searchIeObjects(parseSearchQueryToSearchBody(searchQuery, limit))
-				: Promise.resolve([]),
+			searchQuery ? searchIeObjects(apiSearchQueryParams) : Promise.resolve([]),
 		]);
 
 		// Don't show the same object twice if it is both pinned and returned by the query.

@@ -5,14 +5,13 @@ import type {
 	AvoUserCommonUser,
 } from '@viaa/avo2-types';
 import type { ComponentType, FC, FunctionComponent, MouseEvent, ReactNode } from 'react';
-
+import type { OrderProperty } from '~content-blocks/BlockObjectsGrid/BlockObjectsGrid.types.ts';
 import type { ContentBlockType } from '~modules/content-page/types/content-block.types';
 import type {
 	ContentPageInfo,
 	ContentPageWidth,
 } from '~modules/content-page/types/content-pages.types';
 import type { App, Locale } from '~modules/translations/translations.core.types';
-
 import type { UserBulkAction } from '~modules/user/user.types';
 import type { FlowPlayerWrapperProps } from '~shared/components/FlowPlayerWrapper/FlowPlayerWrapper.types';
 
@@ -67,6 +66,9 @@ export interface IeObjectsSearchBody {
 	filters: SearchFilter[];
 	size: number;
 	page: number;
+	requestedAggs?: string[];
+	orderProp?: OrderProperty;
+	orderDirection?: 'asc' | 'desc';
 }
 
 export interface AdminConfig {
