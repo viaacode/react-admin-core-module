@@ -56,6 +56,19 @@ export interface LinkInfo {
 
 export type NavigateFunction = (to: string, options?: { replace?: boolean }) => Promise<void>;
 
+export interface SearchFilter {
+	field: string;
+	operator: string;
+	value?: string;
+	multiValue?: string[];
+}
+
+export interface IeObjectsSearchBody {
+	filters: SearchFilter[];
+	size: number;
+	page: number;
+}
+
 export interface AdminConfig {
 	// Core module configurations
 	flowplayer: {
@@ -87,6 +100,13 @@ export interface AdminConfig {
 		};
 		queryCache: {
 			clear: (key: string) => Promise<void>;
+		};
+		// Converts a hetarchief search-page url (as stored on eg. the ObjectsGrid content-page
+		// block) into an ie-objects search API request body. Lives in the config so the client's
+		// own url-filter-mapping logic (used by its search page) can be reused here, without the
+		// admin-core needing to depend on the client package.
+		search?: {
+			searchUrlToApiUrl: (searchQuery: string, size: number) => IeObjectsSearchBody;
 		};
 	};
 	components: {
