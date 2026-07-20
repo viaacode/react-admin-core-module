@@ -192,6 +192,14 @@ export const GET_CONTENT_BLOCK_TYPE_OPTIONS: () => SelectOption<string>[] = () =
 			),
 			value: ContentBlockType.Timeline,
 		},
+		{
+			label: tText(
+				'react-admin/modules/content-page/const/get-content-block-type-options___tijdslijn',
+				{},
+				[HET_ARCHIEF]
+			),
+			value: ContentBlockType.Timeline,
+		},
 	];
 
 	// Only show the content blocks that the client enabled through the config object
