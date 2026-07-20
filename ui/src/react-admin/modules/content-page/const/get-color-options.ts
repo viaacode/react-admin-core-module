@@ -130,6 +130,21 @@ export const GET_BACKGROUND_COLOR_OPTIONS_AVO: () => SelectOption<Color>[] = () 
 	yellowOption(),
 ];
 
+export const GET_SECONDARY_BACKGROUND_COLOR_OPTIONS_ARCHIEF: () => SelectOption<
+	Color | GradientColor | CustomBackground
+>[] = () => [
+	oldPinkOption(),
+	lavenderOption(),
+	lilaOption(),
+	blossomPinkOption(),
+	coralOption(),
+	lightBlueOption(),
+	sageOption(),
+	pistachioOption(),
+	sandBeigeOption(),
+	mustardOption(),
+];
+
 export const GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF: () => SelectOption<
 	Color | GradientColor | CustomBackground
 >[] = () => [
@@ -142,16 +157,7 @@ export const GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF: () => SelectOption<
 	skyBlueOption(),
 	meemooLogoOption(),
 	blackWhiteGradientOption(),
-	oldPinkOption(),
-	lavenderOption(),
-	lilaOption(),
-	blossomPinkOption(),
-	coralOption(),
-	lightBlueOption(),
-	sageOption(),
-	pistachioOption(),
-	sandBeigeOption(),
-	mustardOption(),
+	...GET_SECONDARY_BACKGROUND_COLOR_OPTIONS_ARCHIEF(),
 ];
 
 export const GET_AVO_HERO_BACKGROUND_COLOR_OPTIONS: () => SelectOption<Color>[] = () => [

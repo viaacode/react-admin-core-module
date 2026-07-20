@@ -2,6 +2,9 @@
 @use "../../../../shared/styles/settings/colors" as colors;
 
 .c-block-overview-themes {
+	// The group band breaks out to a fixed 5000px width for full-bleed coverage; it must stay
+	// visible here so it isn't clipped by this element's own bounds.
+	overflow-x: visible;
 	font-family: SofiaPro, sans-serif;
 	font-size: 3.2rem;
 	font-style: normal;
@@ -9,6 +12,7 @@
 	line-height: 4rem;
 
 	&__group {
+		position: relative;
 		padding: 3.2rem 2.4rem;
 
 		@media (min-width: variables.$g-bp3) {
@@ -16,7 +20,22 @@
 		}
 	}
 
+	// Full-bleed colored band behind the title + first grid row. Its height is measured from
+	// the real rendered layout (see BlockOverviewThemes.tsx) since a "tall" tile can span from
+	// row 1 into row 2. The 5000px width is just a generous fixed size to guarantee it always
+	// covers the viewport, breaking out of any max-width content container.
+	&__group-band {
+		position: absolute;
+		top: 0;
+		left: -2500px;
+		z-index: 0;
+		width: 5000px;
+	}
+
 	&__group-title {
+		position: relative;
+		z-index: 1;
+
 		// Reset so the heading level (h1-h4, chosen for semantics only) never affects the visual style.
 		margin: 0 0 2.4rem;
 		color: colors.$color-gray-1000;
@@ -28,6 +47,8 @@
 	}
 
 	&__grid {
+		position: relative;
+		z-index: 1;
 		display: grid;
 		grid-template-columns: 1fr;
 
