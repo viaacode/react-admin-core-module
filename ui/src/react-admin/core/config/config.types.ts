@@ -108,7 +108,7 @@ export interface AdminConfig {
 			// block) into an ie-objects search API request body. Lives in the config so the client's
 			// own url-filter-mapping logic (used by its search page) can be reused here, without the
 			// admin-core needing to depend on the client package.
-			clientSearchUrlToApiSearchUrl: (searchQuery: string, size: number) => IeObjectsSearchBody;
+			clientSearchUrlToApiSearchUrl: (searchQuery: string) => IeObjectsSearchBody;
 		};
 	};
 	components: {
