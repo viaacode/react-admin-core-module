@@ -63,16 +63,13 @@ const mapRawToGridItem = (raw: RawIeObject): ObjectsGridItem => ({
  *
  * Notice: this doesn't work inside the demo app, since the client doesn't pass us the conversion url function
  */
-export const parseSearchQueryToSearchBody = (
-	searchQuery: string,
-	size: number
-): IeObjectsSearchBody => {
+export const parseSearchQueryToSearchBody = (searchQuery: string): IeObjectsSearchBody => {
 	const clientSearchUrlToApiSearchUrl =
 		AdminConfigManager.getConfig().services.search?.clientSearchUrlToApiSearchUrl;
 	if (!clientSearchUrlToApiSearchUrl) {
-		return { filters: [], size, page: 1 };
+		return { filters: [], size: 20, page: 1 };
 	}
-	return clientSearchUrlToApiSearchUrl(searchQuery, size);
+	return clientSearchUrlToApiSearchUrl(searchQuery);
 };
 
 const searchIeObjects = async (body: IeObjectsSearchBody): Promise<ObjectsGridItem[]> => {
@@ -123,9 +120,10 @@ export const getObjectsGridItems = async (
 	limit = DEFAULT_OBJECTS_GRID_LIMIT
 ): Promise<ObjectsGridData> => {
 	try {
-		const apiSearchQueryParams = parseSearchQueryToSearchBody(searchQuery, limit);
+		const apiSearchQueryParams = parseSearchQueryToSearchBody(searchQuery);
 		// Grid needs to show random items, except for the fixed items
 		apiSearchQueryParams.orderProp = OrderProperty.RANDOM;
+		apiSearchQueryParams.size = limit;
 
 		const [fixedObjects, objects] = await Promise.all([
 			getFixedObjects(fixedItems),

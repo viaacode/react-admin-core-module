@@ -18,6 +18,10 @@ import { useGetObjectsGridItems } from './hooks/useGetObjectsGridItems';
 // the prefix if the client application uses a different detail route for objects.
 const OBJECT_DETAIL_PATH_PREFIX = '/pid';
 
+// 4 rows of 4 items per row when there are no fixed items present
+// https://meemoo.atlassian.net/wiki/spaces/HA2/pages/6217171023/FA+Objecten+grid#Gedrag-van-het-contentblok
+const OBJECT_GRID_MAX_ITEMS = 16;
+
 const getObjectDetailPath = (schemaIdentifier: string): string =>
 	`${OBJECT_DETAIL_PATH_PREFIX}/${encodeURIComponent(schemaIdentifier)}`;
 
@@ -52,7 +56,12 @@ export const BlockObjectsGrid: FunctionComponent<BlockObjectsGridProps> = ({
 	backgroundColor,
 }): ReactElement => {
 	const fixedItems = elements.map((element) => element.mediaItem).filter((item) => item?.value);
-	const { data, isLoading, isError } = useGetObjectsGridItems(searchQuery, fixedItems);
+	// Items to fetch is: max - 2 * fixed items, because fixed items are double width
+	const { data, isLoading, isError } = useGetObjectsGridItems(
+		searchQuery,
+		fixedItems,
+		OBJECT_GRID_MAX_ITEMS - fixedItems.length * 2
+	);
 
 	const renderTile = (item: ObjectsGridItem, isFixed: boolean): ReactElement => {
 		const iconName = item.type ? TYPE_ICON_NAME[item.type] : undefined;
