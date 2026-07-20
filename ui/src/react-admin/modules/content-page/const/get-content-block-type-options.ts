@@ -184,6 +184,14 @@ export const GET_CONTENT_BLOCK_TYPE_OPTIONS: () => SelectOption<string>[] = () =
 			),
 			value: ContentBlockType.OverviewWithCarousel,
 		},
+		{
+			label: tText(
+				"modules/content-page/const/get-content-block-type-options___overzicht-themas",
+				{},
+				[HET_ARCHIEF]
+			),
+			value: ContentBlockType.OverviewThemes,
+		},
 	];
 
 	// Only show the content blocks that the client enabled through the config object
