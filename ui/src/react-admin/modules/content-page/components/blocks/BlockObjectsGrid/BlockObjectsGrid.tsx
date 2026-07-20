@@ -21,6 +21,18 @@ const OBJECT_DETAIL_PATH_PREFIX = '/pid';
 const getObjectDetailPath = (schemaIdentifier: string): string =>
 	`${OBJECT_DETAIL_PATH_PREFIX}/${encodeURIComponent(schemaIdentifier)}`;
 
+// The searchQuery is a full url pointing to the search page on hetarchief.be, but since this
+// admin-core module is embedded on that same site, we want a relative link instead of an
+// absolute one pointing to a specific domain (eg qas./int./prod.hetarchief.be).
+const stripDomain = (url: string): string => {
+	try {
+		const parsed = new URL(url);
+		return `${parsed.pathname}${parsed.search}${parsed.hash}`;
+	} catch {
+		return url;
+	}
+};
+
 type IconNameType = ComponentProps<typeof Icon>['name'];
 
 // Object type → icon name (icons are registered in the admin-core icon config). Types without a
@@ -164,7 +176,7 @@ export const BlockObjectsGrid: FunctionComponent<BlockObjectsGridProps> = ({
 					<SmartLink
 						action={{
 							type: AvoCoreContentPickerType.EXTERNAL_LINK,
-							value: searchQuery,
+							value: stripDomain(searchQuery),
 						}}
 						removeStyles={false}
 						className="c-block-objects-grid__cta"
