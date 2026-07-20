@@ -175,6 +175,7 @@ export enum ContentBlockType {
 	AvoImageTextBackground = 'AVO_IMAGE_TEXT_BACKGROUND', // Avo
 	ScrollDownNudge = 'SCROLL_DOWN_NUDGE',
 	OverviewWithCarousel = 'OVERVIEW_WITH_CAROUSEL',
+	Timeline = 'TIMELINE',
 }
 
 export enum ContentBlockEditor {
@@ -432,7 +433,8 @@ export type RepeatedContentBlockComponentState =
 	| MediaGridBlockComponentState
 	| ImageInfo // project spotlight & spotlight
 	| RichTextBlockComponentState
-	| ThreeClickableTilesBlockComponentState;
+	| ThreeClickableTilesBlockComponentState
+	| TimelineNodeBlockComponentState;
 
 export type SingleContentBlockComponentState =
 	| HeadingBlockComponentState
@@ -582,4 +584,26 @@ export interface HetArchiefHeaderSearchBlockComponentState {
 export interface HetArchiefIeObject {
 	name: string;
 	schemaIdentifier: string;
+}
+
+export type TimelineSortOrder = 'date__asc' | 'date__desc';
+
+export type TimelineNodeVisualType = 'NONE' | 'OBJECT' | 'IMAGE';
+
+export interface TimelineNodeBlockComponentState {
+	date: string;
+	title: string;
+	text?: string;
+	visualType: TimelineNodeVisualType;
+	mediaItem?: ButtonAction; // Content picker value pointing to an IE_OBJECT (pid/fragmentId)
+	image?: string;
+	imageAlt?: string;
+	imageCaptionCopyright?: string;
+	imageCaptionCopyrightIconVisible?: boolean;
+	imageCaptionDescription?: string;
+	backgroundColor?: Color;
+}
+
+export interface TimelineBlockState extends DefaultContentBlockState {
+	sortOrder: TimelineSortOrder;
 }

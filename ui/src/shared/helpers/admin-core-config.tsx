@@ -97,6 +97,7 @@ export function getAdminCoreConfigForLocalTestApp(navigateFunc: NavigateFunction
 				// ContentBlockType.ContentEncloseGrid,
 				// ContentBlockType.Breadcrumbs,
 				ContentBlockType.OverviewWithCarousel,
+				ContentBlockType.Timeline,
 			],
 			defaultPageWidth: ContentPageWidth.LARGE,
 			onSaveContentPage: async (contentPageInfo: ContentPageInfo) => {

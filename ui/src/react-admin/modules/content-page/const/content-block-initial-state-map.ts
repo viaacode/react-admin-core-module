@@ -38,6 +38,7 @@ import {
 } from '~content-blocks/BlockSpotlight';
 import { INITIAL_TAGS_WITH_LINK_COMPONENTS_STATE } from '~content-blocks/BlockTagsWithLink';
 import { INITIAL_THREE_CLICKABLE_TILES_COMPONENTS_STATE } from '~content-blocks/BlockThreeClickableTiles';
+import { INITIAL_TIMELINE_COMPONENTS_STATE } from '~content-blocks/BlockTimeline';
 import { INITIAL_UITGEKLAARD_BLOCK_STATE } from '~content-blocks/BlockUitgeklaard';
 import { INITIAL_MEDIA_PLAYER_COMPONENTS_STATE } from '~content-blocks/BlockVideo';
 import { INITIAL_MEDIA_PLAYER_TITLE_TEXT_BUTTON_COMPONENTS_STATE } from '~content-blocks/BlockVideoTitleTextButton';
@@ -90,4 +91,5 @@ export const CONTENT_BLOCK_INITIAL_STATE_MAP: {
 	[ContentBlockType.Breadcrumbs]: INITIAL_BREADCRUMBS_BLOCK_STATE,
 	[ContentBlockType.ScrollDownNudge]: INITIAL_SCROLL_DOWN_NUDGE_BLOCK_STATE,
 	[ContentBlockType.OverviewWithCarousel]: INITIAL_CONTENT_OVERVIEW_WITH_CAROUSEL_BLOCK_STATE,
+	[ContentBlockType.Timeline]: INITIAL_TIMELINE_COMPONENTS_STATE,
 };

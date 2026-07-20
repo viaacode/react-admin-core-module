@@ -37,6 +37,7 @@ import {
 } from '~content-blocks/BlockSpotlight';
 import { TAGS_WITH_LINK_BLOCK_CONFIG } from '~content-blocks/BlockTagsWithLink';
 import { THREE_CLICKABLE_TILES_BLOCK_CONFIG } from '~content-blocks/BlockThreeClickableTiles';
+import { TIMELINE_BLOCK_CONFIG } from '~content-blocks/BlockTimeline';
 import { UITGEKLAARD_BLOCK_CONFIG } from '~content-blocks/BlockUitgeklaard';
 import { MEDIA_PLAYER_BLOCK_CONFIG } from '~content-blocks/BlockVideo';
 import { MEDIA_PLAYER_TITLE_TEXT_BUTTON_BLOCK_CONFIG } from '~content-blocks/BlockVideoTitleTextButton';
@@ -87,4 +88,5 @@ export const CONTENT_BLOCK_CONFIG_MAP: Record<
 	[ContentBlockType.Breadcrumbs]: CONTENT_BREADCRUMBS_CONFIG,
 	[ContentBlockType.ScrollDownNudge]: CONTENT_SCROLL_DOWN_NUDGE_CONFIG,
 	[ContentBlockType.OverviewWithCarousel]: CONTENT_OVERVIEW_WITH_CAROUSEL_CONFIG,
+	[ContentBlockType.Timeline]: TIMELINE_BLOCK_CONFIG,
 };

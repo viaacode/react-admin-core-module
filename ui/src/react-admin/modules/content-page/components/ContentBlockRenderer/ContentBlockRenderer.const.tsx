@@ -30,6 +30,7 @@ import { BlockScrollDownNudge } from '~content-blocks/BlockScrollDownNudge';
 import { BlockProjectSpotlightWrapper, BlockSpotlight } from '~content-blocks/BlockSpotlight';
 import { BlockTagsWithLink } from '~content-blocks/BlockTagsWithLink';
 import { BlockThreeClickableTiles } from '~content-blocks/BlockThreeClickableTiles';
+import { BlockTimeline } from '~content-blocks/BlockTimeline';
 import { BlockUitgeklaard } from '~content-blocks/BlockUitgeklaard';
 import { BlockVideoWrapper } from '~content-blocks/BlockVideo';
 import { BlockVideoTitleTextButtonWrapper } from '~content-blocks/BlockVideoTitleTextButton';
@@ -87,6 +88,7 @@ export function GET_BLOCK_COMPONENT(
 		[ContentBlockType.Breadcrumbs]: BlockBreadcrumbs,
 		[ContentBlockType.HetArchiefImageTextBackground]: BlockHetArchiefImageTextBackground,
 		[ContentBlockType.OverviewWithCarousel]: BlockOverviewWithCarousel,
+		[ContentBlockType.Timeline]: BlockTimeline,
 
 		// Avo specific blocks
 		[ContentBlockType.MediaGrid]: loadComponentFromConfig(ContentBlockType.MediaGrid),
@@ -111,6 +113,7 @@ export const REPEATABLE_CONTENT_BLOCKS = [
 	ContentBlockType.ThreeClickableTiles,
 	ContentBlockType.TagsWithLink,
 	ContentBlockType.CardsWithoutDescription,
+	ContentBlockType.Timeline,
 	// ContentBlockType.ContentEncloseGrid,
 ];
 
