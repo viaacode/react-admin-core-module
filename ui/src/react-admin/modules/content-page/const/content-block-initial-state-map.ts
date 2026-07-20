@@ -24,6 +24,7 @@ import { INITIAL_KLAAR_COMPONENTS_STATE } from '~content-blocks/BlockKlaar';
 import { INITIAL_MAINTAINERS_GRID_BLOCK_STATE } from '~content-blocks/BlockMaintainersGrid';
 import { INITIAL_MEDIA_GRID_COMPONENTS_STATE } from '~content-blocks/BlockMediaGrid';
 import { INITIAL_OVERVIEW_NEWSPAPER_TITLES_BLOCK_STATE } from '~content-blocks/BlockOverviewNewspaperTitles';
+import { INITIAL_OBJECTS_GRID_BLOCK_STATE } from '~content-blocks/BlockObjectsGrid';
 import { INITIAL_CONTENT_OVERVIEW_WITH_CAROUSEL_BLOCK_STATE } from '~content-blocks/BlockOverviewWithCarousel/BlockOverviewWithCarousel.editorconfig.ts';
 import { INITIAL_PAGE_OVERVIEW_COMPONENTS_STATE } from '~content-blocks/BlockPageOverview';
 import { INITIAL_QUOTE_COMPONENTS_STATE } from '~content-blocks/BlockQuote';
@@ -90,4 +91,5 @@ export const CONTENT_BLOCK_INITIAL_STATE_MAP: {
 	[ContentBlockType.Breadcrumbs]: INITIAL_BREADCRUMBS_BLOCK_STATE,
 	[ContentBlockType.ScrollDownNudge]: INITIAL_SCROLL_DOWN_NUDGE_BLOCK_STATE,
 	[ContentBlockType.OverviewWithCarousel]: INITIAL_CONTENT_OVERVIEW_WITH_CAROUSEL_BLOCK_STATE,
+	[ContentBlockType.ObjectsGrid]: INITIAL_OBJECTS_GRID_BLOCK_STATE,
 };

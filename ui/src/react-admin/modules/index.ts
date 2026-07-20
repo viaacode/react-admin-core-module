@@ -116,6 +116,7 @@ export * from './content-page/components/blocks/BlockIntro/BlockIntro';
 export * from './content-page/components/blocks/BlockKlaar/BlockKlaar';
 export * from './content-page/components/blocks/BlockMaintainersGrid/BlockMaintainersGrid';
 export * from './content-page/components/blocks/BlockMediaGrid/BlockMediaGrid.editorconfig';
+export * from './content-page/components/blocks/BlockObjectsGrid/BlockObjectsGrid';
 export * from './content-page/components/blocks/BlockOverviewNewspaperTitles/BlockOverviewNewspaperTitles';
 export * from './content-page/components/blocks/BlockPageOverview/BlockPageOverview';
 export * from './content-page/components/blocks/BlockQuote/BlockQuote';

@@ -255,3 +255,5 @@ schema.graphql
 /.husky
 
 api/.claude/
+
+CLAUDE.md

@@ -1,0 +1,243 @@
+@use "../../../../shared/styles/settings/variables" as variables;
+@use "../../../../shared/styles/settings/colors" as colors;
+
+.c-block-objects-grid {
+	// Number of grid columns per breakpoint. The count is responsive (see FA) but capped at 4
+	// columns; a fixed landscape tile always spans 2 of these columns.
+	--c-objects-grid-columns: 2;
+
+	// All tiles share this height (standard tiles are 1 column wide, fixed tiles 2), so every
+	// tile lines up regardless of type.
+	--c-objects-grid-row-height: 22rem;
+
+	@media (min-width: variables.$g-bp2) {
+		--c-objects-grid-columns: 3;
+		--c-objects-grid-row-height: 28rem;
+	}
+
+	@media (min-width: variables.$g-bp3) {
+		--c-objects-grid-columns: 4;
+		--c-objects-grid-row-height: 32rem;
+	}
+
+	.c-block-objects-grid__title {
+		color: colors.$color-gray-1000;
+		font-family: SofiaPro, sans-serif;
+		font-size: 2.4rem;
+		font-weight: 800;
+		margin-bottom: 2.2rem;
+	}
+
+	.c-block-objects-grid__grid {
+		display: grid;
+		grid-template-columns: repeat(var(--c-objects-grid-columns), minmax(0, 1fr));
+		grid-auto-rows: var(--c-objects-grid-row-height);
+		gap: 1.6rem;
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+
+	.c-block-objects-grid__tile {
+		display: flex;
+		min-width: 0;
+
+		// Fixed positions are shown as a landscape tile that occupies 2 standard positions
+		// (2 columns), at the same height as every other tile.
+		&--fixed {
+			grid-column: span 2;
+		}
+	}
+
+	.c-block-objects-grid__tile-link {
+		display: flex;
+		flex-direction: column;
+		width: 100%;
+		height: 100%;
+		min-width: 0;
+		text-decoration: none;
+		color: inherit;
+
+		// Clear, high-contrast focus indicator for keyboard navigation (no keyboard traps).
+		&:focus-visible {
+			outline: 2px solid colors.$color-ocean-green;
+			outline-offset: 2px;
+		}
+	}
+
+	.c-block-objects-grid__tile-media {
+		position: relative;
+		width: 100%;
+		overflow: hidden;
+		background-color: colors.$color-gray-100;
+
+		// Fill the tile height above the title bar; the image is cropped with object-fit: cover,
+		// so a 1-column (portrait) and a 2-column (landscape) tile end up exactly the same height.
+		flex: 1 1 auto;
+		min-height: 0;
+
+		&--audio {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			background-color: colors.$color-gray-900;
+
+			// Fixed waveform look for audio, which has no thumbnail.
+			background-image: repeating-linear-gradient(
+				90deg,
+				colors.$color-gray-400 0,
+				colors.$color-gray-400 2px,
+				transparent 2px,
+				transparent 8px
+			);
+		}
+
+		.c-block-objects-grid__tile-image {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			object-position: center;
+			display: block;
+			transition: transform 0.5s ease-out;
+		}
+
+
+
+		&--newspaper {
+			.c-block-objects-grid__tile-image {
+				object-position: top;
+			}
+		}
+	}
+
+	// Only limit newspapers if the tile is double width for fixed ie objects
+	.c-block-objects-grid__tile--fixed {
+		// Newspaper scans are tall pages; crop from the top so the masthead stays visible
+		// instead of centering on the middle of the page.
+		.c-block-objects-grid__tile-media--newspaper {
+			.c-block-objects-grid__tile-image {
+				width: 60%;
+				height: 100%;
+				margin: 0 auto;
+				object-position: top;
+				display: block;
+				transition: transform 0.5s ease-out;
+			}
+		}
+	}
+
+	.c-block-objects-grid__tile-placeholder {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 100%;
+		height: 100%;
+		font-size: 4rem;
+		color: colors.$white;
+	}
+
+	// Desktop-only zoom-in on hover (see FA). Pointer devices only, never affects keyboard focus.
+	@media (hover: hover) {
+		.c-block-objects-grid__tile-link:hover .c-block-objects-grid__tile-image {
+			transform: scale(1.1);
+		}
+	}
+
+	.c-block-objects-grid__tile-titlebar {
+		display: flex;
+		align-items: flex-start;
+		gap: 0.8rem;
+		height: 9.6rem;
+		flex-shrink: 0;
+
+		// Black bar with white text/icons (see FA) — contrast ratio 21:1.
+		background-color: colors.$color-gray-1000;
+		color: colors.$white;
+		padding: 1.6rem;
+	}
+
+	.c-block-objects-grid__tile-titlebar-left {
+		display: flex;
+		flex-direction: column;
+		flex: 1 1 auto;
+		min-width: 0;
+	}
+
+	.c-block-objects-grid__tile-type-icon {
+		flex-shrink: 0;
+		width: 2.2rem;
+		height: 2.2rem;
+		font-size: 2.2rem;
+		line-height: 1;
+
+		@media (min-width: variables.$g-bp2) {
+			width: 2.4rem;
+			height: 2.4rem;
+			font-size: 2.4rem;
+		}
+	}
+
+	.c-block-objects-grid__tile-title {
+		font-family: SofiaPro, sans-serif;
+		font-size: 1.4rem;
+		font-weight: 800;
+		line-height: 2rem;
+		display: -webkit-box;
+		-webkit-line-clamp: 2;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
+
+		@media (min-width: variables.$g-bp2) {
+			font-size: 1.6rem;
+		}
+	}
+
+	.c-block-objects-grid__tile-maintainer {
+		font-size: 1.4rem;
+		font-weight: 400;
+		line-height: 2rem;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+
+		@media (min-width: variables.$g-bp2) {
+			font-size: 1.6rem;
+		}
+	}
+
+	.c-block-objects-grid__footer {
+		display: flex;
+		justify-content: center;
+		margin-top: 2.4rem;
+	}
+
+	.c-block-objects-grid__cta {
+		display: inline-flex;
+		align-items: center;
+		padding: 1.2rem 2.4rem;
+		border-radius: 0.4rem;
+		background-color: colors.$color-gray-1000;
+		color: colors.$white;
+		font-family: SofiaPro, sans-serif;
+		font-weight: 700;
+		text-decoration: none;
+
+		&:focus-visible {
+			outline: 2px solid colors.$color-ocean-green;
+			outline-offset: 2px;
+		}
+	}
+
+	// Visually hidden but available to screen readers (for the aria-live status messages).
+	.c-block-objects-grid__sr-only {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		padding: 0;
+		margin: -1px;
+		overflow: hidden;
+		clip-path: inset(50%);
+		white-space: nowrap;
+		border: 0;
+	}
+}

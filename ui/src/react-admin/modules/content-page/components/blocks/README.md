@@ -113,10 +113,61 @@ that already rely on it — **do not extend it**: don't add new block types to
 `ADD_/REMOVE_COMPONENTS_STATE` actions in new work. (They're marked `@deprecated`
 for this reason.)
 
-We deliberately have **not** migrated the legacy blocks to B: their state is
-already persisted in the DB as bare arrays, so a switch would require a data
-migration of all saved content pages plus prop changes in every affected preview
-component.
+We are migrating the legacy blocks to B **lazily**, one block at a time (see
+below) — so new work should always target B.
+
+---
+
+## Migrating a block from A → B
+
+No big-bang DB migration is needed. Stored data is upgraded **in memory on load**
+and re-persisted as B on the next **save**, block by block.
+
+### The lazy data migration (already in place)
+
+[`../../services/content-page.converters.ts`](../../services/content-page.converters.ts)
+is the single load/save choke-point (used by the editor *and* the public page
+render). On load, `convertDbContentBlockToContentBlockConfig` wraps a legacy
+array under `elements` — but only for blocks whose editorconfig has already been
+switched to B:
+
+```ts
+const configExpectsArray = Array.isArray(cleanConfig.components.state);
+const componentState = Array.isArray(rawComponentState)
+  ? configExpectsArray
+    ? rawComponentState // block still on A → untouched
+    : { ...cleanConfig.components.state, elements: rawComponentState } // legacy A data, config now B → migrate
+  : { ...cleanConfig.components.state, ...rawComponentState };
+```
+
+So a block becomes "migrated" the moment its editorconfig returns an object
+state. On save, `convertContentPageInfoToDbContentPage` writes `components.state`
+verbatim, persisting the B shape. Pages that are never re-opened keep working via
+the load-time wrap.
+
+### Per-block recipe
+
+Standardize the fieldGroup key as **`elements`** — then preview components need no
+change (they already receive `props.elements`). For each block:
+
+1. **editorconfig** — change `state` from a bare array to
+   `{ elements: [ SINGLE_ELEMENT() ] }`, and wrap the existing `fields` into one
+   `elements` field with `type: 'fieldGroup'`, `repeat: { defaultState, addButtonLabel, deleteButtonLabel }`,
+   and `min`/`max` carried over from the old `components.limits`. Drop
+   `components.name` and `components.limits`.
+2. **Remove the type from `REPEATABLE_CONTENT_BLOCKS`**
+   ([`../ContentBlockRenderer/ContentBlockRenderer.const.tsx`](../ContentBlockRenderer/ContentBlockRenderer.const.tsx)).
+3. **Preview component** — no change (still reads `props.elements`).
+
+`BlockButtons` is the reference example of a migrated block. Validation of the
+nested `elements` group already works via `validateFieldGroup`. **`BlockRichText`
+is an anomaly** (object state while still in `REPEATABLE_CONTENT_BLOCKS`, and its
+preview tolerates both shapes) — migrate it individually.
+
+Mechanism-A code (the `REPEATABLE_CONTENT_BLOCKS` wrap, `ADD_/REMOVE_COMPONENTS_STATE`
+actions, the array branches, `ContentBlockComponentsLimits`, and the converter
+shim) can only be removed once **every** stored page has been re-saved as B —
+e.g. via a one-time batch re-save. Until then the shim stays.
 
 ---
 

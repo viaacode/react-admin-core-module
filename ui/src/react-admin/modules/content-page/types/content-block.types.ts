@@ -187,6 +187,7 @@ export enum ContentBlockType {
 	AvoImageTextBackground = 'AVO_IMAGE_TEXT_BACKGROUND', // Avo
 	ScrollDownNudge = 'SCROLL_DOWN_NUDGE',
 	OverviewWithCarousel = 'OVERVIEW_WITH_CAROUSEL',
+	ObjectsGrid = 'OBJECTS_GRID',
 }
 
 export enum ContentBlockEditor {

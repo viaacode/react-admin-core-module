@@ -5,14 +5,13 @@ import type {
 	AvoUserCommonUser,
 } from '@viaa/avo2-types';
 import type { ComponentType, FC, FunctionComponent, MouseEvent, ReactNode } from 'react';
-
+import type { OrderProperty } from '~content-blocks/BlockObjectsGrid/BlockObjectsGrid.types.ts';
 import type { ContentBlockType } from '~modules/content-page/types/content-block.types';
 import type {
 	ContentPageInfo,
 	ContentPageWidth,
 } from '~modules/content-page/types/content-pages.types';
 import type { App, Locale } from '~modules/translations/translations.core.types';
-
 import type { UserBulkAction } from '~modules/user/user.types';
 import type { FlowPlayerWrapperProps } from '~shared/components/FlowPlayerWrapper/FlowPlayerWrapper.types';
 
@@ -56,6 +55,22 @@ export interface LinkInfo {
 
 export type NavigateFunction = (to: string, options?: { replace?: boolean }) => Promise<void>;
 
+export interface SearchFilter {
+	field: string;
+	operator: string;
+	value?: string;
+	multiValue?: string[];
+}
+
+export interface IeObjectsSearchBody {
+	filters: SearchFilter[];
+	size: number;
+	page: number;
+	requestedAggs?: string[];
+	orderProp?: OrderProperty;
+	orderDirection?: 'asc' | 'desc';
+}
+
 export interface AdminConfig {
 	// Core module configurations
 	flowplayer: {
@@ -87,6 +102,13 @@ export interface AdminConfig {
 		};
 		queryCache: {
 			clear: (key: string) => Promise<void>;
+		};
+		search?: {
+			// Converts a hetarchief search-page url (as stored on eg. the ObjectsGrid content-page
+			// block) into an ie-objects search API request body. Lives in the config so the client's
+			// own url-filter-mapping logic (used by its search page) can be reused here, without the
+			// admin-core needing to depend on the client package.
+			clientSearchUrlToApiSearchUrl: (searchQuery: string) => IeObjectsSearchBody;
 		};
 	};
 	components: {
