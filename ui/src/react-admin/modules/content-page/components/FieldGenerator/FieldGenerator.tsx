@@ -142,6 +142,13 @@ export const FieldGenerator: FunctionComponent<FieldGeneratorProps> = ({
 				<>
 					{/* biome-ignore lint/suspicious/noExplicitAny: todo */}
 					{currentState.map((innerState: any, index: number) => {
+						const fieldId = `${fieldKey}-${index}`;
+						const defaultProps = {
+							...field.editorProps,
+							editorId: fieldId,
+							name: fieldId,
+						};
+
 						// biome-ignore lint/suspicious/noExplicitAny: todo
 						const editorProps: any = generateFieldAttributes(
 							field as ContentBlockField,
@@ -151,7 +158,7 @@ export const FieldGenerator: FunctionComponent<FieldGeneratorProps> = ({
 							},
 							// biome-ignore lint/suspicious/noExplicitAny: todo
 							innerState as any,
-							`${fieldKey}-${index}`,
+							fieldId,
 							fieldKey,
 							currentState
 						);
@@ -159,21 +166,27 @@ export const FieldGenerator: FunctionComponent<FieldGeneratorProps> = ({
 						return (
 							// biome-ignore lint/suspicious/noArrayIndexKey: We don't have a better key at this time
 							<Spacer margin="top" key={`${fieldKey}-${index}`}>
-								<Flex justify="between" center orientation="vertical">
-									<FlexItem>
-										<FormGroup label={`${field.label} ${index + 1}`}>
-											<Spacer margin="top-small">
-												<EditorComponent {...editorProps} />
-											</Spacer>
-											{renderNote(field)}
-										</FormGroup>
-									</FlexItem>
-									{currentState.length > 1 && (
-										<Spacer margin="left">
-											{renderDeleteButton(currentState, field?.repeat?.deleteButtonLabel, index)}
-										</Spacer>
+								{/*<Flex justify="between" center orientation="vertical">*/}
+								{/*	/!* `center` + `orientation="vertical"` renders as flex-direction: column with*/}
+								{/*	align-items: center, which centers this item at its content width instead of*/}
+								{/*	stretching it — force it to take the full row width regardless. *!/*/}
+								{/*	<FlexItem style={{ alignSelf: 'stretch', width: '100%' }}>*/}
+								<FormGroup label={`${field.label} ${index + 1}`}>
+									<Spacer margin="top-small">
+										<EditorComponent {...defaultProps} {...editorProps} />
+									</Spacer>
+									{renderNote(field)}
+								</FormGroup>
+								{/*</FlexItem>*/}
+								{currentState.length > 1 &&
+									renderDeleteButton(
+										currentState,
+										field?.repeat?.deleteButtonLabel,
+										index,
+										'u-align-right'
 									)}
-								</Flex>
+
+								{/*</Flex>*/}
 							</Spacer>
 						);
 					})}
@@ -249,7 +262,8 @@ export const FieldGenerator: FunctionComponent<FieldGeneratorProps> = ({
 		// biome-ignore lint/suspicious/noExplicitAny: todo
 		stateCopy: any,
 		label?: string,
-		index?: number
+		index?: number,
+		className?: string
 	) => {
 		// biome-ignore lint/suspicious/noExplicitAny: todo
 		const handleFieldDelete = (index: any) => {
@@ -268,6 +282,7 @@ export const FieldGenerator: FunctionComponent<FieldGeneratorProps> = ({
 				title={label}
 				ariaLabel={label}
 				type="danger"
+				className={className}
 			/>
 		);
 	};

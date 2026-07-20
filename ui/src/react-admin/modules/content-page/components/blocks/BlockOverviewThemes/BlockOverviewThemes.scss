@@ -1,0 +1,161 @@
+@use "../../../../shared/styles/settings/variables" as variables;
+@use "../../../../shared/styles/settings/colors" as colors;
+
+.c-block-overview-themes {
+	// The group band breaks out to a fixed 5000px width for full-bleed coverage; it must stay
+	// visible here so it isn't clipped by this element's own bounds.
+	overflow-x: visible;
+	font-family: SofiaPro, sans-serif;
+	font-size: 3.2rem;
+	font-style: normal;
+	font-weight: 800;
+	line-height: 4rem;
+
+	&__group {
+		position: relative;
+		padding: 3.2rem 2.4rem 0;
+
+		@media (min-width: variables.$g-bp3) {
+			padding: 4.8rem 4rem 0;
+		}
+	}
+
+	// Full-bleed colored band behind the title + first grid row. Its height is measured from
+	// the real rendered layout (see BlockOverviewThemes.tsx) since a "tall" tile can span from
+	// row 1 into row 2. The 5000px width is just a generous fixed size to guarantee it always
+	// covers the viewport, breaking out of any max-width content container.
+	&__group-band {
+		position: absolute;
+		top: 0;
+		left: -2500px;
+		z-index: 0;
+		width: 5000px;
+	}
+
+	&__group-shape{
+		width: 10cqw;
+		height: 10cqw;
+		background-color: colors.$white;
+		position: absolute;
+		top: 0;
+		right: 0;
+	}
+
+	&__group-title {
+		position: relative;
+		z-index: 1;
+
+		// Reset so the heading level (h1-h4, chosen for semantics only) never affects the visual style.
+		margin: 0 0 2.4rem;
+		color: colors.$color-gray-1000;
+
+		@media (min-width: variables.$g-bp3) {
+			font-size: 3.2rem;
+			margin-bottom: 3.2rem;
+		}
+	}
+
+	&__grid {
+		position: relative;
+		z-index: 1;
+		display: grid;
+		grid-template-columns: 1fr;
+
+		// The "snake" tile spans (see getThemeTileSpans.ts) only make sense in a 3-column grid;
+		// below this breakpoint every tile is forced back to a single stacked column.
+		@media (min-width: variables.$g-bp2) {
+			grid-template-columns: repeat(3, 1fr);
+			grid-auto-rows: 20rem;
+		}
+
+		@media (min-width: variables.$g-bp4) {
+			grid-auto-rows: 24rem;
+		}
+	}
+
+	&__tile {
+		position: relative;
+		display: block;
+		aspect-ratio: 4/3;
+		overflow: hidden;
+		text-decoration: none;
+
+		@media (min-width: variables.$g-bp2) {
+			// Size comes from the grid row/column spans below instead of a fixed aspect ratio.
+			aspect-ratio: auto;
+			grid-column: span 1;
+			grid-row: span 1;
+
+			&--tall {
+				grid-row: span 2;
+			}
+
+			&--wide {
+				grid-column: span 2;
+			}
+
+			&--full-width {
+				grid-column: span 3;
+			}
+		}
+
+		// Below the breakpoint the grid collapses to a single column: neutralise any computed
+		// span so every tile is still a simple, plainly-stacked full-width card.
+		@media (max-width: variables.$g-bp2 - 1) {
+			grid-column: span 1 !important;
+			grid-row: span 1 !important;
+		}
+
+		&:focus-visible {
+			outline: 2px solid colors.$color-ocean-green;
+			outline-offset: 2px;
+		}
+
+		&:hover &-image > img {
+			transform: scale(1.08);
+		}
+
+		&::after {
+			content: "";
+			position: absolute;
+			inset: 0;
+			background: linear-gradient(180deg, rgb(0 0 0 / 0%) 40%, rgb(0 0 0 / 72%) 100%);
+			pointer-events: none;
+		}
+	}
+
+	&__tile-image {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+
+		> img {
+			object-fit: cover;
+			object-position: center;
+			width: 100%;
+			height: 100%;
+			transition: transform 0.5s ease-out;
+		}
+	}
+
+	&__tile-title {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		z-index: 1;
+		padding: 3rem;
+		color: colors.$white;
+		font-family: SofiaPro, sans-serif;
+		font-size: 1.8rem;
+		font-style: normal;
+		font-weight: 800;
+		line-height: 2.4rem;
+		display: -webkit-box;
+		-webkit-box-orient: vertical;
+		-webkit-line-clamp: 2;
+		line-clamp: 2;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+}

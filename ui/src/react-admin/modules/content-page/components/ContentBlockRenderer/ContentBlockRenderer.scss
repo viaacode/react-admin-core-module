@@ -40,6 +40,10 @@
   }
 }
 
+.c-content-block-preview {
+	overflow-x: hidden;
+}
+
 .c-content-block-preview--dark {
   // Here you can overwrite styles on content-blocks for previews with a dark background
   .c-block-media-list {
