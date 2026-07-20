@@ -1,15 +1,10 @@
 import { stringifyUrl } from 'query-string';
+import { AdminConfigManager } from '~core/config/config.class';
+import type { IeObjectsSearchBody } from '~core/config/config.types';
 import { CustomError } from '~shared/helpers/custom-error';
 import { fetchWithLogout, fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
 import { getProxyUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config';
 import type { PickerItem } from '~shared/types/content-picker';
-import {
-	FILTER_LABEL_VALUE_DELIMITER,
-	IeObjectsSearchFilterField,
-	IeObjectsSearchOperator,
-	mapAdvancedFilterParamToElastic,
-	type SearchFilter,
-} from './BlockObjectsGrid.search-filters';
 import { type ObjectsGridItem, ObjectsGridItemType } from './BlockObjectsGrid.types';
 
 /**
@@ -18,12 +13,6 @@ import { type ObjectsGridItem, ObjectsGridItemType } from './BlockObjectsGrid.ty
  * what is actually rendered via CSS.
  */
 export const DEFAULT_OBJECTS_GRID_LIMIT = 24;
-
-interface IeObjectsSearchBody {
-	filters: SearchFilter[];
-	size: number;
-	page: number;
-}
 
 /**
  * Shape of a single item as returned by both `POST /ie-objects` (search, in `.items`) and
@@ -64,143 +53,23 @@ const mapRawToGridItem = (raw: RawIeObject): ObjectsGridItem => ({
 	thumbnailUrl: raw.thumbnailUrl,
 });
 
-const stripLabel = (value: string): string => value.split(FILTER_LABEL_VALUE_DELIMITER)[0];
-
 /**
  * Convert a raw hetarchief.be `/zoeken` search URL into the ie-objects search body.
  *
- * Mirrors the client-side `mapFiltersToElastic` (hetarchief-client visitor-space/utils/elastic-filters):
- * each search-page url param is translated to the matching API filter field/operator. The advanced
- * range params (`duration`, `releaseDate`, `advanced`) are decoded via the ported advanced-filter
- * logic in `BlockObjectsGrid.search-filters.ts`.
+ * The actual url-param-to-filter mapping logic lives client-side (it mirrors the search page's
+ * own filter logic, which the admin-core cannot import — the client depends on the admin-core,
+ * not the other way around), and is passed in through the admin-core config as
+ * `services.search.searchUrlToApiUrl`.
  */
 export const parseSearchQueryToSearchBody = (
 	searchQuery: string,
 	size: number
 ): IeObjectsSearchBody => {
-	const filters: SearchFilter[] = [];
-	// The API pagination is 1-based (default 1), same as the hetarchief search url.
-	let page = 1;
-
-	const add = (filter: SearchFilter) => {
-		if (filter.value || filter.multiValue?.length) {
-			filters.push(filter);
-		}
-	};
-
-	try {
-		const params = new URL(searchQuery).searchParams;
-		const single = (key: string) => params.get(key) || '';
-		const multi = (key: string) => params.getAll(key).filter(Boolean);
-
-		const pageParam = Number(params.get('page'));
-		if (Number.isFinite(pageParam) && pageParam > 0) {
-			page = pageParam;
-		}
-
-		// Free-text search terms (searchbar) → query / contains.
-		for (const term of multi('zoekterm')) {
-			add({
-				field: IeObjectsSearchFilterField.QUERY,
-				operator: IeObjectsSearchOperator.CONTAINS,
-				value: term,
-			});
-		}
-
-		// Media type tab → format / is ("all" means no filter).
-		const format = single('format');
-		if (format && format !== 'all') {
-			add({
-				field: IeObjectsSearchFilterField.FORMAT,
-				operator: IeObjectsSearchOperator.IS,
-				value: format,
-			});
-		}
-
-		add({
-			field: IeObjectsSearchFilterField.MEDIUM,
-			operator: IeObjectsSearchOperator.IS,
-			multiValue: multi('medium'),
-		});
-		add({
-			field: IeObjectsSearchFilterField.CREATOR,
-			operator: IeObjectsSearchOperator.CONTAINS,
-			value: single('creator'),
-		});
-		add({
-			field: IeObjectsSearchFilterField.NEWSPAPER_SERIES_NAME,
-			operator: IeObjectsSearchOperator.IS,
-			value: single('newspaperSeriesName'),
-		});
-		add({
-			field: IeObjectsSearchFilterField.LOCATION_CREATED,
-			operator: IeObjectsSearchOperator.IS,
-			value: single('locationCreated'),
-		});
-		add({
-			field: IeObjectsSearchFilterField.MENTIONS,
-			operator: IeObjectsSearchOperator.IS,
-			value: single('mentions'),
-		});
-		add({
-			field: IeObjectsSearchFilterField.GENRE,
-			operator: IeObjectsSearchOperator.IS,
-			multiValue: multi('genre'),
-		});
-		add({
-			field: IeObjectsSearchFilterField.KEYWORD,
-			operator: IeObjectsSearchOperator.IS,
-			multiValue: multi('keywords'),
-		});
-		add({
-			field: IeObjectsSearchFilterField.LANGUAGE,
-			operator: IeObjectsSearchOperator.IS,
-			multiValue: multi('language').map(stripLabel),
-		});
-		// `aanbieders` (maintainers) → maintainer / is, values encoded as `OR-id---label`.
-		add({
-			field: IeObjectsSearchFilterField.MAINTAINER_ID,
-			operator: IeObjectsSearchOperator.IS,
-			multiValue: multi('aanbieders').map(stripLabel),
-		});
-		add({
-			field: IeObjectsSearchFilterField.REUSABILITY,
-			operator: IeObjectsSearchOperator.IS,
-			multiValue: multi('herbruikbaarheid').map(stripLabel),
-		});
-		if (single('onLocation')) {
-			add({
-				field: IeObjectsSearchFilterField.CONSULTABLE_ONLY_ON_LOCATION,
-				operator: IeObjectsSearchOperator.IS,
-				value: 'true',
-			});
-		}
-		if (single('media')) {
-			add({
-				field: IeObjectsSearchFilterField.CONSULTABLE_MEDIA,
-				operator: IeObjectsSearchOperator.IS,
-				value: 'true',
-			});
-		}
-		if (single('publicDomain')) {
-			add({
-				field: IeObjectsSearchFilterField.CONSULTABLE_PUBLIC_DOMAIN,
-				operator: IeObjectsSearchOperator.IS,
-				value: 'true',
-			});
-		}
-
-		// Advanced range filters (duration / releaseDate / free-form advanced), acronym-encoded in the url.
-		for (const key of ['duration', 'releaseDate', 'advanced']) {
-			for (const filter of mapAdvancedFilterParamToElastic(params.get(key))) {
-				add(filter);
-			}
-		}
-	} catch {
-		// Invalid URL (already blocked by the editor validator) → return an empty search.
+	const searchUrlToApiUrl = AdminConfigManager.getConfig().services.search?.searchUrlToApiUrl;
+	if (!searchUrlToApiUrl) {
+		return { filters: [], size, page: 1 };
 	}
-
-	return { filters, size, page };
+	return searchUrlToApiUrl(searchQuery, size);
 };
 
 const searchIeObjects = async (body: IeObjectsSearchBody): Promise<ObjectsGridItem[]> => {
