@@ -7,10 +7,27 @@ import React, { useMemo } from 'react';
 import type { HeadingTypeOption } from '~modules/content-page/types/content-block.types';
 import { Link } from '~shared/components/Link/Link';
 import { ROUTE_PARTS } from '~shared/consts/routes';
+import type { Theme } from '~shared/services/themes-service/themes.types';
 import type { DefaultComponentProps } from '~shared/types/components';
 import type { PickerItem } from '~shared/types/content-picker';
 import './BlockOverviewThemes.scss';
+import { type ThemeTileSpan, getThemeTileSpans } from './getThemeTileSpans';
 import { useGetThemesByIds } from './hooks/useGetThemesByIds';
+
+// Only 4 combinations occur (see getThemeTileSpans): 1x1 needs no modifier, the rest map to a
+// fixed CSS class since `Link` (an app-provided router link) doesn't accept an inline `style`.
+const getTileSpanClassName = (span: ThemeTileSpan): string | undefined => {
+	if (span.colSpan === 1 && span.rowSpan === 2) {
+		return 'c-block-overview-themes__tile--tall';
+	}
+	if (span.colSpan === 2 && span.rowSpan === 1) {
+		return 'c-block-overview-themes__tile--wide';
+	}
+	if (span.colSpan === 3 && span.rowSpan === 1) {
+		return 'c-block-overview-themes__tile--full-width';
+	}
+	return undefined;
+};
 
 export interface BlockOverviewThemesGroup {
 	title: string;
@@ -52,34 +69,42 @@ export const BlockOverviewThemes: FunctionComponent<BlockOverviewThemesProps> = 
 							{ className: 'c-block-overview-themes__group-title' },
 							group.title
 						)}
-					<div className="c-block-overview-themes__grid">
-						{(group.themes || []).map((pickerItem, tileIndex) => {
-							const theme = themesById[pickerItem.value];
+					{(() => {
+						const resolvedThemes = (group.themes || [])
+							.map((pickerItem) => themesById[pickerItem.value])
+							.filter((theme): theme is Theme => !!theme);
+						const spans = getThemeTileSpans(resolvedThemes.length);
 
-							if (!theme) {
-								return null;
-							}
+						return (
+							<div className="c-block-overview-themes__grid">
+								{resolvedThemes.map((theme, tileIndex) => {
+									const span = spans[tileIndex];
 
-							return (
-								<Link
-									// biome-ignore lint/suspicious/noArrayIndexKey: themes can be picked more than once across groups
-									key={`c-block-overview-themes__tile-${groupIndex}-${tileIndex}`}
-									className="c-block-overview-themes__tile"
-									to={stringifyUrl({
-										url: `/${ROUTE_PARTS.search}`,
-										query: { theme: theme.slug },
-									})}
-								>
-									<Image
-										src={theme.imageUrl || ''}
-										alt={theme.nameNl}
-										className="c-block-overview-themes__tile-image"
-									/>
-									<span className="c-block-overview-themes__tile-title">{theme.nameNl}</span>
-								</Link>
-							);
-						})}
-					</div>
+									return (
+										<Link
+											// biome-ignore lint/suspicious/noArrayIndexKey: themes can be picked more than once across groups
+											key={`c-block-overview-themes__tile-${groupIndex}-${tileIndex}`}
+											className={clsx(
+												'c-block-overview-themes__tile',
+												getTileSpanClassName(span)
+											)}
+											to={stringifyUrl({
+												url: `/${ROUTE_PARTS.search}`,
+												query: { theme: theme.slug },
+											})}
+										>
+											<Image
+												src={theme.imageUrl || ''}
+												alt={theme.nameNl}
+												className="c-block-overview-themes__tile-image"
+											/>
+											<span className="c-block-overview-themes__tile-title">{theme.nameNl}</span>
+										</Link>
+									);
+								})}
+							</div>
+						);
+					})()}
 				</section>
 			))}
 		</div>
