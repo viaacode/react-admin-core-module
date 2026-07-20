@@ -1,6 +1,7 @@
 import { AvoCoreContentPickerType } from '@viaa/avo2-types';
 import clsx from 'clsx';
-import type { ComponentProps, FunctionComponent, ReactElement } from 'react';
+import type { ComponentProps, FunctionComponent, ReactElement, ReactNode } from 'react';
+import { useEffect, useState } from 'react';
 import { BlockHeading } from '~content-blocks/BlockHeading';
 import { SmartLink } from '~modules/shared/components/SmartLink/SmartLink';
 import { Icon } from '~shared/components/Icon';
@@ -22,20 +23,9 @@ const OBJECT_DETAIL_PATH_PREFIX = '/pid';
 // https://meemoo.atlassian.net/wiki/spaces/HA2/pages/6217171023/FA+Objecten+grid#Gedrag-van-het-contentblok
 const OBJECT_GRID_MAX_ITEMS = 16;
 
-const getObjectDetailPath = (schemaIdentifier: string): string =>
-	`${OBJECT_DETAIL_PATH_PREFIX}/${encodeURIComponent(schemaIdentifier)}`;
-
-// The searchQuery is a full url pointing to the search page on hetarchief.be, but since this
-// admin-core module is embedded on that same site, we want a relative link instead of an
-// absolute one pointing to a specific domain (eg qas./int./prod.hetarchief.be).
-const stripDomain = (url: string): string => {
-	try {
-		const parsed = new URL(url);
-		return `${parsed.pathname}${parsed.search}${parsed.hash}`;
-	} catch {
-		return url;
-	}
-};
+// Column-count breakpoints, mirrored from BlockObjectsGrid.scss ($g-bp2/$g-bp3).
+const BREAKPOINT_TABLET = 700;
+const BREAKPOINT_DESKTOP = 900;
 
 type IconNameType = ComponentProps<typeof Icon>['name'];
 
@@ -54,7 +44,7 @@ export const BlockObjectsGrid: FunctionComponent<BlockObjectsGridProps> = ({
 	searchQuery,
 	elements = [],
 	backgroundColor,
-}): ReactElement => {
+}): ReactNode => {
 	const fixedItems = elements.map((element) => element.mediaItem).filter((item) => item?.value);
 	// Items to fetch is: max - 2 * fixed items, because fixed items are double width
 	const { data, isLoading, isError } = useGetObjectsGridItems(
@@ -63,9 +53,92 @@ export const BlockObjectsGrid: FunctionComponent<BlockObjectsGridProps> = ({
 		OBJECT_GRID_MAX_ITEMS - fixedItems.length * 2
 	);
 
+	// Tracks viewport width so the tablet/mobile breakpoints can hide tiles that would
+	// otherwise leave the last row half-filled (desktop always fetches an exact 4 rows).
+	const [windowWidth, setWindowWidth] = useState<number>(() =>
+		typeof window === 'undefined' ? BREAKPOINT_DESKTOP : window.innerWidth
+	);
+
+	useEffect(() => {
+		const handleResize = (): void => setWindowWidth(window.innerWidth);
+		window.addEventListener('resize', handleResize);
+		return () => window.removeEventListener('resize', handleResize);
+	}, []);
+
+	// Number of grid columns and rows shown per breakpoint (see FA linked above).
+	const getColumnsForWidth = (width: number): number => {
+		if (width >= BREAKPOINT_DESKTOP) {
+			return 4;
+		}
+		if (width >= BREAKPOINT_TABLET) {
+			return 3;
+		}
+		return 2;
+	};
+	const MAX_ROWS_FOR_COLUMNS: Record<number, number> = {
+		4: 4, // desktop
+		3: 3, // tablet
+		2: 2, // mobile
+	};
+
+	type OrderedTile = { item: ObjectsGridItem; isFixed: boolean };
+
+	// Packs tiles into rows the same way the CSS grid renders them (auto-flow row, not dense):
+	// a fixed (2-column-wide) tile that doesn't fit the remaining space in a row wraps to the
+	// next row, leaving the remainder of the current row empty.
+	const packTilesIntoRows = (tiles: OrderedTile[], columns: number): OrderedTile[][] => {
+		const rows: OrderedTile[][] = [];
+		let currentRow: OrderedTile[] = [];
+		let usedColumns = 0;
+
+		tiles.forEach((tile) => {
+			const width = tile.isFixed ? 2 : 1;
+			if (usedColumns + width > columns) {
+				rows.push(currentRow);
+				currentRow = [];
+				usedColumns = 0;
+			}
+			currentRow.push(tile);
+			usedColumns += width;
+		});
+		if (currentRow.length > 0) {
+			rows.push(currentRow);
+		}
+		return rows;
+	};
+
+	// Limits the tiles to what fits in the max number of rows for this breakpoint, dropping
+	// tiles from an incomplete trailing row so the last visible row is always fully filled.
+	const getVisibleTiles = (tiles: OrderedTile[], columns: number): OrderedTile[] => {
+		const maxRows = MAX_ROWS_FOR_COLUMNS[columns] ?? tiles.length;
+		const visibleRows = packTilesIntoRows(tiles, columns).slice(0, maxRows);
+
+		const lastRow = visibleRows[visibleRows.length - 1];
+		const lastRowUsedColumns = lastRow?.reduce((sum, tile) => sum + (tile.isFixed ? 2 : 1), 0) ?? 0;
+		if (lastRow && lastRowUsedColumns < columns) {
+			visibleRows.pop();
+		}
+
+		return visibleRows.flat();
+	};
+
+	const getObjectDetailPath = (schemaIdentifier: string): string =>
+		`${OBJECT_DETAIL_PATH_PREFIX}/${encodeURIComponent(schemaIdentifier)}`;
+
+	// The searchQuery is a full url pointing to the search page on hetarchief.be, but since this
+	// admin-core module is embedded on that same site, we want a relative link instead of an
+	// absolute one pointing to a specific domain (eg qas./int./prod.hetarchief.be).
+	const stripDomain = (url: string): string => {
+		try {
+			const parsed = new URL(url);
+			return `${parsed.pathname}${parsed.search}${parsed.hash}`;
+		} catch {
+			return url;
+		}
+	};
+
 	const renderTile = (item: ObjectsGridItem, isFixed: boolean): ReactElement => {
 		const iconName = item.type ? TYPE_ICON_NAME[item.type] : undefined;
-		const isAudio = item.type === ObjectsGridItemType.Audio;
 
 		return (
 			<li
@@ -88,12 +161,13 @@ export const BlockObjectsGrid: FunctionComponent<BlockObjectsGridProps> = ({
 					)}
 				>
 					<div
-						className={clsx('c-block-objects-grid__tile-media', {
-							'c-block-objects-grid__tile-media--audio': isAudio,
-						})}
+						className={clsx(
+							'c-block-objects-grid__tile-media',
+							`c-block-objects-grid__tile-media--${item.type}`
+						)}
 					>
 						{item.thumbnailUrl ? (
-							<img className="c-block-objects-grid__tile-image" src={item.thumbnailUrl} alt="" />
+							<img className={'c-block-objects-grid__tile-image'} src={item.thumbnailUrl} alt="" />
 						) : (
 							// No thumbnail (e.g. audio): decorative placeholder, the link already carries the name.
 							<span className="c-block-objects-grid__tile-placeholder" aria-hidden="true">
@@ -129,7 +203,10 @@ export const BlockObjectsGrid: FunctionComponent<BlockObjectsGridProps> = ({
 		...restFixed.map((item) => ({ item, isFixed: true })),
 		...objects.slice(2).map((item) => ({ item, isFixed: false })),
 	];
-	const hasObjects = orderedTiles.length > 0;
+
+	const columns = getColumnsForWidth(windowWidth);
+	const visibleTiles = getVisibleTiles(orderedTiles, columns);
+	const hasObjects = visibleTiles.length > 0;
 
 	return (
 		<section
@@ -176,7 +253,7 @@ export const BlockObjectsGrid: FunctionComponent<BlockObjectsGridProps> = ({
 
 			{hasObjects && (
 				<ul className="c-block-objects-grid__grid">
-					{orderedTiles.map(({ item, isFixed }) => renderTile(item, isFixed))}
+					{visibleTiles.map(({ item, isFixed }) => renderTile(item, isFixed))}
 				</ul>
 			)}
 

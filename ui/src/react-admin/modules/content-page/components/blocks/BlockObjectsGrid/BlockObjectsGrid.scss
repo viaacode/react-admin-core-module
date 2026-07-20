@@ -91,15 +91,39 @@
 				transparent 8px
 			);
 		}
+
+		.c-block-objects-grid__tile-image {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			object-position: center;
+			display: block;
+			transition: transform 0.5s ease-out;
+		}
+
+
+
+		&--newspaper {
+			.c-block-objects-grid__tile-image {
+				object-position: top;
+			}
+		}
 	}
 
-	.c-block-objects-grid__tile-image {
-		width: 100%;
-		height: 100%;
-		object-fit: cover;
-		object-position: center;
-		display: block;
-		transition: transform 0.5s ease-out;
+	// Only limit newspapers if the tile is double width for fixed ie objects
+	.c-block-objects-grid__tile--fixed {
+		// Newspaper scans are tall pages; crop from the top so the masthead stays visible
+		// instead of centering on the middle of the page.
+		.c-block-objects-grid__tile-media--newspaper {
+			.c-block-objects-grid__tile-image {
+				width: 60%;
+				height: 100%;
+				margin: 0 auto;
+				object-position: top;
+				display: block;
+				transition: transform 0.5s ease-out;
+			}
+		}
 	}
 
 	.c-block-objects-grid__tile-placeholder {
