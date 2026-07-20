@@ -214,3 +214,17 @@ $g-spacer-unit: 0.8rem !default;
 .u-padding-bottom-xl {
   padding-bottom: variables.$g-spacer-unit * 6 !important;
 }
+
+// align
+
+.u-align-right {
+	margin-left: auto;
+	margin-right: 0;
+	display: block !important;
+}
+
+.u-align-left {
+	margin-left: 0;
+	margin-right: auto;
+	display: block !important;
+}

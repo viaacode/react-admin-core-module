@@ -4,8 +4,7 @@ import { keyBy } from 'es-toolkit';
 import { stringifyUrl } from 'query-string';
 import type { FunctionComponent, ReactElement } from 'react';
 import React, { useMemo } from 'react';
-import { BlockHeading } from '~content-blocks/BlockHeading';
-import type { Color, HeadingTypeOption } from '~modules/content-page/types/content-block.types';
+import type { HeadingTypeOption } from '~modules/content-page/types/content-block.types';
 import { Link } from '~shared/components/Link/Link';
 import { ROUTE_PARTS } from '~shared/consts/routes';
 import type { DefaultComponentProps } from '~shared/types/components';
@@ -16,7 +15,6 @@ import { useGetThemesByIds } from './hooks/useGetThemesByIds';
 export interface BlockOverviewThemesGroup {
 	title: string;
 	titleType: HeadingTypeOption;
-	backgroundColor: Color;
 	themes: PickerItem[];
 }
 
@@ -45,16 +43,15 @@ export const BlockOverviewThemes: FunctionComponent<BlockOverviewThemesProps> = 
 					// biome-ignore lint/suspicious/noArrayIndexKey: groups have no stable id
 					key={`c-block-overview-themes__group-${groupIndex}`}
 					className="c-block-overview-themes__group"
-					style={{ backgroundColor: group.backgroundColor }}
 				>
-					{group.title && (
-						<BlockHeading
-							className="c-block-overview-themes__group-title"
-							type={group.titleType || 'h2'}
-						>
-							{group.title}
-						</BlockHeading>
-					)}
+					{group.title &&
+						// Rendered as the semantic titleType tag directly (not via BlockHeading) so the
+						// heading level only affects HTML semantics, never the visual style.
+						React.createElement(
+							group.titleType || 'h2',
+							{ className: 'c-block-overview-themes__group-title' },
+							group.title
+						)}
 					<div className="c-block-overview-themes__grid">
 						{(group.themes || []).map((pickerItem, tileIndex) => {
 							const theme = themesById[pickerItem.value];

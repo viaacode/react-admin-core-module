@@ -1,14 +1,7 @@
-import {
-	BACKGROUND_COLOR_FIELD,
-	BLOCK_FIELD_DEFAULTS,
-	BLOCK_STATE_DEFAULTS,
-	TEXT_FIELD,
-} from '~content-blocks/defaults';
-import { GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF } from '~modules/content-page/const/get-color-options';
+import { AvoCoreContentPickerType } from '@viaa/avo2-types';
+import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, TEXT_FIELD } from '~content-blocks/defaults';
 import { GET_FULL_HEADING_TYPE_OPTIONS } from '~modules/content-page/const/get-heading-type-options';
-import { THEME_CONTENT_PICKER_TYPE } from '~modules/shared/components/ContentPicker/item-providers/theme';
 import {
-	Color,
 	type ContentBlockConfig,
 	ContentBlockEditor,
 	ContentBlockType,
@@ -20,16 +13,20 @@ import { HET_ARCHIEF } from '~shared/types';
 
 const INITIAL_OVERVIEW_THEMES_THEME_STATE = () => ({
 	label: '',
-	type: THEME_CONTENT_PICKER_TYPE,
+	type: AvoCoreContentPickerType.IE_OBJECT_THEME,
 	value: '',
 });
 
-export const INITIAL_OVERVIEW_THEMES_COMPONENTS_STATE = () => ({
+const INITIAL_OVERVIEW_THEMES_GROUP_STATE = () => ({
 	title: '',
 	titleType: 'h2',
-	backgroundColor: Color.Transparent,
 	themes: [INITIAL_OVERVIEW_THEMES_THEME_STATE()],
 });
+
+// `components.state` for a repeatable block must be an array: the editor pushes/splices entries
+// into it directly (see content-edit.reducer.ts), and `ContentBlockRenderer` passes it straight
+// through as the `elements` prop.
+export const INITIAL_OVERVIEW_THEMES_COMPONENTS_STATE = () => [INITIAL_OVERVIEW_THEMES_GROUP_STATE()];
 
 export const INITIAL_OVERVIEW_THEMES_BLOCK_STATE = (): DefaultContentBlockState =>
 	BLOCK_STATE_DEFAULTS();
@@ -85,35 +82,27 @@ export const OVERVIEW_THEMES_BLOCK_CONFIG = (position = 0): ContentBlockConfig =
 						)
 					),
 			},
-			backgroundColor: BACKGROUND_COLOR_FIELD(
-				tText(
-					'modules/content-page/components/blocks/block-overview-themes/block-overview-themes___achtergrondkleur',
-					{},
-					[HET_ARCHIEF]
-				),
-				GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF()[1]
-			),
 			themes: {
 				label: tText(
-					"modules/content-page/components/blocks/block-overview-themes/block-overview-themes___thema",
+					'modules/content-page/components/blocks/block-overview-themes/block-overview-themes___thema',
 					{},
 					[HET_ARCHIEF]
 				),
 				editorType: ContentBlockEditor.ContentPicker,
 				editorProps: {
-					allowedTypes: [THEME_CONTENT_PICKER_TYPE],
+					allowedTypes: [AvoCoreContentPickerType.IE_OBJECT_THEME],
 					hideTypeDropdown: true,
 					hideTargetSwitch: true,
 				},
 				repeat: {
 					defaultState: INITIAL_OVERVIEW_THEMES_THEME_STATE(),
 					addButtonLabel: tText(
-						"modules/content-page/components/blocks/block-overview-themes/block-overview-themes___voeg-thema-toe",
+						'modules/content-page/components/blocks/block-overview-themes/block-overview-themes___voeg-thema-toe',
 						{},
 						[HET_ARCHIEF]
 					),
 					deleteButtonLabel: tText(
-						"modules/content-page/components/blocks/block-overview-themes/block-overview-themes___verwijder-thema",
+						'modules/content-page/components/blocks/block-overview-themes/block-overview-themes___verwijder-thema',
 						{},
 						[HET_ARCHIEF]
 					),

@@ -11,7 +11,7 @@ import { retrieveContentPages, retrieveProjectContentPages } from './item-provid
 import { retrieveInternalLinks } from './item-providers/internal-link';
 import { retrieveItems } from './item-providers/item';
 import { retrieveProfiles } from './item-providers/profile';
-import { retrieveThemes, THEME_CONTENT_PICKER_TYPE } from './item-providers/theme';
+import { retrieveThemes } from './item-providers/theme';
 
 export interface PickerItem {
 	label?: string;
@@ -80,14 +80,14 @@ export const GET_CONTENT_TYPE_LABELS: () => Record<AvoCoreContentPickerType, str
 	[AvoCoreContentPickerType.IE_OBJECT]: tText(
 		'modules/shared/components/content-picker/content-picker___ie-objects'
 	),
+	[AvoCoreContentPickerType.IE_OBJECT_THEME]: tText(
+		"modules/shared/components/content-picker/content-picker___thema's"
+	),
 	/**
 	 * @deprecated, use CUSTOM_NAVIGATION_ELEMENTS instead
 	 */
 	[AvoCoreContentPickerType.DROPDOWN]: tText(
 		'react-admin/modules/shared/components/content-picker/content-picker___custom-navigatie-items'
-	),
-	[THEME_CONTENT_PICKER_TYPE]: tText(
-		"modules/shared/components/content-picker/content-picker___thema's"
 	),
 });
 
@@ -224,8 +224,8 @@ export const GET_CONTENT_TYPES: () => PickerTypeOption[] = () => {
 			picker: 'SELECT',
 		},
 		{
-			value: THEME_CONTENT_PICKER_TYPE,
-			label: labels[THEME_CONTENT_PICKER_TYPE],
+			value: AvoCoreContentPickerType.IE_OBJECT_THEME,
+			label: labels[AvoCoreContentPickerType.IE_OBJECT_THEME],
 			disabled: false,
 			fetch: retrieveThemes,
 			picker: 'SELECT',
