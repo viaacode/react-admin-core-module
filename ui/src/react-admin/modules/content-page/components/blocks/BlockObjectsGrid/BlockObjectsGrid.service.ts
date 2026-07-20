@@ -65,11 +65,12 @@ export const parseSearchQueryToSearchBody = (
 	searchQuery: string,
 	size: number
 ): IeObjectsSearchBody => {
-	const searchUrlToApiUrl = AdminConfigManager.getConfig().services.search?.searchUrlToApiUrl;
-	if (!searchUrlToApiUrl) {
+	const clientSearchUrlToApiSearchUrl =
+		AdminConfigManager.getConfig().services.search?.clientSearchUrlToApiSearchUrl;
+	if (!clientSearchUrlToApiSearchUrl) {
 		return { filters: [], size, page: 1 };
 	}
-	return searchUrlToApiUrl(searchQuery, size);
+	return clientSearchUrlToApiSearchUrl(searchQuery, size);
 };
 
 const searchIeObjects = async (body: IeObjectsSearchBody): Promise<ObjectsGridItem[]> => {
