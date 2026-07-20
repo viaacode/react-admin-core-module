@@ -101,12 +101,12 @@ export interface AdminConfig {
 		queryCache: {
 			clear: (key: string) => Promise<void>;
 		};
-		// Converts a hetarchief search-page url (as stored on eg. the ObjectsGrid content-page
-		// block) into an ie-objects search API request body. Lives in the config so the client's
-		// own url-filter-mapping logic (used by its search page) can be reused here, without the
-		// admin-core needing to depend on the client package.
 		search?: {
-			searchUrlToApiUrl: (searchQuery: string, size: number) => IeObjectsSearchBody;
+			// Converts a hetarchief search-page url (as stored on eg. the ObjectsGrid content-page
+			// block) into an ie-objects search API request body. Lives in the config so the client's
+			// own url-filter-mapping logic (used by its search page) can be reused here, without the
+			// admin-core needing to depend on the client package.
+			clientSearchUrlToApiSearchUrl: (searchQuery: string, size: number) => IeObjectsSearchBody;
 		};
 	};
 	components: {
