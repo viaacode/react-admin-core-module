@@ -1,3 +1,4 @@
+import { SearchFilter } from '~core/config/config.types.ts';
 import type { HeadingTypeOption } from '~modules/content-page/types/content-block.types';
 import type { DefaultComponentProps } from '~modules/shared/types/components';
 import type { PickerItem } from '~modules/shared/types/content-picker';
@@ -53,4 +54,12 @@ export interface BlockObjectsGridProps extends DefaultComponentProps {
 	elements?: ObjectsGridFixedPosition[];
 	// Block-wide background color (from the block-level "Blok-opties").
 	backgroundColor?: string;
+}
+
+export enum OrderProperty {
+	RELEVANCE = 'relevance',
+	CREATED = 'created',
+	ARCHIVED = 'archived',
+	NAME = 'name',
+	RANDOM = 'random',
 }
