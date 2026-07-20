@@ -2,7 +2,7 @@ import { Image } from '@viaa/avo2-components';
 import clsx from 'clsx';
 import { keyBy } from 'es-toolkit';
 import { stringifyUrl } from 'query-string';
-import type { FunctionComponent, ReactElement } from 'react';
+import type { CSSProperties, FunctionComponent, ReactElement } from 'react';
 import React, { useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { GET_SECONDARY_BACKGROUND_COLOR_OPTIONS_ARCHIEF } from '~modules/content-page/const/get-color-options';
 import type { HeadingTypeOption } from '~modules/content-page/types/content-block.types';
@@ -12,14 +12,16 @@ import type { Theme } from '~shared/services/themes-service/themes.types';
 import type { DefaultComponentProps } from '~shared/types/components';
 import type { PickerItem } from '~shared/types/content-picker';
 import './BlockOverviewThemes.scss';
-import { type ThemeTileSpan, getThemeTileSpans } from './getThemeTileSpans';
+import { getThemeTileSpans, type ThemeTileSpan } from './getThemeTileSpans';
 import { useGetThemesByIds } from './hooks/useGetThemesByIds';
 
 // Assigns one color per group without repeating any color until the whole palette has been used
 // once ("shuffle bag"): pick a random color from the remaining pool, remove it, and refill the
 // pool with the full palette again once it runs out.
 const assignBandColors = (groupCount: number): string[] => {
-	const palette = GET_SECONDARY_BACKGROUND_COLOR_OPTIONS_ARCHIEF().map((option) => option.value as string);
+	const palette = GET_SECONDARY_BACKGROUND_COLOR_OPTIONS_ARCHIEF().map(
+		(option) => option.value as string
+	);
 	const colors: string[] = [];
 	let pool: string[] = [];
 
@@ -106,13 +108,62 @@ const BlockOverviewThemesGroupSection: FunctionComponent<BlockOverviewThemesGrou
 		.filter((theme): theme is Theme => !!theme);
 	const spans = getThemeTileSpans(resolvedThemes.length);
 
+	/**
+	 * Renders the white meemoo logo shapes in the colors bands behind the theme group title and first row
+	 * @param groupIndex
+	 */
+	const renderGroupShapes = (groupIndex: number) => {
+		const rectangleStyles: CSSProperties = { width: '6cqw' };
+		const circleStyles: CSSProperties = { borderRadius: '50%' };
+		const shapeStyles: [CSSProperties, CSSProperties][] = [
+			[circleStyles, rectangleStyles],
+			[rectangleStyles, circleStyles],
+			[rectangleStyles, rectangleStyles],
+		];
+		const positionStyles: [CSSProperties, CSSProperties][] = [
+			[
+				// Circle
+				{ right: '5%', top: '6rem' },
+				// Rectangle
+				{ right: '25%', top: '3rem', transform: 'rotate(35deg)' },
+			],
+			[
+				// Rectangle
+				{ right: '0%', top: '5rem', transform: 'rotate(-45deg)' },
+				// Circle
+				{ right: '25%', top: '6rem' },
+			],
+			[
+				// Rectangle
+				{ right: '30%', top: '1rem', transform: 'rotate(85deg)' },
+				// Rectangle
+				{ right: '45%', top: '-4rem', transform: 'rotate(20deg)' },
+			],
+		];
+		return (
+			<>
+				<div
+					className="c-block-overview-themes__group-shape"
+					style={{ ...shapeStyles[groupIndex % 3][0], ...positionStyles[groupIndex % 3][0] }}
+				></div>
+				<div
+					className="c-block-overview-themes__group-shape"
+					style={{ ...shapeStyles[groupIndex % 3][1], ...positionStyles[groupIndex % 3][1] }}
+				></div>
+			</>
+		);
+	};
+
 	return (
 		<section className="c-block-overview-themes__group">
-			{bandHeight !== null && (
-				<div
-					className="c-block-overview-themes__group-band"
-					style={{ height: `${bandHeight}px`, backgroundColor: bandColor }}
-				/>
+			{!!bandHeight && (
+				<>
+					<div
+						className="c-block-overview-themes__group-band"
+						style={{ height: `${bandHeight}px`, backgroundColor: bandColor }}
+					/>
+					{renderGroupShapes(groupIndex)}
+				</>
 			)}
 			{group.title &&
 				// Rendered as the semantic titleType tag directly (not via BlockHeading) so the
@@ -157,7 +208,9 @@ export const BlockOverviewThemes: FunctionComponent<BlockOverviewThemesProps> = 
 	const themeIds = useMemo(
 		() =>
 			Array.from(
-				new Set((elements || []).flatMap((group) => (group.themes || []).map((theme) => theme.value)))
+				new Set(
+					(elements || []).flatMap((group) => (group.themes || []).map((theme) => theme.value))
+				)
 			),
 		[elements]
 	);

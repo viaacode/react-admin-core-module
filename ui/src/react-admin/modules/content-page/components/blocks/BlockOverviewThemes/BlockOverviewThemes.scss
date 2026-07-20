@@ -13,10 +13,10 @@
 
 	&__group {
 		position: relative;
-		padding: 3.2rem 2.4rem;
+		padding: 3.2rem 2.4rem 0;
 
 		@media (min-width: variables.$g-bp3) {
-			padding: 4.8rem 4rem;
+			padding: 4.8rem 4rem 0;
 		}
 	}
 
@@ -30,6 +30,15 @@
 		left: -2500px;
 		z-index: 0;
 		width: 5000px;
+	}
+
+	&__group-shape{
+		width: 10cqw;
+		height: 10cqw;
+		background-color: colors.$white;
+		position: absolute;
+		top: 0;
+		right: 0;
 	}
 
 	&__group-title {
@@ -135,7 +144,7 @@
 		bottom: 0;
 		left: 0;
 		z-index: 1;
-		padding: 4.8rem;
+		padding: 3rem;
 		color: colors.$white;
 		font-family: SofiaPro, sans-serif;
 		font-size: 1.8rem;
