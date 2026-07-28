@@ -13,6 +13,7 @@ import 'swiper/css';
 import clsx from 'clsx';
 import { BlockHeading } from '~content-blocks/BlockHeading';
 import { generateSmartLink } from '~shared/components/SmartLink/SmartLink.tsx';
+import { HET_ARCHIEF } from '~shared/types';
 
 export interface BlockOverviewWithCarouselProps extends DefaultComponentProps {
 	backgroundColor: string;
@@ -116,8 +117,8 @@ export const BlockOverviewWithCarousel: FunctionComponent<BlockOverviewWithCarou
 							<Button
 								variants={['black', 'sm']}
 								icon={<Icon name="arrowLeft" />}
-								title={tText('Vorige slide')}
-								ariaLabel={tText('Vorige slide')}
+								title={tText('Vorige slide', undefined, [HET_ARCHIEF])}
+								ariaLabel={tText('Vorige slide', undefined, [HET_ARCHIEF])}
 								onClick={() => controlledSwiper?.slidePrev()}
 							/>
 						)}
@@ -125,8 +126,8 @@ export const BlockOverviewWithCarousel: FunctionComponent<BlockOverviewWithCarou
 							<Button
 								variants={['black', 'sm']}
 								icon={<Icon name="arrowRight" />}
-								title={tText('Volgende slide')}
-								ariaLabel={tText('Volgende slide')}
+								title={tText('Volgende slide', undefined, [HET_ARCHIEF])}
+								ariaLabel={tText('Volgende slide', undefined, [HET_ARCHIEF])}
 								onClick={() => controlledSwiper?.slideNext()}
 							/>
 						)}

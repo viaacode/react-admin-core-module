@@ -150,7 +150,9 @@ export const TEXT_FIELD = (
 ): ContentBlockField => ({
 	label: tText('admin/content-block/helpers/generators/defaults___tekst'),
 	editorType: ContentBlockEditor.TextInput, // Default text input type. also supported: textarea and rich text editor
-	validator: (value: string) => validateRequiredValue(value, emptyFieldValidatorMessage),
+	validator: emptyFieldValidatorMessage
+		? (value: string) => validateRequiredValue(value, emptyFieldValidatorMessage)
+		: undefined,
 	editorProps: {
 		controls: [...RICH_TEXT_EDITOR_OPTIONS_FULL_WITHOUT_ALIGN, 'media'],
 		fileType: 'CONTENT_BLOCK_IMAGE',

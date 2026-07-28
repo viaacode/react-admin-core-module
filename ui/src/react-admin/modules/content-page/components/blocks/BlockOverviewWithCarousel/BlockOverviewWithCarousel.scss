@@ -2,6 +2,8 @@
 @use "../../../../shared/styles/settings/variables" as variables;
 @use "../../../../shared/styles/settings/colors" as colors;
 
+$slide-width: 28rem;
+
 .c-block-overview-with-carousel {
 	.c-block-overview-with-carousel__header {
 		width: 100%;
@@ -9,13 +11,13 @@
 		flex-direction: row;
 		flex-wrap: wrap;
 		align-items: center;
-		gap: 1.6rem;
+		gap: variables.$g-spacer-unit * 2;
 		margin-bottom: 2.2rem;
 		justify-content: space-between;
 
 		@media (max-width: variables.$g-bp2) {
-			margin-bottom: 2.4rem;
-			gap: 1.2rem;
+			margin-bottom: variables.$g-spacer-unit * 3;
+			gap: variables.$g-spacer-unit * 1.5;
 		}
 
 		&-title {
@@ -33,7 +35,7 @@
 		&-actions {
 			display: flex;
 			align-items: center;
-			gap: 1.6rem;
+			gap: variables.$g-spacer-unit * 2;
 			min-width: 0;
 
 			.c-button {
@@ -68,7 +70,7 @@
 		&-nav {
 			display: flex;
 			align-items: center;
-			gap: .8rem;
+			gap: variables.$g-spacer-unit;
 			margin-left: auto;
 			flex-shrink: 0;
 		}
@@ -116,10 +118,10 @@
 		}
 
 		&__portrait {
-			width: 28rem !important;
+			width: $slide-width !important;
 
 			.c-block-overview-with-carousel__slide-image {
-				min-height: 28rem;
+				min-height: $slide-width;
 			}
 
 			.c-block-overview-with-carousel__slide-description {
@@ -128,11 +130,11 @@
 		}
 
 		&__round {
-			width: 28rem !important;
-			border-radius: 140px 140px 0 0;
+			width: $slide-width !important;
+			border-radius: math.div($slide-width , 2) math.div($slide-width , 2) 0 0;
 
 			.c-block-overview-with-carousel__slide-image {
-				height: 28rem;
+				height: $slide-width;
 				clip-path: circle();
 				flex: initial;
 			}
@@ -176,7 +178,7 @@
 			min-height: 0;
 			display: flex;
 			align-items: end;
-			padding: 1.6rem 2.4rem;
+			padding: calc(variables.$g-spacer-unit * 2) calc(variables.$g-spacer-unit * 3);
 		}
 
 		&-text {

@@ -1,14 +1,14 @@
-import type { DOMPurifyI } from 'dompurify';
+import type { DOMPurify } from 'dompurify';
 import { isServerSideRendering } from '~shared/helpers/routing/is-server-side-rendering';
 import type { SanitizePreset } from './presets';
 import sanitizePresets from './presets';
 
 // biome-ignore lint/suspicious/noExplicitAny: This is a generic function that can be used for multiple types
-function normalizeModule(requiredModule: any): DOMPurifyI {
+function normalizeModule(requiredModule: any): DOMPurify {
 	return requiredModule?.default || requiredModule;
 }
 
-let domPurify: DOMPurifyI | undefined;
+let domPurify: DOMPurify | undefined;
 let _domPurifyInitPromise: Promise<void> | undefined;
 
 /**
@@ -23,7 +23,7 @@ function initDOMPurify(): void {
 			sanitize: (source: string, _preset: SanitizePreset): string => {
 				return source;
 			},
-		} as unknown as DOMPurifyI;
+		} as unknown as DOMPurify;
 	} else {
 		// Start loading DOMPurify asynchronously
 		_domPurifyInitPromise = import('dompurify').then((module) => {
