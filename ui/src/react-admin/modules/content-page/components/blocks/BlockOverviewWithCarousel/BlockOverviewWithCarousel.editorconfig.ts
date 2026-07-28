@@ -59,7 +59,7 @@ export const CONTENT_OVERVIEW_WITH_CAROUSEL_CONFIG = (position = 0): ContentBloc
 				{
 					label: tText('title', undefined, [HET_ARCHIEF]),
 				},
-				tText('titel is verplicht')
+				tText('titel is verplicht', undefined, [HET_ARCHIEF])
 			),
 			titleType: {
 				label: tText('titletype', undefined, [HET_ARCHIEF]),
@@ -67,7 +67,8 @@ export const CONTENT_OVERVIEW_WITH_CAROUSEL_CONFIG = (position = 0): ContentBloc
 				editorProps: {
 					options: GET_FULL_HEADING_TYPE_OPTIONS(),
 				},
-				validator: (value: string) => validateRequiredValue(value, 'titletype is verplicht'),
+				validator: (value: string) =>
+					validateRequiredValue(value, tText('titletype is verplicht', undefined, [HET_ARCHIEF])),
 			},
 			buttonLabel: TEXT_FIELD({
 				label: tText('button label', undefined, [HET_ARCHIEF]),
@@ -101,9 +102,13 @@ export const CONTENT_OVERVIEW_WITH_CAROUSEL_CONFIG = (position = 0): ContentBloc
 						},
 					},
 					image: {
-						label: tText('Item image'),
+						label: tText('Item image', undefined, [HET_ARCHIEF]),
 						editorType: ContentBlockEditor.FileUpload,
-						validator: (value: string) => validateRequiredValue(value, 'Afbeelding is verplicht'),
+						validator: (value: string) =>
+							validateRequiredValue(
+								value,
+								tText('Afbeelding is verplicht', undefined, [HET_ARCHIEF])
+							),
 						editorProps: {
 							assetType: 'CONTENT_BLOCK_IMAGE',
 							allowMulti: false,
@@ -111,43 +116,47 @@ export const CONTENT_OVERVIEW_WITH_CAROUSEL_CONFIG = (position = 0): ContentBloc
 						} as FileUploadProps,
 					},
 					imageAlt: TEXT_FIELD({
-						label: tText('alt tekst voor de afbeelding'),
+						label: tText('alt tekst voor de afbeelding', undefined, [HET_ARCHIEF]),
 						validator: undefined,
 					}),
 					title: TEXT_FIELD(
 						{
 							label: tText('Item title', undefined, [HET_ARCHIEF]),
 						},
-						tText('titel is verplicht')
+						tText('titel is verplicht', undefined, [HET_ARCHIEF])
 					),
 					backgroundColor: BACKGROUND_COLOR_FIELD(
-						tText('achtergrondkleur van het item'),
+						tText('achtergrondkleur van het item', undefined, [HET_ARCHIEF]),
 						GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF()[1]
 					),
 					textColor: FOREGROUND_COLOR_FIELD(
-						tText('tekst kleur'),
+						tText('tekst kleur', undefined, [HET_ARCHIEF]),
 						GET_FOREGROUND_COLOR_OPTIONS_ARCHIEF()[3]
 					),
 					itemDisplay: {
-						label: tText('Weergave'),
+						label: tText('Weergave', undefined, [HET_ARCHIEF]),
 						editorType: ContentBlockEditor.Select,
 						editorProps: {
 							options: [
 								{
-									label: tText('Portret'),
+									label: tText('Portret', undefined, [HET_ARCHIEF]),
 									value: '9:16',
 								},
 								{
-									label: tText('Afgerond portret'),
+									label: tText('Afgerond portret', undefined, [HET_ARCHIEF]),
 									value: '9:16round',
 								},
 								{
-									label: tText('Landscape'),
+									label: tText('Landscape', undefined, [HET_ARCHIEF]),
 									value: '16:9',
 								},
 							],
 						},
-						validator: (value: string) => validateRequiredValue(value, 'Weergave is verplicht'),
+						validator: (value: string) =>
+							validateRequiredValue(
+								value,
+								tText('Weergave is verplicht', undefined, [HET_ARCHIEF])
+							),
 					},
 				},
 				type: 'fieldGroup',
