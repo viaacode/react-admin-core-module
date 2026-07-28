@@ -27,16 +27,26 @@ export const INITIAL_CONTENT_HOMEPAGE_BANNER_BLOCK_STATE = (): DefaultContentBlo
 
 export const CONTENT_HOMEPAGE_BANNER_CONFIG = (position = 0): ContentBlockConfig => ({
 	position,
-	name: tText('Homepage banner'),
+	name: tText(
+		'modules/content-page/components/blocks/block-homepage-banner/block-homepage-banner___homepage-banner'
+	),
 	type: ContentBlockType.HomepageBanner,
 	components: {
 		state: INITIAL_CONTENT_HOMEPAGE_BANNER_COMPONENTS_STATE(),
 		fields: {
 			title: TEXT_FIELD(
 				{
-					label: tText('title', undefined, [HET_ARCHIEF]),
+					label: tText(
+						'modules/content-page/components/blocks/block-homepage-banner/block-homepage-banner___title',
+						undefined,
+						[HET_ARCHIEF]
+					),
 				},
-				tText('titel is verplicht', undefined, [HET_ARCHIEF])
+				tText(
+					'modules/content-page/components/blocks/block-homepage-banner/block-homepage-banner___titel-is-verplicht',
+					undefined,
+					[HET_ARCHIEF]
+				)
 			),
 			content: TEXT_FIELD({
 				editorType: ContentBlockEditor.RICH_TEXT_EDITOR,
@@ -46,14 +56,22 @@ export const CONTENT_HOMEPAGE_BANNER_CONFIG = (position = 0): ContentBlockConfig
 				validator: undefined,
 			}),
 			textAlign: {
-				label: tText('Text alignatie', undefined, [HET_ARCHIEF]),
+				label: tText(
+					'modules/content-page/components/blocks/block-homepage-banner/block-homepage-banner___text-alignatie',
+					undefined,
+					[HET_ARCHIEF]
+				),
 				editorType: ContentBlockEditor.Select,
 				editorProps: {
 					options: GET_ALIGN_OPTIONS(),
 				},
 			},
 			bannerColor: {
-				label: tText('Kleur banner', undefined, [HET_ARCHIEF]),
+				label: tText(
+					'modules/content-page/components/blocks/block-homepage-banner/block-homepage-banner___kleur-banner',
+					undefined,
+					[HET_ARCHIEF]
+				),
 				editorType: ContentBlockEditor.ColorSelect,
 				editorProps: {
 					options: GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF(),
