@@ -77,6 +77,10 @@ $pattern-mobile-overshoot: 10rem;
 
 		&--left {
 			margin-right: auto;
+
+			.c-block-homepage-banner__pattern--right {
+				left: calc(100% + $pattern-distance-horizontal + $pattern-distance-horizontal);
+			}
 		}
 
 		&--center {
@@ -85,6 +89,10 @@ $pattern-mobile-overshoot: 10rem;
 
 		&--right {
 			margin-left: auto;
+
+			.c-block-homepage-banner__pattern--left{
+				right: calc(100% + $pattern-distance-horizontal + $pattern-distance-horizontal);
+			}
 		}
 
 		&-title {
@@ -152,7 +160,7 @@ $pattern-mobile-overshoot: 10rem;
 		}
 
 		&--right {
-			left: calc(100% + $pattern-distance-horizontal + $pattern-distance-horizontal);
+			left: calc(100% + $pattern-distance-horizontal);
 			background-position-x: left;
 			@include pattern-tile(
 				(
