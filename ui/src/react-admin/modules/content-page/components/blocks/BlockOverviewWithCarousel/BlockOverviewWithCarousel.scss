@@ -1,6 +1,7 @@
 @use "sass:math";
 @use "../../../../shared/styles/settings/variables" as variables;
 @use "../../../../shared/styles/settings/colors" as colors;
+@use "../../../../shared/styles/mixins/typography" as typography;
 
 $slide-width: 28rem;
 
@@ -22,13 +23,8 @@ $slide-width: 28rem;
 
 		&-title {
 			color: colors.$color-gray-1000;
-			font-family: "SofiaPro";
-			font-size: 2.4rem;
-			font-style: normal;
-			font-weight: 800;
-			overflow: hidden;
-			text-overflow: ellipsis;
-			white-space: nowrap;
+			@include typography.sofia-pro-heading-lg();
+			@include typography.truncate();
 			width: fit-content;
 		}
 
@@ -178,7 +174,7 @@ $slide-width: 28rem;
 			min-height: 0;
 			display: flex;
 			align-items: end;
-			padding: calc(variables.$g-spacer-unit * 2) calc(variables.$g-spacer-unit * 3);
+			padding: calc(#{variables.$g-spacer-unit} * 2) calc(#{variables.$g-spacer-unit} * 3);
 		}
 
 		&-text {
@@ -191,11 +187,7 @@ $slide-width: 28rem;
 			width: 100%;
 
 			color: colors.$color-gray-1000;
-			font-family: "SofiaPro";
-			font-size: 1.8rem;
-			font-style: normal;
-			font-weight: 800;
-			line-height: 2.8rem;
+			@include typography.sofia-pro-heading-md();
 		}
 	}
 }
