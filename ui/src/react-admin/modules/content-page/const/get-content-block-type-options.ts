@@ -186,11 +186,19 @@ export const GET_CONTENT_BLOCK_TYPE_OPTIONS: () => SelectOption<string>[] = () =
 		},
 		{
 			label: tText(
-				'modules/content-page/const/get-content-block-type-options___homepage=-banner',
+				'modules/content-page/const/get-content-block-type-options___homepage-banner',
 				{},
 				[HET_ARCHIEF]
 			),
 			value: ContentBlockType.HomepageBanner,
+		},
+		{
+			label: tText(
+				'modules/content-page/const/get-content-block-type-options___highlight-text',
+				{},
+				[HET_ARCHIEF]
+			),
+			value: ContentBlockType.HighlightText,
 		},
 	];
 

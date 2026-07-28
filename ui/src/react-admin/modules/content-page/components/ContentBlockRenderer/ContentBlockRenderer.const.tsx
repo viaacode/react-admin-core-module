@@ -10,6 +10,7 @@ import { BlockEventbrite } from '~content-blocks/BlockEventbrite';
 import { BlockHeading } from '~content-blocks/BlockHeading';
 import { BlockHetArchiefHeaderSearch } from '~content-blocks/BlockHetArchiefHeaderSearch/BlockHetArchiefHeaderSearch';
 import { BlockHetArchiefImageTextBackground } from '~content-blocks/BlockHetArchiefImageTextBackground';
+import { BlockHighlightText } from '~content-blocks/BlockHighlightText';
 import { BlockHomepageBanner } from '~content-blocks/BlockHomepageBanner';
 import { BlockIFrame } from '~content-blocks/BlockIFrame';
 import { BlockImage } from '~content-blocks/BlockImage';
@@ -89,6 +90,7 @@ export function GET_BLOCK_COMPONENT(
 		[ContentBlockType.HetArchiefImageTextBackground]: BlockHetArchiefImageTextBackground,
 		[ContentBlockType.OverviewWithCarousel]: BlockOverviewWithCarousel,
 		[ContentBlockType.HomepageBanner]: BlockHomepageBanner,
+		[ContentBlockType.HighlightText]: BlockHighlightText,
 
 		// Avo specific blocks
 		[ContentBlockType.MediaGrid]: loadComponentFromConfig(ContentBlockType.MediaGrid),
