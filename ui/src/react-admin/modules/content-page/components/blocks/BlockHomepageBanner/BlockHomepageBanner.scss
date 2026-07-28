@@ -12,6 +12,10 @@ $pattern-cycle-width: $pattern-rect-width * 2 + $pattern-circle-diameter * 3;
 // Safety multiple for $pattern-cycle-width so the strip always reaches this component's
 // own edge (see the width comment below) - comfortably covers any realistic viewport.
 $pattern-repeat-count: 20;
+// Mobile pattern slots overshoot &__content's edge by this much so they can still bleed
+// past the text's own container gutter to the true screen edge (see &__pattern-slot) -
+// comfortably more than any gutter avo2's Container applies below $g-bp2.
+$pattern-mobile-overshoot: 10rem;
 
 // Renders the repeating tile (3 circles + 2 rects) for one pattern strip. $circle-centers
 // is a 3-item list of x-offsets (from the tile's own left edge); $rect-ranges is a 2-item
@@ -60,6 +64,23 @@ $pattern-repeat-count: 20;
 		display: flex;
 		flex-direction: column;
 		gap: 3.2rem;
+
+		// The mobile pattern slots size themselves as a % of THIS element (their
+		// containing block), so it needs to span the full screen width below $g-bp2 -
+		// otherwise "max 1/3 of the screen" would really mean "1/3 of the desktop
+		// 75% cap".
+		//
+		// The padding reserves normal-flow vertical space for the (absolutely positioned,
+		// so otherwise height-less-as-far-as-the-layout-is-concerned) pattern slots above
+		// the title and below the text. This matters: &__pattern-slot's height doesn't
+		// contribute to this element's (or, transitively, .c-block-homepage-banner's) own
+			// height, and .c-block-homepage-banner's clip-path: inset(0) clips to its own
+		// layout box - without this padding, that box would end exactly at the title/text,
+		// and the pattern slots (sitting outside it) would be clipped away entirely.
+		@media (max-width: variables.$g-bp2) {
+			max-width: 100%;
+			padding: calc(8rem + 2.4rem) 0;
+		}
 
 		&--left {
 			margin-right: auto;
@@ -161,6 +182,65 @@ $pattern-repeat-count: 20;
 					($pattern-circle-diameter * 3 + $pattern-rect-width, $pattern-cycle-width),
 				)
 			);
+		}
+
+		// Below $g-bp2 the patterns move from beside the text to above/below it. Both
+		// sides keep their EXACT desktop tile/anchor (background-position-x untouched) -
+		// only where the strip itself is placed changes: it's now anchored against
+		// &__pattern-slot's inner edge (the 1/3 or 2/3 landmark) instead of "near text".
+		// That's what puts the clean shape there and pushes the arbitrary cut-off out to
+		// the true screen edge, and mirrored for --right - exactly the desktop mechanism,
+		// reused. (top/bottom: 0 is unconditional above, so unchanged here.)
+		@media (max-width: variables.$g-bp2) {
+			&--left {
+				right: 0;
+				left: auto;
+			}
+
+			&--right {
+				left: 0;
+				right: auto;
+			}
+		}
+	}
+
+	// No-op on desktop: an unpositioned, unsized inline box that &__pattern's
+	// position: absolute reaches past, straight to &__content. Below $g-bp2 it becomes the
+	// positioned, overflow-clipping box that caps &__pattern at exactly 1/3 (top) or 2/3
+	// (bottom) of &__content's width.
+	//
+	// The cap MUST live on this separate wrapper rather than on &__pattern itself: capping
+	// &__pattern's own width there would make its rendered width a non-multiple of
+	// $pattern-cycle-width again, reintroducing the Chrome tearing bug described above.
+	//
+	// top: 0 / bottom: 0 here land inside the padding &__content reserves above/below the
+	// title and text (see there) - not against &__content's content-box directly, which is
+	// what makes this safe: those are literal zero offsets, not percentages, so (unlike
+	// the desktop right/left: calc(100% + 4rem) trick) they don't depend on &__content
+	// having a definite height to resolve correctly.
+	//
+	// The slot also overshoots &__content's left/right edge by $pattern-mobile-overshoot:
+	// &__content sits inside avo2's <Container>, which still applies its own (smaller,
+	// but non-zero) gutter below $g-bp2 - without this overshoot the pattern could only
+	// ever reach &__content's edge, not the true screen edge. The overshoot is compensated
+	// for in the width so the INNER edge (the anchor landmark) stays exactly at 1/3 / 2/3.
+	&__pattern-slot {
+		@media (max-width: variables.$g-bp2) {
+			position: absolute;
+			overflow: hidden;
+			height: 8rem;
+
+			&--top {
+				top: 0;
+				left: -$pattern-mobile-overshoot;
+				width: calc(33.333% + #{$pattern-mobile-overshoot});
+			}
+
+			&--bottom {
+				bottom: 0;
+				right: -$pattern-mobile-overshoot;
+				width: calc(66.667% + #{$pattern-mobile-overshoot});
+			}
 		}
 	}
 }

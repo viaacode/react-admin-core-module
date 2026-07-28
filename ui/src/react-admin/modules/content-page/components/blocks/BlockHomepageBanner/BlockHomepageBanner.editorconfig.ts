@@ -36,7 +36,7 @@ export const CONTENT_HOMEPAGE_BANNER_CONFIG = (position = 0): ContentBlockConfig
 				{
 					label: tText('title', undefined, [HET_ARCHIEF]),
 				},
-				tText('titel is verplicht')
+				tText('titel is verplicht', undefined, [HET_ARCHIEF])
 			),
 			content: TEXT_FIELD({
 				editorType: ContentBlockEditor.RICH_TEXT_EDITOR,
@@ -46,14 +46,14 @@ export const CONTENT_HOMEPAGE_BANNER_CONFIG = (position = 0): ContentBlockConfig
 				validator: undefined,
 			}),
 			textAlign: {
-				label: tText('admin/content-block/helpers/generators/image-grid___text-alignatie'),
+				label: tText('Text alignatie', undefined, [HET_ARCHIEF]),
 				editorType: ContentBlockEditor.Select,
 				editorProps: {
 					options: GET_ALIGN_OPTIONS(),
 				},
 			},
 			bannerColor: {
-				label: tText('Kleur banner'),
+				label: tText('Kleur banner', undefined, [HET_ARCHIEF]),
 				editorType: ContentBlockEditor.ColorSelect,
 				editorProps: {
 					options: GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF(),

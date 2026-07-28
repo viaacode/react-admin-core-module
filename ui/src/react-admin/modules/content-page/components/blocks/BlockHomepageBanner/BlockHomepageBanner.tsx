@@ -49,18 +49,32 @@ export const BlockHomepageBanner: FunctionComponent<BlockHomepageBannerProps> = 
 						`c-block-homepage-banner__content--${textAlign}`
 					)}
 				>
+					{/*
+						On desktop these patterns sit beside the text and this wrapper is a
+						no-op (unpositioned, so the pattern's own position: absolute reaches
+						past it to __content). On mobile the wrapper becomes the positioned,
+						overflow-clipping "slot" that caps the pattern at max 1/3 or 2/3 of the
+						screen width - see BlockHomepageBanner.scss for why the clipping can't
+						happen on the pattern element itself. It's placed here, before the
+						title, purely for source order (mobile stacks it above the text); the
+						desktop position is entirely controlled by CSS.
+					*/}
+					<div className="c-block-homepage-banner__pattern-slot c-block-homepage-banner__pattern-slot--top">
+						<div
+							className="c-block-homepage-banner__pattern c-block-homepage-banner__pattern--left"
+							aria-hidden="true"
+						/>
+					</div>
 					<BlockHeading className="c-block-homepage-banner__content-title" type="h4">
 						{title}
 					</BlockHeading>
 					<Html className="c-block-homepage-banner__content-text" content={content} type="p"></Html>
-					<div
-						className="c-block-homepage-banner__pattern c-block-homepage-banner__pattern--left"
-						aria-hidden="true"
-					/>
-					<div
-						className="c-block-homepage-banner__pattern c-block-homepage-banner__pattern--right"
-						aria-hidden="true"
-					/>
+					<div className="c-block-homepage-banner__pattern-slot c-block-homepage-banner__pattern-slot--bottom">
+						<div
+							className="c-block-homepage-banner__pattern c-block-homepage-banner__pattern--right"
+							aria-hidden="true"
+						/>
+					</div>
 				</div>
 			</Container>
 		</article>
