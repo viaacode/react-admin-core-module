@@ -1,6 +1,47 @@
 @use "sass:math";
+@use "sass:list";
 @use "../../../../shared/styles/settings/variables" as variables;
 @use "../../../../shared/styles/settings/colors" as colors;
+
+// Shared shape sizing for the decorative pattern strips (used by both --left and --right).
+$pattern-rect-width: 4rem;
+$pattern-circle-diameter: 8rem;
+$pattern-circle-radius: math.div($pattern-circle-diameter, 2);
+$pattern-circle-antialias-edge: $pattern-circle-radius + 0.02rem;
+$pattern-cycle-width: $pattern-rect-width * 2 + $pattern-circle-diameter * 3;
+// Safety multiple for $pattern-cycle-width so the strip always reaches this component's
+// own edge (see the width comment below) - comfortably covers any realistic viewport.
+$pattern-repeat-count: 20;
+
+// Renders the repeating tile (3 circles + 2 rects) for one pattern strip. $circle-centers
+// is a 3-item list of x-offsets (from the tile's own left edge); $rect-ranges is a 2-item
+// list of [start, end] x-offset pairs. Both sides share this shape/size, only the ORDER
+// (i.e. which offsets are passed in) differs - see the comments on &--left/&--right.
+@mixin pattern-tile($circle-centers, $rect-ranges) {
+	background-image:
+		radial-gradient(
+			circle at list.nth($circle-centers, 1) 50%,
+			var(--pattern-color, transparent) $pattern-circle-radius,
+			transparent $pattern-circle-antialias-edge
+		),
+		radial-gradient(
+			circle at list.nth($circle-centers, 2) 50%,
+			var(--pattern-color, transparent) $pattern-circle-radius,
+			transparent $pattern-circle-antialias-edge
+		),
+		radial-gradient(
+			circle at list.nth($circle-centers, 3) 50%,
+			var(--pattern-color, transparent) $pattern-circle-radius,
+			transparent $pattern-circle-antialias-edge
+		),
+		linear-gradient(
+			to right,
+			transparent 0 list.nth(list.nth($rect-ranges, 1), 1),
+			var(--pattern-color, transparent) list.nth(list.nth($rect-ranges, 1), 1) list.nth(list.nth($rect-ranges, 1), 2),
+			transparent list.nth(list.nth($rect-ranges, 1), 2) list.nth(list.nth($rect-ranges, 2), 1),
+			var(--pattern-color, transparent) list.nth(list.nth($rect-ranges, 2), 1) list.nth(list.nth($rect-ranges, 2), 2)
+		);
+}
 
 .c-block-homepage-banner {
 	// The pattern strips are position: absolute and escape all the way out to this
@@ -76,18 +117,13 @@
 	// - left:  rect, circle, rect, [circle, circle, rect, circle, ...]
 	// - right: circle, rect, circle, circle, [rect, circle, circle, rect, circle, ...]
 	&__pattern {
-		$rect-width: 4rem;
-		$circle-diameter: 8rem;
-		$circle-radius: math.div($circle-diameter, 2);
-		$cycle-width: $rect-width * 2 + $circle-diameter * 3;
-
 		position: absolute;
 		top: 0;
 		bottom: 0;
-		width: $cycle-width * 20;
+		width: $pattern-cycle-width * $pattern-repeat-count;
 		background-repeat: repeat-x;
 		background-position-y: top;
-		background-size: $cycle-width 8rem;
+		background-size: $pattern-cycle-width 8rem;
 
 		&--left {
 			right: calc(100% + 4rem);
@@ -95,30 +131,17 @@
 			// Tile (local 0 -> cycle-width): circle, circle, rect, circle, rect.
 			// Its own right edge lands on the near-text edge, so reading backwards
 			// (away from text) gives: rect, circle, rect, circle, circle, ...
-			background-image:
-				radial-gradient(
-					circle at #{$circle-radius} 50%,
-					var(--pattern-color, transparent) $circle-radius,
-					transparent #{$circle-radius + 0.02rem}
+			@include pattern-tile(
+				(
+					$pattern-circle-radius,
+					$pattern-circle-diameter + $pattern-circle-radius,
+					$pattern-circle-diameter * 2 + $pattern-rect-width + $pattern-circle-radius,
 				),
-				radial-gradient(
-					circle at #{$circle-diameter + $circle-radius} 50%,
-					var(--pattern-color, transparent) $circle-radius,
-					transparent #{$circle-radius + 0.02rem}
-				),
-				radial-gradient(
-					circle at #{$circle-diameter * 2 + $rect-width + $circle-radius} 50%,
-					var(--pattern-color, transparent) $circle-radius,
-					transparent #{$circle-radius + 0.02rem}
-				),
-				linear-gradient(
-					to right,
-					transparent 0 #{$circle-diameter * 2},
-					var(--pattern-color, transparent) #{$circle-diameter * 2}
-						#{$circle-diameter * 2 + $rect-width},
-					transparent #{$circle-diameter * 2 + $rect-width} #{$circle-diameter * 3 + $rect-width},
-					var(--pattern-color, transparent) #{$circle-diameter * 3 + $rect-width} $cycle-width
-				);
+				(
+					($pattern-circle-diameter * 2, $pattern-circle-diameter * 2 + $pattern-rect-width),
+					($pattern-circle-diameter * 3 + $pattern-rect-width, $pattern-cycle-width),
+				)
+			);
 		}
 
 		&--right {
@@ -127,29 +150,17 @@
 			// Tile (local 0 -> cycle-width): circle, rect, circle, circle, rect.
 			// Its own left edge lands on the near-text edge, so reading forwards
 			// (away from text) gives: circle, rect, circle, circle, rect, ...
-			background-image:
-				radial-gradient(
-					circle at #{$circle-radius} 50%,
-					var(--pattern-color, transparent) $circle-radius,
-					transparent #{$circle-radius + 0.02rem}
+			@include pattern-tile(
+				(
+					$pattern-circle-radius,
+					$pattern-circle-diameter + $pattern-rect-width + $pattern-circle-radius,
+					$pattern-circle-diameter * 2 + $pattern-rect-width + $pattern-circle-radius,
 				),
-				radial-gradient(
-					circle at #{$circle-diameter + $rect-width + $circle-radius} 50%,
-					var(--pattern-color, transparent) $circle-radius,
-					transparent #{$circle-radius + 0.02rem}
-				),
-				radial-gradient(
-					circle at #{$circle-diameter * 2 + $rect-width + $circle-radius} 50%,
-					var(--pattern-color, transparent) $circle-radius,
-					transparent #{$circle-radius + 0.02rem}
-				),
-				linear-gradient(
-					to right,
-					transparent 0 $circle-diameter,
-					var(--pattern-color, transparent) $circle-diameter #{$circle-diameter + $rect-width},
-					transparent #{$circle-diameter + $rect-width} #{$circle-diameter * 3 + $rect-width},
-					var(--pattern-color, transparent) #{$circle-diameter * 3 + $rect-width} $cycle-width
-				);
+				(
+					($pattern-circle-diameter, $pattern-circle-diameter + $pattern-rect-width),
+					($pattern-circle-diameter * 3 + $pattern-rect-width, $pattern-cycle-width),
+				)
+			);
 		}
 	}
 }
