@@ -12,13 +12,6 @@ $pattern-repeat-count: 20;
 // Container's (smaller, but non-zero) mobile gutter to the true screen edge.
 $pattern-mobile-overshoot: 10rem;
 
-// Used below to build each side's shape-order (circle-centers/rect-ranges) - pattern-tile
-// derives the rest (radius, antialias edge, cycle width) from $pattern-height itself.
-$pattern-rect-width: pattern.pattern-rect-width($pattern-height);
-$pattern-circle-diameter: $pattern-height;
-$pattern-circle-radius: pattern.pattern-circle-radius($pattern-height);
-$pattern-cycle-width: pattern.pattern-cycle-width($pattern-height);
-
 .c-block-homepage-banner {
 	// clip-path (not overflow-x: hidden) avoids the overflow-x/y coupling rule that would
 	// otherwise turn overflow-y into "auto" and risk a vertical scrollbar.
@@ -76,11 +69,10 @@ $pattern-cycle-width: pattern.pattern-cycle-width($pattern-height);
 		}
 	}
 
-	// --left/--right are two DIFFERENT tiles (not one tile phase-shifted via background-position
-	// - that proved unreliable), each built so the desired near-text shape sits naturally at the
-	// tile's own edge, anchored via a plain background-position-x: right / left (no offset):
-	// - left:  rect, circle, rect, circle, circle (nearest text -> farthest)
-	// - right: circle, rect, circle, circle, rect (nearest text -> farthest)
+	// The strip is always the same 5-shape cycle - rect, circle, circle, rect, circle - just
+	// entered at a different point per side (see pattern.pattern-side):
+	// - left:  enters at shape 1, nearest text -> rect, circle, rect, circle, circle
+	// - right: enters at shape 5, nearest text -> circle, rect, circle, circle, rect
 	&__pattern {
 		@include pattern.pattern-strip($pattern-height, $pattern-repeat-count);
 		top: 0;
@@ -89,35 +81,13 @@ $pattern-cycle-width: pattern.pattern-cycle-width($pattern-height);
 		&--left {
 			right: calc(100% + $pattern-distance-horizontal);
 			background-position-x: right;
-			@include pattern.pattern-tile(
-				(
-					$pattern-circle-radius,
-					$pattern-circle-diameter + $pattern-circle-radius,
-					$pattern-circle-diameter * 2 + $pattern-rect-width + $pattern-circle-radius,
-				),
-				(
-					($pattern-circle-diameter * 2, $pattern-circle-diameter * 2 + $pattern-rect-width),
-					($pattern-circle-diameter * 3 + $pattern-rect-width, $pattern-cycle-width),
-				),
-				$pattern-height
-			);
+			@include pattern.pattern-side(left, 1, $pattern-height);
 		}
 
 		&--right {
 			left: calc(100% + $pattern-distance-horizontal);
 			background-position-x: left;
-			@include pattern.pattern-tile(
-				(
-					$pattern-circle-radius,
-					$pattern-circle-diameter + $pattern-rect-width + $pattern-circle-radius,
-					$pattern-circle-diameter * 2 + $pattern-rect-width + $pattern-circle-radius,
-				),
-				(
-					($pattern-circle-diameter, $pattern-circle-diameter + $pattern-rect-width),
-					($pattern-circle-diameter * 3 + $pattern-rect-width, $pattern-cycle-width),
-				),
-				$pattern-height
-			);
+			@include pattern.pattern-side(right, 5, $pattern-height);
 		}
 
 		// Below $g-bp4 the patterns move from beside the text to above/below it (see
@@ -125,12 +95,12 @@ $pattern-cycle-width: pattern.pattern-cycle-width($pattern-height);
 		// "near text" to the slot's inner (1/3 or 2/3) edge; top/bottom: 0 already set above.
 		@media (max-width: variables.$g-bp4) {
 			&--left {
-				right: 0;
+				right: 0 !important;
 				left: auto;
 			}
 
 			&--right {
-				left: 0;
+				left: 0 !important;
 				right: auto;
 			}
 		}

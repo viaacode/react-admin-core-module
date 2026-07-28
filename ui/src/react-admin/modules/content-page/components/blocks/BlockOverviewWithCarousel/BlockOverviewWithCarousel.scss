@@ -55,9 +55,7 @@ $slide-width: 28rem;
 
 					.c-button__label {
 						font-weight: 700; // since sm buttons loose this
-						overflow: hidden;
-						text-overflow: ellipsis;
-						white-space: nowrap;
+						@include typography.truncate();
 					}
 				}
 			}
@@ -148,10 +146,7 @@ $slide-width: 28rem;
 			}
 
 			.c-block-overview-with-carousel__slide-text {
-				font-size: 3.2rem;
-				font-style: normal;
-				font-weight: 800;
-				line-height: 4.0rem;
+				@include typography.sofia-pro-heading-xl();
 			}
 		}
 

@@ -1,33 +1,86 @@
 @use "sass:math";
 @use "sass:list";
 
-// Shared geometry for the repeating decorative pattern strip (3 circles + 2 rects) used by
-// content blocks like BlockHomepageBanner and BlockHighlightText. Everything is derived from
-// a single $height so blocks only need to tune one number to get a proportional strip.
-@function pattern-rect-width($height) {
+// Shared geometry + drawing for the repeating decorative pattern strip used by content blocks
+// like BlockHomepageBanner and BlockHighlightText. The strip is always the same 5-shape cycle -
+// rect, circle, circle, rect, circle - repeated; blocks only ever vary $height, which side of
+// the content the strip is on, and which shape in the cycle sits nearest that content.
+$_pattern-canon: rect, circle, circle, rect, circle;
+
+@function _pattern-rect-width($height) {
   @return math.div($height, 2);
 }
 
-@function pattern-circle-radius($height) {
+@function _pattern-circle-radius($height) {
   @return math.div($height, 2);
 }
 
-@function pattern-antialias-edge($height) {
-  @return pattern-circle-radius($height) + 0.02rem;
+@function _pattern-antialias-edge($height) {
+  @return _pattern-circle-radius($height) + 0.02rem;
 }
 
 // Must stay a multiple of this cycle width wherever it's used as a background-size: Chrome has
 // a rendering bug where a repeating multi-layer gradient tears mid-strip when the element's
 // width isn't an exact multiple of its background-size (100vw reproduces this reliably).
-@function pattern-cycle-width($height) {
-  @return pattern-rect-width($height) * 2 + $height * 3;
+@function _pattern-cycle-width($height) {
+  @return _pattern-rect-width($height) * 2 + $height * 3;
 }
 
-// Common base for a pattern strip element - position/tiling only, no shape or side (--left /
-// --right) concerns. $repeat-count just needs to be generous enough that the strip always
-// reaches the block's own edge on any realistic viewport.
+// Floor modulo (Sass % is unreliable with negative operands) - keeps cycle indices in 1..$m.
+@function _pattern-mod1($n, $m) {
+  @return $n - math.floor(math.div($n, $m)) * $m;
+}
+
+// The 5 shapes in ascending (left-to-right) x order for a strip anchored on $side, starting
+// $start (1-5) shapes into $_pattern-canon at the edge that touches the content:
+// - right-anchored ("left" tiles, touching at their right edge): read the cycle BACKWARDS
+//   moving away from that edge, so ascending x is the cycle read FORWARDS from $start.
+// - left-anchored ("right" tiles, touching at their left edge): read the cycle FORWARDS
+//   moving away from that edge, so ascending x already IS that forward reading from $start.
+@function _pattern-ascending-shapes($side, $start) {
+  $away: ();
+  @for $i from 0 through 4 {
+    $step: if($side == right, $i, -$i);
+    $idx: _pattern-mod1($start - 1 + $step, 5) + 1;
+    $away: list.append($away, list.nth($_pattern-canon, $idx));
+  }
+  @if $side == left {
+    // list.append can't prepend, so build the reversed list back-to-front
+    $ascending: ();
+    @for $i from 5 through 1 {
+      $ascending: list.append($ascending, list.nth($away, $i));
+    }
+    @return $ascending;
+  }
+  @return $away;
+}
+
+// Lays the 5 shapes from _pattern-ascending-shapes out left-to-right, returning the
+// (circle-centers, rect-ranges) pair that _pattern-tile needs.
+@function _pattern-positions($side, $start, $height) {
+  $rect-width: _pattern-rect-width($height);
+  $circle-centers: ();
+  $rect-ranges: ();
+  $cursor: 0;
+
+  @each $shape in _pattern-ascending-shapes($side, $start) {
+    @if $shape == rect {
+      $rect-ranges: list.append($rect-ranges, ($cursor, $cursor + $rect-width), $separator: comma);
+      $cursor: $cursor + $rect-width;
+    } @else {
+      $circle-centers: list.append($circle-centers, $cursor + _pattern-circle-radius($height));
+      $cursor: $cursor + $height;
+    }
+  }
+
+  @return $circle-centers, $rect-ranges;
+}
+
+// Common base for a pattern strip element - position/tiling only, no shape or side concerns.
+// $repeat-count just needs to be generous enough that the strip always reaches the block's own
+// edge on any realistic viewport.
 @mixin pattern-strip($height, $repeat-count: 20) {
-  $cycle-width: pattern-cycle-width($height);
+  $cycle-width: _pattern-cycle-width($height);
 
   position: absolute;
   width: $cycle-width * $repeat-count;
@@ -36,14 +89,16 @@
   background-size: $cycle-width $height;
 }
 
-// Renders the repeating tile (3 circles + 2 rects) for one pattern strip. $circle-centers is a
-// 3-item list of x-offsets; $rect-ranges is a 2-item list of [start, end] pairs, both in the
-// same unit space as $height (see the pattern-* functions above). Two strips of the same
-// $height can look completely different just by passing a different shape order here.
-@mixin pattern-tile($circle-centers, $rect-ranges, $height) {
-  $circle-radius: pattern-circle-radius($height);
-  $antialias-edge: pattern-antialias-edge($height);
-  $cycle-width: pattern-cycle-width($height);
+// Draws the repeating tile (3 circles + 2 rects) for one side of a pattern strip. $side is
+// `left` or `right` (which edge of the strip touches the content); $start (1-5) picks which
+// shape of the fixed rect/circle/circle/rect/circle cycle sits nearest that content.
+@mixin pattern-side($side, $start, $height) {
+  $circle-radius: _pattern-circle-radius($height);
+  $antialias-edge: _pattern-antialias-edge($height);
+  $cycle-width: _pattern-cycle-width($height);
+  $positions: _pattern-positions($side, $start, $height);
+  $circle-centers: list.nth($positions, 1);
+  $rect-ranges: list.nth($positions, 2);
 
   background-image:
     radial-gradient(

@@ -3,8 +3,6 @@ import type { DefaultComponentProps } from '~modules/shared/types/components';
 import './BlockHighligtText.scss';
 import { Container } from '@viaa/avo2-components';
 import clsx from 'clsx';
-import { BlockHeading } from '~content-blocks/BlockHeading';
-import type { AlignOption } from '~modules/content-page/types/content-block.types';
 import { ContentPageWidth } from '~modules/content-page/types/content-pages.types.ts';
 import Html from '~shared/components/Html/Html.tsx';
 
