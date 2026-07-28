@@ -131,7 +131,7 @@ $slide-width: 28rem;
 
 		&__round {
 			width: $slide-width !important;
-			border-radius: 140px 140px 0 0;
+			border-radius: math.div($slide-width , 2) math.div($slide-width , 2) 0 0;
 
 			.c-block-overview-with-carousel__slide-image {
 				height: $slide-width;
