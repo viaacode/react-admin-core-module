@@ -1,13 +1,9 @@
-@use "sass:math";
 @use "../../../../shared/styles/settings/variables" as variables;
 @use "../../../../shared/styles/mixins/pattern" as pattern;
 @use "../../../../shared/styles/mixins/typography" as typography;
 
 $pattern-height: 12rem;
-// Mobile shrinks the strip - shapes are still drawn at the desktop $pattern-height (so they
-// keep their proportions) and scaled down visually via transform, see &__pattern.
 $pattern-height-mobile: 8rem;
-$pattern-mobile-scale: math.div($pattern-height-mobile, $pattern-height);
 $pattern-repeat-count: 20;
 // How far the mobile pattern slots overshoot &__content's edge, so they can bleed past avo2
 // Container's (smaller, but non-zero) mobile gutter to the true screen edge.
@@ -51,7 +47,6 @@ $pattern-mobile-overshoot: 15rem;
 
 			@media (max-width: variables.$g-bp4) {
 				padding: calc(#{variables.$g-spacer-unit} * 3) calc(#{variables.$g-spacer-unit} * 2.5) !important;
-				margin: -1px 0; // closes a hairline gap between the pattern and the text
 			}
 		}
 	}
@@ -62,8 +57,6 @@ $pattern-mobile-overshoot: 15rem;
 	// - right: enters at shape 2, nearest text -> circle, circle, rect, circle, rect
 	&__pattern {
 		@include pattern.pattern-strip($pattern-height, $pattern-repeat-count);
-		// Always drawn at the desktop $pattern-height so the shapes keep their proportions -
-		// the mobile media query below shrinks the whole box (incl. background) via transform.
 		height: $pattern-height;
 
 		// Aligned to &-text's top edge, not stretched to &__content's full (padded) height.
@@ -82,22 +75,21 @@ $pattern-mobile-overshoot: 15rem;
 			@include pattern.pattern-side(right, 2, $pattern-height);
 		}
 
-		// Below $g-bp4 the pattern moves from beside the text to above/below it (see
-		// &__pattern-slot) - drawn at desktop size and scaled down, anchored at the corner that
-		// must stay flush against the slot's edges.
+		// Below $g-bp4 the pattern moves from beside the text to above/below it (see &__pattern-slot).
 		@media (max-width: variables.$g-bp4) {
-			transform: scale($pattern-mobile-scale);
+			@include pattern.pattern-strip($pattern-height-mobile, $pattern-repeat-count);
+			height: $pattern-height-mobile;
 
 			&--left {
 				right: 0;
 				left: auto;
-				transform-origin: top right;
+				@include pattern.pattern-side(left, 5, $pattern-height-mobile);
 			}
 
 			&--right {
 				left: 0;
 				right: auto;
-				transform-origin: bottom left;
+				@include pattern.pattern-side(right, 2, $pattern-height-mobile);
 			}
 		}
 	}
