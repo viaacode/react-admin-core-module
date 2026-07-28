@@ -8,8 +8,7 @@ $pattern-distance-vertical: variables.$g-spacer-unit * 3;
 $pattern-distance-horizontal: variables.$g-spacer-unit * 5;
 // Generous enough that the strip always reaches this component's own edge on any viewport.
 $pattern-repeat-count: 20;
-// How far the mobile pattern slots overshoot &__content's edge, so they can bleed past avo2
-// Container's (smaller, but non-zero) mobile gutter to the true screen edge.
+// How far the mobile pattern slots overshoot &__content's edge - see &__pattern-slot.
 $pattern-mobile-overshoot: 10rem;
 
 .c-block-homepage-banner {
@@ -90,9 +89,7 @@ $pattern-mobile-overshoot: 10rem;
 			@include pattern.pattern-side(right, 5, $pattern-height);
 		}
 
-		// Below $g-bp4 the patterns move from beside the text to above/below it (see
-		// &__pattern-slot) - same tile/anchor as desktop, only the anchor's landmark moves from
-		// "near text" to the slot's inner (1/3 or 2/3) edge; top/bottom: 0 already set above.
+		// Below $g-bp4 the patterns move from beside the text to above/below it (see &__pattern-slot).
 		@media (max-width: variables.$g-bp4) {
 			&--left {
 				right: 0 !important;
@@ -106,10 +103,9 @@ $pattern-mobile-overshoot: 10rem;
 		}
 	}
 
-	// No-op on desktop (unpositioned - &__pattern's position: absolute reaches past it to
-	// &__content). Below $g-bp4 it's the positioned, overflow-clipping box that caps &__pattern
-	// at exactly 1/3 (top) / 2/3 (bottom) of &__content's width - the cap can't live on
-	// &__pattern itself without breaking the Chrome tiling-bug workaround above.
+	// No-op on desktop. Below $g-bp4 it's the positioned, overflow-clipping box that caps
+	// &__pattern at exactly 1/3 (top) / 2/3 (bottom) of &__content's width - the cap can't live
+	// on &__pattern itself without breaking the Chrome tiling-bug workaround above.
 	&__pattern-slot {
 		@media (max-width: variables.$g-bp4) {
 			position: absolute;

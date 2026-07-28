@@ -38,18 +38,12 @@ export const BlockHighlightText: FunctionComponent<BlockHighlightTextProps> = ({
 				}
 				className={clsx('c-block-highlight-text__content')}
 			>
-				{/* No-op on desktop (patterns sit beside the text via CSS); on mobile this
-					    is the clip box that caps the pattern at 1/3 screen width - see .scss.
-					    Placed here (before the title) only for mobile's source order. */}
 				<div className="c-block-highlight-text__pattern-slot c-block-highlight-text__pattern-slot--top">
 					<div
 						className="c-block-highlight-text__pattern c-block-highlight-text__pattern--left"
 						aria-hidden="true"
 					/>
 				</div>
-				{/* Carries the highlight background-color and the text's own breathing-room
-					    padding, separate from &__content's padding (which only reserves space
-					    for the patterns above/below it on mobile) - see .scss. */}
 				<Html className="c-block-highlight-text__content-text" content={content} type="p"></Html>
 				<div className="c-block-highlight-text__pattern-slot c-block-highlight-text__pattern-slot--bottom">
 					<div

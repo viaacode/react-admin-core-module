@@ -19,9 +19,9 @@ $_pattern-canon: rect, circle, circle, rect, circle;
   @return _pattern-circle-radius($height) + 0.02rem;
 }
 
-// Must stay a multiple of this cycle width wherever it's used as a background-size: Chrome has
-// a rendering bug where a repeating multi-layer gradient tears mid-strip when the element's
-// width isn't an exact multiple of its background-size (100vw reproduces this reliably).
+// Must stay a multiple of this cycle width wherever it's used as a background-size: Chrome
+// tears a repeating multi-layer gradient mid-strip when the element's width isn't an exact
+// multiple of its background-size.
 @function _pattern-cycle-width($height) {
   @return _pattern-rect-width($height) * 2 + $height * 3;
 }
@@ -32,31 +32,30 @@ $_pattern-canon: rect, circle, circle, rect, circle;
 }
 
 // The 5 shapes in ascending (left-to-right) x order for a strip anchored on $side, starting
-// $start (1-5) shapes into $_pattern-canon at the edge that touches the content:
-// - right-anchored ("left" tiles, touching at their right edge): read the cycle BACKWARDS
-//   moving away from that edge, so ascending x is the cycle read FORWARDS from $start.
-// - left-anchored ("right" tiles, touching at their left edge): read the cycle FORWARDS
-//   moving away from that edge, so ascending x already IS that forward reading from $start.
+// $start (1-5) shapes into $_pattern-canon at the edge touching the content. "left" tiles touch
+// at their RIGHT edge, so we walk the cycle backwards moving away from it and then flip that
+// into left-to-right order; "right" tiles touch at their LEFT edge, so walking forwards away
+// from it already IS left-to-right order.
 @function _pattern-ascending-shapes($side, $start) {
-  $away: ();
+  $away-from-content: ();
   @for $i from 0 through 4 {
     $step: if($side == right, $i, -$i);
     $idx: _pattern-mod1($start - 1 + $step, 5) + 1;
-    $away: list.append($away, list.nth($_pattern-canon, $idx));
+    $away-from-content: list.append($away-from-content, list.nth($_pattern-canon, $idx));
   }
   @if $side == left {
-    // list.append can't prepend, so build the reversed list back-to-front
+    // list.append can't prepend, so build the flipped list back-to-front
     $ascending: ();
     @for $i from 5 through 1 {
-      $ascending: list.append($ascending, list.nth($away, $i));
+      $ascending: list.append($ascending, list.nth($away-from-content, $i));
     }
     @return $ascending;
   }
-  @return $away;
+  @return $away-from-content;
 }
 
 // Lays the 5 shapes from _pattern-ascending-shapes out left-to-right, returning the
-// (circle-centers, rect-ranges) pair that _pattern-tile needs.
+// (circle-centers, rect-ranges) pair that pattern-side draws from.
 @function _pattern-positions($side, $start, $height) {
   $rect-width: _pattern-rect-width($height);
   $circle-centers: ();

@@ -5,8 +5,7 @@
 $pattern-height: 12rem;
 $pattern-height-mobile: 8rem;
 $pattern-repeat-count: 20;
-// How far the mobile pattern slots overshoot &__content's edge, so they can bleed past avo2
-// Container's (smaller, but non-zero) mobile gutter to the true screen edge.
+// How far the mobile pattern slots overshoot &__content's edge - see &__pattern-slot.
 $pattern-mobile-overshoot: 15rem;
 
 .c-block-highlight-text {
