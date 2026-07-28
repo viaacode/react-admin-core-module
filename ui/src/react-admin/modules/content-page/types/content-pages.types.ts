@@ -142,8 +142,18 @@ export enum ContentEditActionType {
 	ADD_CONTENT_BLOCK_CONFIG = '@@admin-content-edit/ADD_CONTENT_BLOCK_CONFIG',
 	REMOVE_CONTENT_BLOCK_CONFIG = '@@admin-content-edit/REMOVE_CONTENT_BLOCK_CONFIG',
 	REORDER_CONTENT_BLOCK_CONFIG = '@@admin-content-edit/REORDER_CONTENT_BLOCK_CONFIG',
+	/**
+	 * @deprecated Legacy: only used by the array-valued `components.state` repetition
+	 * mechanism (A). For new blocks use the `fieldGroup` + `repeat` mechanism (B), which
+	 * needs no dedicated add/remove actions. See `components/blocks/README.md`.
+	 */
 	ADD_COMPONENTS_STATE = '@@admin-content-edit/ADD_COMPONENTS_STATE',
 	SET_COMPONENTS_STATE = '@@admin-content-edit/SET_COMPONENTS_STATE',
+	/**
+	 * @deprecated Legacy: only used by the array-valued `components.state` repetition
+	 * mechanism (A). For new blocks use the `fieldGroup` + `repeat` mechanism (B), which
+	 * needs no dedicated add/remove actions. See `components/blocks/README.md`.
+	 */
 	REMOVE_COMPONENTS_STATE = '@@admin-content-edit/REMOVE_COMPONENTS_STATE',
 	SET_BLOCK_STATE = '@@admin-content-edit/SET_BLOCK_STATE',
 	SET_CONTENT_BLOCK_ERROR = '@@admin-content-edit/SET_CONTENT_BLOCK_ERROR',
