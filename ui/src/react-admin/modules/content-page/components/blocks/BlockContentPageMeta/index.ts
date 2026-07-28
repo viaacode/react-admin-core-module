@@ -1,2 +1,2 @@
-export * from './BlockContentPageMeta.editorconfig';
 export * from './BlockContentPageMeta';
+export * from './BlockContentPageMeta.editorconfig';

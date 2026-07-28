@@ -41,8 +41,8 @@ import { useGetAllLanguages } from '../hooks/use-get-all-languages';
 import { TranslationsService } from '../translations.service';
 import './TranslationsOverview.scss';
 import { AvoSearchOrderDirection } from '@viaa/avo2-types';
-import { isHetArchief } from '~shared/helpers/is-hetarchief.ts';
 import { AdminConfigManager } from '~core/config';
+import { isHetArchief } from '~shared/helpers/is-hetarchief.ts';
 
 type OrderProp = `value_${Locale}` | 'id';
 

@@ -47,9 +47,11 @@ export interface LinkInfo {
 	className?: string;
 	to?: string;
 	onClick?: (evt: MouseEvent) => void;
+	onKeyUp?: (evt: KeyboardEvent) => void;
 	title?: string;
 	children: ReactNode;
 	target?: LinkTarget;
+	tabIndex?: number;
 }
 
 export type NavigateFunction = (to: string, options?: { replace?: boolean }) => Promise<void>;
@@ -169,6 +171,7 @@ export interface IconConfig {
 		angleRight: IconComponentProps;
 		anglesLeft: IconComponentProps;
 		anglesRight: IconComponentProps;
+		arrowLeft: IconComponentProps;
 		arrowRight: IconComponentProps;
 		delete: IconComponentProps;
 		extraOptions: IconComponentProps;

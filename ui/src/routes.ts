@@ -1,5 +1,5 @@
 import { asyncNoop } from 'es-toolkit';
-import { type MiddlewareFunction, redirect, type RouteObject } from 'react-router';
+import { type MiddlewareFunction, type RouteObject, redirect } from 'react-router';
 import { Loading } from '~shared/components/Loading/Loading';
 import { ROUTE_PARTS } from '~shared/consts';
 import App from './App';
