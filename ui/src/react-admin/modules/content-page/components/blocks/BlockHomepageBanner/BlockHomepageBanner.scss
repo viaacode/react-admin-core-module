@@ -3,19 +3,32 @@
 @use "../../../../shared/styles/settings/colors" as colors;
 
 .c-block-homepage-banner {
+	// The pattern strips are position: absolute and escape all the way out to this
+	// element's own edges (and beyond) - clip them here so they never cause the page to
+	// scroll horizontally. clip-path (rather than overflow-x: hidden) avoids the CSS
+	// overflow-x/overflow-y coupling rule that would otherwise turn overflow-y into
+	// "auto" and risk an unwanted vertical scrollbar.
+	clip-path: inset(0);
+	width: 100% !important;
+	max-width: none !important;
+
 	&__content {
-		width: 75%;
+		position: relative;
+		max-width: 75%;
+		min-height: 8rem;
 		display: flex;
 		flex-direction: column;
 		gap: 3.2rem;
 
-		&--left,
-		&--center {
+		&--left {
 			margin-right: auto;
 		}
 
-		&--right,
 		&--center {
+			margin: 0 auto;
+		}
+
+		&--right {
 			margin-left: auto;
 		}
 
@@ -41,6 +54,102 @@
 			font-style: normal !important;
 			font-weight: 500 !important;
 			line-height: 2.8rem !important;
+		}
+	}
+
+	// Anchored directly off the text box's own edge (not Container's), so the 4rem gap
+	// holds regardless of alignment or the actual (up-to-75%) width of the text. Each
+	// strip is a single element - overshooting far enough that it always reaches this
+	// component's own edge, clipped by the clip-path above.
+	//
+	// The width MUST be an exact multiple of the tile's cycle-width. Chrome has a
+	// rendering bug where a repeating multi-layer gradient background tears/gaps in the
+	// middle of the element when the element's own width isn't an exact multiple of
+	// background-size - clipping a partial tile at the edges is fine, but a non-multiple
+	// width visibly breaks the repeat. Using 100vw (or any other non-multiple width)
+	// reproduces this reliably.
+	//
+	// left and right are two DIFFERENT tiles (not the same tile phase-shifted via a
+	// background-position offset - that proved unreliable) - each built so the desired
+	// near-text shape sits naturally at the tile's own edge, letting both sides anchor
+	// with a plain background-position-x: right / left (no offset at all):
+	// - left:  rect, circle, rect, [circle, circle, rect, circle, ...]
+	// - right: circle, rect, circle, circle, [rect, circle, circle, rect, circle, ...]
+	&__pattern {
+		$rect-width: 4rem;
+		$circle-diameter: 8rem;
+		$circle-radius: math.div($circle-diameter, 2);
+		$cycle-width: $rect-width * 2 + $circle-diameter * 3;
+
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		width: $cycle-width * 20;
+		background-repeat: repeat-x;
+		background-position-y: top;
+		background-size: $cycle-width 8rem;
+
+		&--left {
+			right: calc(100% + 4rem);
+			background-position-x: right;
+			// Tile (local 0 -> cycle-width): circle, circle, rect, circle, rect.
+			// Its own right edge lands on the near-text edge, so reading backwards
+			// (away from text) gives: rect, circle, rect, circle, circle, ...
+			background-image:
+				radial-gradient(
+					circle at #{$circle-radius} 50%,
+					var(--pattern-color, transparent) $circle-radius,
+					transparent #{$circle-radius + 0.02rem}
+				),
+				radial-gradient(
+					circle at #{$circle-diameter + $circle-radius} 50%,
+					var(--pattern-color, transparent) $circle-radius,
+					transparent #{$circle-radius + 0.02rem}
+				),
+				radial-gradient(
+					circle at #{$circle-diameter * 2 + $rect-width + $circle-radius} 50%,
+					var(--pattern-color, transparent) $circle-radius,
+					transparent #{$circle-radius + 0.02rem}
+				),
+				linear-gradient(
+					to right,
+					transparent 0 #{$circle-diameter * 2},
+					var(--pattern-color, transparent) #{$circle-diameter * 2}
+						#{$circle-diameter * 2 + $rect-width},
+					transparent #{$circle-diameter * 2 + $rect-width} #{$circle-diameter * 3 + $rect-width},
+					var(--pattern-color, transparent) #{$circle-diameter * 3 + $rect-width} $cycle-width
+				);
+		}
+
+		&--right {
+			left: calc(100% + 4rem);
+			background-position-x: left;
+			// Tile (local 0 -> cycle-width): circle, rect, circle, circle, rect.
+			// Its own left edge lands on the near-text edge, so reading forwards
+			// (away from text) gives: circle, rect, circle, circle, rect, ...
+			background-image:
+				radial-gradient(
+					circle at #{$circle-radius} 50%,
+					var(--pattern-color, transparent) $circle-radius,
+					transparent #{$circle-radius + 0.02rem}
+				),
+				radial-gradient(
+					circle at #{$circle-diameter + $rect-width + $circle-radius} 50%,
+					var(--pattern-color, transparent) $circle-radius,
+					transparent #{$circle-radius + 0.02rem}
+				),
+				radial-gradient(
+					circle at #{$circle-diameter * 2 + $rect-width + $circle-radius} 50%,
+					var(--pattern-color, transparent) $circle-radius,
+					transparent #{$circle-radius + 0.02rem}
+				),
+				linear-gradient(
+					to right,
+					transparent 0 $circle-diameter,
+					var(--pattern-color, transparent) $circle-diameter #{$circle-diameter + $rect-width},
+					transparent #{$circle-diameter + $rect-width} #{$circle-diameter * 3 + $rect-width},
+					var(--pattern-color, transparent) #{$circle-diameter * 3 + $rect-width} $cycle-width
+				);
 		}
 	}
 }

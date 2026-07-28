@@ -1,4 +1,4 @@
-import React, { type FunctionComponent, type ReactElement } from 'react';
+import React, { type CSSProperties, type FunctionComponent, type ReactElement } from 'react';
 import type { DefaultComponentProps } from '~modules/shared/types/components';
 import './BlockHomepageBanner.scss';
 import { Container } from '@viaa/avo2-components';
@@ -26,10 +26,13 @@ export const BlockHomepageBanner: FunctionComponent<BlockHomepageBannerProps> = 
 }): ReactElement => {
 	return (
 		<article
-			className="c-block-homepage-banner"
-			style={{
-				background: backgroundColor,
-			}}
+			className={clsx("c-block-homepage-banner", 'o-container')}
+			style={
+				{
+					background: backgroundColor,
+					'--pattern-color': bannerColor,
+				} as CSSProperties
+			}
 		>
 			<Container
 				mode="horizontal"
@@ -39,12 +42,18 @@ export const BlockHomepageBanner: FunctionComponent<BlockHomepageBannerProps> = 
 						: (pageWidth?.toLowerCase() as 'medium' | 'large')
 				}
 			>
-				<div className={clsx("c-block-homepage-banner__content"
-					, `c-block-homepage-banner__content--${textAlign}`)}>
+				<div
+					className={clsx(
+						'c-block-homepage-banner__content',
+						`c-block-homepage-banner__content--${textAlign}`
+					)}
+				>
 					<BlockHeading className="c-block-homepage-banner__content-title" type="h4">
 						{title}
 					</BlockHeading>
 					<Html className="c-block-homepage-banner__content-text" content={content} type="p"></Html>
+					<div className="c-block-homepage-banner__pattern c-block-homepage-banner__pattern--left" aria-hidden="true" />
+					<div className="c-block-homepage-banner__pattern c-block-homepage-banner__pattern--right" aria-hidden="true" />
 				</div>
 			</Container>
 		</article>
