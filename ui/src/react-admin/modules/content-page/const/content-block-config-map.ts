@@ -38,6 +38,7 @@ import {
 	SPOTLIGHT_BLOCK_CONFIG,
 } from '~content-blocks/BlockSpotlight';
 import { TAGS_WITH_LINK_BLOCK_CONFIG } from '~content-blocks/BlockTagsWithLink';
+import { THEME_REELS_BLOCK_CONFIG } from '~content-blocks/BlockThemeReels';
 import { THREE_CLICKABLE_TILES_BLOCK_CONFIG } from '~content-blocks/BlockThreeClickableTiles';
 import { UITGEKLAARD_BLOCK_CONFIG } from '~content-blocks/BlockUitgeklaard';
 import { MEDIA_PLAYER_BLOCK_CONFIG } from '~content-blocks/BlockVideo';
@@ -91,4 +92,5 @@ export const CONTENT_BLOCK_CONFIG_MAP: Record<
 	[ContentBlockType.OverviewWithCarousel]: OVERVIEW_WITH_CAROUSEL_CONFIG,
 	[ContentBlockType.HomepageBanner]: CONTENT_HOMEPAGE_BANNER_CONFIG,
 	[ContentBlockType.HighlightText]: CONTENT_HIGHLIGHT_TEXT_CONFIG,
+	[ContentBlockType.ThemeReels]: THEME_REELS_BLOCK_CONFIG,
 };

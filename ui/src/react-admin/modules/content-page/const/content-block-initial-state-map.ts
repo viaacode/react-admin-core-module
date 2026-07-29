@@ -39,6 +39,7 @@ import {
 	INITIAL_SPOTLIGHT_COMPONENTS_STATE,
 } from '~content-blocks/BlockSpotlight';
 import { INITIAL_TAGS_WITH_LINK_COMPONENTS_STATE } from '~content-blocks/BlockTagsWithLink';
+import { INITIAL_THEME_REELS_COMPONENTS_STATE } from '~content-blocks/BlockThemeReels';
 import { INITIAL_THREE_CLICKABLE_TILES_COMPONENTS_STATE } from '~content-blocks/BlockThreeClickableTiles';
 import { INITIAL_UITGEKLAARD_BLOCK_STATE } from '~content-blocks/BlockUitgeklaard';
 import { INITIAL_MEDIA_PLAYER_COMPONENTS_STATE } from '~content-blocks/BlockVideo';
@@ -94,4 +95,5 @@ export const CONTENT_BLOCK_INITIAL_STATE_MAP: {
 	[ContentBlockType.OverviewWithCarousel]: INITIAL_OVERVIEW_WITH_CAROUSEL_BLOCK_STATE,
 	[ContentBlockType.HomepageBanner]: INITIAL_CONTENT_HOMEPAGE_BANNER_BLOCK_STATE,
 	[ContentBlockType.HighlightText]: INITIAL_CONTENT_HIGHLIGHT_TEXT_BLOCK_STATE,
+	[ContentBlockType.ThemeReels]: INITIAL_THEME_REELS_COMPONENTS_STATE,
 };

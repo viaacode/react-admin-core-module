@@ -31,6 +31,7 @@ import { BlockRichTextWrapper } from '~content-blocks/BlockRichText';
 import { BlockScrollDownNudge } from '~content-blocks/BlockScrollDownNudge';
 import { BlockProjectSpotlightWrapper, BlockSpotlight } from '~content-blocks/BlockSpotlight';
 import { BlockTagsWithLink } from '~content-blocks/BlockTagsWithLink';
+import { BlockThemeReels } from '~content-blocks/BlockThemeReels';
 import { BlockThreeClickableTiles } from '~content-blocks/BlockThreeClickableTiles';
 import { BlockUitgeklaard } from '~content-blocks/BlockUitgeklaard';
 import { BlockVideoWrapper } from '~content-blocks/BlockVideo';
@@ -91,6 +92,7 @@ export function GET_BLOCK_COMPONENT(
 		[ContentBlockType.OverviewWithCarousel]: BlockOverviewWithCarousel,
 		[ContentBlockType.HomepageBanner]: BlockHomepageBanner,
 		[ContentBlockType.HighlightText]: BlockHighlightText,
+		[ContentBlockType.ThemeReels]: BlockThemeReels,
 
 		// Avo specific blocks
 		[ContentBlockType.MediaGrid]: loadComponentFromConfig(ContentBlockType.MediaGrid),
