@@ -2,6 +2,7 @@
 @use "../../../../shared/styles/settings/variables" as variables;
 @use "../../../../shared/styles/settings/colors" as colors;
 @use '../../../../shared/styles/mixins/typography' as typography;
+@use '../../../../shared/styles/mixins/animations' as animations;
 
 .c-block-theme-reels-section {
 	.c-block-theme-reels-section__header {
@@ -129,7 +130,7 @@
 
 		&:hover:not(&--first) {
 			.c-block-theme-reels-section__slide-image > img {
-				transform: scale(1.1);
+				@include animations.zoom-in-animation;
 			}
 		}
 
@@ -148,8 +149,8 @@
 				object-fit: cover;
 				width: 100%;
 				height: 100%;
-				transition: transform 0.5s ease-out;
 				object-position: center;
+				@include animations.zoom-in-transition;
 			}
 
 			&-placeholder {
