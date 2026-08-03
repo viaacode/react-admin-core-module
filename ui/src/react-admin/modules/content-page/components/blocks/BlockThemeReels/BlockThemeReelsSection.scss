@@ -24,6 +24,17 @@
 			width: fit-content;
 			@include typography.truncate();
 			@include typography.sofia-pro-heading-lg();
+
+			@media (max-width: variables.$g-bp2) {
+				line-height: 2.6rem;
+			}
+		}
+
+		&-subtitle {
+			@include typography.truncate-after-x-lines(3);
+			@include typography.sofia-pro-body-sm();
+			color: colors.$neutral;
+			width: 100%;
 		}
 
 		&-actions {
@@ -92,6 +103,12 @@
 		width: 28rem;
 		gap: variables.$g-spacer-unit * 2;
 
+		@media (max-width: variables.$g-bp2) {
+			height: 19.6rem !important;
+			width: 20rem;
+			gap: variables.$g-spacer-unit;
+		}
+
 		&--first {
 			width: 46.8rem;
 
@@ -110,7 +127,7 @@
 			}
 		}
 
-		&:hover:not(:first-of-type) {
+		&:hover:not(&--first) {
 			.c-block-theme-reels-section__slide-image > img {
 				transform: scale(1.1);
 			}
@@ -122,6 +139,10 @@
 			height: 100%;
 			max-height: 16rem;
 			overflow: hidden;
+
+			@media (max-width: variables.$g-bp2) {
+				max-height: 12rem;
+			}
 
 			> img {
 				object-fit: cover;
@@ -197,6 +218,11 @@
 
 				width: 100%;
 				@include typography.truncate-after-x-lines(2);
+
+				@media (max-width: variables.$g-bp2) {
+					font-size: 1.4rem;
+					line-height: 2rem;
+				}
 			}
 
 			&-text {
@@ -204,9 +230,13 @@
 				width: 100%;
 
 				color: colors.$color-gray-1000;
-				@include typography.sofia-pro-body();
-				font-size: 1.6rem;
-				line-height: 2.4rem;
+				@include typography.sofia-pro-body-sm();
+
+
+				@media (max-width: variables.$g-bp2) {
+					font-size: 1.4rem;
+					line-height: 2rem;
+				}
 			}
 		}
 	}

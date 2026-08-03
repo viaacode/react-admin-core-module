@@ -15,6 +15,7 @@ import { useGetThemeWithObjects } from '~content-blocks/BlockThemeReels/hooks/us
 import { AdminConfigManager } from '~core/config';
 import { App, Locale } from '~modules/translations/translations.core.types.ts';
 import { generateSmartLink } from '~shared/components/SmartLink/SmartLink.tsx';
+import { isMobileWidth } from '~shared/helpers/media-query.ts';
 
 export interface BlockThemeReelSectionProps extends DefaultComponentProps {
 	themeId: string;
@@ -91,7 +92,12 @@ export const BlockThemeReelSection: FunctionComponent<BlockThemeReelSectionProps
 	return (
 		<div className={clsx('c-block-theme-reels-section')}>
 			<div className="c-block-theme-reels-section__header">
-				<span className={clsx('c-block-theme-reels-section__header-title')}>{themeName}</span>
+				<span className="c-block-theme-reels-section__header-title">{themeName}</span>
+				{isMobileWidth() && (description || themeDescription) && (
+					<span className="c-block-theme-reels-section__header-subtitle">
+						{description || themeDescription || ''}
+					</span>
+				)}
 				<div className="c-block-theme-reels-section__header-actions">
 					{themeContentPagePath &&
 						generateSmartLink(
@@ -142,22 +148,24 @@ export const BlockThemeReelSection: FunctionComponent<BlockThemeReelSectionProps
 				onTransitionEnd={() => updateSlideButtons()}
 				watchSlidesProgress={true}
 			>
-				<SwiperSlide
-					key={`theme-reel-slide__${theme.slug}__start-image`}
-					className={clsx(
-						'c-block-theme-reels-section__slide',
-						'c-block-theme-reels-section__slide--first'
-					)}
-					title={description || themeDescription || ''}
-				>
-					{renderSlideContent(
-						image || theme.imageUrl,
-						imageAltText || themeName,
-						'',
-						description || themeDescription || '',
-						clsx(`c-block-theme-reels-section__slide-image--mask-${imageMask}`)
-					)}
-				</SwiperSlide>
+				{!isMobileWidth() && (
+					<SwiperSlide
+						key={`theme-reel-slide__${theme.slug}__start-image`}
+						className={clsx(
+							'c-block-theme-reels-section__slide',
+							'c-block-theme-reels-section__slide--first'
+						)}
+						title={description || themeDescription || ''}
+					>
+						{renderSlideContent(
+							image || theme.imageUrl,
+							imageAltText || themeName,
+							'',
+							description || themeDescription || '',
+							clsx(`c-block-theme-reels-section__slide-image--mask-${imageMask}`)
+						)}
+					</SwiperSlide>
+				)}
 				{theme.ieObjects.map(
 					({ id, format, maintainerName, schemaIdentifier, thumbnailUrl, name }) => {
 						const componentClassName = clsx('c-block-theme-reels-section__slide');

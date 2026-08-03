@@ -38,7 +38,11 @@ $font-family: "SofiaPro", sans-serif;
 }
 
 @mixin sofia-pro-body($important: false) {
-  @include sofia-pro(1.8rem, 500, 2.8rem, $important);
+	@include sofia-pro(1.8rem, 500, 2.8rem, $important);
+}
+
+@mixin sofia-pro-body-sm($important: false) {
+	@include sofia-pro(1.6rem, 500, 2.4rem, $important);
 }
 
 // Single-line truncation with an ellipsis - shared with .u-truncate (utilities/_text.scss).
