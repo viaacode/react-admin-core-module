@@ -13,6 +13,7 @@ export interface Theme {
 export interface ThemeWithObjects extends Theme {
 	ieObjects: {
 		id: string;
+		schemaIdentifier: string;
 		name: string;
 		format: string;
 		thumbnailUrl: string;

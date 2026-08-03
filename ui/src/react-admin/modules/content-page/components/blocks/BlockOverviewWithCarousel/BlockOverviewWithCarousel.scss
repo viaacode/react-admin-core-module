@@ -173,13 +173,8 @@ $slide-width: 28rem;
 		}
 
 		&-text {
-			display: -webkit-box;
-			-webkit-box-orient: vertical;
-			-webkit-line-clamp: 2;
-			line-clamp: 2;
-			overflow: hidden;
-			text-overflow: ellipsis;
 			width: 100%;
+			@include typography.truncate-after-x-lines(2);
 
 			color: colors.$color-gray-1000;
 			@include typography.sofia-pro-heading-md();

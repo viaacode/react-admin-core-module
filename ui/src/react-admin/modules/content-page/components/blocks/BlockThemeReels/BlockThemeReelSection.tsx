@@ -1,7 +1,7 @@
 import { Image, LinkTarget } from '@viaa/avo2-components';
 import React, { type FunctionComponent, type ReactNode, useEffect, useState } from 'react';
 import type { DefaultComponentProps } from '~modules/shared/types/components';
-import './BlockThemeReels.scss';
+import './BlockThemeReelsSection.scss';
 import { Button } from '@meemoo/react-components';
 import type SwiperController from 'swiper';
 import { Controller } from 'swiper/modules';
@@ -72,12 +72,16 @@ export const BlockThemeReelSection: FunctionComponent<BlockThemeReelSectionProps
 				<Image
 					src={image || theme.imageUrl || ''}
 					alt={imageAlt || description}
-					className={clsx('c-block-theme-reels__slide-image', className)}
+					className={clsx('c-block-theme-reels-section__slide-image', className)}
 				/>
-				<div className="c-block-theme-reels__slide-description">
-					{title && <span className="c-block-theme-reels__slide-description-title">{title}</span>}
+				<div className="c-block-theme-reels-section__slide-description">
+					{title && (
+						<span className="c-block-theme-reels-section__slide-description-title">{title}</span>
+					)}
 					{description && (
-						<span className="c-block-theme-reels__slide-description-text">{description}</span>
+						<span className="c-block-theme-reels-section__slide-description-text">
+							{description}
+						</span>
 					)}
 				</div>
 			</>
@@ -85,10 +89,10 @@ export const BlockThemeReelSection: FunctionComponent<BlockThemeReelSectionProps
 	};
 
 	return (
-		<div className={clsx('c-block-theme-reels')}>
-			<div className="c-block-theme-reels__header">
-				<span className={clsx('c-block-overview-with-carousel__header-title')}>{themeName}</span>
-				<div className="c-block-theme-reels__header-actions">
+		<div className={clsx('c-block-theme-reels-section')}>
+			<div className="c-block-theme-reels-section__header">
+				<span className={clsx('c-block-theme-reels-section__header-title')}>{themeName}</span>
+				<div className="c-block-theme-reels-section__header-actions">
 					{themeContentPagePath &&
 						generateSmartLink(
 							{
@@ -106,7 +110,7 @@ export const BlockThemeReelSection: FunctionComponent<BlockThemeReelSectionProps
 							undefined,
 							-1
 						)}
-					<div className="c-block-theme-reels__header-nav">
+					<div className="c-block-theme-reels-section__header-nav">
 						{showPrevSlideButton && (
 							<Button
 								variants={['black', 'sm']}
@@ -131,7 +135,7 @@ export const BlockThemeReelSection: FunctionComponent<BlockThemeReelSectionProps
 			<Swiper
 				modules={[Controller]}
 				controller={{ control: controlledSwiper }}
-				className="c-block-theme-reels__wrapper"
+				className="c-block-theme-reels-section__wrapper"
 				slidesPerView="auto"
 				spaceBetween={16}
 				onSwiper={setControlledSwiper}
@@ -139,28 +143,95 @@ export const BlockThemeReelSection: FunctionComponent<BlockThemeReelSectionProps
 				watchSlidesProgress={true}
 			>
 				<SwiperSlide
-					key={`carousel-slide__${theme.slug}__start-image`}
-					className="c-block-theme-reels__slide--first"
+					key={`theme-reel-slide__${theme.slug}__start-image`}
+					className={clsx(
+						'c-block-theme-reels-section__slide',
+						'c-block-theme-reels-section__slide--first'
+					)}
+					title={description || themeDescription || ''}
 				>
 					{renderSlideContent(
 						image || theme.imageUrl,
 						imageAltText || themeName,
 						'',
 						description || themeDescription || '',
-						clsx(`c-block-theme-reels__slide-image--mask-${imageMask}`)
+						clsx(`c-block-theme-reels-section__slide-image--mask-${imageMask}`)
 					)}
 				</SwiperSlide>
-				{theme.ieObjects.map(({ id, format, maintainerName, maintainerId, thumbnailUrl, name }) => {
-					const componentClassName = clsx('c-block-theme-reels__slide');
-					return (
-						<SwiperSlide
-							key={`carousel-slide__${theme.slug}__${id}}`}
-							className={componentClassName}
-						>
-							{renderSlideContent(thumbnailUrl, name, name, maintainerName)}
-						</SwiperSlide>
-					);
-				})}
+				{theme.ieObjects.map(
+					({ id, format, maintainerName, schemaIdentifier, thumbnailUrl, name }) => {
+						const componentClassName = clsx('c-block-theme-reels-section__slide');
+						return (
+							<SwiperSlide
+								key={`theme-reel-slide__${theme.slug}__${id}}`}
+								className={componentClassName}
+							>
+								{({ isVisible }) => {
+									return generateSmartLink(
+										{
+											type: AvoCoreContentPickerType.INTERNAL_LINK,
+											target: LinkTarget.Self,
+											value: `/pid/${schemaIdentifier}`,
+										},
+										renderSlideContent(
+											thumbnailUrl,
+											name,
+											name,
+											maintainerName,
+											`c-block-theme-reels-section__slide-image--format-${format}`
+										),
+										name,
+										componentClassName,
+										isVisible ? undefined : -1
+									);
+								}}
+							</SwiperSlide>
+						);
+					}
+				)}
+				{themeContentPagePath && (
+					<SwiperSlide
+						key={`theme-reel-slide__${theme.slug}__start-image`}
+						className={clsx(
+							'c-block-theme-reels-section__slide',
+							'c-block-theme-reels-section__slide--last'
+						)}
+					>
+						{({ isVisible }) => {
+							return generateSmartLink(
+								{
+									value: themeContentPagePath,
+									type: AvoCoreContentPickerType.CONTENT_PAGE,
+									target: LinkTarget.Self,
+								},
+								<>
+									<div
+										className={clsx(
+											'c-block-theme-reels-section__slide-image',
+											'c-block-theme-reels-section__slide-image-placeholder'
+										)}
+										aria-hidden
+									>
+										<Button
+											variants={['black', 'sm', 'block']}
+											icon={<Icon name="add" />}
+											disabled
+											tabIndex={-1}
+										/>
+									</div>
+									<div className="c-block-theme-reels-section__slide-description">
+										<span className="c-block-theme-reels-section__slide-description-title">
+											{tText('Toon alle materialen voor dit theme', {}, [App.HET_ARCHIEF])}
+										</span>
+									</div>
+								</>,
+								tText('Toon alle materialen voor dit theme', {}, [App.HET_ARCHIEF]),
+								'c-block-theme-reels-section__slide',
+								isVisible ? undefined : -1
+							);
+						}}
+					</SwiperSlide>
+				)}
 			</Swiper>
 		</div>
 	);
