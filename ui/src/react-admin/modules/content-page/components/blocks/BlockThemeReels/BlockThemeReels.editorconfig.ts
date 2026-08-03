@@ -93,7 +93,17 @@ export const THEME_REELS_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 					},
 					description: TEXT_FIELD({
 						label: tText('Beschrijving'),
-						validator: undefined,
+						validator: (value: string) => {
+							const errorArray: string[] = [];
+
+							if (value?.length > 300) {
+								errorArray.push(
+									tText('Beschrijving mag max 300 karakters lang zijn', {}, [HET_ARCHIEF])
+								);
+							}
+
+							return errorArray;
+						},
 					}),
 				},
 				type: 'fieldGroup',
@@ -103,9 +113,12 @@ export const THEME_REELS_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 					deleteButtonLabel: tText('verwijder thema', {}, [HET_ARCHIEF]),
 				},
 			},
-			buttonLabel: TEXT_FIELD({
-				label: tText('button label', {}, [HET_ARCHIEF]),
-			}),
+			buttonLabel: TEXT_FIELD(
+				{
+					label: tText('button label', {}, [HET_ARCHIEF]),
+				},
+				tText('button label is verplicht', {}, [HET_ARCHIEF])
+			),
 			buttonAltTitle: TEXT_FIELD({
 				label: tText('button alt title', {}, [HET_ARCHIEF]),
 			}),
