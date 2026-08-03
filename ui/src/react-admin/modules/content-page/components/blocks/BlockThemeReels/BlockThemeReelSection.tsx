@@ -1,4 +1,4 @@
-import { Image, LinkTarget } from '@viaa/avo2-components';
+import { type IconName, Image, LinkTarget } from '@viaa/avo2-components';
 import React, { type FunctionComponent, type ReactNode, useEffect, useState } from 'react';
 import type { DefaultComponentProps } from '~modules/shared/types/components';
 import './BlockThemeReelsSection.scss';
@@ -61,20 +61,63 @@ export const BlockThemeReelSection: FunctionComponent<BlockThemeReelSectionProps
 	const themeContentPagePath =
 		locale === Locale.En ? theme.contentPagePathEn : theme.contentPagePathNl;
 
+	const getIconFromObjectType = (format: string | undefined): string => {
+		switch (format) {
+			case 'film':
+			case 'video':
+			case 'videofragment':
+				return 'no-video--light';
+
+			case 'audio':
+			case 'audiofragment':
+				return 'no-audio--light';
+
+			case 'newspaper':
+			case 'newspaperpage':
+				return 'no-newspaper--light';
+
+			case 'image':
+				return 'no-image--light';
+
+			default:
+				return 'no-file--light';
+		}
+	};
+
 	const renderSlideContent = (
 		image: string,
 		imageAlt: string,
 		title: string,
 		description: string,
-		className?: string
+		className?: string,
+		format?: string
 	) => {
 		return (
 			<>
-				<Image
-					src={image || theme.imageUrl || ''}
-					alt={imageAlt || description}
-					className={clsx('c-block-theme-reels-section__slide-image', className)}
-				/>
+				{image ? (
+					<Image
+						src={image}
+						alt={imageAlt || description}
+						className={clsx('c-block-theme-reels-section__slide-image', className)}
+					/>
+				) : (
+					<div
+						className={clsx(
+							'c-block-theme-reels-section__slide-image',
+							'c-block-theme-reels-section__slide-image-placeholder',
+							className
+						)}
+						aria-hidden
+					>
+						<Button
+							className="c-block-theme-reels-section__slide-image-placeholder-icon"
+							variants={['sm', 'block']}
+							icon={<Icon name={getIconFromObjectType(format) as IconName} />}
+							disabled
+							tabIndex={-1}
+						/>
+					</div>
+				)}
 				<div className="c-block-theme-reels-section__slide-description">
 					{title && (
 						<span className="c-block-theme-reels-section__slide-description-title">{title}</span>
@@ -186,7 +229,8 @@ export const BlockThemeReelSection: FunctionComponent<BlockThemeReelSectionProps
 											name,
 											name,
 											maintainerName,
-											`c-block-theme-reels-section__slide-image--format-${format}`
+											`c-block-theme-reels-section__slide-image--format-${format}`,
+											format
 										),
 										name,
 										componentClassName,

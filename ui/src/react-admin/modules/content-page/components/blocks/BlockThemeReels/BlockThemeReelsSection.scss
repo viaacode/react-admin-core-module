@@ -129,6 +129,7 @@
 		}
 
 		&:hover:not(&--first) {
+			.c-button,
 			.c-block-theme-reels-section__slide-image > img {
 				@include animations.zoom-in-animation;
 			}
@@ -163,6 +164,17 @@
 					border-color: colors.$color-gray-1000;
 					color: colors.$white;
 					pointer-events: none;
+					@include animations.zoom-in-transition;
+
+					&.c-block-theme-reels-section__slide-image-placeholder-icon {
+						background-color: colors.$white;
+						border-color: colors.$white;
+						color: colors.$color-teal-bright;
+					}
+
+					.c-button__icon {
+						font-size: 2.4rem;
+					}
 				}
 			}
 

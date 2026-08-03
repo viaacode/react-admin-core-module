@@ -57,6 +57,7 @@ export class ThemesService {
 					url: `${ThemesService.getBaseUrl()}/${themeId}/ie-objects`,
 					query: {
 						orderDirection: 'random',
+						resolveThumbnailUrl: true,
 					},
 				})
 			);
