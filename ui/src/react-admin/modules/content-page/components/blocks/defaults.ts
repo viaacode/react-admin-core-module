@@ -81,24 +81,22 @@ export const FOREGROUND_COLOR_FIELD = (
 	editorProps: {
 		options: isAvo() ? GET_FOREGROUND_COLOR_OPTIONS_AVO() : GET_FOREGROUND_COLOR_OPTIONS_ARCHIEF(),
 		defaultValue:
-			defaultValue || isAvo()
-				? GET_FOREGROUND_COLOR_OPTIONS_AVO()[0]
-				: GET_FOREGROUND_COLOR_OPTIONS_ARCHIEF()[0],
+			defaultValue ??
+			(isAvo() ? GET_FOREGROUND_COLOR_OPTIONS_AVO()[0] : GET_FOREGROUND_COLOR_OPTIONS_ARCHIEF()[0]),
 	},
 });
 
 export const BACKGROUND_COLOR_FIELD = (
 	label: string,
-	defaultValue: SelectOption<Color | GradientColor | CustomBackground>
+	defaultValue?: SelectOption<Color | GradientColor | CustomBackground>
 ): ContentBlockField => ({
 	label,
 	editorType: ContentBlockEditor.ColorSelect,
 	editorProps: {
 		options: isAvo() ? GET_BACKGROUND_COLOR_OPTIONS_AVO() : GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF(),
 		defaultValue:
-			defaultValue || isAvo()
-				? GET_BACKGROUND_COLOR_OPTIONS_AVO()[0]
-				: GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF()[0],
+			defaultValue ??
+			(isAvo() ? GET_BACKGROUND_COLOR_OPTIONS_AVO()[0] : GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF()[0]),
 	},
 });
 
@@ -111,9 +109,8 @@ export const BACKGROUND_COLOR_EXTENDED_FIELD = (
 	editorProps: {
 		options: isAvo() ? GET_COLOR_OPTIONS_EXTENDED_AVO() : GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF(),
 		defaultValue:
-			defaultValue || isAvo()
-				? GET_COLOR_OPTIONS_EXTENDED_AVO()[0]
-				: GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF()[0],
+			defaultValue ??
+			(isAvo() ? GET_COLOR_OPTIONS_EXTENDED_AVO()[0] : GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF()[0]),
 	},
 });
 
