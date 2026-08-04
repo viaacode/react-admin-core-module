@@ -11,6 +11,7 @@ import { EVENTBRITE_BLOCK_CONFIG } from '~content-blocks/BlockEventbrite';
 import { HEADING_BLOCK_CONFIG } from '~content-blocks/BlockHeading';
 import { HET_ARCHIEF_HEADER_SEARCH_BLOCK_CONFIG } from '~content-blocks/BlockHetArchiefHeaderSearch/BlockHetArchiefHeaderSearch.editorconfig';
 import { HET_ARCHIEF_IMAGE_TEXT_BACKGROUND_BLOCK_CONFIG } from '~content-blocks/BlockHetArchiefImageTextBackground';
+import { HETARCHIEF_QUOTE_BLOCK_CONFIG } from '~content-blocks/BlockHetarchiefQuote';
 import { IFRAME_BLOCK_CONFIG } from '~content-blocks/BlockIFrame';
 import { IMAGE_BLOCK_CONFIG } from '~content-blocks/BlockImage';
 import {
@@ -63,6 +64,7 @@ export const CONTENT_BLOCK_CONFIG_MAP: Record<
 	[ContentBlockType.MediaPlayer]: MEDIA_PLAYER_BLOCK_CONFIG,
 	[ContentBlockType.MediaPlayerTitleTextButton]: MEDIA_PLAYER_TITLE_TEXT_BUTTON_BLOCK_CONFIG,
 	[ContentBlockType.AvoQuote]: AVO_QUOTE_BLOCK_CONFIG,
+	[ContentBlockType.HetarchiefQuote]: HETARCHIEF_QUOTE_BLOCK_CONFIG,
 	[ContentBlockType.PageOverview]: PAGE_OVERVIEW_BLOCK_CONFIG,
 	[ContentBlockType.ProjectsSpotlight]: PROJECTS_SPOTLIGHT_BLOCK_CONFIG,
 	[ContentBlockType.Spotlight]: SPOTLIGHT_BLOCK_CONFIG,

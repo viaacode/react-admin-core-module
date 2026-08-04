@@ -11,6 +11,7 @@ import { INITIAL_EVENTBRITE_COMPONENTS_STATE } from '~content-blocks/BlockEventb
 import { INITIAL_HEADING_COMPONENTS_STATE } from '~content-blocks/BlockHeading';
 import { INITIAL_HET_ARCHIEF_HEADER_SEARCH_BLOCK_STATE } from '~content-blocks/BlockHetArchiefHeaderSearch/BlockHetArchiefHeaderSearch.editorconfig';
 import { INITIAL_HET_ARCHIEF_IMAGE_TEXT_BACKGROUND_BLOCK_STATE } from '~content-blocks/BlockHetArchiefImageTextBackground';
+import { INITIAL_HETARCHIEF_QUOTE_COMPONENTS_STATE } from '~content-blocks/BlockHetarchiefQuote';
 import { INITIAL_IFRAME_COMPONENTS_STATE } from '~content-blocks/BlockIFrame';
 import { INITIAL_IMAGE_COMPONENTS_STATE } from '~content-blocks/BlockImage';
 import {
@@ -68,6 +69,7 @@ export const CONTENT_BLOCK_INITIAL_STATE_MAP: {
 	[ContentBlockType.ProjectsSpotlight]: INITIAL_PROJECTS_SPOTLIGHT_COMPONENTS_STATE,
 	[ContentBlockType.Spotlight]: INITIAL_SPOTLIGHT_COMPONENTS_STATE,
 	[ContentBlockType.AvoQuote]: INITIAL_AVO_QUOTE_COMPONENTS_STATE,
+	[ContentBlockType.HetarchiefQuote]: INITIAL_HETARCHIEF_QUOTE_COMPONENTS_STATE,
 	[ContentBlockType.RichText]: INITIAL_RICH_TEXT_COMPONENTS_STATE,
 	[ContentBlockType.RichTextTwoColumns]: INITIAL_RICH_TEXT_TWO_COLUMNS_COMPONENTS_STATE,
 	[ContentBlockType.Search]: INITIAL_SEARCH_COMPONENTS_STATE,

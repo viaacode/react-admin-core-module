@@ -9,6 +9,7 @@ export { BlockEventbrite } from '~content-blocks/BlockEventbrite';
 export { BlockHeading } from '~content-blocks/BlockHeading/BlockHeading';
 export { BlockHetArchiefHeaderSearch } from '~content-blocks/BlockHetArchiefHeaderSearch';
 export { BlockHetArchiefImageTextBackground } from '~content-blocks/BlockHetArchiefImageTextBackground';
+export { BlockHetarchiefQuote } from '~content-blocks/BlockHetarchiefQuote';
 export { BlockIFrame } from '~content-blocks/BlockIFrame';
 export { BlockImage } from '~content-blocks/BlockImage';
 export { BlockImageGridWrapper } from '~content-blocks/BlockImageGrid/BlockImageGrid.wrapper';

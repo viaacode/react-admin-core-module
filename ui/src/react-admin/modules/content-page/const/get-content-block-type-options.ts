@@ -184,6 +184,14 @@ export const GET_CONTENT_BLOCK_TYPE_OPTIONS: () => SelectOption<string>[] = () =
 			),
 			value: ContentBlockType.OverviewWithCarousel,
 		},
+		{
+			label: tText(
+				'modules/content-page/const/get-content-block-type-options___quote-kader',
+				{},
+				[HET_ARCHIEF]
+			),
+			value: ContentBlockType.HetarchiefQuote,
+		},
 	];
 
 	// Only show the content blocks that the client enabled through the config object

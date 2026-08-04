@@ -108,6 +108,7 @@ export * from './content-page/components/blocks/BlockEventbrite/BlockEventbrite'
 export * from './content-page/components/blocks/BlockHeading/BlockHeading';
 export * from './content-page/components/blocks/BlockHetArchiefHeaderSearch/BlockHetArchiefHeaderSearch';
 export * from './content-page/components/blocks/BlockHetArchiefImageTextBackground/BlockHetArchiefImageTextBackground';
+export * from './content-page/components/blocks/BlockHetarchiefQuote/BlockHetarchiefQuote';
 export * from './content-page/components/blocks/BlockIFrame/BlockIFrame';
 export * from './content-page/components/blocks/BlockImage/BlockImage';
 export * from './content-page/components/blocks/BlockImageGrid/BlockImageGrid';
