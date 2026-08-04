@@ -1,0 +1,58 @@
+.c-block-hetarchief-quote {
+	display: grid;
+	grid-template-columns: 10.4rem 1fr;
+	grid-template-areas:
+		'mark quote'
+		'.    author';
+	align-content: center;
+	margin: 0;
+	// 19.2rem is the space Figma leaves between the text column (ends at x=816) and the frame
+	// edge (1008px), which keeps the text clear of the semicircular curve.
+	padding: 4rem 19.2rem 4rem 0;
+	background: var(--frame-color);
+	color: var(--text-color);
+	// Square left, true semicircular right end at any height, per Figma (r = height / 2).
+	border-radius: 0 9999px 9999px 0;
+
+	&__mark {
+		grid-area: mark;
+		// Figma node 455:5723: icon font "meemoocons-light", size 64/line-height 72.
+		font-family: 'meemoocons-light';
+		font-size: 6.4rem;
+		font-weight: normal;
+		line-height: 7.2rem;
+		letter-spacing: normal;
+	}
+
+	&__quote {
+		grid-area: quote;
+		margin: 0;
+		// Figma node 455:5724, style "P - XL": Sofia Pro Medium, 32/40, letter-spacing 0.
+		font-family: 'SofiaPro';
+		font-size: 3.2rem;
+		font-weight: 500;
+		line-height: 4rem;
+		letter-spacing: normal;
+	}
+
+	&__author {
+		grid-area: author;
+		margin-top: 0.8rem;
+		// Figma node 455:5725, style "P - S": Sofia Pro Medium, 14/20, letter-spacing 0.
+		font-family: 'SofiaPro';
+		font-size: 1.4rem;
+		font-weight: 500;
+		line-height: 2rem;
+		letter-spacing: normal;
+	}
+
+	@media (max-width: 768px) {
+		grid-template-columns: 1fr;
+		grid-template-areas:
+			'mark'
+			'quote'
+			'author';
+		padding: 2.4rem 2.4rem 2.4rem 1.6rem;
+		border-radius: 0 2.4rem 2.4rem 0;
+	}
+}

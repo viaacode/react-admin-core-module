@@ -181,6 +181,7 @@ export enum ContentBlockType {
 	HetArchiefImageTextBackground = 'IMAGE_TEXT_BACKGROUND', // Hetarchief
 	MaintainersGrid = 'MAINTAINERS_GRID',
 	HetArchiefHeaderSearch = 'HETARCHIEF__HEADER_SEARCH',
+	HetarchiefQuote = 'HETARCHIEF_QUOTE', // Hetarchief
 	OverviewNewspaperTitles = 'OVERVIEW_NEWSPAPER_TITLES',
 	ContentEncloseGrid = 'CONTENT_ENCLOSE_GRID',
 	Breadcrumbs = 'BREADCRUMBS',
@@ -457,6 +458,7 @@ export type SingleContentBlockComponentState =
 	| MediaPlayerTitleTextButtonBlockComponentState
 	| PageOverviewBlockComponentStateFields
 	| AvoQuoteBlockComponentState
+	| HetarchiefQuoteBlockComponentState
 	| RichTextBlockComponentState
 	// biome-ignore lint/complexity/noBannedTypes: todo
 	| {}; // Search block & content page meta
@@ -589,6 +591,13 @@ export interface HetArchiefHeaderSearchBlockComponentState {
 	title: string;
 	subtitles: { label: string }[];
 	textBelowSearch?: string;
+}
+
+export interface HetarchiefQuoteBlockComponentState {
+	quote: string;
+	authorName: string;
+	textColor: Color;
+	frameColor: Color | GradientColor | CustomBackground;
 }
 
 export interface HetArchiefIeObject {
