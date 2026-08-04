@@ -2,7 +2,7 @@ import { tText } from '~shared/helpers/translation-functions';
 import type {
 	ContentBlockConfig,
 	DefaultContentBlockState,
-	HetarchiefQuoteBlockComponentState,
+	HetArchiefQuoteBlockComponentState,
 } from '../../../types/content-block.types';
 import { Color, ContentBlockEditor, ContentBlockType } from '../../../types/content-block.types';
 
@@ -13,15 +13,15 @@ import {
 	TEXT_FIELD,
 } from '../defaults';
 
-export const INITIAL_HETARCHIEF_QUOTE_COMPONENTS_STATE =
-	(): HetarchiefQuoteBlockComponentState => ({
+export const INITIAL_HET_ARCHIEF_QUOTE_COMPONENTS_STATE =
+	(): HetArchiefQuoteBlockComponentState => ({
 		quote: '',
 		authorName: '',
 		textColor: Color.White,
 		frameColor: Color.Black,
 	});
 
-export const INITIAL_HETARCHIEF_QUOTE_BLOCK_STATE = (): DefaultContentBlockState =>
+export const INITIAL_HET_ARCHIEF_QUOTE_BLOCK_STATE = (): DefaultContentBlockState =>
 	BLOCK_STATE_DEFAULTS({
 		padding: {
 			top: 'top-small',
@@ -29,12 +29,12 @@ export const INITIAL_HETARCHIEF_QUOTE_BLOCK_STATE = (): DefaultContentBlockState
 		},
 	});
 
-export const HETARCHIEF_QUOTE_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
+export const HET_ARCHIEF_QUOTE_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 	position,
 	name: tText('admin/content-block/helpers/generators/hetarchief-quote___quote-kader'),
-	type: ContentBlockType.HetarchiefQuote,
+	type: ContentBlockType.HetArchiefQuote,
 	components: {
-		state: INITIAL_HETARCHIEF_QUOTE_COMPONENTS_STATE(),
+		state: INITIAL_HET_ARCHIEF_QUOTE_COMPONENTS_STATE(),
 		fields: {
 			quote: TEXT_FIELD(
 				{
@@ -64,7 +64,7 @@ export const HETARCHIEF_QUOTE_BLOCK_CONFIG = (position = 0): ContentBlockConfig 
 		},
 	},
 	block: {
-		state: INITIAL_HETARCHIEF_QUOTE_BLOCK_STATE(),
+		state: INITIAL_HET_ARCHIEF_QUOTE_BLOCK_STATE(),
 		fields: BLOCK_FIELD_DEFAULTS(),
 	},
 });

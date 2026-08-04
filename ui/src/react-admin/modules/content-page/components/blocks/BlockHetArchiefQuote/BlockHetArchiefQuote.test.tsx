@@ -3,16 +3,16 @@ import React from 'react';
 import { afterEach, describe, expect, it } from 'vitest';
 
 import { Color } from '../../../types/content-block.types';
-import { BlockHetarchiefQuote } from './BlockHetarchiefQuote';
+import { BlockHetArchiefQuote } from './BlockHetArchiefQuote';
 
 afterEach(() => {
 	cleanup();
 });
 
-describe('<BlockHetarchiefQuote />', () => {
+describe('<BlockHetArchiefQuote />', () => {
 	it('renders the quote and the author', () => {
 		render(
-			<BlockHetarchiefQuote
+			<BlockHetArchiefQuote
 				quote="Een citaat"
 				authorName="John Doe"
 				textColor={Color.White}
@@ -26,7 +26,7 @@ describe('<BlockHetarchiefQuote />', () => {
 
 	it('exposes the chosen colours as custom properties', () => {
 		const { container } = render(
-			<BlockHetarchiefQuote
+			<BlockHetArchiefQuote
 				quote="Een citaat"
 				authorName="John Doe"
 				textColor={Color.White}
@@ -34,7 +34,7 @@ describe('<BlockHetarchiefQuote />', () => {
 			/>
 		);
 
-		const figure = container.querySelector('.c-block-hetarchief-quote') as HTMLElement;
+		const figure = container.querySelector('.c-block-het-archief-quote') as HTMLElement;
 
 		expect(figure.style.getPropertyValue('--text-color')).toEqual(Color.White);
 		expect(figure.style.getPropertyValue('--frame-color')).toEqual(Color.OceanGreen);
@@ -42,9 +42,20 @@ describe('<BlockHetarchiefQuote />', () => {
 
 	it('omits the caption when there is no author', () => {
 		const { container } = render(
-			<BlockHetarchiefQuote quote="Een citaat" textColor={Color.White} frameColor={Color.Black} />
+			<BlockHetArchiefQuote quote="Een citaat" textColor={Color.White} frameColor={Color.Black} />
 		);
 
 		expect(container.querySelector('figcaption')).toBeNull();
+	});
+
+	it('renders the quote mark as the ligature icon name, hidden from assistive tech', () => {
+		const { container } = render(
+			<BlockHetArchiefQuote quote="Een citaat" textColor={Color.White} frameColor={Color.Black} />
+		);
+
+		const mark = container.querySelector('.c-block-het-archief-quote__mark');
+
+		expect(mark?.textContent).toEqual('quotes');
+		expect(mark?.getAttribute('aria-hidden')).toEqual('true');
 	});
 });

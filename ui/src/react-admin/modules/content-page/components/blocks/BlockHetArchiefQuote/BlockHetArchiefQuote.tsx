@@ -5,16 +5,16 @@ import React from 'react';
 
 import type { Color, CustomBackground, GradientColor } from '../../../types/content-block.types';
 
-import './BlockHetarchiefQuote.scss';
+import './BlockHetArchiefQuote.scss';
 
-export interface BlockHetarchiefQuoteProps extends DefaultProps {
+export interface BlockHetArchiefQuoteProps extends DefaultProps {
 	quote: string;
 	authorName?: string;
-	textColor: Color;
+	textColor: Color | GradientColor | CustomBackground;
 	frameColor: Color | GradientColor | CustomBackground;
 }
 
-export const BlockHetarchiefQuote: FunctionComponent<BlockHetarchiefQuoteProps> = ({
+export const BlockHetArchiefQuote: FunctionComponent<BlockHetArchiefQuoteProps> = ({
 	className,
 	quote,
 	authorName,
@@ -22,7 +22,7 @@ export const BlockHetarchiefQuote: FunctionComponent<BlockHetarchiefQuoteProps> 
 	frameColor,
 }) => (
 	<figure
-		className={clsx('c-block-hetarchief-quote', className)}
+		className={clsx('c-block-het-archief-quote', className)}
 		style={
 			{
 				'--text-color': textColor,
@@ -30,12 +30,12 @@ export const BlockHetarchiefQuote: FunctionComponent<BlockHetarchiefQuoteProps> 
 			} as CSSProperties
 		}
 	>
-		<span className="c-block-hetarchief-quote__mark" aria-hidden="true">
-			”
+		<span className="c-block-het-archief-quote__mark" aria-hidden="true">
+			quotes
 		</span>
-		<blockquote className="c-block-hetarchief-quote__quote">{quote}</blockquote>
+		<blockquote className="c-block-het-archief-quote__quote">{quote}</blockquote>
 		{authorName && (
-			<figcaption className="c-block-hetarchief-quote__author">{authorName}</figcaption>
+			<figcaption className="c-block-het-archief-quote__author">{authorName}</figcaption>
 		)}
 	</figure>
 );

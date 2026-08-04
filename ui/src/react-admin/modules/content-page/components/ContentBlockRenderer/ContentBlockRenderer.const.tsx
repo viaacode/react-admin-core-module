@@ -1,6 +1,7 @@
 import type { FC, FunctionComponent } from 'react';
 import { AvoHeroWrapper } from '~content-blocks/BlockAvoHero/AvoHeroWrapper';
 import { BlockAvoImageTextBackground } from '~content-blocks/BlockAvoImageTextBackground';
+import { BlockAvoQuote } from '~content-blocks/BlockAvoQuote';
 import { BlockBreadcrumbs } from '~content-blocks/BlockBreadcrumbs';
 import { BlockButtonsWrapper } from '~content-blocks/BlockButtons';
 import { BlockCardsWithoutDescription } from '~content-blocks/BlockCardsWithoutDescription';
@@ -10,7 +11,7 @@ import { BlockEventbrite } from '~content-blocks/BlockEventbrite';
 import { BlockHeading } from '~content-blocks/BlockHeading';
 import { BlockHetArchiefHeaderSearch } from '~content-blocks/BlockHetArchiefHeaderSearch/BlockHetArchiefHeaderSearch';
 import { BlockHetArchiefImageTextBackground } from '~content-blocks/BlockHetArchiefImageTextBackground';
-import { BlockHetarchiefQuote } from '~content-blocks/BlockHetarchiefQuote';
+import { BlockHetArchiefQuote } from '~content-blocks/BlockHetArchiefQuote';
 import { BlockIFrame } from '~content-blocks/BlockIFrame';
 import { BlockImage } from '~content-blocks/BlockImage';
 import {
@@ -25,7 +26,6 @@ import { BlockMaintainersGrid } from '~content-blocks/BlockMaintainersGrid';
 import { BlockOverviewNewspaperTitles } from '~content-blocks/BlockOverviewNewspaperTitles';
 import { BlockOverviewWithCarousel } from '~content-blocks/BlockOverviewWithCarousel/BlockOverviewWithCarousel.tsx';
 import { BlockPageOverviewWrapper } from '~content-blocks/BlockPageOverview';
-import { BlockAvoQuote } from '~content-blocks/BlockAvoQuote';
 import { BlockRichTextWrapper } from '~content-blocks/BlockRichText';
 import { BlockScrollDownNudge } from '~content-blocks/BlockScrollDownNudge';
 import { BlockProjectSpotlightWrapper, BlockSpotlight } from '~content-blocks/BlockSpotlight';
@@ -88,7 +88,7 @@ export function GET_BLOCK_COMPONENT(
 		[ContentBlockType.Breadcrumbs]: BlockBreadcrumbs,
 		[ContentBlockType.HetArchiefImageTextBackground]: BlockHetArchiefImageTextBackground,
 		[ContentBlockType.OverviewWithCarousel]: BlockOverviewWithCarousel,
-		[ContentBlockType.HetarchiefQuote]: BlockHetarchiefQuote,
+		[ContentBlockType.HetArchiefQuote]: BlockHetArchiefQuote,
 
 		// Avo specific blocks
 		[ContentBlockType.MediaGrid]: loadComponentFromConfig(ContentBlockType.MediaGrid),
