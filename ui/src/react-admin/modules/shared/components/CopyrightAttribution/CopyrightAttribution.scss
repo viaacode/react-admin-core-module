@@ -1,0 +1,6 @@
+@use "../../styles/settings/colors" as colors;
+@use "../../styles/settings/variables" as variables;
+
+.a-copyright-attribution__text {
+  color: colors.$color-gray-200;
+}

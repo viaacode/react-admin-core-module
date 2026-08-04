@@ -17,9 +17,13 @@ import { defaultRenderLinkFunction } from '~shared/helpers/routing/link';
 import { SanitizePreset } from '~shared/helpers/sanitize/presets';
 
 import './BlockRichText.scss';
+import { CopyrightAttribution } from '~shared/components/CopyrightAttribution';
 
 interface BlockRichTextElement {
 	content: string;
+	copyrightTitle: string;
+	copyrightIconVisible: boolean;
+	copyrightText: string;
 	buttons?: (ButtonProps & { buttonAction: ButtonAction })[];
 	color?: string;
 }
@@ -35,6 +39,9 @@ export const BlockRichText: FunctionComponent<BlockRichTextProps> = ({
 	elements = [
 		{
 			content: '',
+			copyrightTitle: '',
+			copyrightIconVisible: false,
+			copyrightText: '',
 		},
 	],
 	maxTextWidth,
@@ -69,7 +76,8 @@ export const BlockRichText: FunctionComponent<BlockRichTextProps> = ({
 	};
 
 	const renderContent = (contentElem: BlockRichTextElement, columnIndex = 0) => {
-		const { content, color, buttons } = contentElem;
+		const { content, copyrightTitle, copyrightIconVisible, copyrightText, color, buttons } =
+			contentElem;
 
 		return (
 			<>
@@ -82,6 +90,11 @@ export const BlockRichText: FunctionComponent<BlockRichTextProps> = ({
 						...(maxTextWidth ? { maxWidth: maxTextWidth } : {}),
 					}}
 					type="div"
+				/>
+				<CopyrightAttribution
+					title={copyrightTitle}
+					text={copyrightText}
+					showIcon={copyrightIconVisible}
 				/>
 				{buttons && !!buttons.length && renderButtons(columnIndex, buttons)}
 			</>

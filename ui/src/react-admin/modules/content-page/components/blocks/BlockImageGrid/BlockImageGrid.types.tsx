@@ -9,6 +9,9 @@ import type { ReactNode } from 'react';
 
 export interface GridItem {
 	source: string;
+	copyrightTitle: string;
+	copyrightIconVisible: boolean;
+	copyrightText: string;
 	titleAbove?: string;
 	title?: string;
 	textAbove?: string | ReactNode;

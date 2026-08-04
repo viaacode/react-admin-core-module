@@ -1,7 +1,7 @@
 import type { ButtonAction, ButtonType, IconName } from '@viaa/avo2-components';
 import { Button, Image } from '@viaa/avo2-components';
 import clsx from 'clsx';
-import type { FunctionComponent, ReactElement } from 'react';
+import React, { type FunctionComponent, type ReactElement } from 'react';
 import type {
 	BackgroundAlignOption,
 	Color,
@@ -15,6 +15,7 @@ import { BlockHeading } from '../BlockHeading/BlockHeading';
 import './BlockHetArchiefImageTextBackground.scss';
 import type { ContentPageWidth } from '~modules/content-page/types/content-pages.types';
 import { CONTENT_PAGE_WIDTH_TO_REM } from '~modules/content-page/types/content-pages.types';
+import { CopyrightAttribution } from '~shared/components/CopyrightAttribution';
 
 export interface BlockHetArchiefImageTextBackgroundProps extends DefaultComponentProps {
 	heading: string;
@@ -25,6 +26,9 @@ export interface BlockHetArchiefImageTextBackgroundProps extends DefaultComponen
 	image?: string;
 	imageAlignment?: BackgroundAlignOption;
 	imageAltText?: string;
+	copyrightTitle: string;
+	copyrightIconVisible: boolean;
+	copyrightText: string;
 	buttonAction?: ButtonAction;
 	buttonAltTitle?: string;
 	buttonLabel: string;
@@ -46,6 +50,9 @@ export const BlockHetArchiefImageTextBackground: FunctionComponent<
 	image,
 	imageAlignment = 'left-screen',
 	imageAltText,
+	copyrightTitle,
+	copyrightIconVisible,
+	copyrightText,
 	buttonAction,
 	buttonAltTitle,
 	buttonLabel,
@@ -93,18 +100,25 @@ export const BlockHetArchiefImageTextBackground: FunctionComponent<
 						buttonAltTitle || buttonLabel
 					)}
 			</div>
-			{image && (
-				<Image
-					src={image}
-					className={clsx('c-block-het-archief-image-text-background__image-wrapper', {
-						'c-block-het-archief-image-text-background__image-wrapper--screen-left':
-							imageAlignment === 'left-screen',
-						'c-block-het-archief-image-text-background__image-wrapper--screen-right':
-							imageAlignment === 'right-screen',
-					})}
-					alt={imageAltText}
+			<div className={'c-block-het-archief-image-text-background__image-wrapper'}>
+				{image && (
+					<Image
+						src={image}
+						className={clsx({
+							'c-block-het-archief-image-text-background__image-wrapper--screen-left':
+								imageAlignment === 'left-screen',
+							'c-block-het-archief-image-text-background__image-wrapper--screen-right':
+								imageAlignment === 'right-screen',
+						})}
+						alt={imageAltText}
+					/>
+				)}
+				<CopyrightAttribution
+					title={copyrightTitle}
+					text={copyrightText}
+					showIcon={copyrightIconVisible}
 				/>
-			)}
+			</div>
 		</article>
 	);
 };
