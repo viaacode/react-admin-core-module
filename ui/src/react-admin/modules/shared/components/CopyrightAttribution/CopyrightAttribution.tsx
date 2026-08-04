@@ -27,16 +27,16 @@ export const CopyrightAttribution: FunctionComponent<BlockImageProps> = ({
 		}
 
 		return (
-			<h3>
+			<span className="a-copyright-attribution__annotation">
 				{showIcon && <>&#169;</>} {title}
-			</h3>
+			</span>
 		);
 	};
 
 	return (
-		<div className={clsx('a-copyright-attribution__annotation', className)}>
+		<div className={clsx('a-copyright-attribution', className)}>
 			{renderTitle()}
-			{text && <p className="a-copyright-attribution__text">{text}</p>}
+			{text && <span className="a-copyright-attribution__text">{text}</span>}
 		</div>
 	);
 };
