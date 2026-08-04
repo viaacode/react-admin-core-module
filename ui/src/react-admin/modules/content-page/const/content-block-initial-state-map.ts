@@ -26,7 +26,7 @@ import { INITIAL_MEDIA_GRID_COMPONENTS_STATE } from '~content-blocks/BlockMediaG
 import { INITIAL_OVERVIEW_NEWSPAPER_TITLES_BLOCK_STATE } from '~content-blocks/BlockOverviewNewspaperTitles';
 import { INITIAL_CONTENT_OVERVIEW_WITH_CAROUSEL_BLOCK_STATE } from '~content-blocks/BlockOverviewWithCarousel/BlockOverviewWithCarousel.editorconfig.ts';
 import { INITIAL_PAGE_OVERVIEW_COMPONENTS_STATE } from '~content-blocks/BlockPageOverview';
-import { INITIAL_QUOTE_COMPONENTS_STATE } from '~content-blocks/BlockQuote';
+import { INITIAL_AVO_QUOTE_COMPONENTS_STATE } from '~content-blocks/BlockAvoQuote';
 import {
 	INITIAL_RICH_TEXT_COMPONENTS_STATE,
 	INITIAL_RICH_TEXT_TWO_COLUMNS_COMPONENTS_STATE,
@@ -67,7 +67,7 @@ export const CONTENT_BLOCK_INITIAL_STATE_MAP: {
 	[ContentBlockType.PageOverview]: INITIAL_PAGE_OVERVIEW_COMPONENTS_STATE,
 	[ContentBlockType.ProjectsSpotlight]: INITIAL_PROJECTS_SPOTLIGHT_COMPONENTS_STATE,
 	[ContentBlockType.Spotlight]: INITIAL_SPOTLIGHT_COMPONENTS_STATE,
-	[ContentBlockType.Quote]: INITIAL_QUOTE_COMPONENTS_STATE,
+	[ContentBlockType.AvoQuote]: INITIAL_AVO_QUOTE_COMPONENTS_STATE,
 	[ContentBlockType.RichText]: INITIAL_RICH_TEXT_COMPONENTS_STATE,
 	[ContentBlockType.RichTextTwoColumns]: INITIAL_RICH_TEXT_TWO_COLUMNS_COMPONENTS_STATE,
 	[ContentBlockType.Search]: INITIAL_SEARCH_COMPONENTS_STATE,

@@ -25,7 +25,7 @@ import { MAINTAINERS_GRID_BLOCK_CONFIG } from '~content-blocks/BlockMaintainersG
 import { MEDIA_GRID_BLOCK_CONFIG } from '~content-blocks/BlockMediaGrid';
 import { OVERVIEW_NEWSPAPER_TITLES_BLOCK_CONFIG } from '~content-blocks/BlockOverviewNewspaperTitles';
 import { CONTENT_OVERVIEW_WITH_CAROUSEL_CONFIG } from '~content-blocks/BlockOverviewWithCarousel';
-import { QUOTE_BLOCK_CONFIG } from '~content-blocks/BlockQuote';
+import { AVO_QUOTE_BLOCK_CONFIG } from '~content-blocks/BlockAvoQuote';
 import {
 	RICH_TEXT_BLOCK_CONFIG,
 	RICH_TEXT_TWO_COLUMNS_BLOCK_CONFIG,
@@ -62,7 +62,7 @@ export const CONTENT_BLOCK_CONFIG_MAP: Record<
 	[ContentBlockType.MediaGrid]: MEDIA_GRID_BLOCK_CONFIG,
 	[ContentBlockType.MediaPlayer]: MEDIA_PLAYER_BLOCK_CONFIG,
 	[ContentBlockType.MediaPlayerTitleTextButton]: MEDIA_PLAYER_TITLE_TEXT_BUTTON_BLOCK_CONFIG,
-	[ContentBlockType.Quote]: QUOTE_BLOCK_CONFIG,
+	[ContentBlockType.AvoQuote]: AVO_QUOTE_BLOCK_CONFIG,
 	[ContentBlockType.PageOverview]: PAGE_OVERVIEW_BLOCK_CONFIG,
 	[ContentBlockType.ProjectsSpotlight]: PROJECTS_SPOTLIGHT_BLOCK_CONFIG,
 	[ContentBlockType.Spotlight]: SPOTLIGHT_BLOCK_CONFIG,

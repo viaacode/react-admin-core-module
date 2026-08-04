@@ -24,7 +24,7 @@ import { BlockMaintainersGrid } from '~content-blocks/BlockMaintainersGrid';
 import { BlockOverviewNewspaperTitles } from '~content-blocks/BlockOverviewNewspaperTitles';
 import { BlockOverviewWithCarousel } from '~content-blocks/BlockOverviewWithCarousel/BlockOverviewWithCarousel.tsx';
 import { BlockPageOverviewWrapper } from '~content-blocks/BlockPageOverview';
-import { BlockQuote } from '~content-blocks/BlockQuote';
+import { BlockAvoQuote } from '~content-blocks/BlockAvoQuote';
 import { BlockRichTextWrapper } from '~content-blocks/BlockRichText';
 import { BlockScrollDownNudge } from '~content-blocks/BlockScrollDownNudge';
 import { BlockProjectSpotlightWrapper, BlockSpotlight } from '~content-blocks/BlockSpotlight';
@@ -61,7 +61,7 @@ export function GET_BLOCK_COMPONENT(
 		[ContentBlockType.MediaPlayer]: BlockVideoWrapper,
 		[ContentBlockType.PageOverview]: BlockPageOverviewWrapper,
 		[ContentBlockType.ProjectsSpotlight]: BlockProjectSpotlightWrapper,
-		[ContentBlockType.Quote]: BlockQuote,
+		[ContentBlockType.AvoQuote]: BlockAvoQuote,
 		[ContentBlockType.RichTextTwoColumns]: BlockRichTextWrapper,
 		[ContentBlockType.RichText]: BlockRichTextWrapper,
 		[ContentBlockType.Spotlight]: BlockSpotlight,

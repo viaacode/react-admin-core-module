@@ -78,7 +78,7 @@ export function getAdminCoreConfigForLocalTestApp(navigateFunc: NavigateFunction
 				ContentBlockType.ImageGrid,
 				ContentBlockType.PageOverview,
 				ContentBlockType.UspGrid,
-				ContentBlockType.Quote,
+				ContentBlockType.AvoQuote,
 				ContentBlockType.CTAs,
 				// AVO
 				ContentBlockType.AnchorLinks,

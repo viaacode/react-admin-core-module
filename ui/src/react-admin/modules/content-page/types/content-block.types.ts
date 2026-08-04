@@ -168,7 +168,7 @@ export enum ContentBlockType {
 	MediaPlayerTitleTextButton = 'MEDIA_PLAYER_TITLE_TEXT_BUTTON',
 	PageOverview = 'PAGE_OVERVIEW',
 	ProjectsSpotlight = 'PROJECTS_SPOTLIGHT',
-	Quote = 'QUOTE',
+	AvoQuote = 'QUOTE', // Avo
 	RichText = 'RICH_TEXT',
 	RichTextTwoColumns = 'RICH_TEXT_TWO_COLUMNS',
 	Search = 'SEARCH',
@@ -358,7 +358,7 @@ export interface IFrameBlockComponentState {
 	src: string;
 }
 
-export interface QuoteBlockComponentState {
+export interface AvoQuoteBlockComponentState {
 	quote: string;
 	authorName: string;
 	authorInitials: string;
@@ -456,7 +456,7 @@ export type SingleContentBlockComponentState =
 	| MediaPlayerBlockComponentState
 	| MediaPlayerTitleTextButtonBlockComponentState
 	| PageOverviewBlockComponentStateFields
-	| QuoteBlockComponentState
+	| AvoQuoteBlockComponentState
 	| RichTextBlockComponentState
 	// biome-ignore lint/complexity/noBannedTypes: todo
 	| {}; // Search block & content page meta

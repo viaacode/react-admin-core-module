@@ -118,7 +118,7 @@ export * from './content-page/components/blocks/BlockMaintainersGrid/BlockMainta
 export * from './content-page/components/blocks/BlockMediaGrid/BlockMediaGrid.editorconfig';
 export * from './content-page/components/blocks/BlockOverviewNewspaperTitles/BlockOverviewNewspaperTitles';
 export * from './content-page/components/blocks/BlockPageOverview/BlockPageOverview';
-export * from './content-page/components/blocks/BlockQuote/BlockQuote';
+export * from './content-page/components/blocks/BlockAvoQuote/BlockAvoQuote';
 export * from './content-page/components/blocks/BlockRichText/BlockRichText';
 export * from './content-page/components/blocks/BlockSpotlight/BlockSpotlight';
 export * from './content-page/components/blocks/BlockTagsWithLink/BlockTagsWithLink';

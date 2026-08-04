@@ -21,7 +21,7 @@ export { BlockMaintainersGrid } from '~content-blocks/BlockMaintainersGrid';
 export { BlockOverviewNewspaperTitles } from '~content-blocks/BlockOverviewNewspaperTitles';
 export { BlockOverviewWithCarousel } from '~content-blocks/BlockOverviewWithCarousel';
 export { BlockPageOverviewWrapper } from '~content-blocks/BlockPageOverview/BlockPageOverview.wrapper';
-export { BlockQuote } from '~content-blocks/BlockQuote';
+export { BlockAvoQuote } from '~content-blocks/BlockAvoQuote';
 export { BlockRichText } from '~content-blocks/BlockRichText';
 export { BlockRichTextWrapper } from '~content-blocks/BlockRichText/BlockRichText.wrapper';
 export { BlockScrollDownNudge } from '~content-blocks/BlockScrollDownNudge';

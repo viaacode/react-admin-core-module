@@ -80,7 +80,7 @@ export const GET_CONTENT_BLOCK_TYPE_OPTIONS: () => SelectOption<string>[] = () =
 		},
 		{
 			label: tText('admin/content-block/content-block___quote'),
-			value: ContentBlockType.Quote,
+			value: ContentBlockType.AvoQuote,
 		},
 		{
 			label: tText('admin/content-block/helpers/generators/anchor-links___links'),
