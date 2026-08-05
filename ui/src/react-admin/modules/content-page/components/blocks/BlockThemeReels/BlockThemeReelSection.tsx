@@ -3,19 +3,19 @@ import React, { type FunctionComponent, type ReactNode, useEffect, useState } fr
 import type { DefaultComponentProps } from '~modules/shared/types/components';
 import './BlockThemeReelsSection.scss';
 import { Button } from '@meemoo/react-components';
+import { AvoCoreContentPickerType } from '@viaa/avo2-types';
+import clsx from 'clsx';
 import type SwiperController from 'swiper';
 import { Controller } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Icon } from '~shared/components/Icon';
-import { tText } from '~shared/helpers/translation-functions.ts';
-import 'swiper/css';
-import { AvoCoreContentPickerType } from '@viaa/avo2-types';
-import clsx from 'clsx';
 import { useGetThemeWithObjects } from '~content-blocks/BlockThemeReels/hooks/useGetThemeWithObjects.ts';
 import { AdminConfigManager } from '~core/config';
 import { App, Locale } from '~modules/translations/translations.core.types.ts';
+import { Icon } from '~shared/components/Icon';
 import { generateSmartLink } from '~shared/components/SmartLink/SmartLink.tsx';
 import { isMobileWidth } from '~shared/helpers/media-query.ts';
+import { tText } from '~shared/helpers/translation-functions.ts';
+import 'swiper/css';
 
 export interface BlockThemeReelSectionProps extends DefaultComponentProps {
 	themeId: string;
@@ -99,6 +99,7 @@ export const BlockThemeReelSection: FunctionComponent<BlockThemeReelSectionProps
 						src={image}
 						alt={imageAlt || description}
 						className={clsx('c-block-theme-reels-section__slide-image', className)}
+						loading="lazy"
 					/>
 				) : (
 					<div
