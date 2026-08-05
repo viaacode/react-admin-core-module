@@ -20,7 +20,7 @@ import { isMobileWidth } from '~shared/helpers/media-query.ts';
 export interface BlockThemeReelSectionProps extends DefaultComponentProps {
 	themeId: string;
 	image?: string;
-	imageAltText?: string;
+	imageAlt?: string;
 	imageMask: string;
 	description?: string;
 }
@@ -28,7 +28,7 @@ export interface BlockThemeReelSectionProps extends DefaultComponentProps {
 export const BlockThemeReelSection: FunctionComponent<BlockThemeReelSectionProps> = ({
 	themeId,
 	image,
-	imageAltText,
+	imageAlt,
 	imageMask,
 	description,
 }): ReactNode => {
@@ -202,7 +202,7 @@ export const BlockThemeReelSection: FunctionComponent<BlockThemeReelSectionProps
 					>
 						{renderSlideContent(
 							image || theme.imageUrl,
-							imageAltText || themeName,
+							imageAlt || themeName,
 							'',
 							description || themeDescription || '',
 							clsx(`c-block-theme-reels-section__slide-image--mask-${imageMask}`)

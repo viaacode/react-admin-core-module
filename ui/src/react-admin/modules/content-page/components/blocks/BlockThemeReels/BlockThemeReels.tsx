@@ -23,7 +23,7 @@ export interface BlockThemeReelsProps extends DefaultComponentProps {
 	elements: {
 		theme: PickerItem;
 		image?: string;
-		imageAltText?: string;
+		imageAlt?: string;
 		imageMask: string;
 		description?: string;
 	}[];
@@ -55,7 +55,7 @@ export const BlockThemeReels: FunctionComponent<BlockThemeReelsProps> = ({
 						key={`c-block-theme-reels__group-${groupIndex}`}
 						themeId={element.theme.value}
 						image={element.image}
-						imageAltText={element.imageAltText}
+						imageAlt={element.imageAlt}
 						imageMask={element.imageMask}
 						description={element.description}
 					/>
