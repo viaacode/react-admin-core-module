@@ -3,6 +3,11 @@ import type { DefaultComponentProps } from '~modules/shared/types/components';
 import './BlockHighligtText.scss';
 import { Container } from '@viaa/avo2-components';
 import clsx from 'clsx';
+import {
+	Color,
+	ColorSelectGradientColors,
+	CustomBackground,
+} from '~modules/content-page/types/content-block.types';
 import { ContentPageWidth } from '~modules/content-page/types/content-pages.types.ts';
 import Html from '~shared/components/Html/Html.tsx';
 
@@ -19,13 +24,19 @@ export const BlockHighlightText: FunctionComponent<BlockHighlightTextProps> = ({
 	backgroundColor,
 	pageWidth,
 }): ReactElement => {
+	const isGradient = highlightColor.includes('gradient');
+	const patternColor =
+		highlightColor === CustomBackground.MeemooLogo
+			? Color.Transparent
+			: ((ColorSelectGradientColors as Record<string, string>)[highlightColor] ?? highlightColor);
+
 	return (
 		<article
 			className={clsx('c-block-highlight-text', 'o-container')}
 			style={
 				{
 					background: backgroundColor,
-					'--pattern-color': highlightColor,
+					'--pattern-color': patternColor,
 				} as CSSProperties
 			}
 		>
@@ -44,7 +55,16 @@ export const BlockHighlightText: FunctionComponent<BlockHighlightTextProps> = ({
 						aria-hidden="true"
 					/>
 				</div>
-				<Html className="c-block-highlight-text__content-text" content={content} type="p"></Html>
+				<Html
+					className="c-block-highlight-text__content-text"
+					style={
+						{
+							'--pattern-color': isGradient ? Color.White : patternColor,
+						} as CSSProperties
+					}
+					content={content}
+					type="p"
+				></Html>
 				<div className="c-block-highlight-text__pattern-slot c-block-highlight-text__pattern-slot--bottom">
 					<div
 						className="c-block-highlight-text__pattern c-block-highlight-text__pattern--right"
