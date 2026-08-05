@@ -78,8 +78,10 @@ $pattern-mobile-overshoot: 10rem;
 		&--left {
 			margin-right: auto;
 
-			.c-block-homepage-banner__pattern--right {
-				left: calc(100% + $pattern-distance-horizontal + $pattern-distance-horizontal);
+			@media (min-width: variables.$g-bp4) {
+				.c-block-homepage-banner__pattern--right {
+					left: calc(100% + $pattern-distance-horizontal + $pattern-distance-horizontal);
+				}
 			}
 		}
 
@@ -90,8 +92,10 @@ $pattern-mobile-overshoot: 10rem;
 		&--right {
 			margin-left: auto;
 
-			.c-block-homepage-banner__pattern--left{
-				right: calc(100% + $pattern-distance-horizontal + $pattern-distance-horizontal);
+			@media (min-width: variables.$g-bp4) {
+				.c-block-homepage-banner__pattern--left{
+					right: calc(100% + $pattern-distance-horizontal + $pattern-distance-horizontal);
+				}
 			}
 		}
 
