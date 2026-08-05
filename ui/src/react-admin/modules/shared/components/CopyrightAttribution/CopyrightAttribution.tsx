@@ -5,13 +5,13 @@ import React from 'react';
 import './CopyrightAttribution.scss';
 import clsx from 'clsx';
 
-export interface BlockImageProps extends DefaultProps {
+export interface CopyrightAttributionProps extends DefaultProps {
 	title?: string;
 	showIcon?: boolean;
 	text?: string;
 }
 
-export const CopyrightAttribution: FunctionComponent<BlockImageProps> = ({
+export const CopyrightAttribution: FunctionComponent<CopyrightAttributionProps> = ({
 	className,
 	title = '',
 	showIcon = false,
