@@ -11,6 +11,7 @@ import { EVENTBRITE_BLOCK_CONFIG } from '~content-blocks/BlockEventbrite';
 import { HEADING_BLOCK_CONFIG } from '~content-blocks/BlockHeading';
 import { HET_ARCHIEF_HEADER_SEARCH_BLOCK_CONFIG } from '~content-blocks/BlockHetArchiefHeaderSearch/BlockHetArchiefHeaderSearch.editorconfig';
 import { HET_ARCHIEF_IMAGE_TEXT_BACKGROUND_BLOCK_CONFIG } from '~content-blocks/BlockHetArchiefImageTextBackground';
+import { CONTENT_HIGHLIGHT_TEXT_CONFIG } from '~content-blocks/BlockHighlightText';
 import { CONTENT_HOMEPAGE_BANNER_CONFIG } from '~content-blocks/BlockHomepageBanner';
 import { IFRAME_BLOCK_CONFIG } from '~content-blocks/BlockIFrame';
 import { IMAGE_BLOCK_CONFIG } from '~content-blocks/BlockImage';
@@ -89,4 +90,5 @@ export const CONTENT_BLOCK_CONFIG_MAP: Record<
 	[ContentBlockType.ScrollDownNudge]: CONTENT_SCROLL_DOWN_NUDGE_CONFIG,
 	[ContentBlockType.OverviewWithCarousel]: CONTENT_OVERVIEW_WITH_CAROUSEL_CONFIG,
 	[ContentBlockType.HomepageBanner]: CONTENT_HOMEPAGE_BANNER_CONFIG,
+	[ContentBlockType.HighlightText]: CONTENT_HIGHLIGHT_TEXT_CONFIG,
 };
