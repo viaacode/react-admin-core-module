@@ -107,6 +107,7 @@ export const THEME_REELS_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 					}),
 				},
 				type: 'fieldGroup',
+				max: 10,
 				repeat: {
 					defaultState: INITIAL_THEME_REELS_THEME_STATE(),
 					addButtonLabel: tText('voeg thema toe', {}, [HET_ARCHIEF]),
