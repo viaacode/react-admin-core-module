@@ -21,9 +21,9 @@ import { CopyrightAttribution } from '~shared/components/CopyrightAttribution';
 
 interface BlockRichTextElement {
 	content: string;
-	copyrightTitle: string;
-	copyrightIconVisible: boolean;
-	copyrightText: string;
+	copyrightTitle?: string;
+	copyrightIconVisible?: boolean;
+	copyrightText?: string;
 	buttons?: (ButtonProps & { buttonAction: ButtonAction })[];
 	color?: string;
 }
