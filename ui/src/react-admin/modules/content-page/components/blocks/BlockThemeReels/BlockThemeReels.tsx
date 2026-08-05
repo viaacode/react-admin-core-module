@@ -81,7 +81,6 @@ export const BlockThemeReels: FunctionComponent<BlockThemeReelsProps> = ({
 						label={buttonLabel}
 						title={buttonLabel}
 						ariaLabel={buttonAltTitle}
-						onClick={() => setMaxVisibleItems(maxVisibleItems + 1)}
 					/>,
 					buttonAltTitle || buttonLabel,
 					undefined,
