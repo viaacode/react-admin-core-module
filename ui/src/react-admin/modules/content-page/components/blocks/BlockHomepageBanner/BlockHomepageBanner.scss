@@ -23,30 +23,35 @@ $pattern-mobile-overshoot: 10rem;
 // Renders the repeating tile (3 circles + 2 rects) for one pattern strip. $circle-centers
 // is a 3-item list of x-offsets; $rect-ranges is a 2-item list of [start, end] pairs. Both
 // sides share this shape/size - only the ORDER (which offsets are passed in) differs.
+// Shape is carved via mask-image (opaque #000 = visible) rather than baked into
+// background-image's color stops, since --pattern-color (plugged in via `background` on
+// &__pattern) can be a gradient, and a gradient isn't a valid color-stop <color>.
 @mixin pattern-tile($circle-centers, $rect-ranges) {
-	background-image:
+	$mask:
 		radial-gradient(
 			circle at list.nth($circle-centers, 1) 50%,
-			var(--pattern-color, transparent) $pattern-circle-radius,
+			#000 $pattern-circle-radius,
 			transparent $pattern-circle-antialias-edge
 		),
 		radial-gradient(
 			circle at list.nth($circle-centers, 2) 50%,
-			var(--pattern-color, transparent) $pattern-circle-radius,
+			#000 $pattern-circle-radius,
 			transparent $pattern-circle-antialias-edge
 		),
 		radial-gradient(
 			circle at list.nth($circle-centers, 3) 50%,
-			var(--pattern-color, transparent) $pattern-circle-radius,
+			#000 $pattern-circle-radius,
 			transparent $pattern-circle-antialias-edge
 		),
 		linear-gradient(
 			to right,
 			transparent 0 list.nth(list.nth($rect-ranges, 1), 1),
-			var(--pattern-color, transparent) list.nth(list.nth($rect-ranges, 1), 1) list.nth(list.nth($rect-ranges, 1), 2),
+			#000 list.nth(list.nth($rect-ranges, 1), 1) list.nth(list.nth($rect-ranges, 1), 2),
 			transparent list.nth(list.nth($rect-ranges, 1), 2) list.nth(list.nth($rect-ranges, 2), 1),
-			var(--pattern-color, transparent) list.nth(list.nth($rect-ranges, 2), 1) list.nth(list.nth($rect-ranges, 2), 2)
+			#000 list.nth(list.nth($rect-ranges, 2), 1) list.nth(list.nth($rect-ranges, 2), 2)
 		);
+
+	mask-image: $mask;
 }
 
 .c-block-homepage-banner {
@@ -65,13 +70,10 @@ $pattern-mobile-overshoot: 10rem;
 		flex-direction: column;
 
 		@media (max-width: variables.$g-bp4) {
-			// Mobile pattern slots size themselves as a % of this element, so it needs to
-			// span the full screen width here, not the desktop 75% cap.
+			// Mobile pattern slots size as a % of this element, so it spans full width here.
 			max-width: 100%;
-			// Reserves normal-flow space for the pattern slots above/below the text.
-			// &__pattern-slot is position: absolute so its height doesn't count towards
-			// this element's own height - without this padding, .c-block-homepage-banner's
-			// clip-path would end right at the text and clip the slots away entirely.
+			// Reserves space for the (position: absolute, so otherwise height: 0) pattern
+			// slots above/below the text - else the parent's clip-path would cut them off.
 			padding: calc($pattern-height + $pattern-distance-vertical) 0;
 		}
 
@@ -125,31 +127,33 @@ $pattern-mobile-overshoot: 10rem;
 		}
 	}
 
-	// Anchored off the text box's own edge (not Container's), so the $pattern-distance-horizontal gap holds
-	// regardless of alignment or actual (up to 75%) text width.
-	//
-	// width MUST be a multiple of $pattern-cycle-width: Chrome has a rendering bug where a
-	// repeating multi-layer gradient tears in the middle of the element when its width
-	// isn't an exact multiple of background-size (100vw reproduces this reliably).
-	//
-	// --left/--right are two DIFFERENT tiles (not one tile phase-shifted via
-	// background-position - that proved unreliable), each built so the desired near-text
-	// shape sits naturally at the tile's own edge, anchored via a plain
-	// background-position-x: right / left (no offset):
-	// - left:  rect, circle, rect, [circle, circle, rect, circle, ...]
-	// - right: circle, rect, circle, circle, [rect, circle, circle, rect, circle, ...]
+	// Anchored off the text box's own edge (not Container's), so the gap holds regardless
+	// of alignment/text width. width MUST be a multiple of $pattern-cycle-width: Chrome
+	// tears a repeating multi-layer gradient when the element width isn't an exact
+	// multiple of background-size. --left/--right are two DIFFERENT tiles (phase-shifting
+	// one tile via background-position proved unreliable), each anchored via a plain
+	// mask-position: right / left so the near-text shape lands at the tile's own edge.
 	&__pattern {
 		position: absolute;
 		top: 0;
 		bottom: 0;
 		width: $pattern-cycle-width * $pattern-repeat-count;
+
+		// `background` (not `background-image`) accepts a plain <color> as well as a
+		// gradient. Sized/repeated/positioned identically to the mask below so a gradient's
+		// 0%-100% resolves against one $pattern-cycle-width x $pattern-height tile, not
+		// &__pattern's full content-dependent height.
+		background: var(--pattern-color, transparent);
 		background-repeat: repeat-x;
-		background-position-y: top;
 		background-size: $pattern-cycle-width $pattern-height;
+		mask-repeat: repeat-x;
+		mask-size: $pattern-cycle-width $pattern-height;
 
 		&--left {
 			right: calc(100% + $pattern-distance-horizontal);
 			background-position-x: right;
+			mask-position: right top;
+
 			@include pattern-tile(
 				(
 					$pattern-circle-radius,
@@ -166,6 +170,8 @@ $pattern-mobile-overshoot: 10rem;
 		&--right {
 			left: calc(100% + $pattern-distance-horizontal);
 			background-position-x: left;
+			mask-position: left top;
+
 			@include pattern-tile(
 				(
 					$pattern-circle-radius,
@@ -180,9 +186,7 @@ $pattern-mobile-overshoot: 10rem;
 		}
 
 		// Below $g-bp4 the patterns move from beside the text to above/below it (see
-		// &__pattern-slot). Same tile/anchor as desktop - only the anchor's landmark moves
-		// from "near text" to the slot's inner (1/3 or 2/3) edge; top/bottom: 0 is already
-		// set above.
+		// &__pattern-slot) - same tile/anchor, just anchored to the slot's inner edge instead.
 		@media (max-width: variables.$g-bp4) {
 			&--left {
 				right: 0;
@@ -196,24 +200,18 @@ $pattern-mobile-overshoot: 10rem;
 		}
 	}
 
-	// No-op on desktop (unpositioned - &__pattern's position: absolute reaches past it to
-	// &__content). Below $g-bp4 it's the positioned, overflow-clipping box that caps
-	// &__pattern at exactly 1/3 (top) / 2/3 (bottom) of &__content's width. This cap can't
-	// live on &__pattern itself: capping its width there would make it a non-multiple of
-	// $pattern-cycle-width again (see the Chrome bug above).
+	// No-op on desktop. Below $g-bp4 it's the overflow-clipping box that caps &__pattern at
+	// exactly 1/3 (top) / 2/3 (bottom) of &__content's width - can't live on &__pattern
+	// itself, since capping its width there would break the Chrome multiple-width rule above.
 	&__pattern-slot {
 		@media (max-width: variables.$g-bp4) {
 			position: absolute;
 			overflow: hidden;
 			height: $pattern-height;
 
-			// top/bottom: 0 land inside &__content's reserved padding, not against its
-			// content-box - literal zero offsets, so (unlike the desktop calc(100% + $pattern-distance-horizontal)
-			// trick) they don't need &__content to have a definite height to resolve.
-			//
-			// left/right overshoot by $pattern-mobile-overshoot to reach past avo2
-			// Container's gutter to the true screen edge; width compensates so the INNER
-			// edge (the anchor landmark) stays exactly at 1/3 / 2/3.
+			// left/right overshoot by $pattern-mobile-overshoot to reach past avo2 Container's
+			// gutter to the true screen edge; width compensates so the inner (anchor) edge
+			// stays exactly at 1/3 / 2/3.
 			&--top {
 				top: 0;
 				left: -$pattern-mobile-overshoot;
