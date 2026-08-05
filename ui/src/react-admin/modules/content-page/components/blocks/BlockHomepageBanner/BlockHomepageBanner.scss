@@ -94,12 +94,12 @@ $pattern-mobile-overshoot: 10rem;
 		// &__pattern-slot) - same tile/anchor, just anchored to the slot's inner edge instead.
 		@media (max-width: variables.$g-bp4) {
 			&--left {
-				right: 0 !important;
+				right: 0;
 				left: auto;
 			}
 
 			&--right {
-				left: 0 !important;
+				left: 0;
 				right: auto;
 			}
 		}

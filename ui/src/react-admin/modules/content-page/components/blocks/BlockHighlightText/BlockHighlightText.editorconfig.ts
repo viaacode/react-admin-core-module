@@ -15,7 +15,7 @@ import { HET_ARCHIEF } from '~shared/types';
 const INITIAL_CONTENT_HIGHLIGHT_TEXT_COMPONENTS_STATE = () => ({
 	content: '',
 	backgroundColor: Color.Transparent,
-	highlightColor: Color.OceanGreen,
+	highlightColor: Color.SeaGreen,
 });
 
 export const INITIAL_CONTENT_HIGHLIGHT_TEXT_BLOCK_STATE = (): DefaultContentBlockState => ({
@@ -43,7 +43,7 @@ export const CONTENT_HIGHLIGHT_TEXT_CONFIG = (position = 0): ContentBlockConfig 
 				editorType: ContentBlockEditor.ColorSelect,
 				editorProps: {
 					options: GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF(),
-					defaultValue: GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF()[2],
+					defaultValue: GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF()[3],
 				},
 			},
 		},
