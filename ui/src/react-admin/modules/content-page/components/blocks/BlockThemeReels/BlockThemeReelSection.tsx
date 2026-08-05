@@ -243,7 +243,7 @@ export const BlockThemeReelSection: FunctionComponent<BlockThemeReelSectionProps
 				)}
 				{themeContentPagePath && (
 					<SwiperSlide
-						key={`theme-reel-slide__${theme.slug}__start-image`}
+						key={`theme-reel-slide__${theme.slug}__open-theme-cta`}
 						className={clsx(
 							'c-block-theme-reels-section__slide',
 							'c-block-theme-reels-section__slide--last'
