@@ -15,7 +15,6 @@ import { navigateFunc } from '~shared/helpers/navigate-fnc';
 import { tText } from '~shared/helpers/translation-functions';
 import { HET_ARCHIEF } from '~shared/types';
 import { BlockHeading } from '../BlockHeading/BlockHeading';
-import { useHasAccessToVisitorSpaces } from './hooks/has-access-to-visitor-spaces.ts';
 import { SearchDropdown, type SearchDropdownOption } from './SearchDropdown.tsx';
 
 export interface BlockHetArchiefHeaderSearchProps extends DefaultComponentProps {
@@ -59,8 +58,6 @@ export const BlockHetArchiefHeaderSearch: FunctionComponent<BlockHetArchiefHeade
 	const [searchTerm, setSearchTerm] = useState<string>('');
 	const [mediaType, setMediaType] = useState<string>(SEARCH_OPTIONS[0].id);
 
-	const { data: hasAccessToVisitorSpaces } = useHasAccessToVisitorSpaces();
-
 	useEffect(() => {
 		const timerId = setInterval(() => {
 			// setActive(activeIndex);
@@ -75,14 +72,17 @@ export const BlockHetArchiefHeaderSearch: FunctionComponent<BlockHetArchiefHeade
 	}, [subtitles.length]);
 
 	const navigateToSearchPage = async () => {
+		const baseQuery = {
+			format: mediaType,
+		};
 		const url = stringifyUrl({
 			url: AdminConfigManager.getConfig().routes.SEARCH || '/zoeken',
 			query: searchTerm
 				? {
+						...baseQuery,
 						zoekterm: searchTerm,
-						format: mediaType,
 					}
-				: {},
+				: baseQuery,
 		});
 		await navigateFunc(url);
 	};
@@ -112,17 +112,16 @@ export const BlockHetArchiefHeaderSearch: FunctionComponent<BlockHetArchiefHeade
 			</div>
 			<div>
 				<div
-					className={clsx('c-block-het-archief-header-search__searchbar', {
-						'c-block-het-archief-header-search__searchbar--has-dropdown': hasAccessToVisitorSpaces,
-					})}
-				>
-					{hasAccessToVisitorSpaces && (
-						<SearchDropdown
-							options={SEARCH_OPTIONS}
-							selectedOptionId={mediaType}
-							onSelectOption={(selectedOption) => setMediaType(selectedOption.id)}
-						/>
+					className={clsx(
+						'c-block-het-archief-header-search__searchbar',
+						'c-block-het-archief-header-search__searchbar--has-dropdown'
 					)}
+				>
+					<SearchDropdown
+						options={SEARCH_OPTIONS}
+						selectedOptionId={mediaType}
+						onSelectOption={(selectedOption) => setMediaType(selectedOption.id)}
+					/>
 					<TextInput
 						id="block-hetarchief-header-search__search-input"
 						ariaLabel={searchAriaLabel}

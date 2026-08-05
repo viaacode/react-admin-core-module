@@ -64,7 +64,7 @@ export const SearchDropdown: FC<SearchDropdownProps> = ({
 				{options.map((option: SearchDropdownOption) => (
 					// biome-ignore lint/a11y/useAriaPropsSupportedByRole: because it works?
 					<li
-						tabIndex={isOpen ? 0 : 1}
+						tabIndex={isOpen ? -1 : 1}
 						key={option.id}
 						aria-selected={selectedOptionId === option.id}
 						onClick={() => handleSelectOption(option)}
