@@ -11,6 +11,7 @@ import { retrieveContentPages, retrieveProjectContentPages } from './item-provid
 import { retrieveInternalLinks } from './item-providers/internal-link';
 import { retrieveItems } from './item-providers/item';
 import { retrieveProfiles } from './item-providers/profile';
+import { retrieveThemes } from './item-providers/theme';
 
 export interface PickerItem {
 	label?: string;
@@ -78,6 +79,9 @@ export const GET_CONTENT_TYPE_LABELS: () => Record<AvoCoreContentPickerType, str
 	),
 	[AvoCoreContentPickerType.IE_OBJECT]: tText(
 		'modules/shared/components/content-picker/content-picker___ie-objects'
+	),
+	[AvoCoreContentPickerType.IE_OBJECT_THEME]: tText(
+		"modules/shared/components/content-picker/content-picker___thema's"
 	),
 	/**
 	 * @deprecated, use CUSTOM_NAVIGATION_ELEMENTS instead
@@ -217,6 +221,13 @@ export const GET_CONTENT_TYPES: () => PickerTypeOption[] = () => {
 			label: labels[AvoCoreContentPickerType.IE_OBJECT],
 			disabled: false,
 			fetch: retrieveIeObjects,
+			picker: 'SELECT',
+		},
+		{
+			value: AvoCoreContentPickerType.IE_OBJECT_THEME,
+			label: labels[AvoCoreContentPickerType.IE_OBJECT_THEME],
+			disabled: false,
+			fetch: retrieveThemes,
 			picker: 'SELECT',
 		},
 		getContentTypeForContentPage(AvoCoreContentPickerType.CONTENT_PAGE_NEWS_ITEM),

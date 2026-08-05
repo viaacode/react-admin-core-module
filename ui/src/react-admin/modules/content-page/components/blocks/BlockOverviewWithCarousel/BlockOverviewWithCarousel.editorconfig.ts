@@ -24,7 +24,7 @@ import { tText } from '~shared/helpers/translation-functions';
 import { validateRequiredValue } from '~shared/helpers/validation.ts';
 import { HET_ARCHIEF } from '~shared/types';
 
-const INITIAL_CONTENT_OVERVIEW_WITH_CAROUSEL_ELEMENT_STATE = () => ({
+const INITIAL_OVERVIEW_WITH_CAROUSEL_ELEMENT_STATE = () => ({
 	mediaItem: {
 		label: '',
 		type: AvoCoreContentPickerType.CONTENT_PAGE,
@@ -36,26 +36,26 @@ const INITIAL_CONTENT_OVERVIEW_WITH_CAROUSEL_ELEMENT_STATE = () => ({
 	itemDisplay: '',
 });
 
-export const INITIAL_CONTENT_OVERVIEW_WITH_CAROUSEL_COMPONENTS_STATE = () => ({
+export const INITIAL_OVERVIEW_WITH_CAROUSEL_COMPONENTS_STATE = () => ({
 	title: '',
-	titleType: '',
+	titleType: 'h2',
 	buttonLabel: '',
 	buttonAltTitle: '',
-	elements: [INITIAL_CONTENT_OVERVIEW_WITH_CAROUSEL_ELEMENT_STATE()],
+	elements: [INITIAL_OVERVIEW_WITH_CAROUSEL_ELEMENT_STATE()],
 });
 
-export const INITIAL_CONTENT_OVERVIEW_WITH_CAROUSEL_BLOCK_STATE = (): DefaultContentBlockState => ({
+export const INITIAL_OVERVIEW_WITH_CAROUSEL_BLOCK_STATE = (): DefaultContentBlockState => ({
 	...BLOCK_STATE_DEFAULTS(),
 });
 
-export const CONTENT_OVERVIEW_WITH_CAROUSEL_CONFIG = (position = 0): ContentBlockConfig => ({
+export const OVERVIEW_WITH_CAROUSEL_CONFIG = (position = 0): ContentBlockConfig => ({
 	position,
 	name: tText(
 		'modules/content-page/components/blocks/block-overview-with-carousel/block-overview-with-carousel___overzicht-met-carrousel'
 	),
 	type: ContentBlockType.OverviewWithCarousel,
 	components: {
-		state: INITIAL_CONTENT_OVERVIEW_WITH_CAROUSEL_COMPONENTS_STATE(),
+		state: INITIAL_OVERVIEW_WITH_CAROUSEL_COMPONENTS_STATE(),
 		fields: {
 			title: TEXT_FIELD(
 				{
@@ -250,7 +250,7 @@ export const CONTENT_OVERVIEW_WITH_CAROUSEL_CONFIG = (position = 0): ContentBloc
 				},
 				type: 'fieldGroup',
 				repeat: {
-					defaultState: INITIAL_CONTENT_OVERVIEW_WITH_CAROUSEL_ELEMENT_STATE(),
+					defaultState: INITIAL_OVERVIEW_WITH_CAROUSEL_ELEMENT_STATE(),
 					addButtonLabel: tText(
 						'modules/content-page/components/blocks/block-overview-with-carousel/block-overview-with-carousel___voeg-object-toe',
 						undefined,
@@ -266,7 +266,7 @@ export const CONTENT_OVERVIEW_WITH_CAROUSEL_CONFIG = (position = 0): ContentBloc
 		},
 	},
 	block: {
-		state: INITIAL_CONTENT_OVERVIEW_WITH_CAROUSEL_BLOCK_STATE(),
+		state: INITIAL_OVERVIEW_WITH_CAROUSEL_BLOCK_STATE(),
 		fields: {
 			...BLOCK_FIELD_DEFAULTS(),
 		},

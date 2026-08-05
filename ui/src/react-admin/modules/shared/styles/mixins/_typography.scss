@@ -38,12 +38,27 @@ $font-family: "SofiaPro", sans-serif;
 }
 
 @mixin sofia-pro-body($important: false) {
-  @include sofia-pro(1.8rem, 500, 2.8rem, $important);
+	@include sofia-pro(1.8rem, 500, 2.8rem, $important);
+}
+
+@mixin sofia-pro-body-sm($important: false) {
+	@include sofia-pro(1.6rem, 500, 2.4rem, $important);
 }
 
 // Single-line truncation with an ellipsis - shared with .u-truncate (utilities/_text.scss).
 @mixin truncate() {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+// Multiline-line truncation with an ellipsis
+@mixin truncate-after-x-lines($lines) {
+	@include truncate();
+
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: $lines;
+	line-clamp: $lines;
+	white-space: normal;
 }
