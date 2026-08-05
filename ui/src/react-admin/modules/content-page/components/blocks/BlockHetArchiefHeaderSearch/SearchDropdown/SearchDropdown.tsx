@@ -1,6 +1,7 @@
 import { keysEnter, onKey } from '@meemoo/react-components';
 import clsx from 'clsx';
 import { type FC, useState } from 'react';
+import { Icon } from '~shared/components/Icon/Icon';
 import { tText } from '~shared/helpers/translation-functions.ts';
 import styles from './SearchDropdown.module.scss';
 
@@ -60,12 +61,13 @@ export const SearchDropdown: FC = () => {
 		};
 
 		return (
-			<li {...actionProps} className={clsx(styles['c-visitor-spaces-dropdown__active'])}>
-				<div className={clsx(styles['c-visitor-spaces-dropdown__active-content'])}>
-					<p className={clsx(styles['c-visitor-spaces-dropdown__active-label'])}>
+			<li {...actionProps} className={clsx(styles['c-search-dropdown__active'])}>
+				<div className={clsx(styles['c-search-dropdown__active-content'])}>
+					<p className={clsx(styles['c-search-dropdown__active-label'])}>
 						{selected?.selectedLabel}
 					</p>
 				</div>
+				<Icon className={clsx(styles['c-search-dropdown__active-icon'])} name="angleDown" />
 			</li>
 		);
 	};
@@ -73,8 +75,8 @@ export const SearchDropdown: FC = () => {
 	const renderAllOptions = () => (
 		<li aria-hidden={!isOpen} id="list-controls">
 			<ul
-				className={clsx('u-list-reset', styles['c-visitor-spaces-dropdown__list'], {
-					[styles['c-visitor-spaces-dropdown__list--open']]: isOpen,
+				className={clsx('u-list-reset', styles['c-search-dropdown__list'], {
+					[styles['c-search-dropdown__list--open']]: isOpen,
 				})}
 			>
 				{SEARCH_OPTIONS.map((option: SearchDropdownOption) => (
@@ -85,10 +87,10 @@ export const SearchDropdown: FC = () => {
 						aria-selected={selectedOptionId === option.id}
 						onClick={() => onSelectOption(option)}
 						onKeyDown={(e) => onKey(e, [...keysEnter], () => onSelectOption(option))}
-						className={clsx(styles['c-visitor-spaces-dropdown__option'])}
+						className={clsx(styles['c-search-dropdown__option'])}
 					>
 						<p
-							className={clsx(styles['c-visitor-spaces-dropdown__option-label'], 'u-text-ellipsis')}
+							className={clsx(styles['c-search-dropdown__option-label'], 'u-text-ellipsis')}
 						>
 							{option.label}
 						</p>
@@ -100,9 +102,9 @@ export const SearchDropdown: FC = () => {
 
 	return (
 		<ul
-			className={clsx('u-list-reset', styles['c-visitor-spaces-dropdown'], {
-				[styles['c-visitor-spaces-dropdown--open']]: isOpen,
-				[styles['c-visitor-spaces-dropdown--selectable']]: true,
+			className={clsx('u-list-reset', styles['c-search-dropdown'], {
+				[styles['c-search-dropdown--open']]: isOpen,
+				[styles['c-search-dropdown--selectable']]: true,
 			})}
 		>
 			{renderSelectedOption()}
