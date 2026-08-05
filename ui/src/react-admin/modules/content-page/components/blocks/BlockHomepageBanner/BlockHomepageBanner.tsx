@@ -4,7 +4,12 @@ import './BlockHomepageBanner.scss';
 import { Container } from '@viaa/avo2-components';
 import clsx from 'clsx';
 import { BlockHeading } from '~content-blocks/BlockHeading';
-import type { AlignOption } from '~modules/content-page/types/content-block.types';
+import {
+	type AlignOption,
+	Color,
+	ColorSelectGradientColors,
+	CustomBackground,
+} from '~modules/content-page/types/content-block.types';
 import { ContentPageWidth } from '~modules/content-page/types/content-pages.types.ts';
 import Html from '~shared/components/Html/Html.tsx';
 
@@ -25,13 +30,18 @@ export const BlockHomepageBanner: FunctionComponent<BlockHomepageBannerProps> = 
 	bannerColor,
 	pageWidth,
 }): ReactElement => {
+	const patternColor =
+		bannerColor === CustomBackground.MeemooLogo
+			? Color.Transparent
+			: ((ColorSelectGradientColors as Record<string, string>)[bannerColor] ?? bannerColor);
+
 	return (
 		<article
 			className={clsx('c-block-homepage-banner', 'o-container')}
 			style={
 				{
 					background: backgroundColor,
-					'--pattern-color': bannerColor,
+					'--pattern-color': patternColor,
 				} as CSSProperties
 			}
 		>

@@ -26,19 +26,20 @@ $pattern-mobile-overshoot: 10rem;
 		flex-direction: column;
 
 		@media (max-width: variables.$g-bp4) {
-			// Mobile pattern slots size themselves as a % of this element, so it needs to span
-			// the full screen width here, not the desktop 75% cap.
+			// Mobile pattern slots size as a % of this element, so it spans full width here.
 			max-width: 100%;
-			// &__pattern-slot is position: absolute so this is what reserves its space in
-			// normal flow - without it the clip-path above would cut the slots away entirely.
+			// Reserves space for the (position: absolute, so otherwise height: 0) pattern
+			// slots above/below the text - else the parent's clip-path would cut them off.
 			padding: calc($pattern-height + $pattern-distance-vertical) 0;
 		}
 
 		&--left {
 			margin-right: auto;
 
-			.c-block-homepage-banner__pattern--right {
-				left: calc(100% + $pattern-distance-horizontal + $pattern-distance-horizontal);
+			@media (min-width: variables.$g-bp4) {
+				.c-block-homepage-banner__pattern--right {
+					left: calc(100% + $pattern-distance-horizontal + $pattern-distance-horizontal);
+				}
 			}
 		}
 
@@ -49,8 +50,10 @@ $pattern-mobile-overshoot: 10rem;
 		&--right {
 			margin-left: auto;
 
-			.c-block-homepage-banner__pattern--left {
-				right: calc(100% + $pattern-distance-horizontal + $pattern-distance-horizontal);
+			@media (min-width: variables.$g-bp4) {
+				.c-block-homepage-banner__pattern--left {
+					right: calc(100% + $pattern-distance-horizontal + $pattern-distance-horizontal);
+				}
 			}
 		}
 
@@ -79,17 +82,16 @@ $pattern-mobile-overshoot: 10rem;
 
 		&--left {
 			right: calc(100% + $pattern-distance-horizontal);
-			background-position-x: right;
 			@include pattern.pattern-side(left, 1, $pattern-height);
 		}
 
 		&--right {
 			left: calc(100% + $pattern-distance-horizontal);
-			background-position-x: left;
 			@include pattern.pattern-side(right, 5, $pattern-height);
 		}
 
-		// Below $g-bp4 the patterns move from beside the text to above/below it (see &__pattern-slot).
+		// Below $g-bp4 the patterns move from beside the text to above/below it (see
+		// &__pattern-slot) - same tile/anchor, just anchored to the slot's inner edge instead.
 		@media (max-width: variables.$g-bp4) {
 			&--left {
 				right: 0 !important;
@@ -103,17 +105,18 @@ $pattern-mobile-overshoot: 10rem;
 		}
 	}
 
-	// No-op on desktop. Below $g-bp4 it's the positioned, overflow-clipping box that caps
-	// &__pattern at exactly 1/3 (top) / 2/3 (bottom) of &__content's width - the cap can't live
-	// on &__pattern itself without breaking the Chrome tiling-bug workaround above.
+	// No-op on desktop. Below $g-bp4 it's the overflow-clipping box that caps &__pattern at
+	// exactly 1/3 (top) / 2/3 (bottom) of &__content's width - can't live on &__pattern
+	// itself, since capping its width there would break the Chrome multiple-width rule above.
 	&__pattern-slot {
 		@media (max-width: variables.$g-bp4) {
 			position: absolute;
 			overflow: hidden;
 			height: $pattern-height;
 
-			// left/right overshoot to reach past avo2 Container's gutter to the true screen
-			// edge; width compensates so the inner (anchor) edge stays exactly at 1/3 / 2/3.
+			// left/right overshoot by $pattern-mobile-overshoot to reach past avo2 Container's
+			// gutter to the true screen edge; width compensates so the inner (anchor) edge
+			// stays exactly at 1/3 / 2/3.
 			&--top {
 				top: 0;
 				left: -$pattern-mobile-overshoot;

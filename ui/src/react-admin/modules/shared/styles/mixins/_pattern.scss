@@ -77,15 +77,21 @@ $_pattern-canon: rect, circle, circle, rect, circle;
 
 // Common base for a pattern strip element - position/tiling only, no shape or side concerns.
 // $repeat-count just needs to be generous enough that the strip always reaches the block's own
-// edge on any realistic viewport.
+// edge on any realistic viewport. Paints via `background` (not `background-image`) so
+// --pattern-color can be a plain color or a gradient; pattern-side's mask-image carves the
+// shape out of that paint rather than baking the color into gradient color stops directly,
+// since a gradient isn't a valid color-stop <color>.
 @mixin pattern-strip($height, $repeat-count: 20) {
   $cycle-width: _pattern-cycle-width($height);
 
   position: absolute;
   width: $cycle-width * $repeat-count;
+  background: var(--pattern-color, transparent);
   background-repeat: repeat-x;
-  background-position-y: top;
   background-size: $cycle-width $height;
+  mask-repeat: repeat-x;
+  mask-position-y: top;
+  mask-size: $cycle-width $height;
 }
 
 // Draws the repeating tile (3 circles + 2 rects) for one side of a pattern strip. $side is
@@ -98,32 +104,36 @@ $_pattern-canon: rect, circle, circle, rect, circle;
   $positions: _pattern-positions($side, $start, $height);
   $circle-centers: list.nth($positions, 1);
   $rect-ranges: list.nth($positions, 2);
+  $anchor: if($side == left, right, left);
 
-  background-image:
+  background-position-x: $anchor;
+  mask-position-x: $anchor;
+  mask-image:
     radial-gradient(
       circle at list.nth($circle-centers, 1) 50%,
-      var(--pattern-color, transparent) $circle-radius,
+      #000 $circle-radius,
       transparent $antialias-edge
     ),
     radial-gradient(
       circle at list.nth($circle-centers, 2) 50%,
-      var(--pattern-color, transparent) $circle-radius,
+      #000 $circle-radius,
       transparent $antialias-edge
     ),
     radial-gradient(
       circle at list.nth($circle-centers, 3) 50%,
-      var(--pattern-color, transparent) $circle-radius,
+      #000 $circle-radius,
       transparent $antialias-edge
     ),
     linear-gradient(
       to right,
       transparent 0 list.nth(list.nth($rect-ranges, 1), 1),
-      var(--pattern-color, transparent) list.nth(list.nth($rect-ranges, 1), 1) list.nth(list.nth($rect-ranges, 1), 2),
+      #000 list.nth(list.nth($rect-ranges, 1), 1) list.nth(list.nth($rect-ranges, 1), 2),
       transparent list.nth(list.nth($rect-ranges, 1), 2) list.nth(list.nth($rect-ranges, 2), 1),
-      var(--pattern-color, transparent) list.nth(list.nth($rect-ranges, 2), 1) list.nth(list.nth($rect-ranges, 2), 2),
-      // Without this trailing stop, a plain linear-gradient holds its LAST color for the rest
-      // of its length - the 2nd rect would bleed solid color all the way to the tile's edge
-      // instead of stopping, whenever that edge doesn't land exactly on $cycle-width.
+      #000 list.nth(list.nth($rect-ranges, 2), 1) list.nth(list.nth($rect-ranges, 2), 2),
+      // Without this trailing stop, a plain linear-gradient holds its LAST stop for the rest
+      // of its length - the 2nd rect would bleed solid (opaque, ie. visible) all the way to
+      // the tile's edge instead of stopping, whenever that edge doesn't land exactly on
+      // $cycle-width.
       transparent list.nth(list.nth($rect-ranges, 2), 2) $cycle-width
     );
 }
