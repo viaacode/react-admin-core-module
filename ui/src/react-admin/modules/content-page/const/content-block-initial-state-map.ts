@@ -11,6 +11,7 @@ import { INITIAL_EVENTBRITE_COMPONENTS_STATE } from '~content-blocks/BlockEventb
 import { INITIAL_HEADING_COMPONENTS_STATE } from '~content-blocks/BlockHeading';
 import { INITIAL_HET_ARCHIEF_HEADER_SEARCH_BLOCK_STATE } from '~content-blocks/BlockHetArchiefHeaderSearch/BlockHetArchiefHeaderSearch.editorconfig';
 import { INITIAL_HET_ARCHIEF_IMAGE_TEXT_BACKGROUND_BLOCK_STATE } from '~content-blocks/BlockHetArchiefImageTextBackground';
+import { INITIAL_CONTENT_HIGHLIGHT_TEXT_BLOCK_STATE } from '~content-blocks/BlockHighlightText';
 import { INITIAL_CONTENT_HOMEPAGE_BANNER_BLOCK_STATE } from '~content-blocks/BlockHomepageBanner';
 import { INITIAL_IFRAME_COMPONENTS_STATE } from '~content-blocks/BlockIFrame';
 import { INITIAL_IMAGE_COMPONENTS_STATE } from '~content-blocks/BlockImage';
@@ -92,4 +93,5 @@ export const CONTENT_BLOCK_INITIAL_STATE_MAP: {
 	[ContentBlockType.ScrollDownNudge]: INITIAL_SCROLL_DOWN_NUDGE_BLOCK_STATE,
 	[ContentBlockType.OverviewWithCarousel]: INITIAL_CONTENT_OVERVIEW_WITH_CAROUSEL_BLOCK_STATE,
 	[ContentBlockType.HomepageBanner]: INITIAL_CONTENT_HOMEPAGE_BANNER_BLOCK_STATE,
+	[ContentBlockType.HighlightText]: INITIAL_CONTENT_HIGHLIGHT_TEXT_BLOCK_STATE,
 };

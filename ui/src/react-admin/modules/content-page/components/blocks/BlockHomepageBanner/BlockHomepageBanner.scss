@@ -1,63 +1,19 @@
-@use "sass:math";
-@use "sass:list";
 @use "../../../../shared/styles/settings/variables" as variables;
 @use "../../../../shared/styles/settings/colors" as colors;
+@use "../../../../shared/styles/mixins/pattern" as pattern;
+@use "../../../../shared/styles/mixins/typography" as typography;
 
-// Shared shape sizing for the decorative pattern strips (used by --left and --right).
 $pattern-height: 8rem;
 $pattern-distance-vertical: variables.$g-spacer-unit * 3;
 $pattern-distance-horizontal: variables.$g-spacer-unit * 5;
-
-$pattern-rect-width: 4rem;
-$pattern-circle-diameter: $pattern-height;
-$pattern-circle-radius: math.div($pattern-circle-diameter, 2);
-$pattern-circle-antialias-edge: $pattern-circle-radius + 0.02rem;
-$pattern-cycle-width: $pattern-rect-width * 2 + $pattern-circle-diameter * 3;
-// Must stay a multiple of $pattern-cycle-width (see &__pattern) - generous safety margin
-// so the strip always reaches this component's own edge on any realistic viewport.
+// Generous enough that the strip always reaches this component's own edge on any viewport.
 $pattern-repeat-count: 20;
-// How far the mobile pattern slots overshoot &__content's edge, so they can still bleed
-// past avo2 Container's (smaller, but non-zero) gutter to the true screen edge.
+// How far the mobile pattern slots overshoot &__content's edge - see &__pattern-slot.
 $pattern-mobile-overshoot: 10rem;
 
-// Renders the repeating tile (3 circles + 2 rects) for one pattern strip. $circle-centers
-// is a 3-item list of x-offsets; $rect-ranges is a 2-item list of [start, end] pairs. Both
-// sides share this shape/size - only the ORDER (which offsets are passed in) differs.
-// Shape is carved via mask-image (opaque #000 = visible) rather than baked into
-// background-image's color stops, since --pattern-color (plugged in via `background` on
-// &__pattern) can be a gradient, and a gradient isn't a valid color-stop <color>.
-@mixin pattern-tile($circle-centers, $rect-ranges) {
-	$mask:
-		radial-gradient(
-			circle at list.nth($circle-centers, 1) 50%,
-			#000 $pattern-circle-radius,
-			transparent $pattern-circle-antialias-edge
-		),
-		radial-gradient(
-			circle at list.nth($circle-centers, 2) 50%,
-			#000 $pattern-circle-radius,
-			transparent $pattern-circle-antialias-edge
-		),
-		radial-gradient(
-			circle at list.nth($circle-centers, 3) 50%,
-			#000 $pattern-circle-radius,
-			transparent $pattern-circle-antialias-edge
-		),
-		linear-gradient(
-			to right,
-			transparent 0 list.nth(list.nth($rect-ranges, 1), 1),
-			#000 list.nth(list.nth($rect-ranges, 1), 1) list.nth(list.nth($rect-ranges, 1), 2),
-			transparent list.nth(list.nth($rect-ranges, 1), 2) list.nth(list.nth($rect-ranges, 2), 1),
-			#000 list.nth(list.nth($rect-ranges, 2), 1) list.nth(list.nth($rect-ranges, 2), 2)
-		);
-
-	mask-image: $mask;
-}
-
 .c-block-homepage-banner {
-	// The pattern strips escape all the way to this element's edges (and beyond) - clip
-	// them here. clip-path (not overflow-x: hidden) avoids the overflow-x/y coupling rule
-	// that would otherwise turn overflow-y into "auto" and risk a vertical scrollbar.
+	// clip-path (not overflow-x: hidden) avoids the overflow-x/y coupling rule that would
+	// otherwise turn overflow-y into "auto" and risk a vertical scrollbar.
 	clip-path: inset(0);
 	width: 100% !important;
 	max-width: none !important;
@@ -95,7 +51,7 @@ $pattern-mobile-overshoot: 10rem;
 			margin-left: auto;
 
 			@media (min-width: variables.$g-bp4) {
-				.c-block-homepage-banner__pattern--left{
+				.c-block-homepage-banner__pattern--left {
 					right: calc(100% + $pattern-distance-horizontal + $pattern-distance-horizontal);
 				}
 			}
@@ -104,85 +60,34 @@ $pattern-mobile-overshoot: 10rem;
 		&-title {
 			padding-bottom: variables.$g-spacer-unit * 4;
 			color: colors.$color-gray-1000;
-
-			/* H4 */
-			font-family: "SofiaPro" !important;
-			font-size: 3.2rem  !important;
-			font-style: normal !important;
-			font-weight: 800 !important;
-			line-height: 4rem !important;
 			width: 100%;
 			white-space: wrap;
+			@include typography.sofia-pro-heading-xl(true);
 		}
 
 		&-text {
 			color: colors.$neutral;
-
-			/* H4 */
-			font-family: "SofiaPro" !important;
-			font-size: 1.8rem !important;
-			font-style: normal !important;
-			font-weight: 500 !important;
-			line-height: 2.8rem !important;
+			@include typography.sofia-pro-body(true);
 		}
 	}
 
-	// Anchored off the text box's own edge (not Container's), so the gap holds regardless
-	// of alignment/text width. width MUST be a multiple of $pattern-cycle-width: Chrome
-	// tears a repeating multi-layer gradient when the element width isn't an exact
-	// multiple of background-size. --left/--right are two DIFFERENT tiles (phase-shifting
-	// one tile via background-position proved unreliable), each anchored via a plain
-	// mask-position: right / left so the near-text shape lands at the tile's own edge.
+	// The strip is always the same 5-shape cycle - rect, circle, circle, rect, circle - just
+	// entered at a different point per side (see pattern.pattern-side):
+	// - left:  enters at shape 1, nearest text -> rect, circle, rect, circle, circle
+	// - right: enters at shape 5, nearest text -> circle, rect, circle, circle, rect
 	&__pattern {
-		position: absolute;
+		@include pattern.pattern-strip($pattern-height, $pattern-repeat-count);
 		top: 0;
 		bottom: 0;
-		width: $pattern-cycle-width * $pattern-repeat-count;
-
-		// `background` (not `background-image`) accepts a plain <color> as well as a
-		// gradient. Sized/repeated/positioned identically to the mask below so a gradient's
-		// 0%-100% resolves against one $pattern-cycle-width x $pattern-height tile, not
-		// &__pattern's full content-dependent height.
-		background: var(--pattern-color, transparent);
-		background-repeat: repeat-x;
-		background-size: $pattern-cycle-width $pattern-height;
-		mask-repeat: repeat-x;
-		mask-size: $pattern-cycle-width $pattern-height;
 
 		&--left {
 			right: calc(100% + $pattern-distance-horizontal);
-			background-position-x: right;
-			mask-position: right top;
-
-			@include pattern-tile(
-				(
-					$pattern-circle-radius,
-					$pattern-circle-diameter + $pattern-circle-radius,
-					$pattern-circle-diameter * 2 + $pattern-rect-width + $pattern-circle-radius,
-				),
-				(
-					($pattern-circle-diameter * 2, $pattern-circle-diameter * 2 + $pattern-rect-width),
-					($pattern-circle-diameter * 3 + $pattern-rect-width, $pattern-cycle-width),
-				)
-			);
+			@include pattern.pattern-side(left, 1, $pattern-height);
 		}
 
 		&--right {
 			left: calc(100% + $pattern-distance-horizontal);
-			background-position-x: left;
-			mask-position: left top;
-
-			@include pattern-tile(
-				(
-					$pattern-circle-radius,
-					$pattern-circle-diameter + $pattern-rect-width + $pattern-circle-radius,
-					$pattern-circle-diameter * 2 + $pattern-rect-width + $pattern-circle-radius,
-				),
-				(
-					($pattern-circle-diameter, $pattern-circle-diameter + $pattern-rect-width),
-					($pattern-circle-diameter * 3 + $pattern-rect-width, $pattern-cycle-width),
-				)
-			);
+			@include pattern.pattern-side(right, 5, $pattern-height);
 		}
 
 		// Below $g-bp4 the patterns move from beside the text to above/below it (see

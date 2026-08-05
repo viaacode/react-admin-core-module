@@ -188,6 +188,7 @@ export enum ContentBlockType {
 	ScrollDownNudge = 'SCROLL_DOWN_NUDGE',
 	OverviewWithCarousel = 'OVERVIEW_WITH_CAROUSEL',
 	HomepageBanner = 'HOMEPAGE_BANNER',
+	HighlightText = 'HIGHLIGHT_TEXT',
 }
 
 export enum ContentBlockEditor {
