@@ -1,5 +1,4 @@
 import { TextInput } from '@meemoo/react-components';
-import { AvoSearchOrderDirection } from '@viaa/avo2-types';
 import clsx from 'clsx';
 import { stringifyUrl } from 'query-string';
 import React, {
@@ -7,10 +6,8 @@ import React, {
 	type KeyboardEvent,
 	type ReactElement,
 	useEffect,
-	useMemo,
 	useState,
 } from 'react';
-import { SearchDropdown } from '~content-blocks/BlockHetArchiefHeaderSearch/SearchDropdown/SearchDropdown.tsx';
 import { AdminConfigManager } from '~core/config/config.class';
 import type { DefaultComponentProps } from '~modules/shared/types/components';
 import { Icon } from '~shared/components/Icon/Icon';
@@ -19,6 +16,7 @@ import { tText } from '~shared/helpers/translation-functions';
 import { HET_ARCHIEF } from '~shared/types';
 import { BlockHeading } from '../BlockHeading/BlockHeading';
 import { useHasAccessToVisitorSpaces } from './hooks/has-access-to-visitor-spaces.ts';
+import { SearchDropdown } from './SearchDropdown.tsx';
 
 export interface BlockHetArchiefHeaderSearchProps extends DefaultComponentProps {
 	title: string;
@@ -121,7 +119,7 @@ export const BlockHetArchiefHeaderSearch: FunctionComponent<BlockHetArchiefHeade
 						value={searchTerm}
 					/>
 				</div>
-				<p>{textBelowSearch}</p>
+				{textBelowSearch && <p>{textBelowSearch}</p>}
 			</div>
 		</article>
 	);
