@@ -8,5 +8,9 @@
 	&__actions{
 		display: flex;
 		justify-content: center;
+
+		.c-button__label {
+			font-weight: 700; // since sm buttons loose this
+		}
 	}
 }
