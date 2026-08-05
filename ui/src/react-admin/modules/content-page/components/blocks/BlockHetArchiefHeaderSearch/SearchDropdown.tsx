@@ -2,52 +2,37 @@ import { keysEnter, onKey } from '@meemoo/react-components';
 import clsx from 'clsx';
 import { type FC, useState } from 'react';
 import { Icon } from '~shared/components/Icon/Icon';
-import { tText } from '~shared/helpers/translation-functions.ts';
 
-interface SearchDropdownOption {
+export interface SearchDropdownOption {
 	id: string;
 	label: string;
 	selectedLabel: string;
 }
 
-export const SearchDropdown: FC = () => {
-	const SEARCH_OPTIONS: SearchDropdownOption[] = [
-		{
-			id: 'search-all',
-			selectedLabel: tText('Alles'),
-			label: tText('Zoek in alle objecten'),
-		},
-		{
-			id: 'search-audio',
-			selectedLabel: tText('Alle audio'),
-			label: tText('Zoek in audio'),
-		},
-		{
-			id: 'search-video',
-			selectedLabel: tText('Alle video'),
-			label: tText('Zoek in video'),
-		},
-		{
-			id: 'search-newspapers',
-			selectedLabel: tText('Alle kranten'),
-			label: tText('Zoek in kranten'),
-		},
-	];
+interface SearchDropdownProps {
+	options: SearchDropdownOption[];
+	selectedOptionId: string;
+	onSelectOption: (selectedOption: SearchDropdownOption) => void;
+}
 
+export const SearchDropdown: FC<SearchDropdownProps> = ({
+	options,
+	selectedOptionId,
+	onSelectOption,
+}) => {
 	const [isOpen, setIsOpen] = useState<boolean>(false);
-	const [selectedOptionId, setSelectedOptionId] = useState<string>(SEARCH_OPTIONS[0].id);
 
 	const onClickDropdown = (): void => {
 		setIsOpen((prevIsOpen: boolean) => !prevIsOpen);
 	};
 
-	const onSelectOption = (selectedOption: SearchDropdownOption): void => {
+	const handleSelectOption = (selectedOption: SearchDropdownOption): void => {
 		setIsOpen(false);
-		setSelectedOptionId(selectedOption.id);
+		onSelectOption(selectedOption);
 	};
 
 	const renderSelectedOption = () => {
-		const selected = SEARCH_OPTIONS.find(({ id }: SearchDropdownOption) => id === selectedOptionId);
+		const selected = options.find(({ id }: SearchDropdownOption) => id === selectedOptionId);
 
 		const actionProps = {
 			tabIndex: 0,
@@ -76,14 +61,14 @@ export const SearchDropdown: FC = () => {
 					'c-search-dropdown__list--open': isOpen,
 				})}
 			>
-				{SEARCH_OPTIONS.map((option: SearchDropdownOption) => (
+				{options.map((option: SearchDropdownOption) => (
 					// biome-ignore lint/a11y/useAriaPropsSupportedByRole: because it works?
 					<li
 						tabIndex={isOpen ? 0 : 1}
 						key={option.id}
 						aria-selected={selectedOptionId === option.id}
-						onClick={() => onSelectOption(option)}
-						onKeyDown={(e) => onKey(e, [...keysEnter], () => onSelectOption(option))}
+						onClick={() => handleSelectOption(option)}
+						onKeyDown={(e) => onKey(e, [...keysEnter], () => handleSelectOption(option))}
 						className="c-search-dropdown__option"
 					>
 						<p className="c-search-dropdown__option-label u-text-ellipsis">{option.label}</p>

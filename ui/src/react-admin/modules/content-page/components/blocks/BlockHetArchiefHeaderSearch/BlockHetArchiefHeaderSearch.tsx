@@ -16,7 +16,7 @@ import { tText } from '~shared/helpers/translation-functions';
 import { HET_ARCHIEF } from '~shared/types';
 import { BlockHeading } from '../BlockHeading/BlockHeading';
 import { useHasAccessToVisitorSpaces } from './hooks/has-access-to-visitor-spaces.ts';
-import { SearchDropdown } from './SearchDropdown.tsx';
+import { SearchDropdown, type SearchDropdownOption } from './SearchDropdown.tsx';
 
 export interface BlockHetArchiefHeaderSearchProps extends DefaultComponentProps {
 	title: string;
@@ -32,8 +32,32 @@ export const BlockHetArchiefHeaderSearch: FunctionComponent<BlockHetArchiefHeade
 	searchAriaLabel,
 	textBelowSearch,
 }): ReactElement => {
+	const SEARCH_OPTIONS: SearchDropdownOption[] = [
+		{
+			id: 'all',
+			selectedLabel: tText('Alles'),
+			label: tText('Zoek in alle objecten'),
+		},
+		{
+			id: 'audio',
+			selectedLabel: tText('Alle audio'),
+			label: tText('Zoek in audio'),
+		},
+		{
+			id: 'video',
+			selectedLabel: tText('Alle video'),
+			label: tText('Zoek in video'),
+		},
+		{
+			id: 'newspaper',
+			selectedLabel: tText('Alle kranten'),
+			label: tText('Zoek in kranten'),
+		},
+	];
+
 	const [activeIndex, setActiveIndex] = useState<number>(subtitles.length - 1);
 	const [searchTerm, setSearchTerm] = useState<string>('');
+	const [mediaType, setMediaType] = useState<string>(SEARCH_OPTIONS[0].id);
 
 	const { data: hasAccessToVisitorSpaces } = useHasAccessToVisitorSpaces();
 
@@ -53,7 +77,12 @@ export const BlockHetArchiefHeaderSearch: FunctionComponent<BlockHetArchiefHeade
 	const navigateToSearchPage = async () => {
 		const url = stringifyUrl({
 			url: AdminConfigManager.getConfig().routes.SEARCH || '/zoeken',
-			query: searchTerm ? { zoekterm: searchTerm } : {},
+			query: searchTerm
+				? {
+						zoekterm: searchTerm,
+						format: mediaType,
+					}
+				: {},
 		});
 		await navigateFunc(url);
 	};
@@ -87,7 +116,13 @@ export const BlockHetArchiefHeaderSearch: FunctionComponent<BlockHetArchiefHeade
 						'c-block-het-archief-header-search__searchbar--has-dropdown': hasAccessToVisitorSpaces,
 					})}
 				>
-					{hasAccessToVisitorSpaces && <SearchDropdown />}
+					{hasAccessToVisitorSpaces && (
+						<SearchDropdown
+							options={SEARCH_OPTIONS}
+							selectedOptionId={mediaType}
+							onSelectOption={(selectedOption) => setMediaType(selectedOption.id)}
+						/>
+					)}
 					<TextInput
 						id="block-hetarchief-header-search__search-input"
 						ariaLabel={searchAriaLabel}
