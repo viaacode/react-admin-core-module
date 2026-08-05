@@ -117,8 +117,16 @@ export const BlockOverviewWithCarousel: FunctionComponent<BlockOverviewWithCarou
 							<Button
 								variants={['black', 'sm']}
 								icon={<Icon name="arrowLeft" />}
-								title={tText('Vorige slide', undefined, [HET_ARCHIEF])}
-								ariaLabel={tText('Vorige slide', undefined, [HET_ARCHIEF])}
+								title={tText(
+									'modules/content-page/components/blocks/block-overview-with-carousel/block-overview-with-carousel___vorige-slide',
+									undefined,
+									[HET_ARCHIEF]
+								)}
+								ariaLabel={tText(
+									'modules/content-page/components/blocks/block-overview-with-carousel/block-overview-with-carousel___vorige-slide',
+									undefined,
+									[HET_ARCHIEF]
+								)}
 								onClick={() => controlledSwiper?.slidePrev()}
 							/>
 						)}
@@ -126,8 +134,16 @@ export const BlockOverviewWithCarousel: FunctionComponent<BlockOverviewWithCarou
 							<Button
 								variants={['black', 'sm']}
 								icon={<Icon name="arrowRight" />}
-								title={tText('Volgende slide', undefined, [HET_ARCHIEF])}
-								ariaLabel={tText('Volgende slide', undefined, [HET_ARCHIEF])}
+								title={tText(
+									'modules/content-page/components/blocks/block-overview-with-carousel/block-overview-with-carousel___volgende-slide',
+									undefined,
+									[HET_ARCHIEF]
+								)}
+								ariaLabel={tText(
+									'modules/content-page/components/blocks/block-overview-with-carousel/block-overview-with-carousel___volgende-slide',
+									undefined,
+									[HET_ARCHIEF]
+								)}
 								onClick={() => controlledSwiper?.slideNext()}
 							/>
 						)}
