@@ -1,4 +1,5 @@
 import { tText } from '~shared/helpers/translation-functions';
+import { HET_ARCHIEF } from '~shared/types';
 import type {
 	ContentBlockConfig,
 	DefaultContentBlockState,
@@ -31,7 +32,9 @@ export const INITIAL_HET_ARCHIEF_QUOTE_BLOCK_STATE = (): DefaultContentBlockStat
 
 export const HET_ARCHIEF_QUOTE_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 	position,
-	name: tText('admin/content-block/helpers/generators/hetarchief-quote___quote-kader'),
+	name: tText('admin/content-block/helpers/generators/hetarchief-quote___quote-kader', {}, [
+		HET_ARCHIEF,
+	]),
 	type: ContentBlockType.HetArchiefQuote,
 	components: {
 		state: INITIAL_HET_ARCHIEF_QUOTE_COMPONENTS_STATE(),
@@ -48,14 +51,18 @@ export const HET_ARCHIEF_QUOTE_BLOCK_CONFIG = (position = 0): ContentBlockConfig
 				validator: undefined,
 			}),
 			textColor: SOLID_COLOR_FIELD(
-				tText('admin/content-block/helpers/generators/hetarchief-quote___tekstkleur'),
+				tText('admin/content-block/helpers/generators/hetarchief-quote___tekstkleur', {}, [
+					HET_ARCHIEF,
+				]),
 				{
 					label: tText('admin/content-block/content-block___wit'),
 					value: Color.White,
 				}
 			),
 			frameColor: SOLID_COLOR_FIELD(
-				tText('admin/content-block/helpers/generators/hetarchief-quote___kleur-kader'),
+				tText('admin/content-block/helpers/generators/hetarchief-quote___kleur-kader', {}, [
+					HET_ARCHIEF,
+				]),
 				{
 					label: tText('modules/content-page/const/content-block___zwart'),
 					value: Color.Black,
