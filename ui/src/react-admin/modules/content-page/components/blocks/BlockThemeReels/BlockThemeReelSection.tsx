@@ -152,11 +152,27 @@ export const BlockThemeReelSection: FunctionComponent<BlockThemeReelSectionProps
 							},
 							<Button
 								variants={['inline-block', 'silver', 'sm']}
-								label={tText('Toon alle', {}, [App.HET_ARCHIEF])}
-								title={tText('Toon alle', {}, [App.HET_ARCHIEF])}
-								ariaLabel={tText('Toon alle', {}, [App.HET_ARCHIEF])}
+								label={tText(
+									'modules/content-page/components/blocks/block-theme-reels/block-theme-reel-section___toon-alle',
+									{},
+									[App.HET_ARCHIEF]
+								)}
+								title={tText(
+									'modules/content-page/components/blocks/block-theme-reels/block-theme-reel-section___toon-alle',
+									{},
+									[App.HET_ARCHIEF]
+								)}
+								ariaLabel={tText(
+									'modules/content-page/components/blocks/block-theme-reels/block-theme-reel-section___toon-alle',
+									{},
+									[App.HET_ARCHIEF]
+								)}
 							/>,
-							tText('Toon alle', {}, [App.HET_ARCHIEF]),
+							tText(
+								'modules/content-page/components/blocks/block-theme-reels/block-theme-reel-section___toon-alle',
+								{},
+								[App.HET_ARCHIEF]
+							),
 							undefined,
 							-1
 						)}
@@ -165,8 +181,12 @@ export const BlockThemeReelSection: FunctionComponent<BlockThemeReelSectionProps
 							<Button
 								variants={['black', 'sm']}
 								icon={<Icon name="arrowLeft" />}
-								title={tText('Vorige slide')}
-								ariaLabel={tText('Vorige slide')}
+								title={tText(
+									'modules/content-page/components/blocks/block-theme-reels/block-theme-reel-section___vorige-slide'
+								)}
+								ariaLabel={tText(
+									'modules/content-page/components/blocks/block-theme-reels/block-theme-reel-section___vorige-slide'
+								)}
 								onClick={() => controlledSwiper?.slidePrev()}
 							/>
 						)}
@@ -174,8 +194,12 @@ export const BlockThemeReelSection: FunctionComponent<BlockThemeReelSectionProps
 							<Button
 								variants={['black', 'sm']}
 								icon={<Icon name="arrowRight" />}
-								title={tText('Volgende slide')}
-								ariaLabel={tText('Volgende slide')}
+								title={tText(
+									'modules/content-page/components/blocks/block-theme-reels/block-theme-reel-section___volgende-slide'
+								)}
+								ariaLabel={tText(
+									'modules/content-page/components/blocks/block-theme-reels/block-theme-reel-section___volgende-slide'
+								)}
 								onClick={() => controlledSwiper?.slideNext()}
 							/>
 						)}
@@ -274,11 +298,19 @@ export const BlockThemeReelSection: FunctionComponent<BlockThemeReelSectionProps
 									</div>
 									<div className="c-block-theme-reels-section__slide-description">
 										<span className="c-block-theme-reels-section__slide-description-title">
-											{tText('Toon alle materialen voor dit theme', {}, [App.HET_ARCHIEF])}
+											{tText(
+												'modules/content-page/components/blocks/block-theme-reels/block-theme-reel-section___toon-alle-materialen-voor-dit-theme',
+												{},
+												[App.HET_ARCHIEF]
+											)}
 										</span>
 									</div>
 								</>,
-								tText('Toon alle materialen voor dit theme', {}, [App.HET_ARCHIEF]),
+								tText(
+									'modules/content-page/components/blocks/block-theme-reels/block-theme-reel-section___toon-alle-materialen-voor-dit-theme',
+									{},
+									[App.HET_ARCHIEF]
+								),
 								'c-block-theme-reels-section__slide',
 								isVisible ? undefined : -1
 							);

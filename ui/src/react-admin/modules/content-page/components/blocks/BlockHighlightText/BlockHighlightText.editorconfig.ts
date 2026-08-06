@@ -25,7 +25,9 @@ export const INITIAL_CONTENT_HIGHLIGHT_TEXT_BLOCK_STATE = (): DefaultContentBloc
 
 export const CONTENT_HIGHLIGHT_TEXT_CONFIG = (position = 0): ContentBlockConfig => ({
 	position,
-	name: tText('Highlight text'),
+	name: tText(
+		'modules/content-page/components/blocks/block-highlight-text/block-highlight-text___highlight-text'
+	),
 	type: ContentBlockType.HighlightText,
 	components: {
 		state: INITIAL_CONTENT_HIGHLIGHT_TEXT_COMPONENTS_STATE(),
@@ -36,10 +38,21 @@ export const CONTENT_HIGHLIGHT_TEXT_CONFIG = (position = 0): ContentBlockConfig 
 					controls: RICH_TEXT_EDITOR_OPTIONS_FULL,
 				},
 				validator: (value: string) =>
-					validateRequiredValue(value, tText('Tekst is verplicht', undefined, [HET_ARCHIEF])),
+					validateRequiredValue(
+						value,
+						tText(
+							'modules/content-page/components/blocks/block-highlight-text/block-highlight-text___tekst-is-verplicht',
+							undefined,
+							[HET_ARCHIEF]
+						)
+					),
 			}),
 			highlightColor: {
-				label: tText('Highlightkleur', undefined, [HET_ARCHIEF]),
+				label: tText(
+					'modules/content-page/components/blocks/block-highlight-text/block-highlight-text___highlightkleur',
+					undefined,
+					[HET_ARCHIEF]
+				),
 				editorType: ContentBlockEditor.ColorSelect,
 				editorProps: {
 					options: GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF(),

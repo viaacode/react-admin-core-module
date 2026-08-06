@@ -35,13 +35,21 @@ export const INITIAL_THEME_REELS_BLOCK_STATE = (): DefaultContentBlockState =>
 
 export const THEME_REELS_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 	position,
-	name: tText('Thema reels', {}, [HET_ARCHIEF]),
+	name: tText(
+		'modules/content-page/components/blocks/block-theme-reels/block-theme-reels___thema-reels',
+		{},
+		[HET_ARCHIEF]
+	),
 	type: ContentBlockType.ThemeReels,
 	components: {
 		state: INITIAL_THEME_REELS_COMPONENTS_STATE(),
 		fields: {
 			elements: {
-				label: tText('Thema', {}, [HET_ARCHIEF]),
+				label: tText(
+					'modules/content-page/components/blocks/block-theme-reels/block-theme-reels___thema',
+					{},
+					[HET_ARCHIEF]
+				),
 				fields: {
 					theme: {
 						label: tText(
@@ -57,7 +65,11 @@ export const THEME_REELS_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 						},
 					},
 					image: {
-						label: tText('Afbeelding', {}, [HET_ARCHIEF]),
+						label: tText(
+							'modules/content-page/components/blocks/block-theme-reels/block-theme-reels___afbeelding',
+							{},
+							[HET_ARCHIEF]
+						),
 						editorType: ContentBlockEditor.FileUpload,
 						editorProps: {
 							assetType: 'CONTENT_BLOCK_IMAGE',
@@ -66,39 +78,68 @@ export const THEME_REELS_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 						} as FileUploadProps,
 					},
 					imageAlt: TEXT_FIELD({
-						label: tText('alt tekst voor de afbeelding'),
+						label: tText(
+							'modules/content-page/components/blocks/block-theme-reels/block-theme-reels___alt-tekst-voor-de-afbeelding'
+						),
 						validator: undefined,
 					}),
 					imageMask: {
-						label: tText('Masker'),
+						label: tText(
+							'modules/content-page/components/blocks/block-theme-reels/block-theme-reels___masker'
+						),
 						editorType: ContentBlockEditor.Select,
 						editorProps: {
 							options: [
 								{
-									label: tText('IOOI', {}, [HET_ARCHIEF]),
+									label: tText(
+										'modules/content-page/components/blocks/block-theme-reels/block-theme-reels___iooi',
+										{},
+										[HET_ARCHIEF]
+									),
 									value: 'IOOI',
 								},
 								{
-									label: tText('IOIO', {}, [HET_ARCHIEF]),
+									label: tText(
+										'modules/content-page/components/blocks/block-theme-reels/block-theme-reels___ioio',
+										{},
+										[HET_ARCHIEF]
+									),
 									value: 'IOIO',
 								},
 								{
-									label: tText('OIOI', {}, [HET_ARCHIEF]),
+									label: tText(
+										'modules/content-page/components/blocks/block-theme-reels/block-theme-reels___oioi',
+										{},
+										[HET_ARCHIEF]
+									),
 									value: 'OIOI',
 								},
 							],
 						},
 						validator: (value: string) =>
-							validateRequiredValue(value, tText('Masker is verplicht', {}, [HET_ARCHIEF])),
+							validateRequiredValue(
+								value,
+								tText(
+									'modules/content-page/components/blocks/block-theme-reels/block-theme-reels___masker-is-verplicht',
+									{},
+									[HET_ARCHIEF]
+								)
+							),
 					},
 					description: TEXT_FIELD({
-						label: tText('Beschrijving'),
+						label: tText(
+							'modules/content-page/components/blocks/block-theme-reels/block-theme-reels___beschrijving'
+						),
 						validator: (value: string) => {
 							const errorArray: string[] = [];
 
 							if (value?.length > 300) {
 								errorArray.push(
-									tText('Beschrijving mag max 300 karakters lang zijn', {}, [HET_ARCHIEF])
+									tText(
+										'modules/content-page/components/blocks/block-theme-reels/block-theme-reels___beschrijving-mag-max-300-karakters-lang-zijn',
+										{},
+										[HET_ARCHIEF]
+									)
 								);
 							}
 
@@ -110,27 +151,58 @@ export const THEME_REELS_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				max: 10,
 				repeat: {
 					defaultState: INITIAL_THEME_REELS_THEME_STATE(),
-					addButtonLabel: tText('voeg thema toe', {}, [HET_ARCHIEF]),
-					deleteButtonLabel: tText('verwijder thema', {}, [HET_ARCHIEF]),
+					addButtonLabel: tText(
+						'modules/content-page/components/blocks/block-theme-reels/block-theme-reels___voeg-thema-toe',
+						{},
+						[HET_ARCHIEF]
+					),
+					deleteButtonLabel: tText(
+						'modules/content-page/components/blocks/block-theme-reels/block-theme-reels___verwijder-thema',
+						{},
+						[HET_ARCHIEF]
+					),
 				},
 			},
 			buttonLabel: TEXT_FIELD(
 				{
-					label: tText('button label', {}, [HET_ARCHIEF]),
+					label: tText(
+						'modules/content-page/components/blocks/block-theme-reels/block-theme-reels___button-label',
+						{},
+						[HET_ARCHIEF]
+					),
 				},
-				tText('button label is verplicht', {}, [HET_ARCHIEF])
+				tText(
+					'modules/content-page/components/blocks/block-theme-reels/block-theme-reels___button-label-is-verplicht',
+					{},
+					[HET_ARCHIEF]
+				)
 			),
 			buttonAltTitle: TEXT_FIELD({
-				label: tText('button alt title', {}, [HET_ARCHIEF]),
+				label: tText(
+					'modules/content-page/components/blocks/block-theme-reels/block-theme-reels___button-alt-title',
+					{},
+					[HET_ARCHIEF]
+				),
 			}),
 			buttonType: {
-				label: tText('Knop type', {}, [HET_ARCHIEF]),
+				label: tText(
+					'modules/content-page/components/blocks/block-theme-reels/block-theme-reels___knop-type',
+					{},
+					[HET_ARCHIEF]
+				),
 				editorType: ContentBlockEditor.Select,
 				editorProps: {
 					options: AdminConfigManager.getConfig().components.buttonTypes(),
 				},
 				validator: (value: string) =>
-					validateRequiredValue(value, tText('Knop type is verplicht', {}, [HET_ARCHIEF])),
+					validateRequiredValue(
+						value,
+						tText(
+							'modules/content-page/components/blocks/block-theme-reels/block-theme-reels___knop-type-is-verplicht',
+							{},
+							[HET_ARCHIEF]
+						)
+					),
 			},
 			buttonIcon: {
 				label: tText('admin/content-block/helpers/generators/ctas___knop-icoon'),
@@ -140,7 +212,11 @@ export const THEME_REELS_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				},
 			},
 			buttonAction: {
-				label: tText('Bestemming', {}, [HET_ARCHIEF]),
+				label: tText(
+					'modules/content-page/components/blocks/block-theme-reels/block-theme-reels___bestemming',
+					{},
+					[HET_ARCHIEF]
+				),
 				editorType: ContentBlockEditor.ContentPicker,
 				editorProps: {
 					allowedTypes: [AvoCoreContentPickerType.CONTENT_PAGE],
@@ -148,7 +224,14 @@ export const THEME_REELS_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 					hideTargetSwitch: true,
 				},
 				validator: (value: string) =>
-					validateRequiredValue(value, tText('Bestemming is verplicht', {}, [HET_ARCHIEF])),
+					validateRequiredValue(
+						value,
+						tText(
+							'modules/content-page/components/blocks/block-theme-reels/block-theme-reels___bestemming-is-verplicht',
+							{},
+							[HET_ARCHIEF]
+						)
+					),
 			},
 		},
 	},

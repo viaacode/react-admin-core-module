@@ -81,7 +81,7 @@ export const GET_CONTENT_TYPE_LABELS: () => Record<AvoCoreContentPickerType, str
 		'modules/shared/components/content-picker/content-picker___ie-objects'
 	),
 	[AvoCoreContentPickerType.IE_OBJECT_THEME]: tText(
-		"modules/shared/components/content-picker/content-picker___thema's"
+		'modules/shared/components/content-picker/content-picker___themas'
 	),
 	/**
 	 * @deprecated, use CUSTOM_NAVIGATION_ELEMENTS instead
