@@ -100,25 +100,27 @@ export const BlockHetArchiefImageTextBackground: FunctionComponent<
 						buttonAltTitle || buttonLabel
 					)}
 			</div>
-			<div className={'c-block-het-archief-image-text-background__image-wrapper'}>
-				{image && (
-					<Image
-						src={image}
-						className={clsx({
-							'c-block-het-archief-image-text-background__image-wrapper--screen-left':
-								imageAlignment === 'left-screen',
-							'c-block-het-archief-image-text-background__image-wrapper--screen-right':
-								imageAlignment === 'right-screen',
-						})}
-						alt={imageAltText}
+			{(image || copyrightTitle || copyrightText) && (
+				<div className={'c-block-het-archief-image-text-background__image-wrapper'}>
+					{image && (
+						<Image
+							src={image}
+							className={clsx({
+								'c-block-het-archief-image-text-background__image-wrapper--screen-left':
+									imageAlignment === 'left-screen',
+								'c-block-het-archief-image-text-background__image-wrapper--screen-right':
+									imageAlignment === 'right-screen',
+							})}
+							alt={imageAltText}
+						/>
+					)}
+					<CopyrightAttribution
+						title={copyrightTitle}
+						text={copyrightText}
+						showIcon={copyrightIconVisible}
 					/>
-				)}
-				<CopyrightAttribution
-					title={copyrightTitle}
-					text={copyrightText}
-					showIcon={copyrightIconVisible}
-				/>
-			</div>
+				</div>
+			)}
 		</article>
 	);
 };
