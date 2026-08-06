@@ -6,24 +6,34 @@
 	grid-template-areas:
 		'mark quote'
 		'.    author';
-	align-content: center;
 	margin: 0;
 
 	// 19.2rem is the space Figma leaves between the text column (ends at x=816) and the frame
-	// edge (1008px), which keeps the text clear of the semicircular curve.
+	// edge (1008px), which keeps the text clear of the curve.
 	padding: 4rem 19.2rem 4rem 0;
 	background: var(--frame-color);
 	color: var(--text-color);
 
-	// Square left, true semicircular right end at any height, per Figma (r = height / 2).
-	border-radius: 0 9999px 9999px 0;
+	// Figma emits the deprecated `word-break: break-word`; this is its modern equivalent.
+	overflow-wrap: break-word;
+
+	// Figma node 455:5722: rounded-tr-[400px] rounded-br-[400px], square on the left. At the
+	// design's 228px height CSS scales both radii down to height/2, so this looks like a pill;
+	// past ~800px of height it stops growing, which is the point — an unbounded 9999px radius
+	// would keep eating into the text on a long quote.
+	border-radius: 0 40rem 40rem 0;
 
 	&__mark {
 		grid-area: mark;
 
-		// Figma node 455:5723: icon font "meemoocons-light", size 64/line-height 72. The span
-		// content is the ligature name "quotes" — meemoocons-light is a ligature icon font, it
-		// has no glyph for the quote-mark character itself.
+		// Figma node 455:5723 sits at top 28 while the quote sits at top 40, so the mark is
+		// raised 12px out of the shared grid row, and centred in its 104px column.
+		margin-top: -1.2rem;
+		text-align: center;
+
+		// Icon font "meemoocons-light", size 64/line-height 72. The span content is the
+		// ligature name "quotes" — meemoocons-light is a ligature icon font and has no glyph
+		// for the quote-mark character itself.
 		font-family: meemoocons-light, sans-serif;
 		font-feature-settings: 'liga';
 		font-variant-ligatures: discretionary-ligatures;
@@ -31,6 +41,13 @@
 		font-weight: normal;
 		line-height: 7.2rem;
 		letter-spacing: normal;
+
+		@media (width <= #{variables.$g-bp2}) {
+			// Figma node 455:7187: in the stacked layout the mark is in normal flow and
+			// left-aligned with the text below it.
+			margin-top: 0;
+			text-align: left;
+		}
 	}
 
 	&__quote {
@@ -44,6 +61,13 @@
 		font-weight: 500;
 		line-height: 4rem;
 		letter-spacing: normal;
+
+		@media (width <= #{variables.$g-bp2}) {
+			// Figma node 455:7186: 8px flex gap below the mark, plus the 8px padding on the
+			// text group that holds the quote and the author.
+			margin-top: 1.6rem;
+			margin-left: 0.8rem;
+		}
 	}
 
 	&__author {
@@ -56,6 +80,11 @@
 		font-weight: 500;
 		line-height: 2rem;
 		letter-spacing: normal;
+
+		@media (width <= #{variables.$g-bp2}) {
+			margin-bottom: 0.8rem;
+			margin-left: 0.8rem;
+		}
 	}
 
 	@media (width <= #{variables.$g-bp2}) {
@@ -64,7 +93,10 @@
 			'mark'
 			'quote'
 			'author';
-		padding: 2.4rem 2.4rem 2.4rem 1.6rem;
-		border-radius: 0 2.4rem 2.4rem 0;
+
+		// Figma node 455:7186: 24/20 padding and a single 120px top-right radius — the
+		// desktop's two-corner pill does not carry over to mobile.
+		padding: 2.4rem 2rem;
+		border-radius: 0 12rem 0 0;
 	}
 }
