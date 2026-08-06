@@ -6,6 +6,8 @@ import {
 	GET_COLOR_OPTIONS_EXTENDED_AVO,
 	GET_FOREGROUND_COLOR_OPTIONS_ARCHIEF,
 	GET_FOREGROUND_COLOR_OPTIONS_AVO,
+	GET_SOLID_COLOR_OPTIONS_ARCHIEF,
+	GET_SOLID_COLOR_OPTIONS_AVO,
 } from '~modules/content-page/const/get-color-options';
 
 import type { FileUploadProps } from '~shared/components/FileUpload/FileUpload';
@@ -97,6 +99,26 @@ export const BACKGROUND_COLOR_FIELD = (
 		defaultValue:
 			defaultValue ??
 			(isAvo() ? GET_BACKGROUND_COLOR_OPTIONS_AVO()[0] : GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF()[0]),
+	},
+});
+
+/**
+ * Same colours as BACKGROUND_COLOR_FIELD, minus the entries that are not a plain CSS colour.
+ * Use this wherever the picked value ends up in `color` or in a `background` that has to stay a
+ * flat fill, since "Geen", "meemoo logo" and the black/white gradient silently render as nothing
+ * there. See NON_SOLID_COLOR_VALUES in get-color-options.ts.
+ */
+export const SOLID_COLOR_FIELD = (
+	label: string,
+	defaultValue?: SelectOption<Color>
+): ContentBlockField => ({
+	label,
+	editorType: ContentBlockEditor.ColorSelect,
+	editorProps: {
+		options: isAvo() ? GET_SOLID_COLOR_OPTIONS_AVO() : GET_SOLID_COLOR_OPTIONS_ARCHIEF(),
+		defaultValue:
+			defaultValue ??
+			(isAvo() ? GET_SOLID_COLOR_OPTIONS_AVO()[0] : GET_SOLID_COLOR_OPTIONS_ARCHIEF()[0]),
 	},
 });
 

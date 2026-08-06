@@ -7,9 +7,9 @@ import type {
 import { Color, ContentBlockEditor, ContentBlockType } from '../../../types/content-block.types';
 
 import {
-	BACKGROUND_COLOR_FIELD,
 	BLOCK_FIELD_DEFAULTS,
 	BLOCK_STATE_DEFAULTS,
+	SOLID_COLOR_FIELD,
 	TEXT_FIELD,
 } from '../defaults';
 
@@ -47,14 +47,14 @@ export const HET_ARCHIEF_QUOTE_BLOCK_CONFIG = (position = 0): ContentBlockConfig
 				label: tText('admin/content-block/helpers/generators/quote___auteur'),
 				validator: undefined,
 			}),
-			textColor: BACKGROUND_COLOR_FIELD(
+			textColor: SOLID_COLOR_FIELD(
 				tText('admin/content-block/helpers/generators/hetarchief-quote___tekstkleur'),
 				{
 					label: tText('admin/content-block/content-block___wit'),
 					value: Color.White,
 				}
 			),
-			frameColor: BACKGROUND_COLOR_FIELD(
+			frameColor: SOLID_COLOR_FIELD(
 				tText('admin/content-block/helpers/generators/hetarchief-quote___kleur-kader'),
 				{
 					label: tText('modules/content-page/const/content-block___zwart'),

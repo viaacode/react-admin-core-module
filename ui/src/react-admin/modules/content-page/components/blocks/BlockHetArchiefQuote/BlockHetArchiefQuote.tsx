@@ -3,15 +3,15 @@ import clsx from 'clsx';
 import type { CSSProperties, FunctionComponent } from 'react';
 import React from 'react';
 
-import type { Color, CustomBackground, GradientColor } from '../../../types/content-block.types';
+import type { Color } from '../../../types/content-block.types';
 
 import './BlockHetArchiefQuote.scss';
 
 export interface BlockHetArchiefQuoteProps extends DefaultProps {
 	quote: string;
 	authorName?: string;
-	textColor: Color | GradientColor | CustomBackground;
-	frameColor: Color | GradientColor | CustomBackground;
+	textColor: Color;
+	frameColor: Color;
 }
 
 export const BlockHetArchiefQuote: FunctionComponent<BlockHetArchiefQuoteProps> = ({

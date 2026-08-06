@@ -596,8 +596,10 @@ export interface HetArchiefHeaderSearchBlockComponentState {
 export interface HetArchiefQuoteBlockComponentState {
 	quote: string;
 	authorName: string;
-	textColor: Color | GradientColor | CustomBackground;
-	frameColor: Color | GradientColor | CustomBackground;
+	// Plain colours only: these end up in `color` and `background` as-is, so the gradient and
+	// the meemoo-logo sentinel from the background colour list would render as nothing.
+	textColor: Color;
+	frameColor: Color;
 }
 
 export interface HetArchiefIeObject {

@@ -154,6 +154,34 @@ export const GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF: () => SelectOption<
 	mustardOption(),
 ];
 
+/**
+ * The background colour lists contain three entries that are not a plain CSS colour and can
+ * therefore not be used everywhere a colour is picked:
+ * - Color.Transparent ("Geen") renders invisible text
+ * - CustomBackground.MeemooLogo is a sentinel that only ContentBlockRenderer knows how to expand
+ * - GradientColor.BlackWhite is only valid for `background`, never for `color`
+ * Blocks that need a real colour (text colour, a frame colour, …) filter them out with this list,
+ * so that newly added colours keep flowing through automatically.
+ */
+const NON_SOLID_COLOR_VALUES: (Color | GradientColor | CustomBackground)[] = [
+	Color.Transparent,
+	CustomBackground.MeemooLogo,
+	GradientColor.BlackWhite,
+];
+
+const toSolidColorOptions = (
+	options: SelectOption<Color | GradientColor | CustomBackground>[]
+): SelectOption<Color>[] =>
+	options.filter(
+		(option) => !NON_SOLID_COLOR_VALUES.includes(option.value)
+	) as SelectOption<Color>[];
+
+export const GET_SOLID_COLOR_OPTIONS_AVO: () => SelectOption<Color>[] = () =>
+	toSolidColorOptions(GET_BACKGROUND_COLOR_OPTIONS_AVO());
+
+export const GET_SOLID_COLOR_OPTIONS_ARCHIEF: () => SelectOption<Color>[] = () =>
+	toSolidColorOptions(GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF());
+
 export const GET_AVO_HERO_BACKGROUND_COLOR_OPTIONS: () => SelectOption<Color>[] = () => [
 	softBlueOption(),
 	nightBlueOption(),
