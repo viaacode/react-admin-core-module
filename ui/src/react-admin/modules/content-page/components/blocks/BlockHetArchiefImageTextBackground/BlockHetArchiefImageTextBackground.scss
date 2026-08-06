@@ -2,12 +2,11 @@
 @use "../../../../shared/styles/settings/variables" as variables;
 
 .c-block-het-archief-image-text-background {
+	border: 1px solid black;
   width: 100%;
   display: grid;
 
-  // Add margin right by adding an extra column
-  // Also make the middle column a bit smaller so the image is a bit smaller than 66% width
-  grid-template-columns: 1fr 0.6fr 1fr 20px;
+  grid-template-columns: 1fr 0.6fr 1fr;
   gap: variables.$g-spacer-unit * 3;
   min-height: 34rem;
   margin: 0 auto;
@@ -18,7 +17,7 @@
 	}
 
   &.c-block-het-archief-image-text-background--left-screen {
-	position: initial;
+	position: relative;
 
 	.c-block-het-archief-image-text-background__content-wrapper {
 	  grid-row: 1;
@@ -34,19 +33,23 @@
 	  grid-column: 1/3;
 	  grid-row: 1;
 
-	  img {
-		margin: 0 auto 0 0;
-	  }
-
 	  @media (max-width: variables.$g-bp2) {
 		grid-column: 1;
 		grid-row: 1;
+	  }
+
+	  @media (min-width: variables.$g-bp2) {
+		img,
+		.c-block-het-archief-image-text-background__copyright {
+		  margin-right: auto;
+		  margin-left: 0;
+		}
 	  }
 	}
   }
 
   &.c-block-het-archief-image-text-background--right-screen {
-	position: initial;
+	position: relative;
 
 	.c-block-het-archief-image-text-background__content-wrapper {
 	  grid-row: 1;
@@ -67,8 +70,12 @@
 		grid-row: 2;
 	  }
 
-	  img {
-		margin: 0 0 0 auto;
+	  @media (min-width: variables.$g-bp2) {
+		img,
+		.c-block-het-archief-image-text-background__copyright {
+		  margin-left: auto;
+		  margin-right: 0;
+		}
 	  }
 	}
   }
@@ -95,8 +102,12 @@
 		grid-row: 1;
 	  }
 
-	  img {
-		margin: 0 auto 0 0;
+	  @media (min-width: variables.$g-bp2) {
+		img,
+		.c-block-het-archief-image-text-background__copyright {
+		  margin-right: auto;
+		  margin-left: 0;
+		}
 	  }
 	}
   }
@@ -123,9 +134,12 @@
 		grid-row: 2;
 	  }
 
-	  &.c-image img {
-		margin-right: 0 !important;
-		margin-left: auto !important;
+	  @media (min-width: variables.$g-bp2) {
+		img,
+		.c-block-het-archief-image-text-background__copyright {
+		  margin-left: auto;
+		  margin-right: 0;
+		}
 	  }
 	}
   }
@@ -165,17 +179,44 @@
 
   .c-block-het-archief-image-text-background__image-wrapper {
 	@media (min-width: variables.$g-bp2) {
+	  position: absolute;
 	  inset: 0;
 	}
 
-	img {
-	  max-width: 100%;
+	.c-block-het-archief-image-text-background__media {
+	  display: flex;
+	  flex-direction: column;
 	  height: 100%;
-	  object-fit: contain;
+		justify-content: center;
+	}
 
-	  @media (max-width: variables.$g-bp2) {
-		width: 100%;
+	.c-block-het-archief-image-text-background__image {
+	  min-width: 0;
+
+	  @media (min-width: variables.$g-bp2) {
+		min-height: 0;
+	  }
+
+	  img {
+		display: block;
+		max-width: 100%;
+		height: 100%;
+		object-fit: contain;
+
+		@media (max-width: variables.$g-bp2) {
+		  width: 100%;
+		}
 	  }
 	}
+
+	  .c-block-het-archief-image-text-background__copyright {
+		  flex: 0 0 auto;
+		  margin-top: variables.$g-spacer-unit;
+		  max-width: 100%;
+
+		  &:empty{
+			  display: none;
+		  }
+	  }
   }
 }
