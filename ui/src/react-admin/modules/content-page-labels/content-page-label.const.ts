@@ -1,12 +1,12 @@
 export const LABELS_PER_PAGE = 10;
 
 /**
- * The hetarchief content types whose labels get a generated visual label drawn over their image.
- * The FA shows the generated label in the overview table but says nothing is shown when no label
- * is available, "e.g. voor FAQ-items", and describes the label as appearing on the images of
- * "blogposts of pagina's". https://meemoo.atlassian.net/browse/ARC-3818
+ * The hetarchief content types whose labels never get a generated visual label, so the overview
+ * table shows no preview for them. The FA names FAQ items as the example of a label that has
+ * nothing to show; an overview block of faq items renders accordions rather than images, so there
+ * is no thumbnail to draw a label over. https://meemoo.atlassian.net/browse/ARC-3818
  *
- * Plain strings because AvoContentPageType is the avo flavoured enum and has no BLOG_POST, while
+ * Plain strings because AvoContentPageType is the avo flavoured enum and has no FAQ_ITEM, while
  * content_type carries the hetarchief lookup values at runtime.
  */
-export const CONTENT_TYPES_WITH_A_VISUAL_LABEL: string[] = ['BLOG_POST', 'PAGINA'];
+export const CONTENT_TYPES_WITHOUT_A_VISUAL_LABEL: string[] = ['FAQ_ITEM'];
