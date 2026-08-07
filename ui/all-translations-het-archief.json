@@ -13423,6 +13423,26 @@
     "id": "",
     "app": "HET_ARCHIEF",
     "component": "ADMIN_CORE",
+    "location": "modules/shared/components/content-picker/content-picker",
+    "key": "themas",
+    "language": "nl",
+    "value": "Themas",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/shared/components/content-picker/content-picker",
+    "key": "themas",
+    "language": "en",
+    "value": "Themas",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
     "location": "admin/shared/components/content-picker/content-picker",
     "key": "plak-hier-uw-zoekpagina-url",
     "language": "nl",
@@ -21737,26 +21757,6 @@
     "key": "gelieve-een-correcte-zoekfilter-link-in-te-vullen",
     "language": "en",
     "value": "Please enter a correct search filter link.",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/shared/components/content-picker/content-picker",
-    "key": "themas",
-    "language": "nl",
-    "value": "Themas",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/shared/components/content-picker/content-picker",
-    "key": "themas",
-    "language": "en",
-    "value": "Themas",
     "value_type": "TEXT"
   },
   {
@@ -39124,6 +39124,86 @@
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
     "location": "modules/admin/views/themes/themes-edit-page",
+    "key": "toegevoegd",
+    "language": "nl",
+    "value": "{{objectId}} werd toegevoegd",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-edit-page",
+    "key": "toegevoegd",
+    "language": "en",
+    "value": "{{objectId}} werd toegevoegd",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-edit-page",
+    "key": "was-al-gekoppeld",
+    "language": "nl",
+    "value": "{{objectId}} was al gekoppeld",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-edit-page",
+    "key": "was-al-gekoppeld",
+    "language": "en",
+    "value": "{{objectId}} was al gekoppeld",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-edit-page",
+    "key": "niet-gevonden",
+    "language": "nl",
+    "value": "{{objectId}} werd niet gevonden",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-edit-page",
+    "key": "niet-gevonden",
+    "language": "en",
+    "value": "{{objectId}} werd niet gevonden",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-edit-page",
+    "key": "success",
+    "language": "nl",
+    "value": "Success",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-edit-page",
+    "key": "success",
+    "language": "en",
+    "value": "Success",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-edit-page",
     "key": "het-koppelen-van-de-objecten-is-mislukt",
     "language": "nl",
     "value": "Het koppelen van de objecten is mislukt",
@@ -39137,6 +39217,26 @@
     "key": "het-koppelen-van-de-objecten-is-mislukt",
     "language": "en",
     "value": "Het koppelen van de objecten is mislukt",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-edit-page",
+    "key": "het-loskoppelen-van-het-object-is-geslaagd",
+    "language": "nl",
+    "value": "Het loskoppelen van het object is geslaagd",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-edit-page",
+    "key": "het-loskoppelen-van-het-object-is-geslaagd",
+    "language": "en",
+    "value": "Het loskoppelen van het object is geslaagd",
     "value_type": "HTML"
   },
   {
@@ -39158,66 +39258,6 @@
     "language": "en",
     "value": "Het loskoppelen van het object is mislukt",
     "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/admin/views/themes/themes-edit-page",
-    "key": "toegevoegd",
-    "language": "nl",
-    "value": "Toegevoegd",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/admin/views/themes/themes-edit-page",
-    "key": "toegevoegd",
-    "language": "en",
-    "value": "Toegevoegd",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/admin/views/themes/themes-edit-page",
-    "key": "was-al-gekoppeld",
-    "language": "nl",
-    "value": "Was al gekoppeld",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/admin/views/themes/themes-edit-page",
-    "key": "was-al-gekoppeld",
-    "language": "en",
-    "value": "Was al gekoppeld",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/admin/views/themes/themes-edit-page",
-    "key": "niet-gevonden",
-    "language": "nl",
-    "value": "Niet gevonden",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/admin/views/themes/themes-edit-page",
-    "key": "niet-gevonden",
-    "language": "en",
-    "value": "Niet gevonden",
-    "value_type": "TEXT"
   },
   {
     "id": "",
@@ -39504,46 +39544,6 @@
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
     "location": "modules/admin/views/themes/themes-edit-page",
-    "key": "slug",
-    "language": "nl",
-    "value": "Slug",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/admin/views/themes/themes-edit-page",
-    "key": "slug",
-    "language": "en",
-    "value": "Slug",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/admin/views/themes/themes-edit-page",
-    "key": "uniek-kleine-letters-koppeltekens-gebruikt-in-urls",
-    "language": "nl",
-    "value": "Uniek kleine letters koppeltekens gebruikt in urls",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/admin/views/themes/themes-edit-page",
-    "key": "uniek-kleine-letters-koppeltekens-gebruikt-in-urls",
-    "language": "en",
-    "value": "Uniek kleine letters koppeltekens gebruikt in urls",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/admin/views/themes/themes-edit-page",
     "key": "nl-benaming",
     "language": "nl",
     "value": "Nl benaming",
@@ -39577,6 +39577,46 @@
     "key": "en-benaming",
     "language": "en",
     "value": "En benaming",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-edit-page",
+    "key": "slug",
+    "language": "nl",
+    "value": "Slug",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-edit-page",
+    "key": "slug",
+    "language": "en",
+    "value": "Slug",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-edit-page",
+    "key": "uniek-kleine-letters-koppeltekens-gebruikt-in-urls",
+    "language": "nl",
+    "value": "Uniek kleine letters koppeltekens gebruikt in urls",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-edit-page",
+    "key": "uniek-kleine-letters-koppeltekens-gebruikt-in-urls",
+    "language": "en",
+    "value": "Uniek kleine letters koppeltekens gebruikt in urls",
     "value_type": "TEXT"
   },
   {
@@ -45184,26 +45224,6 @@
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
     "location": "modules/navigation/components/navigation/navigation",
-    "key": "audio",
-    "language": "nl",
-    "value": "Audio",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/navigation/components/navigation/navigation",
-    "key": "audio",
-    "language": "en",
-    "value": "Audio",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/navigation/components/navigation/navigation",
     "key": "video",
     "language": "nl",
     "value": "Video",
@@ -45217,6 +45237,26 @@
     "key": "video",
     "language": "en",
     "value": "Video",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/navigation/components/navigation/navigation",
+    "key": "audio",
+    "language": "nl",
+    "value": "Audio",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/navigation/components/navigation/navigation",
+    "key": "audio",
+    "language": "en",
+    "value": "Audio",
     "value_type": "TEXT"
   },
   {
