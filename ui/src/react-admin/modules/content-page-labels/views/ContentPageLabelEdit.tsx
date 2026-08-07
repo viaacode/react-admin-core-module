@@ -16,7 +16,11 @@ import type { FunctionComponent } from 'react';
 import React, { useCallback, useEffect, useState } from 'react';
 import { AdminConfigManager, ToastType } from '~core/config';
 import { ColorSelect } from '~modules/content-page/components/fields/ColorSelect/ColorSelect';
-import { GET_CONTENT_PAGE_LABEL_COLOR_OPTIONS } from '~modules/content-page/const/get-color-options';
+import { GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF } from '~modules/content-page/const/get-color-options';
+import type {
+	CustomBackground,
+	GradientColor,
+} from '~modules/content-page/types/content-block.types';
 import { Color } from '~modules/content-page/types/content-block.types';
 import { ContentPageLabelService } from '~modules/content-page-labels/content-page-label.service';
 import { useGetAllLanguages } from '~modules/translations/hooks/use-get-all-languages';
@@ -140,16 +144,6 @@ export const ContentPageLabelEdit: FunctionComponent<ContentPageLabelEditProps> 
 			return {
 				label: tText(
 					'modules/content-page-labels/views/content-page-label-edit___een-taal-keuze-is-verplicht'
-				),
-			};
-		}
-		// The colour only exists on hetarchief content page labels
-		if (isHetArchief() && !contentPageLabelInfo?.color) {
-			return {
-				color: tText(
-					'modules/content-page-labels/views/content-page-label-edit___een-achtergrondkleur-is-verplicht',
-					{},
-					[App.HET_ARCHIEF]
 				),
 			};
 		}
@@ -295,18 +289,19 @@ export const ContentPageLabelEdit: FunctionComponent<ContentPageLabelEditProps> 
 											{},
 											[App.HET_ARCHIEF]
 										)}
-										error={formErrors.color}
 										required
 									>
 										<ColorSelect
-											options={GET_CONTENT_PAGE_LABEL_COLOR_OPTIONS()}
-											value={GET_CONTENT_PAGE_LABEL_COLOR_OPTIONS().find(
+											options={GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF()}
+											value={GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF().find(
 												(option) => option.value === contentPageLabelInfo.color
 											)}
 											onChange={(newColor) =>
 												setContentPageLabelInfo({
 													...contentPageLabelInfo,
-													color: (newColor as { value: Color } | null)?.value,
+													color: (
+														newColor as { value: Color | GradientColor | CustomBackground } | null
+													)?.value,
 												})
 											}
 										/>

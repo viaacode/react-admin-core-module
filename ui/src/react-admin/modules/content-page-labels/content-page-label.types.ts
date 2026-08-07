@@ -30,7 +30,6 @@ export interface ContentPageLabelEditFormErrorState {
 	content_type?: string;
 	language?: string;
 	link_to?: string;
-	color?: string;
 }
 
 export interface ContentPageLabelTableState extends FilterableTableState {

@@ -20,8 +20,7 @@ export interface GridItem {
 	action?: ButtonAction;
 	// Visual label drawn in the top left corner of the image
 	// https://meemoo.atlassian.net/browse/ARC-3818
-	imageLabel?: string;
-	imageLabelColor?: string;
+	imageLabel?: { text: string; color: string };
 }
 
 export type CssSizeSetting = `${number}${'rem' | '%'}`;

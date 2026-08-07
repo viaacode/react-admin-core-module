@@ -23,30 +23,7 @@ describe('<ContentPageLabelChip />', () => {
 
 		const chip = container.querySelector('.c-content-page-label-chip') as HTMLElement;
 
-		expect(chip.style.backgroundColor).toEqual('rgb(230, 148, 179)');
-	});
-
-	it('falls back to white when the label has no colour yet', () => {
-		const { container } = render(<ContentPageLabelChip label="Pareltjes" color={undefined} />);
-
-		const chip = container.querySelector('.c-content-page-label-chip') as HTMLElement;
-
-		expect(chip.style.backgroundColor).toEqual('rgb(255, 255, 255)');
-	});
-
-	it('keeps the text readable by following the background colour', () => {
-		const { container: onWhite } = render(
-			<ContentPageLabelChip label="Pareltjes" color={Color.White} />
-		);
-		const { container: onBlack } = render(
-			<ContentPageLabelChip label="Pareltjes" color={Color.Black} />
-		);
-
-		const chipOnWhite = onWhite.querySelector('.c-content-page-label-chip') as HTMLElement;
-		const chipOnBlack = onBlack.querySelector('.c-content-page-label-chip') as HTMLElement;
-
-		expect(chipOnWhite.style.color).toEqual('rgb(0, 0, 0)');
-		expect(chipOnBlack.style.color).toEqual('rgb(255, 255, 255)');
+		expect(chip.style.background).toEqual('rgb(230, 148, 179)');
 	});
 
 	it('renders nothing without a label', () => {

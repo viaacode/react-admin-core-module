@@ -244,17 +244,3 @@ export const GET_FOREGROUND_COLOR_OPTIONS_ARCHIEF: () => SelectOption<Color>[] =
 	oceanGreenOption(),
 	seaGreenOption(),
 ];
-
-/**
- * Background colors for the visual label of a content page label.
- * These are the archief background colors, minus the entries that are not a flat css fill:
- * "geen", the meemoo logo and the black/white gradient all render as nothing behind the label text.
- * https://meemoo.atlassian.net/browse/ARC-3818
- */
-export const GET_CONTENT_PAGE_LABEL_COLOR_OPTIONS: () => SelectOption<Color>[] = () =>
-	GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF().filter(
-		(option): option is SelectOption<Color> =>
-			option.value !== Color.Transparent &&
-			option.value !== CustomBackground.MeemooLogo &&
-			option.value !== GradientColor.BlackWhite
-	);

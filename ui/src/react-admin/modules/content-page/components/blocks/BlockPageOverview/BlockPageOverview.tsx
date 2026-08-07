@@ -57,8 +57,9 @@ export interface BlockPageOverviewProps extends DefaultProps {
 	showDescription?: boolean;
 	showDate?: boolean;
 	// The content page labels selected on this block, of which the matching one is drawn over
-	// the page image: https://meemoo.atlassian.net/browse/ARC-3818
-	labelIdsShownOnImage?: number[] | string[];
+	// the page image. The ids are numbers on avo and uuid strings on hetarchief, hence the union.
+	// https://meemoo.atlassian.net/browse/ARC-3818
+	labelIdsShownOnImage?: (number | string)[];
 	dateString?: string;
 	buttonLabel?: string;
 	buttonAltTitle?: string;
@@ -203,9 +204,13 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 	 * The visual label to draw over the page image: the first of the page's labels that the admin
 	 * selected on this block. https://meemoo.atlassian.net/browse/ARC-3818
 	 */
-	const getLabelShownOnImage = (page: ContentPageInfo): ContentPageLabel | undefined => {
+	const getLabelShownOnImage = (
+		page: ContentPageInfo
+	): { text: string; color: string } | undefined => {
 		const labelIds = labelIdsShownOnImage.map(String);
-		return page.labels?.find((labelObj) => labelIds.includes(String(labelObj.id)));
+		const labelObj = page.labels?.find((label) => labelIds.includes(String(label.id)));
+		// app_content_label.color is not null, and only hetarchief passes label ids in here
+		return labelObj?.color ? { text: labelObj.label, color: labelObj.color } : undefined;
 	};
 
 	const renderGrid = (pages: ContentPageInfo[]): ReactNode => {
@@ -218,8 +223,7 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 						text: getDescription(page),
 						source: page.thumbnailPath as string, // TODO handle undefined thumbnails
 						action: { type: AvoCoreContentPickerType.CONTENT_PAGE, value: page.path as string },
-						imageLabel: labelShownOnImage?.label,
-						imageLabelColor: labelShownOnImage?.color,
+						imageLabel: labelShownOnImage,
 					};
 				})}
 				itemWidth="30.7rem"
@@ -266,7 +270,7 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 											{!!labelShownOnImage && (
 												<ContentPageLabelChip
 													className="c-page-overview__image-label"
-													label={labelShownOnImage.label}
+													label={labelShownOnImage.text}
 													color={labelShownOnImage.color}
 												/>
 											)}

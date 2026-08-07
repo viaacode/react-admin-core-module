@@ -1,11 +1,10 @@
 import { Button } from '@meemoo/react-components';
 import { ButtonToolbar, Container } from '@viaa/avo2-components';
-import { AvoSearchOrderDirection } from '@viaa/avo2-types';
+import { AvoContentPageType, AvoSearchOrderDirection } from '@viaa/avo2-types';
 import { isNil } from 'es-toolkit';
 import type { FunctionComponent } from 'react';
 import React, { useCallback, useEffect, useState } from 'react';
 import { AdminConfigManager, ToastType } from '~core/config';
-import { CONTENT_TYPES_WITHOUT_A_VISUAL_LABEL } from '~modules/content-page-labels/content-page-label.const';
 import { ContentPageLabelService } from '~modules/content-page-labels/content-page-label.service';
 import { ITEMS_PER_PAGE } from '~modules/item/items.consts';
 import { ErrorView } from '~modules/shared/components/error/ErrorView';
@@ -294,9 +293,12 @@ export const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> 
 			}
 
 			case 'color':
-				// Nothing to preview for the content types that never get a visual label drawn over
-				// an image, e.g. faq items
-				if (CONTENT_TYPES_WITHOUT_A_VISUAL_LABEL.includes(contentPageLabel.content_type)) {
+				// An overview block of faq items renders accordions, so there is no thumbnail to draw
+				// a visual label over and nothing to preview here
+				if (
+					contentPageLabel.content_type === AvoContentPageType.FAQ_ITEM ||
+					!contentPageLabel.color
+				) {
 					return null;
 				}
 				return (

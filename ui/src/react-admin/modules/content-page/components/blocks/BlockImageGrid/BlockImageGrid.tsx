@@ -52,8 +52,8 @@ export const BlockImageGrid: FunctionComponent<BlockImageGridProps> = ({
 					{!!element.imageLabel && (
 						<ContentPageLabelChip
 							className="c-block-grid__image-label"
-							label={element.imageLabel}
-							color={element.imageLabelColor}
+							label={element.imageLabel.text}
+							color={element.imageLabel.color}
 						/>
 					)}
 				</div>
