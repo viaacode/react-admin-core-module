@@ -12,6 +12,8 @@ import { BlockHeading } from '~content-blocks/BlockHeading';
 import { BlockHetArchiefHeaderSearch } from '~content-blocks/BlockHetArchiefHeaderSearch/BlockHetArchiefHeaderSearch';
 import { BlockHetArchiefImageTextBackground } from '~content-blocks/BlockHetArchiefImageTextBackground';
 import { BlockHetArchiefQuote } from '~content-blocks/BlockHetArchiefQuote';
+import { BlockHighlightText } from '~content-blocks/BlockHighlightText';
+import { BlockHomepageBanner } from '~content-blocks/BlockHomepageBanner';
 import { BlockIFrame } from '~content-blocks/BlockIFrame';
 import { BlockImage } from '~content-blocks/BlockImage';
 import {
@@ -30,6 +32,7 @@ import { BlockRichTextWrapper } from '~content-blocks/BlockRichText';
 import { BlockScrollDownNudge } from '~content-blocks/BlockScrollDownNudge';
 import { BlockProjectSpotlightWrapper, BlockSpotlight } from '~content-blocks/BlockSpotlight';
 import { BlockTagsWithLink } from '~content-blocks/BlockTagsWithLink';
+import { BlockThemeReels } from '~content-blocks/BlockThemeReels';
 import { BlockThreeClickableTiles } from '~content-blocks/BlockThreeClickableTiles';
 import { BlockUitgeklaard } from '~content-blocks/BlockUitgeklaard';
 import { BlockVideoWrapper } from '~content-blocks/BlockVideo';
@@ -89,6 +92,9 @@ export function GET_BLOCK_COMPONENT(
 		[ContentBlockType.HetArchiefImageTextBackground]: BlockHetArchiefImageTextBackground,
 		[ContentBlockType.OverviewWithCarousel]: BlockOverviewWithCarousel,
 		[ContentBlockType.HetArchiefQuote]: BlockHetArchiefQuote,
+		[ContentBlockType.HomepageBanner]: BlockHomepageBanner,
+		[ContentBlockType.HighlightText]: BlockHighlightText,
+		[ContentBlockType.ThemeReels]: BlockThemeReels,
 
 		// Avo specific blocks
 		[ContentBlockType.MediaGrid]: loadComponentFromConfig(ContentBlockType.MediaGrid),

@@ -13,6 +13,8 @@ import { INITIAL_HEADING_COMPONENTS_STATE } from '~content-blocks/BlockHeading';
 import { INITIAL_HET_ARCHIEF_HEADER_SEARCH_BLOCK_STATE } from '~content-blocks/BlockHetArchiefHeaderSearch/BlockHetArchiefHeaderSearch.editorconfig';
 import { INITIAL_HET_ARCHIEF_IMAGE_TEXT_BACKGROUND_BLOCK_STATE } from '~content-blocks/BlockHetArchiefImageTextBackground';
 import { INITIAL_HET_ARCHIEF_QUOTE_COMPONENTS_STATE } from '~content-blocks/BlockHetArchiefQuote';
+import { INITIAL_CONTENT_HIGHLIGHT_TEXT_BLOCK_STATE } from '~content-blocks/BlockHighlightText';
+import { INITIAL_CONTENT_HOMEPAGE_BANNER_BLOCK_STATE } from '~content-blocks/BlockHomepageBanner';
 import { INITIAL_IFRAME_COMPONENTS_STATE } from '~content-blocks/BlockIFrame';
 import { INITIAL_IMAGE_COMPONENTS_STATE } from '~content-blocks/BlockImage';
 import {
@@ -26,7 +28,7 @@ import { INITIAL_KLAAR_COMPONENTS_STATE } from '~content-blocks/BlockKlaar';
 import { INITIAL_MAINTAINERS_GRID_BLOCK_STATE } from '~content-blocks/BlockMaintainersGrid';
 import { INITIAL_MEDIA_GRID_COMPONENTS_STATE } from '~content-blocks/BlockMediaGrid';
 import { INITIAL_OVERVIEW_NEWSPAPER_TITLES_BLOCK_STATE } from '~content-blocks/BlockOverviewNewspaperTitles';
-import { INITIAL_CONTENT_OVERVIEW_WITH_CAROUSEL_BLOCK_STATE } from '~content-blocks/BlockOverviewWithCarousel/BlockOverviewWithCarousel.editorconfig.ts';
+import { INITIAL_OVERVIEW_WITH_CAROUSEL_BLOCK_STATE } from '~content-blocks/BlockOverviewWithCarousel/BlockOverviewWithCarousel.editorconfig.ts';
 import { INITIAL_PAGE_OVERVIEW_COMPONENTS_STATE } from '~content-blocks/BlockPageOverview';
 import {
 	INITIAL_RICH_TEXT_COMPONENTS_STATE,
@@ -38,6 +40,7 @@ import {
 	INITIAL_SPOTLIGHT_COMPONENTS_STATE,
 } from '~content-blocks/BlockSpotlight';
 import { INITIAL_TAGS_WITH_LINK_COMPONENTS_STATE } from '~content-blocks/BlockTagsWithLink';
+import { INITIAL_THEME_REELS_COMPONENTS_STATE } from '~content-blocks/BlockThemeReels';
 import { INITIAL_THREE_CLICKABLE_TILES_COMPONENTS_STATE } from '~content-blocks/BlockThreeClickableTiles';
 import { INITIAL_UITGEKLAARD_BLOCK_STATE } from '~content-blocks/BlockUitgeklaard';
 import { INITIAL_MEDIA_PLAYER_COMPONENTS_STATE } from '~content-blocks/BlockVideo';
@@ -91,5 +94,8 @@ export const CONTENT_BLOCK_INITIAL_STATE_MAP: {
 	[ContentBlockType.ContentEncloseGrid]: INITIAL_CONTENT_ENCLOSE_BLOCK_STATE,
 	[ContentBlockType.Breadcrumbs]: INITIAL_BREADCRUMBS_BLOCK_STATE,
 	[ContentBlockType.ScrollDownNudge]: INITIAL_SCROLL_DOWN_NUDGE_BLOCK_STATE,
-	[ContentBlockType.OverviewWithCarousel]: INITIAL_CONTENT_OVERVIEW_WITH_CAROUSEL_BLOCK_STATE,
+	[ContentBlockType.OverviewWithCarousel]: INITIAL_OVERVIEW_WITH_CAROUSEL_BLOCK_STATE,
+	[ContentBlockType.HomepageBanner]: INITIAL_CONTENT_HOMEPAGE_BANNER_BLOCK_STATE,
+	[ContentBlockType.HighlightText]: INITIAL_CONTENT_HIGHLIGHT_TEXT_BLOCK_STATE,
+	[ContentBlockType.ThemeReels]: INITIAL_THEME_REELS_COMPONENTS_STATE,
 };

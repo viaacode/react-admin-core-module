@@ -190,6 +190,28 @@ export const GET_CONTENT_BLOCK_TYPE_OPTIONS: () => SelectOption<string>[] = () =
 			]),
 			value: ContentBlockType.HetArchiefQuote,
 		},
+		{
+			label: tText(
+				'modules/content-page/const/get-content-block-type-options___homepage-banner',
+				{},
+				[HET_ARCHIEF]
+			),
+			value: ContentBlockType.HomepageBanner,
+		},
+		{
+			label: tText(
+				'modules/content-page/const/get-content-block-type-options___highlight-text',
+				{},
+				[HET_ARCHIEF]
+			),
+			value: ContentBlockType.HighlightText,
+		},
+		{
+			label: tText('modules/content-page/const/get-content-block-type-options___thema-reels', {}, [
+				HET_ARCHIEF,
+			]),
+			value: ContentBlockType.ThemeReels,
+		},
 	];
 
 	// Only show the content blocks that the client enabled through the config object

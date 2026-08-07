@@ -1,6 +1,8 @@
 @use "sass:math";
 @use "../../../../shared/styles/settings/variables" as variables;
 @use "../../../../shared/styles/settings/colors" as colors;
+@use "../../../../shared/styles/mixins/typography" as typography;
+@use "../../../../shared/styles/mixins/animations" as animations;
 
 $slide-width: 28rem;
 
@@ -22,13 +24,8 @@ $slide-width: 28rem;
 
 		&-title {
 			color: colors.$color-gray-1000;
-			font-family: "SofiaPro";
-			font-size: 2.4rem;
-			font-style: normal;
-			font-weight: 800;
-			overflow: hidden;
-			text-overflow: ellipsis;
-			white-space: nowrap;
+			@include typography.sofia-pro-heading-lg();
+			@include typography.truncate();
 			width: fit-content;
 		}
 
@@ -59,9 +56,7 @@ $slide-width: 28rem;
 
 					.c-button__label {
 						font-weight: 700; // since sm buttons loose this
-						overflow: hidden;
-						text-overflow: ellipsis;
-						white-space: nowrap;
+						@include typography.truncate();
 					}
 				}
 			}
@@ -108,7 +103,7 @@ $slide-width: 28rem;
 
 		&:hover {
 			.c-block-overview-with-carousel__slide-image > img {
-				transform: scale(1.1);
+				@include animations.zoom-in-animation;
 			}
 		}
 
@@ -152,10 +147,7 @@ $slide-width: 28rem;
 			}
 
 			.c-block-overview-with-carousel__slide-text {
-				font-size: 3.2rem;
-				font-style: normal;
-				font-weight: 800;
-				line-height: 4.0rem;
+				@include typography.sofia-pro-heading-xl();
 			}
 		}
 
@@ -169,7 +161,7 @@ $slide-width: 28rem;
 				object-position: center;
 				width: 100%;
 				height: 100%;
-				transition: transform 0.5s ease-out;
+				@include animations.zoom-in-transition;
 			}
 		}
 
@@ -178,24 +170,15 @@ $slide-width: 28rem;
 			min-height: 0;
 			display: flex;
 			align-items: end;
-			padding: calc(variables.$g-spacer-unit * 2) calc(variables.$g-spacer-unit * 3);
+			padding: calc(#{variables.$g-spacer-unit} * 2) calc(#{variables.$g-spacer-unit} * 3);
 		}
 
 		&-text {
-			display: -webkit-box;
-			-webkit-box-orient: vertical;
-			-webkit-line-clamp: 2;
-			line-clamp: 2;
-			overflow: hidden;
-			text-overflow: ellipsis;
 			width: 100%;
+			@include typography.truncate-after-x-lines(2);
 
 			color: colors.$color-gray-1000;
-			font-family: "SofiaPro";
-			font-size: 1.8rem;
-			font-style: normal;
-			font-weight: 800;
-			line-height: 2.8rem;
+			@include typography.sofia-pro-heading-md();
 		}
 	}
 }
