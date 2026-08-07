@@ -9,6 +9,7 @@ import { Icon } from '~shared/components/Icon/Icon';
 import type { LoadingInfo } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
 import { LoadingErrorLoadedComponent } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
 import { CustomError } from '~shared/helpers/custom-error';
+import { isHetArchief } from '~shared/helpers/is-hetarchief';
 import { isMultiLanguageEnabled } from '~shared/helpers/is-multi-language-enabled';
 import { navigateFunc } from '~shared/helpers/navigate-fnc';
 import {
@@ -19,7 +20,10 @@ import {
 import { buildLink, navigateToContentType } from '~shared/helpers/routing/link';
 import { tText } from '~shared/helpers/translation-functions';
 import { AdminLayout } from '~shared/layouts/AdminLayout/AdminLayout';
+import { App } from '../../../../../scripts/translation.types';
 import type { ContentPageLabel } from '../content-page-label.types';
+
+import './ContentPageLabelDetail.scss';
 
 type ContentPageLabelDetailProps = {
 	contentPageLabelId: string;
@@ -57,6 +61,7 @@ export const ContentPageLabelDetail: FunctionComponent<ContentPageLabelDetailPro
 				content_type: contentPageLabelObj.content_type,
 				language: contentPageLabelObj.language,
 				link_to: contentPageLabelObj.link_to,
+				color: contentPageLabelObj.color,
 				created_at: contentPageLabelObj.created_at,
 				updated_at: contentPageLabelObj.updated_at,
 			};
@@ -131,6 +136,18 @@ export const ContentPageLabelDetail: FunctionComponent<ContentPageLabelDetailPro
 								'-'
 							),
 							tText('admin/content-page-labels/views/content-page-label-detail___link')
+						)}
+						{renderDetailRow(
+							<div
+								className="c-content-page-label-detail__color-swatch"
+								style={{ backgroundColor: contentPageLabelInfo.color }}
+							/>,
+							tText(
+								'modules/content-page-labels/views/content-page-label-detail___achtergrondkleur',
+								{},
+								[App.HET_ARCHIEF]
+							),
+							isHetArchief()
 						)}
 						{renderDateDetailRows(contentPageLabelInfo, [
 							[

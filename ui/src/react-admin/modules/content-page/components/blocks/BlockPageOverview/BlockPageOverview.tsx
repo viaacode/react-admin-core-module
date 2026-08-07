@@ -55,6 +55,11 @@ export interface BlockPageOverviewProps extends DefaultProps {
 	showTitle?: boolean;
 	showDescription?: boolean;
 	showDate?: boolean;
+	// Draw the generated visual label over the page images, GRID item style only
+	// https://meemoo.atlassian.net/browse/ARC-3818
+	showLabelsOnImage?: boolean;
+	// The content page labels selected on this block, of which one may be drawn on the image
+	labelIdsShownOnImage?: number[] | string[];
 	dateString?: string;
 	buttonLabel?: string;
 	buttonAltTitle?: string;
@@ -89,6 +94,8 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 	showTitle = true,
 	showDescription = true,
 	showDate = false,
+	showLabelsOnImage = false,
+	labelIdsShownOnImage = [],
 	dateString = 'Geplaatst %label% op %date%',
 	buttonLabel = 'Lees meer',
 	buttonAltTitle = '',
@@ -194,17 +201,32 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 		return null;
 	};
 
+	/**
+	 * The visual label to draw over the page image: the first of the page's labels that the admin
+	 * selected on this block. https://meemoo.atlassian.net/browse/ARC-3818
+	 */
+	const getLabelShownOnImage = (page: ContentPageInfo): ContentPageLabel | undefined => {
+		if (!showLabelsOnImage) {
+			return undefined;
+		}
+		const labelIds = labelIdsShownOnImage.map(String);
+		return page.labels?.find((labelObj) => labelIds.includes(String(labelObj.id)));
+	};
+
 	const renderGrid = (pages: ContentPageInfo[]): ReactNode => {
 		return (
 			<BlockImageGrid
-				elements={pages.map(
-					(page: ContentPageInfo): GridItem => ({
+				elements={pages.map((page: ContentPageInfo): GridItem => {
+					const labelShownOnImage = getLabelShownOnImage(page);
+					return {
 						title: showTitle ? page.title : undefined,
 						text: getDescription(page),
 						source: page.thumbnailPath as string, // TODO handle undefined thumbnails
 						action: { type: AvoCoreContentPickerType.CONTENT_PAGE, value: page.path as string },
-					})
-				)}
+						imageLabel: labelShownOnImage?.label,
+						imageLabelColor: labelShownOnImage?.color,
+					};
+				})}
 				itemWidth="30.7rem"
 				imageHeight="17.2rem"
 				imageWidth="100%"

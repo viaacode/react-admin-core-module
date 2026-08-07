@@ -6,6 +6,7 @@ import type {
 	BlockImageGridProps,
 	GridItem,
 } from '~content-blocks/BlockImageGrid/BlockImageGrid.types';
+import { ContentPageLabelChip } from '~shared/components/ContentPageLabelChip/ContentPageLabelChip';
 import { defaultRenderLinkFunction } from '~shared/helpers/routing/link';
 
 import './BlockImageGrid.scss';
@@ -47,7 +48,15 @@ export const BlockImageGrid: FunctionComponent<BlockImageGridProps> = ({
 						backgroundSize: fill,
 						backgroundPosition: imageItemAlignment || 'center',
 					}}
-				/>
+				>
+					{!!element.imageLabel && (
+						<ContentPageLabelChip
+							className="c-block-grid__image-label"
+							label={element.imageLabel}
+							color={element.imageLabelColor}
+						/>
+					)}
+				</div>
 				<div
 					className="c-block-grid__text-wrapper"
 					style={{

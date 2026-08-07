@@ -15,6 +15,9 @@ import { isNil } from 'es-toolkit';
 import type { FunctionComponent } from 'react';
 import React, { useCallback, useEffect, useState } from 'react';
 import { AdminConfigManager, ToastType } from '~core/config';
+import { ColorSelect } from '~modules/content-page/components/fields/ColorSelect/ColorSelect';
+import { GET_CONTENT_PAGE_LABEL_COLOR_OPTIONS } from '~modules/content-page/const/get-color-options';
+import { Color } from '~modules/content-page/types/content-block.types';
 import { ContentPageLabelService } from '~modules/content-page-labels/content-page-label.service';
 import { useGetAllLanguages } from '~modules/translations/hooks/use-get-all-languages';
 import { Locale } from '~modules/translations/translations.core.types';
@@ -24,6 +27,7 @@ import type { LoadingInfo } from '~shared/components/LoadingErrorLoadedComponent
 import { LoadingErrorLoadedComponent } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
 import { GET_LANGUAGE_NAMES } from '~shared/consts/language-names';
 import { CustomError } from '~shared/helpers/custom-error';
+import { isHetArchief } from '~shared/helpers/is-hetarchief';
 import { isMultiLanguageEnabled } from '~shared/helpers/is-multi-language-enabled';
 import { navigateFunc } from '~shared/helpers/navigate-fnc';
 import { buildLink, navigate } from '~shared/helpers/routing/link';
@@ -31,6 +35,7 @@ import { showToast } from '~shared/helpers/show-toast';
 import { tText } from '~shared/helpers/translation-functions';
 import { AdminLayout } from '~shared/layouts/AdminLayout/AdminLayout';
 import type { DefaultComponentProps } from '~shared/types/components';
+import { App } from '../../../../../scripts/translation.types';
 import { useContentTypes } from '../../content-page/hooks/useContentTypes';
 import type {
 	ContentPageLabel,
@@ -73,6 +78,7 @@ export const ContentPageLabelEdit: FunctionComponent<ContentPageLabelEditProps> 
 				label: '',
 				content_type: 'PAGINA',
 				language: Locale.Nl,
+				...(isHetArchief() ? { color: Color.White } : {}),
 				created_at: new Date().toISOString(),
 				updated_at: new Date().toISOString(),
 				permissions: [],
@@ -134,6 +140,16 @@ export const ContentPageLabelEdit: FunctionComponent<ContentPageLabelEditProps> 
 			return {
 				label: tText(
 					'modules/content-page-labels/views/content-page-label-edit___een-taal-keuze-is-verplicht'
+				),
+			};
+		}
+		// The colour only exists on hetarchief content page labels
+		if (isHetArchief() && !contentPageLabelInfo?.color) {
+			return {
+				color: tText(
+					'modules/content-page-labels/views/content-page-label-edit___een-achtergrondkleur-is-verplicht',
+					{},
+					[App.HET_ARCHIEF]
 				),
 			};
 		}
@@ -267,6 +283,30 @@ export const ContentPageLabelEdit: FunctionComponent<ContentPageLabelEditProps> 
 												setContentPageLabelInfo({
 													...contentPageLabelInfo,
 													language: newLanguage as Locale,
+												})
+											}
+										/>
+									</FormGroup>
+								)}
+								{isHetArchief() && (
+									<FormGroup
+										label={tText(
+											'modules/content-page-labels/views/content-page-label-edit___achtergrondkleur',
+											{},
+											[App.HET_ARCHIEF]
+										)}
+										error={formErrors.color}
+										required
+									>
+										<ColorSelect
+											options={GET_CONTENT_PAGE_LABEL_COLOR_OPTIONS()}
+											value={GET_CONTENT_PAGE_LABEL_COLOR_OPTIONS().find(
+												(option) => option.value === contentPageLabelInfo.color
+											)}
+											onChange={(newColor) =>
+												setContentPageLabelInfo({
+													...contentPageLabelInfo,
+													color: (newColor as { value: Color } | null)?.value,
 												})
 											}
 										/>

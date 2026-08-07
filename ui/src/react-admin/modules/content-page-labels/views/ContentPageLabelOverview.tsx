@@ -18,6 +18,7 @@ import type {
 	CheckboxOption,
 } from '~shared/components/CheckboxDropdownModal/CheckboxDropdownModal';
 import ConfirmModal from '~shared/components/ConfirmModal/ConfirmModal';
+import { ContentPageLabelChip } from '~shared/components/ContentPageLabelChip/ContentPageLabelChip';
 import { GET_CONTENT_TYPE_LABELS } from '~shared/components/ContentPicker/ContentPicker.const';
 import type { FilterableColumn } from '~shared/components/FilterTable/FilterTable';
 import FilterTable, { getFilters } from '~shared/components/FilterTable/FilterTable';
@@ -32,6 +33,7 @@ import {
 	getQueryFilter,
 } from '~shared/helpers/filters';
 import { formatDate } from '~shared/helpers/formatters/date';
+import { isHetArchief } from '~shared/helpers/is-hetarchief';
 import { isMultiLanguageEnabled } from '~shared/helpers/is-multi-language-enabled';
 import { navigateFunc } from '~shared/helpers/navigate-fnc';
 import { buildLink, navigate } from '~shared/helpers/routing/link';
@@ -40,6 +42,7 @@ import { truncateTableValue } from '~shared/helpers/truncate';
 import { AdminLayout } from '~shared/layouts/AdminLayout/AdminLayout';
 import { TableColumnDataType } from '~shared/types/table-column-data-type';
 import { TableFilterType } from '~shared/types/table-filter-types';
+import { App } from '../../../../../scripts/translation.types';
 import { useContentTypes } from '../../content-page/hooks/useContentTypes';
 import type {
 	ContentPageLabel,
@@ -186,6 +189,24 @@ export const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> 
 				filterType: TableFilterType.DateRangeDropdown,
 				dataType: TableColumnDataType.dateTime,
 			},
+			// A preview of the generated visual label, shown without a column header
+			// https://meemoo.atlassian.net/browse/ARC-3818
+			...(isHetArchief()
+				? [
+						{
+							id: 'color' as const,
+							// No header above the chips, but the columns dropdown needs a name
+							label: '',
+							tooltip: tText(
+								'modules/content-page-labels/views/content-page-label-overview___label-voorbeeld',
+								{},
+								[App.HET_ARCHIEF]
+							),
+							sortable: false,
+							visibleByDefault: true,
+						},
+					]
+				: []),
 			{
 				id: 'actions',
 				tooltip: tText('admin/content-page-labels/views/content-page-label-overview___acties'),
@@ -270,6 +291,11 @@ export const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> 
 			case 'language': {
 				return contentPageLabel.language;
 			}
+
+			case 'color':
+				return (
+					<ContentPageLabelChip label={contentPageLabel.label} color={contentPageLabel.color} />
+				);
 
 			case 'actions':
 				return (

@@ -40,6 +40,7 @@ export const BlockPageOverviewWrapper: FunctionComponent<PageOverviewWrapperProp
 	showTitle = true,
 	showDescription = true,
 	showDate = false,
+	showLabelsOnImage = false,
 	buttonLabel = tText(
 		'admin/content-block/components/page-overview-wrapper/page-overview-wrapper___lees-meer'
 	),
@@ -242,6 +243,8 @@ export const BlockPageOverviewWrapper: FunctionComponent<PageOverviewWrapperProp
 				showTitle={showTitle}
 				showDescription={showDescription}
 				showDate={showDate}
+				showLabelsOnImage={showLabelsOnImage}
+				labelIdsShownOnImage={getSelectedLabelIds()}
 				dateString={tText(
 					'admin/content-block/components/page-overview-wrapper/page-overview-wrapper___geplaatst-label-op-date'
 				)}

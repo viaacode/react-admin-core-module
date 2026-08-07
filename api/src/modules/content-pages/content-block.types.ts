@@ -137,6 +137,9 @@ export interface PageOverviewBlockComponentStateFields {
 	showTitle?: boolean;
 	showDescription?: boolean;
 	showDate?: boolean;
+	// Draw the generated visual label of the selected content page labels over the page images
+	// https://meemoo.atlassian.net/browse/ARC-3818
+	showLabelsOnImage?: boolean;
 	buttonLabel?: string;
 	itemsPerPage?: number;
 	navigate?: (buttonAction: string) => void;

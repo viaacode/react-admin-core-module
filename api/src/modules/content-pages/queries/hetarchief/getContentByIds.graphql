@@ -50,6 +50,7 @@ query getContentByIds($ids: [uuid!]!) {
 				label
 				id
 				link_to
+				color
 			}
 		}
 		content_blocks(order_by: { position: asc }) {

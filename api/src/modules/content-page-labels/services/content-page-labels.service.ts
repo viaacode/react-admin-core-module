@@ -6,6 +6,7 @@ import { DataService } from '../../data';
 import { CustomError } from '../../shared/helpers/error';
 import { getDatabaseType } from '../../shared/helpers/get-database-type';
 import { isAvo } from '../../shared/helpers/is-avo';
+import { isHetArchief } from '../../shared/helpers/is-hetarchief';
 import type { ContentPageLabelOverviewTableCols } from '../content-page-labels.types';
 import type {
 	ContentPageLabelDto,
@@ -16,6 +17,14 @@ import {
 	CONTENT_PAGE_LABEL_QUERIES,
 	type ContentPageLabelQueryTypes,
 } from '../queries/content-page-label.queries';
+
+// The label rows come back as an avo | hetarchief union, and only hetarchief has a color column.
+// Narrowing to the hetarchief row keeps the color access type checked, so removing color from the
+// query is a compile error instead of a silently undefined value.
+type HetArchiefContentPageLabel =
+	ContentPageLabelQueryTypes['GetContentPageLabelsQueryHetArchief']['app_content_label'][0];
+type HetArchiefContentPageLabelById =
+	ContentPageLabelQueryTypes['GetContentPageLabelByIdQueryHetArchief']['app_content_label'][0];
 
 export class ContentPageLabelsService {
 	constructor(@Inject(forwardRef(() => DataService)) protected dataService: DataService) {}
@@ -55,6 +64,8 @@ export class ContentPageLabelsService {
 					id: labelObj?.id,
 					language: labelObj?.language,
 					link_to: labelObj?.link_to,
+					// Only hetarchief content page labels have a color
+					color: (labelObj as HetArchiefContentPageLabel)?.color,
 					created_at: labelObj?.created_at,
 					updated_at: labelObj?.updated_at,
 				})
@@ -112,6 +123,8 @@ export class ContentPageLabelsService {
 				id: contentPageLabelRaw.id,
 				language: contentPageLabelRaw.language,
 				link_to: contentPageLabelRaw.link_to,
+				// Only hetarchief content page labels have a color
+				color: (contentPageLabelRaw as HetArchiefContentPageLabelById).color,
 				created_at: contentPageLabelRaw.created_at,
 				updated_at: contentPageLabelRaw.updated_at,
 			};
@@ -137,6 +150,8 @@ export class ContentPageLabelsService {
 					// biome-ignore lint/suspicious/noExplicitAny: locale from other repo complains about types
 					language: contentPageLabel.language as any,
 					link_to: contentPageLabel.link_to || null,
+					// The color column only exists on hetarchief
+					...(isHetArchief() ? { color: contentPageLabel.color } : {}),
 					created_at: new Date().toISOString(),
 					updated_at: new Date().toISOString(),
 				})),
@@ -176,6 +191,8 @@ export class ContentPageLabelsService {
 					content_type: contentPageLabelInfo.content_type as any,
 					language: contentPageLabelInfo.language,
 					link_to: contentPageLabelInfo.link_to || null,
+					// The color column only exists on hetarchief
+					...(isHetArchief() ? { color: contentPageLabelInfo.color } : {}),
 					updated_at: new Date().toISOString(),
 				},
 				contentPageLabelId: contentPageLabelInfo.id,

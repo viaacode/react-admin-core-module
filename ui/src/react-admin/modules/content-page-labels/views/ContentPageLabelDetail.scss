@@ -1,0 +1,10 @@
+@use "../../shared/styles/settings/colors" as colors;
+
+// Swatch showing the background colour picked for the generated visual label
+// https://meemoo.atlassian.net/browse/ARC-3818
+.c-content-page-label-detail__color-swatch {
+	width: 20rem;
+	height: 2.4rem;
+	// Without a border, white and platinum are invisible against the detail page
+	border: 1px solid colors.$color-gray-100;
+}

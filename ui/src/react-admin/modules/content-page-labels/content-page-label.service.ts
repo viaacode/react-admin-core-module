@@ -73,6 +73,7 @@ export class ContentPageLabelService {
 						content_type: labelObj.content_type,
 						language: labelObj.language,
 						link_to: labelObj.link_to,
+						color: labelObj.color,
 					}))
 				),
 			});
@@ -95,6 +96,7 @@ export class ContentPageLabelService {
 					content_type: contentPageLabelInfo.content_type,
 					language: contentPageLabelInfo.language,
 					link_to: contentPageLabelInfo.link_to,
+					color: contentPageLabelInfo.color,
 				}),
 			});
 		} catch (err) {
