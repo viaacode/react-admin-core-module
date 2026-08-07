@@ -6,10 +6,7 @@ import { GET_ALIGN_OPTIONS } from '~modules/content-page/const/get-align-options
 import { GET_PAGE_OVERVIEW_ITEM_STYLE_OPTIONS } from '~modules/content-page/const/get-page-overview-item-style-options';
 import { GET_PAGE_OVERVIEW_ORDER_OPTIONS } from '~modules/content-page/const/get-page-overview-order-options';
 import { GET_PAGE_OVERVIEW_TAB_STYLE_OPTIONS } from '~modules/content-page/const/get-page-overview-tab-style-options';
-import type { ContentTypeAndLabelsValue } from '~shared/components/ContentTypeAndLabelsPicker/ContentTypeAndLabelsPicker';
-import { isHetArchief } from '~shared/helpers/is-hetarchief';
 import { tText } from '~shared/helpers/translation-functions';
-import { App } from '../../../../../../../scripts/translation.types';
 import {
 	Color,
 	type ContentBlockConfig,
@@ -41,7 +38,6 @@ export const INITIAL_PAGE_OVERVIEW_COMPONENTS_STATE =
 		showTitle: true,
 		showDescription: true,
 		showDate: false,
-		showLabelsOnImage: false,
 		buttonLabel: tText('admin/content-block/helpers/generators/page-overview___lees-meer'),
 		itemsPerPage: 20,
 	});
@@ -172,29 +168,6 @@ export const PAGE_OVERVIEW_BLOCK_CONFIG = (position = 0): ContentBlockConfig => 
 						return (
 							itemStyle === ContentItemStyle.NEWS_LIST ||
 							itemStyle === ContentItemStyle.PROJECT_LIST
-						);
-					},
-				},
-				// Draws the generated visual label over the page images, for the labels that are
-				// selected above: https://meemoo.atlassian.net/browse/ARC-3818
-				showLabelsOnImage: {
-					editorType: ContentBlockEditor.Checkbox,
-					editorProps: {
-						label: tText(
-							'modules/content-page/components/blocks/block-page-overview/block-page-overview___toon-de-labels-op-de-afbeelding',
-							{},
-							[App.HET_ARCHIEF]
-						),
-					} as CheckboxProps,
-					isVisible: (config: ContentBlockConfig) => {
-						const state = config.components.state as PageOverviewBlockComponentStateFields & {
-							contentTypeAndTabs?: ContentTypeAndLabelsValue;
-						};
-						// Without selected labels there is nothing to draw, so don't offer the option
-						return (
-							isHetArchief() &&
-							state?.itemStyle === ContentItemStyle.GRID &&
-							!!state?.contentTypeAndTabs?.selectedLabels?.length
 						);
 					},
 				},

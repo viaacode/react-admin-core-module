@@ -41,6 +41,7 @@ import { ContentItemStyle } from './BlockPageOverview.types';
 import './BlockPageOverview.scss';
 import { AvoCoreContentPickerType } from '@viaa/avo2-types';
 import type { ContentPageLabel } from '~modules/content-page-labels/content-page-label.types.ts';
+import { ContentPageLabelChip } from '~shared/components/ContentPageLabelChip/ContentPageLabelChip';
 
 export interface BlockPageOverviewProps extends DefaultProps {
 	tabs?: { label: string; id: number }[];
@@ -55,10 +56,8 @@ export interface BlockPageOverviewProps extends DefaultProps {
 	showTitle?: boolean;
 	showDescription?: boolean;
 	showDate?: boolean;
-	// Draw the generated visual label over the page images, GRID item style only
-	// https://meemoo.atlassian.net/browse/ARC-3818
-	showLabelsOnImage?: boolean;
-	// The content page labels selected on this block, of which one may be drawn on the image
+	// The content page labels selected on this block, of which the matching one is drawn over
+	// the page image: https://meemoo.atlassian.net/browse/ARC-3818
 	labelIdsShownOnImage?: number[] | string[];
 	dateString?: string;
 	buttonLabel?: string;
@@ -94,7 +93,6 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 	showTitle = true,
 	showDescription = true,
 	showDate = false,
-	showLabelsOnImage = false,
 	labelIdsShownOnImage = [],
 	dateString = 'Geplaatst %label% op %date%',
 	buttonLabel = 'Lees meer',
@@ -206,9 +204,6 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 	 * selected on this block. https://meemoo.atlassian.net/browse/ARC-3818
 	 */
 	const getLabelShownOnImage = (page: ContentPageInfo): ContentPageLabel | undefined => {
-		if (!showLabelsOnImage) {
-			return undefined;
-		}
 		const labelIds = labelIdsShownOnImage.map(String);
 		return page.labels?.find((labelObj) => labelIds.includes(String(labelObj.id)));
 	};
@@ -242,6 +237,7 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 	const renderPages = () => {
 		if (itemStyle === ContentItemStyle.NEWS_LIST || itemStyle === ContentItemStyle.PROJECT_LIST) {
 			return pages.map((page) => {
+				const labelShownOnImage = getLabelShownOnImage(page);
 				return (
 					<Container
 						className={clsx(
@@ -256,16 +252,25 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 							<Grid>
 								<Column size={itemStyle === ContentItemStyle.NEWS_LIST ? '2-5' : '2-4'}>
 									<Spacer margin="bottom-large">
-										<AspectRatioWrapper
-											style={
-												page.thumbnailPath
-													? {
-															backgroundImage: `url(${page.thumbnailPath})`,
-														}
-													: {}
-											}
-											aspect={itemStyle === ContentItemStyle.NEWS_LIST ? 1.78 : 2.5} // 500 x 280 or 528 x 211
-										/>
+										<div className="c-page-overview__image">
+											<AspectRatioWrapper
+												style={
+													page.thumbnailPath
+														? {
+																backgroundImage: `url(${page.thumbnailPath})`,
+															}
+														: {}
+												}
+												aspect={itemStyle === ContentItemStyle.NEWS_LIST ? 1.78 : 2.5} // 500 x 280 or 528 x 211
+											/>
+											{!!labelShownOnImage && (
+												<ContentPageLabelChip
+													className="c-page-overview__image-label"
+													label={labelShownOnImage.label}
+													color={labelShownOnImage.color}
+												/>
+											)}
+										</div>
 									</Spacer>
 								</Column>
 								<Column size="2-7">
