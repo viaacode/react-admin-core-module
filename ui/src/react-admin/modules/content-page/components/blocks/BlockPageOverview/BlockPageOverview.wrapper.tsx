@@ -15,6 +15,7 @@ import { useGetContentPagesForPageOverviewBlock } from '~modules/content-page/ho
 import type { ContentPageInfo } from '~modules/content-page/types/content-pages.types';
 import { Locale } from '~modules/translations/translations.core.types';
 import { ErrorView } from '~shared/components/error/ErrorView';
+import { isHetArchief } from '~shared/helpers/is-hetarchief';
 import { navigateFunc } from '~shared/helpers/navigate-fnc';
 import {
 	CheckboxListParam,
@@ -242,7 +243,8 @@ export const BlockPageOverviewWrapper: FunctionComponent<PageOverviewWrapperProp
 				showTitle={showTitle}
 				showDescription={showDescription}
 				showDate={showDate}
-				labelIdsShownOnImage={getSelectedLabelIds()}
+				// Only hetarchief content page labels have a colour to draw a visual label with
+				labelIdsShownOnImage={isHetArchief() ? getSelectedLabelIds() : []}
 				dateString={tText(
 					'admin/content-block/components/page-overview-wrapper/page-overview-wrapper___geplaatst-label-op-date'
 				)}
