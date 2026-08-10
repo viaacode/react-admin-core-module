@@ -168,7 +168,7 @@ export enum ContentBlockType {
 	MediaPlayerTitleTextButton = 'MEDIA_PLAYER_TITLE_TEXT_BUTTON',
 	PageOverview = 'PAGE_OVERVIEW',
 	ProjectsSpotlight = 'PROJECTS_SPOTLIGHT',
-	AvoQuote = 'QUOTE', // Avo
+	AvoQuote = 'QUOTE',
 	RichText = 'RICH_TEXT',
 	RichTextTwoColumns = 'RICH_TEXT_TWO_COLUMNS',
 	Search = 'SEARCH',
@@ -181,7 +181,7 @@ export enum ContentBlockType {
 	HetArchiefImageTextBackground = 'IMAGE_TEXT_BACKGROUND', // Hetarchief
 	MaintainersGrid = 'MAINTAINERS_GRID',
 	HetArchiefHeaderSearch = 'HETARCHIEF__HEADER_SEARCH',
-	HetArchiefQuote = 'HETARCHIEF_QUOTE', // Hetarchief
+	HetArchiefQuote = 'HETARCHIEF_QUOTE',
 	OverviewNewspaperTitles = 'OVERVIEW_NEWSPAPER_TITLES',
 	ContentEncloseGrid = 'CONTENT_ENCLOSE_GRID',
 	Breadcrumbs = 'BREADCRUMBS',
@@ -599,10 +599,8 @@ export interface HetArchiefHeaderSearchBlockComponentState {
 export interface HetArchiefQuoteBlockComponentState {
 	quote: string;
 	authorName: string;
-	// Plain colours only: these end up in `color` and `background` as-is, so the gradient and
-	// the meemoo-logo sentinel from the background colour list would render as nothing.
 	textColor: Color;
-	frameColor: Color;
+	frameColor: Color | GradientColor | CustomBackground;
 }
 
 export interface HetArchiefIeObject {

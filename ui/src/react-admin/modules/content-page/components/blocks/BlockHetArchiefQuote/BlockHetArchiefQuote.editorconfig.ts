@@ -1,3 +1,7 @@
+import {
+	GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF,
+	GET_FOREGROUND_COLOR_OPTIONS_ARCHIEF,
+} from '~modules/content-page/const/get-color-options';
 import { tText } from '~shared/helpers/translation-functions';
 import { HET_ARCHIEF } from '~shared/types';
 import type {
@@ -5,21 +9,26 @@ import type {
 	DefaultContentBlockState,
 	HetArchiefQuoteBlockComponentState,
 } from '../../../types/content-block.types';
-import { Color, ContentBlockEditor, ContentBlockType } from '../../../types/content-block.types';
+import { ContentBlockEditor, ContentBlockType } from '../../../types/content-block.types';
 
 import {
+	BACKGROUND_COLOR_FIELD,
 	BLOCK_FIELD_DEFAULTS,
 	BLOCK_STATE_DEFAULTS,
-	SOLID_COLOR_FIELD,
+	FOREGROUND_COLOR_FIELD,
 	TEXT_FIELD,
 } from '../defaults';
+
+// White in the foreground colour list, black in the background colour list
+const DEFAULT_TEXT_COLOR_OPTION = () => GET_FOREGROUND_COLOR_OPTIONS_ARCHIEF()[1];
+const DEFAULT_FRAME_COLOR_OPTION = () => GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF()[5];
 
 export const INITIAL_HET_ARCHIEF_QUOTE_COMPONENTS_STATE =
 	(): HetArchiefQuoteBlockComponentState => ({
 		quote: '',
 		authorName: '',
-		textColor: Color.White,
-		frameColor: Color.Black,
+		textColor: DEFAULT_TEXT_COLOR_OPTION().value,
+		frameColor: DEFAULT_FRAME_COLOR_OPTION().value,
 	});
 
 export const INITIAL_HET_ARCHIEF_QUOTE_BLOCK_STATE = (): DefaultContentBlockState =>
@@ -50,23 +59,17 @@ export const HET_ARCHIEF_QUOTE_BLOCK_CONFIG = (position = 0): ContentBlockConfig
 				label: tText('admin/content-block/helpers/generators/quote___auteur'),
 				validator: undefined,
 			}),
-			textColor: SOLID_COLOR_FIELD(
+			textColor: FOREGROUND_COLOR_FIELD(
 				tText('admin/content-block/helpers/generators/hetarchief-quote___tekstkleur', {}, [
 					HET_ARCHIEF,
 				]),
-				{
-					label: tText('admin/content-block/content-block___wit'),
-					value: Color.White,
-				}
+				DEFAULT_TEXT_COLOR_OPTION()
 			),
-			frameColor: SOLID_COLOR_FIELD(
+			frameColor: BACKGROUND_COLOR_FIELD(
 				tText('admin/content-block/helpers/generators/hetarchief-quote___kleur-kader', {}, [
 					HET_ARCHIEF,
 				]),
-				{
-					label: tText('modules/content-page/const/content-block___zwart'),
-					value: Color.Black,
-				}
+				DEFAULT_FRAME_COLOR_OPTION()
 			),
 		},
 	},
