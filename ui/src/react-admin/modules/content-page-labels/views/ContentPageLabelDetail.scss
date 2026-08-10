@@ -5,6 +5,10 @@
 .c-content-page-label-detail__color-swatch {
 	width: 20rem;
 	height: 2.4rem;
-	// Without a border, white and platinum are invisible against the detail page
-	border: 1px solid colors.$color-gray-100;
+
+	// Only the colours that are white or near white need a border, without one they are invisible
+	// against the detail page
+	&--bordered {
+		border: 1px solid colors.$color-gray-100;
+	}
 }

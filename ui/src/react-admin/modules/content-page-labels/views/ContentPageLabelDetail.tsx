@@ -1,7 +1,9 @@
 import { Button, ButtonToolbar, IconName, Table } from '@viaa/avo2-components';
+import clsx from 'clsx';
 import type { FunctionComponent } from 'react';
 import React, { useCallback, useEffect, useState } from 'react';
 import { AdminConfigManager } from '~core/config/config.class';
+import { Color, CustomBackground } from '~modules/content-page/types/content-block.types';
 import { ContentPageLabelService } from '~modules/content-page-labels/content-page-label.service';
 import type { DefaultComponentProps } from '~modules/shared/types/components';
 import { GET_CONTENT_TYPE_LABELS } from '~shared/components/ContentPicker/ContentPicker.const';
@@ -24,6 +26,10 @@ import { App } from '../../../../../scripts/translation.types';
 import type { ContentPageLabel } from '../content-page-label.types';
 
 import './ContentPageLabelDetail.scss';
+
+// The only background colours that leave the swatch invisible against the white detail page, and so
+// the only ones that get a border. Everything else shows its own colour, as the design intends
+const COLORS_INVISIBLE_ON_A_WHITE_PAGE: string[] = [Color.Transparent, Color.White, Color.Platinum];
 
 type ContentPageLabelDetailProps = {
 	contentPageLabelId: string;
@@ -107,6 +113,13 @@ export const ContentPageLabelDetail: FunctionComponent<ContentPageLabelDetailPro
 
 		const linkTo = contentPageLabelInfo.link_to;
 		const labels = GET_CONTENT_TYPE_LABELS();
+		// The meemoo logo is a pattern the client fills in, not a css value, so the swatch shows it the
+		// same way the label chip does: transparent. Same for a label without a colour, which only the
+		// type allows, because avo shares this dto and has no colour column
+		const swatchBackground =
+			!contentPageLabelInfo.color || contentPageLabelInfo.color === CustomBackground.MeemooLogo
+				? Color.Transparent
+				: contentPageLabelInfo.color;
 
 		return (
 			<>
@@ -139,8 +152,12 @@ export const ContentPageLabelDetail: FunctionComponent<ContentPageLabelDetailPro
 						)}
 						{renderDetailRow(
 							<div
-								className="c-content-page-label-detail__color-swatch"
-								style={{ backgroundColor: contentPageLabelInfo.color }}
+								className={clsx('c-content-page-label-detail__color-swatch', {
+									'c-content-page-label-detail__color-swatch--bordered':
+										COLORS_INVISIBLE_ON_A_WHITE_PAGE.includes(swatchBackground),
+								})}
+								// Not backgroundColor: one of the options is a gradient
+								style={{ background: swatchBackground }}
 							/>,
 							tText(
 								'modules/content-page-labels/views/content-page-label-detail___achtergrondkleur',
