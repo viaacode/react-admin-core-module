@@ -66,9 +66,21 @@ export const BlockThemeReels: FunctionComponent<BlockThemeReelsProps> = ({
 				{visibleThemes.length < elements.length && (
 					<Button
 						variants={['black', 'sm']}
-						label={tText('Meer suggesties', {}, [App.HET_ARCHIEF])}
-						title={tText('Meer suggesties', {}, [App.HET_ARCHIEF])}
-						ariaLabel={tText('Meer suggesties', {}, [App.HET_ARCHIEF])}
+						label={tText(
+							'modules/content-page/components/blocks/block-theme-reels/block-theme-reels___meer-suggesties',
+							{},
+							[App.HET_ARCHIEF]
+						)}
+						title={tText(
+							'modules/content-page/components/blocks/block-theme-reels/block-theme-reels___meer-suggesties',
+							{},
+							[App.HET_ARCHIEF]
+						)}
+						ariaLabel={tText(
+							'modules/content-page/components/blocks/block-theme-reels/block-theme-reels___meer-suggesties',
+							{},
+							[App.HET_ARCHIEF]
+						)}
 						onClick={() => setMaxVisibleItems(maxVisibleItems + 1)}
 					/>
 				)}
