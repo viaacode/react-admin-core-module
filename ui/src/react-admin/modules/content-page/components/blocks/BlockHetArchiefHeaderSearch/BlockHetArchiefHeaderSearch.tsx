@@ -38,14 +38,14 @@ export const BlockHetArchiefHeaderSearch: FunctionComponent<BlockHetArchiefHeade
 			label: tText('Zoek in alle objecten'),
 		},
 		{
-			id: 'audio',
-			selectedLabel: tText('Alle audio'),
-			label: tText('Zoek in audio'),
-		},
-		{
 			id: 'video',
 			selectedLabel: tText('Alle video'),
 			label: tText('Zoek in video'),
+		},
+		{
+			id: 'audio',
+			selectedLabel: tText('Alle audio'),
+			label: tText('Zoek in audio'),
 		},
 		{
 			id: 'newspaper',
