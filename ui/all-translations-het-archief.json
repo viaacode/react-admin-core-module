@@ -56302,6 +56302,46 @@
   {
     "id": "",
     "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-edit-page",
+    "key": "selecteer-een-nl-content-pagina",
+    "language": "nl",
+    "value": "Selecteer een nl content pagina",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-edit-page",
+    "key": "selecteer-een-nl-content-pagina",
+    "language": "en",
+    "value": "Selecteer een nl content pagina",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-edit-page",
+    "key": "selecteer-een-en-content-pagina",
+    "language": "nl",
+    "value": "Selecteer een en content pagina",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-edit-page",
+    "key": "selecteer-een-en-content-pagina",
+    "language": "en",
+    "value": "Selecteer een en content pagina",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
     "component": "BACKEND",
     "location": "modules/campaign-monitor/services/campaign-monitor",
     "key": "ik-wil-dit-object-bekijken-beluisteren",
