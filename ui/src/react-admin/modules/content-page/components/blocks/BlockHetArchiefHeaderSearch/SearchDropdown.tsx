@@ -1,4 +1,11 @@
-import { keysEnter, onKey } from '@meemoo/react-components';
+import {
+	Dropdown,
+	DropdownButton,
+	DropdownContent,
+	keysEnter,
+	keysSpacebar,
+	onKey,
+} from '@meemoo/react-components';
 import clsx from 'clsx';
 import { type FC, useState } from 'react';
 import { Icon } from '~shared/components/Icon/Icon';
@@ -15,6 +22,8 @@ interface SearchDropdownProps {
 	onSelectOption: (selectedOption: SearchDropdownOption) => void;
 }
 
+const DROPDOWN_ID = 'search-dropdown-options';
+
 export const SearchDropdown: FC<SearchDropdownProps> = ({
 	options,
 	selectedOptionId,
@@ -22,70 +31,74 @@ export const SearchDropdown: FC<SearchDropdownProps> = ({
 }) => {
 	const [isOpen, setIsOpen] = useState<boolean>(false);
 
-	const onClickDropdown = (): void => {
-		setIsOpen((prevIsOpen: boolean) => !prevIsOpen);
-	};
-
 	const handleSelectOption = (selectedOption: SearchDropdownOption): void => {
 		setIsOpen(false);
 		onSelectOption(selectedOption);
 	};
 
-	const renderSelectedOption = () => {
-		const selected = options.find(({ id }: SearchDropdownOption) => id === selectedOptionId);
-
-		const actionProps = {
-			tabIndex: 0,
-			role: 'button',
-			'aria-expanded': isOpen,
-			'aria-controls': 'list-controls',
-			onClick: onClickDropdown,
-			// biome-ignore lint/suspicious/noExplicitAny: No typing yet
-			onKeyDown: (evt: any) => onKey(evt, [...keysEnter], onClickDropdown),
-		};
-
-		return (
-			<li {...actionProps} className="c-search-dropdown__active">
-				<div className="c-search-dropdown__active-content">
-					<p className="c-search-dropdown__active-label">{selected?.selectedLabel}</p>
-				</div>
-				<Icon className="c-search-dropdown__active-icon" name="angleDown" />
-			</li>
-		);
-	};
-
-	const renderAllOptions = () => (
-		<li aria-hidden={!isOpen} id="list-controls">
-			<ul
-				className={clsx('u-list-reset', 'c-search-dropdown__list', {
-					'c-search-dropdown__list--open': isOpen,
-				})}
-			>
-				{options.map((option: SearchDropdownOption) => (
-					// biome-ignore lint/a11y/useAriaPropsSupportedByRole: because it works?
-					<li
-						tabIndex={isOpen ? -1 : 1}
-						key={option.id}
-						aria-selected={selectedOptionId === option.id}
-						onClick={() => handleSelectOption(option)}
-						onKeyDown={(e) => onKey(e, [...keysEnter], () => handleSelectOption(option))}
-						className="c-search-dropdown__option"
-					>
-						<p className="c-search-dropdown__option-label u-text-ellipsis">{option.label}</p>
-					</li>
-				))}
-			</ul>
-		</li>
-	);
+	const selected = options.find(({ id }: SearchDropdownOption) => id === selectedOptionId);
 
 	return (
-		<ul
-			className={clsx('u-list-reset', 'c-search-dropdown', 'c-search-dropdown--selectable', {
-				'c-search-dropdown--open': isOpen,
-			})}
+		<Dropdown
+			id={DROPDOWN_ID}
+			isOpen={isOpen}
+			onOpen={() => setIsOpen(true)}
+			onClose={() => setIsOpen(false)}
+			menuClassName="c-search-dropdown"
+			triggerClassName="c-search-dropdown__trigger"
+			flyoutClassName="c-search-dropdown__flyout"
+			menuWidth="fit-trigger"
+			placement="bottom-start"
+			offset={0}
 		>
-			{renderSelectedOption()}
-			{renderAllOptions()}
-		</ul>
+			<DropdownButton>
+				<button
+					type="button"
+					className={clsx('c-search-dropdown__active', {
+						'c-search-dropdown__active--open': isOpen,
+					})}
+					aria-expanded={isOpen}
+					aria-controls={DROPDOWN_ID}
+				>
+					<div className="c-search-dropdown__active-content">
+						<p className="c-search-dropdown__active-label">{selected?.selectedLabel}</p>
+					</div>
+					<Icon
+						className={clsx('c-search-dropdown__active-icon', {
+							'c-search-dropdown__active-icon--open': isOpen,
+						})}
+						name="angleDown"
+					/>
+				</button>
+			</DropdownButton>
+			<DropdownContent>
+				{/* biome-ignore lint/a11y/useSemanticElements: Dropdown options */}
+				{/* biome-ignore lint/a11y/noNoninteractiveElementToInteractiveRole: Dropdown options */}
+				<ul className="u-list-reset c-search-dropdown__list" role="listbox">
+					{options.map((option: SearchDropdownOption) => (
+						<li
+							key={option.id}
+							// biome-ignore lint/a11y/useSemanticElements: Dropdown options
+							// biome-ignore lint/a11y/noNoninteractiveElementToInteractiveRole: Dropdown options
+							role="option"
+							tabIndex={isOpen ? 0 : -1}
+							aria-selected={selectedOptionId === option.id}
+							onClick={() => handleSelectOption(option)}
+							onKeyDown={(e) =>
+								onKey(e, [...keysEnter, ...keysSpacebar], () => {
+									if (keysSpacebar.includes(e.key)) {
+										e.preventDefault();
+									}
+									handleSelectOption(option);
+								})
+							}
+							className="c-search-dropdown__option"
+						>
+							<p className="c-search-dropdown__option-label u-text-ellipsis">{option.label}</p>
+						</li>
+					))}
+				</ul>
+			</DropdownContent>
+		</Dropdown>
 	);
 };
