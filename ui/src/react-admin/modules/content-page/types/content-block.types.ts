@@ -127,9 +127,21 @@ export interface PaddingFieldState {
 
 // CONTENT BLOCK CONFIG
 
-// if 1 block, errors is a string[]. If multiple, it is a string[] index by their stateIndex, so string[][].
-export type ContentBlockErrors = { [key: string]: (string | string[])[] };
+// Errors for a repeated field group (mechanism B, e.g. `elements`): one entry per
+// element index, each mapping an inner field key to its error messages.
+export type ContentBlockFieldGroupErrors = Record<string, string[]>[];
 
+// if 1 block, errors is a string[]. If multiple, it is a string[] index by their stateIndex, so string[][].
+// For a repeated field group the value is a ContentBlockFieldGroupErrors instead.
+export type ContentBlockErrors = {
+	[key: string]: (string | string[])[] | ContentBlockFieldGroupErrors;
+};
+
+/**
+ * @deprecated Legacy: bounds the array-valued `components.state` repetition mechanism (A).
+ * For new blocks use the `fieldGroup` + `repeat` mechanism (B) and put `min`/`max` on the
+ * `ContentBlockFieldGroup` instead. See `components/blocks/README.md`.
+ */
 export interface ContentBlockComponentsLimits {
 	min?: number;
 	max?: number;
@@ -175,6 +187,9 @@ export enum ContentBlockType {
 	AvoImageTextBackground = 'AVO_IMAGE_TEXT_BACKGROUND', // Avo
 	ScrollDownNudge = 'SCROLL_DOWN_NUDGE',
 	OverviewWithCarousel = 'OVERVIEW_WITH_CAROUSEL',
+	HomepageBanner = 'HOMEPAGE_BANNER',
+	HighlightText = 'HIGHLIGHT_TEXT',
+	ThemeReels = 'THEME_REELS',
 	OverviewThemes = 'OVERVIEW_THEMES',
 }
 
@@ -269,7 +284,14 @@ export interface HeadingBlockComponentState {
 	align: AlignOption;
 }
 
-export interface ImageBlockComponentState {
+export interface CopyrightComponentState {
+	copyrightTitle: string;
+	copyrightIconVisible: boolean;
+	copyrightText: string;
+}
+
+export interface ImageBlockComponentState
+	extends Omit<CopyrightComponentState, 'copyrightTitle' | 'copyrightText'> {
 	title: string;
 	text: string;
 	imageSource: string;
@@ -284,7 +306,7 @@ export interface ImageBlockComponentState {
 	buttonAlign?: AlignOption;
 }
 
-export interface ImageGridBlockComponentStateFields {
+export interface ImageGridBlockComponentStateFields extends CopyrightComponentState {
 	source: string;
 	title?: string;
 	text?: string;
@@ -317,7 +339,7 @@ export interface ButtonsBlockComponentState {
 	navigate?: (buttonAction: ButtonAction) => void;
 }
 
-export interface RichTextBlockComponentState {
+export interface RichTextBlockComponentState extends CopyrightComponentState {
 	content: string;
 	buttons?: ButtonsBlockComponentState[];
 }
@@ -545,7 +567,7 @@ export interface AvoImageTextBackgroundBlockComponentState {
 	buttonIconAlignment?: SimpleAlignOption;
 }
 
-export interface HetArchiefImageTextBackgroundBlockComponentState {
+export interface HetArchiefImageTextBackgroundBlockComponentState extends CopyrightComponentState {
 	heading: string;
 	headingType: HeadingTypeOption;
 	headingSize: HeadingSizeOption;

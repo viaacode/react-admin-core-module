@@ -25,6 +25,8 @@ import { Color, ContentBlockEditor, ContentBlockType } from '../../../types/cont
 import {
 	BLOCK_FIELD_DEFAULTS,
 	BLOCK_STATE_DEFAULTS,
+	COPYRIGHT_FIELDS,
+	COPYRIGHT_STATE,
 	PADDING_SINGLE_VALUE_FIELD,
 	TEXT_FIELD,
 } from '../defaults';
@@ -42,6 +44,7 @@ export const INITIAL_HET_ARCHIEF_IMAGE_TEXT_BACKGROUND_COMPONENTS_STATE =
 		imageAlignment: 'left-inside-page',
 		buttonLabel: '',
 		buttonIconAlignment: 'left',
+		...COPYRIGHT_STATE(),
 	});
 
 export const INITIAL_HET_ARCHIEF_IMAGE_TEXT_BACKGROUND_BLOCK_STATE =
@@ -155,6 +158,7 @@ export const HET_ARCHIEF_IMAGE_TEXT_BACKGROUND_BLOCK_CONFIG = (
 					validator: undefined,
 				},
 			},
+			...COPYRIGHT_FIELDS(),
 			buttonType: {
 				label: tText(
 					'admin/content-block/helpers/image-text-background/image-text-background___knop-type'

@@ -25,7 +25,7 @@ export const retrieveThemes = memoize(
 const parseThemes = (raw: Theme[]): PickerItem[] => {
 	return raw.map(
 		(theme: Theme): PickerItem => ({
-			label: theme.nameNl,
+			label: theme.slug,
 			...parsePickerItem(AvoCoreContentPickerType.IE_OBJECT_THEME, theme.id),
 		})
 	);

@@ -113,7 +113,7 @@ export class ContentPagesController {
 	): Promise<DbContentPage> {
 		try {
 			const user = sessionUser?.getUser();
-			return await this.contentPagesService.getContentPageByLanguageAndPathForUser(
+			const contentPage = await this.contentPagesService.getContentPageByLanguageAndPathForUser(
 				language || (user.language as Locale),
 				path,
 				user,
@@ -121,9 +121,13 @@ export class ContentPagesController {
 				ip,
 				onlyInfo === 'true'
 			);
+			if (!contentPage) {
+				throw new CustomError('ContentPage not found', null, {code: 'NOT_FOUND'}, 404);
+			}
+			return contentPage;
 			// biome-ignore lint/suspicious/noExplicitAny: error can be any type
 		} catch (err: any) {
-			if (err?.response?.additionalInfo?.code === 'NOT_FOUND') {
+			if (err?.response?.additionalInfo?.code === 'NOT_FOUND' || err?.statusCode === 404) {
 				throw new NotFoundException('The content page with path was not found');
 			}
 			const error = new CustomError('Failed to get content page by language and path', err, {

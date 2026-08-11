@@ -1,0 +1,119 @@
+@use "../../../../shared/styles/settings/variables" as variables;
+@use "../../../../shared/styles/mixins/pattern" as pattern;
+@use "../../../../shared/styles/mixins/typography" as typography;
+
+$pattern-height: 12rem;
+$pattern-height-mobile: 8rem;
+$pattern-repeat-count: 20;
+// How far the mobile pattern slots overshoot &__content's edge - see &__pattern-slot.
+$pattern-mobile-overshoot: 15rem;
+
+.c-block-highlight-text {
+	// clip-path (not overflow-x: hidden) avoids the overflow-x/y coupling rule that would
+	// otherwise turn overflow-y into "auto" and risk a vertical scrollbar.
+	clip-path: inset(0);
+	width: 100% !important;
+	max-width: none !important;
+
+	@media (max-width: variables.$g-bp4) {
+		padding: 0 calc(#{variables.$g-spacer-unit} * 2.5) !important;
+	}
+
+	// Reservation box only - carries no background of its own, so the space it reserves for
+	// the patterns (mobile only, see &-text and &__pattern-slot) reads as "outside" &-text,
+	// which is what the patterns need to touch.
+	&__content {
+		position: relative;
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		padding: 0;
+
+		@media (max-width: variables.$g-bp4) {
+			// Sized to match &__pattern-slot's height exactly so the patterns touch &-text with
+			// no gap - without this, .c-block-highlight-text's clip-path would cut the slots away.
+			padding: $pattern-height-mobile 0;
+		}
+
+		// The actual highlighted box - its own padding gives the text breathing room from the
+		// box's edges, independent of &__content's (pattern-reservation-only) padding above.
+		&-text {
+			position: relative;
+			min-height: $pattern-height;
+
+			background: var(--pattern-color, transparent);
+			padding: variables.$g-spacer-unit * 6;
+			@include typography.sofia-pro-body();
+
+			@media (max-width: variables.$g-bp4) {
+				padding: calc(#{variables.$g-spacer-unit} * 3) calc(#{variables.$g-spacer-unit} * 2.5) !important;
+			}
+		}
+	}
+
+	// The strip is always the same 5-shape cycle - rect, circle, circle, rect, circle - just
+	// entered at a different point per side (see pattern.pattern-side):
+	// - left:  enters at shape 5, nearest text -> circle, rect, circle, circle, rect
+	// - right: enters at shape 2, nearest text -> circle, circle, rect, circle, rect
+	&__pattern {
+		@include pattern.pattern-strip($pattern-height, $pattern-repeat-count);
+		height: $pattern-height;
+
+		// Aligned to &-text's top edge, not stretched to &__content's full (padded) height.
+		&--left {
+			top: 0;
+			right: 100%;
+			@include pattern.pattern-side(left, 5, $pattern-height);
+		}
+
+		// Aligned to &-text's bottom edge, not stretched from &__content's full (padded) height.
+		&--right {
+			bottom: 0;
+			left: 100%;
+			@include pattern.pattern-side(right, 2, $pattern-height);
+		}
+
+		// Below $g-bp4 the pattern moves from beside the text to above/below it (see &__pattern-slot).
+		@media (max-width: variables.$g-bp4) {
+			@include pattern.pattern-strip($pattern-height-mobile, $pattern-repeat-count);
+			height: $pattern-height-mobile;
+
+			&--left {
+				right: 0;
+				left: auto;
+				@include pattern.pattern-side(left, 5, $pattern-height-mobile);
+			}
+
+			&--right {
+				left: 0;
+				right: auto;
+				@include pattern.pattern-side(right, 2, $pattern-height-mobile);
+			}
+		}
+	}
+
+	// No-op on desktop. Below $g-bp4 it's the positioned, overflow-clipping box that caps
+	// &__pattern at 40% (top) / 30% (bottom) of &__content's width - the cap can't live on
+	// &__pattern itself without breaking the Chrome tiling-bug workaround above.
+	&__pattern-slot {
+		@media (max-width: variables.$g-bp4) {
+			position: absolute;
+			overflow: hidden;
+			height: $pattern-height-mobile;
+
+			// left/right overshoot to reach past avo2 Container's gutter to the true screen
+			// edge; width compensates so the inner (anchor) edge stays exactly at 40% / 30%.
+			&--top {
+				top: 0;
+				left: -$pattern-mobile-overshoot;
+				width: calc(40% + #{$pattern-mobile-overshoot});
+			}
+
+			&--bottom {
+				bottom: 0;
+				right: -$pattern-mobile-overshoot;
+				width: calc(30% + #{$pattern-mobile-overshoot});
+			}
+		}
+	}
+}

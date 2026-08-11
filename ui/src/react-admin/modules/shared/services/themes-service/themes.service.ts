@@ -2,7 +2,7 @@ import { stringifyUrl } from 'query-string';
 import { CustomError } from '~shared/helpers/custom-error';
 import { fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
 import { getProxyUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config';
-import type { Theme, ThemesResponse } from './themes.types';
+import type { Theme, ThemesResponse, ThemeWithObjects } from './themes.types';
 
 export class ThemesService {
 	private static getBaseUrl(): string {
@@ -42,6 +42,27 @@ export class ThemesService {
 			return response.items.filter((theme) => idSet.has(theme.id));
 		} catch (err) {
 			throw new CustomError('Failed to fetch themes by ids', err, { ids });
+		}
+	}
+
+	public static async fetchThemeWithObjects(
+		themeId: string | undefined
+	): Promise<ThemeWithObjects | undefined> {
+		if (!themeId) {
+			return undefined;
+		}
+		try {
+			return await fetchWithLogoutJson<ThemeWithObjects>(
+				stringifyUrl({
+					url: `${ThemesService.getBaseUrl()}/${themeId}/ie-objects`,
+					query: {
+						orderDirection: 'random',
+						resolveThumbnailUrl: true,
+					},
+				})
+			);
+		} catch (err) {
+			throw new CustomError('Failed to fetch theme with objects', err, { themeId });
 		}
 	}
 }

@@ -3,7 +3,23 @@ export interface Theme {
 	slug: string;
 	nameNl: string;
 	nameEn: string;
-	imageUrl: string | null;
+	imageUrl: string;
+	contentPagePathEn: string | null;
+	contentPagePathNl: string | null;
+	descriptionEn: string | null;
+	descriptionNl: string | null;
+}
+
+export interface ThemeWithObjects extends Theme {
+	ieObjects: {
+		id: string;
+		schemaIdentifier: string;
+		name: string;
+		format: string;
+		thumbnailUrl: string;
+		maintainerId: string;
+		maintainerName: string;
+	}[];
 }
 
 export interface ThemesResponse {

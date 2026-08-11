@@ -10,10 +10,17 @@ import type {
 } from '../../../types/content-block.types';
 import { ContentBlockEditor, ContentBlockType } from '../../../types/content-block.types';
 
-import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, FILE_FIELD, TEXT_FIELD } from '../defaults';
+import {
+	BLOCK_FIELD_DEFAULTS,
+	BLOCK_STATE_DEFAULTS,
+	COPYRIGHT_FIELDS,
+	FILE_FIELD,
+	TEXT_FIELD,
+} from '../defaults';
 
 export const INITIAL_IMAGE_COMPONENTS_STATE = (): ImageBlockComponentState => ({
 	title: '',
+	copyrightIconVisible: true,
 	text: '',
 	imageSource: '',
 	imageAlt: '',
@@ -37,13 +44,13 @@ export const IMAGE_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 	components: {
 		state: INITIAL_IMAGE_COMPONENTS_STATE(),
 		fields: {
-			title: TEXT_FIELD({
-				label: tText('admin/content-block/helpers/generators/image___bijschift-titel'),
-				validator: undefined,
-			}),
-			text: TEXT_FIELD({
-				label: tText('admin/content-block/helpers/generators/image___bijschrift-beschrijving'),
-				validator: undefined,
+			...COPYRIGHT_FIELDS({
+				title: {
+					fieldName: 'title',
+				},
+				text: {
+					fieldName: 'text',
+				},
 			}),
 			imageSource: FILE_FIELD(
 				tText('admin/content-block/helpers/generators/image___een-afbeelding-is-verplicht'),

@@ -6,6 +6,7 @@ import React from 'react';
 import type { AlignOption } from '~modules/content-page/types/content-block.types';
 
 import './BlockImage.scss';
+import { CopyrightAttribution } from '~shared/components/CopyrightAttribution';
 import { generateSmartLink, SmartLink } from '~shared/components/SmartLink/SmartLink';
 
 export interface BlockImageProps extends DefaultProps {
@@ -14,6 +15,7 @@ export interface BlockImageProps extends DefaultProps {
 	imageAction?: ButtonAction;
 	imageAlt?: string;
 	title?: string;
+	copyrightIconVisible?: boolean;
 	text?: string;
 	width?: 'page-header' | 'full-width' | string;
 	align?: AlignOptions;
@@ -31,6 +33,7 @@ export const BlockImage: FunctionComponent<BlockImageProps> = ({
 	imageAction,
 	imageAlt,
 	title = '',
+	copyrightIconVisible = false,
 	text = '',
 	width = '100%',
 	align = 'center',
@@ -95,12 +98,12 @@ export const BlockImage: FunctionComponent<BlockImageProps> = ({
 			</div>
 
 			{/* image author attribution */}
-			{(!!title || !!text) && (
-				<div className="a-block-image__annotation">
-					{title && <h3>&#169; {title}</h3>}
-					{text && <p className="a-block-image__text">{text}</p>}
-				</div>
-			)}
+			<CopyrightAttribution
+				title={title}
+				text={text}
+				showIcon={copyrightIconVisible}
+				className="a-block-image__annotation"
+			/>
 		</Container>
 	);
 };
