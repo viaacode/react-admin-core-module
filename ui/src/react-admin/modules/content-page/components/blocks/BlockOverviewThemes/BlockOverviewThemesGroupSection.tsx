@@ -16,6 +16,7 @@ import type { Theme } from '~shared/services/themes-service/themes.types';
 import { getThemeTileSpans, type ThemeTileSpan } from './getThemeTileSpans';
 import './BlockOverviewThemes.scss';
 import { keyBy } from 'es-toolkit/compat';
+import { BlockHeading } from '~content-blocks/BlockHeading';
 
 /**
  * Renders a single theme group with a full-bleed colored band behind the title and first grid
@@ -126,14 +127,14 @@ export const BlockOverviewThemesGroupSection: FunctionComponent<
 					{renderGroupShapes(groupIndex)}
 				</>
 			)}
-			{group.title &&
-				// Rendered as the semantic titleType tag directly (not via BlockHeading) so the
-				// heading level only affects HTML semantics, never the visual style.
-				React.createElement(
-					group.titleType || 'h2',
-					{ className: 'c-block-overview-themes__group-title' },
-					group.title
-				)}
+			{group.title && (
+				<BlockHeading
+					type={group.titleType || 'h2'}
+					className="c-block-overview-themes__group-title"
+				>
+					{group.title}
+				</BlockHeading>
+			)}
 			<div ref={gridRef} className="c-block-overview-themes__grid">
 				{resolvedThemes.map((theme, tileIndex) => {
 					const span = spans[tileIndex];
