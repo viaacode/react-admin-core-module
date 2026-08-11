@@ -236,6 +236,7 @@ export interface DefaultContentBlockState {
 	margin: PaddingFieldState;
 	userGroupIds: number[];
 	fullWidth?: boolean;
+	overlayNextBlock?: boolean; // Renders the block on top of the block below it instead of above it: https://meemoo.atlassian.net/browse/ARC-3822
 	anchor?: string; // Contains an id that the user can enter, so they can link to this block using the anchor-block buttons
 }
 
