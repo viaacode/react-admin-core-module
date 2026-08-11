@@ -16,6 +16,6 @@ export interface BlockOverviewThemesProps extends DefaultComponentProps {
 export interface BlockOverviewThemesGroupSectionProps {
 	group: BlockOverviewThemesGroup;
 	groupIndex: number;
-	themesById: Record<string, Theme>;
+	themes: Theme[];
 	bandColor: string;
 }

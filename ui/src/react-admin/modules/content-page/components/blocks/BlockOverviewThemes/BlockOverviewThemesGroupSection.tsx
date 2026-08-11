@@ -1,14 +1,21 @@
 import { Image } from '@viaa/avo2-components';
 import clsx from 'clsx';
 import { stringifyUrl } from 'query-string';
-import type { CSSProperties, FunctionComponent } from 'react';
-import React, { useLayoutEffect, useRef, useState } from 'react';
+import React, {
+	type CSSProperties,
+	type FunctionComponent,
+	useLayoutEffect,
+	useMemo,
+	useRef,
+	useState,
+} from 'react';
 import type { BlockOverviewThemesGroupSectionProps } from '~content-blocks/BlockOverviewThemes/BlockOverviewThemes.types.tsx';
 import { Link } from '~shared/components/Link/Link';
 import { ROUTE_PARTS } from '~shared/consts/routes';
 import type { Theme } from '~shared/services/themes-service/themes.types';
 import { getThemeTileSpans, type ThemeTileSpan } from './getThemeTileSpans';
 import './BlockOverviewThemes.scss';
+import { keyBy } from 'es-toolkit/compat';
 
 /**
  * Renders a single theme group with a full-bleed colored band behind the title and first grid
@@ -18,7 +25,7 @@ import './BlockOverviewThemes.scss';
  */
 export const BlockOverviewThemesGroupSection: FunctionComponent<
 	BlockOverviewThemesGroupSectionProps
-> = ({ group, groupIndex, themesById, bandColor }) => {
+> = ({ group, groupIndex, themes, bandColor }) => {
 	const gridRef = useRef<HTMLDivElement>(null);
 	const [bandHeight, setBandHeight] = useState<number | null>(null);
 
@@ -56,6 +63,7 @@ export const BlockOverviewThemesGroupSection: FunctionComponent<
 		return undefined;
 	};
 
+	const themesById = useMemo(() => keyBy(themes, (theme) => theme.id), [themes]);
 	const resolvedThemes = (group.themes || [])
 		.map((pickerItem) => themesById[pickerItem.value])
 		.filter((theme): theme is Theme => !!theme);
@@ -98,11 +106,11 @@ export const BlockOverviewThemesGroupSection: FunctionComponent<
 				<div
 					className="c-block-overview-themes__group-shape"
 					style={{ ...shapeStyles[groupIndex % 3][0], ...positionStyles[groupIndex % 3][0] }}
-				></div>
+				/>
 				<div
 					className="c-block-overview-themes__group-shape"
 					style={{ ...shapeStyles[groupIndex % 3][1], ...positionStyles[groupIndex % 3][1] }}
-				></div>
+				/>
 			</>
 		);
 	};

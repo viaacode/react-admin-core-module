@@ -1,5 +1,4 @@
 import clsx from 'clsx';
-import { keyBy } from 'es-toolkit';
 import type { FunctionComponent, ReactElement } from 'react';
 import React, { useMemo } from 'react';
 import type { BlockOverviewThemesProps } from '~content-blocks/BlockOverviewThemes/BlockOverviewThemes.types.tsx';
@@ -22,7 +21,6 @@ export const BlockOverviewThemes: FunctionComponent<BlockOverviewThemesProps> = 
 		[elements]
 	);
 	const { data: themes } = useGetThemesByIds(themeIds);
-	const themesById = useMemo(() => keyBy(themes || [], (theme) => theme.id), [themes]);
 
 	return (
 		<div className={clsx('c-block-overview-themes', className)}>
@@ -32,7 +30,7 @@ export const BlockOverviewThemes: FunctionComponent<BlockOverviewThemesProps> = 
 					key={`c-block-overview-themes__group-${groupIndex}`}
 					group={group}
 					groupIndex={groupIndex}
-					themesById={themesById}
+					themes={themes || []}
 					bandColor={GET_SECONDARY_BACKGROUND_COLOR_OPTIONS_ARCHIEF()[groupIndex].value}
 				/>
 			))}
