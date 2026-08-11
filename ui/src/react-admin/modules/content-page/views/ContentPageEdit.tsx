@@ -247,8 +247,7 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 					position: pasted.position ?? 0,
 					// A pasted block is a ContentBlockConfig (components = { state, fields }); fall
 					// back to a raw DB shape (components = state) for any other pasted payload.
-					components: (pasted.components?.state ??
-						pasted.components) as ContentBlockComponentState,
+					components: (pasted.components?.state ?? pasted.components) as ContentBlockComponentState,
 					block: (pasted.block?.state ?? pasted.block) as DefaultContentBlockState,
 				} as DbContentBlock,
 			]);
@@ -258,9 +257,7 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 			delete blockToAdd.id;
 
 			// Ensure block is added at the bottom of the page
-			blockToAdd.position = (
-				contentPageState?.currentContentPageInfo?.content_blocks || []
-			).length;
+			blockToAdd.position = (contentPageState?.currentContentPageInfo?.content_blocks || []).length;
 
 			// Duplicate the assets used in this content block, so it is no longer linked to the original content block
 			const newBlockConfigWithDuplicatedAssets =
