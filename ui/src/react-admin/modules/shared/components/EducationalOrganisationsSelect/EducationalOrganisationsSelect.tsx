@@ -3,7 +3,7 @@ import type { AvoEducationOrganizationOrganization } from '@viaa/avo2-types';
 import clsx from 'clsx';
 import { remove, uniq } from 'es-toolkit';
 import { pullAllBy } from 'es-toolkit/compat';
-import type { FunctionComponent, ReactText } from 'react';
+import type { FunctionComponent } from 'react';
 import React, { useEffect, useState } from 'react';
 import { AdminConfigManager } from '~core/config/config.class';
 import { ToastType } from '~core/config/config.types';
@@ -16,6 +16,8 @@ export interface Tag {
 	label: string;
 	id: string;
 }
+
+type ReactText = string | number;
 
 export interface EducationalOrganisationsSelectProps {
 	organisations: AvoEducationOrganizationOrganization[];

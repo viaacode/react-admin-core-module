@@ -7,7 +7,11 @@
   },
   "files": {
     "ignoreUnknown": false,
-    "includes": ["src/**", "scripts/**", "!src/react-admin/modules/shared/helpers/map-deep/map-deep.mocks.ts"]
+    "includes": [
+      "src/**",
+      "scripts/**",
+      "!src/react-admin/modules/shared/helpers/map-deep/map-deep.mocks.ts"
+    ]
   },
   "formatter": {
     "enabled": true,
@@ -27,6 +31,18 @@
       },
       "nursery": {
         "useUniqueElementIds": "off"
+      },
+      "style": {
+        "noParameterAssign": "error",
+        "useAsConstAssertion": "error",
+        "useDefaultParameterLast": "error",
+        "useEnumInitializers": "error",
+        "useSelfClosingElements": "error",
+        "useSingleVarDeclarator": "error",
+        "noUnusedTemplateLiteral": "error",
+        "useNumberNamespace": "error",
+        "noInferrableTypes": "error",
+        "noUselessElse": "error"
       }
     }
   },

@@ -41,7 +41,7 @@ export const BlockVideoTitleTextButton: FunctionComponent<BlockVideoTitleTextBut
 						</div>
 					</Column>
 					<Column size="2-6">
-						<div className="c-content">
+						<div className="c-rich-text-editor__content">
 							<ExpandableContainer collapsedHeight={collapsedHeight}>
 								{title && (
 									<h2>

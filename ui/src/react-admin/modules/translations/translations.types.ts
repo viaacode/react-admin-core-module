@@ -24,6 +24,7 @@ export interface MultiLanguageTranslationEntry {
 	key: Key;
 	values: Record<Locale, string>;
 	value_type: ValueType | null;
+	id: string;
 }
 
 export interface LanguageInfo {

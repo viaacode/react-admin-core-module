@@ -60,7 +60,12 @@ interface HetArchiefLoadingProps extends DefaultProps {
 	owner: string; // Used to identify which loader is shown
 }
 
-export function getAdminCoreConfig(navigateFunc: NavigateFunction): AdminConfig {
+export function getAdminCoreConfigForLocalTestApp(navigateFunc: NavigateFunction): AdminConfig {
+	if (window.location.host !== 'localhost:3400') {
+		console.log(
+			'This method should only be used for the local setup of the admin-core-ui. Please use ui/src/react-admin/core/config/config.class.ts - getConfig() for everything else'
+		);
+	}
 	return {
 		contentPage: {
 			availableContentBlocks: [
@@ -91,6 +96,7 @@ export function getAdminCoreConfig(navigateFunc: NavigateFunction): AdminConfig 
 				// ContentBlockType.OverviewNewspaperTitles,
 				// ContentBlockType.ContentEncloseGrid,
 				// ContentBlockType.Breadcrumbs,
+				ContentBlockType.OverviewWithCarousel,
 			],
 			defaultPageWidth: ContentPageWidth.LARGE,
 			onSaveContentPage: async (contentPageInfo: ContentPageInfo) => {
@@ -135,6 +141,7 @@ export function getAdminCoreConfig(navigateFunc: NavigateFunction): AdminConfig 
 				sortTable: { name: 'sort-table' },
 				arrowDown: { name: 'arrow-down' },
 				arrowRight: { name: 'arrow-right' },
+				arrowLeft: { name: 'arrow-left' },
 				chevronLeft: { name: 'chevron-left' },
 				check: { name: 'check' },
 				calendar: { name: 'calendar' },
@@ -391,5 +398,5 @@ export function getAdminCoreConfig(navigateFunc: NavigateFunction): AdminConfig 
 
 export function setAdminCoreConfig(navigateFunc: NavigateFunction) {
 	// only used for starting admin-core separately
-	AdminConfigManager.setConfig(getAdminCoreConfig(navigateFunc));
+	AdminConfigManager.setConfig(getAdminCoreConfigForLocalTestApp(navigateFunc));
 }

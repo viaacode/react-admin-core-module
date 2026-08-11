@@ -59,7 +59,7 @@ export const BlockImageTitleTextButton: FunctionComponent<BlockImageTitleTextBut
 						<Image src={imageSource} alt={imageDescription} />
 					</Column>
 					<Column size="2-8">
-						<div className="c-content">
+						<div className="c-rich-text-editor__content">
 							{title && <h2>{title}</h2>}
 							{renderText(subtitle, 'a-subtitle')}
 							{renderText(text)}

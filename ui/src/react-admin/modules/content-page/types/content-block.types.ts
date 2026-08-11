@@ -1,4 +1,3 @@
-import type { RichEditorState } from '@meemoo/react-components';
 import type {
 	ButtonAction,
 	ButtonType,
@@ -95,6 +94,18 @@ export enum Color {
 	Zinc = '#ADADAD',
 	SkyBlue = '#C3DDE6',
 	Juniper = '#678588',
+
+	// Tertiary colors
+	OldPink = '#9B6072',
+	Lavender = '#A293AF',
+	Lila = '#c6c2e0',
+	BlossomPink = '#E694B3',
+	Coral = '#E89B88',
+	LightBlue = '#BDDEE7',
+	Sage = '#91A9A7',
+	Pistachio = '#B8BE9A',
+	SandBeige = '#EDD6C4',
+	Mustard = '#EFCA6A',
 }
 
 export enum GradientColor {
@@ -116,9 +127,21 @@ export interface PaddingFieldState {
 
 // CONTENT BLOCK CONFIG
 
-// if 1 block, errors is a string[]. If multiple, it is a string[] index by their stateIndex, so string[][].
-export type ContentBlockErrors = { [key: string]: (string | string[])[] };
+// Errors for a repeated field group (mechanism B, e.g. `elements`): one entry per
+// element index, each mapping an inner field key to its error messages.
+export type ContentBlockFieldGroupErrors = Record<string, string[]>[];
 
+// if 1 block, errors is a string[]. If multiple, it is a string[] index by their stateIndex, so string[][].
+// For a repeated field group the value is a ContentBlockFieldGroupErrors instead.
+export type ContentBlockErrors = {
+	[key: string]: (string | string[])[] | ContentBlockFieldGroupErrors;
+};
+
+/**
+ * @deprecated Legacy: bounds the array-valued `components.state` repetition mechanism (A).
+ * For new blocks use the `fieldGroup` + `repeat` mechanism (B) and put `min`/`max` on the
+ * `ContentBlockFieldGroup` instead. See `components/blocks/README.md`.
+ */
 export interface ContentBlockComponentsLimits {
 	min?: number;
 	max?: number;
@@ -163,6 +186,10 @@ export enum ContentBlockType {
 	Breadcrumbs = 'BREADCRUMBS',
 	AvoImageTextBackground = 'AVO_IMAGE_TEXT_BACKGROUND', // Avo
 	ScrollDownNudge = 'SCROLL_DOWN_NUDGE',
+	OverviewWithCarousel = 'OVERVIEW_WITH_CAROUSEL',
+	HomepageBanner = 'HOMEPAGE_BANNER',
+	HighlightText = 'HIGHLIGHT_TEXT',
+	ThemeReels = 'THEME_REELS',
 }
 
 export enum ContentBlockEditor {
@@ -307,9 +334,6 @@ export interface ButtonsBlockComponentState {
 
 export interface RichTextBlockComponentState {
 	content: string;
-	// Each rich text editor state prop has to and with 'RichEditorStateKey'
-	// So this can be removed before saving the page to the database in ContentPageService.removeRichEditorStateRecursively
-	contentRichEditorState: RichEditorState | undefined;
 	buttons?: ButtonsBlockComponentState[];
 }
 

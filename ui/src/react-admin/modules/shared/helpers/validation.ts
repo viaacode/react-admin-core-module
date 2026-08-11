@@ -20,7 +20,7 @@ export const validateContentBlockField = (
 
 	if (errorArray.length) {
 		if (typeof stateIndex === 'number') {
-			const errorsByKey = [...(oldErrors[fieldKey] || [])];
+			const errorsByKey = [...((oldErrors[fieldKey] as (string | string[])[]) || [])];
 			errorsByKey[stateIndex] = errorArray;
 
 			return {
@@ -63,4 +63,14 @@ export function validateFlowplayerVideoUrl(url: string | null | undefined) {
 		return [tText('admin/shared/helpers/validation___video-url-moet-eindigen-met-m-3-u-8-of-mp-4')];
 	}
 	return [];
+}
+
+export function validateRequiredValue(value: string, emptyFieldValidatorMessage: string) {
+	const errorArray: string[] = [];
+
+	if (!value && emptyFieldValidatorMessage) {
+		errorArray.push(emptyFieldValidatorMessage);
+	}
+
+	return errorArray;
 }

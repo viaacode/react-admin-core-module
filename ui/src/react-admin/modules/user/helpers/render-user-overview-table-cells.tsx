@@ -7,7 +7,7 @@ import {
 	type AvoUserCommonUser,
 } from '@viaa/avo2-types';
 import { compact, isNil } from 'es-toolkit';
-import type { ReactNode, ReactText } from 'react';
+import type { ReactNode } from 'react';
 import { AdminConfigManager, ToastType } from '~core/config';
 import { hasTempAccess } from '~modules/user/helpers/has-temp-access';
 import type { Idp, UserOverviewTableCol, UserTableState } from '~modules/user/user.types';
@@ -23,6 +23,8 @@ import { stringsToTagList } from '~shared/helpers/strings-to-taglist';
 import { tHtml, tText } from '~shared/helpers/translation-functions';
 import { truncateTableValue } from '~shared/helpers/truncate';
 import { AVO, HET_ARCHIEF } from '~shared/types';
+
+type ReactText = string | number;
 
 const handleOptionClicked = (profileId: string) => {
 	navigator.clipboard.writeText(profileId);

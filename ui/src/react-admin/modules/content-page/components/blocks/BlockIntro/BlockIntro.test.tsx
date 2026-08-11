@@ -23,7 +23,7 @@ describe('<BlockIntro />', () => {
 	it('Should set the correct className', () => {
 		const output = render(BlockIntroExample);
 		expect(output.container.firstChild).toHaveClass(customClass);
-		expect(output.container.firstChild).toHaveClass('c-content');
+		expect(output.container.firstChild).toHaveClass('c-rich-text-editor__content');
 		expect(output.container.firstChild).toHaveClass('u-text-left');
 		expect(output.container.firstChild?.childNodes[0]).toHaveClass(
 			'o-container-vertical-title__title'

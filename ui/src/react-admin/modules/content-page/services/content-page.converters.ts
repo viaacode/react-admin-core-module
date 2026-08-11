@@ -1,9 +1,8 @@
-import { compact, isFunction, isPlainObject, sortBy } from 'es-toolkit';
+import { compact, sortBy } from 'es-toolkit';
 import { isEmpty } from 'es-toolkit/compat';
 import { ToastType } from '~core/config/config.types';
 import { CONTENT_BLOCK_CONFIG_MAP } from '~modules/content-page/const/content-block-config-map';
 import { TEMP_BLOCK_ID_PREFIX } from '~modules/content-page/const/content-page.consts';
-import { RichEditorStateKey } from '~modules/content-page/const/rich-text-editor.consts';
 import type {
 	ContentBlockConfig,
 	ContentBlockType,
@@ -14,7 +13,6 @@ import type {
 	DbContentPage,
 } from '~modules/content-page/types/content-pages.types';
 import { CustomError } from '~shared/helpers/custom-error';
-import { mapDeep } from '~shared/helpers/map-deep/map-deep';
 import { sanitizeHtml } from '~shared/helpers/sanitize';
 import { SanitizePreset } from '~shared/helpers/sanitize/presets';
 import { showToast } from '~shared/helpers/show-toast';
@@ -24,47 +22,8 @@ export function getContentPageDescriptionHtml(
 	contentPageInfo: Partial<ContentPageInfo> | undefined,
 	sanitizePreset: SanitizePreset = SanitizePreset.link
 ): string | null {
-	const descriptionHtml = contentPageInfo?.description_state
-		? contentPageInfo?.description_state.toHTML()
-		: contentPageInfo?.description || null;
+	const descriptionHtml = contentPageInfo?.description || null;
 	return descriptionHtml ? sanitizeHtml(descriptionHtml, sanitizePreset) : null;
-}
-
-/**
- * Remove rich text editor states, since they are also saved as html,
- * and we don't want those states to end up in the database
- * @param blockConfigs
- */
-export function convertRichTextEditorStatesToHtml(
-	blockConfigs: ContentBlockConfig[]
-): ContentBlockConfig[] {
-	return mapDeep(
-		blockConfigs,
-		// biome-ignore lint/suspicious/noExplicitAny: todo
-		(obj: any, key: string | number, value: any) => {
-			if (String(key).endsWith(RichEditorStateKey)) {
-				const htmlKey: string = String(key).substring(
-					0,
-					String(key).length - RichEditorStateKey.length
-				);
-				let htmlFromRichTextEditor: string | null = null;
-				if (value?.toHTML && isFunction(value.toHTML)) {
-					htmlFromRichTextEditor = value.toHTML();
-				}
-				obj[htmlKey] = sanitizeHtml(
-					htmlFromRichTextEditor || obj[htmlKey] || '',
-					SanitizePreset.full
-				);
-			} else if (!isPlainObject(value) && !Array.isArray(value)) {
-				obj[key] = value;
-			} else if (isPlainObject(value)) {
-				obj[key] = {};
-			} else {
-				obj[key] = [];
-			}
-		},
-		(key: string | number) => String(key).endsWith(RichEditorStateKey)
-	);
 }
 
 export function convertDbContentPagesToContentPageInfos(
@@ -149,20 +108,18 @@ export function convertContentPageInfoToDbContentPage(
 	const dbContentPage = {
 		...contentPageInfo,
 		description: getContentPageDescriptionHtml(contentPageInfo),
-		content_blocks: convertRichTextEditorStatesToHtml(contentPageInfo.content_blocks || []).map(
-			(contentBlock): DbContentBlock => {
-				return {
-					name: contentBlock.name,
-					id: contentBlock.unsaved ? undefined : contentBlock.id,
-					anchor: contentBlock.anchor,
-					type: contentBlock.type,
-					errors: contentBlock.errors,
-					position: contentBlock.position,
-					block: contentBlock.block.state,
-					components: contentBlock.components.state,
-				};
-			}
-		),
+		content_blocks: (contentPageInfo.content_blocks || []).map((contentBlock): DbContentBlock => {
+			return {
+				name: contentBlock.name,
+				id: contentBlock.unsaved ? undefined : contentBlock.id,
+				anchor: contentBlock.anchor,
+				type: contentBlock.type,
+				errors: contentBlock.errors,
+				position: contentBlock.position,
+				block: contentBlock.block.state,
+				components: contentBlock.components.state,
+			};
+		}),
 	} as DbContentPage;
 	delete dbContentPage.description_state;
 	return dbContentPage;

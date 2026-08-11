@@ -1,6 +1,12 @@
-/** biome-ignore-all lint/nursery/noNestedComponentDefinitions: Cell isn't a component but a property with capital letter */
-import type { RichEditorState } from '@meemoo/react-components';
-import { Button, PaginationBar, RichTextEditor, Table, TextInput } from '@meemoo/react-components';
+import {
+	Button,
+	type Column,
+	PaginationBar,
+	RichTextEditor,
+	type Row,
+	Table,
+	TextInput,
+} from '@meemoo/react-components';
 import { Spacer } from '@viaa/avo2-components';
 
 import { sortBy } from 'es-toolkit';
@@ -8,7 +14,6 @@ import { reverse } from 'es-toolkit/compat';
 import type { FunctionComponent, KeyboardEvent, ReactElement, ReactNode } from 'react';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import CopyToClipboard from 'react-copy-to-clipboard';
-import type { Row, TableOptions } from 'react-table';
 import { ToastType } from '~core/config/config.types';
 import { useGetAllTranslations } from '~modules/translations/hooks/use-get-all-translations';
 import {
@@ -36,6 +41,7 @@ import { useGetAllLanguages } from '../hooks/use-get-all-languages';
 import { TranslationsService } from '../translations.service';
 import './TranslationsOverview.scss';
 import { AvoSearchOrderDirection } from '@viaa/avo2-types';
+import { AdminConfigManager } from '~core/config';
 import { isHetArchief } from '~shared/helpers/is-hetarchief.ts';
 
 type OrderProp = `value_${Locale}` | 'id';
@@ -61,8 +67,7 @@ export const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> 
 	const [activeTranslationEntry, setActiveTranslationEntry] =
 		useState<MultiLanguageTranslationEntry | null>(null);
 	const [activeTranslationLanguage, setActiveTranslationLanguage] = useState<Locale>(Locale.Nl);
-	const [activeTranslationEditorState, setActiveTranslationEditorState] =
-		useState<RichEditorState | null>(null);
+	const [activeTranslationHtmlValue, setActiveTranslationHtmlValue] = useState<string | null>(null);
 	const [activeTranslationTextValue, setActiveTranslationTextValue] = useState<string | null>(null);
 
 	const [search, setSearch] = useState<string>('');
@@ -128,7 +133,7 @@ export const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> 
 			let value =
 				activeTranslationEntry.value_type === ValueType.TEXT
 					? activeTranslationTextValue || ''
-					: activeTranslationEditorState?.toHTML() || '';
+					: activeTranslationHtmlValue || '';
 
 			// Simplify value if only wrapped with <p></p> tag and otherwise no html
 			if (
@@ -155,7 +160,7 @@ export const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> 
 
 			setActiveTranslationEntry(null);
 			setActiveTranslationTextValue(null);
-			setActiveTranslationEditorState(null);
+			setActiveTranslationHtmlValue(null);
 
 			showToast({
 				title: tText('modules/translations/views/translations-overview___success'),
@@ -183,7 +188,7 @@ export const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> 
 	const sortFilters = useMemo(() => {
 		return [
 			{
-				id: orderProp,
+				id: orderProp as string,
 				desc: orderDirection !== AvoSearchOrderDirection.ASC,
 			},
 		];
@@ -245,14 +250,19 @@ export const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> 
 		);
 	};
 
-	const translationTableColumns = [
+	const translationTableColumns: Column<TranslationEntry | MultiLanguageTranslationEntry>[] = [
 		{
 			id: 'key',
-			Header: tHtml('modules/translations/views/translations-overview-v-2___id'),
-			canSort: true,
-			accessorFn: (translationEntry: TranslationEntry) => getFullKey(translationEntry),
-			Cell: ({ row }: { row: Row<TranslationEntry> }): ReactElement => {
-				const translationEntry: TranslationEntry = row.original;
+			header: () => tHtml('modules/translations/views/translations-overview-v-2___id'),
+			enableSorting: true,
+			accessorFn: (translationEntry: TranslationEntry | MultiLanguageTranslationEntry) =>
+				getFullKey(translationEntry as TranslationEntry),
+			cell: ({
+				row,
+			}: {
+				row: Row<TranslationEntry | MultiLanguageTranslationEntry>;
+			}): ReactElement => {
+				const translationEntry: TranslationEntry = row.original as TranslationEntry;
 				return (
 					<>
 						<div>
@@ -268,12 +278,16 @@ export const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> 
 		...(allLanguages || []).map((languageInfo) => {
 			return {
 				id: `value_${languageInfo.languageCode}`,
-				Header: GET_LANGUAGE_NAMES()[languageInfo.languageCode],
-				canSort: true,
-				accessorFn: (translationEntry: MultiLanguageTranslationEntry) =>
-					translationEntry.values[languageInfo.languageCode],
-				Cell: ({ row }: { row: Row<MultiLanguageTranslationEntry> }): ReactElement => {
-					const translationEntry = row.original;
+				header: GET_LANGUAGE_NAMES()[languageInfo.languageCode],
+				enableSorting: true,
+				accessorFn: (translationEntry: TranslationEntry | MultiLanguageTranslationEntry) =>
+					(translationEntry as MultiLanguageTranslationEntry).values[languageInfo.languageCode],
+				cell: ({
+					row,
+				}: {
+					row: Row<TranslationEntry | MultiLanguageTranslationEntry>;
+				}): ReactElement => {
+					const translationEntry = row.original as MultiLanguageTranslationEntry;
 					const value = translationEntry.values[languageInfo.languageCode as Locale];
 
 					return (
@@ -293,7 +307,7 @@ export const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> 
 								<Html
 									content={value}
 									sanitizePreset={SanitizePreset.link}
-									className="c-content"
+									className="c-rich-text-editor__content"
 								></Html>
 							)}
 							{translationEntry.value_type === ValueType.TEXT && <span>{value}</span>}
@@ -319,18 +333,17 @@ export const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> 
 		}
 		return (
 			<>
-				<Table
-					options={
-						{
-							columns: translationTableColumns,
-							data: filteredAndPaginatedTranslations,
-							initialState: {
+				<Table<TranslationEntry | MultiLanguageTranslationEntry>
+					options={{
+						columns: translationTableColumns,
+						data: filteredAndPaginatedTranslations,
+						initialState: {
+							pagination: {
 								pageSize: TRANSLATIONS_PER_PAGE,
-								sortBy: sortFilters,
 							},
-							// biome-ignore lint/suspicious/noExplicitAny: todo
-						} as TableOptions<any>
-					}
+							sorting: sortFilters,
+						},
+					}}
 					onSortChange={handleSortChange}
 					sortingIcons={sortingIcons}
 					pagination={getPagination}
@@ -369,10 +382,10 @@ export const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> 
 				</CopyToClipboard>
 				{activeTranslationEntry.value_type === ValueType.HTML && (
 					<RichTextEditor
-						onChange={setActiveTranslationEditorState}
-						state={activeTranslationEditorState || undefined}
-						initialHtml={activeTranslationEntry.values[activeTranslationLanguage]}
+						value={activeTranslationTextValue || undefined}
+						onChange={setActiveTranslationTextValue}
 						controls={RICH_TEXT_EDITOR_OPTIONS}
+						locale={AdminConfigManager.getConfig().locale}
 					></RichTextEditor>
 				)}
 				{activeTranslationEntry.value_type === ValueType.TEXT && (
@@ -417,7 +430,6 @@ export const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> 
 				onClose: () => {
 					setActiveTranslationEntry(null);
 					setActiveTranslationTextValue(null);
-					setActiveTranslationEditorState(null);
 				},
 			})}
 		</div>

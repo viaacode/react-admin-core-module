@@ -36,14 +36,14 @@ describe('<BlockRichText />', () => {
 
 	it('Should set the correct className', () => {
 		const { container } = render(SingleColumnExample);
-		const contentContainer = container.querySelector('.c-content');
+		const contentContainer = container.querySelector('.c-rich-text-editor__content');
 		expect(container.firstChild).toHaveClass(customClass);
 		expect(contentContainer).not.toBeNull();
 	});
 
 	it('Should create multiple columns', () => {
 		const { container } = render(TwoColumnExample);
-		const columns = container.querySelectorAll('.c-content');
+		const columns = container.querySelectorAll('.c-rich-text-editor__content');
 		expect(columns.length).toBe(2);
 	});
 });

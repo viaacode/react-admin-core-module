@@ -1,10 +1,6 @@
 import type { RichTextEditorControl } from '@meemoo/react-components';
 
-export const RICH_TEXT_EDITOR_OPTIONS_ALIGN: RichTextEditorControl[] = [
-	'separator',
-	'text-align',
-	'editHtml',
-];
+export const RICH_TEXT_EDITOR_OPTIONS_ALIGN: RichTextEditorControl[] = ['separator', 'text-align'];
 
 export const RICH_TEXT_EDITOR_OPTIONS_BASE: RichTextEditorControl[] = [
 	'fullscreen',
@@ -31,15 +27,6 @@ export const RICH_TEXT_EDITOR_OPTIONS_DEFAULT: RichTextEditorControl[] = [
 	'remove-styles',
 ];
 
-// Avo Eind redacteur, Educative Author & Partners
-export const RICH_TEXT_EDITOR_OPTIONS_AUTHOR: RichTextEditorControl[] = [
-	...RICH_TEXT_EDITOR_OPTIONS_BASE,
-	'separator',
-	'link',
-	'separator',
-	'remove-styles',
-];
-
 // Admin
 export const RICH_TEXT_EDITOR_OPTIONS_FULL: RichTextEditorControl[] = [
 	...RICH_TEXT_EDITOR_OPTIONS_BASE,
@@ -54,7 +41,7 @@ export const RICH_TEXT_EDITOR_OPTIONS_FULL: RichTextEditorControl[] = [
 	'table',
 	'separator',
 	'remove-styles',
-	'editHtml',
+	'edit-html',
 ];
 
 export const RICH_TEXT_EDITOR_OPTIONS_FULL_WITHOUT_ALIGN: (
@@ -86,45 +73,5 @@ export const RICH_TEXT_EDITOR_OPTIONS_FULL_WITHOUT_ALIGN: (
 	'table',
 	'separator',
 	'remove-styles',
-	'editHtml',
-];
-
-export const RICH_TEXT_EDITOR_OPTIONS_DEFAULT_NO_TITLES: (
-	| RichTextEditorControl[]
-	| RichTextEditorControl
-)[] = [
-	'undo',
-	'redo',
-	'separator',
-	'bold',
-	'italic',
-	'strike-through',
-	'underline',
-	'separator',
-	'list-ul',
-	'list-ol',
-	'separator',
-	'subscript',
-	'superscript',
-	'separator',
-	'hr',
-	'separator',
-	'remove-styles',
-];
-
-export const RICH_TEXT_EDITOR_OPTIONS_BUNDLE_DESCRIPTION: (
-	| RichTextEditorControl[]
-	| RichTextEditorControl
-)[] = [
-	'bold',
-	'italic',
-	'strike-through',
-	'underline',
-	'separator',
-	'remove-styles',
-	'separator',
-	'link',
-	'separator',
-	'undo',
-	'redo',
+	'edit-html',
 ];

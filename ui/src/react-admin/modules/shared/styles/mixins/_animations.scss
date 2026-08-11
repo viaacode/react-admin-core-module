@@ -1,0 +1,9 @@
+@mixin zoom-in-animation {
+	transform: scale(1.1);
+}
+
+@mixin zoom-in-transition {
+	transition: transform 0.5s ease-out;
+}
+
+

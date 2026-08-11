@@ -3,7 +3,7 @@ import {
 	FormControl,
 	MultiSelect,
 	ReactSelect,
-	RichTextEditorWithInternalState,
+	RichTextEditor,
 	TextInput,
 } from '@meemoo/react-components';
 import { format } from 'date-fns';
@@ -13,6 +13,7 @@ import type { FunctionComponent } from 'react';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import DatePicker from 'react-datepicker';
 import { ValidationError } from 'yup';
+import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
 import { getDatePickerDefaultProps } from '~modules/content-page/components/DatePicker/DatePicker.consts';
 import { MaintenanceAlertsService } from '~modules/maintenance-alerts/maintenance-alerts.service';
@@ -344,7 +345,7 @@ const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProp
 				errors={[errors.message]}
 				key={currentMaintenanceAlert?.id}
 			>
-				<RichTextEditorWithInternalState
+				<RichTextEditor
 					value={currentMaintenanceAlert?.message}
 					controls={RICH_TEXT_EDITOR_OPTIONS}
 					key={maintenanceAlert?.id}
@@ -355,7 +356,8 @@ const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProp
 						});
 					}}
 					onBlur={isFormValid}
-				></RichTextEditorWithInternalState>
+					locale={AdminConfigManager.getConfig().locale}
+				></RichTextEditor>
 			</FormControl>
 		);
 	}, [currentMaintenanceAlert, errors.message, maintenanceAlert?.id, isFormValid]);
@@ -441,7 +443,7 @@ const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProp
 					id="new-alert-from-date"
 					name="fromDate"
 					onBlur={isFormValid}
-					onChange={handleNewFromDate}
+					onChange={handleNewFromDate as (date: Date | null) => void}
 					selected={
 						currentMaintenanceAlert?.fromDate ? new Date(currentMaintenanceAlert.fromDate) : null
 					}

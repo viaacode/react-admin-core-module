@@ -9,11 +9,12 @@ import {
 } from '~modules/content-page/const/get-color-options';
 
 import type { FileUploadProps } from '~shared/components/FileUpload/FileUpload';
-import type { RichTextEditorWithInternalStateWrapperProps } from '~shared/components/RichTextEditorWithInternalStateWrapper/RichTextEditorWithInternalStateWrapper';
+import type { RichTextEditorWrapperProps } from '~shared/components/RichTextEditorWrapper/RichTextEditorWrapper';
 import type { UserGroupSelectProps } from '~shared/components/UserGroupSelect/UserGroupSelect';
 import { RICH_TEXT_EDITOR_OPTIONS_FULL_WITHOUT_ALIGN } from '~shared/consts/rich-text-editor.consts';
 import { isAvo } from '~shared/helpers/is-avo';
 import { tText } from '~shared/helpers/translation-functions';
+import { validateRequiredValue } from '~shared/helpers/validation.ts';
 import { SpecialUserGroups } from '~shared/types/authentication.types';
 import type {
 	ContentBlockField,
@@ -149,22 +150,13 @@ export const TEXT_FIELD = (
 ): ContentBlockField => ({
 	label: tText('admin/content-block/helpers/generators/defaults___tekst'),
 	editorType: ContentBlockEditor.TextInput, // Default text input type. also supported: textarea and rich text editor
-	validator: (value: string) => {
-		const errorArray: string[] = [];
-
-		if (!value && emptyFieldValidatorMessage) {
-			errorArray.push(
-				emptyFieldValidatorMessage ||
-					tText('admin/content-block/helpers/generators/defaults___tekst-is-verplicht')
-			);
-		}
-
-		return errorArray;
-	},
+	validator: emptyFieldValidatorMessage
+		? (value: string) => validateRequiredValue(value, emptyFieldValidatorMessage)
+		: undefined,
 	editorProps: {
 		controls: [...RICH_TEXT_EDITOR_OPTIONS_FULL_WITHOUT_ALIGN, 'media'],
 		fileType: 'CONTENT_BLOCK_IMAGE',
-	} as Partial<RichTextEditorWithInternalStateWrapperProps>,
+	} as Partial<RichTextEditorWrapperProps>,
 	...propOverride,
 });
 
@@ -176,15 +168,7 @@ export const FILE_FIELD = (
 ): ContentBlockField => ({
 	label: tText('admin/content-block/helpers/generators/defaults___bestand'),
 	editorType: ContentBlockEditor.FileUpload,
-	validator: (value: string) => {
-		const errorArray: string[] = [];
-
-		if (!value) {
-			errorArray.push(emptyFieldValidatorMessage);
-		}
-
-		return errorArray;
-	},
+	validator: (value: string) => validateRequiredValue(value, emptyFieldValidatorMessage),
 	editorProps: { assetType: 'CONTENT_BLOCK_IMAGE' } as FileUploadProps,
 	...propOverride,
 });
@@ -197,15 +181,7 @@ export const ITEM_PICKER_FIELD = (
 ): ContentBlockField => ({
 	label: tText('admin/content-block/helpers/generators/media-player___video-of-audio-item'),
 	editorType: ContentBlockEditor.ContentPicker,
-	validator: (value: string) => {
-		const errorArray: string[] = [];
-
-		if (!value) {
-			errorArray.push(emptyFieldValidatorMessage);
-		}
-
-		return errorArray;
-	},
+	validator: (value: string) => validateRequiredValue(value, emptyFieldValidatorMessage),
 	editorProps: {
 		allowedTypes: ['ITEM'],
 		hideTargetSwitch: true,

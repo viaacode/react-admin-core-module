@@ -247,7 +247,7 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 									</Spacer>
 								</Column>
 								<Column size="2-7">
-									<div className="c-content">
+									<div className="c-rich-text-editor__content">
 										{showTitle &&
 											renderLink(
 												{

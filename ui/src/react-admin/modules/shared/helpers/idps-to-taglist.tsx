@@ -1,8 +1,6 @@
 import type { TagOption } from '@viaa/avo2-components';
 import { TagList } from '@viaa/avo2-components';
 import { noop } from 'es-toolkit';
-import type { ReactText } from 'react';
-import React from 'react';
 import type { Idp } from '~modules/user/user.types';
 
 /* eslint-disable @typescript-eslint/no-unused-vars */
@@ -14,6 +12,7 @@ export const IDP_COLORS: { [idp in Idp]: string } = {
 	MEEMOO: '#00c8aa',
 };
 
+type ReactText = string | number;
 /* eslint-enable @typescript-eslint/no-unused-vars */
 
 export function idpMapsToTagList(

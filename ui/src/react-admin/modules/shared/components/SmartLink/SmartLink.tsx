@@ -1,16 +1,17 @@
+import { keysSpacebar, onKey } from '@meemoo/react-components';
 import type { ButtonAction } from '@viaa/avo2-components';
 import type { AvoCoreContentPickerType } from '@viaa/avo2-types';
 import clsx from 'clsx';
 import { map } from 'es-toolkit/compat';
 import { stringify } from 'query-string';
-import {
+import React, {
 	type FunctionComponent,
+	type KeyboardEvent,
 	type ReactElement,
 	type ReactNode,
 	useEffect,
 	useState,
 } from 'react';
-import React from 'react';
 import { AdminConfigManager } from '~core/config';
 import { getAdminCoreApiUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config';
 import { isServerSideRendering } from '~shared/helpers/routing/is-server-side-rendering';
@@ -27,6 +28,7 @@ export interface SmartLinkProps {
 	ariaLabel?: string;
 	className?: string;
 	children: ReactNode;
+	tabIndex?: number;
 }
 
 export const SmartLink: FunctionComponent<SmartLinkProps> = ({
@@ -36,6 +38,7 @@ export const SmartLink: FunctionComponent<SmartLinkProps> = ({
 	children,
 	className,
 	ariaLabel,
+	tabIndex,
 }) => {
 	const location = useLocation();
 
@@ -67,6 +70,11 @@ export const SmartLink: FunctionComponent<SmartLinkProps> = ({
 			fullUrl = fullUrl.replace(clientUrlWithoutProtocol, '');
 		}
 
+		const onKeyUpHandler = (evt: KeyboardEvent<HTMLElement>) =>
+			onKey(evt, keysSpacebar, () => {
+				(evt.target as HTMLElement).click();
+			});
+
 		switch (target) {
 			case LinkTarget.Self:
 				// Open inside same tab
@@ -80,6 +88,8 @@ export const SmartLink: FunctionComponent<SmartLinkProps> = ({
 							aria-label={ariaLabel}
 							className={clsx(className, { 'a-link__no-styles': removeStyles })}
 							onClick={() => AdminConfigManager.getConfig().handlers.onExternalLink(fullUrl)}
+							onKeyUp={onKeyUpHandler}
+							tabIndex={tabIndex}
 						>
 							{children}
 						</a>
@@ -102,6 +112,8 @@ export const SmartLink: FunctionComponent<SmartLinkProps> = ({
 								scrollTo({ top: 0 });
 							}
 						}}
+						onKeyUp={(evt) => onKeyUpHandler(evt as unknown as KeyboardEvent<HTMLElement>)}
+						tabIndex={tabIndex}
 					>
 						{children}
 					</Link>
@@ -118,6 +130,8 @@ export const SmartLink: FunctionComponent<SmartLinkProps> = ({
 							title={title}
 							className={clsx(className, { 'a-link__no-styles': removeStyles })}
 							onClick={() => AdminConfigManager.getConfig().handlers.onExternalLink(fullUrl)}
+							onKeyUp={onKeyUpHandler}
+							tabIndex={tabIndex}
 						>
 							{children}
 						</a>
@@ -132,6 +146,8 @@ export const SmartLink: FunctionComponent<SmartLinkProps> = ({
 						title={title}
 						className={clsx(className, { 'a-link__no-styles': removeStyles })}
 						onClick={() => AdminConfigManager.getConfig().handlers.onExternalLink(fullUrl)}
+						onKeyUp={onKeyUpHandler}
+						tabIndex={tabIndex}
 					>
 						{children}
 					</a>
@@ -250,7 +266,8 @@ export const generateSmartLink = (
 	action: ButtonAction | null | undefined,
 	children: ReactNode,
 	title?: string,
-	className?: string
+	className?: string,
+	tabIndex?: number
 	// biome-ignore lint/suspicious/noExplicitAny: todo
 ): ReactElement<any, any> | null => {
 	return (
@@ -259,6 +276,7 @@ export const generateSmartLink = (
 			title={title}
 			className={className}
 			key={`smart-link-${action?.value}-${title}-${className}`}
+			tabIndex={tabIndex}
 		>
 			{children}
 		</SmartLink>

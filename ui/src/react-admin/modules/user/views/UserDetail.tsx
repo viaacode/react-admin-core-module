@@ -19,7 +19,7 @@ import {
 import { differenceInMilliseconds, formatDuration, intervalToDuration, parseISO } from 'date-fns';
 import { nlBE } from 'date-fns/locale';
 import { compact } from 'es-toolkit';
-import type { FC, ReactText } from 'react';
+import type { FC } from 'react';
 import React, { useCallback, useEffect, useState } from 'react';
 import { AdminConfigManager, ToastType } from '~core/config';
 import { useGetProfileById } from '~modules/user/hooks/use-get-profile-by-id';
@@ -47,6 +47,8 @@ import TempAccessModal from '../components/TempAccessModal';
 import UserDeleteModal from '../components/UserDeleteModal';
 import { UserService } from '../user.service';
 import { Idp } from '../user.types';
+
+type ReactText = string | number;
 
 export interface UserDetailProps {
 	id: string | null;

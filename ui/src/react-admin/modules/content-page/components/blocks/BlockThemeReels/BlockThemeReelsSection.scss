@@ -1,0 +1,256 @@
+@use "sass:math";
+@use "../../../../shared/styles/settings/variables" as variables;
+@use "../../../../shared/styles/settings/colors" as colors;
+@use '../../../../shared/styles/mixins/typography' as typography;
+@use '../../../../shared/styles/mixins/animations' as animations;
+
+.c-block-theme-reels-section {
+	.c-block-theme-reels-section__header {
+		width: 100%;
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: variables.$g-spacer-unit * 2;
+		margin-bottom: 2.2rem;
+		justify-content: space-between;
+
+		@media (max-width: variables.$g-bp2) {
+			margin-bottom: variables.$g-spacer-unit * 3;
+			gap: variables.$g-spacer-unit * 1.5;
+		}
+
+		&-title {
+			color: colors.$color-gray-1000;
+			width: fit-content;
+			@include typography.truncate();
+			@include typography.sofia-pro-heading-lg();
+
+			@media (max-width: variables.$g-bp2) {
+				line-height: 2.6rem;
+			}
+		}
+
+		&-subtitle {
+			@include typography.truncate-after-x-lines(3);
+			@include typography.sofia-pro-body-sm();
+			color: colors.$neutral;
+			width: 100%;
+		}
+
+		&-actions {
+			display: flex;
+			align-items: center;
+			gap: variables.$g-spacer-unit * 2;
+			min-width: 0;
+
+			.c-button {
+				margin: 0 !important;
+			}
+
+			// Only the buttonLabel button (a direct child) may shrink/truncate,
+			// the prev/next nav group keeps its natural size.
+			> a {
+				min-width: 0;
+				flex-shrink: 1;
+
+				> .c-button {
+					min-width: 0;
+					width: 100%;
+
+					.c-button__content {
+						min-width: 0;
+						width: 100%;
+					}
+
+					.c-button__label {
+						font-weight: 700; // since sm buttons loose this
+						@include typography.truncate();
+					}
+				}
+			}
+		}
+
+		&-nav {
+			display: flex;
+			align-items: center;
+			gap: variables.$g-spacer-unit;
+			margin-left: auto;
+			flex-shrink: 0;
+		}
+
+		@media (max-width: variables.$g-bp2) {
+			flex-direction: column;
+			align-items: stretch;
+
+			&-title {
+				margin-right: 0;
+			}
+
+			&-actions {
+				width: 100%;
+			}
+		}
+	}
+
+	&__wrapper {
+		overflow: visible !important;
+	}
+
+	&__slide {
+		display: flex !important;
+		flex-direction: column;
+		height: 26rem !important;
+		width: 28rem;
+		gap: variables.$g-spacer-unit * 2;
+
+		@media (max-width: variables.$g-bp2) {
+			height: 19.6rem !important;
+			width: 20rem;
+			gap: variables.$g-spacer-unit;
+		}
+
+		&--first {
+			width: 46.8rem;
+
+			.c-block-theme-reels-section__slide-description-text{
+				@include typography.truncate-after-x-lines(3);
+				color: colors.$neutral;
+				width: 100%;
+			}
+		}
+
+		a {
+			text-decoration: none;
+
+			&:focus-visible {
+				outline: 2px solid colors.$color-ocean-green;
+			}
+		}
+
+		&:hover:not(&--first) {
+			.c-button,
+			.c-block-theme-reels-section__slide-image > img {
+				@include animations.zoom-in-animation;
+			}
+		}
+
+		&-image {
+			flex: auto;
+			width: 100%;
+			height: 100%;
+			max-height: 16rem;
+			overflow: hidden;
+
+			@media (max-width: variables.$g-bp2) {
+				max-height: 12rem;
+			}
+
+			> img {
+				object-fit: cover;
+				width: 100%;
+				height: 100%;
+				object-position: center;
+				@include animations.zoom-in-transition;
+			}
+
+			&-placeholder {
+				background-color: colors.$color-gray-100;
+				align-content: center;
+
+				.c-button {
+					margin: auto !important;
+					background-color: colors.$color-gray-1000;
+					border-color: colors.$color-gray-1000;
+					color: colors.$white;
+					pointer-events: none;
+					@include animations.zoom-in-transition;
+
+					&.c-block-theme-reels-section__slide-image-placeholder-icon {
+						background-color: colors.$white;
+						border-color: colors.$white;
+						color: colors.$color-teal-bright;
+					}
+
+					.c-button__icon {
+						font-size: 2.4rem;
+					}
+				}
+			}
+
+			&--format-newspaper {
+				> img {
+					object-position: top center;
+				}
+			}
+
+			// Reveals the image through a strip of 4 shapes (I = rectangle, O = circle - circle
+			// diameter equals the strip height, rectangle width is half of it). Everything
+			// outside the shapes shows this wrapper's background-color instead of the image.
+			&--mask-IOOI,
+			&--mask-IOIO,
+			&--mask-OIOI {
+				> img {
+					-webkit-mask-repeat: no-repeat;
+					mask-repeat: no-repeat;
+					-webkit-mask-position: center;
+					mask-position: center;
+					-webkit-mask-size: 100% auto;
+					mask-size: 100% auto;
+				}
+			}
+
+			&--mask-IOOI > img {
+				-webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 6 2'%3E%3Crect x='0' y='0' width='1' height='2'/%3E%3Ccircle cx='2' cy='1' r='1'/%3E%3Ccircle cx='4' cy='1' r='1'/%3E%3Crect x='5' y='0' width='1' height='2'/%3E%3C/svg%3E");
+				mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 6 2'%3E%3Crect x='0' y='0' width='1' height='2'/%3E%3Ccircle cx='2' cy='1' r='1'/%3E%3Ccircle cx='4' cy='1' r='1'/%3E%3Crect x='5' y='0' width='1' height='2'/%3E%3C/svg%3E");
+			}
+
+			&--mask-IOIO > img {
+				-webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 6 2'%3E%3Crect x='0' y='0' width='1' height='2'/%3E%3Ccircle cx='2' cy='1' r='1'/%3E%3Crect x='3' y='0' width='1' height='2'/%3E%3Ccircle cx='5' cy='1' r='1'/%3E%3C/svg%3E");
+				mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 6 2'%3E%3Crect x='0' y='0' width='1' height='2'/%3E%3Ccircle cx='2' cy='1' r='1'/%3E%3Crect x='3' y='0' width='1' height='2'/%3E%3Ccircle cx='5' cy='1' r='1'/%3E%3C/svg%3E");
+			}
+
+			&--mask-OIOI > img {
+				-webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 6 2'%3E%3Ccircle cx='1' cy='1' r='1'/%3E%3Crect x='2' y='0' width='1' height='2'/%3E%3Ccircle cx='4' cy='1' r='1'/%3E%3Crect x='5' y='0' width='1' height='2'/%3E%3C/svg%3E");
+				mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 6 2'%3E%3Ccircle cx='1' cy='1' r='1'/%3E%3Crect x='2' y='0' width='1' height='2'/%3E%3Ccircle cx='4' cy='1' r='1'/%3E%3Crect x='5' y='0' width='1' height='2'/%3E%3C/svg%3E");
+			}
+		}
+
+		&-description {
+			flex: 1 1 auto;
+			min-height: 0;
+			display: flex;
+			align-items: end;
+			padding: 0;
+			flex-direction: column;
+			gap: variables.$g-spacer-unit;
+
+			&-title {
+				color: colors.$color-gray-1000;
+				@include typography.sofia-pro-heading-md();
+
+				width: 100%;
+				@include typography.truncate-after-x-lines(2);
+
+				@media (max-width: variables.$g-bp2) {
+					font-size: 1.4rem;
+					line-height: 2rem;
+				}
+			}
+
+			&-text {
+				@include typography.truncate();
+				width: 100%;
+
+				color: colors.$color-gray-1000;
+				@include typography.sofia-pro-body-sm();
+
+
+				@media (max-width: variables.$g-bp2) {
+					font-size: 1.4rem;
+					line-height: 2rem;
+				}
+			}
+		}
+	}
+}

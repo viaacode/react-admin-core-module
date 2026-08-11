@@ -150,6 +150,7 @@ export const HET_ARCHIEF_IMAGE_TEXT_BACKGROUND_BLOCK_CONFIG = (
 				label: tText(
 					'modules/content-page/components/blocks/block-het-archief-image-text-background/block-het-archief-image-text-background___afbeelding-alt-tekst'
 				),
+				editorType: ContentBlockEditor.TextInput,
 				editorProps: {
 					validator: undefined,
 				},
