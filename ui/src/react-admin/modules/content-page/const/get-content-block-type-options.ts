@@ -79,7 +79,7 @@ export const GET_CONTENT_BLOCK_TYPE_OPTIONS: () => SelectOption<string>[] = () =
 			value: ContentBlockType.Spotlight,
 		},
 		{
-			label: tText('admin/content-block/content-block___quote'),
+			label: tText('admin/content-block/content-block___quote', {}, [AVO]),
 			value: ContentBlockType.AvoQuote,
 		},
 		{
