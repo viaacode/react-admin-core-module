@@ -18,7 +18,9 @@ import {
 	type ContentBlockConfig,
 	ContentBlockEditor,
 	type ContentBlockField,
+	type ContentBlockFieldGroup,
 	ContentBlockType,
+	DEFAULT_BUTTON_PROPS,
 	type DefaultContentBlockState,
 } from '~modules/content-page/types/content-block.types';
 import type { FileUploadProps } from '~shared/components/FileUpload/FileUpload.tsx';
@@ -40,9 +42,7 @@ const INITIAL_HERO_CAROUSEL_ELEMENT_STATE = (): HeroCarouselBlockComponentState 
 
 export const INITIAL_HERO_CAROUSEL_COMPONENTS_STATE = () => ({
 	title: '',
-	titleType: 'h2',
-	buttonLabel: '',
-	buttonAltTitle: '',
+	subtitles: [],
 	elements: [INITIAL_HERO_CAROUSEL_ELEMENT_STATE()],
 });
 
@@ -87,6 +87,65 @@ export const HERO_CAROUSEL_CONFIG = (position = 0): ContentBlockConfig => ({
 	components: {
 		state: INITIAL_HERO_CAROUSEL_COMPONENTS_STATE(),
 		fields: {
+			title: TEXT_FIELD(
+				{
+					label: tText(
+						'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel___titel',
+						{},
+						[HET_ARCHIEF]
+					),
+				},
+				tText(
+					'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel___is-verplicht',
+					{},
+					[HET_ARCHIEF]
+				)
+			),
+			subtitles: {
+				label: tText(
+					'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel___animatie-teksten',
+					{},
+					[HET_ARCHIEF]
+				),
+				fields: {
+					label: TEXT_FIELD({
+						label: tText(
+							'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel___animatie-tekst',
+							{},
+							[HET_ARCHIEF]
+						),
+						validator: undefined,
+					}),
+				},
+				type: 'fieldGroup',
+				repeat: {
+					defaultState: DEFAULT_BUTTON_PROPS,
+					addButtonLabel: tText(
+						'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel___voeg-animatie-tekst-toe',
+						{},
+						[HET_ARCHIEF]
+					),
+					deleteButtonLabel: tText(
+						'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel___verwijder-animatie-tekst',
+						{},
+						[HET_ARCHIEF]
+					),
+				},
+			} as ContentBlockFieldGroup,
+			searchAriaLabel: TEXT_FIELD(
+				{
+					label: tText(
+						'modules/content-page/components/blocks/block-het-archief-header-search/block-het-archief-header-search___aria-label-voor-zoekveld',
+						{},
+						[HET_ARCHIEF]
+					),
+				},
+				tText(
+					'modules/content-page/components/blocks/block-het-archief-header-search/block-het-archief-header-search___aria-label-verplicht',
+					{},
+					[HET_ARCHIEF]
+				)
+			),
 			elements: {
 				label: tText(
 					'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel___content-item',

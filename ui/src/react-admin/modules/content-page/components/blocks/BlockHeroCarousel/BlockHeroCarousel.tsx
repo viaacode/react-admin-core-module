@@ -1,6 +1,7 @@
 import { type ButtonAction, Image } from '@viaa/avo2-components';
 import React, {
 	type FunctionComponent,
+	type KeyboardEvent,
 	type ReactElement,
 	type ReactNode,
 	useEffect,
@@ -9,7 +10,7 @@ import React, {
 import type { Color, HeadingTypeOption } from '~modules/content-page/types/content-block.types';
 import type { DefaultComponentProps } from '~modules/shared/types/components';
 import './BlockHeroCarousel.scss';
-import { Button } from '@meemoo/react-components';
+import { Button, TextInput } from '@meemoo/react-components';
 import type SwiperController from 'swiper';
 import { Controller } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -17,19 +18,23 @@ import { Icon } from '~shared/components/Icon';
 import { tText } from '~shared/helpers/translation-functions.ts';
 import 'swiper/css';
 import clsx from 'clsx';
+import { stringifyUrl } from 'query-string';
 import { BlockHeading } from '~content-blocks/BlockHeading';
+import {
+	SearchDropdown,
+	type SearchDropdownOption,
+} from '~content-blocks/BlockHeroCarousel/SearchDropdown.tsx';
+import { AdminConfigManager } from '~core/config';
 import { generateSmartLink } from '~shared/components/SmartLink/SmartLink.tsx';
+import { navigateFunc } from '~shared/helpers/navigate-fnc.ts';
 import { HET_ARCHIEF } from '~shared/types';
 
 export interface BlockHeroCarouselProps extends DefaultComponentProps {
-	backgroundColor: string;
 	title: string;
-	titleType: HeadingTypeOption;
-	buttonLabel: string;
-	buttonAltTitle?: string;
-	buttonAction?: ButtonAction;
+	searchAriaLabel: string;
+	subtitles: { label: string }[];
 	elements: {
-		mediaItem: ButtonAction;
+		mediaItem?: ButtonAction;
 		image: string;
 		imageAlt: string;
 		title: string;
@@ -40,172 +45,135 @@ export interface BlockHeroCarouselProps extends DefaultComponentProps {
 }
 
 export const BlockHeroCarousel: FunctionComponent<BlockHeroCarouselProps> = ({
-	backgroundColor,
+	className,
 	title,
-	titleType,
-	buttonLabel,
-	buttonAltTitle,
-	buttonAction,
+	subtitles,
+	searchAriaLabel,
 	elements,
 }): ReactNode => {
-	return null;
+	const SEARCH_OPTIONS: SearchDropdownOption[] = [
+		{
+			id: 'all',
+			selectedLabel: tText('Alles'),
+			label: tText('Zoek in alle objecten'),
+		},
+		{
+			id: 'video',
+			selectedLabel: tText('Alle video'),
+			label: tText('Zoek in video'),
+		},
+		{
+			id: 'audio',
+			selectedLabel: tText('Alle audio'),
+			label: tText('Zoek in audio'),
+		},
+		{
+			id: 'newspaper',
+			selectedLabel: tText('Alle kranten'),
+			label: tText('Zoek in kranten'),
+		},
+	];
 
-	const [controlledSwiper, setControlledSwiper] = useState<SwiperController | null>(null);
-	const [showPrevSlideButton, setShowPrevSlideButton] = useState<boolean>(false);
-	const [showNextSlideButton, setShowNextSlideButton] = useState<boolean>(false);
+	const [activeIndex, setActiveIndex] = useState<number>(subtitles.length - 1);
+	const [searchTerm, setSearchTerm] = useState<string>('');
+	const [mediaType, setMediaType] = useState<string>(SEARCH_OPTIONS[0].id);
 
-	const updateSlideButtons = () => {
-		setShowPrevSlideButton(controlledSwiper ? !controlledSwiper.isBeginning : false);
-		setShowNextSlideButton(controlledSwiper ? !controlledSwiper.isEnd : false);
-	};
-
-	// biome-ignore lint/correctness/useExhaustiveDependencies: Only used to init the buttons
 	useEffect(() => {
-		if (controlledSwiper) {
-			updateSlideButtons();
-		}
-	}, [controlledSwiper]);
+		const timerId = setInterval(() => {
+			// setActive(activeIndex);
+			setActiveIndex((oldActiveIndex) => (oldActiveIndex + 1) % subtitles.length);
+		}, 3000);
 
-	const renderSlideContent = (
-		image: string,
-		imageAlt: string,
-		title: string,
-		backgroundColor: Color,
-		textColor: Color
-	) => {
-		return (
-			<>
-				<Image
-					src={image}
-					alt={imageAlt || title}
-					className={clsx('c-block-overview-with-carousel__slide-image')}
-				/>
-				<div
-					className={'c-block-overview-with-carousel__slide-description'}
-					style={{
-						backgroundColor: backgroundColor,
-					}}
-				>
-					<span
-						className={'c-block-overview-with-carousel__slide-text'}
-						style={{
-							color: textColor,
-						}}
-					>
-						{title}
-					</span>
-				</div>
-			</>
-		);
+		return () => {
+			if (timerId) {
+				clearInterval(timerId);
+			}
+		};
+	}, [subtitles.length]);
+
+	const navigateToSearchPage = async () => {
+		const baseQuery = {
+			format: mediaType,
+		};
+		const url = stringifyUrl({
+			url: AdminConfigManager.getConfig().routes.SEARCH || '/zoeken',
+			query: searchTerm
+				? {
+						...baseQuery,
+						zoekterm: searchTerm,
+					}
+				: baseQuery,
+		});
+		await navigateFunc(url);
 	};
 
 	return (
-		<div
-			className={clsx('c-block-overview-with-carousel')}
-			style={{
-				backgroundColor: backgroundColor,
-			}}
-		>
-			<div className={'c-block-overview-with-carousel__header'}>
-				<BlockHeading
-					className={clsx('c-block-overview-with-carousel__header-title')}
-					type={titleType}
-				>
+		<article className={clsx('c-block-hero-carousel', className)}>
+			<div className="c-block-hero-carousel__header">
+				<BlockHeading className="c-block-hero-carousel__title" type="h1">
 					{title}
 				</BlockHeading>
-
-				<div className={'c-block-overview-with-carousel__header-actions'}>
-					{buttonAction &&
-						generateSmartLink(
-							buttonAction,
-							<Button
-								variants={['inline-block', 'silver', 'sm']}
-								label={buttonLabel}
-								title={buttonAltTitle}
-								ariaLabel={buttonAltTitle}
-							/>,
-							buttonAltTitle || buttonLabel,
-							undefined,
-							-1
+				{subtitles?.length && (
+					<ul>
+						{/* Add first item again at the end for a smooth crossfade animation */}
+						{subtitles.map((subtitle, index) => (
+							<li
+								key={`animation-text-${subtitle.label}-${index}`}
+								className={clsx({
+									current: activeIndex === index,
+									next: activeIndex === (index - 1 + subtitles.length) % subtitles.length,
+								})}
+							>
+								{subtitle.label}
+							</li>
+						))}
+					</ul>
+				)}
+			</div>
+			<div>
+				<div
+					className={clsx(
+						'c-block-hero-carousel__searchbar',
+						'c-block-hero-carousel__searchbar--has-dropdown'
+					)}
+				>
+					<SearchDropdown
+						options={SEARCH_OPTIONS}
+						selectedOptionId={mediaType}
+						onSelectOption={(selectedOption) => setMediaType(selectedOption.id)}
+					/>
+					<TextInput
+						id="block-hetarchief-header-search__search-input"
+						ariaLabel={searchAriaLabel}
+						placeholder={tText(
+							'react-admin/modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel___start-je-zoektocht',
+							{},
+							[HET_ARCHIEF]
 						)}
-					<div className={'c-block-overview-with-carousel__header-nav'}>
-						{showPrevSlideButton && (
-							<Button
-								variants={['black', 'sm']}
-								icon={<Icon name="arrowLeft" />}
-								title={tText(
-									'modules/content-page/components/blocks/block-overview-with-carousel/block-overview-with-carousel___vorige-slide',
-									undefined,
+						iconEnd={
+							<button
+								onClick={navigateToSearchPage}
+								onKeyUp={async (evt: KeyboardEvent) => {
+									if (evt.key === 'Enter') {
+										await navigateToSearchPage();
+									}
+								}}
+								type="submit"
+								aria-label={tText(
+									'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel___zoek-in-de-publieke-catalogus-input-aria-label',
+									{},
 									[HET_ARCHIEF]
 								)}
-								ariaLabel={tText(
-									'modules/content-page/components/blocks/block-overview-with-carousel/block-overview-with-carousel___vorige-slide',
-									undefined,
-									[HET_ARCHIEF]
-								)}
-								onClick={() => controlledSwiper?.slidePrev()}
-							/>
-						)}
-						{showNextSlideButton && (
-							<Button
-								variants={['black', 'sm']}
-								icon={<Icon name="arrowRight" />}
-								title={tText(
-									'modules/content-page/components/blocks/block-overview-with-carousel/block-overview-with-carousel___volgende-slide',
-									undefined,
-									[HET_ARCHIEF]
-								)}
-								ariaLabel={tText(
-									'modules/content-page/components/blocks/block-overview-with-carousel/block-overview-with-carousel___volgende-slide',
-									undefined,
-									[HET_ARCHIEF]
-								)}
-								onClick={() => controlledSwiper?.slideNext()}
-							/>
-						)}
-					</div>
+							>
+								<Icon name="filter" />
+							</button>
+						}
+						onChange={(evt) => setSearchTerm(evt.target.value)}
+						onEnter={navigateToSearchPage}
+						value={searchTerm}
+					/>
 				</div>
 			</div>
-			<Swiper
-				modules={[Controller]}
-				controller={{ control: controlledSwiper }}
-				className={'c-block-overview-with-carousel__wrapper'}
-				slidesPerView="auto"
-				spaceBetween={16}
-				onSwiper={setControlledSwiper}
-				onTransitionEnd={() => updateSlideButtons()}
-				watchSlidesProgress={true}
-			>
-				{elements.map(
-					({ title, image, imageAlt, itemDisplay, textColor, backgroundColor, mediaItem }) => {
-						const componentClassName = clsx(
-							'c-block-overview-with-carousel__slide',
-							itemDisplay === '9:16' && 'c-block-overview-with-carousel__slide__portrait',
-							itemDisplay === '9:16round' && 'c-block-overview-with-carousel__slide__round',
-							itemDisplay === '16:9' && 'c-block-overview-with-carousel__slide__landscape'
-						);
-						return (
-							<SwiperSlide
-								key={`carousel-slide__${title}__${mediaItem.type}__${mediaItem.value}`}
-								className={componentClassName}
-								style={{
-									backgroundColor: backgroundColor,
-								}}
-							>
-								{({ isVisible }) => {
-									return generateSmartLink(
-										mediaItem,
-										renderSlideContent(image, imageAlt, title, backgroundColor, textColor),
-										title,
-										componentClassName,
-										isVisible ? undefined : -1
-									);
-								}}
-							</SwiperSlide>
-						);
-					}
-				)}
-			</Swiper>
-		</div>
+		</article>
 	);
 };
