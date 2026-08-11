@@ -1,0 +1,172 @@
+import { AvoCoreContentPickerType } from '@viaa/avo2-types';
+import type { HeroCarouselBlockComponentState } from '~content-blocks/BlockHeroCarousel/BlockHeroCarousel.types.ts';
+import { BlockPageOverviewProps, ContentItemStyle } from '~content-blocks/BlockPageOverview';
+import {
+	BACKGROUND_COLOR_FIELD,
+	BLOCK_FIELD_DEFAULTS,
+	BLOCK_STATE_DEFAULTS,
+	FOREGROUND_COLOR_FIELD,
+	TEXT_FIELD,
+} from '~content-blocks/defaults';
+import {
+	GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF,
+	GET_FOREGROUND_COLOR_OPTIONS_ARCHIEF,
+} from '~modules/content-page/const/get-color-options.ts';
+import { GET_FULL_HEADING_TYPE_OPTIONS } from '~modules/content-page/const/get-heading-type-options';
+import {
+	Color,
+	type ContentBlockConfig,
+	ContentBlockEditor,
+	type ContentBlockField,
+	ContentBlockType,
+	type DefaultContentBlockState,
+} from '~modules/content-page/types/content-block.types';
+import type { FileUploadProps } from '~shared/components/FileUpload/FileUpload.tsx';
+import { PHOTO_TYPES } from '~shared/helpers/files.ts';
+import { toSeconds } from '~shared/helpers/parsers/duration.ts';
+import { tText } from '~shared/helpers/translation-functions';
+import { validateRequiredValue } from '~shared/helpers/validation.ts';
+import { HET_ARCHIEF } from '~shared/types';
+import type { PickerItem } from '~shared/types/content-picker.ts';
+
+const INITIAL_HERO_CAROUSEL_ELEMENT_STATE = (): HeroCarouselBlockComponentState => ({
+	mediaItem: {
+		type: AvoCoreContentPickerType.IE_OBJECT,
+		value: '',
+	},
+	startCuePoint: '',
+	endCuePoint: '',
+});
+
+export const INITIAL_HERO_CAROUSEL_COMPONENTS_STATE = () => ({
+	title: '',
+	titleType: 'h2',
+	buttonLabel: '',
+	buttonAltTitle: '',
+	elements: [INITIAL_HERO_CAROUSEL_ELEMENT_STATE()],
+});
+
+export const INITIAL_HERO_CAROUSEL_BLOCK_STATE = (): DefaultContentBlockState => ({
+	...BLOCK_STATE_DEFAULTS(),
+});
+
+const cuePointsIsVisible: ContentBlockField['isVisible'] = (_config, formGroupState) => {
+	return ['film', 'video', 'videofragment', 'audio', 'audiofragment'].includes(
+		(formGroupState as HeroCarouselBlockComponentState).mediaItem?.dctermsFormat ?? ''
+	);
+};
+
+const CUE_POINT_FIELD = (label: string, error: string) =>
+	TEXT_FIELD({
+		label,
+		editorProps: {
+			placeholder: tText(
+				'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel___hh-mm-ss',
+				undefined,
+				[HET_ARCHIEF]
+			),
+		},
+		validator: (value: string) => {
+			if (value) {
+				if (value.length !== 8 || toSeconds(value, true) === null) {
+					return [error];
+				}
+			}
+
+			return [];
+		},
+		isVisible: cuePointsIsVisible,
+	});
+
+export const HERO_CAROUSEL_CONFIG = (position = 0): ContentBlockConfig => ({
+	position,
+	name: tText(
+		'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel___overzicht-met-carrousel'
+	),
+	type: ContentBlockType.HeroCarousel,
+	components: {
+		state: INITIAL_HERO_CAROUSEL_COMPONENTS_STATE(),
+		fields: {
+			elements: {
+				label: tText(
+					'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel___content-item',
+					undefined,
+					[HET_ARCHIEF]
+				),
+				fields: {
+					mediaItem: {
+						label: tText(
+							'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel___object',
+							undefined,
+							[HET_ARCHIEF]
+						),
+						editorType: ContentBlockEditor.ContentPicker,
+						editorProps: {
+							allowedTypes: [AvoCoreContentPickerType.IE_OBJECT],
+							hideTypeDropdown: true,
+							hideTargetSwitch: true,
+						},
+						fieldsToResetOnChange: ['startCuePoint', 'endCuePoint'],
+						validator: (value: PickerItem) => {
+							if (!value?.value) {
+								return [
+									tText(
+										'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel___object-is-verplicht',
+										undefined,
+										[HET_ARCHIEF]
+									),
+								];
+							}
+							return [];
+						},
+					},
+					startCuePoint: CUE_POINT_FIELD(
+						tText(
+							'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel___start-cue-point',
+							undefined,
+							[HET_ARCHIEF]
+						),
+						tText(
+							'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel___start-cue-point-heeft-het-verkeerde-formaat',
+							undefined,
+							[HET_ARCHIEF]
+						)
+					),
+					endCuePoint: CUE_POINT_FIELD(
+						tText(
+							'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel___end-cue-point',
+							undefined,
+							[HET_ARCHIEF]
+						),
+						tText(
+							'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel___end-cue-point-heeft-het-verkeerde-formaat',
+							undefined,
+							[HET_ARCHIEF]
+						)
+					),
+				},
+				type: 'fieldGroup',
+				max: 100,
+				repeat: {
+					defaultState: INITIAL_HERO_CAROUSEL_ELEMENT_STATE(),
+					addButtonLabel: tText(
+						'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel___voeg-een-object-toe',
+						undefined,
+						[HET_ARCHIEF]
+					),
+					deleteButtonLabel: tText(
+						'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel___verwijder-object',
+						undefined,
+						[HET_ARCHIEF]
+					),
+				},
+			},
+		},
+	},
+	block: {
+		state: INITIAL_HERO_CAROUSEL_BLOCK_STATE(),
+		fields: {
+			...BLOCK_FIELD_DEFAULTS(),
+		},
+	},
+});

@@ -8,6 +8,7 @@ import { BlockContentPageMeta } from '~content-blocks/BlockContentPageMeta';
 import { BlockCTAsWrapper } from '~content-blocks/BlockCTAs';
 import { BlockEventbrite } from '~content-blocks/BlockEventbrite';
 import { BlockHeading } from '~content-blocks/BlockHeading';
+import { BlockHeroCarousel } from '~content-blocks/BlockHeroCarousel';
 import { BlockHetArchiefHeaderSearch } from '~content-blocks/BlockHetArchiefHeaderSearch/BlockHetArchiefHeaderSearch';
 import { BlockHetArchiefImageTextBackground } from '~content-blocks/BlockHetArchiefImageTextBackground';
 import { BlockHighlightText } from '~content-blocks/BlockHighlightText';
@@ -93,6 +94,7 @@ export function GET_BLOCK_COMPONENT(
 		[ContentBlockType.HomepageBanner]: BlockHomepageBanner,
 		[ContentBlockType.HighlightText]: BlockHighlightText,
 		[ContentBlockType.ThemeReels]: BlockThemeReels,
+		[ContentBlockType.HeroCarousel]: BlockHeroCarousel,
 
 		// Avo specific blocks
 		[ContentBlockType.MediaGrid]: loadComponentFromConfig(ContentBlockType.MediaGrid),
