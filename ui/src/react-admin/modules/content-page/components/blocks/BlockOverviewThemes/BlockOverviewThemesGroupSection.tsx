@@ -1,4 +1,4 @@
-import { Image } from '@viaa/avo2-components';
+import { Image, LinkTarget } from '@viaa/avo2-components';
 import clsx from 'clsx';
 import { stringifyUrl } from 'query-string';
 import React, {
@@ -9,14 +9,15 @@ import React, {
 	useRef,
 	useState,
 } from 'react';
-import type { BlockOverviewThemesGroupSectionProps } from '~content-blocks/BlockOverviewThemes/BlockOverviewThemes.types.tsx';
-import { Link } from '~shared/components/Link/Link';
+import type { BlockOverviewThemesGroupSectionProps } from '~content-blocks/BlockOverviewThemes/BlockOverviewThemes.types.ts';
 import { ROUTE_PARTS } from '~shared/consts/routes';
 import type { Theme } from '~shared/services/themes-service/themes.types';
 import { getThemeTileSpans, type ThemeTileSpan } from './getThemeTileSpans';
 import './BlockOverviewThemes.scss';
+import { AvoCoreContentPickerType } from '@viaa/avo2-types';
 import { keyBy } from 'es-toolkit/compat';
 import { BlockHeading } from '~content-blocks/BlockHeading';
+import { SmartLink } from '~shared/components/SmartLink/SmartLink.tsx';
 
 /**
  * Renders a single theme group with a full-bleed colored band behind the title and first grid
@@ -138,16 +139,21 @@ export const BlockOverviewThemesGroupSection: FunctionComponent<
 			<div ref={gridRef} className="c-block-overview-themes__grid">
 				{resolvedThemes.map((theme, tileIndex) => {
 					const span = spans[tileIndex];
+					const url = stringifyUrl({
+						url: `/${ROUTE_PARTS.search}`,
+						query: { theme: theme.slug },
+					});
 
 					return (
-						<Link
+						<SmartLink
 							// biome-ignore lint/suspicious/noArrayIndexKey: themes can be picked more than once across groups
 							key={`c-block-overview-themes__tile-${groupIndex}-${tileIndex}`}
 							className={clsx('c-block-overview-themes__tile', getTileSpanClassName(span))}
-							to={stringifyUrl({
-								url: `/${ROUTE_PARTS.search}`,
-								query: { theme: theme.slug },
-							})}
+							action={{
+								value: url,
+								type: AvoCoreContentPickerType.SEARCH_QUERY,
+								target: LinkTarget.Self,
+							}}
 						>
 							<Image
 								src={theme.imageUrl || ''}
@@ -155,7 +161,7 @@ export const BlockOverviewThemesGroupSection: FunctionComponent<
 								className="c-block-overview-themes__tile-image"
 							/>
 							<span className="c-block-overview-themes__tile-title">{theme.nameNl}</span>
-						</Link>
+						</SmartLink>
 					);
 				})}
 			</div>
