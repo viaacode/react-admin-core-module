@@ -4,6 +4,7 @@ import { PermissionName } from '@viaa/avo2-types';
 
 import { RequireAllPermissions } from '../../shared/decorators/require-permissions.decorator';
 import { addPrefix } from '../../shared/helpers/add-route-prefix';
+import { isAvo } from '../../shared/helpers/is-avo';
 import { UpdateTranslationDto } from '../dto/translations.dto';
 import { TranslationsService } from '../services/translations.service';
 import {
@@ -43,7 +44,25 @@ export class TranslationsController {
 	 */
 	@Get('languages')
 	public async getLanguages(): Promise<LanguageInfo[]> {
-		return this.translationsService.getLanguages();
+		if (isAvo()) {
+			return [
+				{
+					languageCode: 'nl',
+					languageLabel: 'Nederlands',
+				},
+			];
+		}
+		// hetarchief
+		return [
+			{
+				languageCode: 'nl',
+				languageLabel: 'Nederlands',
+			},
+			{
+				languageCode: 'en',
+				languageLabel: 'English',
+			},
+		];
 	}
 
 	/**
