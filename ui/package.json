@@ -1,6 +1,6 @@
 {
   "name": "@meemoo/admin-core-ui",
-  "version": "6.0.13",
+  "version": "6.0.14",
   "private": false,
   "type": "module",
   "files": [
@@ -79,7 +79,7 @@
     "@meemoo/react-components": "6.0.9",
     "@studiohyperdrive/pagination": "1.0.0",
     "@tanstack/react-query": "5.99.0",
-    "@viaa/avo2-components": "7.0.4",
+    "@viaa/avo2-components": "7.0.6",
     "@viaa/avo2-types": "5.0.20",
     "autosize": "6.0.1",
     "blend-promise-utils": "1.29.2",
