@@ -1,6 +1,11 @@
 import { cleanup, render, screen } from '@testing-library/react';
 import React from 'react';
-import { afterEach, describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
+
+// The real Icon reads the injected client config, which a unit test has no business setting up.
+vi.mock('~shared/components/Icon/Icon', () => ({
+	Icon: ({ name }: { name: string }) => <span data-icon={name} />,
+}));
 
 import { Color } from '../../../types/content-block.types';
 import { BlockHetArchiefQuote } from './BlockHetArchiefQuote';
@@ -48,14 +53,14 @@ describe('<BlockHetArchiefQuote />', () => {
 		expect(container.querySelector('figcaption')).toBeNull();
 	});
 
-	it('renders the quote mark as the ligature icon name, hidden from assistive tech', () => {
+	it('renders the quote mark as a decorative icon, hidden from assistive tech', () => {
 		const { container } = render(
 			<BlockHetArchiefQuote quote="Een citaat" textColor={Color.White} frameColor={Color.Black} />
 		);
 
 		const mark = container.querySelector('.c-block-het-archief-quote__mark');
 
-		expect(mark?.textContent).toEqual('quotes');
 		expect(mark?.getAttribute('aria-hidden')).toEqual('true');
+		expect(mark?.querySelector('[data-icon="quotes"]')).toBeTruthy();
 	});
 });

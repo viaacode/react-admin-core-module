@@ -3,6 +3,7 @@ import clsx from 'clsx';
 import type { CSSProperties, FunctionComponent } from 'react';
 import React from 'react';
 
+import { Icon } from '~shared/components/Icon/Icon';
 import type { Color, CustomBackground, GradientColor } from '../../../types/content-block.types';
 
 import './BlockHetArchiefQuote.scss';
@@ -30,8 +31,9 @@ export const BlockHetArchiefQuote: FunctionComponent<BlockHetArchiefQuoteProps> 
 			} as CSSProperties
 		}
 	>
+		{/* Decorative: the quote itself carries the meaning, so keep it out of the a11y tree */}
 		<span className="c-block-het-archief-quote__mark" aria-hidden="true">
-			quotes
+			<Icon name="quotes" />
 		</span>
 		<blockquote className="c-block-het-archief-quote__quote">{quote}</blockquote>
 		{authorName && (
