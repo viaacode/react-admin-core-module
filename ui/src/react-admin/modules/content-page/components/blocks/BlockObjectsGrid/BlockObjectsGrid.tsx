@@ -8,6 +8,8 @@ import { Icon } from '~shared/components/Icon';
 import { tText } from '~shared/helpers/translation-functions';
 import { HET_ARCHIEF } from '~shared/types';
 import './BlockObjectsGrid.scss';
+import { Button } from '@meemoo/react-components';
+import { Link } from '~shared/components/Link';
 import {
 	type BlockObjectsGridProps,
 	type ObjectsGridItem,
@@ -75,11 +77,6 @@ export const BlockObjectsGrid: FunctionComponent<BlockObjectsGridProps> = ({
 		}
 		return 2;
 	};
-	const MAX_ROWS_FOR_COLUMNS: Record<number, number> = {
-		4: 4, // desktop
-		3: 3, // tablet
-		2: 2, // mobile
-	};
 
 	type OrderedTile = { item: ObjectsGridItem; isFixed: boolean };
 
@@ -110,8 +107,7 @@ export const BlockObjectsGrid: FunctionComponent<BlockObjectsGridProps> = ({
 	// Limits the tiles to what fits in the max number of rows for this breakpoint, dropping
 	// tiles from an incomplete trailing row so the last visible row is always fully filled.
 	const getVisibleTiles = (tiles: OrderedTile[], columns: number): OrderedTile[] => {
-		const maxRows = MAX_ROWS_FOR_COLUMNS[columns] ?? tiles.length;
-		const visibleRows = packTilesIntoRows(tiles, columns).slice(0, maxRows);
+		const visibleRows = packTilesIntoRows(tiles, columns);
 
 		const lastRow = visibleRows[visibleRows.length - 1];
 		const lastRowUsedColumns = lastRow?.reduce((sum, tile) => sum + (tile.isFixed ? 2 : 1), 0) ?? 0;
@@ -259,25 +255,21 @@ export const BlockObjectsGrid: FunctionComponent<BlockObjectsGridProps> = ({
 
 			{searchQuery && (
 				<div className="c-block-objects-grid__footer">
-					<SmartLink
-						action={{
-							type: AvoCoreContentPickerType.EXTERNAL_LINK,
-							value: stripDomain(searchQuery),
-						}}
-						removeStyles={false}
-						className="c-block-objects-grid__cta"
-						ariaLabel={tText(
-							'modules/content-page/components/blocks/block-objects-grid/block-objects-grid___toon-alle-objecten-voor-deze-zoekopdracht',
-							undefined,
-							[HET_ARCHIEF]
-						)}
-					>
-						{tText(
-							'modules/content-page/components/blocks/block-objects-grid/block-objects-grid___toon-alle',
-							undefined,
-							[HET_ARCHIEF]
-						)}
-					</SmartLink>
+					<Link to={stripDomain(searchQuery)}>
+						<Button
+							label={tText(
+								'modules/content-page/components/blocks/block-objects-grid/block-objects-grid___toon-alle',
+								undefined,
+								[HET_ARCHIEF]
+							)}
+							ariaLabel={tText(
+								'modules/content-page/components/blocks/block-objects-grid/block-objects-grid___toon-alle-objecten-voor-deze-zoekopdracht',
+								undefined,
+								[HET_ARCHIEF]
+							)}
+							variants={['block', 'black']}
+						/>
+					</Link>
 				</div>
 			)}
 		</section>
