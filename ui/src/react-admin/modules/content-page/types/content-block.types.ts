@@ -604,4 +604,5 @@ export interface HetArchiefHeaderSearchBlockComponentState {
 export interface HetArchiefIeObject {
 	name: string;
 	schemaIdentifier: string;
+	dctermsFormat: string;
 }

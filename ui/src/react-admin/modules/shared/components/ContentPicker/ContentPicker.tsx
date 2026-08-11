@@ -22,7 +22,7 @@ import {
 import { filterTypes, setInitialItem } from './ContentPicker.helpers';
 import './ContentPicker.scss';
 
-import type { AvoCoreContentPickerType } from '@viaa/avo2-types';
+import { AvoCoreContentPickerType } from '@viaa/avo2-types';
 import { ToastType } from '~core/config/config.types';
 import { parseSearchQuery } from './helpers/parse-picker';
 
@@ -86,6 +86,7 @@ export const ContentPicker: FunctionComponent<ContentPickerProps> = ({
 							label: value?.label || '',
 							type: value?.type as AvoCoreContentPickerType,
 							value: value?.value || '',
+							dctermsFormat: value?.dctermsFormat,
 						},
 						...items.filter((item: PickerItem) => item.label !== value?.label),
 					];
@@ -188,16 +189,19 @@ export const ContentPicker: FunctionComponent<ContentPickerProps> = ({
 
 		let newValue: string | null;
 		let newLabel: string | undefined;
+		let newDctermsFormat: string | undefined;
 		if (prop === 'value') {
 			newValue = propValue as string | null;
 		} else if (prop === 'selectedItem') {
 			newValue = (propValue as PickerItem)?.value || null;
 			newLabel = (propValue as PickerItem)?.label;
+			newDctermsFormat = (propValue as PickerItem)?.dctermsFormat;
 		} else if (selectedType.picker === 'TEXT_INPUT') {
 			newValue = value?.value || '';
 		} else if (selectedType.picker === 'SELECT' && selectedItem) {
 			newLabel = selectedItem?.label;
 			newValue = selectedItem?.value;
+			newDctermsFormat = selectedItem?.dctermsFormat;
 		} else {
 			newValue = null;
 		}
@@ -223,6 +227,8 @@ export const ContentPicker: FunctionComponent<ContentPickerProps> = ({
 				value: newValue,
 				target: newTarget,
 				label: newLabel,
+				dctermsFormat:
+					newType === AvoCoreContentPickerType.IE_OBJECT ? newDctermsFormat : undefined,
 			});
 		}
 	};
