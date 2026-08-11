@@ -15,9 +15,6 @@ $text-inset-right-tablet: variables.$g-spacer-unit * 8;
 $frame-radius: 40rem;
 $frame-radius-mobile: 12rem;
 
-// meemoocons-light is a ligature icon font, provided by the host app (hetarchief-client), and has
-// no glyph for the quote-mark character itself - hence the "quotes" ligature in the markup.
-$mark-font-family: meemoocons-light, sans-serif;
 $mark-font-size: variables.$g-spacer-unit * 8;
 $mark-line-height: variables.$g-spacer-unit * 9;
 
@@ -43,11 +40,7 @@ $mark-line-height: variables.$g-spacer-unit * 9;
 		// raised out of the shared grid row and centred in its own column.
 		margin-top: -(variables.$g-spacer-unit * 1.5);
 		text-align: center;
-		font-family: $mark-font-family;
-		font-feature-settings: 'liga';
-		font-variant-ligatures: discretionary-ligatures;
 		font-size: $mark-font-size;
-		font-weight: normal;
 		line-height: $mark-line-height;
 
 		@media (max-width: variables.$g-bp2) {
@@ -64,7 +57,7 @@ $mark-line-height: variables.$g-spacer-unit * 9;
 		white-space: pre-line;
 
 		// Figma node 455:5724, style "P - XL".
-		@include typography.sofia-pro(3.2rem, 500, 4rem);
+		@include typography.sofia-pro-body-xl();
 
 		@media (max-width: variables.$g-bp2) {
 			// Figma node 455:7186: gap below the mark, plus the padding on the text group that
@@ -79,7 +72,7 @@ $mark-line-height: variables.$g-spacer-unit * 9;
 		margin-top: variables.$g-spacer-unit;
 
 		// Figma node 455:5725, style "P - S".
-		@include typography.sofia-pro(1.4rem, 500, 2rem);
+		@include typography.sofia-pro-body-xs();
 
 		@media (max-width: variables.$g-bp2) {
 			margin-bottom: variables.$g-spacer-unit;
