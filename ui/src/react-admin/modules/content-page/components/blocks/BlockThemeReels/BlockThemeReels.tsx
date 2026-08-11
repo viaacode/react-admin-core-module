@@ -89,7 +89,7 @@ export const BlockThemeReels: FunctionComponent<BlockThemeReelsProps> = ({
 					buttonAction,
 					<Button
 						variants={['sm', ...(buttonType ? [buttonType] : [])]}
-						icon={buttonIcon && <Icon name={buttonIcon} />}
+						iconStart={buttonIcon && <Icon name={buttonIcon} />}
 						label={buttonLabel}
 						title={buttonLabel}
 						ariaLabel={buttonAltTitle}
