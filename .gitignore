@@ -257,3 +257,5 @@ schema.graphql
 api/.claude/
 
 CLAUDE.md
+
+ui/.claude/worktrees/
