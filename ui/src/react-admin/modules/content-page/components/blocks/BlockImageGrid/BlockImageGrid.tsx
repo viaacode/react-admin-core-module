@@ -9,6 +9,7 @@ import type {
 import { defaultRenderLinkFunction } from '~shared/helpers/routing/link';
 
 import './BlockImageGrid.scss';
+import { CopyrightAttribution } from '~shared/components/CopyrightAttribution';
 
 export const BlockImageGrid: FunctionComponent<BlockImageGridProps> = ({
 	elements = [],
@@ -47,6 +48,11 @@ export const BlockImageGrid: FunctionComponent<BlockImageGridProps> = ({
 						backgroundSize: fill,
 						backgroundPosition: imageItemAlignment || 'center',
 					}}
+				/>
+				<CopyrightAttribution
+					title={element.copyrightTitle}
+					text={element.copyrightText}
+					showIcon={element.copyrightIconVisible}
 				/>
 				<div
 					className="c-block-grid__text-wrapper"

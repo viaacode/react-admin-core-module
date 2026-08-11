@@ -1,4 +1,4 @@
-import type { SelectOption } from '@viaa/avo2-components';
+import type { CheckboxProps, SelectOption } from '@viaa/avo2-components';
 import { GET_ALIGN_OPTIONS } from '~modules/content-page/const/get-align-options';
 import {
 	GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF,
@@ -16,14 +16,17 @@ import { isAvo } from '~shared/helpers/is-avo';
 import { tText } from '~shared/helpers/translation-functions';
 import { validateRequiredValue } from '~shared/helpers/validation.ts';
 import { SpecialUserGroups } from '~shared/types/authentication.types';
-import type {
-	ContentBlockField,
-	CustomBackground,
-	DefaultContentBlockState,
-	GradientColor,
-	PaddingFieldState,
+import {
+	Color,
+	type ContentBlockComponentsConfig,
+	ContentBlockEditor,
+	type ContentBlockField,
+	type CopyrightComponentState,
+	type CustomBackground,
+	type DefaultContentBlockState,
+	type GradientColor,
+	type PaddingFieldState,
 } from '../../types/content-block.types';
-import { Color, ContentBlockEditor } from '../../types/content-block.types';
 
 // Block config defaults
 export const BLOCK_STATE_DEFAULTS = (
@@ -196,4 +199,43 @@ export const CONTENT_TYPE_AND_LABELS_INPUT = (
 	editorType: ContentBlockEditor.ContentTypeAndLabelsPicker,
 	validator: undefined,
 	...propOverride,
+});
+
+export const COPYRIGHT_FIELDS = (overrides?: {
+	title?: {
+		fieldName?: string;
+		overrides?: Partial<ContentBlockField>;
+	};
+	showIcon?: {
+		fieldName?: string;
+		overrides?: Partial<ContentBlockField>;
+	};
+	text?: {
+		fieldName?: string;
+		overrides?: Partial<ContentBlockField>;
+	};
+}): ContentBlockComponentsConfig['fields'] => ({
+	[overrides?.title?.fieldName || 'copyrightTitle']: TEXT_FIELD({
+		label: tText('bijschrift titel'),
+		validator: undefined,
+		...overrides?.title?.overrides,
+	}),
+	[overrides?.showIcon?.fieldName || 'copyrightIconVisible']: {
+		editorType: ContentBlockEditor.Checkbox,
+		editorProps: {
+			label: tText('Toon bijschrift icoon'),
+		} as CheckboxProps,
+		...overrides?.showIcon?.overrides,
+	},
+	[overrides?.text?.fieldName || 'copyrightText']: TEXT_FIELD({
+		label: tText('bijschrift beschrijving'),
+		validator: undefined,
+		...overrides?.text?.overrides,
+	}),
+});
+
+export const COPYRIGHT_STATE = (): CopyrightComponentState => ({
+	copyrightTitle: '',
+	copyrightIconVisible: true,
+	copyrightText: '',
 });
