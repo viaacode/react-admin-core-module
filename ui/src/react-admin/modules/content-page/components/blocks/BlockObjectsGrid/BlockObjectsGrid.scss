@@ -2,6 +2,7 @@
 @use "../../../../shared/styles/settings/colors" as colors;
 @use "../../../../shared/styles/mixins/typography" as typography;
 @use "../../../../shared/styles/mixins/focus" as focus;
+@use "../../../../shared/styles/mixins/animations" as animations;
 
 .c-block-objects-grid {
 	// Number of grid columns per breakpoint. The count is responsive (see FA) but capped at 4
@@ -97,7 +98,7 @@
 			object-fit: cover;
 			object-position: center;
 			display: block;
-			transition: transform 0.5s ease-out;
+			@include animations.zoom-in-transition;
 		}
 
 
@@ -120,7 +121,7 @@
 				margin: 0 auto;
 				object-position: top;
 				display: block;
-				transition: transform 0.5s ease-out;
+				@include animations.zoom-in-transition;
 			}
 		}
 	}
@@ -138,7 +139,7 @@
 	// Desktop-only zoom-in on hover (see FA). Pointer devices only, never affects keyboard focus.
 	@media (hover: hover) {
 		.c-block-objects-grid__tile-link:hover .c-block-objects-grid__tile-image {
-			transform: scale(1.1);
+			@include animations.zoom-in-animation;
 		}
 	}
 
