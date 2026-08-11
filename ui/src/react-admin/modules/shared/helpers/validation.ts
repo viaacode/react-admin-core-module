@@ -65,7 +65,7 @@ export function validateFlowplayerVideoUrl(url: string | null | undefined) {
 	return [];
 }
 
-export function validateRequiredValue(value: string, emptyFieldValidatorMessage?: string) {
+export function validateRequiredValue(value: string, emptyFieldValidatorMessage: string) {
 	const errorArray: string[] = [];
 
 	if (!value && emptyFieldValidatorMessage) {

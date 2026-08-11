@@ -1,0 +1,133 @@
+@use "../../../../shared/styles/settings/variables" as variables;
+@use "../../../../shared/styles/settings/colors" as colors;
+@use "../../../../shared/styles/mixins/pattern" as pattern;
+@use "../../../../shared/styles/mixins/typography" as typography;
+
+$pattern-height: 8rem;
+$pattern-distance-vertical: variables.$g-spacer-unit * 3;
+$pattern-distance-horizontal: variables.$g-spacer-unit * 5;
+// Generous enough that the strip always reaches this component's own edge on any viewport.
+$pattern-repeat-count: 20;
+// How far the mobile pattern slots overshoot &__content's edge - see &__pattern-slot.
+$pattern-mobile-overshoot: 10rem;
+
+.c-block-homepage-banner {
+	// clip-path (not overflow-x: hidden) avoids the overflow-x/y coupling rule that would
+	// otherwise turn overflow-y into "auto" and risk a vertical scrollbar.
+	clip-path: inset(0);
+	width: 100% !important;
+	max-width: none !important;
+
+	&__content {
+		position: relative;
+		max-width: 75%;
+		min-height: $pattern-height;
+		display: flex;
+		flex-direction: column;
+
+		@media (max-width: variables.$g-bp4) {
+			// Mobile pattern slots size as a % of this element, so it spans full width here.
+			max-width: 100%;
+			// Reserves space for the (position: absolute, so otherwise height: 0) pattern
+			// slots above/below the text - else the parent's clip-path would cut them off.
+			padding: calc($pattern-height + $pattern-distance-vertical) 0;
+		}
+
+		&--left {
+			margin-right: auto;
+
+			@media (min-width: variables.$g-bp4) {
+				.c-block-homepage-banner__pattern--right {
+					left: calc(100% + $pattern-distance-horizontal + $pattern-distance-horizontal);
+				}
+			}
+		}
+
+		&--center {
+			margin: 0 auto;
+		}
+
+		&--right {
+			margin-left: auto;
+
+			@media (min-width: variables.$g-bp4) {
+				.c-block-homepage-banner__pattern--left {
+					right: calc(100% + $pattern-distance-horizontal + $pattern-distance-horizontal);
+				}
+			}
+		}
+
+		&-title {
+			padding-bottom: variables.$g-spacer-unit * 4;
+			color: colors.$color-gray-1000;
+			width: 100%;
+			white-space: wrap;
+			@include typography.sofia-pro-heading-xl(true);
+		}
+
+		&-text {
+			color: colors.$neutral;
+			@include typography.sofia-pro-body(true);
+		}
+	}
+
+	// The strip is always the same 5-shape cycle - rect, circle, circle, rect, circle - just
+	// entered at a different point per side (see pattern.pattern-side):
+	// - left:  enters at shape 1, nearest text -> rect, circle, rect, circle, circle
+	// - right: enters at shape 5, nearest text -> circle, rect, circle, circle, rect
+	&__pattern {
+		@include pattern.pattern-strip($pattern-height, $pattern-repeat-count);
+		top: 0;
+		bottom: 0;
+
+		&--left {
+			right: calc(100% + $pattern-distance-horizontal);
+			@include pattern.pattern-side(left, 1, $pattern-height);
+		}
+
+		&--right {
+			left: calc(100% + $pattern-distance-horizontal);
+			@include pattern.pattern-side(right, 5, $pattern-height);
+		}
+
+		// Below $g-bp4 the patterns move from beside the text to above/below it (see
+		// &__pattern-slot) - same tile/anchor, just anchored to the slot's inner edge instead.
+		@media (max-width: variables.$g-bp4) {
+			&--left {
+				right: 0;
+				left: auto;
+			}
+
+			&--right {
+				left: 0;
+				right: auto;
+			}
+		}
+	}
+
+	// No-op on desktop. Below $g-bp4 it's the overflow-clipping box that caps &__pattern at
+	// exactly 1/3 (top) / 2/3 (bottom) of &__content's width - can't live on &__pattern
+	// itself, since capping its width there would break the Chrome multiple-width rule above.
+	&__pattern-slot {
+		@media (max-width: variables.$g-bp4) {
+			position: absolute;
+			overflow: hidden;
+			height: $pattern-height;
+
+			// left/right overshoot by $pattern-mobile-overshoot to reach past avo2 Container's
+			// gutter to the true screen edge; width compensates so the inner (anchor) edge
+			// stays exactly at 1/3 / 2/3.
+			&--top {
+				top: 0;
+				left: -$pattern-mobile-overshoot;
+				width: calc(33.333% + #{$pattern-mobile-overshoot});
+			}
+
+			&--bottom {
+				bottom: 0;
+				right: -$pattern-mobile-overshoot;
+				width: calc(66.667% + #{$pattern-mobile-overshoot});
+			}
+		}
+	}
+}

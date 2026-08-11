@@ -59,6 +59,11 @@ export { NavigationBarOverview } from './navigation/views/NavigationBarOverview'
 export { NavigationItemEdit } from './navigation/views/NavigationItemEdit';
 // STOPGAP
 export type { DefaultComponentProps, ValueOf } from './shared';
+// ContentPicker
+export {
+	ContentPicker,
+	type ContentPickerProps,
+} from './shared/components/ContentPicker/ContentPicker';
 // FilterTable
 export {
 	type FilterableColumn,
@@ -78,6 +83,7 @@ export { sanitizeHtml } from './shared/helpers/sanitize';
 export { SanitizePreset } from './shared/helpers/sanitize/presets';
 export { toggleSortOrder } from './shared/helpers/toggle-sort-order';
 export { AssetsService } from './shared/services/assets-service/assets.service';
+export type { PickerItem } from './shared/types/content-picker';
 export { TableFilterType } from './shared/types/table-filter-types';
 // Translations
 export { TranslationsOverview } from './translations/views/TranslationsOverview';
