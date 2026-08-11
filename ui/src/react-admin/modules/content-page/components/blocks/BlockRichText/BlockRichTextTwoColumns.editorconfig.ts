@@ -17,15 +17,23 @@ import {
 	DEFAULT_BUTTON_PROPS,
 } from '../../../types/content-block.types';
 
-import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, TEXT_FIELD } from '../defaults';
+import {
+	BLOCK_FIELD_DEFAULTS,
+	BLOCK_STATE_DEFAULTS,
+	COPYRIGHT_FIELDS,
+	COPYRIGHT_STATE,
+	TEXT_FIELD,
+} from '../defaults';
 
 export const INITIAL_RICH_TEXT_TWO_COLUMNS_COMPONENTS_STATE = (): RichTextBlockComponentState[] => [
 	{
 		content: '',
+		...COPYRIGHT_STATE(),
 		buttons: [],
 	},
 	{
 		content: '',
+		...COPYRIGHT_STATE(),
 		buttons: [],
 	},
 ];
@@ -60,6 +68,7 @@ export const RICH_TEXT_TWO_COLUMNS_BLOCK_CONFIG = (position = 0): ContentBlockCo
 				},
 				tText('admin/content-block/helpers/generators/rich-text-two-columns___tekst-is-verplicht')
 			),
+			...COPYRIGHT_FIELDS(),
 			buttons: {
 				label: tText('admin/content-block/helpers/generators/rich-text-two-columns___knop'),
 				fields: {

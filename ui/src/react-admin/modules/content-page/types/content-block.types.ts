@@ -283,7 +283,14 @@ export interface HeadingBlockComponentState {
 	align: AlignOption;
 }
 
-export interface ImageBlockComponentState {
+export interface CopyrightComponentState {
+	copyrightTitle: string;
+	copyrightIconVisible: boolean;
+	copyrightText: string;
+}
+
+export interface ImageBlockComponentState
+	extends Omit<CopyrightComponentState, 'copyrightTitle' | 'copyrightText'> {
 	title: string;
 	text: string;
 	imageSource: string;
@@ -298,7 +305,7 @@ export interface ImageBlockComponentState {
 	buttonAlign?: AlignOption;
 }
 
-export interface ImageGridBlockComponentStateFields {
+export interface ImageGridBlockComponentStateFields extends CopyrightComponentState {
 	source: string;
 	title?: string;
 	text?: string;
@@ -331,7 +338,7 @@ export interface ButtonsBlockComponentState {
 	navigate?: (buttonAction: ButtonAction) => void;
 }
 
-export interface RichTextBlockComponentState {
+export interface RichTextBlockComponentState extends CopyrightComponentState {
 	content: string;
 	buttons?: ButtonsBlockComponentState[];
 }
@@ -559,7 +566,7 @@ export interface AvoImageTextBackgroundBlockComponentState {
 	buttonIconAlignment?: SimpleAlignOption;
 }
 
-export interface HetArchiefImageTextBackgroundBlockComponentState {
+export interface HetArchiefImageTextBackgroundBlockComponentState extends CopyrightComponentState {
 	heading: string;
 	headingType: HeadingTypeOption;
 	headingSize: HeadingSizeOption;
