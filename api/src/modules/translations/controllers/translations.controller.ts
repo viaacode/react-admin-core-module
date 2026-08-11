@@ -47,7 +47,7 @@ export class TranslationsController {
 		if (isAvo()) {
 			return [
 				{
-					languageCode: 'nl',
+					languageCode: Locale.Nl,
 					languageLabel: 'Nederlands',
 				},
 			];
@@ -55,11 +55,11 @@ export class TranslationsController {
 		// hetarchief
 		return [
 			{
-				languageCode: 'nl',
+				languageCode: Locale.Nl,
 				languageLabel: 'Nederlands',
 			},
 			{
-				languageCode: 'en',
+				languageCode: Locale.En,
 				languageLabel: 'English',
 			},
 		];
