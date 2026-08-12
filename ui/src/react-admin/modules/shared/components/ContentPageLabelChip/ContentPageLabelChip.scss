@@ -1,12 +1,15 @@
+@use "../../styles/settings/colors" as colors;
 @use "../../styles/settings/variables" as variables;
 @use "../../styles/mixins/typography" as typography;
 
-// The generated visual label of a content page label. The background and the text colour are set
-// inline, because they follow the colour the admin picked on the label
+// The generated visual label of a content page label. The background is set inline, because it
+// follows the colour the admin picked on the label
 // https://meemoo.atlassian.net/browse/ARC-3818
+// Figma: hetarchief.be — ontdekken, node 455:5403
 .c-content-page-label-chip {
 	display: inline-block;
 	padding: variables.$g-spacer-unit;
+	color: colors.$white;
 
 	@include typography.sofia-pro(1.6rem, 700, 2rem);
 	@include typography.truncate;

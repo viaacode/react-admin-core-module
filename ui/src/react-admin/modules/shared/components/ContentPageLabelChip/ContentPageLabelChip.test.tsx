@@ -32,15 +32,6 @@ describe('<ContentPageLabelChip />', () => {
 		expect(renderChip(CustomBackground.MeemooLogo).style.background).not.toContain('MEEMOO_LOGO');
 	});
 
-	it('writes black on the colours that white text fails wcag aa on', () => {
-		expect(renderChip(Color.BlossomPink).style.color).toEqual('rgb(0, 0, 0)');
-	});
-
-	it('writes white on the colours that white text passes wcag aa on', () => {
-		expect(renderChip(Color.Black).style.color).toEqual('rgb(255, 255, 255)');
-		expect(renderChip(Color.OldPink).style.color).toEqual('rgb(255, 255, 255)');
-	});
-
 	it('renders nothing without a label', () => {
 		const { container } = render(<ContentPageLabelChip label="" color={Color.Black} />);
 

@@ -154,18 +154,6 @@ export const GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF: () => SelectOption<
 	mustardOption(),
 ];
 
-/**
- * The label background colours that get white text instead of black, following the rule meemoo set:
- * black text on the colour, unless white text on that colour passes WCAG AA. Of the archief
- * background colours only these two clear 4.5:1 against white: black (21:1) and old pink (4.87:1,
- * the "Pareltjes" label). The chip text is 1.6rem/700, so the 3:1 large text threshold does not
- * apply. https://meemoo.atlassian.net/browse/ARC-3818
- *
- * Deliberately not GET_DARK_BACKGROUND_COLOR_OPTIONS: that list predates the rule and would put
- * white on e.g. ocean green, which only reaches 2.13:1.
- */
-export const CONTENT_PAGE_LABEL_COLORS_WITH_WHITE_TEXT: string[] = [Color.Black, Color.OldPink];
-
 export const GET_AVO_HERO_BACKGROUND_COLOR_OPTIONS: () => SelectOption<Color>[] = () => [
 	softBlueOption(),
 	nightBlueOption(),
