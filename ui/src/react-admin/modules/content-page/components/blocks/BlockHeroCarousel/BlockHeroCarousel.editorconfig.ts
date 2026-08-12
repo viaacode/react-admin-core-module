@@ -38,9 +38,11 @@ const INITIAL_HERO_CAROUSEL_ELEMENT_STATE = (): HeroCarouselBlockComponentState 
 	},
 	startCuePoint: '',
 	endCuePoint: '',
+	videoThumbnail: undefined,
 });
 
 export const INITIAL_HERO_CAROUSEL_COMPONENTS_STATE = () => ({
+	backgroundImage: '',
 	title: '',
 	subtitles: [],
 	elements: [INITIAL_HERO_CAROUSEL_ELEMENT_STATE()],
@@ -50,9 +52,18 @@ export const INITIAL_HERO_CAROUSEL_BLOCK_STATE = (): DefaultContentBlockState =>
 	...BLOCK_STATE_DEFAULTS(),
 });
 
-const cuePointsIsVisible: ContentBlockField['isVisible'] = (_config, formGroupState) => {
-	return ['film', 'video', 'videofragment', 'audio', 'audiofragment'].includes(
+const videoIsVisible: ContentBlockField['isVisible'] = (_config, formGroupState) => {
+	return ['film', 'video', 'videofragment'].includes(
 		(formGroupState as HeroCarouselBlockComponentState).mediaItem?.dctermsFormat ?? ''
+	);
+};
+
+const cuePointsIsVisible: ContentBlockField['isVisible'] = (config, formGroupState) => {
+	return (
+		videoIsVisible(config, formGroupState) ||
+		['audio', 'audiofragment'].includes(
+			(formGroupState as HeroCarouselBlockComponentState).mediaItem?.dctermsFormat ?? ''
+		)
 	);
 };
 
@@ -87,6 +98,17 @@ export const HERO_CAROUSEL_CONFIG = (position = 0): ContentBlockConfig => ({
 	components: {
 		state: INITIAL_HERO_CAROUSEL_COMPONENTS_STATE(),
 		fields: {
+			backgroundImage: {
+				label: tText('Achtergrondafbeelding (krijgt voorrang op achtergrondkleur)', undefined, [
+					HET_ARCHIEF,
+				]),
+				editorType: ContentBlockEditor.FileUpload,
+				editorProps: {
+					assetType: 'CONTENT_BLOCK_IMAGE',
+					allowMulti: false,
+					allowedTypes: PHOTO_TYPES,
+				} as FileUploadProps,
+			},
 			title: TEXT_FIELD(
 				{
 					label: tText(
@@ -203,6 +225,20 @@ export const HERO_CAROUSEL_CONFIG = (position = 0): ContentBlockConfig => ({
 							[HET_ARCHIEF]
 						)
 					),
+					videoThumbnail: {
+						label: tText(
+							'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel___thumbnail',
+							undefined,
+							[HET_ARCHIEF]
+						),
+						editorType: ContentBlockEditor.FileUpload,
+						editorProps: {
+							assetType: 'CONTENT_BLOCK_IMAGE',
+							allowMulti: false,
+							allowedTypes: PHOTO_TYPES,
+						} as FileUploadProps,
+						isVisible: videoIsVisible,
+					},
 				},
 				type: 'fieldGroup',
 				max: 100,

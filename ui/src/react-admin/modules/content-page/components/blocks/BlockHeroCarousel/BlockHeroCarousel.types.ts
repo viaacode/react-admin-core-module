@@ -4,4 +4,5 @@ export interface HeroCarouselBlockComponentState {
 	mediaItem?: PickerItem;
 	startCuePoint?: string;
 	endCuePoint?: string;
+	videoThumbnail?: string;
 }
