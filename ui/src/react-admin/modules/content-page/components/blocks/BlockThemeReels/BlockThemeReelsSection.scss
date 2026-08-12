@@ -5,6 +5,11 @@
 @use '../../../../shared/styles/mixins/animations' as animations;
 
 .c-block-theme-reels-section {
+	& + & {
+		margin-top: variables.$g-spacer-unit * 4;
+	}
+
+
 	.c-block-theme-reels-section__header {
 		width: 100%;
 		display: flex;

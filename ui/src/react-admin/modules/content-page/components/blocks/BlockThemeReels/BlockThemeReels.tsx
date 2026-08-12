@@ -53,7 +53,7 @@ export const BlockThemeReels: FunctionComponent<BlockThemeReelsProps> = ({
 					<BlockThemeReelSection
 						// biome-ignore lint/suspicious/noArrayIndexKey: groups have no stable id
 						key={`c-block-theme-reels__group-${groupIndex}`}
-						themeId={element.theme.value}
+						themeId={element.theme?.value}
 						image={element.image}
 						imageAlt={element.imageAlt}
 						imageMask={element.imageMask}
@@ -89,7 +89,7 @@ export const BlockThemeReels: FunctionComponent<BlockThemeReelsProps> = ({
 					buttonAction,
 					<Button
 						variants={['sm', ...(buttonType ? [buttonType] : [])]}
-						icon={buttonIcon && <Icon name={buttonIcon} />}
+						iconStart={buttonIcon && <Icon name={buttonIcon} />}
 						label={buttonLabel}
 						title={buttonLabel}
 						ariaLabel={buttonAltTitle}
