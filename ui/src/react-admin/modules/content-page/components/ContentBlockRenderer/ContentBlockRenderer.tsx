@@ -131,7 +131,7 @@ const ContentBlockRenderer: FunctionComponent<ContentBlockPreviewProps> = ({
 
 	// Blocks with a header background need a z-index, so the absolutely positioned background stays
 	// behind the block content. A block that overlays the next one has to beat that z-index, since
-	// the block it covers can carry one too: https://meemoo.atlassian.net/browse/ARC-3822
+	// the block it covers can carry one too.
 	const getZIndex = (): number | undefined => {
 		if (blockState?.overlayNextBlock) {
 			return 3;
@@ -151,7 +151,7 @@ const ContentBlockRenderer: FunctionComponent<ContentBlockPreviewProps> = ({
 				{
 					'c-content-block__meemoo-custom-background':
 						blockState?.backgroundColor === CustomBackground.MeemooLogo, // https://meemoo.atlassian.net/browse/ARC-1237
-					'c-content-block--overlay-next-block': blockState?.overlayNextBlock, // https://meemoo.atlassian.net/browse/ARC-3822
+					'c-content-block--overlay-next-block': blockState?.overlayNextBlock,
 				}
 			)}
 			style={{

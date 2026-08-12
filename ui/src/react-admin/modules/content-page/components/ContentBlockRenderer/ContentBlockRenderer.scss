@@ -42,8 +42,8 @@
 }
 
 // Lifts the block out of the flow so the block below it slides up underneath and this one paints
-// on top of it: https://meemoo.atlassian.net/browse/ARC-3822
-// The block keeps its place in the DOM, so its links stay clickable and in the tab order.
+// on top of it. The block keeps its place in the DOM, so its links stay clickable and in the tab
+// order.
 // The z-index that puts it above that block is set in ContentBlockRenderer.
 // The class is doubled to outrank `.c-content-block { overflow: hidden }` in hetarchief-client
 // (src/styles/admin-core/_content-pages.scss), which loads after this file and would otherwise
