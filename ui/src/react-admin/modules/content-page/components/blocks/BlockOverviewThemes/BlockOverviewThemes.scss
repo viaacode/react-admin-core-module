@@ -14,7 +14,7 @@ $tile-padding: 3rem;
 
 	&__group {
 		position: relative;
-		padding: 3.2rem 2.4rem 0;
+		padding: 4 * variables.$g-spacer-unit 3 * variables.$g-spacer-unit 0;
 
 		@media (min-width: variables.$g-bp3) {
 			padding: 6 * variables.$g-spacer-unit 5 * variables.$g-spacer-unit 0;
