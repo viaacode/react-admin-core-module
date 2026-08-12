@@ -18,6 +18,7 @@ import { AvoCoreContentPickerType } from '@viaa/avo2-types';
 import { keyBy } from 'es-toolkit/compat';
 import { BlockHeading } from '~content-blocks/BlockHeading';
 import { AdminConfigManager } from '~core/config';
+import { Locale } from '~modules/translations/translations.core.types.ts';
 import { Icon } from '~shared/components/Icon/Icon.tsx';
 import { SmartLink } from '~shared/components/SmartLink/SmartLink.tsx';
 
@@ -145,6 +146,8 @@ export const BlockOverviewThemesGroupSection: FunctionComponent<
 						url: `/${ROUTE_PARTS.search}`,
 						query: { theme: theme.slug },
 					});
+					const locale = AdminConfigManager.getConfig().locale || Locale.Nl;
+					const themeNameLocale = (locale === Locale.Nl ? theme.nameNl : theme.nameEn) || '';
 
 					return (
 						<SmartLink
@@ -159,10 +162,10 @@ export const BlockOverviewThemesGroupSection: FunctionComponent<
 						>
 							<Image
 								src={theme.imageUrl || ''}
-								alt={theme.nameNl}
+								alt={themeNameLocale}
 								className="c-block-overview-themes__tile-image"
 							/>
-							<span className="c-block-overview-themes__tile-title">{theme.nameNl}</span>
+							<span className="c-block-overview-themes__tile-title">{themeNameLocale}</span>
 							<Icon
 								className="c-block-overview-themes__tile-title__icon"
 								name={'arrowDownRight' as IconName}

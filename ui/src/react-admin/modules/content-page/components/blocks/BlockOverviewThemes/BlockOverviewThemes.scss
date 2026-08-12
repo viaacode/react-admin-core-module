@@ -14,10 +14,10 @@ $tile-padding: 3rem;
 
 	&__group {
 		position: relative;
-		padding: 4 * variables.$g-spacer-unit 3 * variables.$g-spacer-unit 0;
+		padding: (4 * variables.$g-spacer-unit) (3 * variables.$g-spacer-unit) 0;
 
 		@media (min-width: variables.$g-bp3) {
-			padding: 6 * variables.$g-spacer-unit 5 * variables.$g-spacer-unit 0;
+			padding: (6 * variables.$g-spacer-unit) (5 * variables.$g-spacer-unit) 0;
 		}
 	}
 
@@ -48,12 +48,12 @@ $tile-padding: 3rem;
 		@include typography.sofia-pro-heading-xl(true);
 
 		// Reset so the heading level (h1-h4, chosen for semantics only) never affects the visual style.
-		margin: 0 0 2.4rem !important;
+		margin: 0 0 (variables.$g-spacer-unit * 3) !important;
 		color: colors.$color-gray-1000;
 
 		@media (min-width: variables.$g-bp3) {
 			font-size: 3.2rem !important;
-			margin-bottom: 3.2rem;
+			margin-bottom: variables.$g-spacer-unit * 4;
 		}
 	}
 
