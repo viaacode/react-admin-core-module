@@ -146,14 +146,14 @@
 	.c-block-objects-grid__tile-titlebar {
 		display: flex;
 		align-items: flex-start;
-		gap: 0.8rem;
+		gap: variables.$g-spacer-unit;
 		max-height: 9.6rem;
 		flex-shrink: 0;
 
 		// Black bar with white text/icons (see FA) — contrast ratio 21:1.
 		background-color: colors.$color-gray-1000;
 		color: colors.$white;
-		padding: 1.6rem;
+		padding: variables.$g-spacer-unit * 2;
 	}
 
 	.c-block-objects-grid__tile-titlebar-left {
@@ -203,13 +203,13 @@
 	.c-block-objects-grid__footer {
 		display: flex;
 		justify-content: center;
-		margin-top: 2.4rem;
+		margin-top: variables.$g-spacer-unit * 3;
 	}
 
 	.c-block-objects-grid__cta {
 		display: inline-flex;
 		align-items: center;
-		padding: 1.2rem 2.4rem;
+		padding: variables.$g-spacer-unit * 1.5 variables.$g-spacer-unit * 3;
 		border-radius: 0.4rem;
 		background-color: colors.$color-gray-1000;
 		color: colors.$white;

@@ -1,3 +1,5 @@
+import type { ObjectType } from '~shared/helpers/mapFormatToType.ts';
+
 export interface Theme {
 	id: string;
 	slug: string;
@@ -15,7 +17,7 @@ export interface ThemeWithObjects extends Theme {
 		id: string;
 		schemaIdentifier: string;
 		name: string;
-		format: string;
+		format: ObjectType;
 		thumbnailUrl: string;
 		maintainerId: string;
 		maintainerName: string;

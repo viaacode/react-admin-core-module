@@ -1,43 +1,25 @@
+import { Button } from '@meemoo/react-components';
+import type { IconName } from '@viaa/avo2-components';
 import { AvoCoreContentPickerType } from '@viaa/avo2-types';
 import clsx from 'clsx';
-import type { ComponentProps, FunctionComponent, ReactElement, ReactNode } from 'react';
+import type { FunctionComponent, ReactElement, ReactNode } from 'react';
 import { useEffect, useState } from 'react';
 import { BlockHeading } from '~content-blocks/BlockHeading';
+import { ItemsService } from '~modules/item/items.service.ts';
 import { SmartLink } from '~modules/shared/components/SmartLink/SmartLink';
 import { Icon } from '~shared/components/Icon';
+import { Link } from '~shared/components/Link';
+import { BREAKPOINTS } from '~shared/consts/breakpoints.ts';
+import { getIconFromObjectType } from '~shared/helpers/icon.ts';
 import { tText } from '~shared/helpers/translation-functions';
 import { HET_ARCHIEF } from '~shared/types';
-import './BlockObjectsGrid.scss';
-import { Button } from '@meemoo/react-components';
-import { Link } from '~shared/components/Link';
-import {
-	type BlockObjectsGridProps,
-	type ObjectsGridItem,
-	ObjectsGridItemType,
-} from './BlockObjectsGrid.types';
+import type { BlockObjectsGridProps, ObjectsGridItem, OrderedTile } from './BlockObjectsGrid.types';
 import { useGetObjectsGridItems } from './hooks/useGetObjectsGridItems';
-
-// NOTE (client route): ie-object detail pages live under this path on hetarchief.be. Adjust
-// the prefix if the client application uses a different detail route for objects.
-const OBJECT_DETAIL_PATH_PREFIX = '/pid';
+import './BlockObjectsGrid.scss';
 
 // 4 rows of 4 items per row when there are no fixed items present
 // https://meemoo.atlassian.net/wiki/spaces/HA2/pages/6217171023/FA+Objecten+grid#Gedrag-van-het-contentblok
 const OBJECT_GRID_MAX_ITEMS = 16;
-
-// Column-count breakpoints, mirrored from BlockObjectsGrid.scss ($g-bp2/$g-bp3).
-const BREAKPOINT_TABLET = 700;
-const BREAKPOINT_DESKTOP = 900;
-
-type IconNameType = ComponentProps<typeof Icon>['name'];
-
-// Object type → icon name (icons are registered in the admin-core icon config). Types without a
-// dedicated icon (e.g. image) simply render no type-icon.
-const TYPE_ICON_NAME: Partial<Record<ObjectsGridItemType, IconNameType>> = {
-	[ObjectsGridItemType.Video]: 'video',
-	[ObjectsGridItemType.Audio]: 'audio',
-	[ObjectsGridItemType.Newspaper]: 'newspaper',
-};
 
 export const BlockObjectsGrid: FunctionComponent<BlockObjectsGridProps> = ({
 	className,
@@ -58,7 +40,7 @@ export const BlockObjectsGrid: FunctionComponent<BlockObjectsGridProps> = ({
 	// Tracks viewport width so the tablet/mobile breakpoints can hide tiles that would
 	// otherwise leave the last row half-filled (desktop always fetches an exact 4 rows).
 	const [windowWidth, setWindowWidth] = useState<number>(() =>
-		typeof window === 'undefined' ? BREAKPOINT_DESKTOP : window.innerWidth
+		typeof window === 'undefined' ? BREAKPOINTS.desktop : window.innerWidth
 	);
 
 	useEffect(() => {
@@ -69,16 +51,14 @@ export const BlockObjectsGrid: FunctionComponent<BlockObjectsGridProps> = ({
 
 	// Number of grid columns and rows shown per breakpoint (see FA linked above).
 	const getColumnsForWidth = (width: number): number => {
-		if (width >= BREAKPOINT_DESKTOP) {
+		if (width >= BREAKPOINTS.desktop) {
 			return 4;
 		}
-		if (width >= BREAKPOINT_TABLET) {
+		if (width >= BREAKPOINTS.tablet) {
 			return 3;
 		}
 		return 2;
 	};
-
-	type OrderedTile = { item: ObjectsGridItem; isFixed: boolean };
 
 	// Packs tiles into rows the same way the CSS grid renders them (auto-flow row, not dense):
 	// a fixed (2-column-wide) tile that doesn't fit the remaining space in a row wraps to the
@@ -109,7 +89,11 @@ export const BlockObjectsGrid: FunctionComponent<BlockObjectsGridProps> = ({
 	const getVisibleTiles = (tiles: OrderedTile[], columns: number): OrderedTile[] => {
 		const visibleRows = packTilesIntoRows(tiles, columns);
 
+		// Find the last row
 		const lastRow = visibleRows[visibleRows.length - 1];
+		// Count how many cells are used on the last row
+		// Double width tiles are counted double
+		// Single width tiles are counted single
 		const lastRowUsedColumns = lastRow?.reduce((sum, tile) => sum + (tile.isFixed ? 2 : 1), 0) ?? 0;
 		if (lastRow && lastRowUsedColumns < columns) {
 			visibleRows.pop();
@@ -117,9 +101,6 @@ export const BlockObjectsGrid: FunctionComponent<BlockObjectsGridProps> = ({
 
 		return visibleRows.flat();
 	};
-
-	const getObjectDetailPath = (schemaIdentifier: string): string =>
-		`${OBJECT_DETAIL_PATH_PREFIX}/${encodeURIComponent(schemaIdentifier)}`;
 
 	// The searchQuery is a full url pointing to the search page on hetarchief.be, but since this
 	// admin-core module is embedded on that same site, we want a relative link instead of an
@@ -134,7 +115,7 @@ export const BlockObjectsGrid: FunctionComponent<BlockObjectsGridProps> = ({
 	};
 
 	const renderTile = (item: ObjectsGridItem, isFixed: boolean): ReactElement => {
-		const iconName = item.type ? TYPE_ICON_NAME[item.type] : undefined;
+		const iconName = item.type ? getIconFromObjectType(item.type) : undefined;
 
 		return (
 			<li
@@ -146,7 +127,7 @@ export const BlockObjectsGrid: FunctionComponent<BlockObjectsGridProps> = ({
 				<SmartLink
 					action={{
 						type: AvoCoreContentPickerType.INTERNAL_LINK,
-						value: getObjectDetailPath(item.schemaIdentifier),
+						value: ItemsService.getObjectDetailPath(item.schemaIdentifier),
 					}}
 					removeStyles={false}
 					className="c-block-objects-grid__tile-link"
@@ -167,7 +148,7 @@ export const BlockObjectsGrid: FunctionComponent<BlockObjectsGridProps> = ({
 						) : (
 							// No thumbnail (e.g. audio): decorative placeholder, the link already carries the name.
 							<span className="c-block-objects-grid__tile-placeholder" aria-hidden="true">
-								{iconName && <Icon name={iconName} />}
+								{iconName && <Icon name={iconName as IconName} />}
 							</span>
 						)}
 					</div>
@@ -178,7 +159,9 @@ export const BlockObjectsGrid: FunctionComponent<BlockObjectsGridProps> = ({
 								<span className="c-block-objects-grid__tile-maintainer">{item.maintainerName}</span>
 							)}
 						</div>
-						{iconName && <Icon className="c-block-objects-grid__tile-type-icon" name={iconName} />}
+						{iconName && (
+							<Icon className="c-block-objects-grid__tile-type-icon" name={iconName as IconName} />
+						)}
 					</div>
 				</SmartLink>
 			</li>

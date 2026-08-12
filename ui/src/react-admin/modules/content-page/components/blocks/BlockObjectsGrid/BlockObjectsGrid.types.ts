@@ -1,18 +1,9 @@
-import { SearchFilter } from '~core/config/config.types.ts';
 import type { HeadingTypeOption } from '~modules/content-page/types/content-block.types';
 import type { DefaultComponentProps } from '~modules/shared/types/components';
 import type { PickerItem } from '~modules/shared/types/content-picker';
+import type { ObjectType } from '~shared/helpers/mapFormatToType.ts';
 
-/**
- * The object types that can appear in the grid. Drives which type-icon is shown in the
- * title bar, and whether the audio "waveform" fallback is rendered instead of a thumbnail.
- */
-export enum ObjectsGridItemType {
-	Video = 'video',
-	Audio = 'audio',
-	Newspaper = 'newspaper',
-	Image = 'image',
-}
+export type OrderedTile = { item: ObjectsGridItem; isFixed: boolean };
 
 /**
  * A single IE-object as rendered in the grid.
@@ -30,7 +21,7 @@ export interface ObjectsGridItem {
 	// Provider / maintainer name, shown in the title bar.
 	maintainerName?: string;
 	// Object type, drives the type-icon. Falls back to a generic icon when unknown.
-	type?: ObjectsGridItemType;
+	type?: ObjectType;
 	// Thumbnail (video / newspaper / image). Absent for audio → waveform fallback is shown.
 	thumbnailUrl?: string;
 }

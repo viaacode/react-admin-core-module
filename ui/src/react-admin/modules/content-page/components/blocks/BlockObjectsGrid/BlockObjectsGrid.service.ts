@@ -4,8 +4,9 @@ import type { IeObjectsSearchBody } from '~core/config/config.types';
 import { CustomError } from '~shared/helpers/custom-error';
 import { fetchWithLogout, fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
 import { getProxyUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config';
+import { mapFormatToType } from '~shared/helpers/mapFormatToType.ts';
 import type { PickerItem } from '~shared/types/content-picker';
-import { type ObjectsGridItem, ObjectsGridItemType, OrderProperty } from './BlockObjectsGrid.types';
+import { type ObjectsGridItem, OrderProperty } from './BlockObjectsGrid.types';
 
 /**
  * How many query-result objects to request. The grid shows 4 rows and the number of columns
@@ -26,24 +27,6 @@ interface RawIeObject {
 	dctermsFormat?: string;
 	thumbnailUrl?: string;
 }
-
-const mapFormatToType = (format?: string): ObjectsGridItemType | undefined => {
-	switch ((format || '').toLowerCase()) {
-		case 'video':
-		case 'film':
-			return ObjectsGridItemType.Video;
-		case 'audio':
-			return ObjectsGridItemType.Audio;
-		case 'newspaper':
-		case 'krant':
-			return ObjectsGridItemType.Newspaper;
-		case 'image':
-		case 'photo':
-			return ObjectsGridItemType.Image;
-		default:
-			return undefined;
-	}
-};
 
 const mapRawToGridItem = (raw: RawIeObject): ObjectsGridItem => ({
 	schemaIdentifier: raw.schemaIdentifier,
