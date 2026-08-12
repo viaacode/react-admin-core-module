@@ -53,7 +53,7 @@ export const BlockThemeReels: FunctionComponent<BlockThemeReelsProps> = ({
 					<BlockThemeReelSection
 						// biome-ignore lint/suspicious/noArrayIndexKey: groups have no stable id
 						key={`c-block-theme-reels__group-${groupIndex}`}
-						themeId={element.theme.value}
+						themeId={element.theme?.value}
 						image={element.image}
 						imageAlt={element.imageAlt}
 						imageMask={element.imageMask}
@@ -66,9 +66,21 @@ export const BlockThemeReels: FunctionComponent<BlockThemeReelsProps> = ({
 				{visibleThemes.length < elements.length && (
 					<Button
 						variants={['black', 'sm']}
-						label={tText('Meer suggesties', {}, [App.HET_ARCHIEF])}
-						title={tText('Meer suggesties', {}, [App.HET_ARCHIEF])}
-						ariaLabel={tText('Meer suggesties', {}, [App.HET_ARCHIEF])}
+						label={tText(
+							'modules/content-page/components/blocks/block-theme-reels/block-theme-reels___meer-suggesties',
+							{},
+							[App.HET_ARCHIEF]
+						)}
+						title={tText(
+							'modules/content-page/components/blocks/block-theme-reels/block-theme-reels___meer-suggesties',
+							{},
+							[App.HET_ARCHIEF]
+						)}
+						ariaLabel={tText(
+							'modules/content-page/components/blocks/block-theme-reels/block-theme-reels___meer-suggesties',
+							{},
+							[App.HET_ARCHIEF]
+						)}
 						onClick={() => setMaxVisibleItems(maxVisibleItems + 1)}
 					/>
 				)}
@@ -77,7 +89,7 @@ export const BlockThemeReels: FunctionComponent<BlockThemeReelsProps> = ({
 					buttonAction,
 					<Button
 						variants={['sm', ...(buttonType ? [buttonType] : [])]}
-						icon={buttonIcon && <Icon name={buttonIcon} />}
+						iconStart={buttonIcon && <Icon name={buttonIcon} />}
 						label={buttonLabel}
 						title={buttonLabel}
 						ariaLabel={buttonAltTitle}

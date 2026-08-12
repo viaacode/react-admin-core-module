@@ -10,6 +10,7 @@ import { ContentPageLabelChip } from '~shared/components/ContentPageLabelChip/Co
 import { defaultRenderLinkFunction } from '~shared/helpers/routing/link';
 
 import './BlockImageGrid.scss';
+import { CopyrightAttribution } from '~shared/components/CopyrightAttribution';
 
 export const BlockImageGrid: FunctionComponent<BlockImageGridProps> = ({
 	elements = [],
@@ -57,6 +58,11 @@ export const BlockImageGrid: FunctionComponent<BlockImageGridProps> = ({
 						/>
 					)}
 				</div>
+				<CopyrightAttribution
+					title={element.copyrightTitle}
+					text={element.copyrightText}
+					showIcon={element.copyrightIconVisible}
+				/>
 				<div
 					className="c-block-grid__text-wrapper"
 					style={{

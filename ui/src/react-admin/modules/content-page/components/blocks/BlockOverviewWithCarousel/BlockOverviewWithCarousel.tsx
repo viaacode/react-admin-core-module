@@ -23,7 +23,7 @@ export interface BlockOverviewWithCarouselProps extends DefaultComponentProps {
 	buttonAltTitle?: string;
 	buttonAction?: ButtonAction;
 	elements: {
-		mediaItem: ButtonAction;
+		mediaItem?: ButtonAction;
 		image: string;
 		imageAlt: string;
 		title: string;
@@ -62,7 +62,8 @@ export const BlockOverviewWithCarousel: FunctionComponent<BlockOverviewWithCarou
 		image: string,
 		imageAlt: string,
 		title: string,
-		backgroundColor: Color
+		backgroundColor: Color,
+		textColor: Color
 	) => {
 		return (
 			<>
@@ -77,7 +78,14 @@ export const BlockOverviewWithCarousel: FunctionComponent<BlockOverviewWithCarou
 						backgroundColor: backgroundColor,
 					}}
 				>
-					<span className={'c-block-overview-with-carousel__slide-text'}>{title}</span>
+					<span
+						className={'c-block-overview-with-carousel__slide-text'}
+						style={{
+							color: textColor,
+						}}
+					>
+						{title}
+					</span>
 				</div>
 			</>
 		);
@@ -164,23 +172,22 @@ export const BlockOverviewWithCarousel: FunctionComponent<BlockOverviewWithCarou
 					({ title, image, imageAlt, itemDisplay, textColor, backgroundColor, mediaItem }) => {
 						const componentClassName = clsx(
 							'c-block-overview-with-carousel__slide',
-							itemDisplay === '9:16' && `c-block-overview-with-carousel__slide__portrait`,
-							itemDisplay === '9:16round' && `c-block-overview-with-carousel__slide__round`,
-							itemDisplay === '16:9' && `c-block-overview-with-carousel__slide__landscape`
+							itemDisplay === '9:16' && 'c-block-overview-with-carousel__slide__portrait',
+							itemDisplay === '9:16round' && 'c-block-overview-with-carousel__slide__round',
+							itemDisplay === '16:9' && 'c-block-overview-with-carousel__slide__landscape'
 						);
 						return (
 							<SwiperSlide
-								key={`carousel-slide__${title}__${mediaItem.type}__${mediaItem.value}`}
+								key={`carousel-slide__${title}__${mediaItem?.type}__${mediaItem?.value}`}
 								className={componentClassName}
 								style={{
 									backgroundColor: backgroundColor,
-									color: textColor,
 								}}
 							>
 								{({ isVisible }) => {
 									return generateSmartLink(
 										mediaItem,
-										renderSlideContent(image, imageAlt, title, backgroundColor),
+										renderSlideContent(image, imageAlt, title, backgroundColor, textColor),
 										title,
 										componentClassName,
 										isVisible ? undefined : -1

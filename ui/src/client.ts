@@ -19,6 +19,7 @@ export { BlockIntro } from '~content-blocks/BlockIntro';
 export { BlockKlaar } from '~content-blocks/BlockKlaar';
 export { BlockMaintainersGrid } from '~content-blocks/BlockMaintainersGrid';
 export { BlockOverviewNewspaperTitles } from '~content-blocks/BlockOverviewNewspaperTitles';
+export { BlockOverviewThemes } from '~content-blocks/BlockOverviewThemes';
 export { BlockOverviewWithCarousel } from '~content-blocks/BlockOverviewWithCarousel';
 export { BlockPageOverviewWrapper } from '~content-blocks/BlockPageOverview/BlockPageOverview.wrapper';
 export { BlockQuote } from '~content-blocks/BlockQuote';
