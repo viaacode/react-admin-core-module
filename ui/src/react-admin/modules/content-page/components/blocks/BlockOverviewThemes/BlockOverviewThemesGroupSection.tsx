@@ -151,7 +151,7 @@ export const BlockOverviewThemesGroupSection: FunctionComponent<
 							className={clsx('c-block-overview-themes__tile', getTileSpanClassName(span))}
 							action={{
 								value: url,
-								type: AvoCoreContentPickerType.SEARCH_QUERY,
+								type: AvoCoreContentPickerType.INTERNAL_LINK,
 								target: LinkTarget.Self,
 							}}
 						>
