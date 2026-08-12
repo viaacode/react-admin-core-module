@@ -1,4 +1,4 @@
-import { Image, LinkTarget } from '@viaa/avo2-components';
+import { type IconName, Image, LinkTarget } from '@viaa/avo2-components';
 import clsx from 'clsx';
 import { stringifyUrl } from 'query-string';
 import React, {
@@ -17,6 +17,8 @@ import './BlockOverviewThemes.scss';
 import { AvoCoreContentPickerType } from '@viaa/avo2-types';
 import { keyBy } from 'es-toolkit/compat';
 import { BlockHeading } from '~content-blocks/BlockHeading';
+import { AdminConfigManager } from '~core/config';
+import { Icon } from '~shared/components/Icon/Icon.tsx';
 import { SmartLink } from '~shared/components/SmartLink/SmartLink.tsx';
 
 /**
@@ -161,6 +163,10 @@ export const BlockOverviewThemesGroupSection: FunctionComponent<
 								className="c-block-overview-themes__tile-image"
 							/>
 							<span className="c-block-overview-themes__tile-title">{theme.nameNl}</span>
+							<Icon
+								className="c-block-overview-themes__tile-title__icon"
+								name={'arrowDownRight' as IconName}
+							/>
 						</SmartLink>
 					);
 				})}

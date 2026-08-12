@@ -156,6 +156,7 @@ export function getAdminCoreConfigForLocalTestApp(navigateFunc: NavigateFunction
 				newspaper: { name: 'newspaper' },
 				noAudio: { name: 'no-audio' },
 				noVideo: { name: 'no-video' },
+				arrowDownRight: { name: 'arrow-down-right' },
 			},
 			list: (): { value: IconName; label: string }[] => {
 				return Object.values(IconName).map((iconName: IconName) => ({

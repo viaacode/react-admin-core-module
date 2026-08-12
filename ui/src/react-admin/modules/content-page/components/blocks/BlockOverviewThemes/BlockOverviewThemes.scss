@@ -4,6 +4,8 @@
 @use "../../../../shared/styles/mixins/animations" as animations;
 @use "../../../../shared/styles/mixins/focus" as focus;
 
+$tile-padding: 3rem;
+
 .c-block-overview-themes {
 	// The group band breaks out to a fixed 5000px width for full-bleed coverage; it must stay
 	// visible here so it isn't clipped by this element's own bounds.
@@ -46,7 +48,7 @@
 		@include typography.sofia-pro-heading-xl(true);
 
 		// Reset so the heading level (h1-h4, chosen for semantics only) never affects the visual style.
-		margin: 0 0 2.4rem;
+		margin: 0 0 2.4rem !important;
 		color: colors.$color-gray-1000;
 
 		@media (min-width: variables.$g-bp3) {
@@ -143,9 +145,20 @@
 		bottom: 0;
 		left: 0;
 		z-index: 1;
-		padding: 3rem;
+		padding: $tile-padding;
 		color: colors.$white;
 		@include typography.sofia-pro-heading-md;
 		@include typography.truncate-after-x-lines(2);
+	}
+
+	.c-block-overview-themes__tile {
+		&-title__icon {
+			position: absolute;
+			right: $tile-padding;
+			bottom: $tile-padding;
+			color: colors.$white;
+			z-index: 1;
+			font-size: 2.4rem;
+		}
 	}
 }
