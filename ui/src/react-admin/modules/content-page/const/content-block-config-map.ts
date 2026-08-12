@@ -7,6 +7,7 @@ import { CARDS_WITHOUT_DESCRIPTION_BLOCK_CONFIG } from '~content-blocks/BlockCar
 import { CONTENT_ENCLOSE_BLOCK_CONFIG } from '~content-blocks/BlockContentEnclose';
 import { CONTENT_PAGE_META_BLOCK_CONFIG } from '~content-blocks/BlockContentPageMeta';
 import { CTAS_BLOCK_CONFIG } from '~content-blocks/BlockCTAs';
+import { DOUBLE_BANNER_BLOCK_CONFIG } from '~content-blocks/BlockDoubleBanner';
 import { EVENTBRITE_BLOCK_CONFIG } from '~content-blocks/BlockEventbrite';
 import { HEADING_BLOCK_CONFIG } from '~content-blocks/BlockHeading';
 import { HET_ARCHIEF_HEADER_SEARCH_BLOCK_CONFIG } from '~content-blocks/BlockHetArchiefHeaderSearch/BlockHetArchiefHeaderSearch.editorconfig';
@@ -95,4 +96,5 @@ export const CONTENT_BLOCK_CONFIG_MAP: Record<
 	[ContentBlockType.HighlightText]: CONTENT_HIGHLIGHT_TEXT_CONFIG,
 	[ContentBlockType.ThemeReels]: THEME_REELS_BLOCK_CONFIG,
 	[ContentBlockType.OverviewThemes]: OVERVIEW_THEMES_BLOCK_CONFIG,
+	[ContentBlockType.DoubleBanner]: DOUBLE_BANNER_BLOCK_CONFIG,
 };

@@ -5,6 +5,7 @@ export { BlockButtonsWrapper } from '~content-blocks/BlockButtons/BlockButtons.w
 export { BlockCardsWithoutDescription } from '~content-blocks/BlockCardsWithoutDescription';
 export { BlockContentPageMeta } from '~content-blocks/BlockContentPageMeta';
 export { BlockCTAsWrapper } from '~content-blocks/BlockCTAs/BlockCTAs.wrapper';
+export { BlockDoubleBanner } from '~content-blocks/BlockDoubleBanner';
 export { BlockEventbrite } from '~content-blocks/BlockEventbrite';
 export { BlockHeading } from '~content-blocks/BlockHeading/BlockHeading';
 export { BlockHetArchiefHeaderSearch } from '~content-blocks/BlockHetArchiefHeaderSearch';

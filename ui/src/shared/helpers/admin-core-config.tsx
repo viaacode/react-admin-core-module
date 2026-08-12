@@ -98,6 +98,7 @@ export function getAdminCoreConfigForLocalTestApp(navigateFunc: NavigateFunction
 				// ContentBlockType.Breadcrumbs,
 				ContentBlockType.OverviewWithCarousel,
 				ContentBlockType.OverviewThemes,
+				ContentBlockType.DoubleBanner,
 			],
 			defaultPageWidth: ContentPageWidth.LARGE,
 			onSaveContentPage: async (contentPageInfo: ContentPageInfo) => {

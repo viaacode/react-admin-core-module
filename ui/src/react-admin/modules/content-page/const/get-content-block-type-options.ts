@@ -214,6 +214,14 @@ export const GET_CONTENT_BLOCK_TYPE_OPTIONS: () => SelectOption<string>[] = () =
 			),
 			value: ContentBlockType.OverviewThemes,
 		},
+		{
+			label: tText(
+				'modules/content-page/const/get-content-block-type-options___dubbele-banner',
+				{},
+				[HET_ARCHIEF]
+			),
+			value: ContentBlockType.DoubleBanner,
+		},
 	];
 
 	// Only show the content blocks that the client enabled through the config object

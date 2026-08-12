@@ -191,6 +191,7 @@ export enum ContentBlockType {
 	HighlightText = 'HIGHLIGHT_TEXT',
 	ThemeReels = 'THEME_REELS',
 	OverviewThemes = 'OVERVIEW_THEMES',
+	DoubleBanner = 'DOUBLE_BANNER',
 }
 
 export enum ContentBlockEditor {

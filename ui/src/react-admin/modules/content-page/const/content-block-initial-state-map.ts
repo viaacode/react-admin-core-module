@@ -7,6 +7,7 @@ import { INITIAL_CARDS_WITHOUT_DESCRIPTION_COMPONENTS_STATE } from '~content-blo
 import { INITIAL_CONTENT_ENCLOSE_BLOCK_STATE } from '~content-blocks/BlockContentEnclose/BlockContentEnclose.editorconfig';
 import { INITIAL_CONTENT_PAGE_META_COMPONENTS_STATE } from '~content-blocks/BlockContentPageMeta';
 import { INITIAL_CTAS_COMPONENTS_STATE } from '~content-blocks/BlockCTAs';
+import { INITIAL_DOUBLE_BANNER_COMPONENTS_STATE } from '~content-blocks/BlockDoubleBanner/BlockDoubleBanner.editorconfig';
 import { INITIAL_EVENTBRITE_COMPONENTS_STATE } from '~content-blocks/BlockEventbrite';
 import { INITIAL_HEADING_COMPONENTS_STATE } from '~content-blocks/BlockHeading';
 import { INITIAL_HET_ARCHIEF_HEADER_SEARCH_BLOCK_STATE } from '~content-blocks/BlockHetArchiefHeaderSearch/BlockHetArchiefHeaderSearch.editorconfig';
@@ -98,4 +99,5 @@ export const CONTENT_BLOCK_INITIAL_STATE_MAP: {
 	[ContentBlockType.HighlightText]: INITIAL_CONTENT_HIGHLIGHT_TEXT_BLOCK_STATE,
 	[ContentBlockType.ThemeReels]: INITIAL_THEME_REELS_COMPONENTS_STATE,
 	[ContentBlockType.OverviewThemes]: INITIAL_OVERVIEW_THEMES_COMPONENTS_STATE,
+	[ContentBlockType.DoubleBanner]: INITIAL_DOUBLE_BANNER_COMPONENTS_STATE,
 };
