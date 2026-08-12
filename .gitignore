@@ -256,4 +256,6 @@ schema.graphql
 
 api/.claude/
 
+*.pdf
+
 ui/.claude/worktrees/

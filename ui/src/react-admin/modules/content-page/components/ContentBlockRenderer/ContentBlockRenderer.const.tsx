@@ -24,6 +24,7 @@ import { BlockIntro } from '~content-blocks/BlockIntro';
 import { BlockKlaar } from '~content-blocks/BlockKlaar';
 import { BlockMaintainersGrid } from '~content-blocks/BlockMaintainersGrid';
 import { BlockOverviewNewspaperTitles } from '~content-blocks/BlockOverviewNewspaperTitles';
+import { BlockOverviewThemes } from '~content-blocks/BlockOverviewThemes/BlockOverviewThemes.tsx';
 import { BlockOverviewWithCarousel } from '~content-blocks/BlockOverviewWithCarousel/BlockOverviewWithCarousel.tsx';
 import { BlockPageOverviewWrapper } from '~content-blocks/BlockPageOverview';
 import { BlockQuote } from '~content-blocks/BlockQuote';
@@ -93,6 +94,7 @@ export function GET_BLOCK_COMPONENT(
 		[ContentBlockType.HomepageBanner]: BlockHomepageBanner,
 		[ContentBlockType.HighlightText]: BlockHighlightText,
 		[ContentBlockType.ThemeReels]: BlockThemeReels,
+		[ContentBlockType.OverviewThemes]: BlockOverviewThemes,
 
 		// Avo specific blocks
 		[ContentBlockType.MediaGrid]: loadComponentFromConfig(ContentBlockType.MediaGrid),
@@ -123,6 +125,7 @@ export const REPEATABLE_CONTENT_BLOCKS = [
 	ContentBlockType.ThreeClickableTiles,
 	ContentBlockType.TagsWithLink,
 	ContentBlockType.CardsWithoutDescription,
+	ContentBlockType.OverviewThemes,
 	// ContentBlockType.ContentEncloseGrid,
 ];
 

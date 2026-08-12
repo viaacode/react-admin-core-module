@@ -190,6 +190,7 @@ export enum ContentBlockType {
 	HomepageBanner = 'HOMEPAGE_BANNER',
 	HighlightText = 'HIGHLIGHT_TEXT',
 	ThemeReels = 'THEME_REELS',
+	OverviewThemes = 'OVERVIEW_THEMES',
 }
 
 export enum ContentBlockEditor {
