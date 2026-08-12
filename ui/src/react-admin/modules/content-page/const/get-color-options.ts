@@ -169,17 +169,29 @@ export const GET_AVO_HERO_BACKGROUND_COLOR_OPTIONS: () => SelectOption<Color>[] 
 	yellowOption(),
 ];
 
-export const GET_DARK_BACKGROUND_COLOR_OPTIONS: () => (Color | GradientColor | CustomBackground)[] =
-	() => [
-		Color.SoftBlue,
-		Color.NightBlue,
-		Color.Teal,
-		Color.TealBright,
-		Color.OceanGreen,
-		Color.SeaGreen,
-		Color.Yellow,
-		Color.Black,
-	];
+export const GET_DARK_BACKGROUND_COLOR_OPTIONS_AVO: () => (
+	| Color
+	| GradientColor
+	| CustomBackground
+)[] = () => [
+	Color.SoftBlue,
+	Color.NightBlue,
+	Color.Teal,
+	Color.TealBright,
+	Color.OceanGreen,
+	Color.SeaGreen,
+	Color.Yellow,
+	Color.Black,
+];
+
+// Backgrounds that need white text to pass WCAG AA on hetarchief.be, per the color
+// combinations design provided on https://meemoo.atlassian.net/browse/ARC-3848.
+// Every other archief background color passes AA with the default black text.
+export const GET_DARK_BACKGROUND_COLOR_OPTIONS_ARCHIEF: () => (
+	| Color
+	| GradientColor
+	| CustomBackground
+)[] = () => [Color.Black, Color.OldPink];
 
 export const GET_FOREGROUND_COLOR_OPTIONS_AVO: () => SelectOption<Color>[] = () => [
 	{

@@ -7,7 +7,10 @@ import { ContentItemStyle } from '~content-blocks/BlockPageOverview/BlockPageOve
 import { AdminConfigManager } from '~core/config/config.class';
 import { BlockPageOverview } from '~modules/content-page/components/blocks/BlockPageOverview/BlockPageOverview';
 import type { PageOverviewWrapperProps } from '~modules/content-page/components/blocks/BlockPageOverview/BlockPageOverview.types';
-import { GET_DARK_BACKGROUND_COLOR_OPTIONS } from '~modules/content-page/const/get-color-options';
+import {
+	GET_DARK_BACKGROUND_COLOR_OPTIONS_ARCHIEF,
+	GET_DARK_BACKGROUND_COLOR_OPTIONS_AVO,
+} from '~modules/content-page/const/get-color-options';
 import { useGetContentPageByLanguageAndPath } from '~modules/content-page/hooks/use-get-content-page-by-language-and-path';
 import { useGetContentPageLabelsByTypeAndIds } from '~modules/content-page/hooks/use-get-content-page-labels-by-type-and-ids';
 import { useGetContentPageLabelsByTypeAndLabels } from '~modules/content-page/hooks/use-get-content-page-labels-by-type-and-labels';
@@ -15,6 +18,7 @@ import { useGetContentPagesForPageOverviewBlock } from '~modules/content-page/ho
 import type { ContentPageInfo } from '~modules/content-page/types/content-pages.types';
 import { Locale } from '~modules/translations/translations.core.types';
 import { ErrorView } from '~shared/components/error/ErrorView';
+import { isAvo } from '~shared/helpers/is-avo';
 import { isHetArchief } from '~shared/helpers/is-hetarchief';
 import { navigateFunc } from '~shared/helpers/navigate-fnc';
 import {
@@ -225,7 +229,10 @@ export const BlockPageOverviewWrapper: FunctionComponent<PageOverviewWrapperProp
 				tabs={getLabelsWithContent()}
 				darkTabs={
 					!!headerBackgroundColor &&
-					GET_DARK_BACKGROUND_COLOR_OPTIONS().includes(headerBackgroundColor)
+					(isAvo()
+						? GET_DARK_BACKGROUND_COLOR_OPTIONS_AVO()
+						: GET_DARK_BACKGROUND_COLOR_OPTIONS_ARCHIEF()
+					).includes(headerBackgroundColor)
 				}
 				selectedTabs={selectedTabObjects || []}
 				onSelectedTabsChanged={handleSelectedTabsChanged}
