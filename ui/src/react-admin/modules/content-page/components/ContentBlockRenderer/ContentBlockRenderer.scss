@@ -45,21 +45,26 @@
 // on top of it: https://meemoo.atlassian.net/browse/ARC-3822
 // The block keeps its place in the DOM, so its links stay clickable and in the tab order.
 // The z-index that puts it above that block is set in ContentBlockRenderer.
-.c-content-block--overlay-next-block {
+// The class is doubled to outrank `.c-content-block { overflow: hidden }` in hetarchief-client
+// (src/styles/admin-core/_content-pages.scss), which loads after this file and would otherwise
+// clip both the breadcrumbs and the scrim out of the zero-height box.
+.c-content-block.c-content-block--overlay-next-block {
   height: 0;
+
+  // The whole mechanism relies on the content escaping this zero-height box
+  overflow: visible;
 
   // Dark scrim so light text stays legible over a photo. Taken from the design: 120px at 56% on
   // desktop, 160px on mobile, where the breadcrumbs wrap over several lines.
   // Desktop: https://www.figma.com/design/mps3ITECqMBQtdk8vheYOp/?node-id=455-3958
   // Mobile: https://www.figma.com/design/mps3ITECqMBQtdk8vheYOp/?node-id=455-6978
-  // 1rem = 10px here, see font-size: 62.5% in shared/styles/elements/_base.scss.
   &::before {
     content: "";
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
-    height: 12rem;
+    height: variables.$g-spacer-unit * 15; // 120px
     background: linear-gradient(to bottom, rgb(0 0 0 / 56%), rgb(0 0 0 / 0%));
 
     // Behind the breadcrumbs, but still above the block underneath, because the z-index on this
@@ -70,17 +75,17 @@
     pointer-events: none;
 
     @media (max-width: variables.$g-bp2) {
-      height: 16rem;
+      height: variables.$g-spacer-unit * 20; // 160px
     }
   }
 
   // The design puts the breadcrumbs 48px below the top of the block they cover, 24px on mobile.
   // Overrides the block's padding field, which avo2-components applies with !important.
   .c-content-block-preview {
-    padding-top: 4.8rem !important;
+    padding-top: variables.$g-spacer-unit * 6 !important; // 48px
 
     @media (max-width: variables.$g-bp2) {
-      padding-top: 2.4rem !important;
+      padding-top: variables.$g-spacer-unit * 1.75 !important; // 14px
     }
   }
 }
