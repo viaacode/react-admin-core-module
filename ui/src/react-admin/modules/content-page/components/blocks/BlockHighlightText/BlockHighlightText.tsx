@@ -3,6 +3,7 @@ import type { DefaultComponentProps } from '~modules/shared/types/components';
 import './BlockHighligtText.scss';
 import { Container } from '@viaa/avo2-components';
 import clsx from 'clsx';
+import { hasDarkBackground } from '~modules/content-page/const/get-color-options.ts';
 import {
 	Color,
 	ColorSelectGradientColors,
@@ -29,6 +30,12 @@ export const BlockHighlightText: FunctionComponent<BlockHighlightTextProps> = ({
 		highlightColor === CustomBackground.MeemooLogo
 			? Color.Transparent
 			: ((ColorSelectGradientColors as Record<string, string>)[highlightColor] ?? highlightColor);
+	// The text sits inside the highlighted box, so its WCAG text color follows the highlight color
+	// rather than the block background. A gradient highlight renders the box white and the meemoo
+	// logo renders it transparent (both below), and neither has a single luminance, so
+	// hasDarkBackground reports false for them and the text stays black - which is what those two
+	// backgrounds need. https://meemoo.atlassian.net/browse/ARC-3848
+	const hasDarkHighlight = hasDarkBackground(highlightColor);
 
 	return (
 		<article
@@ -56,7 +63,9 @@ export const BlockHighlightText: FunctionComponent<BlockHighlightTextProps> = ({
 					/>
 				</div>
 				<Html
-					className="c-block-highlight-text__content-text"
+					className={clsx('c-block-highlight-text__content-text', {
+						'u-color-white': hasDarkHighlight,
+					})}
 					style={
 						{
 							'--pattern-color': isGradient ? Color.White : patternColor,

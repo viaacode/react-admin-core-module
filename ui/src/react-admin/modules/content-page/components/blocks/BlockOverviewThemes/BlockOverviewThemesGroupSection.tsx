@@ -18,6 +18,7 @@ import { AvoCoreContentPickerType } from '@viaa/avo2-types';
 import { keyBy } from 'es-toolkit/compat';
 import { BlockHeading } from '~content-blocks/BlockHeading';
 import { AdminConfigManager } from '~core/config';
+import { hasDarkBackground } from '~modules/content-page/const/get-color-options';
 import { Locale } from '~modules/translations/translations.core.types.ts';
 import { Icon } from '~shared/components/Icon/Icon.tsx';
 import { SmartLink } from '~shared/components/SmartLink/SmartLink.tsx';
@@ -33,6 +34,7 @@ export const BlockOverviewThemesGroupSection: FunctionComponent<
 > = ({ group, groupIndex, themes, bandColor }) => {
 	const gridRef = useRef<HTMLDivElement>(null);
 	const [bandHeight, setBandHeight] = useState<number | null>(null);
+	const hasDarkBand = hasDarkBackground(bandColor);
 
 	useLayoutEffect(() => {
 		const gridEl = gridRef.current;
@@ -134,7 +136,12 @@ export const BlockOverviewThemesGroupSection: FunctionComponent<
 			{group.title && (
 				<BlockHeading
 					type={group.titleType || 'h2'}
-					className="c-block-overview-themes__group-title"
+					className={clsx('c-block-overview-themes__group-title', {
+						// The title sits on the band, so its WCAG text color follows the band color. Gated on
+						// bandHeight like the band itself, so both flip in the same render and the title is
+						// never white on the page background. https://meemoo.atlassian.net/browse/ARC-3848
+						'u-color-white': !!bandHeight && hasDarkBand,
+					})}
 				>
 					{group.title}
 				</BlockHeading>
