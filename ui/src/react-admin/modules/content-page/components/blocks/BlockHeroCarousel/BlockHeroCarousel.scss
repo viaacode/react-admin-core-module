@@ -1,10 +1,18 @@
 .c-block-hero-carousel {
 	&__background{
 		position: absolute;
-		top: 0;
-		left: 0;
-		right: 0;
-		bottom: 0;
+		inset: 0;
 		background-position: center;
+		background-size: cover;
+
+		&::before {
+			content: "";
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			height: 50%;
+			background: linear-gradient(180deg, #000 0%, rgba(0, 0, 0, 0) 100%);
+		}
 	}
 }
