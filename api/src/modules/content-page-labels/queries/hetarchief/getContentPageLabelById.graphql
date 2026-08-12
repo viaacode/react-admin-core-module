@@ -5,6 +5,7 @@ query getContentPageLabelById($id: uuid!) {
 		content_type
 		link_to
 		language
+		color
 		created_at
 		updated_at
 	}

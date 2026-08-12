@@ -53,6 +53,8 @@ export interface ContentPageLabel {
 	content_type: ContentPageType;
 	language: Locale;
 	link_to: PickerItem | null;
+	// The background color of the generated visual label. Only exists on hetarchief
+	color?: string;
 	created_at: string;
 	updated_at: string;
 }
@@ -107,6 +109,11 @@ export type GqlContentBlockAvo =
 export type GqlContentBlockHetArchief =
 	GetContentPageByPathQueryHetArchief['app_content_page'][0]['content_blocks'][0];
 export type GqlContentBlock = GqlContentBlockAvo | GqlContentBlockHetArchief;
+
+// Only hetarchief content page labels have a color, so narrowing to the hetarchief label keeps
+// that access type checked instead of silently undefined
+export type GqlContentPageLabelHetArchief =
+	GetContentPageByPathQueryHetArchief['app_content_page'][0]['content_content_labels'][0]['content_label'];
 
 export type GqlInsertOrUpdateContentPage =
 	| ContentPageQueryTypes['InsertContentMutationVariables']['contentPage']

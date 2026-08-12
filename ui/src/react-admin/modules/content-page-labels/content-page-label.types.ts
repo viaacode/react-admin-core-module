@@ -10,6 +10,7 @@ export type ContentPageLabelOverviewTableCols =
 	| 'language'
 	| 'created_at'
 	| 'updated_at'
+	| 'color'
 	| 'actions';
 
 export interface ContentPageLabel {
@@ -18,6 +19,8 @@ export interface ContentPageLabel {
 	content_type: AvoContentPageType;
 	language: Locale;
 	link_to: PickerItem | null;
+	// The background colour of the generated visual label. Only exists on hetarchief
+	color?: string;
 	created_at: string;
 	updated_at: string;
 }
