@@ -34,8 +34,6 @@ export const BlockHeroCarousel: FunctionComponent<BlockHeroCarouselProps> = ({
 	searchAriaLabel,
 	elements,
 }): ReactNode => {
-	console.log(backgroundImage, backgroundColor);
-
 	return (
 		<article className={clsx('c-block-hero-carousel', className)}>
 			{backgroundImage && (
