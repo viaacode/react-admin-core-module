@@ -117,6 +117,7 @@ export const OVERVIEW_WITH_CAROUSEL_CONFIG = (position = 0): ContentBlockConfig 
 						AvoCoreContentPickerType.CONTENT_PAGE,
 						AvoCoreContentPickerType.INTERNAL_LINK,
 						AvoCoreContentPickerType.EXTERNAL_LINK,
+						AvoCoreContentPickerType.IE_OBJECT,
 					],
 				},
 			},
