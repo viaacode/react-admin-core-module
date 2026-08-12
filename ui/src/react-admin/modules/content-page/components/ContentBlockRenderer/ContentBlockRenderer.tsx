@@ -10,11 +10,7 @@ import { GENERATED_CONTENT_BLOCK_ANCHOR_PREFIX } from '~modules/content-page/con
 import type { ContentPageInfo } from '~modules/content-page/types/content-pages.types';
 import { ContentPageWidth } from '~modules/content-page/types/content-pages.types';
 import { generateSmartLink } from '~shared/components/SmartLink/SmartLink';
-import { isAvo } from '~shared/helpers/is-avo';
-import {
-	GET_DARK_BACKGROUND_COLOR_OPTIONS_ARCHIEF,
-	GET_DARK_BACKGROUND_COLOR_OPTIONS_AVO,
-} from '../../const/get-color-options';
+import { hasDarkBackground } from '../../const/get-color-options';
 import {
 	Color,
 	type ContentBlockConfig,
@@ -126,9 +122,7 @@ const ContentBlockRenderer: FunctionComponent<ContentBlockPreviewProps> = ({
 		};
 	}
 
-	const hasDarkBg = (
-		isAvo() ? GET_DARK_BACKGROUND_COLOR_OPTIONS_AVO() : GET_DARK_BACKGROUND_COLOR_OPTIONS_ARCHIEF()
-	).includes(blockState?.backgroundColor || ('' as unknown as Color));
+	const hasDarkBg = hasDarkBackground(blockState?.backgroundColor);
 	const anchor =
 		blockState?.anchor?.replaceAll(' ', '-') ||
 		GENERATED_CONTENT_BLOCK_ANCHOR_PREFIX + contentBlockConfig.id;

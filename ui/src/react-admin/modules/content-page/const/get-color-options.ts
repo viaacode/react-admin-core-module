@@ -1,4 +1,6 @@
 import type { SelectOption } from '@viaa/avo2-components';
+import { getContrastRatio, WCAG_AA_CONTRAST_NORMAL_TEXT } from '~shared/helpers/get-contrast-ratio';
+import { isAvo } from '~shared/helpers/is-avo';
 import { tText } from '~shared/helpers/translation-functions';
 import { AVO } from '~shared/types';
 import { App } from '../../../../../scripts/translation.types';
@@ -169,11 +171,7 @@ export const GET_AVO_HERO_BACKGROUND_COLOR_OPTIONS: () => SelectOption<Color>[] 
 	yellowOption(),
 ];
 
-export const GET_DARK_BACKGROUND_COLOR_OPTIONS_AVO: () => (
-	| Color
-	| GradientColor
-	| CustomBackground
-)[] = () => [
+export const DARK_BACKGROUND_COLOR_OPTIONS_AVO: (Color | GradientColor | CustomBackground)[] = [
 	Color.SoftBlue,
 	Color.NightBlue,
 	Color.Teal,
@@ -184,14 +182,41 @@ export const GET_DARK_BACKGROUND_COLOR_OPTIONS_AVO: () => (
 	Color.Black,
 ];
 
-// Backgrounds that need white text to pass WCAG AA on hetarchief.be, per the color
-// combinations design provided on https://meemoo.atlassian.net/browse/ARC-3848.
-// Every other archief background color passes AA with the default black text.
-export const GET_DARK_BACKGROUND_COLOR_OPTIONS_ARCHIEF: () => (
-	| Color
-	| GradientColor
-	| CustomBackground
-)[] = () => [Color.Black, Color.OldPink];
+/**
+ * Whether text on this background color must be white to pass WCAG AA, following the rule meemoo
+ * set: black text on the color, unless white text on that color passes AA.
+ * https://meemoo.atlassian.net/browse/ARC-3848
+ *
+ * Use this for every content block that renders text on an admin-picked color without offering a
+ * text color field of its own.
+ *
+ * The archief answer is computed rather than listed, so a new brand color is handled the moment it
+ * is added instead of silently defaulting to black - the drift between the palette and a
+ * hand-maintained list is what put unreadable white text on ocean green in the first place. The
+ * computation reproduces every background row of meemoo-hetarchief-kleurencombinaties.pdf, which
+ * get-color-options.test.ts asserts row by row.
+ *
+ * AVO keeps its literal list: its palette predates this rule and does not follow it (white on
+ * Color.Yellow is 1.2:1, nowhere near AA), so it must not be recomputed.
+ *
+ * Gradients, the meemoo logo pattern and Color.Transparent have no single luminance, so
+ * getContrastRatio returns null and they keep the default black text.
+ */
+export function hasDarkBackground(
+	color: Color | GradientColor | CustomBackground | string | undefined
+): boolean {
+	if (!color) {
+		return false;
+	}
+
+	if (isAvo()) {
+		return DARK_BACKGROUND_COLOR_OPTIONS_AVO.includes(color as Color);
+	}
+
+	const whiteTextContrast = getContrastRatio(color, Color.White);
+
+	return whiteTextContrast !== null && whiteTextContrast >= WCAG_AA_CONTRAST_NORMAL_TEXT;
+}
 
 export const GET_FOREGROUND_COLOR_OPTIONS_AVO: () => SelectOption<Color>[] = () => [
 	{
