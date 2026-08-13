@@ -78,16 +78,6 @@
       height: variables.$g-spacer-unit * 20; // 160px
     }
   }
-
-  // The design puts the breadcrumbs 48px below the top of the block they cover, 24px on mobile.
-  // Overrides the block's padding field, which avo2-components applies with !important.
-  .c-content-block-preview {
-    padding-top: variables.$g-spacer-unit * 6 !important; // 48px
-
-    @media (max-width: variables.$g-bp2) {
-      padding-top: variables.$g-spacer-unit * 1.75 !important; // 14px
-    }
-  }
 }
 
 .c-content-block-preview--dark {
