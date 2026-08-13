@@ -36,11 +36,9 @@ $hero-carousel-format-widths: (
 				height: 32rem !important;
 				align-items: flex-end;
 
-				// Matches the ease-out on &-slide below so the slide-into-place motion
-				// (Swiper's translate) and the grow/shrink (this file's own transition)
-				// read as one combined movement instead of two differently-eased ones.
+				// Matches the &-slide transition below so the slide-into-place motion and
+				// the grow/shrink read as one combined movement, not two differently-eased ones.
 				--swiper-wrapper-transition-timing-function: ease-out;
-				background: rgba(125, 124, 125, .5);
 			}
 		}
 
