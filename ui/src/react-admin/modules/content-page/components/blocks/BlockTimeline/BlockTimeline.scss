@@ -5,7 +5,7 @@
 // line from $g-bp3 on. Below that breakpoint the years sit above the date, right of the line.
 $year-column-width: 17rem;
 // Distance between the timeline line and the node date / content.
-$line-content-gap: 1.5rem;
+$line-content-gap: 3rem;
 // The circle / rectangle markers: one per node (alternating), plus a fixed circle-rectangle-circle
 // cluster at the very start and end of the timeline.
 $marker-size: 0.4375rem;
@@ -13,9 +13,9 @@ $marker-rectangle-height: 0.3rem;
 // Aspect ratio for the node's image / video / audio media.
 $node-media-aspect-ratio: '1215 / 630';
 // Vertical space between every item on the timeline (start cap, nodes, end cap).
-$item-gap: 2rem;
+$item-gap: 12rem;
 // Inner padding of a node that has a background colour.
-$node-background-padding: 1rem;
+$node-background-padding: 4rem;
 // Gap between a node's media (image / object) and the start of its background colour band.
 $node-background-top-gap: 5rem;
 
@@ -40,10 +40,15 @@ $node-background-top-gap: 5rem;
 			width: 1px;
 			background-color: currentcolor;
 			opacity: 0.3;
+			z-index: 1;
 		}
 
-		> li:not(:last-child) {
+		> li:not(:first-child):not(:last-child) {
 			margin-bottom: $item-gap;
+		}
+
+		> li:first-child {
+			margin-bottom: 6rem;
 		}
 	}
 
@@ -104,6 +109,7 @@ $node-background-top-gap: 5rem;
 		font-style: normal;
 		line-height: 26px;
 		letter-spacing: 0;
+		color: colors.$color-gray-300;
 	}
 
 	// A node's marker alternates between a circle and a rectangle (see BlockTimeline.tsx).
@@ -160,12 +166,6 @@ $node-background-top-gap: 5rem;
 				position: relative;
 				z-index: 1;
 			}
-
-			.c-block-timeline__node-text,
-			.c-block-timeline__node-image-caption {
-				padding-right: $node-background-padding;
-				padding-left: calc(#{$line-content-gap} + #{$node-background-padding});
-			}
 		}
 	}
 
@@ -186,11 +186,12 @@ $node-background-top-gap: 5rem;
 	&__node-description {
 		margin-top: 0.25rem;
 		font-family: "Sofia Pro", sans-serif;
-		font-size: 1.125rem;
 		font-weight: 500;
 		font-style: normal;
 		line-height: 28px;
 		letter-spacing: 0;
+		font-size: 18px;
+
 	}
 
 	&__node-image-wrapper {
@@ -219,7 +220,7 @@ $node-background-top-gap: 5rem;
 		font-style: normal;
 		line-height: 20px;
 		letter-spacing: 0;
-		color: var(--c-block-timeline-copyright-color, #757575);
+		color: var(--c-block-timeline-copyright-color, colors.$color-gray-300);
 	}
 
 	&__node-image-description {
@@ -282,7 +283,7 @@ $node-background-top-gap: 5rem;
 		border: none;
 		padding: 0;
 		cursor: pointer;
-		color: #757575;
+		color: colors.$color-gray-300;
 		font-family: "Sofia Pro", sans-serif;
 		font-size: 1rem;
 		font-weight: 500;
@@ -324,18 +325,6 @@ $node-background-top-gap: 5rem;
 		&__node-object-media {
 			margin-left: calc(-1 * (#{$year-column-width} + #{$line-content-gap}));
 			width: calc(100% + #{$year-column-width} + #{$line-content-gap});
-		}
-
-		// The image bleeds left over the timeline line (see above), so its caption needs its own
-		// offset to line back up with the date, which sits to the right of the line.
-		&__node-image-caption {
-			padding-left: calc(#{$year-column-width} + #{$line-content-gap});
-		}
-
-		&__node-content--has-background &__node-image-caption {
-			padding-left: calc(
-				#{$year-column-width} + #{$line-content-gap} + #{$node-background-padding}
-			);
 		}
 	}
 }

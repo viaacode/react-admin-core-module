@@ -89,7 +89,7 @@ export const BlockAvoHero: FunctionComponent<BlockAvoHeroProps> = ({
 				)}
 				{!!textBelowButtons && (
 					<Spacer margin="top-large" style={{ color: contentColor }}>
-						{isString(textBelowButtons) && <Html content={textBelowButtons} type="p"></Html>}
+						{isString(textBelowButtons) && <Html content={textBelowButtons} type="p" />}
 						{!isString(textBelowButtons) && textBelowButtons}
 					</Spacer>
 				)}

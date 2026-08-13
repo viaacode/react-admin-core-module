@@ -182,96 +182,97 @@ export function getAdminCoreConfigForLocalTestApp(navigateFunc: NavigateFunction
 			},
 			defaultAudioStill: 'FAKE_DEFAULT_AUDIO_STILL',
 			enableMultiLanguage: true,
+			audioOrVideoPlayer: () => (
+				<div style={{ backgroundColor: 'gray', aspectRatio: 16 / 9 }}>AudioOrVideoPlayer</div>
+			),
 			buttonTypes: () => [
 				// Het archief buttons
-				// {
-				// 	label: tText('index___zilver'),
-				// 	value: 'content-page-button--silver',
-				// },
-				// {
-				// 	label: tText(
-				// 		'index___blauw-groen'
-				// 	),
-				// 	value: 'content-page-button--teal',
-				// },
-				// {
-				// 	label: tText('index___wit'),
-				// 	value: 'content-page-button--white',
-				// },
-				// {
-				// 	label: tText('index___zwart'),
-				// 	value: 'content-page-button--black',
-				// },
-				// {
-				// 	label: tText('index___outline'),
-				// 	value: 'content-page-button--outline',
-				// },
-				// {
-				// 	label: tText('index___tekst'),
-				// 	value: 'content-page-button--text',
-				// },
-				// {
-				// 	label: tText('index___rood'),
-				// 	value: 'content-page-button--red',
-				// },
-				// {
-				// 	label: tText('index___link'),
-				// 	value: 'content-page-button--link',
-				// },
+				{
+					label: tText('index___zilver'),
+					value: 'content-page-button--silver',
+				},
+				{
+					label: tText('index___blauw-groen'),
+					value: 'content-page-button--teal',
+				},
+				{
+					label: tText('index___wit'),
+					value: 'content-page-button--white',
+				},
+				{
+					label: tText('index___zwart'),
+					value: 'content-page-button--black',
+				},
+				{
+					label: tText('index___outline'),
+					value: 'content-page-button--outline',
+				},
+				{
+					label: tText('index___tekst'),
+					value: 'content-page-button--text',
+				},
+				{
+					label: tText('index___rood'),
+					value: 'content-page-button--red',
+				},
+				{
+					label: tText('index___link'),
+					value: 'content-page-button--link',
+				},
 
 				// Avo buttons
-				{
-					label: tText('admin/content-block/content-block___primair'),
-					value: 'primary',
-				},
-				{
-					label: tText('admin/content-block/content-block___secundair'),
-					value: 'secondary',
-				},
-				{
-					label: tText('admin/content-block/content-block___secundair-invers'),
-					value: 'secondary-i',
-				},
-				{
-					label: tText('admin/content-block/content-block___tertiair'),
-					value: 'tertiary',
-				},
-				{
-					label: tText('admin/content-block/content-block___randloos'),
-					value: 'borderless',
-				},
-				{
-					label: tText('admin/content-block/content-block___randloos-invers'),
-					value: 'borderless-i',
-				},
-				{
-					label: tText('admin/content-block/content-block___gevaar'),
-					value: 'danger',
-				},
-				{
-					label: tText('admin/content-block/content-block___gevaar-hover'),
-					value: 'danger-hover',
-				},
-				{
-					label: tText('admin/content-block/content-block___link'),
-					value: 'link',
-				},
-				{
-					label: tText('admin/content-block/content-block___link-inline'),
-					value: 'inline-link',
-				},
-				{
-					label: tText('admin/content-block/content-block___leerling-primair-geel'),
-					value: 'pupil-primary',
-				},
-				{
-					label: tText('admin/content-block/content-block___leerling-link-tekst-in-geel'),
-					value: 'pupil-link',
-				},
-				{
-					label: tText('admin/content-block/content-block___leerling-link-geel-inline'),
-					value: 'pupil-inline-link',
-				},
+				// {
+				// 	label: tText('admin/content-block/content-block___primair'),
+				// 	value: 'primary',
+				// },
+				// {
+				// 	label: tText('admin/content-block/content-block___secundair'),
+				// 	value: 'secondary',
+				// },
+				// {
+				// 	label: tText('admin/content-block/content-block___secundair-invers'),
+				// 	value: 'secondary-i',
+				// },
+				// {
+				// 	label: tText('admin/content-block/content-block___tertiair'),
+				// 	value: 'tertiary',
+				// },
+				// {
+				// 	label: tText('admin/content-block/content-block___randloos'),
+				// 	value: 'borderless',
+				// },
+				// {
+				// 	label: tText('admin/content-block/content-block___randloos-invers'),
+				// 	value: 'borderless-i',
+				// },
+				// {
+				// 	label: tText('admin/content-block/content-block___gevaar'),
+				// 	value: 'danger',
+				// },
+				// {
+				// 	label: tText('admin/content-block/content-block___gevaar-hover'),
+				// 	value: 'danger-hover',
+				// },
+				// {
+				// 	label: tText('admin/content-block/content-block___link'),
+				// 	value: 'link',
+				// },
+				// {
+				// 	label: tText('admin/content-block/content-block___link-inline'),
+				// 	value: 'inline-link',
+				// },
+				// {
+				// 	label: tText('admin/content-block/content-block___leerling-primair-geel'),
+				// 	value: 'pupil-primary',
+				// },
+				// {
+				// 	label: tText('admin/content-block/content-block___leerling-link-tekst-in-geel'),
+				// 	value: 'pupil-link',
+				// },
+				// {
+				// 	label: tText('admin/content-block/content-block___leerling-link-geel-inline'),
+				// 	value: 'pupil-inline-link',
+				// },
 			],
 		},
 		content_blocks: {

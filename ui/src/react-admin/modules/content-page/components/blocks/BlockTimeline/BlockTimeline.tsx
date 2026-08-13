@@ -177,26 +177,26 @@ export const BlockTimeline: FunctionComponent<BlockTimelineProps> = ({
 											alt={node.imageAlt || node.title}
 											className="c-block-timeline__node-image"
 										/>
-										{(node.imageCaptionCopyright || node.imageCaptionDescription) && (
-											<div className="c-block-timeline__node-image-caption">
-												{node.imageCaptionCopyright && (
-													<p className="c-block-timeline__node-image-copyright">
-														{node.imageCaptionCopyrightIconVisible !== false && (
-															<span aria-hidden="true">&copy;&nbsp;</span>
-														)}
-														{node.imageCaptionCopyright}
-													</p>
-												)}
-												{node.imageCaptionDescription && (
-													<p className="c-block-timeline__node-image-description">
-														{node.imageCaptionDescription}
-													</p>
-												)}
-											</div>
-										)}
 									</div>
 								)}
 								<div className="c-block-timeline__node-text">
+									{(node.imageCaptionCopyright || node.imageCaptionDescription) && (
+										<div className="c-block-timeline__node-image-caption">
+											{node.imageCaptionCopyright && (
+												<p className="c-block-timeline__node-image-copyright">
+													{node.imageCaptionCopyrightIconVisible !== false && (
+														<span aria-hidden="true">&copy;&nbsp;</span>
+													)}
+													{node.imageCaptionCopyright}
+												</p>
+											)}
+											{node.imageCaptionDescription && (
+												<p className="c-block-timeline__node-image-description">
+													{node.imageCaptionDescription}
+												</p>
+											)}
+										</div>
+									)}
 									<h3 className="c-block-timeline__node-title">{node.title}</h3>
 									{node.text && (
 										<Html
