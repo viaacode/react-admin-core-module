@@ -609,8 +609,6 @@ export interface HetArchiefIeObject {
 	schemaIdentifier: string;
 }
 
-export type TimelineSortOrder = 'date__asc' | 'date__desc';
-
 export type TimelineNodeVisualType = 'NONE' | 'OBJECT' | 'IMAGE';
 
 export interface TimelineNodeBlockComponentState {
@@ -627,6 +625,4 @@ export interface TimelineNodeBlockComponentState {
 	backgroundColor?: Color;
 }
 
-export interface TimelineBlockState extends DefaultContentBlockState {
-	sortOrder: TimelineSortOrder;
-}
+export type TimelineBlockState = DefaultContentBlockState;

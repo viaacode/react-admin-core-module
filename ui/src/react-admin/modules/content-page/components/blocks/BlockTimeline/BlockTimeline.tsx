@@ -1,19 +1,17 @@
 import { AvoCoreContentPickerType } from '@viaa/avo2-types';
 import clsx from 'clsx';
-import type { FunctionComponent, ReactElement } from 'react';
-import React, { useMemo, useRef } from 'react';
+import type { CSSProperties, FunctionComponent, ReactElement } from 'react';
+import React, { useRef } from 'react';
 import { AdminConfigManager } from '~core/config/config.class';
+import type { TimelineNodeBlockComponentState } from '~modules/content-page/types/content-block.types';
+import { Color } from '~modules/content-page/types/content-block.types';
+import { FlowPlayerWrapper } from '~shared/components/FlowPlayerWrapper/FlowPlayerWrapper';
+import Html from '~shared/components/Html/Html';
+import { Icon } from '~shared/components/Icon/Icon';
+import { SmartLink } from '~shared/components/SmartLink/SmartLink';
 import { SanitizePreset } from '~shared/helpers/sanitize/presets';
 import { tText } from '~shared/helpers/translation-functions';
 import { HET_ARCHIEF } from '~shared/types';
-import { Color } from '~modules/content-page/types/content-block.types';
-import type {
-	TimelineNodeBlockComponentState,
-	TimelineSortOrder,
-} from '~modules/content-page/types/content-block.types';
-import { FlowPlayerWrapper } from '~shared/components/FlowPlayerWrapper/FlowPlayerWrapper';
-import { SmartLink } from '~shared/components/SmartLink/SmartLink';
-import Html from '~shared/components/Html/Html';
 import type { DefaultComponentProps } from '~shared/types/components';
 import { useGetTimelineIeObject } from './hooks/useGetTimelineIeObject';
 
@@ -21,13 +19,22 @@ import './BlockTimeline.scss';
 
 export interface BlockTimelineProps extends DefaultComponentProps {
 	elements: TimelineNodeBlockComponentState[];
-	sortOrder?: TimelineSortOrder;
 }
 
 const isValidDate = (date: string): boolean => !Number.isNaN(new Date(date).getTime());
 
 const getYear = (date: string): number | null =>
 	isValidDate(date) ? new Date(date).getFullYear() : null;
+
+// The timeline starts and ends with the same fixed circle/rectangle/circle cluster of markers.
+// Every node in between alternates circle, rectangle, circle, rectangle, ... based on its index.
+const TimelineCap: FunctionComponent<{ position: 'start' | 'end' }> = ({ position }) => (
+	<li className={`c-block-timeline__cap c-block-timeline__cap--${position}`} aria-hidden="true">
+		<span className="c-block-timeline__cap-shape c-block-timeline__cap-shape--circle" />
+		<span className="c-block-timeline__cap-shape c-block-timeline__cap-shape--rectangle" />
+		<span className="c-block-timeline__cap-shape c-block-timeline__cap-shape--circle" />
+	</li>
+);
 
 const BlockTimelineObject: FunctionComponent<{ pid: string; fallbackTitle: string }> = ({
 	pid,
@@ -96,17 +103,9 @@ const BlockTimelineObject: FunctionComponent<{ pid: string; fallbackTitle: strin
 export const BlockTimeline: FunctionComponent<BlockTimelineProps> = ({
 	className,
 	elements = [],
-	sortOrder = 'date__desc',
 }): ReactElement => {
 	const containerRef = useRef<HTMLDivElement>(null);
 	const locale = AdminConfigManager.getConfig().locale;
-
-	const sortedElements = useMemo(() => {
-		const sorted = [...elements].sort(
-			(a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
-		);
-		return sortOrder === 'date__asc' ? sorted : sorted.reverse();
-	}, [elements, sortOrder]);
 
 	const formatDate = (date: string): string =>
 		isValidDate(date)
@@ -124,31 +123,46 @@ export const BlockTimeline: FunctionComponent<BlockTimelineProps> = ({
 	return (
 		<div className={clsx('c-block-timeline', className)} ref={containerRef}>
 			<ol className="c-block-timeline__list">
-				{sortedElements.map((node, index) => {
-					const showYear =
-						index === 0 || getYear(node.date) !== getYear(sortedElements[index - 1].date);
+				<TimelineCap position="start" />
+				{elements.map((node, index) => {
+					const showYear = index === 0 || getYear(node.date) !== getYear(elements[index - 1].date);
 					const backgroundColor =
 						node.backgroundColor && node.backgroundColor !== Color.Transparent
 							? node.backgroundColor
 							: undefined;
+					const markerShape = index % 2 === 0 ? 'circle' : 'rectangle';
+					const hasMedia =
+						(node.visualType === 'OBJECT' && !!node.mediaItem?.value) ||
+						(node.visualType === 'IMAGE' && !!node.image);
 
 					return (
 						<li
 							className="c-block-timeline__node"
 							key={`c-block-timeline__node--${node.date}-${node.title}-${index}`}
 						>
-							<div className="c-block-timeline__node-marker" aria-hidden="true" />
-							<div className="c-block-timeline__node-date">
-								{showYear && (
-									<span className="c-block-timeline__node-year">{getYear(node.date)}</span>
-								)}
-								<time className="c-block-timeline__node-full-date" dateTime={node.date}>
-									{formatDate(node.date)}
-								</time>
-							</div>
+							{showYear && (
+								<span className="c-block-timeline__node-year">{getYear(node.date)}</span>
+							)}
+							<time className="c-block-timeline__node-date" dateTime={node.date}>
+								<span
+									className={clsx(
+										'c-block-timeline__node-marker',
+										`c-block-timeline__node-marker--${markerShape}`
+									)}
+									aria-hidden="true"
+								/>
+								{formatDate(node.date)}
+							</time>
 							<div
-								className="c-block-timeline__node-content"
-								style={backgroundColor ? { backgroundColor } : undefined}
+								className={clsx('c-block-timeline__node-content', {
+									'c-block-timeline__node-content--has-background': !!backgroundColor,
+									'c-block-timeline__node-content--has-media': hasMedia,
+								})}
+								style={
+									backgroundColor
+										? ({ '--c-block-timeline-node-bg': backgroundColor } as CSSProperties)
+										: undefined
+								}
 							>
 								{node.visualType === 'OBJECT' && node.mediaItem?.value && (
 									<BlockTimelineObject
@@ -197,18 +211,16 @@ export const BlockTimeline: FunctionComponent<BlockTimelineProps> = ({
 						</li>
 					);
 				})}
+				<TimelineCap position="end" />
 			</ol>
-			{sortedElements.length > 0 && (
-				<button
-					type="button"
-					className="c-block-timeline__back-to-top"
-					onClick={scrollToTop}
-				>
+			{elements.length > 0 && (
+				<button type="button" className="c-block-timeline__back-to-top" onClick={scrollToTop}>
 					{tText(
 						'react-admin/modules/content-page/components/blocks/block-timeline/block-timeline___terug-naar-boven',
 						{},
 						[HET_ARCHIEF]
 					)}
+					<Icon name="arrowUp" className="c-block-timeline__back-to-top-icon" />
 				</button>
 			)}
 		</div>

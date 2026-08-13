@@ -1,3 +1,24 @@
+@use "../../../../shared/styles/settings/colors" as colors;
+@use "../../../../shared/styles/settings/variables" as variables;
+
+// Horizontal space reserved for the year labels, which sit to the left of the timeline
+// line from $g-bp3 on. Below that breakpoint the years sit above the date, right of the line.
+$year-column-width: 17rem;
+// Distance between the timeline line and the node date / content.
+$line-content-gap: 1.5rem;
+// The circle / rectangle markers: one per node (alternating), plus a fixed circle-rectangle-circle
+// cluster at the very start and end of the timeline.
+$marker-size: 0.4375rem;
+$marker-rectangle-height: 0.3rem;
+// Aspect ratio for the node's image / video / audio media.
+$node-media-aspect-ratio: '1215 / 630';
+// Vertical space between every item on the timeline (start cap, nodes, end cap).
+$item-gap: 2rem;
+// Inner padding of a node that has a background colour.
+$node-background-padding: 1rem;
+// Gap between a node's media (image / object) and the start of its background colour band.
+$node-background-top-gap: 5rem;
+
 .c-block-timeline {
 	position: relative;
 
@@ -7,74 +28,181 @@
 		padding: 0;
 		list-style: none;
 
+		// The timeline line runs continuously behind every marker, from the first shape of the
+		// start cap to the last shape of the end cap.
 		&::before {
 			content: '';
 			position: absolute;
 			top: 0;
 			bottom: 0;
-			left: 0.5rem;
+			left: 0;
+			transform: translateX(-50%);
 			width: 1px;
 			background-color: currentcolor;
 			opacity: 0.3;
 		}
-	}
 
-	&__node {
-		position: relative;
-		padding-left: 2rem;
-
-		&:not(:last-child) {
-			margin-bottom: 1.5rem;
+		> li:not(:last-child) {
+			margin-bottom: $item-gap;
 		}
 	}
 
-	&__node-marker {
-		position: absolute;
-		top: 0.6rem;
-		left: 0.125rem;
-		width: 0.75rem;
-		height: 0.75rem;
-		border-radius: 50%;
-		background-color: currentcolor;
+	// The fixed circle/rectangle/circle cluster marking the start and end of the timeline. The
+	// shapes touch, with no gap between them.
+	&__cap {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		align-items: stretch;
+		width: $marker-size;
+		margin-left: calc(#{$marker-size} / -2);
 	}
 
-	&__node-date {
-		display: flex;
-		align-items: baseline;
-		gap: 0.75rem;
-		margin-bottom: 0.5rem;
+	&__cap-shape {
+		flex-shrink: 0;
+		width: 100%;
+		height: $marker-size;
+		background-color: currentcolor;
+
+		&--circle {
+			border-radius: 50%;
+		}
+
+		&--rectangle {
+			height: $marker-rectangle-height;
+			border-radius: 0;
+		}
+	}
+
+	&__node {
+		display: grid;
+		grid-template-columns: 1fr;
+		grid-template-areas:
+			'year'
+			'date'
+			'content';
 	}
 
 	&__node-year {
-		font-size: 1.5rem;
+		grid-area: year;
+		align-self: baseline;
+		padding-left: $line-content-gap;
+		font-size: 2.25rem;
 		font-weight: 700;
+		line-height: 1.2;
 	}
 
-	&__node-full-date {
-		font-size: 0.875rem;
-		opacity: 0.7;
+	&__node-date {
+		grid-area: date;
+		align-self: baseline;
+		position: relative;
+		display: block;
+		padding-left: $line-content-gap;
+		font-family: "Sofia Pro", sans-serif;
+		font-size: 1.5rem;
+		font-weight: 800;
+		font-style: normal;
+		line-height: 26px;
+		letter-spacing: 0;
+	}
+
+	// A node's marker alternates between a circle and a rectangle (see BlockTimeline.tsx).
+	&__node-marker {
+		position: absolute;
+		top: 50%;
+		left: 0;
+		transform: translate(-50%, -50%);
+		width: $marker-size;
+		height: $marker-size;
+		background-color: currentcolor;
+
+		&--circle {
+			border-radius: 50%;
+		}
+
+		&--rectangle {
+			height: $marker-rectangle-height;
+			border-radius: 0;
+		}
 	}
 
 	&__node-content {
-		padding: 1rem;
+		grid-area: content;
+		margin-top: 0.5rem;
+		padding-left: $line-content-gap;
+
+		&--has-background {
+			position: relative;
+			padding-bottom: $node-background-padding;
+
+			// Full-page-width colour band behind the node's content. The 5000px width is a
+			// generous fixed size that always covers the viewport, breaking out of any
+			// max-width content container (see BlockOverviewThemes for the same pattern). With
+			// media, it starts $node-background-top-gap below the media's top edge so that edge
+			// stays free of colour; without media there's nothing to leave uncovered, so it
+			// starts at the very top and covers the title and description in full.
+			&::before {
+				content: '';
+				position: absolute;
+				top: 0;
+				bottom: 0;
+				left: -2500px;
+				z-index: 0;
+				width: 5000px;
+				background-color: var(--c-block-timeline-node-bg);
+			}
+
+			&.c-block-timeline__node-content--has-media::before {
+				top: $node-background-top-gap;
+			}
+
+			> * {
+				position: relative;
+				z-index: 1;
+			}
+
+			.c-block-timeline__node-text,
+			.c-block-timeline__node-image-caption {
+				padding-right: $node-background-padding;
+				padding-left: calc(#{$line-content-gap} + #{$node-background-padding});
+			}
+		}
+	}
+
+	&__node-text {
+		padding-top: 1rem;
 	}
 
 	&__node-title {
-		margin: 0.5rem 0 0;
+		margin: 0;
+		font-family: "Sofia Pro", sans-serif;
+		font-size: 1.5rem;
+		font-weight: 800;
+		font-style: normal;
+		line-height: 26px;
+		letter-spacing: 0;
 	}
 
 	&__node-description {
 		margin-top: 0.25rem;
+		font-family: "Sofia Pro", sans-serif;
+		font-size: 1.125rem;
+		font-weight: 500;
+		font-style: normal;
+		line-height: 28px;
+		letter-spacing: 0;
 	}
 
 	&__node-image-wrapper {
+		position: relative;
+		z-index: 1;
 		width: 100%;
 	}
 
 	&__node-image {
 		display: block;
 		width: 100%;
-		height: 20rem;
+		aspect-ratio: #{$node-media-aspect-ratio};
 		object-fit: cover;
 		object-position: center;
 	}
@@ -85,23 +213,36 @@
 
 	&__node-image-copyright {
 		margin: 0;
-		font-size: 0.75rem;
+		font-family: "Sofia Pro", sans-serif;
+		font-size: 0.875rem;
+		font-weight: 500;
+		font-style: normal;
+		line-height: 20px;
+		letter-spacing: 0;
 		color: var(--c-block-timeline-copyright-color, #757575);
 	}
 
 	&__node-image-description {
 		margin: 0.25rem 0 0;
-		font-weight: 700;
+		font-family: "Sofia Pro", sans-serif;
+		font-size: 0.875rem;
+		font-weight: 500;
+		font-style: normal;
+		line-height: 20px;
+		letter-spacing: 0;
+		color: colors.$color-gray-1000;
 	}
 
 	&__node-object-media {
+		position: relative;
+		z-index: 1;
 		width: 100%;
 	}
 
 	&__node-object-image {
 		display: block;
 		width: 100%;
-		height: 20rem;
+		aspect-ratio: #{$node-media-aspect-ratio};
 		object-fit: cover;
 		object-position: top;
 	}
@@ -112,7 +253,7 @@
 		justify-content: space-between;
 		gap: 1rem;
 		padding: 0.75rem 1rem;
-		background-color: #fff;
+		background-color: colors.$white;
 	}
 
 	&__node-object-title {
@@ -132,13 +273,69 @@
 	}
 
 	&__back-to-top {
-		display: block;
-		margin: 1.5rem 0 0 2rem;
+		display: flex;
+		align-items: center;
+		gap: 0.375rem;
+		width: fit-content;
+		margin: 1.5rem 0 0 auto;
 		background: none;
 		border: none;
 		padding: 0;
-		text-decoration: underline;
 		cursor: pointer;
-		font: inherit;
+		color: #757575;
+		font-family: "Sofia Pro", sans-serif;
+		font-size: 1rem;
+		font-weight: 500;
+		font-style: normal;
+		line-height: 20px;
+		letter-spacing: 0;
+
+		&-icon {
+			width: 1rem;
+			height: 1rem;
+		}
+	}
+
+	// From this breakpoint on, the year labels move to the left of the timeline line, and the
+	// image / object media bleed left over the line to align with the year.
+	@media (min-width: variables.$g-bp3) {
+		&__list::before {
+			left: $year-column-width;
+		}
+
+		&__cap {
+			margin-left: calc(#{$year-column-width} - #{$marker-size} / 2);
+		}
+
+		&__node {
+			grid-template-columns: $year-column-width 1fr;
+			grid-template-areas:
+				'year date'
+				'.    content';
+		}
+
+		&__node-year {
+			padding-right: 1rem;
+			padding-left: 0;
+			font-size: 2.5rem;
+		}
+
+		&__node-image-wrapper,
+		&__node-object-media {
+			margin-left: calc(-1 * (#{$year-column-width} + #{$line-content-gap}));
+			width: calc(100% + #{$year-column-width} + #{$line-content-gap});
+		}
+
+		// The image bleeds left over the timeline line (see above), so its caption needs its own
+		// offset to line back up with the date, which sits to the right of the line.
+		&__node-image-caption {
+			padding-left: calc(#{$year-column-width} + #{$line-content-gap});
+		}
+
+		&__node-content--has-background &__node-image-caption {
+			padding-left: calc(
+				#{$year-column-width} + #{$line-content-gap} + #{$node-background-padding}
+			);
+		}
 	}
 }

@@ -1,6 +1,5 @@
 import type { CheckboxProps, SelectOption } from '@viaa/avo2-components';
 import { GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF } from '~modules/content-page/const/get-color-options';
-import { GET_TIMELINE_SORT_ORDER_OPTIONS } from '~modules/content-page/const/get-timeline-sort-order-options';
 import type { FileUploadProps } from '~shared/components/FileUpload/FileUpload';
 import { tText } from '~shared/helpers/translation-functions';
 import { HET_ARCHIEF } from '~shared/types';
@@ -66,7 +65,6 @@ export const INITIAL_TIMELINE_COMPONENTS_STATE = (): TimelineNodeBlockComponentS
 
 export const INITIAL_TIMELINE_BLOCK_STATE = (): TimelineBlockState => ({
 	...BLOCK_STATE_DEFAULTS(),
-	sortOrder: 'date__desc',
 });
 
 export const TIMELINE_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
@@ -246,17 +244,6 @@ export const TIMELINE_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 		state: INITIAL_TIMELINE_BLOCK_STATE(),
 		fields: {
 			...BLOCK_FIELD_DEFAULTS(),
-			sortOrder: {
-				label: tText(
-					'react-admin/modules/content-page/components/blocks/block-timeline/block-timeline___sortering',
-					{},
-					[HET_ARCHIEF]
-				),
-				editorType: ContentBlockEditor.Select,
-				editorProps: {
-					options: GET_TIMELINE_SORT_ORDER_OPTIONS(),
-				},
-			},
 		},
 	},
 });
