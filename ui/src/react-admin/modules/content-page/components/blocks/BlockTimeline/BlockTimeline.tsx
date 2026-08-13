@@ -1,23 +1,21 @@
-import { AvoCoreContentPickerType } from '@viaa/avo2-types';
 import clsx from 'clsx';
 import { compact, uniq } from 'es-toolkit/compat';
 import type { CSSProperties, FunctionComponent, ReactElement } from 'react';
-import React, { useMemo, useRef, useState } from 'react';
+import React, { useMemo, useRef } from 'react';
 import { AdminConfigManager } from '~core/config/config.class';
 import type { TimelineNodeBlockComponentState } from '~modules/content-page/types/content-block.types';
 import { Color } from '~modules/content-page/types/content-block.types';
-import { IeObjectType } from '~shared/components/AudioOrVideoPlayer/AudioOrVideoPlayer.types';
 import Html from '~shared/components/Html/Html';
 import { Icon } from '~shared/components/Icon/Icon';
-import { SmartLink } from '~shared/components/SmartLink/SmartLink';
 import { SanitizePreset } from '~shared/helpers/sanitize/presets';
 import { tText } from '~shared/helpers/translation-functions';
 import { HET_ARCHIEF } from '~shared/types';
 import type { DefaultComponentProps } from '~shared/types/components';
-import type { TimelineIeObject } from './hooks/useGetTimelineIeObjects';
+import { BlockTimelineObject } from './BlockTimelineObject';
 import { useGetTimelineIeObjects } from './hooks/useGetTimelineIeObjects';
 
 import './BlockTimeline.scss';
+import { BlockTimelineObjectMeta } from '~content-blocks/BlockTimeline/BlockTimelineObjectMeta.tsx';
 
 export interface BlockTimelineProps extends DefaultComponentProps {
 	elements: TimelineNodeBlockComponentState[];
@@ -37,90 +35,6 @@ const TimelineCap: FunctionComponent<{ position: 'start' | 'end' }> = ({ positio
 		<span className="c-block-timeline__cap-shape c-block-timeline__cap-shape--circle" />
 	</li>
 );
-
-// Formats that the AudioOrVideoPlayer can play. Other formats (newspaper, image) fall back to the thumbnail.
-const PLAYABLE_FORMATS: IeObjectType[] = [
-	IeObjectType.VIDEO,
-	IeObjectType.VIDEO_FRAGMENT,
-	IeObjectType.AUDIO,
-	IeObjectType.AUDIO_FRAGMENT,
-	IeObjectType.FILM,
-];
-
-const BlockTimelineObject: FunctionComponent<{
-	ieObject: TimelineIeObject;
-	fallbackTitle: string;
-}> = ({ ieObject, fallbackTitle }) => {
-	const [isPaused, setIsPaused] = useState<boolean>(true);
-	const AudioOrVideoPlayer = AdminConfigManager.getConfig().components?.audioOrVideoPlayer;
-
-	// The player only needs the first representation that contains a file, same as the object detail page
-	const representation = (ieObject.pages || [])
-		.flatMap((page) => page?.representations || [])
-		.find((rep) => !!rep?.files?.length);
-
-	const isPlayable =
-		!!AudioOrVideoPlayer &&
-		!!representation &&
-		!!ieObject.dctermsFormat &&
-		PLAYABLE_FORMATS.includes(ieObject.dctermsFormat);
-
-	return (
-		<div className="c-block-timeline__node-object">
-			<div className="c-block-timeline__node-object-media">
-				{isPlayable && AudioOrVideoPlayer ? (
-					<AudioOrVideoPlayer
-						className="c-block-timeline__node-object-player"
-						locationId="block-timeline"
-						representation={representation}
-						dctermsFormat={ieObject.dctermsFormat}
-						schemaIdentifier={ieObject.schemaIdentifier}
-						maintainerLogo={ieObject.maintainerOverlay ? ieObject.maintainerLogo : undefined}
-						cuePoints={undefined}
-						poster={ieObject.thumbnailUrl}
-						paused={isPaused}
-						onPlay={() => setIsPaused(false)}
-						onPause={() => setIsPaused(true)}
-						onMediaReady={() => undefined}
-					/>
-				) : (
-					ieObject.thumbnailUrl && (
-						<img
-							src={ieObject.thumbnailUrl}
-							alt={ieObject.name || fallbackTitle}
-							className="c-block-timeline__node-object-image"
-						/>
-					)
-				)}
-			</div>
-			<div className="c-block-timeline__node-object-meta">
-				<p className="c-block-timeline__node-object-title">{ieObject.name || fallbackTitle}</p>
-				<div className="c-block-timeline__node-object-footer">
-					<SmartLink
-						action={{
-							type: AvoCoreContentPickerType.INTERNAL_LINK,
-							value: `/pid/${ieObject.schemaIdentifier}`,
-						}}
-						className="c-block-timeline__node-object-cta"
-					>
-						{tText(
-							'react-admin/modules/content-page/components/blocks/block-timeline/block-timeline___bekijk-volledig-fragment',
-							{},
-							[HET_ARCHIEF]
-						)}
-					</SmartLink>
-					{ieObject.maintainerLogo && (
-						<img
-							src={ieObject.maintainerLogo}
-							alt={ieObject.maintainerName || ''}
-							className="c-block-timeline__node-object-maintainer-logo"
-						/>
-					)}
-				</div>
-			</div>
-		</div>
-	);
-};
 
 export const BlockTimeline: FunctionComponent<BlockTimelineProps> = ({
 	className,
@@ -246,6 +160,9 @@ export const BlockTimeline: FunctionComponent<BlockTimelineProps> = ({
 										/>
 									)}
 								</div>
+								{node.visualType === 'OBJECT' && ieObject && (
+									<BlockTimelineObjectMeta ieObject={ieObject} fallbackTitle={node.title} />
+								)}
 							</div>
 						</li>
 					);

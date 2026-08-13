@@ -183,7 +183,17 @@ export function getAdminCoreConfigForLocalTestApp(navigateFunc: NavigateFunction
 			defaultAudioStill: 'FAKE_DEFAULT_AUDIO_STILL',
 			enableMultiLanguage: true,
 			audioOrVideoPlayer: () => (
-				<div style={{ backgroundColor: 'gray', aspectRatio: 16 / 9 }}>AudioOrVideoPlayer</div>
+				<div
+					style={{
+						display: 'flex',
+						alignItems: 'center',
+						justifyContent: 'center',
+						backgroundColor: 'gray',
+						aspectRatio: 16 / 9,
+					}}
+				>
+					AudioOrVideoPlayer
+				</div>
 			),
 			buttonTypes: () => [
 				// Het archief buttons

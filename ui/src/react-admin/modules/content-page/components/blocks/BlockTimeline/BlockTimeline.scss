@@ -1,9 +1,11 @@
 @use "../../../../shared/styles/settings/colors" as colors;
 @use "../../../../shared/styles/settings/variables" as variables;
+@use "../../../../shared/styles/mixins/typography" as typography;
 
 // Horizontal space reserved for the year labels, which sit to the left of the timeline
 // line from $g-bp3 on. Below that breakpoint the years sit above the date, right of the line.
-$year-column-width: 17rem;
+$year-column-width-desktop: 17rem;
+$year-column-width-mobile: 4rem;
 // Distance between the timeline line and the node date / content.
 $line-content-gap: 3rem;
 // The circle / rectangle markers: one per node (alternating), plus a fixed circle-rectangle-circle
@@ -174,7 +176,7 @@ $node-background-top-gap: 5rem;
 	}
 
 	&__node-title {
-		margin: 0;
+		margin: variables.$g-spacer-unit * 4 0 0;
 		font-family: "Sofia Pro", sans-serif;
 		font-size: 1.5rem;
 		font-weight: 800;
@@ -215,21 +217,21 @@ $node-background-top-gap: 5rem;
 	&__node-image-copyright {
 		margin: 0;
 		font-family: "Sofia Pro", sans-serif;
-		font-size: 0.875rem;
+		font-size: 10px;
 		font-weight: 500;
 		font-style: normal;
-		line-height: 20px;
+		line-height: 15px;
 		letter-spacing: 0;
 		color: var(--c-block-timeline-copyright-color, colors.$color-gray-300);
 	}
 
 	&__node-image-description {
-		margin: 0.25rem 0 0;
+		margin: 0.25rem 0 variables.$g-spacer-unit * 4;
 		font-family: "Sofia Pro", sans-serif;
-		font-size: 0.875rem;
+		font-size: 10px;
 		font-weight: 500;
 		font-style: normal;
-		line-height: 20px;
+		line-height: 15px;
 		letter-spacing: 0;
 		color: colors.$color-gray-1000;
 	}
@@ -260,23 +262,41 @@ $node-background-top-gap: 5rem;
 		justify-content: space-between;
 		gap: 1rem;
 		padding: 0.75rem 1rem;
-		background-color: colors.$white;
+		background-color: colors.$color-platinum;
+		height: 6rem;
+		position: absolute;
+		bottom: -6rem;
+		left: 0;
+		max-width: 100%;
 	}
 
-	&__node-object-title {
+	&__node-object-cta {
+		flex: 0 0 auto;
+		white-space: nowrap;
+	}
+
+	&__node-object-text {
+		flex: 1 1 auto;
+		min-width: 0;
+	}
+
+	&__node-object-title,
+	&__node-object-maintainer-name {
 		margin: 0;
 		font-weight: 700;
+		display: block;
+		@include typography.truncate;
 	}
 
-	&__node-object-footer {
-		display: flex;
-		align-items: center;
-		gap: 0.75rem;
+	&__node-object-maintainer-name {
+		font-weight: 500;
 	}
 
 	&__node-object-maintainer-logo {
-		height: 1.5rem;
+		flex: 0 0 auto;
+		height: 2.4rem;
 		width: auto;
+		margin: 0 variables.$g-spacer-unit * 1.5 0 variables.$g-spacer-unit * 3;
 	}
 
 	&__back-to-top {
@@ -303,19 +323,44 @@ $node-background-top-gap: 5rem;
 		}
 	}
 
-	// From this breakpoint on, the year labels move to the left of the timeline line, and the
-	// image / object media bleed left over the line to align with the year.
-	@media (min-width: variables.$g-bp3) {
+	&__list::before {
+		left: $year-column-width-desktop;
+	}
+
+	&__cap {
+		margin-left: calc(#{$year-column-width-desktop} - #{$marker-size} / 2);
+	}
+
+	&__node {
+		grid-template-columns: $year-column-width-desktop 1fr;
+		grid-template-areas:
+			'year date'
+			'.    content';
+	}
+
+	&__node-year {
+		padding-right: 1rem;
+		padding-left: 0;
+		font-size: 2.5rem;
+	}
+
+	&__node-image-wrapper,
+	&__node-object-media {
+		margin-left: calc(-1 * (#{$year-column-width-desktop} + #{$line-content-gap}));
+		width: calc(100% + #{$year-column-width-desktop} + #{$line-content-gap});
+	}
+
+	@media (max-width: variables.$g-bp3) {
 		&__list::before {
-			left: $year-column-width;
+			left: $year-column-width-mobile;
 		}
 
 		&__cap {
-			margin-left: calc(#{$year-column-width} - #{$marker-size} / 2);
+			margin-left: calc(#{$year-column-width-mobile} - #{$marker-size} / 2);
 		}
 
 		&__node {
-			grid-template-columns: $year-column-width 1fr;
+			grid-template-columns: $year-column-width-mobile 1fr;
 			grid-template-areas:
 				'year date'
 				'.    content';
@@ -329,8 +374,8 @@ $node-background-top-gap: 5rem;
 
 		&__node-image-wrapper,
 		&__node-object-media {
-			margin-left: calc(-1 * (#{$year-column-width} + #{$line-content-gap}));
-			width: calc(100% + #{$year-column-width} + #{$line-content-gap});
+			margin-left: calc(-1 * (#{$year-column-width-mobile} + #{$line-content-gap}));
+			width: calc(100% + #{$year-column-width-mobile} + #{$line-content-gap});
 		}
 	}
 }
