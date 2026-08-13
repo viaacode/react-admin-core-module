@@ -14,7 +14,14 @@ import type {
 } from '../../../types/content-block.types';
 import { ContentBlockEditor, ContentBlockType } from '../../../types/content-block.types';
 
-import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, FILE_FIELD, TEXT_FIELD } from '../defaults';
+import {
+	BLOCK_FIELD_DEFAULTS,
+	BLOCK_STATE_DEFAULTS,
+	COPYRIGHT_FIELDS,
+	COPYRIGHT_STATE,
+	FILE_FIELD,
+	TEXT_FIELD,
+} from '../defaults';
 
 export const INITIAL_USP_GRID_COMPONENTS_STATE = (): ImageGridBlockComponentStateFields[] => [
 	{
@@ -22,6 +29,7 @@ export const INITIAL_USP_GRID_COMPONENTS_STATE = (): ImageGridBlockComponentStat
 		title: '',
 		text: '',
 		action: undefined,
+		...COPYRIGHT_STATE(),
 	} as unknown as ImageGridBlockComponentStateFields,
 ];
 
@@ -58,6 +66,7 @@ export const USP_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 					} as FileUploadProps,
 				}
 			),
+			...COPYRIGHT_FIELDS(),
 			title: TEXT_FIELD({
 				label: tText('admin/content-block/helpers/generators/image-grid___titel'),
 			}),

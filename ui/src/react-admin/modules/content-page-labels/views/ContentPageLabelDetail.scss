@@ -1,0 +1,14 @@
+@use "../../shared/styles/settings/colors" as colors;
+
+// Swatch showing the background colour picked for the generated visual label
+// https://meemoo.atlassian.net/browse/ARC-3818
+.c-content-page-label-detail__color-swatch {
+	width: 20rem;
+	height: 2.4rem;
+
+	// Only the colours that are white or near white need a border, without one they are invisible
+	// against the detail page
+	&--bordered {
+		border: 1px solid colors.$color-gray-100;
+	}
+}

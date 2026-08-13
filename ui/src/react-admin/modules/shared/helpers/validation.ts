@@ -20,7 +20,7 @@ export const validateContentBlockField = (
 
 	if (errorArray.length) {
 		if (typeof stateIndex === 'number') {
-			const errorsByKey = [...(oldErrors[fieldKey] || [])];
+			const errorsByKey = [...((oldErrors[fieldKey] as (string | string[])[]) || [])];
 			errorsByKey[stateIndex] = errorArray;
 
 			return {
@@ -65,7 +65,7 @@ export function validateFlowplayerVideoUrl(url: string | null | undefined) {
 	return [];
 }
 
-export function validateRequiredValue(value: string, emptyFieldValidatorMessage?: string) {
+export function validateRequiredValue(value: string, emptyFieldValidatorMessage: string) {
 	const errorArray: string[] = [];
 
 	if (!value && emptyFieldValidatorMessage) {

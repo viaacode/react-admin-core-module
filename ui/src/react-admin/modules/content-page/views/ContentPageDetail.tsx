@@ -526,7 +526,7 @@ export const ContentPageDetail: FC<ContentPageDetailProps> = ({
 		<AdminLayout className={className} pageTitle={pageTitle}>
 			<AdminLayout.Back>
 				<Button type="borderless" onClick={onGoBack}>
-					<Icon name="chevronLeft"></Icon>
+					<Icon name="chevronLeft" />
 				</Button>
 			</AdminLayout.Back>
 			<AdminLayout.Actions>{renderContentActions()}</AdminLayout.Actions>

@@ -52,6 +52,7 @@ query getContentPageByPath($path: String!, $language: lookup_languages_enum!) {
 				id
 				label
 				link_to
+				color
 			}
 		}
 		content_blocks(order_by: { position: asc }) {

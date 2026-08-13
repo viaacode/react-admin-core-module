@@ -61,6 +61,19 @@
     background-position: center;
   }
 
+  // The generated visual label sits flush in the top left corner of the page image
+  // https://meemoo.atlassian.net/browse/ARC-3818
+  .c-page-overview__image {
+    position: relative;
+
+    .c-page-overview__image-label {
+      position: absolute;
+      top: 0;
+      left: 0;
+      max-width: 100%;
+    }
+  }
+
   .c-page-overview-project-list.c-block-image-title-text-button {
     padding: 0;
     margin: 0 0 3.8rem;

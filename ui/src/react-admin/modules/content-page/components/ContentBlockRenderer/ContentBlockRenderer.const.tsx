@@ -10,6 +10,8 @@ import { BlockEventbrite } from '~content-blocks/BlockEventbrite';
 import { BlockHeading } from '~content-blocks/BlockHeading';
 import { BlockHetArchiefHeaderSearch } from '~content-blocks/BlockHetArchiefHeaderSearch/BlockHetArchiefHeaderSearch';
 import { BlockHetArchiefImageTextBackground } from '~content-blocks/BlockHetArchiefImageTextBackground';
+import { BlockHighlightText } from '~content-blocks/BlockHighlightText';
+import { BlockHomepageBanner } from '~content-blocks/BlockHomepageBanner';
 import { BlockIFrame } from '~content-blocks/BlockIFrame';
 import { BlockImage } from '~content-blocks/BlockImage';
 import {
@@ -22,6 +24,7 @@ import { BlockIntro } from '~content-blocks/BlockIntro';
 import { BlockKlaar } from '~content-blocks/BlockKlaar';
 import { BlockMaintainersGrid } from '~content-blocks/BlockMaintainersGrid';
 import { BlockOverviewNewspaperTitles } from '~content-blocks/BlockOverviewNewspaperTitles';
+import { BlockOverviewThemes } from '~content-blocks/BlockOverviewThemes/BlockOverviewThemes.tsx';
 import { BlockOverviewWithCarousel } from '~content-blocks/BlockOverviewWithCarousel/BlockOverviewWithCarousel.tsx';
 import { BlockPageOverviewWrapper } from '~content-blocks/BlockPageOverview';
 import { BlockQuote } from '~content-blocks/BlockQuote';
@@ -29,6 +32,7 @@ import { BlockRichTextWrapper } from '~content-blocks/BlockRichText';
 import { BlockScrollDownNudge } from '~content-blocks/BlockScrollDownNudge';
 import { BlockProjectSpotlightWrapper, BlockSpotlight } from '~content-blocks/BlockSpotlight';
 import { BlockTagsWithLink } from '~content-blocks/BlockTagsWithLink';
+import { BlockThemeReels } from '~content-blocks/BlockThemeReels';
 import { BlockThreeClickableTiles } from '~content-blocks/BlockThreeClickableTiles';
 import { BlockTimeline } from '~content-blocks/BlockTimeline';
 import { BlockUitgeklaard } from '~content-blocks/BlockUitgeklaard';
@@ -88,6 +92,10 @@ export function GET_BLOCK_COMPONENT(
 		[ContentBlockType.Breadcrumbs]: BlockBreadcrumbs,
 		[ContentBlockType.HetArchiefImageTextBackground]: BlockHetArchiefImageTextBackground,
 		[ContentBlockType.OverviewWithCarousel]: BlockOverviewWithCarousel,
+		[ContentBlockType.HomepageBanner]: BlockHomepageBanner,
+		[ContentBlockType.HighlightText]: BlockHighlightText,
+		[ContentBlockType.ThemeReels]: BlockThemeReels,
+		[ContentBlockType.OverviewThemes]: BlockOverviewThemes,
 		[ContentBlockType.Timeline]: BlockTimeline,
 
 		// Avo specific blocks
@@ -98,6 +106,12 @@ export function GET_BLOCK_COMPONENT(
 	return blocks[type];
 }
 
+/**
+ * @deprecated Legacy allowlist for the array-valued `components.state` repetition
+ * mechanism (A). Do NOT add new block types here. For new blocks use the `fieldGroup` +
+ * `repeat` mechanism (B), which is config-driven and needs no allowlist.
+ * See `components/blocks/README.md`.
+ */
 export const REPEATABLE_CONTENT_BLOCKS = [
 	ContentBlockType.AnchorLinks,
 	ContentBlockType.Buttons,
@@ -113,6 +127,7 @@ export const REPEATABLE_CONTENT_BLOCKS = [
 	ContentBlockType.ThreeClickableTiles,
 	ContentBlockType.TagsWithLink,
 	ContentBlockType.CardsWithoutDescription,
+	ContentBlockType.OverviewThemes,
 	ContentBlockType.Timeline,
 	// ContentBlockType.ContentEncloseGrid,
 ];

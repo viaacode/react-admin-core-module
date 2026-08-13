@@ -1,0 +1,16 @@
+@use "../../../../shared/styles/settings/variables" as variables;
+
+.c-block-theme-reels {
+	display: flex;
+	flex-direction: column;
+	gap: variables.$g-spacer-unit * 5;
+
+	&__actions{
+		display: flex;
+		justify-content: center;
+
+		.c-button__label {
+			font-weight: 700; // since sm buttons loose this
+		}
+	}
+}
