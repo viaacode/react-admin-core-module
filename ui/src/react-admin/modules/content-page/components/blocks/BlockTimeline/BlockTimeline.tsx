@@ -24,7 +24,10 @@ export interface BlockTimelineProps extends DefaultComponentProps {
 	sortOrder?: TimelineSortOrder;
 }
 
-const getYear = (date: string): number => new Date(date).getFullYear();
+const isValidDate = (date: string): boolean => !Number.isNaN(new Date(date).getTime());
+
+const getYear = (date: string): number | null =>
+	isValidDate(date) ? new Date(date).getFullYear() : null;
 
 const BlockTimelineObject: FunctionComponent<{ pid: string; fallbackTitle: string }> = ({
 	pid,
@@ -106,11 +109,13 @@ export const BlockTimeline: FunctionComponent<BlockTimelineProps> = ({
 	}, [elements, sortOrder]);
 
 	const formatDate = (date: string): string =>
-		new Intl.DateTimeFormat(locale, {
-			day: 'numeric',
-			month: 'long',
-			year: 'numeric',
-		}).format(new Date(date));
+		isValidDate(date)
+			? new Intl.DateTimeFormat(locale, {
+					day: 'numeric',
+					month: 'long',
+					year: 'numeric',
+				}).format(new Date(date))
+			: '';
 
 	const scrollToTop = () => {
 		containerRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
