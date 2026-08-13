@@ -1,11 +1,12 @@
 import { AvoCoreContentPickerType } from '@viaa/avo2-types';
 import clsx from 'clsx';
+import { compact, uniq } from 'es-toolkit/compat';
 import type { CSSProperties, FunctionComponent, ReactElement } from 'react';
-import React, { useRef } from 'react';
+import React, { useMemo, useRef, useState } from 'react';
 import { AdminConfigManager } from '~core/config/config.class';
 import type { TimelineNodeBlockComponentState } from '~modules/content-page/types/content-block.types';
 import { Color } from '~modules/content-page/types/content-block.types';
-import { FlowPlayerWrapper } from '~shared/components/FlowPlayerWrapper/FlowPlayerWrapper';
+import { IeObjectType } from '~shared/components/AudioOrVideoPlayer/AudioOrVideoPlayer.types';
 import Html from '~shared/components/Html/Html';
 import { Icon } from '~shared/components/Icon/Icon';
 import { SmartLink } from '~shared/components/SmartLink/SmartLink';
@@ -13,7 +14,8 @@ import { SanitizePreset } from '~shared/helpers/sanitize/presets';
 import { tText } from '~shared/helpers/translation-functions';
 import { HET_ARCHIEF } from '~shared/types';
 import type { DefaultComponentProps } from '~shared/types/components';
-import { useGetTimelineIeObject } from './hooks/useGetTimelineIeObject';
+import type { TimelineIeObject } from './hooks/useGetTimelineIeObjects';
+import { useGetTimelineIeObjects } from './hooks/useGetTimelineIeObjects';
 
 import './BlockTimeline.scss';
 
@@ -36,28 +38,50 @@ const TimelineCap: FunctionComponent<{ position: 'start' | 'end' }> = ({ positio
 	</li>
 );
 
-const BlockTimelineObject: FunctionComponent<{ pid: string; fallbackTitle: string }> = ({
-	pid,
-	fallbackTitle,
-}) => {
-	const { data: ieObject, isLoading } = useGetTimelineIeObject(pid);
+// Formats that the AudioOrVideoPlayer can play. Other formats (newspaper, image) fall back to the thumbnail.
+const PLAYABLE_FORMATS: IeObjectType[] = [
+	IeObjectType.VIDEO,
+	IeObjectType.VIDEO_FRAGMENT,
+	IeObjectType.AUDIO,
+	IeObjectType.AUDIO_FRAGMENT,
+	IeObjectType.FILM,
+];
 
-	if (isLoading || !ieObject) {
-		return null;
-	}
+const BlockTimelineObject: FunctionComponent<{
+	ieObject: TimelineIeObject;
+	fallbackTitle: string;
+}> = ({ ieObject, fallbackTitle }) => {
+	const [isPaused, setIsPaused] = useState<boolean>(true);
+	const AudioOrVideoPlayer = AdminConfigManager.getConfig().components?.audioOrVideoPlayer;
+
+	// The player only needs the first representation that contains a file, same as the object detail page
+	const representation = (ieObject.pages || [])
+		.flatMap((page) => page?.representations || [])
+		.find((rep) => !!rep?.files?.length);
+
+	const isPlayable =
+		!!AudioOrVideoPlayer &&
+		!!representation &&
+		!!ieObject.dctermsFormat &&
+		PLAYABLE_FORMATS.includes(ieObject.dctermsFormat);
 
 	return (
 		<div className="c-block-timeline__node-object">
 			<div className="c-block-timeline__node-object-media">
-				{ieObject.mediaType === 'video' || ieObject.mediaType === 'audio' ? (
-					<FlowPlayerWrapper
-						src={ieObject.src}
+				{isPlayable && AudioOrVideoPlayer ? (
+					<AudioOrVideoPlayer
+						className="c-block-timeline__node-object-player"
+						locationId="block-timeline"
+						representation={representation}
+						dctermsFormat={ieObject.dctermsFormat}
+						schemaIdentifier={ieObject.schemaIdentifier}
+						maintainerLogo={ieObject.maintainerOverlay ? ieObject.maintainerLogo : undefined}
+						cuePoints={undefined}
 						poster={ieObject.thumbnailUrl}
-						title={ieObject.name || fallbackTitle}
-						duration={ieObject.duration}
-						organisationName={ieObject.maintainerName}
-						organisationLogo={ieObject.maintainerLogo}
-						trackPlayEvent={true}
+						paused={isPaused}
+						onPlay={() => setIsPaused(false)}
+						onPause={() => setIsPaused(true)}
+						onMediaReady={() => undefined}
 					/>
 				) : (
 					ieObject.thumbnailUrl && (
@@ -72,21 +96,19 @@ const BlockTimelineObject: FunctionComponent<{ pid: string; fallbackTitle: strin
 			<div className="c-block-timeline__node-object-meta">
 				<p className="c-block-timeline__node-object-title">{ieObject.name || fallbackTitle}</p>
 				<div className="c-block-timeline__node-object-footer">
-					{ieObject.detailPageUrl && (
-						<SmartLink
-							action={{
-								type: AvoCoreContentPickerType.EXTERNAL_LINK,
-								value: ieObject.detailPageUrl,
-							}}
-							className="c-block-timeline__node-object-cta"
-						>
-							{tText(
-								'react-admin/modules/content-page/components/blocks/block-timeline/block-timeline___bekijk-volledig-fragment',
-								{},
-								[HET_ARCHIEF]
-							)}
-						</SmartLink>
-					)}
+					<SmartLink
+						action={{
+							type: AvoCoreContentPickerType.INTERNAL_LINK,
+							value: `/pid/${ieObject.schemaIdentifier}`,
+						}}
+						className="c-block-timeline__node-object-cta"
+					>
+						{tText(
+							'react-admin/modules/content-page/components/blocks/block-timeline/block-timeline___bekijk-volledig-fragment',
+							{},
+							[HET_ARCHIEF]
+						)}
+					</SmartLink>
 					{ieObject.maintainerLogo && (
 						<img
 							src={ieObject.maintainerLogo}
@@ -106,6 +128,22 @@ export const BlockTimeline: FunctionComponent<BlockTimelineProps> = ({
 }): ReactElement => {
 	const containerRef = useRef<HTMLDivElement>(null);
 	const locale = AdminConfigManager.getConfig().locale;
+
+	// Resolve all objects of the timeline in a single request
+	const pids = useMemo(
+		() =>
+			uniq(
+				compact(
+					elements.map((node) =>
+						node.visualType === 'OBJECT' && node.mediaItem?.value
+							? String(node.mediaItem.value)
+							: null
+					)
+				)
+			),
+		[elements]
+	);
+	const { data: ieObjectsByPid } = useGetTimelineIeObjects(pids);
 
 	const formatDate = (date: string): string =>
 		isValidDate(date)
@@ -131,6 +169,10 @@ export const BlockTimeline: FunctionComponent<BlockTimelineProps> = ({
 							? node.backgroundColor
 							: undefined;
 					const markerShape = index % 2 === 0 ? 'circle' : 'rectangle';
+					const ieObject =
+						node.visualType === 'OBJECT' && node.mediaItem?.value
+							? ieObjectsByPid?.[String(node.mediaItem.value)]
+							: undefined;
 					const hasMedia =
 						(node.visualType === 'OBJECT' && !!node.mediaItem?.value) ||
 						(node.visualType === 'IMAGE' && !!node.image);
@@ -164,11 +206,8 @@ export const BlockTimeline: FunctionComponent<BlockTimelineProps> = ({
 										: undefined
 								}
 							>
-								{node.visualType === 'OBJECT' && node.mediaItem?.value && (
-									<BlockTimelineObject
-										pid={String(node.mediaItem.value)}
-										fallbackTitle={node.title}
-									/>
+								{node.visualType === 'OBJECT' && ieObject && (
+									<BlockTimelineObject ieObject={ieObject} fallbackTitle={node.title} />
 								)}
 								{node.visualType === 'IMAGE' && node.image && (
 									<div className="c-block-timeline__node-image-wrapper">

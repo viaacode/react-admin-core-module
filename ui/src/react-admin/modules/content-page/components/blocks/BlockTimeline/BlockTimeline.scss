@@ -92,9 +92,9 @@ $node-background-top-gap: 5rem;
 		grid-area: year;
 		align-self: baseline;
 		padding-left: $line-content-gap;
-		font-size: 2.25rem;
-		font-weight: 700;
-		line-height: 1.2;
+		font-size: 4.8rem;
+		font-weight: 800;
+		line-height: 5.6rem;
 	}
 
 	&__node-date {
@@ -246,6 +246,12 @@ $node-background-top-gap: 5rem;
 		aspect-ratio: #{$node-media-aspect-ratio};
 		object-fit: cover;
 		object-position: top;
+	}
+
+	// The player renders its own aspect ratio (video) or fixed height (audio), it only needs the full width
+	&__node-object-player {
+		display: block;
+		width: 100%;
 	}
 
 	&__node-object-meta {

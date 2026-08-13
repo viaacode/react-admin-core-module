@@ -155,6 +155,8 @@ export const TIMELINE_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				editorProps: {
 					allowedTypes: ['IE_OBJECT'],
 					hideTargetSwitch: true,
+					// Only one type is allowed, so the type dropdown would only ever have a single option
+					hideTypeDropdown: true,
 				},
 				isVisible: visualTypeIsObject,
 				validator: (value: unknown) =>
