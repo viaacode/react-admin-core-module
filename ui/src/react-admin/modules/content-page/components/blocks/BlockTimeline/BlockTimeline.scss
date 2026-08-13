@@ -15,7 +15,8 @@ $marker-rectangle-height: 0.3rem;
 // Aspect ratio for the node's image / video / audio media.
 $node-media-aspect-ratio: '1215 / 630';
 // Vertical space between every item on the timeline (start cap, nodes, end cap).
-$item-gap: 12rem;
+$item-gap-desktop: 12rem;
+$item-gap-mobile: 5rem;
 // Inner padding of a node that has a background colour.
 $node-background-padding: 4rem;
 // Gap between a node's media (image / object) and the start of its background colour band.
@@ -46,7 +47,11 @@ $node-background-top-gap: 5rem;
 		}
 
 		> li:not(:first-child):not(:last-child) {
-			margin-bottom: $item-gap;
+			margin-bottom: $item-gap-desktop;
+
+			@media (max-width: variables.$g-bp3) {
+				margin-bottom: $item-gap-mobile;
+			}
 		}
 
 		> li:first-child {
@@ -83,7 +88,10 @@ $node-background-top-gap: 5rem;
 
 	&__node {
 		display: grid;
-		grid-template-columns: 1fr;
+		// minmax(0, ...) instead of a bare 1fr: 1fr means minmax(auto, 1fr), which lets the
+		// column grow to the min-content width of its item (e.g. the object meta bar's title)
+		// instead of clamping to the available space. That growth is what breaks truncation.
+		grid-template-columns: minmax(0, 1fr);
 		grid-template-areas:
 			'year'
 			'date'
@@ -136,6 +144,10 @@ $node-background-top-gap: 5rem;
 
 	&__node-content {
 		grid-area: content;
+		// Grid items default to min-width: auto, so wide content would push the column wider
+		// than the track. Together with the minmax(0, 1fr) tracks this keeps the column at the
+		// available width and lets the object title ellipse inside it.
+		min-width: 0;
 		margin-top: 0.5rem;
 		padding-left: $line-content-gap;
 
@@ -160,8 +172,22 @@ $node-background-top-gap: 5rem;
 				background-color: var(--c-block-timeline-node-bg);
 			}
 
-			&.c-block-timeline__node-content--has-media::before {
+			&.c-block-timeline__node-content--has-image::before {
 				top: $node-background-top-gap;
+				bottom: 0;
+
+				@media (max-width: variables.$g-bp3) {
+					bottom: 0;
+				}
+			}
+
+			&.c-block-timeline__node-content--has-object::before {
+				top: $node-background-top-gap;
+				bottom: 10rem;
+
+				@media (max-width: variables.$g-bp3) {
+					bottom: 13rem;
+				}
 			}
 
 			> * {
@@ -199,7 +225,6 @@ $node-background-top-gap: 5rem;
 	&__node-image-wrapper {
 		position: relative;
 		z-index: 1;
-		width: 100%;
 	}
 
 	&__node-image {
@@ -239,7 +264,6 @@ $node-background-top-gap: 5rem;
 	&__node-object-media {
 		position: relative;
 		z-index: 1;
-		width: 100%;
 	}
 
 	&__node-object-image {
@@ -264,15 +288,33 @@ $node-background-top-gap: 5rem;
 		padding: 0.75rem 1rem;
 		background-color: colors.$color-platinum;
 		height: 6rem;
-		position: absolute;
-		bottom: -6rem;
-		left: 0;
-		max-width: 100%;
+		margin-left: -$line-content-gap;
+		margin-top: 4rem;
+
+		@media (max-width: variables.$g-bp3) {
+			height: 9rem;
+			flex-direction: row-reverse;
+		}
 	}
 
-	&__node-object-cta {
+	&__node-object-cta--desktop,
+	&__node-object-cta--mobile {
 		flex: 0 0 auto;
 		white-space: nowrap;
+	}
+
+	&__node-object-cta--mobile {
+		display: none;
+	}
+
+	@media (max-width: variables.$g-bp3) {
+		&__node-object-cta--desktop {
+			display: none;
+		}
+
+		&__node-object-cta--mobile {
+			display: block;
+		}
 	}
 
 	&__node-object-text {
@@ -285,7 +327,15 @@ $node-background-top-gap: 5rem;
 		margin: 0;
 		font-weight: 700;
 		display: block;
+	}
+
+	&__node-object-title {
+		flex-shrink: 1;
 		@include typography.truncate;
+
+		@media (max-width: variables.$g-bp3) {
+			@include typography.truncate-after-x-lines(2);
+		}
 	}
 
 	&__node-object-maintainer-name {
@@ -297,6 +347,10 @@ $node-background-top-gap: 5rem;
 		height: 2.4rem;
 		width: auto;
 		margin: 0 variables.$g-spacer-unit * 1.5 0 variables.$g-spacer-unit * 3;
+
+		@media (max-width: variables.$g-bp3) {
+			display: none;
+		}
 	}
 
 	&__back-to-top {
@@ -332,7 +386,7 @@ $node-background-top-gap: 5rem;
 	}
 
 	&__node {
-		grid-template-columns: $year-column-width-desktop 1fr;
+		grid-template-columns: $year-column-width-desktop minmax(0, 1fr);
 		grid-template-areas:
 			'year date'
 			'.    content';
@@ -348,6 +402,11 @@ $node-background-top-gap: 5rem;
 	&__node-object-media {
 		margin-left: calc(-1 * (#{$year-column-width-desktop} + #{$line-content-gap}));
 		width: calc(100% + #{$year-column-width-desktop} + #{$line-content-gap});
+
+		@media (max-width: variables.$g-bp3) {
+			margin-left: calc(-1 * (#{$year-column-width-mobile} + #{$line-content-gap}));
+			width: calc(100% + #{$year-column-width-mobile} + #{$line-content-gap});
+		}
 	}
 
 	@media (max-width: variables.$g-bp3) {
@@ -359,23 +418,20 @@ $node-background-top-gap: 5rem;
 			margin-left: calc(#{$year-column-width-mobile} - #{$marker-size} / 2);
 		}
 
+		// The year sits to the right of the line, stacked above the date.
 		&__node {
-			grid-template-columns: $year-column-width-mobile 1fr;
+			grid-template-columns: $year-column-width-mobile minmax(0, 1fr);
 			grid-template-areas:
-				'year date'
+				'.    year'
+				'.    date'
 				'.    content';
 		}
 
 		&__node-year {
-			padding-right: 1rem;
-			padding-left: 0;
+			padding-right: 0;
+			padding-left: $line-content-gap;
 			font-size: 2.5rem;
-		}
-
-		&__node-image-wrapper,
-		&__node-object-media {
-			margin-left: calc(-1 * (#{$year-column-width-mobile} + #{$line-content-gap}));
-			width: calc(100% + #{$year-column-width-mobile} + #{$line-content-gap});
+			line-height: 3rem;
 		}
 	}
 }

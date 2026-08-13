@@ -87,9 +87,8 @@ export const BlockTimeline: FunctionComponent<BlockTimelineProps> = ({
 						node.visualType === 'OBJECT' && node.mediaItem?.value
 							? ieObjectsByPid?.[String(node.mediaItem.value)]
 							: undefined;
-					const hasMedia =
-						(node.visualType === 'OBJECT' && !!node.mediaItem?.value) ||
-						(node.visualType === 'IMAGE' && !!node.image);
+					const hasImage = node.visualType === 'IMAGE' && !!node.image;
+					const hasObject = node.visualType === 'OBJECT' && !!node.mediaItem?.value;
 
 					return (
 						<li
@@ -112,7 +111,8 @@ export const BlockTimeline: FunctionComponent<BlockTimelineProps> = ({
 							<div
 								className={clsx('c-block-timeline__node-content', {
 									'c-block-timeline__node-content--has-background': !!backgroundColor,
-									'c-block-timeline__node-content--has-media': hasMedia,
+									'c-block-timeline__node-content--has-image': hasImage,
+									'c-block-timeline__node-content--has-object': hasObject,
 								})}
 								style={
 									backgroundColor
@@ -159,10 +159,10 @@ export const BlockTimeline: FunctionComponent<BlockTimelineProps> = ({
 											className="c-block-timeline__node-description"
 										/>
 									)}
+									{node.visualType === 'OBJECT' && ieObject && (
+										<BlockTimelineObjectMeta ieObject={ieObject} fallbackTitle={node.title} />
+									)}
 								</div>
-								{node.visualType === 'OBJECT' && ieObject && (
-									<BlockTimelineObjectMeta ieObject={ieObject} fallbackTitle={node.title} />
-								)}
 							</div>
 						</li>
 					);
