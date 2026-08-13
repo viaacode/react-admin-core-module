@@ -24,7 +24,7 @@ export const BlockImageGrid: FunctionComponent<BlockImageGridProps> = ({
 	textSize = 15,
 	textMargin = 0,
 	textWeight = 500,
-	textColor = '#2B414F',
+	textColor,
 	horizontalMargin = 10,
 	verticalMargin = 10,
 	className,
@@ -36,7 +36,7 @@ export const BlockImageGrid: FunctionComponent<BlockImageGridProps> = ({
 				{element.textAbove && (
 					<div className="c-block-grid__text-wrapper">
 						<Spacer margin="bottom-small">
-							<p>{element.textAbove}</p>
+							<p className="u-background-text-primary">{element.textAbove}</p>
 						</Spacer>
 					</div>
 				)}
@@ -64,10 +64,10 @@ export const BlockImageGrid: FunctionComponent<BlockImageGridProps> = ({
 					showIcon={element.copyrightIconVisible}
 				/>
 				<div
-					className="c-block-grid__text-wrapper"
-					style={{
-						color: textColor,
-					}}
+					className={clsx('c-block-grid__text-wrapper', {
+						'u-background-text-primary': !textColor,
+					})}
+					style={textColor ? { color: textColor } : undefined}
 				>
 					{!!element.title && (
 						<Spacer margin="top-small">
@@ -78,13 +78,15 @@ export const BlockImageGrid: FunctionComponent<BlockImageGridProps> = ({
 									fontWeight: textWeight,
 								}}
 							>
-								<strong>{element.title}</strong>
+								<strong className={clsx({ 'u-background-text-primary': !textColor })}>
+									{element.title}
+								</strong>
 							</h3>
 						</Spacer>
 					)}
 					{!!element.text && (
 						<Spacer margin="top-small">
-							<p>{element.text}</p>
+							<p className={clsx({ 'u-background-text-primary': !textColor })}>{element.text}</p>
 						</Spacer>
 					)}
 					{!!element.buttonLabel && (

@@ -101,7 +101,7 @@ export enum Color {
 	Lila = '#c6c2e0',
 	BlossomPink = '#E694B3',
 	Coral = '#E89B88',
-	LightBlue = '#BDDEE7',
+	BabyBlue = '#8DDEE7',
 	Sage = '#91A9A7',
 	Pistachio = '#B8BE9A',
 	SandBeige = '#EDD6C4',

@@ -39,6 +39,7 @@ describe('<BlockRichText />', () => {
 		const contentContainer = container.querySelector('.c-rich-text-editor__content');
 		expect(container.firstChild).toHaveClass(customClass);
 		expect(contentContainer).not.toBeNull();
+		expect(contentContainer).toHaveClass('u-background-text-links');
 	});
 
 	it('Should create multiple columns', () => {

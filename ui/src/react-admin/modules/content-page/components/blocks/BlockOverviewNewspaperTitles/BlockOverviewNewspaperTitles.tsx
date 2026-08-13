@@ -86,6 +86,7 @@ export const BlockOverviewNewspaperTitles: FC<BlockOverviewNewspaperTitlesProps>
 						key={`newspaper-title-item__${item.title}`}
 					>
 						<Link
+							className="u-background-text-hyperlink"
 							to={stringifyUrl({
 								url: '/zoeken',
 								query: { zoekterm: item.title },

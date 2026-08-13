@@ -23,13 +23,16 @@ export const BlockTagsWithLink: FunctionComponent<BlockTagsWithLinkProps> = ({
 		!isNil(link) ? (
 			<SmartLink
 				key={`c-block-tags-with-link-${i}`}
-				className="c-block-tags-with-link__term c-block-tags-with-link__link"
+				className="c-block-tags-with-link__term c-block-tags-with-link__link u-background-text-hyperlink"
 				action={link}
 			>
 				{label}
 			</SmartLink>
 		) : (
-			<p key={`c-block-tags-with-link-${i}`} className="c-block-tags-with-link__term">
+			<p
+				key={`c-block-tags-with-link-${i}`}
+				className="c-block-tags-with-link__term u-background-text-primary"
+			>
 				{label}
 			</p>
 		);

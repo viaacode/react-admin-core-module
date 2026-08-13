@@ -27,7 +27,7 @@ export const CopyrightAttribution: FunctionComponent<CopyrightAttributionProps> 
 		}
 
 		return (
-			<span className="a-copyright-attribution__annotation">
+			<span className="a-copyright-attribution__annotation u-background-text-secondary">
 				{showIcon && <>&#169;</>} {title}
 			</span>
 		);
@@ -36,7 +36,9 @@ export const CopyrightAttribution: FunctionComponent<CopyrightAttributionProps> 
 	return (
 		<div className={clsx('a-copyright-attribution', className)}>
 			{renderTitle()}
-			{text && <span className="a-copyright-attribution__text">{text}</span>}
+			{text && (
+				<span className="a-copyright-attribution__text u-background-text-primary">{text}</span>
+			)}
 		</div>
 	);
 };

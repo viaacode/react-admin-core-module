@@ -1724,9 +1724,9 @@
     "app": "HET_ARCHIEF",
     "component": "ADMIN_CORE",
     "location": "modules/content-page/const/content-block",
-    "key": "poederblauw",
+    "key": "babyblauw",
     "language": "nl",
-    "value": "Poederblauw",
+    "value": "Baby blauw",
     "value_type": "TEXT"
   },
   {
@@ -1734,9 +1734,9 @@
     "app": "HET_ARCHIEF",
     "component": "ADMIN_CORE",
     "location": "modules/content-page/const/content-block",
-    "key": "poederblauw",
+    "key": "babyblauw",
     "language": "en",
-    "value": "Poederblauw",
+    "value": "Baby blauw",
     "value_type": "TEXT"
   },
   {

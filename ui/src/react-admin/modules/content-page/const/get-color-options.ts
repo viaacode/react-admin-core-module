@@ -98,9 +98,9 @@ const coralOption = () => ({
 	label: tText('modules/content-page/const/content-block___koraal-oranje', {}, [App.HET_ARCHIEF]),
 	value: Color.Coral,
 });
-const lightBlueOption = () => ({
-	label: tText('modules/content-page/const/content-block___poederblauw', {}, [App.HET_ARCHIEF]),
-	value: Color.LightBlue,
+const babyBlueOption = () => ({
+	label: tText('modules/content-page/const/content-block___babyblauw', {}, [App.HET_ARCHIEF]),
+	value: Color.BabyBlue,
 });
 const sageOption = () => ({
 	label: tText('modules/content-page/const/content-block___salie-groen', {}, [App.HET_ARCHIEF]),
@@ -140,7 +140,7 @@ export const GET_SECONDARY_BACKGROUND_COLOR_OPTIONS_ARCHIEF: () => SelectOption<
 	lilaOption(),
 	blossomPinkOption(),
 	coralOption(),
-	lightBlueOption(),
+	babyBlueOption(),
 	sageOption(),
 	pistachioOption(),
 	sandBeigeOption(),

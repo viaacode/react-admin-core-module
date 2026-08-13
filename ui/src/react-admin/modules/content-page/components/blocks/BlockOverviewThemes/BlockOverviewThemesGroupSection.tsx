@@ -145,7 +145,7 @@ export const BlockOverviewThemesGroupSection: FunctionComponent<
 					className={clsx('c-block-overview-themes__group-title', {
 						// Gated on bandHeight like the band itself, so both appear in the same render and the
 						// title never takes the band's text color while sitting on the page background.
-						'u-text-primary': !!bandHeight && hasBandTextColors,
+						'u-background-text-primary': !!bandHeight && hasBandTextColors,
 					})}
 				>
 					{group.title}

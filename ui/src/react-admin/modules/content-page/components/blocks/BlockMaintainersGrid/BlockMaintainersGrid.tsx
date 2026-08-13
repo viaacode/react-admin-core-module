@@ -36,11 +36,13 @@ export const BlockMaintainersGrid: FunctionComponent<BlockMaintainerGridProps> =
 					<BlockHeading className="c-block-maintainers-grid__title" type={titleType}>
 						{title}
 					</BlockHeading>
-					{subtitle && <p>{subtitle}</p>}
+					{subtitle && <p className="u-background-text-secondary">{subtitle}</p>}
 				</div>
 				{buttonLabel && (
 					<div>
-						<SmartLink action={buttonAction}>{buttonLabel}</SmartLink>
+						<SmartLink className="u-background-text-hyperlink" action={buttonAction}>
+							{buttonLabel}
+						</SmartLink>
 					</div>
 				)}
 			</div>
@@ -60,11 +62,7 @@ export const BlockMaintainersGrid: FunctionComponent<BlockMaintainerGridProps> =
 									}
 								)}
 							>
-								<img
-									src={maintainer.logoUrl}
-									alt=""
-									className="c-block-maintainers-grid__image"
-								></img>
+								<img src={maintainer.logoUrl} alt="" className="c-block-maintainers-grid__image" />
 							</SmartLink>
 						</li>
 					);

@@ -99,7 +99,6 @@ export const BlockHetArchiefImageTextBackground: FunctionComponent<
 	// Only reads it once the image has finished loading — reading mid-load measures
 	// ~0px, which would shrink `.media` (and the image with it) with no way to
 	// recover, since a later re-measure would just report that same self-inflicted size.
-	// biome-ignore lint/correctness/useExhaustiveDependencies: refs are stable
 	const updateMediaMeasurements = useCallback(() => {
 		const imgEl = imgRef.current;
 		const measureEl = copyrightMeasureRef.current;
@@ -172,6 +171,7 @@ export const BlockHetArchiefImageTextBackground: FunctionComponent<
 				<BlockHeading
 					className="c-block-het-archief-image-text-background__heading"
 					type={headingType}
+					color={foregroundColor}
 				>
 					{heading}
 				</BlockHeading>
@@ -206,12 +206,7 @@ export const BlockHetArchiefImageTextBackground: FunctionComponent<
 					>
 						{image && (
 							<div className="c-block-het-archief-image-text-background__image">
-								<img
-									ref={imgRef}
-									src={image}
-									alt={imageAltText}
-									onLoad={updateMediaMeasurements}
-								/>
+								<img ref={imgRef} src={image} alt={imageAltText} onLoad={updateMediaMeasurements} />
 							</div>
 						)}
 						<div

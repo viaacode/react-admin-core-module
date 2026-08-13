@@ -1,14 +1,16 @@
+import { isAvo } from '~shared/helpers/is-avo';
+
 /**
- * The WCAG text colors per background color, exactly as delivered by design in
+ * The WCAG text colors per background color, based on
  * meemoo-hetarchief-kleurencombinaties.pdf (attached to
- * https://meemoo.atlassian.net/browse/ARC-3848).
+ * https://meemoo.atlassian.net/browse/ARC-3848) and meemoo's confirmed corrections.
  *
  * Every content block that renders text on an admin-picked background color, and does not offer a
  * text color field of its own, takes its text colors from here.
  *
- * The PDF is the authority: do not derive these values, and do not "fix" a row that looks off -
- * raise it with design instead. The columns map to `primary` (body text), `secondary` (muted text
- * such as captions, subtitles and metadata) and `hyperlink` (the underlined link color).
+ * The columns map to `primary` (body text), `secondary` (muted text such as captions, subtitles
+ * and metadata) and `hyperlink` (the underlined link color). Differences from the PDF must be
+ * documented at the affected row.
  */
 
 /** Named colors from the PDF, so the rows below read like the design document. */
@@ -16,10 +18,18 @@ const WIT = '#FFFFFF';
 const ZWART = '#000000';
 const ZINK = '#ADADAD';
 const TEAL = '#00C8AA';
-const NEUTRAAL = '#757575';
 const JADE = '#00857D';
 const LEISTEEN = '#666666';
 const LAGUNE = '#005F69';
+
+/**
+ * Backward-compatible aliases for colors that were selectable in previously saved content.
+ * Poederblauw was a typo for Baby blauw (`8` became `B`), so it must render exactly like Baby
+ * blauw without remaining a selectable or separately maintained palette entry.
+ */
+const LEGACY_BACKGROUND_COLOR_ALIASES: Record<string, string> = {
+	'#bddee7': '#8ddee7',
+};
 
 /**
  * White as the PDF writes it. Color.White is the shorthand '#FFF', so compare against this when
@@ -44,7 +54,8 @@ export interface BackgroundTextColors {
 export const BACKGROUND_TEXT_COLORS: Record<string, BackgroundTextColors> = {
 	// Merk
 	'#000000': { primary: WIT, secondary: ZINK, hyperlink: TEAL }, // Zwart
-	'#ffffff': { primary: ZWART, secondary: NEUTRAAL, hyperlink: JADE }, // Wit
+	// Meemoo replaced Neutraal #757575 with Leisteen #666666 for muted text on white.
+	'#ffffff': { primary: ZWART, secondary: LEISTEEN, hyperlink: JADE }, // Wit
 	'#00c8aa': { primary: ZWART }, // Teal
 
 	// Functioneel
@@ -53,7 +64,8 @@ export const BACKGROUND_TEXT_COLORS: Record<string, BackgroundTextColors> = {
 	'#505050': { primary: WIT }, // Schaduw
 	'#666666': { primary: WIT }, // Leisteen
 	'#757575': { primary: WIT }, // Neutraal
-	'#adadad': { primary: WIT }, // Zink - see the open question in the ticket, white is 2.24:1 here
+	// The PDF text originally listed white, but meemoo confirmed the visual is authoritative: black.
+	'#adadad': { primary: ZWART }, // Zink
 	'#e6e6e6': { primary: ZWART, secondary: LEISTEEN, hyperlink: LAGUNE }, // Zilver
 	'#f8f8f8': { primary: ZWART, secondary: LEISTEEN, hyperlink: LAGUNE }, // Platinum
 	'#d60039': { primary: WIT }, // Kers
@@ -82,6 +94,10 @@ export const BACKGROUND_TEXT_COLORS: Record<string, BackgroundTextColors> = {
 	'#d1543a': { primary: ZWART }, // Terra
 	'#64702b': { primary: WIT }, // Olijf
 	'#432457': { primary: WIT }, // Viool
+
+	// Selectable legacy color that is not in the PDF. Until meemoo decides whether Sky blauw stays,
+	// it uses the confirmed Baby blauw text colors.
+	'#c3dde6': { primary: ZWART, hyperlink: LAGUNE }, // Sky blauw
 };
 
 /**
@@ -103,29 +119,34 @@ function normaliseHex(color: string): string | null {
 }
 
 /**
- * The WCAG text colors design specified for this background color, or undefined when the background
- * is not a flat color from the palette (transparent, a gradient, the meemoo logo pattern) or is an
- * AVO-only color, which follows its own brand book.
+ * The Archief text colors specified for this background color, or undefined on AVO and when the
+ * background is not a flat color from the palette (transparent, a gradient or the meemoo logo
+ * pattern). Meemoo explicitly confirmed that the BlackWhite gradient must keep each block's
+ * existing, separately handled text styling. AVO follows its own brand book, including for hex
+ * values shared by both apps.
  */
 export function getBackgroundTextColors(
 	color: string | undefined
 ): BackgroundTextColors | undefined {
-	if (!color) {
+	if (!color || isAvo()) {
 		return undefined;
 	}
 
-	const key = normaliseHex(color);
+	const normalisedColor = normaliseHex(color);
+	const key = normalisedColor
+		? (LEGACY_BACKGROUND_COLOR_ALIASES[normalisedColor] ?? normalisedColor)
+		: null;
 
 	return key ? BACKGROUND_TEXT_COLORS[key] : undefined;
 }
 
 /**
  * The design text colors for this background as css variables, to spread into a style prop. The
- * u-text-primary / u-text-secondary / u-text-hyperlink classes read these, so any element inside
- * can say which role its text plays instead of hardcoding a color.
+ * u-background-text-* classes read these, so any element inside can say which role its text
+ * plays instead of hardcoding a color.
  *
- * Returns an empty object when design specified nothing for this background, which leaves the
- * variables unset and the utility classes falling back to `inherit`.
+ * Returns an empty object when design specified nothing for this background. The renderer then
+ * omits the u-background-text-colors wrapper, leaving the role classes inactive.
  */
 export function getBackgroundTextColorVariables(color: string | undefined): Record<string, string> {
 	const textColors = getBackgroundTextColors(color);

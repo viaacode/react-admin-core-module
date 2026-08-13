@@ -84,7 +84,7 @@ export const BlockRichText: FunctionComponent<BlockRichTextProps> = ({
 				<Html
 					content={convertToHtml(content)}
 					sanitizePreset={SanitizePreset.full}
-					className="c-rich-text-editor__content"
+					className="c-rich-text-editor__content u-background-text-links"
 					style={{
 						...(color ? { color } : {}),
 						...(maxTextWidth ? { maxWidth: maxTextWidth } : {}),

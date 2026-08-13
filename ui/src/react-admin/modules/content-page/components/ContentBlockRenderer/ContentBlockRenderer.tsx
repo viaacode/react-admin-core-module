@@ -10,10 +10,7 @@ import { GENERATED_CONTENT_BLOCK_ANCHOR_PREFIX } from '~modules/content-page/con
 import type { ContentPageInfo } from '~modules/content-page/types/content-pages.types';
 import { ContentPageWidth } from '~modules/content-page/types/content-pages.types';
 import { generateSmartLink } from '~shared/components/SmartLink/SmartLink';
-import {
-	getBackgroundTextColors,
-	getBackgroundTextColorVariables,
-} from '../../const/background-text-colors';
+import { getBackgroundTextColorVariables } from '../../const/background-text-colors';
 import { hasDarkBackground } from '../../const/get-color-options';
 import {
 	Color,
@@ -127,13 +124,14 @@ const ContentBlockRenderer: FunctionComponent<ContentBlockPreviewProps> = ({
 	}
 
 	const hasDarkBg = hasDarkBackground(blockState?.backgroundColor);
-	// The WCAG text colors design specified for this background, published as css variables so any
-	// text inside the block can pick the role it plays with u-text-primary / u-text-secondary /
-	// u-text-hyperlink. https://meemoo.atlassian.net/browse/ARC-3848
-	const backgroundTextColors = getBackgroundTextColors(blockState?.backgroundColor);
+	// The Archief text colors specified for this background, published as css variables so text
+	// inside the block can take the primary, secondary or hyperlink role. On AVO this helper returns
+	// no variables, preserving AVO's own brand-book behavior.
+	// https://meemoo.atlassian.net/browse/ARC-3848
 	const textColorVariables = getBackgroundTextColorVariables(
 		blockState?.backgroundColor
 	) as CSSProperties;
+	const hasBackgroundTextColors = Object.keys(textColorVariables).length > 0;
 	const anchor =
 		blockState?.anchor?.replaceAll(' ', '-') ||
 		GENERATED_CONTENT_BLOCK_ANCHOR_PREFIX + contentBlockConfig.id;
@@ -175,10 +173,9 @@ const ContentBlockRenderer: FunctionComponent<ContentBlockPreviewProps> = ({
 			<Spacer
 				className={clsx('c-content-block-preview', {
 					'c-content-block-preview--dark': hasDarkBg,
-					// Archief takes its color from the design record; AVO has no record and keeps the
-					// original blanket white.
-					'u-text-primary': !!backgroundTextColors,
-					'u-color-white': hasDarkBg && !backgroundTextColors,
+					'u-background-text-colors': hasBackgroundTextColors,
+					// AVO has no Archief record and keeps its original blanket white text.
+					'u-color-white': hasDarkBg && !hasBackgroundTextColors,
 				})}
 				margin={[blockState?.margin?.top ?? 'none', blockState?.margin?.bottom ?? 'none']}
 				padding={[blockState?.padding?.top ?? 'none', blockState?.padding?.bottom ?? 'none']}

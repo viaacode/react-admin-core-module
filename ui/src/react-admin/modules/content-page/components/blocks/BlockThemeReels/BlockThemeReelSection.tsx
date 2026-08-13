@@ -121,10 +121,12 @@ export const BlockThemeReelSection: FunctionComponent<BlockThemeReelSectionProps
 				)}
 				<div className="c-block-theme-reels-section__slide-description">
 					{title && (
-						<span className="c-block-theme-reels-section__slide-description-title">{title}</span>
+						<span className="c-block-theme-reels-section__slide-description-title u-background-text-primary">
+							{title}
+						</span>
 					)}
 					{description && (
-						<span className="c-block-theme-reels-section__slide-description-text">
+						<span className="c-block-theme-reels-section__slide-description-text u-background-text-secondary">
 							{description}
 						</span>
 					)}
@@ -136,9 +138,11 @@ export const BlockThemeReelSection: FunctionComponent<BlockThemeReelSectionProps
 	return (
 		<div className={clsx('c-block-theme-reels-section')}>
 			<div className="c-block-theme-reels-section__header">
-				<span className="c-block-theme-reels-section__header-title">{themeName}</span>
+				<span className="c-block-theme-reels-section__header-title u-background-text-primary">
+					{themeName}
+				</span>
 				{isMobileWidth() && (description || themeDescription) && (
-					<span className="c-block-theme-reels-section__header-subtitle">
+					<span className="c-block-theme-reels-section__header-subtitle u-background-text-secondary">
 						{description || themeDescription || ''}
 					</span>
 				)}
@@ -297,7 +301,7 @@ export const BlockThemeReelSection: FunctionComponent<BlockThemeReelSectionProps
 										/>
 									</div>
 									<div className="c-block-theme-reels-section__slide-description">
-										<span className="c-block-theme-reels-section__slide-description-title">
+										<span className="c-block-theme-reels-section__slide-description-title u-background-text-primary">
 											{tText(
 												'modules/content-page/components/blocks/block-theme-reels/block-theme-reel-section___toon-alle-materialen-voor-dit-theme',
 												{},

@@ -66,7 +66,7 @@ export const BlockHighlightText: FunctionComponent<BlockHighlightTextProps> = ({
 				</div>
 				<Html
 					className={clsx('c-block-highlight-text__content-text', {
-						'u-text-primary': hasTextColors,
+						'u-background-text-colors u-background-text-links': hasTextColors,
 					})}
 					style={
 						{

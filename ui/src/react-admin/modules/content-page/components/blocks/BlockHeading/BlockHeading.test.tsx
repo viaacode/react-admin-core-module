@@ -25,6 +25,24 @@ describe('<BlockHeading />', () => {
 		expect(heading).toHaveClass(customClass);
 	});
 
+	it('marks headings without an editor color as primary background text', () => {
+		render(<BlockHeading type="h2">Heading</BlockHeading>);
+
+		expect(screen.getByRole('heading', { level: 2 })).toHaveClass('u-background-text-primary');
+	});
+
+	it('preserves an explicit editor color instead of applying the background role', () => {
+		render(
+			<BlockHeading color="#123456" type="h2">
+				Heading
+			</BlockHeading>
+		);
+
+		const heading = screen.getByRole('heading', { level: 2 });
+		expect(heading).not.toHaveClass('u-background-text-primary');
+		expect(heading).toHaveStyle({ color: '#123456' });
+	});
+
 	it('Should correctly pass children', () => {
 		render(
 			<BlockHeading type="h1">

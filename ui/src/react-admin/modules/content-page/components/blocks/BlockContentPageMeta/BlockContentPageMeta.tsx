@@ -22,6 +22,7 @@ export const BlockContentPageMeta: FunctionComponent<ContentPageMetaProps> = ({
 		// biome-ignore lint/suspicious/noExplicitAny: todo
 		return (labelObj as any).link_to ? (
 			<Button
+				className="u-background-text-hyperlink"
 				type="inline-link"
 				onClick={() =>
 					// biome-ignore lint/suspicious/noExplicitAny: todo
@@ -68,7 +69,7 @@ export const BlockContentPageMeta: FunctionComponent<ContentPageMetaProps> = ({
 
 	const publishedDate = getPublishedDate(contentPageInfo);
 	return (
-		<span>
+		<span className="u-background-text-secondary">
 			{tHtml(
 				'admin/content-block/components/wrappers/block-content-page-meta/block-content-page-meta___gepubliceerd-op'
 			)}{' '}

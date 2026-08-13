@@ -180,7 +180,12 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 
 	const getDescription = (page: ContentPageInfo) => {
 		return showDescription && page.description ? (
-			<Html content={page.description} sanitizePreset={SanitizePreset.full} type="div" />
+			<Html
+				className="u-background-text-links"
+				content={page.description}
+				sanitizePreset={SanitizePreset.full}
+				type="div"
+			/>
 		) : undefined;
 	};
 
@@ -191,7 +196,7 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 					<Html
 						content={convertToHtml(text as string)}
 						sanitizePreset={SanitizePreset.full}
-						className={className}
+						className={clsx(className, 'u-background-text-links')}
 					/>
 				);
 			}
@@ -286,15 +291,19 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 													value: page.path,
 												} as ButtonAction,
 												itemStyle === ContentItemStyle.NEWS_LIST ? (
-													<h3>{page.title}</h3>
+													<h3 className="u-background-text-hyperlink">{page.title}</h3>
 												) : (
-													<h2>{page.title}</h2>
+													<h2 className="u-background-text-hyperlink">{page.title}</h2>
 												),
 												page.title
 											)}
-										{showDate && renderText(formatDateString(dateString, page), 'a-subtitle')}
+										{showDate &&
+											renderText(
+												formatDateString(dateString, page),
+												'a-subtitle u-background-text-secondary'
+											)}
 										{
-											<div className="a-content-page__description">
+											<div className="a-content-page__description u-background-text-secondary">
 												{renderText(getDescription(page))}
 											</div>
 										}
@@ -356,17 +365,17 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 						</Spacer>
 					);
 				});
-			} else {
-				// Render all pages in a grid without section titles (unique pages only)
-				let pagesToShow = labelsToShow.flatMap((labelObj) => {
-					if (!(pagesByLabel[labelObj.id] || []).length) {
-						return [];
-					}
-					return pagesByLabel[labelObj.id];
-				});
-				pagesToShow = uniqBy(pagesToShow, (page) => page.id);
-				return renderGrid(pagesToShow);
 			}
+
+			// Render all pages in a grid without section titles (unique pages only)
+			let pagesToShow = labelsToShow.flatMap((labelObj) => {
+				if (!(pagesByLabel[labelObj.id] || []).length) {
+					return [];
+				}
+				return pagesByLabel[labelObj.id];
+			});
+			pagesToShow = uniqBy(pagesToShow, (page) => page.id);
+			return renderGrid(pagesToShow);
 		}
 		if (itemStyle === ContentItemStyle.ACCORDION) {
 			// Ensure the focused page is not loaded twice on the same pagination page (ACCORDION)

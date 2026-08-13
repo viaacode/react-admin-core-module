@@ -42,8 +42,8 @@ export const BlockImageTitleTextButton: FunctionComponent<BlockImageTitleTextBut
 					<Html
 						content={convertToHtml(text as string)}
 						sanitizePreset={SanitizePreset.full}
-						className={className}
-					></Html>
+						className={clsx(className, 'u-background-text-links')}
+					/>
 				);
 			}
 			return text;
@@ -60,8 +60,8 @@ export const BlockImageTitleTextButton: FunctionComponent<BlockImageTitleTextBut
 					</Column>
 					<Column size="2-8">
 						<div className="c-rich-text-editor__content">
-							{title && <h2>{title}</h2>}
-							{renderText(subtitle, 'a-subtitle')}
+							{title && <h2 className="u-background-text-primary">{title}</h2>}
+							{renderText(subtitle, 'a-subtitle u-background-text-secondary')}
 							{renderText(text)}
 							{buttonLabel && (
 								<Spacer margin="top">
