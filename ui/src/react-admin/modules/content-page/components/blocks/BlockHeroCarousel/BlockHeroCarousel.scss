@@ -1,5 +1,17 @@
+@use "../../../../shared/styles/settings/variables" as variables;
+
+$hero-carousel-format-widths: (
+	"video": 28rem,
+	"videofragment": 28rem,
+	"film": 28rem,
+	"audio": 16rem,
+	"audiofragment": 16rem,
+	"newspaper": 12rem,
+	"newspaperpage": 12rem,
+);
+
 .c-block-hero-carousel {
-	&__background{
+	&__background {
 		position: absolute;
 		inset: 0;
 		background-position: center;
@@ -13,6 +25,61 @@
 			right: 0;
 			height: 50%;
 			background: linear-gradient(180deg, #000 0%, rgba(0, 0, 0, 0) 100%);
+		}
+	}
+
+	&__carousel {
+		&-swiper {
+			overflow: visible !important;
+
+			.swiper-wrapper {
+				height: 32rem !important;
+				align-items: flex-end;
+
+				// Matches the ease-out on &-slide below so the slide-into-place motion
+				// (Swiper's translate) and the grow/shrink (this file's own transition)
+				// read as one combined movement instead of two differently-eased ones.
+				--swiper-wrapper-transition-timing-function: ease-out;
+				background: rgba(125, 124, 125, .5);
+			}
+		}
+
+		&-slide {
+			// !important throughout: Swiper's own base stylesheet (swiper/css) sets
+			// `.swiper-slide { width: 100%; height: 100%; }` globally, which otherwise
+			// wins this cascade since specificity ties and it can load after this file.
+			display: flex !important;
+			flex-direction: column;
+			height: 16rem !important;
+			width: 12rem !important;
+			transition: height 0.5s ease-out, width 0.5s ease-out !important;
+
+			@each $format, $width in $hero-carousel-format-widths {
+				&--#{$format} {
+					width: $width !important;
+				}
+			}
+
+			// Compound selector (two classes) so this reliably outranks the single-class
+			// format-width rules above, regardless of declaration order.
+			&.c-block-hero-carousel__carousel-slide--active {
+				height: 32rem !important;
+				width: 51.2rem !important;
+			}
+
+			&-image {
+				flex: auto;
+				width: 100%;
+				height: 100%;
+				overflow: hidden;
+
+				> img {
+					object-fit: cover;
+					object-position: center;
+					width: 100%;
+					height: 100%;
+				}
+			}
 		}
 	}
 }

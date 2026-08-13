@@ -1,12 +1,13 @@
-import type { ButtonAction } from '@viaa/avo2-components';
 import React, { type CSSProperties, type FunctionComponent, type ReactNode } from 'react';
 import type { Color } from '~modules/content-page/types/content-block.types';
 import type { DefaultComponentProps } from '~modules/shared/types/components';
 import './BlockHeroCarousel.scss';
 import 'swiper/css';
 import clsx from 'clsx';
+import type { HeroCarouselBlockComponentState } from '~content-blocks/BlockHeroCarousel/BlockHeroCarousel.types.ts';
+import { BlockHeroCarouselCarousel } from '~content-blocks/BlockHeroCarousel/BlockHeroCarouselCarousel.tsx';
 import { BlockHeroCarouselSearch } from '~content-blocks/BlockHeroCarousel/BlockHeroCarouselSearch.tsx';
-import { CONTENT_PAGE_WIDTH_TO_REM } from '~modules/content-page/types/content-pages.types.ts';
+import { useGetIeObjectsByIds } from '~content-blocks/BlockHeroCarousel/hooks/useGetIeObjectsByIds.ts';
 
 export interface BlockHeroCarouselProps extends DefaultComponentProps {
 	backgroundColor: Color;
@@ -14,26 +15,19 @@ export interface BlockHeroCarouselProps extends DefaultComponentProps {
 	title: string;
 	searchAriaLabel: string;
 	subtitles: { label: string }[];
-	elements: {
-		mediaItem?: ButtonAction;
-		image: string;
-		imageAlt: string;
-		title: string;
-		textColor: Color;
-		backgroundColor: Color;
-		itemDisplay: string;
-	}[];
+	elements: HeroCarouselBlockComponentState[];
 }
 
 export const BlockHeroCarousel: FunctionComponent<BlockHeroCarouselProps> = ({
 	className,
-	backgroundColor,
 	backgroundImage,
 	title,
 	subtitles,
 	searchAriaLabel,
 	elements,
 }): ReactNode => {
+	const { data: ieObjects } = useGetIeObjectsByIds(elements);
+
 	return (
 		<article className={clsx('c-block-hero-carousel', className)}>
 			{backgroundImage && (
@@ -51,6 +45,7 @@ export const BlockHeroCarousel: FunctionComponent<BlockHeroCarouselProps> = ({
 				subtitles={subtitles}
 				searchAriaLabel={searchAriaLabel}
 			/>
+			{ieObjects && <BlockHeroCarouselCarousel elements={ieObjects} />}
 		</article>
 	);
 };
