@@ -2,8 +2,10 @@ import { Image } from '@viaa/avo2-components';
 import clsx from 'clsx';
 import React, { type FunctionComponent, type ReactElement, useMemo, useRef, useState } from 'react';
 import type SwiperController from 'swiper';
+import { Autoplay } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import type { HeroCarouselBlockComponentState } from '~content-blocks/BlockHeroCarousel/BlockHeroCarousel.types.ts';
+import { CarouselButtons } from '~modules/content-page/components/CarouselButtons/CarouselButtons.tsx';
 import type { DefaultComponentProps } from '~modules/shared/types/components';
 import type { IeObject } from '~shared/services/ie-objects-service/ie-objects.types.ts';
 import {
@@ -19,7 +21,6 @@ import {
 
 import 'swiper/css';
 import './BlockHeroCarousel.scss';
-import { CarouselButtons } from '~modules/content-page/components/CarouselButtons/CarouselButtons.tsx';
 
 export interface BlockHeroCarouselCarouselProps extends DefaultComponentProps {
 	elements: (HeroCarouselBlockComponentState & IeObject)[];
@@ -38,15 +39,20 @@ export const BlockHeroCarouselCarousel: FunctionComponent<BlockHeroCarouselCarou
 	const isRecenteringRef = useRef(false);
 	const pendingCorrectionPxRef = useRef(0);
 	const pendingDirectionRef = useRef<'next' | 'prev'>('next');
+	const speed = 1300;
 
 	return (
 		<div className={clsx('c-block-hero-carousel__carousel')}>
-			<CarouselButtons controlledSwiper={controlledSwiper} isLoopedCarousel={true} />
 			<Swiper
 				className={'c-block-hero-carousel__carousel-swiper'}
+				modules={[Autoplay]}
+				autoplay={{
+					waitForTransition: false,
+					delay: speed + 1000, // we need to take the transition into consideration
+				}}
 				slidesPerView="auto"
 				spaceBetween={12}
-				speed={500}
+				speed={speed}
 				initialSlide={startIndex}
 				allowTouchMove={false}
 				simulateTouch={false}
@@ -107,6 +113,11 @@ export const BlockHeroCarouselCarousel: FunctionComponent<BlockHeroCarouselCarou
 						);
 					}
 				)}
+				<CarouselButtons
+					controlledSwiper={controlledSwiper}
+					isLoopedCarousel={true}
+					className={'c-block-hero-carousel__carousel-navigation'}
+				/>
 			</Swiper>
 		</div>
 	);
