@@ -3,7 +3,7 @@ import type { DefaultComponentProps } from '~modules/shared/types/components';
 import './BlockHighligtText.scss';
 import { Container } from '@viaa/avo2-components';
 import clsx from 'clsx';
-import { hasDarkBackground } from '~modules/content-page/const/get-color-options.ts';
+import { getBackgroundTextColorVariables } from '~modules/content-page/const/background-text-colors.ts';
 import {
 	Color,
 	ColorSelectGradientColors,
@@ -30,12 +30,14 @@ export const BlockHighlightText: FunctionComponent<BlockHighlightTextProps> = ({
 		highlightColor === CustomBackground.MeemooLogo
 			? Color.Transparent
 			: ((ColorSelectGradientColors as Record<string, string>)[highlightColor] ?? highlightColor);
-	// The text sits inside the highlighted box, so its WCAG text color follows the highlight color
-	// rather than the block background. A gradient highlight renders the box white and the meemoo
-	// logo renders it transparent (both below), and neither has a single luminance, so
-	// hasDarkBackground reports false for them and the text stays black - which is what those two
-	// backgrounds need. https://meemoo.atlassian.net/browse/ARC-3848
-	const hasDarkHighlight = hasDarkBackground(highlightColor);
+	// The text sits inside the highlighted box, so its WCAG text colors follow the box background
+	// rather than the block background: the highlight color, except for a gradient, which renders the
+	// box white (see --pattern-color below). The meemoo logo renders it transparent, which design
+	// specified no colors for, so that keeps the inherited text color.
+	// https://meemoo.atlassian.net/browse/ARC-3848
+	const textBoxBackground = isGradient ? Color.White : patternColor;
+	const textColorVariables = getBackgroundTextColorVariables(textBoxBackground);
+	const hasTextColors = Object.keys(textColorVariables).length > 0;
 
 	return (
 		<article
@@ -64,16 +66,17 @@ export const BlockHighlightText: FunctionComponent<BlockHighlightTextProps> = ({
 				</div>
 				<Html
 					className={clsx('c-block-highlight-text__content-text', {
-						'u-color-white': hasDarkHighlight,
+						'u-text-primary': hasTextColors,
 					})}
 					style={
 						{
-							'--pattern-color': isGradient ? Color.White : patternColor,
+							'--pattern-color': textBoxBackground,
+							...textColorVariables,
 						} as CSSProperties
 					}
 					content={content}
 					type="p"
-				></Html>
+				/>
 				<div className="c-block-highlight-text__pattern-slot c-block-highlight-text__pattern-slot--bottom">
 					<div
 						className="c-block-highlight-text__pattern c-block-highlight-text__pattern--right"

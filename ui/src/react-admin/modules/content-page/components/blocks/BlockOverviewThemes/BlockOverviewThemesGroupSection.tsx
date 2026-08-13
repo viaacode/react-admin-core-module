@@ -18,7 +18,7 @@ import { AvoCoreContentPickerType } from '@viaa/avo2-types';
 import { keyBy } from 'es-toolkit/compat';
 import { BlockHeading } from '~content-blocks/BlockHeading';
 import { AdminConfigManager } from '~core/config';
-import { hasDarkBackground } from '~modules/content-page/const/get-color-options';
+import { getBackgroundTextColorVariables } from '~modules/content-page/const/background-text-colors';
 import { Locale } from '~modules/translations/translations.core.types.ts';
 import { Icon } from '~shared/components/Icon/Icon.tsx';
 import { SmartLink } from '~shared/components/SmartLink/SmartLink.tsx';
@@ -34,7 +34,10 @@ export const BlockOverviewThemesGroupSection: FunctionComponent<
 > = ({ group, groupIndex, themes, bandColor }) => {
 	const gridRef = useRef<HTMLDivElement>(null);
 	const [bandHeight, setBandHeight] = useState<number | null>(null);
-	const hasDarkBand = hasDarkBackground(bandColor);
+	// The group title sits on the band, so it takes the design text colors for the band color.
+	// https://meemoo.atlassian.net/browse/ARC-3848
+	const bandTextColorVariables = getBackgroundTextColorVariables(bandColor);
+	const hasBandTextColors = Object.keys(bandTextColorVariables).length > 0;
 
 	useLayoutEffect(() => {
 		const gridEl = gridRef.current;
@@ -123,7 +126,10 @@ export const BlockOverviewThemesGroupSection: FunctionComponent<
 	};
 
 	return (
-		<section className="c-block-overview-themes__group">
+		<section
+			className="c-block-overview-themes__group"
+			style={bandTextColorVariables as CSSProperties}
+		>
 			{!!bandHeight && (
 				<>
 					<div
@@ -137,10 +143,9 @@ export const BlockOverviewThemesGroupSection: FunctionComponent<
 				<BlockHeading
 					type={group.titleType || 'h2'}
 					className={clsx('c-block-overview-themes__group-title', {
-						// The title sits on the band, so its WCAG text color follows the band color. Gated on
-						// bandHeight like the band itself, so both flip in the same render and the title is
-						// never white on the page background. https://meemoo.atlassian.net/browse/ARC-3848
-						'u-color-white': !!bandHeight && hasDarkBand,
+						// Gated on bandHeight like the band itself, so both appear in the same render and the
+						// title never takes the band's text color while sitting on the page background.
+						'u-text-primary': !!bandHeight && hasBandTextColors,
 					})}
 				>
 					{group.title}

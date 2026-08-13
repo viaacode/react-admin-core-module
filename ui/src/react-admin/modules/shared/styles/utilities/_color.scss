@@ -11,3 +11,28 @@
 .u-color-gray-150 {
   color: colors.$color-gray-150 !important;
 }
+
+/* --------------------------------------------------------------------------
+   WCAG text colors on a content block's background color
+
+   The block sets --bg-text-primary / --bg-text-secondary / --bg-text-hyperlink from the design
+   record in background-text-colors.ts (see ContentBlockRenderer). These classes let a block tag
+   which role a piece of text plays, instead of hardcoding a color that then has to be overridden
+   per background. https://meemoo.atlassian.net/browse/ARC-3848
+
+   Each falls back to `inherit` so a block outside a colored background is unaffected, and
+   --bg-text-secondary / --bg-text-hyperlink fall back to the primary color when design specified
+   no separate value for that background.
+   -------------------------------------------------------------------------- */
+
+.u-text-primary {
+  color: var(--bg-text-primary, inherit) !important;
+}
+
+.u-text-secondary {
+  color: var(--bg-text-secondary, var(--bg-text-primary, inherit)) !important;
+}
+
+.u-text-hyperlink {
+  color: var(--bg-text-hyperlink, var(--bg-text-primary, inherit)) !important;
+}

@@ -1,10 +1,10 @@
 import type { SelectOption } from '@viaa/avo2-components';
-import { getContrastRatio, WCAG_AA_CONTRAST_NORMAL_TEXT } from '~shared/helpers/get-contrast-ratio';
 import { isAvo } from '~shared/helpers/is-avo';
 import { tText } from '~shared/helpers/translation-functions';
 import { AVO } from '~shared/types';
 import { App } from '../../../../../scripts/translation.types';
 import { Color, CustomBackground, GradientColor } from '../types/content-block.types';
+import { getBackgroundTextColors, TEXT_COLOR_WHITE } from './background-text-colors';
 
 const transparentOption = () => ({
 	label: tText('admin/content-block/content-block___geen'),
@@ -183,24 +183,12 @@ export const DARK_BACKGROUND_COLOR_OPTIONS_AVO: (Color | GradientColor | CustomB
 ];
 
 /**
- * Whether text on this background color must be white to pass WCAG AA, following the rule meemoo
- * set: black text on the color, unless white text on that color passes AA.
- * https://meemoo.atlassian.net/browse/ARC-3848
+ * Whether this background needs light text, so blocks can pick a dark-background variant of their
+ * styling. On archief the answer comes from the design record in background-text-colors.ts; AVO
+ * keeps its own list, since its palette follows a different brand book.
  *
- * Use this for every content block that renders text on an admin-picked color without offering a
- * text color field of its own.
- *
- * The archief answer is computed rather than listed, so a new brand color is handled the moment it
- * is added instead of silently defaulting to black - the drift between the palette and a
- * hand-maintained list is what put unreadable white text on ocean green in the first place. The
- * computation reproduces every background row of meemoo-hetarchief-kleurencombinaties.pdf, which
- * get-color-options.test.ts asserts row by row.
- *
- * AVO keeps its literal list: its palette predates this rule and does not follow it (white on
- * Color.Yellow is 1.2:1, nowhere near AA), so it must not be recomputed.
- *
- * Gradients, the meemoo logo pattern and Color.Transparent have no single luminance, so
- * getContrastRatio returns null and they keep the default black text.
+ * Prefer getBackgroundTextColors() where you need the actual colors - this only answers "is it a
+ * dark background", not "which color is the text". https://meemoo.atlassian.net/browse/ARC-3848
  */
 export function hasDarkBackground(
 	color: Color | GradientColor | CustomBackground | string | undefined
@@ -213,9 +201,7 @@ export function hasDarkBackground(
 		return DARK_BACKGROUND_COLOR_OPTIONS_AVO.includes(color as Color);
 	}
 
-	const whiteTextContrast = getContrastRatio(color, Color.White);
-
-	return whiteTextContrast !== null && whiteTextContrast >= WCAG_AA_CONTRAST_NORMAL_TEXT;
+	return getBackgroundTextColors(color)?.primary === TEXT_COLOR_WHITE;
 }
 
 export const GET_FOREGROUND_COLOR_OPTIONS_AVO: () => SelectOption<Color>[] = () => [

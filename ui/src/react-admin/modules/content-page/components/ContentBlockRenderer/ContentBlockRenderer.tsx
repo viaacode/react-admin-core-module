@@ -2,7 +2,7 @@ import { Container, Spacer } from '@viaa/avo2-components';
 
 import clsx from 'clsx';
 import { kebabCase, noop, omit } from 'es-toolkit';
-import type { FunctionComponent, KeyboardEvent, RefObject } from 'react';
+import type { CSSProperties, FunctionComponent, KeyboardEvent, RefObject } from 'react';
 import React, { useCallback, useEffect, useRef } from 'react';
 import { AdminConfigManager } from '~core/config/config.class';
 import { getCommonUser } from '~core/config/config.selectors.ts';
@@ -10,6 +10,10 @@ import { GENERATED_CONTENT_BLOCK_ANCHOR_PREFIX } from '~modules/content-page/con
 import type { ContentPageInfo } from '~modules/content-page/types/content-pages.types';
 import { ContentPageWidth } from '~modules/content-page/types/content-pages.types';
 import { generateSmartLink } from '~shared/components/SmartLink/SmartLink';
+import {
+	getBackgroundTextColors,
+	getBackgroundTextColorVariables,
+} from '../../const/background-text-colors';
 import { hasDarkBackground } from '../../const/get-color-options';
 import {
 	Color,
@@ -123,6 +127,13 @@ const ContentBlockRenderer: FunctionComponent<ContentBlockPreviewProps> = ({
 	}
 
 	const hasDarkBg = hasDarkBackground(blockState?.backgroundColor);
+	// The WCAG text colors design specified for this background, published as css variables so any
+	// text inside the block can pick the role it plays with u-text-primary / u-text-secondary /
+	// u-text-hyperlink. https://meemoo.atlassian.net/browse/ARC-3848
+	const backgroundTextColors = getBackgroundTextColors(blockState?.backgroundColor);
+	const textColorVariables = getBackgroundTextColorVariables(
+		blockState?.backgroundColor
+	) as CSSProperties;
 	const anchor =
 		blockState?.anchor?.replaceAll(' ', '-') ||
 		GENERATED_CONTENT_BLOCK_ANCHOR_PREFIX + contentBlockConfig.id;
@@ -144,6 +155,7 @@ const ContentBlockRenderer: FunctionComponent<ContentBlockPreviewProps> = ({
 						? Color.Transparent
 						: blockState?.backgroundColor,
 				...(blockState?.headerBackgroundColor !== Color.Transparent ? { zIndex: 1 } : {}),
+				...textColorVariables,
 			}}
 			data-anchor={anchor}
 			ref={blockRef}
@@ -159,11 +171,14 @@ const ContentBlockRenderer: FunctionComponent<ContentBlockPreviewProps> = ({
 			 * to avoid overlapping a fixed header when we jump to this anchor
 			 * https://meemoo.atlassian.net/browse/AVO-3351
 			 */}
-			<div className="c-content-block__anchor" id={anchor}></div>
+			<div className="c-content-block__anchor" id={anchor} />
 			<Spacer
 				className={clsx('c-content-block-preview', {
 					'c-content-block-preview--dark': hasDarkBg,
-					'u-color-white': hasDarkBg,
+					// Archief takes its color from the design record; AVO has no record and keeps the
+					// original blanket white.
+					'u-text-primary': !!backgroundTextColors,
+					'u-color-white': hasDarkBg && !backgroundTextColors,
 				})}
 				margin={[blockState?.margin?.top ?? 'none', blockState?.margin?.bottom ?? 'none']}
 				padding={[blockState?.padding?.top ?? 'none', blockState?.padding?.bottom ?? 'none']}
