@@ -35,11 +35,14 @@ export class ThemesService {
 			return [];
 		}
 		try {
-			// The themes endpoint doesn't support filtering by ids, so we fetch a large page and filter client-side.
-			// Themes are a bounded editorial taxonomy, so this is expected to stay small.
-			const response = await ThemesService.fetchThemes(null, 0, 1000);
-			const idSet = new Set(ids);
-			return response.items.filter((theme) => idSet.has(theme.id));
+			return await fetchWithLogoutJson<Theme[]>(
+				stringifyUrl({
+					url: `${ThemesService.getBaseUrl()}/by-id`,
+					query: {
+						ids: ids.join(','),
+					},
+				})
+			);
 		} catch (err) {
 			throw new CustomError('Failed to fetch themes by ids', err, { ids });
 		}

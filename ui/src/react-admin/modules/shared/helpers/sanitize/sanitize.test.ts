@@ -7,8 +7,9 @@ describe('sanitize', () => {
 		const originalHtml =
 			'<p style="text-align:center">Simpel! Drie <a href="/start" target="_self">stappen</a> naar een geslaagde opdracht:</p>';
 		const sanitizedHtml = sanitizeHtml(originalHtml, SanitizePreset.full);
+		// Attributes come back in their original order
 		expect(sanitizedHtml).toEqual(
-			'<p style="text-align:center">Simpel! Drie <a target="_self" href="/start">stappen</a> naar een geslaagde opdracht:</p>'
+			'<p style="text-align:center">Simpel! Drie <a href="/start" target="_self">stappen</a> naar een geslaagde opdracht:</p>'
 		);
 	});
 
