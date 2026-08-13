@@ -58538,5 +58538,325 @@
     "language": "en",
     "value": "You do not have the right permissions to call this route",
     "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-double-banner/block-double-banner",
+    "key": "achtergrondkleur-tekstvak",
+    "language": "nl",
+    "value": "Achtergrondkleur tekstvak",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-double-banner/block-double-banner",
+    "key": "achtergrondkleur-tekstvak",
+    "language": "en",
+    "value": "Text panel background colour",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-double-banner/block-double-banner",
+    "key": "afbeelding",
+    "language": "nl",
+    "value": "Afbeelding",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-double-banner/block-double-banner",
+    "key": "afbeelding",
+    "language": "en",
+    "value": "Image",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-double-banner/block-double-banner",
+    "key": "afbeelding-is-verplicht",
+    "language": "nl",
+    "value": "Afbeelding is verplicht",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-double-banner/block-double-banner",
+    "key": "afbeelding-is-verplicht",
+    "language": "en",
+    "value": "Image is required",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-double-banner/block-double-banner",
+    "key": "bestemming",
+    "language": "nl",
+    "value": "Bestemming",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-double-banner/block-double-banner",
+    "key": "bestemming",
+    "language": "en",
+    "value": "Destination",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-double-banner/block-double-banner",
+    "key": "bestemming-is-verplicht",
+    "language": "nl",
+    "value": "Bestemming is verplicht",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-double-banner/block-double-banner",
+    "key": "bestemming-is-verplicht",
+    "language": "en",
+    "value": "Destination is required",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-double-banner/block-double-banner",
+    "key": "dubbele-banner",
+    "language": "nl",
+    "value": "Dubbele banner",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-double-banner/block-double-banner",
+    "key": "dubbele-banner",
+    "language": "en",
+    "value": "Double banner",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-double-banner/block-double-banner",
+    "key": "helft",
+    "language": "nl",
+    "value": "Helft",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-double-banner/block-double-banner",
+    "key": "helft",
+    "language": "en",
+    "value": "Half",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-double-banner/block-double-banner",
+    "key": "icoon-1",
+    "language": "nl",
+    "value": "Icoon 1",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-double-banner/block-double-banner",
+    "key": "icoon-1",
+    "language": "en",
+    "value": "Icon 1",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-double-banner/block-double-banner",
+    "key": "icoon-2",
+    "language": "nl",
+    "value": "Icoon 2",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-double-banner/block-double-banner",
+    "key": "icoon-2",
+    "language": "en",
+    "value": "Icon 2",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-double-banner/block-double-banner",
+    "key": "icoon-3",
+    "language": "nl",
+    "value": "Icoon 3",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-double-banner/block-double-banner",
+    "key": "icoon-3",
+    "language": "en",
+    "value": "Icon 3",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-double-banner/block-double-banner",
+    "key": "label",
+    "language": "nl",
+    "value": "Label",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-double-banner/block-double-banner",
+    "key": "label",
+    "language": "en",
+    "value": "Label",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-double-banner/block-double-banner",
+    "key": "label-is-verplicht",
+    "language": "nl",
+    "value": "Label is verplicht",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-double-banner/block-double-banner",
+    "key": "label-is-verplicht",
+    "language": "en",
+    "value": "Label is required",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-double-banner/block-double-banner",
+    "key": "tekstkleur",
+    "language": "nl",
+    "value": "Tekstkleur",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-double-banner/block-double-banner",
+    "key": "tekstkleur",
+    "language": "en",
+    "value": "Text colour",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/const/get-content-block-type-options",
+    "key": "dubbele-banner",
+    "language": "nl",
+    "value": "Dubbele banner",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/const/get-content-block-type-options",
+    "key": "dubbele-banner",
+    "language": "en",
+    "value": "Double banner",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-double-banner/block-double-banner",
+    "key": "achtergrondkleur-tekstvak-is-verplicht",
+    "language": "nl",
+    "value": "Achtergrondkleur tekstvak is verplicht",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-double-banner/block-double-banner",
+    "key": "achtergrondkleur-tekstvak-is-verplicht",
+    "language": "en",
+    "value": "Text panel background colour is required",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-double-banner/block-double-banner",
+    "key": "tekstkleur-is-verplicht",
+    "language": "nl",
+    "value": "Tekstkleur is verplicht",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-double-banner/block-double-banner",
+    "key": "tekstkleur-is-verplicht",
+    "language": "en",
+    "value": "Text colour is required",
+    "value_type": "TEXT"
   }
 ]

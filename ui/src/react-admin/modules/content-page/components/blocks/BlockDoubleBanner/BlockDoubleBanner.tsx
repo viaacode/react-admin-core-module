@@ -37,19 +37,24 @@ export const BlockDoubleBanner: FunctionComponent<BlockDoubleBannerProps> = ({
 					<span className="c-block-double-banner__label">{half.label}</span>
 					<span className="c-block-double-banner__actions">
 						<span className="c-block-double-banner__icons">
-							{icons.map((icon) => (
+							{icons.map((icon, iconIndex) => (
 								<Icon
-									key={`c-block-double-banner__icon-${index}-${icon}`}
+									key={`c-block-double-banner__icon-${index}-${iconIndex}-${icon}`}
 									className="c-block-double-banner__icon"
 									name={icon as IconName}
+									aria-hidden
 								/>
 							))}
 						</span>
-						<Icon className="c-block-double-banner__arrow" name={'arrowDownRight' as IconName} />
+						<Icon
+							className="c-block-double-banner__arrow"
+							name={'arrowDownRight' as IconName}
+							aria-hidden
+						/>
 					</span>
 				</div>
 				<div className="c-block-double-banner__image">
-					<Image src={half.image} alt={half.label} />
+					<Image src={half.image} alt="" />
 				</div>
 			</>
 		);

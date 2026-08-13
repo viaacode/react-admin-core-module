@@ -17,12 +17,13 @@ $half-gap: variables.$g-spacer-unit * 2;
 
 	&__half {
 		display: flex;
-		min-height: 12rem;
+		flex-direction: column-reverse;
 		overflow: hidden;
 		text-decoration: none;
 
 		@media (min-width: variables.$g-bp3) {
-			min-height: 14rem;
+			flex-direction: row;
+			min-height: 16rem;
 		}
 
 		&:focus-visible {
@@ -35,25 +36,31 @@ $half-gap: variables.$g-spacer-unit * 2;
 
 		// Mirror image: the image moves to the other side and its rounded end flips with it.
 		&--mirrored {
-			flex-direction: row-reverse;
-
 			.c-block-double-banner__image {
 				border-radius: 999px 0 0 999px;
+			}
+
+			@media (min-width: variables.$g-bp3) {
+				flex-direction: row-reverse;
 			}
 		}
 	}
 
 	&__panel {
-		// The panel needs more room than the image while the two halves sit under each other.
-		flex: 3 1 0;
-		display: flex;
-		flex-direction: column;
-		justify-content: space-between;
+		box-sizing: border-box;
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) auto;
+		align-items: end;
 		gap: variables.$g-spacer-unit;
-		padding: $panel-padding;
+		padding: $panel-padding $panel-padding * 1.5;
 
 		@media (min-width: variables.$g-bp3) {
-			flex: 1 1 0;
+			flex: 0 0 50%;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+			align-items: stretch;
+			min-width: 0;
 			padding: $panel-padding * 1.5;
 		}
 	}
@@ -61,53 +68,71 @@ $half-gap: variables.$g-spacer-unit * 2;
 	&__label {
 		// Body copy at heading weight: none of the presets cover that combo, which is what the
 		// sofia-pro mixin is there for.
-		@include typography.sofia-pro(1.6rem, 800, 2.4rem);
-
-		@media (min-width: variables.$g-bp3) {
-			@include typography.sofia-pro(1.8rem, 800, 2.8rem);
-		}
+		@include typography.sofia-pro(1.8rem, 800, 2.8rem);
 	}
 
-	// The design groups the icons and the arrow together at the start of the row, rather than
-	// pushing the arrow out to the far edge of the panel.
+	// Mobile keeps only the arrow at the far edge; desktop groups the selected icons and arrow at
+	// the start of the row.
 	&__actions {
 		display: flex;
 		align-items: center;
-		gap: variables.$g-spacer-unit * 2;
+		gap: variables.$g-spacer-unit * 0.5;
+		justify-self: end;
+
+		@media (min-width: variables.$g-bp3) {
+			justify-self: auto;
+		}
 	}
 
 	&__icons {
-		display: flex;
+		display: none;
 		align-items: center;
-		gap: variables.$g-spacer-unit;
+		gap: variables.$g-spacer-unit * 0.5;
+
+		@media (min-width: variables.$g-bp3) {
+			display: flex;
+		}
 	}
 
 	&__icon,
 	&__arrow {
-		font-size: 2rem;
+		font-size: 2.4rem;
 		line-height: 1;
+
+		@media (min-width: variables.$g-bp3) {
+			font-size: 3.2rem;
+		}
 	}
 
 	&__image {
 		position: relative;
-		flex: 2 1 0;
+		flex: 0 0 auto;
+		width: 100%;
+		height: 9.6rem;
 		overflow: hidden;
 
-		@media (min-width: variables.$g-bp3) {
-			flex: 1 1 0;
-		}
 		// A pill end on the side facing the middle of the block; the radius is deliberately larger
 		// than the half is tall so it always resolves to a semicircle.
 		border-radius: 0 999px 999px 0;
+
+		@media (min-width: variables.$g-bp3) {
+			box-sizing: border-box;
+			flex: 0 0 50%;
+			width: auto;
+			height: auto;
+			min-width: 0;
+		}
 
 		img {
 			position: absolute;
 			inset: 0;
 			width: 100%;
 			height: 100%;
+
 			// Cover-scaling, centered both ways, as required by the FA.
 			object-fit: cover;
 			object-position: center;
+
 			@include animations.zoom-in-transition;
 		}
 	}

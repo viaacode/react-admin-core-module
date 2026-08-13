@@ -9,9 +9,10 @@ import { isHetArchief } from '~shared/helpers/is-hetarchief.ts';
 interface IconProps {
 	name: keyof IconConfig['componentProps'] | IconName;
 	className?: string;
+	'aria-hidden'?: boolean;
 }
 
-export const Icon: FC<IconProps> = ({ name, className }) => {
+export const Icon: FC<IconProps> = ({ name, className, ...accessibilityProps }) => {
 	const iconConfig = AdminConfigManager.getConfig().icon;
 	// biome-ignore lint/suspicious/noExplicitAny: todo
 	let iconProps = (iconConfig?.componentProps as any)?.[name] as {
@@ -25,12 +26,13 @@ export const Icon: FC<IconProps> = ({ name, className }) => {
 					config: iconConfig?.componentProps,
 				})
 			);
-		} else {
-			// Default to avo2 icons
-			iconProps = { name };
 		}
+
+		// Icon picker values are concrete client glyph names (for example `video--light`) rather
+		// than admin-core config keys. Pass those values through to the configured icon component.
+		iconProps = { name };
 	}
 	const IconComponent = iconConfig?.component ?? (() => null);
 
-	return <IconComponent {...iconProps} className={className} />;
+	return <IconComponent {...iconProps} {...accessibilityProps} className={className} />;
 };

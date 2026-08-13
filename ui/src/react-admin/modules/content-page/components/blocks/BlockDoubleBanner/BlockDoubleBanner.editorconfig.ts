@@ -48,6 +48,9 @@ const ICON_FIELD = (label: string) => ({
 	},
 });
 
+const GET_DOUBLE_BANNER_BACKGROUND_COLOR_OPTIONS = () =>
+	GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF().filter(({ value }) => value.startsWith('#'));
+
 export const DOUBLE_BANNER_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 	position,
 	name: tText(
@@ -146,6 +149,10 @@ export const DOUBLE_BANNER_BLOCK_CONFIG = (position = 0): ContentBlockConfig => 
 								{},
 								[HET_ARCHIEF]
 							),
+							editorProps: {
+								assetType: 'CONTENT_BLOCK_IMAGE',
+								allowMulti: false,
+							},
 						}
 					),
 					textColor: {
@@ -161,6 +168,15 @@ export const DOUBLE_BANNER_BLOCK_CONFIG = (position = 0): ContentBlockConfig => 
 								(option) => option.value === Color.White
 							),
 						},
+						validator: (value: string) =>
+							validateRequiredValue(
+								value,
+								tText(
+									'modules/content-page/components/blocks/block-double-banner/block-double-banner___tekstkleur-is-verplicht',
+									{},
+									[HET_ARCHIEF]
+								)
+							),
 					},
 					backgroundColor: {
 						label: tText(
@@ -170,11 +186,20 @@ export const DOUBLE_BANNER_BLOCK_CONFIG = (position = 0): ContentBlockConfig => 
 						),
 						editorType: ContentBlockEditor.ColorSelect,
 						editorProps: {
-							options: GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF(),
-							defaultValue: GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF().find(
+							options: GET_DOUBLE_BANNER_BACKGROUND_COLOR_OPTIONS(),
+							defaultValue: GET_DOUBLE_BANNER_BACKGROUND_COLOR_OPTIONS().find(
 								(option) => option.value === Color.Black
 							),
 						},
+						validator: (value: string) =>
+							validateRequiredValue(
+								value,
+								tText(
+									'modules/content-page/components/blocks/block-double-banner/block-double-banner___achtergrondkleur-tekstvak-is-verplicht',
+									{},
+									[HET_ARCHIEF]
+								)
+							),
 					},
 				},
 			},
