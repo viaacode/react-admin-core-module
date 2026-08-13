@@ -71,14 +71,6 @@
 			}
 		}
 
-		&-nav {
-			display: flex;
-			align-items: center;
-			gap: variables.$g-spacer-unit;
-			margin-left: auto;
-			flex-shrink: 0;
-		}
-
 		@media (max-width: variables.$g-bp2) {
 			flex-direction: column;
 			align-items: stretch;
