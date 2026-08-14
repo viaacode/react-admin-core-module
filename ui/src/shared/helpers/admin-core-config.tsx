@@ -97,6 +97,7 @@ export function getAdminCoreConfigForLocalTestApp(navigateFunc: NavigateFunction
 				// ContentBlockType.ContentEncloseGrid,
 				// ContentBlockType.Breadcrumbs,
 				ContentBlockType.OverviewWithCarousel,
+				ContentBlockType.ObjectsGrid,
 				ContentBlockType.OverviewThemes,
 			],
 			defaultPageWidth: ContentPageWidth.LARGE,

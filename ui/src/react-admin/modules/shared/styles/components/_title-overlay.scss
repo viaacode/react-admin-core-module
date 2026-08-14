@@ -1,5 +1,6 @@
 @use "../../styles/settings/colors" as colors;
 @use "../../styles/settings/variables" as variables;
+@use "../../styles/mixins/typography" as typography;
 
 /* ==========================================================================
    Component: Title overlay
@@ -27,11 +28,9 @@ $c-title-overlay-padding: 1.6rem;
   padding: 0.8rem 1.2rem;
   margin: 0 0 1rem;
   font-size: 1.8rem;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
   display: inline-block;
   max-width: calc(100% - #{$c-title-overlay-padding * 2});
+	@include typography.truncate;
 }
 
 .c-title-overlay__source {

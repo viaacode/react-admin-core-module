@@ -81,6 +81,7 @@ $tile-padding: 3rem;
 		aspect-ratio: 4/3;
 		overflow: hidden;
 		text-decoration: none;
+		@include focus.focus-outline;
 
 		@media (min-width: variables.$g-bp2) {
 			// Size comes from the grid row/column spans below instead of a fixed aspect ratio.
@@ -108,9 +109,6 @@ $tile-padding: 3rem;
 			grid-row: span 1 !important;
 		}
 
-		&:focus-visible {
-			@include focus.focus;
-		}
 
 		&:hover &-image > img {
 			@include animations.zoom-in-animation;

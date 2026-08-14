@@ -23,6 +23,7 @@ import { BlockImageTitleTextButtonWrapper } from '~content-blocks/BlockImageTitl
 import { BlockIntro } from '~content-blocks/BlockIntro';
 import { BlockKlaar } from '~content-blocks/BlockKlaar';
 import { BlockMaintainersGrid } from '~content-blocks/BlockMaintainersGrid';
+import { BlockObjectsGrid } from '~content-blocks/BlockObjectsGrid';
 import { BlockOverviewNewspaperTitles } from '~content-blocks/BlockOverviewNewspaperTitles';
 import { BlockOverviewThemes } from '~content-blocks/BlockOverviewThemes/BlockOverviewThemes.tsx';
 import { BlockOverviewWithCarousel } from '~content-blocks/BlockOverviewWithCarousel/BlockOverviewWithCarousel.tsx';
@@ -81,6 +82,7 @@ export function GET_BLOCK_COMPONENT(
 		[ContentBlockType.CardsWithoutDescription]: BlockCardsWithoutDescription,
 		[ContentBlockType.MaintainersGrid]: BlockMaintainersGrid,
 		[ContentBlockType.ScrollDownNudge]: BlockScrollDownNudge,
+		[ContentBlockType.ObjectsGrid]: BlockObjectsGrid,
 
 		// Het archief specific blocks
 		[ContentBlockType.HetArchiefHeaderSearch]: BlockHetArchiefHeaderSearch,
