@@ -1,32 +1,33 @@
-import { stringifyUrl } from 'query-string';
 import { CustomError } from '~shared/helpers/custom-error';
 import { fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
 import { getProxyUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config';
-import type { IeObject } from '~shared/services/ie-objects-service/ie-objects.types.ts';
+import type { PlayableDisplayIeObject } from '~shared/services/ie-objects-service/ie-objects.types.ts';
 
 export class IeObjectsService {
 	private static getBaseUrl(): string {
 		return `${getProxyUrl()}/ie-objects`;
 	}
 
-	public static async getByIeObjectSchemaIdentifiers(
-		schemaIdentifiers: string[],
-		resolveThumbnailUrl: boolean
-	): Promise<IeObject[]> {
+	public static async getPlayableDisplayData(
+		schemaIdentifiers:
+			| string[]
+			| {
+					schemaIdentifier: string;
+					start?: number;
+					end?: number;
+			  }[]
+	): Promise<PlayableDisplayIeObject[]> {
 		try {
-			return await fetchWithLogoutJson<IeObject[]>(
-				stringifyUrl({
-					url: IeObjectsService.getBaseUrl(),
-					query: {
-						schemaIdentifiers,
-						resolveThumbnailUrl,
-					},
-				})
+			return await fetchWithLogoutJson<PlayableDisplayIeObject[]>(
+				`${IeObjectsService.getBaseUrl()}/playable-display-data`,
+				{
+					method: 'POST',
+					body: JSON.stringify({ objects: schemaIdentifiers }),
+				}
 			);
 		} catch (err) {
 			throw new CustomError('Failed to fetch themes', err, {
 				schemaIdentifiers,
-				resolveThumbnailUrl,
 			});
 		}
 	}

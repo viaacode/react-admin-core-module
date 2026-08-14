@@ -66,7 +66,7 @@ $slide-height: 16rem;
 			flex-direction: column;
 			height: $slide-height !important;
 			width: 12rem !important;
-			transition: height 1.3s ease-out, width 1.3s ease-out !important;
+			transition: height 1.3s ease-out, width 1.3s ease-out, border 1.3s ease-out !important;
 			border: 3px solid colors.$color-gray-1000;
 
 			@each $format, $width in $hero-carousel-format-widths {
@@ -95,6 +95,16 @@ $slide-height: 16rem;
 					width: 100%;
 					height: 100%;
 				}
+			}
+
+			&-placeholder {
+				flex: auto;
+				width: 100%;
+				height: 100%;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				background-color: colors.$color-gray-600;
 			}
 		}
 	}
