@@ -154,9 +154,9 @@ Block styles are a plain `Block<Name>.scss` next to the component, imported by i
 - **Breakpoints** are `variables.$g-bp1`…`$g-bp4`, written as
   `@media (max-width: variables.$g-bp2)`.
 - **Type** goes through [`mixins/_typography.scss`](../../../shared/styles/mixins/_typography.scss):
-  a preset (`sofia-pro-body()`, `sofia-pro-heading-lg()`, …) when the size/weight matches, otherwise
-  `sofia-pro($size, $weight, $line-height)`. Don't re-declare `font-family`/`font-size`/`font-weight`
-  by hand.
+  always a preset (`sofia-pro-body()`, `sofia-pro-heading-lg()`, …). If none of them matches, add a
+  preset there instead of calling `sofia-pro($size, $weight, $line-height)` from the block. Don't
+  re-declare `font-family`/`font-size`/`font-weight` by hand.
 - **Colours** come from `settings/colors`, or from a CSS custom property when the editor picks them
   (`background: var(--frame-color)`).
 - A value that genuinely is design-specific (a frame radius, an icon-column width) becomes a named

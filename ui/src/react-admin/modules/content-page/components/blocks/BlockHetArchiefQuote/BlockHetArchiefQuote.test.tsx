@@ -53,6 +53,17 @@ describe('<BlockHetArchiefQuote />', () => {
 		expect(container.querySelector('figcaption')).toBeNull();
 	});
 
+	it('falls back to the editorconfig defaults when textColor and frameColor are missing', () => {
+		// Simulates a block migrated from the old shared 'QUOTE' type, whose stored
+		// componentState predates these colour fields and so has neither.
+		const { container } = render(<BlockHetArchiefQuote quote="Een citaat" authorName="John Doe" />);
+
+		const figure = container.querySelector('.c-block-het-archief-quote') as HTMLElement;
+
+		expect(figure.style.getPropertyValue('--text-color')).toEqual(Color.White);
+		expect(figure.style.getPropertyValue('--frame-color')).toEqual(Color.Black);
+	});
+
 	it('renders the quote mark as a decorative icon, hidden from assistive tech', () => {
 		const { container } = render(
 			<BlockHetArchiefQuote quote="Een citaat" textColor={Color.White} frameColor={Color.Black} />

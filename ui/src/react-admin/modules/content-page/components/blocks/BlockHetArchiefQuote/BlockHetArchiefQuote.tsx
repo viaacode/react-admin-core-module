@@ -4,23 +4,32 @@ import type { CSSProperties, FunctionComponent } from 'react';
 import React from 'react';
 
 import { Icon } from '~shared/components/Icon/Icon';
-import type { Color, CustomBackground, GradientColor } from '../../../types/content-block.types';
+import {
+	Color,
+	type CustomBackground,
+	type GradientColor,
+} from '../../../types/content-block.types';
 
 import './BlockHetArchiefQuote.scss';
 
 export interface BlockHetArchiefQuoteProps extends DefaultProps {
 	quote: string;
 	authorName?: string;
-	textColor: Color;
-	frameColor: Color | GradientColor | CustomBackground;
+	// Optional because content blocks created before this block type existed (the old shared
+	// 'QUOTE' block) have no colour fields in their stored componentState, so these arrive
+	// undefined when read straight out of the database.
+	textColor?: Color;
+	frameColor?: Color | GradientColor | CustomBackground;
 }
 
 export const BlockHetArchiefQuote: FunctionComponent<BlockHetArchiefQuoteProps> = ({
 	className,
 	quote,
 	authorName,
-	textColor,
-	frameColor,
+	// Same defaults as INITIAL_HET_ARCHIEF_QUOTE_COMPONENTS_STATE() in the editorconfig, which
+	// only runs for blocks created in the editor, never for stored state read back out.
+	textColor = Color.White,
+	frameColor = Color.Black,
 }) => (
 	<figure
 		className={clsx('c-block-het-archief-quote', className)}

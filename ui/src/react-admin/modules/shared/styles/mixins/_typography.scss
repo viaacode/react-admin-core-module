@@ -23,8 +23,9 @@ $font-family: "SofiaPro", sans-serif;
   }
 }
 
-// Presets for the combos already repeated across content blocks - reach for `sofia-pro(...)`
-// directly instead if a new block needs a size/weight that doesn't match one of these.
+// Presets for the combos used across content blocks - always style through one of these. If a new
+// block needs a size/weight that isn't here, add a preset for it rather than calling
+// `sofia-pro(...)` straight from the block, so the set stays consistent and reusable.
 @mixin sofia-pro-heading-xl($important: false) {
   @include sofia-pro(3.2rem, 800, 4rem, $important);
 }
