@@ -78,7 +78,7 @@ describe('DOUBLE_BANNER_BLOCK_CONFIG', () => {
 			textColor: Color.White,
 			backgroundColor: Color.Black,
 		});
-		expect(field('textColor').editorProps.defaultValue?.value).toBe(Color.White);
-		expect(field('backgroundColor').editorProps.defaultValue?.value).toBe(Color.Black);
+		expect(field('textColor').editorProps.defaultValue).toBe(Color.White);
+		expect(field('backgroundColor').editorProps.defaultValue).toBe(Color.Black);
 	});
 });

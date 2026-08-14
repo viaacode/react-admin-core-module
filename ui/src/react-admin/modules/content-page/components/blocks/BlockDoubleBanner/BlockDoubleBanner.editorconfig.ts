@@ -161,7 +161,7 @@ export const DOUBLE_BANNER_BLOCK_CONFIG = (position = 0): ContentBlockConfig => 
 						editorType: ContentBlockEditor.ColorSelect,
 						editorProps: {
 							options: GET_FOREGROUND_COLOR_OPTIONS_ARCHIEF(),
-							defaultValue: GET_FOREGROUND_COLOR_OPTIONS_ARCHIEF()[1],
+							defaultValue: Color.White,
 						},
 						validator: (value: string) =>
 							validateRequiredValue(
@@ -182,7 +182,7 @@ export const DOUBLE_BANNER_BLOCK_CONFIG = (position = 0): ContentBlockConfig => 
 						editorType: ContentBlockEditor.ColorSelect,
 						editorProps: {
 							options: GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF(),
-							defaultValue: GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF()[5],
+							defaultValue: Color.Black,
 						},
 						validator: (value: string) =>
 							validateRequiredValue(
