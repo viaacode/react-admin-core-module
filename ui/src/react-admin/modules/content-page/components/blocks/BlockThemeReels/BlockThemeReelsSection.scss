@@ -3,8 +3,14 @@
 @use "../../../../shared/styles/settings/colors" as colors;
 @use '../../../../shared/styles/mixins/typography' as typography;
 @use '../../../../shared/styles/mixins/animations' as animations;
+@use "../../../../shared/styles/mixins/focus" as focus;
 
 .c-block-theme-reels-section {
+	& + & {
+		margin-top: variables.$g-spacer-unit * 4;
+	}
+
+
 	.c-block-theme-reels-section__header {
 		width: 100%;
 		display: flex;
@@ -122,10 +128,7 @@
 
 		a {
 			text-decoration: none;
-
-			&:focus-visible {
-				outline: 2px solid colors.$color-ocean-green;
-			}
+			@include focus.focus-outline;
 		}
 
 		&:hover:not(&--first) {

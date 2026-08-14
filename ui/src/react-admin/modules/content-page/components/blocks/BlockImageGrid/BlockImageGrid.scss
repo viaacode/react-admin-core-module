@@ -31,6 +31,16 @@
       background-repeat: no-repeat;
       background-position: center center;
       margin: 0 auto;
+      position: relative;
+
+      // The visual label sits flush in the top left corner of the image
+      // https://meemoo.atlassian.net/browse/ARC-3818
+      .c-block-grid__image-label {
+        position: absolute;
+        top: 0;
+        left: 0;
+        max-width: 100%;
+      }
     }
 
     .c-block-grid__text-wrapper {

@@ -15,6 +15,13 @@ import { isNil } from 'es-toolkit';
 import type { FunctionComponent } from 'react';
 import React, { useCallback, useEffect, useState } from 'react';
 import { AdminConfigManager, ToastType } from '~core/config';
+import { ColorSelect } from '~modules/content-page/components/fields/ColorSelect/ColorSelect';
+import { GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF } from '~modules/content-page/const/get-color-options';
+import type {
+	CustomBackground,
+	GradientColor,
+} from '~modules/content-page/types/content-block.types';
+import { Color } from '~modules/content-page/types/content-block.types';
 import { ContentPageLabelService } from '~modules/content-page-labels/content-page-label.service';
 import { useGetAllLanguages } from '~modules/translations/hooks/use-get-all-languages';
 import { Locale } from '~modules/translations/translations.core.types';
@@ -24,6 +31,7 @@ import type { LoadingInfo } from '~shared/components/LoadingErrorLoadedComponent
 import { LoadingErrorLoadedComponent } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
 import { GET_LANGUAGE_NAMES } from '~shared/consts/language-names';
 import { CustomError } from '~shared/helpers/custom-error';
+import { isHetArchief } from '~shared/helpers/is-hetarchief';
 import { isMultiLanguageEnabled } from '~shared/helpers/is-multi-language-enabled';
 import { navigateFunc } from '~shared/helpers/navigate-fnc';
 import { buildLink, navigate } from '~shared/helpers/routing/link';
@@ -31,6 +39,7 @@ import { showToast } from '~shared/helpers/show-toast';
 import { tText } from '~shared/helpers/translation-functions';
 import { AdminLayout } from '~shared/layouts/AdminLayout/AdminLayout';
 import type { DefaultComponentProps } from '~shared/types/components';
+import { App } from '../../../../../scripts/translation.types';
 import { useContentTypes } from '../../content-page/hooks/useContentTypes';
 import type {
 	ContentPageLabel,
@@ -73,6 +82,7 @@ export const ContentPageLabelEdit: FunctionComponent<ContentPageLabelEditProps> 
 				label: '',
 				content_type: 'PAGINA',
 				language: Locale.Nl,
+				...(isHetArchief() ? { color: Color.White } : {}),
 				created_at: new Date().toISOString(),
 				updated_at: new Date().toISOString(),
 				permissions: [],
@@ -267,6 +277,31 @@ export const ContentPageLabelEdit: FunctionComponent<ContentPageLabelEditProps> 
 												setContentPageLabelInfo({
 													...contentPageLabelInfo,
 													language: newLanguage as Locale,
+												})
+											}
+										/>
+									</FormGroup>
+								)}
+								{isHetArchief() && (
+									<FormGroup
+										label={tText(
+											'modules/content-page-labels/views/content-page-label-edit___achtergrondkleur',
+											{},
+											[App.HET_ARCHIEF]
+										)}
+										required
+									>
+										<ColorSelect
+											options={GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF()}
+											value={GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF().find(
+												(option) => option.value === contentPageLabelInfo.color
+											)}
+											onChange={(newColor) =>
+												setContentPageLabelInfo({
+													...contentPageLabelInfo,
+													color: (
+														newColor as { value: Color | GradientColor | CustomBackground } | null
+													)?.value,
 												})
 											}
 										/>

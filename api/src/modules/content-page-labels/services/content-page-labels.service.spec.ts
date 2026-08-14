@@ -19,6 +19,7 @@ import {
 	mockContentPageLabelDto,
 	mockGqlContentPageLabel1,
 	mockGqlContentPageLabel2,
+	mockGqlContentPageLabelWithoutColor,
 	mockLabelObj,
 } from '../mocks/content-page-labels.mocks';
 
@@ -113,6 +114,37 @@ describe('ContentPageLabelsService', () => {
 			expect(response[0][0].link_to).toBe(mockGqlContentPageLabel1.link_to);
 			expect(response[0][0].label).toBe(mockGqlContentPageLabel1.label);
 			expect(response[0][0].content_type).toBe(mockGqlContentPageLabel1.content_type);
+		});
+		it('should map the background color of the visual label', async () => {
+			mockDataService.execute.mockResolvedValueOnce(getDefaultContentPageLabelsResponse());
+
+			const response = await contentPageLabelsService.fetchContentPageLabels(
+				0,
+				20,
+				'label',
+				AvoSearchOrderDirection.ASC,
+				'{}'
+			);
+
+			expect(response[0][0].color).toBe(mockGqlContentPageLabel1.color);
+		});
+		it('should leave the color undefined for labels that have no color column', async () => {
+			mockDataService.execute.mockResolvedValueOnce({
+				// biome-ignore lint/suspicious/noExplicitAny: avo vs hetarchief number vs uuid
+				app_content_label: [mockGqlContentPageLabelWithoutColor as any],
+				app_content_label_aggregate: { aggregate: { count: 1 } },
+			});
+
+			const response = await contentPageLabelsService.fetchContentPageLabels(
+				0,
+				20,
+				'label',
+				AvoSearchOrderDirection.ASC,
+				'{}'
+			);
+
+			expect(response[0][0].color).toBeUndefined();
+			expect(response[0][0].label).toBe(mockGqlContentPageLabelWithoutColor.label);
 		});
 		it('should return an error when the response fails to get content page labels', async () => {
 			mockDataService.execute.mockRejectedValueOnce(getEmptyContentPageLabelsResponse());

@@ -6,9 +6,11 @@ import type {
 	BlockImageGridProps,
 	GridItem,
 } from '~content-blocks/BlockImageGrid/BlockImageGrid.types';
+import { ContentPageLabelChip } from '~shared/components/ContentPageLabelChip/ContentPageLabelChip';
 import { defaultRenderLinkFunction } from '~shared/helpers/routing/link';
 
 import './BlockImageGrid.scss';
+import { CopyrightAttribution } from '~shared/components/CopyrightAttribution';
 
 export const BlockImageGrid: FunctionComponent<BlockImageGridProps> = ({
 	elements = [],
@@ -47,6 +49,19 @@ export const BlockImageGrid: FunctionComponent<BlockImageGridProps> = ({
 						backgroundSize: fill,
 						backgroundPosition: imageItemAlignment || 'center',
 					}}
+				>
+					{!!element.imageLabel && (
+						<ContentPageLabelChip
+							className="c-block-grid__image-label"
+							label={element.imageLabel.text}
+							color={element.imageLabel.color}
+						/>
+					)}
+				</div>
+				<CopyrightAttribution
+					title={element.copyrightTitle}
+					text={element.copyrightText}
+					showIcon={element.copyrightIconVisible}
 				/>
 				<div
 					className="c-block-grid__text-wrapper"

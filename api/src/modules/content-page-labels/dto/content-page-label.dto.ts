@@ -61,6 +61,15 @@ export class InsertContentPageLabelDto {
 		required: false,
 	})
 	link_to?: PickerItemDto | null = null;
+
+	// Only exists on hetarchief, avo has no color on its content page labels
+	@IsString()
+	@IsOptional()
+	@ApiProperty({
+		type: String,
+		required: false,
+	})
+	color?: string;
 }
 
 export class UpdateContentPageLabelDto {
@@ -95,6 +104,15 @@ export class UpdateContentPageLabelDto {
 		required: false,
 	})
 	link_to?: PickerItemDto | null = null;
+
+	// Only exists on hetarchief, avo has no color on its content page labels
+	@IsString()
+	@IsOptional()
+	@ApiProperty({
+		type: String,
+		required: false,
+	})
+	color?: string;
 }
 
 export class ContentPageLabelDto {
@@ -129,6 +147,15 @@ export class ContentPageLabelDto {
 		enum: Locale,
 	})
 	language: Locale;
+
+	// Only exists on hetarchief, avo has no color on its content page labels
+	@IsString()
+	@IsOptional()
+	@ApiProperty({
+		type: String,
+		required: false,
+	})
+	color?: string;
 
 	@IsString()
 	@ApiProperty({

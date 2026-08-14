@@ -20,7 +20,9 @@ export { BlockImageTitleTextButtonWrapper } from '~content-blocks/BlockImageTitl
 export { BlockIntro } from '~content-blocks/BlockIntro';
 export { BlockKlaar } from '~content-blocks/BlockKlaar';
 export { BlockMaintainersGrid } from '~content-blocks/BlockMaintainersGrid';
+export { BlockObjectsGrid } from '~content-blocks/BlockObjectsGrid';
 export { BlockOverviewNewspaperTitles } from '~content-blocks/BlockOverviewNewspaperTitles';
+export { BlockOverviewThemes } from '~content-blocks/BlockOverviewThemes';
 export { BlockOverviewWithCarousel } from '~content-blocks/BlockOverviewWithCarousel';
 export { BlockPageOverviewWrapper } from '~content-blocks/BlockPageOverview/BlockPageOverview.wrapper';
 export { BlockRichText } from '~content-blocks/BlockRichText';

@@ -44,7 +44,7 @@ async function writeTranslationsToFile(
 		.join('\n');
 	sql = `TRUNCATE app.translations;\n${sql}`;
 	await fs.writeFile(filePath, sql);
-	console.info(`Finished writing ${translations.length} translations`);
+	console.info(`Finished writing ${translations.length} translations to ${filePath}`);
 }
 
 async function backupTranslations(): Promise<void> {

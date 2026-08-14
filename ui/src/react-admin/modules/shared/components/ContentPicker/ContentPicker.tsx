@@ -130,6 +130,31 @@ export const ContentPicker: FunctionComponent<ContentPickerProps> = ({
 		}
 	}, [itemOptions, hasAppliedInitialItem, value]);
 
+	// Follow the `value` prop when it is changed from the outside, eg: when an entry is deleted from
+	// a repeated field, the values of the pickers after the deleted one shift up one position.
+	// Without this the picker would keep rendering the item it was initialised with.
+	useEffect(() => {
+		if (!hasAppliedInitialItem) {
+			return; // The effect above is still responsible for applying the initial item
+		}
+		setSelectedItem((currentSelectedItem: PickerItem | null) => {
+			if ((currentSelectedItem?.value || null) === (value?.value || null)) {
+				return currentSelectedItem; // Already in sync, most likely this component reported the change itself
+			}
+			if (!value?.value) {
+				return null;
+			}
+			// Prefer the fetched option, since it is guaranteed to have an up to date label
+			return (
+				setInitialItem(itemOptions, value) || {
+					label: value.label || '',
+					type: value.type,
+					value: value.value,
+				}
+			);
+		});
+	}, [value, itemOptions, hasAppliedInitialItem]);
+
 	// events
 	const onSelectType = async (selected: SingleValue<PickerTypeOption>) => {
 		if (selectedType !== selected) {

@@ -98,6 +98,8 @@ export function getAdminCoreConfigForLocalTestApp(navigateFunc: NavigateFunction
 				// ContentBlockType.Breadcrumbs,
 				ContentBlockType.OverviewWithCarousel,
 				ContentBlockType.HetArchiefQuote,
+				ContentBlockType.ObjectsGrid,
+				ContentBlockType.OverviewThemes,
 			],
 			defaultPageWidth: ContentPageWidth.LARGE,
 			onSaveContentPage: async (contentPageInfo: ContentPageInfo) => {
@@ -157,6 +159,7 @@ export function getAdminCoreConfigForLocalTestApp(navigateFunc: NavigateFunction
 				noAudio: { name: 'no-audio' },
 				noVideo: { name: 'no-video' },
 				quotes: { name: 'quotes' },
+				arrowDownRight: { name: 'arrow-down-right' },
 			},
 			list: (): { value: IconName; label: string }[] => {
 				return Object.values(IconName).map((iconName: IconName) => ({

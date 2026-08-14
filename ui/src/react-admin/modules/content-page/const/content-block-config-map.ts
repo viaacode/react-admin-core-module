@@ -27,7 +27,9 @@ import { INTRO_BLOCK_CONFIG } from '~content-blocks/BlockIntro';
 import { KLAAR_BLOCK_CONFIG } from '~content-blocks/BlockKlaar';
 import { MAINTAINERS_GRID_BLOCK_CONFIG } from '~content-blocks/BlockMaintainersGrid';
 import { MEDIA_GRID_BLOCK_CONFIG } from '~content-blocks/BlockMediaGrid';
+import { OBJECTS_GRID_BLOCK_CONFIG } from '~content-blocks/BlockObjectsGrid';
 import { OVERVIEW_NEWSPAPER_TITLES_BLOCK_CONFIG } from '~content-blocks/BlockOverviewNewspaperTitles';
+import { OVERVIEW_THEMES_BLOCK_CONFIG } from '~content-blocks/BlockOverviewThemes';
 import { OVERVIEW_WITH_CAROUSEL_CONFIG } from '~content-blocks/BlockOverviewWithCarousel';
 import {
 	RICH_TEXT_BLOCK_CONFIG,
@@ -95,4 +97,6 @@ export const CONTENT_BLOCK_CONFIG_MAP: Record<
 	[ContentBlockType.HomepageBanner]: CONTENT_HOMEPAGE_BANNER_CONFIG,
 	[ContentBlockType.HighlightText]: CONTENT_HIGHLIGHT_TEXT_CONFIG,
 	[ContentBlockType.ThemeReels]: THEME_REELS_BLOCK_CONFIG,
+	[ContentBlockType.ObjectsGrid]: OBJECTS_GRID_BLOCK_CONFIG,
+	[ContentBlockType.OverviewThemes]: OVERVIEW_THEMES_BLOCK_CONFIG,
 };

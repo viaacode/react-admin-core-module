@@ -6,7 +6,12 @@ import { DataService } from '../../data';
 import { CustomError } from '../../shared/helpers/error';
 import { getDatabaseType } from '../../shared/helpers/get-database-type';
 import { isAvo } from '../../shared/helpers/is-avo';
-import type { ContentPageLabelOverviewTableCols } from '../content-page-labels.types';
+import { isHetArchief } from '../../shared/helpers/is-hetarchief';
+import type {
+	ContentPageLabelOverviewTableCols,
+	HetArchiefContentPageLabel,
+	HetArchiefContentPageLabelById,
+} from '../content-page-labels.types';
 import type {
 	ContentPageLabelDto,
 	InsertContentPageLabelDto,
@@ -55,6 +60,8 @@ export class ContentPageLabelsService {
 					id: labelObj?.id,
 					language: labelObj?.language,
 					link_to: labelObj?.link_to,
+					// Only hetarchief content page labels have a color
+					color: (labelObj as HetArchiefContentPageLabel)?.color,
 					created_at: labelObj?.created_at,
 					updated_at: labelObj?.updated_at,
 				})
@@ -112,6 +119,8 @@ export class ContentPageLabelsService {
 				id: contentPageLabelRaw.id,
 				language: contentPageLabelRaw.language,
 				link_to: contentPageLabelRaw.link_to,
+				// Only hetarchief content page labels have a color
+				color: (contentPageLabelRaw as HetArchiefContentPageLabelById).color,
 				created_at: contentPageLabelRaw.created_at,
 				updated_at: contentPageLabelRaw.updated_at,
 			};
@@ -137,6 +146,8 @@ export class ContentPageLabelsService {
 					// biome-ignore lint/suspicious/noExplicitAny: locale from other repo complains about types
 					language: contentPageLabel.language as any,
 					link_to: contentPageLabel.link_to || null,
+					// The color column only exists on hetarchief
+					...(isHetArchief() ? { color: contentPageLabel.color } : {}),
 					created_at: new Date().toISOString(),
 					updated_at: new Date().toISOString(),
 				})),
@@ -176,6 +187,8 @@ export class ContentPageLabelsService {
 					content_type: contentPageLabelInfo.content_type as any,
 					language: contentPageLabelInfo.language,
 					link_to: contentPageLabelInfo.link_to || null,
+					// The color column only exists on hetarchief
+					...(isHetArchief() ? { color: contentPageLabelInfo.color } : {}),
 					updated_at: new Date().toISOString(),
 				},
 				contentPageLabelId: contentPageLabelInfo.id,
