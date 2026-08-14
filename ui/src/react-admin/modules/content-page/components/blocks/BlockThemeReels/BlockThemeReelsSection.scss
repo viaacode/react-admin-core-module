@@ -128,10 +128,7 @@
 
 		a {
 			text-decoration: none;
-
-			&:focus-visible {
-				@include focus.focus-outline;
-			}
+			@include focus.focus-outline;
 		}
 
 		&:hover:not(&--first) {
