@@ -11,12 +11,12 @@ export interface DoubleBannerHalf {
 	icon1?: string;
 	icon2?: string;
 	icon3?: string;
-	link?: ButtonAction;
+	link: ButtonAction;
 	image: string;
 	textColor: string;
 	backgroundColor: string;
 }
 
 export interface BlockDoubleBannerProps extends DefaultComponentProps {
-	halves: DoubleBannerHalf[];
+	halves: [DoubleBannerHalf, DoubleBannerHalf];
 }

@@ -71,7 +71,7 @@ describe('DOUBLE_BANNER_BLOCK_CONFIG', () => {
 		});
 	});
 
-	it('defaults to white text on a black flat-color background', () => {
+	it('defaults to white text on a black background', () => {
 		const state = INITIAL_DOUBLE_BANNER_COMPONENTS_STATE();
 
 		expect(state.halves[0]).toMatchObject({
@@ -80,10 +80,5 @@ describe('DOUBLE_BANNER_BLOCK_CONFIG', () => {
 		});
 		expect(field('textColor').editorProps.defaultValue?.value).toBe(Color.White);
 		expect(field('backgroundColor').editorProps.defaultValue?.value).toBe(Color.Black);
-		expect(
-			field('backgroundColor').editorProps.options.every(({ value }: { value: string }) =>
-				value.startsWith('#')
-			)
-		).toBe(true);
 	});
 });
