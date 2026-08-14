@@ -1,4 +1,5 @@
 @use "../../../shared/styles/settings/colors" as colors;
+@use "../../../shared/styles/settings/variables" as variables;
 
 .c-content-page-overview-block__header {
   opacity: 0;
@@ -36,6 +37,45 @@
           margin: 0;
         }
       }
+    }
+  }
+}
+
+// Lifts the block out of the flow so the block below it slides up underneath and this one paints
+// on top of it. The block keeps its place in the DOM, so its links stay clickable and in the tab
+// order.
+// The z-index that puts it above that block is set in ContentBlockRenderer.
+// The class is doubled to outrank `.c-content-block { overflow: hidden }` in hetarchief-client
+// (src/styles/admin-core/_content-pages.scss), which loads after this file and would otherwise
+// clip both the breadcrumbs and the scrim out of the zero-height box.
+.c-content-block.c-content-block--overlay-next-block {
+  height: 0;
+
+  // The whole mechanism relies on the content escaping this zero-height box
+  overflow: visible;
+
+  // Dark scrim so light text stays legible over a photo. Taken from the design: 120px at 56% on
+  // desktop, 160px on mobile, where the breadcrumbs wrap over several lines.
+  // Desktop: https://www.figma.com/design/mps3ITECqMBQtdk8vheYOp/?node-id=455-3958
+  // Mobile: https://www.figma.com/design/mps3ITECqMBQtdk8vheYOp/?node-id=455-6978
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: variables.$g-spacer-unit * 15; // 120px
+    background: linear-gradient(to bottom, rgb(0 0 0 / 56%), rgb(0 0 0 / 0%));
+
+    // Behind the breadcrumbs, but still above the block underneath, because the z-index on this
+    // block makes it a stacking context
+    z-index: -1;
+
+    // Never swallow clicks meant for the block underneath
+    pointer-events: none;
+
+    @media (max-width: variables.$g-bp2) {
+      height: variables.$g-spacer-unit * 20; // 160px
     }
   }
 }

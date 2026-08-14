@@ -1,3 +1,4 @@
+import type { CheckboxProps } from '@viaa/avo2-components';
 import type { AvoCoreContentPickerType } from '@viaa/avo2-types';
 import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, TEXT_FIELD } from '~content-blocks/defaults';
 import { GET_FOREGROUND_COLOR_OPTIONS_ARCHIEF } from '~modules/content-page/const/get-color-options';
@@ -32,6 +33,7 @@ export const INITIAL_BREADCRUMBS_BLOCK_STATE = (): DefaultContentBlockState => (
 			bottom: 'none',
 		},
 	}),
+	overlayNextBlock: false,
 });
 
 export const CONTENT_BREADCRUMBS_CONFIG = (position = 0): ContentBlockConfig => ({
@@ -104,6 +106,16 @@ export const CONTENT_BREADCRUMBS_CONFIG = (position = 0): ContentBlockConfig => 
 		state: INITIAL_BREADCRUMBS_BLOCK_STATE(),
 		fields: {
 			...BLOCK_FIELD_DEFAULTS(),
+			overlayNextBlock: {
+				editorType: ContentBlockEditor.Checkbox,
+				editorProps: {
+					label: tText(
+						'modules/content-page/components/blocks/block-breadcrumbs/block-breadcrumbs___overlay-op-andere-contentblokken',
+						{},
+						[HET_ARCHIEF]
+					),
+				} as CheckboxProps,
+			},
 		},
 	},
 });

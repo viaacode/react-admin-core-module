@@ -265,6 +265,7 @@ export interface DefaultContentBlockState {
 	margin: PaddingFieldState;
 	userGroupIds: number[];
 	fullWidth?: boolean;
+	overlayNextBlock?: boolean; // Renders the block on top of the block below it instead of above it
 	anchor?: string; // Contains an id that the user can enter, so they can link to this block using the anchor-block buttons
 }
 
