@@ -1,6 +1,7 @@
 @use "sass:math";
 @use "../../../../shared/styles/settings/variables" as variables;
 @use "../../../../shared/styles/settings/colors" as colors;
+@use "../../../../shared/styles/mixins/typography" as typography;
 
 $hero-carousel-format-widths: (
 	"video": 28rem,
@@ -15,7 +16,78 @@ $hero-carousel-format-widths: (
 $background-image-height: 63.2rem;
 $slide-height: 16rem;
 
+$hero-carousel-search-height-mobile: 4.8rem;
+$hero-carousel-search-height-desktop: 6.4rem;
+$hero-carousel-search-radius-desktop: 3.2rem;
+
+.c-content-block.c-content-block__hero-carousel,
+.c-content-page-preview:has(.c-content-block__hero-carousel) {
+	overflow: visible !important;
+}
+
 .c-block-hero-carousel {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	gap: variables.$g-spacer-unit * 6;
+
+	@media (max-width: variables.$g-bp2) {
+		flex-direction: column;
+	}
+
+	> * {
+		z-index: 0;
+	}
+
+	&__header {
+		h1,
+		> ul > li {
+			text-align: center;
+			width: 100%;
+			font-size: 6.4rem;
+			line-height: 1.2;
+			font-weight: 800;
+
+			@media (max-width: variables.$g-bp2) {
+				font-size: 4rem;
+				line-height: 1.1;
+			}
+		}
+
+		ul {
+			padding: 0;
+			position: relative;
+			height: 6rem;
+			margin: 0;
+
+			li {
+				list-style: none;
+				color: colors.$color-ocean-green;
+				position: absolute;
+				top: 0;
+				left: 0;
+				opacity: 0;
+				transition: opacity 300ms ease-in-out;
+				font-size: 4rem;
+				line-height: 1.1;
+
+				@media (max-width: variables.$g-bp2) {
+					font-size: 3.2rem;
+					line-height: 1.3;
+					top: variables.$g-spacer-unit;
+				}
+
+				&.current {
+					opacity: 0;
+				}
+
+				&.next {
+					opacity: 1;
+				}
+			}
+		}
+	}
+
 	&__background {
 		position: absolute;
 		inset: 0;
@@ -40,6 +112,218 @@ $slide-height: 16rem;
 			right: 0;
 			bottom: 0;
 			background: colors.$color-platinum;
+		}
+	}
+
+	&__search {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		z-index: 1;
+
+		input {
+			border-radius: 4rem;
+		}
+
+		.c-block-hero-carousel__searchbar {
+			display: flex;
+			flex-direction: column;
+			gap: variables.$g-spacer-unit;
+
+			@media (min-width: variables.$g-bp2) {
+				flex-direction: row;
+				align-items: stretch;
+				gap: 0;
+			}
+
+			.c-input {
+				order: 1;
+
+				@media (min-width: variables.$g-bp2) {
+					order: 0;
+				}
+			}
+
+			.c-search-dropdown {
+				order: 2;
+				align-self: center;
+
+				@media (min-width: variables.$g-bp2) {
+					order: 0;
+					align-self: stretch;
+				}
+			}
+
+			&.c-block-hero-carousel__searchbar--has-dropdown .c-input input {
+				@media (min-width: variables.$g-bp2) {
+					border-radius: 0 $hero-carousel-search-radius-desktop $hero-carousel-search-radius-desktop 0;
+					border-top: 1px solid #adadad;
+					border-left: none;
+				}
+			}
+		}
+
+		.c-input {
+			flex: 1;
+
+			.c-input__field {
+				height: $hero-carousel-search-height-mobile;
+				padding-left: variables.$g-spacer-unit * 3;
+				font-size: 1.6rem;
+				line-height: 2rem;
+				overflow: hidden;
+				white-space: nowrap;
+				text-overflow: ellipsis;
+
+				@media (min-width: variables.$g-bp2) {
+					height: $hero-carousel-search-height-desktop;
+					font-size: 1.8rem;
+				}
+			}
+
+			.c-input__icon {
+				right: variables.$g-spacer-unit * 3;
+				pointer-events: auto;
+				cursor: pointer;
+			}
+
+			button {
+				background-color: transparent;
+				border: none;
+				color: colors.$neutral;
+				padding: 0;
+				font-size: 1.6rem;
+				line-height: 2.4rem;
+
+				@media (min-width: variables.$g-bp2) {
+					font-size: 2.4rem;
+				}
+
+				.c-icon {
+					padding-top: 0.5rem;
+				}
+			}
+		}
+
+		> p {
+			text-align: right;
+			margin-top: variables.$g-spacer-unit * 3;
+		}
+
+		.c-search-dropdown {
+			width: 26.5rem; // Same width as on search page
+			max-width: 100%;
+
+			&__trigger {
+				width: 100%;
+
+				&:hover {
+					cursor: pointer;
+				}
+			}
+
+			&__active {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				gap: variables.$g-spacer-unit * 2;
+				width: 100%;
+				height: $hero-carousel-search-height-mobile;
+				padding: (variables.$g-spacer-unit * 2) (variables.$g-spacer-unit * 3) (variables.$g-spacer-unit * 2) (variables.$g-spacer-unit * 4);
+				background-color: colors.$color-gray-1000;
+				color: colors.$white;
+				font: inherit;
+				border: 1px solid colors.$white;
+				border-radius: $hero-carousel-search-radius-desktop;
+				transition: border-radius 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+
+				@media (min-width: variables.$g-bp2) {
+					height: $hero-carousel-search-height-desktop;
+					border-radius: $hero-carousel-search-radius-desktop 0 0 $hero-carousel-search-radius-desktop;
+					border-right: none;
+				}
+
+				&:focus,
+				&:focus-within {
+					outline: 0.2rem solid colors.$color-ocean-green;
+					outline-offset: -0.2rem;
+				}
+
+				&-content {
+					overflow: hidden;
+					min-width: 0;
+				}
+
+				&-label {
+					overflow: hidden;
+					white-space: nowrap;
+					text-overflow: ellipsis;
+					font-family: typography.$font-family;
+					font-size: 1.8rem;
+					font-style: normal;
+					font-weight: 800;
+					line-height: 2rem;
+					color: colors.$white;
+				}
+
+				&-icon {
+					flex-shrink: 0;
+					font-size: 1.8rem;
+					font-weight: 400;
+					transform: rotate(0);
+					transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+
+					&--open {
+						transform: rotate(-180deg);
+					}
+				}
+
+				&--open {
+					border-radius: $hero-carousel-search-radius-desktop $hero-carousel-search-radius-desktop 0 0;
+
+					@media (min-width: variables.$g-bp2) {
+						border-radius: $hero-carousel-search-radius-desktop 0 0 0;
+					}
+				}
+			}
+
+			&__list {
+				width: 100%;
+				background-color: colors.$white;
+				box-shadow: 0 0 2.4rem rgba(colors.$color-gray-1000, 0.12);
+				z-index: 10; // Matches the "dropdown" layer of the hetarchief-client z-index scale
+			}
+
+			&__option {
+				width: 100%;
+
+				&-label {
+					padding: 1.2rem (variables.$g-spacer-unit * 4);
+					overflow: hidden;
+					font-size: 1.6rem;
+					color: colors.$color-gray-1000;
+				}
+
+				&:hover,
+				&:active,
+				&:focus {
+					background-color: colors.$color-platinum;
+					cursor: pointer;
+				}
+
+				&:focus,
+				&:focus-within {
+					outline: 0.2rem solid colors.$color-ocean-green;
+				}
+			}
+
+			&__flyout {
+				.c-menu {
+					transition:
+						opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+						visibility 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+				}
+			}
 		}
 	}
 
