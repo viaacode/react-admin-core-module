@@ -657,6 +657,7 @@
   "modules/content-page/components/blocks/block-breadcrumbs/block-breadcrumbs___breadcrumbs": "Breadcrumbs",
   "modules/content-page/components/blocks/block-breadcrumbs/block-breadcrumbs___label": "Label",
   "modules/content-page/components/blocks/block-breadcrumbs/block-breadcrumbs___link": "Link",
+  "modules/content-page/components/blocks/block-breadcrumbs/block-breadcrumbs___overlay-op-andere-contentblokken": "Overlay op andere contentblokken",
   "modules/content-page/components/blocks/block-breadcrumbs/block-breadcrumbs___tekstkleur": "Tekstkleur",
   "modules/content-page/components/blocks/block-breadcrumbs/block-breadcrumbs___verwijder-object": "Verwijder object",
   "modules/content-page/components/blocks/block-breadcrumbs/block-breadcrumbs___voeg-object-toe": "Voeg object toe",

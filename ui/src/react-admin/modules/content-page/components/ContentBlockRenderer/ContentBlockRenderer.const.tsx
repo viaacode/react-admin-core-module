@@ -174,6 +174,7 @@ export const IGNORE_BLOCK_LEVEL_PROPS = [
 	'backgroundColor',
 	'blockType',
 	'elements',
+	'overlayNextBlock',
 	'padding',
 	'position',
 ];
