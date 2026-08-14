@@ -18,43 +18,43 @@ vi.mock('~shared/helpers/translation-functions', () => ({ tText: (key: string) =
  * on meemoo-hetarchief-kleurencombinaties.pdf and the corrections confirmed by meemoo on
  * ARC-3848. Sky blauw is the only selectable legacy color that is absent from the PDF.
  */
-const EXPECTED_BACKGROUND_TEXT_COLORS: [string, string, string, string?, string?][] = [
+const EXPECTED_BACKGROUND_TEXT_COLORS: [string, Color, Color, Color?, Color?][] = [
 	// Merk
-	['Zwart', '#000000', '#FFFFFF', '#ADADAD', '#00C8AA'],
-	['Wit', '#FFFFFF', '#000000', '#666666', '#00857D'],
-	['Teal', '#00C8AA', '#000000'],
+	['Zwart', Color.Black, Color.White, Color.Zinc, Color.OceanGreen],
+	['Wit', Color.White, Color.Black, Color.Slate, Color.Jade],
+	['Teal', Color.OceanGreen, Color.Black],
 	// Functioneel
-	['Grafiet', '#222222', '#FFFFFF', '#ADADAD', '#00C8AA'],
-	['Inkt', '#303030', '#FFFFFF', '#ADADAD', '#00C8AA'],
-	['Schaduw', '#505050', '#FFFFFF'],
-	['Leisteen', '#666666', '#FFFFFF'],
-	['Neutraal', '#757575', '#FFFFFF'],
-	['Zink', '#ADADAD', '#000000'],
-	['Zilver', '#E6E6E6', '#000000', '#666666', '#005F69'],
-	['Platinum', '#F8F8F8', '#000000', '#666666', '#005F69'],
-	['Kers', '#D60039', '#FFFFFF'],
-	['Jade', '#00857D', '#FFFFFF', '#000000'],
-	['Lagune', '#005F69', '#FFFFFF'],
+	['Grafiet', Color.Graphite, Color.White, Color.Zinc, Color.OceanGreen],
+	['Inkt', Color.Ink, Color.White, Color.Zinc, Color.OceanGreen],
+	['Schaduw', Color.Shadow, Color.White],
+	['Leisteen', Color.Slate, Color.White],
+	['Neutraal', Color.ArchiefNeutral, Color.White],
+	['Zink', Color.Zinc, Color.Black],
+	['Zilver', Color.ArchiefSilver, Color.Black, Color.Slate, Color.Lagoon],
+	['Platinum', Color.Platinum, Color.Black, Color.Slate, Color.Lagoon],
+	['Kers', Color.Cherry, Color.White],
+	['Jade', Color.Jade, Color.White, Color.Black],
+	['Lagune', Color.Lagoon, Color.White],
 	// Secundair
-	['Zeegroen', '#009690', '#000000'],
-	['Grasgroen', '#82E678', '#000000'],
-	['Azuur', '#28A0C8', '#000000'],
+	['Zeegroen', Color.SeaGreen, Color.Black],
+	['Grasgroen', Color.GrassGreen, Color.Black],
+	['Azuur', Color.Azure, Color.Black],
 	// Tertiair
-	['Lila', '#C6C2E0', '#000000'],
-	['Mosterd', '#EFCA6A', '#000000'],
-	['Koraal', '#E89B88', '#000000'],
-	['Baby blauw', '#8DDEE7', '#000000', undefined, '#005F69'],
-	['Blush', '#E694B3', '#000000'],
-	['Donker lila', '#A293AF', '#000000'],
-	['Mist', '#91A9A7', '#000000'],
-	['Sepia', '#EDD6C4', '#000000'],
-	['Mauve', '#9B6072', '#FFFFFF'],
-	['Salie', '#B8BE9A', '#000000'],
-	['Terra', '#D1543A', '#000000'],
-	['Olijf', '#64702B', '#FFFFFF'],
-	['Viool', '#432457', '#FFFFFF'],
+	['Lila', Color.Lila, Color.Black],
+	['Mosterd', Color.Mustard, Color.Black],
+	['Koraal', Color.Coral, Color.Black],
+	['Baby blauw', Color.BabyBlue, Color.Black, undefined, Color.Lagoon],
+	['Blush', Color.BlossomPink, Color.Black],
+	['Donker lila', Color.Lavender, Color.Black],
+	['Mist', Color.Sage, Color.Black],
+	['Sepia', Color.SandBeige, Color.Black],
+	['Mauve', Color.OldPink, Color.White],
+	['Salie', Color.Pistachio, Color.Black],
+	['Terra', Color.Terra, Color.Black],
+	['Olijf', Color.Olive, Color.White],
+	['Viool', Color.Viola, Color.White],
 	// Not in the PDF; temporarily follows Baby blauw while meemoo decides whether it remains.
-	['Sky blauw', '#C3DDE6', '#000000', undefined, '#005F69'],
+	['Sky blauw', Color.SkyBlue, Color.Black, undefined, Color.Lagoon],
 ];
 
 describe('getBackgroundTextColors()', () => {
@@ -79,14 +79,12 @@ describe('getBackgroundTextColors()', () => {
 		);
 	});
 
-	// Color.Black is '#000' and Color.White is '#FFF', and Color.Lila is lowercase, so lookups have
-	// to normalise rather than match the enum value verbatim.
-	it('accepts the shorthand and mixed casing the Color enum uses', () => {
-		expect(getBackgroundTextColors(Color.Black)?.primary).toBe('#FFFFFF');
-		expect(getBackgroundTextColors(Color.White)?.primary).toBe('#000000');
-		expect(getBackgroundTextColors(Color.Lila)?.primary).toBe('#000000');
-		expect(getBackgroundTextColors(Color.OldPink)?.primary).toBe('#FFFFFF');
-		expect(getBackgroundTextColors(Color.BabyBlue)?.hyperlink).toBe('#005F69');
+	it('looks up the Color enum values directly', () => {
+		expect(getBackgroundTextColors(Color.Black)?.primary).toBe(Color.White);
+		expect(getBackgroundTextColors(Color.White)?.primary).toBe(Color.Black);
+		expect(getBackgroundTextColors(Color.Lila)?.primary).toBe(Color.Black);
+		expect(getBackgroundTextColors(Color.OldPink)?.primary).toBe(Color.White);
+		expect(getBackgroundTextColors(Color.BabyBlue)?.hyperlink).toBe(Color.Lagoon);
 		expect(getBackgroundTextColors(Color.SkyBlue)).toEqual(getBackgroundTextColors(Color.BabyBlue));
 	});
 
@@ -110,13 +108,12 @@ describe('getBackgroundTextColors()', () => {
 
 	// Design specified nothing for these, so blocks keep whatever they inherit. In particular,
 	// meemoo confirmed that BlackWhite must retain the existing per-block handling.
-	it.each([
+	it.each<[string, Color | GradientColor | CustomBackground | undefined]>([
 		['transparent', Color.Transparent],
 		['the separately handled black-white gradient', GradientColor.BlackWhite],
 		['the meemoo logo pattern', CustomBackground.MeemooLogo],
 		['an AVO-only color', Color.SoftBlue],
 		['no background', undefined],
-		['an empty background', ''],
 	])('has no colors for %s', (_name, background) => {
 		expect(getBackgroundTextColors(background)).toBeUndefined();
 	});
@@ -143,16 +140,16 @@ describe('getBackgroundTextColorVariables()', () => {
 	});
 	it('exposes all three roles when design specified all three', () => {
 		expect(getBackgroundTextColorVariables(Color.Black)).toEqual({
-			'--bg-text-primary': '#FFFFFF',
-			'--bg-text-secondary': '#ADADAD',
-			'--bg-text-hyperlink': '#00C8AA',
+			'--bg-text-primary': Color.White,
+			'--bg-text-secondary': Color.Zinc,
+			'--bg-text-hyperlink': Color.OceanGreen,
 		});
 	});
 
 	// Leaving them unset is what makes the utility classes fall back to the primary color.
 	it('omits the roles design did not specify', () => {
 		expect(getBackgroundTextColorVariables(Color.OldPink)).toEqual({
-			'--bg-text-primary': '#FFFFFF',
+			'--bg-text-primary': Color.White,
 		});
 	});
 

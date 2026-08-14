@@ -95,6 +95,22 @@ export enum Color {
 	SkyBlue = '#C3DDE6',
 	Juniper = '#678588',
 
+	// Het Archief colors from the approved color-combination document.
+	Graphite = '#222222',
+	Ink = '#303030',
+	Shadow = '#505050',
+	Slate = '#666666',
+	ArchiefNeutral = '#757575',
+	ArchiefSilver = '#E6E6E6',
+	Cherry = '#D60039',
+	Jade = '#00857D',
+	Lagoon = '#005F69',
+	GrassGreen = '#82E678',
+	Azure = '#28A0C8',
+	Terra = '#D1543A',
+	Olive = '#64702B',
+	Viola = '#432457',
+
 	// Tertiary colors
 	OldPink = '#9B6072',
 	Lavender = '#A293AF',

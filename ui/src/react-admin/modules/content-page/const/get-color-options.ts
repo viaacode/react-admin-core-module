@@ -132,9 +132,7 @@ export const GET_BACKGROUND_COLOR_OPTIONS_AVO: () => SelectOption<Color>[] = () 
 	yellowOption(),
 ];
 
-export const GET_SECONDARY_BACKGROUND_COLOR_OPTIONS_ARCHIEF: () => SelectOption<
-	Color | GradientColor | CustomBackground
->[] = () => [
+export const GET_SECONDARY_BACKGROUND_COLOR_OPTIONS_ARCHIEF: () => SelectOption<Color>[] = () => [
 	oldPinkOption(),
 	lavenderOption(),
 	lilaOption(),
@@ -191,7 +189,7 @@ export const DARK_BACKGROUND_COLOR_OPTIONS_AVO: (Color | GradientColor | CustomB
  * dark background", not "which color is the text". https://meemoo.atlassian.net/browse/ARC-3848
  */
 export function hasDarkBackground(
-	color: Color | GradientColor | CustomBackground | string | undefined
+	color: Color | GradientColor | CustomBackground | undefined
 ): boolean {
 	if (!color) {
 		return false;

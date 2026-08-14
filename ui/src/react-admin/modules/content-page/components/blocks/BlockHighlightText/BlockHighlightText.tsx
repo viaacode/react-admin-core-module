@@ -8,14 +8,15 @@ import {
 	Color,
 	ColorSelectGradientColors,
 	CustomBackground,
+	type GradientColor,
 } from '~modules/content-page/types/content-block.types';
 import { ContentPageWidth } from '~modules/content-page/types/content-pages.types.ts';
 import Html from '~shared/components/Html/Html.tsx';
 
 export interface BlockHighlightTextProps extends DefaultComponentProps {
 	content: string;
-	highlightColor: string;
-	backgroundColor: string;
+	highlightColor: Color | GradientColor | CustomBackground;
+	backgroundColor: Color | GradientColor | CustomBackground;
 	pageWidth?: string;
 }
 
@@ -33,7 +34,11 @@ export const BlockHighlightText: FunctionComponent<BlockHighlightTextProps> = ({
 	// Text colors follow the actual fill behind the content: gradients use the white content box,
 	// while the transparent meemoo logo variant keeps the outer block's inherited text color.
 	// https://meemoo.atlassian.net/browse/ARC-3848
-	const textBoxBackground = isGradient ? Color.White : patternColor;
+	const textBoxBackground = isGradient
+		? Color.White
+		: highlightColor === CustomBackground.MeemooLogo
+			? Color.Transparent
+			: highlightColor;
 	const textColorVariables = getBackgroundTextColorVariables(textBoxBackground);
 	const hasTextColors = Object.keys(textColorVariables).length > 0;
 
