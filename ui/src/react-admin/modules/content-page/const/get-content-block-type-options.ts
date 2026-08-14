@@ -222,7 +222,7 @@ export const GET_CONTENT_BLOCK_TYPE_OPTIONS: () => SelectOption<string>[] = () =
 		},
 		{
 			label: tText(
-				"modules/content-page/const/get-content-block-type-options___overzicht-themas",
+				'modules/content-page/const/get-content-block-type-options___overzicht-themas',
 				{},
 				[HET_ARCHIEF]
 			),

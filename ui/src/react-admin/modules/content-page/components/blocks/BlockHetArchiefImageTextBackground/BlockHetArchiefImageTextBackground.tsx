@@ -206,12 +206,7 @@ export const BlockHetArchiefImageTextBackground: FunctionComponent<
 					>
 						{image && (
 							<div className="c-block-het-archief-image-text-background__image">
-								<img
-									ref={imgRef}
-									src={image}
-									alt={imageAltText}
-									onLoad={updateMediaMeasurements}
-								/>
+								<img ref={imgRef} src={image} alt={imageAltText} onLoad={updateMediaMeasurements} />
 							</div>
 						)}
 						<div

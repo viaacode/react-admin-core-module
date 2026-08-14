@@ -26,7 +26,9 @@ const INITIAL_OVERVIEW_THEMES_GROUP_STATE = () => ({
 // `components.state` for a repeatable block must be an array: the editor pushes/splices entries
 // into it directly (see content-edit.reducer.ts), and `ContentBlockRenderer` passes it straight
 // through as the `elements` prop.
-export const INITIAL_OVERVIEW_THEMES_COMPONENTS_STATE = () => [INITIAL_OVERVIEW_THEMES_GROUP_STATE()];
+export const INITIAL_OVERVIEW_THEMES_COMPONENTS_STATE = () => [
+	INITIAL_OVERVIEW_THEMES_GROUP_STATE(),
+];
 
 export const INITIAL_OVERVIEW_THEMES_BLOCK_STATE = (): DefaultContentBlockState =>
 	BLOCK_STATE_DEFAULTS();
