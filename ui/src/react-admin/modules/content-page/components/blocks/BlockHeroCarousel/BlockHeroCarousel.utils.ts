@@ -177,8 +177,12 @@ export interface TransitionEndDeps {
 	activeIndexRef: RefObject<number>;
 	pendingCorrectionPxRef: RefObject<number>;
 	setActiveIndex: (index: number) => void;
+	setSettledActiveIndex: (index: number) => void;
 }
 
+// The active slide's own content (as opposed to its grow/shrink sizing, which must react the
+// instant navigation starts) should only render once a navigation has fully settled -- this is
+// only ever updated here and by the instant recenter jump below, never on navigation start.
 export function handleTransitionEnd(
 	swiperInstance: SwiperController,
 	deps: TransitionEndDeps
@@ -191,9 +195,11 @@ export function handleTransitionEnd(
 		activeIndexRef,
 		pendingCorrectionPxRef,
 		setActiveIndex,
+		setSettledActiveIndex,
 	} = deps;
 	pendingCorrectionPxRef.current = 0;
 	refreshGridAndResync(swiperInstance, swiperInstance.activeIndex);
+	setSettledActiveIndex(swiperInstance.activeIndex);
 	recenterIfNeeded(swiperInstance, {
 		startIndex,
 		itemsLength,
@@ -201,6 +207,7 @@ export function handleTransitionEnd(
 		isRecenteringRef,
 		activeIndexRef,
 		setActiveIndex,
+		setSettledActiveIndex,
 	});
 }
 
@@ -213,10 +220,18 @@ function recenterIfNeeded(
 		isRecenteringRef: RefObject<boolean>;
 		activeIndexRef: RefObject<number>;
 		setActiveIndex: (index: number) => void;
+		setSettledActiveIndex: (index: number) => void;
 	}
 ): void {
-	const { startIndex, itemsLength, stripLength, isRecenteringRef, activeIndexRef, setActiveIndex } =
-		deps;
+	const {
+		startIndex,
+		itemsLength,
+		stripLength,
+		isRecenteringRef,
+		activeIndexRef,
+		setActiveIndex,
+		setSettledActiveIndex,
+	} = deps;
 	if (itemsLength === 0) {
 		return;
 	}
@@ -237,7 +252,12 @@ function recenterIfNeeded(
 	// is content-identical, so nothing should visibly resize.
 	const outgoingEl = swiperInstance.slides[current] as HTMLElement | undefined;
 	const incomingEl = swiperInstance.slides[target] as HTMLElement | undefined;
-	withoutTransition([outgoingEl, incomingEl], () => flushSync(() => setActiveIndex(target)));
+	withoutTransition([outgoingEl, incomingEl], () =>
+		flushSync(() => {
+			setActiveIndex(target);
+			setSettledActiveIndex(target);
+		})
+	);
 	// The recenter's own instant resize (outgoing shrinks, incoming grows) is just as
 	// disruptive to the cached grid as a real navigation's resize.
 	refreshGridAndResync(swiperInstance, target);

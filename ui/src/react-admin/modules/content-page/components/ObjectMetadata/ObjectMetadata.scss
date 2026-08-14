@@ -1,0 +1,60 @@
+@use "../../../shared/styles/settings/colors" as colors;
+@use "../../../shared/styles/settings/variables" as variables;
+@use "../../../shared/styles/mixins/typography" as typography;
+
+.c-object-metadata {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: variables.$g-spacer-unit * 3;
+	padding: 0.75rem 1rem;
+	background-color: colors.$color-platinum;
+	height: 6rem;
+	margin-top: 4rem;
+
+	@media (max-width: variables.$g-bp3) {
+		height: 9rem;
+		flex-direction: row-reverse;
+	}
+
+	&__cta {
+		flex: 0 0 auto;
+		white-space: nowrap;
+	}
+
+	&__text {
+		flex: 1 1 auto;
+		min-width: 0;
+	}
+
+	&__title,
+	&__maintainer-name {
+		margin: 0;
+		font-weight: 700;
+		display: block;
+	}
+
+	&__title {
+		flex-shrink: 1;
+		@include typography.truncate;
+
+		@media (max-width: variables.$g-bp3) {
+			@include typography.truncate-after-x-lines(2);
+		}
+	}
+
+	&__maintainer-name {
+		font-weight: 500;
+	}
+
+	&__maintainer-logo {
+		flex: 0 0 auto;
+		height: 2.4rem;
+		width: auto;
+		margin: 0 variables.$g-spacer-unit * 1.5 0 variables.$g-spacer-unit * 3;
+
+		@media (max-width: variables.$g-bp3) {
+			display: none;
+		}
+	}
+}

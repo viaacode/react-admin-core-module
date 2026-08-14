@@ -4,17 +4,18 @@ import type { DefaultComponentProps } from '~modules/shared/types/components';
 import './BlockHeroCarousel.scss';
 import 'swiper/css';
 import clsx from 'clsx';
-import type { HeroCarouselBlockComponentState } from '~content-blocks/BlockHeroCarousel/BlockHeroCarousel.types.ts';
-import {
-	BlockHeroCarouselCarousel,
-	type HeroCarouselSlideItem,
-} from '~content-blocks/BlockHeroCarousel/BlockHeroCarouselCarousel.tsx';
+import type {
+	HeroCarouselBlockComponentState,
+	HeroCarouselSlideItem,
+} from '~content-blocks/BlockHeroCarousel/BlockHeroCarousel.types.ts';
+import { BlockHeroCarouselCarousel } from '~content-blocks/BlockHeroCarousel/BlockHeroCarouselCarousel.tsx';
 import { BlockHeroCarouselSearch } from '~content-blocks/BlockHeroCarousel/BlockHeroCarouselSearch.tsx';
 import { useGetIeObjectsByIds } from '~content-blocks/BlockHeroCarousel/hooks/useGetIeObjectsByIds.ts';
+import { GET_TERTIARY_BACKGROUND_COLOR_OPTIONS_ARCHIEF } from '~modules/content-page/const/get-color-options.ts';
 import type { ObjectType } from '~shared/helpers/mapFormatToType.ts';
+import { toSeconds } from '~shared/helpers/parsers/duration.ts';
 
 export interface BlockHeroCarouselProps extends DefaultComponentProps {
-	backgroundColor: Color;
 	backgroundImage?: string;
 	title: string;
 	searchAriaLabel: string;
@@ -30,22 +31,31 @@ export const BlockHeroCarousel: FunctionComponent<BlockHeroCarouselProps> = ({
 	searchAriaLabel,
 	elements,
 }): ReactNode => {
-	const { data: ieObjects, isLoading } = useGetIeObjectsByIds(elements);
-
-	// Placeholders keep every slide's format-based width correct while the ie-objects are
-	// still loading, since that format is already known from the content picker selection.
-	const carouselElements = useMemo<HeroCarouselSlideItem[]>(() => {
-		if (ieObjects) {
-			return ieObjects;
-		}
+	const items = useMemo(() => {
+		const allTertiaryColors = GET_TERTIARY_BACKGROUND_COLOR_OPTIONS_ARCHIEF();
 		return elements
-			.filter((element) => !!element.mediaItem)
-			.map((element) => ({
-				...element,
-				schemaIdentifier: String(element.mediaItem?.value),
-				dctermsFormat: element.mediaItem?.dctermsFormat as ObjectType,
-			}));
-	}, [ieObjects, elements]);
+			.filter(({ mediaItem }) => !!mediaItem)
+			.map((object) => {
+				// eslint-disable-next-line react-hooks/purity
+				const randomIndex = Math.floor(Math.random() * allTertiaryColors.length);
+				return {
+					schemaIdentifier: String(object.mediaItem?.value),
+					dctermsFormat: object.mediaItem?.dctermsFormat as ObjectType,
+					videoThumbnail: object.videoThumbnail,
+					backgroundColor: allTertiaryColors[randomIndex].value as Color,
+					cuepoints: {
+						start: object.startCuePoint
+							? (toSeconds(object.startCuePoint, true) ?? undefined)
+							: undefined,
+						end: object.endCuePoint
+							? (toSeconds(object.endCuePoint, true) ?? undefined)
+							: undefined,
+					},
+				} as HeroCarouselSlideItem;
+			});
+	}, [elements]);
+
+	const { data: ieObjects, isLoading } = useGetIeObjectsByIds(items);
 
 	return (
 		<article className={clsx('c-block-hero-carousel', className)}>
@@ -64,8 +74,8 @@ export const BlockHeroCarousel: FunctionComponent<BlockHeroCarouselProps> = ({
 				subtitles={subtitles}
 				searchAriaLabel={searchAriaLabel}
 			/>
-			{carouselElements.length > 0 && (
-				<BlockHeroCarouselCarousel elements={carouselElements} isLoading={isLoading} />
+			{ieObjects?.length && (
+				<BlockHeroCarouselCarousel elements={ieObjects} isLoading={isLoading} />
 			)}
 		</article>
 	);

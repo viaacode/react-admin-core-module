@@ -1,4 +1,3 @@
-import { Image, Spinner } from '@viaa/avo2-components';
 import clsx from 'clsx';
 import React, {
 	type FunctionComponent,
@@ -11,10 +10,11 @@ import React, {
 import type SwiperController from 'swiper';
 import { Autoplay } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import type { HeroCarouselBlockComponentState } from '~content-blocks/BlockHeroCarousel/BlockHeroCarousel.types.ts';
+import type { HeroCarouselSlideItem } from '~content-blocks/BlockHeroCarousel/BlockHeroCarousel.types.ts';
+import { BlockHeroCarouselActiveSlide } from '~content-blocks/BlockHeroCarousel/BlockHeroCarouselActiveSlide.tsx';
+import { BlockHeroCarouselInactiveSlide } from '~content-blocks/BlockHeroCarousel/BlockHeroCarouselInactiveSlide.tsx';
 import { CarouselButtons } from '~modules/content-page/components/CarouselButtons/CarouselButtons.tsx';
 import type { DefaultComponentProps } from '~modules/shared/types/components';
-import type { PlayableDisplayIeObject } from '~shared/services/ie-objects-service/ie-objects.types.ts';
 import {
 	ACTIVE_SLIDE_CLASS,
 	buildInfiniteStrip,
@@ -28,13 +28,8 @@ import {
 
 import 'swiper/css';
 import './BlockHeroCarousel.scss';
-
-// While the ie-object data is still loading, we only know the format (it's picked up-front in
-// the content picker) -- everything else (thumbnail, name, ...) is filled in once the fetch
-// resolves, so those fields stay optional on top of the always-known ones.
-export type HeroCarouselSlideItem = HeroCarouselBlockComponentState &
-	Pick<PlayableDisplayIeObject, 'dctermsFormat' | 'schemaIdentifier'> &
-	Partial<Omit<PlayableDisplayIeObject, 'dctermsFormat' | 'schemaIdentifier'>>;
+import { ObjectMetadata } from '~modules/content-page/components/ObjectMetadata/ObjectMetadata.tsx';
+import type { PlayableDisplayIeObject } from '~shared/services/ie-objects-service/ie-objects.types.ts';
 
 export interface BlockHeroCarouselCarouselProps extends DefaultComponentProps {
 	elements: HeroCarouselSlideItem[];
@@ -51,6 +46,10 @@ export const BlockHeroCarouselCarousel: FunctionComponent<BlockHeroCarouselCarou
 		[elements]
 	);
 	const [activeIndex, setActiveIndex] = useState<number>(startIndex);
+	// Only updated once a navigation has fully settled (transition end, or an instant recenter
+	// jump) -- unlike activeIndex, which must update the moment navigation starts so the
+	// grow/shrink sizing animates immediately.
+	const [settledActiveIndex, setSettledActiveIndex] = useState<number>(startIndex);
 	const activeIndexRef = useRef<number>(startIndex);
 	const isRecenteringRef = useRef(false);
 	const pendingCorrectionPxRef = useRef(0);
@@ -80,7 +79,7 @@ export const BlockHeroCarouselCarousel: FunctionComponent<BlockHeroCarouselCarou
 						? false
 						: {
 								waitForTransition: false,
-								delay: speed + 1000, // we need to take the transition into consideration
+								delay: speed + 5000, // we need to take the transition into consideration
 							}
 				}
 				slidesPerView="auto"
@@ -119,23 +118,27 @@ export const BlockHeroCarouselCarousel: FunctionComponent<BlockHeroCarouselCarou
 						activeIndexRef,
 						pendingCorrectionPxRef,
 						setActiveIndex,
+						setSettledActiveIndex,
 					})
 				}
 			>
 				{strip.map(
 					(
-						{ schemaIdentifier, name, thumbnailUrl, newspaperImage, videoThumbnail, dctermsFormat },
+						{
+							schemaIdentifier,
+							name,
+							thumbnailUrl,
+							newspaperImage,
+							videoThumbnail,
+							dctermsFormat,
+							backgroundColor,
+						},
 						index
 					) => {
-						let imageSrc: string | undefined = '';
-
-						if (index === activeIndex && newspaperImage) {
-							imageSrc = newspaperImage;
-						}
-
-						if (!imageSrc) {
-							imageSrc = videoThumbnail || thumbnailUrl || '';
-						}
+						// The active slide's real content only takes over once its navigation has
+						// settled; every other slide (including one mid-transition into becoming
+						// active) shows the lighter-weight inactive content.
+						const isSettledActive = index === activeIndex && index === settledActiveIndex;
 
 						return (
 							<SwiperSlide
@@ -149,16 +152,26 @@ export const BlockHeroCarouselCarousel: FunctionComponent<BlockHeroCarouselCarou
 									`c-block-hero-carousel__carousel-slide--${dctermsFormat}`,
 									index === activeIndex && ACTIVE_SLIDE_CLASS
 								)}
+								style={{
+									backgroundColor,
+								}}
 							>
-								{isLoading ? (
-									<div className={clsx('c-block-hero-carousel__carousel-slide-placeholder')}>
-										<Spinner size="large" locationId={`hero-carousel-slide__${schemaIdentifier}`} />
-									</div>
+								{isSettledActive ? (
+									<BlockHeroCarouselActiveSlide
+										schemaIdentifier={schemaIdentifier}
+										name={name}
+										thumbnailUrl={thumbnailUrl}
+										newspaperImage={newspaperImage}
+										videoThumbnail={videoThumbnail}
+										isLoading={isLoading}
+									/>
 								) : (
-									<Image
-										src={imageSrc}
-										alt={name}
-										className={clsx('c-block-hero-carousel__carousel-slide-image')}
+									<BlockHeroCarouselInactiveSlide
+										schemaIdentifier={schemaIdentifier}
+										name={name}
+										thumbnailUrl={thumbnailUrl}
+										videoThumbnail={videoThumbnail}
+										isLoading={isLoading}
 									/>
 								)}
 							</SwiperSlide>
@@ -171,6 +184,11 @@ export const BlockHeroCarouselCarousel: FunctionComponent<BlockHeroCarouselCarou
 					className={'c-block-hero-carousel__carousel-navigation'}
 				/>
 			</Swiper>
+			<ObjectMetadata
+				className={'c-block-hero-carousel__carousel-metadata'}
+				ieObject={strip?.[activeIndex] as PlayableDisplayIeObject}
+				fallbackTitle=""
+			/>
 		</div>
 	);
 };

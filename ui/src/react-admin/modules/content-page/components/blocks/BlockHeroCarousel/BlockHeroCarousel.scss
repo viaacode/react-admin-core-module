@@ -1,3 +1,4 @@
+@use "sass:math";
 @use "../../../../shared/styles/settings/variables" as variables;
 @use "../../../../shared/styles/settings/colors" as colors;
 
@@ -11,6 +12,7 @@ $hero-carousel-format-widths: (
 	"newspaperpage": 12rem,
 );
 
+$background-image-height: 63.2rem;
 $slide-height: 16rem;
 
 .c-block-hero-carousel {
@@ -26,8 +28,18 @@ $slide-height: 16rem;
 			top: 0;
 			left: 0;
 			right: 0;
-			height: 50%;
+			height: math.div($background-image-height, 2);
 			background: linear-gradient(180deg, colors.$color-gray-1000 0%, rgba(0, 0, 0, 0) 100%);
+		}
+
+		&::after {
+			content: "";
+			position: absolute;
+			top: $background-image-height;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			background: colors.$color-platinum;
 		}
 	}
 
@@ -104,8 +116,15 @@ $slide-height: 16rem;
 				display: flex;
 				align-items: center;
 				justify-content: center;
-				background-color: colors.$color-gray-600;
 			}
+		}
+
+		.c-object-metadata {
+			gap: variables.$g-spacer-unit * 4;
+			color: colors.$color-gray-1000;
+			height: fit-content;
+			margin-top: 0;
+			padding: (variables.$g-spacer-unit * 2) 0;
 		}
 	}
 }
