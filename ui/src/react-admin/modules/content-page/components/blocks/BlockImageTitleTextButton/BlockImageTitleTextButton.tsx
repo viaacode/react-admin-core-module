@@ -13,8 +13,6 @@ import type { FunctionComponent, ReactNode } from 'react';
 import Html from '~shared/components/Html/Html';
 import { SanitizePreset } from '~shared/helpers/sanitize/presets';
 
-import './BlockImageTitleTextButton.scss';
-
 export interface BlockImageTitleTextButtonProps extends DefaultProps {
 	imageSource: string;
 	imageDescription?: string;
@@ -61,8 +59,8 @@ export const BlockImageTitleTextButton: FunctionComponent<BlockImageTitleTextBut
 					<Column size="2-8">
 						<div className="c-rich-text-editor__content">
 							{title && <h2 className="u-background-text-primary">{title}</h2>}
-							{renderText(subtitle, 'a-subtitle u-background-text-secondary')}
-							{renderText(text)}
+							{renderText(subtitle, 'u-background-text-secondary')}
+							{renderText(text, 'u-background-text-primary')}
 							{buttonLabel && (
 								<Spacer margin="top">
 									<Button label={buttonLabel} type="secondary" onClick={() => onClick?.()} />

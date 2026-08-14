@@ -37,7 +37,6 @@ export const BlockOverviewThemesGroupSection: FunctionComponent<
 	// The group title sits on the band, so it takes the design text colors for the band color.
 	// https://meemoo.atlassian.net/browse/ARC-3848
 	const bandTextColorVariables = getBackgroundTextColorVariables(bandColor);
-	const hasBandTextColors = Object.keys(bandTextColorVariables).length > 0;
 
 	useLayoutEffect(() => {
 		const gridEl = gridRef.current;
@@ -142,11 +141,7 @@ export const BlockOverviewThemesGroupSection: FunctionComponent<
 			{group.title && (
 				<BlockHeading
 					type={group.titleType || 'h2'}
-					className={clsx('c-block-overview-themes__group-title', {
-						// Gated on bandHeight like the band itself, so both appear in the same render and the
-						// title never takes the band's text color while sitting on the page background.
-						'u-background-text-primary': !!bandHeight && hasBandTextColors,
-					})}
+					className="c-block-overview-themes__group-title"
 				>
 					{group.title}
 				</BlockHeading>

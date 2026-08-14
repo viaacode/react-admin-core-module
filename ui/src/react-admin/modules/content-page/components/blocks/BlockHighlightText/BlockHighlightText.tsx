@@ -30,10 +30,8 @@ export const BlockHighlightText: FunctionComponent<BlockHighlightTextProps> = ({
 		highlightColor === CustomBackground.MeemooLogo
 			? Color.Transparent
 			: ((ColorSelectGradientColors as Record<string, string>)[highlightColor] ?? highlightColor);
-	// The text sits inside the highlighted box, so its WCAG text colors follow the box background
-	// rather than the block background: the highlight color, except for a gradient, which renders the
-	// box white (see --pattern-color below). The meemoo logo renders it transparent, which design
-	// specified no colors for, so that keeps the inherited text color.
+	// Text colors follow the actual fill behind the content: gradients use the white content box,
+	// while the transparent meemoo logo variant keeps the outer block's inherited text color.
 	// https://meemoo.atlassian.net/browse/ARC-3848
 	const textBoxBackground = isGradient ? Color.White : patternColor;
 	const textColorVariables = getBackgroundTextColorVariables(textBoxBackground);

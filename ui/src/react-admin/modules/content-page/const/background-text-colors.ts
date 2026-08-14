@@ -23,15 +23,6 @@ const LEISTEEN = '#666666';
 const LAGUNE = '#005F69';
 
 /**
- * Backward-compatible aliases for colors that were selectable in previously saved content.
- * Poederblauw was a typo for Baby blauw (`8` became `B`), so it must render exactly like Baby
- * blauw without remaining a selectable or separately maintained palette entry.
- */
-const LEGACY_BACKGROUND_COLOR_ALIASES: Record<string, string> = {
-	'#bddee7': '#8ddee7',
-};
-
-/**
  * White as the PDF writes it. Color.White is the shorthand '#FFF', so compare against this when
  * checking whether a background got light text.
  */
@@ -133,11 +124,8 @@ export function getBackgroundTextColors(
 	}
 
 	const normalisedColor = normaliseHex(color);
-	const key = normalisedColor
-		? (LEGACY_BACKGROUND_COLOR_ALIASES[normalisedColor] ?? normalisedColor)
-		: null;
 
-	return key ? BACKGROUND_TEXT_COLORS[key] : undefined;
+	return normalisedColor ? BACKGROUND_TEXT_COLORS[normalisedColor] : undefined;
 }
 
 /**

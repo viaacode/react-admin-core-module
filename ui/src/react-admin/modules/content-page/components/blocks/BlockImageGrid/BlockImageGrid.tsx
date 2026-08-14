@@ -78,15 +78,13 @@ export const BlockImageGrid: FunctionComponent<BlockImageGridProps> = ({
 									fontWeight: textWeight,
 								}}
 							>
-								<strong className={clsx({ 'u-background-text-primary': !textColor })}>
-									{element.title}
-								</strong>
+								<strong>{element.title}</strong>
 							</h3>
 						</Spacer>
 					)}
 					{!!element.text && (
 						<Spacer margin="top-small">
-							<p className={clsx({ 'u-background-text-primary': !textColor })}>{element.text}</p>
+							<p>{element.text}</p>
 						</Spacer>
 					)}
 					{!!element.buttonLabel && (

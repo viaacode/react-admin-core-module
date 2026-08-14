@@ -90,11 +90,6 @@ describe('getBackgroundTextColors()', () => {
 		expect(getBackgroundTextColors(Color.SkyBlue)).toEqual(getBackgroundTextColors(Color.BabyBlue));
 	});
 
-	it('renders legacy Poederblauw as Baby blauw without keeping a separate palette record', () => {
-		expect(getBackgroundTextColors('#BDDEE7')).toEqual(getBackgroundTextColors(Color.BabyBlue));
-		expect(BACKGROUND_TEXT_COLORS).not.toHaveProperty('#bddee7');
-	});
-
 	it('has a ruling for every selectable flat Archief background', () => {
 		const backgroundsWithoutOneTextColor = [
 			Color.Transparent,

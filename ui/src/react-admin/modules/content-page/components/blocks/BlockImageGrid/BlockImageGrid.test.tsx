@@ -18,8 +18,8 @@ describe('<BlockImageGrid /> text colors', () => {
 		expect(container.querySelector('.c-block-grid__text-wrapper')).toHaveClass(
 			'u-background-text-primary'
 		);
-		expect(screen.getByText('Grid title')).toHaveClass('u-background-text-primary');
-		expect(screen.getByText('Grid description')).toHaveClass('u-background-text-primary');
+		expect(screen.getByText('Grid title')).not.toHaveClass('u-background-text-primary');
+		expect(screen.getByText('Grid description')).not.toHaveClass('u-background-text-primary');
 	});
 
 	it('preserves a caller-supplied foreground color', () => {
