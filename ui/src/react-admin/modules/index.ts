@@ -104,6 +104,7 @@ export * from './content-page/components/blocks/anchor-links';
 export * from './content-page/components/blocks/BlockAccordions/BlockAccordions';
 export * from './content-page/components/blocks/BlockAvoHero/BlockAvoHero';
 export * from './content-page/components/blocks/BlockAvoImageTextBackground/BlockAvoImageTextBackground';
+export * from './content-page/components/blocks/BlockAvoQuote/BlockAvoQuote';
 export * from './content-page/components/blocks/BlockBreadcrumbs/BlockBreadcrumbs';
 export * from './content-page/components/blocks/BlockButtons/BlockButtons';
 export * from './content-page/components/blocks/BlockCardsWithoutDescription/BlockCardsWithoutDescription';
@@ -114,6 +115,7 @@ export * from './content-page/components/blocks/BlockEventbrite/BlockEventbrite'
 export * from './content-page/components/blocks/BlockHeading/BlockHeading';
 export * from './content-page/components/blocks/BlockHetArchiefHeaderSearch/BlockHetArchiefHeaderSearch';
 export * from './content-page/components/blocks/BlockHetArchiefImageTextBackground/BlockHetArchiefImageTextBackground';
+export * from './content-page/components/blocks/BlockHetArchiefQuote/BlockHetArchiefQuote';
 export * from './content-page/components/blocks/BlockIFrame/BlockIFrame';
 export * from './content-page/components/blocks/BlockImage/BlockImage';
 export * from './content-page/components/blocks/BlockImageGrid/BlockImageGrid';
@@ -125,7 +127,6 @@ export * from './content-page/components/blocks/BlockMediaGrid/BlockMediaGrid.ed
 export * from './content-page/components/blocks/BlockObjectsGrid/BlockObjectsGrid';
 export * from './content-page/components/blocks/BlockOverviewNewspaperTitles/BlockOverviewNewspaperTitles';
 export * from './content-page/components/blocks/BlockPageOverview/BlockPageOverview';
-export * from './content-page/components/blocks/BlockQuote/BlockQuote';
 export * from './content-page/components/blocks/BlockRichText/BlockRichText';
 export * from './content-page/components/blocks/BlockSpotlight/BlockSpotlight';
 export * from './content-page/components/blocks/BlockTagsWithLink/BlockTagsWithLink';

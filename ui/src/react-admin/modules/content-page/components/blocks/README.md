@@ -120,6 +120,55 @@ component.
 
 ---
 
+## Colour fields
+
+Colours come from the shared lists in
+[`../../const/get-color-options.ts`](../../const/get-color-options.ts), through the helpers in
+[`defaults.ts`](./defaults.ts): `FOREGROUND_COLOR_FIELD` for text colours,
+`BACKGROUND_COLOR_FIELD` / `BACKGROUND_COLOR_EXTENDED_FIELD` for backgrounds.
+
+- **Don't build a filtered variant of a list.** Some entries are not a plain CSS colour
+  (`Color.Transparent`, the `GradientColor.BlackWhite` gradient string, and the
+  `CustomBackground.MeemooLogo` sentinel that only `ContentBlockRenderer` expands). Whether a
+  given combination is legible or useful is the editor's call, not something we narrow down in
+  code — pick the list that fits (`GET_FOREGROUND_COLOR_OPTIONS_*` is already gradient-free) and
+  pass it through unchanged.
+- **Take defaults out of the list, never hand-write them.** `GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF()[5]`,
+  not `{ label: tText('…___zwart'), value: Color.Black }` — a literal copy silently drifts when
+  the label behind that translation key changes.
+- Use the same option for the field default and for `INITIAL_…_COMPONENTS_STATE`, so the form and
+  the stored state agree.
+
+## Styling
+
+Block styles are a plain `Block<Name>.scss` next to the component, imported by it. Reuse what
+`~shared/styles` already provides instead of re-deriving values out of Figma:
+
+```scss
+@use "../../../../shared/styles/settings/variables" as variables;
+@use "../../../../shared/styles/mixins/typography" as typography;
+```
+
+- **Spacing** is `variables.$g-spacer-unit` (0.8rem) multiples — `variables.$g-spacer-unit * 3`,
+  not `2.4rem`.
+- **Breakpoints** are `variables.$g-bp1`…`$g-bp4`, written as
+  `@media (max-width: variables.$g-bp2)`.
+- **Type** goes through [`mixins/_typography.scss`](../../../shared/styles/mixins/_typography.scss):
+  always a preset (`sofia-pro-body()`, `sofia-pro-heading-lg()`, …). If none of them matches, add a
+  preset there instead of calling `sofia-pro($size, $weight, $line-height)` from the block. Don't
+  re-declare `font-family`/`font-size`/`font-weight` by hand.
+- **Colours** come from `settings/colors`, or from a CSS custom property when the editor picks them
+  (`background: var(--frame-color)`).
+- A value that genuinely is design-specific (a frame radius, an icon-column width) becomes a named
+  `$variable` at the top of the file with a comment saying where it comes from — no bare literals
+  in the rules.
+- Check the block at tablet and mobile widths before opening the PR; review asks about it every
+  time.
+
+`BlockOverviewWithCarousel.scss` and `BlockHetArchiefQuote.scss` are reasonable reference files.
+
+---
+
 ## Key files
 
 - [`../ContentBlockForm/ContentBlockForm.tsx`](../ContentBlockForm/ContentBlockForm.tsx) —

@@ -168,7 +168,7 @@ export enum ContentBlockType {
 	MediaPlayerTitleTextButton = 'MEDIA_PLAYER_TITLE_TEXT_BUTTON',
 	PageOverview = 'PAGE_OVERVIEW',
 	ProjectsSpotlight = 'PROJECTS_SPOTLIGHT',
-	Quote = 'QUOTE',
+	AvoQuote = 'QUOTE',
 	RichText = 'RICH_TEXT',
 	RichTextTwoColumns = 'RICH_TEXT_TWO_COLUMNS',
 	Search = 'SEARCH',
@@ -181,6 +181,7 @@ export enum ContentBlockType {
 	HetArchiefImageTextBackground = 'IMAGE_TEXT_BACKGROUND', // Hetarchief
 	MaintainersGrid = 'MAINTAINERS_GRID',
 	HetArchiefHeaderSearch = 'HETARCHIEF__HEADER_SEARCH',
+	HetArchiefQuote = 'HETARCHIEF_QUOTE',
 	OverviewNewspaperTitles = 'OVERVIEW_NEWSPAPER_TITLES',
 	ContentEncloseGrid = 'CONTENT_ENCLOSE_GRID',
 	Breadcrumbs = 'BREADCRUMBS',
@@ -371,7 +372,7 @@ export interface IFrameBlockComponentState {
 	src: string;
 }
 
-export interface QuoteBlockComponentState {
+export interface AvoQuoteBlockComponentState {
 	quote: string;
 	authorName: string;
 	authorInitials: string;
@@ -469,7 +470,8 @@ export type SingleContentBlockComponentState =
 	| MediaPlayerBlockComponentState
 	| MediaPlayerTitleTextButtonBlockComponentState
 	| PageOverviewBlockComponentStateFields
-	| QuoteBlockComponentState
+	| AvoQuoteBlockComponentState
+	| HetArchiefQuoteBlockComponentState
 	| RichTextBlockComponentState
 	// biome-ignore lint/complexity/noBannedTypes: todo
 	| {}; // Search block & content page meta
@@ -602,6 +604,13 @@ export interface HetArchiefHeaderSearchBlockComponentState {
 	title: string;
 	subtitles: { label: string }[];
 	textBelowSearch?: string;
+}
+
+export interface HetArchiefQuoteBlockComponentState {
+	quote: string;
+	authorName: string;
+	textColor: Color;
+	frameColor: Color | GradientColor | CustomBackground;
 }
 
 export interface HetArchiefIeObject {

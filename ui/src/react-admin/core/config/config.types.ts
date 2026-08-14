@@ -217,6 +217,7 @@ export interface IconConfig {
 		newspaper: IconComponentProps;
 		noAudio: IconComponentProps;
 		noVideo: IconComponentProps;
+		quotes: IconComponentProps;
 		arrowDownRight: IconComponentProps;
 	};
 	list: () => { label: string; value: string }[];
