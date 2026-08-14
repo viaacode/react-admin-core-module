@@ -2570,7 +2570,7 @@
     "location": "modules/content-page/views/content-page-overview",
     "key": "zoek-input-aria-label",
     "language": "nl",
-    "value": "Invulveld zoeken aria label",
+    "value": "Dit is een invulveld om te zoeken.",
     "value_type": "TEXT"
   },
   {
@@ -3047,7 +3047,7 @@
     "location": "modules/content-page-labels/views/content-page-label-overview",
     "key": "zoek-input-aria-label",
     "language": "nl",
-    "value": "Invulveld zoeken aria label",
+    "value": "Dit is een invulveld om een paginalabel te zoeken.",
     "value_type": "TEXT"
   },
   {
@@ -3227,7 +3227,7 @@
     "location": "modules/navigation/views/navigation-bar-detail",
     "key": "zoek-input-aria-label",
     "language": "nl",
-    "value": "Zoek input aria label",
+    "value": "Dit is een invulveld om een navigatie-item te zoeken.",
     "value_type": "TEXT"
   },
   {
@@ -3740,7 +3740,7 @@
     "location": "modules/translations/views/translations-overview",
     "key": "zoekveld-aria-label",
     "language": "nl",
-    "value": "Zoekveld aria label",
+    "value": "Dit is een invulveld om te zoeken in vertalingen.",
     "value_type": "TEXT"
   },
   {
@@ -3758,7 +3758,7 @@
     "location": "modules/translations/views/translations-overview",
     "key": "zoek-vertaling-input-aria-label",
     "language": "nl",
-    "value": "Invulveld zoeken in vertalingen aria label",
+    "value": "Dit is een invulveld om te zoeken in vertalingen.",
     "value_type": "TEXT"
   },
   {
@@ -4829,7 +4829,7 @@
     "location": "modules/user/views/user-overview",
     "key": "zoek-input-aria-label",
     "language": "nl",
-    "value": "Invulveld zoeken aria label",
+    "value": "Dit is een invulveld om te zoeken in gebruikersgroepen.",
     "value_type": "TEXT"
   },
   {
@@ -5000,7 +5000,7 @@
     "location": "modules/user-group/views/user-group-overview",
     "key": "zoekveld-aria-label",
     "language": "nl",
-    "value": "Zoekveld aria label",
+    "value": "Dit is een invulveld om te zoeken in gebruikersgroepen.",
     "value_type": "TEXT"
   },
   {
@@ -5522,7 +5522,7 @@
     "location": "modules/content-page/components/date-picker/date-picker",
     "key": "datum-input-aria-label",
     "language": "nl",
-    "value": "Invulveld datum aria label",
+    "value": "Dit is een invulveld om een datum te zoeken.",
     "value_type": "TEXT"
   },
   {
@@ -6503,7 +6503,7 @@
     "location": "modules/shared/components/filter-table/filter-table",
     "key": "zoekveld-checkbox-filter-aria-label",
     "language": "nl",
-    "value": "Zoekveld checkbox filter aria label",
+    "value": "Dit is een checkbox om te filteren.",
     "value_type": "TEXT"
   },
   {
@@ -7256,6 +7256,15 @@
   {
     "app": "AVO",
     "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-content-enclose/block-content-enclose",
+    "key": "titel-is-verplicht",
+    "language": "nl",
+    "value": "Titel is verplicht",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
     "location": "admin/content-block/helpers/generators/content-page-meta",
     "key": "pagina-meta-data",
     "language": "nl",
@@ -7457,7 +7466,7 @@
     "location": "admin/content-block/helpers/generators/heading",
     "key": "titel-is-verplicht",
     "language": "nl",
-    "value": "Titel is verplicht.",
+    "value": "Titel is verplicht",
     "value_type": "TEXT"
   },
   {
@@ -7961,7 +7970,7 @@
     "location": "admin/content-block/helpers/generators/intro",
     "key": "titel-is-verplicht",
     "language": "nl",
-    "value": "Titel is verplicht.",
+    "value": "Titel is verplicht",
     "value_type": "TEXT"
   },
   {
@@ -8033,7 +8042,7 @@
     "location": "admin/content-block/helpers/generators/klaar",
     "key": "titel-is-verplicht",
     "language": "nl",
-    "value": "Titel is verplicht.",
+    "value": "Titel is verplicht",
     "value_type": "TEXT"
   },
   {
@@ -9321,15 +9330,6 @@
     "key": "error",
     "language": "nl",
     "value": "Error",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-content-enclose/block-content-enclose",
-    "key": "titel-is-verplicht",
-    "language": "nl",
-    "value": "Titel is verplicht",
     "value_type": "TEXT"
   },
   {
@@ -18662,7 +18662,7 @@
     "location": "item/views/item",
     "key": "je-hebt-geen-rechten-om-dit-item-te-bekijken-leerling",
     "language": "nl",
-    "value": "Je hebt geen rechten om dit fragment te bekijken.\r\nVraag aan jouw leerkracht de <u>opdrachtlink</u> om dit video- of audiofragment als leerling te kunnen bekijken.",
+    "value": "Je hebt geen rechten om dit fragment te bekijken.\nVraag aan jouw leerkracht de <u>opdrachtlink</u> om dit video- of audiofragment als leerling te kunnen bekijken.",
     "value_type": "HTML"
   },
   {
@@ -19941,15 +19941,6 @@
     "key": "voornaam",
     "language": "nl",
     "value": "Voornaam",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "settings/components/account",
-    "key": "wijzig-gegevens",
-    "language": "nl",
-    "value": "Wijzig mijn gegevens",
     "value_type": "TEXT"
   },
   {
@@ -30137,7 +30128,7 @@
     "location": "modules/klascement/klascement",
     "key": "publiceer-collection-naar-klascement-collection-description-collection-title-collection-link",
     "language": "nl",
-    "value": "<p>\r\nIn deze collectie vind je video- en geluidsfragmenten over (vul onderwerp in), samen met meer context en concrete lestips.\r\n</p>\r\n<p>\r\n\t{{collectionDescription}}\r\n</p>\r\n<p>\r\n\t<a href=\"{{collectionLink}}\" target=\"_blank\">\r\n\t\tBekijk de collectie <strong>{{collectionTitle}}</strong> op Het Archief voor Onderwijs >\r\n\t</a>\r\n</p>",
+    "value": "<p>\nIn deze collectie vind je video- en geluidsfragmenten over (vul onderwerp in), samen met meer context en concrete lestips.\n</p>\n<p>\n\t{{collectionDescription}}\n</p>\n<p>\n\t<a href=\"{{collectionLink}}\" target=\"_blank\">\n\t\tBekijk de collectie <strong>{{collectionTitle}}</strong> op Het Archief voor Onderwijs >\n\t</a>\n</p>",
     "value_type": "TEXT"
   },
   {
@@ -30155,7 +30146,7 @@
     "location": "modules/klascement/klascement",
     "key": "publiceer-opdracht-naar-klascement-assignment-description-assignment-title-assignment-link",
     "language": "nl",
-    "value": "<p>\r\n\t{{assignmentDescription}}\r\n</p>\r\n<p>\r\n\t<a href=\"{{assignmentLink}}\" target=\"_blank\">\r\n\t\tBekijk de voorbeeldopdracht <strong>{{assignmentTitle}}</strong> op Het Archief voor Onderwijs >\r\n\t</a>\r\n</p>",
+    "value": "<p>\n\t{{assignmentDescription}}\n</p>\n<p>\n\t<a href=\"{{assignmentLink}}\" target=\"_blank\">\n\t\tBekijk de voorbeeldopdracht <strong>{{assignmentTitle}}</strong> op Het Archief voor Onderwijs >\n\t</a>\n</p>",
     "value_type": "TEXT"
   },
   {
@@ -30173,7 +30164,7 @@
     "location": "modules/url-redirects/url-redirects",
     "key": "redirects-naar-andere-redirects-zijn-niet-toegestaan-bedoelde-je-from-path-to-path",
     "language": "nl",
-    "value": "Een redirect naar een pagina waarop al een redirect staat, mag niet. Bedoelde je {{existingOldPath}} => {{creatingNewPath}}?\r\n",
+    "value": "Een redirect naar een pagina waarop al een redirect staat, mag niet. Bedoelde je {{existingOldPath}} => {{creatingNewPath}}?\n",
     "value_type": "TEXT"
   },
   {
