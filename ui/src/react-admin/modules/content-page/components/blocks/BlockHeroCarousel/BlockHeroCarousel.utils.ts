@@ -105,7 +105,7 @@ export interface RecenterDeps<T extends StripItem> {
 	strip: T[];
 	startIndex: number;
 	itemsLength: number;
-	activeIndexRef: RefObject<number>;
+	activeIndex: number;
 	trackRef: RefObject<HTMLDivElement | null>;
 	setActiveIndex: (index: number) => void;
 	setSettledActiveIndex: (index: number) => void;
@@ -116,7 +116,7 @@ function recenterIfNeeded<T extends StripItem>(deps: RecenterDeps<T>): void {
 		strip,
 		startIndex,
 		itemsLength,
-		activeIndexRef,
+		activeIndex,
 		trackRef,
 		setActiveIndex,
 		setSettledActiveIndex,
@@ -124,21 +124,19 @@ function recenterIfNeeded<T extends StripItem>(deps: RecenterDeps<T>): void {
 	if (itemsLength === 0) {
 		return;
 	}
-	const current = activeIndexRef.current;
-	const nearStart = current < BACKWARD_BUFFER;
-	const nearEnd = current >= strip.length - FORWARD_BUFFER;
+	const nearStart = activeIndex < BACKWARD_BUFFER;
+	const nearEnd = activeIndex >= strip.length - FORWARD_BUFFER;
 	if (!nearStart && !nearEnd) {
 		return;
 	}
 	// startIndex isn't a multiple of itemsLength (the strip clones a boundary window, not whole
 	// item-list copies), so the target must be re-based relative to startIndex's own phase.
-	const target = startIndex + mod(current - startIndex, itemsLength);
-	if (target === current) {
+	const target = startIndex + mod(activeIndex - startIndex, itemsLength);
+	if (target === activeIndex) {
 		return;
 	}
 	withoutTransition(trackRef.current, () => {
 		flushSync(() => {
-			activeIndexRef.current = target;
 			setActiveIndex(target);
 			setSettledActiveIndex(target);
 		});
@@ -155,21 +153,8 @@ export function handleTrackTransitionEnd<T extends StripItem>(
 	if (e.target !== e.currentTarget || e.propertyName !== 'transform') {
 		return;
 	}
-	deps.setSettledActiveIndex(deps.activeIndexRef.current);
+	deps.setSettledActiveIndex(deps.activeIndex);
 	recenterIfNeeded(deps);
-}
-
-// Navigates to the given index with the same animated transition as the next/prev buttons.
-export function goToSlide(
-	targetIndex: number,
-	activeIndexRef: RefObject<number>,
-	setActiveIndex: (index: number) => void
-): void {
-	if (targetIndex === activeIndexRef.current) {
-		return;
-	}
-	activeIndexRef.current = targetIndex;
-	setActiveIndex(targetIndex);
 }
 
 // Re-syncs pxPerRem if the root font-size changed (e.g. a responsive html{font-size}

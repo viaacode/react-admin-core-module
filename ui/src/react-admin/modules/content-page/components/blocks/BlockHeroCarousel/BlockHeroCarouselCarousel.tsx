@@ -18,7 +18,6 @@ import {
 	buildInfiniteStrip,
 	computeOffsetPx,
 	getPxPerRem,
-	goToSlide,
 	handleTrackTransitionEnd,
 	handleWindowResize,
 } from './BlockHeroCarousel.utils.ts';
@@ -46,7 +45,6 @@ export const BlockHeroCarouselCarousel: FunctionComponent<BlockHeroCarouselCarou
 	// grow/shrink sizing animates immediately.
 	const [settledActiveIndex, setSettledActiveIndex] = useState<number>(startIndex);
 	const [pxPerRem, setPxPerRem] = useState<number>(() => getPxPerRem());
-	const activeIndexRef = useRef<number>(startIndex);
 	const pxPerRemRef = useRef<number>(pxPerRem);
 	const trackRef = useRef<HTMLDivElement | null>(null);
 
@@ -65,10 +63,9 @@ export const BlockHeroCarouselCarousel: FunctionComponent<BlockHeroCarouselCarou
 		[strip, activeIndex, pxPerRem]
 	);
 
-	const handleGoToSlide = (targetIndex: number) =>
-		goToSlide(targetIndex, activeIndexRef, setActiveIndex);
-	const goNext = () => handleGoToSlide(activeIndexRef.current + 1);
-	const goPrev = () => handleGoToSlide(activeIndexRef.current - 1);
+	const goToSlide = (targetIndex: number) => setActiveIndex(targetIndex);
+	const goNext = () => setActiveIndex((current) => current + 1);
+	const goPrev = () => setActiveIndex((current) => current - 1);
 
 	return (
 		<div className={clsx('c-block-hero-carousel__carousel')}>
@@ -82,7 +79,7 @@ export const BlockHeroCarouselCarousel: FunctionComponent<BlockHeroCarouselCarou
 							strip,
 							startIndex,
 							itemsLength,
-							activeIndexRef,
+							activeIndex,
 							trackRef,
 							setActiveIndex,
 							setSettledActiveIndex,
@@ -104,7 +101,7 @@ export const BlockHeroCarouselCarousel: FunctionComponent<BlockHeroCarouselCarou
 							<div
 								// biome-ignore lint/suspicious/noArrayIndexKey: strip repeats real elements, so schemaIdentifier alone isn't unique per slide
 								key={`carousel-slide__${schemaIdentifier}__${index}`}
-								onClick={() => handleGoToSlide(index)}
+								onClick={() => goToSlide(index)}
 								aria-hidden={isClone ? true : undefined}
 								className={clsx(
 									'c-block-hero-carousel__carousel-slide',
