@@ -95,21 +95,20 @@ export const BlockHeroCarouselCarousel: FunctionComponent<BlockHeroCarouselCarou
 						// already elsewhere in the strip -- hidden from assistive tech so it isn't
 						// announced multiple times.
 						const isClone = index < startIndex || index >= startIndex + itemsLength;
-						const { schemaIdentifier, dctermsFormat, backgroundColor } = item;
 
 						return (
 							<div
 								// biome-ignore lint/suspicious/noArrayIndexKey: strip repeats real elements, so schemaIdentifier alone isn't unique per slide
-								key={`carousel-slide__${schemaIdentifier}__${index}`}
+								key={`carousel-slide__${item?.schemaIdentifier}__${index}`}
 								onClick={() => goToSlide(index)}
 								aria-hidden={isClone ? true : undefined}
 								className={clsx(
 									'c-block-hero-carousel__carousel-slide',
-									`c-block-hero-carousel__carousel-slide--${dctermsFormat}`,
+									`c-block-hero-carousel__carousel-slide--${item?.dctermsFormat}`,
 									index === activeIndex && ACTIVE_SLIDE_CLASS
 								)}
 								style={{
-									backgroundColor,
+									backgroundColor: item?.backgroundColor,
 								}}
 							>
 								{isSettledActive ? (

@@ -10,7 +10,7 @@ import { tText } from '~shared/helpers/translation-functions.ts';
 import { HET_ARCHIEF } from '~shared/types';
 
 export interface BlockHeroCarouselInactiveSlideProps extends DefaultComponentProps {
-	item: HeroCarouselSlideItem;
+	item?: HeroCarouselSlideItem;
 	isLoading?: boolean;
 }
 
@@ -40,7 +40,7 @@ const getObjectTypeLabel = (format: ObjectType | undefined): string => {
 export const BlockHeroCarouselInactiveSlide: FunctionComponent<
 	BlockHeroCarouselInactiveSlideProps
 > = ({ item, isLoading }): ReactElement => {
-	if (isLoading) {
+	if (isLoading || !item?.schemaIdentifier) {
 		return (
 			<div className={clsx('c-block-hero-carousel__carousel-slide-placeholder')}>
 				<Spinner size="large" locationId={'hero-carousel-slide'} />
@@ -61,9 +61,7 @@ export const BlockHeroCarouselInactiveSlide: FunctionComponent<
 	);
 
 	if (!imageSrc) {
-		return (
-			<div className={clsx('c-block-hero-carousel__carousel-slide-image')}>{formatIcon}</div>
-		);
+		return <div className={clsx('c-block-hero-carousel__carousel-slide-image')}>{formatIcon}</div>;
 	}
 
 	return (

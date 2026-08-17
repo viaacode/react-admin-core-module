@@ -33,26 +33,22 @@ export const BlockHeroCarousel: FunctionComponent<BlockHeroCarouselProps> = ({
 }): ReactNode => {
 	const items = useMemo(() => {
 		const allTertiaryColors = GET_TERTIARY_BACKGROUND_COLOR_OPTIONS_ARCHIEF();
-		return elements
-			.filter(({ mediaItem }) => !!mediaItem)
-			.map((object) => {
-				// eslint-disable-next-line react-hooks/purity
-				const randomIndex = Math.floor(Math.random() * allTertiaryColors.length);
-				return {
-					schemaIdentifier: String(object.mediaItem?.value),
-					dctermsFormat: object.mediaItem?.dctermsFormat as ObjectType,
-					videoThumbnail: object.videoThumbnail,
-					backgroundColor: allTertiaryColors[randomIndex].value as Color,
-					cuepoints: {
-						start: object.startCuePoint
-							? (toSeconds(object.startCuePoint, true) ?? undefined)
-							: undefined,
-						end: object.endCuePoint
-							? (toSeconds(object.endCuePoint, true) ?? undefined)
-							: undefined,
-					},
-				} as HeroCarouselSlideItem;
-			});
+		return elements.map((object) => {
+			// eslint-disable-next-line react-hooks/purity
+			const randomIndex = Math.floor(Math.random() * allTertiaryColors.length);
+			return {
+				schemaIdentifier: String(object.mediaItem?.value),
+				dctermsFormat: object.mediaItem?.dctermsFormat as ObjectType,
+				videoThumbnail: object.videoThumbnail,
+				backgroundColor: allTertiaryColors[randomIndex].value as Color,
+				cuepoints: {
+					start: object.startCuePoint
+						? (toSeconds(object.startCuePoint, true) ?? undefined)
+						: undefined,
+					end: object.endCuePoint ? (toSeconds(object.endCuePoint, true) ?? undefined) : undefined,
+				},
+			} as HeroCarouselSlideItem;
+		});
 	}, [elements]);
 
 	const { data: ieObjects, isLoading } = useGetIeObjectsByIds(items);

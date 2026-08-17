@@ -2,6 +2,7 @@
 @use "../../../../shared/styles/settings/variables" as variables;
 @use "../../../../shared/styles/settings/colors" as colors;
 @use "../../../../shared/styles/mixins/typography" as typography;
+@use "../../../../shared/styles/mixins/animations" as animations;
 
 $hero-carousel-format-widths: (
 	"video": 28rem,
@@ -23,16 +24,6 @@ $hero-carousel-search-radius-desktop: 3.2rem;
 
 .c-content-page-preview:has(.c-content-block__hero-carousel) {
 	overflow: visible !important;
-}
-
-@keyframes hero-carousel-ken-burns {
-	from {
-		transform: scale(1);
-	}
-
-	to {
-		transform: scale(1.15);
-	}
 }
 
 @keyframes hero-carousel-progress-fill {
@@ -419,15 +410,20 @@ $hero-carousel-search-radius-desktop: 3.2rem;
 				height: 100%;
 				overflow: hidden;
 
-				&-media img {
-					object-fit: cover;
-					object-position: top center;
+				&-media {
 					width: 100%;
 					height: 100%;
+
+					img {
+						object-fit: cover;
+						object-position: top center;
+						width: 100%;
+						height: 100%;
+					}
 				}
 
 				&--animated &-media img {
-					animation: hero-carousel-ken-burns $ken-burns-duration linear forwards;
+					@include animations.ken-burns-animation($ken-burns-duration);
 
 					@media (prefers-reduced-motion: reduce) {
 						animation: none;

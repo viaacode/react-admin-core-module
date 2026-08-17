@@ -23,7 +23,7 @@ import { useGetFileDuration } from '~shared/hooks/use-get-file-duration.ts';
 import { HET_ARCHIEF } from '~shared/types';
 
 export interface BlockHeroCarouselActiveSlideProps extends DefaultComponentProps {
-	item: HeroCarouselSlideItem;
+	item?: HeroCarouselSlideItem;
 	onEnded: () => void;
 	isLoading?: boolean;
 }
@@ -33,10 +33,10 @@ export const BlockHeroCarouselActiveSlide: FunctionComponent<BlockHeroCarouselAc
 	onEnded,
 	isLoading,
 }): ReactElement => {
-	const { data: mediaDuration } = useGetFileDuration(item.playableUrl);
+	const { data: mediaDuration } = useGetFileDuration(item?.playableUrl);
 	const [isPaused, setIsPaused] = useState(false);
 
-	if (isLoading) {
+	if (isLoading || !item?.schemaIdentifier) {
 		return (
 			<div className={clsx('c-block-hero-carousel__carousel-slide-placeholder')}>
 				<Spinner size="large" locationId={'hero-carousel-slide'} />
