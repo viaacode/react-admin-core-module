@@ -1,9 +1,11 @@
 import { cleanup, render, screen } from '@testing-library/react';
 import React from 'react';
-import { afterEach, describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 
 import { Color, CustomBackground } from '~modules/content-page/types/content-block.types';
 import { ContentPageLabelChip } from './ContentPageLabelChip';
+
+vi.mock('~shared/helpers/is-avo', () => ({ isAvo: () => false }));
 
 afterEach(() => {
 	cleanup();
@@ -24,6 +26,16 @@ describe('<ContentPageLabelChip />', () => {
 
 	it('uses the chosen colour as the background', () => {
 		expect(renderChip(Color.BlossomPink).style.background).toEqual('rgb(230, 148, 179)');
+	});
+
+	it('uses the shared WCAG text colour for the chosen background', () => {
+		expect(renderChip(Color.White).style.color).toEqual('rgb(0, 0, 0)');
+		expect(renderChip(Color.SandBeige).style.color).toEqual('rgb(0, 0, 0)');
+		expect(renderChip(Color.Black).style.color).toEqual('rgb(255, 255, 255)');
+	});
+
+	it('keeps white text when the background has no WCAG mapping', () => {
+		expect(renderChip(CustomBackground.MeemooLogo).style.color).toEqual('rgb(255, 255, 255)');
 	});
 
 	it('renders the meemoo logo background as transparent, since a chip cannot show the pattern', () => {
