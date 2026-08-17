@@ -6,21 +6,34 @@
 // line from $g-bp3 on. Below that breakpoint the years sit above the date, right of the line.
 $year-column-width-desktop: 17rem;
 $year-column-width-mobile: 4rem;
+
 // Distance between the timeline line and the node date / content.
 $line-content-gap: 3rem;
+
 // The circle / rectangle markers: one per node (alternating), plus a fixed circle-rectangle-circle
 // cluster at the very start and end of the timeline.
 $marker-size: 0.4375rem;
 $marker-rectangle-height: 0.3rem;
+
 // Aspect ratio for the node's image / video / audio media.
 $node-media-aspect-ratio: '1215 / 630';
+
 // Vertical space between every item on the timeline (start cap, nodes, end cap).
 $item-gap-desktop: 12rem;
 $item-gap-mobile: 5rem;
+
 // Inner padding of a node that has a background colour.
 $node-background-padding: 4rem;
+
 // Gap between a node's media (image / object) and the start of its background colour band.
 $node-background-top-gap: 5rem;
+
+// The meta bar under an object node, and the gap between it and the node's text. It is taller on
+// mobile because the title wraps over two lines there. The background colour band of an object node
+// stops right above this bar, so its bottom offset is derived from these two values.
+$object-meta-height-desktop: 6rem;
+$object-meta-height-mobile: 9rem;
+$object-meta-gap: 4rem;
 
 .c-block-timeline {
 	position: relative;
@@ -38,15 +51,19 @@ $node-background-top-gap: 5rem;
 			position: absolute;
 			top: 0;
 			bottom: 0;
-			left: 0;
+			left: $year-column-width-desktop;
 			transform: translateX(-50%);
 			width: 1px;
 			background-color: currentcolor;
 			opacity: 0.3;
 			z-index: 1;
+
+			@media (max-width: variables.$g-bp3) {
+				left: $year-column-width-mobile;
+			}
 		}
 
-		> li:not(:first-child):not(:last-child) {
+		> li:not(:first-child, :last-child) {
 			margin-bottom: $item-gap-desktop;
 
 			@media (max-width: variables.$g-bp3) {
@@ -67,7 +84,11 @@ $node-background-top-gap: 5rem;
 		flex-direction: column;
 		align-items: stretch;
 		width: $marker-size;
-		margin-left: calc(#{$marker-size} / -2);
+		margin-left: calc(#{$year-column-width-desktop} - #{$marker-size} / 2);
+
+		@media (max-width: variables.$g-bp3) {
+			margin-left: calc(#{$year-column-width-mobile} - #{$marker-size} / 2);
+		}
 	}
 
 	&__cap-shape {
@@ -88,23 +109,40 @@ $node-background-top-gap: 5rem;
 
 	&__node {
 		display: grid;
+
 		// minmax(0, ...) instead of a bare 1fr: 1fr means minmax(auto, 1fr), which lets the
 		// column grow to the min-content width of its item (e.g. the object meta bar's title)
 		// instead of clamping to the available space. That growth is what breaks truncation.
-		grid-template-columns: minmax(0, 1fr);
+		grid-template-columns: $year-column-width-desktop minmax(0, 1fr);
 		grid-template-areas:
-			'year'
-			'date'
-			'content';
+			'year date'
+			'.    content';
+
+		// The year sits to the right of the line, stacked above the date.
+		@media (max-width: variables.$g-bp3) {
+			grid-template-columns: $year-column-width-mobile minmax(0, 1fr);
+			grid-template-areas:
+				'.    year'
+				'.    date'
+				'.    content';
+		}
 	}
 
 	&__node-year {
 		grid-area: year;
 		align-self: baseline;
-		padding-left: $line-content-gap;
-		font-size: 4.8rem;
-		font-weight: 800;
+		padding-right: 1rem;
+
+		@include typography.sofia-pro-heading-lg;
+
+		// Taller than the font itself, so the year lines up with the top of the node's content
 		line-height: 5.6rem;
+
+		@media (max-width: variables.$g-bp3) {
+			padding-right: 0;
+			padding-left: $line-content-gap;
+			line-height: 3rem;
+		}
 	}
 
 	&__node-date {
@@ -113,12 +151,9 @@ $node-background-top-gap: 5rem;
 		position: relative;
 		display: block;
 		padding-left: $line-content-gap;
-		font-family: "Sofia Pro", sans-serif;
-		font-size: 1.5rem;
-		font-weight: 800;
-		font-style: normal;
-		line-height: 26px;
-		letter-spacing: 0;
+
+		@include typography.sofia-pro-heading;
+
 		color: colors.$color-gray-300;
 	}
 
@@ -144,6 +179,7 @@ $node-background-top-gap: 5rem;
 
 	&__node-content {
 		grid-area: content;
+
 		// Grid items default to min-width: auto, so wide content would push the column wider
 		// than the track. Together with the minmax(0, 1fr) tracks this keeps the column at the
 		// available width and lets the object title ellipse inside it.
@@ -174,19 +210,15 @@ $node-background-top-gap: 5rem;
 
 			&.c-block-timeline__node-content--has-image::before {
 				top: $node-background-top-gap;
-				bottom: 0;
-
-				@media (max-width: variables.$g-bp3) {
-					bottom: 0;
-				}
 			}
 
+			// Stops right above the object's meta bar, which sits outside the coloured band.
 			&.c-block-timeline__node-content--has-object::before {
 				top: $node-background-top-gap;
-				bottom: 10rem;
+				bottom: $object-meta-gap + $object-meta-height-desktop;
 
 				@media (max-width: variables.$g-bp3) {
-					bottom: 13rem;
+					bottom: $object-meta-gap + $object-meta-height-mobile;
 				}
 			}
 
@@ -203,28 +235,31 @@ $node-background-top-gap: 5rem;
 
 	&__node-title {
 		margin: variables.$g-spacer-unit * 4 0 0;
-		font-family: "Sofia Pro", sans-serif;
-		font-size: 1.5rem;
-		font-weight: 800;
-		font-style: normal;
-		line-height: 26px;
-		letter-spacing: 0;
+
+		@include typography.sofia-pro-heading;
 	}
 
 	&__node-description {
 		margin-top: 0.25rem;
-		font-family: "Sofia Pro", sans-serif;
-		font-weight: 500;
-		font-style: normal;
-		line-height: 28px;
-		letter-spacing: 0;
-		font-size: 18px;
 
+		@include typography.sofia-pro-body;
 	}
 
-	&__node-image-wrapper {
+	// A node's media (image or object) breaks out of the content column and starts at the very
+	// left of the block, so it also covers the year column and the gap next to the timeline line.
+	// The media itself is styled by BlockTimeline's img rule / the shared IeObjectMedia component,
+	// only its placement inside the node is timeline specific.
+	&__node-image-wrapper,
+	&__node-object-media {
 		position: relative;
 		z-index: 1;
+		margin-left: calc(-1 * (#{$year-column-width-desktop} + #{$line-content-gap}));
+		width: calc(100% + #{$year-column-width-desktop} + #{$line-content-gap});
+
+		@media (max-width: variables.$g-bp3) {
+			margin-left: calc(-1 * (#{$year-column-width-mobile} + #{$line-content-gap}));
+			width: calc(100% + #{$year-column-width-mobile} + #{$line-content-gap});
+		}
 	}
 
 	&__node-image {
@@ -239,47 +274,6 @@ $node-background-top-gap: 5rem;
 		padding-top: 0.5rem;
 	}
 
-	&__node-image-copyright {
-		margin: 0;
-		font-family: "Sofia Pro", sans-serif;
-		font-size: 10px;
-		font-weight: 500;
-		font-style: normal;
-		line-height: 15px;
-		letter-spacing: 0;
-		color: var(--c-block-timeline-copyright-color, colors.$color-gray-300);
-	}
-
-	&__node-image-description {
-		margin: 0.25rem 0 variables.$g-spacer-unit * 4;
-		font-family: "Sofia Pro", sans-serif;
-		font-size: 10px;
-		font-weight: 500;
-		font-style: normal;
-		line-height: 15px;
-		letter-spacing: 0;
-		color: colors.$color-gray-1000;
-	}
-
-	&__node-object-media {
-		position: relative;
-		z-index: 1;
-	}
-
-	&__node-object-image {
-		display: block;
-		width: 100%;
-		aspect-ratio: #{$node-media-aspect-ratio};
-		object-fit: cover;
-		object-position: top;
-	}
-
-	// The player renders its own aspect ratio (video) or fixed height (audio), it only needs the full width
-	&__node-object-player {
-		display: block;
-		width: 100%;
-	}
-
 	&__node-object-meta {
 		display: flex;
 		align-items: center;
@@ -287,32 +281,32 @@ $node-background-top-gap: 5rem;
 		gap: 1rem;
 		padding: 0.75rem 1rem;
 		background-color: colors.$color-platinum;
-		height: 6rem;
+		height: $object-meta-height-desktop;
 		margin-left: -$line-content-gap;
-		margin-top: 4rem;
+		margin-top: $object-meta-gap;
 
 		@media (max-width: variables.$g-bp3) {
-			height: 9rem;
+			height: $object-meta-height-mobile;
 			flex-direction: row-reverse;
 		}
 	}
 
-	&__node-object-cta--desktop,
-	&__node-object-cta--mobile {
+	&__node-object-cta {
 		flex: 0 0 auto;
 		white-space: nowrap;
 	}
 
-	&__node-object-cta--mobile {
+	// Below $g-bp3 the meta bar has no room for the label, so the call to action shrinks to its icon.
+	&__node-object-cta-icon {
 		display: none;
 	}
 
 	@media (max-width: variables.$g-bp3) {
-		&__node-object-cta--desktop {
+		&__node-object-cta-label {
 			display: none;
 		}
 
-		&__node-object-cta--mobile {
+		&__node-object-cta-icon {
 			display: block;
 		}
 	}
@@ -325,12 +319,13 @@ $node-background-top-gap: 5rem;
 	&__node-object-title,
 	&__node-object-maintainer-name {
 		margin: 0;
-		font-weight: 700;
 		display: block;
 	}
 
 	&__node-object-title {
 		flex-shrink: 1;
+
+		@include typography.sofia-pro-heading-sm;
 		@include typography.truncate;
 
 		@media (max-width: variables.$g-bp3) {
@@ -339,7 +334,7 @@ $node-background-top-gap: 5rem;
 	}
 
 	&__node-object-maintainer-name {
-		font-weight: 500;
+		@include typography.sofia-pro-body-xs;
 	}
 
 	&__node-object-maintainer-logo {
@@ -364,12 +359,8 @@ $node-background-top-gap: 5rem;
 		padding: 0;
 		cursor: pointer;
 		color: colors.$color-gray-300;
-		font-family: "Sofia Pro", sans-serif;
-		font-size: 1rem;
-		font-weight: 500;
-		font-style: normal;
-		line-height: 20px;
-		letter-spacing: 0;
+
+		@include typography.sofia-pro-body-xs;
 
 		&-icon {
 			width: 1rem;
@@ -377,61 +368,4 @@ $node-background-top-gap: 5rem;
 		}
 	}
 
-	&__list::before {
-		left: $year-column-width-desktop;
-	}
-
-	&__cap {
-		margin-left: calc(#{$year-column-width-desktop} - #{$marker-size} / 2);
-	}
-
-	&__node {
-		grid-template-columns: $year-column-width-desktop minmax(0, 1fr);
-		grid-template-areas:
-			'year date'
-			'.    content';
-	}
-
-	&__node-year {
-		padding-right: 1rem;
-		padding-left: 0;
-		font-size: 2.5rem;
-	}
-
-	&__node-image-wrapper,
-	&__node-object-media {
-		margin-left: calc(-1 * (#{$year-column-width-desktop} + #{$line-content-gap}));
-		width: calc(100% + #{$year-column-width-desktop} + #{$line-content-gap});
-
-		@media (max-width: variables.$g-bp3) {
-			margin-left: calc(-1 * (#{$year-column-width-mobile} + #{$line-content-gap}));
-			width: calc(100% + #{$year-column-width-mobile} + #{$line-content-gap});
-		}
-	}
-
-	@media (max-width: variables.$g-bp3) {
-		&__list::before {
-			left: $year-column-width-mobile;
-		}
-
-		&__cap {
-			margin-left: calc(#{$year-column-width-mobile} - #{$marker-size} / 2);
-		}
-
-		// The year sits to the right of the line, stacked above the date.
-		&__node {
-			grid-template-columns: $year-column-width-mobile minmax(0, 1fr);
-			grid-template-areas:
-				'.    year'
-				'.    date'
-				'.    content';
-		}
-
-		&__node-year {
-			padding-right: 0;
-			padding-left: $line-content-gap;
-			font-size: 2.5rem;
-			line-height: 3rem;
-		}
-	}
 }

@@ -7,25 +7,21 @@ import type { TimelineNodeBlockComponentState } from '~modules/content-page/type
 import { Color } from '~modules/content-page/types/content-block.types';
 import Html from '~shared/components/Html/Html';
 import { Icon } from '~shared/components/Icon/Icon';
+import { formatDateToDayMonthNameYear, getYear } from '~shared/helpers/formatters/date';
 import { SanitizePreset } from '~shared/helpers/sanitize/presets';
 import { tText } from '~shared/helpers/translation-functions';
 import { HET_ARCHIEF } from '~shared/types';
 import type { DefaultComponentProps } from '~shared/types/components';
-import { BlockTimelineObject } from './BlockTimelineObject';
 import { useGetTimelineIeObjects } from './hooks/useGetTimelineIeObjects';
 
 import './BlockTimeline.scss';
 import { BlockTimelineObjectMeta } from '~content-blocks/BlockTimeline/BlockTimelineObjectMeta.tsx';
 import { CopyrightAttribution } from '~shared/components/CopyrightAttribution';
+import { IeObjectMedia } from '~shared/components/IeObjectMedia';
 
 export interface BlockTimelineProps extends DefaultComponentProps {
 	elements: TimelineNodeBlockComponentState[];
 }
-
-const isValidDate = (date: string): boolean => !Number.isNaN(new Date(date).getTime());
-
-const getYear = (date: string): number | null =>
-	isValidDate(date) ? new Date(date).getFullYear() : null;
 
 // The timeline starts and ends with the same fixed circle/rectangle/circle cluster of markers.
 // Every node in between alternates circle, rectangle, circle, rectangle, ... based on its index.
@@ -60,15 +56,6 @@ export const BlockTimeline: FunctionComponent<BlockTimelineProps> = ({
 	);
 	const { data: ieObjectsByPid } = useGetTimelineIeObjects(pids);
 
-	const formatDate = (date: string): string =>
-		isValidDate(date)
-			? new Intl.DateTimeFormat(locale, {
-					day: 'numeric',
-					month: 'long',
-					year: 'numeric',
-				}).format(new Date(date))
-			: '';
-
 	const scrollToTop = () => {
 		containerRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
 	};
@@ -84,12 +71,9 @@ export const BlockTimeline: FunctionComponent<BlockTimelineProps> = ({
 							? node.backgroundColor
 							: undefined;
 					const markerShape = index % 2 === 0 ? 'circle' : 'rectangle';
-					const ieObject =
-						node.visualType === 'OBJECT' && node.mediaItem?.value
-							? ieObjectsByPid?.[String(node.mediaItem.value)]
-							: undefined;
 					const hasImage = node.visualType === 'IMAGE' && !!node.image;
 					const hasObject = node.visualType === 'OBJECT' && !!node.mediaItem?.value;
+					const ieObject = hasObject ? ieObjectsByPid?.[String(node.mediaItem?.value)] : undefined;
 
 					return (
 						<li
@@ -107,7 +91,7 @@ export const BlockTimeline: FunctionComponent<BlockTimelineProps> = ({
 									)}
 									aria-hidden="true"
 								/>
-								{formatDate(node.date)}
+								{formatDateToDayMonthNameYear(node.date, locale)}
 							</time>
 							<div
 								className={clsx('c-block-timeline__node-content', {
@@ -121,8 +105,13 @@ export const BlockTimeline: FunctionComponent<BlockTimelineProps> = ({
 										: undefined
 								}
 							>
-								{node.visualType === 'OBJECT' && ieObject && (
-									<BlockTimelineObject ieObject={ieObject} fallbackTitle={node.title} />
+								{ieObject && (
+									<IeObjectMedia
+										className="c-block-timeline__node-object-media"
+										ieObject={ieObject}
+										fallbackTitle={node.title}
+										locationId="block-timeline"
+									/>
 								)}
 								{node.visualType === 'IMAGE' && node.image && (
 									<div className="c-block-timeline__node-image-wrapper">
@@ -149,7 +138,7 @@ export const BlockTimeline: FunctionComponent<BlockTimelineProps> = ({
 											className="c-block-timeline__node-description"
 										/>
 									)}
-									{node.visualType === 'OBJECT' && ieObject && (
+									{ieObject && (
 										<BlockTimelineObjectMeta ieObject={ieObject} fallbackTitle={node.title} />
 									)}
 								</div>

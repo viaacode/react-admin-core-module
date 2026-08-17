@@ -1,30 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
 import { compact, keyBy } from 'es-toolkit/compat';
 import { stringifyUrl } from 'query-string';
-import type {
-	IeObjectRepresentation,
-	IeObjectType,
-} from '~shared/components/AudioOrVideoPlayer/AudioOrVideoPlayer.types';
+import type { IeObjectMediaInfo } from '~shared/components/IeObjectMedia';
 import { CustomError } from '~shared/helpers/custom-error';
 import { fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
 import { getProxyUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config';
 import { QUERY_KEYS } from '~shared/types';
-
-/**
- * The subset of the ie-object we need to render a timeline node.
- * The proxy returns camel case properties for this endpoint.
- */
-export interface TimelineIeObject {
-	schemaIdentifier: string;
-	name: string;
-	thumbnailUrl?: string;
-	dctermsFormat: IeObjectType | null;
-	duration?: string;
-	maintainerName?: string;
-	maintainerLogo?: string | null;
-	maintainerOverlay?: boolean | null;
-	pages?: { representations: IeObjectRepresentation[] }[];
-}
 
 /**
  * Resolves the ie-objects for all timeline nodes with visualType OBJECT in a single request.
@@ -33,9 +14,9 @@ export interface TimelineIeObject {
  */
 const fetchTimelineIeObjects = async (
 	pids: string[]
-): Promise<Record<string, TimelineIeObject>> => {
+): Promise<Record<string, IeObjectMediaInfo>> => {
 	try {
-		const ieObjects = await fetchWithLogoutJson<(TimelineIeObject | null)[]>(
+		const ieObjects = await fetchWithLogoutJson<(IeObjectMediaInfo | null)[]>(
 			stringifyUrl({
 				url: `${getProxyUrl()}/ie-objects`,
 				query: {
@@ -51,7 +32,7 @@ const fetchTimelineIeObjects = async (
 };
 
 export const useGetTimelineIeObjects = (pids: string[]) => {
-	return useQuery<Record<string, TimelineIeObject>>({
+	return useQuery<Record<string, IeObjectMediaInfo>>({
 		queryKey: [QUERY_KEYS.GET_IE_OBJECT, ...pids],
 		queryFn: () => fetchTimelineIeObjects(pids),
 		enabled: pids.length > 0,

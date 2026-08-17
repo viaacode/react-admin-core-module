@@ -1,4 +1,4 @@
-import type { CheckboxProps, SelectOption } from '@viaa/avo2-components';
+import type { SelectOption } from '@viaa/avo2-components';
 import { GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF } from '~modules/content-page/const/get-color-options';
 import type { FileUploadProps } from '~shared/components/FileUpload/FileUpload';
 import { tText } from '~shared/helpers/translation-functions';
@@ -16,6 +16,7 @@ import {
 	BLOCK_FIELD_DEFAULTS,
 	BLOCK_STATE_DEFAULTS,
 	COPYRIGHT_FIELDS,
+	COPYRIGHT_STATE,
 	FILE_FIELD,
 	TEXT_FIELD,
 } from '../defaults';
@@ -62,9 +63,7 @@ export const INITIAL_TIMELINE_COMPONENTS_STATE = (): TimelineNodeBlockComponentS
 		mediaItem: undefined,
 		image: undefined,
 		imageAlt: '',
-		imageCaptionCopyright: '',
-		imageCaptionCopyrightIconVisible: true,
-		imageCaptionDescription: '',
+		...COPYRIGHT_STATE(),
 		backgroundColor: Color.Transparent,
 	},
 ];
