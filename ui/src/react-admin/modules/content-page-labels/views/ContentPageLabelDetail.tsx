@@ -4,6 +4,7 @@ import type { FunctionComponent } from 'react';
 import React, { useCallback, useEffect, useState } from 'react';
 import { AdminConfigManager } from '~core/config/config.class';
 import { Color, CustomBackground } from '~modules/content-page/types/content-block.types';
+import { CONTENT_PAGE_LABEL_COLORS_INVISIBLE_ON_WHITE } from '~modules/content-page-labels/content-page-label.const';
 import { ContentPageLabelService } from '~modules/content-page-labels/content-page-label.service';
 import type { DefaultComponentProps } from '~modules/shared/types/components';
 import { GET_CONTENT_TYPE_LABELS } from '~shared/components/ContentPicker/ContentPicker.const';
@@ -26,10 +27,6 @@ import { App } from '../../../../../scripts/translation.types';
 import type { ContentPageLabel } from '../content-page-label.types';
 
 import './ContentPageLabelDetail.scss';
-
-// The only background colours that leave the swatch invisible against the white detail page, and so
-// the only ones that get a border. Everything else shows its own colour, as the design intends
-const COLORS_INVISIBLE_ON_A_WHITE_PAGE: string[] = [Color.Transparent, Color.White, Color.Platinum];
 
 type ContentPageLabelDetailProps = {
 	contentPageLabelId: string;
@@ -154,7 +151,7 @@ export const ContentPageLabelDetail: FunctionComponent<ContentPageLabelDetailPro
 							<div
 								className={clsx('c-content-page-label-detail__color-swatch', {
 									'c-content-page-label-detail__color-swatch--bordered':
-										COLORS_INVISIBLE_ON_A_WHITE_PAGE.includes(swatchBackground),
+										CONTENT_PAGE_LABEL_COLORS_INVISIBLE_ON_WHITE.includes(swatchBackground),
 								})}
 								// Not backgroundColor: one of the options is a gradient
 								style={{ background: swatchBackground }}
