@@ -341,41 +341,49 @@ $hero-carousel-search-radius-desktop: 3.2rem;
 			}
 		}
 
-		&-swiper {
-			overflow: visible !important;
+		&-viewport {
+			position: relative;
+			overflow: visible;
+		}
 
-			.swiper-wrapper {
-				height: 32rem !important;
-				align-items: flex-end;
+		&-track {
+			display: flex;
+			gap: 1.2rem; // matches GAP_PX in BlockHeroCarousel.utils.ts
+			align-items: flex-end;
+			height: 32rem;
 
-				// Matches the &-slide transition below so the slide-into-place motion and
-				// the grow/shrink read as one combined movement, not two differently-eased ones.
-				--swiper-wrapper-transition-timing-function: ease-out;
+			// Matches the &-slide transition below so the slide-into-place motion and
+			// the grow/shrink read as one combined movement, not two differently-eased ones.
+			transition: transform 1.3s ease-out;
+
+			// Suppresses transitions during an instant recenter jump or a resize-driven
+			// px-per-rem resync, so those DOM mutations land without animating.
+			&.is-instant,
+			&.is-instant .c-block-hero-carousel__carousel-slide {
+				transition: none;
 			}
 		}
 
 		&-slide {
-			// !important throughout: Swiper's own base stylesheet (swiper/css) sets
-			// `.swiper-slide { width: 100%; height: 100%; }` globally, which otherwise
-			// wins this cascade since specificity ties and it can load after this file.
-			display: flex !important;
+			display: flex;
 			flex-direction: column;
-			height: $slide-height !important;
-			width: 12rem !important;
-			transition: height 1.3s ease-out, width 1.3s ease-out, border 1.3s ease-out !important;
+			flex-shrink: 0;
+			height: $slide-height;
+			width: 12rem;
+			transition: height 1.3s ease-out, width 1.3s ease-out, border 1.3s ease-out;
 			border: 3px solid colors.$color-gray-1000;
 
 			@each $format, $width in $hero-carousel-format-widths {
 				&--#{$format} {
-					width: $width !important;
+					width: $width;
 				}
 			}
 
 			// Compound selector (two classes) so this reliably outranks the single-class
 			// format-width rules above, regardless of declaration order.
 			&.c-block-hero-carousel__carousel-slide--active {
-				height: 32rem !important;
-				width: 51.2rem !important;
+				height: 32rem;
+				width: 51.2rem;
 				border: 6px solid colors.$color-ocean-green;
 			}
 

@@ -1,10 +1,7 @@
 import type { RefObject } from 'react';
 import { flushSync } from 'react-dom';
-import type SwiperController from 'swiper';
 import { ObjectType } from '~shared/helpers/map-format-to-type.ts';
 
-// Keep in sync with the sizes in BlockHeroCarousel.scss.
-const ACTIVE_WIDTH_REM = 51.2;
 const FALLBACK_THUMB_WIDTH_REM = 12;
 const FORMAT_THUMB_WIDTHS_REM: Record<ObjectType, number> = {
 	[ObjectType.video]: 28,
@@ -19,63 +16,41 @@ const FORMAT_THUMB_WIDTHS_REM: Record<ObjectType, number> = {
 
 export const ACTIVE_SLIDE_CLASS = 'c-block-hero-carousel__carousel-slide--active';
 
+// Keep in sync with &__carousel-track's `gap: 1.2rem` in BlockHeroCarousel.scss.
+export const GAP_PX = 12;
+
 interface StripItem {
 	dctermsFormat: ObjectType;
 }
 
-type Direction = 'next' | 'prev';
-
-const getThumbWidthRem = (format: ObjectType | undefined): number =>
-	(format && FORMAT_THUMB_WIDTHS_REM[format]) || FALLBACK_THUMB_WIDTH_REM;
-
-// How much translate needs to be nudged to keep the new active slide flush-left once the
-// outgoing slide (currently active, at ACTIVE_WIDTH_REM) shrinks back to its own rest width.
-const getShrinkCorrectionPx = (outgoingFormat: ObjectType | undefined): number => {
-	const remToPx = Number.parseFloat(getComputedStyle(document.documentElement).fontSize);
-	return (ACTIVE_WIDTH_REM - getThumbWidthRem(outgoingFormat)) * remToPx;
-};
-
-// Swiper caches slidesGrid/snapGrid and only recomputes them on specific triggers -- it
-// doesn't know our CSS transition (or a recenter's instant swap) just resized a slide.
-// Refreshing them and re-snapping translate to the given index keeps the *next* navigation
-// targeting correctly instead of using a stale layout.
-function refreshGridAndResync(swiperInstance: SwiperController, index: number): void {
-	swiperInstance.updateSlides();
-	swiperInstance.updateSlidesClasses();
-	swiperInstance.slideTo(index, 0, false);
+export function getThumbWidthRem(format: ObjectType | undefined): number {
+	return (format && FORMAT_THUMB_WIDTHS_REM[format]) || FALLBACK_THUMB_WIDTH_REM;
 }
 
-// Runs `fn` (a DOM mutation, e.g. a class swap) with each element's CSS transition
-// suppressed, so any resize it triggers lands instantly instead of animating. Suppression
-// must be set with `important` priority -- the stylesheet's own transition rule is
-// `!important` (needed to beat swiper's base CSS), which otherwise wins over a plain inline
-// style. The forced offsetHeight read in between is required too: without it the browser
-// can coalesce the whole none-then-normal flip into one frame and animate anyway.
-function withoutTransition(elements: (HTMLElement | undefined)[], fn: () => void): void {
-	for (const el of elements) {
-		el?.style.setProperty('transition', 'none', 'important');
-	}
-	fn();
-	for (const el of elements) {
-		void el?.offsetHeight;
-	}
-	for (const el of elements) {
-		el?.style.removeProperty('transition');
-	}
+export function getPxPerRem(): number {
+	return Number.parseFloat(getComputedStyle(document.documentElement).fontSize);
 }
 
-// Swiper's own `loop: true` corrupts its index bookkeeping once slidesPerView="auto" is
-// combined with variable slide widths (loopFix physically reorders DOM nodes on the fly).
-// We fake "infinite" scrolling instead: a static strip of repeated copies of the real
-// elements, starting in the middle, with a 0-duration recenter jump whenever navigation
-// comes within VISIBLE_SLIDES_BUFFER slides of either end -- the landing slide is
-// content-identical, so the jump itself is invisible.
+// A CSS transition can't animate to a slide that doesn't exist yet, so wrapping smoothly from
+// last-to-first (or vice versa) needs real duplicate slides to slide into. Rather than tiling
+// whole extra copies of the item list (wasteful once it's long), we clone only the boundary
+// window each direction needs, then recenter -- an invisible 0-duration jump, since the
+// landing slide is content-identical -- once navigation drifts within buffer range of an end.
 //
-// VISIBLE_SLIDES_BUFFER just needs to comfortably exceed the most slides that could ever be
-// on screen at once, so recentering never has to happen mid-viewport. Worst case is a very
-// wide viewport showing only the smallest (12rem/192px) non-active slides: even a 4K-wide
-// screen only fits roughly (3840 - 819) / 192 ≈ 15 of those beside the active slide.
-const VISIBLE_SLIDES_BUFFER = 24;
+// The active slide is always flush-left, so only slides *after* it are ever visible, making
+// the two directions asymmetric:
+// - FORWARD_BUFFER must exceed the most slides that could ever be visible at once (a 4K screen
+//   showing only the smallest 12rem slides fits ~15), so the viewport never runs out of real
+//   content before a recenter kicks in.
+// - BACKWARD_BUFFER isn't filling anything visible; it only needs to survive a burst of rapid
+//   clicks before the next `transitionend` gets a chance to recenter (retargeting an in-flight
+//   transition doesn't fire one of its own).
+const FORWARD_BUFFER = 24;
+const BACKWARD_BUFFER = 8;
+
+function mod(n: number, m: number): number {
+	return ((n % m) + m) % m;
+}
 
 export interface InfiniteStrip<T> {
 	strip: T[];
@@ -84,196 +59,132 @@ export interface InfiniteStrip<T> {
 }
 
 export function buildInfiniteStrip<T>(items: T[]): InfiniteStrip<T> {
-	if (items.length === 0) {
+	const itemsLength = items.length;
+	if (itemsLength === 0) {
 		return { strip: items, startIndex: 0, itemsLength: 0 };
 	}
-	let copies = Math.ceil((items.length + 2 * VISIBLE_SLIDES_BUFFER) / items.length);
-	if (copies < 3) {
-		copies = 3;
-	}
-	if (copies % 2 === 0) {
-		copies += 1; // keep an odd count so there's one exact middle copy to start/recenter into
-	}
-	const strip = Array.from({ length: copies * items.length }, (_, i) => items[i % items.length]);
-	const startIndex = ((copies - 1) / 2) * items.length;
-	return { strip, startIndex, itemsLength: items.length };
-}
-
-// Patches slideNext/slidePrev on the swiper instance so we always know which direction
-// triggered the current navigation, regardless of who calls it (our own buttons, the
-// parent's CarouselButtons, or a future touch swipe) -- handleBeforeSlideChangeStart needs
-// it but isn't given the target index.
-export function handleSwiperMount(
-	swiperInstance: SwiperController,
-	pendingDirectionRef: RefObject<Direction>,
-	setControlledSwiper: (swiperInstance: SwiperController) => void
-): void {
-	const originalSlideNext = swiperInstance.slideNext.bind(swiperInstance);
-	const originalSlidePrev = swiperInstance.slidePrev.bind(swiperInstance);
-	swiperInstance.slideNext = (...args) => {
-		pendingDirectionRef.current = 'next';
-		return originalSlideNext(...args);
-	};
-	swiperInstance.slidePrev = (...args) => {
-		pendingDirectionRef.current = 'prev';
-		return originalSlidePrev(...args);
-	};
-	setControlledSwiper(swiperInstance);
-}
-
-// Swiper's target aims at the current active slide's flush-left position using its size
-// as-is, so it can't account for that slide shrinking over the next 0.5s. That only throws
-// off the new active slide's position when the shrinking slide sits before it in flow order
-// (navigating "next"); "prev" needs no correction.
-export function handleBeforeSlideChangeStart<T extends StripItem>(
-	swiperInstance: SwiperController,
-	strip: T[],
-	isRecenteringRef: RefObject<boolean>,
-	pendingDirectionRef: RefObject<Direction>,
-	pendingCorrectionPxRef: RefObject<number>
-): void {
-	if (isRecenteringRef.current) {
-		return;
-	}
-	if (pendingDirectionRef.current !== 'next') {
-		pendingCorrectionPxRef.current = 0;
-		return;
-	}
-	pendingCorrectionPxRef.current = getShrinkCorrectionPx(
-		strip[swiperInstance.activeIndex]?.dctermsFormat
+	const tailClones = Array.from(
+		{ length: BACKWARD_BUFFER },
+		(_, i) => items[mod(i - BACKWARD_BUFFER, itemsLength)]
 	);
+	const headClones = Array.from({ length: FORWARD_BUFFER }, (_, i) => items[i % itemsLength]);
+	return {
+		strip: [...tailClones, ...items, ...headClones],
+		startIndex: BACKWARD_BUFFER,
+		itemsLength,
+	};
 }
 
-// The correction is applied here, not consumed, because Swiper re-emits setTranslate with
-// its own uncorrected value on every slide image load while a transition is still in
-// flight -- consuming it after one use would let such a call win.
-export function handleSetTranslate(
-	swiperInstance: SwiperController,
-	translate: number,
-	pendingCorrectionPxRef: RefObject<number>
-): void {
-	const x = translate + pendingCorrectionPxRef.current - swiperInstance.cssOverflowAdjustment();
-	swiperInstance.wrapperEl.style.transform = `translate3d(${x}px, 0px, 0px)`;
-}
-
-export function handleActiveIndexChange(
-	swiperInstance: SwiperController,
-	isRecenteringRef: RefObject<boolean>,
-	activeIndexRef: RefObject<number>,
-	setActiveIndex: (index: number) => void
-): void {
-	if (isRecenteringRef.current) {
-		return;
+// The translateX magnitude that brings targetIndex flush left once navigation settles, summing
+// every preceding slide's rest width (targetIndex itself -- the only active one -- is excluded).
+// Since every slide's width transition shares the track's transform duration/easing, both stay
+// in sync automatically at every frame -- no runtime correction needed.
+export function computeOffsetPx<T extends StripItem>(
+	strip: T[],
+	targetIndex: number,
+	pxPerRem: number
+): number {
+	let offset = 0;
+	for (let i = 0; i < targetIndex; i++) {
+		offset += getThumbWidthRem(strip[i]?.dctermsFormat) * pxPerRem + GAP_PX;
 	}
-	activeIndexRef.current = swiperInstance.activeIndex;
-	setActiveIndex(swiperInstance.activeIndex);
+	return offset;
 }
 
-export interface TransitionEndDeps {
+// Runs `fn` with `el`'s transitions suppressed via the `is-instant` class, so the mutation
+// lands instantly. The forced offsetHeight read in between is required: without it the browser
+// can coalesce the whole class toggle into one frame and animate anyway.
+function withoutTransition(el: HTMLElement | null | undefined, fn: () => void): void {
+	el?.classList.add('is-instant');
+	fn();
+	void el?.offsetHeight;
+	el?.classList.remove('is-instant');
+}
+
+export interface RecenterDeps<T extends StripItem> {
+	strip: T[];
 	startIndex: number;
 	itemsLength: number;
-	stripLength: number;
-	isRecenteringRef: RefObject<boolean>;
 	activeIndexRef: RefObject<number>;
-	pendingCorrectionPxRef: RefObject<number>;
+	trackRef: RefObject<HTMLDivElement | null>;
 	setActiveIndex: (index: number) => void;
 	setSettledActiveIndex: (index: number) => void;
 }
 
-// The active slide's own content (as opposed to its grow/shrink sizing, which must react the
-// instant navigation starts) should only render once a navigation has fully settled -- this is
-// only ever updated here and by the instant recenter jump below, never on navigation start.
-export function handleTransitionEnd(
-	swiperInstance: SwiperController,
-	deps: TransitionEndDeps
-): void {
+function recenterIfNeeded<T extends StripItem>(deps: RecenterDeps<T>): void {
 	const {
+		strip,
 		startIndex,
 		itemsLength,
-		stripLength,
-		isRecenteringRef,
 		activeIndexRef,
-		pendingCorrectionPxRef,
-		setActiveIndex,
-		setSettledActiveIndex,
-	} = deps;
-	pendingCorrectionPxRef.current = 0;
-	refreshGridAndResync(swiperInstance, swiperInstance.activeIndex);
-	setSettledActiveIndex(swiperInstance.activeIndex);
-	recenterIfNeeded(swiperInstance, {
-		startIndex,
-		itemsLength,
-		stripLength,
-		isRecenteringRef,
-		activeIndexRef,
-		setActiveIndex,
-		setSettledActiveIndex,
-	});
-}
-
-function recenterIfNeeded(
-	swiperInstance: SwiperController,
-	deps: {
-		startIndex: number;
-		itemsLength: number;
-		stripLength: number;
-		isRecenteringRef: RefObject<boolean>;
-		activeIndexRef: RefObject<number>;
-		setActiveIndex: (index: number) => void;
-		setSettledActiveIndex: (index: number) => void;
-	}
-): void {
-	const {
-		startIndex,
-		itemsLength,
-		stripLength,
-		isRecenteringRef,
-		activeIndexRef,
+		trackRef,
 		setActiveIndex,
 		setSettledActiveIndex,
 	} = deps;
 	if (itemsLength === 0) {
 		return;
 	}
-	const current = swiperInstance.activeIndex;
-	const nearStart = current < VISIBLE_SLIDES_BUFFER;
-	const nearEnd = current >= stripLength - VISIBLE_SLIDES_BUFFER;
+	const current = activeIndexRef.current;
+	const nearStart = current < BACKWARD_BUFFER;
+	const nearEnd = current >= strip.length - FORWARD_BUFFER;
 	if (!nearStart && !nearEnd) {
 		return;
 	}
-	const target = startIndex + (current % itemsLength);
+	// startIndex isn't a multiple of itemsLength (the strip clones a boundary window, not whole
+	// item-list copies), so the target must be re-based relative to startIndex's own phase.
+	const target = startIndex + mod(current - startIndex, itemsLength);
 	if (target === current) {
 		return;
 	}
-	isRecenteringRef.current = true;
-	swiperInstance.slideTo(target, 0, false);
-	activeIndexRef.current = target;
-	// The active class is about to jump from the old node to the new one -- but the target
-	// is content-identical, so nothing should visibly resize.
-	const outgoingEl = swiperInstance.slides[current] as HTMLElement | undefined;
-	const incomingEl = swiperInstance.slides[target] as HTMLElement | undefined;
-	withoutTransition([outgoingEl, incomingEl], () =>
+	withoutTransition(trackRef.current, () => {
 		flushSync(() => {
+			activeIndexRef.current = target;
 			setActiveIndex(target);
 			setSettledActiveIndex(target);
-		})
-	);
-	// The recenter's own instant resize (outgoing shrinks, incoming grows) is just as
-	// disruptive to the cached grid as a real navigation's resize.
-	refreshGridAndResync(swiperInstance, target);
-	isRecenteringRef.current = false;
+		});
+	});
 }
 
-// Navigates to a clicked slide with the same corrected animation as the next/prev buttons.
-export function goToSlide(
-	controlledSwiper: SwiperController | null,
-	targetIndex: number,
-	activeIndexRef: RefObject<number>,
-	pendingDirectionRef: RefObject<Direction>
+// Attach as the track's onTransitionEnd. e.target !== e.currentTarget filters out bubbled
+// width/height/border transitionend events from child slides -- only the track's own transform
+// transition should trigger settling logic.
+export function handleTrackTransitionEnd<T extends StripItem>(
+	e: { target: EventTarget | null; currentTarget: EventTarget | null; propertyName: string },
+	deps: RecenterDeps<T>
 ): void {
-	if (!controlledSwiper || targetIndex === activeIndexRef.current) {
+	if (e.target !== e.currentTarget || e.propertyName !== 'transform') {
 		return;
 	}
-	pendingDirectionRef.current = targetIndex > activeIndexRef.current ? 'next' : 'prev';
-	controlledSwiper.slideTo(targetIndex);
+	deps.setSettledActiveIndex(deps.activeIndexRef.current);
+	recenterIfNeeded(deps);
+}
+
+// Navigates to the given index with the same animated transition as the next/prev buttons.
+export function goToSlide(
+	targetIndex: number,
+	activeIndexRef: RefObject<number>,
+	setActiveIndex: (index: number) => void
+): void {
+	if (targetIndex === activeIndexRef.current) {
+		return;
+	}
+	activeIndexRef.current = targetIndex;
+	setActiveIndex(targetIndex);
+}
+
+// Re-syncs pxPerRem if the root font-size changed (e.g. a responsive html{font-size}
+// breakpoint in the embedding app), snapping instantly since this is a layout fix, not a
+// user-driven navigation.
+export function handleWindowResize(
+	pxPerRemRef: RefObject<number>,
+	trackRef: RefObject<HTMLDivElement | null>,
+	setPxPerRem: (pxPerRem: number) => void
+): void {
+	const next = getPxPerRem();
+	if (next === pxPerRemRef.current) {
+		return;
+	}
+	withoutTransition(trackRef.current, () => {
+		flushSync(() => setPxPerRem(next));
+	});
 }
