@@ -17,6 +17,8 @@ const PLAYABLE_FORMATS: IeObjectType[] = [
 	IeObjectType.film,
 ];
 
+const AUDIO_FORMATS: IeObjectType[] = [IeObjectType.audio, IeObjectType.audiofragment];
+
 export interface IeObjectMediaProps extends DefaultComponentProps {
 	ieObject: IeObjectMediaInfo;
 	// Shown as the image alt text when the object itself has no name
@@ -37,7 +39,8 @@ export const IeObjectMedia: FunctionComponent<IeObjectMediaProps> = ({
 	locationId,
 }) => {
 	const [isPaused, setIsPaused] = useState<boolean>(true);
-	const AudioOrVideoPlayer = AdminConfigManager.getConfig().components?.audioOrVideoPlayer;
+	const { audioOrVideoPlayer: AudioOrVideoPlayer, defaultAudioStill } =
+		AdminConfigManager.getConfig().components;
 
 	// The player only needs the first representation that contains a file, same as the object detail page
 	const representation = (ieObject.pages || [])
@@ -50,6 +53,13 @@ export const IeObjectMedia: FunctionComponent<IeObjectMediaProps> = ({
 		!!ieObject.dctermsFormat &&
 		PLAYABLE_FORMATS.includes(ieObject.dctermsFormat);
 
+	// The thumbnail the proxy returns for audio is a signed link to an ugly speaker icon, so we
+	// show the client's own waveform image instead. Same as the client does for its media cards.
+	const thumbnailUrl =
+		ieObject.dctermsFormat && AUDIO_FORMATS.includes(ieObject.dctermsFormat)
+			? defaultAudioStill
+			: ieObject.thumbnailUrl;
+
 	return (
 		<div className={clsx('c-ie-object-media', className)}>
 			{isPlayable && AudioOrVideoPlayer ? (
@@ -61,7 +71,7 @@ export const IeObjectMedia: FunctionComponent<IeObjectMediaProps> = ({
 					schemaIdentifier={ieObject.schemaIdentifier}
 					maintainerLogo={ieObject.maintainerOverlay ? ieObject.maintainerLogo : undefined}
 					cuePoints={undefined}
-					poster={ieObject.thumbnailUrl}
+					poster={thumbnailUrl}
 					paused={isPaused}
 					onPlay={() => setIsPaused(false)}
 					onPause={() => setIsPaused(true)}
@@ -69,9 +79,9 @@ export const IeObjectMedia: FunctionComponent<IeObjectMediaProps> = ({
 					onMediaReady={() => undefined}
 				/>
 			) : (
-				ieObject.thumbnailUrl && (
+				thumbnailUrl && (
 					<img
-						src={ieObject.thumbnailUrl}
+						src={thumbnailUrl}
 						alt={ieObject.name || fallbackTitle}
 						className="c-ie-object-media__image"
 					/>
