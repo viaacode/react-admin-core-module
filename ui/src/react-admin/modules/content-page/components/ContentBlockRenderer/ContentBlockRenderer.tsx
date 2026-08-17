@@ -47,9 +47,8 @@ const ContentBlockRenderer: FunctionComponent<ContentBlockPreviewProps> = ({
 	const blockState = contentBlockConfig?.block?.state as ContentBlockState | undefined;
 	const componentState = contentBlockConfig?.components?.state;
 	const overlayNextBlock = Array.isArray(componentState)
-		? blockState?.overlayNextBlock
-		: ((componentState as Partial<BlockBreadcrumbsProps>).overlayNextBlock ??
-			blockState?.overlayNextBlock);
+		? false
+		: (componentState as Partial<BlockBreadcrumbsProps>).overlayNextBlock;
 	const pageWidth =
 		contentPageInfo.contentWidth?.toUpperCase() ||
 		AdminConfigManager.getConfig().contentPage?.defaultPageWidth ||

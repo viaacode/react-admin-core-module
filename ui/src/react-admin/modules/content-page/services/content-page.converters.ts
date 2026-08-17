@@ -1,12 +1,12 @@
-import { compact, omit, sortBy } from 'es-toolkit';
+import { compact, sortBy } from 'es-toolkit';
 import { isEmpty } from 'es-toolkit/compat';
 import { ToastType } from '~core/config/config.types';
 import { CONTENT_BLOCK_CONFIG_MAP } from '~modules/content-page/const/content-block-config-map';
 import { TEMP_BLOCK_ID_PREFIX } from '~modules/content-page/const/content-page.consts';
-import {
-	type ContentBlockConfig,
+import type {
+	ContentBlockConfig,
 	ContentBlockType,
-	type DbContentBlock,
+	DbContentBlock,
 } from '~modules/content-page/types/content-block.types';
 import type {
 	ContentPageInfo,
@@ -75,19 +75,9 @@ export function convertDbContentBlockToContentBlockConfig(
 			}
 			const cleanConfig = configForType(contentBlock.position);
 
-			const rawComponentState =
-				type === ContentBlockType.Breadcrumbs && !Array.isArray(components)
-					? {
-							...components,
-							overlayNextBlock:
-								(components as { overlayNextBlock?: boolean }).overlayNextBlock ??
-								block?.overlayNextBlock ??
-								false,
-						}
-					: components;
-			const componentState = Array.isArray(rawComponentState)
-				? rawComponentState
-				: { ...cleanConfig.components.state, ...rawComponentState };
+			const componentState = Array.isArray(components)
+				? components
+				: { ...cleanConfig.components.state, ...components };
 
 			return {
 				...cleanConfig,
@@ -125,10 +115,7 @@ export function convertContentPageInfoToDbContentPage(
 				type: contentBlock.type,
 				errors: contentBlock.errors,
 				position: contentBlock.position,
-				block:
-					contentBlock.type === ContentBlockType.Breadcrumbs
-						? omit(contentBlock.block.state, ['overlayNextBlock'])
-						: contentBlock.block.state,
+				block: contentBlock.block.state,
 				components: contentBlock.components.state,
 			};
 		}),

@@ -264,8 +264,6 @@ export interface DefaultContentBlockState {
 	margin: PaddingFieldState;
 	userGroupIds: number[];
 	fullWidth?: boolean;
-	/** @deprecated ARC-3822 initially stored this component-specific value in the block state. */
-	overlayNextBlock?: boolean;
 	anchor?: string; // Contains an id that the user can enter, so they can link to this block using the anchor-block buttons
 }
 
