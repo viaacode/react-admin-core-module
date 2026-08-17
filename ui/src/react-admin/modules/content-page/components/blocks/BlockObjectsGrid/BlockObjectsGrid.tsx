@@ -5,7 +5,7 @@ import clsx from 'clsx';
 import type { FunctionComponent, ReactElement, ReactNode } from 'react';
 import { useEffect, useState } from 'react';
 import { BlockHeading } from '~content-blocks/BlockHeading';
-import { ItemsService } from '~modules/item/items.service.ts';
+import { IeObjectsService } from '~modules/ie-objects/ie-objects.service.ts';
 import { SmartLink } from '~modules/shared/components/SmartLink/SmartLink';
 import { Icon } from '~shared/components/Icon';
 import { Link } from '~shared/components/Link';
@@ -127,7 +127,7 @@ export const BlockObjectsGrid: FunctionComponent<BlockObjectsGridProps> = ({
 				<SmartLink
 					action={{
 						type: AvoCoreContentPickerType.INTERNAL_LINK,
-						value: ItemsService.getObjectDetailPath(item.schemaIdentifier),
+						value: IeObjectsService.getObjectDetailPath(item.schemaIdentifier),
 					}}
 					removeStyles={false}
 					className="c-block-objects-grid__tile-link"

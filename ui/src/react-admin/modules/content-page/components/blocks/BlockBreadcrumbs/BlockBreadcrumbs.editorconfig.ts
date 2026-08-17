@@ -16,6 +16,7 @@ import { HET_ARCHIEF } from '~shared/types';
 
 export const INITIAL_BREADCRUMBS_COMPONENTS_STATE = () => ({
 	foregroundColor: GET_FOREGROUND_COLOR_OPTIONS_ARCHIEF()[0].value,
+	overlayNextBlock: false,
 	elements: [
 		{
 			label: '',
@@ -33,7 +34,6 @@ export const INITIAL_BREADCRUMBS_BLOCK_STATE = (): DefaultContentBlockState => (
 			bottom: 'none',
 		},
 	}),
-	overlayNextBlock: false,
 });
 
 export const CONTENT_BREADCRUMBS_CONFIG = (position = 0): ContentBlockConfig => ({
@@ -58,6 +58,16 @@ export const CONTENT_BREADCRUMBS_CONFIG = (position = 0): ContentBlockConfig => 
 					options: GET_FOREGROUND_COLOR_OPTIONS_ARCHIEF(),
 					defaultValue: GET_FOREGROUND_COLOR_OPTIONS_ARCHIEF()[0],
 				},
+			},
+			overlayNextBlock: {
+				editorType: ContentBlockEditor.Checkbox,
+				editorProps: {
+					label: tText(
+						'modules/content-page/components/blocks/block-breadcrumbs/block-breadcrumbs___overlay-op-andere-contentblokken',
+						{},
+						[HET_ARCHIEF]
+					),
+				} as CheckboxProps,
 			},
 			elements: {
 				label: 'breadcrumb',
@@ -104,18 +114,6 @@ export const CONTENT_BREADCRUMBS_CONFIG = (position = 0): ContentBlockConfig => 
 	},
 	block: {
 		state: INITIAL_BREADCRUMBS_BLOCK_STATE(),
-		fields: {
-			...BLOCK_FIELD_DEFAULTS(),
-			overlayNextBlock: {
-				editorType: ContentBlockEditor.Checkbox,
-				editorProps: {
-					label: tText(
-						'modules/content-page/components/blocks/block-breadcrumbs/block-breadcrumbs___overlay-op-andere-contentblokken',
-						{},
-						[HET_ARCHIEF]
-					),
-				} as CheckboxProps,
-			},
-		},
+		fields: BLOCK_FIELD_DEFAULTS(),
 	},
 });
