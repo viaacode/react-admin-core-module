@@ -115,7 +115,11 @@ export const BlockObjectsGrid: FunctionComponent<BlockObjectsGridProps> = ({
 	};
 
 	const renderTile = (item: ObjectsGridItem, isFixed: boolean): ReactElement => {
-		const iconName = item.type ? getIconFromObjectType(item.type) : undefined;
+		// Same signal the search page uses to decide between the plain and the struck-through
+		// ("no-…") type icon: the search proxy only resolves a thumbnail for objects whose
+		// essence the current user may see.
+		const isAccessible = Boolean(item.thumbnailUrl);
+		const iconName = item.type ? getIconFromObjectType(item.type, isAccessible) : undefined;
 
 		return (
 			<li
