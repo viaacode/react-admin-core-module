@@ -92,7 +92,7 @@ const CUE_POINT_FIELD = (label: string, error: string) =>
 export const HERO_CAROUSEL_CONFIG = (position = 0): ContentBlockConfig => ({
 	position,
 	name: tText(
-		'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel___overzicht-met-carrousel'
+		'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel___hero-carousel'
 	),
 	type: ContentBlockType.HeroCarousel,
 	components: {
