@@ -15,7 +15,7 @@ export const BlockHeroCarouselInactiveSlide: FunctionComponent<
 	if (isLoading) {
 		return (
 			<div className={clsx('c-block-hero-carousel__carousel-slide-placeholder')}>
-				<Spinner size="large" locationId={`hero-carousel-slide__${item.schemaIdentifier}`} />
+				<Spinner size="large" locationId={'hero-carousel-slide'} />
 			</div>
 		);
 	}

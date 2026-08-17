@@ -15,6 +15,7 @@ $hero-carousel-format-widths: (
 
 $background-image-height: 80%;
 $slide-height: 16rem;
+$ken-burns-duration: 15s;
 
 $hero-carousel-search-height-mobile: 4.8rem;
 $hero-carousel-search-height-desktop: 6.4rem;
@@ -22,6 +23,26 @@ $hero-carousel-search-radius-desktop: 3.2rem;
 
 .c-content-page-preview:has(.c-content-block__hero-carousel) {
 	overflow: visible !important;
+}
+
+@keyframes hero-carousel-ken-burns {
+	from {
+		transform: scale(1);
+	}
+
+	to {
+		transform: scale(1.15);
+	}
+}
+
+@keyframes hero-carousel-progress-fill {
+	from {
+		width: 0%;
+	}
+
+	to {
+		width: 100%;
+	}
 }
 
 .c-block-hero-carousel {
@@ -392,16 +413,70 @@ $hero-carousel-search-radius-desktop: 3.2rem;
 			}
 
 			&-image {
+				position: relative;
 				flex: auto;
 				width: 100%;
 				height: 100%;
 				overflow: hidden;
 
-				> img {
+				> img,
+				&-media img {
 					object-fit: cover;
 					object-position: top center;
 					width: 100%;
 					height: 100%;
+				}
+
+				&-media img {
+					animation: hero-carousel-ken-burns $ken-burns-duration linear forwards;
+
+					@media (prefers-reduced-motion: reduce) {
+						animation: none;
+					}
+				}
+
+				&-controls {
+					position: absolute;
+					left: variables.$g-spacer-unit;
+					right: variables.$g-spacer-unit;
+					bottom: variables.$g-spacer-unit;
+					z-index: 1;
+					display: flex;
+					align-items: stretch;
+					gap: variables.$g-spacer-unit;
+
+					.c-button {
+						margin-bottom: 0;
+						width: 4.8rem !important;
+					}
+				}
+
+				&-progress {
+					flex: 1;
+					display: flex;
+					align-items: center;
+					padding: 0 (variables.$g-spacer-unit * 2);
+					border-radius: 999px;
+					overflow: hidden;
+					background-color: colors.$color-gray-1000;
+
+					&-fill {
+						height: 0.4rem;
+						width: 0;
+						border-radius: 999px;
+						background-color: colors.$color-ocean-green;
+						animation: hero-carousel-progress-fill $ken-burns-duration linear forwards;
+					}
+				}
+
+				&--paused {
+					.c-block-hero-carousel__carousel-slide-image-media img {
+						animation-play-state: paused;
+					}
+
+					.c-block-hero-carousel__carousel-slide-image-progress-fill {
+						animation-play-state: paused;
+					}
 				}
 			}
 

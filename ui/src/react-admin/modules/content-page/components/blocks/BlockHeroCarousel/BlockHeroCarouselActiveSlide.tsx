@@ -1,5 +1,10 @@
-import { FlowPlayer, type FlowPlayerProps, getValidStartAndEnd } from '@meemoo/react-components';
-import { Image, Spinner } from '@viaa/avo2-components';
+import {
+	Button,
+	FlowPlayer,
+	type FlowPlayerProps,
+	getValidStartAndEnd,
+} from '@meemoo/react-components';
+import { type IconName, Image, Spinner } from '@viaa/avo2-components';
 import clsx from 'clsx';
 import { isNil } from 'es-toolkit';
 import React, { type FunctionComponent, type ReactElement, useState } from 'react';
@@ -7,12 +12,15 @@ import type { HeroCarouselSlideItem } from '~content-blocks/BlockHeroCarousel/Bl
 import { AdminConfigManager } from '~core/config';
 import { Color } from '~modules/content-page/types/content-block.types.ts';
 import type { DefaultComponentProps } from '~modules/shared/types/components';
+import { Icon } from '~shared/components/Icon';
 import {
 	isAudioFormat,
 	isAudioVideoFormat,
 	isVideoFormat,
 } from '~shared/helpers/is-audio-video-format.ts';
+import { tText } from '~shared/helpers/translation-functions.ts';
 import { useGetFileDuration } from '~shared/hooks/use-get-file-duration.ts';
+import { HET_ARCHIEF } from '~shared/types';
 
 export interface BlockHeroCarouselActiveSlideProps extends DefaultComponentProps {
 	item: HeroCarouselSlideItem;
@@ -26,11 +34,12 @@ export const BlockHeroCarouselActiveSlide: FunctionComponent<BlockHeroCarouselAc
 	isLoading,
 }): ReactElement => {
 	const { data: mediaDuration } = useGetFileDuration(item.playableUrl);
+	const [isPaused, setIsPaused] = useState(false);
 
 	if (isLoading) {
 		return (
 			<div className={clsx('c-block-hero-carousel__carousel-slide-placeholder')}>
-				<Spinner size="large" locationId={`hero-carousel-slide__${item.schemaIdentifier}`} />
+				<Spinner size="large" locationId={'hero-carousel-slide'} />
 			</div>
 		);
 	}
@@ -112,10 +121,40 @@ export const BlockHeroCarouselActiveSlide: FunctionComponent<BlockHeroCarouselAc
 	}
 
 	return (
-		<Image
-			src={imageSrc}
-			alt={item.name}
-			className={clsx('c-block-hero-carousel__carousel-slide-image')}
-		/>
+		<div
+			className={clsx(
+				'c-block-hero-carousel__carousel-slide-image',
+				isPaused && 'c-block-hero-carousel__carousel-slide-image--paused'
+			)}
+		>
+			<Image
+				src={imageSrc}
+				alt={item.name}
+				className="c-block-hero-carousel__carousel-slide-image-media"
+			/>
+			<div className="c-block-hero-carousel__carousel-slide-image-controls">
+				<Button
+					variants={['black', 'sm']}
+					icon={<Icon name={(isPaused ? 'play--light' : 'pause--light') as IconName} />}
+					title={
+						isPaused
+							? tText('Afspelen', undefined, [HET_ARCHIEF])
+							: tText('Pauzeren', undefined, [HET_ARCHIEF])
+					}
+					ariaLabel={
+						isPaused
+							? tText('Afspelen', undefined, [HET_ARCHIEF])
+							: tText('Pauzeren', undefined, [HET_ARCHIEF])
+					}
+					onClick={() => setIsPaused((paused) => !paused)}
+				/>
+				<div className="c-block-hero-carousel__carousel-slide-image-progress" aria-hidden="true">
+					<div
+						className="c-block-hero-carousel__carousel-slide-image-progress-fill"
+						onAnimationEnd={onEnded}
+					/>
+				</div>
+			</div>
+		</div>
 	);
 };

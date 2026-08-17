@@ -61,6 +61,7 @@ export const BlockHeroCarousel: FunctionComponent<BlockHeroCarouselProps> = ({
 		<article className={clsx('c-block-hero-carousel', className)}>
 			{backgroundImage && (
 				<div
+					aria-hidden
 					className={clsx('c-block-hero-carousel__background')}
 					style={
 						{
