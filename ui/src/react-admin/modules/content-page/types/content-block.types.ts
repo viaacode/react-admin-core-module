@@ -9,6 +9,7 @@ import type {
 import type { AvoContentPageType } from '@viaa/avo2-types';
 import type { ReactNode } from 'react';
 import type { BlockAvoHeroProps } from '~content-blocks/BlockAvoHero/BlockAvoHero';
+import type { BlockBreadcrumbsProps } from '~content-blocks/BlockBreadcrumbs/BlockBreadcrumbs.types';
 import type {
 	ContentItemStyle,
 	ContentTabStyle,
@@ -263,7 +264,8 @@ export interface DefaultContentBlockState {
 	margin: PaddingFieldState;
 	userGroupIds: number[];
 	fullWidth?: boolean;
-	overlayNextBlock?: boolean; // Renders the block on top of the block below it instead of above it
+	/** @deprecated ARC-3822 initially stored this component-specific value in the block state. */
+	overlayNextBlock?: boolean;
 	anchor?: string; // Contains an id that the user can enter, so they can link to this block using the anchor-block buttons
 }
 
@@ -453,6 +455,7 @@ export type RepeatedContentBlockComponentState =
 export type SingleContentBlockComponentState =
 	| HeadingBlockComponentState
 	| Partial<BlockAvoHeroProps>
+	| BlockBreadcrumbsProps
 	| IFrameBlockComponentState
 	| ImageBlockComponentState
 	| IntroBlockComponentState
