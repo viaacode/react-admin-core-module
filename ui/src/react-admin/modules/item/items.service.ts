@@ -2,13 +2,8 @@ import type { AvoItemItem } from '@viaa/avo2-types';
 import { stringifyUrl } from 'query-string';
 import { fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
 import { getAdminCoreApiUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config';
-import { isHetArchief } from '~shared/helpers/is-hetarchief.ts';
 import { CustomError } from '../shared/helpers/custom-error';
 import { addDefaultAudioStillToItem } from '../shared/helpers/default-still';
-
-// NOTE (client route): ie-object detail pages live under this path on hetarchief.be. Adjust
-// the prefix if the client application uses a different detail route for objects.
-const OBJECT_DETAIL_PATH_PREFIX = '/pid';
 
 export class ItemsService {
 	private static getBaseUrl(): string {
@@ -68,14 +63,5 @@ export class ItemsService {
 				limit,
 			});
 		}
-	}
-
-	public static getObjectDetailPath(schemaIdentifier: string): string {
-		if (!isHetArchief()) {
-			throw new CustomError('getObjectDetailPath is only available on hetarchief.be', null, {
-				schemaIdentifier,
-			});
-		}
-		return `${OBJECT_DETAIL_PATH_PREFIX}/${encodeURIComponent(schemaIdentifier)}`;
 	}
 }
