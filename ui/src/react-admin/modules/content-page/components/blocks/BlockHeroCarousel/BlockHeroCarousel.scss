@@ -13,14 +13,13 @@ $hero-carousel-format-widths: (
 	"newspaperpage": 12rem,
 );
 
-$background-image-height: 63.2rem;
+$background-image-height: 80%;
 $slide-height: 16rem;
 
 $hero-carousel-search-height-mobile: 4.8rem;
 $hero-carousel-search-height-desktop: 6.4rem;
 $hero-carousel-search-radius-desktop: 3.2rem;
 
-.c-content-block.c-content-block__hero-carousel,
 .c-content-page-preview:has(.c-content-block__hero-carousel) {
 	overflow: visible !important;
 }
@@ -422,6 +421,7 @@ $hero-carousel-search-radius-desktop: 3.2rem;
 			height: fit-content;
 			margin-top: 0;
 			padding: (variables.$g-spacer-unit * 2) 0;
+			background-color: transparent;
 		}
 	}
 }

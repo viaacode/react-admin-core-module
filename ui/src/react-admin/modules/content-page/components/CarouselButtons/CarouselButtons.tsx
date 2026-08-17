@@ -10,17 +10,30 @@ import './CarouselButtons.scss';
 import { clsx } from 'clsx';
 
 export interface CarouselButtonsProps extends DefaultComponentProps {
-	controlledSwiper: SwiperController | null;
-	isLoopedCarousel: boolean;
+	controlledSwiper?: SwiperController | null;
+	isLoopedCarousel?: boolean;
+	// Plain-callback mode: for carousels with their own hand-rolled (non-swiper) navigation,
+	// e.g. the hero carousel's infinite strip. When both are set, the buttons are always
+	// enabled and swiper wiring below is skipped entirely.
+	onPrev?: () => void;
+	onNext?: () => void;
 }
 
 export const CarouselButtons: FunctionComponent<CarouselButtonsProps> = ({
-	controlledSwiper,
-	isLoopedCarousel,
+	controlledSwiper = null,
+	isLoopedCarousel = false,
+	onPrev,
+	onNext,
 	className,
 }): ReactNode => {
-	const [disablePrevSlideButton, setDisablePrevSlideButton] = useState<boolean>(true);
-	const [disableNextSlideButton, setDisableNextSlideButton] = useState<boolean>(true);
+	const isPlainCallbackMode = !!onPrev && !!onNext;
+
+	const [disablePrevSlideButton, setDisablePrevSlideButton] = useState<boolean>(
+		!isPlainCallbackMode
+	);
+	const [disableNextSlideButton, setDisableNextSlideButton] = useState<boolean>(
+		!isPlainCallbackMode
+	);
 
 	const updateSlideButtons = () => {
 		if (isLoopedCarousel) {
@@ -35,6 +48,9 @@ export const CarouselButtons: FunctionComponent<CarouselButtonsProps> = ({
 
 	// biome-ignore lint/correctness/useExhaustiveDependencies: Only used to init the buttons
 	useEffect(() => {
+		if (isPlainCallbackMode) {
+			return;
+		}
 		if (controlledSwiper) {
 			// eslint-disable-next-line react-hooks/set-state-in-effect
 			updateSlideButtons();
@@ -44,7 +60,7 @@ export const CarouselButtons: FunctionComponent<CarouselButtonsProps> = ({
 		return () => {
 			controlledSwiper?.off('transitionEnd', updateSlideButtons);
 		};
-	}, [controlledSwiper]);
+	}, [controlledSwiper, isPlainCallbackMode]);
 
 	if (disablePrevSlideButton && disableNextSlideButton) {
 		return null;
@@ -57,7 +73,7 @@ export const CarouselButtons: FunctionComponent<CarouselButtonsProps> = ({
 				icon={<Icon name="arrowLeft" />}
 				title={tText('Vorige slide', undefined, [HET_ARCHIEF])}
 				ariaLabel={tText('Vorige slide', undefined, [HET_ARCHIEF])}
-				onClick={() => controlledSwiper?.slidePrev()}
+				onClick={() => (onPrev ? onPrev() : controlledSwiper?.slidePrev())}
 				disabled={disablePrevSlideButton}
 			/>
 			<Button
@@ -65,7 +81,7 @@ export const CarouselButtons: FunctionComponent<CarouselButtonsProps> = ({
 				icon={<Icon name="arrowRight" />}
 				title={tText('Volgende slide', undefined, [HET_ARCHIEF])}
 				ariaLabel={tText('Volgende slide', undefined, [HET_ARCHIEF])}
-				onClick={() => controlledSwiper?.slideNext()}
+				onClick={() => (onNext ? onNext() : controlledSwiper?.slideNext())}
 				disabled={disableNextSlideButton}
 			/>
 		</div>

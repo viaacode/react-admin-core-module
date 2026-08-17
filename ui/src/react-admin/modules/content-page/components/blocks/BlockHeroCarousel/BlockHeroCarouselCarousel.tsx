@@ -11,7 +11,7 @@ import React, {
 import type { HeroCarouselSlideItem } from '~content-blocks/BlockHeroCarousel/BlockHeroCarousel.types.ts';
 import { BlockHeroCarouselActiveSlide } from '~content-blocks/BlockHeroCarousel/BlockHeroCarouselActiveSlide.tsx';
 import { BlockHeroCarouselInactiveSlide } from '~content-blocks/BlockHeroCarousel/BlockHeroCarouselInactiveSlide.tsx';
-import { BlockHeroCarouselNavButtons } from '~content-blocks/BlockHeroCarousel/BlockHeroCarouselNavButtons.tsx';
+import { CarouselButtons } from '~modules/content-page/components/CarouselButtons/CarouselButtons.tsx';
 import type { DefaultComponentProps } from '~modules/shared/types/components';
 import {
 	ACTIVE_SLIDE_CLASS,
@@ -125,7 +125,7 @@ export const BlockHeroCarouselCarousel: FunctionComponent<BlockHeroCarouselCarou
 						);
 					})}
 				</div>
-				<BlockHeroCarouselNavButtons
+				<CarouselButtons
 					className={'c-block-hero-carousel__carousel-navigation'}
 					onPrev={goPrev}
 					onNext={goNext}
