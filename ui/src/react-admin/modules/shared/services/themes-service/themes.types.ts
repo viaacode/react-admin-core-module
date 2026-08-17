@@ -1,4 +1,4 @@
-import type { ObjectType } from '~shared/helpers/mapFormatToType.ts';
+import type { ObjectType } from '~shared/helpers/map-format-to-type.ts';
 
 export interface Theme {
 	id: string;

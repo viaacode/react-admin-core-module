@@ -12,7 +12,7 @@ import { BlockHeroCarouselCarousel } from '~content-blocks/BlockHeroCarousel/Blo
 import { BlockHeroCarouselSearch } from '~content-blocks/BlockHeroCarousel/BlockHeroCarouselSearch.tsx';
 import { useGetIeObjectsByIds } from '~content-blocks/BlockHeroCarousel/hooks/useGetIeObjectsByIds.ts';
 import { GET_TERTIARY_BACKGROUND_COLOR_OPTIONS_ARCHIEF } from '~modules/content-page/const/get-color-options.ts';
-import type { ObjectType } from '~shared/helpers/mapFormatToType.ts';
+import type { ObjectType } from '~shared/helpers/map-format-to-type.ts';
 import { toSeconds } from '~shared/helpers/parsers/duration.ts';
 
 export interface BlockHeroCarouselProps extends DefaultComponentProps {

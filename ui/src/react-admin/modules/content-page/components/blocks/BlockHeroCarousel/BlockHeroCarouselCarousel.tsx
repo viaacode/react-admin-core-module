@@ -8,7 +8,6 @@ import React, {
 	useState,
 } from 'react';
 import type SwiperController from 'swiper';
-import { Autoplay } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import type { HeroCarouselSlideItem } from '~content-blocks/BlockHeroCarousel/BlockHeroCarousel.types.ts';
 import { BlockHeroCarouselActiveSlide } from '~content-blocks/BlockHeroCarousel/BlockHeroCarouselActiveSlide.tsx';
@@ -56,32 +55,10 @@ export const BlockHeroCarouselCarousel: FunctionComponent<BlockHeroCarouselCarou
 	const pendingDirectionRef = useRef<'next' | 'prev'>('next');
 	const speed = 1300;
 
-	// Guards against the module auto-starting on mount while still loading; once loaded, the
-	// prop change alone isn't reliable, so we also explicitly (re)start it here.
-	useEffect(() => {
-		if (!controlledSwiper || controlledSwiper.destroyed) {
-			return;
-		}
-		if (isLoading) {
-			controlledSwiper.autoplay?.stop();
-		} else {
-			controlledSwiper.autoplay?.start();
-		}
-	}, [isLoading, controlledSwiper]);
-
 	return (
 		<div className={clsx('c-block-hero-carousel__carousel')}>
 			<Swiper
 				className={'c-block-hero-carousel__carousel-swiper'}
-				modules={[Autoplay]}
-				autoplay={
-					isLoading
-						? false
-						: {
-								waitForTransition: false,
-								delay: speed + 5000, // we need to take the transition into consideration
-							}
-				}
 				slidesPerView="auto"
 				spaceBetween={12}
 				speed={speed}
@@ -122,62 +99,41 @@ export const BlockHeroCarouselCarousel: FunctionComponent<BlockHeroCarouselCarou
 					})
 				}
 			>
-				{strip.map(
-					(
-						{
-							schemaIdentifier,
-							name,
-							thumbnailUrl,
-							newspaperImage,
-							videoThumbnail,
-							dctermsFormat,
-							backgroundColor,
-						},
-						index
-					) => {
-						// The active slide's real content only takes over once its navigation has
-						// settled; every other slide (including one mid-transition into becoming
-						// active) shows the lighter-weight inactive content.
-						const isSettledActive = index === activeIndex && index === settledActiveIndex;
+				{strip.map((item, index) => {
+					// The active slide's real content only takes over once its navigation has
+					// settled; every other slide (including one mid-transition into becoming
+					// active) shows the lighter-weight inactive content.
+					const isSettledActive = index === activeIndex && index === settledActiveIndex;
+					const { schemaIdentifier, dctermsFormat, backgroundColor } = item;
 
-						return (
-							<SwiperSlide
-								// biome-ignore lint/suspicious/noArrayIndexKey: strip repeats real elements, so schemaIdentifier alone isn't unique per slide
-								key={`carousel-slide__${schemaIdentifier}__${index}`}
-								onClick={() =>
-									goToSlide(controlledSwiper, index, activeIndexRef, pendingDirectionRef)
-								}
-								className={clsx(
-									'c-block-hero-carousel__carousel-slide',
-									`c-block-hero-carousel__carousel-slide--${dctermsFormat}`,
-									index === activeIndex && ACTIVE_SLIDE_CLASS
-								)}
-								style={{
-									backgroundColor,
-								}}
-							>
-								{isSettledActive ? (
-									<BlockHeroCarouselActiveSlide
-										schemaIdentifier={schemaIdentifier}
-										name={name}
-										thumbnailUrl={thumbnailUrl}
-										newspaperImage={newspaperImage}
-										videoThumbnail={videoThumbnail}
-										isLoading={isLoading}
-									/>
-								) : (
-									<BlockHeroCarouselInactiveSlide
-										schemaIdentifier={schemaIdentifier}
-										name={name}
-										thumbnailUrl={thumbnailUrl}
-										videoThumbnail={videoThumbnail}
-										isLoading={isLoading}
-									/>
-								)}
-							</SwiperSlide>
-						);
-					}
-				)}
+					return (
+						<SwiperSlide
+							// biome-ignore lint/suspicious/noArrayIndexKey: strip repeats real elements, so schemaIdentifier alone isn't unique per slide
+							key={`carousel-slide__${schemaIdentifier}__${index}`}
+							onClick={() =>
+								goToSlide(controlledSwiper, index, activeIndexRef, pendingDirectionRef)
+							}
+							className={clsx(
+								'c-block-hero-carousel__carousel-slide',
+								`c-block-hero-carousel__carousel-slide--${dctermsFormat}`,
+								index === activeIndex && ACTIVE_SLIDE_CLASS
+							)}
+							style={{
+								backgroundColor,
+							}}
+						>
+							{isSettledActive ? (
+								<BlockHeroCarouselActiveSlide
+									item={item}
+									onEnded={() => controlledSwiper?.slideNext()}
+									isLoading={isLoading}
+								/>
+							) : (
+								<BlockHeroCarouselInactiveSlide item={item} isLoading={isLoading} />
+							)}
+						</SwiperSlide>
+					);
+				})}
 				<CarouselButtons
 					controlledSwiper={controlledSwiper}
 					isLoopedCarousel={true}

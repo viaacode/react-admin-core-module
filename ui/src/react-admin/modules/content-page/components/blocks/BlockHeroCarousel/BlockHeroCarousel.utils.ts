@@ -1,7 +1,7 @@
 import type { RefObject } from 'react';
 import { flushSync } from 'react-dom';
 import type SwiperController from 'swiper';
-import { ObjectType } from '~shared/helpers/mapFormatToType.ts';
+import { ObjectType } from '~shared/helpers/map-format-to-type.ts';
 
 // Keep in sync with the sizes in BlockHeroCarousel.scss.
 const ACTIVE_WIDTH_REM = 51.2;

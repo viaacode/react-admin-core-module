@@ -13,8 +13,8 @@ import type { DefaultComponentProps } from '~modules/shared/types/components';
 import { App, Locale } from '~modules/translations/translations.core.types.ts';
 import { Icon } from '~shared/components/Icon';
 import { generateSmartLink } from '~shared/components/SmartLink/SmartLink.tsx';
-import { getIconFromObjectType } from '~shared/helpers/getIconFromObjectType.ts';
-import type { ObjectType } from '~shared/helpers/mapFormatToType.ts';
+import { getIconFromObjectType } from '~shared/helpers/get-icon-from-object-type.ts';
+import type { ObjectType } from '~shared/helpers/map-format-to-type.ts';
 import { isMobileWidth } from '~shared/helpers/media-query.ts';
 import { tText } from '~shared/helpers/translation-functions.ts';
 

@@ -1,5 +1,5 @@
 import type { IconName } from '@viaa/avo2-components';
-import { ObjectType } from '~shared/helpers/mapFormatToType.ts';
+import { ObjectType } from '~shared/helpers/map-format-to-type.ts';
 
 export function getIconFromObjectType(format: ObjectType | undefined): IconName {
 	switch (format) {
