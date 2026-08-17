@@ -71,11 +71,28 @@ export const BlockDoubleBanner: FunctionComponent<BlockDoubleBannerProps> = ({
 					'c-block-double-banner__half--mirrored': index % 2 === 1,
 				});
 
-				return generateSmartLink(
-					{ ...half.link, target: LinkTarget.Self },
-					content,
-					undefined,
-					halfClassName
+				// generateSmartLink returns a bare fragment for an empty action, which drops the
+				// halfClassName and with it the whole layout. Keep the wrapper in that case, so the
+				// editor sees the real layout before the destination is filled in.
+				if (!half.link?.value) {
+					return (
+						// biome-ignore lint/suspicious/noArrayIndexKey: the halves have no id of their own
+						<div key={`c-block-double-banner__half-${index}`} className={halfClassName}>
+							{content}
+						</div>
+					);
+				}
+
+				return (
+					// biome-ignore lint/suspicious/noArrayIndexKey: the halves have no id of their own
+					<React.Fragment key={`c-block-double-banner__half-${index}`}>
+						{generateSmartLink(
+							{ ...half.link, target: LinkTarget.Self },
+							content,
+							undefined,
+							halfClassName
+						)}
+					</React.Fragment>
 				);
 			})}
 		</div>
