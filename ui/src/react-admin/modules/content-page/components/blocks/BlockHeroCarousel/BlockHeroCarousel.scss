@@ -419,7 +419,6 @@ $hero-carousel-search-radius-desktop: 3.2rem;
 				height: 100%;
 				overflow: hidden;
 
-				> img,
 				&-media img {
 					object-fit: cover;
 					object-position: top center;
@@ -427,11 +426,28 @@ $hero-carousel-search-radius-desktop: 3.2rem;
 					height: 100%;
 				}
 
-				&-media img {
+				&--animated &-media img {
 					animation: hero-carousel-ken-burns $ken-burns-duration linear forwards;
 
 					@media (prefers-reduced-motion: reduce) {
 						animation: none;
+					}
+				}
+
+				&-format-icon {
+					position: absolute;
+					right: 0;
+					bottom: 0;
+					z-index: 1;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					background-color: colors.$color-gray-1000;
+					width: 3.2rem;
+					height: 3.2rem;
+
+					> * {
+						font-size: 2.2rem;
 					}
 				}
 
@@ -460,8 +476,16 @@ $hero-carousel-search-radius-desktop: 3.2rem;
 					overflow: hidden;
 					background-color: colors.$color-gray-1000;
 
-					&-fill {
+					&-track {
+						flex: 1;
 						height: 0.4rem;
+						border-radius: 999px;
+						overflow: hidden;
+						background-color: colors.$color-gray-shadow;
+					}
+
+					&-fill {
+						height: 100%;
 						width: 0;
 						border-radius: 999px;
 						background-color: colors.$color-ocean-green;

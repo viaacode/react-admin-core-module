@@ -4,7 +4,7 @@ import {
 	type FlowPlayerProps,
 	getValidStartAndEnd,
 } from '@meemoo/react-components';
-import { type IconName, Image, Spinner } from '@viaa/avo2-components';
+import { IconName, Image, Spinner } from '@viaa/avo2-components';
 import clsx from 'clsx';
 import { isNil } from 'es-toolkit';
 import React, { type FunctionComponent, type ReactElement, useState } from 'react';
@@ -124,6 +124,7 @@ export const BlockHeroCarouselActiveSlide: FunctionComponent<BlockHeroCarouselAc
 		<div
 			className={clsx(
 				'c-block-hero-carousel__carousel-slide-image',
+				'c-block-hero-carousel__carousel-slide-image--animated',
 				isPaused && 'c-block-hero-carousel__carousel-slide-image--paused'
 			)}
 		>
@@ -135,7 +136,7 @@ export const BlockHeroCarouselActiveSlide: FunctionComponent<BlockHeroCarouselAc
 			<div className="c-block-hero-carousel__carousel-slide-image-controls">
 				<Button
 					variants={['black', 'sm']}
-					icon={<Icon name={(isPaused ? 'play--light' : 'pause--light') as IconName} />}
+					icon={<Icon name={isPaused ? IconName.play : IconName.pause} />}
 					title={
 						isPaused
 							? tText('Afspelen', undefined, [HET_ARCHIEF])
@@ -149,10 +150,12 @@ export const BlockHeroCarouselActiveSlide: FunctionComponent<BlockHeroCarouselAc
 					onClick={() => setIsPaused((paused) => !paused)}
 				/>
 				<div className="c-block-hero-carousel__carousel-slide-image-progress" aria-hidden="true">
-					<div
-						className="c-block-hero-carousel__carousel-slide-image-progress-fill"
-						onAnimationEnd={onEnded}
-					/>
+					<div className="c-block-hero-carousel__carousel-slide-image-progress-track">
+						<div
+							className="c-block-hero-carousel__carousel-slide-image-progress-fill"
+							onAnimationEnd={onEnded}
+						/>
+					</div>
 				</div>
 			</div>
 		</div>

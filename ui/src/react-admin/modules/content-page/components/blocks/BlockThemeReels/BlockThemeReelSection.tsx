@@ -79,7 +79,7 @@ export const BlockThemeReelSection: FunctionComponent<BlockThemeReelSectionProps
 						<Button
 							className="c-block-theme-reels-section__slide-image-placeholder-icon"
 							variants={['sm', 'block']}
-							icon={<Icon name={getIconFromObjectType(format)} />}
+							icon={<Icon name={getIconFromObjectType(format, true)} />}
 							disabled
 							tabIndex={-1}
 						/>
