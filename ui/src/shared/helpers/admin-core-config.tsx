@@ -78,7 +78,7 @@ export function getAdminCoreConfigForLocalTestApp(navigateFunc: NavigateFunction
 				ContentBlockType.ImageGrid,
 				ContentBlockType.PageOverview,
 				ContentBlockType.UspGrid,
-				ContentBlockType.Quote,
+				ContentBlockType.AvoQuote,
 				ContentBlockType.CTAs,
 				// AVO
 				ContentBlockType.AnchorLinks,
@@ -97,6 +97,8 @@ export function getAdminCoreConfigForLocalTestApp(navigateFunc: NavigateFunction
 				// ContentBlockType.ContentEncloseGrid,
 				// ContentBlockType.Breadcrumbs,
 				ContentBlockType.OverviewWithCarousel,
+				ContentBlockType.HetArchiefQuote,
+				ContentBlockType.ObjectsGrid,
 				ContentBlockType.OverviewThemes,
 				ContentBlockType.Timeline,
 			],
@@ -157,6 +159,7 @@ export function getAdminCoreConfigForLocalTestApp(navigateFunc: NavigateFunction
 				newspaper: { name: 'newspaper' },
 				noAudio: { name: 'no-audio' },
 				noVideo: { name: 'no-video' },
+				quotes: { name: 'quotes' },
 				arrowDownRight: { name: 'arrow-down-right' },
 			},
 			list: (): { value: IconName; label: string }[] => {

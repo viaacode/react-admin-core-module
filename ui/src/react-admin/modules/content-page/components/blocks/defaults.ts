@@ -216,19 +216,19 @@ export const COPYRIGHT_FIELDS = (overrides?: {
 	};
 }): ContentBlockComponentsConfig['fields'] => ({
 	[overrides?.title?.fieldName || 'copyrightTitle']: TEXT_FIELD({
-		label: tText('bijschrift titel'),
+		label: tText('modules/content-page/components/blocks/defaults___bijschrift-titel'),
 		validator: undefined,
 		...overrides?.title?.overrides,
 	}),
 	[overrides?.showIcon?.fieldName || 'copyrightIconVisible']: {
 		editorType: ContentBlockEditor.Checkbox,
 		editorProps: {
-			label: tText('Toon bijschrift icoon'),
+			label: tText('modules/content-page/components/blocks/defaults___toon-bijschrift-icoon'),
 		} as CheckboxProps,
 		...overrides?.showIcon?.overrides,
 	},
 	[overrides?.text?.fieldName || 'copyrightText']: TEXT_FIELD({
-		label: tText('bijschrift beschrijving'),
+		label: tText('modules/content-page/components/blocks/defaults___bijschrift-beschrijving'),
 		validator: undefined,
 		...overrides?.text?.overrides,
 	}),
