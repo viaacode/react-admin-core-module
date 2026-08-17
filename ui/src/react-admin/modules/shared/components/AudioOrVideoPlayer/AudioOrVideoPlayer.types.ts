@@ -1,3 +1,5 @@
+import type { IeObjectType } from '~shared/helpers/mapFormatToType.ts';
+
 export interface IeObjectFile {
 	id: string;
 	name: string;
@@ -11,17 +13,6 @@ export interface IeObjectFile {
 		startTime: number;
 		endTime: number;
 	} | null;
-}
-
-export enum IeObjectType {
-	VIDEO = 'video',
-	VIDEO_FRAGMENT = 'videofragment',
-	AUDIO = 'audio',
-	AUDIO_FRAGMENT = 'audiofragment',
-	FILM = 'film',
-	NEWSPAPER = 'newspaper',
-	NEWSPAPER_PAGE = 'newspaperpage', // Should never be used, but does seem to pop up some times
-	IMAGE = 'image', // Should never be used, but does seem to pop up some times
 }
 
 export interface IeObjectRepresentation {
@@ -49,6 +40,7 @@ export type AudioOrVideoPlayerProps = {
 	paused: boolean;
 	onPlay: () => void;
 	onPause: () => void;
+	onEnded: () => void;
 	onMediaReady: (isAvailable: boolean, playableFile: IeObjectFile | null) => void;
 	onMediaDurationLoaded?: (duration: number) => void;
 	dctermsFormat: IeObjectType | null;

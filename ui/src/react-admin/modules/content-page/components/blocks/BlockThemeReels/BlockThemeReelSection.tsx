@@ -17,7 +17,7 @@ import { isMobileWidth } from '~shared/helpers/media-query.ts';
 import { tText } from '~shared/helpers/translation-functions.ts';
 import 'swiper/css';
 import './BlockThemeReelsSection.scss';
-import type { ObjectType } from '~shared/helpers/mapFormatToType.ts';
+import type { IeObjectType } from '~shared/helpers/mapFormatToType.ts';
 
 export interface BlockThemeReelSectionProps extends DefaultComponentProps {
 	themeId: string;
@@ -69,7 +69,7 @@ export const BlockThemeReelSection: FunctionComponent<BlockThemeReelSectionProps
 		title: string,
 		description: string,
 		className?: string,
-		format?: ObjectType
+		format?: IeObjectType
 	) => {
 		return (
 			<>

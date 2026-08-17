@@ -1,22 +1,22 @@
 import type { IconName } from '@viaa/avo2-components';
-import { ObjectType } from '~shared/helpers/mapFormatToType.ts';
+import { IeObjectType } from '~shared/helpers/mapFormatToType.ts';
 
-export function getIconFromObjectType(format: ObjectType | undefined): IconName {
+export function getIconFromObjectType(format: IeObjectType | undefined): IconName {
 	switch (format) {
-		case ObjectType.film:
-		case ObjectType.video:
-		case ObjectType.videofragment:
+		case IeObjectType.film:
+		case IeObjectType.video:
+		case IeObjectType.videofragment:
 			return 'no-video--light' as IconName;
 
-		case ObjectType.audio:
-		case ObjectType.audiofragment:
+		case IeObjectType.audio:
+		case IeObjectType.audiofragment:
 			return 'no-audio--light' as IconName;
 
-		case ObjectType.newspaper:
-		case ObjectType.newspaperpage:
+		case IeObjectType.newspaper:
+		case IeObjectType.newspaperpage:
 			return 'no-newspaper--light' as IconName;
 
-		case ObjectType.image:
+		case IeObjectType.image:
 			return 'no-image--light' as IconName;
 
 		default:

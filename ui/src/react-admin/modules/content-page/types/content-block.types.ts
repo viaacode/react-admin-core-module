@@ -630,9 +630,9 @@ export interface TimelineNodeBlockComponentState {
 	mediaItem?: ButtonAction; // Content picker value pointing to an IE_OBJECT (pid/fragmentId)
 	image?: string;
 	imageAlt?: string;
-	imageCaptionCopyright?: string;
-	imageCaptionCopyrightIconVisible?: boolean;
-	imageCaptionDescription?: string;
+	copyrightTitle?: string;
+	copyrightIconVisible?: boolean;
+	copyrightText?: string;
 	backgroundColor?: Color;
 }
 

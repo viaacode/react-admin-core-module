@@ -12,7 +12,13 @@ import type {
 } from '../../../types/content-block.types';
 import { Color, ContentBlockEditor, ContentBlockType } from '../../../types/content-block.types';
 
-import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, FILE_FIELD, TEXT_FIELD } from '../defaults';
+import {
+	BLOCK_FIELD_DEFAULTS,
+	BLOCK_STATE_DEFAULTS,
+	COPYRIGHT_FIELDS,
+	FILE_FIELD,
+	TEXT_FIELD,
+} from '../defaults';
 
 const GET_TIMELINE_NODE_VISUAL_TYPE_OPTIONS = (): SelectOption<TimelineNodeVisualType>[] => [
 	{
@@ -199,34 +205,22 @@ export const TIMELINE_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				validator: undefined,
 				isVisible: visualTypeIsImage,
 			}),
-			imageCaptionCopyright: TEXT_FIELD({
-				label: tText(
-					'react-admin/modules/content-page/components/blocks/block-timeline/block-timeline___bijschrift-copyright',
-					{},
-					[HET_ARCHIEF]
-				),
-				validator: undefined,
-				isVisible: visualTypeIsImage,
-			}),
-			imageCaptionCopyrightIconVisible: {
-				editorType: ContentBlockEditor.Checkbox,
-				editorProps: {
-					label: tText(
-						'react-admin/modules/content-page/components/blocks/block-timeline/block-timeline___copyright-icoon-toevoegen',
-						{},
-						[HET_ARCHIEF]
-					),
-				} as CheckboxProps,
-				isVisible: visualTypeIsImage,
-			},
-			imageCaptionDescription: TEXT_FIELD({
-				label: tText(
-					'react-admin/modules/content-page/components/blocks/block-timeline/block-timeline___bijschrift-beschrijving',
-					{},
-					[HET_ARCHIEF]
-				),
-				validator: undefined,
-				isVisible: visualTypeIsImage,
+			...COPYRIGHT_FIELDS({
+				title: {
+					overrides: {
+						isVisible: visualTypeIsImage,
+					},
+				},
+				showIcon: {
+					overrides: {
+						isVisible: visualTypeIsImage,
+					},
+				},
+				text: {
+					overrides: {
+						isVisible: visualTypeIsImage,
+					},
+				},
 			}),
 			backgroundColor: {
 				label: tText(

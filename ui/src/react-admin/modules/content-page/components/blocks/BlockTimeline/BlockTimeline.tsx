@@ -16,6 +16,7 @@ import { useGetTimelineIeObjects } from './hooks/useGetTimelineIeObjects';
 
 import './BlockTimeline.scss';
 import { BlockTimelineObjectMeta } from '~content-blocks/BlockTimeline/BlockTimelineObjectMeta.tsx';
+import { CopyrightAttribution } from '~shared/components/CopyrightAttribution';
 
 export interface BlockTimelineProps extends DefaultComponentProps {
 	elements: TimelineNodeBlockComponentState[];
@@ -133,23 +134,12 @@ export const BlockTimeline: FunctionComponent<BlockTimelineProps> = ({
 									</div>
 								)}
 								<div className="c-block-timeline__node-text">
-									{(node.imageCaptionCopyright || node.imageCaptionDescription) && (
-										<div className="c-block-timeline__node-image-caption">
-											{node.imageCaptionCopyright && (
-												<p className="c-block-timeline__node-image-copyright">
-													{node.imageCaptionCopyrightIconVisible !== false && (
-														<span aria-hidden="true">&copy;&nbsp;</span>
-													)}
-													{node.imageCaptionCopyright}
-												</p>
-											)}
-											{node.imageCaptionDescription && (
-												<p className="c-block-timeline__node-image-description">
-													{node.imageCaptionDescription}
-												</p>
-											)}
-										</div>
-									)}
+									<CopyrightAttribution
+										title={node.copyrightTitle}
+										text={node.copyrightText}
+										showIcon={node.copyrightIconVisible}
+										className="c-block-timeline__node-image-caption"
+									/>
 									<h3 className="c-block-timeline__node-title">{node.title}</h3>
 									{node.text && (
 										<Html
