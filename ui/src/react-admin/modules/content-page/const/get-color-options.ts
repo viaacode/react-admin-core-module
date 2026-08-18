@@ -8,7 +8,7 @@ const transparentOption = () => ({
 	label: tText('admin/content-block/content-block___geen'),
 	value: Color.Transparent,
 });
-export const whiteOption = () => ({
+const whiteOption = () => ({
 	label: tText('admin/content-block/content-block___wit'),
 	value: Color.White,
 });
@@ -48,7 +48,7 @@ const platinumOption = () => ({
 	label: tText('modules/content-page/const/content-block___platinum', {}, [App.HET_ARCHIEF]),
 	value: Color.Platinum,
 });
-export const blackOption = () => ({
+const blackOption = () => ({
 	label: tText('modules/content-page/const/content-block___zwart'),
 	value: Color.Black,
 });

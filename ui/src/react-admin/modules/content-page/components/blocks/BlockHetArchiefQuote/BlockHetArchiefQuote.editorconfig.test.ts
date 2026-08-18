@@ -28,7 +28,7 @@ describe('HET_ARCHIEF_QUOTE_BLOCK_CONFIG', () => {
 	});
 
 	it('defaults to white text on a black frame', () => {
-		expect(field('textColor').editorProps?.defaultValue?.value).toBe(Color.White);
-		expect(field('frameColor').editorProps?.defaultValue?.value).toBe(Color.Black);
+		expect(field('textColor').editorProps?.defaultValue).toBe(Color.White);
+		expect(field('frameColor').editorProps?.defaultValue).toBe(Color.Black);
 	});
 });
