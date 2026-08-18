@@ -1,5 +1,5 @@
 import React, { type CSSProperties, type FunctionComponent, type ReactNode, useMemo } from 'react';
-import type { Color } from '~modules/content-page/types/content-block.types';
+import { Color } from '~modules/content-page/types/content-block.types';
 import type { DefaultComponentProps } from '~modules/shared/types/components';
 import './BlockHeroCarousel.scss';
 import 'swiper/css';
@@ -12,6 +12,7 @@ import { BlockHeroCarouselCarousel } from '~content-blocks/BlockHeroCarousel/Blo
 import { BlockHeroCarouselSearch } from '~content-blocks/BlockHeroCarousel/BlockHeroCarouselSearch.tsx';
 import { useGetIeObjectsByIds } from '~content-blocks/BlockHeroCarousel/hooks/useGetIeObjectsByIds.ts';
 import { GET_SECONDARY_BACKGROUND_COLOR_OPTIONS_ARCHIEF } from '~modules/content-page/const/get-color-options.ts';
+import { isAudioVideoFormat } from '~shared/helpers/is-audio-video-format.ts';
 import type { ObjectType } from '~shared/helpers/map-format-to-type.ts';
 import { toSeconds } from '~shared/helpers/parsers/duration.ts';
 
@@ -36,11 +37,14 @@ export const BlockHeroCarousel: FunctionComponent<BlockHeroCarouselProps> = ({
 		return elements.map((object) => {
 			// eslint-disable-next-line react-hooks/purity
 			const randomIndex = Math.floor(Math.random() * allTertiaryColors.length);
+			const dctermsFormat = object.mediaItem?.dctermsFormat as ObjectType;
 			return {
 				schemaIdentifier: String(object.mediaItem?.value),
-				dctermsFormat: object.mediaItem?.dctermsFormat as ObjectType,
+				dctermsFormat,
 				videoThumbnail: object.videoThumbnail,
-				backgroundColor: allTertiaryColors[randomIndex].value as Color,
+				backgroundColor: isAudioVideoFormat(dctermsFormat)
+					? (allTertiaryColors[randomIndex].value as Color)
+					: Color.Mustard,
 				cuepoints: {
 					start: object.startCuePoint
 						? (toSeconds(object.startCuePoint, true) ?? undefined)
