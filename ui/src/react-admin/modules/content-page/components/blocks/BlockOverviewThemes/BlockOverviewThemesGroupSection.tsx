@@ -69,8 +69,10 @@ export const BlockOverviewThemesGroupSection: FunctionComponent<
 	};
 
 	const themesById = useMemo(() => keyBy(themes, (theme) => theme.id), [themes]);
+	// A picker entry can be `null` (while being cleared in the editor) or point at a theme that no
+	// longer exists, so only the ones that actually resolve are rendered.
 	const resolvedThemes = (group.themes || [])
-		.map((pickerItem) => themesById[pickerItem.value])
+		.map((pickerItem) => (pickerItem?.value ? themesById[pickerItem.value] : undefined))
 		.filter((theme): theme is Theme => !!theme);
 	const spans = getThemeTileSpans(resolvedThemes.length);
 
