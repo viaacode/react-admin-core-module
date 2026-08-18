@@ -1,17 +1,17 @@
 import type { RefObject } from 'react';
 import { flushSync } from 'react-dom';
-import { ObjectType } from '~shared/helpers/map-format-to-type.ts';
+import {
+	mapDcTermsFormatToSimpleType,
+	type ObjectType,
+	SimpleIeObjectType,
+} from '~shared/helpers/map-format-to-type.ts';
 
 const FALLBACK_THUMB_WIDTH_REM = 12;
-const FORMAT_THUMB_WIDTHS_REM: Record<ObjectType, number> = {
-	[ObjectType.video]: 28,
-	[ObjectType.videofragment]: 28,
-	[ObjectType.film]: 28,
-	[ObjectType.audio]: 16,
-	[ObjectType.audiofragment]: 16,
-	[ObjectType.newspaper]: 12,
-	[ObjectType.newspaperpage]: 12,
-	[ObjectType.image]: 12,
+const FORMAT_THUMB_WIDTHS_REM: Record<SimpleIeObjectType, number> = {
+	[SimpleIeObjectType.VIDEO]: 28,
+	[SimpleIeObjectType.AUDIO]: 16,
+	[SimpleIeObjectType.NEWSPAPER]: 12,
+	[SimpleIeObjectType.IMAGE]: 12,
 };
 
 export const ACTIVE_SLIDE_CLASS = 'c-block-hero-carousel__carousel-slide--active';
@@ -24,7 +24,8 @@ interface StripItem {
 }
 
 export function getThumbWidthRem(format: ObjectType | undefined): number {
-	return (format && FORMAT_THUMB_WIDTHS_REM[format]) || FALLBACK_THUMB_WIDTH_REM;
+	const simpleType = mapDcTermsFormatToSimpleType(format);
+	return FORMAT_THUMB_WIDTHS_REM[simpleType as SimpleIeObjectType] || FALLBACK_THUMB_WIDTH_REM;
 }
 
 export function getPxPerRem(): number {

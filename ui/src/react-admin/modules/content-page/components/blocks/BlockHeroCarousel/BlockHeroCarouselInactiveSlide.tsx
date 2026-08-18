@@ -5,7 +5,11 @@ import type { HeroCarouselSlideItem } from '~content-blocks/BlockHeroCarousel/Bl
 import type { DefaultComponentProps } from '~modules/shared/types/components';
 import { Icon } from '~shared/components/Icon';
 import { getIconFromObjectType } from '~shared/helpers/get-icon-from-object-type.ts';
-import { ObjectType } from '~shared/helpers/map-format-to-type.ts';
+import {
+	mapDcTermsFormatToSimpleType,
+	type ObjectType,
+	SimpleIeObjectType,
+} from '~shared/helpers/map-format-to-type.ts';
 import { tText } from '~shared/helpers/translation-functions.ts';
 import { HET_ARCHIEF } from '~shared/types';
 
@@ -15,33 +19,31 @@ export interface BlockHeroCarouselInactiveSlideProps extends DefaultComponentPro
 }
 
 const getObjectTypeLabel = (format: ObjectType | undefined): string => {
-	switch (format) {
-		case ObjectType.film:
-		case ObjectType.video:
-		case ObjectType.videofragment:
+	const simpleType = mapDcTermsFormatToSimpleType(format);
+
+	switch (simpleType) {
+		case SimpleIeObjectType.VIDEO:
 			return tText(
 				'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel-inactive-slide___video',
 				undefined,
 				[HET_ARCHIEF]
 			);
 
-		case ObjectType.audio:
-		case ObjectType.audiofragment:
+		case SimpleIeObjectType.AUDIO:
 			return tText(
 				'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel-inactive-slide___audio',
 				undefined,
 				[HET_ARCHIEF]
 			);
 
-		case ObjectType.newspaper:
-		case ObjectType.newspaperpage:
+		case SimpleIeObjectType.NEWSPAPER:
 			return tText(
 				'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel-inactive-slide___krant',
 				undefined,
 				[HET_ARCHIEF]
 			);
 
-		case ObjectType.image:
+		case SimpleIeObjectType.IMAGE:
 			return tText(
 				'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel-inactive-slide___afbeelding',
 				undefined,

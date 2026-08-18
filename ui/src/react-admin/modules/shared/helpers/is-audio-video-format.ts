@@ -1,13 +1,17 @@
-import { ObjectType } from '~shared/helpers/map-format-to-type.ts';
+import {
+	mapDcTermsFormatToSimpleType,
+	type ObjectType,
+	SimpleIeObjectType,
+} from '~shared/helpers/map-format-to-type.ts';
 
 export function isAudioFormat(format: ObjectType | undefined): boolean {
-	return format === ObjectType.audio || format === ObjectType.audiofragment;
+	const simpleType = mapDcTermsFormatToSimpleType(format);
+	return simpleType === SimpleIeObjectType.AUDIO;
 }
 
 export function isVideoFormat(format: ObjectType | undefined): boolean {
-	return (
-		format === ObjectType.film || format === ObjectType.video || format === ObjectType.videofragment
-	);
+	const simpleType = mapDcTermsFormatToSimpleType(format);
+	return simpleType === SimpleIeObjectType.VIDEO;
 }
 
 export function isAudioVideoFormat(format: ObjectType | undefined): boolean {

@@ -1,5 +1,9 @@
 import type { IconName } from '@viaa/avo2-components';
-import { ObjectType } from '~shared/helpers/map-format-to-type.ts';
+import {
+	mapDcTermsFormatToSimpleType,
+	type ObjectType,
+	SimpleIeObjectType,
+} from '~shared/helpers/map-format-to-type.ts';
 
 /**
  * Icon for an object type. Mirrors the client's `getIconFromObjectType`
@@ -11,21 +15,19 @@ export function getIconFromObjectType(
 	format: ObjectType | undefined,
 	accessible: boolean
 ): IconName {
-	switch (format) {
-		case ObjectType.film:
-		case ObjectType.video:
-		case ObjectType.videofragment:
+	const simpleType = mapDcTermsFormatToSimpleType(format);
+
+	switch (simpleType) {
+		case SimpleIeObjectType.VIDEO:
 			return (accessible ? 'video--light' : 'no-video--light') as IconName;
 
-		case ObjectType.audio:
-		case ObjectType.audiofragment:
+		case SimpleIeObjectType.AUDIO:
 			return (accessible ? 'audio--light' : 'no-audio--light') as IconName;
 
-		case ObjectType.newspaper:
-		case ObjectType.newspaperpage:
+		case SimpleIeObjectType.NEWSPAPER:
 			return (accessible ? 'newspaper--light' : 'no-newspaper--light') as IconName;
 
-		case ObjectType.image:
+		case SimpleIeObjectType.IMAGE:
 			return (accessible ? 'image--light' : 'no-image--light') as IconName;
 
 		default:

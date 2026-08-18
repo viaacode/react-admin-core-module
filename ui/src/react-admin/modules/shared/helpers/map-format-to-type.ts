@@ -9,6 +9,34 @@ export enum ObjectType {
 	videofragment = 'videofragment',
 }
 
+export enum SimpleIeObjectType {
+	VIDEO = 'video',
+	AUDIO = 'audio',
+	NEWSPAPER = 'newspaper',
+	IMAGE = 'image',
+}
+
+const MAP_DC_TERMS_FORMAT_TO_SIMPLE_TYPE: Record<ObjectType, SimpleIeObjectType> = {
+	[ObjectType.video]: SimpleIeObjectType.VIDEO,
+	[ObjectType.videofragment]: SimpleIeObjectType.VIDEO,
+	[ObjectType.film]: SimpleIeObjectType.VIDEO,
+	[ObjectType.audio]: SimpleIeObjectType.AUDIO,
+	[ObjectType.audiofragment]: SimpleIeObjectType.AUDIO,
+	[ObjectType.newspaper]: SimpleIeObjectType.NEWSPAPER,
+	[ObjectType.newspaperpage]: SimpleIeObjectType.NEWSPAPER,
+	[ObjectType.image]: SimpleIeObjectType.IMAGE,
+};
+
+export function mapDcTermsFormatToSimpleType(
+	format: ObjectType | undefined | null
+): SimpleIeObjectType | 'unknown' {
+	if (!format) {
+		return 'unknown';
+	}
+
+	return MAP_DC_TERMS_FORMAT_TO_SIMPLE_TYPE[format] || format;
+}
+
 export function mapFormatToType(format?: string): ObjectType | undefined {
 	switch ((format || '').toLowerCase()) {
 		case 'video':
