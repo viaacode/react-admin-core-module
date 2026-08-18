@@ -1,8 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import type { ReactNode } from 'react';
 import React from 'react';
-import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { AdminConfigManager } from '~core/config/config.class';
+import { describe, expect, it, vi } from 'vitest';
 import { BlockDoubleBanner } from './BlockDoubleBanner';
 
 vi.mock('@viaa/avo2-components', () => ({
@@ -30,26 +29,13 @@ vi.mock('~shared/components/SmartLink/SmartLink', () => ({
 }));
 
 describe('BlockDoubleBanner', () => {
-	beforeEach(() => {
-		AdminConfigManager.setConfig({
-			icon: {
-				component: ({ name, className }: { name: string; className?: string }) => (
-					<i className={className} data-icon={name} />
-				),
-				componentProps: {
-					newspaper: { name: 'newspaper--light' },
-				},
-			},
-		} as never);
-	});
-
 	it('wraps each complete half in a same-tab link and keeps its media decorative', () => {
 		render(
 			<BlockDoubleBanner
 				halves={[
 					{
 						label: 'Newspapers',
-						icon1: 'newspaper',
+						icon1: 'newspaper--light',
 						icon2: 'video--light',
 						link: { value: '/newspapers' } as never,
 						image: '/newspapers.jpg',
@@ -81,6 +67,7 @@ describe('BlockDoubleBanner', () => {
 				'true'
 			);
 		}
+		// The shared Icon resolves the config name itself, so the block passes the picked name on.
 		expect(links[0].querySelector('[data-icon="newspaper--light"]')).toBeInTheDocument();
 		expect(links[0].querySelector('[data-icon="video--light"]')).toBeInTheDocument();
 	});
