@@ -19,7 +19,7 @@ export interface BlockHetArchiefQuoteProps extends DefaultProps {
 	// Optional because content blocks created before this block type existed (the old shared
 	// 'QUOTE' block) have no colour fields in their stored componentState, so these arrive
 	// undefined when read straight out of the database.
-	textColor?: Color;
+	textColor?: Color | GradientColor | CustomBackground;
 	frameColor?: Color | GradientColor | CustomBackground;
 }
 

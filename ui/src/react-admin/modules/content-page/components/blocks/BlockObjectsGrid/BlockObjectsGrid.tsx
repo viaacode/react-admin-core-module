@@ -56,7 +56,7 @@ export const BlockObjectsGrid: FunctionComponent<BlockObjectsGridProps> = ({
 		if (width >= BREAKPOINTS.tablet) {
 			return 3;
 		}
-		return 2;
+		return 1;
 	};
 
 	// Packs tiles into rows the same way the CSS grid renders them (auto-flow row, not dense):
@@ -68,7 +68,9 @@ export const BlockObjectsGrid: FunctionComponent<BlockObjectsGridProps> = ({
 		let usedColumns = 0;
 
 		tiles.forEach((tile) => {
-			const width = tile.isFixed ? 2 : 1;
+			// Fixed tiles span 2 columns, except on mobile where the grid is a single column
+			// wide and they span 1 like every other tile (see BlockObjectsGrid.scss).
+			const width = tile.isFixed ? Math.min(2, columns) : 1;
 			if (usedColumns + width > columns) {
 				rows.push(currentRow);
 				currentRow = [];
