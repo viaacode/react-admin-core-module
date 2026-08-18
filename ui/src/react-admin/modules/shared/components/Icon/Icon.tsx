@@ -19,12 +19,19 @@ export const Icon: FC<IconProps> = ({ name, className }) => {
 	};
 	if (!iconProps) {
 		if (isHetArchief()) {
-			console.error(
-				new CustomError('Failed to find hetarchief icon in admin-core config', null, {
-					name,
-					config: iconConfig?.componentProps,
-				})
-			);
+			// Icons picked in the content page editor are stored by their raw icon name
+			// (eg: arrow-right--light) instead of by their admin-core config key (eg: arrowRight)
+			const isKnownIconName = (iconConfig?.list?.() || []).some((option) => option.value === name);
+			if (isKnownIconName) {
+				iconProps = { name };
+			} else {
+				console.error(
+					new CustomError('Failed to find hetarchief icon in admin-core config', null, {
+						name,
+						config: iconConfig?.componentProps,
+					})
+				);
+			}
 		} else {
 			// Default to avo2 icons
 			iconProps = { name };

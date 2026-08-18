@@ -110,7 +110,7 @@ export const ContentPageLabelEdit: FunctionComponent<ContentPageLabelEditProps> 
 				});
 			}
 		}
-	}, [isCreatePage, contentPageLabelId]);
+	}, [contentPageLabelId, isCreatePage]);
 
 	useEffect(() => {
 		initOrFetchContentPageLabel();
@@ -121,6 +121,20 @@ export const ContentPageLabelEdit: FunctionComponent<ContentPageLabelEditProps> 
 			setLoadingInfo({ state: 'loaded' });
 		}
 	}, [contentPageLabelInfo]);
+
+	// ITEM, COLLECTION and BUNDLE only exist in the avo database, hetarchief has ie-objects instead
+	const getLinkToAllowedTypes = (): AvoCoreContentPickerType[] => [
+		AvoCoreContentPickerType.CONTENT_PAGE,
+		...(isHetArchief()
+			? [AvoCoreContentPickerType.IE_OBJECT]
+			: [
+					AvoCoreContentPickerType.ITEM,
+					AvoCoreContentPickerType.COLLECTION,
+					AvoCoreContentPickerType.BUNDLE,
+				]),
+		AvoCoreContentPickerType.INTERNAL_LINK,
+		AvoCoreContentPickerType.EXTERNAL_LINK,
+	];
 
 	const navigateBack = async () => {
 		if (isCreatePage) {
@@ -314,14 +328,7 @@ export const ContentPageLabelEdit: FunctionComponent<ContentPageLabelEditProps> 
 									error={formErrors.link_to}
 								>
 									<ContentPicker
-										allowedTypes={[
-											AvoCoreContentPickerType.CONTENT_PAGE,
-											AvoCoreContentPickerType.ITEM,
-											AvoCoreContentPickerType.COLLECTION,
-											AvoCoreContentPickerType.BUNDLE,
-											AvoCoreContentPickerType.INTERNAL_LINK,
-											AvoCoreContentPickerType.EXTERNAL_LINK,
-										]}
+										allowedTypes={getLinkToAllowedTypes()}
 										onChange={(newLinkTo) =>
 											setContentPageLabelInfo({
 												...contentPageLabelInfo,
@@ -366,7 +373,7 @@ export const ContentPageLabelEdit: FunctionComponent<ContentPageLabelEditProps> 
 		>
 			<AdminLayout.Back>
 				<Button type="borderless" onClick={onGoBack}>
-					<Icon name="chevronLeft"></Icon>
+					<Icon name="chevronLeft" />
 				</Button>
 			</AdminLayout.Back>
 			<AdminLayout.Actions>

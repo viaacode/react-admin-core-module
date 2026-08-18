@@ -115,16 +115,22 @@ const ContentBlockForm: FunctionComponent<ContentBlockFormProps> = ({
 
 		if (fieldGroup.type === 'fieldGroup') {
 			// Mechanism B: re-validate every element in the repeated group so inline
-			// errors clear/appear as the user edits (validators live on the inner fields)
-			const newErrors = validateFieldGroup(
-				configErrors,
-				config,
-				key,
-				fieldGroup.fields,
-				// biome-ignore lint/suspicious/noExplicitAny: state is a single object here (mechanism B)
-				(stateUpdate as any)[key]
-			);
-			onError(blockIndex, newErrors);
+			// errors clear/appear as the user edits (validators live on the inner fields).
+			// For a repeatable block the group lives inside the component at `stateIndex`,
+			// for a non repeatable one it sits directly on the single state object.
+			// biome-ignore lint/suspicious/noExplicitAny: element state shape varies per block
+			const fieldGroupState = (stateToCheckVisibility as any)?.[key];
+
+			if (Array.isArray(fieldGroupState)) {
+				const newErrors = validateFieldGroup(
+					configErrors,
+					config,
+					key,
+					fieldGroup.fields,
+					fieldGroupState
+				);
+				onError(blockIndex, newErrors);
+			}
 		} else if (!(field.isVisible && !field.isVisible(config, stateToCheckVisibility))) {
 			handleValidation(field, key, value, stateIndex);
 		}
@@ -245,15 +251,14 @@ const ContentBlockForm: FunctionComponent<ContentBlockFormProps> = ({
 				<div
 					style={{ backgroundImage: `url(${imageUrl})` }}
 					className="c-content-block-form__accordion__header__preview--image"
-				></div>
-			);
-		} else {
-			return (
-				<div className="c-content-block-form__accordion__header__preview--text">
-					{contentBlock.name.substring(0, 2)}
-				</div>
+				/>
 			);
 		}
+		return (
+			<div className="c-content-block-form__accordion__header__preview--text">
+				{contentBlock.name.substring(0, 2)}
+			</div>
+		);
 	};
 
 	const renderBlockForm = (contentBlock: ContentBlockConfig) => {
