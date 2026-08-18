@@ -9,9 +9,15 @@ import React, {
 	useRef,
 	useState,
 } from 'react';
-import type { BlockOverviewThemesGroupSectionProps } from '~content-blocks/BlockOverviewThemes/BlockOverviewThemes.types.ts';
+import {
+	getThemeEntryImageOverride,
+	getThemeEntryPickerItem,
+} from '~content-blocks/BlockOverviewThemes/BlockOverviewThemes.helpers.ts';
+import type {
+	BlockOverviewThemesGroupSectionProps,
+	BlockOverviewThemesResolvedTheme,
+} from '~content-blocks/BlockOverviewThemes/BlockOverviewThemes.types.ts';
 import { ROUTE_PARTS } from '~shared/consts/routes';
-import type { Theme } from '~shared/services/themes-service/themes.types';
 import { getThemeTileSpans, type ThemeTileSpan } from './getThemeTileSpans';
 import './BlockOverviewThemes.scss';
 import { AvoCoreContentPickerType } from '@viaa/avo2-types';
@@ -71,16 +77,28 @@ export const BlockOverviewThemesGroupSection: FunctionComponent<
 	const themesById = useMemo(() => keyBy(themes, (theme) => theme.id), [themes]);
 	// A picker entry can be `null` (while being cleared in the editor) or point at a theme that no
 	// longer exists, so only the ones that actually resolve are rendered.
-	const resolvedThemes = (group.themes || [])
-		.map((pickerItem) => (pickerItem?.value ? themesById[pickerItem.value] : undefined))
-		.filter((theme): theme is Theme => !!theme);
+	const resolvedThemes: BlockOverviewThemesResolvedTheme[] = (group.themes || [])
+		.map((themeEntry) => {
+			const pickerItem = getThemeEntryPickerItem(themeEntry);
+			const theme = pickerItem?.value ? themesById[pickerItem.value] : undefined;
+			return theme
+				? // The editor can override the image that is configured on the theme itself
+					{ theme, imageUrl: getThemeEntryImageOverride(themeEntry) || theme.imageUrl || '' }
+				: undefined;
+		})
+		.filter((resolvedTheme): resolvedTheme is BlockOverviewThemesResolvedTheme => !!resolvedTheme);
+	// Groups saved before the "achtergrond vormen" field existed have no `shapesVariant`, so those
+	// keep the old behaviour of cycling through the 3 arrangements by group index.
+	const shapesVariantIndex = group.shapesVariant
+		? Number.parseInt(group.shapesVariant, 10) - 1
+		: groupIndex % 3;
 	const spans = getThemeTileSpans(resolvedThemes.length);
 
 	/**
 	 * Renders the white meemoo logo shapes in the colors bands behind the theme group title and first row
-	 * @param groupIndex
+	 * @param variantIndex zero based index of the shape arrangement to render
 	 */
-	const renderGroupShapes = (groupIndex: number) => {
+	const renderGroupShapes = (variantIndex: number) => {
 		const rectangleStyles: CSSProperties = { width: '6cqw' };
 		const circleStyles: CSSProperties = { borderRadius: '50%' };
 		const shapeStyles: [CSSProperties, CSSProperties][] = [
@@ -112,11 +130,11 @@ export const BlockOverviewThemesGroupSection: FunctionComponent<
 			<>
 				<div
 					className="c-block-overview-themes__group-shape"
-					style={{ ...shapeStyles[groupIndex % 3][0], ...positionStyles[groupIndex % 3][0] }}
+					style={{ ...shapeStyles[variantIndex][0], ...positionStyles[variantIndex][0] }}
 				/>
 				<div
 					className="c-block-overview-themes__group-shape"
-					style={{ ...shapeStyles[groupIndex % 3][1], ...positionStyles[groupIndex % 3][1] }}
+					style={{ ...shapeStyles[variantIndex][1], ...positionStyles[variantIndex][1] }}
 				/>
 			</>
 		);
@@ -130,7 +148,7 @@ export const BlockOverviewThemesGroupSection: FunctionComponent<
 						className="c-block-overview-themes__group-band"
 						style={{ height: `${bandHeight}px`, backgroundColor: bandColor }}
 					/>
-					{renderGroupShapes(groupIndex)}
+					{renderGroupShapes(shapesVariantIndex)}
 				</>
 			)}
 			{group.title && (
@@ -142,7 +160,7 @@ export const BlockOverviewThemesGroupSection: FunctionComponent<
 				</BlockHeading>
 			)}
 			<div ref={gridRef} className="c-block-overview-themes__grid">
-				{resolvedThemes.map((theme, tileIndex) => {
+				{resolvedThemes.map(({ theme, imageUrl }, tileIndex) => {
 					const span = spans[tileIndex];
 					const url = stringifyUrl({
 						url: `/${ROUTE_PARTS.search}`,
@@ -163,7 +181,7 @@ export const BlockOverviewThemesGroupSection: FunctionComponent<
 							}}
 						>
 							<Image
-								src={theme.imageUrl || ''}
+								src={imageUrl}
 								alt={themeNameLocale}
 								className="c-block-overview-themes__tile-image"
 							/>
