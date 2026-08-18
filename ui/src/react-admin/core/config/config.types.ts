@@ -187,6 +187,7 @@ export interface IconConfig {
 	component: ComponentType<{ name: string; className?: string }>;
 	componentProps: {
 		add: IconComponentProps;
+		collection: IconComponentProps;
 		angleUp: IconComponentProps;
 		angleDown: IconComponentProps;
 		angleLeft: IconComponentProps;

@@ -270,7 +270,7 @@ export const BlockThemeReelSection: FunctionComponent<BlockThemeReelSectionProps
 									>
 										<Button
 											variants={['black', 'sm', 'block']}
-											icon={<Icon name="add" />}
+											icon={<Icon name="collection" />}
 											disabled
 											tabIndex={-1}
 										/>
