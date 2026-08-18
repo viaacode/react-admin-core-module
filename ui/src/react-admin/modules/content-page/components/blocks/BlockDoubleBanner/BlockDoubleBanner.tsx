@@ -49,7 +49,9 @@ export const BlockDoubleBanner: FunctionComponent<BlockDoubleBannerProps> = ({
 					</span>
 				</div>
 				<div className="c-block-double-banner__image">
-					<Image src={half.image} alt="" />
+					{/* Before an image is uploaded the value is empty, and an empty src makes the
+					    browser refetch the page. */}
+					{half.image ? <Image src={half.image} alt="" /> : null}
 				</div>
 			</>
 		);
