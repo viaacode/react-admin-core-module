@@ -71,6 +71,11 @@ export const BlockHeroCarouselCarousel: FunctionComponent<BlockHeroCarouselCarou
 	return (
 		<div className={clsx('c-block-hero-carousel__carousel')}>
 			<div className={clsx('c-block-hero-carousel__carousel-viewport')}>
+				<CarouselButtons
+					className={'c-block-hero-carousel__carousel-navigation'}
+					onPrev={goPrev}
+					onNext={goNext}
+				/>
 				<div
 					ref={trackRef}
 					className={clsx('c-block-hero-carousel__carousel-track')}
@@ -127,11 +132,6 @@ export const BlockHeroCarouselCarousel: FunctionComponent<BlockHeroCarouselCarou
 						);
 					})}
 				</div>
-				<CarouselButtons
-					className={'c-block-hero-carousel__carousel-navigation'}
-					onPrev={goPrev}
-					onNext={goNext}
-				/>
 			</div>
 			<ObjectMetadata
 				className={'c-block-hero-carousel__carousel-metadata'}

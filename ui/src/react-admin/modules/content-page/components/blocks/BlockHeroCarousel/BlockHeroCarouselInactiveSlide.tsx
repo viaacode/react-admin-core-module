@@ -56,7 +56,7 @@ export const BlockHeroCarouselInactiveSlide: FunctionComponent<
 			role="img"
 			aria-label={getObjectTypeLabel(item.dctermsFormat)}
 		>
-			<Icon name={getIconFromObjectType(item.dctermsFormat, Boolean(item.videoThumbnail))} />
+			<Icon name={getIconFromObjectType(item.dctermsFormat, Boolean(item.thumbnailUrl))} />
 		</div>
 	);
 

@@ -16,6 +16,7 @@ $hero-carousel-format-widths: (
 
 $background-image-height: 80%;
 $slide-height: 16rem;
+$slide-animation: 1.3s ease-out;
 $ken-burns-duration: 15s;
 
 $hero-carousel-search-height-mobile: 4.8rem;
@@ -341,6 +342,12 @@ $hero-carousel-search-radius-desktop: 3.2rem;
 	&__carousel {
 		position: relative;
 
+		--active-slide-height: 32rem;
+
+		@media (max-width: variables.$g-bp2) {
+			--active-slide-height: 20rem;
+		}
+
 		&-navigation {
 			position: absolute;
 			right: 0;
@@ -349,6 +356,11 @@ $hero-carousel-search-radius-desktop: 3.2rem;
 
 			.c-button {
 				margin-bottom: 0 !important;
+			}
+
+			@media (max-width: variables.$g-bp2) {
+				position: unset;
+				justify-content: end;
 			}
 		}
 
@@ -361,11 +373,11 @@ $hero-carousel-search-radius-desktop: 3.2rem;
 			display: flex;
 			gap: 1.2rem; // matches GAP_PX in BlockHeroCarousel.utils.ts
 			align-items: flex-end;
-			height: 32rem;
+			height: var(--active-slide-height);
 
 			// Matches the &-slide transition below so the slide-into-place motion and
 			// the grow/shrink read as one combined movement, not two differently-eased ones.
-			transition: transform 1.3s ease-out;
+			transition: transform $slide-animation;
 
 			// Suppresses transitions during an instant recenter jump or a resize-driven
 			// px-per-rem resync, so those DOM mutations land without animating.
@@ -381,8 +393,10 @@ $hero-carousel-search-radius-desktop: 3.2rem;
 			flex-shrink: 0;
 			height: $slide-height;
 			width: 12rem;
-			transition: height 1.3s ease-out, width 1.3s ease-out, border 1.3s ease-out;
+			transition: height $slide-animation, width $slide-animation, border-width $slide-animation, outline $slide-animation;
 			border: 3px solid colors.$color-gray-1000;
+			outline: 0 solid transparent;
+			cursor: pointer;
 
 			@each $format, $width in $hero-carousel-format-widths {
 				&--#{$format} {
@@ -393,9 +407,15 @@ $hero-carousel-search-radius-desktop: 3.2rem;
 			// Compound selector (two classes) so this reliably outranks the single-class
 			// format-width rules above, regardless of declaration order.
 			&.c-block-hero-carousel__carousel-slide--active {
-				height: 32rem;
-				width: 51.2rem;
-				border: 6px solid colors.$color-ocean-green;
+				height: var(--active-slide-height);
+				width: 56rem;
+				outline: 6px solid colors.$color-ocean-green;
+				border-width: 2px;
+				cursor: unset;
+
+				@media (max-width: variables.$g-bp2) {
+					width: 35.5rem;
+				}
 			}
 
 			.c-video-player {
@@ -515,7 +535,7 @@ $hero-carousel-search-radius-desktop: 3.2rem;
 			color: colors.$color-gray-1000;
 			height: fit-content;
 			margin-top: 0;
-			padding: (variables.$g-spacer-unit * 2) 0;
+			padding: (variables.$g-spacer-unit * 2.5) 0 (variables.$g-spacer-unit * 2);
 			background-color: transparent;
 		}
 	}
