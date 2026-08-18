@@ -486,14 +486,14 @@ $hero-carousel-search-radius-desktop: 3.2rem;
 					display: flex;
 					align-items: center;
 					padding: 0 (variables.$g-spacer-unit * 2);
-					border-radius: 999px;
+					border-radius: variables.$g-border-radius-non-square;
 					overflow: hidden;
 					background-color: colors.$color-gray-1000;
 
 					&-track {
 						flex: 1;
 						height: 0.4rem;
-						border-radius: 999px;
+						border-radius: variables.$g-border-radius-non-square;
 						overflow: hidden;
 						background-color: colors.$color-gray-shadow;
 					}
@@ -501,7 +501,7 @@ $hero-carousel-search-radius-desktop: 3.2rem;
 					&-fill {
 						height: 100%;
 						width: 0;
-						border-radius: 999px;
+						border-radius: variables.$g-border-radius-non-square;
 						background-color: colors.$color-ocean-green;
 						animation: hero-carousel-progress-fill $ken-burns-duration linear forwards;
 					}
