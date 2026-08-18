@@ -49,8 +49,8 @@ export const BlockHeroCarouselActiveSlide: FunctionComponent<BlockHeroCarouselAc
 	}
 
 	const getStartAndEnd = () => {
-		let cueStart: number | null = null;
-		let cueEnd: number | null = null;
+		let startPoint: number | null = null;
+		let endPoint: number | null = null;
 
 		// Only snipPoint if there are any set, and they do not fall outside the range of the video itself
 		if (item.snipPoint) {
@@ -59,7 +59,7 @@ export const BlockHeroCarouselActiveSlide: FunctionComponent<BlockHeroCarouselAc
 				item.snipPoint.start > 0 &&
 				(isNil(mediaDuration) || item.snipPoint.start < mediaDuration)
 			) {
-				cueStart = item.snipPoint.start;
+				startPoint = item.snipPoint.start;
 			}
 
 			if (
@@ -67,11 +67,11 @@ export const BlockHeroCarouselActiveSlide: FunctionComponent<BlockHeroCarouselAc
 				(isNil(mediaDuration) ||
 					(item.snipPoint.end && item.snipPoint.end < mediaDuration && item.snipPoint.end > 0))
 			) {
-				cueEnd = item.snipPoint.end;
+				endPoint = item.snipPoint.end;
 			}
 		}
 
-		return getValidStartAndEnd(cueStart, cueEnd, mediaDuration);
+		return getValidStartAndEnd(startPoint, endPoint, mediaDuration);
 	};
 
 	// The active slide is the only one big enough to warrant the full-size newspaper image, so
@@ -91,6 +91,7 @@ export const BlockHeroCarouselActiveSlide: FunctionComponent<BlockHeroCarouselAc
 		token: AdminConfigManager.getConfig().flowplayer.FLOW_PLAYER_TOKEN,
 		dataPlayerId: AdminConfigManager.getConfig().flowplayer.FLOW_PLAYER_ID,
 		ui: isAudioVideoFormat(item.dctermsFormat) ? undefined : 1, // 1 = NO_FULLSCREEN
+		// TODO: remove cuepoints later
 		plugins: ['subtitles', 'cuepoints', 'audio'],
 		peakColorBackground: Color.Gray800,
 		peakColorInactive: Color.Zinc,

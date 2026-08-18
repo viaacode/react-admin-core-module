@@ -46,10 +46,8 @@ export const BlockHeroCarousel: FunctionComponent<BlockHeroCarouselProps> = ({
 					? (allTertiaryColors[randomIndex].value as Color)
 					: Color.Mustard,
 				snipPoint: {
-					start: object.startCuePoint
-						? (toSeconds(object.startCuePoint, true) ?? undefined)
-						: undefined,
-					end: object.endCuePoint ? (toSeconds(object.endCuePoint, true) ?? undefined) : undefined,
+					start: object.startPoint ? (toSeconds(object.startPoint, true) ?? undefined) : undefined,
+					end: object.endPoint ? (toSeconds(object.endPoint, true) ?? undefined) : undefined,
 				},
 			} as HeroCarouselSlideItem;
 		});

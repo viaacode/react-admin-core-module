@@ -36,8 +36,8 @@ const INITIAL_HERO_CAROUSEL_ELEMENT_STATE = (): HeroCarouselBlockComponentState 
 		type: AvoCoreContentPickerType.IE_OBJECT,
 		value: '',
 	},
-	startCuePoint: '',
-	endCuePoint: '',
+	startPoint: '',
+	endPoint: '',
 	videoThumbnail: undefined,
 });
 
@@ -67,7 +67,7 @@ const snipPointIsVisible: ContentBlockField['isVisible'] = (config, formGroupSta
 	);
 };
 
-const CUE_POINT_FIELD = (label: string, error: string) =>
+const SNIP_POINT_FIELD = (label: string, error: string) =>
 	TEXT_FIELD({
 		label,
 		editorProps: {
@@ -189,7 +189,7 @@ export const HERO_CAROUSEL_CONFIG = (position = 0): ContentBlockConfig => ({
 							hideTypeDropdown: true,
 							hideTargetSwitch: true,
 						},
-						fieldsToResetOnChange: ['startCuePoint', 'endCuePoint'],
+						fieldsToResetOnChange: ['startPoint', 'endPoint'],
 						validator: (value: PickerItem) => {
 							if (!value?.value) {
 								return [
@@ -203,7 +203,7 @@ export const HERO_CAROUSEL_CONFIG = (position = 0): ContentBlockConfig => ({
 							return [];
 						},
 					},
-					startCuePoint: CUE_POINT_FIELD(
+					startPoint: SNIP_POINT_FIELD(
 						tText(
 							'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel___start-cue-point',
 							undefined,
@@ -215,7 +215,7 @@ export const HERO_CAROUSEL_CONFIG = (position = 0): ContentBlockConfig => ({
 							[HET_ARCHIEF]
 						)
 					),
-					endCuePoint: CUE_POINT_FIELD(
+					endPoint: SNIP_POINT_FIELD(
 						tText(
 							'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel___end-cue-point',
 							undefined,
