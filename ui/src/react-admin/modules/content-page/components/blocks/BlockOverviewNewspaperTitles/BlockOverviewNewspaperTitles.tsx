@@ -4,8 +4,9 @@ import { stringifyUrl } from 'query-string';
 import type { ChangeEvent, FC } from 'react';
 import React, { useEffect, useState } from 'react';
 import { BlockHeading } from '~content-blocks/BlockHeading/BlockHeading';
+import { AdminCoreIconName } from '~core/config/config.types';
 import { Link } from '~modules/shared/components/Link/Link';
-import { Icon } from '~shared/components/Icon/Icon';
+import { Icon, RawIcon } from '~shared/components/Icon/Icon';
 import { generateSmartLink } from '~shared/components/SmartLink/SmartLink';
 import { tText } from '~shared/helpers/translation-functions';
 import { HET_ARCHIEF } from '~shared/types';
@@ -53,7 +54,7 @@ export const BlockOverviewNewspaperTitles: FC<BlockOverviewNewspaperTitlesProps>
 						<Button
 							label={buttonLabel}
 							type={buttonType}
-							renderIcon={buttonIcon ? () => <Icon name={buttonIcon} /> : undefined}
+							renderIcon={buttonIcon ? () => <RawIcon name={buttonIcon} /> : undefined}
 						/>,
 						buttonAltTitle || buttonLabel
 					)}
@@ -69,7 +70,7 @@ export const BlockOverviewNewspaperTitles: FC<BlockOverviewNewspaperTitlesProps>
 				)}
 				iconEnd={
 					<div>
-						<Icon name="filter" />
+						<Icon name={AdminCoreIconName.Filter} />
 					</div>
 				}
 				onChange={(value: ChangeEvent<HTMLInputElement>) => setSearchInput(value.target.value)}

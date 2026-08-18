@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import type { FunctionComponent } from 'react';
 import type { Props as ReactSelectProps } from 'react-select';
 import Select from 'react-select';
-import { Icon } from '~shared/components/Icon/Icon';
+import { RawIcon } from '~shared/components/Icon/Icon';
 
 import './IconPicker.scss';
 
@@ -18,7 +18,7 @@ export const IconPicker: FunctionComponent<ReactSelectProps> = ({
 	// biome-ignore lint/suspicious/noExplicitAny: todo
 	const renderLabel = (option: any) => (
 		<Flex>
-			{<Icon name={option?.value} />}
+			{<RawIcon name={option?.value} />}
 			<Spacer margin="left">{option?.label as string}</Spacer>
 		</Flex>
 	);

@@ -7,7 +7,7 @@ import type { FC } from 'react';
 import React, { useCallback, useEffect, useReducer, useState } from 'react';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import { AdminConfigManager } from '~core/config/config.class';
-import { ToastType } from '~core/config/config.types';
+import { AdminCoreIconName, ToastType } from '~core/config/config.types';
 import { ContentEditForm } from '~modules/content-page/components/ContentEditForm/ContentEditForm';
 import { ContentPagePreviewUserRoleSelector } from '~modules/content-page/components/ContentPagePreviewUserRoleSelector/ContentPagePreviewUserRoleSelector';
 import { CONTENT_BLOCK_INITIAL_STATE_MAP } from '~modules/content-page/const/content-block-initial-state-map';
@@ -513,7 +513,7 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 						id:
 							typeof (id as string | number) === 'string' && id.includes('-')
 								? id
-								: parseInt(id, 10), // Numeric ids in avo, uuid's in hetarchief
+								: Number.parseInt(id, 10), // Numeric ids in avo, uuid's in hetarchief
 						content_blocks: blockConfigs,
 						path: ContentPageService.getPathOrDefault(contentPageState.currentContentPageInfo),
 					};
@@ -807,7 +807,7 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 			<AdminLayout className={className} pageTitle={pageTitle}>
 				<AdminLayout.Back>
 					<Button type="borderless" onClick={onGoBack}>
-						<Icon name="chevronLeft"></Icon>
+						<Icon name={AdminCoreIconName.ChevronLeft} />
 					</Button>
 				</AdminLayout.Back>
 				<AdminLayout.Actions>

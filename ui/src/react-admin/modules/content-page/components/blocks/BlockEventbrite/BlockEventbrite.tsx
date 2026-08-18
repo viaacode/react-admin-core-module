@@ -1,9 +1,9 @@
-import type { AlignOptions, ButtonProps, DefaultProps, IconName } from '@viaa/avo2-components';
+import type { AlignOptions, ButtonProps, DefaultProps } from '@viaa/avo2-components';
 import { Button } from '@viaa/avo2-components';
 import clsx from 'clsx';
 import type { FunctionComponent } from 'react';
 import React, { useEffect } from 'react';
-import { Icon } from '~shared/components/Icon/Icon';
+import { RawIcon } from '~shared/components/Icon/Icon';
 
 import './BlockEventbrite.scss';
 
@@ -53,7 +53,7 @@ export const BlockEventbrite: FunctionComponent<BlockEventbriteProps> = ({
 			<Button
 				{...rest}
 				id={elementId}
-				renderIcon={rest.icon ? () => <Icon name={rest.icon as IconName} /> : undefined}
+				renderIcon={rest.icon ? () => <RawIcon name={rest.icon} /> : undefined}
 			/>
 		</div>
 	);
