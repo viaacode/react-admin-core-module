@@ -25,13 +25,11 @@ export const ObjectMetadata: FunctionComponent<{
 			ariaLabel={tText('Bekijk volledig fragment', {}, [HET_ARCHIEF])}
 			className="c-object-metadata__cta"
 		>
-			<Button variants={['block', 'black']}>
-				{isMobileWidth() ? (
-					<Icon name={'arrow-down-right' as IconName} />
-				) : (
-					tText('Bekijk volledig fragment', {}, [HET_ARCHIEF])
-				)}
-			</Button>
+			<Button
+				variants={['block', 'black']}
+				icon={isMobileWidth() ? <Icon name={'arrow-down-right' as IconName} /> : undefined}
+				label={isMobileWidth() ? undefined : tText('Bekijk volledig fragment', {}, [HET_ARCHIEF])}
+			/>
 		</SmartLink>
 		<div className="c-object-metadata__text">
 			<p className="c-object-metadata__title">{ieObject?.name || fallbackTitle}</p>

@@ -39,6 +39,7 @@
 		@include typography.truncate;
 
 		@media (max-width: variables.$g-bp3) {
+			margin-bottom: variables.$g-spacer-unit;
 			@include typography.truncate-after-x-lines(2);
 		}
 	}
