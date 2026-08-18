@@ -20,8 +20,7 @@ export interface BlockOverviewThemesThemeEntry {
 export interface BlockOverviewThemesGroup {
 	title: string;
 	titleType: HeadingTypeOption;
-	// Both optional: groups saved before these fields existed fall back to cycling by group index
-	bandColor?: string;
+	bandColor: string;
 	shapesVariant?: BlockOverviewThemesShapesVariant;
 	themes: BlockOverviewThemesThemeEntry[];
 }

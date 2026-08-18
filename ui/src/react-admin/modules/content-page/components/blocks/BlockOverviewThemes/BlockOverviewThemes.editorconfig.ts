@@ -2,9 +2,13 @@ import type { SelectOption } from '@viaa/avo2-components';
 import { AvoCoreContentPickerType } from '@viaa/avo2-types';
 import type { BlockOverviewThemesShapesVariant } from '~content-blocks/BlockOverviewThemes/BlockOverviewThemes.types';
 import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, TEXT_FIELD } from '~content-blocks/defaults';
-import { GET_SECONDARY_BACKGROUND_COLOR_OPTIONS_ARCHIEF } from '~modules/content-page/const/get-color-options';
+import {
+	GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF,
+	GET_SECONDARY_BACKGROUND_COLOR_OPTIONS_ARCHIEF,
+} from '~modules/content-page/const/get-color-options';
 import { GET_FULL_HEADING_TYPE_OPTIONS } from '~modules/content-page/const/get-heading-type-options';
 import {
+	Color,
 	type ContentBlockConfig,
 	ContentBlockEditor,
 	ContentBlockType,
@@ -57,7 +61,7 @@ const INITIAL_OVERVIEW_THEMES_THEME_STATE = () => ({
 const INITIAL_OVERVIEW_THEMES_GROUP_STATE = () => ({
 	title: '',
 	titleType: 'h2',
-	bandColor: GET_SECONDARY_BACKGROUND_COLOR_OPTIONS_ARCHIEF()[0].value,
+	bandColor: GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF().find((color) => color.value === Color.SeaGreen),
 	shapesVariant: '1' as BlockOverviewThemesShapesVariant,
 	themes: [INITIAL_OVERVIEW_THEMES_THEME_STATE()],
 });
@@ -132,7 +136,9 @@ export const OVERVIEW_THEMES_BLOCK_CONFIG = (position = 0): ContentBlockConfig =
 				editorType: ContentBlockEditor.ColorSelect,
 				editorProps: {
 					options: GET_SECONDARY_BACKGROUND_COLOR_OPTIONS_ARCHIEF(),
-					defaultValue: GET_SECONDARY_BACKGROUND_COLOR_OPTIONS_ARCHIEF()[0],
+					defaultValue: GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF().find(
+						(color) => color.value === Color.SeaGreen
+					),
 				},
 			},
 			shapesVariant: {
