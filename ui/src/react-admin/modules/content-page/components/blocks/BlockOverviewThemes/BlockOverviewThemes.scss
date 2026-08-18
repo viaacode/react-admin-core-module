@@ -1,0 +1,206 @@
+@use "../../../../shared/styles/settings/variables" as variables;
+@use "../../../../shared/styles/settings/colors" as colors;
+@use "../../../../shared/styles/mixins/typography" as typography;
+@use "../../../../shared/styles/mixins/animations" as animations;
+@use "../../../../shared/styles/mixins/focus" as focus;
+
+$tile-padding: 3rem;
+$description-animation-speed: 0.3s;
+
+.c-block-overview-themes {
+	@include typography.sofia-pro-heading-xl;
+
+	&__group {
+		position: relative;
+		padding: (4 * variables.$g-spacer-unit) (3 * variables.$g-spacer-unit) 0;
+
+		@media (min-width: variables.$g-bp3) {
+			padding: (6 * variables.$g-spacer-unit) (5 * variables.$g-spacer-unit) 0;
+		}
+	}
+
+	// Full-bleed colored band behind the title + first grid row. Its height is measured from
+	// the real rendered layout (see BlockOverviewThemes.tsx) since a "tall" tile can span from
+	// row 1 into row 2. The 5000px width is just a generous fixed size to guarantee it always
+	// covers the viewport, breaking out of any max-width content container.
+	&__group-band {
+		position: absolute;
+		top: 0;
+		left: -2500px;
+		z-index: 0;
+		width: 5000px;
+	}
+
+	&__group-shape{
+		width: 10cqw;
+		height: 10cqw;
+		background-color: colors.$white;
+		position: absolute;
+		top: 0;
+		right: 0;
+	}
+
+	&__group-title {
+		position: relative;
+		z-index: 1;
+		@include typography.sofia-pro-heading-xl(true);
+
+		// Reset so the heading level (h1-h4, chosen for semantics only) never affects the visual style.
+		margin: 0 0 (variables.$g-spacer-unit * 3) !important;
+		color: colors.$color-gray-1000;
+
+		@media (min-width: variables.$g-bp3) {
+			font-size: 3.2rem !important;
+			margin-bottom: variables.$g-spacer-unit * 4;
+		}
+	}
+
+	&__grid {
+		position: relative;
+		z-index: 1;
+		display: grid;
+		grid-template-columns: 1fr;
+
+		// The "snake" tile spans (see getThemeTileSpans.ts) only make sense in a 3-column grid;
+		// below this breakpoint every tile is forced back to a single stacked column.
+		@media (min-width: variables.$g-bp2) {
+			grid-template-columns: repeat(3, 1fr);
+			grid-auto-rows: 20rem;
+		}
+
+		@media (min-width: variables.$g-bp4) {
+			grid-auto-rows: 24rem;
+		}
+	}
+
+	&__tile {
+		position: relative;
+		display: block;
+		aspect-ratio: 4/3;
+		overflow: hidden;
+		text-decoration: none;
+		@include focus.focus-outline;
+
+		@media (min-width: variables.$g-bp2) {
+			// Size comes from the grid row/column spans below instead of a fixed aspect ratio.
+			aspect-ratio: auto;
+			grid-column: span 1;
+			grid-row: span 1;
+
+			&--tall {
+				grid-row: span 2;
+			}
+
+			&--wide {
+				grid-column: span 2;
+			}
+
+			&--full-width {
+				grid-column: span 3;
+			}
+		}
+
+		// Below the breakpoint the grid collapses to a single column: neutralise any computed
+		// span so every tile is still a simple, plainly-stacked full-width card.
+		@media (max-width: variables.$g-bp2 - 1) {
+			grid-column: span 1 !important;
+			grid-row: span 1 !important;
+		}
+
+
+		&:hover &-image > img {
+			@include animations.zoom-in-animation;
+		}
+
+		&::after {
+			content: "";
+			position: absolute;
+			inset: 0;
+			background: linear-gradient(180deg, rgb(0 0 0 / 0%) 40%, rgb(0 0 0 / 72%) 100%);
+			pointer-events: none;
+		}
+
+		// The description is collapsed to nothing by default and only grows/fades in on hover, so
+		// it visually slides up from the bottom of the tile alongside the (already bottom-anchored)
+		// title.
+		&:hover &-description,
+		&:focus-within &-description {
+			max-height: 7.2rem;
+			opacity: 1;
+			transform: translateY(0);
+			margin-top: variables.$g-spacer-unit;
+		}
+	}
+
+	&__tile-image {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+
+		> img {
+			object-fit: cover;
+			object-position: center;
+			width: 100%;
+			height: 100%;
+			@include animations.zoom-in-transition;
+		}
+	}
+
+	// Title/description and icon share one flex row so the icon always reserves its own space
+	// instead of being positioned independently of the title, which could make long titles run
+	// underneath it.
+	&__tile-content {
+		position: absolute;
+		inset: auto 0 0 0;
+		z-index: 1;
+		display: flex;
+		align-items: flex-end;
+		justify-content: space-between;
+		gap: variables.$g-spacer-unit;
+		padding: $tile-padding;
+	}
+
+	&__tile-text {
+		// Lets the column shrink below its content width so it wraps/clamps within the space left
+		// by the icon instead of pushing the flex row wider than the tile.
+		min-width: 0;
+		display: flex;
+		flex-direction: column;
+	}
+
+	&__tile-title {
+		color: colors.$white;
+		@include typography.sofia-pro-heading-md;
+		@include typography.truncate-after-x-lines(2);
+	}
+
+	// Hidden until the tile is hovered/focused (see the `&:hover &-description` rule above), where
+	// it fades and slides up into view below the title. Deliberately NOT using
+	// `truncate-after-x-lines` here: `-webkit-line-clamp` recomputes how many lines fit at every
+	// animation frame, which made the text pop in line-by-line instead of revealing smoothly.
+	// Plain `overflow: hidden` clips continuously as `max-height` grows, so it stays smooth; the
+	// trade-off is a hard cut instead of an ellipsis if the text would need a 4th line.
+	&__tile-description {
+		margin: 0;
+		max-height: 0;
+		opacity: 0;
+		overflow: hidden;
+		transform: translateY(0.5rem);
+		transition:
+			max-height $description-animation-speed ease-out,
+			opacity $description-animation-speed ease-out,
+			transform $description-animation-speed ease-out,
+			margin-top $description-animation-speed ease-out;
+		color: colors.$white;
+		@include typography.sofia-pro-body-sm;
+	}
+
+	.c-block-overview-themes__tile {
+		&-title__icon {
+			flex-shrink: 0;
+			color: colors.$white;
+			font-size: 2.4rem;
+		}
+	}
+}

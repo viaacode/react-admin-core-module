@@ -9,6 +9,9 @@ import type { ReactNode } from 'react';
 
 export interface GridItem {
 	source: string;
+	copyrightTitle?: string;
+	copyrightIconVisible?: boolean;
+	copyrightText?: string;
 	titleAbove?: string;
 	title?: string;
 	textAbove?: string | ReactNode;
@@ -18,6 +21,9 @@ export interface GridItem {
 	buttonTitle?: string;
 	buttonAltTitle?: string;
 	action?: ButtonAction;
+	// Visual label drawn in the top left corner of the image
+	// https://meemoo.atlassian.net/browse/ARC-3818
+	imageLabel?: { text: string; color: string };
 }
 
 export type CssSizeSetting = `${number}${'rem' | '%'}`;

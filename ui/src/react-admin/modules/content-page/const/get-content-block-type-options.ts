@@ -79,8 +79,8 @@ export const GET_CONTENT_BLOCK_TYPE_OPTIONS: () => SelectOption<string>[] = () =
 			value: ContentBlockType.Spotlight,
 		},
 		{
-			label: tText('admin/content-block/content-block___quote'),
-			value: ContentBlockType.Quote,
+			label: tText('admin/content-block/content-block___quote', {}, [AVO]),
+			value: ContentBlockType.AvoQuote,
 		},
 		{
 			label: tText('admin/content-block/helpers/generators/anchor-links___links'),
@@ -183,6 +183,50 @@ export const GET_CONTENT_BLOCK_TYPE_OPTIONS: () => SelectOption<string>[] = () =
 				[HET_ARCHIEF]
 			),
 			value: ContentBlockType.OverviewWithCarousel,
+		},
+		{
+			label: tText('modules/content-page/const/get-content-block-type-options___quote-kader', {}, [
+				HET_ARCHIEF,
+			]),
+			value: ContentBlockType.HetArchiefQuote,
+		},
+		{
+			label: tText(
+				'modules/content-page/const/get-content-block-type-options___homepage-banner',
+				{},
+				[HET_ARCHIEF]
+			),
+			value: ContentBlockType.HomepageBanner,
+		},
+		{
+			label: tText(
+				'modules/content-page/const/get-content-block-type-options___highlight-text',
+				{},
+				[HET_ARCHIEF]
+			),
+			value: ContentBlockType.HighlightText,
+		},
+		{
+			label: tText('modules/content-page/const/get-content-block-type-options___thema-reels', {}, [
+				HET_ARCHIEF,
+			]),
+			value: ContentBlockType.ThemeReels,
+		},
+		{
+			label: tText(
+				'modules/content-page/const/get-content-block-type-options___objecten-grid',
+				{},
+				[HET_ARCHIEF]
+			),
+			value: ContentBlockType.ObjectsGrid,
+		},
+		{
+			label: tText(
+				'modules/content-page/const/get-content-block-type-options___overzicht-themas',
+				{},
+				[HET_ARCHIEF]
+			),
+			value: ContentBlockType.OverviewThemes,
 		},
 		{
 			label: tText(

@@ -50,6 +50,7 @@ query getContentPages(
 				id
 				label
 				link_to
+				color
 			}
 		}
 	}

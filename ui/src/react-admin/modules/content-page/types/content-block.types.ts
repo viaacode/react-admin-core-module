@@ -9,6 +9,7 @@ import type {
 import type { AvoContentPageType } from '@viaa/avo2-types';
 import type { ReactNode } from 'react';
 import type { BlockAvoHeroProps } from '~content-blocks/BlockAvoHero/BlockAvoHero';
+import type { BlockBreadcrumbsProps } from '~content-blocks/BlockBreadcrumbs/BlockBreadcrumbs.types';
 import type {
 	ContentItemStyle,
 	ContentTabStyle,
@@ -127,9 +128,21 @@ export interface PaddingFieldState {
 
 // CONTENT BLOCK CONFIG
 
-// if 1 block, errors is a string[]. If multiple, it is a string[] index by their stateIndex, so string[][].
-export type ContentBlockErrors = { [key: string]: (string | string[])[] };
+// Errors for a repeated field group (mechanism B, e.g. `elements`): one entry per
+// element index, each mapping an inner field key to its error messages.
+export type ContentBlockFieldGroupErrors = Record<string, string[]>[];
 
+// if 1 block, errors is a string[]. If multiple, it is a string[] index by their stateIndex, so string[][].
+// For a repeated field group the value is a ContentBlockFieldGroupErrors instead.
+export type ContentBlockErrors = {
+	[key: string]: (string | string[])[] | ContentBlockFieldGroupErrors;
+};
+
+/**
+ * @deprecated Legacy: bounds the array-valued `components.state` repetition mechanism (A).
+ * For new blocks use the `fieldGroup` + `repeat` mechanism (B) and put `min`/`max` on the
+ * `ContentBlockFieldGroup` instead. See `components/blocks/README.md`.
+ */
 export interface ContentBlockComponentsLimits {
 	min?: number;
 	max?: number;
@@ -156,7 +169,7 @@ export enum ContentBlockType {
 	MediaPlayerTitleTextButton = 'MEDIA_PLAYER_TITLE_TEXT_BUTTON',
 	PageOverview = 'PAGE_OVERVIEW',
 	ProjectsSpotlight = 'PROJECTS_SPOTLIGHT',
-	Quote = 'QUOTE',
+	AvoQuote = 'QUOTE',
 	RichText = 'RICH_TEXT',
 	RichTextTwoColumns = 'RICH_TEXT_TWO_COLUMNS',
 	Search = 'SEARCH',
@@ -169,12 +182,18 @@ export enum ContentBlockType {
 	HetArchiefImageTextBackground = 'IMAGE_TEXT_BACKGROUND', // Hetarchief
 	MaintainersGrid = 'MAINTAINERS_GRID',
 	HetArchiefHeaderSearch = 'HETARCHIEF__HEADER_SEARCH',
+	HetArchiefQuote = 'HETARCHIEF_QUOTE',
 	OverviewNewspaperTitles = 'OVERVIEW_NEWSPAPER_TITLES',
 	ContentEncloseGrid = 'CONTENT_ENCLOSE_GRID',
 	Breadcrumbs = 'BREADCRUMBS',
 	AvoImageTextBackground = 'AVO_IMAGE_TEXT_BACKGROUND', // Avo
 	ScrollDownNudge = 'SCROLL_DOWN_NUDGE',
 	OverviewWithCarousel = 'OVERVIEW_WITH_CAROUSEL',
+	HomepageBanner = 'HOMEPAGE_BANNER',
+	HighlightText = 'HIGHLIGHT_TEXT',
+	ThemeReels = 'THEME_REELS',
+	ObjectsGrid = 'OBJECTS_GRID',
+	OverviewThemes = 'OVERVIEW_THEMES',
 	HetArchiefVideo = 'HETARCHIEF_VIDEO',
 }
 
@@ -269,7 +288,14 @@ export interface HeadingBlockComponentState {
 	align: AlignOption;
 }
 
-export interface ImageBlockComponentState {
+export interface CopyrightComponentState {
+	copyrightTitle: string;
+	copyrightIconVisible: boolean;
+	copyrightText: string;
+}
+
+export interface ImageBlockComponentState
+	extends Omit<CopyrightComponentState, 'copyrightTitle' | 'copyrightText'> {
 	title: string;
 	text: string;
 	imageSource: string;
@@ -284,7 +310,7 @@ export interface ImageBlockComponentState {
 	buttonAlign?: AlignOption;
 }
 
-export interface ImageGridBlockComponentStateFields {
+export interface ImageGridBlockComponentStateFields extends CopyrightComponentState {
 	source: string;
 	title?: string;
 	text?: string;
@@ -317,7 +343,7 @@ export interface ButtonsBlockComponentState {
 	navigate?: (buttonAction: ButtonAction) => void;
 }
 
-export interface RichTextBlockComponentState {
+export interface RichTextBlockComponentState extends CopyrightComponentState {
 	content: string;
 	buttons?: ButtonsBlockComponentState[];
 }
@@ -347,7 +373,7 @@ export interface IFrameBlockComponentState {
 	src: string;
 }
 
-export interface QuoteBlockComponentState {
+export interface AvoQuoteBlockComponentState {
 	quote: string;
 	authorName: string;
 	authorInitials: string;
@@ -453,6 +479,7 @@ export type RepeatedContentBlockComponentState =
 export type SingleContentBlockComponentState =
 	| HeadingBlockComponentState
 	| Partial<BlockAvoHeroProps>
+	| BlockBreadcrumbsProps
 	| IFrameBlockComponentState
 	| ImageBlockComponentState
 	| IntroBlockComponentState
@@ -461,7 +488,8 @@ export type SingleContentBlockComponentState =
 	| MediaPlayerTitleTextButtonBlockComponentState
 	| HetArchiefVideoBlockComponentState
 	| PageOverviewBlockComponentStateFields
-	| QuoteBlockComponentState
+	| AvoQuoteBlockComponentState
+	| HetArchiefQuoteBlockComponentState
 	| RichTextBlockComponentState
 	// biome-ignore lint/complexity/noBannedTypes: todo
 	| {}; // Search block & content page meta
@@ -561,7 +589,7 @@ export interface AvoImageTextBackgroundBlockComponentState {
 	buttonIconAlignment?: SimpleAlignOption;
 }
 
-export interface HetArchiefImageTextBackgroundBlockComponentState {
+export interface HetArchiefImageTextBackgroundBlockComponentState extends CopyrightComponentState {
 	heading: string;
 	headingType: HeadingTypeOption;
 	headingSize: HeadingSizeOption;
@@ -594,6 +622,13 @@ export interface HetArchiefHeaderSearchBlockComponentState {
 	title: string;
 	subtitles: { label: string }[];
 	textBelowSearch?: string;
+}
+
+export interface HetArchiefQuoteBlockComponentState {
+	quote: string;
+	authorName: string;
+	textColor: Color | GradientColor | CustomBackground;
+	frameColor: Color | GradientColor | CustomBackground;
 }
 
 export interface HetArchiefIeObject {

@@ -1,4 +1,5 @@
 @use "../../shared/styles/settings/colors" as colors;
+@use "../../shared/styles/mixins/typography" as typography;
 @use "./react-split-pane";
 
 .c-content-edit-view__sidebar {
@@ -7,9 +8,7 @@
 
   > .o-sidebar__content {
     .c-select__control .c-select__placeholder {
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+		@include typography.truncate;
     }
 
     > .c-navbar {

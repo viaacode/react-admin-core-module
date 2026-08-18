@@ -1,6 +1,7 @@
 import { ANCHOR_LINKS_BLOCK_CONFIG } from '~content-blocks/anchor-links.ts';
 import { AVO_HERO_BLOCK_CONFIG } from '~content-blocks/BlockAvoHero';
 import { AVO_IMAGE_TEXT_BACKGROUND_BLOCK_CONFIG } from '~content-blocks/BlockAvoImageTextBackground';
+import { AVO_QUOTE_BLOCK_CONFIG } from '~content-blocks/BlockAvoQuote';
 import { CONTENT_BREADCRUMBS_CONFIG } from '~content-blocks/BlockBreadcrumbs';
 import { BUTTONS_BLOCK_CONFIG } from '~content-blocks/BlockButtons';
 import { CARDS_WITHOUT_DESCRIPTION_BLOCK_CONFIG } from '~content-blocks/BlockCardsWithoutDescription';
@@ -11,6 +12,9 @@ import { EVENTBRITE_BLOCK_CONFIG } from '~content-blocks/BlockEventbrite';
 import { HEADING_BLOCK_CONFIG } from '~content-blocks/BlockHeading';
 import { HET_ARCHIEF_HEADER_SEARCH_BLOCK_CONFIG } from '~content-blocks/BlockHetArchiefHeaderSearch/BlockHetArchiefHeaderSearch.editorconfig';
 import { HET_ARCHIEF_IMAGE_TEXT_BACKGROUND_BLOCK_CONFIG } from '~content-blocks/BlockHetArchiefImageTextBackground';
+import { HET_ARCHIEF_QUOTE_BLOCK_CONFIG } from '~content-blocks/BlockHetArchiefQuote';
+import { CONTENT_HIGHLIGHT_TEXT_CONFIG } from '~content-blocks/BlockHighlightText';
+import { CONTENT_HOMEPAGE_BANNER_CONFIG } from '~content-blocks/BlockHomepageBanner';
 import { HETARCHIEF_VIDEO_BLOCK_CONFIG } from '~content-blocks/BlockHetArchiefVideo';
 import { IFRAME_BLOCK_CONFIG } from '~content-blocks/BlockIFrame';
 import { IMAGE_BLOCK_CONFIG } from '~content-blocks/BlockImage';
@@ -24,9 +28,10 @@ import { INTRO_BLOCK_CONFIG } from '~content-blocks/BlockIntro';
 import { KLAAR_BLOCK_CONFIG } from '~content-blocks/BlockKlaar';
 import { MAINTAINERS_GRID_BLOCK_CONFIG } from '~content-blocks/BlockMaintainersGrid';
 import { MEDIA_GRID_BLOCK_CONFIG } from '~content-blocks/BlockMediaGrid';
+import { OBJECTS_GRID_BLOCK_CONFIG } from '~content-blocks/BlockObjectsGrid';
 import { OVERVIEW_NEWSPAPER_TITLES_BLOCK_CONFIG } from '~content-blocks/BlockOverviewNewspaperTitles';
-import { CONTENT_OVERVIEW_WITH_CAROUSEL_CONFIG } from '~content-blocks/BlockOverviewWithCarousel';
-import { QUOTE_BLOCK_CONFIG } from '~content-blocks/BlockQuote';
+import { OVERVIEW_THEMES_BLOCK_CONFIG } from '~content-blocks/BlockOverviewThemes';
+import { OVERVIEW_WITH_CAROUSEL_CONFIG } from '~content-blocks/BlockOverviewWithCarousel';
 import {
 	RICH_TEXT_BLOCK_CONFIG,
 	RICH_TEXT_TWO_COLUMNS_BLOCK_CONFIG,
@@ -37,6 +42,7 @@ import {
 	SPOTLIGHT_BLOCK_CONFIG,
 } from '~content-blocks/BlockSpotlight';
 import { TAGS_WITH_LINK_BLOCK_CONFIG } from '~content-blocks/BlockTagsWithLink';
+import { THEME_REELS_BLOCK_CONFIG } from '~content-blocks/BlockThemeReels';
 import { THREE_CLICKABLE_TILES_BLOCK_CONFIG } from '~content-blocks/BlockThreeClickableTiles';
 import { UITGEKLAARD_BLOCK_CONFIG } from '~content-blocks/BlockUitgeklaard';
 import { MEDIA_PLAYER_BLOCK_CONFIG } from '~content-blocks/BlockVideo';
@@ -63,7 +69,8 @@ export const CONTENT_BLOCK_CONFIG_MAP: Record<
 	[ContentBlockType.MediaGrid]: MEDIA_GRID_BLOCK_CONFIG,
 	[ContentBlockType.MediaPlayer]: MEDIA_PLAYER_BLOCK_CONFIG,
 	[ContentBlockType.MediaPlayerTitleTextButton]: MEDIA_PLAYER_TITLE_TEXT_BUTTON_BLOCK_CONFIG,
-	[ContentBlockType.Quote]: QUOTE_BLOCK_CONFIG,
+	[ContentBlockType.AvoQuote]: AVO_QUOTE_BLOCK_CONFIG,
+	[ContentBlockType.HetArchiefQuote]: HET_ARCHIEF_QUOTE_BLOCK_CONFIG,
 	[ContentBlockType.PageOverview]: PAGE_OVERVIEW_BLOCK_CONFIG,
 	[ContentBlockType.ProjectsSpotlight]: PROJECTS_SPOTLIGHT_BLOCK_CONFIG,
 	[ContentBlockType.Spotlight]: SPOTLIGHT_BLOCK_CONFIG,
@@ -87,6 +94,11 @@ export const CONTENT_BLOCK_CONFIG_MAP: Record<
 	[ContentBlockType.ContentEncloseGrid]: CONTENT_ENCLOSE_BLOCK_CONFIG,
 	[ContentBlockType.Breadcrumbs]: CONTENT_BREADCRUMBS_CONFIG,
 	[ContentBlockType.ScrollDownNudge]: CONTENT_SCROLL_DOWN_NUDGE_CONFIG,
-	[ContentBlockType.OverviewWithCarousel]: CONTENT_OVERVIEW_WITH_CAROUSEL_CONFIG,
+	[ContentBlockType.OverviewWithCarousel]: OVERVIEW_WITH_CAROUSEL_CONFIG,
+	[ContentBlockType.HomepageBanner]: CONTENT_HOMEPAGE_BANNER_CONFIG,
+	[ContentBlockType.HighlightText]: CONTENT_HIGHLIGHT_TEXT_CONFIG,
+	[ContentBlockType.ThemeReels]: THEME_REELS_BLOCK_CONFIG,
+	[ContentBlockType.ObjectsGrid]: OBJECTS_GRID_BLOCK_CONFIG,
+	[ContentBlockType.OverviewThemes]: OVERVIEW_THEMES_BLOCK_CONFIG,
 	[ContentBlockType.HetArchiefVideo]: HETARCHIEF_VIDEO_BLOCK_CONFIG,
 };

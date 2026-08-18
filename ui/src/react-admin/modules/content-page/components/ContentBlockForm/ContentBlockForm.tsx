@@ -22,6 +22,7 @@ import React from 'react';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import { BlockHeading } from '~content-blocks/BlockHeading/BlockHeading';
 import { ToastType } from '~core/config/config.types';
+import { validateFieldGroup } from '~modules/content-page/helpers/validate-content-block-config';
 import { findImageInJson } from '~shared/helpers/find-image-in-json';
 import { showToast } from '~shared/helpers/show-toast';
 import { tText } from '~shared/helpers/translation-functions';
@@ -33,6 +34,7 @@ import type {
 	ContentBlockConfig,
 	ContentBlockErrors,
 	ContentBlockField,
+	ContentBlockFieldGroup,
 	ContentBlockState,
 	ContentBlockStateType,
 	RepeatedContentBlockComponentState,
@@ -90,6 +92,7 @@ const ContentBlockForm: FunctionComponent<ContentBlockFormProps> = ({
 		stateIndex?: number
 	) => {
 		const field = config[formGroupType].fields[key] as ContentBlockField;
+		const fieldGroup = config[formGroupType].fields[key] as ContentBlockFieldGroup;
 		const updateObject = {
 			...Object.fromEntries((field.fieldsToResetOnChange || []).map((key) => [key, null])),
 			[key]: value,
@@ -109,7 +112,26 @@ const ContentBlockForm: FunctionComponent<ContentBlockFormProps> = ({
 			Array.isArray(stateUpdate) && typeof stateIndex === 'number'
 				? stateUpdate[stateIndex]
 				: stateUpdate;
-		if (!(field.isVisible && !field.isVisible(config, stateToCheckVisibility))) {
+
+		if (fieldGroup.type === 'fieldGroup') {
+			// Mechanism B: re-validate every element in the repeated group so inline
+			// errors clear/appear as the user edits (validators live on the inner fields).
+			// For a repeatable block the group lives inside the component at `stateIndex`,
+			// for a non repeatable one it sits directly on the single state object.
+			// biome-ignore lint/suspicious/noExplicitAny: element state shape varies per block
+			const fieldGroupState = (stateToCheckVisibility as any)?.[key];
+
+			if (Array.isArray(fieldGroupState)) {
+				const newErrors = validateFieldGroup(
+					configErrors,
+					config,
+					key,
+					fieldGroup.fields,
+					fieldGroupState
+				);
+				onError(blockIndex, newErrors);
+			}
+		} else if (!(field.isVisible && !field.isVisible(config, stateToCheckVisibility))) {
 			handleValidation(field, key, value, stateIndex);
 		}
 		onChange(formGroupType, stateUpdate, Array.isArray(components.state) ? stateIndex : undefined);
@@ -229,15 +251,14 @@ const ContentBlockForm: FunctionComponent<ContentBlockFormProps> = ({
 				<div
 					style={{ backgroundImage: `url(${imageUrl})` }}
 					className="c-content-block-form__accordion__header__preview--image"
-				></div>
-			);
-		} else {
-			return (
-				<div className="c-content-block-form__accordion__header__preview--text">
-					{contentBlock.name.substring(0, 2)}
-				</div>
+				/>
 			);
 		}
+		return (
+			<div className="c-content-block-form__accordion__header__preview--text">
+				{contentBlock.name.substring(0, 2)}
+			</div>
+		);
 	};
 
 	const renderBlockForm = (contentBlock: ContentBlockConfig) => {

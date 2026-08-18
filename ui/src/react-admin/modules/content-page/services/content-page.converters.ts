@@ -75,10 +75,9 @@ export function convertDbContentBlockToContentBlockConfig(
 			}
 			const cleanConfig = configForType(contentBlock.position);
 
-			const rawComponentState = components;
-			const componentState = Array.isArray(rawComponentState)
-				? rawComponentState
-				: { ...cleanConfig.components.state, ...rawComponentState };
+			const componentState = Array.isArray(components)
+				? components
+				: { ...cleanConfig.components.state, ...components };
 
 			return {
 				...cleanConfig,

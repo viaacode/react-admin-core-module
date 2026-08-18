@@ -7,7 +7,9 @@ import { stringify } from 'query-string';
 import type { ReactNode } from 'react';
 import { AdminConfigManager } from '~core/config/config.class';
 import { ToastType } from '~core/config/config.types';
+import { IeObjectsService } from '~modules/ie-objects/ie-objects.service';
 import { getAdminCoreApiUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config';
+import { isHetArchief } from '~shared/helpers/is-hetarchief';
 import { navigateFunc } from '~shared/helpers/navigate-fnc';
 import { showToast } from '~shared/helpers/show-toast';
 import { tText } from '~shared/helpers/translation-functions';
@@ -154,6 +156,18 @@ export const navigateToContentType = (action: ButtonAction) => {
 					id: value,
 				});
 				navigateToAbsoluteOrRelativeUrl(bundleUrl, resolvedTarget);
+				break;
+			}
+
+			case 'IE_OBJECT': {
+				if (!isHetArchief()) {
+					// ie-objects only exist on hetarchief, so there is nothing to navigate to
+					break;
+				}
+				navigateToAbsoluteOrRelativeUrl(
+					IeObjectsService.getObjectDetailPath(String(value)),
+					resolvedTarget
+				);
 				break;
 			}
 
