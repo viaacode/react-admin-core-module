@@ -56,6 +56,8 @@ const INITIAL_OVERVIEW_THEMES_THEME_STATE = () => ({
 	},
 	// Empty means: fall back to the image that is configured on the theme itself
 	image: '',
+	// Empty means: fall back to the description that is configured on the theme itself
+	description: '',
 });
 
 const INITIAL_OVERVIEW_THEMES_GROUP_STATE = () => ({
@@ -195,6 +197,26 @@ export const OVERVIEW_THEMES_BLOCK_CONFIG = (position = 0): ContentBlockConfig =
 							allowedTypes: PHOTO_TYPES,
 						} as FileUploadProps,
 					},
+					description: TEXT_FIELD({
+						label: tText(
+							'modules/content-page/components/blocks/block-overview-themes/block-overview-themes___beschrijving-overschrijft-de-beschrijving-van-het-thema',
+							{},
+							[HET_ARCHIEF]
+						),
+						validator: (value: string) => {
+							const errorArray: string[] = [];
+							if (value?.length > 300) {
+								errorArray.push(
+									tText(
+										'modules/content-page/components/blocks/block-overview-themes/block-overview-themes___beschrijving-mag-max-300-karakters-lang-zijn',
+										{},
+										[HET_ARCHIEF]
+									)
+								);
+							}
+							return errorArray;
+						},
+					}),
 				},
 				repeat: {
 					defaultState: INITIAL_OVERVIEW_THEMES_THEME_STATE(),
