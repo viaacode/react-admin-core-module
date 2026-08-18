@@ -22,13 +22,25 @@ export const ObjectMetadata: FunctionComponent<{
 				type: AvoCoreContentPickerType.INTERNAL_LINK,
 				value: `/pid/${ieObject?.schemaIdentifier}`,
 			}}
-			ariaLabel={tText('Bekijk volledig fragment', {}, [HET_ARCHIEF])}
+			ariaLabel={tText(
+				'modules/content-page/components/object-metadata/object-metadata___bekijk-volledig-fragment',
+				{},
+				[HET_ARCHIEF]
+			)}
 			className="c-object-metadata__cta"
 		>
 			<Button
 				variants={['block', 'black']}
 				icon={isMobileWidth() ? <Icon name={'arrow-down-right' as IconName} /> : undefined}
-				label={isMobileWidth() ? undefined : tText('Bekijk volledig fragment', {}, [HET_ARCHIEF])}
+				label={
+					isMobileWidth()
+						? undefined
+						: tText(
+								'modules/content-page/components/object-metadata/object-metadata___bekijk-volledig-fragment',
+								{},
+								[HET_ARCHIEF]
+							)
+				}
 			/>
 		</SmartLink>
 		<div className="c-object-metadata__text">

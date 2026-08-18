@@ -19,21 +19,41 @@ const getObjectTypeLabel = (format: ObjectType | undefined): string => {
 		case ObjectType.film:
 		case ObjectType.video:
 		case ObjectType.videofragment:
-			return tText('Video', undefined, [HET_ARCHIEF]);
+			return tText(
+				'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel-inactive-slide___video',
+				undefined,
+				[HET_ARCHIEF]
+			);
 
 		case ObjectType.audio:
 		case ObjectType.audiofragment:
-			return tText('Audio', undefined, [HET_ARCHIEF]);
+			return tText(
+				'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel-inactive-slide___audio',
+				undefined,
+				[HET_ARCHIEF]
+			);
 
 		case ObjectType.newspaper:
 		case ObjectType.newspaperpage:
-			return tText('Krant', undefined, [HET_ARCHIEF]);
+			return tText(
+				'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel-inactive-slide___krant',
+				undefined,
+				[HET_ARCHIEF]
+			);
 
 		case ObjectType.image:
-			return tText('Afbeelding', undefined, [HET_ARCHIEF]);
+			return tText(
+				'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel-inactive-slide___afbeelding',
+				undefined,
+				[HET_ARCHIEF]
+			);
 
 		default:
-			return tText('Bestand', undefined, [HET_ARCHIEF]);
+			return tText(
+				'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel-inactive-slide___bestand',
+				undefined,
+				[HET_ARCHIEF]
+			);
 	}
 };
 

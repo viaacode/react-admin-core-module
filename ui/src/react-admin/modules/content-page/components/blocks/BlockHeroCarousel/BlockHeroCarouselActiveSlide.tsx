@@ -144,13 +144,29 @@ export const BlockHeroCarouselActiveSlide: FunctionComponent<BlockHeroCarouselAc
 					icon={<Icon name={isPaused ? IconName.play : IconName.pause} />}
 					title={
 						isPaused
-							? tText('Afspelen', undefined, [HET_ARCHIEF])
-							: tText('Pauzeren', undefined, [HET_ARCHIEF])
+							? tText(
+									'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel-active-slide___afspelen',
+									undefined,
+									[HET_ARCHIEF]
+								)
+							: tText(
+									'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel-active-slide___pauzeren',
+									undefined,
+									[HET_ARCHIEF]
+								)
 					}
 					ariaLabel={
 						isPaused
-							? tText('Afspelen', undefined, [HET_ARCHIEF])
-							: tText('Pauzeren', undefined, [HET_ARCHIEF])
+							? tText(
+									'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel-active-slide___afspelen',
+									undefined,
+									[HET_ARCHIEF]
+								)
+							: tText(
+									'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel-active-slide___pauzeren',
+									undefined,
+									[HET_ARCHIEF]
+								)
 					}
 					onClick={() => setIsPaused((paused) => !paused)}
 				/>

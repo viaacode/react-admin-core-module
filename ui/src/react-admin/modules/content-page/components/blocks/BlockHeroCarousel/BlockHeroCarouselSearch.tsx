@@ -37,23 +37,39 @@ export const BlockHeroCarouselSearch: FunctionComponent<BlockHeroCarouselSearchP
 	const SEARCH_OPTIONS: SearchDropdownOption[] = [
 		{
 			id: 'all',
-			selectedLabel: tText('Alles'),
-			label: tText('Zoek in alle objecten'),
+			selectedLabel: tText(
+				'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel-search___alles'
+			),
+			label: tText(
+				'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel-search___zoek-in-alle-objecten'
+			),
 		},
 		{
 			id: 'video',
-			selectedLabel: tText('Alle video'),
-			label: tText('Zoek in video'),
+			selectedLabel: tText(
+				'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel-search___alle-video'
+			),
+			label: tText(
+				'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel-search___zoek-in-video'
+			),
 		},
 		{
 			id: 'audio',
-			selectedLabel: tText('Alle audio'),
-			label: tText('Zoek in audio'),
+			selectedLabel: tText(
+				'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel-search___alle-audio'
+			),
+			label: tText(
+				'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel-search___zoek-in-audio'
+			),
 		},
 		{
 			id: 'newspaper',
-			selectedLabel: tText('Alle kranten'),
-			label: tText('Zoek in kranten'),
+			selectedLabel: tText(
+				'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel-search___alle-kranten'
+			),
+			label: tText(
+				'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel-search___zoek-in-kranten'
+			),
 		},
 	];
 

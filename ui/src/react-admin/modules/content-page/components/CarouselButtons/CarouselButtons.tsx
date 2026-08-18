@@ -63,16 +63,32 @@ export const CarouselButtons: FunctionComponent<CarouselButtonsProps> = ({
 			<Button
 				variants={['black', 'sm']}
 				icon={<Icon name="arrowLeft" />}
-				title={tText('Vorige slide', undefined, [HET_ARCHIEF])}
-				ariaLabel={tText('Vorige slide', undefined, [HET_ARCHIEF])}
+				title={tText(
+					'modules/content-page/components/carousel-buttons/carousel-buttons___vorige-slide',
+					undefined,
+					[HET_ARCHIEF]
+				)}
+				ariaLabel={tText(
+					'modules/content-page/components/carousel-buttons/carousel-buttons___vorige-slide',
+					undefined,
+					[HET_ARCHIEF]
+				)}
 				onClick={() => (onPrev ? onPrev() : controlledSwiper?.slidePrev())}
 				disabled={disablePrevSlideButton}
 			/>
 			<Button
 				variants={['black', 'sm']}
 				icon={<Icon name="arrowRight" />}
-				title={tText('Volgende slide', undefined, [HET_ARCHIEF])}
-				ariaLabel={tText('Volgende slide', undefined, [HET_ARCHIEF])}
+				title={tText(
+					'modules/content-page/components/carousel-buttons/carousel-buttons___volgende-slide',
+					undefined,
+					[HET_ARCHIEF]
+				)}
+				ariaLabel={tText(
+					'modules/content-page/components/carousel-buttons/carousel-buttons___volgende-slide',
+					undefined,
+					[HET_ARCHIEF]
+				)}
 				onClick={() => (onNext ? onNext() : controlledSwiper?.slideNext())}
 				disabled={disableNextSlideButton}
 			/>

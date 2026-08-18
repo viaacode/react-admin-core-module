@@ -99,9 +99,11 @@ export const HERO_CAROUSEL_CONFIG = (position = 0): ContentBlockConfig => ({
 		state: INITIAL_HERO_CAROUSEL_COMPONENTS_STATE(),
 		fields: {
 			backgroundImage: {
-				label: tText('Achtergrondafbeelding (krijgt voorrang op achtergrondkleur)', undefined, [
-					HET_ARCHIEF,
-				]),
+				label: tText(
+					'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel___achtergrondafbeelding-krijgt-voorrang-op-achtergrondkleur',
+					undefined,
+					[HET_ARCHIEF]
+				),
 				editorType: ContentBlockEditor.FileUpload,
 				editorProps: {
 					assetType: 'CONTENT_BLOCK_IMAGE',
