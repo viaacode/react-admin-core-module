@@ -3,6 +3,7 @@
 @use "../../../../shared/styles/settings/colors" as colors;
 @use "../../../../shared/styles/mixins/typography" as typography;
 @use "../../../../shared/styles/mixins/animations" as animations;
+@use "../../../../shared/styles/mixins/focus" as focus;
 
 $slide-width: 28rem;
 
@@ -87,10 +88,7 @@ $slide-width: 28rem;
 
 		a {
 			text-decoration: none;
-
-			&:focus-visible {
-				outline: 2px solid colors.$color-ocean-green;
-			}
+			@include focus.focus-outline;
 		}
 
 		&:hover {

@@ -3,7 +3,8 @@ import type { AvoAuthErrorActionButton } from '@viaa/avo2-types';
 import type { FunctionComponent, ReactElement, ReactNode } from 'react';
 import React from 'react';
 import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner';
-import { tHtml } from '~shared/helpers/translation-functions';
+import { tHtml, tText } from '~shared/helpers/translation-functions';
+import ErrorView from '../error/ErrorView';
 
 export type LoadingState = 'loading' | 'loaded' | 'error';
 
@@ -46,24 +47,17 @@ export const LoadingErrorLoadedComponent: FunctionComponent<LoadingErrorLoadedCo
 	locationId,
 }) => {
 	const renderError = () => (
-		// <ErrorView
-		// 	message={
-		// 		loadingInfo.message ||
-		// 		t(
-		// 			'shared/components/loading-error-loaded-component/loading-error-loaded-component___er-is-iets-mis-gegaan-bij-het-laden-van-de-gegevens'
-		// 		)
-		// 	}
-		// 	icon={loadingInfo.icon || 'alertTriangle' as IconName}
-		// 	actionButtons={loadingInfo.actionButtons || ['home']}
-		// />
-		<>
-			locationId: {locationId}
-			<br />
-			{loadingInfo.message ||
-				tHtml(
+		<ErrorView
+			message={
+				loadingInfo.message ||
+				tText(
 					'shared/components/loading-error-loaded-component/loading-error-loaded-component___er-is-iets-mis-gegaan-bij-het-laden-van-de-gegevens'
-				)}
-		</>
+				)
+			}
+			icon={loadingInfo.icon || ('alertTriangle' as IconName)}
+			actionButtons={loadingInfo.actionButtons || ['home']}
+			locationId={locationId}
+		/>
 	);
 
 	// Render

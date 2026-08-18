@@ -22,7 +22,7 @@ export interface BlockOverviewWithCarouselProps extends DefaultComponentProps {
 	buttonAltTitle?: string;
 	buttonAction?: ButtonAction;
 	elements: {
-		mediaItem: ButtonAction;
+		mediaItem?: ButtonAction;
 		image: string;
 		imageAlt: string;
 		title: string;
@@ -127,7 +127,7 @@ export const BlockOverviewWithCarousel: FunctionComponent<BlockOverviewWithCarou
 						);
 						return (
 							<SwiperSlide
-								key={`carousel-slide__${title}__${mediaItem.type}__${mediaItem.value}`}
+								key={`carousel-slide__${title}__${mediaItem?.type}__${mediaItem?.value}`}
 								className={componentClassName}
 								style={{
 									backgroundColor: backgroundColor,

@@ -45,9 +45,28 @@ describe('<BlockImage />', () => {
 
 	it('Should set the correct title and text', () => {
 		render(blockImageExample);
-		const titleElement = screen.getByText('© example title');
+		const titleElement = screen.getByText('example title');
 		const textElement = screen.getByText('example text');
 		expect(titleElement).toBeInTheDocument();
 		expect(textElement).toBeInTheDocument();
+	});
+
+	it('Should only show the copyright icon when copyrightIconVisible is set', () => {
+		render(blockImageExample);
+		expect(screen.getByText('example title')).not.toHaveTextContent('©');
+
+		cleanup();
+		render(
+			<BlockImage
+				className={customClass}
+				imageSource="https://placeholder.com/500x200.jpg"
+				imageDescription="image showing the default dimensions on a grey background"
+				title="example title"
+				copyrightIconVisible
+				text="example text"
+				width="400px"
+			/>
+		);
+		expect(screen.getByText('© example title')).toBeInTheDocument();
 	});
 });

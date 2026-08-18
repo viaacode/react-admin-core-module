@@ -1,6 +1,7 @@
 import { INITIAL_ANCHOR_LINKS_COMPONENTS_STATE } from '~content-blocks/anchor-links';
 import { INITIAL_AVO_HERO_COMPONENTS_STATE } from '~content-blocks/BlockAvoHero';
 import { INITIAL_AVO_IMAGE_TEXT_BACKGROUND_BLOCK_STATE } from '~content-blocks/BlockAvoImageTextBackground';
+import { INITIAL_AVO_QUOTE_COMPONENTS_STATE } from '~content-blocks/BlockAvoQuote';
 import { INITIAL_BREADCRUMBS_BLOCK_STATE } from '~content-blocks/BlockBreadcrumbs/BlockBreadcrumbs.editorconfig';
 import { INITIAL_BUTTONS_COMPONENTS_STATE } from '~content-blocks/BlockButtons';
 import { INITIAL_CARDS_WITHOUT_DESCRIPTION_COMPONENTS_STATE } from '~content-blocks/BlockCardsWithoutDescription';
@@ -12,6 +13,7 @@ import { INITIAL_HEADING_COMPONENTS_STATE } from '~content-blocks/BlockHeading';
 import { INITIAL_HERO_CAROUSEL_COMPONENTS_STATE } from '~content-blocks/BlockHeroCarousel';
 import { INITIAL_HET_ARCHIEF_HEADER_SEARCH_BLOCK_STATE } from '~content-blocks/BlockHetArchiefHeaderSearch';
 import { INITIAL_HET_ARCHIEF_IMAGE_TEXT_BACKGROUND_BLOCK_STATE } from '~content-blocks/BlockHetArchiefImageTextBackground';
+import { INITIAL_HET_ARCHIEF_QUOTE_COMPONENTS_STATE } from '~content-blocks/BlockHetArchiefQuote';
 import { INITIAL_CONTENT_HIGHLIGHT_TEXT_BLOCK_STATE } from '~content-blocks/BlockHighlightText';
 import { INITIAL_CONTENT_HOMEPAGE_BANNER_BLOCK_STATE } from '~content-blocks/BlockHomepageBanner';
 import { INITIAL_IFRAME_COMPONENTS_STATE } from '~content-blocks/BlockIFrame';
@@ -28,8 +30,9 @@ import { INITIAL_MAINTAINERS_GRID_BLOCK_STATE } from '~content-blocks/BlockMaint
 import { INITIAL_MEDIA_GRID_COMPONENTS_STATE } from '~content-blocks/BlockMediaGrid';
 import { INITIAL_OVERVIEW_NEWSPAPER_TITLES_BLOCK_STATE } from '~content-blocks/BlockOverviewNewspaperTitles';
 import { INITIAL_OVERVIEW_WITH_CAROUSEL_BLOCK_STATE } from '~content-blocks/BlockOverviewWithCarousel/BlockOverviewWithCarousel.editorconfig.ts';
+import { INITIAL_OBJECTS_GRID_BLOCK_STATE } from '~content-blocks/BlockObjectsGrid';
+import { INITIAL_OVERVIEW_THEMES_COMPONENTS_STATE } from '~content-blocks/BlockOverviewThemes/BlockOverviewThemes.editorconfig.ts';
 import { INITIAL_PAGE_OVERVIEW_COMPONENTS_STATE } from '~content-blocks/BlockPageOverview';
-import { INITIAL_QUOTE_COMPONENTS_STATE } from '~content-blocks/BlockQuote';
 import {
 	INITIAL_RICH_TEXT_COMPONENTS_STATE,
 	INITIAL_RICH_TEXT_TWO_COLUMNS_COMPONENTS_STATE,
@@ -71,7 +74,8 @@ export const CONTENT_BLOCK_INITIAL_STATE_MAP: {
 	[ContentBlockType.PageOverview]: INITIAL_PAGE_OVERVIEW_COMPONENTS_STATE,
 	[ContentBlockType.ProjectsSpotlight]: INITIAL_PROJECTS_SPOTLIGHT_COMPONENTS_STATE,
 	[ContentBlockType.Spotlight]: INITIAL_SPOTLIGHT_COMPONENTS_STATE,
-	[ContentBlockType.Quote]: INITIAL_QUOTE_COMPONENTS_STATE,
+	[ContentBlockType.AvoQuote]: INITIAL_AVO_QUOTE_COMPONENTS_STATE,
+	[ContentBlockType.HetArchiefQuote]: INITIAL_HET_ARCHIEF_QUOTE_COMPONENTS_STATE,
 	[ContentBlockType.RichText]: INITIAL_RICH_TEXT_COMPONENTS_STATE,
 	[ContentBlockType.RichTextTwoColumns]: INITIAL_RICH_TEXT_TWO_COLUMNS_COMPONENTS_STATE,
 	[ContentBlockType.Search]: INITIAL_SEARCH_COMPONENTS_STATE,
@@ -97,5 +101,7 @@ export const CONTENT_BLOCK_INITIAL_STATE_MAP: {
 	[ContentBlockType.HomepageBanner]: INITIAL_CONTENT_HOMEPAGE_BANNER_BLOCK_STATE,
 	[ContentBlockType.HighlightText]: INITIAL_CONTENT_HIGHLIGHT_TEXT_BLOCK_STATE,
 	[ContentBlockType.ThemeReels]: INITIAL_THEME_REELS_COMPONENTS_STATE,
+	[ContentBlockType.ObjectsGrid]: INITIAL_OBJECTS_GRID_BLOCK_STATE,
+	[ContentBlockType.OverviewThemes]: INITIAL_OVERVIEW_THEMES_COMPONENTS_STATE,
 	[ContentBlockType.HeroCarousel]: INITIAL_HERO_CAROUSEL_COMPONENTS_STATE,
 };

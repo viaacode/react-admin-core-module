@@ -4,6 +4,7 @@ import clsx from 'clsx';
 import { kebabCase, noop, omit } from 'es-toolkit';
 import type { FunctionComponent, KeyboardEvent, RefObject } from 'react';
 import React, { useCallback, useEffect, useRef } from 'react';
+import type { BlockBreadcrumbsProps } from '~content-blocks/BlockBreadcrumbs/BlockBreadcrumbs.types';
 import { AdminConfigManager } from '~core/config/config.class';
 import { getCommonUser } from '~core/config/config.selectors.ts';
 import { GENERATED_CONTENT_BLOCK_ANCHOR_PREFIX } from '~modules/content-page/const/content-block-anchors.consts';
@@ -45,6 +46,9 @@ const ContentBlockRenderer: FunctionComponent<ContentBlockPreviewProps> = ({
 	const commonUser = getCommonUser();
 	const blockState = contentBlockConfig?.block?.state as ContentBlockState | undefined;
 	const componentState = contentBlockConfig?.components?.state;
+	const overlayNextBlock = Array.isArray(componentState)
+		? false
+		: (componentState as Partial<BlockBreadcrumbsProps>).overlayNextBlock;
 	const pageWidth =
 		contentPageInfo.contentWidth?.toUpperCase() ||
 		AdminConfigManager.getConfig().contentPage?.defaultPageWidth ||
@@ -129,6 +133,19 @@ const ContentBlockRenderer: FunctionComponent<ContentBlockPreviewProps> = ({
 		blockState?.anchor?.replaceAll(' ', '-') ||
 		GENERATED_CONTENT_BLOCK_ANCHOR_PREFIX + contentBlockConfig.id;
 
+	// Blocks with a header background need a z-index, so the absolutely positioned background stays
+	// behind the block content. A block that overlays the next one has to beat that z-index, since
+	// the block it covers can carry one too.
+	const getZIndex = (): number | undefined => {
+		if (overlayNextBlock) {
+			return 3;
+		}
+		if (blockState?.headerBackgroundColor !== Color.Transparent) {
+			return 1;
+		}
+		return undefined;
+	};
+
 	return (
 		<div
 			className={clsx(
@@ -138,6 +155,7 @@ const ContentBlockRenderer: FunctionComponent<ContentBlockPreviewProps> = ({
 				{
 					'c-content-block__meemoo-custom-background':
 						blockState?.backgroundColor === CustomBackground.MeemooLogo, // https://meemoo.atlassian.net/browse/ARC-1237
+					'c-content-block--overlay-next-block': overlayNextBlock,
 				}
 			)}
 			style={{
@@ -145,7 +163,7 @@ const ContentBlockRenderer: FunctionComponent<ContentBlockPreviewProps> = ({
 					blockState?.backgroundColor === CustomBackground.MeemooLogo
 						? Color.Transparent
 						: blockState?.backgroundColor,
-				...(blockState?.headerBackgroundColor !== Color.Transparent ? { zIndex: 1 } : {}),
+				zIndex: getZIndex(),
 			}}
 			data-anchor={anchor}
 			ref={blockRef}

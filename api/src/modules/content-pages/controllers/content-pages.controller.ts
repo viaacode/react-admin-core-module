@@ -4,7 +4,6 @@ import {
 	Delete,
 	ForbiddenException,
 	Get,
-	InternalServerErrorException,
 	Ip,
 	NotFoundException,
 	Param,
@@ -113,7 +112,7 @@ export class ContentPagesController {
 	): Promise<DbContentPage> {
 		try {
 			const user = sessionUser?.getUser();
-			return await this.contentPagesService.getContentPageByLanguageAndPathForUser(
+			const contentPage = await this.contentPagesService.getContentPageByLanguageAndPathForUser(
 				language || (user.language as Locale),
 				path,
 				user,
@@ -121,10 +120,24 @@ export class ContentPagesController {
 				ip,
 				onlyInfo === 'true'
 			);
+			if (!contentPage) {
+				throw new CustomError('ContentPage not found', null, { code: 'NOT_FOUND' }, 404);
+			}
+			return contentPage;
 			// biome-ignore lint/suspicious/noExplicitAny: error can be any type
 		} catch (err: any) {
-			if (err?.response?.additionalInfo?.code === 'NOT_FOUND') {
-				throw new NotFoundException('The content page with path was not found');
+			if (err?.response?.additionalInfo?.code === 'NOT_FOUND' || err?.statusCode === 404) {
+				throw new CustomError(
+					'The content page with path was not found',
+					err,
+					{
+						language,
+						path,
+						onlyInfo,
+						code: 'NOT_FOUND',
+					},
+					404
+				);
 			}
 			const error = new CustomError('Failed to get content page by language and path', err, {
 				language,
@@ -147,14 +160,27 @@ export class ContentPagesController {
 		@Ip() ip: string,
 		@SessionUser() user: SessionUserEntity
 	): Promise<{ exists: boolean; title: string; id: number | string }> {
-		const contentPage = await this.getContentPageByLanguageAndPath(
-			language,
-			path,
-			'true',
-			request,
-			ip,
-			user
-		);
+		let contentPage: DbContentPage | null = null;
+		try {
+			contentPage = await this.getContentPageByLanguageAndPath(
+				language,
+				path,
+				'true',
+				request,
+				ip,
+				user
+			);
+		} catch (err) {
+			if ((err as CustomError)?.statusCode === 404) {
+				return {
+					exists: false,
+					title: '',
+					id: '',
+				};
+			}
+			throw err;
+		}
+
 		return {
 			exists: !!contentPage,
 			title: contentPage?.title ?? null,

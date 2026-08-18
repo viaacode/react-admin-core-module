@@ -76,6 +76,7 @@ import type {
 	GqlAvoUser,
 	GqlContentBlock,
 	GqlContentPage,
+	GqlContentPageLabelHetArchief,
 	GqlHetArchiefUser,
 	GqlInsertOrUpdateContentPage,
 	GqlUser,
@@ -189,6 +190,8 @@ export class ContentPagesService {
 					label: labelObj?.content_label?.label,
 					language: labelObj?.content_label?.language,
 					link_to: labelObj?.content_label?.link_to,
+					// Only hetarchief content page labels have a color
+					color: (labelObj?.content_label as GqlContentPageLabelHetArchief)?.color,
 					created_at: labelObj?.content_label?.created_at,
 					updated_at: labelObj?.content_label?.updated_at,
 				})
