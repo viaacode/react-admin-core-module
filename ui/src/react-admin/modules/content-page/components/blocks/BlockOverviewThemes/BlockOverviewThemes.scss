@@ -5,11 +5,9 @@
 @use "../../../../shared/styles/mixins/focus" as focus;
 
 $tile-padding: 3rem;
+$description-animation-speed: 0.3s;
 
 .c-block-overview-themes {
-	// The group band breaks out to a fixed 5000px width for full-bleed coverage; it must stay
-	// visible here so it isn't clipped by this element's own bounds.
-	clip-path: inset(0);
 	@include typography.sofia-pro-heading-xl;
 
 	&__group {
@@ -121,6 +119,17 @@ $tile-padding: 3rem;
 			background: linear-gradient(180deg, rgb(0 0 0 / 0%) 40%, rgb(0 0 0 / 72%) 100%);
 			pointer-events: none;
 		}
+
+		// The description is collapsed to nothing by default and only grows/fades in on hover, so
+		// it visually slides up from the bottom of the tile alongside the (already bottom-anchored)
+		// title.
+		&:hover &-description,
+		&:focus-within &-description {
+			max-height: 7.2rem;
+			opacity: 1;
+			transform: translateY(0);
+			margin-top: variables.$g-spacer-unit;
+		}
 	}
 
 	&__tile-image {
@@ -138,24 +147,59 @@ $tile-padding: 3rem;
 		}
 	}
 
-	&__tile-title {
+	// Title/description and icon share one flex row so the icon always reserves its own space
+	// instead of being positioned independently of the title, which could make long titles run
+	// underneath it.
+	&__tile-content {
 		position: absolute;
-		bottom: 0;
-		left: 0;
+		inset: auto 0 0 0;
 		z-index: 1;
+		display: flex;
+		align-items: flex-end;
+		justify-content: space-between;
+		gap: variables.$g-spacer-unit;
 		padding: $tile-padding;
+	}
+
+	&__tile-text {
+		// Lets the column shrink below its content width so it wraps/clamps within the space left
+		// by the icon instead of pushing the flex row wider than the tile.
+		min-width: 0;
+		display: flex;
+		flex-direction: column;
+	}
+
+	&__tile-title {
 		color: colors.$white;
 		@include typography.sofia-pro-heading-md;
 		@include typography.truncate-after-x-lines(2);
 	}
 
+	// Hidden until the tile is hovered/focused (see the `&:hover &-description` rule above), where
+	// it fades and slides up into view below the title. Deliberately NOT using
+	// `truncate-after-x-lines` here: `-webkit-line-clamp` recomputes how many lines fit at every
+	// animation frame, which made the text pop in line-by-line instead of revealing smoothly.
+	// Plain `overflow: hidden` clips continuously as `max-height` grows, so it stays smooth; the
+	// trade-off is a hard cut instead of an ellipsis if the text would need a 4th line.
+	&__tile-description {
+		margin: 0;
+		max-height: 0;
+		opacity: 0;
+		overflow: hidden;
+		transform: translateY(0.5rem);
+		transition:
+			max-height $description-animation-speed ease-out,
+			opacity $description-animation-speed ease-out,
+			transform $description-animation-speed ease-out,
+			margin-top $description-animation-speed ease-out;
+		color: colors.$white;
+		@include typography.sofia-pro-body-sm;
+	}
+
 	.c-block-overview-themes__tile {
 		&-title__icon {
-			position: absolute;
-			right: $tile-padding;
-			bottom: $tile-padding;
+			flex-shrink: 0;
 			color: colors.$white;
-			z-index: 1;
 			font-size: 2.4rem;
 		}
 	}

@@ -57,7 +57,7 @@ export const BlockObjectsGrid: FunctionComponent<BlockObjectsGridProps> = ({
 		if (width >= BREAKPOINTS.tablet) {
 			return 3;
 		}
-		return 2;
+		return 1;
 	};
 
 	// Packs tiles into rows the same way the CSS grid renders them (auto-flow row, not dense):
@@ -69,7 +69,9 @@ export const BlockObjectsGrid: FunctionComponent<BlockObjectsGridProps> = ({
 		let usedColumns = 0;
 
 		tiles.forEach((tile) => {
-			const width = tile.isFixed ? 2 : 1;
+			// Fixed tiles span 2 columns, except on mobile where the grid is a single column
+			// wide and they span 1 like every other tile (see BlockObjectsGrid.scss).
+			const width = tile.isFixed ? Math.min(2, columns) : 1;
 			if (usedColumns + width > columns) {
 				rows.push(currentRow);
 				currentRow = [];
@@ -115,7 +117,11 @@ export const BlockObjectsGrid: FunctionComponent<BlockObjectsGridProps> = ({
 	};
 
 	const renderTile = (item: ObjectsGridItem, isFixed: boolean): ReactElement => {
-		const iconName = item.type ? getIconFromObjectType(item.type) : undefined;
+		// Same signal the search page uses to decide between the plain and the struck-through
+		// ("no-…") type icon: the search proxy only resolves a thumbnail for objects whose
+		// essence the current user may see.
+		const isAccessible = Boolean(item.thumbnailUrl);
+		const iconName = item.type ? getIconFromObjectType(item.type, isAccessible) : undefined;
 
 		return (
 			<li

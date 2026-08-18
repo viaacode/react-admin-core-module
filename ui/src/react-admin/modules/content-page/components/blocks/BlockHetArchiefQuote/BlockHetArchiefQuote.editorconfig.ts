@@ -1,7 +1,4 @@
-import {
-	GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF,
-	GET_FOREGROUND_COLOR_OPTIONS_ARCHIEF,
-} from '~modules/content-page/const/get-color-options';
+import { GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF } from '~modules/content-page/const/get-color-options';
 import { tText } from '~shared/helpers/translation-functions';
 import { HET_ARCHIEF } from '~shared/types';
 import type {
@@ -11,13 +8,7 @@ import type {
 } from '../../../types/content-block.types';
 import { Color, ContentBlockEditor, ContentBlockType } from '../../../types/content-block.types';
 
-import {
-	BACKGROUND_COLOR_FIELD,
-	BLOCK_FIELD_DEFAULTS,
-	BLOCK_STATE_DEFAULTS,
-	FOREGROUND_COLOR_FIELD,
-	TEXT_FIELD,
-} from '../defaults';
+import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, TEXT_FIELD } from '../defaults';
 
 export const INITIAL_HET_ARCHIEF_QUOTE_COMPONENTS_STATE =
 	(): HetArchiefQuoteBlockComponentState => ({
@@ -61,18 +52,28 @@ export const HET_ARCHIEF_QUOTE_BLOCK_CONFIG = (position = 0): ContentBlockConfig
 				]),
 				validator: undefined,
 			}),
-			textColor: FOREGROUND_COLOR_FIELD(
-				tText('admin/content-block/helpers/generators/hetarchief-quote___tekstkleur', {}, [
+			// The FA gives the text colour the same palette as the frame colour, so both offer
+			// the background colour options.
+			textColor: {
+				label: tText('admin/content-block/helpers/generators/hetarchief-quote___tekstkleur', {}, [
 					HET_ARCHIEF,
 				]),
-				GET_FOREGROUND_COLOR_OPTIONS_ARCHIEF()[1]
-			),
-			frameColor: BACKGROUND_COLOR_FIELD(
-				tText('admin/content-block/helpers/generators/hetarchief-quote___kleur-kader', {}, [
+				editorType: ContentBlockEditor.ColorSelect,
+				editorProps: {
+					options: GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF(),
+					defaultValue: Color.White,
+				},
+			},
+			frameColor: {
+				label: tText('admin/content-block/helpers/generators/hetarchief-quote___kleur-kader', {}, [
 					HET_ARCHIEF,
 				]),
-				GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF()[5]
-			),
+				editorType: ContentBlockEditor.ColorSelect,
+				editorProps: {
+					options: GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF(),
+					defaultValue: Color.Black,
+				},
+			},
 		},
 	},
 	block: {

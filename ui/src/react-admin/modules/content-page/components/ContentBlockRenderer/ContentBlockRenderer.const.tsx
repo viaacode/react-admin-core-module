@@ -131,7 +131,6 @@ export const REPEATABLE_CONTENT_BLOCKS = [
 	ContentBlockType.ThreeClickableTiles,
 	ContentBlockType.TagsWithLink,
 	ContentBlockType.CardsWithoutDescription,
-	ContentBlockType.OverviewThemes,
 	ContentBlockType.Timeline,
 	// ContentBlockType.ContentEncloseGrid,
 ];

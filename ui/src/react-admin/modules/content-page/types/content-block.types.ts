@@ -612,7 +612,7 @@ export interface HetArchiefHeaderSearchBlockComponentState {
 export interface HetArchiefQuoteBlockComponentState {
 	quote: string;
 	authorName: string;
-	textColor: Color;
+	textColor: Color | GradientColor | CustomBackground;
 	frameColor: Color | GradientColor | CustomBackground;
 }
 
