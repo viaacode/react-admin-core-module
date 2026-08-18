@@ -11,7 +11,6 @@ import { clsx } from 'clsx';
 
 export interface CarouselButtonsProps extends DefaultComponentProps {
 	controlledSwiper?: SwiperController | null;
-	isLoopedCarousel?: boolean;
 	// Plain-callback mode: for carousels with their own hand-rolled (non-swiper) navigation,
 	// e.g. the hero carousel's infinite strip. When both are set, the buttons are always
 	// enabled and swiper wiring below is skipped entirely.
@@ -21,7 +20,6 @@ export interface CarouselButtonsProps extends DefaultComponentProps {
 
 export const CarouselButtons: FunctionComponent<CarouselButtonsProps> = ({
 	controlledSwiper = null,
-	isLoopedCarousel = false,
 	onPrev,
 	onNext,
 	className,
@@ -36,14 +34,8 @@ export const CarouselButtons: FunctionComponent<CarouselButtonsProps> = ({
 	);
 
 	const updateSlideButtons = () => {
-		if (isLoopedCarousel) {
-			const amountOfSlides = controlledSwiper?.slides?.length || 0;
-			setDisablePrevSlideButton(amountOfSlides === 0);
-			setDisableNextSlideButton(amountOfSlides === 0);
-		} else {
-			setDisablePrevSlideButton(!!controlledSwiper?.isBeginning);
-			setDisableNextSlideButton(!!controlledSwiper?.isEnd);
-		}
+		setDisablePrevSlideButton(!!controlledSwiper?.isBeginning);
+		setDisableNextSlideButton(!!controlledSwiper?.isEnd);
 	};
 
 	// biome-ignore lint/correctness/useExhaustiveDependencies: Only used to init the buttons
