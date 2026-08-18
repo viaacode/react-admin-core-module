@@ -26,12 +26,16 @@ export interface BlockHeroCarouselActiveSlideProps extends DefaultComponentProps
 	item?: HeroCarouselSlideItem;
 	onEnded: () => void;
 	isLoading?: boolean;
+	isMuted: boolean;
+	onMutedChange: (muted: boolean) => void;
 }
 
 export const BlockHeroCarouselActiveSlide: FunctionComponent<BlockHeroCarouselActiveSlideProps> = ({
 	item,
 	onEnded,
 	isLoading,
+	isMuted,
+	onMutedChange,
 }): ReactElement => {
 	const { data: mediaDuration } = useGetFileDuration(item?.playableUrl);
 	const [isPaused, setIsPaused] = useState(false);
@@ -80,7 +84,8 @@ export const BlockHeroCarouselActiveSlide: FunctionComponent<BlockHeroCarouselAc
 		title: item.name,
 		logo: item.maintainerLogo ?? undefined,
 		autoplay: true,
-		muted: true,
+		muted: isMuted,
+		onMutedChange,
 		onEnded: onEnded,
 		onError: onEnded,
 		token: AdminConfigManager.getConfig().flowplayer.FLOW_PLAYER_TOKEN,

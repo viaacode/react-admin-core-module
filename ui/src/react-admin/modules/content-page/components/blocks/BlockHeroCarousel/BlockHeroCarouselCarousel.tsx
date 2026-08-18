@@ -47,6 +47,7 @@ export const BlockHeroCarouselCarousel: FunctionComponent<BlockHeroCarouselCarou
 	const [pxPerRem, setPxPerRem] = useState<number>(() => getPxPerRem());
 	const pxPerRemRef = useRef<number>(pxPerRem);
 	const trackRef = useRef<HTMLDivElement | null>(null);
+	const [isMuted, setIsMuted] = useState<boolean>(true);
 
 	useEffect(() => {
 		pxPerRemRef.current = pxPerRem;
@@ -116,6 +117,8 @@ export const BlockHeroCarouselCarousel: FunctionComponent<BlockHeroCarouselCarou
 										item={item}
 										onEnded={goNext}
 										isLoading={isLoading}
+										isMuted={isMuted}
+										onMutedChange={setIsMuted}
 									/>
 								) : (
 									<BlockHeroCarouselInactiveSlide item={item} isLoading={isLoading} />
