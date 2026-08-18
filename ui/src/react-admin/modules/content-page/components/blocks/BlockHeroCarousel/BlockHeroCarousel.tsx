@@ -13,7 +13,7 @@ import { BlockHeroCarouselSearch } from '~content-blocks/BlockHeroCarousel/Block
 import { useGetIeObjectsByIds } from '~content-blocks/BlockHeroCarousel/hooks/useGetIeObjectsByIds.ts';
 import { GET_SECONDARY_BACKGROUND_COLOR_OPTIONS_ARCHIEF } from '~modules/content-page/const/get-color-options.ts';
 import { isAudioVideoFormat } from '~shared/helpers/is-audio-video-format.ts';
-import type { ObjectType } from '~shared/helpers/map-format-to-type.ts';
+import type { IeObjectType } from '~shared/helpers/map-format-to-type.ts';
 import { toSeconds } from '~shared/helpers/parsers/duration.ts';
 
 export interface BlockHeroCarouselProps extends DefaultComponentProps {
@@ -37,7 +37,7 @@ export const BlockHeroCarousel: FunctionComponent<BlockHeroCarouselProps> = ({
 		return elements.map((object) => {
 			// eslint-disable-next-line react-hooks/purity
 			const randomIndex = Math.floor(Math.random() * allTertiaryColors.length);
-			const dctermsFormat = object.mediaItem?.dctermsFormat as ObjectType;
+			const dctermsFormat = object.mediaItem?.dctermsFormat as IeObjectType;
 			return {
 				schemaIdentifier: String(object.mediaItem?.value),
 				dctermsFormat,

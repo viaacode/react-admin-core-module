@@ -1,8 +1,8 @@
 import type { RefObject } from 'react';
 import { flushSync } from 'react-dom';
 import {
+	type IeObjectType,
 	mapDcTermsFormatToSimpleType,
-	type ObjectType,
 	SimpleIeObjectType,
 } from '~shared/helpers/map-format-to-type.ts';
 
@@ -20,10 +20,10 @@ export const ACTIVE_SLIDE_CLASS = 'c-block-hero-carousel__carousel-slide--active
 export const GAP_PX = 12;
 
 interface StripItem {
-	dctermsFormat: ObjectType;
+	dctermsFormat: IeObjectType;
 }
 
-export function getThumbWidthRem(format: ObjectType | undefined): number {
+export function getThumbWidthRem(format: IeObjectType | undefined): number {
 	const simpleType = mapDcTermsFormatToSimpleType(format);
 	return FORMAT_THUMB_WIDTHS_REM[simpleType as SimpleIeObjectType] || FALLBACK_THUMB_WIDTH_REM;
 }

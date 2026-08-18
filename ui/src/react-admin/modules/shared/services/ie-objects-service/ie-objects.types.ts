@@ -1,4 +1,4 @@
-import type { ObjectType } from '~shared/helpers/map-format-to-type.ts';
+import type { IeObjectType } from '~shared/helpers/map-format-to-type.ts';
 
 interface JsonWaveformData {
 	version: number;
@@ -14,7 +14,7 @@ export interface PlayableDisplayIeObject {
 	schemaIdentifier: string;
 	name: string;
 	thumbnailUrl: string | null;
-	dctermsFormat: ObjectType;
+	dctermsFormat: IeObjectType;
 	maintainerName: string;
 	maintainerLogo?: string;
 	maintainerOverlay: boolean;

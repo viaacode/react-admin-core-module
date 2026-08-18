@@ -6,8 +6,8 @@ import type { DefaultComponentProps } from '~modules/shared/types/components';
 import { Icon } from '~shared/components/Icon';
 import { getIconFromObjectType } from '~shared/helpers/get-icon-from-object-type.ts';
 import {
+	type IeObjectType,
 	mapDcTermsFormatToSimpleType,
-	type ObjectType,
 	SimpleIeObjectType,
 } from '~shared/helpers/map-format-to-type.ts';
 import { tText } from '~shared/helpers/translation-functions.ts';
@@ -18,7 +18,7 @@ export interface BlockHeroCarouselInactiveSlideProps extends DefaultComponentPro
 	isLoading?: boolean;
 }
 
-const getObjectTypeLabel = (format: ObjectType | undefined): string => {
+const getObjectTypeLabel = (format: IeObjectType | undefined): string => {
 	const simpleType = mapDcTermsFormatToSimpleType(format);
 
 	switch (simpleType) {

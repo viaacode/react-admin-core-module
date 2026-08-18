@@ -1,10 +1,10 @@
-export enum ObjectType {
+export enum IeObjectType {
 	audio = 'audio',
 	audiofragment = 'audiofragment',
 	film = 'film',
-	image = 'image',
+	image = 'image', // Should never be used, but does seem to pop up some times
 	newspaper = 'newspaper',
-	newspaperpage = 'newspaperpage',
+	newspaperpage = 'newspaperpage', // Should never be used, but does seem to pop up some times
 	video = 'video',
 	videofragment = 'videofragment',
 }
@@ -16,19 +16,19 @@ export enum SimpleIeObjectType {
 	IMAGE = 'image',
 }
 
-const MAP_DC_TERMS_FORMAT_TO_SIMPLE_TYPE: Record<ObjectType, SimpleIeObjectType> = {
-	[ObjectType.video]: SimpleIeObjectType.VIDEO,
-	[ObjectType.videofragment]: SimpleIeObjectType.VIDEO,
-	[ObjectType.film]: SimpleIeObjectType.VIDEO,
-	[ObjectType.audio]: SimpleIeObjectType.AUDIO,
-	[ObjectType.audiofragment]: SimpleIeObjectType.AUDIO,
-	[ObjectType.newspaper]: SimpleIeObjectType.NEWSPAPER,
-	[ObjectType.newspaperpage]: SimpleIeObjectType.NEWSPAPER,
-	[ObjectType.image]: SimpleIeObjectType.IMAGE,
+const MAP_DC_TERMS_FORMAT_TO_SIMPLE_TYPE: Record<IeObjectType, SimpleIeObjectType> = {
+	[IeObjectType.video]: SimpleIeObjectType.VIDEO,
+	[IeObjectType.videofragment]: SimpleIeObjectType.VIDEO,
+	[IeObjectType.film]: SimpleIeObjectType.VIDEO,
+	[IeObjectType.audio]: SimpleIeObjectType.AUDIO,
+	[IeObjectType.audiofragment]: SimpleIeObjectType.AUDIO,
+	[IeObjectType.newspaper]: SimpleIeObjectType.NEWSPAPER,
+	[IeObjectType.newspaperpage]: SimpleIeObjectType.NEWSPAPER,
+	[IeObjectType.image]: SimpleIeObjectType.IMAGE,
 };
 
 export function mapDcTermsFormatToSimpleType(
-	format: ObjectType | undefined | null
+	format: IeObjectType | undefined | null
 ): SimpleIeObjectType | 'unknown' {
 	if (!format) {
 		return 'unknown';
@@ -37,19 +37,19 @@ export function mapDcTermsFormatToSimpleType(
 	return MAP_DC_TERMS_FORMAT_TO_SIMPLE_TYPE[format] || format;
 }
 
-export function mapFormatToType(format?: string): ObjectType | undefined {
+export function mapFormatToType(format?: string): IeObjectType | undefined {
 	switch ((format || '').toLowerCase()) {
 		case 'video':
 		case 'film':
-			return ObjectType.video;
+			return IeObjectType.video;
 		case 'audio':
-			return ObjectType.audio;
+			return IeObjectType.audio;
 		case 'newspaper':
 		case 'krant':
-			return ObjectType.newspaper;
+			return IeObjectType.newspaper;
 		case 'image':
 		case 'photo':
-			return ObjectType.image;
+			return IeObjectType.image;
 		default:
 			return undefined;
 	}

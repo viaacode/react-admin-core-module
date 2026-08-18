@@ -1,7 +1,7 @@
 import type { IconName } from '@viaa/avo2-components';
 import {
+	type IeObjectType,
 	mapDcTermsFormatToSimpleType,
-	type ObjectType,
 	SimpleIeObjectType,
 } from '~shared/helpers/map-format-to-type.ts';
 
@@ -12,7 +12,7 @@ import {
  * struck-through ("no-…") variant.
  */
 export function getIconFromObjectType(
-	format: ObjectType | undefined,
+	format: IeObjectType | undefined,
 	accessible: boolean
 ): IconName {
 	const simpleType = mapDcTermsFormatToSimpleType(format);

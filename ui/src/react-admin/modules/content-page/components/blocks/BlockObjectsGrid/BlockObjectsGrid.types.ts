@@ -1,7 +1,7 @@
 import type { HeadingTypeOption } from '~modules/content-page/types/content-block.types';
 import type { DefaultComponentProps } from '~modules/shared/types/components';
 import type { PickerItem } from '~modules/shared/types/content-picker';
-import type { ObjectType } from '~shared/helpers/map-format-to-type';
+import type { IeObjectType } from '~shared/helpers/map-format-to-type';
 
 export type OrderedTile = { item: ObjectsGridItem; isFixed: boolean };
 
@@ -21,7 +21,7 @@ export interface ObjectsGridItem {
 	// Provider / maintainer name, shown in the title bar.
 	maintainerName?: string;
 	// Object type, drives the type-icon. Falls back to a generic icon when unknown.
-	type?: ObjectType;
+	type?: IeObjectType;
 	// Thumbnail (video / newspaper / image). Absent for audio → waveform fallback is shown.
 	thumbnailUrl?: string;
 }
