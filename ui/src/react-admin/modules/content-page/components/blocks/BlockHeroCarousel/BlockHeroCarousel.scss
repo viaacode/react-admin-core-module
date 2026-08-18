@@ -169,7 +169,7 @@ $hero-carousel-search-radius-desktop: 3.2rem;
 			&.c-block-hero-carousel__searchbar--has-dropdown .c-input input {
 				@media (min-width: variables.$g-bp2) {
 					border-radius: 0 $hero-carousel-search-radius-desktop $hero-carousel-search-radius-desktop 0;
-					border-top: 1px solid #adadad;
+					border-top: 1px solid colors.$zinc;
 					border-left: none;
 				}
 			}
