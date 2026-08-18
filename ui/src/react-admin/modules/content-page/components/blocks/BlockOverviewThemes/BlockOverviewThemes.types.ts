@@ -25,9 +25,7 @@ export interface BlockOverviewThemesGroup {
 	themes: BlockOverviewThemesThemeEntry[];
 }
 
-export interface BlockOverviewThemesProps extends DefaultComponentProps {
-	elements: BlockOverviewThemesGroup[];
-}
+export interface BlockOverviewThemesProps extends DefaultComponentProps, BlockOverviewThemesGroup {}
 
 export interface BlockOverviewThemesResolvedTheme {
 	theme: Theme;
