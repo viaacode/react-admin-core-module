@@ -11,8 +11,8 @@ import { BlockEventbrite } from '~content-blocks/BlockEventbrite';
 import { BlockHeading } from '~content-blocks/BlockHeading';
 import { BlockHetArchiefHeaderSearch } from '~content-blocks/BlockHetArchiefHeaderSearch/BlockHetArchiefHeaderSearch';
 import { BlockHetArchiefImageTextBackground } from '~content-blocks/BlockHetArchiefImageTextBackground';
-import { BlockHetArchiefVideoWrapper } from '~content-blocks/BlockHetArchiefVideo';
 import { BlockHetArchiefQuote } from '~content-blocks/BlockHetArchiefQuote';
+import { BlockHetArchiefVideo } from '~content-blocks/BlockHetArchiefVideo';
 import { BlockHighlightText } from '~content-blocks/BlockHighlightText';
 import { BlockHomepageBanner } from '~content-blocks/BlockHomepageBanner';
 import { BlockIFrame } from '~content-blocks/BlockIFrame';
@@ -85,7 +85,7 @@ export function GET_BLOCK_COMPONENT(
 		[ContentBlockType.MaintainersGrid]: BlockMaintainersGrid,
 		[ContentBlockType.ScrollDownNudge]: BlockScrollDownNudge,
 		[ContentBlockType.ObjectsGrid]: BlockObjectsGrid,
-		[ContentBlockType.HetArchiefVideo]: BlockHetArchiefVideoWrapper,
+		[ContentBlockType.HetArchiefVideo]: BlockHetArchiefVideo,
 
 		// Het archief specific blocks
 		[ContentBlockType.HetArchiefHeaderSearch]: BlockHetArchiefHeaderSearch,
@@ -167,7 +167,6 @@ export const USER_CONTENT_BLOCKS = [
 	ContentBlockType.PageOverview,
 	ContentBlockType.MediaGrid,
 	ContentBlockType.ProjectsSpotlight,
-	ContentBlockType.HetArchiefVideo,
 ];
 
 /**

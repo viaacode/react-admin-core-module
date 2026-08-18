@@ -34,6 +34,11 @@ export interface ContentPickerProps {
 	hideTypeDropdown?: boolean;
 	hideTargetSwitch?: boolean;
 	errors?: string | string[];
+	/**
+	 * Restrict IE_OBJECT results to these dcterms formats, eg. to offer AV objects only.
+	 * Ignored by the other picker types. See IE_OBJECT_AV_FORMATS.
+	 */
+	ieObjectFormats?: string[];
 }
 
 export const ContentPicker: FunctionComponent<ContentPickerProps> = ({
@@ -44,6 +49,7 @@ export const ContentPicker: FunctionComponent<ContentPickerProps> = ({
 	hideTypeDropdown = false,
 	hideTargetSwitch = false,
 	errors = [],
+	ieObjectFormats,
 }) => {
 	const [testInput, setTestInput] = useState<string>('');
 
@@ -77,7 +83,8 @@ export const ContentPicker: FunctionComponent<ContentPickerProps> = ({
 				let items: PickerItem[] = await selectedType.fetch(
 					keyword,
 					20,
-					selectedType.value as AvoCoreContentPickerType
+					selectedType.value as AvoCoreContentPickerType,
+					ieObjectFormats
 				);
 
 				if (!hasAppliedInitialItem && value) {
@@ -114,7 +121,7 @@ export const ContentPicker: FunctionComponent<ContentPickerProps> = ({
 				return [];
 			}
 		},
-		[selectedType, hasAppliedInitialItem, value]
+		[selectedType, hasAppliedInitialItem, value, ieObjectFormats]
 	);
 
 	// when selecting a type, reset `selectedItem` and retrieve new item options

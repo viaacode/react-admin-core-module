@@ -36,7 +36,7 @@ export function validateFieldGroup(
 
 			if (validator && isFunction(validator)) {
 				if (!isVisible || isVisible(config, elementState)) {
-					const messages = validator(elementState?.[innerKey]);
+					const messages = validator(elementState?.[innerKey], elementState);
 					if (messages.length) {
 						elementErrors[innerKey] = messages;
 						hasError = true;
@@ -98,7 +98,8 @@ export function validateContentBlockConfig(
 							validator,
 							newErrors,
 							singleState[key as keyof ContentBlockComponentState],
-							stateIndex
+							stateIndex,
+							singleState
 						);
 					}
 				});
@@ -109,7 +110,9 @@ export function validateContentBlockConfig(
 						key,
 						validator,
 						newErrors,
-						state[key as keyof ContentBlockComponentState]
+						state[key as keyof ContentBlockComponentState],
+						undefined,
+						state
 					);
 				}
 			}

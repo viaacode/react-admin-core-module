@@ -229,11 +229,9 @@ export const GET_CONTENT_BLOCK_TYPE_OPTIONS: () => SelectOption<string>[] = () =
 			value: ContentBlockType.OverviewThemes,
 		},
 		{
-			label: tText(
-				'react-admin/modules/content-page/const/get-content-block-type-options___video-snippet',
-				{},
-				[HET_ARCHIEF]
-			),
+			label: tText('modules/content-page/const/get-content-block-type-options___videoblok', {}, [
+				HET_ARCHIEF,
+			]),
 			value: ContentBlockType.HetArchiefVideo,
 		},
 	];

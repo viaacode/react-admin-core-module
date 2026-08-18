@@ -226,13 +226,30 @@ export interface ContentBlockField {
 	fields?: Record<string, ContentBlockField>; // Used for fieldGroups
 	note?: ReactNode;
 	isNoteVisible?: (config: ContentBlockConfig) => boolean;
-	// biome-ignore lint/suspicious/noExplicitAny: todo
-	validator?: (value: any) => string[];
+	/**
+	 * Returns the validation errors for this field's value.
+	 *
+	 * `siblingState` is the state object this field lives in (the component state, the block
+	 * state, or a single element of a repeated field group), so a validator can express rules
+	 * that span two fields — e.g. "start time and end time must both be filled in, or neither".
+	 * Pair such a validator with `revalidateFields` so the other field's error clears too.
+	 */
+	validator?: (
+		// biome-ignore lint/suspicious/noExplicitAny: todo
+		value: any,
+		siblingState?: ContentBlockComponentState | ContentBlockState
+	) => string[];
 	isVisible?: (
 		config: ContentBlockConfig,
 		formGroupState: ContentBlockComponentState | ContentBlockState
 	) => boolean;
 	fieldsToResetOnChange?: string[];
+	/**
+	 * Other field keys in the same state object whose validators should re-run when this field
+	 * changes. Needed for cross-field rules: without it a sibling's error would linger until
+	 * that sibling itself is edited.
+	 */
+	revalidateFields?: string[];
 	repeat?: {
 		// biome-ignore lint/suspicious/noExplicitAny: todo
 		defaultState: any;
@@ -386,21 +403,6 @@ export interface MediaPlayerBlockComponentState {
 	autoplay: boolean;
 }
 
-export interface HetArchiefVideoBlockComponentState {
-	title: string;
-	item?: ButtonAction;
-	poster?: string;
-	showCopyright?: boolean;
-	annotationTitle?: string;
-	annotationText?: string;
-	width?: string;
-	autoplay: boolean;
-	/** Start time of the fragment to play, in seconds */
-	startTime?: string;
-	/** End time of the fragment to play, in seconds */
-	endTime?: string;
-}
-
 export interface MediaPlayerTitleTextButtonBlockComponentState {
 	align: AlignOption;
 	buttonAction?: ButtonAction;
@@ -486,7 +488,6 @@ export type SingleContentBlockComponentState =
 	| KlaarBlockComponentState
 	| MediaPlayerBlockComponentState
 	| MediaPlayerTitleTextButtonBlockComponentState
-	| HetArchiefVideoBlockComponentState
 	| PageOverviewBlockComponentStateFields
 	| AvoQuoteBlockComponentState
 	| HetArchiefQuoteBlockComponentState

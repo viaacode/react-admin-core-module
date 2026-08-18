@@ -7,7 +7,7 @@ import {
 	ModalBody,
 	ModalFooterRight,
 } from '@viaa/avo2-components';
-import { type AvoCoreContentPickerType, AvoFileUploadAssetType } from '@viaa/avo2-types';
+import { AvoCoreContentPickerType, AvoFileUploadAssetType } from '@viaa/avo2-types';
 import clsx from 'clsx';
 import { compact, noop, uniq } from 'es-toolkit';
 import type { FunctionComponent, KeyboardEvent } from 'react';
@@ -16,7 +16,9 @@ import FileUpload from '~shared/components/FileUpload/FileUpload';
 import { Loading } from '~shared/components/Loading/Loading';
 
 import { useGetStillsFromContentItem } from '~shared/components/UploadOrSelectVideoStill/hooks/useGetStillsFromContentItem';
+import { useGetStillsFromIeObject } from '~shared/components/UploadOrSelectVideoStill/hooks/useGetStillsFromIeObject';
 import { PHOTO_TYPES } from '~shared/helpers/files';
+import { snippetTimeToSeconds } from '~shared/helpers/parsers/duration';
 import { tText } from '~shared/helpers/translation-functions';
 
 import './UploadOrSelectVideoStill.scss';
@@ -31,8 +33,15 @@ export interface UploadOrSelectVideoStillProps {
 		| AvoCoreContentPickerType.ITEM
 		| AvoCoreContentPickerType.COLLECTION
 		| AvoCoreContentPickerType.ASSIGNMENT
+		| AvoCoreContentPickerType.IE_OBJECT
 		| null; // Limit maintainer options based on the selected item, collection or assignment
 	contentItemId: string | null; // Limit maintainer options based on the selected item, collection or assignment
+	/**
+	 * For IE_OBJECT only: start of the snippet as entered on the block (HH:MM:SS or MM:SS), so the
+	 * still can be taken from inside the snippet instead of the start of the object.
+	 * https://meemoo.atlassian.net/browse/ARC-3832
+	 */
+	startTime?: string;
 }
 
 export const UploadOrSelectVideoStill: FunctionComponent<UploadOrSelectVideoStillProps> = ({
@@ -43,17 +52,31 @@ export const UploadOrSelectVideoStill: FunctionComponent<UploadOrSelectVideoStil
 	required,
 	contentItemType,
 	contentItemId,
+	startTime,
 }) => {
 	const [originalStillValue] = useState<string | null>(value);
 	const [uploadedStill, setUploadedStill] = useState<string | null>(null);
 	const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 	const [selectedStill, setSelectedStill] = useState<string | null>(value);
 
-	const {
-		data: stills,
-		isFetching,
-		refetch,
-	} = useGetStillsFromContentItem(contentItemType, contentItemId);
+	// hetarchief ie-objects have their own stills source: the avo endpoint below does not know
+	// about them, and the still should come from inside the chosen snippet.
+	const isIeObject = contentItemType === AvoCoreContentPickerType.IE_OBJECT;
+
+	const avoStills = useGetStillsFromContentItem(
+		isIeObject ? null : contentItemType,
+		contentItemId,
+		{
+			enabled: !isIeObject,
+		}
+	);
+	const ieObjectStills = useGetStillsFromIeObject(
+		isIeObject ? contentItemId : null,
+		snippetTimeToSeconds(startTime),
+		{ enabled: isIeObject }
+	);
+
+	const { data: stills, isFetching, refetch } = isIeObject ? ieObjectStills : avoStills;
 
 	useEffect(() => {
 		if (contentItemId) {

@@ -36,12 +36,9 @@ export class PlayerTicketController {
 				'Either query param externalId or browsePath is required to fetch a playable url'
 			);
 		}
-		const startTime = /[0-9]+/.test(queryParams.startTime)
-			? Number.parseInt(queryParams.startTime, 10)
-			: undefined;
-		const endTime = /[0-9]+/.test(queryParams.endTime)
-			? Number.parseInt(queryParams.endTime, 10)
-			: undefined;
+		const startTime = this.parseTimeParam('startTime', queryParams.startTime);
+		const endTime = this.parseTimeParam('endTime', queryParams.endTime);
+		this.assertValidStartAndEndTime(startTime, endTime);
 		// biome-ignore lint/suspicious/noExplicitAny: get header
 		const referer = (request as any).header('Referer') || 'referer-not-defined';
 		if (queryParams.externalId) {
@@ -74,6 +71,47 @@ export class PlayerTicketController {
 	}
 
 	/**
+	 * Parses a start/end time query param into whole seconds.
+	 *
+	 * The pattern is anchored on purpose: an unanchored test accepts strings such as "a1", which
+	 * then parse to NaN and silently disable the cut further down the chain instead of failing.
+	 */
+	private parseTimeParam(name: string, value: string | undefined): number | undefined {
+		if (value === undefined || value === null || value === '') {
+			return undefined;
+		}
+		if (!/^\d+$/.test(value)) {
+			throw new BadRequestException(
+				`Query param ${name} must be a whole number of seconds, got "${value}"`
+			);
+		}
+		return Number.parseInt(value, 10);
+	}
+
+	/**
+	 * The ticket service only cuts the media when it receives an end time: both the `fragment`
+	 * claim in the ticket JWT and the `t=start,end` media fragment on the url are gated on it.
+	 * A start time without an end time would therefore silently hand out an *uncut* url, so
+	 * reject that combination outright instead of quietly ignoring it.
+	 */
+	private assertValidStartAndEndTime(
+		startTime: number | undefined,
+		endTime: number | undefined
+	): void {
+		if (startTime === undefined && endTime === undefined) {
+			return;
+		}
+		if (startTime === undefined || endTime === undefined) {
+			throw new BadRequestException(
+				'Query params startTime and endTime must be passed together, or not at all'
+			);
+		}
+		if (endTime <= startTime) {
+			throw new BadRequestException('Query param endTime must be greater than startTime');
+		}
+	}
+
+	/**
 	 * Gets a playable url for a given media item
 	 * https://viaadocumentation.atlassian.net/wiki/spaces/SI/pages/1063453019/Media+Service
 	 * @param externalId external_id of the media item that you want to view
@@ -90,6 +128,9 @@ export class PlayerTicketController {
 					message: 'Object with external id was not found',
 				});
 			}
+			// Callers can only supply start and end together (see assertValidStartAndEndTime), so the
+			// only way to end up here with a start and no end is the graph-defined fragment fallback
+			// below, whose behaviour is deliberately left unchanged.
 			return this.getPlayableUrlFromBrowsePath(objectInfo.browsePath, {
 				...options,
 				startTime: options.startTime || objectInfo.startTime,

@@ -1,22 +1,28 @@
 import { tText } from '~shared/helpers/translation-functions';
 
-import type { ContentBlockErrors } from '../../content-page/types/content-block.types';
+import type {
+	ContentBlockComponentState,
+	ContentBlockErrors,
+	ContentBlockField,
+	ContentBlockState,
+} from '../../content-page/types/content-block.types';
 
 // Handle content-block config components/block state validation
 export const validateContentBlockField = (
 	fieldKey: string,
-	// biome-ignore lint/suspicious/noExplicitAny: todo
-	validator: ((value: any) => string[]) | undefined,
+	validator: ContentBlockField['validator'],
 	oldErrors: ContentBlockErrors = {},
 	// biome-ignore lint/suspicious/noExplicitAny: todo
 	value: any,
-	stateIndex?: number
+	stateIndex?: number,
+	// The state object the field lives in, so validators can express cross-field rules
+	siblingState?: ContentBlockComponentState | ContentBlockState
 ): ContentBlockErrors => {
 	if (!validator) {
 		return oldErrors;
 	}
 
-	const errorArray = validator(value);
+	const errorArray = validator(value, siblingState);
 
 	if (errorArray.length) {
 		if (typeof stateIndex === 'number') {
@@ -43,13 +49,12 @@ export const validateContentBlockField = (
 		};
 		delete updatedErrors[fieldKey];
 		return updatedErrors;
-	} else {
-		// Still errors, set errors under fieldKey on error object
-		return {
-			...oldErrors,
-			[fieldKey]: errorArray,
-		};
 	}
+	// Still errors, set errors under fieldKey on error object
+	return {
+		...oldErrors,
+		[fieldKey]: errorArray,
+	};
 };
 
 export function validateFlowplayerVideoUrl(url: string | null | undefined) {

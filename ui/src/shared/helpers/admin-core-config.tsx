@@ -98,6 +98,7 @@ export function getAdminCoreConfigForLocalTestApp(navigateFunc: NavigateFunction
 				// ContentBlockType.Breadcrumbs,
 				ContentBlockType.OverviewWithCarousel,
 				ContentBlockType.HetArchiefQuote,
+				ContentBlockType.HetArchiefVideo,
 				ContentBlockType.ObjectsGrid,
 				ContentBlockType.OverviewThemes,
 			],
