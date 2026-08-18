@@ -45,7 +45,7 @@ export const BlockHeroCarousel: FunctionComponent<BlockHeroCarouselProps> = ({
 				backgroundColor: isAudioVideoFormat(dctermsFormat)
 					? (allTertiaryColors[randomIndex].value as Color)
 					: Color.Mustard,
-				cuepoints: {
+				snipPoint: {
 					start: object.startCuePoint
 						? (toSeconds(object.startCuePoint, true) ?? undefined)
 						: undefined,

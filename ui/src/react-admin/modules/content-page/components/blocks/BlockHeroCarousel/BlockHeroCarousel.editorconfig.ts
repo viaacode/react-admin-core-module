@@ -58,7 +58,7 @@ const videoIsVisible: ContentBlockField['isVisible'] = (_config, formGroupState)
 	);
 };
 
-const cuePointsIsVisible: ContentBlockField['isVisible'] = (config, formGroupState) => {
+const snipPointIsVisible: ContentBlockField['isVisible'] = (config, formGroupState) => {
 	return (
 		videoIsVisible(config, formGroupState) ||
 		['audio', 'audiofragment'].includes(
@@ -86,7 +86,7 @@ const CUE_POINT_FIELD = (label: string, error: string) =>
 
 			return [];
 		},
-		isVisible: cuePointsIsVisible,
+		isVisible: snipPointIsVisible,
 	});
 
 export const HERO_CAROUSEL_CONFIG = (position = 0): ContentBlockConfig => ({

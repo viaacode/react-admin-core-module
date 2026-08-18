@@ -52,22 +52,22 @@ export const BlockHeroCarouselActiveSlide: FunctionComponent<BlockHeroCarouselAc
 		let cueStart: number | null = null;
 		let cueEnd: number | null = null;
 
-		// Only cuepoints if there are any set, and they do not fall outside the range of the video itself
-		if (item.cuepoints) {
+		// Only snipPoint if there are any set, and they do not fall outside the range of the video itself
+		if (item.snipPoint) {
 			if (
-				item.cuepoints.start &&
-				item.cuepoints.start > 0 &&
-				(isNil(mediaDuration) || item.cuepoints.start < mediaDuration)
+				item.snipPoint.start &&
+				item.snipPoint.start > 0 &&
+				(isNil(mediaDuration) || item.snipPoint.start < mediaDuration)
 			) {
-				cueStart = item.cuepoints.start;
+				cueStart = item.snipPoint.start;
 			}
 
 			if (
-				item.cuepoints.end &&
+				item.snipPoint.end &&
 				(isNil(mediaDuration) ||
-					(item.cuepoints.end && item.cuepoints.end < mediaDuration && item.cuepoints.end > 0))
+					(item.snipPoint.end && item.snipPoint.end < mediaDuration && item.snipPoint.end > 0))
 			) {
-				cueEnd = item.cuepoints.end;
+				cueEnd = item.snipPoint.end;
 			}
 		}
 
@@ -111,7 +111,7 @@ export const BlockHeroCarouselActiveSlide: FunctionComponent<BlockHeroCarouselAc
 						type: item.mimeType as string,
 					},
 				]}
-				waveformData={item.peakfileData?.data || undefined}
+				waveformData={item.peakfileData || undefined}
 				{...shared}
 			/>
 		);

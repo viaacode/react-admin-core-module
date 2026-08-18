@@ -17,8 +17,8 @@ export const useGetIeObjectsByIds = (mediaItems: HeroCarouselSlideItem[]) => {
 			const objects = await IeObjectsService.getPlayableDisplayData(
 				requestableMediaItems.map((item) => ({
 					schemaIdentifier: item.schemaIdentifier,
-					start: item.cuepoints?.start,
-					end: item.cuepoints?.end,
+					start: item.snipPoint?.start,
+					end: item.snipPoint?.end,
 				}))
 			);
 
