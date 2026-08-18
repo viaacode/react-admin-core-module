@@ -23,7 +23,7 @@ import {
 } from './BlockHeroCarousel.utils.ts';
 
 import './BlockHeroCarousel.scss';
-import { ObjectMetadata } from '~modules/content-page/components/ObjectMetadata/ObjectMetadata.tsx';
+import { IeObjectMetadata } from '~modules/content-page/components/IeObjectMetadata/IeObjectMetadata.tsx';
 import type { PlayableDisplayIeObject } from '~shared/services/ie-objects-service/ie-objects.types.ts';
 
 export interface BlockHeroCarouselCarouselProps extends DefaultComponentProps {
@@ -133,7 +133,7 @@ export const BlockHeroCarouselCarousel: FunctionComponent<BlockHeroCarouselCarou
 					})}
 				</div>
 			</div>
-			<ObjectMetadata
+			<IeObjectMetadata
 				className={'c-block-hero-carousel__carousel-metadata'}
 				ieObject={strip?.[activeIndex] as PlayableDisplayIeObject}
 				fallbackTitle=""

@@ -9,14 +9,14 @@ import { isMobileWidth } from '~shared/helpers/media-query.ts';
 import { tText } from '~shared/helpers/translation-functions';
 import type { PlayableDisplayIeObject } from '~shared/services/ie-objects-service/ie-objects.types.ts';
 import { HET_ARCHIEF } from '~shared/types';
-import './ObjectMetadata.scss';
+import './IeObjectMetadata.scss';
 
-export const ObjectMetadata: FunctionComponent<{
+export const IeObjectMetadata: FunctionComponent<{
 	ieObject: PlayableDisplayIeObject;
 	fallbackTitle: string;
 	className?: string;
 }> = ({ ieObject, fallbackTitle, className }) => (
-	<div className={clsx('c-object-metadata', className)}>
+	<div className={clsx('c-ie-object-metadata', className)}>
 		<SmartLink
 			action={{
 				type: AvoCoreContentPickerType.INTERNAL_LINK,
@@ -27,7 +27,7 @@ export const ObjectMetadata: FunctionComponent<{
 				{},
 				[HET_ARCHIEF]
 			)}
-			className="c-object-metadata__cta"
+			className="c-ie-object-metadata__cta"
 		>
 			<Button
 				variants={['block', 'black']}
@@ -43,15 +43,15 @@ export const ObjectMetadata: FunctionComponent<{
 				}
 			/>
 		</SmartLink>
-		<div className="c-object-metadata__text">
-			<p className="c-object-metadata__title">{ieObject?.name || fallbackTitle}</p>
-			<p className="c-object-metadata__maintainer-name">{ieObject?.maintainerName || ''}</p>
+		<div className="c-ie-object-metadata__text">
+			<p className="c-ie-object-metadata__title">{ieObject?.name || fallbackTitle}</p>
+			<p className="c-ie-object-metadata__maintainer-name">{ieObject?.maintainerName || ''}</p>
 		</div>
 		{ieObject?.maintainerLogo && (
 			<img
 				src={ieObject?.maintainerLogo}
 				alt={ieObject?.maintainerName || ''}
-				className="c-object-metadata__maintainer-logo"
+				className="c-ie-object-metadata__maintainer-logo"
 			/>
 		)}
 	</div>

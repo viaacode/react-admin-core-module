@@ -2,7 +2,7 @@
 @use "../../../shared/styles/settings/variables" as variables;
 @use "../../../shared/styles/mixins/typography" as typography;
 
-.c-object-metadata {
+.c-ie-object-metadata {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
