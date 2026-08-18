@@ -6,7 +6,9 @@ import type { PickerItem } from '~shared/types/content-picker.ts';
 export interface BlockOverviewThemesGroup {
 	title: string;
 	titleType: HeadingTypeOption;
-	themes: PickerItem[];
+	// The content picker reports `null` for an entry that is being cleared, so a saved group can
+	// contain empty slots
+	themes: (PickerItem | null)[];
 }
 
 export interface BlockOverviewThemesProps extends DefaultComponentProps {
