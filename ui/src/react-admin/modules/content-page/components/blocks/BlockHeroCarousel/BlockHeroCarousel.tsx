@@ -53,7 +53,7 @@ export const BlockHeroCarousel: FunctionComponent<BlockHeroCarouselProps> = ({
 		});
 	}, [elements]);
 
-	const { data: ieObjects, isLoading } = useGetIeObjectsByIds(items);
+	const { data: ieObjects, isLoading, isFetching } = useGetIeObjectsByIds(items);
 
 	return (
 		<article className={clsx('c-block-hero-carousel', className)}>
@@ -74,7 +74,7 @@ export const BlockHeroCarousel: FunctionComponent<BlockHeroCarouselProps> = ({
 				searchAriaLabel={searchAriaLabel}
 			/>
 			{ieObjects?.length && (
-				<BlockHeroCarouselCarousel elements={ieObjects} isLoading={isLoading} />
+				<BlockHeroCarouselCarousel elements={ieObjects} isLoading={isLoading || isFetching} />
 			)}
 		</article>
 	);
