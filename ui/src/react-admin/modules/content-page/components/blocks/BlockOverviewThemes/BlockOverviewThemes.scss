@@ -7,9 +7,6 @@
 $tile-padding: 3rem;
 
 .c-block-overview-themes {
-	// The group band breaks out to a fixed 5000px width for full-bleed coverage; it must stay
-	// visible here so it isn't clipped by this element's own bounds.
-	clip-path: inset(0);
 	@include typography.sofia-pro-heading-xl;
 
 	&__group {

@@ -18,14 +18,10 @@
 	// tile lines up regardless of type.
 	--c-objects-grid-row-height: 22rem;
 
-	@media (min-width: variables.$g-bp1) {
-		--c-objects-grid-columns: 2;
-		--c-objects-grid-fixed-span: 2;
-		--c-objects-grid-gap: #{variables.$g-spacer-unit * 4};
-	}
-
 	@media (min-width: variables.$g-bp2) {
 		--c-objects-grid-columns: 3;
+		--c-objects-grid-fixed-span: 2;
+		--c-objects-grid-gap: #{variables.$g-spacer-unit * 4};
 		--c-objects-grid-row-height: 28rem;
 	}
 
@@ -121,7 +117,7 @@
 
 	// Only limit newspapers if the tile is double width for fixed ie objects, which is not the
 	// case on mobile where the grid is a single column.
-	@media (min-width: variables.$g-bp1) {
+	@media (min-width: variables.$g-bp2) {
 		.c-block-objects-grid__tile--fixed {
 			// Newspaper scans are tall pages; crop from the top so the masthead stays visible
 			// instead of centering on the middle of the page.

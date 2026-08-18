@@ -61,7 +61,7 @@ const INITIAL_OVERVIEW_THEMES_THEME_STATE = () => ({
 const INITIAL_OVERVIEW_THEMES_GROUP_STATE = () => ({
 	title: '',
 	titleType: 'h2',
-	bandColor: GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF().find((color) => color.value === Color.SeaGreen),
+	bandColor: Color.SeaGreen,
 	shapesVariant: '1' as BlockOverviewThemesShapesVariant,
 	themes: [INITIAL_OVERVIEW_THEMES_THEME_STATE()],
 });
@@ -135,7 +135,7 @@ export const OVERVIEW_THEMES_BLOCK_CONFIG = (position = 0): ContentBlockConfig =
 				),
 				editorType: ContentBlockEditor.ColorSelect,
 				editorProps: {
-					options: GET_SECONDARY_BACKGROUND_COLOR_OPTIONS_ARCHIEF(),
+					options: GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF(),
 					defaultValue: GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF().find(
 						(color) => color.value === Color.SeaGreen
 					),

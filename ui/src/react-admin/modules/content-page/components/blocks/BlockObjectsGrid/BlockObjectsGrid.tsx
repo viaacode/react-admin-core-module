@@ -57,9 +57,6 @@ export const BlockObjectsGrid: FunctionComponent<BlockObjectsGridProps> = ({
 		if (width >= BREAKPOINTS.tablet) {
 			return 3;
 		}
-		if (width >= BREAKPOINTS.mobile) {
-			return 2;
-		}
 		return 1;
 	};
 
