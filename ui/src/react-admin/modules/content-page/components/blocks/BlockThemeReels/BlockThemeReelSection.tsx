@@ -142,7 +142,7 @@ export const BlockThemeReelSection: FunctionComponent<BlockThemeReelSectionProps
 							undefined,
 							-1
 						)}
-					<CarouselButtons controlledSwiper={controlledSwiper} isLoopedCarousel={false} />
+					<CarouselButtons controlledSwiper={controlledSwiper} />
 				</div>
 			</div>
 			<Swiper

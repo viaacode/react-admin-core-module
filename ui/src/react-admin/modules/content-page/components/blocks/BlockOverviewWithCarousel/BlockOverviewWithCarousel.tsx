@@ -105,7 +105,7 @@ export const BlockOverviewWithCarousel: FunctionComponent<BlockOverviewWithCarou
 							undefined,
 							-1
 						)}
-					<CarouselButtons controlledSwiper={controlledSwiper} isLoopedCarousel={false} />
+					<CarouselButtons controlledSwiper={controlledSwiper} />
 				</div>
 			</div>
 			<Swiper
