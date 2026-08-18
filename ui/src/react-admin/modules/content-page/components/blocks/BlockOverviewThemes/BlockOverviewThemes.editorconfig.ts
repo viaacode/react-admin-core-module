@@ -2,10 +2,7 @@ import type { SelectOption } from '@viaa/avo2-components';
 import { AvoCoreContentPickerType } from '@viaa/avo2-types';
 import type { BlockOverviewThemesShapesVariant } from '~content-blocks/BlockOverviewThemes/BlockOverviewThemes.types';
 import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, TEXT_FIELD } from '~content-blocks/defaults';
-import {
-	GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF,
-	GET_SECONDARY_BACKGROUND_COLOR_OPTIONS_ARCHIEF,
-} from '~modules/content-page/const/get-color-options';
+import { GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF } from '~modules/content-page/const/get-color-options';
 import { GET_FULL_HEADING_TYPE_OPTIONS } from '~modules/content-page/const/get-heading-type-options';
 import {
 	Color,
@@ -13,6 +10,7 @@ import {
 	ContentBlockEditor,
 	ContentBlockType,
 	type DefaultContentBlockState,
+	type PaddingFieldState,
 } from '~modules/content-page/types/content-block.types';
 import type { FileUploadProps } from '~shared/components/FileUpload/FileUpload.tsx';
 import { PHOTO_TYPES } from '~shared/helpers/files.ts';
@@ -60,7 +58,9 @@ const INITIAL_OVERVIEW_THEMES_THEME_STATE = () => ({
 	description: '',
 });
 
-const INITIAL_OVERVIEW_THEMES_GROUP_STATE = () => ({
+// Only one theme group per block: `components.state` is a single object, and only the nested
+// `themes` field repeats (`fieldGroup` + `repeat`, see block-overview-themes___thema below).
+export const INITIAL_OVERVIEW_THEMES_COMPONENTS_STATE = () => ({
 	title: '',
 	titleType: 'h2',
 	bandColor: Color.SeaGreen,
@@ -68,15 +68,17 @@ const INITIAL_OVERVIEW_THEMES_GROUP_STATE = () => ({
 	themes: [INITIAL_OVERVIEW_THEMES_THEME_STATE()],
 });
 
-// `components.state` for a repeatable block must be an array: the editor pushes/splices entries
-// into it directly (see content-edit.reducer.ts), and `ContentBlockRenderer` passes it straight
-// through as the `elements` prop.
-export const INITIAL_OVERVIEW_THEMES_COMPONENTS_STATE = () => [
-	INITIAL_OVERVIEW_THEMES_GROUP_STATE(),
-];
-
-export const INITIAL_OVERVIEW_THEMES_BLOCK_STATE = (): DefaultContentBlockState =>
-	BLOCK_STATE_DEFAULTS();
+export const INITIAL_OVERVIEW_THEMES_BLOCK_STATE = (): DefaultContentBlockState => ({
+	...BLOCK_STATE_DEFAULTS(),
+	padding: {
+		top: 'none',
+		bottom: 'none',
+	} as PaddingFieldState,
+	margin: {
+		top: 'none',
+		bottom: 'none',
+	} as PaddingFieldState,
+});
 
 export const OVERVIEW_THEMES_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 	position,
@@ -85,14 +87,6 @@ export const OVERVIEW_THEMES_BLOCK_CONFIG = (position = 0): ContentBlockConfig =
 	]),
 	type: ContentBlockType.OverviewThemes,
 	components: {
-		name: tText(
-			'modules/content-page/components/blocks/block-overview-themes/block-overview-themes___themagroep',
-			{},
-			[HET_ARCHIEF]
-		),
-		limits: {
-			min: 1,
-		},
 		state: INITIAL_OVERVIEW_THEMES_COMPONENTS_STATE(),
 		fields: {
 			title: TEXT_FIELD(
