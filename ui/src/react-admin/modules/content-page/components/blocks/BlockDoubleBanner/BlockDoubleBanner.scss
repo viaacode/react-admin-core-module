@@ -22,13 +22,11 @@ $pill-radius: 999px;
 		overflow: hidden;
 		text-decoration: none;
 
+		@include focus.focus-outline;
+
 		@media (min-width: variables.$g-bp3) {
 			flex-direction: row;
 			min-height: 16rem;
-		}
-
-		&:focus-visible {
-			@include focus.focus;
 		}
 
 		&:hover .c-block-double-banner__image img {
