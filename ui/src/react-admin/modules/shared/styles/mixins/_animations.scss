@@ -1,3 +1,5 @@
+@use "sass:list";
+
 @mixin zoom-in-animation {
 	transform: scale(1.1);
 }
@@ -32,6 +34,18 @@ $ken-burns-scale: 1.35;
 
 @mixin ken-burns-animation($duration) {
 	animation: ken-burns $duration linear forwards;
+}
+
+$flyout-animation: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+
+@mixin flyout-animation($properties...) {
+	$transitions: ();
+
+	@each $property in $properties {
+		$transitions: list.append($transitions, $property $flyout-animation, comma);
+	}
+
+	transition: $transitions;
 }
 
 

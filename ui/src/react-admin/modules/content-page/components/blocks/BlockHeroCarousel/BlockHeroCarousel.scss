@@ -247,7 +247,7 @@ $hero-carousel-search-radius-desktop: 3.2rem;
 				font: inherit;
 				border: 1px solid colors.$white;
 				border-radius: $hero-carousel-search-radius-desktop;
-				transition: border-radius 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+				@include animations.flyout-animation(border-radius);
 
 				@media (min-width: variables.$g-bp2) {
 					height: $hero-carousel-search-height-desktop;
@@ -283,7 +283,7 @@ $hero-carousel-search-radius-desktop: 3.2rem;
 					font-size: 1.8rem;
 					font-weight: 400;
 					transform: rotate(0);
-					transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+					@include animations.flyout-animation(transform);
 
 					&--open {
 						transform: rotate(-180deg);
@@ -331,9 +331,7 @@ $hero-carousel-search-radius-desktop: 3.2rem;
 
 			&__flyout {
 				.c-menu {
-					transition:
-						opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1),
-						visibility 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+					@include animations.flyout-animation(opacity, visibility);
 				}
 			}
 		}
