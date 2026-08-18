@@ -1,28 +1,34 @@
 import type { IconName } from '@viaa/avo2-components';
 import { ObjectType } from '~shared/helpers/map-format-to-type.ts';
 
+/**
+ * Icon for an object type. Mirrors the client's `getIconFromObjectType`
+ * (hetarchief-client/src/modules/shared/components/MediaCard/MediaCard.consts.ts):
+ * when the essence is available to the user we show the plain icon, otherwise the
+ * struck-through ("no-…") variant.
+ */
 export function getIconFromObjectType(
 	format: ObjectType | undefined,
-	inaccessible: boolean
+	accessible: boolean
 ): IconName {
 	switch (format) {
 		case ObjectType.film:
 		case ObjectType.video:
 		case ObjectType.videofragment:
-			return (inaccessible ? 'no-video--light' : 'video--light') as IconName;
+			return (accessible ? 'video--light' : 'no-video--light') as IconName;
 
 		case ObjectType.audio:
 		case ObjectType.audiofragment:
-			return (inaccessible ? 'no-audio--light' : 'audio--light') as IconName;
+			return (accessible ? 'audio--light' : 'no-audio--light') as IconName;
 
 		case ObjectType.newspaper:
 		case ObjectType.newspaperpage:
-			return (inaccessible ? 'no-newspaper--light' : 'newspaper--light') as IconName;
+			return (accessible ? 'newspaper--light' : 'no-newspaper--light') as IconName;
 
 		case ObjectType.image:
-			return (inaccessible ? 'no-image--light' : 'image--light') as IconName;
+			return (accessible ? 'image--light' : 'no-image--light') as IconName;
 
 		default:
-			return (inaccessible ? 'no-file--light' : 'file--light') as IconName;
+			return (accessible ? 'file--light' : 'no-file--light') as IconName;
 	}
 }

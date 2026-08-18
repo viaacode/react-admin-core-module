@@ -1,7 +1,7 @@
 import type { HeadingTypeOption } from '~modules/content-page/types/content-block.types';
 import type { DefaultComponentProps } from '~modules/shared/types/components';
 import type { PickerItem } from '~modules/shared/types/content-picker';
-import type { ObjectType } from '~shared/helpers/mapFormatToType.ts';
+import type { ObjectType } from '~shared/helpers/map-format-to-type';
 
 export type OrderedTile = { item: ObjectsGridItem; isFixed: boolean };
 

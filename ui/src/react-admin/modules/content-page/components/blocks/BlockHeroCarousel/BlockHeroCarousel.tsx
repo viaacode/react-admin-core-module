@@ -11,7 +11,7 @@ import type {
 import { BlockHeroCarouselCarousel } from '~content-blocks/BlockHeroCarousel/BlockHeroCarouselCarousel.tsx';
 import { BlockHeroCarouselSearch } from '~content-blocks/BlockHeroCarousel/BlockHeroCarouselSearch.tsx';
 import { useGetIeObjectsByIds } from '~content-blocks/BlockHeroCarousel/hooks/useGetIeObjectsByIds.ts';
-import { GET_TERTIARY_BACKGROUND_COLOR_OPTIONS_ARCHIEF } from '~modules/content-page/const/get-color-options.ts';
+import { GET_SECONDARY_BACKGROUND_COLOR_OPTIONS_ARCHIEF } from '~modules/content-page/const/get-color-options.ts';
 import type { ObjectType } from '~shared/helpers/map-format-to-type.ts';
 import { toSeconds } from '~shared/helpers/parsers/duration.ts';
 
@@ -32,7 +32,7 @@ export const BlockHeroCarousel: FunctionComponent<BlockHeroCarouselProps> = ({
 	elements,
 }): ReactNode => {
 	const items = useMemo(() => {
-		const allTertiaryColors = GET_TERTIARY_BACKGROUND_COLOR_OPTIONS_ARCHIEF();
+		const allTertiaryColors = GET_SECONDARY_BACKGROUND_COLOR_OPTIONS_ARCHIEF();
 		return elements.map((object) => {
 			// eslint-disable-next-line react-hooks/purity
 			const randomIndex = Math.floor(Math.random() * allTertiaryColors.length);
