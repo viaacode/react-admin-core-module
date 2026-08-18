@@ -5,29 +5,43 @@
 @use "../../../../shared/styles/mixins/animations" as animations;
 
 .c-block-objects-grid {
+	// The grid is its own inline-size query container, so the row height below can be derived
+	// from the actual width of the grid (100cqw) instead of a hardcoded height. The grid <ul>
+	// spans the full content box of this container, so 100cqw is exactly the grid width.
+	container-type: inline-size;
+
 	// Number of grid columns per breakpoint. The count is responsive (see FA) but capped at 4
 	// columns; a fixed landscape tile spans 2 of these columns, except on mobile where the grid
-	// is a single column and every tile spans the full width.
+	// is a single column and every tile spans the full width — there a fixed tile spans 2 rows
+	// (double height) instead of 2 columns (double width).
 	--c-objects-grid-columns: 1;
 	--c-objects-grid-fixed-span: 1;
+	--c-objects-grid-fixed-row-span: 2;
 
 	// Gap between the tiles: tighter on mobile, where the tiles are full width.
 	--c-objects-grid-gap: #{variables.$g-spacer-unit * 2};
 
 	// All tiles share this height (standard tiles are 1 column wide, fixed tiles 2), so every
-	// tile lines up regardless of type.
-	--c-objects-grid-row-height: 22rem;
+	// tile lines up regardless of type. The height is the width of a fixed (landscape) tile
+	// divided by the 16:9 aspect ratio it has to keep, so it scales with the grid width.
+	// Mobile: a single column, so a fixed tile is the full grid width.
+	--c-objects-grid-row-height: calc(100cqw * 9 / 16);
 
 	@media (min-width: variables.$g-bp2) {
 		--c-objects-grid-columns: 3;
 		--c-objects-grid-fixed-span: 2;
+		--c-objects-grid-fixed-row-span: 1;
 		--c-objects-grid-gap: #{variables.$g-spacer-unit * 4};
-		--c-objects-grid-row-height: 28rem;
+
+		// 3 columns: a fixed tile is 2 columns + 1 gap wide = (2 * 100cqw - gap) / 3.
+		--c-objects-grid-row-height: calc((2 * 100cqw - var(--c-objects-grid-gap)) / 3 * 9 / 16);
 	}
 
 	@media (min-width: variables.$g-bp3) {
 		--c-objects-grid-columns: 4;
-		--c-objects-grid-row-height: 32rem;
+
+		// 4 columns: a fixed tile is 2 columns + 1 gap wide = (100cqw - gap) / 2.
+		--c-objects-grid-row-height: calc((100cqw - var(--c-objects-grid-gap)) / 2 * 9 / 16);
 	}
 
 	.c-block-objects-grid__title {
@@ -52,9 +66,10 @@
 
 		// Fixed positions are shown as a landscape tile that occupies 2 standard positions
 		// (2 columns), at the same height as every other tile. On mobile the grid only has a
-		// single column, so there they span 1 column like every other tile.
+		// single column, so instead it spans 2 rows (double height) to keep the same footprint.
 		&--fixed {
 			grid-column: span var(--c-objects-grid-fixed-span);
+			grid-row: span var(--c-objects-grid-fixed-row-span);
 		}
 	}
 
