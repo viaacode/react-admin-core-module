@@ -60,6 +60,7 @@ export interface InfiniteStrip<T> {
 }
 
 export function buildInfiniteStrip<T>(items: T[]): InfiniteStrip<T> {
+	console.log('buildInfiniteStrip', items);
 	const itemsLength = items.length;
 	if (itemsLength === 0) {
 		return { strip: items, startIndex: 0, itemsLength: 0 };

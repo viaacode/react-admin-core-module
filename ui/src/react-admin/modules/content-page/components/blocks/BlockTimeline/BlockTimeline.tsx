@@ -2,23 +2,23 @@ import clsx from 'clsx';
 import { compact, uniq } from 'es-toolkit/compat';
 import type { CSSProperties, FunctionComponent, ReactElement } from 'react';
 import React, { useMemo, useRef } from 'react';
-import { BlockTimelineObjectMeta } from '~content-blocks/BlockTimeline/BlockTimelineObjectMeta.tsx';
+import { AdminCoreIconName } from '~core/config';
 import { AdminConfigManager } from '~core/config/config.class';
+import { IeObjectFlowPlayerWrapper } from '~modules/content-page/components/IeObjectFlowPlayerWrapper/IeObjectFlowPlayerWrapper.tsx';
+import { IeObjectMetadata } from '~modules/content-page/components/IeObjectMetadata/IeObjectMetadata.tsx';
+import { useGetIeObjectsPlayableDisplayData } from '~modules/content-page/hooks/useGetIeObjectsPlayableDisplayData.ts';
 import type { TimelineNodeBlockComponentState } from '~modules/content-page/types/content-block.types';
 import { Color } from '~modules/content-page/types/content-block.types';
 import { CopyrightAttribution } from '~shared/components/CopyrightAttribution';
 import Html from '~shared/components/Html/Html';
 import { Icon } from '~shared/components/Icon/Icon';
-import { IeObjectMedia } from '~shared/components/IeObjectMedia';
 import { formatDateToDayMonthNameYear, getYear } from '~shared/helpers/formatters/date';
 import { SanitizePreset } from '~shared/helpers/sanitize/presets';
 import { tText } from '~shared/helpers/translation-functions';
+import type { PlayableDisplayIeObject } from '~shared/services/ie-objects-service/ie-objects.types.ts';
 import { HET_ARCHIEF } from '~shared/types';
 import type { DefaultComponentProps } from '~shared/types/components';
-import { useGetTimelineIeObjects } from './hooks/useGetTimelineIeObjects';
-
 import './BlockTimeline.scss';
-import { AdminCoreIconName } from '~core/config';
 
 export interface BlockTimelineProps extends DefaultComponentProps {
 	elements: TimelineNodeBlockComponentState[];
@@ -46,16 +46,19 @@ export const BlockTimeline: FunctionComponent<BlockTimelineProps> = ({
 		() =>
 			uniq(
 				compact(
-					elements.map((node) =>
-						node.visualType === 'OBJECT' && node.mediaItem?.value
-							? String(node.mediaItem.value)
-							: null
-					)
+					elements.map((node) => ({
+						schemaIdentifier:
+							node.visualType === 'OBJECT' && node.mediaItem?.value
+								? String(node.mediaItem.value)
+								: null,
+					})) as PlayableDisplayIeObject[]
 				)
 			),
 		[elements]
 	);
-	const { data: ieObjectsByPid } = useGetTimelineIeObjects(pids);
+	const { data: ieObjects } = useGetIeObjectsPlayableDisplayData(pids);
+
+	console.log('ieObjects', ieObjects);
 
 	const scrollToTop = () => {
 		containerRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -74,7 +77,7 @@ export const BlockTimeline: FunctionComponent<BlockTimelineProps> = ({
 					const markerShape = index % 2 === 0 ? 'circle' : 'rectangle';
 					const hasImage = node.visualType === 'IMAGE' && !!node.image;
 					const hasObject = node.visualType === 'OBJECT' && !!node.mediaItem?.value;
-					const ieObject = hasObject ? ieObjectsByPid?.[String(node.mediaItem?.value)] : undefined;
+					const ieObject = hasObject ? ieObjects?.[index] : undefined;
 
 					return (
 						<li
@@ -107,11 +110,9 @@ export const BlockTimeline: FunctionComponent<BlockTimelineProps> = ({
 								}
 							>
 								{ieObject && (
-									<IeObjectMedia
+									<IeObjectFlowPlayerWrapper
 										className="c-block-timeline__node-object-media"
 										ieObject={ieObject}
-										fallbackTitle={node.title}
-										locationId="block-timeline"
 									/>
 								)}
 								{node.visualType === 'IMAGE' && node.image && (
@@ -139,9 +140,7 @@ export const BlockTimeline: FunctionComponent<BlockTimelineProps> = ({
 											className="c-block-timeline__node-description"
 										/>
 									)}
-									{ieObject && (
-										<BlockTimelineObjectMeta ieObject={ieObject} fallbackTitle={node.title} />
-									)}
+									{ieObject && <IeObjectMetadata ieObject={ieObject} fallbackTitle={node.title} />}
 								</div>
 							</div>
 						</li>
