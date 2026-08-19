@@ -99,7 +99,6 @@ export const BlockHetArchiefImageTextBackground: FunctionComponent<
 	// Only reads it once the image has finished loading — reading mid-load measures
 	// ~0px, which would shrink `.media` (and the image with it) with no way to
 	// recover, since a later re-measure would just report that same self-inflicted size.
-	// biome-ignore lint/correctness/useExhaustiveDependencies: refs are stable
 	const updateMediaMeasurements = useCallback(() => {
 		const imgEl = imgRef.current;
 		const measureEl = copyrightMeasureRef.current;

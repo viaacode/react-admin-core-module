@@ -82,18 +82,16 @@ export async function fetchWithLogoutJson<ResponseType>(
 	const text = await response.text();
 	if (text) {
 		return JSON.parse(text);
-	} else {
-		if (throwOnNullResponse) {
-			throw new CustomError('Response from the server was null', null, {
-				code: 'RESPONSE_IS_NULL',
-				text,
-				url,
-				options,
-			});
-		} else {
-			return null; // only in case throwOnNullResponse is false/undefined will this  return null
-		}
 	}
+	if (throwOnNullResponse) {
+		throw new CustomError('Response from the server was null', null, {
+			code: 'RESPONSE_IS_NULL',
+			text,
+			url,
+			options,
+		});
+	}
+	return null; // only in case throwOnNullResponse is false/undefined will this  return null
 }
 
 export function goToLoginBecauseOfUnauthorizedError() {

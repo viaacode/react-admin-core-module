@@ -179,7 +179,7 @@ const ContentBlockRenderer: FunctionComponent<ContentBlockPreviewProps> = ({
 			 * to avoid overlapping a fixed header when we jump to this anchor
 			 * https://meemoo.atlassian.net/browse/AVO-3351
 			 */}
-			<div className="c-content-block__anchor" id={anchor}></div>
+			<div className="c-content-block__anchor" id={anchor} />
 			<Spacer
 				className={clsx('c-content-block-preview', {
 					'c-content-block-preview--dark': hasDarkBg,

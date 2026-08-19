@@ -174,10 +174,7 @@ export const BlockOverviewThemesGroupSection: FunctionComponent<
 					// Themes without a content page for the current locale have nothing to link to.
 					const contentPagePath =
 						locale === Locale.Nl ? theme.contentPagePathNl : theme.contentPagePathEn;
-					const tileClassName = clsx(
-						'c-block-overview-themes__tile',
-						getTileSpanClassName(span)
-					);
+					const tileClassName = clsx('c-block-overview-themes__tile', getTileSpanClassName(span));
 					const tileContent = (
 						<>
 							<Image
@@ -189,9 +186,7 @@ export const BlockOverviewThemesGroupSection: FunctionComponent<
 								<div className="c-block-overview-themes__tile-text">
 									<span className="c-block-overview-themes__tile-title">{themeNameLocale}</span>
 									{!!tileDescription && (
-										<p className="c-block-overview-themes__tile-description">
-											{tileDescription}
-										</p>
+										<p className="c-block-overview-themes__tile-description">{tileDescription}</p>
 									)}
 								</div>
 								{!!contentPagePath && (

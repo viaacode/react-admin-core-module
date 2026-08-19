@@ -56,7 +56,7 @@ export const ExportAllToCsvModal: FunctionComponent<ExportAllToCsvModalProps> = 
 	const [csvBlob, setCsvBlob] = useState<Blob | null>(null);
 	const [percentageConvertedToCsv, setPercentageConvertedToCsv] = useState(0);
 
-	const currentItems = Math.min(processedItems, total || Infinity);
+	const currentItems = Math.min(processedItems, total || Number.POSITIVE_INFINITY);
 	const percentageDownloaded = total ? (currentItems / total) * 100 : 0;
 	const totalPercentage = Math.round((percentageDownloaded + percentageConvertedToCsv) / 2);
 
@@ -215,9 +215,11 @@ export const ExportAllToCsvModal: FunctionComponent<ExportAllToCsvModalProps> = 
 					{fetchingItemsLabel}: {currentItems} / {total || '???'}
 				</span>
 			);
-		} else if (percentageDownloaded === 100 && percentageConvertedToCsv !== 100) {
+		}
+		if (percentageDownloaded === 100 && percentageConvertedToCsv !== 100) {
 			return <span>{generatingCsvLabel}</span>;
-		} else if (totalPercentage === 100) {
+		}
+		if (totalPercentage === 100) {
 			return (
 				<span>
 					{tText(
@@ -239,7 +241,7 @@ export const ExportAllToCsvModal: FunctionComponent<ExportAllToCsvModalProps> = 
 			<ModalBody>
 				<div className="c-export-all-to-csv-modal__body">
 					{renderProgressLabel(total, currentItems, fetchingItemsLabel)}
-					<ProgressBar percentage={totalPercentage}></ProgressBar>
+					<ProgressBar percentage={totalPercentage} />
 				</div>
 
 				<ButtonToolbar>

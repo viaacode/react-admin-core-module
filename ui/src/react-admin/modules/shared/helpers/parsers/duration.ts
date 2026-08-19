@@ -7,7 +7,11 @@ import { CustomError } from '../custom-error';
 
 export function parseDuration(duration: string) {
 	const parts = duration.split(':');
-	return parseInt(parts[0], 10) * 3600 + parseInt(parts[1], 10) * 60 + parseInt(parts[2], 10);
+	return (
+		Number.parseInt(parts[0], 10) * 3600 +
+		Number.parseInt(parts[1], 10) * 60 +
+		Number.parseInt(parts[2], 10)
+	);
 }
 
 /**
@@ -36,9 +40,9 @@ export function toSeconds(
 			);
 		}
 		return (
-			parseInt(durationParts[0], 10) * 3600 +
-			parseInt(durationParts[1], 10) * 60 +
-			parseFloat(durationParts[2])
+			Number.parseInt(durationParts[0], 10) * 3600 +
+			Number.parseInt(durationParts[1], 10) * 60 +
+			Number.parseFloat(durationParts[2])
 		);
 	} catch (err) {
 		if (silent) {

@@ -12,7 +12,7 @@ import { parsePickerItem } from '../helpers/parse-picker';
 export const retrieveContentPages = memoize(
 	async (
 		title: string | null,
-		limit = 5,
+		limit: number,
 		type: AvoCoreContentPickerType
 	): Promise<PickerItem[]> => {
 		const pageType = mapContentPickerTypeToPageType(type);

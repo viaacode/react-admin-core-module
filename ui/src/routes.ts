@@ -56,7 +56,7 @@ const APP_ROUTES: RouteObject[] = [
 			},
 			{
 				id: 'homepage',
-				path: `/`,
+				path: '/',
 				loader: fetchContentPageLoader,
 				Component: ContentPagePreviewPage,
 			},

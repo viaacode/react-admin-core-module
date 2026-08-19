@@ -37,6 +37,7 @@ import { BlockProjectSpotlightWrapper, BlockSpotlight } from '~content-blocks/Bl
 import { BlockTagsWithLink } from '~content-blocks/BlockTagsWithLink';
 import { BlockThemeReels } from '~content-blocks/BlockThemeReels';
 import { BlockThreeClickableTiles } from '~content-blocks/BlockThreeClickableTiles';
+import { BlockTimeline } from '~content-blocks/BlockTimeline';
 import { BlockUitgeklaard } from '~content-blocks/BlockUitgeklaard';
 import { BlockVideoWrapper } from '~content-blocks/BlockVideo';
 import { BlockVideoTitleTextButtonWrapper } from '~content-blocks/BlockVideoTitleTextButton';
@@ -101,6 +102,7 @@ export function GET_BLOCK_COMPONENT(
 		[ContentBlockType.ThemeReels]: BlockThemeReels,
 		[ContentBlockType.OverviewThemes]: BlockOverviewThemes,
 		[ContentBlockType.HeroCarousel]: BlockHeroCarousel,
+		[ContentBlockType.Timeline]: BlockTimeline,
 
 		// Avo specific blocks
 		[ContentBlockType.MediaGrid]: loadComponentFromConfig(ContentBlockType.MediaGrid),
@@ -131,6 +133,7 @@ export const REPEATABLE_CONTENT_BLOCKS = [
 	ContentBlockType.ThreeClickableTiles,
 	ContentBlockType.TagsWithLink,
 	ContentBlockType.CardsWithoutDescription,
+	ContentBlockType.Timeline,
 	// ContentBlockType.ContentEncloseGrid,
 ];
 
