@@ -10,6 +10,7 @@ import {
 } from '~modules/content-page/types/content-block.types';
 import { ContentPageWidth } from '~modules/content-page/types/content-pages.types.ts';
 import Html from '~shared/components/Html/Html.tsx';
+import { SanitizePreset } from '~shared/helpers/sanitize/presets';
 
 export interface BlockHighlightTextProps extends DefaultComponentProps {
 	content: string;
@@ -65,6 +66,7 @@ export const BlockHighlightText: FunctionComponent<BlockHighlightTextProps> = ({
 						} as CSSProperties
 					}
 					content={content}
+					sanitizePreset={SanitizePreset.full}
 					type="p"
 				/>
 				<div className="c-block-highlight-text__pattern-slot c-block-highlight-text__pattern-slot--bottom">
