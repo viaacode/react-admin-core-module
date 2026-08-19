@@ -10,7 +10,7 @@ import type {
 } from '~content-blocks/BlockHeroCarousel/BlockHeroCarousel.types.ts';
 import { BlockHeroCarouselCarousel } from '~content-blocks/BlockHeroCarousel/BlockHeroCarouselCarousel.tsx';
 import { BlockHeroCarouselSearch } from '~content-blocks/BlockHeroCarousel/BlockHeroCarouselSearch.tsx';
-import { useGetIeObjectsByIds } from '~content-blocks/BlockHeroCarousel/hooks/useGetIeObjectsByIds.ts';
+import { useGetPlayableDisplayData } from '~content-blocks/BlockHeroCarousel/hooks/useGetPlayableDisplayData.ts';
 import { GET_SECONDARY_BACKGROUND_COLOR_OPTIONS_ARCHIEF } from '~modules/content-page/const/get-color-options.ts';
 import { isAudioVideoFormat } from '~shared/helpers/is-audio-video-format.ts';
 import type { IeObjectType } from '~shared/helpers/map-format-to-type.ts';
@@ -53,7 +53,7 @@ export const BlockHeroCarousel: FunctionComponent<BlockHeroCarouselProps> = ({
 		});
 	}, [elements]);
 
-	const { data: ieObjects, isLoading, isFetching } = useGetIeObjectsByIds(items);
+	const { data: ieObjects, isLoading, isFetching } = useGetPlayableDisplayData(items);
 
 	return (
 		<article className={clsx('c-block-hero-carousel', className)}>

@@ -4,14 +4,14 @@ import { IeObjectsService } from '~shared/services/ie-objects-service/ie-objects
 import type { PlayableDisplayIeObject } from '~shared/services/ie-objects-service/ie-objects.types.ts';
 import { QUERY_KEYS } from '~shared/types';
 
-export const useGetIeObjectsByIds = (mediaItems: HeroCarouselSlideItem[]) => {
+export const useGetPlayableDisplayData = (mediaItems: HeroCarouselSlideItem[]) => {
 	// Slots with no media item selected yet (e.g. a freshly added, not-yet-filled-in editor row)
 	// have an empty schemaIdentifier -- exclude them from the request, there's nothing to fetch.
 	const requestableMediaItems = mediaItems.filter((item) => !!item.schemaIdentifier);
 	const schemaIdentifiers = requestableMediaItems.map(({ schemaIdentifier }) => schemaIdentifier);
 
 	return useQuery<PlayableDisplayIeObject[]>({
-		queryKey: [QUERY_KEYS.GET_IE_OBJECTS_BY_ID, schemaIdentifiers.join(',')],
+		queryKey: [QUERY_KEYS.GET_IE_OBJECTS_PLAYABLE_DISPLAY_DATA, schemaIdentifiers.join(',')],
 		placeholderData: mediaItems,
 		queryFn: async () => {
 			const objects = await IeObjectsService.getPlayableDisplayData(
