@@ -13,7 +13,9 @@ import React, {
 	useState,
 } from 'react';
 import { AdminConfigManager } from '~core/config';
+import { IeObjectsService } from '~modules/ie-objects/ie-objects.service';
 import { getAdminCoreApiUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config';
+import { isHetArchief } from '~shared/helpers/is-hetarchief';
 import { isServerSideRendering } from '~shared/helpers/routing/is-server-side-rendering';
 import { buildLink } from '~shared/helpers/routing/link';
 import { useLocation } from '~shared/hooks/useLocation.ts';
@@ -207,6 +209,14 @@ export const SmartLink: FunctionComponent<SmartLinkProps> = ({
 						id: value,
 					});
 					return renderLink(bundleUrl, resolvedTarget);
+				}
+
+				case 'IE_OBJECT': {
+					if (!isHetArchief()) {
+						// ie-objects only exist on hetarchief, render the children unwrapped
+						break;
+					}
+					return renderLink(IeObjectsService.getObjectDetailPath(String(value)), resolvedTarget);
 				}
 
 				case 'ASSIGNMENT': {

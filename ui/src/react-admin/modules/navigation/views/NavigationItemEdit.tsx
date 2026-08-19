@@ -4,7 +4,7 @@ import { compact, isNil, noop, startCase, uniqBy } from 'es-toolkit';
 import type { FC } from 'react';
 import React, { useEffect, useState } from 'react';
 import { AdminConfigManager } from '~core/config/config.class';
-import { ToastType } from '~core/config/config.types';
+import { AdminCoreIconName, ToastType } from '~core/config/config.types';
 import { blockHasErrors } from '~modules/content-page/helpers/block-has-errors';
 import { useGetNavigationBarItems } from '~modules/navigation/hooks/use-get-navigation-bar-items';
 import { Locale } from '~modules/translations/translations.core.types';
@@ -277,7 +277,7 @@ export const NavigationItemEdit: FC<NavigationEditProps> = ({
 			<AdminLayout pageTitle={pageTitle}>
 				<AdminLayout.Back>
 					<Button type="borderless" onClick={onGoBack}>
-						<Icon name="chevronLeft"></Icon>
+						<Icon name={AdminCoreIconName.ChevronLeft} />
 					</Button>
 				</AdminLayout.Back>
 				<AdminLayout.Actions>

@@ -1,9 +1,51 @@
+@use "sass:list";
+
 @mixin zoom-in-animation {
 	transform: scale(1.1);
 }
 
 @mixin zoom-in-transition {
 	transition: transform 0.5s ease-out;
+}
+
+$ken-burns-scale: 1.35;
+
+// A `transform: scale()`/`translate()` on the img only ever rearranges whatever `object-fit:
+// cover` already rendered into its box -- for a source image whose aspect ratio is far from the
+// box's (e.g. a 9:16 portrait image inside a wide landscape slide), cover already discards most
+// of the source before the transform runs, so no translate can reveal it. Panning via
+// `object-position` instead re-picks *which* slice of the source cover selects, so it genuinely
+// reaches the source's true edges regardless of the aspect-ratio mismatch. The scale zoom stays
+// a plain center-anchored transform.
+// `from` must match the element's own static (non-animated) object-position -- BlockHeroCarousel
+// sets `top center` as the base value, so starting the keyframe at a different value caused a
+// visible snap the instant the animation took over.
+@keyframes ken-burns {
+	from {
+		transform: scale(1);
+		object-position: top center;
+	}
+
+	to {
+		transform: scale($ken-burns-scale);
+		object-position: bottom center;
+	}
+}
+
+@mixin ken-burns-animation($duration) {
+	animation: ken-burns $duration linear forwards;
+}
+
+$flyout-animation: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+
+@mixin flyout-animation($properties...) {
+	$transitions: ();
+
+	@each $property in $properties {
+		$transitions: list.append($transitions, $property $flyout-animation, comma);
+	}
+
+	transition: $transitions;
 }
 
 

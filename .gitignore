@@ -258,4 +258,6 @@ api/.claude/
 
 *.pdf
 
+CLAUDE.md
+
 ui/.claude/worktrees/

@@ -4,6 +4,7 @@ import { stringifyUrl } from 'query-string';
 import type { FunctionComponent, KeyboardEvent, ReactElement } from 'react';
 import React, { useEffect, useState } from 'react';
 import { AdminConfigManager } from '~core/config/config.class';
+import { AdminCoreIconName } from '~core/config/config.types';
 import type { DefaultComponentProps } from '~modules/shared/types/components';
 import { Icon } from '~shared/components/Icon/Icon';
 import { navigateFunc } from '~shared/helpers/navigate-fnc';
@@ -96,7 +97,7 @@ export const BlockHetArchiefHeaderSearch: FunctionComponent<BlockHetArchiefHeade
 								[HET_ARCHIEF]
 							)}
 						>
-							<Icon name="filter" />
+							<Icon name={AdminCoreIconName.Filter} />
 						</button>
 					}
 					onChange={(evt) => setSearchTerm(evt.target.value)}

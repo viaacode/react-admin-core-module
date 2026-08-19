@@ -1,6 +1,7 @@
 import type { FC, FunctionComponent } from 'react';
 import { AvoHeroWrapper } from '~content-blocks/BlockAvoHero/AvoHeroWrapper';
 import { BlockAvoImageTextBackground } from '~content-blocks/BlockAvoImageTextBackground';
+import { BlockAvoQuote } from '~content-blocks/BlockAvoQuote';
 import { BlockBreadcrumbs } from '~content-blocks/BlockBreadcrumbs';
 import { BlockButtonsWrapper } from '~content-blocks/BlockButtons';
 import { BlockCardsWithoutDescription } from '~content-blocks/BlockCardsWithoutDescription';
@@ -8,8 +9,10 @@ import { BlockContentPageMeta } from '~content-blocks/BlockContentPageMeta';
 import { BlockCTAsWrapper } from '~content-blocks/BlockCTAs';
 import { BlockEventbrite } from '~content-blocks/BlockEventbrite';
 import { BlockHeading } from '~content-blocks/BlockHeading';
+import { BlockHeroCarousel } from '~content-blocks/BlockHeroCarousel';
 import { BlockHetArchiefHeaderSearch } from '~content-blocks/BlockHetArchiefHeaderSearch/BlockHetArchiefHeaderSearch';
 import { BlockHetArchiefImageTextBackground } from '~content-blocks/BlockHetArchiefImageTextBackground';
+import { BlockHetArchiefQuote } from '~content-blocks/BlockHetArchiefQuote';
 import { BlockHighlightText } from '~content-blocks/BlockHighlightText';
 import { BlockHomepageBanner } from '~content-blocks/BlockHomepageBanner';
 import { BlockIFrame } from '~content-blocks/BlockIFrame';
@@ -23,11 +26,11 @@ import { BlockImageTitleTextButtonWrapper } from '~content-blocks/BlockImageTitl
 import { BlockIntro } from '~content-blocks/BlockIntro';
 import { BlockKlaar } from '~content-blocks/BlockKlaar';
 import { BlockMaintainersGrid } from '~content-blocks/BlockMaintainersGrid';
+import { BlockObjectsGrid } from '~content-blocks/BlockObjectsGrid';
 import { BlockOverviewNewspaperTitles } from '~content-blocks/BlockOverviewNewspaperTitles';
 import { BlockOverviewThemes } from '~content-blocks/BlockOverviewThemes/BlockOverviewThemes.tsx';
 import { BlockOverviewWithCarousel } from '~content-blocks/BlockOverviewWithCarousel/BlockOverviewWithCarousel.tsx';
 import { BlockPageOverviewWrapper } from '~content-blocks/BlockPageOverview';
-import { BlockQuote } from '~content-blocks/BlockQuote';
 import { BlockRichTextWrapper } from '~content-blocks/BlockRichText';
 import { BlockScrollDownNudge } from '~content-blocks/BlockScrollDownNudge';
 import { BlockProjectSpotlightWrapper, BlockSpotlight } from '~content-blocks/BlockSpotlight';
@@ -65,7 +68,7 @@ export function GET_BLOCK_COMPONENT(
 		[ContentBlockType.MediaPlayer]: BlockVideoWrapper,
 		[ContentBlockType.PageOverview]: BlockPageOverviewWrapper,
 		[ContentBlockType.ProjectsSpotlight]: BlockProjectSpotlightWrapper,
-		[ContentBlockType.Quote]: BlockQuote,
+		[ContentBlockType.AvoQuote]: BlockAvoQuote,
 		[ContentBlockType.RichTextTwoColumns]: BlockRichTextWrapper,
 		[ContentBlockType.RichText]: BlockRichTextWrapper,
 		[ContentBlockType.Spotlight]: BlockSpotlight,
@@ -81,6 +84,7 @@ export function GET_BLOCK_COMPONENT(
 		[ContentBlockType.CardsWithoutDescription]: BlockCardsWithoutDescription,
 		[ContentBlockType.MaintainersGrid]: BlockMaintainersGrid,
 		[ContentBlockType.ScrollDownNudge]: BlockScrollDownNudge,
+		[ContentBlockType.ObjectsGrid]: BlockObjectsGrid,
 
 		// Het archief specific blocks
 		[ContentBlockType.HetArchiefHeaderSearch]: BlockHetArchiefHeaderSearch,
@@ -91,10 +95,12 @@ export function GET_BLOCK_COMPONENT(
 		[ContentBlockType.Breadcrumbs]: BlockBreadcrumbs,
 		[ContentBlockType.HetArchiefImageTextBackground]: BlockHetArchiefImageTextBackground,
 		[ContentBlockType.OverviewWithCarousel]: BlockOverviewWithCarousel,
+		[ContentBlockType.HetArchiefQuote]: BlockHetArchiefQuote,
 		[ContentBlockType.HomepageBanner]: BlockHomepageBanner,
 		[ContentBlockType.HighlightText]: BlockHighlightText,
 		[ContentBlockType.ThemeReels]: BlockThemeReels,
 		[ContentBlockType.OverviewThemes]: BlockOverviewThemes,
+		[ContentBlockType.HeroCarousel]: BlockHeroCarousel,
 
 		// Avo specific blocks
 		[ContentBlockType.MediaGrid]: loadComponentFromConfig(ContentBlockType.MediaGrid),
@@ -125,7 +131,6 @@ export const REPEATABLE_CONTENT_BLOCKS = [
 	ContentBlockType.ThreeClickableTiles,
 	ContentBlockType.TagsWithLink,
 	ContentBlockType.CardsWithoutDescription,
-	ContentBlockType.OverviewThemes,
 	// ContentBlockType.ContentEncloseGrid,
 ];
 
@@ -174,6 +179,7 @@ export const IGNORE_BLOCK_LEVEL_PROPS = [
 	'backgroundColor',
 	'blockType',
 	'elements',
+	'overlayNextBlock',
 	'padding',
 	'position',
 ];

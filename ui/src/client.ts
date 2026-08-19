@@ -1,5 +1,6 @@
 export { AvoHeroWrapper } from '~content-blocks/BlockAvoHero/AvoHeroWrapper';
 export { BlockAvoImageTextBackground } from '~content-blocks/BlockAvoImageTextBackground';
+export { BlockAvoQuote } from '~content-blocks/BlockAvoQuote';
 export { BlockBreadcrumbs } from '~content-blocks/BlockBreadcrumbs';
 export { BlockButtonsWrapper } from '~content-blocks/BlockButtons/BlockButtons.wrapper';
 export { BlockCardsWithoutDescription } from '~content-blocks/BlockCardsWithoutDescription';
@@ -9,6 +10,7 @@ export { BlockEventbrite } from '~content-blocks/BlockEventbrite';
 export { BlockHeading } from '~content-blocks/BlockHeading/BlockHeading';
 export { BlockHetArchiefHeaderSearch } from '~content-blocks/BlockHetArchiefHeaderSearch';
 export { BlockHetArchiefImageTextBackground } from '~content-blocks/BlockHetArchiefImageTextBackground';
+export { BlockHetArchiefQuote } from '~content-blocks/BlockHetArchiefQuote';
 export { BlockIFrame } from '~content-blocks/BlockIFrame';
 export { BlockImage } from '~content-blocks/BlockImage';
 export { BlockImageGridWrapper } from '~content-blocks/BlockImageGrid/BlockImageGrid.wrapper';
@@ -18,11 +20,11 @@ export { BlockImageTitleTextButtonWrapper } from '~content-blocks/BlockImageTitl
 export { BlockIntro } from '~content-blocks/BlockIntro';
 export { BlockKlaar } from '~content-blocks/BlockKlaar';
 export { BlockMaintainersGrid } from '~content-blocks/BlockMaintainersGrid';
+export { BlockObjectsGrid } from '~content-blocks/BlockObjectsGrid';
 export { BlockOverviewNewspaperTitles } from '~content-blocks/BlockOverviewNewspaperTitles';
 export { BlockOverviewThemes } from '~content-blocks/BlockOverviewThemes';
 export { BlockOverviewWithCarousel } from '~content-blocks/BlockOverviewWithCarousel';
 export { BlockPageOverviewWrapper } from '~content-blocks/BlockPageOverview/BlockPageOverview.wrapper';
-export { BlockQuote } from '~content-blocks/BlockQuote';
 export { BlockRichText } from '~content-blocks/BlockRichText';
 export { BlockRichTextWrapper } from '~content-blocks/BlockRichText/BlockRichText.wrapper';
 export { BlockScrollDownNudge } from '~content-blocks/BlockScrollDownNudge';
@@ -33,7 +35,7 @@ export { BlockThreeClickableTiles } from '~content-blocks/BlockThreeClickableTil
 export { BlockUitgeklaard } from '~content-blocks/BlockUitgeklaard';
 export { BlockVideoWrapper } from '~content-blocks/BlockVideo/BlockVideo.wrapper';
 export { BlockVideoTitleTextButtonWrapper } from '~content-blocks/BlockVideoTitleTextButton/BlockVideoTitleTextButton.wrapper';
-export { AdminConfigManager, ToastType } from '~core/config';
+export { AdminConfigManager, AdminCoreIconName, ToastType } from '~core/config';
 export type { AdminConfig, LinkInfo, ToastInfo } from '~core/config/config.types';
 export { ContentPageService } from '~modules/content-page/services/content-page.service';
 export { ContentBlockType } from '~modules/content-page/types/content-block.types';

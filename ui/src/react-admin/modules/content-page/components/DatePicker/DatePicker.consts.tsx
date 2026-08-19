@@ -4,6 +4,7 @@ import { enGB, nlBE } from 'date-fns/locale';
 import React from 'react';
 import type { DatePickerProps } from 'react-datepicker';
 import { AdminConfigManager } from '~core/config/config.class';
+import { AdminCoreIconName } from '~core/config/config.types';
 import { Locale } from '~modules/translations/translations.core.types';
 import { Icon } from '~shared/components/Icon/Icon';
 import { tText } from '~shared/helpers/translation-functions.ts';
@@ -44,7 +45,7 @@ export function getDatePickerDefaultProps(id: string): DatePickerPropsSchema {
 		customInput: (
 			<TextInput
 				id={`${id}__date-picker__input-field`}
-				iconStart={<Icon name="calendar" />}
+				iconStart={<Icon name={AdminCoreIconName.Calendar} />}
 				ariaLabel={tText(
 					'modules/content-page/components/date-picker/date-picker___datum-input-aria-label'
 				)}

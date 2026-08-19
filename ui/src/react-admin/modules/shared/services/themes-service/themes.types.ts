@@ -1,3 +1,5 @@
+import type { IeObjectType } from '~shared/helpers/map-format-to-type.ts';
+
 export interface Theme {
 	id: string;
 	slug: string;
@@ -15,7 +17,7 @@ export interface ThemeWithObjects extends Theme {
 		id: string;
 		schemaIdentifier: string;
 		name: string;
-		format: string;
+		format: IeObjectType;
 		thumbnailUrl: string;
 		maintainerId: string;
 		maintainerName: string;

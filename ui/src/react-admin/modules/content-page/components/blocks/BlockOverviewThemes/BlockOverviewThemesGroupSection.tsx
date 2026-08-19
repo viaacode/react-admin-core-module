@@ -1,6 +1,5 @@
-import { type IconName, Image, LinkTarget } from '@viaa/avo2-components';
+import { Image, LinkTarget } from '@viaa/avo2-components';
 import clsx from 'clsx';
-import { stringifyUrl } from 'query-string';
 import React, {
 	type CSSProperties,
 	type FunctionComponent,
@@ -9,9 +8,15 @@ import React, {
 	useRef,
 	useState,
 } from 'react';
-import type { BlockOverviewThemesGroupSectionProps } from '~content-blocks/BlockOverviewThemes/BlockOverviewThemes.types.ts';
-import { ROUTE_PARTS } from '~shared/consts/routes';
-import type { Theme } from '~shared/services/themes-service/themes.types';
+import {
+	getThemeEntryDescriptionOverride,
+	getThemeEntryImageOverride,
+	getThemeEntryPickerItem,
+} from '~content-blocks/BlockOverviewThemes/BlockOverviewThemes.helpers.ts';
+import type {
+	BlockOverviewThemesGroupSectionProps,
+	BlockOverviewThemesResolvedTheme,
+} from '~content-blocks/BlockOverviewThemes/BlockOverviewThemes.types.ts';
 import { getThemeTileSpans, type ThemeTileSpan } from './getThemeTileSpans';
 import './BlockOverviewThemes.scss';
 import { AvoCoreContentPickerType } from '@viaa/avo2-types';
@@ -19,6 +24,7 @@ import { keyBy } from 'es-toolkit/compat';
 import { BlockHeading } from '~content-blocks/BlockHeading';
 import { AdminConfigManager } from '~core/config';
 import { getBackgroundTextColorVariables } from '~modules/content-page/const/background-text-colors';
+import { AdminCoreIconName } from '~core/config/config.types';
 import { Locale } from '~modules/translations/translations.core.types.ts';
 import { Icon } from '~shared/components/Icon/Icon.tsx';
 import { SmartLink } from '~shared/components/SmartLink/SmartLink.tsx';
@@ -73,16 +79,34 @@ export const BlockOverviewThemesGroupSection: FunctionComponent<
 	};
 
 	const themesById = useMemo(() => keyBy(themes, (theme) => theme.id), [themes]);
-	const resolvedThemes = (group.themes || [])
-		.map((pickerItem) => themesById[pickerItem.value])
-		.filter((theme): theme is Theme => !!theme);
+	// A picker entry can be `null` (while being cleared in the editor) or point at a theme that no
+	// longer exists, so only the ones that actually resolve are rendered.
+	const resolvedThemes: BlockOverviewThemesResolvedTheme[] = (group.themes || [])
+		.map((themeEntry): BlockOverviewThemesResolvedTheme | undefined => {
+			const pickerItem = getThemeEntryPickerItem(themeEntry);
+			const theme = pickerItem?.value ? themesById[pickerItem.value] : undefined;
+			return theme
+				? // The editor can override the image and description that are configured on the theme itself
+					{
+						theme,
+						imageUrl: getThemeEntryImageOverride(themeEntry) || theme.imageUrl || '',
+						description: getThemeEntryDescriptionOverride(themeEntry),
+					}
+				: undefined;
+		})
+		.filter((resolvedTheme): resolvedTheme is BlockOverviewThemesResolvedTheme => !!resolvedTheme);
+	// Groups saved before the "achtergrond vormen" field existed have no `shapesVariant`, so those
+	// keep the old behaviour of cycling through the 3 arrangements by group index.
+	const shapesVariantIndex = group.shapesVariant
+		? Number.parseInt(group.shapesVariant, 10) - 1
+		: groupIndex % 3;
 	const spans = getThemeTileSpans(resolvedThemes.length);
 
 	/**
 	 * Renders the white meemoo logo shapes in the colors bands behind the theme group title and first row
-	 * @param groupIndex
+	 * @param variantIndex zero based index of the shape arrangement to render
 	 */
-	const renderGroupShapes = (groupIndex: number) => {
+	const renderGroupShapes = (variantIndex: number) => {
 		const rectangleStyles: CSSProperties = { width: '6cqw' };
 		const circleStyles: CSSProperties = { borderRadius: '50%' };
 		const shapeStyles: [CSSProperties, CSSProperties][] = [
@@ -114,11 +138,11 @@ export const BlockOverviewThemesGroupSection: FunctionComponent<
 			<>
 				<div
 					className="c-block-overview-themes__group-shape"
-					style={{ ...shapeStyles[groupIndex % 3][0], ...positionStyles[groupIndex % 3][0] }}
+					style={{ ...shapeStyles[variantIndex][0], ...positionStyles[variantIndex][0] }}
 				/>
 				<div
 					className="c-block-overview-themes__group-shape"
-					style={{ ...shapeStyles[groupIndex % 3][1], ...positionStyles[groupIndex % 3][1] }}
+					style={{ ...shapeStyles[variantIndex][1], ...positionStyles[variantIndex][1] }}
 				/>
 			</>
 		);
@@ -135,7 +159,7 @@ export const BlockOverviewThemesGroupSection: FunctionComponent<
 						className="c-block-overview-themes__group-band"
 						style={{ height: `${bandHeight}px`, backgroundColor: bandColor }}
 					/>
-					{renderGroupShapes(groupIndex)}
+					{renderGroupShapes(shapesVariantIndex)}
 				</>
 			)}
 			{group.title && (
@@ -147,36 +171,70 @@ export const BlockOverviewThemesGroupSection: FunctionComponent<
 				</BlockHeading>
 			)}
 			<div ref={gridRef} className="c-block-overview-themes__grid">
-				{resolvedThemes.map((theme, tileIndex) => {
+				{resolvedThemes.map(({ theme, imageUrl, description }, tileIndex) => {
 					const span = spans[tileIndex];
-					const url = stringifyUrl({
-						url: `/${ROUTE_PARTS.search}`,
-						query: { theme: theme.slug },
-					});
 					const locale = AdminConfigManager.getConfig().locale || Locale.Nl;
 					const themeNameLocale = (locale === Locale.Nl ? theme.nameNl : theme.nameEn) || '';
+					const themeDescriptionLocale =
+						(locale === Locale.Nl ? theme.descriptionNl : theme.descriptionEn) || '';
+					const tileDescription = description || themeDescriptionLocale || undefined;
+					// Themes without a content page for the current locale have nothing to link to.
+					const contentPagePath =
+						locale === Locale.Nl ? theme.contentPagePathNl : theme.contentPagePathEn;
+					const tileClassName = clsx(
+						'c-block-overview-themes__tile',
+						getTileSpanClassName(span)
+					);
+					const tileContent = (
+						<>
+							<Image
+								src={imageUrl}
+								alt={themeNameLocale}
+								className="c-block-overview-themes__tile-image"
+							/>
+							<div className="c-block-overview-themes__tile-content">
+								<div className="c-block-overview-themes__tile-text">
+									<span className="c-block-overview-themes__tile-title">{themeNameLocale}</span>
+									{!!tileDescription && (
+										<p className="c-block-overview-themes__tile-description">
+											{tileDescription}
+										</p>
+									)}
+								</div>
+								{!!contentPagePath && (
+									<Icon
+										className="c-block-overview-themes__tile-title__icon"
+										name={AdminCoreIconName.ArrowDownRight}
+									/>
+								)}
+							</div>
+						</>
+					);
+
+					if (!contentPagePath) {
+						return (
+							<div
+								// biome-ignore lint/suspicious/noArrayIndexKey: themes can be picked more than once across groups
+								key={`c-block-overview-themes__tile-${groupIndex}-${tileIndex}`}
+								className={tileClassName}
+							>
+								{tileContent}
+							</div>
+						);
+					}
 
 					return (
 						<SmartLink
 							// biome-ignore lint/suspicious/noArrayIndexKey: themes can be picked more than once across groups
 							key={`c-block-overview-themes__tile-${groupIndex}-${tileIndex}`}
-							className={clsx('c-block-overview-themes__tile', getTileSpanClassName(span))}
+							className={tileClassName}
 							action={{
-								value: url,
-								type: AvoCoreContentPickerType.INTERNAL_LINK,
+								value: contentPagePath,
+								type: AvoCoreContentPickerType.CONTENT_PAGE,
 								target: LinkTarget.Self,
 							}}
 						>
-							<Image
-								src={theme.imageUrl || ''}
-								alt={themeNameLocale}
-								className="c-block-overview-themes__tile-image"
-							/>
-							<span className="c-block-overview-themes__tile-title">{themeNameLocale}</span>
-							<Icon
-								className="c-block-overview-themes__tile-title__icon"
-								name={'arrowDownRight' as IconName}
-							/>
+							{tileContent}
 						</SmartLink>
 					);
 				})}

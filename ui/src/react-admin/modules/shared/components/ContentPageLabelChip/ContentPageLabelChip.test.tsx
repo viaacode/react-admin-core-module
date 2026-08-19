@@ -44,6 +44,21 @@ describe('<ContentPageLabelChip />', () => {
 		expect(renderChip(CustomBackground.MeemooLogo).style.background).not.toContain('MEEMOO_LOGO');
 	});
 
+	it('adds the bordered variant only when requested by the surrounding context', () => {
+		const { container } = render(
+			<ContentPageLabelChip label="Erfgoedverhalen" color={Color.White} bordered />
+		);
+
+		expect(
+			container
+				.querySelector('.c-content-page-label-chip')
+				?.classList.contains('c-content-page-label-chip--bordered')
+		).toBe(true);
+		expect(renderChip(Color.White).classList.contains('c-content-page-label-chip--bordered')).toBe(
+			false
+		);
+	});
+
 	it('renders nothing without a label', () => {
 		const { container } = render(<ContentPageLabelChip label="" color={Color.Black} />);
 

@@ -3,6 +3,7 @@
 @use "../../../../shared/styles/settings/colors" as colors;
 @use '../../../../shared/styles/mixins/typography' as typography;
 @use '../../../../shared/styles/mixins/animations' as animations;
+@use "../../../../shared/styles/mixins/focus" as focus;
 
 .c-block-theme-reels-section {
 	& + & {
@@ -76,14 +77,6 @@
 			}
 		}
 
-		&-nav {
-			display: flex;
-			align-items: center;
-			gap: variables.$g-spacer-unit;
-			margin-left: auto;
-			flex-shrink: 0;
-		}
-
 		@media (max-width: variables.$g-bp2) {
 			flex-direction: column;
 			align-items: stretch;
@@ -127,10 +120,7 @@
 
 		a {
 			text-decoration: none;
-
-			&:focus-visible {
-				outline: 2px solid colors.$color-ocean-green;
-			}
+			@include focus.focus-outline;
 		}
 
 		&:hover:not(&--first) {

@@ -19,6 +19,7 @@ export interface ContentPageLabelChipProps {
 	// hetarchief app_content_label.color column is not null with a white default
 	color: string;
 	className?: string;
+	bordered?: boolean;
 }
 
 /**
@@ -29,6 +30,7 @@ export const ContentPageLabelChip: FunctionComponent<ContentPageLabelChipProps> 
 	label,
 	color,
 	className,
+	bordered = false,
 }) => {
 	if (!label) {
 		return null;
@@ -41,7 +43,11 @@ export const ContentPageLabelChip: FunctionComponent<ContentPageLabelChipProps> 
 	// draw that pattern on, so it renders transparent, like ContentBlockRenderer does for a block
 	return (
 		<span
-			className={clsx('c-content-page-label-chip', className)}
+			className={clsx(
+				'c-content-page-label-chip',
+				{ 'c-content-page-label-chip--bordered': bordered },
+				className
+			)}
 			style={{
 				background: color === CustomBackground.MeemooLogo ? Color.Transparent : color,
 				color: textColor,
