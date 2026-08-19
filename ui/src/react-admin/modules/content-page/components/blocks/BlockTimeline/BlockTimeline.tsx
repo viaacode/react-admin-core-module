@@ -119,6 +119,7 @@ export const BlockTimeline: FunctionComponent<BlockTimelineProps> = ({
 												poster={node.image}
 											/>
 										) : (
+											// Newspapers
 											thumbnail && (
 												<div className="c-block-timeline__node-image-wrapper">
 													<img
