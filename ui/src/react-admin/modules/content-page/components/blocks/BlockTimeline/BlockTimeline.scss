@@ -29,7 +29,8 @@ $node-background-padding: 4rem;
 $node-background-top-gap: 5rem;
 
 // See also IeObjectMetadata
-$object-meta-height-desktop: calc(5.2rem + 3.2rem); // Adding 2-times the padding
+$object-meta-vertical-padding: variables.$g-spacer-unit * 2;
+$object-meta-height-desktop: calc(5.2rem + $object-meta-vertical-padding + $object-meta-vertical-padding); // Adding 2-times the padding
 $object-meta-height-mobile: 8.4rem;
 $object-meta-gap: 4rem;
 
@@ -294,10 +295,10 @@ $object-meta-gap: 4rem;
 		height: $object-meta-height-desktop;
 		margin-left: -$line-content-gap;
 		margin-top: $object-meta-gap;
-		padding: (variables.$g-spacer-unit * 2) (variables.$g-spacer-unit * 4);
+		padding: $object-meta-vertical-padding (variables.$g-spacer-unit * 4);
 
 		@media (max-width: variables.$g-bp3) {
-			padding: (variables.$g-spacer-unit * 2) (variables.$g-spacer-unit * 3);
+			padding: $object-meta-vertical-padding (variables.$g-spacer-unit * 3);
 		}
 	}
 
