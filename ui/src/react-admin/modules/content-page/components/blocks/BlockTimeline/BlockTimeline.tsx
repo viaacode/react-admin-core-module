@@ -13,13 +13,14 @@ import { CopyrightAttribution } from '~shared/components/CopyrightAttribution';
 import Html from '~shared/components/Html/Html';
 import { Icon } from '~shared/components/Icon/Icon';
 import { formatDateToDayMonthNameYear, getYear } from '~shared/helpers/formatters/date';
+import { isAudioVideoFormat } from '~shared/helpers/is-audio-video-format.ts';
 import { SanitizePreset } from '~shared/helpers/sanitize/presets';
 import { tText } from '~shared/helpers/translation-functions';
 import type { PlayableDisplayIeObject } from '~shared/services/ie-objects-service/ie-objects.types.ts';
 import { HET_ARCHIEF } from '~shared/types';
 import type { DefaultComponentProps } from '~shared/types/components';
+
 import './BlockTimeline.scss';
-import { isAudioVideoFormat } from '~shared/helpers/is-audio-video-format.ts';
 
 export interface BlockTimelineProps extends DefaultComponentProps {
 	elements: TimelineNodeBlockComponentState[];
