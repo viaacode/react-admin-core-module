@@ -18,7 +18,7 @@ import { QUERY_KEYS } from '~shared/types';
  * Inside the content page editor the block config is being changed as we speak -- and a freshly
  * added block has no id at all -- so resolving from the saved config would show a preview that is
  * one step behind, or none at all until the page is saved. Blocks rendered there get no blockId
- * and pass their objects (with cuepoints) as `unsavedObjects` instead, which the proxy only
+ * and pass their objects (with snipPoints) as `unsavedObjects` instead, which the proxy only
  * honours for users who may edit content pages. Keep one entry per element there as well, so the
  * response stays aligned.
  *

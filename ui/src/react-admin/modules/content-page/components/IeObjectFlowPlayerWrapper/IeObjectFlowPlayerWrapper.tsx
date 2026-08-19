@@ -33,45 +33,14 @@ export const IeObjectFlowPlayerWrapper: FunctionComponent<IeObjectFlowPlayerWrap
 	onMutedChange,
 	className,
 }): ReactNode => {
-	const { data: mediaDuration } = useGetFileDuration(ieObject?.playableUrl);
-
 	if (!isAudioVideoFormat(ieObject.dctermsFormat)) {
 		return null;
 	}
-
-	const getStartAndEnd = () => {
-		let startPoint: number | null = null;
-		let endPoint: number | null = null;
-
-		// Only snipPoint if there are any set, and they do not fall outside the range of the video itself
-		if (ieObject.snipPoint) {
-			if (
-				ieObject.snipPoint.start &&
-				ieObject.snipPoint.start > 0 &&
-				(isNil(mediaDuration) || ieObject.snipPoint.start < mediaDuration)
-			) {
-				startPoint = ieObject.snipPoint.start;
-			}
-
-			if (
-				ieObject.snipPoint.end &&
-				(isNil(mediaDuration) ||
-					(ieObject.snipPoint.end &&
-						ieObject.snipPoint.end < mediaDuration &&
-						ieObject.snipPoint.end > 0))
-			) {
-				endPoint = ieObject.snipPoint.end;
-			}
-		}
-
-		return getValidStartAndEnd(startPoint, endPoint, mediaDuration);
-	};
 
 	// The active slide is the only one big enough to warrant the full-size newspaper image, so
 	// it's the only slide that prefers it over the (lower-res) thumbnail.
 	const imageSrc = ieObject.thumbnailUrl || '';
 
-	const [start, end]: [number | null, number | null] = getStartAndEnd();
 	const shared: Partial<FlowPlayerProps> = {
 		poster: poster ?? imageSrc,
 		title: title || ieObject.name,
@@ -84,16 +53,14 @@ export const IeObjectFlowPlayerWrapper: FunctionComponent<IeObjectFlowPlayerWrap
 		token: AdminConfigManager.getConfig().flowplayer.FLOW_PLAYER_TOKEN,
 		dataPlayerId: AdminConfigManager.getConfig().flowplayer.FLOW_PLAYER_ID,
 		ui: isVideoFormat(ieObject.dctermsFormat) ? undefined : 1, // 1 = NO_FULLSCREEN
-		// TODO: remove cuepoints later
-		plugins: ['subtitles', 'cuepoints', 'audio'],
+		plugins: ['subtitles', 'audio'],
 		peakColorBackground: Color.Gray800,
 		peakColorInactive: Color.Zinc,
 		peakColorActive: Color.SeaGreen,
 		peakHeightFactor: 0.6,
 		preload: 'metadata',
-		start,
-		end,
 		className,
+		// Not passing start and end times, since they are already in the snippet video url: browse.mp4?t=x,y&token=token-containing-x-y
 	};
 
 	if (isAudioFormat(ieObject.dctermsFormat)) {

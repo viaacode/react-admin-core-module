@@ -44,9 +44,9 @@ export const BlockTimeline: FunctionComponent<BlockTimelineProps> = ({
 	const containerRef = useRef<HTMLDivElement>(null);
 	const locale = AdminConfigManager.getConfig().locale;
 
-	// While this block is being put together in the editor it has no id yet, so its nodes go along
+	// While this block is being put together in the editor, it has no id yet, so its nodes go along
 	// for the proxy to resolve. One entry per node, so the response stays aligned. Timeline nodes
-	// never play a snippet, so they carry no cuepoints.
+	// never play a snippet, so they carry no snipPoints.
 	const unsavedObjects = useMemo(
 		() =>
 			elements.map((node) => ({
