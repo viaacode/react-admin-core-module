@@ -211,6 +211,7 @@ export enum ContentBlockType {
 	ObjectsGrid = 'OBJECTS_GRID',
 	OverviewThemes = 'OVERVIEW_THEMES',
 	HeroCarousel = 'HERO_CAROUSEL',
+	Timeline = 'TIMELINE',
 }
 
 export enum ContentBlockEditor {
@@ -475,7 +476,8 @@ export type RepeatedContentBlockComponentState =
 	| MediaGridBlockComponentState
 	| ImageInfo // project spotlight & spotlight
 	| RichTextBlockComponentState
-	| ThreeClickableTilesBlockComponentState;
+	| ThreeClickableTilesBlockComponentState
+	| TimelineNodeBlockComponentState;
 
 export type SingleContentBlockComponentState =
 	| HeadingBlockComponentState
@@ -636,3 +638,21 @@ export interface HetArchiefIeObject {
 	schemaIdentifier: string;
 	dctermsFormat: string;
 }
+
+export type TimelineNodeVisualType = 'NONE' | 'OBJECT' | 'IMAGE';
+
+export interface TimelineNodeBlockComponentState {
+	date: string;
+	title: string;
+	text?: string;
+	visualType: TimelineNodeVisualType;
+	mediaItem?: ButtonAction; // Content picker value pointing to an IE_OBJECT (pid/fragmentId)
+	image?: string;
+	imageAlt?: string;
+	copyrightTitle?: string;
+	copyrightIconVisible?: boolean;
+	copyrightText?: string;
+	backgroundColor?: Color;
+}
+
+export type TimelineBlockState = DefaultContentBlockState;

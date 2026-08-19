@@ -183,7 +183,7 @@ export const UserGroupSelect: FunctionComponent<UserGroupSelectProps> = ({
 							className={clsx('', {
 								'u-spacer-left-l': isSubUserGroup(userGroupOption.value),
 							})}
-						></Checkbox>
+						/>
 					);
 				})}
 			</CheckboxGroup>

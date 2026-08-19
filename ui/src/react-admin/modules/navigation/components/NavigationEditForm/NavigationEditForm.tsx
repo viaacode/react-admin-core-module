@@ -85,18 +85,19 @@ export const NavigationEditForm: FunctionComponent<NavigationEditFormProps> = ({
 			if (!currentNavigationItem) {
 				return;
 			}
+			let resolvedContentUserGroupIds: (string | number)[] = contentUserGroupIds;
 			const navItemUserGroupIds: string[] = currentNavigationItem.userGroupIds || [];
 			const allUserGroupIds: string[] = allUserGroups.map((ug) => String(ug.value));
 
 			// Add all user groups to content page user groups if content page is accessible by special user group: logged-in users
-			if (contentUserGroupIds.includes(SpecialUserGroups.loggedInUsers)) {
-				contentUserGroupIds = uniq([
+			if (resolvedContentUserGroupIds.includes(SpecialUserGroups.loggedInUsers)) {
+				resolvedContentUserGroupIds = uniq([
 					...contentUserGroupIds,
 					...without(allUserGroupIds, SpecialUserGroups.loggedOutUsers),
 				]);
 			}
 
-			const faultyUserGroupIds = without(navItemUserGroupIds, ...contentUserGroupIds);
+			const faultyUserGroupIds = without(navItemUserGroupIds, ...resolvedContentUserGroupIds);
 			if (faultyUserGroupIds.length) {
 				const faultyUserGroups = compact(
 					faultyUserGroupIds.map((faultyUserGroupId) => {

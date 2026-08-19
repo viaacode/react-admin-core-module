@@ -8,7 +8,7 @@ import {
 /**
  * Icon for an object type. Mirrors the client's `getIconFromObjectType`
  * (hetarchief-client/src/modules/shared/components/MediaCard/MediaCard.consts.ts):
- * when the essence is available to the user we show the plain icon, otherwise the
+ * when the essence is available to the user, we show the plain icon, otherwise the
  * struck-through ("no-…") variant.
  */
 export function getIconFromObjectType(

@@ -1,0 +1,325 @@
+@use "../../../../shared/styles/settings/colors" as colors;
+@use "../../../../shared/styles/settings/variables" as variables;
+@use "../../../../shared/styles/mixins/typography" as typography;
+
+// Horizontal space reserved for the year labels, which sit to the left of the timeline
+// line from $g-bp3 on. Below that breakpoint the years sit above the date, right of the line.
+$year-column-width-desktop: 17rem;
+$year-column-width-mobile: 4rem;
+
+// Distance between the timeline line and the node date / content.
+$line-content-gap: 3rem;
+
+// The circle / rectangle markers: one per node (alternating), plus a fixed circle-rectangle-circle
+// cluster at the very start and end of the timeline.
+$marker-size: 0.4375rem;
+$marker-rectangle-height: 0.3rem;
+
+// Aspect ratio for the node's image / video / audio media.
+$node-media-aspect-ratio: '1215 / 630';
+
+// Vertical space between every item on the timeline (start cap, nodes, end cap).
+$item-gap-desktop: 12rem;
+$item-gap-mobile: 5rem;
+
+// Inner padding of a node that has a background colour.
+$node-background-padding: 4rem;
+
+// Gap between a node's media (image / object) and the start of its background colour band.
+$node-background-top-gap: 5rem;
+
+// See also IeObjectMetadata
+$object-meta-vertical-padding: variables.$g-spacer-unit * 2;
+$object-meta-height-desktop: calc(5.2rem + $object-meta-vertical-padding + $object-meta-vertical-padding); // Adding 2-times the padding
+$object-meta-height-mobile: 8.4rem;
+$object-meta-gap: 4rem;
+
+.c-block-timeline {
+	position: relative;
+
+	&__list {
+		position: relative;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+
+		// The timeline line runs continuously behind every marker, from the first shape of the
+		// start cap to the last shape of the end cap.
+		&::before {
+			content: '';
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			left: $year-column-width-desktop;
+			transform: translateX(-50%);
+			width: 1px;
+			background-color: currentcolor;
+			opacity: 0.3;
+			z-index: 1;
+
+			@media (max-width: variables.$g-bp3) {
+				left: $year-column-width-mobile;
+			}
+		}
+
+		> li:not(:first-child, :last-child) {
+			margin-bottom: $item-gap-desktop;
+
+			@media (max-width: variables.$g-bp3) {
+				margin-bottom: $item-gap-mobile;
+			}
+		}
+
+		> li:first-child {
+			margin-bottom: 6rem;
+		}
+	}
+
+	// The fixed circle/rectangle/circle cluster marking the start and end of the timeline. The
+	// shapes touch, with no gap between them.
+	&__cap {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		align-items: stretch;
+		width: $marker-size;
+		margin-left: calc(#{$year-column-width-desktop} - #{$marker-size} / 2);
+
+		@media (max-width: variables.$g-bp3) {
+			margin-left: calc(#{$year-column-width-mobile} - #{$marker-size} / 2);
+		}
+	}
+
+	&__cap-shape {
+		flex-shrink: 0;
+		width: 100%;
+		height: $marker-size;
+		background-color: currentcolor;
+
+		&--circle {
+			border-radius: 50%;
+		}
+
+		&--rectangle {
+			height: $marker-rectangle-height;
+			border-radius: 0;
+		}
+	}
+
+	&__node {
+		display: grid;
+
+		// minmax(0, ...) instead of a bare 1fr: 1fr means minmax(auto, 1fr), which lets the
+		// column grow to the min-content width of its item (e.g. the object meta bar's title)
+		// instead of clamping to the available space. That growth is what breaks truncation.
+		grid-template-columns: $year-column-width-desktop minmax(0, 1fr);
+		grid-template-areas:
+			'year date'
+			'.    content';
+
+		// The year sits to the right of the line, stacked above the date.
+		@media (max-width: variables.$g-bp3) {
+			grid-template-columns: $year-column-width-mobile minmax(0, 1fr);
+			grid-template-areas:
+				'.    year'
+				'.    date'
+				'.    content';
+		}
+	}
+
+	&__node-year {
+		grid-area: year;
+		align-self: baseline;
+		padding-right: 1rem;
+
+		@include typography.sofia-pro-heading-xl;
+
+		// Taller than the font itself, so the year lines up with the top of the node's content
+		line-height: 5.6rem;
+
+		@media (max-width: variables.$g-bp3) {
+			padding-right: 0;
+			padding-left: $line-content-gap;
+			line-height: 3rem;
+		}
+	}
+
+	&__node-date {
+		grid-area: date;
+		align-self: baseline;
+		position: relative;
+		display: block;
+		padding-left: $line-content-gap;
+
+		@include typography.sofia-pro-heading-lg;
+		line-height: 2.6rem;
+
+		color: colors.$color-gray-300;
+	}
+
+	// A node's marker alternates between a circle and a rectangle (see BlockTimeline.tsx).
+	&__node-marker {
+		position: absolute;
+		top: 50%;
+		left: 0;
+		transform: translate(-50%, -50%);
+		width: $marker-size;
+		height: $marker-size;
+		background-color: currentcolor;
+
+		&--circle {
+			border-radius: 50%;
+		}
+
+		&--rectangle {
+			height: $marker-rectangle-height;
+			border-radius: 0;
+		}
+	}
+
+	&__node-content {
+		grid-area: content;
+
+		// Grid items default to min-width: auto, so wide content would push the column wider
+		// than the track. Together with the minmax(0, 1fr) tracks this keeps the column at the
+		// available width and lets the object title ellipse inside it.
+		min-width: 0;
+		margin-top: variables.$g-spacer-unit * 2;
+		padding-left: $line-content-gap;
+
+		&--has-background {
+			position: relative;
+			padding-bottom: $node-background-padding;
+
+			// Full-page-width colour band behind the node's content. The 5000px width is a
+			// generous fixed size that always covers the viewport, breaking out of any
+			// max-width content container (see BlockOverviewThemes for the same pattern). With
+			// media, it starts $node-background-top-gap below the media's top edge so that edge
+			// stays free of colour; without media there's nothing to leave uncovered, so it
+			// starts at the very top and covers the title and description in full.
+			&::before {
+				content: '';
+				position: absolute;
+				top: 0;
+				bottom: 0;
+				left: -2500px;
+				z-index: 0;
+				width: 5000px;
+				background-color: var(--c-block-timeline-node-bg);
+			}
+
+			&.c-block-timeline__node-content--has-image::before {
+				top: $node-background-top-gap;
+			}
+
+			// Stops right above the object's meta bar, which sits outside the coloured band.
+			&.c-block-timeline__node-content--has-object::before {
+				top: $node-background-top-gap;
+				bottom: $object-meta-gap + $object-meta-height-desktop;
+
+				@media (max-width: variables.$g-bp3) {
+					bottom: $object-meta-gap + $object-meta-height-mobile;
+				}
+			}
+
+			> * {
+				position: relative;
+				z-index: 1;
+			}
+		}
+	}
+
+	&__node-text {
+		padding-top: 1rem;
+	}
+
+	&__node-title {
+		margin: (variables.$g-spacer-unit * 4) 0 0;
+
+		@include typography.sofia-pro-heading-lg;
+
+		@media (max-width: variables.$g-bp3) {
+			@include typography.sofia-pro-heading-md;
+		}
+	}
+
+	&__node-description {
+		margin-top: variables.$g-spacer-unit * 2;
+
+		@include typography.sofia-pro-body;
+
+		@media (max-width: variables.$g-bp3) {
+			@include typography.sofia-pro-body-sm;
+		}
+	}
+
+	// A node's media (image or object) breaks out of the content column and starts at the very
+	// left of the block, so it also covers the year column and the gap next to the timeline line.
+	// The media itself is styled by BlockTimeline's img rule / the shared IeObjectMedia component,
+	// only its placement inside the node is timeline specific.
+	&__node-image-wrapper,
+	&__node-object-media {
+		position: relative;
+		z-index: 1;
+		margin-left: calc(-1 * (#{$year-column-width-desktop} + #{$line-content-gap}));
+		width: calc(100% + #{$year-column-width-desktop} + #{$line-content-gap});
+		aspect-ratio: #{$node-media-aspect-ratio};
+
+		@media (max-width: variables.$g-bp3) {
+			margin-left: calc(-1 * (#{$year-column-width-mobile} + #{$line-content-gap}));
+			width: calc(100% + #{$year-column-width-mobile} + #{$line-content-gap});
+		}
+	}
+
+	&__node-object-image,
+	&__node-image {
+		display: block;
+		width: 100%;
+		aspect-ratio: #{$node-media-aspect-ratio};
+		object-fit: cover;
+	}
+
+	&__node-object-image {
+		object-position: top center;
+	}
+
+	&__node-image {
+		object-position: center;
+	}
+
+	&__node-image-caption {
+		padding-top: 0.5rem;
+	}
+
+	.c-ie-object-metadata {
+		height: $object-meta-height-desktop;
+		margin-left: -$line-content-gap;
+		margin-top: $object-meta-gap;
+		padding: $object-meta-vertical-padding (variables.$g-spacer-unit * 4);
+
+		@media (max-width: variables.$g-bp3) {
+			padding: $object-meta-vertical-padding (variables.$g-spacer-unit * 3);
+		}
+	}
+
+	&__back-to-top {
+		display: flex;
+		align-items: center;
+		gap: 0.375rem;
+		width: fit-content;
+		margin: 1.5rem 0 0 auto;
+		background: none;
+		border: none;
+		padding: 0;
+		cursor: pointer;
+		color: colors.$color-gray-300;
+
+		@include typography.sofia-pro-body-xs;
+
+		&-icon {
+			width: 1rem;
+			height: 1rem;
+		}
+	}
+
+}

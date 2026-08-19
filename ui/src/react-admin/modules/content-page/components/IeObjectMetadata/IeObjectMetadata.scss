@@ -2,6 +2,11 @@
 @use "../../../shared/styles/settings/variables" as variables;
 @use "../../../shared/styles/mixins/typography" as typography;
 
+// Check all components that changing these does not break like for example BlockTimeline
+$object-meta-height-desktop: 6rem;
+$object-meta-height-mobile: 9rem;
+$object-meta-gap: 4rem;
+
 .c-ie-object-metadata {
 	display: flex;
 	align-items: center;
@@ -9,11 +14,11 @@
 	gap: variables.$g-spacer-unit * 3;
 	padding: 0.75rem 1rem;
 	background-color: colors.$color-platinum;
-	height: 6rem;
-	margin-top: 4rem;
+	height: $object-meta-height-desktop;
+	margin-top: $object-meta-gap;
 
 	@media (max-width: variables.$g-bp3) {
-		height: 9rem;
+		height: $object-meta-height-mobile;
 		flex-direction: row-reverse;
 	}
 

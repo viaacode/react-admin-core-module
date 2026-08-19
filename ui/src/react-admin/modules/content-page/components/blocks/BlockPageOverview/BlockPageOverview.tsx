@@ -366,7 +366,6 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 					);
 				});
 			}
-
 			// Render all pages in a grid without section titles (unique pages only)
 			let pagesToShow = labelsToShow.flatMap((labelObj) => {
 				if (!(pagesByLabel[labelObj.id] || []).length) {
