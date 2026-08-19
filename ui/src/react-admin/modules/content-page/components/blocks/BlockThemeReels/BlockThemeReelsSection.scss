@@ -133,8 +133,20 @@
 
 		&:hover:not(&--first) {
 			.c-button,
+			.c-block-theme-reels-section__cta-icons,
 			.c-block-theme-reels-section__slide-image > img {
 				@include animations.zoom-in-animation;
+			}
+		}
+
+		// The cta tile is a colored block without a caption underneath, so it only takes up the
+		// height of the images of the other slides.
+		&--last {
+			height: 16rem !important;
+			align-self: flex-start;
+
+			@media (max-width: variables.$g-bp2) {
+				height: 12rem !important;
 			}
 		}
 
@@ -254,6 +266,39 @@
 					line-height: 2rem;
 				}
 			}
+		}
+	}
+
+	&__cta {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		width: 100%;
+		height: 100%;
+		padding: variables.$g-spacer-unit * 3;
+		color: colors.$color-gray-1000;
+
+		@media (max-width: variables.$g-bp2) {
+			padding: variables.$g-spacer-unit * 2;
+		}
+
+		&-label {
+			@include typography.sofia-pro-heading-md;
+			@include typography.truncate-after-x-lines(3);
+
+			@media (max-width: variables.$g-bp2) {
+				font-size: 1.4rem;
+				line-height: 2rem;
+			}
+		}
+
+		&-icons {
+			display: flex;
+			align-items: center;
+			gap: variables.$g-spacer-unit;
+			font-size: 2.4rem;
+
+			@include animations.zoom-in-transition;
 		}
 	}
 }

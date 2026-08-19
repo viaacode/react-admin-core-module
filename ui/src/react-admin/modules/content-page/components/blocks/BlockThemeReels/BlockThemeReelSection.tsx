@@ -2,12 +2,14 @@ import { Button } from '@meemoo/react-components';
 import { type IconName, Image, LinkTarget } from '@viaa/avo2-components';
 import { AvoCoreContentPickerType } from '@viaa/avo2-types';
 import clsx from 'clsx';
-import React, { type FunctionComponent, type ReactNode, useEffect, useState } from 'react';
+import React, { type FunctionComponent, type ReactNode, useEffect, useMemo, useState } from 'react';
 import type SwiperController from 'swiper';
 import { Controller } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { useGetThemeWithObjects } from '~content-blocks/BlockThemeReels/hooks/useGetThemeWithObjects.ts';
 import { AdminConfigManager } from '~core/config';
+import { GET_SECONDARY_BACKGROUND_COLOR_OPTIONS_ARCHIEF } from '~modules/content-page/const/get-color-options.ts';
+import type { Color } from '~modules/content-page/types/content-block.types';
 import type { DefaultComponentProps } from '~modules/shared/types/components';
 import { App, Locale } from '~modules/translations/translations.core.types.ts';
 import { Icon } from '~shared/components/Icon';
@@ -38,6 +40,14 @@ export const BlockThemeReelSection: FunctionComponent<BlockThemeReelSectionProps
 	const locale = AdminConfigManager.getConfig().locale;
 
 	const [controlledSwiper, setControlledSwiper] = useState<SwiperController | null>(null);
+
+	// The "open this theme" tile has no image, it gets one of the tertiary brand colors instead.
+	// Picked once per mount so it stays stable while the carousel is scrolled.
+	const ctaBackgroundColor = useMemo(() => {
+		const tertiaryColors = GET_SECONDARY_BACKGROUND_COLOR_OPTIONS_ARCHIEF();
+		// eslint-disable-next-line react-hooks/purity
+		return tertiaryColors[Math.floor(Math.random() * tertiaryColors.length)].value as Color;
+	}, []);
 	const [showPrevSlideButton, setShowPrevSlideButton] = useState<boolean>(false);
 	const [showNextSlideButton, setShowNextSlideButton] = useState<boolean>(false);
 
@@ -260,37 +270,31 @@ export const BlockThemeReelSection: FunctionComponent<BlockThemeReelSectionProps
 									type: AvoCoreContentPickerType.CONTENT_PAGE,
 									target: LinkTarget.Self,
 								},
-								<>
-									<div
-										className={clsx(
-											'c-block-theme-reels-section__slide-image',
-											'c-block-theme-reels-section__slide-image-placeholder'
+								<div
+									className="c-block-theme-reels-section__cta"
+									style={{ backgroundColor: ctaBackgroundColor }}
+								>
+									<span className="c-block-theme-reels-section__cta-label">
+										{tText(
+											'modules/content-page/components/blocks/block-theme-reels/block-theme-reel-section___toon-alle-materialen-voor-dit-theme',
+											{},
+											[App.HET_ARCHIEF]
 										)}
-										aria-hidden
-									>
-										<Button
-											variants={['black', 'sm', 'block']}
-											icon={<Icon name="collection" />}
-											disabled
-											tabIndex={-1}
-										/>
-									</div>
-									<div className="c-block-theme-reels-section__slide-description">
-										<span className="c-block-theme-reels-section__slide-description-title">
-											{tText(
-												'modules/content-page/components/blocks/block-theme-reels/block-theme-reel-section___toon-alle-materialen-voor-dit-theme',
-												{},
-												[App.HET_ARCHIEF]
-											)}
-										</span>
-									</div>
-								</>,
+									</span>
+									<span className="c-block-theme-reels-section__cta-icons" aria-hidden>
+										<Icon name={'collection' as IconName} />
+										<Icon name={'arrowDownRight' as IconName} />
+									</span>
+								</div>,
 								tText(
 									'modules/content-page/components/blocks/block-theme-reels/block-theme-reel-section___toon-alle-materialen-voor-dit-theme',
 									{},
 									[App.HET_ARCHIEF]
 								),
-								'c-block-theme-reels-section__slide',
+								clsx(
+									'c-block-theme-reels-section__slide',
+									'c-block-theme-reels-section__slide--last'
+								),
 								isVisible ? undefined : -1
 							);
 						}}
