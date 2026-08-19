@@ -35,7 +35,6 @@ export const useGetIeObjectsPlayableDisplayData = (
 					])
 			);
 
-			console.log(mediaItems, objects);
 			return mediaItems.map(
 				(placeholder) =>
 					({

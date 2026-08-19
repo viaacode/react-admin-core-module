@@ -59,8 +59,6 @@ export const BlockTimeline: FunctionComponent<BlockTimelineProps> = ({
 	);
 	const { data: ieObjects } = useGetIeObjectsPlayableDisplayData(pids);
 
-	console.log('ieObjects', ieObjects);
-
 	const scrollToTop = () => {
 		containerRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
 	};
