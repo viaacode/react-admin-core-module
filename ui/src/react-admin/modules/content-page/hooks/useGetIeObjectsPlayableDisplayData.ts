@@ -1,5 +1,4 @@
 import { useQuery } from '@tanstack/react-query';
-import type { HeroCarouselSlideItem } from '~content-blocks/BlockHeroCarousel/BlockHeroCarousel.types.ts';
 import { IeObjectsService } from '~shared/services/ie-objects-service/ie-objects.service.ts';
 import type { PlayableDisplayIeObject } from '~shared/services/ie-objects-service/ie-objects.types.ts';
 import { QUERY_KEYS } from '~shared/types';
@@ -10,7 +9,9 @@ import { QUERY_KEYS } from '~shared/types';
 const toObjectKey = (schemaIdentifier: string, start?: number, end?: number): string =>
 	`${schemaIdentifier}__${start ?? ''}__${end ?? ''}`;
 
-export const useGetPlayableDisplayData = (mediaItems: HeroCarouselSlideItem[]) => {
+export const useGetIeObjectsPlayableDisplayData = (
+	mediaItems: Partial<PlayableDisplayIeObject>[]
+) => {
 	// Slots with no media item selected yet (e.g. a freshly added, not-yet-filled-in editor row)
 	// have an empty schemaIdentifier -- exclude them from the request, there's nothing to fetch.
 	const requestableMediaItems = mediaItems.filter((item) => !!item.schemaIdentifier);
@@ -18,15 +19,9 @@ export const useGetPlayableDisplayData = (mediaItems: HeroCarouselSlideItem[]) =
 
 	return useQuery<PlayableDisplayIeObject[]>({
 		queryKey: [QUERY_KEYS.GET_IE_OBJECTS_PLAYABLE_DISPLAY_DATA, schemaIdentifiers.join(',')],
-		placeholderData: mediaItems,
+		placeholderData: mediaItems as PlayableDisplayIeObject[],
 		queryFn: async () => {
-			const objects = await IeObjectsService.getPlayableDisplayData(
-				requestableMediaItems.map((item) => ({
-					schemaIdentifier: item.schemaIdentifier,
-					start: item.snipPoint?.start,
-					end: item.snipPoint?.end,
-				}))
-			);
+			const objects = await IeObjectsService.getPlayableDisplayData(requestableMediaItems);
 
 			// Look fetched objects up by key rather than zipping arrays by index: this keeps every
 			// slide -- including empty slots that were never requested -- in its original position,
@@ -46,7 +41,7 @@ export const useGetPlayableDisplayData = (mediaItems: HeroCarouselSlideItem[]) =
 						...placeholder,
 						...objectByKey.get(
 							toObjectKey(
-								placeholder.schemaIdentifier,
+								placeholder.schemaIdentifier as string,
 								placeholder.snipPoint?.start,
 								placeholder.snipPoint?.end
 							)
