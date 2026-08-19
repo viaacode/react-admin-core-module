@@ -5,6 +5,7 @@ import { isNil } from 'es-toolkit';
 import type { FunctionComponent } from 'react';
 import React, { useCallback, useEffect, useState } from 'react';
 import { AdminConfigManager, ToastType } from '~core/config';
+import { AdminCoreIconName } from '~core/config/config.types';
 import { CONTENT_PAGE_LABEL_COLORS_INVISIBLE_ON_WHITE } from '~modules/content-page-labels/content-page-label.const';
 import { ContentPageLabelService } from '~modules/content-page-labels/content-page-label.service';
 import { ITEMS_PER_PAGE } from '~modules/item/items.consts';
@@ -315,7 +316,7 @@ export const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> 
 				return (
 					<ButtonToolbar>
 						<Button
-							icon={<Icon name="info" />}
+							icon={<Icon name={AdminCoreIconName.Info} />}
 							onClick={() =>
 								navigate(AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_LABEL_DETAIL'), {
 									id: contentPageLabel.id,
@@ -330,7 +331,7 @@ export const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> 
 							variants={['block', 'text', 'secondary']}
 						/>
 						<Button
-							icon={<Icon name="edit" />}
+							icon={<Icon name={AdminCoreIconName.Edit} />}
 							onClick={() =>
 								navigate(AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_LABEL_EDIT'), {
 									id: contentPageLabel.id,
@@ -345,7 +346,7 @@ export const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> 
 							variants={['block', 'text', 'secondary']}
 						/>
 						<Button
-							icon={<Icon name="delete" />}
+							icon={<Icon name={AdminCoreIconName.Delete} />}
 							onClick={() => openModal(contentPageLabel)}
 							aria-label={tText(
 								'admin/content-page-labels/views/content-page-label-overview___verwijder-deze-content-pagina-label'

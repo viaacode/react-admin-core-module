@@ -3,7 +3,6 @@ import type {
 	ButtonProps,
 	DefaultProps,
 	GridSize,
-	IconName,
 	RenderLinkFunction,
 } from '@viaa/avo2-components';
 import { Button, Column, convertToHtml, Grid, Spacer } from '@viaa/avo2-components';
@@ -12,7 +11,7 @@ import type { FunctionComponent } from 'react';
 import React from 'react';
 import type { RichTextButton } from '~content-blocks/BlockRichText/BlockRichText.types';
 import Html from '~shared/components/Html/Html';
-import { Icon } from '~shared/components/Icon/Icon';
+import { ContentPageIcon } from '~shared/components/Icon/Icon';
 import { defaultRenderLinkFunction } from '~shared/helpers/routing/link';
 import { SanitizePreset } from '~shared/helpers/sanitize/presets';
 
@@ -60,7 +59,7 @@ export const BlockRichText: FunctionComponent<BlockRichTextProps> = ({
 						<Button
 							{...buttonProps}
 							renderIcon={
-								buttonProps.icon ? () => <Icon name={buttonProps.icon as IconName} /> : undefined
+								buttonProps.icon ? () => <ContentPageIcon name={buttonProps.icon} /> : undefined
 							}
 							iconPosition={buttonProps.buttonIconAlignment}
 						/>,

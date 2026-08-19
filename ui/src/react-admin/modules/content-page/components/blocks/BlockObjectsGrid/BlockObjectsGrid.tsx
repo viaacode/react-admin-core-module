@@ -1,5 +1,4 @@
 import { Button } from '@meemoo/react-components';
-import type { IconName } from '@viaa/avo2-components';
 import { AvoCoreContentPickerType } from '@viaa/avo2-types';
 import clsx from 'clsx';
 import type { FunctionComponent, ReactElement, ReactNode } from 'react';
@@ -154,7 +153,7 @@ export const BlockObjectsGrid: FunctionComponent<BlockObjectsGridProps> = ({
 						) : (
 							// No thumbnail (e.g. audio): decorative placeholder, the link already carries the name.
 							<span className="c-block-objects-grid__tile-placeholder" aria-hidden="true">
-								{iconName && <Icon name={iconName as IconName} />}
+								{iconName && <Icon name={iconName} />}
 							</span>
 						)}
 					</div>
@@ -165,9 +164,7 @@ export const BlockObjectsGrid: FunctionComponent<BlockObjectsGridProps> = ({
 								<span className="c-block-objects-grid__tile-maintainer">{item.maintainerName}</span>
 							)}
 						</div>
-						{iconName && (
-							<Icon className="c-block-objects-grid__tile-type-icon" name={iconName as IconName} />
-						)}
+						{iconName && <Icon className="c-block-objects-grid__tile-type-icon" name={iconName} />}
 					</div>
 				</SmartLink>
 			</li>

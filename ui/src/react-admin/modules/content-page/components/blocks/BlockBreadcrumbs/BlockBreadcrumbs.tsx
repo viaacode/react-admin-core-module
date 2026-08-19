@@ -4,13 +4,14 @@ import type {
 	BlockBreadcrumbsProps,
 	BreadCrumb,
 } from '~content-blocks/BlockBreadcrumbs/BlockBreadcrumbs.types';
+import { AdminCoreIconName } from '~core/config/config.types';
 import { Icon } from '~shared/components/Icon/Icon';
 import { Link } from '~shared/components/Link/Link';
 
 export const BlockBreadcrumbs: FC<BlockBreadcrumbsProps> = ({ foregroundColor, elements }) => {
 	return (
 		<Breadcrumbs
-			icon={<Icon name="angleRight" />}
+			icon={<Icon name={AdminCoreIconName.AngleRight} />}
 			items={elements.map((breadCrumb: BreadCrumb) => {
 				return {
 					label: breadCrumb.label,

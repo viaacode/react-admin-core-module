@@ -14,7 +14,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import DatePicker from 'react-datepicker';
 import { ValidationError } from 'yup';
 import { AdminConfigManager } from '~core/config';
-import { ToastType } from '~core/config/config.types';
+import { AdminCoreIconName, ToastType } from '~core/config/config.types';
 import { getDatePickerDefaultProps } from '~modules/content-page/components/DatePicker/DatePicker.consts';
 import { MaintenanceAlertsService } from '~modules/maintenance-alerts/maintenance-alerts.service';
 import type {
@@ -357,7 +357,7 @@ const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProp
 					}}
 					onBlur={isFormValid}
 					locale={AdminConfigManager.getConfig().locale}
-				></RichTextEditor>
+				/>
 			</FormControl>
 		);
 	}, [currentMaintenanceAlert, errors.message, maintenanceAlert?.id, isFormValid]);
@@ -419,9 +419,9 @@ const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProp
 						{},
 						[HET_ARCHIEF]
 					)}
-					iconOpen={<Icon name="angleUp" />}
-					iconClosed={<Icon name="angleDown" />}
-					iconCheck={<Icon name="check" />}
+					iconOpen={<Icon name={AdminCoreIconName.AngleUp} />}
+					iconClosed={<Icon name={AdminCoreIconName.AngleDown} />}
+					iconCheck={<Icon name={AdminCoreIconName.Check} />}
 					id="maintenance-alerts-edit-form__user-groups-select"
 				/>
 			</FormControl>

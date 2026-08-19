@@ -3,6 +3,7 @@ import clsx from 'clsx';
 import type { FunctionComponent } from 'react';
 import React, { useCallback, useEffect, useState } from 'react';
 import { AdminConfigManager } from '~core/config/config.class';
+import { AdminCoreIconName } from '~core/config/config.types';
 import { Color, CustomBackground } from '~modules/content-page/types/content-block.types';
 import { CONTENT_PAGE_LABEL_COLORS_INVISIBLE_ON_WHITE } from '~modules/content-page-labels/content-page-label.const';
 import { ContentPageLabelService } from '~modules/content-page-labels/content-page-label.service';
@@ -193,7 +194,7 @@ export const ContentPageLabelDetail: FunctionComponent<ContentPageLabelDetailPro
 			>
 				<AdminLayout.Back>
 					<Button type="borderless" onClick={onGoBack}>
-						<Icon name="chevronLeft"></Icon>
+						<Icon name={AdminCoreIconName.ChevronLeft} />
 					</Button>
 				</AdminLayout.Back>
 				<AdminLayout.Actions>

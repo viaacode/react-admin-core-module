@@ -5,7 +5,7 @@ import { format, isAfter, isWithinInterval, parseISO } from 'date-fns';
 import { nlBE } from 'date-fns/locale';
 import type { FunctionComponent, ReactNode } from 'react';
 import { useState } from 'react';
-import { ToastType } from '~core/config/config.types';
+import { AdminCoreIconName, ToastType } from '~core/config/config.types';
 import { ITEMS_PER_PAGE } from '~modules/item/items.consts';
 import { useGetMaintenanceAlerts } from '~modules/maintenance-alerts/hooks/use-get-maintenance-alerts';
 import type { MaintenanceAlertsOverviewTableState } from '~modules/maintenance-alerts/maintenance-alerts.types';
@@ -173,7 +173,7 @@ export const MaintenanceAlertsOverview: FunctionComponent<MaintenanceAlertsOverv
 				return (
 					<>
 						<Button
-							icon={<Icon name="edit" />}
+							icon={<Icon name={AdminCoreIconName.Edit} />}
 							className="u-color-neutral"
 							variants="text"
 							onClick={() => {
@@ -187,7 +187,7 @@ export const MaintenanceAlertsOverview: FunctionComponent<MaintenanceAlertsOverv
 							)}
 						/>
 						<Button
-							icon={<Icon name="delete" />}
+							icon={<Icon name={AdminCoreIconName.Delete} />}
 							className="u-color-neutral"
 							variants="text"
 							onClick={() => {
@@ -320,7 +320,7 @@ export const MaintenanceAlertsOverview: FunctionComponent<MaintenanceAlertsOverv
 		<AdminLayout className={className} pageTitle={title}>
 			<AdminLayout.Actions>
 				<Button
-					iconStart={<Icon name="export" />}
+					iconStart={<Icon name={AdminCoreIconName.Export} />}
 					label={tText(
 						'react-admin/modules/alerts/views/alerts-overview___nieuwe-melding-aanmaken',
 						{},
@@ -339,7 +339,7 @@ export const MaintenanceAlertsOverview: FunctionComponent<MaintenanceAlertsOverv
 					maintenanceAlert={activeMaintenanceAlert}
 					action={action}
 					onClose={handleCloseEditPopup}
-				></MaintenanceAlertsEditForm>
+				/>
 				<ConfirmModal
 					deleteObjectCallback={onClickDelete}
 					body={tHtml(
