@@ -43,7 +43,7 @@ export const BlockImageTitleTextButton: FunctionComponent<BlockImageTitleTextBut
 						content={convertToHtml(text as string)}
 						sanitizePreset={SanitizePreset.full}
 						className={className}
-					></Html>
+					/>
 				);
 			}
 			return text;

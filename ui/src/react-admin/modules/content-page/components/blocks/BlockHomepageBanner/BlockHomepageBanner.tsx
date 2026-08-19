@@ -71,7 +71,7 @@ export const BlockHomepageBanner: FunctionComponent<BlockHomepageBannerProps> = 
 					<BlockHeading className="c-block-homepage-banner__content-title" type="h4">
 						{title}
 					</BlockHeading>
-					<Html className="c-block-homepage-banner__content-text" content={content} type="p"></Html>
+					<Html className="c-block-homepage-banner__content-text" content={content} type="p" />
 					<div className="c-block-homepage-banner__pattern-slot c-block-homepage-banner__pattern-slot--bottom">
 						<div
 							className="c-block-homepage-banner__pattern c-block-homepage-banner__pattern--right"

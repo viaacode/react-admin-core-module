@@ -4,7 +4,7 @@ import {
 	type FlowPlayerProps,
 	getValidStartAndEnd,
 } from '@meemoo/react-components';
-import { IconName, Image, Spinner } from '@viaa/avo2-components';
+import { Image, Spinner } from '@viaa/avo2-components';
 import clsx from 'clsx';
 import { isNil } from 'es-toolkit';
 import React, { type FunctionComponent, type ReactElement, useState } from 'react';

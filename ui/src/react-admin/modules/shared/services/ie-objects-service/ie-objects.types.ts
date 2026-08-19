@@ -1,15 +1,5 @@
 import type { IeObjectType } from '~shared/helpers/map-format-to-type.ts';
 
-interface JsonWaveformData {
-	version: number;
-	channels: number;
-	sample_rate: number;
-	samples_per_pixel: number;
-	bits: number;
-	length: number;
-	data: Array<number>;
-}
-
 export interface PlayableDisplayIeObject {
 	schemaIdentifier: string;
 	name: string;

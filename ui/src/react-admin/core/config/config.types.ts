@@ -13,6 +13,7 @@ import type {
 } from '~modules/content-page/types/content-pages.types';
 import type { App, Locale } from '~modules/translations/translations.core.types';
 import type { UserBulkAction } from '~modules/user/user.types';
+import type { AudioOrVideoPlayerProps } from '~shared/components/AudioOrVideoPlayer/AudioOrVideoPlayer.types.ts';
 import type { FlowPlayerWrapperProps } from '~shared/components/FlowPlayerWrapper/FlowPlayerWrapper.types';
 
 export enum ToastType {
@@ -116,7 +117,8 @@ export interface AdminConfig {
 			component: ComponentType | null;
 		};
 		defaultAudioStill: string;
-		flowplayer?: FC<FlowPlayerWrapperProps>;
+		flowplayer?: FC<FlowPlayerWrapperProps>; // User by avo for
+		audioOrVideoPlayer?: FC<AudioOrVideoPlayerProps>; // Used by hetarchief for timeline component
 		buttonTypes: () => { label: string; value: string }[];
 		enableMultiLanguage: boolean;
 	};

@@ -28,10 +28,10 @@ import { INITIAL_INTRO_COMPONENTS_STATE } from '~content-blocks/BlockIntro';
 import { INITIAL_KLAAR_COMPONENTS_STATE } from '~content-blocks/BlockKlaar';
 import { INITIAL_MAINTAINERS_GRID_BLOCK_STATE } from '~content-blocks/BlockMaintainersGrid';
 import { INITIAL_MEDIA_GRID_COMPONENTS_STATE } from '~content-blocks/BlockMediaGrid';
-import { INITIAL_OVERVIEW_NEWSPAPER_TITLES_BLOCK_STATE } from '~content-blocks/BlockOverviewNewspaperTitles';
-import { INITIAL_OVERVIEW_WITH_CAROUSEL_BLOCK_STATE } from '~content-blocks/BlockOverviewWithCarousel/BlockOverviewWithCarousel.editorconfig.ts';
 import { INITIAL_OBJECTS_GRID_BLOCK_STATE } from '~content-blocks/BlockObjectsGrid';
+import { INITIAL_OVERVIEW_NEWSPAPER_TITLES_BLOCK_STATE } from '~content-blocks/BlockOverviewNewspaperTitles';
 import { INITIAL_OVERVIEW_THEMES_COMPONENTS_STATE } from '~content-blocks/BlockOverviewThemes/BlockOverviewThemes.editorconfig.ts';
+import { INITIAL_OVERVIEW_WITH_CAROUSEL_BLOCK_STATE } from '~content-blocks/BlockOverviewWithCarousel/BlockOverviewWithCarousel.editorconfig.ts';
 import { INITIAL_PAGE_OVERVIEW_COMPONENTS_STATE } from '~content-blocks/BlockPageOverview';
 import {
 	INITIAL_RICH_TEXT_COMPONENTS_STATE,
@@ -45,6 +45,7 @@ import {
 import { INITIAL_TAGS_WITH_LINK_COMPONENTS_STATE } from '~content-blocks/BlockTagsWithLink';
 import { INITIAL_THEME_REELS_COMPONENTS_STATE } from '~content-blocks/BlockThemeReels';
 import { INITIAL_THREE_CLICKABLE_TILES_COMPONENTS_STATE } from '~content-blocks/BlockThreeClickableTiles';
+import { INITIAL_TIMELINE_COMPONENTS_STATE } from '~content-blocks/BlockTimeline';
 import { INITIAL_UITGEKLAARD_BLOCK_STATE } from '~content-blocks/BlockUitgeklaard';
 import { INITIAL_MEDIA_PLAYER_COMPONENTS_STATE } from '~content-blocks/BlockVideo';
 import { INITIAL_MEDIA_PLAYER_TITLE_TEXT_BUTTON_COMPONENTS_STATE } from '~content-blocks/BlockVideoTitleTextButton';
@@ -104,4 +105,5 @@ export const CONTENT_BLOCK_INITIAL_STATE_MAP: {
 	[ContentBlockType.ObjectsGrid]: INITIAL_OBJECTS_GRID_BLOCK_STATE,
 	[ContentBlockType.OverviewThemes]: INITIAL_OVERVIEW_THEMES_COMPONENTS_STATE,
 	[ContentBlockType.HeroCarousel]: INITIAL_HERO_CAROUSEL_COMPONENTS_STATE,
+	[ContentBlockType.Timeline]: INITIAL_TIMELINE_COMPONENTS_STATE,
 };

@@ -122,7 +122,7 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 
 	const renderConfirmDeleteMessage = () => {
 		if (!deleteContentCounts) {
-			return <Spinner locationId="UserDeleteModal"></Spinner>;
+			return <Spinner locationId="UserDeleteModal" />;
 		}
 
 		const isDeleteAll = selectedDeleteOption === 'DELETE_ALL';

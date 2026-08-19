@@ -1,20 +1,7 @@
 import { AvoCoreContentPickerType } from '@viaa/avo2-types';
 import type { HeroCarouselBlockComponentState } from '~content-blocks/BlockHeroCarousel/BlockHeroCarousel.types.ts';
-import { BlockPageOverviewProps, ContentItemStyle } from '~content-blocks/BlockPageOverview';
+import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, TEXT_FIELD } from '~content-blocks/defaults';
 import {
-	BACKGROUND_COLOR_FIELD,
-	BLOCK_FIELD_DEFAULTS,
-	BLOCK_STATE_DEFAULTS,
-	FOREGROUND_COLOR_FIELD,
-	TEXT_FIELD,
-} from '~content-blocks/defaults';
-import {
-	GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF,
-	GET_FOREGROUND_COLOR_OPTIONS_ARCHIEF,
-} from '~modules/content-page/const/get-color-options.ts';
-import { GET_FULL_HEADING_TYPE_OPTIONS } from '~modules/content-page/const/get-heading-type-options';
-import {
-	Color,
 	type ContentBlockConfig,
 	ContentBlockEditor,
 	type ContentBlockField,
@@ -27,7 +14,6 @@ import type { FileUploadProps } from '~shared/components/FileUpload/FileUpload.t
 import { PHOTO_TYPES } from '~shared/helpers/files.ts';
 import { toSeconds } from '~shared/helpers/parsers/duration.ts';
 import { tText } from '~shared/helpers/translation-functions';
-import { validateRequiredValue } from '~shared/helpers/validation.ts';
 import { HET_ARCHIEF } from '~shared/types';
 import type { PickerItem } from '~shared/types/content-picker.ts';
 
