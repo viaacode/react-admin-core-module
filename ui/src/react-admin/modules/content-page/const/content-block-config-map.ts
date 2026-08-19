@@ -45,6 +45,7 @@ import {
 import { TAGS_WITH_LINK_BLOCK_CONFIG } from '~content-blocks/BlockTagsWithLink';
 import { THEME_REELS_BLOCK_CONFIG } from '~content-blocks/BlockThemeReels';
 import { THREE_CLICKABLE_TILES_BLOCK_CONFIG } from '~content-blocks/BlockThreeClickableTiles';
+import { TIMELINE_BLOCK_CONFIG } from '~content-blocks/BlockTimeline';
 import { UITGEKLAARD_BLOCK_CONFIG } from '~content-blocks/BlockUitgeklaard';
 import { MEDIA_PLAYER_BLOCK_CONFIG } from '~content-blocks/BlockVideo';
 import { MEDIA_PLAYER_TITLE_TEXT_BUTTON_BLOCK_CONFIG } from '~content-blocks/BlockVideoTitleTextButton';
@@ -103,4 +104,5 @@ export const CONTENT_BLOCK_CONFIG_MAP: Record<
 	[ContentBlockType.OverviewThemes]: OVERVIEW_THEMES_BLOCK_CONFIG,
 	[ContentBlockType.DoubleBanner]: DOUBLE_BANNER_BLOCK_CONFIG,
 	[ContentBlockType.HeroCarousel]: HERO_CAROUSEL_CONFIG,
+	[ContentBlockType.Timeline]: TIMELINE_BLOCK_CONFIG,
 };

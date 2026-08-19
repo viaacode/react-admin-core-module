@@ -1,25 +1,14 @@
-import {
-	Button,
-	FlowPlayer,
-	type FlowPlayerProps,
-	getValidStartAndEnd,
-} from '@meemoo/react-components';
-import { IconName, Image, Spinner } from '@viaa/avo2-components';
+import { Button } from '@meemoo/react-components';
+import { Image, Spinner } from '@viaa/avo2-components';
 import clsx from 'clsx';
-import { isNil } from 'es-toolkit';
 import React, { type FunctionComponent, type ReactElement, useState } from 'react';
 import type { HeroCarouselSlideItem } from '~content-blocks/BlockHeroCarousel/BlockHeroCarousel.types.ts';
-import { AdminConfigManager, AdminCoreIconName } from '~core/config';
-import { Color } from '~modules/content-page/types/content-block.types.ts';
+import { AdminCoreIconName } from '~core/config';
+import { IeObjectFlowPlayerWrapper } from '~modules/content-page/components/IeObjectFlowPlayerWrapper/IeObjectFlowPlayerWrapper.tsx';
 import type { DefaultComponentProps } from '~modules/shared/types/components';
 import { Icon } from '~shared/components/Icon';
-import {
-	isAudioFormat,
-	isAudioVideoFormat,
-	isVideoFormat,
-} from '~shared/helpers/is-audio-video-format.ts';
+import { isAudioVideoFormat } from '~shared/helpers/is-audio-video-format.ts';
 import { tText } from '~shared/helpers/translation-functions.ts';
-import { useGetFileDuration } from '~shared/hooks/use-get-file-duration.ts';
 import { HET_ARCHIEF } from '~shared/types';
 
 export interface BlockHeroCarouselActiveSlideProps extends DefaultComponentProps {
@@ -37,7 +26,6 @@ export const BlockHeroCarouselActiveSlide: FunctionComponent<BlockHeroCarouselAc
 	isMuted,
 	onMutedChange,
 }): ReactElement => {
-	const { data: mediaDuration } = useGetFileDuration(item?.playableUrl);
 	const [isPaused, setIsPaused] = useState(false);
 
 	if (isLoading || !item?.schemaIdentifier) {
@@ -48,78 +36,21 @@ export const BlockHeroCarouselActiveSlide: FunctionComponent<BlockHeroCarouselAc
 		);
 	}
 
-	const getStartAndEnd = () => {
-		let startPoint: number | null = null;
-		let endPoint: number | null = null;
-
-		// Only snipPoint if there are any set, and they do not fall outside the range of the video itself
-		if (item.snipPoint) {
-			if (
-				item.snipPoint.start &&
-				item.snipPoint.start > 0 &&
-				(isNil(mediaDuration) || item.snipPoint.start < mediaDuration)
-			) {
-				startPoint = item.snipPoint.start;
-			}
-
-			if (
-				item.snipPoint.end &&
-				(isNil(mediaDuration) ||
-					(item.snipPoint.end && item.snipPoint.end < mediaDuration && item.snipPoint.end > 0))
-			) {
-				endPoint = item.snipPoint.end;
-			}
-		}
-
-		return getValidStartAndEnd(startPoint, endPoint, mediaDuration);
-	};
-
 	// The active slide is the only one big enough to warrant the full-size newspaper image, so
 	// it's the only slide that prefers it over the (lower-res) thumbnail.
 	const imageSrc = item.newspaperImage || item.videoThumbnail || item.thumbnailUrl || '';
 
-	const [start, end]: [number | null, number | null] = getStartAndEnd();
-	const shared: Partial<FlowPlayerProps> = {
-		poster: imageSrc,
-		title: item.name,
-		logo: item.maintainerLogo ?? undefined,
-		autoplay: true,
-		muted: isMuted,
-		onMutedChange,
-		onEnded: onEnded,
-		onError: onEnded,
-		token: AdminConfigManager.getConfig().flowplayer.FLOW_PLAYER_TOKEN,
-		dataPlayerId: AdminConfigManager.getConfig().flowplayer.FLOW_PLAYER_ID,
-		ui: isAudioVideoFormat(item.dctermsFormat) ? undefined : 1, // 1 = NO_FULLSCREEN
-		// TODO: remove cuepoints later
-		plugins: ['subtitles', 'cuepoints', 'audio'],
-		peakColorBackground: Color.Gray800,
-		peakColorInactive: Color.Zinc,
-		peakColorActive: Color.SeaGreen,
-		peakHeightFactor: 0.6,
-		preload: 'metadata',
-		start,
-		end,
-	};
-
-	if (isAudioFormat(item.dctermsFormat)) {
+	if (isAudioVideoFormat(item.dctermsFormat)) {
 		return (
-			<FlowPlayer
-				type="audio"
-				src={[
-					{
-						src: item.playableUrl as string,
-						type: item.mimeType as string,
-					},
-				]}
-				waveformData={item.peakfileData || undefined}
-				{...shared}
+			<IeObjectFlowPlayerWrapper
+				ieObject={item}
+				autoplay={true}
+				isMuted={isMuted}
+				onMutedChange={onMutedChange}
+				onEnded={onEnded}
+				poster={imageSrc}
 			/>
 		);
-	}
-
-	if (isVideoFormat(item.dctermsFormat)) {
-		return <FlowPlayer type="video" src={item.playableUrl as string} {...shared} />;
 	}
 
 	if (!imageSrc) {

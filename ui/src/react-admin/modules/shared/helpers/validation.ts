@@ -7,7 +7,7 @@ export const validateContentBlockField = (
 	fieldKey: string,
 	// biome-ignore lint/suspicious/noExplicitAny: todo
 	validator: ((value: any) => string[]) | undefined,
-	oldErrors: ContentBlockErrors = {},
+	oldErrors: ContentBlockErrors,
 	// biome-ignore lint/suspicious/noExplicitAny: todo
 	value: any,
 	stateIndex?: number
@@ -43,13 +43,12 @@ export const validateContentBlockField = (
 		};
 		delete updatedErrors[fieldKey];
 		return updatedErrors;
-	} else {
-		// Still errors, set errors under fieldKey on error object
-		return {
-			...oldErrors,
-			[fieldKey]: errorArray,
-		};
 	}
+	// Still errors, set errors under fieldKey on error object
+	return {
+		...oldErrors,
+		[fieldKey]: errorArray,
+	};
 };
 
 export function validateFlowplayerVideoUrl(url: string | null | undefined) {

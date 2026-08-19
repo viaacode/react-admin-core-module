@@ -116,7 +116,7 @@ export interface AdminConfig {
 			component: ComponentType | null;
 		};
 		defaultAudioStill: string;
-		flowplayer?: FC<FlowPlayerWrapperProps>;
+		flowplayer?: FC<FlowPlayerWrapperProps>; // User by avo for
 		buttonTypes: () => { label: string; value: string }[];
 		enableMultiLanguage: boolean;
 	};
