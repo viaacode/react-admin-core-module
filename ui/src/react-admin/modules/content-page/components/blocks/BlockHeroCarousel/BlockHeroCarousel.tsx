@@ -14,9 +14,10 @@ import { GET_SECONDARY_BACKGROUND_COLOR_OPTIONS_ARCHIEF } from '~modules/content
 import { useGetIeObjectsPlayableDisplayData } from '~modules/content-page/hooks/useGetIeObjectsPlayableDisplayData.ts';
 import { isAudioVideoFormat } from '~shared/helpers/is-audio-video-format.ts';
 import type { IeObjectType } from '~shared/helpers/map-format-to-type.ts';
-import { toSeconds } from '~shared/helpers/parsers/duration.ts';
 
 export interface BlockHeroCarouselProps extends DefaultComponentProps {
+	/** Id of the content block, added by the content block renderer. Empty for an unsaved block. */
+	blockId?: string;
 	backgroundImage?: string;
 	title: string;
 	searchAriaLabel: string;
@@ -26,35 +27,38 @@ export interface BlockHeroCarouselProps extends DefaultComponentProps {
 
 export const BlockHeroCarousel: FunctionComponent<BlockHeroCarouselProps> = ({
 	className,
+	blockId,
 	backgroundImage,
 	title,
 	subtitles,
 	searchAriaLabel,
 	elements,
 }): ReactNode => {
+	// The objects themselves -- and the part of them that plays -- are resolved by the proxy from
+	// this block's stored config, so only the block id goes out. The response comes back in the
+	// same order as the elements below, which is what lets them be merged by index.
+	const { data: ieObjects, isLoading, isFetching } = useGetIeObjectsPlayableDisplayData(blockId);
+
 	const items = useMemo(() => {
 		const allTertiaryColors = GET_SECONDARY_BACKGROUND_COLOR_OPTIONS_ARCHIEF();
-		return elements.map((object) => {
+		return elements.map((object, index) => {
 			// eslint-disable-next-line react-hooks/purity
 			const randomIndex = Math.floor(Math.random() * allTertiaryColors.length);
-			const dctermsFormat = object.mediaItem?.dctermsFormat as IeObjectType;
+			const ieObject = ieObjects?.[index];
+			const dctermsFormat = (ieObject?.dctermsFormat ??
+				object.mediaItem?.dctermsFormat) as IeObjectType;
 
 			return {
-				schemaIdentifier: String(object.mediaItem?.value),
+				...ieObject,
+				schemaIdentifier: ieObject?.schemaIdentifier ?? String(object.mediaItem?.value),
 				dctermsFormat,
 				videoThumbnail: object.videoThumbnail,
 				backgroundColor: isAudioVideoFormat(dctermsFormat)
 					? (allTertiaryColors[randomIndex].value as Color)
 					: Color.Mustard,
-				snipPoint: {
-					start: object.startPoint ? (toSeconds(object.startPoint, true) ?? undefined) : undefined,
-					end: object.endPoint ? (toSeconds(object.endPoint, true) ?? undefined) : undefined,
-				},
 			} as HeroCarouselSlideItem;
 		});
-	}, [elements]);
-
-	const { data: ieObjects, isLoading, isFetching } = useGetIeObjectsPlayableDisplayData(items);
+	}, [elements, ieObjects]);
 
 	return (
 		<article className={clsx('c-block-hero-carousel', className)}>
@@ -74,8 +78,10 @@ export const BlockHeroCarousel: FunctionComponent<BlockHeroCarouselProps> = ({
 				subtitles={subtitles}
 				searchAriaLabel={searchAriaLabel}
 			/>
-			{ieObjects?.length && (
-				<BlockHeroCarouselCarousel elements={ieObjects} isLoading={isLoading || isFetching} />
+			{/* Nothing to show until the objects have been resolved: a slide without a playable url
+			    would render an empty player. */}
+			{!!ieObjects?.length && (
+				<BlockHeroCarouselCarousel elements={items} isLoading={isLoading || isFetching} />
 			)}
 		</article>
 	);

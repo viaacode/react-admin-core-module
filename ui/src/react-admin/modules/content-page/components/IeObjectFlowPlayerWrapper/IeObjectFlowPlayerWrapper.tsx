@@ -14,6 +14,8 @@ import type { PlayableDisplayIeObject } from '~shared/services/ie-objects-servic
 
 export interface IeObjectFlowPlayerWrapperProps extends DefaultComponentProps {
 	ieObject: PlayableDisplayIeObject;
+	/** Overrides the object name as the player's accessible title, e.g. a title set by an editor */
+	title?: string;
 	autoplay?: boolean;
 	poster?: string;
 	onEnded?: () => void;
@@ -23,6 +25,7 @@ export interface IeObjectFlowPlayerWrapperProps extends DefaultComponentProps {
 
 export const IeObjectFlowPlayerWrapper: FunctionComponent<IeObjectFlowPlayerWrapperProps> = ({
 	ieObject,
+	title,
 	autoplay,
 	poster,
 	onEnded,
@@ -71,7 +74,7 @@ export const IeObjectFlowPlayerWrapper: FunctionComponent<IeObjectFlowPlayerWrap
 	const [start, end]: [number | null, number | null] = getStartAndEnd();
 	const shared: Partial<FlowPlayerProps> = {
 		poster: poster ?? imageSrc,
-		title: ieObject.name,
+		title: title || ieObject.name,
 		logo: ieObject.maintainerLogo ?? undefined,
 		autoplay,
 		muted: isMuted,

@@ -1,7 +1,6 @@
 import clsx from 'clsx';
-import { compact, uniq } from 'es-toolkit/compat';
 import type { CSSProperties, FunctionComponent, ReactElement } from 'react';
-import React, { useMemo, useRef } from 'react';
+import React, { useRef } from 'react';
 import { AdminCoreIconName } from '~core/config';
 import { AdminConfigManager } from '~core/config/config.class';
 import { IeObjectFlowPlayerWrapper } from '~modules/content-page/components/IeObjectFlowPlayerWrapper/IeObjectFlowPlayerWrapper.tsx';
@@ -16,13 +15,14 @@ import { formatDateToDayMonthNameYear, getYear } from '~shared/helpers/formatter
 import { isAudioVideoFormat } from '~shared/helpers/is-audio-video-format.ts';
 import { SanitizePreset } from '~shared/helpers/sanitize/presets';
 import { tText } from '~shared/helpers/translation-functions';
-import type { PlayableDisplayIeObject } from '~shared/services/ie-objects-service/ie-objects.types.ts';
 import { HET_ARCHIEF } from '~shared/types';
 import type { DefaultComponentProps } from '~shared/types/components';
 
 import './BlockTimeline.scss';
 
 export interface BlockTimelineProps extends DefaultComponentProps {
+	/** Id of the content block, added by the content block renderer. Empty for an unsaved block. */
+	blockId?: string;
 	elements: TimelineNodeBlockComponentState[];
 }
 
@@ -38,27 +38,16 @@ const TimelineCap: FunctionComponent<{ position: 'start' | 'end' }> = ({ positio
 
 export const BlockTimeline: FunctionComponent<BlockTimelineProps> = ({
 	className,
+	blockId,
 	elements = [],
 }): ReactElement => {
 	const containerRef = useRef<HTMLDivElement>(null);
 	const locale = AdminConfigManager.getConfig().locale;
 
-	// Resolve all objects of the timeline in a single request
-	const pids = useMemo(
-		() =>
-			uniq(
-				compact(
-					elements.map((node) => ({
-						schemaIdentifier:
-							node.visualType === 'OBJECT' && node.mediaItem?.value
-								? String(node.mediaItem.value)
-								: null,
-					})) as PlayableDisplayIeObject[]
-				)
-			),
-		[elements]
-	);
-	const { data: ieObjects } = useGetIeObjectsPlayableDisplayData(pids);
+	// Resolve all objects of the timeline in a single request. Which objects those are is read
+	// from this block's stored config by the proxy, so only the block id goes out; the response
+	// comes back in the order of the nodes below, one (possibly null) entry per node.
+	const { data: ieObjects } = useGetIeObjectsPlayableDisplayData(blockId);
 
 	const scrollToTop = () => {
 		containerRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });

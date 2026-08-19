@@ -8,33 +8,28 @@ export class IeObjectsService {
 		return `${getProxyUrl()}/ie-objects`;
 	}
 
+	/**
+	 * Fetches the playable display data for the ie-objects referenced by a content block.
+	 *
+	 * The objects -- and the snippet start/end times they are cut at -- are read from the stored
+	 * block config by the proxy, so they cannot be tampered with here. The response holds one
+	 * (possibly null) entry per element of the block, in the block's own order: an element that
+	 * has no ie-object selected, or one the visitor has no access to, comes back as null.
+	 */
 	public static async getPlayableDisplayData(
-		schemaIdentifiers: string[] | Partial<PlayableDisplayIeObject>[]
-	): Promise<PlayableDisplayIeObject[]> {
-		// TODO remove this mapping and the endpoint should only accept the blockId
-		// Callers can pass bare schema identifiers or (partial) ie-objects -- pass strings through
-		// as-is, and flatten objects down to the shape the endpoint expects, pulling start/end out
-		// of the nested snipPoint.
-		const objects = schemaIdentifiers.map((item) =>
-			typeof item === 'string'
-				? item
-				: {
-						schemaIdentifier: item.schemaIdentifier,
-						start: item.snipPoint?.start,
-						end: item.snipPoint?.end,
-					}
-		);
+		blockId: string
+	): Promise<(PlayableDisplayIeObject | null)[]> {
 		try {
-			return await fetchWithLogoutJson<PlayableDisplayIeObject[]>(
+			return await fetchWithLogoutJson<(PlayableDisplayIeObject | null)[]>(
 				`${IeObjectsService.getBaseUrl()}/playable-display-data`,
 				{
 					method: 'POST',
-					body: JSON.stringify({ objects }),
+					body: JSON.stringify({ blockId }),
 				}
 			);
 		} catch (err) {
-			throw new CustomError('Failed to fetch themes', err, {
-				schemaIdentifiers,
+			throw new CustomError('Failed to fetch playable display data for content block', err, {
+				blockId,
 			});
 		}
 	}

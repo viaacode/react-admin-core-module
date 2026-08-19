@@ -23,6 +23,7 @@ import {
 	GET_BLOCK_COMPONENT,
 	IGNORE_BLOCK_LEVEL_PROPS,
 	NAVIGABLE_CONTENT_BLOCKS,
+	PLAYABLE_DISPLAY_DATA_BLOCKS,
 	REPEATABLE_CONTENT_BLOCKS,
 	USER_CONTENT_BLOCKS,
 } from './ContentBlockRenderer.const';
@@ -108,6 +109,14 @@ const ContentBlockRenderer: FunctionComponent<ContentBlockPreviewProps> = ({
 	if (USER_CONTENT_BLOCKS.includes(contentBlockConfig.type)) {
 		// Give the block access to the current logged-in user in theAvo.User.CommonUser format
 		blockStateProps.commonUser = commonUser;
+	}
+
+	// The block resolves the objects in its own config through the proxy, which needs to be able to
+	// look that config up. A block that hasn't been saved yet has no id, and renders without the
+	// resolved object data.
+	if (PLAYABLE_DISPLAY_DATA_BLOCKS.includes(contentBlockConfig.type)) {
+		// Avo block ids are numbers, hetarchief block ids are uuids: the blocks only pass it on
+		blockStateProps.blockId = contentBlockConfig.id ? String(contentBlockConfig.id) : undefined;
 	}
 
 	// Pass the content page object to the block

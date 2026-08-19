@@ -38,7 +38,6 @@ export { BlockVideoWrapper } from '~content-blocks/BlockVideo/BlockVideo.wrapper
 export { BlockVideoTitleTextButtonWrapper } from '~content-blocks/BlockVideoTitleTextButton/BlockVideoTitleTextButton.wrapper';
 export { AdminConfigManager, AdminCoreIconName, ToastType } from '~core/config';
 export type { AdminConfig, LinkInfo, ToastInfo } from '~core/config/config.types';
-export type { AudioOrVideoPlayerWrapperProps } from '~shared/components/AudioOrVideoPlayerWrapper';
 export { ContentPageService } from '~modules/content-page/services/content-page.service';
 export { ContentBlockType } from '~modules/content-page/types/content-block.types';
 export type { DbContentPage } from '~modules/content-page/types/content-pages.types';
