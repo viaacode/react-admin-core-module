@@ -1,4 +1,4 @@
-import type { IeObjectType } from '~shared/helpers/mapFormatToType.ts';
+import type { IeObjectType } from '~shared/helpers/map-format-to-type.ts';
 
 export interface Theme {
 	id: string;

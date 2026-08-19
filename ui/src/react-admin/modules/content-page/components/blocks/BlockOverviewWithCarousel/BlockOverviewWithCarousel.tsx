@@ -1,20 +1,19 @@
-import { type ButtonAction, Image } from '@viaa/avo2-components';
-import React, { type FunctionComponent, type ReactElement, useEffect, useState } from 'react';
-import type { Color, HeadingTypeOption } from '~modules/content-page/types/content-block.types';
-import type { DefaultComponentProps } from '~modules/shared/types/components';
-import './BlockOverviewWithCarousel.scss';
 import { Button } from '@meemoo/react-components';
+import { type ButtonAction, Image } from '@viaa/avo2-components';
+import React, { type FunctionComponent, type ReactElement, useState } from 'react';
 import type SwiperController from 'swiper';
 import { Controller } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { AdminCoreIconName } from '~core/config/config.types';
-import { Icon } from '~shared/components/Icon';
-import { tText } from '~shared/helpers/translation-functions.ts';
 import 'swiper/css';
 import clsx from 'clsx';
 import { BlockHeading } from '~content-blocks/BlockHeading';
+import { CarouselButtons } from '~modules/content-page/components/CarouselButtons/CarouselButtons.tsx';
+import type { Color, HeadingTypeOption } from '~modules/content-page/types/content-block.types';
+import type { DefaultComponentProps } from '~modules/shared/types/components';
 import { generateSmartLink } from '~shared/components/SmartLink/SmartLink.tsx';
-import { HET_ARCHIEF } from '~shared/types';
+
+import 'swiper/css';
+import './BlockOverviewWithCarousel.scss';
 
 export interface BlockOverviewWithCarouselProps extends DefaultComponentProps {
 	backgroundColor: string;
@@ -44,20 +43,6 @@ export const BlockOverviewWithCarousel: FunctionComponent<BlockOverviewWithCarou
 	elements,
 }): ReactElement => {
 	const [controlledSwiper, setControlledSwiper] = useState<SwiperController | null>(null);
-	const [showPrevSlideButton, setShowPrevSlideButton] = useState<boolean>(false);
-	const [showNextSlideButton, setShowNextSlideButton] = useState<boolean>(false);
-
-	const updateSlideButtons = () => {
-		setShowPrevSlideButton(controlledSwiper ? !controlledSwiper.isBeginning : false);
-		setShowNextSlideButton(controlledSwiper ? !controlledSwiper.isEnd : false);
-	};
-
-	// biome-ignore lint/correctness/useExhaustiveDependencies: Only used to init the buttons
-	useEffect(() => {
-		if (controlledSwiper) {
-			updateSlideButtons();
-		}
-	}, [controlledSwiper]);
 
 	const renderSlideContent = (
 		image: string,
@@ -121,42 +106,7 @@ export const BlockOverviewWithCarousel: FunctionComponent<BlockOverviewWithCarou
 							undefined,
 							-1
 						)}
-					<div className={'c-block-overview-with-carousel__header-nav'}>
-						{showPrevSlideButton && (
-							<Button
-								variants={['black', 'sm']}
-								icon={<Icon name={AdminCoreIconName.ArrowLeft} />}
-								title={tText(
-									'modules/content-page/components/blocks/block-overview-with-carousel/block-overview-with-carousel___vorige-slide',
-									undefined,
-									[HET_ARCHIEF]
-								)}
-								ariaLabel={tText(
-									'modules/content-page/components/blocks/block-overview-with-carousel/block-overview-with-carousel___vorige-slide',
-									undefined,
-									[HET_ARCHIEF]
-								)}
-								onClick={() => controlledSwiper?.slidePrev()}
-							/>
-						)}
-						{showNextSlideButton && (
-							<Button
-								variants={['black', 'sm']}
-								icon={<Icon name={AdminCoreIconName.ArrowRight} />}
-								title={tText(
-									'modules/content-page/components/blocks/block-overview-with-carousel/block-overview-with-carousel___volgende-slide',
-									undefined,
-									[HET_ARCHIEF]
-								)}
-								ariaLabel={tText(
-									'modules/content-page/components/blocks/block-overview-with-carousel/block-overview-with-carousel___volgende-slide',
-									undefined,
-									[HET_ARCHIEF]
-								)}
-								onClick={() => controlledSwiper?.slideNext()}
-							/>
-						)}
-					</div>
+					<CarouselButtons controlledSwiper={controlledSwiper} />
 				</div>
 			</div>
 			<Swiper
@@ -166,7 +116,6 @@ export const BlockOverviewWithCarousel: FunctionComponent<BlockOverviewWithCarou
 				slidesPerView="auto"
 				spaceBetween={16}
 				onSwiper={setControlledSwiper}
-				onTransitionEnd={() => updateSlideButtons()}
 				watchSlidesProgress={true}
 			>
 				{elements.map(

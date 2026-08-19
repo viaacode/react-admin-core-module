@@ -5,7 +5,7 @@ import type { FunctionComponent } from 'react';
 import React from 'react';
 import type { IeObjectMediaInfo } from '~shared/components/IeObjectMedia';
 import { SmartLink } from '~shared/components/SmartLink/SmartLink';
-import { IeObjectType } from '~shared/helpers/mapFormatToType.ts';
+import { IeObjectType } from '~shared/helpers/map-format-to-type.ts';
 import { tText } from '~shared/helpers/translation-functions';
 import { HET_ARCHIEF } from '~shared/types';
 

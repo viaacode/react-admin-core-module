@@ -33,7 +33,7 @@ const fetchTimelineIeObjects = async (
 
 export const useGetTimelineIeObjects = (pids: string[]) => {
 	return useQuery<Record<string, IeObjectMediaInfo>>({
-		queryKey: [QUERY_KEYS.GET_IE_OBJECT, ...pids],
+		queryKey: [QUERY_KEYS.GET_IE_OBJECTS_PLAYABLE_DISPLAY_DATA, ...pids],
 		queryFn: () => fetchTimelineIeObjects(pids),
 		enabled: pids.length > 0,
 		staleTime: 60 * 60 * 1000, // 1 hour

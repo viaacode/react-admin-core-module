@@ -3,10 +3,10 @@ import type { FunctionComponent } from 'react';
 import React, { useState } from 'react';
 import { AdminConfigManager } from '~core/config/config.class';
 import type { IeObjectMediaInfo } from '~shared/components/IeObjectMedia/IeObjectMedia.types';
-import { IeObjectType } from '~shared/helpers/mapFormatToType.ts';
 import type { DefaultComponentProps } from '~shared/types/components';
 
 import './IeObjectMedia.scss';
+import { IeObjectType } from '~shared/helpers/map-format-to-type.ts';
 
 // Formats that the AudioOrVideoPlayer can play. Other formats (newspaper, image) fall back to the thumbnail.
 const PLAYABLE_FORMATS: IeObjectType[] = [

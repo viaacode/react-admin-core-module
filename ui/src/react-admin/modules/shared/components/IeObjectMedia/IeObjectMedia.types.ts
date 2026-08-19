@@ -1,5 +1,5 @@
 import type { IeObjectRepresentation } from '~shared/components/AudioOrVideoPlayer/AudioOrVideoPlayer.types';
-import type { IeObjectType } from '~shared/helpers/mapFormatToType.ts';
+import type { IeObjectType } from '~shared/helpers/map-format-to-type.ts';
 
 /**
  * The subset of an ie-object that is needed to render its media (player or thumbnail).

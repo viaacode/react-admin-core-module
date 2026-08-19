@@ -194,6 +194,7 @@ export enum ContentBlockType {
 	ThemeReels = 'THEME_REELS',
 	ObjectsGrid = 'OBJECTS_GRID',
 	OverviewThemes = 'OVERVIEW_THEMES',
+	HeroCarousel = 'HERO_CAROUSEL',
 	Timeline = 'TIMELINE',
 }
 
@@ -619,6 +620,7 @@ export interface HetArchiefQuoteBlockComponentState {
 export interface HetArchiefIeObject {
 	name: string;
 	schemaIdentifier: string;
+	dctermsFormat: string;
 }
 
 export type TimelineNodeVisualType = 'NONE' | 'OBJECT' | 'IMAGE';

@@ -2,11 +2,14 @@ import clsx from 'clsx';
 import { compact, uniq } from 'es-toolkit/compat';
 import type { CSSProperties, FunctionComponent, ReactElement } from 'react';
 import React, { useMemo, useRef } from 'react';
+import { BlockTimelineObjectMeta } from '~content-blocks/BlockTimeline/BlockTimelineObjectMeta.tsx';
 import { AdminConfigManager } from '~core/config/config.class';
 import type { TimelineNodeBlockComponentState } from '~modules/content-page/types/content-block.types';
 import { Color } from '~modules/content-page/types/content-block.types';
+import { CopyrightAttribution } from '~shared/components/CopyrightAttribution';
 import Html from '~shared/components/Html/Html';
 import { Icon } from '~shared/components/Icon/Icon';
+import { IeObjectMedia } from '~shared/components/IeObjectMedia';
 import { formatDateToDayMonthNameYear, getYear } from '~shared/helpers/formatters/date';
 import { SanitizePreset } from '~shared/helpers/sanitize/presets';
 import { tText } from '~shared/helpers/translation-functions';
@@ -15,10 +18,7 @@ import type { DefaultComponentProps } from '~shared/types/components';
 import { useGetTimelineIeObjects } from './hooks/useGetTimelineIeObjects';
 
 import './BlockTimeline.scss';
-import { BlockTimelineObjectMeta } from '~content-blocks/BlockTimeline/BlockTimelineObjectMeta.tsx';
-import { CopyrightAttribution } from '~shared/components/CopyrightAttribution';
-import { IeObjectMedia } from '~shared/components/IeObjectMedia';
-import { AdminCoreIconName } from '../../../../../../client.ts';
+import { AdminCoreIconName } from '~core/config';
 
 export interface BlockTimelineProps extends DefaultComponentProps {
 	elements: TimelineNodeBlockComponentState[];

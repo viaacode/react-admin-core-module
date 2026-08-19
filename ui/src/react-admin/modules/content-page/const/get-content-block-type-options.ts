@@ -230,6 +230,14 @@ export const GET_CONTENT_BLOCK_TYPE_OPTIONS: () => SelectOption<string>[] = () =
 		},
 		{
 			label: tText(
+				'modules/content-page/const/get-content-block-type-options___hero-carousel',
+				{},
+				[HET_ARCHIEF]
+			),
+			value: ContentBlockType.HeroCarousel,
+		},
+		{
+			label: tText(
 				'react-admin/modules/content-page/const/get-content-block-type-options___tijdslijn',
 				{},
 				[HET_ARCHIEF]

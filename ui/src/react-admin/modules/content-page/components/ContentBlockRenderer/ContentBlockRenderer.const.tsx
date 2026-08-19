@@ -9,6 +9,7 @@ import { BlockContentPageMeta } from '~content-blocks/BlockContentPageMeta';
 import { BlockCTAsWrapper } from '~content-blocks/BlockCTAs';
 import { BlockEventbrite } from '~content-blocks/BlockEventbrite';
 import { BlockHeading } from '~content-blocks/BlockHeading';
+import { BlockHeroCarousel } from '~content-blocks/BlockHeroCarousel';
 import { BlockHetArchiefHeaderSearch } from '~content-blocks/BlockHetArchiefHeaderSearch/BlockHetArchiefHeaderSearch';
 import { BlockHetArchiefImageTextBackground } from '~content-blocks/BlockHetArchiefImageTextBackground';
 import { BlockHetArchiefQuote } from '~content-blocks/BlockHetArchiefQuote';
@@ -100,6 +101,7 @@ export function GET_BLOCK_COMPONENT(
 		[ContentBlockType.HighlightText]: BlockHighlightText,
 		[ContentBlockType.ThemeReels]: BlockThemeReels,
 		[ContentBlockType.OverviewThemes]: BlockOverviewThemes,
+		[ContentBlockType.HeroCarousel]: BlockHeroCarousel,
 		[ContentBlockType.Timeline]: BlockTimeline,
 
 		// Avo specific blocks

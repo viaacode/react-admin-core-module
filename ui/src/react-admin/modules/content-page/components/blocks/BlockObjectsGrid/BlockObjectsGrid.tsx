@@ -9,7 +9,7 @@ import { SmartLink } from '~modules/shared/components/SmartLink/SmartLink';
 import { Icon } from '~shared/components/Icon';
 import { Link } from '~shared/components/Link';
 import { BREAKPOINTS } from '~shared/consts/breakpoints.ts';
-import { getIconFromObjectType } from '~shared/helpers/icon.ts';
+import { getIconFromObjectType } from '~shared/helpers/get-icon-from-object-type';
 import { tText } from '~shared/helpers/translation-functions';
 import { HET_ARCHIEF } from '~shared/types';
 import type { BlockObjectsGridProps, ObjectsGridItem, OrderedTile } from './BlockObjectsGrid.types';
