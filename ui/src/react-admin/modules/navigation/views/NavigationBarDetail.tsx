@@ -7,7 +7,7 @@ import { cloneDeep, isNil, startCase } from 'es-toolkit';
 import type { FC, ReactElement, ReactNode } from 'react';
 import React, { useEffect, useRef, useState } from 'react';
 import { AdminConfigManager } from '~core/config/config.class';
-import { ToastType } from '~core/config/config.types';
+import { AdminCoreIconName, ToastType } from '~core/config/config.types';
 import { invalidateNavigationQueries } from '~modules/navigation/helpers/invalidate-navigation-queries';
 import { reindexNavigationItems } from '~modules/navigation/helpers/reorder-navigation-items';
 import { useGetNavigationBarItems } from '~modules/navigation/hooks/use-get-navigation-bar-items';
@@ -367,7 +367,7 @@ export const NavigationBarDetail: FC<NavigationDetailProps> = ({ navigationBarId
 			>
 				<AdminLayout.Back>
 					<Button type="borderless" onClick={onGoBack}>
-						<Icon name="chevronLeft"></Icon>
+						<Icon name={AdminCoreIconName.ChevronLeft} />
 					</Button>
 				</AdminLayout.Back>
 				<AdminLayout.Actions>

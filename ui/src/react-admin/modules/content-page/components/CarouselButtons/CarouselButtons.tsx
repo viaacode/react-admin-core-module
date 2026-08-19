@@ -8,6 +8,7 @@ import 'swiper/css';
 import { HET_ARCHIEF } from '~shared/types';
 import './CarouselButtons.scss';
 import { clsx } from 'clsx';
+import { AdminCoreIconName } from '~core/config';
 
 export interface CarouselButtonsProps extends DefaultComponentProps {
 	controlledSwiper?: SwiperController | null;
@@ -62,7 +63,7 @@ export const CarouselButtons: FunctionComponent<CarouselButtonsProps> = ({
 		<div className={clsx('c-carousel-buttons', className)}>
 			<Button
 				variants={['black', 'sm']}
-				icon={<Icon name="arrowLeft" />}
+				icon={<Icon name={AdminCoreIconName.ArrowLeft} />}
 				title={tText(
 					'modules/content-page/components/carousel-buttons/carousel-buttons___vorige-slide',
 					undefined,
@@ -78,7 +79,7 @@ export const CarouselButtons: FunctionComponent<CarouselButtonsProps> = ({
 			/>
 			<Button
 				variants={['black', 'sm']}
-				icon={<Icon name="arrowRight" />}
+				icon={<Icon name={AdminCoreIconName.ArrowRight} />}
 				title={tText(
 					'modules/content-page/components/carousel-buttons/carousel-buttons___volgende-slide',
 					undefined,

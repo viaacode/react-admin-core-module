@@ -8,6 +8,7 @@ import {
 } from '@meemoo/react-components';
 import clsx from 'clsx';
 import { type FC, useState } from 'react';
+import { AdminCoreIconName } from '~core/config';
 import { Icon } from '~shared/components/Icon/Icon';
 
 export interface SearchDropdownOption {
@@ -67,7 +68,7 @@ export const SearchDropdown: FC<SearchDropdownProps> = ({
 						className={clsx('c-search-dropdown__active-icon', {
 							'c-search-dropdown__active-icon--open': isOpen,
 						})}
-						name="angleDown"
+						name={AdminCoreIconName.AngleDown}
 					/>
 				</button>
 			</DropdownButton>

@@ -17,7 +17,7 @@ import {
 	SearchDropdown,
 	type SearchDropdownOption,
 } from '~content-blocks/BlockHeroCarousel/SearchDropdown.tsx';
-import { AdminConfigManager } from '~core/config';
+import { AdminConfigManager, AdminCoreIconName } from '~core/config';
 import { navigateFunc } from '~shared/helpers/navigate-fnc.ts';
 import { HET_ARCHIEF } from '~shared/types';
 
@@ -164,7 +164,7 @@ export const BlockHeroCarouselSearch: FunctionComponent<BlockHeroCarouselSearchP
 									[HET_ARCHIEF]
 								)}
 							>
-								<Icon name="filter" />
+								<Icon name={AdminCoreIconName.Filter} />
 							</button>
 						}
 						onChange={(evt) => setSearchTerm(evt.target.value)}

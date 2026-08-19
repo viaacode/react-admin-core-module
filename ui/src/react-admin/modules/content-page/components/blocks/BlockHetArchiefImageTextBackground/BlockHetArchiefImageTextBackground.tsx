@@ -18,7 +18,7 @@ import type {
 } from '~modules/content-page/types/content-block.types';
 import { generateSmartLink } from '~modules/shared/components/SmartLink/SmartLink';
 import type { DefaultComponentProps } from '~modules/shared/types/components';
-import { Icon } from '~shared/components/Icon/Icon';
+import { ContentPageIcon } from '~shared/components/Icon/Icon';
 import { BlockHeading } from '../BlockHeading/BlockHeading';
 import './BlockHetArchiefImageTextBackground.scss';
 import type { ContentPageWidth } from '~modules/content-page/types/content-pages.types';
@@ -186,7 +186,7 @@ export const BlockHetArchiefImageTextBackground: FunctionComponent<
 							type={buttonType}
 							icon={buttonIcon}
 							iconPosition={buttonIconAlignment}
-							renderIcon={() => (buttonIcon ? <Icon name={buttonIcon} /> : null)}
+							renderIcon={() => (buttonIcon ? <ContentPageIcon name={buttonIcon} /> : null)}
 						/>,
 						buttonAltTitle || buttonLabel
 					)}

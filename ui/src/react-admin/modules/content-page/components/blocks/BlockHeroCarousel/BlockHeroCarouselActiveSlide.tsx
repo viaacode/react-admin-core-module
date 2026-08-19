@@ -9,7 +9,7 @@ import clsx from 'clsx';
 import { isNil } from 'es-toolkit';
 import React, { type FunctionComponent, type ReactElement, useState } from 'react';
 import type { HeroCarouselSlideItem } from '~content-blocks/BlockHeroCarousel/BlockHeroCarousel.types.ts';
-import { AdminConfigManager } from '~core/config';
+import { AdminConfigManager, AdminCoreIconName } from '~core/config';
 import { Color } from '~modules/content-page/types/content-block.types.ts';
 import type { DefaultComponentProps } from '~modules/shared/types/components';
 import { Icon } from '~shared/components/Icon';
@@ -142,7 +142,7 @@ export const BlockHeroCarouselActiveSlide: FunctionComponent<BlockHeroCarouselAc
 			<div className="c-block-hero-carousel__carousel-slide-image-controls">
 				<Button
 					variants={['black', 'sm']}
-					icon={<Icon name={isPaused ? IconName.play : IconName.pause} />}
+					icon={<Icon name={isPaused ? AdminCoreIconName.Play : AdminCoreIconName.Pause} />}
 					title={
 						isPaused
 							? tText(

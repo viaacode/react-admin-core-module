@@ -14,7 +14,6 @@ $text-inset-right-tablet: variables.$g-spacer-unit * 8;
 // which is the point - an unbounded 9999px radius would keep eating into a long quote.
 $frame-radius: 40rem;
 $frame-radius-mobile: 12rem;
-
 $mark-font-size: variables.$g-spacer-unit * 8;
 $mark-line-height: variables.$g-spacer-unit * 9;
 
@@ -24,6 +23,7 @@ $mark-line-height: variables.$g-spacer-unit * 9;
 	grid-template-areas:
 		'mark quote'
 		'.    author';
+	position: relative;
 	margin: 0;
 	padding: variables.$g-spacer-unit * 5 $text-inset-right variables.$g-spacer-unit * 5 0;
 	background: var(--frame-color);
@@ -34,11 +34,14 @@ $mark-line-height: variables.$g-spacer-unit * 9;
 	overflow-wrap: break-word;
 
 	&__mark {
-		grid-area: mark;
-
-		// Figma node 455:5723 sits at top 28 while the quote sits at top 40, so the mark is
-		// raised out of the shared grid row and centred in its own column.
-		margin-top: -(variables.$g-spacer-unit * 1.5);
+		// Taken out of flow: the mark's line box is far taller than a line of quote text, so
+		// leaving it in the grid stretched the first row and pushed the author away from a
+		// short quote. Figma node 455:5723 sits at top 28 while the quote sits at top 40, so
+		// it is offset by that difference from the frame's own top padding.
+		position: absolute;
+		top: variables.$g-spacer-unit * 3.5;
+		left: 0;
+		width: $mark-column-width;
 		text-align: center;
 		font-size: $mark-font-size;
 		line-height: $mark-line-height;
@@ -46,7 +49,9 @@ $mark-line-height: variables.$g-spacer-unit * 9;
 		@media (max-width: variables.$g-bp2) {
 			// Figma node 455:7187: in the stacked layout the mark is in normal flow and
 			// left-aligned with the text below it.
-			margin-top: 0;
+			grid-area: mark;
+			position: static;
+			width: auto;
 			text-align: left;
 		}
 	}
@@ -57,7 +62,7 @@ $mark-line-height: variables.$g-spacer-unit * 9;
 		white-space: pre-line;
 
 		// Figma node 455:5724, style "P - XL".
-		@include typography.sofia-pro-body-xl();
+		@include typography.sofia-pro-body-xl;
 
 		@media (max-width: variables.$g-bp2) {
 			// Figma node 455:7186: gap below the mark, plus the padding on the text group that
@@ -72,7 +77,7 @@ $mark-line-height: variables.$g-spacer-unit * 9;
 		margin-top: variables.$g-spacer-unit;
 
 		// Figma node 455:5725, style "P - S".
-		@include typography.sofia-pro-body-xs();
+		@include typography.sofia-pro-body-xs;
 
 		@media (max-width: variables.$g-bp2) {
 			margin-bottom: variables.$g-spacer-unit;

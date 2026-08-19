@@ -1,4 +1,4 @@
-import type { IconName } from '@viaa/avo2-components';
+import { AdminCoreIconName } from '~core/config/config.types';
 import {
 	type IeObjectType,
 	mapDcTermsFormatToSimpleType,
@@ -14,23 +14,23 @@ import {
 export function getIconFromObjectType(
 	format: IeObjectType | undefined,
 	accessible: boolean
-): IconName {
+): AdminCoreIconName {
 	const simpleType = mapDcTermsFormatToSimpleType(format);
 
 	switch (simpleType) {
 		case SimpleIeObjectType.VIDEO:
-			return (accessible ? 'video--light' : 'no-video--light') as IconName;
+			return accessible ? AdminCoreIconName.Video : AdminCoreIconName.NoVideo;
 
 		case SimpleIeObjectType.AUDIO:
-			return (accessible ? 'audio--light' : 'no-audio--light') as IconName;
+			return accessible ? AdminCoreIconName.Audio : AdminCoreIconName.NoAudio;
 
 		case SimpleIeObjectType.NEWSPAPER:
-			return (accessible ? 'newspaper--light' : 'no-newspaper--light') as IconName;
+			return accessible ? AdminCoreIconName.Newspaper : AdminCoreIconName.NoNewspaper;
 
 		case SimpleIeObjectType.IMAGE:
-			return (accessible ? 'image--light' : 'no-image--light') as IconName;
+			return accessible ? AdminCoreIconName.Image : AdminCoreIconName.NoImage;
 
 		default:
-			return (accessible ? 'file--light' : 'no-file--light') as IconName;
+			return accessible ? AdminCoreIconName.File : AdminCoreIconName.NoFile;
 	}
 }

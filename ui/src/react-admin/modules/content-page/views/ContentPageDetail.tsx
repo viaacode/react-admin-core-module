@@ -17,7 +17,7 @@ import { stringifyUrl } from 'query-string';
 import type { FC, ReactElement } from 'react';
 import React, { useCallback, useEffect, useState } from 'react';
 import { AdminConfigManager } from '~core/config/config.class';
-import { ToastType } from '~core/config/config.types';
+import { AdminCoreIconName, ToastType } from '~core/config/config.types';
 import { ContentPageRenderer } from '~modules/content-page/components/ContentPageRenderer/ContentPageRenderer';
 import { CONTENT_PAGE_PREVIEW_QUERY_PARAM } from '~modules/content-page/components/ContentPageRenderer/ContentPageRenderer.consts';
 import PublishContentPageModal from '~modules/content-page/components/PublishContentPageModal';
@@ -526,7 +526,7 @@ export const ContentPageDetail: FC<ContentPageDetailProps> = ({
 		<AdminLayout className={className} pageTitle={pageTitle}>
 			<AdminLayout.Back>
 				<Button type="borderless" onClick={onGoBack}>
-					<Icon name="chevronLeft" />
+					<Icon name={AdminCoreIconName.ChevronLeft} />
 				</Button>
 			</AdminLayout.Back>
 			<AdminLayout.Actions>{renderContentActions()}</AdminLayout.Actions>

@@ -1,10 +1,11 @@
 import { Button } from '@meemoo/react-components';
 import { type ButtonAction, Image } from '@viaa/avo2-components';
-import clsx from 'clsx';
 import React, { type FunctionComponent, type ReactElement, useState } from 'react';
 import type SwiperController from 'swiper';
 import { Controller } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import clsx from 'clsx';
 import { BlockHeading } from '~content-blocks/BlockHeading';
 import { CarouselButtons } from '~modules/content-page/components/CarouselButtons/CarouselButtons.tsx';
 import type { Color, HeadingTypeOption } from '~modules/content-page/types/content-block.types';

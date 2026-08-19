@@ -9,6 +9,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { useGetThemeWithObjects } from '~content-blocks/BlockThemeReels/hooks/useGetThemeWithObjects.ts';
 import { AdminConfigManager } from '~core/config';
 import { CarouselButtons } from '~modules/content-page/components/CarouselButtons/CarouselButtons.tsx';
+import { AdminCoreIconName } from '~core/config/config.types';
 import type { DefaultComponentProps } from '~modules/shared/types/components';
 import { App, Locale } from '~modules/translations/translations.core.types.ts';
 import { Icon } from '~shared/components/Icon';
@@ -229,7 +230,7 @@ export const BlockThemeReelSection: FunctionComponent<BlockThemeReelSectionProps
 									>
 										<Button
 											variants={['black', 'sm', 'block']}
-											icon={<Icon name="add" />}
+											icon={<Icon name={AdminCoreIconName.Add} />}
 											disabled
 											tabIndex={-1}
 										/>
