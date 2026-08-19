@@ -133,7 +133,6 @@
 
 		&:hover:not(&--first) {
 			.c-button,
-			.c-block-theme-reels-section__cta-icons,
 			.c-block-theme-reels-section__slide-image > img {
 				@include animations.zoom-in-animation;
 			}
@@ -297,8 +296,6 @@
 			align-items: center;
 			gap: variables.$g-spacer-unit;
 			font-size: 2.4rem;
-
-			@include animations.zoom-in-transition;
 		}
 	}
 }
