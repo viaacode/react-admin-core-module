@@ -10,7 +10,8 @@ import { CONTENT_PAGE_META_BLOCK_CONFIG } from '~content-blocks/BlockContentPage
 import { CTAS_BLOCK_CONFIG } from '~content-blocks/BlockCTAs';
 import { EVENTBRITE_BLOCK_CONFIG } from '~content-blocks/BlockEventbrite';
 import { HEADING_BLOCK_CONFIG } from '~content-blocks/BlockHeading';
-import { HET_ARCHIEF_HEADER_SEARCH_BLOCK_CONFIG } from '~content-blocks/BlockHetArchiefHeaderSearch/BlockHetArchiefHeaderSearch.editorconfig';
+import { HERO_CAROUSEL_CONFIG } from '~content-blocks/BlockHeroCarousel';
+import { HET_ARCHIEF_HEADER_SEARCH_BLOCK_CONFIG } from '~content-blocks/BlockHetArchiefHeaderSearch';
 import { HET_ARCHIEF_IMAGE_TEXT_BACKGROUND_BLOCK_CONFIG } from '~content-blocks/BlockHetArchiefImageTextBackground';
 import { HET_ARCHIEF_QUOTE_BLOCK_CONFIG } from '~content-blocks/BlockHetArchiefQuote';
 import { CONTENT_HIGHLIGHT_TEXT_CONFIG } from '~content-blocks/BlockHighlightText';
@@ -99,4 +100,5 @@ export const CONTENT_BLOCK_CONFIG_MAP: Record<
 	[ContentBlockType.ThemeReels]: THEME_REELS_BLOCK_CONFIG,
 	[ContentBlockType.ObjectsGrid]: OBJECTS_GRID_BLOCK_CONFIG,
 	[ContentBlockType.OverviewThemes]: OVERVIEW_THEMES_BLOCK_CONFIG,
+	[ContentBlockType.HeroCarousel]: HERO_CAROUSEL_CONFIG,
 };

@@ -194,6 +194,7 @@ export enum ContentBlockType {
 	ThemeReels = 'THEME_REELS',
 	ObjectsGrid = 'OBJECTS_GRID',
 	OverviewThemes = 'OVERVIEW_THEMES',
+	HeroCarousel = 'HERO_CAROUSEL',
 }
 
 export enum ContentBlockEditor {
@@ -617,4 +618,5 @@ export interface HetArchiefQuoteBlockComponentState {
 export interface HetArchiefIeObject {
 	name: string;
 	schemaIdentifier: string;
+	dctermsFormat: string;
 }

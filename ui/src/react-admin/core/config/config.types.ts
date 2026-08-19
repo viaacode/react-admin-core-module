@@ -228,6 +228,8 @@ export enum AdminCoreIconName {
 	Video = 'video',
 	View = 'view',
 	Warning = 'warning',
+	Play = 'play',
+	Pause = 'pause',
 }
 
 export interface IconConfig {

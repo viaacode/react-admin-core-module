@@ -1,5 +1,9 @@
 import { AdminCoreIconName } from '~core/config/config.types';
-import { ObjectType } from '~shared/helpers/mapFormatToType.ts';
+import {
+	type IeObjectType,
+	mapDcTermsFormatToSimpleType,
+	SimpleIeObjectType,
+} from '~shared/helpers/map-format-to-type.ts';
 
 /**
  * Icon for an object type. Mirrors the client's `getIconFromObjectType`
@@ -8,24 +12,22 @@ import { ObjectType } from '~shared/helpers/mapFormatToType.ts';
  * struck-through ("no-…") variant.
  */
 export function getIconFromObjectType(
-	format: ObjectType | undefined,
+	format: IeObjectType | undefined,
 	accessible: boolean
 ): AdminCoreIconName {
-	switch (format) {
-		case ObjectType.film:
-		case ObjectType.video:
-		case ObjectType.videofragment:
+	const simpleType = mapDcTermsFormatToSimpleType(format);
+
+	switch (simpleType) {
+		case SimpleIeObjectType.VIDEO:
 			return accessible ? AdminCoreIconName.Video : AdminCoreIconName.NoVideo;
 
-		case ObjectType.audio:
-		case ObjectType.audiofragment:
+		case SimpleIeObjectType.AUDIO:
 			return accessible ? AdminCoreIconName.Audio : AdminCoreIconName.NoAudio;
 
-		case ObjectType.newspaper:
-		case ObjectType.newspaperpage:
+		case SimpleIeObjectType.NEWSPAPER:
 			return accessible ? AdminCoreIconName.Newspaper : AdminCoreIconName.NoNewspaper;
 
-		case ObjectType.image:
+		case SimpleIeObjectType.IMAGE:
 			return accessible ? AdminCoreIconName.Image : AdminCoreIconName.NoImage;
 
 		default:
