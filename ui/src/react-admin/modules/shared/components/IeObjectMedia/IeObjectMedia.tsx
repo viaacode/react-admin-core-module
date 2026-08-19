@@ -3,21 +3,10 @@ import type { FunctionComponent } from 'react';
 import React, { useState } from 'react';
 import { AdminConfigManager } from '~core/config/config.class';
 import type { IeObjectMediaInfo } from '~shared/components/IeObjectMedia/IeObjectMedia.types';
+import { isAudioFormat, isAudioVideoFormat } from '~shared/helpers/is-audio-video-format.ts';
 import type { DefaultComponentProps } from '~shared/types/components';
 
 import './IeObjectMedia.scss';
-import { IeObjectType } from '~shared/helpers/map-format-to-type.ts';
-
-// Formats that the AudioOrVideoPlayer can play. Other formats (newspaper, image) fall back to the thumbnail.
-const PLAYABLE_FORMATS: IeObjectType[] = [
-	IeObjectType.video,
-	IeObjectType.videofragment,
-	IeObjectType.audio,
-	IeObjectType.audiofragment,
-	IeObjectType.film,
-];
-
-const AUDIO_FORMATS: IeObjectType[] = [IeObjectType.audio, IeObjectType.audiofragment];
 
 export interface IeObjectMediaProps extends DefaultComponentProps {
 	ieObject: IeObjectMediaInfo;
@@ -51,12 +40,12 @@ export const IeObjectMedia: FunctionComponent<IeObjectMediaProps> = ({
 		!!AudioOrVideoPlayer &&
 		!!representation &&
 		!!ieObject.dctermsFormat &&
-		PLAYABLE_FORMATS.includes(ieObject.dctermsFormat);
+		isAudioVideoFormat(ieObject.dctermsFormat);
 
 	// The thumbnail the proxy returns for audio is a signed link to an ugly speaker icon, so we
 	// show the client's own waveform image instead. Same as the client does for its media cards.
 	const thumbnailUrl =
-		ieObject.dctermsFormat && AUDIO_FORMATS.includes(ieObject.dctermsFormat)
+		ieObject.dctermsFormat && isAudioFormat(ieObject.dctermsFormat)
 			? defaultAudioStill
 			: ieObject.thumbnailUrl;
 

@@ -2,6 +2,7 @@ import type { SelectOption } from '@viaa/avo2-components';
 import { GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF } from '~modules/content-page/const/get-color-options';
 import type { FileUploadProps } from '~shared/components/FileUpload/FileUpload';
 import { tText } from '~shared/helpers/translation-functions';
+import { validateRequiredValue } from '~shared/helpers/validation.ts';
 import { HET_ARCHIEF } from '~shared/types';
 import type {
 	ContentBlockConfig,
@@ -11,7 +12,6 @@ import type {
 	TimelineNodeVisualType,
 } from '../../../types/content-block.types';
 import { Color, ContentBlockEditor, ContentBlockType } from '../../../types/content-block.types';
-
 import {
 	BLOCK_FIELD_DEFAULTS,
 	BLOCK_STATE_DEFAULTS,
@@ -96,15 +96,14 @@ export const TIMELINE_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				),
 				editorType: ContentBlockEditor.DatePicker,
 				validator: (value: string) =>
-					value
-						? []
-						: [
-								tText(
-									'react-admin/modules/content-page/components/blocks/block-timeline/block-timeline___datum-is-verplicht',
-									{},
-									[HET_ARCHIEF]
-								),
-							],
+					validateRequiredValue(
+						value,
+						tText(
+							'react-admin/modules/content-page/components/blocks/block-timeline/block-timeline___datum-is-verplicht',
+							{},
+							[HET_ARCHIEF]
+						)
+					),
 			},
 			title: TEXT_FIELD(
 				{
@@ -140,15 +139,14 @@ export const TIMELINE_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 					options: GET_TIMELINE_NODE_VISUAL_TYPE_OPTIONS(),
 				},
 				validator: (value: string) =>
-					value
-						? []
-						: [
-								tText(
-									'react-admin/modules/content-page/components/blocks/block-timeline/block-timeline___keuze-van-visuele-elementen-is-verplicht',
-									{},
-									[HET_ARCHIEF]
-								),
-							],
+					validateRequiredValue(
+						value,
+						tText(
+							'react-admin/modules/content-page/components/blocks/block-timeline/block-timeline___keuze-van-visuele-elementen-is-verplicht',
+							{},
+							[HET_ARCHIEF]
+						)
+					),
 			},
 			mediaItem: {
 				label: tText(

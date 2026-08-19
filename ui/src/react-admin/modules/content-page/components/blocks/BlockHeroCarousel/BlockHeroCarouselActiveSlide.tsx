@@ -35,6 +35,7 @@ export const BlockHeroCarouselActiveSlide: FunctionComponent<BlockHeroCarouselAc
 	onEnded,
 	isLoading,
 	isMuted,
+	onMutedChange,
 }): ReactElement => {
 	const { data: mediaDuration } = useGetFileDuration(item?.playableUrl);
 	const [isPaused, setIsPaused] = useState(false);
@@ -84,7 +85,9 @@ export const BlockHeroCarouselActiveSlide: FunctionComponent<BlockHeroCarouselAc
 		logo: item.maintainerLogo ?? undefined,
 		autoplay: true,
 		muted: isMuted,
+		onMutedChange,
 		onEnded: onEnded,
+		onError: onEnded,
 		token: AdminConfigManager.getConfig().flowplayer.FLOW_PLAYER_TOKEN,
 		dataPlayerId: AdminConfigManager.getConfig().flowplayer.FLOW_PLAYER_ID,
 		ui: isAudioVideoFormat(item.dctermsFormat) ? undefined : 1, // 1 = NO_FULLSCREEN

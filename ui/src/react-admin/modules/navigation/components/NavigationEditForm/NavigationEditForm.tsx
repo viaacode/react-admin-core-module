@@ -85,7 +85,7 @@ export const NavigationEditForm: FunctionComponent<NavigationEditFormProps> = ({
 			if (!currentNavigationItem) {
 				return;
 			}
-			let resolvedContentUserGroupIds: (string | number)[] = [];
+			let resolvedContentUserGroupIds: (string | number)[] = contentUserGroupIds;
 			const navItemUserGroupIds: string[] = currentNavigationItem.userGroupIds || [];
 			const allUserGroupIds: string[] = allUserGroups.map((ug) => String(ug.value));
 
