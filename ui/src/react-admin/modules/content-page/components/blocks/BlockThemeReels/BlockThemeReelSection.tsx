@@ -72,6 +72,11 @@ export const BlockThemeReelSection: FunctionComponent<BlockThemeReelSectionProps
 	const themeDescription = locale === Locale.En ? theme.descriptionEn : theme.descriptionNl;
 	const themeContentPagePath =
 		locale === Locale.En ? theme.contentPagePathEn : theme.contentPagePathNl;
+	const ctaLabel = tText(
+		'modules/content-page/components/blocks/block-theme-reels/block-theme-reel-section___toon-alle-count-materialen',
+		{ count: String(theme.total) },
+		[App.HET_ARCHIEF]
+	);
 
 	const renderSlideContent = (
 		image: string,
@@ -274,23 +279,13 @@ export const BlockThemeReelSection: FunctionComponent<BlockThemeReelSectionProps
 									className="c-block-theme-reels-section__cta"
 									style={{ backgroundColor: ctaBackgroundColor }}
 								>
-									<span className="c-block-theme-reels-section__cta-label">
-										{tText(
-											'modules/content-page/components/blocks/block-theme-reels/block-theme-reel-section___toon-alle-materialen-voor-dit-theme',
-											{},
-											[App.HET_ARCHIEF]
-										)}
-									</span>
+									<span className="c-block-theme-reels-section__cta-label">{ctaLabel}</span>
 									<span className="c-block-theme-reels-section__cta-icons" aria-hidden>
 										<Icon name={'collection' as IconName} />
 										<Icon name={'arrowDownRight' as IconName} />
 									</span>
 								</div>,
-								tText(
-									'modules/content-page/components/blocks/block-theme-reels/block-theme-reel-section___toon-alle-materialen-voor-dit-theme',
-									{},
-									[App.HET_ARCHIEF]
-								),
+								ctaLabel,
 								clsx(
 									'c-block-theme-reels-section__slide',
 									'c-block-theme-reels-section__slide--last'
