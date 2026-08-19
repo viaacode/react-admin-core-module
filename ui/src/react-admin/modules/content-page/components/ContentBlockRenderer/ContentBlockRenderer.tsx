@@ -32,6 +32,8 @@ import './ContentBlockRenderer.scss';
 interface ContentBlockPreviewProps {
 	contentBlockConfig: ContentBlockConfig;
 	contentPageInfo: Partial<ContentPageInfo>;
+	/** Renders a block config that is being edited, rather than one as it was last saved */
+	isEditing?: boolean;
 	onClick: () => void;
 	className?: string;
 }
@@ -41,6 +43,7 @@ interface ContentBlockPreviewProps {
 const ContentBlockRenderer: FunctionComponent<ContentBlockPreviewProps> = ({
 	contentBlockConfig,
 	contentPageInfo,
+	isEditing,
 	onClick = noop,
 	className,
 }) => {
@@ -111,12 +114,14 @@ const ContentBlockRenderer: FunctionComponent<ContentBlockPreviewProps> = ({
 		blockStateProps.commonUser = commonUser;
 	}
 
-	// The block resolves the objects in its own config through the proxy, which needs to be able to
-	// look that config up. A block that hasn't been saved yet has no id, and renders without the
-	// resolved object data.
+	// The block resolves the objects in its own config through the proxy, which looks that config
+	// up by id. In the editor the config is being changed as we speak -- and a freshly added block
+	// has no id at all -- so the block is left without one and sends the objects it is rendering
+	// instead, which is what keeps the preview in step with the form.
 	if (PLAYABLE_DISPLAY_DATA_BLOCKS.includes(contentBlockConfig.type)) {
 		// Avo block ids are numbers, hetarchief block ids are uuids: the blocks only pass it on
-		blockStateProps.blockId = contentBlockConfig.id ? String(contentBlockConfig.id) : undefined;
+		blockStateProps.blockId =
+			isEditing || !contentBlockConfig.id ? undefined : String(contentBlockConfig.id);
 	}
 
 	// Pass the content page object to the block

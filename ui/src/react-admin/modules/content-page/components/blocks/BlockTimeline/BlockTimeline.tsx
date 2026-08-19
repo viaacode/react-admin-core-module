@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import type { CSSProperties, FunctionComponent, ReactElement } from 'react';
-import React, { useRef } from 'react';
+import React, { useMemo, useRef } from 'react';
 import { AdminCoreIconName } from '~core/config';
 import { AdminConfigManager } from '~core/config/config.class';
 import { IeObjectFlowPlayerWrapper } from '~modules/content-page/components/IeObjectFlowPlayerWrapper/IeObjectFlowPlayerWrapper.tsx';
@@ -44,10 +44,22 @@ export const BlockTimeline: FunctionComponent<BlockTimelineProps> = ({
 	const containerRef = useRef<HTMLDivElement>(null);
 	const locale = AdminConfigManager.getConfig().locale;
 
+	// While this block is being put together in the editor it has no id yet, so its nodes go along
+	// for the proxy to resolve. One entry per node, so the response stays aligned. Timeline nodes
+	// never play a snippet, so they carry no cuepoints.
+	const unsavedObjects = useMemo(
+		() =>
+			elements.map((node) => ({
+				schemaIdentifier: node.visualType === 'OBJECT' ? String(node.mediaItem?.value || '') : '',
+			})),
+		[elements]
+	);
+
 	// Resolve all objects of the timeline in a single request. Which objects those are is read
-	// from this block's stored config by the proxy, so only the block id goes out; the response
-	// comes back in the order of the nodes below, one (possibly null) entry per node.
-	const { data: ieObjects } = useGetIeObjectsPlayableDisplayData(blockId);
+	// from this block's stored config by the proxy, so only the block id goes out once it has been
+	// saved; the response comes back in the order of the nodes below, one (possibly null) entry
+	// per node.
+	const { data: ieObjects } = useGetIeObjectsPlayableDisplayData(blockId, unsavedObjects);
 
 	const scrollToTop = () => {
 		containerRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });

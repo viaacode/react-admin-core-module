@@ -21,3 +21,15 @@ export interface PlayableDisplayIeObject {
 		end?: number;
 	};
 }
+
+/**
+ * One ie-object of a content block as the content page editor passes it to the proxy, in place of
+ * a block id it can't use there. Keep one entry per block element, with an empty schemaIdentifier
+ * for an element that has no object selected yet, so the response stays aligned with the
+ * elements.
+ */
+export interface UnsavedPlayableDisplayDataObject {
+	schemaIdentifier: string;
+	start?: number;
+	end?: number;
+}

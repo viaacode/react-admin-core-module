@@ -296,6 +296,7 @@ const ContentEditContentBlocks: FunctionComponent<ContentEditContentBlocksProps>
 				<div className="c-content-edit-view__preview">
 					<ContentPageRenderer
 						contentPageInfo={contentPageInfo}
+						isEditing
 						onBlockClicked={focusBlock}
 						activeBlockPosition={activeBlockPosition}
 						renderFakeTitle={contentPageInfo.contentType === 'FAQ_ITEM' && isAvo()}

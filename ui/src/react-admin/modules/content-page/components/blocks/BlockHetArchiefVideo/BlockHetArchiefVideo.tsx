@@ -1,10 +1,11 @@
 import type { DefaultProps } from '@viaa/avo2-components';
 import { Container } from '@viaa/avo2-components';
 import clsx from 'clsx';
-import type { FunctionComponent } from 'react';
+import { type FunctionComponent, useMemo } from 'react';
 import { IeObjectFlowPlayerWrapper } from '~modules/content-page/components/IeObjectFlowPlayerWrapper/IeObjectFlowPlayerWrapper';
 import { useGetIeObjectsPlayableDisplayData } from '~modules/content-page/hooks/useGetIeObjectsPlayableDisplayData';
 import { CopyrightAttribution } from '~shared/components/CopyrightAttribution';
+import { snippetTimeToSeconds } from '~shared/helpers/parsers/duration';
 import type { PickerItem } from '~shared/types/content-picker';
 
 import './BlockHetArchiefVideo.scss';
@@ -40,6 +41,9 @@ export interface BlockHetArchiefVideoProps extends DefaultProps {
 export const BlockHetArchiefVideo: FunctionComponent<BlockHetArchiefVideoProps> = ({
 	className,
 	blockId,
+	mediaItem,
+	startTime,
+	endTime,
 	poster,
 	title,
 	copyrightTitle,
@@ -48,8 +52,26 @@ export const BlockHetArchiefVideo: FunctionComponent<BlockHetArchiefVideoProps> 
 	width,
 	autoplay,
 }) => {
+	// While this block is being put together in the editor it has no id yet, so its object goes
+	// along for the proxy to resolve. Only cut when both times are given and form a real interval,
+	// same rule as the editor and the proxy apply: the media service needs an end time to cut at
+	// all, so a start time on its own would silently play the whole object.
+	const unsavedObjects = useMemo(() => {
+		const start = snippetTimeToSeconds(startTime);
+		const end = snippetTimeToSeconds(endTime);
+		const hasSnippet = start !== null && end !== null && end > start;
+
+		return [
+			{
+				schemaIdentifier: String(mediaItem?.value || ''),
+				start: hasSnippet ? start : undefined,
+				end: hasSnippet ? end : undefined,
+			},
+		];
+	}, [mediaItem?.value, startTime, endTime]);
+
 	// A video block references exactly one object, so the response holds a single entry.
-	const { data: ieObjects } = useGetIeObjectsPlayableDisplayData(blockId);
+	const { data: ieObjects } = useGetIeObjectsPlayableDisplayData(blockId, unsavedObjects);
 	const ieObject = ieObjects?.[0];
 
 	// Nothing to show while the object is still loading, or when it can't be played at all: the
