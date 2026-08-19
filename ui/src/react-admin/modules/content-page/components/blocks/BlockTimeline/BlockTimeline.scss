@@ -131,7 +131,7 @@ $object-meta-gap: 4rem;
 		align-self: baseline;
 		padding-right: 1rem;
 
-		@include typography.sofia-pro-heading-lg;
+		@include typography.sofia-pro-heading-xl;
 
 		// Taller than the font itself, so the year lines up with the top of the node's content
 		line-height: 5.6rem;
@@ -150,7 +150,8 @@ $object-meta-gap: 4rem;
 		display: block;
 		padding-left: $line-content-gap;
 
-		@include typography.sofia-pro-heading;
+		@include typography.sofia-pro-heading-lg;
+		line-height: 2.6rem;
 
 		color: colors.$color-gray-300;
 	}
@@ -182,7 +183,7 @@ $object-meta-gap: 4rem;
 		// than the track. Together with the minmax(0, 1fr) tracks this keeps the column at the
 		// available width and lets the object title ellipse inside it.
 		min-width: 0;
-		margin-top: 0.5rem;
+		margin-top: variables.$g-spacer-unit * 2;
 		padding-left: $line-content-gap;
 
 		&--has-background {
@@ -232,15 +233,23 @@ $object-meta-gap: 4rem;
 	}
 
 	&__node-title {
-		margin: variables.$g-spacer-unit * 4 0 0;
+		margin: (variables.$g-spacer-unit * 4) 0 0;
 
-		@include typography.sofia-pro-heading;
+		@include typography.sofia-pro-heading-lg;
+
+		@media (max-width: variables.$g-bp3) {
+			@include typography.sofia-pro-heading-md;
+		}
 	}
 
 	&__node-description {
-		margin-top: 0.25rem;
+		margin-top: variables.$g-spacer-unit * 2;
 
 		@include typography.sofia-pro-body;
+
+		@media (max-width: variables.$g-bp3) {
+			@include typography.sofia-pro-body-sm;
+		}
 	}
 
 	// A node's media (image or object) breaks out of the content column and starts at the very
