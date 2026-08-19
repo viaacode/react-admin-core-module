@@ -10,7 +10,8 @@ import { CONTENT_PAGE_META_BLOCK_CONFIG } from '~content-blocks/BlockContentPage
 import { CTAS_BLOCK_CONFIG } from '~content-blocks/BlockCTAs';
 import { EVENTBRITE_BLOCK_CONFIG } from '~content-blocks/BlockEventbrite';
 import { HEADING_BLOCK_CONFIG } from '~content-blocks/BlockHeading';
-import { HET_ARCHIEF_HEADER_SEARCH_BLOCK_CONFIG } from '~content-blocks/BlockHetArchiefHeaderSearch/BlockHetArchiefHeaderSearch.editorconfig';
+import { HERO_CAROUSEL_CONFIG } from '~content-blocks/BlockHeroCarousel';
+import { HET_ARCHIEF_HEADER_SEARCH_BLOCK_CONFIG } from '~content-blocks/BlockHetArchiefHeaderSearch';
 import { HET_ARCHIEF_IMAGE_TEXT_BACKGROUND_BLOCK_CONFIG } from '~content-blocks/BlockHetArchiefImageTextBackground';
 import { HET_ARCHIEF_QUOTE_BLOCK_CONFIG } from '~content-blocks/BlockHetArchiefQuote';
 import { CONTENT_HIGHLIGHT_TEXT_CONFIG } from '~content-blocks/BlockHighlightText';
@@ -44,6 +45,7 @@ import {
 import { TAGS_WITH_LINK_BLOCK_CONFIG } from '~content-blocks/BlockTagsWithLink';
 import { THEME_REELS_BLOCK_CONFIG } from '~content-blocks/BlockThemeReels';
 import { THREE_CLICKABLE_TILES_BLOCK_CONFIG } from '~content-blocks/BlockThreeClickableTiles';
+import { TIMELINE_BLOCK_CONFIG } from '~content-blocks/BlockTimeline';
 import { UITGEKLAARD_BLOCK_CONFIG } from '~content-blocks/BlockUitgeklaard';
 import { MEDIA_PLAYER_BLOCK_CONFIG } from '~content-blocks/BlockVideo';
 import { MEDIA_PLAYER_TITLE_TEXT_BUTTON_BLOCK_CONFIG } from '~content-blocks/BlockVideoTitleTextButton';
@@ -100,5 +102,7 @@ export const CONTENT_BLOCK_CONFIG_MAP: Record<
 	[ContentBlockType.ThemeReels]: THEME_REELS_BLOCK_CONFIG,
 	[ContentBlockType.ObjectsGrid]: OBJECTS_GRID_BLOCK_CONFIG,
 	[ContentBlockType.OverviewThemes]: OVERVIEW_THEMES_BLOCK_CONFIG,
+	[ContentBlockType.HeroCarousel]: HERO_CAROUSEL_CONFIG,
+	[ContentBlockType.Timeline]: TIMELINE_BLOCK_CONFIG,
 	[ContentBlockType.HetArchiefVideo]: HETARCHIEF_VIDEO_BLOCK_CONFIG,
 };

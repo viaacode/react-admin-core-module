@@ -356,17 +356,16 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 						</Spacer>
 					);
 				});
-			} else {
-				// Render all pages in a grid without section titles (unique pages only)
-				let pagesToShow = labelsToShow.flatMap((labelObj) => {
-					if (!(pagesByLabel[labelObj.id] || []).length) {
-						return [];
-					}
-					return pagesByLabel[labelObj.id];
-				});
-				pagesToShow = uniqBy(pagesToShow, (page) => page.id);
-				return renderGrid(pagesToShow);
 			}
+			// Render all pages in a grid without section titles (unique pages only)
+			let pagesToShow = labelsToShow.flatMap((labelObj) => {
+				if (!(pagesByLabel[labelObj.id] || []).length) {
+					return [];
+				}
+				return pagesByLabel[labelObj.id];
+			});
+			pagesToShow = uniqBy(pagesToShow, (page) => page.id);
+			return renderGrid(pagesToShow);
 		}
 		if (itemStyle === ContentItemStyle.ACCORDION) {
 			// Ensure the focused page is not loaded twice on the same pagination page (ACCORDION)

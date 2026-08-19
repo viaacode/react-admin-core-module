@@ -7,6 +7,7 @@ export interface PickerItem {
 	label?: string;
 	type: AvoCoreContentPickerType;
 	value: string;
+	dctermsFormat?: string;
 	target?: LinkTarget;
 }
 

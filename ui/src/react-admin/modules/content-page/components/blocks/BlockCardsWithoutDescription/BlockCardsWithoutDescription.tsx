@@ -63,16 +63,15 @@ export const BlockCardsWithoutDescription: FunctionComponent<BlockCardsWithoutDe
 					{renderCardContent(props)}
 				</SmartLink>
 			);
-		} else {
-			return (
-				<div
-					className="c-block-cards-without-description__card"
-					key={`c-block-cards-without-description__card--${i}`}
-				>
-					{renderCardContent(props)}
-				</div>
-			);
 		}
+		return (
+			<div
+				className="c-block-cards-without-description__card"
+				key={`c-block-cards-without-description__card--${i}`}
+			>
+				{renderCardContent(props)}
+			</div>
+		);
 	};
 
 	return (

@@ -99,11 +99,14 @@ const DateRangeDropdown: FC<DateRangeDropdownProps> = ({
 					gte: oldRangeState.gte ? `${oldRangeState.gte.split('-')[0]}-01-01` : '',
 					lte: oldRangeState.lte ? `${oldRangeState.lte.split('-')[0]}-12-31` : '',
 				};
-			} else if (dateControls === 'past') {
+			}
+			if (dateControls === 'past') {
 				return DEFAULT_PAST_DATE_RANGE;
-			} else if (dateControls === 'future') {
+			}
+			if (dateControls === 'future') {
 				return DEFAULT_FUTURE_DATE_RANGE;
-			} else if (oldRangeState.gte?.includes(':') && oldRangeState.lte?.includes(':')) {
+			}
+			if (oldRangeState.gte?.includes(':') && oldRangeState.lte?.includes(':')) {
 				// More precise date was selected, so select "date" mode automatically
 				setDateControls('date');
 			}
@@ -161,7 +164,11 @@ const DateRangeDropdown: FC<DateRangeDropdownProps> = ({
 			rangeId === 'gte' ? setYearInputGte(value) : setYearInputLte(value);
 			if (value.match(/^[0-9]{4}$/g)) {
 				await handleDateChange(
-					new Date(parseInt(value, 10), rangeId === 'gte' ? 0 : 11, rangeId === 'gte' ? 1 : 31),
+					new Date(
+						Number.parseInt(value, 10),
+						rangeId === 'gte' ? 0 : 11,
+						rangeId === 'gte' ? 1 : 31
+					),
 					rangeId
 				);
 			} else {

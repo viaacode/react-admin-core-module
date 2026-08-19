@@ -60,11 +60,7 @@ export const BlockMaintainersGrid: FunctionComponent<BlockMaintainerGridProps> =
 									}
 								)}
 							>
-								<img
-									src={maintainer.logoUrl}
-									alt=""
-									className="c-block-maintainers-grid__image"
-								></img>
+								<img src={maintainer.logoUrl} alt="" className="c-block-maintainers-grid__image" />
 							</SmartLink>
 						</li>
 					);

@@ -11,7 +11,7 @@ import type {
 export const validateContentBlockField = (
 	fieldKey: string,
 	validator: ContentBlockField['validator'],
-	oldErrors: ContentBlockErrors = {},
+	oldErrors: ContentBlockErrors,
 	// biome-ignore lint/suspicious/noExplicitAny: todo
 	value: any,
 	stateIndex?: number,

@@ -9,6 +9,7 @@ import {
 import { compact, isNil } from 'es-toolkit';
 import type { ReactNode } from 'react';
 import { AdminConfigManager, ToastType } from '~core/config';
+import { AdminCoreIconName } from '~core/config/config.types';
 import { hasTempAccess } from '~modules/user/helpers/has-temp-access';
 import type { Idp, UserOverviewTableCol, UserTableState } from '~modules/user/user.types';
 import ActionsDropdown from '~shared/components/ActionsDropdown/ActionsDropdown';
@@ -126,9 +127,8 @@ export function renderUserOverviewTableCellReact(
 		case 'tempAccess': {
 			if (hasTempAccess(tableRowCommonUser?.tempAccess)) {
 				return tHtml('admin/users/views/user-overview___tijdelijke-toegang-ja');
-			} else {
-				return tHtml('admin/users/views/user-overview___tijdelijke-toegang-nee');
 			}
+			return tHtml('admin/users/views/user-overview___tijdelijke-toegang-nee');
 		}
 		case 'tempAccessFrom':
 			return formatDateString(tableRowCommonUser?.tempAccess?.from) || '-';
@@ -195,7 +195,7 @@ export function renderUserOverviewTableCellReact(
 							label:
 								tableRowCommonUser.profileId ||
 								tText('admin/users/views/user-overview___geen-uuid'),
-							iconEnd: <Icon name="copy" />,
+							iconEnd: <Icon name={AdminCoreIconName.Copy} />,
 						},
 					]}
 					onOptionClicked={() => handleOptionClicked(tableRowCommonUser.profileId)}
@@ -293,9 +293,8 @@ export function renderUserOverviewTableCellText(
 		case 'tempAccess': {
 			if (hasTempAccess(tableRowCommonUser?.tempAccess)) {
 				return tHtml('admin/users/views/user-overview___tijdelijke-toegang-ja', {}, [AVO]);
-			} else {
-				return tHtml('admin/users/views/user-overview___tijdelijke-toegang-nee', {}, [AVO]);
 			}
+			return tHtml('admin/users/views/user-overview___tijdelijke-toegang-nee', {}, [AVO]);
 		}
 		case 'tempAccessFrom':
 			return formatDateString(tableRowCommonUser?.tempAccess?.from) || '';

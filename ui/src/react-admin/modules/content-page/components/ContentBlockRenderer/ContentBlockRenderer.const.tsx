@@ -9,6 +9,7 @@ import { BlockContentPageMeta } from '~content-blocks/BlockContentPageMeta';
 import { BlockCTAsWrapper } from '~content-blocks/BlockCTAs';
 import { BlockEventbrite } from '~content-blocks/BlockEventbrite';
 import { BlockHeading } from '~content-blocks/BlockHeading';
+import { BlockHeroCarousel } from '~content-blocks/BlockHeroCarousel';
 import { BlockHetArchiefHeaderSearch } from '~content-blocks/BlockHetArchiefHeaderSearch/BlockHetArchiefHeaderSearch';
 import { BlockHetArchiefImageTextBackground } from '~content-blocks/BlockHetArchiefImageTextBackground';
 import { BlockHetArchiefQuote } from '~content-blocks/BlockHetArchiefQuote';
@@ -37,6 +38,7 @@ import { BlockProjectSpotlightWrapper, BlockSpotlight } from '~content-blocks/Bl
 import { BlockTagsWithLink } from '~content-blocks/BlockTagsWithLink';
 import { BlockThemeReels } from '~content-blocks/BlockThemeReels';
 import { BlockThreeClickableTiles } from '~content-blocks/BlockThreeClickableTiles';
+import { BlockTimeline } from '~content-blocks/BlockTimeline';
 import { BlockUitgeklaard } from '~content-blocks/BlockUitgeklaard';
 import { BlockVideoWrapper } from '~content-blocks/BlockVideo';
 import { BlockVideoTitleTextButtonWrapper } from '~content-blocks/BlockVideoTitleTextButton';
@@ -101,6 +103,8 @@ export function GET_BLOCK_COMPONENT(
 		[ContentBlockType.HighlightText]: BlockHighlightText,
 		[ContentBlockType.ThemeReels]: BlockThemeReels,
 		[ContentBlockType.OverviewThemes]: BlockOverviewThemes,
+		[ContentBlockType.HeroCarousel]: BlockHeroCarousel,
+		[ContentBlockType.Timeline]: BlockTimeline,
 
 		// Avo specific blocks
 		[ContentBlockType.MediaGrid]: loadComponentFromConfig(ContentBlockType.MediaGrid),
@@ -131,6 +135,7 @@ export const REPEATABLE_CONTENT_BLOCKS = [
 	ContentBlockType.ThreeClickableTiles,
 	ContentBlockType.TagsWithLink,
 	ContentBlockType.CardsWithoutDescription,
+	ContentBlockType.Timeline,
 	// ContentBlockType.ContentEncloseGrid,
 ];
 

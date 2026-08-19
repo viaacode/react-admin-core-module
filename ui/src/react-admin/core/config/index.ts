@@ -10,4 +10,4 @@ export type {
 	ToastInfo,
 	ToastService,
 } from './config.types';
-export { ToastType } from './config.types';
+export { AdminCoreIconName, ToastType } from './config.types';

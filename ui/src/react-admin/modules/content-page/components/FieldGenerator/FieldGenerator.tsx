@@ -1,7 +1,8 @@
 import { Alert } from '@meemoo/react-components';
-import { Button, Flex, FlexItem, FormGroup, IconName, Spacer } from '@viaa/avo2-components';
+import { Button, Flex, FlexItem, FormGroup, type IconName, Spacer } from '@viaa/avo2-components';
 import type { FunctionComponent, ReactNode } from 'react';
 import React, { Fragment } from 'react';
+import { AdminCoreIconName } from '~core/config/config.types';
 import { GET_EDITOR_TYPES_MAP } from '~modules/content-page/const/editor-types.consts';
 import { generateFieldAttributes } from '~modules/content-page/helpers/field-attributes';
 import { Icon } from '~shared/components/Icon/Icon';
@@ -116,7 +117,7 @@ export const FieldGenerator: FunctionComponent<FieldGeneratorProps> = ({
 			<Spacer margin="top">
 				<Alert
 					content={field.note}
-					icon={<Icon name={IconName.alertTriangle} />}
+					icon={<Icon name={AdminCoreIconName.Warning} />}
 					variants="info"
 					id={`field--${field.label}__alert`}
 				/>

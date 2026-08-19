@@ -168,12 +168,17 @@ function getTranslationEntryFromCallExpression(
 	oldTranslationsPath: string
 ): TranslationEntry | null {
 	let formattedKey: string | undefined;
-	if (appsParam && !appsParam.includes(App.AVO) && !appsParam.includes(App.HET_ARCHIEF)) {
+	let resolvedAppParam = appsParam;
+	if (
+		resolvedAppParam &&
+		!resolvedAppParam.includes(App.AVO) &&
+		!resolvedAppParam.includes(App.HET_ARCHIEF)
+	) {
 		// hetarchief proxy uses the third parameter to specify the language of the app
-		appsParam = app;
+		resolvedAppParam = app;
 	}
 	const apps: AppsList = compact(
-		(appsParam || ALL_APPS)
+		(resolvedAppParam || ALL_APPS)
 			.replace(/[[\]]/g, '')
 			.replace('App.HET_ARCHIEF', App.HET_ARCHIEF)
 			.replace('App.AVO', App.AVO)

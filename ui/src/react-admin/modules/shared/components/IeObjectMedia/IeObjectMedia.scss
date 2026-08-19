@@ -1,0 +1,20 @@
+// Aspect ratio for the thumbnail fallback, matching the one the player uses for video.
+$ie-object-media-aspect-ratio: '1215 / 630';
+
+.c-ie-object-media {
+	position: relative;
+
+	&__image {
+		display: block;
+		width: 100%;
+		aspect-ratio: #{$ie-object-media-aspect-ratio};
+		object-fit: cover;
+		object-position: top;
+	}
+
+	// The player renders its own aspect ratio (video) or fixed height (audio), it only needs the full width
+	&__player {
+		display: block;
+		width: 100%;
+	}
+}

@@ -51,7 +51,7 @@ async function getListOfCommitMessagesBetweenTags(oldTag?: string, newTag?: stri
 	);
 
 	// Write the simplified translations to a file
-	const outputFilePath = path.join(getDirName(), `../commit-messages.txt`);
+	const outputFilePath = path.join(getDirName(), '../commit-messages.txt');
 	await fs.writeFile(outputFilePath, commitLine.join('\n'), 'utf8');
 }
 
