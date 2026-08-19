@@ -19,6 +19,7 @@ import type { PlayableDisplayIeObject } from '~shared/services/ie-objects-servic
 import { HET_ARCHIEF } from '~shared/types';
 import type { DefaultComponentProps } from '~shared/types/components';
 import './BlockTimeline.scss';
+import { isAudioVideoFormat } from '~shared/helpers/is-audio-video-format.ts';
 
 export interface BlockTimelineProps extends DefaultComponentProps {
 	elements: TimelineNodeBlockComponentState[];
@@ -78,6 +79,7 @@ export const BlockTimeline: FunctionComponent<BlockTimelineProps> = ({
 					const hasImage = node.visualType === 'IMAGE' && !!node.image;
 					const hasObject = node.visualType === 'OBJECT' && !!node.mediaItem?.value;
 					const ieObject = hasObject ? ieObjects?.[index] : undefined;
+					const thumbnail = ieObject?.newspaperImage || ieObject?.thumbnailUrl;
 
 					return (
 						<li
@@ -110,10 +112,25 @@ export const BlockTimeline: FunctionComponent<BlockTimelineProps> = ({
 								}
 							>
 								{ieObject && (
-									<IeObjectFlowPlayerWrapper
-										className="c-block-timeline__node-object-media"
-										ieObject={ieObject}
-									/>
+									<div className={clsx('c-ie-object-media')}>
+										{isAudioVideoFormat(ieObject.dctermsFormat) ? (
+											<IeObjectFlowPlayerWrapper
+												className="c-block-timeline__node-object-media"
+												ieObject={ieObject}
+												poster={node.image}
+											/>
+										) : (
+											thumbnail && (
+												<div className="c-block-timeline__node-image-wrapper">
+													<img
+														src={thumbnail}
+														alt={ieObject.name || node.title}
+														className="c-block-timeline__node-object-image"
+													/>
+												</div>
+											)
+										)}
+									</div>
 								)}
 								{node.visualType === 'IMAGE' && node.image && (
 									<div className="c-block-timeline__node-image-wrapper">

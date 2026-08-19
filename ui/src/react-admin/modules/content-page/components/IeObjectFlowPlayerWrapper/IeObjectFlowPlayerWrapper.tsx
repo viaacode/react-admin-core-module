@@ -28,6 +28,7 @@ export const IeObjectFlowPlayerWrapper: FunctionComponent<IeObjectFlowPlayerWrap
 	onEnded,
 	isMuted,
 	onMutedChange,
+	className,
 }): ReactNode => {
 	const { data: mediaDuration } = useGetFileDuration(ieObject?.playableUrl);
 
@@ -89,6 +90,7 @@ export const IeObjectFlowPlayerWrapper: FunctionComponent<IeObjectFlowPlayerWrap
 		preload: 'metadata',
 		start,
 		end,
+		className,
 	};
 
 	if (isAudioFormat(ieObject.dctermsFormat)) {
