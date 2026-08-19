@@ -6,7 +6,7 @@ import React, { useEffect, useState } from 'react';
 import { BlockHeading } from '~content-blocks/BlockHeading/BlockHeading';
 import { AdminCoreIconName } from '~core/config/config.types';
 import { Link } from '~modules/shared/components/Link/Link';
-import { Icon, RawIcon } from '~shared/components/Icon/Icon';
+import { ContentPageIcon, Icon } from '~shared/components/Icon/Icon';
 import { generateSmartLink } from '~shared/components/SmartLink/SmartLink';
 import { tText } from '~shared/helpers/translation-functions';
 import { HET_ARCHIEF } from '~shared/types';
@@ -54,7 +54,7 @@ export const BlockOverviewNewspaperTitles: FC<BlockOverviewNewspaperTitlesProps>
 						<Button
 							label={buttonLabel}
 							type={buttonType}
-							renderIcon={buttonIcon ? () => <RawIcon name={buttonIcon} /> : undefined}
+							renderIcon={buttonIcon ? () => <ContentPageIcon name={buttonIcon} /> : undefined}
 						/>,
 						buttonAltTitle || buttonLabel
 					)}

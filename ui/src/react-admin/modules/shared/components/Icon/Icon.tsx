@@ -13,7 +13,7 @@ interface IconProps {
 /**
  * Renders one of the icons every client maps in the `icon.componentProps` of its admin-core config.
  * Use this for icons that are part of the admin-core interface itself. Icons that come from content
- * page data are stored by their raw client icon name, use RawIcon for those.
+ * page data are stored by their raw client icon name, use ContentPageIcon for those.
  */
 export const Icon: FC<IconProps> = ({ name, className }) => {
 	const iconConfig = AdminConfigManager.getConfig().icon;
@@ -28,7 +28,7 @@ export const Icon: FC<IconProps> = ({ name, className }) => {
 	return <IconComponent {...iconProps} className={className} />;
 };
 
-interface RawIconProps {
+interface ContentPageIconProps {
 	/** A raw client icon name, eg: arrow-right--light for hetarchief or arrow-right for avo */
 	name: string | undefined;
 	className?: string;
@@ -39,7 +39,7 @@ interface RawIconProps {
  * by their raw icon name (eg: arrow-right--light) instead of by an admin-core config key
  * (eg: arrowRight), so they cannot be resolved through the icon.componentProps of the config.
  */
-export const RawIcon: FC<RawIconProps> = ({ name, className }) => {
+export const ContentPageIcon: FC<ContentPageIconProps> = ({ name, className }) => {
 	const iconConfig = AdminConfigManager.getConfig().icon;
 
 	if (!iconConfig || !name) {

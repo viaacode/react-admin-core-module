@@ -3,7 +3,7 @@ import { Button } from '@viaa/avo2-components';
 import clsx from 'clsx';
 import type { FunctionComponent } from 'react';
 import React, { useEffect } from 'react';
-import { RawIcon } from '~shared/components/Icon/Icon';
+import { ContentPageIcon } from '~shared/components/Icon/Icon';
 
 import './BlockEventbrite.scss';
 
@@ -53,7 +53,7 @@ export const BlockEventbrite: FunctionComponent<BlockEventbriteProps> = ({
 			<Button
 				{...rest}
 				id={elementId}
-				renderIcon={rest.icon ? () => <RawIcon name={rest.icon} /> : undefined}
+				renderIcon={rest.icon ? () => <ContentPageIcon name={rest.icon} /> : undefined}
 			/>
 		</div>
 	);

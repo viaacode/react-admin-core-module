@@ -1,1 +1,1 @@
-export { Icon, RawIcon } from './Icon';
+export { ContentPageIcon, Icon } from './Icon';

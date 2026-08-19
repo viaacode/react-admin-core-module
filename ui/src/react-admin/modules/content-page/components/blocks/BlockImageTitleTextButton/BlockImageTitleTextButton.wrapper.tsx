@@ -5,7 +5,7 @@ import React from 'react';
 import { BlockHeading } from '~content-blocks/BlockHeading/BlockHeading';
 import { BlockRichTextWrapper } from '~content-blocks/BlockRichText/BlockRichText.wrapper';
 import type { ImageTitleTextButtonBlockComponentState } from '~modules/content-page/types/content-block.types';
-import { RawIcon } from '~shared/components/Icon/Icon';
+import { ContentPageIcon } from '~shared/components/Icon/Icon';
 import { generateSmartLink } from '~shared/components/SmartLink/SmartLink';
 
 export const BlockImageTitleTextButtonWrapper: FC<ImageTitleTextButtonBlockComponentState> = (
@@ -49,7 +49,7 @@ export const BlockImageTitleTextButtonWrapper: FC<ImageTitleTextButtonBlockCompo
 						<Button
 							label={buttonLabel}
 							type={buttonType}
-							renderIcon={buttonIcon ? () => <RawIcon name={buttonIcon} /> : undefined}
+							renderIcon={buttonIcon ? () => <ContentPageIcon name={buttonIcon} /> : undefined}
 						/>,
 						buttonAltTitle || buttonLabel
 					)}

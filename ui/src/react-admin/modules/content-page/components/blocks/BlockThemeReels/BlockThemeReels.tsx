@@ -4,7 +4,7 @@ import type { Color } from '~modules/content-page/types/content-block.types';
 import type { DefaultComponentProps } from '~modules/shared/types/components';
 import './BlockThemeReels.scss';
 import { Button } from '@meemoo/react-components';
-import { RawIcon } from '~shared/components/Icon';
+import { ContentPageIcon } from '~shared/components/Icon';
 import { tText } from '~shared/helpers/translation-functions.ts';
 import 'swiper/css';
 import clsx from 'clsx';
@@ -89,7 +89,7 @@ export const BlockThemeReels: FunctionComponent<BlockThemeReelsProps> = ({
 					buttonAction,
 					<Button
 						variants={['sm', ...(buttonType ? [buttonType] : [])]}
-						iconStart={buttonIcon && <RawIcon name={buttonIcon} />}
+						iconStart={buttonIcon && <ContentPageIcon name={buttonIcon} />}
 						label={buttonLabel}
 						title={buttonLabel}
 						ariaLabel={buttonAltTitle}

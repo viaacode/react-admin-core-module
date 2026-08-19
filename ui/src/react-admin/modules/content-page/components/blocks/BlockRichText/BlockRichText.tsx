@@ -11,7 +11,7 @@ import type { FunctionComponent } from 'react';
 import React from 'react';
 import type { RichTextButton } from '~content-blocks/BlockRichText/BlockRichText.types';
 import Html from '~shared/components/Html/Html';
-import { RawIcon } from '~shared/components/Icon/Icon';
+import { ContentPageIcon } from '~shared/components/Icon/Icon';
 import { defaultRenderLinkFunction } from '~shared/helpers/routing/link';
 import { SanitizePreset } from '~shared/helpers/sanitize/presets';
 
@@ -58,7 +58,9 @@ export const BlockRichText: FunctionComponent<BlockRichTextProps> = ({
 						buttonProps.buttonAction,
 						<Button
 							{...buttonProps}
-							renderIcon={buttonProps.icon ? () => <RawIcon name={buttonProps.icon} /> : undefined}
+							renderIcon={
+								buttonProps.icon ? () => <ContentPageIcon name={buttonProps.icon} /> : undefined
+							}
 							iconPosition={buttonProps.buttonIconAlignment}
 						/>,
 						buttonProps.label || buttonProps.ariaLabel || buttonProps.tooltip,

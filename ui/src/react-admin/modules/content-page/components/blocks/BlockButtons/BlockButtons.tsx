@@ -11,7 +11,7 @@ import clsx from 'clsx';
 import { flatten } from 'es-toolkit';
 import type { FunctionComponent } from 'react';
 import React from 'react';
-import { RawIcon } from '~shared/components/Icon/Icon';
+import { ContentPageIcon } from '~shared/components/Icon/Icon';
 import { defaultRenderLinkFunction } from '~shared/helpers/routing/link';
 
 import './BlockButtons.scss';
@@ -63,7 +63,7 @@ export const BlockButtons: FunctionComponent<BlockButtonsProps> = ({
 								key={`button-${index}`}
 								type="secondary"
 								{...button}
-								renderIcon={button.icon ? () => <RawIcon name={button.icon} /> : undefined}
+								renderIcon={button.icon ? () => <ContentPageIcon name={button.icon} /> : undefined}
 							/>,
 							button.label || button.ariaLabel || button.tooltip,
 							button.altTitle || button.label || button.ariaLabel || button.tooltip
