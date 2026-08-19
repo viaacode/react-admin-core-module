@@ -195,6 +195,7 @@ export enum ContentBlockType {
 	ObjectsGrid = 'OBJECTS_GRID',
 	OverviewThemes = 'OVERVIEW_THEMES',
 	DoubleBanner = 'DOUBLE_BANNER',
+	HeroCarousel = 'HERO_CAROUSEL',
 }
 
 export enum ContentBlockEditor {
@@ -611,11 +612,12 @@ export interface HetArchiefHeaderSearchBlockComponentState {
 export interface HetArchiefQuoteBlockComponentState {
 	quote: string;
 	authorName: string;
-	textColor: Color;
+	textColor: Color | GradientColor | CustomBackground;
 	frameColor: Color | GradientColor | CustomBackground;
 }
 
 export interface HetArchiefIeObject {
 	name: string;
 	schemaIdentifier: string;
+	dctermsFormat: string;
 }

@@ -14,7 +14,7 @@ import { reverse } from 'es-toolkit/compat';
 import type { FunctionComponent, KeyboardEvent, ReactElement, ReactNode } from 'react';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import CopyToClipboard from 'react-copy-to-clipboard';
-import { ToastType } from '~core/config/config.types';
+import { AdminCoreIconName, ToastType } from '~core/config/config.types';
 import { useGetAllTranslations } from '~modules/translations/hooks/use-get-all-translations';
 import {
 	RICH_TEXT_EDITOR_OPTIONS,
@@ -224,15 +224,15 @@ export const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> 
 					totalItems={pageCount * TRANSLATIONS_PER_PAGE}
 					onPageChange={handlePageChange}
 					firstLabel={tText('modules/translations/views/translations-overview___eerste')}
-					firstIcon={<Icon name="anglesLeft" />}
+					firstIcon={<Icon name={AdminCoreIconName.AnglesLeft} />}
 					previousLabel={tText('shared/components/filter-table/filter-table___vorige')}
-					previousIcon={<Icon name="angleLeft" />}
+					previousIcon={<Icon name={AdminCoreIconName.AngleLeft} />}
 					nextLabel={tText('shared/components/filter-table/filter-table___volgende')}
-					nextIcon={<Icon name="angleRight" />}
+					nextIcon={<Icon name={AdminCoreIconName.AngleRight} />}
 					lastLabel={tText('modules/translations/views/translations-overview___laatste')}
-					lastIcon={<Icon name="anglesRight" />}
+					lastIcon={<Icon name={AdminCoreIconName.AnglesRight} />}
 					backToTopLabel={tText('shared/components/filter-table/filter-table___terug-naar-boven')}
-					backToTopIcon={<Icon name="angleUp" />}
+					backToTopIcon={<Icon name={AdminCoreIconName.AngleUp} />}
 					labelBetweenPageStartAndEnd={tText(
 						'modules/shared/components/filter-table/filter-table___label-between-start-and-end-page-in-pagination-bar'
 					)}
@@ -308,7 +308,7 @@ export const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> 
 									content={value}
 									sanitizePreset={SanitizePreset.link}
 									className="c-rich-text-editor__content"
-								></Html>
+								/>
 							)}
 							{translationEntry.value_type === ValueType.TEXT && <span>{value}</span>}
 						</button>
@@ -386,14 +386,14 @@ export const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> 
 						onChange={setActiveTranslationTextValue}
 						controls={RICH_TEXT_EDITOR_OPTIONS}
 						locale={AdminConfigManager.getConfig().locale}
-					></RichTextEditor>
+					/>
 				)}
 				{activeTranslationEntry.value_type === ValueType.TEXT && (
 					<textarea
 						className="c-translation-overview__textarea"
 						value={activeTranslationTextValue || undefined}
 						onChange={(evt) => setActiveTranslationTextValue(evt.target.value)}
-					></textarea>
+					/>
 				)}
 			</>
 		);
@@ -408,7 +408,7 @@ export const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> 
 				id="translation-overview__search-input"
 				type="search"
 				aria-label={tText('modules/translations/views/translations-overview___zoekveld-aria-label')}
-				iconEnd={<Icon name="filter" />}
+				iconEnd={<Icon name={AdminCoreIconName.Filter} />}
 				value={search}
 				onChange={(e) => {
 					setSearch(e.target.value);
@@ -420,7 +420,7 @@ export const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> 
 				ariaLabel={tText(
 					'modules/translations/views/translations-overview___zoek-vertaling-input-aria-label'
 				)}
-			></TextInput>
+			/>
 			{renderTranslationsTable()}
 			{renderPopup({
 				title: tText('modules/translations/views/translations-overview-v-2___vertaling-aanpassen'),

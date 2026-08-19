@@ -37,6 +37,7 @@ const parseIeObjects = (raw: Partial<HetArchiefIeObject>[]): PickerItem[] => {
 	return raw.map(
 		(item: Partial<HetArchiefIeObject>): PickerItem => ({
 			label: item.name || '',
+			dctermsFormat: item.dctermsFormat || undefined,
 			...parsePickerItem(AvoCoreContentPickerType.IE_OBJECT, item.schemaIdentifier as string), // TODO enforce path in database
 		})
 	);

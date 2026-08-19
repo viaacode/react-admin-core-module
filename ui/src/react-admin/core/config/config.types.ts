@@ -183,48 +183,63 @@ export interface AdminConfig {
 	};
 }
 
+/**
+ * The icons admin-core renders through the client config. Every client maps each of these onto one
+ * of its own icons in `icon.componentProps`, so each client decides what eg: a warning looks like.
+ * Never pass a client specific icon name (eg: an avo2 IconName) to the admin-core Icon component,
+ * since the other client has no icon by that name.
+ */
+export enum AdminCoreIconName {
+	Add = 'add',
+	AngleDown = 'angleDown',
+	AngleLeft = 'angleLeft',
+	AngleRight = 'angleRight',
+	AnglesLeft = 'anglesLeft',
+	AnglesRight = 'anglesRight',
+	AngleUp = 'angleUp',
+	ArrowDown = 'arrowDown',
+	ArrowDownRight = 'arrowDownRight',
+	ArrowLeft = 'arrowLeft',
+	ArrowRight = 'arrowRight',
+	ArrowUp = 'arrowUp',
+	Audio = 'audio',
+	Calendar = 'calendar',
+	Check = 'check',
+	ChevronLeft = 'chevronLeft',
+	Clock = 'clock',
+	Copy = 'copy',
+	Delete = 'delete',
+	Edit = 'edit',
+	Export = 'export',
+	ExtraOptions = 'extraOptions',
+	EyeOff = 'eyeOff',
+	File = 'file',
+	Filter = 'filter',
+	Image = 'image',
+	Info = 'info',
+	Newspaper = 'newspaper',
+	NoAudio = 'noAudio',
+	NoFile = 'noFile',
+	NoImage = 'noImage',
+	NoNewspaper = 'noNewspaper',
+	NoVideo = 'noVideo',
+	Quotes = 'quotes',
+	SortTable = 'sortTable',
+	Video = 'video',
+	View = 'view',
+	Warning = 'warning',
+	Play = 'play',
+	Pause = 'pause',
+}
+
 export interface IconConfig {
 	component: ComponentType<{ name: string; className?: string }>;
-	componentProps: {
-		add: IconComponentProps;
-		angleUp: IconComponentProps;
-		angleDown: IconComponentProps;
-		angleLeft: IconComponentProps;
-		angleRight: IconComponentProps;
-		anglesLeft: IconComponentProps;
-		anglesRight: IconComponentProps;
-		arrowLeft: IconComponentProps;
-		arrowRight: IconComponentProps;
-		delete: IconComponentProps;
-		extraOptions: IconComponentProps;
-		copy: IconComponentProps;
-		edit: IconComponentProps;
-		view: IconComponentProps;
-		filter: IconComponentProps;
-		arrowUp: IconComponentProps;
-		sortTable: IconComponentProps;
-		arrowDown: IconComponentProps;
-		chevronLeft: IconComponentProps;
-		check: IconComponentProps;
-		clock: IconComponentProps;
-		calendar: IconComponentProps;
-		export: IconComponentProps;
-		info: IconComponentProps;
-		warning: IconComponentProps;
-		eyeOff: IconComponentProps;
-		audio: IconComponentProps;
-		video: IconComponentProps;
-		newspaper: IconComponentProps;
-		noAudio: IconComponentProps;
-		noVideo: IconComponentProps;
-		quotes: IconComponentProps;
-		arrowDownRight: IconComponentProps;
-	};
+	componentProps: Record<AdminCoreIconName, IconComponentProps>;
 	list: () => { label: string; value: string }[];
 	alerts: () => { key: string; label: string; value: string }[];
 }
 
-export type IconComponentProps = Record<string, unknown>;
+export type IconComponentProps = { name: string } & Record<string, unknown>;
 
 export interface EducationOrganisationService {
 	fetchCities(): Promise<string[]>;

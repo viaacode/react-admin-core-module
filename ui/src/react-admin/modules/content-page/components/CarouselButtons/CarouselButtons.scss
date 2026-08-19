@@ -1,0 +1,9 @@
+@use "../../../shared/styles/settings/variables" as variables;
+
+.c-carousel-buttons {
+	display: flex;
+	align-items: center;
+	gap: variables.$g-spacer-unit;
+	margin-left: auto;
+	flex-shrink: 0;
+}

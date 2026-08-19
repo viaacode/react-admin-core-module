@@ -156,11 +156,18 @@ export function getAdminCoreConfigForLocalTestApp(navigateFunc: NavigateFunction
 				eyeOff: { name: 'eye-off' },
 				video: { name: 'video' },
 				audio: { name: 'audio' },
+				image: { name: 'image' },
+				file: { name: 'file' },
 				newspaper: { name: 'newspaper' },
 				noAudio: { name: 'no-audio' },
 				noVideo: { name: 'no-video' },
+				noImage: { name: 'no-image' },
+				noFile: { name: 'no-file' },
+				noNewspaper: { name: 'no-newspaper' },
 				quotes: { name: 'quotes' },
 				arrowDownRight: { name: 'arrow-down-right' },
+				play: { name: 'play' },
+				pause: { name: 'pause' },
 			},
 			list: (): { value: IconName; label: string }[] => {
 				return Object.values(IconName).map((iconName: IconName) => ({

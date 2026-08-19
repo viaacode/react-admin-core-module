@@ -1,23 +1,26 @@
 import { Button } from '@meemoo/react-components';
-import { type IconName, Image, LinkTarget } from '@viaa/avo2-components';
+import { Image, LinkTarget } from '@viaa/avo2-components';
 import { AvoCoreContentPickerType } from '@viaa/avo2-types';
 import clsx from 'clsx';
-import React, { type FunctionComponent, type ReactNode, useEffect, useState } from 'react';
+import React, { type FunctionComponent, type ReactNode, useState } from 'react';
 import type SwiperController from 'swiper';
 import { Controller } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { useGetThemeWithObjects } from '~content-blocks/BlockThemeReels/hooks/useGetThemeWithObjects.ts';
 import { AdminConfigManager } from '~core/config';
+import { CarouselButtons } from '~modules/content-page/components/CarouselButtons/CarouselButtons.tsx';
+import { AdminCoreIconName } from '~core/config/config.types';
 import type { DefaultComponentProps } from '~modules/shared/types/components';
 import { App, Locale } from '~modules/translations/translations.core.types.ts';
 import { Icon } from '~shared/components/Icon';
 import { generateSmartLink } from '~shared/components/SmartLink/SmartLink.tsx';
-import { getIconFromObjectType } from '~shared/helpers/icon.ts';
+import { getIconFromObjectType } from '~shared/helpers/get-icon-from-object-type.ts';
+import type { IeObjectType } from '~shared/helpers/map-format-to-type.ts';
 import { isMobileWidth } from '~shared/helpers/media-query.ts';
 import { tText } from '~shared/helpers/translation-functions.ts';
+
 import 'swiper/css';
 import './BlockThemeReelsSection.scss';
-import type { ObjectType } from '~shared/helpers/mapFormatToType.ts';
 
 export interface BlockThemeReelSectionProps extends DefaultComponentProps {
 	themeId: string;
@@ -38,21 +41,6 @@ export const BlockThemeReelSection: FunctionComponent<BlockThemeReelSectionProps
 	const locale = AdminConfigManager.getConfig().locale;
 
 	const [controlledSwiper, setControlledSwiper] = useState<SwiperController | null>(null);
-	const [showPrevSlideButton, setShowPrevSlideButton] = useState<boolean>(false);
-	const [showNextSlideButton, setShowNextSlideButton] = useState<boolean>(false);
-
-	const updateSlideButtons = () => {
-		setShowPrevSlideButton(controlledSwiper ? !controlledSwiper.isBeginning : false);
-		setShowNextSlideButton(controlledSwiper ? !controlledSwiper.isEnd : false);
-	};
-
-	// biome-ignore lint/correctness/useExhaustiveDependencies: Only used to init the buttons
-	useEffect(() => {
-		if (controlledSwiper) {
-			// eslint-disable-next-line react-hooks/set-state-in-effect
-			updateSlideButtons();
-		}
-	}, [controlledSwiper]);
 
 	if (!theme) {
 		return null;
@@ -69,7 +57,7 @@ export const BlockThemeReelSection: FunctionComponent<BlockThemeReelSectionProps
 		title: string,
 		description: string,
 		className?: string,
-		format?: ObjectType
+		format?: IeObjectType
 	) => {
 		return (
 			<>
@@ -92,7 +80,7 @@ export const BlockThemeReelSection: FunctionComponent<BlockThemeReelSectionProps
 						<Button
 							className="c-block-theme-reels-section__slide-image-placeholder-icon"
 							variants={['sm', 'block']}
-							icon={<Icon name={getIconFromObjectType(format, true) as IconName} />}
+							icon={<Icon name={getIconFromObjectType(format, false)} />}
 							disabled
 							tabIndex={-1}
 						/>
@@ -155,34 +143,7 @@ export const BlockThemeReelSection: FunctionComponent<BlockThemeReelSectionProps
 							undefined,
 							-1
 						)}
-					<div className="c-block-theme-reels-section__header-nav">
-						{showPrevSlideButton && (
-							<Button
-								variants={['black', 'sm']}
-								icon={<Icon name="arrowLeft" />}
-								title={tText(
-									'modules/content-page/components/blocks/block-theme-reels/block-theme-reel-section___vorige-slide'
-								)}
-								ariaLabel={tText(
-									'modules/content-page/components/blocks/block-theme-reels/block-theme-reel-section___vorige-slide'
-								)}
-								onClick={() => controlledSwiper?.slidePrev()}
-							/>
-						)}
-						{showNextSlideButton && (
-							<Button
-								variants={['black', 'sm']}
-								icon={<Icon name="arrowRight" />}
-								title={tText(
-									'modules/content-page/components/blocks/block-theme-reels/block-theme-reel-section___volgende-slide'
-								)}
-								ariaLabel={tText(
-									'modules/content-page/components/blocks/block-theme-reels/block-theme-reel-section___volgende-slide'
-								)}
-								onClick={() => controlledSwiper?.slideNext()}
-							/>
-						)}
-					</div>
+					<CarouselButtons controlledSwiper={controlledSwiper} />
 				</div>
 			</div>
 			<Swiper
@@ -192,7 +153,6 @@ export const BlockThemeReelSection: FunctionComponent<BlockThemeReelSectionProps
 				slidesPerView="auto"
 				spaceBetween={16}
 				onSwiper={setControlledSwiper}
-				onTransitionEnd={() => updateSlideButtons()}
 				watchSlidesProgress={true}
 			>
 				{!isMobileWidth() && (
@@ -270,7 +230,7 @@ export const BlockThemeReelSection: FunctionComponent<BlockThemeReelSectionProps
 									>
 										<Button
 											variants={['black', 'sm', 'block']}
-											icon={<Icon name="add" />}
+											icon={<Icon name={AdminCoreIconName.Add} />}
 											disabled
 											tabIndex={-1}
 										/>

@@ -15,6 +15,8 @@ export interface BlockOverviewThemesThemeEntry {
 	theme: PickerItem | null;
 	// Optional upload that overrides the image configured on the theme itself
 	image?: string;
+	// Optional label that overrides the description configured on the theme itself
+	description?: string;
 }
 
 export interface BlockOverviewThemesGroup {
@@ -25,13 +27,13 @@ export interface BlockOverviewThemesGroup {
 	themes: BlockOverviewThemesThemeEntry[];
 }
 
-export interface BlockOverviewThemesProps extends DefaultComponentProps {
-	elements: BlockOverviewThemesGroup[];
-}
+export interface BlockOverviewThemesProps extends DefaultComponentProps, BlockOverviewThemesGroup {}
 
 export interface BlockOverviewThemesResolvedTheme {
 	theme: Theme;
 	imageUrl: string;
+	// Optional label that overrides the description configured on the theme itself
+	description?: string;
 }
 
 export interface BlockOverviewThemesGroupSectionProps {

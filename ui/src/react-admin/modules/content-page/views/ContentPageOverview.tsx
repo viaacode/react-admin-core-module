@@ -18,7 +18,7 @@ import type { LabelObj } from '~content-blocks/BlockPageOverview/BlockPageOvervi
 
 import { AdminConfigManager } from '~core/config/config.class';
 import { getCommonUser } from '~core/config/config.selectors.ts';
-import { ToastType } from '~core/config/config.types';
+import { AdminCoreIconName, ToastType } from '~core/config/config.types';
 import { isPublic } from '~modules/content-page/helpers/get-published-state';
 import { useGetContentPages } from '~modules/content-page/hooks/get-content-pages';
 import { useGetLanguageFilterOptions } from '~modules/content-page/hooks/useGetLanguageFilterOptions';
@@ -198,7 +198,7 @@ export const ContentPageOverview: FC = () => {
 		} else {
 			userGroupPath = 'profile.profile_user_group.group.id';
 			// Avo group ids are numbers
-			set(filtersFormatted, userGroupPath, parseInt(get(filtersFormatted, userGroupPath)));
+			set(filtersFormatted, userGroupPath, Number.parseInt(get(filtersFormatted, userGroupPath)));
 		}
 		andFilters.push(
 			...getMultiOptionFilters(
@@ -265,7 +265,7 @@ export const ContentPageOverview: FC = () => {
 		if (userGroupIdsFilter) {
 			userGroupIdsFilter.profile.profile_user_group.group.id._in =
 				userGroupIdsFilter.profile.profile_user_group.group.id._in.map((id: string) =>
-					parseInt(id, 10)
+					Number.parseInt(id, 10)
 				);
 		}
 
@@ -511,8 +511,8 @@ export const ContentPageOverview: FC = () => {
 								<Button
 									title={tText('modules/content-page/views/content-page-overview___hover-opties')}
 									type="secondary"
-									renderIcon={() => <Icon name="extraOptions" />}
-								></Button>
+									renderIcon={() => <Icon name={AdminCoreIconName.ExtraOptions} />}
+								/>
 							</DropdownButton>
 							<DropdownContent>
 								<Link
@@ -521,7 +521,7 @@ export const ContentPageOverview: FC = () => {
 									})}
 								>
 									<AvoButton
-										renderIcon={() => <Icon name="info" />}
+										renderIcon={() => <Icon name={AdminCoreIconName.Info} />}
 										size="small"
 										title={tText('admin/content/views/content-overview___bekijk-content')}
 										label={tText('admin/content/views/content-overview___bekijk-content')}
@@ -531,7 +531,7 @@ export const ContentPageOverview: FC = () => {
 									/>
 								</Link>
 								<AvoButton
-									renderIcon={() => <Icon name="view" />}
+									renderIcon={() => <Icon name={AdminCoreIconName.View} />}
 									onClick={() => handlePreviewClicked(contentPage)}
 									size="small"
 									title={tText('admin/content/views/content-overview___preview-content')}
@@ -545,7 +545,7 @@ export const ContentPageOverview: FC = () => {
 									})}
 								>
 									<AvoButton
-										renderIcon={() => <Icon name="edit" />}
+										renderIcon={() => <Icon name={AdminCoreIconName.Edit} />}
 										size="small"
 										title={tText('admin/content/views/content-overview___pas-content-aan')}
 										label={tText('admin/content/views/content-overview___pas-content-aan')}
@@ -556,7 +556,7 @@ export const ContentPageOverview: FC = () => {
 								</Link>
 								{hasPerm(DELETE_ANY_CONTENT_PAGES) && (
 									<Button
-										renderIcon={() => <Icon name="delete" />}
+										renderIcon={() => <Icon name={AdminCoreIconName.Delete} />}
 										onClick={() => openModal(contentPage)}
 										size="small"
 										title={tText('admin/content/views/content-overview___verwijder-content')}

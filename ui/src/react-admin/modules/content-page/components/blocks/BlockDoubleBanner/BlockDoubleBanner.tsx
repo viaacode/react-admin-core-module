@@ -1,13 +1,14 @@
-import { type IconName, Image, LinkTarget } from '@viaa/avo2-components';
+import { Image, LinkTarget } from '@viaa/avo2-components';
 import clsx from 'clsx';
 import { compact } from 'es-toolkit';
 import type { CSSProperties, FunctionComponent, ReactElement } from 'react';
 import React from 'react';
+import { AdminCoreIconName } from '~core/config/config.types';
 import type {
 	BlockDoubleBannerProps,
 	DoubleBannerHalf,
 } from '~content-blocks/BlockDoubleBanner/BlockDoubleBanner.types';
-import { Icon } from '~shared/components/Icon/Icon';
+import { ContentPageIcon, Icon } from '~shared/components/Icon/Icon';
 import { generateSmartLink } from '~shared/components/SmartLink/SmartLink';
 import './BlockDoubleBanner.scss';
 
@@ -38,14 +39,17 @@ export const BlockDoubleBanner: FunctionComponent<BlockDoubleBannerProps> = ({
 					<span className="c-block-double-banner__actions" aria-hidden>
 						<span className="c-block-double-banner__icons">
 							{icons.map((icon, iconIndex) => (
-								<Icon
+								<ContentPageIcon
 									key={`c-block-double-banner__icon-${index}-${iconIndex}-${icon}`}
 									className="c-block-double-banner__icon"
-									name={icon as IconName}
+									name={icon}
 								/>
 							))}
 						</span>
-						<Icon className="c-block-double-banner__arrow" name="arrowDownRight" />
+						<Icon
+							className="c-block-double-banner__arrow"
+							name={AdminCoreIconName.ArrowDownRight}
+						/>
 					</span>
 				</div>
 				<div className="c-block-double-banner__image">

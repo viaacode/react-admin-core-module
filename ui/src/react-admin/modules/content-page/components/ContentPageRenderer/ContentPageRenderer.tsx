@@ -13,6 +13,7 @@ import { stringifyUrl } from 'query-string';
 import React, { type FunctionComponent, type ReactNode, useEffect, useState } from 'react';
 import type { BlockImageProps } from '~content-blocks/BlockImage/BlockImage';
 import { AdminConfigManager } from '~core/config/config.class';
+import { AdminCoreIconName } from '~core/config/config.types';
 import {
 	type BlockClickHandler,
 	BlockClickType,
@@ -205,7 +206,7 @@ export const ContentPageRenderer: FunctionComponent<ContentPageDetailProps> = (p
 				<ToolbarRight>
 					{renderHyperlink(
 						<Button
-							iconStart={<Icon name="edit" />}
+							iconStart={<Icon name={AdminCoreIconName.Edit} />}
 							title={tText(
 								'modules/content-page/components/content-page-renderer/content-page-renderer___bewerk-pagina-tooltip'
 							)}

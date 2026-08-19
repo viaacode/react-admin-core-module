@@ -17,3 +17,7 @@ export const getThemeEntryPickerItem = (
 export const getThemeEntryImageOverride = (
 	entry: BlockOverviewThemesThemeEntry | PickerItem | null
 ): string | undefined => (entry && 'image' in entry ? entry.image : undefined);
+
+export const getThemeEntryDescriptionOverride = (
+	entry: BlockOverviewThemesThemeEntry | PickerItem | null
+): string | undefined => (entry && 'description' in entry ? entry.description : undefined);

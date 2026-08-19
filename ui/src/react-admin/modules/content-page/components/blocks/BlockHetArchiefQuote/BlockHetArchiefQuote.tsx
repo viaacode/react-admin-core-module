@@ -3,6 +3,7 @@ import clsx from 'clsx';
 import type { CSSProperties, FunctionComponent } from 'react';
 import React from 'react';
 
+import { AdminCoreIconName } from '~core/config/config.types';
 import { Icon } from '~shared/components/Icon/Icon';
 import {
 	Color,
@@ -18,7 +19,7 @@ export interface BlockHetArchiefQuoteProps extends DefaultProps {
 	// Optional because content blocks created before this block type existed (the old shared
 	// 'QUOTE' block) have no colour fields in their stored componentState, so these arrive
 	// undefined when read straight out of the database.
-	textColor?: Color;
+	textColor?: Color | GradientColor | CustomBackground;
 	frameColor?: Color | GradientColor | CustomBackground;
 }
 
@@ -42,7 +43,7 @@ export const BlockHetArchiefQuote: FunctionComponent<BlockHetArchiefQuoteProps> 
 	>
 		{/* Decorative: the quote itself carries the meaning, so keep it out of the a11y tree */}
 		<span className="c-block-het-archief-quote__mark" aria-hidden="true">
-			<Icon name="quotes" />
+			<Icon name={AdminCoreIconName.Quotes} />
 		</span>
 		<blockquote className="c-block-het-archief-quote__quote">{quote}</blockquote>
 		{authorName && (

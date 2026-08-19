@@ -68,6 +68,10 @@ export const FieldGroup: FunctionComponent<FieldGroupProps> = ({
 		<>
 			{/* biome-ignore lint/suspicious/noExplicitAny: todo */}
 			{Object.entries(fields).map((fieldState: any, fieldIndex: number) => {
+				if (fieldState[1].isVisible && !fieldState[1].isVisible(config, fieldGroupState)) {
+					return null;
+				}
+
 				// biome-ignore lint/suspicious/noExplicitAny: todo
 				const editorProps: any = {
 					...fieldState[1].editorProps,
