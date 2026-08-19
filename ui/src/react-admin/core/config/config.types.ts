@@ -13,7 +13,6 @@ import type {
 } from '~modules/content-page/types/content-pages.types';
 import type { App, Locale } from '~modules/translations/translations.core.types';
 import type { UserBulkAction } from '~modules/user/user.types';
-import type { AudioOrVideoPlayerWrapperProps } from '~shared/components/AudioOrVideoPlayerWrapper/AudioOrVideoPlayerWrapper.types';
 import type { FlowPlayerWrapperProps } from '~shared/components/FlowPlayerWrapper/FlowPlayerWrapper.types';
 
 export enum ToastType {
@@ -117,11 +116,7 @@ export interface AdminConfig {
 			component: ComponentType | null;
 		};
 		defaultAudioStill: string;
-		flowplayer?: FC<FlowPlayerWrapperProps>;
-		// Player for hetarchief ie-objects, used by the Videoblok content block. Registered by the
-		// client because resolving an ie-object to a playable file lives there.
-		// https://meemoo.atlassian.net/browse/ARC-3832
-		audioOrVideoPlayer?: FC<AudioOrVideoPlayerWrapperProps>;
+		flowplayer?: FC<FlowPlayerWrapperProps>; // User by avo for
 		buttonTypes: () => { label: string; value: string }[];
 		enableMultiLanguage: boolean;
 	};
