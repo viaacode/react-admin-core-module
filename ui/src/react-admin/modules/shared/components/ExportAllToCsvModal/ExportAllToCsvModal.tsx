@@ -215,9 +215,11 @@ export const ExportAllToCsvModal: FunctionComponent<ExportAllToCsvModalProps> = 
 					{fetchingItemsLabel}: {currentItems} / {total || '???'}
 				</span>
 			);
-		}if (percentageDownloaded === 100 && percentageConvertedToCsv !== 100) {
+		}
+		if (percentageDownloaded === 100 && percentageConvertedToCsv !== 100) {
 			return <span>{generatingCsvLabel}</span>;
-		}if (totalPercentage === 100) {
+		}
+		if (totalPercentage === 100) {
 			return (
 				<span>
 					{tText(

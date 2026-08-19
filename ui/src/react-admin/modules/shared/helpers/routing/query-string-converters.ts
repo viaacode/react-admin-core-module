@@ -78,7 +78,7 @@ export const CheckboxListParam: QueryParamEncoderDecoder<string[]> = {
 				if (value.length) {
 					return value as string[];
 				}
-					return undefined;
+				return undefined;
 			}
 			const newValues = value.split('~');
 			return newValues?.length ? newValues : undefined;

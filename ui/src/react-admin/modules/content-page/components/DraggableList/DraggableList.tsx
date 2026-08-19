@@ -147,7 +147,8 @@ const DraggableList: FunctionComponent<DraggableListProps> = ({
 					key={'draggable-list__item--target-ghost'}
 				/>
 			);
-		}if (item.isEndGhost) {
+		}
+		if (item.isEndGhost) {
 			return (
 				<div
 					className="c-draggable-list__item--end-ghost"
@@ -156,29 +157,29 @@ const DraggableList: FunctionComponent<DraggableListProps> = ({
 				/>
 			);
 		}
-			return (
-				<div
-					className={clsx('c-draggable-list__item', {
-						'c-draggable-list__item--is-being-dragged': item.isBeingDragged,
-						'c-draggable-list__item--highlighted': index === highlightedItemIndex,
-						'c-draggable-list__item--error': blockHasErrors(item.data.errors),
-					})}
-					onDragOver={(evt) => onDragOver(evt, index)}
-					onDragEnd={onDragEnd}
-					onDragStart={(e) => onDragStart(e, index)}
-					draggable
-					key={`draggable-list__item-${generateKey(item.data)}`}
-				>
-					<div className="c-draggable-list__item__content">
-						<div className="o-flex u-flex-align--center">
-							<div className="c-draggable-list__item__drag-handle">
-								<Icon name={'menu' as IconName} />
-							</div>
-							{renderItem(item.data, item.index)}
+		return (
+			<div
+				className={clsx('c-draggable-list__item', {
+					'c-draggable-list__item--is-being-dragged': item.isBeingDragged,
+					'c-draggable-list__item--highlighted': index === highlightedItemIndex,
+					'c-draggable-list__item--error': blockHasErrors(item.data.errors),
+				})}
+				onDragOver={(evt) => onDragOver(evt, index)}
+				onDragEnd={onDragEnd}
+				onDragStart={(e) => onDragStart(e, index)}
+				draggable
+				key={`draggable-list__item-${generateKey(item.data)}`}
+			>
+				<div className="c-draggable-list__item__content">
+					<div className="o-flex u-flex-align--center">
+						<div className="c-draggable-list__item__drag-handle">
+							<Icon name={'menu' as IconName} />
 						</div>
+						{renderItem(item.data, item.index)}
 					</div>
 				</div>
-			);
+			</div>
+		);
 	};
 
 	// biome-ignore lint/suspicious/noExplicitAny: todo

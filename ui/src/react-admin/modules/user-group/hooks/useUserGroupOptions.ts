@@ -51,13 +51,13 @@ export const useUserGroupOptions = (
 				})
 			);
 		}
-			return allOptions.map(
-				(opt): CheckboxOption => ({
-					label: opt.label as string,
-					id: String(opt.id),
-					checked: false,
-				})
-			);
+		return allOptions.map(
+			(opt): CheckboxOption => ({
+				label: opt.label as string,
+				id: String(opt.id),
+				checked: false,
+			})
+		);
 	}, [userGroups, includeSpecialGroups, type, isLoading]);
 
 	return [userGroupOptions, userGroups || [], isLoading];

@@ -16,5 +16,5 @@ export const Loading: FC<DefaultComponentProps & { fullscreen?: boolean; locatio
 		// biome-ignore lint/suspicious/noExplicitAny: todo
 		return <LoaderComponent {...(props as any)} />;
 	}
-		return <Spinner {...(props as SpinnerProps)} />;
+	return <Spinner {...(props as SpinnerProps)} />;
 };

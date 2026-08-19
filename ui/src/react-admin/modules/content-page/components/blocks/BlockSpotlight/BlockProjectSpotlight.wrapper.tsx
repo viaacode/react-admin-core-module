@@ -96,16 +96,16 @@ export const BlockProjectSpotlightWrapper: FunctionComponent<ProjectSpotlightWra
 								buttonAction: element?.project,
 							};
 						}
-							return {
-								title:
-									tText(
-										'react-admin/modules/content-page/components/blocks/block-spotlight/block-project-spotlight___pagina-niet-gevonden'
-									) +
-									': ' +
-									element.project?.value?.toString(),
-								image: '',
-								buttonAction: undefined,
-							};
+						return {
+							title:
+								tText(
+									'react-admin/modules/content-page/components/blocks/block-spotlight/block-project-spotlight___pagina-niet-gevonden'
+								) +
+								': ' +
+								element.project?.value?.toString(),
+							image: '',
+							buttonAction: undefined,
+						};
 					}
 				)}
 				renderLink={renderLink}

@@ -31,8 +31,8 @@ export function hasAccessUserGroups(
 			// Some required user groups and user has no user group => no access
 			return false;
 		}
-			// No required user groups and no user group ids => access
-			return true;
+		// No required user groups and no user group ids => access
+		return true;
 	}
 
 	if (currentUserGroupId === SpecialUserGroups.allContent) {

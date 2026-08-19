@@ -616,7 +616,7 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 		if (isAvo()) {
 			return renderAvoEditGrid();
 		}
-			return renderHetarchiefEditGrid();
+		return renderHetarchiefEditGrid();
 	};
 
 	if (!commonUser) {

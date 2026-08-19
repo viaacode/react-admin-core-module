@@ -80,7 +80,7 @@ export function parseAsIsoWithoutTimezone(timestamp: string): Date {
 	if (!timestamp.endsWith('Z')) {
 		return parseISO(`${timestamp}Z`);
 	}
-		return parseISO(timestamp);
+	return parseISO(timestamp);
 }
 
 /**

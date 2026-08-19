@@ -41,7 +41,7 @@ export const useGetStillsFromContentItem = (
 				if (still === 'AUDIO_WAVE_FORM') {
 					return AdminConfigManager.getConfig().components.defaultAudioStill;
 				}
-					return still;
+				return still;
 			});
 		},
 		enabled: true,

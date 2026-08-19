@@ -109,10 +109,11 @@ const PublishContentPageModal: FC<PublishContentPageModalProps> = ({
 	const getPublishedAtDisplayDate = (): Date | undefined => {
 		if (publishedAtDisplay) {
 			return parseISO(publishedAtDisplay);
-		}if (contentPage.publishedAt) {
+		}
+		if (contentPage.publishedAt) {
 			return parseISO(contentPage.publishedAt);
 		}
-			return undefined;
+		return undefined;
 	};
 
 	return (

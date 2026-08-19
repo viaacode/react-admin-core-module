@@ -7,7 +7,11 @@ import { CustomError } from '../custom-error';
 
 export function parseDuration(duration: string) {
 	const parts = duration.split(':');
-	return Number.parseInt(parts[0], 10) * 3600 + Number.parseInt(parts[1], 10) * 60 + Number.parseInt(parts[2], 10);
+	return (
+		Number.parseInt(parts[0], 10) * 3600 +
+		Number.parseInt(parts[1], 10) * 60 +
+		Number.parseInt(parts[2], 10)
+	);
 }
 
 /**

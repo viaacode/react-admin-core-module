@@ -15,7 +15,7 @@ export const useGetUserGroups = (props: GetUserGroupsParams) => {
 			if (userGroupsParams.withPermissions) {
 				return UserGroupService.fetchUserGroupsWithPermissions();
 			}
-				return UserGroupService.fetchUserGroups();
+			return UserGroupService.fetchUserGroups();
 		},
 		gcTime: Number.POSITIVE_INFINITY,
 		staleTime: Number.POSITIVE_INFINITY,
