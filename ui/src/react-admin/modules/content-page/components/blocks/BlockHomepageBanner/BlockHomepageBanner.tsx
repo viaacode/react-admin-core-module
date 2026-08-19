@@ -71,7 +71,13 @@ export const BlockHomepageBanner: FunctionComponent<BlockHomepageBannerProps> = 
 					<BlockHeading className="c-block-homepage-banner__content-title" type="h4">
 						{title}
 					</BlockHeading>
-					<Html className="c-block-homepage-banner__content-text" content={content} type="p"></Html>
+					{/* c-rich-text-editor__content gives the rich text output its standard styling,
+					    paragraph spacing included - see BlockRichText */}
+					<Html
+						className={clsx('c-block-homepage-banner__content-text', 'c-rich-text-editor__content')}
+						content={content}
+						type="p"
+					/>
 					<div className="c-block-homepage-banner__pattern-slot c-block-homepage-banner__pattern-slot--bottom">
 						<div
 							className="c-block-homepage-banner__pattern c-block-homepage-banner__pattern--right"

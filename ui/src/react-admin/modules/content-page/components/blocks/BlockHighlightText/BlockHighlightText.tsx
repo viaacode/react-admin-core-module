@@ -55,8 +55,10 @@ export const BlockHighlightText: FunctionComponent<BlockHighlightTextProps> = ({
 						aria-hidden="true"
 					/>
 				</div>
+				{/* c-rich-text-editor__content gives the rich text output its standard styling,
+				    paragraph spacing included - see BlockRichText */}
 				<Html
-					className="c-block-highlight-text__content-text"
+					className={clsx('c-block-highlight-text__content-text', 'c-rich-text-editor__content')}
 					style={
 						{
 							'--pattern-color': isGradient ? Color.White : patternColor,
@@ -64,7 +66,7 @@ export const BlockHighlightText: FunctionComponent<BlockHighlightTextProps> = ({
 					}
 					content={content}
 					type="p"
-				></Html>
+				/>
 				<div className="c-block-highlight-text__pattern-slot c-block-highlight-text__pattern-slot--bottom">
 					<div
 						className="c-block-highlight-text__pattern c-block-highlight-text__pattern--right"

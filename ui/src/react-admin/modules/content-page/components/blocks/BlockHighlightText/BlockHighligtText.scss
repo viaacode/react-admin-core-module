@@ -48,6 +48,16 @@ $pattern-mobile-overshoot: 15rem;
 			@media (max-width: variables.$g-bp4) {
 				padding: calc(#{variables.$g-spacer-unit} * 3) calc(#{variables.$g-spacer-unit} * 2.5) !important;
 			}
+
+			// The rich text paragraph margins space the paragraphs apart, but the box's own
+			// padding does the spacing at the top and the bottom.
+			> p:first-child {
+				margin-top: 0;
+			}
+
+			> p:last-child {
+				margin-bottom: 0;
+			}
 		}
 	}
 
