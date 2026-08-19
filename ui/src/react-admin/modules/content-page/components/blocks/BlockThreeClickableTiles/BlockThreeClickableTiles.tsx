@@ -4,6 +4,7 @@ import clsx from 'clsx';
 import { isNil } from 'es-toolkit';
 import type { FunctionComponent, ReactElement, ReactNode } from 'react';
 import { BlockHeading } from '~content-blocks/BlockHeading/BlockHeading';
+import { AdminCoreIconName } from '~core/config/config.types';
 import type { HeadingTypeOption } from '~modules/content-page/types/content-block.types';
 import { SmartLink } from '~modules/shared/components/SmartLink/SmartLink';
 import type { DefaultComponentProps } from '~modules/shared/types/components';
@@ -40,7 +41,7 @@ export const BlockThreeClickableTiles: FunctionComponent<BlockThreeClickableTile
 					</BlockHeading>
 				)}
 				<div className="c-block-three-clickable-tiles__icon">
-					<Icon name="arrowRight" />
+					<Icon name={AdminCoreIconName.ArrowRight} />
 				</div>
 			</div>
 		</article>

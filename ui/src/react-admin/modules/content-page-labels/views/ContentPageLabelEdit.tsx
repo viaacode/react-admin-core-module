@@ -15,6 +15,7 @@ import { isNil } from 'es-toolkit';
 import type { FunctionComponent } from 'react';
 import React, { useCallback, useEffect, useState } from 'react';
 import { AdminConfigManager, ToastType } from '~core/config';
+import { AdminCoreIconName } from '~core/config/config.types';
 import { ColorSelect } from '~modules/content-page/components/fields/ColorSelect/ColorSelect';
 import { GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF } from '~modules/content-page/const/get-color-options';
 import type {
@@ -373,7 +374,7 @@ export const ContentPageLabelEdit: FunctionComponent<ContentPageLabelEditProps> 
 		>
 			<AdminLayout.Back>
 				<Button type="borderless" onClick={onGoBack}>
-					<Icon name="chevronLeft" />
+					<Icon name={AdminCoreIconName.ChevronLeft} />
 				</Button>
 			</AdminLayout.Back>
 			<AdminLayout.Actions>

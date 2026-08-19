@@ -3,7 +3,6 @@ import type {
 	ButtonAction,
 	ButtonProps,
 	DefaultProps,
-	IconName,
 	RenderLinkFunction,
 } from '@viaa/avo2-components';
 import { Button, ButtonToolbar, Container, Spacer } from '@viaa/avo2-components';
@@ -11,7 +10,7 @@ import clsx from 'clsx';
 import { isString } from 'es-toolkit';
 import type { FunctionComponent, ReactNode } from 'react';
 import React from 'react';
-import { Icon } from '~shared/components/Icon/Icon';
+import { ContentPageIcon } from '~shared/components/Icon/Icon';
 import { defaultRenderLinkFunction } from '~shared/helpers/routing/link';
 
 import { BlockHeading } from '../BlockHeading/BlockHeading';
@@ -78,7 +77,7 @@ export const BlockAvoHero: FunctionComponent<BlockAvoHeroProps> = ({
 										{...rest}
 										// biome-ignore lint/suspicious/noArrayIndexKey: We don't have any better id at this time
 										key={`hero-button-${index}`}
-										renderIcon={rest.icon ? () => <Icon name={rest.icon as IconName} /> : undefined}
+										renderIcon={rest.icon ? () => <ContentPageIcon name={rest.icon} /> : undefined}
 									/>,
 									rest.label || rest.ariaLabel || rest.tooltip,
 									rest.altTitle || rest.label || rest.ariaLabel || rest.tooltip
@@ -89,8 +88,11 @@ export const BlockAvoHero: FunctionComponent<BlockAvoHeroProps> = ({
 				)}
 				{!!textBelowButtons && (
 					<Spacer margin="top-large" style={{ color: contentColor }}>
-						{isString(textBelowButtons) && <Html content={textBelowButtons} type="p"></Html>}
-						{!isString(textBelowButtons) && textBelowButtons}
+						{isString(textBelowButtons) ? (
+							<Html content={textBelowButtons} type="p" />
+						) : (
+							textBelowButtons
+						)}
 					</Spacer>
 				)}
 			</div>

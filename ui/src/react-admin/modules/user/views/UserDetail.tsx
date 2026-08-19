@@ -22,6 +22,7 @@ import { compact } from 'es-toolkit';
 import type { FC } from 'react';
 import React, { useCallback, useEffect, useState } from 'react';
 import { AdminConfigManager, ToastType } from '~core/config';
+import { AdminCoreIconName } from '~core/config/config.types';
 import { useGetProfileById } from '~modules/user/hooks/use-get-profile-by-id';
 import ConfirmModal from '~shared/components/ConfirmModal/ConfirmModal';
 import { ErrorView } from '~shared/components/error/ErrorView';
@@ -383,7 +384,7 @@ export const UserDetail: FC<UserDetailProps> = ({
 				<AdminLayout pageTitle={tText('admin/users/views/user-detail___gebruiker-details')}>
 					<AdminLayout.Back>
 						<Button type="borderless" onClick={onGoBack}>
-							<Icon name="chevronLeft"></Icon>
+							<Icon name={AdminCoreIconName.ChevronLeft} />
 						</Button>
 					</AdminLayout.Back>
 					<AdminLayout.Actions>

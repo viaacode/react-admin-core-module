@@ -1,6 +1,5 @@
-import { type IconName, Image, LinkTarget } from '@viaa/avo2-components';
+import { Image, LinkTarget } from '@viaa/avo2-components';
 import clsx from 'clsx';
-import { stringifyUrl } from 'query-string';
 import React, {
 	type CSSProperties,
 	type FunctionComponent,
@@ -10,6 +9,7 @@ import React, {
 	useState,
 } from 'react';
 import {
+	getThemeEntryDescriptionOverride,
 	getThemeEntryImageOverride,
 	getThemeEntryPickerItem,
 } from '~content-blocks/BlockOverviewThemes/BlockOverviewThemes.helpers.ts';
@@ -17,13 +17,13 @@ import type {
 	BlockOverviewThemesGroupSectionProps,
 	BlockOverviewThemesResolvedTheme,
 } from '~content-blocks/BlockOverviewThemes/BlockOverviewThemes.types.ts';
-import { ROUTE_PARTS } from '~shared/consts/routes';
 import { getThemeTileSpans, type ThemeTileSpan } from './getThemeTileSpans';
 import './BlockOverviewThemes.scss';
 import { AvoCoreContentPickerType } from '@viaa/avo2-types';
 import { keyBy } from 'es-toolkit/compat';
 import { BlockHeading } from '~content-blocks/BlockHeading';
 import { AdminConfigManager } from '~core/config';
+import { AdminCoreIconName } from '~core/config/config.types';
 import { Locale } from '~modules/translations/translations.core.types.ts';
 import { Icon } from '~shared/components/Icon/Icon.tsx';
 import { SmartLink } from '~shared/components/SmartLink/SmartLink.tsx';
@@ -78,12 +78,16 @@ export const BlockOverviewThemesGroupSection: FunctionComponent<
 	// A picker entry can be `null` (while being cleared in the editor) or point at a theme that no
 	// longer exists, so only the ones that actually resolve are rendered.
 	const resolvedThemes: BlockOverviewThemesResolvedTheme[] = (group.themes || [])
-		.map((themeEntry) => {
+		.map((themeEntry): BlockOverviewThemesResolvedTheme | undefined => {
 			const pickerItem = getThemeEntryPickerItem(themeEntry);
 			const theme = pickerItem?.value ? themesById[pickerItem.value] : undefined;
 			return theme
-				? // The editor can override the image that is configured on the theme itself
-					{ theme, imageUrl: getThemeEntryImageOverride(themeEntry) || theme.imageUrl || '' }
+				? // The editor can override the image and description that are configured on the theme itself
+					{
+						theme,
+						imageUrl: getThemeEntryImageOverride(themeEntry) || theme.imageUrl || '',
+						description: getThemeEntryDescriptionOverride(themeEntry),
+					}
 				: undefined;
 		})
 		.filter((resolvedTheme): resolvedTheme is BlockOverviewThemesResolvedTheme => !!resolvedTheme);
@@ -160,36 +164,65 @@ export const BlockOverviewThemesGroupSection: FunctionComponent<
 				</BlockHeading>
 			)}
 			<div ref={gridRef} className="c-block-overview-themes__grid">
-				{resolvedThemes.map(({ theme, imageUrl }, tileIndex) => {
+				{resolvedThemes.map(({ theme, imageUrl, description }, tileIndex) => {
 					const span = spans[tileIndex];
-					const url = stringifyUrl({
-						url: `/${ROUTE_PARTS.search}`,
-						query: { theme: theme.slug },
-					});
 					const locale = AdminConfigManager.getConfig().locale || Locale.Nl;
 					const themeNameLocale = (locale === Locale.Nl ? theme.nameNl : theme.nameEn) || '';
-
-					return (
-						<SmartLink
-							// biome-ignore lint/suspicious/noArrayIndexKey: themes can be picked more than once across groups
-							key={`c-block-overview-themes__tile-${groupIndex}-${tileIndex}`}
-							className={clsx('c-block-overview-themes__tile', getTileSpanClassName(span))}
-							action={{
-								value: url,
-								type: AvoCoreContentPickerType.INTERNAL_LINK,
-								target: LinkTarget.Self,
-							}}
-						>
+					const themeDescriptionLocale =
+						(locale === Locale.Nl ? theme.descriptionNl : theme.descriptionEn) || '';
+					const tileDescription = description || themeDescriptionLocale || undefined;
+					// Themes without a content page for the current locale have nothing to link to.
+					const contentPagePath =
+						locale === Locale.Nl ? theme.contentPagePathNl : theme.contentPagePathEn;
+					const tileClassName = clsx('c-block-overview-themes__tile', getTileSpanClassName(span));
+					const tileContent = (
+						<>
 							<Image
 								src={imageUrl}
 								alt={themeNameLocale}
 								className="c-block-overview-themes__tile-image"
 							/>
-							<span className="c-block-overview-themes__tile-title">{themeNameLocale}</span>
-							<Icon
-								className="c-block-overview-themes__tile-title__icon"
-								name={'arrowDownRight' as IconName}
-							/>
+							<div className="c-block-overview-themes__tile-content">
+								<div className="c-block-overview-themes__tile-text">
+									<span className="c-block-overview-themes__tile-title">{themeNameLocale}</span>
+									{!!tileDescription && (
+										<p className="c-block-overview-themes__tile-description">{tileDescription}</p>
+									)}
+								</div>
+								{!!contentPagePath && (
+									<Icon
+										className="c-block-overview-themes__tile-title__icon"
+										name={AdminCoreIconName.ArrowDownRight}
+									/>
+								)}
+							</div>
+						</>
+					);
+
+					if (!contentPagePath) {
+						return (
+							<div
+								// biome-ignore lint/suspicious/noArrayIndexKey: themes can be picked more than once across groups
+								key={`c-block-overview-themes__tile-${groupIndex}-${tileIndex}`}
+								className={tileClassName}
+							>
+								{tileContent}
+							</div>
+						);
+					}
+
+					return (
+						<SmartLink
+							// biome-ignore lint/suspicious/noArrayIndexKey: themes can be picked more than once across groups
+							key={`c-block-overview-themes__tile-${groupIndex}-${tileIndex}`}
+							className={tileClassName}
+							action={{
+								value: contentPagePath,
+								type: AvoCoreContentPickerType.CONTENT_PAGE,
+								target: LinkTarget.Self,
+							}}
+						>
+							{tileContent}
 						</SmartLink>
 					);
 				})}

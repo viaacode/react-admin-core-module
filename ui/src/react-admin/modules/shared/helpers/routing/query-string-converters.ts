@@ -17,7 +17,7 @@ export const NumberParam: QueryParamEncoderDecoder<number> = {
 		if (isNil(value)) {
 			return undefined;
 		}
-		const parsed = parseInt(value);
+		const parsed = Number.parseInt(value);
 		return Number.isNaN(parsed) ? undefined : parsed;
 	},
 };
@@ -77,9 +77,8 @@ export const CheckboxListParam: QueryParamEncoderDecoder<string[]> = {
 			if (Array.isArray(value)) {
 				if (value.length) {
 					return value as string[];
-				} else {
-					return undefined;
 				}
+				return undefined;
 			}
 			const newValues = value.split('~');
 			return newValues?.length ? newValues : undefined;

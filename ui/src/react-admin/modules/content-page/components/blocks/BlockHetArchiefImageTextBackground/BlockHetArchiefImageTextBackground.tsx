@@ -18,7 +18,7 @@ import type {
 } from '~modules/content-page/types/content-block.types';
 import { generateSmartLink } from '~modules/shared/components/SmartLink/SmartLink';
 import type { DefaultComponentProps } from '~modules/shared/types/components';
-import { Icon } from '~shared/components/Icon/Icon';
+import { ContentPageIcon } from '~shared/components/Icon/Icon';
 import { BlockHeading } from '../BlockHeading/BlockHeading';
 import './BlockHetArchiefImageTextBackground.scss';
 import type { ContentPageWidth } from '~modules/content-page/types/content-pages.types';
@@ -99,7 +99,6 @@ export const BlockHetArchiefImageTextBackground: FunctionComponent<
 	// Only reads it once the image has finished loading — reading mid-load measures
 	// ~0px, which would shrink `.media` (and the image with it) with no way to
 	// recover, since a later re-measure would just report that same self-inflicted size.
-	// biome-ignore lint/correctness/useExhaustiveDependencies: refs are stable
 	const updateMediaMeasurements = useCallback(() => {
 		const imgEl = imgRef.current;
 		const measureEl = copyrightMeasureRef.current;
@@ -186,7 +185,7 @@ export const BlockHetArchiefImageTextBackground: FunctionComponent<
 							type={buttonType}
 							icon={buttonIcon}
 							iconPosition={buttonIconAlignment}
-							renderIcon={() => (buttonIcon ? <Icon name={buttonIcon} /> : null)}
+							renderIcon={() => (buttonIcon ? <ContentPageIcon name={buttonIcon} /> : null)}
 						/>,
 						buttonAltTitle || buttonLabel
 					)}

@@ -1,0 +1,113 @@
+import { FlowPlayer, type FlowPlayerProps, getValidStartAndEnd } from '@meemoo/react-components';
+import { isNil } from 'es-toolkit';
+import React, { type FunctionComponent, type ReactNode } from 'react';
+import { AdminConfigManager } from '~core/config';
+import { Color } from '~modules/content-page/types/content-block.types.ts';
+import type { DefaultComponentProps } from '~modules/shared/types/components';
+import {
+	isAudioFormat,
+	isAudioVideoFormat,
+	isVideoFormat,
+} from '~shared/helpers/is-audio-video-format.ts';
+import { useGetFileDuration } from '~shared/hooks/use-get-file-duration.ts';
+import type { PlayableDisplayIeObject } from '~shared/services/ie-objects-service/ie-objects.types.ts';
+
+export interface IeObjectFlowPlayerWrapperProps extends DefaultComponentProps {
+	ieObject: PlayableDisplayIeObject;
+	autoplay?: boolean;
+	poster?: string;
+	onEnded?: () => void;
+	isMuted?: boolean;
+	onMutedChange?: (muted: boolean) => void;
+}
+
+export const IeObjectFlowPlayerWrapper: FunctionComponent<IeObjectFlowPlayerWrapperProps> = ({
+	ieObject,
+	autoplay,
+	poster,
+	onEnded,
+	isMuted,
+	onMutedChange,
+	className,
+}): ReactNode => {
+	const { data: mediaDuration } = useGetFileDuration(ieObject?.playableUrl);
+
+	if (!isAudioVideoFormat(ieObject.dctermsFormat)) {
+		return null;
+	}
+
+	const getStartAndEnd = () => {
+		let startPoint: number | null = null;
+		let endPoint: number | null = null;
+
+		// Only snipPoint if there are any set, and they do not fall outside the range of the video itself
+		if (ieObject.snipPoint) {
+			if (
+				ieObject.snipPoint.start &&
+				ieObject.snipPoint.start > 0 &&
+				(isNil(mediaDuration) || ieObject.snipPoint.start < mediaDuration)
+			) {
+				startPoint = ieObject.snipPoint.start;
+			}
+
+			if (
+				ieObject.snipPoint.end &&
+				(isNil(mediaDuration) ||
+					(ieObject.snipPoint.end &&
+						ieObject.snipPoint.end < mediaDuration &&
+						ieObject.snipPoint.end > 0))
+			) {
+				endPoint = ieObject.snipPoint.end;
+			}
+		}
+
+		return getValidStartAndEnd(startPoint, endPoint, mediaDuration);
+	};
+
+	// The active slide is the only one big enough to warrant the full-size newspaper image, so
+	// it's the only slide that prefers it over the (lower-res) thumbnail.
+	const imageSrc = ieObject.thumbnailUrl || '';
+
+	const [start, end]: [number | null, number | null] = getStartAndEnd();
+	const shared: Partial<FlowPlayerProps> = {
+		poster: poster ?? imageSrc,
+		title: ieObject.name,
+		logo: ieObject.maintainerLogo ?? undefined,
+		autoplay,
+		muted: isMuted,
+		onMutedChange,
+		onEnded: onEnded,
+		onError: onEnded,
+		token: AdminConfigManager.getConfig().flowplayer.FLOW_PLAYER_TOKEN,
+		dataPlayerId: AdminConfigManager.getConfig().flowplayer.FLOW_PLAYER_ID,
+		ui: isVideoFormat(ieObject.dctermsFormat) ? undefined : 1, // 1 = NO_FULLSCREEN
+		// TODO: remove cuepoints later
+		plugins: ['subtitles', 'cuepoints', 'audio'],
+		peakColorBackground: Color.Gray800,
+		peakColorInactive: Color.Zinc,
+		peakColorActive: Color.SeaGreen,
+		peakHeightFactor: 0.6,
+		preload: 'metadata',
+		start,
+		end,
+		className,
+	};
+
+	if (isAudioFormat(ieObject.dctermsFormat)) {
+		return (
+			<FlowPlayer
+				type="audio"
+				src={[
+					{
+						src: ieObject.playableUrl as string,
+						type: ieObject.mimeType as string,
+					},
+				]}
+				waveformData={ieObject.peakfileData || undefined}
+				{...shared}
+			/>
+		);
+	}
+
+	return <FlowPlayer type="video" src={ieObject.playableUrl as string} {...shared} />;
+};
