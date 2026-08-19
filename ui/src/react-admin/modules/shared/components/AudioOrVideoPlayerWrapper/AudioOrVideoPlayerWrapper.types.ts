@@ -1,4 +1,11 @@
-/**
+import type {
+	IeObjectFile,
+	IeObjectRepresentation,
+} from '~shared/components/AudioOrVideoPlayer/AudioOrVideoPlayer.types.ts';
+import type { CuePoints } from '~shared/components/FlowPlayerWrapper/FlowPlayerWrapper.types.ts';
+import type { IeObjectType } from '~shared/helpers/map-format-to-type.ts';
+
+/**Ò
  * Props for the audio/video player that the host application registers under
  * `AdminConfigManager.getConfig().components.audioOrVideoPlayer`.
  *
@@ -10,16 +17,31 @@
  * https://meemoo.atlassian.net/browse/ARC-3832
  */
 export interface AudioOrVideoPlayerWrapperProps {
-	/** Pid / fragmentId of the ie-object to play. */
-	schemaIdentifier: string;
-	/** Start of the snippet to play, in seconds. Always set together with `endTime`. */
+	className?: string;
+	allowFullScreen?: boolean;
+	paused: boolean;
+	onPlay: () => void;
+	onPause: () => void;
+	onEnded?: () => void;
+	onMediaReady: (isAvailable: boolean, playableFile: IeObjectFile | null) => void;
+	onMediaDurationLoaded?: (duration: number) => void;
+	dctermsFormat: IeObjectType | null;
+	schemaIdentifier: string | undefined;
+	representation: IeObjectRepresentation | null | undefined;
+	maintainerLogo: string | null | undefined;
+	cuePoints: CuePoints | undefined;
+	locationId: string;
+	poster: string | undefined;
+	/**
+	 * Start and end of the snippet to play, in seconds. When given, they are sent along to the
+	 * player-ticket endpoint so the media service delivers only that part, rather than relying on
+	 * flowplayer cuepoints, which merely restrict the seek bar.
+	 *
+	 * Pass both or neither: the media service only cuts when it has an end time.
+	 * https://meemoo.atlassian.net/browse/ARC-3832
+	 */
 	startTime?: number;
-	/** End of the snippet to play, in seconds. Always set together with `startTime`. */
 	endTime?: number;
-	/** Thumbnail to show before playback starts. Falls back to the object's own thumbnail. */
-	poster?: string;
-	/** Accessibility title for the player. */
 	title?: string;
 	autoplay?: boolean;
-	className?: string;
 }

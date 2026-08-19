@@ -1,11 +1,10 @@
 import type { TagInfo, TagOption } from '@viaa/avo2-components';
-import { Container, Spacer, Table, TagList, Thumbnail } from '@viaa/avo2-components';
+import { Container, Table, TagList, Thumbnail } from '@viaa/avo2-components';
 import { AvoContentTypeEnglish } from '@viaa/avo2-types';
 import { isAfter, isBefore, parseISO } from 'date-fns';
 import { compact } from 'es-toolkit';
 import type { FunctionComponent } from 'react';
 import React from 'react';
-import { BlockHeading } from '~content-blocks/BlockHeading/BlockHeading';
 import { AdminConfigManager } from '~core/config/config.class';
 import { GET_CONTENT_PAGE_WIDTH_OPTIONS } from '~modules/content-page/const/content-page.consts';
 import { useContentTypes } from '~modules/content-page/hooks/useContentTypes';
@@ -13,7 +12,6 @@ import { getContentPageDescriptionHtml } from '~modules/content-page/services/co
 import type { ContentPageInfo } from '~modules/content-page/types/content-pages.types';
 import { useUserGroupOptions } from '~modules/user-group/hooks/useUserGroupOptions';
 import type { UserGroup } from '~modules/user-group/types/user-group.types';
-import Html from '~shared/components/Html/Html';
 import { Link } from '~shared/components/Link/Link';
 import { GET_LANGUAGE_NAMES } from '~shared/consts/language-names';
 import { formatDate, formatDateString } from '~shared/helpers/formatters/date';
@@ -107,15 +105,6 @@ export const ContentPageDetailMetaData: FunctionComponent<ContentDetailMetaDataP
 	return (
 		<Container mode="vertical" size="small">
 			<Container mode="horizontal">
-				{!!description && (
-					<Spacer margin="bottom-large">
-						<BlockHeading type="h4">
-							{tHtml('admin/content/views/content-detail___omschrijving')}
-						</BlockHeading>
-						<Html content={description || '-'} sanitizePreset={SanitizePreset.full} />
-					</Spacer>
-				)}
-
 				<Table horizontal variant="invisible" className="c-table_detail-page">
 					<tbody>
 						{renderDetailRow(

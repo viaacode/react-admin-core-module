@@ -19,7 +19,7 @@ import {
 	ContentBlockEditor,
 	ContentBlockType,
 } from '~modules/content-page/types/content-block.types';
-import { IE_OBJECT_AV_FORMATS } from '~shared/helpers/mapFormatToType';
+import { IeObjectType } from '~shared/helpers/map-format-to-type.ts';
 import { snippetTimeToSeconds } from '~shared/helpers/parsers/duration';
 import { tHtml, tText } from '~shared/helpers/translation-functions';
 import { HET_ARCHIEF } from '~shared/types';
@@ -160,8 +160,14 @@ export const HETARCHIEF_VIDEO_BLOCK_CONFIG = (position = 0): ContentBlockConfig 
 				editorProps: {
 					allowedTypes: [AvoCoreContentPickerType.IE_OBJECT],
 					hideTypeDropdown: true,
-					// Only video and audio objects can be played, see IE_OBJECT_AV_TYPES in the proxy
-					ieObjectFormats: IE_OBJECT_AV_FORMATS,
+					// Only video and audio objects can be played
+					ieObjectFormats: [
+						IeObjectType.video,
+						IeObjectType.videofragment,
+						IeObjectType.film,
+						IeObjectType.audio,
+						IeObjectType.audiofragment,
+					],
 				},
 				validator: (value: PickerItem | undefined) =>
 					value?.value

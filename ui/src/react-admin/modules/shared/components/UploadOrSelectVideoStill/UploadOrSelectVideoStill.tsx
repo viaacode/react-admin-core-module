@@ -1,16 +1,7 @@
-import {
-	Button,
-	ButtonToolbar,
-	FormGroup,
-	IconName,
-	Modal,
-	ModalBody,
-	ModalFooterRight,
-} from '@viaa/avo2-components';
+import { FormGroup, Select, type SelectOption } from '@viaa/avo2-components';
 import { AvoCoreContentPickerType, AvoFileUploadAssetType } from '@viaa/avo2-types';
-import clsx from 'clsx';
-import { compact, noop, uniq } from 'es-toolkit';
-import type { FunctionComponent, KeyboardEvent } from 'react';
+import { compact, noop } from 'es-toolkit';
+import type { FunctionComponent } from 'react';
 import React, { useEffect, useState } from 'react';
 import FileUpload from '~shared/components/FileUpload/FileUpload';
 import { Loading } from '~shared/components/Loading/Loading';
@@ -22,6 +13,11 @@ import { snippetTimeToSeconds } from '~shared/helpers/parsers/duration';
 import { tText } from '~shared/helpers/translation-functions';
 
 import './UploadOrSelectVideoStill.scss';
+
+export enum ThumbnailMode {
+	AUTO = 'AUTO',
+	UPLOAD = 'UPLOAD',
+}
 
 export interface UploadOrSelectVideoStillProps {
 	label: string | undefined;
@@ -54,10 +50,8 @@ export const UploadOrSelectVideoStill: FunctionComponent<UploadOrSelectVideoStil
 	contentItemId,
 	startTime,
 }) => {
-	const [originalStillValue] = useState<string | null>(value);
-	const [uploadedStill, setUploadedStill] = useState<string | null>(null);
-	const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-	const [selectedStill, setSelectedStill] = useState<string | null>(value);
+	const [mode, setMode] = useState<ThumbnailMode>(value ? ThumbnailMode.UPLOAD : ThumbnailMode.AUTO);
+	const [selectedStill, setSelectedStill] = useState<string | null>(value || null);
 
 	// hetarchief ie-objects have their own stills source: the avo endpoint below does not know
 	// about them, and the still should come from inside the chosen snippet.
@@ -77,6 +71,9 @@ export const UploadOrSelectVideoStill: FunctionComponent<UploadOrSelectVideoStil
 	);
 
 	const { data: stills, isFetching, refetch } = isIeObject ? ieObjectStills : avoStills;
+	// The hook resolves the snippet keyframe (or the object's own thumbnail as fallback) first,
+	// so the first entry is what "automatic" ends up picking.
+	const automaticStill = stills?.[0] || null;
 
 	useEffect(() => {
 		if (contentItemId) {
@@ -86,15 +83,34 @@ export const UploadOrSelectVideoStill: FunctionComponent<UploadOrSelectVideoStil
 		}
 	}, [refetch, contentItemId]);
 
-	const handleSaveClick = () => {
-		onChange(selectedStill);
-		setIsModalOpen(false);
+	const handleModeChange = (newMode: string) => {
+		setMode(newMode as ThumbnailMode);
+		if (newMode === ThumbnailMode.AUTO) {
+			setSelectedStill(null);
+			onChange(null);
+		}
 	};
 
-	const handleUploadedStillChanged = (newValue: string[] | null) => {
-		setSelectedStill(newValue?.[0] || null);
-		setUploadedStill(newValue?.[0] || null);
+	const handleUploadChange = (newValue: string[] | null) => {
+		const uploaded = newValue?.[0] || null;
+		setSelectedStill(uploaded);
+		onChange(uploaded);
 	};
+
+	const modeOptions: SelectOption<ThumbnailMode>[] = [
+		{
+			label: tText(
+				'react-admin/modules/shared/components/upload-or-select-video-still/upload-or-select-video-still___automatisch'
+			),
+			value: ThumbnailMode.AUTO,
+		},
+		{
+			label: tText(
+				'react-admin/modules/shared/components/upload-or-select-video-still/upload-or-select-video-still___upload-een-afbeelding'
+			),
+			value: ThumbnailMode.UPLOAD,
+		},
+	];
 
 	return (
 		<FormGroup
@@ -103,83 +119,38 @@ export const UploadOrSelectVideoStill: FunctionComponent<UploadOrSelectVideoStil
 			required={required}
 			className="c-upload-or-select-video-still"
 		>
-			<FileUpload
-				assetType={AvoFileUploadAssetType.CONTENT_BLOCK_IMAGE}
-				ownerId=""
-				urls={compact([selectedStill])}
-				onChange={(newValue: string[] | null) => onChange(newValue?.[0] || null)}
-				onButtonClicked={() => setIsModalOpen(true)}
-				onDeleteFile={() => setSelectedStill(null)}
-				label={tText(
-					'react-admin/modules/shared/components/upload-or-select-video-still/upload-or-select-video-still___upload-of-kies-een-still'
-				)}
+			<Select
+				options={modeOptions}
+				value={mode}
+				onChange={handleModeChange}
+				className="c-upload-or-select-video-still__mode-select"
 			/>
-			<Modal
-				title={tText(
-					'react-admin/modules/shared/components/upload-or-select-video-still/upload-or-select-video-still___upload-of-selecteer-een-still-modal-titel'
-				)}
-				isOpen={isModalOpen}
-				onClose={() => setIsModalOpen(false)}
-				size="large"
-				scrollable
-				className="c-upload-or-select-video-still__modal"
-			>
-				<ModalBody>
-					<FileUpload
-						assetType={AvoFileUploadAssetType.CONTENT_BLOCK_IMAGE}
-						ownerId=""
-						urls={[value]}
-						onChange={handleUploadedStillChanged}
-						allowMulti={false}
-						allowedTypes={PHOTO_TYPES}
-						label={tText(
-							'react-admin/modules/shared/components/upload-or-select-video-still/upload-or-select-video-still___eigen-still-uploaden'
-						)}
-						icon={IconName.upload}
+			{mode === ThumbnailMode.AUTO &&
+				(automaticStill ? (
+					<div
+						className="c-upload-or-select-video-still__image c-upload-or-select-video-still__image--selected"
+						style={{ backgroundImage: `url(${automaticStill})` }}
 					/>
-					{uniq(
-						compact(
-							[value, uploadedStill, originalStillValue, selectedStill, ...(stills || [])].sort()
-						)
-					).map((still) => (
-						<div
-							className={clsx('c-upload-or-select-video-still__image', {
-								'c-upload-or-select-video-still__image--selected': selectedStill === still,
-							})}
-							style={{ backgroundImage: `url(${still})` }}
-							key={still}
-							onClick={() => setSelectedStill(still)}
-							onKeyUp={(evt: KeyboardEvent) => {
-								if (evt.key === 'Enter') {
-									setSelectedStill(still);
-								}
-							}}
-						/>
-					))}
-					{isFetching && (
+				) : (
+					isFetching && (
 						<div className="c-upload-or-select-video-still__spinner">
 							<Loading locationId="upload-or-select-video-still--loading" />
 						</div>
+					)
+				))}
+			{mode === ThumbnailMode.UPLOAD && (
+				<FileUpload
+					assetType={AvoFileUploadAssetType.CONTENT_BLOCK_IMAGE}
+					ownerId=""
+					urls={compact([selectedStill])}
+					onChange={handleUploadChange}
+					allowMulti={false}
+					allowedTypes={PHOTO_TYPES}
+					label={tText(
+						'react-admin/modules/shared/components/upload-or-select-video-still/upload-or-select-video-still___upload-een-eigen-afbeelding'
 					)}
-				</ModalBody>
-				<ModalFooterRight>
-					<ButtonToolbar>
-						<Button
-							label={tText(
-								'react-admin/modules/shared/components/upload-or-select-video-still/upload-or-select-video-still___annuleer'
-							)}
-							type="secondary"
-							onClick={() => setIsModalOpen(false)}
-						/>
-						<Button
-							label={tText(
-								'react-admin/modules/shared/components/upload-or-select-video-still/upload-or-select-video-still___opslaan'
-							)}
-							onClick={handleSaveClick}
-						/>
-					</ButtonToolbar>
-				</ModalFooterRight>
-			</Modal>
+				/>
+			)}
 		</FormGroup>
 	);
 };

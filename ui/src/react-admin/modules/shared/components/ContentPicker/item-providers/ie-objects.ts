@@ -24,7 +24,7 @@ const fetchIeObjects = memoize(
 					method: 'POST',
 					body: JSON.stringify({
 						filters: [
-							{ field: 'query', operator: 'contains', value: title },
+							...(title ? [{ field: 'query', operator: 'contains', value: title }] : []),
 							// `format` maps to dcterms_format as a terms query, so multiValue is an OR
 							...(formats.length ? [{ field: 'format', operator: 'is', multiValue: formats }] : []),
 						],

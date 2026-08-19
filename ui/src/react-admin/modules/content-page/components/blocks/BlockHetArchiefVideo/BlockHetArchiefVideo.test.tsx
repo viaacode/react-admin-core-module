@@ -47,7 +47,7 @@ describe('<BlockHetArchiefVideo />', () => {
 		const rootDiv = container.querySelector('div');
 
 		expect(rootDiv).toHaveClass(customClass);
-		expect(rootDiv).toHaveClass('o-container-vertical');
+		expect(rootDiv).not.toHaveClass('o-container-vertical');
 	});
 
 	it('Should render nothing without an object', () => {

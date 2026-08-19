@@ -60,7 +60,7 @@ export const BlockHetArchiefVideo: FunctionComponent<BlockHetArchiefVideoProps> 
 	const hasSnippet = startSeconds !== null && endSeconds !== null && endSeconds > startSeconds;
 
 	return (
-		<Container className={clsx(className, 'c-block-het-archief-video')} mode="vertical">
+		<Container className={clsx(className, 'c-block-het-archief-video')}>
 			<div className="c-block-het-archief-video__player" style={width ? { width } : undefined}>
 				<AudioOrVideoPlayerWrapper
 					schemaIdentifier={schemaIdentifier}
