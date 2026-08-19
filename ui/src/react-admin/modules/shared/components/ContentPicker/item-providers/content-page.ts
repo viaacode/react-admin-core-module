@@ -13,7 +13,7 @@ export const retrieveContentPages = memoize(
 	async (
 		title: string | null,
 		limit = 5,
-		type: AvoCoreContentPickerType
+		type: AvoCoreContentPickerType = AvoCoreContentPickerType.CONTENT_PAGE
 	): Promise<PickerItem[]> => {
 		const pageType = mapContentPickerTypeToPageType(type);
 		try {

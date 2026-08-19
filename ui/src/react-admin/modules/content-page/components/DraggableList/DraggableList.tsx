@@ -145,17 +145,17 @@ const DraggableList: FunctionComponent<DraggableListProps> = ({
 				<div
 					className="c-draggable-list__item--target-ghost"
 					key={'draggable-list__item--target-ghost'}
-				></div>
+				/>
 			);
-		} else if (item.isEndGhost) {
+		}if (item.isEndGhost) {
 			return (
 				<div
 					className="c-draggable-list__item--end-ghost"
 					key={'draggable-list__item--end-ghost'}
 					onDragOver={(evt) => onDragOver(evt, index)}
-				></div>
+				/>
 			);
-		} else {
+		}
 			return (
 				<div
 					className={clsx('c-draggable-list__item', {
@@ -179,7 +179,6 @@ const DraggableList: FunctionComponent<DraggableListProps> = ({
 					</div>
 				</div>
 			);
-		}
 	};
 
 	// biome-ignore lint/suspicious/noExplicitAny: todo

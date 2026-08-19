@@ -14,11 +14,10 @@ export const useGetUserGroups = (props: GetUserGroupsParams) => {
 
 			if (userGroupsParams.withPermissions) {
 				return UserGroupService.fetchUserGroupsWithPermissions();
-			} else {
-				return UserGroupService.fetchUserGroups();
 			}
+				return UserGroupService.fetchUserGroups();
 		},
-		gcTime: Infinity,
-		staleTime: Infinity,
+		gcTime: Number.POSITIVE_INFINITY,
+		staleTime: Number.POSITIVE_INFINITY,
 	});
 };

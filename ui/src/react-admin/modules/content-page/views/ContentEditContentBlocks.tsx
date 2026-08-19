@@ -263,16 +263,15 @@ const ContentEditContentBlocks: FunctionComponent<ContentEditContentBlocksProps>
 								setHighlightedBlockIndex(null);
 							}, 1000);
 						}}
-					></DraggableList>
+					/>
 				);
-			} else {
+			}
 				// A block is expanded, so we disable drag and drop
 				return (
 					<div className="content-block-sidebar__items-non-draggable">
 						{(contentPageInfo.content_blocks || []).map(renderBlockForm)}
 					</div>
 				);
-			}
 		},
 		// Only do change detection on the ids of the blocks, not the content
 		// eslint-disable-next-line react-hooks/exhaustive-deps

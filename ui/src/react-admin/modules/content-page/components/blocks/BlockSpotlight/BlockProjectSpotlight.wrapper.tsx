@@ -95,7 +95,7 @@ export const BlockProjectSpotlightWrapper: FunctionComponent<ProjectSpotlightWra
 								image: element?.customImage || projectContentPage?.thumbnailPath || '',
 								buttonAction: element?.project,
 							};
-						} else {
+						}
 							return {
 								title:
 									tText(
@@ -106,7 +106,6 @@ export const BlockProjectSpotlightWrapper: FunctionComponent<ProjectSpotlightWra
 								image: '',
 								buttonAction: undefined,
 							};
-						}
 					}
 				)}
 				renderLink={renderLink}

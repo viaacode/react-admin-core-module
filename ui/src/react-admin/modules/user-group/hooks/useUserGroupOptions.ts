@@ -50,7 +50,7 @@ export const useUserGroupOptions = (
 					value: opt.id as string,
 				})
 			);
-		} else {
+		}
 			return allOptions.map(
 				(opt): CheckboxOption => ({
 					label: opt.label as string,
@@ -58,7 +58,6 @@ export const useUserGroupOptions = (
 					checked: false,
 				})
 			);
-		}
 	}, [userGroups, includeSpecialGroups, type, isLoading]);
 
 	return [userGroupOptions, userGroups || [], isLoading];

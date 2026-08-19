@@ -4,28 +4,28 @@ import { IeObjectType } from '~shared/helpers/mapFormatToType.ts';
 /**
  * Icon for an object type. Mirrors the client's `getIconFromObjectType`
  * (hetarchief-client/src/modules/shared/components/MediaCard/MediaCard.consts.ts):
- * when the essence is available to the user we show the plain icon, otherwise the
+ * when the essence is available to the user, we show the plain icon, otherwise the
  * struck-through ("no-…") variant.
  */
 export function getIconFromObjectType(
-	format: ObjectType | undefined,
+	format: IeObjectType | undefined,
 	accessible: boolean
 ): AdminCoreIconName {
 	switch (format) {
-		case ObjectType.film:
-		case ObjectType.video:
-		case ObjectType.videofragment:
+		case IeObjectType.film:
+		case IeObjectType.video:
+		case IeObjectType.videofragment:
 			return accessible ? AdminCoreIconName.Video : AdminCoreIconName.NoVideo;
 
-		case ObjectType.audio:
-		case ObjectType.audiofragment:
+		case IeObjectType.audio:
+		case IeObjectType.audiofragment:
 			return accessible ? AdminCoreIconName.Audio : AdminCoreIconName.NoAudio;
 
-		case ObjectType.newspaper:
-		case ObjectType.newspaperpage:
+		case IeObjectType.newspaper:
+		case IeObjectType.newspaperpage:
 			return accessible ? AdminCoreIconName.Newspaper : AdminCoreIconName.NoNewspaper;
 
-		case ObjectType.image:
+		case IeObjectType.image:
 			return accessible ? AdminCoreIconName.Image : AdminCoreIconName.NoImage;
 
 		default:

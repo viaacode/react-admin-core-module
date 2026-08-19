@@ -264,7 +264,7 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 				required
 				formError={formErrors.description}
 				className="field-description"
-			></ContentPageEditFormDescription>
+			/>
 		);
 	};
 
@@ -465,7 +465,7 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 					aria-label={tText(
 						'modules/content-page/components/content-edit-form/content-edit-form___selecteer-de-taal-van-de-pagina'
 					)}
-				></Select>
+				/>
 			</FormGroup>
 		);
 	};
@@ -490,7 +490,7 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 					placeholder={tText(
 						'modules/content-page/components/content-edit-form/content-edit-form___leeg-indien-dit-de-hoofd-pagina-is'
 					)}
-				></ContentPicker>
+				/>
 			</FormGroup>
 		);
 	};
@@ -615,9 +615,8 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 	const renderEditGrid = () => {
 		if (isAvo()) {
 			return renderAvoEditGrid();
-		} else {
-			return renderHetarchiefEditGrid();
 		}
+			return renderHetarchiefEditGrid();
 	};
 
 	if (!commonUser) {

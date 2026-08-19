@@ -64,7 +64,7 @@ export const BlockHighlightText: FunctionComponent<BlockHighlightTextProps> = ({
 					}
 					content={content}
 					type="p"
-				></Html>
+				/>
 				<div className="c-block-highlight-text__pattern-slot c-block-highlight-text__pattern-slot--bottom">
 					<div
 						className="c-block-highlight-text__pattern c-block-highlight-text__pattern--right"

@@ -196,9 +196,8 @@ export const UserGroupOverview = forwardRef<
 			(currentUserGroups: UserGroupWithPermissions[] | undefined): UserGroupWithPermissions[] => {
 				if (!currentUserGroups) {
 					return cloneDeep(userGroups) as UserGroupWithPermissions[];
-				} else {
-					return currentUserGroups;
 				}
+					return currentUserGroups;
 			}
 		);
 	}, [userGroups]);

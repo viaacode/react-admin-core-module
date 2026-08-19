@@ -18,6 +18,7 @@ import './BlockTimeline.scss';
 import { BlockTimelineObjectMeta } from '~content-blocks/BlockTimeline/BlockTimelineObjectMeta.tsx';
 import { CopyrightAttribution } from '~shared/components/CopyrightAttribution';
 import { IeObjectMedia } from '~shared/components/IeObjectMedia';
+import { AdminCoreIconName } from '../../../../../../client.ts';
 
 export interface BlockTimelineProps extends DefaultComponentProps {
 	elements: TimelineNodeBlockComponentState[];
@@ -155,7 +156,7 @@ export const BlockTimeline: FunctionComponent<BlockTimelineProps> = ({
 						{},
 						[HET_ARCHIEF]
 					)}
-					<Icon name="arrowUp" className="c-block-timeline__back-to-top-icon" />
+					<Icon name={AdminCoreIconName.ArrowUp} className="c-block-timeline__back-to-top-icon" />
 				</button>
 			)}
 		</div>
