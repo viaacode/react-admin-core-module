@@ -1,4 +1,4 @@
-import type { IconName } from '@viaa/avo2-components';
+import { AdminCoreIconName } from '~core/config/config.types';
 import { ObjectType } from '~shared/helpers/mapFormatToType.ts';
 
 /**
@@ -10,25 +10,25 @@ import { ObjectType } from '~shared/helpers/mapFormatToType.ts';
 export function getIconFromObjectType(
 	format: ObjectType | undefined,
 	accessible: boolean
-): IconName {
+): AdminCoreIconName {
 	switch (format) {
 		case ObjectType.film:
 		case ObjectType.video:
 		case ObjectType.videofragment:
-			return (accessible ? 'video--light' : 'no-video--light') as IconName;
+			return accessible ? AdminCoreIconName.Video : AdminCoreIconName.NoVideo;
 
 		case ObjectType.audio:
 		case ObjectType.audiofragment:
-			return (accessible ? 'audio--light' : 'no-audio--light') as IconName;
+			return accessible ? AdminCoreIconName.Audio : AdminCoreIconName.NoAudio;
 
 		case ObjectType.newspaper:
 		case ObjectType.newspaperpage:
-			return (accessible ? 'newspaper--light' : 'no-newspaper--light') as IconName;
+			return accessible ? AdminCoreIconName.Newspaper : AdminCoreIconName.NoNewspaper;
 
 		case ObjectType.image:
-			return (accessible ? 'image--light' : 'no-image--light') as IconName;
+			return accessible ? AdminCoreIconName.Image : AdminCoreIconName.NoImage;
 
 		default:
-			return (accessible ? 'file--light' : 'no-file--light') as IconName;
+			return accessible ? AdminCoreIconName.File : AdminCoreIconName.NoFile;
 	}
 }

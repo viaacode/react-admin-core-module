@@ -1,5 +1,5 @@
 import { Button } from '@meemoo/react-components';
-import { type IconName, Image, LinkTarget } from '@viaa/avo2-components';
+import { Image, LinkTarget } from '@viaa/avo2-components';
 import { AvoCoreContentPickerType } from '@viaa/avo2-types';
 import clsx from 'clsx';
 import React, { type FunctionComponent, type ReactNode, useEffect, useState } from 'react';
@@ -8,6 +8,7 @@ import { Controller } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { useGetThemeWithObjects } from '~content-blocks/BlockThemeReels/hooks/useGetThemeWithObjects.ts';
 import { AdminConfigManager } from '~core/config';
+import { AdminCoreIconName } from '~core/config/config.types';
 import type { DefaultComponentProps } from '~modules/shared/types/components';
 import { App, Locale } from '~modules/translations/translations.core.types.ts';
 import { Icon } from '~shared/components/Icon';
@@ -92,7 +93,7 @@ export const BlockThemeReelSection: FunctionComponent<BlockThemeReelSectionProps
 						<Button
 							className="c-block-theme-reels-section__slide-image-placeholder-icon"
 							variants={['sm', 'block']}
-							icon={<Icon name={getIconFromObjectType(format, true) as IconName} />}
+							icon={<Icon name={getIconFromObjectType(format, true)} />}
 							disabled
 							tabIndex={-1}
 						/>
@@ -159,7 +160,7 @@ export const BlockThemeReelSection: FunctionComponent<BlockThemeReelSectionProps
 						{showPrevSlideButton && (
 							<Button
 								variants={['black', 'sm']}
-								icon={<Icon name="arrowLeft" />}
+								icon={<Icon name={AdminCoreIconName.ArrowLeft} />}
 								title={tText(
 									'modules/content-page/components/blocks/block-theme-reels/block-theme-reel-section___vorige-slide'
 								)}
@@ -172,7 +173,7 @@ export const BlockThemeReelSection: FunctionComponent<BlockThemeReelSectionProps
 						{showNextSlideButton && (
 							<Button
 								variants={['black', 'sm']}
-								icon={<Icon name="arrowRight" />}
+								icon={<Icon name={AdminCoreIconName.ArrowRight} />}
 								title={tText(
 									'modules/content-page/components/blocks/block-theme-reels/block-theme-reel-section___volgende-slide'
 								)}
@@ -270,7 +271,7 @@ export const BlockThemeReelSection: FunctionComponent<BlockThemeReelSectionProps
 									>
 										<Button
 											variants={['black', 'sm', 'block']}
-											icon={<Icon name="add" />}
+											icon={<Icon name={AdminCoreIconName.Add} />}
 											disabled
 											tabIndex={-1}
 										/>

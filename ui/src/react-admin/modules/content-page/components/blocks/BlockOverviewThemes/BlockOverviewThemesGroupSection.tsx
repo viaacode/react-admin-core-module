@@ -1,4 +1,4 @@
-import { type IconName, Image, LinkTarget } from '@viaa/avo2-components';
+import { Image, LinkTarget } from '@viaa/avo2-components';
 import clsx from 'clsx';
 import React, {
 	type CSSProperties,
@@ -23,6 +23,7 @@ import { AvoCoreContentPickerType } from '@viaa/avo2-types';
 import { keyBy } from 'es-toolkit/compat';
 import { BlockHeading } from '~content-blocks/BlockHeading';
 import { AdminConfigManager } from '~core/config';
+import { AdminCoreIconName } from '~core/config/config.types';
 import { Locale } from '~modules/translations/translations.core.types.ts';
 import { Icon } from '~shared/components/Icon/Icon.tsx';
 import { SmartLink } from '~shared/components/SmartLink/SmartLink.tsx';
@@ -196,7 +197,7 @@ export const BlockOverviewThemesGroupSection: FunctionComponent<
 								{!!contentPagePath && (
 									<Icon
 										className="c-block-overview-themes__tile-title__icon"
-										name={'arrowDownRight' as IconName}
+										name={AdminCoreIconName.ArrowDownRight}
 									/>
 								)}
 							</div>

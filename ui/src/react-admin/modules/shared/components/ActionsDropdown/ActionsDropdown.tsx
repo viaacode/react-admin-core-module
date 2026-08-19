@@ -8,6 +8,7 @@ import {
 } from '@meemoo/react-components';
 import type { FunctionComponent } from 'react';
 import React, { useState } from 'react';
+import { AdminCoreIconName } from '~core/config/config.types';
 import { tText } from '~shared/helpers/translation-functions';
 import { Icon } from '../Icon/Icon';
 
@@ -46,7 +47,7 @@ const ActionsDropdown: FunctionComponent<ActionsDropdownProps> = ({
 						'modules/shared/components/actions-dropdown/actions-dropdown___hover-opties'
 					)}
 				>
-					<Icon name="extraOptions" />
+					<Icon name={AdminCoreIconName.ExtraOptions} />
 				</Button>
 			</DropdownButton>
 			<DropdownContent>

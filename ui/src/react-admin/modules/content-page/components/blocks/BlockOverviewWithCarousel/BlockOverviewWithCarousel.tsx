@@ -7,6 +7,7 @@ import { Button } from '@meemoo/react-components';
 import type SwiperController from 'swiper';
 import { Controller } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { AdminCoreIconName } from '~core/config/config.types';
 import { Icon } from '~shared/components/Icon';
 import { tText } from '~shared/helpers/translation-functions.ts';
 import 'swiper/css';
@@ -124,7 +125,7 @@ export const BlockOverviewWithCarousel: FunctionComponent<BlockOverviewWithCarou
 						{showPrevSlideButton && (
 							<Button
 								variants={['black', 'sm']}
-								icon={<Icon name="arrowLeft" />}
+								icon={<Icon name={AdminCoreIconName.ArrowLeft} />}
 								title={tText(
 									'modules/content-page/components/blocks/block-overview-with-carousel/block-overview-with-carousel___vorige-slide',
 									undefined,
@@ -141,7 +142,7 @@ export const BlockOverviewWithCarousel: FunctionComponent<BlockOverviewWithCarou
 						{showNextSlideButton && (
 							<Button
 								variants={['black', 'sm']}
-								icon={<Icon name="arrowRight" />}
+								icon={<Icon name={AdminCoreIconName.ArrowRight} />}
 								title={tText(
 									'modules/content-page/components/blocks/block-overview-with-carousel/block-overview-with-carousel___volgende-slide',
 									undefined,
