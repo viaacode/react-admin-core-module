@@ -10,8 +10,7 @@ import { useGetThemeWithObjects } from '~content-blocks/BlockThemeReels/hooks/us
 import { AdminConfigManager } from '~core/config';
 import { AdminCoreIconName } from '~core/config/config.types';
 import { CarouselButtons } from '~modules/content-page/components/CarouselButtons/CarouselButtons.tsx';
-import { GET_SECONDARY_BACKGROUND_COLOR_OPTIONS_ARCHIEF } from '~modules/content-page/const/get-color-options.ts';
-import type { Color } from '~modules/content-page/types/content-block.types';
+import { getRandomTertiaryBackgroundColor } from '~modules/content-page/helpers/get-random-tertiary-background-color.ts';
 import type { DefaultComponentProps } from '~modules/shared/types/components';
 import { App, Locale } from '~modules/translations/translations.core.types.ts';
 import { Icon } from '~shared/components/Icon';
@@ -46,11 +45,7 @@ export const BlockThemeReelSection: FunctionComponent<BlockThemeReelSectionProps
 
 	// The "open this theme" tile has no image, it gets one of the tertiary brand colors instead.
 	// Picked once per mount so it stays stable while the carousel is scrolled.
-	const ctaBackgroundColor = useMemo(() => {
-		const tertiaryColors = GET_SECONDARY_BACKGROUND_COLOR_OPTIONS_ARCHIEF();
-		// eslint-disable-next-line react-hooks/purity
-		return tertiaryColors[Math.floor(Math.random() * tertiaryColors.length)].value as Color;
-	}, []);
+	const ctaBackgroundColor = useMemo(() => getRandomTertiaryBackgroundColor(), []);
 
 	if (!theme) {
 		return null;
