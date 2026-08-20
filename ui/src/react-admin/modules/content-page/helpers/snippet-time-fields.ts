@@ -1,9 +1,7 @@
-import { ConfigFn } from '@testing-library/react';
 import type { TextInputProps } from '@viaa/avo2-components';
 import { AvoCoreContentPickerType } from '@viaa/avo2-types';
 import type { HeroCarouselBlockComponentState } from '~content-blocks/BlockHeroCarousel/BlockHeroCarousel.types.ts';
 import type { HetArchiefVideoBlockComponentState } from '~content-blocks/BlockHetArchiefVideo';
-import { TIMELINE_BLOCK_CONFIG } from '~content-blocks/BlockTimeline';
 import { TEXT_FIELD } from '~content-blocks/defaults.ts';
 import {
 	type ContentBlockComponentState,
@@ -45,12 +43,12 @@ const validateSnippetTime =
 			return [
 				field === 'startTime'
 					? tText(
-							'modules/content-page/components/blocks/block-het-archief-video/block-het-archief-video___vul-ook-een-starttijd-in-of-laat-de-eindtijd-leeg',
+							'modules/content-page/helpers/snippet-time-fields___vul-ook-een-starttijd-in-of-laat-de-eindtijd-leeg',
 							undefined,
 							[HET_ARCHIEF]
 						)
 					: tText(
-							'modules/content-page/components/blocks/block-het-archief-video/block-het-archief-video___vul-ook-een-eindtijd-in-of-laat-de-starttijd-leeg',
+							'modules/content-page/helpers/snippet-time-fields___vul-ook-een-eindtijd-in-of-laat-de-starttijd-leeg',
 							undefined,
 							[HET_ARCHIEF]
 						),
@@ -61,7 +59,7 @@ const validateSnippetTime =
 		if (ownSeconds === null) {
 			return [
 				tText(
-					'modules/content-page/components/blocks/block-het-archief-video/block-het-archief-video___gebruik-het-formaat-uu-mm-ss-of-mm-ss',
+					'modules/content-page/helpers/snippet-time-fields___gebruik-het-formaat-uu-mm-ss-of-mm-ss',
 					undefined,
 					[HET_ARCHIEF]
 				),
@@ -75,7 +73,7 @@ const validateSnippetTime =
 			if (startSeconds !== null && ownSeconds <= startSeconds) {
 				return [
 					tText(
-						'modules/content-page/components/blocks/block-het-archief-video/block-het-archief-video___de-eindtijd-moet-na-de-starttijd-liggen',
+						'modules/content-page/helpers/snippet-time-fields___de-eindtijd-moet-na-de-starttijd-liggen',
 						undefined,
 						[HET_ARCHIEF]
 					),
@@ -110,11 +108,9 @@ const SNIPPET_TIME_FIELD = (field: 'startTime' | 'endTime', label: string): Cont
 		label,
 		editorType: ContentBlockEditor.TextInput,
 		editorProps: {
-			placeholder: tText(
-				'modules/content-page/components/blocks/block-het-archief-video/block-het-archief-video___bv-00-01-30',
-				undefined,
-				[HET_ARCHIEF]
-			),
+			placeholder: tText('modules/content-page/helpers/snippet-time-fields___uu-mm-ss', undefined, [
+				HET_ARCHIEF,
+			]),
 		} as TextInputProps,
 		validator: validateSnippetTime(field),
 		// The two times validate against each other, so editing one must re-check the other.
@@ -133,7 +129,9 @@ export const IE_OBJECT_WITH_SNIPPET_TIME_FIELDS = (
 	// Named `mediaItem` on purpose: generateFieldAttributes reads `state.item ||
 	// state.mediaItem` to tell the still picker below which object to fetch stills for.
 	mediaItem: {
-		label: tText('Object', undefined, [HET_ARCHIEF]),
+		label: tText('modules/content-page/helpers/snippet-time-fields___object', undefined, [
+			HET_ARCHIEF,
+		]),
 		editorType: ContentBlockEditor.ContentPicker,
 		editorProps: {
 			allowedTypes: [AvoCoreContentPickerType.IE_OBJECT],
@@ -144,23 +142,23 @@ export const IE_OBJECT_WITH_SNIPPET_TIME_FIELDS = (
 		},
 		fieldsToResetOnChange: ['startPoint', 'endPoint'],
 		validator: (value: PickerItem | undefined) =>
-			value?.value ? [] : [tText('Een object is verplicht', undefined, [HET_ARCHIEF])],
+			value?.value
+				? []
+				: [
+						tText(
+							'modules/content-page/helpers/snippet-time-fields___een-object-is-verplicht',
+							undefined,
+							[HET_ARCHIEF]
+						),
+					],
 		isVisible: isVisibleFunc,
 	},
 	startTime: SNIPPET_TIME_FIELD(
 		'startTime',
-		tText(
-			'modules/content-page/components/blocks/block-het-archief-video/block-het-archief-video___starttijd',
-			undefined,
-			[HET_ARCHIEF]
-		)
+		tText('modules/content-page/helpers/snippet-time-fields___starttijd', undefined, [HET_ARCHIEF])
 	),
 	endTime: SNIPPET_TIME_FIELD(
 		'endTime',
-		tText(
-			'modules/content-page/components/blocks/block-het-archief-video/block-het-archief-video___eindtijd',
-			undefined,
-			[HET_ARCHIEF]
-		)
+		tText('modules/content-page/helpers/snippet-time-fields___eindtijd', undefined, [HET_ARCHIEF])
 	),
 });

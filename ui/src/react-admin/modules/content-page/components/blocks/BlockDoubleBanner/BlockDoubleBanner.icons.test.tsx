@@ -34,7 +34,9 @@ describe('BlockDoubleBanner icons', () => {
 			env: { DATABASE_APPLICATION_TYPE: AvoCoreDatabaseType.hetArchief },
 		} as never);
 
-		render(<BlockDoubleBanner halves={[half('kranten', 'newspaper--light'), half('beeld')] as never} />);
+		render(
+			<BlockDoubleBanner halves={[half('kranten', 'newspaper--light'), half('beeld')] as never} />
+		);
 
 		expect(screen.getByTestId('icon-newspaper--light')).toBeInTheDocument();
 		// Both halves keep their CTA arrow, which resolves through the config key.

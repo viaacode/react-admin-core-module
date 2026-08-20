@@ -425,6 +425,7 @@ $hero-carousel-search-radius-desktop: 3.2rem;
 				min-height: 0;
 				padding: variables.$g-spacer-unit;
 				overflow: hidden;
+				background-color: inherit;
 			}
 
 			&-image {

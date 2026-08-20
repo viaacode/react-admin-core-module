@@ -41,6 +41,7 @@ export class IeObjectsService {
 		} catch (err) {
 			throw new CustomError('Failed to fetch playable display data for content block', err, {
 				blockId,
+				unsavedObjects,
 			});
 		}
 	}
