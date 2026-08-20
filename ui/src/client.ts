@@ -6,11 +6,13 @@ export { BlockButtonsWrapper } from '~content-blocks/BlockButtons/BlockButtons.w
 export { BlockCardsWithoutDescription } from '~content-blocks/BlockCardsWithoutDescription';
 export { BlockContentPageMeta } from '~content-blocks/BlockContentPageMeta';
 export { BlockCTAsWrapper } from '~content-blocks/BlockCTAs/BlockCTAs.wrapper';
+export { BlockDoubleBanner } from '~content-blocks/BlockDoubleBanner';
 export { BlockEventbrite } from '~content-blocks/BlockEventbrite';
 export { BlockHeading } from '~content-blocks/BlockHeading/BlockHeading';
 export { BlockHetArchiefHeaderSearch } from '~content-blocks/BlockHetArchiefHeaderSearch';
 export { BlockHetArchiefImageTextBackground } from '~content-blocks/BlockHetArchiefImageTextBackground';
 export { BlockHetArchiefQuote } from '~content-blocks/BlockHetArchiefQuote';
+export { BlockHetArchiefVideo } from '~content-blocks/BlockHetArchiefVideo';
 export { BlockIFrame } from '~content-blocks/BlockIFrame';
 export { BlockImage } from '~content-blocks/BlockImage';
 export { BlockImageGridWrapper } from '~content-blocks/BlockImageGrid/BlockImageGrid.wrapper';
@@ -37,6 +39,7 @@ export { BlockVideoWrapper } from '~content-blocks/BlockVideo/BlockVideo.wrapper
 export { BlockVideoTitleTextButtonWrapper } from '~content-blocks/BlockVideoTitleTextButton/BlockVideoTitleTextButton.wrapper';
 export { AdminConfigManager, AdminCoreIconName, ToastType } from '~core/config';
 export type { AdminConfig, LinkInfo, ToastInfo } from '~core/config/config.types';
+export type { AudioOrVideoPlayerWrapperProps } from '~shared/components/AudioOrVideoPlayerWrapper';
 export { ContentPageService } from '~modules/content-page/services/content-page.service';
 export { ContentBlockType } from '~modules/content-page/types/content-block.types';
 export type { DbContentPage } from '~modules/content-page/types/content-pages.types';

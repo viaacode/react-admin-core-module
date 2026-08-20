@@ -230,6 +230,14 @@ export const GET_CONTENT_BLOCK_TYPE_OPTIONS: () => SelectOption<string>[] = () =
 		},
 		{
 			label: tText(
+				'modules/content-page/const/get-content-block-type-options___dubbele-banner',
+				{},
+				[HET_ARCHIEF]
+			),
+			value: ContentBlockType.DoubleBanner,
+		},
+		{
+			label: tText(
 				'modules/content-page/const/get-content-block-type-options___hero-carousel',
 				{},
 				[HET_ARCHIEF]
@@ -243,6 +251,12 @@ export const GET_CONTENT_BLOCK_TYPE_OPTIONS: () => SelectOption<string>[] = () =
 				[HET_ARCHIEF]
 			),
 			value: ContentBlockType.Timeline,
+		},
+		{
+			label: tText('modules/content-page/const/get-content-block-type-options___videoblok', {}, [
+				HET_ARCHIEF,
+			]),
+			value: ContentBlockType.HetArchiefVideo,
 		},
 	];
 

@@ -19,7 +19,10 @@ export interface PickerTypeOption<T = AvoCoreContentPickerType> {
 	fetch?: (
 		keyword: string | null,
 		limit: number,
-		pickerType?: AvoCoreContentPickerType
+		pickerType?: AvoCoreContentPickerType,
+		// Optional dcterms formats to restrict the results to. Only honoured by the ie-object
+		// provider, which uses it so blocks can offer AV objects only.
+		formats?: string[]
 	) => Promise<PickerItem[]>;
 	placeholder?: string;
 }

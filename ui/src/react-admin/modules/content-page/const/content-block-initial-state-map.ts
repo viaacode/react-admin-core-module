@@ -8,6 +8,7 @@ import { INITIAL_CARDS_WITHOUT_DESCRIPTION_COMPONENTS_STATE } from '~content-blo
 import { INITIAL_CONTENT_ENCLOSE_BLOCK_STATE } from '~content-blocks/BlockContentEnclose/BlockContentEnclose.editorconfig';
 import { INITIAL_CONTENT_PAGE_META_COMPONENTS_STATE } from '~content-blocks/BlockContentPageMeta';
 import { INITIAL_CTAS_COMPONENTS_STATE } from '~content-blocks/BlockCTAs';
+import { INITIAL_DOUBLE_BANNER_COMPONENTS_STATE } from '~content-blocks/BlockDoubleBanner/BlockDoubleBanner.editorconfig';
 import { INITIAL_EVENTBRITE_COMPONENTS_STATE } from '~content-blocks/BlockEventbrite';
 import { INITIAL_HEADING_COMPONENTS_STATE } from '~content-blocks/BlockHeading';
 import { INITIAL_HERO_CAROUSEL_COMPONENTS_STATE } from '~content-blocks/BlockHeroCarousel';
@@ -16,6 +17,7 @@ import { INITIAL_HET_ARCHIEF_IMAGE_TEXT_BACKGROUND_BLOCK_STATE } from '~content-
 import { INITIAL_HET_ARCHIEF_QUOTE_COMPONENTS_STATE } from '~content-blocks/BlockHetArchiefQuote';
 import { INITIAL_CONTENT_HIGHLIGHT_TEXT_BLOCK_STATE } from '~content-blocks/BlockHighlightText';
 import { INITIAL_CONTENT_HOMEPAGE_BANNER_BLOCK_STATE } from '~content-blocks/BlockHomepageBanner';
+import { INITIAL_HETARCHIEF_VIDEO_COMPONENTS_STATE } from '~content-blocks/BlockHetArchiefVideo';
 import { INITIAL_IFRAME_COMPONENTS_STATE } from '~content-blocks/BlockIFrame';
 import { INITIAL_IMAGE_COMPONENTS_STATE } from '~content-blocks/BlockImage';
 import {
@@ -104,6 +106,8 @@ export const CONTENT_BLOCK_INITIAL_STATE_MAP: {
 	[ContentBlockType.ThemeReels]: INITIAL_THEME_REELS_COMPONENTS_STATE,
 	[ContentBlockType.ObjectsGrid]: INITIAL_OBJECTS_GRID_BLOCK_STATE,
 	[ContentBlockType.OverviewThemes]: INITIAL_OVERVIEW_THEMES_COMPONENTS_STATE,
+	[ContentBlockType.DoubleBanner]: INITIAL_DOUBLE_BANNER_COMPONENTS_STATE,
 	[ContentBlockType.HeroCarousel]: INITIAL_HERO_CAROUSEL_COMPONENTS_STATE,
 	[ContentBlockType.Timeline]: INITIAL_TIMELINE_COMPONENTS_STATE,
+	[ContentBlockType.HetArchiefVideo]: INITIAL_HETARCHIEF_VIDEO_COMPONENTS_STATE,
 };

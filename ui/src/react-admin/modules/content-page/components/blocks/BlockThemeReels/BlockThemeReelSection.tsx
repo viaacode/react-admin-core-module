@@ -2,7 +2,7 @@ import { Button } from '@meemoo/react-components';
 import { Image, LinkTarget } from '@viaa/avo2-components';
 import { AvoCoreContentPickerType } from '@viaa/avo2-types';
 import clsx from 'clsx';
-import React, { type FunctionComponent, type ReactNode, useState } from 'react';
+import React, { type FunctionComponent, type ReactNode, useMemo, useState } from 'react';
 import type SwiperController from 'swiper';
 import { Controller } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -10,6 +10,7 @@ import { useGetThemeWithObjects } from '~content-blocks/BlockThemeReels/hooks/us
 import { AdminConfigManager } from '~core/config';
 import { AdminCoreIconName } from '~core/config/config.types';
 import { CarouselButtons } from '~modules/content-page/components/CarouselButtons/CarouselButtons.tsx';
+import { getRandomTertiaryBackgroundColor } from '~modules/content-page/helpers/get-random-tertiary-background-color.ts';
 import type { DefaultComponentProps } from '~modules/shared/types/components';
 import { App, Locale } from '~modules/translations/translations.core.types.ts';
 import { Icon } from '~shared/components/Icon';
@@ -42,6 +43,10 @@ export const BlockThemeReelSection: FunctionComponent<BlockThemeReelSectionProps
 
 	const [controlledSwiper, setControlledSwiper] = useState<SwiperController | null>(null);
 
+	// The "open this theme" tile has no image, it gets one of the tertiary brand colors instead.
+	// Picked once per mount so it stays stable while the carousel is scrolled.
+	const ctaBackgroundColor = useMemo(() => getRandomTertiaryBackgroundColor(), []);
+
 	if (!theme) {
 		return null;
 	}
@@ -50,6 +55,11 @@ export const BlockThemeReelSection: FunctionComponent<BlockThemeReelSectionProps
 	const themeDescription = locale === Locale.En ? theme.descriptionEn : theme.descriptionNl;
 	const themeContentPagePath =
 		locale === Locale.En ? theme.contentPagePathEn : theme.contentPagePathNl;
+	const ctaLabel = tText(
+		'modules/content-page/components/blocks/block-theme-reels/block-theme-reel-section___toon-alle-count-materialen',
+		{ count: String(theme.total) },
+		[App.HET_ARCHIEF]
+	);
 
 	const renderSlideContent = (
 		image: string,
@@ -224,37 +234,21 @@ export const BlockThemeReelSection: FunctionComponent<BlockThemeReelSectionProps
 									type: AvoCoreContentPickerType.CONTENT_PAGE,
 									target: LinkTarget.Self,
 								},
-								<>
-									<div
-										className={clsx(
-											'c-block-theme-reels-section__slide-image',
-											'c-block-theme-reels-section__slide-image-placeholder'
-										)}
-										aria-hidden
-									>
-										<Button
-											variants={['black', 'sm', 'block']}
-											icon={<Icon name={AdminCoreIconName.Add} />}
-											disabled
-											tabIndex={-1}
-										/>
-									</div>
-									<div className="c-block-theme-reels-section__slide-description">
-										<span className="c-block-theme-reels-section__slide-description-title u-background-text-primary">
-											{tText(
-												'modules/content-page/components/blocks/block-theme-reels/block-theme-reel-section___toon-alle-materialen-voor-dit-theme',
-												{},
-												[App.HET_ARCHIEF]
-											)}
-										</span>
-									</div>
-								</>,
-								tText(
-									'modules/content-page/components/blocks/block-theme-reels/block-theme-reel-section___toon-alle-materialen-voor-dit-theme',
-									{},
-									[App.HET_ARCHIEF]
+								<div
+									className="c-block-theme-reels-section__cta"
+									style={{ backgroundColor: ctaBackgroundColor }}
+								>
+									<span className="c-block-theme-reels-section__cta-label">{ctaLabel}</span>
+									<span className="c-block-theme-reels-section__cta-icons" aria-hidden>
+										<Icon name={AdminCoreIconName.Collection} />
+										<Icon name={AdminCoreIconName.ArrowDownRight} />
+									</span>
+								</div>,
+								ctaLabel,
+								clsx(
+									'c-block-theme-reels-section__slide',
+									'c-block-theme-reels-section__slide--last'
 								),
-								'c-block-theme-reels-section__slide',
 								isVisible ? undefined : -1
 							);
 						}}

@@ -8,6 +8,7 @@ import { CARDS_WITHOUT_DESCRIPTION_BLOCK_CONFIG } from '~content-blocks/BlockCar
 import { CONTENT_ENCLOSE_BLOCK_CONFIG } from '~content-blocks/BlockContentEnclose';
 import { CONTENT_PAGE_META_BLOCK_CONFIG } from '~content-blocks/BlockContentPageMeta';
 import { CTAS_BLOCK_CONFIG } from '~content-blocks/BlockCTAs';
+import { DOUBLE_BANNER_BLOCK_CONFIG } from '~content-blocks/BlockDoubleBanner';
 import { EVENTBRITE_BLOCK_CONFIG } from '~content-blocks/BlockEventbrite';
 import { HEADING_BLOCK_CONFIG } from '~content-blocks/BlockHeading';
 import { HERO_CAROUSEL_CONFIG } from '~content-blocks/BlockHeroCarousel';
@@ -16,6 +17,7 @@ import { HET_ARCHIEF_IMAGE_TEXT_BACKGROUND_BLOCK_CONFIG } from '~content-blocks/
 import { HET_ARCHIEF_QUOTE_BLOCK_CONFIG } from '~content-blocks/BlockHetArchiefQuote';
 import { CONTENT_HIGHLIGHT_TEXT_CONFIG } from '~content-blocks/BlockHighlightText';
 import { CONTENT_HOMEPAGE_BANNER_CONFIG } from '~content-blocks/BlockHomepageBanner';
+import { HETARCHIEF_VIDEO_BLOCK_CONFIG } from '~content-blocks/BlockHetArchiefVideo';
 import { IFRAME_BLOCK_CONFIG } from '~content-blocks/BlockIFrame';
 import { IMAGE_BLOCK_CONFIG } from '~content-blocks/BlockImage';
 import {
@@ -101,6 +103,8 @@ export const CONTENT_BLOCK_CONFIG_MAP: Record<
 	[ContentBlockType.ThemeReels]: THEME_REELS_BLOCK_CONFIG,
 	[ContentBlockType.ObjectsGrid]: OBJECTS_GRID_BLOCK_CONFIG,
 	[ContentBlockType.OverviewThemes]: OVERVIEW_THEMES_BLOCK_CONFIG,
+	[ContentBlockType.DoubleBanner]: DOUBLE_BANNER_BLOCK_CONFIG,
 	[ContentBlockType.HeroCarousel]: HERO_CAROUSEL_CONFIG,
 	[ContentBlockType.Timeline]: TIMELINE_BLOCK_CONFIG,
+	[ContentBlockType.HetArchiefVideo]: HETARCHIEF_VIDEO_BLOCK_CONFIG,
 };

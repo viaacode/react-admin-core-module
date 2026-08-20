@@ -91,14 +91,30 @@ export const generateFieldAttributes = (
 			} as DatePickerProps;
 
 		case ContentBlockEditor.IconPicker:
-		case ContentBlockEditor.ColorSelect:
-			return {
+		case ContentBlockEditor.ColorSelect: {
+			const options = field.editorProps.options as SelectOption<string>[];
+			const selectAttributes = {
 				onChange: ((option: SelectOption<string>) => {
 					onChange(option?.value || '');
 					// biome-ignore lint/suspicious/noExplicitAny: todo investigate why this cast is needed
 				}) as any,
-				value: field.editorProps.options.find((opt: SelectOption<string>) => opt.value === value),
+				value: options.find((option) => option.value === value),
 			};
+
+			if (field.editorType === ContentBlockEditor.ColorSelect) {
+				const configuredDefaultValue = field.editorProps.defaultValue;
+
+				return {
+					...selectAttributes,
+					defaultValue:
+						typeof configuredDefaultValue === 'string'
+							? options.find((option) => option.value === configuredDefaultValue)
+							: configuredDefaultValue,
+				};
+			}
+
+			return selectAttributes;
+		}
 
 		case ContentBlockEditor.RICH_TEXT_EDITOR: {
 			// biome-ignore lint/suspicious/noExplicitAny: todo
@@ -176,6 +192,9 @@ export const generateFieldAttributes = (
 				// So we can figure out which stills to show the user for this content item
 				contentItemType: item?.type || null,
 				contentItemId: item?.value || null,
+				// For a snippet block the still should come from inside the snippet, not from the
+				// start of the object. https://meemoo.atlassian.net/browse/ARC-3832
+				startTime: state.startTime,
 			};
 		}
 

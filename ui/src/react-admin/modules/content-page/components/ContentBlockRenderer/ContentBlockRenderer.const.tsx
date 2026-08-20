@@ -7,12 +7,14 @@ import { BlockButtonsWrapper } from '~content-blocks/BlockButtons';
 import { BlockCardsWithoutDescription } from '~content-blocks/BlockCardsWithoutDescription';
 import { BlockContentPageMeta } from '~content-blocks/BlockContentPageMeta';
 import { BlockCTAsWrapper } from '~content-blocks/BlockCTAs';
+import { BlockDoubleBanner } from '~content-blocks/BlockDoubleBanner';
 import { BlockEventbrite } from '~content-blocks/BlockEventbrite';
 import { BlockHeading } from '~content-blocks/BlockHeading';
 import { BlockHeroCarousel } from '~content-blocks/BlockHeroCarousel';
 import { BlockHetArchiefHeaderSearch } from '~content-blocks/BlockHetArchiefHeaderSearch/BlockHetArchiefHeaderSearch';
 import { BlockHetArchiefImageTextBackground } from '~content-blocks/BlockHetArchiefImageTextBackground';
 import { BlockHetArchiefQuote } from '~content-blocks/BlockHetArchiefQuote';
+import { BlockHetArchiefVideo } from '~content-blocks/BlockHetArchiefVideo';
 import { BlockHighlightText } from '~content-blocks/BlockHighlightText';
 import { BlockHomepageBanner } from '~content-blocks/BlockHomepageBanner';
 import { BlockIFrame } from '~content-blocks/BlockIFrame';
@@ -86,6 +88,7 @@ export function GET_BLOCK_COMPONENT(
 		[ContentBlockType.MaintainersGrid]: BlockMaintainersGrid,
 		[ContentBlockType.ScrollDownNudge]: BlockScrollDownNudge,
 		[ContentBlockType.ObjectsGrid]: BlockObjectsGrid,
+		[ContentBlockType.HetArchiefVideo]: BlockHetArchiefVideo,
 
 		// Het archief specific blocks
 		[ContentBlockType.HetArchiefHeaderSearch]: BlockHetArchiefHeaderSearch,
@@ -101,6 +104,7 @@ export function GET_BLOCK_COMPONENT(
 		[ContentBlockType.HighlightText]: BlockHighlightText,
 		[ContentBlockType.ThemeReels]: BlockThemeReels,
 		[ContentBlockType.OverviewThemes]: BlockOverviewThemes,
+		[ContentBlockType.DoubleBanner]: BlockDoubleBanner,
 		[ContentBlockType.HeroCarousel]: BlockHeroCarousel,
 		[ContentBlockType.Timeline]: BlockTimeline,
 
