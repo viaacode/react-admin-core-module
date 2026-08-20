@@ -145,17 +145,17 @@ const ContentBlockForm: FunctionComponent<ContentBlockFormProps> = ({
 	};
 
 	const handleValidation = (
-		field: ContentBlockField,
+		currentField: ContentBlockField,
 		fieldKey: keyof ContentBlockComponentState | keyof ContentBlockState,
 		// biome-ignore lint/suspicious/noExplicitAny: todo
 		updatedFormValue: any,
-		siblingFields: Record<string, ContentBlockField>,
+		fields: Record<string, ContentBlockField>,
 		stateIndex?: number,
 		updatedState?: ContentBlockComponentState | ContentBlockState
 	) => {
 		let errors = validateContentBlockField(
 			fieldKey,
-			field?.validator,
+			currentField?.validator,
 			configErrors,
 			updatedFormValue,
 			stateIndex,
@@ -164,8 +164,8 @@ const ContentBlockForm: FunctionComponent<ContentBlockFormProps> = ({
 
 		// Cross-field rules: re-run the partner fields' validators against the updated state too,
 		// otherwise their errors would linger until the user edits them as well.
-		for (const siblingKey of field?.revalidateFields || []) {
-			const siblingField = siblingFields[siblingKey];
+		for (const siblingKey of currentField?.revalidateFields || []) {
+			const siblingField = fields[siblingKey];
 
 			if (!siblingField?.validator) {
 				continue;

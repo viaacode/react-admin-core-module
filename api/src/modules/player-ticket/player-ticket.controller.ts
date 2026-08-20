@@ -76,14 +76,12 @@ export class PlayerTicketController {
 	 * The pattern is anchored on purpose: an unanchored test accepts strings such as "a1", which
 	 * then parse to NaN and silently disable the cut further down the chain instead of failing.
 	 */
-	private parseTimeParam(name: string, value: string | undefined): number | undefined {
+	private parseTimeParam(value: string | undefined): number | undefined {
 		if (value === undefined || value === null || value === '') {
 			return undefined;
 		}
 		if (!/^\d+$/.test(value)) {
-			throw new BadRequestException(
-				`Query param ${name} must be a whole number of seconds, got "${value}"`
-			);
+			return undefined; // Silent failure
 		}
 		return Number.parseInt(value, 10);
 	}

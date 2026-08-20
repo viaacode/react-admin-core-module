@@ -26,13 +26,12 @@ export interface BlockHetArchiefVideoProps extends DefaultProps {
 }
 
 /**
- * Plays a snippet of an AV ie-object on a content page, with an optional caption underneath.
+ * Plays a snippet of an audio/video ie-object on a content page, with an optional caption underneath.
  *
- * The snippet is purely editorial: it does not exist as an object in the MAM. The start and end
- * time are handed to the player, which passes them on to the player-ticket endpoint so the media
- * service delivers only that part.
- *
- * https://meemoo.atlassian.net/browse/ARC-3832
+ * The snippet is purely editorial: it does not exist as an object in the MAM. Which object plays
+ * and which part of it plays are both read from this block's stored config by the proxy -- the
+ * block only sends its own id -- so the returned url is already cut to the snippet the editor
+ * configured
  */
 export const BlockHetArchiefVideo: FunctionComponent<BlockHetArchiefVideoProps> = ({
 	className,
