@@ -8,15 +8,11 @@
 
 	&__annotation {
 		color: colors.$neutral;
-		@include typography.sofia-pro-body-sm(true);
-		font-size: 1.4rem;
-		line-height: 2rem;
+		@include typography.sofia-pro-body-xs(true);
 	}
 
 	&__text {
 		color: colors.$color-gray-1000;
-		@include typography.sofia-pro-body-sm(true);
-		font-size: 1.4rem;
-		line-height: 2rem;
+		@include typography.sofia-pro-body-xs(true);
 	}
 }

@@ -48,10 +48,16 @@ export const CarouselButtons: FunctionComponent<CarouselButtonsProps> = ({
 			// eslint-disable-next-line react-hooks/set-state-in-effect
 			updateSlideButtons();
 			controlledSwiper.on('transitionEnd', updateSlideButtons);
+			// Slides whose size isn't known up front (e.g. width derived from an image's aspect
+			// ratio once it loads) can make swiper.update() discover, after the fact and without
+			// any transition, that there's now more (or less) to scroll than at mount time. That
+			// only fires swiper's 'update' event, not 'transitionEnd', so listen for both.
+			controlledSwiper.on('update', updateSlideButtons);
 		}
 
 		return () => {
 			controlledSwiper?.off('transitionEnd', updateSlideButtons);
+			controlledSwiper?.off('update', updateSlideButtons);
 		};
 	}, [controlledSwiper, isPlainCallbackMode]);
 

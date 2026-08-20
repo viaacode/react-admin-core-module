@@ -2,7 +2,6 @@
 @use "../../../../shared/styles/settings/variables" as variables;
 @use "../../../../shared/styles/settings/colors" as colors;
 @use "../../../../shared/styles/mixins/typography" as typography;
-@use "../../../../shared/styles/mixins/focus" as focus;
 
 .c-block-image-carousel {
 	.c-block-image-carousel__header {
@@ -12,11 +11,11 @@
 		flex-wrap: wrap;
 		align-items: center;
 		gap: variables.$g-spacer-unit * 2;
-		margin-bottom: 2.2rem;
+		margin-bottom: variables.$g-spacer-unit * 3;
 		justify-content: space-between;
 
 		@media (max-width: variables.$g-bp2) {
-			margin-bottom: variables.$g-spacer-unit * 3;
+			margin-bottom: variables.$g-spacer-unit * 2;
 			gap: variables.$g-spacer-unit * 1.5;
 		}
 
@@ -33,36 +32,50 @@
 			gap: variables.$g-spacer-unit * 2;
 			min-width: 0;
 		}
-
-		@media (max-width: variables.$g-bp2) {
-			flex-direction: column;
-			align-items: stretch;
-
-			&-title {
-				margin-right: 0;
-			}
-
-			&-actions {
-				width: 100%;
-			}
-		}
 	}
 
 	&__wrapper {
 		overflow: visible !important;
+
+		.swiper-wrapper {
+			// Slides must not stretch to match the tallest sibling: a wrapped caption on one
+			// slide should never add whitespace under the (fixed-height) image of another.
+			align-items: flex-start;
+		}
 	}
 
 	&__slide {
-		display: flex !important;
-		flex-direction: column;
-		height: 48rem !important;
+		// Just a shrink-to-fit box around &-content below: the actual column layout lives one
+		// level deeper so that swiper/react still sees a plain <SwiperSlide> (see the .tsx file
+		// for why the layout logic can't live directly on the SwiperSlide component itself).
 		width: auto;
 
-		&-image {
-			flex: auto;
+		&-content {
+			display: flex;
+			flex-direction: column;
 			width: fit-content;
-			height: 100%;
+			gap: variables.$g-spacer-unit * 2;
+		}
+
+		&-image-wrapper {
+			// Exists only so JS can reach the <img> to measure it (see BlockImageCarousel.tsx);
+			// it must not introduce a box of its own or it would sit between the slide and the
+			// image in a way that breaks the slide's own fit-content width.
+			display: contents;
+		}
+
+		&-image {
+			// Fixed, non-flexing height: the image's height must never be shrunk to make room
+			// for the caption, since that would leave the slide's auto-width sized for the
+			// original (unshrunk) aspect ratio while the image itself renders narrower.
+			flex: none;
+			width: fit-content;
+			height: 48rem;
 			overflow: hidden;
+
+			@media (max-width: variables.$g-bp2) {
+				height: 24rem;
+			}
 
 			> img {
 				width: auto;
@@ -70,6 +83,20 @@
 				object-fit: contain;
 				object-position: center;
 			}
+		}
+
+		// Compound selector (both classes are on the same element, see BlockImageCarousel.tsx):
+		// needed to reliably beat CopyrightAttribution's own `.a-copyright-attribution { width:
+		// 100% }` on specificity, rather than depending on which .scss file's import happens to
+		// land later in the bundle.
+		&-image-attribution.a-copyright-attribution {
+			// Capped to the image's rendered width (a JS-measured px value set as a CSS custom
+			// property on the slide, see BlockImageCarousel.tsx). A percentage width here would
+			// let a long, wrapping caption inflate the slide's own fit-content width beyond the
+			// image, since browsers can fall back to the caption's un-wrapped text width when
+			// computing the slide's intrinsic size across a row of several slides.
+			width: fit-content;
+			max-width: var(--c-block-image-carousel-slide-image-width, 100%);
 		}
 	}
 }

@@ -1,18 +1,17 @@
-import { Image } from '@viaa/avo2-components';
+import clsx from 'clsx';
 import React, { type FunctionComponent, type ReactElement, useState } from 'react';
 import type SwiperController from 'swiper';
 import { Controller } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
-import clsx from 'clsx';
 import { BlockHeading } from '~content-blocks/BlockHeading';
+import { ImageCarouselSlide } from '~content-blocks/BlockImageCarousel/BlockImageCarouselSlide.tsx';
 import { CarouselButtons } from '~modules/content-page/components/CarouselButtons/CarouselButtons.tsx';
 import type {
 	CopyrightComponentState,
 	HeadingTypeOption,
 } from '~modules/content-page/types/content-block.types';
 import type { DefaultComponentProps } from '~modules/shared/types/components';
-import { CopyrightAttribution } from '~shared/components/CopyrightAttribution';
 
 import './BlockImageCarousel.scss';
 
@@ -50,34 +49,16 @@ export const BlockImageCarousel: FunctionComponent<BlockImageCarouselProps> = ({
 				slidesPerView="auto"
 				spaceBetween={16}
 				onSwiper={setControlledSwiper}
-				watchSlidesProgress={true}
 			>
-				{elements.map(
-					({ image, imageAlt, copyrightTitle, copyrightText, copyrightIconVisible }, index) => {
-						return (
-							<SwiperSlide
-								key={`c-block-image-carousel-slide__${title}__${
-									// biome-ignore lint/suspicious/noArrayIndexKey: No unique identifier possible
-									index
-								}`}
-								className="c-block-image-carousel__slide"
-							>
-								<Image
-									src={image}
-									alt={imageAlt || title}
-									className={clsx('c-block-image-carousel__slide-image')}
-									loading="lazy"
-								/>
-								<CopyrightAttribution
-									className={'c-block-image-carousel__slide-image-attribution'}
-									title={copyrightTitle}
-									text={copyrightText}
-									showIcon={copyrightIconVisible}
-								/>
-							</SwiperSlide>
-						);
-					}
-				)}
+				{elements.map((element, index) => (
+					<SwiperSlide
+						// biome-ignore lint/suspicious/noArrayIndexKey: No unique identifier possible
+						key={`c-block-image-carousel-slide__${title}__${index}`}
+						className="c-block-image-carousel__slide"
+					>
+						<ImageCarouselSlide title={title} {...element} />
+					</SwiperSlide>
+				))}
 			</Swiper>
 		</div>
 	);
