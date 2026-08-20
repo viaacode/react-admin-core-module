@@ -19,6 +19,7 @@ import { BlockHighlightText } from '~content-blocks/BlockHighlightText';
 import { BlockHomepageBanner } from '~content-blocks/BlockHomepageBanner';
 import { BlockIFrame } from '~content-blocks/BlockIFrame';
 import { BlockImage } from '~content-blocks/BlockImage';
+import { BlockImageCarousel } from '~content-blocks/BlockImageCarousel';
 import {
 	BlockImageGridWrapper,
 	BlockLogoGridWrapper,
@@ -107,6 +108,7 @@ export function GET_BLOCK_COMPONENT(
 		[ContentBlockType.DoubleBanner]: BlockDoubleBanner,
 		[ContentBlockType.HeroCarousel]: BlockHeroCarousel,
 		[ContentBlockType.Timeline]: BlockTimeline,
+		[ContentBlockType.ImageCarousel]: BlockImageCarousel,
 
 		// Avo specific blocks
 		[ContentBlockType.MediaGrid]: loadComponentFromConfig(ContentBlockType.MediaGrid),

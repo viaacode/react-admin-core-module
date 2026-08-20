@@ -15,11 +15,12 @@ import { HERO_CAROUSEL_CONFIG } from '~content-blocks/BlockHeroCarousel';
 import { HET_ARCHIEF_HEADER_SEARCH_BLOCK_CONFIG } from '~content-blocks/BlockHetArchiefHeaderSearch';
 import { HET_ARCHIEF_IMAGE_TEXT_BACKGROUND_BLOCK_CONFIG } from '~content-blocks/BlockHetArchiefImageTextBackground';
 import { HET_ARCHIEF_QUOTE_BLOCK_CONFIG } from '~content-blocks/BlockHetArchiefQuote';
+import { HETARCHIEF_VIDEO_BLOCK_CONFIG } from '~content-blocks/BlockHetArchiefVideo';
 import { CONTENT_HIGHLIGHT_TEXT_CONFIG } from '~content-blocks/BlockHighlightText';
 import { CONTENT_HOMEPAGE_BANNER_CONFIG } from '~content-blocks/BlockHomepageBanner';
-import { HETARCHIEF_VIDEO_BLOCK_CONFIG } from '~content-blocks/BlockHetArchiefVideo';
 import { IFRAME_BLOCK_CONFIG } from '~content-blocks/BlockIFrame';
 import { IMAGE_BLOCK_CONFIG } from '~content-blocks/BlockImage';
+import { IMAGE_CAROUSEL_CONFIG } from '~content-blocks/BlockImageCarousel';
 import {
 	IMAGE_GRID_BLOCK_CONFIG,
 	LOGO_GRID_BLOCK_CONFIG,
@@ -107,4 +108,5 @@ export const CONTENT_BLOCK_CONFIG_MAP: Record<
 	[ContentBlockType.HeroCarousel]: HERO_CAROUSEL_CONFIG,
 	[ContentBlockType.Timeline]: TIMELINE_BLOCK_CONFIG,
 	[ContentBlockType.HetArchiefVideo]: HETARCHIEF_VIDEO_BLOCK_CONFIG,
+	[ContentBlockType.ImageCarousel]: IMAGE_CAROUSEL_CONFIG,
 };

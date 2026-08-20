@@ -198,6 +198,7 @@ export enum ContentBlockType {
 	HeroCarousel = 'HERO_CAROUSEL',
 	Timeline = 'TIMELINE',
 	HetArchiefVideo = 'HETARCHIEF_VIDEO',
+	ImageCarousel = 'IMAGE_CAROUSEL',
 }
 
 export enum ContentBlockEditor {
