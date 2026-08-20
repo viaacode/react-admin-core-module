@@ -49,6 +49,7 @@ import { INITIAL_TAGS_WITH_LINK_COMPONENTS_STATE } from '~content-blocks/BlockTa
 import { INITIAL_THEME_REELS_COMPONENTS_STATE } from '~content-blocks/BlockThemeReels';
 import { INITIAL_THREE_CLICKABLE_TILES_COMPONENTS_STATE } from '~content-blocks/BlockThreeClickableTiles';
 import { INITIAL_TIMELINE_COMPONENTS_STATE } from '~content-blocks/BlockTimeline';
+import { INITIAL_TITLE_WITH_PARALLAX_COMPONENTS_STATE } from '~content-blocks/BlockTitleWithParallax/BlockTitleWithParallax.editorconfig.ts';
 import { INITIAL_UITGEKLAARD_BLOCK_STATE } from '~content-blocks/BlockUitgeklaard';
 import { INITIAL_MEDIA_PLAYER_COMPONENTS_STATE } from '~content-blocks/BlockVideo';
 import { INITIAL_MEDIA_PLAYER_TITLE_TEXT_BUTTON_COMPONENTS_STATE } from '~content-blocks/BlockVideoTitleTextButton';
@@ -112,4 +113,5 @@ export const CONTENT_BLOCK_INITIAL_STATE_MAP: {
 	[ContentBlockType.Timeline]: INITIAL_TIMELINE_COMPONENTS_STATE,
 	[ContentBlockType.HetArchiefVideo]: INITIAL_HETARCHIEF_VIDEO_COMPONENTS_STATE,
 	[ContentBlockType.ImageCarousel]: INITIAL_IMAGE_CAROUSEL_COMPONENTS_STATE,
+	[ContentBlockType.TitleWithParallax]: INITIAL_TITLE_WITH_PARALLAX_COMPONENTS_STATE,
 };
