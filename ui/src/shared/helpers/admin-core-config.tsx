@@ -102,6 +102,7 @@ export function getAdminCoreConfigForLocalTestApp(navigateFunc: NavigateFunction
 				ContentBlockType.ObjectsGrid,
 				ContentBlockType.OverviewThemes,
 				ContentBlockType.Timeline,
+				ContentBlockType.DoubleBanner,
 			],
 			defaultPageWidth: ContentPageWidth.LARGE,
 			onSaveContentPage: async (contentPageInfo: ContentPageInfo) => {
@@ -130,6 +131,7 @@ export function getAdminCoreConfigForLocalTestApp(navigateFunc: NavigateFunction
 			component: ({ name }: { name: string }) => <span>{name}</span>,
 			componentProps: {
 				add: { name: 'add' },
+				collection: { name: 'collection' },
 				view: { name: 'view' },
 				angleDown: { name: 'down' },
 				angleUp: { name: 'up' },

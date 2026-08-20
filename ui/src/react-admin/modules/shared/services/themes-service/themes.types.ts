@@ -22,6 +22,9 @@ export interface ThemeWithObjects extends Theme {
 		maintainerId: string;
 		maintainerName: string;
 	}[];
+	// The number of ie-objects linked to the theme, which is more than the objects in `ieObjects`
+	// since those are capped by the requested page size.
+	total: number;
 }
 
 export interface ThemesResponse {
