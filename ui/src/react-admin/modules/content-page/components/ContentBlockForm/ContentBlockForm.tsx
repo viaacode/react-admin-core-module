@@ -132,27 +132,54 @@ const ContentBlockForm: FunctionComponent<ContentBlockFormProps> = ({
 				onError(blockIndex, newErrors);
 			}
 		} else if (!(field.isVisible && !field.isVisible(config, stateToCheckVisibility))) {
-			handleValidation(field, key, value, stateIndex);
+			handleValidation(
+				field,
+				key,
+				value,
+				config[formGroupType].fields as Record<string, ContentBlockField>,
+				stateIndex,
+				stateToCheckVisibility
+			);
 		}
 		onChange(formGroupType, stateUpdate, Array.isArray(components.state) ? stateIndex : undefined);
 	};
 
 	const handleValidation = (
-		field: ContentBlockField,
+		currentField: ContentBlockField,
 		fieldKey: keyof ContentBlockComponentState | keyof ContentBlockState,
 		// biome-ignore lint/suspicious/noExplicitAny: todo
 		updatedFormValue: any,
-		stateIndex?: number
+		fields: Record<string, ContentBlockField>,
+		stateIndex?: number,
+		updatedState?: ContentBlockComponentState | ContentBlockState
 	) => {
-		const validator = field?.validator;
-
-		const errors = validateContentBlockField(
+		let errors = validateContentBlockField(
 			fieldKey,
-			validator,
+			currentField?.validator,
 			configErrors,
 			updatedFormValue,
-			stateIndex
+			stateIndex,
+			updatedState
 		);
+
+		// Cross-field rules: re-run the partner fields' validators against the updated state too,
+		// otherwise their errors would linger until the user edits them as well.
+		for (const siblingKey of currentField?.revalidateFields || []) {
+			const siblingField = fields[siblingKey];
+
+			if (!siblingField?.validator) {
+				continue;
+			}
+			errors = validateContentBlockField(
+				siblingKey,
+				siblingField.validator,
+				errors,
+				// biome-ignore lint/suspicious/noExplicitAny: state shape varies per block
+				(updatedState as any)?.[siblingKey],
+				stateIndex,
+				updatedState
+			);
+		}
 
 		onError(blockIndex, errors);
 	};

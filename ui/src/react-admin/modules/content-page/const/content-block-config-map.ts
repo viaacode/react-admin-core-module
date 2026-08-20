@@ -17,6 +17,7 @@ import { HET_ARCHIEF_IMAGE_TEXT_BACKGROUND_BLOCK_CONFIG } from '~content-blocks/
 import { HET_ARCHIEF_QUOTE_BLOCK_CONFIG } from '~content-blocks/BlockHetArchiefQuote';
 import { CONTENT_HIGHLIGHT_TEXT_CONFIG } from '~content-blocks/BlockHighlightText';
 import { CONTENT_HOMEPAGE_BANNER_CONFIG } from '~content-blocks/BlockHomepageBanner';
+import { HETARCHIEF_VIDEO_BLOCK_CONFIG } from '~content-blocks/BlockHetArchiefVideo';
 import { IFRAME_BLOCK_CONFIG } from '~content-blocks/BlockIFrame';
 import { IMAGE_BLOCK_CONFIG } from '~content-blocks/BlockImage';
 import {
@@ -105,4 +106,5 @@ export const CONTENT_BLOCK_CONFIG_MAP: Record<
 	[ContentBlockType.DoubleBanner]: DOUBLE_BANNER_BLOCK_CONFIG,
 	[ContentBlockType.HeroCarousel]: HERO_CAROUSEL_CONFIG,
 	[ContentBlockType.Timeline]: TIMELINE_BLOCK_CONFIG,
+	[ContentBlockType.HetArchiefVideo]: HETARCHIEF_VIDEO_BLOCK_CONFIG,
 };
