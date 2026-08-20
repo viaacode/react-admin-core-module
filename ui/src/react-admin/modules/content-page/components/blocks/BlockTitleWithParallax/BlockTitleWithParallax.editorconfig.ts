@@ -48,6 +48,10 @@ export const TITLE_WITH_PARALLAX_CONFIG = (position = 0): ContentBlockConfig => 
 				editorProps: {
 					options: GET_VISUAL_TYPE_OPTIONS(),
 				},
+				// The subtitle field is only visible for 'BIG' (see its own isVisible below), so
+				// clear its value whenever visualType changes - otherwise a subtitle typed while
+				// on 'BIG' keeps rendering after switching to 'SMALL', just hidden from the editor.
+				fieldsToResetOnChange: ['subtitle'],
 			},
 			title: TEXT_FIELD(
 				{

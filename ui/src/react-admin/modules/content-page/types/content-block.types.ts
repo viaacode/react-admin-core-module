@@ -665,7 +665,7 @@ export type TimelineBlockState = DefaultContentBlockState;
 export type TitleWithParallaxVisualisationOption = 'BIG' | 'SMALL';
 
 export interface TitleWithParallaxBlockComponentState {
-	visualType: TitleWithParallaxVisualisationOption;
+	visualType?: TitleWithParallaxVisualisationOption;
 	title: string;
 	subtitle?: string;
 	image?: string;
