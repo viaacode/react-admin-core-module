@@ -4,8 +4,8 @@ import type { PickerItem } from '~shared/types/content-picker.ts';
 
 export interface HeroCarouselBlockComponentState {
 	mediaItem?: PickerItem;
-	startPoint?: string;
-	endPoint?: string;
+	startTime?: string;
+	endTime?: string;
 	videoThumbnail?: string;
 	backgroundColor?: Color;
 }

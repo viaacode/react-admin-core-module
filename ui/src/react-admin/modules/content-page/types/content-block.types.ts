@@ -15,6 +15,7 @@ import type {
 	ContentTabStyle,
 } from '~content-blocks/BlockPageOverview/BlockPageOverview.types';
 import type { ImageInfo } from '~content-blocks/BlockSpotlight/BlockSpotlight';
+import type { PickerItem } from '~shared/types/content-picker.ts';
 
 // OPTIONS
 export type AlignOption = 'left' | 'right' | 'center';
@@ -648,7 +649,9 @@ export interface TimelineNodeBlockComponentState {
 	title: string;
 	text?: string;
 	visualType: TimelineNodeVisualType;
-	mediaItem?: ButtonAction; // Content picker value pointing to an IE_OBJECT (pid/fragmentId)
+	mediaItem?: PickerItem; // Content picker value pointing to an IE_OBJECT (pid/fragmentId)
+	startTime?: number;
+	endTime?: number;
 	image?: string;
 	imageAlt?: string;
 	copyrightTitle?: string;

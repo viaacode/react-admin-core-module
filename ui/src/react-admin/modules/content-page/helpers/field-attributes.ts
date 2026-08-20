@@ -176,9 +176,6 @@ export const generateFieldAttributes = (
 				// So we can figure out which stills to show the user for this content item
 				contentItemType: item?.type || null,
 				contentItemId: item?.value || null,
-				// For a snippet block the still should come from inside the snippet, not from the
-				// start of the object. https://meemoo.atlassian.net/browse/ARC-3832
-				startTime: state.startTime,
 			};
 		}
 

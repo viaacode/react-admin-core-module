@@ -41,8 +41,8 @@ export const BlockHeroCarousel: FunctionComponent<BlockHeroCarouselProps> = ({
 		() =>
 			elements.map((element) => ({
 				schemaIdentifier: String(element.mediaItem?.value || ''),
-				start: element.startPoint ? (toSeconds(element.startPoint, true) ?? undefined) : undefined,
-				end: element.endPoint ? (toSeconds(element.endPoint, true) ?? undefined) : undefined,
+				start: element.startTime ? (toSeconds(element.startTime, true) ?? undefined) : undefined,
+				end: element.endTime ? (toSeconds(element.endTime, true) ?? undefined) : undefined,
 			})),
 		[elements]
 	);

@@ -51,6 +51,8 @@ export const BlockTimeline: FunctionComponent<BlockTimelineProps> = ({
 		() =>
 			elements.map((node) => ({
 				schemaIdentifier: node.visualType === 'OBJECT' ? String(node.mediaItem?.value || '') : '',
+				startTime: node?.startTime,
+				endTime: node?.endTime,
 			})),
 		[elements]
 	);
