@@ -22,7 +22,11 @@ const ieObject = {
 } as unknown as PlayableDisplayIeObject;
 
 const mockPlayableDisplayData = vi.fn<
-	() => { data: (PlayableDisplayIeObject | null)[] | undefined }
+	() => {
+		data: (PlayableDisplayIeObject | null)[] | undefined;
+		isLoading?: boolean;
+		isFetching?: boolean;
+	}
 >(() => ({ data: [ieObject] }));
 const mockPlayer = vi.fn<(props: IeObjectFlowPlayerWrapperProps) => null>(() => null);
 
@@ -83,6 +87,27 @@ describe('<BlockHetArchiefVideo />', () => {
 
 		expect(container).toBeEmptyDOMElement();
 		expect(mockPlayer).not.toHaveBeenCalled();
+	});
+
+	it('Should hold the block its spot with the poster while the object is still loading', () => {
+		mockPlayableDisplayData.mockReturnValue({ data: undefined, isLoading: true });
+
+		const { container } = render(<BlockHetArchiefVideo blockId={blockId} poster="poster.jpg" />);
+
+		expect(
+			container.querySelector('.c-block-het-archief-video__player--loading')
+		).toBeInTheDocument();
+		expect(container.querySelector('img')).toHaveAttribute('src', 'poster.jpg');
+		expect(mockPlayer).not.toHaveBeenCalled();
+	});
+
+	it('Should swap the poster for the player once the object has been resolved', () => {
+		mockPlayableDisplayData.mockReturnValue({ data: [ieObject], isLoading: false });
+
+		const { container } = render(<BlockHetArchiefVideo blockId={blockId} poster="poster.jpg" />);
+
+		expect(container.querySelector('.c-block-het-archief-video__player--loading')).toBeNull();
+		expect(mockPlayer).toHaveBeenCalled();
 	});
 
 	it('Should render nothing for an object that resolved to no playable url', () => {

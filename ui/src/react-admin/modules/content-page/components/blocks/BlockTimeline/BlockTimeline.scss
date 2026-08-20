@@ -288,6 +288,20 @@ $object-meta-gap: 4rem;
 		object-position: center;
 	}
 
+	// A node whose object is still being resolved shows its poster dimmed with a spinner on top,
+	// rather than an empty spot that pops into a player.
+	&__node-image-wrapper--loading img {
+		opacity: 0.5;
+	}
+
+	&__node-object-loading {
+		position: absolute;
+		inset: 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
 	&__node-image-caption {
 		padding-top: 0.5rem;
 	}

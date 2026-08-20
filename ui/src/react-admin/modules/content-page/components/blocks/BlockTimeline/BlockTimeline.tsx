@@ -1,3 +1,4 @@
+import { Spinner } from '@viaa/avo2-components';
 import clsx from 'clsx';
 import type { CSSProperties, FunctionComponent, ReactElement } from 'react';
 import React, { useMemo, useRef } from 'react';
@@ -47,13 +48,12 @@ export const BlockTimeline: FunctionComponent<BlockTimelineProps> = ({
 
 	// While this block is being put together in the editor, it has no id yet, so its nodes go along
 	// for the proxy to resolve. One entry per node, so the response stays aligned. Timeline nodes
-	// never play a snippet, so they carry no snipPoints.
+	// never play a snippet, so they carry no snipPoints -- which also keeps the node's own start/end
+	// times out of the query key, where editing them would refetch for nothing.
 	const unsavedObjects = useMemo(
 		() =>
 			elements.map((node) => ({
 				schemaIdentifier: node.visualType === 'OBJECT' ? String(node.mediaItem?.value || '') : '',
-				startTime: node?.startTime,
-				endTime: node?.endTime,
 			})),
 		[elements]
 	);
@@ -88,6 +88,10 @@ export const BlockTimeline: FunctionComponent<BlockTimelineProps> = ({
 					// timeline and shows an error tile where the media would have been.
 					const hasFailedObject =
 						hasObject && !!ieObjects && index < ieObjects.length && ieObjects[index] === null;
+					// Until its object has been resolved the node shows what its own config knows --
+					// the poster image, if it has one -- so the timeline is laid out at its final
+					// size straight away instead of reflowing as the objects come in.
+					const isLoadingObject = hasObject && !ieObject && !hasFailedObject;
 
 					return (
 						<li
@@ -122,6 +126,28 @@ export const BlockTimeline: FunctionComponent<BlockTimelineProps> = ({
 								{hasFailedObject && (
 									<div className={clsx('c-ie-object-media')}>
 										<IeObjectLoadError className="c-block-timeline__node-object-error" />
+									</div>
+								)}
+								{isLoadingObject && (
+									<div className={clsx('c-ie-object-media')}>
+										<div
+											className={clsx(
+												'c-block-timeline__node-image-wrapper',
+												'c-block-timeline__node-image-wrapper--loading'
+											)}
+										>
+											{node.image && (
+												<img
+													src={node.image}
+													alt=""
+													aria-hidden="true"
+													className="c-block-timeline__node-object-image"
+												/>
+											)}
+											<div className="c-block-timeline__node-object-loading">
+												<Spinner size="large" locationId={'timeline-node-object'} />
+											</div>
+										</div>
 									</div>
 								)}
 								{ieObject && (

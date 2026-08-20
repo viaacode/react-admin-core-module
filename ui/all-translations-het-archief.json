@@ -3443,6 +3443,186 @@
     "id": "",
     "app": "HET_ARCHIEF",
     "component": "ADMIN_CORE",
+    "location": "modules/content-page/helpers/snippet-time-fields",
+    "key": "vul-ook-een-starttijd-in-of-laat-de-eindtijd-leeg",
+    "language": "nl",
+    "value": "Vul ook een starttijd in of laat de eindtijd leeg",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/helpers/snippet-time-fields",
+    "key": "vul-ook-een-starttijd-in-of-laat-de-eindtijd-leeg",
+    "language": "en",
+    "value": "Vul ook een starttijd in of laat de eindtijd leeg",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/helpers/snippet-time-fields",
+    "key": "vul-ook-een-eindtijd-in-of-laat-de-starttijd-leeg",
+    "language": "nl",
+    "value": "Vul ook een eindtijd in of laat de starttijd leeg",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/helpers/snippet-time-fields",
+    "key": "vul-ook-een-eindtijd-in-of-laat-de-starttijd-leeg",
+    "language": "en",
+    "value": "Vul ook een eindtijd in of laat de starttijd leeg",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/helpers/snippet-time-fields",
+    "key": "gebruik-het-formaat-uu-mm-ss-of-mm-ss",
+    "language": "nl",
+    "value": "Gebruik het formaat uu mm ss of mm ss",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/helpers/snippet-time-fields",
+    "key": "gebruik-het-formaat-uu-mm-ss-of-mm-ss",
+    "language": "en",
+    "value": "Gebruik het formaat uu mm ss of mm ss",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/helpers/snippet-time-fields",
+    "key": "de-eindtijd-moet-na-de-starttijd-liggen",
+    "language": "nl",
+    "value": "De eindtijd moet na de starttijd liggen",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/helpers/snippet-time-fields",
+    "key": "de-eindtijd-moet-na-de-starttijd-liggen",
+    "language": "en",
+    "value": "De eindtijd moet na de starttijd liggen",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/helpers/snippet-time-fields",
+    "key": "uu-mm-ss",
+    "language": "nl",
+    "value": "uu:mm:ss",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/helpers/snippet-time-fields",
+    "key": "uu-mm-ss",
+    "language": "en",
+    "value": "uu:mm:ss",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/helpers/snippet-time-fields",
+    "key": "object",
+    "language": "nl",
+    "value": "Object",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/helpers/snippet-time-fields",
+    "key": "object",
+    "language": "en",
+    "value": "Object",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/helpers/snippet-time-fields",
+    "key": "een-object-is-verplicht",
+    "language": "nl",
+    "value": "Een object is verplicht",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/helpers/snippet-time-fields",
+    "key": "een-object-is-verplicht",
+    "language": "en",
+    "value": "Een object is verplicht",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/helpers/snippet-time-fields",
+    "key": "starttijd",
+    "language": "nl",
+    "value": "starttijd",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/helpers/snippet-time-fields",
+    "key": "starttijd",
+    "language": "en",
+    "value": "starttijd",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/helpers/snippet-time-fields",
+    "key": "eindtijd",
+    "language": "nl",
+    "value": "eindtijd",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/helpers/snippet-time-fields",
+    "key": "eindtijd",
+    "language": "en",
+    "value": "eindtijd",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
     "location": "modules/content-page/hooks/use-get-language-filter-options",
     "key": "language-bestaat",
     "language": "nl",
@@ -12783,6 +12963,106 @@
     "id": "",
     "app": "HET_ARCHIEF",
     "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/ie-object-metadata/ie-object-metadata",
+    "key": "bekijk-de-volledige-video",
+    "language": "nl",
+    "value": "Bekijk de volledige video",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/ie-object-metadata/ie-object-metadata",
+    "key": "bekijk-de-volledige-video",
+    "language": "en",
+    "value": "Bekijk de volledige video",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/ie-object-metadata/ie-object-metadata",
+    "key": "beluister-de-volledige-audio",
+    "language": "nl",
+    "value": "Beluister de volledige audio",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/ie-object-metadata/ie-object-metadata",
+    "key": "beluister-de-volledige-audio",
+    "language": "en",
+    "value": "Beluister de volledige audio",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/ie-object-metadata/ie-object-metadata",
+    "key": "bekijk-de-volledige-krant",
+    "language": "nl",
+    "value": "Bekijk de volledige krant",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/ie-object-metadata/ie-object-metadata",
+    "key": "bekijk-de-volledige-krant",
+    "language": "en",
+    "value": "Bekijk de volledige krant",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/ie-object-metadata/ie-object-metadata",
+    "key": "bekijk-de-volledige-afbeelding",
+    "language": "nl",
+    "value": "Bekijk de volledige afbeelding",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/ie-object-metadata/ie-object-metadata",
+    "key": "bekijk-de-volledige-afbeelding",
+    "language": "en",
+    "value": "Bekijk de volledige afbeelding",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/ie-object-metadata/ie-object-metadata",
+    "key": "bekijk-het-volledige-object",
+    "language": "nl",
+    "value": "Bekijk het volledige object",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/ie-object-metadata/ie-object-metadata",
+    "key": "bekijk-het-volledige-object",
+    "language": "en",
+    "value": "Bekijk het volledige object",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
     "location": "admin/menu/views/menu-edit",
     "key": "het-navigatie-item-zal-zichtbaar-zijn-voor-gebruikers-die-geen-toegang-hebben-tot-de-geselecteerde-pagina",
     "language": "nl",
@@ -15198,6 +15478,106 @@
     "language": "en",
     "value": "Management",
     "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/shared/components/upload-or-select-video-still/upload-or-select-video-still",
+    "key": "upload-of-kies-een-still",
+    "language": "nl",
+    "value": "Upload of kies een still",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/shared/components/upload-or-select-video-still/upload-or-select-video-still",
+    "key": "upload-of-kies-een-still",
+    "language": "en",
+    "value": "Upload or choose a still",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/shared/components/upload-or-select-video-still/upload-or-select-video-still",
+    "key": "upload-of-selecteer-een-still-modal-titel",
+    "language": "nl",
+    "value": "Upload of selecteer een still modal titel",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/shared/components/upload-or-select-video-still/upload-or-select-video-still",
+    "key": "upload-of-selecteer-een-still-modal-titel",
+    "language": "en",
+    "value": "Upload or select a still modal title",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/shared/components/upload-or-select-video-still/upload-or-select-video-still",
+    "key": "eigen-still-uploaden",
+    "language": "nl",
+    "value": "Eigen still uploaden",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/shared/components/upload-or-select-video-still/upload-or-select-video-still",
+    "key": "eigen-still-uploaden",
+    "language": "en",
+    "value": "Upload still manually",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/shared/components/upload-or-select-video-still/upload-or-select-video-still",
+    "key": "annuleer",
+    "language": "nl",
+    "value": "Annuleer",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/shared/components/upload-or-select-video-still/upload-or-select-video-still",
+    "key": "annuleer",
+    "language": "en",
+    "value": "Cancel",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/shared/components/upload-or-select-video-still/upload-or-select-video-still",
+    "key": "opslaan",
+    "language": "nl",
+    "value": "Opslaan",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/shared/components/upload-or-select-video-still/upload-or-select-video-still",
+    "key": "opslaan",
+    "language": "en",
+    "value": "Save",
+    "value_type": "TEXT"
   },
   {
     "id": "",
@@ -20544,6 +20924,46 @@
     "app": "HET_ARCHIEF",
     "component": "ADMIN_CORE",
     "location": "modules/content-page/components/blocks/block-overview-themes/block-overview-themes",
+    "key": "beschrijving-overschrijft-de-beschrijving-van-het-thema",
+    "language": "nl",
+    "value": "Beschrijving overschrijft de beschrijving van het thema",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-overview-themes/block-overview-themes",
+    "key": "beschrijving-overschrijft-de-beschrijving-van-het-thema",
+    "language": "en",
+    "value": "Beschrijving overschrijft de beschrijving van het thema",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-overview-themes/block-overview-themes",
+    "key": "beschrijving-mag-max-300-karakters-lang-zijn",
+    "language": "nl",
+    "value": "Beschrijving mag max 300 karakters lang zijn",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-overview-themes/block-overview-themes",
+    "key": "beschrijving-mag-max-300-karakters-lang-zijn",
+    "language": "en",
+    "value": "Beschrijving mag max 300 karakters lang zijn",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-overview-themes/block-overview-themes",
     "key": "voeg-thema-toe",
     "language": "nl",
     "value": "Voeg thema toe",
@@ -22544,6 +22964,26 @@
     "app": "HET_ARCHIEF",
     "component": "ADMIN_CORE",
     "location": "modules/content-page/components/blocks/block-theme-reels/block-theme-reel-section",
+    "key": "toon-alle-count-materialen",
+    "language": "nl",
+    "value": "Toon alle {{count}} materialen",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-theme-reels/block-theme-reel-section",
+    "key": "toon-alle-count-materialen",
+    "language": "en",
+    "value": "Toon alle {{count}} materialen",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-theme-reels/block-theme-reel-section",
     "key": "toon-alle",
     "language": "nl",
     "value": "Toon alle",
@@ -23777,446 +24217,6 @@
     "key": "gelieve-een-correcte-zoekfilter-link-in-te-vullen",
     "language": "en",
     "value": "Please enter a correct search filter link.",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/helpers/snippet-time-fields",
-    "key": "vul-ook-een-starttijd-in-of-laat-de-eindtijd-leeg",
-    "language": "nl",
-    "value": "Vul ook een starttijd in of laat de eindtijd leeg",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/helpers/snippet-time-fields",
-    "key": "vul-ook-een-starttijd-in-of-laat-de-eindtijd-leeg",
-    "language": "en",
-    "value": "Vul ook een starttijd in of laat de eindtijd leeg",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/helpers/snippet-time-fields",
-    "key": "vul-ook-een-eindtijd-in-of-laat-de-starttijd-leeg",
-    "language": "nl",
-    "value": "Vul ook een eindtijd in of laat de starttijd leeg",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/helpers/snippet-time-fields",
-    "key": "vul-ook-een-eindtijd-in-of-laat-de-starttijd-leeg",
-    "language": "en",
-    "value": "Vul ook een eindtijd in of laat de starttijd leeg",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/helpers/snippet-time-fields",
-    "key": "gebruik-het-formaat-uu-mm-ss-of-mm-ss",
-    "language": "nl",
-    "value": "Gebruik het formaat uu mm ss of mm ss",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/helpers/snippet-time-fields",
-    "key": "gebruik-het-formaat-uu-mm-ss-of-mm-ss",
-    "language": "en",
-    "value": "Gebruik het formaat uu mm ss of mm ss",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/helpers/snippet-time-fields",
-    "key": "de-eindtijd-moet-na-de-starttijd-liggen",
-    "language": "nl",
-    "value": "De eindtijd moet na de starttijd liggen",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/helpers/snippet-time-fields",
-    "key": "de-eindtijd-moet-na-de-starttijd-liggen",
-    "language": "en",
-    "value": "De eindtijd moet na de starttijd liggen",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/helpers/snippet-time-fields",
-    "key": "uu-mm-ss",
-    "language": "nl",
-    "value": "uu:mm:ss",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/helpers/snippet-time-fields",
-    "key": "uu-mm-ss",
-    "language": "en",
-    "value": "uu:mm:ss",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/helpers/snippet-time-fields",
-    "key": "object",
-    "language": "nl",
-    "value": "Object",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/helpers/snippet-time-fields",
-    "key": "object",
-    "language": "en",
-    "value": "Object",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/helpers/snippet-time-fields",
-    "key": "een-object-is-verplicht",
-    "language": "nl",
-    "value": "Een object is verplicht",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/helpers/snippet-time-fields",
-    "key": "een-object-is-verplicht",
-    "language": "en",
-    "value": "Een object is verplicht",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/helpers/snippet-time-fields",
-    "key": "starttijd",
-    "language": "nl",
-    "value": "starttijd",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/helpers/snippet-time-fields",
-    "key": "starttijd",
-    "language": "en",
-    "value": "starttijd",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/helpers/snippet-time-fields",
-    "key": "eindtijd",
-    "language": "nl",
-    "value": "eindtijd",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/helpers/snippet-time-fields",
-    "key": "eindtijd",
-    "language": "en",
-    "value": "eindtijd",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/ie-object-metadata/ie-object-metadata",
-    "key": "bekijk-de-volledige-video",
-    "language": "nl",
-    "value": "Bekijk de volledige video",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/ie-object-metadata/ie-object-metadata",
-    "key": "bekijk-de-volledige-video",
-    "language": "en",
-    "value": "Bekijk de volledige video",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/ie-object-metadata/ie-object-metadata",
-    "key": "beluister-de-volledige-audio",
-    "language": "nl",
-    "value": "Beluister de volledige audio",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/ie-object-metadata/ie-object-metadata",
-    "key": "beluister-de-volledige-audio",
-    "language": "en",
-    "value": "Beluister de volledige audio",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/ie-object-metadata/ie-object-metadata",
-    "key": "bekijk-de-volledige-krant",
-    "language": "nl",
-    "value": "Bekijk de volledige krant",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/ie-object-metadata/ie-object-metadata",
-    "key": "bekijk-de-volledige-krant",
-    "language": "en",
-    "value": "Bekijk de volledige krant",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/ie-object-metadata/ie-object-metadata",
-    "key": "bekijk-de-volledige-afbeelding",
-    "language": "nl",
-    "value": "Bekijk de volledige afbeelding",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/ie-object-metadata/ie-object-metadata",
-    "key": "bekijk-de-volledige-afbeelding",
-    "language": "en",
-    "value": "Bekijk de volledige afbeelding",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/ie-object-metadata/ie-object-metadata",
-    "key": "bekijk-het-volledige-object",
-    "language": "nl",
-    "value": "Bekijk het volledige object",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/ie-object-metadata/ie-object-metadata",
-    "key": "bekijk-het-volledige-object",
-    "language": "en",
-    "value": "Bekijk het volledige object",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/shared/components/upload-or-select-video-still/upload-or-select-video-still",
-    "key": "upload-of-kies-een-still",
-    "language": "nl",
-    "value": "Upload of kies een still",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/shared/components/upload-or-select-video-still/upload-or-select-video-still",
-    "key": "upload-of-kies-een-still",
-    "language": "en",
-    "value": "Upload or choose a still",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/shared/components/upload-or-select-video-still/upload-or-select-video-still",
-    "key": "upload-of-selecteer-een-still-modal-titel",
-    "language": "nl",
-    "value": "Upload of selecteer een still modal titel",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/shared/components/upload-or-select-video-still/upload-or-select-video-still",
-    "key": "upload-of-selecteer-een-still-modal-titel",
-    "language": "en",
-    "value": "Upload or select a still modal title",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/shared/components/upload-or-select-video-still/upload-or-select-video-still",
-    "key": "eigen-still-uploaden",
-    "language": "nl",
-    "value": "Eigen still uploaden",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/shared/components/upload-or-select-video-still/upload-or-select-video-still",
-    "key": "eigen-still-uploaden",
-    "language": "en",
-    "value": "Upload still manually",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/shared/components/upload-or-select-video-still/upload-or-select-video-still",
-    "key": "annuleer",
-    "language": "nl",
-    "value": "Annuleer",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/shared/components/upload-or-select-video-still/upload-or-select-video-still",
-    "key": "annuleer",
-    "language": "en",
-    "value": "Cancel",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/shared/components/upload-or-select-video-still/upload-or-select-video-still",
-    "key": "opslaan",
-    "language": "nl",
-    "value": "Opslaan",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/shared/components/upload-or-select-video-still/upload-or-select-video-still",
-    "key": "opslaan",
-    "language": "en",
-    "value": "Save",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-overview-themes/block-overview-themes",
-    "key": "beschrijving-overschrijft-de-beschrijving-van-het-thema",
-    "language": "nl",
-    "value": "Beschrijving overschrijft de beschrijving van het thema",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-overview-themes/block-overview-themes",
-    "key": "beschrijving-overschrijft-de-beschrijving-van-het-thema",
-    "language": "en",
-    "value": "Beschrijving overschrijft de beschrijving van het thema",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-overview-themes/block-overview-themes",
-    "key": "beschrijving-mag-max-300-karakters-lang-zijn",
-    "language": "nl",
-    "value": "Beschrijving mag max 300 karakters lang zijn",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-overview-themes/block-overview-themes",
-    "key": "beschrijving-mag-max-300-karakters-lang-zijn",
-    "language": "en",
-    "value": "Beschrijving mag max 300 karakters lang zijn",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-theme-reels/block-theme-reel-section",
-    "key": "toon-alle-count-materialen",
-    "language": "nl",
-    "value": "Toon alle {{count}} materialen",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-theme-reels/block-theme-reel-section",
-    "key": "toon-alle-count-materialen",
-    "language": "en",
-    "value": "Toon alle {{count}} materialen",
     "value_type": "TEXT"
   },
   {
@@ -30104,6 +30104,26 @@
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
     "location": "modules/admin/const/routing",
+    "key": "themas",
+    "language": "nl",
+    "value": "Themas",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/const/routing",
+    "key": "themas",
+    "language": "en",
+    "value": "Themas",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/const/routing",
     "key": "navigatie",
     "language": "nl",
     "value": "Navigatie",
@@ -30497,6 +30517,346 @@
     "key": "terug-naar-in-aanvraag",
     "language": "en",
     "value": "Back to in request",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/const/themes",
+    "key": "een-standaard-thumbnail-is-verplicht",
+    "language": "nl",
+    "value": "Een standaard thumbnail is verplicht",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/const/themes",
+    "key": "een-standaard-thumbnail-is-verplicht",
+    "language": "en",
+    "value": "Een standaard thumbnail is verplicht",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/const/themes",
+    "key": "slug-mag-enkel-kleine-letters-cijfers-en-koppeltekens-bevatten",
+    "language": "nl",
+    "value": "Slug mag enkel kleine letters cijfers en koppeltekens bevatten",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/const/themes",
+    "key": "slug-mag-enkel-kleine-letters-cijfers-en-koppeltekens-bevatten",
+    "language": "en",
+    "value": "Slug mag enkel kleine letters cijfers en koppeltekens bevatten",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/const/themes",
+    "key": "slug-is-verplicht",
+    "language": "nl",
+    "value": "Slug is verplicht",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/const/themes",
+    "key": "slug-is-verplicht",
+    "language": "en",
+    "value": "Slug is verplicht",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/const/themes",
+    "key": "nl-benaming-is-verplicht",
+    "language": "nl",
+    "value": "Nl benaming is verplicht",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/const/themes",
+    "key": "nl-benaming-is-verplicht",
+    "language": "en",
+    "value": "Nl benaming is verplicht",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/const/themes",
+    "key": "en-benaming-is-verplicht",
+    "language": "nl",
+    "value": "En benaming is verplicht",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/const/themes",
+    "key": "en-benaming-is-verplicht",
+    "language": "en",
+    "value": "En benaming is verplicht",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/const/themes",
+    "key": "de-beschrijving-mag-maximaal-300-tekens-bevatten",
+    "language": "nl",
+    "value": "De beschrijving mag maximaal 300 tekens bevatten",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/const/themes",
+    "key": "de-beschrijving-mag-maximaal-300-tekens-bevatten",
+    "language": "en",
+    "value": "De beschrijving mag maximaal 300 tekens bevatten",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/const/themes",
+    "key": "geef-een-intern-pad-op-dat-begint-met-een-slash",
+    "language": "nl",
+    "value": "Geef een intern pad op dat begint met een slash",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/const/themes",
+    "key": "geef-een-intern-pad-op-dat-begint-met-een-slash",
+    "language": "en",
+    "value": "Geef een intern pad op dat begint met een slash",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/const/themes",
+    "key": "titel",
+    "language": "nl",
+    "value": "Titel",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/const/themes",
+    "key": "titel",
+    "language": "en",
+    "value": "Titel",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/const/themes",
+    "key": "geen-titel",
+    "language": "nl",
+    "value": "Geen titel",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/const/themes",
+    "key": "geen-titel",
+    "language": "en",
+    "value": "Geen titel",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/const/themes",
+    "key": "identifier",
+    "language": "nl",
+    "value": "Identifier",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/const/themes",
+    "key": "identifier",
+    "language": "en",
+    "value": "Identifier",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/const/themes",
+    "key": "object-loskoppelen",
+    "language": "nl",
+    "value": "Object loskoppelen",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/const/themes",
+    "key": "object-loskoppelen",
+    "language": "en",
+    "value": "Object loskoppelen",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/const/themes",
+    "key": "slug",
+    "language": "nl",
+    "value": "Slug",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/const/themes",
+    "key": "slug",
+    "language": "en",
+    "value": "Slug",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/const/themes",
+    "key": "nl-benaming",
+    "language": "nl",
+    "value": "Nl benaming",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/const/themes",
+    "key": "nl-benaming",
+    "language": "en",
+    "value": "Nl benaming",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/const/themes",
+    "key": "en-benaming",
+    "language": "nl",
+    "value": "En benaming",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/const/themes",
+    "key": "en-benaming",
+    "language": "en",
+    "value": "En benaming",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/const/themes",
+    "key": "aangepast-op",
+    "language": "nl",
+    "value": "Aangepast op",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/const/themes",
+    "key": "aangepast-op",
+    "language": "en",
+    "value": "Aangepast op",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/const/themes",
+    "key": "thema-aanpassen",
+    "language": "nl",
+    "value": "Thema aanpassen",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/const/themes",
+    "key": "thema-aanpassen",
+    "language": "en",
+    "value": "Thema aanpassen",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/const/themes",
+    "key": "thema-verwijderen",
+    "language": "nl",
+    "value": "Thema verwijderen",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/const/themes",
+    "key": "thema-verwijderen",
+    "language": "en",
+    "value": "Thema verwijderen",
     "value_type": "TEXT"
   },
   {
@@ -34157,6 +34517,46 @@
     "key": "nieuwsbrief-formulier-email-moet-ingevuld-zijn",
     "language": "en",
     "value": "Please fill in your email address",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/cp/components/visitor-space-settings/visitor-space-settings",
+    "key": "bestand-is-te-groot-max-500-kb",
+    "language": "nl",
+    "value": "Bestand is te groot (max 500kb)",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/cp/components/visitor-space-settings/visitor-space-settings",
+    "key": "bestand-is-te-groot-max-500-kb",
+    "language": "en",
+    "value": "File is too large (max 500kb)",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/cp/components/visitor-space-settings/visitor-space-settings",
+    "key": "bestandstype-is-niet-toegestaan-jpg-png",
+    "language": "nl",
+    "value": "Bestandstype is niet toegestaan (enkel jpg-png)",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/cp/components/visitor-space-settings/visitor-space-settings",
+    "key": "bestandstype-is-niet-toegestaan-jpg-png",
+    "language": "en",
+    "value": "File type is not supported (only jpg-png)",
     "value_type": "TEXT"
   },
   {
@@ -39923,6 +40323,46 @@
     "id": "",
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
+    "location": "modules/admin/components/theme-thumbnail-input/theme-thumbnail-input",
+    "key": "voorbeeld-van-de-thumbnail",
+    "language": "nl",
+    "value": "Voorbeeld van de thumbnail",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/components/theme-thumbnail-input/theme-thumbnail-input",
+    "key": "voorbeeld-van-de-thumbnail",
+    "language": "en",
+    "value": "Voorbeeld van de thumbnail",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/components/theme-thumbnail-input/theme-thumbnail-input",
+    "key": "sleep-een-afbeelding-hierheen-of-klik-om-te-bladeren",
+    "language": "nl",
+    "value": "Sleep een afbeelding hierheen of klik om te bladeren",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/components/theme-thumbnail-input/theme-thumbnail-input",
+    "key": "sleep-een-afbeelding-hierheen-of-klik-om-te-bladeren",
+    "language": "en",
+    "value": "Sleep een afbeelding hierheen of klik om te bladeren",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
     "location": "modules/admin/layouts/admin-layout/admin-layout",
     "key": "admin",
     "language": "nl",
@@ -41037,6 +41477,986 @@
     "key": "groepen-en-permissies-omschrijving",
     "language": "en",
     "value": "Manage user groups and permissions.",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-edit-page",
+    "key": "het-thema-is-aangemaakt",
+    "language": "nl",
+    "value": "Het thema is aangemaakt",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-edit-page",
+    "key": "het-thema-is-aangemaakt",
+    "language": "en",
+    "value": "Het thema is aangemaakt",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-edit-page",
+    "key": "je-kan-nu-objecten-koppelen-aan-dit-thema",
+    "language": "nl",
+    "value": "Je kan nu objecten koppelen aan dit thema",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-edit-page",
+    "key": "je-kan-nu-objecten-koppelen-aan-dit-thema",
+    "language": "en",
+    "value": "Je kan nu objecten koppelen aan dit thema",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-edit-page",
+    "key": "de-aanpassingen-zijn-opgeslagen",
+    "language": "nl",
+    "value": "De aanpassingen zijn opgeslagen",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-edit-page",
+    "key": "de-aanpassingen-zijn-opgeslagen",
+    "language": "en",
+    "value": "De aanpassingen zijn opgeslagen",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-edit-page",
+    "key": "de-aanpassingen-aan-het-thema-zijn-opgeslagen",
+    "language": "nl",
+    "value": "De aanpassingen aan het thema zijn opgeslagen",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-edit-page",
+    "key": "de-aanpassingen-aan-het-thema-zijn-opgeslagen",
+    "language": "en",
+    "value": "De aanpassingen aan het thema zijn opgeslagen",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-edit-page",
+    "key": "error",
+    "language": "nl",
+    "value": "Error",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-edit-page",
+    "key": "error",
+    "language": "en",
+    "value": "Error",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-edit-page",
+    "key": "het-opslaan-van-het-thema-is-mislukt",
+    "language": "nl",
+    "value": "Het opslaan van het thema is mislukt",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-edit-page",
+    "key": "het-opslaan-van-het-thema-is-mislukt",
+    "language": "en",
+    "value": "Het opslaan van het thema is mislukt",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-edit-page",
+    "key": "toegevoegd",
+    "language": "nl",
+    "value": "{{objectId}} werd toegevoegd",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-edit-page",
+    "key": "toegevoegd",
+    "language": "en",
+    "value": "{{objectId}} werd toegevoegd",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-edit-page",
+    "key": "was-al-gekoppeld",
+    "language": "nl",
+    "value": "{{objectId}} was al gekoppeld",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-edit-page",
+    "key": "was-al-gekoppeld",
+    "language": "en",
+    "value": "{{objectId}} was al gekoppeld",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-edit-page",
+    "key": "niet-gevonden",
+    "language": "nl",
+    "value": "{{objectId}} werd niet gevonden",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-edit-page",
+    "key": "niet-gevonden",
+    "language": "en",
+    "value": "{{objectId}} werd niet gevonden",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-edit-page",
+    "key": "success",
+    "language": "nl",
+    "value": "Success",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-edit-page",
+    "key": "success",
+    "language": "en",
+    "value": "Success",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-edit-page",
+    "key": "het-koppelen-van-de-objecten-is-mislukt",
+    "language": "nl",
+    "value": "Het koppelen van de objecten is mislukt",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-edit-page",
+    "key": "het-koppelen-van-de-objecten-is-mislukt",
+    "language": "en",
+    "value": "Het koppelen van de objecten is mislukt",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-edit-page",
+    "key": "het-loskoppelen-van-het-object-is-geslaagd",
+    "language": "nl",
+    "value": "Het loskoppelen van het object is geslaagd",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-edit-page",
+    "key": "het-loskoppelen-van-het-object-is-geslaagd",
+    "language": "en",
+    "value": "Het loskoppelen van het object is geslaagd",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-edit-page",
+    "key": "het-loskoppelen-van-het-object-is-mislukt",
+    "language": "nl",
+    "value": "Het loskoppelen van het object is mislukt",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-edit-page",
+    "key": "het-loskoppelen-van-het-object-is-mislukt",
+    "language": "en",
+    "value": "Het loskoppelen van het object is mislukt",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-edit-page",
+    "key": "gekoppelde-objecten",
+    "language": "nl",
+    "value": "Gekoppelde objecten",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-edit-page",
+    "key": "gekoppelde-objecten",
+    "language": "en",
+    "value": "Gekoppelde objecten",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-edit-page",
+    "key": "aantal-objecten-gekoppeld",
+    "language": "nl",
+    "value": "Aantal objecten gekoppeld",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-edit-page",
+    "key": "aantal-objecten-gekoppeld",
+    "language": "en",
+    "value": "Aantal objecten gekoppeld",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-edit-page",
+    "key": "objecten-toevoegen",
+    "language": "nl",
+    "value": "Objecten toevoegen",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-edit-page",
+    "key": "objecten-toevoegen",
+    "language": "en",
+    "value": "Objecten toevoegen",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-edit-page",
+    "key": "identifier-van-het-object-meerdere-komma-gescheiden",
+    "language": "nl",
+    "value": "Identifier van het object meerdere komma gescheiden",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-edit-page",
+    "key": "identifier-van-het-object-meerdere-komma-gescheiden",
+    "language": "en",
+    "value": "Identifier van het object meerdere komma gescheiden",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-edit-page",
+    "key": "identifiers-van-objecten-om-te-koppelen",
+    "language": "nl",
+    "value": "Identifiers van objecten om te koppelen",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-edit-page",
+    "key": "identifiers-van-objecten-om-te-koppelen",
+    "language": "en",
+    "value": "Identifiers van objecten om te koppelen",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-edit-page",
+    "key": "toevoegen",
+    "language": "nl",
+    "value": "Toevoegen",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-edit-page",
+    "key": "toevoegen",
+    "language": "en",
+    "value": "Toevoegen",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-edit-page",
+    "key": "er-zijn-nog-geen-objecten-gekoppeld",
+    "language": "nl",
+    "value": "Er zijn nog geen objecten gekoppeld",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-edit-page",
+    "key": "er-zijn-nog-geen-objecten-gekoppeld",
+    "language": "en",
+    "value": "Er zijn nog geen objecten gekoppeld",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-edit-page",
+    "key": "thema-aanmaken",
+    "language": "nl",
+    "value": "Thema aanmaken",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-edit-page",
+    "key": "thema-aanmaken",
+    "language": "en",
+    "value": "Thema aanmaken",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-edit-page",
+    "key": "thema-aanpassen",
+    "language": "nl",
+    "value": "Thema aanpassen",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-edit-page",
+    "key": "thema-aanpassen",
+    "language": "en",
+    "value": "Thema aanpassen",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-edit-page",
+    "key": "annuleer",
+    "language": "nl",
+    "value": "Annuleer",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-edit-page",
+    "key": "annuleer",
+    "language": "en",
+    "value": "Annuleer",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-edit-page",
+    "key": "opslaan",
+    "language": "nl",
+    "value": "Opslaan",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-edit-page",
+    "key": "opslaan",
+    "language": "en",
+    "value": "Opslaan",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-edit-page",
+    "key": "terug",
+    "language": "nl",
+    "value": "Terug",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-edit-page",
+    "key": "terug",
+    "language": "en",
+    "value": "Terug",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-edit-page",
+    "key": "standaard-thumbnail",
+    "language": "nl",
+    "value": "Standaard thumbnail",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-edit-page",
+    "key": "standaard-thumbnail",
+    "language": "en",
+    "value": "Standaard thumbnail",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-edit-page",
+    "key": "16-9-aanbevolen-640-x-360-px-max-500-kb",
+    "language": "nl",
+    "value": "16 9 aanbevolen 640 x 360 px max 500 kb",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-edit-page",
+    "key": "16-9-aanbevolen-640-x-360-px-max-500-kb",
+    "language": "en",
+    "value": "16 9 aanbevolen 640 x 360 px max 500 kb",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-edit-page",
+    "key": "nl-benaming",
+    "language": "nl",
+    "value": "Nl benaming",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-edit-page",
+    "key": "nl-benaming",
+    "language": "en",
+    "value": "Nl benaming",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-edit-page",
+    "key": "en-benaming",
+    "language": "nl",
+    "value": "En benaming",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-edit-page",
+    "key": "en-benaming",
+    "language": "en",
+    "value": "En benaming",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-edit-page",
+    "key": "slug",
+    "language": "nl",
+    "value": "Slug",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-edit-page",
+    "key": "slug",
+    "language": "en",
+    "value": "Slug",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-edit-page",
+    "key": "uniek-kleine-letters-koppeltekens-gebruikt-in-urls",
+    "language": "nl",
+    "value": "Uniek kleine letters koppeltekens gebruikt in urls",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-edit-page",
+    "key": "uniek-kleine-letters-koppeltekens-gebruikt-in-urls",
+    "language": "en",
+    "value": "Uniek kleine letters koppeltekens gebruikt in urls",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-edit-page",
+    "key": "nl-beschrijving",
+    "language": "nl",
+    "value": "Nl beschrijving",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-edit-page",
+    "key": "nl-beschrijving",
+    "language": "en",
+    "value": "Nl beschrijving",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-edit-page",
+    "key": "en-beschrijving",
+    "language": "nl",
+    "value": "En beschrijving",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-edit-page",
+    "key": "en-beschrijving",
+    "language": "en",
+    "value": "En beschrijving",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-edit-page",
+    "key": "url-themadetailpagina-nl",
+    "language": "nl",
+    "value": "Url themadetailpagina nl",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-edit-page",
+    "key": "url-themadetailpagina-nl",
+    "language": "en",
+    "value": "Url themadetailpagina nl",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-edit-page",
+    "key": "selecteer-een-nl-content-pagina",
+    "language": "nl",
+    "value": "Selecteer een nl content pagina",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-edit-page",
+    "key": "selecteer-een-nl-content-pagina",
+    "language": "en",
+    "value": "Selecteer een nl content pagina",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-edit-page",
+    "key": "url-themadetailpagina-en",
+    "language": "nl",
+    "value": "Url themadetailpagina en",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-edit-page",
+    "key": "url-themadetailpagina-en",
+    "language": "en",
+    "value": "Url themadetailpagina en",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-edit-page",
+    "key": "selecteer-een-en-content-pagina",
+    "language": "nl",
+    "value": "Selecteer een en content pagina",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-edit-page",
+    "key": "selecteer-een-en-content-pagina",
+    "language": "en",
+    "value": "Selecteer een en content pagina",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-edit-page",
+    "key": "beheer-de-gegevens-en-gekoppelde-objecten-van-een-thema",
+    "language": "nl",
+    "value": "Beheer de gegevens en gekoppelde objecten van een thema",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-edit-page",
+    "key": "beheer-de-gegevens-en-gekoppelde-objecten-van-een-thema",
+    "language": "en",
+    "value": "Beheer de gegevens en gekoppelde objecten van een thema",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-overview-page",
+    "key": "het-thema-is-verwijderd",
+    "language": "nl",
+    "value": "Het thema is verwijderd",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-overview-page",
+    "key": "het-thema-is-verwijderd",
+    "language": "en",
+    "value": "Het thema is verwijderd",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-overview-page",
+    "key": "het-thema-is-succesvol-verwijderd",
+    "language": "nl",
+    "value": "Het thema is succesvol verwijderd",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-overview-page",
+    "key": "het-thema-is-succesvol-verwijderd",
+    "language": "en",
+    "value": "Het thema is succesvol verwijderd",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-overview-page",
+    "key": "error",
+    "language": "nl",
+    "value": "Error",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-overview-page",
+    "key": "error",
+    "language": "en",
+    "value": "Error",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-overview-page",
+    "key": "het-verwijderen-van-het-thema-is-mislukt",
+    "language": "nl",
+    "value": "Het verwijderen van het thema is mislukt",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-overview-page",
+    "key": "het-verwijderen-van-het-thema-is-mislukt",
+    "language": "en",
+    "value": "Het verwijderen van het thema is mislukt",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-overview-page",
+    "key": "er-zijn-nog-geen-themas",
+    "language": "nl",
+    "value": "Er zijn nog geen themas",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-overview-page",
+    "key": "er-zijn-nog-geen-themas",
+    "language": "en",
+    "value": "Er zijn nog geen themas",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-overview-page",
+    "key": "themas",
+    "language": "nl",
+    "value": "Themas",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-overview-page",
+    "key": "themas",
+    "language": "en",
+    "value": "Themas",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-overview-page",
+    "key": "nieuw",
+    "language": "nl",
+    "value": "Nieuw",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-overview-page",
+    "key": "nieuw",
+    "language": "en",
+    "value": "Nieuw",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-overview-page",
+    "key": "zoek-op-themas",
+    "language": "nl",
+    "value": "Zoek op themas",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-overview-page",
+    "key": "zoek-op-themas",
+    "language": "en",
+    "value": "Zoek op themas",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-overview-page",
+    "key": "zoek-themas-input-aria-label",
+    "language": "nl",
+    "value": "Zoek themas input aria label",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-overview-page",
+    "key": "zoek-themas-input-aria-label",
+    "language": "en",
+    "value": "Zoek themas input aria label",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-overview-page",
+    "key": "laden",
+    "language": "nl",
+    "value": "Laden",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-overview-page",
+    "key": "laden",
+    "language": "en",
+    "value": "Laden",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-overview-page",
+    "key": "overzicht-van-alle-themas-binnen-het-archief",
+    "language": "nl",
+    "value": "Overzicht van alle themas binnen het archief",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/views/themes/themes-overview-page",
+    "key": "overzicht-van-alle-themas-binnen-het-archief",
+    "language": "en",
+    "value": "Overzicht van alle themas binnen het archief",
     "value_type": "TEXT"
   },
   {
@@ -42418,46 +43838,6 @@
     "language": "en",
     "value": "Something went wrong when setting up the settings",
     "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/cp/components/visitor-space-settings/visitor-space-settings",
-    "key": "bestand-is-te-groot-max-500-kb",
-    "language": "nl",
-    "value": "Bestand is te groot (max 500kb)",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/cp/components/visitor-space-settings/visitor-space-settings",
-    "key": "bestand-is-te-groot-max-500-kb",
-    "language": "en",
-    "value": "File is too large (max 500kb)",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/cp/components/visitor-space-settings/visitor-space-settings",
-    "key": "bestandstype-is-niet-toegestaan-jpg-png",
-    "language": "nl",
-    "value": "Bestandstype is niet toegestaan (enkel jpg-png)",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/cp/components/visitor-space-settings/visitor-space-settings",
-    "key": "bestandstype-is-niet-toegestaan-jpg-png",
-    "language": "en",
-    "value": "File type is not supported (only jpg-png)",
-    "value_type": "TEXT"
   },
   {
     "id": "",
@@ -45563,6 +46943,26 @@
     "id": "",
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata-themes",
+    "key": "themas",
+    "language": "nl",
+    "value": "Themas",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata-themes",
+    "key": "themas",
+    "language": "en",
+    "value": "Themas",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
     "location": "pages/bezoekersruimte/visitor-space-slug/object-id/index",
     "key": "trefwoorden",
     "language": "nl",
@@ -45637,6 +47037,26 @@
     "key": "lees-de-volledige-waarde-van-het-metadata-veld-selected-metadata-field-name-blade-aria-label",
     "language": "en",
     "value": "Read the entire value of this metadata field {{selectedMetadataFieldName}}",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata-themes",
+    "key": "aantal-objecten-in-dit-thema",
+    "language": "nl",
+    "value": "Aantal objecten in dit thema",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata-themes",
+    "key": "aantal-objecten-in-dit-thema",
+    "language": "en",
+    "value": "Aantal objecten in dit thema",
     "value_type": "TEXT"
   },
   {
@@ -46318,6 +47738,86 @@
     "language": "en",
     "value": "Are you sure you want to cancel this request? This will also delete the information from the form about usage.",
     "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/navigation/components/navigation/navigation",
+    "key": "video",
+    "language": "nl",
+    "value": "Video",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/navigation/components/navigation/navigation",
+    "key": "video",
+    "language": "en",
+    "value": "Video",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/navigation/components/navigation/navigation",
+    "key": "audio",
+    "language": "nl",
+    "value": "Audio",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/navigation/components/navigation/navigation",
+    "key": "audio",
+    "language": "en",
+    "value": "Audio",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/navigation/components/navigation/navigation",
+    "key": "kranten",
+    "language": "nl",
+    "value": "Kranten",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/navigation/components/navigation/navigation",
+    "key": "kranten",
+    "language": "en",
+    "value": "Newspapers",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/navigation/components/navigation/navigation",
+    "key": "zoek-alles",
+    "language": "nl",
+    "value": "Zoek alles",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/navigation/components/navigation/navigation",
+    "key": "zoek-alles",
+    "language": "en",
+    "value": "Search all",
+    "value_type": "TEXT"
   },
   {
     "id": "",

@@ -68,7 +68,11 @@ export const BlockHeroCarouselInactiveSlide: FunctionComponent<
 		return <IeObjectLoadError className="c-block-hero-carousel__carousel-slide-error" />;
 	}
 
-	if (isLoading || !item?.schemaIdentifier) {
+	const imageSrc = item?.videoThumbnail || item?.thumbnailUrl || '';
+
+	// Nothing is known about this slide yet -- not even which object it points at, as with a freshly
+	// added editor row that hasn't been filled in -- so the spinner is all there is to show.
+	if (!item?.schemaIdentifier && !imageSrc && !item?.dctermsFormat) {
 		return (
 			<div className={clsx('c-block-hero-carousel__carousel-slide-placeholder')}>
 				<Spinner size="large" locationId={'hero-carousel-slide'} />
@@ -76,30 +80,47 @@ export const BlockHeroCarouselInactiveSlide: FunctionComponent<
 		);
 	}
 
-	const imageSrc = item.videoThumbnail || item.thumbnailUrl || '';
+	// What the block config knows -- the format, the editor's thumbnail -- is shown right away; the
+	// spinner sits on top of it until the rest of the object has been resolved.
+	const loadingOverlay = isLoading ? (
+		<div className="c-block-hero-carousel__carousel-slide-image-loading">
+			<Spinner size="large" locationId={'hero-carousel-slide'} />
+		</div>
+	) : null;
+
+	const imageClassName = clsx(
+		'c-block-hero-carousel__carousel-slide-image',
+		isLoading && 'c-block-hero-carousel__carousel-slide-image--loading'
+	);
 
 	const formatIcon = (
 		<div
 			className="c-block-hero-carousel__carousel-slide-image-format-icon"
 			role="img"
-			aria-label={getObjectTypeLabel(item.dctermsFormat)}
+			aria-label={getObjectTypeLabel(item?.dctermsFormat)}
 		>
-			<Icon name={getIconFromObjectType(item.dctermsFormat, Boolean(item.thumbnailUrl))} />
+			<Icon name={getIconFromObjectType(item?.dctermsFormat, Boolean(item?.thumbnailUrl))} />
 		</div>
 	);
 
 	if (!imageSrc) {
-		return <div className={clsx('c-block-hero-carousel__carousel-slide-image')}>{formatIcon}</div>;
+		return (
+			<div className={imageClassName}>
+				{formatIcon}
+				{loadingOverlay}
+			</div>
+		);
 	}
 
 	return (
-		<div className={clsx('c-block-hero-carousel__carousel-slide-image')}>
+		<div className={imageClassName}>
 			<Image
 				src={imageSrc}
-				alt={item.name}
+				alt={item?.name}
 				className="c-block-hero-carousel__carousel-slide-image-media"
 			/>
 			{formatIcon}
+			{loadingOverlay}
 		</div>
 	);
 };

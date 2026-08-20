@@ -523,6 +523,22 @@ $hero-carousel-search-radius-desktop: 3.2rem;
 						animation-play-state: paused;
 					}
 				}
+
+				// The slide is rendered from what the block config already knows while its object is
+				// still being resolved: the placeholder content is dimmed and carries a spinner, so
+				// it doesn't read as the finished slide.
+				&--loading &-media {
+					opacity: 0.5;
+				}
+
+				&-loading {
+					position: absolute;
+					inset: 0;
+					z-index: 2;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+				}
 			}
 
 			&-placeholder {

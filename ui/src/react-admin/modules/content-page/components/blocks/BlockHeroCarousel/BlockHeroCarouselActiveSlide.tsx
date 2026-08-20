@@ -34,7 +34,13 @@ export const BlockHeroCarouselActiveSlide: FunctionComponent<BlockHeroCarouselAc
 		return <IeObjectLoadError className="c-block-hero-carousel__carousel-slide-error" />;
 	}
 
-	if (isLoading || !item?.schemaIdentifier) {
+	// The active slide is the only one big enough to warrant the full-size newspaper image, so
+	// it's the only slide that prefers it over the (lower-res) thumbnail.
+	const imageSrc = item?.newspaperImage || item?.videoThumbnail || item?.thumbnailUrl || '';
+
+	// Nothing is known about this slide yet -- not even which object it points at, as with a freshly
+	// added editor row that hasn't been filled in -- so the spinner is all there is to show.
+	if (!item?.schemaIdentifier && !imageSrc && !item?.dctermsFormat) {
 		return (
 			<div className={clsx('c-block-hero-carousel__carousel-slide-placeholder')}>
 				<Spinner size="large" locationId={'hero-carousel-slide'} />
@@ -42,11 +48,9 @@ export const BlockHeroCarouselActiveSlide: FunctionComponent<BlockHeroCarouselAc
 		);
 	}
 
-	// The active slide is the only one big enough to warrant the full-size newspaper image, so
-	// it's the only slide that prefers it over the (lower-res) thumbnail.
-	const imageSrc = item.newspaperImage || item.videoThumbnail || item.thumbnailUrl || '';
-
-	if (isAudioVideoFormat(item.dctermsFormat)) {
+	// Only mount the player once there is something to play: the slide goes up on what the block
+	// config knows, well before the playable url has been resolved.
+	if (isAudioVideoFormat(item?.dctermsFormat) && item?.playableUrl) {
 		return (
 			<IeObjectFlowPlayerWrapper
 				ieObject={item}
@@ -59,64 +63,90 @@ export const BlockHeroCarouselActiveSlide: FunctionComponent<BlockHeroCarouselAc
 		);
 	}
 
+	// What the block config knows is shown right away; the spinner sits on top of it until the rest
+	// of the object has been resolved.
+	const loadingOverlay = isLoading ? (
+		<div className="c-block-hero-carousel__carousel-slide-image-loading">
+			<Spinner size="large" locationId={'hero-carousel-slide'} />
+		</div>
+	) : null;
+
 	if (!imageSrc) {
-		return <div className={clsx('c-block-hero-carousel__carousel-slide-image')} />;
+		return (
+			<div
+				className={clsx(
+					'c-block-hero-carousel__carousel-slide-image',
+					isLoading && 'c-block-hero-carousel__carousel-slide-image--loading'
+				)}
+			>
+				{loadingOverlay}
+			</div>
+		);
 	}
 
 	return (
 		<div
 			className={clsx(
 				'c-block-hero-carousel__carousel-slide-image',
-				'c-block-hero-carousel__carousel-slide-image--animated',
+				// The ken-burns animation doubles as this slide's timer -- its end advances the
+				// carousel -- so it only runs once the slide shows its real content: a placeholder
+				// shouldn't tick away while the object is still loading.
+				!isLoading && 'c-block-hero-carousel__carousel-slide-image--animated',
+				isLoading && 'c-block-hero-carousel__carousel-slide-image--loading',
 				isPaused && 'c-block-hero-carousel__carousel-slide-image--paused'
 			)}
 		>
 			<Image
 				src={imageSrc}
-				alt={item.name}
+				alt={item?.name}
 				className="c-block-hero-carousel__carousel-slide-image-media"
 			/>
-			<div className="c-block-hero-carousel__carousel-slide-image-controls">
-				<Button
-					variants={['black', 'sm']}
-					icon={<Icon name={isPaused ? AdminCoreIconName.Play : AdminCoreIconName.Pause} />}
-					title={
-						isPaused
-							? tText(
-									'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel-active-slide___afspelen',
-									undefined,
-									[HET_ARCHIEF]
-								)
-							: tText(
-									'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel-active-slide___pauzeren',
-									undefined,
-									[HET_ARCHIEF]
-								)
-					}
-					ariaLabel={
-						isPaused
-							? tText(
-									'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel-active-slide___afspelen',
-									undefined,
-									[HET_ARCHIEF]
-								)
-							: tText(
-									'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel-active-slide___pauzeren',
-									undefined,
-									[HET_ARCHIEF]
-								)
-					}
-					onClick={() => setIsPaused((paused) => !paused)}
-				/>
-				<div className="c-block-hero-carousel__carousel-slide-image-progress" aria-hidden="true">
-					<div className="c-block-hero-carousel__carousel-slide-image-progress-track">
-						<div
-							className="c-block-hero-carousel__carousel-slide-image-progress-fill"
-							onAnimationEnd={onEnded}
-						/>
+			{loadingOverlay}
+			{/* The progress bar is this slide's timer -- its end advances the carousel -- so it
+			    only starts once the slide shows its real content. */}
+			{!isLoading && (
+				<div className="c-block-hero-carousel__carousel-slide-image-controls">
+					<Button
+						variants={['black', 'sm']}
+						icon={<Icon name={isPaused ? AdminCoreIconName.Play : AdminCoreIconName.Pause} />}
+						title={
+							isPaused
+								? tText(
+										'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel-active-slide___afspelen',
+										undefined,
+										[HET_ARCHIEF]
+									)
+								: tText(
+										'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel-active-slide___pauzeren',
+										undefined,
+										[HET_ARCHIEF]
+									)
+						}
+						ariaLabel={
+							isPaused
+								? tText(
+										'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel-active-slide___afspelen',
+										undefined,
+										[HET_ARCHIEF]
+									)
+								: tText(
+										'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel-active-slide___pauzeren',
+										undefined,
+										[HET_ARCHIEF]
+									)
+						}
+						onClick={() => setIsPaused((paused) => !paused)}
+					/>
+					<div className="c-block-hero-carousel__carousel-slide-image-progress" aria-hidden="true">
+						<div className="c-block-hero-carousel__carousel-slide-image-progress-track">
+							<div
+								className="c-block-hero-carousel__carousel-slide-image-progress-fill"
+								onAnimationEnd={onEnded}
+							/>
+						</div>
 					</div>
 				</div>
-			</div>
+			)}
 		</div>
 	);
 };

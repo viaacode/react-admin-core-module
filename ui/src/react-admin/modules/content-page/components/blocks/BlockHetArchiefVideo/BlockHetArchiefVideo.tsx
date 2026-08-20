@@ -1,5 +1,5 @@
 import type { DefaultProps } from '@viaa/avo2-components';
-import { Container } from '@viaa/avo2-components';
+import { Container, Spinner } from '@viaa/avo2-components';
 import clsx from 'clsx';
 import { type FunctionComponent, useMemo } from 'react';
 import { IeObjectFlowPlayerWrapper } from '~modules/content-page/components/IeObjectFlowPlayerWrapper/IeObjectFlowPlayerWrapper';
@@ -70,13 +70,22 @@ export const BlockHetArchiefVideo: FunctionComponent<BlockHetArchiefVideoProps> 
 	}, [mediaItem?.value, startTime, endTime]);
 
 	// A video block references exactly one object, so the response holds a single entry.
-	const { data: ieObjects } = useGetIeObjectsPlayableDisplayData(blockId, unsavedObjects);
+	const {
+		data: ieObjects,
+		isLoading,
+		isFetching,
+	} = useGetIeObjectsPlayableDisplayData(blockId, unsavedObjects);
 	const ieObject = ieObjects?.[0];
 
 	// A resolved-but-null entry means the object itself couldn't be loaded (it's gone, or this
 	// visitor can't get at it). That's worth showing: the block is only ever added for an AV
 	// object, so an empty spot would just look like a rendering bug.
 	const hasFailed = !!ieObjects && ieObjects.length > 0 && ieObjects[0] === null;
+
+	// The url can only come from the request, but the poster the editor picked is right here in the
+	// block config: showing it while the object resolves keeps the block in the page flow instead of
+	// having it appear out of nowhere once the url lands.
+	const isLoadingObject = isLoading || isFetching || !ieObjects;
 
 	if (hasFailed) {
 		return (
@@ -88,22 +97,41 @@ export const BlockHetArchiefVideo: FunctionComponent<BlockHetArchiefVideoProps> 
 		);
 	}
 
-	// Nothing to show while the object is still loading, or when it can't be played at all: the
-	// block is only ever added for an AV object, but content pages are public while the object
-	// behind them still goes through the licence and visitor space checks.
-	if (!ieObject?.playableUrl) {
+	// Nothing local to hold the spot with while the object is still loading, and nothing to play
+	// once it has: the block is only ever added for an AV object, but content pages are public while
+	// the object behind them still goes through the licence and visitor space checks.
+	if (isLoadingObject ? !poster : !ieObject?.playableUrl) {
 		return null;
 	}
 
 	return (
 		<Container className={clsx(className, 'c-block-het-archief-video')}>
-			<div className="c-block-het-archief-video__player" style={width ? { width } : undefined}>
-				<IeObjectFlowPlayerWrapper
-					ieObject={ieObject}
-					poster={poster}
-					title={title}
-					autoplay={autoplay}
-				/>
+			<div
+				className={clsx('c-block-het-archief-video__player', {
+					'c-block-het-archief-video__player--loading': isLoadingObject,
+				})}
+				style={width ? { width } : undefined}
+			>
+				{isLoadingObject || !ieObject ? (
+					<>
+						<img
+							src={poster}
+							alt=""
+							aria-hidden="true"
+							className="c-block-het-archief-video__player-poster"
+						/>
+						<div className="c-block-het-archief-video__player-loading">
+							<Spinner size="large" locationId={'block-het-archief-video'} />
+						</div>
+					</>
+				) : (
+					<IeObjectFlowPlayerWrapper
+						ieObject={ieObject}
+						poster={poster}
+						title={title}
+						autoplay={autoplay}
+					/>
+				)}
 			</div>
 			<CopyrightAttribution
 				title={copyrightTitle}
