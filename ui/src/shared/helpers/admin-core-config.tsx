@@ -130,6 +130,7 @@ export function getAdminCoreConfigForLocalTestApp(navigateFunc: NavigateFunction
 			component: ({ name }: { name: string }) => <span>{name}</span>,
 			componentProps: {
 				add: { name: 'add' },
+				collection: { name: 'collection' },
 				view: { name: 'view' },
 				angleDown: { name: 'down' },
 				angleUp: { name: 'up' },

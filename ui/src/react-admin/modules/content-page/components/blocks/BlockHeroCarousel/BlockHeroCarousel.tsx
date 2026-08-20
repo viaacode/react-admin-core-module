@@ -10,7 +10,7 @@ import type {
 } from '~content-blocks/BlockHeroCarousel/BlockHeroCarousel.types.ts';
 import { BlockHeroCarouselCarousel } from '~content-blocks/BlockHeroCarousel/BlockHeroCarouselCarousel.tsx';
 import { BlockHeroCarouselSearch } from '~content-blocks/BlockHeroCarousel/BlockHeroCarouselSearch.tsx';
-import { GET_SECONDARY_BACKGROUND_COLOR_OPTIONS_ARCHIEF } from '~modules/content-page/const/get-color-options.ts';
+import { getRandomTertiaryBackgroundColor } from '~modules/content-page/helpers/get-random-tertiary-background-color.ts';
 import { useGetIeObjectsPlayableDisplayData } from '~modules/content-page/hooks/useGetIeObjectsPlayableDisplayData.ts';
 import { isAudioVideoFormat } from '~shared/helpers/is-audio-video-format.ts';
 import type { IeObjectType } from '~shared/helpers/map-format-to-type.ts';
@@ -33,10 +33,7 @@ export const BlockHeroCarousel: FunctionComponent<BlockHeroCarouselProps> = ({
 	elements,
 }): ReactNode => {
 	const items = useMemo(() => {
-		const allTertiaryColors = GET_SECONDARY_BACKGROUND_COLOR_OPTIONS_ARCHIEF();
 		return elements.map((object) => {
-			// eslint-disable-next-line react-hooks/purity
-			const randomIndex = Math.floor(Math.random() * allTertiaryColors.length);
 			const dctermsFormat = object.mediaItem?.dctermsFormat as IeObjectType;
 
 			return {
@@ -44,7 +41,7 @@ export const BlockHeroCarousel: FunctionComponent<BlockHeroCarouselProps> = ({
 				dctermsFormat,
 				videoThumbnail: object.videoThumbnail,
 				backgroundColor: isAudioVideoFormat(dctermsFormat)
-					? (allTertiaryColors[randomIndex].value as Color)
+					? getRandomTertiaryBackgroundColor()
 					: Color.Mustard,
 				snipPoint: {
 					start: object.startPoint ? (toSeconds(object.startPoint, true) ?? undefined) : undefined,
