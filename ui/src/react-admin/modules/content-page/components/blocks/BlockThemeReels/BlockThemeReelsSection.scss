@@ -14,8 +14,7 @@
 	.c-block-theme-reels-section__header {
 		width: 100%;
 		display: flex;
-		flex-direction: row;
-		flex-wrap: wrap;
+		flex-flow: row wrap;
 		align-items: center;
 		gap: variables.$g-spacer-unit * 2;
 		margin-bottom: 2.2rem;
@@ -29,8 +28,9 @@
 		&-title {
 			color: colors.$color-gray-1000;
 			width: fit-content;
-			@include typography.truncate();
-			@include typography.sofia-pro-heading-lg();
+
+			@include typography.truncate;
+			@include typography.sofia-pro-heading-lg;
 
 			@media (max-width: variables.$g-bp2) {
 				line-height: 2.6rem;
@@ -39,7 +39,8 @@
 
 		&-subtitle {
 			@include typography.truncate-after-x-lines(3);
-			@include typography.sofia-pro-body-sm();
+			@include typography.sofia-pro-body-sm;
+
 			color: colors.$neutral;
 			width: 100%;
 		}
@@ -71,7 +72,8 @@
 
 					.c-button__label {
 						font-weight: 700; // since sm buttons loose this
-						@include typography.truncate();
+
+						@include typography.truncate;
 					}
 				}
 			}
@@ -113,6 +115,7 @@
 
 			.c-block-theme-reels-section__slide-description-text{
 				@include typography.truncate-after-x-lines(3);
+
 				color: colors.$neutral;
 				width: 100%;
 			}
@@ -120,6 +123,7 @@
 
 		a {
 			text-decoration: none;
+
 			@include focus.focus-outline;
 		}
 
@@ -146,6 +150,7 @@
 				width: 100%;
 				height: 100%;
 				object-position: center;
+
 				@include animations.zoom-in-transition;
 			}
 
@@ -159,6 +164,7 @@
 					border-color: colors.$color-gray-1000;
 					color: colors.$white;
 					pointer-events: none;
+
 					@include animations.zoom-in-transition;
 
 					&.c-block-theme-reels-section__slide-image-placeholder-icon {
@@ -186,27 +192,27 @@
 			&--mask-IOIO,
 			&--mask-OIOI {
 				> img {
-					-webkit-mask-repeat: no-repeat;
 					mask-repeat: no-repeat;
-					-webkit-mask-position: center;
+					mask-repeat: no-repeat;
 					mask-position: center;
-					-webkit-mask-size: 100% auto;
+					mask-position: center;
+					mask-size: 100% auto;
 					mask-size: 100% auto;
 				}
 			}
 
 			&--mask-IOOI > img {
-				-webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 6 2'%3E%3Crect x='0' y='0' width='1' height='2'/%3E%3Ccircle cx='2' cy='1' r='1'/%3E%3Ccircle cx='4' cy='1' r='1'/%3E%3Crect x='5' y='0' width='1' height='2'/%3E%3C/svg%3E");
+				mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 6 2'%3E%3Crect x='0' y='0' width='1' height='2'/%3E%3Ccircle cx='2' cy='1' r='1'/%3E%3Ccircle cx='4' cy='1' r='1'/%3E%3Crect x='5' y='0' width='1' height='2'/%3E%3C/svg%3E");
 				mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 6 2'%3E%3Crect x='0' y='0' width='1' height='2'/%3E%3Ccircle cx='2' cy='1' r='1'/%3E%3Ccircle cx='4' cy='1' r='1'/%3E%3Crect x='5' y='0' width='1' height='2'/%3E%3C/svg%3E");
 			}
 
 			&--mask-IOIO > img {
-				-webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 6 2'%3E%3Crect x='0' y='0' width='1' height='2'/%3E%3Ccircle cx='2' cy='1' r='1'/%3E%3Crect x='3' y='0' width='1' height='2'/%3E%3Ccircle cx='5' cy='1' r='1'/%3E%3C/svg%3E");
+				mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 6 2'%3E%3Crect x='0' y='0' width='1' height='2'/%3E%3Ccircle cx='2' cy='1' r='1'/%3E%3Crect x='3' y='0' width='1' height='2'/%3E%3Ccircle cx='5' cy='1' r='1'/%3E%3C/svg%3E");
 				mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 6 2'%3E%3Crect x='0' y='0' width='1' height='2'/%3E%3Ccircle cx='2' cy='1' r='1'/%3E%3Crect x='3' y='0' width='1' height='2'/%3E%3Ccircle cx='5' cy='1' r='1'/%3E%3C/svg%3E");
 			}
 
 			&--mask-OIOI > img {
-				-webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 6 2'%3E%3Ccircle cx='1' cy='1' r='1'/%3E%3Crect x='2' y='0' width='1' height='2'/%3E%3Ccircle cx='4' cy='1' r='1'/%3E%3Crect x='5' y='0' width='1' height='2'/%3E%3C/svg%3E");
+				mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 6 2'%3E%3Ccircle cx='1' cy='1' r='1'/%3E%3Crect x='2' y='0' width='1' height='2'/%3E%3Ccircle cx='4' cy='1' r='1'/%3E%3Crect x='5' y='0' width='1' height='2'/%3E%3C/svg%3E");
 				mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 6 2'%3E%3Ccircle cx='1' cy='1' r='1'/%3E%3Crect x='2' y='0' width='1' height='2'/%3E%3Ccircle cx='4' cy='1' r='1'/%3E%3Crect x='5' y='0' width='1' height='2'/%3E%3C/svg%3E");
 			}
 		}
@@ -222,9 +228,11 @@
 
 			&-title {
 				color: colors.$color-gray-1000;
-				@include typography.sofia-pro-heading-md();
+
+				@include typography.sofia-pro-heading-md;
 
 				width: 100%;
+
 				@include typography.truncate-after-x-lines(2);
 
 				@media (max-width: variables.$g-bp2) {
@@ -234,11 +242,12 @@
 			}
 
 			&-text {
-				@include typography.truncate();
-				width: 100%;
+				@include typography.truncate;
 
+				width: 100%;
 				color: colors.$color-gray-1000;
-				@include typography.sofia-pro-body-sm();
+
+				@include typography.sofia-pro-body-sm;
 
 
 				@media (max-width: variables.$g-bp2) {

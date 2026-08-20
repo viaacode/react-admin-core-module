@@ -63,6 +63,9 @@ export const BlockHeroCarousel: FunctionComponent<BlockHeroCarouselProps> = ({
 			// eslint-disable-next-line react-hooks/purity
 			const randomIndex = Math.floor(Math.random() * allTertiaryColors.length);
 			const ieObject = ieObjects?.[index];
+			// A resolved-but-null entry means this slide's object couldn't be loaded; the slide
+			// stays in the strip and shows an error tile instead of an empty player.
+			const hasFailed = !!ieObjects && index < ieObjects.length && ieObjects[index] === null;
 			const dctermsFormat = (ieObject?.dctermsFormat ??
 				object.mediaItem?.dctermsFormat) as IeObjectType;
 
@@ -71,6 +74,7 @@ export const BlockHeroCarousel: FunctionComponent<BlockHeroCarouselProps> = ({
 				schemaIdentifier: ieObject?.schemaIdentifier ?? String(object.mediaItem?.value),
 				dctermsFormat,
 				videoThumbnail: object.videoThumbnail,
+				hasFailed,
 				backgroundColor: isAudioVideoFormat(dctermsFormat)
 					? (allTertiaryColors[randomIndex].value as Color)
 					: Color.Mustard,

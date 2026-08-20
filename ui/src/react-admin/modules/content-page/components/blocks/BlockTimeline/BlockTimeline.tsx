@@ -4,6 +4,7 @@ import React, { useMemo, useRef } from 'react';
 import { AdminCoreIconName } from '~core/config';
 import { AdminConfigManager } from '~core/config/config.class';
 import { IeObjectFlowPlayerWrapper } from '~modules/content-page/components/IeObjectFlowPlayerWrapper/IeObjectFlowPlayerWrapper.tsx';
+import { IeObjectLoadError } from '~modules/content-page/components/IeObjectLoadError/IeObjectLoadError.tsx';
 import { IeObjectMetadata } from '~modules/content-page/components/IeObjectMetadata/IeObjectMetadata.tsx';
 import { useGetIeObjectsPlayableDisplayData } from '~modules/content-page/hooks/useGetIeObjectsPlayableDisplayData.ts';
 import type { TimelineNodeBlockComponentState } from '~modules/content-page/types/content-block.types';
@@ -82,6 +83,11 @@ export const BlockTimeline: FunctionComponent<BlockTimelineProps> = ({
 					const hasObject = node.visualType === 'OBJECT' && !!node.mediaItem?.value;
 					const ieObject = hasObject ? ieObjects?.[index] : undefined;
 					const thumbnail = ieObject?.newspaperImage || ieObject?.thumbnailUrl;
+					// A resolved-but-null entry means this node's object couldn't be loaded (it's
+					// gone, or out of reach for this visitor); the node keeps its place in the
+					// timeline and shows an error tile where the media would have been.
+					const hasFailedObject =
+						hasObject && !!ieObjects && index < ieObjects.length && ieObjects[index] === null;
 
 					return (
 						<li
@@ -113,6 +119,11 @@ export const BlockTimeline: FunctionComponent<BlockTimelineProps> = ({
 										: undefined
 								}
 							>
+								{hasFailedObject && (
+									<div className={clsx('c-ie-object-media')}>
+										<IeObjectLoadError className="c-block-timeline__node-object-error" />
+									</div>
+								)}
 								{ieObject && (
 									<div className={clsx('c-ie-object-media')}>
 										{isAudioVideoFormat(ieObject.dctermsFormat) ? (

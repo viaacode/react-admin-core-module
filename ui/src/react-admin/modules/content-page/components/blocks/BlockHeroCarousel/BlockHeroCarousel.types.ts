@@ -17,4 +17,11 @@ export type HeroCarouselSlideItem = Pick<
 	HeroCarouselBlockComponentState,
 	'videoThumbnail' | 'backgroundColor'
 > &
-	PlayableDisplayIeObject;
+	PlayableDisplayIeObject & {
+		/**
+		 * Set when the playable-display-data endpoint resolved this slide's object to null: it's
+		 * gone, or out of reach for this visitor. The slide then shows an error tile instead of a
+		 * player/image.
+		 */
+		hasFailed?: boolean;
+	};

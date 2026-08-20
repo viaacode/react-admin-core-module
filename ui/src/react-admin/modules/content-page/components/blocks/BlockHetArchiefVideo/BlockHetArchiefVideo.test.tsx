@@ -30,6 +30,17 @@ vi.mock('~modules/content-page/hooks/useGetIeObjectsPlayableDisplayData', () => 
 	useGetIeObjectsPlayableDisplayData: () => mockPlayableDisplayData(),
 }));
 
+// The error tile is the only part of this block that reads from the admin-core config (for its
+// label and its icon), which isn't set up in a unit test.
+vi.mock('~shared/helpers/translation-functions', () => ({
+	tText: (key: string) => key,
+	tHtml: (key: string) => key,
+}));
+
+vi.mock('~shared/components/Icon', () => ({
+	Icon: () => null,
+}));
+
 vi.mock(
 	'~modules/content-page/components/IeObjectFlowPlayerWrapper/IeObjectFlowPlayerWrapper',
 	() => ({
@@ -80,6 +91,15 @@ describe('<BlockHetArchiefVideo />', () => {
 		const { container } = render(<BlockHetArchiefVideo blockId={blockId} />);
 
 		expect(container).toBeEmptyDOMElement();
+		expect(mockPlayer).not.toHaveBeenCalled();
+	});
+
+	it('Should render an error tile for an object that resolved to null', () => {
+		mockPlayableDisplayData.mockReturnValue({ data: [null] });
+
+		const { container } = render(<BlockHetArchiefVideo blockId={blockId} />);
+
+		expect(container.querySelector('.c-ie-object-load-error')).toBeInTheDocument();
 		expect(mockPlayer).not.toHaveBeenCalled();
 	});
 

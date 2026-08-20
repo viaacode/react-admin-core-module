@@ -13,12 +13,10 @@ $hero-carousel-format-widths: (
 	"newspaper": 12rem,
 	"newspaperpage": 12rem,
 );
-
 $background-image-height: 80%;
 $slide-height: 16rem;
 $slide-animation: 1.3s ease-out;
 $ken-burns-duration: 15s;
-
 $hero-carousel-search-height-mobile: 4.8rem;
 $hero-carousel-search-height-desktop: 6.4rem;
 $hero-carousel-search-radius-desktop: 3.2rem;
@@ -113,16 +111,13 @@ $hero-carousel-search-radius-desktop: 3.2rem;
 			left: 0;
 			right: 0;
 			height: math.div($background-image-height, 2);
-			background: linear-gradient(180deg, colors.$color-gray-1000 0%, rgba(0, 0, 0, 0) 100%);
+			background: linear-gradient(180deg, colors.$color-gray-1000 0%, rgb(0 0 0 / 0%) 100%);
 		}
 
 		&::after {
 			content: "";
 			position: absolute;
-			top: $background-image-height;
-			left: 0;
-			right: 0;
-			bottom: 0;
+			inset: $background-image-height 0 0 0;
 			background: colors.$color-platinum;
 		}
 	}
@@ -247,6 +242,7 @@ $hero-carousel-search-radius-desktop: 3.2rem;
 				font: inherit;
 				border: 1px solid colors.$white;
 				border-radius: $hero-carousel-search-radius-desktop;
+
 				@include animations.flyout-animation(border-radius);
 
 				@media (min-width: variables.$g-bp2) {
@@ -283,6 +279,7 @@ $hero-carousel-search-radius-desktop: 3.2rem;
 					font-size: 1.8rem;
 					font-weight: 400;
 					transform: rotate(0);
+
 					@include animations.flyout-animation(transform);
 
 					&--open {
@@ -419,6 +416,15 @@ $hero-carousel-search-radius-desktop: 3.2rem;
 			.c-video-player {
 				width: 100%;
 				height: 100%;
+			}
+
+			// The error tile fills the slide, however big the slide currently is -- inactive
+			// slides are small, so it can't keep the component's own minimum height.
+			&-error {
+				flex: auto;
+				min-height: 0;
+				padding: variables.$g-spacer-unit;
+				overflow: hidden;
 			}
 
 			&-image {

@@ -3,6 +3,7 @@ import { Container } from '@viaa/avo2-components';
 import clsx from 'clsx';
 import { type FunctionComponent, useMemo } from 'react';
 import { IeObjectFlowPlayerWrapper } from '~modules/content-page/components/IeObjectFlowPlayerWrapper/IeObjectFlowPlayerWrapper';
+import { IeObjectLoadError } from '~modules/content-page/components/IeObjectLoadError/IeObjectLoadError';
 import { useGetIeObjectsPlayableDisplayData } from '~modules/content-page/hooks/useGetIeObjectsPlayableDisplayData';
 import { CopyrightAttribution } from '~shared/components/CopyrightAttribution';
 import { snippetTimeToSeconds } from '~shared/helpers/parsers/duration';
@@ -73,6 +74,21 @@ export const BlockHetArchiefVideo: FunctionComponent<BlockHetArchiefVideoProps> 
 	// A video block references exactly one object, so the response holds a single entry.
 	const { data: ieObjects } = useGetIeObjectsPlayableDisplayData(blockId, unsavedObjects);
 	const ieObject = ieObjects?.[0];
+
+	// A resolved-but-null entry means the object itself couldn't be loaded (it's gone, or this
+	// visitor can't get at it). That's worth showing: the block is only ever added for an AV
+	// object, so an empty spot would just look like a rendering bug.
+	const hasFailed = !!ieObjects && ieObjects.length > 0 && ieObjects[0] === null;
+
+	if (hasFailed) {
+		return (
+			<Container className={clsx(className, 'c-block-het-archief-video')}>
+				<div className="c-block-het-archief-video__player" style={width ? { width } : undefined}>
+					<IeObjectLoadError />
+				</div>
+			</Container>
+		);
+	}
 
 	// Nothing to show while the object is still loading, or when it can't be played at all: the
 	// block is only ever added for an AV object, but content pages are public while the object

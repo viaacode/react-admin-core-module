@@ -6,8 +6,10 @@
 $pattern-height: 8rem;
 $pattern-distance-vertical: variables.$g-spacer-unit * 3;
 $pattern-distance-horizontal: variables.$g-spacer-unit * 5;
+
 // Generous enough that the strip always reaches this component's own edge on any viewport.
 $pattern-repeat-count: 20;
+
 // How far the mobile pattern slots overshoot &__content's edge - see &__pattern-slot.
 $pattern-mobile-overshoot: 10rem;
 
@@ -28,6 +30,7 @@ $pattern-mobile-overshoot: 10rem;
 		@media (max-width: variables.$g-bp4) {
 			// Mobile pattern slots size as a % of this element, so it spans full width here.
 			max-width: 100%;
+
 			// Reserves space for the (position: absolute, so otherwise height: 0) pattern
 			// slots above/below the text - else the parent's clip-path would cut them off.
 			padding: calc($pattern-height + $pattern-distance-vertical) 0;
@@ -62,11 +65,13 @@ $pattern-mobile-overshoot: 10rem;
 			color: colors.$color-gray-1000;
 			width: 100%;
 			white-space: wrap;
+
 			@include typography.sofia-pro-heading-xl(true);
 		}
 
 		&-text {
 			color: colors.$neutral;
+
 			@include typography.sofia-pro-body(true);
 		}
 	}
@@ -77,16 +82,19 @@ $pattern-mobile-overshoot: 10rem;
 	// - right: enters at shape 5, nearest text -> circle, rect, circle, circle, rect
 	&__pattern {
 		@include pattern.pattern-strip($pattern-height, $pattern-repeat-count);
+
 		top: 0;
 		bottom: 0;
 
 		&--left {
 			right: calc(100% + $pattern-distance-horizontal);
+
 			@include pattern.pattern-side(left, 1, $pattern-height);
 		}
 
 		&--right {
 			left: calc(100% + $pattern-distance-horizontal);
+
 			@include pattern.pattern-side(right, 5, $pattern-height);
 		}
 

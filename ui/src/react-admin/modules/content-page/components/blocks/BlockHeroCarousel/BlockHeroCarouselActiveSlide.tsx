@@ -5,6 +5,7 @@ import React, { type FunctionComponent, type ReactElement, useState } from 'reac
 import type { HeroCarouselSlideItem } from '~content-blocks/BlockHeroCarousel/BlockHeroCarousel.types.ts';
 import { AdminCoreIconName } from '~core/config';
 import { IeObjectFlowPlayerWrapper } from '~modules/content-page/components/IeObjectFlowPlayerWrapper/IeObjectFlowPlayerWrapper.tsx';
+import { IeObjectLoadError } from '~modules/content-page/components/IeObjectLoadError/IeObjectLoadError.tsx';
 import type { DefaultComponentProps } from '~modules/shared/types/components';
 import { Icon } from '~shared/components/Icon';
 import { isAudioVideoFormat } from '~shared/helpers/is-audio-video-format.ts';
@@ -27,6 +28,11 @@ export const BlockHeroCarouselActiveSlide: FunctionComponent<BlockHeroCarouselAc
 	onMutedChange,
 }): ReactElement => {
 	const [isPaused, setIsPaused] = useState(false);
+
+	// The object behind this slide couldn't be resolved -- show that, rather than an empty slide.
+	if (item?.hasFailed) {
+		return <IeObjectLoadError className="c-block-hero-carousel__carousel-slide-error" />;
+	}
 
 	if (isLoading || !item?.schemaIdentifier) {
 		return (

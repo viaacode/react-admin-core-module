@@ -2,6 +2,7 @@ import { Image, Spinner } from '@viaa/avo2-components';
 import clsx from 'clsx';
 import React, { type FunctionComponent, type ReactElement } from 'react';
 import type { HeroCarouselSlideItem } from '~content-blocks/BlockHeroCarousel/BlockHeroCarousel.types.ts';
+import { IeObjectLoadError } from '~modules/content-page/components/IeObjectLoadError/IeObjectLoadError.tsx';
 import type { DefaultComponentProps } from '~modules/shared/types/components';
 import { Icon } from '~shared/components/Icon';
 import { getIconFromObjectType } from '~shared/helpers/get-icon-from-object-type.ts';
@@ -62,6 +63,11 @@ const getObjectTypeLabel = (format: IeObjectType | undefined): string => {
 export const BlockHeroCarouselInactiveSlide: FunctionComponent<
 	BlockHeroCarouselInactiveSlideProps
 > = ({ item, isLoading }): ReactElement => {
+	// The object behind this slide couldn't be resolved -- show that, rather than an empty slide.
+	if (item?.hasFailed) {
+		return <IeObjectLoadError className="c-block-hero-carousel__carousel-slide-error" />;
+	}
+
 	if (isLoading || !item?.schemaIdentifier) {
 		return (
 			<div className={clsx('c-block-hero-carousel__carousel-slide-placeholder')}>

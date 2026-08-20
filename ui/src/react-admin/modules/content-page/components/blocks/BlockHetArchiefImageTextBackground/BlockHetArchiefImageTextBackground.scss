@@ -183,6 +183,7 @@
       img {
         display: block;
         max-width: 100%;
+
         // `max-height`, not `height`, keeps the box aspect-correct so the
         // width-alignment above matches the image's actual visible content.
         max-height: 100%;
