@@ -5,7 +5,6 @@
 
 $panel-padding: variables.$g-spacer-unit * 2;
 $half-gap: variables.$g-spacer-unit * 2;
-$pill-radius: 999px;
 
 .c-block-double-banner {
 	display: grid;
@@ -36,7 +35,8 @@ $pill-radius: 999px;
 		// Mirror image: the image moves to the other side and its rounded end flips with it.
 		&--mirrored {
 			.c-block-double-banner__image {
-				border-radius: $pill-radius 0 0 $pill-radius;
+				border-radius: variables.$g-border-radius-non-square 0 0
+					variables.$g-border-radius-non-square;
 			}
 
 			@media (min-width: variables.$g-bp3) {
@@ -110,7 +110,8 @@ $pill-radius: 999px;
 
 		// Percentage radii would create an ellipse on this rectangular image. CSS clamps this
 		// oversized radius to a circular pill cap, regardless of the rendered image height.
-		border-radius: 0 $pill-radius $pill-radius 0;
+		border-radius: 0 variables.$g-border-radius-non-square
+			variables.$g-border-radius-non-square 0;
 
 		@media (min-width: variables.$g-bp3) {
 			box-sizing: border-box;
