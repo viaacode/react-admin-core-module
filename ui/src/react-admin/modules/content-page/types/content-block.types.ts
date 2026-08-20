@@ -194,6 +194,7 @@ export enum ContentBlockType {
 	ThemeReels = 'THEME_REELS',
 	ObjectsGrid = 'OBJECTS_GRID',
 	OverviewThemes = 'OVERVIEW_THEMES',
+	DoubleBanner = 'DOUBLE_BANNER',
 	HeroCarousel = 'HERO_CAROUSEL',
 	Timeline = 'TIMELINE',
 }

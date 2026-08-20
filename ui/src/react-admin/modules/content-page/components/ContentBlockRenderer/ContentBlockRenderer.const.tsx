@@ -7,6 +7,7 @@ import { BlockButtonsWrapper } from '~content-blocks/BlockButtons';
 import { BlockCardsWithoutDescription } from '~content-blocks/BlockCardsWithoutDescription';
 import { BlockContentPageMeta } from '~content-blocks/BlockContentPageMeta';
 import { BlockCTAsWrapper } from '~content-blocks/BlockCTAs';
+import { BlockDoubleBanner } from '~content-blocks/BlockDoubleBanner';
 import { BlockEventbrite } from '~content-blocks/BlockEventbrite';
 import { BlockHeading } from '~content-blocks/BlockHeading';
 import { BlockHeroCarousel } from '~content-blocks/BlockHeroCarousel';
@@ -101,6 +102,7 @@ export function GET_BLOCK_COMPONENT(
 		[ContentBlockType.HighlightText]: BlockHighlightText,
 		[ContentBlockType.ThemeReels]: BlockThemeReels,
 		[ContentBlockType.OverviewThemes]: BlockOverviewThemes,
+		[ContentBlockType.DoubleBanner]: BlockDoubleBanner,
 		[ContentBlockType.HeroCarousel]: BlockHeroCarousel,
 		[ContentBlockType.Timeline]: BlockTimeline,
 
