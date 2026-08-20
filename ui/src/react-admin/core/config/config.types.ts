@@ -207,6 +207,7 @@ export enum AdminCoreIconName {
 	Check = 'check',
 	ChevronLeft = 'chevronLeft',
 	Clock = 'clock',
+	Collection = 'collection',
 	Copy = 'copy',
 	Delete = 'delete',
 	Edit = 'edit',

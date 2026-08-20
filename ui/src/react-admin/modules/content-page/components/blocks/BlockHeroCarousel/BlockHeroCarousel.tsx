@@ -10,7 +10,7 @@ import type {
 } from '~content-blocks/BlockHeroCarousel/BlockHeroCarousel.types.ts';
 import { BlockHeroCarouselCarousel } from '~content-blocks/BlockHeroCarousel/BlockHeroCarouselCarousel.tsx';
 import { BlockHeroCarouselSearch } from '~content-blocks/BlockHeroCarousel/BlockHeroCarouselSearch.tsx';
-import { GET_SECONDARY_BACKGROUND_COLOR_OPTIONS_ARCHIEF } from '~modules/content-page/const/get-color-options.ts';
+import { getRandomTertiaryBackgroundColor } from '~modules/content-page/helpers/get-random-tertiary-background-color.ts';
 import { useGetIeObjectsPlayableDisplayData } from '~modules/content-page/hooks/useGetIeObjectsPlayableDisplayData.ts';
 import { isAudioVideoFormat } from '~shared/helpers/is-audio-video-format.ts';
 import type { IeObjectType } from '~shared/helpers/map-format-to-type.ts';
@@ -58,10 +58,7 @@ export const BlockHeroCarousel: FunctionComponent<BlockHeroCarouselProps> = ({
 	} = useGetIeObjectsPlayableDisplayData(blockId, unsavedObjects);
 
 	const items = useMemo(() => {
-		const allTertiaryColors = GET_SECONDARY_BACKGROUND_COLOR_OPTIONS_ARCHIEF();
 		return elements.map((object, index) => {
-			// eslint-disable-next-line react-hooks/purity
-			const randomIndex = Math.floor(Math.random() * allTertiaryColors.length);
 			const ieObject = ieObjects?.[index];
 			// A resolved-but-null entry means this slide's object couldn't be loaded; the slide
 			// stays in the strip and shows an error tile instead of an empty player.
@@ -76,7 +73,7 @@ export const BlockHeroCarousel: FunctionComponent<BlockHeroCarouselProps> = ({
 				videoThumbnail: object.videoThumbnail,
 				hasFailed,
 				backgroundColor: isAudioVideoFormat(dctermsFormat)
-					? (allTertiaryColors[randomIndex].value as Color)
+					? getRandomTertiaryBackgroundColor()
 					: Color.Mustard,
 			} as HeroCarouselSlideItem;
 		});
