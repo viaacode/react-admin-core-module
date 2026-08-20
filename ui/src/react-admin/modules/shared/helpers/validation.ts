@@ -16,13 +16,13 @@ export const validateContentBlockField = (
 	value: any,
 	stateIndex?: number,
 	// The state object the field lives in, so validators can express cross-field rules
-	siblingState?: ContentBlockComponentState | ContentBlockState
+	parentState?: ContentBlockComponentState | ContentBlockState
 ): ContentBlockErrors => {
 	if (!validator) {
 		return oldErrors;
 	}
 
-	const errorArray = validator(value, siblingState);
+	const errorArray = validator(value, parentState);
 
 	if (errorArray.length) {
 		if (typeof stateIndex === 'number') {

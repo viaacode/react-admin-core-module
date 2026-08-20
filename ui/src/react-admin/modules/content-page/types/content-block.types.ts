@@ -233,7 +233,7 @@ export interface ContentBlockField {
 	/**
 	 * Returns the validation errors for this field's value.
 	 *
-	 * `siblingState` is the state object this field lives in (the component state, the block
+	 * `parentState` is the state object this field lives in (the component state, the block
 	 * state, or a single element of a repeated field group), so a validator can express rules
 	 * that span two fields — e.g. "start time and end time must both be filled in, or neither".
 	 * Pair such a validator with `revalidateFields` so the other field's error clears too.
@@ -241,7 +241,7 @@ export interface ContentBlockField {
 	validator?: (
 		// biome-ignore lint/suspicious/noExplicitAny: todo
 		value: any,
-		siblingState?: ContentBlockComponentState | ContentBlockState
+		parentState?: ContentBlockComponentState | ContentBlockState
 	) => string[];
 	isVisible?: (
 		config: ContentBlockConfig,

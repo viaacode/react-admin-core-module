@@ -39,10 +39,10 @@ describe('validateContentBlockField', () => {
 
 	// Cross-field validation, used by the Videoblok start/end times.
 	// https://meemoo.atlassian.net/browse/ARC-3832
-	describe('sibling state', () => {
-		it('should pass the sibling state to the validator', () => {
+	describe('parent state', () => {
+		it('should pass the parent state to the validator', () => {
 			const validator = vi.fn().mockReturnValue([]);
-			const siblingState = { startTime: '00:00:10', endTime: '00:00:25' };
+			const parentState = { startTime: '00:00:10', endTime: '00:00:25' };
 
 			validateContentBlockField(
 				'endTime',
@@ -50,19 +50,19 @@ describe('validateContentBlockField', () => {
 				{},
 				'00:00:25',
 				undefined,
-				siblingState as unknown as ContentBlockComponentState
+				parentState as unknown as ContentBlockComponentState
 			);
 
-			expect(validator).toHaveBeenCalledWith('00:00:25', siblingState);
+			expect(validator).toHaveBeenCalledWith('00:00:25', parentState);
 		});
 
 		it('should let a validator report an error based on a sibling field', () => {
 			// "both or none": an end time without a start time is invalid
 			const validator = (
 				value: string,
-				siblingState?: { startTime?: string } | ContentBlockComponentState
+				parentState?: { startTime?: string } | ContentBlockComponentState
 			) =>
-				value && !(siblingState as { startTime?: string })?.startTime
+				value && !(parentState as { startTime?: string })?.startTime
 					? ['a start time is required as well']
 					: [];
 
@@ -79,7 +79,7 @@ describe('validateContentBlockField', () => {
 			).toEqual({});
 		});
 
-		it('should leave the sibling state undefined when it is not passed', () => {
+		it('should leave the parent state undefined when it is not passed', () => {
 			const validator = vi.fn().mockReturnValue([]);
 
 			validateContentBlockField('someField', validator, {}, 'value');

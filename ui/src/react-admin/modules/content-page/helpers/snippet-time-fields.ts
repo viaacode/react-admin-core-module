@@ -32,8 +32,8 @@ import type { PickerItem } from '~shared/types/content-picker.ts';
  */
 const validateSnippetTime =
 	(field: 'startTime' | 'endTime') =>
-	(value: string | undefined, siblingState?: ContentBlockComponentState): string[] => {
-		const state = siblingState as HetArchiefVideoBlockComponentState | undefined;
+	(value: string | undefined, parentState?: ContentBlockComponentState): string[] => {
+		const state = parentState as HetArchiefVideoBlockComponentState | undefined;
 		const otherValue = (field === 'startTime' ? state?.endTime : state?.startTime)?.trim();
 		const ownValue = (value || '').trim();
 
