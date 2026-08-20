@@ -15,46 +15,48 @@ vi.mock('~shared/helpers/translation-functions', () => ({ tText: (key: string) =
 
 /**
  * Every supported Archief background as [name, background, primary, secondary, hyperlink], based
- * on meemoo-hetarchief-kleurencombinaties.pdf and the corrections confirmed by meemoo on
- * ARC-3848. Sky blauw is the only selectable legacy color that is absent from the PDF.
+ * on meemoo-hetarchief-kleurencombinaties-v3.pdf and the corrections confirmed by meemoo on
+ * ARC-3848. Version 3 specifies all three roles for every approved background. Sky blauw, Terra,
+ * Olijf and Viool are absent from the document.
  */
 const EXPECTED_BACKGROUND_TEXT_COLORS: [string, Color, Color, Color?, Color?][] = [
 	// Merk
 	['Zwart', Color.Black, Color.White, Color.Zinc, Color.OceanGreen],
 	['Wit', Color.White, Color.Black, Color.Slate, Color.Jade],
-	['Teal', Color.OceanGreen, Color.Black],
+	['Teal', Color.OceanGreen, Color.Black, Color.Ink, Color.Black],
 	// Functioneel
 	['Grafiet', Color.Graphite, Color.White, Color.Zinc, Color.OceanGreen],
 	['Inkt', Color.Ink, Color.White, Color.Zinc, Color.OceanGreen],
-	['Schaduw', Color.Shadow, Color.White],
-	['Leisteen', Color.Slate, Color.White],
-	['Neutraal', Color.ArchiefNeutral, Color.White],
-	['Zink', Color.Zinc, Color.Black],
+	['Schaduw', Color.Shadow, Color.White, Color.ArchiefSilver, Color.White],
+	['Leisteen', Color.Slate, Color.White, Color.ArchiefSilver, Color.White],
+	['Neutraal', Color.ArchiefNeutral, Color.White, Color.White, Color.White],
+	['Zink', Color.Zinc, Color.Black, Color.Ink, Color.Black],
 	['Zilver', Color.ArchiefSilver, Color.Black, Color.Slate, Color.Lagoon],
 	['Platinum', Color.Platinum, Color.Black, Color.Slate, Color.Lagoon],
-	['Kers', Color.Cherry, Color.White],
-	['Jade', Color.Jade, Color.White, Color.Black],
-	['Lagune', Color.Lagoon, Color.White],
+	['Kers', Color.Cherry, Color.White, Color.White, Color.White],
+	['Jade', Color.Jade, Color.White, Color.White, Color.White],
+	['Lagune', Color.Lagoon, Color.White, Color.ArchiefSilver, Color.White],
 	// Secundair
-	['Zeegroen', Color.SeaGreen, Color.Black],
-	['Grasgroen', Color.GrassGreen, Color.Black],
-	['Azuur', Color.Azure, Color.Black],
+	['Zeegroen', Color.SeaGreen, Color.Black, Color.Black, Color.Black],
+	['Grasgroen', Color.GrassGreen, Color.Black, Color.Shadow, Color.Black],
+	['Azuur', Color.Azure, Color.Black, Color.Graphite, Color.Black],
 	// Tertiair
-	['Lila', Color.Lila, Color.Black],
-	['Mosterd', Color.Mustard, Color.Black],
-	['Koraal', Color.Coral, Color.Black],
-	['Baby blauw', Color.BabyBlue, Color.Black, undefined, Color.Lagoon],
-	['Blush', Color.BlossomPink, Color.Black],
-	['Donker lila', Color.Lavender, Color.Black],
-	['Mist', Color.Sage, Color.Black],
-	['Sepia', Color.SandBeige, Color.Black],
-	['Mauve', Color.OldPink, Color.White],
-	['Salie', Color.Pistachio, Color.Black],
+	['Lila', Color.Lila, Color.Black, Color.Shadow, Color.Black],
+	['Mosterd', Color.Mustard, Color.Black, Color.Shadow, Color.Black],
+	['Koraal', Color.Coral, Color.Black, Color.Ink, Color.Black],
+	['Baby blauw', Color.BabyBlue, Color.Black, Color.Shadow, Color.Lagoon],
+	['Blush', Color.BlossomPink, Color.Black, Color.Ink, Color.Black],
+	['Donker lila', Color.Lavender, Color.Black, Color.Ink, Color.Black],
+	['Mist', Color.Sage, Color.Black, Color.Ink, Color.Black],
+	['Sepia', Color.SandBeige, Color.Black, Color.Shadow, Color.Black],
+	['Mauve', Color.OldPink, Color.White, Color.Platinum, Color.White],
+	['Salie', Color.Pistachio, Color.Black, Color.Ink, Color.Black],
+	// Not in the document; only a primary color, so the other roles fall back to it.
 	['Terra', Color.Terra, Color.Black],
 	['Olijf', Color.Olive, Color.White],
 	['Viool', Color.Viola, Color.White],
-	// Not in the PDF; temporarily follows Baby blauw while meemoo decides whether it remains.
-	['Sky blauw', Color.SkyBlue, Color.Black, undefined, Color.Lagoon],
+	// Not in the document; temporarily follows Baby blauw while meemoo decides whether it remains.
+	['Sky blauw', Color.SkyBlue, Color.Black, Color.Shadow, Color.Lagoon],
 ];
 
 describe('getBackgroundTextColors()', () => {
@@ -148,8 +150,8 @@ describe('getBackgroundTextColorVariables()', () => {
 
 	// Leaving them unset is what makes the utility classes fall back to the primary color.
 	it('omits the roles design did not specify', () => {
-		expect(getBackgroundTextColorVariables(Color.OldPink)).toEqual({
-			'--bg-text-primary': Color.White,
+		expect(getBackgroundTextColorVariables(Color.Terra)).toEqual({
+			'--bg-text-primary': Color.Black,
 		});
 	});
 
