@@ -9,12 +9,12 @@
     }
 
     .u-background-text-secondary {
-      color: var(--bg-text-secondary, var(--bg-text-primary)) !important;
+      color: var(--bg-text-secondary) !important;
     }
 
     .u-background-text-hyperlink,
     .u-background-text-links a:not(.a-link__no-styles) {
-      color: var(--bg-text-hyperlink, var(--bg-text-primary)) !important;
+      color: var(--bg-text-hyperlink) !important;
     }
 
     /* SmartLink deliberately removes link styling; it should inherit the semantic text role of its

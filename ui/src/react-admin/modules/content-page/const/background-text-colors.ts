@@ -11,19 +11,19 @@ import { Color, type CustomBackground, type GradientColor } from '../types/conte
  *
  * The columns map to `primary` ("standaard tekst"), `secondary` ("neutrale tekst": captions,
  * subtitles and metadata) and `hyperlink` ("link/CTA"). Version 3 of the document specifies all
- * three roles for every approved background, so a row only leaves a role out when the color itself
- * is absent from the document. Differences from the document must be documented at the row.
+ * three roles for every approved background. A background the document does not list repeats its
+ * primary color in the other two roles. Differences from the document must be documented at the row.
  */
 
 export const TEXT_COLOR_WHITE = Color.White;
 
 export interface BackgroundTextColors {
-	/** Standard body text. Always present. */
+	/** Standard body text. */
 	primary: Color;
-	/** Neutral text: captions, subtitles, metadata. Absent when design specified no second color. */
-	secondary?: Color;
-	/** Link and CTA text. Absent when design specified no link color. */
-	hyperlink?: Color;
+	/** Neutral text: captions, subtitles, metadata. */
+	secondary: Color;
+	/** Link and CTA text. */
+	hyperlink: Color;
 }
 
 /**
@@ -176,10 +176,22 @@ export const BACKGROUND_TEXT_COLORS: Partial<Record<Color, BackgroundTextColors>
 	}, // Salie
 
 	// Colors that the color-combination document does not list. They keep the primary color the
-	// earlier version of the document gave them, and fall back to it for the other two roles.
-	[Color.Terra]: { primary: Color.Black }, // Terra
-	[Color.Olive]: { primary: Color.White }, // Olijf
-	[Color.Viola]: { primary: Color.White }, // Viool
+	// earlier version of the document gave them, and repeat it for the other two roles.
+	[Color.Terra]: {
+		primary: Color.Black,
+		secondary: Color.Black,
+		hyperlink: Color.Black,
+	}, // Terra
+	[Color.Olive]: {
+		primary: Color.White,
+		secondary: Color.White,
+		hyperlink: Color.White,
+	}, // Olijf
+	[Color.Viola]: {
+		primary: Color.White,
+		secondary: Color.White,
+		hyperlink: Color.White,
+	}, // Viool
 
 	// Sky blauw is a selectable legacy color and is not an approved color. Until meemoo decides
 	// whether it stays, design asked to give it the Baby blauw text colors.
@@ -226,7 +238,7 @@ export function getBackgroundTextColorVariables(
 
 	return {
 		'--bg-text-primary': textColors.primary,
-		...(textColors.secondary ? { '--bg-text-secondary': textColors.secondary } : {}),
-		...(textColors.hyperlink ? { '--bg-text-hyperlink': textColors.hyperlink } : {}),
+		'--bg-text-secondary': textColors.secondary,
+		'--bg-text-hyperlink': textColors.hyperlink,
 	};
 }

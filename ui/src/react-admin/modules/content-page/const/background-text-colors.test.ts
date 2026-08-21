@@ -19,7 +19,7 @@ vi.mock('~shared/helpers/translation-functions', () => ({ tText: (key: string) =
  * ARC-3848. Version 3 specifies all three roles for every approved background. Sky blauw, Terra,
  * Olijf and Viool are absent from the document.
  */
-const EXPECTED_BACKGROUND_TEXT_COLORS: [string, Color, Color, Color?, Color?][] = [
+const EXPECTED_BACKGROUND_TEXT_COLORS: [string, Color, Color, Color, Color][] = [
 	// Merk
 	['Zwart', Color.Black, Color.White, Color.Zinc, Color.OceanGreen],
 	['Wit', Color.White, Color.Black, Color.Slate, Color.Jade],
@@ -51,10 +51,10 @@ const EXPECTED_BACKGROUND_TEXT_COLORS: [string, Color, Color, Color?, Color?][] 
 	['Sepia', Color.SandBeige, Color.Black, Color.Shadow, Color.Black],
 	['Mauve', Color.OldPink, Color.White, Color.Platinum, Color.White],
 	['Salie', Color.Pistachio, Color.Black, Color.Ink, Color.Black],
-	// Not in the document; only a primary color, so the other roles fall back to it.
-	['Terra', Color.Terra, Color.Black],
-	['Olijf', Color.Olive, Color.White],
-	['Viool', Color.Viola, Color.White],
+	// Not in the document; the primary color repeats across all three roles.
+	['Terra', Color.Terra, Color.Black, Color.Black, Color.Black],
+	['Olijf', Color.Olive, Color.White, Color.White, Color.White],
+	['Viool', Color.Viola, Color.White, Color.White, Color.White],
 	// Not in the document; temporarily follows Baby blauw while meemoo decides whether it remains.
 	['Sky blauw', Color.SkyBlue, Color.Black, Color.Shadow, Color.Lagoon],
 ];
@@ -67,11 +67,7 @@ describe('getBackgroundTextColors()', () => {
 	it.each(EXPECTED_BACKGROUND_TEXT_COLORS)(
 		'matches the design for %s',
 		(_name, background, primary, secondary, hyperlink) => {
-			expect(getBackgroundTextColors(background)).toEqual({
-				primary,
-				...(secondary ? { secondary } : {}),
-				...(hyperlink ? { hyperlink } : {}),
-			});
+			expect(getBackgroundTextColors(background)).toEqual({ primary, secondary, hyperlink });
 		}
 	);
 
@@ -148,10 +144,12 @@ describe('getBackgroundTextColorVariables()', () => {
 		});
 	});
 
-	// Leaving them unset is what makes the utility classes fall back to the primary color.
-	it('omits the roles design did not specify', () => {
+	// Backgrounds the document does not list repeat their primary color, so all three stay set.
+	it('repeats the primary color for a background the document does not list', () => {
 		expect(getBackgroundTextColorVariables(Color.Terra)).toEqual({
 			'--bg-text-primary': Color.Black,
+			'--bg-text-secondary': Color.Black,
+			'--bg-text-hyperlink': Color.Black,
 		});
 	});
 

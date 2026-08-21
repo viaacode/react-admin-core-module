@@ -115,7 +115,6 @@
 
    ContentBlockRenderer emits the shared mixin in client.css; the utility index emits it separately
    in admin.css. All role rules are scoped to u-background-text-colors, so AVO remains untouched.
-   Secondary and link roles fall back to primary when the design specifies no separate role color.
    -------------------------------------------------------------------------- */
 
 @include background-text.background-text-roles;

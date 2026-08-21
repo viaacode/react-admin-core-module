@@ -61,12 +61,12 @@
   .c-block-image-title-text-button .c-rich-text-editor__content {
     h2.u-background-text-hyperlink,
     h3.u-background-text-hyperlink {
-      color: var(--bg-text-hyperlink, var(--bg-text-primary)) !important;
+      color: var(--bg-text-hyperlink) !important;
     }
 
     .a-subtitle.u-background-text-secondary,
     .a-content-page__description.u-background-text-secondary {
-      color: var(--bg-text-secondary, var(--bg-text-primary)) !important;
+      color: var(--bg-text-secondary) !important;
     }
   }
 
