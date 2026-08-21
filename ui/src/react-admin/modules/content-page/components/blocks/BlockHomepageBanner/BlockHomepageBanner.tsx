@@ -12,6 +12,7 @@ import {
 } from '~modules/content-page/types/content-block.types';
 import { ContentPageWidth } from '~modules/content-page/types/content-pages.types.ts';
 import Html from '~shared/components/Html/Html.tsx';
+import { SanitizePreset } from '~shared/helpers/sanitize/presets';
 
 export interface BlockHomepageBannerProps extends DefaultComponentProps {
 	title: string;
@@ -76,6 +77,7 @@ export const BlockHomepageBanner: FunctionComponent<BlockHomepageBannerProps> = 
 					<Html
 						className={clsx('c-block-homepage-banner__content-text', 'c-rich-text-editor__content')}
 						content={content}
+						sanitizePreset={SanitizePreset.full}
 						type="p"
 					/>
 					<div className="c-block-homepage-banner__pattern-slot c-block-homepage-banner__pattern-slot--bottom">
