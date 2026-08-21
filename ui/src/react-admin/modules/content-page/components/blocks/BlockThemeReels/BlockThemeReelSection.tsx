@@ -10,7 +10,7 @@ import { useGetThemeWithObjects } from '~content-blocks/BlockThemeReels/hooks/us
 import { AdminConfigManager } from '~core/config';
 import { AdminCoreIconName } from '~core/config/config.types';
 import { CarouselButtons } from '~modules/content-page/components/CarouselButtons/CarouselButtons.tsx';
-import { ImageOrAudioWaveForm } from '~modules/content-page/components/ImageOrAudioWaveForm';
+import { ImageOrAudioWaveForm } from '~modules/content-page/components/ImageOrAudioWaveForm/ImageOrAudioWaveForm.tsx';
 import { getRandomTertiaryBackgroundColor } from '~modules/content-page/helpers/get-random-tertiary-background-color.ts';
 import type { Color } from '~modules/content-page/types/content-block.types.ts';
 import type { DefaultComponentProps } from '~modules/shared/types/components';

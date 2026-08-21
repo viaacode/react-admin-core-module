@@ -1,8 +1,7 @@
 import React, { type FunctionComponent, type ReactElement } from 'react';
 import type { HeroCarouselSlideItem } from '~content-blocks/BlockHeroCarousel/BlockHeroCarousel.types.ts';
 import { getSlideImageSrc } from '~content-blocks/BlockHeroCarousel/BlockHeroCarousel.utils.ts';
-import { ImageOrAudioWaveForm } from '~modules/content-page/components/ImageOrAudioWaveForm';
-import { Color } from '~modules/content-page/types/content-block.types.ts';
+import { ImageOrAudioWaveForm } from '~modules/content-page/components/ImageOrAudioWaveForm/ImageOrAudioWaveForm.tsx';
 import type { DefaultComponentProps } from '~modules/shared/types/components';
 import { Icon } from '~shared/components/Icon';
 import { getIconFromObjectType } from '~shared/helpers/get-icon-from-object-type.ts';

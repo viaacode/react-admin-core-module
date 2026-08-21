@@ -10,6 +10,7 @@ import React, {
 	useState,
 } from 'react';
 import { BlockHeading } from '~content-blocks/BlockHeading';
+import { ImageOrAudioWaveForm } from '~modules/content-page/components/ImageOrAudioWaveForm/ImageOrAudioWaveForm.tsx';
 import { getRandomTertiaryBackgroundColor } from '~modules/content-page/helpers/get-random-tertiary-background-color.ts';
 import type { Color } from '~modules/content-page/types/content-block.types.ts';
 import { IeObjectsService } from '~modules/ie-objects/ie-objects.service.ts';
@@ -23,7 +24,6 @@ import { HET_ARCHIEF } from '~shared/types';
 import type { BlockObjectsGridProps, ObjectsGridItem, OrderedTile } from './BlockObjectsGrid.types';
 import { useGetObjectsGridItems } from './hooks/useGetObjectsGridItems';
 import './BlockObjectsGrid.scss';
-import { ImageOrAudioWaveForm } from '~modules/content-page/components/ImageOrAudioWaveForm';
 
 // 4 rows of 4 items per row when there are no fixed items present
 // https://meemoo.atlassian.net/wiki/spaces/HA2/pages/6217171023/FA+Objecten+grid#Gedrag-van-het-contentblok

@@ -2,7 +2,7 @@ import { cleanup, render } from '@testing-library/react';
 import React from 'react';
 import { afterEach, describe, expect, it } from 'vitest';
 import { Color } from '~modules/content-page/types/content-block.types.ts';
-import { AudioWaveFormDisplay } from './AudioWaveFormDisplay';
+import { AudioWaveFormDisplay } from './AudioWaveFormDisplay.tsx';
 
 afterEach(() => {
 	cleanup();
@@ -38,12 +38,8 @@ describe('<AudioWaveFormDisplay />', () => {
 		);
 		const outer = container.querySelector('.c-audio-wave-form-display') as HTMLElement;
 
-		expect(outer.style.getPropertyValue('--c-audio-wave-form-display-wave-color')).toBe(
-			Color.Teal
-		);
-		expect(outer.style.getPropertyValue('--c-audio-wave-form-display-bg')).toBe(
-			Color.NightBlue
-		);
+		expect(outer.style.getPropertyValue('--c-audio-wave-form-display-wave-color')).toBe(Color.Teal);
+		expect(outer.style.getPropertyValue('--c-audio-wave-form-display-bg')).toBe(Color.NightBlue);
 	});
 
 	it('should pass the given className through', () => {
