@@ -1,5 +1,6 @@
 import type { SelectOption } from '@viaa/avo2-components';
 import { GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF } from '~modules/content-page/const/get-color-options';
+import { IE_OBJECT_WITH_SNIPPET_TIME_FIELDS } from '~modules/content-page/helpers/snippet-time-fields.ts';
 import type { FileUploadProps } from '~shared/components/FileUpload/FileUpload';
 import { tText } from '~shared/helpers/translation-functions';
 import { validateRequiredValue } from '~shared/helpers/validation.ts';
@@ -48,11 +49,13 @@ const GET_TIMELINE_NODE_VISUAL_TYPE_OPTIONS = (): SelectOption<TimelineNodeVisua
 	},
 ];
 
-const visualTypeIsObject: ContentBlockField['isVisible'] = (_config, formGroupState) =>
-	(formGroupState as TimelineNodeBlockComponentState).visualType === 'OBJECT';
+const visualTypeIsObject: ContentBlockField['isVisible'] = (_config, formGroupState) => {
+	return (formGroupState as TimelineNodeBlockComponentState).visualType === 'OBJECT';
+};
 
-const visualTypeIsImage: ContentBlockField['isVisible'] = (_config, formGroupState) =>
-	(formGroupState as TimelineNodeBlockComponentState).visualType === 'IMAGE';
+const visualTypeIsImage: ContentBlockField['isVisible'] = (_config, formGroupState) => {
+	return (formGroupState as TimelineNodeBlockComponentState).visualType === 'IMAGE';
+};
 
 export const INITIAL_TIMELINE_COMPONENTS_STATE = (): TimelineNodeBlockComponentState[] => [
 	{
@@ -61,6 +64,8 @@ export const INITIAL_TIMELINE_COMPONENTS_STATE = (): TimelineNodeBlockComponentS
 		text: '',
 		visualType: 'NONE',
 		mediaItem: undefined,
+		startTime: undefined,
+		endTime: undefined,
 		image: undefined,
 		imageAlt: '',
 		...COPYRIGHT_STATE(),
@@ -148,31 +153,7 @@ export const TIMELINE_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 						)
 					),
 			},
-			mediaItem: {
-				label: tText(
-					'react-admin/modules/content-page/components/blocks/block-timeline/block-timeline___object-audio-video-of-krant',
-					{},
-					[HET_ARCHIEF]
-				),
-				editorType: ContentBlockEditor.ContentPicker,
-				editorProps: {
-					allowedTypes: ['IE_OBJECT'],
-					hideTargetSwitch: true,
-					// Only one type is allowed, so the type dropdown would only ever have a single option
-					hideTypeDropdown: true,
-				},
-				isVisible: visualTypeIsObject,
-				validator: (value: unknown) =>
-					value
-						? []
-						: [
-								tText(
-									'react-admin/modules/content-page/components/blocks/block-timeline/block-timeline___selecteren-van-een-object-is-verplicht',
-									{},
-									[HET_ARCHIEF]
-								),
-							],
-			},
+			...IE_OBJECT_WITH_SNIPPET_TIME_FIELDS(undefined, visualTypeIsObject),
 			image: FILE_FIELD(
 				tText(
 					'react-admin/modules/content-page/components/blocks/block-timeline/block-timeline___een-afbeelding-is-verplicht',

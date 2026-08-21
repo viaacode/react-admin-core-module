@@ -45,6 +45,12 @@ import { useLocation } from '~shared/hooks/useLocation.ts';
 
 type ContentPageDetailProps = {
 	contentPageInfo: Partial<ContentPageInfo>;
+	/**
+	 * Renders the content page config as it is being edited, rather than a saved page. Blocks that
+	 * resolve ie-objects then do so from the config they are handed, since the saved version of it
+	 * is one step behind -- or doesn't exist yet.
+	 */
+	isEditing?: boolean;
 	activeBlockPosition?: number | null;
 	onBlockClicked?: BlockClickHandler;
 	renderFakeTitle?: boolean;
@@ -238,6 +244,7 @@ export const ContentPageRenderer: FunctionComponent<ContentPageDetailProps> = (p
 								}
 								contentBlockConfig={contentBlockConfig}
 								contentPageInfo={props.contentPageInfo as ContentPageInfo}
+								isEditing={props.isEditing}
 								className={clsx(`content-block-preview-${contentBlockConfig.position}`, {
 									'c-content-block__active':
 										contentBlockConfig.position ===

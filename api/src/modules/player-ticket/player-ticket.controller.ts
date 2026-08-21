@@ -36,8 +36,8 @@ export class PlayerTicketController {
 				'Either query param externalId or browsePath is required to fetch a playable url'
 			);
 		}
-		const startTime = this.parseTimeParam('startTime', queryParams.startTime);
-		const endTime = this.parseTimeParam('endTime', queryParams.endTime);
+		const startTime = this.parseTimeParam(queryParams.startTime);
+		const endTime = this.parseTimeParam(queryParams.endTime);
 		this.assertValidStartAndEndTime(startTime, endTime);
 		// biome-ignore lint/suspicious/noExplicitAny: get header
 		const referer = (request as any).header('Referer') || 'referer-not-defined';

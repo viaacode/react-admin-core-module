@@ -1,20 +1,22 @@
 import { Button } from '@meemoo/react-components';
-import { Image, Spinner } from '@viaa/avo2-components';
+import { Image } from '@viaa/avo2-components';
 import clsx from 'clsx';
 import React, { type FunctionComponent, type ReactElement, useState } from 'react';
 import type { HeroCarouselSlideItem } from '~content-blocks/BlockHeroCarousel/BlockHeroCarousel.types.ts';
+import {
+	getSlideImageSrc,
+	isSlidePlayerReady,
+} from '~content-blocks/BlockHeroCarousel/BlockHeroCarousel.utils.ts';
 import { AdminCoreIconName } from '~core/config';
 import { IeObjectFlowPlayerWrapper } from '~modules/content-page/components/IeObjectFlowPlayerWrapper/IeObjectFlowPlayerWrapper.tsx';
 import type { DefaultComponentProps } from '~modules/shared/types/components';
 import { Icon } from '~shared/components/Icon';
-import { isAudioVideoFormat } from '~shared/helpers/is-audio-video-format.ts';
 import { tText } from '~shared/helpers/translation-functions.ts';
 import { HET_ARCHIEF } from '~shared/types';
 
 export interface BlockHeroCarouselActiveSlideProps extends DefaultComponentProps {
-	item?: HeroCarouselSlideItem;
+	item: HeroCarouselSlideItem;
 	onEnded: () => void;
-	isLoading?: boolean;
 	isMuted: boolean;
 	onMutedChange: (muted: boolean) => void;
 }
@@ -22,25 +24,14 @@ export interface BlockHeroCarouselActiveSlideProps extends DefaultComponentProps
 export const BlockHeroCarouselActiveSlide: FunctionComponent<BlockHeroCarouselActiveSlideProps> = ({
 	item,
 	onEnded,
-	isLoading,
 	isMuted,
 	onMutedChange,
 }): ReactElement => {
 	const [isPaused, setIsPaused] = useState(false);
 
-	if (isLoading || !item?.schemaIdentifier) {
-		return (
-			<div className={clsx('c-block-hero-carousel__carousel-slide-placeholder')}>
-				<Spinner size="large" locationId={'hero-carousel-slide'} />
-			</div>
-		);
-	}
+	const imageSrc = getSlideImageSrc(item, true);
 
-	// The active slide is the only one big enough to warrant the full-size newspaper image, so
-	// it's the only slide that prefers it over the (lower-res) thumbnail.
-	const imageSrc = item.newspaperImage || item.videoThumbnail || item.thumbnailUrl || '';
-
-	if (isAudioVideoFormat(item.dctermsFormat)) {
+	if (isSlidePlayerReady(item)) {
 		return (
 			<IeObjectFlowPlayerWrapper
 				ieObject={item}
@@ -54,7 +45,7 @@ export const BlockHeroCarouselActiveSlide: FunctionComponent<BlockHeroCarouselAc
 	}
 
 	if (!imageSrc) {
-		return <div className={clsx('c-block-hero-carousel__carousel-slide-image')} />;
+		return <div className="c-block-hero-carousel__carousel-slide-image" />;
 	}
 
 	return (

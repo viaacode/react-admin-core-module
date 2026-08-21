@@ -179,6 +179,18 @@ export const USER_CONTENT_BLOCKS = [
 ];
 
 /**
+ * Blocks that resolve the ie-objects in their own config through the proxy.
+ * The blockId property will be added to these blocks automatically, so they can ask the proxy for
+ * the playable display data of the objects their config references, instead of passing the object
+ * ids and snipPoints along themselves.
+ */
+export const PLAYABLE_DISPLAY_DATA_BLOCKS = [
+	ContentBlockType.HetArchiefVideo,
+	ContentBlockType.HeroCarousel,
+	ContentBlockType.Timeline,
+];
+
+/**
  * Blocks that need access to the top level content page
  * The contentPageInfo property will be added to these blocks automatically
  */

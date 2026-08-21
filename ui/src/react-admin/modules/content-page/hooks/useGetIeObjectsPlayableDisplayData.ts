@@ -1,55 +1,44 @@
 import { useQuery } from '@tanstack/react-query';
 import { IeObjectsService } from '~shared/services/ie-objects-service/ie-objects.service.ts';
-import type { PlayableDisplayIeObject } from '~shared/services/ie-objects-service/ie-objects.types.ts';
+import type {
+	PlayableDisplayIeObject,
+	UnsavedPlayableDisplayDataObject,
+} from '~shared/services/ie-objects-service/ie-objects.types.ts';
 import { QUERY_KEYS } from '~shared/types';
 
-// Multiple slides can point at the same schemaIdentifier with different snipPoints (e.g. two
-// clips from the same video), so schemaIdentifier alone isn't a unique key -- fold the snipPoint
-// into the key used to match a fetched object back to the slide that requested it.
-const toObjectKey = (schemaIdentifier: string, start?: number, end?: number): string =>
-	`${schemaIdentifier}__${start ?? ''}__${end ?? ''}`;
-
+/**
+ * Fetches the playable display data for every ie-object referenced by a content block.
+ *
+ * Normally only the block id is sent: the proxy reads the objects and their snippet start/end
+ * times from the stored block config, so a client can't ask for a cut of an object that no editor
+ * configured. The result keeps the block's own element order -- entry i belongs to element i --
+ * with null for elements that have no ie-object (yet), so callers can merge it with their own
+ * per-element state by index.
+ *
+ * Inside the content page editor the block config is being changed as we speak -- and a freshly
+ * added block has no id at all -- so resolving from the saved config would show a preview that is
+ * one step behind, or none at all until the page is saved. Blocks rendered there get no blockId
+ * and pass their objects (with snipPoints) as `unsavedObjects` instead, which the proxy only
+ * honours for users who may edit content pages. Keep one entry per element there as well, so the
+ * response stays aligned.
+ *
+ * The two are mutually exclusive on the endpoint, which is what the blockId check below enforces:
+ * a block either has an id to look up, or sends what it is rendering, never both.
+ */
 export const useGetIeObjectsPlayableDisplayData = (
-	mediaItems: Partial<PlayableDisplayIeObject>[]
+	blockId: string | undefined,
+	unsavedObjects?: UnsavedPlayableDisplayDataObject[]
 ) => {
-	// Slots with no media item selected yet (e.g. a freshly added, not-yet-filled-in editor row)
-	// have an empty schemaIdentifier -- exclude them from the request, there's nothing to fetch.
-	const requestableMediaItems = mediaItems.filter((item) => !!item.schemaIdentifier);
-	const schemaIdentifiers = requestableMediaItems.map(({ schemaIdentifier }) => schemaIdentifier);
+	const objects = blockId ? undefined : unsavedObjects;
 
-	return useQuery<PlayableDisplayIeObject[]>({
-		queryKey: [QUERY_KEYS.GET_IE_OBJECTS_PLAYABLE_DISPLAY_DATA, schemaIdentifiers.join(',')],
-		placeholderData: mediaItems as PlayableDisplayIeObject[],
-		queryFn: async () => {
-			const objects = await IeObjectsService.getPlayableDisplayData(requestableMediaItems);
-
-			// Look fetched objects up by key rather than zipping arrays by index: this keeps every
-			// slide -- including empty slots that were never requested -- in its original position,
-			// and tolerates a response that's missing an entry, null, or out of order for any id.
-			const objectByKey = new Map(
-				(objects ?? [])
-					.filter((object): object is PlayableDisplayIeObject => !!object?.schemaIdentifier)
-					.map((object) => [
-						toObjectKey(object.schemaIdentifier, object.snipPoint?.start, object.snipPoint?.end),
-						object,
-					])
-			);
-
-			return mediaItems.map(
-				(placeholder) =>
-					({
-						...placeholder,
-						...objectByKey.get(
-							toObjectKey(
-								placeholder.schemaIdentifier as string,
-								placeholder.snipPoint?.start,
-								placeholder.snipPoint?.end
-							)
-						),
-					}) as PlayableDisplayIeObject
-			);
-		},
-		enabled: schemaIdentifiers.length > 0,
+	return useQuery<(PlayableDisplayIeObject | null)[]>({
+		queryKey: [
+			QUERY_KEYS.GET_IE_OBJECTS_PLAYABLE_DISPLAY_DATA,
+			blockId,
+			objects && JSON.stringify(objects),
+		],
+		queryFn: async () => (await IeObjectsService.getPlayableDisplayData(blockId, objects)) ?? [],
+		enabled: !!blockId || !!objects?.length,
 		staleTime: 60 * 60 * 1000, // 1 hour
 	});
 };

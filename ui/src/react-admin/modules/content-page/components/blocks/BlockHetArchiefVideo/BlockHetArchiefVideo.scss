@@ -16,6 +16,23 @@
     }
   }
 
+  // While the object is being resolved the block holds its spot with the poster the editor picked,
+  // dimmed and with a spinner on top, so it doesn't read as a finished player.
+  .c-block-het-archief-video__player--loading {
+    .c-block-het-archief-video__player-poster {
+      object-fit: cover;
+      opacity: 0.5;
+    }
+  }
+
+  .c-block-het-archief-video__player-loading {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   .c-block-het-archief-video__annotation {
     padding-top: variables.$g-spacer-unit;
   }
