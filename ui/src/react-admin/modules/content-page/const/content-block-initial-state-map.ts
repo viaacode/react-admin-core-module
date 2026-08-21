@@ -15,11 +15,12 @@ import { INITIAL_HERO_CAROUSEL_COMPONENTS_STATE } from '~content-blocks/BlockHer
 import { INITIAL_HET_ARCHIEF_HEADER_SEARCH_BLOCK_STATE } from '~content-blocks/BlockHetArchiefHeaderSearch';
 import { INITIAL_HET_ARCHIEF_IMAGE_TEXT_BACKGROUND_BLOCK_STATE } from '~content-blocks/BlockHetArchiefImageTextBackground';
 import { INITIAL_HET_ARCHIEF_QUOTE_COMPONENTS_STATE } from '~content-blocks/BlockHetArchiefQuote';
+import { INITIAL_HETARCHIEF_VIDEO_COMPONENTS_STATE } from '~content-blocks/BlockHetArchiefVideo';
 import { INITIAL_CONTENT_HIGHLIGHT_TEXT_BLOCK_STATE } from '~content-blocks/BlockHighlightText';
 import { INITIAL_CONTENT_HOMEPAGE_BANNER_BLOCK_STATE } from '~content-blocks/BlockHomepageBanner';
-import { INITIAL_HETARCHIEF_VIDEO_COMPONENTS_STATE } from '~content-blocks/BlockHetArchiefVideo';
 import { INITIAL_IFRAME_COMPONENTS_STATE } from '~content-blocks/BlockIFrame';
 import { INITIAL_IMAGE_COMPONENTS_STATE } from '~content-blocks/BlockImage';
+import { INITIAL_IMAGE_CAROUSEL_COMPONENTS_STATE } from '~content-blocks/BlockImageCarousel/BlockImageCarousel.editorconfig.ts';
 import {
 	INITIAL_IMAGE_GRID_COMPONENTS_STATE,
 	INITIAL_LOGO_GRID_COMPONENTS_STATE,
@@ -110,4 +111,5 @@ export const CONTENT_BLOCK_INITIAL_STATE_MAP: {
 	[ContentBlockType.HeroCarousel]: INITIAL_HERO_CAROUSEL_COMPONENTS_STATE,
 	[ContentBlockType.Timeline]: INITIAL_TIMELINE_COMPONENTS_STATE,
 	[ContentBlockType.HetArchiefVideo]: INITIAL_HETARCHIEF_VIDEO_COMPONENTS_STATE,
+	[ContentBlockType.ImageCarousel]: INITIAL_IMAGE_CAROUSEL_COMPONENTS_STATE,
 };
