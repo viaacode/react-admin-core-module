@@ -4,7 +4,7 @@ import type { IeObjectsSearchBody } from '~core/config/config.types';
 import { CustomError } from '~shared/helpers/custom-error';
 import { fetchWithLogout, fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
 import { getProxyUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config';
-import { mapFormatToType } from '~shared/helpers/map-format-to-type';
+import type { IeObjectType } from '~shared/helpers/map-format-to-type';
 import type { PickerItem } from '~shared/types/content-picker';
 import { type ObjectsGridItem, OrderProperty } from './BlockObjectsGrid.types';
 
@@ -24,7 +24,7 @@ interface RawIeObject {
 	name?: string;
 	maintainerName?: string;
 	// dcterms format, e.g. "video" | "audio" | "newspaper".
-	dctermsFormat?: string;
+	dctermsFormat?: IeObjectType;
 	thumbnailUrl?: string;
 }
 
@@ -32,7 +32,7 @@ const mapRawToGridItem = (raw: RawIeObject): ObjectsGridItem => ({
 	schemaIdentifier: raw.schemaIdentifier,
 	name: raw.name || '',
 	maintainerName: raw.maintainerName,
-	type: mapFormatToType(raw.dctermsFormat),
+	type: raw.dctermsFormat,
 	thumbnailUrl: raw.thumbnailUrl,
 });
 
