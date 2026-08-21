@@ -1,4 +1,5 @@
 // biome-ignore-all lint/a11y/useKeyWithClickEvents: mouse-only slide click by design -- the strip's many duplicate slides shouldn't all become tab stops. (File-level because a per-line ignore here conflicts with the neighboring noArrayIndexKey ignore -- biome mis-attaches both when stacked on the same element.)
+import { Spinner } from '@viaa/avo2-components';
 import clsx from 'clsx';
 import React, {
 	type FunctionComponent,
@@ -12,6 +13,7 @@ import type { HeroCarouselSlideItem } from '~content-blocks/BlockHeroCarousel/Bl
 import { BlockHeroCarouselActiveSlide } from '~content-blocks/BlockHeroCarousel/BlockHeroCarouselActiveSlide.tsx';
 import { BlockHeroCarouselInactiveSlide } from '~content-blocks/BlockHeroCarousel/BlockHeroCarouselInactiveSlide.tsx';
 import { CarouselButtons } from '~modules/content-page/components/CarouselButtons/CarouselButtons.tsx';
+import { IeObjectLoadError } from '~modules/content-page/components/IeObjectLoadError/IeObjectLoadError.tsx';
 import type { DefaultComponentProps } from '~modules/shared/types/components';
 import {
 	ACTIVE_SLIDE_CLASS,
@@ -20,6 +22,7 @@ import {
 	getPxPerRem,
 	handleTrackTransitionEnd,
 	handleWindowResize,
+	isSlideEmpty,
 } from './BlockHeroCarousel.utils.ts';
 
 import './BlockHeroCarousel.scss';
@@ -67,6 +70,44 @@ export const BlockHeroCarouselCarousel: FunctionComponent<BlockHeroCarouselCarou
 	const goToSlide = (targetIndex: number) => setActiveIndex(targetIndex);
 	const goNext = () => setActiveIndex((current) => current + 1);
 	const goPrev = () => setActiveIndex((current) => current - 1);
+
+	// What a slide shows before it has any object content of its own. Both leaf slides get to
+	// assume a resolved object, so neither has to carry these states.
+	const renderSlideContent = (item: HeroCarouselSlideItem, isSettledActive: boolean) => {
+		// The object behind this slide couldn't be resolved -- show that, rather than an empty
+		// slide. Only the active slide has room for the message under the icon.
+		if (item?.hasFailed) {
+			return (
+				<IeObjectLoadError
+					className="c-block-hero-carousel__carousel-slide-error"
+					isTextVisible={isSettledActive}
+				/>
+			);
+		}
+
+		// Nothing to show yet: either the slide's object is still being resolved, or nothing is
+		// known about it at all -- not even which object it points at, as with a freshly added
+		// editor row that hasn't been filled in. The slide's own box is sized and coloured from
+		// the block config, so the strip keeps its layout while the objects land.
+		if (isLoading || isSlideEmpty(item)) {
+			return (
+				<div className="c-block-hero-carousel__carousel-slide-placeholder">
+					<Spinner size="large" locationId={'hero-carousel-slide'} />
+				</div>
+			);
+		}
+
+		return isSettledActive ? (
+			<BlockHeroCarouselActiveSlide
+				item={item}
+				onEnded={goNext}
+				isMuted={isMuted}
+				onMutedChange={setIsMuted}
+			/>
+		) : (
+			<BlockHeroCarouselInactiveSlide item={item} />
+		);
+	};
 
 	return (
 		<div className={clsx('c-block-hero-carousel__carousel')}>
@@ -116,17 +157,7 @@ export const BlockHeroCarouselCarousel: FunctionComponent<BlockHeroCarouselCarou
 									backgroundColor: item?.backgroundColor,
 								}}
 							>
-								{isSettledActive ? (
-									<BlockHeroCarouselActiveSlide
-										item={item}
-										onEnded={goNext}
-										isLoading={isLoading}
-										isMuted={isMuted}
-										onMutedChange={setIsMuted}
-									/>
-								) : (
-									<BlockHeroCarouselInactiveSlide item={item} isLoading={isLoading} />
-								)}
+								{renderSlideContent(item, isSettledActive)}
 							</div>
 						);
 					})}

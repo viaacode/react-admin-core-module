@@ -15,11 +15,12 @@ import { HERO_CAROUSEL_CONFIG } from '~content-blocks/BlockHeroCarousel';
 import { HET_ARCHIEF_HEADER_SEARCH_BLOCK_CONFIG } from '~content-blocks/BlockHetArchiefHeaderSearch';
 import { HET_ARCHIEF_IMAGE_TEXT_BACKGROUND_BLOCK_CONFIG } from '~content-blocks/BlockHetArchiefImageTextBackground';
 import { HET_ARCHIEF_QUOTE_BLOCK_CONFIG } from '~content-blocks/BlockHetArchiefQuote';
+import { HETARCHIEF_VIDEO_BLOCK_CONFIG } from '~content-blocks/BlockHetArchiefVideo';
 import { CONTENT_HIGHLIGHT_TEXT_CONFIG } from '~content-blocks/BlockHighlightText';
 import { CONTENT_HOMEPAGE_BANNER_CONFIG } from '~content-blocks/BlockHomepageBanner';
-import { HETARCHIEF_VIDEO_BLOCK_CONFIG } from '~content-blocks/BlockHetArchiefVideo';
 import { IFRAME_BLOCK_CONFIG } from '~content-blocks/BlockIFrame';
 import { IMAGE_BLOCK_CONFIG } from '~content-blocks/BlockImage';
+import { IMAGE_CAROUSEL_CONFIG } from '~content-blocks/BlockImageCarousel';
 import {
 	IMAGE_GRID_BLOCK_CONFIG,
 	LOGO_GRID_BLOCK_CONFIG,
@@ -47,6 +48,7 @@ import { TAGS_WITH_LINK_BLOCK_CONFIG } from '~content-blocks/BlockTagsWithLink';
 import { THEME_REELS_BLOCK_CONFIG } from '~content-blocks/BlockThemeReels';
 import { THREE_CLICKABLE_TILES_BLOCK_CONFIG } from '~content-blocks/BlockThreeClickableTiles';
 import { TIMELINE_BLOCK_CONFIG } from '~content-blocks/BlockTimeline';
+import { TITLE_WITH_PARALLAX_CONFIG } from '~content-blocks/BlockTitleWithParallax';
 import { UITGEKLAARD_BLOCK_CONFIG } from '~content-blocks/BlockUitgeklaard';
 import { MEDIA_PLAYER_BLOCK_CONFIG } from '~content-blocks/BlockVideo';
 import { MEDIA_PLAYER_TITLE_TEXT_BUTTON_BLOCK_CONFIG } from '~content-blocks/BlockVideoTitleTextButton';
@@ -107,4 +109,6 @@ export const CONTENT_BLOCK_CONFIG_MAP: Record<
 	[ContentBlockType.HeroCarousel]: HERO_CAROUSEL_CONFIG,
 	[ContentBlockType.Timeline]: TIMELINE_BLOCK_CONFIG,
 	[ContentBlockType.HetArchiefVideo]: HETARCHIEF_VIDEO_BLOCK_CONFIG,
+	[ContentBlockType.ImageCarousel]: IMAGE_CAROUSEL_CONFIG,
+	[ContentBlockType.TitleWithParallax]: TITLE_WITH_PARALLAX_CONFIG,
 };

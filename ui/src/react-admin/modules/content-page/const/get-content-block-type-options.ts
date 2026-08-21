@@ -258,6 +258,22 @@ export const GET_CONTENT_BLOCK_TYPE_OPTIONS: () => SelectOption<string>[] = () =
 			]),
 			value: ContentBlockType.HetArchiefVideo,
 		},
+		{
+			label: tText(
+				'modules/content-page/const/get-content-block-type-options___carousel-met-afbeeldingen',
+				{},
+				[HET_ARCHIEF]
+			),
+			value: ContentBlockType.ImageCarousel,
+		},
+		{
+			label: tText(
+				'modules/content-page/const/get-content-block-type-options___titel-met-parallax',
+				{},
+				[HET_ARCHIEF]
+			),
+			value: ContentBlockType.TitleWithParallax,
+		},
 	];
 
 	// Only show the content blocks that the client enabled through the config object

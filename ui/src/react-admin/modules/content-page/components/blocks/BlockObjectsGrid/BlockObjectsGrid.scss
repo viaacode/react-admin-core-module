@@ -46,6 +46,7 @@
 
 	.c-block-objects-grid__title {
 		@include typography.sofia-pro-heading-lg($important: false);
+
 		color: colors.$color-gray-1000;
 		margin-bottom: 2.2rem;
 	}
@@ -81,6 +82,7 @@
 		min-width: 0;
 		text-decoration: none;
 		color: inherit;
+
 		@include focus.focus-outline;
 	}
 
@@ -118,6 +120,7 @@
 			object-fit: cover;
 			object-position: center;
 			display: block;
+
 			@include animations.zoom-in-transition;
 		}
 
@@ -143,6 +146,7 @@
 					margin: 0 auto;
 					object-position: top;
 					display: block;
+
 					@include animations.zoom-in-transition;
 				}
 			}
@@ -202,6 +206,7 @@
 
 	.c-block-objects-grid__tile-title {
 		@include typography.sofia-pro-heading-sm($important: false);
+
 		display: -webkit-box;
 		-webkit-line-clamp: 2;
 		-webkit-box-orient: vertical;
@@ -216,6 +221,7 @@
 		font-size: 1.4rem;
 		font-weight: 400;
 		line-height: 2rem;
+
 		@include typography.truncate;
 
 		@media (min-width: variables.$g-bp2) {
@@ -236,8 +242,11 @@
 		border-radius: 0.4rem;
 		background-color: colors.$color-gray-1000;
 		color: colors.$white;
-		@include typography.sofia-pro-heading();
+
+		@include typography.sofia-pro-heading;
+
 		text-decoration: none;
+
 		@include focus.focus-outline;
 	}
 

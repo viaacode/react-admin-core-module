@@ -5,6 +5,7 @@
 $pattern-height: 12rem;
 $pattern-height-mobile: 8rem;
 $pattern-repeat-count: 20;
+
 // How far the mobile pattern slots overshoot &__content's edge - see &__pattern-slot.
 $pattern-mobile-overshoot: 15rem;
 
@@ -40,13 +41,23 @@ $pattern-mobile-overshoot: 15rem;
 		&-text {
 			position: relative;
 			min-height: $pattern-height;
-
 			background: var(--pattern-color, transparent);
 			padding: variables.$g-spacer-unit * 6;
-			@include typography.sofia-pro-body();
+
+			@include typography.sofia-pro-body;
 
 			@media (max-width: variables.$g-bp4) {
 				padding: calc(#{variables.$g-spacer-unit} * 3) calc(#{variables.$g-spacer-unit} * 2.5) !important;
+			}
+
+			// The rich text paragraph margins space the paragraphs apart, but the box's own
+			// padding does the spacing at the top and the bottom.
+			> p:first-child {
+				margin-top: 0;
+			}
+
+			> p:last-child {
+				margin-bottom: 0;
 			}
 		}
 	}
@@ -57,12 +68,14 @@ $pattern-mobile-overshoot: 15rem;
 	// - right: enters at shape 2, nearest text -> circle, circle, rect, circle, rect
 	&__pattern {
 		@include pattern.pattern-strip($pattern-height, $pattern-repeat-count);
+
 		height: $pattern-height;
 
 		// Aligned to &-text's top edge, not stretched to &__content's full (padded) height.
 		&--left {
 			top: 0;
 			right: 100%;
+
 			@include pattern.pattern-side(left, 5, $pattern-height);
 		}
 
@@ -70,23 +83,27 @@ $pattern-mobile-overshoot: 15rem;
 		&--right {
 			bottom: 0;
 			left: 100%;
+
 			@include pattern.pattern-side(right, 2, $pattern-height);
 		}
 
 		// Below $g-bp4 the pattern moves from beside the text to above/below it (see &__pattern-slot).
 		@media (max-width: variables.$g-bp4) {
 			@include pattern.pattern-strip($pattern-height-mobile, $pattern-repeat-count);
+
 			height: $pattern-height-mobile;
 
 			&--left {
 				right: 0;
 				left: auto;
+
 				@include pattern.pattern-side(left, 5, $pattern-height-mobile);
 			}
 
 			&--right {
 				left: 0;
 				right: auto;
+
 				@include pattern.pattern-side(right, 2, $pattern-height-mobile);
 			}
 		}

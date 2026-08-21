@@ -1,10 +1,11 @@
+import { Spinner } from '@viaa/avo2-components';
 import clsx from 'clsx';
-import { compact, uniq } from 'es-toolkit/compat';
 import type { CSSProperties, FunctionComponent, ReactElement } from 'react';
 import React, { useMemo, useRef } from 'react';
 import { AdminCoreIconName } from '~core/config';
 import { AdminConfigManager } from '~core/config/config.class';
 import { IeObjectFlowPlayerWrapper } from '~modules/content-page/components/IeObjectFlowPlayerWrapper/IeObjectFlowPlayerWrapper.tsx';
+import { IeObjectLoadError } from '~modules/content-page/components/IeObjectLoadError/IeObjectLoadError.tsx';
 import { IeObjectMetadata } from '~modules/content-page/components/IeObjectMetadata/IeObjectMetadata.tsx';
 import { useGetIeObjectsPlayableDisplayData } from '~modules/content-page/hooks/useGetIeObjectsPlayableDisplayData.ts';
 import type { TimelineNodeBlockComponentState } from '~modules/content-page/types/content-block.types';
@@ -16,13 +17,14 @@ import { formatDateToDayMonthNameYear, getYear } from '~shared/helpers/formatter
 import { isAudioVideoFormat } from '~shared/helpers/is-audio-video-format.ts';
 import { SanitizePreset } from '~shared/helpers/sanitize/presets';
 import { tText } from '~shared/helpers/translation-functions';
-import type { PlayableDisplayIeObject } from '~shared/services/ie-objects-service/ie-objects.types.ts';
 import { HET_ARCHIEF } from '~shared/types';
 import type { DefaultComponentProps } from '~shared/types/components';
 
 import './BlockTimeline.scss';
 
 export interface BlockTimelineProps extends DefaultComponentProps {
+	/** Id of the content block, added by the content block renderer. Empty for an unsaved block. */
+	blockId?: string;
 	elements: TimelineNodeBlockComponentState[];
 }
 
@@ -38,27 +40,27 @@ const TimelineCap: FunctionComponent<{ position: 'start' | 'end' }> = ({ positio
 
 export const BlockTimeline: FunctionComponent<BlockTimelineProps> = ({
 	className,
+	blockId,
 	elements = [],
 }): ReactElement => {
 	const containerRef = useRef<HTMLDivElement>(null);
 	const locale = AdminConfigManager.getConfig().locale;
 
-	// Resolve all objects of the timeline in a single request
-	const pids = useMemo(
+	// While this block is being put together in the editor, it has no id yet, so its nodes go along
+	// for the proxy to resolve. One entry per node, so the response stays aligned.
+	const unsavedObjects = useMemo(
 		() =>
-			uniq(
-				compact(
-					elements.map((node) => ({
-						schemaIdentifier:
-							node.visualType === 'OBJECT' && node.mediaItem?.value
-								? String(node.mediaItem.value)
-								: null,
-					})) as PlayableDisplayIeObject[]
-				)
-			),
+			elements.map((node) => ({
+				schemaIdentifier: node.visualType === 'OBJECT' ? String(node.mediaItem?.value || '') : '',
+			})),
 		[elements]
 	);
-	const { data: ieObjects } = useGetIeObjectsPlayableDisplayData(pids);
+
+	// Resolve all objects of the timeline in a single request. Which objects those are is read
+	// from this block's stored config by the proxy, so only the block id goes out once it has been
+	// saved; the response comes back in the order of the nodes below, one (possibly null) entry
+	// per node.
+	const { data: ieObjects } = useGetIeObjectsPlayableDisplayData(blockId, unsavedObjects);
 
 	const scrollToTop = () => {
 		containerRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -79,6 +81,15 @@ export const BlockTimeline: FunctionComponent<BlockTimelineProps> = ({
 					const hasObject = node.visualType === 'OBJECT' && !!node.mediaItem?.value;
 					const ieObject = hasObject ? ieObjects?.[index] : undefined;
 					const thumbnail = ieObject?.newspaperImage || ieObject?.thumbnailUrl;
+					// A resolved-but-null entry means this node's object couldn't be loaded (it's
+					// gone, or out of reach for this visitor); the node keeps its place in the
+					// timeline and shows an error tile where the media would have been.
+					const hasFailedObject =
+						hasObject && !!ieObjects && index < ieObjects.length && ieObjects[index] === null;
+					// Until its object has been resolved the node shows what its own config knows --
+					// the poster image, if it has one -- so the timeline is laid out at its final
+					// size straight away instead of reflowing as the objects come in.
+					const isLoadingObject = hasObject && !ieObject && !hasFailedObject;
 
 					return (
 						<li
@@ -115,6 +126,33 @@ export const BlockTimeline: FunctionComponent<BlockTimelineProps> = ({
 										: undefined
 								}
 							>
+								{hasFailedObject && (
+									<div className={clsx('c-ie-object-media')}>
+										<IeObjectLoadError className="c-block-timeline__node-object-error" />
+									</div>
+								)}
+								{isLoadingObject && (
+									<div className={clsx('c-ie-object-media')}>
+										<div
+											className={clsx(
+												'c-block-timeline__node-image-wrapper',
+												'c-block-timeline__node-image-wrapper--loading'
+											)}
+										>
+											{node.image && (
+												<img
+													src={node.image}
+													alt=""
+													aria-hidden="true"
+													className="c-block-timeline__node-object-image"
+												/>
+											)}
+											<div className="c-block-timeline__node-object-loading">
+												<Spinner size="large" locationId={'timeline-node-object'} />
+											</div>
+										</div>
+									</div>
+								)}
 								{ieObject && (
 									<div className={clsx('c-ie-object-media')}>
 										{isAudioVideoFormat(ieObject.dctermsFormat) ? (

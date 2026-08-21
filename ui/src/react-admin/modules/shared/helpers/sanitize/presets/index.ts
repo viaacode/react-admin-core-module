@@ -38,7 +38,23 @@ export const link: DOMPurify.Config = {
 };
 
 export const full: DOMPurify.Config = {
-	ALLOWED_TAGS: [...(link.ALLOWED_TAGS || []), 'img', 'table', 'tr', 'td', 'div'],
+	ALLOWED_TAGS: [
+		...(link.ALLOWED_TAGS || []),
+		'img',
+		'div',
+		// A table needs its whole tag set. Without thead/tbody/th the browser keeps only the
+		// cell text and the table falls apart into a list of lines.
+		'table',
+		'caption',
+		'colgroup',
+		'col',
+		'thead',
+		'tbody',
+		'tfoot',
+		'tr',
+		'th',
+		'td',
+	],
 	RETURN_DOM: false,
 	ADD_ATTR: ['target'], // Allow target _blank for links
 };

@@ -12,6 +12,7 @@ import {
 } from '~modules/content-page/types/content-block.types';
 import { ContentPageWidth } from '~modules/content-page/types/content-pages.types.ts';
 import Html from '~shared/components/Html/Html.tsx';
+import { SanitizePreset } from '~shared/helpers/sanitize/presets';
 
 export interface BlockHighlightTextProps extends DefaultComponentProps {
 	content: string;
@@ -67,8 +68,10 @@ export const BlockHighlightText: FunctionComponent<BlockHighlightTextProps> = ({
 						aria-hidden="true"
 					/>
 				</div>
+				{/* c-rich-text-editor__content gives the rich text output its standard styling,
+				    paragraph spacing included - see BlockRichText */}
 				<Html
-					className={clsx('c-block-highlight-text__content-text', {
+					className={clsx('c-block-highlight-text__content-text', 'c-rich-text-editor__content', {
 						'u-background-text-colors u-background-text-links': hasTextColors,
 					})}
 					style={
@@ -78,6 +81,7 @@ export const BlockHighlightText: FunctionComponent<BlockHighlightTextProps> = ({
 						} as CSSProperties
 					}
 					content={content}
+					sanitizePreset={SanitizePreset.full}
 					type="p"
 				/>
 				<div className="c-block-highlight-text__pattern-slot c-block-highlight-text__pattern-slot--bottom">

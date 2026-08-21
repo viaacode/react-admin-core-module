@@ -1,0 +1,11 @@
+query getContentPageBlockById($id: Int!) {
+	app_content_blocks(where: { id: { _eq: $id } }) {
+		id
+		content_id
+		content_block_type
+		position
+		variables
+		created_at
+		updated_at
+	}
+}

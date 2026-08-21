@@ -1,7 +1,7 @@
-import { Image, Spinner } from '@viaa/avo2-components';
-import clsx from 'clsx';
+import { Image } from '@viaa/avo2-components';
 import React, { type FunctionComponent, type ReactElement } from 'react';
 import type { HeroCarouselSlideItem } from '~content-blocks/BlockHeroCarousel/BlockHeroCarousel.types.ts';
+import { getSlideImageSrc } from '~content-blocks/BlockHeroCarousel/BlockHeroCarousel.utils.ts';
 import type { DefaultComponentProps } from '~modules/shared/types/components';
 import { Icon } from '~shared/components/Icon';
 import { getIconFromObjectType } from '~shared/helpers/get-icon-from-object-type.ts';
@@ -14,8 +14,7 @@ import { tText } from '~shared/helpers/translation-functions.ts';
 import { HET_ARCHIEF } from '~shared/types';
 
 export interface BlockHeroCarouselInactiveSlideProps extends DefaultComponentProps {
-	item?: HeroCarouselSlideItem;
-	isLoading?: boolean;
+	item: HeroCarouselSlideItem;
 }
 
 const getObjectTypeLabel = (format: IeObjectType | undefined): string => {
@@ -61,16 +60,8 @@ const getObjectTypeLabel = (format: IeObjectType | undefined): string => {
 
 export const BlockHeroCarouselInactiveSlide: FunctionComponent<
 	BlockHeroCarouselInactiveSlideProps
-> = ({ item, isLoading }): ReactElement => {
-	if (isLoading || !item?.schemaIdentifier) {
-		return (
-			<div className={clsx('c-block-hero-carousel__carousel-slide-placeholder')}>
-				<Spinner size="large" locationId={'hero-carousel-slide'} />
-			</div>
-		);
-	}
-
-	const imageSrc = item.videoThumbnail || item.thumbnailUrl || '';
+> = ({ item }): ReactElement => {
+	const imageSrc = getSlideImageSrc(item);
 
 	const formatIcon = (
 		<div
@@ -82,17 +73,15 @@ export const BlockHeroCarouselInactiveSlide: FunctionComponent<
 		</div>
 	);
 
-	if (!imageSrc) {
-		return <div className={clsx('c-block-hero-carousel__carousel-slide-image')}>{formatIcon}</div>;
-	}
-
 	return (
-		<div className={clsx('c-block-hero-carousel__carousel-slide-image')}>
-			<Image
-				src={imageSrc}
-				alt={item.name}
-				className="c-block-hero-carousel__carousel-slide-image-media"
-			/>
+		<div className="c-block-hero-carousel__carousel-slide-image">
+			{imageSrc && (
+				<Image
+					src={imageSrc}
+					alt={item.name}
+					className="c-block-hero-carousel__carousel-slide-image-media"
+				/>
+			)}
 			{formatIcon}
 		</div>
 	);

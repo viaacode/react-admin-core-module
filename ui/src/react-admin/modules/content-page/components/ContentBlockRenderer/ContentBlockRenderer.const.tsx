@@ -19,6 +19,7 @@ import { BlockHighlightText } from '~content-blocks/BlockHighlightText';
 import { BlockHomepageBanner } from '~content-blocks/BlockHomepageBanner';
 import { BlockIFrame } from '~content-blocks/BlockIFrame';
 import { BlockImage } from '~content-blocks/BlockImage';
+import { BlockImageCarousel } from '~content-blocks/BlockImageCarousel';
 import {
 	BlockImageGridWrapper,
 	BlockLogoGridWrapper,
@@ -40,6 +41,7 @@ import { BlockTagsWithLink } from '~content-blocks/BlockTagsWithLink';
 import { BlockThemeReels } from '~content-blocks/BlockThemeReels';
 import { BlockThreeClickableTiles } from '~content-blocks/BlockThreeClickableTiles';
 import { BlockTimeline } from '~content-blocks/BlockTimeline';
+import { BlockTitleWithParallax } from '~content-blocks/BlockTitleWithParallax';
 import { BlockUitgeklaard } from '~content-blocks/BlockUitgeklaard';
 import { BlockVideoWrapper } from '~content-blocks/BlockVideo';
 import { BlockVideoTitleTextButtonWrapper } from '~content-blocks/BlockVideoTitleTextButton';
@@ -107,6 +109,8 @@ export function GET_BLOCK_COMPONENT(
 		[ContentBlockType.DoubleBanner]: BlockDoubleBanner,
 		[ContentBlockType.HeroCarousel]: BlockHeroCarousel,
 		[ContentBlockType.Timeline]: BlockTimeline,
+		[ContentBlockType.ImageCarousel]: BlockImageCarousel,
+		[ContentBlockType.TitleWithParallax]: BlockTitleWithParallax,
 
 		// Avo specific blocks
 		[ContentBlockType.MediaGrid]: loadComponentFromConfig(ContentBlockType.MediaGrid),
@@ -174,6 +178,18 @@ export const USER_CONTENT_BLOCKS = [
 	ContentBlockType.PageOverview,
 	ContentBlockType.MediaGrid,
 	ContentBlockType.ProjectsSpotlight,
+];
+
+/**
+ * Blocks that resolve the ie-objects in their own config through the proxy.
+ * The blockId property will be added to these blocks automatically, so they can ask the proxy for
+ * the playable display data of the objects their config references, instead of passing the object
+ * ids and snipPoints along themselves.
+ */
+export const PLAYABLE_DISPLAY_DATA_BLOCKS = [
+	ContentBlockType.HetArchiefVideo,
+	ContentBlockType.HeroCarousel,
+	ContentBlockType.Timeline,
 ];
 
 /**

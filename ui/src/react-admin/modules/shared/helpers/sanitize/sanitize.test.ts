@@ -13,6 +13,13 @@ describe('sanitize', () => {
 		);
 	});
 
+	it('Should keep a whole table, header row included', () => {
+		const originalHtml =
+			'<table class="c-editor-table"><thead><tr><th>Kop</th></tr></thead><tbody><tr><td><p>cel</p></td></tr></tbody></table>';
+		const sanitizedHtml = sanitizeHtml(originalHtml, SanitizePreset.full);
+		expect(sanitizedHtml).toEqual(originalHtml);
+	});
+
 	it('Should remove link', () => {
 		const originalHtml =
 			'<p style="text-align:center">Simpel! Drie <a href="/start" target="_self">stappen</a> naar een geslaagde opdracht:</p>';

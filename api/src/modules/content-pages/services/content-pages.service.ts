@@ -607,6 +607,30 @@ export class ContentPagesService {
 		).map(this.adaptContentBlock.bind(this)) as DbContentPage[];
 	}
 
+	/**
+	 * Fetches a single content block by its id, without the content page it belongs to.
+	 *
+	 * Used by endpoints that have to check that a client provided block config actually exists in
+	 * the database, instead of trusting the values the client sends along.
+	 */
+	public async getContentPageBlockById(blockId: string): Promise<DbContentBlock | null> {
+		const response = await this.dataService.execute<
+			ContentPageQueryTypes['GetContentPageBlockByIdQuery'],
+			ContentPageQueryTypes['GetContentPageBlockByIdQueryVariables']
+		>(CONTENT_PAGE_QUERIES[getDatabaseType()].GetContentPageBlockByIdDocument, {
+			// Avo content block ids are numbers, hetarchief content block ids are uuids
+			id: isAvo() ? Number(blockId) : blockId,
+		} as ContentPageQueryTypes['GetContentPageBlockByIdQueryVariables']);
+
+		const contentBlock =
+			(response as ContentPageQueryTypes['GetContentPageBlockByIdQueryAvo'])
+				.app_content_blocks?.[0] ||
+			(response as ContentPageQueryTypes['GetContentPageBlockByIdQueryHetArchief'])
+				.app_content_block?.[0];
+
+		return this.adaptContentBlock(contentBlock as GqlContentBlock);
+	}
+
 	public async resolveMediaPlayersInPage(contentPage: DbContentPage, referrer?: string, ip = '') {
 		const mediaPlayerBlocks =
 			contentPage?.content_blocks?.filter((contentBlock) =>
