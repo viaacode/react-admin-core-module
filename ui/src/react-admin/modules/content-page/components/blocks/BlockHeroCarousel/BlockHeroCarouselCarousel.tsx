@@ -23,7 +23,6 @@ import {
 	handleTrackTransitionEnd,
 	handleWindowResize,
 	isSlideEmpty,
-	isSlidePlayerReady,
 } from './BlockHeroCarousel.utils.ts';
 
 import './BlockHeroCarousel.scss';
@@ -86,9 +85,11 @@ export const BlockHeroCarouselCarousel: FunctionComponent<BlockHeroCarouselCarou
 			);
 		}
 
-		// Nothing is known about this slide yet -- not even which object it points at, as with a
-		// freshly added editor row that hasn't been filled in.
-		if (isSlideEmpty(item)) {
+		// Nothing to show yet: either the slide's object is still being resolved, or nothing is
+		// known about it at all -- not even which object it points at, as with a freshly added
+		// editor row that hasn't been filled in. The slide's own box is sized and coloured from
+		// the block config, so the strip keeps its layout while the objects land.
+		if (isLoading || isSlideEmpty(item)) {
 			return (
 				<div className="c-block-hero-carousel__carousel-slide-placeholder">
 					<Spinner size="large" locationId={'hero-carousel-slide'} />
@@ -100,7 +101,6 @@ export const BlockHeroCarouselCarousel: FunctionComponent<BlockHeroCarouselCarou
 			<BlockHeroCarouselActiveSlide
 				item={item}
 				onEnded={goNext}
-				isLoading={isLoading}
 				isMuted={isMuted}
 				onMutedChange={setIsMuted}
 			/>
@@ -142,16 +142,6 @@ export const BlockHeroCarouselCarousel: FunctionComponent<BlockHeroCarouselCarou
 						// already elsewhere in the strip -- hidden from assistive tech so it isn't
 						// announced multiple times.
 						const isClone = index < startIndex || index >= startIndex + itemsLength;
-						// A slide goes up on what the block config already knows, with the spinner
-						// over it until its object has been resolved. The two slides that show no
-						// object content are left alone: an error tile is final, and an empty slide
-						// carries a spinner of its own. Neither does a mounted player, which a
-						// background refetch would otherwise dim mid-playback.
-						const isSlideLoading =
-							Boolean(isLoading) &&
-							!item?.hasFailed &&
-							!isSlideEmpty(item) &&
-							!(isSettledActive && isSlidePlayerReady(item));
 
 						return (
 							<div
@@ -161,19 +151,13 @@ export const BlockHeroCarouselCarousel: FunctionComponent<BlockHeroCarouselCarou
 								className={clsx(
 									'c-block-hero-carousel__carousel-slide',
 									`c-block-hero-carousel__carousel-slide--${item?.dctermsFormat}`,
-									index === activeIndex && ACTIVE_SLIDE_CLASS,
-									isSlideLoading && 'c-block-hero-carousel__carousel-slide--loading'
+									index === activeIndex && ACTIVE_SLIDE_CLASS
 								)}
 								style={{
 									backgroundColor: item?.backgroundColor,
 								}}
 							>
 								{renderSlideContent(item, isSettledActive)}
-								{isSlideLoading && (
-									<div className="c-block-hero-carousel__carousel-slide-loading">
-										<Spinner size="large" locationId={'hero-carousel-slide'} />
-									</div>
-								)}
 							</div>
 						);
 					})}

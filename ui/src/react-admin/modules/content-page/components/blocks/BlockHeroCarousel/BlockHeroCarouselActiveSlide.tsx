@@ -17,11 +17,6 @@ import { HET_ARCHIEF } from '~shared/types';
 export interface BlockHeroCarouselActiveSlideProps extends DefaultComponentProps {
 	item: HeroCarouselSlideItem;
 	onEnded: () => void;
-	/**
-	 * The slide's object is still being resolved, so what shows is built from the block config
-	 * alone. The carousel puts the spinner over it; here it only holds back this slide's timer.
-	 */
-	isLoading?: boolean;
 	isMuted: boolean;
 	onMutedChange: (muted: boolean) => void;
 }
@@ -29,7 +24,6 @@ export interface BlockHeroCarouselActiveSlideProps extends DefaultComponentProps
 export const BlockHeroCarouselActiveSlide: FunctionComponent<BlockHeroCarouselActiveSlideProps> = ({
 	item,
 	onEnded,
-	isLoading,
 	isMuted,
 	onMutedChange,
 }): ReactElement => {
@@ -58,10 +52,7 @@ export const BlockHeroCarouselActiveSlide: FunctionComponent<BlockHeroCarouselAc
 		<div
 			className={clsx(
 				'c-block-hero-carousel__carousel-slide-image',
-				// The ken-burns animation doubles as this slide's timer -- its end advances the
-				// carousel -- so it only runs once the slide shows its real content: a placeholder
-				// shouldn't tick away while the object is still loading.
-				!isLoading && 'c-block-hero-carousel__carousel-slide-image--animated',
+				'c-block-hero-carousel__carousel-slide-image--animated',
 				isPaused && 'c-block-hero-carousel__carousel-slide-image--paused'
 			)}
 		>
@@ -70,51 +61,47 @@ export const BlockHeroCarouselActiveSlide: FunctionComponent<BlockHeroCarouselAc
 				alt={item.name}
 				className="c-block-hero-carousel__carousel-slide-image-media"
 			/>
-			{/* The progress bar is this slide's timer -- its end advances the carousel -- so it
-			    only starts once the slide shows its real content. */}
-			{!isLoading && (
-				<div className="c-block-hero-carousel__carousel-slide-image-controls">
-					<Button
-						variants={['black', 'sm']}
-						icon={<Icon name={isPaused ? AdminCoreIconName.Play : AdminCoreIconName.Pause} />}
-						title={
-							isPaused
-								? tText(
-										'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel-active-slide___afspelen',
-										undefined,
-										[HET_ARCHIEF]
-									)
-								: tText(
-										'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel-active-slide___pauzeren',
-										undefined,
-										[HET_ARCHIEF]
-									)
-						}
-						ariaLabel={
-							isPaused
-								? tText(
-										'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel-active-slide___afspelen',
-										undefined,
-										[HET_ARCHIEF]
-									)
-								: tText(
-										'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel-active-slide___pauzeren',
-										undefined,
-										[HET_ARCHIEF]
-									)
-						}
-						onClick={() => setIsPaused((paused) => !paused)}
-					/>
-					<div className="c-block-hero-carousel__carousel-slide-image-progress" aria-hidden="true">
-						<div className="c-block-hero-carousel__carousel-slide-image-progress-track">
-							<div
-								className="c-block-hero-carousel__carousel-slide-image-progress-fill"
-								onAnimationEnd={onEnded}
-							/>
-						</div>
+			<div className="c-block-hero-carousel__carousel-slide-image-controls">
+				<Button
+					variants={['black', 'sm']}
+					icon={<Icon name={isPaused ? AdminCoreIconName.Play : AdminCoreIconName.Pause} />}
+					title={
+						isPaused
+							? tText(
+									'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel-active-slide___afspelen',
+									undefined,
+									[HET_ARCHIEF]
+								)
+							: tText(
+									'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel-active-slide___pauzeren',
+									undefined,
+									[HET_ARCHIEF]
+								)
+					}
+					ariaLabel={
+						isPaused
+							? tText(
+									'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel-active-slide___afspelen',
+									undefined,
+									[HET_ARCHIEF]
+								)
+							: tText(
+									'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel-active-slide___pauzeren',
+									undefined,
+									[HET_ARCHIEF]
+								)
+					}
+					onClick={() => setIsPaused((paused) => !paused)}
+				/>
+				<div className="c-block-hero-carousel__carousel-slide-image-progress" aria-hidden="true">
+					<div className="c-block-hero-carousel__carousel-slide-image-progress-track">
+						<div
+							className="c-block-hero-carousel__carousel-slide-image-progress-fill"
+							onAnimationEnd={onEnded}
+						/>
 					</div>
 				</div>
-			)}
+			</div>
 		</div>
 	);
 };

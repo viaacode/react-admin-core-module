@@ -51,11 +51,10 @@ export const BlockHeroCarousel: FunctionComponent<BlockHeroCarouselProps> = ({
 	// this block's stored config, so only the block id goes out once it has been saved. The
 	// response comes back in the same order as the elements below, which is what lets them be
 	// merged by index.
-	const {
-		data: ieObjects,
-		isLoading,
-		isFetching,
-	} = useGetIeObjectsPlayableDisplayData(blockId, unsavedObjects);
+	const { data: ieObjects, isLoading } = useGetIeObjectsPlayableDisplayData(
+		blockId,
+		unsavedObjects
+	);
 
 	// The random tertiary colour has to be picked once per slide and then stay put: derived inside
 	// the merge below it would be re-rolled the moment the fetched objects land, changing the
@@ -116,12 +115,12 @@ export const BlockHeroCarousel: FunctionComponent<BlockHeroCarouselProps> = ({
 				subtitles={subtitles}
 				searchAriaLabel={searchAriaLabel}
 			/>
-			{/* The strip goes up as soon as there is a slide to put in it, on what the block config
-			    already knows; the slides themselves show a loading state until their object has
-			    been resolved. */}
-			{items.length > 0 && (
-				<BlockHeroCarouselCarousel elements={items} isLoading={isLoading || isFetching} />
-			)}
+			{/* The strip goes up as soon as there is a slide to put in it, sized and coloured from
+			    what the block config already knows; the slides themselves show a spinner until
+			    their object has been resolved. Only the first fetch counts as loading -- a
+			    background refetch shouldn't turn a strip that already has content back into
+			    spinners. */}
+			{items.length > 0 && <BlockHeroCarouselCarousel elements={items} isLoading={isLoading} />}
 		</article>
 	);
 };
