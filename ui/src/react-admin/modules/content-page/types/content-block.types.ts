@@ -662,7 +662,10 @@ export interface TimelineNodeBlockComponentState {
 
 export type TimelineBlockState = DefaultContentBlockState;
 
-export type TitleWithParallaxVisualisationOption = 'BIG' | 'SMALL';
+export enum TitleWithParallaxVisualisationOption {
+	BIG = 'BIG',
+	SMALL = 'SMALL',
+}
 
 export interface TitleWithParallaxBlockComponentState {
 	visualType?: TitleWithParallaxVisualisationOption;

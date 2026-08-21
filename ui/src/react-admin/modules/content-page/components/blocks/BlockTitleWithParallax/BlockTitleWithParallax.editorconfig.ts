@@ -6,7 +6,7 @@ import {
 	ContentBlockType,
 	type DefaultContentBlockState,
 	type TitleWithParallaxBlockComponentState,
-	type TitleWithParallaxVisualisationOption,
+	TitleWithParallaxVisualisationOption,
 } from '~modules/content-page/types/content-block.types';
 import type { FileUploadProps } from '~shared/components/FileUpload/FileUpload.tsx';
 import { PHOTO_TYPES } from '~shared/helpers/files.ts';
@@ -17,11 +17,11 @@ import { HET_ARCHIEF } from '~shared/types';
 const GET_VISUAL_TYPE_OPTIONS = (): SelectOption<TitleWithParallaxVisualisationOption>[] => [
 	{
 		label: tText('Groot', {}, [HET_ARCHIEF]),
-		value: 'BIG',
+		value: TitleWithParallaxVisualisationOption.BIG,
 	},
 	{
 		label: tText('Klein', {}, [HET_ARCHIEF]),
-		value: 'SMALL',
+		value: TitleWithParallaxVisualisationOption.SMALL,
 	},
 ];
 
