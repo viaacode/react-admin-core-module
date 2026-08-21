@@ -15,12 +15,14 @@ import {
 import type { FileUploadProps } from '~modules/shared/components/FileUpload/FileUpload';
 import { GET_ADMIN_ICON_OPTIONS } from '~modules/shared/consts/icons.consts';
 import { tText } from '~shared/helpers/translation-functions';
-import type {
-	ContentBlockConfig,
-	DefaultContentBlockState,
-	HetArchiefImageTextBackgroundBlockComponentState,
+import {
+	Color,
+	type ContentBlockConfig,
+	ContentBlockEditor,
+	ContentBlockType,
+	type DefaultContentBlockState,
+	type HetArchiefImageTextBackgroundBlockComponentState,
 } from '../../../types/content-block.types';
-import { Color, ContentBlockEditor, ContentBlockType } from '../../../types/content-block.types';
 
 import {
 	BLOCK_FIELD_DEFAULTS,
@@ -95,6 +97,7 @@ export const HET_ARCHIEF_IMAGE_TEXT_BACKGROUND_BLOCK_CONFIG = (
 				},
 			},
 			content: TEXT_FIELD({
+				editorType: ContentBlockEditor.TextArea,
 				validator: undefined,
 			}),
 			textAlign: {
