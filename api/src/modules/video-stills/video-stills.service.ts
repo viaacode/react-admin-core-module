@@ -9,6 +9,7 @@ import { toMilliseconds } from '../shared/helpers/duration';
 import { CustomError } from '../shared/helpers/error';
 import { DEFAULT_AUDIO_STILL } from './video-stills.consts';
 import {
+	FailedObjectNameInfo,
 	ObjectNameInfo,
 	ObjectNameInfoAndStills,
 	StillsObjectType,
@@ -21,6 +22,12 @@ import type {
 	StillRequestByFileId,
 	StillRequestByStoredAt,
 } from './video-stills.validation';
+
+function isFailedObjectNameInfo(
+	objectNameInfo: ObjectNameInfoAndStills | FailedObjectNameInfo | null
+): objectNameInfo is FailedObjectNameInfo {
+	return !!objectNameInfo && 'error' in objectNameInfo;
+}
 
 @Injectable()
 export class VideoStillsService {
@@ -66,16 +73,24 @@ export class VideoStillsService {
 				return {
 					thumbnailImagePath: videoStill.ThumbnailImagePath,
 					previewImagePath: videoStill.PreviewImagePath,
-					time: toMilliseconds(videoStill.AbsoluteTimeCode) || 0,
+					// The keyframe api reports both an absolute SMPTE timecode, which carries the
+					// customary one hour start offset (a keyframe 3.7 seconds into the video is
+					// reported as "01:00:03.720"), and a timecode relative to the start of the
+					// file. The start times callers ask for are relative to the start of the file,
+					// so the relative one is the one to compare against - using the absolute one
+					// made every requested cut point match the very first keyframe.
+					time: toMilliseconds(videoStill.RelativeTimeCode || videoStill.AbsoluteTimeCode) || 0,
 				};
 			});
-		} catch (err) {
-			const error = new CustomError('Failed to get stills from video stills service', err, {
+			// biome-ignore lint/suspicious/noExplicitAny: error can be any type
+		} catch (err: any) {
+			// Keep the inner exception intact: without it there is no way to tell an expired
+			// token apart from an unknown object id or a media service outage
+			throw new CustomError('Failed to get stills from video stills service', err, {
 				objectId,
+				statusCode: err?.response?.statusCode,
+				responseBody: err?.response?.body,
 			});
-			console.log(error);
-			error.innerException = null;
-			throw error;
 		}
 	}
 
@@ -95,15 +110,38 @@ export class VideoStillsService {
 			);
 
 			// Get stills for all videos
-			const allVideoStills: (ObjectNameInfoAndStills | null)[] = await promiseUtils.mapLimit(
-				objectNameInfos,
-				20,
-				this.getVideoStillsWithLogging.bind(this)
-			);
+			const allVideoStills: (ObjectNameInfoAndStills | FailedObjectNameInfo | null)[] =
+				await promiseUtils.mapLimit(
+					objectNameInfos,
+					20,
+					this.getVideoStillsForObjectNameInfo.bind(this)
+				);
+
+			// A single failing lookup shouldn't take down the stills of every other item in the
+			// batch, so failures are reported per item and skipped. But if nothing at all could be
+			// fetched, returning a list of nulls would hide a broken (or misconfigured) stills
+			// service behind what looks like a video without keyframes, so fail loudly instead.
+			const failures = allVideoStills.filter(isFailedObjectNameInfo);
+			if (failures.length && failures.length === allVideoStills.filter(Boolean).length) {
+				throw new CustomError(
+					'Failed to get video stills for every requested object',
+					failures[0].error,
+					{
+						failedObjectNames: failures.map((failure) => failure.objectName),
+					}
+				);
+			}
+
 			// Get first video still for each video after their startTime
 			return allVideoStills.map(
-				(objectNameInfo: ObjectNameInfoAndStills | null): AvoStillsStillInfo | null => {
-					if (!objectNameInfo || objectNameInfo.type === 'other') {
+				(
+					objectNameInfo: ObjectNameInfoAndStills | FailedObjectNameInfo | null
+				): AvoStillsStillInfo | null => {
+					if (
+						!objectNameInfo ||
+						isFailedObjectNameInfo(objectNameInfo) ||
+						objectNameInfo.type === 'other'
+					) {
 						return null;
 					}
 					if (objectNameInfo.type === 'audio') {
@@ -174,26 +212,29 @@ export class VideoStillsService {
 		};
 	}
 
-	private async getVideoStillsWithLogging(
+	/**
+	 * Fetches the stills for a single item, turning a failed fetch into a FailedObjectNameInfo
+	 * rather than a bare null, so getFirstVideoStills can report it instead of quietly handing
+	 * back a missing still
+	 */
+	private async getVideoStillsForObjectNameInfo(
 		objectNameInfo: ObjectNameInfo | null
-	): Promise<ObjectNameInfoAndStills | null> {
+	): Promise<ObjectNameInfoAndStills | FailedObjectNameInfo | null> {
+		if (!objectNameInfo) {
+			return null;
+		}
 		try {
-			if (!objectNameInfo) {
-				return null;
-			}
 			return {
 				...objectNameInfo,
 				videoStills: await this.getVideoStills(objectNameInfo.objectName),
 			};
 		} catch (err) {
-			this.logger.error({
-				message: 'Failed to get video stills for objectName',
-				innerException: err,
-				additionalInfo: {
+			this.logger.error(
+				new CustomError('Failed to get video stills for objectName', err, {
 					objectNameInfo,
-				},
-			});
-			return null; // Avoid failing on a single error, so the other stills still get returned, We'll just log the error
+				})
+			);
+			return { ...objectNameInfo, error: err };
 		}
 	}
 
