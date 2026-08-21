@@ -1,4 +1,3 @@
-@use "../../styles/settings/colors" as colors;
 @use "../../styles/settings/variables" as variables;
 @use "../../styles/mixins/typography" as typography;
 
@@ -12,8 +11,4 @@
 
 	@include typography.sofia-pro(1.6rem, 700, 2rem);
 	@include typography.truncate;
-
-	&--bordered {
-		border: 1px solid colors.$color-gray-100;
-	}
 }
