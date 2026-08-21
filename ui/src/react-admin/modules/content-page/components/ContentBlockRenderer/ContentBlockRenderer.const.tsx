@@ -41,6 +41,7 @@ import { BlockTagsWithLink } from '~content-blocks/BlockTagsWithLink';
 import { BlockThemeReels } from '~content-blocks/BlockThemeReels';
 import { BlockThreeClickableTiles } from '~content-blocks/BlockThreeClickableTiles';
 import { BlockTimeline } from '~content-blocks/BlockTimeline';
+import { BlockTitleWithParallax } from '~content-blocks/BlockTitleWithParallax';
 import { BlockUitgeklaard } from '~content-blocks/BlockUitgeklaard';
 import { BlockVideoWrapper } from '~content-blocks/BlockVideo';
 import { BlockVideoTitleTextButtonWrapper } from '~content-blocks/BlockVideoTitleTextButton';
@@ -109,6 +110,7 @@ export function GET_BLOCK_COMPONENT(
 		[ContentBlockType.HeroCarousel]: BlockHeroCarousel,
 		[ContentBlockType.Timeline]: BlockTimeline,
 		[ContentBlockType.ImageCarousel]: BlockImageCarousel,
+		[ContentBlockType.TitleWithParallax]: BlockTitleWithParallax,
 
 		// Avo specific blocks
 		[ContentBlockType.MediaGrid]: loadComponentFromConfig(ContentBlockType.MediaGrid),

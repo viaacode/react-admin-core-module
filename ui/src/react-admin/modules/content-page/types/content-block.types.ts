@@ -200,6 +200,7 @@ export enum ContentBlockType {
 	Timeline = 'TIMELINE',
 	HetArchiefVideo = 'HETARCHIEF_VIDEO',
 	ImageCarousel = 'IMAGE_CAROUSEL',
+	TitleWithParallax = 'TITLE_WITH_PARALLAX',
 }
 
 export enum ContentBlockEditor {
@@ -673,3 +674,15 @@ export interface TimelineNodeBlockComponentState extends MediaItemComponentState
 }
 
 export type TimelineBlockState = DefaultContentBlockState;
+
+export enum TitleWithParallaxVisualisationOption {
+	BIG = 'BIG',
+	SMALL = 'SMALL',
+}
+
+export interface TitleWithParallaxBlockComponentState {
+	visualType?: TitleWithParallaxVisualisationOption;
+	title: string;
+	subtitle?: string;
+	image?: string;
+}
