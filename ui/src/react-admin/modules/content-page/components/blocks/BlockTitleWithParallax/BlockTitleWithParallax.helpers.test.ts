@@ -1,5 +1,9 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { computeLineBoxes, readParallaxSpeed, watchReducedMotion } from './BlockTitleWithParallax.helpers';
+import {
+	computeLineBoxes,
+	readParallaxSpeed,
+	watchReducedMotion,
+} from './BlockTitleWithParallax.helpers';
 
 const rect = (top: number, right: number, bottom: number, left: number): DOMRect =>
 	({
@@ -57,7 +61,8 @@ describe('computeLineBoxes', () => {
 
 		const textEl = document.createElement('span');
 		// A tight line-height (44) but a font whose own metrics report a taller rect.bottom (50).
-		textEl.getClientRects = () => [rect(0, 200, 50, 0), rect(44, 150, 88, 0)] as unknown as DOMRectList;
+		textEl.getClientRects = () =>
+			[rect(0, 200, 50, 0), rect(44, 150, 88, 0)] as unknown as DOMRectList;
 
 		const [first, second] = computeLineBoxes(wrapperEl, textEl);
 
