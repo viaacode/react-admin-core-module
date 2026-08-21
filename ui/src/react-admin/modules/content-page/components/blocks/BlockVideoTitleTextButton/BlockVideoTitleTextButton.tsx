@@ -45,13 +45,21 @@ export const BlockVideoTitleTextButton: FunctionComponent<BlockVideoTitleTextBut
 							<ExpandableContainer collapsedHeight={collapsedHeight}>
 								{title && (
 									<h2>
-										<a href={titleLink} style={{ color: 'black', textDecoration: 'none' }}>
+										<a
+											className="u-background-text-primary"
+											href={titleLink}
+											style={{ textDecoration: 'none' }}
+										>
 											{title}
 										</a>
 									</h2>
 								)}
 								{text && (
-									<Html content={convertToHtml(text)} sanitizePreset={SanitizePreset.full} />
+									<Html
+										className="u-background-text-links"
+										content={convertToHtml(text)}
+										sanitizePreset={SanitizePreset.full}
+									/>
 								)}
 							</ExpandableContainer>
 						</div>

@@ -1,4 +1,5 @@
 @use '../../styles/settings/colors' as colors;
+@use './background-text' as background-text;
 
 /* ==========================================================================
    Utility: Color
@@ -11,3 +12,7 @@
 .u-color-gray-150 {
   color: colors.$color-gray-150 !important;
 }
+
+// The complete utility index feeds admin.css. ContentBlockRenderer includes the same mixin in the
+// public client bundle, whose style graph intentionally excludes this index.
+@include background-text.background-text-roles;

@@ -55,6 +55,21 @@
     }
   }
 
+  // The consuming Het Archief stylesheet has legacy `!important` foreground colors for these
+  // elements. Keep the semantic role classes authoritative without coupling the global utility to
+  // PageOverview's DOM structure.
+  .c-block-image-title-text-button .c-rich-text-editor__content {
+    h2.u-background-text-hyperlink,
+    h3.u-background-text-hyperlink {
+      color: var(--bg-text-hyperlink) !important;
+    }
+
+    .a-subtitle.u-background-text-secondary,
+    .a-content-page__description.u-background-text-secondary {
+      color: var(--bg-text-secondary) !important;
+    }
+  }
+
   .c-aspect-ratio-wrapper {
     background-size: cover;
     background-repeat: no-repeat;

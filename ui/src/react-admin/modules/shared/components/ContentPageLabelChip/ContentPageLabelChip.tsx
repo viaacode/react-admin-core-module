@@ -1,7 +1,15 @@
 import clsx from 'clsx';
 import type { FunctionComponent } from 'react';
 import React from 'react';
-import { Color, CustomBackground } from '~modules/content-page/types/content-block.types';
+import {
+	getBackgroundTextColors,
+	TEXT_COLOR_WHITE,
+} from '~modules/content-page/const/background-text-colors';
+import {
+	Color,
+	CustomBackground,
+	type GradientColor,
+} from '~modules/content-page/types/content-block.types';
 
 import './ContentPageLabelChip.scss';
 
@@ -11,7 +19,6 @@ export interface ContentPageLabelChipProps {
 	// hetarchief app_content_label.color column is not null with a white default
 	color: string;
 	className?: string;
-	bordered?: boolean;
 }
 
 /**
@@ -22,22 +29,25 @@ export const ContentPageLabelChip: FunctionComponent<ContentPageLabelChipProps> 
 	label,
 	color,
 	className,
-	bordered = false,
 }) => {
 	if (!label) {
 		return null;
 	}
-
 	// The meemoo logo is not a css value, it is a pattern the client fills in. A chip is too small to
 	// draw that pattern on, so it renders transparent, like ContentBlockRenderer does for a block
+	const backgroundColor = (color === CustomBackground.MeemooLogo ? Color.Transparent : color) as
+		| Color
+		| GradientColor
+		| CustomBackground;
+	const textColor = getBackgroundTextColors(backgroundColor)?.primary ?? TEXT_COLOR_WHITE;
+
 	return (
 		<span
-			className={clsx(
-				'c-content-page-label-chip',
-				{ 'c-content-page-label-chip--bordered': bordered },
-				className
-			)}
-			style={{ background: color === CustomBackground.MeemooLogo ? Color.Transparent : color }}
+			className={clsx('c-content-page-label-chip', className)}
+			style={{
+				background: backgroundColor,
+				color: textColor,
+			}}
 		>
 			{label}
 		</span>

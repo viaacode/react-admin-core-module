@@ -39,4 +39,9 @@ describe('<BlockTitleImageText />', () => {
 		const h2Element = screen.getByRole('heading', { level: 2 });
 		expect(h2Element).toHaveTextContent('Title');
 	});
+
+	it('lets inline links follow the background link color', () => {
+		const { container } = render(blockTitleImageTextExample);
+		expect(container.querySelector('.u-background-text-links')).toHaveTextContent(loremIpsumText);
+	});
 });

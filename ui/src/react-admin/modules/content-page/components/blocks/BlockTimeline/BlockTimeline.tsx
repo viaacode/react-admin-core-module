@@ -99,7 +99,12 @@ export const BlockTimeline: FunctionComponent<BlockTimelineProps> = ({
 							{showYear && (
 								<span className="c-block-timeline__node-year">{getYear(node.date)}</span>
 							)}
-							<time className="c-block-timeline__node-date" dateTime={node.date}>
+							{/* The date sits on the block background, outside the node's own colour band, so it
+							    takes the neutral text role. https://meemoo.atlassian.net/browse/ARC-3848 */}
+							<time
+								className="c-block-timeline__node-date u-background-text-secondary"
+								dateTime={node.date}
+							>
 								<span
 									className={clsx(
 										'c-block-timeline__node-marker',
@@ -192,7 +197,7 @@ export const BlockTimeline: FunctionComponent<BlockTimelineProps> = ({
 											content={node.text}
 											sanitizePreset={SanitizePreset.full}
 											type="div"
-											className="c-block-timeline__node-description"
+											className="c-block-timeline__node-description u-background-text-links"
 										/>
 									)}
 									{ieObject && <IeObjectMetadata ieObject={ieObject} fallbackTitle={node.title} />}

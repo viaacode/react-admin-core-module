@@ -1,8 +1,10 @@
 import type { SelectOption } from '@viaa/avo2-components';
+import { isAvo } from '~shared/helpers/is-avo';
 import { tText } from '~shared/helpers/translation-functions';
 import { AVO } from '~shared/types';
 import { App } from '../../../../../scripts/translation.types';
 import { Color, CustomBackground, GradientColor } from '../types/content-block.types';
+import { getBackgroundTextColors, TEXT_COLOR_WHITE } from './background-text-colors';
 
 const transparentOption = () => ({
 	label: tText('admin/content-block/content-block___geen'),
@@ -96,9 +98,9 @@ const coralOption = () => ({
 	label: tText('modules/content-page/const/content-block___koraal-oranje', {}, [App.HET_ARCHIEF]),
 	value: Color.Coral,
 });
-const lightBlueOption = () => ({
-	label: tText('modules/content-page/const/content-block___poederblauw', {}, [App.HET_ARCHIEF]),
-	value: Color.LightBlue,
+const babyBlueOption = () => ({
+	label: tText('modules/content-page/const/content-block___babyblauw', {}, [App.HET_ARCHIEF]),
+	value: Color.BabyBlue,
 });
 const sageOption = () => ({
 	label: tText('modules/content-page/const/content-block___salie-groen', {}, [App.HET_ARCHIEF]),
@@ -130,15 +132,13 @@ export const GET_BACKGROUND_COLOR_OPTIONS_AVO: () => SelectOption<Color>[] = () 
 	yellowOption(),
 ];
 
-export const GET_SECONDARY_BACKGROUND_COLOR_OPTIONS_ARCHIEF: () => SelectOption<
-	Color | GradientColor | CustomBackground
->[] = () => [
+export const GET_SECONDARY_BACKGROUND_COLOR_OPTIONS_ARCHIEF: () => SelectOption<Color>[] = () => [
 	oldPinkOption(),
 	lavenderOption(),
 	lilaOption(),
 	blossomPinkOption(),
 	coralOption(),
-	lightBlueOption(),
+	babyBlueOption(),
 	sageOption(),
 	pistachioOption(),
 	sandBeigeOption(),
@@ -169,17 +169,38 @@ export const GET_AVO_HERO_BACKGROUND_COLOR_OPTIONS: () => SelectOption<Color>[] 
 	yellowOption(),
 ];
 
-export const GET_DARK_BACKGROUND_COLOR_OPTIONS: () => (Color | GradientColor | CustomBackground)[] =
-	() => [
-		Color.SoftBlue,
-		Color.NightBlue,
-		Color.Teal,
-		Color.TealBright,
-		Color.OceanGreen,
-		Color.SeaGreen,
-		Color.Yellow,
-		Color.Black,
-	];
+export const DARK_BACKGROUND_COLOR_OPTIONS_AVO: (Color | GradientColor | CustomBackground)[] = [
+	Color.SoftBlue,
+	Color.NightBlue,
+	Color.Teal,
+	Color.TealBright,
+	Color.OceanGreen,
+	Color.SeaGreen,
+	Color.Yellow,
+	Color.Black,
+];
+
+/**
+ * Whether this background needs light text, so blocks can pick a dark-background variant of their
+ * styling. On archief the answer comes from the design record in background-text-colors.ts; AVO
+ * keeps its own list, since its palette follows a different brand book.
+ *
+ * Prefer getBackgroundTextColors() where you need the actual colors - this only answers "is it a
+ * dark background", not "which color is the text". https://meemoo.atlassian.net/browse/ARC-3848
+ */
+export function hasDarkBackground(
+	color: Color | GradientColor | CustomBackground | undefined
+): boolean {
+	if (!color) {
+		return false;
+	}
+
+	if (isAvo()) {
+		return DARK_BACKGROUND_COLOR_OPTIONS_AVO.includes(color as Color);
+	}
+
+	return getBackgroundTextColors(color)?.primary === TEXT_COLOR_WHITE;
+}
 
 export const GET_FOREGROUND_COLOR_OPTIONS_AVO: () => SelectOption<Color>[] = () => [
 	{

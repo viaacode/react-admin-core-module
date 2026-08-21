@@ -15,6 +15,7 @@ const blockImageTitleTextButtonExample = (
 		imageSource="https://placeholder.com/1280x720.jpg"
 		imageDescription="image showing the default dimensions on a grey background"
 		title="Title"
+		subtitle="Subtitle"
 		text={loremIpsumText}
 		buttonLabel="Goto video"
 	/>
@@ -43,9 +44,14 @@ describe('<BlockImageTitleTextButton />', () => {
 	});
 
 	it('Should render the text correctly', () => {
-		render(blockImageTitleTextButtonExample);
+		const { container } = render(blockImageTitleTextButtonExample);
 		const pElement = screen.getByText(loremIpsumText);
 		expect(pElement).toBeInTheDocument();
+		expect(screen.getByRole('heading', { level: 2 })).toHaveClass('u-background-text-primary');
+		expect(container.querySelector('.u-background-text-secondary')).toHaveTextContent('Subtitle');
+		expect(
+			container.querySelector('.u-background-text-primary.u-background-text-links')
+		).toHaveTextContent(loremIpsumText);
 	});
 
 	it('Should set the correct className', () => {

@@ -2,7 +2,7 @@ import { Container, Spacer } from '@viaa/avo2-components';
 
 import clsx from 'clsx';
 import { kebabCase, noop, omit } from 'es-toolkit';
-import type { FunctionComponent, KeyboardEvent, RefObject } from 'react';
+import type { CSSProperties, FunctionComponent, KeyboardEvent, RefObject } from 'react';
 import React, { useCallback, useEffect, useRef } from 'react';
 import type { BlockBreadcrumbsProps } from '~content-blocks/BlockBreadcrumbs/BlockBreadcrumbs.types';
 import { AdminConfigManager } from '~core/config/config.class';
@@ -11,7 +11,8 @@ import { GENERATED_CONTENT_BLOCK_ANCHOR_PREFIX } from '~modules/content-page/con
 import type { ContentPageInfo } from '~modules/content-page/types/content-pages.types';
 import { ContentPageWidth } from '~modules/content-page/types/content-pages.types';
 import { generateSmartLink } from '~shared/components/SmartLink/SmartLink';
-import { GET_DARK_BACKGROUND_COLOR_OPTIONS } from '../../const/get-color-options';
+import { getBackgroundTextColorVariables } from '../../const/background-text-colors';
+import { hasDarkBackground } from '../../const/get-color-options';
 import {
 	Color,
 	type ContentBlockConfig,
@@ -140,9 +141,15 @@ const ContentBlockRenderer: FunctionComponent<ContentBlockPreviewProps> = ({
 		};
 	}
 
-	const hasDarkBg = GET_DARK_BACKGROUND_COLOR_OPTIONS().includes(
-		blockState?.backgroundColor || ('' as unknown as Color)
-	);
+	const hasDarkBg = hasDarkBackground(blockState?.backgroundColor);
+	// The Archief text colors specified for this background, published as css variables so text
+	// inside the block can take the primary, secondary or hyperlink role. On AVO this helper returns
+	// no variables, preserving AVO's own brand-book behavior.
+	// https://meemoo.atlassian.net/browse/ARC-3848
+	const textColorVariables = getBackgroundTextColorVariables(
+		blockState?.backgroundColor
+	) as CSSProperties;
+	const hasBackgroundTextColors = Object.keys(textColorVariables).length > 0;
 	const anchor =
 		blockState?.anchor?.replaceAll(' ', '-') ||
 		GENERATED_CONTENT_BLOCK_ANCHOR_PREFIX + contentBlockConfig.id;
@@ -178,6 +185,7 @@ const ContentBlockRenderer: FunctionComponent<ContentBlockPreviewProps> = ({
 						? Color.Transparent
 						: blockState?.backgroundColor,
 				zIndex: getZIndex(),
+				...textColorVariables,
 			}}
 			data-anchor={anchor}
 			ref={blockRef}
@@ -197,7 +205,9 @@ const ContentBlockRenderer: FunctionComponent<ContentBlockPreviewProps> = ({
 			<Spacer
 				className={clsx('c-content-block-preview', {
 					'c-content-block-preview--dark': hasDarkBg,
-					'u-color-white': hasDarkBg,
+					'u-background-text-colors': hasBackgroundTextColors,
+					// AVO has no Archief record and keeps its original blanket white text.
+					'u-color-white': hasDarkBg && !hasBackgroundTextColors,
 				})}
 				margin={[blockState?.margin?.top ?? 'none', blockState?.margin?.bottom ?? 'none']}
 				padding={[blockState?.padding?.top ?? 'none', blockState?.padding?.bottom ?? 'none']}
