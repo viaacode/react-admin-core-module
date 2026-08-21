@@ -18,6 +18,9 @@ import {
 	GetContentLabelsByContentTypeDocument as GetContentLabelsByContentTypeDocumentAvo,
 	type GetContentLabelsByContentTypeQuery as GetContentLabelsByContentTypeQueryAvo,
 	type GetContentLabelsByContentTypeQueryVariables as GetContentLabelsByContentTypeQueryVariablesAvo,
+	GetContentPageBlockByIdDocument as GetContentPageBlockByIdDocumentAvo,
+	type GetContentPageBlockByIdQuery as GetContentPageBlockByIdQueryAvo,
+	type GetContentPageBlockByIdQueryVariables as GetContentPageBlockByIdQueryVariablesAvo,
 	GetContentPageByPathDocument as GetContentPageByPathDocumentAvo,
 	type GetContentPageByPathQuery as GetContentPageByPathQueryAvo,
 	type GetContentPageByPathQueryVariables as GetContentPageByPathQueryVariablesAvo,
@@ -95,6 +98,9 @@ import {
 	GetContentLabelsByContentTypeDocument as GetContentLabelsByContentTypeDocumentHetArchief,
 	type GetContentLabelsByContentTypeQuery as GetContentLabelsByContentTypeQueryHetArchief,
 	type GetContentLabelsByContentTypeQueryVariables as GetContentLabelsByContentTypeQueryVariablesHetArchief,
+	GetContentPageBlockByIdDocument as GetContentPageBlockByIdDocumentHetArchief,
+	type GetContentPageBlockByIdQuery as GetContentPageBlockByIdQueryHetArchief,
+	type GetContentPageBlockByIdQueryVariables as GetContentPageBlockByIdQueryVariablesHetArchief,
 	GetContentPageByPathDocument as GetContentPageByPathDocumentHetArchief,
 	type GetContentPageByPathQuery as GetContentPageByPathQueryHetArchief,
 	type GetContentPageByPathQueryVariables as GetContentPageByPathQueryVariablesHetArchief,
@@ -161,6 +167,16 @@ export type ContentPageQueryTypes = {
 	GetContentByIdQuery: GetContentByIdQueryAvo | GetContentByIdQueryHetArchief;
 	GetContentByIdQueryHetArchief: GetContentByIdQueryHetArchief;
 	GetContentByIdQueryAvo: GetContentByIdQueryAvo;
+	GetContentPageBlockByIdQuery:
+		| GetContentPageBlockByIdQueryAvo
+		| GetContentPageBlockByIdQueryHetArchief;
+	GetContentPageBlockByIdQueryHetArchief: GetContentPageBlockByIdQueryHetArchief;
+	GetContentPageBlockByIdQueryAvo: GetContentPageBlockByIdQueryAvo;
+	GetContentPageBlockByIdQueryVariables:
+		| GetContentPageBlockByIdQueryVariablesAvo
+		| GetContentPageBlockByIdQueryVariablesHetArchief;
+	GetContentPageBlockByIdQueryVariablesHetArchief: GetContentPageBlockByIdQueryVariablesHetArchief;
+	GetContentPageBlockByIdQueryVariablesAvo: GetContentPageBlockByIdQueryVariablesAvo;
 	GetContentLabelsByContentTypeQueryAvo: GetContentLabelsByContentTypeQueryAvo;
 	GetContentLabelsByContentTypeQueryHetArchief: GetContentLabelsByContentTypeQueryHetArchief;
 	GetContentLabelsByContentTypeQuery:
@@ -393,6 +409,7 @@ type ContentPageQueries = {
 	DeleteContentBlockDocument: TypedDocumentNode<any, any>;
 	DeleteContentLabelLinksDocument: TypedDocumentNode<any, any>;
 	GetContentByIdDocument: TypedDocumentNode<any, any>;
+	GetContentPageBlockByIdDocument: TypedDocumentNode<any, any>;
 	GetContentLabelsByContentTypeDocument: TypedDocumentNode<any, any>;
 	GetContentPagesDocument: TypedDocumentNode<any, any>;
 	GetContentTypesDocument: TypedDocumentNode<any, any>;
@@ -422,6 +439,7 @@ export const CONTENT_PAGE_QUERIES: Record<AvoCoreDatabaseType, ContentPageQuerie
 		DeleteContentBlockDocument: DeleteContentBlockDocumentAvo,
 		DeleteContentLabelLinksDocument: DeleteContentLabelLinksDocumentAvo,
 		GetContentByIdDocument: GetContentByIdDocumentAvo,
+		GetContentPageBlockByIdDocument: GetContentPageBlockByIdDocumentAvo,
 		GetContentLabelsByContentTypeDocument: GetContentLabelsByContentTypeDocumentAvo,
 		GetContentPagesDocument: GetContentPagesDocumentAvo,
 		GetContentTypesDocument: GetContentTypesDocumentAvo,
@@ -449,6 +467,7 @@ export const CONTENT_PAGE_QUERIES: Record<AvoCoreDatabaseType, ContentPageQuerie
 		DeleteContentBlockDocument: DeleteContentBlockDocumentHetArchief,
 		DeleteContentLabelLinksDocument: DeleteContentLabelLinksDocumentHetArchief,
 		GetContentByIdDocument: GetContentByIdDocumentHetArchief,
+		GetContentPageBlockByIdDocument: GetContentPageBlockByIdDocumentHetArchief,
 		GetContentLabelsByContentTypeDocument: GetContentLabelsByContentTypeDocumentHetArchief,
 		GetContentPagesDocument: GetContentPagesDocumentHetArchief,
 		GetContentTypesDocument: GetContentTypesDocumentHetArchief,

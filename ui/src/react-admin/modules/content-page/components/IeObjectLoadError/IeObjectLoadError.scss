@@ -1,0 +1,67 @@
+@use "../../../shared/styles/settings/colors" as colors;
+@use "../../../shared/styles/settings/variables" as variables;
+
+.c-ie-object-load-error {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+
+	// Fills whatever the player/image would have filled, so the block's own layout is kept.
+	width: 100%;
+	height: 100%;
+	min-height: 10rem;
+	padding: variables.$g-spacer-unit * 4;
+	text-align: center;
+	color: colors.$color-gray-1000;
+
+	&__icon {
+		font-size: 2.4rem;
+		line-height: 1;
+	}
+
+	// A collapsible grid row rather than a plain block: an `fr` row animates between 0 and its
+	// content height, so the message can unfold at whatever height it wraps to, pushing the icon
+	// up as it grows. Collapsed, it takes no space at all and the icon is centered on its own.
+	&__text-wrapper {
+		display: grid;
+		grid-template-rows: 1fr;
+		overflow: hidden;
+		animation: c-ie-object-load-error-text-unfold 300ms ease-in-out;
+
+		@media (prefers-reduced-motion: reduce) {
+			animation: none;
+		}
+
+		&--collapsed {
+			grid-template-rows: 0fr;
+			animation: none;
+
+			// The gap above the message is padding on the item, which a zero-height row still has
+			// to make room for -- it goes along with the collapse.
+			.c-ie-object-load-error__text {
+				padding-top: 0;
+			}
+		}
+	}
+
+	&__text {
+		// Without this the item's automatic minimum size floors the wrapper's `0fr` row at the
+		// text's own height, and the row never actually collapses.
+		min-height: 0;
+		padding-top: variables.$g-spacer-unit * 2;
+		font-weight: bold;
+	}
+}
+
+@keyframes c-ie-object-load-error-text-unfold {
+	from {
+		grid-template-rows: 0fr;
+		opacity: 0;
+	}
+
+	to {
+		grid-template-rows: 1fr;
+		opacity: 1;
+	}
+}

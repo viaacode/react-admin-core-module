@@ -1,31 +1,61 @@
 import { cleanup, render, screen } from '@testing-library/react';
-import { AvoCoreContentPickerType } from '@viaa/avo2-types';
-import type { FunctionComponent } from 'react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { AdminConfigManager } from '~core/config/config.class';
-import type { AudioOrVideoPlayerWrapperProps } from '~shared/components/AudioOrVideoPlayerWrapper';
+import type { IeObjectFlowPlayerWrapperProps } from '~modules/content-page/components/IeObjectFlowPlayerWrapper/IeObjectFlowPlayerWrapper';
+import type { PlayableDisplayIeObject } from '~shared/services/ie-objects-service/ie-objects.types';
 
 import { BlockHetArchiefVideo } from './BlockHetArchiefVideo';
 
 const customClass = 'c-block-custom';
+const blockId = 'c9c9f4b1-1a6f-4f0e-9d2e-9e5f1a2b3c4d';
 
-const mediaItem = {
-	label: 'Some AV object',
-	type: AvoCoreContentPickerType.IE_OBJECT,
-	value: 'qs6d5p9579',
-};
+// The proxy resolves the block's config to a ready-to-play, already cut url
+const ieObject = {
+	schemaIdentifier: 'qs6d5p9579',
+	name: 'Some AV object',
+	dctermsFormat: 'video',
+	playableUrl: 'https://media.example.com/qs6d5p9579.mp4',
+	mimeType: 'video/mp4',
+	thumbnailUrl: null,
+	maintainerName: 'VRT',
+	maintainerOverlay: false,
+} as unknown as PlayableDisplayIeObject;
 
-// Stands in for the player that the client registers under components.audioOrVideoPlayer, so we
-// can assert which snippet the block asks for.
-const mockPlayer = vi.fn<(props: AudioOrVideoPlayerWrapperProps) => null>(() => null);
+const mockPlayableDisplayData = vi.fn<
+	() => {
+		data: (PlayableDisplayIeObject | null)[] | undefined;
+		isLoading?: boolean;
+		isFetching?: boolean;
+	}
+>(() => ({ data: [ieObject] }));
+const mockPlayer = vi.fn<(props: IeObjectFlowPlayerWrapperProps) => null>(() => null);
+
+vi.mock('~modules/content-page/hooks/useGetIeObjectsPlayableDisplayData', () => ({
+	useGetIeObjectsPlayableDisplayData: () => mockPlayableDisplayData(),
+}));
+
+// The error tile is the only part of this block that reads from the admin-core config (for its
+// label and its icon), which isn't set up in a unit test.
+vi.mock('~shared/helpers/translation-functions', () => ({
+	tText: (key: string) => key,
+	tHtml: (key: string) => key,
+}));
+
+vi.mock('~shared/components/Icon', () => ({
+	Icon: () => null,
+}));
+
+vi.mock(
+	'~modules/content-page/components/IeObjectFlowPlayerWrapper/IeObjectFlowPlayerWrapper',
+	() => ({
+		IeObjectFlowPlayerWrapper: (props: IeObjectFlowPlayerWrapperProps) => mockPlayer(props),
+	})
+);
 
 beforeEach(() => {
 	mockPlayer.mockClear();
-	vi.spyOn(AdminConfigManager, 'getConfig').mockReturnValue({
-		components: { audioOrVideoPlayer: mockPlayer as unknown as FunctionComponent },
-		// biome-ignore lint/suspicious/noExplicitAny: only the components key is read here
-	} as any);
+	mockPlayableDisplayData.mockClear();
+	mockPlayableDisplayData.mockReturnValue({ data: [ieObject] });
 });
 
 afterEach(() => {
@@ -35,14 +65,14 @@ afterEach(() => {
 
 describe('<BlockHetArchiefVideo />', () => {
 	it('Should be able to render', () => {
-		render(<BlockHetArchiefVideo className={customClass} mediaItem={mediaItem} />);
+		render(<BlockHetArchiefVideo className={customClass} blockId={blockId} />);
 
 		expect(mockPlayer).toHaveBeenCalled();
 	});
 
 	it('Should set the correct className', () => {
 		const { container } = render(
-			<BlockHetArchiefVideo className={customClass} mediaItem={mediaItem} />
+			<BlockHetArchiefVideo className={customClass} blockId={blockId} />
 		);
 		const rootDiv = container.querySelector('div');
 
@@ -50,79 +80,67 @@ describe('<BlockHetArchiefVideo />', () => {
 		expect(rootDiv).not.toHaveClass('o-container-vertical');
 	});
 
-	it('Should render nothing without an object', () => {
+	it('Should render nothing while the block has no resolved object', () => {
+		mockPlayableDisplayData.mockReturnValue({ data: undefined });
+
 		const { container } = render(<BlockHetArchiefVideo className={customClass} />);
 
 		expect(container).toBeEmptyDOMElement();
 		expect(mockPlayer).not.toHaveBeenCalled();
 	});
 
-	it('Should pass the object pid to the player', () => {
-		render(<BlockHetArchiefVideo mediaItem={mediaItem} />);
+	it('Should hold the block its spot with the poster while the object is still loading', () => {
+		mockPlayableDisplayData.mockReturnValue({ data: undefined, isLoading: true });
 
-		expect(mockPlayer).toHaveBeenCalledWith(
-			expect.objectContaining({ schemaIdentifier: 'qs6d5p9579' }),
-			undefined
-		);
+		const { container } = render(<BlockHetArchiefVideo blockId={blockId} poster="poster.jpg" />);
+
+		expect(
+			container.querySelector('.c-block-het-archief-video__player--loading')
+		).toBeInTheDocument();
+		expect(container.querySelector('img')).toHaveAttribute('src', 'poster.jpg');
+		expect(mockPlayer).not.toHaveBeenCalled();
 	});
 
-	describe('snippet times', () => {
-		const renderWithTimes = (startTime?: string, endTime?: string) =>
-			render(
-				<BlockHetArchiefVideo mediaItem={mediaItem} startTime={startTime} endTime={endTime} />
-			);
+	it('Should swap the poster for the player once the object has been resolved', () => {
+		mockPlayableDisplayData.mockReturnValue({ data: [ieObject], isLoading: false });
 
-		const playerProps = () => mockPlayer.mock.calls[0][0];
+		const { container } = render(<BlockHetArchiefVideo blockId={blockId} poster="poster.jpg" />);
 
-		it('Should convert HH:MM:SS to seconds', () => {
-			renderWithTimes('00:00:10', '00:01:30');
+		expect(container.querySelector('.c-block-het-archief-video__player--loading')).toBeNull();
+		expect(mockPlayer).toHaveBeenCalled();
+	});
 
-			expect(playerProps()).toMatchObject({ startTime: 10, endTime: 90 });
-		});
+	it('Should render nothing for an object that resolved to no playable url', () => {
+		mockPlayableDisplayData.mockReturnValue({ data: [{ ...ieObject, playableUrl: null }] });
 
-		it('Should convert MM:SS to seconds', () => {
-			renderWithTimes('00:10', '01:30');
+		const { container } = render(<BlockHetArchiefVideo blockId={blockId} />);
 
-			expect(playerProps()).toMatchObject({ startTime: 10, endTime: 90 });
-		});
+		expect(container).toBeEmptyDOMElement();
+		expect(mockPlayer).not.toHaveBeenCalled();
+	});
 
-		it('Should play the whole object when no times are given', () => {
-			renderWithTimes(undefined, undefined);
+	it('Should render an error tile for an object that resolved to null', () => {
+		mockPlayableDisplayData.mockReturnValue({ data: [null] });
 
-			expect(playerProps()).toMatchObject({ startTime: undefined, endTime: undefined });
-		});
+		const { container } = render(<BlockHetArchiefVideo blockId={blockId} />);
 
-		// The media service only cuts when it gets an end time, so half a pair must not be sent.
-		it('Should not cut when only one of the times is given', () => {
-			renderWithTimes('00:00:10', undefined);
+		expect(container.querySelector('.c-ie-object-load-error')).toBeInTheDocument();
+		expect(mockPlayer).not.toHaveBeenCalled();
+	});
 
-			expect(playerProps()).toMatchObject({ startTime: undefined, endTime: undefined });
-		});
+	it('Should hand the resolved object to the player', () => {
+		render(<BlockHetArchiefVideo blockId={blockId} poster="poster.jpg" title="Journaal" />);
 
-		it('Should not cut when the end time is not after the start time', () => {
-			renderWithTimes('00:01:30', '00:00:10');
-
-			expect(playerProps()).toMatchObject({ startTime: undefined, endTime: undefined });
-		});
-
-		it('Should not cut on an unparseable time', () => {
-			renderWithTimes('nonsense', '00:01:30');
-
-			expect(playerProps()).toMatchObject({ startTime: undefined, endTime: undefined });
-		});
-
-		it('Should support a snippet starting at 0', () => {
-			renderWithTimes('00:00:00', '00:00:30');
-
-			expect(playerProps()).toMatchObject({ startTime: 0, endTime: 30 });
-		});
+		expect(mockPlayer).toHaveBeenCalledWith(
+			expect.objectContaining({ ieObject, poster: 'poster.jpg', title: 'Journaal' })
+		);
 	});
 
 	describe('caption', () => {
 		it('Should render the caption underneath the player', () => {
 			render(
 				<BlockHetArchiefVideo
-					mediaItem={mediaItem}
+					blockId={blockId}
 					copyrightTitle="VRT"
 					copyrightText="Fragment uit het journaal"
 					copyrightIconVisible
@@ -136,7 +154,7 @@ describe('<BlockHetArchiefVideo />', () => {
 		});
 
 		it('Should render no caption when title and text are empty', () => {
-			const { container } = render(<BlockHetArchiefVideo mediaItem={mediaItem} />);
+			const { container } = render(<BlockHetArchiefVideo blockId={blockId} />);
 
 			expect(container.querySelector('.a-copyright-attribution')).toBeNull();
 		});

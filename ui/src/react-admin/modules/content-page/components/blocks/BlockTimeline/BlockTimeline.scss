@@ -152,8 +152,8 @@ $object-meta-gap: 4rem;
 		padding-left: $line-content-gap;
 
 		@include typography.sofia-pro-heading-lg;
-		line-height: 2.6rem;
 
+		line-height: 2.6rem;
 		color: colors.$color-gray-300;
 	}
 
@@ -258,6 +258,7 @@ $object-meta-gap: 4rem;
 	// The media itself is styled by BlockTimeline's img rule / the shared IeObjectMedia component,
 	// only its placement inside the node is timeline specific.
 	&__node-image-wrapper,
+	&__node-object-error,
 	&__node-object-media {
 		position: relative;
 		z-index: 1;
@@ -285,6 +286,20 @@ $object-meta-gap: 4rem;
 
 	&__node-image {
 		object-position: center;
+	}
+
+	// A node whose object is still being resolved shows its poster dimmed with a spinner on top,
+	// rather than an empty spot that pops into a player.
+	&__node-image-wrapper--loading img {
+		opacity: 0.5;
+	}
+
+	&__node-object-loading {
+		position: absolute;
+		inset: 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
 	}
 
 	&__node-image-caption {
