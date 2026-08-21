@@ -28,15 +28,16 @@ export const BlockHighlightText: FunctionComponent<BlockHighlightTextProps> = ({
 	pageWidth,
 }): ReactElement => {
 	const isGradient = highlightColor.includes('gradient');
-	const patternColor =
+	// A gradient highlight resolves to its css gradient value; every other choice is used as picked.
+	const patternColor: Color | GradientColor | CustomBackground =
 		highlightColor === CustomBackground.MeemooLogo
-			? Color.Transparent
-			: ((ColorSelectGradientColors as Record<string, string>)[highlightColor] ?? highlightColor);
+			? Color.White
+			: (((ColorSelectGradientColors as Record<string, string>)[highlightColor] ??
+					highlightColor) as Color | GradientColor | CustomBackground);
 	// Text colors follow the fill behind the content. Gradients and the meemoo logo both render a
 	// white content box, so both take the text colors for white.
 	// https://meemoo.atlassian.net/browse/ARC-3848
-	const textBoxBackground =
-		isGradient || highlightColor === CustomBackground.MeemooLogo ? Color.White : highlightColor;
+	const textBoxBackground = isGradient ? Color.White : patternColor;
 	const textColorVariables = getBackgroundTextColorVariables(textBoxBackground);
 	const hasTextColors = Object.keys(textColorVariables).length > 0;
 
