@@ -47,9 +47,7 @@ export const BlockTimeline: FunctionComponent<BlockTimelineProps> = ({
 	const locale = AdminConfigManager.getConfig().locale;
 
 	// While this block is being put together in the editor, it has no id yet, so its nodes go along
-	// for the proxy to resolve. One entry per node, so the response stays aligned. Timeline nodes
-	// never play a snippet, so they carry no snipPoints -- which also keeps the node's own start/end
-	// times out of the query key, where editing them would refetch for nothing.
+	// for the proxy to resolve. One entry per node, so the response stays aligned.
 	const unsavedObjects = useMemo(
 		() =>
 			elements.map((node) => ({
