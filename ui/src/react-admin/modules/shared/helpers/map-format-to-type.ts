@@ -29,28 +29,10 @@ const MAP_DC_TERMS_FORMAT_TO_SIMPLE_TYPE: Record<IeObjectType, SimpleIeObjectTyp
 
 export function mapDcTermsFormatToSimpleType(
 	format: IeObjectType | undefined | null
-): SimpleIeObjectType | 'unknown' {
+): SimpleIeObjectType | undefined {
 	if (!format) {
-		return 'unknown';
+		return undefined;
 	}
 
 	return MAP_DC_TERMS_FORMAT_TO_SIMPLE_TYPE[format] || format;
-}
-
-export function mapFormatToType(format?: string): IeObjectType | undefined {
-	switch ((format || '').toLowerCase()) {
-		case 'video':
-		case 'film':
-			return IeObjectType.video;
-		case 'audio':
-			return IeObjectType.audio;
-		case 'newspaper':
-		case 'krant':
-			return IeObjectType.newspaper;
-		case 'image':
-		case 'photo':
-			return IeObjectType.image;
-		default:
-			return undefined;
-	}
 }

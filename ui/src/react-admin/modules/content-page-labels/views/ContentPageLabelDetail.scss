@@ -6,9 +6,7 @@
 	width: 20rem;
 	height: 2.4rem;
 
-	// Only the colours that are white or near white need a border, without one they are invisible
-	// against the detail page
-	&--bordered {
-		border: 1px solid colors.$color-gray-100;
-	}
+	// A white or near white swatch is invisible against the detail page without a border, and the
+	// border is unobtrusive on the other colours
+	border: 1px solid colors.$color-gray-100;
 }

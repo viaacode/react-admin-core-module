@@ -6,7 +6,6 @@ import type { FunctionComponent } from 'react';
 import React, { useCallback, useEffect, useState } from 'react';
 import { AdminConfigManager, ToastType } from '~core/config';
 import { AdminCoreIconName } from '~core/config/config.types';
-import { CONTENT_PAGE_LABEL_COLORS_INVISIBLE_ON_WHITE } from '~modules/content-page-labels/content-page-label.const';
 import { ContentPageLabelService } from '~modules/content-page-labels/content-page-label.service';
 import { ITEMS_PER_PAGE } from '~modules/item/items.consts';
 import { ErrorView } from '~modules/shared/components/error/ErrorView';
@@ -308,7 +307,6 @@ export const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> 
 						className="c-content-page-label-overview__chip"
 						label={contentPageLabel.label}
 						color={contentPageLabel.color}
-						bordered={CONTENT_PAGE_LABEL_COLORS_INVISIBLE_ON_WHITE.includes(contentPageLabel.color)}
 					/>
 				);
 

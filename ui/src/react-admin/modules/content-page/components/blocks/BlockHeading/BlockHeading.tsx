@@ -25,6 +25,8 @@ export const BlockHeading: FunctionComponent<BlockHeadingProps> = ({
 	<Type
 		className={clsx(className, `c-heading c-${Type}`, {
 			[`u-text-${align}`]: align !== 'left',
+			// Headings are primary text unless the editor supplied an explicit foreground color.
+			'u-background-text-primary': !color,
 		})}
 		onClick={onClick}
 		style={color ? { ...style, color } : style}

@@ -3,10 +3,12 @@ import type { DefaultComponentProps } from '~modules/shared/types/components';
 import './BlockHighligtText.scss';
 import { Container } from '@viaa/avo2-components';
 import clsx from 'clsx';
+import { getBackgroundTextColorVariables } from '~modules/content-page/const/background-text-colors.ts';
 import {
 	Color,
 	ColorSelectGradientColors,
 	CustomBackground,
+	type GradientColor,
 } from '~modules/content-page/types/content-block.types';
 import { ContentPageWidth } from '~modules/content-page/types/content-pages.types.ts';
 import Html from '~shared/components/Html/Html.tsx';
@@ -14,8 +16,8 @@ import { SanitizePreset } from '~shared/helpers/sanitize/presets';
 
 export interface BlockHighlightTextProps extends DefaultComponentProps {
 	content: string;
-	highlightColor: string;
-	backgroundColor: string;
+	highlightColor: Color | GradientColor | CustomBackground;
+	backgroundColor: Color | GradientColor | CustomBackground;
 	pageWidth?: string;
 }
 
@@ -26,10 +28,18 @@ export const BlockHighlightText: FunctionComponent<BlockHighlightTextProps> = ({
 	pageWidth,
 }): ReactElement => {
 	const isGradient = highlightColor.includes('gradient');
-	const patternColor =
+	// A gradient highlight resolves to its css gradient value; every other choice is used as picked.
+	const patternColor: Color | GradientColor | CustomBackground =
 		highlightColor === CustomBackground.MeemooLogo
-			? Color.Transparent
-			: ((ColorSelectGradientColors as Record<string, string>)[highlightColor] ?? highlightColor);
+			? Color.White
+			: (((ColorSelectGradientColors as Record<string, string>)[highlightColor] ??
+					highlightColor) as Color | GradientColor | CustomBackground);
+	// Text colors follow the fill behind the content. Gradients and the meemoo logo both render a
+	// white content box, so both take the text colors for white.
+	// https://meemoo.atlassian.net/browse/ARC-3848
+	const textBoxBackground = isGradient ? Color.White : patternColor;
+	const textColorVariables = getBackgroundTextColorVariables(textBoxBackground);
+	const hasTextColors = Object.keys(textColorVariables).length > 0;
 
 	return (
 		<article
@@ -59,10 +69,13 @@ export const BlockHighlightText: FunctionComponent<BlockHighlightTextProps> = ({
 				{/* c-rich-text-editor__content gives the rich text output its standard styling,
 				    paragraph spacing included - see BlockRichText */}
 				<Html
-					className={clsx('c-block-highlight-text__content-text', 'c-rich-text-editor__content')}
+					className={clsx('c-block-highlight-text__content-text', 'c-rich-text-editor__content', {
+						'u-background-text-colors u-background-text-links': hasTextColors,
+					})}
 					style={
 						{
-							'--pattern-color': isGradient ? Color.White : patternColor,
+							'--pattern-color': textBoxBackground,
+							...textColorVariables,
 						} as CSSProperties
 					}
 					content={content}

@@ -1,0 +1,26 @@
+/* Semantic text-role classes for content blocks whose foreground follows an editor-selected
+   background. Kept in a mixin so the same contract can be emitted by admin.css and client.css. */
+@mixin background-text-roles {
+  .u-background-text-colors {
+    color: var(--bg-text-primary) !important;
+
+    .u-background-text-primary {
+      color: var(--bg-text-primary) !important;
+    }
+
+    .u-background-text-secondary {
+      color: var(--bg-text-secondary) !important;
+    }
+
+    .u-background-text-hyperlink,
+    .u-background-text-links a:not(.a-link__no-styles) {
+      color: var(--bg-text-hyperlink) !important;
+    }
+
+    /* SmartLink deliberately removes link styling; it should inherit the semantic text role of its
+       contents instead of the application's legacy global black link override. */
+    .a-link__no-styles {
+      color: inherit;
+    }
+  }
+}

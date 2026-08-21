@@ -62,7 +62,7 @@ export const BlockHetArchiefHeaderSearch: FunctionComponent<BlockHetArchiefHeade
 						{subtitles.map((subtitle, index) => (
 							<li
 								key={`animation-text-${subtitle.label}-${index}`}
-								className={clsx({
+								className={clsx('u-background-text-primary', {
 									current: activeIndex === index,
 									next: activeIndex === (index - 1 + subtitles.length) % subtitles.length,
 								})}
@@ -104,7 +104,7 @@ export const BlockHetArchiefHeaderSearch: FunctionComponent<BlockHetArchiefHeade
 					onEnter={navigateToSearchPage}
 					value={searchTerm}
 				/>
-				<p>{textBelowSearch}</p>
+				<p className="u-background-text-secondary">{textBelowSearch}</p>
 			</div>
 		</article>
 	);

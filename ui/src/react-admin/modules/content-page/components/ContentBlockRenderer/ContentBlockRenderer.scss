@@ -1,4 +1,5 @@
 @use "../../../shared/styles/settings/colors" as colors;
+@use "../../../shared/styles/utilities/background-text" as background-text;
 @use "../../../shared/styles/settings/variables" as variables;
 
 .c-content-page-overview-block__header {
@@ -102,3 +103,18 @@
     }
   }
 }
+
+/* --------------------------------------------------------------------------
+   WCAG text colors on a content block's background color
+
+   ContentBlockRenderer sets --bg-text-primary / --bg-text-secondary / --bg-text-hyperlink from
+   the design record. The wrapper applies primary text by inheritance; elements that have their own
+   color rule are tagged explicitly with one of the role classes below. Rich-text containers use
+   u-background-text-links because their generated anchors cannot receive a React class directly.
+   https://meemoo.atlassian.net/browse/ARC-3848
+
+   ContentBlockRenderer emits the shared mixin in client.css; the utility index emits it separately
+   in admin.css. All role rules are scoped to u-background-text-colors, so AVO remains untouched.
+   -------------------------------------------------------------------------- */
+
+@include background-text.background-text-roles;

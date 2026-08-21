@@ -1,11 +1,9 @@
 import { Button, ButtonToolbar, IconName, Table } from '@viaa/avo2-components';
-import clsx from 'clsx';
 import type { FunctionComponent } from 'react';
 import React, { useCallback, useEffect, useState } from 'react';
 import { AdminConfigManager } from '~core/config/config.class';
 import { AdminCoreIconName } from '~core/config/config.types';
 import { Color, CustomBackground } from '~modules/content-page/types/content-block.types';
-import { CONTENT_PAGE_LABEL_COLORS_INVISIBLE_ON_WHITE } from '~modules/content-page-labels/content-page-label.const';
 import { ContentPageLabelService } from '~modules/content-page-labels/content-page-label.service';
 import type { DefaultComponentProps } from '~modules/shared/types/components';
 import { GET_CONTENT_TYPE_LABELS } from '~shared/components/ContentPicker/ContentPicker.const';
@@ -150,10 +148,7 @@ export const ContentPageLabelDetail: FunctionComponent<ContentPageLabelDetailPro
 						)}
 						{renderDetailRow(
 							<div
-								className={clsx('c-content-page-label-detail__color-swatch', {
-									'c-content-page-label-detail__color-swatch--bordered':
-										CONTENT_PAGE_LABEL_COLORS_INVISIBLE_ON_WHITE.includes(swatchBackground),
-								})}
+								className="c-content-page-label-detail__color-swatch"
 								// Not backgroundColor: one of the options is a gradient
 								style={{ background: swatchBackground }}
 							/>,

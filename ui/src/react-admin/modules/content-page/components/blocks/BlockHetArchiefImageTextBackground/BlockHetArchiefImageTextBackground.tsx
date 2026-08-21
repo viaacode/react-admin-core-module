@@ -171,6 +171,7 @@ export const BlockHetArchiefImageTextBackground: FunctionComponent<
 				<BlockHeading
 					className="c-block-het-archief-image-text-background__heading"
 					type={headingType}
+					color={foregroundColor}
 				>
 					{heading}
 				</BlockHeading>

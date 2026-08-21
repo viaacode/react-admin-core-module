@@ -75,9 +75,16 @@ export const BlockHomepageBanner: FunctionComponent<BlockHomepageBannerProps> = 
 					{/* c-rich-text-editor__content gives the rich text output its standard styling,
 					    paragraph spacing included - see BlockRichText */}
 					<Html
-						className={clsx('c-block-homepage-banner__content-text', 'c-rich-text-editor__content')}
+						className={clsx(
+							'c-block-homepage-banner__content-text',
+							'c-rich-text-editor__content',
+							'u-background-text-secondary',
+							'u-background-text-links'
+						)}
 						content={content}
-						sanitizePreset={SanitizePreset.full}type="p" />
+						sanitizePreset={SanitizePreset.full}
+						type="p"
+					/>
 					<div className="c-block-homepage-banner__pattern-slot c-block-homepage-banner__pattern-slot--bottom">
 						<div
 							className="c-block-homepage-banner__pattern c-block-homepage-banner__pattern--right"

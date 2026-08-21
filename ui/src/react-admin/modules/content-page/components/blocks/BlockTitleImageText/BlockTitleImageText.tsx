@@ -26,7 +26,13 @@ export const BlockTitleImageText: FunctionComponent<BlockTitleImageTextProps> = 
 				{imageSource && <Image src={imageSource} alt={imageDescription} wide={true} />}
 				{text && (
 					<Spacer margin="top">
-						<Html content={convertToHtml(text)} sanitizePreset={SanitizePreset.full} />
+						{/* Inline links follow the link colour of the block's background colour.
+						    https://meemoo.atlassian.net/browse/ARC-3848 */}
+						<Html
+							content={convertToHtml(text)}
+							sanitizePreset={SanitizePreset.full}
+							className="u-background-text-links"
+						/>
 					</Spacer>
 				)}
 			</Container>
