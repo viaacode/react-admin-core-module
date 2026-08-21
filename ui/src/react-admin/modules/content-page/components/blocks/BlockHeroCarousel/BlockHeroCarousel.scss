@@ -383,6 +383,8 @@ $hero-carousel-search-radius-desktop: 3.2rem;
 		}
 
 		&-slide {
+			// Containing block for the loading overlay below.
+			position: relative;
 			display: flex;
 			flex-direction: column;
 			flex-shrink: 0;
@@ -423,6 +425,22 @@ $hero-carousel-search-radius-desktop: 3.2rem;
 			// matched by position here rather than styled in the shared component.
 			> .o-flex {
 				color: colors.$color-gray-1000;
+			}
+
+			// The slide is rendered from what the block config already knows while its object is
+			// still being resolved: the partial content is dimmed and carries a spinner, so it
+			// doesn't read as the finished slide.
+			&--loading &-image-media {
+				opacity: 0.5;
+			}
+
+			&-loading {
+				position: absolute;
+				inset: 0;
+				z-index: 2;
+				display: flex;
+				align-items: center;
+				justify-content: center;
 			}
 
 			// The error tile fills the slide, however big the slide currently is -- inactive
@@ -529,22 +547,6 @@ $hero-carousel-search-radius-desktop: 3.2rem;
 					.c-block-hero-carousel__carousel-slide-image-progress-fill {
 						animation-play-state: paused;
 					}
-				}
-
-				// The slide is rendered from what the block config already knows while its object is
-				// still being resolved: the placeholder content is dimmed and carries a spinner, so
-				// it doesn't read as the finished slide.
-				&--loading &-media {
-					opacity: 0.5;
-				}
-
-				&-loading {
-					position: absolute;
-					inset: 0;
-					z-index: 2;
-					display: flex;
-					align-items: center;
-					justify-content: center;
 				}
 			}
 

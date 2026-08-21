@@ -1,4 +1,5 @@
 // biome-ignore-all lint/a11y/useKeyWithClickEvents: mouse-only slide click by design -- the strip's many duplicate slides shouldn't all become tab stops. (File-level because a per-line ignore here conflicts with the neighboring noArrayIndexKey ignore -- biome mis-attaches both when stacked on the same element.)
+import { Spinner } from '@viaa/avo2-components';
 import clsx from 'clsx';
 import React, {
 	type FunctionComponent,
@@ -12,6 +13,7 @@ import type { HeroCarouselSlideItem } from '~content-blocks/BlockHeroCarousel/Bl
 import { BlockHeroCarouselActiveSlide } from '~content-blocks/BlockHeroCarousel/BlockHeroCarouselActiveSlide.tsx';
 import { BlockHeroCarouselInactiveSlide } from '~content-blocks/BlockHeroCarousel/BlockHeroCarouselInactiveSlide.tsx';
 import { CarouselButtons } from '~modules/content-page/components/CarouselButtons/CarouselButtons.tsx';
+import { IeObjectLoadError } from '~modules/content-page/components/IeObjectLoadError/IeObjectLoadError.tsx';
 import type { DefaultComponentProps } from '~modules/shared/types/components';
 import {
 	ACTIVE_SLIDE_CLASS,
@@ -20,6 +22,8 @@ import {
 	getPxPerRem,
 	handleTrackTransitionEnd,
 	handleWindowResize,
+	isSlideEmpty,
+	isSlidePlayerReady,
 } from './BlockHeroCarousel.utils.ts';
 
 import './BlockHeroCarousel.scss';
@@ -68,6 +72,43 @@ export const BlockHeroCarouselCarousel: FunctionComponent<BlockHeroCarouselCarou
 	const goNext = () => setActiveIndex((current) => current + 1);
 	const goPrev = () => setActiveIndex((current) => current - 1);
 
+	// What a slide shows before it has any object content of its own. Both leaf slides get to
+	// assume a resolved object, so neither has to carry these states.
+	const renderSlideContent = (item: HeroCarouselSlideItem, isSettledActive: boolean) => {
+		// The object behind this slide couldn't be resolved -- show that, rather than an empty
+		// slide. Only the active slide has room for the message under the icon.
+		if (item?.hasFailed) {
+			return (
+				<IeObjectLoadError
+					className="c-block-hero-carousel__carousel-slide-error"
+					isTextVisible={isSettledActive}
+				/>
+			);
+		}
+
+		// Nothing is known about this slide yet -- not even which object it points at, as with a
+		// freshly added editor row that hasn't been filled in.
+		if (isSlideEmpty(item)) {
+			return (
+				<div className="c-block-hero-carousel__carousel-slide-placeholder">
+					<Spinner size="large" locationId={'hero-carousel-slide'} />
+				</div>
+			);
+		}
+
+		return isSettledActive ? (
+			<BlockHeroCarouselActiveSlide
+				item={item}
+				onEnded={goNext}
+				isLoading={isLoading}
+				isMuted={isMuted}
+				onMutedChange={setIsMuted}
+			/>
+		) : (
+			<BlockHeroCarouselInactiveSlide item={item} />
+		);
+	};
+
 	return (
 		<div className={clsx('c-block-hero-carousel__carousel')}>
 			<div className={clsx('c-block-hero-carousel__carousel-viewport')}>
@@ -101,6 +142,16 @@ export const BlockHeroCarouselCarousel: FunctionComponent<BlockHeroCarouselCarou
 						// already elsewhere in the strip -- hidden from assistive tech so it isn't
 						// announced multiple times.
 						const isClone = index < startIndex || index >= startIndex + itemsLength;
+						// A slide goes up on what the block config already knows, with the spinner
+						// over it until its object has been resolved. The two slides that show no
+						// object content are left alone: an error tile is final, and an empty slide
+						// carries a spinner of its own. Neither does a mounted player, which a
+						// background refetch would otherwise dim mid-playback.
+						const isSlideLoading =
+							Boolean(isLoading) &&
+							!item?.hasFailed &&
+							!isSlideEmpty(item) &&
+							!(isSettledActive && isSlidePlayerReady(item));
 
 						return (
 							<div
@@ -110,22 +161,18 @@ export const BlockHeroCarouselCarousel: FunctionComponent<BlockHeroCarouselCarou
 								className={clsx(
 									'c-block-hero-carousel__carousel-slide',
 									`c-block-hero-carousel__carousel-slide--${item?.dctermsFormat}`,
-									index === activeIndex && ACTIVE_SLIDE_CLASS
+									index === activeIndex && ACTIVE_SLIDE_CLASS,
+									isSlideLoading && 'c-block-hero-carousel__carousel-slide--loading'
 								)}
 								style={{
 									backgroundColor: item?.backgroundColor,
 								}}
 							>
-								{isSettledActive ? (
-									<BlockHeroCarouselActiveSlide
-										item={item}
-										onEnded={goNext}
-										isLoading={isLoading}
-										isMuted={isMuted}
-										onMutedChange={setIsMuted}
-									/>
-								) : (
-									<BlockHeroCarouselInactiveSlide item={item} isLoading={isLoading} />
+								{renderSlideContent(item, isSettledActive)}
+								{isSlideLoading && (
+									<div className="c-block-hero-carousel__carousel-slide-loading">
+										<Spinner size="large" locationId={'hero-carousel-slide'} />
+									</div>
 								)}
 							</div>
 						);

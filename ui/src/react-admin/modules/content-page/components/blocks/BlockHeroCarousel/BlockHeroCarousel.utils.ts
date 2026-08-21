@@ -1,5 +1,7 @@
 import type { RefObject } from 'react';
 import { flushSync } from 'react-dom';
+import type { HeroCarouselSlideItem } from '~content-blocks/BlockHeroCarousel/BlockHeroCarousel.types.ts';
+import { isAudioVideoFormat } from '~shared/helpers/is-audio-video-format.ts';
 import {
 	type IeObjectType,
 	mapDcTermsFormatToSimpleType,
@@ -26,6 +28,32 @@ interface StripItem {
 export function getThumbWidthRem(format: IeObjectType | undefined): number {
 	const simpleType = mapDcTermsFormatToSimpleType(format);
 	return FORMAT_THUMB_WIDTHS_REM[simpleType as SimpleIeObjectType] || FALLBACK_THUMB_WIDTH_REM;
+}
+
+// The image a slide shows. Only the active slide is big enough to warrant the full-size
+// newspaper image, so it's the only one that prefers it over the (lower-res) thumbnail.
+export function getSlideImageSrc(
+	item: HeroCarouselSlideItem | undefined,
+	preferFullSize = false
+): string {
+	return (
+		(preferFullSize ? item?.newspaperImage : undefined) ||
+		item?.videoThumbnail ||
+		item?.thumbnailUrl ||
+		''
+	);
+}
+
+// Nothing is known about this slide yet -- not even which object it points at, as with a freshly
+// added editor row that hasn't been filled in -- so a spinner is all there is to show.
+export function isSlideEmpty(item: HeroCarouselSlideItem | undefined): boolean {
+	return !item?.schemaIdentifier && !getSlideImageSrc(item, true) && !item?.dctermsFormat;
+}
+
+// The player only goes up once there is something to play: a slide is rendered on what the block
+// config knows, well before its playable url has been resolved.
+export function isSlidePlayerReady(item: HeroCarouselSlideItem | undefined): boolean {
+	return isAudioVideoFormat(item?.dctermsFormat) && !!item?.playableUrl;
 }
 
 export function getPxPerRem(): number {
