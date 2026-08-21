@@ -28,3 +28,11 @@
   color: black;
   text-decoration: none;
 }
+
+// The active tab in the avo2-components Tabs sets a z-index (to lift its box-shadow above the
+// bottom border of the tab list). Since .c-tabs isn't a stacking context, that z-index leaks into
+// the root stacking context and makes the active tab render on top of the main site navigation
+// dropdown. Isolating .c-tabs keeps the tab z-index scoped to the tab list itself.
+.c-tabs {
+  isolation: isolate;
+}
