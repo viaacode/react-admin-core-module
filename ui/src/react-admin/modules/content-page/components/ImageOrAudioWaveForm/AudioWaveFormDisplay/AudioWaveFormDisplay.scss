@@ -1,0 +1,21 @@
+@use "../../../../shared/styles/settings/colors" as colors;
+
+.c-audio-wave-form-display {
+	display: block;
+	width: 100%;
+	height: 100%;
+	background-color: var(--c-audio-wave-form-display-bg, transparent);
+
+	&__svg {
+		display: block;
+		width: 100%;
+		height: 100%;
+	}
+
+	&__bar {
+		stroke: var(
+			--c-audio-wave-form-display-bar-color,
+			var(--c-audio-wave-form-display-wave-color, colors.$white)
+		);
+	}
+}
