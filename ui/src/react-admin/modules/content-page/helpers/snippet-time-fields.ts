@@ -103,6 +103,27 @@ const getFormatFromMediaItem = (
 		? (formGroupState.mediaItem?.dctermsFormat as IeObjectType | undefined)
 		: undefined;
 
+/**
+ * Decides whether the snippet time fields apply to the object picked in this form group.
+ *
+ * The format is only known when the content picker itself reported it, so blocks that were saved
+ * before the picker started storing `dctermsFormat` come back from the database with a picked
+ * object but no format. Hiding the times in that case would make them reappear only after
+ * reselecting the very same object, and would hide times that are already filled in. So an object
+ * without a known format is treated as playable: the format is what narrows the fields away, not
+ * its absence.
+ */
+const hasSnippetTimes = (
+	formGroupState: ContentBlockComponentState | ContentBlockState
+): boolean => {
+	if (!hasMediaItem(formGroupState) || !formGroupState.mediaItem?.value) {
+		return false;
+	}
+
+	const format = getFormatFromMediaItem(formGroupState);
+	return format === undefined || isAudioVideoFormat(format);
+};
+
 const SNIPPET_TIME_FIELD = (
 	field: 'startTime' | 'endTime',
 	label: string,
@@ -120,10 +141,7 @@ const SNIPPET_TIME_FIELD = (
 		// The two times validate against each other, so editing one must re-check the other.
 		revalidateFields: [field === 'startTime' ? 'endTime' : 'startTime'],
 		isVisible: (config, formGroupState) => {
-			return (
-				isAudioVideoFormat(getFormatFromMediaItem(formGroupState)) &&
-				isVisibleFunc(config, formGroupState)
-			);
+			return hasSnippetTimes(formGroupState) && isVisibleFunc(config, formGroupState);
 		},
 	});
 

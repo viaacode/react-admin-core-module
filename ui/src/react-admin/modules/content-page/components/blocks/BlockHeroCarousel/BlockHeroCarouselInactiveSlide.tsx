@@ -64,8 +64,14 @@ export const BlockHeroCarouselInactiveSlide: FunctionComponent<
 	BlockHeroCarouselInactiveSlideProps
 > = ({ item, isLoading }): ReactElement => {
 	// The object behind this slide couldn't be resolved -- show that, rather than an empty slide.
+	// Only the icon: the message is kept for the active slide, which has room for it.
 	if (item?.hasFailed) {
-		return <IeObjectLoadError className="c-block-hero-carousel__carousel-slide-error" />;
+		return (
+			<IeObjectLoadError
+				className="c-block-hero-carousel__carousel-slide-error"
+				isTextVisible={false}
+			/>
+		);
 	}
 
 	const imageSrc = item?.videoThumbnail || item?.thumbnailUrl || '';
