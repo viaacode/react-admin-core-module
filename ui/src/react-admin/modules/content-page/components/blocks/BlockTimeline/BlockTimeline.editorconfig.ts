@@ -49,11 +49,13 @@ const GET_TIMELINE_NODE_VISUAL_TYPE_OPTIONS = (): SelectOption<TimelineNodeVisua
 	},
 ];
 
-const visualTypeIsObject: ContentBlockField['isVisible'] = (_config, formGroupState) =>
-	(formGroupState as TimelineNodeBlockComponentState).visualType === 'OBJECT';
+const visualTypeIsObject: ContentBlockField['isVisible'] = (_config, formGroupState) => {
+	return (formGroupState as TimelineNodeBlockComponentState).visualType === 'OBJECT';
+};
 
-const visualTypeIsImage: ContentBlockField['isVisible'] = (_config, formGroupState) =>
-	(formGroupState as TimelineNodeBlockComponentState).visualType === 'IMAGE';
+const visualTypeIsImage: ContentBlockField['isVisible'] = (_config, formGroupState) => {
+	return (formGroupState as TimelineNodeBlockComponentState).visualType === 'IMAGE';
+};
 
 export const INITIAL_TIMELINE_COMPONENTS_STATE = (): TimelineNodeBlockComponentState[] => [
 	{

@@ -1,6 +1,5 @@
 import type { TextInputProps } from '@viaa/avo2-components';
 import { AvoCoreContentPickerType } from '@viaa/avo2-types';
-import type { HeroCarouselBlockComponentState } from '~content-blocks/BlockHeroCarousel/BlockHeroCarousel.types.ts';
 import type { HetArchiefVideoBlockComponentState } from '~content-blocks/BlockHetArchiefVideo';
 import { TEXT_FIELD } from '~content-blocks/defaults.ts';
 import {
@@ -9,8 +8,8 @@ import {
 	ContentBlockEditor,
 	type ContentBlockField,
 	type ContentBlockState,
-	ContentBlockType,
-	type TimelineNodeBlockComponentState,
+	type IsVisibleFunc,
+	type MediaItemComponentState,
 } from '~modules/content-page/types/content-block.types.ts';
 import { isAudioVideoFormat } from '~shared/helpers/is-audio-video-format.ts';
 import { IeObjectType } from '~shared/helpers/map-format-to-type.ts';
@@ -84,26 +83,31 @@ const validateSnippetTime =
 		return [];
 	};
 
-const getFormatFromMediaItem = (
-	config: ContentBlockConfig,
-	formGroupState: ContentBlockComponentState | ContentBlockState
-): IeObjectType | undefined => {
-	if (config.type === ContentBlockType.HetArchiefVideo) {
-		return (config.components.state as HetArchiefVideoBlockComponentState).mediaItem
-			?.dctermsFormat as IeObjectType;
-	}
-	if (config.type === ContentBlockType.HeroCarousel) {
-		return (formGroupState as HeroCarouselBlockComponentState).mediaItem
-			?.dctermsFormat as IeObjectType;
-	}
-	if (config.type === ContentBlockType.Timeline) {
-		return (formGroupState as TimelineNodeBlockComponentState).mediaItem
-			?.dctermsFormat as IeObjectType;
-	}
-	return undefined;
-};
+/**
+ * Reads the format of the IE object picked in this form group.
+ *
+ * Structural on purpose: every block state that carries a picked object implements
+ * MediaItemComponentState, so a new block gets the snippet time fields simply by extending it --
+ * no per-block branch here. `formGroupState` is already the right object for both shapes: the
+ * callers hand us the single element for repeated states (BlockTimeline nodes, BlockHeroCarousel
+ * elements) and the whole component state for non repeatable blocks (BlockHetArchiefVideo).
+ */
+const hasMediaItem = (
+	state: ContentBlockComponentState | ContentBlockState
+): state is MediaItemComponentState => !!state && 'mediaItem' in state;
 
-const SNIPPET_TIME_FIELD = (field: 'startTime' | 'endTime', label: string): ContentBlockField =>
+const getFormatFromMediaItem = (
+	formGroupState: ContentBlockComponentState | ContentBlockState
+): IeObjectType | undefined =>
+	hasMediaItem(formGroupState)
+		? (formGroupState.mediaItem?.dctermsFormat as IeObjectType | undefined)
+		: undefined;
+
+const SNIPPET_TIME_FIELD = (
+	field: 'startTime' | 'endTime',
+	label: string,
+	isVisibleFunc: IsVisibleFunc
+): ContentBlockField =>
 	TEXT_FIELD({
 		label,
 		editorType: ContentBlockEditor.TextInput,
@@ -115,16 +119,17 @@ const SNIPPET_TIME_FIELD = (field: 'startTime' | 'endTime', label: string): Cont
 		validator: validateSnippetTime(field),
 		// The two times validate against each other, so editing one must re-check the other.
 		revalidateFields: [field === 'startTime' ? 'endTime' : 'startTime'],
-		isVisible: (config, formGroupState) =>
-			isAudioVideoFormat(getFormatFromMediaItem(config, formGroupState)),
+		isVisible: (config, formGroupState) => {
+			return (
+				isAudioVideoFormat(getFormatFromMediaItem(formGroupState)) &&
+				isVisibleFunc(config, formGroupState)
+			);
+		},
 	});
 
 export const IE_OBJECT_WITH_SNIPPET_TIME_FIELDS = (
 	allowedObjectTypes: IeObjectType[] = Object.values(IeObjectType),
-	isVisibleFunc: (
-		config: ContentBlockConfig,
-		formGroupState: ContentBlockComponentState | ContentBlockState
-	) => boolean = () => true
+	isVisibleFunc: IsVisibleFunc = () => true
 ): Record<string, ContentBlockField> => ({
 	// Named `mediaItem` on purpose: generateFieldAttributes reads `state.item ||
 	// state.mediaItem` to tell the still picker below which object to fetch stills for.
@@ -140,7 +145,7 @@ export const IE_OBJECT_WITH_SNIPPET_TIME_FIELDS = (
 			// Only video and audio objects can be played
 			ieObjectFormats: allowedObjectTypes,
 		},
-		fieldsToResetOnChange: ['startPoint', 'endPoint'],
+		fieldsToResetOnChange: ['startTime', 'endTime'],
 		validator: (value: PickerItem | undefined) =>
 			value?.value
 				? []
@@ -155,10 +160,12 @@ export const IE_OBJECT_WITH_SNIPPET_TIME_FIELDS = (
 	},
 	startTime: SNIPPET_TIME_FIELD(
 		'startTime',
-		tText('modules/content-page/helpers/snippet-time-fields___starttijd', undefined, [HET_ARCHIEF])
+		tText('modules/content-page/helpers/snippet-time-fields___starttijd', undefined, [HET_ARCHIEF]),
+		isVisibleFunc
 	),
 	endTime: SNIPPET_TIME_FIELD(
 		'endTime',
-		tText('modules/content-page/helpers/snippet-time-fields___eindtijd', undefined, [HET_ARCHIEF])
+		tText('modules/content-page/helpers/snippet-time-fields___eindtijd', undefined, [HET_ARCHIEF]),
+		isVisibleFunc
 	),
 });

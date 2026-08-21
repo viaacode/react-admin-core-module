@@ -222,6 +222,11 @@ export enum ContentBlockEditor {
 	UploadOrSelectVideoStill = 'UploadOrSelectVideoStill', // Used for selecting or uploading a video still for a video player https://meemoo.atlassian.net/browse/AVO-3015
 }
 
+export type IsVisibleFunc = (
+	config: ContentBlockConfig,
+	formGroupState: ContentBlockComponentState | ContentBlockState
+) => boolean;
+
 export interface ContentBlockField {
 	label?: string; // Optional for checkboxes, who have their own label
 	editorType: ContentBlockEditor;
@@ -243,10 +248,7 @@ export interface ContentBlockField {
 		value: any,
 		parentState?: ContentBlockComponentState | ContentBlockState
 	) => string[];
-	isVisible?: (
-		config: ContentBlockConfig,
-		formGroupState: ContentBlockComponentState | ContentBlockState
-	) => boolean;
+	isVisible?: IsVisibleFunc;
 	fieldsToResetOnChange?: string[];
 	/**
 	 * Other field keys in the same state object whose validators should re-run when this field
@@ -645,12 +647,20 @@ export interface HetArchiefIeObject {
 
 export type TimelineNodeVisualType = 'NONE' | 'OBJECT' | 'IMAGE';
 
-export interface TimelineNodeBlockComponentState {
+/**
+ * Implemented by any block state that holds a single IE object, so shared fields (see
+ * IE_OBJECT_WITH_SNIPPET_TIME_FIELDS) can read the picked object without knowing the block type.
+ * The `mediaItem` name is load bearing: generateFieldAttributes reads `state.item || state.mediaItem`.
+ */
+export interface MediaItemComponentState {
+	mediaItem?: PickerItem; // Content picker value pointing to an IE_OBJECT (pid/fragmentId)
+}
+
+export interface TimelineNodeBlockComponentState extends MediaItemComponentState {
 	date: string;
 	title: string;
 	text?: string;
 	visualType: TimelineNodeVisualType;
-	mediaItem?: PickerItem; // Content picker value pointing to an IE_OBJECT (pid/fragmentId)
 	startTime?: number;
 	endTime?: number;
 	image?: string;

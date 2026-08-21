@@ -11,9 +11,9 @@ import { GET_MEDIA_PLAYER_WIDTH_OPTIONS } from '~modules/content-page/const/get-
 import { IE_OBJECT_WITH_SNIPPET_TIME_FIELDS } from '~modules/content-page/helpers/snippet-time-fields.ts';
 import type {
 	ContentBlockConfig,
-	ContentBlockField,
 	CopyrightComponentState,
 	DefaultContentBlockState,
+	MediaItemComponentState,
 } from '~modules/content-page/types/content-block.types';
 import {
 	ContentBlockEditor,
@@ -22,11 +22,10 @@ import {
 import { IeObjectType } from '~shared/helpers/map-format-to-type.ts';
 import { tHtml, tText } from '~shared/helpers/translation-functions';
 import { HET_ARCHIEF } from '~shared/types';
-import type { PickerItem } from '~shared/types/content-picker';
 
-export interface HetArchiefVideoBlockComponentState extends CopyrightComponentState {
-	/** The AV ie-object to play, referenced by its pid / fragmentId. */
-	mediaItem?: PickerItem;
+export interface HetArchiefVideoBlockComponentState
+	extends CopyrightComponentState,
+		MediaItemComponentState {
 	/** Start of the snippet, as the admin types it: HH:MM:SS or MM:SS. */
 	startTime?: string;
 	/** End of the snippet, as the admin types it: HH:MM:SS or MM:SS. */

@@ -1,9 +1,10 @@
-import type { Color } from '~modules/content-page/types/content-block.types.ts';
+import type {
+	Color,
+	MediaItemComponentState,
+} from '~modules/content-page/types/content-block.types.ts';
 import type { PlayableDisplayIeObject } from '~shared/services/ie-objects-service/ie-objects.types.ts';
-import type { PickerItem } from '~shared/types/content-picker.ts';
 
-export interface HeroCarouselBlockComponentState {
-	mediaItem?: PickerItem;
+export interface HeroCarouselBlockComponentState extends MediaItemComponentState {
 	startTime?: string;
 	endTime?: string;
 	videoThumbnail?: string;
