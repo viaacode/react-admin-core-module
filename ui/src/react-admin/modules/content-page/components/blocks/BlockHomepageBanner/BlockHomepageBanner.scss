@@ -77,6 +77,16 @@ $pattern-mobile-overshoot: 10rem;
 			color: colors.$neutral;
 
 			@include typography.sofia-pro-body(true);
+
+			// The rich text paragraph margins space the paragraphs apart, but the title's
+			// padding does the spacing above the first one.
+			> p:first-child {
+				margin-top: 0;
+			}
+
+			> p:last-child {
+				margin-bottom: 0;
+			}
 		}
 	}
 
