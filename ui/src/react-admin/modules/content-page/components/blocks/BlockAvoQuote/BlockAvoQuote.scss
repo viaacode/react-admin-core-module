@@ -1,13 +1,3 @@
 .c-block-quote .c-quote {
   margin: 4rem 2rem;
-
-  // Quote is provided by avo2-components, so its internal elements cannot receive our utility
-  // classes in React. Keep this third-party exception scoped to the block itself.
-  &__text {
-    color: var(--bg-text-primary) !important;
-  }
-
-  &__author {
-    color: var(--bg-text-secondary, var(--bg-text-primary)) !important;
-  }
 }
