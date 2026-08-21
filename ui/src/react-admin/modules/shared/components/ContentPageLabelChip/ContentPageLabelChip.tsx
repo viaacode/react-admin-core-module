@@ -35,12 +35,14 @@ export const ContentPageLabelChip: FunctionComponent<ContentPageLabelChipProps> 
 	if (!label) {
 		return null;
 	}
-	const textColor =
-		getBackgroundTextColors(color as Color | GradientColor | CustomBackground)?.primary ??
-		TEXT_COLOR_WHITE;
-
 	// The meemoo logo is not a css value, it is a pattern the client fills in. A chip is too small to
 	// draw that pattern on, so it renders transparent, like ContentBlockRenderer does for a block
+	const backgroundColor = (color === CustomBackground.MeemooLogo ? Color.Transparent : color) as
+		| Color
+		| GradientColor
+		| CustomBackground;
+	const textColor = getBackgroundTextColors(backgroundColor)?.primary ?? TEXT_COLOR_WHITE;
+
 	return (
 		<span
 			className={clsx(
@@ -49,7 +51,7 @@ export const ContentPageLabelChip: FunctionComponent<ContentPageLabelChipProps> 
 				className
 			)}
 			style={{
-				background: color === CustomBackground.MeemooLogo ? Color.Transparent : color,
+				background: backgroundColor,
 				color: textColor,
 			}}
 		>

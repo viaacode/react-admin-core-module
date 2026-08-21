@@ -4,7 +4,6 @@ export const LABELS_PER_PAGE = 10;
 
 // These backgrounds do not distinguish a label preview from a white admin page without a border.
 // The meemoo logo is included because ContentPageLabelChip renders it as transparent.
-// TODO ARC-3848: remove this list once the WCAG text colors land. They carry the same logic.
 export const CONTENT_PAGE_LABEL_COLORS_INVISIBLE_ON_WHITE: string[] = [
 	Color.Transparent,
 	Color.White,
