@@ -1,7 +1,7 @@
-import { Image } from '@viaa/avo2-components';
 import React, { type FunctionComponent, type ReactElement } from 'react';
 import type { HeroCarouselSlideItem } from '~content-blocks/BlockHeroCarousel/BlockHeroCarousel.types.ts';
 import { getSlideImageSrc } from '~content-blocks/BlockHeroCarousel/BlockHeroCarousel.utils.ts';
+import { ImageOrAudioWaveForm } from '~modules/content-page/components/ImageOrAudioWaveForm/ImageOrAudioWaveForm.tsx';
 import type { DefaultComponentProps } from '~modules/shared/types/components';
 import { Icon } from '~shared/components/Icon';
 import { getIconFromObjectType } from '~shared/helpers/get-icon-from-object-type.ts';
@@ -75,13 +75,12 @@ export const BlockHeroCarouselInactiveSlide: FunctionComponent<
 
 	return (
 		<div className="c-block-hero-carousel__carousel-slide-image">
-			{imageSrc && (
-				<Image
-					src={imageSrc}
-					alt={item.name}
-					className="c-block-hero-carousel__carousel-slide-image-media"
-				/>
-			)}
+			<ImageOrAudioWaveForm
+				imageSrc={imageSrc}
+				imageAlt={item.name}
+				backgroundColor={item.backgroundColor}
+				className="c-block-hero-carousel__carousel-slide-image-media"
+			/>
 			{formatIcon}
 		</div>
 	);

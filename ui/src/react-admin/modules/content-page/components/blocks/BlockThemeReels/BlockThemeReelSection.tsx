@@ -1,5 +1,5 @@
 import { Button } from '@meemoo/react-components';
-import { Image, LinkTarget } from '@viaa/avo2-components';
+import { LinkTarget } from '@viaa/avo2-components';
 import { AvoCoreContentPickerType } from '@viaa/avo2-types';
 import clsx from 'clsx';
 import React, { type FunctionComponent, type ReactNode, useMemo, useState } from 'react';
@@ -10,7 +10,9 @@ import { useGetThemeWithObjects } from '~content-blocks/BlockThemeReels/hooks/us
 import { AdminConfigManager } from '~core/config';
 import { AdminCoreIconName } from '~core/config/config.types';
 import { CarouselButtons } from '~modules/content-page/components/CarouselButtons/CarouselButtons.tsx';
+import { ImageOrAudioWaveForm } from '~modules/content-page/components/ImageOrAudioWaveForm/ImageOrAudioWaveForm.tsx';
 import { getRandomTertiaryBackgroundColor } from '~modules/content-page/helpers/get-random-tertiary-background-color.ts';
+import type { Color } from '~modules/content-page/types/content-block.types.ts';
 import type { DefaultComponentProps } from '~modules/shared/types/components';
 import { App, Locale } from '~modules/translations/translations.core.types.ts';
 import { Icon } from '~shared/components/Icon';
@@ -47,6 +49,16 @@ export const BlockThemeReelSection: FunctionComponent<BlockThemeReelSectionProps
 	// Picked once per mount so it stays stable while the carousel is scrolled.
 	const ctaBackgroundColor = useMemo(() => getRandomTertiaryBackgroundColor(), []);
 
+	// Each object tile gets its own random tertiary color for its wave form background, picked
+	// once when the theme's objects come in so it stays stable while the carousel is scrolled.
+	// One color per position (matched up by index below) rather than a map keyed by object id:
+	// the same object can in principle appear more than once, which an id-keyed map would
+	// collapse into a shared color.
+	const objectBackgroundColors = useMemo(
+		() => (theme?.ieObjects ?? []).map(() => getRandomTertiaryBackgroundColor()),
+		[theme?.ieObjects]
+	);
+
 	if (!theme) {
 		return null;
 	}
@@ -67,16 +79,18 @@ export const BlockThemeReelSection: FunctionComponent<BlockThemeReelSectionProps
 		title: string,
 		description: string,
 		className?: string,
-		format?: IeObjectType
+		format?: IeObjectType,
+		backgroundColor: Color = ctaBackgroundColor
 	) => {
 		return (
 			<>
 				{image ? (
-					<Image
-						src={image}
-						alt={imageAlt || description}
+					<ImageOrAudioWaveForm
+						imageSrc={image}
+						imageAlt={imageAlt || description}
+						backgroundColor={backgroundColor}
+						size="large"
 						className={clsx('c-block-theme-reels-section__slide-image', className)}
-						loading="lazy"
 					/>
 				) : (
 					<div
@@ -188,7 +202,7 @@ export const BlockThemeReelSection: FunctionComponent<BlockThemeReelSectionProps
 					</SwiperSlide>
 				)}
 				{theme.ieObjects.map(
-					({ id, format, maintainerName, schemaIdentifier, thumbnailUrl, name }) => {
+					({ id, format, maintainerName, schemaIdentifier, thumbnailUrl, name }, index) => {
 						const componentClassName = clsx('c-block-theme-reels-section__slide');
 						return (
 							<SwiperSlide
@@ -208,7 +222,8 @@ export const BlockThemeReelSection: FunctionComponent<BlockThemeReelSectionProps
 											name,
 											maintainerName,
 											`c-block-theme-reels-section__slide-image--format-${format}`,
-											format
+											format,
+											objectBackgroundColors[index]
 										),
 										name,
 										componentClassName,
