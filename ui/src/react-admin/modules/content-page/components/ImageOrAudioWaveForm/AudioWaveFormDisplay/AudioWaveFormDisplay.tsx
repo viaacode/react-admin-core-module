@@ -4,6 +4,7 @@ import React from 'react';
 import type { DefaultComponentProps } from '~modules/shared/types/components';
 
 import './AudioWaveFormDisplay.scss';
+import { Color } from '~modules/content-page/types/content-block.types.ts';
 
 export type AudioWaveFormDisplaySize = 'small' | 'large';
 
@@ -84,13 +85,8 @@ const LARGE_WAVE_FORM_BARS: readonly WaveFormBar[] = buildWaveFormBars(
 );
 
 export interface AudioWaveFormDisplayProps extends DefaultComponentProps {
-	backgroundColor?: string;
-	waveColor?: string;
-	/** Color used for the portion of the wave form covered by `highlightPercentage`. */
-	highlightColor?: string;
-	/** How much of the wave form (from the left, 0-100) is rendered in `highlightColor`. */
-	highlightPercentage?: number;
-	/** `small` renders a single wave form, `large` mirrors it into two hills side by side. */
+	waveColor?: Color;
+	backgroundColor?: Color;
 	size?: AudioWaveFormDisplaySize;
 	ariaLabel?: string;
 }
@@ -98,10 +94,8 @@ export interface AudioWaveFormDisplayProps extends DefaultComponentProps {
 export const AudioWaveFormDisplay: FunctionComponent<AudioWaveFormDisplayProps> = ({
 	className,
 	ariaLabel,
+	waveColor = Color.White,
 	backgroundColor,
-	waveColor,
-	highlightColor,
-	highlightPercentage = 0,
 	size = 'small',
 }): ReactElement => {
 	const bars = size === 'large' ? LARGE_WAVE_FORM_BARS : SMALL_WAVE_FORM_BARS;
@@ -110,20 +104,11 @@ export const AudioWaveFormDisplay: FunctionComponent<AudioWaveFormDisplayProps> 
 		WAVE_FORM_VIEW_BOX_HEIGHT
 	);
 
-	const clampedPercentage = Math.min(100, Math.max(0, highlightPercentage));
-	const highlightedBarCount = highlightColor
-		? Math.round((clampedPercentage / 100) * bars.length)
-		: 0;
-
 	return (
 		<div
 			role="img"
 			aria-label={ariaLabel}
-			className={clsx(
-				'c-audio-wave-form-display',
-				`c-audio-wave-form-display--${size}`,
-				className
-			)}
+			className={clsx('c-audio-wave-form-display', `c-audio-wave-form-display--${size}`, className)}
 			style={
 				{
 					'--c-audio-wave-form-display-bg': backgroundColor,
@@ -131,33 +116,32 @@ export const AudioWaveFormDisplay: FunctionComponent<AudioWaveFormDisplayProps> 
 				} as CSSProperties
 			}
 		>
-			<svg
-				className="c-audio-wave-form-display__svg"
-				viewBox={viewBox}
-				preserveAspectRatio="xMidYMid meet"
-				aria-hidden="true"
-			>
-				{bars.map((bar, index) => (
-					<line
-						// biome-ignore lint/suspicious/noArrayIndexKey: decorative, no identity of its own
-						key={index}
-						className="c-audio-wave-form-display__bar"
-						x1={bar.x}
-						x2={bar.x}
-						y1={WAVE_FORM_CENTER_Y - bar.halfHeight}
-						y2={WAVE_FORM_CENTER_Y + bar.halfHeight}
-						strokeWidth={WAVE_FORM_STROKE_WIDTH}
-						strokeLinecap="round"
-						style={
-							index < highlightedBarCount
-								? ({
-										'--c-audio-wave-form-display-bar-color': highlightColor,
-									} as CSSProperties)
-								: undefined
-						}
-					/>
-				))}
-			</svg>
+			{/* A plain box around the svg, rather than putting the class consumers hook a hover-zoom
+			transform onto directly on the svg: CSS transitions on an <svg> element's own `transform`
+			don't animate smoothly in every browser (the scale snaps instead of tweening), where a
+			transform on an ordinary HTML element -- exactly what an <img> is -- always does. */}
+			<div className="c-audio-wave-form-display__scaler">
+				<svg
+					className="c-audio-wave-form-display__svg"
+					viewBox={viewBox}
+					preserveAspectRatio="xMidYMid meet"
+					aria-hidden="true"
+				>
+					{bars.map((bar, index) => (
+						<line
+							// biome-ignore lint/suspicious/noArrayIndexKey: decorative, no identity of its own
+							key={index}
+							className="c-audio-wave-form-display__bar"
+							x1={bar.x}
+							x2={bar.x}
+							y1={WAVE_FORM_CENTER_Y - bar.halfHeight}
+							y2={WAVE_FORM_CENTER_Y + bar.halfHeight}
+							strokeWidth={WAVE_FORM_STROKE_WIDTH}
+							strokeLinecap="round"
+						/>
+					))}
+				</svg>
+			</div>
 		</div>
 	);
 };

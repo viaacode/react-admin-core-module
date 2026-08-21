@@ -7,8 +7,7 @@ import {
 	type AudioWaveFormDisplayProps,
 } from './AudioWaveFormDisplay/AudioWaveFormDisplay.tsx';
 
-export interface ImageOrAudioWaveFormProps
-	extends Omit<AudioWaveFormDisplayProps, 'highlightPercentage' | 'highlightColor' | 'ariaLabel'> {
+export interface ImageOrAudioWaveFormProps extends Omit<AudioWaveFormDisplayProps, 'ariaLabel'> {
 	imageSrc?: string;
 	imageAlt: string;
 }
@@ -17,8 +16,8 @@ export const ImageOrAudioWaveForm: FunctionComponent<ImageOrAudioWaveFormProps> 
 	className,
 	imageSrc,
 	imageAlt,
-	backgroundColor,
 	waveColor,
+	backgroundColor,
 	size = 'small',
 }): ReactElement => {
 	if (!imageSrc) {

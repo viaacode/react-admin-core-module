@@ -1,9 +1,17 @@
 import { Button } from '@meemoo/react-components';
 import { AvoCoreContentPickerType } from '@viaa/avo2-types';
 import clsx from 'clsx';
-import type { FunctionComponent, ReactElement, ReactNode } from 'react';
-import { useEffect, useState } from 'react';
+import React, {
+	type FunctionComponent,
+	type ReactElement,
+	type ReactNode,
+	useEffect,
+	useMemo,
+	useState,
+} from 'react';
 import { BlockHeading } from '~content-blocks/BlockHeading';
+import { getRandomTertiaryBackgroundColor } from '~modules/content-page/helpers/get-random-tertiary-background-color.ts';
+import type { Color } from '~modules/content-page/types/content-block.types.ts';
 import { IeObjectsService } from '~modules/ie-objects/ie-objects.service.ts';
 import { SmartLink } from '~modules/shared/components/SmartLink/SmartLink';
 import { Icon } from '~shared/components/Icon';
@@ -15,6 +23,7 @@ import { HET_ARCHIEF } from '~shared/types';
 import type { BlockObjectsGridProps, ObjectsGridItem, OrderedTile } from './BlockObjectsGrid.types';
 import { useGetObjectsGridItems } from './hooks/useGetObjectsGridItems';
 import './BlockObjectsGrid.scss';
+import { ImageOrAudioWaveForm } from '~modules/content-page/components/ImageOrAudioWaveForm';
 
 // 4 rows of 4 items per row when there are no fixed items present
 // https://meemoo.atlassian.net/wiki/spaces/HA2/pages/6217171023/FA+Objecten+grid#Gedrag-van-het-contentblok
@@ -34,6 +43,18 @@ export const BlockObjectsGrid: FunctionComponent<BlockObjectsGridProps> = ({
 		searchQuery,
 		fixedItems,
 		OBJECT_GRID_MAX_ITEMS - fixedItems.length * 2
+	);
+
+	// Each tile gets its own random tertiary color for its wave-form background (audio items
+	// with no thumbnail image), picked once per fetched result set so it stays stable across
+	// re-renders (e.g. a window resize recalculating the visible columns). One color per tile
+	// position (matched up by index below) rather than a map keyed by schemaIdentifier: the same
+	// object can appear more than once (e.g. pinned as a fixed position and also returned among
+	// the random results), which a key derived from the item would collapse into a shared color.
+	const totalItemCount = (data?.fixedObjects?.length ?? 0) + (data?.objects?.length ?? 0);
+	const tileBackgroundColors = useMemo(
+		() => Array.from({ length: totalItemCount }, () => getRandomTertiaryBackgroundColor()),
+		[totalItemCount]
 	);
 
 	// Tracks viewport width so the tablet/mobile breakpoints can hide tiles that would
@@ -115,7 +136,11 @@ export const BlockObjectsGrid: FunctionComponent<BlockObjectsGridProps> = ({
 		}
 	};
 
-	const renderTile = (item: ObjectsGridItem, isFixed: boolean): ReactElement => {
+	const renderTile = (
+		item: ObjectsGridItem,
+		isFixed: boolean,
+		tileBackgroundColor?: Color
+	): ReactElement => {
 		// Same signal the search page uses to decide between the plain and the struck-through
 		// ("no-…") type icon: the search proxy only resolves a thumbnail for objects whose
 		// essence the current user may see.
@@ -149,7 +174,13 @@ export const BlockObjectsGrid: FunctionComponent<BlockObjectsGridProps> = ({
 						)}
 					>
 						{item.thumbnailUrl ? (
-							<img className={'c-block-objects-grid__tile-image'} src={item.thumbnailUrl} alt="" />
+							<ImageOrAudioWaveForm
+								imageSrc={item.thumbnailUrl}
+								imageAlt={item.name}
+								backgroundColor={tileBackgroundColor}
+								size={isFixed ? 'large' : 'small'}
+								className="c-block-objects-grid__tile-image"
+							/>
 						) : (
 							// No thumbnail (e.g. audio): decorative placeholder, the link already carries the name.
 							<span className="c-block-objects-grid__tile-placeholder" aria-hidden="true">
@@ -235,7 +266,9 @@ export const BlockObjectsGrid: FunctionComponent<BlockObjectsGridProps> = ({
 
 			{hasObjects && (
 				<ul className="c-block-objects-grid__grid">
-					{visibleTiles.map(({ item, isFixed }) => renderTile(item, isFixed))}
+					{visibleTiles.map(({ item, isFixed }, index) =>
+						renderTile(item, isFixed, tileBackgroundColors[index])
+					)}
 				</ul>
 			)}
 

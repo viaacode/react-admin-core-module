@@ -1,7 +1,7 @@
 import { cleanup, render } from '@testing-library/react';
 import React from 'react';
 import { afterEach, describe, expect, it } from 'vitest';
-
+import { Color } from '~modules/content-page/types/content-block.types.ts';
 import { AudioWaveFormDisplay } from './AudioWaveFormDisplay';
 
 afterEach(() => {
@@ -23,28 +23,27 @@ describe('<AudioWaveFormDisplay />', () => {
 		expect(largeBarCount).toBe(smallBarCount * 2);
 	});
 
-	it('should only color bars up to the given highlight percentage', () => {
-		const { container } = render(
-			<AudioWaveFormDisplay highlightColor="#ff0000" highlightPercentage={50} />
+	it('should default the wave color to white', () => {
+		const { container } = render(<AudioWaveFormDisplay />);
+		const outer = container.querySelector('.c-audio-wave-form-display') as HTMLElement;
+
+		expect(outer.style.getPropertyValue('--c-audio-wave-form-display-wave-color')).toBe(
+			Color.White
 		);
-		const bars = container.querySelectorAll('.c-audio-wave-form-display__bar');
-
-		const highlightedCount = Array.from(bars).filter(
-			(bar) => (bar as HTMLElement).style.getPropertyValue('--c-audio-wave-form-display-bar-color')
-		).length;
-
-		expect(highlightedCount).toBe(Math.round(bars.length / 2));
 	});
 
-	it('should not color any bar when no highlight color is given', () => {
-		const { container } = render(<AudioWaveFormDisplay highlightPercentage={100} />);
-		const bars = container.querySelectorAll('.c-audio-wave-form-display__bar');
+	it('should pass the given wave and background colors through as CSS variables', () => {
+		const { container } = render(
+			<AudioWaveFormDisplay waveColor={Color.Teal} backgroundColor={Color.NightBlue} />
+		);
+		const outer = container.querySelector('.c-audio-wave-form-display') as HTMLElement;
 
-		bars.forEach((bar) => {
-			expect(
-				(bar as HTMLElement).style.getPropertyValue('--c-audio-wave-form-display-bar-color')
-			).toBe('');
-		});
+		expect(outer.style.getPropertyValue('--c-audio-wave-form-display-wave-color')).toBe(
+			Color.Teal
+		);
+		expect(outer.style.getPropertyValue('--c-audio-wave-form-display-bg')).toBe(
+			Color.NightBlue
+		);
 	});
 
 	it('should pass the given className through', () => {
