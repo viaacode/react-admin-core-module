@@ -1,10 +1,10 @@
 import clsx from 'clsx';
 import type { CSSProperties, FunctionComponent, ReactElement } from 'react';
 import React from 'react';
+import { Color } from '~modules/content-page/types/content-block.types.ts';
 import type { DefaultComponentProps } from '~modules/shared/types/components';
 
 import './AudioWaveFormDisplay.scss';
-import { Color } from '~modules/content-page/types/content-block.types.ts';
 
 export type AudioWaveFormDisplaySize = 'small' | 'large';
 
