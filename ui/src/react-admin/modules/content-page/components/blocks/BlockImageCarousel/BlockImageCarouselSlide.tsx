@@ -77,7 +77,7 @@ export const ImageCarouselSlide: FunctionComponent<ImageCarouselSlideProps> = ({
 			</div>
 			{imageWidth !== undefined && (
 				<CopyrightAttribution
-					className={'c-block-image-carousel__slide-image-attribution'}
+					className="c-block-image-carousel__slide-image-attribution"
 					title={copyrightTitle}
 					text={copyrightText}
 					showIcon={copyrightIconVisible}

@@ -34,18 +34,18 @@ export const BlockImageCarousel: FunctionComponent<BlockImageCarouselProps> = ({
 	return (
 		<div className={clsx('c-block-image-carousel')}>
 			<div className={'c-block-image-carousel__header'}>
-				<BlockHeading className={clsx('c-block-image-carousel__header-title')} type={titleType}>
+				<BlockHeading className="c-block-image-carousel__header-title" type={titleType}>
 					{title}
 				</BlockHeading>
 
-				<div className={'c-block-image-carousel__header-actions'}>
+				<div className="c-block-image-carousel__header-actions">
 					<CarouselButtons controlledSwiper={controlledSwiper} />
 				</div>
 			</div>
 			<Swiper
 				modules={[Controller]}
 				controller={{ control: controlledSwiper }}
-				className={'c-block-image-carousel__wrapper'}
+				className="c-block-image-carousel__wrapper"
 				slidesPerView="auto"
 				spaceBetween={16}
 				onSwiper={setControlledSwiper}
