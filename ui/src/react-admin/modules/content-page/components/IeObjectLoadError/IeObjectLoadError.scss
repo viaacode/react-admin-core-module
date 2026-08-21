@@ -36,6 +36,12 @@
 		&--collapsed {
 			grid-template-rows: 0fr;
 			animation: none;
+
+			// The gap above the message is padding on the item, which a zero-height row still has
+			// to make room for -- it goes along with the collapse.
+			.c-ie-object-load-error__text {
+				padding-top: 0;
+			}
 		}
 	}
 
