@@ -10,57 +10,18 @@ import React, {
 import type { TitleWithParallaxBlockComponentState } from '~modules/content-page/types/content-block.types';
 import type { DefaultComponentProps } from '~modules/shared/types/components';
 
+import {
+	computeLineBoxes,
+	type LineBox,
+	readParallaxSpeed,
+	watchReducedMotion,
+} from './BlockTitleWithParallax.helpers';
+
 import './BlockTitleWithParallax.scss';
 
 export interface BlockTitleWithParallaxProps
 	extends TitleWithParallaxBlockComponentState,
 		DefaultComponentProps {}
-
-// Must match &__image's height: 150% in the .scss (50% oversize = the max offset below).
-const PARALLAX_SPEED = 0.5;
-
-const prefersReducedMotion = (): boolean =>
-	typeof window !== 'undefined' &&
-	window.matchMedia?.('(prefers-reduced-motion: reduce)').matches === true;
-
-interface LineBox {
-	top: number;
-	left: number;
-	width: number;
-	height: number;
-}
-
-const rootFontSizePx = (): number =>
-	Number.parseFloat(getComputedStyle(document.documentElement).fontSize) || 16;
-
-// --h-pad (see .scss) is a plain rem number with no layout effect of its own.
-const readPaddingPx = (el: Element, customProperty: string): number =>
-	(Number.parseFloat(getComputedStyle(el).getPropertyValue(customProperty)) || 0) *
-	rootFontSizePx();
-
-// One decorative highlight box per rendered line of textEl, positioned relative to wrapperEl.
-const computeLineBoxes = (wrapperEl: HTMLElement, textEl: HTMLElement): LineBox[] => {
-	const wrapperRect = wrapperEl.getBoundingClientRect();
-	const hPad = readPaddingPx(wrapperEl, '--h-pad');
-	const rects = Array.from(textEl.getClientRects());
-	const lastIndex = rects.length - 1;
-
-	return rects.map((rect, index) => {
-		const isFirst = index === 0;
-		const isLast = index === lastIndex;
-		// A loaded font's ascent/descent can exceed the (deliberately tight) line-height, which
-		// inflates rect.top/bottom beyond the real spacing between lines - so internal boundaries
-		// use the next line's own top, and the outer edges use wrapperEl's real box instead.
-		const rawTop = isFirst ? wrapperRect.top : rect.top;
-		const rawBottom = isLast ? wrapperRect.bottom : rects[index + 1].top;
-		const top = rawTop - wrapperRect.top;
-		const bottom = rawBottom - wrapperRect.top;
-		const left = rect.left - wrapperRect.left - hPad;
-		const right = rect.right - wrapperRect.left + hPad;
-
-		return { top, left, width: right - left, height: bottom - top };
-	});
-};
 
 export const BlockTitleWithParallax: FunctionComponent<BlockTitleWithParallaxProps> = ({
 	className,
@@ -87,18 +48,24 @@ export const BlockTitleWithParallax: FunctionComponent<BlockTitleWithParallaxPro
 			return undefined;
 		}
 
-		let rafId: number;
+		const speed = readParallaxSpeed(img);
+		let reducedMotion = false;
+		const unwatchReducedMotion = watchReducedMotion((value) => {
+			reducedMotion = value;
+		});
+
+		let rafId: number | null = null;
 		let lastOffset: number | null = null;
 
 		const tick = () => {
-			if (prefersReducedMotion()) {
+			if (reducedMotion) {
 				if (lastOffset !== null) {
 					img.style.transform = '';
 					lastOffset = null;
 				}
 			} else {
 				const rect = root.getBoundingClientRect();
-				const offset = Math.max(-rect.height * PARALLAX_SPEED, Math.min(0, rect.top * PARALLAX_SPEED));
+				const offset = Math.max(-rect.height * speed, Math.min(0, rect.top * speed));
 				if (offset !== lastOffset) {
 					img.style.transform = `translate3d(0, ${offset}px, 0)`;
 					lastOffset = offset;
@@ -107,10 +74,30 @@ export const BlockTitleWithParallax: FunctionComponent<BlockTitleWithParallaxPro
 			rafId = window.requestAnimationFrame(tick);
 		};
 
-		rafId = window.requestAnimationFrame(tick);
+		const start = () => {
+			if (rafId === null) {
+				rafId = window.requestAnimationFrame(tick);
+			}
+		};
+		const stop = () => {
+			if (rafId !== null) {
+				window.cancelAnimationFrame(rafId);
+				rafId = null;
+			}
+		};
+
+		// Only animate while the block is (near) the viewport - a page with several of these
+		// blocks would otherwise keep every single one polling forever.
+		const intersectionObserver = new IntersectionObserver(
+			([entry]) => (entry.isIntersecting ? start() : stop()),
+			{ rootMargin: '50% 0px' }
+		);
+		intersectionObserver.observe(root);
 
 		return () => {
-			window.cancelAnimationFrame(rafId);
+			intersectionObserver.disconnect();
+			stop();
+			unwatchReducedMotion();
 		};
 	}, [image]);
 
@@ -119,12 +106,18 @@ export const BlockTitleWithParallax: FunctionComponent<BlockTitleWithParallaxPro
 		const titleEl = titleRef.current;
 		const titleTextEl = titleTextRef.current;
 		if (!titleEl || !titleTextEl) {
+			// eslint-disable-next-line react-hooks/set-state-in-effect
 			setTitleBoxes([]);
 			setSubtitleBoxes([]);
 			return undefined;
 		}
 
+		let cancelled = false;
+
 		const measure = () => {
+			if (cancelled) {
+				return;
+			}
 			setTitleBoxes(computeLineBoxes(titleEl, titleTextEl));
 
 			const subtitleEl = subtitleRef.current;
@@ -145,6 +138,7 @@ export const BlockTitleWithParallax: FunctionComponent<BlockTitleWithParallaxPro
 		document.fonts?.ready?.then(measure);
 
 		return () => {
+			cancelled = true;
 			resizeObserver.disconnect();
 		};
 	}, [title, subtitle]);
@@ -167,7 +161,7 @@ export const BlockTitleWithParallax: FunctionComponent<BlockTitleWithParallaxPro
 					ref={imageRef}
 					className="c-block-title-with-parallax__image"
 					aria-hidden="true"
-					style={{ backgroundImage: `url(${image})` }}
+					style={{ backgroundImage: `url("${image}")` }}
 				/>
 			)}
 			<div className="c-block-title-with-parallax__content">
