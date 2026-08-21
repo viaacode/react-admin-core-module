@@ -60,7 +60,7 @@ export const TITLE_WITH_PARALLAX_CONFIG = (position = 0): ContentBlockConfig => 
 				tText('titel is verplicht', undefined, [HET_ARCHIEF])
 			),
 			subtitle: TEXT_FIELD({
-				label: tText('title', undefined, [HET_ARCHIEF]),
+				label: tText('subtitle', undefined, [HET_ARCHIEF]),
 				isVisible: (_config, formGroupState) =>
 					(formGroupState as TitleWithParallaxBlockComponentState).visualType === 'BIG',
 			}),
