@@ -32,14 +32,11 @@ export const BlockHighlightText: FunctionComponent<BlockHighlightTextProps> = ({
 		highlightColor === CustomBackground.MeemooLogo
 			? Color.Transparent
 			: ((ColorSelectGradientColors as Record<string, string>)[highlightColor] ?? highlightColor);
-	// Text colors follow the actual fill behind the content: gradients use the white content box,
-	// while the transparent meemoo logo variant keeps the outer block's inherited text color.
+	// Text colors follow the fill behind the content. Gradients and the meemoo logo both render a
+	// white content box, so both take the text colors for white.
 	// https://meemoo.atlassian.net/browse/ARC-3848
-	const textBoxBackground = isGradient
-		? Color.White
-		: highlightColor === CustomBackground.MeemooLogo
-			? Color.Transparent
-			: highlightColor;
+	const textBoxBackground =
+		isGradient || highlightColor === CustomBackground.MeemooLogo ? Color.White : highlightColor;
 	const textColorVariables = getBackgroundTextColorVariables(textBoxBackground);
 	const hasTextColors = Object.keys(textColorVariables).length > 0;
 
