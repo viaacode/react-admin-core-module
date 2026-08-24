@@ -19,7 +19,6 @@ import {
 
 export const INITIAL_MEDIA_PLAYER_COMPONENTS_STATE = (): MediaPlayerBlockComponentState => ({
 	title: '',
-	autoplay: false,
 });
 
 export const INITIAL_MEDIA_PLAYER_BLOCK_STATE = (): DefaultContentBlockState =>
@@ -89,14 +88,6 @@ export const MEDIA_PLAYER_BLOCK_CONFIG = (position = 0): ContentBlockConfig => (
 				editorProps: {
 					options: GET_MEDIA_PLAYER_WIDTH_OPTIONS(),
 				},
-			},
-			autoplay: {
-				editorType: ContentBlockEditor.Checkbox,
-				editorProps: {
-					label: tText(
-						'admin/content-block/helpers/generators/media-player___automatisch-afspelen'
-					),
-				} as CheckboxProps,
 			},
 		},
 	},
