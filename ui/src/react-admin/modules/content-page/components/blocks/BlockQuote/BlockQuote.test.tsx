@@ -3,7 +3,7 @@ import { loremIpsum } from 'lorem-ipsum';
 import React from 'react';
 import { afterEach, describe, it } from 'vitest';
 
-import { BlockAvoQuote } from './BlockAvoQuote';
+import { BlockQuote } from './BlockQuote.tsx';
 
 const customClass = 'c-block-custom';
 const quote = loremIpsum({ count: 10 });
@@ -12,7 +12,7 @@ const authorName = loremIpsum({ count: 2 });
 const authorInitials = 'AE';
 
 const quoteExample = (
-	<BlockAvoQuote
+	<BlockQuote
 		className={customClass}
 		quote={quote}
 		authorImage={authorImage}
@@ -25,7 +25,7 @@ afterEach(() => {
 	cleanup();
 });
 
-describe('<BlockAvoQuote />', () => {
+describe('<BlockQuote />', () => {
 	it('Should be able to render', () => {
 		render(quoteExample);
 	});

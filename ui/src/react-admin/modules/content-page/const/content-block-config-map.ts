@@ -1,7 +1,6 @@
 import { ANCHOR_LINKS_BLOCK_CONFIG } from '~content-blocks/anchor-links.ts';
 import { AVO_HERO_BLOCK_CONFIG } from '~content-blocks/BlockAvoHero';
 import { AVO_IMAGE_TEXT_BACKGROUND_BLOCK_CONFIG } from '~content-blocks/BlockAvoImageTextBackground';
-import { AVO_QUOTE_BLOCK_CONFIG } from '~content-blocks/BlockAvoQuote';
 import { CONTENT_BREADCRUMBS_CONFIG } from '~content-blocks/BlockBreadcrumbs';
 import { BUTTONS_BLOCK_CONFIG } from '~content-blocks/BlockButtons';
 import { CARDS_WITHOUT_DESCRIPTION_BLOCK_CONFIG } from '~content-blocks/BlockCardsWithoutDescription';
@@ -35,6 +34,7 @@ import { OBJECTS_GRID_BLOCK_CONFIG } from '~content-blocks/BlockObjectsGrid';
 import { OVERVIEW_NEWSPAPER_TITLES_BLOCK_CONFIG } from '~content-blocks/BlockOverviewNewspaperTitles';
 import { OVERVIEW_THEMES_BLOCK_CONFIG } from '~content-blocks/BlockOverviewThemes';
 import { OVERVIEW_WITH_CAROUSEL_CONFIG } from '~content-blocks/BlockOverviewWithCarousel';
+import { QUOTE_BLOCK_CONFIG } from '~content-blocks/BlockQuote';
 import {
 	RICH_TEXT_BLOCK_CONFIG,
 	RICH_TEXT_TWO_COLUMNS_BLOCK_CONFIG,
@@ -74,7 +74,7 @@ export const CONTENT_BLOCK_CONFIG_MAP: Record<
 	[ContentBlockType.MediaGrid]: MEDIA_GRID_BLOCK_CONFIG,
 	[ContentBlockType.MediaPlayer]: MEDIA_PLAYER_BLOCK_CONFIG,
 	[ContentBlockType.MediaPlayerTitleTextButton]: MEDIA_PLAYER_TITLE_TEXT_BUTTON_BLOCK_CONFIG,
-	[ContentBlockType.AvoQuote]: AVO_QUOTE_BLOCK_CONFIG,
+	[ContentBlockType.Quote]: QUOTE_BLOCK_CONFIG,
 	[ContentBlockType.HetArchiefQuote]: HET_ARCHIEF_QUOTE_BLOCK_CONFIG,
 	[ContentBlockType.PageOverview]: PAGE_OVERVIEW_BLOCK_CONFIG,
 	[ContentBlockType.ProjectsSpotlight]: PROJECTS_SPOTLIGHT_BLOCK_CONFIG,
