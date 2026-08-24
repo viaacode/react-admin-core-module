@@ -49,3 +49,42 @@ describe('<BlockTimeline /> text colors', () => {
 		);
 	});
 });
+
+describe('<BlockTimeline /> sorting', () => {
+	const NODES = [
+		{ ...NODE, date: '2024-03-02', title: 'Middle' },
+		{ ...NODE, date: '2020-01-01', title: 'Oldest' },
+		{ ...NODE, date: '2026-05-01', title: 'Newest' },
+	];
+
+	const renderedTitles = (container: HTMLElement) =>
+		Array.from(container.querySelectorAll('.c-block-timeline__node-title')).map(
+			(node) => node.textContent
+		);
+
+	it('shows the most recent node first by default', () => {
+		// biome-ignore lint/suspicious/noExplicitAny: partial nodes are enough for an order assertion
+		const { container } = render(<BlockTimeline elements={NODES as any} />);
+
+		expect(renderedTitles(container)).toEqual(['Newest', 'Middle', 'Oldest']);
+	});
+
+	it('shows the oldest node first when sorted ascending', () => {
+		// biome-ignore lint/suspicious/noExplicitAny: partial nodes are enough for an order assertion
+		const { container } = render(<BlockTimeline elements={NODES as any} sortOrder="ASC" />);
+
+		expect(renderedTitles(container)).toEqual(['Oldest', 'Middle', 'Newest']);
+	});
+
+	it('keeps nodes without a usable date at the end, in their configured order', () => {
+		const nodes = [
+			{ ...NODE, date: '', title: 'No date' },
+			{ ...NODE, date: '2020-01-01', title: 'Oldest' },
+			{ ...NODE, date: '2026-05-01', title: 'Newest' },
+		];
+		// biome-ignore lint/suspicious/noExplicitAny: partial nodes are enough for an order assertion
+		const { container } = render(<BlockTimeline elements={nodes as any} sortOrder="ASC" />);
+
+		expect(renderedTitles(container)).toEqual(['Oldest', 'Newest', 'No date']);
+	});
+});

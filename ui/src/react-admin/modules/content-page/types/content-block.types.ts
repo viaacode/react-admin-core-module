@@ -689,7 +689,12 @@ export interface TimelineNodeBlockComponentState extends MediaItemComponentState
 	backgroundColor?: Color;
 }
 
-export type TimelineBlockState = DefaultContentBlockState;
+export type TimelineSortOrder = 'ASC' | 'DESC';
+
+export type TimelineBlockState = DefaultContentBlockState & {
+	/** Chronological order of the nodes. Descending (most recent first) when unset. */
+	sortOrder?: TimelineSortOrder;
+};
 
 export enum TitleWithParallaxVisualisationOption {
 	BIG = 'BIG',

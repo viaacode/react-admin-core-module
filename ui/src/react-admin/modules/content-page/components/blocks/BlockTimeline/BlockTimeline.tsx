@@ -8,7 +8,10 @@ import { IeObjectFlowPlayerWrapper } from '~modules/content-page/components/IeOb
 import { IeObjectLoadError } from '~modules/content-page/components/IeObjectLoadError/IeObjectLoadError.tsx';
 import { IeObjectMetadata } from '~modules/content-page/components/IeObjectMetadata/IeObjectMetadata.tsx';
 import { useGetIeObjectsPlayableDisplayData } from '~modules/content-page/hooks/useGetIeObjectsPlayableDisplayData.ts';
-import type { TimelineNodeBlockComponentState } from '~modules/content-page/types/content-block.types';
+import type {
+	TimelineNodeBlockComponentState,
+	TimelineSortOrder,
+} from '~modules/content-page/types/content-block.types';
 import { Color } from '~modules/content-page/types/content-block.types';
 import { CopyrightAttribution } from '~shared/components/CopyrightAttribution';
 import Html from '~shared/components/Html/Html';
@@ -26,6 +29,8 @@ export interface BlockTimelineProps extends DefaultComponentProps {
 	/** Id of the content block, added by the content block renderer. Empty for an unsaved block. */
 	blockId?: string;
 	elements: TimelineNodeBlockComponentState[];
+	/** Chronological order of the nodes. Descending (most recent first) when unset. */
+	sortOrder?: TimelineSortOrder;
 }
 
 // The timeline starts and ends with the same fixed circle/rectangle/circle cluster of markers.
@@ -42,18 +47,33 @@ export const BlockTimeline: FunctionComponent<BlockTimelineProps> = ({
 	className,
 	blockId,
 	elements = [],
+	sortOrder = 'DESC',
 }): ReactElement => {
 	const containerRef = useRef<HTMLDivElement>(null);
 	const locale = AdminConfigManager.getConfig().locale;
+
+	// The nodes are shown in chronological order, regardless of the order they were configured in.
+	// Nodes without a usable date keep their configured order at the end of the timeline.
+	const sortedElements = useMemo(() => {
+		const direction = sortOrder === 'ASC' ? 1 : -1;
+		return [...elements].sort((left, right) => {
+			const leftTime = new Date(left.date).getTime();
+			const rightTime = new Date(right.date).getTime();
+			if (Number.isNaN(leftTime) || Number.isNaN(rightTime)) {
+				return Number.isNaN(leftTime) ? (Number.isNaN(rightTime) ? 0 : 1) : -1;
+			}
+			return (leftTime - rightTime) * direction;
+		});
+	}, [elements, sortOrder]);
 
 	// While this block is being put together in the editor, it has no id yet, so its nodes go along
 	// for the proxy to resolve. One entry per node, so the response stays aligned.
 	const unsavedObjects = useMemo(
 		() =>
-			elements.map((node) => ({
+			sortedElements.map((node) => ({
 				schemaIdentifier: node.visualType === 'OBJECT' ? String(node.mediaItem?.value || '') : '',
 			})),
-		[elements]
+		[sortedElements]
 	);
 
 	// Resolve all objects of the timeline in a single request. Which objects those are is read
@@ -70,8 +90,9 @@ export const BlockTimeline: FunctionComponent<BlockTimelineProps> = ({
 		<div className={clsx('c-block-timeline', className)} ref={containerRef}>
 			<ol className="c-block-timeline__list">
 				<TimelineCap position="start" />
-				{elements.map((node, index) => {
-					const showYear = index === 0 || getYear(node.date) !== getYear(elements[index - 1].date);
+				{sortedElements.map((node, index) => {
+					const showYear =
+						index === 0 || getYear(node.date) !== getYear(sortedElements[index - 1].date);
 					const backgroundColor =
 						node.backgroundColor && node.backgroundColor !== Color.Transparent
 							? node.backgroundColor
@@ -208,7 +229,7 @@ export const BlockTimeline: FunctionComponent<BlockTimelineProps> = ({
 				})}
 				<TimelineCap position="end" />
 			</ol>
-			{elements.length > 0 && (
+			{sortedElements.length > 0 && (
 				<button type="button" className="c-block-timeline__back-to-top" onClick={scrollToTop}>
 					{tText(
 						'react-admin/modules/content-page/components/blocks/block-timeline/block-timeline___terug-naar-boven',

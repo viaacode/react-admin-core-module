@@ -11,6 +11,7 @@ import type {
 	TimelineBlockState,
 	TimelineNodeBlockComponentState,
 	TimelineNodeVisualType,
+	TimelineSortOrder,
 } from '../../../types/content-block.types';
 import { Color, ContentBlockEditor, ContentBlockType } from '../../../types/content-block.types';
 import {
@@ -49,6 +50,25 @@ const GET_TIMELINE_NODE_VISUAL_TYPE_OPTIONS = (): SelectOption<TimelineNodeVisua
 	},
 ];
 
+const GET_TIMELINE_SORT_ORDER_OPTIONS = (): SelectOption<TimelineSortOrder>[] => [
+	{
+		label: tText(
+			'react-admin/modules/content-page/components/blocks/block-timeline/block-timeline___aflopend-meest-recente-eerst',
+			{},
+			[HET_ARCHIEF]
+		),
+		value: 'DESC',
+	},
+	{
+		label: tText(
+			'react-admin/modules/content-page/components/blocks/block-timeline/block-timeline___oplopend-oudste-eerst',
+			{},
+			[HET_ARCHIEF]
+		),
+		value: 'ASC',
+	},
+];
+
 const visualTypeIsObject: ContentBlockField['isVisible'] = (_config, formGroupState) => {
 	return (formGroupState as TimelineNodeBlockComponentState).visualType === 'OBJECT';
 };
@@ -75,6 +95,7 @@ export const INITIAL_TIMELINE_COMPONENTS_STATE = (): TimelineNodeBlockComponentS
 
 export const INITIAL_TIMELINE_BLOCK_STATE = (): TimelineBlockState => ({
 	...BLOCK_STATE_DEFAULTS(),
+	sortOrder: 'DESC',
 });
 
 export const TIMELINE_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
@@ -217,6 +238,17 @@ export const TIMELINE_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 	block: {
 		state: INITIAL_TIMELINE_BLOCK_STATE(),
 		fields: {
+			sortOrder: {
+				label: tText(
+					'react-admin/modules/content-page/components/blocks/block-timeline/block-timeline___chronologische-sortering',
+					{},
+					[HET_ARCHIEF]
+				),
+				editorType: ContentBlockEditor.Select,
+				editorProps: {
+					options: GET_TIMELINE_SORT_ORDER_OPTIONS(),
+				},
+			},
 			...BLOCK_FIELD_DEFAULTS(),
 		},
 	},
