@@ -5,6 +5,7 @@
 
 $panel-padding: variables.$g-spacer-unit * 2;
 $half-gap: variables.$g-spacer-unit * 2;
+$image-min-height: variables.$g-spacer-unit * 12;
 
 .c-block-double-banner {
 	display: grid;
@@ -25,7 +26,6 @@ $half-gap: variables.$g-spacer-unit * 2;
 
 		@media (min-width: variables.$g-bp3) {
 			flex-direction: row;
-			min-height: 16rem;
 		}
 
 		&:hover .c-block-double-banner__image img {
@@ -105,7 +105,7 @@ $half-gap: variables.$g-spacer-unit * 2;
 		position: relative;
 		flex: 0 0 auto;
 		width: 100%;
-		height: 9.6rem;
+		height: $image-min-height;
 		overflow: hidden;
 
 		// Percentage radii would create an ellipse on this rectangular image. CSS clamps this
@@ -119,6 +119,7 @@ $half-gap: variables.$g-spacer-unit * 2;
 			width: auto;
 			height: auto;
 			min-width: 0;
+			min-height: $image-min-height;
 		}
 
 		img {

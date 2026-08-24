@@ -37,15 +37,17 @@ export const BlockDoubleBanner: FunctionComponent<BlockDoubleBannerProps> = ({
 				>
 					<span className="c-block-double-banner__label">{half.label}</span>
 					<span className="c-block-double-banner__actions" aria-hidden>
-						<span className="c-block-double-banner__icons">
-							{icons.map((icon, iconIndex) => (
-								<ContentPageIcon
-									key={`c-block-double-banner__icon-${index}-${iconIndex}-${icon}`}
-									className="c-block-double-banner__icon"
-									name={icon}
-								/>
-							))}
-						</span>
+						{icons.length > 0 && (
+							<span className="c-block-double-banner__icons">
+								{icons.map((icon, iconIndex) => (
+									<ContentPageIcon
+										key={`c-block-double-banner__icon-${index}-${iconIndex}-${icon}`}
+										className="c-block-double-banner__icon"
+										name={icon}
+									/>
+								))}
+							</span>
+						)}
 						<Icon
 							className="c-block-double-banner__arrow"
 							name={AdminCoreIconName.ArrowDownRight}
