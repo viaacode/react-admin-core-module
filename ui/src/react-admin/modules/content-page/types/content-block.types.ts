@@ -6,7 +6,7 @@ import type {
 	IconName,
 	SpacerOption,
 } from '@viaa/avo2-components';
-import type { AvoContentPageType } from '@viaa/avo2-types';
+import type { AvoContentPageType, AvoSearchOrderDirection } from '@viaa/avo2-types';
 import type { ReactNode } from 'react';
 import type { BlockAvoHeroProps } from '~content-blocks/BlockAvoHero/BlockAvoHero';
 import type { BlockBreadcrumbsProps } from '~content-blocks/BlockBreadcrumbs/BlockBreadcrumbs.types';
@@ -689,11 +689,9 @@ export interface TimelineNodeBlockComponentState extends MediaItemComponentState
 	backgroundColor?: Color;
 }
 
-export type TimelineSortOrder = 'ASC' | 'DESC';
-
 export type TimelineBlockState = DefaultContentBlockState & {
 	/** Chronological order of the nodes. Descending (most recent first) when unset. */
-	sortOrder?: TimelineSortOrder;
+	sortOrder?: AvoSearchOrderDirection;
 };
 
 export enum TitleWithParallaxVisualisationOption {

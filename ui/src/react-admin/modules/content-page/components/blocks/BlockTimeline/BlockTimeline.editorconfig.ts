@@ -1,4 +1,5 @@
 import type { SelectOption } from '@viaa/avo2-components';
+import { AvoSearchOrderDirection } from '@viaa/avo2-types';
 import { GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF } from '~modules/content-page/const/get-color-options';
 import { IE_OBJECT_WITH_SNIPPET_TIME_FIELDS } from '~modules/content-page/helpers/snippet-time-fields.ts';
 import type { FileUploadProps } from '~shared/components/FileUpload/FileUpload';
@@ -11,7 +12,6 @@ import type {
 	TimelineBlockState,
 	TimelineNodeBlockComponentState,
 	TimelineNodeVisualType,
-	TimelineSortOrder,
 } from '../../../types/content-block.types';
 import { Color, ContentBlockEditor, ContentBlockType } from '../../../types/content-block.types';
 import {
@@ -50,14 +50,14 @@ const GET_TIMELINE_NODE_VISUAL_TYPE_OPTIONS = (): SelectOption<TimelineNodeVisua
 	},
 ];
 
-const GET_TIMELINE_SORT_ORDER_OPTIONS = (): SelectOption<TimelineSortOrder>[] => [
+const GET_TIMELINE_SORT_ORDER_OPTIONS = (): SelectOption<AvoSearchOrderDirection>[] => [
 	{
 		label: tText(
 			'react-admin/modules/content-page/components/blocks/block-timeline/block-timeline___aflopend-meest-recente-eerst',
 			{},
 			[HET_ARCHIEF]
 		),
-		value: 'DESC',
+		value: AvoSearchOrderDirection.DESC,
 	},
 	{
 		label: tText(
@@ -65,7 +65,7 @@ const GET_TIMELINE_SORT_ORDER_OPTIONS = (): SelectOption<TimelineSortOrder>[] =>
 			{},
 			[HET_ARCHIEF]
 		),
-		value: 'ASC',
+		value: AvoSearchOrderDirection.ASC,
 	},
 ];
 
@@ -95,7 +95,7 @@ export const INITIAL_TIMELINE_COMPONENTS_STATE = (): TimelineNodeBlockComponentS
 
 export const INITIAL_TIMELINE_BLOCK_STATE = (): TimelineBlockState => ({
 	...BLOCK_STATE_DEFAULTS(),
-	sortOrder: 'DESC',
+	sortOrder: AvoSearchOrderDirection.DESC,
 });
 
 export const TIMELINE_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({

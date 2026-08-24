@@ -1,4 +1,5 @@
 import { Spinner } from '@viaa/avo2-components';
+import { AvoSearchOrderDirection } from '@viaa/avo2-types';
 import clsx from 'clsx';
 import type { CSSProperties, FunctionComponent, ReactElement } from 'react';
 import React, { useMemo, useRef } from 'react';
@@ -8,10 +9,7 @@ import { IeObjectFlowPlayerWrapper } from '~modules/content-page/components/IeOb
 import { IeObjectLoadError } from '~modules/content-page/components/IeObjectLoadError/IeObjectLoadError.tsx';
 import { IeObjectMetadata } from '~modules/content-page/components/IeObjectMetadata/IeObjectMetadata.tsx';
 import { useGetIeObjectsPlayableDisplayData } from '~modules/content-page/hooks/useGetIeObjectsPlayableDisplayData.ts';
-import type {
-	TimelineNodeBlockComponentState,
-	TimelineSortOrder,
-} from '~modules/content-page/types/content-block.types';
+import type { TimelineNodeBlockComponentState } from '~modules/content-page/types/content-block.types';
 import { Color } from '~modules/content-page/types/content-block.types';
 import { CopyrightAttribution } from '~shared/components/CopyrightAttribution';
 import Html from '~shared/components/Html/Html';
@@ -22,7 +20,6 @@ import { SanitizePreset } from '~shared/helpers/sanitize/presets';
 import { tText } from '~shared/helpers/translation-functions';
 import { HET_ARCHIEF } from '~shared/types';
 import type { DefaultComponentProps } from '~shared/types/components';
-
 import './BlockTimeline.scss';
 
 export interface BlockTimelineProps extends DefaultComponentProps {
@@ -30,7 +27,7 @@ export interface BlockTimelineProps extends DefaultComponentProps {
 	blockId?: string;
 	elements: TimelineNodeBlockComponentState[];
 	/** Chronological order of the nodes. Descending (most recent first) when unset. */
-	sortOrder?: TimelineSortOrder;
+	sortOrder?: AvoSearchOrderDirection;
 }
 
 // The timeline starts and ends with the same fixed circle/rectangle/circle cluster of markers.
@@ -47,7 +44,7 @@ export const BlockTimeline: FunctionComponent<BlockTimelineProps> = ({
 	className,
 	blockId,
 	elements = [],
-	sortOrder = 'DESC',
+	sortOrder = AvoSearchOrderDirection.DESC,
 }): ReactElement => {
 	const containerRef = useRef<HTMLDivElement>(null);
 	const locale = AdminConfigManager.getConfig().locale;
@@ -55,7 +52,7 @@ export const BlockTimeline: FunctionComponent<BlockTimelineProps> = ({
 	// The nodes are shown in chronological order, regardless of the order they were configured in.
 	// Nodes without a usable date keep their configured order at the end of the timeline.
 	const sortedElements = useMemo(() => {
-		const direction = sortOrder === 'ASC' ? 1 : -1;
+		const direction = sortOrder === AvoSearchOrderDirection.ASC ? 1 : -1;
 		return [...elements].sort((left, right) => {
 			const leftTime = new Date(left.date).getTime();
 			const rightTime = new Date(right.date).getTime();

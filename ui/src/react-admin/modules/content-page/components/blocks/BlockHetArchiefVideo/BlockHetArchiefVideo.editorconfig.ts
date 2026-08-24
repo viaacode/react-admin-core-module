@@ -1,5 +1,4 @@
 import type { CheckboxProps } from '@viaa/avo2-components';
-import { AvoCoreContentPickerType } from '@viaa/avo2-types';
 import {
 	BLOCK_FIELD_DEFAULTS,
 	BLOCK_STATE_DEFAULTS,

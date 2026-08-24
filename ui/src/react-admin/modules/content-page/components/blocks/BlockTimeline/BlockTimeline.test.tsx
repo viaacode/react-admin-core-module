@@ -1,9 +1,8 @@
 import { cleanup, render } from '@testing-library/react';
+import { AvoSearchOrderDirection } from '@viaa/avo2-types';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-
 import { AdminConfigManager } from '~core/config/config.class';
 import { Locale } from '~modules/translations/translations.core.types';
-
 import { BlockTimeline } from './BlockTimeline';
 
 vi.mock('~modules/content-page/hooks/useGetIeObjectsPlayableDisplayData.ts', () => ({
@@ -70,8 +69,10 @@ describe('<BlockTimeline /> sorting', () => {
 	});
 
 	it('shows the oldest node first when sorted ascending', () => {
-		// biome-ignore lint/suspicious/noExplicitAny: partial nodes are enough for an order assertion
-		const { container } = render(<BlockTimeline elements={NODES as any} sortOrder="ASC" />);
+		const { container } = render(
+			// biome-ignore lint/suspicious/noExplicitAny: partial nodes are enough for an order assertion
+			<BlockTimeline elements={NODES as any} sortOrder={AvoSearchOrderDirection.ASC} />
+		);
 
 		expect(renderedTitles(container)).toEqual(['Oldest', 'Middle', 'Newest']);
 	});
@@ -82,8 +83,10 @@ describe('<BlockTimeline /> sorting', () => {
 			{ ...NODE, date: '2020-01-01', title: 'Oldest' },
 			{ ...NODE, date: '2026-05-01', title: 'Newest' },
 		];
-		// biome-ignore lint/suspicious/noExplicitAny: partial nodes are enough for an order assertion
-		const { container } = render(<BlockTimeline elements={nodes as any} sortOrder="ASC" />);
+		const { container } = render(
+			// biome-ignore lint/suspicious/noExplicitAny: partial nodes are enough for an order assertion
+			<BlockTimeline elements={nodes as any} sortOrder={AvoSearchOrderDirection.ASC} />
+		);
 
 		expect(renderedTitles(container)).toEqual(['Oldest', 'Newest', 'No date']);
 	});

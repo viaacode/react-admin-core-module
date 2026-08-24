@@ -1,5 +1,4 @@
-import { FlowPlayer, type FlowPlayerProps, getValidStartAndEnd } from '@meemoo/react-components';
-import { isNil } from 'es-toolkit';
+import { FlowPlayer, type FlowPlayerProps } from '@meemoo/react-components';
 import React, { type FunctionComponent, type ReactNode } from 'react';
 import { AdminConfigManager } from '~core/config';
 import { Color } from '~modules/content-page/types/content-block.types.ts';
@@ -9,7 +8,6 @@ import {
 	isAudioVideoFormat,
 	isVideoFormat,
 } from '~shared/helpers/is-audio-video-format.ts';
-import { useGetFileDuration } from '~shared/hooks/use-get-file-duration.ts';
 import type { PlayableDisplayIeObject } from '~shared/services/ie-objects-service/ie-objects.types.ts';
 
 export interface IeObjectFlowPlayerWrapperProps extends DefaultComponentProps {
