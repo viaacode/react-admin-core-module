@@ -5,7 +5,7 @@ import { CustomError } from '~shared/helpers/custom-error';
 import { fetchWithLogout, fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
 import { getProxyUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config';
 import { isAudioFormat } from '~shared/helpers/is-audio-video-format.ts';
-import { mapFormatToType } from '~shared/helpers/map-format-to-type';
+import type { IeObjectType } from '~shared/helpers/map-format-to-type';
 import type { PickerItem } from '~shared/types/content-picker';
 import { type ObjectsGridItem, OrderProperty } from './BlockObjectsGrid.types';
 
@@ -25,12 +25,12 @@ interface RawIeObject {
 	name?: string;
 	maintainerName?: string;
 	// dcterms format, e.g. "video" | "audio" | "newspaper".
-	dctermsFormat?: string;
+	dctermsFormat?: IeObjectType;
 	thumbnailUrl?: string;
 }
 
 const mapRawToGridItem = (raw: RawIeObject): ObjectsGridItem => {
-	const type = mapFormatToType(raw.dctermsFormat);
+	const type = raw.dctermsFormat;
 
 	return {
 		schemaIdentifier: raw.schemaIdentifier,
