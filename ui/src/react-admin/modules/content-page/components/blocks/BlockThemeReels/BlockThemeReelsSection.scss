@@ -133,7 +133,12 @@ $slide-image-height-mobile: 12rem;
 
 		&:hover:not(&--first) {
 			.c-button,
-			.c-block-theme-reels-section__slide-image > img {
+			.c-block-theme-reels-section__slide-image > img,
+			// The audio wave form is its own root element, sitting where the wrapping
+			// `.c-block-theme-reels-section__slide-image` div would otherwise be (see the
+			// `> img` rule below) -- its `__scaler` div is the equivalent of that `img` to zoom
+			// (a plain box, not the `<svg>` itself, so the transform transitions smoothly).
+			.c-block-theme-reels-section__slide-image > .c-audio-wave-form-display__scaler {
 				@include animations.zoom-in-animation;
 			}
 		}
@@ -160,13 +165,16 @@ $slide-image-height-mobile: 12rem;
 				max-height: $slide-image-height-mobile;
 			}
 
+			> img,
+			> .c-audio-wave-form-display__scaler {
+				@include animations.zoom-in-transition;
+			}
+
 			> img {
 				object-fit: cover;
 				width: 100%;
 				height: 100%;
 				object-position: center;
-
-				@include animations.zoom-in-transition;
 			}
 
 			&-placeholder {

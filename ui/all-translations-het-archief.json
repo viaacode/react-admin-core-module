@@ -2663,6 +2663,46 @@
     "id": "",
     "app": "HET_ARCHIEF",
     "component": "ADMIN_CORE",
+    "location": "modules/content-page/const/get-content-block-type-options",
+    "key": "carousel-met-afbeeldingen",
+    "language": "nl",
+    "value": "Carousel met afbeeldingen",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/const/get-content-block-type-options",
+    "key": "carousel-met-afbeeldingen",
+    "language": "en",
+    "value": "Carousel met afbeeldingen",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/const/get-content-block-type-options",
+    "key": "titel-met-parallax",
+    "language": "nl",
+    "value": "Titel met parallax",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/const/get-content-block-type-options",
+    "key": "titel-met-parallax",
+    "language": "en",
+    "value": "Titel met parallax",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
     "location": "admin/content-block/content-block",
     "key": "voeg-een-content-blok-toe",
     "language": "nl",
@@ -19323,6 +19363,226 @@
     "id": "",
     "app": "HET_ARCHIEF",
     "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-image-carousel/block-image-carousel",
+    "key": "Carousel-met-afbeeldingen",
+    "language": "nl",
+    "value": "Carousel met afbeeldingen",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-image-carousel/block-image-carousel",
+    "key": "Carousel-met-afbeeldingen",
+    "language": "en",
+    "value": "Carousel met afbeeldingen",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-image-carousel/block-image-carousel",
+    "key": "title",
+    "language": "nl",
+    "value": "Title",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-image-carousel/block-image-carousel",
+    "key": "title",
+    "language": "en",
+    "value": "Title",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-image-carousel/block-image-carousel",
+    "key": "titel-is-verplicht",
+    "language": "nl",
+    "value": "Titel is verplicht",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-image-carousel/block-image-carousel",
+    "key": "titel-is-verplicht",
+    "language": "en",
+    "value": "Titel is verplicht",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-image-carousel/block-image-carousel",
+    "key": "titletype",
+    "language": "nl",
+    "value": "Titletype",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-image-carousel/block-image-carousel",
+    "key": "titletype",
+    "language": "en",
+    "value": "Titletype",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-image-carousel/block-image-carousel",
+    "key": "titletype-is-verplicht",
+    "language": "nl",
+    "value": "Titletype is verplicht",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-image-carousel/block-image-carousel",
+    "key": "titletype-is-verplicht",
+    "language": "en",
+    "value": "Titletype is verplicht",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-image-carousel/block-image-carousel",
+    "key": "content-item",
+    "language": "nl",
+    "value": "Content item",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-image-carousel/block-image-carousel",
+    "key": "content-item",
+    "language": "en",
+    "value": "Content item",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-image-carousel/block-image-carousel",
+    "key": "item-image",
+    "language": "nl",
+    "value": "Item image",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-image-carousel/block-image-carousel",
+    "key": "item-image",
+    "language": "en",
+    "value": "Item image",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-image-carousel/block-image-carousel",
+    "key": "afbeelding-is-verplicht",
+    "language": "nl",
+    "value": "Afbeelding is verplicht",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-image-carousel/block-image-carousel",
+    "key": "afbeelding-is-verplicht",
+    "language": "en",
+    "value": "Afbeelding is verplicht",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-image-carousel/block-image-carousel",
+    "key": "alt-tekst-voor-de-afbeelding",
+    "language": "nl",
+    "value": "Alt tekst voor de afbeelding",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-image-carousel/block-image-carousel",
+    "key": "alt-tekst-voor-de-afbeelding",
+    "language": "en",
+    "value": "Alt tekst voor de afbeelding",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-image-carousel/block-image-carousel",
+    "key": "voeg-afbeelding-toe",
+    "language": "nl",
+    "value": "Voeg afbeelding toe",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-image-carousel/block-image-carousel",
+    "key": "voeg-afbeelding-toe",
+    "language": "en",
+    "value": "Voeg afbeelding toe",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-image-carousel/block-image-carousel",
+    "key": "verwijder-afbeelding",
+    "language": "nl",
+    "value": "Verwijder afbeelding",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-image-carousel/block-image-carousel",
+    "key": "verwijder-afbeelding",
+    "language": "en",
+    "value": "Verwijder afbeelding",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
     "location": "admin/content-block/helpers/generators/image-grid",
     "key": "afbeeldingen-grid",
     "language": "nl",
@@ -20416,7 +20676,7 @@
     "location": "modules/content-page/components/blocks/block-objects-grid/block-objects-grid",
     "key": "toon-alle",
     "language": "en",
-    "value": "Toon alle",
+    "value": "Show all",
     "value_type": "TEXT"
   },
   {
@@ -23483,6 +23743,186 @@
     "id": "",
     "app": "HET_ARCHIEF",
     "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-title-with-parallax/block-title-with-parallax",
+    "key": "groot",
+    "language": "nl",
+    "value": "Groot",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-title-with-parallax/block-title-with-parallax",
+    "key": "groot",
+    "language": "en",
+    "value": "Groot",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-title-with-parallax/block-title-with-parallax",
+    "key": "klein",
+    "language": "nl",
+    "value": "Klein",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-title-with-parallax/block-title-with-parallax",
+    "key": "klein",
+    "language": "en",
+    "value": "Klein",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-title-with-parallax/block-title-with-parallax",
+    "key": "titel-met-parallax",
+    "language": "nl",
+    "value": "Titel met parallax",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-title-with-parallax/block-title-with-parallax",
+    "key": "titel-met-parallax",
+    "language": "en",
+    "value": "Titel met parallax",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-title-with-parallax/block-title-with-parallax",
+    "key": "visualisatie",
+    "language": "nl",
+    "value": "Visualisatie",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-title-with-parallax/block-title-with-parallax",
+    "key": "visualisatie",
+    "language": "en",
+    "value": "Visualisatie",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-title-with-parallax/block-title-with-parallax",
+    "key": "title",
+    "language": "nl",
+    "value": "title",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-title-with-parallax/block-title-with-parallax",
+    "key": "title",
+    "language": "en",
+    "value": "title",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-title-with-parallax/block-title-with-parallax",
+    "key": "titel-is-verplicht",
+    "language": "nl",
+    "value": "titel is verplicht",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-title-with-parallax/block-title-with-parallax",
+    "key": "titel-is-verplicht",
+    "language": "en",
+    "value": "titel is verplicht",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-title-with-parallax/block-title-with-parallax",
+    "key": "subtitle",
+    "language": "nl",
+    "value": "subtitle",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-title-with-parallax/block-title-with-parallax",
+    "key": "subtitle",
+    "language": "en",
+    "value": "subtitle",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-title-with-parallax/block-title-with-parallax",
+    "key": "item-image",
+    "language": "nl",
+    "value": "item-image",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-title-with-parallax/block-title-with-parallax",
+    "key": "item-image",
+    "language": "en",
+    "value": "item-image",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-title-with-parallax/block-title-with-parallax",
+    "key": "afbeelding-is-verplicht",
+    "language": "nl",
+    "value": "afbeelding-is-verplicht",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-title-with-parallax/block-title-with-parallax",
+    "key": "afbeelding-is-verplicht",
+    "language": "en",
+    "value": "afbeelding-is-verplicht",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
     "location": "admin/content-block/helpers/generators/uitgeklaard",
     "key": "uitgeklaard",
     "language": "nl",
@@ -24217,446 +24657,6 @@
     "key": "gelieve-een-correcte-zoekfilter-link-in-te-vullen",
     "language": "en",
     "value": "Please enter a correct search filter link.",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/const/get-content-block-type-options",
-    "key": "carousel-met-afbeeldingen",
-    "language": "nl",
-    "value": "Carousel met afbeeldingen",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/const/get-content-block-type-options",
-    "key": "carousel-met-afbeeldingen",
-    "language": "en",
-    "value": "Carousel met afbeeldingen",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/const/get-content-block-type-options",
-    "key": "titel-met-parallax",
-    "language": "nl",
-    "value": "Titel met parallax",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/const/get-content-block-type-options",
-    "key": "titel-met-parallax",
-    "language": "en",
-    "value": "Titel met parallax",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-image-carousel/block-image-carousel",
-    "key": "Carousel-met-afbeeldingen",
-    "language": "nl",
-    "value": "Carousel met afbeeldingen",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-image-carousel/block-image-carousel",
-    "key": "Carousel-met-afbeeldingen",
-    "language": "en",
-    "value": "Carousel met afbeeldingen",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-image-carousel/block-image-carousel",
-    "key": "title",
-    "language": "nl",
-    "value": "Title",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-image-carousel/block-image-carousel",
-    "key": "title",
-    "language": "en",
-    "value": "Title",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-image-carousel/block-image-carousel",
-    "key": "titel-is-verplicht",
-    "language": "nl",
-    "value": "Titel is verplicht",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-image-carousel/block-image-carousel",
-    "key": "titel-is-verplicht",
-    "language": "en",
-    "value": "Titel is verplicht",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-image-carousel/block-image-carousel",
-    "key": "titletype",
-    "language": "nl",
-    "value": "Titletype",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-image-carousel/block-image-carousel",
-    "key": "titletype",
-    "language": "en",
-    "value": "Titletype",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-image-carousel/block-image-carousel",
-    "key": "titletype-is-verplicht",
-    "language": "nl",
-    "value": "Titletype is verplicht",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-image-carousel/block-image-carousel",
-    "key": "titletype-is-verplicht",
-    "language": "en",
-    "value": "Titletype is verplicht",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-image-carousel/block-image-carousel",
-    "key": "content-item",
-    "language": "nl",
-    "value": "Content item",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-image-carousel/block-image-carousel",
-    "key": "content-item",
-    "language": "en",
-    "value": "Content item",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-image-carousel/block-image-carousel",
-    "key": "item-image",
-    "language": "nl",
-    "value": "Item image",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-image-carousel/block-image-carousel",
-    "key": "item-image",
-    "language": "en",
-    "value": "Item image",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-image-carousel/block-image-carousel",
-    "key": "afbeelding-is-verplicht",
-    "language": "nl",
-    "value": "Afbeelding is verplicht",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-image-carousel/block-image-carousel",
-    "key": "afbeelding-is-verplicht",
-    "language": "en",
-    "value": "Afbeelding is verplicht",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-image-carousel/block-image-carousel",
-    "key": "alt-tekst-voor-de-afbeelding",
-    "language": "nl",
-    "value": "Alt tekst voor de afbeelding",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-image-carousel/block-image-carousel",
-    "key": "alt-tekst-voor-de-afbeelding",
-    "language": "en",
-    "value": "Alt tekst voor de afbeelding",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-image-carousel/block-image-carousel",
-    "key": "voeg-afbeelding-toe",
-    "language": "nl",
-    "value": "Voeg afbeelding toe",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-image-carousel/block-image-carousel",
-    "key": "voeg-afbeelding-toe",
-    "language": "en",
-    "value": "Voeg afbeelding toe",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-image-carousel/block-image-carousel",
-    "key": "verwijder-afbeelding",
-    "language": "nl",
-    "value": "Verwijder afbeelding",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-image-carousel/block-image-carousel",
-    "key": "verwijder-afbeelding",
-    "language": "en",
-    "value": "Verwijder afbeelding",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-title-with-parallax/block-title-with-parallax",
-    "key": "groot",
-    "language": "nl",
-    "value": "Groot",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-title-with-parallax/block-title-with-parallax",
-    "key": "groot",
-    "language": "en",
-    "value": "Groot",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-title-with-parallax/block-title-with-parallax",
-    "key": "klein",
-    "language": "nl",
-    "value": "Klein",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-title-with-parallax/block-title-with-parallax",
-    "key": "klein",
-    "language": "en",
-    "value": "Klein",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-title-with-parallax/block-title-with-parallax",
-    "key": "titel-met-parallax",
-    "language": "nl",
-    "value": "Titel met parallax",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-title-with-parallax/block-title-with-parallax",
-    "key": "titel-met-parallax",
-    "language": "en",
-    "value": "Titel met parallax",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-title-with-parallax/block-title-with-parallax",
-    "key": "visualisatie",
-    "language": "nl",
-    "value": "Visualisatie",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-title-with-parallax/block-title-with-parallax",
-    "key": "visualisatie",
-    "language": "en",
-    "value": "Visualisatie",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-title-with-parallax/block-title-with-parallax",
-    "key": "title",
-    "language": "nl",
-    "value": "title",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-title-with-parallax/block-title-with-parallax",
-    "key": "title",
-    "language": "en",
-    "value": "title",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-title-with-parallax/block-title-with-parallax",
-    "key": "titel-is-verplicht",
-    "language": "nl",
-    "value": "titel is verplicht",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-title-with-parallax/block-title-with-parallax",
-    "key": "titel-is-verplicht",
-    "language": "en",
-    "value": "titel is verplicht",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-title-with-parallax/block-title-with-parallax",
-    "key": "subtitle",
-    "language": "nl",
-    "value": "subtitle",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-title-with-parallax/block-title-with-parallax",
-    "key": "subtitle",
-    "language": "en",
-    "value": "subtitle",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-title-with-parallax/block-title-with-parallax",
-    "key": "item-image",
-    "language": "nl",
-    "value": "item-image",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-title-with-parallax/block-title-with-parallax",
-    "key": "item-image",
-    "language": "en",
-    "value": "item-image",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-title-with-parallax/block-title-with-parallax",
-    "key": "afbeelding-is-verplicht",
-    "language": "nl",
-    "value": "afbeelding-is-verplicht",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-title-with-parallax/block-title-with-parallax",
-    "key": "afbeelding-is-verplicht",
-    "language": "en",
-    "value": "afbeelding-is-verplicht",
     "value_type": "TEXT"
   },
   {
