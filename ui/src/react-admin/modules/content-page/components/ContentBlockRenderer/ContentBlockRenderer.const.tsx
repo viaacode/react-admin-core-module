@@ -1,7 +1,6 @@
 import type { FC, FunctionComponent } from 'react';
 import { AvoHeroWrapper } from '~content-blocks/BlockAvoHero/AvoHeroWrapper';
 import { BlockAvoImageTextBackground } from '~content-blocks/BlockAvoImageTextBackground';
-import { BlockAvoQuote } from '~content-blocks/BlockAvoQuote';
 import { BlockBreadcrumbs } from '~content-blocks/BlockBreadcrumbs';
 import { BlockButtonsWrapper } from '~content-blocks/BlockButtons';
 import { BlockCardsWithoutDescription } from '~content-blocks/BlockCardsWithoutDescription';
@@ -34,6 +33,7 @@ import { BlockOverviewNewspaperTitles } from '~content-blocks/BlockOverviewNewsp
 import { BlockOverviewThemes } from '~content-blocks/BlockOverviewThemes/BlockOverviewThemes.tsx';
 import { BlockOverviewWithCarousel } from '~content-blocks/BlockOverviewWithCarousel/BlockOverviewWithCarousel.tsx';
 import { BlockPageOverviewWrapper } from '~content-blocks/BlockPageOverview';
+import { BlockQuote } from '~content-blocks/BlockQuote';
 import { BlockRichTextWrapper } from '~content-blocks/BlockRichText';
 import { BlockScrollDownNudge } from '~content-blocks/BlockScrollDownNudge';
 import { BlockProjectSpotlightWrapper, BlockSpotlight } from '~content-blocks/BlockSpotlight';
@@ -73,7 +73,7 @@ export function GET_BLOCK_COMPONENT(
 		[ContentBlockType.MediaPlayer]: BlockVideoWrapper,
 		[ContentBlockType.PageOverview]: BlockPageOverviewWrapper,
 		[ContentBlockType.ProjectsSpotlight]: BlockProjectSpotlightWrapper,
-		[ContentBlockType.AvoQuote]: BlockAvoQuote,
+		[ContentBlockType.Quote]: BlockQuote,
 		[ContentBlockType.RichTextTwoColumns]: BlockRichTextWrapper,
 		[ContentBlockType.RichText]: BlockRichTextWrapper,
 		[ContentBlockType.Spotlight]: BlockSpotlight,
