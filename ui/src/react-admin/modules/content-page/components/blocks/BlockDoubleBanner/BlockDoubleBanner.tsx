@@ -3,11 +3,11 @@ import clsx from 'clsx';
 import { compact } from 'es-toolkit';
 import type { CSSProperties, FunctionComponent, ReactElement } from 'react';
 import React from 'react';
-import { AdminCoreIconName } from '~core/config/config.types';
 import type {
 	BlockDoubleBannerProps,
 	DoubleBannerHalf,
 } from '~content-blocks/BlockDoubleBanner/BlockDoubleBanner.types';
+import { AdminCoreIconName } from '~core/config/config.types';
 import { ContentPageIcon, Icon } from '~shared/components/Icon/Icon';
 import { generateSmartLink } from '~shared/components/SmartLink/SmartLink';
 import './BlockDoubleBanner.scss';

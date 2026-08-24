@@ -1,4 +1,5 @@
 import type { SelectOption } from '@viaa/avo2-components';
+import { AvoSearchOrderDirection } from '@viaa/avo2-types';
 import { GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF } from '~modules/content-page/const/get-color-options';
 import { IE_OBJECT_WITH_SNIPPET_TIME_FIELDS } from '~modules/content-page/helpers/snippet-time-fields.ts';
 import type { FileUploadProps } from '~shared/components/FileUpload/FileUpload';
@@ -49,6 +50,25 @@ const GET_TIMELINE_NODE_VISUAL_TYPE_OPTIONS = (): SelectOption<TimelineNodeVisua
 	},
 ];
 
+const GET_TIMELINE_SORT_ORDER_OPTIONS = (): SelectOption<AvoSearchOrderDirection>[] => [
+	{
+		label: tText(
+			'react-admin/modules/content-page/components/blocks/block-timeline/block-timeline___aflopend-meest-recente-eerst',
+			{},
+			[HET_ARCHIEF]
+		),
+		value: AvoSearchOrderDirection.DESC,
+	},
+	{
+		label: tText(
+			'react-admin/modules/content-page/components/blocks/block-timeline/block-timeline___oplopend-oudste-eerst',
+			{},
+			[HET_ARCHIEF]
+		),
+		value: AvoSearchOrderDirection.ASC,
+	},
+];
+
 const visualTypeIsObject: ContentBlockField['isVisible'] = (_config, formGroupState) => {
 	return (formGroupState as TimelineNodeBlockComponentState).visualType === 'OBJECT';
 };
@@ -75,6 +95,7 @@ export const INITIAL_TIMELINE_COMPONENTS_STATE = (): TimelineNodeBlockComponentS
 
 export const INITIAL_TIMELINE_BLOCK_STATE = (): TimelineBlockState => ({
 	...BLOCK_STATE_DEFAULTS(),
+	sortOrder: AvoSearchOrderDirection.DESC,
 });
 
 export const TIMELINE_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
@@ -217,6 +238,17 @@ export const TIMELINE_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 	block: {
 		state: INITIAL_TIMELINE_BLOCK_STATE(),
 		fields: {
+			sortOrder: {
+				label: tText(
+					'react-admin/modules/content-page/components/blocks/block-timeline/block-timeline___chronologische-sortering',
+					{},
+					[HET_ARCHIEF]
+				),
+				editorType: ContentBlockEditor.Select,
+				editorProps: {
+					options: GET_TIMELINE_SORT_ORDER_OPTIONS(),
+				},
+			},
 			...BLOCK_FIELD_DEFAULTS(),
 		},
 	},

@@ -4,7 +4,6 @@ import type { HetArchiefVideoBlockComponentState } from '~content-blocks/BlockHe
 import { TEXT_FIELD } from '~content-blocks/defaults.ts';
 import {
 	type ContentBlockComponentState,
-	type ContentBlockConfig,
 	ContentBlockEditor,
 	type ContentBlockField,
 	type ContentBlockState,
