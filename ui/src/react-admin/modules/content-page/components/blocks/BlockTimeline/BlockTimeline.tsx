@@ -52,32 +52,49 @@ export const BlockTimeline: FunctionComponent<BlockTimelineProps> = ({
 
 	// The nodes are shown in chronological order, regardless of the order they were configured in.
 	// Nodes without a usable date keep their configured order at the end of the timeline.
+	// The position a node was configured at travels along with it: the playable display data below
+	// comes back in the block's own element order, so that -- and not the position on screen -- is
+	// what tells which entry of the response belongs to which node.
 	const sortedElements = useMemo(() => {
 		const direction = sortOrder === AvoSearchOrderDirection.ASC ? 1 : -1;
-		return [...elements].sort((left, right) => {
-			const leftTime = new Date(left.date).getTime();
-			const rightTime = new Date(right.date).getTime();
-			if (Number.isNaN(leftTime) || Number.isNaN(rightTime)) {
-				return Number.isNaN(leftTime) ? (Number.isNaN(rightTime) ? 0 : 1) : -1;
-			}
-			return (leftTime - rightTime) * direction;
-		});
+		return elements
+			.map((node, elementIndex) => ({ node, elementIndex }))
+			.sort((left, right) => {
+				const leftTime = new Date(left.node.date).getTime();
+				const rightTime = new Date(right.node.date).getTime();
+				if (Number.isNaN(leftTime) || Number.isNaN(rightTime)) {
+					return Number.isNaN(leftTime) ? (Number.isNaN(rightTime) ? 0 : 1) : -1;
+				}
+				return (leftTime - rightTime) * direction;
+			});
 	}, [elements, sortOrder]);
 
 	// While this block is being put together in the editor, it has no id yet, so its nodes go along
-	// for the proxy to resolve. One entry per node, so the response stays aligned.
+	// for the proxy to resolve. One entry per node, in the block's own element order -- the same
+	// order the proxy reads them in from a saved config -- so the response is indexed the same way
+	// either way it was fetched. Only cut when both times are given and form a real interval, same
+	// rule as the editor and the proxy apply: the media service needs an end time to cut at all, so
+	// a start time on its own would silently play the whole object.
 	const unsavedObjects = useMemo(
 		() =>
-			sortedElements.map((node) => ({
-				schemaIdentifier: node.visualType === 'OBJECT' ? String(node.mediaItem?.value || '') : '',
-			})),
-		[sortedElements]
+			elements.map((node) => {
+				const start = snippetTimeToSeconds(node.startTime);
+				const end = snippetTimeToSeconds(node.endTime);
+				const hasSnippet = start !== null && end !== null && end > start;
+
+				return {
+					schemaIdentifier: node.visualType === 'OBJECT' ? String(node.mediaItem?.value || '') : '',
+					start: hasSnippet ? start : undefined,
+					end: hasSnippet ? end : undefined,
+				};
+			}),
+		[elements]
 	);
 
 	// Resolve all objects of the timeline in a single request. Which objects those are is read
 	// from this block's stored config by the proxy, so only the block id goes out once it has been
-	// saved; the response comes back in the order of the nodes below, one (possibly null) entry
-	// per node.
+	// saved; the response comes back in the order the nodes were configured in -- not the
+	// chronological order they are shown in -- one (possibly null) entry per node.
 	const { data: ieObjects } = useGetIeObjectsPlayableDisplayData(blockId, unsavedObjects);
 
 	const scrollToTop = () => {
@@ -88,9 +105,9 @@ export const BlockTimeline: FunctionComponent<BlockTimelineProps> = ({
 		<div className={clsx('c-block-timeline', className)} ref={containerRef}>
 			<ol className="c-block-timeline__list">
 				<TimelineCap position="start" />
-				{sortedElements.map((node, index) => {
+				{sortedElements.map(({ node, elementIndex }, index) => {
 					const showYear =
-						index === 0 || getYear(node.date) !== getYear(sortedElements[index - 1].date);
+						index === 0 || getYear(node.date) !== getYear(sortedElements[index - 1].node.date);
 					const backgroundColor =
 						node.backgroundColor && node.backgroundColor !== Color.Transparent
 							? node.backgroundColor
@@ -105,13 +122,16 @@ export const BlockTimeline: FunctionComponent<BlockTimelineProps> = ({
 					const markerShape = index % 2 === 0 ? 'circle' : 'rectangle';
 					const hasImage = node.visualType === 'IMAGE' && !!node.image;
 					const hasObject = node.visualType === 'OBJECT' && !!node.mediaItem?.value;
-					const ieObject = hasObject ? ieObjects?.[index] : undefined;
+					const ieObject = hasObject ? ieObjects?.[elementIndex] : undefined;
 					const thumbnail = ieObject?.newspaperImage || ieObject?.thumbnailUrl;
 					// A resolved-but-null entry means this node's object couldn't be loaded (it's
 					// gone, or out of reach for this visitor); the node keeps its place in the
 					// timeline and shows an error tile where the media would have been.
 					const hasFailedObject =
-						hasObject && !!ieObjects && index < ieObjects.length && ieObjects[index] === null;
+						hasObject &&
+						!!ieObjects &&
+						elementIndex < ieObjects.length &&
+						ieObjects[elementIndex] === null;
 					// Until its object has been resolved the node shows what its own config knows --
 					// the poster image, if it has one -- so the timeline is laid out at its final
 					// size straight away instead of reflowing as the objects come in.
