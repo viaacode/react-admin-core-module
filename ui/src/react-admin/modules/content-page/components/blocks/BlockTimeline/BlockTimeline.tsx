@@ -8,6 +8,7 @@ import { AdminConfigManager } from '~core/config/config.class';
 import { IeObjectFlowPlayerWrapper } from '~modules/content-page/components/IeObjectFlowPlayerWrapper/IeObjectFlowPlayerWrapper.tsx';
 import { IeObjectLoadError } from '~modules/content-page/components/IeObjectLoadError/IeObjectLoadError.tsx';
 import { IeObjectMetadata } from '~modules/content-page/components/IeObjectMetadata/IeObjectMetadata.tsx';
+import { getBackgroundTextColorVariables } from '~modules/content-page/const/background-text-colors';
 import { useGetIeObjectsPlayableDisplayData } from '~modules/content-page/hooks/useGetIeObjectsPlayableDisplayData.ts';
 import type { TimelineNodeBlockComponentState } from '~modules/content-page/types/content-block.types';
 import { Color } from '~modules/content-page/types/content-block.types';
@@ -94,6 +95,13 @@ export const BlockTimeline: FunctionComponent<BlockTimelineProps> = ({
 						node.backgroundColor && node.backgroundColor !== Color.Transparent
 							? node.backgroundColor
 							: undefined;
+					// The node's title and text sit on its own colour band, so they take the design
+					// text colors for that band's color instead of the block's own background.
+					// https://meemoo.atlassian.net/browse/ARC-3848
+					const nodeTextColorVariables = backgroundColor
+						? getBackgroundTextColorVariables(backgroundColor)
+						: {};
+					const hasNodeTextColors = Object.keys(nodeTextColorVariables).length > 0;
 					const markerShape = index % 2 === 0 ? 'circle' : 'rectangle';
 					const hasImage = node.visualType === 'IMAGE' && !!node.image;
 					const hasObject = node.visualType === 'OBJECT' && !!node.mediaItem?.value;
@@ -137,10 +145,14 @@ export const BlockTimeline: FunctionComponent<BlockTimelineProps> = ({
 									'c-block-timeline__node-content--has-background': !!backgroundColor,
 									'c-block-timeline__node-content--has-image': hasImage,
 									'c-block-timeline__node-content--has-object': hasObject,
+									'u-background-text-colors': hasNodeTextColors,
 								})}
 								style={
 									backgroundColor
-										? ({ '--c-block-timeline-node-bg': backgroundColor } as CSSProperties)
+										? ({
+												'--c-block-timeline-node-bg': backgroundColor,
+												...nodeTextColorVariables,
+											} as CSSProperties)
 										: undefined
 								}
 							>
@@ -209,13 +221,15 @@ export const BlockTimeline: FunctionComponent<BlockTimelineProps> = ({
 										showIcon={node.copyrightIconVisible}
 										className="c-block-timeline__node-image-caption"
 									/>
-									<h3 className="c-block-timeline__node-title">{node.title}</h3>
+									<h3 className="c-block-timeline__node-title u-background-text-primary">
+										{node.title}
+									</h3>
 									{node.text && (
 										<Html
 											content={node.text}
 											sanitizePreset={SanitizePreset.full}
 											type="div"
-											className="c-block-timeline__node-description u-background-text-links"
+											className="c-block-timeline__node-description u-background-text-primary u-background-text-links"
 										/>
 									)}
 									{ieObject && <IeObjectMetadata ieObject={ieObject} fallbackTitle={node.title} />}
@@ -227,7 +241,14 @@ export const BlockTimeline: FunctionComponent<BlockTimelineProps> = ({
 				<TimelineCap position="end" />
 			</ol>
 			{sortedElements.length > 0 && (
-				<button type="button" className="c-block-timeline__back-to-top" onClick={scrollToTop}>
+				<button
+					type="button"
+					// "Terug naar boven" is secondary text, so it follows the design's secondary color for
+					// the block background instead of a fixed grey.
+					// https://meemoo.atlassian.net/browse/ARC-3848
+					className="c-block-timeline__back-to-top u-background-text-secondary"
+					onClick={scrollToTop}
+				>
 					{tText(
 						'react-admin/modules/content-page/components/blocks/block-timeline/block-timeline___terug-naar-boven',
 						{},
