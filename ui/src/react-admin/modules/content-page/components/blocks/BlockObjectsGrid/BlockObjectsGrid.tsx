@@ -1,4 +1,5 @@
 import { Button } from '@meemoo/react-components';
+import { Spinner } from '@viaa/avo2-components';
 import { AvoCoreContentPickerType } from '@viaa/avo2-types';
 import clsx from 'clsx';
 import React, {
@@ -57,6 +58,25 @@ export const BlockObjectsGrid: FunctionComponent<BlockObjectsGridProps> = ({
 		[totalItemCount]
 	);
 
+	// Skeleton layout shown while the objects are still being fetched. How many tiles there will
+	// be -- and which of them are double width -- is already known from the block config (the
+	// fixed positions) and the max item count, so the grid can take up its final size right away
+	// with a spinner per tile, instead of the whole block popping into existence once the
+	// response lands. Same idea as the hero carousel's slides.
+	const placeholderTiles = useMemo<{ isFixed: boolean }[]>(() => {
+		const fixedCount = fixedItems.length;
+		const randomCount = OBJECT_GRID_MAX_ITEMS - fixedCount * 2;
+
+		// Same interleave as the loaded tiles below, so the skeleton's row layout matches the
+		// layout the real tiles end up in.
+		return [
+			...(fixedCount > 0 ? [{ isFixed: true }] : []),
+			...Array.from({ length: Math.min(2, randomCount) }, () => ({ isFixed: false })),
+			...Array.from({ length: Math.max(fixedCount - 1, 0) }, () => ({ isFixed: true })),
+			...Array.from({ length: Math.max(randomCount - 2, 0) }, () => ({ isFixed: false })),
+		];
+	}, [fixedItems.length]);
+
 	// Tracks viewport width so the tablet/mobile breakpoints can hide tiles that would
 	// otherwise leave the last row half-filled (desktop always fetches an exact 4 rows).
 	const [windowWidth, setWindowWidth] = useState<number>(() =>
@@ -83,9 +103,12 @@ export const BlockObjectsGrid: FunctionComponent<BlockObjectsGridProps> = ({
 	// Packs tiles into rows the same way the CSS grid renders them (auto-flow row, not dense):
 	// a fixed (2-column-wide) tile that doesn't fit the remaining space in a row wraps to the
 	// next row, leaving the remainder of the current row empty.
-	const packTilesIntoRows = (tiles: OrderedTile[], columns: number): OrderedTile[][] => {
-		const rows: OrderedTile[][] = [];
-		let currentRow: OrderedTile[] = [];
+	const packTilesIntoRows = <T extends { isFixed: boolean }>(
+		tiles: T[],
+		columns: number
+	): T[][] => {
+		const rows: T[][] = [];
+		let currentRow: T[] = [];
 		let usedColumns = 0;
 
 		tiles.forEach((tile) => {
@@ -108,7 +131,7 @@ export const BlockObjectsGrid: FunctionComponent<BlockObjectsGridProps> = ({
 
 	// Limits the tiles to what fits in the max number of rows for this breakpoint, dropping
 	// tiles from an incomplete trailing row so the last visible row is always fully filled.
-	const getVisibleTiles = (tiles: OrderedTile[], columns: number): OrderedTile[] => {
+	const getVisibleTiles = <T extends { isFixed: boolean }>(tiles: T[], columns: number): T[] => {
 		const visibleRows = packTilesIntoRows(tiles, columns);
 
 		// Find the last row
@@ -135,6 +158,23 @@ export const BlockObjectsGrid: FunctionComponent<BlockObjectsGridProps> = ({
 			return url;
 		}
 	};
+
+	// A tile whose object hasn't been resolved yet: the box is already at its final size (the
+	// grid sizes it), so it only needs to show that something is on its way.
+	const renderPlaceholderTile = (isFixed: boolean, index: number): ReactElement => (
+		<li
+			className={clsx('c-block-objects-grid__tile', {
+				'c-block-objects-grid__tile--fixed': isFixed,
+			})}
+			key={`objects-grid-placeholder__${index}`}
+			// The aria-live status below already announces that the objects are loading.
+			aria-hidden="true"
+		>
+			<div className="c-block-objects-grid__tile-media c-block-objects-grid__tile-media--loading">
+				<Spinner size="large" locationId={'objects-grid-tile'} />
+			</div>
+		</li>
+	);
 
 	const renderTile = (
 		item: ObjectsGridItem,
@@ -210,7 +250,7 @@ export const BlockObjectsGrid: FunctionComponent<BlockObjectsGridProps> = ({
 	// e.g. F1, R, R, F2, F3, R, R, … — with fixed tiles spanning 2 columns this puts F1 on row 1
 	// and F2/F3 on row 2.
 	const [firstFixed, ...restFixed] = fixedObjects;
-	const orderedTiles: { item: ObjectsGridItem; isFixed: boolean }[] = [
+	const orderedTiles: OrderedTile[] = [
 		...(firstFixed ? [{ item: firstFixed, isFixed: true }] : []),
 		...objects.slice(0, 2).map((item) => ({ item, isFixed: false })),
 		...restFixed.map((item) => ({ item, isFixed: true })),
@@ -219,6 +259,7 @@ export const BlockObjectsGrid: FunctionComponent<BlockObjectsGridProps> = ({
 
 	const columns = getColumnsForWidth(windowWidth);
 	const visibleTiles = getVisibleTiles(orderedTiles, columns);
+	const visiblePlaceholders = getVisibleTiles(placeholderTiles, columns);
 	const hasObjects = visibleTiles.length > 0;
 
 	return (
@@ -264,7 +305,13 @@ export const BlockObjectsGrid: FunctionComponent<BlockObjectsGridProps> = ({
 					)}
 			</output>
 
-			{hasObjects && (
+			{isLoading && (
+				<ul className="c-block-objects-grid__grid">
+					{visiblePlaceholders.map(({ isFixed }, index) => renderPlaceholderTile(isFixed, index))}
+				</ul>
+			)}
+
+			{!isLoading && hasObjects && (
 				<ul className="c-block-objects-grid__grid">
 					{visibleTiles.map(({ item, isFixed }, index) =>
 						renderTile(item, isFixed, tileBackgroundColors[index])

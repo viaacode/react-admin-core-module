@@ -135,6 +135,15 @@
 		}
 	}
 
+	// A tile that is still waiting for its object: the grid already gives it its final size, so
+	// it only has to center the spinner in that box.
+	.c-block-objects-grid__tile-media--loading {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		height: 100%;
+	}
+
 	.c-block-objects-grid__tile-placeholder {
 		display: flex;
 		align-items: center;
