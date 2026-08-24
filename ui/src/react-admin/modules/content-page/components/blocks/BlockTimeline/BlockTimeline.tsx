@@ -17,6 +17,7 @@ import Html from '~shared/components/Html/Html';
 import { Icon } from '~shared/components/Icon/Icon';
 import { formatDateToDayMonthNameYear, getYear } from '~shared/helpers/formatters/date';
 import { isAudioVideoFormat } from '~shared/helpers/is-audio-video-format.ts';
+import { snippetTimeToSeconds } from '~shared/helpers/parsers/duration';
 import { SanitizePreset } from '~shared/helpers/sanitize/presets';
 import { tText } from '~shared/helpers/translation-functions';
 import { HET_ARCHIEF } from '~shared/types';
@@ -65,12 +66,23 @@ export const BlockTimeline: FunctionComponent<BlockTimelineProps> = ({
 	}, [elements, sortOrder]);
 
 	// While this block is being put together in the editor, it has no id yet, so its nodes go along
-	// for the proxy to resolve. One entry per node, so the response stays aligned.
+	// for the proxy to resolve. One entry per node, so the response stays aligned. Only cut when
+	// both times are given and form a real interval, same rule as the editor and the proxy apply:
+	// the media service needs an end time to cut at all, so a start time on its own would silently
+	// play the whole object.
 	const unsavedObjects = useMemo(
 		() =>
-			sortedElements.map((node) => ({
-				schemaIdentifier: node.visualType === 'OBJECT' ? String(node.mediaItem?.value || '') : '',
-			})),
+			sortedElements.map((node) => {
+				const start = snippetTimeToSeconds(node.startTime);
+				const end = snippetTimeToSeconds(node.endTime);
+				const hasSnippet = start !== null && end !== null && end > start;
+
+				return {
+					schemaIdentifier: node.visualType === 'OBJECT' ? String(node.mediaItem?.value || '') : '',
+					start: hasSnippet ? start : undefined,
+					end: hasSnippet ? end : undefined,
+				};
+			}),
 		[sortedElements]
 	);
 

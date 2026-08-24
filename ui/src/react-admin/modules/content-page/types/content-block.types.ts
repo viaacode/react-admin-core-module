@@ -678,8 +678,9 @@ export interface TimelineNodeBlockComponentState extends MediaItemComponentState
 	title: string;
 	text?: string;
 	visualType: TimelineNodeVisualType;
-	startTime?: number;
-	endTime?: number;
+	/** Snippet start/end as entered by the editor, eg. `01:23` or `00:01:23`, see IE_OBJECT_WITH_SNIPPET_TIME_FIELDS */
+	startTime?: string;
+	endTime?: string;
 	image?: string;
 	imageAlt?: string;
 	copyrightTitle?: string;
