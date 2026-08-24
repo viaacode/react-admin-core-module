@@ -31,10 +31,16 @@ $description-animation-speed: 0.3s;
 		width: 5000px;
 	}
 
+	// The decorative shapes sit on the band next to the group title, so they take the same color the
+	// title does: the primary text color the design specifies for the band color. The group section
+	// publishes it as --bg-text-primary, the same variable .u-background-text-primary reads on the
+	// title. https://meemoo.atlassian.net/browse/ARC-3848
+	// White stays the fallback for the band colors design specified nothing for (transparent, the
+	// gradient and the meemoo logo pattern), which is what these shapes were before.
 	&__group-shape{
 		width: 10cqw;
 		height: 10cqw;
-		background-color: colors.$white;
+		background-color: var(--bg-text-primary, #{colors.$white});
 		position: absolute;
 		top: 0;
 		right: 0;

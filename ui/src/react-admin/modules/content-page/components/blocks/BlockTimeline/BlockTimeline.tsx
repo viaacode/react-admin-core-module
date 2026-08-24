@@ -241,7 +241,14 @@ export const BlockTimeline: FunctionComponent<BlockTimelineProps> = ({
 				<TimelineCap position="end" />
 			</ol>
 			{sortedElements.length > 0 && (
-				<button type="button" className="c-block-timeline__back-to-top" onClick={scrollToTop}>
+				<button
+					type="button"
+					// "Terug naar boven" is secondary text, so it follows the design's secondary color for
+					// the block background instead of a fixed grey.
+					// https://meemoo.atlassian.net/browse/ARC-3848
+					className="c-block-timeline__back-to-top u-background-text-secondary"
+					onClick={scrollToTop}
+				>
 					{tText(
 						'react-admin/modules/content-page/components/blocks/block-timeline/block-timeline___terug-naar-boven',
 						{},
