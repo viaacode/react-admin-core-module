@@ -46,18 +46,6 @@ export const BlockObjectsGrid: FunctionComponent<BlockObjectsGridProps> = ({
 		OBJECT_GRID_MAX_ITEMS - fixedItems.length * 2
 	);
 
-	// Each tile gets its own random tertiary color for its wave-form background (audio items
-	// with no thumbnail image), picked once per fetched result set so it stays stable across
-	// re-renders (e.g. a window resize recalculating the visible columns). One color per tile
-	// position (matched up by index below) rather than a map keyed by schemaIdentifier: the same
-	// object can appear more than once (e.g. pinned as a fixed position and also returned among
-	// the random results), which a key derived from the item would collapse into a shared color.
-	const totalItemCount = (data?.fixedObjects?.length ?? 0) + (data?.objects?.length ?? 0);
-	const tileBackgroundColors = useMemo(
-		() => Array.from({ length: totalItemCount }, () => getRandomTertiaryBackgroundColor()),
-		[totalItemCount]
-	);
-
 	// Skeleton layout shown while the objects are still being fetched. How many tiles there will
 	// be -- and which of them are double width -- is already known from the block config (the
 	// fixed positions) and the max item count, so the grid can take up its final size right away
@@ -76,6 +64,22 @@ export const BlockObjectsGrid: FunctionComponent<BlockObjectsGridProps> = ({
 			...Array.from({ length: Math.max(randomCount - 2, 0) }, () => ({ isFixed: false })),
 		];
 	}, [fixedItems.length]);
+
+	// Each tile gets its own random tertiary color: the background of its wave form (audio items
+	// with no thumbnail image) and of its loading tile. Picked once and then left alone so it
+	// stays stable across re-renders (e.g. a window resize recalculating the visible columns) and
+	// so a tile doesn't change colour the moment its object lands -- hence the count being the
+	// larger of the skeleton and the loaded result set, which for a full grid is the same number.
+	// One color per tile position (matched up by index below) rather than a map keyed by
+	// schemaIdentifier: the same object can appear more than once (e.g. pinned as a fixed position
+	// and also returned among the random results), which a key derived from the item would
+	// collapse into a shared color.
+	const totalItemCount = (data?.fixedObjects?.length ?? 0) + (data?.objects?.length ?? 0);
+	const tileCount = Math.max(totalItemCount, placeholderTiles.length);
+	const tileBackgroundColors = useMemo(
+		() => Array.from({ length: tileCount }, () => getRandomTertiaryBackgroundColor()),
+		[tileCount]
+	);
 
 	// Tracks viewport width so the tablet/mobile breakpoints can hide tiles that would
 	// otherwise leave the last row half-filled (desktop always fetches an exact 4 rows).
@@ -161,7 +165,11 @@ export const BlockObjectsGrid: FunctionComponent<BlockObjectsGridProps> = ({
 
 	// A tile whose object hasn't been resolved yet: the box is already at its final size (the
 	// grid sizes it), so it only needs to show that something is on its way.
-	const renderPlaceholderTile = (isFixed: boolean, index: number): ReactElement => (
+	const renderPlaceholderTile = (
+		isFixed: boolean,
+		index: number,
+		tileBackgroundColor?: Color
+	): ReactElement => (
 		<li
 			className={clsx('c-block-objects-grid__tile', {
 				'c-block-objects-grid__tile--fixed': isFixed,
@@ -170,7 +178,10 @@ export const BlockObjectsGrid: FunctionComponent<BlockObjectsGridProps> = ({
 			// The aria-live status below already announces that the objects are loading.
 			aria-hidden="true"
 		>
-			<div className="c-block-objects-grid__tile-media c-block-objects-grid__tile-media--loading">
+			<div
+				className="c-block-objects-grid__tile-media c-block-objects-grid__tile-media--loading"
+				style={tileBackgroundColor ? { backgroundColor: tileBackgroundColor } : undefined}
+			>
 				<Spinner size="large" locationId={'objects-grid-tile'} />
 			</div>
 		</li>
@@ -307,7 +318,9 @@ export const BlockObjectsGrid: FunctionComponent<BlockObjectsGridProps> = ({
 
 			{isLoading && (
 				<ul className="c-block-objects-grid__grid">
-					{visiblePlaceholders.map(({ isFixed }, index) => renderPlaceholderTile(isFixed, index))}
+					{visiblePlaceholders.map(({ isFixed }, index) =>
+						renderPlaceholderTile(isFixed, index, tileBackgroundColors[index])
+					)}
 				</ul>
 			)}
 
