@@ -54,31 +54,6 @@
 
   // The whole mechanism relies on the content escaping this zero-height box
   overflow: visible;
-
-  // Dark scrim so light text stays legible over a photo. Taken from the design: 120px at 56% on
-  // desktop, 160px on mobile, where the breadcrumbs wrap over several lines.
-  // Desktop: https://www.figma.com/design/mps3ITECqMBQtdk8vheYOp/?node-id=455-3958
-  // Mobile: https://www.figma.com/design/mps3ITECqMBQtdk8vheYOp/?node-id=455-6978
-  &::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: variables.$g-spacer-unit * 15; // 120px
-    background: linear-gradient(to bottom, rgb(0 0 0 / 56%), rgb(0 0 0 / 0%));
-
-    // Behind the breadcrumbs, but still above the block underneath, because the z-index on this
-    // block makes it a stacking context
-    z-index: -1;
-
-    // Never swallow clicks meant for the block underneath
-    pointer-events: none;
-
-    @media (max-width: variables.$g-bp2) {
-      height: variables.$g-spacer-unit * 20; // 160px
-    }
-  }
 }
 
 .c-content-block-preview--dark {

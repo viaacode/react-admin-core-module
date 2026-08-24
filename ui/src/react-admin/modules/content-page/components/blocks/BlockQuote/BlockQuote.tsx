@@ -4,16 +4,16 @@ import clsx from 'clsx';
 import type { FunctionComponent } from 'react';
 import React from 'react';
 
-import './BlockAvoQuote.scss';
+import './BlockQuote.scss';
 
-export interface BlockAvoQuoteProps extends DefaultProps {
+export interface BlockQuoteProps extends DefaultProps {
 	quote: string;
 	authorImage?: string;
 	authorName: string;
 	authorInitials?: string;
 }
 
-export const BlockAvoQuote: FunctionComponent<BlockAvoQuoteProps> = ({
+export const BlockQuote: FunctionComponent<BlockQuoteProps> = ({
 	className,
 	quote,
 	authorImage,
