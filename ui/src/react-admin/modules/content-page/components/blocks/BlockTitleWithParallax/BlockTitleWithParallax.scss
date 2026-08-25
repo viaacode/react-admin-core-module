@@ -2,17 +2,29 @@
 @use "../../../../shared/styles/settings/colors" as colors;
 @use "../../../../shared/styles/mixins/typography" as typography;
 
-// Shared by &__title/&__subtitle - only their padding and --h-pad values differ.
-@mixin text-highlight-wrapper {
+// Shared by &__title/&__subtitle - only --h-pad differs per element (see below); --v-pad is the
+// same for both, so it lives here. Both custom properties size the highlight boxes in the .tsx
+// (computeLineBoxes). --v-pad is also this element's *real* padding, so its border-box edge lines
+// up exactly with the next element's - and clip-path crops each line box's own small
+// font-metrics bleed (see computeLineBoxes) at that edge, so the highlight can't leak into the
+// next element. Not overflow: it'd either risk a scrollbar (the x/y coupling rule) or clip the
+// horizontal padding, which is meant to extend past this element's edge.
+@mixin text-wrapper {
 	position: relative;
-	z-index: 0; // contains the highlight box's z-index: -1 to this element
+	z-index: 0;
 	margin: 0;
 	width: fit-content;
 	max-width: 80%;
 	text-align: center;
+	clip-path: inset(0 -9999px);
+
+	--v-pad: #{variables.$g-spacer-unit * 2};
+
+	padding: var(--v-pad) 0;
 }
 
-// Shared by &__title-box/&__subtitle-box - only their background-color differs.
+// Shared by &__title-box/&__subtitle-box - only their background-color differs. Positioned via
+// computeLineBoxes in the .tsx - decorative, hence pointer-events: none.
 @mixin highlight-box($background-color) {
 	position: absolute;
 	z-index: -1;
@@ -95,19 +107,25 @@
 		width: 100%;
 	}
 
-	// Vertical padding is real (centers the text, stacks flush against &__subtitle for free).
-	// Horizontal is JS-driven via --h-pad for the per-line highlighter effect (see the .tsx).
 	&__title {
-		@include text-highlight-wrapper;
-
-		padding: (variables.$g-spacer-unit * 2) 0;
+		@include text-wrapper;
 
 		--h-pad: #{variables.$g-spacer-unit * 3};
 
 		@media (max-width: variables.$g-bp2) {
-			padding: variables.$g-spacer-unit * 2 0;
-
 			--h-pad: #{variables.$g-spacer-unit * 2};
+		}
+	}
+
+	// No padding, no box-decoration-break: a plain span, so line-height alone decides where its
+	// glyphs sit. Its highlight is painted by &__title-box (below) instead.
+	&__title-text {
+		color: colors.$white;
+
+		@include typography.sofia-pro(6.4rem, 800, 6.4rem, true);
+
+		@media (max-width: variables.$g-bp2) {
+			@include typography.sofia-pro(4rem, 800, 4.4rem, true);
 		}
 	}
 
@@ -115,42 +133,20 @@
 		@include highlight-box(colors.$color-gray-1000);
 	}
 
-	&__title-text {
-		display: inline;
-
-		@include typography.sofia-pro(6.4rem, 800, 6.4rem, true);
-
-		color: colors.$white;
-
-		@media (max-width: variables.$g-bp2) {
-			@include typography.sofia-pro(4rem, 800, 4.4rem, true);
-		}
-	}
-
 	&__subtitle {
-		@include text-highlight-wrapper;
-
-		padding: (variables.$g-spacer-unit * 2) 0;
+		@include text-wrapper;
 
 		--h-pad: #{variables.$g-spacer-unit * 3};
+	}
 
-		@media (max-width: variables.$g-bp2) {
-			padding: variables.$g-spacer-unit 0;
+	&__subtitle-text {
+		color: colors.$neutral;
 
-			--h-pad: #{variables.$g-spacer-unit};
-		}
+		@include typography.sofia-pro(2.4rem, 800, 2.6rem, true);
 	}
 
 	&__subtitle-box {
 		@include highlight-box(colors.$white);
-	}
-
-	&__subtitle-text {
-		display: inline;
-
-		@include typography.sofia-pro(2.4rem, 800, 2.6rem, true);
-
-		color: colors.$neutral;
 	}
 
 	// "Big" keeps the desktop subtitle size on mobile - only "small" shrinks it.
