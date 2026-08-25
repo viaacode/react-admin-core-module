@@ -27,6 +27,7 @@ import './BlockTimeline.scss';
 export interface BlockTimelineProps extends DefaultComponentProps {
 	/** Id of the content block, added by the content block renderer. Empty for an unsaved block. */
 	blockId?: string;
+	/** The timeline nodes, in the order the editor configured them, not the order they are shown in. */
 	elements: TimelineNodeBlockComponentState[];
 	/** Chronological order of the nodes. Descending (most recent first) when unset. */
 	sortOrder?: AvoSearchOrderDirection;

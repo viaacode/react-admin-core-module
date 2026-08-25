@@ -9,7 +9,8 @@ import { HET_ARCHIEF } from '~shared/types';
 import type {
 	ContentBlockConfig,
 	ContentBlockField,
-	TimelineBlockState,
+	DefaultContentBlockState,
+	TimelineBlockComponentState,
 	TimelineNodeBlockComponentState,
 	TimelineNodeVisualType,
 } from '../../../types/content-block.types';
@@ -77,25 +78,27 @@ const visualTypeIsImage: ContentBlockField['isVisible'] = (_config, formGroupSta
 	return (formGroupState as TimelineNodeBlockComponentState).visualType === 'IMAGE';
 };
 
-export const INITIAL_TIMELINE_COMPONENTS_STATE = (): TimelineNodeBlockComponentState[] => [
-	{
-		date: '',
-		title: '',
-		text: '',
-		visualType: 'NONE',
-		mediaItem: undefined,
-		startTime: undefined,
-		endTime: undefined,
-		image: undefined,
-		imageAlt: '',
-		...COPYRIGHT_STATE(),
-		backgroundColor: Color.Transparent,
-	},
-];
+const INITIAL_TIMELINE_NODE_STATE = (): TimelineNodeBlockComponentState => ({
+	date: '',
+	title: '',
+	text: '',
+	visualType: 'NONE',
+	mediaItem: undefined,
+	startTime: undefined,
+	endTime: undefined,
+	image: undefined,
+	imageAlt: '',
+	...COPYRIGHT_STATE(),
+	backgroundColor: Color.Transparent,
+});
 
-export const INITIAL_TIMELINE_BLOCK_STATE = (): TimelineBlockState => ({
-	...BLOCK_STATE_DEFAULTS(),
+export const INITIAL_TIMELINE_COMPONENTS_STATE = (): TimelineBlockComponentState => ({
 	sortOrder: AvoSearchOrderDirection.DESC,
+	elements: [INITIAL_TIMELINE_NODE_STATE()],
+});
+
+export const INITIAL_TIMELINE_BLOCK_STATE = (): DefaultContentBlockState => ({
+	...BLOCK_STATE_DEFAULTS(),
 });
 
 export const TIMELINE_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
@@ -107,136 +110,7 @@ export const TIMELINE_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 	),
 	type: ContentBlockType.Timeline,
 	components: {
-		name: tText(
-			'react-admin/modules/content-page/components/blocks/block-timeline/block-timeline___node',
-			{},
-			[HET_ARCHIEF]
-		),
 		state: INITIAL_TIMELINE_COMPONENTS_STATE(),
-		fields: {
-			date: {
-				label: tText(
-					'react-admin/modules/content-page/components/blocks/block-timeline/block-timeline___datum',
-					{},
-					[HET_ARCHIEF]
-				),
-				editorType: ContentBlockEditor.DatePicker,
-				validator: (value: string) =>
-					validateRequiredValue(
-						value,
-						tText(
-							'react-admin/modules/content-page/components/blocks/block-timeline/block-timeline___datum-is-verplicht',
-							{},
-							[HET_ARCHIEF]
-						)
-					),
-			},
-			title: TEXT_FIELD(
-				{
-					label: tText(
-						'react-admin/modules/content-page/components/blocks/block-timeline/block-timeline___titel',
-						{},
-						[HET_ARCHIEF]
-					),
-				},
-				tText(
-					'react-admin/modules/content-page/components/blocks/block-timeline/block-timeline___titel-is-verplicht',
-					{},
-					[HET_ARCHIEF]
-				)
-			),
-			text: TEXT_FIELD({
-				label: tText(
-					'react-admin/modules/content-page/components/blocks/block-timeline/block-timeline___tekst',
-					{},
-					[HET_ARCHIEF]
-				),
-				editorType: ContentBlockEditor.RICH_TEXT_EDITOR,
-				validator: undefined,
-			}),
-			visualType: {
-				label: tText(
-					'react-admin/modules/content-page/components/blocks/block-timeline/block-timeline___visuele-elementen',
-					{},
-					[HET_ARCHIEF]
-				),
-				editorType: ContentBlockEditor.Select,
-				editorProps: {
-					options: GET_TIMELINE_NODE_VISUAL_TYPE_OPTIONS(),
-				},
-				validator: (value: string) =>
-					validateRequiredValue(
-						value,
-						tText(
-							'react-admin/modules/content-page/components/blocks/block-timeline/block-timeline___keuze-van-visuele-elementen-is-verplicht',
-							{},
-							[HET_ARCHIEF]
-						)
-					),
-			},
-			...IE_OBJECT_WITH_SNIPPET_TIME_FIELDS(undefined, visualTypeIsObject),
-			image: FILE_FIELD(
-				tText(
-					'react-admin/modules/content-page/components/blocks/block-timeline/block-timeline___een-afbeelding-is-verplicht',
-					{},
-					[HET_ARCHIEF]
-				),
-				{
-					label: tText(
-						'react-admin/modules/content-page/components/blocks/block-timeline/block-timeline___afbeelding',
-						{},
-						[HET_ARCHIEF]
-					),
-					editorProps: {
-						assetType: 'CONTENT_BLOCK_IMAGE',
-						allowMulti: false,
-						showDeleteButton: true,
-					} as FileUploadProps,
-					isVisible: visualTypeIsImage,
-				}
-			),
-			imageAlt: TEXT_FIELD({
-				label: tText(
-					'react-admin/modules/content-page/components/blocks/block-timeline/block-timeline___alternatieve-tekst-afbeelding',
-					{},
-					[HET_ARCHIEF]
-				),
-				validator: undefined,
-				isVisible: visualTypeIsImage,
-			}),
-			...COPYRIGHT_FIELDS({
-				title: {
-					overrides: {
-						isVisible: visualTypeIsImage,
-					},
-				},
-				showIcon: {
-					overrides: {
-						isVisible: visualTypeIsImage,
-					},
-				},
-				text: {
-					overrides: {
-						isVisible: visualTypeIsImage,
-					},
-				},
-			}),
-			backgroundColor: {
-				label: tText(
-					'react-admin/modules/content-page/components/blocks/block-timeline/block-timeline___achtergrondkleur-van-de-node',
-					{},
-					[HET_ARCHIEF]
-				),
-				editorType: ContentBlockEditor.ColorSelect,
-				editorProps: {
-					options: GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF(),
-					defaultValue: GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF()[0],
-				},
-			},
-		},
-	},
-	block: {
-		state: INITIAL_TIMELINE_BLOCK_STATE(),
 		fields: {
 			sortOrder: {
 				label: tText(
@@ -249,6 +123,153 @@ export const TIMELINE_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 					options: GET_TIMELINE_SORT_ORDER_OPTIONS(),
 				},
 			},
+			elements: {
+				label: tText(
+					'react-admin/modules/content-page/components/blocks/block-timeline/block-timeline___node',
+					{},
+					[HET_ARCHIEF]
+				),
+				type: 'fieldGroup',
+				fields: {
+					date: {
+						label: tText(
+							'react-admin/modules/content-page/components/blocks/block-timeline/block-timeline___datum',
+							{},
+							[HET_ARCHIEF]
+						),
+						editorType: ContentBlockEditor.DatePicker,
+						validator: (value: string) =>
+							validateRequiredValue(
+								value,
+								tText(
+									'react-admin/modules/content-page/components/blocks/block-timeline/block-timeline___datum-is-verplicht',
+									{},
+									[HET_ARCHIEF]
+								)
+							),
+					},
+					title: TEXT_FIELD(
+						{
+							label: tText(
+								'react-admin/modules/content-page/components/blocks/block-timeline/block-timeline___titel',
+								{},
+								[HET_ARCHIEF]
+							),
+						},
+						tText(
+							'react-admin/modules/content-page/components/blocks/block-timeline/block-timeline___titel-is-verplicht',
+							{},
+							[HET_ARCHIEF]
+						)
+					),
+					text: TEXT_FIELD({
+						label: tText(
+							'react-admin/modules/content-page/components/blocks/block-timeline/block-timeline___tekst',
+							{},
+							[HET_ARCHIEF]
+						),
+						editorType: ContentBlockEditor.RICH_TEXT_EDITOR,
+						validator: undefined,
+					}),
+					visualType: {
+						label: tText(
+							'react-admin/modules/content-page/components/blocks/block-timeline/block-timeline___visuele-elementen',
+							{},
+							[HET_ARCHIEF]
+						),
+						editorType: ContentBlockEditor.Select,
+						editorProps: {
+							options: GET_TIMELINE_NODE_VISUAL_TYPE_OPTIONS(),
+						},
+						validator: (value: string) =>
+							validateRequiredValue(
+								value,
+								tText(
+									'react-admin/modules/content-page/components/blocks/block-timeline/block-timeline___keuze-van-visuele-elementen-is-verplicht',
+									{},
+									[HET_ARCHIEF]
+								)
+							),
+					},
+					...IE_OBJECT_WITH_SNIPPET_TIME_FIELDS(undefined, visualTypeIsObject),
+					image: FILE_FIELD(
+						tText(
+							'react-admin/modules/content-page/components/blocks/block-timeline/block-timeline___een-afbeelding-is-verplicht',
+							{},
+							[HET_ARCHIEF]
+						),
+						{
+							label: tText(
+								'react-admin/modules/content-page/components/blocks/block-timeline/block-timeline___afbeelding',
+								{},
+								[HET_ARCHIEF]
+							),
+							editorProps: {
+								assetType: 'CONTENT_BLOCK_IMAGE',
+								allowMulti: false,
+								showDeleteButton: true,
+							} as FileUploadProps,
+							isVisible: visualTypeIsImage,
+						}
+					),
+					imageAlt: TEXT_FIELD({
+						label: tText(
+							'react-admin/modules/content-page/components/blocks/block-timeline/block-timeline___alternatieve-tekst-afbeelding',
+							{},
+							[HET_ARCHIEF]
+						),
+						validator: undefined,
+						isVisible: visualTypeIsImage,
+					}),
+					...COPYRIGHT_FIELDS({
+						title: {
+							overrides: {
+								isVisible: visualTypeIsImage,
+							},
+						},
+						showIcon: {
+							overrides: {
+								isVisible: visualTypeIsImage,
+							},
+						},
+						text: {
+							overrides: {
+								isVisible: visualTypeIsImage,
+							},
+						},
+					}),
+					backgroundColor: {
+						label: tText(
+							'react-admin/modules/content-page/components/blocks/block-timeline/block-timeline___achtergrondkleur-van-de-node',
+							{},
+							[HET_ARCHIEF]
+						),
+						editorType: ContentBlockEditor.ColorSelect,
+						editorProps: {
+							options: GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF(),
+							defaultValue: GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF()[0],
+						},
+					},
+				},
+				repeat: {
+					defaultState: INITIAL_TIMELINE_NODE_STATE(),
+					addButtonLabel: tText(
+						'react-admin/modules/content-page/components/blocks/block-timeline/block-timeline___voeg-node-toe',
+						{},
+						[HET_ARCHIEF]
+					),
+					deleteButtonLabel: tText(
+						'react-admin/modules/content-page/components/blocks/block-timeline/block-timeline___verwijder-node',
+						{},
+						[HET_ARCHIEF]
+					),
+				},
+			},
+		},
+	},
+	block: {
+		state: INITIAL_TIMELINE_BLOCK_STATE(),
+		fields: {
 			...BLOCK_FIELD_DEFAULTS(),
 		},
 	},
