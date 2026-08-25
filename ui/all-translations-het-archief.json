@@ -23484,6 +23484,46 @@
     "app": "HET_ARCHIEF",
     "component": "ADMIN_CORE",
     "location": "react-admin/modules/content-page/components/blocks/block-timeline/block-timeline",
+    "key": "aflopend-meest-recente-eerst",
+    "language": "nl",
+    "value": "Aflopend (meest recente eerst)",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/content-page/components/blocks/block-timeline/block-timeline",
+    "key": "aflopend-meest-recente-eerst",
+    "language": "en",
+    "value": "Aflopend (meest recente eerst)",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/content-page/components/blocks/block-timeline/block-timeline",
+    "key": "oplopend-oudste-eerst",
+    "language": "nl",
+    "value": "Oplopend (oudste eerst)",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/content-page/components/blocks/block-timeline/block-timeline",
+    "key": "oplopend-oudste-eerst",
+    "language": "en",
+    "value": "Oplopend (oudste eerst)",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/content-page/components/blocks/block-timeline/block-timeline",
     "key": "tijdslijn",
     "language": "nl",
     "value": "Tijdslijn",
@@ -23717,6 +23757,26 @@
     "key": "achtergrondkleur-van-de-node",
     "language": "en",
     "value": "Achtergrondkleur van de node",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/content-page/components/blocks/block-timeline/block-timeline",
+    "key": "chronologische-sortering",
+    "language": "nl",
+    "value": "Chronologische sortering",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/content-page/components/blocks/block-timeline/block-timeline",
+    "key": "chronologische-sortering",
+    "language": "en",
+    "value": "Chronologische sortering",
     "value_type": "TEXT"
   },
   {
@@ -24243,26 +24303,6 @@
     "id": "",
     "app": "HET_ARCHIEF",
     "component": "ADMIN_CORE",
-    "location": "admin/content-block/helpers/generators/media-player",
-    "key": "automatisch-afspelen",
-    "language": "nl",
-    "value": "Automatisch afspelen",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "admin/content-block/helpers/generators/media-player",
-    "key": "automatisch-afspelen",
-    "language": "en",
-    "value": "Autoplay",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
     "location": "modules/admin/content-page/components/wrappers/media-player-wrapper/media-player-wrapper",
     "key": "error",
     "language": "nl",
@@ -24657,6 +24697,86 @@
     "key": "gelieve-een-correcte-zoekfilter-link-in-te-vullen",
     "language": "en",
     "value": "Please enter a correct search filter link.",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "admin/content-block/helpers/generators/quote",
+    "key": "quote",
+    "language": "nl",
+    "value": "Quote",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "admin/content-block/helpers/generators/quote",
+    "key": "quote",
+    "language": "en",
+    "value": "Quote",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "admin/content-block/helpers/generators/quote",
+    "key": "quote-is-verplicht",
+    "language": "nl",
+    "value": "Quote is verplicht",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "admin/content-block/helpers/generators/quote",
+    "key": "quote-is-verplicht",
+    "language": "en",
+    "value": "Quote is verplicht",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "admin/content-block/helpers/generators/quote",
+    "key": "auteur",
+    "language": "nl",
+    "value": "Auteur",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "admin/content-block/helpers/generators/quote",
+    "key": "auteur",
+    "language": "en",
+    "value": "Auteur",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "admin/content-block/helpers/generators/quote",
+    "key": "initialen",
+    "language": "nl",
+    "value": "Initialen",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "admin/content-block/helpers/generators/quote",
+    "key": "initialen",
+    "language": "en",
+    "value": "Initialen",
     "value_type": "TEXT"
   },
   {
