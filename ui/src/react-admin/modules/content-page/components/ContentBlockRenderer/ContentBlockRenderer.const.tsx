@@ -1,6 +1,7 @@
 import type { FC, FunctionComponent } from 'react';
 import { AvoHeroWrapper } from '~content-blocks/BlockAvoHero/AvoHeroWrapper';
 import { BlockAvoImageTextBackground } from '~content-blocks/BlockAvoImageTextBackground';
+import { BlockAvoVideoWrapper } from '~content-blocks/BlockAvoVideo';
 import { BlockBreadcrumbs } from '~content-blocks/BlockBreadcrumbs';
 import { BlockButtonsWrapper } from '~content-blocks/BlockButtons';
 import { BlockCardsWithoutDescription } from '~content-blocks/BlockCardsWithoutDescription';
@@ -43,7 +44,6 @@ import { BlockThreeClickableTiles } from '~content-blocks/BlockThreeClickableTil
 import { BlockTimeline } from '~content-blocks/BlockTimeline';
 import { BlockTitleWithParallax } from '~content-blocks/BlockTitleWithParallax';
 import { BlockUitgeklaard } from '~content-blocks/BlockUitgeklaard';
-import { BlockVideoWrapper } from '~content-blocks/BlockVideo';
 import { BlockVideoTitleTextButtonWrapper } from '~content-blocks/BlockVideoTitleTextButton';
 import { AdminConfigManager } from '~core/config/config.class';
 import { ContentBlockType } from '~modules/content-page/types/content-block.types';
@@ -70,7 +70,7 @@ export function GET_BLOCK_COMPONENT(
 		[ContentBlockType.Intro]: BlockIntro,
 		[ContentBlockType.Klaar]: BlockKlaar,
 		[ContentBlockType.MediaPlayerTitleTextButton]: BlockVideoTitleTextButtonWrapper,
-		[ContentBlockType.MediaPlayer]: BlockVideoWrapper,
+		[ContentBlockType.AvoVideo]: BlockAvoVideoWrapper,
 		[ContentBlockType.PageOverview]: BlockPageOverviewWrapper,
 		[ContentBlockType.ProjectsSpotlight]: BlockProjectSpotlightWrapper,
 		[ContentBlockType.Quote]: BlockQuote,
@@ -141,7 +141,6 @@ export const REPEATABLE_CONTENT_BLOCKS = [
 	ContentBlockType.ThreeClickableTiles,
 	ContentBlockType.TagsWithLink,
 	ContentBlockType.CardsWithoutDescription,
-	ContentBlockType.Timeline,
 	// ContentBlockType.ContentEncloseGrid,
 ];
 
@@ -174,7 +173,7 @@ export const NAVIGABLE_CONTENT_BLOCKS = [
  */
 export const USER_CONTENT_BLOCKS = [
 	ContentBlockType.MediaPlayerTitleTextButton,
-	ContentBlockType.MediaPlayer,
+	ContentBlockType.AvoVideo,
 	ContentBlockType.PageOverview,
 	ContentBlockType.MediaGrid,
 	ContentBlockType.ProjectsSpotlight,

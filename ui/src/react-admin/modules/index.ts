@@ -99,6 +99,7 @@ export { UserGroupOverview } from './user-group/views/UserGroupOverview';
 
 // Admin Core
 
+export * from '~content-blocks/BlockAvoVideo/BlockAvoVideo.tsx';
 // Export items to csv modal
 export * from './content-page/components/blocks/anchor-links';
 export * from './content-page/components/blocks/BlockAccordions/BlockAccordions';
@@ -133,7 +134,6 @@ export * from './content-page/components/blocks/BlockTagsWithLink/BlockTagsWithL
 export * from './content-page/components/blocks/BlockThreeClickableTiles/BlockThreeClickableTiles';
 export * from './content-page/components/blocks/BlockTitleImageText/BlockTitleImageText';
 export * from './content-page/components/blocks/BlockUitgeklaard/BlockUitgeklaard';
-export * from './content-page/components/blocks/BlockVideo/BlockVideo';
 export * from './content-page/components/blocks/BlockVideoTitleTextButton/BlockVideoTitleTextButton';
 export * from './content-page/components/blocks/defaults';
 export * from './content-page/components/blocks/search';

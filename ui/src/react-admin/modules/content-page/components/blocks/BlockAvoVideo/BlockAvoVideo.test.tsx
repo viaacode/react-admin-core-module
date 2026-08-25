@@ -3,19 +3,19 @@ import React from 'react';
 import { afterEach, describe, expect, it } from 'vitest';
 import { flowplayerMock } from '../../../../../../__mocks__/flowplayer';
 
-import { BlockVideo } from './BlockVideo';
+import { BlockAvoVideo } from './BlockAvoVideo.tsx';
 
 const customClass = 'c-block-custom';
 
 const blockVideoExampleExample = (
-	<BlockVideo className={customClass} flowPlayerProps={flowplayerMock} />
+	<BlockAvoVideo className={customClass} flowPlayerProps={flowplayerMock} />
 );
 
 afterEach(() => {
 	cleanup();
 });
 
-describe('<BlockVideo />', () => {
+describe('<BlockAvoVideo />', () => {
 	it('Should be able to render', () => {
 		render(blockVideoExampleExample);
 	});

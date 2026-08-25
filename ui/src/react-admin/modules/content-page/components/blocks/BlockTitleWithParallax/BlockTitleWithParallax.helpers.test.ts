@@ -56,11 +56,7 @@ describe('computeLineBoxes', () => {
 
 		const textEl = document.createElement('span');
 		textEl.getClientRects = () =>
-			[
-				rect(10, 200, 40, 0),
-				rect(50, 150, 80, 0),
-				rect(90, 180, 140, 0),
-			] as unknown as DOMRectList;
+			[rect(10, 200, 40, 0), rect(50, 150, 80, 0), rect(90, 180, 140, 0)] as unknown as DOMRectList;
 
 		expect(computeLineBoxes(wrapperEl, textEl)).toEqual([
 			{ top: 10, left: 0, width: 200, height: 30 },

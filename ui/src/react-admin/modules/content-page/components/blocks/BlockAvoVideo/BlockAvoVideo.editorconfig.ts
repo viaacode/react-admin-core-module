@@ -17,11 +17,12 @@ import {
 	TEXT_FIELD,
 } from '../defaults';
 
-export const INITIAL_MEDIA_PLAYER_COMPONENTS_STATE = (): MediaPlayerBlockComponentState => ({
+export const INITIAL_AVO_VIDEO_COMPONENTS_STATE = (): MediaPlayerBlockComponentState => ({
 	title: '',
+	autoplay: false,
 });
 
-export const INITIAL_MEDIA_PLAYER_BLOCK_STATE = (): DefaultContentBlockState =>
+export const INITIAL_AVO_VIDEO_BLOCK_STATE = (): DefaultContentBlockState =>
 	BLOCK_STATE_DEFAULTS({
 		padding: {
 			top: 'top-extra-large',
@@ -29,12 +30,12 @@ export const INITIAL_MEDIA_PLAYER_BLOCK_STATE = (): DefaultContentBlockState =>
 		},
 	});
 
-export const MEDIA_PLAYER_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
+export const AVO_VIDEO_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 	position,
 	name: tText('admin/content-block/helpers/generators/media-player___media-speler'),
-	type: ContentBlockType.MediaPlayer,
+	type: ContentBlockType.AvoVideo,
 	components: {
-		state: INITIAL_MEDIA_PLAYER_COMPONENTS_STATE(),
+		state: INITIAL_AVO_VIDEO_COMPONENTS_STATE(),
 		fields: {
 			title: TEXT_FIELD({
 				label: tText(
@@ -89,10 +90,18 @@ export const MEDIA_PLAYER_BLOCK_CONFIG = (position = 0): ContentBlockConfig => (
 					options: GET_MEDIA_PLAYER_WIDTH_OPTIONS(),
 				},
 			},
+			autoplay: {
+				editorType: ContentBlockEditor.Checkbox,
+				editorProps: {
+					label: tText(
+						'admin/content-block/helpers/generators/media-player___automatisch-afspelen'
+					),
+				} as CheckboxProps,
+			},
 		},
 	},
 	block: {
-		state: INITIAL_MEDIA_PLAYER_BLOCK_STATE(),
+		state: INITIAL_AVO_VIDEO_BLOCK_STATE(),
 		fields: BLOCK_FIELD_DEFAULTS(),
 	},
 });
