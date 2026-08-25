@@ -22,10 +22,16 @@ export const BlockTitleWithParallax: FunctionComponent<BlockTitleWithParallaxPro
 	const rootRef = useRef<HTMLDivElement>(null);
 	const imageRef = useRef<HTMLDivElement>(null);
 
-	const { wrapperRef: titleRef, textRef: titleTextRef, boxes: titleBoxes } =
-		useHighlightBoxes<HTMLHeadingElement>(title);
-	const { wrapperRef: subtitleRef, textRef: subtitleTextRef, boxes: subtitleBoxes } =
-		useHighlightBoxes<HTMLParagraphElement>(subtitle);
+	const {
+		wrapperRef: titleRef,
+		textRef: titleTextRef,
+		boxes: titleBoxes,
+	} = useHighlightBoxes<HTMLHeadingElement>(title);
+	const {
+		wrapperRef: subtitleRef,
+		textRef: subtitleTextRef,
+		boxes: subtitleBoxes,
+	} = useHighlightBoxes<HTMLParagraphElement>(subtitle);
 
 	// biome-ignore lint/correctness/useExhaustiveDependencies: re-attaches once `image` (and imageRef.current) is set
 	useEffect(() => {
