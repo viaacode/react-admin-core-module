@@ -4,7 +4,7 @@ import type { TitleWithParallaxBlockComponentState } from '~modules/content-page
 import type { DefaultComponentProps } from '~modules/shared/types/components';
 
 import { readParallaxSpeed, watchReducedMotion } from './BlockTitleWithParallax.helpers';
-import { useHighlightBoxes } from './hooks/useHighlightBoxes';
+import { HighlightedText } from './HighlightedText';
 
 import './BlockTitleWithParallax.scss';
 
@@ -21,11 +21,6 @@ export const BlockTitleWithParallax: FunctionComponent<BlockTitleWithParallaxPro
 }): ReactElement => {
 	const rootRef = useRef<HTMLDivElement>(null);
 	const imageRef = useRef<HTMLDivElement>(null);
-
-	const { wrapperRef: titleRef, textRef: titleTextRef, boxes: titleBoxes } =
-		useHighlightBoxes<HTMLHeadingElement>(title);
-	const { wrapperRef: subtitleRef, textRef: subtitleTextRef, boxes: subtitleBoxes } =
-		useHighlightBoxes<HTMLParagraphElement>(subtitle);
 
 	// biome-ignore lint/correctness/useExhaustiveDependencies: re-attaches once `image` (and imageRef.current) is set
 	useEffect(() => {
@@ -111,36 +106,22 @@ export const BlockTitleWithParallax: FunctionComponent<BlockTitleWithParallaxPro
 			)}
 			<div className="c-block-title-with-parallax__content">
 				{title && (
-					<h1 ref={titleRef} className="c-block-title-with-parallax__title">
-						{titleBoxes.map((box, index) => (
-							<span
-								// biome-ignore lint/suspicious/noArrayIndexKey: decorative, no identity of its own
-								key={index}
-								className="c-block-title-with-parallax__title-box"
-								style={box}
-								aria-hidden="true"
-							/>
-						))}
-						<span ref={titleTextRef} className="c-block-title-with-parallax__title-text">
-							{title}
-						</span>
-					</h1>
+					<HighlightedText
+						htmlTag="h1"
+						text={title}
+						wrapperClassName="c-block-title-with-parallax__title"
+						textClassName="c-block-title-with-parallax__title-text"
+						boxClassName="c-block-title-with-parallax__title-box"
+					/>
 				)}
 				{subtitle && (
-					<p ref={subtitleRef} className="c-block-title-with-parallax__subtitle">
-						{subtitleBoxes.map((box, index) => (
-							<span
-								// biome-ignore lint/suspicious/noArrayIndexKey: decorative, no identity of its own
-								key={index}
-								className="c-block-title-with-parallax__subtitle-box"
-								style={box}
-								aria-hidden="true"
-							/>
-						))}
-						<span ref={subtitleTextRef} className="c-block-title-with-parallax__subtitle-text">
-							{subtitle}
-						</span>
-					</p>
+					<HighlightedText
+						htmlTag="p"
+						text={subtitle}
+						wrapperClassName="c-block-title-with-parallax__subtitle"
+						textClassName="c-block-title-with-parallax__subtitle-text"
+						boxClassName="c-block-title-with-parallax__subtitle-box"
+					/>
 				)}
 			</div>
 		</div>
