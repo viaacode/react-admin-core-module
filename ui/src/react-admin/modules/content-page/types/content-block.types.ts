@@ -499,8 +499,7 @@ export type RepeatedContentBlockComponentState =
 	| MediaGridBlockComponentState
 	| ImageInfo // project spotlight & spotlight
 	| RichTextBlockComponentState
-	| ThreeClickableTilesBlockComponentState
-	| TimelineNodeBlockComponentState;
+	| ThreeClickableTilesBlockComponentState;
 
 export type SingleContentBlockComponentState =
 	| HeadingBlockComponentState
@@ -516,6 +515,7 @@ export type SingleContentBlockComponentState =
 	| QuoteBlockComponentState
 	| HetArchiefQuoteBlockComponentState
 	| RichTextBlockComponentState
+	| TimelineBlockComponentState
 	// biome-ignore lint/complexity/noBannedTypes: todo
 	| {}; // Search block & content page meta
 
@@ -689,10 +689,11 @@ export interface TimelineNodeBlockComponentState extends MediaItemComponentState
 	backgroundColor?: Color;
 }
 
-export type TimelineBlockState = DefaultContentBlockState & {
+export interface TimelineBlockComponentState {
 	/** Chronological order of the nodes. Descending (most recent first) when unset. */
 	sortOrder?: AvoSearchOrderDirection;
-};
+	elements: TimelineNodeBlockComponentState[];
+}
 
 export enum TitleWithParallaxVisualisationOption {
 	BIG = 'BIG',
