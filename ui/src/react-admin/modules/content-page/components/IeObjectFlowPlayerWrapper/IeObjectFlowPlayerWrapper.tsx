@@ -35,6 +35,22 @@ export const IeObjectFlowPlayerWrapper: FunctionComponent<IeObjectFlowPlayerWrap
 		return null;
 	}
 
+	// FlowPlayer calls onPlay once per player, for autoplay and manual play alike, so this reports
+	// every play of this object without needing a guard of its own. What to do with it is up to the
+	// consuming app: the admin-core does no analytics.
+	const handlePlay = () => {
+		AdminConfigManager.getConfig().handlers?.onIeObjectPlay?.({
+			schemaIdentifier: ieObject.schemaIdentifier,
+			maintainerId: ieObject.maintainerId,
+			dctermsFormat: ieObject.dctermsFormat,
+			// snipPoint is what the proxy actually cut the url at, echoed back for both a saved
+			// block and one still being edited, and it only ever holds a real interval - so having
+			// both times is exactly "an editor configured a snippet for this block".
+			isBlockSnippet:
+				ieObject.snipPoint?.start !== undefined && ieObject.snipPoint?.end !== undefined,
+		});
+	};
+
 	// The active slide is the only one big enough to warrant the full-size newspaper image, so
 	// it's the only slide that prefers it over the (lower-res) thumbnail.
 	const imageSrc = ieObject.thumbnailUrl || '';
@@ -46,6 +62,7 @@ export const IeObjectFlowPlayerWrapper: FunctionComponent<IeObjectFlowPlayerWrap
 		autoplay,
 		muted: isMuted,
 		onMutedChange,
+		onPlay: handlePlay,
 		onEnded: onEnded,
 		onError: onEnded,
 		token: AdminConfigManager.getConfig().flowplayer.FLOW_PLAYER_TOKEN,

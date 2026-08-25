@@ -14,6 +14,19 @@ import type {
 import type { App, Locale } from '~modules/translations/translations.core.types';
 import type { UserBulkAction } from '~modules/user/user.types';
 import type { FlowPlayerWrapperProps } from '~shared/components/FlowPlayerWrapper/FlowPlayerWrapper.types';
+import type { IeObjectType } from '~shared/helpers/map-format-to-type.ts';
+
+/**
+ * What a consuming app needs to log a play of an ie-object rendered by a content block. The
+ * admin-core does no analytics of its own, so it only reports the play and the context it has.
+ */
+export interface IeObjectPlayInfo {
+	schemaIdentifier: string;
+	maintainerId: string;
+	dctermsFormat: IeObjectType;
+	/** True when the content block config cut this object to a snippet, ie. it has a start and end */
+	isBlockSnippet: boolean;
+}
 
 export enum ToastType {
 	ERROR = 'error',
@@ -126,6 +139,12 @@ export interface AdminConfig {
 	alertIcon?: IconConfig;
 	handlers: {
 		onExternalLink: (url: string) => void;
+		/**
+		 * Called when an ie-object in a content block starts playing, automatically or manually,
+		 * once per player. The consuming app decides whether and how to track that - the
+		 * admin-core does no analytics. Optional, so an app that tracks no plays needs no handler.
+		 */
+		onIeObjectPlay?: (info: IeObjectPlayInfo) => void;
 	};
 	users?: {
 		bulkActions?: UserBulkAction[];

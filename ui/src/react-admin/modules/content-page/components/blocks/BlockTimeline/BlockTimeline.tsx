@@ -17,6 +17,7 @@ import Html from '~shared/components/Html/Html';
 import { Icon } from '~shared/components/Icon/Icon';
 import { formatDateToDayMonthNameYear, getYear } from '~shared/helpers/formatters/date';
 import { isAudioVideoFormat } from '~shared/helpers/is-audio-video-format.ts';
+import { snippetTimeToSeconds } from '~shared/helpers/parsers/duration';
 import { SanitizePreset } from '~shared/helpers/sanitize/presets';
 import { tText } from '~shared/helpers/translation-functions';
 import { HET_ARCHIEF } from '~shared/types';
