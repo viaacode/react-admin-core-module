@@ -26,7 +26,6 @@ export interface BlockHetArchiefVideoProps extends DefaultProps {
 	copyrightIconVisible?: boolean;
 	copyrightText?: string;
 	width?: string;
-	autoplay?: boolean;
 }
 
 /**
@@ -49,7 +48,6 @@ export const BlockHetArchiefVideo: FunctionComponent<BlockHetArchiefVideoProps> 
 	copyrightIconVisible = false,
 	copyrightText,
 	width,
-	autoplay,
 }) => {
 	// While this block is being put together in the editor it has no id yet, so its object goes
 	// along for the proxy to resolve. Only cut when both times are given and form a real interval,
@@ -125,12 +123,7 @@ export const BlockHetArchiefVideo: FunctionComponent<BlockHetArchiefVideoProps> 
 						</div>
 					</>
 				) : (
-					<IeObjectFlowPlayerWrapper
-						ieObject={ieObject}
-						poster={poster}
-						title={title}
-						autoplay={autoplay}
-					/>
+					<IeObjectFlowPlayerWrapper ieObject={ieObject} poster={poster} title={title} />
 				)}
 			</div>
 			<CopyrightAttribution

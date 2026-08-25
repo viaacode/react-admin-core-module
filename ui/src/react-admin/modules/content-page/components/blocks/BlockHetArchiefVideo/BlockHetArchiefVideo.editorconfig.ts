@@ -33,7 +33,6 @@ export interface HetArchiefVideoBlockComponentState
 	/** Accessibility title for the player. */
 	title: string;
 	width?: string;
-	autoplay: boolean;
 }
 
 export const INITIAL_HETARCHIEF_VIDEO_COMPONENTS_STATE =
@@ -42,7 +41,6 @@ export const INITIAL_HETARCHIEF_VIDEO_COMPONENTS_STATE =
 		title: '',
 		startTime: '',
 		endTime: '',
-		autoplay: false,
 	});
 
 export const INITIAL_HETARCHIEF_VIDEO_BLOCK_STATE = (): DefaultContentBlockState =>
@@ -105,16 +103,6 @@ export const HETARCHIEF_VIDEO_BLOCK_CONFIG = (position = 0): ContentBlockConfig 
 				editorProps: {
 					options: GET_MEDIA_PLAYER_WIDTH_OPTIONS(),
 				},
-			},
-			autoplay: {
-				editorType: ContentBlockEditor.Checkbox,
-				editorProps: {
-					label: tText(
-						'modules/content-page/components/blocks/block-het-archief-video/block-het-archief-video___automatisch-afspelen',
-						undefined,
-						[HET_ARCHIEF]
-					),
-				} as CheckboxProps,
 			},
 		},
 	},

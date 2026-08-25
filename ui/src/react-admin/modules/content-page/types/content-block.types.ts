@@ -182,7 +182,7 @@ export enum ContentBlockType {
 	Klaar = 'KLAAR',
 	LogoGrid = 'LOGO_GRID',
 	MediaGrid = 'MEDIA_GRID',
-	MediaPlayer = 'MEDIA_PLAYER',
+	AvoVideo = 'MEDIA_PLAYER',
 	MediaPlayerTitleTextButton = 'MEDIA_PLAYER_TITLE_TEXT_BUTTON',
 	PageOverview = 'PAGE_OVERVIEW',
 	ProjectsSpotlight = 'PROJECTS_SPOTLIGHT',
@@ -424,6 +424,7 @@ export interface QuoteBlockComponentState {
 export interface MediaPlayerBlockComponentState {
 	title: string;
 	item?: ButtonAction;
+	autoplay: boolean;
 }
 
 export interface MediaPlayerTitleTextButtonBlockComponentState {

@@ -1,5 +1,6 @@
 export { AvoHeroWrapper } from '~content-blocks/BlockAvoHero/AvoHeroWrapper';
 export { BlockAvoImageTextBackground } from '~content-blocks/BlockAvoImageTextBackground';
+export { BlockAvoVideoWrapper } from '~content-blocks/BlockAvoVideo/BlockAvoVideo.wrapper.tsx';
 export { BlockBreadcrumbs } from '~content-blocks/BlockBreadcrumbs';
 export { BlockButtonsWrapper } from '~content-blocks/BlockButtons/BlockButtons.wrapper';
 export { BlockCardsWithoutDescription } from '~content-blocks/BlockCardsWithoutDescription';
@@ -35,7 +36,6 @@ export { BlockProjectSpotlightWrapper } from '~content-blocks/BlockSpotlight/Blo
 export { BlockTagsWithLink } from '~content-blocks/BlockTagsWithLink';
 export { BlockThreeClickableTiles } from '~content-blocks/BlockThreeClickableTiles';
 export { BlockUitgeklaard } from '~content-blocks/BlockUitgeklaard';
-export { BlockVideoWrapper } from '~content-blocks/BlockVideo/BlockVideo.wrapper';
 export { BlockVideoTitleTextButtonWrapper } from '~content-blocks/BlockVideoTitleTextButton/BlockVideoTitleTextButton.wrapper';
 export { AdminConfigManager, AdminCoreIconName, ToastType } from '~core/config';
 export type { AdminConfig, IeObjectPlayInfo, LinkInfo, ToastInfo } from '~core/config/config.types';

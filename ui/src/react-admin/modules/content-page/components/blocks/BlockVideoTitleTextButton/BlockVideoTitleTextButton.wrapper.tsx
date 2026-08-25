@@ -8,6 +8,7 @@ import {
 } from '@viaa/avo2-types';
 import type { FC } from 'react';
 import React from 'react';
+import { BlockAvoVideoWrapper } from '~content-blocks/BlockAvoVideo/BlockAvoVideo.wrapper.tsx';
 import { BlockHeading } from '~content-blocks/BlockHeading/BlockHeading';
 import { BlockRichTextWrapper } from '~content-blocks/BlockRichText/BlockRichText.wrapper';
 import { AdminConfigManager } from '~core/config/config.class';
@@ -17,7 +18,6 @@ import { generateSmartLink } from '~shared/components/SmartLink/SmartLink';
 import { useLocation } from '~shared/hooks/useLocation.ts';
 import { PermissionService } from '~shared/services/permission-service';
 import type { AlignOption, HeadingTypeOption } from '../../../types/content-block.types';
-import { BlockVideoWrapper } from '../BlockVideo/BlockVideo.wrapper';
 
 interface MediaPlayerTitleTextButtonWrapperProps {
 	mediaItem: ButtonAction;
@@ -84,7 +84,7 @@ export const BlockVideoTitleTextButtonWrapper: FC<MediaPlayerTitleTextButtonWrap
 	return (
 		<Grid className="c-item-video-description">
 			<Column size="2-7">
-				<BlockVideoWrapper
+				<BlockAvoVideoWrapper
 					item={mediaItem}
 					title={mediaTitle}
 					external_id={mediaExternalId}
