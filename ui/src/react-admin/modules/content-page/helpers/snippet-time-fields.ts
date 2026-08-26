@@ -1,7 +1,6 @@
 import type { TextInputProps } from '@viaa/avo2-components';
-import { AvoCoreContentPickerType } from '@viaa/avo2-types';
 import type { HetArchiefVideoBlockComponentState } from '~content-blocks/BlockHetArchiefVideo';
-import { TEXT_FIELD } from '~content-blocks/defaults.ts';
+import { IE_OBJECT_FIELD, TEXT_FIELD } from '~content-blocks/defaults.ts';
 import {
 	type ContentBlockComponentState,
 	ContentBlockEditor,
@@ -15,7 +14,6 @@ import { IeObjectType } from '~shared/helpers/map-format-to-type.ts';
 import { snippetTimeToSeconds } from '~shared/helpers/parsers/duration.ts';
 import { tText } from '~shared/helpers/translation-functions.ts';
 import { HET_ARCHIEF } from '~shared/types';
-import type { PickerItem } from '~shared/types/content-picker.ts';
 
 /**
  * Validates one of the two snippet time fields.
@@ -148,33 +146,9 @@ export const IE_OBJECT_WITH_SNIPPET_TIME_FIELDS = (
 	allowedObjectTypes: IeObjectType[] = Object.values(IeObjectType),
 	isVisibleFunc: IsVisibleFunc = () => true
 ): Record<string, ContentBlockField> => ({
-	// Named `mediaItem` on purpose: generateFieldAttributes reads `state.item ||
-	// state.mediaItem` to tell the still picker below which object to fetch stills for.
-	mediaItem: {
-		label: tText('modules/content-page/helpers/snippet-time-fields___object', undefined, [
-			HET_ARCHIEF,
-		]),
-		editorType: ContentBlockEditor.ContentPicker,
-		editorProps: {
-			allowedTypes: [AvoCoreContentPickerType.IE_OBJECT],
-			hideTypeDropdown: true,
-			hideTargetSwitch: true,
-			// Only video and audio objects can be played
-			ieObjectFormats: allowedObjectTypes,
-		},
-		fieldsToResetOnChange: ['startTime', 'endTime'],
-		validator: (value: PickerItem | undefined) =>
-			value?.value
-				? []
-				: [
-						tText(
-							'modules/content-page/helpers/snippet-time-fields___een-object-is-verplicht',
-							undefined,
-							[HET_ARCHIEF]
-						),
-					],
-		isVisible: isVisibleFunc,
-	},
+	// Changing the object clears the times: they are offsets into that object and mean nothing once
+	// it is a different one.
+	mediaItem: IE_OBJECT_FIELD(allowedObjectTypes, isVisibleFunc, ['startTime', 'endTime']),
 	startTime: SNIPPET_TIME_FIELD(
 		'startTime',
 		tText('modules/content-page/helpers/snippet-time-fields___starttijd', undefined, [HET_ARCHIEF]),

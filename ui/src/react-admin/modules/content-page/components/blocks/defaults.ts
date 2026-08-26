@@ -1,4 +1,5 @@
 import type { CheckboxProps, SelectOption } from '@viaa/avo2-components';
+import { AvoCoreContentPickerType } from '@viaa/avo2-types';
 import { GET_ALIGN_OPTIONS } from '~modules/content-page/const/get-align-options';
 import {
 	GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF,
@@ -13,9 +14,12 @@ import type { RichTextEditorWrapperProps } from '~shared/components/RichTextEdit
 import type { UserGroupSelectProps } from '~shared/components/UserGroupSelect/UserGroupSelect';
 import { RICH_TEXT_EDITOR_OPTIONS_FULL_WITHOUT_ALIGN } from '~shared/consts/rich-text-editor.consts';
 import { isAvo } from '~shared/helpers/is-avo';
+import { IeObjectType } from '~shared/helpers/map-format-to-type.ts';
 import { tText } from '~shared/helpers/translation-functions';
 import { validateRequiredValue } from '~shared/helpers/validation.ts';
+import { HET_ARCHIEF } from '~shared/types';
 import { SpecialUserGroups } from '~shared/types/authentication.types';
+import type { PickerItem } from '~shared/types/content-picker.ts';
 import {
 	Color,
 	type ContentBlockComponentsConfig,
@@ -25,6 +29,7 @@ import {
 	type CustomBackground,
 	type DefaultContentBlockState,
 	type GradientColor,
+	type IsVisibleFunc,
 	type PaddingFieldState,
 } from '../../types/content-block.types';
 
@@ -238,4 +243,42 @@ export const COPYRIGHT_STATE = (): CopyrightComponentState => ({
 	copyrightTitle: '',
 	copyrightIconVisible: true,
 	copyrightText: '',
+});
+
+/**
+ * The object picker every block uses to point at one ie-object: it searches by title and stores the
+ * pid, so nobody has to type one by hand.
+ *
+ * The state key is `mediaItem` wherever this is used, because `generateFieldAttributes` reads
+ * `state.item || state.mediaItem` to tell a video-still picker which object to fetch stills for.
+ * A block without a still picker keeps the name anyway, so the proxy can read every block the same
+ * way. https://meemoo.atlassian.net/browse/ARC-3813
+ */
+export const IE_OBJECT_FIELD = (
+	allowedObjectTypes: IeObjectType[] = Object.values(IeObjectType),
+	isVisibleFunc: IsVisibleFunc = () => true,
+	fieldsToResetOnChange: string[] = []
+): ContentBlockField => ({
+	label: tText('modules/content-page/helpers/snippet-time-fields___object', undefined, [
+		HET_ARCHIEF,
+	]),
+	editorType: ContentBlockEditor.ContentPicker,
+	editorProps: {
+		allowedTypes: [AvoCoreContentPickerType.IE_OBJECT],
+		hideTypeDropdown: true,
+		hideTargetSwitch: true,
+		ieObjectFormats: allowedObjectTypes,
+	},
+	fieldsToResetOnChange,
+	validator: (value: PickerItem | undefined) =>
+		value?.value
+			? []
+			: [
+					tText(
+						'modules/content-page/helpers/snippet-time-fields___een-object-is-verplicht',
+						undefined,
+						[HET_ARCHIEF]
+					),
+				],
+	isVisible: isVisibleFunc,
 });
