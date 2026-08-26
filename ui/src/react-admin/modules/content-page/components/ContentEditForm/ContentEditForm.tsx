@@ -274,10 +274,7 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 				error={formErrors.seoDescription}
 				label={
 					tText(
-						'modules/content-page/components/content-edit-form/content-edit-form___beschrijving-voor-seo',
-						{
-							maxLength: CONTENT_PAGE_SEO_DESCRIPTION_MAX_LENGTH_STRING,
-						}
+						'modules/content-page/components/content-edit-form/content-edit-form___beschrijving-voor-seo'
 					) +
 					` (${
 						contentPageInfo.seoDescription?.length || 0

@@ -9,6 +9,7 @@
   "files": [
     "backup-translations.ts",
     "execute-database-query.ts",
-    "extract-and-replace-translations.ts"
+    "extract-and-replace-translations.ts",
+    "extract-and-replace-translations.test.ts"
   ]
 }
