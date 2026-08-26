@@ -27,9 +27,19 @@ export class IeObjectsService {
 	 */
 	public static async getPlayableDisplayData(
 		blockId: string | undefined,
-		unsavedObjects?: UnsavedPlayableDisplayDataObject[]
+		unsavedObjects?: UnsavedPlayableDisplayDataObject[],
+		/**
+		 * Resolve only this one object out of the block instead of every object it references. The
+		 * proxy still checks that the block references it, so this narrows the response without
+		 * widening what a visitor can reach. Used by the driekeuzespeler, which can hold 200
+		 * interests and opens one at a time.
+		 */
+		schemaIdentifier?: string
 	): Promise<(PlayableDisplayIeObject | null)[]> {
-		const body = blockId ? { blockId } : { objects: unsavedObjects };
+		const body = {
+			...(blockId ? { blockId } : { objects: unsavedObjects }),
+			...(schemaIdentifier ? { schemaIdentifier } : {}),
+		};
 		try {
 			return await fetchWithLogoutJson<(PlayableDisplayIeObject | null)[]>(
 				`${IeObjectsService.getBaseUrl()}/playable-display-data`,

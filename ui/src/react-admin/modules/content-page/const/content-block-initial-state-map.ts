@@ -8,6 +8,7 @@ import { INITIAL_CONTENT_ENCLOSE_BLOCK_STATE } from '~content-blocks/BlockConten
 import { INITIAL_CONTENT_PAGE_META_COMPONENTS_STATE } from '~content-blocks/BlockContentPageMeta';
 import { INITIAL_CTAS_COMPONENTS_STATE } from '~content-blocks/BlockCTAs';
 import { INITIAL_DOUBLE_BANNER_COMPONENTS_STATE } from '~content-blocks/BlockDoubleBanner/BlockDoubleBanner.editorconfig';
+import { INITIAL_DRIEKEUZESPELER_COMPONENTS_STATE } from '~content-blocks/BlockDriekeuzespeler';
 import { INITIAL_EVENTBRITE_COMPONENTS_STATE } from '~content-blocks/BlockEventbrite';
 import { INITIAL_HEADING_COMPONENTS_STATE } from '~content-blocks/BlockHeading';
 import { INITIAL_HERO_CAROUSEL_COMPONENTS_STATE } from '~content-blocks/BlockHeroCarousel';
@@ -114,4 +115,5 @@ export const CONTENT_BLOCK_INITIAL_STATE_MAP: {
 	[ContentBlockType.HetArchiefVideo]: INITIAL_HETARCHIEF_VIDEO_COMPONENTS_STATE,
 	[ContentBlockType.ImageCarousel]: INITIAL_IMAGE_CAROUSEL_COMPONENTS_STATE,
 	[ContentBlockType.TitleWithParallax]: INITIAL_TITLE_WITH_PARALLAX_COMPONENTS_STATE,
+	[ContentBlockType.Driekeuzespeler]: INITIAL_DRIEKEUZESPELER_COMPONENTS_STATE,
 };

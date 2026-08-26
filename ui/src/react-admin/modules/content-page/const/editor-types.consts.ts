@@ -18,6 +18,7 @@ import FileUpload from '~shared/components/FileUpload/FileUpload';
 import { IconPicker } from '~shared/components/IconPicker/IconPicker';
 import { MaintainerSelect } from '~shared/components/MaintainerSelect/MaintainerSelect';
 import RichTextEditorWrapper from '~shared/components/RichTextEditorWrapper/RichTextEditorWrapper';
+import { ThemeSelect } from '~shared/components/ThemeSelect/ThemeSelect';
 import { UploadOrSelectVideoStill } from '~shared/components/UploadOrSelectVideoStill/UploadOrSelectVideoStill';
 import { UserGroupSelect } from '~shared/components/UserGroupSelect/UserGroupSelect';
 
@@ -43,5 +44,6 @@ export const GET_EDITOR_TYPES_MAP = (): Record<
 	UserGroupSelect,
 	RICH_TEXT_EDITOR: RichTextEditorWrapper,
 	MaintainerSelect,
+	ThemeSelect,
 	UploadOrSelectVideoStill,
 });

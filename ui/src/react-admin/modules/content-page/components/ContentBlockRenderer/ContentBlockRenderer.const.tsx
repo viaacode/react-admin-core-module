@@ -7,6 +7,7 @@ import { BlockCardsWithoutDescription } from '~content-blocks/BlockCardsWithoutD
 import { BlockContentPageMeta } from '~content-blocks/BlockContentPageMeta';
 import { BlockCTAsWrapper } from '~content-blocks/BlockCTAs';
 import { BlockDoubleBanner } from '~content-blocks/BlockDoubleBanner';
+import { BlockDriekeuzespeler } from '~content-blocks/BlockDriekeuzespeler';
 import { BlockEventbrite } from '~content-blocks/BlockEventbrite';
 import { BlockHeading } from '~content-blocks/BlockHeading';
 import { BlockHeroCarousel } from '~content-blocks/BlockHeroCarousel';
@@ -111,6 +112,7 @@ export function GET_BLOCK_COMPONENT(
 		[ContentBlockType.Timeline]: BlockTimeline,
 		[ContentBlockType.ImageCarousel]: BlockImageCarousel,
 		[ContentBlockType.TitleWithParallax]: BlockTitleWithParallax,
+		[ContentBlockType.Driekeuzespeler]: BlockDriekeuzespeler,
 
 		// Avo specific blocks
 		[ContentBlockType.MediaGrid]: loadComponentFromConfig(ContentBlockType.MediaGrid),
@@ -190,6 +192,7 @@ export const PLAYABLE_DISPLAY_DATA_BLOCKS = [
 	ContentBlockType.HetArchiefVideo,
 	ContentBlockType.HeroCarousel,
 	ContentBlockType.Timeline,
+	ContentBlockType.Driekeuzespeler,
 ];
 
 /**

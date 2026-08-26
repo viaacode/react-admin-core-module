@@ -217,6 +217,10 @@ export enum ContentBlockType {
 	HetArchiefVideo = 'HETARCHIEF_VIDEO',
 	ImageCarousel = 'IMAGE_CAROUSEL',
 	TitleWithParallax = 'TITLE_WITH_PARALLAX',
+	// The db lookup value predates this work and reads THREE_CHOICES_PLAYER (migration
+	// 1784294418766). The member keeps the Dutch name the FA, the designs and the rest of this block
+	// use. https://meemoo.atlassian.net/browse/ARC-3813
+	Driekeuzespeler = 'THREE_CHOICES_PLAYER',
 }
 
 export enum ContentBlockEditor {
@@ -237,6 +241,7 @@ export enum ContentBlockEditor {
 	RICH_TEXT_EDITOR = 'RICH_TEXT_EDITOR',
 	UserGroupSelect = 'UserGroupSelect',
 	MaintainerSelect = 'MaintainerSelect', // Used for selecting which maintainers copy right notice should be on the video still https://meemoo.atlassian.net/browse/AVO-3015
+	ThemeSelect = 'ThemeSelect', // Used for picking the theme an interest links to https://meemoo.atlassian.net/browse/ARC-3813
 	UploadOrSelectVideoStill = 'UploadOrSelectVideoStill', // Used for selecting or uploading a video still for a video player https://meemoo.atlassian.net/browse/AVO-3015
 }
 
@@ -703,4 +708,50 @@ export interface TitleWithParallaxBlockComponentState {
 	title: string;
 	subtitle?: string;
 	image?: string;
+}
+
+/**
+ * One "interesse" of the Driekeuzespeler: the label the visitor sees on a tile, the object that
+ * opens when the tile is clicked, and the theme its secondary CTA searches for.
+ *
+ * https://meemoo.atlassian.net/wiki/spaces/HA2/pages/6218383419
+ */
+export interface DriekeuzespelerInterestState {
+	/** The label shown in the pill on the tile. */
+	name: string;
+	/**
+	 * The ie-object that plays in the modal, as the shared object picker stores it. `value` holds the
+	 * pid the FA asks for. Named `mediaItem` like every other block that points at an object, so the
+	 * proxy can read them all the same way.
+	 */
+	mediaItem?: PickerItem;
+	/** Id of the single theme this interest belongs to. */
+	themeId: string;
+}
+
+/** The two colours of one tile position, in one fixed-length repeated field group. */
+export interface DriekeuzespelerTileColors {
+	backgroundColor: Color;
+	textColor: Color;
+}
+
+/**
+ * The Driekeuzespeler picks three random interests out of `interests` and renders one tile each.
+ *
+ * The tile colors are block-level and positional: entry 0 styles the leftmost tile, whichever
+ * interest randomization put there. They deliberately do not live on the interest itself, so a
+ * shuffle keeps the block's color rhythm intact -- which is also why a tile's colour cannot be
+ * configured next to its label: the label travels with the interest.
+ *
+ * The field order here follows the FA: title, the three background colors, the three text colors,
+ * the shuffle label, then the interests.
+ */
+export interface DriekeuzespelerBlockComponentState {
+	title: string;
+	/** Exactly three entries, one per tile position. */
+	tileColors: DriekeuzespelerTileColors[];
+	/** Label of the CTA that reshuffles the three tiles. Its icon is fixed. */
+	shuffleButtonLabel: string;
+	/** Between 3 and 200 entries. */
+	interests: DriekeuzespelerInterestState[];
 }

@@ -1,0 +1,47 @@
+@use "../../../../shared/styles/settings/variables" as variables;
+
+// The FA asks for the same ratio as the video player on an object's detail page, and for the modal
+// to adapt to the screen. 16:9 is that player's ratio.
+$media-aspect-ratio: 16 / 9;
+
+.c-driekeuzespeler-modal {
+	&__media {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		aspect-ratio: $media-aspect-ratio;
+		width: 100%;
+
+		// Keeps a tall newspaper page inside the viewport instead of pushing the metadata panel and
+		// the close button off screen.
+		max-height: 70vh;
+		overflow: hidden;
+	}
+
+	&__player,
+	&__newspaper,
+	&__iiif-viewer {
+		width: 100%;
+		height: 100%;
+	}
+
+	// The viewer sizes itself to its container, so it needs one with a height rather than the
+	// intrinsic height an image brings.
+	&__iiif-viewer {
+		position: relative;
+		overflow: hidden;
+	}
+
+	// A newspaper page is portrait, so it fits inside the frame rather than filling it.
+	&__newspaper {
+		object-fit: contain;
+	}
+
+	&__loading {
+		margin: 0;
+	}
+
+	&__metadata {
+		margin-top: variables.$g-spacer-unit * 3;
+	}
+}

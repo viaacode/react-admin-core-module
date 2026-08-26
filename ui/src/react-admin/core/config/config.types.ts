@@ -117,6 +117,15 @@ export interface AdminConfig {
 		};
 		defaultAudioStill: string;
 		flowplayer?: FC<FlowPlayerWrapperProps>; // User by avo for
+		/**
+		 * The IIIF viewer a newspaper opens in, injected by the host the way `flowplayer` is.
+		 *
+		 * It takes only the object's id: the viewer needs the object's page list and a ticket-service
+		 * token per page, and those hooks live in the host app. Admin-core has no equivalent, so a
+		 * block that leaves this unset falls back to the flat IIIF detail image.
+		 * https://meemoo.atlassian.net/browse/ARC-3813
+		 */
+		iiifViewer?: FC<IiifViewerConfigProps>;
 		buttonTypes: () => { label: string; value: string }[];
 		enableMultiLanguage: boolean;
 	};
@@ -184,6 +193,17 @@ export interface AdminConfig {
 }
 
 /**
+ * What the injected IIIF viewer is handed. Deliberately just the id: everything else the viewer
+ * needs -- the page list, a ticket-service token per page, the page and overlay state -- is the
+ * host's to resolve. https://meemoo.atlassian.net/browse/ARC-3813
+ */
+export interface IiifViewerConfigProps {
+	schemaIdentifier: string;
+	/** Names the viewer for assistive technology, since the object title lives outside it. */
+	title?: string;
+}
+
+/**
  * The icons admin-core renders through the client config. Every client maps each of these onto one
  * of its own icons in `icon.componentProps`, so each client decides what eg: a warning looks like.
  * Never pass a client specific icon name (eg: an avo2 IconName) to the admin-core Icon component,
@@ -208,6 +228,9 @@ export enum AdminCoreIconName {
 	ChevronLeft = 'chevronLeft',
 	Clock = 'clock',
 	Collection = 'collection',
+	// The fixed icon on the driekeuzespeler's shuffle CTA, "collection-shuffle" in the design.
+	// https://meemoo.atlassian.net/browse/ARC-3813
+	CollectionShuffle = 'collectionShuffle',
 	Copy = 'copy',
 	Delete = 'delete',
 	Edit = 'edit',

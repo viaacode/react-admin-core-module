@@ -1,0 +1,580 @@
+@use "sass:math";
+@use "../../../../shared/styles/settings/variables" as variables;
+@use "../../../../shared/styles/settings/colors" as colors;
+@use "../../../../shared/styles/mixins/focus" as focus;
+@use "../../../../shared/styles/mixins/typography" as typography;
+
+// Every number below is measured from the designs in the "hetarchief.be — ontdekken" file:
+// desktop node 2354:4891 (1440px frame), mobile node 2702:1568 (402px frame).
+// https://www.figma.com/design/1yUd3vpjHXcMfI15dTeVYC/hetarchief.be-%E2%80%94-ontdekken?node-id=2354-4891
+// https://www.figma.com/design/1yUd3vpjHXcMfI15dTeVYC/hetarchief.be-%E2%80%94-ontdekken?node-id=2702-1568
+// The three tiles are hand placed, so each one is positioned by its own centre inside a container
+// with the design's aspect ratio. Percentages keep the whole composition scaling as one.
+
+// Desktop: the "Keuzes" frame is 1222.013 x 512, inset inside the 1440 frame and centred.
+$tiles-ratio-desktop: math.div(1222.013, 512);
+$tiles-width-desktop: 84.862%;
+
+// Mobile: the tiles stack and overlap, spanning 402 x 842.
+$tiles-ratio-mobile: math.div(402, 842);
+
+// The two outer tiles are tilted; the active tile stands upright.
+$tile-tilt: 5deg;
+
+// Hover behaviour, taken from Bert's reference pen (codepen.io/bertyhell/pen/pvRKvbW). In the pen a
+// click makes a card the active one; here hovering does it, which is what the FA describes: the
+// tile comes to the foreground and is enlarged.
+//
+// So there is no separate hover look. A tile is either the active one or it is not, and hovering
+// decides which. Without a hover the middle tile is active, exactly as the pen starts out.
+//
+// The pen holds the sizes in one base width plus two scales rather than two fixed widths, which is
+// what lets the active look travel between tiles. The base is derived so the two scales land on the
+// design's own rendered sizes: 29.46% inactive and 41.898% active at 1440.
+$tile-scale-inactive: 0.9;
+$tile-width-desktop-base: math.div(29.46%, $tile-scale-inactive); // 32.733%
+$tile-scale-active-desktop: math.div(41.898%, $tile-width-desktop-base); // 1.28
+
+// Mobile keeps its own pair: 78.109% inactive and 90.05% active at 402.
+$tile-width-mobile-base: math.div(78.109%, $tile-scale-inactive); // 86.788%
+$tile-scale-active-mobile: math.div(90.05%, $tile-width-mobile-base); // 1.038
+
+// A tile the visitor hovers grows less than the middle tile does at rest. The design fixes the
+// resting composition, not the hover, so this is the one number to turn when the growth reads too
+// strong or too weak. At 1.1 a side tile goes from 29.46% to 36% of the tile area, and it still
+// fits: 56.128% + 42.97% leaves it just inside the stage, so it needs no vertical lift.
+// Mobile grows by 4% at rest already, so it is subtle there without a separate number.
+$tile-scale-hover-desktop: 1.1;
+
+// The tilted tiles straighten by 3deg when they become active, as the pen does. Ours tilt 5deg
+// rather than the pen's 6deg, so they land at 2deg instead of snapping upright.
+$tile-active-tilt: 2deg;
+
+// When a side tile is active the opposite side tile slides inward and drops behind the middle one.
+// The pen calls this "tucked".
+$tile-tucked-distance: variables.$g-spacer-unit * 7;
+
+// The pen's stacking order. The active tile clears everything; a tucked tile sits behind the
+// inactive middle one.
+$tile-z-inactive: 3;
+$tile-z-middle-inactive: 5;
+$tile-z-tucked: 1;
+$tile-z-active: 30;
+
+// The pen's shadows: a flat one at rest, a deeper pair on the active tile.
+$tile-shadow-inactive: 0 1.4rem 3.2rem rgb(0 0 0 / 10%);
+$tile-shadow-active:
+	0 2.8rem 6rem rgb(0 0 0 / 22%),
+	0 0.8rem 2rem rgb(0 0 0 / 12%);
+
+// The pen's curve and timings. Becoming active is quicker than returning to rest, which is what
+// makes the stack settle instead of snapping back.
+$tile-hover-duration: 320ms;
+$tile-hover-easing: cubic-bezier(0.22, 1, 0.36, 1);
+$tile-rest-duration: 500ms;
+
+// The focal tile carries a white band along its edge: the 6px border of Figma node 2354:4942. Not a
+// spacer multiple -- the spacer unit is 8px and this is a border width, not spacing.
+$tile-border-outer: 0.6rem;
+
+// A 64px radius, which CSS clamps to half the pill's height, so it reads as fully rounded.
+$pill-radius: variables.$g-spacer-unit * 8;
+
+// The type presets leave line-height unset at these sizes, but the design states it, and it is what
+// gives the pill and the shuffle button their height: 26px at H5 and 20px at the mobile size, per
+// the type styles on the Figma nodes. Line heights follow the type, not the spacer scale.
+$pill-line-height: 2.6rem;
+$pill-line-height-mobile: 2rem;
+$pill-height-mobile: variables.$g-spacer-unit * 6;
+
+// The "Shapes" layer: the white blobs that sit on the block's background colour behind the tiles.
+// This is the "achtergrondkleur met masker" the FA asks for. Every path below is the Figma export,
+// unchanged -- only the layer ids and the fill-opacity twin of `fill="white"` are stripped.
+//
+// Inlined as data uris rather than committed .svg files, the way BlockThemeReels does it: the block
+// ships inside admin-core's client.css, and a url() to a file would have to resolve on every host
+// that renders a content page.
+//
+// Desktop is one export covering the whole band (node 2354:4920). Mobile is three separate shapes
+// (nodes 2381:6032, 2382:1610 and 2382:1617), each rotated on its own.
+$shapes-desktop: url("data:image/svg+xml,%3Csvg width='1355.54' height='704.889' viewBox='0 0 1355.54 704.889' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1141.72 281.596L1064.3 174.686L1278.12 19.8429L1355.54 126.754L1141.72 281.596Z' fill='white'/%3E%3Cpath d='M868.993 648.922C803.069 618.012 774.745 539.402 805.664 473.482C836.582 407.563 915.14 379.068 981.064 409.978C1046.99 440.888 1075.31 519.498 1044.39 585.418C1013.48 651.337 934.916 679.832 868.993 648.922Z' fill='white'/%3E%3Cpath d='M430.688 65.8111L385.098 325.44L255.104 302.544L300.695 42.9157L430.688 65.8111Z' fill='white'/%3E%3Cpath d='M20.4439 131.484C30.5335 59.3767 97.2908 9.1256 169.397 19.224C241.504 29.3224 291.903 95.9811 281.813 168.089C271.724 240.197 204.966 290.448 132.86 280.349C60.7533 270.251 10.3544 203.592 20.4439 131.484Z' fill='white'/%3E%3C/svg%3E");
+$shapes-mobile-top: url("data:image/svg+xml,%3Csvg width='226.044' height='163.997' viewBox='0 0 226.044 163.997' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M15.149 138.048L33.6406 7.55105L98.9799 16.8445L80.4882 147.341L15.149 138.048Z' fill='white'/%3E%3Cpath d='M219.073 98.4495C215.223 134.651 182.693 160.866 146.493 157.011C110.292 153.157 84.0047 120.678 87.8549 84.4773C91.7051 48.2763 124.235 22.061 160.435 25.9157C196.636 29.7703 222.923 62.2485 219.073 98.4495Z' fill='white'/%3E%3C/svg%3E");
+$shapes-mobile-bottom: url("data:image/svg+xml,%3Csvg width='145.161' height='145.068' viewBox='0 0 145.161 145.068' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M138.19 79.52C134.339 115.721 101.81 141.936 65.6091 138.082C29.4085 134.227 3.12121 101.749 6.97141 65.5478C10.8216 29.3467 43.3513 3.13144 79.5519 6.9861C115.752 10.8408 142.04 43.3189 138.19 79.52Z' fill='white'/%3E%3C/svg%3E");
+
+// Each shape is placed by the centre of its Figma bounding box and sized to the shape's own
+// unrotated size, then rotated about that centre -- which is how Figma composes them, and it keeps
+// the rotation from stretching the artwork.
+// Desktop: the export is not rotated, so it is placed by its top left corner instead.
+$shapes-desktop-left: -7.662%;
+$shapes-desktop-top: -16.408%;
+$shapes-desktop-width: 110.926%;
+$shapes-desktop-height: 137.674%;
+
+$shape-mobile-top-x: 15.838%;
+$shape-mobile-top-y: 4.832%;
+$shape-mobile-top-width: 56.23%;
+$shape-mobile-top-height: 19.477%;
+$shape-mobile-top-tilt: -178.11deg;
+
+// The middle shape is a plain white rectangle in the design, so it needs no artwork of its own.
+$shape-mobile-middle-x: 89.688%;
+$shape-mobile-middle-y: 54.429%;
+$shape-mobile-middle-width: 18.388%;
+$shape-mobile-middle-height: 17.558%;
+$shape-mobile-middle-tilt: 54.09deg;
+
+$shape-mobile-bottom-x: 5.863%;
+$shape-mobile-bottom-y: 84.548%;
+$shape-mobile-bottom-width: 36.109%;
+$shape-mobile-bottom-height: 17.229%;
+$shape-mobile-bottom-tilt: -178.11deg;
+
+.c-driekeuzespeler {
+	position: relative;
+
+	// The shapes reach past the tile area on purpose, and on mobile they run off the left edge of the
+	// design. Clipping them here keeps that from adding a horizontal scrollbar to the page. The modal
+	// is portalled to document.body, so it is not affected.
+	overflow: hidden;
+
+	&__title {
+		// H1, 64/64.
+		@include typography.sofia-pro-heading-2xl;
+
+		// The shapes layer starts above the tile area and reaches into the title, so the title has to
+		// sit in front of it.
+		position: relative;
+		z-index: 1;
+		margin: 0 0 (variables.$g-spacer-unit * 8);
+		text-align: center;
+
+		// H3, 40/44 on mobile.
+		@media (max-width: variables.$g-bp2) {
+			@include typography.sofia-pro-heading-xl;
+
+			margin-bottom: variables.$g-spacer-unit * 6;
+		}
+	}
+
+	// The coordinate box every percentage below resolves against: the design's tile area, 1222 of the
+	// 1440 frame, centred. The block renders full width, so this takes that share of the viewport and
+	// the per-tile and per-shape percentages inside land on the design's pixel sizes at 1440.
+	//
+	// The shapes and the tiles share it, which is why it is a box of its own: a `ul` may only hold
+	// `li` children, so the decorative layer cannot live inside the tile list.
+	&__stage {
+		position: relative;
+		aspect-ratio: $tiles-ratio-desktop;
+		width: $tiles-width-desktop;
+		margin: 0 auto;
+
+		// The mobile frame is 402 wide and the tiles fill it, so no inset there.
+		@media (max-width: variables.$g-bp2) {
+			aspect-ratio: $tiles-ratio-mobile;
+			width: 100%;
+		}
+	}
+
+	// Holds the three absolutely placed tiles, over the shapes layer.
+	&__tiles {
+		position: absolute;
+		z-index: 1;
+		inset: 0;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	// The white blobs on the block's background colour. Decorative only: `aria-hidden` in the markup,
+	// and no pointer events, so it never swallows a click meant for a tile.
+	&__shapes {
+		position: absolute;
+		z-index: 0;
+		inset: 0;
+		pointer-events: none;
+	}
+
+	&__shape {
+		position: absolute;
+		background-repeat: no-repeat;
+		// The exports carry preserveAspectRatio="none", and each shape is sized to its own aspect
+		// ratio here, so filling the box reproduces the design rather than distorting it.
+		background-size: 100% 100%;
+	}
+
+	// One export covers the whole desktop band, unrotated, so it is placed by its top left corner.
+	&__shape--desktop {
+		left: $shapes-desktop-left;
+		top: $shapes-desktop-top;
+		width: $shapes-desktop-width;
+		height: $shapes-desktop-height;
+		background-image: $shapes-desktop;
+
+		@media (max-width: variables.$g-bp2) {
+			display: none;
+		}
+	}
+
+	// The three mobile shapes. Each is centred on its Figma bounding box and rotated about that
+	// centre, so the artwork keeps its own proportions.
+	&__shape--mobile-top,
+	&__shape--mobile-middle,
+	&__shape--mobile-bottom {
+		display: none;
+
+		@media (max-width: variables.$g-bp2) {
+			display: block;
+		}
+	}
+
+	&__shape--mobile-top {
+		left: $shape-mobile-top-x;
+		top: $shape-mobile-top-y;
+		width: $shape-mobile-top-width;
+		height: $shape-mobile-top-height;
+		transform: translate(-50%, -50%) rotate($shape-mobile-top-tilt);
+		background-image: $shapes-mobile-top;
+	}
+
+	// A plain white rectangle in the design, so a background colour says it exactly -- no artwork
+	// needed.
+	&__shape--mobile-middle {
+		left: $shape-mobile-middle-x;
+		top: $shape-mobile-middle-y;
+		width: $shape-mobile-middle-width;
+		height: $shape-mobile-middle-height;
+		transform: translate(-50%, -50%) rotate($shape-mobile-middle-tilt);
+		background-color: colors.$white;
+	}
+
+	&__shape--mobile-bottom {
+		left: $shape-mobile-bottom-x;
+		top: $shape-mobile-bottom-y;
+		width: $shape-mobile-bottom-width;
+		height: $shape-mobile-bottom-height;
+		transform: translate(-50%, -50%) rotate($shape-mobile-bottom-tilt);
+		background-image: $shapes-mobile-bottom;
+	}
+
+	&__tile {
+		// Placed by its centre, so its size can change without moving it.
+		position: absolute;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		aspect-ratio: 1;
+		z-index: $tile-z-inactive;
+		width: $tile-width-desktop-base;
+
+		// Composed from custom properties so one rule can change one part without restating the rest,
+		// the way the reference pen does it.
+		transform: translate(calc(-50% + var(--tile-shift, 0px)), -50%)
+			rotate(var(--tile-tilt, 0deg)) scale(var(--tile-scale, #{$tile-scale-inactive}));
+
+		// Placeholder ground for a thumbnail that has not loaded, or an object that no longer
+		// resolves. The block always renders three tiles, so a tile is never dropped.
+		background-color: colors.$color-gray-100;
+		box-shadow: $tile-shadow-inactive;
+
+		// Transform and shadow only, so no layout work per frame.
+		transition:
+			transform $tile-rest-duration $tile-hover-easing,
+			box-shadow $tile-rest-duration $tile-hover-easing;
+
+		@media (max-width: variables.$g-bp2) {
+			width: $tile-width-mobile-base;
+		}
+
+		// Left tile: hangs lower than the other two and tilts anticlockwise.
+		&:nth-child(1) {
+			--tile-tilt: #{-$tile-tilt};
+
+			left: 15.958%;
+			top: 56.128%;
+		}
+
+		&:nth-child(2) {
+			--tile-tilt: 0deg;
+
+			z-index: $tile-z-middle-inactive;
+			left: 50%;
+			top: 50%;
+		}
+
+		// Right tile: tilts clockwise.
+		&:nth-child(3) {
+			--tile-tilt: #{$tile-tilt};
+
+			left: 86.61%;
+			top: 50%;
+		}
+
+		// On mobile the three sit in a centred, overlapping column.
+		@media (max-width: variables.$g-bp2) {
+			&:nth-child(1) {
+				left: 50%;
+				top: 18.646%;
+			}
+
+			&:nth-child(2) {
+				left: 50%;
+				top: 50%;
+			}
+
+			&:nth-child(3) {
+				left: 50%;
+				top: 81.354%;
+			}
+		}
+	}
+
+	// The white band the design puts on the active tile: the 6px border of Figma node 2354:4942.
+	// Drawn INSIDE the tile, which is what the design does -- the two 512 boxes in Figma sit exactly
+	// on the 512-tall tile area, so their edges eat into the image rather than growing the tile.
+	//
+	// The design also puts a 2px black hairline inside the band (node 2354:4943), dropped on request:
+	// with no background colour on the block the white band disappears and the hairline is all that is
+	// left, which reads as a stray border. https://meemoo.atlassian.net/browse/ARC-3813
+	//
+	// Always present, revealed only on the active tile, so it does not fade in halfway through the
+	// grow. On a pseudo element so it paints over the thumbnail and the tile button, and takes no
+	// clicks.
+	&__tile::after {
+		content: "";
+		box-sizing: border-box;
+		position: absolute;
+		inset: 0;
+		border: $tile-border-outer solid colors.$white;
+		opacity: 0;
+		pointer-events: none;
+		transition: opacity $tile-rest-duration $tile-hover-easing;
+	}
+
+	// The pen collapses the durations rather than removing the transitions, so the end states stay
+	// identical and only the movement goes away.
+	@media (prefers-reduced-motion: reduce) {
+		&__tile,
+		&__tile::after,
+		&__thumbnail {
+			transition-duration: 1ms;
+		}
+	}
+
+	&__thumbnail {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+
+		// The pen desaturates an inactive card slightly, so the active one reads as the one in focus.
+		// It puts the filter on the whole card; here it is on the thumbnail alone, because the pill
+		// carries colours the admin picked and washing those out is not ours to do.
+		filter: saturate(0.9);
+		transition: filter $tile-rest-duration $tile-hover-easing;
+	}
+
+	// The whole tile is the control that opens the modal, so the button fills it. It carries no look
+	// of its own: the thumbnail behind it and the pill inside it are the tile's appearance.
+	&__tile-button {
+		// The tile's tilt and scale on :focus-within is motion, not a focus indicator, and it is gone
+		// altogether under prefers-reduced-motion. The keyboard user needs a real outline.
+		// https://meemoo.atlassian.net/wiki/spaces/HA2/pages/6218383419
+		@include focus.focus-outline;
+
+		position: absolute;
+		inset: 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: 0;
+		border: none;
+		background: none;
+		cursor: pointer;
+	}
+
+	&__pill {
+		// H5, 24/26. The preset leaves line-height unset, so it has to be stated: it is what makes the
+		// pill 58px tall in the design (16 + 26 + 16).
+		@include typography.sofia-pro-heading-lg;
+
+		position: relative;
+		z-index: 1;
+		padding: (variables.$g-spacer-unit * 2) (variables.$g-spacer-unit * 3);
+		border-radius: $pill-radius;
+		line-height: $pill-line-height;
+		text-align: center;
+
+		// 18/20 on mobile, in a pill the design fixes at 48px tall.
+		@media (max-width: variables.$g-bp2) {
+			@include typography.sofia-pro-heading-md;
+
+			display: flex;
+			align-items: center;
+			height: $pill-height-mobile;
+			padding: 0 (variables.$g-spacer-unit * 3);
+			line-height: $pill-line-height-mobile;
+		}
+	}
+
+	&__shuffle {
+		@include typography.sofia-pro-heading-lg;
+		@include focus.focus-outline;
+
+		// The shapes layer reaches below the tile area, and it is a positioned layer, so an unpositioned
+		// button would paint underneath it.
+		position: relative;
+		z-index: 1;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: variables.$g-spacer-unit * 1.5;
+
+		// 48px below the tile area in both designs.
+		margin: (variables.$g-spacer-unit * 6) auto 0;
+		padding: (variables.$g-spacer-unit * 2) (variables.$g-spacer-unit * 3);
+		border: none;
+		border-radius: $pill-radius;
+		background-color: colors.$color-gray-1000;
+		color: colors.$white;
+		line-height: $pill-line-height;
+		cursor: pointer;
+
+		@media (max-width: variables.$g-bp2) {
+			@include typography.sofia-pro-heading-md;
+
+			line-height: $pill-line-height-mobile;
+		}
+	}
+
+	&__shuffle-icon {
+		// The icon is a glyph from the meemoocons font, not an svg: the Icon component is a span sized
+		// `width: 1em; height: 1em; font-size: inherit`. So its size comes from font-size, and setting
+		// width/height would resize the box while leaving the glyph inheriting the label's size.
+		// Both designs keep the icon at 24px while the label drops to 18px on mobile.
+		font-size: variables.$g-spacer-unit * 3;
+	}
+}
+
+// The shuffle CTA is a near-black pill in the design, on the design's mustard background. On a dark
+// block background that pill has no edge against the background at all, which fails the 3:1 that
+// WCAG 1.4.11 asks of a control's boundary. The renderer already marks a block whose WCAG text
+// colour is white, so the pill flips there. https://meemoo.atlassian.net/browse/ARC-3848
+.c-content-block-preview--dark .c-driekeuzespeler__shuffle {
+	background-color: colors.$white;
+	color: colors.$color-gray-1000;
+}
+
+// The active tile: upright, enlarged, in front, with the white band and the deeper shadow. In the
+// pen a click puts a card in this state; here hovering or focusing does, so the state has to travel
+// between tiles instead of living on the middle one.
+//
+// Written with full class names rather than `&` interpolation: inside a nested block `&` is the
+// entire parent selector, which silently compiles to a descendant selector that matches nothing.
+// `:has` drives the siblings with no javascript; BlockHeroCarousel uses the same selector.
+@mixin driekeuzespeler-tile-active($scale-desktop: $tile-scale-active-desktop) {
+	--tile-scale: #{$scale-desktop};
+
+	z-index: $tile-z-active;
+	box-shadow: $tile-shadow-active;
+
+	// Becoming active is quicker than returning to rest.
+	transition-duration: $tile-hover-duration;
+
+	@media (max-width: variables.$g-bp2) {
+		--tile-scale: #{$tile-scale-active-mobile};
+	}
+
+	&::after {
+		opacity: 1;
+		transition-duration: $tile-hover-duration;
+	}
+
+	.c-driekeuzespeler__thumbnail {
+		filter: saturate(1);
+		transition-duration: $tile-hover-duration;
+	}
+}
+
+// A tilted tile straightens part of the way when it becomes active, rather than snapping upright.
+@mixin driekeuzespeler-tile-active-left {
+	--tile-tilt: #{-$tile-active-tilt};
+}
+
+@mixin driekeuzespeler-tile-active-right {
+	--tile-tilt: #{$tile-active-tilt};
+}
+
+// The tucked tile: when a side tile is active, the opposite side tile slides inward and drops behind
+// the inactive middle one.
+@mixin driekeuzespeler-tile-tucked($direction) {
+	--tile-shift: #{$direction * $tile-tucked-distance};
+
+	z-index: $tile-z-tucked;
+}
+
+// No hover and no focus anywhere in the stack: the middle tile is the active one, which is the state
+// the design draws and the state the pen starts in.
+.c-driekeuzespeler__tiles:not(:has(.c-driekeuzespeler__tile:hover)):not(
+		:has(.c-driekeuzespeler__tile:focus-within)
+	)
+	.c-driekeuzespeler__tile:nth-child(2) {
+	@include driekeuzespeler-tile-active;
+}
+
+// Hovering or focusing a tile makes that one active, at the gentler hover scale.
+.c-driekeuzespeler__tile:hover,
+.c-driekeuzespeler__tile:focus-within {
+	@include driekeuzespeler-tile-active($tile-scale-hover-desktop);
+}
+
+// The middle tile is the exception: it is already the design's size at rest, so hovering it changes
+// nothing about its scale. Shrinking it to the hover scale would read as the focal tile stepping
+// backwards under the cursor.
+.c-driekeuzespeler__tile:nth-child(2):hover,
+.c-driekeuzespeler__tile:nth-child(2):focus-within {
+	--tile-scale: #{$tile-scale-active-desktop};
+}
+
+.c-driekeuzespeler__tile:nth-child(1):hover,
+.c-driekeuzespeler__tile:nth-child(1):focus-within {
+	@include driekeuzespeler-tile-active-left;
+}
+
+.c-driekeuzespeler__tile:nth-child(3):hover,
+.c-driekeuzespeler__tile:nth-child(3):focus-within {
+	@include driekeuzespeler-tile-active-right;
+}
+
+// The left tile is active, so the right one tucks in behind the middle.
+.c-driekeuzespeler__tiles:has(.c-driekeuzespeler__tile:nth-child(1):hover)
+	.c-driekeuzespeler__tile:nth-child(3),
+.c-driekeuzespeler__tiles:has(.c-driekeuzespeler__tile:nth-child(1):focus-within)
+	.c-driekeuzespeler__tile:nth-child(3) {
+	@include driekeuzespeler-tile-tucked(-1);
+}
+
+// The right tile is active, so the left one tucks in.
+.c-driekeuzespeler__tiles:has(.c-driekeuzespeler__tile:nth-child(3):hover)
+	.c-driekeuzespeler__tile:nth-child(1),
+.c-driekeuzespeler__tiles:has(.c-driekeuzespeler__tile:nth-child(3):focus-within)
+	.c-driekeuzespeler__tile:nth-child(1) {
+	@include driekeuzespeler-tile-tucked(1);
+}
+
+// A touch device has no hover, so a tap must not leave a tile stuck as the active one. The middle
+// tile keeps the active look, as it does at rest.
+@media (hover: none) {
+	.c-driekeuzespeler__tile:nth-child(1):hover,
+	.c-driekeuzespeler__tile:nth-child(3):hover {
+		--tile-scale: #{$tile-scale-inactive};
+		--tile-shift: 0px;
+
+		z-index: $tile-z-inactive;
+		box-shadow: $tile-shadow-inactive;
+
+		&::after {
+			opacity: 0;
+		}
+	}
+}

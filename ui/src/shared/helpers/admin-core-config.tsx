@@ -132,6 +132,7 @@ export function getAdminCoreConfigForLocalTestApp(navigateFunc: NavigateFunction
 			componentProps: {
 				add: { name: 'add' },
 				collection: { name: 'collection' },
+				collectionShuffle: { name: 'collection-shuffle' },
 				view: { name: 'view' },
 				angleDown: { name: 'down' },
 				angleUp: { name: 'up' },
