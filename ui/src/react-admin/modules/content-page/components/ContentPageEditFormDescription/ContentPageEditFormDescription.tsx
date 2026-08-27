@@ -26,10 +26,7 @@ export const ContentPageEditFormDescription: FunctionComponent<
 			error={formError}
 			label={
 				tText(
-					'modules/content-page/components/content-edit-form/content-edit-form___beschrijving',
-					{
-						maxLength: CONTENT_PAGE_DESCRIPTION_MAX_LENGTH_STRING,
-					}
+					'modules/content-page/components/content-edit-form/content-edit-form___beschrijving'
 				) +
 				` (${stripHtml(description)?.length || 0} / ${CONTENT_PAGE_DESCRIPTION_MAX_LENGTH_STRING})`
 			}

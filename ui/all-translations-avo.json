@@ -1746,7 +1746,7 @@
     "location": "modules/content-page/hooks/use-get-language-filter-options",
     "key": "language-bestaat",
     "language": "nl",
-    "value": "Taal bestaat",
+    "value": "Taal {{language}} bestaat",
     "value_type": "TEXT"
   },
   {
@@ -1756,7 +1756,7 @@
     "location": "modules/content-page/hooks/use-get-language-filter-options",
     "key": "language-bestaat-niet",
     "language": "nl",
-    "value": "Taal bestaat niet",
+    "value": "Taal {{language}} bestaat niet",
     "value_type": "TEXT"
   },
   {
@@ -2107,16 +2107,6 @@
     "key": "nee",
     "language": "nl",
     "value": "Nee",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "admin/content/views/content-detail",
-    "key": "omschrijving",
-    "language": "nl",
-    "value": "Beschrijving:",
     "value_type": "HTML"
   },
   {
@@ -2566,7 +2556,7 @@
     "location": "modules/content-page/views/content-page-edit",
     "key": "de-seo-beschrijving-mag-maximaal-max-length-tekens-bevatten",
     "language": "nl",
-    "value": "De SEO-beschrijving mag maximaal 158 tekens bevatten.",
+    "value": "De SEO-beschrijving mag maximaal {{maxLength}} tekens bevatten.",
     "value_type": "TEXT"
   },
   {
@@ -3706,7 +3696,7 @@
     "location": "admin/menu/views/menu-edit",
     "key": "er-werden-geen-navigatie-items-gevonden-voor-menu-name",
     "language": "nl",
-    "value": "Er zijn geen navigatie-items gevonden voor de menu naam.",
+    "value": "Er zijn geen navigatie-items gevonden voor de menu {{menuName}}.",
     "value_type": "TEXT"
   },
   {
@@ -5694,16 +5684,6 @@
     "app": "AVO",
     "component": "ADMIN_CORE",
     "location": "admin/content-block/helpers/generators/defaults",
-    "key": "tekst-is-verplicht",
-    "language": "nl",
-    "value": "Tekst is verplicht.",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "admin/content-block/helpers/generators/defaults",
     "key": "een-bestand-is-verplicht",
     "language": "nl",
     "value": "Een bestand is verplicht.",
@@ -5753,6 +5733,36 @@
     "id": "",
     "app": "AVO",
     "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/defaults",
+    "key": "bijschrift-titel",
+    "language": "nl",
+    "value": "bijschrift titel",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/defaults",
+    "key": "toon-bijschrift-icoon",
+    "language": "nl",
+    "value": "Toon bijschrift icoon",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/defaults",
+    "key": "bijschrift-beschrijving",
+    "language": "nl",
+    "value": "bijschrift beschrijving",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "AVO",
+    "component": "ADMIN_CORE",
     "location": "admin/content-block/helpers/generators/search",
     "key": "search",
     "language": "nl",
@@ -5776,7 +5786,7 @@
     "location": "admin/content-block/components/content-block-form/content-block-form",
     "key": "voeg-label-to",
     "language": "nl",
-    "value": "Voeg toe",
+    "value": "Voeg {{label}} toe",
     "value_type": "TEXT"
   },
   {
@@ -6603,6 +6613,16 @@
     "id": "",
     "app": "AVO",
     "component": "ADMIN_CORE",
+    "location": "modules/shared/components/content-picker/content-picker",
+    "key": "themas",
+    "language": "nl",
+    "value": "Themas",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "AVO",
+    "component": "ADMIN_CORE",
     "location": "admin/shared/components/content-picker/content-picker",
     "key": "plak-hier-uw-zoekpagina-url",
     "language": "nl",
@@ -7297,7 +7317,7 @@
     "key": "er-is-iets-mis-gegaan-bij-het-laden-van-de-gegevens",
     "language": "nl",
     "value": "Er is iets misgegaan bij het laden van de gegevens. Contacteer ons via de Feedback-knop mocht dit probleem zich blijven voordoen.",
-    "value_type": "HTML"
+    "value_type": "TEXT"
   },
   {
     "id": "",
@@ -7923,6 +7943,166 @@
     "id": "",
     "app": "AVO",
     "component": "ADMIN_CORE",
+    "location": "admin/content-block/helpers/generators/media-player",
+    "key": "media-speler",
+    "language": "nl",
+    "value": "Mediaspeler",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "admin/content-block/helpers/generators/media-player",
+    "key": "toegankelijkheidstitel",
+    "language": "nl",
+    "value": "Alt. tekst (verplicht)",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "admin/content-block/helpers/generators/media-player",
+    "key": "eigen-video-url-van-flowplayer-com-optioneel",
+    "language": "nl",
+    "value": "Eigen video-url van flowplayer.com (optioneel)",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "admin/content-block/helpers/generators/media-player",
+    "key": "bv-https-cdn-flowplayer-com-hls-playlist-m-3-u-8",
+    "language": "nl",
+    "value": "bv. https://cdn.flowplayer.com/.../hls/playlist.m3u8",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/content-page/components/blocks/block-video/block-video",
+    "key": "poster",
+    "language": "nl",
+    "value": "Poster",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/content-page/components/blocks/block-video/block-video",
+    "key": "toon-auteursrecht-melding-voor-deze-poster",
+    "language": "nl",
+    "value": "Toon bron voor deze videostill (verplicht voor publieke pagina).",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-video/block-video",
+    "key": "bijschift-titel",
+    "language": "nl",
+    "value": "Bijschift: titel",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-video/block-video",
+    "key": "bijschrift-beschrijving",
+    "language": "nl",
+    "value": "Bijschrift: beschrijving",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "admin/content-block/helpers/generators/media-player",
+    "key": "breedte",
+    "language": "nl",
+    "value": "Breedte",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "admin/content-block/helpers/generators/media-player",
+    "key": "automatisch-afspelen",
+    "language": "nl",
+    "value": "Automatisch afspelen",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "modules/admin/content-page/components/wrappers/media-player-wrapper/media-player-wrapper",
+    "key": "error",
+    "language": "nl",
+    "value": "Error",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "admin/content-block/components/wrappers/media-player-wrapper/media-player-wrapper",
+    "key": "het-ophalen-van-het-fragment-is-mislukt",
+    "language": "nl",
+    "value": "Het ophalen van het fragment is mislukt.",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/content-page/components/blocks/block-video/block-video",
+    "key": "bron",
+    "language": "nl",
+    "value": "Bron >",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/content-page/components/blocks/block-video/block-video",
+    "key": "bekijk-de-copyright-info-van-deze-afbeelding",
+    "language": "nl",
+    "value": "Bekijk de bronvermelding van deze afbeelding.",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "admin/content-page/components/blocks/media-grid-wrapper/media-grid-wrapper",
+    "key": "copyright-info",
+    "language": "nl",
+    "value": "Bronvermelding",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "admin/content-page/components/blocks/media-grid-wrapper/media-grid-wrapper",
+    "key": "deze-afbeelding-valt-onder-copyright-van-organisation-name",
+    "language": "nl",
+    "value": "De bron van deze videostill is <a href=\"{{organisationWebsite}}\" target=\"_blank\">{{organisationName}}</a>.",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "AVO",
+    "component": "ADMIN_CORE",
     "location": "admin/content-block/helpers/generators/buttons",
     "key": "knoppen",
     "language": "nl",
@@ -8323,6 +8503,96 @@
     "id": "",
     "app": "AVO",
     "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel",
+    "key": "hero-carousel",
+    "language": "nl",
+    "value": "Hero carousel",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel-search",
+    "key": "alles",
+    "language": "nl",
+    "value": "Alles",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel-search",
+    "key": "zoek-in-alle-objecten",
+    "language": "nl",
+    "value": "Zoek in alle objecten",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel-search",
+    "key": "alle-video",
+    "language": "nl",
+    "value": "Alle video",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel-search",
+    "key": "zoek-in-video",
+    "language": "nl",
+    "value": "Zoek in video",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel-search",
+    "key": "alle-audio",
+    "language": "nl",
+    "value": "Alle audio",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel-search",
+    "key": "zoek-in-audio",
+    "language": "nl",
+    "value": "Zoek in audio",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel-search",
+    "key": "alle-kranten",
+    "language": "nl",
+    "value": "Alle kranten",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel-search",
+    "key": "zoek-in-kranten",
+    "language": "nl",
+    "value": "Zoek in kranten",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "AVO",
+    "component": "ADMIN_CORE",
     "location": "modules/content-page/components/blocks/block-het-archief-image-text-background/block-het-archief-image-text-background",
     "key": "titel-grootte",
     "language": "nl",
@@ -8393,6 +8663,26 @@
     "id": "",
     "app": "AVO",
     "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-highlight-text/block-highlight-text",
+    "key": "highlight-text",
+    "language": "nl",
+    "value": "Highlight text",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-homepage-banner/block-homepage-banner",
+    "key": "homepage-banner",
+    "language": "nl",
+    "value": "Homepage banner",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "AVO",
+    "component": "ADMIN_CORE",
     "location": "admin/content-block/helpers/generators/iframe",
     "key": "i-frame",
     "language": "nl",
@@ -8447,26 +8737,6 @@
     "key": "afbeelding",
     "language": "nl",
     "value": "Afbeelding",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "admin/content-block/helpers/generators/image",
-    "key": "bijschift-titel",
-    "language": "nl",
-    "value": "Bijschrift: bronvermelding ©",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "admin/content-block/helpers/generators/image",
-    "key": "bijschrift-beschrijving",
-    "language": "nl",
-    "value": "Bijschrift: beschrijving",
     "value_type": "TEXT"
   },
   {
@@ -8577,6 +8847,16 @@
     "key": "knop-alignatie",
     "language": "nl",
     "value": "Uitlijning knop",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-image-carousel/block-image-carousel",
+    "key": "Carousel-met-afbeeldingen",
+    "language": "nl",
+    "value": "Carousel met afbeeldingen",
     "value_type": "TEXT"
   },
   {
@@ -9363,6 +9643,16 @@
     "id": "",
     "app": "AVO",
     "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-overview-with-carousel/block-overview-with-carousel",
+    "key": "overzicht-met-carrousel",
+    "language": "nl",
+    "value": "Overzicht met carrousel",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "AVO",
+    "component": "ADMIN_CORE",
     "location": "admin/content-block/helpers/generators/page-overview",
     "key": "lees-meer",
     "language": "nl",
@@ -9923,6 +10213,36 @@
     "id": "",
     "app": "AVO",
     "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-theme-reels/block-theme-reels",
+    "key": "alt-tekst-voor-de-afbeelding",
+    "language": "nl",
+    "value": "alt tekst voor de afbeelding",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-theme-reels/block-theme-reels",
+    "key": "masker",
+    "language": "nl",
+    "value": "Masker",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-theme-reels/block-theme-reels",
+    "key": "beschrijving",
+    "language": "nl",
+    "value": "Beschrijving",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "AVO",
+    "component": "ADMIN_CORE",
     "location": "admin/content-block/helpers/generators/three-clickable-tiles",
     "key": "three-clickable-tiles",
     "language": "nl",
@@ -9997,6 +10317,26 @@
     "key": "link",
     "language": "nl",
     "value": "Link",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-title-with-parallax/block-title-with-parallax",
+    "key": "titel-met-parallax",
+    "language": "nl",
+    "value": "Titel met parallax",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-title-with-parallax/block-title-with-parallax",
+    "key": "visualisatie",
+    "language": "nl",
+    "value": "Visualisatie",
     "value_type": "TEXT"
   },
   {
@@ -10078,166 +10418,6 @@
     "language": "nl",
     "value": "Datum is verplicht",
     "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "admin/content-block/helpers/generators/media-player",
-    "key": "media-speler",
-    "language": "nl",
-    "value": "Mediaspeler",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "admin/content-block/helpers/generators/media-player",
-    "key": "toegankelijkheidstitel",
-    "language": "nl",
-    "value": "Alt. tekst (verplicht)",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "admin/content-block/helpers/generators/media-player",
-    "key": "eigen-video-url-van-flowplayer-com-optioneel",
-    "language": "nl",
-    "value": "Eigen video-url van flowplayer.com (optioneel)",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "admin/content-block/helpers/generators/media-player",
-    "key": "bv-https-cdn-flowplayer-com-hls-playlist-m-3-u-8",
-    "language": "nl",
-    "value": "bv. https://cdn.flowplayer.com/.../hls/playlist.m3u8",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/content-page/components/blocks/block-video/block-video",
-    "key": "poster",
-    "language": "nl",
-    "value": "Poster",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/content-page/components/blocks/block-video/block-video",
-    "key": "toon-auteursrecht-melding-voor-deze-poster",
-    "language": "nl",
-    "value": "Toon bron voor deze videostill (verplicht voor publieke pagina).",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-video/block-video",
-    "key": "bijschift-titel",
-    "language": "nl",
-    "value": "Bijschift: titel",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-video/block-video",
-    "key": "bijschrift-beschrijving",
-    "language": "nl",
-    "value": "Bijschrift: beschrijving",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "admin/content-block/helpers/generators/media-player",
-    "key": "breedte",
-    "language": "nl",
-    "value": "Breedte",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "admin/content-block/helpers/generators/media-player",
-    "key": "automatisch-afspelen",
-    "language": "nl",
-    "value": "Automatisch afspelen",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "modules/admin/content-page/components/wrappers/media-player-wrapper/media-player-wrapper",
-    "key": "error",
-    "language": "nl",
-    "value": "Error",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "admin/content-block/components/wrappers/media-player-wrapper/media-player-wrapper",
-    "key": "het-ophalen-van-het-fragment-is-mislukt",
-    "language": "nl",
-    "value": "Het ophalen van het fragment is mislukt.",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/content-page/components/blocks/block-video/block-video",
-    "key": "bron",
-    "language": "nl",
-    "value": "Bron >",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/content-page/components/blocks/block-video/block-video",
-    "key": "bekijk-de-copyright-info-van-deze-afbeelding",
-    "language": "nl",
-    "value": "Bekijk de bronvermelding van deze afbeelding.",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "admin/content-page/components/blocks/media-grid-wrapper/media-grid-wrapper",
-    "key": "copyright-info",
-    "language": "nl",
-    "value": "Bronvermelding",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "admin/content-page/components/blocks/media-grid-wrapper/media-grid-wrapper",
-    "key": "deze-afbeelding-valt-onder-copyright-van-organisation-name",
-    "language": "nl",
-    "value": "De bron van deze videostill is <a href=\"{{organisationWebsite}}\" target=\"_blank\">{{organisationName}}</a>.",
-    "value_type": "HTML"
   },
   {
     "id": "",
@@ -20526,7 +20706,7 @@
     "location": "embed-code/views/embed-code-detail",
     "key": "onverwacht-inhoudstype",
     "language": "nl",
-    "value": "Onverwacht inhoudstype",
+    "value": "Onverwacht inhoudstype: {{type}}",
     "value_type": "HTML"
   },
   {
