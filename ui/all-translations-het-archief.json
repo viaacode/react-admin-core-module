@@ -16303,6 +16303,26 @@
     "id": "",
     "app": "HET_ARCHIEF",
     "component": "ADMIN_CORE",
+    "location": "admin/content-block/helpers/generators/media-player",
+    "key": "automatisch-afspelen",
+    "language": "nl",
+    "value": "Automatisch afspelen",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "admin/content-block/helpers/generators/media-player",
+    "key": "automatisch-afspelen",
+    "language": "en",
+    "value": "Automatisch afspelen",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
     "location": "modules/admin/content-page/components/wrappers/media-player-wrapper/media-player-wrapper",
     "key": "error",
     "language": "nl",
@@ -24797,26 +24817,6 @@
     "key": "gelieve-een-correcte-zoekfilter-link-in-te-vullen",
     "language": "en",
     "value": "Please enter a correct search filter link.",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "admin/content-block/helpers/generators/media-player",
-    "key": "automatisch-afspelen",
-    "language": "nl",
-    "value": "Automatisch afspelen",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "admin/content-block/helpers/generators/media-player",
-    "key": "automatisch-afspelen",
-    "language": "en",
-    "value": "Automatisch afspelen",
     "value_type": "TEXT"
   },
   {
@@ -45643,6 +45643,66 @@
     "id": "",
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
+    "location": "modules/ie-objects/components/context-disclaimer/context-disclaimer",
+    "key": "toon-de-context-van-dit-fragment",
+    "language": "nl",
+    "value": "Toon de context van dit fragment",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/context-disclaimer/context-disclaimer",
+    "key": "toon-de-context-van-dit-fragment",
+    "language": "en",
+    "value": "Toon de context van dit fragment",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/context-disclaimer/context-disclaimer",
+    "key": "de-context-van-dit-archief-is-belangrijk-bij-het-begrip-van-deze-video-meer-weten",
+    "language": "nl",
+    "value": "De context van dit archief is belangrijk bij het begrip van deze video. <a href=\"/vragen\">Meer weten</a>",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/context-disclaimer/context-disclaimer",
+    "key": "de-context-van-dit-archief-is-belangrijk-bij-het-begrip-van-deze-video-meer-weten",
+    "language": "en",
+    "value": "De context van dit archief is belangrijk bij het begrip van deze video. <a href=\"/vragen\">Meer weten</a>",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/context-disclaimer/context-disclaimer",
+    "key": "verberg-de-context-van-dit-fragment",
+    "language": "nl",
+    "value": "Verberg de context van dit fragment",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/context-disclaimer/context-disclaimer",
+    "key": "verberg-de-context-van-dit-fragment",
+    "language": "en",
+    "value": "Verberg de context van dit fragment",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
     "location": "modules/ie-objects/components/copyright-confirmation-modal/copyright-confirmation-modal",
     "key": "download-deze-krant",
     "language": "nl",
@@ -50464,9 +50524,9 @@
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
     "location": "modules/shared/components/media-card/media-card",
-    "key": "items",
+    "key": "dit-item-is-een-onderdeel-van-een-ander-item",
     "language": "nl",
-    "value": "items",
+    "value": "Dit item is een onderdeel van een ander item",
     "value_type": "TEXT"
   },
   {
@@ -50474,9 +50534,9 @@
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
     "location": "modules/shared/components/media-card/media-card",
-    "key": "items",
+    "key": "dit-item-is-een-onderdeel-van-een-ander-item",
     "language": "en",
-    "value": "items",
+    "value": "Dit item is een onderdeel van een ander item",
     "value_type": "TEXT"
   },
   {
@@ -50484,9 +50544,9 @@
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
     "location": "modules/shared/components/media-card/media-card",
-    "key": "item",
+    "key": "dit-object-heeft-childrencount-kind-objecten",
     "language": "nl",
-    "value": "item",
+    "value": "Dit object heeft {{childrenCount}} kind objecten",
     "value_type": "TEXT"
   },
   {
@@ -50494,9 +50554,9 @@
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
     "location": "modules/shared/components/media-card/media-card",
-    "key": "item",
+    "key": "dit-object-heeft-childrencount-kind-objecten",
     "language": "en",
-    "value": "item",
+    "value": "Dit object heeft {{childrenCount}} kind objecten",
     "value_type": "TEXT"
   },
   {
@@ -59417,6 +59477,106 @@
     "key": "sluiten",
     "language": "en",
     "value": "Close",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/shared/components/media-card/media-card",
+    "key": "num-of-children-items",
+    "language": "nl",
+    "value": "{{numOfChildren}} items",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/shared/components/media-card/media-card",
+    "key": "num-of-children-items",
+    "language": "en",
+    "value": "{{numOfChildren}} items",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/shared/components/media-card/media-card",
+    "key": "1-item",
+    "language": "nl",
+    "value": "1 item",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/shared/components/media-card/media-card",
+    "key": "1-item",
+    "language": "en",
+    "value": "1 item",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/theme-select/theme-select",
+    "key": "geen-themas-gevonden",
+    "language": "nl",
+    "value": "Geen themas gevonden",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/theme-select/theme-select",
+    "key": "geen-themas-gevonden",
+    "language": "en",
+    "value": "Geen themas gevonden",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/theme-select/theme-select",
+    "key": "kies-een-thema",
+    "language": "nl",
+    "value": "Kies een thema",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/theme-select/theme-select",
+    "key": "kies-een-thema",
+    "language": "en",
+    "value": "Kies een thema",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/utils/advanced-filters/metadata",
+    "key": "thema",
+    "language": "nl",
+    "value": "Thema",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/utils/advanced-filters/metadata",
+    "key": "thema",
+    "language": "en",
+    "value": "Thema",
     "value_type": "TEXT"
   },
   {
