@@ -40,9 +40,10 @@ export const BlockOverviewThemesGroupSection: FunctionComponent<
 > = ({ group, groupIndex, themes, bandColor }) => {
 	const gridRef = useRef<HTMLDivElement>(null);
 	const [bandHeight, setBandHeight] = useState<number | null>(null);
-	// The group title sits on the band, so it takes the design text colors for the band color.
-	// https://meemoo.atlassian.net/browse/ARC-3848
+	// The group title sits on the band, so it takes the design text colors for the band color
+	// instead of the block's own background. https://meemoo.atlassian.net/browse/ARC-3848
 	const bandTextColorVariables = getBackgroundTextColorVariables(bandColor);
+	const hasBandTextColors = Object.keys(bandTextColorVariables).length > 0;
 
 	useLayoutEffect(() => {
 		const gridEl = gridRef.current;
@@ -150,7 +151,9 @@ export const BlockOverviewThemesGroupSection: FunctionComponent<
 
 	return (
 		<section
-			className="c-block-overview-themes__group"
+			className={clsx('c-block-overview-themes__group', {
+				'u-background-text-colors': hasBandTextColors,
+			})}
 			style={bandTextColorVariables as CSSProperties}
 		>
 			{!!bandHeight && (
@@ -165,7 +168,7 @@ export const BlockOverviewThemesGroupSection: FunctionComponent<
 			{group.title && (
 				<BlockHeading
 					type={group.titleType || 'h2'}
-					className="c-block-overview-themes__group-title"
+					className="c-block-overview-themes__group-title u-background-text-primary"
 				>
 					{group.title}
 				</BlockHeading>

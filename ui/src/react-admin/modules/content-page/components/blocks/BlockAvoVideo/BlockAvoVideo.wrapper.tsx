@@ -42,7 +42,7 @@ interface MediaPlayerWrapperProps {
 	onEnded?: () => void;
 }
 
-export const BlockVideoWrapper: FunctionComponent<MediaPlayerWrapperProps> = (props) => {
+export const BlockAvoVideoWrapper: FunctionComponent<MediaPlayerWrapperProps> = (props) => {
 	const {
 		item,
 		src,

@@ -34,7 +34,7 @@ and add them to the json file without overwriting the existing strings.
 
 We can now input the src/modules/shared/translations/.../nl.json files into their respective database so the translations can be updated by meemoo through the admin dashboard.
  */
-import { Project, SyntaxKind } from 'ts-morph';
+import { Node, Project, SyntaxKind } from 'ts-morph';
 import type { MultiLanguageTranslationEntry } from '~modules/translations/translations.types.ts';
 import { executeDatabaseQuery } from './execute-database-query';
 import { getDirName } from './get-dir-name';
@@ -89,60 +89,131 @@ function getFormattedTranslation(translation: string) {
 	return translation.trim().replace(/\t\t(\t)+/g, ' ');
 }
 
-function extractInterpolationVariables(interpolationParam: string | undefined): string[] {
-	if (!interpolationParam) return [];
-	return [...interpolationParam.matchAll(/\b(\w+)\s*:/g)].map((match) => match[1]);
+function escapeForRegex(text: string): string {
+	return text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
 /**
- * Restores `{{variable}}` placeholders in a fallback translation string generated from a key.
- *
- * When a translation key like `path___this-is-a-translation-for-user-name` is converted to a
- * human-readable fallback (`This is a translation for user name`), any interpolation variables
- * that were part of the original translation (e.g. `{{userName}}`) are lost because the key was
- * derived via `kebabCase`, which strips the `{{}}` braces and lowercases the name.
- *
- * This function recovers them by stripping all non-alphanumeric characters from each variable name
- * and finding the consecutive word sequence in the fallback whose stripped form matches. For
- * example, variable `username` matches the phrase `user name` (stripped: `username`) and replaces
- * it with `{{username}}`.
- *
- * @param fallback - The human-readable fallback string produced from the translation key.
- * @param variables - The interpolation variable names extracted from the `tText`/`tHtml` call's
- *   second parameter (e.g. `['username', 'count']` from `{username: user.name, count: items.length}`).
- * @returns The fallback string with matched word sequences replaced by `{{variableName}}` placeholders.
+ * Lowercases and strips everything that isn't a letter or a number, so that the words a variable
+ * was flattened into can be compared to the variable name itself: `user name` === `userName`.
  */
-function reconstructVariablesInFallback(fallback: string, variables: string[]): string {
-	let result = fallback;
-	for (const varName of variables) {
-		const normalizedVar = varName.toLowerCase().replace(/[^a-z0-9]/g, '');
+function normalizeForComparison(text: string): string {
+	return text.toLowerCase().replace(/[^\p{L}\p{N}]/gu, '');
+}
+
+/**
+ * Returns the names of the interpolation variables passed to a tText/tHtml call, eg: ['userName']
+ * for tText('Hallo {{userName}}', { userName: user.name }).
+ *
+ * Only object literals are inspected: a variable, spread or ternary tells us nothing about which
+ * placeholders the translation should contain, so those return an empty list and are never reported
+ * as broken.
+ */
+export function extractInterpolationVariables(interpolationParam: Node | undefined): string[] {
+	if (!interpolationParam || !Node.isObjectLiteralExpression(interpolationParam)) {
+		return [];
+	}
+	return compact(
+		interpolationParam.getProperties().map((property) => {
+			if (!Node.isPropertyAssignment(property) && !Node.isShorthandPropertyAssignment(property)) {
+				// Spread assignments and methods have no name we can use
+				return null;
+			}
+			const nameNode = property.getNameNode();
+			if (
+				Node.isIdentifier(nameNode) ||
+				Node.isStringLiteral(nameNode) ||
+				Node.isNoSubstitutionTemplateLiteral(nameNode)
+			) {
+				return trim(nameNode.getText(), '\'"`');
+			}
+			// Computed property names ([key]) resolve at runtime
+			return null;
+		})
+	);
+}
+
+/**
+ * Restores `{{variable}}` placeholders that were flattened into plain words.
+ *
+ * A translation key is built with `kebabCase`, which drops the `{{}}` braces and the camelCase:
+ * `Hallo {{userName}}` becomes `...___hallo-user-name`. Any value derived from such a key (or any
+ * value that was written by an earlier run of this script) therefore reads `Hallo user name` and no
+ * longer interpolates. This function finds the words a variable was turned into and puts the
+ * placeholder back.
+ *
+ * Variables that are still intact are left alone, and variables whose words cannot be found are
+ * returned in `missing` so the caller can report them instead of writing a broken value.
+ *
+ * @param value - The translation value to check.
+ * @param variables - The interpolation variable names taken from the tText/tHtml call.
+ */
+export function ensureVariablesInValue(
+	value: string,
+	variables: string[]
+): { value: string; missing: string[] } {
+	const missing: string[] = [];
+	let result = value;
+
+	for (const variableName of variables) {
+		if (new RegExp(`\\{\\{\\s*${escapeForRegex(variableName)}\\s*\\}\\}`, 'i').test(result)) {
+			// Placeholder is still intact
+			continue;
+		}
+
+		const normalizedVariable = normalizeForComparison(variableName);
+		// kebabCase tells us into how many words the variable was flattened, eg: 'selectedUserGroup'
+		// => 'selected-user-group' => 3. Only phrases of exactly that length can be its remains,
+		// which keeps a variable from swallowing unrelated words.
+		const wordCount = kebabCase(variableName).split('-').length;
 		const words = result.split(/\s+/);
 		let replaced = false;
-		outer: for (let len = words.length; len >= 1; len--) {
-			for (let start = 0; start <= words.length - len; start++) {
-				const phrase = words.slice(start, start + len).join(' ');
-				const normalizedPhrase = phrase.toLowerCase().replace(/[^a-z0-9]/g, '');
-				if (normalizedPhrase === normalizedVar) {
-					const escaped = phrase.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-					result = result.replace(new RegExp(escaped, 'i'), `{{${varName}}}`);
-					replaced = true;
-					break outer;
-				}
+
+		for (let start = 0; start + wordCount <= words.length; start++) {
+			const phrase = words.slice(start, start + wordCount).join(' ');
+			if (normalizeForComparison(phrase) !== normalizedVariable) {
+				continue;
+			}
+			// Keep any punctuation that is glued to the phrase, eg: 'menu name.' => '{{menuName}}.'
+			const prefix = (phrase.match(/^[^\p{L}\p{N}]*/u) as RegExpMatchArray)[0];
+			const suffix = (phrase.match(/[^\p{L}\p{N}]*$/u) as RegExpMatchArray)[0];
+			// Replace every occurrence, a variable can be used more than once in one translation
+			const replacedResult = result.replace(
+				new RegExp(escapeForRegex(phrase), 'gi'),
+				`${prefix}{{${variableName}}}${suffix}`
+			);
+			if (replacedResult !== result) {
+				result = replacedResult;
+				replaced = true;
+				break;
 			}
 		}
+
 		if (!replaced) {
-			console.warn(
-				yellow(`Could not reconstruct variable {{${varName}}} in fallback translation: "${result}"`)
-			);
+			missing.push(variableName);
 		}
 	}
-	return result;
+
+	return { value: result, missing };
+}
+
+/**
+ * Whether a value ended up using at least one of the variables the code passes to it.
+ *
+ * Not every variable has to appear: a translation may use only some of them (eg: a count that is
+ * only mentioned in the plural wording), so a value is only considered broken when none of its
+ * variables made it in.
+ *
+ * @param missing - The variables that `ensureVariablesInValue` could not find or restore.
+ * @param variables - All variables the tText/tHtml call passes.
+ */
+export function usesAnyVariable(missing: string[], variables: string[]): boolean {
+	return missing.length < variables.length;
 }
 
 function getFallbackTranslation(key: string, variables: string[] = []): string {
 	const fallback = `${upperFirst(lowerCase(key.split(TRANSLATION_SEPARATOR).pop() as string))}`;
-	if (variables.length === 0) return fallback;
-	return reconstructVariablesInFallback(fallback, variables);
+	return ensureVariablesInValue(fallback, variables).value;
 }
 
 function simplifyHtmlValue(value: string): string {
@@ -156,16 +227,37 @@ function simplifyHtmlValue(value: string): string {
 	return value;
 }
 
+/**
+ * The admin-core code is shared between AVO and hetArchief, but each app keeps its own translation
+ * json file. When a key is missing from this app's file, the other app's file is a far better source
+ * than a value reconstructed from the key, since it still holds the original punctuation, casing and
+ * placeholders.
+ *
+ * Rejected only when it uses none of the variables the code passes, so a value that another app
+ * completely flattened cannot spread.
+ */
+function getSiblingTranslation(
+	siblingValue: string | undefined,
+	variables: string[]
+): string | undefined {
+	if (!siblingValue) {
+		return undefined;
+	}
+	const { missing } = ensureVariablesInValue(siblingValue, variables);
+	return usesAnyVariable(missing, variables) ? siblingValue : undefined;
+}
+
 function getTranslationEntryFromCallExpression(
 	tFunction: 'tText' | 'tHtml',
 	translationTextOrKey: string,
 	appsParam: string | undefined,
-	interpolationParam: string | undefined,
+	interpolationParam: Node | undefined,
 	app: App,
 	component: Component,
 	relativeFilePath: string,
 	oldTranslations: Record<string, string>,
-	oldTranslationsPath: string
+	oldTranslationsPath: string,
+	siblingTranslations: Record<string, string>
 ): TranslationEntry | null {
 	let formattedKey: string | undefined;
 	let resolvedAppParam = appsParam;
@@ -215,10 +307,13 @@ function getTranslationEntryFromCallExpression(
 			value:
 				(hasKeyAlready
 					? getFormattedTranslation(
-							oldTranslations[formattedKey] || getFallbackTranslation(formattedKey, variables)
+							oldTranslations[formattedKey] ||
+								getSiblingTranslation(siblingTranslations[formattedKey], variables) ||
+								getFallbackTranslation(formattedKey, variables)
 						)
 					: formattedTranslation) || '',
 			value_type: tFunction === 'tHtml' ? ValueType.HTML : ValueType.TEXT,
+			variables,
 		};
 	}
 	return null;
@@ -230,6 +325,7 @@ async function extractTranslationsFromCodeFiles(
 	component: Component,
 	oldTranslations: Record<string, string>,
 	oldTranslationsJsonPath: string,
+	siblingTranslations: Record<string, string>,
 	tsConfigFilePath?: string,
 	onProgress?: ProgressCallback
 ): Promise<TranslationEntry[]> {
@@ -300,12 +396,13 @@ async function extractTranslationsFromCodeFiles(
 				functionCallName,
 				trim(firstParameter.getText(), '\'"``'),
 				params[2],
-				params[1],
+				functionParameters[1],
 				app,
 				component,
 				sourceFile.getFilePath().substring(rootFolderPath.length + 1),
 				oldTranslations,
-				oldTranslationsJsonPath
+				oldTranslationsJsonPath,
+				siblingTranslations
 			);
 
 			if (translationEntry) {
@@ -344,6 +441,55 @@ async function getOnlineTranslations(app: App): Promise<TranslationEntry[]> {
 	}));
 }
 
+interface BrokenVariableFinding {
+	fullKey: string;
+	language: Locale;
+	value: string;
+	missing: string[];
+	source: 'online' | 'json' | 'code';
+	siblingValue?: string;
+}
+
+// console-log-colors has no orange, and the report has to stand out from the yellow warnings
+const ORANGE = '\x1b[38;5;208m';
+const ORANGE_RESET = '\x1b[0m';
+const orange = (text: string) => `${ORANGE}${text}${ORANGE_RESET}`;
+
+/**
+ * Lists the translations that no longer interpolate any of their variables, so they can be corrected
+ * by hand. Never throws: online values are curated by meemoo and are always used as-is, we can only
+ * point at them.
+ */
+function reportBrokenInterpolationVariables(
+	findings: BrokenVariableFinding[],
+	outputJsonFile: string
+) {
+	if (findings.length === 0) {
+		return;
+	}
+	const onlineFindings = findings.filter((finding) => finding.source === 'online');
+	console.warn(
+		orange(
+			`\n${findings.length} translation(s) no longer use any of their {{variables}} and have to be fixed by hand (${outputJsonFile}):`
+		)
+	);
+	if (onlineFindings.length > 0) {
+		console.warn(
+			orange(
+				`\t${onlineFindings.length} of them come from the online translations. Since online values always win, those have to be corrected in the QAS app_translations table.`
+			)
+		);
+	}
+	for (const finding of findings) {
+		console.warn(orange(`\n\t${finding.fullKey} [${finding.language}, from ${finding.source}]`));
+		console.warn(orange(`\t\tmissing:  ${finding.missing.map((v) => `{{${v}}}`).join(', ')}`));
+		console.warn(orange(`\t\tvalue:    ${finding.value}`));
+		if (finding.siblingValue) {
+			console.warn(orange(`\t\tother app: ${finding.siblingValue}`));
+		}
+	}
+}
+
 function checkTranslationsForKeysAsValue(translationJson: string) {
 	// Identify  if any translations contain "___", then something went wrong with the translations
 	const faultyTranslations = [];
@@ -379,7 +525,8 @@ async function combineTranslations(
 	nlSourceCodeTranslations: TranslationEntry[],
 	allOnlineTranslations: TranslationEntry[],
 	outputJsonFile: string,
-	app: App
+	app: App,
+	siblingTranslations: Record<string, string>
 ): Promise<TranslationEntry[]> {
 	// Compare existing translations to the new translations
 	const nlJsonTranslationKeys: string[] = nlJsonTranslations.map(getFullKey);
@@ -405,6 +552,7 @@ async function combineTranslations(
 
 	// Combine the translations in the json with the freshly extracted translations from the code
 	const combinedTranslationEntries: TranslationEntry[] = [];
+	const brokenVariableFindings: BrokenVariableFinding[] = [];
 	[...existingTranslationKeys, ...addedTranslationKeys].forEach((translationKey: string) => {
 		const onlineTranslations = allOnlineTranslations.filter(
 			(t) => getFullKey(t) === translationKey
@@ -456,6 +604,33 @@ async function combineTranslations(
 					sourceCodeTranslation?.value_type || onlineTranslation?.value_type || ValueType.TEXT, // translations in json file do not store the value type
 			};
 
+			// Make sure the value still interpolates the variables that the code passes to it. Values
+			// that we generated ourselves are repaired, online values are curated by meemoo so those
+			// are only reported. Since variables can be optional, only a value that uses none of them
+			// is reported as broken.
+			const requiredVariables = sourceCodeTranslation?.variables || [];
+			if (requiredVariables.length > 0 && entry.value) {
+				const source: BrokenVariableFinding['source'] = onlineTranslation?.value
+					? 'online'
+					: nlJsonTranslation?.value
+						? 'json'
+						: 'code';
+				const { value, missing } = ensureVariablesInValue(entry.value, requiredVariables);
+				if (source !== 'online') {
+					entry.value = value;
+				}
+				if (!usesAnyVariable(missing, requiredVariables)) {
+					brokenVariableFindings.push({
+						fullKey: translationKey,
+						language: languageCode,
+						value: entry.value,
+						missing,
+						source,
+						siblingValue: siblingTranslations[getKeyWithoutComponent(entry)],
+					});
+				}
+			}
+
 			combinedTranslationEntries.push(entry);
 		});
 	});
@@ -466,6 +641,7 @@ async function combineTranslations(
 			.map((entry) => [entry.location + TRANSLATION_SEPARATOR + entry.key, entry.value])
 	);
 	const nlJsonContent = JSON.stringify(sortObjectKeys(combinedTranslations), null, 2);
+	reportBrokenInterpolationVariables(brokenVariableFindings, outputJsonFile); // Only warns
 	checkTranslationsForKeysAsValue(nlJsonContent); // Throws error if any key is found as a value
 
 	await fs.writeFile(outputJsonFile, `${nlJsonContent}\n`);
@@ -481,6 +657,23 @@ async function combineTranslations(
 	return combinedTranslationEntries;
 }
 
+/**
+ * Reads the translation json of the other app that shares this code. Never fatal: without it we
+ * simply fall back to reconstructing values from the key.
+ */
+async function readSiblingTranslations(siblingJsonPath: string): Promise<Record<string, string>> {
+	try {
+		return JSON.parse((await fs.readFile(siblingJsonPath)).toString());
+	} catch {
+		console.warn(
+			yellow(
+				`Could not read the sibling app translations at ${siblingJsonPath}, falling back to translations derived from the key`
+			)
+		);
+		return {};
+	}
+}
+
 async function updateTranslations(
 	rootFolderPath: string,
 	app: App,
@@ -488,7 +681,8 @@ async function updateTranslations(
 	outputJsonFile: string,
 	allOnlineTranslations: TranslationEntry[],
 	tsConfigPath?: string,
-	onProgress?: ProgressCallback
+	onProgress?: ProgressCallback,
+	siblingJsonFile?: string
 ): Promise<TranslationEntry[]> {
 	try {
 		const onlineTranslations = allOnlineTranslations.filter((t) => t.component === component);
@@ -512,6 +706,10 @@ async function updateTranslations(
 			}
 		);
 
+		const siblingTranslations = siblingJsonFile
+			? await readSiblingTranslations(path.resolve(rootFolderPath, siblingJsonFile))
+			: {};
+
 		// Extract translations from code and replace code by reference to translation key
 		const sourceCodeTranslations = await extractTranslationsFromCodeFiles(
 			rootFolderPath,
@@ -519,6 +717,7 @@ async function updateTranslations(
 			component,
 			nlJsonTranslations,
 			resolvePath(rootFolderPath, outputJsonFile),
+			siblingTranslations,
 			tsConfigPath,
 			onProgress
 		);
@@ -529,7 +728,8 @@ async function updateTranslations(
 			sourceCodeTranslations,
 			onlineTranslations,
 			path.join(rootFolderPath, outputJsonFile),
-			app
+			app,
+			siblingTranslations
 		);
 		onProgress?.(95, 'done');
 		return result;
@@ -568,7 +768,8 @@ async function extractAvoAdminCoreTranslations(
 		'../shared/translations/avo/nl.json',
 		allOnlineTranslations,
 		resolvePath('../tsconfig.json'),
-		onProgress
+		onProgress,
+		'../shared/translations/hetArchief/nl.json'
 	);
 	onProgress?.(97, 'formatting...');
 	await formatCode(resolvePath('../'));
@@ -625,7 +826,8 @@ async function extractHetArchiefAdminCoreTranslations(
 		'../shared/translations/hetArchief/nl.json',
 		allOnlineTranslations,
 		resolvePath('../tsconfig.json'),
-		onProgress
+		onProgress,
+		'../shared/translations/avo/nl.json'
 	);
 	onProgress?.(97, 'formatting...');
 	await formatCode(resolvePath('../'));
@@ -807,6 +1009,9 @@ async function extractTranslations() {
 	console.info(green(`Finished writing ${uniqueTranslations.length} translations`));
 }
 
-extractTranslations().catch((err) => {
-	console.error(red('Extracting translations failed: '), err);
-});
+// Only run when this file is executed directly, so tests can import the helpers above
+if (process.argv[1]?.endsWith('extract-and-replace-translations.ts')) {
+	extractTranslations().catch((err) => {
+		console.error(red('Extracting translations failed: '), err);
+	});
+}

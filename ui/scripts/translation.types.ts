@@ -29,6 +29,12 @@ export interface TranslationEntry {
 	value: string;
 	value_type: ValueType | null;
 	id: string;
+	/**
+	 * Interpolation variable names found in the second parameter of the tText/tHtml call
+	 * (eg: ['userName'] for tText('Hallo {{userName}}', { userName: user.name })).
+	 * Only set on translations extracted from the source code, never persisted.
+	 */
+	variables?: string[];
 }
 
 export const TRANSLATION_SEPARATOR = '___';

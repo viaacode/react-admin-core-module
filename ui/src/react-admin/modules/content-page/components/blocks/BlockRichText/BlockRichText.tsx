@@ -83,7 +83,11 @@ export const BlockRichText: FunctionComponent<BlockRichTextProps> = ({
 				<Html
 					content={convertToHtml(content)}
 					sanitizePreset={SanitizePreset.full}
-					className="c-rich-text-editor__content u-background-text-links"
+					className={clsx('u-background-text-links', {
+						// A per-column custom color always wins; only follow the block's design text
+						// colors when none was set. https://meemoo.atlassian.net/browse/ARC-3848
+						'u-background-text-primary': !color,
+					})}
 					style={{
 						...(color ? { color } : {}),
 						...(maxTextWidth ? { maxWidth: maxTextWidth } : {}),

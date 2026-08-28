@@ -48,7 +48,7 @@ export const GET_CONTENT_BLOCK_TYPE_OPTIONS: () => SelectOption<string>[] = () =
 		},
 		{
 			label: tText('admin/content-block/content-block___media-speler'),
-			value: ContentBlockType.MediaPlayer,
+			value: ContentBlockType.AvoVideo,
 		},
 		{
 			label: tText('admin/content-block/content-block___media-speler-met-titel-tekst-en-knop'),

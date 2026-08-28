@@ -1,6 +1,7 @@
 import { ANCHOR_LINKS_BLOCK_CONFIG } from '~content-blocks/anchor-links.ts';
 import { AVO_HERO_BLOCK_CONFIG } from '~content-blocks/BlockAvoHero';
 import { AVO_IMAGE_TEXT_BACKGROUND_BLOCK_CONFIG } from '~content-blocks/BlockAvoImageTextBackground';
+import { AVO_VIDEO_BLOCK_CONFIG } from '~content-blocks/BlockAvoVideo';
 import { CONTENT_BREADCRUMBS_CONFIG } from '~content-blocks/BlockBreadcrumbs';
 import { BUTTONS_BLOCK_CONFIG } from '~content-blocks/BlockButtons';
 import { CARDS_WITHOUT_DESCRIPTION_BLOCK_CONFIG } from '~content-blocks/BlockCardsWithoutDescription';
@@ -51,7 +52,6 @@ import { THREE_CLICKABLE_TILES_BLOCK_CONFIG } from '~content-blocks/BlockThreeCl
 import { TIMELINE_BLOCK_CONFIG } from '~content-blocks/BlockTimeline';
 import { TITLE_WITH_PARALLAX_CONFIG } from '~content-blocks/BlockTitleWithParallax';
 import { UITGEKLAARD_BLOCK_CONFIG } from '~content-blocks/BlockUitgeklaard';
-import { MEDIA_PLAYER_BLOCK_CONFIG } from '~content-blocks/BlockVideo';
 import { MEDIA_PLAYER_TITLE_TEXT_BUTTON_BLOCK_CONFIG } from '~content-blocks/BlockVideoTitleTextButton';
 import { SEARCH_BLOCK_CONFIG } from '~content-blocks/search';
 import { PAGE_OVERVIEW_BLOCK_CONFIG } from '~modules/content-page/components/blocks/BlockPageOverview/BlockPageOverview.editorconfig';
@@ -73,7 +73,7 @@ export const CONTENT_BLOCK_CONFIG_MAP: Record<
 	[ContentBlockType.Intro]: INTRO_BLOCK_CONFIG,
 	[ContentBlockType.Klaar]: KLAAR_BLOCK_CONFIG,
 	[ContentBlockType.MediaGrid]: MEDIA_GRID_BLOCK_CONFIG,
-	[ContentBlockType.MediaPlayer]: MEDIA_PLAYER_BLOCK_CONFIG,
+	[ContentBlockType.AvoVideo]: AVO_VIDEO_BLOCK_CONFIG,
 	[ContentBlockType.MediaPlayerTitleTextButton]: MEDIA_PLAYER_TITLE_TEXT_BUTTON_BLOCK_CONFIG,
 	[ContentBlockType.Quote]: QUOTE_BLOCK_CONFIG,
 	[ContentBlockType.HetArchiefQuote]: HET_ARCHIEF_QUOTE_BLOCK_CONFIG,

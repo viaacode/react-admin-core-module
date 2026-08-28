@@ -8,6 +8,7 @@ import { AdminConfigManager } from '~core/config/config.class';
 import { IeObjectFlowPlayerWrapper } from '~modules/content-page/components/IeObjectFlowPlayerWrapper/IeObjectFlowPlayerWrapper.tsx';
 import { IeObjectLoadError } from '~modules/content-page/components/IeObjectLoadError/IeObjectLoadError.tsx';
 import { IeObjectMetadata } from '~modules/content-page/components/IeObjectMetadata/IeObjectMetadata.tsx';
+import { getBackgroundTextColorVariables } from '~modules/content-page/const/background-text-colors';
 import { useGetIeObjectsPlayableDisplayData } from '~modules/content-page/hooks/useGetIeObjectsPlayableDisplayData.ts';
 import type { TimelineNodeBlockComponentState } from '~modules/content-page/types/content-block.types';
 import { Color } from '~modules/content-page/types/content-block.types';
@@ -16,6 +17,7 @@ import Html from '~shared/components/Html/Html';
 import { Icon } from '~shared/components/Icon/Icon';
 import { formatDateToDayMonthNameYear, getYear } from '~shared/helpers/formatters/date';
 import { isAudioVideoFormat } from '~shared/helpers/is-audio-video-format.ts';
+import { snippetTimeToSeconds } from '~shared/helpers/parsers/duration';
 import { SanitizePreset } from '~shared/helpers/sanitize/presets';
 import { tText } from '~shared/helpers/translation-functions';
 import { HET_ARCHIEF } from '~shared/types';
@@ -25,6 +27,7 @@ import './BlockTimeline.scss';
 export interface BlockTimelineProps extends DefaultComponentProps {
 	/** Id of the content block, added by the content block renderer. Empty for an unsaved block. */
 	blockId?: string;
+	/** The timeline nodes, in the order the editor configured them, not the order they are shown in. */
 	elements: TimelineNodeBlockComponentState[];
 	/** Chronological order of the nodes. Descending (most recent first) when unset. */
 	sortOrder?: AvoSearchOrderDirection;
@@ -51,32 +54,49 @@ export const BlockTimeline: FunctionComponent<BlockTimelineProps> = ({
 
 	// The nodes are shown in chronological order, regardless of the order they were configured in.
 	// Nodes without a usable date keep their configured order at the end of the timeline.
+	// The position a node was configured at travels along with it: the playable display data below
+	// comes back in the block's own element order, so that -- and not the position on screen -- is
+	// what tells which entry of the response belongs to which node.
 	const sortedElements = useMemo(() => {
 		const direction = sortOrder === AvoSearchOrderDirection.ASC ? 1 : -1;
-		return [...elements].sort((left, right) => {
-			const leftTime = new Date(left.date).getTime();
-			const rightTime = new Date(right.date).getTime();
-			if (Number.isNaN(leftTime) || Number.isNaN(rightTime)) {
-				return Number.isNaN(leftTime) ? (Number.isNaN(rightTime) ? 0 : 1) : -1;
-			}
-			return (leftTime - rightTime) * direction;
-		});
+		return elements
+			.map((node, elementIndex) => ({ node, elementIndex }))
+			.sort((left, right) => {
+				const leftTime = new Date(left.node.date).getTime();
+				const rightTime = new Date(right.node.date).getTime();
+				if (Number.isNaN(leftTime) || Number.isNaN(rightTime)) {
+					return Number.isNaN(leftTime) ? (Number.isNaN(rightTime) ? 0 : 1) : -1;
+				}
+				return (leftTime - rightTime) * direction;
+			});
 	}, [elements, sortOrder]);
 
 	// While this block is being put together in the editor, it has no id yet, so its nodes go along
-	// for the proxy to resolve. One entry per node, so the response stays aligned.
+	// for the proxy to resolve. One entry per node, in the block's own element order -- the same
+	// order the proxy reads them in from a saved config -- so the response is indexed the same way
+	// either way it was fetched. Only cut when both times are given and form a real interval, same
+	// rule as the editor and the proxy apply: the media service needs an end time to cut at all, so
+	// a start time on its own would silently play the whole object.
 	const unsavedObjects = useMemo(
 		() =>
-			sortedElements.map((node) => ({
-				schemaIdentifier: node.visualType === 'OBJECT' ? String(node.mediaItem?.value || '') : '',
-			})),
-		[sortedElements]
+			elements.map((node) => {
+				const start = snippetTimeToSeconds(node.startTime);
+				const end = snippetTimeToSeconds(node.endTime);
+				const hasSnippet = start !== null && end !== null && end > start;
+
+				return {
+					schemaIdentifier: node.visualType === 'OBJECT' ? String(node.mediaItem?.value || '') : '',
+					start: hasSnippet ? start : undefined,
+					end: hasSnippet ? end : undefined,
+				};
+			}),
+		[elements]
 	);
 
 	// Resolve all objects of the timeline in a single request. Which objects those are is read
 	// from this block's stored config by the proxy, so only the block id goes out once it has been
-	// saved; the response comes back in the order of the nodes below, one (possibly null) entry
-	// per node.
+	// saved; the response comes back in the order the nodes were configured in -- not the
+	// chronological order they are shown in -- one (possibly null) entry per node.
 	const { data: ieObjects } = useGetIeObjectsPlayableDisplayData(blockId, unsavedObjects);
 
 	const scrollToTop = () => {
@@ -87,23 +107,33 @@ export const BlockTimeline: FunctionComponent<BlockTimelineProps> = ({
 		<div className={clsx('c-block-timeline', className)} ref={containerRef}>
 			<ol className="c-block-timeline__list">
 				<TimelineCap position="start" />
-				{sortedElements.map((node, index) => {
+				{sortedElements.map(({ node, elementIndex }, index) => {
 					const showYear =
-						index === 0 || getYear(node.date) !== getYear(sortedElements[index - 1].date);
+						index === 0 || getYear(node.date) !== getYear(sortedElements[index - 1].node.date);
 					const backgroundColor =
 						node.backgroundColor && node.backgroundColor !== Color.Transparent
 							? node.backgroundColor
 							: undefined;
+					// The node's title and text sit on its own colour band, so they take the design
+					// text colors for that band's color instead of the block's own background.
+					// https://meemoo.atlassian.net/browse/ARC-3848
+					const nodeTextColorVariables = backgroundColor
+						? getBackgroundTextColorVariables(backgroundColor)
+						: {};
+					const hasNodeTextColors = Object.keys(nodeTextColorVariables).length > 0;
 					const markerShape = index % 2 === 0 ? 'circle' : 'rectangle';
 					const hasImage = node.visualType === 'IMAGE' && !!node.image;
 					const hasObject = node.visualType === 'OBJECT' && !!node.mediaItem?.value;
-					const ieObject = hasObject ? ieObjects?.[index] : undefined;
+					const ieObject = hasObject ? ieObjects?.[elementIndex] : undefined;
 					const thumbnail = ieObject?.newspaperImage || ieObject?.thumbnailUrl;
 					// A resolved-but-null entry means this node's object couldn't be loaded (it's
 					// gone, or out of reach for this visitor); the node keeps its place in the
 					// timeline and shows an error tile where the media would have been.
 					const hasFailedObject =
-						hasObject && !!ieObjects && index < ieObjects.length && ieObjects[index] === null;
+						hasObject &&
+						!!ieObjects &&
+						elementIndex < ieObjects.length &&
+						ieObjects[elementIndex] === null;
 					// Until its object has been resolved the node shows what its own config knows --
 					// the poster image, if it has one -- so the timeline is laid out at its final
 					// size straight away instead of reflowing as the objects come in.
@@ -137,10 +167,14 @@ export const BlockTimeline: FunctionComponent<BlockTimelineProps> = ({
 									'c-block-timeline__node-content--has-background': !!backgroundColor,
 									'c-block-timeline__node-content--has-image': hasImage,
 									'c-block-timeline__node-content--has-object': hasObject,
+									'u-background-text-colors': hasNodeTextColors,
 								})}
 								style={
 									backgroundColor
-										? ({ '--c-block-timeline-node-bg': backgroundColor } as CSSProperties)
+										? ({
+												'--c-block-timeline-node-bg': backgroundColor,
+												...nodeTextColorVariables,
+											} as CSSProperties)
 										: undefined
 								}
 							>
@@ -209,13 +243,15 @@ export const BlockTimeline: FunctionComponent<BlockTimelineProps> = ({
 										showIcon={node.copyrightIconVisible}
 										className="c-block-timeline__node-image-caption"
 									/>
-									<h3 className="c-block-timeline__node-title">{node.title}</h3>
+									<h3 className="c-block-timeline__node-title u-background-text-primary">
+										{node.title}
+									</h3>
 									{node.text && (
 										<Html
 											content={node.text}
 											sanitizePreset={SanitizePreset.full}
 											type="div"
-											className="c-block-timeline__node-description u-background-text-links"
+											className="c-block-timeline__node-description u-background-text-primary u-background-text-links"
 										/>
 									)}
 									{ieObject && <IeObjectMetadata ieObject={ieObject} fallbackTitle={node.title} />}
@@ -227,7 +263,14 @@ export const BlockTimeline: FunctionComponent<BlockTimelineProps> = ({
 				<TimelineCap position="end" />
 			</ol>
 			{sortedElements.length > 0 && (
-				<button type="button" className="c-block-timeline__back-to-top" onClick={scrollToTop}>
+				<button
+					type="button"
+					// "Terug naar boven" is secondary text, so it follows the design's secondary color for
+					// the block background instead of a fixed grey.
+					// https://meemoo.atlassian.net/browse/ARC-3848
+					className="c-block-timeline__back-to-top u-background-text-secondary"
+					onClick={scrollToTop}
+				>
 					{tText(
 						'react-admin/modules/content-page/components/blocks/block-timeline/block-timeline___terug-naar-boven',
 						{},

@@ -327,6 +327,10 @@ $object-meta-gap: 4rem;
 		border: none;
 		padding: 0;
 		cursor: pointer;
+
+		// Fallback only. The button carries .u-background-text-secondary, so on a background design
+		// specified colors for, that rule (which is !important) wins. This grey still applies on AVO
+		// and on backgrounds with no record. https://meemoo.atlassian.net/browse/ARC-3848
 		color: colors.$color-gray-300;
 
 		@include typography.sofia-pro-body-xs;

@@ -182,7 +182,7 @@ export enum ContentBlockType {
 	Klaar = 'KLAAR',
 	LogoGrid = 'LOGO_GRID',
 	MediaGrid = 'MEDIA_GRID',
-	MediaPlayer = 'MEDIA_PLAYER',
+	AvoVideo = 'MEDIA_PLAYER',
 	MediaPlayerTitleTextButton = 'MEDIA_PLAYER_TITLE_TEXT_BUTTON',
 	PageOverview = 'PAGE_OVERVIEW',
 	ProjectsSpotlight = 'PROJECTS_SPOTLIGHT',
@@ -427,6 +427,7 @@ export interface QuoteBlockComponentState {
 export interface MediaPlayerBlockComponentState {
 	title: string;
 	item?: ButtonAction;
+	autoplay: boolean;
 }
 
 export interface MediaPlayerTitleTextButtonBlockComponentState {
@@ -502,8 +503,7 @@ export type RepeatedContentBlockComponentState =
 	| MediaGridBlockComponentState
 	| ImageInfo // project spotlight & spotlight
 	| RichTextBlockComponentState
-	| ThreeClickableTilesBlockComponentState
-	| TimelineNodeBlockComponentState;
+	| ThreeClickableTilesBlockComponentState;
 
 export type SingleContentBlockComponentState =
 	| HeadingBlockComponentState
@@ -519,6 +519,7 @@ export type SingleContentBlockComponentState =
 	| QuoteBlockComponentState
 	| HetArchiefQuoteBlockComponentState
 	| RichTextBlockComponentState
+	| TimelineBlockComponentState
 	// biome-ignore lint/complexity/noBannedTypes: todo
 	| {}; // Search block & content page meta
 
@@ -681,8 +682,9 @@ export interface TimelineNodeBlockComponentState extends MediaItemComponentState
 	title: string;
 	text?: string;
 	visualType: TimelineNodeVisualType;
-	startTime?: number;
-	endTime?: number;
+	/** Snippet start/end as entered by the editor, eg. `01:23` or `00:01:23`, see IE_OBJECT_WITH_SNIPPET_TIME_FIELDS */
+	startTime?: string;
+	endTime?: string;
 	image?: string;
 	imageAlt?: string;
 	copyrightTitle?: string;
@@ -691,10 +693,11 @@ export interface TimelineNodeBlockComponentState extends MediaItemComponentState
 	backgroundColor?: Color;
 }
 
-export type TimelineBlockState = DefaultContentBlockState & {
+export interface TimelineBlockComponentState {
 	/** Chronological order of the nodes. Descending (most recent first) when unset. */
 	sortOrder?: AvoSearchOrderDirection;
-};
+	elements: TimelineNodeBlockComponentState[];
+}
 
 export enum TitleWithParallaxVisualisationOption {
 	BIG = 'BIG',

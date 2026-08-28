@@ -34,49 +34,58 @@ afterEach(() => {
 });
 
 describe('computeLineBoxes', () => {
-	it('snaps the outer edges to the wrapper rect and pads the sides by --h-pad', () => {
-		stubComputedStyle({ '--h-pad': '1rem' });
+	it('expands each rendered line by --h-pad/--v-pad, read as plain rem numbers', () => {
+		stubComputedStyle({ '--h-pad': '1rem', '--v-pad': '0.5rem' });
 
-		const wrapperEl = document.createElement('div');
-		wrapperEl.getBoundingClientRect = () => rect(100, 300, 132, 100);
+		const wrapperEl = document.createElement('h1');
+		wrapperEl.getBoundingClientRect = () => rect(100, 300, 148, 100);
 
 		const textEl = document.createElement('span');
-		textEl.getClientRects = () => [rect(102, 250, 130, 120)] as unknown as DOMRectList;
+		textEl.getClientRects = () => [rect(116, 250, 132, 120)] as unknown as DOMRectList;
 
-		const [box] = computeLineBoxes(wrapperEl, textEl);
-
-		// Outer top/bottom come from the wrapper, not the (font-inflated) text rect.
-		expect(box.top).toBe(0);
-		expect(box.height).toBe(32);
-		// Sides are padded outward by --h-pad (1rem * 16px root font size = 16px).
-		expect(box.left).toBe(120 - 100 - 16);
-		expect(box.width).toBe(250 - 120 + 16 * 2);
+		expect(computeLineBoxes(wrapperEl, textEl)).toEqual([
+			{ top: 8, left: 4, width: 162, height: 32 },
+		]);
 	});
 
-	it('derives an internal boundary from the next line, not the inflated rect.bottom', () => {
-		stubComputedStyle({ '--h-pad': '0rem' });
+	it('returns one box per rendered line, each only as tall/wide as that line plus padding', () => {
+		stubComputedStyle({ '--h-pad': '0rem', '--v-pad': '0rem' });
 
-		const wrapperEl = document.createElement('div');
-		wrapperEl.getBoundingClientRect = () => rect(0, 300, 88, 0);
+		const wrapperEl = document.createElement('h1');
+		wrapperEl.getBoundingClientRect = () => rect(0, 300, 150, 0);
 
 		const textEl = document.createElement('span');
-		// A tight line-height (44) but a font whose own metrics report a taller rect.bottom (50).
 		textEl.getClientRects = () =>
-			[rect(0, 200, 50, 0), rect(44, 150, 88, 0)] as unknown as DOMRectList;
+			[rect(10, 200, 40, 0), rect(50, 150, 80, 0), rect(90, 180, 140, 0)] as unknown as DOMRectList;
+
+		expect(computeLineBoxes(wrapperEl, textEl)).toEqual([
+			{ top: 10, left: 0, width: 200, height: 30 },
+			{ top: 50, left: 0, width: 150, height: 30 },
+			{ top: 90, left: 0, width: 180, height: 50 },
+		]);
+	});
+
+	it('lets adjacent lines overlap once --v-pad exceeds the gap line-height leaves between them', () => {
+		stubComputedStyle({ '--h-pad': '0rem', '--v-pad': '2rem' });
+
+		const wrapperEl = document.createElement('h1');
+		wrapperEl.getBoundingClientRect = () => rect(0, 300, 100, 0);
+
+		const textEl = document.createElement('span');
+		// Only a 10px natural gap between these two lines' own ink (40 to 50) - far less than the
+		// 32px (2rem * 16px root) --v-pad each box extends by, so their boxes overlap by design.
+		textEl.getClientRects = () =>
+			[rect(0, 200, 40, 0), rect(50, 200, 90, 0)] as unknown as DOMRectList;
 
 		const [first, second] = computeLineBoxes(wrapperEl, textEl);
 
-		// First line's bottom is the second line's own top (44), not its own inflated bottom (50).
-		expect(first.height).toBe(44);
-		expect(second.top).toBe(44);
-		// The two boxes are flush - no gap, no overlap.
-		expect(first.top + first.height).toBe(second.top);
+		expect(first.top + first.height).toBeGreaterThan(second.top);
 	});
 
 	it('returns an empty array when there are no rendered lines', () => {
 		stubComputedStyle({});
 
-		const wrapperEl = document.createElement('div');
+		const wrapperEl = document.createElement('h1');
 		wrapperEl.getBoundingClientRect = () => rect(0, 0, 0, 0);
 
 		const textEl = document.createElement('span');

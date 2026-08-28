@@ -304,11 +304,7 @@ export const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> 
 							}}
 						>
 							{translationEntry.value_type === ValueType.HTML && (
-								<Html
-									content={value}
-									sanitizePreset={SanitizePreset.link}
-									className="c-rich-text-editor__content"
-								/>
+								<Html content={value} sanitizePreset={SanitizePreset.link} />
 							)}
 							{translationEntry.value_type === ValueType.TEXT && <span>{value}</span>}
 						</button>

@@ -67,11 +67,19 @@ export const BlockThemeReelSection: FunctionComponent<BlockThemeReelSectionProps
 	const themeDescription = locale === Locale.En ? theme.descriptionEn : theme.descriptionNl;
 	const themeContentPagePath =
 		locale === Locale.En ? theme.contentPagePathEn : theme.contentPagePathNl;
-	const ctaLabel = tText(
-		'modules/content-page/components/blocks/block-theme-reels/block-theme-reel-section___toon-alle-count-materialen',
-		{ count: String(theme.total) },
-		[App.HET_ARCHIEF]
-	);
+	// The proxy sometimes omits the total ie-object count. Fall back to the plain CTA rather than
+	// rendering a "Toon alle undefined materialen" label.
+	const ctaLabel = theme.total
+		? tText(
+				'modules/content-page/components/blocks/block-theme-reels/block-theme-reel-section___toon-alle-count-materialen',
+				{ count: String(theme.total) },
+				[App.HET_ARCHIEF]
+			)
+		: tText(
+				'modules/content-page/components/blocks/block-theme-reels/block-theme-reel-section___toon-alle',
+				{},
+				[App.HET_ARCHIEF]
+			);
 
 	const renderSlideContent = (
 		image: string,

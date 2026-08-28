@@ -1,6 +1,7 @@
 import { INITIAL_ANCHOR_LINKS_COMPONENTS_STATE } from '~content-blocks/anchor-links';
 import { INITIAL_AVO_HERO_COMPONENTS_STATE } from '~content-blocks/BlockAvoHero';
 import { INITIAL_AVO_IMAGE_TEXT_BACKGROUND_BLOCK_STATE } from '~content-blocks/BlockAvoImageTextBackground';
+import { INITIAL_AVO_VIDEO_COMPONENTS_STATE } from '~content-blocks/BlockAvoVideo';
 import { INITIAL_BREADCRUMBS_BLOCK_STATE } from '~content-blocks/BlockBreadcrumbs/BlockBreadcrumbs.editorconfig';
 import { INITIAL_BUTTONS_COMPONENTS_STATE } from '~content-blocks/BlockButtons';
 import { INITIAL_CARDS_WITHOUT_DESCRIPTION_COMPONENTS_STATE } from '~content-blocks/BlockCardsWithoutDescription';
@@ -52,7 +53,6 @@ import { INITIAL_THREE_CLICKABLE_TILES_COMPONENTS_STATE } from '~content-blocks/
 import { INITIAL_TIMELINE_COMPONENTS_STATE } from '~content-blocks/BlockTimeline';
 import { INITIAL_TITLE_WITH_PARALLAX_COMPONENTS_STATE } from '~content-blocks/BlockTitleWithParallax/BlockTitleWithParallax.editorconfig.ts';
 import { INITIAL_UITGEKLAARD_BLOCK_STATE } from '~content-blocks/BlockUitgeklaard';
-import { INITIAL_MEDIA_PLAYER_COMPONENTS_STATE } from '~content-blocks/BlockVideo';
 import { INITIAL_MEDIA_PLAYER_TITLE_TEXT_BUTTON_COMPONENTS_STATE } from '~content-blocks/BlockVideoTitleTextButton';
 import { INITIAL_SEARCH_COMPONENTS_STATE } from '~content-blocks/search';
 import type { ContentBlockComponentState } from '../types/content-block.types';
@@ -74,7 +74,7 @@ export const CONTENT_BLOCK_INITIAL_STATE_MAP: {
 	[ContentBlockType.Intro]: INITIAL_INTRO_COMPONENTS_STATE,
 	[ContentBlockType.Klaar]: INITIAL_KLAAR_COMPONENTS_STATE,
 	[ContentBlockType.MediaGrid]: INITIAL_MEDIA_GRID_COMPONENTS_STATE,
-	[ContentBlockType.MediaPlayer]: INITIAL_MEDIA_PLAYER_COMPONENTS_STATE,
+	[ContentBlockType.AvoVideo]: INITIAL_AVO_VIDEO_COMPONENTS_STATE,
 	[ContentBlockType.MediaPlayerTitleTextButton]:
 		INITIAL_MEDIA_PLAYER_TITLE_TEXT_BUTTON_COMPONENTS_STATE,
 	[ContentBlockType.PageOverview]: INITIAL_PAGE_OVERVIEW_COMPONENTS_STATE,

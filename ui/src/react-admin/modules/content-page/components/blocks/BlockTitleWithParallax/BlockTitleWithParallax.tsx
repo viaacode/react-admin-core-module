@@ -1,21 +1,10 @@
 import clsx from 'clsx';
-import React, {
-	type FunctionComponent,
-	type ReactElement,
-	useEffect,
-	useLayoutEffect,
-	useRef,
-	useState,
-} from 'react';
+import React, { type FunctionComponent, type ReactElement, useEffect, useRef } from 'react';
 import type { TitleWithParallaxBlockComponentState } from '~modules/content-page/types/content-block.types';
 import type { DefaultComponentProps } from '~modules/shared/types/components';
 
-import {
-	computeLineBoxes,
-	type LineBox,
-	readParallaxSpeed,
-	watchReducedMotion,
-} from './BlockTitleWithParallax.helpers';
+import { readParallaxSpeed, watchReducedMotion } from './BlockTitleWithParallax.helpers';
+import { HighlightedText } from './HighlightedText';
 
 import './BlockTitleWithParallax.scss';
 
@@ -32,13 +21,6 @@ export const BlockTitleWithParallax: FunctionComponent<BlockTitleWithParallaxPro
 }): ReactElement => {
 	const rootRef = useRef<HTMLDivElement>(null);
 	const imageRef = useRef<HTMLDivElement>(null);
-	const titleRef = useRef<HTMLHeadingElement>(null);
-	const titleTextRef = useRef<HTMLSpanElement>(null);
-	const subtitleRef = useRef<HTMLParagraphElement>(null);
-	const subtitleTextRef = useRef<HTMLSpanElement>(null);
-
-	const [titleBoxes, setTitleBoxes] = useState<LineBox[]>([]);
-	const [subtitleBoxes, setSubtitleBoxes] = useState<LineBox[]>([]);
 
 	// biome-ignore lint/correctness/useExhaustiveDependencies: re-attaches once `image` (and imageRef.current) is set
 	useEffect(() => {
@@ -101,48 +83,6 @@ export const BlockTitleWithParallax: FunctionComponent<BlockTitleWithParallaxPro
 		};
 	}, [image]);
 
-	// biome-ignore lint/correctness/useExhaustiveDependencies: re-measures on text change
-	useLayoutEffect(() => {
-		const titleEl = titleRef.current;
-		const titleTextEl = titleTextRef.current;
-		if (!titleEl || !titleTextEl) {
-			// eslint-disable-next-line react-hooks/set-state-in-effect
-			setTitleBoxes([]);
-			setSubtitleBoxes([]);
-			return undefined;
-		}
-
-		let cancelled = false;
-
-		const measure = () => {
-			if (cancelled) {
-				return;
-			}
-			setTitleBoxes(computeLineBoxes(titleEl, titleTextEl));
-
-			const subtitleEl = subtitleRef.current;
-			const subtitleTextEl = subtitleTextRef.current;
-			setSubtitleBoxes(
-				subtitleEl && subtitleTextEl ? computeLineBoxes(subtitleEl, subtitleTextEl) : []
-			);
-		};
-
-		measure();
-
-		const resizeObserver = new ResizeObserver(measure);
-		resizeObserver.observe(titleEl);
-		if (subtitleRef.current) {
-			resizeObserver.observe(subtitleRef.current);
-		}
-
-		document.fonts?.ready?.then(measure);
-
-		return () => {
-			cancelled = true;
-			resizeObserver.disconnect();
-		};
-	}, [title, subtitle]);
-
 	if (!visualType) {
 		return <></>;
 	}
@@ -166,36 +106,22 @@ export const BlockTitleWithParallax: FunctionComponent<BlockTitleWithParallaxPro
 			)}
 			<div className="c-block-title-with-parallax__content">
 				{title && (
-					<h1 ref={titleRef} className="c-block-title-with-parallax__title">
-						{titleBoxes.map((box, index) => (
-							<span
-								// biome-ignore lint/suspicious/noArrayIndexKey: decorative, no identity of its own
-								key={index}
-								className="c-block-title-with-parallax__title-box"
-								style={{ top: box.top, left: box.left, width: box.width, height: box.height }}
-								aria-hidden="true"
-							/>
-						))}
-						<span ref={titleTextRef} className="c-block-title-with-parallax__title-text">
-							{title}
-						</span>
-					</h1>
+					<HighlightedText
+						htmlTag="h1"
+						text={title}
+						wrapperClassName="c-block-title-with-parallax__title"
+						textClassName="c-block-title-with-parallax__title-text"
+						boxClassName="c-block-title-with-parallax__title-box"
+					/>
 				)}
 				{subtitle && (
-					<p ref={subtitleRef} className="c-block-title-with-parallax__subtitle">
-						{subtitleBoxes.map((box, index) => (
-							<span
-								// biome-ignore lint/suspicious/noArrayIndexKey: decorative, no identity of its own
-								key={index}
-								className="c-block-title-with-parallax__subtitle-box"
-								style={{ top: box.top, left: box.left, width: box.width, height: box.height }}
-								aria-hidden="true"
-							/>
-						))}
-						<span ref={subtitleTextRef} className="c-block-title-with-parallax__subtitle-text">
-							{subtitle}
-						</span>
-					</p>
+					<HighlightedText
+						htmlTag="p"
+						text={subtitle}
+						wrapperClassName="c-block-title-with-parallax__subtitle"
+						textClassName="c-block-title-with-parallax__subtitle-text"
+						boxClassName="c-block-title-with-parallax__subtitle-box"
+					/>
 				)}
 			</div>
 		</div>
