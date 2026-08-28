@@ -704,6 +704,7 @@
   "modules/content-page/components/blocks/block-driekeuzespeler/block-driekeuzespeler___titel": "Titel",
   "modules/content-page/components/blocks/block-driekeuzespeler/block-driekeuzespeler___titel-is-verplicht": "Titel is verplicht",
   "modules/content-page/components/blocks/block-driekeuzespeler/block-driekeuzespeler___toon-me-iets-anders": "Toon me iets anders",
+  "modules/content-page/components/blocks/block-driekeuzespeler/block-driekeuzespeler___toon-meer-over-thema": "Toon meer over \"{{theme}}\"",
   "modules/content-page/components/blocks/block-driekeuzespeler/block-driekeuzespeler___verwijder-deze-interesse": "Verwijder deze interesse",
   "modules/content-page/components/blocks/block-driekeuzespeler/block-driekeuzespeler___voeg-een-interesse-toe": "Voeg een interesse toe",
   "modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel-active-slide___afspelen": "Afspelen",

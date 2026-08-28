@@ -193,14 +193,24 @@ export interface AdminConfig {
 }
 
 /**
- * What the injected IIIF viewer is handed. Deliberately just the id: everything else the viewer
- * needs -- the page list, a ticket-service token per page, the page and overlay state -- is the
- * host's to resolve. https://meemoo.atlassian.net/browse/ARC-3813
+ * What the injected IIIF viewer is handed. The page and overlay state, and a ticket-service token
+ * per page, stay the host's to resolve -- a ticket is short-lived and access-checked at request
+ * time, so it can never be handed over already resolved. The page list itself is optional: a
+ * caller that already has it (e.g. from the driekeuzespeler's own proactive fetch) passes it along
+ * so the host can skip re-fetching the object just to rebuild a list it already had; a caller with
+ * only an id leaves it undefined and the host resolves it the way it always has.
+ * https://meemoo.atlassian.net/browse/ARC-3813
  */
 export interface IiifViewerConfigProps {
 	schemaIdentifier: string;
 	/** Names the viewer for assistive technology, since the object title lives outside it. */
 	title?: string;
+	/** Every page's raw (un-ticketed) image/thumbnail/alto urls, when the caller already has them. */
+	pages?: {
+		imageUrl: string;
+		thumbnailUrl: string | null;
+		altoUrl: string | null;
+	}[];
 }
 
 /**

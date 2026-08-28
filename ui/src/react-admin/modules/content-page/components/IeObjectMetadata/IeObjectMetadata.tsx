@@ -2,7 +2,7 @@ import { Button } from '@meemoo/react-components';
 import { Icon, type IconName } from '@viaa/avo2-components';
 import { AvoCoreContentPickerType } from '@viaa/avo2-types';
 import { clsx } from 'clsx';
-import type { FunctionComponent } from 'react';
+import type { FunctionComponent, ReactNode } from 'react';
 import React from 'react';
 import { SmartLink } from '~shared/components/SmartLink/SmartLink';
 import {
@@ -62,7 +62,13 @@ export const IeObjectMetadata: FunctionComponent<{
 	ieObject: PlayableDisplayIeObject;
 	fallbackTitle: string;
 	className?: string;
-}> = ({ ieObject, fallbackTitle, className }) => {
+	/**
+	 * An optional second CTA, rendered after a divider at the end of the same row -- e.g. the
+	 * driekeuzespeler's "Toon meer over [thema]" pill. Purely a slot: this component supplies the
+	 * divider and the layout, the caller supplies (and styles) the content.
+	 */
+	secondaryCta?: ReactNode;
+}> = ({ ieObject, fallbackTitle, className, secondaryCta }) => {
 	const callToActionLabel = getCallToActionLabel(ieObject.dctermsFormat);
 
 	return (
@@ -91,6 +97,12 @@ export const IeObjectMetadata: FunctionComponent<{
 					alt={ieObject?.maintainerName || ''}
 					className="c-ie-object-metadata__maintainer-logo"
 				/>
+			)}
+			{!!secondaryCta && (
+				<>
+					<span className="c-ie-object-metadata__divider" aria-hidden="true" />
+					{secondaryCta}
+				</>
 			)}
 		</div>
 	);

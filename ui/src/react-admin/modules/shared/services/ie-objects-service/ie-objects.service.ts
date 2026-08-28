@@ -29,16 +29,16 @@ export class IeObjectsService {
 		blockId: string | undefined,
 		unsavedObjects?: UnsavedPlayableDisplayDataObject[],
 		/**
-		 * Resolve only this one object out of the block instead of every object it references. The
-		 * proxy still checks that the block references it, so this narrows the response without
-		 * widening what a visitor can reach. Used by the driekeuzespeler, which can hold 200
-		 * interests and opens one at a time.
+		 * Resolve only these objects out of the block instead of every object it references. The
+		 * proxy still checks that the block references each of them, so this narrows the response
+		 * without widening what a visitor can reach, and it comes back in this order. Used by the
+		 * driekeuzespeler, which can hold 200 interests and shows three at a time.
 		 */
-		schemaIdentifier?: string
+		schemaIdentifiers?: string[]
 	): Promise<(PlayableDisplayIeObject | null)[]> {
 		const body = {
 			...(blockId ? { blockId } : { objects: unsavedObjects }),
-			...(schemaIdentifier ? { schemaIdentifier } : {}),
+			...(schemaIdentifiers?.length ? { schemaIdentifiers } : {}),
 		};
 		try {
 			return await fetchWithLogoutJson<(PlayableDisplayIeObject | null)[]>(

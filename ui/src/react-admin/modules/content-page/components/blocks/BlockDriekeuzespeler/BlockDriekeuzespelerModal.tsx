@@ -1,24 +1,27 @@
 import { Modal, ModalBody } from '@viaa/avo2-components';
+import { AvoCoreContentPickerType } from '@viaa/avo2-types';
 import type { FunctionComponent, ReactElement } from 'react';
 import React from 'react';
 import { AdminConfigManager } from '~core/config/config.class';
 import { IeObjectFlowPlayerWrapper } from '~modules/content-page/components/IeObjectFlowPlayerWrapper/IeObjectFlowPlayerWrapper.tsx';
 import { IeObjectMetadata } from '~modules/content-page/components/IeObjectMetadata/IeObjectMetadata.tsx';
+import { Locale } from '~modules/translations/translations.core.types.ts';
+import { SmartLink } from '~shared/components/SmartLink/SmartLink.tsx';
 import { isAudioVideoFormat } from '~shared/helpers/is-audio-video-format.ts';
 import { tText } from '~shared/helpers/translation-functions';
-import type { UnsavedPlayableDisplayDataObject } from '~shared/services/ie-objects-service/ie-objects.types.ts';
+import type { PlayableDisplayIeObject } from '~shared/services/ie-objects-service/ie-objects.types.ts';
 import { HET_ARCHIEF } from '~shared/types';
-import { useGetDriekeuzespelerPlayableObject } from './hooks/useGetDriekeuzespelerPlayableObject';
+import { useGetThemesByIds } from '../BlockOverviewThemes/hooks/useGetThemesByIds';
 
 import './BlockDriekeuzespelerModal.scss';
 
 export interface BlockDriekeuzespelerModalProps {
 	/** The interest whose tile was opened, or null when the modal is closed. */
 	interest: { name: string; mediaItem?: { value?: string }; themeId: string } | null;
-	/** Id of the content block, so the proxy can check the object is one this block references. */
-	blockId?: string;
-	/** Objects of a block that has not been saved yet, for the content page editor. */
-	unsavedObjects?: UnsavedPlayableDisplayDataObject[];
+	/** The interest's object, already resolved by the parent along with the rest of the selection. */
+	ieObject?: PlayableDisplayIeObject;
+	/** Whether the parent's proactive fetch for the current selection is still in flight. */
+	isFetching: boolean;
 	onClose: () => void;
 }
 
@@ -30,19 +33,21 @@ export interface BlockDriekeuzespelerModalProps {
  */
 export const BlockDriekeuzespelerModal: FunctionComponent<BlockDriekeuzespelerModalProps> = ({
 	interest,
-	blockId,
-	unsavedObjects,
+	ieObject,
+	isFetching,
 	onClose,
 }): ReactElement => {
 	const isOpen = !!interest;
 	// The host's IIIF viewer, if it registered one. Read per render rather than at module load, so a
 	// config set up after this module is imported is still picked up.
 	const IiifViewer = AdminConfigManager.getConfig().components.iiifViewer;
-	const { data: ieObject, isFetching } = useGetDriekeuzespelerPlayableObject(
-		blockId,
-		interest?.mediaItem?.value,
-		unsavedObjects
-	);
+
+	// Resolves the interest's theme for the secondary CTA, in the name and slug fields -- not just
+	// the id the block config stores.
+	const { data: themes } = useGetThemesByIds(interest?.themeId ? [interest.themeId] : []);
+	const theme = themes?.[0];
+	const locale = AdminConfigManager.getConfig().locale || Locale.Nl;
+	const themeName = theme ? (locale === Locale.Nl ? theme.nameNl : theme.nameEn) : '';
 
 	// Only mount the player while the modal is open, so closing stops playback outright instead of
 	// leaving audio running behind the page.
@@ -61,13 +66,20 @@ export const BlockDriekeuzespelerModal: FunctionComponent<BlockDriekeuzespelerMo
 			);
 		}
 
-		// A newspaper opens in the IIIF viewer, as the FA asks. The viewer needs the object's page list
-		// and a ticket-service token per page, so it is injected by the host rather than living here.
-		// https://meemoo.atlassian.net/browse/ARC-3813
+		// A newspaper opens in the IIIF viewer, as the FA asks. It still needs a ticket-service token
+		// per page (short-lived and access-checked at request time, so it can't travel with the rest
+		// of this already-fetched object), so the viewer itself is injected by the host rather than
+		// living here -- but its page list came along with everything else this modal proactively
+		// fetched, so passing it through here saves the host from re-fetching the object just to
+		// rebuild a list it already had. https://meemoo.atlassian.net/browse/ARC-3813
 		if (IiifViewer) {
 			return (
 				<div className="c-driekeuzespeler-modal__iiif-viewer">
-					<IiifViewer schemaIdentifier={ieObject.schemaIdentifier} title={ieObject.name} />
+					<IiifViewer
+						schemaIdentifier={ieObject.schemaIdentifier}
+						title={ieObject.name}
+						pages={ieObject.pages}
+					/>
 				</div>
 			);
 		}
@@ -90,10 +102,15 @@ export const BlockDriekeuzespelerModal: FunctionComponent<BlockDriekeuzespelerMo
 	return (
 		<Modal
 			isOpen={isOpen}
-			size="large"
+			size="extra-large"
 			scrollable={false}
 			onClose={onClose}
 			className="c-driekeuzespeler-modal"
+			// The FA's video-first look: no visible title bar, just the close button floating over the
+			// media, and a darker backdrop than the rest of the app's modals use. The title itself stays
+			// -- visually hidden in the stylesheet -- so the dialog still has an accessible name.
+			// https://www.figma.com/design/1yUd3vpjHXcMfI15dTeVYC/hetarchief.be-%E2%80%94-ontdekken?node-id=2354-4569
+			borderless
 			title={
 				interest
 					? tText(
@@ -127,14 +144,30 @@ export const BlockDriekeuzespelerModal: FunctionComponent<BlockDriekeuzespelerMo
 						ieObject={ieObject}
 						fallbackTitle={interest?.name || ''}
 						className="c-driekeuzespeler-modal__metadata"
+						secondaryCta={
+							// The search page has no theme filter yet to point this at -- see
+							// https://meemoo.atlassian.net/wiki/x/dYStdQE -- so this is a placeholder link, on
+							// the URL param shape that FA describes ("Thema als URL parameter"). Swap the path
+							// below for the real search route once that filter ships; nothing else about this
+							// CTA should need to change.
+							themeName ? (
+								<SmartLink
+									action={{
+										type: AvoCoreContentPickerType.INTERNAL_LINK,
+										value: `/zoeken?thema=${theme?.slug}`,
+									}}
+									className="c-driekeuzespeler-modal__theme-cta"
+								>
+									{tText(
+										'modules/content-page/components/blocks/block-driekeuzespeler/block-driekeuzespeler___toon-meer-over-thema',
+										{ theme: themeName },
+										[HET_ARCHIEF]
+									)}
+								</SmartLink>
+							) : undefined
+						}
 					/>
 				)}
-
-				{/* TODO(ARC-3813): the secondary CTA "Toon meer over [thema]" is not rendered yet. It has
-				    to link to the search page with this interest's theme filter active, and that filter
-				    does not exist: see goal 2b in the plan. Rendering a link with no working target would
-				    be worse than leaving it out. The theme name itself is resolvable through
-				    ThemesService.fetchThemesByIds once there is somewhere to point it. */}
 			</ModalBody>
 		</Modal>
 	);

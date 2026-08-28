@@ -65,4 +65,12 @@ $object-meta-gap: 4rem;
 			display: none;
 		}
 	}
+
+	// Separates the primary CTA/title/maintainer from an optional secondaryCta at the end of the row.
+	&__divider {
+		flex: 0 0 auto;
+		align-self: stretch;
+		width: 1px;
+		background-color: rgba(colors.$color-gray-1000, 0.12);
+	}
 }

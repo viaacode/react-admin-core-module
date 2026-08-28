@@ -1,8 +1,43 @@
+@use "../../../../shared/styles/settings/colors" as colors;
 @use "../../../../shared/styles/settings/variables" as variables;
 
 // The FA asks for the same ratio as the video player on an object's detail page, and for the modal
 // to adapt to the screen. 16:9 is that player's ratio.
 $media-aspect-ratio: 16 / 9;
+
+// The dialog still needs an accessible name, so the title stays in the DOM -- just not on screen,
+// where the FA wants nothing but the close button over the media.
+// https://www.figma.com/design/1yUd3vpjHXcMfI15dTeVYC/hetarchief.be-%E2%80%94-ontdekken?node-id=2354-4569
+.c-driekeuzespeler-modal .c-modal__title {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border: 0;
+}
+
+// The default close button, restyled from a borderless icon button into the floating black circle
+// the FA asks for, sitting on top of the media instead of in a header row.
+.c-driekeuzespeler-modal .c-modal__header--transparent {
+	padding: variables.$g-spacer-unit * 2;
+
+	.c-button--icon {
+		width: 3.2rem;
+		height: 3.2rem;
+		border-radius: 50%;
+		background-color: #000;
+		color: #fff;
+	}
+}
+
+// Edge-to-edge media instead of sitting inside the library's default body padding.
+.c-driekeuzespeler-modal .c-modal__body {
+	padding: 0;
+}
 
 .c-driekeuzespeler-modal {
 	&__media {
@@ -41,7 +76,28 @@ $media-aspect-ratio: 16 / 9;
 		margin: 0;
 	}
 
-	&__metadata {
-		margin-top: variables.$g-spacer-unit * 3;
+	// Flush against the media instead of the gap `IeObjectMetadata` keeps for callers that don't sit
+	// directly under a full-bleed video, and height:auto instead of the shared component's fixed
+	// 6rem row -- with the row's content centered inside a fixed height, its own vertical padding is
+	// invisible, but Figma's bar (node 2354:4631) isn't a fixed height at all: it's the CTA button's
+	// 48px plus 16px of padding top and bottom. Not changed on the shared component itself since
+	// other blocks (BlockTimeline, carousel) rely on the fixed 6rem row. Chained onto the shared
+	// class (both land on the same element, same specificity otherwise) so this wins regardless of
+	// which stylesheet happens to load last.
+	&__metadata.c-ie-object-metadata {
+		height: auto;
+		padding: variables.$g-spacer-unit * 2;
+		margin-top: 0;
+	}
+
+	// The FA's secondary CTA, "Toon meer over [thema]": a pill at the end of the metadata bar's own
+	// row, via its `secondaryCta` slot.
+	&__theme-cta {
+		flex: 0 0 auto;
+		padding: variables.$g-spacer-unit variables.$g-spacer-unit * 2;
+		border-radius: 9.2rem;
+		background-color: colors.$color-silver;
+		font-weight: 700;
+		white-space: nowrap;
 	}
 }

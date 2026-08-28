@@ -10,7 +10,7 @@ import type { DefaultComponentProps } from '~shared/types/components';
 import { DRIEKEUZESPELER_TILE_COUNT } from './BlockDriekeuzespeler.editorconfig';
 import { pickNextSelection, pickRandomIndices } from './BlockDriekeuzespeler.helpers';
 import { BlockDriekeuzespelerModal } from './BlockDriekeuzespelerModal';
-import { useGetDriekeuzespelerObjects } from './hooks/useGetDriekeuzespelerObjects';
+import { useGetDriekeuzespelerPlayableObjects } from './hooks/useGetDriekeuzespelerPlayableObjects';
 
 import './BlockDriekeuzespeler.scss';
 
@@ -69,8 +69,21 @@ export const BlockDriekeuzespeler: FunctionComponent<BlockDriekeuzespelerProps> 
 	// Not compacted: tile colors are positional, so dropping a missing interest would shift every
 	// later tile onto the wrong colour. renderTile handles an empty slot.
 	const selectedInterests = (selection || []).map((index) => interests[index]);
-	const { data: objectsById } = useGetDriekeuzespelerObjects(
-		selectedInterests.filter(Boolean).map((interest) => interest.mediaItem?.value || '')
+	const selectedSchemaIdentifiers = selectedInterests
+		.filter(Boolean)
+		.map((interest) => interest.mediaItem?.value || '')
+		.filter(Boolean);
+
+	// Resolved proactively for the whole selection as soon as it is picked, so opening a tile in the
+	// modal reads from data that is already there instead of triggering its own request.
+	const { data: objectsById, isFetching: isFetchingObjects } = useGetDriekeuzespelerPlayableObjects(
+		blockId,
+		selectedSchemaIdentifiers,
+		// A block being edited has no id yet, so the objects travel with the request. The proxy
+		// honours this path for content page editors only.
+		!blockId
+			? selectedSchemaIdentifiers.map((schemaIdentifier) => ({ schemaIdentifier }))
+			: undefined
 	);
 
 	const renderTile = (tileIndex: number): ReactElement => {
@@ -159,14 +172,12 @@ export const BlockDriekeuzespeler: FunctionComponent<BlockDriekeuzespelerProps> 
 
 			<BlockDriekeuzespelerModal
 				interest={openedInterest}
-				blockId={blockId}
-				// A block being edited has no id yet, so the object travels with the request. Only the
-				// opened one is needed, and the proxy honours this path for content page editors only.
-				unsavedObjects={
-					!blockId && openedInterest?.mediaItem?.value
-						? [{ schemaIdentifier: openedInterest.mediaItem.value }]
+				ieObject={
+					openedInterest?.mediaItem?.value
+						? objectsById?.[openedInterest.mediaItem.value]
 						: undefined
 				}
+				isFetching={isFetchingObjects}
 				onClose={() => setOpenedInterest(null)}
 			/>
 		</div>
