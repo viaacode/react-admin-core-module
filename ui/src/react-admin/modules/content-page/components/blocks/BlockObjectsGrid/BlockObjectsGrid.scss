@@ -187,37 +187,21 @@
 		height: 2.2rem;
 		font-size: 2.2rem;
 		line-height: 1;
-
-		@media (min-width: variables.$g-bp2) {
-			width: 2.4rem;
-			height: 2.4rem;
-			font-size: 2.4rem;
-		}
 	}
 
 	.c-block-objects-grid__tile-title {
 		@include typography.sofia-pro-heading-sm($important: false);
+		font-size: 1.6rem;
 
-		display: -webkit-box;
-		-webkit-line-clamp: 2;
-		-webkit-box-orient: vertical;
+		@include typography.truncate-after-x-lines(2);
 		overflow: hidden;
-
-		@media (min-width: variables.$g-bp2) {
-			font-size: 1.6rem;
-		}
 	}
 
 	.c-block-objects-grid__tile-maintainer {
-		font-size: 1.4rem;
-		font-weight: 400;
+		@include typography.sofia-pro-body-sm($important: false);
 		line-height: 2rem;
 
 		@include typography.truncate;
-
-		@media (min-width: variables.$g-bp2) {
-			font-size: 1.6rem;
-		}
 	}
 
 	.c-block-objects-grid__footer {
