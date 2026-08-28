@@ -61,7 +61,7 @@ describe('DRIEKEUZESPELER_CONFIG', () => {
 		const state = INITIAL_DRIEKEUZESPELER_COMPONENTS_STATE();
 
 		for (const interest of state.interests) {
-			expect(interest).toEqual({ name: '', mediaItem: undefined, themeId: '' });
+			expect(interest).toEqual({ name: '', mediaItem: undefined, theme: undefined });
 		}
 	});
 
@@ -99,14 +99,15 @@ describe('DRIEKEUZESPELER_CONFIG', () => {
 		expect(field('title').validator?.('Ontdek')).toEqual([]);
 	});
 
-	it('requires a name, an object and a theme on every interest', () => {
+	it('requires a name and an object on every interest', () => {
 		const interestFields = group('interests').fields;
 
 		// The object is picked, not typed, so its filled value is a picker item rather than a string.
+		// The theme is a plain ContentPicker field, same as every other block that picks one, so
+		// (like theirs) it carries no validator of its own here -- see the dedicated test below.
 		const filledValues: Record<string, unknown> = {
 			name: 'Wielrennen',
 			mediaItem: { type: 'IE_OBJECT', value: '086348mc8s' },
-			themeId: 'theme-1',
 		};
 
 		for (const [key, filled] of Object.entries(filledValues)) {
@@ -129,8 +130,17 @@ describe('DRIEKEUZESPELER_CONFIG', () => {
 		});
 	});
 
-	it('picks the theme with the theme select, so an interest links to exactly one theme', () => {
-		expect(group('interests').fields.themeId.editorType).toBe(ContentBlockEditor.ThemeSelect);
+	it('picks the theme with the shared content picker, so an interest links to exactly one theme', () => {
+		// Same picker BlockThemeReels and BlockOverviewThemes use for a theme, restricted to themes
+		// and with no way to switch to another content type or target.
+		const theme = group('interests').fields.theme;
+
+		expect(theme.editorType).toBe(ContentBlockEditor.ContentPicker);
+		expect(theme.editorProps).toMatchObject({
+			allowedTypes: ['IE_OBJECT_THEME'],
+			hideTypeDropdown: true,
+			hideTargetSwitch: true,
+		});
 	});
 
 	it('types its own initial state', () => {

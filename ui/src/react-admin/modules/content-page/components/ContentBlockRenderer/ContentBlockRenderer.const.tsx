@@ -112,7 +112,7 @@ export function GET_BLOCK_COMPONENT(
 		[ContentBlockType.Timeline]: BlockTimeline,
 		[ContentBlockType.ImageCarousel]: BlockImageCarousel,
 		[ContentBlockType.TitleWithParallax]: BlockTitleWithParallax,
-		[ContentBlockType.Driekeuzespeler]: BlockDriekeuzespeler,
+		[ContentBlockType.ThreeChoicesPlayer]: BlockDriekeuzespeler,
 
 		// Avo specific blocks
 		[ContentBlockType.MediaGrid]: loadComponentFromConfig(ContentBlockType.MediaGrid),
@@ -192,7 +192,7 @@ export const PLAYABLE_DISPLAY_DATA_BLOCKS = [
 	ContentBlockType.HetArchiefVideo,
 	ContentBlockType.HeroCarousel,
 	ContentBlockType.Timeline,
-	ContentBlockType.Driekeuzespeler,
+	ContentBlockType.ThreeChoicesPlayer,
 ];
 
 /**

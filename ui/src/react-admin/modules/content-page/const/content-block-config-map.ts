@@ -112,5 +112,5 @@ export const CONTENT_BLOCK_CONFIG_MAP: Record<
 	[ContentBlockType.HetArchiefVideo]: HETARCHIEF_VIDEO_BLOCK_CONFIG,
 	[ContentBlockType.ImageCarousel]: IMAGE_CAROUSEL_CONFIG,
 	[ContentBlockType.TitleWithParallax]: TITLE_WITH_PARALLAX_CONFIG,
-	[ContentBlockType.Driekeuzespeler]: DRIEKEUZESPELER_CONFIG,
+	[ContentBlockType.ThreeChoicesPlayer]: DRIEKEUZESPELER_CONFIG,
 };

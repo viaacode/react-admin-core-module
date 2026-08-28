@@ -22,7 +22,8 @@ interface DriekeuzespelerInterest {
 	name: string;
 	/** The object picker's value: `value` is the pid. Absent while the admin has picked nothing. */
 	mediaItem?: { value?: string };
-	themeId: string;
+	/** The theme picker's value: `value` is the theme id. Absent while the admin has picked nothing. */
+	theme?: { value?: string };
 }
 
 export interface BlockDriekeuzespelerProps extends DefaultComponentProps {

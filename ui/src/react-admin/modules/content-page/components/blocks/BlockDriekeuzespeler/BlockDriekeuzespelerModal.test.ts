@@ -19,12 +19,12 @@ describe('Driekeuzespeler modal wiring', () => {
 	it('uses the block type value the database lookup already holds', () => {
 		// The lookup value predates this work: migration 1784294418766 inserted THREE_CHOICES_PLAYER.
 		// A mismatch here makes every save fail on a foreign key, which is easy to miss locally.
-		expect(ContentBlockType.Driekeuzespeler).toBe('THREE_CHOICES_PLAYER');
+		expect(ContentBlockType.ThreeChoicesPlayer).toBe('THREE_CHOICES_PLAYER');
 	});
 
 	it('is listed as a block that receives its blockId', () => {
 		// Without this the block gets no id, so the modal would fall back to the unsaved-objects path
 		// and resolve nothing for an ordinary visitor.
-		expect(PLAYABLE_DISPLAY_DATA_BLOCKS).toContain(ContentBlockType.Driekeuzespeler);
+		expect(PLAYABLE_DISPLAY_DATA_BLOCKS).toContain(ContentBlockType.ThreeChoicesPlayer);
 	});
 });

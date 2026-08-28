@@ -280,7 +280,7 @@ export const GET_CONTENT_BLOCK_TYPE_OPTIONS: () => SelectOption<string>[] = () =
 				{},
 				[HET_ARCHIEF]
 			),
-			value: ContentBlockType.Driekeuzespeler,
+			value: ContentBlockType.ThreeChoicesPlayer,
 		},
 	];
 

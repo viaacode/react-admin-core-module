@@ -1,3 +1,4 @@
+import { AvoCoreContentPickerType } from '@viaa/avo2-types';
 import {
 	BACKGROUND_COLOR_FIELD,
 	BLOCK_FIELD_DEFAULTS,
@@ -19,8 +20,8 @@ import {
 	type DriekeuzespelerInterestState,
 	type DriekeuzespelerTileColors,
 } from '~modules/content-page/types/content-block.types';
+import { IeObjectType } from '~shared/helpers/map-format-to-type.ts';
 import { tText } from '~shared/helpers/translation-functions';
-import { validateRequiredValue } from '~shared/helpers/validation.ts';
 import { HET_ARCHIEF } from '~shared/types';
 
 /**
@@ -40,9 +41,9 @@ const INITIAL_TILE_COLORS_STATE = (): DriekeuzespelerTileColors => ({
 
 const INITIAL_DRIEKEUZESPELER_INTEREST_STATE = (): DriekeuzespelerInterestState => ({
 	name: '',
-	// The object picker fills this in; an empty entry has nothing selected yet.
+	// The object and theme pickers fill these in; an empty entry has nothing selected yet.
 	mediaItem: undefined,
-	themeId: '',
+	theme: undefined,
 });
 
 // The key order is the order the editor renders the fields in, and it follows the FA.
@@ -71,7 +72,7 @@ export const DRIEKEUZESPELER_CONFIG = (position = 0): ContentBlockConfig => ({
 		undefined,
 		[HET_ARCHIEF]
 	),
-	type: ContentBlockType.Driekeuzespeler,
+	type: ContentBlockType.ThreeChoicesPlayer,
 	components: {
 		state: INITIAL_DRIEKEUZESPELER_COMPONENTS_STATE(),
 		fields: {
@@ -89,10 +90,6 @@ export const DRIEKEUZESPELER_CONFIG = (position = 0): ContentBlockConfig => ({
 					[HET_ARCHIEF]
 				)
 			),
-			// One fixed-length group of three, one entry per tile. `repeat` is what makes FieldGenerator
-			// walk the array and render one sub-form per entry; equal min and max then hide both the add
-			// and the delete button, so the count is fixed at three and the admin cannot change it.
-			//
 			// A tile's colours cannot sit next to its label: the colours belong to the tile position,
 			// while the label travels with whichever interest a shuffle puts there. That is why there are
 			// three colour entries and three to two hundred interests.
@@ -115,8 +112,6 @@ export const DRIEKEUZESPELER_CONFIG = (position = 0): ContentBlockConfig => ({
 				min: DRIEKEUZESPELER_TILE_COUNT,
 				max: DRIEKEUZESPELER_TILE_COUNT,
 				repeat: {
-					// Never used: the add button is hidden because min equals max. It is here because
-					// FieldGenerator only iterates a group that carries a `repeat` descriptor.
 					defaultState: INITIAL_TILE_COLORS_STATE(),
 				},
 				fields: {
@@ -180,23 +175,20 @@ export const DRIEKEUZESPELER_CONFIG = (position = 0): ContentBlockConfig => ({
 					// stores exactly it while letting the admin search by title instead of typing a pid.
 					// Every other block that points at an ie-object uses the same field under the same
 					// `mediaItem` key, which is what the proxy reads.
-					mediaItem: IE_OBJECT_FIELD(),
-					themeId: {
+					// No format restriction: the FA lets the tile point at anything with a pid or fragmentId.
+					mediaItem: IE_OBJECT_FIELD(Object.values(IeObjectType)),
+					theme: {
 						label: tText(
 							'modules/content-page/components/blocks/block-driekeuzespeler/block-driekeuzespeler___gerelateerd-thema',
 							undefined,
 							[HET_ARCHIEF]
 						),
-						editorType: ContentBlockEditor.ThemeSelect,
-						validator: (value: string) =>
-							validateRequiredValue(
-								value,
-								tText(
-									'modules/content-page/components/blocks/block-driekeuzespeler/block-driekeuzespeler___een-thema-is-verplicht',
-									undefined,
-									[HET_ARCHIEF]
-								)
-							),
+						editorType: ContentBlockEditor.ContentPicker,
+						editorProps: {
+							allowedTypes: [AvoCoreContentPickerType.IE_OBJECT_THEME],
+							hideTypeDropdown: true,
+							hideTargetSwitch: true,
+						},
 					},
 				},
 				repeat: {

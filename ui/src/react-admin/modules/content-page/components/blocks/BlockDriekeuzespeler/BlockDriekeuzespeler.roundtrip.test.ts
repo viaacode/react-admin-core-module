@@ -33,10 +33,18 @@ describe('Driekeuzespeler state round trip', () => {
 				{
 					name: 'Wielrennen',
 					mediaItem: { type: 'IE_OBJECT', value: 'abc123' },
-					themeId: 'theme-1',
+					theme: { type: 'IE_OBJECT_THEME', value: 'theme-1' },
 				},
-				{ name: 'Kermis', mediaItem: { type: 'IE_OBJECT', value: 'def456' }, themeId: 'theme-2' },
-				{ name: 'Stoeten', mediaItem: { type: 'IE_OBJECT', value: 'ghi789' }, themeId: 'theme-3' },
+				{
+					name: 'Kermis',
+					mediaItem: { type: 'IE_OBJECT', value: 'def456' },
+					theme: { type: 'IE_OBJECT_THEME', value: 'theme-2' },
+				},
+				{
+					name: 'Stoeten',
+					mediaItem: { type: 'IE_OBJECT', value: 'ghi789' },
+					theme: { type: 'IE_OBJECT_THEME', value: 'theme-3' },
+				},
 			],
 		};
 
@@ -48,19 +56,19 @@ describe('Driekeuzespeler state round trip', () => {
 	});
 
 	it('is registered in the config and initial-state maps, so a saved block can be reopened', () => {
-		expect(CONTENT_BLOCK_CONFIG_MAP[ContentBlockType.Driekeuzespeler]).toBeDefined();
-		expect(CONTENT_BLOCK_INITIAL_STATE_MAP[ContentBlockType.Driekeuzespeler]).toBeDefined();
+		expect(CONTENT_BLOCK_CONFIG_MAP[ContentBlockType.ThreeChoicesPlayer]).toBeDefined();
+		expect(CONTENT_BLOCK_INITIAL_STATE_MAP[ContentBlockType.ThreeChoicesPlayer]).toBeDefined();
 	});
 
 	it('stays out of REPEATABLE_CONTENT_BLOCKS, so its state is read as an object', () => {
 		// A block in that list has its whole `components.state` treated as an array and handed to the
 		// preview as an `elements` prop. This block uses mechanism B, so being listed there would
 		// silently blank every field.
-		expect(REPEATABLE_CONTENT_BLOCKS).not.toContain(ContentBlockType.Driekeuzespeler);
+		expect(REPEATABLE_CONTENT_BLOCKS).not.toContain(ContentBlockType.ThreeChoicesPlayer);
 	});
 
 	it('starts from an object, not an array, which is what mechanism B requires', () => {
-		const config = CONTENT_BLOCK_CONFIG_MAP[ContentBlockType.Driekeuzespeler]();
+		const config = CONTENT_BLOCK_CONFIG_MAP[ContentBlockType.ThreeChoicesPlayer]();
 
 		expect(Array.isArray(config.components.state)).toBe(false);
 	});
@@ -77,7 +85,7 @@ describe('Driekeuzespeler state round trip', () => {
 	});
 
 	it('declares a field for every key in its state, and no key without a field', () => {
-		const config = CONTENT_BLOCK_CONFIG_MAP[ContentBlockType.Driekeuzespeler]();
+		const config = CONTENT_BLOCK_CONFIG_MAP[ContentBlockType.ThreeChoicesPlayer]();
 
 		expect(Object.keys(config.components.fields).sort()).toEqual(
 			Object.keys(config.components.state).sort()

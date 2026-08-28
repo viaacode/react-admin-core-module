@@ -218,9 +218,8 @@ export enum ContentBlockType {
 	ImageCarousel = 'IMAGE_CAROUSEL',
 	TitleWithParallax = 'TITLE_WITH_PARALLAX',
 	// The db lookup value predates this work and reads THREE_CHOICES_PLAYER (migration
-	// 1784294418766). The member keeps the Dutch name the FA, the designs and the rest of this block
-	// use. https://meemoo.atlassian.net/browse/ARC-3813
-	Driekeuzespeler = 'THREE_CHOICES_PLAYER',
+	// 1784294418766). https://meemoo.atlassian.net/browse/ARC-3813
+	ThreeChoicesPlayer = 'THREE_CHOICES_PLAYER',
 }
 
 export enum ContentBlockEditor {
@@ -241,7 +240,6 @@ export enum ContentBlockEditor {
 	RICH_TEXT_EDITOR = 'RICH_TEXT_EDITOR',
 	UserGroupSelect = 'UserGroupSelect',
 	MaintainerSelect = 'MaintainerSelect', // Used for selecting which maintainers copy right notice should be on the video still https://meemoo.atlassian.net/browse/AVO-3015
-	ThemeSelect = 'ThemeSelect', // Used for picking the theme an interest links to https://meemoo.atlassian.net/browse/ARC-3813
 	UploadOrSelectVideoStill = 'UploadOrSelectVideoStill', // Used for selecting or uploading a video still for a video player https://meemoo.atlassian.net/browse/AVO-3015
 }
 
@@ -725,8 +723,8 @@ export interface DriekeuzespelerInterestState {
 	 * proxy can read them all the same way.
 	 */
 	mediaItem?: PickerItem;
-	/** Id of the single theme this interest belongs to. */
-	themeId: string;
+	/** The single theme this interest belongs to, as the shared content picker stores it. */
+	theme?: PickerItem;
 }
 
 /** The two colours of one tile position, in one fixed-length repeated field group. */

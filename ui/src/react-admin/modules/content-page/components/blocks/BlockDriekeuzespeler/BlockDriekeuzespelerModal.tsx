@@ -17,7 +17,11 @@ import './BlockDriekeuzespelerModal.scss';
 
 export interface BlockDriekeuzespelerModalProps {
 	/** The interest whose tile was opened, or null when the modal is closed. */
-	interest: { name: string; mediaItem?: { value?: string }; themeId: string } | null;
+	interest: {
+		name: string;
+		mediaItem?: { value?: string };
+		theme?: { value?: string };
+	} | null;
 	/** The interest's object, already resolved by the parent along with the rest of the selection. */
 	ieObject?: PlayableDisplayIeObject;
 	/** Whether the parent's proactive fetch for the current selection is still in flight. */
@@ -44,7 +48,7 @@ export const BlockDriekeuzespelerModal: FunctionComponent<BlockDriekeuzespelerMo
 
 	// Resolves the interest's theme for the secondary CTA, in the name and slug fields -- not just
 	// the id the block config stores.
-	const { data: themes } = useGetThemesByIds(interest?.themeId ? [interest.themeId] : []);
+	const { data: themes } = useGetThemesByIds(interest?.theme?.value ? [interest.theme.value] : []);
 	const theme = themes?.[0];
 	const locale = AdminConfigManager.getConfig().locale || Locale.Nl;
 	const themeName = theme ? (locale === Locale.Nl ? theme.nameNl : theme.nameEn) : '';
