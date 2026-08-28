@@ -11,15 +11,27 @@
   // The image column is absolutely positioned (see __image-wrapper) so it can't grow
   // this row's height. Reserve room for the copyright's real rendered height here so
   // it isn't clipped by a consuming app's `.c-content-block { overflow: hidden }`.
-  min-height: max(34rem, calc(var(--copyright-height, 0px) + #{variables.$g-spacer-unit}));
+  min-height: max(34rem, calc(var(--copyright-height, 0px)));
+
+  // The extra spacer only applies when a copyright is actually rendered — it's the
+  // gap above it (see __copyright's margin-top below). Adding it unconditionally
+  // would inflate the block past the image's own height, leaving the image
+  // (vertically centered in __media) with dead space above and below it.
+  &.c-block-het-archief-image-text-background--has-copyright {
+    min-height: max(34rem, calc(var(--copyright-height, 0px) + #{variables.$g-spacer-unit}));
+  }
 
   &.c-block-het-archief-image-text-background--has-image {
     // Also reserve the image's own 21.7rem floor (or its actual height if a
     // tall/portrait source needs more, see __image below).
-    min-height: max(
-      34rem,
-      calc(max(21.7rem, var(--image-height, 0px)) + var(--copyright-height, 0px) + #{variables.$g-spacer-unit})
-    );
+    min-height: max(34rem, calc(max(21.7rem, var(--image-height, 0px)) + var(--copyright-height, 0px)));
+
+    &.c-block-het-archief-image-text-background--has-copyright {
+      min-height: max(
+        34rem,
+        calc(max(21.7rem, var(--image-height, 0px)) + var(--copyright-height, 0px) + #{variables.$g-spacer-unit})
+      );
+    }
   }
 
   @media (max-width: variables.$g-bp2) {
@@ -204,6 +216,7 @@
 
       &:empty {
         display: none;
+	  	margin-top: 0;
       }
     }
 
