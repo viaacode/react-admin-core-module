@@ -77,7 +77,6 @@ export const BlockHomepageBanner: FunctionComponent<BlockHomepageBannerProps> = 
 					<Html
 						className={clsx(
 							'c-block-homepage-banner__content-text',
-							'c-rich-text-editor__content',
 							'u-background-text-secondary',
 							'u-background-text-links'
 						)}

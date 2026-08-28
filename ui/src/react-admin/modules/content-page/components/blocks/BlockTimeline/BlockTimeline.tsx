@@ -236,7 +236,7 @@ export const BlockTimeline: FunctionComponent<BlockTimelineProps> = ({
 										/>
 									</div>
 								)}
-								<div className="c-block-timeline__node-text c-rich-text-editor__content">
+								<div className="c-block-timeline__node-text">
 									<CopyrightAttribution
 										title={node.copyrightTitle}
 										text={node.copyrightText}
