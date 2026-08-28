@@ -174,7 +174,7 @@ export const BlockObjectsGrid: FunctionComponent<BlockObjectsGridProps> = ({
 			className={clsx('c-block-objects-grid__tile', {
 				'c-block-objects-grid__tile--fixed': isFixed,
 			})}
-			key={`objects-grid-placeholder__${index}`}
+			key={`objects-grid-placeholder__${index}__${tileBackgroundColor}__${isFixed}`}
 			// The aria-live status below already announces that the objects are loading.
 			aria-hidden="true"
 		>
