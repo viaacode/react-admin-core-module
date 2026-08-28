@@ -118,7 +118,7 @@
 	&__title-text {
 		display: inline;
 
-		@include typography.sofia-pro(6.4rem, 800, 6.4rem, true);
+		@include typography.sofia-pro-heading-2xl(true);
 
 		color: colors.$white;
 
