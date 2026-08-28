@@ -14,6 +14,7 @@ import type {
 import type { App, Locale } from '~modules/translations/translations.core.types';
 import type { UserBulkAction } from '~modules/user/user.types';
 import type { FlowPlayerWrapperProps } from '~shared/components/FlowPlayerWrapper/FlowPlayerWrapper.types';
+import type { PlayableDisplayIeObjectPage } from '~shared/services/ie-objects-service/ie-objects.types';
 
 export enum ToastType {
 	ERROR = 'error',
@@ -206,11 +207,7 @@ export interface IiifViewerConfigProps {
 	/** Names the viewer for assistive technology, since the object title lives outside it. */
 	title?: string;
 	/** Every page's raw (un-ticketed) image/thumbnail/alto urls, when the caller already has them. */
-	pages?: {
-		imageUrl: string;
-		thumbnailUrl: string | null;
-		altoUrl: string | null;
-	}[];
+	pages?: PlayableDisplayIeObjectPage[];
 }
 
 /**

@@ -1,5 +1,12 @@
 import type { IeObjectType } from '~shared/helpers/map-format-to-type.ts';
 
+/** One newspaper page's raw (un-ticketed) image/thumbnail/alto urls. */
+export interface PlayableDisplayIeObjectPage {
+	imageUrl: string;
+	thumbnailUrl: string | null;
+	altoUrl: string | null;
+}
+
 export interface PlayableDisplayIeObject {
 	schemaIdentifier: string;
 	name: string;
@@ -17,11 +24,7 @@ export interface PlayableDisplayIeObject {
 	/** Non audio/video objects only (e.g. newspapers): self-contained base64 data uri of the IIIF detail image, or null if none is accessible/couldn't be resolved. Use this directly as an <img src> */
 	newspaperImage?: string | null;
 	/** Non audio/video objects only (e.g. newspapers): every page's raw (un-ticketed) image/thumbnail/alto urls, for a caller building its own multi-page IIIF viewer instead of using newspaperImage's single flattened detail image. A ticket still has to be requested per url before use. Empty when the object has no pages or none carry an image. */
-	pages?: {
-		imageUrl: string;
-		thumbnailUrl: string | null;
-		altoUrl: string | null;
-	}[];
+	pages?: PlayableDisplayIeObjectPage[];
 	snipPoint?: {
 		start?: number;
 		end?: number;
