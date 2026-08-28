@@ -69,7 +69,7 @@ export const BlockHighlightText: FunctionComponent<BlockHighlightTextProps> = ({
 				{/* c-rich-text-editor__content gives the rich text output its standard styling,
 				    paragraph spacing included - see BlockRichText */}
 				<Html
-					className={clsx('c-block-highlight-text__content-text', 'c-rich-text-editor__content', {
+					className={clsx('c-block-highlight-text__content-text', {
 						'u-background-text-colors u-background-text-links': hasTextColors,
 					})}
 					style={

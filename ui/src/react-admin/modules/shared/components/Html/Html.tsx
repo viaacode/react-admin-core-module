@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import type { CSSProperties, FunctionComponent } from 'react';
 import React, { useEffect, useState } from 'react';
 import { sanitizeHtml } from '../../helpers/sanitize';
@@ -38,7 +39,7 @@ const Html: FunctionComponent<HtmlProps> = ({
 			dangerouslySetInnerHTML={{
 				__html: mounted ? sanitizeHtml(content, sanitizePreset) : content,
 			}}
-			className={className}
+			className={clsx('c-rich-text-editor__content', className)}
 			style={style}
 		/>
 	);
