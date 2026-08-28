@@ -165,7 +165,7 @@ export const navigateToContentType = (action: ButtonAction) => {
 					break;
 				}
 				navigateToAbsoluteOrRelativeUrl(
-					IeObjectsService.getObjectDetailPath(String(value)),
+					IeObjectsService.getObjectDetailPathViaPid(String(value)),
 					resolvedTarget
 				);
 				break;
