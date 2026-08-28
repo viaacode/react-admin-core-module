@@ -79,7 +79,7 @@ describe('pickNextSelection', () => {
 		// A source that draws the previous order first and a different one after it. The retry has to
 		// take the second draw: a tile's colours and thumbnail belong to its position, so a reorder is
 		// a visibly different block.
-		expect(pickNextSelection(3, 3, [0, 1, 2], seededRandom([0, 0, 0, 0.99, 0, 0]))).toEqual([
+		expect(pickNextSelection(3, 3, [0, 1, 2], [], seededRandom([0, 0, 0, 0.99, 0, 0]))).toEqual([
 			2, 1, 0,
 		]);
 	});
@@ -94,7 +94,7 @@ describe('pickNextSelection', () => {
 
 	it('still returns a full selection when it retries', () => {
 		// A random source that first reproduces the previous set forces the retry path.
-		const next = pickNextSelection(4, 3, [0, 1, 2], seededRandom([0, 0, 0, 0.99, 0, 0]));
+		const next = pickNextSelection(4, 3, [0, 1, 2], [], seededRandom([0, 0, 0, 0.99, 0, 0]));
 
 		expect(next).toHaveLength(3);
 		expect(new Set(next).size).toBe(3);
@@ -103,8 +103,38 @@ describe('pickNextSelection', () => {
 	it('gives up after the retry cap instead of looping forever', () => {
 		// A random source that always reproduces the previous set. Every retry draws the same three
 		// indices, so only the cap can end this.
-		const next = pickNextSelection(4, 3, [0, 1, 2], seededRandom([0]));
+		const next = pickNextSelection(4, 3, [0, 1, 2], [], seededRandom([0]));
 
 		expect(next).toEqual([0, 1, 2]);
+	});
+
+	it('never draws an interest that is in recentlyShown, when enough others are available', () => {
+		for (let run = 0; run < 200; run++) {
+			const next = pickNextSelection(10, 3, [0, 1, 2], [3, 4, 5, 6, 7]);
+
+			for (const index of next) {
+				expect([3, 4, 5, 6, 7]).not.toContain(index);
+			}
+		}
+	});
+
+	it('falls back to every interest once too few are left outside recentlyShown', () => {
+		// 5 of 6 interests are already "recently shown", leaving only one unseen -- not enough to
+		// fill three tiles, so the exclusion has to give way rather than come up short.
+		const next = pickNextSelection(6, 3, [0, 1, 2], [1, 2, 3, 4, 5]);
+
+		expect(next).toHaveLength(3);
+		expect(new Set(next).size).toBe(3);
+	});
+
+	it('ignores recentlyShown entries past `total`, e.g. after the interest list shrinks', () => {
+		const next = pickNextSelection(4, 3, [0, 1, 2], [4, 5, 6, 7, 8, 9]);
+
+		expect(next).toHaveLength(3);
+		expect(new Set(next).size).toBe(3);
+	});
+
+	it('is not tripped up by an empty recentlyShown', () => {
+		expect(pickNextSelection(10, 3, [0, 1, 2], [])).toHaveLength(3);
 	});
 });

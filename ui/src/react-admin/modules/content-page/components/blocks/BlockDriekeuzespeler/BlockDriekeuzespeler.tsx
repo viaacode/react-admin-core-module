@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import type { CSSProperties, FunctionComponent, ReactElement } from 'react';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { AdminCoreIconName } from '~core/config';
 import type { Color } from '~modules/content-page/types/content-block.types';
 import { Icon } from '~shared/components/Icon/Icon';
@@ -8,7 +8,11 @@ import { tText } from '~shared/helpers/translation-functions';
 import { HET_ARCHIEF } from '~shared/types';
 import type { DefaultComponentProps } from '~shared/types/components';
 import { DRIEKEUZESPELER_TILE_COUNT } from './BlockDriekeuzespeler.editorconfig';
-import { pickNextSelection, pickRandomIndices } from './BlockDriekeuzespeler.helpers';
+import {
+	pickNextSelection,
+	pickRandomIndices,
+	RECENTLY_SHOWN_LIMIT,
+} from './BlockDriekeuzespeler.helpers';
 import { BlockDriekeuzespelerModal } from './BlockDriekeuzespelerModal';
 import { useGetDriekeuzespelerPlayableObjects } from './hooks/useGetDriekeuzespelerPlayableObjects';
 
@@ -54,13 +58,27 @@ export const BlockDriekeuzespeler: FunctionComponent<BlockDriekeuzespelerProps> 
 	// the client disagree and break hydration, so the first paint shows the tile skeletons instead.
 	const [selection, setSelection] = useState<number[] | null>(null);
 
+	// Interests shown over the last couple of shuffles (including the initial draw), oldest first,
+	// capped at RECENTLY_SHOWN_LIMIT. A ref rather than state: it is bookkeeping pickNextSelection
+	// reads, not something the block renders, so updating it should not itself trigger a render.
+	const recentlyShownRef = useRef<number[]>([]);
+
 	useEffect(() => {
-		setSelection(pickRandomIndices(interests.length, tileCount));
+		const initial = pickRandomIndices(interests.length, tileCount);
+		recentlyShownRef.current = initial.slice(-RECENTLY_SHOWN_LIMIT);
+		setSelection(initial);
 	}, [interests.length, tileCount]);
 
 	const shuffle = useCallback(() => {
-		setSelection((previous) => pickNextSelection(interests.length, tileCount, previous || []));
-	}, [interests.length, tileCount]);
+		const next = pickNextSelection(
+			interests.length,
+			tileCount,
+			selection || [],
+			recentlyShownRef.current
+		);
+		recentlyShownRef.current = [...recentlyShownRef.current, ...next].slice(-RECENTLY_SHOWN_LIMIT);
+		setSelection(next);
+	}, [interests.length, tileCount, selection]);
 
 	// The interest whose tile is open in the modal, or null when nothing is open. The selection is
 	// untouched while the modal is open, so closing returns to the same three tiles.
