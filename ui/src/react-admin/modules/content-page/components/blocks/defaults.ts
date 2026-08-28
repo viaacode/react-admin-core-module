@@ -255,9 +255,9 @@ export const COPYRIGHT_STATE = (): CopyrightComponentState => ({
  * way. https://meemoo.atlassian.net/browse/ARC-3813
  */
 export const IE_OBJECT_FIELD = (
-	allowedObjectTypes: IeObjectType[] = Object.values(IeObjectType),
-	isVisibleFunc: IsVisibleFunc = () => true,
-	fieldsToResetOnChange: string[] = []
+	allowedObjectTypes: IeObjectType[],
+	isVisibleFunc?: IsVisibleFunc,
+	fieldsToResetOnChange?: string[]
 ): ContentBlockField => ({
 	label: tText('modules/content-page/helpers/snippet-time-fields___object', undefined, [
 		HET_ARCHIEF,
