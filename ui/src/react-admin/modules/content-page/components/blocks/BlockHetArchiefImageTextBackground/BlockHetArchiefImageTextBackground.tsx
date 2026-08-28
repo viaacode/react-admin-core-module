@@ -150,7 +150,12 @@ export const BlockHetArchiefImageTextBackground: FunctionComponent<
 		<article
 			className={clsx(
 				`c-block-het-archief-image-text-background c-block-het-archief-image-text-background--${imageAlignment}`,
-				{ 'c-block-het-archief-image-text-background--has-image': !!image },
+				{
+					'c-block-het-archief-image-text-background--has-image': !!image,
+					'c-block-het-archief-image-text-background--has-copyright': !!(
+						copyrightTitle || copyrightText
+					),
+				},
 				className
 			)}
 			style={
