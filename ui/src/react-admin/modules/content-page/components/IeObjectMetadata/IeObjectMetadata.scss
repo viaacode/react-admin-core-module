@@ -27,6 +27,31 @@ $object-meta-gap: 4rem;
 		white-space: nowrap;
 	}
 
+	// The labelled pill is the default; the icon-only variant takes over on a narrow screen. Both are
+	// in the DOM and CSS picks one -- see the comment in the .tsx for why this is not a JS branch.
+	// 700px, the threshold the `isMobileWidth()` branch used before, so nothing changes per width.
+	// Written as descendant selectors (two classes) rather than the bare BEM class, so they outrank
+	// any single-class rule the button library paints `display` with, whatever the stylesheet order.
+	.c-ie-object-metadata__cta-button--icon {
+		display: none;
+	}
+
+	@media (max-width: variables.$g-bp2) {
+		.c-ie-object-metadata__cta-button--icon {
+			display: inline-flex;
+
+			// Making the button a flex container is what centers its content here: the library's own
+			// icon-only styling centers via `text-align`, which a flex container ignores, so without
+			// these the icon sits against the left edge of the round button instead of in its middle.
+			align-items: center;
+			justify-content: center;
+		}
+
+		.c-ie-object-metadata__cta-button--label {
+			display: none;
+		}
+	}
+
 	&__text {
 		flex: 1 1 auto;
 		min-width: 0;

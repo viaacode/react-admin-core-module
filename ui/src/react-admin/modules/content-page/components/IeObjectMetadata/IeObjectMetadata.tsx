@@ -10,7 +10,6 @@ import {
 	mapDcTermsFormatToSimpleType,
 	SimpleIeObjectType,
 } from '~shared/helpers/map-format-to-type.ts';
-import { isMobileWidth } from '~shared/helpers/media-query.ts';
 import { tText } from '~shared/helpers/translation-functions';
 import type { PlayableDisplayIeObject } from '~shared/services/ie-objects-service/ie-objects.types.ts';
 import { HET_ARCHIEF } from '~shared/types';
@@ -81,10 +80,20 @@ export const IeObjectMetadata: FunctionComponent<{
 				ariaLabel={callToActionLabel}
 				className="c-ie-object-metadata__cta"
 			>
+				{/* Both variants are rendered and the stylesheet picks one, rather than branching on
+				    `isMobileWidth()` here. That helper reads `window.innerWidth` during render and nothing
+				    re-renders this component on resize, so the narrow icon-only variant used to stick at
+				    desktop widths once the window had ever been narrow (and vice versa after hydration).
+				    The switch happens at the same 700px the helper used, so each width looks as before. */}
 				<Button
+					className="c-ie-object-metadata__cta-button c-ie-object-metadata__cta-button--icon"
 					variants={['block', 'black']}
-					icon={isMobileWidth() ? <Icon name={'arrow-down-right' as IconName} /> : undefined}
-					label={isMobileWidth() ? undefined : callToActionLabel}
+					icon={<Icon name={'arrow-down-right' as IconName} />}
+				/>
+				<Button
+					className="c-ie-object-metadata__cta-button c-ie-object-metadata__cta-button--label"
+					variants={['block', 'black']}
+					label={callToActionLabel}
 				/>
 			</SmartLink>
 			<div className="c-ie-object-metadata__text">
