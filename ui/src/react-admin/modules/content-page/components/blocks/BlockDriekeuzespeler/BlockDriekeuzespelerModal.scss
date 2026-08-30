@@ -39,6 +39,49 @@ $media-aspect-ratio: 16 / 9;
 	padding: 0;
 }
 
+// The library forces the dialog to near-full screen height on mobile regardless of its content
+// (`.c-modal-context .c-modal` at $g-bp2), and its own background is white -- so a modal shorter
+// than the screen used to leave a blank white void below the metadata card. The FA's design has the
+// modal hug its content instead, so height comes back to the content, with a dark background (rather
+// than white) for the rare case content is short enough to leave a sliver showing through.
+//
+// The library puts the caller's className on the outer `.c-modal-context` wrapper, not on the inner
+// `.c-modal` -- so this has to be a descendant selector, not a combined one on a single element.
+// `.c-modal-context.c-driekeuzespeler-modal .c-modal` (3 classes) beats the library's own
+// `.c-modal-context .c-modal` (2 classes) regardless of stylesheet load order.
+// https://www.figma.com/design/1yUd3vpjHXcMfI15dTeVYC/hetarchief.be-%E2%80%94-ontdekken?node-id=2382-1623
+@media (max-width: variables.$g-bp2) {
+	// The context is an unstyled flex row on mobile (the library's own vertical-centering `margin:
+	// auto` on `.c-modal` only applies above $g-bp2), so a shorter-than-container modal sits at the
+	// cross-axis start -- the top -- instead of centering. `align-items: center` on the row centers it.
+	.c-modal-context.c-driekeuzespeler-modal {
+		align-items: center;
+	}
+
+	// Transparent, not a colour of its own: the design floats the media and the metadata card over the
+	// backdrop with a gutter either side, and both carry their own background. Painting the dialog
+	// would fill that gutter with a second, slightly different dark than the backdrop's.
+	.c-modal-context.c-driekeuzespeler-modal .c-modal {
+		height: auto;
+		max-height: calc(100% - 4rem);
+		background-color: transparent;
+	}
+
+	// Lines the close button up with the media's own top-right corner, which is inset by the gutter
+	// below, rather than with the full-bleed dialog edge.
+	.c-driekeuzespeler-modal .c-modal__header--transparent {
+		padding: variables.$g-spacer-unit * 2 variables.$g-spacer-unit * 2.5;
+	}
+
+	// The modal is mounted with `scrollable={false}`, which the library turns into `overflow: visible`
+	// on the body -- fine on desktop, but on a phone a tall object (a portrait newspaper, or a player
+	// that reports a big intrinsic size) can then push the metadata card and its theme CTA off screen
+	// with no way to reach them. Scrolling the body keeps everything reachable whatever the media does.
+	.c-modal-context.c-driekeuzespeler-modal .c-modal__body {
+		overflow-y: auto;
+	}
+}
+
 .c-driekeuzespeler-modal {
 	&__media {
 		display: flex;
@@ -99,5 +142,59 @@ $media-aspect-ratio: 16 / 9;
 		background-color: colors.$color-silver;
 		font-weight: 700;
 		white-space: nowrap;
+	}
+
+	// On mobile the FA insets the video from the screen edges and rounds its top corners, then stacks
+	// the metadata card under it with the secondary CTA on its own row below a full-width divider,
+	// instead of desktop's edge-to-edge video and single side-by-side metadata row.
+	// https://www.figma.com/design/1yUd3vpjHXcMfI15dTeVYC/hetarchief.be-%E2%80%94-ontdekken?node-id=2382-1623
+	@media (max-width: variables.$g-bp2) {
+		&__media {
+			width: calc(100% - #{variables.$g-spacer-unit * 5});
+			margin: 0 auto;
+			border-radius: variables.$g-spacer-unit * 1.5 variables.$g-spacer-unit * 1.5 0 0;
+
+			// Tighter than the 70vh the desktop rule allows: on a phone the metadata card carries two
+			// rows plus the theme CTA, so the media has to leave room for it rather than taking most of
+			// the screen. The design's video is roughly a quarter of the frame height.
+			max-height: 45vh;
+			flex: 0 0 auto;
+		}
+
+		&__metadata.c-ie-object-metadata {
+			background-color: colors.$white;
+			border-radius: 0 0 variables.$g-spacer-unit * 1.5 variables.$g-spacer-unit * 1.5;
+			width: calc(100% - #{variables.$g-spacer-unit * 5});
+			margin: 0 auto;
+
+			// The primary CTA/title/maintainer row stays side-by-side; only the secondary CTA drops to
+			// its own row below the divider.
+			display: grid;
+			grid-template-columns: 1fr auto;
+			grid-template-areas:
+				'text cta'
+				'divider divider'
+				'theme-cta theme-cta';
+			gap: variables.$g-spacer-unit * 2;
+
+			.c-ie-object-metadata__cta {
+				grid-area: cta;
+			}
+
+			.c-ie-object-metadata__text {
+				grid-area: text;
+			}
+
+			.c-ie-object-metadata__divider {
+				grid-area: divider;
+				width: 100%;
+				height: 1px;
+			}
+
+			.c-driekeuzespeler-modal__theme-cta {
+				grid-area: theme-cta;
+				width: fit-content;
+			}
+		}
 	}
 }
