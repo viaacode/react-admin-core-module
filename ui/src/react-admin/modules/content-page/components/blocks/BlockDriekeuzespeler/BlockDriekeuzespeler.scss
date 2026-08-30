@@ -530,10 +530,16 @@ $shape-mobile-bottom-tilt: -178.11deg;
 
 // The middle tile is the exception: it is already the design's size at rest, so hovering it changes
 // nothing about its scale. Shrinking it to the hover scale would read as the focal tile stepping
-// backwards under the cursor.
+// backwards under the cursor. Higher specificity than the generic `:hover` rule above (an extra
+// `:nth-child`), so it needs its own mobile override too -- without one, hovering the middle tile
+// jumped it to the desktop rest scale even on mobile, overriding the generic rule's mobile cap.
 .c-driekeuzespeler__tile:nth-child(2):hover,
 .c-driekeuzespeler__tile:nth-child(2):focus-within {
 	--tile-scale: #{$tile-scale-active-desktop};
+
+	@media (max-width: variables.$g-bp2) {
+		--tile-scale: #{$tile-scale-active-mobile};
+	}
 }
 
 .c-driekeuzespeler__tile:nth-child(1):hover,
