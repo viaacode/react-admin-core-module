@@ -1,11 +1,11 @@
 import type { SelectOption } from '@viaa/avo2-components';
-import { AvoSearchOrderDirection } from '@viaa/avo2-types';
+import { AvoCoreContentPickerType, AvoSearchOrderDirection } from '@viaa/avo2-types';
 import { GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF } from '~modules/content-page/const/get-color-options';
-import { IE_OBJECT_WITH_SNIPPET_TIME_FIELDS } from '~modules/content-page/helpers/snippet-time-fields.ts';
 import type { FileUploadProps } from '~shared/components/FileUpload/FileUpload';
 import { tText } from '~shared/helpers/translation-functions';
 import { validateRequiredValue } from '~shared/helpers/validation.ts';
 import { HET_ARCHIEF } from '~shared/types';
+import type { PickerItem } from '~shared/types/content-picker.ts';
 import type {
 	ContentBlockConfig,
 	ContentBlockField,
@@ -191,7 +191,30 @@ export const TIMELINE_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 								)
 							),
 					},
-					...IE_OBJECT_WITH_SNIPPET_TIME_FIELDS(undefined, visualTypeIsObject),
+					mediaItem: {
+						label: tText(
+							'react-admin/modules/content-page/components/blocks/block-timeline/block-timeline___object',
+							undefined,
+							[HET_ARCHIEF]
+						),
+						editorType: ContentBlockEditor.ContentPicker,
+						editorProps: {
+							allowedTypes: [AvoCoreContentPickerType.IE_OBJECT],
+							hideTypeDropdown: true,
+							hideTargetSwitch: true,
+						},
+						validator: (value: PickerItem | undefined) =>
+							value?.value
+								? []
+								: [
+										tText(
+											'react-admin/modules/content-page/components/blocks/block-timeline/block-timeline___een-object-is-verplicht',
+											undefined,
+											[HET_ARCHIEF]
+										),
+									],
+						isVisible: visualTypeIsObject,
+					},
 					image: FILE_FIELD(
 						tText(
 							'react-admin/modules/content-page/components/blocks/block-timeline/block-timeline___een-afbeelding-is-verplicht',
