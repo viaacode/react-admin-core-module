@@ -34,11 +34,7 @@ export const useGetDriekeuzespelerPlayableObjects = (
 			objects && JSON.stringify(objects),
 		],
 		queryFn: async () => {
-			const entries = await IeObjectsService.getPlayableDisplayData(
-				blockId,
-				objects,
-				identifiers
-			);
+			const entries = await IeObjectsService.getPlayableDisplayData(blockId, objects, identifiers);
 
 			return Object.fromEntries(
 				(entries || [])
