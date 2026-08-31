@@ -18,6 +18,8 @@ export interface ObjectsGridItem {
 	schemaIdentifier: string;
 	// Object title, shown in the title bar.
 	name: string;
+	// Provider / maintainer slug, used to link to the object.
+	maintainerSlug: string;
 	// Provider / maintainer name, shown in the title bar.
 	maintainerName?: string;
 	// Object type, drives the type-icon. Falls back to a generic icon when unknown.

@@ -124,6 +124,12 @@ export interface AdminConfig {
 			// admin-core needing to depend on the client package.
 			clientSearchUrlToApiSearchUrl: (searchQuery: string) => IeObjectsSearchBody;
 		};
+		getIeObjectDetailPath?: (
+			locale: string,
+			maintainerSlug: string,
+			schemaIdentifier: string,
+			name: string | null | undefined
+		) => string;
 	};
 	components: {
 		loader: {

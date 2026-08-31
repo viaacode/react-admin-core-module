@@ -20,6 +20,7 @@ export interface ThemeWithObjects extends Theme {
 		format: IeObjectType;
 		thumbnailUrl: string;
 		maintainerId: string;
+		maintainerSlug: string;
 		maintainerName: string;
 	}[];
 	// The number of ie-objects linked to the theme, which is more than the objects in `ieObjects`

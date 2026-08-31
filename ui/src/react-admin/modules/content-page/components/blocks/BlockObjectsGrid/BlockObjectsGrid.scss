@@ -4,6 +4,8 @@
 @use "../../../../shared/styles/mixins/focus" as focus;
 @use "../../../../shared/styles/mixins/animations" as animations;
 
+$max-item-height: 37.6rem;
+
 .c-block-objects-grid {
 	// The grid is its own inline-size query container, so the row height below can be derived
 	// from the actual width of the grid (100cqw) instead of a hardcoded height. The grid <ul>
@@ -22,10 +24,12 @@
 	--c-objects-grid-gap: #{variables.$g-spacer-unit * 2};
 
 	// All tiles share this height (standard tiles are 1 column wide, fixed tiles 2), so every
-	// tile lines up regardless of type. The height is the width of a fixed (landscape) tile
-	// divided by the 16:9 aspect ratio it has to keep, so it scales with the grid width.
-	// Mobile: a single column, so a fixed tile is the full grid width.
-	--c-objects-grid-row-height: calc(100cqw * 9 / 16);
+	// tile lines up regardless of type. The height is derived from a standard tile's column
+	// width, scaled to the required aspect ratio, so it scales with the grid width — capped
+	// so tiles stop growing on very wide containers.
+	// Mobile: a single column, so a standard tile is the full grid width and is landscape
+	// (16:9) instead of portrait; a fixed tile spans 2 rows to become twice as high + the gap.
+	--c-objects-grid-row-height: min(calc(100cqw * 9 / 16), #{$max-item-height});
 
 	@media (min-width: variables.$g-bp2) {
 		--c-objects-grid-columns: 3;
@@ -33,15 +37,15 @@
 		--c-objects-grid-fixed-row-span: 1;
 		--c-objects-grid-gap: #{variables.$g-spacer-unit * 4};
 
-		// 3 columns: a fixed tile is 2 columns + 1 gap wide = (2 * 100cqw - gap) / 3.
-		--c-objects-grid-row-height: calc((2 * 100cqw - var(--c-objects-grid-gap)) / 3 * 9 / 16);
+		// 3 columns: a standard tile is (100cqw - 2 gaps) / 3 wide.
+		--c-objects-grid-row-height: min(calc((100cqw - 2 * var(--c-objects-grid-gap)) / 3 * 16 / 9), #{$max-item-height});
 	}
 
 	@media (min-width: variables.$g-bp3) {
 		--c-objects-grid-columns: 4;
 
-		// 4 columns: a fixed tile is 2 columns + 1 gap wide = (100cqw - gap) / 2.
-		--c-objects-grid-row-height: calc((100cqw - var(--c-objects-grid-gap)) / 2 * 9 / 16);
+		// 4 columns: a standard tile is (100cqw - 3 gaps) / 4 wide.
+		--c-objects-grid-row-height: min(calc((100cqw - 3 * var(--c-objects-grid-gap)) / 4 * 16 / 9), #{$max-item-height});
 	}
 
 	.c-block-objects-grid__title {
@@ -187,37 +191,21 @@
 		height: 2.2rem;
 		font-size: 2.2rem;
 		line-height: 1;
-
-		@media (min-width: variables.$g-bp2) {
-			width: 2.4rem;
-			height: 2.4rem;
-			font-size: 2.4rem;
-		}
 	}
 
 	.c-block-objects-grid__tile-title {
 		@include typography.sofia-pro-heading-sm($important: false);
+		font-size: 1.6rem;
 
-		display: -webkit-box;
-		-webkit-line-clamp: 2;
-		-webkit-box-orient: vertical;
+		@include typography.truncate-after-x-lines(2);
 		overflow: hidden;
-
-		@media (min-width: variables.$g-bp2) {
-			font-size: 1.6rem;
-		}
 	}
 
 	.c-block-objects-grid__tile-maintainer {
-		font-size: 1.4rem;
-		font-weight: 400;
+		@include typography.sofia-pro-body-sm($important: false);
 		line-height: 2rem;
 
 		@include typography.truncate;
-
-		@media (min-width: variables.$g-bp2) {
-			font-size: 1.6rem;
-		}
 	}
 
 	.c-block-objects-grid__footer {

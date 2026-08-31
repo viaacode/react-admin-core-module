@@ -24,6 +24,7 @@ import { tText } from '~shared/helpers/translation-functions.ts';
 
 import 'swiper/css';
 import './BlockThemeReelsSection.scss';
+import { IeObjectsService } from '~modules/ie-objects/ie-objects.service.ts';
 
 export interface BlockThemeReelSectionProps extends DefaultComponentProps {
 	themeId: string;
@@ -210,7 +211,10 @@ export const BlockThemeReelSection: FunctionComponent<BlockThemeReelSectionProps
 					</SwiperSlide>
 				)}
 				{theme.ieObjects.map(
-					({ id, format, maintainerName, schemaIdentifier, thumbnailUrl, name }, index) => {
+					(
+						{ id, format, maintainerSlug, maintainerName, schemaIdentifier, thumbnailUrl, name },
+						index
+					) => {
 						const componentClassName = clsx('c-block-theme-reels-section__slide');
 						return (
 							<SwiperSlide
@@ -222,7 +226,11 @@ export const BlockThemeReelSection: FunctionComponent<BlockThemeReelSectionProps
 										{
 											type: AvoCoreContentPickerType.INTERNAL_LINK,
 											target: LinkTarget.Self,
-											value: `/pid/${schemaIdentifier}`,
+											value: IeObjectsService.getObjectDetailPath(
+												maintainerSlug,
+												schemaIdentifier,
+												name
+											),
 										},
 										renderSlideContent(
 											thumbnailUrl,
