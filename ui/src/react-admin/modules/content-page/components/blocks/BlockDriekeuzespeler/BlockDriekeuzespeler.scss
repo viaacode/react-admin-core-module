@@ -14,7 +14,6 @@ $tiles-width-desktop: 84.862%;
 
 // Mobile: the tiles stack and overlap, spanning 402 x 842.
 $tiles-ratio-mobile: math.div(402, 842);
-
 $tile-tilt: 5deg;
 $tile-active-tilt: 2deg;
 
@@ -29,7 +28,6 @@ $tile-scale-active-mobile: math.div(90.05%, $tile-width-mobile-base); // 1.038
 
 // A hovered side tile grows less than the middle tile does at rest, so it still fits the stage.
 $tile-scale-hover-desktop: 1.1;
-
 $tile-tucked-distance: variables.$g-spacer-unit * 7;
 $tile-z-tucked: 1;
 $tile-z-inactive: 3;
@@ -335,7 +333,6 @@ $shape-color: var(--bg-text-primary, #{colors.$white});
 
 	// Only the button's place under the tile area is set here; the look is the shared black pill. The
 	// positioned shapes layer reaches below that area, so an unpositioned button would paint under it.
-	//
 	// The compound selector is not decoration: the client's `.c-content-page-preview [class*="c-button--"]`
 	// margin and `.c-button`'s own `display` both beat or tie a lone `&__shuffle`, dropping the CTA onto
 	// the tiles. Three classes put this above both in either app.
@@ -346,7 +343,6 @@ $shape-color: var(--bg-text-primary, #{colors.$white});
 		// `.c-button` is inline-block, and an auto margin only centres a block level box.
 		display: flex;
 		width: fit-content;
-
 		margin: (variables.$g-spacer-unit * 6) auto 0;
 	}
 
