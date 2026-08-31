@@ -1,5 +1,6 @@
-import { describe, expect, it, vi } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import type {
+	ContentBlockConfig,
 	ContentBlockField,
 	ContentBlockFieldGroup,
 	DriekeuzespelerBlockComponentState,
@@ -21,7 +22,13 @@ vi.mock('~shared/helpers/is-avo', () => ({
 	isAvo: () => false,
 }));
 
-const config = DRIEKEUZESPELER_CONFIG();
+// Rebuilt per test, so nothing one test does to the config leaks into the next.
+let config: ContentBlockConfig;
+
+beforeEach(() => {
+	config = DRIEKEUZESPELER_CONFIG();
+});
+
 const group = (key: string): ContentBlockFieldGroup =>
 	config.components.fields[key] as ContentBlockFieldGroup;
 const field = (key: string): ContentBlockField =>
