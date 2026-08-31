@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import type { CSSProperties, FunctionComponent, ReactElement } from 'react';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { AdminCoreIconName } from '~core/config';
-import { useGetIeObjectsPlayableDisplayData } from '~modules/content-page/hooks/useGetIeObjectsPlayableDisplayData';
+import { useGetIeObjectsByIds } from '~modules/content-page/hooks/useGetIeObjectsByIds';
 import type {
 	DriekeuzespelerInterestState,
 	DriekeuzespelerTileColors,
@@ -22,8 +22,6 @@ import { BlockDriekeuzespelerModal } from './BlockDriekeuzespelerModal';
 import './BlockDriekeuzespeler.scss';
 
 export interface BlockDriekeuzespelerProps extends DefaultComponentProps {
-	/** Id of the content block, added by the content block renderer. Empty for an unsaved block. */
-	blockId?: string;
 	title: string;
 	tileColors: DriekeuzespelerTileColors[];
 	shuffleButtonLabel: string;
@@ -37,7 +35,6 @@ export interface BlockDriekeuzespelerProps extends DefaultComponentProps {
  * https://meemoo.atlassian.net/browse/ARC-3813
  */
 export const BlockDriekeuzespeler: FunctionComponent<BlockDriekeuzespelerProps> = ({
-	blockId,
 	title,
 	tileColors,
 	shuffleButtonLabel,
@@ -75,15 +72,14 @@ export const BlockDriekeuzespeler: FunctionComponent<BlockDriekeuzespelerProps> 
 	// selection is untouched while the modal is open, so closing returns to the same three tiles.
 	const [openedIndex, setOpenedIndex] = useState<number | null>(null);
 
-	// One entry per interest, in the block's own order, so a shuffle never needs another request.
-	const { data: ieObjects, isFetching: isFetchingObjects } = useGetIeObjectsPlayableDisplayData(
-		blockId,
-		// A block being edited has no id yet, so the objects travel with the request. The proxy
-		// honours this path for content page editors only.
-		!blockId
-			? interests.map((interest) => ({ schemaIdentifier: interest.mediaItem?.value || '' }))
-			: undefined
-	);
+	// Only the three interests on screen are resolved, not all two hundred a block may hold. The pids
+	// are part of the query key, so a shuffle back to a selection already seen is served from cache.
+	const selectedSchemaIdentifiers = (selection || [])
+		.map((index) => interests[index]?.mediaItem?.value || '')
+		.filter(Boolean);
+
+	const { data: ieObjectsById, isFetching: isFetchingObjects } =
+		useGetIeObjectsByIds(selectedSchemaIdentifiers);
 
 	// Deduplicated and sorted, so a shuffle back to a selection already seen hits the same query key.
 	const selectedThemeIds = Array.from(
@@ -100,7 +96,8 @@ export const BlockDriekeuzespeler: FunctionComponent<BlockDriekeuzespelerProps> 
 		const interestIndex = selection?.[tileIndex];
 		const interest = interestIndex === undefined ? undefined : interests[interestIndex];
 		const { backgroundColor, textColor } = tileColors[tileIndex] ?? {};
-		const ieObject = interestIndex === undefined ? null : ieObjects?.[interestIndex];
+		const schemaIdentifier = interest?.mediaItem?.value;
+		const ieObject = schemaIdentifier ? ieObjectsById?.[schemaIdentifier] : undefined;
 
 		return (
 			<li
@@ -176,7 +173,11 @@ export const BlockDriekeuzespeler: FunctionComponent<BlockDriekeuzespelerProps> 
 
 			<BlockDriekeuzespelerModal
 				interest={openedInterest}
-				ieObject={(openedIndex === null ? null : ieObjects?.[openedIndex]) ?? undefined}
+				ieObject={
+					openedInterest?.mediaItem?.value
+						? ieObjectsById?.[openedInterest.mediaItem.value]
+						: undefined
+				}
 				theme={themes?.find((theme) => theme.id === openedInterest?.theme?.value)}
 				isFetching={isFetchingObjects}
 				onClose={() => setOpenedIndex(null)}

@@ -6,12 +6,18 @@ import React from 'react';
 import { AdminConfigManager } from '~core/config/config.class';
 import { IeObjectFlowPlayerWrapper } from '~modules/content-page/components/IeObjectFlowPlayerWrapper/IeObjectFlowPlayerWrapper.tsx';
 import { IeObjectMetadata } from '~modules/content-page/components/IeObjectMetadata/IeObjectMetadata.tsx';
-import { useGetIeObjectsByIds } from '~modules/content-page/hooks/useGetIeObjectsByIds';
+import { useGetPeakFileData } from '~modules/content-page/hooks/useGetPeakFileData';
+import { useGetPlayableUrl } from '~modules/content-page/hooks/useGetPlayableUrl';
 import { Locale } from '~modules/translations/translations.core.types.ts';
 import { SmartLink } from '~shared/components/SmartLink/SmartLink.tsx';
-import { isAudioVideoFormat } from '~shared/helpers/is-audio-video-format.ts';
+import { findPeakFile, findPlayableFile } from '~shared/helpers/ie-object-files.ts';
+import { isAudioFormat, isAudioVideoFormat } from '~shared/helpers/is-audio-video-format.ts';
+import type { IeObjectType } from '~shared/helpers/map-format-to-type.ts';
 import { tText } from '~shared/helpers/translation-functions';
-import type { PlayableDisplayIeObject } from '~shared/services/ie-objects-service/ie-objects.types.ts';
+import type {
+	IeObject,
+	PlayableDisplayIeObject,
+} from '~shared/services/ie-objects-service/ie-objects.types.ts';
 import type { Theme } from '~shared/services/themes-service/themes.types';
 import { HET_ARCHIEF } from '~shared/types';
 
@@ -22,11 +28,11 @@ export interface BlockDriekeuzespelerModalProps {
 	interest: {
 		name: string;
 	} | null;
-	/** The interest's object, already resolved by the parent along with the rest of the block. */
-	ieObject?: PlayableDisplayIeObject;
+	/** The interest's object, already resolved by the parent along with the rest of the selection. */
+	ieObject?: IeObject;
 	/** The interest's theme: the block config only stores its id, and the CTA needs name and slug. */
 	theme?: Theme;
-	/** Whether the parent's fetch for the block's objects is still in flight. */
+	/** Whether the parent's fetch for the selection's objects is still in flight. */
 	isFetching: boolean;
 	onClose: () => void;
 }
@@ -52,28 +58,53 @@ export const BlockDriekeuzespelerModal: FunctionComponent<BlockDriekeuzespelerMo
 	const locale = AdminConfigManager.getConfig().locale || Locale.Nl;
 	const themeName = locale === Locale.En ? theme?.nameEn : theme?.nameNl;
 
-	// Only a multi-page object opens in the viewer, and the viewer is handed the whole object rather
-	// than an id to go and resolve itself. Playable display data is cut to what a block renders and
-	// carries no page list, so the object comes off the general ie-objects endpoint -- and only once
-	// a newspaper is actually opened, not for every tile.
-	const opensInViewer = !!IiifViewer && !!ieObject && !isAudioVideoFormat(ieObject.dctermsFormat);
-	const { data: ieObjectsById, isFetching: isFetchingIeObject } = useGetIeObjectsByIds(
-		ieObject ? [ieObject.schemaIdentifier] : [],
-		isOpen && opensInViewer
+	const isPlayable = !!ieObject && isAudioVideoFormat(ieObject.dctermsFormat);
+
+	// A file's stored url is behind ticket auth, so the one the player gets is asked for here, and
+	// only once the tile is actually opened.
+	const playableFile = findPlayableFile(ieObject);
+	const { data: playableUrl, isFetching: isFetchingPlayableUrl } = useGetPlayableUrl(
+		playableFile?.id,
+		ieObject?.schemaIdentifier,
+		isOpen && isPlayable
 	);
-	const viewerIeObject = ieObject ? ieObjectsById?.[ieObject.schemaIdentifier] : undefined;
+
+	// Additive: without it the audio player still plays, it just draws no waveform.
+	const peakFile = findPeakFile(ieObject);
+	const { data: peakfileData } = useGetPeakFileData(
+		peakFile?.id,
+		ieObject?.schemaIdentifier,
+		isOpen && isPlayable && isAudioFormat(ieObject?.dctermsFormat)
+	);
+
+	// The player and the metadata panel are shared with the other content blocks, which describe an
+	// object the way the playable-display-data endpoint does. This is the same object in that shape.
+	const displayIeObject: PlayableDisplayIeObject | undefined = ieObject && {
+		schemaIdentifier: ieObject.schemaIdentifier,
+		name: ieObject.name || '',
+		thumbnailUrl: ieObject.thumbnailUrl || null,
+		dctermsFormat: ieObject.dctermsFormat as IeObjectType,
+		maintainerId: ieObject.maintainerId || '',
+		maintainerSlug: ieObject.maintainerSlug || '',
+		maintainerName: ieObject.maintainerName || '',
+		maintainerLogo: ieObject.maintainerLogo || undefined,
+		maintainerOverlay: !!ieObject.maintainerOverlay,
+		playableUrl,
+		mimeType: playableFile?.mimeType,
+		peakfileData,
+	};
 
 	// Only mount the player while the modal is open, so closing stops playback outright instead of
 	// leaving audio running behind the page.
 	const renderMedia = (): ReactElement | null => {
-		if (!ieObject) {
+		if (!ieObject || !displayIeObject) {
 			return null;
 		}
 
-		if (isAudioVideoFormat(ieObject.dctermsFormat)) {
+		if (isPlayable) {
 			return (
 				<IeObjectFlowPlayerWrapper
-					ieObject={ieObject}
+					ieObject={displayIeObject}
 					title={ieObject.name}
 					className="c-driekeuzespeler-modal__player"
 				/>
@@ -83,22 +114,21 @@ export const BlockDriekeuzespelerModal: FunctionComponent<BlockDriekeuzespelerMo
 		// A newspaper opens in the IIIF viewer, as the FA asks. The host still resolves a
 		// ticket-service token per page, which is why the viewer itself is injected rather than
 		// living here.
-		if (IiifViewer && viewerIeObject) {
+		if (IiifViewer) {
 			return (
 				<div className="c-driekeuzespeler-modal__iiif-viewer">
-					<IiifViewer ieObject={viewerIeObject} title={ieObject.name} />
+					<IiifViewer ieObject={ieObject} title={ieObject.name} />
 				</div>
 			);
 		}
 
-		// No viewer configured, so fall back to the flat IIIF detail image the timeline and carousel
-		// blocks show.
-		if (ieObject.newspaperImage) {
+		// No viewer configured, so the thumbnail is all there is to show.
+		if (ieObject.thumbnailUrl) {
 			return (
 				<img
 					className="c-driekeuzespeler-modal__newspaper"
-					src={ieObject.newspaperImage}
-					alt={ieObject.name}
+					src={ieObject.thumbnailUrl}
+					alt={ieObject.name || ''}
 				/>
 			);
 		}
@@ -131,7 +161,7 @@ export const BlockDriekeuzespelerModal: FunctionComponent<BlockDriekeuzespelerMo
 		>
 			<ModalBody>
 				<div className="c-driekeuzespeler-modal__media">
-					{isFetching || isFetchingIeObject ? (
+					{isFetching || isFetchingPlayableUrl ? (
 						// The FA asks for dynamic content a screen reader picks up, so the wait is announced
 						// instead of only drawn. `output` carries the status role on its own.
 						<output className="c-driekeuzespeler-modal__loading" aria-live="polite">
@@ -146,9 +176,9 @@ export const BlockDriekeuzespelerModal: FunctionComponent<BlockDriekeuzespelerMo
 					)}
 				</div>
 
-				{!!ieObject && (
+				{!!displayIeObject && (
 					<IeObjectMetadata
-						ieObject={ieObject}
+						ieObject={displayIeObject}
 						fallbackTitle={interest?.name || ''}
 						className="c-driekeuzespeler-modal__metadata"
 						secondaryCta={

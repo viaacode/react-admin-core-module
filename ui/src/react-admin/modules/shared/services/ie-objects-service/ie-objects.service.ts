@@ -1,6 +1,6 @@
 import { stringifyUrl } from 'query-string';
 import { CustomError } from '~shared/helpers/custom-error';
-import { fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
+import { fetchWithLogout, fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
 import { getProxyUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config';
 import type {
 	IeObject,
@@ -22,12 +22,39 @@ export class IeObjectsService {
 	public static async getIeObjectsByIds(schemaIdentifiers: string[]): Promise<IeObject[]> {
 		const url = stringifyUrl({
 			url: IeObjectsService.getBaseUrl(),
-			query: { schemaIdentifiers },
+			// Without this the thumbnail comes back as a path the browser cannot load.
+			query: { schemaIdentifiers, resolveThumbnailUrl: 'true' },
 		});
 		try {
 			return (await fetchWithLogoutJson<IeObject[]>(url)) || [];
 		} catch (err) {
 			throw new CustomError('Failed to fetch ie-objects by id', err, { schemaIdentifiers });
+		}
+	}
+
+	/**
+	 * Turns one of an object's files into a url that can actually be played or read.
+	 *
+	 * The media server sits behind Authorization-header auth that only a short-lived, per-visitor
+	 * ticket satisfies, so a file's stored url is useless on its own. The endpoint answers with the
+	 * ticketed url as plain text, not as JSON.
+	 */
+	public static async getPlayableUrl(
+		fileId: string,
+		schemaIdentifier: string
+	): Promise<string | null> {
+		const url = stringifyUrl({
+			url: `${IeObjectsService.getBaseUrl()}/player-ticket`,
+			query: { fileId, schemaIdentifier },
+		});
+		try {
+			const response = await fetchWithLogout(url);
+			return response.ok ? await response.text() : null;
+		} catch (err) {
+			throw new CustomError('Failed to fetch a playable url for an ie-object file', err, {
+				fileId,
+				schemaIdentifier,
+			});
 		}
 	}
 

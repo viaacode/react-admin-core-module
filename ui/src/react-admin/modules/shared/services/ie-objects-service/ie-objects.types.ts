@@ -4,24 +4,33 @@ import type { IeObjectType } from '~shared/helpers/map-format-to-type.ts';
  * An ie-object as `GET /ie-objects?schemaIdentifiers=...` returns it. Only the fields a caller
  * needs are declared, the way BlockObjectsGrid declares its own subset of the same response.
  *
- * `pages` is what a multi-page object (a newspaper) is viewed through. The urls are raw: a ticket
- * still has to be requested per url before use, which is why the viewer that renders them lives in
- * the host app. https://meemoo.atlassian.net/browse/ARC-3813
+ * Everything playable or viewable hangs off `pages`: a newspaper's page images, and an audio or
+ * video object's media file, all live in the same representations. The urls there are raw -- a
+ * ticket has to be requested per file before it can be used, which is what
+ * `IeObjectsService.getPlayableUrl` does. https://meemoo.atlassian.net/browse/ARC-3813
  */
 export interface IeObject {
 	schemaIdentifier: string;
 	name?: string;
+	dctermsFormat?: IeObjectType;
+	thumbnailUrl?: string;
+	maintainerId?: string;
+	maintainerName?: string;
+	maintainerSlug?: string;
+	maintainerLogo?: string | null;
+	maintainerOverlay?: boolean | null;
 	pages?: IeObjectPage[];
 }
 
+export interface IeObjectFile {
+	id?: string;
+	mimeType?: string;
+	storedAt?: string;
+	thumbnailUrl?: string;
+}
+
 export interface IeObjectPage {
-	representations?: {
-		files?: {
-			mimeType?: string;
-			storedAt?: string;
-			thumbnailUrl?: string;
-		}[];
-	}[];
+	representations?: { files?: IeObjectFile[] }[];
 }
 
 export interface PlayableDisplayIeObject {
