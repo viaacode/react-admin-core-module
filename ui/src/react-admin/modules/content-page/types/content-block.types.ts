@@ -217,8 +217,6 @@ export enum ContentBlockType {
 	HetArchiefVideo = 'HETARCHIEF_VIDEO',
 	ImageCarousel = 'IMAGE_CAROUSEL',
 	TitleWithParallax = 'TITLE_WITH_PARALLAX',
-	// The db lookup value predates this work and reads THREE_CHOICES_PLAYER (migration
-	// 1784294418766). https://meemoo.atlassian.net/browse/ARC-3813
 	ThreeChoicesPlayer = 'THREE_CHOICES_PLAYER',
 }
 
@@ -749,8 +747,7 @@ export interface DriekeuzespelerTileColors {
  */
 export interface DriekeuzespelerBlockComponentState {
 	title: string;
-	/** Exactly three entries, one per tile position. */
-	tileColors: DriekeuzespelerTileColors[];
+	tileColors: [DriekeuzespelerTileColors, DriekeuzespelerTileColors, DriekeuzespelerTileColors];
 	/** Label of the CTA that reshuffles the three tiles. Its icon is fixed. */
 	shuffleButtonLabel: string;
 	/** Between 3 and 200 entries. */

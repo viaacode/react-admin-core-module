@@ -20,14 +20,13 @@ import {
 	type DriekeuzespelerInterestState,
 	type DriekeuzespelerTileColors,
 } from '~modules/content-page/types/content-block.types';
-import { IeObjectType } from '~shared/helpers/map-format-to-type.ts';
 import { tText } from '~shared/helpers/translation-functions';
 import { HET_ARCHIEF } from '~shared/types';
 
 /**
  * The block always renders three tiles, so the color list is fixed at three entries and the
  * interest list needs at least three to fill them.
- * https://meemoo.atlassian.net/wiki/spaces/HA2/pages/6218383419
+ * https://meemoo.atlassian.net/browse/ARC-3813
  */
 export const DRIEKEUZESPELER_TILE_COUNT = 3;
 export const DRIEKEUZESPELER_MIN_INTERESTS = 3;
@@ -46,7 +45,6 @@ const INITIAL_DRIEKEUZESPELER_INTEREST_STATE = (): DriekeuzespelerInterestState 
 	theme: undefined,
 });
 
-// The key order is the order the editor renders the fields in, and it follows the FA.
 export const INITIAL_DRIEKEUZESPELER_COMPONENTS_STATE = () => ({
 	title: '',
 	tileColors: Array.from({ length: DRIEKEUZESPELER_TILE_COUNT }, () => INITIAL_TILE_COLORS_STATE()),
@@ -59,9 +57,6 @@ export const INITIAL_DRIEKEUZESPELER_COMPONENTS_STATE = () => ({
 
 export const INITIAL_DRIEKEUZESPELER_BLOCK_STATE = (): DefaultContentBlockState => ({
 	...BLOCK_STATE_DEFAULTS(),
-	// The design is a full-bleed band: the background spans the viewport and the tiles span 1222 of
-	// the 1440 frame. Inside the default 940px content column everything renders at ~77% of the
-	// design size. https://meemoo.atlassian.net/browse/ARC-3813
 	fullWidth: true,
 });
 
@@ -90,19 +85,7 @@ export const DRIEKEUZESPELER_CONFIG = (position = 0): ContentBlockConfig => ({
 					[HET_ARCHIEF]
 				)
 			),
-			// A tile's colours cannot sit next to its label: the colours belong to the tile position,
-			// while the label travels with whichever interest a shuffle puts there. That is why there are
-			// three colour entries and three to two hundred interests.
 			tileColors: {
-				// FieldGenerator renders this label with the entry number after it, so it has to name the
-				// tile and not the interest: "op tegel 1" cannot be read as "interesse 1". The colour
-				// belongs to the position, and a shuffle decides which interest lands there.
-				//
-				// Both colours of a tile sit in one group, so the admin fills in a tile completely before
-				// moving to the next. The FA lists them as two bullets, but that list is headed
-				// "mogelijkheden" and describes the two properties -- it does not prescribe the grouping
-				// in contentbeheer. What the FA does state is kept: three colours for tegel 1, 2 and 3,
-				// both required, defaults "geen" and "zwart".
 				label: tText(
 					'modules/content-page/components/blocks/block-driekeuzespeler/block-driekeuzespeler___kleuren-van-de-interesse-op-tegel',
 					undefined,
@@ -171,12 +154,7 @@ export const DRIEKEUZESPELER_CONFIG = (position = 0): ContentBlockConfig => ({
 							[HET_ARCHIEF]
 						)
 					),
-					// The FA asks for "Pid of fragmentId". That is the value, and the shared object picker
-					// stores exactly it while letting the admin search by title instead of typing a pid.
-					// Every other block that points at an ie-object uses the same field under the same
-					// `mediaItem` key, which is what the proxy reads.
-					// No format restriction: the FA lets the tile point at anything with a pid or fragmentId.
-					mediaItem: IE_OBJECT_FIELD(Object.values(IeObjectType)),
+					mediaItem: IE_OBJECT_FIELD(),
 					theme: {
 						label: tText(
 							'modules/content-page/components/blocks/block-driekeuzespeler/block-driekeuzespeler___gerelateerd-thema',
