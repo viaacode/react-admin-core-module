@@ -45,13 +45,9 @@ const resolvePlayableData = async (ieObject: IeObject): Promise<PlayableData> =>
 /**
  * Tickets the media of every audio or video object handed in, keyed by pid.
  *
- * Resolved with the selection rather than when a tile is opened: the modal should play what is
- * already there instead of going to the network at the moment the visitor clicks. A ticket is
- * short-lived and access-checked at request time, so it cannot travel with the object itself and
- * has to be asked for separately -- but it can be asked for early.
- *
- * Objects that are not audio or video (a newspaper) are skipped: they have nothing to ticket here,
- * and the viewer resolves its own per-page tokens.
+ * Resolved with the selection rather than on open, so the modal plays what is already there. A
+ * ticket is short-lived and access-checked at request time, so it cannot travel with the object --
+ * but it can be asked for early. Newspapers are skipped; the viewer resolves its own page tokens.
  */
 export const useGetPlayableDataForIeObjects = (ieObjects: (IeObject | undefined)[]) => {
 	const playableObjects = ieObjects.filter(

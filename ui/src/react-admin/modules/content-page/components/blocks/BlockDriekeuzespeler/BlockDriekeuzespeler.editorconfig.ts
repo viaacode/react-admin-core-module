@@ -24,15 +24,13 @@ import { tText } from '~shared/helpers/translation-functions';
 import { HET_ARCHIEF } from '~shared/types';
 
 /**
- * The block always renders three tiles, so the color list is fixed at three entries and the
+ * The block always renders three tiles, so the colour list is fixed at three entries and the
  * interest list needs at least three to fill them.
- * https://meemoo.atlassian.net/browse/ARC-3813
  */
 export const DRIEKEUZESPELER_TILE_COUNT = 3;
 export const DRIEKEUZESPELER_MIN_INTERESTS = 3;
 export const DRIEKEUZESPELER_MAX_INTERESTS = 200;
 
-// "geen" and "zwart" are the defaults the FA asks for.
 const INITIAL_TILE_COLORS_STATE = (): DriekeuzespelerTileColors => ({
 	backgroundColor: Color.Transparent,
 	textColor: Color.Black,
@@ -40,7 +38,6 @@ const INITIAL_TILE_COLORS_STATE = (): DriekeuzespelerTileColors => ({
 
 const INITIAL_DRIEKEUZESPELER_INTEREST_STATE = (): DriekeuzespelerInterestState => ({
 	name: '',
-	// The object and theme pickers fill these in; an empty entry has nothing selected yet.
 	mediaItem: undefined,
 	theme: undefined,
 });

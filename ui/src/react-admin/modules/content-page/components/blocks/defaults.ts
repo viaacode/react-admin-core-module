@@ -246,13 +246,11 @@ export const COPYRIGHT_STATE = (): CopyrightComponentState => ({
 });
 
 /**
- * The object picker every block uses to point at one ie-object: it searches by title and stores the
- * pid, so nobody has to type one by hand.
+ * The object picker every block uses to point at one ie-object: searches by title, stores the pid.
  *
- * The state key is `mediaItem` wherever this is used, because `generateFieldAttributes` reads
- * `state.item || state.mediaItem` to tell a video-still picker which object to fetch stills for.
- * A block without a still picker keeps the name anyway, so the proxy can read every block the same
- * way. https://meemoo.atlassian.net/browse/ARC-3813
+ * The state key must be `mediaItem`: `generateFieldAttributes` reads `state.item || state.mediaItem`
+ * to tell a video-still picker which object to fetch stills for. Blocks without a still picker keep
+ * the name too, so the proxy reads every block the same way.
  */
 export const IE_OBJECT_FIELD = ({
 	allowedObjectTypes = Object.values(IeObjectType),
@@ -261,13 +259,10 @@ export const IE_OBJECT_FIELD = ({
 	fieldsToResetOnChange,
 	isRequired = true,
 }: {
-	/** Formats the picker offers. Every format by default, which is no restriction at all. */
 	allowedObjectTypes?: IeObjectType[];
-	/** Overrides the generic "Object" label where a block names the field its own way. */
 	label?: string;
 	isVisible?: IsVisibleFunc;
 	fieldsToResetOnChange?: string[];
-	/** False where a block may hold the field empty, e.g. an optional repeated entry. */
 	isRequired?: boolean;
 } = {}): ContentBlockField => ({
 	label:

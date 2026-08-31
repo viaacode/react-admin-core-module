@@ -709,46 +709,24 @@ export interface TitleWithParallaxBlockComponentState {
 	image?: string;
 }
 
-/**
- * One "interesse" of the Driekeuzespeler: the label the visitor sees on a tile, the object that
- * opens when the tile is clicked, and the theme its secondary CTA searches for.
- *
- * https://meemoo.atlassian.net/wiki/spaces/HA2/pages/6218383419
- */
+/** One "interesse" of the Driekeuzespeler: a tile label, the object it opens, and its theme. */
 export interface DriekeuzespelerInterestState {
-	/** The label shown in the pill on the tile. */
 	name: string;
-	/**
-	 * The ie-object that plays in the modal, as the shared object picker stores it. `value` holds the
-	 * pid the FA asks for. Named `mediaItem` like every other block that points at an object, so the
-	 * proxy can read them all the same way.
-	 */
+	/** Named `mediaItem` like every other block pointing at an object, so the proxy reads them alike. */
 	mediaItem?: PickerItem;
-	/** The single theme this interest belongs to, as the shared content picker stores it. */
 	theme?: PickerItem;
 }
 
-/** The two colours of one tile position, in one fixed-length repeated field group. */
 export interface DriekeuzespelerTileColors {
 	backgroundColor: Color;
 	textColor: Color;
 }
 
-/**
- * The Driekeuzespeler picks three random interests out of `interests` and renders one tile each.
- *
- * The tile colors are block-level and positional: entry 0 styles the leftmost tile, whichever
- * interest randomization put there. They deliberately do not live on the interest itself, so a
- * shuffle keeps the block's color rhythm intact -- which is also why a tile's colour cannot be
- * configured next to its label: the label travels with the interest.
- *
- * The field order here follows the FA: title, the three background colors, the three text colors,
- * the shuffle label, then the interests.
- */
 export interface DriekeuzespelerBlockComponentState {
 	title: string;
+	/** Positional: entry 0 styles the leftmost tile, whichever interest a shuffle puts there. */
 	tileColors: [DriekeuzespelerTileColors, DriekeuzespelerTileColors, DriekeuzespelerTileColors];
-	/** Label of the CTA that reshuffles the three tiles. Its icon is fixed. */
+	/** The CTA's icon is fixed; only its label is configurable. */
 	shuffleButtonLabel: string;
 	/** Between 3 and 200 entries. */
 	interests: DriekeuzespelerInterestState[];

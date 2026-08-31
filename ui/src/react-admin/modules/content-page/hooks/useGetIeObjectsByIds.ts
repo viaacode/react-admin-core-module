@@ -4,10 +4,8 @@ import type { IeObject } from '~shared/services/ie-objects-service/ie-objects.ty
 import { QUERY_KEYS } from '~shared/types';
 
 /**
- * Resolves whole ie-objects by pid through the general ie-objects endpoint, keyed by pid.
- *
- * Playable display data is cut to what a block renders, so a caller that needs the object itself --
- * the IIIF viewer needs its page list -- asks for it here instead.
+ * Whole ie-objects by pid. Playable display data is cut to what a block renders, so a caller needing
+ * the object itself -- the IIIF viewer needs its page list -- asks here instead.
  */
 export const useGetIeObjectsByIds = (schemaIdentifiers: string[], enabled = true) => {
 	const identifiers = schemaIdentifiers.filter(Boolean);
@@ -16,8 +14,7 @@ export const useGetIeObjectsByIds = (schemaIdentifiers: string[], enabled = true
 		queryKey: [QUERY_KEYS.GET_IE_OBJECTS_BY_IDS, [...identifiers].sort().join(',')],
 		queryFn: async () =>
 			Object.fromEntries(
-				// The endpoint answers with one entry per requested pid, and a pid it could not resolve
-				// comes back as null, so the entries cannot be keyed blindly.
+				// A pid the endpoint could not resolve comes back as null, so entries cannot be keyed blindly.
 				(await IeObjectsService.getIeObjectsByIds(identifiers))
 					.filter((ieObject): ieObject is IeObject => !!ieObject?.schemaIdentifier)
 					.map((ieObject) => [ieObject.schemaIdentifier, ieObject])

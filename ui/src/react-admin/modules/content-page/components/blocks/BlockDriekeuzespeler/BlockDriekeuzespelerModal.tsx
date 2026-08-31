@@ -22,26 +22,21 @@ import { HET_ARCHIEF } from '~shared/types';
 import './BlockDriekeuzespelerModal.scss';
 
 export interface BlockDriekeuzespelerModalProps {
-	/** The interest whose tile was opened, or null when the modal is closed. */
 	interest: {
 		name: string;
 	} | null;
-	/** The interest's object, already resolved by the parent along with the rest of the selection. */
 	ieObject?: IeObject;
-	/** The object's ticketed media, also resolved by the parent. Absent for a newspaper. */
+	/** Absent for a newspaper, which has nothing to ticket. */
 	playableData?: PlayableData;
-	/** The interest's theme: the block config only stores its id, and the CTA needs name and slug. */
+	/** Resolved by the parent: the block config stores only an id, and the CTA needs name and slug. */
 	theme?: Theme;
-	/** Whether the parent's fetch for the selection's objects is still in flight. */
 	isFetching: boolean;
 	onClose: () => void;
 }
 
 /**
- * Plays the object behind one interest, on top of the page. The visitor is never navigated
- * anywhere, and closing returns to the same three tiles.
- *
- * https://meemoo.atlassian.net/browse/ARC-3813
+ * Plays the object behind one interest on top of the page: the visitor is never navigated anywhere,
+ * and closing returns to the same three tiles.
  */
 export const BlockDriekeuzespelerModal: FunctionComponent<BlockDriekeuzespelerModalProps> = ({
 	interest,
@@ -61,8 +56,7 @@ export const BlockDriekeuzespelerModal: FunctionComponent<BlockDriekeuzespelerMo
 
 	const isPlayable = !!ieObject && isAudioVideoFormat(ieObject.dctermsFormat);
 
-	// The player and the metadata panel are shared with the other content blocks, which describe an
-	// object the way the playable-display-data endpoint does. This is the same object in that shape.
+	// The shared player and metadata panel describe an object the way playable-display-data does.
 	const displayIeObject: PlayableDisplayIeObject | undefined = ieObject && {
 		schemaIdentifier: ieObject.schemaIdentifier,
 		name: ieObject.name || '',
@@ -95,9 +89,8 @@ export const BlockDriekeuzespelerModal: FunctionComponent<BlockDriekeuzespelerMo
 			);
 		}
 
-		// A newspaper opens in the IIIF viewer, as the FA asks. The host still resolves a
-		// ticket-service token per page, which is why the viewer itself is injected rather than
-		// living here.
+		// The viewer is injected rather than living here because the host resolves a ticket-service
+		// token per page.
 		if (IiifViewer) {
 			return (
 				<div className="c-driekeuzespeler-modal__iiif-viewer">
@@ -106,7 +99,6 @@ export const BlockDriekeuzespelerModal: FunctionComponent<BlockDriekeuzespelerMo
 			);
 		}
 
-		// No viewer configured, so the thumbnail is all there is to show.
 		if (ieObject.thumbnailUrl) {
 			return (
 				<img
@@ -124,14 +116,12 @@ export const BlockDriekeuzespelerModal: FunctionComponent<BlockDriekeuzespelerMo
 		<Modal
 			isOpen={isOpen}
 			size="extra-large"
-			// A tall object (a portrait newspaper, or a player reporting a big intrinsic size) would
-			// otherwise push the metadata card and its theme CTA off a phone screen with no way back.
+			// A tall object would otherwise push the metadata card off a phone screen with no way back.
 			scrollable
 			onClose={onClose}
 			className="c-driekeuzespeler-modal"
-			// The FA's video-first look: no visible title bar, just the close button floating over the
-			// media. The title itself stays -- visually hidden in the stylesheet -- so the dialog still
-			// has an accessible name.
+			// No visible title bar. The title stays, visually hidden, so the dialog keeps its
+			// accessible name.
 			borderless
 			title={
 				interest
@@ -146,8 +136,7 @@ export const BlockDriekeuzespelerModal: FunctionComponent<BlockDriekeuzespelerMo
 			<ModalBody>
 				<div className="c-driekeuzespeler-modal__media">
 					{isFetching ? (
-						// The FA asks for dynamic content a screen reader picks up, so the wait is announced
-						// instead of only drawn. `output` carries the status role on its own.
+						// `output` carries the status role, so the wait is announced and not only drawn.
 						<output className="c-driekeuzespeler-modal__loading" aria-live="polite">
 							{tText(
 								'modules/content-page/components/blocks/block-driekeuzespeler/block-driekeuzespeler___bezig-met-laden',

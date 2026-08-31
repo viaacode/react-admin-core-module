@@ -14,10 +14,8 @@ export class IeObjectsService {
 	}
 
 	/**
-	 * Fetches whole ie-objects by their pid, in one call, through the general ie-objects endpoint.
-	 *
-	 * Playable display data is cut to what a content block renders and cannot carry a newspaper's
-	 * page list, so a caller that needs the object itself -- the IIIF viewer does -- asks here.
+	 * Playable display data cannot carry a newspaper's page list, so a caller needing the object
+	 * itself -- the IIIF viewer does -- asks here.
 	 */
 	public static async getIeObjectsByIds(schemaIdentifiers: string[]): Promise<IeObject[]> {
 		const url = stringifyUrl({
@@ -33,11 +31,8 @@ export class IeObjectsService {
 	}
 
 	/**
-	 * Turns one of an object's files into a url that can actually be played or read.
-	 *
-	 * The media server sits behind Authorization-header auth that only a short-lived, per-visitor
-	 * ticket satisfies, so a file's stored url is useless on its own. The endpoint answers with the
-	 * ticketed url as plain text, not as JSON.
+	 * A file's stored url is useless on its own: the media server wants a short-lived, per-visitor
+	 * ticket in the Authorization header. The endpoint answers as plain text, not JSON.
 	 */
 	public static async getPlayableUrl(
 		fileId: string,

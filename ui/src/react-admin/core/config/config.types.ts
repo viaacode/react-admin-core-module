@@ -137,12 +137,7 @@ export interface AdminConfig {
 		};
 		defaultAudioStill: string;
 		flowplayer?: FC<FlowPlayerWrapperProps>; // User by avo for
-		/**
-		 * The IIIF viewer a newspaper opens in, injected by the host the way `flowplayer` is.
-		 *
-		 * A block that leaves this unset falls back to the flat IIIF detail image.
-		 * https://meemoo.atlassian.net/browse/ARC-3813
-		 */
+		/** Injected by the host like `flowplayer`. Unset falls back to the flat IIIF detail image. */
 		iiifViewer?: FC<IiifViewerConfigProps>;
 		buttonTypes: () => { label: string; value: string }[];
 		enableMultiLanguage: boolean;
@@ -217,10 +212,8 @@ export interface AdminConfig {
 }
 
 /**
- * What the injected IIIF viewer is handed: the whole ie-object, so the viewer never has to resolve
- * one itself. The page and overlay state, and a ticket-service token per page, stay the host's --
- * a ticket is short-lived and access-checked at request time, so it can never be handed over
- * already resolved. https://meemoo.atlassian.net/browse/ARC-3813
+ * Page state and the per-page ticket stay with the host: a ticket is short-lived and access-checked
+ * at request time, so it cannot be handed over already resolved.
  */
 export interface IiifViewerConfigProps {
 	ieObject: IeObject;
@@ -253,8 +246,6 @@ export enum AdminCoreIconName {
 	ChevronLeft = 'chevronLeft',
 	Clock = 'clock',
 	Collection = 'collection',
-	// The fixed icon on the driekeuzespeler's shuffle CTA, "collection-shuffle" in the design.
-	// https://meemoo.atlassian.net/browse/ARC-3813
 	CollectionShuffle = 'collectionShuffle',
 	Copy = 'copy',
 	Delete = 'delete',

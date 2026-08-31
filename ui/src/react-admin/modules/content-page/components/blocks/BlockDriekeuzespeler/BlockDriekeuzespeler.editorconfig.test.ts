@@ -54,8 +54,7 @@ describe('DRIEKEUZESPELER_CONFIG', () => {
 	});
 
 	it('renders the fields in the order the FA lists them', () => {
-		// Object.keys order is the render order (ContentBlockFormGroup), so this is a real UI contract:
-		// title, the colours of the three tiles, the shuffle label, the interests.
+		// Object.keys order is the render order in ContentBlockFormGroup, so it is a real UI contract.
 		expect(Object.keys(config.components.fields)).toEqual([
 			'title',
 			'tileColors',
@@ -84,8 +83,7 @@ describe('DRIEKEUZESPELER_CONFIG', () => {
 	});
 
 	it('holds both colours of a tile in the same entry', () => {
-		// One group per tile, so the admin fills in a tile completely instead of jumping between two
-		// lists. https://meemoo.atlassian.net/browse/ARC-3813
+		// One group per tile, so the admin fills a tile in completely instead of jumping between lists.
 		expect(Object.keys(group('tileColors').fields ?? {})).toEqual(['backgroundColor', 'textColor']);
 	});
 
@@ -109,9 +107,7 @@ describe('DRIEKEUZESPELER_CONFIG', () => {
 	it('requires a name and an object on every interest', () => {
 		const interestFields = group('interests').fields;
 
-		// The object is picked, not typed, so its filled value is a picker item rather than a string.
-		// The theme is a plain ContentPicker field, same as every other block that picks one, so
-		// (like theirs) it carries no validator of its own here -- see the dedicated test below.
+		// A plain ContentPicker field like every other block's, so it carries no validator of its own.
 		const filledValues: Record<string, unknown> = {
 			name: 'Wielrennen',
 			mediaItem: { type: 'IE_OBJECT', value: '086348mc8s' },
@@ -126,8 +122,7 @@ describe('DRIEKEUZESPELER_CONFIG', () => {
 	});
 
 	it('picks the object with the shared object picker, so nobody types a pid by hand', () => {
-		// Every block that points at an ie-object uses this field under the `mediaItem` key, which is
-		// also the key the proxy reads. https://meemoo.atlassian.net/browse/ARC-3813
+		// The `mediaItem` key is shared by every block pointing at an ie-object, and read by the proxy.
 		const mediaItem = group('interests').fields.mediaItem;
 
 		expect(mediaItem.editorType).toBe(ContentBlockEditor.ContentPicker);
@@ -138,8 +133,7 @@ describe('DRIEKEUZESPELER_CONFIG', () => {
 	});
 
 	it('picks the theme with the shared content picker, so an interest links to exactly one theme', () => {
-		// Same picker BlockThemeReels and BlockOverviewThemes use for a theme, restricted to themes
-		// and with no way to switch to another content type or target.
+		// The same picker BlockThemeReels and BlockOverviewThemes use, locked to themes.
 		const theme = group('interests').fields.theme;
 
 		expect(theme.editorType).toBe(ContentBlockEditor.ContentPicker);

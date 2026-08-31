@@ -68,17 +68,14 @@ describe('pickNextSelection', () => {
 	});
 
 	it('keeps working when the list holds exactly as many interests as there are tiles', () => {
-		// The three interests cannot change here, only the tile each one lands on, so it must still
-		// return a full selection rather than retry forever.
+		// Only the tile each interest lands on can change, so it must still return a full selection.
 		const next = pickNextSelection(3, 3, [0, 1, 2]);
 
 		expect([...next].sort()).toEqual([0, 1, 2]);
 	});
 
 	it('reorders the tiles when the list holds exactly as many interests as there are tiles', () => {
-		// A source that draws the previous order first and a different one after it. The retry has to
-		// take the second draw: a tile's colours and thumbnail belong to its position, so a reorder is
-		// a visibly different block.
+		// Draws the previous order first, then a different one: the retry has to take the second draw.
 		expect(pickNextSelection(3, 3, [0, 1, 2], [], seededRandom([0, 0, 0, 0.99, 0, 0]))).toEqual([
 			2, 1, 0,
 		]);
@@ -101,8 +98,7 @@ describe('pickNextSelection', () => {
 	});
 
 	it('gives up after the retry cap instead of looping forever', () => {
-		// A random source that always reproduces the previous set. Every retry draws the same three
-		// indices, so only the cap can end this.
+		// Always reproduces the previous set, so only the retry cap can end this.
 		const next = pickNextSelection(4, 3, [0, 1, 2], [], seededRandom([0]));
 
 		expect(next).toEqual([0, 1, 2]);
@@ -119,8 +115,7 @@ describe('pickNextSelection', () => {
 	});
 
 	it('falls back to every interest once too few are left outside recentlyShown', () => {
-		// 5 of 6 interests are already "recently shown", leaving only one unseen -- not enough to
-		// fill three tiles, so the exclusion has to give way rather than come up short.
+		// Only one unseen interest is left, so the exclusion has to give way rather than come up short.
 		const next = pickNextSelection(6, 3, [0, 1, 2], [1, 2, 3, 4, 5]);
 
 		expect(next).toHaveLength(3);
