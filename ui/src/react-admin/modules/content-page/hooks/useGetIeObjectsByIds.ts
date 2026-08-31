@@ -16,10 +16,11 @@ export const useGetIeObjectsByIds = (schemaIdentifiers: string[], enabled = true
 		queryKey: [QUERY_KEYS.GET_IE_OBJECTS_BY_IDS, [...identifiers].sort().join(',')],
 		queryFn: async () =>
 			Object.fromEntries(
-				(await IeObjectsService.getIeObjectsByIds(identifiers)).map((ieObject) => [
-					ieObject.schemaIdentifier,
-					ieObject,
-				])
+				// The endpoint answers with one entry per requested pid, and a pid it could not resolve
+				// comes back as null, so the entries cannot be keyed blindly.
+				(await IeObjectsService.getIeObjectsByIds(identifiers))
+					.filter((ieObject): ieObject is IeObject => !!ieObject?.schemaIdentifier)
+					.map((ieObject) => [ieObject.schemaIdentifier, ieObject])
 			),
 		enabled: enabled && identifiers.length > 0,
 		staleTime: 60 * 60 * 1000, // 1 hour, same as the playable display data
