@@ -74,17 +74,6 @@ export const BlockHeroCarouselCarousel: FunctionComponent<BlockHeroCarouselCarou
 	// What a slide shows before it has any object content of its own. Both leaf slides get to
 	// assume a resolved object, so neither has to carry these states.
 	const renderSlideContent = (item: HeroCarouselSlideItem, isSettledActive: boolean) => {
-		// The object behind this slide couldn't be resolved -- show that, rather than an empty
-		// slide. Only the active slide has room for the message under the icon.
-		if (item?.hasFailed) {
-			return (
-				<IeObjectLoadError
-					className="c-block-hero-carousel__carousel-slide-error"
-					isTextVisible={isSettledActive}
-				/>
-			);
-		}
-
 		// Nothing to show yet: either the slide's object is still being resolved, or nothing is
 		// known about it at all -- not even which object it points at, as with a freshly added
 		// editor row that hasn't been filled in. The slide's own box is sized and coloured from
