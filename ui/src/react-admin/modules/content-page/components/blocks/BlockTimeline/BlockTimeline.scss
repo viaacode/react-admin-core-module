@@ -308,7 +308,7 @@ $object-meta-gap: 4rem;
 
 	.c-ie-object-metadata {
 		height: $object-meta-height-desktop;
-		margin-left: -$line-content-gap;
+		margin-left: calc(#{-$line-content-gap} + 1px);
 		margin-top: $object-meta-gap;
 		padding: $object-meta-vertical-padding (variables.$g-spacer-unit * 4);
 
