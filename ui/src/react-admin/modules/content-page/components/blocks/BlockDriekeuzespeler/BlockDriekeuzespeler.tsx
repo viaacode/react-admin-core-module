@@ -163,9 +163,11 @@ export const BlockDriekeuzespeler: FunctionComponent<BlockDriekeuzespelerProps> 
 			{interests.length > DRIEKEUZESPELER_TILE_COUNT && (
 				<Button
 					className="c-driekeuzespeler__shuffle"
-					variants={['block', 'black']}
-					// The FA fixes this icon: only the label is configurable.
-					icon={<Icon name={AdminCoreIconName.CollectionShuffle} />}
+					// No `block` variant: that one stretches the button to the full width of the block.
+					variants={['black']}
+					// iconStart, not icon: `icon` is the library's icon-only button, which drops the label.
+					// The FA fixes this icon anyway -- only the label is configurable.
+					iconStart={<Icon name={AdminCoreIconName.CollectionShuffle} />}
 					label={shuffleButtonLabel}
 					onClick={shuffle}
 				/>

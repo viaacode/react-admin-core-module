@@ -374,9 +374,20 @@ $shape-color: var(--bg-text-primary, #{colors.$white});
 	// The button itself is the shared black pill; only its place under the tile area is set here. The
 	// shapes layer reaches below that area and is positioned, so an unpositioned button would paint
 	// underneath it.
-	&__shuffle {
+	// The CTA is as wide as its icon and label plus the button's own padding, and no wider.
+	//
+	// Written as a compound selector, and that is not decoration. Two shared rules reach this button
+	// and both beat a lone `&__shuffle` (0,1,0): `.c-content-page-preview [class*="c-button--"]` in the
+	// client sets `margin: 0.2rem` at 0,2,0, which drops the CTA onto the tiles, and `.c-button` sets
+	// `display: inline-block` at the same specificity as `&__shuffle`, so it wins or loses on load
+	// order alone. Three classes put the block's own layout above both in either app.
+	& &__shuffle.c-button {
 		position: relative;
 		z-index: 1;
+
+		// `.c-button` is inline-block, and an auto margin only centres a block level box.
+		display: flex;
+		width: fit-content;
 
 		// 48px below the tile area in both designs.
 		margin: (variables.$g-spacer-unit * 6) auto 0;
