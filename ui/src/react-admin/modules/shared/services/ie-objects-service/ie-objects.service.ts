@@ -1,7 +1,9 @@
+import { stringifyUrl } from 'query-string';
 import { CustomError } from '~shared/helpers/custom-error';
 import { fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
 import { getProxyUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config';
 import type {
+	IeObject,
 	PlayableDisplayIeObject,
 	UnsavedPlayableDisplayDataObject,
 } from '~shared/services/ie-objects-service/ie-objects.types.ts';
@@ -9,6 +11,24 @@ import type {
 export class IeObjectsService {
 	private static getBaseUrl(): string {
 		return `${getProxyUrl()}/ie-objects`;
+	}
+
+	/**
+	 * Fetches whole ie-objects by their pid, in one call, through the general ie-objects endpoint.
+	 *
+	 * Playable display data is cut to what a content block renders and cannot carry a newspaper's
+	 * page list, so a caller that needs the object itself -- the IIIF viewer does -- asks here.
+	 */
+	public static async getIeObjectsByIds(schemaIdentifiers: string[]): Promise<IeObject[]> {
+		const url = stringifyUrl({
+			url: IeObjectsService.getBaseUrl(),
+			query: { schemaIdentifiers },
+		});
+		try {
+			return (await fetchWithLogoutJson<IeObject[]>(url)) || [];
+		} catch (err) {
+			throw new CustomError('Failed to fetch ie-objects by id', err, { schemaIdentifiers });
+		}
 	}
 
 	/**
@@ -27,19 +47,9 @@ export class IeObjectsService {
 	 */
 	public static async getPlayableDisplayData(
 		blockId: string | undefined,
-		unsavedObjects?: UnsavedPlayableDisplayDataObject[],
-		/**
-		 * Resolve only these objects out of the block instead of every object it references. The
-		 * proxy still checks that the block references each of them, so this narrows the response
-		 * without widening what a visitor can reach, and it comes back in this order. Used by the
-		 * driekeuzespeler, which can hold 200 interests and shows three at a time.
-		 */
-		schemaIdentifiers?: string[]
+		unsavedObjects?: UnsavedPlayableDisplayDataObject[]
 	): Promise<(PlayableDisplayIeObject | null)[]> {
-		const body = {
-			...(blockId ? { blockId } : { objects: unsavedObjects }),
-			...(schemaIdentifiers?.length ? { schemaIdentifiers } : {}),
-		};
+		const body = blockId ? { blockId } : { objects: unsavedObjects };
 		try {
 			return await fetchWithLogoutJson<(PlayableDisplayIeObject | null)[]>(
 				`${IeObjectsService.getBaseUrl()}/playable-display-data`,

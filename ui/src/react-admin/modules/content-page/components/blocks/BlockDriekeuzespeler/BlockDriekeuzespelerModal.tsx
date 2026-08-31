@@ -1,10 +1,12 @@
 import { Modal, ModalBody } from '@viaa/avo2-components';
 import { AvoCoreContentPickerType } from '@viaa/avo2-types';
+import { stringifyUrl } from 'query-string';
 import type { FunctionComponent, ReactElement } from 'react';
 import React from 'react';
 import { AdminConfigManager } from '~core/config/config.class';
 import { IeObjectFlowPlayerWrapper } from '~modules/content-page/components/IeObjectFlowPlayerWrapper/IeObjectFlowPlayerWrapper.tsx';
 import { IeObjectMetadata } from '~modules/content-page/components/IeObjectMetadata/IeObjectMetadata.tsx';
+import { useGetIeObjectsByIds } from '~modules/content-page/hooks/useGetIeObjectsByIds';
 import { Locale } from '~modules/translations/translations.core.types.ts';
 import { SmartLink } from '~shared/components/SmartLink/SmartLink.tsx';
 import { isAudioVideoFormat } from '~shared/helpers/is-audio-video-format.ts';
@@ -20,14 +22,11 @@ export interface BlockDriekeuzespelerModalProps {
 	interest: {
 		name: string;
 	} | null;
-	/** The interest's object, already resolved by the parent along with the rest of the selection. */
+	/** The interest's object, already resolved by the parent along with the rest of the block. */
 	ieObject?: PlayableDisplayIeObject;
-	/**
-	 * The interest's theme, resolved by the parent along with the rest of the selection -- the block
-	 * config only stores its id, and the CTA needs the name and the slug.
-	 */
+	/** The interest's theme: the block config only stores its id, and the CTA needs name and slug. */
 	theme?: Theme;
-	/** Whether the parent's proactive fetch for the current selection is still in flight. */
+	/** Whether the parent's fetch for the block's objects is still in flight. */
 	isFetching: boolean;
 	onClose: () => void;
 }
@@ -36,7 +35,7 @@ export interface BlockDriekeuzespelerModalProps {
  * Plays the object behind one interest, on top of the page. The visitor is never navigated
  * anywhere, and closing returns to the same three tiles.
  *
- * https://meemoo.atlassian.net/wiki/spaces/HA2/pages/6218383419
+ * https://meemoo.atlassian.net/browse/ARC-3813
  */
 export const BlockDriekeuzespelerModal: FunctionComponent<BlockDriekeuzespelerModalProps> = ({
 	interest,
@@ -46,12 +45,23 @@ export const BlockDriekeuzespelerModal: FunctionComponent<BlockDriekeuzespelerMo
 	onClose,
 }): ReactElement => {
 	const isOpen = !!interest;
-	// The host's IIIF viewer, if it registered one. Read per render rather than at module load, so a
-	// config set up after this module is imported is still picked up.
+	// Read per render rather than at module load, so a config set up after this module is imported
+	// is still picked up.
 	const IiifViewer = AdminConfigManager.getConfig().components.iiifViewer;
 
 	const locale = AdminConfigManager.getConfig().locale || Locale.Nl;
-	const themeName = theme ? (locale === Locale.Nl ? theme.nameNl : theme.nameEn) : '';
+	const themeName = locale === Locale.En ? theme?.nameEn : theme?.nameNl;
+
+	// Only a multi-page object opens in the viewer, and the viewer is handed the whole object rather
+	// than an id to go and resolve itself. Playable display data is cut to what a block renders and
+	// carries no page list, so the object comes off the general ie-objects endpoint -- and only once
+	// a newspaper is actually opened, not for every tile.
+	const opensInViewer = !!IiifViewer && !!ieObject && !isAudioVideoFormat(ieObject.dctermsFormat);
+	const { data: ieObjectsById, isFetching: isFetchingIeObject } = useGetIeObjectsByIds(
+		ieObject ? [ieObject.schemaIdentifier] : [],
+		isOpen && opensInViewer
+	);
+	const viewerIeObject = ieObject ? ieObjectsById?.[ieObject.schemaIdentifier] : undefined;
 
 	// Only mount the player while the modal is open, so closing stops playback outright instead of
 	// leaving audio running behind the page.
@@ -70,26 +80,19 @@ export const BlockDriekeuzespelerModal: FunctionComponent<BlockDriekeuzespelerMo
 			);
 		}
 
-		// A newspaper opens in the IIIF viewer, as the FA asks. It still needs a ticket-service token
-		// per page (short-lived and access-checked at request time, so it can't travel with the rest
-		// of this already-fetched object), so the viewer itself is injected by the host rather than
-		// living here -- but its page list came along with everything else this modal proactively
-		// fetched, so passing it through here saves the host from re-fetching the object just to
-		// rebuild a list it already had. https://meemoo.atlassian.net/browse/ARC-3813
-		if (IiifViewer) {
+		// A newspaper opens in the IIIF viewer, as the FA asks. The host still resolves a
+		// ticket-service token per page, which is why the viewer itself is injected rather than
+		// living here.
+		if (IiifViewer && viewerIeObject) {
 			return (
 				<div className="c-driekeuzespeler-modal__iiif-viewer">
-					<IiifViewer
-						schemaIdentifier={ieObject.schemaIdentifier}
-						title={ieObject.name}
-						pages={ieObject.pages}
-					/>
+					<IiifViewer ieObject={viewerIeObject} title={ieObject.name} />
 				</div>
 			);
 		}
 
 		// No viewer configured, so fall back to the flat IIIF detail image the timeline and carousel
-		// blocks show. A newspaper comes back as a self-contained data uri.
+		// blocks show.
 		if (ieObject.newspaperImage) {
 			return (
 				<img
@@ -107,13 +110,14 @@ export const BlockDriekeuzespelerModal: FunctionComponent<BlockDriekeuzespelerMo
 		<Modal
 			isOpen={isOpen}
 			size="extra-large"
-			scrollable={false}
+			// A tall object (a portrait newspaper, or a player reporting a big intrinsic size) would
+			// otherwise push the metadata card and its theme CTA off a phone screen with no way back.
+			scrollable
 			onClose={onClose}
 			className="c-driekeuzespeler-modal"
 			// The FA's video-first look: no visible title bar, just the close button floating over the
-			// media, and a darker backdrop than the rest of the app's modals use. The title itself stays
-			// -- visually hidden in the stylesheet -- so the dialog still has an accessible name.
-			// https://www.figma.com/design/1yUd3vpjHXcMfI15dTeVYC/hetarchief.be-%E2%80%94-ontdekken?node-id=2354-4569
+			// media. The title itself stays -- visually hidden in the stylesheet -- so the dialog still
+			// has an accessible name.
 			borderless
 			title={
 				interest
@@ -127,10 +131,9 @@ export const BlockDriekeuzespelerModal: FunctionComponent<BlockDriekeuzespelerMo
 		>
 			<ModalBody>
 				<div className="c-driekeuzespeler-modal__media">
-					{isFetching ? (
+					{isFetching || isFetchingIeObject ? (
 						// The FA asks for dynamic content a screen reader picks up, so the wait is announced
-						// instead of only drawn. `output` carries the status role on its own, which is how
-						// BlockObjectsGrid does it too.
+						// instead of only drawn. `output` carries the status role on its own.
 						<output className="c-driekeuzespeler-modal__loading" aria-live="polite">
 							{tText(
 								'modules/content-page/components/blocks/block-driekeuzespeler/block-driekeuzespeler___bezig-met-laden',
@@ -149,16 +152,14 @@ export const BlockDriekeuzespelerModal: FunctionComponent<BlockDriekeuzespelerMo
 						fallbackTitle={interest?.name || ''}
 						className="c-driekeuzespeler-modal__metadata"
 						secondaryCta={
-							// The search page has no theme filter yet to point this at -- see
-							// https://meemoo.atlassian.net/wiki/x/dYStdQE -- so this is a placeholder link, on
-							// the URL param shape that FA describes ("Thema als URL parameter"). Swap the path
-							// below for the real search route once that filter ships; nothing else about this
-							// CTA should need to change.
-							themeName ? (
+							themeName && theme ? (
 								<SmartLink
 									action={{
 										type: AvoCoreContentPickerType.INTERNAL_LINK,
-										value: `/zoeken?thema=${theme?.slug}`,
+										value: stringifyUrl({
+											url: AdminConfigManager.getConfig().routes.SEARCH || '/zoeken',
+											query: { thema: theme.slug },
+										}),
 									}}
 									className="c-driekeuzespeler-modal__theme-cta"
 								>

@@ -1,11 +1,14 @@
+import { Button } from '@meemoo/react-components';
 import clsx from 'clsx';
 import type { CSSProperties, FunctionComponent, ReactElement } from 'react';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { AdminCoreIconName } from '~core/config';
-import type { Color } from '~modules/content-page/types/content-block.types';
+import { useGetIeObjectsPlayableDisplayData } from '~modules/content-page/hooks/useGetIeObjectsPlayableDisplayData';
+import type {
+	DriekeuzespelerInterestState,
+	DriekeuzespelerTileColors,
+} from '~modules/content-page/types/content-block.types';
 import { Icon } from '~shared/components/Icon/Icon';
-import { tText } from '~shared/helpers/translation-functions';
-import { HET_ARCHIEF } from '~shared/types';
 import type { DefaultComponentProps } from '~shared/types/components';
 import { useGetThemesByIds } from '../BlockOverviewThemes/hooks/useGetThemesByIds';
 import { DRIEKEUZESPELER_TILE_COUNT } from './BlockDriekeuzespeler.editorconfig';
@@ -15,33 +18,23 @@ import {
 	RECENTLY_SHOWN_LIMIT,
 } from './BlockDriekeuzespeler.helpers';
 import { BlockDriekeuzespelerModal } from './BlockDriekeuzespelerModal';
-import { useGetDriekeuzespelerPlayableObjects } from './hooks/useGetDriekeuzespelerPlayableObjects';
 
 import './BlockDriekeuzespeler.scss';
-
-interface DriekeuzespelerInterest {
-	name: string;
-	/** The object picker's value: `value` is the pid. Absent while the admin has picked nothing. */
-	mediaItem?: { value?: string };
-	/** The theme picker's value: `value` is the theme id. Absent while the admin has picked nothing. */
-	theme?: { value?: string };
-}
 
 export interface BlockDriekeuzespelerProps extends DefaultComponentProps {
 	/** Id of the content block, added by the content block renderer. Empty for an unsaved block. */
 	blockId?: string;
 	title: string;
-	/** Exactly three entries, one per tile position. */
-	tileColors: { backgroundColor: Color; textColor: Color }[];
+	tileColors: DriekeuzespelerTileColors[];
 	shuffleButtonLabel: string;
-	interests: DriekeuzespelerInterest[];
+	interests: DriekeuzespelerInterestState[];
 }
 
 /**
  * Shows three of the configured interests, picked at random, each as a tile with the thumbnail of
  * its object and a pill carrying the interest name. The shuffle CTA replaces all three.
  *
- * https://meemoo.atlassian.net/wiki/spaces/HA2/pages/6218383419
+ * https://meemoo.atlassian.net/browse/ARC-3813
  */
 export const BlockDriekeuzespeler: FunctionComponent<BlockDriekeuzespelerProps> = ({
 	blockId,
@@ -51,82 +44,63 @@ export const BlockDriekeuzespeler: FunctionComponent<BlockDriekeuzespelerProps> 
 	interests,
 	className,
 }): ReactElement => {
-	// Fixed at three, not derived from the colour lists: the stylesheet places the tiles by
-	// nth-child(1..3), so a fourth tile would render with no position at all. A saved block whose
-	// colour lists are the wrong length keeps three tiles and falls back per tile below.
-	const tileCount = DRIEKEUZESPELER_TILE_COUNT;
-
 	// The selection is only made after mount. Randomising during render would make the server and
 	// the client disagree and break hydration, so the first paint shows the tile skeletons instead.
 	const [selection, setSelection] = useState<number[] | null>(null);
 
 	// Interests shown over the last couple of shuffles (including the initial draw), oldest first,
 	// capped at RECENTLY_SHOWN_LIMIT. A ref rather than state: it is bookkeeping pickNextSelection
-	// reads, not something the block renders, so updating it should not itself trigger a render.
+	// reads, not something the block renders.
 	const recentlyShownRef = useRef<number[]>([]);
 
 	useEffect(() => {
-		const initial = pickRandomIndices(interests.length, tileCount);
+		const initial = pickRandomIndices(interests.length, DRIEKEUZESPELER_TILE_COUNT);
 		recentlyShownRef.current = initial.slice(-RECENTLY_SHOWN_LIMIT);
 		setSelection(initial);
-	}, [interests.length, tileCount]);
+	}, [interests.length]);
 
 	const shuffle = useCallback(() => {
 		const next = pickNextSelection(
 			interests.length,
-			tileCount,
+			DRIEKEUZESPELER_TILE_COUNT,
 			selection || [],
 			recentlyShownRef.current
 		);
 		recentlyShownRef.current = [...recentlyShownRef.current, ...next].slice(-RECENTLY_SHOWN_LIMIT);
 		setSelection(next);
-	}, [interests.length, tileCount, selection]);
+	}, [interests.length, selection]);
 
-	// The interest whose tile is open in the modal, or null when nothing is open. The selection is
-	// untouched while the modal is open, so closing returns to the same three tiles.
-	const [openedInterest, setOpenedInterest] = useState<DriekeuzespelerInterest | null>(null);
+	// Index into `interests` of the tile open in the modal, or null when nothing is open. An index
+	// rather than the interest itself, so it survives the renderer handing us a rebuilt array. The
+	// selection is untouched while the modal is open, so closing returns to the same three tiles.
+	const [openedIndex, setOpenedIndex] = useState<number | null>(null);
 
-	// Not compacted: tile colors are positional, so dropping a missing interest would shift every
-	// later tile onto the wrong colour. renderTile handles an empty slot.
-	const selectedInterests = (selection || []).map((index) => interests[index]);
-	const selectedSchemaIdentifiers = selectedInterests
-		.filter(Boolean)
-		.map((interest) => interest.mediaItem?.value || '')
-		.filter(Boolean);
-
-	// Resolved proactively for the whole selection as soon as it is picked, so opening a tile in the
-	// modal reads from data that is already there instead of triggering its own request.
-	const { data: objectsById, isFetching: isFetchingObjects } = useGetDriekeuzespelerPlayableObjects(
+	// One entry per interest, in the block's own order, so a shuffle never needs another request.
+	const { data: ieObjects, isFetching: isFetchingObjects } = useGetIeObjectsPlayableDisplayData(
 		blockId,
-		selectedSchemaIdentifiers,
 		// A block being edited has no id yet, so the objects travel with the request. The proxy
 		// honours this path for content page editors only.
 		!blockId
-			? selectedSchemaIdentifiers.map((schemaIdentifier) => ({ schemaIdentifier }))
+			? interests.map((interest) => ({ schemaIdentifier: interest.mediaItem?.value || '' }))
 			: undefined
 	);
 
-	// Resolved with the selection for the same reason the objects are: the modal's theme CTA is part
-	// of what a tile shows, so it should be there the moment the tile is opened rather than a request
-	// later. Deduplicated (two interests may share a theme) and sorted, so a shuffle back to a
-	// selection already seen hits the same query key and is served from the cache.
+	// Deduplicated and sorted, so a shuffle back to a selection already seen hits the same query key.
 	const selectedThemeIds = Array.from(
-		new Set(
-			selectedInterests
-				.filter(Boolean)
-				.map((interest) => interest.theme?.value || '')
-				.filter(Boolean)
-		)
+		new Set((selection || []).map((index) => interests[index]?.theme?.value || '').filter(Boolean))
 	).sort();
 
 	const { data: themes } = useGetThemesByIds(selectedThemeIds);
 
+	const openedInterest = openedIndex === null ? null : interests[openedIndex];
+
 	const renderTile = (tileIndex: number): ReactElement => {
-		const interest = selectedInterests[tileIndex];
-		// The colours are positional and fixed at three, so they index by tile.
+		// Not compacted: tile colors are positional, so dropping a missing interest would shift every
+		// later tile onto the wrong colour.
+		const interestIndex = selection?.[tileIndex];
+		const interest = interestIndex === undefined ? undefined : interests[interestIndex];
 		const { backgroundColor, textColor } = tileColors[tileIndex] ?? {};
-		const schemaIdentifier = interest?.mediaItem?.value;
-		const ieObject = schemaIdentifier ? objectsById?.[schemaIdentifier] : undefined;
+		const ieObject = interestIndex === undefined ? null : ieObjects?.[interestIndex];
 
 		return (
 			<li
@@ -134,9 +108,10 @@ export const BlockDriekeuzespeler: FunctionComponent<BlockDriekeuzespelerProps> 
 				// tile 1 keeps tile 1's colors, whichever interest landed there.
 				key={`c-driekeuzespeler__tile--${tileIndex}`}
 				className="c-driekeuzespeler__tile"
+				// Also the ground a tile shows while its thumbnail loads, or when the object no longer
+				// resolves -- the block always renders three tiles.
+				style={{ '--tile-color': backgroundColor } as CSSProperties}
 			>
-				{/* A thumbnail that has not arrived yet, or an object that no longer resolves, leaves the
-				    tile in its placeholder state rather than removing it: the block always shows three. */}
 				{!!ieObject?.thumbnailUrl && (
 					<img
 						className="c-driekeuzespeler__thumbnail"
@@ -145,14 +120,13 @@ export const BlockDriekeuzespeler: FunctionComponent<BlockDriekeuzespelerProps> 
 						loading="lazy"
 					/>
 				)}
-				{!!interest && (
+				{interestIndex !== undefined && !!interest && (
 					// The whole tile is the control that opens the modal, so it is a real button: Enter and
-					// Space work for free, and the tile's :focus-within styling finally has something to
-					// react to. The thumbnail is decorative, so the interest name names the button.
+					// Space work for free. The thumbnail is decorative, so the interest name names the button.
 					<button
 						type="button"
 						className="c-driekeuzespeler__tile-button"
-						onClick={() => setOpenedInterest(interest)}
+						onClick={() => setOpenedIndex(interestIndex)}
 					>
 						<span
 							className="c-driekeuzespeler__pill"
@@ -172,53 +146,40 @@ export const BlockDriekeuzespeler: FunctionComponent<BlockDriekeuzespelerProps> 
 
 			<div className="c-driekeuzespeler__stage">
 				{/* The white blobs the design lays on the block's background colour, behind the tiles --
-				    the "achtergrondkleur met masker" of the FA. Purely decorative, so it is hidden from
-				    assistive technology and the artwork lives in the stylesheet. */}
+				    the "achtergrondkleur met masker" of the FA. Decorative, so the artwork lives in the
+				    stylesheet. Each shape carries its own rotation and a background layer cannot be
+				    rotated on its own, so the three mobile shapes need three boxes: the layer itself and
+				    its two pseudo elements draw two of them, this span the third. */}
 				<div className="c-driekeuzespeler__shapes" aria-hidden="true">
-					<span className="c-driekeuzespeler__shape c-driekeuzespeler__shape--desktop" />
-					<span className="c-driekeuzespeler__shape c-driekeuzespeler__shape--mobile-top" />
-					<span className="c-driekeuzespeler__shape c-driekeuzespeler__shape--mobile-middle" />
-					<span className="c-driekeuzespeler__shape c-driekeuzespeler__shape--mobile-bottom" />
+					<span className="c-driekeuzespeler__shape" />
 				</div>
 
 				<ul className="c-driekeuzespeler__tiles">
-					{Array.from({ length: tileCount }, (_unused, tileIndex) => renderTile(tileIndex))}
+					{Array.from({ length: DRIEKEUZESPELER_TILE_COUNT }, (_unused, tileIndex) =>
+						renderTile(tileIndex)
+					)}
 				</ul>
 			</div>
 
-			{/* Shown as soon as there is anything to shuffle. Even with exactly three interests the CTA
-			    still does something: the selection is ordered, so a shuffle moves the interests between
-			    tile positions, and each position carries its own colours and thumbnail. */}
-			{interests.length > 0 && (
-				<button type="button" className="c-driekeuzespeler__shuffle" onClick={shuffle}>
-					{/* The FA fixes this icon: only the label is configurable. */}
-					<Icon
-						name={AdminCoreIconName.CollectionShuffle}
-						className="c-driekeuzespeler__shuffle-icon"
-					/>
-					{shuffleButtonLabel ||
-						tText(
-							'modules/content-page/components/blocks/block-driekeuzespeler/block-driekeuzespeler___toon-me-iets-anders',
-							undefined,
-							[HET_ARCHIEF]
-						)}
-				</button>
+			{/* With exactly three interests every shuffle would draw the same three, so the CTA only
+			    appears once there is something else to draw. */}
+			{interests.length > DRIEKEUZESPELER_TILE_COUNT && (
+				<Button
+					className="c-driekeuzespeler__shuffle"
+					variants={['block', 'black']}
+					// The FA fixes this icon: only the label is configurable.
+					icon={<Icon name={AdminCoreIconName.CollectionShuffle} />}
+					label={shuffleButtonLabel}
+					onClick={shuffle}
+				/>
 			)}
 
 			<BlockDriekeuzespelerModal
 				interest={openedInterest}
-				ieObject={
-					openedInterest?.mediaItem?.value
-						? objectsById?.[openedInterest.mediaItem.value]
-						: undefined
-				}
-				theme={
-					openedInterest?.theme?.value
-						? themes?.find((theme) => theme.id === openedInterest.theme?.value)
-						: undefined
-				}
+				ieObject={(openedIndex === null ? null : ieObjects?.[openedIndex]) ?? undefined}
+				theme={themes?.find((theme) => theme.id === openedInterest?.theme?.value)}
 				isFetching={isFetchingObjects}
-				onClose={() => setOpenedInterest(null)}
+				onClose={() => setOpenedIndex(null)}
 			/>
 		</div>
 	);

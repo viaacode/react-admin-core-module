@@ -15,7 +15,7 @@ import type { App, Locale } from '~modules/translations/translations.core.types'
 import type { UserBulkAction } from '~modules/user/user.types';
 import type { FlowPlayerWrapperProps } from '~shared/components/FlowPlayerWrapper/FlowPlayerWrapper.types';
 import type { IeObjectType } from '~shared/helpers/map-format-to-type.ts';
-import type { PlayableDisplayIeObjectPage } from '~shared/services/ie-objects-service/ie-objects.types';
+import type { IeObject } from '~shared/services/ie-objects-service/ie-objects.types';
 
 /**
  * What a consuming app needs to log a play of an ie-object rendered by a content block. The
@@ -134,9 +134,7 @@ export interface AdminConfig {
 		/**
 		 * The IIIF viewer a newspaper opens in, injected by the host the way `flowplayer` is.
 		 *
-		 * It takes only the object's id: the viewer needs the object's page list and a ticket-service
-		 * token per page, and those hooks live in the host app. Admin-core has no equivalent, so a
-		 * block that leaves this unset falls back to the flat IIIF detail image.
+		 * A block that leaves this unset falls back to the flat IIIF detail image.
 		 * https://meemoo.atlassian.net/browse/ARC-3813
 		 */
 		iiifViewer?: FC<IiifViewerConfigProps>;
@@ -213,20 +211,15 @@ export interface AdminConfig {
 }
 
 /**
- * What the injected IIIF viewer is handed. The page and overlay state, and a ticket-service token
- * per page, stay the host's to resolve -- a ticket is short-lived and access-checked at request
- * time, so it can never be handed over already resolved. The page list itself is optional: a
- * caller that already has it (e.g. from the driekeuzespeler's own proactive fetch) passes it along
- * so the host can skip re-fetching the object just to rebuild a list it already had; a caller with
- * only an id leaves it undefined and the host resolves it the way it always has.
- * https://meemoo.atlassian.net/browse/ARC-3813
+ * What the injected IIIF viewer is handed: the whole ie-object, so the viewer never has to resolve
+ * one itself. The page and overlay state, and a ticket-service token per page, stay the host's --
+ * a ticket is short-lived and access-checked at request time, so it can never be handed over
+ * already resolved. https://meemoo.atlassian.net/browse/ARC-3813
  */
 export interface IiifViewerConfigProps {
-	schemaIdentifier: string;
+	ieObject: IeObject;
 	/** Names the viewer for assistive technology, since the object title lives outside it. */
 	title?: string;
-	/** Every page's raw (un-ticketed) image/thumbnail/alto urls, when the caller already has them. */
-	pages?: PlayableDisplayIeObjectPage[];
 }
 
 /**

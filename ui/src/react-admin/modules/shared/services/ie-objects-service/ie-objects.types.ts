@@ -1,10 +1,27 @@
 import type { IeObjectType } from '~shared/helpers/map-format-to-type.ts';
 
-/** One newspaper page's raw (un-ticketed) image/thumbnail/alto urls. */
-export interface PlayableDisplayIeObjectPage {
-	imageUrl: string;
-	thumbnailUrl: string | null;
-	altoUrl: string | null;
+/**
+ * An ie-object as `GET /ie-objects?schemaIdentifiers=...` returns it. Only the fields a caller
+ * needs are declared, the way BlockObjectsGrid declares its own subset of the same response.
+ *
+ * `pages` is what a multi-page object (a newspaper) is viewed through. The urls are raw: a ticket
+ * still has to be requested per url before use, which is why the viewer that renders them lives in
+ * the host app. https://meemoo.atlassian.net/browse/ARC-3813
+ */
+export interface IeObject {
+	schemaIdentifier: string;
+	name?: string;
+	pages?: IeObjectPage[];
+}
+
+export interface IeObjectPage {
+	representations?: {
+		files?: {
+			mimeType?: string;
+			storedAt?: string;
+			thumbnailUrl?: string;
+		}[];
+	}[];
 }
 
 export interface PlayableDisplayIeObject {
@@ -24,8 +41,6 @@ export interface PlayableDisplayIeObject {
 	peakfileData?: number[] | null;
 	/** Non audio/video objects only (e.g. newspapers): self-contained base64 data uri of the IIIF detail image, or null if none is accessible/couldn't be resolved. Use this directly as an <img src> */
 	newspaperImage?: string | null;
-	/** Non audio/video objects only (e.g. newspapers): every page's raw (un-ticketed) image/thumbnail/alto urls, for a caller building its own multi-page IIIF viewer instead of using newspaperImage's single flattened detail image. A ticket still has to be requested per url before use. Empty when the object has no pages or none carry an image. */
-	pages?: PlayableDisplayIeObjectPage[];
 	snipPoint?: {
 		start?: number;
 		end?: number;
