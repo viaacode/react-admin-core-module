@@ -67,9 +67,9 @@ export const BlockHeroCarouselInactiveSlide: FunctionComponent<
 		<div
 			className="c-block-hero-carousel__carousel-slide-image-format-icon"
 			role="img"
-			aria-label={getObjectTypeLabel(item.dctermsFormat)}
+			aria-label={getObjectTypeLabel(item?.dctermsFormat)}
 		>
-			<Icon name={getIconFromObjectType(item.dctermsFormat, Boolean(item.thumbnailUrl))} />
+			<Icon name={getIconFromObjectType(item?.dctermsFormat, Boolean(item?.thumbnailUrl))} />
 		</div>
 	);
 
@@ -77,8 +77,8 @@ export const BlockHeroCarouselInactiveSlide: FunctionComponent<
 		<div className="c-block-hero-carousel__carousel-slide-image">
 			<ImageOrAudioWaveForm
 				imageSrc={imageSrc}
-				imageAlt={item.name}
-				backgroundColor={item.backgroundColor}
+				imageAlt={item?.name}
+				backgroundColor={item?.backgroundColor}
 				className="c-block-hero-carousel__carousel-slide-image-media"
 			/>
 			{formatIcon}
