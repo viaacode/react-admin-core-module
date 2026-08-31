@@ -64,7 +64,7 @@ export const IeObjectMetadata: FunctionComponent<{
 	fallbackTitle: string;
 	className?: string;
 }> = ({ ieObject, fallbackTitle, className }) => {
-	const callToActionLabel = getCallToActionLabel(ieObject.dctermsFormat);
+	const callToActionLabel = getCallToActionLabel(ieObject?.dctermsFormat);
 
 	return (
 		<div className={clsx('c-ie-object-metadata', className)}>
