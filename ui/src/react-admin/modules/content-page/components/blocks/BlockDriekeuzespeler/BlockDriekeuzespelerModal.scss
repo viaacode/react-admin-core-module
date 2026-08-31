@@ -5,6 +5,9 @@
 // to adapt to the screen. 16:9 is that player's ratio.
 $media-aspect-ratio: 16 / 9;
 
+// The rounded corners the FA gives the stacked mobile card.
+$card-radius: variables.$g-spacer-unit * 1.5;
+
 // The dialog still needs an accessible name, so the title stays in the DOM -- just not on screen,
 // where the FA wants nothing but the close button over the media.
 // https://www.figma.com/design/1yUd3vpjHXcMfI15dTeVYC/hetarchief.be-%E2%80%94-ontdekken?node-id=2354-4569
@@ -15,7 +18,7 @@ $media-aspect-ratio: 16 / 9;
 	padding: 0;
 	margin: -1px;
 	overflow: hidden;
-	clip: rect(0, 0, 0, 0);
+	clip-path: inset(50%);
 	white-space: nowrap;
 	border: 0;
 }
@@ -29,8 +32,8 @@ $media-aspect-ratio: 16 / 9;
 		width: 3.2rem;
 		height: 3.2rem;
 		border-radius: 50%;
-		background-color: #000;
-		color: #fff;
+		background-color: colors.$color-gray-1000;
+		color: colors.$white;
 	}
 }
 
@@ -44,7 +47,6 @@ $media-aspect-ratio: 16 / 9;
 // than the screen used to leave a blank white void below the metadata card. The FA's design has the
 // modal hug its content instead, so height comes back to the content, with a dark background (rather
 // than white) for the rare case content is short enough to leave a sliver showing through.
-//
 // The library puts the caller's className on the outer `.c-modal-context` wrapper, not on the inner
 // `.c-modal` -- so this has to be a descendant selector, not a combined one on a single element.
 // `.c-modal-context.c-driekeuzespeler-modal .c-modal` (3 classes) beats the library's own
@@ -73,13 +75,6 @@ $media-aspect-ratio: 16 / 9;
 		padding: variables.$g-spacer-unit * 2 variables.$g-spacer-unit * 2.5;
 	}
 
-	// The modal is mounted with `scrollable={false}`, which the library turns into `overflow: visible`
-	// on the body -- fine on desktop, but on a phone a tall object (a portrait newspaper, or a player
-	// that reports a big intrinsic size) can then push the metadata card and its theme CTA off screen
-	// with no way to reach them. Scrolling the body keeps everything reachable whatever the media does.
-	.c-modal-context.c-driekeuzespeler-modal .c-modal__body {
-		overflow-y: auto;
-	}
 }
 
 .c-driekeuzespeler-modal {
@@ -152,7 +147,7 @@ $media-aspect-ratio: 16 / 9;
 		&__media {
 			width: calc(100% - #{variables.$g-spacer-unit * 5});
 			margin: 0 auto;
-			border-radius: variables.$g-spacer-unit * 1.5 variables.$g-spacer-unit * 1.5 0 0;
+			border-radius: $card-radius $card-radius 0 0;
 
 			// Tighter than the 70vh the desktop rule allows: on a phone the metadata card carries two
 			// rows plus the theme CTA, so the media has to leave room for it rather than taking most of
@@ -163,7 +158,7 @@ $media-aspect-ratio: 16 / 9;
 
 		&__metadata.c-ie-object-metadata {
 			background-color: colors.$white;
-			border-radius: 0 0 variables.$g-spacer-unit * 1.5 variables.$g-spacer-unit * 1.5;
+			border-radius: 0 0 $card-radius $card-radius;
 			width: calc(100% - #{variables.$g-spacer-unit * 5});
 			margin: 0 auto;
 
