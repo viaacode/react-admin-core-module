@@ -148,7 +148,11 @@ export const IE_OBJECT_WITH_SNIPPET_TIME_FIELDS = (
 ): Record<string, ContentBlockField> => ({
 	// Changing the object clears the times: they are offsets into that object and mean nothing once
 	// it is a different one.
-	mediaItem: IE_OBJECT_FIELD(allowedObjectTypes, isVisibleFunc, ['startTime', 'endTime']),
+	mediaItem: IE_OBJECT_FIELD({
+		allowedObjectTypes,
+		isVisible: isVisibleFunc,
+		fieldsToResetOnChange: ['startTime', 'endTime'],
+	}),
 	startTime: SNIPPET_TIME_FIELD(
 		'startTime',
 		tText('modules/content-page/helpers/snippet-time-fields___starttijd', undefined, [HET_ARCHIEF]),

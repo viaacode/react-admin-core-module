@@ -254,14 +254,25 @@ export const COPYRIGHT_STATE = (): CopyrightComponentState => ({
  * A block without a still picker keeps the name anyway, so the proxy can read every block the same
  * way. https://meemoo.atlassian.net/browse/ARC-3813
  */
-export const IE_OBJECT_FIELD = (
-	allowedObjectTypes: IeObjectType[],
-	isVisibleFunc?: IsVisibleFunc,
-	fieldsToResetOnChange?: string[]
-): ContentBlockField => ({
-	label: tText('modules/content-page/helpers/snippet-time-fields___object', undefined, [
-		HET_ARCHIEF,
-	]),
+export const IE_OBJECT_FIELD = ({
+	allowedObjectTypes = Object.values(IeObjectType),
+	label,
+	isVisible,
+	fieldsToResetOnChange,
+	isRequired = true,
+}: {
+	/** Formats the picker offers. Every format by default, which is no restriction at all. */
+	allowedObjectTypes?: IeObjectType[];
+	/** Overrides the generic "Object" label where a block names the field its own way. */
+	label?: string;
+	isVisible?: IsVisibleFunc;
+	fieldsToResetOnChange?: string[];
+	/** False where a block may hold the field empty, e.g. an optional repeated entry. */
+	isRequired?: boolean;
+} = {}): ContentBlockField => ({
+	label:
+		label ||
+		tText('modules/content-page/helpers/snippet-time-fields___object', undefined, [HET_ARCHIEF]),
 	editorType: ContentBlockEditor.ContentPicker,
 	editorProps: {
 		allowedTypes: [AvoCoreContentPickerType.IE_OBJECT],
@@ -270,15 +281,17 @@ export const IE_OBJECT_FIELD = (
 		ieObjectFormats: allowedObjectTypes,
 	},
 	fieldsToResetOnChange,
-	validator: (value: PickerItem | undefined) =>
-		value?.value
-			? []
-			: [
-					tText(
-						'modules/content-page/helpers/snippet-time-fields___een-object-is-verplicht',
-						undefined,
-						[HET_ARCHIEF]
-					),
-				],
-	isVisible: isVisibleFunc,
+	validator: isRequired
+		? (value: PickerItem | undefined) =>
+				value?.value
+					? []
+					: [
+							tText(
+								'modules/content-page/helpers/snippet-time-fields___een-object-is-verplicht',
+								undefined,
+								[HET_ARCHIEF]
+							),
+						]
+		: undefined,
+	isVisible,
 });
