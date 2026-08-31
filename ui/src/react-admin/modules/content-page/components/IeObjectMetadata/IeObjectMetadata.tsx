@@ -10,6 +10,7 @@ import {
 	mapDcTermsFormatToSimpleType,
 	SimpleIeObjectType,
 } from '~shared/helpers/map-format-to-type.ts';
+import { isMobileWidth } from '~shared/helpers/media-query.ts';
 import { tText } from '~shared/helpers/translation-functions';
 import type { PlayableDisplayIeObject } from '~shared/services/ie-objects-service/ie-objects.types.ts';
 import { HET_ARCHIEF } from '~shared/types';
@@ -61,11 +62,7 @@ export const IeObjectMetadata: FunctionComponent<{
 	ieObject: PlayableDisplayIeObject;
 	fallbackTitle: string;
 	className?: string;
-	/**
-	 * An optional second CTA, rendered after a divider at the end of the same row -- e.g. the
-	 * driekeuzespeler's "Toon meer over [thema]" pill. Purely a slot: this component supplies the
-	 * divider and the layout, the caller supplies (and styles) the content.
-	 */
+	/** An optional second CTA at the end of the same row. The caller supplies and styles it. */
 	secondaryCta?: ReactNode;
 }> = ({ ieObject, fallbackTitle, className, secondaryCta }) => {
 	const callToActionLabel = getCallToActionLabel(ieObject.dctermsFormat);
@@ -80,20 +77,10 @@ export const IeObjectMetadata: FunctionComponent<{
 				ariaLabel={callToActionLabel}
 				className="c-ie-object-metadata__cta"
 			>
-				{/* Both variants are rendered and the stylesheet picks one, rather than branching on
-				    `isMobileWidth()` here. That helper reads `window.innerWidth` during render and nothing
-				    re-renders this component on resize, so the narrow icon-only variant used to stick at
-				    desktop widths once the window had ever been narrow (and vice versa after hydration).
-				    The switch happens at the same 700px the helper used, so each width looks as before. */}
 				<Button
-					className="c-ie-object-metadata__cta-button c-ie-object-metadata__cta-button--icon"
 					variants={['block', 'black']}
-					icon={<Icon name={'arrow-down-right' as IconName} />}
-				/>
-				<Button
-					className="c-ie-object-metadata__cta-button c-ie-object-metadata__cta-button--label"
-					variants={['block', 'black']}
-					label={callToActionLabel}
+					icon={isMobileWidth() ? <Icon name={'arrow-down-right' as IconName} /> : undefined}
+					label={isMobileWidth() ? undefined : callToActionLabel}
 				/>
 			</SmartLink>
 			<div className="c-ie-object-metadata__text">
@@ -107,12 +94,7 @@ export const IeObjectMetadata: FunctionComponent<{
 					className="c-ie-object-metadata__maintainer-logo"
 				/>
 			)}
-			{!!secondaryCta && (
-				<>
-					<span className="c-ie-object-metadata__divider" aria-hidden="true" />
-					{secondaryCta}
-				</>
-			)}
+			{secondaryCta}
 		</div>
 	);
 };
