@@ -6,6 +6,7 @@ export interface PlayableDisplayIeObject {
 	thumbnailUrl: string | null;
 	dctermsFormat: IeObjectType;
 	maintainerId: string;
+	maintainerSlug: string;
 	maintainerName: string;
 	maintainerLogo?: string;
 	maintainerOverlay: boolean;

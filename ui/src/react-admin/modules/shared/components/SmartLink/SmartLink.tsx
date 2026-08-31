@@ -111,7 +111,11 @@ export const SmartLink: FunctionComponent<SmartLinkProps> = ({
 								const anchorId = fullUrl.split('#')[1];
 								document.getElementById(anchorId)?.scrollIntoView({ behavior: 'instant' });
 							} else {
-								scrollTo({ top: 0 });
+								const targetPathname = fullUrl.split('?')[0].split('#')[0];
+								// Only scroll to top if we are navigating to the same page (otherwise this will happen by default)
+								if (window.location.pathname === targetPathname) {
+									scrollTo({ top: 0 });
+								}
 							}
 						}}
 						onKeyUp={(evt) => onKeyUpHandler(evt as unknown as KeyboardEvent<HTMLElement>)}
@@ -216,7 +220,10 @@ export const SmartLink: FunctionComponent<SmartLinkProps> = ({
 						// ie-objects only exist on hetarchief, render the children unwrapped
 						break;
 					}
-					return renderLink(IeObjectsService.getObjectDetailPath(String(value)), resolvedTarget);
+					return renderLink(
+						IeObjectsService.getObjectDetailPathViaPid(String(value)),
+						resolvedTarget
+					);
 				}
 
 				case 'ASSIGNMENT': {

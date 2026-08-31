@@ -15,6 +15,7 @@ import { tText } from '~shared/helpers/translation-functions';
 import type { PlayableDisplayIeObject } from '~shared/services/ie-objects-service/ie-objects.types.ts';
 import { HET_ARCHIEF } from '~shared/types';
 import './IeObjectMetadata.scss';
+import { IeObjectsService } from '~modules/ie-objects/ie-objects.service.ts';
 
 // The call to action names the kind of object it links to, so a newspaper isn't announced as a fragment.
 const getCallToActionLabel = (format: IeObjectType | null): string => {
@@ -70,7 +71,11 @@ export const IeObjectMetadata: FunctionComponent<{
 			<SmartLink
 				action={{
 					type: AvoCoreContentPickerType.INTERNAL_LINK,
-					value: `/pid/${ieObject?.schemaIdentifier}`,
+					value: IeObjectsService.getObjectDetailPath(
+						ieObject?.maintainerSlug,
+						ieObject?.schemaIdentifier,
+						ieObject?.name
+					),
 				}}
 				ariaLabel={callToActionLabel}
 				className="c-ie-object-metadata__cta"

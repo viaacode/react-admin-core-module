@@ -23,6 +23,7 @@ export const DEFAULT_OBJECTS_GRID_LIMIT = 24;
 interface RawIeObject {
 	schemaIdentifier: string;
 	name?: string;
+	maintainerSlug?: string;
 	maintainerName?: string;
 	// dcterms format, e.g. "video" | "audio" | "newspaper".
 	dctermsFormat?: IeObjectType;
@@ -35,6 +36,7 @@ const mapRawToGridItem = (raw: RawIeObject): ObjectsGridItem => {
 	return {
 		schemaIdentifier: raw.schemaIdentifier,
 		name: raw.name || '',
+		maintainerSlug: raw.maintainerSlug || '',
 		maintainerName: raw.maintainerName,
 		type,
 		thumbnailUrl: isAudioFormat(type)

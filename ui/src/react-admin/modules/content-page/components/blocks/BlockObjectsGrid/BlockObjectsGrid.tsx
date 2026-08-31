@@ -208,7 +208,11 @@ export const BlockObjectsGrid: FunctionComponent<BlockObjectsGridProps> = ({
 				<SmartLink
 					action={{
 						type: AvoCoreContentPickerType.INTERNAL_LINK,
-						value: IeObjectsService.getObjectDetailPath(item.schemaIdentifier),
+						value: IeObjectsService.getObjectDetailPath(
+							item.maintainerSlug,
+							item.schemaIdentifier,
+							item.name
+						),
 					}}
 					removeStyles={false}
 					className="c-block-objects-grid__tile-link"
