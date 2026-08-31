@@ -27,7 +27,7 @@ import { clone, compact, take } from 'es-toolkit';
 import type { FunctionComponent, KeyboardEvent, MouseEvent } from 'react';
 import React, { useState } from 'react';
 import { tText } from '~shared/helpers/translation-functions';
-import { isMobileWidth } from '../../helpers/media-query';
+import { useIsMobileWidth } from '../../helpers/media-query';
 
 import './CheckboxDropdownModal.scss';
 
@@ -81,6 +81,7 @@ export const CheckboxDropdownModal: FunctionComponent<CheckboxDropdownModalProps
 	);
 
 	// State
+	const isMobile = useIsMobileWidth();
 	const [checkedStates, setCheckedStates] = useState(optionsFromPairs);
 	const [isOpen, setIsOpen] = useState<boolean>(false);
 	const [searchKeyword, setSearchKeyword] = useState<string>('');
@@ -277,7 +278,7 @@ export const CheckboxDropdownModal: FunctionComponent<CheckboxDropdownModalProps
 						)}
 						<Spacer className="c-checkbox-dropdown__list">
 							<Form>
-								{isMobileWidth() ? (
+								{isMobile ? (
 									renderCheckboxGroup(take(filteredOptions, 14))
 								) : (
 									<Grid>

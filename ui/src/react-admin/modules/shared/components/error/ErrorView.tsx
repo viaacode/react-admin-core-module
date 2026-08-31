@@ -16,7 +16,7 @@ import './ErrorView.scss';
 import { Loading } from '~shared/components/Loading';
 import { ROUTE_PARTS } from '~shared/consts';
 import { CustomError } from '~shared/helpers/custom-error.ts';
-import { isMobileWidth } from '~shared/helpers/media-query.ts';
+import { useIsMobileWidth } from '~shared/helpers/media-query.ts';
 import { isServerSideRendering } from '~shared/helpers/routing/is-server-side-rendering.ts';
 import { tText } from '~shared/helpers/translation-functions.ts';
 import { useLocation } from '~shared/hooks/useLocation.ts';
@@ -46,6 +46,7 @@ export const ErrorView: FC<ErrorViewProps> = ({
 	locationId,
 }) => {
 	const location = useLocation();
+	const isMobile = useIsMobileWidth();
 	const queryParams =
 		isServerSideRendering() || !location?.search
 			? {}
@@ -121,7 +122,7 @@ export const ErrorView: FC<ErrorViewProps> = ({
 			</>
 		);
 
-		if (isMobileWidth()) {
+		if (isMobile) {
 			return <div className="c-error-buttons__mobile">{buttons}</div>;
 		}
 		return (
