@@ -10,8 +10,8 @@ import { SmartLink } from '~shared/components/SmartLink/SmartLink.tsx';
 import { isAudioVideoFormat } from '~shared/helpers/is-audio-video-format.ts';
 import { tText } from '~shared/helpers/translation-functions';
 import type { PlayableDisplayIeObject } from '~shared/services/ie-objects-service/ie-objects.types.ts';
+import type { Theme } from '~shared/services/themes-service/themes.types';
 import { HET_ARCHIEF } from '~shared/types';
-import { useGetThemesByIds } from '../BlockOverviewThemes/hooks/useGetThemesByIds';
 
 import './BlockDriekeuzespelerModal.scss';
 
@@ -19,11 +19,14 @@ export interface BlockDriekeuzespelerModalProps {
 	/** The interest whose tile was opened, or null when the modal is closed. */
 	interest: {
 		name: string;
-		mediaItem?: { value?: string };
-		theme?: { value?: string };
 	} | null;
 	/** The interest's object, already resolved by the parent along with the rest of the selection. */
 	ieObject?: PlayableDisplayIeObject;
+	/**
+	 * The interest's theme, resolved by the parent along with the rest of the selection -- the block
+	 * config only stores its id, and the CTA needs the name and the slug.
+	 */
+	theme?: Theme;
 	/** Whether the parent's proactive fetch for the current selection is still in flight. */
 	isFetching: boolean;
 	onClose: () => void;
@@ -38,6 +41,7 @@ export interface BlockDriekeuzespelerModalProps {
 export const BlockDriekeuzespelerModal: FunctionComponent<BlockDriekeuzespelerModalProps> = ({
 	interest,
 	ieObject,
+	theme,
 	isFetching,
 	onClose,
 }): ReactElement => {
@@ -46,10 +50,6 @@ export const BlockDriekeuzespelerModal: FunctionComponent<BlockDriekeuzespelerMo
 	// config set up after this module is imported is still picked up.
 	const IiifViewer = AdminConfigManager.getConfig().components.iiifViewer;
 
-	// Resolves the interest's theme for the secondary CTA, in the name and slug fields -- not just
-	// the id the block config stores.
-	const { data: themes } = useGetThemesByIds(interest?.theme?.value ? [interest.theme.value] : []);
-	const theme = themes?.[0];
 	const locale = AdminConfigManager.getConfig().locale || Locale.Nl;
 	const themeName = theme ? (locale === Locale.Nl ? theme.nameNl : theme.nameEn) : '';
 

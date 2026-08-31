@@ -7,6 +7,7 @@ import { Icon } from '~shared/components/Icon/Icon';
 import { tText } from '~shared/helpers/translation-functions';
 import { HET_ARCHIEF } from '~shared/types';
 import type { DefaultComponentProps } from '~shared/types/components';
+import { useGetThemesByIds } from '../BlockOverviewThemes/hooks/useGetThemesByIds';
 import { DRIEKEUZESPELER_TILE_COUNT } from './BlockDriekeuzespeler.editorconfig';
 import {
 	pickNextSelection,
@@ -105,6 +106,21 @@ export const BlockDriekeuzespeler: FunctionComponent<BlockDriekeuzespelerProps> 
 			: undefined
 	);
 
+	// Resolved with the selection for the same reason the objects are: the modal's theme CTA is part
+	// of what a tile shows, so it should be there the moment the tile is opened rather than a request
+	// later. Deduplicated (two interests may share a theme) and sorted, so a shuffle back to a
+	// selection already seen hits the same query key and is served from the cache.
+	const selectedThemeIds = Array.from(
+		new Set(
+			selectedInterests
+				.filter(Boolean)
+				.map((interest) => interest.theme?.value || '')
+				.filter(Boolean)
+		)
+	).sort();
+
+	const { data: themes } = useGetThemesByIds(selectedThemeIds);
+
 	const renderTile = (tileIndex: number): ReactElement => {
 		const interest = selectedInterests[tileIndex];
 		// The colours are positional and fixed at three, so they index by tile.
@@ -194,6 +210,11 @@ export const BlockDriekeuzespeler: FunctionComponent<BlockDriekeuzespelerProps> 
 				ieObject={
 					openedInterest?.mediaItem?.value
 						? objectsById?.[openedInterest.mediaItem.value]
+						: undefined
+				}
+				theme={
+					openedInterest?.theme?.value
+						? themes?.find((theme) => theme.id === openedInterest.theme?.value)
 						: undefined
 				}
 				isFetching={isFetchingObjects}
