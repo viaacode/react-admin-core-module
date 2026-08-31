@@ -292,19 +292,24 @@ $shape-color: var(--bg-text-primary, #{colors.$white});
 		}
 
 		// On mobile the three sit in a centred, overlapping column.
+		// `left` is repeated per tile rather than set once here: the desktop rules above place each
+		// tile with a `:nth-child()` selector, which outranks a bare `&` declaration whatever the
+		// source order, so a single `left: 50%` never lands.
 		@media (max-width: variables.$g-bp2) {
 			width: $tile-width-mobile-base;
-			left: 50%;
 
 			&:nth-child(1) {
+				left: 50%;
 				top: 18.646%;
 			}
 
 			&:nth-child(2) {
+				left: 50%;
 				top: 50%;
 			}
 
 			&:nth-child(3) {
+				left: 50%;
 				top: 81.354%;
 			}
 		}
