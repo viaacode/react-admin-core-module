@@ -4,6 +4,7 @@ import type { CSSProperties, FunctionComponent, ReactElement } from 'react';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { AdminCoreIconName } from '~core/config';
 import { useGetIeObjectsByIds } from '~modules/content-page/hooks/useGetIeObjectsByIds';
+import { useGetPlayableDataForIeObjects } from '~modules/content-page/hooks/useGetPlayableDataForIeObjects';
 import type {
 	DriekeuzespelerInterestState,
 	DriekeuzespelerTileColors,
@@ -80,6 +81,13 @@ export const BlockDriekeuzespeler: FunctionComponent<BlockDriekeuzespelerProps> 
 
 	const { data: ieObjectsById, isFetching: isFetchingObjects } =
 		useGetIeObjectsByIds(selectedSchemaIdentifiers);
+
+	// Ticketed with the selection, not when a tile is opened, so the modal plays what is already
+	// there instead of going to the network at the moment the visitor clicks.
+	const { data: playableDataById, isFetching: isFetchingPlayableData } =
+		useGetPlayableDataForIeObjects(
+			selectedSchemaIdentifiers.map((schemaIdentifier) => ieObjectsById?.[schemaIdentifier])
+		);
 
 	// Deduplicated and sorted, so a shuffle back to a selection already seen hits the same query key.
 	const selectedThemeIds = Array.from(
@@ -181,7 +189,12 @@ export const BlockDriekeuzespeler: FunctionComponent<BlockDriekeuzespelerProps> 
 						: undefined
 				}
 				theme={themes?.find((theme) => theme.id === openedInterest?.theme?.value)}
-				isFetching={isFetchingObjects}
+				playableData={
+					openedInterest?.mediaItem?.value
+						? playableDataById?.[openedInterest.mediaItem.value]
+						: undefined
+				}
+				isFetching={isFetchingObjects || isFetchingPlayableData}
 				onClose={() => setOpenedIndex(null)}
 			/>
 		</div>

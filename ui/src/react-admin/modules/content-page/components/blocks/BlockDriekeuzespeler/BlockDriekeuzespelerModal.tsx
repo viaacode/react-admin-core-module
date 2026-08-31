@@ -6,12 +6,10 @@ import React from 'react';
 import { AdminConfigManager } from '~core/config/config.class';
 import { IeObjectFlowPlayerWrapper } from '~modules/content-page/components/IeObjectFlowPlayerWrapper/IeObjectFlowPlayerWrapper.tsx';
 import { IeObjectMetadata } from '~modules/content-page/components/IeObjectMetadata/IeObjectMetadata.tsx';
-import { useGetPeakFileData } from '~modules/content-page/hooks/useGetPeakFileData';
-import { useGetPlayableUrl } from '~modules/content-page/hooks/useGetPlayableUrl';
+import type { PlayableData } from '~modules/content-page/hooks/useGetPlayableDataForIeObjects';
 import { Locale } from '~modules/translations/translations.core.types.ts';
 import { SmartLink } from '~shared/components/SmartLink/SmartLink.tsx';
-import { findPeakFile, findPlayableFile } from '~shared/helpers/ie-object-files.ts';
-import { isAudioFormat, isAudioVideoFormat } from '~shared/helpers/is-audio-video-format.ts';
+import { isAudioVideoFormat } from '~shared/helpers/is-audio-video-format.ts';
 import type { IeObjectType } from '~shared/helpers/map-format-to-type.ts';
 import { tText } from '~shared/helpers/translation-functions';
 import type {
@@ -30,6 +28,8 @@ export interface BlockDriekeuzespelerModalProps {
 	} | null;
 	/** The interest's object, already resolved by the parent along with the rest of the selection. */
 	ieObject?: IeObject;
+	/** The object's ticketed media, also resolved by the parent. Absent for a newspaper. */
+	playableData?: PlayableData;
 	/** The interest's theme: the block config only stores its id, and the CTA needs name and slug. */
 	theme?: Theme;
 	/** Whether the parent's fetch for the selection's objects is still in flight. */
@@ -46,6 +46,7 @@ export interface BlockDriekeuzespelerModalProps {
 export const BlockDriekeuzespelerModal: FunctionComponent<BlockDriekeuzespelerModalProps> = ({
 	interest,
 	ieObject,
+	playableData,
 	theme,
 	isFetching,
 	onClose,
@@ -60,23 +61,6 @@ export const BlockDriekeuzespelerModal: FunctionComponent<BlockDriekeuzespelerMo
 
 	const isPlayable = !!ieObject && isAudioVideoFormat(ieObject.dctermsFormat);
 
-	// A file's stored url is behind ticket auth, so the one the player gets is asked for here, and
-	// only once the tile is actually opened.
-	const playableFile = findPlayableFile(ieObject);
-	const { data: playableUrl, isFetching: isFetchingPlayableUrl } = useGetPlayableUrl(
-		playableFile?.id,
-		ieObject?.schemaIdentifier,
-		isOpen && isPlayable
-	);
-
-	// Additive: without it the audio player still plays, it just draws no waveform.
-	const peakFile = findPeakFile(ieObject);
-	const { data: peakfileData } = useGetPeakFileData(
-		peakFile?.id,
-		ieObject?.schemaIdentifier,
-		isOpen && isPlayable && isAudioFormat(ieObject?.dctermsFormat)
-	);
-
 	// The player and the metadata panel are shared with the other content blocks, which describe an
 	// object the way the playable-display-data endpoint does. This is the same object in that shape.
 	const displayIeObject: PlayableDisplayIeObject | undefined = ieObject && {
@@ -89,9 +73,9 @@ export const BlockDriekeuzespelerModal: FunctionComponent<BlockDriekeuzespelerMo
 		maintainerName: ieObject.maintainerName || '',
 		maintainerLogo: ieObject.maintainerLogo || undefined,
 		maintainerOverlay: !!ieObject.maintainerOverlay,
-		playableUrl,
-		mimeType: playableFile?.mimeType,
-		peakfileData,
+		playableUrl: playableData?.playableUrl,
+		mimeType: playableData?.mimeType,
+		peakfileData: playableData?.peakfileData,
 	};
 
 	// Only mount the player while the modal is open, so closing stops playback outright instead of
@@ -161,7 +145,7 @@ export const BlockDriekeuzespelerModal: FunctionComponent<BlockDriekeuzespelerMo
 		>
 			<ModalBody>
 				<div className="c-driekeuzespeler-modal__media">
-					{isFetching || isFetchingPlayableUrl ? (
+					{isFetching ? (
 						// The FA asks for dynamic content a screen reader picks up, so the wait is announced
 						// instead of only drawn. `output` carries the status role on its own.
 						<output className="c-driekeuzespeler-modal__loading" aria-live="polite">
