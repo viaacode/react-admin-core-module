@@ -128,6 +128,14 @@ $card-radius: variables.$g-spacer-unit * 1.5;
 		margin-top: 0;
 	}
 
+	// Separates the primary CTA, title and provider from the theme CTA at the end of the same row.
+	&__divider {
+		flex: 0 0 auto;
+		align-self: stretch;
+		width: 1px;
+		background-color: rgba(colors.$color-gray-1000, 0.12);
+	}
+
 	// The FA's secondary CTA, "Toon meer over [thema]": a pill at the end of the metadata bar's own
 	// row, via its `secondaryCta` slot.
 	&__theme-cta {
@@ -180,10 +188,11 @@ $card-radius: variables.$g-spacer-unit * 1.5;
 				grid-area: text;
 			}
 
-			.c-ie-object-metadata__divider {
+			.c-driekeuzespeler-modal__divider {
 				grid-area: divider;
 				width: 100%;
 				height: 1px;
+				align-self: auto;
 			}
 
 			.c-driekeuzespeler-modal__theme-cta {

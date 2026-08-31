@@ -167,22 +167,28 @@ export const BlockDriekeuzespelerModal: FunctionComponent<BlockDriekeuzespelerMo
 						className="c-driekeuzespeler-modal__metadata"
 						secondaryCta={
 							themeName && theme ? (
-								<SmartLink
-									action={{
-										type: AvoCoreContentPickerType.INTERNAL_LINK,
-										value: stringifyUrl({
-											url: AdminConfigManager.getConfig().routes.SEARCH || '/zoeken',
-											query: { thema: theme.slug },
-										}),
-									}}
-									className="c-driekeuzespeler-modal__theme-cta"
-								>
-									{tText(
-										'modules/content-page/components/blocks/block-driekeuzespeler/block-driekeuzespeler___toon-meer-over-thema',
-										{ theme: themeName },
-										[HET_ARCHIEF]
-									)}
-								</SmartLink>
+								<>
+									{/* Separates the primary CTA row from the theme CTA. Drawn here rather than by
+									    IeObjectMetadata, because this is the only block that puts a second CTA in
+									    that row. */}
+									<span className="c-driekeuzespeler-modal__divider" aria-hidden="true" />
+									<SmartLink
+										action={{
+											type: AvoCoreContentPickerType.INTERNAL_LINK,
+											value: stringifyUrl({
+												url: AdminConfigManager.getConfig().routes.SEARCH || '/zoeken',
+												query: { thema: theme.slug },
+											}),
+										}}
+										className="c-driekeuzespeler-modal__theme-cta"
+									>
+										{tText(
+											'modules/content-page/components/blocks/block-driekeuzespeler/block-driekeuzespeler___toon-meer-over-thema',
+											{ theme: themeName },
+											[HET_ARCHIEF]
+										)}
+									</SmartLink>
+								</>
 							) : undefined
 						}
 					/>
