@@ -1,35 +1,11 @@
+import type {
+	HetArchiefIeObject as IeObject,
+	HetArchiefIeObjectFile as IeObjectFile,
+	HetArchiefIeObjectPage as IeObjectPage,
+} from '@viaa/avo2-types';
 import type { IeObjectType } from '~shared/helpers/map-format-to-type.ts';
 
-/**
- * An ie-object as `GET /ie-objects?schemaIdentifiers=...` returns it, declaring only the fields a
- * caller needs, as BlockObjectsGrid does for the same response.
- *
- * Everything playable or viewable hangs off `pages`, and the urls there are raw: each file has to be
- * ticketed through `IeObjectsService.getPlayableUrl` before it can be used.
- */
-export interface IeObject {
-	schemaIdentifier: string;
-	name?: string;
-	dctermsFormat?: IeObjectType;
-	thumbnailUrl?: string;
-	maintainerId?: string;
-	maintainerName?: string;
-	maintainerSlug?: string;
-	maintainerLogo?: string | null;
-	maintainerOverlay?: boolean | null;
-	pages?: IeObjectPage[];
-}
-
-export interface IeObjectFile {
-	id?: string;
-	mimeType?: string;
-	storedAt?: string;
-	thumbnailUrl?: string;
-}
-
-export interface IeObjectPage {
-	representations?: { files?: IeObjectFile[] }[];
-}
+export type { IeObject, IeObjectFile, IeObjectPage };
 
 export interface PlayableDisplayIeObject {
 	schemaIdentifier: string;
