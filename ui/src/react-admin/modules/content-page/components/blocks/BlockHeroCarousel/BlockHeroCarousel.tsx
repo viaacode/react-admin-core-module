@@ -92,6 +92,7 @@ export const BlockHeroCarousel: FunctionComponent<BlockHeroCarouselProps> = ({
 				name: ieObject?.name ?? object.mediaItem?.label,
 				videoThumbnail: object.videoThumbnail,
 				hasFailed,
+				isAccessible: Boolean(ieObject?.thumbnailUrl),
 				backgroundColor: backgroundColors[index],
 			} as HeroCarouselSlideItem;
 		});
