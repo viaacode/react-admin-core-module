@@ -2,7 +2,7 @@ import { Button } from '@meemoo/react-components';
 import { Icon, type IconName } from '@viaa/avo2-components';
 import { AvoCoreContentPickerType } from '@viaa/avo2-types';
 import { clsx } from 'clsx';
-import type { FunctionComponent, ReactNode } from 'react';
+import type { FunctionComponent } from 'react';
 import React from 'react';
 import { SmartLink } from '~shared/components/SmartLink/SmartLink';
 import {
@@ -63,9 +63,7 @@ export const IeObjectMetadata: FunctionComponent<{
 	ieObject: PlayableDisplayIeObject;
 	fallbackTitle: string;
 	className?: string;
-	/** An optional second CTA at the end of the same row. The caller supplies and styles it. */
-	secondaryCta?: ReactNode;
-}> = ({ ieObject, fallbackTitle, className, secondaryCta }) => {
+}> = ({ ieObject, fallbackTitle, className }) => {
 	const callToActionLabel = getCallToActionLabel(ieObject?.dctermsFormat);
 
 	return (
@@ -99,7 +97,6 @@ export const IeObjectMetadata: FunctionComponent<{
 					className="c-ie-object-metadata__maintainer-logo"
 				/>
 			)}
-			{secondaryCta}
 		</div>
 	);
 };
