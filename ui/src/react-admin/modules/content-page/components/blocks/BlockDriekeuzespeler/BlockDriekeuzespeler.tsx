@@ -4,7 +4,7 @@ import type { CSSProperties, FunctionComponent, ReactElement } from 'react';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { AdminCoreIconName } from '~core/config';
 import { useGetIeObjectsByIds } from '~modules/content-page/hooks/useGetIeObjectsByIds';
-import { useGetPlayableDataForIeObjects } from '~modules/content-page/hooks/useGetPlayableDataForIeObjects';
+import { useGetPlayableFileForIeObjects } from '~modules/content-page/hooks/useGetPlayableFileForIeObjects';
 import type {
 	DriekeuzespelerInterestState,
 	DriekeuzespelerTileColors,
@@ -76,8 +76,8 @@ export const BlockDriekeuzespeler: FunctionComponent<BlockDriekeuzespelerProps> 
 		useGetIeObjectsByIds(selectedSchemaIdentifiers);
 
 	// Ticketed with the selection, so the modal plays what is already there.
-	const { data: playableDataById, isFetching: isFetchingPlayableData } =
-		useGetPlayableDataForIeObjects(
+	const { data: playableFileById, isFetching: isFetchingPlayableFile } =
+		useGetPlayableFileForIeObjects(
 			selectedSchemaIdentifiers.map((schemaIdentifier) => ieObjectsById?.[schemaIdentifier])
 		);
 
@@ -94,9 +94,14 @@ export const BlockDriekeuzespeler: FunctionComponent<BlockDriekeuzespelerProps> 
 		// Not compacted: colours are positional, so dropping a missing interest shifts every later tile
 		// onto the wrong colour.
 		const interestIndex = selection?.[tileIndex];
-		const interest = interestIndex === undefined ? undefined : interests[interestIndex];
+		// Index and interest travel together, so the render below needs one check rather than one per
+		// half: opening the modal needs the index, naming the button needs the interest.
+		const selected =
+			interestIndex === undefined
+				? undefined
+				: { index: interestIndex, interest: interests[interestIndex] };
 		const { backgroundColor, textColor } = tileColors[tileIndex] ?? {};
-		const schemaIdentifier = interest?.mediaItem?.value;
+		const schemaIdentifier = selected?.interest?.mediaItem?.value;
 		const ieObject = schemaIdentifier ? ieObjectsById?.[schemaIdentifier] : undefined;
 
 		return (
@@ -115,19 +120,19 @@ export const BlockDriekeuzespeler: FunctionComponent<BlockDriekeuzespelerProps> 
 						loading="lazy"
 					/>
 				)}
-				{interestIndex !== undefined && !!interest && (
+				{!!selected?.interest && (
 					// A real button, so Enter and Space work for free. The thumbnail is decorative, so the
 					// interest name is what names the control.
 					<button
 						type="button"
 						className="c-driekeuzespeler__tile-button"
-						onClick={() => setOpenedIndex(interestIndex)}
+						onClick={() => setOpenedIndex(selected.index)}
 					>
 						<span
 							className="c-driekeuzespeler__pill"
 							style={{ backgroundColor, color: textColor } as CSSProperties}
 						>
-							{interest.name}
+							{selected.interest.name}
 						</span>
 					</button>
 				)}
@@ -176,12 +181,12 @@ export const BlockDriekeuzespeler: FunctionComponent<BlockDriekeuzespelerProps> 
 						: undefined
 				}
 				theme={themes?.find((theme) => theme.id === openedInterest?.theme?.value)}
-				playableData={
+				playableFile={
 					openedInterest?.mediaItem?.value
-						? playableDataById?.[openedInterest.mediaItem.value]
+						? playableFileById?.[openedInterest.mediaItem.value]
 						: undefined
 				}
-				isFetching={isFetchingObjects || isFetchingPlayableData}
+				isFetching={isFetchingObjects || isFetchingPlayableFile}
 				onClose={() => setOpenedIndex(null)}
 			/>
 		</div>
