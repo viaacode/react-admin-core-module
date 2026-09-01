@@ -4,6 +4,7 @@
 @use "../../../../shared/styles/settings/colors" as colors;
 @use "../../../../shared/styles/mixins/focus" as focus;
 @use "../../../../shared/styles/mixins/typography" as typography;
+@use "./shapes" as shapes;
 
 // The three tiles are hand placed, so each is positioned by its own centre inside a container with
 // the design's aspect ratio. Every size below is a percentage of that container, so the whole
@@ -59,36 +60,6 @@ $pill-height-mobile: variables.$g-spacer-unit * 6;
 // breakpoint and 1440. The bounds are the mobile and desktop sizes of the design.
 $pill-font-size: clamp(1.8rem, 1.964cqw, 2.4rem);
 
-// The decorative shapes behind the tiles, inlined as data uris the way BlockThemeReels does it: the
-// block ships inside admin-core's client.css, and a url() to a file would have to resolve on every
-// host. Used as masks, not images, so a shape takes the colour below rather than a fixed white.
-$shapes-desktop: url("data:image/svg+xml,%3Csvg width='1355.54' height='704.889' viewBox='0 0 1355.54 704.889' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1141.72 281.596L1064.3 174.686L1278.12 19.8429L1355.54 126.754L1141.72 281.596Z' fill='white'/%3E%3Cpath d='M868.993 648.922C803.069 618.012 774.745 539.402 805.664 473.482C836.582 407.563 915.14 379.068 981.064 409.978C1046.99 440.888 1075.31 519.498 1044.39 585.418C1013.48 651.337 934.916 679.832 868.993 648.922Z' fill='white'/%3E%3Cpath d='M430.688 65.8111L385.098 325.44L255.104 302.544L300.695 42.9157L430.688 65.8111Z' fill='white'/%3E%3Cpath d='M20.4439 131.484C30.5335 59.3767 97.2908 9.1256 169.397 19.224C241.504 29.3224 291.903 95.9811 281.813 168.089C271.724 240.197 204.966 290.448 132.86 280.349C60.7533 270.251 10.3544 203.592 20.4439 131.484Z' fill='white'/%3E%3C/svg%3E");
-$shapes-mobile-top: url("data:image/svg+xml,%3Csvg width='226.044' height='163.997' viewBox='0 0 226.044 163.997' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M15.149 138.048L33.6406 7.55105L98.9799 16.8445L80.4882 147.341L15.149 138.048Z' fill='white'/%3E%3Cpath d='M219.073 98.4495C215.223 134.651 182.693 160.866 146.493 157.011C110.292 153.157 84.0047 120.678 87.8549 84.4773C91.7051 48.2763 124.235 22.061 160.435 25.9157C196.636 29.7703 222.923 62.2485 219.073 98.4495Z' fill='white'/%3E%3C/svg%3E");
-$shapes-mobile-bottom: url("data:image/svg+xml,%3Csvg width='145.161' height='145.068' viewBox='0 0 145.161 145.068' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M138.19 79.52C134.339 115.721 101.81 141.936 65.6091 138.082C29.4085 134.227 3.12121 101.749 6.97141 65.5478C10.8216 29.3467 43.3513 3.13144 79.5519 6.9861C115.752 10.8408 142.04 43.3189 138.19 79.52Z' fill='white'/%3E%3C/svg%3E");
-
-// Each mobile shape is placed by the centre of its bounding box and rotated about it. The desktop
-// export carries no rotation, so it is placed by its top left corner.
-$shapes-desktop-left: -7.662%;
-$shapes-desktop-top: -16.408%;
-$shapes-desktop-width: 110.926%;
-$shapes-desktop-height: 137.674%;
-$shape-mobile-top: (x: 15.838%, y: 4.832%, width: 56.23%, height: 19.477%, tilt: -178.11deg);
-$shape-mobile-middle: (x: 89.688%, y: 54.429%, width: 18.388%, height: 17.558%, tilt: 54.09deg);
-$shape-mobile-bottom: (x: 5.863%, y: 84.548%, width: 36.109%, height: 17.229%, tilt: -178.11deg);
-
-// The renderer publishes the block background's WCAG text colour, so a shape is drawn in the colour
-// the text on that background uses -- black on a light background, not the design's white. The same
-// trade BlockOverviewThemes' group shapes make. ARC-3848
-$shape-color: var(--bg-text-primary, #{colors.$white});
-
-@mixin mobile-shape($shape) {
-	left: map.get($shape, x);
-	top: map.get($shape, y);
-	width: map.get($shape, width);
-	height: map.get($shape, height);
-	transform: translate(-50%, -50%) rotate(map.get($shape, tilt));
-}
-
 .c-driekeuzespeler {
 	position: relative;
 
@@ -140,66 +111,7 @@ $shape-color: var(--bg-text-primary, #{colors.$white});
 		list-style: none;
 	}
 
-	// Decorative: `aria-hidden` in the markup, and no pointer events, so it never swallows a click meant
-	// for a tile. A mask layer cannot be rotated on its own, so each rotated shape needs a box of its
-	// own -- the two pseudo elements and the child span.
-	&__shapes {
-		position: absolute;
-		z-index: 0;
-		inset: 0;
-		pointer-events: none;
-
-		&::before,
-		&::after {
-			content: "";
-			position: absolute;
-
-			// Each box already carries the shape's own aspect ratio, so filling it does not distort.
-			mask-size: 100% 100%;
-			mask-repeat: no-repeat;
-			background-color: $shape-color;
-		}
-
-		&::before {
-			left: $shapes-desktop-left;
-			top: $shapes-desktop-top;
-			width: $shapes-desktop-width;
-			height: $shapes-desktop-height;
-			mask-image: $shapes-desktop;
-		}
-
-		&::after {
-			display: none;
-		}
-
-		@media (max-width: variables.$g-bp2) {
-			&::before {
-				@include mobile-shape($shape-mobile-top);
-
-				mask-image: $shapes-mobile-top;
-			}
-
-			&::after {
-				@include mobile-shape($shape-mobile-bottom);
-
-				display: block;
-				mask-image: $shapes-mobile-bottom;
-			}
-		}
-	}
-
-	// A plain rectangle, so a background colour says it exactly -- no artwork needed.
-	&__shape {
-		display: none;
-
-		@media (max-width: variables.$g-bp2) {
-			@include mobile-shape($shape-mobile-middle);
-
-			display: block;
-			position: absolute;
-			background-color: $shape-color;
-		}
-	}
+	@include shapes.shapes;
 
 	&__tile {
 		// Placed by its centre, so its size can change without moving it.
