@@ -13,7 +13,6 @@ import type { HeroCarouselSlideItem } from '~content-blocks/BlockHeroCarousel/Bl
 import { BlockHeroCarouselActiveSlide } from '~content-blocks/BlockHeroCarousel/BlockHeroCarouselActiveSlide.tsx';
 import { BlockHeroCarouselInactiveSlide } from '~content-blocks/BlockHeroCarousel/BlockHeroCarouselInactiveSlide.tsx';
 import { CarouselButtons } from '~modules/content-page/components/CarouselButtons/CarouselButtons.tsx';
-import { IeObjectLoadError } from '~modules/content-page/components/IeObjectLoadError/IeObjectLoadError.tsx';
 import type { DefaultComponentProps } from '~modules/shared/types/components';
 import {
 	ACTIVE_SLIDE_CLASS,
@@ -27,6 +26,7 @@ import {
 
 import './BlockHeroCarousel.scss';
 import { IeObjectMetadata } from '~modules/content-page/components/IeObjectMetadata/IeObjectMetadata.tsx';
+import { mapDcTermsFormatToSimpleType } from '~shared/helpers/map-format-to-type.ts';
 import type { PlayableDisplayIeObject } from '~shared/services/ie-objects-service/ie-objects.types.ts';
 
 export interface BlockHeroCarouselCarouselProps extends DefaultComponentProps {
@@ -139,7 +139,7 @@ export const BlockHeroCarouselCarousel: FunctionComponent<BlockHeroCarouselCarou
 								aria-hidden={isClone ? true : undefined}
 								className={clsx(
 									'c-block-hero-carousel__carousel-slide',
-									`c-block-hero-carousel__carousel-slide--${item?.dctermsFormat}`,
+									`c-block-hero-carousel__carousel-slide--${mapDcTermsFormatToSimpleType(item?.dctermsFormat)}`,
 									index === activeIndex && ACTIVE_SLIDE_CLASS
 								)}
 								style={{

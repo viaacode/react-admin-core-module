@@ -6,12 +6,9 @@
 
 $hero-carousel-format-widths: (
 	"video": 28rem,
-	"videofragment": 28rem,
-	"film": 28rem,
 	"audio": 16rem,
-	"audiofragment": 16rem,
 	"newspaper": 12rem,
-	"newspaperpage": 12rem,
+	"image": 12rem,
 );
 $background-image-height: 80%;
 $slide-height: 16rem;
@@ -397,6 +394,10 @@ $hero-carousel-search-radius-desktop: 3.2rem;
 				&--#{$format} {
 					width: $width;
 				}
+			}
+
+			&--audio, &--video {
+				border-width: 0;
 			}
 
 			// Compound selector (two classes) so this reliably outranks the single-class
