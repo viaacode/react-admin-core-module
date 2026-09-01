@@ -313,11 +313,14 @@ $pill-font-size: clamp(1.8rem, 1.964cqw, 2.4rem);
 	--tile-scale: #{$tile-scale-active-desktop};
 }
 
-// One active scale on mobile. Last, so it beats every desktop scale above whatever the specificity.
+// One active scale on mobile. Every desktop scale above needs its selector repeated here, matched
+// for specificity: source order alone loses to the extra `:nth-child` on the middle tile's rule,
+// which would hand a hovered middle tile the desktop scale and burst the stage.
 @media (max-width: variables.$g-bp2) {
 	.c-driekeuzespeler__tiles:not(:has(.c-driekeuzespeler__tile:is(:hover, :focus-within)))
 		.c-driekeuzespeler__tile:nth-child(2),
-	.c-driekeuzespeler__tile:is(:hover, :focus-within) {
+	.c-driekeuzespeler__tile:is(:hover, :focus-within),
+	.c-driekeuzespeler__tile:nth-child(2):is(:hover, :focus-within) {
 		--tile-scale: #{$tile-scale-active-mobile};
 	}
 }
