@@ -5,64 +5,6 @@
 $media-aspect-ratio: 16 / 9;
 $card-radius: variables.$g-spacer-unit * 1.5;
 
-// Nothing but the close button shows over the media, but the dialog still needs an accessible name,
-// so the title stays in the DOM off screen.
-.c-driekeuzespeler-modal .c-modal__title {
-	position: absolute;
-	width: 1px;
-	height: 1px;
-	padding: 0;
-	margin: -1px;
-	overflow: hidden;
-	clip-path: inset(50%);
-	white-space: nowrap;
-	border: 0;
-}
-
-.c-driekeuzespeler-modal .c-modal__header--transparent {
-	padding: variables.$g-spacer-unit * 2;
-
-	.c-button--icon {
-		width: 3.2rem;
-		height: 3.2rem;
-		border-radius: 50%;
-		background-color: colors.$color-gray-1000;
-		color: colors.$white;
-	}
-}
-
-// Edge-to-edge media instead of the library's default body padding.
-.c-driekeuzespeler-modal .c-modal__body {
-	padding: 0;
-}
-
-// The library forces the dialog to near-full screen height on mobile and paints it white, which left
-// a blank void under a modal shorter than the screen. The overrides below give the height back to the
-// content. The caller's className lands on the outer `.c-modal-context`, not on `.c-modal`, so these
-// must be descendant selectors; at three classes they also beat the library's own two regardless of
-// load order.
-@media (max-width: variables.$g-bp2) {
-	// The library's vertical-centering `margin: auto` only applies above $g-bp2, so without this a
-	// short modal sits at the top of the flex row.
-	.c-modal-context.c-driekeuzespeler-modal {
-		align-items: center;
-	}
-
-	// Transparent: the media and the metadata card carry their own background, and painting the dialog
-	// would fill the gutter either side with a second, slightly different dark.
-	.c-modal-context.c-driekeuzespeler-modal .c-modal {
-		height: auto;
-		max-height: calc(100% - 4rem);
-		background-color: transparent;
-	}
-
-	// Lines the close button up with the media's inset corner, not the full-bleed dialog edge.
-	.c-driekeuzespeler-modal .c-modal__header--transparent {
-		padding: variables.$g-spacer-unit * 2 variables.$g-spacer-unit * 2.5;
-	}
-
-}
-
 .c-driekeuzespeler-modal {
 	&__media {
 		display: flex;
@@ -95,17 +37,35 @@ $card-radius: variables.$g-spacer-unit * 1.5;
 		object-fit: contain;
 	}
 
+	// Stands in for the essence when the visitor has no access to it.
+	&__inaccessible {
+		font-size: variables.$g-spacer-unit * 8;
+	}
+
 	&__loading {
 		margin: 0;
 	}
 
-	// The bar grows with its content instead of the shared component's fixed 6rem row. Left on the
-	// shared component because BlockTimeline and the carousel rely on that row. Chained onto the
-	// shared class so it wins whichever stylesheet loads last.
-	&__metadata.c-ie-object-metadata {
-		height: auto;
+	// The theme CTA sits in the same bar as the object metadata, so the modal owns the bar and the
+	// shared component renders inside it without its own chrome.
+	&__metadata-row {
+		display: flex;
+		align-items: center;
+		gap: variables.$g-spacer-unit * 3;
 		padding: variables.$g-spacer-unit * 2;
+		background-color: colors.$color-platinum;
+	}
+
+	// The bar grows with its content instead of the shared component's fixed 6rem row, and the row
+	// above carries the background now. Chained onto the shared class so it wins whichever
+	// stylesheet loads last.
+	&__metadata.c-ie-object-metadata {
+		flex: 1 1 auto;
+		min-width: 0;
+		height: auto;
+		padding: 0;
 		margin-top: 0;
+		background-color: transparent;
 	}
 
 	&__divider {
@@ -136,40 +96,26 @@ $card-radius: variables.$g-spacer-unit * 1.5;
 			flex: 0 0 auto;
 		}
 
-		&__metadata.c-ie-object-metadata {
+		// The theme CTA drops to its own row under the metadata; the rest stays side by side inside
+		// the shared component.
+		&__metadata-row {
+			flex-direction: column;
+			align-items: stretch;
 			background-color: colors.$white;
 			border-radius: 0 0 $card-radius $card-radius;
 			width: calc(100% - #{variables.$g-spacer-unit * 5});
 			margin: 0 auto;
-
-			// Only the theme CTA drops to its own row; the rest stays side by side.
-			display: grid;
-			grid-template-columns: 1fr auto;
-			grid-template-areas:
-				'text cta'
-				'divider divider'
-				'theme-cta theme-cta';
-			gap: variables.$g-spacer-unit * 2;
-
-			.c-ie-object-metadata__cta {
-				grid-area: cta;
-			}
-
-			.c-ie-object-metadata__text {
-				grid-area: text;
-			}
-
-			.c-driekeuzespeler-modal__divider {
-				grid-area: divider;
-				width: 100%;
-				height: 1px;
-				align-self: auto;
-			}
-
-			.c-driekeuzespeler-modal__theme-cta {
-				grid-area: theme-cta;
-				width: fit-content;
-			}
 		}
+
+		&__divider {
+			width: 100%;
+			height: 1px;
+			align-self: auto;
+		}
+
+		&__theme-cta {
+			width: fit-content;
+		}
+
 	}
 }

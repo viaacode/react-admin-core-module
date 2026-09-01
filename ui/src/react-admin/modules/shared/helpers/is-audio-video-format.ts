@@ -17,3 +17,7 @@ export function isVideoFormat(format: IeObjectType | undefined): boolean {
 export function isAudioVideoFormat(format: IeObjectType | undefined): boolean {
 	return isAudioFormat(format) || isVideoFormat(format);
 }
+
+export function isNewspaperFormat(format: IeObjectType | undefined): boolean {
+	return mapDcTermsFormatToSimpleType(format) === SimpleIeObjectType.NEWSPAPER;
+}

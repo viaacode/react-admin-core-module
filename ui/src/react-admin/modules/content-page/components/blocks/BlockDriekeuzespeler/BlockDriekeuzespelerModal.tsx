@@ -6,10 +6,12 @@ import React from 'react';
 import { AdminConfigManager } from '~core/config/config.class';
 import { IeObjectFlowPlayerWrapper } from '~modules/content-page/components/IeObjectFlowPlayerWrapper/IeObjectFlowPlayerWrapper.tsx';
 import { IeObjectMetadata } from '~modules/content-page/components/IeObjectMetadata/IeObjectMetadata.tsx';
-import type { PlayableData } from '~modules/content-page/hooks/useGetPlayableDataForIeObjects';
+import type { PlayableFile } from '~modules/content-page/hooks/useGetPlayableFileForIeObjects';
 import { Locale } from '~modules/translations/translations.core.types.ts';
+import { Icon } from '~shared/components/Icon/Icon';
 import { SmartLink } from '~shared/components/SmartLink/SmartLink.tsx';
-import { isAudioVideoFormat } from '~shared/helpers/is-audio-video-format.ts';
+import { getIconFromObjectType } from '~shared/helpers/get-icon-from-object-type.ts';
+import { isAudioVideoFormat, isNewspaperFormat } from '~shared/helpers/is-audio-video-format.ts';
 import type { IeObjectType } from '~shared/helpers/map-format-to-type.ts';
 import { tText } from '~shared/helpers/translation-functions';
 import type {
@@ -27,7 +29,7 @@ export interface BlockDriekeuzespelerModalProps {
 	} | null;
 	ieObject?: IeObject;
 	/** Absent for a newspaper, which has nothing to ticket. */
-	playableData?: PlayableData;
+	playableFile?: PlayableFile;
 	/** Resolved by the parent: the block config stores only an id, and the CTA needs name and slug. */
 	theme?: Theme;
 	isFetching: boolean;
@@ -41,7 +43,7 @@ export interface BlockDriekeuzespelerModalProps {
 export const BlockDriekeuzespelerModal: FunctionComponent<BlockDriekeuzespelerModalProps> = ({
 	interest,
 	ieObject,
-	playableData,
+	playableFile,
 	theme,
 	isFetching,
 	onClose,
@@ -54,7 +56,7 @@ export const BlockDriekeuzespelerModal: FunctionComponent<BlockDriekeuzespelerMo
 	const locale = AdminConfigManager.getConfig().locale || Locale.Nl;
 	const themeName = locale === Locale.En ? theme?.nameEn : theme?.nameNl;
 
-	const isPlayable = !!ieObject && isAudioVideoFormat(ieObject.dctermsFormat);
+	const isPlayable = isAudioVideoFormat(ieObject?.dctermsFormat);
 
 	// The shared player and metadata panel describe an object the way playable-display-data does.
 	const displayIeObject: PlayableDisplayIeObject | undefined = ieObject && {
@@ -67,9 +69,9 @@ export const BlockDriekeuzespelerModal: FunctionComponent<BlockDriekeuzespelerMo
 		maintainerName: ieObject.maintainerName || '',
 		maintainerLogo: ieObject.maintainerLogo || undefined,
 		maintainerOverlay: !!ieObject.maintainerOverlay,
-		playableUrl: playableData?.playableUrl,
-		mimeType: playableData?.mimeType,
-		peakfileData: playableData?.peakfileData,
+		playableUrl: playableFile?.playableUrl,
+		mimeType: playableFile?.mimeType,
+		peakfileData: playableFile?.peakfileData,
 	};
 
 	// Only mount the player while the modal is open, so closing stops playback outright instead of
@@ -77,6 +79,16 @@ export const BlockDriekeuzespelerModal: FunctionComponent<BlockDriekeuzespelerMo
 	const renderMedia = (): ReactElement | null => {
 		if (!ieObject || !displayIeObject) {
 			return null;
+		}
+
+		// No thumbnail means the essence is not available to this visitor, so neither the player nor
+		// the viewer may be shown.
+		if (!ieObject.thumbnailUrl) {
+			return (
+				<span className="c-driekeuzespeler-modal__inaccessible">
+					<Icon name={getIconFromObjectType(ieObject.dctermsFormat, false)} />
+				</span>
+			);
 		}
 
 		if (isPlayable) {
@@ -90,8 +102,9 @@ export const BlockDriekeuzespelerModal: FunctionComponent<BlockDriekeuzespelerMo
 		}
 
 		// The viewer is injected rather than living here because the host resolves a ticket-service
-		// token per page.
-		if (IiifViewer) {
+		// token per page. Only a newspaper has the pages it needs; anything else falls back to the
+		// thumbnail.
+		if (IiifViewer && isNewspaperFormat(ieObject.dctermsFormat)) {
 			return (
 				<div className="c-driekeuzespeler-modal__iiif-viewer">
 					<IiifViewer ieObject={ieObject} title={ieObject.name} />
@@ -99,17 +112,42 @@ export const BlockDriekeuzespelerModal: FunctionComponent<BlockDriekeuzespelerMo
 			);
 		}
 
-		if (ieObject.thumbnailUrl) {
-			return (
-				<img
-					className="c-driekeuzespeler-modal__newspaper"
-					src={ieObject.thumbnailUrl}
-					alt={ieObject.name || ''}
-				/>
-			);
+		return (
+			<img
+				className="c-driekeuzespeler-modal__newspaper"
+				src={ieObject.thumbnailUrl}
+				alt={ieObject.name || ''}
+			/>
+		);
+	};
+
+	// Sits at the end of the metadata row, after a divider that separates it from the primary CTA.
+	const renderThemeCta = (): ReactElement | undefined => {
+		if (!themeName || !theme) {
+			return undefined;
 		}
 
-		return null;
+		return (
+			<>
+				<span className="c-driekeuzespeler-modal__divider" aria-hidden="true" />
+				<SmartLink
+					action={{
+						type: AvoCoreContentPickerType.INTERNAL_LINK,
+						value: stringifyUrl({
+							url: AdminConfigManager.getConfig().routes.SEARCH || '/zoeken',
+							query: { thema: theme.slug },
+						}),
+					}}
+					className="c-driekeuzespeler-modal__theme-cta"
+				>
+					{tText(
+						'modules/content-page/components/blocks/block-driekeuzespeler/block-driekeuzespeler___toon-meer-over-thema',
+						{ theme: themeName },
+						[HET_ARCHIEF]
+					)}
+				</SmartLink>
+			</>
+		);
 	};
 
 	return (
@@ -150,37 +188,14 @@ export const BlockDriekeuzespelerModal: FunctionComponent<BlockDriekeuzespelerMo
 				</div>
 
 				{!!displayIeObject && (
-					<IeObjectMetadata
-						ieObject={displayIeObject}
-						fallbackTitle={interest?.name || ''}
-						className="c-driekeuzespeler-modal__metadata"
-						secondaryCta={
-							themeName && theme ? (
-								<>
-									{/* Separates the primary CTA row from the theme CTA. Drawn here rather than by
-									    IeObjectMetadata, because this is the only block that puts a second CTA in
-									    that row. */}
-									<span className="c-driekeuzespeler-modal__divider" aria-hidden="true" />
-									<SmartLink
-										action={{
-											type: AvoCoreContentPickerType.INTERNAL_LINK,
-											value: stringifyUrl({
-												url: AdminConfigManager.getConfig().routes.SEARCH || '/zoeken',
-												query: { thema: theme.slug },
-											}),
-										}}
-										className="c-driekeuzespeler-modal__theme-cta"
-									>
-										{tText(
-											'modules/content-page/components/blocks/block-driekeuzespeler/block-driekeuzespeler___toon-meer-over-thema',
-											{ theme: themeName },
-											[HET_ARCHIEF]
-										)}
-									</SmartLink>
-								</>
-							) : undefined
-						}
-					/>
+					<div className="c-driekeuzespeler-modal__metadata-row">
+						<IeObjectMetadata
+							ieObject={displayIeObject}
+							fallbackTitle={interest?.name || ''}
+							className="c-driekeuzespeler-modal__metadata"
+						/>
+						{renderThemeCta()}
+					</div>
 				)}
 			</ModalBody>
 		</Modal>
