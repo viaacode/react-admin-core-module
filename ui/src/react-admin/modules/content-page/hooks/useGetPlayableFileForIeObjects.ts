@@ -10,7 +10,7 @@ interface PeakFile {
 	data: number[];
 }
 
-export interface PlayableData {
+export interface PlayableFile {
 	/** Ready to feed straight into a player, or null when the file could not be ticketed. */
 	playableUrl: string | null;
 	mimeType?: string;
@@ -18,7 +18,7 @@ export interface PlayableData {
 	peakfileData?: number[] | null;
 }
 
-const resolvePlayableData = async (ieObject: IeObject): Promise<PlayableData> => {
+const resolvePlayableFile = async (ieObject: IeObject): Promise<PlayableFile> => {
 	const playableFile = findPlayableFile(ieObject);
 	const peakFile = isAudioFormat(ieObject.dctermsFormat) ? findPeakFile(ieObject) : undefined;
 
@@ -49,12 +49,12 @@ const resolvePlayableData = async (ieObject: IeObject): Promise<PlayableData> =>
  * ticket is short-lived and access-checked at request time, so it cannot travel with the object --
  * but it can be asked for early. Newspapers are skipped; the viewer resolves its own page tokens.
  */
-export const useGetPlayableDataForIeObjects = (ieObjects: (IeObject | undefined)[]) => {
+export const useGetPlayableFileForIeObjects = (ieObjects: (IeObject | undefined)[]) => {
 	const playableObjects = ieObjects.filter(
 		(ieObject): ieObject is IeObject => !!ieObject && isAudioVideoFormat(ieObject.dctermsFormat)
 	);
 
-	return useQuery<Record<string, PlayableData>>({
+	return useQuery<Record<string, PlayableFile>>({
 		queryKey: [
 			QUERY_KEYS.GET_IE_OBJECT_PLAYER_TICKET,
 			playableObjects
@@ -67,7 +67,7 @@ export const useGetPlayableDataForIeObjects = (ieObjects: (IeObject | undefined)
 				await Promise.all(
 					playableObjects.map(async (ieObject) => [
 						ieObject.schemaIdentifier,
-						await resolvePlayableData(ieObject),
+						await resolvePlayableFile(ieObject),
 					])
 				)
 			),
