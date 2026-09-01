@@ -164,9 +164,6 @@ export const BlockTimeline: FunctionComponent<BlockTimelineProps> = ({
 							</time>
 							<div
 								className={clsx('c-block-timeline__node-content', {
-									'c-block-timeline__node-content--has-background': !!backgroundColor,
-									'c-block-timeline__node-content--has-image': hasImage,
-									'c-block-timeline__node-content--has-object': hasObject,
 									'u-background-text-colors': hasNodeTextColors,
 								})}
 								style={
@@ -178,84 +175,94 @@ export const BlockTimeline: FunctionComponent<BlockTimelineProps> = ({
 										: undefined
 								}
 							>
-								{hasFailedObject && (
-									<div className={clsx('c-ie-object-media')}>
-										<IeObjectLoadError className="c-block-timeline__node-object-error" />
-									</div>
-								)}
-								{isLoadingObject && (
-									<div className={clsx('c-ie-object-media')}>
-										<div
-											className={clsx(
-												'c-block-timeline__node-image-wrapper',
-												'c-block-timeline__node-image-wrapper--loading'
-											)}
-										>
-											{node.image && (
-												<img
-													src={node.image}
-													alt=""
-													aria-hidden="true"
-													className="c-block-timeline__node-object-image"
-												/>
-											)}
-											<div className="c-block-timeline__node-object-loading">
-												<Spinner size="large" locationId={'timeline-node-object'} />
-											</div>
+								{/* The metadata bar sits outside this wrapper so its height -- which grows with
+								    its content -- never has to be baked into the coloured background's size. */}
+								<div
+									className={clsx('c-block-timeline__node-body', {
+										'c-block-timeline__node-body--has-background': !!backgroundColor,
+										'c-block-timeline__node-body--has-image': hasImage,
+										'c-block-timeline__node-body--has-object': hasObject,
+									})}
+								>
+									{hasFailedObject && (
+										<div className={clsx('c-ie-object-media')}>
+											<IeObjectLoadError className="c-block-timeline__node-object-error" />
 										</div>
-									</div>
-								)}
-								{ieObject && (
-									<div className={clsx('c-ie-object-media')}>
-										{isAudioVideoFormat(ieObject.dctermsFormat) ? (
-											<IeObjectFlowPlayerWrapper
-												className="c-block-timeline__node-object-media"
-												ieObject={ieObject}
-												poster={node.image}
-											/>
-										) : (
-											// Newspapers
-											thumbnail && (
-												<div className="c-block-timeline__node-image-wrapper">
+									)}
+									{isLoadingObject && (
+										<div className={clsx('c-ie-object-media')}>
+											<div
+												className={clsx(
+													'c-block-timeline__node-image-wrapper',
+													'c-block-timeline__node-image-wrapper--loading'
+												)}
+											>
+												{node.image && (
 													<img
-														src={thumbnail}
-														alt={ieObject.name || node.title}
+														src={node.image}
+														alt=""
+														aria-hidden="true"
 														className="c-block-timeline__node-object-image"
 													/>
+												)}
+												<div className="c-block-timeline__node-object-loading">
+													<Spinner size="large" locationId={'timeline-node-object'} />
 												</div>
-											)
+											</div>
+										</div>
+									)}
+									{ieObject && (
+										<div className={clsx('c-ie-object-media')}>
+											{isAudioVideoFormat(ieObject.dctermsFormat) ? (
+												<IeObjectFlowPlayerWrapper
+													className="c-block-timeline__node-object-media"
+													ieObject={ieObject}
+													poster={node.image}
+												/>
+											) : (
+												// Newspapers
+												thumbnail && (
+													<div className="c-block-timeline__node-image-wrapper">
+														<img
+															src={thumbnail}
+															alt={ieObject.name || node.title}
+															className="c-block-timeline__node-object-image"
+														/>
+													</div>
+												)
+											)}
+										</div>
+									)}
+									{node.visualType === 'IMAGE' && node.image && (
+										<div className="c-block-timeline__node-image-wrapper">
+											<img
+												src={node.image}
+												alt={node.imageAlt || node.title}
+												className="c-block-timeline__node-image"
+											/>
+										</div>
+									)}
+									<div className="c-block-timeline__node-text">
+										<CopyrightAttribution
+											title={node.copyrightTitle}
+											text={node.copyrightText}
+											showIcon={node.copyrightIconVisible}
+											className="c-block-timeline__node-image-caption"
+										/>
+										<h3 className="c-block-timeline__node-title u-background-text-primary">
+											{node.title}
+										</h3>
+										{node.text && (
+											<Html
+												content={node.text}
+												sanitizePreset={SanitizePreset.full}
+												type="div"
+												className="c-block-timeline__node-description u-background-text-primary u-background-text-links"
+											/>
 										)}
 									</div>
-								)}
-								{node.visualType === 'IMAGE' && node.image && (
-									<div className="c-block-timeline__node-image-wrapper">
-										<img
-											src={node.image}
-											alt={node.imageAlt || node.title}
-											className="c-block-timeline__node-image"
-										/>
-									</div>
-								)}
-								<div className="c-block-timeline__node-text">
-									<CopyrightAttribution
-										title={node.copyrightTitle}
-										text={node.copyrightText}
-										showIcon={node.copyrightIconVisible}
-										className="c-block-timeline__node-image-caption"
-									/>
-									<h3 className="c-block-timeline__node-title u-background-text-primary">
-										{node.title}
-									</h3>
-									{node.text && (
-										<Html
-											content={node.text}
-											sanitizePreset={SanitizePreset.full}
-											type="div"
-											className="c-block-timeline__node-description u-background-text-primary u-background-text-links"
-										/>
-									)}
-									{ieObject && <IeObjectMetadata ieObject={ieObject} fallbackTitle={node.title} />}
 								</div>
+								{ieObject && <IeObjectMetadata ieObject={ieObject} fallbackTitle={node.title} />}
 							</div>
 						</li>
 					);
