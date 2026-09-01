@@ -151,7 +151,7 @@ export const DRIEKEUZESPELER_CONFIG = (position = 0): ContentBlockConfig => ({
 							[HET_ARCHIEF]
 						)
 					),
-					mediaItem: IE_OBJECT_FIELD(),
+					mediaItem: IE_OBJECT_FIELD({ isRequired: true }),
 					theme: {
 						label: tText(
 							'modules/content-page/components/blocks/block-driekeuzespeler/block-driekeuzespeler___gerelateerd-thema',

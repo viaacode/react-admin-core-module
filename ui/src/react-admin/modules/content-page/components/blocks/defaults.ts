@@ -257,17 +257,19 @@ export const IE_OBJECT_FIELD = ({
 	label,
 	isVisible,
 	fieldsToResetOnChange,
-	isRequired = true,
+	isRequired = false,
+	requiredError,
 }: {
 	allowedObjectTypes?: IeObjectType[];
 	label?: string;
 	isVisible?: IsVisibleFunc;
 	fieldsToResetOnChange?: string[];
 	isRequired?: boolean;
+	requiredError?: string;
 } = {}): ContentBlockField => ({
 	label:
 		label ||
-		tText('modules/content-page/helpers/snippet-time-fields___object', undefined, [HET_ARCHIEF]),
+		tText('modules/content-page/components/blocks/defaults___object', undefined, [HET_ARCHIEF]),
 	editorType: ContentBlockEditor.ContentPicker,
 	editorProps: {
 		allowedTypes: [AvoCoreContentPickerType.IE_OBJECT],
@@ -281,11 +283,12 @@ export const IE_OBJECT_FIELD = ({
 				value?.value
 					? []
 					: [
-							tText(
-								'modules/content-page/helpers/snippet-time-fields___een-object-is-verplicht',
-								undefined,
-								[HET_ARCHIEF]
-							),
+							requiredError ||
+								tText(
+									'modules/content-page/components/blocks/defaults___een-object-is-verplicht',
+									undefined,
+									[HET_ARCHIEF]
+								),
 						]
 		: undefined,
 	isVisible,

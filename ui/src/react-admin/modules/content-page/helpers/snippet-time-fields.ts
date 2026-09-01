@@ -152,6 +152,7 @@ export const IE_OBJECT_WITH_SNIPPET_TIME_FIELDS = (
 		allowedObjectTypes,
 		isVisible: isVisibleFunc,
 		fieldsToResetOnChange: ['startTime', 'endTime'],
+		isRequired: true,
 	}),
 	startTime: SNIPPET_TIME_FIELD(
 		'startTime',

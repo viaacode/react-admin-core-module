@@ -148,7 +148,6 @@ export const OBJECTS_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => (
 							undefined,
 							[HET_ARCHIEF]
 						),
-						isRequired: false,
 					}),
 				},
 				repeat: {
