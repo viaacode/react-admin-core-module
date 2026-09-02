@@ -19,6 +19,7 @@ $object-meta-gap: 4rem;
 
 	@media (max-width: variables.$g-bp3) {
 		height: $object-meta-height-mobile;
+		gap: variables.$g-spacer-unit * 2;
 		flex-direction: row-reverse;
 	}
 

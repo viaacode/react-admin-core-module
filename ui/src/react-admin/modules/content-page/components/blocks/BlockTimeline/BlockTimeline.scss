@@ -20,19 +20,16 @@ $node-media-aspect-ratio: '1215 / 630';
 
 // Vertical space between every item on the timeline (start cap, nodes, end cap).
 $item-gap-desktop: 12rem;
-$item-gap-mobile: 5rem;
+$item-gap-mobile: variables.$g-spacer-unit * 7;
 
 // Inner padding of a node that has a background colour.
-$node-background-padding: 4rem;
+$node-background-padding: variables.$g-spacer-unit * 4;
 
 // Gap between a node's media (image / object) and the start of its background colour band.
 $node-background-top-gap: 5rem;
 
 // See also IeObjectMetadata
 $object-meta-vertical-padding: variables.$g-spacer-unit * 2;
-$object-meta-height-desktop: calc(5.2rem + $object-meta-vertical-padding + $object-meta-vertical-padding); // Adding 2-times the padding
-$object-meta-height-mobile: 8.4rem;
-$object-meta-gap: 4rem;
 
 .c-block-timeline {
 	position: relative;
@@ -186,17 +183,25 @@ $object-meta-gap: 4rem;
 		min-width: 0;
 		margin-top: variables.$g-spacer-unit * 2;
 		padding-left: $line-content-gap;
+	}
 
+	// Everything a node shows above its object's metadata bar (media, title, description). Split
+	// out from __node-content so the coloured background below can size itself to this content
+	// alone: the metadata bar's height varies with its own content, and this box's height is
+	// derived from normal flow layout instead of a fixed number, so it never has to know that
+	// height up front.
+	&__node-body {
 		&--has-background {
 			position: relative;
-			padding-bottom: $node-background-padding;
 
 			// Full-page-width colour band behind the node's content. The 5000px width is a
 			// generous fixed size that always covers the viewport, breaking out of any
 			// max-width content container (see BlockOverviewThemes for the same pattern). With
 			// media, it starts $node-background-top-gap below the media's top edge so that edge
 			// stays free of colour; without media there's nothing to leave uncovered, so it
-			// starts at the very top and covers the title and description in full.
+			// starts at the very top and covers the title and description in full. The object's
+			// metadata bar sits outside this box entirely (see BlockTimeline.tsx), so the band
+			// naturally stops right above it regardless of the metadata's rendered height.
 			&::before {
 				content: '';
 				position: absolute;
@@ -208,18 +213,9 @@ $object-meta-gap: 4rem;
 				background-color: var(--c-block-timeline-node-bg);
 			}
 
-			&.c-block-timeline__node-content--has-image::before {
+			&.c-block-timeline__node-body--has-image::before,
+			&.c-block-timeline__node-body--has-object::before {
 				top: $node-background-top-gap;
-			}
-
-			// Stops right above the object's meta bar, which sits outside the coloured band.
-			&.c-block-timeline__node-content--has-object::before {
-				top: $node-background-top-gap;
-				bottom: $object-meta-gap + $object-meta-height-desktop;
-
-				@media (max-width: variables.$g-bp3) {
-					bottom: $object-meta-gap + $object-meta-height-mobile;
-				}
 			}
 
 			> * {
@@ -230,16 +226,21 @@ $object-meta-gap: 4rem;
 	}
 
 	&__node-text {
-		padding-top: 1rem;
+		padding-bottom: $node-background-padding;
 	}
 
 	&__node-title {
 		margin: (variables.$g-spacer-unit * 4) 0 0;
 
+		&:first-child {
+			margin-top: 0;
+		}
+
 		@include typography.sofia-pro-heading-lg;
 
 		@media (max-width: variables.$g-bp3) {
 			@include typography.sofia-pro-heading-md;
+			margin: (variables.$g-spacer-unit * 3) 0 0;
 		}
 	}
 
@@ -307,9 +308,9 @@ $object-meta-gap: 4rem;
 	}
 
 	.c-ie-object-metadata {
-		height: $object-meta-height-desktop;
-		margin-left: -$line-content-gap;
-		margin-top: $object-meta-gap;
+		height: auto;
+		margin-left: calc(#{-$line-content-gap} + 1px);
+		margin-top: 0;
 		padding: $object-meta-vertical-padding (variables.$g-spacer-unit * 4);
 
 		@media (max-width: variables.$g-bp3) {

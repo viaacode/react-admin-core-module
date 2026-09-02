@@ -3,8 +3,9 @@ import React from 'react';
 import type { BlockCTAsProps } from '~content-blocks/BlockCTAs/BlockCTAs';
 import { BlockCTAs } from '~content-blocks/BlockCTAs/BlockCTAs';
 
-import { isMobileWidth } from '~shared/helpers/media-query';
+import { useIsMobileWidth } from '~shared/helpers/media-query';
 
 export const BlockCTAsWrapper: FunctionComponent<BlockCTAsProps> = (props) => {
-	return <BlockCTAs {...props} width={isMobileWidth() ? '100%' : props.width} />;
+	const isMobile = useIsMobileWidth();
+	return <BlockCTAs {...props} width={isMobile ? '100%' : props.width} />;
 };

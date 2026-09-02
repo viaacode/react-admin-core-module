@@ -21,7 +21,7 @@ import { App, Locale } from '~modules/translations/translations.core.types.ts';
 import { Icon } from '~shared/components/Icon';
 import { generateSmartLink } from '~shared/components/SmartLink/SmartLink.tsx';
 import { getIconFromObjectType } from '~shared/helpers/get-icon-from-object-type.ts';
-import { isMobileWidth } from '~shared/helpers/media-query.ts';
+import { useIsMobileWidth } from '~shared/helpers/media-query.ts';
 import { tText } from '~shared/helpers/translation-functions.ts';
 
 import 'swiper/css';
@@ -46,6 +46,7 @@ export const BlockThemeReelSection: FunctionComponent<BlockThemeReelSectionProps
 	const { data: theme } = useGetThemeWithObjects(themeId);
 	const locale = AdminConfigManager.getConfig().locale;
 
+	const isMobile = useIsMobileWidth();
 	const [controlledSwiper, setControlledSwiper] = useState<SwiperController | null>(null);
 
 	// The "open this theme" tile has no image, it gets one of the tertiary brand colors instead.
@@ -143,7 +144,7 @@ export const BlockThemeReelSection: FunctionComponent<BlockThemeReelSectionProps
 				<span className="c-block-theme-reels-section__header-title u-background-text-primary">
 					{themeName}
 				</span>
-				{isMobileWidth() && (description || themeDescription) && (
+				{isMobile && (description || themeDescription) && (
 					<span className="c-block-theme-reels-section__header-subtitle u-background-text-secondary">
 						{description || themeDescription || ''}
 					</span>
@@ -194,7 +195,7 @@ export const BlockThemeReelSection: FunctionComponent<BlockThemeReelSectionProps
 				onSwiper={setControlledSwiper}
 				watchSlidesProgress={true}
 			>
-				{!isMobileWidth() && (
+				{!isMobile && (
 					<SwiperSlide
 						key={`theme-reel-slide__${theme.slug}__start-image`}
 						className={clsx(

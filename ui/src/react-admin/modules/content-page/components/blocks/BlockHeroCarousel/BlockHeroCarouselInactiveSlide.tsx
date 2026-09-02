@@ -5,6 +5,8 @@ import {
 import React, { type FunctionComponent, type ReactElement } from 'react';
 import type { HeroCarouselSlideItem } from '~content-blocks/BlockHeroCarousel/BlockHeroCarousel.types.ts';
 import { getSlideImageSrc } from '~content-blocks/BlockHeroCarousel/BlockHeroCarousel.utils.ts';
+import { BlockHeroCarouselInaccessibleItem } from '~content-blocks/BlockHeroCarousel/BlockHeroCarouselInaccessibleItem.tsx';
+import { IeObjectLoadError } from '~modules/content-page/components/IeObjectLoadError';
 import { ImageOrAudioWaveForm } from '~modules/content-page/components/ImageOrAudioWaveForm/ImageOrAudioWaveForm.tsx';
 import type { DefaultComponentProps } from '~modules/shared/types/components';
 import { Icon } from '~shared/components/Icon';
@@ -63,25 +65,38 @@ export const BlockHeroCarouselInactiveSlide: FunctionComponent<
 > = ({ item }): ReactElement => {
 	const imageSrc = getSlideImageSrc(item);
 
-	const formatIcon = (
-		<div
-			className="c-block-hero-carousel__carousel-slide-image-format-icon"
-			role="img"
-			aria-label={getObjectTypeLabel(item?.dctermsFormat)}
-		>
-			<Icon name={getIconFromObjectType(item?.dctermsFormat, Boolean(item?.thumbnailUrl))} />
-		</div>
-	);
+	const renderContent = () => {
+		if (item?.hasFailed) {
+			return (
+				<IeObjectLoadError
+					className="c-block-hero-carousel__carousel-slide-error"
+					isTextVisible={false}
+				/>
+			);
+		}
 
-	return (
-		<div className="c-block-hero-carousel__carousel-slide-image">
-			<ImageOrAudioWaveForm
-				imageSrc={imageSrc}
-				imageAlt={item?.name}
-				backgroundColor={item?.backgroundColor}
-				className="c-block-hero-carousel__carousel-slide-image-media"
-			/>
-			{formatIcon}
-		</div>
-	);
+		if (!item?.isAccessible) {
+			return <BlockHeroCarouselInaccessibleItem item={item} />;
+		}
+
+		return (
+			<>
+				<ImageOrAudioWaveForm
+					imageSrc={imageSrc}
+					imageAlt={item?.name}
+					backgroundColor={item?.backgroundColor}
+					className="c-block-hero-carousel__carousel-slide-image-media"
+				/>
+				<div
+					className="c-block-hero-carousel__carousel-slide-image-format-icon"
+					role="img"
+					aria-label={getObjectTypeLabel(item?.dctermsFormat)}
+				>
+					<Icon name={getIconFromObjectType(item?.dctermsFormat, true)} />
+				</div>
+			</>
+		);
+	};
+
+	return <div className="c-block-hero-carousel__carousel-slide-image">{renderContent()}</div>;
 };

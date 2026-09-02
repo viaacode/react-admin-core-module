@@ -25,4 +25,5 @@ export type HeroCarouselSlideItem = Pick<
 		 * player/image.
 		 */
 		hasFailed?: boolean;
+		isAccessible?: boolean;
 	};

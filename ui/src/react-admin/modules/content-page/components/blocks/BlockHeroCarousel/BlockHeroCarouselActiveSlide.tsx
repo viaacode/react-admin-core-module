@@ -1,14 +1,16 @@
 import { Button } from '@meemoo/react-components';
-import { Image } from '@viaa/avo2-components';
+import { Image, Spinner } from '@viaa/avo2-components';
 import clsx from 'clsx';
-import React, { type FunctionComponent, type ReactElement, useState } from 'react';
+import React, { type FunctionComponent, type ReactElement, type ReactNode, useState } from 'react';
 import type { HeroCarouselSlideItem } from '~content-blocks/BlockHeroCarousel/BlockHeroCarousel.types.ts';
 import {
 	getSlideImageSrc,
 	isSlidePlayerReady,
 } from '~content-blocks/BlockHeroCarousel/BlockHeroCarousel.utils.ts';
+import { BlockHeroCarouselInaccessibleItem } from '~content-blocks/BlockHeroCarousel/BlockHeroCarouselInaccessibleItem.tsx';
 import { AdminCoreIconName } from '~core/config';
 import { IeObjectFlowPlayerWrapper } from '~modules/content-page/components/IeObjectFlowPlayerWrapper/IeObjectFlowPlayerWrapper.tsx';
+import { IeObjectLoadError } from '~modules/content-page/components/IeObjectLoadError';
 import type { DefaultComponentProps } from '~modules/shared/types/components';
 import { Icon } from '~shared/components/Icon';
 import { tText } from '~shared/helpers/translation-functions.ts';
@@ -31,6 +33,71 @@ export const BlockHeroCarouselActiveSlide: FunctionComponent<BlockHeroCarouselAc
 
 	const imageSrc = getSlideImageSrc(item, true);
 
+	const renderAnimationWrapper = (content: ReactNode) => {
+		return (
+			<div
+				className={clsx(
+					'c-block-hero-carousel__carousel-slide-image',
+					'c-block-hero-carousel__carousel-slide-image--animated',
+					isPaused && 'c-block-hero-carousel__carousel-slide-image--paused'
+				)}
+			>
+				{content}
+				<div className="c-block-hero-carousel__carousel-slide-image-controls">
+					<Button
+						variants={['black', 'sm']}
+						icon={<Icon name={isPaused ? AdminCoreIconName.Play : AdminCoreIconName.Pause} />}
+						title={
+							isPaused
+								? tText(
+										'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel-active-slide___afspelen',
+										undefined,
+										[HET_ARCHIEF]
+									)
+								: tText(
+										'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel-active-slide___pauzeren',
+										undefined,
+										[HET_ARCHIEF]
+									)
+						}
+						ariaLabel={
+							isPaused
+								? tText(
+										'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel-active-slide___afspelen',
+										undefined,
+										[HET_ARCHIEF]
+									)
+								: tText(
+										'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel-active-slide___pauzeren',
+										undefined,
+										[HET_ARCHIEF]
+									)
+						}
+						onClick={() => setIsPaused((paused) => !paused)}
+					/>
+					<div className="c-block-hero-carousel__carousel-slide-image-progress" aria-hidden="true">
+						<div className="c-block-hero-carousel__carousel-slide-image-progress-track">
+							<div
+								className="c-block-hero-carousel__carousel-slide-image-progress-fill"
+								onAnimationEnd={onEnded}
+							/>
+						</div>
+					</div>
+				</div>
+			</div>
+		);
+	};
+
+	if (item?.hasFailed) {
+		return renderAnimationWrapper(
+			<IeObjectLoadError className="c-block-hero-carousel__carousel-slide-error" isTextVisible />
+		);
+	}
+
+	if (!item?.isAccessible || !imageSrc) {
+		return renderAnimationWrapper(<BlockHeroCarouselInaccessibleItem item={item} />);
+	}
+
 	if (isSlidePlayerReady(item)) {
 		return (
 			<IeObjectFlowPlayerWrapper
@@ -44,64 +111,11 @@ export const BlockHeroCarouselActiveSlide: FunctionComponent<BlockHeroCarouselAc
 		);
 	}
 
-	if (!imageSrc) {
-		return <div className="c-block-hero-carousel__carousel-slide-image" />;
-	}
-
-	return (
-		<div
-			className={clsx(
-				'c-block-hero-carousel__carousel-slide-image',
-				'c-block-hero-carousel__carousel-slide-image--animated',
-				isPaused && 'c-block-hero-carousel__carousel-slide-image--paused'
-			)}
-		>
-			<Image
-				src={imageSrc}
-				alt={item.name}
-				className="c-block-hero-carousel__carousel-slide-image-media"
-			/>
-			<div className="c-block-hero-carousel__carousel-slide-image-controls">
-				<Button
-					variants={['black', 'sm']}
-					icon={<Icon name={isPaused ? AdminCoreIconName.Play : AdminCoreIconName.Pause} />}
-					title={
-						isPaused
-							? tText(
-									'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel-active-slide___afspelen',
-									undefined,
-									[HET_ARCHIEF]
-								)
-							: tText(
-									'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel-active-slide___pauzeren',
-									undefined,
-									[HET_ARCHIEF]
-								)
-					}
-					ariaLabel={
-						isPaused
-							? tText(
-									'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel-active-slide___afspelen',
-									undefined,
-									[HET_ARCHIEF]
-								)
-							: tText(
-									'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel-active-slide___pauzeren',
-									undefined,
-									[HET_ARCHIEF]
-								)
-					}
-					onClick={() => setIsPaused((paused) => !paused)}
-				/>
-				<div className="c-block-hero-carousel__carousel-slide-image-progress" aria-hidden="true">
-					<div className="c-block-hero-carousel__carousel-slide-image-progress-track">
-						<div
-							className="c-block-hero-carousel__carousel-slide-image-progress-fill"
-							onAnimationEnd={onEnded}
-						/>
-					</div>
-				</div>
-			</div>
-		</div>
+	return renderAnimationWrapper(
+		<Image
+			src={imageSrc}
+			alt={item.name}
+			className="c-block-hero-carousel__carousel-slide-image-media"
+		/>
 	);
 };

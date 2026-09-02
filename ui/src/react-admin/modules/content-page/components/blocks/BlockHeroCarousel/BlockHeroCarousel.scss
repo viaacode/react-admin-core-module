@@ -6,12 +6,9 @@
 
 $hero-carousel-format-widths: (
 	"video": 28rem,
-	"videofragment": 28rem,
-	"film": 28rem,
 	"audio": 16rem,
-	"audiofragment": 16rem,
 	"newspaper": 12rem,
-	"newspaperpage": 12rem,
+	"image": 12rem,
 );
 $background-image-height: 80%;
 $slide-height: 16rem;
@@ -399,6 +396,10 @@ $hero-carousel-search-radius-desktop: 3.2rem;
 				}
 			}
 
+			&--audio, &--video {
+				border-width: 0;
+			}
+
 			// Compound selector (two classes) so this reliably outranks the single-class
 			// format-width rules above, regardless of declaration order.
 			&.c-block-hero-carousel__carousel-slide--active {
@@ -539,6 +540,7 @@ $hero-carousel-search-radius-desktop: 3.2rem;
 				display: flex;
 				align-items: center;
 				justify-content: center;
+				font-size: 4rem;
 			}
 		}
 

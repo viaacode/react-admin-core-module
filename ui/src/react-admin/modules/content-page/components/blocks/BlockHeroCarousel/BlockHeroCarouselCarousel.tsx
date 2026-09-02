@@ -13,7 +13,6 @@ import type { HeroCarouselSlideItem } from '~content-blocks/BlockHeroCarousel/Bl
 import { BlockHeroCarouselActiveSlide } from '~content-blocks/BlockHeroCarousel/BlockHeroCarouselActiveSlide.tsx';
 import { BlockHeroCarouselInactiveSlide } from '~content-blocks/BlockHeroCarousel/BlockHeroCarouselInactiveSlide.tsx';
 import { CarouselButtons } from '~modules/content-page/components/CarouselButtons/CarouselButtons.tsx';
-import { IeObjectLoadError } from '~modules/content-page/components/IeObjectLoadError/IeObjectLoadError.tsx';
 import type { DefaultComponentProps } from '~modules/shared/types/components';
 import {
 	ACTIVE_SLIDE_CLASS,
@@ -27,6 +26,7 @@ import {
 
 import './BlockHeroCarousel.scss';
 import { IeObjectMetadata } from '~modules/content-page/components/IeObjectMetadata/IeObjectMetadata.tsx';
+import { mapDcTermsFormatToSimpleType } from '~shared/helpers/map-format-to-type.ts';
 import type { PlayableDisplayIeObject } from '~shared/services/ie-objects-service/ie-objects.types.ts';
 
 export interface BlockHeroCarouselCarouselProps extends DefaultComponentProps {
@@ -74,17 +74,6 @@ export const BlockHeroCarouselCarousel: FunctionComponent<BlockHeroCarouselCarou
 	// What a slide shows before it has any object content of its own. Both leaf slides get to
 	// assume a resolved object, so neither has to carry these states.
 	const renderSlideContent = (item: HeroCarouselSlideItem, isSettledActive: boolean) => {
-		// The object behind this slide couldn't be resolved -- show that, rather than an empty
-		// slide. Only the active slide has room for the message under the icon.
-		if (item?.hasFailed) {
-			return (
-				<IeObjectLoadError
-					className="c-block-hero-carousel__carousel-slide-error"
-					isTextVisible={isSettledActive}
-				/>
-			);
-		}
-
 		// Nothing to show yet: either the slide's object is still being resolved, or nothing is
 		// known about it at all -- not even which object it points at, as with a freshly added
 		// editor row that hasn't been filled in. The slide's own box is sized and coloured from
@@ -150,7 +139,7 @@ export const BlockHeroCarouselCarousel: FunctionComponent<BlockHeroCarouselCarou
 								aria-hidden={isClone ? true : undefined}
 								className={clsx(
 									'c-block-hero-carousel__carousel-slide',
-									`c-block-hero-carousel__carousel-slide--${item?.dctermsFormat}`,
+									`c-block-hero-carousel__carousel-slide--${mapDcTermsFormatToSimpleType(item?.dctermsFormat)}`,
 									index === activeIndex && ACTIVE_SLIDE_CLASS
 								)}
 								style={{

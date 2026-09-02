@@ -10,7 +10,7 @@ import type { FunctionComponent } from 'react';
 import React from 'react';
 import { SmartLink } from '~shared/components/SmartLink/SmartLink';
 import { mapDcTermsFormatToSimpleType } from '~shared/helpers/map-format-to-type.ts';
-import { isMobileWidth } from '~shared/helpers/media-query.ts';
+import { useIsMobileWidth } from '~shared/helpers/media-query.ts';
 import { tText } from '~shared/helpers/translation-functions';
 import type { PlayableDisplayIeObject } from '~shared/services/ie-objects-service/ie-objects.types.ts';
 import { HET_ARCHIEF } from '~shared/types';
@@ -65,6 +65,7 @@ export const IeObjectMetadata: FunctionComponent<{
 	className?: string;
 }> = ({ ieObject, fallbackTitle, className }) => {
 	const callToActionLabel = getCallToActionLabel(ieObject?.dctermsFormat);
+	const isMobile = useIsMobileWidth();
 
 	return (
 		<div className={clsx('c-ie-object-metadata', className)}>
@@ -82,8 +83,8 @@ export const IeObjectMetadata: FunctionComponent<{
 			>
 				<Button
 					variants={['block', 'black']}
-					icon={isMobileWidth() ? <Icon name={'arrow-down-right' as IconName} /> : undefined}
-					label={isMobileWidth() ? undefined : callToActionLabel}
+					icon={isMobile ? <Icon name={'arrow-down-right' as IconName} /> : undefined}
+					label={isMobile ? undefined : callToActionLabel}
 				/>
 			</SmartLink>
 			<div className="c-ie-object-metadata__text">
