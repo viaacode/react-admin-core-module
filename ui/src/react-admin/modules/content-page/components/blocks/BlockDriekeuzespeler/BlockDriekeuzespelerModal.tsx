@@ -4,7 +4,6 @@ import {
 	type HetArchiefIeObject as IeObject,
 	type HetArchiefIeObjectType as IeObjectType,
 } from '@viaa/avo2-types';
-import { stringifyUrl } from 'query-string';
 import type { FunctionComponent, ReactElement } from 'react';
 import React from 'react';
 import { AdminConfigManager } from '~core/config/config.class';
@@ -18,6 +17,7 @@ import { getIconFromObjectType } from '~shared/helpers/get-icon-from-object-type
 import { isAudioVideoFormat, isNewspaperFormat } from '~shared/helpers/is-audio-video-format.ts';
 import { tText } from '~shared/helpers/translation-functions';
 import type { PlayableDisplayIeObject } from '~shared/services/ie-objects-service/ie-objects.types.ts';
+import { ThemesService } from '~shared/services/themes-service/themes.service.ts';
 import type { Theme } from '~shared/services/themes-service/themes.types';
 import { HET_ARCHIEF } from '~shared/types';
 
@@ -133,10 +133,7 @@ export const BlockDriekeuzespelerModal: FunctionComponent<BlockDriekeuzespelerMo
 				<SmartLink
 					action={{
 						type: AvoCoreContentPickerType.INTERNAL_LINK,
-						value: stringifyUrl({
-							url: AdminConfigManager.getConfig().routes.SEARCH || '/zoeken',
-							query: { thema: theme.slug },
-						}),
+						value: ThemesService.getThemeSearchPath(locale, theme.slug),
 					}}
 					className="c-driekeuzespeler-modal__theme-cta"
 				>

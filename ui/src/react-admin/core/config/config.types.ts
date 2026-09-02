@@ -130,6 +130,10 @@ export interface AdminConfig {
 			schemaIdentifier: string,
 			name: string | null | undefined
 		) => string;
+		// Path of the search page pre-filtered on a theme. Lives in the config for the same reason
+		// as getIeObjectDetailPath: the client's own advanced-filter url encoding is reused here,
+		// without the admin-core needing to depend on the client package.
+		getThemeSearchPath?: (locale: string, themeSlug: string) => string;
 	};
 	components: {
 		loader: {
