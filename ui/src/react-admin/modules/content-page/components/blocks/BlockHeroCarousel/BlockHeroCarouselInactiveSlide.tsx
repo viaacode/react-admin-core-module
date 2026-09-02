@@ -1,3 +1,7 @@
+import {
+	type HetArchiefIeObjectType as IeObjectType,
+	HetArchiefSimpleIeObjectType as SimpleIeObjectType,
+} from '@viaa/avo2-types';
 import React, { type FunctionComponent, type ReactElement } from 'react';
 import type { HeroCarouselSlideItem } from '~content-blocks/BlockHeroCarousel/BlockHeroCarousel.types.ts';
 import { getSlideImageSrc } from '~content-blocks/BlockHeroCarousel/BlockHeroCarousel.utils.ts';
@@ -5,11 +9,7 @@ import { ImageOrAudioWaveForm } from '~modules/content-page/components/ImageOrAu
 import type { DefaultComponentProps } from '~modules/shared/types/components';
 import { Icon } from '~shared/components/Icon';
 import { getIconFromObjectType } from '~shared/helpers/get-icon-from-object-type.ts';
-import {
-	type IeObjectType,
-	mapDcTermsFormatToSimpleType,
-	SimpleIeObjectType,
-} from '~shared/helpers/map-format-to-type.ts';
+import { mapDcTermsFormatToSimpleType } from '~shared/helpers/map-format-to-type.ts';
 import { tText } from '~shared/helpers/translation-functions.ts';
 import { HET_ARCHIEF } from '~shared/types';
 

@@ -1,8 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
+import type { HetArchiefIeObject as IeObject } from '@viaa/avo2-types';
 import { findPeakFile, findPlayableFile } from '~shared/helpers/ie-object-files.ts';
 import { isAudioFormat, isAudioVideoFormat } from '~shared/helpers/is-audio-video-format.ts';
 import { IeObjectsService } from '~shared/services/ie-objects-service/ie-objects.service.ts';
-import type { IeObject } from '~shared/services/ie-objects-service/ie-objects.types.ts';
 import { QUERY_KEYS } from '~shared/types';
 
 /** Only the sample array of a peak file is used; the rest of its metadata is not. */

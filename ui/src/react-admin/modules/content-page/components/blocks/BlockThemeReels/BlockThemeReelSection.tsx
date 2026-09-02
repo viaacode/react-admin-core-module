@@ -1,6 +1,9 @@
 import { Button } from '@meemoo/react-components';
 import { LinkTarget } from '@viaa/avo2-components';
-import { AvoCoreContentPickerType } from '@viaa/avo2-types';
+import {
+	AvoCoreContentPickerType,
+	type HetArchiefIeObjectType as IeObjectType,
+} from '@viaa/avo2-types';
 import clsx from 'clsx';
 import React, { type FunctionComponent, type ReactNode, useMemo, useState } from 'react';
 import type SwiperController from 'swiper';
@@ -18,7 +21,6 @@ import { App, Locale } from '~modules/translations/translations.core.types.ts';
 import { Icon } from '~shared/components/Icon';
 import { generateSmartLink } from '~shared/components/SmartLink/SmartLink.tsx';
 import { getIconFromObjectType } from '~shared/helpers/get-icon-from-object-type.ts';
-import type { IeObjectType } from '~shared/helpers/map-format-to-type.ts';
 import { isMobileWidth } from '~shared/helpers/media-query.ts';
 import { tText } from '~shared/helpers/translation-functions.ts';
 

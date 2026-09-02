@@ -1,3 +1,4 @@
+import { HetArchiefIeObjectType as IeObjectType } from '@viaa/avo2-types';
 import {
 	BLOCK_FIELD_DEFAULTS,
 	BLOCK_STATE_DEFAULTS,
@@ -17,7 +18,6 @@ import {
 	ContentBlockEditor,
 	ContentBlockType,
 } from '~modules/content-page/types/content-block.types';
-import { IeObjectType } from '~shared/helpers/map-format-to-type.ts';
 import { tHtml, tText } from '~shared/helpers/translation-functions';
 import { HET_ARCHIEF } from '~shared/types';
 

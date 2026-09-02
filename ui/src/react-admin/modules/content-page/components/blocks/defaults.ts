@@ -1,5 +1,5 @@
 import type { CheckboxProps, SelectOption } from '@viaa/avo2-components';
-import { AvoCoreContentPickerType } from '@viaa/avo2-types';
+import { AvoCoreContentPickerType, HetArchiefIeObjectType as IeObjectType } from '@viaa/avo2-types';
 import { GET_ALIGN_OPTIONS } from '~modules/content-page/const/get-align-options';
 import {
 	GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF,
@@ -14,7 +14,6 @@ import type { RichTextEditorWrapperProps } from '~shared/components/RichTextEdit
 import type { UserGroupSelectProps } from '~shared/components/UserGroupSelect/UserGroupSelect';
 import { RICH_TEXT_EDITOR_OPTIONS_FULL_WITHOUT_ALIGN } from '~shared/consts/rich-text-editor.consts';
 import { isAvo } from '~shared/helpers/is-avo';
-import { IeObjectType } from '~shared/helpers/map-format-to-type.ts';
 import { tText } from '~shared/helpers/translation-functions';
 import { validateRequiredValue } from '~shared/helpers/validation.ts';
 import { HET_ARCHIEF } from '~shared/types';

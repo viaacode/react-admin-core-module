@@ -1,15 +1,15 @@
 import { Button } from '@meemoo/react-components';
 import { Icon, type IconName } from '@viaa/avo2-components';
-import { AvoCoreContentPickerType } from '@viaa/avo2-types';
+import {
+	AvoCoreContentPickerType,
+	type HetArchiefIeObjectType as IeObjectType,
+	HetArchiefSimpleIeObjectType as SimpleIeObjectType,
+} from '@viaa/avo2-types';
 import { clsx } from 'clsx';
 import type { FunctionComponent } from 'react';
 import React from 'react';
 import { SmartLink } from '~shared/components/SmartLink/SmartLink';
-import {
-	type IeObjectType,
-	mapDcTermsFormatToSimpleType,
-	SimpleIeObjectType,
-} from '~shared/helpers/map-format-to-type.ts';
+import { mapDcTermsFormatToSimpleType } from '~shared/helpers/map-format-to-type.ts';
 import { isMobileWidth } from '~shared/helpers/media-query.ts';
 import { tText } from '~shared/helpers/translation-functions';
 import type { PlayableDisplayIeObject } from '~shared/services/ie-objects-service/ie-objects.types.ts';

@@ -1,5 +1,9 @@
 import { Modal, ModalBody } from '@viaa/avo2-components';
-import { AvoCoreContentPickerType } from '@viaa/avo2-types';
+import {
+	AvoCoreContentPickerType,
+	type HetArchiefIeObject as IeObject,
+	type HetArchiefIeObjectType as IeObjectType,
+} from '@viaa/avo2-types';
 import { stringifyUrl } from 'query-string';
 import type { FunctionComponent, ReactElement } from 'react';
 import React from 'react';
@@ -12,12 +16,8 @@ import { Icon } from '~shared/components/Icon/Icon';
 import { SmartLink } from '~shared/components/SmartLink/SmartLink.tsx';
 import { getIconFromObjectType } from '~shared/helpers/get-icon-from-object-type.ts';
 import { isAudioVideoFormat, isNewspaperFormat } from '~shared/helpers/is-audio-video-format.ts';
-import type { IeObjectType } from '~shared/helpers/map-format-to-type.ts';
 import { tText } from '~shared/helpers/translation-functions';
-import type {
-	IeObject,
-	PlayableDisplayIeObject,
-} from '~shared/services/ie-objects-service/ie-objects.types.ts';
+import type { PlayableDisplayIeObject } from '~shared/services/ie-objects-service/ie-objects.types.ts';
 import type { Theme } from '~shared/services/themes-service/themes.types';
 import { HET_ARCHIEF } from '~shared/types';
 

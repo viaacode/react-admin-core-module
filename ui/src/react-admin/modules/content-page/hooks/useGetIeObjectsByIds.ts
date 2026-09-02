@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
+import type { HetArchiefIeObject as IeObject } from '@viaa/avo2-types';
 import { IeObjectsService } from '~shared/services/ie-objects-service/ie-objects.service.ts';
-import type { IeObject } from '~shared/services/ie-objects-service/ie-objects.types.ts';
 import { QUERY_KEYS } from '~shared/types';
 
 /**

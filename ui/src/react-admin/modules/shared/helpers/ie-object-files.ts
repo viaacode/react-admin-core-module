@@ -1,7 +1,7 @@
 import type {
-	IeObject,
-	IeObjectFile,
-} from '~shared/services/ie-objects-service/ie-objects.types.ts';
+	HetArchiefIeObject as IeObject,
+	HetArchiefIeObjectFile as IeObjectFile,
+} from '@viaa/avo2-types';
 
 /**
  * The audio list is ordered: the mp4 with the speaker still beats the mp3, and the backend

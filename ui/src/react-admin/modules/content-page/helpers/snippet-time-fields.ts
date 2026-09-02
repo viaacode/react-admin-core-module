@@ -1,4 +1,5 @@
 import type { TextInputProps } from '@viaa/avo2-components';
+import { HetArchiefIeObjectType as IeObjectType } from '@viaa/avo2-types';
 import type { HetArchiefVideoBlockComponentState } from '~content-blocks/BlockHetArchiefVideo';
 import { IE_OBJECT_FIELD, TEXT_FIELD } from '~content-blocks/defaults.ts';
 import {
@@ -10,7 +11,6 @@ import {
 	type MediaItemComponentState,
 } from '~modules/content-page/types/content-block.types.ts';
 import { isAudioVideoFormat } from '~shared/helpers/is-audio-video-format.ts';
-import { IeObjectType } from '~shared/helpers/map-format-to-type.ts';
 import { snippetTimeToSeconds } from '~shared/helpers/parsers/duration.ts';
 import { tText } from '~shared/helpers/translation-functions.ts';
 import { HET_ARCHIEF } from '~shared/types';

@@ -1,11 +1,4 @@
-import type {
-	HetArchiefIeObject as IeObject,
-	HetArchiefIeObjectFile as IeObjectFile,
-	HetArchiefIeObjectPage as IeObjectPage,
-} from '@viaa/avo2-types';
-import type { IeObjectType } from '~shared/helpers/map-format-to-type.ts';
-
-export type { IeObject, IeObjectFile, IeObjectPage };
+import type { HetArchiefIeObjectType as IeObjectType } from '@viaa/avo2-types';
 
 export interface PlayableDisplayIeObject {
 	schemaIdentifier: string;

@@ -3,6 +3,8 @@ import type {
 	AvoCoreDatabaseType,
 	AvoEducationOrganizationOrganization,
 	AvoUserCommonUser,
+	HetArchiefIeObject as IeObject,
+	HetArchiefIeObjectType as IeObjectType,
 } from '@viaa/avo2-types';
 import type { ComponentType, FC, FunctionComponent, MouseEvent, ReactNode } from 'react';
 import type { OrderProperty } from '~content-blocks/BlockObjectsGrid/BlockObjectsGrid.types.ts';
@@ -14,8 +16,6 @@ import type {
 import type { App, Locale } from '~modules/translations/translations.core.types';
 import type { UserBulkAction } from '~modules/user/user.types';
 import type { FlowPlayerWrapperProps } from '~shared/components/FlowPlayerWrapper/FlowPlayerWrapper.types';
-import type { IeObjectType } from '~shared/helpers/map-format-to-type.ts';
-import type { IeObject } from '~shared/services/ie-objects-service/ie-objects.types';
 
 /**
  * What a consuming app needs to log a play of an ie-object rendered by a content block. The

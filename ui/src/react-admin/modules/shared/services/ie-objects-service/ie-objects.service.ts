@@ -1,9 +1,9 @@
+import type { HetArchiefIeObject as IeObject } from '@viaa/avo2-types';
 import { stringifyUrl } from 'query-string';
 import { CustomError } from '~shared/helpers/custom-error';
 import { fetchWithLogout, fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
 import { getProxyUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config';
 import type {
-	IeObject,
 	PlayableDisplayIeObject,
 	UnsavedPlayableDisplayDataObject,
 } from '~shared/services/ie-objects-service/ie-objects.types.ts';
