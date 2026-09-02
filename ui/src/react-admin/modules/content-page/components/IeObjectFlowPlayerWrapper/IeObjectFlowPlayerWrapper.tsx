@@ -19,6 +19,9 @@ export interface IeObjectFlowPlayerWrapperProps extends DefaultComponentProps {
 	onEnded?: () => void;
 	isMuted?: boolean;
 	onMutedChange?: (muted: boolean) => void;
+	/** Opt-in - defaults to FlowPlayer's own native controls, unchanged for existing callers. */
+	controlsVariant?: FlowPlayerProps['controlsVariant'];
+	customControlsConfig?: FlowPlayerProps['customControlsConfig'];
 }
 
 export const IeObjectFlowPlayerWrapper: FunctionComponent<IeObjectFlowPlayerWrapperProps> = ({
@@ -29,6 +32,8 @@ export const IeObjectFlowPlayerWrapper: FunctionComponent<IeObjectFlowPlayerWrap
 	onEnded,
 	isMuted,
 	onMutedChange,
+	controlsVariant,
+	customControlsConfig,
 	className,
 }): ReactNode => {
 	if (!isAudioVideoFormat(ieObject.dctermsFormat)) {
@@ -75,6 +80,8 @@ export const IeObjectFlowPlayerWrapper: FunctionComponent<IeObjectFlowPlayerWrap
 		peakHeightFactor: 0.6,
 		preload: 'metadata',
 		className,
+		controlsVariant,
+		customControlsConfig,
 		// Not passing start and end times, since they are already in the snippet video url: browse.mp4?t=x,y&token=token-containing-x-y
 	};
 
