@@ -38,7 +38,13 @@ export { BlockThreeClickableTiles } from '~content-blocks/BlockThreeClickableTil
 export { BlockUitgeklaard } from '~content-blocks/BlockUitgeklaard';
 export { BlockVideoTitleTextButtonWrapper } from '~content-blocks/BlockVideoTitleTextButton/BlockVideoTitleTextButton.wrapper';
 export { AdminConfigManager, AdminCoreIconName, ToastType } from '~core/config';
-export type { AdminConfig, IeObjectPlayInfo, LinkInfo, ToastInfo } from '~core/config/config.types';
+export type {
+	AdminConfig,
+	IeObjectPlayInfo,
+	IiifViewerConfigProps,
+	LinkInfo,
+	ToastInfo,
+} from '~core/config/config.types';
 export { ContentPageService } from '~modules/content-page/services/content-page.service';
 export { ContentBlockType } from '~modules/content-page/types/content-block.types';
 export type { DbContentPage } from '~modules/content-page/types/content-pages.types';

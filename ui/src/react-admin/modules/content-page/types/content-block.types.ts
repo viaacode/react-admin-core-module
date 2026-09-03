@@ -217,6 +217,7 @@ export enum ContentBlockType {
 	HetArchiefVideo = 'HETARCHIEF_VIDEO',
 	ImageCarousel = 'IMAGE_CAROUSEL',
 	TitleWithParallax = 'TITLE_WITH_PARALLAX',
+	ThreeChoicesPlayer = 'THREE_CHOICES_PLAYER',
 }
 
 export enum ContentBlockEditor {
@@ -706,4 +707,27 @@ export interface TitleWithParallaxBlockComponentState {
 	title: string;
 	subtitle?: string;
 	image?: string;
+}
+
+/** One "interesse" of the Driekeuzespeler: a tile label, the object it opens, and its theme. */
+export interface DriekeuzespelerInterestState {
+	name: string;
+	/** Named `mediaItem` like every other block pointing at an object, so the proxy reads them alike. */
+	mediaItem?: PickerItem;
+	theme?: PickerItem;
+}
+
+export interface DriekeuzespelerTileColors {
+	backgroundColor: Color;
+	textColor: Color;
+}
+
+export interface DriekeuzespelerBlockComponentState {
+	title: string;
+	/** Positional: entry 0 styles the leftmost tile, whichever interest a shuffle puts there. */
+	tileColors: [DriekeuzespelerTileColors, DriekeuzespelerTileColors, DriekeuzespelerTileColors];
+	/** The CTA's icon is fixed; only its label is configurable. */
+	shuffleButtonLabel: string;
+	/** Between 3 and 200 entries. */
+	interests: DriekeuzespelerInterestState[];
 }

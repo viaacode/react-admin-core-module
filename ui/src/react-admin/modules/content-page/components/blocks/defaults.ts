@@ -1,4 +1,5 @@
 import type { CheckboxProps, SelectOption } from '@viaa/avo2-components';
+import { AvoCoreContentPickerType, HetArchiefIeObjectType as IeObjectType } from '@viaa/avo2-types';
 import { GET_ALIGN_OPTIONS } from '~modules/content-page/const/get-align-options';
 import {
 	GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF,
@@ -15,7 +16,9 @@ import { RICH_TEXT_EDITOR_OPTIONS_FULL_WITHOUT_ALIGN } from '~shared/consts/rich
 import { isAvo } from '~shared/helpers/is-avo';
 import { tText } from '~shared/helpers/translation-functions';
 import { validateRequiredValue } from '~shared/helpers/validation.ts';
+import { HET_ARCHIEF } from '~shared/types';
 import { SpecialUserGroups } from '~shared/types/authentication.types';
+import type { PickerItem } from '~shared/types/content-picker.ts';
 import {
 	Color,
 	type ContentBlockComponentsConfig,
@@ -25,6 +28,7 @@ import {
 	type CustomBackground,
 	type DefaultContentBlockState,
 	type GradientColor,
+	type IsVisibleFunc,
 	type PaddingFieldState,
 } from '../../types/content-block.types';
 
@@ -238,4 +242,53 @@ export const COPYRIGHT_STATE = (): CopyrightComponentState => ({
 	copyrightTitle: '',
 	copyrightIconVisible: true,
 	copyrightText: '',
+});
+
+/**
+ * The object picker every block uses to point at one ie-object: searches by title, stores the pid.
+ *
+ * The state key must be `mediaItem`: `generateFieldAttributes` reads `state.item || state.mediaItem`
+ * to tell a video-still picker which object to fetch stills for. Blocks without a still picker keep
+ * the name too, so the proxy reads every block the same way.
+ */
+export const IE_OBJECT_FIELD = ({
+	allowedObjectTypes = Object.values(IeObjectType),
+	label,
+	isVisible,
+	fieldsToResetOnChange,
+	isRequired = false,
+	requiredError,
+}: {
+	allowedObjectTypes?: IeObjectType[];
+	label?: string;
+	isVisible?: IsVisibleFunc;
+	fieldsToResetOnChange?: string[];
+	isRequired?: boolean;
+	requiredError?: string;
+} = {}): ContentBlockField => ({
+	label:
+		label ||
+		tText('modules/content-page/components/blocks/defaults___object', undefined, [HET_ARCHIEF]),
+	editorType: ContentBlockEditor.ContentPicker,
+	editorProps: {
+		allowedTypes: [AvoCoreContentPickerType.IE_OBJECT],
+		hideTypeDropdown: true,
+		hideTargetSwitch: true,
+		ieObjectFormats: allowedObjectTypes,
+	},
+	fieldsToResetOnChange,
+	validator: isRequired
+		? (value: PickerItem | undefined) =>
+				value?.value
+					? []
+					: [
+							requiredError ||
+								tText(
+									'modules/content-page/components/blocks/defaults___een-object-is-verplicht',
+									undefined,
+									[HET_ARCHIEF]
+								),
+						]
+		: undefined,
+	isVisible,
 });

@@ -1,10 +1,14 @@
 import { AvoCoreContentPickerType } from '@viaa/avo2-types';
-import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, TEXT_FIELD } from '~content-blocks/defaults';
+import {
+	BLOCK_FIELD_DEFAULTS,
+	BLOCK_STATE_DEFAULTS,
+	IE_OBJECT_FIELD,
+	TEXT_FIELD,
+} from '~content-blocks/defaults';
 import { GET_HEADING_TYPE_OPTIONS } from '~modules/content-page/const/get-heading-type-options';
 import {
 	type ContentBlockConfig,
 	ContentBlockEditor,
-	type ContentBlockField,
 	ContentBlockType,
 	type DefaultContentBlockState,
 	type HeadingTypeOption,
@@ -137,18 +141,14 @@ export const OBJECTS_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => (
 				min: 0,
 				max: MAX_FIXED_POSITIONS,
 				fields: {
-					mediaItem: {
+					// A fixed position may be added and left empty, so the object is not required here.
+					mediaItem: IE_OBJECT_FIELD({
 						label: tText(
 							'modules/content-page/components/blocks/block-objects-grid/block-objects-grid___object-pid-of-fragment-id',
 							undefined,
 							[HET_ARCHIEF]
 						),
-						editorType: ContentBlockEditor.ContentPicker,
-						editorProps: {
-							allowedTypes: [AvoCoreContentPickerType.IE_OBJECT],
-							hideTypeDropdown: true,
-						},
-					} as ContentBlockField,
+					}),
 				},
 				repeat: {
 					defaultState: INITIAL_OBJECTS_GRID_FIXED_POSITION_STATE(),

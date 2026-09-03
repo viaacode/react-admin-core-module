@@ -9,6 +9,7 @@ import { CONTENT_ENCLOSE_BLOCK_CONFIG } from '~content-blocks/BlockContentEnclos
 import { CONTENT_PAGE_META_BLOCK_CONFIG } from '~content-blocks/BlockContentPageMeta';
 import { CTAS_BLOCK_CONFIG } from '~content-blocks/BlockCTAs';
 import { DOUBLE_BANNER_BLOCK_CONFIG } from '~content-blocks/BlockDoubleBanner';
+import { DRIEKEUZESPELER_CONFIG } from '~content-blocks/BlockDriekeuzespeler';
 import { EVENTBRITE_BLOCK_CONFIG } from '~content-blocks/BlockEventbrite';
 import { HEADING_BLOCK_CONFIG } from '~content-blocks/BlockHeading';
 import { HERO_CAROUSEL_CONFIG } from '~content-blocks/BlockHeroCarousel';
@@ -111,4 +112,5 @@ export const CONTENT_BLOCK_CONFIG_MAP: Record<
 	[ContentBlockType.HetArchiefVideo]: HETARCHIEF_VIDEO_BLOCK_CONFIG,
 	[ContentBlockType.ImageCarousel]: IMAGE_CAROUSEL_CONFIG,
 	[ContentBlockType.TitleWithParallax]: TITLE_WITH_PARALLAX_CONFIG,
+	[ContentBlockType.ThreeChoicesPlayer]: DRIEKEUZESPELER_CONFIG,
 };

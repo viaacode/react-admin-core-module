@@ -1,12 +1,12 @@
+import {
+	type HetArchiefIeObjectType as IeObjectType,
+	HetArchiefSimpleIeObjectType as SimpleIeObjectType,
+} from '@viaa/avo2-types';
 import type { RefObject } from 'react';
 import { flushSync } from 'react-dom';
 import type { HeroCarouselSlideItem } from '~content-blocks/BlockHeroCarousel/BlockHeroCarousel.types.ts';
 import { isAudioVideoFormat } from '~shared/helpers/is-audio-video-format.ts';
-import {
-	type IeObjectType,
-	mapDcTermsFormatToSimpleType,
-	SimpleIeObjectType,
-} from '~shared/helpers/map-format-to-type.ts';
+import { mapDcTermsFormatToSimpleType } from '~shared/helpers/map-format-to-type.ts';
 
 const FALLBACK_THUMB_WIDTH_REM = 12;
 const FORMAT_THUMB_WIDTHS_REM: Record<SimpleIeObjectType, number> = {

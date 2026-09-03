@@ -1,5 +1,7 @@
+import type { HetArchiefIeObject as IeObject } from '@viaa/avo2-types';
+import { stringifyUrl } from 'query-string';
 import { CustomError } from '~shared/helpers/custom-error';
-import { fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
+import { fetchWithLogout, fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
 import { getProxyUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config';
 import type {
 	PlayableDisplayIeObject,
@@ -9,6 +11,46 @@ import type {
 export class IeObjectsService {
 	private static getBaseUrl(): string {
 		return `${getProxyUrl()}/ie-objects`;
+	}
+
+	/**
+	 * Playable display data cannot carry a newspaper's page list, so a caller needing the object
+	 * itself -- the IIIF viewer does -- asks here.
+	 */
+	public static async getIeObjectsByIds(schemaIdentifiers: string[]): Promise<IeObject[]> {
+		const url = stringifyUrl({
+			url: IeObjectsService.getBaseUrl(),
+			// Without this the thumbnail comes back as a path the browser cannot load.
+			query: { schemaIdentifiers, resolveThumbnailUrl: 'true' },
+		});
+		try {
+			return (await fetchWithLogoutJson<IeObject[]>(url)) || [];
+		} catch (err) {
+			throw new CustomError('Failed to fetch ie-objects by id', err, { schemaIdentifiers });
+		}
+	}
+
+	/**
+	 * A file's stored url is useless on its own: the media server wants a short-lived, per-visitor
+	 * ticket in the Authorization header. The endpoint answers as plain text, not JSON.
+	 */
+	public static async getPlayableUrl(
+		fileId: string,
+		schemaIdentifier: string
+	): Promise<string | null> {
+		const url = stringifyUrl({
+			url: `${IeObjectsService.getBaseUrl()}/player-ticket`,
+			query: { fileId, schemaIdentifier },
+		});
+		try {
+			const response = await fetchWithLogout(url);
+			return response.ok ? await response.text() : null;
+		} catch (err) {
+			throw new CustomError('Failed to fetch a playable url for an ie-object file', err, {
+				fileId,
+				schemaIdentifier,
+			});
+		}
 	}
 
 	/**
