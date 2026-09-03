@@ -1,12 +1,36 @@
 import { stringifyUrl } from 'query-string';
+import { AdminConfigManager } from '~core/config';
 import { CustomError } from '~shared/helpers/custom-error';
 import { fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
 import { getProxyUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config';
+import { isHetArchief } from '~shared/helpers/is-hetarchief';
 import type { Theme, ThemesResponse, ThemeWithObjects } from './themes.types';
 
 export class ThemesService {
 	private static getBaseUrl(): string {
 		return `${getProxyUrl()}/themes`;
+	}
+
+	/**
+	 * Path of the search page pre-filtered on a theme, relative to the client url.
+	 * Themes only exist on hetarchief.be, so this throws on avo.
+	 *
+	 * Falls back to the plain (unfiltered) search page when the host has not configured
+	 * getThemeSearchPath, the same way IeObjectsService.getObjectDetailPath falls back to
+	 * getObjectDetailPathViaPid.
+	 */
+	public static getThemeSearchPath(locale: string, themeSlug: string): string {
+		if (!isHetArchief()) {
+			throw new CustomError('getThemeSearchPath is only available on hetarchief.be', null, {
+				themeSlug,
+			});
+		}
+
+		return (
+			AdminConfigManager.getConfig().services.getThemeSearchPath?.(locale, themeSlug) ||
+			AdminConfigManager.getConfig().routes.SEARCH ||
+			'/zoeken'
+		);
 	}
 
 	public static async fetchThemes(

@@ -1,3 +1,4 @@
+import type { HetArchiefIeObjectType as IeObjectType } from '@viaa/avo2-types';
 import React, { type CSSProperties, type FunctionComponent, type ReactNode, useMemo } from 'react';
 import { Color } from '~modules/content-page/types/content-block.types';
 import type { DefaultComponentProps } from '~modules/shared/types/components';
@@ -13,7 +14,6 @@ import { BlockHeroCarouselSearch } from '~content-blocks/BlockHeroCarousel/Block
 import { getRandomTertiaryBackgroundColor } from '~modules/content-page/helpers/get-random-tertiary-background-color.ts';
 import { useGetIeObjectsPlayableDisplayData } from '~modules/content-page/hooks/useGetIeObjectsPlayableDisplayData.ts';
 import { isAudioVideoFormat } from '~shared/helpers/is-audio-video-format.ts';
-import type { IeObjectType } from '~shared/helpers/map-format-to-type.ts';
 import { toSeconds } from '~shared/helpers/parsers/duration.ts';
 
 export interface BlockHeroCarouselProps extends DefaultComponentProps {

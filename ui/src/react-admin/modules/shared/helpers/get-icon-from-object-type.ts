@@ -1,9 +1,9 @@
-import { AdminCoreIconName } from '~core/config/config.types';
 import {
-	type IeObjectType,
-	mapDcTermsFormatToSimpleType,
-	SimpleIeObjectType,
-} from '~shared/helpers/map-format-to-type.ts';
+	type HetArchiefIeObjectType as IeObjectType,
+	HetArchiefSimpleIeObjectType as SimpleIeObjectType,
+} from '@viaa/avo2-types';
+import { AdminCoreIconName } from '~core/config/config.types';
+import { mapDcTermsFormatToSimpleType } from '~shared/helpers/map-format-to-type.ts';
 
 /**
  * Icon for an object type. Mirrors the client's `getIconFromObjectType`
