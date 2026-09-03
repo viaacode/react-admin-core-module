@@ -1,8 +1,4 @@
-import {
-	AudioWaveFormDisplay,
-	Button,
-	WAVE_FORM_PADDING_X_PERCENT,
-} from '@meemoo/react-components';
+import { Button } from '@meemoo/react-components';
 import { Image } from '@viaa/avo2-components';
 import clsx from 'clsx';
 import React, { type FunctionComponent, type ReactElement, type ReactNode, useState } from 'react';
@@ -112,30 +108,7 @@ export const BlockHeroCarouselActiveSlide: FunctionComponent<BlockHeroCarouselAc
 				onMutedChange={onMutedChange}
 				onEnded={onEnded}
 				poster={imageSrc}
-				controlsVariant="custom"
-				customControlsConfig={{
-					// Fullscreen only (see ControlBar.scss) - fades in sync with the control bar itself
-					// (same `controls-hidden` signal, same transition), matching native mode's title
-					// overlay instead of the two drifting apart on separate timers.
-					showTitleOverlay: true,
-					peakMode: 'image',
-					// Same base color as the inactive slide's waveform (BlockHeroCarouselInactiveSlide
-					// -> ImageOrAudioWaveForm, which leaves `waveColor` unset and falls back to
-					// AudioWaveFormDisplay's own default) for the not-yet-played bars, large size since
-					// this is the active, full-size slide. AudioWaveFormDisplay's bar color is its own
-					// prop (not `currentColor`), so the "played" highlight needs its own render per
-					// state rather than a CSS trick - see PeakDisplay's `peakVisual` function form.
-					// No-op for video items: FlowPlayer only reads peakMode/peakVisual when audio.
-					peakVisual: (state: 'inactive' | 'active') => (
-						<AudioWaveFormDisplay
-							size="large"
-							waveColor={state === 'active' ? Color.Teal40 : Color.White}
-							backgroundColor={item?.backgroundColor}
-						/>
-					),
-					// AudioWaveFormDisplay's bars don't fill its box edge-to-edge - see the constant.
-					peakVisualContentInset: WAVE_FORM_PADDING_X_PERCENT,
-				}}
+				backgroundColor={item?.backgroundColor}
 			/>
 		);
 	}

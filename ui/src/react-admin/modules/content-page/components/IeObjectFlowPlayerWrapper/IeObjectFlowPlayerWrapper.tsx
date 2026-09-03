@@ -1,6 +1,7 @@
 import { FlowPlayer, type FlowPlayerProps } from '@meemoo/react-components';
-import React, { type FunctionComponent, type ReactNode } from 'react';
+import React, { type FunctionComponent, type ReactNode, useMemo } from 'react';
 import { AdminConfigManager } from '~core/config';
+import { getRandomTertiaryBackgroundColor } from '~modules/content-page/helpers';
 import { Color } from '~modules/content-page/types/content-block.types.ts';
 import type { DefaultComponentProps } from '~modules/shared/types/components';
 import {
@@ -19,9 +20,7 @@ export interface IeObjectFlowPlayerWrapperProps extends DefaultComponentProps {
 	onEnded?: () => void;
 	isMuted?: boolean;
 	onMutedChange?: (muted: boolean) => void;
-	/** Opt-in - defaults to FlowPlayer's own native controls, unchanged for existing callers. */
-	controlsVariant?: FlowPlayerProps['controlsVariant'];
-	customControlsConfig?: FlowPlayerProps['customControlsConfig'];
+	backgroundColor?: string;
 }
 
 export const IeObjectFlowPlayerWrapper: FunctionComponent<IeObjectFlowPlayerWrapperProps> = ({
@@ -32,10 +31,11 @@ export const IeObjectFlowPlayerWrapper: FunctionComponent<IeObjectFlowPlayerWrap
 	onEnded,
 	isMuted,
 	onMutedChange,
-	controlsVariant,
-	customControlsConfig,
+	backgroundColor,
 	className,
 }): ReactNode => {
+	const fallbackBackgroundColor = useMemo(() => getRandomTertiaryBackgroundColor(), []);
+
 	if (!isAudioVideoFormat(ieObject.dctermsFormat)) {
 		return null;
 	}
@@ -59,6 +59,7 @@ export const IeObjectFlowPlayerWrapper: FunctionComponent<IeObjectFlowPlayerWrap
 	// The active slide is the only one big enough to warrant the full-size newspaper image, so
 	// it's the only slide that prefers it over the (lower-res) thumbnail.
 	const imageSrc = ieObject.thumbnailUrl || '';
+	const isAudio = isAudioFormat(ieObject.dctermsFormat);
 
 	const shared: Partial<FlowPlayerProps> = {
 		poster: poster ?? imageSrc,
@@ -80,9 +81,15 @@ export const IeObjectFlowPlayerWrapper: FunctionComponent<IeObjectFlowPlayerWrap
 		peakHeightFactor: 0.6,
 		preload: 'metadata',
 		className,
-		controlsVariant,
-		customControlsConfig,
-		// Not passing start and end times, since they are already in the snippet video url: browse.mp4?t=x,y&token=token-containing-x-y
+		controlsVariant: 'custom',
+		customControlsConfig: {
+			showFullscreen: !isAudio,
+			showTitleOverlay: true,
+			peakMode: 'generic',
+			peakColorActive: Color.Teal40,
+			peakColorInactive: Color.White,
+			peakColorBackground: backgroundColor || fallbackBackgroundColor,
+		},
 	};
 
 	if (isAudioFormat(ieObject.dctermsFormat)) {
