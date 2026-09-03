@@ -22224,6 +22224,26 @@
     "app": "HET_ARCHIEF",
     "component": "ADMIN_CORE",
     "location": "modules/content-page/components/blocks/block-page-overview/block-page-overview",
+    "key": "toon-de-gekleurde-labels-bovenop-de-tegels",
+    "language": "nl",
+    "value": "Toon de gekleurde labels bovenop de tegels",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-page-overview/block-page-overview",
+    "key": "toon-de-gekleurde-labels-bovenop-de-tegels",
+    "language": "en",
+    "value": "Toon de gekleurde labels bovenop de tegels",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-page-overview/block-page-overview",
     "key": "toon-de-pagina-titels",
     "language": "nl",
     "value": "Toon de paginatitels",
