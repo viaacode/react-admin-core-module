@@ -1,7 +1,7 @@
+import type { HetArchiefIeObjectType as IeObjectType } from '@viaa/avo2-types';
 import type { HeadingTypeOption } from '~modules/content-page/types/content-block.types';
 import type { DefaultComponentProps } from '~modules/shared/types/components';
 import type { PickerItem } from '~modules/shared/types/content-picker';
-import type { IeObjectType } from '~shared/helpers/map-format-to-type';
 
 export type OrderedTile = { item: ObjectsGridItem; isFixed: boolean };
 

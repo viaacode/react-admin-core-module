@@ -1,0 +1,119 @@
+@use "../../../../shared/styles/settings/colors" as colors;
+@use "../../../../shared/styles/settings/variables" as variables;
+
+$card-radius: variables.$g-spacer-unit * 1.5;
+
+.c-driekeuzespeler-modal {
+	&__media {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		aspect-ratio: 16 / 9;
+		width: 100%;
+
+		// Keeps a tall newspaper page inside the viewport instead of pushing the metadata panel and
+		// the close button off screen.
+		max-height: 70vh;
+		overflow: hidden;
+	}
+
+	&__player,
+	&__newspaper,
+	&__iiif-viewer {
+		width: 100%;
+		height: 100%;
+	}
+
+	// The viewer sizes itself to its container, so it needs one with a height of its own.
+	&__iiif-viewer {
+		position: relative;
+		overflow: hidden;
+	}
+
+	// A newspaper page is portrait, so it fits inside the frame rather than filling it.
+	&__newspaper {
+		object-fit: contain;
+	}
+
+	// Stands in for the essence when the visitor has no access to it.
+	&__inaccessible {
+		font-size: variables.$g-spacer-unit * 8;
+	}
+
+	&__loading {
+		margin: 0;
+	}
+
+	// The theme CTA sits in the same bar as the object metadata, so the modal owns the bar and the
+	// shared component renders inside it without its own chrome.
+	&__metadata-row {
+		display: flex;
+		align-items: center;
+		gap: variables.$g-spacer-unit * 3;
+		padding: variables.$g-spacer-unit * 2;
+		background-color: colors.$color-platinum;
+	}
+
+	// The bar grows with its content instead of the shared component's fixed 6rem row, and the row
+	// above carries the background now. Chained onto the shared class so it wins whichever
+	// stylesheet loads last.
+	&__metadata.c-ie-object-metadata {
+		flex: 1 1 auto;
+		min-width: 0;
+		height: auto;
+		padding: 0;
+		margin-top: 0;
+		background-color: transparent;
+	}
+
+	&__divider {
+		flex: 0 0 auto;
+		align-self: stretch;
+		width: 1px;
+		background-color: rgba(colors.$color-gray-1000, 0.12);
+	}
+
+	&__theme-cta {
+		flex: 0 0 auto;
+		padding: variables.$g-spacer-unit variables.$g-spacer-unit * 2;
+		border-radius: 9.2rem;
+		background-color: colors.$color-silver;
+		font-weight: 700;
+		white-space: nowrap;
+	}
+
+	// Mobile insets the media and stacks the metadata card under it, with the theme CTA on its own row.
+	@media (max-width: variables.$g-bp2) {
+		&__media {
+			width: calc(100% - #{variables.$g-spacer-unit * 5});
+			margin: 0 auto;
+			border-radius: $card-radius $card-radius 0 0;
+
+			// Tighter than desktop's 70vh: the stacked metadata card needs the room.
+			max-height: 45vh;
+			flex: 0 0 auto;
+		}
+
+		// The theme CTA drops to its own row under the metadata; the rest stays side by side inside
+		// the shared component.
+		&__metadata-row {
+			flex-direction: column;
+			align-items: stretch;
+			background-color: colors.$white;
+			border-radius: 0 0 $card-radius $card-radius;
+			width: calc(100% - #{variables.$g-spacer-unit * 5});
+			margin: 0 auto;
+		}
+
+		&__divider {
+			width: 100%;
+			height: 1px;
+			align-self: auto;
+		}
+
+		&__theme-cta {
+			width: fit-content;
+		}
+
+	}
+}

@@ -120,9 +120,11 @@
 	// No padding, no box-decoration-break: a plain span, so line-height alone decides where its
 	// glyphs sit. Its highlight is painted by &__title-box (below) instead.
 	&__title-text {
-		color: colors.$white;
+		display: inline;
 
-		@include typography.set-font(6.4rem, 800, 6.4rem, true);
+		@include typography.heading-2xl(true);
+
+		color: colors.$white;
 
 		@media (max-width: variables.$g-bp2) {
 			@include typography.set-font(4rem, 800, 4.4rem, true);

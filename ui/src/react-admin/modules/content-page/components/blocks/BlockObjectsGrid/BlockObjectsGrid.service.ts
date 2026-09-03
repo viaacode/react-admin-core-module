@@ -1,3 +1,4 @@
+import type { HetArchiefIeObjectType as IeObjectType } from '@viaa/avo2-types';
 import { stringifyUrl } from 'query-string';
 import { AdminConfigManager } from '~core/config/config.class';
 import type { IeObjectsSearchBody } from '~core/config/config.types';
@@ -5,7 +6,6 @@ import { CustomError } from '~shared/helpers/custom-error';
 import { fetchWithLogout, fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
 import { getProxyUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config';
 import { isAudioFormat } from '~shared/helpers/is-audio-video-format.ts';
-import type { IeObjectType } from '~shared/helpers/map-format-to-type';
 import type { PickerItem } from '~shared/types/content-picker';
 import { type ObjectsGridItem, OrderProperty } from './BlockObjectsGrid.types';
 

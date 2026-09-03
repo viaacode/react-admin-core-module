@@ -3,6 +3,8 @@ import type {
 	AvoCoreDatabaseType,
 	AvoEducationOrganizationOrganization,
 	AvoUserCommonUser,
+	HetArchiefIeObject as IeObject,
+	HetArchiefIeObjectType as IeObjectType,
 } from '@viaa/avo2-types';
 import type { ComponentType, FC, FunctionComponent, MouseEvent, ReactNode } from 'react';
 import type { OrderProperty } from '~content-blocks/BlockObjectsGrid/BlockObjectsGrid.types.ts';
@@ -14,7 +16,6 @@ import type {
 import type { App, Locale } from '~modules/translations/translations.core.types';
 import type { UserBulkAction } from '~modules/user/user.types';
 import type { FlowPlayerWrapperProps } from '~shared/components/FlowPlayerWrapper/FlowPlayerWrapper.types';
-import type { IeObjectType } from '~shared/helpers/map-format-to-type.ts';
 
 /**
  * What a consuming app needs to log a play of an ie-object rendered by a content block. The
@@ -129,6 +130,10 @@ export interface AdminConfig {
 			schemaIdentifier: string,
 			name: string | null | undefined
 		) => string;
+		// Path of the search page pre-filtered on a theme. Lives in the config for the same reason
+		// as getIeObjectDetailPath: the client's own advanced-filter url encoding is reused here,
+		// without the admin-core needing to depend on the client package.
+		getThemeSearchPath?: (locale: string, themeSlug: string) => string;
 	};
 	components: {
 		loader: {
@@ -136,6 +141,8 @@ export interface AdminConfig {
 		};
 		defaultAudioStill: string;
 		flowplayer?: FC<FlowPlayerWrapperProps>; // User by avo for
+		/** Injected by the host like `flowplayer`. Unset falls back to the flat IIIF detail image. */
+		iiifViewer?: FC<IiifViewerConfigProps>;
 		buttonTypes: () => { label: string; value: string }[];
 		enableMultiLanguage: boolean;
 	};
@@ -209,6 +216,16 @@ export interface AdminConfig {
 }
 
 /**
+ * Page state and the per-page ticket stay with the host: a ticket is short-lived and access-checked
+ * at request time, so it cannot be handed over already resolved.
+ */
+export interface IiifViewerConfigProps {
+	ieObject: IeObject;
+	/** Names the viewer for assistive technology, since the object title lives outside it. */
+	title?: string;
+}
+
+/**
  * The icons admin-core renders through the client config. Every client maps each of these onto one
  * of its own icons in `icon.componentProps`, so each client decides what eg: a warning looks like.
  * Never pass a client specific icon name (eg: an avo2 IconName) to the admin-core Icon component,
@@ -233,6 +250,7 @@ export enum AdminCoreIconName {
 	ChevronLeft = 'chevronLeft',
 	Clock = 'clock',
 	Collection = 'collection',
+	CollectionShuffle = 'collectionShuffle',
 	Copy = 'copy',
 	Delete = 'delete',
 	Edit = 'edit',
