@@ -1,8 +1,6 @@
 @use "../../../../shared/styles/settings/colors" as colors;
 @use "../../../../shared/styles/settings/variables" as variables;
 
-// Same ratio as the video player on an object's detail page.
-$media-aspect-ratio: 16 / 9;
 $card-radius: variables.$g-spacer-unit * 1.5;
 
 .c-driekeuzespeler-modal {
@@ -10,7 +8,7 @@ $card-radius: variables.$g-spacer-unit * 1.5;
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		aspect-ratio: $media-aspect-ratio;
+		aspect-ratio: 16 / 9;
 		width: 100%;
 
 		// Keeps a tall newspaper page inside the viewport instead of pushing the metadata panel and

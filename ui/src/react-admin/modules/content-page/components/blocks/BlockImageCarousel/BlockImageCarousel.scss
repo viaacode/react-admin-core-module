@@ -21,7 +21,7 @@
 
 		&-title {
 			color: colors.$color-gray-1000;
-			@include typography.sofia-pro-heading-lg();
+			@include typography.heading-lg();
 			@include typography.truncate();
 			width: fit-content;
 		}
