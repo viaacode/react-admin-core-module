@@ -227,14 +227,14 @@ $object-meta-vertical-padding: variables.$g-spacer-unit * 2;
 
 	&__node-text {
 		padding-bottom: $node-background-padding;
+
+		&:first-child .c-block-timeline__node-title {
+			margin-top: 0;
+		}
 	}
 
 	&__node-title {
 		margin: (variables.$g-spacer-unit * 4) 0 0;
-
-		&:first-child {
-			margin-top: 0;
-		}
 
 		@include typography.sofia-pro-heading-lg;
 
