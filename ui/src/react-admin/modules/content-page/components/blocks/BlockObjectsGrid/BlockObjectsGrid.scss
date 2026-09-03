@@ -49,7 +49,7 @@ $max-item-height: 37.6rem;
 	}
 
 	.c-block-objects-grid__title {
-		@include typography.sofia-pro-heading-lg($important: false);
+		@include typography.heading-lg($important: false);
 
 		color: colors.$color-gray-1000;
 		margin-bottom: 2.2rem;
@@ -194,7 +194,7 @@ $max-item-height: 37.6rem;
 	}
 
 	.c-block-objects-grid__tile-title {
-		@include typography.sofia-pro-heading-sm($important: false);
+		@include typography.heading-sm($important: false);
 		font-size: 1.6rem;
 
 		@include typography.truncate-after-x-lines(2);
@@ -202,7 +202,7 @@ $max-item-height: 37.6rem;
 	}
 
 	.c-block-objects-grid__tile-maintainer {
-		@include typography.sofia-pro-body-sm($important: false);
+		@include typography.body-sm($important: false);
 		line-height: 2rem;
 
 		@include typography.truncate;
@@ -222,7 +222,7 @@ $max-item-height: 37.6rem;
 		background-color: colors.$color-gray-1000;
 		color: colors.$white;
 
-		@include typography.sofia-pro-heading;
+		@include typography.heading;
 
 		text-decoration: none;
 
