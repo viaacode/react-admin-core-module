@@ -1726,7 +1726,7 @@
     "location": "modules/content-page/const/content-block",
     "key": "babyblauw",
     "language": "nl",
-    "value": "Baby blauw",
+    "value": "Poederblauw",
     "value_type": "TEXT"
   },
   {
@@ -1736,7 +1736,7 @@
     "location": "modules/content-page/const/content-block",
     "key": "babyblauw",
     "language": "en",
-    "value": "Baby blauw",
+    "value": "Powder blue",
     "value_type": "TEXT"
   },
   {
@@ -2596,7 +2596,7 @@
     "location": "modules/content-page/const/get-content-block-type-options",
     "key": "dubbele-banner",
     "language": "en",
-    "value": "Dubbele banner",
+    "value": "Double banner",
     "value_type": "TEXT"
   },
   {
@@ -2616,7 +2616,7 @@
     "location": "modules/content-page/const/get-content-block-type-options",
     "key": "hero-carousel",
     "language": "en",
-    "value": "Hero carousel",
+    "value": "Hero carrousel",
     "value_type": "TEXT"
   },
   {
@@ -2636,7 +2636,7 @@
     "location": "react-admin/modules/content-page/const/get-content-block-type-options",
     "key": "tijdslijn",
     "language": "en",
-    "value": "Tijdslijn",
+    "value": "Timeline",
     "value_type": "TEXT"
   },
   {
@@ -2656,7 +2656,7 @@
     "location": "modules/content-page/const/get-content-block-type-options",
     "key": "videoblok",
     "language": "en",
-    "value": "Videoblok",
+    "value": "Video block",
     "value_type": "TEXT"
   },
   {
@@ -2676,7 +2676,7 @@
     "location": "modules/content-page/const/get-content-block-type-options",
     "key": "carousel-met-afbeeldingen",
     "language": "en",
-    "value": "Carousel met afbeeldingen",
+    "value": "Carrousel with images",
     "value_type": "TEXT"
   },
   {
@@ -2696,7 +2696,7 @@
     "location": "modules/content-page/const/get-content-block-type-options",
     "key": "titel-met-parallax",
     "language": "en",
-    "value": "Titel met parallax",
+    "value": "Title with parallax",
     "value_type": "TEXT"
   },
   {
@@ -3496,7 +3496,7 @@
     "location": "modules/content-page/helpers/snippet-time-fields",
     "key": "vul-ook-een-starttijd-in-of-laat-de-eindtijd-leeg",
     "language": "en",
-    "value": "Vul ook een starttijd in of laat de eindtijd leeg",
+    "value": "Please add a start-time, or leave the end-time empty",
     "value_type": "TEXT"
   },
   {
@@ -3516,7 +3516,7 @@
     "location": "modules/content-page/helpers/snippet-time-fields",
     "key": "vul-ook-een-eindtijd-in-of-laat-de-starttijd-leeg",
     "language": "en",
-    "value": "Vul ook een eindtijd in of laat de starttijd leeg",
+    "value": "Please add an end-time, or leave the start-time empty",
     "value_type": "TEXT"
   },
   {
@@ -3536,7 +3536,7 @@
     "location": "modules/content-page/helpers/snippet-time-fields",
     "key": "gebruik-het-formaat-uu-mm-ss-of-mm-ss",
     "language": "en",
-    "value": "Gebruik het formaat uu mm ss of mm ss",
+    "value": "Please use the format hh mm ss of mm ss",
     "value_type": "TEXT"
   },
   {
@@ -3556,7 +3556,7 @@
     "location": "modules/content-page/helpers/snippet-time-fields",
     "key": "de-eindtijd-moet-na-de-starttijd-liggen",
     "language": "en",
-    "value": "De eindtijd moet na de starttijd liggen",
+    "value": "The end-time cannot precede the start-time",
     "value_type": "TEXT"
   },
   {
@@ -3576,7 +3576,7 @@
     "location": "modules/content-page/helpers/snippet-time-fields",
     "key": "uu-mm-ss",
     "language": "en",
-    "value": "uu:mm:ss",
+    "value": "hh:mm:ss",
     "value_type": "TEXT"
   },
   {
@@ -3616,7 +3616,7 @@
     "location": "modules/content-page/helpers/snippet-time-fields",
     "key": "een-object-is-verplicht",
     "language": "en",
-    "value": "Een object is verplicht",
+    "value": "An object is required",
     "value_type": "TEXT"
   },
   {
@@ -3626,7 +3626,7 @@
     "location": "modules/content-page/helpers/snippet-time-fields",
     "key": "starttijd",
     "language": "nl",
-    "value": "starttijd",
+    "value": "Starttijd",
     "value_type": "TEXT"
   },
   {
@@ -3636,7 +3636,7 @@
     "location": "modules/content-page/helpers/snippet-time-fields",
     "key": "starttijd",
     "language": "en",
-    "value": "starttijd",
+    "value": "Start time",
     "value_type": "TEXT"
   },
   {
@@ -3646,7 +3646,7 @@
     "location": "modules/content-page/helpers/snippet-time-fields",
     "key": "eindtijd",
     "language": "nl",
-    "value": "eindtijd",
+    "value": "Eindtijd",
     "value_type": "TEXT"
   },
   {
@@ -3656,7 +3656,7 @@
     "location": "modules/content-page/helpers/snippet-time-fields",
     "key": "eindtijd",
     "language": "en",
-    "value": "eindtijd",
+    "value": "End time",
     "value_type": "TEXT"
   },
   {
@@ -12196,7 +12196,7 @@
     "location": "modules/content-page/components/carousel-buttons/carousel-buttons",
     "key": "vorige-slide",
     "language": "en",
-    "value": "Vorige slide",
+    "value": "Previous slide",
     "value_type": "TEXT"
   },
   {
@@ -12216,7 +12216,7 @@
     "location": "modules/content-page/components/carousel-buttons/carousel-buttons",
     "key": "volgende-slide",
     "language": "en",
-    "value": "Volgende slide",
+    "value": "Next slide",
     "value_type": "TEXT"
   },
   {
@@ -12996,7 +12996,7 @@
     "location": "react-admin/modules/content-page/components/ie-object-load-error/ie-object-load-error",
     "key": "object-kon-niet-geladen-worden",
     "language": "en",
-    "value": "Object kon niet geladen worden",
+    "value": "Object failed to load",
     "value_type": "TEXT"
   },
   {
@@ -13016,7 +13016,7 @@
     "location": "modules/content-page/components/ie-object-metadata/ie-object-metadata",
     "key": "bekijk-de-volledige-video",
     "language": "en",
-    "value": "Bekijk de volledige video",
+    "value": "View the full video",
     "value_type": "TEXT"
   },
   {
@@ -13036,7 +13036,7 @@
     "location": "modules/content-page/components/ie-object-metadata/ie-object-metadata",
     "key": "beluister-de-volledige-audio",
     "language": "en",
-    "value": "Beluister de volledige audio",
+    "value": "Listen to the entire audio fragment",
     "value_type": "TEXT"
   },
   {
@@ -13056,7 +13056,7 @@
     "location": "modules/content-page/components/ie-object-metadata/ie-object-metadata",
     "key": "bekijk-de-volledige-krant",
     "language": "en",
-    "value": "Bekijk de volledige krant",
+    "value": "View the entire newspaper",
     "value_type": "TEXT"
   },
   {
@@ -13076,7 +13076,7 @@
     "location": "modules/content-page/components/ie-object-metadata/ie-object-metadata",
     "key": "bekijk-de-volledige-afbeelding",
     "language": "en",
-    "value": "Bekijk de volledige afbeelding",
+    "value": "View the full image",
     "value_type": "TEXT"
   },
   {
@@ -13096,7 +13096,7 @@
     "location": "modules/content-page/components/ie-object-metadata/ie-object-metadata",
     "key": "bekijk-het-volledige-object",
     "language": "en",
-    "value": "Bekijk het volledige object",
+    "value": "View the entire object",
     "value_type": "TEXT"
   },
   {
@@ -17576,7 +17576,7 @@
     "location": "modules/content-page/components/blocks/block-double-banner/block-double-banner",
     "key": "dubbele-banner",
     "language": "en",
-    "value": "Dubbele banner",
+    "value": "Double banner",
     "value_type": "TEXT"
   },
   {
@@ -17596,7 +17596,7 @@
     "location": "modules/content-page/components/blocks/block-double-banner/block-double-banner",
     "key": "helft",
     "language": "en",
-    "value": "Helft",
+    "value": "Half",
     "value_type": "TEXT"
   },
   {
@@ -17636,7 +17636,7 @@
     "location": "modules/content-page/components/blocks/block-double-banner/block-double-banner",
     "key": "label-is-verplicht",
     "language": "en",
-    "value": "Label is verplicht",
+    "value": "Label is required",
     "value_type": "TEXT"
   },
   {
@@ -17656,7 +17656,7 @@
     "location": "modules/content-page/components/blocks/block-double-banner/block-double-banner",
     "key": "icoon-1",
     "language": "en",
-    "value": "Icoon 1",
+    "value": "Icon 1",
     "value_type": "TEXT"
   },
   {
@@ -17676,7 +17676,7 @@
     "location": "modules/content-page/components/blocks/block-double-banner/block-double-banner",
     "key": "icoon-2",
     "language": "en",
-    "value": "Icoon 2",
+    "value": "Icon 2",
     "value_type": "TEXT"
   },
   {
@@ -17696,7 +17696,7 @@
     "location": "modules/content-page/components/blocks/block-double-banner/block-double-banner",
     "key": "icoon-3",
     "language": "en",
-    "value": "Icoon 3",
+    "value": "Icon 3",
     "value_type": "TEXT"
   },
   {
@@ -17716,7 +17716,7 @@
     "location": "modules/content-page/components/blocks/block-double-banner/block-double-banner",
     "key": "bestemming",
     "language": "en",
-    "value": "Bestemming",
+    "value": "Destination",
     "value_type": "TEXT"
   },
   {
@@ -17736,7 +17736,7 @@
     "location": "modules/content-page/components/blocks/block-double-banner/block-double-banner",
     "key": "bestemming-is-verplicht",
     "language": "en",
-    "value": "Bestemming is verplicht",
+    "value": "Destination is required",
     "value_type": "TEXT"
   },
   {
@@ -17756,7 +17756,7 @@
     "location": "modules/content-page/components/blocks/block-double-banner/block-double-banner",
     "key": "afbeelding-is-verplicht",
     "language": "en",
-    "value": "Afbeelding is verplicht",
+    "value": "Image is required",
     "value_type": "TEXT"
   },
   {
@@ -17776,7 +17776,7 @@
     "location": "modules/content-page/components/blocks/block-double-banner/block-double-banner",
     "key": "afbeelding",
     "language": "en",
-    "value": "Afbeelding",
+    "value": "Image",
     "value_type": "TEXT"
   },
   {
@@ -17836,7 +17836,7 @@
     "location": "modules/content-page/components/blocks/block-double-banner/block-double-banner",
     "key": "achtergrondkleur-tekstvak",
     "language": "en",
-    "value": "Achtergrondkleur tekstvak",
+    "value": "Background colour text block",
     "value_type": "TEXT"
   },
   {
@@ -17856,7 +17856,7 @@
     "location": "modules/content-page/components/blocks/block-double-banner/block-double-banner",
     "key": "achtergrondkleur-tekstvak-is-verplicht",
     "language": "en",
-    "value": "Achtergrondkleur tekstvak is verplicht",
+    "value": "Background colour text block is required",
     "value_type": "TEXT"
   },
   {
@@ -17986,7 +17986,7 @@
     "location": "modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel",
     "key": "hero-carousel",
     "language": "nl",
-    "value": "Hero carousel",
+    "value": "Hero carrousel",
     "value_type": "TEXT"
   },
   {
@@ -18016,7 +18016,7 @@
     "location": "modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel",
     "key": "achtergrondafbeelding-krijgt-voorrang-op-achtergrondkleur",
     "language": "en",
-    "value": "Achtergrondafbeelding (krijgt voorrang op achtergrondkleur)",
+    "value": "Background image (has priority over background colour)",
     "value_type": "TEXT"
   },
   {
@@ -18036,7 +18036,7 @@
     "location": "modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel",
     "key": "titel",
     "language": "en",
-    "value": "Titel",
+    "value": "Title",
     "value_type": "TEXT"
   },
   {
@@ -18056,7 +18056,7 @@
     "location": "modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel",
     "key": "is-verplicht",
     "language": "en",
-    "value": "Is verplicht",
+    "value": "Is required",
     "value_type": "TEXT"
   },
   {
@@ -18076,7 +18076,7 @@
     "location": "modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel",
     "key": "animatie-teksten",
     "language": "en",
-    "value": "Animatie teksten",
+    "value": "Animation texts",
     "value_type": "TEXT"
   },
   {
@@ -18096,7 +18096,7 @@
     "location": "modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel",
     "key": "animatie-tekst",
     "language": "en",
-    "value": "Animatie tekst",
+    "value": "Animation text",
     "value_type": "TEXT"
   },
   {
@@ -18106,7 +18106,7 @@
     "location": "modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel",
     "key": "voeg-animatie-tekst-toe",
     "language": "nl",
-    "value": "Voeg animatie tekst toe",
+    "value": "Voeg animatietekst toe",
     "value_type": "TEXT"
   },
   {
@@ -18116,7 +18116,7 @@
     "location": "modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel",
     "key": "voeg-animatie-tekst-toe",
     "language": "en",
-    "value": "Voeg animatie tekst toe",
+    "value": "Add animation text",
     "value_type": "TEXT"
   },
   {
@@ -18136,7 +18136,7 @@
     "location": "modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel",
     "key": "verwijder-animatie-tekst",
     "language": "en",
-    "value": "Verwijder animatie tekst",
+    "value": "Delete animation text",
     "value_type": "TEXT"
   },
   {
@@ -18236,7 +18236,7 @@
     "location": "modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel",
     "key": "voeg-een-object-toe",
     "language": "en",
-    "value": "Voeg een object toe",
+    "value": "Add an object",
     "value_type": "TEXT"
   },
   {
@@ -18256,7 +18256,7 @@
     "location": "modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel",
     "key": "verwijder-object",
     "language": "en",
-    "value": "Verwijder object",
+    "value": "Delete object",
     "value_type": "TEXT"
   },
   {
@@ -18276,7 +18276,7 @@
     "location": "modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel-active-slide",
     "key": "afspelen",
     "language": "en",
-    "value": "Afspelen",
+    "value": "Play",
     "value_type": "TEXT"
   },
   {
@@ -18296,7 +18296,7 @@
     "location": "modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel-active-slide",
     "key": "pauzeren",
     "language": "en",
-    "value": "Pauzeren",
+    "value": "Pause",
     "value_type": "TEXT"
   },
   {
@@ -18356,7 +18356,7 @@
     "location": "modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel-inactive-slide",
     "key": "krant",
     "language": "en",
-    "value": "Krant",
+    "value": "Newspaper",
     "value_type": "TEXT"
   },
   {
@@ -18376,7 +18376,7 @@
     "location": "modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel-inactive-slide",
     "key": "afbeelding",
     "language": "en",
-    "value": "Afbeelding",
+    "value": "Image",
     "value_type": "TEXT"
   },
   {
@@ -18396,7 +18396,7 @@
     "location": "modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel-inactive-slide",
     "key": "bestand",
     "language": "en",
-    "value": "Bestand",
+    "value": "File",
     "value_type": "TEXT"
   },
   {
@@ -18416,7 +18416,7 @@
     "location": "modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel-search",
     "key": "alles",
     "language": "en",
-    "value": "Alles",
+    "value": "All",
     "value_type": "TEXT"
   },
   {
@@ -18436,7 +18436,7 @@
     "location": "modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel-search",
     "key": "zoek-in-alle-objecten",
     "language": "en",
-    "value": "Zoek in alle objecten",
+    "value": "Search all objects",
     "value_type": "TEXT"
   },
   {
@@ -18456,7 +18456,7 @@
     "location": "modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel-search",
     "key": "alle-video",
     "language": "en",
-    "value": "Alle video",
+    "value": "All video",
     "value_type": "TEXT"
   },
   {
@@ -18476,7 +18476,7 @@
     "location": "modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel-search",
     "key": "zoek-in-video",
     "language": "en",
-    "value": "Zoek in video",
+    "value": "Search video",
     "value_type": "TEXT"
   },
   {
@@ -18496,7 +18496,7 @@
     "location": "modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel-search",
     "key": "alle-audio",
     "language": "en",
-    "value": "Alle audio",
+    "value": "All audio",
     "value_type": "TEXT"
   },
   {
@@ -18536,7 +18536,7 @@
     "location": "modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel-search",
     "key": "alle-kranten",
     "language": "en",
-    "value": "Alle kranten",
+    "value": "All newspapers",
     "value_type": "TEXT"
   },
   {
@@ -18556,7 +18556,7 @@
     "location": "modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel-search",
     "key": "zoek-in-kranten",
     "language": "en",
-    "value": "Zoek in kranten",
+    "value": "Search newspapers",
     "value_type": "TEXT"
   },
   {
@@ -18576,7 +18576,7 @@
     "location": "react-admin/modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel",
     "key": "start-je-zoektocht",
     "language": "en",
-    "value": "Start je zoektocht",
+    "value": "Start your search",
     "value_type": "TEXT"
   },
   {
@@ -18586,7 +18586,7 @@
     "location": "modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel",
     "key": "zoek-in-de-publieke-catalogus-input-aria-label",
     "language": "nl",
-    "value": "Zoek in de publieke catalogus input aria label",
+    "value": "Zoek hier in de publieke catalogus",
     "value_type": "TEXT"
   },
   {
@@ -18596,7 +18596,7 @@
     "location": "modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel",
     "key": "zoek-in-de-publieke-catalogus-input-aria-label",
     "language": "en",
-    "value": "Zoek in de publieke catalogus input aria label",
+    "value": "Search the public catalogue here",
     "value_type": "TEXT"
   },
   {
@@ -19076,7 +19076,7 @@
     "location": "modules/content-page/components/blocks/block-het-archief-video/block-het-archief-video",
     "key": "videoblok",
     "language": "en",
-    "value": "Videoblok",
+    "value": "Video block",
     "value_type": "TEXT"
   },
   {
@@ -19136,7 +19136,7 @@
     "location": "modules/content-page/components/blocks/block-het-archief-video/block-het-archief-video",
     "key": "toegankelijkheidstitel",
     "language": "en",
-    "value": "Toegankelijkheidstitel",
+    "value": "Accessibility title",
     "value_type": "TEXT"
   },
   {
@@ -19156,7 +19156,7 @@
     "location": "modules/content-page/components/blocks/block-het-archief-video/block-het-archief-video",
     "key": "breedte",
     "language": "en",
-    "value": "Breedte",
+    "value": "Width",
     "value_type": "TEXT"
   },
   {
@@ -19676,7 +19676,7 @@
     "location": "modules/content-page/components/blocks/block-image-carousel/block-image-carousel",
     "key": "Carousel-met-afbeeldingen",
     "language": "en",
-    "value": "Carousel met afbeeldingen",
+    "value": "Carrousel with images",
     "value_type": "TEXT"
   },
   {
@@ -19686,7 +19686,7 @@
     "location": "modules/content-page/components/blocks/block-image-carousel/block-image-carousel",
     "key": "title",
     "language": "nl",
-    "value": "Title",
+    "value": "Titel",
     "value_type": "TEXT"
   },
   {
@@ -19716,7 +19716,7 @@
     "location": "modules/content-page/components/blocks/block-image-carousel/block-image-carousel",
     "key": "titel-is-verplicht",
     "language": "en",
-    "value": "Titel is verplicht",
+    "value": "Title is required",
     "value_type": "TEXT"
   },
   {
@@ -19726,7 +19726,7 @@
     "location": "modules/content-page/components/blocks/block-image-carousel/block-image-carousel",
     "key": "titletype",
     "language": "nl",
-    "value": "Titletype",
+    "value": "Titeltype",
     "value_type": "TEXT"
   },
   {
@@ -19736,7 +19736,7 @@
     "location": "modules/content-page/components/blocks/block-image-carousel/block-image-carousel",
     "key": "titletype",
     "language": "en",
-    "value": "Titletype",
+    "value": "Title type",
     "value_type": "TEXT"
   },
   {
@@ -19756,7 +19756,7 @@
     "location": "modules/content-page/components/blocks/block-image-carousel/block-image-carousel",
     "key": "titletype-is-verplicht",
     "language": "en",
-    "value": "Titletype is verplicht",
+    "value": "Title type is required",
     "value_type": "TEXT"
   },
   {
@@ -19786,7 +19786,7 @@
     "location": "modules/content-page/components/blocks/block-image-carousel/block-image-carousel",
     "key": "item-image",
     "language": "nl",
-    "value": "Item image",
+    "value": "Item afbeelding",
     "value_type": "TEXT"
   },
   {
@@ -19816,7 +19816,7 @@
     "location": "modules/content-page/components/blocks/block-image-carousel/block-image-carousel",
     "key": "afbeelding-is-verplicht",
     "language": "en",
-    "value": "Afbeelding is verplicht",
+    "value": "Image is required",
     "value_type": "TEXT"
   },
   {
@@ -19836,7 +19836,7 @@
     "location": "modules/content-page/components/blocks/block-image-carousel/block-image-carousel",
     "key": "alt-tekst-voor-de-afbeelding",
     "language": "en",
-    "value": "Alt tekst voor de afbeelding",
+    "value": "Alt text for image",
     "value_type": "TEXT"
   },
   {
@@ -19856,7 +19856,7 @@
     "location": "modules/content-page/components/blocks/block-image-carousel/block-image-carousel",
     "key": "voeg-afbeelding-toe",
     "language": "en",
-    "value": "Voeg afbeelding toe",
+    "value": "Add image",
     "value_type": "TEXT"
   },
   {
@@ -19876,7 +19876,7 @@
     "location": "modules/content-page/components/blocks/block-image-carousel/block-image-carousel",
     "key": "verwijder-afbeelding",
     "language": "en",
-    "value": "Verwijder afbeelding",
+    "value": "Delete image",
     "value_type": "TEXT"
   },
   {
@@ -21256,7 +21256,7 @@
     "location": "modules/content-page/components/blocks/block-overview-themes/block-overview-themes",
     "key": "achtergrond-vormen-1",
     "language": "en",
-    "value": "Achtergrond vormen 1",
+    "value": "Background shapes 1",
     "value_type": "TEXT"
   },
   {
@@ -21276,7 +21276,7 @@
     "location": "modules/content-page/components/blocks/block-overview-themes/block-overview-themes",
     "key": "achtergrond-vormen-2",
     "language": "en",
-    "value": "Achtergrond vormen 2",
+    "value": "Background shapes 2",
     "value_type": "TEXT"
   },
   {
@@ -21296,7 +21296,7 @@
     "location": "modules/content-page/components/blocks/block-overview-themes/block-overview-themes",
     "key": "achtergrond-vormen-3",
     "language": "en",
-    "value": "Achtergrond vormen 3",
+    "value": "Background shapes 3",
     "value_type": "TEXT"
   },
   {
@@ -21396,7 +21396,7 @@
     "location": "modules/content-page/components/blocks/block-overview-themes/block-overview-themes",
     "key": "achtergrond-kleur",
     "language": "en",
-    "value": "Achtergrond kleur",
+    "value": "Background colour",
     "value_type": "TEXT"
   },
   {
@@ -21416,7 +21416,7 @@
     "location": "modules/content-page/components/blocks/block-overview-themes/block-overview-themes",
     "key": "achtergrond-vormen",
     "language": "en",
-    "value": "Achtergrond vormen",
+    "value": "Background shapes",
     "value_type": "TEXT"
   },
   {
@@ -21436,7 +21436,7 @@
     "location": "modules/content-page/components/blocks/block-overview-themes/block-overview-themes",
     "key": "achtergrond-vormen-is-verplicht",
     "language": "en",
-    "value": "Achtergrond vormen is verplicht",
+    "value": "Background shapes is required",
     "value_type": "TEXT"
   },
   {
@@ -21476,7 +21476,7 @@
     "location": "modules/content-page/components/blocks/block-overview-themes/block-overview-themes",
     "key": "afbeelding-overschrijft-de-afbeelding-van-het-thema",
     "language": "en",
-    "value": "Afbeelding (overschrijft de afbeelding van het thema)",
+    "value": "Image (this will replace the theme image)",
     "value_type": "TEXT"
   },
   {
@@ -21496,7 +21496,7 @@
     "location": "modules/content-page/components/blocks/block-overview-themes/block-overview-themes",
     "key": "beschrijving-overschrijft-de-beschrijving-van-het-thema",
     "language": "en",
-    "value": "Beschrijving overschrijft de beschrijving van het thema",
+    "value": "This description will replace the theme description",
     "value_type": "TEXT"
   },
   {
@@ -21516,7 +21516,7 @@
     "location": "modules/content-page/components/blocks/block-overview-themes/block-overview-themes",
     "key": "beschrijving-mag-max-300-karakters-lang-zijn",
     "language": "en",
-    "value": "Beschrijving mag max 300 karakters lang zijn",
+    "value": "Description is limited to 300 characters",
     "value_type": "TEXT"
   },
   {
@@ -22526,7 +22526,7 @@
     "location": "admin/content-block/helpers/generators/quote",
     "key": "quote",
     "language": "nl",
-    "value": "Quote",
+    "value": "Citaat",
     "value_type": "TEXT"
   },
   {
@@ -22546,7 +22546,7 @@
     "location": "admin/content-block/helpers/generators/quote",
     "key": "quote-is-verplicht",
     "language": "nl",
-    "value": "Quote is verplicht",
+    "value": "Citaat is verplicht",
     "value_type": "TEXT"
   },
   {
@@ -22556,7 +22556,7 @@
     "location": "admin/content-block/helpers/generators/quote",
     "key": "quote-is-verplicht",
     "language": "en",
-    "value": "Quote is verplicht",
+    "value": "Quote is required",
     "value_type": "TEXT"
   },
   {
@@ -22576,7 +22576,7 @@
     "location": "admin/content-block/helpers/generators/quote",
     "key": "auteur",
     "language": "en",
-    "value": "Auteur",
+    "value": "Author",
     "value_type": "TEXT"
   },
   {
@@ -22596,7 +22596,7 @@
     "location": "admin/content-block/helpers/generators/quote",
     "key": "initialen",
     "language": "en",
-    "value": "Initialen",
+    "value": "Initials",
     "value_type": "TEXT"
   },
   {
@@ -23616,7 +23616,7 @@
     "location": "modules/content-page/components/blocks/block-theme-reels/block-theme-reel-section",
     "key": "toon-alle-count-materialen",
     "language": "en",
-    "value": "Toon alle {{count}} materialen",
+    "value": "Show all material: {{count}}",
     "value_type": "TEXT"
   },
   {
@@ -23816,7 +23816,7 @@
     "location": "react-admin/modules/content-page/components/blocks/block-timeline/block-timeline",
     "key": "geen",
     "language": "en",
-    "value": "Geen",
+    "value": "None",
     "value_type": "TEXT"
   },
   {
@@ -23856,7 +23856,7 @@
     "location": "react-admin/modules/content-page/components/blocks/block-timeline/block-timeline",
     "key": "afbeelding",
     "language": "en",
-    "value": "Afbeelding",
+    "value": "Image",
     "value_type": "TEXT"
   },
   {
@@ -23876,7 +23876,7 @@
     "location": "react-admin/modules/content-page/components/blocks/block-timeline/block-timeline",
     "key": "aflopend-meest-recente-eerst",
     "language": "en",
-    "value": "Aflopend (meest recente eerst)",
+    "value": "Descending (most recent first)",
     "value_type": "TEXT"
   },
   {
@@ -23896,7 +23896,7 @@
     "location": "react-admin/modules/content-page/components/blocks/block-timeline/block-timeline",
     "key": "oplopend-oudste-eerst",
     "language": "en",
-    "value": "Oplopend (oudste eerst)",
+    "value": "Ascending (oldest first)",
     "value_type": "TEXT"
   },
   {
@@ -23916,7 +23916,7 @@
     "location": "react-admin/modules/content-page/components/blocks/block-timeline/block-timeline",
     "key": "tijdslijn",
     "language": "en",
-    "value": "Tijdslijn",
+    "value": "Timeline",
     "value_type": "TEXT"
   },
   {
@@ -23936,7 +23936,7 @@
     "location": "react-admin/modules/content-page/components/blocks/block-timeline/block-timeline",
     "key": "chronologische-sortering",
     "language": "en",
-    "value": "Chronologische sortering",
+    "value": "Sort chronologically",
     "value_type": "TEXT"
   },
   {
@@ -23976,7 +23976,7 @@
     "location": "react-admin/modules/content-page/components/blocks/block-timeline/block-timeline",
     "key": "datum",
     "language": "en",
-    "value": "Datum",
+    "value": "Date",
     "value_type": "TEXT"
   },
   {
@@ -23996,7 +23996,7 @@
     "location": "react-admin/modules/content-page/components/blocks/block-timeline/block-timeline",
     "key": "datum-is-verplicht",
     "language": "en",
-    "value": "Datum is verplicht",
+    "value": "Date is required",
     "value_type": "TEXT"
   },
   {
@@ -24016,6 +24016,296 @@
     "location": "react-admin/modules/content-page/components/blocks/block-timeline/block-timeline",
     "key": "titel",
     "language": "en",
+    "value": "Title",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/content-page/components/blocks/block-timeline/block-timeline",
+    "key": "titel-is-verplicht",
+    "language": "nl",
+    "value": "Titel is verplicht",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/content-page/components/blocks/block-timeline/block-timeline",
+    "key": "titel-is-verplicht",
+    "language": "en",
+    "value": "Title is required",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/content-page/components/blocks/block-timeline/block-timeline",
+    "key": "tekst",
+    "language": "nl",
+    "value": "Tekst",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/content-page/components/blocks/block-timeline/block-timeline",
+    "key": "tekst",
+    "language": "en",
+    "value": "Text",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/content-page/components/blocks/block-timeline/block-timeline",
+    "key": "visuele-elementen",
+    "language": "nl",
+    "value": "Visuele elementen",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/content-page/components/blocks/block-timeline/block-timeline",
+    "key": "visuele-elementen",
+    "language": "en",
+    "value": "Visual elements",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/content-page/components/blocks/block-timeline/block-timeline",
+    "key": "keuze-van-visuele-elementen-is-verplicht",
+    "language": "nl",
+    "value": "Keuze van visuele elementen is verplicht",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/content-page/components/blocks/block-timeline/block-timeline",
+    "key": "keuze-van-visuele-elementen-is-verplicht",
+    "language": "en",
+    "value": "Choosing visual elements is required",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/content-page/components/blocks/block-timeline/block-timeline",
+    "key": "een-afbeelding-is-verplicht",
+    "language": "nl",
+    "value": "Een afbeelding is verplicht",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/content-page/components/blocks/block-timeline/block-timeline",
+    "key": "een-afbeelding-is-verplicht",
+    "language": "en",
+    "value": "An image is required",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/content-page/components/blocks/block-timeline/block-timeline",
+    "key": "alternatieve-tekst-afbeelding",
+    "language": "nl",
+    "value": "Alternatieve tekst afbeelding",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/content-page/components/blocks/block-timeline/block-timeline",
+    "key": "alternatieve-tekst-afbeelding",
+    "language": "en",
+    "value": "Alternative text image",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/content-page/components/blocks/block-timeline/block-timeline",
+    "key": "achtergrondkleur-van-de-node",
+    "language": "nl",
+    "value": "Achtergrondkleur van de node",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/content-page/components/blocks/block-timeline/block-timeline",
+    "key": "achtergrondkleur-van-de-node",
+    "language": "en",
+    "value": "Background colour of the node",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/content-page/components/blocks/block-timeline/block-timeline",
+    "key": "voeg-node-toe",
+    "language": "nl",
+    "value": "Voeg node toe",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/content-page/components/blocks/block-timeline/block-timeline",
+    "key": "voeg-node-toe",
+    "language": "en",
+    "value": "Add node",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/content-page/components/blocks/block-timeline/block-timeline",
+    "key": "verwijder-node",
+    "language": "nl",
+    "value": "Verwijder node",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/content-page/components/blocks/block-timeline/block-timeline",
+    "key": "verwijder-node",
+    "language": "en",
+    "value": "Delete node",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/content-page/components/blocks/block-timeline/block-timeline",
+    "key": "terug-naar-boven",
+    "language": "nl",
+    "value": "Terug naar boven",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/content-page/components/blocks/block-timeline/block-timeline",
+    "key": "terug-naar-boven",
+    "language": "en",
+    "value": "Back to the top",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-title-with-parallax/block-title-with-parallax",
+    "key": "groot",
+    "language": "nl",
+    "value": "Groot",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-title-with-parallax/block-title-with-parallax",
+    "key": "groot",
+    "language": "en",
+    "value": "Large",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-title-with-parallax/block-title-with-parallax",
+    "key": "klein",
+    "language": "nl",
+    "value": "Klein",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-title-with-parallax/block-title-with-parallax",
+    "key": "klein",
+    "language": "en",
+    "value": "Small",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-title-with-parallax/block-title-with-parallax",
+    "key": "titel-met-parallax",
+    "language": "nl",
+    "value": "Titel met parallax",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-title-with-parallax/block-title-with-parallax",
+    "key": "titel-met-parallax",
+    "language": "en",
+    "value": "Title with parallax",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-title-with-parallax/block-title-with-parallax",
+    "key": "visualisatie",
+    "language": "nl",
+    "value": "Visualisatie",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-title-with-parallax/block-title-with-parallax",
+    "key": "visualisatie",
+    "language": "en",
+    "value": "Visualisation",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-title-with-parallax/block-title-with-parallax",
+    "key": "title",
+    "language": "nl",
     "value": "Titel",
     "value_type": "TEXT"
   },
@@ -24023,7 +24313,17 @@
     "id": "",
     "app": "HET_ARCHIEF",
     "component": "ADMIN_CORE",
-    "location": "react-admin/modules/content-page/components/blocks/block-timeline/block-timeline",
+    "location": "modules/content-page/components/blocks/block-title-with-parallax/block-title-with-parallax",
+    "key": "title",
+    "language": "en",
+    "value": "Title",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-title-with-parallax/block-title-with-parallax",
     "key": "titel-is-verplicht",
     "language": "nl",
     "value": "Titel is verplicht",
@@ -24033,310 +24333,10 @@
     "id": "",
     "app": "HET_ARCHIEF",
     "component": "ADMIN_CORE",
-    "location": "react-admin/modules/content-page/components/blocks/block-timeline/block-timeline",
-    "key": "titel-is-verplicht",
-    "language": "en",
-    "value": "Titel is verplicht",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/content-page/components/blocks/block-timeline/block-timeline",
-    "key": "tekst",
-    "language": "nl",
-    "value": "Tekst",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/content-page/components/blocks/block-timeline/block-timeline",
-    "key": "tekst",
-    "language": "en",
-    "value": "Tekst",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/content-page/components/blocks/block-timeline/block-timeline",
-    "key": "visuele-elementen",
-    "language": "nl",
-    "value": "Visuele elementen",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/content-page/components/blocks/block-timeline/block-timeline",
-    "key": "visuele-elementen",
-    "language": "en",
-    "value": "Visuele elementen",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/content-page/components/blocks/block-timeline/block-timeline",
-    "key": "keuze-van-visuele-elementen-is-verplicht",
-    "language": "nl",
-    "value": "Keuze van visuele elementen is verplicht",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/content-page/components/blocks/block-timeline/block-timeline",
-    "key": "keuze-van-visuele-elementen-is-verplicht",
-    "language": "en",
-    "value": "Keuze van visuele elementen is verplicht",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/content-page/components/blocks/block-timeline/block-timeline",
-    "key": "een-afbeelding-is-verplicht",
-    "language": "nl",
-    "value": "Een afbeelding is verplicht",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/content-page/components/blocks/block-timeline/block-timeline",
-    "key": "een-afbeelding-is-verplicht",
-    "language": "en",
-    "value": "Een afbeelding is verplicht",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/content-page/components/blocks/block-timeline/block-timeline",
-    "key": "alternatieve-tekst-afbeelding",
-    "language": "nl",
-    "value": "Alternatieve tekst afbeelding",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/content-page/components/blocks/block-timeline/block-timeline",
-    "key": "alternatieve-tekst-afbeelding",
-    "language": "en",
-    "value": "Alternatieve tekst afbeelding",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/content-page/components/blocks/block-timeline/block-timeline",
-    "key": "achtergrondkleur-van-de-node",
-    "language": "nl",
-    "value": "Achtergrondkleur van de node",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/content-page/components/blocks/block-timeline/block-timeline",
-    "key": "achtergrondkleur-van-de-node",
-    "language": "en",
-    "value": "Achtergrondkleur van de node",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/content-page/components/blocks/block-timeline/block-timeline",
-    "key": "voeg-node-toe",
-    "language": "nl",
-    "value": "Voeg node toe",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/content-page/components/blocks/block-timeline/block-timeline",
-    "key": "voeg-node-toe",
-    "language": "en",
-    "value": "Voeg node toe",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/content-page/components/blocks/block-timeline/block-timeline",
-    "key": "verwijder-node",
-    "language": "nl",
-    "value": "Verwijder node",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/content-page/components/blocks/block-timeline/block-timeline",
-    "key": "verwijder-node",
-    "language": "en",
-    "value": "Verwijder node",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/content-page/components/blocks/block-timeline/block-timeline",
-    "key": "terug-naar-boven",
-    "language": "nl",
-    "value": "Terug naar boven",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/content-page/components/blocks/block-timeline/block-timeline",
-    "key": "terug-naar-boven",
-    "language": "en",
-    "value": "Terug naar boven",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-title-with-parallax/block-title-with-parallax",
-    "key": "groot",
-    "language": "nl",
-    "value": "Groot",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-title-with-parallax/block-title-with-parallax",
-    "key": "groot",
-    "language": "en",
-    "value": "Groot",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-title-with-parallax/block-title-with-parallax",
-    "key": "klein",
-    "language": "nl",
-    "value": "Klein",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-title-with-parallax/block-title-with-parallax",
-    "key": "klein",
-    "language": "en",
-    "value": "Klein",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-title-with-parallax/block-title-with-parallax",
-    "key": "titel-met-parallax",
-    "language": "nl",
-    "value": "Titel met parallax",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-title-with-parallax/block-title-with-parallax",
-    "key": "titel-met-parallax",
-    "language": "en",
-    "value": "Titel met parallax",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-title-with-parallax/block-title-with-parallax",
-    "key": "visualisatie",
-    "language": "nl",
-    "value": "Visualisatie",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-title-with-parallax/block-title-with-parallax",
-    "key": "visualisatie",
-    "language": "en",
-    "value": "Visualisatie",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-title-with-parallax/block-title-with-parallax",
-    "key": "title",
-    "language": "nl",
-    "value": "title",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-title-with-parallax/block-title-with-parallax",
-    "key": "title",
-    "language": "en",
-    "value": "title",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-title-with-parallax/block-title-with-parallax",
-    "key": "titel-is-verplicht",
-    "language": "nl",
-    "value": "titel is verplicht",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
     "location": "modules/content-page/components/blocks/block-title-with-parallax/block-title-with-parallax",
     "key": "titel-is-verplicht",
     "language": "en",
-    "value": "titel is verplicht",
+    "value": "Title is required",
     "value_type": "TEXT"
   },
   {
@@ -24346,7 +24346,7 @@
     "location": "modules/content-page/components/blocks/block-title-with-parallax/block-title-with-parallax",
     "key": "subtitle",
     "language": "nl",
-    "value": "subtitle",
+    "value": "Ondertitel",
     "value_type": "TEXT"
   },
   {
@@ -24356,7 +24356,7 @@
     "location": "modules/content-page/components/blocks/block-title-with-parallax/block-title-with-parallax",
     "key": "subtitle",
     "language": "en",
-    "value": "subtitle",
+    "value": "Subtitle",
     "value_type": "TEXT"
   },
   {
@@ -24366,7 +24366,7 @@
     "location": "modules/content-page/components/blocks/block-title-with-parallax/block-title-with-parallax",
     "key": "item-image",
     "language": "nl",
-    "value": "item-image",
+    "value": "Item afbeelding",
     "value_type": "TEXT"
   },
   {
@@ -24376,7 +24376,7 @@
     "location": "modules/content-page/components/blocks/block-title-with-parallax/block-title-with-parallax",
     "key": "item-image",
     "language": "en",
-    "value": "item-image",
+    "value": "Item image",
     "value_type": "TEXT"
   },
   {
@@ -24386,7 +24386,7 @@
     "location": "modules/content-page/components/blocks/block-title-with-parallax/block-title-with-parallax",
     "key": "afbeelding-is-verplicht",
     "language": "nl",
-    "value": "afbeelding-is-verplicht",
+    "value": "Afbeelding is verplicht",
     "value_type": "TEXT"
   },
   {
@@ -24396,7 +24396,7 @@
     "location": "modules/content-page/components/blocks/block-title-with-parallax/block-title-with-parallax",
     "key": "afbeelding-is-verplicht",
     "language": "en",
-    "value": "afbeelding-is-verplicht",
+    "value": "Image is required",
     "value_type": "TEXT"
   },
   {
@@ -31236,7 +31236,7 @@
     "location": "modules/admin/const/themes",
     "key": "de-beschrijving-mag-maximaal-300-tekens-bevatten",
     "language": "en",
-    "value": "De beschrijving mag maximaal 300 tekens bevatten",
+    "value": "The description is limited to 300 characters",
     "value_type": "TEXT"
   },
   {
