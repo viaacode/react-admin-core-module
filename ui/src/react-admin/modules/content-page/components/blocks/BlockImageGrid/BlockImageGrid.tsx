@@ -11,6 +11,8 @@ import { defaultRenderLinkFunction } from '~shared/helpers/routing/link';
 
 import './BlockImageGrid.scss';
 import { CopyrightAttribution } from '~shared/components/CopyrightAttribution';
+import { generateSmartLink } from '~shared/components/SmartLink/SmartLink.tsx';
+import { tText } from '~shared/helpers/translation-functions.ts';
 
 export const BlockImageGrid: FunctionComponent<BlockImageGridProps> = ({
 	elements = [],
@@ -111,22 +113,41 @@ export const BlockImageGrid: FunctionComponent<BlockImageGridProps> = ({
 		<div
 			className={clsx('c-block-grid', `text-align-${textAlign}`, `item-align-${align}`, className)}
 		>
-			{elements.map((element, index) => (
-				<div
-					key={`block-grid-${element?.action?.value || element.title || null}${index}`}
-					className={clsx('c-block-grid__item')}
-					style={{
-						width: itemWidth,
-						margin: `${Math.round(verticalMargin / 2)}px ${Math.round(horizontalMargin / 2)}px`,
-					}}
-				>
-					{renderLink(
-						element.action,
-						renderGridImage(element),
-						element.title || element.buttonTitle || element.titleAbove
-					)}
-				</div>
-			))}
+			{elements.map((element, index) => {
+				const title = element.title || element.buttonTitle || element.titleAbove || '';
+				let elementAriaLabel: string;
+
+				if (element.imageLabel?.text) {
+					elementAriaLabel = tText('aria-label block image grid item met label', {
+						label: element.imageLabel.text,
+						title,
+					});
+				} else {
+					elementAriaLabel = tText('aria-label block image grid item', {
+						title,
+					});
+				}
+
+				return (
+					<div
+						key={`block-grid-${element?.action?.value || element.title || null}${index}`}
+						className={clsx('c-block-grid__item')}
+						style={{
+							width: itemWidth,
+							margin: `${Math.round(verticalMargin / 2)}px ${Math.round(horizontalMargin / 2)}px`,
+						}}
+					>
+						{generateSmartLink(
+							element.action,
+							renderGridImage(element),
+							title,
+							undefined,
+							undefined,
+							elementAriaLabel
+						)}
+					</div>
+				);
+			})}
 		</div>
 	);
 };

@@ -134,6 +134,7 @@ export const SmartLink: FunctionComponent<SmartLinkProps> = ({
 							target={LinkTarget.Blank}
 							rel="noopener noreferrer"
 							title={title}
+							aria-label={ariaLabel}
 							className={clsx(className, { 'a-link__no-styles': removeStyles })}
 							onClick={() => AdminConfigManager.getConfig().handlers.onExternalLink(fullUrl)}
 							onKeyUp={onKeyUpHandler}
@@ -150,6 +151,7 @@ export const SmartLink: FunctionComponent<SmartLinkProps> = ({
 						target={LinkTarget.Blank}
 						rel="noopener noreferrer"
 						title={title}
+						aria-label={ariaLabel}
 						className={clsx(className, { 'a-link__no-styles': removeStyles })}
 						onClick={() => AdminConfigManager.getConfig().handlers.onExternalLink(fullUrl)}
 						onKeyUp={onKeyUpHandler}
@@ -284,7 +286,8 @@ export const generateSmartLink = (
 	children: ReactNode,
 	title?: string,
 	className?: string,
-	tabIndex?: number
+	tabIndex?: number,
+	ariaLabel?: string
 	// biome-ignore lint/suspicious/noExplicitAny: todo
 ): ReactElement<any, any> | null => {
 	return (
@@ -294,6 +297,7 @@ export const generateSmartLink = (
 			className={className}
 			key={`smart-link-${action?.value}-${title}-${className}`}
 			tabIndex={tabIndex}
+			ariaLabel={ariaLabel}
 		>
 			{children}
 		</SmartLink>
