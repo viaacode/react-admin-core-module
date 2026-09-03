@@ -3,6 +3,7 @@ import clsx from 'clsx';
 import type { CSSProperties, FunctionComponent, ReactElement } from 'react';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { AdminCoreIconName } from '~core/config';
+import { ImageOrAudioWaveForm } from '~modules/content-page/components/ImageOrAudioWaveForm/ImageOrAudioWaveForm.tsx';
 import { useGetIeObjectsByIds } from '~modules/content-page/hooks/useGetIeObjectsByIds';
 import { useGetPlayableFileForIeObjects } from '~modules/content-page/hooks/useGetPlayableFileForIeObjects';
 import type {
@@ -10,6 +11,7 @@ import type {
 	DriekeuzespelerTileColors,
 } from '~modules/content-page/types/content-block.types';
 import { Icon } from '~shared/components/Icon/Icon';
+import { mapDcTermsFormatToSimpleType } from '~shared/helpers/map-format-to-type.ts';
 import type { DefaultComponentProps } from '~shared/types/components';
 import { useGetThemesByIds } from '../BlockOverviewThemes/hooks/useGetThemesByIds';
 import { DRIEKEUZESPELER_TILE_COUNT } from './BlockDriekeuzespeler.editorconfig';
@@ -103,6 +105,7 @@ export const BlockDriekeuzespeler: FunctionComponent<BlockDriekeuzespelerProps> 
 		const { backgroundColor, textColor } = tileColors[tileIndex] ?? {};
 		const schemaIdentifier = selected?.interest?.mediaItem?.value;
 		const ieObject = schemaIdentifier ? ieObjectsById?.[schemaIdentifier] : undefined;
+		const simpleType = mapDcTermsFormatToSimpleType(ieObject?.dctermsFormat);
 
 		return (
 			<li
@@ -113,11 +116,14 @@ export const BlockDriekeuzespeler: FunctionComponent<BlockDriekeuzespelerProps> 
 				style={{ '--tile-color': backgroundColor } as CSSProperties}
 			>
 				{!!ieObject?.thumbnailUrl && (
-					<img
-						className="c-driekeuzespeler__thumbnail"
-						src={ieObject.thumbnailUrl}
-						alt=""
-						loading="lazy"
+					<ImageOrAudioWaveForm
+						imageSrc={ieObject.thumbnailUrl}
+						imageAlt={ieObject.name}
+						backgroundColor={backgroundColor}
+						className={clsx(
+							'c-driekeuzespeler__thumbnail',
+							`c-driekeuzespeler__thumbnail--${simpleType}`
+						)}
 					/>
 				)}
 				{!!selected?.interest && (
