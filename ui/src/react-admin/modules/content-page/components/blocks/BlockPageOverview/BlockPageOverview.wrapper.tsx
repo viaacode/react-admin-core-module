@@ -38,6 +38,7 @@ export const BlockPageOverviewWrapper: FunctionComponent<PageOverviewWrapperProp
 	itemAlignment = 'left',
 	imageItemAlignment = 'center',
 	showSectionTitle = true,
+	showLabelsOnImage = false,
 	showTitle = true,
 	showDescription = true,
 	showDate = false,
@@ -237,6 +238,7 @@ export const BlockPageOverviewWrapper: FunctionComponent<PageOverviewWrapperProp
 				allowMultiple={allowMultiple}
 				centerHeader={centerHeader}
 				showSectionTitle={showSectionTitle}
+				showLabelsOnImage={showLabelsOnImage}
 				showTitle={showTitle}
 				showDescription={showDescription}
 				showDate={showDate}

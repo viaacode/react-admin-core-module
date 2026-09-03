@@ -369,6 +369,7 @@ export interface PageOverviewBlockComponentStateFields {
 	itemAlignment?: AlignOption;
 	imageItemAlignment?: AlignOption;
 	showSectionTitle?: boolean; // Title of the label that groups multiple pages
+	showLabelsOnImage?: boolean; // Colored label chips drawn on top of the page images
 	showTitle?: boolean; // Title of one of the pages
 	showDescription?: boolean; // Description of one of the pages
 	showDate?: boolean; // Date of one of the pages

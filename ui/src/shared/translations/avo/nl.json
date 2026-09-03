@@ -749,6 +749,7 @@
   "modules/content-page/components/blocks/block-media-grid/block-media-grid___stijl": "Stijl",
   "modules/content-page/components/blocks/block-page-overview/block-page-overview___afbeelding-uitlijning": "Afbeelding uitlijning",
   "modules/content-page/components/blocks/block-page-overview/block-page-overview___item-alignment": "Uitlijning",
+  "modules/content-page/components/blocks/block-page-overview/block-page-overview___toon-de-gekleurde-labels-bovenop-de-tegels": "Toon de gekleurde labels bovenop de tegels",
   "modules/content-page/components/blocks/block-page-overview/block-page-overview___toon-de-label-tussen-titels": "Toon de labels tussen titels.",
   "modules/content-page/components/blocks/block-page-overview/block-page-overview___toon-de-pagina-beschrijvingen": "Toon de paginabeschrijvingen.",
   "modules/content-page/components/blocks/block-page-overview/block-page-overview___toon-de-pagina-datum-en-categorie": "Toon de paginadatum en -categorie.",

@@ -53,6 +53,7 @@ export interface BlockPageOverviewProps extends DefaultProps {
 	itemAlignment?: AlignOption;
 	imageItemAlignment?: AlignOption;
 	showSectionTitle?: boolean;
+	showLabelsOnImage?: boolean;
 	showTitle?: boolean;
 	showDescription?: boolean;
 	showDate?: boolean;
@@ -91,6 +92,7 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 	itemAlignment = 'left',
 	imageItemAlignment = 'center',
 	showSectionTitle = true,
+	showLabelsOnImage = false,
 	showTitle = true,
 	showDescription = true,
 	showDate = false,
@@ -212,6 +214,9 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 	const getLabelShownOnImage = (
 		page: ContentPageInfo
 	): { text: string; color: string } | undefined => {
+		if (!showLabelsOnImage) {
+			return undefined;
+		}
 		const labelIds = labelIdsShownOnImage.map(String);
 		const labelObj = page.labels?.find((label) => labelIds.includes(String(label.id)));
 		// app_content_label.color is not null, and only hetarchief passes label ids in here
