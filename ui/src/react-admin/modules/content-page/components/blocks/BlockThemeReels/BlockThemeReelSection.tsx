@@ -16,6 +16,7 @@ import { CarouselButtons } from '~modules/content-page/components/CarouselButton
 import { ImageOrAudioWaveForm } from '~modules/content-page/components/ImageOrAudioWaveForm/ImageOrAudioWaveForm.tsx';
 import { getRandomTertiaryBackgroundColor } from '~modules/content-page/helpers/get-random-tertiary-background-color.ts';
 import type { Color } from '~modules/content-page/types/content-block.types.ts';
+import { IeObjectsService } from '~modules/ie-objects/ie-objects.service.ts';
 import type { DefaultComponentProps } from '~modules/shared/types/components';
 import { App, Locale } from '~modules/translations/translations.core.types.ts';
 import { Icon } from '~shared/components/Icon';
@@ -26,7 +27,6 @@ import { tText } from '~shared/helpers/translation-functions.ts';
 
 import 'swiper/css';
 import './BlockThemeReelsSection.scss';
-import { IeObjectsService } from '~modules/ie-objects/ie-objects.service.ts';
 
 export interface BlockThemeReelSectionProps extends DefaultComponentProps {
 	themeId: string;

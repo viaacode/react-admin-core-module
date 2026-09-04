@@ -1,5 +1,5 @@
 import { Button } from '@meemoo/react-components';
-import { Image, Spinner } from '@viaa/avo2-components';
+import { Image } from '@viaa/avo2-components';
 import clsx from 'clsx';
 import React, { type FunctionComponent, type ReactElement, type ReactNode, useState } from 'react';
 import type { HeroCarouselSlideItem } from '~content-blocks/BlockHeroCarousel/BlockHeroCarousel.types.ts';
@@ -11,6 +11,7 @@ import { BlockHeroCarouselInaccessibleItem } from '~content-blocks/BlockHeroCaro
 import { AdminCoreIconName } from '~core/config';
 import { IeObjectFlowPlayerWrapper } from '~modules/content-page/components/IeObjectFlowPlayerWrapper/IeObjectFlowPlayerWrapper.tsx';
 import { IeObjectLoadError } from '~modules/content-page/components/IeObjectLoadError';
+import { Color } from '~modules/content-page/types/content-block.types.ts';
 import type { DefaultComponentProps } from '~modules/shared/types/components';
 import { Icon } from '~shared/components/Icon';
 import { tText } from '~shared/helpers/translation-functions.ts';
@@ -107,6 +108,8 @@ export const BlockHeroCarouselActiveSlide: FunctionComponent<BlockHeroCarouselAc
 				onMutedChange={onMutedChange}
 				onEnded={onEnded}
 				poster={imageSrc}
+				backgroundColor={item?.backgroundColor}
+				hideTimestampsOnMobile={true}
 			/>
 		);
 	}

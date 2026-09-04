@@ -1,11 +1,8 @@
+import { AudioWaveFormDisplay, type AudioWaveFormDisplayProps } from '@meemoo/react-components';
 import { Image } from '@viaa/avo2-components';
 import type { FunctionComponent, ReactElement } from 'react';
 import React from 'react';
 import { AdminConfigManager } from '~core/config';
-import {
-	AudioWaveFormDisplay,
-	type AudioWaveFormDisplayProps,
-} from './AudioWaveFormDisplay/AudioWaveFormDisplay.tsx';
 
 export interface ImageOrAudioWaveFormProps extends Omit<AudioWaveFormDisplayProps, 'ariaLabel'> {
 	imageSrc?: string;

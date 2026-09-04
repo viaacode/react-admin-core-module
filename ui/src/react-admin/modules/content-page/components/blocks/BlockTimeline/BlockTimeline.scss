@@ -129,7 +129,7 @@ $object-meta-vertical-padding: variables.$g-spacer-unit * 2;
 		align-self: baseline;
 		padding-right: 1rem;
 
-		@include typography.sofia-pro-heading-xl;
+		@include typography.heading-xl;
 
 		// Taller than the font itself, so the year lines up with the top of the node's content
 		line-height: 5.6rem;
@@ -148,7 +148,7 @@ $object-meta-vertical-padding: variables.$g-spacer-unit * 2;
 		display: block;
 		padding-left: $line-content-gap;
 
-		@include typography.sofia-pro-heading-lg;
+		@include typography.heading-lg;
 
 		line-height: 2.6rem;
 		color: colors.$color-gray-300;
@@ -227,19 +227,19 @@ $object-meta-vertical-padding: variables.$g-spacer-unit * 2;
 
 	&__node-text {
 		padding-bottom: $node-background-padding;
+
+		&:first-child .c-block-timeline__node-title {
+			margin-top: 0;
+		}
 	}
 
 	&__node-title {
 		margin: (variables.$g-spacer-unit * 4) 0 0;
 
-		&:first-child {
-			margin-top: 0;
-		}
-
-		@include typography.sofia-pro-heading-lg;
+		@include typography.heading-lg;
 
 		@media (max-width: variables.$g-bp3) {
-			@include typography.sofia-pro-heading-md;
+			@include typography.heading-md;
 			margin: (variables.$g-spacer-unit * 3) 0 0;
 		}
 	}
@@ -247,10 +247,10 @@ $object-meta-vertical-padding: variables.$g-spacer-unit * 2;
 	&__node-description {
 		margin-top: variables.$g-spacer-unit * 2;
 
-		@include typography.sofia-pro-body;
+		@include typography.body;
 
 		@media (max-width: variables.$g-bp3) {
-			@include typography.sofia-pro-body-sm;
+			@include typography.body-sm;
 		}
 	}
 
@@ -334,7 +334,7 @@ $object-meta-vertical-padding: variables.$g-spacer-unit * 2;
 		// and on backgrounds with no record. https://meemoo.atlassian.net/browse/ARC-3848
 		color: colors.$color-gray-300;
 
-		@include typography.sofia-pro-body-xs;
+		@include typography.body-xs;
 
 		&-icon {
 			width: 1rem;

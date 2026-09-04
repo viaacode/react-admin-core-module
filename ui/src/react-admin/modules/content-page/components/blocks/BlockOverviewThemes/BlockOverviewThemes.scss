@@ -8,7 +8,7 @@ $tile-padding: 3rem;
 $description-animation-speed: 0.3s;
 
 .c-block-overview-themes {
-	@include typography.sofia-pro-heading-xl;
+	@include typography.heading-xl;
 
 	&__group {
 		position: relative;
@@ -50,7 +50,7 @@ $description-animation-speed: 0.3s;
 		position: relative;
 		z-index: 1;
 
-		@include typography.sofia-pro-heading-xl(true);
+		@include typography.heading-xl(true);
 
 		// Reset so the heading level (h1-h4, chosen for semantics only) never affects the visual style.
 		margin: 0 0 (variables.$g-spacer-unit * 3) !important;
@@ -181,7 +181,7 @@ $description-animation-speed: 0.3s;
 	&__tile-title {
 		color: colors.$white;
 
-		@include typography.sofia-pro-heading-md;
+		@include typography.heading-md;
 		@include typography.truncate-after-x-lines(2);
 	}
 
@@ -204,7 +204,7 @@ $description-animation-speed: 0.3s;
 			margin-top $description-animation-speed ease-out;
 		color: colors.$white;
 
-		@include typography.sofia-pro-body-sm;
+		@include typography.body-sm;
 	}
 
 	.c-block-overview-themes__tile {
