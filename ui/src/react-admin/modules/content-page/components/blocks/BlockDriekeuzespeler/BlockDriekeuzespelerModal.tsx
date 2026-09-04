@@ -1,3 +1,4 @@
+import { Button } from '@meemoo/react-components';
 import { Modal, ModalBody } from '@viaa/avo2-components';
 import {
 	AvoCoreContentPickerType,
@@ -137,11 +138,15 @@ export const BlockDriekeuzespelerModal: FunctionComponent<BlockDriekeuzespelerMo
 					}}
 					className="c-driekeuzespeler-modal__theme-cta"
 				>
-					{tText(
-						'modules/content-page/components/blocks/block-driekeuzespeler/block-driekeuzespeler___toon-meer-over-thema',
-						{ theme: themeName },
-						[HET_ARCHIEF]
-					)}
+					<Button
+						variants={['block', 'silver', 'sm']}
+						onClick={onClose}
+						label={tText(
+							'modules/content-page/components/blocks/block-driekeuzespeler/block-driekeuzespeler___toon-meer-over-thema',
+							{ theme: themeName },
+							[HET_ARCHIEF]
+						)}
+					/>
 				</SmartLink>
 			</>
 		);

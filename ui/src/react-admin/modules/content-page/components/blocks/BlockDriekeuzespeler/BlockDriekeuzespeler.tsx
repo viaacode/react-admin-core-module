@@ -3,6 +3,7 @@ import clsx from 'clsx';
 import type { CSSProperties, FunctionComponent, ReactElement } from 'react';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { AdminCoreIconName } from '~core/config';
+import { ImageOrAudioWaveForm } from '~modules/content-page/components/ImageOrAudioWaveForm/ImageOrAudioWaveForm.tsx';
 import { useGetIeObjectsByIds } from '~modules/content-page/hooks/useGetIeObjectsByIds';
 import { useGetPlayableFileForIeObjects } from '~modules/content-page/hooks/useGetPlayableFileForIeObjects';
 import type {
@@ -10,6 +11,7 @@ import type {
 	DriekeuzespelerTileColors,
 } from '~modules/content-page/types/content-block.types';
 import { Icon } from '~shared/components/Icon/Icon';
+import { mapDcTermsFormatToSimpleType } from '~shared/helpers/map-format-to-type.ts';
 import type { DefaultComponentProps } from '~shared/types/components';
 import { useGetThemesByIds } from '../BlockOverviewThemes/hooks/useGetThemesByIds';
 import { DRIEKEUZESPELER_TILE_COUNT } from './BlockDriekeuzespeler.editorconfig';
@@ -66,6 +68,11 @@ export const BlockDriekeuzespeler: FunctionComponent<BlockDriekeuzespelerProps> 
 	// An index rather than the interest itself, so it survives the renderer handing us a rebuilt array.
 	const [openedIndex, setOpenedIndex] = useState<number | null>(null);
 
+	// The tile a pointer opened the modal from. Escape closes the modal without moving focus, and the
+	// stack's pose follows :focus-within, so that tile would stay in its opened pose under a cursor
+	// that sits somewhere else. Null after a keyboard open: there the focus belongs to the visitor.
+	const openerRef = useRef<HTMLButtonElement | null>(null);
+
 	// Only the three on screen are resolved, not all two hundred a block may hold. The pids are part
 	// of the query key, so a shuffle back to a selection already seen is served from cache.
 	const selectedSchemaIdentifiers = (selection || [])
@@ -103,6 +110,7 @@ export const BlockDriekeuzespeler: FunctionComponent<BlockDriekeuzespelerProps> 
 		const { backgroundColor, textColor } = tileColors[tileIndex] ?? {};
 		const schemaIdentifier = selected?.interest?.mediaItem?.value;
 		const ieObject = schemaIdentifier ? ieObjectsById?.[schemaIdentifier] : undefined;
+		const simpleType = mapDcTermsFormatToSimpleType(ieObject?.dctermsFormat);
 
 		return (
 			<li
@@ -113,11 +121,14 @@ export const BlockDriekeuzespeler: FunctionComponent<BlockDriekeuzespelerProps> 
 				style={{ '--tile-color': backgroundColor } as CSSProperties}
 			>
 				{!!ieObject?.thumbnailUrl && (
-					<img
-						className="c-driekeuzespeler__thumbnail"
-						src={ieObject.thumbnailUrl}
-						alt=""
-						loading="lazy"
+					<ImageOrAudioWaveForm
+						imageSrc={ieObject.thumbnailUrl}
+						imageAlt={ieObject.name}
+						backgroundColor={backgroundColor}
+						className={clsx(
+							'c-driekeuzespeler__thumbnail',
+							`c-driekeuzespeler__thumbnail--${simpleType}`
+						)}
 					/>
 				)}
 				{!!selected?.interest && (
@@ -126,7 +137,11 @@ export const BlockDriekeuzespeler: FunctionComponent<BlockDriekeuzespelerProps> 
 					<button
 						type="button"
 						className="c-driekeuzespeler__tile-button"
-						onClick={() => setOpenedIndex(selected.index)}
+						onClick={(event) => {
+							// `detail` counts the clicks of a pointer, so 0 is Enter or Space.
+							openerRef.current = event.detail > 0 ? event.currentTarget : null;
+							setOpenedIndex(selected.index);
+						}}
 					>
 						<span
 							className="c-driekeuzespeler__pill"
@@ -187,7 +202,11 @@ export const BlockDriekeuzespeler: FunctionComponent<BlockDriekeuzespelerProps> 
 						: undefined
 				}
 				isFetching={isFetchingObjects || isFetchingPlayableFile}
-				onClose={() => setOpenedIndex(null)}
+				onClose={() => {
+					setOpenedIndex(null);
+					openerRef.current?.blur();
+					openerRef.current = null;
+				}}
 			/>
 		</div>
 	);
