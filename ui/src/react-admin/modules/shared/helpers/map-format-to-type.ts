@@ -1,35 +1,22 @@
-export enum IeObjectType {
-	audio = 'audio',
-	audiofragment = 'audiofragment',
-	film = 'film',
-	image = 'image', // Should never be used, but does seem to pop up some times
-	newspaper = 'newspaper',
-	newspaperpage = 'newspaperpage', // Should never be used, but does seem to pop up some times
-	video = 'video',
-	videofragment = 'videofragment',
-}
+import { HetArchiefIeObjectType, HetArchiefSimpleIeObjectType } from '@viaa/avo2-types';
 
-export enum SimpleIeObjectType {
-	VIDEO = 'video',
-	AUDIO = 'audio',
-	NEWSPAPER = 'newspaper',
-	IMAGE = 'image',
-}
-
-const MAP_DC_TERMS_FORMAT_TO_SIMPLE_TYPE: Record<IeObjectType, SimpleIeObjectType> = {
-	[IeObjectType.video]: SimpleIeObjectType.VIDEO,
-	[IeObjectType.videofragment]: SimpleIeObjectType.VIDEO,
-	[IeObjectType.film]: SimpleIeObjectType.VIDEO,
-	[IeObjectType.audio]: SimpleIeObjectType.AUDIO,
-	[IeObjectType.audiofragment]: SimpleIeObjectType.AUDIO,
-	[IeObjectType.newspaper]: SimpleIeObjectType.NEWSPAPER,
-	[IeObjectType.newspaperpage]: SimpleIeObjectType.NEWSPAPER,
-	[IeObjectType.image]: SimpleIeObjectType.IMAGE,
+const MAP_DC_TERMS_FORMAT_TO_SIMPLE_TYPE: Record<
+	HetArchiefIeObjectType,
+	HetArchiefSimpleIeObjectType
+> = {
+	[HetArchiefIeObjectType.VIDEO]: HetArchiefSimpleIeObjectType.VIDEO,
+	[HetArchiefIeObjectType.VIDEO_FRAGMENT]: HetArchiefSimpleIeObjectType.VIDEO,
+	[HetArchiefIeObjectType.FILM]: HetArchiefSimpleIeObjectType.VIDEO,
+	[HetArchiefIeObjectType.AUDIO]: HetArchiefSimpleIeObjectType.AUDIO,
+	[HetArchiefIeObjectType.AUDIO_FRAGMENT]: HetArchiefSimpleIeObjectType.AUDIO,
+	[HetArchiefIeObjectType.NEWSPAPER]: HetArchiefSimpleIeObjectType.NEWSPAPER,
+	[HetArchiefIeObjectType.NEWSPAPER_PAGE]: HetArchiefSimpleIeObjectType.NEWSPAPER,
+	[HetArchiefIeObjectType.IMAGE]: HetArchiefSimpleIeObjectType.IMAGE,
 };
 
 export function mapDcTermsFormatToSimpleType(
-	format: IeObjectType | undefined | null
-): SimpleIeObjectType | undefined {
+	format: HetArchiefIeObjectType | undefined | null
+): HetArchiefSimpleIeObjectType | undefined {
 	if (!format) {
 		return undefined;
 	}

@@ -3,6 +3,7 @@ import type {
 	AvoCoreDatabaseType,
 	AvoEducationOrganizationOrganization,
 	AvoUserCommonUser,
+	HetArchiefIeObjectType,
 } from '@viaa/avo2-types';
 import type { ComponentType, FC, FunctionComponent, MouseEvent, ReactNode } from 'react';
 import type { OrderProperty } from '~content-blocks/BlockObjectsGrid/BlockObjectsGrid.types.ts';
@@ -14,7 +15,6 @@ import type {
 import type { App, Locale } from '~modules/translations/translations.core.types';
 import type { UserBulkAction } from '~modules/user/user.types';
 import type { FlowPlayerWrapperProps } from '~shared/components/FlowPlayerWrapper/FlowPlayerWrapper.types';
-import type { IeObjectType } from '~shared/helpers/map-format-to-type.ts';
 
 /**
  * What a consuming app needs to log a play of an ie-object rendered by a content block. The
@@ -23,7 +23,7 @@ import type { IeObjectType } from '~shared/helpers/map-format-to-type.ts';
 export interface IeObjectPlayInfo {
 	schemaIdentifier: string;
 	maintainerId: string;
-	dctermsFormat: IeObjectType;
+	dctermsFormat: HetArchiefIeObjectType;
 	/** True when the content block config cut this object to a snippet, ie. it has a start and end */
 	isBlockSnippet: boolean;
 }

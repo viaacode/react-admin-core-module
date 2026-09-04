@@ -1,4 +1,4 @@
-import type { IeObjectType } from '~shared/helpers/map-format-to-type.ts';
+import type { HetArchiefIeObjectType } from '@viaa/avo2-types';
 
 export interface Theme {
 	id: string;
@@ -17,8 +17,14 @@ export interface ThemeWithObjects extends Theme {
 		id: string;
 		schemaIdentifier: string;
 		name: string;
-		format: IeObjectType;
-		thumbnailUrl: string;
+		format: HetArchiefIeObjectType;
+		// Null when the object has no thumbnail, or when the current user may not see its essence
+		thumbnailUrl: string | null;
+		/**
+		 * Whether the current user may see/play this object's essence. Computed by the proxy from the
+		 * licenses the user can access. Use this instead of checking thumbnailUrl for truthiness.
+		 */
+		hasAccessToEssence: boolean;
 		maintainerId: string;
 		maintainerName: string;
 	}[];

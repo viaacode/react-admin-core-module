@@ -1,9 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
-import { IeObjectsService } from '~shared/services/ie-objects-service/ie-objects.service.ts';
 import type {
-	PlayableDisplayIeObject,
-	UnsavedPlayableDisplayDataObject,
-} from '~shared/services/ie-objects-service/ie-objects.types.ts';
+	HetArchiefPlayableDisplayIeObject,
+	HetArchiefUnsavedPlayableDisplayDataObject,
+} from '@viaa/avo2-types';
+import { IeObjectsService } from '~shared/services/ie-objects-service/ie-objects.service.ts';
 import { QUERY_KEYS } from '~shared/types';
 
 /**
@@ -27,11 +27,11 @@ import { QUERY_KEYS } from '~shared/types';
  */
 export const useGetIeObjectsPlayableDisplayData = (
 	blockId: string | undefined,
-	unsavedObjects?: UnsavedPlayableDisplayDataObject[]
+	unsavedObjects?: HetArchiefUnsavedPlayableDisplayDataObject[]
 ) => {
 	const objects = blockId ? undefined : unsavedObjects;
 
-	return useQuery<(PlayableDisplayIeObject | null)[]>({
+	return useQuery<(HetArchiefPlayableDisplayIeObject | null)[]>({
 		queryKey: [
 			QUERY_KEYS.GET_IE_OBJECTS_PLAYABLE_DISPLAY_DATA,
 			blockId,

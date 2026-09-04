@@ -658,11 +658,8 @@ export interface HetArchiefQuoteBlockComponentState {
 	frameColor: Color | GradientColor | CustomBackground;
 }
 
-export interface HetArchiefIeObject {
-	name: string;
-	schemaIdentifier: string;
-	dctermsFormat: string;
-}
+// The full ie-object as the proxy returns it; the content picker only reads a few fields off it
+export type { HetArchiefIeObject } from '@viaa/avo2-types';
 
 export type TimelineNodeVisualType = 'NONE' | 'OBJECT' | 'IMAGE';
 
