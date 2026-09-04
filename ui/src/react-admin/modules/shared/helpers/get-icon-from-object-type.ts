@@ -1,9 +1,6 @@
+import { type HetArchiefIeObjectType, HetArchiefSimpleIeObjectType } from '@viaa/avo2-types';
 import { AdminCoreIconName } from '~core/config/config.types';
-import {
-	type IeObjectType,
-	mapDcTermsFormatToSimpleType,
-	SimpleIeObjectType,
-} from '~shared/helpers/map-format-to-type.ts';
+import { mapDcTermsFormatToSimpleType } from '~shared/helpers/map-format-to-type.ts';
 
 /**
  * Icon for an object type. Mirrors the client's `getIconFromObjectType`
@@ -12,22 +9,22 @@ import {
  * struck-through ("no-…") variant.
  */
 export function getIconFromObjectType(
-	format: IeObjectType | undefined,
+	format: HetArchiefIeObjectType | undefined,
 	accessible: boolean
 ): AdminCoreIconName {
 	const simpleType = mapDcTermsFormatToSimpleType(format);
 
 	switch (simpleType) {
-		case SimpleIeObjectType.VIDEO:
+		case HetArchiefSimpleIeObjectType.VIDEO:
 			return accessible ? AdminCoreIconName.Video : AdminCoreIconName.NoVideo;
 
-		case SimpleIeObjectType.AUDIO:
+		case HetArchiefSimpleIeObjectType.AUDIO:
 			return accessible ? AdminCoreIconName.Audio : AdminCoreIconName.NoAudio;
 
-		case SimpleIeObjectType.NEWSPAPER:
+		case HetArchiefSimpleIeObjectType.NEWSPAPER:
 			return accessible ? AdminCoreIconName.Newspaper : AdminCoreIconName.NoNewspaper;
 
-		case SimpleIeObjectType.IMAGE:
+		case HetArchiefSimpleIeObjectType.IMAGE:
 			return accessible ? AdminCoreIconName.Image : AdminCoreIconName.NoImage;
 
 		default:

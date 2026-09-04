@@ -16,6 +16,7 @@ import { CopyrightAttribution } from '~shared/components/CopyrightAttribution';
 import Html from '~shared/components/Html/Html';
 import { Icon } from '~shared/components/Icon/Icon';
 import { formatDateToDayMonthNameYear, getYear } from '~shared/helpers/formatters/date';
+import { getIconFromObjectType } from '~shared/helpers/get-icon-from-object-type';
 import { isAudioVideoFormat } from '~shared/helpers/is-audio-video-format.ts';
 import { snippetTimeToSeconds } from '~shared/helpers/parsers/duration';
 import { SanitizePreset } from '~shared/helpers/sanitize/presets';
@@ -207,23 +208,36 @@ export const BlockTimeline: FunctionComponent<BlockTimelineProps> = ({
 								)}
 								{ieObject && (
 									<div className={clsx('c-ie-object-media')}>
-										{isAudioVideoFormat(ieObject.dctermsFormat) ? (
+										{ieObject.hasAccessToEssence && isAudioVideoFormat(ieObject.dctermsFormat) ? (
 											<IeObjectFlowPlayerWrapper
 												className="c-block-timeline__node-object-media"
 												ieObject={ieObject}
 												poster={node.image}
 											/>
-										) : (
+										) : ieObject.hasAccessToEssence && thumbnail ? (
 											// Newspapers
-											thumbnail && (
-												<div className="c-block-timeline__node-image-wrapper">
-													<img
-														src={thumbnail}
-														alt={ieObject.name || node.title}
-														className="c-block-timeline__node-object-image"
-													/>
-												</div>
-											)
+											<div className="c-block-timeline__node-image-wrapper">
+												<img
+													src={thumbnail}
+													alt={ieObject.name || node.title}
+													className="c-block-timeline__node-object-image"
+												/>
+											</div>
+										) : (
+											// Nothing to show: the plain type icon when the essence is simply missing, the
+											// struck-through one when this visitor may not see it. Decorative -- the node's
+											// own title and metadata already name the object.
+											<span
+												className="c-block-timeline__node-object-placeholder"
+												aria-hidden="true"
+											>
+												<Icon
+													name={getIconFromObjectType(
+														ieObject.dctermsFormat,
+														ieObject.hasAccessToEssence
+													)}
+												/>
+											</span>
 										)}
 									</div>
 								)}

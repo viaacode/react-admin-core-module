@@ -189,6 +189,7 @@ export const PLAYABLE_DISPLAY_DATA_BLOCKS = [
 	ContentBlockType.HetArchiefVideo,
 	ContentBlockType.HeroCarousel,
 	ContentBlockType.Timeline,
+	ContentBlockType.OverviewWithCarousel,
 ];
 
 /**

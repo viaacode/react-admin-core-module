@@ -259,6 +259,7 @@ $object-meta-gap: 4rem;
 	// only its placement inside the node is timeline specific.
 	&__node-image-wrapper,
 	&__node-object-error,
+	&__node-object-placeholder,
 	&__node-object-media {
 		position: relative;
 		z-index: 1;
@@ -282,6 +283,16 @@ $object-meta-gap: 4rem;
 
 	&__node-object-image {
 		object-position: top center;
+	}
+
+	// Stands in for the media of an object with nothing to show: no essence access, or no
+	// thumbnail. Sized by the shared media rule above, so the node keeps its layout either way.
+	&__node-object-placeholder {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-size: 4rem;
+		color: colors.$color-gray-1000;
 	}
 
 	&__node-image {

@@ -1,5 +1,6 @@
 // biome-ignore-all lint/a11y/useKeyWithClickEvents: mouse-only slide click by design -- the strip's many duplicate slides shouldn't all become tab stops. (File-level because a per-line ignore here conflicts with the neighboring noArrayIndexKey ignore -- biome mis-attaches both when stacked on the same element.)
 import { Spinner } from '@viaa/avo2-components';
+import type { HetArchiefPlayableDisplayIeObject } from '@viaa/avo2-types';
 import clsx from 'clsx';
 import React, {
 	type FunctionComponent,
@@ -27,7 +28,6 @@ import {
 
 import './BlockHeroCarousel.scss';
 import { IeObjectMetadata } from '~modules/content-page/components/IeObjectMetadata/IeObjectMetadata.tsx';
-import type { PlayableDisplayIeObject } from '~shared/services/ie-objects-service/ie-objects.types.ts';
 
 export interface BlockHeroCarouselCarouselProps extends DefaultComponentProps {
 	elements: HeroCarouselSlideItem[];
@@ -165,7 +165,7 @@ export const BlockHeroCarouselCarousel: FunctionComponent<BlockHeroCarouselCarou
 			</div>
 			<IeObjectMetadata
 				className={'c-block-hero-carousel__carousel-metadata'}
-				ieObject={strip?.[activeIndex] as PlayableDisplayIeObject}
+				ieObject={strip?.[activeIndex] as HetArchiefPlayableDisplayIeObject}
 				fallbackTitle=""
 			/>
 		</div>

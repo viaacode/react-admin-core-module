@@ -1,4 +1,5 @@
 import { FlowPlayer, type FlowPlayerProps } from '@meemoo/react-components';
+import type { HetArchiefPlayableDisplayIeObject } from '@viaa/avo2-types';
 import React, { type FunctionComponent, type ReactNode } from 'react';
 import { AdminConfigManager } from '~core/config';
 import { Color } from '~modules/content-page/types/content-block.types.ts';
@@ -8,10 +9,9 @@ import {
 	isAudioVideoFormat,
 	isVideoFormat,
 } from '~shared/helpers/is-audio-video-format.ts';
-import type { PlayableDisplayIeObject } from '~shared/services/ie-objects-service/ie-objects.types.ts';
 
 export interface IeObjectFlowPlayerWrapperProps extends DefaultComponentProps {
-	ieObject: PlayableDisplayIeObject;
+	ieObject: HetArchiefPlayableDisplayIeObject;
 	/** Overrides the object name as the player's accessible title, e.g. a title set by an editor */
 	title?: string;
 	autoplay?: boolean;

@@ -1,5 +1,5 @@
 import type { TextInputProps } from '@viaa/avo2-components';
-import { AvoCoreContentPickerType } from '@viaa/avo2-types';
+import { AvoCoreContentPickerType, HetArchiefIeObjectType } from '@viaa/avo2-types';
 import type { HetArchiefVideoBlockComponentState } from '~content-blocks/BlockHetArchiefVideo';
 import { TEXT_FIELD } from '~content-blocks/defaults.ts';
 import {
@@ -11,7 +11,6 @@ import {
 	type MediaItemComponentState,
 } from '~modules/content-page/types/content-block.types.ts';
 import { isAudioVideoFormat } from '~shared/helpers/is-audio-video-format.ts';
-import { IeObjectType } from '~shared/helpers/map-format-to-type.ts';
 import { snippetTimeToSeconds } from '~shared/helpers/parsers/duration.ts';
 import { tText } from '~shared/helpers/translation-functions.ts';
 import { HET_ARCHIEF } from '~shared/types';
@@ -97,9 +96,9 @@ const hasMediaItem = (
 
 const getFormatFromMediaItem = (
 	formGroupState: ContentBlockComponentState | ContentBlockState
-): IeObjectType | undefined =>
+): HetArchiefIeObjectType | undefined =>
 	hasMediaItem(formGroupState)
-		? (formGroupState.mediaItem?.dctermsFormat as IeObjectType | undefined)
+		? (formGroupState.mediaItem?.dctermsFormat as HetArchiefIeObjectType | undefined)
 		: undefined;
 
 /**
@@ -145,7 +144,7 @@ const SNIPPET_TIME_FIELD = (
 	});
 
 export const IE_OBJECT_WITH_SNIPPET_TIME_FIELDS = (
-	allowedObjectTypes: IeObjectType[] = Object.values(IeObjectType),
+	allowedObjectTypes: HetArchiefIeObjectType[] = Object.values(HetArchiefIeObjectType),
 	isVisibleFunc: IsVisibleFunc = () => true
 ): Record<string, ContentBlockField> => ({
 	// Named `mediaItem` on purpose: generateFieldAttributes reads `state.item ||

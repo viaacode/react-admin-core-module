@@ -1,10 +1,10 @@
+import type {
+	HetArchiefPlayableDisplayIeObject,
+	HetArchiefUnsavedPlayableDisplayDataObject,
+} from '@viaa/avo2-types';
 import { CustomError } from '~shared/helpers/custom-error';
 import { fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
 import { getProxyUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config';
-import type {
-	PlayableDisplayIeObject,
-	UnsavedPlayableDisplayDataObject,
-} from '~shared/services/ie-objects-service/ie-objects.types.ts';
 
 export class IeObjectsService {
 	private static getBaseUrl(): string {
@@ -27,11 +27,11 @@ export class IeObjectsService {
 	 */
 	public static async getPlayableDisplayData(
 		blockId: string | undefined,
-		unsavedObjects?: UnsavedPlayableDisplayDataObject[]
-	): Promise<(PlayableDisplayIeObject | null)[]> {
+		unsavedObjects?: HetArchiefUnsavedPlayableDisplayDataObject[]
+	): Promise<(HetArchiefPlayableDisplayIeObject | null)[]> {
 		const body = blockId ? { blockId } : { objects: unsavedObjects };
 		try {
-			return await fetchWithLogoutJson<(PlayableDisplayIeObject | null)[]>(
+			return await fetchWithLogoutJson<(HetArchiefPlayableDisplayIeObject | null)[]>(
 				`${IeObjectsService.getBaseUrl()}/playable-display-data`,
 				{
 					method: 'POST',
