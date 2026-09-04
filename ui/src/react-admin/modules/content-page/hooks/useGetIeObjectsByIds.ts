@@ -1,5 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import type { HetArchiefIeObject as IeObject } from '@viaa/avo2-types';
+import { AdminConfigManager } from '~core/config';
+import { isAudioFormat } from '~shared/helpers/is-audio-video-format.ts';
 import { IeObjectsService } from '~shared/services/ie-objects-service/ie-objects.service.ts';
 import { QUERY_KEYS } from '~shared/types';
 
@@ -17,7 +19,15 @@ export const useGetIeObjectsByIds = (schemaIdentifiers: string[], enabled = true
 				// A pid the endpoint could not resolve comes back as null, so entries cannot be keyed blindly.
 				(await IeObjectsService.getIeObjectsByIds(identifiers))
 					.filter((ieObject): ieObject is IeObject => !!ieObject?.schemaIdentifier)
-					.map((ieObject) => [ieObject.schemaIdentifier, ieObject])
+					.map((ieObject) => [
+						ieObject.schemaIdentifier,
+						{
+							...ieObject,
+							thumbnailUrl: isAudioFormat(ieObject.dctermsFormat)
+								? AdminConfigManager.getConfig().components.defaultAudioStill
+								: ieObject.thumbnailUrl,
+						},
+					])
 			),
 		enabled: enabled && identifiers.length > 0,
 		staleTime: 60 * 60 * 1000, // 1 hour, same as the playable display data
