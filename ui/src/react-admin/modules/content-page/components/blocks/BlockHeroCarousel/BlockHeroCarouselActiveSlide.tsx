@@ -109,6 +109,7 @@ export const BlockHeroCarouselActiveSlide: FunctionComponent<BlockHeroCarouselAc
 				onEnded={onEnded}
 				poster={imageSrc}
 				backgroundColor={item?.backgroundColor}
+				hideTimestampsOnMobile={true}
 			/>
 		);
 	}

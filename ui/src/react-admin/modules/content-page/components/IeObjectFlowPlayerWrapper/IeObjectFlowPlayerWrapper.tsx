@@ -9,6 +9,7 @@ import {
 	isAudioVideoFormat,
 	isVideoFormat,
 } from '~shared/helpers/is-audio-video-format.ts';
+import { useIsMobileWidth } from '~shared/helpers/media-query.ts';
 import type { PlayableDisplayIeObject } from '~shared/services/ie-objects-service/ie-objects.types.ts';
 
 export interface IeObjectFlowPlayerWrapperProps extends DefaultComponentProps {
@@ -21,6 +22,7 @@ export interface IeObjectFlowPlayerWrapperProps extends DefaultComponentProps {
 	isMuted?: boolean;
 	onMutedChange?: (muted: boolean) => void;
 	backgroundColor?: string;
+	hideTimestampsOnMobile?: boolean;
 }
 
 export const IeObjectFlowPlayerWrapper: FunctionComponent<IeObjectFlowPlayerWrapperProps> = ({
@@ -32,9 +34,11 @@ export const IeObjectFlowPlayerWrapper: FunctionComponent<IeObjectFlowPlayerWrap
 	isMuted,
 	onMutedChange,
 	backgroundColor,
+	hideTimestampsOnMobile,
 	className,
 }): ReactNode => {
 	const fallbackBackgroundColor = useMemo(() => getRandomTertiaryBackgroundColor(), []);
+	const isMobile = useIsMobileWidth();
 
 	if (!isAudioVideoFormat(ieObject.dctermsFormat)) {
 		return null;
@@ -85,6 +89,7 @@ export const IeObjectFlowPlayerWrapper: FunctionComponent<IeObjectFlowPlayerWrap
 		customControlsConfig: {
 			showFullscreen: !isAudio,
 			showTitleOverlay: true,
+			showTimestamps: hideTimestampsOnMobile ? !isMobile : true,
 			peakMode: 'generic',
 			peakColorActive: Color.Teal40,
 			peakColorInactive: Color.White,
