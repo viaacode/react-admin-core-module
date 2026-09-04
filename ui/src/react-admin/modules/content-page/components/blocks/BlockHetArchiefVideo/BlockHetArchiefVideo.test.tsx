@@ -14,6 +14,7 @@ const ieObject = {
 	schemaIdentifier: 'qs6d5p9579',
 	name: 'Some AV object',
 	dctermsFormat: 'video',
+	hasAccessToEssence: true,
 	playableUrl: 'https://media.example.com/qs6d5p9579.mp4',
 	mimeType: 'video/mp4',
 	thumbnailUrl: null,
@@ -117,6 +118,30 @@ describe('<BlockHetArchiefVideo />', () => {
 
 		expect(container).toBeEmptyDOMElement();
 		expect(mockPlayer).not.toHaveBeenCalled();
+	});
+
+	it('Should render an error tile for an object this visitor has no essence access to', () => {
+		mockPlayableDisplayData.mockReturnValue({
+			data: [{ ...ieObject, hasAccessToEssence: false, playableUrl: null }],
+		});
+
+		const { container } = render(<BlockHetArchiefVideo blockId={blockId} />);
+
+		expect(container.querySelector('.c-ie-object-load-error')).toBeInTheDocument();
+		expect(
+			container.querySelector('.c-block-het-archief-video__player--error')
+		).toBeInTheDocument();
+		expect(mockPlayer).not.toHaveBeenCalled();
+	});
+
+	it('Should keep the caption for an object this visitor has no essence access to', () => {
+		mockPlayableDisplayData.mockReturnValue({
+			data: [{ ...ieObject, hasAccessToEssence: false, playableUrl: null }],
+		});
+
+		render(<BlockHetArchiefVideo blockId={blockId} copyrightTitle="VRT" />);
+
+		expect(screen.getByText(/VRT/)).toBeInTheDocument();
 	});
 
 	it('Should render an error tile for an object that resolved to null', () => {
