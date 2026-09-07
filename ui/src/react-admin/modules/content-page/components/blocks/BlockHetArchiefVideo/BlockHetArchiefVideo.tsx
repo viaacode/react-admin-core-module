@@ -76,29 +76,24 @@ export const BlockHetArchiefVideo: FunctionComponent<BlockHetArchiefVideoProps> 
 	const ieObject = ieObjects?.[0];
 
 	// A resolved-but-null entry means the object itself couldn't be loaded (it's gone, or this
-	// visitor can't get at it). That's worth showing: the block is only ever added for an AV
-	// object, so an empty spot would just look like a rendering bug.
-	const hasFailed = !!ieObjects && ieObjects.length > 0 && ieObjects[0] === null;
+	// visitor can't get at it), and a resolved object with no essence access is one this visitor
+	// may not play. Both are worth showing: the block is only ever added for an AV object, so an
+	// empty spot would just look like a rendering bug.
+	const hasFailed =
+		!!ieObjects &&
+		ieObjects.length > 0 &&
+		(ieObject === null || ieObject?.hasAccessToEssence === false);
 
 	// The url can only come from the request, but the poster the editor picked is right here in the
 	// block config: showing it while the object resolves keeps the block in the page flow instead of
 	// having it appear out of nowhere once the url lands.
 	const isLoadingObject = isLoading || isFetching || !ieObjects;
 
-	if (hasFailed) {
-		return (
-			<Container className={clsx(className, 'c-block-het-archief-video')}>
-				<div className="c-block-het-archief-video__player" style={width ? { width } : undefined}>
-					<IeObjectLoadError />
-				</div>
-			</Container>
-		);
-	}
-
 	// Nothing local to hold the spot with while the object is still loading, and nothing to play
 	// once it has: the block is only ever added for an AV object, but content pages are public while
-	// the object behind them still goes through the licence and visitor space checks.
-	if (isLoadingObject ? !poster : !ieObject?.playableUrl) {
+	// the object behind them still goes through the licence and visitor space checks. An object this
+	// visitor may not see is the one case that does get something in the player's place.
+	if (!hasFailed && (isLoadingObject ? !poster : !ieObject?.playableUrl)) {
 		return null;
 	}
 
@@ -106,11 +101,16 @@ export const BlockHetArchiefVideo: FunctionComponent<BlockHetArchiefVideoProps> 
 		<Container className={clsx(className, 'c-block-het-archief-video')}>
 			<div
 				className={clsx('c-block-het-archief-video__player', {
-					'c-block-het-archief-video__player--loading': isLoadingObject,
+					'c-block-het-archief-video__player--loading': !hasFailed && isLoadingObject,
+					'c-block-het-archief-video__player--error': hasFailed,
 				})}
 				style={width ? { width } : undefined}
 			>
-				{isLoadingObject || !ieObject ? (
+				{hasFailed ? (
+					// Only the player is swapped out: the block keeps its size and its caption, so the
+					// object stays announced the same way it would have been with access.
+					<IeObjectLoadError />
+				) : isLoadingObject || !ieObject ? (
 					<>
 						<img
 							src={poster}
