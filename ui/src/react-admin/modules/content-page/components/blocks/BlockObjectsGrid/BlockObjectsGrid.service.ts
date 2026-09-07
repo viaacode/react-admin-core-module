@@ -1,4 +1,4 @@
-import type { HetArchiefIeObjectType as IeObjectType } from '@viaa/avo2-types';
+import type { HetArchiefIeObjectType } from '@viaa/avo2-types';
 import { stringifyUrl } from 'query-string';
 import { AdminConfigManager } from '~core/config/config.class';
 import type { IeObjectsSearchBody } from '~core/config/config.types';
@@ -26,8 +26,10 @@ interface RawIeObject {
 	maintainerSlug?: string;
 	maintainerName?: string;
 	// dcterms format, e.g. "video" | "audio" | "newspaper".
-	dctermsFormat?: IeObjectType;
+	dctermsFormat?: HetArchiefIeObjectType;
 	thumbnailUrl?: string;
+	// Always sent by the proxy: it is computed for every censored object, not resolved per request
+	hasAccessToEssence: boolean;
 }
 
 const mapRawToGridItem = (raw: RawIeObject): ObjectsGridItem => {
@@ -39,9 +41,13 @@ const mapRawToGridItem = (raw: RawIeObject): ObjectsGridItem => {
 		maintainerSlug: raw.maintainerSlug || '',
 		maintainerName: raw.maintainerName,
 		type,
-		thumbnailUrl: isAudioFormat(type)
-			? AdminConfigManager.getConfig().components.defaultAudioStill
-			: raw.thumbnailUrl,
+		hasAccessToEssence: raw.hasAccessToEssence,
+		// The audio still stands in for the ugly speaker thumbnail, but only for an object the user
+		// may actually hear -- it is a display substitute, never a signal that access was granted
+		thumbnailUrl:
+			isAudioFormat(type) && raw.hasAccessToEssence
+				? AdminConfigManager.getConfig().components.defaultAudioStill
+				: raw.thumbnailUrl,
 	};
 };
 

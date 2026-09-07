@@ -1,13 +1,13 @@
 import { cleanup, render } from '@testing-library/react';
+import type { HetArchiefPlayableDisplayIeObject } from '@viaa/avo2-types';
 import { AvoSearchOrderDirection } from '@viaa/avo2-types';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { AdminConfigManager } from '~core/config/config.class';
 import { Locale } from '~modules/translations/translations.core.types';
-import type { PlayableDisplayIeObject } from '~shared/services/ie-objects-service/ie-objects.types';
 import { BlockTimeline } from './BlockTimeline';
 
 const mockPlayableDisplayData = vi.fn<
-	() => { data: (PlayableDisplayIeObject | null)[] | undefined }
+	() => { data: (HetArchiefPlayableDisplayIeObject | null)[] | undefined }
 >(() => ({ data: undefined }));
 
 vi.mock('~modules/content-page/hooks/useGetIeObjectsPlayableDisplayData.ts', () => ({
@@ -23,6 +23,13 @@ vi.mock(
 
 vi.mock('~modules/content-page/components/IeObjectMetadata/IeObjectMetadata.tsx', () => ({
 	IeObjectMetadata: () => null,
+}));
+
+// Stubbed so the tests can assert which icon variant a node asks for: the second argument is the
+// "may this visitor see the essence" flag that picks between the plain and struck-through icon.
+const getIconFromObjectType = vi.fn(() => 'no-newspaper');
+vi.mock('~shared/helpers/get-icon-from-object-type', () => ({
+	getIconFromObjectType: (...args: unknown[]) => getIconFromObjectType(...(args as [])),
 }));
 
 const NODE = {
@@ -130,7 +137,8 @@ describe('<BlockTimeline /> playable display data alignment', () => {
 		name: 'Newspaper',
 		dctermsFormat: 'newspaper',
 		newspaperImage: 'data:image/jpeg;base64,newspaper',
-	} as PlayableDisplayIeObject;
+		hasAccessToEssence: true,
+	} as HetArchiefPlayableDisplayIeObject;
 
 	it('shows the object of the node it was configured for, not of the row it is rendered on', () => {
 		// One entry per node in configured order: the image node has no object, the newspaper does
@@ -146,5 +154,33 @@ describe('<BlockTimeline /> playable display data alignment', () => {
 		expect(
 			nodes[0].querySelector('.c-block-timeline__node-object-image')?.getAttribute('src')
 		).toBe(newspaper.newspaperImage);
+	});
+
+	it('shows the struck-through type icon instead of the image when the visitor may not see the essence', () => {
+		mockPlayableDisplayData.mockReturnValue({
+			data: [null, { ...newspaper, hasAccessToEssence: false }],
+		});
+
+		// biome-ignore lint/suspicious/noExplicitAny: partial nodes are enough for this assertion
+		const { container } = render(<BlockTimeline elements={NODES as any} />);
+		const nodes = Array.from(container.querySelectorAll('.c-block-timeline__node'));
+
+		expect(nodes[0].querySelector('.c-block-timeline__node-object-image')).toBeNull();
+		expect(nodes[0].querySelector('.c-block-timeline__node-object-placeholder')).not.toBeNull();
+		expect(getIconFromObjectType).toHaveBeenCalledWith('newspaper', false);
+	});
+
+	it('shows the plain type icon when the essence is accessible but there is no image', () => {
+		mockPlayableDisplayData.mockReturnValue({
+			data: [null, { ...newspaper, newspaperImage: null, thumbnailUrl: null }],
+		});
+
+		// biome-ignore lint/suspicious/noExplicitAny: partial nodes are enough for this assertion
+		const { container } = render(<BlockTimeline elements={NODES as any} />);
+		const nodes = Array.from(container.querySelectorAll('.c-block-timeline__node'));
+
+		expect(nodes[0].querySelector('.c-block-timeline__node-object-image')).toBeNull();
+		expect(nodes[0].querySelector('.c-block-timeline__node-object-placeholder')).not.toBeNull();
+		expect(getIconFromObjectType).toHaveBeenCalledWith('newspaper', true);
 	});
 });

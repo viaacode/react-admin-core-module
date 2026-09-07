@@ -40,6 +40,7 @@ export interface PageOverviewWrapperProps {
 	itemAlignment?: AlignOption;
 	imageItemAlignment?: AlignOption;
 	showSectionTitle?: boolean;
+	showLabelsOnImage?: boolean;
 	showTitle?: boolean;
 	showDescription?: boolean;
 	showDate?: boolean;

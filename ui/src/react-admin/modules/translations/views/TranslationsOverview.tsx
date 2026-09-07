@@ -67,7 +67,6 @@ export const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> 
 	const [activeTranslationEntry, setActiveTranslationEntry] =
 		useState<MultiLanguageTranslationEntry | null>(null);
 	const [activeTranslationLanguage, setActiveTranslationLanguage] = useState<Locale>(Locale.Nl);
-	const [activeTranslationHtmlValue, setActiveTranslationHtmlValue] = useState<string | null>(null);
 	const [activeTranslationTextValue, setActiveTranslationTextValue] = useState<string | null>(null);
 
 	const [search, setSearch] = useState<string>('');
@@ -130,10 +129,7 @@ export const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> 
 				throw new Error('Active translation is not defined, failed to save translation');
 			}
 
-			let value =
-				activeTranslationEntry.value_type === ValueType.TEXT
-					? activeTranslationTextValue || ''
-					: activeTranslationHtmlValue || '';
+			let value = activeTranslationTextValue || '';
 
 			// Simplify value if only wrapped with <p></p> tag and otherwise no html
 			if (
@@ -160,7 +156,6 @@ export const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> 
 
 			setActiveTranslationEntry(null);
 			setActiveTranslationTextValue(null);
-			setActiveTranslationHtmlValue(null);
 
 			showToast({
 				title: tText('modules/translations/views/translations-overview___success'),

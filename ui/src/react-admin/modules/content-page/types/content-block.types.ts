@@ -370,6 +370,7 @@ export interface PageOverviewBlockComponentStateFields {
 	itemAlignment?: AlignOption;
 	imageItemAlignment?: AlignOption;
 	showSectionTitle?: boolean; // Title of the label that groups multiple pages
+	showLabelsOnImage?: boolean; // Colored label chips drawn on top of the page images
 	showTitle?: boolean; // Title of one of the pages
 	showDescription?: boolean; // Description of one of the pages
 	showDate?: boolean; // Date of one of the pages
@@ -658,11 +659,8 @@ export interface HetArchiefQuoteBlockComponentState {
 	frameColor: Color | GradientColor | CustomBackground;
 }
 
-export interface HetArchiefIeObject {
-	name: string;
-	schemaIdentifier: string;
-	dctermsFormat: string;
-}
+// The full ie-object as the proxy returns it; the content picker only reads a few fields off it
+export type { HetArchiefIeObject } from '@viaa/avo2-types';
 
 export type TimelineNodeVisualType = 'NONE' | 'OBJECT' | 'IMAGE';
 

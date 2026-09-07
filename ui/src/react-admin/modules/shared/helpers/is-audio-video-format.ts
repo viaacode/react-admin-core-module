@@ -1,20 +1,17 @@
-import {
-	type HetArchiefIeObjectType as IeObjectType,
-	HetArchiefSimpleIeObjectType as SimpleIeObjectType,
-} from '@viaa/avo2-types';
+import { type HetArchiefIeObjectType, HetArchiefSimpleIeObjectType } from '@viaa/avo2-types';
 import { mapDcTermsFormatToSimpleType } from '~shared/helpers/map-format-to-type.ts';
 
-export function isAudioFormat(format: IeObjectType | undefined): boolean {
+export function isAudioFormat(format: HetArchiefIeObjectType | undefined): boolean {
 	const simpleType = mapDcTermsFormatToSimpleType(format);
-	return simpleType === SimpleIeObjectType.AUDIO;
+	return simpleType === HetArchiefSimpleIeObjectType.AUDIO;
 }
 
-export function isVideoFormat(format: IeObjectType | undefined): boolean {
+export function isVideoFormat(format: HetArchiefIeObjectType | undefined): boolean {
 	const simpleType = mapDcTermsFormatToSimpleType(format);
-	return simpleType === SimpleIeObjectType.VIDEO;
+	return simpleType === HetArchiefSimpleIeObjectType.VIDEO;
 }
 
-export function isAudioVideoFormat(format: IeObjectType | undefined): boolean {
+export function isAudioVideoFormat(format: HetArchiefIeObjectType | undefined): boolean {
 	return isAudioFormat(format) || isVideoFormat(format);
 }
 

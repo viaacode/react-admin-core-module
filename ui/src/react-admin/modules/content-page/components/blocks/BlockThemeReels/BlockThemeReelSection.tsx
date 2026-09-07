@@ -1,9 +1,6 @@
 import { Button } from '@meemoo/react-components';
 import { LinkTarget } from '@viaa/avo2-components';
-import {
-	AvoCoreContentPickerType,
-	type HetArchiefIeObjectType as IeObjectType,
-} from '@viaa/avo2-types';
+import { AvoCoreContentPickerType, type HetArchiefIeObjectType } from '@viaa/avo2-types';
 import clsx from 'clsx';
 import React, { type FunctionComponent, type ReactNode, useMemo, useState } from 'react';
 import type SwiperController from 'swiper';
@@ -86,17 +83,20 @@ export const BlockThemeReelSection: FunctionComponent<BlockThemeReelSectionProps
 			);
 
 	const renderSlideContent = (
-		image: string,
+		image: string | null,
 		imageAlt: string,
 		title: string,
 		description: string,
 		className?: string,
-		format?: IeObjectType,
-		backgroundColor: Color = ctaBackgroundColor
+		format?: HetArchiefIeObjectType,
+		backgroundColor: Color = ctaBackgroundColor,
+		// Whether the slide's ie-object may be seen by the current user. The theme's own header tile
+		// is not an ie-object, so it is always shown.
+		hasAccessToEssence = true
 	) => {
 		return (
 			<>
-				{image ? (
+				{hasAccessToEssence && image ? (
 					<ImageOrAudioWaveForm
 						imageSrc={image}
 						imageAlt={imageAlt || description}
@@ -116,7 +116,7 @@ export const BlockThemeReelSection: FunctionComponent<BlockThemeReelSectionProps
 						<Button
 							className="c-block-theme-reels-section__slide-image-placeholder-icon"
 							variants={['sm', 'block']}
-							icon={<Icon name={getIconFromObjectType(format, false)} />}
+							icon={<Icon name={getIconFromObjectType(format, hasAccessToEssence)} />}
 							disabled
 							tabIndex={-1}
 						/>
@@ -215,7 +215,15 @@ export const BlockThemeReelSection: FunctionComponent<BlockThemeReelSectionProps
 				)}
 				{theme.ieObjects.map(
 					(
-						{ id, format, maintainerSlug, maintainerName, schemaIdentifier, thumbnailUrl, name },
+						{
+							id,
+							format,
+							maintainerName,
+							schemaIdentifier,
+							thumbnailUrl,
+							name,
+							hasAccessToEssence,
+						},
 						index
 					) => {
 						const componentClassName = clsx('c-block-theme-reels-section__slide');
@@ -242,7 +250,8 @@ export const BlockThemeReelSection: FunctionComponent<BlockThemeReelSectionProps
 											maintainerName,
 											`c-block-theme-reels-section__slide-image--format-${format}`,
 											format,
-											objectBackgroundColors[index]
+											objectBackgroundColors[index],
+											hasAccessToEssence
 										),
 										name,
 										componentClassName,

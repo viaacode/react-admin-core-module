@@ -1,4 +1,4 @@
-import type { HetArchiefIeObjectType as IeObjectType } from '@viaa/avo2-types';
+import type { HetArchiefIeObjectType } from '@viaa/avo2-types';
 import type { HeadingTypeOption } from '~modules/content-page/types/content-block.types';
 import type { DefaultComponentProps } from '~modules/shared/types/components';
 import type { PickerItem } from '~modules/shared/types/content-picker';
@@ -23,9 +23,11 @@ export interface ObjectsGridItem {
 	// Provider / maintainer name, shown in the title bar.
 	maintainerName?: string;
 	// Object type, drives the type-icon. Falls back to a generic icon when unknown.
-	type?: IeObjectType;
+	type?: HetArchiefIeObjectType;
 	// Thumbnail (video / newspaper / image). Absent for audio → waveform fallback is shown.
 	thumbnailUrl?: string;
+	/** Whether the current user may see/play this object's essence, as reported by the proxy */
+	hasAccessToEssence: boolean;
 }
 
 /**

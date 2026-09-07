@@ -1,7 +1,4 @@
-import {
-	type HetArchiefIeObjectType as IeObjectType,
-	HetArchiefSimpleIeObjectType as SimpleIeObjectType,
-} from '@viaa/avo2-types';
+import { type HetArchiefIeObjectType, HetArchiefSimpleIeObjectType } from '@viaa/avo2-types';
 import React, { type FunctionComponent, type ReactElement } from 'react';
 import type { HeroCarouselSlideItem } from '~content-blocks/BlockHeroCarousel/BlockHeroCarousel.types.ts';
 import { getSlideImageSrc } from '~content-blocks/BlockHeroCarousel/BlockHeroCarousel.utils.ts';
@@ -19,32 +16,32 @@ export interface BlockHeroCarouselInactiveSlideProps extends DefaultComponentPro
 	item: HeroCarouselSlideItem;
 }
 
-const getObjectTypeLabel = (format: IeObjectType | undefined): string => {
+const getObjectTypeLabel = (format: HetArchiefIeObjectType | undefined): string => {
 	const simpleType = mapDcTermsFormatToSimpleType(format);
 
 	switch (simpleType) {
-		case SimpleIeObjectType.VIDEO:
+		case HetArchiefSimpleIeObjectType.VIDEO:
 			return tText(
 				'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel-inactive-slide___video',
 				undefined,
 				[HET_ARCHIEF]
 			);
 
-		case SimpleIeObjectType.AUDIO:
+		case HetArchiefSimpleIeObjectType.AUDIO:
 			return tText(
 				'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel-inactive-slide___audio',
 				undefined,
 				[HET_ARCHIEF]
 			);
 
-		case SimpleIeObjectType.NEWSPAPER:
+		case HetArchiefSimpleIeObjectType.NEWSPAPER:
 			return tText(
 				'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel-inactive-slide___krant',
 				undefined,
 				[HET_ARCHIEF]
 			);
 
-		case SimpleIeObjectType.IMAGE:
+		case HetArchiefSimpleIeObjectType.IMAGE:
 			return tText(
 				'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel-inactive-slide___afbeelding',
 				undefined,
@@ -65,6 +62,16 @@ export const BlockHeroCarouselInactiveSlide: FunctionComponent<
 > = ({ item }): ReactElement => {
 	const imageSrc = getSlideImageSrc(item);
 
+	const formatIcon = (
+		<div
+			className="c-block-hero-carousel__carousel-slide-image-format-icon"
+			role="img"
+			aria-label={getObjectTypeLabel(item.dctermsFormat)}
+		>
+			<Icon name={getIconFromObjectType(item.dctermsFormat, item.hasAccessToEssence)} />
+		</div>
+	);
+    
 	const renderContent = () => {
 		if (item?.hasFailed) {
 			return (

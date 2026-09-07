@@ -1,8 +1,8 @@
+import type { HetArchiefPlayableDisplayIeObject } from '@viaa/avo2-types';
 import type {
 	Color,
 	MediaItemComponentState,
 } from '~modules/content-page/types/content-block.types.ts';
-import type { PlayableDisplayIeObject } from '~shared/services/ie-objects-service/ie-objects.types.ts';
 
 export interface HeroCarouselBlockComponentState extends MediaItemComponentState {
 	startTime?: string;
@@ -18,7 +18,7 @@ export type HeroCarouselSlideItem = Pick<
 	HeroCarouselBlockComponentState,
 	'videoThumbnail' | 'backgroundColor'
 > &
-	PlayableDisplayIeObject & {
+	HetArchiefPlayableDisplayIeObject & {
 		/**
 		 * Set when the playable-display-data endpoint resolved this slide's object to null: it's
 		 * gone, or out of reach for this visitor. The slide then shows an error tile instead of a

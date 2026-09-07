@@ -1,4 +1,5 @@
-import { HetArchiefIeObjectType as IeObjectType } from '@viaa/avo2-types';
+import type { CheckboxProps } from '@viaa/avo2-components';
+import { HetArchiefIeObjectType } from '@viaa/avo2-types';
 import {
 	BLOCK_FIELD_DEFAULTS,
 	BLOCK_STATE_DEFAULTS,
@@ -62,11 +63,11 @@ export const HETARCHIEF_VIDEO_BLOCK_CONFIG = (position = 0): ContentBlockConfig 
 		state: INITIAL_HETARCHIEF_VIDEO_COMPONENTS_STATE(),
 		fields: {
 			...IE_OBJECT_WITH_SNIPPET_TIME_FIELDS([
-				IeObjectType.VIDEO,
-				IeObjectType.VIDEO_FRAGMENT,
-				IeObjectType.FILM,
-				IeObjectType.AUDIO,
-				IeObjectType.AUDIO_FRAGMENT,
+				HetArchiefIeObjectType.VIDEO,
+				HetArchiefIeObjectType.VIDEO_FRAGMENT,
+				HetArchiefIeObjectType.FILM,
+				HetArchiefIeObjectType.AUDIO,
+				HetArchiefIeObjectType.AUDIO_FRAGMENT,
 			]),
 			poster: {
 				label: tText(
