@@ -1,4 +1,3 @@
-import type { HetArchiefIeObjectType as IeObjectType } from '@viaa/avo2-types';
 import React, { type CSSProperties, type FunctionComponent, type ReactNode, useMemo } from 'react';
 import { Color } from '~modules/content-page/types/content-block.types';
 import type { DefaultComponentProps } from '~modules/shared/types/components';

@@ -1,5 +1,5 @@
 import { Button } from '@meemoo/react-components';
-import { Image, Spinner } from '@viaa/avo2-components';
+import { Image } from '@viaa/avo2-components';
 import clsx from 'clsx';
 import React, { type FunctionComponent, type ReactElement, type ReactNode, useState } from 'react';
 import type { HeroCarouselSlideItem } from '~content-blocks/BlockHeroCarousel/BlockHeroCarousel.types.ts';

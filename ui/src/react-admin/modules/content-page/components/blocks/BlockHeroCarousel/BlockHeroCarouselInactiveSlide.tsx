@@ -62,16 +62,6 @@ export const BlockHeroCarouselInactiveSlide: FunctionComponent<
 > = ({ item }): ReactElement => {
 	const imageSrc = getSlideImageSrc(item);
 
-	const formatIcon = (
-		<div
-			className="c-block-hero-carousel__carousel-slide-image-format-icon"
-			role="img"
-			aria-label={getObjectTypeLabel(item.dctermsFormat)}
-		>
-			<Icon name={getIconFromObjectType(item.dctermsFormat, item.hasAccessToEssence)} />
-		</div>
-	);
-    
 	const renderContent = () => {
 		if (item?.hasFailed) {
 			return (

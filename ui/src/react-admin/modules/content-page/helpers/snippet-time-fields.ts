@@ -1,5 +1,5 @@
 import type { TextInputProps } from '@viaa/avo2-components';
-import { AvoCoreContentPickerType, HetArchiefIeObjectType } from '@viaa/avo2-types';
+import { HetArchiefIeObjectType } from '@viaa/avo2-types';
 import type { HetArchiefVideoBlockComponentState } from '~content-blocks/BlockHetArchiefVideo';
 import { IE_OBJECT_FIELD, TEXT_FIELD } from '~content-blocks/defaults.ts';
 import {

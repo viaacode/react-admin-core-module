@@ -1,4 +1,3 @@
-import type { CheckboxProps } from '@viaa/avo2-components';
 import { HetArchiefIeObjectType } from '@viaa/avo2-types';
 import {
 	BLOCK_FIELD_DEFAULTS,
