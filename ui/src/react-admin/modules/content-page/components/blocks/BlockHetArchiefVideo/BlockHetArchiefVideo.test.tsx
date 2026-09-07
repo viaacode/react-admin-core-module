@@ -1,8 +1,8 @@
 import { cleanup, render, screen } from '@testing-library/react';
+import type { HetArchiefPlayableDisplayIeObject } from '@viaa/avo2-types';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import type { IeObjectFlowPlayerWrapperProps } from '~modules/content-page/components/IeObjectFlowPlayerWrapper/IeObjectFlowPlayerWrapper';
-import type { PlayableDisplayIeObject } from '~shared/services/ie-objects-service/ie-objects.types';
 
 import { BlockHetArchiefVideo } from './BlockHetArchiefVideo';
 
@@ -19,11 +19,11 @@ const ieObject = {
 	thumbnailUrl: null,
 	maintainerName: 'VRT',
 	maintainerOverlay: false,
-} as unknown as PlayableDisplayIeObject;
+} as unknown as HetArchiefPlayableDisplayIeObject;
 
 const mockPlayableDisplayData = vi.fn<
 	() => {
-		data: (PlayableDisplayIeObject | null)[] | undefined;
+		data: (HetArchiefPlayableDisplayIeObject | null)[] | undefined;
 		isLoading?: boolean;
 		isFetching?: boolean;
 	}

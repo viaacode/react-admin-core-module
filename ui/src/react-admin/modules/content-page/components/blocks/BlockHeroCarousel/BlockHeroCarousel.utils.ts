@@ -1,19 +1,16 @@
+import { type HetArchiefIeObjectType, HetArchiefSimpleIeObjectType } from '@viaa/avo2-types';
 import type { RefObject } from 'react';
 import { flushSync } from 'react-dom';
 import type { HeroCarouselSlideItem } from '~content-blocks/BlockHeroCarousel/BlockHeroCarousel.types.ts';
 import { isAudioVideoFormat } from '~shared/helpers/is-audio-video-format.ts';
-import {
-	type IeObjectType,
-	mapDcTermsFormatToSimpleType,
-	SimpleIeObjectType,
-} from '~shared/helpers/map-format-to-type.ts';
+import { mapDcTermsFormatToSimpleType } from '~shared/helpers/map-format-to-type.ts';
 
 const FALLBACK_THUMB_WIDTH_REM = 12;
-const FORMAT_THUMB_WIDTHS_REM: Record<SimpleIeObjectType, number> = {
-	[SimpleIeObjectType.VIDEO]: 28,
-	[SimpleIeObjectType.AUDIO]: 16,
-	[SimpleIeObjectType.NEWSPAPER]: 12,
-	[SimpleIeObjectType.IMAGE]: 12,
+const FORMAT_THUMB_WIDTHS_REM: Record<HetArchiefSimpleIeObjectType, number> = {
+	[HetArchiefSimpleIeObjectType.VIDEO]: 28,
+	[HetArchiefSimpleIeObjectType.AUDIO]: 16,
+	[HetArchiefSimpleIeObjectType.NEWSPAPER]: 12,
+	[HetArchiefSimpleIeObjectType.IMAGE]: 12,
 };
 
 export const ACTIVE_SLIDE_CLASS = 'c-block-hero-carousel__carousel-slide--active';
@@ -22,12 +19,14 @@ export const ACTIVE_SLIDE_CLASS = 'c-block-hero-carousel__carousel-slide--active
 export const GAP_PX = 12;
 
 interface StripItem {
-	dctermsFormat: IeObjectType;
+	dctermsFormat: HetArchiefIeObjectType;
 }
 
-export function getThumbWidthRem(format: IeObjectType | undefined): number {
+export function getThumbWidthRem(format: HetArchiefIeObjectType | undefined): number {
 	const simpleType = mapDcTermsFormatToSimpleType(format);
-	return FORMAT_THUMB_WIDTHS_REM[simpleType as SimpleIeObjectType] || FALLBACK_THUMB_WIDTH_REM;
+	return (
+		FORMAT_THUMB_WIDTHS_REM[simpleType as HetArchiefSimpleIeObjectType] || FALLBACK_THUMB_WIDTH_REM
+	);
 }
 
 // The image a slide shows. Only the active slide is big enough to warrant the full-size

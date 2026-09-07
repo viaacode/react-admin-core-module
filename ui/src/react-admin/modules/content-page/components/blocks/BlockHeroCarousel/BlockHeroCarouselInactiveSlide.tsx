@@ -1,3 +1,4 @@
+import { type HetArchiefIeObjectType, HetArchiefSimpleIeObjectType } from '@viaa/avo2-types';
 import React, { type FunctionComponent, type ReactElement } from 'react';
 import type { HeroCarouselSlideItem } from '~content-blocks/BlockHeroCarousel/BlockHeroCarousel.types.ts';
 import { getSlideImageSrc } from '~content-blocks/BlockHeroCarousel/BlockHeroCarousel.utils.ts';
@@ -5,11 +6,7 @@ import { ImageOrAudioWaveForm } from '~modules/content-page/components/ImageOrAu
 import type { DefaultComponentProps } from '~modules/shared/types/components';
 import { Icon } from '~shared/components/Icon';
 import { getIconFromObjectType } from '~shared/helpers/get-icon-from-object-type.ts';
-import {
-	type IeObjectType,
-	mapDcTermsFormatToSimpleType,
-	SimpleIeObjectType,
-} from '~shared/helpers/map-format-to-type.ts';
+import { mapDcTermsFormatToSimpleType } from '~shared/helpers/map-format-to-type.ts';
 import { tText } from '~shared/helpers/translation-functions.ts';
 import { HET_ARCHIEF } from '~shared/types';
 
@@ -17,32 +14,32 @@ export interface BlockHeroCarouselInactiveSlideProps extends DefaultComponentPro
 	item: HeroCarouselSlideItem;
 }
 
-const getObjectTypeLabel = (format: IeObjectType | undefined): string => {
+const getObjectTypeLabel = (format: HetArchiefIeObjectType | undefined): string => {
 	const simpleType = mapDcTermsFormatToSimpleType(format);
 
 	switch (simpleType) {
-		case SimpleIeObjectType.VIDEO:
+		case HetArchiefSimpleIeObjectType.VIDEO:
 			return tText(
 				'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel-inactive-slide___video',
 				undefined,
 				[HET_ARCHIEF]
 			);
 
-		case SimpleIeObjectType.AUDIO:
+		case HetArchiefSimpleIeObjectType.AUDIO:
 			return tText(
 				'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel-inactive-slide___audio',
 				undefined,
 				[HET_ARCHIEF]
 			);
 
-		case SimpleIeObjectType.NEWSPAPER:
+		case HetArchiefSimpleIeObjectType.NEWSPAPER:
 			return tText(
 				'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel-inactive-slide___krant',
 				undefined,
 				[HET_ARCHIEF]
 			);
 
-		case SimpleIeObjectType.IMAGE:
+		case HetArchiefSimpleIeObjectType.IMAGE:
 			return tText(
 				'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel-inactive-slide___afbeelding',
 				undefined,
@@ -69,7 +66,7 @@ export const BlockHeroCarouselInactiveSlide: FunctionComponent<
 			role="img"
 			aria-label={getObjectTypeLabel(item.dctermsFormat)}
 		>
-			<Icon name={getIconFromObjectType(item.dctermsFormat, Boolean(item.thumbnailUrl))} />
+			<Icon name={getIconFromObjectType(item.dctermsFormat, item.hasAccessToEssence)} />
 		</div>
 	);
 

@@ -1,4 +1,5 @@
 import type { CheckboxProps } from '@viaa/avo2-components';
+import { HetArchiefIeObjectType } from '@viaa/avo2-types';
 import {
 	BLOCK_FIELD_DEFAULTS,
 	BLOCK_STATE_DEFAULTS,
@@ -18,7 +19,6 @@ import {
 	ContentBlockEditor,
 	ContentBlockType,
 } from '~modules/content-page/types/content-block.types';
-import { IeObjectType } from '~shared/helpers/map-format-to-type.ts';
 import { tHtml, tText } from '~shared/helpers/translation-functions';
 import { HET_ARCHIEF } from '~shared/types';
 
@@ -63,11 +63,11 @@ export const HETARCHIEF_VIDEO_BLOCK_CONFIG = (position = 0): ContentBlockConfig 
 		state: INITIAL_HETARCHIEF_VIDEO_COMPONENTS_STATE(),
 		fields: {
 			...IE_OBJECT_WITH_SNIPPET_TIME_FIELDS([
-				IeObjectType.video,
-				IeObjectType.videofragment,
-				IeObjectType.film,
-				IeObjectType.audio,
-				IeObjectType.audiofragment,
+				HetArchiefIeObjectType.VIDEO,
+				HetArchiefIeObjectType.VIDEO_FRAGMENT,
+				HetArchiefIeObjectType.FILM,
+				HetArchiefIeObjectType.AUDIO,
+				HetArchiefIeObjectType.AUDIO_FRAGMENT,
 			]),
 			poster: {
 				label: tText(

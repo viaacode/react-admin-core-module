@@ -1,3 +1,4 @@
+import type { HetArchiefIeObjectType } from '@viaa/avo2-types';
 import { stringifyUrl } from 'query-string';
 import { AdminConfigManager } from '~core/config/config.class';
 import type { IeObjectsSearchBody } from '~core/config/config.types';
@@ -5,7 +6,6 @@ import { CustomError } from '~shared/helpers/custom-error';
 import { fetchWithLogout, fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
 import { getProxyUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config';
 import { isAudioFormat } from '~shared/helpers/is-audio-video-format.ts';
-import type { IeObjectType } from '~shared/helpers/map-format-to-type';
 import type { PickerItem } from '~shared/types/content-picker';
 import { type ObjectsGridItem, OrderProperty } from './BlockObjectsGrid.types';
 
@@ -25,8 +25,10 @@ interface RawIeObject {
 	name?: string;
 	maintainerName?: string;
 	// dcterms format, e.g. "video" | "audio" | "newspaper".
-	dctermsFormat?: IeObjectType;
+	dctermsFormat?: HetArchiefIeObjectType;
 	thumbnailUrl?: string;
+	// Always sent by the proxy: it is computed for every censored object, not resolved per request
+	hasAccessToEssence: boolean;
 }
 
 const mapRawToGridItem = (raw: RawIeObject): ObjectsGridItem => {
@@ -37,9 +39,13 @@ const mapRawToGridItem = (raw: RawIeObject): ObjectsGridItem => {
 		name: raw.name || '',
 		maintainerName: raw.maintainerName,
 		type,
-		thumbnailUrl: isAudioFormat(type)
-			? AdminConfigManager.getConfig().components.defaultAudioStill
-			: raw.thumbnailUrl,
+		hasAccessToEssence: raw.hasAccessToEssence,
+		// The audio still stands in for the ugly speaker thumbnail, but only for an object the user
+		// may actually hear -- it is a display substitute, never a signal that access was granted
+		thumbnailUrl:
+			isAudioFormat(type) && raw.hasAccessToEssence
+				? AdminConfigManager.getConfig().components.defaultAudioStill
+				: raw.thumbnailUrl,
 	};
 };
 

@@ -1,6 +1,6 @@
 import { Button } from '@meemoo/react-components';
 import { LinkTarget } from '@viaa/avo2-components';
-import { AvoCoreContentPickerType } from '@viaa/avo2-types';
+import { AvoCoreContentPickerType, type HetArchiefIeObjectType } from '@viaa/avo2-types';
 import clsx from 'clsx';
 import React, { type FunctionComponent, type ReactNode, useMemo, useState } from 'react';
 import type SwiperController from 'swiper';
@@ -18,7 +18,6 @@ import { App, Locale } from '~modules/translations/translations.core.types.ts';
 import { Icon } from '~shared/components/Icon';
 import { generateSmartLink } from '~shared/components/SmartLink/SmartLink.tsx';
 import { getIconFromObjectType } from '~shared/helpers/get-icon-from-object-type.ts';
-import type { IeObjectType } from '~shared/helpers/map-format-to-type.ts';
 import { isMobileWidth } from '~shared/helpers/media-query.ts';
 import { tText } from '~shared/helpers/translation-functions.ts';
 
@@ -82,17 +81,20 @@ export const BlockThemeReelSection: FunctionComponent<BlockThemeReelSectionProps
 			);
 
 	const renderSlideContent = (
-		image: string,
+		image: string | null,
 		imageAlt: string,
 		title: string,
 		description: string,
 		className?: string,
-		format?: IeObjectType,
-		backgroundColor: Color = ctaBackgroundColor
+		format?: HetArchiefIeObjectType,
+		backgroundColor: Color = ctaBackgroundColor,
+		// Whether the slide's ie-object may be seen by the current user. The theme's own header tile
+		// is not an ie-object, so it is always shown.
+		hasAccessToEssence = true
 	) => {
 		return (
 			<>
-				{image ? (
+				{hasAccessToEssence && image ? (
 					<ImageOrAudioWaveForm
 						imageSrc={image}
 						imageAlt={imageAlt || description}
@@ -112,7 +114,7 @@ export const BlockThemeReelSection: FunctionComponent<BlockThemeReelSectionProps
 						<Button
 							className="c-block-theme-reels-section__slide-image-placeholder-icon"
 							variants={['sm', 'block']}
-							icon={<Icon name={getIconFromObjectType(format, false)} />}
+							icon={<Icon name={getIconFromObjectType(format, hasAccessToEssence)} />}
 							disabled
 							tabIndex={-1}
 						/>
@@ -210,7 +212,18 @@ export const BlockThemeReelSection: FunctionComponent<BlockThemeReelSectionProps
 					</SwiperSlide>
 				)}
 				{theme.ieObjects.map(
-					({ id, format, maintainerName, schemaIdentifier, thumbnailUrl, name }, index) => {
+					(
+						{
+							id,
+							format,
+							maintainerName,
+							schemaIdentifier,
+							thumbnailUrl,
+							name,
+							hasAccessToEssence,
+						},
+						index
+					) => {
 						const componentClassName = clsx('c-block-theme-reels-section__slide');
 						return (
 							<SwiperSlide
@@ -231,7 +244,8 @@ export const BlockThemeReelSection: FunctionComponent<BlockThemeReelSectionProps
 											maintainerName,
 											`c-block-theme-reels-section__slide-image--format-${format}`,
 											format,
-											objectBackgroundColors[index]
+											objectBackgroundColors[index],
+											hasAccessToEssence
 										),
 										name,
 										componentClassName,

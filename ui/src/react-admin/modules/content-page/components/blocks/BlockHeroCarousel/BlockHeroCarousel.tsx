@@ -3,6 +3,7 @@ import { Color } from '~modules/content-page/types/content-block.types';
 import type { DefaultComponentProps } from '~modules/shared/types/components';
 import './BlockHeroCarousel.scss';
 import 'swiper/css';
+import type { HetArchiefIeObjectType } from '@viaa/avo2-types';
 import clsx from 'clsx';
 import type {
 	HeroCarouselBlockComponentState,
@@ -13,7 +14,6 @@ import { BlockHeroCarouselSearch } from '~content-blocks/BlockHeroCarousel/Block
 import { getRandomTertiaryBackgroundColor } from '~modules/content-page/helpers/get-random-tertiary-background-color.ts';
 import { useGetIeObjectsPlayableDisplayData } from '~modules/content-page/hooks/useGetIeObjectsPlayableDisplayData.ts';
 import { isAudioVideoFormat } from '~shared/helpers/is-audio-video-format.ts';
-import type { IeObjectType } from '~shared/helpers/map-format-to-type.ts';
 import { toSeconds } from '~shared/helpers/parsers/duration.ts';
 
 export interface BlockHeroCarouselProps extends DefaultComponentProps {
@@ -63,7 +63,7 @@ export const BlockHeroCarousel: FunctionComponent<BlockHeroCarouselProps> = ({
 	const backgroundColors = useMemo(
 		() =>
 			elements.map((element) =>
-				isAudioVideoFormat(element.mediaItem?.dctermsFormat as IeObjectType)
+				isAudioVideoFormat(element.mediaItem?.dctermsFormat as HetArchiefIeObjectType)
 					? getRandomTertiaryBackgroundColor()
 					: Color.Mustard
 			),
@@ -80,7 +80,7 @@ export const BlockHeroCarousel: FunctionComponent<BlockHeroCarouselProps> = ({
 			// stays in the strip and shows an error tile instead of an empty player.
 			const hasFailed = !!ieObjects && index < ieObjects.length && ieObjects[index] === null;
 			const dctermsFormat = (ieObject?.dctermsFormat ??
-				object.mediaItem?.dctermsFormat) as IeObjectType;
+				object.mediaItem?.dctermsFormat) as HetArchiefIeObjectType;
 
 			return {
 				...ieObject,

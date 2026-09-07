@@ -192,11 +192,10 @@ export const BlockObjectsGrid: FunctionComponent<BlockObjectsGridProps> = ({
 		isFixed: boolean,
 		tileBackgroundColor?: Color
 	): ReactElement => {
-		// Same signal the search page uses to decide between the plain and the struck-through
-		// ("no-…") type icon: the search proxy only resolves a thumbnail for objects whose
-		// essence the current user may see.
-		const isAccessible = Boolean(item.thumbnailUrl);
-		const iconName = item.type ? getIconFromObjectType(item.type, isAccessible) : undefined;
+		// hasAccessToEssence decides between the plain and the struck-through ("no-…") type icon
+		const iconName = item.type
+			? getIconFromObjectType(item.type, item.hasAccessToEssence)
+			: undefined;
 
 		return (
 			<li
@@ -224,7 +223,7 @@ export const BlockObjectsGrid: FunctionComponent<BlockObjectsGridProps> = ({
 							`c-block-objects-grid__tile-media--${item.type}`
 						)}
 					>
-						{item.thumbnailUrl ? (
+						{item.hasAccessToEssence && item.thumbnailUrl ? (
 							<ImageOrAudioWaveForm
 								imageSrc={item.thumbnailUrl}
 								imageAlt={item.name}
@@ -233,7 +232,9 @@ export const BlockObjectsGrid: FunctionComponent<BlockObjectsGridProps> = ({
 								className="c-block-objects-grid__tile-image"
 							/>
 						) : (
-							// No thumbnail (e.g. audio): decorative placeholder, the link already carries the name.
+							// Nothing to show: the plain type icon when the essence is simply missing, the
+							// struck-through one when this visitor may not see it -- iconName already carries
+							// that distinction. Decorative: the link itself already carries the name.
 							<span className="c-block-objects-grid__tile-placeholder" aria-hidden="true">
 								{iconName && <Icon name={iconName} />}
 							</span>
