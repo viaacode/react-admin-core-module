@@ -1,7 +1,8 @@
 import { Spinner } from '@viaa/avo2-components';
+import type { HetArchiefPlayableDisplayIeObject } from '@viaa/avo2-types';
 import { AvoSearchOrderDirection } from '@viaa/avo2-types';
 import clsx from 'clsx';
-import type { CSSProperties, FunctionComponent, ReactElement } from 'react';
+import type { CSSProperties, FunctionComponent, ReactElement, ReactNode } from 'react';
 import React, { useMemo, useRef } from 'react';
 import { AdminCoreIconName } from '~core/config';
 import { AdminConfigManager } from '~core/config/config.class';
@@ -104,176 +105,205 @@ export const BlockTimeline: FunctionComponent<BlockTimelineProps> = ({
 		containerRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
 	};
 
+	/**
+	 * A resolved-but-null entry means this node's object couldn't be loaded (it's gone, or out of reach
+	 * for this visitor); the node keeps its place in the timeline and shows an error tile where the
+	 * media would have been.
+	 */
+	const renderObjectLoadError = (): ReactNode => (
+		<div className={clsx('c-ie-object-media')}>
+			<IeObjectLoadError className="c-block-timeline__node-object-error" />
+		</div>
+	);
+
+	/**
+	 * Until its object has been resolved the node shows what its own config knows -- the poster image,
+	 * if it has one -- so the timeline is laid out at its final size straight away instead of reflowing
+	 * as the objects come in.
+	 */
+	const renderObjectLoading = (node: TimelineNodeBlockComponentState): ReactNode => (
+		<div className={clsx('c-ie-object-media')}>
+			<div
+				className={clsx(
+					'c-block-timeline__node-image-wrapper',
+					'c-block-timeline__node-image-wrapper--loading'
+				)}
+			>
+				{node.image && (
+					<img
+						src={node.image}
+						alt=""
+						aria-hidden="true"
+						className="c-block-timeline__node-object-image"
+					/>
+				)}
+				<div className="c-block-timeline__node-object-loading">
+					<Spinner size="large" locationId={'timeline-node-object'} />
+				</div>
+			</div>
+		</div>
+	);
+
+	/** The player, thumbnail or type icon of a resolved object, whichever this object can show. */
+	const renderObjectMedia = (
+		node: TimelineNodeBlockComponentState,
+		ieObject: HetArchiefPlayableDisplayIeObject
+	): ReactNode => {
+		const thumbnail = ieObject.newspaperImage || ieObject.thumbnailUrl;
+
+		const renderMedia = (): ReactNode => {
+			if (ieObject.hasAccessToEssence && isAudioVideoFormat(ieObject.dctermsFormat)) {
+				return (
+					<IeObjectFlowPlayerWrapper
+						className="c-block-timeline__node-object-media"
+						ieObject={ieObject}
+						poster={node.image}
+					/>
+				);
+			}
+
+			if (ieObject.hasAccessToEssence && thumbnail) {
+				// Newspapers
+				return (
+					<div className="c-block-timeline__node-image-wrapper">
+						<img
+							src={thumbnail}
+							alt={ieObject.name || node.title}
+							className="c-block-timeline__node-object-image"
+						/>
+					</div>
+				);
+			}
+
+			// Nothing to show: the plain type icon when the essence is simply missing, the
+			// struck-through one when this visitor may not see it. Decorative -- the node's
+			// own title and metadata already name the object.
+			return (
+				<span className="c-block-timeline__node-object-placeholder" aria-hidden="true">
+					<Icon name={getIconFromObjectType(ieObject.dctermsFormat, ieObject.hasAccessToEssence)} />
+				</span>
+			);
+		};
+
+		return <div className={clsx('c-ie-object-media')}>{renderMedia()}</div>;
+	};
+
+	/** The node's own image, for nodes that show a plain image instead of an object. */
+	const renderNodeImage = (node: TimelineNodeBlockComponentState): ReactNode => (
+		<div className="c-block-timeline__node-image-wrapper">
+			<img
+				src={node.image}
+				alt={node.imageAlt || node.title}
+				className="c-block-timeline__node-image"
+			/>
+		</div>
+	);
+
+	/** Copyright, title, description and -- for object nodes -- the object's metadata. */
+	const renderNodeText = (
+		node: TimelineNodeBlockComponentState,
+		ieObject: HetArchiefPlayableDisplayIeObject | undefined
+	): ReactNode => (
+		<div className="c-block-timeline__node-text">
+			<CopyrightAttribution
+				title={node.copyrightTitle}
+				text={node.copyrightText}
+				showIcon={node.copyrightIconVisible}
+				className="c-block-timeline__node-image-caption"
+			/>
+			<h3 className="c-block-timeline__node-title u-background-text-primary">{node.title}</h3>
+			{node.text && (
+				<Html
+					content={node.text}
+					sanitizePreset={SanitizePreset.full}
+					type="div"
+					className="c-block-timeline__node-description u-background-text-primary u-background-text-links"
+				/>
+			)}
+			{ieObject && <IeObjectMetadata ieObject={ieObject} fallbackTitle={node.title} />}
+		</div>
+	);
+
+	const renderNode = (
+		{ node, elementIndex }: { node: TimelineNodeBlockComponentState; elementIndex: number },
+		index: number
+	): ReactNode => {
+		const showYear =
+			index === 0 || getYear(node.date) !== getYear(sortedElements[index - 1].node.date);
+		const backgroundColor =
+			node.backgroundColor && node.backgroundColor !== Color.Transparent
+				? node.backgroundColor
+				: undefined;
+		// The node's title and text sit on its own colour band, so they take the design
+		// text colors for that band's color instead of the block's own background.
+		// https://meemoo.atlassian.net/browse/ARC-3848
+		const nodeTextColorVariables = backgroundColor
+			? getBackgroundTextColorVariables(backgroundColor)
+			: {};
+		const hasNodeTextColors = Object.keys(nodeTextColorVariables).length > 0;
+		const markerShape = index % 2 === 0 ? 'circle' : 'rectangle';
+		const hasImage = node.visualType === 'IMAGE' && !!node.image;
+		const hasObject = node.visualType === 'OBJECT' && !!node.mediaItem?.value;
+		const ieObject = hasObject ? ieObjects?.[elementIndex] : undefined;
+		const hasFailedObject =
+			hasObject &&
+			!!ieObjects &&
+			elementIndex < ieObjects.length &&
+			ieObjects[elementIndex] === null;
+		const isLoadingObject = hasObject && !ieObject && !hasFailedObject;
+
+		return (
+			<li
+				className="c-block-timeline__node"
+				key={`c-block-timeline__node--${node.date}-${node.title}-${index}`}
+			>
+				{showYear && <span className="c-block-timeline__node-year">{getYear(node.date)}</span>}
+				{/* The date sits on the block background, outside the node's own colour band, so it
+				    takes the neutral text role. https://meemoo.atlassian.net/browse/ARC-3848 */}
+				<time
+					className="c-block-timeline__node-date u-background-text-secondary"
+					dateTime={node.date}
+				>
+					<span
+						className={clsx(
+							'c-block-timeline__node-marker',
+							`c-block-timeline__node-marker--${markerShape}`
+						)}
+						aria-hidden="true"
+					/>
+					{formatDateToDayMonthNameYear(node.date, locale)}
+				</time>
+				<div
+					className={clsx('c-block-timeline__node-content', {
+						'c-block-timeline__node-content--has-background': !!backgroundColor,
+						'c-block-timeline__node-content--has-image': hasImage,
+						'c-block-timeline__node-content--has-object': hasObject,
+						'u-background-text-colors': hasNodeTextColors,
+					})}
+					style={
+						backgroundColor
+							? ({
+									'--c-block-timeline-node-bg': backgroundColor,
+									...nodeTextColorVariables,
+								} as CSSProperties)
+							: undefined
+					}
+				>
+					{hasFailedObject && renderObjectLoadError()}
+					{isLoadingObject && renderObjectLoading(node)}
+					{ieObject && renderObjectMedia(node, ieObject)}
+					{hasImage && renderNodeImage(node)}
+					{renderNodeText(node, ieObject ?? undefined)}
+				</div>
+			</li>
+		);
+	};
+
 	return (
 		<div className={clsx('c-block-timeline', className)} ref={containerRef}>
 			<ol className="c-block-timeline__list">
 				<TimelineCap position="start" />
-				{sortedElements.map(({ node, elementIndex }, index) => {
-					const showYear =
-						index === 0 || getYear(node.date) !== getYear(sortedElements[index - 1].node.date);
-					const backgroundColor =
-						node.backgroundColor && node.backgroundColor !== Color.Transparent
-							? node.backgroundColor
-							: undefined;
-					// The node's title and text sit on its own colour band, so they take the design
-					// text colors for that band's color instead of the block's own background.
-					// https://meemoo.atlassian.net/browse/ARC-3848
-					const nodeTextColorVariables = backgroundColor
-						? getBackgroundTextColorVariables(backgroundColor)
-						: {};
-					const hasNodeTextColors = Object.keys(nodeTextColorVariables).length > 0;
-					const markerShape = index % 2 === 0 ? 'circle' : 'rectangle';
-					const hasImage = node.visualType === 'IMAGE' && !!node.image;
-					const hasObject = node.visualType === 'OBJECT' && !!node.mediaItem?.value;
-					const ieObject = hasObject ? ieObjects?.[elementIndex] : undefined;
-					const thumbnail = ieObject?.newspaperImage || ieObject?.thumbnailUrl;
-					// A resolved-but-null entry means this node's object couldn't be loaded (it's
-					// gone, or out of reach for this visitor); the node keeps its place in the
-					// timeline and shows an error tile where the media would have been.
-					const hasFailedObject =
-						hasObject &&
-						!!ieObjects &&
-						elementIndex < ieObjects.length &&
-						ieObjects[elementIndex] === null;
-					// Until its object has been resolved the node shows what its own config knows --
-					// the poster image, if it has one -- so the timeline is laid out at its final
-					// size straight away instead of reflowing as the objects come in.
-					const isLoadingObject = hasObject && !ieObject && !hasFailedObject;
-
-					return (
-						<li
-							className="c-block-timeline__node"
-							key={`c-block-timeline__node--${node.date}-${node.title}-${index}`}
-						>
-							{showYear && (
-								<span className="c-block-timeline__node-year">{getYear(node.date)}</span>
-							)}
-							{/* The date sits on the block background, outside the node's own colour band, so it
-							    takes the neutral text role. https://meemoo.atlassian.net/browse/ARC-3848 */}
-							<time
-								className="c-block-timeline__node-date u-background-text-secondary"
-								dateTime={node.date}
-							>
-								<span
-									className={clsx(
-										'c-block-timeline__node-marker',
-										`c-block-timeline__node-marker--${markerShape}`
-									)}
-									aria-hidden="true"
-								/>
-								{formatDateToDayMonthNameYear(node.date, locale)}
-							</time>
-							<div
-								className={clsx('c-block-timeline__node-content', {
-									'c-block-timeline__node-content--has-background': !!backgroundColor,
-									'c-block-timeline__node-content--has-image': hasImage,
-									'c-block-timeline__node-content--has-object': hasObject,
-									'u-background-text-colors': hasNodeTextColors,
-								})}
-								style={
-									backgroundColor
-										? ({
-												'--c-block-timeline-node-bg': backgroundColor,
-												...nodeTextColorVariables,
-											} as CSSProperties)
-										: undefined
-								}
-							>
-								{hasFailedObject && (
-									<div className={clsx('c-ie-object-media')}>
-										<IeObjectLoadError className="c-block-timeline__node-object-error" />
-									</div>
-								)}
-								{isLoadingObject && (
-									<div className={clsx('c-ie-object-media')}>
-										<div
-											className={clsx(
-												'c-block-timeline__node-image-wrapper',
-												'c-block-timeline__node-image-wrapper--loading'
-											)}
-										>
-											{node.image && (
-												<img
-													src={node.image}
-													alt=""
-													aria-hidden="true"
-													className="c-block-timeline__node-object-image"
-												/>
-											)}
-											<div className="c-block-timeline__node-object-loading">
-												<Spinner size="large" locationId={'timeline-node-object'} />
-											</div>
-										</div>
-									</div>
-								)}
-								{ieObject && (
-									<div className={clsx('c-ie-object-media')}>
-										{ieObject.hasAccessToEssence && isAudioVideoFormat(ieObject.dctermsFormat) ? (
-											<IeObjectFlowPlayerWrapper
-												className="c-block-timeline__node-object-media"
-												ieObject={ieObject}
-												poster={node.image}
-											/>
-										) : ieObject.hasAccessToEssence && thumbnail ? (
-											// Newspapers
-											<div className="c-block-timeline__node-image-wrapper">
-												<img
-													src={thumbnail}
-													alt={ieObject.name || node.title}
-													className="c-block-timeline__node-object-image"
-												/>
-											</div>
-										) : (
-											// Nothing to show: the plain type icon when the essence is simply missing, the
-											// struck-through one when this visitor may not see it. Decorative -- the node's
-											// own title and metadata already name the object.
-											<span
-												className="c-block-timeline__node-object-placeholder"
-												aria-hidden="true"
-											>
-												<Icon
-													name={getIconFromObjectType(
-														ieObject.dctermsFormat,
-														ieObject.hasAccessToEssence
-													)}
-												/>
-											</span>
-										)}
-									</div>
-								)}
-								{node.visualType === 'IMAGE' && node.image && (
-									<div className="c-block-timeline__node-image-wrapper">
-										<img
-											src={node.image}
-											alt={node.imageAlt || node.title}
-											className="c-block-timeline__node-image"
-										/>
-									</div>
-								)}
-								<div className="c-block-timeline__node-text">
-									<CopyrightAttribution
-										title={node.copyrightTitle}
-										text={node.copyrightText}
-										showIcon={node.copyrightIconVisible}
-										className="c-block-timeline__node-image-caption"
-									/>
-									<h3 className="c-block-timeline__node-title u-background-text-primary">
-										{node.title}
-									</h3>
-									{node.text && (
-										<Html
-											content={node.text}
-											sanitizePreset={SanitizePreset.full}
-											type="div"
-											className="c-block-timeline__node-description u-background-text-primary u-background-text-links"
-										/>
-									)}
-									{ieObject && <IeObjectMetadata ieObject={ieObject} fallbackTitle={node.title} />}
-								</div>
-							</div>
-						</li>
-					);
-				})}
+				{sortedElements.map(renderNode)}
 				<TimelineCap position="end" />
 			</ol>
 			{sortedElements.length > 0 && (

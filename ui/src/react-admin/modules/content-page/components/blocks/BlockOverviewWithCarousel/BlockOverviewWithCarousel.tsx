@@ -75,8 +75,7 @@ export const BlockOverviewWithCarousel: FunctionComponent<BlockOverviewWithCarou
 		title: string,
 		backgroundColor: Color,
 		textColor: Color,
-		// False only for a slide linking to an ie-object whose essence this visitor may not see
-		hasAccessToEssence = true
+		hasAccessToEssence: boolean
 	) => {
 		return (
 			<>
