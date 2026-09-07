@@ -67,15 +67,15 @@ $tile-shadow-active:
 	0 0.8rem 2rem rgb(0 0 0 / 12%);
 
 // Quicker to become active than to return to rest, so the stack settles instead of snapping back.
-$tile-hover-duration: 320ms;
+$tile-hover-duration: 450ms;
 $tile-hover-easing: cubic-bezier(0.22, 1, 0.36, 1);
-$tile-rest-duration: 500ms;
+$tile-rest-duration: 700ms;
 
 // Taking over as the active tile runs in two stages: the tile steps outward, and only then swells
 // back into its place while the stack behind it reorders. The reference stack steps out by 60 of
 // its 950, over 190ms, and hops 12 up halfway through the swell.
 $tile-step-out-distance: math.div(60, $stack-width) * 100cqw; // 6.316cqw
-$tile-step-out-duration: 190ms;
+$tile-step-out-duration: 270ms;
 $tile-step-out-easing: cubic-bezier(0.4, 0, 0.8, 0.4);
 $tile-settle-lift: 1.2rem;
 $tile-activate-duration: $tile-step-out-duration + $tile-rest-duration; // 690ms
