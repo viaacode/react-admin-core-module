@@ -112,13 +112,15 @@ export const BlockDriekeuzespeler: FunctionComponent<BlockDriekeuzespelerProps> 
 		const ieObject = schemaIdentifier ? ieObjectsById?.[schemaIdentifier] : undefined;
 		const simpleType = mapDcTermsFormatToSimpleType(ieObject?.dctermsFormat);
 
+		// Three layers, deliberately: the tile box takes the hover and never moves, the visual
+		// inside carries the pose, and the button fills the box. A hover target that scales grows
+		// out from under the pointer and drops its own hover, which jitters on the seam between two
+		// tiles. The button therefore cannot wrap the pill, so both hold the interest name: the span
+		// shows it, the label says it. ARC-3813
 		return (
 			<li
 				// The index is the tile's identity: after a shuffle tile 1 keeps tile 1's colours.
 				key={`c-driekeuzespeler__tile--${tileIndex}`}
-				// This box is the hover target and it never moves. The pose lives on the visual inside it,
-				// because a hover that moves its own target drops the hover and takes it back frame after
-				// frame, which reads as a jitter along the seam between two tiles. ARC-3813
 				className="c-driekeuzespeler__tile"
 				// Also the ground a tile shows while its thumbnail loads, or when the object stops resolving.
 				style={{ '--tile-color': backgroundColor } as CSSProperties}
@@ -136,8 +138,6 @@ export const BlockDriekeuzespeler: FunctionComponent<BlockDriekeuzespelerProps> 
 						/>
 					)}
 					{!!selected?.interest && (
-						// Named by the button's aria-label rather than by this text, so the pill can sit in the
-						// layer that scales. Same string, which is what WCAG 2.5.3 asks of a visible label.
 						<span
 							className="c-driekeuzespeler__pill"
 							aria-hidden="true"
@@ -148,8 +148,6 @@ export const BlockDriekeuzespeler: FunctionComponent<BlockDriekeuzespelerProps> 
 					)}
 				</div>
 				{!!selected?.interest && (
-					// A real button, so Enter and Space work for free. The thumbnail is decorative, so the
-					// interest name is what names the control.
 					<button
 						type="button"
 						className="c-driekeuzespeler__tile-button"
