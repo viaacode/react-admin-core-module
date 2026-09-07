@@ -94,6 +94,10 @@ export const IeObjectFlowPlayerWrapper: FunctionComponent<IeObjectFlowPlayerWrap
 			peakColorActive: Color.Teal40,
 			peakColorInactive: Color.White,
 			peakColorBackground: backgroundColor || fallbackBackgroundColor,
+			colors: {
+				progressColor: '#00CCA9',
+				accentColor: '#009991',
+			}
 		},
 	};
 
