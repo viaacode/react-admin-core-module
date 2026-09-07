@@ -12983,6 +12983,26 @@
     "id": "",
     "app": "HET_ARCHIEF",
     "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/ie-object-load-error/ie-object-load-error",
+    "key": "geen-permissies-om-dit-object-te-bekijken",
+    "language": "nl",
+    "value": "Geen permissies om dit object te bekijken",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/ie-object-load-error/ie-object-load-error",
+    "key": "geen-permissies-om-dit-object-te-bekijken",
+    "language": "en",
+    "value": "Geen permissies om dit object te bekijken",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
     "location": "modules/content-page/components/ie-object-metadata/ie-object-metadata",
     "key": "bekijk-de-volledige-video",
     "language": "nl",
@@ -24817,26 +24837,6 @@
     "key": "gelieve-een-correcte-zoekfilter-link-in-te-vullen",
     "language": "en",
     "value": "Please enter a correct search filter link.",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/ie-object-load-error/ie-object-load-error",
-    "key": "geen-permissies-om-dit-object-te-bekijken",
-    "language": "nl",
-    "value": "Geen permissies om dit object te bekijken",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/ie-object-load-error/ie-object-load-error",
-    "key": "geen-permissies-om-dit-object-te-bekijken",
-    "language": "en",
-    "value": "Geen permissies om dit object te bekijken",
     "value_type": "TEXT"
   },
   {
