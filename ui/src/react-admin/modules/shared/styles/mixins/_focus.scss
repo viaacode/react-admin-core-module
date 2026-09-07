@@ -1,11 +1,18 @@
 @use "../../styles/settings/colors" as colors;
 
 /**
+  * The outline itself, for the cases where the focused element and the outlined one differ.
+ */
+@mixin focus-outline-styles {
+	outline: 2px solid colors.$color-ocean-green;
+	outline-offset: 2px;
+}
+
+/**
   * Provides a focus outline for keyboard navigation.
  */
 @mixin focus-outline {
 	&:focus-visible {
-		outline: 2px solid colors.$color-ocean-green;
-		outline-offset: 2px;
+		@include focus-outline-styles;
 	}
 }

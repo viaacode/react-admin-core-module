@@ -112,6 +112,11 @@ export const BlockDriekeuzespeler: FunctionComponent<BlockDriekeuzespelerProps> 
 		const ieObject = schemaIdentifier ? ieObjectsById?.[schemaIdentifier] : undefined;
 		const simpleType = mapDcTermsFormatToSimpleType(ieObject?.dctermsFormat);
 
+		// Three layers, deliberately: the tile box takes the hover and never moves, the visual
+		// inside carries the pose, and the button fills the box. A hover target that scales grows
+		// out from under the pointer and drops its own hover, which jitters on the seam between two
+		// tiles. The button therefore cannot wrap the pill, so both hold the interest name: the span
+		// shows it, the label says it. ARC-3813
 		return (
 			<li
 				// The index is the tile's identity: after a shuffle tile 1 keeps tile 1's colours.
@@ -120,36 +125,39 @@ export const BlockDriekeuzespeler: FunctionComponent<BlockDriekeuzespelerProps> 
 				// Also the ground a tile shows while its thumbnail loads, or when the object stops resolving.
 				style={{ '--tile-color': backgroundColor } as CSSProperties}
 			>
-				{!!ieObject?.thumbnailUrl && (
-					<ImageOrAudioWaveForm
-						imageSrc={ieObject.thumbnailUrl}
-						imageAlt={ieObject.name}
-						backgroundColor={backgroundColor}
-						className={clsx(
-							'c-driekeuzespeler__thumbnail',
-							`c-driekeuzespeler__thumbnail--${simpleType}`
-						)}
-					/>
-				)}
+				<div className="c-driekeuzespeler__tile-visual">
+					{!!ieObject?.thumbnailUrl && (
+						<ImageOrAudioWaveForm
+							imageSrc={ieObject.thumbnailUrl}
+							imageAlt={ieObject.name}
+							backgroundColor={backgroundColor}
+							className={clsx(
+								'c-driekeuzespeler__thumbnail',
+								`c-driekeuzespeler__thumbnail--${simpleType}`
+							)}
+						/>
+					)}
+					{!!selected?.interest && (
+						<span
+							className="c-driekeuzespeler__pill"
+							aria-hidden="true"
+							style={{ backgroundColor, color: textColor } as CSSProperties}
+						>
+							{selected.interest.name}
+						</span>
+					)}
+				</div>
 				{!!selected?.interest && (
-					// A real button, so Enter and Space work for free. The thumbnail is decorative, so the
-					// interest name is what names the control.
 					<button
 						type="button"
 						className="c-driekeuzespeler__tile-button"
+						aria-label={selected.interest.name}
 						onClick={(event) => {
 							// `detail` counts the clicks of a pointer, so 0 is Enter or Space.
 							openerRef.current = event.detail > 0 ? event.currentTarget : null;
 							setOpenedIndex(selected.index);
 						}}
-					>
-						<span
-							className="c-driekeuzespeler__pill"
-							style={{ backgroundColor, color: textColor } as CSSProperties}
-						>
-							{selected.interest.name}
-						</span>
-					</button>
+					/>
 				)}
 			</li>
 		);
