@@ -26,10 +26,30 @@ $tile-active-tilt: 3deg;
 // scales rather than fixed widths, which is what lets the active look travel between tiles.
 $tile-scale-inactive: 0.9;
 $tile-scale-active-desktop: 1.34;
-$tile-width-desktop-base: math.div(250, $stack-width) * 100%; // 26.316%
 $tile-offset-desktop: math.div(235, $stack-width) * 100%; // 24.737%
 $tile-width-mobile-base: math.div(78.109%, $tile-scale-inactive); // 86.788%
 $tile-scale-active-mobile: math.div(90.05%, $tile-width-mobile-base); // 1.038
+
+// The tile visual sits inside its hover zone rather than in the stage, so its width is in `cqw` to
+// stay a share of the stage the way every other size here is.
+$tile-width-visual-desktop: math.div(250, $stack-width) * 100cqw; // 26.316cqw
+$tile-width-visual-mobile: math.div($tile-width-mobile-base, 100%) * 100cqw; // 86.788cqw
+
+// The hover zones divide the tile band into three, edge to edge: one zone per tile, no overlap and
+// no gap, so every pointer position in the band belongs to exactly one tile and stays with it. As
+// wide as the spacing between two tile centres, and as tall as a tile at its active size.
+$hit-width-desktop: $tile-offset-desktop; // 24.737%
+$hit-height-desktop: math.div(250 * 1.02 * $tile-scale-active-desktop, $stack-height) * 100%; // 72.7%
+$hit-height-mobile: 81.354% - 50%; // 31.354%
+
+// Placed by its edges rather than by its centre: a `translate(-50%, -50%)` would make every zone a
+// stacking context, and the z-index that lifts the active tile above its neighbours sits on the
+// visual inside it, so it would be trapped there and the tiles would paint in DOM order. ARC-3813
+$hit-left-desktop: 50% - 1.5 * $tile-offset-desktop; // 12.895%
+$hit-top-desktop: 50% - math.div($hit-height-desktop, 2); // 13.649%
+$hit-top-mobile-1: 18.646% - math.div($hit-height-mobile, 2); // 2.969%
+$hit-top-mobile-2: 50% - math.div($hit-height-mobile, 2); // 34.323%
+$hit-top-mobile-3: 81.354% - math.div($hit-height-mobile, 2); // 65.677%
 
 // How far a tile makes room for the hovered one: the neighbour steps aside by a nudge, the tile on
 // the far side slides in behind the middle one, and both side tiles spread on a hovered middle tile.
@@ -147,15 +167,83 @@ $pill-font-size: clamp(1.8rem, 1.964cqw, 2.4rem);
 
 	@include shapes.shapes;
 
+	// The hover zone, not the tile's own outline: the three sit edge to edge so the seam between them
+	// is a line rather than a gap, and none of them ever moves. Everything that does move sits in
+	// `&__tile-visual` below.
 	&__tile {
-		// Placed by its centre, so its size can change without moving it.
+		// No transform of any kind here: that would make this box a stacking context and shut the
+		// active tile's z-index in with it. See the note on $hit-left-desktop.
+		position: absolute;
+		width: $hit-width-desktop;
+		height: $hit-height-desktop;
+		top: $hit-top-desktop;
+
+		@media (max-width: variables.$g-bp2) {
+			width: 100%;
+			height: $hit-height-mobile;
+		}
+
+		&:nth-child(1) {
+			--tile-tilt: #{-$tile-tilt};
+			--tile-tilt-active: #{-$tile-active-tilt};
+			--tile-step-out: calc(#{$tile-step-out-distance} * -1);
+
+			left: $hit-left-desktop;
+		}
+
+		&:nth-child(2) {
+			--tile-tilt: 0deg;
+			--tile-tilt-active: 0deg;
+
+			left: $hit-left-desktop + $tile-offset-desktop;
+		}
+
+		&:nth-child(3) {
+			--tile-tilt: #{$tile-tilt};
+			--tile-tilt-active: #{$tile-active-tilt};
+			--tile-step-out: #{$tile-step-out-distance};
+
+			left: $hit-left-desktop + 2 * $tile-offset-desktop;
+		}
+
+		// On mobile the three sit in a centred, overlapping column. `left` is repeated per tile because
+		// the desktop rules above use `:nth-child()`, which outranks a bare `&` whatever the source
+		// order, so a single `left: 0` never lands.
+		@media (max-width: variables.$g-bp2) {
+			&:nth-child(1) {
+				left: 0;
+				top: $hit-top-mobile-1;
+			}
+
+			&:nth-child(2) {
+				left: 0;
+				top: $hit-top-mobile-2;
+			}
+
+			&:nth-child(3) {
+				left: 0;
+				top: $hit-top-mobile-3;
+			}
+		}
+	}
+
+	// The tile itself: everything the hover pose moves, scales or restacks. Centred in the hover zone
+	// above, which is what keeps the pointer target still while this travels.
+	&__tile-visual {
 		position: absolute;
 		display: flex;
 		align-items: center;
 		justify-content: center;
 		aspect-ratio: $tile-ratio;
 		z-index: $tile-z-inactive;
-		width: $tile-width-desktop-base;
+		left: 50%;
+		top: 50%;
+		width: $tile-width-visual-desktop;
+
+		// The pointer must not see this layer at all: it overflows its hover zone, and hovering an
+		// overflowing child hovers the parent too, which would hand the moving tile back its say over
+		// the hover and bring the jitter with it.
+		pointer-events: none;
 
 		// Custom properties so one rule can change one part without restating the rest.
 		transform: translate(calc(-50% + var(--tile-shift, 0px)), -50%)
@@ -181,53 +269,12 @@ $pill-font-size: clamp(1.8rem, 1.964cqw, 2.4rem);
 			transition: opacity $tile-rest-duration $tile-hover-easing;
 		}
 
-		&:nth-child(1) {
-			--tile-tilt: #{-$tile-tilt};
-			--tile-tilt-active: #{-$tile-active-tilt};
-			--tile-step-out: calc(#{$tile-step-out-distance} * -1);
-
-			left: 50% - $tile-offset-desktop;
-			top: 50%;
-		}
-
-		&:nth-child(2) {
-			--tile-tilt: 0deg;
-			--tile-tilt-active: 0deg;
-
+		.c-driekeuzespeler__tile:nth-child(2) & {
 			z-index: $tile-z-middle-inactive;
-			left: 50%;
-			top: 50%;
 		}
 
-		&:nth-child(3) {
-			--tile-tilt: #{$tile-tilt};
-			--tile-tilt-active: #{$tile-active-tilt};
-			--tile-step-out: #{$tile-step-out-distance};
-
-			left: 50% + $tile-offset-desktop;
-			top: 50%;
-		}
-
-		// On mobile the three sit in a centred, overlapping column. `left` is repeated per tile because
-		// the desktop rules above use `:nth-child()`, which outranks a bare `&` whatever the source
-		// order, so a single `left: 50%` never lands.
 		@media (max-width: variables.$g-bp2) {
-			width: $tile-width-mobile-base;
-
-			&:nth-child(1) {
-				left: 50%;
-				top: 18.646%;
-			}
-
-			&:nth-child(2) {
-				left: 50%;
-				top: 50%;
-			}
-
-			&:nth-child(3) {
-				left: 50%;
-				top: 81.354%;
-			}
+			width: $tile-width-visual-mobile;
 		}
 	}
 
@@ -244,20 +291,26 @@ $pill-font-size: clamp(1.8rem, 1.964cqw, 2.4rem);
 		transition: filter $tile-rest-duration $tile-hover-easing;
 	}
 
+	// Fills the hover zone rather than the tile, so the pointer keeps one still target. Every pixel of
+	// the zone is clickable, and the tile is only ever grown while the pointer is inside its own zone.
 	&__tile-button {
-		// The tile's tilt and scale on :focus-within is motion, not a focus indicator, and it is gone
-		// altogether under prefers-reduced-motion. The keyboard user needs a real outline.
-		@include focus.focus-outline;
-
 		position: absolute;
 		inset: 0;
-		display: flex;
-		align-items: center;
-		justify-content: center;
 		padding: 0;
 		border: none;
 		background: none;
 		cursor: pointer;
+
+		&:focus-visible {
+			outline: none;
+		}
+	}
+
+	// The tile's tilt and scale on :focus-within is motion, not a focus indicator, and it is gone
+	// altogether under prefers-reduced-motion. The keyboard user needs a real outline, and it belongs
+	// on the tile rather than on the zone the button fills, so it hugs what the visitor sees.
+	&__tile:has(&__tile-button:focus-visible) &__tile-visual {
+		@include focus.focus-outline-styles;
 	}
 
 	&__pill {
@@ -299,13 +352,13 @@ $pill-font-size: clamp(1.8rem, 1.964cqw, 2.4rem);
 
 	// Collapsed rather than removed, so only the movement goes away.
 	@media (prefers-reduced-motion: reduce) {
-		&__tile,
-		&__tile::after,
+		&__tile-visual,
+		&__tile-visual::after,
 		&__thumbnail {
 			transition-duration: 1ms;
 		}
 
-		&__tile {
+		&__tile-visual {
 			animation: none;
 		}
 	}
@@ -383,23 +436,27 @@ $pill-font-size: clamp(1.8rem, 1.964cqw, 2.4rem);
 	}
 }
 
+// Every rule below is triggered by the hover zone and lands on the visual inside it. Splitting the
+// two is what stops the jitter: the zone the pointer tests against never moves.
+
 // No hover or focus anywhere in the stack: the middle tile is the active one. `:has` drives the
 // siblings with no javascript, as BlockHeroCarousel does.
 .c-driekeuzespeler__tiles:not(:has(.c-driekeuzespeler__tile:is(:hover, :focus-within)))
-	.c-driekeuzespeler__tile:nth-child(2) {
+	.c-driekeuzespeler__tile:nth-child(2)
+	.c-driekeuzespeler__tile-visual {
 	@include tile-active;
 }
 
 // A hovered tile takes over the active look whole, so the stack always has one tile at that size.
-.c-driekeuzespeler__tile:is(:hover, :focus-within) {
+.c-driekeuzespeler__tile:is(:hover, :focus-within) .c-driekeuzespeler__tile-visual {
 	@include tile-active;
 }
 
 // Only a side tile travels: the middle one is already the active tile, and hovering it moves the
 // two beside it instead. `forwards`, so the tile holds the last frame until the pointer leaves --
 // the transform transition then carries it back to rest on its own.
-.c-driekeuzespeler__tile:nth-child(1):is(:hover, :focus-within),
-.c-driekeuzespeler__tile:nth-child(3):is(:hover, :focus-within) {
+.c-driekeuzespeler__tile:nth-child(1):is(:hover, :focus-within) .c-driekeuzespeler__tile-visual,
+.c-driekeuzespeler__tile:nth-child(3):is(:hover, :focus-within) .c-driekeuzespeler__tile-visual {
 	animation:
 		c-driekeuzespeler-tile-activate $tile-activate-duration linear forwards,
 		c-driekeuzespeler-tile-settle $tile-activate-duration linear;
@@ -409,13 +466,13 @@ $pill-font-size: clamp(1.8rem, 1.964cqw, 2.4rem);
 // the far side slides inward and drops behind the middle one. Delayed by the first stage, so the
 // stack waits for the hovered tile to clear it.
 .c-driekeuzespeler__tiles:has(.c-driekeuzespeler__tile:nth-child(1):is(:hover, :focus-within)) {
-	.c-driekeuzespeler__tile:nth-child(2) {
+	.c-driekeuzespeler__tile:nth-child(2) .c-driekeuzespeler__tile-visual {
 		--tile-shift: var(--tile-nudge);
 
 		transition-delay: $tile-step-out-duration;
 	}
 
-	.c-driekeuzespeler__tile:nth-child(3) {
+	.c-driekeuzespeler__tile:nth-child(3) .c-driekeuzespeler__tile-visual {
 		--tile-shift: calc(var(--tile-tuck) * -1);
 
 		z-index: $tile-z-tucked;
@@ -424,13 +481,13 @@ $pill-font-size: clamp(1.8rem, 1.964cqw, 2.4rem);
 }
 
 .c-driekeuzespeler__tiles:has(.c-driekeuzespeler__tile:nth-child(3):is(:hover, :focus-within)) {
-	.c-driekeuzespeler__tile:nth-child(2) {
+	.c-driekeuzespeler__tile:nth-child(2) .c-driekeuzespeler__tile-visual {
 		--tile-shift: calc(var(--tile-nudge) * -1);
 
 		transition-delay: $tile-step-out-duration;
 	}
 
-	.c-driekeuzespeler__tile:nth-child(1) {
+	.c-driekeuzespeler__tile:nth-child(1) .c-driekeuzespeler__tile-visual {
 		--tile-shift: var(--tile-tuck);
 
 		z-index: $tile-z-tucked;
@@ -441,11 +498,11 @@ $pill-font-size: clamp(1.8rem, 1.964cqw, 2.4rem);
 // The middle tile is the active one at rest, so hovering it grows nothing. Both side tiles give it
 // room instead, which is the only thing that moves.
 .c-driekeuzespeler__tiles:has(.c-driekeuzespeler__tile:nth-child(2):is(:hover, :focus-within)) {
-	.c-driekeuzespeler__tile:nth-child(1) {
+	.c-driekeuzespeler__tile:nth-child(1) .c-driekeuzespeler__tile-visual {
 		--tile-shift: calc(var(--tile-push) * -1);
 	}
 
-	.c-driekeuzespeler__tile:nth-child(3) {
+	.c-driekeuzespeler__tile:nth-child(3) .c-driekeuzespeler__tile-visual {
 		--tile-shift: var(--tile-push);
 	}
 }
@@ -458,8 +515,8 @@ $pill-font-size: clamp(1.8rem, 1.964cqw, 2.4rem);
 		--tile-tuck: 0px;
 	}
 
-	.c-driekeuzespeler__tile:nth-child(1):hover,
-	.c-driekeuzespeler__tile:nth-child(3):hover {
+	.c-driekeuzespeler__tile:nth-child(1):hover .c-driekeuzespeler__tile-visual,
+	.c-driekeuzespeler__tile:nth-child(3):hover .c-driekeuzespeler__tile-visual {
 		--tile-scale: #{$tile-scale-inactive};
 		--tile-shift: 0px;
 

@@ -113,37 +113,47 @@ export const BlockDriekeuzespeler: FunctionComponent<BlockDriekeuzespelerProps> 
 			<li
 				// The index is the tile's identity: after a shuffle tile 1 keeps tile 1's colours.
 				key={`c-driekeuzespeler__tile--${tileIndex}`}
+				// This box is the hover target and it never moves. The pose lives on the visual inside it,
+				// because a hover that moves its own target drops the hover and takes it back frame after
+				// frame, which reads as a jitter along the seam between two tiles. ARC-3813
 				className="c-driekeuzespeler__tile"
 				// Also the ground a tile shows while its thumbnail loads, or when the object stops resolving.
 				style={{ '--tile-color': backgroundColor } as CSSProperties}
 			>
-				{!!ieObject?.thumbnailUrl && (
-					<img
-						className="c-driekeuzespeler__thumbnail"
-						src={ieObject.thumbnailUrl}
-						alt=""
-						loading="lazy"
-					/>
-				)}
+				<div className="c-driekeuzespeler__tile-visual">
+					{!!ieObject?.thumbnailUrl && (
+						<img
+							className="c-driekeuzespeler__thumbnail"
+							src={ieObject.thumbnailUrl}
+							alt=""
+							loading="lazy"
+						/>
+					)}
+					{!!selected?.interest && (
+						// Named by the button's aria-label rather than by this text, so the pill can sit in the
+						// layer that scales. Same string, which is what WCAG 2.5.3 asks of a visible label.
+						<span
+							className="c-driekeuzespeler__pill"
+							aria-hidden="true"
+							style={{ backgroundColor, color: textColor } as CSSProperties}
+						>
+							{selected.interest.name}
+						</span>
+					)}
+				</div>
 				{!!selected?.interest && (
 					// A real button, so Enter and Space work for free. The thumbnail is decorative, so the
 					// interest name is what names the control.
 					<button
 						type="button"
 						className="c-driekeuzespeler__tile-button"
+						aria-label={selected.interest.name}
 						onClick={(event) => {
 							// `detail` counts the clicks of a pointer, so 0 is Enter or Space.
 							openerRef.current = event.detail > 0 ? event.currentTarget : null;
 							setOpenedIndex(selected.index);
 						}}
-					>
-						<span
-							className="c-driekeuzespeler__pill"
-							style={{ backgroundColor, color: textColor } as CSSProperties}
-						>
-							{selected.interest.name}
-						</span>
-					</button>
+					/>
 				)}
 			</li>
 		);
