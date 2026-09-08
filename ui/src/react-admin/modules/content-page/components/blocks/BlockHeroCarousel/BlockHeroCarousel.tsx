@@ -1,9 +1,9 @@
-import type { HetArchiefIeObjectType as IeObjectType } from '@viaa/avo2-types';
 import React, { type CSSProperties, type FunctionComponent, type ReactNode, useMemo } from 'react';
 import { Color } from '~modules/content-page/types/content-block.types';
 import type { DefaultComponentProps } from '~modules/shared/types/components';
 import './BlockHeroCarousel.scss';
 import 'swiper/css';
+import type { HetArchiefIeObjectType } from '@viaa/avo2-types';
 import clsx from 'clsx';
 import type {
 	HeroCarouselBlockComponentState,
@@ -63,7 +63,7 @@ export const BlockHeroCarousel: FunctionComponent<BlockHeroCarouselProps> = ({
 	const backgroundColors = useMemo(
 		() =>
 			elements.map((element) =>
-				isAudioVideoFormat(element.mediaItem?.dctermsFormat as IeObjectType)
+				isAudioVideoFormat(element.mediaItem?.dctermsFormat as HetArchiefIeObjectType)
 					? getRandomTertiaryBackgroundColor()
 					: Color.Mustard
 			),
@@ -80,7 +80,7 @@ export const BlockHeroCarousel: FunctionComponent<BlockHeroCarouselProps> = ({
 			// stays in the strip and shows an error tile instead of an empty player.
 			const hasFailed = !!ieObjects && index < ieObjects.length && ieObjects[index] === null;
 			const dctermsFormat = (ieObject?.dctermsFormat ??
-				object.mediaItem?.dctermsFormat) as IeObjectType;
+				object.mediaItem?.dctermsFormat) as HetArchiefIeObjectType;
 
 			return {
 				...ieObject,

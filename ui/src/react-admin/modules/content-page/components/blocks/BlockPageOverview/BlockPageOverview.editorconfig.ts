@@ -35,6 +35,7 @@ export const INITIAL_PAGE_OVERVIEW_COMPONENTS_STATE =
 		itemAlignment: 'center',
 		imageItemAlignment: 'center',
 		showSectionTitle: true,
+		showLabelsOnImage: false,
 		showTitle: true,
 		showDescription: true,
 		showDate: false,
@@ -139,6 +140,14 @@ export const PAGE_OVERVIEW_BLOCK_CONFIG = (position = 0): ContentBlockConfig => 
 							ContentItemStyle.GRID
 						);
 					},
+				},
+				showLabelsOnImage: {
+					editorType: ContentBlockEditor.Checkbox,
+					editorProps: {
+						label: tText(
+							'modules/content-page/components/blocks/block-page-overview/block-page-overview___toon-de-gekleurde-labels-bovenop-de-tegels'
+						),
+					} as CheckboxProps,
 				},
 				showTitle: {
 					editorType: ContentBlockEditor.Checkbox,

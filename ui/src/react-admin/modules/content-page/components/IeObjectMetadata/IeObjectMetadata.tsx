@@ -1,9 +1,10 @@
 import { Button } from '@meemoo/react-components';
 import { Icon, type IconName } from '@viaa/avo2-components';
+import type { HetArchiefPlayableDisplayIeObject } from '@viaa/avo2-types';
 import {
 	AvoCoreContentPickerType,
-	type HetArchiefIeObjectType as IeObjectType,
-	HetArchiefSimpleIeObjectType as SimpleIeObjectType,
+	type HetArchiefIeObjectType,
+	HetArchiefSimpleIeObjectType,
 } from '@viaa/avo2-types';
 import { clsx } from 'clsx';
 import type { FunctionComponent } from 'react';
@@ -12,38 +13,37 @@ import { SmartLink } from '~shared/components/SmartLink/SmartLink';
 import { mapDcTermsFormatToSimpleType } from '~shared/helpers/map-format-to-type.ts';
 import { useIsMobileWidth } from '~shared/helpers/media-query.ts';
 import { tText } from '~shared/helpers/translation-functions';
-import type { PlayableDisplayIeObject } from '~shared/services/ie-objects-service/ie-objects.types.ts';
 import { HET_ARCHIEF } from '~shared/types';
 import './IeObjectMetadata.scss';
 import { IeObjectsService } from '~modules/ie-objects/ie-objects.service.ts';
 
 // The call to action names the kind of object it links to, so a newspaper isn't announced as a fragment.
-const getCallToActionLabel = (format: IeObjectType | null): string => {
+const getCallToActionLabel = (format: HetArchiefIeObjectType | null): string => {
 	const simpleFormat = mapDcTermsFormatToSimpleType(format);
 
 	switch (simpleFormat) {
-		case SimpleIeObjectType.VIDEO:
+		case HetArchiefSimpleIeObjectType.VIDEO:
 			return tText(
 				'modules/content-page/components/ie-object-metadata/ie-object-metadata___bekijk-de-volledige-video',
 				{},
 				[HET_ARCHIEF]
 			);
 
-		case SimpleIeObjectType.AUDIO:
+		case HetArchiefSimpleIeObjectType.AUDIO:
 			return tText(
 				'modules/content-page/components/ie-object-metadata/ie-object-metadata___beluister-de-volledige-audio',
 				{},
 				[HET_ARCHIEF]
 			);
 
-		case SimpleIeObjectType.NEWSPAPER:
+		case HetArchiefSimpleIeObjectType.NEWSPAPER:
 			return tText(
 				'modules/content-page/components/ie-object-metadata/ie-object-metadata___bekijk-de-volledige-krant',
 				{},
 				[HET_ARCHIEF]
 			);
 
-		case SimpleIeObjectType.IMAGE:
+		case HetArchiefSimpleIeObjectType.IMAGE:
 			return tText(
 				'modules/content-page/components/ie-object-metadata/ie-object-metadata___bekijk-de-volledige-afbeelding',
 				{},
@@ -60,7 +60,7 @@ const getCallToActionLabel = (format: IeObjectType | null): string => {
 };
 
 export const IeObjectMetadata: FunctionComponent<{
-	ieObject: PlayableDisplayIeObject;
+	ieObject: HetArchiefPlayableDisplayIeObject;
 	fallbackTitle: string;
 	className?: string;
 }> = ({ ieObject, fallbackTitle, className }) => {

@@ -18,11 +18,12 @@ export interface IeObjectLoadErrorProps extends DefaultComponentProps {
 }
 
 /**
- * Tile shown in place of an ie-object that the playable-display-data endpoint came back with a
- * null for: the object no longer exists, or it can't be resolved for this visitor. The blocks
- * that render objects (video, timeline, hero carousel) all keep their layout in that case and
- * show this instead of the player/image, so an editor sees which element is broken rather than a
- * silently missing tile.
+ * Tile shown in place of an ie-object this visitor cannot be shown: one the proxy reports no
+ * essence access for, or one the playable-display-data endpoint came back with a null for (no
+ * accessible licenses at all, or the object no longer exists). The blocks that render objects
+ * (video, timeline, hero carousel, overview carousel, objects grid) all keep their layout in that
+ * case and show this instead of the player/image, so the visitor gets a clear signal that the
+ * object is out of reach rather than a silently missing tile.
  */
 export const IeObjectLoadError: FunctionComponent<IeObjectLoadErrorProps> = ({
 	className,
@@ -37,7 +38,7 @@ export const IeObjectLoadError: FunctionComponent<IeObjectLoadErrorProps> = ({
 		>
 			<span className="c-ie-object-load-error__text">
 				{tText(
-					'react-admin/modules/content-page/components/ie-object-load-error/ie-object-load-error___object-kon-niet-geladen-worden',
+					'modules/content-page/components/ie-object-load-error/ie-object-load-error___geen-permissies-om-dit-object-te-bekijken',
 					undefined,
 					[HET_ARCHIEF]
 				)}

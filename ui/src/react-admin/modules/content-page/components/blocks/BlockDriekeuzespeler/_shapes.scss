@@ -19,10 +19,11 @@ $shape-mobile-top: (x: 15.838%, y: 4.832%, width: 56.23%, height: 19.477%, tilt:
 $shape-mobile-middle: (x: 89.688%, y: 54.429%, width: 18.388%, height: 17.558%, tilt: 54.09deg);
 $shape-mobile-bottom: (x: 5.863%, y: 84.548%, width: 36.109%, height: 17.229%, tilt: -178.11deg);
 
-// The renderer publishes the block background's WCAG text colour, so a shape is drawn in the colour
-// the text on that background uses -- black on a light background, not the design's white. The same
-// trade BlockOverviewThemes' group shapes make. ARC-3848
-$shape-color: var(--bg-text-primary, #{colors.$white});
+// Always white, on any block background. The shapes are decorative -- `aria-hidden`, and they carry
+// no information -- so WCAG 1.4.11 does not ask them for contrast, and following the background's
+// text colour (as BlockOverviewThemes' group shapes still do, ARC-3848) turned them black on a light
+// block, which the design does not want.
+$shape-color: colors.$white;
 
 @mixin mobile-shape($shape) {
 	left: map.get($shape, x);

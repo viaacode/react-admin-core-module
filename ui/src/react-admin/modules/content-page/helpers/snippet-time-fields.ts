@@ -1,5 +1,5 @@
 import type { TextInputProps } from '@viaa/avo2-components';
-import { HetArchiefIeObjectType as IeObjectType } from '@viaa/avo2-types';
+import { HetArchiefIeObjectType } from '@viaa/avo2-types';
 import type { HetArchiefVideoBlockComponentState } from '~content-blocks/BlockHetArchiefVideo';
 import { IE_OBJECT_FIELD, TEXT_FIELD } from '~content-blocks/defaults.ts';
 import {
@@ -95,9 +95,9 @@ const hasMediaItem = (
 
 const getFormatFromMediaItem = (
 	formGroupState: ContentBlockComponentState | ContentBlockState
-): IeObjectType | undefined =>
+): HetArchiefIeObjectType | undefined =>
 	hasMediaItem(formGroupState)
-		? (formGroupState.mediaItem?.dctermsFormat as IeObjectType | undefined)
+		? (formGroupState.mediaItem?.dctermsFormat as HetArchiefIeObjectType | undefined)
 		: undefined;
 
 /**
@@ -143,7 +143,7 @@ const SNIPPET_TIME_FIELD = (
 	});
 
 export const IE_OBJECT_WITH_SNIPPET_TIME_FIELDS = (
-	allowedObjectTypes: IeObjectType[] = Object.values(IeObjectType),
+	allowedObjectTypes: HetArchiefIeObjectType[] = Object.values(HetArchiefIeObjectType),
 	isVisibleFunc: IsVisibleFunc = () => true
 ): Record<string, ContentBlockField> => ({
 	// Changing the object clears the times: they are offsets into that object and mean nothing once

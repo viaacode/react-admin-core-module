@@ -3,8 +3,7 @@ import type {
 	AvoCoreDatabaseType,
 	AvoEducationOrganizationOrganization,
 	AvoUserCommonUser,
-	HetArchiefIeObject as IeObject,
-	HetArchiefIeObjectType as IeObjectType,
+	HetArchiefIeObjectType,
 } from '@viaa/avo2-types';
 import type { ComponentType, FC, FunctionComponent, MouseEvent, ReactNode } from 'react';
 import type { OrderProperty } from '~content-blocks/BlockObjectsGrid/BlockObjectsGrid.types.ts';
@@ -24,7 +23,7 @@ import type { FlowPlayerWrapperProps } from '~shared/components/FlowPlayerWrappe
 export interface IeObjectPlayInfo {
 	schemaIdentifier: string;
 	maintainerId: string;
-	dctermsFormat: IeObjectType;
+	dctermsFormat: HetArchiefIeObjectType;
 	/** True when the content block config cut this object to a snippet, ie. it has a start and end */
 	isBlockSnippet: boolean;
 }

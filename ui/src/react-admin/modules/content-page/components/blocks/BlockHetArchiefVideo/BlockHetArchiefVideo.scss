@@ -1,3 +1,4 @@
+@use "../../../../shared/styles/settings/colors" as colors;
 @use "../../../../shared/styles/settings/variables" as variables;
 
 .c-block-het-archief-video {
@@ -14,6 +15,12 @@
       width: 100%;
       height: 100%;
     }
+  }
+
+  // The player's spot is kept for an object this visitor may not see, filled with the error tile
+  // on a flat grey instead of the black a player would have been.
+  .c-block-het-archief-video__player--error {
+    background-color: colors.$neutral;
   }
 
   // While the object is being resolved the block holds its spot with the poster the editor picked,

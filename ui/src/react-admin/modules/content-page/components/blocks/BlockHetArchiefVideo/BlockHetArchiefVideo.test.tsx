@@ -1,8 +1,8 @@
 import { cleanup, render, screen } from '@testing-library/react';
+import type { HetArchiefPlayableDisplayIeObject } from '@viaa/avo2-types';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import type { IeObjectFlowPlayerWrapperProps } from '~modules/content-page/components/IeObjectFlowPlayerWrapper/IeObjectFlowPlayerWrapper';
-import type { PlayableDisplayIeObject } from '~shared/services/ie-objects-service/ie-objects.types';
 
 import { BlockHetArchiefVideo } from './BlockHetArchiefVideo';
 
@@ -14,16 +14,17 @@ const ieObject = {
 	schemaIdentifier: 'qs6d5p9579',
 	name: 'Some AV object',
 	dctermsFormat: 'video',
+	hasAccessToEssence: true,
 	playableUrl: 'https://media.example.com/qs6d5p9579.mp4',
 	mimeType: 'video/mp4',
 	thumbnailUrl: null,
 	maintainerName: 'VRT',
 	maintainerOverlay: false,
-} as unknown as PlayableDisplayIeObject;
+} as unknown as HetArchiefPlayableDisplayIeObject;
 
 const mockPlayableDisplayData = vi.fn<
 	() => {
-		data: (PlayableDisplayIeObject | null)[] | undefined;
+		data: (HetArchiefPlayableDisplayIeObject | null)[] | undefined;
 		isLoading?: boolean;
 		isFetching?: boolean;
 	}
@@ -117,6 +118,30 @@ describe('<BlockHetArchiefVideo />', () => {
 
 		expect(container).toBeEmptyDOMElement();
 		expect(mockPlayer).not.toHaveBeenCalled();
+	});
+
+	it('Should render an error tile for an object this visitor has no essence access to', () => {
+		mockPlayableDisplayData.mockReturnValue({
+			data: [{ ...ieObject, hasAccessToEssence: false, playableUrl: null }],
+		});
+
+		const { container } = render(<BlockHetArchiefVideo blockId={blockId} />);
+
+		expect(container.querySelector('.c-ie-object-load-error')).toBeInTheDocument();
+		expect(
+			container.querySelector('.c-block-het-archief-video__player--error')
+		).toBeInTheDocument();
+		expect(mockPlayer).not.toHaveBeenCalled();
+	});
+
+	it('Should keep the caption for an object this visitor has no essence access to', () => {
+		mockPlayableDisplayData.mockReturnValue({
+			data: [{ ...ieObject, hasAccessToEssence: false, playableUrl: null }],
+		});
+
+		render(<BlockHetArchiefVideo blockId={blockId} copyrightTitle="VRT" />);
+
+		expect(screen.getByText(/VRT/)).toBeInTheDocument();
 	});
 
 	it('Should render an error tile for an object that resolved to null', () => {
