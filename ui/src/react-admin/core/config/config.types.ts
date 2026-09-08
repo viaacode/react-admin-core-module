@@ -3,6 +3,7 @@ import type {
 	AvoCoreDatabaseType,
 	AvoEducationOrganizationOrganization,
 	AvoUserCommonUser,
+	HetArchiefIeObject,
 	HetArchiefIeObjectType,
 } from '@viaa/avo2-types';
 import type { ComponentType, FC, FunctionComponent, MouseEvent, ReactNode } from 'react';
@@ -219,7 +220,7 @@ export interface AdminConfig {
  * at request time, so it cannot be handed over already resolved.
  */
 export interface IiifViewerConfigProps {
-	ieObject: IeObject;
+	ieObject: HetArchiefIeObject;
 	/** Names the viewer for assistive technology, since the object title lives outside it. */
 	title?: string;
 }

@@ -1,7 +1,9 @@
 import type {
+	HetArchiefIeObject,
 	HetArchiefPlayableDisplayIeObject,
 	HetArchiefUnsavedPlayableDisplayDataObject,
 } from '@viaa/avo2-types';
+import { stringifyUrl } from 'query-string';
 import { CustomError } from '~shared/helpers/custom-error';
 import { fetchWithLogout, fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
 import { getProxyUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config';
@@ -15,14 +17,16 @@ export class IeObjectsService {
 	 * Playable display data cannot carry a newspaper's page list, so a caller needing the object
 	 * itself -- the IIIF viewer does -- asks here.
 	 */
-	public static async getIeObjectsByIds(schemaIdentifiers: string[]): Promise<IeObject[]> {
+	public static async getIeObjectsByIds(
+		schemaIdentifiers: string[]
+	): Promise<HetArchiefIeObject[]> {
 		const url = stringifyUrl({
 			url: IeObjectsService.getBaseUrl(),
 			// Without this the thumbnail comes back as a path the browser cannot load.
 			query: { schemaIdentifiers, resolveThumbnailUrl: 'true' },
 		});
 		try {
-			return (await fetchWithLogoutJson<IeObject[]>(url)) || [];
+			return (await fetchWithLogoutJson<HetArchiefIeObject[]>(url)) || [];
 		} catch (err) {
 			throw new CustomError('Failed to fetch ie-objects by id', err, { schemaIdentifiers });
 		}

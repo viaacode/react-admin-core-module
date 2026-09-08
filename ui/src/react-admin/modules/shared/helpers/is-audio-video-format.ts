@@ -15,6 +15,6 @@ export function isAudioVideoFormat(format: HetArchiefIeObjectType | undefined): 
 	return isAudioFormat(format) || isVideoFormat(format);
 }
 
-export function isNewspaperFormat(format: IeObjectType | undefined): boolean {
-	return mapDcTermsFormatToSimpleType(format) === SimpleIeObjectType.NEWSPAPER;
+export function isNewspaperFormat(format: HetArchiefIeObjectType | undefined): boolean {
+	return mapDcTermsFormatToSimpleType(format) === HetArchiefSimpleIeObjectType.NEWSPAPER;
 }

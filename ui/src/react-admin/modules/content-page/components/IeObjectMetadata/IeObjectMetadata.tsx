@@ -73,7 +73,7 @@ export const IeObjectMetadata: FunctionComponent<{
 				action={{
 					type: AvoCoreContentPickerType.INTERNAL_LINK,
 					value: IeObjectsService.getObjectDetailPath(
-						ieObject?.maintainerSlug,
+						ieObject?.maintainerSlug as string,
 						ieObject?.schemaIdentifier,
 						ieObject?.name
 					),
