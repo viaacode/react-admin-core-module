@@ -64,7 +64,7 @@ export const IeObjectFlowPlayerWrapper: FunctionComponent<IeObjectFlowPlayerWrap
 	// The active slide is the only one big enough to warrant the full-size newspaper image, so
 	// it's the only slide that prefers it over the (lower-res) thumbnail.
 	const imageSrc = ieObject.thumbnailUrl || '';
-	const isAudio = isAudioFormat(ieObject.dctermsFormat);
+	const isAudio = isAudioType(ieObject.dctermsFormat);
 	const locale = AdminConfigManager.getConfig().locale || Locale.Nl;
 
 	const shared: Partial<FlowPlayerProps> = {
