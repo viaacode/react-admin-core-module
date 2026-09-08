@@ -2,6 +2,7 @@ import { Button } from '@meemoo/react-components';
 import { Modal, ModalBody } from '@viaa/avo2-components';
 import {
 	AvoCoreContentPickerType,
+	type HetArchiefPlayableDisplayIeObject,
 	type HetArchiefIeObject as IeObject,
 	type HetArchiefIeObjectType as IeObjectType,
 } from '@viaa/avo2-types';
@@ -17,7 +18,6 @@ import { SmartLink } from '~shared/components/SmartLink/SmartLink.tsx';
 import { getIconFromObjectType } from '~shared/helpers/get-icon-from-object-type.ts';
 import { isAudioVideoFormat, isNewspaperFormat } from '~shared/helpers/is-audio-video-format.ts';
 import { tText } from '~shared/helpers/translation-functions';
-import type { PlayableDisplayIeObject } from '~shared/services/ie-objects-service/ie-objects.types.ts';
 import { ThemesService } from '~shared/services/themes-service/themes.service.ts';
 import type { Theme } from '~shared/services/themes-service/themes.types';
 import { HET_ARCHIEF } from '~shared/types';
@@ -60,7 +60,7 @@ export const BlockDriekeuzespelerModal: FunctionComponent<BlockDriekeuzespelerMo
 	const isPlayable = isAudioVideoFormat(ieObject?.dctermsFormat);
 
 	// The shared player and metadata panel describe an object the way playable-display-data does.
-	const displayIeObject: PlayableDisplayIeObject | undefined = ieObject && {
+	const displayIeObject: HetArchiefPlayableDisplayIeObject | undefined = ieObject && {
 		schemaIdentifier: ieObject.schemaIdentifier,
 		name: ieObject.name || '',
 		thumbnailUrl: ieObject.thumbnailUrl || null,
@@ -73,6 +73,7 @@ export const BlockDriekeuzespelerModal: FunctionComponent<BlockDriekeuzespelerMo
 		playableUrl: playableFile?.playableUrl,
 		mimeType: playableFile?.mimeType,
 		peakfileData: playableFile?.peakfileData,
+		hasAccessToEssence: ieObject.hasAccessToEssence || false,
 	};
 
 	// Only mount the player while the modal is open, so closing stops playback outright instead of

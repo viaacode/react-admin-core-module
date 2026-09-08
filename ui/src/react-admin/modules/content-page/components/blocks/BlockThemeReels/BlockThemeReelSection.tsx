@@ -223,6 +223,7 @@ export const BlockThemeReelSection: FunctionComponent<BlockThemeReelSectionProps
 							thumbnailUrl,
 							name,
 							hasAccessToEssence,
+							maintainerSlug,
 						},
 						index
 					) => {
