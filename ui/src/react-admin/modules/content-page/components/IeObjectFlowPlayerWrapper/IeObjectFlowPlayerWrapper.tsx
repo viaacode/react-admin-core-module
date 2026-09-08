@@ -1,6 +1,6 @@
 import { FlowPlayer, type FlowPlayerProps } from '@meemoo/react-components';
 import type { HetArchiefPlayableDisplayIeObject } from '@viaa/avo2-types';
-import React, { type FunctionComponent, type ReactNode, useMemo } from 'react';
+import React, {type FunctionComponent, type ReactNode, useState} from 'react';
 import { AdminConfigManager } from '~core/config';
 import { getRandomTertiaryBackgroundColor } from '~modules/content-page/helpers/get-random-tertiary-background-color.ts';
 import { Color } from '~modules/content-page/types/content-block.types.ts';
@@ -38,7 +38,7 @@ export const IeObjectFlowPlayerWrapper: FunctionComponent<IeObjectFlowPlayerWrap
 	hideTimestampsOnMobile,
 	className,
 }): ReactNode => {
-	const fallbackBackgroundColor = useMemo(() => getRandomTertiaryBackgroundColor(), []);
+	const [fallbackBackgroundColor] = useState(getRandomTertiaryBackgroundColor());
 	const isMobile = useIsMobileWidth();
 
 	if (!isAudioVideoFormat(ieObject.dctermsFormat)) {
@@ -80,7 +80,7 @@ export const IeObjectFlowPlayerWrapper: FunctionComponent<IeObjectFlowPlayerWrap
 		token: AdminConfigManager.getConfig().flowplayer.FLOW_PLAYER_TOKEN,
 		dataPlayerId: AdminConfigManager.getConfig().flowplayer.FLOW_PLAYER_ID,
 		ui: isVideoFormat(ieObject.dctermsFormat) ? undefined : 1, // 1 = NO_FULLSCREEN
-		plugins: ['subtitles', 'audio'],
+		plugins: ['subtitles', 'audio', 'keyboard'],
 		peakColorBackground: Color.Gray800,
 		peakColorInactive: Color.Zinc,
 		peakColorActive: Color.SeaGreen,
