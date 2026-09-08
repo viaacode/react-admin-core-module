@@ -1,4 +1,8 @@
-import { AudioWaveFormDisplay, type AudioWaveFormDisplayProps,AudioWaveFormDisplaySize } from '@meemoo/react-components';
+import {
+	AudioWaveFormDisplay,
+	type AudioWaveFormDisplayProps,
+	AudioWaveFormDisplaySize,
+} from '@meemoo/react-components';
 import { Image } from '@viaa/avo2-components';
 import type { FunctionComponent, ReactElement } from 'react';
 import React from 'react';

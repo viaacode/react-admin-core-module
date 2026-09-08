@@ -11,7 +11,6 @@ import { BlockHeroCarouselInaccessibleItem } from '~content-blocks/BlockHeroCaro
 import { AdminCoreIconName } from '~core/config';
 import { IeObjectFlowPlayerWrapper } from '~modules/content-page/components/IeObjectFlowPlayerWrapper/IeObjectFlowPlayerWrapper.tsx';
 import { IeObjectLoadError } from '~modules/content-page/components/IeObjectLoadError';
-import { Color } from '~modules/content-page/types/content-block.types.ts';
 import type { DefaultComponentProps } from '~modules/shared/types/components';
 import { Icon } from '~shared/components/Icon';
 import { tText } from '~shared/helpers/translation-functions.ts';

@@ -1,22 +1,29 @@
-import {AudioWaveFormDisplaySize,Button} from '@meemoo/react-components';
-import {Spinner} from '@viaa/avo2-components';
-import {AvoCoreContentPickerType} from '@viaa/avo2-types';
+import { AudioWaveFormDisplaySize, Button } from '@meemoo/react-components';
+import { Spinner } from '@viaa/avo2-components';
+import { AvoCoreContentPickerType } from '@viaa/avo2-types';
 import clsx from 'clsx';
-import React, {type FunctionComponent, type ReactElement, type ReactNode, useEffect, useMemo, useState,} from 'react';
-import {BlockHeading} from '~content-blocks/BlockHeading';
-import {ImageOrAudioWaveForm} from '~modules/content-page/components/ImageOrAudioWaveForm/ImageOrAudioWaveForm.tsx';
-import {getRandomTertiaryBackgroundColor} from '~modules/content-page/helpers/get-random-tertiary-background-color.ts';
-import type {Color} from '~modules/content-page/types/content-block.types.ts';
-import {IeObjectsService} from '~modules/ie-objects/ie-objects.service.ts';
-import {SmartLink} from '~modules/shared/components/SmartLink/SmartLink';
-import {Icon} from '~shared/components/Icon';
-import {Link} from '~shared/components/Link';
-import {BREAKPOINTS} from '~shared/consts/breakpoints.ts';
-import {getIconFromObjectType} from '~shared/helpers/get-icon-from-object-type';
-import {tText} from '~shared/helpers/translation-functions';
-import {HET_ARCHIEF} from '~shared/types';
-import type {BlockObjectsGridProps, ObjectsGridItem, OrderedTile} from './BlockObjectsGrid.types';
-import {useGetObjectsGridItems} from './hooks/useGetObjectsGridItems';
+import React, {
+	type FunctionComponent,
+	type ReactElement,
+	type ReactNode,
+	useEffect,
+	useMemo,
+	useState,
+} from 'react';
+import { BlockHeading } from '~content-blocks/BlockHeading';
+import { ImageOrAudioWaveForm } from '~modules/content-page/components/ImageOrAudioWaveForm/ImageOrAudioWaveForm.tsx';
+import { getRandomTertiaryBackgroundColor } from '~modules/content-page/helpers/get-random-tertiary-background-color.ts';
+import type { Color } from '~modules/content-page/types/content-block.types.ts';
+import { IeObjectsService } from '~modules/ie-objects/ie-objects.service.ts';
+import { SmartLink } from '~modules/shared/components/SmartLink/SmartLink';
+import { Icon } from '~shared/components/Icon';
+import { Link } from '~shared/components/Link';
+import { BREAKPOINTS } from '~shared/consts/breakpoints.ts';
+import { getIconFromObjectType } from '~shared/helpers/get-icon-from-object-type';
+import { tText } from '~shared/helpers/translation-functions';
+import { HET_ARCHIEF } from '~shared/types';
+import type { BlockObjectsGridProps, ObjectsGridItem, OrderedTile } from './BlockObjectsGrid.types';
+import { useGetObjectsGridItems } from './hooks/useGetObjectsGridItems';
 import './BlockObjectsGrid.scss';
 
 // 4 rows of 4 items per row when there are no fixed items present

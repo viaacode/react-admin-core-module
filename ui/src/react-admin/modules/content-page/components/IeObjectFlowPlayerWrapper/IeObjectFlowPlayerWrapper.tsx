@@ -5,13 +5,13 @@ import { AdminConfigManager } from '~core/config';
 import { getRandomTertiaryBackgroundColor } from '~modules/content-page/helpers';
 import { Color } from '~modules/content-page/types/content-block.types.ts';
 import type { DefaultComponentProps } from '~modules/shared/types/components';
+import { Locale } from '~modules/translations/translations.core.types.ts';
 import {
 	isAudioFormat,
 	isAudioVideoFormat,
 	isVideoFormat,
 } from '~shared/helpers/is-audio-video-format.ts';
 import { useIsMobileWidth } from '~shared/helpers/media-query.ts';
-import {Locale} from "~modules/translations/translations.core.types.ts";
 
 export interface IeObjectFlowPlayerWrapperProps extends DefaultComponentProps {
 	ieObject: HetArchiefPlayableDisplayIeObject;
@@ -100,7 +100,7 @@ export const IeObjectFlowPlayerWrapper: FunctionComponent<IeObjectFlowPlayerWrap
 			colors: {
 				progressColor: '#00CCA9',
 				accentColor: '#009991',
-			}
+			},
 		},
 	};
 
