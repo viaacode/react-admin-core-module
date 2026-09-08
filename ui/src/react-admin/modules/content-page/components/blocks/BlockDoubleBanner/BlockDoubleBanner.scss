@@ -65,7 +65,7 @@ $image-min-height: variables.$g-spacer-unit * 12;
 	}
 
 	&__label {
-		@include typography.sofia-pro-heading-md;
+		@include typography.heading-md;
 	}
 
 	// Mobile keeps only the arrow at the far edge; desktop groups the selected icons and arrow at

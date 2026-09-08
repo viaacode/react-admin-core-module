@@ -8,11 +8,11 @@
 
 	&__annotation {
 		color: colors.$neutral;
-		@include typography.sofia-pro-body-xs(true);
+		@include typography.body-xs(true);
 	}
 
 	&__text {
 		color: colors.$color-gray-1000;
-		@include typography.sofia-pro-body-xs(true);
+		@include typography.body-xs(true);
 	}
 }

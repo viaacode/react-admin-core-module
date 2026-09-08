@@ -122,12 +122,12 @@
 	&__title-text {
 		display: inline;
 
-		@include typography.sofia-pro-heading-2xl(true);
+		@include typography.heading-2xl(true);
 
 		color: colors.$white;
 
 		@media (max-width: variables.$g-bp2) {
-			@include typography.sofia-pro(4rem, 800, 4.4rem, true);
+			@include typography.set-font(4rem, 800, 4.4rem, true);
 		}
 	}
 
@@ -144,7 +144,7 @@
 	&__subtitle-text {
 		color: colors.$neutral;
 
-		@include typography.sofia-pro(2.4rem, 800, 2.6rem, true);
+		@include typography.set-font(2.4rem, 800, 2.6rem, true);
 	}
 
 	&__subtitle-box {
@@ -154,7 +154,7 @@
 	// "Big" keeps the desktop subtitle size on mobile - only "small" shrinks it.
 	&--small &__subtitle-text {
 		@media (max-width: variables.$g-bp2) {
-			@include typography.sofia-pro(2rem, 800, 2.4rem, true);
+			@include typography.set-font(2rem, 800, 2.4rem, true);
 		}
 	}
 }

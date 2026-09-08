@@ -1,11 +1,9 @@
 // Shared text stylings for the "SofiaPro" typeface used across content blocks. Centralised so
 // the same size/weight combo (e.g. body copy) reads identically wherever it's used, instead of
 // each block re-declaring its own font-family/size/weight/line-height by hand.
-$font-family: "SofiaPro", sans-serif;
 
-@mixin sofia-pro($size, $weight: 500, $line-height: null, $important: false) {
+@mixin set-font($size, $weight: 500, $line-height: null, $important: false) {
   @if $important {
-    font-family: $font-family !important;
     font-size: $size !important;
     font-style: normal !important;
     font-weight: $weight !important;
@@ -13,7 +11,6 @@ $font-family: "SofiaPro", sans-serif;
       line-height: $line-height !important;
     }
   } @else {
-    font-family: $font-family;
     font-size: $size;
     font-style: normal;
     font-weight: $weight;
@@ -25,46 +22,46 @@ $font-family: "SofiaPro", sans-serif;
 
 // Presets for the combos used across content blocks - always style through one of these. If a new
 // block needs a size/weight that isn't here, add a preset for it rather than calling
-// `sofia-pro(...)` straight from the block, so the set stays consistent and reusable.
+// `set-font(...)` straight from the block, so the set stays consistent and reusable.
 // The design system's H1: 64/64. Used by the display titles of the full-bleed blocks.
-@mixin sofia-pro-heading-2xl($important: false) {
-  @include sofia-pro(6.4rem, 800, 6.4rem, $important);
+@mixin heading-2xl($important: false) {
+  @include set-font(6.4rem, 800, 6.4rem, $important);
 }
 
-@mixin sofia-pro-heading-xl($important: false) {
-  @include sofia-pro(3.2rem, 800, 4rem, $important);
+@mixin heading-xl($important: false) {
+  @include set-font(3.2rem, 800, 4rem, $important);
 }
 
-@mixin sofia-pro-heading-lg($important: false) {
-  @include sofia-pro(2.4rem, 800, null, $important);
+@mixin heading-lg($important: false) {
+  @include set-font(2.4rem, 800, null, $important);
 }
 
-@mixin sofia-pro-heading-md($important: false) {
-  @include sofia-pro(1.8rem, 800, 2.8rem, $important);
+@mixin heading-md($important: false) {
+  @include set-font(1.8rem, 800, 2.8rem, $important);
 }
 
-@mixin sofia-pro-heading($important: false) {
-  @include sofia-pro(1.6rem, 800, 2.4rem, $important);
+@mixin heading($important: false) {
+  @include set-font(1.6rem, 800, 2.4rem, $important);
 }
 
-@mixin sofia-pro-heading-sm($important: false) {
-  @include sofia-pro(1.4rem, 800, 2rem, $important);
+@mixin heading-sm($important: false) {
+  @include set-font(1.4rem, 800, 2rem, $important);
 }
 
-@mixin sofia-pro-body-xl($important: false) {
-  @include sofia-pro(3.2rem, 500, 4rem, $important);
+@mixin body-xl($important: false) {
+  @include set-font(3.2rem, 500, 4rem, $important);
 }
 
-@mixin sofia-pro-body($important: false) {
-	@include sofia-pro(1.8rem, 500, 2.8rem, $important);
+@mixin body($important: false) {
+	@include set-font(1.8rem, 500, 2.8rem, $important);
 }
 
-@mixin sofia-pro-body-sm($important: false) {
-	@include sofia-pro(1.6rem, 500, 2.4rem, $important);
+@mixin body-sm($important: false) {
+	@include set-font(1.6rem, 500, 2.4rem, $important);
 }
 
-@mixin sofia-pro-body-xs($important: false) {
-	@include sofia-pro(1.4rem, 500, 2rem, $important);
+@mixin body-xs($important: false) {
+	@include set-font(1.4rem, 500, 2rem, $important);
 }
 
 // Single-line truncation with an ellipsis - shared with .u-truncate (utilities/_text.scss).

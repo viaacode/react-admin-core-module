@@ -122,7 +122,7 @@ $pill-font-size: clamp(1.8rem, 1.964cqw, 2.4rem);
 	}
 
 	&__title {
-		@include typography.sofia-pro-heading-2xl;
+		@include typography.heading-2xl;
 
 		// The shapes layer reaches into the title, so the title has to sit in front of it.
 		position: relative;
@@ -131,7 +131,7 @@ $pill-font-size: clamp(1.8rem, 1.964cqw, 2.4rem);
 		text-align: center;
 
 		@media (max-width: variables.$g-bp2) {
-			@include typography.sofia-pro-heading-xl;
+			@include typography.heading-xl;
 
 			margin-bottom: variables.$g-spacer-unit * 6;
 		}
@@ -324,7 +324,7 @@ $pill-font-size: clamp(1.8rem, 1.964cqw, 2.4rem);
 	}
 
 	&__pill {
-		@include typography.sofia-pro-heading-lg;
+		@include typography.heading-lg;
 
 		position: relative;
 		z-index: 1;
@@ -335,7 +335,7 @@ $pill-font-size: clamp(1.8rem, 1.964cqw, 2.4rem);
 		text-align: center;
 
 		@media (max-width: variables.$g-bp2) {
-			@include typography.sofia-pro-heading-md;
+			@include typography.heading-md;
 
 			display: flex;
 			align-items: center;

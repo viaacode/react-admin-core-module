@@ -44,7 +44,7 @@ $pattern-mobile-overshoot: 15rem;
 			background: var(--pattern-color, transparent);
 			padding: variables.$g-spacer-unit * 6;
 
-			@include typography.sofia-pro-body;
+			@include typography.body;
 
 			@media (max-width: variables.$g-bp4) {
 				padding: calc(#{variables.$g-spacer-unit} * 3) calc(#{variables.$g-spacer-unit} * 2.5) !important;

@@ -260,13 +260,8 @@ $hero-carousel-search-radius-desktop: 3.2rem;
 				}
 
 				&-label {
-					overflow: hidden;
-					white-space: nowrap;
-					text-overflow: ellipsis;
-					font-family: typography.$font-family;
-					font-size: 1.8rem;
-					font-style: normal;
-					font-weight: 800;
+					@include typography.truncate;
+					@include typography.heading-md;
 					line-height: 2rem;
 					color: colors.$white;
 				}

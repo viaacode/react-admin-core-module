@@ -9,6 +9,6 @@
 	display: inline-block;
 	padding: variables.$g-spacer-unit;
 
-	@include typography.sofia-pro(1.6rem, 700, 2rem);
+	@include typography.set-font(1.6rem, 700, 2rem);
 	@include typography.truncate;
 }

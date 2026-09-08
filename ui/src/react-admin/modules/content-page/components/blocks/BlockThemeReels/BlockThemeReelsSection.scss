@@ -34,7 +34,7 @@ $slide-image-height-mobile: 12rem;
 			width: fit-content;
 
 			@include typography.truncate;
-			@include typography.sofia-pro-heading-lg;
+			@include typography.heading-lg;
 
 			@media (max-width: variables.$g-bp2) {
 				line-height: 2.6rem;
@@ -43,7 +43,7 @@ $slide-image-height-mobile: 12rem;
 
 		&-subtitle {
 			@include typography.truncate-after-x-lines(3);
-			@include typography.sofia-pro-body-sm;
+			@include typography.body-sm;
 
 			color: colors.$neutral;
 			width: 100%;
@@ -246,7 +246,7 @@ $slide-image-height-mobile: 12rem;
 			&-title {
 				color: colors.$color-gray-1000;
 
-				@include typography.sofia-pro-heading-md;
+				@include typography.heading-md;
 
 				width: 100%;
 
@@ -264,7 +264,7 @@ $slide-image-height-mobile: 12rem;
 				width: 100%;
 				color: colors.$color-gray-1000;
 
-				@include typography.sofia-pro-body-sm;
+				@include typography.body-sm;
 
 
 				@media (max-width: variables.$g-bp2) {
@@ -289,7 +289,7 @@ $slide-image-height-mobile: 12rem;
 		}
 
 		&-label {
-			@include typography.sofia-pro-heading-md;
+			@include typography.heading-md;
 			@include typography.truncate-after-x-lines(3);
 		}
 
