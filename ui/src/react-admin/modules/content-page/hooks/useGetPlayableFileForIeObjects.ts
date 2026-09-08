@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import type { HetArchiefIeObject as IeObject } from '@viaa/avo2-types';
 import { findPeakFile, findPlayableFile } from '~shared/helpers/ie-object-files.ts';
-import { isAudioFormat, isAudioVideoFormat } from '~shared/helpers/is-audio-video-format.ts';
+import { isAudioType, isAudioVideoType } from '~shared/helpers/is-audio-video-newspaper-type.ts';
 import { IeObjectsService } from '~shared/services/ie-objects-service/ie-objects.service.ts';
 import { QUERY_KEYS } from '~shared/types';
 
@@ -20,7 +20,7 @@ export interface PlayableFile {
 
 const resolvePlayableFile = async (ieObject: IeObject): Promise<PlayableFile> => {
 	const playableFile = findPlayableFile(ieObject);
-	const peakFile = isAudioFormat(ieObject.dctermsFormat) ? findPeakFile(ieObject) : undefined;
+	const peakFile = isAudioType(ieObject.dctermsFormat) ? findPeakFile(ieObject) : undefined;
 
 	const [playableUrl, peakfileData] = await Promise.all([
 		playableFile?.id
@@ -51,7 +51,7 @@ const resolvePlayableFile = async (ieObject: IeObject): Promise<PlayableFile> =>
  */
 export const useGetPlayableFileForIeObjects = (ieObjects: (IeObject | undefined)[]) => {
 	const playableObjects = ieObjects.filter(
-		(ieObject): ieObject is IeObject => !!ieObject && isAudioVideoFormat(ieObject.dctermsFormat)
+		(ieObject): ieObject is IeObject => !!ieObject && isAudioVideoType(ieObject.dctermsFormat)
 	);
 
 	return useQuery<Record<string, PlayableFile>>({

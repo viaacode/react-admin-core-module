@@ -16,7 +16,7 @@ import { Locale } from '~modules/translations/translations.core.types.ts';
 import { Icon } from '~shared/components/Icon/Icon';
 import { SmartLink } from '~shared/components/SmartLink/SmartLink.tsx';
 import { getIconFromObjectType } from '~shared/helpers/get-icon-from-object-type.ts';
-import { isAudioVideoFormat, isNewspaperFormat } from '~shared/helpers/is-audio-video-format.ts';
+import { isAudioVideoType, isNewspaperType } from '~shared/helpers/is-audio-video-newspaper-type.ts';
 import { tText } from '~shared/helpers/translation-functions';
 import { ThemesService } from '~shared/services/themes-service/themes.service.ts';
 import type { Theme } from '~shared/services/themes-service/themes.types';
@@ -57,7 +57,7 @@ export const BlockDriekeuzespelerModal: FunctionComponent<BlockDriekeuzespelerMo
 	const locale = AdminConfigManager.getConfig().locale || Locale.Nl;
 	const themeName = locale === Locale.En ? theme?.nameEn : theme?.nameNl;
 
-	const isPlayable = isAudioVideoFormat(ieObject?.dctermsFormat);
+	const isPlayable = isAudioVideoType(ieObject?.dctermsFormat);
 
 	// The shared player and metadata panel describe an object the way playable-display-data does.
 	const displayIeObject: HetArchiefPlayableDisplayIeObject | undefined = ieObject && {
@@ -106,7 +106,7 @@ export const BlockDriekeuzespelerModal: FunctionComponent<BlockDriekeuzespelerMo
 		// The viewer is injected rather than living here because the host resolves a ticket-service
 		// token per page. Only a newspaper has the pages it needs; anything else falls back to the
 		// thumbnail.
-		if (IiifViewer && isNewspaperFormat(ieObject.dctermsFormat)) {
+		if (IiifViewer && isNewspaperType(ieObject.dctermsFormat)) {
 			return (
 				<div className="c-driekeuzespeler-modal__iiif-viewer">
 					<IiifViewer ieObject={ieObject} title={ieObject.name} />

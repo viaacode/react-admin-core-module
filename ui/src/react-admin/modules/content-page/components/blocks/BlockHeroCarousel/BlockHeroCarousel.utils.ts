@@ -2,7 +2,7 @@ import { type HetArchiefIeObjectType, HetArchiefSimpleIeObjectType } from '@viaa
 import type { RefObject } from 'react';
 import { flushSync } from 'react-dom';
 import type { HeroCarouselSlideItem } from '~content-blocks/BlockHeroCarousel/BlockHeroCarousel.types.ts';
-import { isAudioVideoFormat } from '~shared/helpers/is-audio-video-format.ts';
+import { isAudioVideoType } from '~shared/helpers/is-audio-video-newspaper-type.ts';
 import { mapDcTermsFormatToSimpleType } from '~shared/helpers/map-format-to-type.ts';
 
 const FALLBACK_THUMB_WIDTH_REM = 12;
@@ -52,7 +52,7 @@ export function isSlideEmpty(item: HeroCarouselSlideItem | undefined): boolean {
 // The player only goes up once there is something to play: a slide is rendered on what the block
 // config knows, well before its playable url has been resolved.
 export function isSlidePlayerReady(item: HeroCarouselSlideItem | undefined): boolean {
-	return isAudioVideoFormat(item?.dctermsFormat) && !!item?.playableUrl;
+	return isAudioVideoType(item?.dctermsFormat) && !!item?.playableUrl;
 }
 
 export function getPxPerRem(): number {
