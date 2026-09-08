@@ -1,4 +1,4 @@
-import { AudioWaveFormDisplay, type AudioWaveFormDisplayProps } from '@meemoo/react-components';
+import { AudioWaveFormDisplay, type AudioWaveFormDisplayProps,AudioWaveFormDisplaySize } from '@meemoo/react-components';
 import { Image } from '@viaa/avo2-components';
 import type { FunctionComponent, ReactElement } from 'react';
 import React from 'react';
@@ -15,7 +15,7 @@ export const ImageOrAudioWaveForm: FunctionComponent<ImageOrAudioWaveFormProps> 
 	imageAlt,
 	waveColor,
 	backgroundColor,
-	size = 'small',
+	size = AudioWaveFormDisplaySize.Small,
 }): ReactElement => {
 	if (!imageSrc) {
 		return <></>;

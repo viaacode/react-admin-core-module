@@ -11,6 +11,7 @@ import {
 	isVideoFormat,
 } from '~shared/helpers/is-audio-video-format.ts';
 import { useIsMobileWidth } from '~shared/helpers/media-query.ts';
+import {Locale} from "~modules/translations/translations.core.types.ts";
 
 export interface IeObjectFlowPlayerWrapperProps extends DefaultComponentProps {
 	ieObject: HetArchiefPlayableDisplayIeObject;
@@ -64,6 +65,7 @@ export const IeObjectFlowPlayerWrapper: FunctionComponent<IeObjectFlowPlayerWrap
 	// it's the only slide that prefers it over the (lower-res) thumbnail.
 	const imageSrc = ieObject.thumbnailUrl || '';
 	const isAudio = isAudioFormat(ieObject.dctermsFormat);
+	const locale = AdminConfigManager.getConfig().locale || Locale.Nl;
 
 	const shared: Partial<FlowPlayerProps> = {
 		poster: poster ?? imageSrc,
@@ -94,6 +96,7 @@ export const IeObjectFlowPlayerWrapper: FunctionComponent<IeObjectFlowPlayerWrap
 			peakColorActive: Color.Teal40,
 			peakColorInactive: Color.White,
 			peakColorBackground: backgroundColor || fallbackBackgroundColor,
+			locale,
 			colors: {
 				progressColor: '#00CCA9',
 				accentColor: '#009991',
