@@ -703,6 +703,7 @@
   "modules/content-page/components/blocks/block-driekeuzespeler/block-driekeuzespeler___naam-van-de-interesse": "Naam van de interesse",
   "modules/content-page/components/blocks/block-driekeuzespeler/block-driekeuzespeler___naam-van-de-interesse-is-verplicht": "Naam van de interesse is verplicht",
   "modules/content-page/components/blocks/block-driekeuzespeler/block-driekeuzespeler___object-over-interest": "Over {{interest}}",
+  "modules/content-page/components/blocks/block-driekeuzespeler/block-driekeuzespeler___sluit-venster": "Sluit venster",
   "modules/content-page/components/blocks/block-driekeuzespeler/block-driekeuzespeler___tekstkleur": "Tekstkleur",
   "modules/content-page/components/blocks/block-driekeuzespeler/block-driekeuzespeler___titel": "Titel",
   "modules/content-page/components/blocks/block-driekeuzespeler/block-driekeuzespeler___titel-is-verplicht": "Titel is verplicht",
