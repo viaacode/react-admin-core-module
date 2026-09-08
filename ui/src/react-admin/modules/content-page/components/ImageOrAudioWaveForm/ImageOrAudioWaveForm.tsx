@@ -1,11 +1,12 @@
+import {
+	AudioWaveFormDisplay,
+	type AudioWaveFormDisplayProps,
+	AudioWaveFormDisplaySize,
+} from '@meemoo/react-components';
 import { Image } from '@viaa/avo2-components';
 import type { FunctionComponent, ReactElement } from 'react';
 import React from 'react';
 import { AdminConfigManager } from '~core/config';
-import {
-	AudioWaveFormDisplay,
-	type AudioWaveFormDisplayProps,
-} from './AudioWaveFormDisplay/AudioWaveFormDisplay.tsx';
 
 export interface ImageOrAudioWaveFormProps extends Omit<AudioWaveFormDisplayProps, 'ariaLabel'> {
 	imageSrc?: string;
@@ -18,7 +19,7 @@ export const ImageOrAudioWaveForm: FunctionComponent<ImageOrAudioWaveFormProps> 
 	imageAlt,
 	waveColor,
 	backgroundColor,
-	size = 'small',
+	size = AudioWaveFormDisplaySize.Small,
 }): ReactElement => {
 	if (!imageSrc) {
 		return <></>;

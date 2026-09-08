@@ -1,14 +1,17 @@
 import { FlowPlayer, type FlowPlayerProps } from '@meemoo/react-components';
 import type { HetArchiefPlayableDisplayIeObject } from '@viaa/avo2-types';
-import React, { type FunctionComponent, type ReactNode } from 'react';
+import React, {type FunctionComponent, type ReactNode, useState} from 'react';
 import { AdminConfigManager } from '~core/config';
+import { getRandomTertiaryBackgroundColor } from '~modules/content-page/helpers/get-random-tertiary-background-color.ts';
 import { Color } from '~modules/content-page/types/content-block.types.ts';
 import type { DefaultComponentProps } from '~modules/shared/types/components';
+import { Locale } from '~modules/translations/translations.core.types.ts';
 import {
 	isAudioFormat,
 	isAudioVideoFormat,
 	isVideoFormat,
 } from '~shared/helpers/is-audio-video-format.ts';
+import { useIsMobileWidth } from '~shared/helpers/media-query.ts';
 
 export interface IeObjectFlowPlayerWrapperProps extends DefaultComponentProps {
 	ieObject: HetArchiefPlayableDisplayIeObject;
@@ -19,6 +22,8 @@ export interface IeObjectFlowPlayerWrapperProps extends DefaultComponentProps {
 	onEnded?: () => void;
 	isMuted?: boolean;
 	onMutedChange?: (muted: boolean) => void;
+	backgroundColor?: string;
+	hideTimestampsOnMobile?: boolean;
 }
 
 export const IeObjectFlowPlayerWrapper: FunctionComponent<IeObjectFlowPlayerWrapperProps> = ({
@@ -29,8 +34,13 @@ export const IeObjectFlowPlayerWrapper: FunctionComponent<IeObjectFlowPlayerWrap
 	onEnded,
 	isMuted,
 	onMutedChange,
+	backgroundColor,
+	hideTimestampsOnMobile,
 	className,
 }): ReactNode => {
+	const [fallbackBackgroundColor] = useState(getRandomTertiaryBackgroundColor());
+	const isMobile = useIsMobileWidth();
+
 	if (!isAudioVideoFormat(ieObject.dctermsFormat)) {
 		return null;
 	}
@@ -54,6 +64,8 @@ export const IeObjectFlowPlayerWrapper: FunctionComponent<IeObjectFlowPlayerWrap
 	// The active slide is the only one big enough to warrant the full-size newspaper image, so
 	// it's the only slide that prefers it over the (lower-res) thumbnail.
 	const imageSrc = ieObject.thumbnailUrl || '';
+	const isAudio = isAudioFormat(ieObject.dctermsFormat);
+	const locale = AdminConfigManager.getConfig().locale || Locale.Nl;
 
 	const shared: Partial<FlowPlayerProps> = {
 		poster: poster ?? imageSrc,
@@ -68,14 +80,28 @@ export const IeObjectFlowPlayerWrapper: FunctionComponent<IeObjectFlowPlayerWrap
 		token: AdminConfigManager.getConfig().flowplayer.FLOW_PLAYER_TOKEN,
 		dataPlayerId: AdminConfigManager.getConfig().flowplayer.FLOW_PLAYER_ID,
 		ui: isVideoFormat(ieObject.dctermsFormat) ? undefined : 1, // 1 = NO_FULLSCREEN
-		plugins: ['subtitles', 'audio'],
+		plugins: ['subtitles', 'audio', 'keyboard'],
 		peakColorBackground: Color.Gray800,
 		peakColorInactive: Color.Zinc,
 		peakColorActive: Color.SeaGreen,
 		peakHeightFactor: 0.6,
 		preload: 'metadata',
 		className,
-		// Not passing start and end times, since they are already in the snippet video url: browse.mp4?t=x,y&token=token-containing-x-y
+		controlsVariant: 'custom',
+		customControlsConfig: {
+			showFullscreen: !isAudio,
+			showTitleOverlay: true,
+			showTimestamps: hideTimestampsOnMobile ? !isMobile : true,
+			peakMode: 'generic',
+			peakColorActive: Color.Teal40,
+			peakColorInactive: Color.White,
+			peakColorBackground: backgroundColor || fallbackBackgroundColor,
+			locale,
+			colors: {
+				progressColor: '#00CCA9',
+				accentColor: '#009991',
+			},
+		},
 	};
 
 	if (isAudioFormat(ieObject.dctermsFormat)) {

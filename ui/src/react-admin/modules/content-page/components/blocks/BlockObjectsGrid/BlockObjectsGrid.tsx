@@ -1,4 +1,4 @@
-import { Button } from '@meemoo/react-components';
+import { AudioWaveFormDisplaySize, Button } from '@meemoo/react-components';
 import { Spinner } from '@viaa/avo2-components';
 import { AvoCoreContentPickerType } from '@viaa/avo2-types';
 import clsx from 'clsx';
@@ -232,7 +232,7 @@ export const BlockObjectsGrid: FunctionComponent<BlockObjectsGridProps> = ({
 								imageSrc={item.thumbnailUrl}
 								imageAlt={item.name}
 								backgroundColor={tileBackgroundColor}
-								size={isFixed ? 'large' : 'small'}
+								size={isFixed ? AudioWaveFormDisplaySize.Large : AudioWaveFormDisplaySize.Small}
 								className="c-block-objects-grid__tile-image"
 							/>
 						) : (

@@ -88,6 +88,7 @@ export enum Color {
 	AlertBackground = '#FFFFCC',
 	AlertAccent = '#E9E994',
 	TealBright200 = '#CFE3E9',
+	Teal40 = '#81ECDC',
 	BorderColor = '#3FB1D6',
 	InputBoxShadow = '#69C2DF',
 	Transparent = 'TRANSPARENT',

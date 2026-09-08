@@ -107,6 +107,8 @@ export const BlockHeroCarouselActiveSlide: FunctionComponent<BlockHeroCarouselAc
 				onMutedChange={onMutedChange}
 				onEnded={onEnded}
 				poster={imageSrc}
+				backgroundColor={item?.backgroundColor}
+				hideTimestampsOnMobile={true}
 			/>
 		);
 	}
