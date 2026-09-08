@@ -2,7 +2,7 @@ import { FlowPlayer, type FlowPlayerProps } from '@meemoo/react-components';
 import type { HetArchiefPlayableDisplayIeObject } from '@viaa/avo2-types';
 import React, { type FunctionComponent, type ReactNode, useMemo } from 'react';
 import { AdminConfigManager } from '~core/config';
-import { getRandomTertiaryBackgroundColor } from '~modules/content-page/helpers';
+import { getRandomTertiaryBackgroundColor } from '~modules/content-page/helpers/get-random-tertiary-background-color.ts';
 import { Color } from '~modules/content-page/types/content-block.types.ts';
 import type { DefaultComponentProps } from '~modules/shared/types/components';
 import { Locale } from '~modules/translations/translations.core.types.ts';
