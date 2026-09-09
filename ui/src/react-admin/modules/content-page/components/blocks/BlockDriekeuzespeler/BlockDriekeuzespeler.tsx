@@ -68,9 +68,10 @@ export const BlockDriekeuzespeler: FunctionComponent<BlockDriekeuzespelerProps> 
 	// An index rather than the interest itself, so it survives the renderer handing us a rebuilt array.
 	const [openedIndex, setOpenedIndex] = useState<number | null>(null);
 
-	// The tile a pointer opened the modal from. Escape closes the modal without moving focus, and the
-	// stack's pose follows :focus-within, so that tile would stay in its opened pose under a cursor
-	// that sits somewhere else. Null after a keyboard open: there the focus belongs to the visitor.
+	// The tile a pointer opened the modal from. react-modal returns focus to it on close by any
+	// method, and the stack's pose follows :focus-visible, so that returned focus would otherwise
+	// leave the tile looking hovered under a cursor that has moved on. Null after a keyboard open:
+	// there the focus already belongs to the visitor, and blurring it would fight their own tabbing.
 	const openerRef = useRef<HTMLButtonElement | null>(null);
 
 	// Only the three on screen are resolved, not all two hundred a block may hold. The pids are part
@@ -212,8 +213,13 @@ export const BlockDriekeuzespeler: FunctionComponent<BlockDriekeuzespelerProps> 
 				isFetching={isFetchingObjects || isFetchingPlayableFile}
 				onClose={() => {
 					setOpenedIndex(null);
-					openerRef.current?.blur();
+
+					// react-modal only returns focus to the opener once its own close effect runs, which is
+					// after this handler -- blurring here would just be undone a moment later. Deferred a
+					// tick so it lands after that return.
+					const opener = openerRef.current;
 					openerRef.current = null;
+					setTimeout(() => opener?.blur(), 0);
 				}}
 			/>
 		</div>
