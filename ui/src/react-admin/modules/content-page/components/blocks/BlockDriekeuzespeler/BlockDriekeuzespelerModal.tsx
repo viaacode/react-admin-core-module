@@ -144,7 +144,6 @@ export const BlockDriekeuzespelerModal: FunctionComponent<BlockDriekeuzespelerMo
 				>
 					<Button
 						variants={['block', 'silver', 'sm']}
-						onClick={onClose}
 						label={tText(
 							'modules/content-page/components/blocks/block-driekeuzespeler/block-driekeuzespeler___toon-meer-over-thema',
 							{ theme: themeName },
