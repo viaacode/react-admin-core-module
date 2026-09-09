@@ -1,9 +1,112 @@
 @use "../../../../shared/styles/settings/colors" as colors;
 @use "../../../../shared/styles/settings/variables" as variables;
 
-$card-radius: variables.$g-spacer-unit * 1.5;
+// Matches the shuffle button's own hover shade (hetarchief-client's `$shade`): admin-core can't
+// reach that client-side variable, so the value is mirrored here rather than shared.
+$close-hover-shade: #505050;
+
+// Modal chrome
+// ---
+// `Modal` from @meemoo/react-components ships no styles of its own, so the look that used to come
+// from avo's `size="extra-large"`, `scrollable` and `borderless` props lives here instead. Scoped
+// to this block, so no other modal in the app is touched.
+
+// `Modal`'s default root class is the generic `c-modal`, which avo2-components still styles
+// globally for other modals in the app (background, width, radius, shadow, its own z-index).
+// `rootClassName` below replaces it outright, so this modal never inherits or collides with that.
+.c-driekeuzespeler-modal__overlay {
+	position: fixed;
+	inset: 0;
+	z-index: 50;
+	display: flex;
+	padding: variables.$g-spacer-unit * 3;
+
+	// A takeover of whatever it shows reads darker than a dialog floating over the page.
+	background-color: rgba(colors.$color-gray-shadow, 0.96);
+
+	@media (max-width: variables.$g-bp2) {
+		padding: variables.$g-spacer-unit * 2.5;
+	}
+}
 
 .c-driekeuzespeler-modal {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	width: 140rem;
+	max-height: 100%;
+	margin: auto;
+	background-color: colors.$white;
+
+	@media (max-width: variables.$g-bp2) {
+		width: 100%;
+	}
+
+	// react-modal focuses the dialog itself on open, and the app paints a focus ring on whatever has
+	// focus. This element is never reached by keyboard, so the ring is noise around the whole modal.
+	&:focus {
+		outline: none;
+	}
+
+	// No title bar: the heading floats over the body rather than reserving a row above it, so the
+	// media reaches the top edge of the modal. Only the close button shows.
+	&__heading {
+		position: absolute;
+		top: 0;
+		right: 0;
+		z-index: 1;
+		background-color: transparent;
+	}
+
+	// Kept in the markup for the dialog's accessible name, never drawn.
+	&__title-wrapper {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		margin: -1px;
+		padding: 0;
+		overflow: hidden;
+		clip-path: inset(50%);
+		white-space: nowrap;
+	}
+
+	// A square tile in the corner, over the media. Compounded onto both of `Button`'s own classes for
+	// higher specificity: its base rules (rounded, sized, teal) would otherwise tie this on
+	// specificity and have to be out-raced on source order alone.
+	&__close.c-button.c-button--icon {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: variables.$g-spacer-unit * 8;
+		height: variables.$g-spacer-unit * 8;
+		padding: 0;
+		border: 0;
+		border-radius: 0;
+		background-color: colors.$color-gray-1000;
+		color: colors.$white;
+		cursor: pointer;
+		transition: background-color 0.2s ease;
+
+		&:hover {
+			background-color: $close-hover-shade;
+		}
+
+		.o-svg-icon svg path {
+			fill: currentcolor;
+		}
+	}
+
+	// The media runs edge to edge, so the body carries no padding of its own. Its own stacking
+	// context, so nothing the player draws inside it (flowplayer's own overlays use z-index too) can
+	// ever paint above the close button in `&__heading`, no matter what value it picks.
+	&__content {
+		position: relative;
+		z-index: 0;
+		flex: 1 1 auto;
+		overflow-y: auto;
+		padding: 0;
+	}
+
 	&__media {
 		display: flex;
 		align-items: center;
@@ -77,14 +180,10 @@ $card-radius: variables.$g-spacer-unit * 1.5;
 		font-weight: 700;
 	}
 
-	// Mobile insets the media and stacks the metadata card under it, with the theme CTA on its own row.
+	// Mobile keeps the same flush media, and stacks the theme CTA under the metadata.
 	@media (max-width: variables.$g-bp2) {
 		&__media {
-			width: calc(100% - #{variables.$g-spacer-unit * 5});
-			margin: 0 auto;
-			border-radius: $card-radius $card-radius 0 0;
-
-			// Tighter than desktop's 70vh: the stacked metadata card needs the room.
+			// Tighter than desktop's 70vh: the stacked metadata needs the room.
 			max-height: 45vh;
 			flex: 0 0 auto;
 		}
@@ -95,9 +194,6 @@ $card-radius: variables.$g-spacer-unit * 1.5;
 			flex-direction: column;
 			align-items: stretch;
 			background-color: colors.$white;
-			border-radius: 0 0 $card-radius $card-radius;
-			width: calc(100% - #{variables.$g-spacer-unit * 5});
-			margin: 0 auto;
 		}
 
 		&__divider {

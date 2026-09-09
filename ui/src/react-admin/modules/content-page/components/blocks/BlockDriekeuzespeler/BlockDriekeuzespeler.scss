@@ -71,15 +71,17 @@ $tile-hover-duration: 450ms;
 $tile-hover-easing: cubic-bezier(0.22, 1, 0.36, 1);
 $tile-rest-duration: 700ms;
 
-// Taking over as the active tile runs in two stages: the tile steps outward, and only then swells
-// back into its place while the stack behind it reorders. The reference stack steps out by 60 of
-// its 950, over 190ms, and hops 12 up halfway through the swell.
-$tile-step-out-distance: math.div(60, $stack-width) * 100cqw; // 6.316cqw
+// Taking over as the active tile runs in two stages, quicker and sharper at first, then settling
+// in more slowly, and hops 12 up halfway through. A timing split only now, not a position -- see
+// the keyframe further down. ARC-3813
 $tile-step-out-duration: 270ms;
 $tile-step-out-easing: cubic-bezier(0.4, 0, 0.8, 0.4);
 $tile-settle-lift: 1.2rem;
 $tile-activate-duration: $tile-step-out-duration + $tile-rest-duration; // 690ms
 $tile-step-out-stop: math.div($tile-step-out-duration, $tile-activate-duration) * 100%; // 27.536%
+// Unitless, for the scale blend below: a plain fraction multiplies against a CSS calc() cleanly,
+// where a percentage would not.
+$tile-step-out-fraction: math.div($tile-step-out-duration, $tile-activate-duration);
 $tile-settle-stop: $tile-step-out-stop + 0.45 * (100% - $tile-step-out-stop); // 60.145%
 
 // A border width, not spacing, so not a spacer multiple.
@@ -97,6 +99,16 @@ $pill-height-mobile: variables.$g-spacer-unit * 6;
 // The type scales with the stage, or a two-word interest overflows its tile between the mobile
 // breakpoint and 1440. The bounds are the mobile and desktop sizes of the design.
 $pill-font-size: clamp(1.8rem, 1.964cqw, 2.4rem);
+
+// Registered so the browser treats it as a length, which is what makes it eligible for the
+// `transition` below: an unregistered custom property can only snap between values, never ease,
+// so a bystander tile losing its shift the instant it becomes the hovered one would otherwise
+// jump straight to 0 before the activate keyframe even reads it. ARC-3813
+@property --tile-shift {
+	syntax: "<length>";
+	inherits: true;
+	initial-value: 0;
+}
 
 .c-driekeuzespeler {
 	position: relative;
@@ -186,7 +198,6 @@ $pill-font-size: clamp(1.8rem, 1.964cqw, 2.4rem);
 		&:nth-child(1) {
 			--tile-tilt: #{-$tile-tilt};
 			--tile-tilt-active: #{-$tile-active-tilt};
-			--tile-step-out: calc(#{$tile-step-out-distance} * -1);
 
 			left: $hit-left-desktop;
 		}
@@ -201,7 +212,6 @@ $pill-font-size: clamp(1.8rem, 1.964cqw, 2.4rem);
 		&:nth-child(3) {
 			--tile-tilt: #{$tile-tilt};
 			--tile-tilt-active: #{$tile-active-tilt};
-			--tile-step-out: #{$tile-step-out-distance};
 
 			left: $hit-left-desktop + 2 * $tile-offset-desktop;
 		}
@@ -251,10 +261,12 @@ $pill-font-size: clamp(1.8rem, 1.964cqw, 2.4rem);
 		background-color: var(--tile-color, #{colors.$color-gray-100});
 		box-shadow: $tile-shadow-inactive;
 
-		// Transform and shadow only, so no layout work per frame.
+		// Transform and shadow only, so no layout work per frame. `--tile-shift` rides along so it can
+		// still be mid-transition when the activate keyframe below starts reading it.
 		transition:
 			transform $tile-rest-duration $tile-hover-easing,
-			box-shadow $tile-rest-duration $tile-hover-easing;
+			box-shadow $tile-rest-duration $tile-hover-easing,
+			--tile-shift $tile-rest-duration $tile-hover-easing;
 
 		// The white band on the active tile. Always present, revealed only when active, so it does not
 		// fade in halfway through the grow.
@@ -316,7 +328,7 @@ $pill-font-size: clamp(1.8rem, 1.964cqw, 2.4rem);
 		}
 	}
 
-	// The tile's tilt and scale on :focus-within is motion, not a focus indicator, and it is gone
+	// The tile's tilt and scale on :focus-visible is motion, not a focus indicator, and it is gone
 	// altogether under prefers-reduced-motion. The keyboard user needs a real outline, and it belongs
 	// on the tile rather than on the zone the button fills, so it hugs what the visitor sees.
 	&__tile:has(&__tile-button:focus-visible) &__tile-visual {
@@ -402,9 +414,18 @@ $pill-font-size: clamp(1.8rem, 1.964cqw, 2.4rem);
 	}
 }
 
-// Stage one steps the tile outward at its resting size, stage two swells it back into its place.
-// `--tile-scale` is deliberately not read here: the hover rule below sets it for the tile the
-// animation holds at the end, so reading it would start the first frame already grown.
+// Position moves only via `--tile-shift`. A tile that's already shifted as another tile's
+// bystander has its own settle under way on that same property; adding a fixed step-out motion on
+// top of it fought over the same axis and produced a visible reversal. One source of motion only,
+// so a tile only ever travels towards wherever it currently sits. ARC-3813
+
+// The step-out stop still marks where the easing switches and where scale gets the blended value
+// below, rather than following one unbroken curve for the whole animation.
+
+// The tiles overlap at rest (a fanned stack), so z-index cannot go active from frame one: an
+// inactive-sized tile would paint over its neighbour before any motion justifies the reorder.
+// z-index climbs gradually across this same stage too (the browser interpolates it numerically,
+// the same as any other property), so it never gets ahead of the tile's actual position.
 @keyframes c-driekeuzespeler-tile-activate {
 	0% {
 		z-index: $tile-z-inactive;
@@ -416,8 +437,11 @@ $pill-font-size: clamp(1.8rem, 1.964cqw, 2.4rem);
 	#{$tile-step-out-stop} {
 		// The stack only reorders once the tile is clear of it.
 		z-index: $tile-z-active;
-		transform: translate(calc(-50% + var(--tile-shift, 0px) + var(--tile-step-out, 0px)), -50%)
-			rotate(var(--tile-tilt, 0deg)) scale($tile-scale-inactive);
+		transform: translate(calc(-50% + var(--tile-shift, 0px)), -50%)
+			rotate(var(--tile-tilt, 0deg))
+			scale(
+				calc(#{$tile-scale-inactive} + #{$tile-step-out-fraction} * (var(--tile-scale-active) - #{$tile-scale-inactive}))
+			);
 		animation-timing-function: $tile-hover-easing;
 	}
 
@@ -449,24 +473,36 @@ $pill-font-size: clamp(1.8rem, 1.964cqw, 2.4rem);
 // Every rule below is triggered by the hover zone and lands on the visual inside it. Splitting the
 // two is what stops the jitter: the zone the pointer tests against never moves.
 
+// `:focus-within` would also stay true after the modal closes: react-modal returns focus to the
+// tile that opened it, and a mouse-driven return leaves the tile looking stuck in its hover pose
+// while the visitor has moved on. `:focus-visible` only holds the pose for a focus a keyboard
+// visitor can see, which is what a returned focus is unless Escape (not the mouse) closed the modal.
+// Written out rather than through `:is()`: `:has()` cannot appear inside `:is()`, so every rule
+// below spells out the hover and the focus-visible branch as separate, comma-joined selectors.
+
 // No hover or focus anywhere in the stack: the middle tile is the active one. `:has` drives the
 // siblings with no javascript, as BlockHeroCarousel does.
-.c-driekeuzespeler__tiles:not(:has(.c-driekeuzespeler__tile:is(:hover, :focus-within)))
+.c-driekeuzespeler__tiles:not(
+		:has(.c-driekeuzespeler__tile:hover, .c-driekeuzespeler__tile .c-driekeuzespeler__tile-button:focus-visible)
+	)
 	.c-driekeuzespeler__tile:nth-child(2)
 	.c-driekeuzespeler__tile-visual {
 	@include tile-active;
 }
 
 // A hovered tile takes over the active look whole, so the stack always has one tile at that size.
-.c-driekeuzespeler__tile:is(:hover, :focus-within) .c-driekeuzespeler__tile-visual {
+.c-driekeuzespeler__tile:hover .c-driekeuzespeler__tile-visual,
+.c-driekeuzespeler__tile:has(:focus-visible) .c-driekeuzespeler__tile-visual {
 	@include tile-active;
 }
 
 // Only a side tile travels: the middle one is already the active tile, and hovering it moves the
 // two beside it instead. `forwards`, so the tile holds the last frame until the pointer leaves --
 // the transform transition then carries it back to rest on its own.
-.c-driekeuzespeler__tile:nth-child(1):is(:hover, :focus-within) .c-driekeuzespeler__tile-visual,
-.c-driekeuzespeler__tile:nth-child(3):is(:hover, :focus-within) .c-driekeuzespeler__tile-visual {
+.c-driekeuzespeler__tile:nth-child(1):hover .c-driekeuzespeler__tile-visual,
+.c-driekeuzespeler__tile:nth-child(1):has(:focus-visible) .c-driekeuzespeler__tile-visual,
+.c-driekeuzespeler__tile:nth-child(3):hover .c-driekeuzespeler__tile-visual,
+.c-driekeuzespeler__tile:nth-child(3):has(:focus-visible) .c-driekeuzespeler__tile-visual {
 	animation:
 		c-driekeuzespeler-tile-activate $tile-activate-duration linear forwards,
 		c-driekeuzespeler-tile-settle $tile-activate-duration linear;
@@ -475,7 +511,10 @@ $pill-font-size: clamp(1.8rem, 1.964cqw, 2.4rem);
 // The stack makes room for the hovered tile: its neighbour steps aside by a nudge, and the tile on
 // the far side slides inward and drops behind the middle one. Delayed by the first stage, so the
 // stack waits for the hovered tile to clear it.
-.c-driekeuzespeler__tiles:has(.c-driekeuzespeler__tile:nth-child(1):is(:hover, :focus-within)) {
+.c-driekeuzespeler__tiles:has(
+		.c-driekeuzespeler__tile:nth-child(1):hover,
+		.c-driekeuzespeler__tile:nth-child(1) .c-driekeuzespeler__tile-button:focus-visible
+	) {
 	.c-driekeuzespeler__tile:nth-child(2) .c-driekeuzespeler__tile-visual {
 		--tile-shift: var(--tile-nudge);
 
@@ -490,7 +529,10 @@ $pill-font-size: clamp(1.8rem, 1.964cqw, 2.4rem);
 	}
 }
 
-.c-driekeuzespeler__tiles:has(.c-driekeuzespeler__tile:nth-child(3):is(:hover, :focus-within)) {
+.c-driekeuzespeler__tiles:has(
+		.c-driekeuzespeler__tile:nth-child(3):hover,
+		.c-driekeuzespeler__tile:nth-child(3) .c-driekeuzespeler__tile-button:focus-visible
+	) {
 	.c-driekeuzespeler__tile:nth-child(2) .c-driekeuzespeler__tile-visual {
 		--tile-shift: calc(var(--tile-nudge) * -1);
 
@@ -507,7 +549,10 @@ $pill-font-size: clamp(1.8rem, 1.964cqw, 2.4rem);
 
 // The middle tile is the active one at rest, so hovering it grows nothing. Both side tiles give it
 // room instead, which is the only thing that moves.
-.c-driekeuzespeler__tiles:has(.c-driekeuzespeler__tile:nth-child(2):is(:hover, :focus-within)) {
+.c-driekeuzespeler__tiles:has(
+		.c-driekeuzespeler__tile:nth-child(2):hover,
+		.c-driekeuzespeler__tile:nth-child(2) .c-driekeuzespeler__tile-button:focus-visible
+	) {
 	.c-driekeuzespeler__tile:nth-child(1) .c-driekeuzespeler__tile-visual {
 		--tile-shift: calc(var(--tile-push) * -1);
 	}

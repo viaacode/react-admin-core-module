@@ -1,5 +1,5 @@
-import { Button } from '@meemoo/react-components';
-import { Modal, ModalBody } from '@viaa/avo2-components';
+import { Button, Modal } from '@meemoo/react-components';
+import { Icon as AvoIcon, IconName as AvoIconName } from '@viaa/avo2-components';
 import {
 	AvoCoreContentPickerType,
 	type HetArchiefPlayableDisplayIeObject,
@@ -159,14 +159,19 @@ export const BlockDriekeuzespelerModal: FunctionComponent<BlockDriekeuzespelerMo
 	return (
 		<Modal
 			isOpen={isOpen}
-			size="extra-large"
-			// A tall object would otherwise push the metadata card off a phone screen with no way back.
-			scrollable
 			onClose={onClose}
-			className="c-driekeuzespeler-modal"
-			// No visible title bar. The title stays, visually hidden, so the dialog keeps its
-			// accessible name.
-			borderless
+			rootClassName="c-driekeuzespeler-modal"
+			// No visible title bar: the heading is floated over the media and its text is hidden, so
+			// only the close button shows. The title itself stays in the markup, so the dialog keeps
+			// its accessible name.
+			closeButtonProps={{
+				icon: <AvoIcon name={AvoIconName.close} />,
+				ariaLabel: tText(
+					'modules/content-page/components/blocks/block-driekeuzespeler/block-driekeuzespeler___sluit-venster',
+					undefined,
+					[HET_ARCHIEF]
+				),
+			}}
 			title={
 				interest
 					? tText(
@@ -177,33 +182,31 @@ export const BlockDriekeuzespelerModal: FunctionComponent<BlockDriekeuzespelerMo
 					: undefined
 			}
 		>
-			<ModalBody>
-				<div className="c-driekeuzespeler-modal__media">
-					{isFetching ? (
-						// `output` carries the status role, so the wait is announced and not only drawn.
-						<output className="c-driekeuzespeler-modal__loading" aria-live="polite">
-							{tText(
-								'modules/content-page/components/blocks/block-driekeuzespeler/block-driekeuzespeler___bezig-met-laden',
-								undefined,
-								[HET_ARCHIEF]
-							)}
-						</output>
-					) : (
-						renderMedia()
-					)}
-				</div>
-
-				{!!displayIeObject && (
-					<div className="c-driekeuzespeler-modal__metadata-row">
-						<IeObjectMetadata
-							ieObject={displayIeObject}
-							fallbackTitle={interest?.name || ''}
-							className="c-driekeuzespeler-modal__metadata"
-						/>
-						{renderThemeCta()}
-					</div>
+			<div className="c-driekeuzespeler-modal__media">
+				{isFetching ? (
+					// `output` carries the status role, so the wait is announced and not only drawn.
+					<output className="c-driekeuzespeler-modal__loading" aria-live="polite">
+						{tText(
+							'modules/content-page/components/blocks/block-driekeuzespeler/block-driekeuzespeler___bezig-met-laden',
+							undefined,
+							[HET_ARCHIEF]
+						)}
+					</output>
+				) : (
+					renderMedia()
 				)}
-			</ModalBody>
+			</div>
+
+			{!!displayIeObject && (
+				<div className="c-driekeuzespeler-modal__metadata-row">
+					<IeObjectMetadata
+						ieObject={displayIeObject}
+						fallbackTitle={interest?.name || ''}
+						className="c-driekeuzespeler-modal__metadata"
+					/>
+					{renderThemeCta()}
+				</div>
+			)}
 		</Modal>
 	);
 };
