@@ -7,9 +7,10 @@
 // from avo's `size="extra-large"`, `scrollable` and `borderless` props lives here instead. Scoped
 // to this block, so no other modal in the app is touched.
 
-// The backdrop is react-modal's overlay, whose class is fixed at `c-modal__overlay`. Selecting it
-// through the modal it contains keeps the rule off every other modal.
-.c-modal__overlay:has(.c-driekeuzespeler-modal) {
+// `Modal`'s default root class is the generic `c-modal`, which avo2-components still styles
+// globally for other modals in the app (background, width, radius, shadow, its own z-index).
+// `rootClassName` below replaces it outright, so this modal never inherits or collides with that.
+.c-driekeuzespeler-modal__overlay {
 	position: fixed;
 	inset: 0;
 	z-index: 50;
@@ -32,11 +33,6 @@
 	max-height: 100%;
 	margin: auto;
 	background-color: colors.$white;
-	border-radius: 0.3rem;
-	box-shadow:
-		0 0 1.6rem rgba(colors.$color-gray-900, 0.25),
-		0 0 2.4rem rgba(colors.$color-gray-900, 0.15),
-		0 0 3.2rem rgba(colors.$color-gray-900, 0.05);
 
 	@media (max-width: variables.$g-bp2) {
 		width: 100%;
@@ -50,7 +46,7 @@
 
 	// No title bar: the heading floats over the body rather than reserving a row above it, so the
 	// media reaches the top edge of the modal. Only the close button shows.
-	.c-modal__heading {
+	&__heading {
 		position: absolute;
 		top: 0;
 		right: 0;
@@ -59,7 +55,7 @@
 	}
 
 	// Kept in the markup for the dialog's accessible name, never drawn.
-	.c-modal__title-wrapper {
+	&__title-wrapper {
 		position: absolute;
 		width: 1px;
 		height: 1px;
@@ -70,9 +66,10 @@
 		white-space: nowrap;
 	}
 
-	// A square tile in the corner, over the media. A global button rule rounds every `c-button` into
-	// a circle and sizes it, so both are overridden here.
-	.c-modal__close {
+	// A square tile in the corner, over the media. Compounded onto both of `Button`'s own classes for
+	// higher specificity: its base rules (rounded, sized, teal) would otherwise tie this on
+	// specificity and have to be out-raced on source order alone.
+	&__close.c-button.c-button--icon {
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -81,7 +78,7 @@
 		padding: 0;
 		border: 0;
 		border-radius: 0;
-		background-color: colors.$color-gray-shadow;
+		background-color: colors.$color-gray-1000;
 		color: colors.$white;
 		cursor: pointer;
 
@@ -90,8 +87,12 @@
 		}
 	}
 
-	// The media runs edge to edge, so the body carries no padding of its own.
-	.c-modal__content {
+	// The media runs edge to edge, so the body carries no padding of its own. Its own stacking
+	// context, so nothing the player draws inside it (flowplayer's own overlays use z-index too) can
+	// ever paint above the close button in `&__heading`, no matter what value it picks.
+	&__content {
+		position: relative;
+		z-index: 0;
 		flex: 1 1 auto;
 		overflow-y: auto;
 		padding: 0;

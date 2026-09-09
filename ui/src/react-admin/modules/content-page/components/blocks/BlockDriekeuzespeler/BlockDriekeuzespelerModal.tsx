@@ -157,7 +157,7 @@ export const BlockDriekeuzespelerModal: FunctionComponent<BlockDriekeuzespelerMo
 		<Modal
 			isOpen={isOpen}
 			onClose={onClose}
-			className="c-driekeuzespeler-modal"
+			rootClassName="c-driekeuzespeler-modal"
 			// No visible title bar: the heading is floated over the media and its text is hidden, so
 			// only the close button shows. The title itself stays in the markup, so the dialog keeps
 			// its accessible name.
