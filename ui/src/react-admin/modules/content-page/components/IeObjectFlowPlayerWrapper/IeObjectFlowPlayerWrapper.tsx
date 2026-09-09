@@ -1,6 +1,6 @@
 import { FlowPlayer, type FlowPlayerProps } from '@meemoo/react-components';
 import type { HetArchiefPlayableDisplayIeObject } from '@viaa/avo2-types';
-import React, {type FunctionComponent, type ReactNode, useState} from 'react';
+import React, { type FunctionComponent, type ReactNode, useState } from 'react';
 import { AdminConfigManager } from '~core/config';
 import { getRandomTertiaryBackgroundColor } from '~modules/content-page/helpers/get-random-tertiary-background-color.ts';
 import { Color } from '~modules/content-page/types/content-block.types.ts';

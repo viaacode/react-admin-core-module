@@ -118,14 +118,20 @@ export const BlockImageGrid: FunctionComponent<BlockImageGridProps> = ({
 				let elementAriaLabel: string;
 
 				if (element.imageLabel?.text) {
-					elementAriaLabel = tText('aria-label block image grid item met label', {
-						label: element.imageLabel.text,
-						title,
-					});
+					elementAriaLabel = tText(
+						'modules/content-page/components/blocks/block-image-grid/block-image-grid___aria-label-block-image-grid-item-met-label',
+						{
+							label: element.imageLabel.text,
+							title,
+						}
+					);
 				} else {
-					elementAriaLabel = tText('aria-label block image grid item', {
-						title,
-					});
+					elementAriaLabel = tText(
+						'modules/content-page/components/blocks/block-image-grid/block-image-grid___aria-label-block-image-grid-item',
+						{
+							title,
+						}
+					);
 				}
 
 				return (

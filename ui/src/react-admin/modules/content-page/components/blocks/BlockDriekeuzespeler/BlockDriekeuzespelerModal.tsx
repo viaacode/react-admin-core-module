@@ -16,7 +16,10 @@ import { Locale } from '~modules/translations/translations.core.types.ts';
 import { Icon } from '~shared/components/Icon/Icon';
 import { SmartLink } from '~shared/components/SmartLink/SmartLink.tsx';
 import { getIconFromObjectType } from '~shared/helpers/get-icon-from-object-type.ts';
-import { isAudioVideoType, isNewspaperType } from '~shared/helpers/is-audio-video-newspaper-type.ts';
+import {
+	isAudioVideoType,
+	isNewspaperType,
+} from '~shared/helpers/is-audio-video-newspaper-type.ts';
 import { tText } from '~shared/helpers/translation-functions';
 import { ThemesService } from '~shared/services/themes-service/themes.service.ts';
 import type { Theme } from '~shared/services/themes-service/themes.types';
