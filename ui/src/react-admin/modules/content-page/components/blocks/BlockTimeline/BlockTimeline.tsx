@@ -199,11 +199,8 @@ export const BlockTimeline: FunctionComponent<BlockTimelineProps> = ({
 		</div>
 	);
 
-	/** Copyright, title, description and -- for object nodes -- the object's metadata. */
-	const renderNodeText = (
-		node: TimelineNodeBlockComponentState,
-		ieObject: HetArchiefPlayableDisplayIeObject | undefined
-	): ReactNode => (
+	/** Copyright, title and description. */
+	const renderNodeText = (node: TimelineNodeBlockComponentState): ReactNode => (
 		<div className="c-block-timeline__node-text">
 			<CopyrightAttribution
 				title={node.copyrightTitle}
@@ -220,7 +217,6 @@ export const BlockTimeline: FunctionComponent<BlockTimelineProps> = ({
 					className="c-block-timeline__node-description u-background-text-primary u-background-text-links"
 				/>
 			)}
-			{ieObject && <IeObjectMetadata ieObject={ieObject} fallbackTitle={node.title} />}
 		</div>
 	);
 
@@ -273,27 +269,30 @@ export const BlockTimeline: FunctionComponent<BlockTimelineProps> = ({
 					/>
 					{formatDateToDayMonthNameYear(node.date, locale)}
 				</time>
-				<div
-					className={clsx('c-block-timeline__node-content', {
-						'c-block-timeline__node-content--has-background': !!backgroundColor,
-						'c-block-timeline__node-content--has-image': hasImage,
-						'c-block-timeline__node-content--has-object': hasObject,
-						'u-background-text-colors': hasNodeTextColors,
-					})}
-					style={
-						backgroundColor
-							? ({
-									'--c-block-timeline-node-bg': backgroundColor,
-									...nodeTextColorVariables,
-								} as CSSProperties)
-							: undefined
-					}
-				>
-					{hasFailedObject && renderObjectLoadError()}
-					{isLoadingObject && renderObjectLoading(node)}
-					{ieObject && renderObjectMedia(node, ieObject)}
-					{hasImage && renderNodeImage(node)}
-					{renderNodeText(node, ieObject ?? undefined)}
+				<div className="c-block-timeline__node-content">
+					<div
+						className={clsx('c-block-timeline__node-body', {
+							'c-block-timeline__node-body--has-background': !!backgroundColor,
+							'c-block-timeline__node-body--has-image': hasImage,
+							'c-block-timeline__node-body--has-object': hasObject,
+							'u-background-text-colors': hasNodeTextColors,
+						})}
+						style={
+							backgroundColor
+								? ({
+										'--c-block-timeline-node-bg': backgroundColor,
+										...nodeTextColorVariables,
+									} as CSSProperties)
+								: undefined
+						}
+					>
+						{hasFailedObject && renderObjectLoadError()}
+						{isLoadingObject && renderObjectLoading(node)}
+						{ieObject && renderObjectMedia(node, ieObject)}
+						{hasImage && renderNodeImage(node)}
+						{renderNodeText(node)}
+					</div>
+					{ieObject && <IeObjectMetadata ieObject={ieObject} fallbackTitle={node.title} />}
 				</div>
 			</li>
 		);
