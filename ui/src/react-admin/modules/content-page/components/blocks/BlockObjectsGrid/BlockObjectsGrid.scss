@@ -1,3 +1,4 @@
+@use "sass:math";
 @use "../../../../shared/styles/settings/variables" as variables;
 @use "../../../../shared/styles/settings/colors" as colors;
 @use "../../../../shared/styles/mixins/typography" as typography;
@@ -183,6 +184,7 @@ $max-item-height: 37.6rem;
 		flex-direction: column;
 		flex: 1 1 auto;
 		min-width: 0;
+		gap: math.div(variables.$g-spacer-unit, 2);
 	}
 
 	.c-block-objects-grid__tile-type-icon {
