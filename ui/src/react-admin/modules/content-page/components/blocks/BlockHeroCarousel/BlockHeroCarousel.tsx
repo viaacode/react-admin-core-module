@@ -13,7 +13,7 @@ import { BlockHeroCarouselCarousel } from '~content-blocks/BlockHeroCarousel/Blo
 import { BlockHeroCarouselSearch } from '~content-blocks/BlockHeroCarousel/BlockHeroCarouselSearch.tsx';
 import { getRandomTertiaryBackgroundColor } from '~modules/content-page/helpers/get-random-tertiary-background-color.ts';
 import { useGetIeObjectsPlayableDisplayData } from '~modules/content-page/hooks/useGetIeObjectsPlayableDisplayData.ts';
-import { isAudioVideoFormat } from '~shared/helpers/is-audio-video-format.ts';
+import { isAudioVideoType } from '~shared/helpers/is-audio-video-newspaper-type.ts';
 import { toSeconds } from '~shared/helpers/parsers/duration.ts';
 
 export interface BlockHeroCarouselProps extends DefaultComponentProps {
@@ -63,7 +63,7 @@ export const BlockHeroCarousel: FunctionComponent<BlockHeroCarouselProps> = ({
 	const backgroundColors = useMemo(
 		() =>
 			elements.map((element) =>
-				isAudioVideoFormat(element.mediaItem?.dctermsFormat as HetArchiefIeObjectType)
+				isAudioVideoType(element.mediaItem?.dctermsFormat as HetArchiefIeObjectType)
 					? getRandomTertiaryBackgroundColor()
 					: Color.Mustard
 			),

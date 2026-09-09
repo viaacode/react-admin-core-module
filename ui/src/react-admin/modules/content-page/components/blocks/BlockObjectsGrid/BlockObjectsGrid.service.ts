@@ -5,7 +5,7 @@ import type { IeObjectsSearchBody } from '~core/config/config.types';
 import { CustomError } from '~shared/helpers/custom-error';
 import { fetchWithLogout, fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
 import { getProxyUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config';
-import { isAudioFormat } from '~shared/helpers/is-audio-video-format.ts';
+import { isAudioType } from '~shared/helpers/is-audio-video-newspaper-type.ts';
 import type { PickerItem } from '~shared/types/content-picker';
 import { type ObjectsGridItem, OrderProperty } from './BlockObjectsGrid.types';
 
@@ -45,7 +45,7 @@ const mapRawToGridItem = (raw: RawIeObject): ObjectsGridItem => {
 		// The audio still stands in for the ugly speaker thumbnail, but only for an object the user
 		// may actually hear -- it is a display substitute, never a signal that access was granted
 		thumbnailUrl:
-			isAudioFormat(type) && raw.hasAccessToEssence
+			isAudioType(type) && raw.hasAccessToEssence
 				? AdminConfigManager.getConfig().components.defaultAudioStill
 				: raw.thumbnailUrl,
 	};

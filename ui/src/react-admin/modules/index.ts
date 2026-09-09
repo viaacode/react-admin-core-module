@@ -79,6 +79,13 @@ export type {
 	FlowPlayerWrapperProps,
 } from './shared/components/FlowPlayerWrapper/FlowPlayerWrapper.types';
 // Helpers
+export {
+	isAudioType,
+	isAudioVideoType,
+	isNewspaperType,
+	isVideoType,
+} from './shared/helpers/is-audio-video-newspaper-type';
+export { mapDcTermsFormatToSimpleType } from './shared/helpers/map-format-to-type';
 export { sanitizeHtml } from './shared/helpers/sanitize';
 export { SanitizePreset } from './shared/helpers/sanitize/presets';
 export { toggleSortOrder } from './shared/helpers/toggle-sort-order';

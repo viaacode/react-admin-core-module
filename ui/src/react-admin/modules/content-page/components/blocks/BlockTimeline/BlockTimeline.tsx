@@ -18,7 +18,7 @@ import Html from '~shared/components/Html/Html';
 import { Icon } from '~shared/components/Icon/Icon';
 import { formatDateToDayMonthNameYear, getYear } from '~shared/helpers/formatters/date';
 import { getIconFromObjectType } from '~shared/helpers/get-icon-from-object-type';
-import { isAudioVideoFormat } from '~shared/helpers/is-audio-video-format.ts';
+import { isAudioVideoType } from '~shared/helpers/is-audio-video-newspaper-type.ts';
 import { snippetTimeToSeconds } from '~shared/helpers/parsers/duration';
 import { SanitizePreset } from '~shared/helpers/sanitize/presets';
 import { tText } from '~shared/helpers/translation-functions';
@@ -152,7 +152,7 @@ export const BlockTimeline: FunctionComponent<BlockTimelineProps> = ({
 		const thumbnail = ieObject.newspaperImage || ieObject.thumbnailUrl;
 
 		const renderMedia = (): ReactNode => {
-			if (ieObject.hasAccessToEssence && isAudioVideoFormat(ieObject.dctermsFormat)) {
+			if (ieObject.hasAccessToEssence && isAudioVideoType(ieObject.dctermsFormat)) {
 				return (
 					<IeObjectFlowPlayerWrapper
 						className="c-block-timeline__node-object-media"

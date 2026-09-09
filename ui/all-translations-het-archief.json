@@ -2703,6 +2703,26 @@
     "id": "",
     "app": "HET_ARCHIEF",
     "component": "ADMIN_CORE",
+    "location": "modules/content-page/const/get-content-block-type-options",
+    "key": "driekeuzespeler",
+    "language": "nl",
+    "value": "Driekeuzespeler",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/const/get-content-block-type-options",
+    "key": "driekeuzespeler",
+    "language": "en",
+    "value": "Driekeuzespeler",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
     "location": "admin/content-block/content-block",
     "key": "voeg-een-content-blok-toe",
     "language": "nl",
@@ -3577,46 +3597,6 @@
     "key": "uu-mm-ss",
     "language": "en",
     "value": "hh:mm:ss",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/helpers/snippet-time-fields",
-    "key": "object",
-    "language": "nl",
-    "value": "Object",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/helpers/snippet-time-fields",
-    "key": "object",
-    "language": "en",
-    "value": "Object",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/helpers/snippet-time-fields",
-    "key": "een-object-is-verplicht",
-    "language": "nl",
-    "value": "Een object is verplicht",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/helpers/snippet-time-fields",
-    "key": "een-object-is-verplicht",
-    "language": "en",
-    "value": "An object is required",
     "value_type": "TEXT"
   },
   {
@@ -12163,6 +12143,46 @@
     "id": "",
     "app": "HET_ARCHIEF",
     "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/defaults",
+    "key": "object",
+    "language": "nl",
+    "value": "Object",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/defaults",
+    "key": "object",
+    "language": "en",
+    "value": "Object",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/defaults",
+    "key": "een-object-is-verplicht",
+    "language": "nl",
+    "value": "Een object is verplicht",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/defaults",
+    "key": "een-object-is-verplicht",
+    "language": "en",
+    "value": "Een object is verplicht",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
     "location": "admin/content-block/helpers/generators/search",
     "key": "search",
     "language": "nl",
@@ -17876,7 +17896,7 @@
     "location": "modules/content-page/components/blocks/block-driekeuzespeler/block-driekeuzespeler",
     "key": "driekeuzespeler",
     "language": "en",
-    "value": "Three-choice player",
+    "value": "Driekeuzespeler",
     "value_type": "TEXT"
   },
   {
@@ -17896,7 +17916,7 @@
     "location": "modules/content-page/components/blocks/block-driekeuzespeler/block-driekeuzespeler",
     "key": "titel",
     "language": "en",
-    "value": "Title",
+    "value": "Titel",
     "value_type": "TEXT"
   },
   {
@@ -17916,67 +17936,7 @@
     "location": "modules/content-page/components/blocks/block-driekeuzespeler/block-driekeuzespeler",
     "key": "titel-is-verplicht",
     "language": "en",
-    "value": "Title is required",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-driekeuzespeler/block-driekeuzespeler",
-    "key": "label-van-de-shuffle-knop",
-    "language": "nl",
-    "value": "Label van de shuffleknop",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-driekeuzespeler/block-driekeuzespeler",
-    "key": "label-van-de-shuffle-knop",
-    "language": "en",
-    "value": "Shuffle button label",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-driekeuzespeler/block-driekeuzespeler",
-    "key": "label-van-de-shuffle-knop-is-verplicht",
-    "language": "nl",
-    "value": "Label van de shuffleknop is verplicht",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-driekeuzespeler/block-driekeuzespeler",
-    "key": "label-van-de-shuffle-knop-is-verplicht",
-    "language": "en",
-    "value": "Shuffle button label is required",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-driekeuzespeler/block-driekeuzespeler",
-    "key": "kleuren-van-de-tegel",
-    "language": "nl",
-    "value": "Tegel",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-driekeuzespeler/block-driekeuzespeler",
-    "key": "kleuren-van-de-tegel",
-    "language": "en",
-    "value": "Tile",
+    "value": "Titel is verplicht",
     "value_type": "TEXT"
   },
   {
@@ -17996,7 +17956,87 @@
     "location": "modules/content-page/components/blocks/block-driekeuzespeler/block-driekeuzespeler",
     "key": "kleuren-van-de-interesse-op-tegel",
     "language": "en",
-    "value": "Colours of the interest on tile",
+    "value": "Kleuren van de interesse op tegel",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-driekeuzespeler/block-driekeuzespeler",
+    "key": "achtergrondkleur",
+    "language": "nl",
+    "value": "Achtergrondkleur",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-driekeuzespeler/block-driekeuzespeler",
+    "key": "achtergrondkleur",
+    "language": "en",
+    "value": "Achtergrondkleur",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-driekeuzespeler/block-driekeuzespeler",
+    "key": "tekstkleur",
+    "language": "nl",
+    "value": "Tekstkleur",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-driekeuzespeler/block-driekeuzespeler",
+    "key": "tekstkleur",
+    "language": "en",
+    "value": "Tekstkleur",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-driekeuzespeler/block-driekeuzespeler",
+    "key": "label-van-de-shuffle-knop",
+    "language": "nl",
+    "value": "Label van de shuffleknop",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-driekeuzespeler/block-driekeuzespeler",
+    "key": "label-van-de-shuffle-knop",
+    "language": "en",
+    "value": "Label van de shuffleknop",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-driekeuzespeler/block-driekeuzespeler",
+    "key": "label-van-de-shuffle-knop-is-verplicht",
+    "language": "nl",
+    "value": "Label van de shuffleknop is verplicht",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-driekeuzespeler/block-driekeuzespeler",
+    "key": "label-van-de-shuffle-knop-is-verplicht",
+    "language": "en",
+    "value": "Label van de shuffleknop is verplicht",
     "value_type": "TEXT"
   },
   {
@@ -18016,7 +18056,7 @@
     "location": "modules/content-page/components/blocks/block-driekeuzespeler/block-driekeuzespeler",
     "key": "interesse",
     "language": "en",
-    "value": "Interest",
+    "value": "Interesse",
     "value_type": "TEXT"
   },
   {
@@ -18036,7 +18076,7 @@
     "location": "modules/content-page/components/blocks/block-driekeuzespeler/block-driekeuzespeler",
     "key": "naam-van-de-interesse",
     "language": "en",
-    "value": "Name of the interest",
+    "value": "Naam van de interesse",
     "value_type": "TEXT"
   },
   {
@@ -18056,7 +18096,7 @@
     "location": "modules/content-page/components/blocks/block-driekeuzespeler/block-driekeuzespeler",
     "key": "naam-van-de-interesse-is-verplicht",
     "language": "en",
-    "value": "Name of the interest is required",
+    "value": "Naam van de interesse is verplicht",
     "value_type": "TEXT"
   },
   {
@@ -18076,27 +18116,7 @@
     "location": "modules/content-page/components/blocks/block-driekeuzespeler/block-driekeuzespeler",
     "key": "gerelateerd-thema",
     "language": "en",
-    "value": "Related theme",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-driekeuzespeler/block-driekeuzespeler",
-    "key": "een-thema-is-verplicht",
-    "language": "nl",
-    "value": "Een thema is verplicht",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-driekeuzespeler/block-driekeuzespeler",
-    "key": "een-thema-is-verplicht",
-    "language": "en",
-    "value": "A theme is required",
+    "value": "Gerelateerd thema",
     "value_type": "TEXT"
   },
   {
@@ -18116,7 +18136,7 @@
     "location": "modules/content-page/components/blocks/block-driekeuzespeler/block-driekeuzespeler",
     "key": "voeg-een-interesse-toe",
     "language": "en",
-    "value": "Add an interest",
+    "value": "Voeg een interesse toe",
     "value_type": "TEXT"
   },
   {
@@ -18136,7 +18156,7 @@
     "location": "modules/content-page/components/blocks/block-driekeuzespeler/block-driekeuzespeler",
     "key": "verwijder-deze-interesse",
     "language": "en",
-    "value": "Delete this interest",
+    "value": "Verwijder deze interesse",
     "value_type": "TEXT"
   },
   {
@@ -18144,9 +18164,9 @@
     "app": "HET_ARCHIEF",
     "component": "ADMIN_CORE",
     "location": "modules/content-page/components/blocks/block-driekeuzespeler/block-driekeuzespeler",
-    "key": "toon-me-iets-anders",
+    "key": "toon-meer-over-thema",
     "language": "nl",
-    "value": "Toon me iets anders",
+    "value": "Toon meer rond \"{{theme}}\"",
     "value_type": "TEXT"
   },
   {
@@ -18154,76 +18174,36 @@
     "app": "HET_ARCHIEF",
     "component": "ADMIN_CORE",
     "location": "modules/content-page/components/blocks/block-driekeuzespeler/block-driekeuzespeler",
-    "key": "toon-me-iets-anders",
+    "key": "toon-meer-over-thema",
     "language": "en",
-    "value": "Show me something else",
+    "value": "Toon meer rond \"{{theme}}\"",
     "value_type": "TEXT"
   },
   {
     "id": "",
     "app": "HET_ARCHIEF",
     "component": "ADMIN_CORE",
-    "location": "modules/content-page/const/get-content-block-type-options",
-    "key": "driekeuzespeler",
+    "location": "modules/content-page/components/blocks/block-driekeuzespeler/block-driekeuzespeler",
+    "key": "object-over-interest",
     "language": "nl",
-    "value": "Driekeuzespeler",
+    "value": "Over {{interest}}",
     "value_type": "TEXT"
   },
   {
     "id": "",
     "app": "HET_ARCHIEF",
     "component": "ADMIN_CORE",
-    "location": "modules/content-page/const/get-content-block-type-options",
-    "key": "driekeuzespeler",
+    "location": "modules/content-page/components/blocks/block-driekeuzespeler/block-driekeuzespeler",
+    "key": "object-over-interest",
     "language": "en",
-    "value": "Three-choice player",
+    "value": "Over {{interest}}",
     "value_type": "TEXT"
   },
   {
     "id": "",
     "app": "HET_ARCHIEF",
     "component": "ADMIN_CORE",
-    "location": "react-admin/modules/shared/components/theme-select/theme-select",
-    "key": "kies-een-thema",
-    "language": "nl",
-    "value": "Kies een thema",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/shared/components/theme-select/theme-select",
-    "key": "kies-een-thema",
-    "language": "en",
-    "value": "Choose a theme",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/shared/components/theme-select/theme-select",
-    "key": "geen-themas-gevonden",
-    "language": "nl",
-    "value": "Geen thema's gevonden",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/shared/components/theme-select/theme-select",
-    "key": "geen-themas-gevonden",
-    "language": "en",
-    "value": "No themes found",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/shared/components/theme-select/theme-select",
+    "location": "modules/content-page/components/blocks/block-driekeuzespeler/block-driekeuzespeler",
     "key": "bezig-met-laden",
     "language": "nl",
     "value": "Bezig met laden",
@@ -18233,10 +18213,10 @@
     "id": "",
     "app": "HET_ARCHIEF",
     "component": "ADMIN_CORE",
-    "location": "react-admin/modules/shared/components/theme-select/theme-select",
+    "location": "modules/content-page/components/blocks/block-driekeuzespeler/block-driekeuzespeler",
     "key": "bezig-met-laden",
     "language": "en",
-    "value": "Loading",
+    "value": "Bezig met laden",
     "value_type": "TEXT"
   },
   {
@@ -20537,6 +20517,46 @@
     "key": "alignatie",
     "language": "en",
     "value": "Allignment",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-image-grid/block-image-grid",
+    "key": "aria-label-block-image-grid-item-met-label",
+    "language": "nl",
+    "value": "aria-{{label}} block image grid item met {{label}}",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-image-grid/block-image-grid",
+    "key": "aria-label-block-image-grid-item-met-label",
+    "language": "en",
+    "value": "aria-{{label}} block image grid item met {{label}}",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-image-grid/block-image-grid",
+    "key": "aria-label-block-image-grid-item",
+    "language": "nl",
+    "value": "aria-label block image grid item",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-image-grid/block-image-grid",
+    "key": "aria-label-block-image-grid-item",
+    "language": "en",
+    "value": "aria-label block image grid item",
     "value_type": "TEXT"
   },
   {
@@ -24497,6 +24517,26 @@
     "key": "keuze-van-visuele-elementen-is-verplicht",
     "language": "en",
     "value": "Choosing visual elements is required",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/content-page/components/blocks/block-timeline/block-timeline",
+    "key": "een-object-is-verplicht",
+    "language": "nl",
+    "value": "Een object is verplicht",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/content-page/components/blocks/block-timeline/block-timeline",
+    "key": "een-object-is-verplicht",
+    "language": "en",
+    "value": "Een object is verplicht",
     "value_type": "TEXT"
   },
   {
@@ -28543,6 +28583,26 @@
     "id": "",
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
+    "location": "modules/account/const/my-material-requests",
+    "key": "count-ongelezen-berichten",
+    "language": "nl",
+    "value": "{{count}} ongelezen berichten",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/const/my-material-requests",
+    "key": "count-ongelezen-berichten",
+    "language": "en",
+    "value": "{{count}} ongelezen berichten",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
     "location": "modules/cp/const/material-requests",
     "key": "aangevraagd-op",
     "language": "nl",
@@ -30757,6 +30817,26 @@
     "key": "kopieer-het-email-adres-van-de-aanvrager-naar-je-klemboard",
     "language": "en",
     "value": "Kopieer het email adres van de aanvrager naar je klemboard",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/const/material-requests",
+    "key": "count-ongelezen-berichten",
+    "language": "nl",
+    "value": "{{count}} ongelezen berichten",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/admin/const/material-requests",
+    "key": "count-ongelezen-berichten",
+    "language": "en",
+    "value": "{{count}} ongelezen berichten",
     "value_type": "TEXT"
   },
   {
@@ -33117,6 +33197,26 @@
     "key": "kopieer-het-email-adres-van-de-aanvrager-naar-je-klemboard",
     "language": "en",
     "value": "Kopieer het email adres van de aanvrager naar je klemboard",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/cp/const/material-requests",
+    "key": "count-ongelezen-berichten",
+    "language": "nl",
+    "value": "{{count}} ongelezen berichten",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/cp/const/material-requests",
+    "key": "count-ongelezen-berichten",
+    "language": "en",
+    "value": "{{count}} ongelezen berichten",
     "value_type": "TEXT"
   },
   {
@@ -50764,6 +50864,26 @@
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
     "location": "modules/shared/components/media-card/media-card",
+    "key": "object-type-niet-gekend",
+    "language": "nl",
+    "value": "Object type niet gekend",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/shared/components/media-card/media-card",
+    "key": "object-type-niet-gekend",
+    "language": "en",
+    "value": "Object type unknown",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/shared/components/media-card/media-card",
     "key": "audio",
     "language": "nl",
     "value": "Audio",
@@ -50837,26 +50957,6 @@
     "key": "afbeelding",
     "language": "en",
     "value": "Image",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/shared/components/media-card/media-card",
-    "key": "object-type-niet-gekend",
-    "language": "nl",
-    "value": "Object type niet gekend",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/shared/components/media-card/media-card",
-    "key": "object-type-niet-gekend",
-    "language": "en",
-    "value": "Object type unknown",
     "value_type": "TEXT"
   },
   {
@@ -50957,6 +51057,46 @@
     "key": "dit-object-heeft-childrencount-kind-objecten",
     "language": "en",
     "value": "Dit object heeft {{childrenCount}} kind objecten",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/shared/components/media-card/media-card",
+    "key": "num-of-children-items",
+    "language": "nl",
+    "value": "{{numOfChildren}} items",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/shared/components/media-card/media-card",
+    "key": "num-of-children-items",
+    "language": "en",
+    "value": "{{numOfChildren}} items",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/shared/components/media-card/media-card",
+    "key": "1-item",
+    "language": "nl",
+    "value": "1 item",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/shared/components/media-card/media-card",
+    "key": "1-item",
+    "language": "en",
+    "value": "1 item",
     "value_type": "TEXT"
   },
   {
@@ -58683,6 +58823,46 @@
     "id": "",
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
+    "location": "modules/visitor-space/components/theme-select/theme-select",
+    "key": "geen-themas-gevonden",
+    "language": "nl",
+    "value": "Geen themas gevonden",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/theme-select/theme-select",
+    "key": "geen-themas-gevonden",
+    "language": "en",
+    "value": "Geen themas gevonden",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/theme-select/theme-select",
+    "key": "kies-een-thema",
+    "language": "nl",
+    "value": "Kies een thema",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/theme-select/theme-select",
+    "key": "kies-een-thema",
+    "language": "en",
+    "value": "Kies een thema",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
     "location": "modules/visitor-space/components/visitor-space-navigation/visitor-space-navigation",
     "key": "geen-contactinformatie-beschikbaar",
     "language": "nl",
@@ -59217,6 +59397,26 @@
     "key": "tijdsperiode-van-de-inhoud",
     "language": "en",
     "value": "Time period of the content",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/utils/advanced-filters/metadata",
+    "key": "thema",
+    "language": "nl",
+    "value": "Thema",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/utils/advanced-filters/metadata",
+    "key": "thema",
+    "language": "en",
+    "value": "Thema",
     "value_type": "TEXT"
   },
   {
@@ -59877,106 +60077,6 @@
     "key": "sluiten",
     "language": "en",
     "value": "Close",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/shared/components/media-card/media-card",
-    "key": "num-of-children-items",
-    "language": "nl",
-    "value": "{{numOfChildren}} items",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/shared/components/media-card/media-card",
-    "key": "num-of-children-items",
-    "language": "en",
-    "value": "{{numOfChildren}} items",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/shared/components/media-card/media-card",
-    "key": "1-item",
-    "language": "nl",
-    "value": "1 item",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/shared/components/media-card/media-card",
-    "key": "1-item",
-    "language": "en",
-    "value": "1 item",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/theme-select/theme-select",
-    "key": "geen-themas-gevonden",
-    "language": "nl",
-    "value": "Geen themas gevonden",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/theme-select/theme-select",
-    "key": "geen-themas-gevonden",
-    "language": "en",
-    "value": "Geen themas gevonden",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/theme-select/theme-select",
-    "key": "kies-een-thema",
-    "language": "nl",
-    "value": "Kies een thema",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/theme-select/theme-select",
-    "key": "kies-een-thema",
-    "language": "en",
-    "value": "Kies een thema",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/utils/advanced-filters/metadata",
-    "key": "thema",
-    "language": "nl",
-    "value": "Thema",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/utils/advanced-filters/metadata",
-    "key": "thema",
-    "language": "en",
-    "value": "Thema",
     "value_type": "TEXT"
   },
   {
@@ -61957,6 +62057,86 @@
     "key": "name-heeft-zelf-de-aanvraag-geannuleerd",
     "language": "en",
     "value": "{{name}} has cancelled the access request themselves.",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "BACKEND",
+    "location": "modules/notifications/services/notifications",
+    "key": "je-hebt-nieuwe-berichten-op-je-materiaalaanvragen",
+    "language": "nl",
+    "value": "Je hebt nieuwe berichten op je materiaalaanvragen",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "BACKEND",
+    "location": "modules/notifications/services/notifications",
+    "key": "je-hebt-nieuwe-berichten-op-je-materiaalaanvragen",
+    "language": "en",
+    "value": "Je hebt nieuwe berichten op je materiaalaanvragen",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "BACKEND",
+    "location": "modules/notifications/services/notifications",
+    "key": "je-hebt-count-ongelezen-berichten-op-jouw-materiaalaanvragen",
+    "language": "nl",
+    "value": "Je hebt {{count}} ongelezen berichten op jouw materiaalaanvragen",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "BACKEND",
+    "location": "modules/notifications/services/notifications",
+    "key": "je-hebt-count-ongelezen-berichten-op-jouw-materiaalaanvragen",
+    "language": "en",
+    "value": "Je hebt {{count}} ongelezen berichten op jouw materiaalaanvragen",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "BACKEND",
+    "location": "modules/notifications/services/notifications",
+    "key": "je-hebt-nieuwe-berichten-op-materiaalaanvragen-die-je-beheert",
+    "language": "nl",
+    "value": "Je hebt nieuwe berichten op materiaalaanvragen die je beheert",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "BACKEND",
+    "location": "modules/notifications/services/notifications",
+    "key": "je-hebt-nieuwe-berichten-op-materiaalaanvragen-die-je-beheert",
+    "language": "en",
+    "value": "Je hebt nieuwe berichten op materiaalaanvragen die je beheert",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "BACKEND",
+    "location": "modules/notifications/services/notifications",
+    "key": "je-hebt-count-ongelezen-berichten-op-materiaalaanvragen-die-je-beheert",
+    "language": "nl",
+    "value": "Je hebt {{count}} ongelezen berichten op materiaalaanvragen die je beheert",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "BACKEND",
+    "location": "modules/notifications/services/notifications",
+    "key": "je-hebt-count-ongelezen-berichten-op-materiaalaanvragen-die-je-beheert",
+    "language": "en",
+    "value": "Je hebt {{count}} ongelezen berichten op materiaalaanvragen die je beheert",
     "value_type": "TEXT"
   },
   {
