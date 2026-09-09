@@ -10,7 +10,7 @@ import {
 	type IsVisibleFunc,
 	type MediaItemComponentState,
 } from '~modules/content-page/types/content-block.types.ts';
-import { isAudioVideoFormat } from '~shared/helpers/is-audio-video-format.ts';
+import { isAudioVideoType } from '~shared/helpers/is-audio-video-newspaper-type.ts';
 import { snippetTimeToSeconds } from '~shared/helpers/parsers/duration.ts';
 import { tText } from '~shared/helpers/translation-functions.ts';
 import { HET_ARCHIEF } from '~shared/types';
@@ -118,7 +118,7 @@ const hasSnippetTimes = (
 	}
 
 	const format = getFormatFromMediaItem(formGroupState);
-	return format === undefined || isAudioVideoFormat(format);
+	return format === undefined || isAudioVideoType(format);
 };
 
 const SNIPPET_TIME_FIELD = (

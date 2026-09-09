@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import type { HetArchiefIeObject as IeObject } from '@viaa/avo2-types';
 import { AdminConfigManager } from '~core/config';
-import { isAudioFormat } from '~shared/helpers/is-audio-video-format.ts';
+import { isAudioType } from '~shared/helpers/is-audio-video-newspaper-type.ts';
 import { IeObjectsService } from '~shared/services/ie-objects-service/ie-objects.service.ts';
 import { QUERY_KEYS } from '~shared/types';
 
@@ -23,7 +23,7 @@ export const useGetIeObjectsByIds = (schemaIdentifiers: string[], enabled = true
 						ieObject.schemaIdentifier,
 						{
 							...ieObject,
-							thumbnailUrl: isAudioFormat(ieObject.dctermsFormat)
+							thumbnailUrl: isAudioType(ieObject.dctermsFormat)
 								? AdminConfigManager.getConfig().components.defaultAudioStill
 								: ieObject.thumbnailUrl,
 						},
