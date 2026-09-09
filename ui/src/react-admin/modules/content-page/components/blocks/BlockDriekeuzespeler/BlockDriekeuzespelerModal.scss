@@ -1,6 +1,10 @@
 @use "../../../../shared/styles/settings/colors" as colors;
 @use "../../../../shared/styles/settings/variables" as variables;
 
+// Matches the shuffle button's own hover shade (hetarchief-client's `$shade`): admin-core can't
+// reach that client-side variable, so the value is mirrored here rather than shared.
+$close-hover-shade: #505050;
+
 // Modal chrome
 // ---
 // `Modal` from @meemoo/react-components ships no styles of its own, so the look that used to come
@@ -81,6 +85,11 @@
 		background-color: colors.$color-gray-1000;
 		color: colors.$white;
 		cursor: pointer;
+		transition: background-color 0.2s ease;
+
+		&:hover {
+			background-color: $close-hover-shade;
+		}
 
 		.o-svg-icon svg path {
 			fill: currentcolor;
