@@ -98,7 +98,7 @@ export const FieldGroup: FunctionComponent<FieldGroupProps> = ({
 
 				return (
 					<Spacer margin="top" key={`${fieldKey}-${fieldState[0]}-${fieldIndex}`}>
-						<FormGroup label={`${fieldState[1].label}`} error={elementErrors?.[fieldState[0]]}>
+						<FormGroup label={fieldState[1].label} error={elementErrors?.[fieldState[0]]}>
 							<Spacer margin="top-small">
 								<EditorComponents {...editorProps} />
 							</Spacer>
