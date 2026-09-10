@@ -70,6 +70,7 @@ export enum Color {
 	TealBright = '#25A4CF',
 	Teal = '#1D637A',
 	TealDark = '#124455',
+	TealExtraDark = '#00524D',
 	Error200 = '#EE8176',
 	Green = '#46D46E',
 	Blue = '#4D76F3',
