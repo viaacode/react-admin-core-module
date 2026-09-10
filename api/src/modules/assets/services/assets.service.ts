@@ -226,6 +226,15 @@ export class AssetsService {
 		return this.uploadToObjectStore(key, file);
 	}
 
+	/**
+	 * Determines the mime type to store the file under, based on the file extension of the s3 key.
+	 * Falls back to a generic binary type, so the object store doesn't have to guess.
+	 */
+	public static getMimeTypeForKey(key: string): string {
+		const extension = key.split('.').pop()?.toLowerCase() ?? '';
+		return EXTENSION_TO_MIME_TYPE[extension] ?? 'application/octet-stream';
+	}
+
 	public async uploadToObjectStore(key: string, file: UploadFile): Promise<string> {
 		try {
 			let fileBody: Buffer;
@@ -258,7 +267,7 @@ export class AssetsService {
 				hostname: endpoint,
 				path: `/${bucket}/${key}`,
 				headers: {
-					'content-type': EXTENSION_TO_MIME_TYPE[key.split('.').pop() as string],
+					'content-type': AssetsService.getMimeTypeForKey(key),
 					'content-length': fileBody.length.toString(),
 					// No authorization headers yet, we'll add them by signing
 				},
