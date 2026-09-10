@@ -2123,6 +2123,26 @@
     "id": "",
     "app": "HET_ARCHIEF",
     "component": "ADMIN_CORE",
+    "location": "admin/content-block/content-block",
+    "key": "quote",
+    "language": "nl",
+    "value": "Quote",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "admin/content-block/content-block",
+    "key": "quote",
+    "language": "en",
+    "value": "Quote",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
     "location": "admin/content-block/helpers/generators/anchor-links",
     "key": "links",
     "language": "nl",
@@ -25277,26 +25297,6 @@
     "key": "gelieve-een-correcte-zoekfilter-link-in-te-vullen",
     "language": "en",
     "value": "Please enter a correct search filter link.",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "admin/content-block/content-block",
-    "key": "quote",
-    "language": "nl",
-    "value": "Quote",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "admin/content-block/content-block",
-    "key": "quote",
-    "language": "en",
-    "value": "Quote",
     "value_type": "TEXT"
   },
   {
@@ -51086,7 +51086,7 @@
     "location": "modules/shared/components/media-card/media-card",
     "key": "dit-object-heeft-childrencount-kind-objecten",
     "language": "nl",
-    "value": "Dit object heeft {{childrenCount}} kind objecten",
+    "value": "Dit object heeft {{numOfChildren}} kind objecten",
     "value_type": "TEXT"
   },
   {
@@ -51096,7 +51096,27 @@
     "location": "modules/shared/components/media-card/media-card",
     "key": "dit-object-heeft-childrencount-kind-objecten",
     "language": "en",
-    "value": "Dit object heeft {{childrenCount}} kind objecten",
+    "value": "Dit object heeft {{numOfChildren}} kind objecten",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/shared/components/media-card/media-card",
+    "key": "dit-object-heeft-1-kind-object",
+    "language": "nl",
+    "value": "Dit object heeft 1 kind object",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/shared/components/media-card/media-card",
+    "key": "dit-object-heeft-1-kind-object",
+    "language": "en",
+    "value": "Dit object heeft 1 kind object",
     "value_type": "TEXT"
   },
   {
@@ -51106,7 +51126,7 @@
     "location": "modules/shared/components/media-card/media-card",
     "key": "num-of-children-items",
     "language": "nl",
-    "value": "items",
+    "value": "{{numOfChildren}} items",
     "value_type": "TEXT"
   },
   {
@@ -51116,7 +51136,27 @@
     "location": "modules/shared/components/media-card/media-card",
     "key": "num-of-children-items",
     "language": "en",
-    "value": "items",
+    "value": "{{numOfChildren}} items",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/shared/components/media-card/media-card",
+    "key": "num-of-children-1-item",
+    "language": "nl",
+    "value": "1 item",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/shared/components/media-card/media-card",
+    "key": "num-of-children-1-item",
+    "language": "en",
+    "value": "1 item",
     "value_type": "TEXT"
   },
   {
@@ -60097,46 +60137,6 @@
     "key": "sluiten",
     "language": "en",
     "value": "Close",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/shared/components/media-card/media-card",
-    "key": "dit-object-heeft-1-kind-object",
-    "language": "nl",
-    "value": "Dit object heeft 1 kind object",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/shared/components/media-card/media-card",
-    "key": "dit-object-heeft-1-kind-object",
-    "language": "en",
-    "value": "Dit object heeft 1 kind object",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/shared/components/media-card/media-card",
-    "key": "num-of-children-1-item",
-    "language": "nl",
-    "value": "Num of children 1 item",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/shared/components/media-card/media-card",
-    "key": "num-of-children-1-item",
-    "language": "en",
-    "value": "Num of children 1 item",
     "value_type": "TEXT"
   },
   {
