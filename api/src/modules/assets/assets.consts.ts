@@ -82,6 +82,8 @@ export const EXTENSION_TO_MIME_TYPE: Record<string, string> = {
 	xlsx: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
 	// csv
 	csv: 'text/csv',
+	// xml
+	xml: 'application/xml',
 	// ppt
 	ppt: 'application/vnd.ms-powerpoint',
 	pptx: 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
