@@ -51,6 +51,20 @@ $hit-top-mobile-1: 18.646% - math.div($hit-height-mobile, 2); // 2.969%
 $hit-top-mobile-2: 50% - math.div($hit-height-mobile, 2); // 34.323%
 $hit-top-mobile-3: 81.354% - math.div($hit-height-mobile, 2); // 65.677%
 
+// The active tile sits centred in the stage rather than flush with its edges, so the stage's own
+// height leaves empty space that grows with the viewport. Expressed as a share of the block's own
+// width so it can be subtracted from the title/button margins below, keeping their gap fixed. ARC-3959
+$stage-vertical-inset-desktop: math.div($hit-top-desktop, $tiles-ratio-desktop) * math.div($tiles-width-desktop, 100%); // 5.73%
+
+// Same idea for mobile: the rotated top/bottom tile's bounding box reaches past the stage edge by
+// a share that grows with viewport width. ARC-3960
+$tile-tilt-cos: math.cos($tile-tilt);
+$tile-tilt-sin: math.sin($tile-tilt);
+$tile-scaled-width-mobile: $tile-width-mobile-base * $tile-scale-inactive; // 78.109%
+$tile-scaled-height-mobile: math.div($tile-scaled-width-mobile, $tile-ratio); // 79.671%
+$tile-bulge-half-height-mobile: math.div($tile-scaled-height-mobile, 2) * $tile-tilt-cos + math.div($tile-scaled-width-mobile, 2) * $tile-tilt-sin; // 43.70%
+$stage-vertical-inset-mobile: $tile-bulge-half-height-mobile - 18.646% * math.div(1, $tiles-ratio-mobile); // 4.65%
+
 // How far a tile makes room for the hovered one: the neighbour steps aside by a nudge, the tile on
 // the far side slides in behind the middle one, and both side tiles spread on a hovered middle tile.
 // In `cqw`, so they hold their share of the stack the way every other size here does.
@@ -139,13 +153,19 @@ $pill-font-size: clamp(1.8rem, 1.964cqw, 2.4rem);
 		// The shapes layer reaches into the title, so the title has to sit in front of it.
 		position: relative;
 		z-index: 1;
-		margin: 0 0 (variables.$g-spacer-unit * 8);
+
+		// Fixed 64px gap to the tiles: $stage-vertical-inset-desktop cancels the stage's own inset. ARC-3959
+		margin: 0 0 calc(#{variables.$g-spacer-unit * 8} - #{$stage-vertical-inset-desktop});
 		text-align: center;
 
 		@media (max-width: variables.$g-bp2) {
-			@include typography.heading-xl;
+			// H3, same as BlockTitleWithParallax's title. Important so a host app's own generic
+			// mobile-title reset (e.g. hetarchief-client's) can't override it. ARC-3960
+			@include typography.set-font(4rem, 800, 4.4rem, true);
 
-			margin-bottom: variables.$g-spacer-unit * 6;
+			// Fixed 34px gap to the tiles, added rather than subtracted: the rotated mobile tile
+			// pokes past the stage edge instead of sitting short of it. ARC-3960
+			margin-bottom: calc(3.4rem + #{$stage-vertical-inset-mobile});
 		}
 	}
 
@@ -369,7 +389,14 @@ $pill-font-size: clamp(1.8rem, 1.964cqw, 2.4rem);
 		// `.c-button` is inline-block, and an auto margin only centres a block level box.
 		display: flex;
 		width: fit-content;
-		margin: (variables.$g-spacer-unit * 6) auto 0;
+
+		// A fixed 48px gap to the tiles, for the same reason the title's margin above is a calc(). ARC-3959
+		margin: calc(#{variables.$g-spacer-unit * 6} - #{$stage-vertical-inset-desktop}) auto 0;
+
+		@media (max-width: variables.$g-bp2) {
+			// Same fixed-34px logic as the mobile title's margin above. ARC-3960
+			margin-top: calc(3.4rem + #{$stage-vertical-inset-mobile});
+		}
 	}
 
 	// Collapsed rather than removed, so only the movement goes away.
