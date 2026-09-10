@@ -78,6 +78,10 @@ export type {
 	CuePoints,
 	FlowPlayerWrapperProps,
 } from './shared/components/FlowPlayerWrapper/FlowPlayerWrapper.types';
+export {
+	FLOWPLAYER_CUSTOM_CONTROL_COLORS_AVO,
+	FLOWPLAYER_CUSTOM_CONTROL_COLORS_HET_ARCHIEF,
+} from './shared/helpers/flowplayer-custom-control-colors.ts';
 // Helpers
 export {
 	isAudioType,
