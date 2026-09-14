@@ -3,7 +3,7 @@ import { Container, Spinner } from '@viaa/avo2-components';
 import clsx from 'clsx';
 import { type FunctionComponent, useMemo } from 'react';
 import { IeObjectFlowPlayerWrapper } from '~modules/content-page/components/IeObjectFlowPlayerWrapper/IeObjectFlowPlayerWrapper';
-import { IeObjectLoadError } from '~modules/content-page/components/IeObjectLoadError/IeObjectLoadError';
+import { NoAccessToObjectPlaceholder } from '~modules/content-page/components/NoAccessToObjectPlaceholder';
 import { useGetIeObjectsPlayableDisplayData } from '~modules/content-page/hooks/useGetIeObjectsPlayableDisplayData';
 import { CopyrightAttribution } from '~shared/components/CopyrightAttribution';
 import { snippetTimeToSeconds } from '~shared/helpers/parsers/duration';
@@ -109,7 +109,7 @@ export const BlockHetArchiefVideo: FunctionComponent<BlockHetArchiefVideoProps> 
 				{hasFailed ? (
 					// Only the player is swapped out: the block keeps its size and its caption, so the
 					// object stays announced the same way it would have been with access.
-					<IeObjectLoadError />
+					<NoAccessToObjectPlaceholder dctermsFormat={ieObject?.dctermsFormat} />
 				) : isLoadingObject || !ieObject ? (
 					<>
 						<img

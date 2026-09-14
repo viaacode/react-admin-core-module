@@ -7,8 +7,8 @@ import React, { useMemo, useRef } from 'react';
 import { AdminCoreIconName } from '~core/config';
 import { AdminConfigManager } from '~core/config/config.class';
 import { IeObjectFlowPlayerWrapper } from '~modules/content-page/components/IeObjectFlowPlayerWrapper/IeObjectFlowPlayerWrapper.tsx';
-import { IeObjectLoadError } from '~modules/content-page/components/IeObjectLoadError/IeObjectLoadError.tsx';
 import { IeObjectMetadata } from '~modules/content-page/components/IeObjectMetadata/IeObjectMetadata.tsx';
+import { NoAccessToObjectPlaceholder } from '~modules/content-page/components/NoAccessToObjectPlaceholder';
 import { getBackgroundTextColorVariables } from '~modules/content-page/const/background-text-colors';
 import { useGetIeObjectsPlayableDisplayData } from '~modules/content-page/hooks/useGetIeObjectsPlayableDisplayData.ts';
 import type { TimelineNodeBlockComponentState } from '~modules/content-page/types/content-block.types';
@@ -112,7 +112,7 @@ export const BlockTimeline: FunctionComponent<BlockTimelineProps> = ({
 	 */
 	const renderObjectLoadError = (): ReactNode => (
 		<div className={clsx('c-ie-object-media')}>
-			<IeObjectLoadError className="c-block-timeline__node-object-error" />
+			<NoAccessToObjectPlaceholder className="c-block-timeline__node-object-error" />
 		</div>
 	);
 
@@ -175,12 +175,23 @@ export const BlockTimeline: FunctionComponent<BlockTimelineProps> = ({
 				);
 			}
 
-			// Nothing to show: the plain type icon when the essence is simply missing, the
-			// struck-through one when this visitor may not see it. Decorative -- the node's
-			// own title and metadata already name the object.
+			// An object this visitor may not see is announced the same way as one that failed to
+			// load at all, and the same way the other blocks announce it: struck-through type icon
+			// with the message under it.
+			if (!ieObject.hasAccessToEssence) {
+				return (
+					<NoAccessToObjectPlaceholder
+						className="c-block-timeline__node-object-error"
+						dctermsFormat={ieObject.dctermsFormat}
+					/>
+				);
+			}
+
+			// Accessible, but with nothing to show it with: the plain type icon holds the spot.
+			// Decorative -- the node's own title and metadata already name the object.
 			return (
 				<span className="c-block-timeline__node-object-placeholder" aria-hidden="true">
-					<Icon name={getIconFromObjectType(ieObject.dctermsFormat, ieObject.hasAccessToEssence)} />
+					<Icon name={getIconFromObjectType(ieObject.dctermsFormat, true)} />
 				</span>
 			);
 		};

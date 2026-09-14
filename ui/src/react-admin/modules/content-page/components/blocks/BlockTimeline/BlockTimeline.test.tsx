@@ -156,7 +156,7 @@ describe('<BlockTimeline /> playable display data alignment', () => {
 		).toBe(newspaper.newspaperImage);
 	});
 
-	it('shows the struck-through type icon instead of the image when the visitor may not see the essence', () => {
+	it('shows the no-access placeholder instead of the image when the visitor may not see the essence', () => {
 		mockPlayableDisplayData.mockReturnValue({
 			data: [null, { ...newspaper, hasAccessToEssence: false }],
 		});
@@ -166,7 +166,7 @@ describe('<BlockTimeline /> playable display data alignment', () => {
 		const nodes = Array.from(container.querySelectorAll('.c-block-timeline__node'));
 
 		expect(nodes[0].querySelector('.c-block-timeline__node-object-image')).toBeNull();
-		expect(nodes[0].querySelector('.c-block-timeline__node-object-placeholder')).not.toBeNull();
+		expect(nodes[0].querySelector('.c-block-timeline__node-object-error')).not.toBeNull();
 		expect(getIconFromObjectType).toHaveBeenCalledWith('newspaper', false);
 	});
 

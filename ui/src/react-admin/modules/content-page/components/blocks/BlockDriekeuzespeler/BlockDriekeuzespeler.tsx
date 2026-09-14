@@ -127,7 +127,7 @@ export const BlockDriekeuzespeler: FunctionComponent<BlockDriekeuzespelerProps> 
 				style={{ '--tile-color': backgroundColor } as CSSProperties}
 			>
 				<div className="c-driekeuzespeler__tile-visual">
-					{!!ieObject?.thumbnailUrl && (
+					{!!ieObject?.hasAccessToEssence && (
 						<ImageOrAudioWaveForm
 							imageSrc={ieObject.thumbnailUrl}
 							imageAlt={ieObject.name}

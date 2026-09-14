@@ -3,8 +3,8 @@ import React, { type FunctionComponent, type ReactElement } from 'react';
 import type { HeroCarouselSlideItem } from '~content-blocks/BlockHeroCarousel/BlockHeroCarousel.types.ts';
 import { getSlideImageSrc } from '~content-blocks/BlockHeroCarousel/BlockHeroCarousel.utils.ts';
 import { BlockHeroCarouselInaccessibleItem } from '~content-blocks/BlockHeroCarousel/BlockHeroCarouselInaccessibleItem.tsx';
-import { IeObjectLoadError } from '~modules/content-page/components/IeObjectLoadError';
 import { ImageOrAudioWaveForm } from '~modules/content-page/components/ImageOrAudioWaveForm/ImageOrAudioWaveForm.tsx';
+import { NoAccessToObjectPlaceholder } from '~modules/content-page/components/NoAccessToObjectPlaceholder';
 import type { DefaultComponentProps } from '~modules/shared/types/components';
 import { Icon } from '~shared/components/Icon';
 import { getIconFromObjectType } from '~shared/helpers/get-icon-from-object-type.ts';
@@ -65,9 +65,12 @@ export const BlockHeroCarouselInactiveSlide: FunctionComponent<
 	const renderContent = () => {
 		if (item?.hasFailed) {
 			return (
-				<IeObjectLoadError
+				<NoAccessToObjectPlaceholder
 					className="c-block-hero-carousel__carousel-slide-error"
+					dctermsFormat={item?.dctermsFormat}
 					isTextVisible={false}
+					hasBackground={false}
+					textColor="black"
 				/>
 			);
 		}

@@ -127,7 +127,7 @@ describe('<BlockHetArchiefVideo />', () => {
 
 		const { container } = render(<BlockHetArchiefVideo blockId={blockId} />);
 
-		expect(container.querySelector('.c-ie-object-load-error')).toBeInTheDocument();
+		expect(container.querySelector('.c-no-access-to-object-placeholder')).toBeInTheDocument();
 		expect(
 			container.querySelector('.c-block-het-archief-video__player--error')
 		).toBeInTheDocument();
@@ -149,7 +149,7 @@ describe('<BlockHetArchiefVideo />', () => {
 
 		const { container } = render(<BlockHetArchiefVideo blockId={blockId} />);
 
-		expect(container.querySelector('.c-ie-object-load-error')).toBeInTheDocument();
+		expect(container.querySelector('.c-no-access-to-object-placeholder')).toBeInTheDocument();
 		expect(mockPlayer).not.toHaveBeenCalled();
 	});
 

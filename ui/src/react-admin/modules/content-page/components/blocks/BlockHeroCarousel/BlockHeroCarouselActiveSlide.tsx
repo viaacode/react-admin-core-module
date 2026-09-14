@@ -10,7 +10,7 @@ import {
 import { BlockHeroCarouselInaccessibleItem } from '~content-blocks/BlockHeroCarousel/BlockHeroCarouselInaccessibleItem.tsx';
 import { AdminCoreIconName } from '~core/config';
 import { IeObjectFlowPlayerWrapper } from '~modules/content-page/components/IeObjectFlowPlayerWrapper/IeObjectFlowPlayerWrapper.tsx';
-import { IeObjectLoadError } from '~modules/content-page/components/IeObjectLoadError';
+import { NoAccessToObjectPlaceholder } from '~modules/content-page/components/NoAccessToObjectPlaceholder';
 import type { DefaultComponentProps } from '~modules/shared/types/components';
 import { Icon } from '~shared/components/Icon';
 import { tText } from '~shared/helpers/translation-functions.ts';
@@ -90,7 +90,13 @@ export const BlockHeroCarouselActiveSlide: FunctionComponent<BlockHeroCarouselAc
 
 	if (item?.hasFailed) {
 		return renderAnimationWrapper(
-			<IeObjectLoadError className="c-block-hero-carousel__carousel-slide-error" isTextVisible />
+			<NoAccessToObjectPlaceholder
+				className="c-block-hero-carousel__carousel-slide-error"
+				dctermsFormat={item?.dctermsFormat}
+				isTextVisible
+				hasBackground={false}
+				textColor="black"
+			/>
 		);
 	}
 
