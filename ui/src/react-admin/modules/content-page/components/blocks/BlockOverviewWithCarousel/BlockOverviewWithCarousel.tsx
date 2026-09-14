@@ -1,6 +1,6 @@
 import { Button } from '@meemoo/react-components';
 import { type ButtonAction, Image } from '@viaa/avo2-components';
-import { AvoCoreContentPickerType } from '@viaa/avo2-types';
+import { AvoCoreContentPickerType, type HetArchiefIeObjectType } from '@viaa/avo2-types';
 import React, { type FunctionComponent, type ReactElement, useMemo, useState } from 'react';
 import type SwiperController from 'swiper';
 import { Controller } from 'swiper/modules';
@@ -9,7 +9,7 @@ import 'swiper/css';
 import clsx from 'clsx';
 import { BlockHeading } from '~content-blocks/BlockHeading';
 import { CarouselButtons } from '~modules/content-page/components/CarouselButtons/CarouselButtons.tsx';
-import { IeObjectLoadError } from '~modules/content-page/components/IeObjectLoadError/IeObjectLoadError.tsx';
+import { NoAccessToObjectPlaceholder } from '~modules/content-page/components/NoAccessToObjectPlaceholder';
 import { useGetIeObjectsPlayableDisplayData } from '~modules/content-page/hooks/useGetIeObjectsPlayableDisplayData.ts';
 import type { Color, HeadingTypeOption } from '~modules/content-page/types/content-block.types';
 import type { DefaultComponentProps } from '~modules/shared/types/components';
@@ -75,7 +75,8 @@ export const BlockOverviewWithCarousel: FunctionComponent<BlockOverviewWithCarou
 		title: string,
 		backgroundColor: Color,
 		textColor: Color,
-		hasAccessToEssence: boolean
+		hasAccessToEssence: boolean,
+		dctermsFormat: HetArchiefIeObjectType | undefined
 	) => {
 		return (
 			<>
@@ -86,7 +87,10 @@ export const BlockOverviewWithCarousel: FunctionComponent<BlockOverviewWithCarou
 						className={clsx('c-block-overview-with-carousel__slide-image')}
 					/>
 				) : (
-					<IeObjectLoadError className={clsx('c-block-overview-with-carousel__slide-image')} />
+					<NoAccessToObjectPlaceholder
+						className={clsx('c-block-overview-with-carousel__slide-image')}
+						dctermsFormat={dctermsFormat}
+					/>
 				)}
 				<div
 					className={'c-block-overview-with-carousel__slide-description'}
@@ -187,7 +191,8 @@ export const BlockOverviewWithCarousel: FunctionComponent<BlockOverviewWithCarou
 											title,
 											backgroundColor,
 											textColor,
-											hasAccessToEssence
+											hasAccessToEssence,
+											ieObjects?.[index]?.dctermsFormat
 										),
 										title,
 										componentClassName,

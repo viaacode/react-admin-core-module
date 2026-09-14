@@ -1,0 +1,99 @@
+@use "../../../shared/styles/settings/colors" as colors;
+@use "../../../shared/styles/settings/variables" as variables;
+
+.c-no-access-to-object-placeholder {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+
+	// Fills whatever the player/image would have filled, so the block's own layout is kept.
+	width: 100%;
+	height: 100%;
+	min-height: 10rem;
+	padding: variables.$g-spacer-unit * 4;
+	text-align: center;
+
+	// The tile stands in for spots of very different sizes -- a full width player, a timeline
+	// node, a hero slide that is only a few centimeters wide -- so the icon is sized off the
+	// tile's own width rather than picked per block. Inline-size containment only: the tile still
+	// takes its height from its content where nothing else gives it one.
+	container-type: inline-size;
+
+	// The flat grey stands in for the black a player would have been.
+	background-color: colors.$neutral;
+
+	// On a slide that already paints its own background colour the placeholder only contributes
+	// the icon and the message.
+	&--transparent {
+		background-color: transparent;
+	}
+
+	&--white {
+		color: colors.$white;
+	}
+
+	&--black {
+		color: colors.$color-gray-1000;
+	}
+
+	// Deliberately a descendant selector rather than `&__icon`: the Icon component's own class
+	// sets `font-size: inherit` and its stylesheet loads after this one, so a single class here
+	// would tie on specificity and lose.
+	.c-no-access-to-object-placeholder__icon {
+		font-size: 2.4rem;
+		line-height: 1;
+
+		// A wide tile -- a full width player, a timeline node -- can carry a bigger icon without
+		// crowding out the message under it. Narrow spots like the hero carousel's inactive
+		// slides keep the smaller one.
+		@container (min-width: 800px) {
+			font-size: 4rem;
+		}
+	}
+
+	// A collapsible grid row rather than a plain block: an `fr` row animates between 0 and its
+	// content height, so the message can unfold at whatever height it wraps to, pushing the icon
+	// up as it grows. Collapsed, it takes no space at all and the icon is centered on its own.
+	&__text-wrapper {
+		display: grid;
+		grid-template-rows: 1fr;
+		overflow: hidden;
+		animation: c-no-access-to-object-placeholder-text-unfold 300ms ease-in-out;
+
+		@media (prefers-reduced-motion: reduce) {
+			animation: none;
+		}
+
+		&--collapsed {
+			grid-template-rows: 0fr;
+			animation: none;
+
+			// The gap above the message is padding on the item, which a zero-height row still has
+			// to make room for -- it goes along with the collapse.
+			.c-no-access-to-object-placeholder__text {
+				padding-top: 0;
+			}
+		}
+	}
+
+	&__text {
+		// Without this the item's automatic minimum size floors the wrapper's `0fr` row at the
+		// text's own height, and the row never actually collapses.
+		min-height: 0;
+		padding-top: variables.$g-spacer-unit * 2;
+		font-weight: bold;
+	}
+}
+
+@keyframes c-no-access-to-object-placeholder-text-unfold {
+	from {
+		grid-template-rows: 0fr;
+		opacity: 0;
+	}
+
+	to {
+		grid-template-rows: 1fr;
+		opacity: 1;
+	}
+}

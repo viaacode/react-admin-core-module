@@ -421,14 +421,16 @@ $hero-carousel-search-radius-desktop: 3.2rem;
 				color: colors.$color-gray-1000;
 			}
 
-			// The error tile fills the slide, however big the slide currently is -- inactive
-			// slides are small, so it can't keep the component's own minimum height.
+			// The no-access tile fills the slide, however big the slide currently is -- inactive
+			// slides are small, so it can't keep the component's own minimum height. It's the one
+			// place the tile is rendered without its own grey: the slide already paints the colour
+			// the editor picked, so the tile only adds the icon and the message on top of it, in
+			// the black it asks the component for.
 			&-error {
 				flex: auto;
 				min-height: 0;
 				padding: variables.$g-spacer-unit;
 				overflow: hidden;
-				background-color: inherit;
 			}
 
 			&-image {
