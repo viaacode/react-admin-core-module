@@ -21,6 +21,12 @@
   // on a flat grey instead of the black a player would have been.
   .c-block-het-archief-video__player--error {
     background-color: colors.$neutral;
+
+    // The error tile sets a dark text colour of its own for the light backgrounds it sits on in
+    // the other blocks; against this grey the icon and message need to be white instead.
+    .c-ie-object-load-error {
+      color: colors.$white;
+    }
   }
 
   // While the object is being resolved the block holds its spot with the poster the editor picked,
