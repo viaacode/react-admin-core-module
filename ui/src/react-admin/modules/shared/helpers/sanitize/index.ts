@@ -9,7 +9,7 @@ function normalizeModule(requiredModule: any): DOMPurify {
 }
 
 let domPurify: DOMPurify | undefined;
-let _domPurifyInitPromise: Promise<void> | undefined;
+let domPurifyInitPromise: Promise<void> | undefined;
 
 /**
  * DOMPurify uses the window in browser mode, so we need to conditionally import it
@@ -26,7 +26,7 @@ function initDOMPurify(): void {
 		} as unknown as DOMPurify;
 	} else {
 		// Start loading DOMPurify asynchronously
-		_domPurifyInitPromise = import('dompurify').then((module) => {
+		domPurifyInitPromise = import('dompurify').then((module) => {
 			domPurify = normalizeModule(module);
 		});
 	}
@@ -45,4 +45,7 @@ const sanitizeHtml = (input: string, preset: SanitizePreset): string => {
 	return domPurify.sanitize(input, presetConfig) as unknown as string;
 };
 
-export { sanitizeHtml, sanitizePresets };
+// Exposed so tests can await DOMPurify's async init before calling sanitizeHtml synchronously.
+const waitForDOMPurify = (): Promise<void> => domPurifyInitPromise ?? Promise.resolve();
+
+export { sanitizeHtml, sanitizePresets, waitForDOMPurify };

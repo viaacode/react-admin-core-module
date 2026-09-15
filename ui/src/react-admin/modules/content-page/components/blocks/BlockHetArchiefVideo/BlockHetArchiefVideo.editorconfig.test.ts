@@ -53,11 +53,11 @@ describe('HETARCHIEF_VIDEO_BLOCK_CONFIG', () => {
 		expect(mediaItem.editorType).toEqual(ContentBlockEditor.ContentPicker);
 		expect(mediaItem.editorProps.allowedTypes).toEqual([AvoCoreContentPickerType.IE_OBJECT]);
 		expect(mediaItem.editorProps.ieObjectFormats).toEqual([
-			'audio',
-			'audiofragment',
-			'film',
 			'video',
 			'videofragment',
+			'film',
+			'audio',
+			'audiofragment',
 		]);
 	});
 
