@@ -40,7 +40,6 @@ export interface BlockImageGridProps extends DefaultProps {
 	textSize?: number;
 	textMargin?: number;
 	textWeight?: number;
-	textColor?: string;
 	className?: string;
 	horizontalMargin?: number;
 	verticalMargin?: number;
