@@ -21,6 +21,7 @@ import {
 	type DriekeuzespelerTileColors,
 } from '~modules/content-page/types/content-block.types';
 import { tText } from '~shared/helpers/translation-functions';
+import { validateRequiredValue } from '~shared/helpers/validation.ts';
 import { HET_ARCHIEF } from '~shared/types';
 
 /**
@@ -164,6 +165,15 @@ export const DRIEKEUZESPELER_CONFIG = (position = 0): ContentBlockConfig => ({
 							hideTypeDropdown: true,
 							hideTargetSwitch: true,
 						},
+						validator: (value: string) =>
+							validateRequiredValue(
+								value,
+								tText(
+									'modules/content-page/components/blocks/block-driekeuzespeler/block-driekeuzespeler___thema-is-verplicht',
+									undefined,
+									[HET_ARCHIEF]
+								)
+							),
 					},
 				},
 				repeat: {
