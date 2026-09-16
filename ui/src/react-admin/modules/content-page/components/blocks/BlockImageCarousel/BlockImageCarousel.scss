@@ -2,6 +2,7 @@
 @use "../../../../shared/styles/settings/variables" as variables;
 @use "../../../../shared/styles/settings/colors" as colors;
 @use "../../../../shared/styles/mixins/typography" as typography;
+@use "../../../../shared/styles/mixins/animations" as animations;
 
 .c-block-image-carousel {
 	.c-block-image-carousel__header {
@@ -82,6 +83,14 @@
 				height: 100%;
 				object-fit: contain;
 				object-position: center;
+			}
+
+			&--link > img {
+				@include animations.zoom-in-transition;
+
+				&:hover {
+					@include animations.zoom-in-animation;
+				}
 			}
 		}
 
