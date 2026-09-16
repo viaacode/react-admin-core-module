@@ -13,6 +13,9 @@ vi.mock('~shared/components/Icon/Icon', () => ({
 	Icon: ({ name, ...props }: { name: string; 'aria-hidden'?: boolean }) => (
 		<i data-icon={name} {...props} />
 	),
+	ContentPageIcon: ({ name, ...props }: { name: string; 'aria-hidden'?: boolean }) => (
+		<i data-icon={name} {...props} />
+	),
 }));
 
 vi.mock('~shared/components/SmartLink/SmartLink', () => ({

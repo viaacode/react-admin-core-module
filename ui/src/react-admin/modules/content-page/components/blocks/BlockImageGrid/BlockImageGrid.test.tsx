@@ -1,9 +1,22 @@
 import { cleanup, render, screen } from '@testing-library/react';
 import React from 'react';
-import { afterEach, describe, expect, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { AdminConfigManager } from '~core/config/config.class';
+import { Locale } from '~modules/translations/translations.core.types';
 import { BlockImageGrid } from './BlockImageGrid';
 
-afterEach(() => cleanup());
+beforeEach(() => {
+	vi.spyOn(AdminConfigManager, 'getConfig').mockReturnValue({
+		locale: Locale.Nl,
+		services: { i18n: { tText: (key: string) => key } },
+		// biome-ignore lint/suspicious/noExplicitAny: only the locale and i18n keys are read here
+	} as any);
+});
+
+afterEach(() => {
+	cleanup();
+	vi.restoreAllMocks();
+});
 
 const ELEMENT = {
 	source: '/image.jpg',

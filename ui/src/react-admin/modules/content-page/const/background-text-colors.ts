@@ -41,6 +41,11 @@ export const BACKGROUND_TEXT_COLORS: Partial<Record<Color, BackgroundTextColors>
 		secondary: Color.Slate,
 		hyperlink: Color.Jade,
 	}, // Wit
+	[Color.Transparent]: {
+		primary: Color.Black,
+		secondary: Color.Slate,
+		hyperlink: Color.Jade,
+	}, // Transparent = Same as white
 	[Color.OceanGreen]: {
 		primary: Color.Black,
 		secondary: Color.Ink,

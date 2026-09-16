@@ -23,6 +23,7 @@ const EXPECTED_BACKGROUND_TEXT_COLORS: [string, Color, Color, Color, Color][] = 
 	// Merk
 	['Zwart', Color.Black, Color.White, Color.Zinc, Color.OceanGreen],
 	['Wit', Color.White, Color.Black, Color.Slate, Color.Jade],
+	['Transparent', Color.Transparent, Color.Black, Color.Slate, Color.Jade],
 	['Teal', Color.OceanGreen, Color.Black, Color.Ink, Color.Black],
 	// Functioneel
 	['Grafiet', Color.Graphite, Color.White, Color.Zinc, Color.OceanGreen],
@@ -87,8 +88,7 @@ describe('getBackgroundTextColors()', () => {
 	});
 
 	it('has a ruling for every selectable flat Archief background', () => {
-		const backgroundsWithoutOneTextColor = [
-			Color.Transparent,
+		const backgroundsWithoutOneTextColor: (Color | GradientColor | CustomBackground)[] = [
 			GradientColor.BlackWhite,
 			CustomBackground.MeemooLogo,
 		];
@@ -107,7 +107,6 @@ describe('getBackgroundTextColors()', () => {
 	// Design specified nothing for these, so blocks keep whatever they inherit. In particular,
 	// meemoo confirmed that BlackWhite must retain the existing per-block handling.
 	it.each<[string, Color | GradientColor | CustomBackground | undefined]>([
-		['transparent', Color.Transparent],
 		['the separately handled black-white gradient', GradientColor.BlackWhite],
 		['the meemoo logo pattern', CustomBackground.MeemooLogo],
 		['an AVO-only color', Color.SoftBlue],
