@@ -129,12 +129,15 @@ export const BlockDriekeuzespeler: FunctionComponent<BlockDriekeuzespelerProps> 
 				<div className="c-driekeuzespeler__tile-visual">
 					{!!ieObject?.hasAccessToEssence && (
 						<ImageOrAudioWaveForm
-							imageSrc={ieObject.thumbnailUrl}
+							imageSrc={selected?.interest?.image || ieObject.thumbnailUrl}
 							imageAlt={ieObject.name}
 							backgroundColor={backgroundColor}
 							className={clsx(
 								'c-driekeuzespeler__thumbnail',
-								`c-driekeuzespeler__thumbnail--${simpleType}`
+								`c-driekeuzespeler__thumbnail--${simpleType}`,
+								{
+									'c-driekeuzespeler__thumbnail--custom': !!selected?.interest?.image,
+								}
 							)}
 						/>
 					)}

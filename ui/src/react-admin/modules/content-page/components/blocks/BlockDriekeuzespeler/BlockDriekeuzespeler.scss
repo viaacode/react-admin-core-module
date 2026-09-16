@@ -331,6 +331,10 @@ $pill-font-size: clamp(1.8rem, 1.964cqw, 2.4rem);
 		&--newspaper img {
 			object-position: top center;
 		}
+
+		&--custom img {
+			object-position: center;
+		}
 	}
 
 	// Fills the hover zone rather than the tile, so the pointer keeps one still target. Every pixel of
