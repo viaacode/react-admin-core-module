@@ -1,6 +1,8 @@
-import { describe, expect, it } from 'vitest';
-import { sanitizeHtml } from './index';
+import { beforeAll, describe, expect, it } from 'vitest';
+import { sanitizeHtml, waitForDOMPurify } from './index';
 import { SanitizePreset } from './presets';
+
+beforeAll(() => waitForDOMPurify());
 
 describe('sanitize', () => {
 	it('Should not remove p style attribute and also leave link alone', () => {
