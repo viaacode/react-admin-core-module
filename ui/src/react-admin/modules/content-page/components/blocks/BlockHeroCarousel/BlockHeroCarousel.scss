@@ -341,10 +341,6 @@ $hero-carousel-search-radius-desktop: 3.2rem;
 			bottom: $slide-height;
 			margin-bottom: variables.$g-spacer-unit * 2;
 
-			.c-button {
-				margin-bottom: 0 !important;
-			}
-
 			@media (max-width: variables.$g-bp2) {
 				position: unset;
 				justify-content: end;
