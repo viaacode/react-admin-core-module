@@ -20,7 +20,10 @@ import {
 	type DriekeuzespelerInterestState,
 	type DriekeuzespelerTileColors,
 } from '~modules/content-page/types/content-block.types';
+import type { FileUploadProps } from '~shared/components/FileUpload/FileUpload.tsx';
+import { PHOTO_TYPES } from '~shared/helpers/files.ts';
 import { tText } from '~shared/helpers/translation-functions';
+import { validateRequiredValue } from '~shared/helpers/validation.ts';
 import { HET_ARCHIEF } from '~shared/types';
 
 /**
@@ -164,6 +167,28 @@ export const DRIEKEUZESPELER_CONFIG = (position = 0): ContentBlockConfig => ({
 							hideTypeDropdown: true,
 							hideTargetSwitch: true,
 						},
+						validator: (value: string) =>
+							validateRequiredValue(
+								value,
+								tText(
+									'modules/content-page/components/blocks/block-driekeuzespeler/block-driekeuzespeler___thema-is-verplicht',
+									undefined,
+									[HET_ARCHIEF]
+								)
+							),
+					},
+					image: {
+						label: tText(
+							'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel___thumbnail',
+							undefined,
+							[HET_ARCHIEF]
+						),
+						editorType: ContentBlockEditor.FileUpload,
+						editorProps: {
+							assetType: 'CONTENT_BLOCK_IMAGE',
+							allowMulti: false,
+							allowedTypes: PHOTO_TYPES,
+						} as FileUploadProps,
 					},
 				},
 				repeat: {

@@ -52,10 +52,13 @@ describe('HETARCHIEF_VIDEO_BLOCK_CONFIG', () => {
 
 		expect(mediaItem.editorType).toEqual(ContentBlockEditor.ContentPicker);
 		expect(mediaItem.editorProps.allowedTypes).toEqual([AvoCoreContentPickerType.IE_OBJECT]);
-		// Order isn't meaningful, this is a set of allowed formats for filtering.
-		expect(new Set(mediaItem.editorProps.ieObjectFormats)).toEqual(
-			new Set(['audio', 'audiofragment', 'film', 'video', 'videofragment'])
-		);
+		expect(mediaItem.editorProps.ieObjectFormats).toEqual([
+			'video',
+			'videofragment',
+			'film',
+			'audio',
+			'audiofragment',
+		]);
 	});
 
 	it('should require an object', () => {

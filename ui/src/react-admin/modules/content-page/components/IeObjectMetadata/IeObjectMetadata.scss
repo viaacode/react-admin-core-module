@@ -58,7 +58,7 @@ $object-meta-gap: 4rem;
 
 	&__maintainer-logo {
 		flex: 0 0 auto;
-		height: 2.4rem;
+		height: 4.8rem; // Design states 3.2 rem but has no white-space
 		width: auto;
 		margin: 0 variables.$g-spacer-unit * 1.5 0 variables.$g-spacer-unit * 3;
 

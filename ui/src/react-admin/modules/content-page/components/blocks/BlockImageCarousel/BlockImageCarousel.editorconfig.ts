@@ -1,3 +1,4 @@
+import { AvoCoreContentPickerType } from '@viaa/avo2-types';
 import {
 	BLOCK_FIELD_DEFAULTS,
 	BLOCK_STATE_DEFAULTS,
@@ -115,6 +116,20 @@ export const IMAGE_CAROUSEL_CONFIG = (position = 0): ContentBlockConfig => ({
 						validator: undefined,
 					}),
 					...COPYRIGHT_FIELDS(),
+					imageAction: {
+						label: tText(
+							'modules/content-page/components/blocks/block-image-carousel/block-image-carousel___link'
+						),
+						editorType: ContentBlockEditor.ContentPicker,
+						editorProps: {
+							allowedTypes: [
+								AvoCoreContentPickerType.EXTERNAL_LINK,
+								AvoCoreContentPickerType.CONTENT_PAGE,
+								AvoCoreContentPickerType.IE_OBJECT,
+							],
+							hideTargetSwitch: true,
+						},
+					},
 				},
 				type: 'fieldGroup',
 				repeat: {

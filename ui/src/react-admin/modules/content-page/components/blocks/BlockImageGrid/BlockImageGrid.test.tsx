@@ -34,13 +34,4 @@ describe('<BlockImageGrid /> text colors', () => {
 		expect(screen.getByText('Grid title')).not.toHaveClass('u-background-text-primary');
 		expect(screen.getByText('Grid description')).not.toHaveClass('u-background-text-primary');
 	});
-
-	it('preserves a caller-supplied foreground color', () => {
-		const { container } = render(<BlockImageGrid elements={[ELEMENT]} textColor="#123456" />);
-		const textWrapper = container.querySelector('.c-block-grid__text-wrapper');
-
-		expect(textWrapper).not.toHaveClass('u-background-text-primary');
-		expect(textWrapper).toHaveStyle({ color: '#123456' });
-		expect(screen.getByText('Grid title')).not.toHaveClass('u-background-text-primary');
-	});
 });

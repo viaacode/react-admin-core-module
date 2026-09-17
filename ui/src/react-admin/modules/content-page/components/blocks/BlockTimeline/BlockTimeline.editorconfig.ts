@@ -1,4 +1,4 @@
-import type { SelectOption } from '@viaa/avo2-components';
+import type { CheckboxProps, SelectOption } from '@viaa/avo2-components';
 import { AvoCoreContentPickerType, AvoSearchOrderDirection } from '@viaa/avo2-types';
 import { GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF } from '~modules/content-page/const/get-color-options';
 import type { FileUploadProps } from '~shared/components/FileUpload/FileUpload';
@@ -80,6 +80,7 @@ const visualTypeIsImage: ContentBlockField['isVisible'] = (_config, formGroupSta
 
 const INITIAL_TIMELINE_NODE_STATE = (): TimelineNodeBlockComponentState => ({
 	date: '',
+	showDate: true,
 	title: '',
 	text: '',
 	visualType: 'NONE',
@@ -147,6 +148,14 @@ export const TIMELINE_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 									[HET_ARCHIEF]
 								)
 							),
+					},
+					showDate: {
+						editorType: ContentBlockEditor.Checkbox,
+						editorProps: {
+							label: tText(
+								'react-admin/modules/content-page/components/blocks/block-timeline/block-timeline___toon-datum'
+							),
+						} as CheckboxProps,
 					},
 					title: TEXT_FIELD(
 						{

@@ -1,16 +1,16 @@
-import { Image } from '@viaa/avo2-components';
+import { type ButtonAction, Image } from '@viaa/avo2-components';
 import clsx from 'clsx';
 import React, {
 	type CSSProperties,
 	type FunctionComponent,
 	type ReactElement,
 	useEffect,
-	useRef,
 	useState,
 } from 'react';
 import { useSwiper } from 'swiper/react';
 import type { CopyrightComponentState } from '~modules/content-page/types/content-block.types';
 import { CopyrightAttribution } from '~shared/components/CopyrightAttribution';
+import { generateSmartLink } from '~shared/components/SmartLink/SmartLink.tsx';
 
 import './BlockImageCarousel.scss';
 
@@ -18,22 +18,24 @@ export interface ImageCarouselSlideProps extends CopyrightComponentState {
 	title: string;
 	image: string;
 	imageAlt: string;
+	imageAction?: ButtonAction;
 }
 
 export const ImageCarouselSlide: FunctionComponent<ImageCarouselSlideProps> = ({
 	title,
 	image,
 	imageAlt,
+	imageAction,
 	copyrightTitle,
 	copyrightText,
 	copyrightIconVisible,
 }): ReactElement => {
-	const imageWrapperRef = useRef<HTMLDivElement>(null);
+	const [imageWrapperRef, setImageWrapperRef] = useState<HTMLDivElement | null>(null);
 	const [imageWidth, setImageWidth] = useState<number | undefined>(undefined);
 	const swiper = useSwiper();
 
 	useEffect(() => {
-		const imageEl = imageWrapperRef.current?.querySelector('img');
+		const imageEl = imageWrapperRef?.querySelector('img');
 		if (!imageEl) {
 			return;
 		}
@@ -54,7 +56,7 @@ export const ImageCarouselSlide: FunctionComponent<ImageCarouselSlideProps> = ({
 		resizeObserver.observe(imageEl);
 
 		return () => resizeObserver.disconnect();
-	}, [swiper]);
+	}, [swiper, imageWrapperRef]);
 
 	return (
 		<div
@@ -67,14 +69,20 @@ export const ImageCarouselSlide: FunctionComponent<ImageCarouselSlideProps> = ({
 						} as CSSProperties)
 			}
 		>
-			<div ref={imageWrapperRef} className="c-block-image-carousel__slide-image-wrapper">
-				<Image
-					src={image}
-					alt={imageAlt || title}
-					className={clsx('c-block-image-carousel__slide-image')}
-					loading="lazy"
-				/>
-			</div>
+			{generateSmartLink(
+				imageAction,
+				<div ref={setImageWrapperRef} className="c-block-image-carousel__slide-image-wrapper">
+					<Image
+						src={image}
+						alt={imageAlt || title}
+						className={clsx('c-block-image-carousel__slide-image', {
+							'c-block-image-carousel__slide-image--link': !!imageAction,
+						})}
+						loading="lazy"
+					/>
+				</div>,
+				imageAlt || title
+			)}
 			{imageWidth !== undefined && (
 				<CopyrightAttribution
 					className="c-block-image-carousel__slide-image-attribution"

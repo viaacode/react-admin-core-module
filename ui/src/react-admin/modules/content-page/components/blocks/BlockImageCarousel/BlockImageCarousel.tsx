@@ -14,6 +14,7 @@ import type {
 import type { DefaultComponentProps } from '~modules/shared/types/components';
 
 import './BlockImageCarousel.scss';
+import type { ButtonAction } from '@viaa/avo2-components';
 
 export interface BlockImageCarouselProps extends DefaultComponentProps {
 	title: string;
@@ -21,6 +22,7 @@ export interface BlockImageCarouselProps extends DefaultComponentProps {
 	elements: ({
 		image: string;
 		imageAlt: string;
+		imageAction?: ButtonAction;
 	} & CopyrightComponentState)[];
 }
 

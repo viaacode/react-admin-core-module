@@ -150,6 +150,7 @@ $object-meta-vertical-padding: variables.$g-spacer-unit * 2;
 
 		@include typography.heading-lg;
 
+		min-height: 2.6rem; // to avoid that an invisible date would case jumping in styling
 		line-height: 2.6rem;
 		color: colors.$color-gray-300;
 	}
