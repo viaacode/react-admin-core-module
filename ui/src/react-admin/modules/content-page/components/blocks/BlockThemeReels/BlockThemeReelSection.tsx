@@ -129,7 +129,12 @@ export const BlockThemeReelSection: FunctionComponent<BlockThemeReelSectionProps
 						</span>
 					)}
 					{description && (
-						<span className="c-block-theme-reels-section__slide-description-text u-background-text-secondary">
+						<span
+							className={clsx(
+								'c-block-theme-reels-section__slide-description-text',
+								title ? 'u-background-text-primary' : 'u-background-text-secondary'
+							)}
+						>
 							{description}
 						</span>
 					)}

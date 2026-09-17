@@ -119,6 +119,7 @@ $slide-image-height-mobile: 12rem;
 
 			.c-block-theme-reels-section__slide-description-text{
 				@include typography.truncate-after-x-lines(3);
+				@include typography.body;
 
 				color: colors.$neutral;
 				width: 100%;
