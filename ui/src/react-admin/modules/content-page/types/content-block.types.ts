@@ -677,6 +677,7 @@ export interface MediaItemComponentState {
 
 export interface TimelineNodeBlockComponentState extends MediaItemComponentState {
 	date: string;
+	showDate: boolean;
 	title: string;
 	text?: string;
 	visualType: TimelineNodeVisualType;

@@ -278,7 +278,7 @@ export const BlockTimeline: FunctionComponent<BlockTimelineProps> = ({
 						)}
 						aria-hidden="true"
 					/>
-					{formatDateToDayMonthNameYear(node.date, locale)}
+					{node.showDate && formatDateToDayMonthNameYear(node.date, locale)}
 				</time>
 				<div className="c-block-timeline__node-content">
 					<div
