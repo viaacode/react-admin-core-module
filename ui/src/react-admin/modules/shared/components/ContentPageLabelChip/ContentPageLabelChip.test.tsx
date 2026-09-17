@@ -34,8 +34,12 @@ describe('<ContentPageLabelChip />', () => {
 		expect(renderChip(Color.Black).style.color).toEqual('rgb(255, 255, 255)');
 	});
 
-	it('keeps white text when the background has no WCAG mapping', () => {
-		expect(renderChip(CustomBackground.MeemooLogo).style.color).toEqual('rgb(255, 255, 255)');
+	it('uses the transparent WCAG mapping for the meemoo logo pattern', () => {
+		// The component looks up Color.Transparent for the meemoo logo (it renders that background
+		// as transparent, see the test below). Since ARC-3981 gave Color.Transparent its own WCAG
+		// text mapping (same as White: black), that lookup now returns black instead of falling
+		// back to white.
+		expect(renderChip(CustomBackground.MeemooLogo).style.color).toEqual('rgb(0, 0, 0)');
 	});
 
 	it('renders the meemoo logo background as transparent, since a chip cannot show the pattern', () => {
