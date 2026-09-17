@@ -716,6 +716,7 @@ export interface DriekeuzespelerInterestState {
 	/** Named `mediaItem` like every other block pointing at an object, so the proxy reads them alike. */
 	mediaItem?: PickerItem;
 	theme?: PickerItem;
+	image?: string;
 }
 
 export interface DriekeuzespelerTileColors {

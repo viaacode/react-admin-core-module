@@ -12,6 +12,7 @@ import { AdminConfigManager } from '~core/config/config.class';
 import { IeObjectFlowPlayerWrapper } from '~modules/content-page/components/IeObjectFlowPlayerWrapper/IeObjectFlowPlayerWrapper.tsx';
 import { IeObjectMetadata } from '~modules/content-page/components/IeObjectMetadata/IeObjectMetadata.tsx';
 import type { PlayableFile } from '~modules/content-page/hooks/useGetPlayableFileForIeObjects';
+import type { DriekeuzespelerInterestState } from '~modules/content-page/types/content-block.types.ts';
 import { Locale } from '~modules/translations/translations.core.types.ts';
 import { Icon } from '~shared/components/Icon/Icon';
 import { SmartLink } from '~shared/components/SmartLink/SmartLink.tsx';
@@ -28,9 +29,7 @@ import { HET_ARCHIEF } from '~shared/types';
 import './BlockDriekeuzespelerModal.scss';
 
 export interface BlockDriekeuzespelerModalProps {
-	interest: {
-		name: string;
-	} | null;
+	interest: DriekeuzespelerInterestState | null;
 	ieObject?: IeObject;
 	/** Absent for a newspaper, which has nothing to ticket. */
 	playableFile?: PlayableFile;
@@ -66,7 +65,7 @@ export const BlockDriekeuzespelerModal: FunctionComponent<BlockDriekeuzespelerMo
 	const displayIeObject: HetArchiefPlayableDisplayIeObject | undefined = ieObject && {
 		schemaIdentifier: ieObject.schemaIdentifier,
 		name: ieObject.name || '',
-		thumbnailUrl: ieObject.thumbnailUrl || null,
+		thumbnailUrl: interest?.image || ieObject.thumbnailUrl || null,
 		dctermsFormat: ieObject.dctermsFormat as IeObjectType,
 		maintainerId: ieObject.maintainerId || '',
 		maintainerSlug: ieObject.maintainerSlug || '',
@@ -88,7 +87,7 @@ export const BlockDriekeuzespelerModal: FunctionComponent<BlockDriekeuzespelerMo
 
 		// No thumbnail means the essence is not available to this visitor, so neither the player nor
 		// the viewer may be shown.
-		if (!ieObject.thumbnailUrl) {
+		if (!ieObject.hasAccessToEssence) {
 			return (
 				<span className="c-driekeuzespeler-modal__inaccessible">
 					<Icon name={getIconFromObjectType(ieObject.dctermsFormat, false)} />
