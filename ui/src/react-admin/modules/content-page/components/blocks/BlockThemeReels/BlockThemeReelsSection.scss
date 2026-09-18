@@ -11,11 +11,10 @@ $slide-image-height-mobile: 12rem;
 
 .c-block-theme-reels-section {
 	& + & {
-		margin-top: variables.$g-spacer-unit * 4;
+		margin-top: variables.$g-spacer-unit * 3;
 	}
 
-
-	.c-block-theme-reels-section__header {
+	&__header {
 		width: 100%;
 		display: flex;
 		flex-flow: row wrap;
@@ -119,6 +118,7 @@ $slide-image-height-mobile: 12rem;
 
 			.c-block-theme-reels-section__slide-description-text{
 				@include typography.truncate-after-x-lines(3);
+				@include typography.body;
 
 				color: colors.$neutral;
 				width: 100%;
@@ -265,7 +265,6 @@ $slide-image-height-mobile: 12rem;
 				color: colors.$color-gray-1000;
 
 				@include typography.body-sm;
-
 
 				@media (max-width: variables.$g-bp2) {
 					font-size: 1.4rem;
