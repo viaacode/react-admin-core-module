@@ -1,6 +1,6 @@
 import { cleanup, render, screen } from '@testing-library/react';
 import React from 'react';
-import { afterEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeAll, describe, expect, it, vi } from 'vitest';
 
 // The real Icon reads the injected client config, which a unit test has no business setting up.
 vi.mock('~shared/components/Icon/Icon', () => ({
@@ -9,6 +9,16 @@ vi.mock('~shared/components/Icon/Icon', () => ({
 
 import { Color } from '../../../types/content-block.types';
 import { BlockHetArchiefQuote } from './BlockHetArchiefQuote';
+
+// jsdom has no ResizeObserver; BlockHetArchiefQuote only needs observe()/disconnect() to exist.
+beforeAll(() => {
+	// biome-ignore lint/suspicious/noExplicitAny: minimal jsdom stub
+	(global as any).ResizeObserver = class {
+		observe() {}
+		unobserve() {}
+		disconnect() {}
+	};
+});
 
 afterEach(() => {
 	cleanup();

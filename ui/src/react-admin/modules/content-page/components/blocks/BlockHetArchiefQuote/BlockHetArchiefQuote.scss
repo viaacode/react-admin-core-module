@@ -1,28 +1,20 @@
 @use "../../../../shared/styles/settings/variables" as variables;
 @use "../../../../shared/styles/mixins/typography" as typography;
 
-// How far the frame bleeds past the text column on each side (see &, below): left, to make room
-// for the mark (whose column is this same width - Figma node 455:5722) without pushing the quote
-// text off the column ContentBlockRenderer already aligns with every other (non-full-width)
-// block; right, so the text stays clear of the rounded corner. Exposed as --bleed (below) so
-// BlockHetArchiefQuote.tsx can read the live value instead of duplicating it - it needs this to
-// decide when the bleed would leave too little clearance from the screen edge (MIN_EDGE_GAP_REM)
-// and toggles &--stacked instead. That can't be a plain breakpoint: the available margin depends
-// on the page's own (per-page) content width, which isn't known at CSS-authoring time.
+// How far the frame bleeds past the text column (Figma node 455:5722): left for the mark, right for
+// corner clearance. Exposed as --bleed (below) so BlockHetArchiefQuote.tsx can toggle &--stacked
+// once that bleed would leave too little clearance from the screen edge - not a plain breakpoint,
+// since the available margin depends on the page's own content width.
 $bleed: variables.$g-spacer-unit * 13;
 
-// Figma node 455:5722: rounded-tr/br only, square on the left. At the design's 228px height CSS
-// clamps both radii to height/2 so this reads as a pill; past ~800px of height it stops growing,
-// which is the point - an unbounded 9999px radius would keep eating into a long quote.
+// Figma node 455:5722: rounded-tr/br only. CSS clamps radii past height/2, capping this as a pill.
 $frame-radius: 40rem;
 $frame-radius-mobile: 12rem;
 $mark-font-size: variables.$g-spacer-unit * 8;
 $mark-line-height: variables.$g-spacer-unit * 9;
 
-// The stacked layout's own left/right padding (Figma node 455:7186), and how far it bleeds on
-// each side to cancel that padding back out - see &--stacked below. Also exposed as
-// --stack-padding-x (below): BlockHetArchiefQuote.tsx needs both bleed values, since it has to
-// work out the gap the *other* layout would leave from whichever one is actually on screen.
+// The stacked layout's own left/right padding (Figma node 455:7186), also exposed as
+// --stack-padding-x so BlockHetArchiefQuote.tsx can compare both layouts' bleed.
 $stack-padding-x: variables.$g-spacer-unit * 2.5;
 
 .c-block-het-archief-quote {
@@ -38,18 +30,15 @@ $stack-padding-x: variables.$g-spacer-unit * 2.5;
 	// Figma emits the deprecated `word-break: break-word`; this is its modern equivalent.
 	overflow-wrap: break-word;
 
-	// Bleeds past the text column by $bleed on each side, then pads the text back in by the same
-	// amount, so the quote/author end up exactly as wide, and at exactly the same x position, as
-	// sibling text blocks.
+	// Bleeds past the text column by $bleed, then pads it back in, so the quote/author line up
+	// with sibling text blocks at the same width and x position.
 	width: calc(100% + #{$bleed} * 2);
 	margin-left: calc(-1 * #{$bleed});
 	padding: variables.$g-spacer-unit * 5 $bleed;
 
 	&__mark {
-		// Taken out of flow: the mark's line box is far taller than a line of quote text, so
-		// leaving it in flow stretched the row and pushed the author away from a short quote.
-		// Figma node 455:5723 sits at top 28 while the quote sits at top 40, so it is offset by
-		// that difference from the frame's own top padding.
+		// Out of flow: its line box is taller than a line of quote text and would stretch the row.
+		// Figma node 455:5723's top offset (28 vs. the quote's 40) carries over as-is.
 		position: absolute;
 		top: variables.$g-spacer-unit * 3.5;
 		left: 0;
@@ -75,32 +64,26 @@ $stack-padding-x: variables.$g-spacer-unit * 2.5;
 	}
 
 	// Toggled from BlockHetArchiefQuote.tsx once the bled frame above (or a window resize) would
-	// leave too little clearance (MIN_EDGE_GAP_REM) to the true screen edge, on either side.
+	// leave too little clearance to the true screen edge, on either side.
 	&--stacked {
-		// The desktop bleed above is asymmetric (mark column left, corner clearance right) and no
-		// longer applies - swapped for its own symmetric $stack-padding-x bleed instead, so the
-		// text still stays aligned with sibling blocks while the frame reads as a slightly wider
-		// card around it.
+		// Swaps the desktop's asymmetric bleed for a symmetric $stack-padding-x one, keeping the
+		// text aligned with sibling blocks while the frame reads as a wider card.
 		width: calc(100% + #{$stack-padding-x} * 2);
 		margin-left: calc(-1 * #{$stack-padding-x});
 
-		// Figma node 455:7186: a single top-right radius - the desktop's two-corner pill does
-		// not carry over to the stacked layout.
+		// Figma node 455:7186: a single top-right radius, unlike the desktop's two-corner pill.
 		padding: variables.$g-spacer-unit * 3 $stack-padding-x;
 		border-radius: 0 $frame-radius-mobile 0 0;
 
 		.c-block-het-archief-quote__mark {
-			// Figma node 455:7187: in the stacked layout the mark is in normal flow and
-			// left-aligned with the text below it.
+			// Figma node 455:7187: in flow and left-aligned with the text below it.
 			position: static;
 			width: auto;
 			text-align: left;
 		}
 
 		.c-block-het-archief-quote__quote {
-			// Figma node 455:7186: gap below the mark. No left margin here - the mark sits flush
-			// with the frame's own padding edge in this layout too, so the quote needs to stay
-			// flush with it as well to keep both aligned with sibling text.
+			// Figma node 455:7186: gap below the mark, flush with the frame's padding edge.
 			margin-top: variables.$g-spacer-unit * 2;
 		}
 

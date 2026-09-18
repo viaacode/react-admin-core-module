@@ -11,21 +11,14 @@ import {
 	type CustomBackground,
 	type GradientColor,
 } from '../../../types/content-block.types';
+import { computeIsStacked, STACKED_CLASS } from './BlockHetArchiefQuote.helpers';
 
 import './BlockHetArchiefQuote.scss';
-
-// The frame's desktop bleed (--bleed, set in the .scss from $bleed) must keep at least this much
-// clearance from the true screen edge - see updateIsStacked below. Read from the frame's own
-// computed style rather than duplicating $bleed's value here, since drift between the two would
-// silently break the measurement.
-const MIN_EDGE_GAP_REM = 1.5;
 
 export interface BlockHetArchiefQuoteProps extends DefaultProps {
 	quote: string;
 	authorName?: string;
-	// Optional because content blocks created before this block type existed (the old shared
-	// 'QUOTE' block) have no colour fields in their stored componentState, so these arrive
-	// undefined when read straight out of the database.
+	// Optional: blocks migrated from the old shared 'QUOTE' block predate these fields.
 	textColor?: Color | GradientColor | CustomBackground;
 	frameColor?: Color | GradientColor | CustomBackground;
 }
@@ -34,16 +27,12 @@ export const BlockHetArchiefQuote: FunctionComponent<BlockHetArchiefQuoteProps> 
 	className,
 	quote,
 	authorName,
-	// Same defaults as INITIAL_HET_ARCHIEF_QUOTE_COMPONENTS_STATE() in the editorconfig, which
-	// only runs for blocks created in the editor, never for stored state read back out.
+	// Matches INITIAL_HET_ARCHIEF_QUOTE_COMPONENTS_STATE()'s defaults in the editorconfig.
 	textColor = Color.White,
 	frameColor = Color.Black,
 }) => {
 	const figureRef = useRef<HTMLElement>(null);
-	// Whether the frame is bled (see .scss) far enough to come within MIN_EDGE_GAP_REM of the
-	// true screen edge. Starts false (bled) to match the block's default, unmodified markup, so
-	// server- and first-client-render stay identical - see updateIsStacked for how it's kept
-	// correct from there on.
+	// Starts bled (false) to match the default markup, so SSR and first render don't mismatch.
 	const [isStacked, setIsStacked] = useState(false);
 
 	const updateIsStacked = useCallback(() => {
@@ -52,53 +41,48 @@ export const BlockHetArchiefQuote: FunctionComponent<BlockHetArchiefQuoteProps> 
 			return;
 		}
 
-		const style = getComputedStyle(figureEl);
-		const rootFontSize =
-			Number.parseFloat(getComputedStyle(document.documentElement).fontSize) || 16;
-		// --bleed/--stack-padding-x (set in the .scss) come back as unresolved rem strings, since
-		// computed custom properties aren't resolved to px like ordinary properties are.
-		const remVarToPx = (name: string) =>
-			(Number.parseFloat(style.getPropertyValue(name)) || 0) * rootFontSize;
-		const bleedPx = remVarToPx('--bleed');
-		const stackPaddingPx = remVarToPx('--stack-padding-x');
-		const minEdgeGapPx = MIN_EDGE_GAP_REM * rootFontSize;
-
-		// Whichever layout is currently on screen has its own bleed (bled: -bleedPx margin,
-		// stacked: -stackPaddingPx margin - see .scss), which has to be added back to get from
-		// the frame's own rendered edge to the underlying text column's true position, before
-		// re-deriving what the gap would be if the (other) desktop bleed were applied instead.
-		const currentBleedPx = figureEl.classList.contains('c-block-het-archief-quote--stacked')
-			? stackPaddingPx
-			: bleedPx;
-
-		const rect = figureEl.getBoundingClientRect();
-		const columnLeft = rect.left + currentBleedPx;
-		const columnRightGap = window.innerWidth - rect.right + currentBleedPx;
-
-		const leftGapIfBled = columnLeft - bleedPx;
-		const rightGapIfBled = columnRightGap - bleedPx;
-
-		setIsStacked(Math.min(leftGapIfBled, rightGapIfBled) < minEdgeGapPx);
+		// clientWidth, not window.innerWidth - see computeIsStacked's viewportWidth note.
+		setIsStacked(computeIsStacked(figureEl, document.documentElement.clientWidth));
 	}, []);
 
 	useEffect(() => {
-		if (isServerSideRendering()) {
+		if (isServerSideRendering() || !figureRef.current) {
 			return;
 		}
 
+		// Coalesces bursts of resize/observer events to at most one measurement per frame.
+		let rafId = 0;
+		const scheduleUpdate = () => {
+			cancelAnimationFrame(rafId);
+			rafId = requestAnimationFrame(updateIsStacked);
+		};
+
+		// window 'resize' covers the viewport shrinking; ResizeObserver covers the figure's own box
+		// resizing without a window resize (e.g. dragging the admin preview panel's flex-basis).
+		// Its first notification duplicates the updateIsStacked() call below, so skip it.
+		let isInitialObservation = true;
+		const resizeObserver = new ResizeObserver(() => {
+			if (isInitialObservation) {
+				isInitialObservation = false;
+				return;
+			}
+			scheduleUpdate();
+		});
+		resizeObserver.observe(figureRef.current);
+
 		updateIsStacked();
-		window.addEventListener('resize', updateIsStacked);
-		return () => window.removeEventListener('resize', updateIsStacked);
+		window.addEventListener('resize', scheduleUpdate);
+		return () => {
+			window.removeEventListener('resize', scheduleUpdate);
+			resizeObserver.disconnect();
+			cancelAnimationFrame(rafId);
+		};
 	}, [updateIsStacked]);
 
 	return (
 		<figure
 			ref={figureRef}
-			className={clsx(
-				'c-block-het-archief-quote',
-				{ 'c-block-het-archief-quote--stacked': isStacked },
-				className
-			)}
+			className={clsx('c-block-het-archief-quote', { [STACKED_CLASS]: isStacked }, className)}
 			style={
 				{
 					'--text-color': textColor,
