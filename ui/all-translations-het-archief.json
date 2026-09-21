@@ -2743,6 +2743,26 @@
     "id": "",
     "app": "HET_ARCHIEF",
     "component": "ADMIN_CORE",
+    "location": "modules/content-page/const/get-content-block-type-options",
+    "key": "aankeiler-tekst",
+    "language": "nl",
+    "value": "Aankeiler tekst",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/const/get-content-block-type-options",
+    "key": "aankeiler-tekst",
+    "language": "en",
+    "value": "Aankeiler tekst",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
     "location": "admin/content-block/content-block",
     "key": "voeg-een-content-blok-toe",
     "language": "nl",
@@ -19017,6 +19037,66 @@
     "key": "zoek-in-de-publieke-catalogus-input-aria-label",
     "language": "en",
     "value": "Search the public catalogue here",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-aankeiler-text",
+    "key": "aankeiler-tekst",
+    "language": "nl",
+    "value": "Aankeiler tekst",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-aankeiler-text",
+    "key": "aankeiler-tekst",
+    "language": "en",
+    "value": "Aankeiler tekst",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-aankeiler-text",
+    "key": "tekst-is-verplicht",
+    "language": "nl",
+    "value": "Tekst is verplicht!",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-aankeiler-text",
+    "key": "tekst-is-verplicht",
+    "language": "en",
+    "value": "Tekst is verplicht!",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-aankeiler-text",
+    "key": "limiteer-breedte-tot-800-px",
+    "language": "nl",
+    "value": "Limiteer breedte tot 800px",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-aankeiler-text",
+    "key": "limiteer-breedte-tot-800-px",
+    "language": "en",
+    "value": "Limiteer breedte tot 800px",
     "value_type": "TEXT"
   },
   {

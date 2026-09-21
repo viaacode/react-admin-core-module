@@ -13,6 +13,7 @@ import { INITIAL_DRIEKEUZESPELER_COMPONENTS_STATE } from '~content-blocks/BlockD
 import { INITIAL_EVENTBRITE_COMPONENTS_STATE } from '~content-blocks/BlockEventbrite';
 import { INITIAL_HEADING_COMPONENTS_STATE } from '~content-blocks/BlockHeading';
 import { INITIAL_HERO_CAROUSEL_COMPONENTS_STATE } from '~content-blocks/BlockHeroCarousel';
+import { INITIAL_AANKEILER_TEXT_COMPONENTS_STATE } from '~content-blocks/BlockHetArchiefAankeilerText';
 import { INITIAL_HET_ARCHIEF_HEADER_SEARCH_BLOCK_STATE } from '~content-blocks/BlockHetArchiefHeaderSearch';
 import { INITIAL_HET_ARCHIEF_IMAGE_TEXT_BACKGROUND_BLOCK_STATE } from '~content-blocks/BlockHetArchiefImageTextBackground';
 import { INITIAL_HET_ARCHIEF_QUOTE_COMPONENTS_STATE } from '~content-blocks/BlockHetArchiefQuote';
@@ -116,4 +117,5 @@ export const CONTENT_BLOCK_INITIAL_STATE_MAP: {
 	[ContentBlockType.ImageCarousel]: INITIAL_IMAGE_CAROUSEL_COMPONENTS_STATE,
 	[ContentBlockType.TitleWithParallax]: INITIAL_TITLE_WITH_PARALLAX_COMPONENTS_STATE,
 	[ContentBlockType.ThreeChoicesPlayer]: INITIAL_DRIEKEUZESPELER_COMPONENTS_STATE,
+	[ContentBlockType.AankeilerText]: INITIAL_AANKEILER_TEXT_COMPONENTS_STATE,
 };

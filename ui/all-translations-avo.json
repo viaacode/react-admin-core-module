@@ -9754,6 +9754,16 @@
     "app": "AVO",
     "component": "ADMIN_CORE",
     "location": "modules/content-page/components/blocks/block-page-overview/block-page-overview",
+    "key": "toon-de-gekleurde-labels-bovenop-de-tegels",
+    "language": "nl",
+    "value": "Toon de gekleurde labels bovenop de tegels",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-page-overview/block-page-overview",
     "key": "toon-de-pagina-titels",
     "language": "nl",
     "value": "Toon de paginatitels.",
@@ -10547,6 +10557,46 @@
     "key": "error",
     "language": "nl",
     "value": "Error",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-image-carousel/block-image-carousel",
+    "key": "link",
+    "language": "nl",
+    "value": "Link",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-image-grid/block-image-grid",
+    "key": "aria-label-block-image-grid-item-met-label",
+    "language": "nl",
+    "value": "Categorie: {{label}} - Titel: {{title}}",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-image-grid/block-image-grid",
+    "key": "aria-label-block-image-grid-item",
+    "language": "nl",
+    "value": "{{title}}",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/content-page/components/blocks/block-timeline/block-timeline",
+    "key": "toon-datum",
+    "language": "nl",
+    "value": "Toon datum",
     "value_type": "TEXT"
   },
   {
@@ -16257,6 +16307,16 @@
     "key": "publiceren-naar-klascement",
     "language": "nl",
     "value": "Publiceer naar KlasCement",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "assignment/views/assignment-edit-marcom",
+    "key": "reeds-gepubliceerd-naar-klascement",
+    "language": "nl",
+    "value": "Reeds gepubliceerd naar KlasCement",
     "value_type": "TEXT"
   },
   {
