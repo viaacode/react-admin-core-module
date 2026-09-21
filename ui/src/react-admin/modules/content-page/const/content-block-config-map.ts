@@ -13,6 +13,7 @@ import { DRIEKEUZESPELER_CONFIG } from '~content-blocks/BlockDriekeuzespeler';
 import { EVENTBRITE_BLOCK_CONFIG } from '~content-blocks/BlockEventbrite';
 import { HEADING_BLOCK_CONFIG } from '~content-blocks/BlockHeading';
 import { HERO_CAROUSEL_CONFIG } from '~content-blocks/BlockHeroCarousel';
+import { AANKEILER_TEXT_BLOCK_CONFIG } from '~content-blocks/BlockHetArchiefAankeilerText';
 import { HET_ARCHIEF_HEADER_SEARCH_BLOCK_CONFIG } from '~content-blocks/BlockHetArchiefHeaderSearch';
 import { HET_ARCHIEF_IMAGE_TEXT_BACKGROUND_BLOCK_CONFIG } from '~content-blocks/BlockHetArchiefImageTextBackground';
 import { HET_ARCHIEF_QUOTE_BLOCK_CONFIG } from '~content-blocks/BlockHetArchiefQuote';
@@ -113,4 +114,5 @@ export const CONTENT_BLOCK_CONFIG_MAP: Record<
 	[ContentBlockType.ImageCarousel]: IMAGE_CAROUSEL_CONFIG,
 	[ContentBlockType.TitleWithParallax]: TITLE_WITH_PARALLAX_CONFIG,
 	[ContentBlockType.ThreeChoicesPlayer]: DRIEKEUZESPELER_CONFIG,
+	[ContentBlockType.AankeilerText]: AANKEILER_TEXT_BLOCK_CONFIG,
 };

@@ -282,6 +282,14 @@ export const GET_CONTENT_BLOCK_TYPE_OPTIONS: () => SelectOption<string>[] = () =
 			),
 			value: ContentBlockType.ThreeChoicesPlayer,
 		},
+		{
+			label: tText(
+				'modules/content-page/const/get-content-block-type-options___aankeiler-tekst',
+				{},
+				[HET_ARCHIEF]
+			),
+			value: ContentBlockType.AankeilerText,
+		},
 	];
 
 	// Only show the content blocks that the client enabled through the config object

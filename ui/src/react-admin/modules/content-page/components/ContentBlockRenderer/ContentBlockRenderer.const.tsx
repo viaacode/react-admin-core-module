@@ -12,6 +12,7 @@ import { BlockDriekeuzespeler } from '~content-blocks/BlockDriekeuzespeler';
 import { BlockEventbrite } from '~content-blocks/BlockEventbrite';
 import { BlockHeading } from '~content-blocks/BlockHeading';
 import { BlockHeroCarousel } from '~content-blocks/BlockHeroCarousel';
+import { BlockHetArchiefAankeilerTextWrapper } from '~content-blocks/BlockHetArchiefAankeilerText';
 import { BlockHetArchiefHeaderSearch } from '~content-blocks/BlockHetArchiefHeaderSearch/BlockHetArchiefHeaderSearch';
 import { BlockHetArchiefImageTextBackground } from '~content-blocks/BlockHetArchiefImageTextBackground';
 import { BlockHetArchiefQuote } from '~content-blocks/BlockHetArchiefQuote';
@@ -113,6 +114,7 @@ export function GET_BLOCK_COMPONENT(
 		[ContentBlockType.ImageCarousel]: BlockImageCarousel,
 		[ContentBlockType.TitleWithParallax]: BlockTitleWithParallax,
 		[ContentBlockType.ThreeChoicesPlayer]: BlockDriekeuzespeler,
+		[ContentBlockType.AankeilerText]: BlockHetArchiefAankeilerTextWrapper,
 
 		// Avo specific blocks
 		[ContentBlockType.MediaGrid]: loadComponentFromConfig(ContentBlockType.MediaGrid),
