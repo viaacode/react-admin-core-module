@@ -86,15 +86,19 @@ export const BlockRichText: FunctionComponent<BlockRichTextProps> = ({
 	};
 
 	const renderImage = (contentElem: BlockRichTextElement) => {
-		const { imageSource, imageAlt, imageAction, imageAlign } = contentElem;
-
-		if (!imageSource) {
-			return null;
-		}
+		const {
+			imageSource,
+			imageAlt,
+			imageAction,
+			imageAlign,
+			copyrightTitle,
+			copyrightIconVisible,
+			copyrightText,
+		} = contentElem;
 
 		// The image keeps its intrinsic width, so the alignment only has a visible effect
 		// when the image is narrower than the column.
-		const image = <Image src={imageSource} alt={imageAlt} />;
+		const image = imageSource ? <Image src={imageSource} alt={imageAlt} /> : null;
 
 		return (
 			<div
@@ -103,13 +107,23 @@ export const BlockRichText: FunctionComponent<BlockRichTextProps> = ({
 					`c-rich-text-block__image--${imageAlign || 'center'}`
 				)}
 			>
-				{imageAction ? (
-					<SmartLink action={imageAction} title={imageAlt}>
-						{image}
-					</SmartLink>
-				) : (
-					image
-				)}
+				{/* Shrinks to the image width so the caption starts at the image's left edge
+				    and wraps at its right edge, whatever the alignment */}
+				<figure className="c-rich-text-block__image-figure">
+					{image &&
+						(imageAction ? (
+							<SmartLink action={imageAction} title={imageAlt}>
+								{image}
+							</SmartLink>
+						) : (
+							image
+						))}
+					<CopyrightAttribution
+						title={copyrightTitle}
+						text={copyrightText}
+						showIcon={copyrightIconVisible}
+					/>
+				</figure>
 			</div>
 		);
 	};
@@ -129,11 +143,6 @@ export const BlockRichText: FunctionComponent<BlockRichTextProps> = ({
 			return (
 				<>
 					{renderImage(contentElem)}
-					<CopyrightAttribution
-						title={copyrightTitle}
-						text={copyrightText}
-						showIcon={copyrightIconVisible}
-					/>
 					{buttons && !!buttons.length && renderButtons(columnIndex, buttons)}
 				</>
 			);

@@ -11,6 +11,15 @@
       max-width: 100%;
     }
 
+    &-figure {
+      margin: 0;
+
+      // Shrink-wrap to the image so the caption lines up with the image edges
+      width: fit-content;
+      max-width: 100%;
+      text-align: left;
+    }
+
     &--left {
       justify-content: flex-start;
     }
