@@ -220,6 +220,7 @@ export enum ContentBlockType {
 	ImageCarousel = 'IMAGE_CAROUSEL',
 	TitleWithParallax = 'TITLE_WITH_PARALLAX',
 	ThreeChoicesPlayer = 'THREE_CHOICES_PLAYER',
+	AankeilerText = 'AANKEILER_TEXT',
 }
 
 export enum ContentBlockEditor {
