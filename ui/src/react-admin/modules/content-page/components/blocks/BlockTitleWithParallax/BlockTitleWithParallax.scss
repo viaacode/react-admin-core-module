@@ -83,7 +83,7 @@
 		// Single source of truth for the parallax speed: the .tsx reads this property instead of
 		// duplicating the number, and the oversize height is derived from it so the bottom edge
 		// never passes the block's own.
-		--parallax-speed: 0.5;
+		--parallax-speed: 0.8;
 
 		position: absolute;
 		top: 0;
