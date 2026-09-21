@@ -88,7 +88,10 @@ export const BlockTimeline: FunctionComponent<BlockTimelineProps> = ({
 				const hasSnippet = start !== null && end !== null && end > start;
 
 				return {
-					schemaIdentifier: node.visualType === 'OBJECT' ? String(node.mediaItem?.value || '') : '',
+					schemaIdentifier:
+						node.visualType === TimelineVisualType.OBJECT
+							? String(node.mediaItem?.value || '')
+							: '',
 					start: hasSnippet ? start : undefined,
 					end: hasSnippet ? end : undefined,
 				};
