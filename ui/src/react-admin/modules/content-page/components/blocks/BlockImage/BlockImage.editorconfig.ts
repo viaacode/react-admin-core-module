@@ -44,14 +44,6 @@ export const IMAGE_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 	components: {
 		state: INITIAL_IMAGE_COMPONENTS_STATE(),
 		fields: {
-			...COPYRIGHT_FIELDS({
-				title: {
-					fieldName: 'title',
-				},
-				text: {
-					fieldName: 'text',
-				},
-			}),
 			imageSource: FILE_FIELD(
 				tText('admin/content-block/helpers/generators/image___een-afbeelding-is-verplicht'),
 				{
@@ -98,6 +90,14 @@ export const IMAGE_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 					'react-admin/modules/content-page/components/blocks/block-image/block-image___alt-tekst-voor-de-afbeelding'
 				),
 				validator: undefined,
+			}),
+			...COPYRIGHT_FIELDS({
+				title: {
+					fieldName: 'title',
+				},
+				text: {
+					fieldName: 'text',
+				},
 			}),
 			buttonType: {
 				label: tText(
