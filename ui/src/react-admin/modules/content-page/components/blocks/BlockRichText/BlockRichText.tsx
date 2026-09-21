@@ -5,11 +5,15 @@ import type {
 	GridSize,
 	RenderLinkFunction,
 } from '@viaa/avo2-components';
-import { Button, Column, convertToHtml, Grid, Spacer } from '@viaa/avo2-components';
+import { Button, Column, convertToHtml, Grid, Image, Spacer } from '@viaa/avo2-components';
 import clsx from 'clsx';
 import type { FunctionComponent } from 'react';
 import React from 'react';
 import type { RichTextButton } from '~content-blocks/BlockRichText/BlockRichText.types';
+import type {
+	AlignOption,
+	RichTextColumnType,
+} from '~modules/content-page/types/content-block.types';
 import Html from '~shared/components/Html/Html';
 import { ContentPageIcon } from '~shared/components/Icon/Icon';
 import { defaultRenderLinkFunction } from '~shared/helpers/routing/link';
@@ -17,14 +21,21 @@ import { SanitizePreset } from '~shared/helpers/sanitize/presets';
 
 import './BlockRichText.scss';
 import { CopyrightAttribution } from '~shared/components/CopyrightAttribution';
+import { SmartLink } from '~shared/components/SmartLink/SmartLink';
 
 interface BlockRichTextElement {
+	/** Undefined for content saved before columns could hold an image: render as text */
+	columnType?: RichTextColumnType;
 	content: string;
 	copyrightTitle?: string;
 	copyrightIconVisible?: boolean;
 	copyrightText?: string;
 	buttons?: (ButtonProps & { buttonAction: ButtonAction })[];
 	color?: string;
+	imageSource?: string;
+	imageAlt?: string;
+	imageAction?: ButtonAction;
+	imageAlign?: AlignOption;
 }
 
 export interface BlockRichTextProps extends DefaultProps {
@@ -74,9 +85,59 @@ export const BlockRichText: FunctionComponent<BlockRichTextProps> = ({
 		});
 	};
 
+	const renderImage = (contentElem: BlockRichTextElement) => {
+		const { imageSource, imageAlt, imageAction, imageAlign } = contentElem;
+
+		if (!imageSource) {
+			return null;
+		}
+
+		// The image keeps its intrinsic width, so the alignment only has a visible effect
+		// when the image is narrower than the column.
+		const image = <Image src={imageSource} alt={imageAlt} />;
+
+		return (
+			<div
+				className={clsx(
+					'c-rich-text-block__image',
+					`c-rich-text-block__image--${imageAlign || 'center'}`
+				)}
+			>
+				{imageAction ? (
+					<SmartLink action={imageAction} title={imageAlt}>
+						{image}
+					</SmartLink>
+				) : (
+					image
+				)}
+			</div>
+		);
+	};
+
 	const renderContent = (contentElem: BlockRichTextElement, columnIndex = 0) => {
-		const { content, copyrightTitle, copyrightIconVisible, copyrightText, color, buttons } =
-			contentElem;
+		const {
+			columnType,
+			content,
+			copyrightTitle,
+			copyrightIconVisible,
+			copyrightText,
+			color,
+			buttons,
+		} = contentElem;
+
+		if (columnType === 'IMAGE') {
+			return (
+				<>
+					{renderImage(contentElem)}
+					<CopyrightAttribution
+						title={copyrightTitle}
+						text={copyrightText}
+						showIcon={copyrightIconVisible}
+					/>
+					{buttons && !!buttons.length && renderButtons(columnIndex, buttons)}
+				</>
+			);
+		}
 
 		return (
 			<>

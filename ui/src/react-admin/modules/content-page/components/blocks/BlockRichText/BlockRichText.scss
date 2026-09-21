@@ -2,4 +2,25 @@
   .c-rich-text-editor__content {
     margin: 0 auto;
   }
+
+  &__image {
+    display: flex;
+    padding-top: 2.2rem;
+
+    img {
+      max-width: 100%;
+    }
+
+    &--left {
+      justify-content: flex-start;
+    }
+
+    &--center {
+      justify-content: center;
+    }
+
+    &--right {
+      justify-content: flex-end;
+    }
+  }
 }

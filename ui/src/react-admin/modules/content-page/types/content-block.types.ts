@@ -388,9 +388,17 @@ export interface ButtonsBlockComponentState {
 	navigate?: (buttonAction: ButtonAction) => void;
 }
 
+export type RichTextColumnType = 'TEXT' | 'IMAGE';
+
 export interface RichTextBlockComponentState extends CopyrightComponentState {
+	/** Undefined on content saved before columns could hold an image: treat as 'TEXT' */
+	columnType?: RichTextColumnType;
 	content: string;
 	buttons?: ButtonsBlockComponentState[];
+	imageSource?: string;
+	imageAlt?: string;
+	imageAction?: ButtonAction;
+	imageAlign?: AlignOption;
 }
 
 export interface AnchorLinksBlockComponentState {

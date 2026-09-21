@@ -28,6 +28,11 @@ import { parseSearchQuery } from './helpers/parse-picker';
 
 export interface ContentPickerProps {
 	allowedTypes?: AvoCoreContentPickerType[];
+	/**
+	 * Type to preselect when the field is still empty. Falls back to the first allowed type.
+	 * Ignored once `value` holds a type of its own.
+	 */
+	defaultType?: AvoCoreContentPickerType;
 	value: PickerItem | undefined | null;
 	onChange: (value: PickerItem | null) => void;
 	placeholder?: string;
@@ -43,6 +48,7 @@ export interface ContentPickerProps {
 
 export const ContentPicker: FunctionComponent<ContentPickerProps> = ({
 	allowedTypes = DEFAULT_ALLOWED_TYPES,
+	defaultType,
 	value,
 	onChange,
 	placeholder = tText('admin/shared/components/content-picker/content-picker___selecteer-een-item'),
@@ -56,10 +62,11 @@ export const ContentPicker: FunctionComponent<ContentPickerProps> = ({
 	// filter available options for the type picker
 	const typeOptions = filterTypes(GET_CONTENT_TYPES(), allowedTypes as AvoCoreContentPickerType[]);
 
-	// apply initial type from `value`, default to first available type
+	// apply initial type from `value`, then the caller's preferred type, else the first available one
 	const currentTypeObject = typeOptions.find((type) => type.value === value?.type);
+	const defaultTypeObject = typeOptions.find((type) => type.value === defaultType);
 	const [selectedType, setSelectedType] = useState<PickerTypeOption>(
-		currentTypeObject || typeOptions[0]
+		currentTypeObject || defaultTypeObject || typeOptions[0]
 	);
 
 	// available options for the item picker.
