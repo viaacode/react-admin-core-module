@@ -391,7 +391,11 @@ export interface ButtonsBlockComponentState {
 
 export type RichTextColumnType = 'TEXT' | 'IMAGE';
 
-export interface RichTextBlockComponentState extends CopyrightComponentState {
+export interface RichTextBlockComponentState {
+	content: string;
+}
+
+export interface RichTextTwoColumnsBlockComponentState extends CopyrightComponentState {
 	/** Undefined on content saved before columns could hold an image: treat as 'TEXT' */
 	columnType?: RichTextColumnType;
 	content: string;
@@ -512,7 +516,7 @@ export type RepeatedContentBlockComponentState =
 	| ImageGridBlockComponentStateFields
 	| MediaGridBlockComponentState
 	| ImageInfo // project spotlight & spotlight
-	| RichTextBlockComponentState
+	| RichTextTwoColumnsBlockComponentState
 	| ThreeClickableTilesBlockComponentState;
 
 export type SingleContentBlockComponentState =

@@ -8863,6 +8863,16 @@
     "id": "",
     "app": "AVO",
     "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-image-carousel/block-image-carousel",
+    "key": "link",
+    "language": "nl",
+    "value": "Link",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "AVO",
+    "component": "ADMIN_CORE",
     "location": "admin/content-block/helpers/generators/image-grid",
     "key": "afbeeldingen-grid",
     "language": "nl",
@@ -8997,6 +9007,26 @@
     "key": "alignatie",
     "language": "nl",
     "value": "Uitlijning",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-image-grid/block-image-grid",
+    "key": "aria-label-block-image-grid-item-met-label",
+    "language": "nl",
+    "value": "Categorie: {{label}} - Titel: {{title}}",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-image-grid/block-image-grid",
+    "key": "aria-label-block-image-grid-item",
+    "language": "nl",
+    "value": "{{title}}",
     "value_type": "TEXT"
   },
   {
@@ -9984,6 +10014,26 @@
     "app": "AVO",
     "component": "ADMIN_CORE",
     "location": "admin/content-block/helpers/generators/rich-text-two-columns",
+    "key": "tekst",
+    "language": "nl",
+    "value": "Tekst",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "admin/content-block/helpers/generators/rich-text-two-columns",
+    "key": "afbeelding",
+    "language": "nl",
+    "value": "Afbeelding",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "admin/content-block/helpers/generators/rich-text-two-columns",
     "key": "tekst-2-kolommen",
     "language": "nl",
     "value": "Tekst (2 kolommen)",
@@ -10004,9 +10054,59 @@
     "app": "AVO",
     "component": "ADMIN_CORE",
     "location": "admin/content-block/helpers/generators/rich-text-two-columns",
+    "key": "type-kolom",
+    "language": "nl",
+    "value": "Type kolom",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "admin/content-block/helpers/generators/rich-text-two-columns",
     "key": "tekst-is-verplicht",
     "language": "nl",
     "value": "Tekst is verplicht",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "admin/content-block/helpers/generators/rich-text-two-columns",
+    "key": "een-afbeelding-is-verplicht",
+    "language": "nl",
+    "value": "Een afbeelding is verplicht",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "admin/content-block/helpers/generators/rich-text-two-columns",
+    "key": "alt-tekst-voor-de-afbeelding",
+    "language": "nl",
+    "value": "Alt tekst voor de afbeelding",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "admin/content-block/helpers/generators/rich-text-two-columns",
+    "key": "link-achter-de-afbeelding",
+    "language": "nl",
+    "value": "Link achter de afbeelding",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "admin/content-block/helpers/generators/rich-text-two-columns",
+    "key": "alignatie-afbeelding",
+    "language": "nl",
+    "value": "Alignatie afbeelding",
     "value_type": "TEXT"
   },
   {
@@ -10333,6 +10433,16 @@
     "id": "",
     "app": "AVO",
     "component": "ADMIN_CORE",
+    "location": "react-admin/modules/content-page/components/blocks/block-timeline/block-timeline",
+    "key": "toon-datum",
+    "language": "nl",
+    "value": "Toon datum",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "AVO",
+    "component": "ADMIN_CORE",
     "location": "modules/content-page/components/blocks/block-title-with-parallax/block-title-with-parallax",
     "key": "titel-met-parallax",
     "language": "nl",
@@ -10557,46 +10667,6 @@
     "key": "error",
     "language": "nl",
     "value": "Error",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-image-carousel/block-image-carousel",
-    "key": "link",
-    "language": "nl",
-    "value": "Link",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-image-grid/block-image-grid",
-    "key": "aria-label-block-image-grid-item-met-label",
-    "language": "nl",
-    "value": "Categorie: {{label}} - Titel: {{title}}",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-image-grid/block-image-grid",
-    "key": "aria-label-block-image-grid-item",
-    "language": "nl",
-    "value": "{{title}}",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/content-page/components/blocks/block-timeline/block-timeline",
-    "key": "toon-datum",
-    "language": "nl",
-    "value": "Toon datum",
     "value_type": "TEXT"
   },
   {

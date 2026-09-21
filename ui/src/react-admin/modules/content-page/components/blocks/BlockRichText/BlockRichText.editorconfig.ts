@@ -9,16 +9,10 @@ import type {
 } from '../../../types/content-block.types';
 import { ContentBlockEditor, ContentBlockType } from '../../../types/content-block.types';
 
-import {
-	BLOCK_FIELD_DEFAULTS,
-	BLOCK_STATE_DEFAULTS,
-	COPYRIGHT_STATE,
-	TEXT_FIELD,
-} from '../defaults';
+import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, TEXT_FIELD } from '../defaults';
 
 export const INITIAL_RICH_TEXT_COMPONENTS_STATE = (): RichTextBlockComponentState => ({
 	content: '',
-	...COPYRIGHT_STATE(),
 });
 
 export const INITIAL_RICH_TEXT_BLOCK_STATE = (): DefaultContentBlockState =>

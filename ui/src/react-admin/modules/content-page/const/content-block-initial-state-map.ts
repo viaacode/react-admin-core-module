@@ -39,10 +39,8 @@ import { INITIAL_OVERVIEW_THEMES_COMPONENTS_STATE } from '~content-blocks/BlockO
 import { INITIAL_OVERVIEW_WITH_CAROUSEL_BLOCK_STATE } from '~content-blocks/BlockOverviewWithCarousel/BlockOverviewWithCarousel.editorconfig.ts';
 import { INITIAL_PAGE_OVERVIEW_COMPONENTS_STATE } from '~content-blocks/BlockPageOverview';
 import { INITIAL_QUOTE_COMPONENTS_STATE } from '~content-blocks/BlockQuote';
-import {
-	INITIAL_RICH_TEXT_COMPONENTS_STATE,
-	INITIAL_RICH_TEXT_TWO_COLUMNS_COMPONENTS_STATE,
-} from '~content-blocks/BlockRichText';
+import { INITIAL_RICH_TEXT_COMPONENTS_STATE } from '~content-blocks/BlockRichText';
+import { INITIAL_RICH_TEXT_TWO_COLUMNS_COMPONENTS_STATE } from '~content-blocks/BlockRichTextTwoColumns';
 import { INITIAL_SCROLL_DOWN_NUDGE_BLOCK_STATE } from '~content-blocks/BlockScrollDownNudge';
 import {
 	INITIAL_PROJECTS_SPOTLIGHT_COMPONENTS_STATE,

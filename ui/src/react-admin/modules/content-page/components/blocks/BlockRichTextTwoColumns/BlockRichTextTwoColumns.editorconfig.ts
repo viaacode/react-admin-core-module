@@ -15,8 +15,8 @@ import type {
 	ContentBlockField,
 	ContentBlockFieldGroup,
 	DefaultContentBlockState,
-	RichTextBlockComponentState,
 	RichTextColumnType,
+	RichTextTwoColumnsBlockComponentState,
 } from '../../../types/content-block.types';
 import {
 	ContentBlockEditor,
@@ -49,12 +49,12 @@ const GET_RICH_TEXT_COLUMN_TYPE_OPTIONS: () => {
 
 // Columns saved before the image option existed have no columnType, so they render as text
 const columnIsText: ContentBlockField['isVisible'] = (_config, formGroupState) =>
-	(formGroupState as RichTextBlockComponentState).columnType !== 'IMAGE';
+	(formGroupState as RichTextTwoColumnsBlockComponentState).columnType !== 'IMAGE';
 
 const columnIsImage: ContentBlockField['isVisible'] = (_config, formGroupState) =>
-	(formGroupState as RichTextBlockComponentState).columnType === 'IMAGE';
+	(formGroupState as RichTextTwoColumnsBlockComponentState).columnType === 'IMAGE';
 
-const INITIAL_RICH_TEXT_TWO_COLUMNS_COLUMN_STATE = (): RichTextBlockComponentState => ({
+const INITIAL_RICH_TEXT_TWO_COLUMNS_COLUMN_STATE = (): RichTextTwoColumnsBlockComponentState => ({
 	columnType: 'TEXT',
 	content: '',
 	...COPYRIGHT_STATE(),
@@ -65,10 +65,11 @@ const INITIAL_RICH_TEXT_TWO_COLUMNS_COLUMN_STATE = (): RichTextBlockComponentSta
 	imageAlign: 'center',
 });
 
-export const INITIAL_RICH_TEXT_TWO_COLUMNS_COMPONENTS_STATE = (): RichTextBlockComponentState[] => [
-	INITIAL_RICH_TEXT_TWO_COLUMNS_COLUMN_STATE(),
-	INITIAL_RICH_TEXT_TWO_COLUMNS_COLUMN_STATE(),
-];
+export const INITIAL_RICH_TEXT_TWO_COLUMNS_COMPONENTS_STATE =
+	(): RichTextTwoColumnsBlockComponentState[] => [
+		INITIAL_RICH_TEXT_TWO_COLUMNS_COLUMN_STATE(),
+		INITIAL_RICH_TEXT_TWO_COLUMNS_COLUMN_STATE(),
+	];
 
 export const INITIAL_RICH_TEXT_TWO_COLUMNS_BLOCK_STATE = (): DefaultContentBlockState =>
 	BLOCK_STATE_DEFAULTS({

@@ -38,10 +38,8 @@ import { OVERVIEW_NEWSPAPER_TITLES_BLOCK_CONFIG } from '~content-blocks/BlockOve
 import { OVERVIEW_THEMES_BLOCK_CONFIG } from '~content-blocks/BlockOverviewThemes';
 import { OVERVIEW_WITH_CAROUSEL_CONFIG } from '~content-blocks/BlockOverviewWithCarousel';
 import { QUOTE_BLOCK_CONFIG } from '~content-blocks/BlockQuote';
-import {
-	RICH_TEXT_BLOCK_CONFIG,
-	RICH_TEXT_TWO_COLUMNS_BLOCK_CONFIG,
-} from '~content-blocks/BlockRichText';
+import { RICH_TEXT_BLOCK_CONFIG } from '~content-blocks/BlockRichText';
+import { RICH_TEXT_TWO_COLUMNS_BLOCK_CONFIG } from '~content-blocks/BlockRichTextTwoColumns';
 import { CONTENT_SCROLL_DOWN_NUDGE_CONFIG } from '~content-blocks/BlockScrollDownNudge';
 import {
 	PROJECTS_SPOTLIGHT_BLOCK_CONFIG,
