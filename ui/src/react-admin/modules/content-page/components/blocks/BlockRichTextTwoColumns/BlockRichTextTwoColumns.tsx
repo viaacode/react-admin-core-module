@@ -9,11 +9,11 @@ import { Button, Column, convertToHtml, Grid, Image, Spacer } from '@viaa/avo2-c
 import clsx from 'clsx';
 import type { FunctionComponent } from 'react';
 import React from 'react';
-import type { RichTextButton } from '~content-blocks/BlockRichTextTwoColumns/BlockRichTextTwoColumns.types';
-import type {
-	AlignOption,
-	RichTextColumnType,
-} from '~modules/content-page/types/content-block.types';
+import {
+	ColumnType,
+	type RichTextButton,
+} from '~content-blocks/BlockRichTextTwoColumns/BlockRichTextTwoColumns.types';
+import type { AlignOption } from '~modules/content-page/types/content-block.types';
 import Html from '~shared/components/Html/Html';
 import { ContentPageIcon } from '~shared/components/Icon/Icon';
 import { defaultRenderLinkFunction } from '~shared/helpers/routing/link';
@@ -21,11 +21,11 @@ import { SanitizePreset } from '~shared/helpers/sanitize/presets';
 
 import './BlockRichTextTwoColumns.scss';
 import { CopyrightAttribution } from '~shared/components/CopyrightAttribution';
-import { SmartLink } from '~shared/components/SmartLink/SmartLink';
+import { generateSmartLink } from '~shared/components/SmartLink/SmartLink';
 
 interface BlockRichTextTwoColumnsElement {
 	/** Undefined for content saved before columns could hold an image: render as text */
-	columnType?: RichTextColumnType;
+	columnType?: ColumnType;
 	content: string;
 	copyrightTitle?: string;
 	copyrightIconVisible?: boolean;
@@ -108,14 +108,7 @@ export const BlockRichTextTwoColumns: FunctionComponent<BlockRichTextTwoColumnsP
 				{/* Shrinks to the image width so the caption starts at the image's left edge
 				    and wraps at its right edge, whatever the alignment */}
 				<figure className="c-rich-text-two-columns-block__image-figure">
-					{image &&
-						(imageAction ? (
-							<SmartLink action={imageAction} title={imageAlt}>
-								{image}
-							</SmartLink>
-						) : (
-							image
-						))}
+					{image && generateSmartLink(imageAction, image, imageAlt)}
 					<CopyrightAttribution
 						title={copyrightTitle}
 						text={copyrightText}
@@ -129,7 +122,7 @@ export const BlockRichTextTwoColumns: FunctionComponent<BlockRichTextTwoColumnsP
 	const renderContent = (contentElem: BlockRichTextTwoColumnsElement, columnIndex = 0) => {
 		const { columnType, content, color, buttons } = contentElem;
 
-		if (columnType === 'IMAGE') {
+		if (columnType === ColumnType.IMAGE) {
 			return (
 				<>
 					{renderImage(contentElem)}

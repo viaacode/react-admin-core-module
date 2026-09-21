@@ -14,7 +14,9 @@ import type {
 	ContentItemStyle,
 	ContentTabStyle,
 } from '~content-blocks/BlockPageOverview/BlockPageOverview.types';
+import type { ColumnType } from '~content-blocks/BlockRichTextTwoColumns';
 import type { ImageInfo } from '~content-blocks/BlockSpotlight/BlockSpotlight';
+import type { TimelineVisualType } from '~content-blocks/BlockTimeline/BlockTimeline.types.ts';
 import type { PickerItem } from '~shared/types/content-picker.ts';
 
 // OPTIONS
@@ -389,15 +391,13 @@ export interface ButtonsBlockComponentState {
 	navigate?: (buttonAction: ButtonAction) => void;
 }
 
-export type RichTextColumnType = 'TEXT' | 'IMAGE';
-
 export interface RichTextBlockComponentState {
 	content: string;
 }
 
 export interface RichTextTwoColumnsBlockComponentState extends CopyrightComponentState {
 	/** Undefined on content saved before columns could hold an image: treat as 'TEXT' */
-	columnType?: RichTextColumnType;
+	columnType?: ColumnType;
 	content: string;
 	buttons?: ButtonsBlockComponentState[];
 	imageSource?: string;
@@ -677,8 +677,6 @@ export interface HetArchiefQuoteBlockComponentState {
 // The full ie-object as the proxy returns it; the content picker only reads a few fields off it
 export type { HetArchiefIeObject } from '@viaa/avo2-types';
 
-export type TimelineNodeVisualType = 'NONE' | 'OBJECT' | 'IMAGE';
-
 /**
  * Implemented by any block state that holds a single IE object, so shared fields (see
  * IE_OBJECT_WITH_SNIPPET_TIME_FIELDS) can read the picked object without knowing the block type.
@@ -693,7 +691,7 @@ export interface TimelineNodeBlockComponentState extends MediaItemComponentState
 	showDate: boolean;
 	title: string;
 	text?: string;
-	visualType: TimelineNodeVisualType;
+	visualType: TimelineVisualType;
 	/** Snippet start/end as entered by the editor, eg. `01:23` or `00:01:23`, see IE_OBJECT_WITH_SNIPPET_TIME_FIELDS */
 	startTime?: string;
 	endTime?: string;

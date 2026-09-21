@@ -4,3 +4,8 @@ export type RichTextButton = ButtonProps & {
 	buttonAction: ButtonAction;
 	buttonIconAlignment?: 'left' | 'right';
 };
+
+export enum ColumnType {
+	TEXT = 'TEXT',
+	IMAGE = 'IMAGE',
+}
