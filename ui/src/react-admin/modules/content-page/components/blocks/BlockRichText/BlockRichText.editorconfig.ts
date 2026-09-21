@@ -12,7 +12,6 @@ import { ContentBlockEditor, ContentBlockType } from '../../../types/content-blo
 import {
 	BLOCK_FIELD_DEFAULTS,
 	BLOCK_STATE_DEFAULTS,
-	COPYRIGHT_FIELDS,
 	COPYRIGHT_STATE,
 	TEXT_FIELD,
 } from '../defaults';
@@ -50,7 +49,6 @@ export const RICH_TEXT_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				},
 				tText('admin/content-block/helpers/generators/rich-text___tekst-is-verplicht')
 			),
-			...COPYRIGHT_FIELDS(),
 		},
 	},
 	block: {

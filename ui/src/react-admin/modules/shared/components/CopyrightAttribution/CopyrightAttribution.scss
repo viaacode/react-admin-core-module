@@ -14,5 +14,17 @@
 	&__text {
 		color: colors.$color-gray-1000;
 		@include typography.body-xs(true);
+
+		// Correctly render rich text html paragraphs inside CopyrightAttribution component
+		&.c-rich-text-editor__content {
+			margin: 0 !important;
+
+			p {
+				padding: 0 !important;
+				margin: 0 !important;
+				@include typography.body-xs(true);
+			}
+		}
+
 	}
 }

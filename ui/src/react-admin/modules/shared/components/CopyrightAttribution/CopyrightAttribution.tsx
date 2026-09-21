@@ -4,6 +4,7 @@ import React from 'react';
 
 import './CopyrightAttribution.scss';
 import clsx from 'clsx';
+import Html from '../Html/Html';
 
 export interface CopyrightAttributionProps extends DefaultProps {
 	title?: string;
@@ -37,7 +38,11 @@ export const CopyrightAttribution: FunctionComponent<CopyrightAttributionProps> 
 		<div className={clsx('a-copyright-attribution', className)}>
 			{renderTitle()}
 			{text && (
-				<span className="a-copyright-attribution__text u-background-text-primary">{text}</span>
+				<Html
+					content={text}
+					className="a-copyright-attribution__text u-background-text-primary"
+					type="span"
+				/>
 			)}
 		</div>
 	);
