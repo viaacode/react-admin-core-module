@@ -36,7 +36,7 @@ export const CopyrightAttribution: FunctionComponent<CopyrightAttributionProps> 
 
 	return (
 		<div className={clsx('a-copyright-attribution', className)}>
-			{renderTitle()}
+			{title && renderTitle()}
 			{text && (
 				<Html
 					content={text}
