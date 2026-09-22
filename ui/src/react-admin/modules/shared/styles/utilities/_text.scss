@@ -60,5 +60,5 @@ $u-text-danger-color: colors.$color-error !default;
 }
 
 .u-truncate {
-  @include typography.truncate();
+  @include typography.truncate;
 }
