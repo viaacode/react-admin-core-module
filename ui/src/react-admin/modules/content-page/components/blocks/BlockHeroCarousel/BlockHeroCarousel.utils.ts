@@ -5,6 +5,11 @@ import type { HeroCarouselSlideItem } from '~content-blocks/BlockHeroCarousel/Bl
 import { isAudioVideoType } from '~shared/helpers/is-audio-video-newspaper-type.ts';
 import { mapDcTermsFormatToSimpleType } from '~shared/helpers/map-format-to-type.ts';
 
+// Used as the initial pxPerRem on both server and client so SSR markup and the first client
+// render match exactly -- getPxPerRem() (which reads the real value from the DOM) only runs once
+// mounted, in a useEffect.
+export const DEFAULT_PX_PER_REM = 16;
+
 const FALLBACK_THUMB_WIDTH_REM = 12;
 const FORMAT_THUMB_WIDTHS_REM: Record<HetArchiefSimpleIeObjectType, number> = {
 	[HetArchiefSimpleIeObjectType.VIDEO]: 28,
