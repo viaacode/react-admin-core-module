@@ -19,6 +19,7 @@ import {
 	ACTIVE_SLIDE_CLASS,
 	buildInfiniteStrip,
 	computeOffsetPx,
+	DEFAULT_PX_PER_REM,
 	getPxPerRem,
 	handleTrackTransitionEnd,
 	handleWindowResize,
@@ -47,7 +48,9 @@ export const BlockHeroCarouselCarousel: FunctionComponent<BlockHeroCarouselCarou
 	// jump) -- unlike activeIndex, which must update the moment navigation starts so the
 	// grow/shrink sizing animates immediately.
 	const [settledActiveIndex, setSettledActiveIndex] = useState<number>(startIndex);
-	const [pxPerRem, setPxPerRem] = useState<number>(() => getPxPerRem());
+	// Starts at the same value on server and client so SSR markup and the first client render
+	// match; the real value (which needs the DOM) is only read once mounted, below.
+	const [pxPerRem, setPxPerRem] = useState<number>(DEFAULT_PX_PER_REM);
 	const pxPerRemRef = useRef<number>(pxPerRem);
 	const trackRef = useRef<HTMLDivElement | null>(null);
 	const [isMuted, setIsMuted] = useState<boolean>(true);
@@ -55,6 +58,10 @@ export const BlockHeroCarouselCarousel: FunctionComponent<BlockHeroCarouselCarou
 	useEffect(() => {
 		pxPerRemRef.current = pxPerRem;
 	}, [pxPerRem]);
+
+	useEffect(() => {
+		setPxPerRem(getPxPerRem());
+	}, []);
 
 	useEffect(() => {
 		const onResize = () => handleWindowResize(pxPerRemRef, trackRef, setPxPerRem);
