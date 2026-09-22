@@ -8,6 +8,7 @@ import { GET_COLOR_OPTIONS_EXTENDED_AVO } from '~modules/content-page/const/get-
 import { GET_HEADING_SIZE_OPTIONS } from '~modules/content-page/const/get-heading-type-options';
 import type { FileUploadProps } from '~modules/shared/components/FileUpload/FileUpload';
 import { GET_ADMIN_ICON_OPTIONS } from '~modules/shared/consts/icons.consts';
+import { RICH_TEXT_EDITOR_OPTIONS_FULL } from '~shared/consts/rich-text-editor.consts.ts';
 import { PHOTO_TYPES } from '~shared/helpers/files';
 import { tText } from '~shared/helpers/translation-functions';
 import type {
@@ -94,6 +95,10 @@ export const AVO_IMAGE_TEXT_BACKGROUND_BLOCK_CONFIG = (position = 0): ContentBlo
 				},
 			},
 			content: TEXT_FIELD({
+				editorType: ContentBlockEditor.RICH_TEXT_EDITOR,
+				editorProps: {
+					controls: RICH_TEXT_EDITOR_OPTIONS_FULL,
+				},
 				validator: undefined,
 			}),
 			textAlign: {

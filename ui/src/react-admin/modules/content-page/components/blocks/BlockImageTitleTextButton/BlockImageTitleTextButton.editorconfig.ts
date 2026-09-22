@@ -12,6 +12,7 @@ import {
 } from '~modules/content-page/types/content-block.types';
 import type { FileUploadProps } from '~shared/components/FileUpload/FileUpload';
 import { GET_ADMIN_ICON_OPTIONS } from '~shared/consts/icons.consts';
+import { RICH_TEXT_EDITOR_OPTIONS_FULL } from '~shared/consts/rich-text-editor.consts.ts';
 import { tText } from '~shared/helpers/translation-functions';
 import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, FILE_FIELD, TEXT_FIELD } from '../defaults';
 
@@ -76,7 +77,13 @@ export const IMAGE_TITLE_TEXT_BUTTON_BLOCK_CONFIG = (position = 0): ContentBlock
 					options: GET_HEADING_TYPE_OPTIONS(),
 				},
 			},
-			content: TEXT_FIELD(),
+			content: TEXT_FIELD({
+				editorType: ContentBlockEditor.RICH_TEXT_EDITOR,
+				editorProps: {
+					controls: RICH_TEXT_EDITOR_OPTIONS_FULL,
+				},
+				validator: undefined,
+			}),
 			buttonType: {
 				label: tText('admin/content-block/helpers/generators/ctas___knop-type'),
 				editorType: ContentBlockEditor.Select,
