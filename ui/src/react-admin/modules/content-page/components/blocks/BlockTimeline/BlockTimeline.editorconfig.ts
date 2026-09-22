@@ -157,7 +157,9 @@ export const TIMELINE_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 						editorType: ContentBlockEditor.Checkbox,
 						editorProps: {
 							label: tText(
-								'react-admin/modules/content-page/components/blocks/block-timeline/block-timeline___toon-datum'
+								'react-admin/modules/content-page/components/blocks/block-timeline/block-timeline___toon-datum',
+								{},
+								[HET_ARCHIEF]
 							),
 						} as CheckboxProps,
 					},
@@ -222,7 +224,7 @@ export const TIMELINE_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 								: [
 										tText(
 											'react-admin/modules/content-page/components/blocks/block-timeline/block-timeline___een-object-is-verplicht',
-											undefined,
+											{},
 											[HET_ARCHIEF]
 										),
 									],
