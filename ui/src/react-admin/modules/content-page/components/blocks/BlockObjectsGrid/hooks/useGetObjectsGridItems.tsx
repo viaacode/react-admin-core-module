@@ -20,8 +20,11 @@ export const useGetObjectsGridItems = (
 			fixedItems.map((item) => item.value).join(','),
 		],
 		queryFn: () => getObjectsGridItems(searchQuery, fixedItems, limit),
-		// FA: a different random selection should be shown on every load, so don't serve stale data.
-		staleTime: 0,
+		// FA: a different random selection should be shown on every (full page) load, but
+		// navigating to a detail page and back shouldn't reshuffle the grid. The query cache
+		// is in-memory and reset on a full reload, so never marking this stale keeps the same
+		// objects for the lifetime of that cache while still randomizing on reload.
+		staleTime: Infinity,
 		enabled: Boolean(searchQuery) || fixedItems.length > 0,
 	});
 };
