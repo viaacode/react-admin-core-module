@@ -25,6 +25,7 @@ import { tText } from '~shared/helpers/translation-functions';
 import { HET_ARCHIEF } from '~shared/types';
 import type { DefaultComponentProps } from '~shared/types/components';
 import './BlockTimeline.scss';
+import { TimelineVisualType } from '~content-blocks/BlockTimeline/BlockTimeline.types.ts';
 
 export interface BlockTimelineProps extends DefaultComponentProps {
 	/** Id of the content block, added by the content block renderer. Empty for an unsaved block. */
@@ -87,7 +88,10 @@ export const BlockTimeline: FunctionComponent<BlockTimelineProps> = ({
 				const hasSnippet = start !== null && end !== null && end > start;
 
 				return {
-					schemaIdentifier: node.visualType === 'OBJECT' ? String(node.mediaItem?.value || '') : '',
+					schemaIdentifier:
+						node.visualType === TimelineVisualType.OBJECT
+							? String(node.mediaItem?.value || '')
+							: '',
 					start: hasSnippet ? start : undefined,
 					end: hasSnippet ? end : undefined,
 				};
@@ -249,8 +253,8 @@ export const BlockTimeline: FunctionComponent<BlockTimelineProps> = ({
 			: {};
 		const hasNodeTextColors = Object.keys(nodeTextColorVariables).length > 0;
 		const markerShape = index % 2 === 0 ? 'circle' : 'rectangle';
-		const hasImage = node.visualType === 'IMAGE' && !!node.image;
-		const hasObject = node.visualType === 'OBJECT' && !!node.mediaItem?.value;
+		const hasImage = node.visualType === TimelineVisualType.IMAGE && !!node.image;
+		const hasObject = node.visualType === TimelineVisualType.OBJECT && !!node.mediaItem?.value;
 		const ieObject = hasObject ? ieObjects?.[elementIndex] : undefined;
 		const hasFailedObject =
 			hasObject &&

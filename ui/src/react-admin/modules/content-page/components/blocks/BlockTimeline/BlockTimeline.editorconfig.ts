@@ -1,5 +1,6 @@
 import type { CheckboxProps, SelectOption } from '@viaa/avo2-components';
 import { AvoCoreContentPickerType, AvoSearchOrderDirection } from '@viaa/avo2-types';
+import { TimelineVisualType } from '~content-blocks/BlockTimeline/BlockTimeline.types.ts';
 import { GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF } from '~modules/content-page/const/get-color-options';
 import type { FileUploadProps } from '~shared/components/FileUpload/FileUpload';
 import { tText } from '~shared/helpers/translation-functions';
@@ -12,7 +13,6 @@ import type {
 	DefaultContentBlockState,
 	TimelineBlockComponentState,
 	TimelineNodeBlockComponentState,
-	TimelineNodeVisualType,
 } from '../../../types/content-block.types';
 import { Color, ContentBlockEditor, ContentBlockType } from '../../../types/content-block.types';
 import {
@@ -24,14 +24,14 @@ import {
 	TEXT_FIELD,
 } from '../defaults';
 
-const GET_TIMELINE_NODE_VISUAL_TYPE_OPTIONS = (): SelectOption<TimelineNodeVisualType>[] => [
+const GET_TIMELINE_NODE_VISUAL_TYPE_OPTIONS = (): SelectOption<TimelineVisualType>[] => [
 	{
 		label: tText(
 			'react-admin/modules/content-page/components/blocks/block-timeline/block-timeline___geen',
 			{},
 			[HET_ARCHIEF]
 		),
-		value: 'NONE',
+		value: TimelineVisualType.NONE,
 	},
 	{
 		label: tText(
@@ -39,7 +39,7 @@ const GET_TIMELINE_NODE_VISUAL_TYPE_OPTIONS = (): SelectOption<TimelineNodeVisua
 			{},
 			[HET_ARCHIEF]
 		),
-		value: 'OBJECT',
+		value: TimelineVisualType.OBJECT,
 	},
 	{
 		label: tText(
@@ -47,7 +47,7 @@ const GET_TIMELINE_NODE_VISUAL_TYPE_OPTIONS = (): SelectOption<TimelineNodeVisua
 			{},
 			[HET_ARCHIEF]
 		),
-		value: 'IMAGE',
+		value: TimelineVisualType.IMAGE,
 	},
 ];
 
@@ -71,11 +71,15 @@ const GET_TIMELINE_SORT_ORDER_OPTIONS = (): SelectOption<AvoSearchOrderDirection
 ];
 
 const visualTypeIsObject: ContentBlockField['isVisible'] = (_config, formGroupState) => {
-	return (formGroupState as TimelineNodeBlockComponentState).visualType === 'OBJECT';
+	return (
+		(formGroupState as TimelineNodeBlockComponentState).visualType === TimelineVisualType.OBJECT
+	);
 };
 
 const visualTypeIsImage: ContentBlockField['isVisible'] = (_config, formGroupState) => {
-	return (formGroupState as TimelineNodeBlockComponentState).visualType === 'IMAGE';
+	return (
+		(formGroupState as TimelineNodeBlockComponentState).visualType === TimelineVisualType.IMAGE
+	);
 };
 
 const INITIAL_TIMELINE_NODE_STATE = (): TimelineNodeBlockComponentState => ({
@@ -83,7 +87,7 @@ const INITIAL_TIMELINE_NODE_STATE = (): TimelineNodeBlockComponentState => ({
 	showDate: true,
 	title: '',
 	text: '',
-	visualType: 'NONE',
+	visualType: TimelineVisualType.NONE,
 	mediaItem: undefined,
 	startTime: undefined,
 	endTime: undefined,
@@ -153,7 +157,9 @@ export const TIMELINE_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 						editorType: ContentBlockEditor.Checkbox,
 						editorProps: {
 							label: tText(
-								'react-admin/modules/content-page/components/blocks/block-timeline/block-timeline___toon-datum'
+								'react-admin/modules/content-page/components/blocks/block-timeline/block-timeline___toon-datum',
+								{},
+								[HET_ARCHIEF]
 							),
 						} as CheckboxProps,
 					},
@@ -218,7 +224,7 @@ export const TIMELINE_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 								: [
 										tText(
 											'react-admin/modules/content-page/components/blocks/block-timeline/block-timeline___een-object-is-verplicht',
-											undefined,
+											{},
 											[HET_ARCHIEF]
 										),
 									],

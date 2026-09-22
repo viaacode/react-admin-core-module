@@ -23244,6 +23244,46 @@
     "app": "HET_ARCHIEF",
     "component": "ADMIN_CORE",
     "location": "admin/content-block/helpers/generators/rich-text-two-columns",
+    "key": "tekst",
+    "language": "nl",
+    "value": "Tekst",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "admin/content-block/helpers/generators/rich-text-two-columns",
+    "key": "tekst",
+    "language": "en",
+    "value": "Tekst",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "admin/content-block/helpers/generators/rich-text-two-columns",
+    "key": "afbeelding",
+    "language": "nl",
+    "value": "Afbeelding",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "admin/content-block/helpers/generators/rich-text-two-columns",
+    "key": "afbeelding",
+    "language": "en",
+    "value": "Afbeelding",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "admin/content-block/helpers/generators/rich-text-two-columns",
     "key": "tekst-2-kolommen",
     "language": "nl",
     "value": "Tekst (2 kolommen)",
@@ -23284,6 +23324,26 @@
     "app": "HET_ARCHIEF",
     "component": "ADMIN_CORE",
     "location": "admin/content-block/helpers/generators/rich-text-two-columns",
+    "key": "type-kolom",
+    "language": "nl",
+    "value": "Type kolom",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "admin/content-block/helpers/generators/rich-text-two-columns",
+    "key": "type-kolom",
+    "language": "en",
+    "value": "Type kolom",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "admin/content-block/helpers/generators/rich-text-two-columns",
     "key": "tekst-is-verplicht",
     "language": "nl",
     "value": "Tekst is verplicht",
@@ -23297,6 +23357,86 @@
     "key": "tekst-is-verplicht",
     "language": "en",
     "value": "Text is required",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "admin/content-block/helpers/generators/rich-text-two-columns",
+    "key": "een-afbeelding-is-verplicht",
+    "language": "nl",
+    "value": "Een afbeelding is verplicht",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "admin/content-block/helpers/generators/rich-text-two-columns",
+    "key": "een-afbeelding-is-verplicht",
+    "language": "en",
+    "value": "Een afbeelding is verplicht",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "admin/content-block/helpers/generators/rich-text-two-columns",
+    "key": "alt-tekst-voor-de-afbeelding",
+    "language": "nl",
+    "value": "Alt tekst voor de afbeelding",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "admin/content-block/helpers/generators/rich-text-two-columns",
+    "key": "alt-tekst-voor-de-afbeelding",
+    "language": "en",
+    "value": "Alt tekst voor de afbeelding",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "admin/content-block/helpers/generators/rich-text-two-columns",
+    "key": "link-achter-de-afbeelding",
+    "language": "nl",
+    "value": "Link achter de afbeelding",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "admin/content-block/helpers/generators/rich-text-two-columns",
+    "key": "link-achter-de-afbeelding",
+    "language": "en",
+    "value": "Link achter de afbeelding",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "admin/content-block/helpers/generators/rich-text-two-columns",
+    "key": "alignatie-afbeelding",
+    "language": "nl",
+    "value": "Alignatie afbeelding",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "admin/content-block/helpers/generators/rich-text-two-columns",
+    "key": "alignatie-afbeelding",
+    "language": "en",
+    "value": "Alignatie afbeelding",
     "value_type": "TEXT"
   },
   {
@@ -26417,26 +26557,6 @@
     "key": "je-hebt-enkel-toegang-tot-de-metadata-van-dit-object-omdat-dit-object-niet-publiek-beschikbaar-is-volgens-de-licenties-van-de-auteur",
     "language": "en",
     "value": "You can only access the metadata of this object because this object is not publicly available according to the author's licences",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/object-detail-page",
-    "key": "ga-terug-naar-de-zoekresultaten-button-aria-label",
-    "language": "nl",
-    "value": "Hiermee ga je terug naar de zoekresultaten",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/object-detail-page",
-    "key": "ga-terug-naar-de-zoekresultaten-button-aria-label",
-    "language": "en",
-    "value": "This will allow you to navigate back to your search results",
     "value_type": "TEXT"
   },
   {
@@ -60257,6 +60377,26 @@
     "key": "sluiten",
     "language": "en",
     "value": "Close",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/object-detail-page",
+    "key": "aria-label-terug-knop-op-detail-pagina",
+    "language": "nl",
+    "value": "aria label terug knop op detail pagina",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/object-detail-page",
+    "key": "aria-label-terug-knop-op-detail-pagina",
+    "language": "en",
+    "value": "aria label terug knop op detail pagina",
     "value_type": "TEXT"
   },
   {

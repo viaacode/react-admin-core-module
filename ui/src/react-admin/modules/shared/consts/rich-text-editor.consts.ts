@@ -75,3 +75,14 @@ export const RICH_TEXT_EDITOR_OPTIONS_FULL_WITHOUT_ALIGN: (
 	'remove-styles',
 	'edit-html',
 ];
+
+export const RICH_TEXT_EDITOR_OPTIONS_LINK_ONLY: RichTextEditorControl[] = [
+	'fullscreen',
+	'separator',
+	'undo',
+	'redo',
+	'separator',
+	'link',
+	'separator',
+	'remove-styles',
+];

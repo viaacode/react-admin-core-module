@@ -79,12 +79,7 @@ export const BlockImage: FunctionComponent<BlockImageProps> = ({
 		>
 			<div className="o-block-image__wrapper">
 				{/* image itself with or without link */}
-				{!!imageAction && (
-					<SmartLink action={imageAction} title={imageAlt}>
-						{renderImageContent()}
-					</SmartLink>
-				)}
-				{!imageAction && renderImageContent()}
+				{generateSmartLink(imageAction, renderImageContent(), imageAlt)}
 				{/* button on top of image */}
 				{buttonAction &&
 					generateSmartLink(

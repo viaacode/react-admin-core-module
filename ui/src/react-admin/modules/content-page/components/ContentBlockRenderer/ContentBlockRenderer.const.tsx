@@ -38,6 +38,7 @@ import { BlockOverviewWithCarousel } from '~content-blocks/BlockOverviewWithCaro
 import { BlockPageOverviewWrapper } from '~content-blocks/BlockPageOverview';
 import { BlockQuote } from '~content-blocks/BlockQuote';
 import { BlockRichTextWrapper } from '~content-blocks/BlockRichText';
+import { BlockRichTextTwoColumns } from '~content-blocks/BlockRichTextTwoColumns';
 import { BlockScrollDownNudge } from '~content-blocks/BlockScrollDownNudge';
 import { BlockProjectSpotlightWrapper, BlockSpotlight } from '~content-blocks/BlockSpotlight';
 import { BlockTagsWithLink } from '~content-blocks/BlockTagsWithLink';
@@ -76,7 +77,7 @@ export function GET_BLOCK_COMPONENT(
 		[ContentBlockType.PageOverview]: BlockPageOverviewWrapper,
 		[ContentBlockType.ProjectsSpotlight]: BlockProjectSpotlightWrapper,
 		[ContentBlockType.Quote]: BlockQuote,
-		[ContentBlockType.RichTextTwoColumns]: BlockRichTextWrapper,
+		[ContentBlockType.RichTextTwoColumns]: BlockRichTextTwoColumns,
 		[ContentBlockType.RichText]: BlockRichTextWrapper,
 		[ContentBlockType.Spotlight]: BlockSpotlight,
 		[ContentBlockType.AvoHero]: AvoHeroWrapper,
@@ -157,7 +158,6 @@ export const NAVIGABLE_CONTENT_BLOCKS = [
 	ContentBlockType.CTAs,
 	ContentBlockType.ImageGrid,
 	ContentBlockType.ProjectsSpotlight,
-	ContentBlockType.RichText,
 	ContentBlockType.RichTextTwoColumns,
 	ContentBlockType.Spotlight,
 	ContentBlockType.AvoHero,

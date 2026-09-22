@@ -2,6 +2,7 @@ import { cleanup, render } from '@testing-library/react';
 import type { HetArchiefPlayableDisplayIeObject } from '@viaa/avo2-types';
 import { AvoSearchOrderDirection } from '@viaa/avo2-types';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { TimelineVisualType } from '~content-blocks/BlockTimeline/BlockTimeline.types.ts';
 import { AdminConfigManager } from '~core/config/config.class';
 import { Locale } from '~modules/translations/translations.core.types';
 import { BlockTimeline } from './BlockTimeline';
@@ -122,7 +123,13 @@ describe('<BlockTimeline /> playable display data alignment', () => {
 	// it has in the block config, not by the row it ends up on.
 	// https://meemoo.atlassian.net/browse/ARC-3848
 	const NODES = [
-		{ ...NODE, date: '2020-01-01', title: 'Oldest', visualType: 'IMAGE', image: 'oldest.jpg' },
+		{
+			...NODE,
+			date: '2020-01-01',
+			title: 'Oldest',
+			visualType: TimelineVisualType.IMAGE,
+			image: 'oldest.jpg',
+		},
 		{
 			...NODE,
 			date: '2026-05-01',

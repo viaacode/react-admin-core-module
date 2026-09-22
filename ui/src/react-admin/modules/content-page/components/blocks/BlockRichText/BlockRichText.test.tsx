@@ -7,10 +7,7 @@ import { RICH_TEXT_MOCK } from './BlockRichText.mock';
 
 const customClass = 'c-block-custom';
 
-const SingleColumnExample = <BlockRichText className={customClass} elements={RICH_TEXT_MOCK} />;
-const TwoColumnExample = (
-	<BlockRichText className={customClass} elements={[RICH_TEXT_MOCK, RICH_TEXT_MOCK]} />
-);
+const Example = <BlockRichText className={customClass} elements={RICH_TEXT_MOCK} />;
 
 afterEach(() => {
 	cleanup();
@@ -18,11 +15,11 @@ afterEach(() => {
 
 describe('<BlockRichText />', () => {
 	it('Should be able to render', () => {
-		render(SingleColumnExample);
+		render(Example);
 	});
 
 	it('Should render the markdown correctly', () => {
-		const { container } = render(SingleColumnExample);
+		const { container } = render(Example);
 		expect(container.innerHTML).toContain('>Title</h1>');
 		expect(container.innerHTML).toContain('<p>');
 		expect(container.innerHTML).toContain('<ul>');
@@ -35,16 +32,10 @@ describe('<BlockRichText />', () => {
 	});
 
 	it('Should set the correct className', () => {
-		const { container } = render(SingleColumnExample);
+		const { container } = render(Example);
 		const contentContainer = container.querySelector('.c-rich-text-editor__content');
 		expect(container.firstChild).toHaveClass(customClass);
 		expect(contentContainer).not.toBeNull();
 		expect(contentContainer).toHaveClass('u-background-text-links');
-	});
-
-	it('Should create multiple columns', () => {
-		const { container } = render(TwoColumnExample);
-		const columns = container.querySelectorAll('.c-rich-text-editor__content');
-		expect(columns.length).toBe(2);
 	});
 });

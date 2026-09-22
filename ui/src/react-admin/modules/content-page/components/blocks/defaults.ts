@@ -12,7 +12,10 @@ import {
 import type { FileUploadProps } from '~shared/components/FileUpload/FileUpload';
 import type { RichTextEditorWrapperProps } from '~shared/components/RichTextEditorWrapper/RichTextEditorWrapper';
 import type { UserGroupSelectProps } from '~shared/components/UserGroupSelect/UserGroupSelect';
-import { RICH_TEXT_EDITOR_OPTIONS_FULL_WITHOUT_ALIGN } from '~shared/consts/rich-text-editor.consts';
+import {
+	RICH_TEXT_EDITOR_OPTIONS_FULL_WITHOUT_ALIGN,
+	RICH_TEXT_EDITOR_OPTIONS_LINK_ONLY,
+} from '~shared/consts/rich-text-editor.consts';
 import { isAvo } from '~shared/helpers/is-avo';
 import { tText } from '~shared/helpers/translation-functions';
 import { validateRequiredValue } from '~shared/helpers/validation.ts';
@@ -31,6 +34,7 @@ import {
 	type IsVisibleFunc,
 	type PaddingFieldState,
 } from '../../types/content-block.types';
+import './image-annotation.styles.scss';
 
 // Block config defaults
 export const BLOCK_STATE_DEFAULTS = (
@@ -233,6 +237,11 @@ export const COPYRIGHT_FIELDS = (overrides?: {
 	},
 	[overrides?.text?.fieldName || 'copyrightText']: TEXT_FIELD({
 		label: tText('modules/content-page/components/blocks/defaults___bijschrift-beschrijving'),
+		editorType: ContentBlockEditor.RICH_TEXT_EDITOR,
+		editorProps: {
+			controls: RICH_TEXT_EDITOR_OPTIONS_LINK_ONLY,
+			className: 'c-rich-text-editor--copyright-text',
+		},
 		validator: undefined,
 		...overrides?.text?.overrides,
 	}),

@@ -38,7 +38,9 @@ export const INITIAL_IMAGE_CAROUSEL_BLOCK_STATE = (): DefaultContentBlockState =
 export const IMAGE_CAROUSEL_CONFIG = (position = 0): ContentBlockConfig => ({
 	position,
 	name: tText(
-		'modules/content-page/components/blocks/block-image-carousel/block-image-carousel___Carousel-met-afbeeldingen'
+		'modules/content-page/components/blocks/block-image-carousel/block-image-carousel___Carousel-met-afbeeldingen',
+		{},
+		[HET_ARCHIEF]
 	),
 	type: ContentBlockType.ImageCarousel,
 	components: {
@@ -48,20 +50,20 @@ export const IMAGE_CAROUSEL_CONFIG = (position = 0): ContentBlockConfig => ({
 				{
 					label: tText(
 						'modules/content-page/components/blocks/block-image-carousel/block-image-carousel___title',
-						undefined,
+						{},
 						[HET_ARCHIEF]
 					),
 				},
 				tText(
 					'modules/content-page/components/blocks/block-image-carousel/block-image-carousel___titel-is-verplicht',
-					undefined,
+					{},
 					[HET_ARCHIEF]
 				)
 			),
 			titleType: {
 				label: tText(
 					'modules/content-page/components/blocks/block-image-carousel/block-image-carousel___titletype',
-					undefined,
+					{},
 					[HET_ARCHIEF]
 				),
 				editorType: ContentBlockEditor.Select,
@@ -73,7 +75,7 @@ export const IMAGE_CAROUSEL_CONFIG = (position = 0): ContentBlockConfig => ({
 						value,
 						tText(
 							'modules/content-page/components/blocks/block-image-carousel/block-image-carousel___titletype-is-verplicht',
-							undefined,
+							{},
 							[HET_ARCHIEF]
 						)
 					),
@@ -81,14 +83,14 @@ export const IMAGE_CAROUSEL_CONFIG = (position = 0): ContentBlockConfig => ({
 			elements: {
 				label: tText(
 					'modules/content-page/components/blocks/block-image-carousel/block-image-carousel___content-item',
-					undefined,
+					{},
 					[HET_ARCHIEF]
 				),
 				fields: {
 					image: {
 						label: tText(
 							'modules/content-page/components/blocks/block-image-carousel/block-image-carousel___item-image',
-							undefined,
+							{},
 							[HET_ARCHIEF]
 						),
 						editorType: ContentBlockEditor.FileUpload,
@@ -97,7 +99,7 @@ export const IMAGE_CAROUSEL_CONFIG = (position = 0): ContentBlockConfig => ({
 								value,
 								tText(
 									'modules/content-page/components/blocks/block-image-carousel/block-image-carousel___afbeelding-is-verplicht',
-									undefined,
+									{},
 									[HET_ARCHIEF]
 								)
 							),
@@ -118,7 +120,9 @@ export const IMAGE_CAROUSEL_CONFIG = (position = 0): ContentBlockConfig => ({
 					...COPYRIGHT_FIELDS(),
 					imageAction: {
 						label: tText(
-							'modules/content-page/components/blocks/block-image-carousel/block-image-carousel___link'
+							'modules/content-page/components/blocks/block-image-carousel/block-image-carousel___link',
+							{},
+							[HET_ARCHIEF]
 						),
 						editorType: ContentBlockEditor.ContentPicker,
 						editorProps: {
@@ -136,12 +140,12 @@ export const IMAGE_CAROUSEL_CONFIG = (position = 0): ContentBlockConfig => ({
 					defaultState: INITIAL_IMAGE_CAROUSEL_ELEMENT_STATE(),
 					addButtonLabel: tText(
 						'modules/content-page/components/blocks/block-image-carousel/block-image-carousel___voeg-afbeelding-toe',
-						undefined,
+						{},
 						[HET_ARCHIEF]
 					),
 					deleteButtonLabel: tText(
 						'modules/content-page/components/blocks/block-image-carousel/block-image-carousel___verwijder-afbeelding',
-						undefined,
+						{},
 						[HET_ARCHIEF]
 					),
 				},
