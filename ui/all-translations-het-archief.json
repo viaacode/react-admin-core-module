@@ -26563,6 +26563,26 @@
     "id": "",
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
+    "location": "modules/ie-objects/object-detail-page",
+    "key": "aria-label-terug-knop-op-detail-pagina",
+    "language": "nl",
+    "value": "aria label terug knop op detail pagina",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/object-detail-page",
+    "key": "aria-label-terug-knop-op-detail-pagina",
+    "language": "en",
+    "value": "aria label terug knop op detail pagina",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
     "location": "pages/bezoekersruimte/visitor-space-slug/object-id/index",
     "key": "tot-het-materiaal-geen-toegang-dien-aanvraag-in",
     "language": "nl",
@@ -60377,26 +60397,6 @@
     "key": "sluiten",
     "language": "en",
     "value": "Close",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/object-detail-page",
-    "key": "aria-label-terug-knop-op-detail-pagina",
-    "language": "nl",
-    "value": "aria label terug knop op detail pagina",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/object-detail-page",
-    "key": "aria-label-terug-knop-op-detail-pagina",
-    "language": "en",
-    "value": "aria label terug knop op detail pagina",
     "value_type": "TEXT"
   },
   {
