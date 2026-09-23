@@ -108,7 +108,15 @@ export const BlockRichTextTwoColumns: FunctionComponent<BlockRichTextTwoColumnsP
 				{/* Shrinks to the image width so the caption starts at the image's left edge
 				    and wraps at its right edge, whatever the alignment */}
 				<figure className="c-rich-text-two-columns-block__image-figure">
-					{image && generateSmartLink(imageAction, image, imageAlt)}
+					{/* The class only ends up on an actual anchor: without an action SmartLink renders
+					    its children bare, so the zoom effect is limited to linked images */}
+					{image &&
+						generateSmartLink(
+							imageAction,
+							image,
+							imageAlt,
+							'c-rich-text-two-columns-block__image-link'
+						)}
 					<CopyrightAttribution
 						title={copyrightTitle}
 						text={copyrightText}

@@ -1,3 +1,5 @@
+@use "../../../../shared/styles/mixins/animations" as animations;
+
 .c-rich-text-two-columns-block {
   .c-rich-text-editor__content {
     margin: 0 auto;
@@ -9,6 +11,25 @@
 
     img {
       max-width: 100%;
+    }
+
+    // Only a linked image gets the zoom effect; the anchor crops the scaled image.
+    &-link {
+      display: block;
+      overflow: hidden;
+
+      img {
+        display: block;
+
+        @include animations.zoom-in-transition;
+      }
+
+      // Pointer devices only, never on keyboard focus.
+      @media (hover: hover) {
+        &:hover img {
+          @include animations.zoom-in-animation;
+        }
+      }
     }
 
     &-figure {
