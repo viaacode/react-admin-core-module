@@ -8853,26 +8853,6 @@
     "id": "",
     "app": "AVO",
     "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-image-carousel/block-image-carousel",
-    "key": "Carousel-met-afbeeldingen",
-    "language": "nl",
-    "value": "Carousel met afbeeldingen",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-image-carousel/block-image-carousel",
-    "key": "link",
-    "language": "nl",
-    "value": "Link",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "AVO",
-    "component": "ADMIN_CORE",
     "location": "admin/content-block/helpers/generators/image-grid",
     "key": "afbeeldingen-grid",
     "language": "nl",
@@ -10427,16 +10407,6 @@
     "key": "link",
     "language": "nl",
     "value": "Link",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/content-page/components/blocks/block-timeline/block-timeline",
-    "key": "toon-datum",
-    "language": "nl",
-    "value": "Toon datum",
     "value_type": "TEXT"
   },
   {
@@ -18618,16 +18588,6 @@
     "language": "nl",
     "value": "Deze collectie is in geen enkele bundel opgenomen.",
     "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "collection/components/fragment/fragment-edit",
-    "key": "het-controleren-van-je-account-rechten-is-mislukt",
-    "language": "nl",
-    "value": "Het controleren van de rechten gekoppeld aan je account is mislukt. Contacteer ons via de Feedback-knop mocht dit probleem zich blijven voordoen.",
-    "value_type": "HTML"
   },
   {
     "id": "",
@@ -33677,6 +33637,16 @@
     "key": "deze-afbeelding-valt-onder-copyright-van-organisation-name",
     "language": "nl",
     "value": "De bron van deze videostill is <a href=\"{{organisationWebsite}}\" target=\"_blank\">{{organisationName}}</a>.",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "collection/components/collection-or-bundle-edit-content",
+    "key": "het-controleren-van-je-account-rechten-is-mislukt",
+    "language": "nl",
+    "value": "Het controleren van je account rechten is mislukt",
     "value_type": "HTML"
   },
   {
