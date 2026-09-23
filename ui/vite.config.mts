@@ -1,7 +1,6 @@
 import { resolve } from 'node:path';
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import viteTsconfigPaths from 'vite-tsconfig-paths';
 import dts from 'vite-plugin-dts';
 import pkg from './package.json';
 
@@ -15,7 +14,7 @@ const external = [
 
 // https://vitejs.dev/config/
 export default defineConfig({
-	plugins: [react(), viteTsconfigPaths(), dts()],
+	plugins: [react(), dts()],
 	server: {
 		port: 3400,
 	},
@@ -60,6 +59,7 @@ export default defineConfig({
 		),
 	},
 	resolve: {
+		tsconfigPaths: true,
 		dedupe: peerDependencies,
 		alias: {
 			'@': resolve(__dirname, 'public'),
