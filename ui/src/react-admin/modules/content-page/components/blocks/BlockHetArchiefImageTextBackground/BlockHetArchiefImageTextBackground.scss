@@ -18,7 +18,7 @@
   // would inflate the block past the image's own height, leaving the image
   // (vertically centered in __media) with dead space above and below it.
   &.c-block-het-archief-image-text-background--has-copyright {
-    min-height: max(34rem, calc(var(--copyright-height, 0px) + #{variables.$g-spacer-unit}));
+    min-height: max(34rem, calc(var(--copyright-height, 0px) + #{variables.$g-spacer-unit * 1.5}));
   }
 
   &.c-block-het-archief-image-text-background--has-image {
@@ -29,7 +29,7 @@
     &.c-block-het-archief-image-text-background--has-copyright {
       min-height: max(
         34rem,
-        calc(max(21.7rem, var(--image-height, 0px)) + var(--copyright-height, 0px) + #{variables.$g-spacer-unit})
+        calc(max(21.7rem, var(--image-height, 0px)) + var(--copyright-height, 0px) + #{variables.$g-spacer-unit * 1.5})
       );
     }
   }
@@ -211,7 +211,7 @@
 
     .c-block-het-archief-image-text-background__copyright {
       flex: 0 0 auto;
-      margin-top: variables.$g-spacer-unit;
+      margin-top: variables.$g-spacer-unit * 1.5;
       max-width: 100%;
 
       &:empty {

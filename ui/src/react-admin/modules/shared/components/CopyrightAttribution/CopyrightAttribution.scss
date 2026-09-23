@@ -1,10 +1,12 @@
 @use "../../styles/settings/colors" as colors;
 @use "../../styles/mixins/typography" as typography;
+@use "../../styles/settings/variables" as variables;
 
 .a-copyright-attribution {
 	display: flex;
 	flex-direction: column;
 	width: 100%;
+	margin-top: variables.$g-spacer-unit * 1.5;
 
 	&__annotation {
 		color: colors.$neutral;
