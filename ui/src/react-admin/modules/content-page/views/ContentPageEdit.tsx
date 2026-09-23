@@ -2,7 +2,7 @@ import type { IconName, TabProps } from '@viaa/avo2-components';
 import { Button, ButtonToolbar, Container, Navbar, Spacer, Tabs } from '@viaa/avo2-components';
 
 import { type AvoContentPageBlock, PermissionName } from '@viaa/avo2-types';
-import { cloneDeep, isNil, isString } from 'es-toolkit';
+import { cloneDeep, compact, isNil, isString } from 'es-toolkit';
 import type { FC } from 'react';
 import React, { useCallback, useEffect, useReducer, useState } from 'react';
 import CopyToClipboard from 'react-copy-to-clipboard';
@@ -26,6 +26,7 @@ import {
 	contentEditReducer,
 } from '~modules/content-page/helpers/content-edit.reducer';
 import { useContentTypes } from '~modules/content-page/hooks/useContentTypes';
+import { rehydrateContentBlockConfig } from '~modules/content-page/services/content-page.converters';
 import { ContentPageService } from '~modules/content-page/services/content-page.service';
 import type {
 	ContentBlockComponentState,
@@ -246,9 +247,18 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 			// Temp id until this block is saved into the database
 			newBlockConfigWithDuplicatedAssets.id = TEMP_BLOCK_ID_PREFIX + Date.now();
 
+			// Restore functions (eg: isVisible) that were lost when the block was serialized to the clipboard
+			const rehydratedBlockConfig = rehydrateContentBlockConfig(
+				newBlockConfigWithDuplicatedAssets as Partial<ContentBlockConfig>
+			);
+			if (!rehydratedBlockConfig) {
+				AdminConfigManager.getConfig().services.toastService.hideToast(spinnerToastId);
+				return;
+			}
+
 			changeContentPageState({
 				type: ContentEditActionType.ADD_CONTENT_BLOCK_CONFIG,
-				payload: newBlockConfigWithDuplicatedAssets,
+				payload: rehydratedBlockConfig,
 			});
 
 			AdminConfigManager.getConfig().services.toastService.hideToast(spinnerToastId);
@@ -316,7 +326,11 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 						...contentPageWithDuplicatedAssets,
 						content_blocks: [
 							...(contentPageState.currentContentPageInfo?.content_blocks || []),
-							...contentPageWithDuplicatedAssets.content_blocks,
+							...compact(
+								(contentPageWithDuplicatedAssets.content_blocks as ContentBlockConfig[]).map(
+									(block) => rehydrateContentBlockConfig(block)
+								)
+							),
 						].map((block, blockIndex) => {
 							// Reorder the combined array of content block positions
 							return {

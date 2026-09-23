@@ -123,3 +123,28 @@ export function convertContentPageInfoToDbContentPage(
 	delete dbContentPage.description_state;
 	return dbContentPage;
 }
+
+/**
+ * Copied content blocks are serialized with JSON.stringify, which strips all functions (eg: isVisible, validator)
+ * This restores those functions by rebuilding the block config from the CONTENT_BLOCK_CONFIG_MAP and reapplying the state
+ */
+export function rehydrateContentBlockConfig(
+	contentBlock: Partial<ContentBlockConfig>
+): ContentBlockConfig | null {
+	const rehydratedBlock = convertDbContentBlockToContentBlockConfig([
+		{
+			...contentBlock,
+			block: contentBlock.block?.state,
+			components: contentBlock.components?.state,
+		} as DbContentBlock,
+	])[0];
+	if (!rehydratedBlock) {
+		return null;
+	}
+	return {
+		...rehydratedBlock,
+		id: contentBlock.id ?? rehydratedBlock.id,
+		name: contentBlock.name ?? rehydratedBlock.name,
+		anchor: contentBlock.anchor ?? rehydratedBlock.anchor,
+	};
+}
