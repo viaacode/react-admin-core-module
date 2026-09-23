@@ -3,11 +3,16 @@
 .c-rich-text-two-columns-block {
   .c-rich-text-editor__content {
     margin: 0 auto;
+
+    // Ensure image and first paragraph are aligned vertically
+    // https://meemoo.atlassian.net/browse/ARC-4005
+    p:first-child {
+      padding-top: 0;
+    }
   }
 
   &__image {
     display: flex;
-    padding-top: 2.2rem;
 
     img {
       max-width: 100%;
