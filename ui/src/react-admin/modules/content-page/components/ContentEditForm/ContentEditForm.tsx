@@ -113,23 +113,24 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 		[changeContentPageState]
 	);
 
-	const changeContentPageType = useCallback(() => {
-		// Set fixed content width for specific page types
-		Object.keys(DEFAULT_PAGES_WIDTH).forEach((key) => {
-			if (
-				contentPageInfo.contentType &&
-				DEFAULT_PAGES_WIDTH[key as ContentPageWidth].includes(contentPageInfo.contentType)
-			) {
-				changeContentPageProp('contentWidth', key);
-			}
-		});
-	}, [changeContentPageProp, contentPageInfo.contentType]);
+	const setDefaultContentWidthForType = useCallback(
+		(contentType: string) => {
+			// Set default content width for specific page types
+			Object.keys(DEFAULT_PAGES_WIDTH).forEach((key) => {
+				if (
+					DEFAULT_PAGES_WIDTH[key as ContentPageWidth].includes(contentType as AvoContentPageType)
+				) {
+					changeContentPageProp('contentWidth', key);
+				}
+			});
+		},
+		[changeContentPageProp]
+	);
 
 	useEffect(() => {
 		if (!contentPageInfo.contentType) {
 			return;
 		}
-		changeContentPageType();
 		ContentPageService.fetchLabelsByContentType(contentPageInfo.contentType)
 			.then(setContentTypeLabels)
 			// biome-ignore lint/suspicious/noExplicitAny: todo
@@ -147,7 +148,7 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 					type: ToastType.ERROR,
 				});
 			});
-	}, [contentPageInfo.contentType, changeContentPageType]);
+	}, [contentPageInfo.contentType]);
 
 	// Computed
 	const contentTypeOptions = [
@@ -165,6 +166,8 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 	const handleContentTypeChange = (value: string) => {
 		changeContentPageProp('contentType', value);
 		changeContentPageProp('labels', []);
+		// Only apply the default width when the user changes the type, not when loading an existing page
+		setDefaultContentWidthForType(value);
 	};
 
 	const mapLabelsToTags = (contentLabels: ContentPageLabel[]): TagInfo[] => {
