@@ -94,4 +94,69 @@ describe('ContentPagesService', () => {
 			expect(adapted).toBeNull();
 		});
 	});
+
+	describe('getContentPagesForPageOverviewBlock', () => {
+		const baseQuery = {
+			withBlocks: false,
+			contentType: 'BLOG_POST',
+			labelIds: ['label-1', 'label-2'],
+			selectedLabelIds: ['label-1', 'label-2'],
+			orderProp: 'title',
+			orderDirection: 'asc',
+			offset: 0,
+			limit: 2,
+		};
+
+		it('should fetch the pages per label when groupByLabel is set', async () => {
+			const fetchSpy = vi
+				// biome-ignore lint/suspicious/noExplicitAny: spy on private method
+				.spyOn(contentPagesService as any, 'fetchPageOverviewPages')
+				.mockResolvedValueOnce({
+					items: [{ id: 'a' }, { id: 'b' }],
+					count: 5,
+					labelCounts: { 'label-1': 5, 'label-2': 1 },
+				})
+				.mockResolvedValueOnce({ items: [{ id: 'b' }], count: 1, labelCounts: {} });
+
+			const response = await contentPagesService.getContentPagesForPageOverviewBlock(
+				// biome-ignore lint/suspicious/noExplicitAny: test input
+				{ ...baseQuery, groupByLabel: true } as any,
+				['group-1']
+			);
+
+			expect(fetchSpy).toHaveBeenCalledTimes(2);
+			expect(fetchSpy.mock.calls[0][0]).toMatchObject({
+				selectedLabelIds: ['label-1'],
+				labelIds: ['label-1', 'label-2'],
+			});
+			expect(fetchSpy.mock.calls[1][0]).toMatchObject({
+				selectedLabelIds: ['label-2'],
+				labelIds: [],
+			});
+			expect(response.itemsByLabel).toEqual({
+				'label-1': [{ id: 'a' }, { id: 'b' }],
+				'label-2': [{ id: 'b' }],
+			});
+			expect(response.items).toEqual([{ id: 'a' }, { id: 'b' }]);
+			expect(response.labelCounts).toEqual({ 'label-1': 5, 'label-2': 1 });
+			expect(response.pages).toEqual(3);
+		});
+
+		it('should fetch all pages in one query when groupByLabel is not set', async () => {
+			const fetchSpy = vi
+				// biome-ignore lint/suspicious/noExplicitAny: spy on private method
+				.spyOn(contentPagesService as any, 'fetchPageOverviewPages')
+				.mockResolvedValueOnce({ items: [{ id: 'a' }], count: 1, labelCounts: {} });
+
+			const response = await contentPagesService.getContentPagesForPageOverviewBlock(
+				// biome-ignore lint/suspicious/noExplicitAny: test input
+				baseQuery as any,
+				['group-1']
+			);
+
+			expect(fetchSpy).toHaveBeenCalledTimes(1);
+			expect(response.itemsByLabel).toBeUndefined();
+			expect(response.items).toEqual([{ id: 'a' }]);
+		});
+	});
 });

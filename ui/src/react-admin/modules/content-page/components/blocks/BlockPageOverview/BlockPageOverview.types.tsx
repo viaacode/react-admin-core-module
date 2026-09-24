@@ -25,6 +25,8 @@ export interface ContentPageOverviewParams {
 	labelIds: number[] | string[]; // Strings for uuid's on hetarchief, and numbers for ids in avo
 	// Selected tabs for which we should fetch content page items
 	selectedLabelIds: number[] | string[]; // Strings for uuid's on hetarchief, and numbers for ids in avo
+	// Fetch the pages per selected label, returned in itemsByLabel (used for the section titles in the grid view)
+	groupByLabel?: boolean;
 	orderProp?: string;
 	orderDirection?: AvoSearchOrderDirection;
 	offset: number;

@@ -29,9 +29,21 @@ export class ContentPageService {
 
 	public static async getContentPagesForPageOverviewBlock(
 		options: ContentPageOverviewParams
-	): Promise<IPagination<ContentPageInfo> & { labelCounts: Record<string, number> }> {
-		const { items: dbContentPages, ...rest } = await fetchWithLogoutJson<
-			IPagination<DbContentPage> & { labelCounts: Record<string, number> }
+	): Promise<
+		IPagination<ContentPageInfo> & {
+			labelCounts: Record<string, number>;
+			itemsByLabel?: Record<string, ContentPageInfo[]>;
+		}
+	> {
+		const {
+			items: dbContentPages,
+			itemsByLabel: dbItemsByLabel,
+			...rest
+		} = await fetchWithLogoutJson<
+			IPagination<DbContentPage> & {
+				labelCounts: Record<string, number>;
+				itemsByLabel?: Record<string, DbContentPage[]>;
+			}
 		>(`${ContentPageService.getBaseUrl()}/page-overview-block`, {
 			method: 'POST',
 			body: JSON.stringify(options),
@@ -39,6 +51,14 @@ export class ContentPageService {
 		});
 		return {
 			items: convertDbContentPagesToContentPageInfos(dbContentPages) || [],
+			itemsByLabel: dbItemsByLabel
+				? Object.fromEntries(
+						Object.entries(dbItemsByLabel).map(([labelId, pages]) => [
+							labelId,
+							convertDbContentPagesToContentPageInfos(pages) || [],
+						])
+					)
+				: undefined,
 			...rest,
 		};
 	}
