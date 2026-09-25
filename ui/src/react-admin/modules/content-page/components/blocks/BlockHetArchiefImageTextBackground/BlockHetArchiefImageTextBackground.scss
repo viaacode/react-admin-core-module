@@ -144,6 +144,16 @@
     p {
       padding: unset !important;
     }
+
+    &.c-block-het-archief-image-text-background__content-wrapper--center {
+      align-items: center;
+      text-align: center;
+    }
+
+    &.c-block-het-archief-image-text-background__content-wrapper--right {
+      align-items: flex-end;
+      text-align: right;
+    }
   }
 
   .c-block-het-archief-image-text-background__content,
