@@ -1,6 +1,7 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import {
 	computeLineBoxes,
+	computeParallaxOffset,
 	readParallaxSpeed,
 	watchReducedMotion,
 } from './BlockTitleWithParallax.helpers';
@@ -92,6 +93,31 @@ describe('computeLineBoxes', () => {
 		textEl.getClientRects = () => [] as unknown as DOMRectList;
 
 		expect(computeLineBoxes(wrapperEl, textEl)).toEqual([]);
+	});
+});
+
+describe('computeParallaxOffset', () => {
+	const base = { height: 600, viewportHeight: 900, speed: 0.8 };
+
+	it('starts moving on the first scroll for a block already visible on load', () => {
+		// Right below an 80px navigation: at scrollY 0 its top is at 80.
+		expect(computeParallaxOffset({ ...base, documentTop: 80, top: 80 })).toBeCloseTo(0);
+		expect(computeParallaxOffset({ ...base, documentTop: 80, top: 70 })).toBeLessThan(0);
+	});
+
+	it('starts moving as soon as a lower block enters the viewport, not once it hits the top', () => {
+		const lower = { ...base, documentTop: 2000 };
+		// Still below the fold: untouched.
+		expect(computeParallaxOffset({ ...lower, top: 950 })).toBe(0);
+		// Just entered at the bottom: already moving.
+		expect(computeParallaxOffset({ ...lower, top: 850 })).toBeLessThan(0);
+		// Halfway through its visible range (900 + 600 = 1500 px of scrolling).
+		expect(computeParallaxOffset({ ...lower, top: 150 })).toBeCloseTo(-240);
+	});
+
+	it('never exceeds the image oversize (height * speed), so its bottom edge stays covered', () => {
+		expect(computeParallaxOffset({ ...base, documentTop: 2000, top: -600 })).toBeCloseTo(-480);
+		expect(computeParallaxOffset({ ...base, documentTop: 2000, top: -5000 })).toBeCloseTo(-480);
 	});
 });
 
