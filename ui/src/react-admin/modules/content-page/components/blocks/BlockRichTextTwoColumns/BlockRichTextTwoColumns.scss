@@ -6,8 +6,13 @@
 
     // Ensure image and first paragraph are aligned vertically
     // https://meemoo.atlassian.net/browse/ARC-4005
-    p:first-child {
+    // Applies to any element type (paragraph, heading, list, blockquote, ...)
+    > :first-child {
+      margin-top: 0;
       padding-top: 0;
+      // Trim the space above the capital letters (half-leading + font ascent),
+      // so the visible top of the text lines up with the top of the image
+      text-box: trim-start cap alphabetic;
     }
   }
 
