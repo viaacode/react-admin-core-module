@@ -17,7 +17,7 @@ import {
 	PermissionName,
 } from '@viaa/avo2-types';
 import { mapLimit } from 'blend-promise-utils';
-import { compact, escapeRegExp, fromPairs, intersection, keys, set, uniq, uniqBy, without } from 'lodash';
+import { compact, escapeRegExp, fromPairs, intersection, keys, set, uniq, without } from 'lodash';
 
 import { AssetsService } from '../../assets/services/assets.service';
 import { DataService } from '../../data';
@@ -256,82 +256,7 @@ export class ContentPagesService {
 	public async getContentPagesForPageOverviewBlock(
 		inputQuery: ContentPageOverviewParams,
 		userGroupIds: string[]
-	): Promise<
-		IPagination<DbContentPage> & {
-			labelCounts: Record<string, number>;
-			itemsByLabel?: Record<string, DbContentPage[]>;
-		}
-	> {
-		const {
-			withBlocks,
-			contentType,
-			labelIds,
-			selectedLabelIds,
-			groupByLabel,
-			orderProp,
-			orderDirection,
-			offset,
-			limit,
-		} = inputQuery;
-		const groupLabelIds = compact(selectedLabelIds?.length ? selectedLabelIds : labelIds || []);
-
-		if (groupByLabel && groupLabelIds.length) {
-			// Fetch the pages for each label separately, so every label section is sorted and paginated on its own
-			const responses = await Promise.all(
-				groupLabelIds.map((labelId, index) =>
-					this.fetchPageOverviewPages(
-						{
-							withBlocks,
-							contentType,
-							// Only fetch the label counts once
-							labelIds: index === 0 ? labelIds : [],
-							selectedLabelIds: [labelId],
-							orderProp,
-							orderDirection,
-							offset,
-							limit,
-						},
-						userGroupIds
-					)
-				)
-			);
-			return {
-				...Pagination<DbContentPage>({
-					items: uniqBy(
-						responses.flatMap((response) => response.items),
-						(page) => page.id
-					),
-					page: Math.floor((offset || 0) / (limit || 10)),
-					size: limit || 10,
-					// The pagination bar moves all label sections forward together, so the largest section determines the page count
-					total: Math.max(...responses.map((response) => response.count)),
-				}),
-				labelCounts: responses[0].labelCounts,
-				itemsByLabel: Object.fromEntries(
-					groupLabelIds.map((labelId, index) => [String(labelId), responses[index].items])
-				),
-			};
-		}
-
-		const { items, count, labelCounts } = await this.fetchPageOverviewPages(
-			inputQuery,
-			userGroupIds
-		);
-		return {
-			...Pagination<DbContentPage>({
-				items,
-				page: Math.floor((offset || 0) / (limit || 10)),
-				size: limit || 10,
-				total: count,
-			}),
-			labelCounts,
-		};
-	}
-
-	private async fetchPageOverviewPages(
-		inputQuery: ContentPageOverviewParams,
-		userGroupIds: string[]
-	): Promise<{ items: DbContentPage[]; count: number; labelCounts: Record<string, number> }> {
+	): Promise<IPagination<DbContentPage> & { labelCounts: Record<string, number> }> {
 		const {
 			withBlocks,
 			contentType,
@@ -452,8 +377,12 @@ export class ContentPagesService {
 		) as DbContentPage[];
 
 		return {
-			items: contentPages,
-			count,
+			...Pagination<DbContentPage>({
+				items: contentPages,
+				page: Math.floor(offset / limit),
+				size: limit,
+				total: count,
+			}),
 			labelCounts: fromPairs(
 				// biome-ignore lint/suspicious/noExplicitAny: todo
 				contentPageLabels.map((labelInfo: any): [number, number] => [

@@ -72,8 +72,6 @@ export interface BlockPageOverviewProps extends DefaultProps {
 	onCurrentPageChanged: (newPage: number) => void;
 	pageCount: number;
 	pages: ContentPageInfo[];
-	// Pages fetched per label by the api, used for the section titles in the grid view
-	pagesByLabel?: Record<string, ContentPageInfo[]>;
 	focusedPage: ContentPageInfo | null; // Shown at the top with an expanded accordion
 	onFocusedPageChanged: (newFocusedPage: ContentPageInfo | null) => void;
 	getLabelLink?: (label: string) => string | null;
@@ -110,7 +108,6 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 	onCurrentPageChanged,
 	pageCount,
 	pages = [],
-	pagesByLabel,
 	focusedPage,
 	onFocusedPageChanged,
 	getLabelLink,
@@ -337,42 +334,11 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 			});
 		}
 		if (itemStyle === ContentItemStyle.GRID) {
-			const showAllLabels = selectedTabs.length === 0 || selectedTabs[0].id === allLabelObj.id;
-
-			if (!showSectionTitle) {
-				// Render all pages in a single grid, in the order they were returned by the api (sortOrder)
-				// The api already filters the pages by the selected tabs
-				return renderGrid(pages);
-			}
-
-			if (pagesByLabel) {
-				// Pages were fetched per label by the api: render a section per label in the order of the tabs
-				// Tabs are already sorted in the order they were entered in the content page editor
-				const labelsToShow: LabelObj[] = showAllLabels ? tabs : selectedTabs;
-				return labelsToShow.map((labelObj) => {
-					const labelPages = pagesByLabel[String(labelObj.id)] || [];
-					if (!labelPages.length) {
-						return null;
-					}
-					return (
-						<Spacer margin="top-extra-large" key={`block-page-label-${labelObj.id}`}>
-							{(showAllLabels || allowMultiple) && !!(tabs || []).length && (
-								<Spacer margin="left-small">
-									<BlockHeading type={'h2'}>{labelObj.label}</BlockHeading>
-								</Spacer>
-							)}
-							{renderGrid(labelPages)}
-						</Spacer>
-					);
-				});
-			}
-
-			// No labels selected on the block: group the fetched pages by their labels on the client
 			const uniqueLabels: LabelObj[] = uniqBy(
 				flatten(pages.map((page): LabelObj[] => page.labels)),
 				(page) => page.id
 			);
-			const clientPagesByLabel: { [labelId: number]: ContentPageInfo[] } = Object.fromEntries(
+			const pagesByLabel: { [labelId: number]: ContentPageInfo[] } = Object.fromEntries(
 				uniqueLabels.map((labelObj: LabelObj): [number, ContentPageInfo[]] => {
 					return [
 						labelObj.id,
@@ -383,25 +349,37 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 				})
 			);
 			// Put the pages that do not have a label under their own category
-			clientPagesByLabel[noLabelObj.id] = pages.filter((page) => !page.labels || !page.labels.length);
+			pagesByLabel[noLabelObj.id] = pages.filter((page) => !page.labels || !page.labels.length);
+			const showAllLabels = selectedTabs.length === 0 || selectedTabs[0].id === allLabelObj.id;
 			const labelsToShow: LabelObj[] = showAllLabels ? [...uniqueLabels, noLabelObj] : selectedTabs;
 
-			// Render each page under their label section (can have duplicates)
-			return labelsToShow.map((labelObj) => {
-				if (!(clientPagesByLabel[labelObj.id] || []).length) {
-					return null;
+			if (showSectionTitle) {
+				// Render each page under their label section (can have duplicates)
+				return labelsToShow.map((labelObj) => {
+					if (!(pagesByLabel[labelObj.id] || []).length) {
+						return null;
+					}
+					return (
+						<Spacer margin="top-extra-large" key={`block-page-label-${labelObj.id}`}>
+							{showSectionTitle && (showAllLabels || allowMultiple) && !!(tabs || []).length && (
+								<Spacer margin="left-small">
+									<BlockHeading type={'h2'}>{labelObj.label}</BlockHeading>
+								</Spacer>
+							)}
+							{renderGrid(pagesByLabel[labelObj.id])}
+						</Spacer>
+					);
+				});
+			}
+			// Render all pages in a grid without section titles (unique pages only)
+			let pagesToShow = labelsToShow.flatMap((labelObj) => {
+				if (!(pagesByLabel[labelObj.id] || []).length) {
+					return [];
 				}
-				return (
-					<Spacer margin="top-extra-large" key={`block-page-label-${labelObj.id}`}>
-						{(showAllLabels || allowMultiple) && !!(tabs || []).length && (
-							<Spacer margin="left-small">
-								<BlockHeading type={'h2'}>{labelObj.label}</BlockHeading>
-							</Spacer>
-						)}
-						{renderGrid(clientPagesByLabel[labelObj.id])}
-					</Spacer>
-				);
+				return pagesByLabel[labelObj.id];
 			});
+			pagesToShow = uniqBy(pagesToShow, (page) => page.id);
+			return renderGrid(pagesToShow);
 		}
 		if (itemStyle === ContentItemStyle.ACCORDION) {
 			// Ensure the focused page is not loaded twice on the same pagination page (ACCORDION)
