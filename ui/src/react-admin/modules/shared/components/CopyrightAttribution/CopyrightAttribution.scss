@@ -10,11 +10,13 @@
 
 	&__annotation {
 		color: colors.$neutral;
+
 		@include typography.body-xs(true);
 	}
 
 	&__text {
 		color: colors.$color-gray-1000;
+
 		@include typography.body-xs(true);
 
 		// Correctly render rich text html paragraphs inside CopyrightAttribution component
@@ -24,6 +26,7 @@
 			p {
 				padding: 0 !important;
 				margin: 0 !important;
+
 				@include typography.body-xs(true);
 			}
 		}

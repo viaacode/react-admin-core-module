@@ -7,6 +7,7 @@
     font-size: $size !important;
     font-style: normal !important;
     font-weight: $weight !important;
+
     @if $line-height {
       line-height: $line-height !important;
     }
@@ -14,6 +15,7 @@
     font-size: $size;
     font-style: normal;
     font-weight: $weight;
+
     @if $line-height {
       line-height: $line-height;
     }
@@ -73,7 +75,7 @@
 
 // Multiline-line truncation with an ellipsis
 @mixin truncate-after-x-lines($lines) {
-	@include truncate();
+	@include truncate;
 
 	display: -webkit-box;
 	-webkit-box-orient: vertical;

@@ -262,6 +262,7 @@ $hero-carousel-search-radius-desktop: 3.2rem;
 				&-label {
 					@include typography.truncate;
 					@include typography.heading-md;
+
 					line-height: 2rem;
 					color: colors.$white;
 				}
