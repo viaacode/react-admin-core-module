@@ -40,7 +40,7 @@ export const CopyrightAttribution: FunctionComponent<CopyrightAttributionProps> 
 			{text && (
 				<Html
 					content={text}
-					className="a-copyright-attribution__text u-background-text-primary"
+					className="a-copyright-attribution__text u-background-text-primary u-background-text-links"
 					type="span"
 				/>
 			)}
