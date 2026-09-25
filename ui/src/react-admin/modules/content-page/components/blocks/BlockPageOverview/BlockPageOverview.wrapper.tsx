@@ -145,6 +145,9 @@ export const BlockPageOverviewWrapper: FunctionComponent<PageOverviewWrapperProp
 		selectedLabelIds: selectedTabObjects?.length
 			? selectedTabObjects.map((tab) => tab.id)
 			: getSelectedLabelIds(),
+		// Section titles in the grid view need the pages fetched per label
+		groupByLabel:
+			itemStyle === ContentItemStyle.GRID && showSectionTitle && getSelectedLabelIds().length > 0,
 		orderProp: sortOrder.split('__')[0],
 		orderDirection: sortOrder.split('__').pop() as AvoSearchOrderDirection,
 		offset:
@@ -231,6 +234,7 @@ export const BlockPageOverviewWrapper: FunctionComponent<PageOverviewWrapperProp
 				onCurrentPageChanged={handleCurrentPageChanged}
 				pageCount={pageCount || 1}
 				pages={pages ?? []}
+				pagesByLabel={pagesAndLabels?.itemsByLabel}
 				tabStyle={tabStyle}
 				itemStyle={itemStyle}
 				itemAlignment={itemAlignment || 'left'}

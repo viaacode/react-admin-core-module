@@ -8,6 +8,7 @@ interface ContentPagesOverviewArgs {
 	contentType: AvoContentPageType;
 	labelIds: string[] | number[];
 	selectedLabelIds: string[] | number[];
+	groupByLabel?: boolean;
 	orderProp: string;
 	orderDirection: AvoSearchOrderDirection;
 	offset: number;
