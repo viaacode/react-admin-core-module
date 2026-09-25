@@ -83,9 +83,15 @@ const ContentBlockRenderer: FunctionComponent<ContentBlockPreviewProps> = ({
 			return null;
 		}
 		header.style.opacity = '1';
-		const height = header.getBoundingClientRect().height || 0;
-		if (height) {
-			return `${height + 16}px`;
+		const headerRect = header.getBoundingClientRect();
+		if (headerRect.height && headerBgRef.current) {
+			// Measure from the top of the background element, so the block's top padding and margin are
+			// covered too. Tabs have a bottom line where the content starts, the background must stop
+			// exactly there. The Tabs class is a css module class, so it is hashed.
+			const extraSpace = header.querySelector('[class*="c-tabs"]') ? 0 : 16;
+			const height =
+				headerRect.bottom - headerBgRef.current.getBoundingClientRect().top + extraSpace;
+			return `${Math.max(height, 0)}px`;
 		}
 		return '0';
 	}, []);

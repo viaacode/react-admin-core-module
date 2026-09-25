@@ -7,6 +7,7 @@ import { ContentItemStyle } from '~content-blocks/BlockPageOverview/BlockPageOve
 import { AdminConfigManager } from '~core/config/config.class';
 import { BlockPageOverview } from '~modules/content-page/components/blocks/BlockPageOverview/BlockPageOverview';
 import type { PageOverviewWrapperProps } from '~modules/content-page/components/blocks/BlockPageOverview/BlockPageOverview.types';
+import { getBackgroundTextColorVariables } from '~modules/content-page/const/background-text-colors';
 import { hasDarkBackground } from '~modules/content-page/const/get-color-options';
 import { useGetContentPageByLanguageAndPath } from '~modules/content-page/hooks/use-get-content-page-by-language-and-path';
 import { useGetContentPageLabelsByTypeAndIds } from '~modules/content-page/hooks/use-get-content-page-labels-by-type-and-ids';
@@ -228,6 +229,7 @@ export const BlockPageOverviewWrapper: FunctionComponent<PageOverviewWrapperProp
 			<BlockPageOverview
 				tabs={getLabelsWithContent()}
 				darkTabs={hasDarkBackground(headerBackgroundColor)}
+				headerTextColorVariables={getBackgroundTextColorVariables(headerBackgroundColor)}
 				selectedTabs={selectedTabObjects || []}
 				onSelectedTabsChanged={handleSelectedTabsChanged}
 				currentPage={getQueryParams().page || 0}
