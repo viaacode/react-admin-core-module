@@ -9,7 +9,6 @@ import type {
 import {
 	ContentBlockEditor,
 	ContentBlockType,
-	DEFAULT_BUTTON_PROPS,
 } from '~modules/content-page/types/content-block.types';
 import { GET_ADMIN_ICON_OPTIONS } from '~shared/consts/icons.consts';
 import { tText } from '~shared/helpers/translation-functions';
@@ -149,13 +148,13 @@ export const CONTENT_ENCLOSE_BLOCK_CONFIG = (position = 0): ContentBlockConfig =
 						),
 						editorType: ContentBlockEditor.ContentPicker,
 						editorProps: {
-							allowedTypes: ['CONTENT_PAGE', 'IE_OBJECT'] as AvoCoreContentPickerType[],
+							allowedTypes: ['IE_OBJECT', 'CONTENT_PAGE'] as AvoCoreContentPickerType[],
 						},
 					},
 				},
 				type: 'fieldGroup',
 				repeat: {
-					defaultState: DEFAULT_BUTTON_PROPS,
+					defaultState: INITIAL_CONTENT_ENCLOSE_COMPONENTS_STATE().elements[0],
 					addButtonLabel: tText(
 						'modules/content-page/components/blocks/block-content-enclose/block-content-enclose___voeg-object-toe',
 						undefined,
