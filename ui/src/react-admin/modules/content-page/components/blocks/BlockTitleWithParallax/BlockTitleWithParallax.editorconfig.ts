@@ -1,4 +1,4 @@
-import type { SelectOption } from '@viaa/avo2-components';
+import type { CheckboxProps, SelectOption } from '@viaa/avo2-components';
 import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, TEXT_FIELD } from '~content-blocks/defaults';
 import {
 	type ContentBlockConfig,
@@ -36,6 +36,7 @@ const GET_VISUAL_TYPE_OPTIONS = (): SelectOption<TitleWithParallaxVisualisationO
 export const INITIAL_TITLE_WITH_PARALLAX_COMPONENTS_STATE = () => ({
 	title: '',
 	image: '',
+	showGradient: true,
 });
 
 export const INITIAL_TITLE_WITH_PARALLAX_BLOCK_STATE = (): DefaultContentBlockState => ({
@@ -109,6 +110,16 @@ export const TITLE_WITH_PARALLAX_CONFIG = (position = 0): ContentBlockConfig => 
 					allowMulti: false,
 					allowedTypes: PHOTO_TYPES,
 				} as FileUploadProps,
+			},
+			showGradient: {
+				editorType: ContentBlockEditor.Checkbox,
+				editorProps: {
+					label: tText(
+						'modules/content-page/components/blocks/block-title-with-parallax/block-title-with-parallax___toon-gradient',
+						{},
+						[HET_ARCHIEF]
+					),
+				} as CheckboxProps,
 			},
 		},
 	},

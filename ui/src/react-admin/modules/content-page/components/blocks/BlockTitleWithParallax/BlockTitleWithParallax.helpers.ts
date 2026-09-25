@@ -12,6 +12,37 @@ export const readParallaxSpeed = (el: Element, fallback = 0.5): number => {
 	return value > 0 ? value : fallback;
 };
 
+interface ParallaxInput {
+	/** Block's current top relative to the viewport (getBoundingClientRect().top) */
+	top: number;
+	height: number;
+	/** Block's top relative to the document, i.e. its viewport top at scrollY = 0 */
+	documentTop: number;
+	viewportHeight: number;
+	speed: number;
+}
+
+// Maps the block's progress through the viewport onto the image's full oversize range
+// (0 to -height * speed, see the .scss). Progress starts where the block first becomes visible:
+// its on-load position when it's already in view (e.g. right below the navigation), otherwise
+// the moment its top enters at the bottom of the viewport. It ends once the block's bottom leaves
+// at the top. So every block on the page visibly moves while it's on screen, from the first scroll.
+export const computeParallaxOffset = ({
+	top,
+	height,
+	documentTop,
+	viewportHeight,
+	speed,
+}: ParallaxInput): number => {
+	const start = Math.min(documentTop, viewportHeight);
+	const distance = start + height;
+	if (distance <= 0) {
+		return 0;
+	}
+	const progress = Math.max(0, Math.min(1, (start - top) / distance));
+	return progress > 0 ? -progress * height * speed : 0;
+};
+
 // Calls `onChange` once immediately, then again whenever the OS-level preference flips - avoids
 // re-querying matchMedia() on every animation frame.
 export const watchReducedMotion = (onChange: (reduced: boolean) => void): (() => void) => {

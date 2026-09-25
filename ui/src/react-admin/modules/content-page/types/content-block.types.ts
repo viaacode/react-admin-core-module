@@ -719,6 +719,8 @@ export interface TitleWithParallaxBlockComponentState {
 	title: string;
 	subtitle?: string;
 	image?: string;
+	/** Black gradient at the top of the block. Undefined (blocks saved before this option) = shown */
+	showGradient?: boolean;
 }
 
 /** One "interesse" of the Driekeuzespeler: a tile label, the object it opens, and its theme. */

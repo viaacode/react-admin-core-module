@@ -3,7 +3,11 @@ import React, { type FunctionComponent, type ReactElement, useEffect, useRef } f
 import type { TitleWithParallaxBlockComponentState } from '~modules/content-page/types/content-block.types';
 import type { DefaultComponentProps } from '~modules/shared/types/components';
 
-import { readParallaxSpeed, watchReducedMotion } from './BlockTitleWithParallax.helpers';
+import {
+	computeParallaxOffset,
+	readParallaxSpeed,
+	watchReducedMotion,
+} from './BlockTitleWithParallax.helpers';
 import { HighlightedText } from './HighlightedText';
 
 import './BlockTitleWithParallax.scss';
@@ -18,6 +22,7 @@ export const BlockTitleWithParallax: FunctionComponent<BlockTitleWithParallaxPro
 	title,
 	subtitle,
 	image,
+	showGradient = true,
 }): ReactElement => {
 	const rootRef = useRef<HTMLDivElement>(null);
 	const imageRef = useRef<HTMLDivElement>(null);
@@ -47,7 +52,13 @@ export const BlockTitleWithParallax: FunctionComponent<BlockTitleWithParallaxPro
 				}
 			} else {
 				const rect = root.getBoundingClientRect();
-				const offset = Math.max(-rect.height * speed, Math.min(0, rect.top * speed));
+				const offset = computeParallaxOffset({
+					top: rect.top,
+					height: rect.height,
+					documentTop: rect.top + window.scrollY,
+					viewportHeight: window.innerHeight,
+					speed,
+				});
 				if (offset !== lastOffset) {
 					img.style.transform = `translate3d(0, ${offset}px, 0)`;
 					lastOffset = offset;
@@ -93,6 +104,7 @@ export const BlockTitleWithParallax: FunctionComponent<BlockTitleWithParallaxPro
 			className={clsx(
 				'c-block-title-with-parallax',
 				`c-block-title-with-parallax--${visualType.toLowerCase()}`,
+				{ 'c-block-title-with-parallax--no-gradient': !showGradient },
 				className
 			)}
 		>
