@@ -58,7 +58,8 @@
 
   &.text-align-left {
     h3,
-    p {
+    p,
+    .a-copyright-attribution {
       text-align: left;
     }
 
@@ -69,7 +70,8 @@
 
   &.text-align-center {
     h3,
-    p {
+    p,
+    .a-copyright-attribution {
       text-align: center;
     }
 
@@ -80,7 +82,8 @@
 
   &.text-align-right {
     h3,
-    p {
+    p,
+    .a-copyright-attribution {
       text-align: right;
     }
 
