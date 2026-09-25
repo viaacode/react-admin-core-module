@@ -21,7 +21,7 @@ import clsx from 'clsx';
 import { format, parseISO } from 'date-fns';
 import { flatten, uniqBy } from 'es-toolkit';
 import { findIndex } from 'es-toolkit/compat';
-import type { FunctionComponent, ReactNode } from 'react';
+import type { CSSProperties, FunctionComponent, ReactNode } from 'react';
 import React from 'react';
 import { BlockImageGrid } from '~content-blocks/BlockImageGrid/BlockImageGrid';
 import type { GridItem } from '~content-blocks/BlockImageGrid/BlockImageGrid.types';
@@ -46,6 +46,8 @@ import { ContentPageLabelChip } from '~shared/components/ContentPageLabelChip/Co
 export interface BlockPageOverviewProps extends DefaultProps {
 	tabs?: { label: string; id: number }[];
 	darkTabs?: boolean;
+	// Text colors for the header background, so the tab labels stay readable on it (ARC-3848)
+	headerTextColorVariables?: Record<string, string>;
 	tabStyle?: ContentTabStyle;
 	allowMultiple?: boolean;
 	centerHeader?: boolean;
@@ -85,6 +87,7 @@ export interface BlockPageOverviewProps extends DefaultProps {
 export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 	tabs = [],
 	darkTabs = false,
+	headerTextColorVariables = {},
 	tabStyle = 'MENU_BAR',
 	allowMultiple = false,
 	centerHeader = false,
@@ -492,7 +495,11 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 			}
 			if (tabStyle === 'ROUNDED_BADGES') {
 				return (
-					<Flex center={centerHeader} className="c-content-page-overview-block__header">
+					<Flex
+						center={centerHeader}
+						className="c-content-page-overview-block__header"
+						style={headerTextColorVariables as CSSProperties}
+					>
 						<Spacer margin={['left', 'bottom', 'right']}>
 							<TagList
 								tags={extendedTabs.map((tab) => ({
@@ -512,7 +519,11 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 			}
 			if (tabStyle === 'MENU_BAR') {
 				return (
-					<Flex center={centerHeader} className="c-content-page-overview-block__header">
+					<Flex
+						center={centerHeader}
+						className="c-content-page-overview-block__header"
+						style={headerTextColorVariables as CSSProperties}
+					>
 						<Spacer margin={['left', 'bottom', 'right']}>
 							<Tabs
 								tabs={extendedTabs.map((tab) => ({
