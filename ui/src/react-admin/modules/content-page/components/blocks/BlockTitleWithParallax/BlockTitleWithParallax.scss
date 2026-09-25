@@ -46,17 +46,14 @@
 
 	// min-height, not height: a floor, not a cap - a long title grows the block taller.
 	// Sized relative to the viewport (design: big ~70%, small ~50% of the screen), with the rem
-	// value as a floor for short viewports. svh avoids jumps when mobile browser bars collapse;
-	// the vh line is the fallback for browsers without svh support.
+	// value as a floor for short viewports. svh avoids jumps when mobile browser bars collapse.
 	&--big {
-		min-height: max(64rem, 70vh);
 		min-height: max(64rem, 70svh);
 		padding-top: variables.$g-spacer-unit * 10;
 		padding-bottom: variables.$g-spacer-unit * 10;
 	}
 
 	&--small {
-		min-height: max(40rem, 50vh);
 		min-height: max(40rem, 50svh);
 		padding-top: variables.$g-spacer-unit * 6;
 		padding-bottom: variables.$g-spacer-unit * 6;
