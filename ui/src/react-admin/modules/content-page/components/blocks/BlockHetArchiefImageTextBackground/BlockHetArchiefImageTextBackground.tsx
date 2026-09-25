@@ -11,6 +11,7 @@ import React, {
 	useState,
 } from 'react';
 import type {
+	AlignOption,
 	BackgroundAlignOption,
 	Color,
 	HeadingTypeOption,
@@ -29,6 +30,7 @@ export interface BlockHetArchiefImageTextBackgroundProps extends DefaultComponen
 	heading: string;
 	headingType: HeadingTypeOption;
 	content: string;
+	textAlign?: AlignOption;
 	foregroundColor: Color;
 	backgroundColor: Color;
 	image?: string;
@@ -53,6 +55,7 @@ export const BlockHetArchiefImageTextBackground: FunctionComponent<
 	heading,
 	headingType,
 	content,
+	textAlign = 'left',
 	foregroundColor,
 	backgroundColor,
 	image,
@@ -170,7 +173,7 @@ export const BlockHetArchiefImageTextBackground: FunctionComponent<
 			}
 		>
 			<div
-				className="c-block-het-archief-image-text-background__content-wrapper"
+				className={`c-block-het-archief-image-text-background__content-wrapper c-block-het-archief-image-text-background__content-wrapper--${textAlign}`}
 				style={{ color: foregroundColor }}
 			>
 				<BlockHeading
