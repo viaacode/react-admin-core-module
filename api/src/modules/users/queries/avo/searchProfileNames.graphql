@@ -1,0 +1,7 @@
+query searchProfileNames($limit: Int!, $where: users_common_users_bool_exp!) {
+	users_common_users(limit: $limit, order_by: { last_access_at: desc }, where: $where) {
+		profile_id
+		full_name
+		mail
+	}
+}

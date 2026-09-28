@@ -98,6 +98,28 @@ export class UsersController {
 		return this.usersService.getNamesByProfileIds(profileIds);
 	}
 
+	/**
+	 * Lightweight search on name and email for the profile picker (eg: owner filter in the admin dashboard)
+	 * @param name
+	 * @param limit
+	 */
+	@Get('search-names')
+	@RequireAnyPermissions(
+		PermissionName.VIEW_USERS,
+		PermissionName.EDIT_ANY_USER,
+		PermissionName.EDIT_ANY_COLLECTIONS,
+		PermissionName.VIEW_USERS_IN_SAME_COMPANY
+	)
+	async searchProfileNames(
+		@Query('name') name: string | undefined,
+		@Query('limit') limit: string | undefined
+	): Promise<Partial<AvoUserCommonUser>[]> {
+		return this.usersService.searchProfileNames(
+			name || null,
+			Math.min(parseInt(limit || '20', 10) || 20, 50)
+		);
+	}
+
 	@Get('ids')
 	@RequireAnyPermissions(PermissionName.EDIT_ANY_USER)
 	async getProfileIds(@Query('where') where = '{}'): Promise<string[]> {

@@ -440,10 +440,12 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 						'modules/user/views/user-overview___bezig-met-genereren-van-de-csv'
 					)}
 					fetchTotalItems={async () => {
+						// Export all rows matching the current filters, or only the selected rows
 						const where =
-							exportType === UserBulkAction.EXPORT_ALL
-								? {}
-								: generateWhereObject(getFilters(tableState), true);
+							generateWhereObject(
+								getFilters(tableState),
+								exportType === UserBulkAction.EXPORT_SELECTION
+							) || {};
 						const response = await UserService.getProfiles(
 							0,
 							0,
@@ -455,10 +457,12 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 						return response[1];
 					}}
 					fetchMoreItems={async (offset: number, limit: number) => {
+						// Export all rows matching the current filters, or only the selected rows
 						const where =
-							exportType === UserBulkAction.EXPORT_ALL
-								? {}
-								: generateWhereObject(getFilters(tableState), true);
+							generateWhereObject(
+								getFilters(tableState),
+								exportType === UserBulkAction.EXPORT_SELECTION
+							) || {};
 						const response = await UserService.getProfiles(
 							offset,
 							limit,
