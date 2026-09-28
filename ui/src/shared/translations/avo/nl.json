@@ -914,6 +914,7 @@
   "modules/user/helpers/render-user-overview-table-cells___geblokkeerd-nee": "Nee",
   "modules/user/helpers/render-user-overview-table-cells___uitzondering-ja": "Ja",
   "modules/user/helpers/render-user-overview-table-cells___uitzondering-nee": "Nee",
+  "modules/user/user___alle-resultaten-exporteren": "Alle resultaten exporteren",
   "modules/user/user___alles-exporteren": "Alles exporteren",
   "modules/user/user___selectie-blokkeren": "Selectie blokkeren",
   "modules/user/user___selectie-deblokkeren": "Selectie deblokkeren",

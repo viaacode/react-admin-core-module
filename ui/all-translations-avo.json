@@ -10642,6 +10642,16 @@
   {
     "id": "",
     "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "modules/user/user",
+    "key": "alle-resultaten-exporteren",
+    "language": "nl",
+    "value": "Alle resultaten exporteren",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "AVO",
     "component": "FRONTEND",
     "location": "app",
     "key": "je-account-is-gekoppeld",
@@ -24004,16 +24014,6 @@
     "app": "AVO",
     "component": "FRONTEND",
     "location": "admin/assignments/views/assignments-marcom-overview",
-    "key": "exporteer-alles",
-    "language": "nl",
-    "value": "Exporteer alles",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "admin/assignments/views/assignments-marcom-overview",
     "key": "exporteren-van-alle-opdrachten-naar-csv",
     "language": "nl",
     "value": "Exporteren van alle opdrachten naar csv",
@@ -24514,16 +24514,6 @@
     "app": "AVO",
     "component": "FRONTEND",
     "location": "admin/collections-or-bundles/views/collection-or-bundle-actualisation-overview",
-    "key": "exporteer-alles",
-    "language": "nl",
-    "value": "Exporteer alles",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "admin/collections-or-bundles/views/collection-or-bundle-actualisation-overview",
     "key": "exporteren-van-alle-collecties-naar-csv",
     "language": "nl",
     "value": "Exporteren van alle collecties naar .csv",
@@ -24704,16 +24694,6 @@
     "app": "AVO",
     "component": "FRONTEND",
     "location": "admin/collections-or-bundles/views/collection-or-bundle-marcom-overview",
-    "key": "exporteer-alles",
-    "language": "nl",
-    "value": "Exporteer alles",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "admin/collections-or-bundles/views/collection-or-bundle-marcom-overview",
     "key": "exporteren-van-alle-collecties-naar-csv",
     "language": "nl",
     "value": "Exporteren van alle collecties naar csv.",
@@ -24887,16 +24867,6 @@
     "key": "er-zijn-geen-bundel-kwaliteitscontrole-items-die-voldoen-aan-de-opgegeven-filters",
     "language": "nl",
     "value": "Er zijn geen bundels in dit overzicht die voldoen aan de opgegeven zoekterm of filters.",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "admin/collections-or-bundles/views/collection-or-bundle-quality-check-overview",
-    "key": "exporteer-alles",
-    "language": "nl",
-    "value": "Exporteer alles",
     "value_type": "TEXT"
   },
   {
@@ -26587,16 +26557,6 @@
     "key": "er-zijn-geen-items-doe-voldoen-aan-de-opgegeven-filters",
     "language": "nl",
     "value": "Er zijn geen items die voldoen aan de opgegeven filters.",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "admin/items/views/items-overview",
-    "key": "exporteer-alles",
-    "language": "nl",
-    "value": "Exporteer alles",
     "value_type": "TEXT"
   },
   {
@@ -33643,11 +33603,141 @@
     "id": "",
     "app": "AVO",
     "component": "FRONTEND",
-    "location": "collection/components/collection-or-bundle-edit-content",
+    "location": "admin/assignments/assignments",
+    "key": "alle-resultaten-exporteren",
+    "language": "nl",
+    "value": "Alle resultaten exporteren",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/collections-or-bundles/collections-or-bundles",
+    "key": "alle-resultaten-exporteren",
+    "language": "nl",
+    "value": "Alle resultaten exporteren",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/pupil-collection/pupil-collection",
+    "key": "alle-resultaten-exporteren",
+    "language": "nl",
+    "value": "Alle resultaten exporteren",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "collection/components/fragment/fragment-edit",
     "key": "het-controleren-van-je-account-rechten-is-mislukt",
     "language": "nl",
-    "value": "Het controleren van je account rechten is mislukt",
+    "value": "Het controleren van de rechten gekoppeld aan je account is mislukt. Contacteer ons via de Feedback-knop mocht dit probleem zich blijven voordoen.",
     "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/assignments/views/assignment-marcom-overview",
+    "key": "alle-resultaten-exporteren",
+    "language": "nl",
+    "value": "Alle resultaten exporteren",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/assignments/views/assignment-marcom-overview",
+    "key": "alles-exporteren",
+    "language": "nl",
+    "value": "Alles exporteren",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/collections-or-bundles/views/collection-or-bundle-actualisation-overview",
+    "key": "alle-resultaten-exporteren",
+    "language": "nl",
+    "value": "Alle resultaten exporteren",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/collections-or-bundles/views/collection-or-bundle-actualisation-overview",
+    "key": "alles-exporteren",
+    "language": "nl",
+    "value": "Alles exporteren",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/collections-or-bundles/views/collection-or-bundle-marcom-overview",
+    "key": "alle-resultaten-exporteren",
+    "language": "nl",
+    "value": "Alle resultaten exporteren",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/collections-or-bundles/views/collection-or-bundle-marcom-overview",
+    "key": "alles-exporteren",
+    "language": "nl",
+    "value": "Alles exporteren",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/collections-or-bundles/views/collection-or-bundle-quality-check-overview",
+    "key": "alle-resultaten-exporteren",
+    "language": "nl",
+    "value": "Alle resultaten exporteren",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/collections-or-bundles/views/collection-or-bundle-quality-check-overview",
+    "key": "alles-exporteren",
+    "language": "nl",
+    "value": "Alles exporteren",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/items/views/items-overview-admin",
+    "key": "alle-resultaten-exporteren",
+    "language": "nl",
+    "value": "Alle resultaten exporteren",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/items/views/items-overview-admin",
+    "key": "alles-exporteren",
+    "language": "nl",
+    "value": "Alles exporteren",
+    "value_type": "TEXT"
   },
   {
     "id": "",

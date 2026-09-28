@@ -395,7 +395,8 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 					bulkActions={GET_USER_BULK_ACTIONS(
 						commonUser,
 						bulkActions,
-						selectedProfileIds?.length > 0
+						selectedProfileIds?.length > 0,
+						Object.keys(getFilters(tableState) || {}).length > 0
 					)}
 					rowKey={(row: AvoUserCommonUser) => row?.profileId || row?.userId || row?.email || ''}
 					className="u-spacer-bottom-l u-useroverview-table"
