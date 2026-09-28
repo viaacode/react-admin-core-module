@@ -2756,7 +2756,7 @@
     "location": "modules/content-page/const/get-content-block-type-options",
     "key": "aankeiler-tekst",
     "language": "en",
-    "value": "Aankeiler tekst",
+    "value": "Teaser text",
     "value_type": "TEXT"
   },
   {
@@ -12216,7 +12216,7 @@
     "location": "modules/content-page/components/blocks/defaults",
     "key": "een-object-is-verplicht",
     "language": "en",
-    "value": "Een object is verplicht",
+    "value": "An object is required",
     "value_type": "TEXT"
   },
   {
@@ -12306,7 +12306,7 @@
     "location": "admin/content-block/components/content-block-form/content-block-form",
     "key": "voeg-label-to",
     "language": "nl",
-    "value": "Voeg toe",
+    "value": "Voeg {{label}} toe",
     "value_type": "TEXT"
   },
   {
@@ -12316,7 +12316,7 @@
     "location": "admin/content-block/components/content-block-form/content-block-form",
     "key": "voeg-label-to",
     "language": "en",
-    "value": "Add to",
+    "value": "Add {{label}}",
     "value_type": "TEXT"
   },
   {
@@ -12966,7 +12966,7 @@
     "location": "modules/content-page/components/content-page-preview-user-role-selector/content-page-preview-user-role-selector",
     "key": "preview-als-selected-user-group",
     "language": "nl",
-    "value": "Preview als geselecteerde gebruikersgroep",
+    "value": "Preview als {{selectedUserGroup}}",
     "value_type": "TEXT"
   },
   {
@@ -12976,7 +12976,7 @@
     "location": "modules/content-page/components/content-page-preview-user-role-selector/content-page-preview-user-role-selector",
     "key": "preview-als-selected-user-group",
     "language": "en",
-    "value": "Preview as selected user group",
+    "value": "Preview as {{selectedUserGroup}}",
     "value_type": "TEXT"
   },
   {
@@ -13156,7 +13156,7 @@
     "location": "modules/content-page/components/no-access-to-object-placeholder/no-access-to-object-placeholder",
     "key": "geen-permissies-om-dit-object-te-bekijken",
     "language": "en",
-    "value": "Geen permissies om dit object te bekijken",
+    "value": "No permission to view this object",
     "value_type": "TEXT"
   },
   {
@@ -18016,7 +18016,7 @@
     "location": "modules/content-page/components/blocks/block-driekeuzespeler/block-driekeuzespeler",
     "key": "achtergrondkleur",
     "language": "en",
-    "value": "Achtergrondkleur",
+    "value": "Background colour",
     "value_type": "TEXT"
   },
   {
@@ -18036,7 +18036,7 @@
     "location": "modules/content-page/components/blocks/block-driekeuzespeler/block-driekeuzespeler",
     "key": "tekstkleur",
     "language": "en",
-    "value": "Tekstkleur",
+    "value": "Text colour",
     "value_type": "TEXT"
   },
   {
@@ -18176,7 +18176,7 @@
     "location": "modules/content-page/components/blocks/block-driekeuzespeler/block-driekeuzespeler",
     "key": "thema-is-verplicht",
     "language": "en",
-    "value": "Thema is verplicht",
+    "value": "Theme is required",
     "value_type": "TEXT"
   },
   {
@@ -18256,7 +18256,7 @@
     "location": "modules/content-page/components/blocks/block-driekeuzespeler/block-driekeuzespeler",
     "key": "toon-meer-over-thema",
     "language": "en",
-    "value": "Toon meer rond '{{theme}}'",
+    "value": "Show more on '{{theme}}'",
     "value_type": "TEXT"
   },
   {
@@ -18276,7 +18276,7 @@
     "location": "modules/content-page/components/blocks/block-driekeuzespeler/block-driekeuzespeler",
     "key": "sluit-venster",
     "language": "en",
-    "value": "Sluit venster",
+    "value": "Close window",
     "value_type": "TEXT"
   },
   {
@@ -18296,7 +18296,7 @@
     "location": "modules/content-page/components/blocks/block-driekeuzespeler/block-driekeuzespeler",
     "key": "object-over-interest",
     "language": "en",
-    "value": "Over {{interest}}",
+    "value": "About {{interest}}",
     "value_type": "TEXT"
   },
   {
@@ -18316,7 +18316,7 @@
     "location": "modules/content-page/components/blocks/block-driekeuzespeler/block-driekeuzespeler",
     "key": "bezig-met-laden",
     "language": "en",
-    "value": "Bezig met laden",
+    "value": "Loading",
     "value_type": "TEXT"
   },
   {
@@ -19056,7 +19056,7 @@
     "location": "modules/content-page/components/blocks/block-aankeiler-text",
     "key": "aankeiler-tekst",
     "language": "en",
-    "value": "Aankeiler tekst",
+    "value": "Teaser text",
     "value_type": "TEXT"
   },
   {
@@ -19076,7 +19076,7 @@
     "location": "modules/content-page/components/blocks/block-aankeiler-text",
     "key": "tekst-is-verplicht",
     "language": "en",
-    "value": "Tekst is verplicht!",
+    "value": "Text is required!",
     "value_type": "TEXT"
   },
   {
@@ -19096,7 +19096,7 @@
     "location": "modules/content-page/components/blocks/block-aankeiler-text",
     "key": "limiteer-breedte-tot-800-px",
     "language": "en",
-    "value": "Limiteer breedte tot 800px",
+    "value": "Limit width to 800px",
     "value_type": "TEXT"
   },
   {
@@ -23256,7 +23256,7 @@
     "location": "admin/content-block/helpers/generators/rich-text-two-columns",
     "key": "tekst",
     "language": "en",
-    "value": "Tekst",
+    "value": "Text",
     "value_type": "TEXT"
   },
   {
@@ -23276,7 +23276,7 @@
     "location": "admin/content-block/helpers/generators/rich-text-two-columns",
     "key": "afbeelding",
     "language": "en",
-    "value": "Afbeelding",
+    "value": "Image",
     "value_type": "TEXT"
   },
   {
@@ -23336,7 +23336,7 @@
     "location": "admin/content-block/helpers/generators/rich-text-two-columns",
     "key": "type-kolom",
     "language": "en",
-    "value": "Type kolom",
+    "value": "Type of column",
     "value_type": "TEXT"
   },
   {
@@ -23376,7 +23376,7 @@
     "location": "admin/content-block/helpers/generators/rich-text-two-columns",
     "key": "een-afbeelding-is-verplicht",
     "language": "en",
-    "value": "Een afbeelding is verplicht",
+    "value": "An image is required",
     "value_type": "TEXT"
   },
   {
@@ -23396,7 +23396,7 @@
     "location": "admin/content-block/helpers/generators/rich-text-two-columns",
     "key": "alt-tekst-voor-de-afbeelding",
     "language": "en",
-    "value": "Alt tekst voor de afbeelding",
+    "value": "Alt text for image",
     "value_type": "TEXT"
   },
   {
@@ -23416,7 +23416,7 @@
     "location": "admin/content-block/helpers/generators/rich-text-two-columns",
     "key": "link-achter-de-afbeelding",
     "language": "en",
-    "value": "Link achter de afbeelding",
+    "value": "Link behind the image",
     "value_type": "TEXT"
   },
   {
@@ -23436,7 +23436,7 @@
     "location": "admin/content-block/helpers/generators/rich-text-two-columns",
     "key": "alignatie-afbeelding",
     "language": "en",
-    "value": "Alignatie afbeelding",
+    "value": "Image alignement ",
     "value_type": "TEXT"
   },
   {
@@ -24736,7 +24736,7 @@
     "location": "react-admin/modules/content-page/components/blocks/block-timeline/block-timeline",
     "key": "toon-datum",
     "language": "en",
-    "value": "Toon datum",
+    "value": "Show date",
     "value_type": "TEXT"
   },
   {
@@ -24856,7 +24856,7 @@
     "location": "react-admin/modules/content-page/components/blocks/block-timeline/block-timeline",
     "key": "een-object-is-verplicht",
     "language": "en",
-    "value": "Een object is verplicht",
+    "value": "An object is required",
     "value_type": "TEXT"
   },
   {
@@ -25157,6 +25157,26 @@
     "key": "afbeelding-is-verplicht",
     "language": "en",
     "value": "Image is required",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-title-with-parallax/block-title-with-parallax",
+    "key": "toon-gradient",
+    "language": "nl",
+    "value": "Toon gradient",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-title-with-parallax/block-title-with-parallax",
+    "key": "toon-gradient",
+    "language": "en",
+    "value": "Toon gradient",
     "value_type": "TEXT"
   },
   {
@@ -26566,7 +26586,7 @@
     "location": "modules/ie-objects/object-detail-page",
     "key": "aria-label-terug-knop-op-detail-pagina",
     "language": "nl",
-    "value": "aria label terug knop op detail pagina",
+    "value": "Dit is de terugknop op de detail pagina",
     "value_type": "TEXT"
   },
   {
@@ -26576,7 +26596,7 @@
     "location": "modules/ie-objects/object-detail-page",
     "key": "aria-label-terug-knop-op-detail-pagina",
     "language": "en",
-    "value": "aria label terug knop op detail pagina",
+    "value": "This is the return button for the item page",
     "value_type": "TEXT"
   },
   {
@@ -39426,7 +39446,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
     "key": "download-verlopen-op-mobiel",
     "language": "nl",
-    "value": "Download verlopen",
+    "value": "Download verlopen op {{downloadExpirationDate}}",
     "value_type": "TEXT"
   },
   {
@@ -39436,7 +39456,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-request-detail-blade",
     "key": "download-verlopen-op-mobiel",
     "language": "en",
-    "value": "Download expired",
+    "value": "Download expired on {{downloadExpirationDate}}",
     "value_type": "TEXT"
   },
   {
@@ -51366,7 +51386,7 @@
     "location": "modules/shared/components/media-card/media-card",
     "key": "dit-object-heeft-1-kind-object",
     "language": "nl",
-    "value": "Dit object heeft 1 kind object",
+    "value": "Dit object heeft 1 kind-object",
     "value_type": "TEXT"
   },
   {
@@ -51376,7 +51396,7 @@
     "location": "modules/shared/components/media-card/media-card",
     "key": "dit-object-heeft-1-kind-object",
     "language": "en",
-    "value": "Dit object heeft 1 kind object",
+    "value": "This object has a child-object",
     "value_type": "TEXT"
   },
   {
@@ -54326,7 +54346,7 @@
     "location": "modules/visitor-space/components/add-to-folder-blade/add-to-folder-blade",
     "key": "het-item-is-toegevoegd-verwijderd-van-de-geselecteerde-mappen-beschrijving",
     "language": "nl",
-    "value": "Het item is toegevoegd/verwijderd van de geselecteerde mappen beschrijving",
+    "value": "<p>Het item is toegevoegd/verwijderd van de geselecteerde mappen:&nbsp;<span>{{folders}}</span></p>",
     "value_type": "HTML"
   },
   {
@@ -54336,7 +54356,7 @@
     "location": "modules/visitor-space/components/add-to-folder-blade/add-to-folder-blade",
     "key": "het-item-is-toegevoegd-verwijderd-van-de-geselecteerde-mappen-beschrijving",
     "language": "en",
-    "value": "The item has been added/removed from the selected folder description",
+    "value": "<p>The item has been added/removed from the selected folders:&nbsp;<span>{{folders}}</span></p>",
     "value_type": "HTML"
   },
   {
@@ -54726,7 +54746,7 @@
     "location": "modules/visitor-space/components/add-to-folder-blade/add-to-folder-blade",
     "key": "kies-de-map-waaraan-je-strong-title-strong-wil-toevoegen",
     "language": "nl",
-    "value": "Kies de map waarin je dit item wil bijhouden",
+    "value": "<p>Kies de map waarin je <span>&lt;strong&gt;{{title}}&lt;/strong&gt;</span> wil bijhouden</p>",
     "value_type": "HTML"
   },
   {
@@ -54736,7 +54756,7 @@
     "location": "modules/visitor-space/components/add-to-folder-blade/add-to-folder-blade",
     "key": "kies-de-map-waaraan-je-strong-title-strong-wil-toevoegen",
     "language": "en",
-    "value": "Choose the folder where you want to save this item",
+    "value": "<p>Choose the folder where you want to save <span>&lt;strong&gt;{{title}}&lt;/strong&gt;</span></p>",
     "value_type": "HTML"
   },
   {
@@ -62396,7 +62416,7 @@
     "location": "modules/notifications/services/notifications",
     "key": "je-hebt-nieuwe-berichten-op-je-materiaalaanvragen",
     "language": "en",
-    "value": "Je hebt nieuwe berichten op je materiaalaanvragen",
+    "value": "You have new messages about your material requests",
     "value_type": "TEXT"
   },
   {
@@ -62436,7 +62456,7 @@
     "location": "modules/notifications/services/notifications",
     "key": "je-hebt-nieuwe-berichten-op-materiaalaanvragen-die-je-beheert",
     "language": "en",
-    "value": "Je hebt nieuwe berichten op materiaalaanvragen die je beheert",
+    "value": "You have new messages about the material requests that you manage",
     "value_type": "TEXT"
   },
   {
