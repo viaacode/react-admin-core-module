@@ -30,6 +30,7 @@ $c-title-overlay-padding: 1.6rem;
   font-size: 1.8rem;
   display: inline-block;
   max-width: calc(100% - #{$c-title-overlay-padding * 2});
+
 	@include typography.truncate;
 }
 
