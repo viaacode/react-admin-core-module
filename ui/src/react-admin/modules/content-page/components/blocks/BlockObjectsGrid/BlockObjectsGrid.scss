@@ -197,14 +197,17 @@ $max-item-height: 37.6rem;
 
 	.c-block-objects-grid__tile-title {
 		@include typography.heading-sm($important: false);
+
 		font-size: 1.6rem;
 
 		@include typography.truncate-after-x-lines(2);
+
 		overflow: hidden;
 	}
 
 	.c-block-objects-grid__tile-maintainer {
 		@include typography.body-sm($important: false);
+
 		line-height: 2rem;
 
 		@include typography.truncate;

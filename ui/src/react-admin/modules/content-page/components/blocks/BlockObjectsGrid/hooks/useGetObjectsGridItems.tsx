@@ -24,7 +24,7 @@ export const useGetObjectsGridItems = (
 		// navigating to a detail page and back shouldn't reshuffle the grid. The query cache
 		// is in-memory and reset on a full reload, so never marking this stale keeps the same
 		// objects for the lifetime of that cache while still randomizing on reload.
-		staleTime: Infinity,
+		staleTime: Number.POSITIVE_INFINITY,
 		enabled: Boolean(searchQuery) || fixedItems.length > 0,
 	});
 };
