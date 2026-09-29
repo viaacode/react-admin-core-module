@@ -1,9 +1,9 @@
 import type { IconName } from '@viaa/avo2-components';
 import { Button, Flex, FlexItem, FormGroup, LinkTarget, TextInput } from '@viaa/avo2-components';
 
-import { isNull, noop } from 'es-toolkit';
+import { debounce, isNull, noop } from 'es-toolkit';
 import type { FunctionComponent } from 'react';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import type { ActionMeta, SingleValue } from 'react-select';
 import ReactSelect from 'react-select';
 import AsyncSelect from 'react-select/async';
@@ -131,6 +131,19 @@ export const ContentPicker: FunctionComponent<ContentPickerProps> = ({
 		},
 		[selectedType, hasAppliedInitialItem, value, ieObjectFormats]
 	);
+
+	// Wait until the user stops typing, to avoid firing a search request for every keystroke
+	const fetchPickerOptionsDebounced = useMemo(
+		() =>
+			debounce((keyword: string, callback: (options: PickerItem[]) => void) => {
+				fetchPickerOptions(keyword).then(callback);
+			}, 600),
+		[fetchPickerOptions]
+	);
+
+	useEffect(() => {
+		return () => fetchPickerOptionsDebounced.cancel();
+	}, [fetchPickerOptionsDebounced]);
 
 	// when selecting a type, reset `selectedItem` and retrieve new item options
 	useEffect(() => {
@@ -335,7 +348,7 @@ export const ContentPicker: FunctionComponent<ContentPickerProps> = ({
 			id="content-picker-item"
 			placeholder={placeholder}
 			aria-label={placeholder}
-			loadOptions={fetchPickerOptions}
+			loadOptions={fetchPickerOptionsDebounced}
 			onChange={onSelectItem}
 			onFocus={() => fetchPickerOptions(null)}
 			value={selectedItem}

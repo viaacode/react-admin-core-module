@@ -23,8 +23,9 @@ export const generateWhereObjectAvo = (
 		// biome-ignore lint/suspicious/noExplicitAny: todo
 		const andFilters: any[] = [];
 
-		if (filters.query) {
-			const query = `%${filters.query}%`;
+		const trimmedQuery = filters.query?.trim();
+		if (trimmedQuery) {
+			const query = `%${trimmedQuery}%`;
 
 			andFilters.push({
 				_or: [
@@ -154,8 +155,9 @@ export const generateWhereObjectArchief = (
 		// biome-ignore lint/suspicious/noExplicitAny: todo
 		const andFilters: any[] = [];
 
-		if (filters.query) {
-			const query = `%${filters.query}%`;
+		const trimmedQuery = filters.query?.trim();
+		if (trimmedQuery) {
+			const query = `%${trimmedQuery}%`;
 
 			andFilters.push({
 				_or: [

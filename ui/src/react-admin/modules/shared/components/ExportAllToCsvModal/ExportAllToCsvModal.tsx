@@ -5,6 +5,7 @@ import React, {
 	type ReactNode,
 	useCallback,
 	useEffect,
+	useEffectEvent,
 	useState,
 } from 'react';
 import { retry as retryPromise } from 'ts-retry-promise';
@@ -164,16 +165,20 @@ export const ExportAllToCsvModal: FunctionComponent<ExportAllToCsvModalProps> = 
 
 	/**
 	 * When the modal opens, start fetching all the items and convert them to csv format
+	 * Effect event, so the fetch uses the latest props without restarting the effect when they change
 	 */
+	const startFetchingItems = useEffectEvent(() => {
+		abortRef.current = false;
+		resetModal();
+		fetchItems().then(noop);
+	});
+
+	// biome-ignore lint/correctness/useExhaustiveDependencies: effect events must not be listed as dependencies
 	useEffect(() => {
 		if (isOpen) {
-			abortRef.current = false;
-			resetModal();
-			fetchItems().then(noop);
+			startFetchingItems();
 		}
-		// We only want to execute the fetching of all the items once when the modal is opened
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [isOpen, fetchItems, resetModal]);
+	}, [isOpen]);
 
 	/**
 	 * Convert all the downloaded items to csv strings and download them as a csv file

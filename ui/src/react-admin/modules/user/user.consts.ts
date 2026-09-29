@@ -381,7 +381,8 @@ const getHetArchiefColumns = (
 export const GET_USER_BULK_ACTIONS = (
 	user: AvoUserCommonUser | undefined,
 	bulkActions: UserBulkAction[],
-	hasSelection: boolean
+	hasSelection: boolean,
+	hasFilters: boolean
 ): UserBulkActionOption[] => {
 	if (!user || !bulkActions) {
 		return [];
@@ -432,7 +433,9 @@ export const GET_USER_BULK_ACTIONS = (
 	}
 	if (bulkActions.includes(UserBulkAction.EXPORT_ALL)) {
 		actions.push({
-			label: tText('modules/user/user___alles-exporteren'),
+			label: hasFilters
+				? tText('modules/user/user___alle-resultaten-exporteren')
+				: tText('modules/user/user___alles-exporteren'),
 			value: UserBulkAction.EXPORT_ALL,
 			disabled: false,
 		});

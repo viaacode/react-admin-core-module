@@ -186,6 +186,57 @@ export class UsersService {
 		}
 	}
 
+	/**
+	 * Lightweight search on name and email, used by the profile picker (eg: owner filter in the admin dashboard)
+	 * Filters on the first_name, last_name and mail columns so the trigram indexes on shared.users can be used
+	 * @param name
+	 * @param limit
+	 */
+	async searchProfileNames(
+		name: string | null,
+		limit: number
+	): Promise<Partial<AvoUserCommonUser>[]> {
+		let variables: UserQueryTypes['SearchProfileNamesQueryVariables'] | null = null;
+		try {
+			const where = getSearchProfileNamesWhere(name);
+			variables = {
+				limit,
+				where: isHetArchief() ? where : { _and: [where, { is_deleted: { _eq: false } }] },
+			};
+			const response = await this.dataService.execute<
+				UserQueryTypes['SearchProfileNamesQuery'],
+				UserQueryTypes['SearchProfileNamesQueryVariables']
+			>(USER_QUERIES[getDatabaseType()].SearchProfileNamesDocument, variables);
+
+			/* istanbul ignore next */
+			if (isHetArchief()) {
+				return (
+					(response as UserQueryTypes['SearchProfileNamesQueryHetArchief'])?.users_profile || []
+				).map(
+					(profileEntry): Partial<AvoUserCommonUser> => ({
+						profileId: profileEntry.id,
+						fullName: profileEntry.full_name || undefined,
+						email: profileEntry.mail || undefined,
+					})
+				);
+			}
+			return (
+				(response as UserQueryTypes['SearchProfileNamesQueryAvo'])?.users_common_users || []
+			).map(
+				(profileEntry): Partial<AvoUserCommonUser> => ({
+					profileId: profileEntry.profile_id,
+					fullName: profileEntry.full_name || undefined,
+					email: profileEntry.mail || undefined,
+				})
+			);
+		} catch (err) {
+			throw new CustomError('Failed to search profile names in the database', err, {
+				variables,
+				query: 'SEARCH_PROFILE_NAMES',
+			});
+		}
+	}
+
 	async getProfileIds(
 		where?: UserQueryTypes['GetProfileIdsQueryVariables']['where']
 	): Promise<string[]> {
@@ -372,4 +423,28 @@ export class UsersService {
 			});
 		}
 	}
+}
+
+/**
+ * Every word in the search term has to match the first name, last name or email of the user
+ * eg: "jelle van" => (first_name ~ jelle OR last_name ~ jelle OR mail ~ jelle) AND (first_name ~ van OR ...)
+ * @param name
+ */
+export function getSearchProfileNamesWhere(name: string | null | undefined): {
+	_and: { _or: Partial<Record<'first_name' | 'last_name' | 'mail', { _ilike: string }>>[] }[];
+} {
+	const words = (name || '').trim().split(/\s+/).filter(Boolean);
+	return {
+		_and: words.map((word) => {
+			const escapedWord = word.replace(/[\\%_]/g, (char) => `\\${char}`);
+			const wildcardWord = `%${escapedWord}%`;
+			return {
+				_or: [
+					{ first_name: { _ilike: wildcardWord } },
+					{ last_name: { _ilike: wildcardWord } },
+					{ mail: { _ilike: wildcardWord } },
+				],
+			};
+		}),
+	};
 }

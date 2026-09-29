@@ -15,6 +15,9 @@ import {
 	GetUsersDocument as GetUsersDocumentAvo,
 	type GetUsersQuery as GetUsersQueryAvo,
 	type GetUsersQueryVariables as GetUsersQueryVariablesAvo,
+	SearchProfileNamesDocument as SearchProfileNamesDocumentAvo,
+	type SearchProfileNamesQuery as SearchProfileNamesQueryAvo,
+	type SearchProfileNamesQueryVariables as SearchProfileNamesQueryVariablesAvo,
 } from '../../shared/generated/graphql-db-types-avo';
 import {
 	GetIdpsDocument as GetIdpsDocumentHetArchief,
@@ -29,6 +32,9 @@ import {
 	GetUsersDocument as GetUsersDocumentHetArchief,
 	type GetUsersQuery as GetUsersQueryHetArchief,
 	type GetUsersQueryVariables as GetUsersQueryVariablesHetArchief,
+	SearchProfileNamesDocument as SearchProfileNamesDocumentHetArchief,
+	type SearchProfileNamesQuery as SearchProfileNamesQueryHetArchief,
+	type SearchProfileNamesQueryVariables as SearchProfileNamesQueryVariablesHetArchief,
 } from '../../shared/generated/graphql-db-types-hetarchief';
 
 export type UserQueryTypes = {
@@ -60,6 +66,14 @@ export type UserQueryTypes = {
 	GetProfileIdsQueryVariables:
 		| GetProfileIdsQueryVariablesAvo
 		| GetProfileIdsQueryVariablesHetArchief;
+	SearchProfileNamesQueryAvo: SearchProfileNamesQueryAvo;
+	SearchProfileNamesQueryHetArchief: SearchProfileNamesQueryHetArchief;
+	SearchProfileNamesQuery: SearchProfileNamesQueryAvo | SearchProfileNamesQueryHetArchief;
+	SearchProfileNamesQueryVariablesAvo: SearchProfileNamesQueryVariablesAvo;
+	SearchProfileNamesQueryVariablesHetArchief: SearchProfileNamesQueryVariablesHetArchief;
+	SearchProfileNamesQueryVariables:
+		| SearchProfileNamesQueryVariablesAvo
+		| SearchProfileNamesQueryVariablesHetArchief;
 };
 
 type UserQueries = {
@@ -67,6 +81,7 @@ type UserQueries = {
 	GetUsersDocument: TypedDocumentNode<any, any>;
 	GetIdpsDocument: TypedDocumentNode<any, any>;
 	GetProfileIdsDocument: TypedDocumentNode<any, any>;
+	SearchProfileNamesDocument: TypedDocumentNode<any, any>;
 };
 
 export const USER_QUERIES: Record<AvoCoreDatabaseType, UserQueries> = {
@@ -75,11 +90,13 @@ export const USER_QUERIES: Record<AvoCoreDatabaseType, UserQueries> = {
 		GetUsersDocument: GetUsersDocumentAvo,
 		GetIdpsDocument: GetIdpsDocumentAvo,
 		GetProfileIdsDocument: GetProfileIdsDocumentAvo,
+		SearchProfileNamesDocument: SearchProfileNamesDocumentAvo,
 	},
 	[AvoCoreDatabaseType.hetArchief]: {
 		GetProfileNamesDocument: GetProfileNamesDocumentHetArchief,
 		GetUsersDocument: GetUsersDocumentHetArchief,
 		GetIdpsDocument: GetIdpsDocumentHetArchief,
 		GetProfileIdsDocument: GetProfileIdsDocumentHetArchief,
+		SearchProfileNamesDocument: SearchProfileNamesDocumentHetArchief,
 	},
 };

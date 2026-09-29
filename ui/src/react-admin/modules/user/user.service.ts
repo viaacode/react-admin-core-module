@@ -88,6 +88,28 @@ export class UserService {
 		}
 	}
 
+	static async searchProfileNames(
+		name: string | null,
+		limit: number
+	): Promise<Partial<AvoUserCommonUser>[]> {
+		try {
+			return fetchWithLogoutJson(
+				stringifyUrl({
+					url: `${UserService.getBaseUrl()}/search-names`,
+					query: {
+						name,
+						limit,
+					},
+				})
+			);
+		} catch (err) {
+			throw new CustomError('Failed to search profile names on the server', err, {
+				name,
+				limit,
+			});
+		}
+	}
+
 	// biome-ignore lint/suspicious/noExplicitAny: todo
 	static async getProfileIds(where?: any): Promise<string[]> {
 		try {
