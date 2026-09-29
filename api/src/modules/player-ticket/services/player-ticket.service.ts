@@ -11,7 +11,6 @@ import type { Cache } from 'cache-manager';
 import got from 'got';
 import { isNil, trimEnd } from 'lodash';
 import publicIp from 'public-ip';
-import { stringifyUrl } from 'query-string';
 import type { ContentTypeNumber } from '../../collections';
 import { DataService } from '../../data';
 import {

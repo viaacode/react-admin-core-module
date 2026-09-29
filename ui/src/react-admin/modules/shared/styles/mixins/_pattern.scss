@@ -38,19 +38,24 @@ $_pattern-canon: rect, circle, circle, rect, circle;
 // from it already IS left-to-right order.
 @function _pattern-ascending-shapes($side, $start) {
   $away-from-content: ();
+
   @for $i from 0 through 4 {
     $step: if($side == right, $i, -$i);
     $idx: _pattern-mod1($start - 1 + $step, 5) + 1;
     $away-from-content: list.append($away-from-content, list.nth($_pattern-canon, $idx));
   }
+
   @if $side == left {
     // list.append can't prepend, so build the flipped list back-to-front
     $ascending: ();
+
     @for $i from 5 through 1 {
       $ascending: list.append($ascending, list.nth($away-from-content, $i));
     }
+
     @return $ascending;
   }
+
   @return $away-from-content;
 }
 

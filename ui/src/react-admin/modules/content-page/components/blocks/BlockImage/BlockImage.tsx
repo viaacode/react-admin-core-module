@@ -4,10 +4,10 @@ import clsx from 'clsx';
 import type { CSSProperties, FunctionComponent } from 'react';
 import React from 'react';
 import type { AlignOption } from '~modules/content-page/types/content-block.types';
+import { CopyrightAttribution } from '~shared/components/CopyrightAttribution';
+import { generateSmartLink } from '~shared/components/SmartLink/SmartLink';
 
 import './BlockImage.scss';
-import { CopyrightAttribution } from '~shared/components/CopyrightAttribution';
-import { generateSmartLink, SmartLink } from '~shared/components/SmartLink/SmartLink';
 
 export interface BlockImageProps extends DefaultProps {
 	imageSource: string;
