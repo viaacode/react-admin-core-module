@@ -61766,7 +61766,7 @@
     "location": "modules/material-request-messages/services/material-request-pdf-generator",
     "key": "voorwaarden-aanvaard-op",
     "language": "nl",
-    "value": "Voorwaarden aanvaard op",
+    "value": "Voorwaarden aanvaard op {{sentAt}}",
     "value_type": "TEXT"
   },
   {
@@ -61776,7 +61776,7 @@
     "location": "modules/material-request-messages/services/material-request-pdf-generator",
     "key": "voorwaarden-aanvaard-op",
     "language": "en",
-    "value": "Conditions accepted at",
+    "value": "Conditions accepted at {{sentAt}}",
     "value_type": "TEXT"
   },
   {
