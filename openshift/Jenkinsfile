@@ -69,9 +69,9 @@ pipeline {
 								#!/bin/bash
 								node -v
 								npm -v
-								npm --registry=https://registry.npmjs.org install
+								# The root package.json only contains local dev tooling (lint, commitlint, nx), the ui build doesn't need it
 								cd ui
-								npm --registry=https://registry.npmjs.org install
+								npm --registry=https://registry.npmjs.org ci --no-audit --no-fund
 								NO_COLOR=true npm run build || exit 1
 								cd ..
 							'''
@@ -112,7 +112,7 @@ pipeline {
 							script {
 								sh '''
 								#!/bin/bash
-								cd api && npm --registry=https://registry.npmjs.org install && NO_COLOR=true npm run build && cd .. || exit 1
+								cd api && npm --registry=https://registry.npmjs.org ci --no-audit --no-fund && NO_COLOR=true npm run build && cd .. || exit 1
 							'''
 							} // end script Build api
 

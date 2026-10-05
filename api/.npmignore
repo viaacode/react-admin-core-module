@@ -8,3 +8,8 @@
 /nest-cli.json
 /dist/tsconfig.build.tsbuildinfo
 tsconfig.build.tsbuildinfo
+/*.ts
+/*.tsbuildinfo
+/tsconfig*.json
+/biome.json
+/scripts/
