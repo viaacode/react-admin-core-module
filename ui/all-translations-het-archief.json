@@ -25602,6 +25602,26 @@
   {
     "id": "",
     "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/user/user",
+    "key": "alle-resultaten-exporteren",
+    "language": "nl",
+    "value": "Alle resultaten exporteren",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/user/user",
+    "key": "alle-resultaten-exporteren",
+    "language": "en",
+    "value": "Alle resultaten exporteren",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
     "component": "FRONTEND",
     "location": "pages/404",
     "key": "niet-gevonden",
@@ -26344,226 +26364,6 @@
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
     "location": "modules/ie-objects/object-detail-page",
-    "key": "dit-object-is-onderdeel-van-dit-hoofdobject",
-    "language": "nl",
-    "value": "Dit object is onderdeel van dit hoofdobject",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/object-detail-page",
-    "key": "dit-object-is-onderdeel-van-dit-hoofdobject",
-    "language": "en",
-    "value": "This object is a part of this main object",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/object-detail-page",
-    "key": "dit-object-heeft-1-fragment",
-    "language": "nl",
-    "value": "Dit object heeft 1 fragment",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/object-detail-page",
-    "key": "dit-object-heeft-1-fragment",
-    "language": "en",
-    "value": "This object has 1 fragment",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/object-detail-page",
-    "key": "dit-object-heeft-amount-fragmenten",
-    "language": "nl",
-    "value": "Dit object heeft {{amount}} fragmenten",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/object-detail-page",
-    "key": "dit-object-heeft-amount-fragmenten",
-    "language": "en",
-    "value": "This object consists of {{amount}} fragments",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/object-detail-page",
-    "key": "ocr-betrouwbaarheid",
-    "language": "nl",
-    "value": "OCR betrouwbaarheid",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/object-detail-page",
-    "key": "ocr-betrouwbaarheid",
-    "language": "en",
-    "value": "OCR reliability",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/object-detail-page",
-    "key": "deze-ocr-kan-fouten-bevatten-a-href-ocr-betrouwbaarheid-info-meer-info-vind-je-hier-a",
-    "language": "nl",
-    "value": "<p>Deze OCR kan fouten bevatten. <a href=\"/vragen?item=%2Fhoe-betrouwbaar-is-tekstherkenning-ocr-op-hetarchief-be&amp;label=Zoeken&amp;page=0\" target=\"\">Meer info vind je hier</a>.</p>",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/object-detail-page",
-    "key": "deze-ocr-kan-fouten-bevatten-a-href-ocr-betrouwbaarheid-info-meer-info-vind-je-hier-a",
-    "language": "en",
-    "value": "<p>This OCR may contain mistakes. <a href=\"/en/questions?item=%2Fhow-reliable-is-the-text-recognition-ocr-on-thearchives-be&amp;label=Search&amp;page=0\" target=\"\">Read more about OCR</a>.</p>",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/object-detail-page",
-    "key": "zoek-tekst-in-deze-krant-input-aria-label",
-    "language": "nl",
-    "value": "Zoek hier door de tekst in deze krant ",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/object-detail-page",
-    "key": "zoek-tekst-in-deze-krant-input-aria-label",
-    "language": "en",
-    "value": "Search the text of the newspaper here",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/iiif-viewer/iiif-viewer",
-    "key": "ga-naar-de-vorige-afbeelding",
-    "language": "nl",
-    "value": "Ga naar de vorige afbeelding",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/iiif-viewer/iiif-viewer",
-    "key": "ga-naar-de-vorige-afbeelding",
-    "language": "en",
-    "value": "Go to previous image",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/object-detail-page",
-    "key": "vorige",
-    "language": "nl",
-    "value": "Vorige",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/object-detail-page",
-    "key": "vorige",
-    "language": "en",
-    "value": "Previous",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/object-detail-page",
-    "key": "pagina-current-page-van-total-pages",
-    "language": "nl",
-    "value": "Pagina {{currentPage}} van {{totalPages}}",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/object-detail-page",
-    "key": "pagina-current-page-van-total-pages",
-    "language": "en",
-    "value": "Page {{currentPage}} of {{totalPages}}",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/iiif-viewer/iiif-viewer",
-    "key": "ga-naar-de-volgende-afbeelding",
-    "language": "nl",
-    "value": "Ga naar de volgende afbeelding",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/iiif-viewer/iiif-viewer",
-    "key": "ga-naar-de-volgende-afbeelding",
-    "language": "en",
-    "value": "Go to next image",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/object-detail-page",
-    "key": "volgende",
-    "language": "nl",
-    "value": "Volgende",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/object-detail-page",
-    "key": "volgende",
-    "language": "en",
-    "value": "Next",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/object-detail-page",
     "key": "je-hebt-enkel-toegang-tot-de-metadata-van-dit-object-omdat-dit-object-niet-publiek-beschikbaar-is-volgens-de-licenties-van-de-auteur",
     "language": "nl",
     "value": "Je hebt enkel toegang tot de metadata van dit object omdat dit object niet publiek beschikbaar is volgens de licenties van de auteur",
@@ -26683,21 +26483,61 @@
     "id": "",
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
-    "location": "pages/slug/ie/index",
-    "key": "ook-interessant",
+    "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata",
+    "key": "sluit",
     "language": "nl",
-    "value": "Ook interessant",
-    "value_type": "HTML"
+    "value": "Sluit",
+    "value_type": "TEXT"
   },
   {
     "id": "",
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
-    "location": "pages/slug/ie/index",
-    "key": "ook-interessant",
+    "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata",
+    "key": "sluit",
     "language": "en",
-    "value": "Also interesting",
-    "value_type": "HTML"
+    "value": "Close",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata",
+    "key": "sluit-mobiel",
+    "language": "nl",
+    "value": "Sluit",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata",
+    "key": "sluit-mobiel",
+    "language": "en",
+    "value": "Close",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata",
+    "key": "lees-de-volledige-waarde-van-het-metadata-veld-selected-metadata-field-name-blade-aria-label",
+    "language": "nl",
+    "value": "Lees de volledige waarde van het metadata veld {{selectedMetadataFieldName}}",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata",
+    "key": "lees-de-volledige-waarde-van-het-metadata-veld-selected-metadata-field-name-blade-aria-label",
+    "language": "en",
+    "value": "Read the entire value of this metadata field {{selectedMetadataFieldName}}",
+    "value_type": "TEXT"
   },
   {
     "id": "",
@@ -26904,6 +26744,26 @@
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
     "location": "modules/iiif-viewer/iiif-viewer",
+    "key": "ga-naar-de-vorige-afbeelding",
+    "language": "nl",
+    "value": "Ga naar de vorige afbeelding",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/iiif-viewer/iiif-viewer",
+    "key": "ga-naar-de-vorige-afbeelding",
+    "language": "en",
+    "value": "Go to previous image",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/iiif-viewer/iiif-viewer",
     "key": "current-image-van-total-images",
     "language": "nl",
     "value": "{{currentImage}} van {{totalImages}}",
@@ -26917,6 +26777,26 @@
     "key": "current-image-van-total-images",
     "language": "en",
     "value": "{{currentImage}} of {{totalImages}}",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/iiif-viewer/iiif-viewer",
+    "key": "ga-naar-de-volgende-afbeelding",
+    "language": "nl",
+    "value": "Ga naar de volgende afbeelding",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/iiif-viewer/iiif-viewer",
+    "key": "ga-naar-de-volgende-afbeelding",
+    "language": "en",
+    "value": "Go to next image",
     "value_type": "TEXT"
   },
   {
@@ -36003,206 +35883,6 @@
     "id": "",
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
-    "location": "modules/visitor-space/components/advanced-filter-fields/advanced-filter-fields",
-    "key": "vanaf",
-    "language": "nl",
-    "value": "Vanaf",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/advanced-filter-fields/advanced-filter-fields",
-    "key": "vanaf",
-    "language": "en",
-    "value": "From",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/advanced-filter-fields/advanced-filter-fields",
-    "key": "tot-en-met",
-    "language": "nl",
-    "value": "Tot en met",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/advanced-filter-fields/advanced-filter-fields",
-    "key": "tot-en-met",
-    "language": "en",
-    "value": "Up to and including",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/advanced-filter-fields/advanced-filter-fields",
-    "key": "tussen",
-    "language": "nl",
-    "value": "Tussen",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/advanced-filter-fields/advanced-filter-fields",
-    "key": "tussen",
-    "language": "en",
-    "value": "Between",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/advanced-filter-fields/advanced-filter-fields",
-    "key": "bevat",
-    "language": "nl",
-    "value": "Bevat",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/advanced-filter-fields/advanced-filter-fields",
-    "key": "bevat",
-    "language": "en",
-    "value": "Contains",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/advanced-filter-fields/advanced-filter-fields",
-    "key": "bevat-niet",
-    "language": "nl",
-    "value": "Bevat niet",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/advanced-filter-fields/advanced-filter-fields",
-    "key": "bevat-niet",
-    "language": "en",
-    "value": "Does not contain",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/advanced-filter-fields/advanced-filter-fields",
-    "key": "is",
-    "language": "nl",
-    "value": "Is",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/advanced-filter-fields/advanced-filter-fields",
-    "key": "is",
-    "language": "en",
-    "value": "Is",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/advanced-filter-fields/advanced-filter-fields",
-    "key": "is-niet",
-    "language": "nl",
-    "value": "Is niet",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/advanced-filter-fields/advanced-filter-fields",
-    "key": "is-niet",
-    "language": "en",
-    "value": "Is not",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/advanced-filter-fields/advanced-filter-fields",
-    "key": "korter-dan",
-    "language": "nl",
-    "value": "Korter dan",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/advanced-filter-fields/advanced-filter-fields",
-    "key": "korter-dan",
-    "language": "en",
-    "value": "Shorter than",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/advanced-filter-fields/advanced-filter-fields",
-    "key": "langer-dan",
-    "language": "nl",
-    "value": "Langer dan",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/advanced-filter-fields/advanced-filter-fields",
-    "key": "langer-dan",
-    "language": "en",
-    "value": "Longer than",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/advanced-filter-fields/advanced-filter-fields",
-    "key": "exact",
-    "language": "nl",
-    "value": "Exact",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/advanced-filter-fields/advanced-filter-fields",
-    "key": "exact",
-    "language": "en",
-    "value": "Exactly",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
     "location": "modules/visitor-space/const/index",
     "key": "sorteer-op-datum",
     "language": "nl",
@@ -36437,6 +36117,206 @@
     "key": "gedepubliceerd",
     "language": "en",
     "value": "Published",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/const/operator-labels",
+    "key": "bevat",
+    "language": "nl",
+    "value": "Bevat",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/const/operator-labels",
+    "key": "bevat",
+    "language": "en",
+    "value": "Bevat",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/const/operator-labels",
+    "key": "bevat-niet",
+    "language": "nl",
+    "value": "Bevat niet",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/const/operator-labels",
+    "key": "bevat-niet",
+    "language": "en",
+    "value": "Bevat niet",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/const/operator-labels",
+    "key": "is",
+    "language": "nl",
+    "value": "Is",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/const/operator-labels",
+    "key": "is",
+    "language": "en",
+    "value": "Is",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/const/operator-labels",
+    "key": "is-niet",
+    "language": "nl",
+    "value": "Is niet",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/const/operator-labels",
+    "key": "is-niet",
+    "language": "en",
+    "value": "Is niet",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/const/operator-labels",
+    "key": "vanaf",
+    "language": "nl",
+    "value": "Vanaf",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/const/operator-labels",
+    "key": "vanaf",
+    "language": "en",
+    "value": "Vanaf",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/const/operator-labels",
+    "key": "tot-en-met",
+    "language": "nl",
+    "value": "Tot en met",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/const/operator-labels",
+    "key": "tot-en-met",
+    "language": "en",
+    "value": "Tot en met",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/const/operator-labels",
+    "key": "tussen",
+    "language": "nl",
+    "value": "Tussen",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/const/operator-labels",
+    "key": "tussen",
+    "language": "en",
+    "value": "Tussen",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/const/operator-labels",
+    "key": "korter-dan",
+    "language": "nl",
+    "value": "Korter dan",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/const/operator-labels",
+    "key": "korter-dan",
+    "language": "en",
+    "value": "Korter dan",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/const/operator-labels",
+    "key": "langer-dan",
+    "language": "nl",
+    "value": "Langer dan",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/const/operator-labels",
+    "key": "langer-dan",
+    "language": "en",
+    "value": "Langer dan",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/const/operator-labels",
+    "key": "exact",
+    "language": "nl",
+    "value": "Exact",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/const/operator-labels",
+    "key": "exact",
+    "language": "en",
+    "value": "Exact",
     "value_type": "TEXT"
   },
   {
@@ -36877,26 +36757,6 @@
     "key": "analoge-drager",
     "language": "en",
     "value": "Physical carrier",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/const/index",
-    "key": "maker",
-    "language": "nl",
-    "value": "Maker",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/const/index",
-    "key": "maker",
-    "language": "en",
-    "value": "Creator",
     "value_type": "TEXT"
   },
   {
@@ -46903,21 +46763,21 @@
     "id": "",
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
-    "location": "modules/ie-objects/const/index",
-    "key": "aanbieder",
+    "location": "pages/slug/ie/index",
+    "key": "door-gebruik-te-maken-van-deze-applicatie-bevestigt-u-dat-u-het-beschikbare-materiaal-enkel-raadpleegt-voor-wetenschappelijk-of-prive-onderzoek",
     "language": "nl",
-    "value": "Aanbieder",
-    "value_type": "TEXT"
+    "value": "Door gebruik te maken van deze applicatie bevestigt u dat u het beschikbare materiaal enkel raadpleegt voor wetenschappelijk of privé-onderzoek.",
+    "value_type": "HTML"
   },
   {
     "id": "",
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
-    "location": "modules/ie-objects/const/index",
-    "key": "aanbieder",
+    "location": "pages/slug/ie/index",
+    "key": "door-gebruik-te-maken-van-deze-applicatie-bevestigt-u-dat-u-het-beschikbare-materiaal-enkel-raadpleegt-voor-wetenschappelijk-of-prive-onderzoek",
     "language": "en",
-    "value": "Organisation",
-    "value_type": "TEXT"
+    "value": "By using this application you confirm that you access the available material solely for scientific or private research.",
+    "value_type": "HTML"
   },
   {
     "id": "",
@@ -46938,26 +46798,6 @@
     "language": "en",
     "value": "For key users",
     "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/slug/ie/index",
-    "key": "door-gebruik-te-maken-van-deze-applicatie-bevestigt-u-dat-u-het-beschikbare-materiaal-enkel-raadpleegt-voor-wetenschappelijk-of-prive-onderzoek",
-    "language": "nl",
-    "value": "Door gebruik te maken van deze applicatie bevestigt u dat u het beschikbare materiaal enkel raadpleegt voor wetenschappelijk of privé-onderzoek.",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/slug/ie/index",
-    "key": "door-gebruik-te-maken-van-deze-applicatie-bevestigt-u-dat-u-het-beschikbare-materiaal-enkel-raadpleegt-voor-wetenschappelijk-of-prive-onderzoek",
-    "language": "en",
-    "value": "By using this application you confirm that you access the available material solely for scientific or private research.",
-    "value_type": "HTML"
   },
   {
     "id": "",
@@ -46997,266 +46837,6 @@
     "key": "zoeken",
     "language": "en",
     "value": "Search",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata",
-    "key": "vorige",
-    "language": "nl",
-    "value": "Vorige",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata",
-    "key": "vorige",
-    "language": "en",
-    "value": "Previous",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata",
-    "key": "volgende",
-    "language": "nl",
-    "value": "Volgende",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata",
-    "key": "volgende",
-    "language": "en",
-    "value": "Next",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata",
-    "key": "ga-naar-de-vorige-krant-in-dezelfde-serie-link-aria-label",
-    "language": "nl",
-    "value": "Ga naar de vorige krant in dezelfde serie ",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata",
-    "key": "ga-naar-de-vorige-krant-in-dezelfde-serie-link-aria-label",
-    "language": "en",
-    "value": "Skip to the next newspaper in this series",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata",
-    "key": "ga-naar-de-volgende-krant-in-dezelfde-serie-link-aria-label",
-    "language": "nl",
-    "value": "Hiermee ga je naar de volgende krant in dezelfde serie ",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata",
-    "key": "ga-naar-de-volgende-krant-in-dezelfde-serie-link-aria-label",
-    "language": "en",
-    "value": "This will let you toggle to the next newspaper in this series",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/object-detail-page",
-    "key": "a-href-namenlijst-gesneuvelden-wat-is-dit-a",
-    "language": "nl",
-    "value": "<p><a href=\"/vragen?item=%2Fwat-is-de-namenlijst-en-hoe-kan-ik-die-gebruiken&amp;label=Zoeken&amp;page=0\" target=\"\">Wat is dit?</a></p>",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/object-detail-page",
-    "key": "a-href-namenlijst-gesneuvelden-wat-is-dit-a",
-    "language": "en",
-    "value": "<p><a href=\"/en/questions?item=%2Fwhat-is-the-names-list-and-how-can-i-use-it&amp;label=Search&amp;page=0\" target=\"\">What is this?</a></p>",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata",
-    "key": "meer-info-over-de-rechten-van-dit-object",
-    "language": "nl",
-    "value": "Meer info over de rechten van dit object",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata",
-    "key": "meer-info-over-de-rechten-van-dit-object",
-    "language": "en",
-    "value": "More information about the rights on this object.",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/object-detail-page",
-    "key": "rechten",
-    "language": "nl",
-    "value": "Rechten",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/object-detail-page",
-    "key": "rechten",
-    "language": "en",
-    "value": "Rights",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/ie-objects",
-    "key": "rechthebbende",
-    "language": "nl",
-    "value": "Rechthebbende",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/ie-objects",
-    "key": "rechthebbende",
-    "language": "en",
-    "value": "Rights holder",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/ie-objects",
-    "key": "licentiegever",
-    "language": "nl",
-    "value": "Licentiegever",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/ie-objects",
-    "key": "licentiegever",
-    "language": "en",
-    "value": "Licencor",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/object-detail-page",
-    "key": "deze-bronvermelding-is-automatisch-gegenereerd-en-kan-fouten-bevatten-a-href-bronvermelding-fouten-meer-info-a",
-    "language": "nl",
-    "value": "<p>Deze bronvermelding is automatisch gegenereerd en kan fouten bevatten. <a href=\"/vragen?item=%2Fhoe-vermeld-ik-de-bronnen-die-ik-vind-via-hetarchief-be&amp;label=Rechten%20en%20gebruik&amp;page=0\" target=\"\">Meer info</a></p>",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/object-detail-page",
-    "key": "deze-bronvermelding-is-automatisch-gegenereerd-en-kan-fouten-bevatten-a-href-bronvermelding-fouten-meer-info-a",
-    "language": "en",
-    "value": "<p>This source citation is automatically generated and can contain mistakes. <a href=\"/en/questions?item=%2Fhow-do-i-cite-sources-i-found-on-thearchives-be&amp;label=Rights%20and%20usage&amp;page=0\" target=\"\">Read more</a></p>",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/object-detail-page",
-    "key": "bronvermelding",
-    "language": "nl",
-    "value": "Bronvermelding",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/object-detail-page",
-    "key": "bronvermelding",
-    "language": "en",
-    "value": "Source citation",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata",
-    "key": "kopieer-de-bronvermelding-naar-je-klembord",
-    "language": "nl",
-    "value": "Kopieer de bronvermelding naar je klembord",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata",
-    "key": "kopieer-de-bronvermelding-naar-je-klembord",
-    "language": "en",
-    "value": "Kopieer de bronvermelding naar je klembord",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/ie-objects",
-    "key": "auteursrechthouder",
-    "language": "nl",
-    "value": "Auteursrechthouder",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/ie-objects",
-    "key": "auteursrechthouder",
-    "language": "en",
-    "value": "Copyright holder",
     "value_type": "TEXT"
   },
   {
@@ -47304,9 +46884,9 @@
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
     "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata",
-    "key": "editie-newspaper-series-title",
+    "key": "meer-info-over-ai-gegenereerde-titel-en-samenvatting",
     "language": "nl",
-    "value": "Editie: {{newspaperSeriesTitle}}",
+    "value": "Meer info over AI-gegenereerde titel en samenvatting",
     "value_type": "TEXT"
   },
   {
@@ -47314,9 +46894,129 @@
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
     "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata",
-    "key": "editie-newspaper-series-title",
+    "key": "meer-info-over-ai-gegenereerde-titel-en-samenvatting",
     "language": "en",
-    "value": "Edition: {{newspaperSeriesTitle}}",
+    "value": "Meer info over AI-gegenereerde titel en samenvatting",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata",
+    "key": "deze-titel-en-samenvatting-zijn-automatisch-gegenereerd-met-ai-en-kunnen-fouten-bevatten-meer-info",
+    "language": "nl",
+    "value": "<p>Deze titel en samenvatting zijn automatisch gegenereerd met AI en kunnen fouten bevatten. <a href=\"/vragen\">Meer info</a></p>",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata",
+    "key": "deze-titel-en-samenvatting-zijn-automatisch-gegenereerd-met-ai-en-kunnen-fouten-bevatten-meer-info",
+    "language": "en",
+    "value": "<p>Deze titel en samenvatting zijn automatisch gegenereerd met AI en kunnen fouten bevatten. <a href=\"/vragen\">Meer info</a></p>",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata",
+    "key": "samenvatting-ai",
+    "language": "nl",
+    "value": "Samenvatting (AI)",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata",
+    "key": "samenvatting-ai",
+    "language": "en",
+    "value": "Samenvatting (AI)",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/object-detail-page",
+    "key": "a-href-namenlijst-gesneuvelden-wat-is-dit-a",
+    "language": "nl",
+    "value": "<p><a href=\"/vragen?item=%2Fwat-is-de-namenlijst-en-hoe-kan-ik-die-gebruiken&amp;label=Zoeken&amp;page=0\" target=\"\">Wat is dit?</a></p>",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/object-detail-page",
+    "key": "a-href-namenlijst-gesneuvelden-wat-is-dit-a",
+    "language": "en",
+    "value": "<p><a href=\"/en/questions?item=%2Fwhat-is-the-names-list-and-how-can-i-use-it&amp;label=Search&amp;page=0\" target=\"\">What is this?</a></p>",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/object-detail-page",
+    "key": "deze-bronvermelding-is-automatisch-gegenereerd-en-kan-fouten-bevatten-a-href-bronvermelding-fouten-meer-info-a",
+    "language": "nl",
+    "value": "<p>Deze bronvermelding is automatisch gegenereerd en kan fouten bevatten. <a href=\"/vragen?item=%2Fhoe-vermeld-ik-de-bronnen-die-ik-vind-via-hetarchief-be&amp;label=Rechten%20en%20gebruik&amp;page=0\" target=\"\">Meer info</a></p>",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/object-detail-page",
+    "key": "deze-bronvermelding-is-automatisch-gegenereerd-en-kan-fouten-bevatten-a-href-bronvermelding-fouten-meer-info-a",
+    "language": "en",
+    "value": "<p>This source citation is automatically generated and can contain mistakes. <a href=\"/en/questions?item=%2Fhow-do-i-cite-sources-i-found-on-thearchives-be&amp;label=Rights%20and%20usage&amp;page=0\" target=\"\">Read more</a></p>",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/object-detail-page",
+    "key": "bronvermelding",
+    "language": "nl",
+    "value": "Bronvermelding",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/object-detail-page",
+    "key": "bronvermelding",
+    "language": "en",
+    "value": "Source citation",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata",
+    "key": "kopieer-de-bronvermelding-naar-je-klembord",
+    "language": "nl",
+    "value": "Kopieer de bronvermelding naar je klembord",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata",
+    "key": "kopieer-de-bronvermelding-naar-je-klembord",
+    "language": "en",
+    "value": "Kopieer de bronvermelding naar je klembord",
     "value_type": "TEXT"
   },
   {
@@ -47377,46 +47077,6 @@
     "key": "pid",
     "language": "en",
     "value": "PID",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/ie-objects",
-    "key": "titel-van-de-reeks",
-    "language": "nl",
-    "value": "Titel van de reeks",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/ie-objects",
-    "key": "titel-van-de-reeks",
-    "language": "en",
-    "value": "Title of series",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/const/index",
-    "key": "publicatiedatum",
-    "language": "nl",
-    "value": "Publicatiedatum",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/const/index",
-    "key": "publicatiedatum",
-    "language": "en",
-    "value": "Publication date",
     "value_type": "TEXT"
   },
   {
@@ -48424,6 +48084,386 @@
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
     "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata-themes",
+    "key": "aantal-objecten-in-dit-thema",
+    "language": "nl",
+    "value": "Aantal objecten in dit thema: {{count}}",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata-themes",
+    "key": "aantal-objecten-in-dit-thema",
+    "language": "en",
+    "value": "Aantal objecten in dit thema: {{count}}",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/object-detail-page",
+    "key": "ocr-betrouwbaarheid",
+    "language": "nl",
+    "value": "OCR betrouwbaarheid",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/object-detail-page",
+    "key": "ocr-betrouwbaarheid",
+    "language": "en",
+    "value": "OCR reliability",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/object-detail-page",
+    "key": "zoek-tekst-in-deze-krant-input-aria-label",
+    "language": "nl",
+    "value": "Zoek hier door de tekst in deze krant ",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/object-detail-page",
+    "key": "zoek-tekst-in-deze-krant-input-aria-label",
+    "language": "en",
+    "value": "Search the text of the newspaper here",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/object-detail-page",
+    "key": "vorige",
+    "language": "nl",
+    "value": "Vorige",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/object-detail-page",
+    "key": "vorige",
+    "language": "en",
+    "value": "Previous",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/object-detail-page",
+    "key": "pagina-current-page-van-total-pages",
+    "language": "nl",
+    "value": "Pagina {{currentPage}} van {{totalPages}}",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/object-detail-page",
+    "key": "pagina-current-page-van-total-pages",
+    "language": "en",
+    "value": "Page {{currentPage}} of {{totalPages}}",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/object-detail-page",
+    "key": "volgende",
+    "language": "nl",
+    "value": "Volgende",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/object-detail-page",
+    "key": "volgende",
+    "language": "en",
+    "value": "Next",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/const/index",
+    "key": "aanbieder",
+    "language": "nl",
+    "value": "Aanbieder",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/const/index",
+    "key": "aanbieder",
+    "language": "en",
+    "value": "Organisation",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata",
+    "key": "vorige",
+    "language": "nl",
+    "value": "Vorige",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata",
+    "key": "vorige",
+    "language": "en",
+    "value": "Previous",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata",
+    "key": "volgende",
+    "language": "nl",
+    "value": "Volgende",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata",
+    "key": "volgende",
+    "language": "en",
+    "value": "Next",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata",
+    "key": "ga-naar-de-vorige-krant-in-dezelfde-serie-link-aria-label",
+    "language": "nl",
+    "value": "Ga naar de vorige krant in dezelfde serie ",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata",
+    "key": "ga-naar-de-vorige-krant-in-dezelfde-serie-link-aria-label",
+    "language": "en",
+    "value": "Skip to the next newspaper in this series",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata",
+    "key": "ga-naar-de-volgende-krant-in-dezelfde-serie-link-aria-label",
+    "language": "nl",
+    "value": "Hiermee ga je naar de volgende krant in dezelfde serie ",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata",
+    "key": "ga-naar-de-volgende-krant-in-dezelfde-serie-link-aria-label",
+    "language": "en",
+    "value": "This will let you toggle to the next newspaper in this series",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata",
+    "key": "meer-info-over-de-rechten-van-dit-object",
+    "language": "nl",
+    "value": "Meer info over de rechten van dit object",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata",
+    "key": "meer-info-over-de-rechten-van-dit-object",
+    "language": "en",
+    "value": "More information about the rights on this object.",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/object-detail-page",
+    "key": "rechten",
+    "language": "nl",
+    "value": "Rechten",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/object-detail-page",
+    "key": "rechten",
+    "language": "en",
+    "value": "Rights",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/ie-objects",
+    "key": "rechthebbende",
+    "language": "nl",
+    "value": "Rechthebbende",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/ie-objects",
+    "key": "rechthebbende",
+    "language": "en",
+    "value": "Rights holder",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/ie-objects",
+    "key": "licentiegever",
+    "language": "nl",
+    "value": "Licentiegever",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/ie-objects",
+    "key": "licentiegever",
+    "language": "en",
+    "value": "Licencor",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/ie-objects",
+    "key": "auteursrechthouder",
+    "language": "nl",
+    "value": "Auteursrechthouder",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/ie-objects",
+    "key": "auteursrechthouder",
+    "language": "en",
+    "value": "Copyright holder",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata",
+    "key": "editie-newspaper-series-title",
+    "language": "nl",
+    "value": "Editie: {{newspaperSeriesTitle}}",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata",
+    "key": "editie-newspaper-series-title",
+    "language": "en",
+    "value": "Edition: {{newspaperSeriesTitle}}",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/ie-objects",
+    "key": "titel-van-de-reeks",
+    "language": "nl",
+    "value": "Titel van de reeks",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/ie-objects",
+    "key": "titel-van-de-reeks",
+    "language": "en",
+    "value": "Title of series",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/const/index",
+    "key": "publicatiedatum",
+    "language": "nl",
+    "value": "Publicatiedatum",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/const/index",
+    "key": "publicatiedatum",
+    "language": "en",
+    "value": "Publication date",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata-themes",
     "key": "themas",
     "language": "nl",
     "value": "Themas",
@@ -48463,80 +48503,40 @@
     "id": "",
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
-    "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata",
-    "key": "sluit",
+    "location": "pages/slug/ie/index",
+    "key": "ook-interessant",
     "language": "nl",
-    "value": "Sluit",
-    "value_type": "TEXT"
+    "value": "Ook interessant",
+    "value_type": "HTML"
   },
   {
     "id": "",
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
-    "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata",
-    "key": "sluit",
+    "location": "pages/slug/ie/index",
+    "key": "ook-interessant",
     "language": "en",
-    "value": "Close",
-    "value_type": "TEXT"
+    "value": "Also interesting",
+    "value_type": "HTML"
   },
   {
     "id": "",
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
-    "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata",
-    "key": "sluit-mobiel",
+    "location": "modules/ie-objects/object-detail-page",
+    "key": "dit-object-is-onderdeel-van-dit-hoofdobject",
     "language": "nl",
-    "value": "Sluit",
+    "value": "Dit object is onderdeel van dit hoofdobject",
     "value_type": "TEXT"
   },
   {
     "id": "",
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
-    "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata",
-    "key": "sluit-mobiel",
+    "location": "modules/ie-objects/object-detail-page",
+    "key": "dit-object-is-onderdeel-van-dit-hoofdobject",
     "language": "en",
-    "value": "Close",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata",
-    "key": "lees-de-volledige-waarde-van-het-metadata-veld-selected-metadata-field-name-blade-aria-label",
-    "language": "nl",
-    "value": "Lees de volledige waarde van het metadata veld {{selectedMetadataFieldName}}",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata",
-    "key": "lees-de-volledige-waarde-van-het-metadata-veld-selected-metadata-field-name-blade-aria-label",
-    "language": "en",
-    "value": "Read the entire value of this metadata field {{selectedMetadataFieldName}}",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata-themes",
-    "key": "aantal-objecten-in-dit-thema",
-    "language": "nl",
-    "value": "Aantal objecten in dit thema: {{count}}",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata-themes",
-    "key": "aantal-objecten-in-dit-thema",
-    "language": "en",
-    "value": "Aantal objecten in dit thema: {{count}}",
+    "value": "This object is a part of this main object",
     "value_type": "TEXT"
   },
   {
@@ -54784,26 +54784,6 @@
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
     "location": "modules/visitor-space/components/advanced-filter-fields/advanced-filter-fields",
-    "key": "veldnaam",
-    "language": "nl",
-    "value": "Veldnaam",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/advanced-filter-fields/advanced-filter-fields",
-    "key": "veldnaam",
-    "language": "en",
-    "value": "Field name",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/advanced-filter-fields/advanced-filter-fields",
     "key": "operator",
     "language": "nl",
     "value": "Operator",
@@ -54838,146 +54818,6 @@
     "language": "en",
     "value": "Value",
     "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/advanced-filter-fields/advanced-filter-fields",
-    "key": "criterium-verwijderen",
-    "language": "nl",
-    "value": "Criterium verwijderen",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/advanced-filter-fields/advanced-filter-fields",
-    "key": "criterium-verwijderen",
-    "language": "en",
-    "value": "Remove criterion",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/forms/advanced-filter-form/advanced-filter-form",
-    "key": "stel-je-eigen-geavanceerde-filter-samen-aan-de-hand-van-deze-advanced-filters-velden-en-waarden",
-    "language": "nl",
-    "value": "Verfijn je zoekopdracht door filters samen te stellen met deze extra velden en voorwaarden.",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/forms/advanced-filter-form/advanced-filter-form",
-    "key": "stel-je-eigen-geavanceerde-filter-samen-aan-de-hand-van-deze-advanced-filters-velden-en-waarden",
-    "language": "en",
-    "value": "Refine your search by filtering with these extra fields and options.",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/forms/advanced-filter-form/advanced-filter-form",
-    "key": "nieuwe-stelling",
-    "language": "nl",
-    "value": "Voeg filter toe",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/forms/advanced-filter-form/advanced-filter-form",
-    "key": "nieuwe-stelling",
-    "language": "en",
-    "value": "Add filter",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/autocomplete-field-filter-form/autocomplete-field-filter-form",
-    "key": "de-naam-van-de-maker-is-een-verplicht-veld",
-    "language": "nl",
-    "value": "De naam van de maker is een verplicht veld",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/autocomplete-field-filter-form/autocomplete-field-filter-form",
-    "key": "de-naam-van-de-maker-is-een-verplicht-veld",
-    "language": "en",
-    "value": "The name of the creator is a required field",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/autocomplete-field-filter-form/autocomplete-field-filter-form",
-    "key": "de-naam-van-de-krant-serie-is-een-verplicht-veld",
-    "language": "nl",
-    "value": "De naam van de krantenreeks is een verplicht veld",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/autocomplete-field-filter-form/autocomplete-field-filter-form",
-    "key": "de-naam-van-de-krant-serie-is-een-verplicht-veld",
-    "language": "en",
-    "value": "The name of the newspaper series is a required field",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/autocomplete-field-filter-form/autocomplete-field-filter-form",
-    "key": "de-locatie-waar-het-object-is-gemaakt-is-een-verplicht-veld",
-    "language": "nl",
-    "value": "De locatie waar het object is gemaakt is een verplicht veld",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/autocomplete-field-filter-form/autocomplete-field-filter-form",
-    "key": "de-locatie-waar-het-object-is-gemaakt-is-een-verplicht-veld",
-    "language": "en",
-    "value": "The location where the object was created is a required field",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/autocomplete-field-filter-form/autocomplete-field-filter-form",
-    "key": "de-naam-van-de-persoon-is-een-verplicht-veld",
-    "language": "nl",
-    "value": "De naam van de persoon is een verplicht veld",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/autocomplete-field-filter-form/autocomplete-field-filter-form",
-    "key": "de-naam-van-de-persoon-is-een-verplicht-veld",
-    "language": "en",
-    "value": "The name of the person is a required field",
-    "value_type": "TEXT"
   },
   {
     "id": "",
@@ -55063,41 +54903,361 @@
     "id": "",
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
-    "location": "modules/visitor-space/components/creator-filter-form/creator-filter-form",
-    "key": "maker",
+    "location": "modules/visitor-space/components/autocomplete-filter-form/autocomplete-filter-form",
+    "key": "error",
     "language": "nl",
-    "value": "Maker",
+    "value": "Error",
     "value_type": "TEXT"
   },
   {
     "id": "",
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
-    "location": "modules/visitor-space/components/creator-filter-form/creator-filter-form",
-    "key": "maker",
+    "location": "modules/visitor-space/components/autocomplete-filter-form/autocomplete-filter-form",
+    "key": "error",
     "language": "en",
-    "value": "Creator",
+    "value": "Error",
     "value_type": "TEXT"
   },
   {
     "id": "",
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
-    "location": "modules/visitor-space/components/creator-filter-form/creator-filter-form",
-    "key": "naam-van-de-maker",
+    "location": "modules/visitor-space/components/autocomplete-filter-form/autocomplete-filter-form",
+    "key": "het-ophalen-van-de-suggesties-is-mislukt",
     "language": "nl",
-    "value": "Typ de naam van de maker",
+    "value": "Het ophalen van de suggesties is mislukt",
     "value_type": "TEXT"
   },
   {
     "id": "",
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
-    "location": "modules/visitor-space/components/creator-filter-form/creator-filter-form",
-    "key": "naam-van-de-maker",
+    "location": "modules/visitor-space/components/autocomplete-filter-form/autocomplete-filter-form",
+    "key": "het-ophalen-van-de-suggesties-is-mislukt",
     "language": "en",
-    "value": "Type the creator's name",
+    "value": "Het ophalen van de suggesties is mislukt",
     "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/autocomplete-filter-form/autocomplete-filter-form",
+    "key": "geselecteerd",
+    "language": "nl",
+    "value": "Geselecteerd",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/autocomplete-filter-form/autocomplete-filter-form",
+    "key": "geselecteerd",
+    "language": "en",
+    "value": "Geselecteerd",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/autocomplete-filter-form/autocomplete-filter-form",
+    "key": "geef-minstens-3-karakters-in",
+    "language": "nl",
+    "value": "Geef minstens 3 karakters in",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/autocomplete-filter-form/autocomplete-filter-form",
+    "key": "geef-minstens-3-karakters-in",
+    "language": "en",
+    "value": "Geef minstens 3 karakters in",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/autocomplete-filter-form/autocomplete-filter-form",
+    "key": "geen-resultaten-gevonden",
+    "language": "nl",
+    "value": "Geen resultaten gevonden",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/autocomplete-filter-form/autocomplete-filter-form",
+    "key": "geen-resultaten-gevonden",
+    "language": "en",
+    "value": "Geen resultaten gevonden",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/autocomplete-filter-form/autocomplete-filter-form",
+    "key": "laden",
+    "language": "nl",
+    "value": "Laden...",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/autocomplete-filter-form/autocomplete-filter-form",
+    "key": "laden",
+    "language": "en",
+    "value": "Laden...",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/autocomplete-filter-form/autocomplete-filter-form",
+    "key": "zoek",
+    "language": "nl",
+    "value": "Zoek",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/autocomplete-filter-form/autocomplete-filter-form",
+    "key": "zoek",
+    "language": "en",
+    "value": "Zoek",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/checkbox-list-filter-form/checkbox-list-filter-form",
+    "key": "zoek",
+    "language": "nl",
+    "value": "Zoek",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/checkbox-list-filter-form/checkbox-list-filter-form",
+    "key": "zoek",
+    "language": "en",
+    "value": "Zoek",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/checkbox-list-filter-form/checkbox-list-filter-form",
+    "key": "zoek-binnen-filter-input-aria-label",
+    "language": "nl",
+    "value": "Zoek binnen de filter {{filterName}}",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/checkbox-list-filter-form/checkbox-list-filter-form",
+    "key": "zoek-binnen-filter-input-aria-label",
+    "language": "en",
+    "value": "Zoek binnen de filter {{filterName}}",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/checkbox-list-filter-form/checkbox-list-filter-form",
+    "key": "geen-waarden-gevonden",
+    "language": "nl",
+    "value": "Geen waarden gevonden",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/checkbox-list-filter-form/checkbox-list-filter-form",
+    "key": "geen-waarden-gevonden",
+    "language": "en",
+    "value": "Geen waarden gevonden",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/release-date-filter-form/release-date-filter-form",
+    "key": "de-startdatum-moet-kleiner-zijn-dan-de-einddatum",
+    "language": "nl",
+    "value": "De startdatum moet kleiner zijn dan de einddatum",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/release-date-filter-form/release-date-filter-form",
+    "key": "de-startdatum-moet-kleiner-zijn-dan-de-einddatum",
+    "language": "en",
+    "value": "De startdatum moet kleiner zijn dan de einddatum",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/release-date-filter-form/release-date-filter-form",
+    "key": "je-moet-zowel-een-start-als-eind-datum-opgeven",
+    "language": "nl",
+    "value": "Je moet zowel een start als eind datum opgeven",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/release-date-filter-form/release-date-filter-form",
+    "key": "je-moet-zowel-een-start-als-eind-datum-opgeven",
+    "language": "en",
+    "value": "You need to enter both a start and end date",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/release-date-filter-form/release-date-filter-form",
+    "key": "een-geldig-jaar-moet-4-cijfers-bevatten",
+    "language": "nl",
+    "value": "Een geldig jaar moet 4 cijfers bevatten",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/release-date-filter-form/release-date-filter-form",
+    "key": "een-geldig-jaar-moet-4-cijfers-bevatten",
+    "language": "en",
+    "value": "A valid year must consist of 4 digits",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/release-date-filter-form/release-date-filter-form",
+    "key": "gelieve-een-geldige-datum-in-te-vullen",
+    "language": "nl",
+    "value": "Gelieve een geldige datum in te vullen",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/release-date-filter-form/release-date-filter-form",
+    "key": "gelieve-een-geldige-datum-in-te-vullen",
+    "language": "en",
+    "value": "Please enter a valid date",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/release-date-filter-form/release-date-filter-form",
+    "key": "release-datum",
+    "language": "nl",
+    "value": "Release datum",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/release-date-filter-form/release-date-filter-form",
+    "key": "release-datum",
+    "language": "en",
+    "value": "Release datum",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/release-date-filter-form/release-date-filter-form",
+    "key": "release-datum-input-aria-label",
+    "language": "nl",
+    "value": "Release datum ",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/release-date-filter-form/release-date-filter-form",
+    "key": "release-datum-input-aria-label",
+    "language": "en",
+    "value": "Release date",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/releaseDate-filter-form/releaseDate-filter-form",
+    "key": "operator",
+    "language": "nl",
+    "value": "Operator",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/releaseDate-filter-form/releaseDate-filter-form",
+    "key": "operator",
+    "language": "en",
+    "value": "Operator",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/releaseDate-filter-form/releaseDate-filter-form",
+    "key": "waarde",
+    "language": "nl",
+    "value": "Waarde",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/releaseDate-filter-form/releaseDate-filter-form",
+    "key": "waarde",
+    "language": "en",
+    "value": "Value",
+    "value_type": "HTML"
   },
   {
     "id": "",
@@ -55298,126 +55458,6 @@
     "language": "en",
     "value": "Select a language",
     "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/location-created-filter-form/location-created-filter-form",
-    "key": "plaats-van-uitgave",
-    "language": "nl",
-    "value": "Plaats van uitgave",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/location-created-filter-form/location-created-filter-form",
-    "key": "plaats-van-uitgave",
-    "language": "en",
-    "value": "Location of publication",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/location-created-filter-form/location-created-filter-form",
-    "key": "plaatsnaam",
-    "language": "nl",
-    "value": "Plaatsnaam",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/location-created-filter-form/location-created-filter-form",
-    "key": "plaatsnaam",
-    "language": "en",
-    "value": "Name of location",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/maintainer-filter-form/maintainer-filter-form",
-    "key": "aanbieder-is-een-verplicht-veld",
-    "language": "nl",
-    "value": "Aanbieder is een verplicht veld",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/maintainer-filter-form/maintainer-filter-form",
-    "key": "aanbieder-is-een-verplicht-veld",
-    "language": "en",
-    "value": "Organisation is a required field",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/maintainers-filter-form/maintainers-filter-form",
-    "key": "zoek",
-    "language": "nl",
-    "value": "Zoek",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/maintainers-filter-form/maintainers-filter-form",
-    "key": "zoek",
-    "language": "en",
-    "value": "Search",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/maintainer-filter-form/maintainer-filter-form",
-    "key": "zoek-op-aanbieder-input-aria-label",
-    "language": "nl",
-    "value": "Zoek hier op aanbieder",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/maintainer-filter-form/maintainer-filter-form",
-    "key": "zoek-op-aanbieder-input-aria-label",
-    "language": "en",
-    "value": "Search by organisation here",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/maintainers-filter-form/maintainers-filter-form",
-    "key": "geen-aanbieders-gevonden",
-    "language": "nl",
-    "value": "Geen aanbieders gevonden",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/maintainers-filter-form/maintainers-filter-form",
-    "key": "geen-aanbieders-gevonden",
-    "language": "en",
-    "value": "No organisations found",
-    "value_type": "HTML"
   },
   {
     "id": "",
@@ -58183,86 +58223,6 @@
     "id": "",
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
-    "location": "modules/visitor-space/components/medium-filter-form/medium-filter-form",
-    "key": "fysieke-drager-is-een-verplicht-veld",
-    "language": "nl",
-    "value": "Fysieke drager is een verplicht veld",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/medium-filter-form/medium-filter-form",
-    "key": "fysieke-drager-is-een-verplicht-veld",
-    "language": "en",
-    "value": "Physical carrier is a required field",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/medium-filter-form/medium-filter-form",
-    "key": "zoek",
-    "language": "nl",
-    "value": "zoek",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/medium-filter-form/medium-filter-form",
-    "key": "zoek",
-    "language": "en",
-    "value": "search",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/medium-filter-form/medium-filter-form",
-    "key": "zoek-op-medium",
-    "language": "nl",
-    "value": "Zoek op medium",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/medium-filter-form/medium-filter-form",
-    "key": "zoek-op-medium",
-    "language": "en",
-    "value": "Zoek op medium",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/medium-filter-form/medium-filter-form",
-    "key": "geen-analoge-dragers-gevonden",
-    "language": "nl",
-    "value": "Geen fysieke dragers gevonden",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/medium-filter-form/medium-filter-form",
-    "key": "geen-analoge-dragers-gevonden",
-    "language": "en",
-    "value": "No physical carriers found",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
     "location": "modules/visitor-space/components/medium-select/medium-select",
     "key": "geen-analoge-dragers-gevonden",
     "language": "nl",
@@ -58297,86 +58257,6 @@
     "key": "kies-een-analoge-drager",
     "language": "en",
     "value": "Choose a physical carrier",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/mentions-filter-form/mentions-filter-form",
-    "key": "namenlijst-gesneuvelden",
-    "language": "nl",
-    "value": "Namenlijst gesneuvelden",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/mentions-filter-form/mentions-filter-form",
-    "key": "namenlijst-gesneuvelden",
-    "language": "en",
-    "value": "List of Names of WW1-victims",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/mentions-filter-form/mentions-filter-form",
-    "key": "naam",
-    "language": "nl",
-    "value": "Naam",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/mentions-filter-form/mentions-filter-form",
-    "key": "naam",
-    "language": "en",
-    "value": "Name",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/newspaper-series-name-filter-form/newspaper-series-name-filter-form",
-    "key": "krant-serie",
-    "language": "nl",
-    "value": "Krantenreeks",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/newspaper-series-name-filter-form/newspaper-series-name-filter-form",
-    "key": "krant-serie",
-    "language": "en",
-    "value": "Newspaper series",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/newspaper-series-name-filter-form/newspaper-series-name-filter-form",
-    "key": "naam-van-de-krant-serie",
-    "language": "nl",
-    "value": "Typ de naam van de krant, bv. \"Het Brugsch dagblad\"",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/newspaper-series-name-filter-form/newspaper-series-name-filter-form",
-    "key": "naam-van-de-krant-serie",
-    "language": "en",
-    "value": "Type the name of the newspaper, e.g. \"Het Brugsch dagblad\"",
     "value_type": "TEXT"
   },
   {
@@ -58463,166 +58343,6 @@
     "id": "",
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
-    "location": "modules/visitor-space/components/release-date-filter-form/release-date-filter-form",
-    "key": "de-startdatum-moet-kleiner-zijn-dan-de-einddatum",
-    "language": "nl",
-    "value": "De startdatum moet kleiner zijn dan de einddatum",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/release-date-filter-form/release-date-filter-form",
-    "key": "de-startdatum-moet-kleiner-zijn-dan-de-einddatum",
-    "language": "en",
-    "value": "De startdatum moet kleiner zijn dan de einddatum",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/release-date-filter-form/release-date-filter-form",
-    "key": "je-moet-zowel-een-start-als-eind-datum-opgeven",
-    "language": "nl",
-    "value": "Je moet zowel een start als eind datum opgeven",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/release-date-filter-form/release-date-filter-form",
-    "key": "je-moet-zowel-een-start-als-eind-datum-opgeven",
-    "language": "en",
-    "value": "You need to enter both a start and end date",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/release-date-filter-form/release-date-filter-form",
-    "key": "een-geldig-jaar-moet-4-cijfers-bevatten",
-    "language": "nl",
-    "value": "Een geldig jaar moet 4 cijfers bevatten",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/release-date-filter-form/release-date-filter-form",
-    "key": "een-geldig-jaar-moet-4-cijfers-bevatten",
-    "language": "en",
-    "value": "A valid year must consist of 4 digits",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/release-date-filter-form/release-date-filter-form",
-    "key": "gelieve-een-geldige-datum-in-te-vullen",
-    "language": "nl",
-    "value": "Gelieve een geldige datum in te vullen",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/release-date-filter-form/release-date-filter-form",
-    "key": "gelieve-een-geldige-datum-in-te-vullen",
-    "language": "en",
-    "value": "Please enter a valid date",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/release-date-filter-form/release-date-filter-form",
-    "key": "release-datum",
-    "language": "nl",
-    "value": "Release datum",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/release-date-filter-form/release-date-filter-form",
-    "key": "release-datum",
-    "language": "en",
-    "value": "Release datum",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/release-date-filter-form/release-date-filter-form",
-    "key": "release-datum-input-aria-label",
-    "language": "nl",
-    "value": "Release datum ",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/release-date-filter-form/release-date-filter-form",
-    "key": "release-datum-input-aria-label",
-    "language": "en",
-    "value": "Release date",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/releaseDate-filter-form/releaseDate-filter-form",
-    "key": "operator",
-    "language": "nl",
-    "value": "Operator",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/releaseDate-filter-form/releaseDate-filter-form",
-    "key": "operator",
-    "language": "en",
-    "value": "Operator",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/releaseDate-filter-form/releaseDate-filter-form",
-    "key": "waarde",
-    "language": "nl",
-    "value": "Waarde",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/releaseDate-filter-form/releaseDate-filter-form",
-    "key": "waarde",
-    "language": "en",
-    "value": "Value",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
     "location": "modules/visitor-space/components/report-blade/report-blade",
     "key": "probleem-is-verplicht",
     "language": "nl",
@@ -58637,6 +58357,26 @@
     "key": "probleem-is-verplicht",
     "language": "en",
     "value": "The problem is required.",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/report-blade/report-blade",
+    "key": "probleem-mag-maximaal-1000-karakters-bevatten",
+    "language": "nl",
+    "value": "Probleem mag maximaal 1000 karakters bevatten",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/report-blade/report-blade",
+    "key": "probleem-mag-maximaal-1000-karakters-bevatten",
+    "language": "en",
+    "value": "Probleem mag maximaal 1000 karakters bevatten",
     "value_type": "TEXT"
   },
   {
@@ -58677,6 +58417,226 @@
     "key": "e-mail-is-verplicht",
     "language": "en",
     "value": "Email is required.",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/report-blade/report-blade",
+    "key": "kies-een-van-de-bovenstaande-opties",
+    "language": "nl",
+    "value": "Kies een van de bovenstaande opties",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/report-blade/report-blade",
+    "key": "kies-een-van-de-bovenstaande-opties",
+    "language": "en",
+    "value": "Kies een van de bovenstaande opties",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/report-blade/report-blade",
+    "key": "opmerking-is-verplicht",
+    "language": "nl",
+    "value": "Opmerking is verplicht",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/report-blade/report-blade",
+    "key": "opmerking-is-verplicht",
+    "language": "en",
+    "value": "Opmerking is verplicht",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/report-blade/report-blade",
+    "key": "opmerking-mag-maximaal-1000-karakters-bevatten",
+    "language": "nl",
+    "value": "Opmerking mag maximaal 1000 karakters bevatten",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/report-blade/report-blade",
+    "key": "opmerking-mag-maximaal-1000-karakters-bevatten",
+    "language": "en",
+    "value": "Opmerking mag maximaal 1000 karakters bevatten",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/report-blade/report-blade",
+    "key": "ik-wil-een-juridische-opmerking-geven-ivm-auteursrecht-of-gdpr-privacy",
+    "language": "nl",
+    "value": "Ik wil een juridische opmerking geven (ivm auteursrecht of GDPR/Privacy)",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/report-blade/report-blade",
+    "key": "ik-wil-een-juridische-opmerking-geven-ivm-auteursrecht-of-gdpr-privacy",
+    "language": "en",
+    "value": "Ik wil een juridische opmerking geven (ivm auteursrecht of GDPR/Privacy)",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/report-blade/report-blade",
+    "key": "ik-heb-een-ander-probleem-met-dit-object",
+    "language": "nl",
+    "value": "Ik heb een ander probleem met dit object",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/report-blade/report-blade",
+    "key": "ik-heb-een-ander-probleem-met-dit-object",
+    "language": "en",
+    "value": "Ik heb een ander probleem met dit object",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/report-blade/report-blade",
+    "key": "ik-vond-een-probleem-dat-ik-binnen-mijn-organisatie-wil-oplossen-geef-mij-de-juiste-links-om-te-editeren",
+    "language": "nl",
+    "value": "Ik vond een probleem dat ik binnen mijn organisatie wil oplossen, geef mij de juiste links om te editeren.",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/report-blade/report-blade",
+    "key": "ik-vond-een-probleem-dat-ik-binnen-mijn-organisatie-wil-oplossen-geef-mij-de-juiste-links-om-te-editeren",
+    "language": "en",
+    "value": "Ik vond een probleem dat ik binnen mijn organisatie wil oplossen, geef mij de juiste links om te editeren.",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/report-blade/report-blade",
+    "key": "ik-wil-een-probleem-met-dit-item-aan-meemoo-melden",
+    "language": "nl",
+    "value": "Ik wil een probleem met dit item aan meemoo melden",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/report-blade/report-blade",
+    "key": "ik-wil-een-probleem-met-dit-item-aan-meemoo-melden",
+    "language": "en",
+    "value": "Ik wil een probleem met dit item aan meemoo melden",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/report-blade/report-blade",
+    "key": "ik-heb-een-probleem-met-de-metadata-van-dit-object",
+    "language": "nl",
+    "value": "Ik heb een probleem met de metadata van dit object",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/report-blade/report-blade",
+    "key": "ik-heb-een-probleem-met-de-metadata-van-dit-object",
+    "language": "en",
+    "value": "Ik heb een probleem met de metadata van dit object",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/report-blade/report-blade",
+    "key": "ik-ben-rechthebbende-en-wil-een-opt-out-op-de-out-of-commerce-regeling-aanvragen-voor-dit-materiaal-of-een-verwijdering",
+    "language": "nl",
+    "value": "Ik ben rechthebbende en wil een opt-out op de Out-of-Commerce regeling aanvragen voor dit materiaal, of een verwijdering.",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/report-blade/report-blade",
+    "key": "ik-ben-rechthebbende-en-wil-een-opt-out-op-de-out-of-commerce-regeling-aanvragen-voor-dit-materiaal-of-een-verwijdering",
+    "language": "en",
+    "value": "Ik ben rechthebbende en wil een opt-out op de Out-of-Commerce regeling aanvragen voor dit materiaal, of een verwijdering.",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/report-blade/report-blade",
+    "key": "ik-ben-rechthebbende-en-wil-een-klacht-indienen-wegens-mogelijke-inbreuk-op-intellectuele-rechten",
+    "language": "nl",
+    "value": "Ik ben rechthebbende en wil een klacht indienen wegens mogelijke inbreuk op intellectuele rechten.",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/report-blade/report-blade",
+    "key": "ik-ben-rechthebbende-en-wil-een-klacht-indienen-wegens-mogelijke-inbreuk-op-intellectuele-rechten",
+    "language": "en",
+    "value": "Ik ben rechthebbende en wil een klacht indienen wegens mogelijke inbreuk op intellectuele rechten.",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/report-blade/report-blade",
+    "key": "ik-wil-mijn-rechten-uitoefenen-volgens-de-gdpr-of-privacy-wetgeving-met-betrekking-tot-dit-materiaal-vb-portretrecht",
+    "language": "nl",
+    "value": "Ik wil mijn rechten uitoefenen volgens de GDPR of privacy wetgeving, met betrekking tot dit materiaal (vb. portretrecht)",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/report-blade/report-blade",
+    "key": "ik-wil-mijn-rechten-uitoefenen-volgens-de-gdpr-of-privacy-wetgeving-met-betrekking-tot-dit-materiaal-vb-portretrecht",
+    "language": "en",
+    "value": "Ik wil mijn rechten uitoefenen volgens de GDPR of privacy wetgeving, met betrekking tot dit materiaal (vb. portretrecht)",
     "value_type": "TEXT"
   },
   {
@@ -58764,60 +58724,20 @@
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
     "location": "modules/visitor-space/components/report-blade/report-blade",
-    "key": "reden-van-rapporteren",
+    "key": "dit-object-kan-momenteel-niet-gerapporteerd-worden-probeer-het-later-opnieuw-of-neem-contact-op-met-meemoo",
     "language": "nl",
-    "value": "Reden van rapporteren",
-    "value_type": "TEXT"
+    "value": "Dit object kan momenteel niet gerapporteerd worden. Probeer het later opnieuw of neem contact op met meemoo.",
+    "value_type": "HTML"
   },
   {
     "id": "",
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
     "location": "modules/visitor-space/components/report-blade/report-blade",
-    "key": "reden-van-rapporteren",
+    "key": "dit-object-kan-momenteel-niet-gerapporteerd-worden-probeer-het-later-opnieuw-of-neem-contact-op-met-meemoo",
     "language": "en",
-    "value": "Reasons for reporting",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/report-blade/report-blade",
-    "key": "pagina-url",
-    "language": "nl",
-    "value": "pagina url",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/report-blade/report-blade",
-    "key": "pagina-url",
-    "language": "en",
-    "value": "page URL",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/report-blade/report-blade",
-    "key": "media-item-gerapporteerd-door-gebruiker-op-het-archief",
-    "language": "nl",
-    "value": "Media item gerapporteerd door gebruiker op hetarchief.be",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/report-blade/report-blade",
-    "key": "media-item-gerapporteerd-door-gebruiker-op-het-archief",
-    "language": "en",
-    "value": "Media item reported by user on thearchives.be",
-    "value_type": "TEXT"
+    "value": "Dit object kan momenteel niet gerapporteerd worden. Probeer het later opnieuw of neem contact op met meemoo.",
+    "value_type": "HTML"
   },
   {
     "id": "",
@@ -58837,6 +58757,86 @@
     "key": "niet-ingelogde-gebruiker",
     "language": "en",
     "value": "Unregistered user",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/report-blade/report-blade",
+    "key": "verstuur-opmerking",
+    "language": "nl",
+    "value": "Verstuur opmerking",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/report-blade/report-blade",
+    "key": "verstuur-opmerking",
+    "language": "en",
+    "value": "Verstuur opmerking",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/report-blade/report-blade",
+    "key": "verstuur-opmerking-mobiel",
+    "language": "nl",
+    "value": "Verstuur opmerking - mobiel",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/report-blade/report-blade",
+    "key": "verstuur-opmerking-mobiel",
+    "language": "en",
+    "value": "Verstuur opmerking - mobiel",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/report-blade/report-blade",
+    "key": "sluiten",
+    "language": "nl",
+    "value": "Sluiten",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/report-blade/report-blade",
+    "key": "sluiten",
+    "language": "en",
+    "value": "Sluiten",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/report-blade/report-blade",
+    "key": "sluiten-mobiel",
+    "language": "nl",
+    "value": "Sluiten - mobiel",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/report-blade/report-blade",
+    "key": "sluiten-mobiel",
+    "language": "en",
+    "value": "Sluiten - mobiel",
     "value_type": "TEXT"
   },
   {
@@ -58924,66 +58924,6 @@
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
     "location": "modules/visitor-space/components/report-blade/report-blade",
-    "key": "rapporteren",
-    "language": "nl",
-    "value": "Rapporteren",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/report-blade/report-blade",
-    "key": "rapporteren",
-    "language": "en",
-    "value": "Reporting",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/report-blade/report-blade",
-    "key": "beschrijf-het-probleem",
-    "language": "nl",
-    "value": "Beschrijf het probleem",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/report-blade/report-blade",
-    "key": "beschrijf-het-probleem",
-    "language": "en",
-    "value": "Describe the problem",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/report-blade/report-blade",
-    "key": "beschrijf-het-probleem-input-aria-label",
-    "language": "nl",
-    "value": "Beschrijf hier het probleem",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/report-blade/report-blade",
-    "key": "beschrijf-het-probleem-input-aria-label",
-    "language": "en",
-    "value": "Describe the problem here",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/report-blade/report-blade",
     "key": "email-adres",
     "language": "nl",
     "value": "E-mailadres",
@@ -59017,6 +58957,226 @@
     "key": "jouw-email-adres-input-aria-label",
     "language": "en",
     "value": "Your email address",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/report-blade/report-blade",
+    "key": "opmerking",
+    "language": "nl",
+    "value": "Opmerking",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/report-blade/report-blade",
+    "key": "opmerking",
+    "language": "en",
+    "value": "Opmerking",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/report-blade/report-blade",
+    "key": "beschrijf-het-probleem-input-aria-label",
+    "language": "nl",
+    "value": "Beschrijf hier het probleem",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/report-blade/report-blade",
+    "key": "beschrijf-het-probleem-input-aria-label",
+    "language": "en",
+    "value": "Describe the problem here",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/report-blade/report-blade",
+    "key": "gebruik-deze-links-om-de-metadata-aan-te-laten-passen-in-het-meemoo-archiefsysteem-of-op-ai-meemoo-be",
+    "language": "nl",
+    "value": "Gebruik deze links om de metadata aan te (laten) passen in het meemoo-archiefsysteem of op ai.meemoo.be.",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/report-blade/report-blade",
+    "key": "gebruik-deze-links-om-de-metadata-aan-te-laten-passen-in-het-meemoo-archiefsysteem-of-op-ai-meemoo-be",
+    "language": "en",
+    "value": "Gebruik deze links om de metadata aan te (laten) passen in het meemoo-archiefsysteem of op ai.meemoo.be.",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/report-blade/report-blade",
+    "key": "bewerk-object-in-het-mam",
+    "language": "nl",
+    "value": "Bewerk object in het MAM",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/report-blade/report-blade",
+    "key": "bewerk-object-in-het-mam",
+    "language": "en",
+    "value": "Bewerk object in het MAM",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/report-blade/report-blade",
+    "key": "kopieer-link-mam",
+    "language": "nl",
+    "value": "Kopieer link MAM",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/report-blade/report-blade",
+    "key": "kopieer-link-mam",
+    "language": "en",
+    "value": "Kopieer link MAM",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/report-blade/report-blade",
+    "key": "bewerk-object-op-ai-meemoo-be",
+    "language": "nl",
+    "value": "Bewerk object op ai.meemoo.be",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/report-blade/report-blade",
+    "key": "bewerk-object-op-ai-meemoo-be",
+    "language": "en",
+    "value": "Bewerk object op ai.meemoo.be",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/report-blade/report-blade",
+    "key": "kopieer-link-ai-meemoo-be",
+    "language": "nl",
+    "value": "Kopieer link ai.meemoo.be",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/report-blade/report-blade",
+    "key": "kopieer-link-ai-meemoo-be",
+    "language": "en",
+    "value": "Kopieer link ai.meemoo.be",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/report-blade/report-blade",
+    "key": "beschrijf-het-probleem",
+    "language": "nl",
+    "value": "Beschrijf het probleem",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/report-blade/report-blade",
+    "key": "beschrijf-het-probleem",
+    "language": "en",
+    "value": "Describe the problem",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/report-blade/report-blade",
+    "key": "rapporteren",
+    "language": "nl",
+    "value": "Rapporteren",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/report-blade/report-blade",
+    "key": "rapporteren",
+    "language": "en",
+    "value": "Reporting",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/report-blade/report-blade",
+    "key": "wat-wil-je-rapporteren",
+    "language": "nl",
+    "value": "Wat wil je rapporteren?",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/report-blade/report-blade",
+    "key": "wat-wil-je-rapporteren",
+    "language": "en",
+    "value": "Wat wil je rapporteren?",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/report-blade/report-blade",
+    "key": "ben-je-zeker-dat-je-dit-venster-wilt-sluiten-hiermee-gaat-je-opmerking-verloren",
+    "language": "nl",
+    "value": "Ben je zeker dat je dit venster wilt sluiten? Hiermee gaat je opmerking verloren.",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/report-blade/report-blade",
+    "key": "ben-je-zeker-dat-je-dit-venster-wilt-sluiten-hiermee-gaat-je-opmerking-verloren",
+    "language": "en",
+    "value": "Ben je zeker dat je dit venster wilt sluiten? Hiermee gaat je opmerking verloren.",
     "value_type": "TEXT"
   },
   {
@@ -59157,6 +59317,126 @@
     "key": "jaartal",
     "language": "en",
     "value": "Year",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/text-filter-form/text-filter-form",
+    "key": "combineer-verschillende-voorwaarden-om-jouw-exacte-zoekopdracht-waar-te-maken",
+    "language": "nl",
+    "value": "Combineer verschillende voorwaarden om jouw exacte zoekopdracht waar te maken",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/text-filter-form/text-filter-form",
+    "key": "combineer-verschillende-voorwaarden-om-jouw-exacte-zoekopdracht-waar-te-maken",
+    "language": "en",
+    "value": "Combineer verschillende voorwaarden om jouw exacte zoekopdracht waar te maken",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/text-filter-form/text-filter-form",
+    "key": "of",
+    "language": "nl",
+    "value": "of",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/text-filter-form/text-filter-form",
+    "key": "of",
+    "language": "en",
+    "value": "of",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/text-filter-form/text-filter-form",
+    "key": "operator",
+    "language": "nl",
+    "value": "Operator",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/text-filter-form/text-filter-form",
+    "key": "operator",
+    "language": "en",
+    "value": "Operator",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/text-filter-form/text-filter-form",
+    "key": "zoek-field-name-input-aria-label",
+    "language": "nl",
+    "value": "Zoek op {{fieldName}}",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/text-filter-form/text-filter-form",
+    "key": "zoek-field-name-input-aria-label",
+    "language": "en",
+    "value": "Zoek op {{fieldName}}",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/text-filter-form/text-filter-form",
+    "key": "voorwaarde-wissen",
+    "language": "nl",
+    "value": "Voorwaarde wissen",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/text-filter-form/text-filter-form",
+    "key": "voorwaarde-wissen",
+    "language": "en",
+    "value": "Voorwaarde wissen",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/text-filter-form/text-filter-form",
+    "key": "voeg-voorwaarde-toe",
+    "language": "nl",
+    "value": "Voeg voorwaarde toe",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/text-filter-form/text-filter-form",
+    "key": "voeg-voorwaarde-toe",
+    "language": "en",
+    "value": "Voeg voorwaarde toe",
     "value_type": "TEXT"
   },
   {
@@ -59457,6 +59737,66 @@
     "key": "namenlijst-gesneuvelden",
     "language": "en",
     "value": "List of Names of WW1-victims",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/utils/advanced-filters/metadata",
+    "key": "personen-ai",
+    "language": "nl",
+    "value": "Personen (AI)",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/utils/advanced-filters/metadata",
+    "key": "personen-ai",
+    "language": "en",
+    "value": "Personen (AI)",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/utils/advanced-filters/metadata",
+    "key": "plaatsen-ai",
+    "language": "nl",
+    "value": "Plaatsen (AI)",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/utils/advanced-filters/metadata",
+    "key": "plaatsen-ai",
+    "language": "en",
+    "value": "Plaatsen (AI)",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/utils/advanced-filters/metadata",
+    "key": "organisaties-ai",
+    "language": "nl",
+    "value": "Organisaties (AI)",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/utils/advanced-filters/metadata",
+    "key": "organisaties-ai",
+    "language": "en",
+    "value": "Organisaties (AI)",
     "value_type": "TEXT"
   },
   {
@@ -59824,6 +60164,26 @@
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
     "location": "modules/visitor-space/utils/map-filters/map-filters",
+    "key": "is",
+    "language": "nl",
+    "value": "is",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/utils/map-filters/map-filters",
+    "key": "is",
+    "language": "en",
+    "value": "is",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/utils/map-filters/map-filters",
     "key": "trefwoord",
     "language": "nl",
     "value": "Trefwoord",
@@ -59837,86 +60197,6 @@
     "key": "trefwoord",
     "language": "en",
     "value": "Keyword",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/utils/map-filters/map-filters",
-    "key": "raadpleegbaar-ter-plaatse",
-    "language": "nl",
-    "value": "Bij aanbieder raadpleegbaar",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/utils/map-filters/map-filters",
-    "key": "raadpleegbaar-ter-plaatse",
-    "language": "en",
-    "value": "Accessible on-site",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/utils/map-filters/map-filters",
-    "key": "alles-wat-raadpleegbaar-is",
-    "language": "nl",
-    "value": "Alles wat raadpleegbaar is",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/utils/map-filters/map-filters",
-    "key": "alles-wat-raadpleegbaar-is",
-    "language": "en",
-    "value": "Everything that can be consulted",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/utils/map-filters/map-filters",
-    "key": "aanbieders",
-    "language": "nl",
-    "value": "Aanbieders",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/utils/map-filters/map-filters",
-    "key": "aanbieders",
-    "language": "en",
-    "value": "Organisations",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/utils/map-filters/map-filters",
-    "key": "herbruikbaarheid",
-    "language": "nl",
-    "value": "Herbruikbaarheid",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/utils/map-filters/map-filters",
-    "key": "herbruikbaarheid",
-    "language": "en",
-    "value": "Reusability",
     "value_type": "TEXT"
   },
   {
@@ -60417,6 +60697,126 @@
     "key": "sluiten",
     "language": "en",
     "value": "Close",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/const/index",
+    "key": "overzicht",
+    "language": "nl",
+    "value": "Overzicht",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/const/index",
+    "key": "overzicht",
+    "language": "en",
+    "value": "Overzicht",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/const/index",
+    "key": "gerelateerd",
+    "language": "nl",
+    "value": "Gerelateerd",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/const/index",
+    "key": "gerelateerd",
+    "language": "en",
+    "value": "Gerelateerd",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-header/object-detail-page-header",
+    "key": "toon-details",
+    "language": "nl",
+    "value": "Toon details",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-header/object-detail-page-header",
+    "key": "toon-details",
+    "language": "en",
+    "value": "Toon details",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/object-detail-page",
+    "key": "dit-object-heeft-1-gerelateerd-object",
+    "language": "nl",
+    "value": "Dit object heeft 1 gerelateerd object",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/object-detail-page",
+    "key": "dit-object-heeft-1-gerelateerd-object",
+    "language": "en",
+    "value": "Dit object heeft 1 gerelateerd object",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/object-detail-page",
+    "key": "dit-object-heeft-amount-gerelateerde-objecten",
+    "language": "nl",
+    "value": "Dit object heeft {{amount}} gerelateerde objecten",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/object-detail-page",
+    "key": "dit-object-heeft-amount-gerelateerde-objecten",
+    "language": "en",
+    "value": "Dit object heeft {{amount}} gerelateerde objecten",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/autocomplete-filter-form/autocomplete-filter-form",
+    "key": "wissen",
+    "language": "nl",
+    "value": "Wissen",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/autocomplete-filter-form/autocomplete-filter-form",
+    "key": "wissen",
+    "language": "en",
+    "value": "Wissen",
     "value_type": "TEXT"
   },
   {
@@ -62697,6 +63097,206 @@
     "key": "you-do-not-have-the-right-permissions-to-call-this-route",
     "language": "en",
     "value": "You do not have the right permissions to call this route",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "BACKEND",
+    "location": "modules/visitor-space/components/report-blade/report-blade",
+    "key": "ik-heb-een-probleem-met-de-metadata-van-dit-object",
+    "language": "nl",
+    "value": "Ik heb een probleem met de metadata van dit object",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "BACKEND",
+    "location": "modules/visitor-space/components/report-blade/report-blade",
+    "key": "ik-heb-een-probleem-met-de-metadata-van-dit-object",
+    "language": "en",
+    "value": "Ik heb een probleem met de metadata van dit object",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "BACKEND",
+    "location": "modules/visitor-space/components/report-blade/report-blade",
+    "key": "ik-heb-een-ander-probleem-met-dit-object",
+    "language": "nl",
+    "value": "Ik heb een ander probleem met dit object",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "BACKEND",
+    "location": "modules/visitor-space/components/report-blade/report-blade",
+    "key": "ik-heb-een-ander-probleem-met-dit-object",
+    "language": "en",
+    "value": "Ik heb een ander probleem met dit object",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "BACKEND",
+    "location": "modules/visitor-space/components/report-blade/report-blade",
+    "key": "ik-wil-een-juridische-opmerking-geven-ivm-auteursrecht-of-gdpr-privacy",
+    "language": "nl",
+    "value": "Ik wil een juridische opmerking geven ivm auteursrecht of gdpr privacy",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "BACKEND",
+    "location": "modules/visitor-space/components/report-blade/report-blade",
+    "key": "ik-wil-een-juridische-opmerking-geven-ivm-auteursrecht-of-gdpr-privacy",
+    "language": "en",
+    "value": "Ik wil een juridische opmerking geven ivm auteursrecht of gdpr privacy",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "BACKEND",
+    "location": "modules/visitor-space/components/report-blade/report-blade",
+    "key": "ik-ben-rechthebbende-en-wil-een-opt-out-op-de-out-of-commerce-regeling-aanvragen-voor-dit-materiaal-of-een-verwijdering",
+    "language": "nl",
+    "value": "Ik ben rechthebbende en wil een opt out op de out of commerce regeling aanvragen voor dit materiaal of een verwijdering",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "BACKEND",
+    "location": "modules/visitor-space/components/report-blade/report-blade",
+    "key": "ik-ben-rechthebbende-en-wil-een-opt-out-op-de-out-of-commerce-regeling-aanvragen-voor-dit-materiaal-of-een-verwijdering",
+    "language": "en",
+    "value": "Ik ben rechthebbende en wil een opt out op de out of commerce regeling aanvragen voor dit materiaal of een verwijdering",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "BACKEND",
+    "location": "modules/visitor-space/components/report-blade/report-blade",
+    "key": "ik-ben-rechthebbende-en-wil-een-klacht-indienen-wegens-mogelijke-inbreuk-op-intellectuele-rechten",
+    "language": "nl",
+    "value": "Ik ben rechthebbende en wil een klacht indienen wegens mogelijke inbreuk op intellectuele rechten",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "BACKEND",
+    "location": "modules/visitor-space/components/report-blade/report-blade",
+    "key": "ik-ben-rechthebbende-en-wil-een-klacht-indienen-wegens-mogelijke-inbreuk-op-intellectuele-rechten",
+    "language": "en",
+    "value": "Ik ben rechthebbende en wil een klacht indienen wegens mogelijke inbreuk op intellectuele rechten",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "BACKEND",
+    "location": "modules/visitor-space/components/report-blade/report-blade",
+    "key": "ik-wil-mijn-rechten-uitoefenen-volgens-de-gdpr-of-privacy-wetgeving-met-betrekking-tot-dit-materiaal-vb-portretrecht",
+    "language": "nl",
+    "value": "Ik wil mijn rechten uitoefenen volgens de gdpr of privacy wetgeving met betrekking tot dit materiaal vb portretrecht",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "BACKEND",
+    "location": "modules/visitor-space/components/report-blade/report-blade",
+    "key": "ik-wil-mijn-rechten-uitoefenen-volgens-de-gdpr-of-privacy-wetgeving-met-betrekking-tot-dit-materiaal-vb-portretrecht",
+    "language": "en",
+    "value": "Ik wil mijn rechten uitoefenen volgens de gdpr of privacy wetgeving met betrekking tot dit materiaal vb portretrecht",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "BACKEND",
+    "location": "modules/visitor-space/components/report-blade/report-blade",
+    "key": "media-item-gerapporteerd-door-gebruiker-op-het-archief",
+    "language": "nl",
+    "value": "Media item gerapporteerd door gebruiker op het archief",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "BACKEND",
+    "location": "modules/visitor-space/components/report-blade/report-blade",
+    "key": "media-item-gerapporteerd-door-gebruiker-op-het-archief",
+    "language": "en",
+    "value": "Media item gerapporteerd door gebruiker op het archief",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "BACKEND",
+    "location": "modules/visitor-space/components/report-blade/report-blade",
+    "key": "reden-van-rapporteren",
+    "language": "nl",
+    "value": "Reden van rapporteren",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "BACKEND",
+    "location": "modules/visitor-space/components/report-blade/report-blade",
+    "key": "reden-van-rapporteren",
+    "language": "en",
+    "value": "Reden van rapporteren",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "BACKEND",
+    "location": "modules/visitor-space/components/report-blade/report-blade",
+    "key": "opmerking",
+    "language": "nl",
+    "value": "Opmerking",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "BACKEND",
+    "location": "modules/visitor-space/components/report-blade/report-blade",
+    "key": "opmerking",
+    "language": "en",
+    "value": "Opmerking",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "BACKEND",
+    "location": "modules/visitor-space/components/report-blade/report-blade",
+    "key": "pagina-url",
+    "language": "nl",
+    "value": "Pagina url",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "BACKEND",
+    "location": "modules/visitor-space/components/report-blade/report-blade",
+    "key": "pagina-url",
+    "language": "en",
+    "value": "Pagina url",
     "value_type": "TEXT"
   }
 ]
