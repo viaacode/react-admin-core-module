@@ -261,3 +261,5 @@ api/.claude/
 CLAUDE.md
 
 ui/.claude/worktrees/
+
+*.tsbuildinfo
