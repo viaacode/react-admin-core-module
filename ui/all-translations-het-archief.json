@@ -26064,6 +26064,26 @@
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
     "location": "modules/ie-objects/const/index",
+    "key": "amount-gerelateerd",
+    "language": "nl",
+    "value": "{{amount}} gerelateerd",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/const/index",
+    "key": "amount-gerelateerd",
+    "language": "en",
+    "value": "{{amount}} gerelateerd",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/const/index",
     "key": "toevoegen-aan-aanvraaglijst-desktop",
     "language": "nl",
     "value": "Toevoegen aan aanvraaglijst",
@@ -47164,6 +47184,26 @@
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
     "location": "modules/ie-objects/ie-objects",
+    "key": "permanente-url",
+    "language": "nl",
+    "value": "Permanente url",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/ie-objects",
+    "key": "permanente-url",
+    "language": "en",
+    "value": "Permanente url",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/ie-objects",
     "key": "editie-nummer",
     "language": "nl",
     "value": "Editienummer",
@@ -47983,6 +48023,46 @@
     "id": "",
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-metadata-tab/object-detail-page-metadata-tab",
+    "key": "disclaimer",
+    "language": "nl",
+    "value": "Disclaimer",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-metadata-tab/object-detail-page-metadata-tab",
+    "key": "disclaimer",
+    "language": "en",
+    "value": "Disclaimer",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-metadata-tab/object-detail-page-metadata-tab",
+    "key": "metadata-worden-aangeleverd-door-partners-van-meemoo-meemoo-is-niet-verantwoordelijk-voor-onjuistheden-of-onvolledigheden-in-deze-gegevens-meer-info",
+    "language": "nl",
+    "value": "Metadata worden aangeleverd door partners van meemoo. Meemoo is niet verantwoordelijk voor onjuistheden of onvolledigheden in deze gegevens. Meer info",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-metadata-tab/object-detail-page-metadata-tab",
+    "key": "metadata-worden-aangeleverd-door-partners-van-meemoo-meemoo-is-niet-verantwoordelijk-voor-onjuistheden-of-onvolledigheden-in-deze-gegevens-meer-info",
+    "language": "en",
+    "value": "Metadata worden aangeleverd door partners van meemoo. Meemoo is niet verantwoordelijk voor onjuistheden of onvolledigheden in deze gegevens. Meer info",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
     "location": "modules/ie-objects/object-detail-page",
     "key": "namenlijst",
     "language": "nl",
@@ -48038,6 +48118,26 @@
     "language": "en",
     "value": "OCR reliability",
     "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/object-detail-page",
+    "key": "deze-ocr-kan-fouten-bevatten-a-href-ocr-betrouwbaarheid-info-meer-info-vind-je-hier-a",
+    "language": "nl",
+    "value": "<p>Deze OCR kan fouten bevatten. <a href=\"/vragen?item=%2Fhoe-betrouwbaar-is-tekstherkenning-ocr-op-hetarchief-be&amp;label=Zoeken&amp;page=0\" target=\"\">Meer info vind je hier</a>.</p>",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/object-detail-page",
+    "key": "deze-ocr-kan-fouten-bevatten-a-href-ocr-betrouwbaarheid-info-meer-info-vind-je-hier-a",
+    "language": "en",
+    "value": "<p>Deze OCR kan fouten bevatten. <a href=\"/vragen?item=%2Fhoe-betrouwbaar-is-tekstherkenning-ocr-op-hetarchief-be&amp;label=Zoeken&amp;page=0\" target=\"\">Meer info vind je hier</a>.</p>",
+    "value_type": "HTML"
   },
   {
     "id": "",
@@ -60303,6 +60403,46 @@
     "id": "",
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
+    "location": "modules/shared/components/tabs/scrollable-tabs/scrollable-tabs",
+    "key": "scroll-tabs-naar-links",
+    "language": "nl",
+    "value": "Scroll tabs naar links",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/shared/components/tabs/scrollable-tabs/scrollable-tabs",
+    "key": "scroll-tabs-naar-links",
+    "language": "en",
+    "value": "Scroll tabs naar links",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/shared/components/tabs/scrollable-tabs/scrollable-tabs",
+    "key": "scroll-tabs-naar-rechts",
+    "language": "nl",
+    "value": "Scroll tabs naar rechts",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/shared/components/tabs/scrollable-tabs/scrollable-tabs",
+    "key": "scroll-tabs-naar-rechts",
+    "language": "en",
+    "value": "Scroll tabs naar rechts",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
     "location": "modules/visitor-space/components/visitor-space-search-page/visitor-space-search-page",
     "key": "pages-bezoekersruimte-zoeken-zoek-info",
     "language": "nl",
@@ -60677,146 +60817,6 @@
     "key": "sluiten",
     "language": "en",
     "value": "Close",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/const/index",
-    "key": "amount-gerelateerd",
-    "language": "nl",
-    "value": "{{amount}} gerelateerd",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/const/index",
-    "key": "amount-gerelateerd",
-    "language": "en",
-    "value": "{{amount}} gerelateerd",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/ie-objects",
-    "key": "permanente-url",
-    "language": "nl",
-    "value": "Permanente url",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/ie-objects",
-    "key": "permanente-url",
-    "language": "en",
-    "value": "Permanente url",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/components/object-detail-page-metadata-tab/object-detail-page-metadata-tab",
-    "key": "disclaimer",
-    "language": "nl",
-    "value": "Disclaimer",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/components/object-detail-page-metadata-tab/object-detail-page-metadata-tab",
-    "key": "disclaimer",
-    "language": "en",
-    "value": "Disclaimer",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/components/object-detail-page-metadata-tab/object-detail-page-metadata-tab",
-    "key": "metadata-worden-aangeleverd-door-partners-van-meemoo-meemoo-is-niet-verantwoordelijk-voor-onjuistheden-of-onvolledigheden-in-deze-gegevens-meer-info",
-    "language": "nl",
-    "value": "Metadata worden aangeleverd door partners van meemoo. Meemoo is niet verantwoordelijk voor onjuistheden of onvolledigheden in deze gegevens. Meer info",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/components/object-detail-page-metadata-tab/object-detail-page-metadata-tab",
-    "key": "metadata-worden-aangeleverd-door-partners-van-meemoo-meemoo-is-niet-verantwoordelijk-voor-onjuistheden-of-onvolledigheden-in-deze-gegevens-meer-info",
-    "language": "en",
-    "value": "Metadata worden aangeleverd door partners van meemoo. Meemoo is niet verantwoordelijk voor onjuistheden of onvolledigheden in deze gegevens. Meer info",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/object-detail-page",
-    "key": "deze-ocr-kan-fouten-bevatten-a-href-ocr-betrouwbaarheid-info-meer-info-vind-je-hier-a",
-    "language": "nl",
-    "value": "<p>Deze OCR kan fouten bevatten. <a href=\"/vragen?item=%2Fhoe-betrouwbaar-is-tekstherkenning-ocr-op-hetarchief-be&amp;label=Zoeken&amp;page=0\" target=\"\">Meer info vind je hier</a>.</p>",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/object-detail-page",
-    "key": "deze-ocr-kan-fouten-bevatten-a-href-ocr-betrouwbaarheid-info-meer-info-vind-je-hier-a",
-    "language": "en",
-    "value": "<p>This OCR may contain mistakes. <a href=\"/en/questions?item=%2Fhow-reliable-is-the-text-recognition-ocr-on-thearchives-be&amp;label=Search&amp;page=0\" target=\"\">Read more about OCR</a>.</p>",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/shared/components/tabs/scrollable-tabs/scrollable-tabs",
-    "key": "scroll-tabs-naar-links",
-    "language": "nl",
-    "value": "Scroll tabs naar links",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/shared/components/tabs/scrollable-tabs/scrollable-tabs",
-    "key": "scroll-tabs-naar-links",
-    "language": "en",
-    "value": "Scroll tabs naar links",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/shared/components/tabs/scrollable-tabs/scrollable-tabs",
-    "key": "scroll-tabs-naar-rechts",
-    "language": "nl",
-    "value": "Scroll tabs naar rechts",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/shared/components/tabs/scrollable-tabs/scrollable-tabs",
-    "key": "scroll-tabs-naar-rechts",
-    "language": "en",
-    "value": "Scroll tabs naar rechts",
     "value_type": "TEXT"
   },
   {
