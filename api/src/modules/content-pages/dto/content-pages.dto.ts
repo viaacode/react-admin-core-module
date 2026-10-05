@@ -47,6 +47,17 @@ export class ContentPageOverviewParams {
 	})
 	selectedLabelIds?: (string | number)[];
 
+	@IsBoolean()
+	@Type(() => Boolean)
+	@IsOptional()
+	@ApiPropertyOptional({
+		type: Boolean,
+		description:
+			'Fetch the content pages per selected label (each label gets its own sorted and paginated list in itemsByLabel)',
+		default: false,
+	})
+	groupByLabel? = false;
+
 	@IsString()
 	@Type(() => String)
 	@IsOptional()
