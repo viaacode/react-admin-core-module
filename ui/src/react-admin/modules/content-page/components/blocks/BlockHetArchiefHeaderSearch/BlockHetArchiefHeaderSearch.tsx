@@ -56,7 +56,7 @@ export const BlockHetArchiefHeaderSearch: FunctionComponent<BlockHetArchiefHeade
 				<BlockHeading className="c-block-het-archief-header-search__title" type="h1">
 					{title}
 				</BlockHeading>
-				{subtitles?.length && (
+				{subtitles?.length > 0 && (
 					<ul>
 						{/* Add first item again at the end for a smooth crossfade animation */}
 						{subtitles.map((subtitle, index) => (
