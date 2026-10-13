@@ -516,7 +516,7 @@
     "location": "modules/user/user",
     "key": "alle-resultaten-exporteren",
     "language": "en",
-    "value": "Alle resultaten exporteren",
+    "value": "Export all results",
     "value_type": "TEXT"
   },
   {
@@ -26016,7 +26016,7 @@
     "location": "modules/ie-objects/const/index",
     "key": "overzicht",
     "language": "en",
-    "value": "Overzicht",
+    "value": "overview",
     "value_type": "TEXT"
   },
   {
@@ -26076,7 +26076,7 @@
     "location": "modules/ie-objects/const/index",
     "key": "amount-gerelateerd",
     "language": "en",
-    "value": "{{amount}} gerelateerd",
+    "value": "{{amount}} related",
     "value_type": "TEXT"
   },
   {
@@ -36176,7 +36176,7 @@
     "location": "modules/visitor-space/const/operator-labels",
     "key": "bevat",
     "language": "en",
-    "value": "Bevat",
+    "value": "Contains",
     "value_type": "TEXT"
   },
   {
@@ -36196,7 +36196,7 @@
     "location": "modules/visitor-space/const/operator-labels",
     "key": "bevat-niet",
     "language": "en",
-    "value": "Bevat niet",
+    "value": "Does not contain",
     "value_type": "TEXT"
   },
   {
@@ -36236,7 +36236,7 @@
     "location": "modules/visitor-space/const/operator-labels",
     "key": "is-niet",
     "language": "en",
-    "value": "Is niet",
+    "value": "Is not",
     "value_type": "TEXT"
   },
   {
@@ -36256,7 +36256,7 @@
     "location": "modules/visitor-space/const/operator-labels",
     "key": "vanaf",
     "language": "en",
-    "value": "Vanaf",
+    "value": "From",
     "value_type": "TEXT"
   },
   {
@@ -36276,7 +36276,7 @@
     "location": "modules/visitor-space/const/operator-labels",
     "key": "tot-en-met",
     "language": "en",
-    "value": "Tot en met",
+    "value": "Up until",
     "value_type": "TEXT"
   },
   {
@@ -36296,7 +36296,7 @@
     "location": "modules/visitor-space/const/operator-labels",
     "key": "tussen",
     "language": "en",
-    "value": "Tussen",
+    "value": "Between",
     "value_type": "TEXT"
   },
   {
@@ -36316,7 +36316,7 @@
     "location": "modules/visitor-space/const/operator-labels",
     "key": "korter-dan",
     "language": "en",
-    "value": "Korter dan",
+    "value": "Shorter than",
     "value_type": "TEXT"
   },
   {
@@ -36336,7 +36336,7 @@
     "location": "modules/visitor-space/const/operator-labels",
     "key": "langer-dan",
     "language": "en",
-    "value": "Langer dan",
+    "value": "Longer than",
     "value_type": "TEXT"
   },
   {
@@ -46406,7 +46406,7 @@
     "location": "modules/ie-objects/components/context-disclaimer/context-disclaimer",
     "key": "de-context-van-dit-archief-is-belangrijk-bij-het-begrip-van-deze-video-meer-weten",
     "language": "nl",
-    "value": "De context van dit archief is belangrijk bij het begrip van deze video. <a href=\"/vragen\">Meer weten</a>",
+    "value": "<p>De context van dit archief is belangrijk bij het begrip van deze video. <a target=\"_blank\" rel=\"noopener noreferrer nofollow\" href=\"/het-audio-of-videofragment-dat-ik-kan-bekijken-op-hetarchief-be-is-van-slechte-kwaliteit-of-bevat-beledigend-taalgebruik\">Meer weten.</a></p>",
     "value_type": "HTML"
   },
   {
@@ -46416,7 +46416,7 @@
     "location": "modules/ie-objects/components/context-disclaimer/context-disclaimer",
     "key": "de-context-van-dit-archief-is-belangrijk-bij-het-begrip-van-deze-video-meer-weten",
     "language": "en",
-    "value": "<p>The context of this archive is important in understanding this video.&nbsp;<a target=\"_blank\" rel=\"noopener noreferrer nofollow\" href=\"https://qas.hetarchief.be/en/questions\">Learn more</a></p>",
+    "value": "<p>The context of this archive is important in understanding this video.&nbsp;<a target=\"_blank\" rel=\"noopener noreferrer nofollow\" href=\"/en/questions\">Learn more.</a></p>",
     "value_type": "HTML"
   },
   {
@@ -46896,7 +46896,7 @@
     "location": "modules/ie-objects/components/object-detail-page-header/object-detail-page-header",
     "key": "toon-details",
     "language": "en",
-    "value": "Toon details",
+    "value": "Show details",
     "value_type": "TEXT"
   },
   {
@@ -46956,7 +46956,7 @@
     "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata",
     "key": "meer-info-over-ai-gegenereerde-titel-en-samenvatting",
     "language": "en",
-    "value": "Meer info over AI-gegenereerde titel en samenvatting",
+    "value": "More info on AI-generated title and descriptions",
     "value_type": "TEXT"
   },
   {
@@ -46976,7 +46976,7 @@
     "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata",
     "key": "deze-titel-en-samenvatting-zijn-automatisch-gegenereerd-met-ai-en-kunnen-fouten-bevatten-meer-info",
     "language": "en",
-    "value": "<p>Deze titel en samenvatting zijn automatisch gegenereerd met AI en kunnen fouten bevatten. <a href=\"/vragen\">Meer info</a></p>",
+    "value": "<p>This title and description were automatically generated using AI and may contain errors. <a target=\"_blank\" rel=\"noopener noreferrer nofollow\" href=\"/vragen\">Meer info</a></p>",
     "value_type": "HTML"
   },
   {
@@ -46996,7 +46996,7 @@
     "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata",
     "key": "samenvatting-ai",
     "language": "en",
-    "value": "Samenvatting (AI)",
+    "value": "Description (AI)",
     "value_type": "TEXT"
   },
   {
@@ -47196,7 +47196,7 @@
     "location": "modules/ie-objects/ie-objects",
     "key": "permanente-url",
     "language": "en",
-    "value": "Permanente url",
+    "value": "Permanent url",
     "value_type": "TEXT"
   },
   {
@@ -48056,7 +48056,7 @@
     "location": "modules/ie-objects/components/object-detail-page-metadata-tab/object-detail-page-metadata-tab",
     "key": "metadata-worden-aangeleverd-door-partners-van-meemoo-meemoo-is-niet-verantwoordelijk-voor-onjuistheden-of-onvolledigheden-in-deze-gegevens-meer-info",
     "language": "en",
-    "value": "Metadata worden aangeleverd door partners van meemoo. Meemoo is niet verantwoordelijk voor onjuistheden of onvolledigheden in deze gegevens. Meer info",
+    "value": "The metadata is provided by partners of meemoo. Meemoo is not responsible for inaccuracies or the incompleteness of data. More info.",
     "value_type": "HTML"
   },
   {
@@ -48576,7 +48576,7 @@
     "location": "modules/ie-objects/object-detail-page",
     "key": "dit-object-heeft-1-gerelateerd-object",
     "language": "en",
-    "value": "Dit object heeft 1 gerelateerd object",
+    "value": "This object has 1 related object",
     "value_type": "TEXT"
   },
   {
@@ -48596,7 +48596,7 @@
     "location": "modules/ie-objects/object-detail-page",
     "key": "dit-object-heeft-amount-gerelateerde-objecten",
     "language": "en",
-    "value": "Dit object heeft {{amount}} gerelateerde objecten",
+    "value": "This object has {{amount}} related objects",
     "value_type": "TEXT"
   },
   {
@@ -54806,7 +54806,7 @@
     "location": "modules/visitor-space/components/add-to-folder-blade/add-to-folder-blade",
     "key": "kies-de-map-waaraan-je-strong-title-strong-wil-toevoegen",
     "language": "nl",
-    "value": "<p>Kies de map waarin je <span>&lt;strong&gt;{{title}}&lt;/strong&gt;</span> wil bijhouden</p>",
+    "value": "<p>Kies de map waarin je <strong>{{title}}</strong> wil bijhouden</p>",
     "value_type": "HTML"
   },
   {
@@ -54816,7 +54816,7 @@
     "location": "modules/visitor-space/components/add-to-folder-blade/add-to-folder-blade",
     "key": "kies-de-map-waaraan-je-strong-title-strong-wil-toevoegen",
     "language": "en",
-    "value": "<p>Choose the folder where you want to save <span>&lt;strong&gt;{{title}}&lt;/strong&gt;</span></p>",
+    "value": "<p>Choose the folder where you want to save <strong>{{title}}</strong></p>",
     "value_type": "HTML"
   },
   {
@@ -54996,7 +54996,7 @@
     "location": "modules/visitor-space/components/autocomplete-filter-form/autocomplete-filter-form",
     "key": "het-ophalen-van-de-suggesties-is-mislukt",
     "language": "en",
-    "value": "Het ophalen van de suggesties is mislukt",
+    "value": "Retrieving the suggestions has failed",
     "value_type": "TEXT"
   },
   {
@@ -55016,7 +55016,7 @@
     "location": "modules/visitor-space/components/autocomplete-filter-form/autocomplete-filter-form",
     "key": "geselecteerd",
     "language": "en",
-    "value": "Geselecteerd",
+    "value": "Selected",
     "value_type": "HTML"
   },
   {
@@ -55036,7 +55036,7 @@
     "location": "modules/visitor-space/components/autocomplete-filter-form/autocomplete-filter-form",
     "key": "wissen",
     "language": "en",
-    "value": "Wissen",
+    "value": "Delete",
     "value_type": "TEXT"
   },
   {
@@ -55056,7 +55056,7 @@
     "location": "modules/visitor-space/components/autocomplete-filter-form/autocomplete-filter-form",
     "key": "geef-minstens-3-karakters-in",
     "language": "en",
-    "value": "Geef minstens 3 karakters in",
+    "value": "Enter at least 3 characters",
     "value_type": "TEXT"
   },
   {
@@ -55076,7 +55076,7 @@
     "location": "modules/visitor-space/components/autocomplete-filter-form/autocomplete-filter-form",
     "key": "geen-resultaten-gevonden",
     "language": "en",
-    "value": "Geen resultaten gevonden",
+    "value": "No results found",
     "value_type": "TEXT"
   },
   {
@@ -55086,7 +55086,7 @@
     "location": "modules/visitor-space/components/autocomplete-filter-form/autocomplete-filter-form",
     "key": "laden",
     "language": "nl",
-    "value": "Laden...",
+    "value": "Laden ...",
     "value_type": "TEXT"
   },
   {
@@ -55096,7 +55096,7 @@
     "location": "modules/visitor-space/components/autocomplete-filter-form/autocomplete-filter-form",
     "key": "laden",
     "language": "en",
-    "value": "Laden...",
+    "value": "Loading ...",
     "value_type": "TEXT"
   },
   {
@@ -55116,7 +55116,7 @@
     "location": "modules/visitor-space/components/autocomplete-filter-form/autocomplete-filter-form",
     "key": "zoek",
     "language": "en",
-    "value": "Zoek",
+    "value": "Search",
     "value_type": "TEXT"
   },
   {
@@ -55136,7 +55136,7 @@
     "location": "modules/visitor-space/components/checkbox-list-filter-form/checkbox-list-filter-form",
     "key": "zoek",
     "language": "en",
-    "value": "Zoek",
+    "value": "Search",
     "value_type": "TEXT"
   },
   {
@@ -55156,7 +55156,7 @@
     "location": "modules/visitor-space/components/checkbox-list-filter-form/checkbox-list-filter-form",
     "key": "zoek-binnen-filter-input-aria-label",
     "language": "en",
-    "value": "Zoek binnen de filter {{filterName}}",
+    "value": "Search within filter {{filterName}}",
     "value_type": "TEXT"
   },
   {
@@ -55176,7 +55176,7 @@
     "location": "modules/visitor-space/components/checkbox-list-filter-form/checkbox-list-filter-form",
     "key": "geen-waarden-gevonden",
     "language": "en",
-    "value": "Geen waarden gevonden",
+    "value": "No values found",
     "value_type": "HTML"
   },
   {
@@ -58456,7 +58456,7 @@
     "location": "modules/visitor-space/components/report-blade/report-blade",
     "key": "probleem-mag-maximaal-1000-karakters-bevatten",
     "language": "en",
-    "value": "Probleem mag maximaal 1000 karakters bevatten",
+    "value": "Problem cannot exceed 1000 characters",
     "value_type": "TEXT"
   },
   {
@@ -58516,7 +58516,7 @@
     "location": "modules/visitor-space/components/report-blade/report-blade",
     "key": "kies-een-van-de-bovenstaande-opties",
     "language": "en",
-    "value": "Kies een van de bovenstaande opties",
+    "value": "Choose one of the options above",
     "value_type": "TEXT"
   },
   {
@@ -58536,7 +58536,7 @@
     "location": "modules/visitor-space/components/report-blade/report-blade",
     "key": "opmerking-is-verplicht",
     "language": "en",
-    "value": "Opmerking is verplicht",
+    "value": "Comment is required",
     "value_type": "TEXT"
   },
   {
@@ -58556,7 +58556,7 @@
     "location": "modules/visitor-space/components/report-blade/report-blade",
     "key": "opmerking-mag-maximaal-1000-karakters-bevatten",
     "language": "en",
-    "value": "Opmerking mag maximaal 1000 karakters bevatten",
+    "value": "Comment cannot exceed 1000 characters",
     "value_type": "TEXT"
   },
   {
@@ -58566,7 +58566,7 @@
     "location": "modules/visitor-space/components/report-blade/report-blade",
     "key": "ik-wil-een-juridische-opmerking-geven-ivm-auteursrecht-of-gdpr-privacy",
     "language": "nl",
-    "value": "Ik wil een juridische opmerking geven (ivm auteursrecht of GDPR/Privacy)",
+    "value": "Ik wil een juridische opmerking geven in verband met auteursrecht of GDPR/privacy",
     "value_type": "TEXT"
   },
   {
@@ -58576,7 +58576,7 @@
     "location": "modules/visitor-space/components/report-blade/report-blade",
     "key": "ik-wil-een-juridische-opmerking-geven-ivm-auteursrecht-of-gdpr-privacy",
     "language": "en",
-    "value": "Ik wil een juridische opmerking geven (ivm auteursrecht of GDPR/Privacy)",
+    "value": "I want to make a legal comment regarding copyright or GDP/privacy",
     "value_type": "TEXT"
   },
   {
@@ -58596,7 +58596,7 @@
     "location": "modules/visitor-space/components/report-blade/report-blade",
     "key": "ik-heb-een-ander-probleem-met-dit-object",
     "language": "en",
-    "value": "Ik heb een ander probleem met dit object",
+    "value": "I have a different problem with this object",
     "value_type": "TEXT"
   },
   {
@@ -58616,7 +58616,7 @@
     "location": "modules/visitor-space/components/report-blade/report-blade",
     "key": "ik-vond-een-probleem-dat-ik-binnen-mijn-organisatie-wil-oplossen-geef-mij-de-juiste-links-om-te-editeren",
     "language": "en",
-    "value": "Ik vond een probleem dat ik binnen mijn organisatie wil oplossen, geef mij de juiste links om te editeren.",
+    "value": "I found a problem that I want to solve within my organisation, please give me the links to edit.",
     "value_type": "TEXT"
   },
   {
@@ -58636,7 +58636,7 @@
     "location": "modules/visitor-space/components/report-blade/report-blade",
     "key": "ik-wil-een-probleem-met-dit-item-aan-meemoo-melden",
     "language": "en",
-    "value": "Ik wil een probleem met dit item aan meemoo melden",
+    "value": "I want to report a problem with this item to meemoo",
     "value_type": "TEXT"
   },
   {
@@ -58656,7 +58656,7 @@
     "location": "modules/visitor-space/components/report-blade/report-blade",
     "key": "ik-heb-een-probleem-met-de-metadata-van-dit-object",
     "language": "en",
-    "value": "Ik heb een probleem met de metadata van dit object",
+    "value": "I have a problem with the metadata of this object",
     "value_type": "TEXT"
   },
   {
@@ -58676,7 +58676,7 @@
     "location": "modules/visitor-space/components/report-blade/report-blade",
     "key": "ik-ben-rechthebbende-en-wil-een-opt-out-op-de-out-of-commerce-regeling-aanvragen-voor-dit-materiaal-of-een-verwijdering",
     "language": "en",
-    "value": "Ik ben rechthebbende en wil een opt-out op de Out-of-Commerce regeling aanvragen voor dit materiaal, of een verwijdering.",
+    "value": "I'm a rights holder and wish to request an opt out of the out of commerce arrangement or a deletion",
     "value_type": "TEXT"
   },
   {
@@ -58696,7 +58696,7 @@
     "location": "modules/visitor-space/components/report-blade/report-blade",
     "key": "ik-ben-rechthebbende-en-wil-een-klacht-indienen-wegens-mogelijke-inbreuk-op-intellectuele-rechten",
     "language": "en",
-    "value": "Ik ben rechthebbende en wil een klacht indienen wegens mogelijke inbreuk op intellectuele rechten.",
+    "value": "I'm a rights holder and I wish to file a complaint regarding a possible violation of intellectual property.",
     "value_type": "TEXT"
   },
   {
@@ -58706,7 +58706,7 @@
     "location": "modules/visitor-space/components/report-blade/report-blade",
     "key": "ik-wil-mijn-rechten-uitoefenen-volgens-de-gdpr-of-privacy-wetgeving-met-betrekking-tot-dit-materiaal-vb-portretrecht",
     "language": "nl",
-    "value": "Ik wil mijn rechten uitoefenen volgens de GDPR of privacy wetgeving, met betrekking tot dit materiaal (vb. portretrecht)",
+    "value": "Ik wil mijn rechten uitoefenen volgens de GDPR- of privacywetgeving met betrekking tot dit materiaal (bijvoorbeeld: portretrecht)",
     "value_type": "TEXT"
   },
   {
@@ -58716,7 +58716,7 @@
     "location": "modules/visitor-space/components/report-blade/report-blade",
     "key": "ik-wil-mijn-rechten-uitoefenen-volgens-de-gdpr-of-privacy-wetgeving-met-betrekking-tot-dit-materiaal-vb-portretrecht",
     "language": "en",
-    "value": "Ik wil mijn rechten uitoefenen volgens de GDPR of privacy wetgeving, met betrekking tot dit materiaal (vb. portretrecht)",
+    "value": "I want to make use of my GDPR- or privacy rights with regard to this material (for example: portrait right)",
     "value_type": "TEXT"
   },
   {
@@ -58816,7 +58816,7 @@
     "location": "modules/visitor-space/components/report-blade/report-blade",
     "key": "dit-object-kan-momenteel-niet-gerapporteerd-worden-probeer-het-later-opnieuw-of-neem-contact-op-met-meemoo",
     "language": "en",
-    "value": "Dit object kan momenteel niet gerapporteerd worden. Probeer het later opnieuw of neem contact op met meemoo.",
+    "value": "This object cannot be reported right now. Please try again later or contact meemoo.",
     "value_type": "HTML"
   },
   {
@@ -58856,7 +58856,7 @@
     "location": "modules/visitor-space/components/report-blade/report-blade",
     "key": "verstuur-opmerking",
     "language": "en",
-    "value": "Verstuur opmerking",
+    "value": "Send comment",
     "value_type": "TEXT"
   },
   {
@@ -58866,7 +58866,7 @@
     "location": "modules/visitor-space/components/report-blade/report-blade",
     "key": "verstuur-opmerking-mobiel",
     "language": "nl",
-    "value": "Verstuur opmerking - mobiel",
+    "value": "Versturen",
     "value_type": "TEXT"
   },
   {
@@ -58876,7 +58876,7 @@
     "location": "modules/visitor-space/components/report-blade/report-blade",
     "key": "verstuur-opmerking-mobiel",
     "language": "en",
-    "value": "Verstuur opmerking - mobiel",
+    "value": "Send",
     "value_type": "TEXT"
   },
   {
@@ -58896,7 +58896,7 @@
     "location": "modules/visitor-space/components/report-blade/report-blade",
     "key": "sluiten",
     "language": "en",
-    "value": "Sluiten",
+    "value": "Close",
     "value_type": "TEXT"
   },
   {
@@ -58906,7 +58906,7 @@
     "location": "modules/visitor-space/components/report-blade/report-blade",
     "key": "sluiten-mobiel",
     "language": "nl",
-    "value": "Sluiten - mobiel",
+    "value": "Sluiten",
     "value_type": "TEXT"
   },
   {
@@ -58916,7 +58916,7 @@
     "location": "modules/visitor-space/components/report-blade/report-blade",
     "key": "sluiten-mobiel",
     "language": "en",
-    "value": "Sluiten - mobiel",
+    "value": "Close",
     "value_type": "TEXT"
   },
   {
@@ -59044,26 +59044,6 @@
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
     "location": "modules/visitor-space/components/report-blade/report-blade",
-    "key": "opmerking",
-    "language": "nl",
-    "value": "Opmerking",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/report-blade/report-blade",
-    "key": "opmerking",
-    "language": "en",
-    "value": "Opmerking",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/report-blade/report-blade",
     "key": "beschrijf-het-probleem-input-aria-label",
     "language": "nl",
     "value": "Beschrijf hier het probleem",
@@ -59084,6 +59064,26 @@
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
     "location": "modules/visitor-space/components/report-blade/report-blade",
+    "key": "opmerking",
+    "language": "nl",
+    "value": "Opmerking",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/report-blade/report-blade",
+    "key": "opmerking",
+    "language": "en",
+    "value": "Comment",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/report-blade/report-blade",
     "key": "gebruik-deze-links-om-de-metadata-aan-te-laten-passen-in-het-meemoo-archiefsysteem-of-op-ai-meemoo-be",
     "language": "nl",
     "value": "Gebruik deze links om de metadata aan te (laten) passen in het meemoo-archiefsysteem of op ai.meemoo.be.",
@@ -59096,7 +59096,7 @@
     "location": "modules/visitor-space/components/report-blade/report-blade",
     "key": "gebruik-deze-links-om-de-metadata-aan-te-laten-passen-in-het-meemoo-archiefsysteem-of-op-ai-meemoo-be",
     "language": "en",
-    "value": "Gebruik deze links om de metadata aan te (laten) passen in het meemoo-archiefsysteem of op ai.meemoo.be.",
+    "value": "Use these links to have the metadata changed in the meemoo-archive system or at ai.meemoo.be.",
     "value_type": "HTML"
   },
   {
@@ -59116,7 +59116,7 @@
     "location": "modules/visitor-space/components/report-blade/report-blade",
     "key": "bewerk-object-in-het-mam",
     "language": "en",
-    "value": "Bewerk object in het MAM",
+    "value": "Edit object in MAM",
     "value_type": "TEXT"
   },
   {
@@ -59136,7 +59136,7 @@
     "location": "modules/visitor-space/components/report-blade/report-blade",
     "key": "kopieer-link-mam",
     "language": "en",
-    "value": "Kopieer link MAM",
+    "value": "Copy MAM link",
     "value_type": "TEXT"
   },
   {
@@ -59156,7 +59156,7 @@
     "location": "modules/visitor-space/components/report-blade/report-blade",
     "key": "bewerk-object-op-ai-meemoo-be",
     "language": "en",
-    "value": "Bewerk object op ai.meemoo.be",
+    "value": "Edit object at ai.meemoo.be",
     "value_type": "TEXT"
   },
   {
@@ -59176,7 +59176,7 @@
     "location": "modules/visitor-space/components/report-blade/report-blade",
     "key": "kopieer-link-ai-meemoo-be",
     "language": "en",
-    "value": "Kopieer link ai.meemoo.be",
+    "value": "Copy ai.meemoo.be link",
     "value_type": "TEXT"
   },
   {
@@ -59236,7 +59236,7 @@
     "location": "modules/visitor-space/components/report-blade/report-blade",
     "key": "wat-wil-je-rapporteren",
     "language": "en",
-    "value": "Wat wil je rapporteren?",
+    "value": "What do you want to report?",
     "value_type": "HTML"
   },
   {
@@ -59256,7 +59256,7 @@
     "location": "modules/visitor-space/components/report-blade/report-blade",
     "key": "ben-je-zeker-dat-je-dit-venster-wilt-sluiten-hiermee-gaat-je-opmerking-verloren",
     "language": "en",
-    "value": "Ben je zeker dat je dit venster wilt sluiten? Hiermee gaat je opmerking verloren.",
+    "value": "Are you sure you want to close this window? Your comment will be lost.",
     "value_type": "TEXT"
   },
   {
@@ -59416,7 +59416,7 @@
     "location": "modules/visitor-space/components/text-filter-form/text-filter-form",
     "key": "combineer-verschillende-voorwaarden-om-jouw-exacte-zoekopdracht-waar-te-maken",
     "language": "en",
-    "value": "Combineer verschillende voorwaarden om jouw exacte zoekopdracht waar te maken",
+    "value": "Combine different conditions to make your exact search query",
     "value_type": "HTML"
   },
   {
@@ -59436,7 +59436,7 @@
     "location": "modules/visitor-space/components/text-filter-form/text-filter-form",
     "key": "of",
     "language": "en",
-    "value": "of",
+    "value": "or",
     "value_type": "TEXT"
   },
   {
@@ -59476,7 +59476,7 @@
     "location": "modules/visitor-space/components/text-filter-form/text-filter-form",
     "key": "zoek-field-name-input-aria-label",
     "language": "en",
-    "value": "Zoek op {{fieldName}}",
+    "value": "Search for {{fieldName}}",
     "value_type": "TEXT"
   },
   {
@@ -59496,7 +59496,7 @@
     "location": "modules/visitor-space/components/text-filter-form/text-filter-form",
     "key": "voorwaarde-wissen",
     "language": "en",
-    "value": "Voorwaarde wissen",
+    "value": "Delete condition",
     "value_type": "TEXT"
   },
   {
@@ -59516,7 +59516,7 @@
     "location": "modules/visitor-space/components/text-filter-form/text-filter-form",
     "key": "voeg-voorwaarde-toe",
     "language": "en",
-    "value": "Voeg voorwaarde toe",
+    "value": "Add condition",
     "value_type": "TEXT"
   },
   {
@@ -59836,7 +59836,7 @@
     "location": "modules/visitor-space/utils/advanced-filters/metadata",
     "key": "personen-ai",
     "language": "en",
-    "value": "Personen (AI)",
+    "value": "Persons (AI)",
     "value_type": "TEXT"
   },
   {
@@ -59856,7 +59856,7 @@
     "location": "modules/visitor-space/utils/advanced-filters/metadata",
     "key": "plaatsen-ai",
     "language": "en",
-    "value": "Plaatsen (AI)",
+    "value": "Locations (AI)",
     "value_type": "TEXT"
   },
   {
@@ -59876,7 +59876,7 @@
     "location": "modules/visitor-space/utils/advanced-filters/metadata",
     "key": "organisaties-ai",
     "language": "en",
-    "value": "Organisaties (AI)",
+    "value": "Organisations (AI)",
     "value_type": "TEXT"
   },
   {
@@ -60176,7 +60176,7 @@
     "location": "modules/visitor-space/utils/advanced-filters/metadata",
     "key": "thema",
     "language": "en",
-    "value": "Thema",
+    "value": "Theme",
     "value_type": "TEXT"
   },
   {
@@ -60416,7 +60416,7 @@
     "location": "modules/shared/components/tabs/scrollable-tabs/scrollable-tabs",
     "key": "scroll-tabs-naar-links",
     "language": "en",
-    "value": "Scroll tabs naar links",
+    "value": "Scroll tabs to the left",
     "value_type": "TEXT"
   },
   {
@@ -60436,7 +60436,7 @@
     "location": "modules/shared/components/tabs/scrollable-tabs/scrollable-tabs",
     "key": "scroll-tabs-naar-rechts",
     "language": "en",
-    "value": "Scroll tabs naar rechts",
+    "value": "Scroll tabs to the right",
     "value_type": "TEXT"
   },
   {
@@ -61556,7 +61556,7 @@
     "location": "modules/visitor-space/components/report-blade/report-blade",
     "key": "ik-heb-een-probleem-met-de-metadata-van-dit-object",
     "language": "en",
-    "value": "Ik heb een probleem met de metadata van dit object",
+    "value": "I have a problem with the metadata of this object",
     "value_type": "TEXT"
   },
   {
@@ -61576,7 +61576,7 @@
     "location": "modules/visitor-space/components/report-blade/report-blade",
     "key": "ik-heb-een-ander-probleem-met-dit-object",
     "language": "en",
-    "value": "Ik heb een ander probleem met dit object",
+    "value": "I have a different problem with this object",
     "value_type": "TEXT"
   },
   {
@@ -61586,7 +61586,7 @@
     "location": "modules/visitor-space/components/report-blade/report-blade",
     "key": "ik-wil-een-juridische-opmerking-geven-ivm-auteursrecht-of-gdpr-privacy",
     "language": "nl",
-    "value": "Ik wil een juridische opmerking geven ivm auteursrecht of gdpr privacy",
+    "value": "Ik wil een juridische opmerking geven in verband met auteursrecht of GDPR/privacy",
     "value_type": "TEXT"
   },
   {
@@ -61596,7 +61596,7 @@
     "location": "modules/visitor-space/components/report-blade/report-blade",
     "key": "ik-wil-een-juridische-opmerking-geven-ivm-auteursrecht-of-gdpr-privacy",
     "language": "en",
-    "value": "Ik wil een juridische opmerking geven ivm auteursrecht of gdpr privacy",
+    "value": "I want to make a legal comment regarding copyright or GDP/privacy",
     "value_type": "TEXT"
   },
   {
@@ -61616,7 +61616,7 @@
     "location": "modules/visitor-space/components/report-blade/report-blade",
     "key": "ik-ben-rechthebbende-en-wil-een-opt-out-op-de-out-of-commerce-regeling-aanvragen-voor-dit-materiaal-of-een-verwijdering",
     "language": "en",
-    "value": "Ik ben rechthebbende en wil een opt out op de out of commerce regeling aanvragen voor dit materiaal of een verwijdering",
+    "value": "I'm a rights holder and wish to request an opt out of the out of commerce arrangement or a deletion",
     "value_type": "TEXT"
   },
   {
@@ -61636,7 +61636,7 @@
     "location": "modules/visitor-space/components/report-blade/report-blade",
     "key": "ik-ben-rechthebbende-en-wil-een-klacht-indienen-wegens-mogelijke-inbreuk-op-intellectuele-rechten",
     "language": "en",
-    "value": "Ik ben rechthebbende en wil een klacht indienen wegens mogelijke inbreuk op intellectuele rechten",
+    "value": "I'm a rights holder and I wish to file a complaint regarding a possible violation of intellectual property",
     "value_type": "TEXT"
   },
   {
@@ -61646,7 +61646,7 @@
     "location": "modules/visitor-space/components/report-blade/report-blade",
     "key": "ik-wil-mijn-rechten-uitoefenen-volgens-de-gdpr-of-privacy-wetgeving-met-betrekking-tot-dit-materiaal-vb-portretrecht",
     "language": "nl",
-    "value": "Ik wil mijn rechten uitoefenen volgens de gdpr of privacy wetgeving met betrekking tot dit materiaal vb portretrecht",
+    "value": "Ik wil mijn rechten uitoefenen volgens de GDPR- of privacywetgeving met betrekking tot dit materiaal (bijvoorbeeld: portretrecht)",
     "value_type": "TEXT"
   },
   {
@@ -61656,7 +61656,7 @@
     "location": "modules/visitor-space/components/report-blade/report-blade",
     "key": "ik-wil-mijn-rechten-uitoefenen-volgens-de-gdpr-of-privacy-wetgeving-met-betrekking-tot-dit-materiaal-vb-portretrecht",
     "language": "en",
-    "value": "Ik wil mijn rechten uitoefenen volgens de gdpr of privacy wetgeving met betrekking tot dit materiaal vb portretrecht",
+    "value": "I want to make use of my GDPR- or privacy rights with regard to this material (for example: portrait right)",
     "value_type": "TEXT"
   },
   {
@@ -63276,7 +63276,7 @@
     "location": "modules/visitor-space/components/report-blade/report-blade",
     "key": "opmerking",
     "language": "en",
-    "value": "Opmerking",
+    "value": "Comment",
     "value_type": "TEXT"
   },
   {
