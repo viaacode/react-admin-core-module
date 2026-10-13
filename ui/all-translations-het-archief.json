@@ -48083,26 +48083,6 @@
     "id": "",
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
-    "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata-themes",
-    "key": "aantal-objecten-in-dit-thema",
-    "language": "nl",
-    "value": "Aantal objecten in dit thema: {{count}}",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata-themes",
-    "key": "aantal-objecten-in-dit-thema",
-    "language": "en",
-    "value": "Aantal objecten in dit thema: {{count}}",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
     "location": "modules/ie-objects/object-detail-page",
     "key": "ocr-betrouwbaarheid",
     "language": "nl",
@@ -48217,6 +48197,26 @@
     "key": "volgende",
     "language": "en",
     "value": "Next",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata-themes",
+    "key": "aantal-objecten-in-dit-thema",
+    "language": "nl",
+    "value": "Aantal objecten in dit thema: {{count}}",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata-themes",
+    "key": "aantal-objecten-in-dit-thema",
+    "language": "en",
+    "value": "Aantal objecten in dit thema: {{count}}",
     "value_type": "TEXT"
   },
   {
@@ -60817,6 +60817,26 @@
     "key": "sluiten",
     "language": "en",
     "value": "Close",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/utils/get-ie-object-av-rights",
+    "key": "deze-informatie-wordt-verder-verzameld",
+    "language": "nl",
+    "value": "deze informatie wordt verder verzameld",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/utils/get-ie-object-av-rights",
+    "key": "deze-informatie-wordt-verder-verzameld",
+    "language": "en",
+    "value": "deze informatie wordt verder verzameld",
     "value_type": "TEXT"
   },
   {
