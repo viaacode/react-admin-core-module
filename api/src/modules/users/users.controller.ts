@@ -13,6 +13,7 @@ import {
 import { ApiTags } from '@nestjs/swagger';
 
 import {
+	type AvoAuthIdpType,
 	type AvoSearchOrderDirection,
 	type AvoUserCommonUser,
 	PermissionName,
@@ -134,7 +135,7 @@ export class UsersController {
 
 	@Get('idps')
 	@RequireAnyPermissions(PermissionName.VIEW_USERS)
-	async fetchIdps() {
+	async fetchIdps(): Promise<AvoAuthIdpType[]> {
 		return this.usersService.fetchIdps();
 	}
 

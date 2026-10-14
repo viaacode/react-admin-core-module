@@ -4,7 +4,6 @@
       "vitest/globals"
     ],
     "module": "commonjs",
-    "moduleResolution": "node10",
     "declaration": true,
     "removeComments": true,
     "emitDecoratorMetadata": true,
@@ -23,7 +22,6 @@
     "noImplicitAny": false,
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
-    "noFallthroughCasesInSwitch": false,
-    "ignoreDeprecations": "6.0"
+    "noFallthroughCasesInSwitch": false
   }
 }
