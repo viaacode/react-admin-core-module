@@ -1,6 +1,6 @@
 {
   "name": "@meemoo/admin-core-api",
-  "version": "7.0.1",
+  "version": "7.0.2",
   "description": "The backend routes to support the screens in the Admin Core dashboard",
   "author": "Bert Verhelst <bert.verhelst@studiohyperdrive.be>",
   "main": "./dist/src/index.js",
@@ -31,8 +31,8 @@
     "generate-hetarchief-database-types": "dotenv -e ./.env/.env.local graphql-codegen -- --config codegen-hetarchief.ts",
     "generate-avo-database-types": "dotenv -e ./.env/.env.local graphql-codegen -- --config codegen-avo.ts",
     "generate-database-types": "npm run generate-hetarchief-database-types && npm run generate-avo-database-types",
-    "bump": "bump-package-versions --part=patch --strategy=highest ../package.json ../ui/package.json ./package.json",
-    "find-circular-dependencies": "npx madge --circular --extensions ts ./"
+    "find-circular-dependencies": "npx madge --circular --extensions ts ./",
+    "bump": "bump-package-versions --part=patch --strategy=highest ../package.json ../ui/package.json ./package.json"
   },
   "dependencies": {
     "@aws-crypto/sha256-js": "^5.2.0",
