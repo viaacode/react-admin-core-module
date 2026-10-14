@@ -20,6 +20,7 @@
     "start:debug": "dotenv -e .env/.env.local nest start -- --debug --watch",
     "lint": "biome lint --write",
     "format": "biome format --write",
+    "type-check": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:cov": "vitest run --coverage",
