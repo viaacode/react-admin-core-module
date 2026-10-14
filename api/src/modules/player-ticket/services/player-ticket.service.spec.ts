@@ -302,7 +302,9 @@ describe('PlayerTicketService', () => {
 	describe('getThumbnailUrl', () => {
 		it('returns a thumbnail url', async () => {
 			const mockData: GetThumbnailUrlByIdQuery = {
-				graph__intellectual_entity: [{ schema_thumbnail_url: 'vrt/item-1' }],
+				graph__intellectual_entity: [
+					{ schema_identifier: null, schema_thumbnail_url: 'vrt/item-1' },
+				],
 			};
 			mockDataService.execute.mockResolvedValueOnce(mockData);
 			const getThumbnailTokenSpy = vi
@@ -347,7 +349,9 @@ describe('PlayerTicketService', () => {
 	describe('getThumbnailPath', () => {
 		it('returns the thumbnail url for an item', async () => {
 			const mockData: GetThumbnailUrlByIdQuery = {
-				graph__intellectual_entity: [{ schema_thumbnail_url: 'vrt/item-1' }],
+				graph__intellectual_entity: [
+					{ schema_identifier: null, schema_thumbnail_url: 'vrt/item-1' },
+				],
 			};
 			mockDataService.execute.mockResolvedValueOnce(mockData);
 			const url = await playerTicketService.getThumbnailPath('vrt-id');
