@@ -1,6 +1,6 @@
 import { NestFactory } from '@nestjs/core';
+import type { NestExpressApplication } from '@nestjs/platform-express';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { json } from 'express';
 import helmet from 'helmet';
 
 import packageJson from '../package.json';
@@ -8,7 +8,7 @@ import packageJson from '../package.json';
 import { AdminCoreModule } from './admin-core.module';
 
 async function bootstrap() {
-	const app = await NestFactory.create(AdminCoreModule);
+	const app = await NestFactory.create<NestExpressApplication>(AdminCoreModule);
 	const port = process.env.PORT || 3300;
 
 	/** Security */
@@ -24,7 +24,7 @@ async function bootstrap() {
 	app.use(helmet());
 
 	/** Increase POST json body size */
-	app.use(json({ limit: '500kb' }));
+	app.useBodyParser('json', { limit: '500kb' });
 
 	/** Swagger docs **/
 	if (process.env.ENVIRONMENT !== 'production') {

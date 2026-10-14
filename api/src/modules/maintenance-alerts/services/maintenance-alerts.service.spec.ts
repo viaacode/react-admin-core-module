@@ -6,7 +6,7 @@ import {
 	type InsertMaintenanceAlertMutation,
 	Lookup_Languages_Enum,
 	type UpdateMaintenanceAlertMutation,
-} from 'src/modules/shared/generated/graphql-db-types-hetarchief';
+} from '../../shared/generated/graphql-db-types-hetarchief';
 import { afterEach, beforeEach, describe, expect, it, type MockInstance, vi } from 'vitest';
 import { DataService } from '../../data';
 import { TestingLogger } from '../../shared/logging/test-logger';

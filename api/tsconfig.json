@@ -1,7 +1,10 @@
 {
   "compilerOptions": {
-    "types": ["vitest/globals"],
+    "types": [
+      "vitest/globals"
+    ],
     "module": "commonjs",
+    "moduleResolution": "node10",
     "declaration": true,
     "removeComments": true,
     "emitDecoratorMetadata": true,
@@ -9,10 +12,9 @@
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "allowJs": false,
-    "target": "es2017",
+    "target": "es2022",
     "sourceMap": true,
     "noEmit": true,
-    "baseUrl": "./",
     "resolveJsonModule": true,
     "incremental": true,
     "skipLibCheck": true,
@@ -21,6 +23,7 @@
     "noImplicitAny": false,
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
-    "noFallthroughCasesInSwitch": false
+    "noFallthroughCasesInSwitch": false,
+    "ignoreDeprecations": "6.0"
   }
 }

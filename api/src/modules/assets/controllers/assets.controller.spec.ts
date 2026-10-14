@@ -2,6 +2,7 @@ import { Test, type TestingModule } from '@nestjs/testing';
 import type { AvoFileUploadUploadAssetInfo } from '@viaa/avo2-types';
 import { type MockInstance, vi } from 'vitest';
 import { getMockUserAvo } from '../../../mock-user';
+import { DataService } from '../../data/services/data.service';
 import { mockTranslationsService } from '../../shared/helpers/mockTranslationsService';
 import { Locale, TranslationsService } from '../../translations';
 import { SessionUserEntity } from '../../users/classes/session-user';
@@ -30,6 +31,10 @@ describe('AssetsController', () => {
 				{
 					provide: TranslationsService,
 					useValue: mockTranslationsService,
+				},
+				{
+					provide: DataService,
+					useValue: {},
 				},
 			],
 		}).compile();

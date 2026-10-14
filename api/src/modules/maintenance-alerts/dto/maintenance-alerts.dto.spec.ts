@@ -6,7 +6,7 @@ import {
 	UpdateMaintenanceAlertDto,
 } from './maintenance-alerts.dto';
 
-import { SortDirection } from 'src/modules/shared/types/sorting';
+import { SortDirection } from '../../shared/types/sorting';
 
 describe('MaintenanceAlertsDto', () => {
 	describe('MaintenanceAlertsQueryDto', () => {

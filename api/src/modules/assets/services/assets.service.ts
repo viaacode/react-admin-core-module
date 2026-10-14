@@ -19,7 +19,7 @@ import { mapLimit } from 'blend-promise-utils';
 import fse from 'fs-extra';
 import got, { type ExtendOptions, type Got } from 'got';
 import { escapeRegExp, isNil, kebabCase } from 'lodash';
-import { DataService } from 'src/modules/data/services/data.service';
+import { DataService } from '../../data/services/data.service';
 import {
 	GetContentAssetDocument,
 	type GetContentAssetQuery,
