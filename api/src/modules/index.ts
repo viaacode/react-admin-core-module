@@ -12,6 +12,7 @@ export * from './navigations';
 export * from './organisations';
 export * from './permissions';
 export * from './player-ticket';
+export * from './shared/helpers/pagination';
 export * from './shared/types';
 export * from './site-variables';
 export * from './status';

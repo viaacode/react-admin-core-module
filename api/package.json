@@ -37,7 +37,6 @@
     "@aws-sdk/client-s3": "3.717.0",
     "@smithy/protocol-http": "4.1.8",
     "@smithy/signature-v4": "4.2.4",
-    "@studiohyperdrive/pagination": "1.0.0",
     "@viaa/avo2-types": "5.0.25",
     "app-root-path": "3.0.0",
     "blend-promise-utils": "^1.28.0",
@@ -48,7 +47,7 @@
     "express-session": "^1.17.2",
     "fs-extra": "^10.0.0",
     "got": "^11.8.3",
-    "graphql": "16.6.0",
+    "graphql": "17.0.2",
     "helmet": "^5.0.2",
     "i18next": "^21.6.3",
     "joi": "^17.13.3",
@@ -64,9 +63,10 @@
   },
   "devDependencies": {
     "@biomejs/biome": "2.3.8",
-    "@graphql-codegen/cli": "^5.0.5",
-    "@graphql-codegen/typed-document-node": "^5.0.13",
-    "@graphql-codegen/typescript-operations": "^4.4.1",
+    "@graphql-codegen/cli": "^7.4.6",
+    "@graphql-codegen/typed-document-node": "^7.2.0",
+    "@graphql-codegen/typescript": "^6.1.2",
+    "@graphql-codegen/typescript-operations": "^6.1.10",
     "@graphql-typed-document-node/core": "^3.2.0",
     "@nestjs/cache-manager": "^12.0.1",
     "@nestjs/cli": "^12.0.8",
@@ -116,7 +116,7 @@
     "rxjs": "^7.1.0"
   },
   "overrides": {
-    "graphql": "16.6.0"
+    "graphql": "$graphql"
   },
   "allowScripts": {
     "@swc/core@1.16.18": true,

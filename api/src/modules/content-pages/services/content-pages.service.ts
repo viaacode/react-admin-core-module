@@ -6,8 +6,8 @@ import {
 	InternalServerErrorException,
 	Logger,
 } from '@nestjs/common';
-import type { IPagination } from '@studiohyperdrive/pagination';
-import { Pagination } from '@studiohyperdrive/pagination';
+import { Pagination } from '../../shared/helpers/pagination';
+import type { IPagination } from '../../shared/types/pagination';
 
 import {
 	type AvoContentPageType,

@@ -1,6 +1,6 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post, Query } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
-import { IPagination } from '@studiohyperdrive/pagination';
+import type { IPagination } from '../../shared/types/pagination';
 import { PermissionName } from '@viaa/avo2-types';
 import { isAfter } from 'date-fns';
 import { intersection, omit } from 'lodash';

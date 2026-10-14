@@ -16,7 +16,7 @@ import {
 	UseGuards,
 } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
-import type { IPagination } from '@studiohyperdrive/pagination';
+import type { IPagination } from '../../shared/types/pagination';
 
 import {
 	type AvoContentPageType,

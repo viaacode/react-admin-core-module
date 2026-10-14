@@ -6,7 +6,8 @@ import {
 	Logger,
 	NotFoundException,
 } from '@nestjs/common';
-import { IPagination, Pagination } from '@studiohyperdrive/pagination';
+import { Pagination } from '../../shared/helpers/pagination';
+import type { IPagination } from '../../shared/types/pagination';
 import { isEmpty, isNil, set } from 'lodash';
 
 import { DataService } from '../../data';
