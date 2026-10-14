@@ -10,7 +10,6 @@ import {
 import type { Cache } from 'cache-manager';
 import got from 'got';
 import { isNil, trimEnd } from 'lodash';
-import publicIp from 'public-ip';
 import type { ContentTypeNumber } from '../../collections';
 import { DataService } from '../../data';
 import {
@@ -30,6 +29,7 @@ import { cleanMultilineEnv } from '../../shared/helpers/env-vars';
 import { CustomError } from '../../shared/helpers/error';
 import { isHetArchief } from '../../shared/helpers/is-hetarchief';
 import { mapToMediaType } from '../../shared/helpers/mapToMediaType';
+import { getPublicIpV4 } from '../../shared/helpers/public-ip';
 import { PLAYER_TICKET_EXPIRY } from '../player-ticket.consts';
 import {
 	PlayerTicket,
@@ -66,7 +66,7 @@ export class PlayerTicketService {
 	 */
 	protected async getToken(path: string, options: PlayerTokenOptions): Promise<PlayerTicket> {
 		const resolvedIp = ['::1', '::ffff:127.0.0.1', '127.0.0.1'].includes(options.ip)
-			? await publicIp.v4()
+			? await getPublicIpV4()
 			: options.ip;
 		const resolvedReferer = trimEnd(options.referer || this.host, '/');
 		const resolvedMaxAge = this.ticketServiceMaxAge;
