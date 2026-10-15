@@ -1,5 +1,5 @@
 import type { AvoCollectionCollection } from '@viaa/avo2-types';
-import { stringifyUrl } from 'query-string';
+import queryString from 'query-string';
 import { CustomError } from '~shared/helpers/custom-error';
 import { fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
 import { getAdminCoreApiUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config';
@@ -22,7 +22,7 @@ export class CollectionService {
 		typeId: ContentTypeNumber
 	): Promise<AvoCollectionCollection[]> {
 		return await fetchWithLogoutJson(
-			stringifyUrl({
+			queryString.stringifyUrl({
 				url: `${CollectionService.getBaseUrl()}/public`,
 				query: {
 					limit,
@@ -39,7 +39,7 @@ export class CollectionService {
 		limit: number
 	): Promise<AvoCollectionCollection[]> {
 		return fetchWithLogoutJson(
-			stringifyUrl({
+			queryString.stringifyUrl({
 				url: CollectionService.getBaseUrl(),
 				query: {
 					isCollection,
@@ -100,7 +100,7 @@ export class CollectionService {
 	): Promise<AvoCollectionCollection | null> {
 		try {
 			return fetchWithLogoutJson(
-				stringifyUrl({
+				queryString.stringifyUrl({
 					url: `${CollectionService.getBaseUrl()}/fetch-with-items-by-id`,
 					query: {
 						type,

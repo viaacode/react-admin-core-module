@@ -1,6 +1,6 @@
 import { TextInput } from '@meemoo/react-components';
 import { Button } from '@viaa/avo2-components';
-import { stringifyUrl } from 'query-string';
+import queryString from 'query-string';
 import type { ChangeEvent, FC } from 'react';
 import React, { useEffect, useState } from 'react';
 import { BlockHeading } from '~content-blocks/BlockHeading/BlockHeading';
@@ -88,7 +88,7 @@ export const BlockOverviewNewspaperTitles: FC<BlockOverviewNewspaperTitlesProps>
 					>
 						<Link
 							className="u-background-text-hyperlink"
-							to={stringifyUrl({
+							to={queryString.stringifyUrl({
 								url: '/zoeken',
 								query: { zoekterm: item.title },
 							})}

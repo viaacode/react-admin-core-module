@@ -9,7 +9,7 @@ import {
 import { PermissionName } from '@viaa/avo2-types';
 import clsx from 'clsx';
 import { cloneDeep, compact, intersection, isNil, noop } from 'es-toolkit';
-import { stringifyUrl } from 'query-string';
+import queryString from 'query-string';
 import React, { type FunctionComponent, type ReactNode, useEffect, useState } from 'react';
 import type { BlockImageProps } from '~content-blocks/BlockImage/BlockImage';
 import { AdminConfigManager } from '~core/config/config.class';
@@ -170,7 +170,7 @@ export const ContentPageRenderer: FunctionComponent<ContentPageDetailProps> = (p
 		const renderHyperlink = (button: React.ReactNode) => {
 			return (
 				<a
-					href={stringifyUrl({
+					href={queryString.stringifyUrl({
 						url: buildLink(AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_EDIT'), {
 							id: props.contentPageInfo.id,
 						}),
