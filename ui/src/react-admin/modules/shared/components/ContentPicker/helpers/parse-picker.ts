@@ -1,6 +1,6 @@
 import type { LinkTarget } from '@viaa/avo2-components';
 import type { AvoCoreContentPickerType } from '@viaa/avo2-types';
-import { parse } from 'query-string';
+import queryString from 'query-string';
 import { ToastType } from '~core/config/config.types';
 import { showToast } from '~shared/helpers/show-toast';
 import { tText } from '~shared/helpers/translation-functions';
@@ -20,7 +20,7 @@ export const parseSearchQuery = (input: string, toast = false) => {
 		// biome-ignore lint/suspicious/noExplicitAny: todo
 		let filterDefinition: any;
 		if (splitString.trim()[0] !== '{') {
-			filterDefinition = parse(splitString);
+			filterDefinition = queryString.parse(splitString);
 			filterDefinition.filters = JSON.parse(filterDefinition.filters as string);
 		} else {
 			filterDefinition = JSON.parse(splitString);

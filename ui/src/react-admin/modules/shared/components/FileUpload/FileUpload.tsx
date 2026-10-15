@@ -2,7 +2,7 @@ import type { IconName } from '@viaa/avo2-components';
 import { Blankslate, Button, Flex, FlexItem, Icon, Spacer } from '@viaa/avo2-components';
 
 import { compact, isString } from 'es-toolkit';
-import { parse } from 'query-string';
+import queryString from 'query-string';
 import type { FunctionComponent } from 'react';
 import React, { useState } from 'react';
 import { ToastType } from '~core/config/config.types';
@@ -239,7 +239,7 @@ const FileUpload: FunctionComponent<FileUploadProps> = ({
 			}
 			let fileName: string | undefined;
 			if (url.includes('?')) {
-				const queryParams = parse(url.split('?').pop() || '');
+				const queryParams = queryString.parse(url.split('?').pop() || '');
 				if (queryParams?.name && isString(queryParams.name)) {
 					fileName = queryParams.name as string;
 				}

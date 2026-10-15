@@ -1,5 +1,5 @@
 import type { AvoCoreContentPickerType } from '@viaa/avo2-types';
-import { stringifyUrl } from 'query-string';
+import queryString from 'query-string';
 import { CustomError } from '~shared/helpers/custom-error';
 import { fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
 import {
@@ -34,7 +34,7 @@ export class OrganisationService {
 		contentItemId: string
 	): Promise<{ name: string; id: string; logo: string; website: string }[]> {
 		return fetchWithLogoutJson(
-			stringifyUrl({
+			queryString.stringifyUrl({
 				url: `${getProxyUrl()}/organisations/by-content`,
 				query: {
 					contentItemType,
@@ -46,7 +46,7 @@ export class OrganisationService {
 
 	static getMaintainerGrid(limit: number): Promise<MaintainerGridOrganisation[]> {
 		return fetchWithLogoutJson(
-			stringifyUrl({
+			queryString.stringifyUrl({
 				url: `${getProxyUrl()}/organisations/maintainer-grid`,
 				query: {
 					limit,

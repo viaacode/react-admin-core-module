@@ -1,4 +1,4 @@
-import { stringifyUrl } from 'query-string';
+import queryString from 'query-string';
 
 import { fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
 import { getAdminCoreApiUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config';
@@ -15,7 +15,7 @@ export class UserGroupService {
 
 	public static async fetchUserGroupsWithPermissions(): Promise<UserGroupWithPermissions[]> {
 		const userGroups = await fetchWithLogoutJson<UserGroupWithPermissions[]>(
-			stringifyUrl({
+			queryString.stringifyUrl({
 				url: UserGroupService.getBaseUrl(),
 				query: {
 					withPermissions: 'true',
@@ -32,7 +32,7 @@ export class UserGroupService {
 
 	public static async fetchUserGroups(): Promise<UserGroup[]> {
 		const userGroups = await fetchWithLogoutJson<UserGroup[]>(
-			stringifyUrl({
+			queryString.stringifyUrl({
 				url: UserGroupService.getBaseUrl(),
 				query: {
 					withPermissions: 'false',

@@ -61,6 +61,7 @@ export {
 } from '~shared/helpers/fetch-with-logout';
 export { sanitizeHtml } from '~shared/helpers/sanitize';
 export { SanitizePreset } from '~shared/helpers/sanitize/presets';
+export type { IPagination } from '~shared/types/pagination.types';
 export { ContentPageRenderer } from './react-admin/modules/content-page/components/ContentPageRenderer/ContentPageRenderer';
 export {
 	convertDbContentPagesToContentPageInfos,

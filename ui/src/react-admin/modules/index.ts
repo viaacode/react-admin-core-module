@@ -95,6 +95,7 @@ export { SanitizePreset } from './shared/helpers/sanitize/presets';
 export { toggleSortOrder } from './shared/helpers/toggle-sort-order';
 export { AssetsService } from './shared/services/assets-service/assets.service';
 export type { PickerItem } from './shared/types/content-picker';
+export type { IPagination } from './shared/types/pagination.types';
 export { TableFilterType } from './shared/types/table-filter-types';
 // Translations
 export { TranslationsOverview } from './translations/views/TranslationsOverview';
