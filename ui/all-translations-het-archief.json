@@ -26043,26 +26043,6 @@
     "id": "",
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
-    "location": "modules/ie-objects/ie-objects",
-    "key": "ocr",
-    "language": "nl",
-    "value": "OCR",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/ie-objects",
-    "key": "ocr",
-    "language": "en",
-    "value": "OCR",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
     "location": "modules/ie-objects/const/index",
     "key": "amount-gerelateerd",
     "language": "nl",
@@ -26077,6 +26057,26 @@
     "key": "amount-gerelateerd",
     "language": "en",
     "value": "{{amount}} related",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/ie-objects",
+    "key": "ocr",
+    "language": "nl",
+    "value": "OCR",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/ie-objects",
+    "key": "ocr",
+    "language": "en",
+    "value": "OCR",
     "value_type": "TEXT"
   },
   {
@@ -34677,6 +34677,26 @@
     "key": "auteursrechtelijk-beschermd",
     "language": "en",
     "value": "Protected by copyright",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/utils/get-ie-object-av-rights",
+    "key": "deze-informatie-wordt-verder-verzameld",
+    "language": "nl",
+    "value": "deze informatie wordt verder verzameld",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/utils/get-ie-object-av-rights",
+    "key": "deze-informatie-wordt-verder-verzameld",
+    "language": "en",
+    "value": "this information is being further collected",
     "value_type": "TEXT"
   },
   {
@@ -46923,26 +46943,6 @@
     "id": "",
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
-    "location": "pages/bezoekersruimte/visitor-space-slug/object-id/index",
-    "key": "geen-beschrijving",
-    "language": "nl",
-    "value": "<p>Dit item beschikt nog niet over een beschrijving. Samen met onze aanbieders werken we aan de verrijking van metadata zodat de items op hetarchief.be beter doorzoekbaar worden.</p><p><a href=\"https://meemoo.be/nl/projecten/Filter/category:metadata\" target=\"_blank\">Lees hier meer over de initiatieven van meemoo rond metadataverrijking &gt;</a></p>",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/bezoekersruimte/visitor-space-slug/object-id/index",
-    "key": "geen-beschrijving",
-    "language": "en",
-    "value": "<p>This item does not yet have a description. Together with our organisations, we are working on enriching the metadata so that the items on thearchives.be become more searchable. <a href=\"https://meemoo.be/en/projects/Filter/category:metadata\">Read more about Meemoo&#x27;s initiatives around metadata enrichment here &gt;</a></p>",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
     "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata",
     "key": "meer-info-over-ai-gegenereerde-titel-en-samenvatting",
     "language": "nl",
@@ -47177,26 +47177,6 @@
     "key": "premis-identifier",
     "language": "en",
     "value": "Premis identifier",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/ie-objects",
-    "key": "permanente-url",
-    "language": "nl",
-    "value": "Permanente url",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/ie-objects",
-    "key": "permanente-url",
-    "language": "en",
-    "value": "Permanent url",
     "value_type": "TEXT"
   },
   {
@@ -48024,26 +48004,6 @@
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
     "location": "modules/ie-objects/components/object-detail-page-metadata-tab/object-detail-page-metadata-tab",
-    "key": "disclaimer",
-    "language": "nl",
-    "value": "Disclaimer",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/components/object-detail-page-metadata-tab/object-detail-page-metadata-tab",
-    "key": "disclaimer",
-    "language": "en",
-    "value": "Disclaimer",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/components/object-detail-page-metadata-tab/object-detail-page-metadata-tab",
     "key": "metadata-worden-aangeleverd-door-partners-van-meemoo-meemoo-is-niet-verantwoordelijk-voor-onjuistheden-of-onvolledigheden-in-deze-gegevens-meer-info",
     "language": "nl",
     "value": "Metadata worden aangeleverd door partners van meemoo. Meemoo is niet verantwoordelijk voor onjuistheden of onvolledigheden in deze gegevens. Meer info",
@@ -48077,26 +48037,6 @@
     "key": "namenlijst",
     "language": "en",
     "value": "List of Names",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/object-detail-page",
-    "key": "ocr-betrouwbaarheid",
-    "language": "nl",
-    "value": "OCR betrouwbaarheid",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/object-detail-page",
-    "key": "ocr-betrouwbaarheid",
-    "language": "en",
-    "value": "OCR reliability",
     "value_type": "TEXT"
   },
   {
@@ -60823,20 +60763,560 @@
     "id": "",
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
-    "location": "modules/ie-objects/utils/get-ie-object-av-rights",
-    "key": "deze-informatie-wordt-verder-verzameld",
+    "location": "modules/ie-objects/components/object-detail-page-ai-entities/ai-entity-avatar-row",
+    "key": "toon-minder",
     "language": "nl",
-    "value": "deze informatie wordt verder verzameld",
+    "value": "Toon minder",
     "value_type": "TEXT"
   },
   {
     "id": "",
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
-    "location": "modules/ie-objects/utils/get-ie-object-av-rights",
-    "key": "deze-informatie-wordt-verder-verzameld",
+    "location": "modules/ie-objects/components/object-detail-page-ai-entities/ai-entity-avatar-row",
+    "key": "toon-minder",
     "language": "en",
-    "value": "deze informatie wordt verder verzameld",
+    "value": "Toon minder",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-ai-entities/ai-entity-avatar-row",
+    "key": "toon-meer",
+    "language": "nl",
+    "value": "Toon meer",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-ai-entities/ai-entity-avatar-row",
+    "key": "toon-meer",
+    "language": "en",
+    "value": "Toon meer",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-ai-entities/ai-entity-card",
+    "key": "wikidata",
+    "language": "nl",
+    "value": "Wikidata",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-ai-entities/ai-entity-card",
+    "key": "wikidata",
+    "language": "en",
+    "value": "Wikidata",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-ai-entities/ai-entity-card",
+    "key": "zoek-alle-objecten-met-deze-entiteit",
+    "language": "nl",
+    "value": "Zoek alle objecten met deze entiteit",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-ai-entities/ai-entity-card",
+    "key": "zoek-alle-objecten-met-deze-entiteit",
+    "language": "en",
+    "value": "Zoek alle objecten met deze entiteit",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-ai-entities/ai-entity-interval-pills",
+    "key": "paginering-van-de-tijdsintervallen",
+    "language": "nl",
+    "value": "Paginering van de tijdsintervallen",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-ai-entities/ai-entity-interval-pills",
+    "key": "paginering-van-de-tijdsintervallen",
+    "language": "en",
+    "value": "Paginering van de tijdsintervallen",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-ai-entities/ai-entity-interval-pills",
+    "key": "vorige",
+    "language": "nl",
+    "value": "Vorige",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-ai-entities/ai-entity-interval-pills",
+    "key": "vorige",
+    "language": "en",
+    "value": "Vorige",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-ai-entities/ai-entity-interval-pills",
+    "key": "page-van-pageCount",
+    "language": "nl",
+    "value": "{{page}} van {{{{pageCount}}",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-ai-entities/ai-entity-interval-pills",
+    "key": "page-van-pageCount",
+    "language": "en",
+    "value": "{{page}} van {{{{pageCount}}",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-ai-entities/ai-entity-interval-pills",
+    "key": "volgende",
+    "language": "nl",
+    "value": "Volgende",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-ai-entities/ai-entity-interval-pills",
+    "key": "volgende",
+    "language": "en",
+    "value": "Volgende",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-ai-entities/ai-entity-navigation-overlay",
+    "key": "vorig-moment",
+    "language": "nl",
+    "value": "Vorig moment",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-ai-entities/ai-entity-navigation-overlay",
+    "key": "vorig-moment",
+    "language": "en",
+    "value": "Vorig moment",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-ai-entities/ai-entity-navigation-overlay",
+    "key": "index-van-total",
+    "language": "nl",
+    "value": "{{index}} van {{total}}",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-ai-entities/ai-entity-navigation-overlay",
+    "key": "index-van-total",
+    "language": "en",
+    "value": "{{index}} van {{total}}",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-ai-entities/ai-entity-navigation-overlay",
+    "key": "volgend-moment",
+    "language": "nl",
+    "value": "Volgend moment",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-ai-entities/ai-entity-navigation-overlay",
+    "key": "volgend-moment",
+    "language": "en",
+    "value": "Volgend moment",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-ai-entities/ai-entity-navigation-overlay",
+    "key": "sluiten",
+    "language": "nl",
+    "value": "Sluiten",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-ai-entities/ai-entity-navigation-overlay",
+    "key": "sluiten",
+    "language": "en",
+    "value": "Sluiten",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-ai-entities/ai-entity-pill-row",
+    "key": "toon-meer",
+    "language": "nl",
+    "value": "Toon meer",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-ai-entities/ai-entity-pill-row",
+    "key": "toon-meer",
+    "language": "en",
+    "value": "Toon meer",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-ai-entities/ai-entity-pill-row",
+    "key": "toon-minder",
+    "language": "nl",
+    "value": "Toon minder",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-ai-entities/ai-entity-pill-row",
+    "key": "toon-minder",
+    "language": "en",
+    "value": "Toon minder",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-ai-entities/ai-entity-timeline",
+    "key": "spring-naar-timestamp",
+    "language": "nl",
+    "value": "Spring naar {{timestamp}}",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-ai-entities/ai-entity-timeline",
+    "key": "spring-naar-timestamp",
+    "language": "en",
+    "value": "Spring naar {{timestamp}}",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-ai-entities/object-detail-page-ai-persons",
+    "key": "1-persoon",
+    "language": "nl",
+    "value": "1 persoon",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-ai-entities/object-detail-page-ai-persons",
+    "key": "1-persoon",
+    "language": "en",
+    "value": "1 persoon",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-ai-entities/object-detail-page-ai-persons",
+    "key": "count-personen",
+    "language": "nl",
+    "value": "{{count}} personen",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-ai-entities/object-detail-page-ai-persons",
+    "key": "count-personen",
+    "language": "en",
+    "value": "{{count}} personen",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-ai-entities/object-detail-page-ai-persons",
+    "key": "meer-info-over-ai-herkende-personen",
+    "language": "nl",
+    "value": "Meer info over ai herkende personen",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-ai-entities/object-detail-page-ai-persons",
+    "key": "meer-info-over-ai-herkende-personen",
+    "language": "en",
+    "value": "Meer info over ai herkende personen",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-ai-entities/object-detail-page-ai-persons",
+    "key": "deze-personen-zijn-automatisch-herkend-met-ai-en-kunnen-fouten-bevatten-meer-info",
+    "language": "nl",
+    "value": "Deze personen zijn automatisch herkend met ai en kunnen fouten bevatten meer info",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-ai-entities/object-detail-page-ai-persons",
+    "key": "deze-personen-zijn-automatisch-herkend-met-ai-en-kunnen-fouten-bevatten-meer-info",
+    "language": "en",
+    "value": "Deze personen zijn automatisch herkend met ai en kunnen fouten bevatten meer info",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-ai-entities/object-detail-page-ai-places",
+    "key": "1-plaats",
+    "language": "nl",
+    "value": "1 plaats",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-ai-entities/object-detail-page-ai-places",
+    "key": "1-plaats",
+    "language": "en",
+    "value": "1 plaats",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-ai-entities/object-detail-page-ai-places",
+    "key": "count-plaatsen",
+    "language": "nl",
+    "value": "{{count}} plaatsen",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-ai-entities/object-detail-page-ai-places",
+    "key": "count-plaatsen",
+    "language": "en",
+    "value": "{{count}} plaatsen",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-ai-entities/object-detail-page-ai-places",
+    "key": "meer-info-over-ai-herkende-plaatsen",
+    "language": "nl",
+    "value": "Meer info over ai herkende plaatsen",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-ai-entities/object-detail-page-ai-places",
+    "key": "meer-info-over-ai-herkende-plaatsen",
+    "language": "en",
+    "value": "Meer info over ai herkende plaatsen",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-ai-entities/object-detail-page-ai-places",
+    "key": "deze-plaatsen-zijn-automatisch-herkend-met-ai-en-kunnen-fouten-bevatten-meer-info",
+    "language": "nl",
+    "value": "Deze plaatsen zijn automatisch herkend met ai en kunnen fouten bevatten meer info",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-ai-entities/object-detail-page-ai-places",
+    "key": "deze-plaatsen-zijn-automatisch-herkend-met-ai-en-kunnen-fouten-bevatten-meer-info",
+    "language": "en",
+    "value": "Deze plaatsen zijn automatisch herkend met ai en kunnen fouten bevatten meer info",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-ai-entities/object-detail-page-ai-organisations",
+    "key": "1-organisatie",
+    "language": "nl",
+    "value": "1 organisatie",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-ai-entities/object-detail-page-ai-organisations",
+    "key": "1-organisatie",
+    "language": "en",
+    "value": "1 organisatie",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-ai-entities/object-detail-page-ai-organisations",
+    "key": "count-organisaties",
+    "language": "nl",
+    "value": "{{count}} organisaties",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-ai-entities/object-detail-page-ai-organisations",
+    "key": "count-organisaties",
+    "language": "en",
+    "value": "{{count}} organisaties",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-ai-entities/object-detail-page-ai-organisations",
+    "key": "meer-info-over-ai-herkende-organisaties",
+    "language": "nl",
+    "value": "Meer info over ai herkende organisaties",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-ai-entities/object-detail-page-ai-organisations",
+    "key": "meer-info-over-ai-herkende-organisaties",
+    "language": "en",
+    "value": "Meer info over ai herkende organisaties",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-ai-entities/object-detail-page-ai-organisations",
+    "key": "deze-organisaties-zijn-automatisch-herkend-met-ai-en-kunnen-fouten-bevatten-meer-info",
+    "language": "nl",
+    "value": "Deze organisaties zijn automatisch herkend met ai en kunnen fouten bevatten meer info",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-ai-entities/object-detail-page-ai-organisations",
+    "key": "deze-organisaties-zijn-automatisch-herkend-met-ai-en-kunnen-fouten-bevatten-meer-info",
+    "language": "en",
+    "value": "Deze organisaties zijn automatisch herkend met ai en kunnen fouten bevatten meer info",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/utils/metadata/metadata",
+    "key": "lees-meer-mobiel",
+    "language": "nl",
+    "value": "Lees meer mobiel",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/utils/metadata/metadata",
+    "key": "lees-meer-mobiel",
+    "language": "en",
+    "value": "Lees meer mobiel",
     "value_type": "TEXT"
   },
   {
@@ -61683,6 +62163,46 @@
     "id": "",
     "app": "HET_ARCHIEF",
     "component": "BACKEND",
+    "location": "modules/auth/controllers/het-archief",
+    "key": "inloggen-mislukt",
+    "language": "nl",
+    "value": "Inloggen mislukt",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "BACKEND",
+    "location": "modules/auth/controllers/het-archief",
+    "key": "inloggen-mislukt",
+    "language": "en",
+    "value": "Inloggen mislukt",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "BACKEND",
+    "location": "modules/auth/controllers/het-archief",
+    "key": "er-ging-iets-mis-bij-het-inloggen-probeer-het-later-opnieuw",
+    "language": "nl",
+    "value": "Er ging iets mis bij het inloggen. Probeer het later opnieuw.",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "BACKEND",
+    "location": "modules/auth/controllers/het-archief",
+    "key": "er-ging-iets-mis-bij-het-inloggen-probeer-het-later-opnieuw",
+    "language": "en",
+    "value": "Er ging iets mis bij het inloggen. Probeer het later opnieuw.",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "BACKEND",
     "location": "modules/folders/controllers",
     "key": "default-collection-name",
     "language": "nl",
@@ -61717,6 +62237,86 @@
     "key": "account-configuratie",
     "language": "en",
     "value": "Account configuration",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "BACKEND",
+    "location": "modules/auth/controllers/het-archief",
+    "key": "registreren-mislukt",
+    "language": "nl",
+    "value": "Registreren mislukt",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "BACKEND",
+    "location": "modules/auth/controllers/het-archief",
+    "key": "registreren-mislukt",
+    "language": "en",
+    "value": "Registreren mislukt",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "BACKEND",
+    "location": "modules/auth/controllers/het-archief",
+    "key": "er-ging-iets-mis-bij-het-registreren-probeer-het-later-opnieuw",
+    "language": "nl",
+    "value": "Er ging iets mis bij het registreren. Probeer het later opnieuw.",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "BACKEND",
+    "location": "modules/auth/controllers/het-archief",
+    "key": "er-ging-iets-mis-bij-het-registreren-probeer-het-later-opnieuw",
+    "language": "en",
+    "value": "Er ging iets mis bij het registreren. Probeer het later opnieuw.",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "BACKEND",
+    "location": "modules/auth/controllers/het-archief",
+    "key": "uitloggen-mislukt",
+    "language": "nl",
+    "value": "Uitloggen mislukt",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "BACKEND",
+    "location": "modules/auth/controllers/het-archief",
+    "key": "uitloggen-mislukt",
+    "language": "en",
+    "value": "Uitloggen mislukt",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "BACKEND",
+    "location": "modules/auth/controllers/het-archief",
+    "key": "er-ging-iets-mis-bij-het-uitloggen-probeer-het-later-opnieuw",
+    "language": "nl",
+    "value": "Er ging iets mis bij het uitloggen. Probeer het later opnieuw.",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "BACKEND",
+    "location": "modules/auth/controllers/het-archief",
+    "key": "er-ging-iets-mis-bij-het-uitloggen-probeer-het-later-opnieuw",
+    "language": "en",
+    "value": "Er ging iets mis bij het uitloggen. Probeer het later opnieuw.",
     "value_type": "TEXT"
   },
   {
