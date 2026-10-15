@@ -49,14 +49,15 @@ export class AssetsService {
 		const gotOptions: ExtendOptions = {
 			prefixUrl: process.env.ASSET_SERVER_TOKEN_ENDPOINT,
 			resolveBodyOnly: true,
-			username: process.env.ASSET_SERVER_TOKEN_USERNAME,
-			password: process.env.ASSET_SERVER_TOKEN_PASSWORD,
+			username: encodeURIComponent(process.env.ASSET_SERVER_TOKEN_USERNAME),
+			password: encodeURIComponent(process.env.ASSET_SERVER_TOKEN_PASSWORD),
 			responseType: 'json',
 			headers: {
 				'cache-control': 'no-cache',
 				'X-User-Secret-Key-Meta': process.env.ASSET_SERVER_TOKEN_SECRET,
 			},
 		};
+
 		this.gotInstance = got.extend(gotOptions);
 	}
 
