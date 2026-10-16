@@ -1,3 +1,4 @@
+import { addPrefix } from '../shared/helpers/add-route-prefix';
 import { Controller, Get, Param, ParseIntPipe, Query } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 
@@ -14,7 +15,7 @@ import { RequireAnyPermissions } from '../shared/decorators/require-any-permissi
 import { ItemsService } from './items.service';
 
 @ApiTags('Items')
-@Controller(`${process.env.ADMIN_CORE_ROUTES_PREFIX}/items`)
+@Controller(addPrefix(process, 'items'))
 export class ItemsController {
 	constructor(protected itemsService: ItemsService) {}
 

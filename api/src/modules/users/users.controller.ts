@@ -1,3 +1,4 @@
+import { addPrefix } from '../shared/helpers/add-route-prefix';
 import {
 	Body,
 	Controller,
@@ -25,7 +26,7 @@ import { UsersService } from './users.service';
 import type { DeleteContentCounts, QueryProfilesBody, UserOverviewTableCol } from './users.types';
 
 @ApiTags('Users')
-@Controller(`${process.env.ADMIN_CORE_ROUTES_PREFIX}/users`)
+@Controller(addPrefix(process, 'users'))
 export class UsersController {
 	constructor(
 		@Inject(forwardRef(() => UsersService))
