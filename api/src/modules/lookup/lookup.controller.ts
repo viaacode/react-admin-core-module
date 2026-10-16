@@ -1,10 +1,11 @@
+import { addPrefix } from '../shared/helpers/add-route-prefix';
 import { Controller, Get } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import type { AvoLomLomField } from '@viaa/avo2-types';
 import { LookupService } from './lookup.service';
 
 @ApiTags('Lookup')
-@Controller(`${process.env.ADMIN_CORE_ROUTES_PREFIX}/lookup`)
+@Controller(addPrefix(process, 'lookup'))
 export class LookupController {
 	constructor(private lookupService: LookupService) {}
 

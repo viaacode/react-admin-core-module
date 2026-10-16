@@ -1,3 +1,4 @@
+import { addPrefix } from '../shared/helpers/add-route-prefix';
 import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 
@@ -7,7 +8,7 @@ import { SessionUserEntity } from '../users/classes/session-user';
 import { TableColumnPreferencesService } from './services/table-column-preferences.service';
 
 @ApiTags('TableColumnPreferences')
-@Controller(`${process.env.ADMIN_CORE_ROUTES_PREFIX}/table-column-preferences`)
+@Controller(addPrefix(process, 'table-column-preferences'))
 export class TableColumnPreferencesController {
 	constructor(protected tableColumnPreferencesService: TableColumnPreferencesService) {}
 

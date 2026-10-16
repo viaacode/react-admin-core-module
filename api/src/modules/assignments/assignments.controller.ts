@@ -1,10 +1,11 @@
+import { addPrefix } from '../shared/helpers/add-route-prefix';
 import { Controller, Get, ParseIntPipe, Query } from '@nestjs/common';
 import { ApiQuery, ApiTags } from '@nestjs/swagger';
 import type { AvoAssignmentAssignment } from '@viaa/avo2-types';
 import { AssignmentsService } from './assignments.service';
 
 @ApiTags('Assignments')
-@Controller(`${process.env.ADMIN_CORE_ROUTES_PREFIX}/assignments`)
+@Controller(addPrefix(process, 'assignments'))
 export class AssignmentsController {
 	constructor(private assignmentsService: AssignmentsService) {}
 

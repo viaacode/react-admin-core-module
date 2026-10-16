@@ -1,3 +1,4 @@
+import { addPrefix } from '../../shared/helpers/add-route-prefix';
 import { Controller, Get, ParseBoolPipe, ParseIntPipe, Query } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 
@@ -10,7 +11,7 @@ import { CollectionsService } from '../services/collections.service';
 class AvoCollectionCollection {}
 
 @ApiTags('Collections')
-@Controller(`${process.env.ADMIN_CORE_ROUTES_PREFIX}/collections`)
+@Controller(addPrefix(process, 'collections'))
 export class CollectionsController {
 	constructor(private collectionsService: CollectionsService) {}
 

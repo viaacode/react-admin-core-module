@@ -1,3 +1,4 @@
+import { addPrefix } from '../shared/helpers/add-route-prefix';
 import { Controller, Get } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { PermissionName } from '@viaa/avo2-types';
@@ -8,7 +9,7 @@ import { BasicOrganisation } from './admin-organisations.types';
 import { AdminOrganisationsService } from './services/admin-organisations.service';
 
 @ApiTags('Organisations')
-@Controller(`${process.env.ADMIN_CORE_ROUTES_PREFIX}/organisations`)
+@Controller(addPrefix(process, 'organisations'))
 export class AdminOrganisationsController {
 	constructor(protected adminOrganisationsService: AdminOrganisationsService) {}
 

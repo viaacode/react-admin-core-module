@@ -1,3 +1,4 @@
+import { addPrefix } from '../../shared/helpers/add-route-prefix';
 import path from 'node:path';
 import {
 	BadRequestException,
@@ -47,7 +48,7 @@ import { AssetsService } from '../services/assets.service';
 // Uploaded assets are also tracked in the database in the app_content_assets table
 @UseGuards(LoggedInGuard)
 @ApiTags('Assets')
-@Controller(`${process.env.ADMIN_CORE_ROUTES_PREFIX}/assets`)
+@Controller(addPrefix(process, 'assets'))
 @RequireAnyPermissions(PermissionName.EDIT_ANY_CONTENT_PAGES, PermissionName.EDIT_OWN_CONTENT_PAGES)
 export class AssetsController {
 	private logger: Logger = new Logger(AssetsController.name, { timestamp: true });

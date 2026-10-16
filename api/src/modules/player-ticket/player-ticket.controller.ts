@@ -1,3 +1,4 @@
+import { addPrefix } from '../shared/helpers/add-route-prefix';
 import {
 	BadRequestException,
 	Controller,
@@ -20,7 +21,7 @@ import { PlayerTokenOptions } from './player-ticket.types';
 import { PlayerTicketService } from './services/player-ticket.service';
 
 @ApiTags('Player Ticket')
-@Controller(`${process.env.ADMIN_CORE_ROUTES_PREFIX}/player-ticket`)
+@Controller(addPrefix(process, 'player-ticket'))
 export class PlayerTicketController {
 	constructor(private playerTicketService: PlayerTicketService) {}
 

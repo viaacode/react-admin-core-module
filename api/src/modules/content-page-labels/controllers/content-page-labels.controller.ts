@@ -1,3 +1,4 @@
+import { addPrefix } from '../../shared/helpers/add-route-prefix';
 import { Body, Controller, Delete, Get, Param, Patch, Post, Put, Query } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 
@@ -16,7 +17,7 @@ import {
 import { ContentPageLabelsService } from '../services/content-page-labels.service';
 
 @ApiTags('ContentPageLabels')
-@Controller(`${process.env.ADMIN_CORE_ROUTES_PREFIX}/content-page-labels`)
+@Controller(addPrefix(process, 'content-page-labels'))
 export class ContentPageLabelsController {
 	constructor(private contentPageLabelService: ContentPageLabelsService) {}
 
