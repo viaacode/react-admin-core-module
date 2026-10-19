@@ -25,7 +25,6 @@ import {
 import sharp from 'sharp';
 
 import { DataService } from '../../data';
-import { RequireAnyPermissions } from '../../shared/decorators/require-any-permissions.decorator';
 import { SessionUser } from '../../shared/decorators/user.decorator';
 import {
 	DeleteContentAssetDocument,
@@ -49,7 +48,8 @@ import { AssetsService } from '../services/assets.service';
 @UseGuards(LoggedInGuard)
 @ApiTags('Assets')
 @Controller(addPrefix(process, 'assets'))
-@RequireAnyPermissions(PermissionName.EDIT_ANY_CONTENT_PAGES, PermissionName.EDIT_OWN_CONTENT_PAGES)
+// No permission decorators: assets are also uploaded by users that cannot edit content pages
+// eg: profile avatars, bundle covers, og images. Deleting an asset checks the ownership of the asset itself
 export class AssetsController {
 	private logger: Logger = new Logger(AssetsController.name, { timestamp: true });
 
@@ -80,10 +80,6 @@ export class AssetsController {
 		},
 	})
 	@UseGuards(LoggedInGuard)
-	@RequireAnyPermissions(
-		PermissionName.EDIT_ANY_CONTENT_PAGES,
-		PermissionName.EDIT_OWN_CONTENT_PAGES
-	)
 	async uploadAsset(
 		// biome-ignore lint/suspicious/noExplicitAny: todo
 		@UploadedFile() file: any & { originalname: string; mimetype: string },

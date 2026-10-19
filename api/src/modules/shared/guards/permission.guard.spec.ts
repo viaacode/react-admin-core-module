@@ -1,15 +1,19 @@
-import { type ExecutionContext } from '@nestjs/common';
+import { type ExecutionContext, UnauthorizedException } from '@nestjs/common';
 import { PermissionName } from '@viaa/avo2-types';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { PermissionGuard } from './permission.guard';
 
 const createMockExecutionContext = (permissions: PermissionName[]): ExecutionContext => {
+	// The tests run with DATABASE_APPLICATION_TYPE=avo, so the session contains an avo user
 	const mockGetRequest = vi.fn().mockReturnValue({
 		session: {
-			archiefUserInfo: {
-				id: 'test-user-id',
-				permissions,
+			avoUserInfo: {
+				uid: 'test-user-id',
+				profile: {
+					id: 'test-profile-id',
+					permissions,
+				},
 			},
 		},
 		headers: {},
@@ -92,6 +96,27 @@ describe('PermissionGuard', () => {
 			.mockReturnValueOnce([PermissionName.SEARCH, PermissionName.SEARCH_OBJECTS]);
 		const context = createMockExecutionContext([PermissionName.CREATE_VISIT_REQUEST]);
 		expect(() => new PermissionGuard(mockReflector).canActivate(context)).toThrow();
+	});
+
+	it('Should throw an UnauthorizedException when permissions are required and nobody is logged in', () => {
+		mockReflector.get.mockReturnValueOnce([PermissionName.SEARCH]);
+		const context = {
+			switchToHttp: vi.fn().mockReturnValue({
+				getRequest: vi.fn().mockReturnValue({ session: {}, headers: {} }),
+			}),
+			getClass: vi.fn(),
+			getHandler: vi.fn(),
+		} as unknown as ExecutionContext;
+		expect(() => new PermissionGuard(mockReflector).canActivate(context)).toThrow(
+			UnauthorizedException
+		);
+	});
+
+	it('Should accept EDIT_USER_GROUPS for EDIT_PERMISSION_GROUPS in avo', () => {
+		mockReflector.get.mockReturnValueOnce([PermissionName.EDIT_PERMISSION_GROUPS]);
+		const context = createMockExecutionContext([PermissionName.EDIT_USER_GROUPS]);
+		const canActivate = new PermissionGuard(mockReflector).canActivate(context);
+		expect(canActivate).toBe(true);
 	});
 
 	afterEach(() => {

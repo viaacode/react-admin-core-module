@@ -4,6 +4,7 @@ import {
 	Delete,
 	ForbiddenException,
 	Get,
+	HttpException,
 	Ip,
 	NotFoundException,
 	Param,
@@ -113,7 +114,7 @@ export class ContentPagesController {
 		try {
 			const user = sessionUser?.getUser();
 			const contentPage = await this.contentPagesService.getContentPageByLanguageAndPathForUser(
-				language || (user.language as Locale),
+				language || (user?.language as Locale),
 				path,
 				user,
 				request?.headers?.Referrer as string,
@@ -138,6 +139,10 @@ export class ContentPagesController {
 					},
 					404
 				);
+			}
+			if (err instanceof HttpException) {
+				// eg: BadRequestException with code CONTENT_PAGE_WRONG_USER_GROUP or CONTENT_PAGE_DEPUBLISHED
+				throw err;
 			}
 			const error = new CustomError('Failed to get content page by language and path', err, {
 				language,
