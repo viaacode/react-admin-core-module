@@ -189,6 +189,7 @@
     "@parcel/watcher@2.5.6": true,
     "es5-ext@0.10.64": true,
     "fsevents@2.3.3": true,
-    "esbuild@0.28.2": true
+    "esbuild@0.28.2": true,
+    "lefthook@1.11.14": true
   }
 }
