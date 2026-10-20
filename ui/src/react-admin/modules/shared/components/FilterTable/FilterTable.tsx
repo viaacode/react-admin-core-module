@@ -311,7 +311,7 @@ export const FilterTable: FunctionComponent<FilterTableProps> = ({
 
 	const getSelectedColumns = (): FilterableColumn[] => {
 		const tableState = getTableState();
-		if (tableState.columns && tableState.columns.length) {
+		if (tableState.columns?.length) {
 			// Return the columns in the order they are specified in the query params
 			return compact(
 				tableState.columns.map((columnId: string) => {

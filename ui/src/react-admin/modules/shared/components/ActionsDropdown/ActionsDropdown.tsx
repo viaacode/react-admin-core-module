@@ -30,7 +30,7 @@ const ActionsDropdown: FunctionComponent<ActionsDropdownProps> = ({
 		onOptionClicked(menuItemId);
 	};
 
-	return menuItems && menuItems.length ? (
+	return menuItems?.length ? (
 		<Dropdown
 			className="c-actions-dropdown"
 			flyoutClassName="c-actions-dropdown-flyout"

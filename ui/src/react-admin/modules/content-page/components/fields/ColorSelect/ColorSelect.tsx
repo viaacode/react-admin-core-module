@@ -30,11 +30,10 @@ export const ColorSelect: FunctionComponent<ColorSelectProps> = ({
 	const renderLabel = ({ label, value }: ReactSelectOption<string>): ReactNode => {
 		const option: ColorOption | undefined = options.find((option) => option.value === value);
 		const isGradient = option?.color?.includes('gradient') || option?.value?.includes('gradient');
-		const gradientColor = (option?.color || option?.value) as GradientColor | undefined;
-		const background =
-			isGradient && gradientColor
-				? ColorSelectGradientColors[gradientColor]
-				: option?.color || option?.value;
+		const background = isGradient
+			? // biome-ignore lint/correctness/noUnsafeOptionalChaining: used as an object key, undefined is harmless
+				ColorSelectGradientColors[(option?.color || option?.value) as GradientColor]
+			: option?.color || option?.value;
 
 		return (
 			<div key={`color-select-${label}-${value}`}>
