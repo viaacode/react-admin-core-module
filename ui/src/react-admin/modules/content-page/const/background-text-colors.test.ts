@@ -65,11 +65,12 @@ describe('getBackgroundTextColors()', () => {
 		isAvoMock.mockReturnValue(false);
 	});
 
-	it.each(
-		EXPECTED_BACKGROUND_TEXT_COLORS
-	)('matches the design for %s', (_name, background, primary, secondary, hyperlink) => {
-		expect(getBackgroundTextColors(background)).toEqual({ primary, secondary, hyperlink });
-	});
+	it.each(EXPECTED_BACKGROUND_TEXT_COLORS)(
+		'matches the design for %s',
+		(_name, background, primary, secondary, hyperlink) => {
+			expect(getBackgroundTextColors(background)).toEqual({ primary, secondary, hyperlink });
+		}
+	);
 
 	it('holds every approved row and the temporary Sky blauw fallback, with no extras', () => {
 		expect(Object.keys(BACKGROUND_TEXT_COLORS)).toHaveLength(

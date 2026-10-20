@@ -75,7 +75,6 @@ const APP_ROUTES: RouteObject[] = [
 ];
 
 function getAdminRoutes(): RouteObject[] {
-	// @ts-ignore
 	return [
 		{
 			id: 'Dashboard',

@@ -2,7 +2,6 @@ import { keepPreviousData, QueryClient, QueryClientProvider } from '@tanstack/re
 import { setDefaultOptions } from 'date-fns';
 import { nlBE } from 'date-fns/locale';
 // React is required to be imported for SSR even if it is not directly used in this file. This import must be identical between server and client entry files
-// @ts-ignore
 import type { FC } from 'react';
 import { createRoot } from 'react-dom/client';
 import { RouterProvider } from 'react-router';

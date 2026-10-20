@@ -97,7 +97,7 @@ export const FieldGroup: FunctionComponent<FieldGroupProps> = ({
 					GET_EDITOR_TYPES_MAP()[fieldState[1].editorType as ContentBlockEditor];
 
 				return (
-					<Spacer margin="top" key={`${fieldKey}-${fieldState[0]}-${fieldIndex}`}>
+					<Spacer margin="top" key={`${fieldKey}-${fieldState[0]}`}>
 						<FormGroup label={fieldState[1].label} error={elementErrors?.[fieldState[0]]}>
 							<Spacer margin="top-small">
 								<EditorComponents {...editorProps} />

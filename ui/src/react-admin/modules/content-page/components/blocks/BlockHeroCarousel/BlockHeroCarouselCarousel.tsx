@@ -141,6 +141,7 @@ export const BlockHeroCarouselCarousel: FunctionComponent<BlockHeroCarouselCarou
 
 						return (
 							<div
+								// biome-ignore lint/suspicious/noArrayIndexKey: the strip contains clones of the same items, the position is the slide identity
 								key={`carousel-slide__${item?.schemaIdentifier}__${index}`}
 								onClick={() => goToSlide(index)}
 								aria-hidden={isClone ? true : undefined}

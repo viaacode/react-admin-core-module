@@ -47,9 +47,9 @@ export const BlockMaintainersGrid: FunctionComponent<BlockMaintainerGridProps> =
 				)}
 			</div>
 			<ul>
-				{data?.map((maintainer, index) => {
+				{data?.map((maintainer) => {
 					return (
-						<li key={`${maintainer.homepageUrl}-${maintainer.logoUrl}-${index}`}>
+						<li key={maintainer.id}>
 							<SmartLink
 								action={{
 									type: AvoCoreContentPickerType.EXTERNAL_LINK,
