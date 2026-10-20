@@ -117,6 +117,7 @@ export const BlockHeroCarouselSearch: FunctionComponent<BlockHeroCarouselSearchP
 						{/* Add first item again at the end for a smooth crossfade animation */}
 						{subtitles.map((subtitle, index) => (
 							<li
+								// biome-ignore lint/suspicious/noArrayIndexKey: the first subtitle is intentionally repeated at the end, labels are not unique
 								key={`animation-text-${subtitle.label}-${index}`}
 								className={clsx({
 									current: activeIndex === index,

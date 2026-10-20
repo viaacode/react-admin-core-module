@@ -177,6 +177,7 @@ export const ContentPageRenderer: FunctionComponent<ContentPageDetailProps> = (p
 					})}
 					target="_blank"
 					style={{ marginLeft: 'auto' }}
+					rel="noopener"
 				>
 					{button}
 				</a>
@@ -207,7 +208,7 @@ export const ContentPageRenderer: FunctionComponent<ContentPageDetailProps> = (p
 
 		return (
 			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-			// @ts-ignore: no-height is possible
+			// @ts-expect-error: no-height is possible
 			<Toolbar size="no-height">
 				<ToolbarRight>
 					{renderHyperlink(

@@ -25,7 +25,7 @@ const MoreOptionsDropdown: FunctionComponent<MoreOptionsDropdownProps> = ({
 	menuItems,
 	onOptionClicked,
 }) => {
-	return !!menuItems && !!menuItems.length ? (
+	return menuItems?.length ? (
 		<Dropdown
 			isOpen={isOpen}
 			menuWidth="fit-content"

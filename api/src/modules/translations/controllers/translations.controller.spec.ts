@@ -1,5 +1,5 @@
 import { Test, type TestingModule } from '@nestjs/testing';
-import { vi, type MockInstance, describe, it, expect, beforeEach } from 'vitest';
+import { beforeEach, describe, expect, it, type MockInstance, vi } from 'vitest';
 import { Lookup_Languages_Enum } from '../../shared/generated/graphql-db-types-hetarchief';
 
 import { TranslationsService } from '../services/translations.service';

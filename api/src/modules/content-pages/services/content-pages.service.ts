@@ -17,7 +17,17 @@ import {
 	PermissionName,
 } from '@viaa/avo2-types';
 import { mapLimit } from 'blend-promise-utils';
-import { compact, escapeRegExp, fromPairs, intersection, keys, set, uniq, uniqBy, without } from 'lodash';
+import {
+	compact,
+	escapeRegExp,
+	fromPairs,
+	intersection,
+	keys,
+	set,
+	uniq,
+	uniqBy,
+	without,
+} from 'lodash';
 
 import { AssetsService } from '../../assets/services/assets.service';
 import { DataService } from '../../data';

@@ -41,6 +41,7 @@ export const BlockDoubleBanner: FunctionComponent<BlockDoubleBannerProps> = ({
 							<span className="c-block-double-banner__icons">
 								{icons.map((icon, iconIndex) => (
 									<ContentPageIcon
+										// biome-ignore lint/suspicious/noArrayIndexKey: static decorative icon list, the same icon can appear more than once
 										key={`c-block-double-banner__icon-${index}-${iconIndex}-${icon}`}
 										className="c-block-double-banner__icon"
 										name={icon}

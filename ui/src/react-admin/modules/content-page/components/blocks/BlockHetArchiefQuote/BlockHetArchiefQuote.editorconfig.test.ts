@@ -17,7 +17,7 @@ const config = HET_ARCHIEF_QUOTE_BLOCK_CONFIG();
 const field = (key: string): ContentBlockField =>
 	config.components.fields[key] as ContentBlockField;
 const optionValues = (key: string): string[] =>
-	(field(key).editorProps?.options as SelectOption<string>[]).map((option) => option.value);
+	((field(key).editorProps?.options ?? []) as SelectOption<string>[]).map((option) => option.value);
 
 describe('HET_ARCHIEF_QUOTE_BLOCK_CONFIG', () => {
 	it('offers the background palette on both colour fields, as the FA asks', () => {

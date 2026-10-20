@@ -130,6 +130,7 @@ export const BlockImageGrid: FunctionComponent<BlockImageGridProps> = ({
 
 				return (
 					<div
+						// biome-ignore lint/suspicious/noArrayIndexKey: grid elements are editor content without an id, titles and links can repeat
 						key={`block-grid-${element?.action?.value || element.title || null}${index}`}
 						className={clsx('c-block-grid__item')}
 						style={{

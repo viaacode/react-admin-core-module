@@ -106,19 +106,15 @@ describe('PlayerTicketController', () => {
 
 		// The pattern used to be unanchored, so these were accepted and parsed to NaN, which
 		// silently disabled the cut further down the chain instead of failing.
-		it.each([
-			'a1',
-			'1a',
-			'abc',
-			'1.5',
-			'-1',
-			' 1',
-		])('should reject the non-numeric time "%s"', async (startTime) => {
-			await expect(getPlayableUrl({ startTime, endTime: '45' })).rejects.toThrow(
-				BadRequestException
-			);
-			expect(mockPlayerTicketService.getPlayableUrl).not.toHaveBeenCalled();
-		});
+		it.each(['a1', '1a', 'abc', '1.5', '-1', ' 1'])(
+			'should reject the non-numeric time "%s"',
+			async (startTime) => {
+				await expect(getPlayableUrl({ startTime, endTime: '45' })).rejects.toThrow(
+					BadRequestException
+				);
+				expect(mockPlayerTicketService.getPlayableUrl).not.toHaveBeenCalled();
+			}
+		);
 
 		it('should reject a start time without an end time', async () => {
 			await expect(getPlayableUrl({ startTime: '15' })).rejects.toThrow(BadRequestException);

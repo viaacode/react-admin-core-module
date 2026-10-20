@@ -31,9 +31,8 @@ export const ColorSelect: FunctionComponent<ColorSelectProps> = ({
 		const option: ColorOption | undefined = options.find((option) => option.value === value);
 		const isGradient = option?.color?.includes('gradient') || option?.value?.includes('gradient');
 		const background = isGradient
-			? ColorSelectGradientColors[
-					(option?.color as GradientColor) || (option?.value as GradientColor)
-				]
+			? // biome-ignore lint/correctness/noUnsafeOptionalChaining: used as an object key, undefined is harmless
+				ColorSelectGradientColors[(option?.color || option?.value) as GradientColor]
 			: option?.color || option?.value;
 
 		return (
