@@ -1,9 +1,9 @@
 import { Test, type TestingModule } from '@nestjs/testing';
-import { vi, type MockInstance, describe, it, expect, beforeEach } from 'vitest';
+import { beforeEach, describe, expect, it, type MockInstance, vi } from 'vitest';
 
 import packageJson from '../../../../package.json';
-import { TranslationsService } from '../../translations';
 import { TestingLogger } from '../../shared/logging/test-logger';
+import { TranslationsService } from '../../translations';
 
 import { StatusService } from './status.service';
 

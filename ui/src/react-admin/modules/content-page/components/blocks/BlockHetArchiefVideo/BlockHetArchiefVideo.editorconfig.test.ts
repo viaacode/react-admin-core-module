@@ -136,12 +136,16 @@ describe('HETARCHIEF_VIDEO_BLOCK_CONFIG', () => {
 			expect(validate('endTime', state)).toHaveLength(1);
 		});
 
-		it.each(['nonsense', '90', '00:60', '00:00:60', '00:01:30.500', '1:2:3:4'])(
-			'should reject the malformed time "%s"',
-			(value) => {
-				expect(validate('startTime', { startTime: value, endTime: '01:00:00' })).toHaveLength(1);
-			}
-		);
+		it.each([
+			'nonsense',
+			'90',
+			'00:60',
+			'00:00:60',
+			'00:01:30.500',
+			'1:2:3:4',
+		])('should reject the malformed time "%s"', (value) => {
+			expect(validate('startTime', { startTime: value, endTime: '01:00:00' })).toHaveLength(1);
+		});
 
 		it('should accept a snippet starting at 0', () => {
 			const state = { startTime: '00:00:00', endTime: '00:00:30' };

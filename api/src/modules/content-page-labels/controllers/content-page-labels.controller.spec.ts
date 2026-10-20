@@ -1,6 +1,6 @@
 import { Test, type TestingModule } from '@nestjs/testing';
 import { AvoSearchOrderDirection } from '@viaa/avo2-types';
-import { vi, type MockInstance } from 'vitest';
+import { type MockInstance, vi } from 'vitest';
 import { Lookup_App_Content_Type_Enum } from '../../shared/generated/graphql-db-types-hetarchief';
 import { TestingLogger } from '../../shared/logging/test-logger';
 import { UpdateContentPageLabelDto } from '../dto/content-page-label.dto';
