@@ -38,7 +38,6 @@
     }
   },
   "scripts": {
-    "prepare": "cd .. && husky install",
     "dev": "cross-env PORT=3400 dotenv -e .env/.env.local vite",
     "prebuild": "rimraf dist",
     "build": "vite build",
@@ -62,8 +61,8 @@
     "backup-translations-avo-qas": "dotenv -e .env/.env.local tsx --project ./scripts/tsconfig.json scripts/backup-translations.ts -- AVO",
     "translations:extract:hetarchief": "dotenv -e .env/.env.local tsx --project ./scripts/tsconfig.json scripts/extract-and-replace-translations.ts -- HET_ARCHIEF",
     "translations:extract:avo": "dotenv -e .env/.env.local tsx --project ./scripts/tsconfig.json scripts/extract-and-replace-translations.ts -- AVO",
-    "list-of-changed-translations-hetarchief": "dotenv -e .env/.env.local tsx --project ./scripts/tsconfig.json scripts/get-list-of-changed-translations.ts -- HET_ARCHIEF v6.0.60 v6.0.62",
-    "list-commit-messages-between-tags-hetarchief": "dotenv -e .env/.env.local tsx --project ./scripts/tsconfig.json scripts/get-list-of-commit-messages-between-tags.ts -- v6.0.60 v6.0.62",
+    "list-of-changed-translations-hetarchief": "dotenv -e .env/.env.local tsx --project ./scripts/tsconfig.json scripts/get-list-of-changed-translations.ts -- HET_ARCHIEF v6.0.60 v6.0.67",
+    "list-commit-messages-between-tags-hetarchief": "dotenv -e .env/.env.local tsx --project ./scripts/tsconfig.json scripts/get-list-of-commit-messages-between-tags.ts -- v6.0.60 v6.0.67",
     "list-of-changed-translations-avo": "dotenv -e .env/.env.local tsx --project ./scripts/tsconfig.json scripts/get-list-of-changed-translations.ts -- AVO v5.2.90 v6.0.6",
     "list-commit-messages-between-tags-avo": "dotenv -e .env/.env.local tsx --project ./scripts/tsconfig.json scripts/get-list-of-commit-messages-between-tags.ts -- v5.2.90 v6.0.6",
     "check-bundled-files": "npx depcruise src/react-admin --config bundle-import-rules.json --include-only \"^src\" --exclude \"(.spec.tsx?|.test.tsx?|node_modules)\"",
@@ -77,6 +76,7 @@
     "@floating-ui/react": "0.27.18",
     "@hookform/resolvers": "2.9.11",
     "@meemoo/react-components": "6.0.29",
+    "@studiohyperdrive/pagination": "1.0.0",
     "@tanstack/react-query": "5.99.0",
     "@viaa/avo2-components": "7.0.15",
     "@viaa/avo2-types": "5.0.25",
@@ -113,7 +113,7 @@
     "@babel/core": "7.29.7",
     "@babel/plugin-transform-runtime": "7.29.7",
     "@babel/preset-typescript": "7.22.15",
-    "@biomejs/biome": "2.0.0",
+    "@biomejs/biome": "2.5.15",
     "@commitlint/cli": "21.2.3",
     "@commitlint/config-conventional": "21.2.3",
     "@testing-library/jest-dom": "6.9.1",
@@ -142,7 +142,6 @@
     "dotenv": "16.3.1",
     "dotenv-cli": "7.3.0",
     "exitzero": "1.0.1",
-    "husky": "7.0.4",
     "i18next-http-backend": "4.0.2",
     "identity-obj-proxy": "3.0.0",
     "jsdom": "27.4.0",
@@ -190,7 +189,6 @@
     "@parcel/watcher@2.5.6": true,
     "es5-ext@0.10.64": true,
     "fsevents@2.3.3": true,
-    "lefthook@1.11.14": true,
     "esbuild@0.28.2": true
   }
 }

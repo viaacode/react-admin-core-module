@@ -46756,7 +46756,7 @@
     "location": "modules/ie-objects/components/object-detail-page-ai-entities/ai-entity-avatar-row",
     "key": "toon-minder",
     "language": "en",
-    "value": "Toon minder",
+    "value": "Show less",
     "value_type": "TEXT"
   },
   {
@@ -46776,7 +46776,7 @@
     "location": "modules/ie-objects/components/object-detail-page-ai-entities/ai-entity-avatar-row",
     "key": "toon-meer",
     "language": "en",
-    "value": "Toon meer",
+    "value": "Show more",
     "value_type": "TEXT"
   },
   {
@@ -46816,7 +46816,7 @@
     "location": "modules/ie-objects/components/object-detail-page-ai-entities/ai-entity-card",
     "key": "zoek-alle-objecten-met-deze-entiteit",
     "language": "en",
-    "value": "Zoek alle objecten met deze entiteit",
+    "value": "Search for all objects with this entity",
     "value_type": "TEXT"
   },
   {
@@ -46836,7 +46836,7 @@
     "location": "modules/ie-objects/components/object-detail-page-ai-entities/ai-entity-interval-pills",
     "key": "paginering-van-de-tijdsintervallen",
     "language": "en",
-    "value": "Paginering van de tijdsintervallen",
+    "value": "Pagination of time intervals",
     "value_type": "TEXT"
   },
   {
@@ -46856,7 +46856,7 @@
     "location": "modules/ie-objects/components/object-detail-page-ai-entities/ai-entity-interval-pills",
     "key": "vorige",
     "language": "en",
-    "value": "Vorige",
+    "value": "Previous",
     "value_type": "TEXT"
   },
   {
@@ -46876,7 +46876,7 @@
     "location": "modules/ie-objects/components/object-detail-page-ai-entities/ai-entity-interval-pills",
     "key": "page-van-pageCount",
     "language": "en",
-    "value": "{{page}} van {{{{pageCount}}",
+    "value": "{{page}} of {{{{pageCount}}",
     "value_type": "TEXT"
   },
   {
@@ -46896,7 +46896,7 @@
     "location": "modules/ie-objects/components/object-detail-page-ai-entities/ai-entity-interval-pills",
     "key": "volgende",
     "language": "en",
-    "value": "Volgende",
+    "value": "Next",
     "value_type": "TEXT"
   },
   {
@@ -46916,7 +46916,7 @@
     "location": "modules/ie-objects/components/object-detail-page-ai-entities/ai-entity-navigation-overlay",
     "key": "vorig-moment",
     "language": "en",
-    "value": "Vorig moment",
+    "value": "Previous moment",
     "value_type": "TEXT"
   },
   {
@@ -46936,7 +46936,7 @@
     "location": "modules/ie-objects/components/object-detail-page-ai-entities/ai-entity-navigation-overlay",
     "key": "index-van-total",
     "language": "en",
-    "value": "{{index}} van {{total}}",
+    "value": "{{index}} of {{total}}",
     "value_type": "TEXT"
   },
   {
@@ -46956,7 +46956,7 @@
     "location": "modules/ie-objects/components/object-detail-page-ai-entities/ai-entity-navigation-overlay",
     "key": "volgend-moment",
     "language": "en",
-    "value": "Volgend moment",
+    "value": "Next moment",
     "value_type": "TEXT"
   },
   {
@@ -46976,7 +46976,7 @@
     "location": "modules/ie-objects/components/object-detail-page-ai-entities/ai-entity-navigation-overlay",
     "key": "sluiten",
     "language": "en",
-    "value": "Sluiten",
+    "value": "Close",
     "value_type": "TEXT"
   },
   {
@@ -46996,7 +46996,7 @@
     "location": "modules/ie-objects/components/object-detail-page-ai-entities/ai-entity-pill-row",
     "key": "toon-meer",
     "language": "en",
-    "value": "Toon meer",
+    "value": "Show more",
     "value_type": "TEXT"
   },
   {
@@ -47016,7 +47016,7 @@
     "location": "modules/ie-objects/components/object-detail-page-ai-entities/ai-entity-pill-row",
     "key": "toon-minder",
     "language": "en",
-    "value": "Toon minder",
+    "value": "Show less",
     "value_type": "TEXT"
   },
   {
@@ -47036,7 +47036,7 @@
     "location": "modules/ie-objects/components/object-detail-page-ai-entities/ai-entity-timeline",
     "key": "spring-naar-timestamp",
     "language": "en",
-    "value": "Spring naar {{timestamp}}",
+    "value": "Jump to {{timestamp}}",
     "value_type": "TEXT"
   },
   {
@@ -47056,7 +47056,7 @@
     "location": "modules/ie-objects/components/object-detail-page-ai-entities/object-detail-page-ai-persons",
     "key": "1-persoon",
     "language": "en",
-    "value": "1 persoon",
+    "value": "1 person",
     "value_type": "TEXT"
   },
   {
@@ -47076,7 +47076,7 @@
     "location": "modules/ie-objects/components/object-detail-page-ai-entities/object-detail-page-ai-persons",
     "key": "count-personen",
     "language": "en",
-    "value": "{{count}} personen",
+    "value": "{{count}} persons",
     "value_type": "TEXT"
   },
   {
@@ -48706,7 +48706,7 @@
     "location": "modules/ie-objects/components/object-detail-page-ai-entities/object-detail-page-ai-persons",
     "key": "meer-info-over-ai-herkende-personen",
     "language": "nl",
-    "value": "Meer info over ai herkende personen",
+    "value": "Meer info over AI herkende personen",
     "value_type": "TEXT"
   },
   {
@@ -48716,7 +48716,7 @@
     "location": "modules/ie-objects/components/object-detail-page-ai-entities/object-detail-page-ai-persons",
     "key": "meer-info-over-ai-herkende-personen",
     "language": "en",
-    "value": "Meer info over ai herkende personen",
+    "value": "More info on persons identified by AI",
     "value_type": "TEXT"
   },
   {
@@ -48726,7 +48726,7 @@
     "location": "modules/ie-objects/components/object-detail-page-ai-entities/object-detail-page-ai-persons",
     "key": "deze-personen-zijn-automatisch-herkend-met-ai-en-kunnen-fouten-bevatten-meer-info",
     "language": "nl",
-    "value": "Deze personen zijn automatisch herkend met ai en kunnen fouten bevatten meer info",
+    "value": "Deze personen zijn automatisch herkend door AI en kunnen fouten bevatten",
     "value_type": "HTML"
   },
   {
@@ -48736,7 +48736,7 @@
     "location": "modules/ie-objects/components/object-detail-page-ai-entities/object-detail-page-ai-persons",
     "key": "deze-personen-zijn-automatisch-herkend-met-ai-en-kunnen-fouten-bevatten-meer-info",
     "language": "en",
-    "value": "Deze personen zijn automatisch herkend met ai en kunnen fouten bevatten meer info",
+    "value": "These persons have been automatically identified by AI, which may contain errors",
     "value_type": "HTML"
   },
   {
@@ -48756,7 +48756,7 @@
     "location": "modules/ie-objects/components/object-detail-page-ai-entities/object-detail-page-ai-places",
     "key": "1-plaats",
     "language": "en",
-    "value": "1 plaats",
+    "value": "1 location",
     "value_type": "TEXT"
   },
   {
@@ -48776,7 +48776,7 @@
     "location": "modules/ie-objects/components/object-detail-page-ai-entities/object-detail-page-ai-places",
     "key": "count-plaatsen",
     "language": "en",
-    "value": "{{count}} plaatsen",
+    "value": "{{count}} locations",
     "value_type": "TEXT"
   },
   {
@@ -48786,7 +48786,7 @@
     "location": "modules/ie-objects/components/object-detail-page-ai-entities/object-detail-page-ai-places",
     "key": "meer-info-over-ai-herkende-plaatsen",
     "language": "nl",
-    "value": "Meer info over ai herkende plaatsen",
+    "value": "Meer info over door AI herkende plaatsen",
     "value_type": "TEXT"
   },
   {
@@ -48796,7 +48796,7 @@
     "location": "modules/ie-objects/components/object-detail-page-ai-entities/object-detail-page-ai-places",
     "key": "meer-info-over-ai-herkende-plaatsen",
     "language": "en",
-    "value": "Meer info over ai herkende plaatsen",
+    "value": "More info on locations identified with AI",
     "value_type": "TEXT"
   },
   {
@@ -48806,7 +48806,7 @@
     "location": "modules/ie-objects/components/object-detail-page-ai-entities/object-detail-page-ai-places",
     "key": "deze-plaatsen-zijn-automatisch-herkend-met-ai-en-kunnen-fouten-bevatten-meer-info",
     "language": "nl",
-    "value": "Deze plaatsen zijn automatisch herkend met ai en kunnen fouten bevatten meer info",
+    "value": "Deze plaatsen zijn automatisch herkend door AI en kunnen fouten bevatten ",
     "value_type": "HTML"
   },
   {
@@ -48816,7 +48816,7 @@
     "location": "modules/ie-objects/components/object-detail-page-ai-entities/object-detail-page-ai-places",
     "key": "deze-plaatsen-zijn-automatisch-herkend-met-ai-en-kunnen-fouten-bevatten-meer-info",
     "language": "en",
-    "value": "Deze plaatsen zijn automatisch herkend met ai en kunnen fouten bevatten meer info",
+    "value": "These locations have been automatically identified using AI, which may contain errors",
     "value_type": "HTML"
   },
   {
@@ -48836,7 +48836,7 @@
     "location": "modules/ie-objects/components/object-detail-page-ai-entities/object-detail-page-ai-organisations",
     "key": "1-organisatie",
     "language": "en",
-    "value": "1 organisatie",
+    "value": "1 organisation",
     "value_type": "TEXT"
   },
   {
@@ -48856,7 +48856,7 @@
     "location": "modules/ie-objects/components/object-detail-page-ai-entities/object-detail-page-ai-organisations",
     "key": "count-organisaties",
     "language": "en",
-    "value": "{{count}} organisaties",
+    "value": "{{count}} organisations",
     "value_type": "TEXT"
   },
   {
@@ -48866,7 +48866,7 @@
     "location": "modules/ie-objects/components/object-detail-page-ai-entities/object-detail-page-ai-organisations",
     "key": "meer-info-over-ai-herkende-organisaties",
     "language": "nl",
-    "value": "Meer info over ai herkende organisaties",
+    "value": "Meer info over door AI herkende organisaties",
     "value_type": "TEXT"
   },
   {
@@ -48876,7 +48876,7 @@
     "location": "modules/ie-objects/components/object-detail-page-ai-entities/object-detail-page-ai-organisations",
     "key": "meer-info-over-ai-herkende-organisaties",
     "language": "en",
-    "value": "Meer info over ai herkende organisaties",
+    "value": "More info on organisations identified by AI",
     "value_type": "TEXT"
   },
   {
@@ -48886,7 +48886,7 @@
     "location": "modules/ie-objects/components/object-detail-page-ai-entities/object-detail-page-ai-organisations",
     "key": "deze-organisaties-zijn-automatisch-herkend-met-ai-en-kunnen-fouten-bevatten-meer-info",
     "language": "nl",
-    "value": "Deze organisaties zijn automatisch herkend met ai en kunnen fouten bevatten meer info",
+    "value": "Deze organisaties zijn automatisch herkend met AI en kunnen fouten bevatten",
     "value_type": "HTML"
   },
   {
@@ -48896,7 +48896,7 @@
     "location": "modules/ie-objects/components/object-detail-page-ai-entities/object-detail-page-ai-organisations",
     "key": "deze-organisaties-zijn-automatisch-herkend-met-ai-en-kunnen-fouten-bevatten-meer-info",
     "language": "en",
-    "value": "Deze organisaties zijn automatisch herkend met ai en kunnen fouten bevatten meer info",
+    "value": "These organisations have been identified using AI and may contain errors",
     "value_type": "HTML"
   },
   {
@@ -50656,7 +50656,7 @@
     "location": "modules/shared/components/audio-or-video-player/audio-or-video-player",
     "key": "nederlands",
     "language": "en",
-    "value": "Nederlands",
+    "value": "Dutch",
     "value_type": "TEXT"
   },
   {
@@ -50666,7 +50666,7 @@
     "location": "modules/shared/components/audio-or-video-player/audio-or-video-player",
     "key": "ondertitels-zijn-ai-gegenereerd-door-meemoo-er-werd-geen-menselijke-controle-op-uitgevoerd",
     "language": "nl",
-    "value": "Ondertitels zijn ai gegenereerd door meemoo er werd geen menselijke controle op uitgevoerd",
+    "value": "Ondertitels zijn AI-gegenereerd door meemoo, er werd geen menselijke controle op uitgevoerd",
     "value_type": "TEXT"
   },
   {
@@ -50676,7 +50676,7 @@
     "location": "modules/shared/components/audio-or-video-player/audio-or-video-player",
     "key": "ondertitels-zijn-ai-gegenereerd-door-meemoo-er-werd-geen-menselijke-controle-op-uitgevoerd",
     "language": "en",
-    "value": "Ondertitels zijn ai gegenereerd door meemoo er werd geen menselijke controle op uitgevoerd",
+    "value": "Subtitles were AI-generated by meemoo, no human check or edit has been performed",
     "value_type": "TEXT"
   },
   {
@@ -52226,7 +52226,7 @@
     "location": "modules/visitor-space/utils/metadata/metadata",
     "key": "lees-meer-mobiel",
     "language": "nl",
-    "value": "Lees meer mobiel",
+    "value": "Lees meer",
     "value_type": "TEXT"
   },
   {
@@ -52236,7 +52236,7 @@
     "location": "modules/visitor-space/utils/metadata/metadata",
     "key": "lees-meer-mobiel",
     "language": "en",
-    "value": "Lees meer mobiel",
+    "value": "Read more",
     "value_type": "TEXT"
   },
   {
@@ -53486,7 +53486,7 @@
     "location": "modules/shared/components/subtitles-teaser/subtitles-teaser",
     "key": "probeer-onze-nieuwe-ai-gegenereerde-ondertiteling",
     "language": "nl",
-    "value": "Probeer onze nieuwe ai gegenereerde ondertiteling",
+    "value": "Probeer onze nieuwe AI-gegenereerde ondertiteling",
     "value_type": "TEXT"
   },
   {
@@ -53496,7 +53496,7 @@
     "location": "modules/shared/components/subtitles-teaser/subtitles-teaser",
     "key": "probeer-onze-nieuwe-ai-gegenereerde-ondertiteling",
     "language": "en",
-    "value": "Probeer onze nieuwe ai gegenereerde ondertiteling",
+    "value": "Try our new AI-generated subtitling",
     "value_type": "TEXT"
   },
   {

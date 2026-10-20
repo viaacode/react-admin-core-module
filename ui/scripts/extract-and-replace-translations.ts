@@ -951,7 +951,9 @@ async function extractTranslations() {
 		totalBar.update(0, { pct: pct(0), label: pad('total'), status: '0/3 done' });
 
 		if (app === App.AVO) {
-			[...Array(3).keys()].forEach((i) => makeOnProgress(i)(0, 'starting...'));
+			[...Array(3).keys()].forEach((i) => {
+				makeOnProgress(i)(0, 'starting...');
+			});
 			const [adminCore, client, proxy] = await Promise.all([
 				extractAvoAdminCoreTranslations(allOnlineTranslations, makeOnProgress(0)),
 				extractAvoClientTranslations(allOnlineTranslations, makeOnProgress(1)),
@@ -960,7 +962,9 @@ async function extractTranslations() {
 			allTranslations = [...adminCore, ...client, ...proxy];
 		} else {
 			// HET_ARCHIEF
-			[...Array(3).keys()].forEach((i) => makeOnProgress(i)(0, 'starting...'));
+			[...Array(3).keys()].forEach((i) => {
+				makeOnProgress(i)(0, 'starting...');
+			});
 			const [adminCore, client, proxy] = await Promise.all([
 				extractHetArchiefAdminCoreTranslations(allOnlineTranslations, makeOnProgress(0)),
 				extractHetArchiefClientTranslations(allOnlineTranslations, makeOnProgress(1)),

@@ -1,5 +1,5 @@
 import { Test, type TestingModule } from '@nestjs/testing';
-import { vi, describe, it, expect, beforeEach, afterEach } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { DataService } from '../../data';
 import { type GetOrganisationsQuery as GetOrganisationQueryAvo } from '../../shared/generated/graphql-db-types-avo';

@@ -1,12 +1,10 @@
+import { SortDirection } from 'src/modules/shared/types/sorting';
 import { MaintenanceAlertOrderProp } from '../maintenance-alerts.types';
-
 import {
 	CreateMaintenanceAlertDto,
 	MaintenanceAlertsQueryDto,
 	UpdateMaintenanceAlertDto,
 } from './maintenance-alerts.dto';
-
-import { SortDirection } from '../../shared/types/sorting';
 
 describe('MaintenanceAlertsDto', () => {
 	describe('MaintenanceAlertsQueryDto', () => {

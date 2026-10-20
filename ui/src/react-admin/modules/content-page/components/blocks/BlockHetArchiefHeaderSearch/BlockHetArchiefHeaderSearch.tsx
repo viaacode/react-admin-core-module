@@ -61,6 +61,7 @@ export const BlockHetArchiefHeaderSearch: FunctionComponent<BlockHetArchiefHeade
 						{/* Add first item again at the end for a smooth crossfade animation */}
 						{subtitles.map((subtitle, index) => (
 							<li
+								// biome-ignore lint/suspicious/noArrayIndexKey: the first subtitle is intentionally repeated at the end, labels are not unique
 								key={`animation-text-${subtitle.label}-${index}`}
 								className={clsx('u-background-text-primary', {
 									current: activeIndex === index,

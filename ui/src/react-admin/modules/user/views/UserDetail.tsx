@@ -85,7 +85,7 @@ export const UserDetail: FC<UserDetailProps> = ({
 	const [shouldSendActionEmail, setShouldSendActionEmail] = useState<boolean>(false);
 
 	useEffect(() => {
-		if (!!storedProfile && isFetched) {
+		if (storedProfile && isFetched) {
 			onLoaded?.(storedProfile);
 		}
 	}, [isFetched, onLoaded, storedProfile]);
