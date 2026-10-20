@@ -38,7 +38,6 @@
     }
   },
   "scripts": {
-    "prepare": "cd .. && husky install",
     "dev": "cross-env PORT=3400 dotenv -e .env/.env.local vite",
     "prebuild": "rimraf dist",
     "build": "vite build",
@@ -117,7 +116,7 @@
     "@babel/core": "7.29.7",
     "@babel/plugin-transform-runtime": "7.29.7",
     "@babel/preset-typescript": "7.22.15",
-    "@biomejs/biome": "2.0.0",
+    "@biomejs/biome": "2.3.8",
     "@commitlint/cli": "16.1.0",
     "@commitlint/config-conventional": "16.0.0",
     "@testing-library/jest-dom": "6.9.1",
@@ -147,11 +146,9 @@
     "dotenv": "16.3.1",
     "dotenv-cli": "7.3.0",
     "exitzero": "1.0.1",
-    "husky": "7.0.4",
     "identity-obj-proxy": "3.0.0",
     "jest": "29.7.0",
     "jsdom": "27.4.0",
-    "lefthook": "1.11.14",
     "lodash": "4.17.23",
     "lorem-ipsum": "2.0.8",
     "node-fetch": "3.3.2",
@@ -193,7 +190,6 @@
     "es5-ext@0.10.64": true,
     "esbuild@0.28.1": true,
     "fsevents@2.3.3": true,
-    "lefthook@1.11.14": true,
     "esbuild@0.23.1": true
   }
 }

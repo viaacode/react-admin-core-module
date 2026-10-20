@@ -1,42 +1,46 @@
-# EXAMPLE USAGE:
-#
-#   Refer for explanation to following link:
-#   https://lefthook.dev/configuration/
-#
-# pre-push:
-#   jobs:
-#     - name: packages audit
-#       tags:
-#         - frontend
-#         - security
-#       run: yarn audit
-#
-#     - name: gems audit
-#       tags:
-#         - backend
-#         - security
-#       run: bundle audit
-#
-# pre-commit:
-#   parallel: true
-#   jobs:
-#     - run: yarn eslint {staged_files}
-#       glob: "*.{js,ts,jsx,tsx}"
-#
-#     - name: rubocop
-#       glob: "*.rb"
-#       exclude:
-#         - config/application.rb
-#         - config/routes.rb
-#       run: bundle exec rubocop --force-exclusion {all_files}
-#
-#     - name: govet
-#       files: git ls-files -m
-#       glob: "*.go"
-#       run: go vet {files}
-#
-#     - script: "hello.js"
-#       runner: node
-#
-#     - script: "hello.go"
-#       runner: go run
+pre-commit:
+  parallel: true
+  jobs:
+    - name: ui-stylelint
+      root: "ui/"
+      glob: "*.{css,scss}"
+      run: npx stylelint --fix {staged_files}
+      stage_fixed: true
+
+    - name: ui-biome
+      root: "ui/"
+      glob: "*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc}"
+      run: npx @biomejs/biome check --write --no-errors-on-unmatched --files-ignore-unknown=true --colors=off {staged_files}
+      stage_fixed: true
+
+    - name: ui-typescript
+      root: "ui/"
+      glob: "*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx}"
+      run: npx tsc --noEmit --skipLibCheck --pretty --jsx preserve --project ./tsconfig.json
+
+    - name: api-biome
+      root: "api/"
+      glob: "*.{js,ts,cjs,mjs,d.cts,d.mts,json,jsonc}"
+      run: npx @biomejs/biome check --write --no-errors-on-unmatched --files-ignore-unknown=true --colors=off {staged_files}
+      stage_fixed: true
+
+    - name: api-typescript
+      root: "api/"
+      glob: "*.{js,ts,cjs,mjs,d.cts,d.mts}"
+      run: npx tsc --noEmit --skipLibCheck --pretty --project ./tsconfig.json
+
+    - name: no-local-file-dependencies
+      glob: "{package.json,package-lock.json,ui/package.json,ui/package-lock.json,api/package.json,api/package-lock.json}"
+      run: |
+        if grep -lE '"(file:\.\./|resolved": "\.\./)' {staged_files}; then
+          echo 'package.json / package-lock.json should not contain locally linked packages, eg: "@meemoo/react-components": "file:../../react-components"'
+          exit 1
+        fi
+
+    - name: aikido-secrets
+      run: |
+        if [ -x "$HOME/.local/bin/aikido-local-scanner" ]; then
+          "$HOME/.local/bin/aikido-local-scanner" pre-commit-scan "$(git rev-parse --show-toplevel)"
+        else
+          echo "Aikido local scanner not installed, skipping secrets scan: https://help.aikido.dev/code-scanning/local-code-scanning/aikido-secrets-pre-commit-hook"
+        fi
