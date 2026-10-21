@@ -57226,7 +57226,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "keer-terug-mobiel",
     "language": "nl",
-    "value": "Keer terug mobiel",
+    "value": "Keer terug",
     "value_type": "TEXT"
   },
   {
@@ -57236,7 +57236,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "keer-terug-mobiel",
     "language": "en",
-    "value": "Go back mobile",
+    "value": "Go back",
     "value_type": "TEXT"
   },
   {
