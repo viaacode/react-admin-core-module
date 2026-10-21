@@ -16,7 +16,12 @@
 	  // This is a recent css feature. Doesn't work for Firefox ≤153, Chrome/Edge ≤132, and Safari ≤18.1
 	  // But support should grow fast, and not supporting this has a graceful fallback,
 	  // where the alignment of image and text isn't perfect
-      text-box: trim-start cap alphabetic;
+      // Skip it when the first line holds an inline image: the trim then cuts the line box down to
+      // the cap height of the text, and the image overflowing it gets clipped by the content's
+      // overflow: auto. https://meemoo.atlassian.net/browse/ARC-4085
+      &:not(:has(img)) {
+        text-box: trim-start cap alphabetic;
+      }
     }
   }
 
