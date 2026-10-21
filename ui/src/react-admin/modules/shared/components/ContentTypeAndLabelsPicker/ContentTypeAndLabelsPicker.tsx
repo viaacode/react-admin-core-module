@@ -128,10 +128,10 @@ export const ContentTypeAndLabelsPicker: FunctionComponent<ContentTypeAndLabelsP
 						allowCreate={false}
 						value={getSelectedLabelObjects()}
 						onChange={handleLabelsChanged}
-						disabled={!value || !value.selectedContentType}
+						disabled={!value?.selectedContentType}
 						isLoading={isLoading}
 						placeholder={
-							!value || !value.selectedContentType
+							!value?.selectedContentType
 								? tText(
 										'admin/shared/components/content-type-and-labels-picker/content-type-and-labels-picker___kies-eerst-een-content-type'
 									)

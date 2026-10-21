@@ -198,7 +198,7 @@ export const ContentPageOverview: FC = () => {
 		} else {
 			userGroupPath = 'profile.profile_user_group.group.id';
 			// Avo group ids are numbers
-			set(filtersFormatted, userGroupPath, Number.parseInt(get(filtersFormatted, userGroupPath)));
+			set(filtersFormatted, userGroupPath, Number.parseInt(get(filtersFormatted, userGroupPath), 10));
 		}
 		andFilters.push(
 			...getMultiOptionFilters(
@@ -391,7 +391,7 @@ export const ContentPageOverview: FC = () => {
 
 			case 'labels': {
 				const labels = contentPage[columnId];
-				if (!labels || !labels.length) {
+				if (!labels?.length) {
 					return '-';
 				}
 				return (
@@ -409,7 +409,7 @@ export const ContentPageOverview: FC = () => {
 
 			case 'userGroupIds': {
 				const contentPageUserGroupIds = contentPage[columnId];
-				if (!contentPageUserGroupIds || !contentPageUserGroupIds.length) {
+				if (!contentPageUserGroupIds?.length) {
 					return '-';
 				}
 				return (

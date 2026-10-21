@@ -240,8 +240,7 @@ export const ContentPageLabelEdit: FunctionComponent<ContentPageLabelEditProps> 
 			return;
 		}
 		return (
-			<>
-				<Container size="medium">
+			<Container size="medium">
 					<Spacer margin="bottom-extra-large">
 						<Box backgroundColor="gray">
 							<Form>
@@ -354,7 +353,6 @@ export const ContentPageLabelEdit: FunctionComponent<ContentPageLabelEditProps> 
 						</Box>
 					</Spacer>
 				</Container>
-			</>
 		);
 	};
 
@@ -397,13 +395,11 @@ export const ContentPageLabelEdit: FunctionComponent<ContentPageLabelEditProps> 
 	);
 
 	return (
-		<>
-			<LoadingErrorLoadedComponent
+		<LoadingErrorLoadedComponent
 				loadingInfo={loadingInfo}
 				dataObject={contentPageLabelInfo}
 				render={renderPage}
 				locationId="content-page-label-edit"
 			/>
-		</>
 	);
 };

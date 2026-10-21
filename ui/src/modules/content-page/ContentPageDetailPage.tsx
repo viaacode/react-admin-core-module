@@ -12,12 +12,10 @@ export const ContentPageDetailPage: FC = () => {
 		return null;
 	}
 	return (
-		<>
-			<ContentPageDetail
+		<ContentPageDetail
 				id={contentPageId}
 				commonUser={getMockCommonUser()}
 				onGoBack={() => window.history.back()}
 			/>
-		</>
 	);
 };

@@ -23,7 +23,7 @@ export const BlockTitleWithParallax: FunctionComponent<BlockTitleWithParallaxPro
 	subtitle,
 	image,
 	showGradient = true,
-}): ReactElement => {
+}): ReactElement | null => {
 	const rootRef = useRef<HTMLDivElement>(null);
 	const imageRef = useRef<HTMLDivElement>(null);
 
@@ -95,7 +95,7 @@ export const BlockTitleWithParallax: FunctionComponent<BlockTitleWithParallaxPro
 	}, [image]);
 
 	if (!visualType) {
-		return <></>;
+		return null;
 	}
 
 	return (

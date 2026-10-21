@@ -323,8 +323,7 @@ export const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> 
 			);
 		}
 		return (
-			<>
-				<Table<TranslationEntry | MultiLanguageTranslationEntry>
+			<Table<TranslationEntry | MultiLanguageTranslationEntry>
 					options={{
 						columns: translationTableColumns,
 						data: filteredAndPaginatedTranslations,
@@ -340,7 +339,6 @@ export const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> 
 					pagination={getPagination}
 					enableRowFocusOnClick={isHetArchief()}
 				/>
-			</>
 		);
 	};
 

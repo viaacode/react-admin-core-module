@@ -51,7 +51,7 @@ export class AssetsService {
 				body: JSON.stringify(body),
 			});
 
-			if (!reply || reply.status !== 'deleted') {
+			if (reply?.status !== 'deleted') {
 				throw new CustomError(
 					'Unexpected response from admin/assets/delete endpoint. Expected {status: deleted}',
 					null,

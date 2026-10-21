@@ -164,7 +164,7 @@ export const ContentPageRenderer: FunctionComponent<ContentPageDetailProps> = (p
 		);
 
 		if (isAdminRoute() || isContentPagePreview() || !userCanEditPage) {
-			return <></>;
+			return null;
 		}
 
 		const renderHyperlink = (button: React.ReactNode) => {

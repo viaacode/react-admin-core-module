@@ -607,7 +607,6 @@ export function getFilters(tableState: any | undefined | null): any {
 	}
 
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	// biome-ignore lint/correctness/noUnusedVariables: unused only because we want to remove these from the filters by destructuring
 	const { page, sort_column, sort_order, ...filters } = tableState;
 
 	return cleanupFilterTableState(filters);

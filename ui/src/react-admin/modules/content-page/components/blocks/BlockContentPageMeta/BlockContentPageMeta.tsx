@@ -38,7 +38,7 @@ export const BlockContentPageMeta: FunctionComponent<ContentPageMetaProps> = ({
 	};
 
 	const renderLabels = (): ReactNode => {
-		if (!contentPageInfo.labels || !contentPageInfo.labels.length) {
+		if (!contentPageInfo.labels?.length) {
 			return null;
 		}
 

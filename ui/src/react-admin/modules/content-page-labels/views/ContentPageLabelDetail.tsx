@@ -118,8 +118,7 @@ export const ContentPageLabelDetail: FunctionComponent<ContentPageLabelDetailPro
 				: contentPageLabelInfo.color;
 
 		return (
-			<>
-				<Table horizontal variant="invisible" className="c-table_detail-page">
+			<Table horizontal variant="invisible" className="c-table_detail-page">
 					<tbody>
 						{renderSimpleDetailRows(contentPageLabelInfo, [
 							['label', tText('admin/content-page-labels/views/content-page-label-detail___label')],
@@ -171,7 +170,6 @@ export const ContentPageLabelDetail: FunctionComponent<ContentPageLabelDetailPro
 						])}
 					</tbody>
 				</Table>
-			</>
 		);
 	};
 
@@ -213,13 +211,11 @@ export const ContentPageLabelDetail: FunctionComponent<ContentPageLabelDetailPro
 	};
 
 	return (
-		<>
-			<LoadingErrorLoadedComponent
+		<LoadingErrorLoadedComponent
 				loadingInfo={loadingInfo}
 				dataObject={contentPageLabelInfo}
 				render={renderPage}
 				locationId="content-page-label-detail"
 			/>
-		</>
 	);
 };

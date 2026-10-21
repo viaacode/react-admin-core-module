@@ -73,13 +73,11 @@ export const SearchDropdown: FC<SearchDropdownProps> = ({
 				</button>
 			</DropdownButton>
 			<DropdownContent>
-				{/* biome-ignore lint/a11y/useSemanticElements: Dropdown options */}
 				{/* biome-ignore lint/a11y/noNoninteractiveElementToInteractiveRole: Dropdown options */}
 				<ul className="u-list-reset c-search-dropdown__list" role="listbox">
 					{options.map((option: SearchDropdownOption) => (
 						<li
 							key={option.id}
-							// biome-ignore lint/a11y/useSemanticElements: Dropdown options
 							// biome-ignore lint/a11y/noNoninteractiveElementToInteractiveRole: Dropdown options
 							role="option"
 							tabIndex={isOpen ? 0 : -1}
