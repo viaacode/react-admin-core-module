@@ -1,4 +1,4 @@
-import { SortDirection } from 'src/modules/shared/types/sorting';
+import { SortDirection } from '../../shared/types/sorting';
 import { MaintenanceAlertOrderProp } from '../maintenance-alerts.types';
 import {
 	CreateMaintenanceAlertDto,

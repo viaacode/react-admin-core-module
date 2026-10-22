@@ -66,8 +66,8 @@ export class DataService {
 						? query
 						: // biome-ignore lint/suspicious/noExplicitAny: any query type
 							((query as TypedDocumentNode<any, any>)?.definitions?.[0] as any)?.name?.value,
-					variables,
-					graphqlErrors: data.errors,
+					variables: JSON.stringify(variables, null, 2),
+					graphqlErrors: JSON.stringify(data.errors, null, 2),
 				});
 				console.log(error);
 				if (data.errors[0]?.extensions?.code === 'constraint-violation') {
