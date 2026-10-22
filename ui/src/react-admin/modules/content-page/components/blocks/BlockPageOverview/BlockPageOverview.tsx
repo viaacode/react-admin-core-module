@@ -386,9 +386,7 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 				})
 			);
 			// Put the pages that do not have a label under their own category
-			clientPagesByLabel[noLabelObj.id] = pages.filter(
-				(page) => !page.labels?.length
-			);
+			clientPagesByLabel[noLabelObj.id] = pages.filter((page) => !page.labels?.length);
 			const labelsToShow: LabelObj[] = showAllLabels ? [...uniqueLabels, noLabelObj] : selectedTabs;
 
 			// Render each page under their label section (can have duplicates)

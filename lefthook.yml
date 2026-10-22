@@ -40,7 +40,12 @@ pre-commit:
     - name: aikido-secrets
       run: |
         if [ -x "$HOME/.local/bin/aikido-local-scanner" ]; then
-          "$HOME/.local/bin/aikido-local-scanner" pre-commit-scan "$(git rev-parse --show-toplevel)"
+          # The generated translation dumps contain long kebab-case keys that are flagged as generic API keys
+          "$HOME/.local/bin/aikido-local-scanner" pre-commit-scan "$(git rev-parse --show-toplevel)" \
+            --exclude ui/all-translations-avo.json \
+            --exclude ui/all-translations-avo.sql \
+            --exclude ui/all-translations-het-archief.json \
+            --exclude ui/all-translations-het-archief.sql
         else
           echo "Aikido local scanner not installed, skipping secrets scan: https://help.aikido.dev/code-scanning/local-code-scanning/aikido-secrets-pre-commit-hook"
         fi

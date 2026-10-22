@@ -241,118 +241,114 @@ export const ContentPageLabelEdit: FunctionComponent<ContentPageLabelEditProps> 
 		}
 		return (
 			<Container size="medium">
-					<Spacer margin="bottom-extra-large">
-						<Box backgroundColor="gray">
-							<Form>
+				<Spacer margin="bottom-extra-large">
+					<Box backgroundColor="gray">
+						<Form>
+							<FormGroup
+								label={tText('admin/content-page-labels/views/content-page-label-edit___label')}
+								error={formErrors.label}
+								required
+							>
+								<TextInput
+									value={contentPageLabelInfo.label || ''}
+									onChange={(newLabel: string) =>
+										setContentPageLabelInfo({
+											...contentPageLabelInfo,
+											label: newLabel,
+										})
+									}
+								/>
+							</FormGroup>
+							<FormGroup
+								label={tText(
+									'admin/content-page-labels/views/content-page-label-edit___content-pagina-type'
+								)}
+								error={formErrors.content_type}
+							>
+								<Select
+									options={contentTypes}
+									value={contentPageLabelInfo.content_type}
+									onChange={(newContentType) =>
+										setContentPageLabelInfo({
+											...contentPageLabelInfo,
+											content_type: newContentType as AvoContentPageType,
+										})
+									}
+								/>
+							</FormGroup>
+							{isMultiLanguageEnabled() && (
 								<FormGroup
-									label={tText('admin/content-page-labels/views/content-page-label-edit___label')}
-									error={formErrors.label}
-									required
-								>
-									<TextInput
-										value={contentPageLabelInfo.label || ''}
-										onChange={(newLabel: string) =>
-											setContentPageLabelInfo({
-												...contentPageLabelInfo,
-												label: newLabel,
-											})
-										}
-									/>
-								</FormGroup>
-								<FormGroup
-									label={tText(
-										'admin/content-page-labels/views/content-page-label-edit___content-pagina-type'
-									)}
-									error={formErrors.content_type}
+									label={tText('modules/content-page-labels/views/content-page-label-edit___taal')}
+									error={formErrors.language}
+									className="c-multilanguage-controls"
 								>
 									<Select
-										options={contentTypes}
-										value={contentPageLabelInfo.content_type}
-										onChange={(newContentType) =>
+										options={languageOptions}
+										value={contentPageLabelInfo.language}
+										onChange={(newLanguage) =>
 											setContentPageLabelInfo({
 												...contentPageLabelInfo,
-												content_type: newContentType as AvoContentPageType,
+												language: newLanguage as Locale,
 											})
 										}
 									/>
 								</FormGroup>
-								{isMultiLanguageEnabled() && (
-									<FormGroup
-										label={tText(
-											'modules/content-page-labels/views/content-page-label-edit___taal'
-										)}
-										error={formErrors.language}
-										className="c-multilanguage-controls"
-									>
-										<Select
-											options={languageOptions}
-											value={contentPageLabelInfo.language}
-											onChange={(newLanguage) =>
-												setContentPageLabelInfo({
-													...contentPageLabelInfo,
-													language: newLanguage as Locale,
-												})
-											}
-										/>
-									</FormGroup>
-								)}
-								{isHetArchief() && (
-									<FormGroup
-										label={tText(
-											'modules/content-page-labels/views/content-page-label-edit___achtergrondkleur',
-											{},
-											[App.HET_ARCHIEF]
-										)}
-										required
-									>
-										<ColorSelect
-											options={GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF()}
-											value={GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF().find(
-												(option) => option.value === contentPageLabelInfo.color
-											)}
-											onChange={(newColor) =>
-												setContentPageLabelInfo({
-													...contentPageLabelInfo,
-													color: (
-														newColor as { value: Color | GradientColor | CustomBackground } | null
-													)?.value,
-												})
-											}
-										/>
-									</FormGroup>
-								)}
+							)}
+							{isHetArchief() && (
 								<FormGroup
 									label={tText(
-										'admin/content-page-labels/views/content-page-label-edit___link-naar'
+										'modules/content-page-labels/views/content-page-label-edit___achtergrondkleur',
+										{},
+										[App.HET_ARCHIEF]
 									)}
-									error={formErrors.link_to}
+									required
 								>
-									<ContentPicker
-										allowedTypes={getLinkToAllowedTypes()}
-										onChange={(newLinkTo) =>
+									<ColorSelect
+										options={GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF()}
+										value={GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF().find(
+											(option) => option.value === contentPageLabelInfo.color
+										)}
+										onChange={(newColor) =>
 											setContentPageLabelInfo({
 												...contentPageLabelInfo,
-												link_to: newLinkTo,
+												color: (
+													newColor as { value: Color | GradientColor | CustomBackground } | null
+												)?.value,
 											})
-										}
-										value={
-											contentPageLabelInfo?.link_to?.value
-												? {
-														label: isNil(contentPageLabelInfo.link_to?.value)
-															? undefined
-															: String(contentPageLabelInfo.link_to?.value),
-														type: contentPageLabelInfo.link_to?.type || 'CONTENT_PAGE',
-														value: String(contentPageLabelInfo?.link_to?.value),
-														target: contentPageLabelInfo?.link_to?.target,
-													}
-												: undefined
 										}
 									/>
 								</FormGroup>
-							</Form>
-						</Box>
-					</Spacer>
-				</Container>
+							)}
+							<FormGroup
+								label={tText('admin/content-page-labels/views/content-page-label-edit___link-naar')}
+								error={formErrors.link_to}
+							>
+								<ContentPicker
+									allowedTypes={getLinkToAllowedTypes()}
+									onChange={(newLinkTo) =>
+										setContentPageLabelInfo({
+											...contentPageLabelInfo,
+											link_to: newLinkTo,
+										})
+									}
+									value={
+										contentPageLabelInfo?.link_to?.value
+											? {
+													label: isNil(contentPageLabelInfo.link_to?.value)
+														? undefined
+														: String(contentPageLabelInfo.link_to?.value),
+													type: contentPageLabelInfo.link_to?.type || 'CONTENT_PAGE',
+													value: String(contentPageLabelInfo?.link_to?.value),
+													target: contentPageLabelInfo?.link_to?.target,
+												}
+											: undefined
+									}
+								/>
+							</FormGroup>
+						</Form>
+					</Box>
+				</Spacer>
+			</Container>
 		);
 	};
 
@@ -396,10 +392,10 @@ export const ContentPageLabelEdit: FunctionComponent<ContentPageLabelEditProps> 
 
 	return (
 		<LoadingErrorLoadedComponent
-				loadingInfo={loadingInfo}
-				dataObject={contentPageLabelInfo}
-				render={renderPage}
-				locationId="content-page-label-edit"
-			/>
+			loadingInfo={loadingInfo}
+			dataObject={contentPageLabelInfo}
+			render={renderPage}
+			locationId="content-page-label-edit"
+		/>
 	);
 };

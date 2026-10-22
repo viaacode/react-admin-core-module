@@ -13,9 +13,9 @@ export const ContentPageDetailPage: FC = () => {
 	}
 	return (
 		<ContentPageDetail
-				id={contentPageId}
-				commonUser={getMockCommonUser()}
-				onGoBack={() => window.history.back()}
-			/>
+			id={contentPageId}
+			commonUser={getMockCommonUser()}
+			onGoBack={() => window.history.back()}
+		/>
 	);
 };

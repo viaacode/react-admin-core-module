@@ -198,7 +198,11 @@ export const ContentPageOverview: FC = () => {
 		} else {
 			userGroupPath = 'profile.profile_user_group.group.id';
 			// Avo group ids are numbers
-			set(filtersFormatted, userGroupPath, Number.parseInt(get(filtersFormatted, userGroupPath), 10));
+			set(
+				filtersFormatted,
+				userGroupPath,
+				Number.parseInt(get(filtersFormatted, userGroupPath), 10)
+			);
 		}
 		andFilters.push(
 			...getMultiOptionFilters(
