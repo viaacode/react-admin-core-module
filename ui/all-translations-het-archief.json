@@ -27704,6 +27704,106 @@
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
     "location": "modules/search/search-page",
+    "key": "1-object-is-verwijderd-uit-de-map-folders",
+    "language": "nl",
+    "value": "1 object is verwijderd uit de map {{folders}}",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/search/search-page",
+    "key": "1-object-is-verwijderd-uit-de-map-folders",
+    "language": "en",
+    "value": "1 object is verwijderd uit de map {{folders}}",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/search/search-page",
+    "key": "1-object-is-verwijderd-uit-de-mappen-folders",
+    "language": "nl",
+    "value": "1 object is verwijderd uit de mappen {{folders}}",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/search/search-page",
+    "key": "1-object-is-verwijderd-uit-de-mappen-folders",
+    "language": "en",
+    "value": "1 object is verwijderd uit de mappen {{folders}}",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/search/search-page",
+    "key": "count-objecten-zijn-verwijderd-uit-de-map-folders",
+    "language": "nl",
+    "value": "{{count}} objecten zijn verwijderd uit de map {{folders}}",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/search/search-page",
+    "key": "count-objecten-zijn-verwijderd-uit-de-map-folders",
+    "language": "en",
+    "value": "{{count}} objecten zijn verwijderd uit de map {{folders}}",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/search/search-page",
+    "key": "count-objecten-zijn-verwijderd-uit-de-mappen-folders",
+    "language": "nl",
+    "value": "{{count}} objecten zijn verwijderd uit de mappen {{folders}}",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/search/search-page",
+    "key": "count-objecten-zijn-verwijderd-uit-de-mappen-folders",
+    "language": "en",
+    "value": "{{count}} objecten zijn verwijderd uit de mappen {{folders}}",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/search/search-page",
+    "key": "mappen-aangepast",
+    "language": "nl",
+    "value": "Mappen aangepast",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/search/search-page",
+    "key": "mappen-aangepast",
+    "language": "en",
+    "value": "Mappen aangepast",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/search/search-page",
     "key": "objecten-bewaard",
     "language": "nl",
     "value": "Objecten bewaard",
@@ -50484,9 +50584,9 @@
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
     "location": "modules/search/components/multiselect-action-bar/multiselect-action-bar",
-    "key": "te-veel-resultaten-om-alles-te-selecteren",
+    "key": "alle-count-max-resultaten-selecteren",
     "language": "nl",
-    "value": "Deze zoekactie geeft te veel resultaten om ze allemaal in 1 keer te selecteren (max. {{max}})",
+    "value": "Alle {{count}} (max) resultaten selecteren",
     "value_type": "TEXT"
   },
   {
@@ -50494,9 +50594,9 @@
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
     "location": "modules/search/components/multiselect-action-bar/multiselect-action-bar",
-    "key": "te-veel-resultaten-om-alles-te-selecteren",
+    "key": "alle-count-max-resultaten-selecteren",
     "language": "en",
-    "value": "Deze zoekactie geeft te veel resultaten om ze allemaal in 1 keer te selecteren (max. {{max}})",
+    "value": "Alle {{count}} (max) resultaten selecteren",
     "value_type": "TEXT"
   },
   {
@@ -50504,9 +50604,9 @@
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
     "location": "modules/search/components/multiselect-action-bar/multiselect-action-bar",
-    "key": "selecteer-alle-count-resultaten",
+    "key": "alle-count-resultaten-selecteren",
     "language": "nl",
-    "value": "Selecteer alle {{count}} resultaten",
+    "value": "Alle {{count}} resultaten selecteren",
     "value_type": "TEXT"
   },
   {
@@ -50514,9 +50614,29 @@
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
     "location": "modules/search/components/multiselect-action-bar/multiselect-action-bar",
-    "key": "selecteer-alle-count-resultaten",
+    "key": "alle-count-resultaten-selecteren",
     "language": "en",
-    "value": "Selecteer alle {{count}} resultaten",
+    "value": "Alle {{count}} resultaten selecteren",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/search/components/multiselect-action-bar/multiselect-action-bar",
+    "key": "alles-selecteren",
+    "language": "nl",
+    "value": "Alles selecteren",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/search/components/multiselect-action-bar/multiselect-action-bar",
+    "key": "alles-selecteren",
+    "language": "en",
+    "value": "Alles selecteren",
     "value_type": "TEXT"
   },
   {
@@ -50544,9 +50664,9 @@
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
     "location": "modules/search/components/multiselect-action-bar/multiselect-action-bar",
-    "key": "1-object-geselecteerd",
+    "key": "count-geselecteerd",
     "language": "nl",
-    "value": "1 object geselecteerd",
+    "value": "{{count}} geselecteerd",
     "value_type": "TEXT"
   },
   {
@@ -50554,9 +50674,9 @@
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
     "location": "modules/search/components/multiselect-action-bar/multiselect-action-bar",
-    "key": "1-object-geselecteerd",
+    "key": "count-geselecteerd",
     "language": "en",
-    "value": "1 object geselecteerd",
+    "value": "{{count}} geselecteerd",
     "value_type": "TEXT"
   },
   {
@@ -50564,9 +50684,9 @@
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
     "location": "modules/search/components/multiselect-action-bar/multiselect-action-bar",
-    "key": "count-objecten-geselecteerd",
+    "key": "bewaar-in-mappen",
     "language": "nl",
-    "value": "{{count}} objecten geselecteerd",
+    "value": "Bewaar in mappen",
     "value_type": "TEXT"
   },
   {
@@ -50574,89 +50694,9 @@
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
     "location": "modules/search/components/multiselect-action-bar/multiselect-action-bar",
-    "key": "count-objecten-geselecteerd",
+    "key": "bewaar-in-mappen",
     "language": "en",
-    "value": "{{count}} objecten geselecteerd",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/search/components/multiselect-action-bar/multiselect-action-bar",
-    "key": "deselecteer-alles",
-    "language": "nl",
-    "value": "Deselecteer alles",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/search/components/multiselect-action-bar/multiselect-action-bar",
-    "key": "deselecteer-alles",
-    "language": "en",
-    "value": "Deselecteer alles",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/search/components/multiselect-action-bar/multiselect-action-bar",
-    "key": "selecteer-alles",
-    "language": "nl",
-    "value": "Selecteer alles",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/search/components/multiselect-action-bar/multiselect-action-bar",
-    "key": "selecteer-alles",
-    "language": "en",
-    "value": "Selecteer alles",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/search/components/multiselect-action-bar/multiselect-action-bar",
-    "key": "bewaren-in-map-pen",
-    "language": "nl",
-    "value": "Bewaren in map(pen)",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/search/components/multiselect-action-bar/multiselect-action-bar",
-    "key": "bewaren-in-map-pen",
-    "language": "en",
-    "value": "Bewaren in map(pen)",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/search/components/multiselect-action-bar/multiselect-action-bar",
-    "key": "sluiten",
-    "language": "nl",
-    "value": "Sluiten",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/search/components/multiselect-action-bar/multiselect-action-bar",
-    "key": "sluiten",
-    "language": "en",
-    "value": "Sluiten",
+    "value": "Bewaar in mappen",
     "value_type": "TEXT"
   },
   {
@@ -50777,6 +50817,26 @@
     "key": "selecteer-title",
     "language": "en",
     "value": "Selecteer {{title}}",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/search/components/result-card-bookmark-slot/result-card-bookmark-slot",
+    "key": "geselecteerd",
+    "language": "nl",
+    "value": "Geselecteerd",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/search/components/result-card-bookmark-slot/result-card-bookmark-slot",
+    "key": "geselecteerd",
+    "language": "en",
+    "value": "Geselecteerd",
     "value_type": "TEXT"
   },
   {
@@ -50837,26 +50897,6 @@
     "key": "bewaar-title-in-een-map",
     "language": "en",
     "value": "Bewaar {{title}} in een map",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/search/components/selectable-media-card/selectable-media-card",
-    "key": "dit-object-zit-al-in-een-map",
-    "language": "nl",
-    "value": "Dit object zit al in een map",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/search/components/selectable-media-card/selectable-media-card",
-    "key": "dit-object-zit-al-in-een-map",
-    "language": "en",
-    "value": "Dit object zit al in een map",
     "value_type": "TEXT"
   },
   {
@@ -56064,6 +56104,26 @@
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
     "location": "modules/visitor-space/components/add-to-folder-blade/add-to-folder-blade",
+    "key": "opslaan",
+    "language": "nl",
+    "value": "Opslaan",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/add-to-folder-blade/add-to-folder-blade",
+    "key": "opslaan",
+    "language": "en",
+    "value": "Opslaan",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/add-to-folder-blade/add-to-folder-blade",
     "key": "voeg-toe",
     "language": "nl",
     "value": "Voeg toe",
@@ -56077,6 +56137,26 @@
     "key": "voeg-toe",
     "language": "en",
     "value": "Add to",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/add-to-folder-blade/add-to-folder-blade",
+    "key": "opslaan-mobiel",
+    "language": "nl",
+    "value": "Opslaan",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/add-to-folder-blade/add-to-folder-blade",
+    "key": "opslaan-mobiel",
+    "language": "en",
+    "value": "Opslaan",
     "value_type": "TEXT"
   },
   {
@@ -56138,6 +56218,106 @@
     "language": "en",
     "value": "Cancel",
     "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/add-to-folder-blade/add-to-folder-blade",
+    "key": "count-van-de-total-objecten-zitten-al-in-deze-map",
+    "language": "nl",
+    "value": "{{count}} van de {{total}} objecten zitten al in deze map",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/add-to-folder-blade/add-to-folder-blade",
+    "key": "count-van-de-total-objecten-zitten-al-in-deze-map",
+    "language": "en",
+    "value": "{{count}} van de {{total}} objecten zitten al in deze map",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/add-to-folder-blade/add-to-folder-blade",
+    "key": "1-object-wordt-aan-deze-map-toegevoegd",
+    "language": "nl",
+    "value": "1 object wordt aan deze map toegevoegd",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/add-to-folder-blade/add-to-folder-blade",
+    "key": "1-object-wordt-aan-deze-map-toegevoegd",
+    "language": "en",
+    "value": "1 object wordt aan deze map toegevoegd",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/add-to-folder-blade/add-to-folder-blade",
+    "key": "count-objecten-worden-aan-deze-map-toegevoegd",
+    "language": "nl",
+    "value": "{{count}} objecten worden aan deze map toegevoegd",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/add-to-folder-blade/add-to-folder-blade",
+    "key": "count-objecten-worden-aan-deze-map-toegevoegd",
+    "language": "en",
+    "value": "{{count}} objecten worden aan deze map toegevoegd",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/add-to-folder-blade/add-to-folder-blade",
+    "key": "1-object-wordt-uit-deze-map-verwijderd",
+    "language": "nl",
+    "value": "1 object wordt uit deze map verwijderd",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/add-to-folder-blade/add-to-folder-blade",
+    "key": "1-object-wordt-uit-deze-map-verwijderd",
+    "language": "en",
+    "value": "1 object wordt uit deze map verwijderd",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/add-to-folder-blade/add-to-folder-blade",
+    "key": "count-objecten-worden-uit-deze-map-verwijderd",
+    "language": "nl",
+    "value": "{{count}} objecten worden uit deze map verwijderd",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/add-to-folder-blade/add-to-folder-blade",
+    "key": "count-objecten-worden-uit-deze-map-verwijderd",
+    "language": "en",
+    "value": "{{count}} objecten worden uit deze map verwijderd",
+    "value_type": "HTML"
   },
   {
     "id": "",
@@ -56304,66 +56484,6 @@
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
     "location": "modules/visitor-space/components/add-to-folder-blade/add-to-folder-blade",
-    "key": "verwijder-uit-selectie",
-    "language": "nl",
-    "value": "Verwijder uit selectie",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/add-to-folder-blade/add-to-folder-blade",
-    "key": "verwijder-uit-selectie",
-    "language": "en",
-    "value": "Verwijder uit selectie",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/add-to-folder-blade/add-to-folder-blade",
-    "key": "count-meer",
-    "language": "nl",
-    "value": "+ {{count}} meer",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/add-to-folder-blade/add-to-folder-blade",
-    "key": "count-meer",
-    "language": "en",
-    "value": "+ {{count}} meer",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/add-to-folder-blade/add-to-folder-blade",
-    "key": "toon-alle-count-geselecteerde-objecten",
-    "language": "nl",
-    "value": "Toon alle {{count}} geselecteerde objecten",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/add-to-folder-blade/add-to-folder-blade",
-    "key": "toon-alle-count-geselecteerde-objecten",
-    "language": "en",
-    "value": "Toon alle {{count}} geselecteerde objecten",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/add-to-folder-blade/add-to-folder-blade",
     "key": "voeg-toe-aan-map",
     "language": "nl",
     "value": "Voeg toe aan jouw map",
@@ -56384,9 +56504,9 @@
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
     "location": "modules/visitor-space/components/add-to-folder-blade/add-to-folder-blade",
-    "key": "kies-de-map-pen-waarin-je-deze-count-objecten-wil-bewaren",
+    "key": "kies-de-mappen-waarin-je-deze-count-objecten-wil-bewaren",
     "language": "nl",
-    "value": "Kies de map(pen) waarin je deze {{count}} objecten wil bewaren",
+    "value": "Kies de mappen waarin je deze {{count}} objecten wil bewaren",
     "value_type": "HTML"
   },
   {
@@ -56394,9 +56514,9 @@
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
     "location": "modules/visitor-space/components/add-to-folder-blade/add-to-folder-blade",
-    "key": "kies-de-map-pen-waarin-je-deze-count-objecten-wil-bewaren",
+    "key": "kies-de-mappen-waarin-je-deze-count-objecten-wil-bewaren",
     "language": "en",
-    "value": "Kies de map(pen) waarin je deze {{count}} objecten wil bewaren",
+    "value": "Kies de mappen waarin je deze {{count}} objecten wil bewaren",
     "value_type": "HTML"
   },
   {
