@@ -17,8 +17,6 @@ import {
 	UseGuards,
 } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
-import type { IPagination } from '../../shared/types/pagination';
-
 import {
 	type AvoContentPageType,
 	AvoFileUploadAssetType,
@@ -26,13 +24,13 @@ import {
 	PermissionName,
 } from '@viaa/avo2-types';
 import type { Request } from 'express';
-
 import { AssetsService } from '../../assets';
 import { RequireAnyPermissions } from '../../shared/decorators/require-any-permissions.decorator';
 import { SessionUser } from '../../shared/decorators/user.decorator';
 import { ApiKeyGuard } from '../../shared/guards/api-key.guard';
 import { addPrefix } from '../../shared/helpers/add-route-prefix';
 import { CustomError } from '../../shared/helpers/error';
+import type { IPagination } from '../../shared/types/pagination';
 import type { Locale } from '../../translations';
 import type { SessionUserEntity } from '../../users/classes/session-user';
 import { CONTENT_PAGE_COPY, CONTENT_PAGE_COPY_REGEX } from '../content-pages.consts';
@@ -115,7 +113,8 @@ export class ContentPagesController {
 			const user = sessionUser?.getUser();
 			const contentPage = await this.contentPagesService.getContentPageByLanguageAndPathForUser(
 				language || (user?.language as Locale),
-				path,
+				// Content page paths never contain query params or hashes (eg: ?preview=true)
+				path?.split(/[?#]/)[0],
 				user,
 				request?.headers?.Referrer as string,
 				ip,
