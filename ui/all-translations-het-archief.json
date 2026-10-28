@@ -2646,7 +2646,7 @@
     "location": "modules/content-page/const/get-content-block-type-options",
     "key": "hero-carousel",
     "language": "nl",
-    "value": "Hero carousel",
+    "value": "Hero carrousel",
     "value_type": "TEXT"
   },
   {
@@ -2656,7 +2656,7 @@
     "location": "modules/content-page/const/get-content-block-type-options",
     "key": "hero-carousel",
     "language": "en",
-    "value": "Hero carrousel",
+    "value": "Hero carousel",
     "value_type": "TEXT"
   },
   {
@@ -2706,7 +2706,7 @@
     "location": "modules/content-page/const/get-content-block-type-options",
     "key": "carousel-met-afbeeldingen",
     "language": "nl",
-    "value": "Carousel met afbeeldingen",
+    "value": "Carrousel met afbeeldingen",
     "value_type": "TEXT"
   },
   {
@@ -2716,7 +2716,7 @@
     "location": "modules/content-page/const/get-content-block-type-options",
     "key": "carousel-met-afbeeldingen",
     "language": "en",
-    "value": "Carrousel with images",
+    "value": "Carousel with images",
     "value_type": "TEXT"
   },
   {
@@ -27583,306 +27583,6 @@
     "id": "",
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
-    "location": "modules/search/search-page",
-    "key": "er-ging-iets-mis",
-    "language": "nl",
-    "value": "Er ging iets mis",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/search/search-page",
-    "key": "er-ging-iets-mis",
-    "language": "en",
-    "value": "Er ging iets mis",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/search/search-page",
-    "key": "het-selecteren-van-alle-resultaten-is-mislukt",
-    "language": "nl",
-    "value": "Het selecteren van alle resultaten is mislukt",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/search/search-page",
-    "key": "het-selecteren-van-alle-resultaten-is-mislukt",
-    "language": "en",
-    "value": "Het selecteren van alle resultaten is mislukt",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/search/search-page",
-    "key": "1-object-is-toegevoegd-aan-de-map-folders",
-    "language": "nl",
-    "value": "1 object is toegevoegd aan de map {{folders}}",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/search/search-page",
-    "key": "1-object-is-toegevoegd-aan-de-map-folders",
-    "language": "en",
-    "value": "1 object is toegevoegd aan de map {{folders}}",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/search/search-page",
-    "key": "1-object-is-toegevoegd-aan-de-mappen-folders",
-    "language": "nl",
-    "value": "1 object is toegevoegd aan de mappen {{folders}}",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/search/search-page",
-    "key": "1-object-is-toegevoegd-aan-de-mappen-folders",
-    "language": "en",
-    "value": "1 object is toegevoegd aan de mappen {{folders}}",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/search/search-page",
-    "key": "count-objecten-zijn-toegevoegd-aan-de-map-folders",
-    "language": "nl",
-    "value": "{{count}} objecten zijn toegevoegd aan de map {{folders}}",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/search/search-page",
-    "key": "count-objecten-zijn-toegevoegd-aan-de-map-folders",
-    "language": "en",
-    "value": "{{count}} objecten zijn toegevoegd aan de map {{folders}}",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/search/search-page",
-    "key": "count-objecten-zijn-toegevoegd-aan-de-mappen-folders",
-    "language": "nl",
-    "value": "{{count}} objecten zijn toegevoegd aan de mappen {{folders}}",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/search/search-page",
-    "key": "count-objecten-zijn-toegevoegd-aan-de-mappen-folders",
-    "language": "en",
-    "value": "{{count}} objecten zijn toegevoegd aan de mappen {{folders}}",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/search/search-page",
-    "key": "1-object-is-verwijderd-uit-de-map-folders",
-    "language": "nl",
-    "value": "1 object is verwijderd uit de map {{folders}}",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/search/search-page",
-    "key": "1-object-is-verwijderd-uit-de-map-folders",
-    "language": "en",
-    "value": "1 object is verwijderd uit de map {{folders}}",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/search/search-page",
-    "key": "1-object-is-verwijderd-uit-de-mappen-folders",
-    "language": "nl",
-    "value": "1 object is verwijderd uit de mappen {{folders}}",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/search/search-page",
-    "key": "1-object-is-verwijderd-uit-de-mappen-folders",
-    "language": "en",
-    "value": "1 object is verwijderd uit de mappen {{folders}}",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/search/search-page",
-    "key": "count-objecten-zijn-verwijderd-uit-de-map-folders",
-    "language": "nl",
-    "value": "{{count}} objecten zijn verwijderd uit de map {{folders}}",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/search/search-page",
-    "key": "count-objecten-zijn-verwijderd-uit-de-map-folders",
-    "language": "en",
-    "value": "{{count}} objecten zijn verwijderd uit de map {{folders}}",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/search/search-page",
-    "key": "count-objecten-zijn-verwijderd-uit-de-mappen-folders",
-    "language": "nl",
-    "value": "{{count}} objecten zijn verwijderd uit de mappen {{folders}}",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/search/search-page",
-    "key": "count-objecten-zijn-verwijderd-uit-de-mappen-folders",
-    "language": "en",
-    "value": "{{count}} objecten zijn verwijderd uit de mappen {{folders}}",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/search/search-page",
-    "key": "mappen-aangepast",
-    "language": "nl",
-    "value": "Mappen aangepast",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/search/search-page",
-    "key": "mappen-aangepast",
-    "language": "en",
-    "value": "Mappen aangepast",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/search/search-page",
-    "key": "objecten-bewaard",
-    "language": "nl",
-    "value": "Objecten bewaard",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/search/search-page",
-    "key": "objecten-bewaard",
-    "language": "en",
-    "value": "Objecten bewaard",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/search/search-page",
-    "key": "niet-alle-objecten-werden-bewaard",
-    "language": "nl",
-    "value": "Niet alle objecten werden bewaard",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/search/search-page",
-    "key": "niet-alle-objecten-werden-bewaard",
-    "language": "en",
-    "value": "Niet alle objecten werden bewaard",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/search/search-page",
-    "key": "1-object-bestaat-niet-meer-of-is-niet-meer-beschikbaar-en-werd-overgeslagen",
-    "language": "nl",
-    "value": "1 object bestaat niet meer of is niet meer beschikbaar en werd overgeslagen.",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/search/search-page",
-    "key": "1-object-bestaat-niet-meer-of-is-niet-meer-beschikbaar-en-werd-overgeslagen",
-    "language": "en",
-    "value": "1 object bestaat niet meer of is niet meer beschikbaar en werd overgeslagen.",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/search/search-page",
-    "key": "count-objecten-bestaan-niet-meer-of-zijn-niet-meer-beschikbaar-en-werden-overgeslagen",
-    "language": "nl",
-    "value": "{{count}} objecten bestaan niet meer of zijn niet meer beschikbaar en werden overgeslagen.",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/search/search-page",
-    "key": "count-objecten-bestaan-niet-meer-of-zijn-niet-meer-beschikbaar-en-werden-overgeslagen",
-    "language": "en",
-    "value": "{{count}} objecten bestaan niet meer of zijn niet meer beschikbaar en werden overgeslagen.",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
     "location": "pages/slug/index",
     "key": "door-gebruik-te-maken-van-deze-applicatie-bevestigt-u-dat-u-het-beschikbare-materiaal-enkel-raadpleegt-voor-wetenschappelijk-of-prive-onderzoek",
     "language": "nl",
@@ -27997,6 +27697,26 @@
     "key": "filters",
     "language": "en",
     "value": "Filters",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/visitor-space-search-page/visitor-space-search-page",
+    "key": "sla-dit-item-op",
+    "language": "nl",
+    "value": "Sla dit item op",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/visitor-space-search-page/visitor-space-search-page",
+    "key": "sla-dit-item-op",
+    "language": "en",
+    "value": "Save this item",
     "value_type": "TEXT"
   },
   {
@@ -28783,86 +28503,6 @@
     "id": "",
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
-    "location": "modules/account/const/my-folders",
-    "key": "alfabetisch-a-z",
-    "language": "nl",
-    "value": "Alfabetisch A-Z",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/const/my-folders",
-    "key": "alfabetisch-a-z",
-    "language": "en",
-    "value": "Alfabetisch A-Z",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/const/my-folders",
-    "key": "alfabetisch-z-a",
-    "language": "nl",
-    "value": "Alfabetisch Z-A",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/const/my-folders",
-    "key": "alfabetisch-z-a",
-    "language": "en",
-    "value": "Alfabetisch Z-A",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/const/my-folders",
-    "key": "nieuwste-eerst",
-    "language": "nl",
-    "value": "Nieuwste eerst",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/const/my-folders",
-    "key": "nieuwste-eerst",
-    "language": "en",
-    "value": "Nieuwste eerst",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/const/my-folders",
-    "key": "oudste-eerst",
-    "language": "nl",
-    "value": "Oudste eerst",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/const/my-folders",
-    "key": "oudste-eerst",
-    "language": "en",
-    "value": "Oudste eerst",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
     "location": "modules/account/const/my-history",
     "key": "bezoekersruimte",
     "language": "nl",
@@ -29617,6 +29257,606 @@
     "key": "error-er-is-iets-misgelopen",
     "language": "en",
     "value": "Something has gone wrong",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "pages/slug/ie/index",
+    "key": "breadcrumbs-mijn-mappen",
+    "language": "nl",
+    "value": "Mijn mappen",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "pages/slug/ie/index",
+    "key": "breadcrumbs-mijn-mappen",
+    "language": "en",
+    "value": "My folders",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "pages/account/mijn-mappen/folder-slug/index",
+    "key": "onbekend",
+    "language": "nl",
+    "value": "onbekend",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "pages/account/mijn-mappen/folder-slug/index",
+    "key": "onbekend",
+    "language": "en",
+    "value": "unknown",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "pages/account/mijn-mappen/folder-slug/index",
+    "key": "item-verwijderd-uit-map-titel",
+    "language": "nl",
+    "value": "Item verwijderd uit map",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "pages/account/mijn-mappen/folder-slug/index",
+    "key": "item-verwijderd-uit-map-titel",
+    "language": "en",
+    "value": "Item removed from folder",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "pages/account/mijn-mappen/folder-slug/index",
+    "key": "item-is-verwijderd-uit-map-beschrijving",
+    "language": "nl",
+    "value": "&#x27;{{item}}&#x27; is verwijderd uit &#x27;{{folder}}&#x27;.",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "pages/account/mijn-mappen/folder-slug/index",
+    "key": "item-is-verwijderd-uit-map-beschrijving",
+    "language": "en",
+    "value": "&#x27;{{item}}&#x27; is removed from &#x27;{{folder}}&#x27;.",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "pages/account/mijn-mappen/folder-slug/index",
+    "key": "map-delen",
+    "language": "nl",
+    "value": "Map delen",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "pages/account/mijn-mappen/folder-slug/index",
+    "key": "map-delen",
+    "language": "en",
+    "value": "Share folder",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "pages/account/mijn-mappen/folder-slug/index",
+    "key": "map-verwijderen",
+    "language": "nl",
+    "value": "Map verwijderen",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "pages/account/mijn-mappen/folder-slug/index",
+    "key": "map-verwijderen",
+    "language": "en",
+    "value": "Delete folder",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "pages/account/mijn-mappen/folder-slug/index",
+    "key": "map-beperkte-toegang-niet-verwijderen",
+    "language": "nl",
+    "value": "Een map die momenteel gebruikt wordt om beperkte toegang te verlenen, kan niet verwijderd worden.",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "pages/account/mijn-mappen/folder-slug/index",
+    "key": "map-beperkte-toegang-niet-verwijderen",
+    "language": "en",
+    "value": "A map currently being used to grant limited access cannot be removed.",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/edit-folder-title/edit-folder-title",
+    "key": "map-aanpassen",
+    "language": "nl",
+    "value": "Map aanpassen",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/edit-folder-title/edit-folder-title",
+    "key": "map-aanpassen",
+    "language": "en",
+    "value": "Edit folder",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/edit-folder-title/edit-folder-title",
+    "key": "titel-aanpassen",
+    "language": "nl",
+    "value": "Map aanpassen",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/components/edit-folder-title/edit-folder-title",
+    "key": "titel-aanpassen",
+    "language": "en",
+    "value": "Edit folder",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "pages/account/mijn-mappen/folder-slug/index",
+    "key": "verwijderen",
+    "language": "nl",
+    "value": "Verwijderen",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "pages/account/mijn-mappen/folder-slug/index",
+    "key": "verwijderen",
+    "language": "en",
+    "value": "Delete",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "pages/account/mijn-mappen/folder-slug/index",
+    "key": "verplaatsen",
+    "language": "nl",
+    "value": "Verplaatsen",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "pages/account/mijn-mappen/folder-slug/index",
+    "key": "verplaatsen",
+    "language": "en",
+    "value": "Move",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "pages/account/mijn-mappen/folder-slug/index",
+    "key": "aanbieder",
+    "language": "nl",
+    "value": "Aanbieder",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "pages/account/mijn-mappen/folder-slug/index",
+    "key": "aanbieder",
+    "language": "en",
+    "value": "Organisation",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "pages/account/mijn-mappen/folder-slug/index",
+    "key": "programma",
+    "language": "nl",
+    "value": "Programma",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "pages/account/mijn-mappen/folder-slug/index",
+    "key": "programma",
+    "language": "en",
+    "value": "Programme",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "pages/account/mijn-mappen/folder-slug/index",
+    "key": "serie",
+    "language": "nl",
+    "value": "Serie",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "pages/account/mijn-mappen/folder-slug/index",
+    "key": "serie",
+    "language": "en",
+    "value": "Series",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "pages/account/mijn-mappen/folder-slug/index",
+    "key": "type",
+    "language": "nl",
+    "value": "Type",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "pages/account/mijn-mappen/folder-slug/index",
+    "key": "type",
+    "language": "en",
+    "value": "Type",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "pages/account/mijn-mappen/folder-slug/index",
+    "key": "creatiedatum",
+    "language": "nl",
+    "value": "Creatiedatum",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "pages/account/mijn-mappen/folder-slug/index",
+    "key": "creatiedatum",
+    "language": "en",
+    "value": "Creation date",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "pages/account/mijn-mappen/folder-slug/index",
+    "key": "uitzenddatum",
+    "language": "nl",
+    "value": "Uitzenddatum",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "pages/account/mijn-mappen/folder-slug/index",
+    "key": "uitzenddatum",
+    "language": "en",
+    "value": "Release Date",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "pages/account/mijn-mappen/folder-slug/index",
+    "key": "identifier-bij-meemoo",
+    "language": "nl",
+    "value": "Identifiër bij meemoo",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "pages/account/mijn-mappen/folder-slug/index",
+    "key": "identifier-bij-meemoo",
+    "language": "en",
+    "value": "Identifier by Meemoo",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "pages/account/mijn-mappen/folder-slug/index",
+    "key": "identifier-bij-aanbieder",
+    "language": "nl",
+    "value": "Identifiër bij aanbieder",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "pages/account/mijn-mappen/folder-slug/index",
+    "key": "identifier-bij-aanbieder",
+    "language": "en",
+    "value": "Identifier by organisation",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "pages/account/mijn-mappen/folder-slug/index",
+    "key": "tijdelijke-toegang",
+    "language": "nl",
+    "value": "Tijdelijke toegang",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "pages/account/mijn-mappen/folder-slug/index",
+    "key": "tijdelijke-toegang",
+    "language": "en",
+    "value": "Temporary access",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/views/my-folders",
+    "key": "het-laden-van-de-objecten-in-deze-folder-is-mislukt",
+    "language": "nl",
+    "value": "Het laden van de objecten in deze folder is mislukt",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/views/my-folders",
+    "key": "het-laden-van-de-objecten-in-deze-folder-is-mislukt",
+    "language": "en",
+    "value": "Loading the items in this folder has failed",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/views/my-folders",
+    "key": "er-zitten-nog-geen-objecten-in-deze-folder-br-voeg-er-toe-via-het-bookmark-icoon-op-de-zoek-of-detail-paginas",
+    "language": "nl",
+    "value": "Er zitten nog geen objecten in deze folder.<br/>Voeg er toe via het bookmark icoon op de zoek of detail paginas",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/views/my-folders",
+    "key": "er-zitten-nog-geen-objecten-in-deze-folder-br-voeg-er-toe-via-het-bookmark-icoon-op-de-zoek-of-detail-paginas",
+    "language": "en",
+    "value": "There are no items in this folder. You can add some using the bookmark icon in the search interface or an item detail page.",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "pages/account/mijn-mappen/folder-slug/index",
+    "key": "mijn-mappen",
+    "language": "nl",
+    "value": "Mijn mappen",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "pages/account/mijn-mappen/folder-slug/index",
+    "key": "mijn-mappen",
+    "language": "en",
+    "value": "My folders",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "pages/account/mijn-mappen/folder-slug/index",
+    "key": "zoeken-in-deze-map",
+    "language": "nl",
+    "value": "Zoeken in deze map",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "pages/account/mijn-mappen/folder-slug/index",
+    "key": "zoeken-in-deze-map",
+    "language": "en",
+    "value": "Search for in this folder",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "pages/account/mijn-mappen/folder-slug/index",
+    "key": "map-beperkte-toegang",
+    "language": "nl",
+    "value": "Deze map wordt gebruikt om bezoekers beperkte toegang te geven t.e.m.",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "pages/account/mijn-mappen/folder-slug/index",
+    "key": "map-beperkte-toegang",
+    "language": "en",
+    "value": "This folder is used to give limited access to visitors.",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/views/my-folders",
+    "key": "zoekveld-aria-label",
+    "language": "nl",
+    "value": "Doorzoek deze map",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/views/my-folders",
+    "key": "zoekveld-aria-label",
+    "language": "en",
+    "value": "Search this folder",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "pages/account/mijn-mappen/folder-slug/index",
+    "key": "zoek",
+    "language": "nl",
+    "value": "Zoek",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "pages/account/mijn-mappen/folder-slug/index",
+    "key": "zoek",
+    "language": "en",
+    "value": "Search",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "pages/account/mijn-mappen/folder-slug/index",
+    "key": "annuleren",
+    "language": "nl",
+    "value": "Annuleren",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "pages/account/mijn-mappen/folder-slug/index",
+    "key": "annuleren",
+    "language": "en",
+    "value": "Cancel",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/views/account-my-folders",
+    "key": "voeg-dit-object-toe-aan-een-map-blade-aria-label",
+    "language": "nl",
+    "value": "Hiermee voeg je dit object toe aan een map",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/account/views/account-my-folders",
+    "key": "voeg-dit-object-toe-aan-een-map-blade-aria-label",
+    "language": "en",
+    "value": "This will add the object to a folder",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "pages/account/mijn-mappen/folder-slug/index",
+    "key": "mijn-mappen-meta-omschrijving",
+    "language": "nl",
+    "value": "Mijn mappen meta omschrijving",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "pages/account/mijn-mappen/folder-slug/index",
+    "key": "mijn-mappen-meta-omschrijving",
+    "language": "en",
+    "value": "My folder meta description",
     "value_type": "TEXT"
   },
   {
@@ -33077,26 +33317,6 @@
     "key": "toegangsaanvragen",
     "language": "en",
     "value": "Access requests",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/cp/const/index",
-    "key": "organisatiemappen",
-    "language": "nl",
-    "value": "Organisatiemappen",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/cp/const/index",
-    "key": "organisatiemappen",
-    "language": "en",
-    "value": "Organisatiemappen",
     "value_type": "TEXT"
   },
   {
@@ -36803,26 +37023,6 @@
     "id": "",
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
-    "location": "modules/account/components/create-folder-button/create-folder-button",
-    "key": "nieuwe-organisatiemap-aanmaken",
-    "language": "nl",
-    "value": "Nieuwe organisatiemap aanmaken",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/create-folder-button/create-folder-button",
-    "key": "nieuwe-organisatiemap-aanmaken",
-    "language": "en",
-    "value": "Nieuwe organisatiemap aanmaken",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
     "location": "pages/account/mijn-mappen/folder-slug/index",
     "key": "nieuwe-map-aanmaken",
     "language": "nl",
@@ -36977,26 +37177,6 @@
     "key": "nieuwe-map",
     "language": "en",
     "value": "New folder",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/create-folder-button/create-folder-button",
-    "key": "deze-map-is-een-organisatiemap",
-    "language": "nl",
-    "value": "Deze map is een organisatiemap",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/create-folder-button/create-folder-button",
-    "key": "deze-map-is-een-organisatiemap",
-    "language": "en",
-    "value": "Deze map is een organisatiemap",
     "value_type": "TEXT"
   },
   {
@@ -37317,726 +37497,6 @@
     "key": "beschrijving-van-de-map-input-aria-label",
     "language": "en",
     "value": "This is the description of the folder",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/folder-level-disclaimer/folder-level-disclaimer",
-    "key": "deze-mappen-behoren-tot-de-organisatie-en-worden-gedeeld-met-alle-beheerders-van-je-organisatie-a-href-url-klik-hier-voor-je-persoonlijke-mappen-a",
-    "language": "nl",
-    "value": "Deze mappen behoren tot de organisatie en worden gedeeld met alle beheerders van je organisatie. <a href=\"{{url}}\">Klik hier voor je persoonlijke mappen.</a>",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/folder-level-disclaimer/folder-level-disclaimer",
-    "key": "deze-mappen-behoren-tot-de-organisatie-en-worden-gedeeld-met-alle-beheerders-van-je-organisatie-a-href-url-klik-hier-voor-je-persoonlijke-mappen-a",
-    "language": "en",
-    "value": "Deze mappen behoren tot de organisatie en worden gedeeld met alle beheerders van je organisatie. <a href=\"{{url}}\">Klik hier voor je persoonlijke mappen.</a>",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/folder-level-disclaimer/folder-level-disclaimer",
-    "key": "deze-mappen-zijn-persoonlijk-a-href-url-klik-hier-voor-de-mappen-van-je-organisatie-a",
-    "language": "nl",
-    "value": "Deze mappen zijn persoonlijk. <a href=\"{{url}}\">Klik hier voor de mappen van je organisatie.</a>",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/folder-level-disclaimer/folder-level-disclaimer",
-    "key": "deze-mappen-zijn-persoonlijk-a-href-url-klik-hier-voor-de-mappen-van-je-organisatie-a",
-    "language": "en",
-    "value": "Deze mappen zijn persoonlijk. <a href=\"{{url}}\">Klik hier voor de mappen van je organisatie.</a>",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/folder-overview/folder-overview",
-    "key": "organisatiemappen",
-    "language": "nl",
-    "value": "Organisatiemappen",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/folder-overview/folder-overview",
-    "key": "organisatiemappen",
-    "language": "en",
-    "value": "Organisatiemappen",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/account/mijn-mappen/folder-slug/index",
-    "key": "mijn-mappen",
-    "language": "nl",
-    "value": "Mijn mappen",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/account/mijn-mappen/folder-slug/index",
-    "key": "mijn-mappen",
-    "language": "en",
-    "value": "My folders",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/slug/ie/index",
-    "key": "breadcrumbs-mijn-mappen",
-    "language": "nl",
-    "value": "Mijn mappen",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/slug/ie/index",
-    "key": "breadcrumbs-mijn-mappen",
-    "language": "en",
-    "value": "My folders",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/account/mijn-mappen/folder-slug/index",
-    "key": "onbekend",
-    "language": "nl",
-    "value": "onbekend",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/account/mijn-mappen/folder-slug/index",
-    "key": "onbekend",
-    "language": "en",
-    "value": "unknown",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/account/mijn-mappen/folder-slug/index",
-    "key": "item-verwijderd-uit-map-titel",
-    "language": "nl",
-    "value": "Item verwijderd uit map",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/account/mijn-mappen/folder-slug/index",
-    "key": "item-verwijderd-uit-map-titel",
-    "language": "en",
-    "value": "Item removed from folder",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/account/mijn-mappen/folder-slug/index",
-    "key": "item-is-verwijderd-uit-map-beschrijving",
-    "language": "nl",
-    "value": "&#x27;{{item}}&#x27; is verwijderd uit &#x27;{{folder}}&#x27;.",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/account/mijn-mappen/folder-slug/index",
-    "key": "item-is-verwijderd-uit-map-beschrijving",
-    "language": "en",
-    "value": "&#x27;{{item}}&#x27; is removed from &#x27;{{folder}}&#x27;.",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/account/mijn-mappen/folder-slug/index",
-    "key": "map-delen",
-    "language": "nl",
-    "value": "Map delen",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/account/mijn-mappen/folder-slug/index",
-    "key": "map-delen",
-    "language": "en",
-    "value": "Share folder",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/account/mijn-mappen/folder-slug/index",
-    "key": "map-verwijderen",
-    "language": "nl",
-    "value": "Map verwijderen",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/account/mijn-mappen/folder-slug/index",
-    "key": "map-verwijderen",
-    "language": "en",
-    "value": "Delete folder",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/account/mijn-mappen/folder-slug/index",
-    "key": "map-beperkte-toegang-niet-verwijderen",
-    "language": "nl",
-    "value": "Een map die momenteel gebruikt wordt om beperkte toegang te verlenen, kan niet verwijderd worden.",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/account/mijn-mappen/folder-slug/index",
-    "key": "map-beperkte-toegang-niet-verwijderen",
-    "language": "en",
-    "value": "A map currently being used to grant limited access cannot be removed.",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/edit-folder-title/edit-folder-title",
-    "key": "map-aanpassen",
-    "language": "nl",
-    "value": "Map aanpassen",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/edit-folder-title/edit-folder-title",
-    "key": "map-aanpassen",
-    "language": "en",
-    "value": "Edit folder",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/edit-folder-title/edit-folder-title",
-    "key": "titel-aanpassen",
-    "language": "nl",
-    "value": "Map aanpassen",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/edit-folder-title/edit-folder-title",
-    "key": "titel-aanpassen",
-    "language": "en",
-    "value": "Edit folder",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/account/mijn-mappen/folder-slug/index",
-    "key": "verwijderen",
-    "language": "nl",
-    "value": "Verwijderen",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/account/mijn-mappen/folder-slug/index",
-    "key": "verwijderen",
-    "language": "en",
-    "value": "Delete",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/account/mijn-mappen/folder-slug/index",
-    "key": "verplaatsen",
-    "language": "nl",
-    "value": "Verplaatsen",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/account/mijn-mappen/folder-slug/index",
-    "key": "verplaatsen",
-    "language": "en",
-    "value": "Move",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/account/mijn-mappen/folder-slug/index",
-    "key": "aanbieder",
-    "language": "nl",
-    "value": "Aanbieder",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/account/mijn-mappen/folder-slug/index",
-    "key": "aanbieder",
-    "language": "en",
-    "value": "Organisation",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/account/mijn-mappen/folder-slug/index",
-    "key": "programma",
-    "language": "nl",
-    "value": "Programma",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/account/mijn-mappen/folder-slug/index",
-    "key": "programma",
-    "language": "en",
-    "value": "Programme",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/account/mijn-mappen/folder-slug/index",
-    "key": "serie",
-    "language": "nl",
-    "value": "Serie",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/account/mijn-mappen/folder-slug/index",
-    "key": "serie",
-    "language": "en",
-    "value": "Series",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/account/mijn-mappen/folder-slug/index",
-    "key": "type",
-    "language": "nl",
-    "value": "Type",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/account/mijn-mappen/folder-slug/index",
-    "key": "type",
-    "language": "en",
-    "value": "Type",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/account/mijn-mappen/folder-slug/index",
-    "key": "creatiedatum",
-    "language": "nl",
-    "value": "Creatiedatum",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/account/mijn-mappen/folder-slug/index",
-    "key": "creatiedatum",
-    "language": "en",
-    "value": "Creation date",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/account/mijn-mappen/folder-slug/index",
-    "key": "uitzenddatum",
-    "language": "nl",
-    "value": "Uitzenddatum",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/account/mijn-mappen/folder-slug/index",
-    "key": "uitzenddatum",
-    "language": "en",
-    "value": "Release Date",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/account/mijn-mappen/folder-slug/index",
-    "key": "identifier-bij-meemoo",
-    "language": "nl",
-    "value": "Identifiër bij meemoo",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/account/mijn-mappen/folder-slug/index",
-    "key": "identifier-bij-meemoo",
-    "language": "en",
-    "value": "Identifier by Meemoo",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/account/mijn-mappen/folder-slug/index",
-    "key": "identifier-bij-aanbieder",
-    "language": "nl",
-    "value": "Identifiër bij aanbieder",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/account/mijn-mappen/folder-slug/index",
-    "key": "identifier-bij-aanbieder",
-    "language": "en",
-    "value": "Identifier by organisation",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/account/mijn-mappen/folder-slug/index",
-    "key": "tijdelijke-toegang",
-    "language": "nl",
-    "value": "Tijdelijke toegang",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/account/mijn-mappen/folder-slug/index",
-    "key": "tijdelijke-toegang",
-    "language": "en",
-    "value": "Temporary access",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/views/my-folders",
-    "key": "het-laden-van-de-objecten-in-deze-folder-is-mislukt",
-    "language": "nl",
-    "value": "Het laden van de objecten in deze folder is mislukt",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/views/my-folders",
-    "key": "het-laden-van-de-objecten-in-deze-folder-is-mislukt",
-    "language": "en",
-    "value": "Loading the items in this folder has failed",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/views/my-folders",
-    "key": "er-zitten-nog-geen-objecten-in-deze-folder-br-voeg-er-toe-via-het-bookmark-icoon-op-de-zoek-of-detail-paginas",
-    "language": "nl",
-    "value": "Er zitten nog geen objecten in deze folder.<br/>Voeg er toe via het bookmark icoon op de zoek of detail paginas",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/views/my-folders",
-    "key": "er-zitten-nog-geen-objecten-in-deze-folder-br-voeg-er-toe-via-het-bookmark-icoon-op-de-zoek-of-detail-paginas",
-    "language": "en",
-    "value": "There are no items in this folder. You can add some using the bookmark icon in the search interface or an item detail page.",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/folder-overview/folder-overview",
-    "key": "er-zijn-nog-geen-organisatiemappen-maak-een-nieuwe-organisatiemap-aan-via-de-knop-nieuwe-organisatiemap-aanmaken-in-het-menu-deze-map-is-meteen-zichtbaar-voor-alle-beheerders-van-je-organisatie",
-    "language": "nl",
-    "value": "Er zijn nog geen organisatiemappen. Maak een nieuwe organisatiemap aan via de knop \"Nieuwe organisatiemap aanmaken\" in het menu. Deze map is meteen zichtbaar voor alle beheerders van je organisatie.",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/folder-overview/folder-overview",
-    "key": "er-zijn-nog-geen-organisatiemappen-maak-een-nieuwe-organisatiemap-aan-via-de-knop-nieuwe-organisatiemap-aanmaken-in-het-menu-deze-map-is-meteen-zichtbaar-voor-alle-beheerders-van-je-organisatie",
-    "language": "en",
-    "value": "Er zijn nog geen organisatiemappen. Maak een nieuwe organisatiemap aan via de knop \"Nieuwe organisatiemap aanmaken\" in het menu. Deze map is meteen zichtbaar voor alle beheerders van je organisatie.",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/account/mijn-mappen/folder-slug/index",
-    "key": "zoeken-in-deze-map",
-    "language": "nl",
-    "value": "Zoeken in deze map",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/account/mijn-mappen/folder-slug/index",
-    "key": "zoeken-in-deze-map",
-    "language": "en",
-    "value": "Search for in this folder",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/account/mijn-mappen/folder-slug/index",
-    "key": "map-beperkte-toegang",
-    "language": "nl",
-    "value": "Deze map wordt gebruikt om bezoekers beperkte toegang te geven t.e.m.",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/account/mijn-mappen/folder-slug/index",
-    "key": "map-beperkte-toegang",
-    "language": "en",
-    "value": "This folder is used to give limited access to visitors.",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/views/my-folders",
-    "key": "zoekveld-aria-label",
-    "language": "nl",
-    "value": "Doorzoek deze map",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/views/my-folders",
-    "key": "zoekveld-aria-label",
-    "language": "en",
-    "value": "Search this folder",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/account/mijn-mappen/folder-slug/index",
-    "key": "zoek",
-    "language": "nl",
-    "value": "Zoek",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/account/mijn-mappen/folder-slug/index",
-    "key": "zoek",
-    "language": "en",
-    "value": "Search",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/account/mijn-mappen/folder-slug/index",
-    "key": "mijn-mappen-meta-omschrijving",
-    "language": "nl",
-    "value": "Mijn mappen meta omschrijving",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/account/mijn-mappen/folder-slug/index",
-    "key": "mijn-mappen-meta-omschrijving",
-    "language": "en",
-    "value": "My folder meta description",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/account/mijn-mappen/folder-slug/index",
-    "key": "annuleren",
-    "language": "nl",
-    "value": "Annuleren",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/account/mijn-mappen/folder-slug/index",
-    "key": "annuleren",
-    "language": "en",
-    "value": "Cancel",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/views/account-my-folders",
-    "key": "voeg-dit-object-toe-aan-een-map-blade-aria-label",
-    "language": "nl",
-    "value": "Hiermee voeg je dit object toe aan een map",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/views/account-my-folders",
-    "key": "voeg-dit-object-toe-aan-een-map-blade-aria-label",
-    "language": "en",
-    "value": "This will add the object to a folder",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/folder-sort-dropdown/folder-sort-dropdown",
-    "key": "sorteer-mappen-sort",
-    "language": "nl",
-    "value": "Sorteer mappen: {{sort}}",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/folder-sort-dropdown/folder-sort-dropdown",
-    "key": "sorteer-mappen-sort",
-    "language": "en",
-    "value": "Sorteer mappen: {{sort}}",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/folder-sort-dropdown/folder-sort-dropdown",
-    "key": "sorteer-mappen",
-    "language": "nl",
-    "value": "Sorteer mappen",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/account/components/folder-sort-dropdown/folder-sort-dropdown",
-    "key": "sorteer-mappen",
-    "language": "en",
-    "value": "Sorteer mappen",
     "value_type": "TEXT"
   },
   {
@@ -47406,7 +46866,7 @@
     "location": "modules/ie-objects/components/object-detail-page-ai-entities/ai-entity-interval-pills",
     "key": "page-van-pageCount",
     "language": "nl",
-    "value": "{{page}} van {{{{pageCount}}",
+    "value": "{{page}} van {{pageCount}}",
     "value_type": "TEXT"
   },
   {
@@ -47416,7 +46876,7 @@
     "location": "modules/ie-objects/components/object-detail-page-ai-entities/ai-entity-interval-pills",
     "key": "page-van-pageCount",
     "language": "en",
-    "value": "{{page}} of {{{{pageCount}}",
+    "value": "{{page}} of {{pageCount}}",
     "value_type": "TEXT"
   },
   {
@@ -50464,26 +49924,6 @@
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
     "location": "modules/navigation/components/navigation/navigation",
-    "key": "organisatiemappen",
-    "language": "nl",
-    "value": "Organisatiemappen",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/navigation/components/navigation/navigation",
-    "key": "organisatiemappen",
-    "language": "en",
-    "value": "Organisatiemappen",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/navigation/components/navigation/navigation",
     "key": "materiaalaanvragen",
     "language": "nl",
     "value": "Materiaalaanvragen",
@@ -50577,326 +50017,6 @@
     "key": "admin",
     "language": "en",
     "value": "Administrator",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/search/components/multiselect-action-bar/multiselect-action-bar",
-    "key": "alle-count-max-resultaten-selecteren",
-    "language": "nl",
-    "value": "Alle {{count}} (max) resultaten selecteren",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/search/components/multiselect-action-bar/multiselect-action-bar",
-    "key": "alle-count-max-resultaten-selecteren",
-    "language": "en",
-    "value": "Alle {{count}} (max) resultaten selecteren",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/search/components/multiselect-action-bar/multiselect-action-bar",
-    "key": "alle-count-resultaten-selecteren",
-    "language": "nl",
-    "value": "Alle {{count}} resultaten selecteren",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/search/components/multiselect-action-bar/multiselect-action-bar",
-    "key": "alle-count-resultaten-selecteren",
-    "language": "en",
-    "value": "Alle {{count}} resultaten selecteren",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/search/components/multiselect-action-bar/multiselect-action-bar",
-    "key": "alles-selecteren",
-    "language": "nl",
-    "value": "Alles selecteren",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/search/components/multiselect-action-bar/multiselect-action-bar",
-    "key": "alles-selecteren",
-    "language": "en",
-    "value": "Alles selecteren",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/search/components/multiselect-action-bar/multiselect-action-bar",
-    "key": "meerdere-objecten-selecteren",
-    "language": "nl",
-    "value": "Meerdere objecten selecteren",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/search/components/multiselect-action-bar/multiselect-action-bar",
-    "key": "meerdere-objecten-selecteren",
-    "language": "en",
-    "value": "Meerdere objecten selecteren",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/search/components/multiselect-action-bar/multiselect-action-bar",
-    "key": "count-geselecteerd",
-    "language": "nl",
-    "value": "{{count}} geselecteerd",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/search/components/multiselect-action-bar/multiselect-action-bar",
-    "key": "count-geselecteerd",
-    "language": "en",
-    "value": "{{count}} geselecteerd",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/search/components/multiselect-action-bar/multiselect-action-bar",
-    "key": "bewaar-in-mappen",
-    "language": "nl",
-    "value": "Bewaar in mappen",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/search/components/multiselect-action-bar/multiselect-action-bar",
-    "key": "bewaar-in-mappen",
-    "language": "en",
-    "value": "Bewaar in mappen",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/search/components/multiselect-action-bar/multiselect-action-bar",
-    "key": "sluit-het-selecteren-van-meerdere-objecten",
-    "language": "nl",
-    "value": "Sluit het selecteren van meerdere objecten",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/search/components/multiselect-action-bar/multiselect-action-bar",
-    "key": "sluit-het-selecteren-van-meerdere-objecten",
-    "language": "en",
-    "value": "Sluit het selecteren van meerdere objecten",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/search/components/multiselect-error-banner/multiselect-error-banner",
-    "key": "toevoegen-mislukt-je-selectie-is-bewaard-probeer-het-opnieuw",
-    "language": "nl",
-    "value": "Toevoegen mislukt. Je selectie is bewaard, probeer het opnieuw.",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/search/components/multiselect-error-banner/multiselect-error-banner",
-    "key": "toevoegen-mislukt-je-selectie-is-bewaard-probeer-het-opnieuw",
-    "language": "en",
-    "value": "Toevoegen mislukt. Je selectie is bewaard, probeer het opnieuw.",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/search/components/multiselect-error-banner/multiselect-error-banner",
-    "key": "er-ging-iets-mis-bij-het-bewaren-van-1-object",
-    "language": "nl",
-    "value": "Er ging iets mis bij het bewaren van 1 object.",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/search/components/multiselect-error-banner/multiselect-error-banner",
-    "key": "er-ging-iets-mis-bij-het-bewaren-van-1-object",
-    "language": "en",
-    "value": "Er ging iets mis bij het bewaren van 1 object.",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/search/components/multiselect-error-banner/multiselect-error-banner",
-    "key": "er-ging-iets-mis-bij-het-bewaren-van-count-objecten",
-    "language": "nl",
-    "value": "Er ging iets mis bij het bewaren van {{count}} objecten.",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/search/components/multiselect-error-banner/multiselect-error-banner",
-    "key": "er-ging-iets-mis-bij-het-bewaren-van-count-objecten",
-    "language": "en",
-    "value": "Er ging iets mis bij het bewaren van {{count}} objecten.",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/search/components/multiselect-error-banner/multiselect-error-banner",
-    "key": "opnieuw-proberen",
-    "language": "nl",
-    "value": "Opnieuw proberen",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/search/components/multiselect-error-banner/multiselect-error-banner",
-    "key": "opnieuw-proberen",
-    "language": "en",
-    "value": "Opnieuw proberen",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/search/components/result-card-bookmark-slot/result-card-bookmark-slot",
-    "key": "selecteer-title",
-    "language": "nl",
-    "value": "Selecteer {{title}}",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/search/components/result-card-bookmark-slot/result-card-bookmark-slot",
-    "key": "selecteer-title",
-    "language": "en",
-    "value": "Selecteer {{title}}",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/search/components/result-card-bookmark-slot/result-card-bookmark-slot",
-    "key": "geselecteerd",
-    "language": "nl",
-    "value": "Geselecteerd",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/search/components/result-card-bookmark-slot/result-card-bookmark-slot",
-    "key": "geselecteerd",
-    "language": "en",
-    "value": "Geselecteerd",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/visitor-space-search-page/visitor-space-search-page",
-    "key": "sla-dit-item-op",
-    "language": "nl",
-    "value": "Sla dit item op",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/visitor-space-search-page/visitor-space-search-page",
-    "key": "sla-dit-item-op",
-    "language": "en",
-    "value": "Save this item",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/search/components/result-card-bookmark-slot/result-card-bookmark-slot",
-    "key": "bewaar-title-in-een-map-dit-object-zit-al-in-een-map",
-    "language": "nl",
-    "value": "Bewaar {{title}} in een map, dit object zit al in een map",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/search/components/result-card-bookmark-slot/result-card-bookmark-slot",
-    "key": "bewaar-title-in-een-map-dit-object-zit-al-in-een-map",
-    "language": "en",
-    "value": "Bewaar {{title}} in een map, dit object zit al in een map",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/search/components/result-card-bookmark-slot/result-card-bookmark-slot",
-    "key": "bewaar-title-in-een-map",
-    "language": "nl",
-    "value": "Bewaar {{title}} in een map",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/search/components/result-card-bookmark-slot/result-card-bookmark-slot",
-    "key": "bewaar-title-in-een-map",
-    "language": "en",
-    "value": "Bewaar {{title}} in een map",
     "value_type": "TEXT"
   },
   {
@@ -51137,26 +50257,6 @@
     "key": "mappen-dienen-op-voorhand-gemaakt-te-worden",
     "language": "en",
     "value": "Folders must be made beforehand",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/shared/components/approve-request-blade/approve-request-blade",
-    "key": "name-organisatiemap",
-    "language": "nl",
-    "value": "{{name}} (organisatiemap)",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/shared/components/approve-request-blade/approve-request-blade",
-    "key": "name-organisatiemap",
-    "language": "en",
-    "value": "{{name}} (organisatiemap)",
     "value_type": "TEXT"
   },
   {
@@ -56104,26 +55204,6 @@
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
     "location": "modules/visitor-space/components/add-to-folder-blade/add-to-folder-blade",
-    "key": "opslaan",
-    "language": "nl",
-    "value": "Opslaan",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/add-to-folder-blade/add-to-folder-blade",
-    "key": "opslaan",
-    "language": "en",
-    "value": "Opslaan",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/add-to-folder-blade/add-to-folder-blade",
     "key": "voeg-toe",
     "language": "nl",
     "value": "Voeg toe",
@@ -56137,26 +55217,6 @@
     "key": "voeg-toe",
     "language": "en",
     "value": "Add to",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/add-to-folder-blade/add-to-folder-blade",
-    "key": "opslaan-mobiel",
-    "language": "nl",
-    "value": "Opslaan",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/add-to-folder-blade/add-to-folder-blade",
-    "key": "opslaan-mobiel",
-    "language": "en",
-    "value": "Opslaan",
     "value_type": "TEXT"
   },
   {
@@ -56218,106 +55278,6 @@
     "language": "en",
     "value": "Cancel",
     "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/add-to-folder-blade/add-to-folder-blade",
-    "key": "count-van-de-total-objecten-zitten-al-in-deze-map",
-    "language": "nl",
-    "value": "{{count}} van de {{total}} objecten zitten al in deze map",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/add-to-folder-blade/add-to-folder-blade",
-    "key": "count-van-de-total-objecten-zitten-al-in-deze-map",
-    "language": "en",
-    "value": "{{count}} van de {{total}} objecten zitten al in deze map",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/add-to-folder-blade/add-to-folder-blade",
-    "key": "1-object-wordt-aan-deze-map-toegevoegd",
-    "language": "nl",
-    "value": "1 object wordt aan deze map toegevoegd",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/add-to-folder-blade/add-to-folder-blade",
-    "key": "1-object-wordt-aan-deze-map-toegevoegd",
-    "language": "en",
-    "value": "1 object wordt aan deze map toegevoegd",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/add-to-folder-blade/add-to-folder-blade",
-    "key": "count-objecten-worden-aan-deze-map-toegevoegd",
-    "language": "nl",
-    "value": "{{count}} objecten worden aan deze map toegevoegd",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/add-to-folder-blade/add-to-folder-blade",
-    "key": "count-objecten-worden-aan-deze-map-toegevoegd",
-    "language": "en",
-    "value": "{{count}} objecten worden aan deze map toegevoegd",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/add-to-folder-blade/add-to-folder-blade",
-    "key": "1-object-wordt-uit-deze-map-verwijderd",
-    "language": "nl",
-    "value": "1 object wordt uit deze map verwijderd",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/add-to-folder-blade/add-to-folder-blade",
-    "key": "1-object-wordt-uit-deze-map-verwijderd",
-    "language": "en",
-    "value": "1 object wordt uit deze map verwijderd",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/add-to-folder-blade/add-to-folder-blade",
-    "key": "count-objecten-worden-uit-deze-map-verwijderd",
-    "language": "nl",
-    "value": "{{count}} objecten worden uit deze map verwijderd",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/add-to-folder-blade/add-to-folder-blade",
-    "key": "count-objecten-worden-uit-deze-map-verwijderd",
-    "language": "en",
-    "value": "{{count}} objecten worden uit deze map verwijderd",
-    "value_type": "HTML"
   },
   {
     "id": "",
@@ -56384,106 +55344,6 @@
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
     "location": "modules/visitor-space/components/add-to-folder-blade/add-to-folder-blade",
-    "key": "er-zijn-nog-geen-organisatiemappen",
-    "language": "nl",
-    "value": "Er zijn nog geen organisatiemappen.",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/add-to-folder-blade/add-to-folder-blade",
-    "key": "er-zijn-nog-geen-organisatiemappen",
-    "language": "en",
-    "value": "Er zijn nog geen organisatiemappen.",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/add-to-folder-blade/add-to-folder-blade",
-    "key": "er-zijn-nog-geen-persoonlijke-mappen",
-    "language": "nl",
-    "value": "Er zijn nog geen persoonlijke mappen.",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/add-to-folder-blade/add-to-folder-blade",
-    "key": "er-zijn-nog-geen-persoonlijke-mappen",
-    "language": "en",
-    "value": "Er zijn nog geen persoonlijke mappen.",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/add-to-folder-blade/add-to-folder-blade",
-    "key": "het-ophalen-van-de-mappenlijst-is-mislukt-probeer-later-opnieuw",
-    "language": "nl",
-    "value": "Het ophalen van de mappenlijst is mislukt. Probeer later opnieuw.",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/add-to-folder-blade/add-to-folder-blade",
-    "key": "het-ophalen-van-de-mappenlijst-is-mislukt-probeer-later-opnieuw",
-    "language": "en",
-    "value": "Het ophalen van de mappenlijst is mislukt. Probeer later opnieuw.",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/add-to-folder-blade/add-to-folder-blade",
-    "key": "organisatiemappen",
-    "language": "nl",
-    "value": "Organisatiemappen",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/add-to-folder-blade/add-to-folder-blade",
-    "key": "organisatiemappen",
-    "language": "en",
-    "value": "Organisatiemappen",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/add-to-folder-blade/add-to-folder-blade",
-    "key": "persoonlijke-mappen",
-    "language": "nl",
-    "value": "Persoonlijke mappen",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/add-to-folder-blade/add-to-folder-blade",
-    "key": "persoonlijke-mappen",
-    "language": "en",
-    "value": "Persoonlijke mappen",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/add-to-folder-blade/add-to-folder-blade",
     "key": "voeg-toe-aan-map",
     "language": "nl",
     "value": "Voeg toe aan jouw map",
@@ -56498,26 +55358,6 @@
     "language": "en",
     "value": "Add to your folder",
     "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/add-to-folder-blade/add-to-folder-blade",
-    "key": "kies-de-mappen-waarin-je-deze-count-objecten-wil-bewaren",
-    "language": "nl",
-    "value": "Kies de mappen waarin je deze {{count}} objecten wil bewaren",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/add-to-folder-blade/add-to-folder-blade",
-    "key": "kies-de-mappen-waarin-je-deze-count-objecten-wil-bewaren",
-    "language": "en",
-    "value": "Kies de mappen waarin je deze {{count}} objecten wil bewaren",
-    "value_type": "HTML"
   },
   {
     "id": "",
@@ -63363,46 +62203,6 @@
     "id": "",
     "app": "HET_ARCHIEF",
     "component": "BACKEND",
-    "location": "modules/auth/controllers/het-archief",
-    "key": "inloggen-mislukt",
-    "language": "nl",
-    "value": "Inloggen mislukt",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "BACKEND",
-    "location": "modules/auth/controllers/het-archief",
-    "key": "inloggen-mislukt",
-    "language": "en",
-    "value": "Inloggen mislukt",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "BACKEND",
-    "location": "modules/auth/controllers/het-archief",
-    "key": "er-ging-iets-mis-bij-het-inloggen-probeer-het-later-opnieuw",
-    "language": "nl",
-    "value": "Er ging iets mis bij het inloggen. Probeer het later opnieuw.",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "BACKEND",
-    "location": "modules/auth/controllers/het-archief",
-    "key": "er-ging-iets-mis-bij-het-inloggen-probeer-het-later-opnieuw",
-    "language": "en",
-    "value": "Er ging iets mis bij het inloggen. Probeer het later opnieuw.",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "BACKEND",
     "location": "modules/folders/controllers",
     "key": "default-collection-name",
     "language": "nl",
@@ -63437,86 +62237,6 @@
     "key": "account-configuratie",
     "language": "en",
     "value": "Account configuration",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "BACKEND",
-    "location": "modules/auth/controllers/het-archief",
-    "key": "registreren-mislukt",
-    "language": "nl",
-    "value": "Registreren mislukt",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "BACKEND",
-    "location": "modules/auth/controllers/het-archief",
-    "key": "registreren-mislukt",
-    "language": "en",
-    "value": "Registreren mislukt",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "BACKEND",
-    "location": "modules/auth/controllers/het-archief",
-    "key": "er-ging-iets-mis-bij-het-registreren-probeer-het-later-opnieuw",
-    "language": "nl",
-    "value": "Er ging iets mis bij het registreren. Probeer het later opnieuw.",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "BACKEND",
-    "location": "modules/auth/controllers/het-archief",
-    "key": "er-ging-iets-mis-bij-het-registreren-probeer-het-later-opnieuw",
-    "language": "en",
-    "value": "Er ging iets mis bij het registreren. Probeer het later opnieuw.",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "BACKEND",
-    "location": "modules/auth/controllers/het-archief",
-    "key": "uitloggen-mislukt",
-    "language": "nl",
-    "value": "Uitloggen mislukt",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "BACKEND",
-    "location": "modules/auth/controllers/het-archief",
-    "key": "uitloggen-mislukt",
-    "language": "en",
-    "value": "Uitloggen mislukt",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "BACKEND",
-    "location": "modules/auth/controllers/het-archief",
-    "key": "er-ging-iets-mis-bij-het-uitloggen-probeer-het-later-opnieuw",
-    "language": "nl",
-    "value": "Er ging iets mis bij het uitloggen. Probeer het later opnieuw.",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "BACKEND",
-    "location": "modules/auth/controllers/het-archief",
-    "key": "er-ging-iets-mis-bij-het-uitloggen-probeer-het-later-opnieuw",
-    "language": "en",
-    "value": "Er ging iets mis bij het uitloggen. Probeer het later opnieuw.",
     "value_type": "TEXT"
   },
   {
