@@ -2646,7 +2646,7 @@
     "location": "modules/content-page/const/get-content-block-type-options",
     "key": "hero-carousel",
     "language": "nl",
-    "value": "Hero carousel",
+    "value": "Hero carrousel",
     "value_type": "TEXT"
   },
   {
@@ -2656,7 +2656,7 @@
     "location": "modules/content-page/const/get-content-block-type-options",
     "key": "hero-carousel",
     "language": "en",
-    "value": "Hero carrousel",
+    "value": "Hero carousel",
     "value_type": "TEXT"
   },
   {
@@ -2706,7 +2706,7 @@
     "location": "modules/content-page/const/get-content-block-type-options",
     "key": "carousel-met-afbeeldingen",
     "language": "nl",
-    "value": "Carousel met afbeeldingen",
+    "value": "Carrousel met afbeeldingen",
     "value_type": "TEXT"
   },
   {
@@ -2716,7 +2716,7 @@
     "location": "modules/content-page/const/get-content-block-type-options",
     "key": "carousel-met-afbeeldingen",
     "language": "en",
-    "value": "Carrousel with images",
+    "value": "Carousel with images",
     "value_type": "TEXT"
   },
   {
@@ -46866,7 +46866,7 @@
     "location": "modules/ie-objects/components/object-detail-page-ai-entities/ai-entity-interval-pills",
     "key": "page-van-pageCount",
     "language": "nl",
-    "value": "{{page}} van {{{{pageCount}}",
+    "value": "{{page}} van {{pageCount}}",
     "value_type": "TEXT"
   },
   {
@@ -46876,7 +46876,7 @@
     "location": "modules/ie-objects/components/object-detail-page-ai-entities/ai-entity-interval-pills",
     "key": "page-van-pageCount",
     "language": "en",
-    "value": "{{page}} of {{{{pageCount}}",
+    "value": "{{page}} of {{pageCount}}",
     "value_type": "TEXT"
   },
   {
@@ -57226,7 +57226,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "keer-terug-mobiel",
     "language": "nl",
-    "value": "Keer terug mobiel",
+    "value": "Keer terug",
     "value_type": "TEXT"
   },
   {
@@ -57236,7 +57236,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "keer-terug-mobiel",
     "language": "en",
-    "value": "Go back mobile",
+    "value": "Go back",
     "value_type": "TEXT"
   },
   {
