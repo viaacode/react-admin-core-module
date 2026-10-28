@@ -9,6 +9,7 @@ export const FLOWPLAYER_CUSTOM_CONTROL_COLORS_HET_ARCHIEF = (): FlowPlayerContro
 	backgroundColor: Color.Black,
 	foregroundColor: Color.White,
 	progressColor: Color.OceanGreen,
+	volumeColor: Color.Jade,
 	progressTrackHoverColor: Color.Ink,
 	cuepointColor: Color.SeaGreen,
 	buttonTextColor: Color.White,
