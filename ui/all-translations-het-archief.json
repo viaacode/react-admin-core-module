@@ -63838,5 +63838,25 @@
     "language": "en",
     "value": "Pagina url",
     "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "BACKEND",
+    "location": "modules/campaign-monitor/services/campaign-monitor",
+    "key": "hergebruik-voor-sleutelgebruikers",
+    "language": "nl",
+    "value": "Hergebruik voor sleutelgebruikers",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "BACKEND",
+    "location": "modules/campaign-monitor/services/campaign-monitor",
+    "key": "hergebruik-voor-sleutelgebruikers",
+    "language": "en",
+    "value": "Hergebruik voor sleutelgebruikers",
+    "value_type": "TEXT"
   }
 ]
