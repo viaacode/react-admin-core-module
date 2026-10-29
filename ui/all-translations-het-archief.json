@@ -48346,7 +48346,7 @@
     "location": "modules/ie-objects/components/object-detail-page-metadata-tab/object-detail-page-metadata-tab",
     "key": "metadata-worden-aangeleverd-door-partners-van-meemoo-meemoo-is-niet-verantwoordelijk-voor-onjuistheden-of-onvolledigheden-in-deze-gegevens-meer-info",
     "language": "nl",
-    "value": "Metadata worden aangeleverd door partners van meemoo. Meemoo is niet verantwoordelijk voor onjuistheden of onvolledigheden in deze gegevens. Meer info",
+    "value": "<p>Metadata worden aangeleverd door partners van meemoo. Meemoo is niet verantwoordelijk voor onjuistheden of onvolledigheden in deze gegevens. <a target=\"_blank\" rel=\"noopener noreferrer nofollow\" href=\"https://hetarchief.be/vragen?label=Zoeken&amp;item=%2Fhoe-werkt-meemoo-aan-de-kwaliteit-van-metadata\">Meer info</a></p>",
     "value_type": "HTML"
   },
   {
@@ -48356,7 +48356,7 @@
     "location": "modules/ie-objects/components/object-detail-page-metadata-tab/object-detail-page-metadata-tab",
     "key": "metadata-worden-aangeleverd-door-partners-van-meemoo-meemoo-is-niet-verantwoordelijk-voor-onjuistheden-of-onvolledigheden-in-deze-gegevens-meer-info",
     "language": "en",
-    "value": "The metadata is provided by partners of meemoo. Meemoo is not responsible for inaccuracies or the incompleteness of data. More info.",
+    "value": "<p>The metadata is provided by partners of meemoo. Meemoo is not responsible for inaccuracies or the incompleteness of data. <a target=\"_blank\" rel=\"noopener noreferrer nofollow\" href=\"https://hetarchief.be/en/questions?label=Search&amp;item=%2Fhow-does-meemoo-work-on-the-metadata-quality\">More info.</a></p>",
     "value_type": "HTML"
   },
   {
