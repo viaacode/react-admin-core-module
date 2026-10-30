@@ -1,6 +1,7 @@
 import React, { type CSSProperties, type FunctionComponent, type ReactNode, useMemo } from 'react';
 import { Color } from '~modules/content-page/types/content-block.types';
 import type { DefaultComponentProps } from '~modules/shared/types/components';
+import { getBackgroundImage, SCREEN_IMAGE_WIDTH } from '~shared/helpers/images';
 import './BlockHeroCarousel.scss';
 import 'swiper/css';
 import type { HetArchiefIeObjectType } from '@viaa/avo2-types';
@@ -106,7 +107,8 @@ export const BlockHeroCarousel: FunctionComponent<BlockHeroCarouselProps> = ({
 					className={clsx('c-block-hero-carousel__background')}
 					style={
 						{
-							backgroundImage: `url(${backgroundImage})`,
+							// Covers the full width of the screen
+							backgroundImage: getBackgroundImage(backgroundImage, SCREEN_IMAGE_WIDTH),
 						} as CSSProperties
 					}
 				/>

@@ -6,6 +6,8 @@ import { IeObjectFlowPlayerWrapper } from '~modules/content-page/components/IeOb
 import { NoAccessToObjectPlaceholder } from '~modules/content-page/components/NoAccessToObjectPlaceholder';
 import { useGetIeObjectsPlayableDisplayData } from '~modules/content-page/hooks/useGetIeObjectsPlayableDisplayData';
 import { CopyrightAttribution } from '~shared/components/CopyrightAttribution';
+import { OptimizedImg } from '~shared/components/OptimizedImage/OptimizedImage';
+import { getMediaImageDisplayWidth, getPrimaryImageUrl } from '~shared/helpers/images';
 import { snippetTimeToSeconds } from '~shared/helpers/parsers/duration';
 import type { PickerItem } from '~shared/types/content-picker';
 
@@ -89,6 +91,9 @@ export const BlockHetArchiefVideo: FunctionComponent<BlockHetArchiefVideoProps> 
 	// having it appear out of nowhere once the url lands.
 	const isLoadingObject = isLoading || isFetching || !ieObjects;
 
+	// The player is as wide as the width option of the block
+	const { displayWidth: posterDisplayWidth, sizes: posterSizes } = getMediaImageDisplayWidth(width);
+
 	// Nothing local to hold the spot with while the object is still loading, and nothing to play
 	// once it has: the block is only ever added for an AV object, but content pages are public while
 	// the object behind them still goes through the licence and visitor space checks. An object this
@@ -112,8 +117,10 @@ export const BlockHetArchiefVideo: FunctionComponent<BlockHetArchiefVideoProps> 
 					<NoAccessToObjectPlaceholder dctermsFormat={ieObject?.dctermsFormat} />
 				) : isLoadingObject || !ieObject ? (
 					<>
-						<img
+						<OptimizedImg
 							src={poster}
+							displayWidth={posterDisplayWidth}
+							sizes={posterSizes}
 							alt=""
 							aria-hidden="true"
 							className="c-block-het-archief-video__player-poster"
@@ -123,7 +130,11 @@ export const BlockHetArchiefVideo: FunctionComponent<BlockHetArchiefVideoProps> 
 						</div>
 					</>
 				) : (
-					<IeObjectFlowPlayerWrapper ieObject={ieObject} poster={poster} title={title} />
+					<IeObjectFlowPlayerWrapper
+						ieObject={ieObject}
+						poster={getPrimaryImageUrl(poster, posterDisplayWidth)}
+						title={title}
+					/>
 				)}
 			</div>
 			<CopyrightAttribution

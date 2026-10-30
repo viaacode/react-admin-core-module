@@ -17,6 +17,7 @@ export const BlockUspGridWrapper: FunctionComponent<BlockUspGridWrapperProps> = 
 			<BlockImageGrid
 				imageWidth="32.5rem"
 				imageHeight="7.5rem"
+				imageDisplayWidth={325}
 				itemWidth="32.5rem"
 				horizontalMargin={124}
 				verticalMargin={82}

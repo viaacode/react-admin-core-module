@@ -5,7 +5,7 @@ import type {
 	GridSize,
 	RenderLinkFunction,
 } from '@viaa/avo2-components';
-import { Button, Column, convertToHtml, Grid, Image, Spacer } from '@viaa/avo2-components';
+import { Button, Column, convertToHtml, Grid, Spacer } from '@viaa/avo2-components';
 import clsx from 'clsx';
 import type { FunctionComponent } from 'react';
 import React from 'react';
@@ -16,12 +16,17 @@ import {
 import type { AlignOption } from '~modules/content-page/types/content-block.types';
 import Html from '~shared/components/Html/Html';
 import { ContentPageIcon } from '~shared/components/Icon/Icon';
+import { OptimizedImage } from '~shared/components/OptimizedImage/OptimizedImage';
 import { defaultRenderLinkFunction } from '~shared/helpers/routing/link';
 import { SanitizePreset } from '~shared/helpers/sanitize/presets';
 
 import './BlockRichTextTwoColumns.scss';
 import { CopyrightAttribution } from '~shared/components/CopyrightAttribution';
 import { generateSmartLink } from '~shared/components/SmartLink/SmartLink';
+
+// The image keeps its intrinsic width, capped by its column: about 640px next to the other
+// column, up to ~750px when the columns stack on tablets
+const IMAGE_DISPLAY_WIDTH = 960;
 
 interface BlockRichTextTwoColumnsElement {
 	/** Undefined for content saved before columns could hold an image: render as text */
@@ -96,7 +101,14 @@ export const BlockRichTextTwoColumns: FunctionComponent<BlockRichTextTwoColumnsP
 
 		// The image keeps its intrinsic width, so the alignment only has a visible effect
 		// when the image is narrower than the column.
-		const image = imageSource ? <Image src={imageSource} alt={imageAlt} /> : null;
+		const image = imageSource ? (
+			<OptimizedImage
+				src={imageSource}
+				displayWidth={IMAGE_DISPLAY_WIDTH}
+				intrinsicSize
+				alt={imageAlt}
+			/>
+		) : null;
 
 		return (
 			<div
