@@ -134,6 +134,11 @@ export interface AdminConfig {
 		// as getIeObjectDetailPath: the client's own advanced-filter url encoding is reused here,
 		// without the admin-core needing to depend on the client package.
 		getThemeSearchPath?: (locale: string, themeSlug: string) => string;
+		// Urls to load an image at the given display width (css px), in priority order: the primary
+		// (eg. resized) url first, then the fallbacks to try when it fails to load. The host decides
+		// which images can be resized and rounds the width to the sizes it supports. Unset means
+		// every image is loaded from its original url.
+		getImageUrls?: (url: string, width: number) => string[];
 	};
 	components: {
 		loader: {

@@ -8,9 +8,14 @@ import { Icon } from '@viaa/avo2-components';
 import clsx from 'clsx';
 import type { FunctionComponent } from 'react';
 import React from 'react';
+import { getBackgroundImage } from '~shared/helpers/images';
 import { defaultRenderLinkFunction } from '~shared/helpers/routing/link';
 
 import './BlockSpotlight.scss';
+
+// The first item spans 4 of 6 columns of the page content width (~850px), the other two 2 of 6
+// (~425px). All of them are full width (up to 700px) on mobile.
+const ITEM_DISPLAY_WIDTHS = [860, 640, 640];
 
 export interface ImageInfo {
 	image: string;
@@ -40,7 +45,7 @@ export const BlockSpotlight: FunctionComponent<BlockSpotlightProps> = ({
 				className={clsx('c-spotlight__item', {
 					'u-clickable': !!buttonAction,
 				})}
-				style={{ backgroundImage: `url(${element?.image})` }}
+				style={{ backgroundImage: getBackgroundImage(element?.image, ITEM_DISPLAY_WIDTHS[index]) }}
 			>
 				{renderLink(
 					buttonAction,

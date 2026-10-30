@@ -1,5 +1,5 @@
 import { Button } from '@meemoo/react-components';
-import { type ButtonAction, Image } from '@viaa/avo2-components';
+import type { ButtonAction } from '@viaa/avo2-components';
 import { AvoCoreContentPickerType, type HetArchiefIeObjectType } from '@viaa/avo2-types';
 import React, { type FunctionComponent, type ReactElement, useMemo, useState } from 'react';
 import type SwiperController from 'swiper';
@@ -13,10 +13,16 @@ import { NoAccessToObjectPlaceholder } from '~modules/content-page/components/No
 import { useGetIeObjectsPlayableDisplayData } from '~modules/content-page/hooks/useGetIeObjectsPlayableDisplayData.ts';
 import type { Color, HeadingTypeOption } from '~modules/content-page/types/content-block.types';
 import type { DefaultComponentProps } from '~modules/shared/types/components';
+import { OptimizedImage } from '~shared/components/OptimizedImage/OptimizedImage';
 import { generateSmartLink } from '~shared/components/SmartLink/SmartLink.tsx';
 
 import 'swiper/css';
 import './BlockOverviewWithCarousel.scss';
+
+// Slides are 36.8rem high: a 16:9 slide is at most 64rem wide, the other slides are 28rem wide but
+// their image covers a box about as high, which a landscape photo needs ~500px for
+const LANDSCAPE_SLIDE_IMAGE_DISPLAY_WIDTH = 640;
+const SLIDE_IMAGE_DISPLAY_WIDTH = 500;
 
 export interface BlockOverviewWithCarouselProps extends DefaultComponentProps {
 	/** Injected by the content block renderer for saved blocks, see PLAYABLE_DISPLAY_DATA_BLOCKS */
@@ -71,6 +77,7 @@ export const BlockOverviewWithCarousel: FunctionComponent<BlockOverviewWithCarou
 
 	const renderSlideContent = (
 		image: string,
+		imageDisplayWidth: number,
 		imageAlt: string,
 		title: string,
 		backgroundColor: Color,
@@ -81,8 +88,9 @@ export const BlockOverviewWithCarousel: FunctionComponent<BlockOverviewWithCarou
 		return (
 			<>
 				{hasAccessToEssence ? (
-					<Image
+					<OptimizedImage
 						src={image}
+						displayWidth={imageDisplayWidth}
 						alt={imageAlt || title}
 						className={clsx('c-block-overview-with-carousel__slide-image')}
 					/>
@@ -187,6 +195,9 @@ export const BlockOverviewWithCarousel: FunctionComponent<BlockOverviewWithCarou
 										mediaItem,
 										renderSlideContent(
 											image,
+											itemDisplay === '16:9'
+												? LANDSCAPE_SLIDE_IMAGE_DISPLAY_WIDTH
+												: SLIDE_IMAGE_DISPLAY_WIDTH,
 											imageAlt,
 											title,
 											backgroundColor,

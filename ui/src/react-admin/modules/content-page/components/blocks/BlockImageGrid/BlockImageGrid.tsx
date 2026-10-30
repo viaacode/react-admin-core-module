@@ -12,12 +12,14 @@ import { defaultRenderLinkFunction } from '~shared/helpers/routing/link';
 import './BlockImageGrid.scss';
 import { CopyrightAttribution } from '~shared/components/CopyrightAttribution';
 import { generateSmartLink } from '~shared/components/SmartLink/SmartLink.tsx';
+import { getBackgroundImage } from '~shared/helpers/images';
 import { tText } from '~shared/helpers/translation-functions.ts';
 
 export const BlockImageGrid: FunctionComponent<BlockImageGridProps> = ({
 	elements = [],
 	imageWidth = '20rem',
 	imageHeight = '20rem',
+	imageDisplayWidth = 400,
 	itemWidth = '20rem',
 	fill = 'cover',
 	align = 'center',
@@ -46,7 +48,11 @@ export const BlockImageGrid: FunctionComponent<BlockImageGridProps> = ({
 					style={{
 						width: imageWidth,
 						height: imageHeight,
-						backgroundImage: `url(${element.source})`,
+						// fill auto shows the image at its own size, which a resized image would change
+						backgroundImage:
+							fill === 'auto'
+								? `url(${element.source})`
+								: getBackgroundImage(element.source, imageDisplayWidth),
 						backgroundSize: fill,
 						backgroundPosition: imageItemAlignment || 'center',
 					}}

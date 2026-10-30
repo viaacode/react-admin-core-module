@@ -16,8 +16,10 @@ import { Color } from '~modules/content-page/types/content-block.types';
 import { CopyrightAttribution } from '~shared/components/CopyrightAttribution';
 import Html from '~shared/components/Html/Html';
 import { Icon } from '~shared/components/Icon/Icon';
+import { OptimizedImg } from '~shared/components/OptimizedImage/OptimizedImage';
 import { formatDateToDayMonthNameYear, getYear } from '~shared/helpers/formatters/date';
 import { getIconFromObjectType } from '~shared/helpers/get-icon-from-object-type';
+import { getImageSizesUpTo, getPrimaryImageUrl } from '~shared/helpers/images';
 import { isAudioVideoType } from '~shared/helpers/is-audio-video-newspaper-type.ts';
 import { snippetTimeToSeconds } from '~shared/helpers/parsers/duration';
 import { SanitizePreset } from '~shared/helpers/sanitize/presets';
@@ -26,6 +28,10 @@ import { HET_ARCHIEF } from '~shared/types';
 import type { DefaultComponentProps } from '~shared/types/components';
 import './BlockTimeline.scss';
 import { TimelineVisualType } from '~content-blocks/BlockTimeline/BlockTimeline.types.ts';
+
+// The node media spans the timeline, which is at most 1215px wide (its 1215 / 630 aspect ratio)
+const NODE_IMAGE_DISPLAY_WIDTH = 1215;
+const NODE_IMAGE_SIZES = getImageSizesUpTo(NODE_IMAGE_DISPLAY_WIDTH);
 
 export interface BlockTimelineProps extends DefaultComponentProps {
 	/** Id of the content block, added by the content block renderer. Empty for an unsaved block. */
@@ -134,8 +140,10 @@ export const BlockTimeline: FunctionComponent<BlockTimelineProps> = ({
 				)}
 			>
 				{node.image && (
-					<img
+					<OptimizedImg
 						src={node.image}
+						displayWidth={NODE_IMAGE_DISPLAY_WIDTH}
+						sizes={NODE_IMAGE_SIZES}
 						alt=""
 						aria-hidden="true"
 						className="c-block-timeline__node-object-image"
@@ -161,7 +169,7 @@ export const BlockTimeline: FunctionComponent<BlockTimelineProps> = ({
 					<IeObjectFlowPlayerWrapper
 						className="c-block-timeline__node-object-media"
 						ieObject={ieObject}
-						poster={node.image}
+						poster={getPrimaryImageUrl(node.image, NODE_IMAGE_DISPLAY_WIDTH)}
 					/>
 				);
 			}
@@ -206,8 +214,10 @@ export const BlockTimeline: FunctionComponent<BlockTimelineProps> = ({
 	/** The node's own image, for nodes that show a plain image instead of an object. */
 	const renderNodeImage = (node: TimelineNodeBlockComponentState): ReactNode => (
 		<div className="c-block-timeline__node-image-wrapper">
-			<img
+			<OptimizedImg
 				src={node.image}
+				displayWidth={NODE_IMAGE_DISPLAY_WIDTH}
+				sizes={NODE_IMAGE_SIZES}
 				alt={node.imageAlt || node.title}
 				className="c-block-timeline__node-image"
 			/>
