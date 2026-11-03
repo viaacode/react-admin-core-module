@@ -782,16 +782,16 @@ async function extractAvoClientTranslations(
 	onProgress?: ProgressCallback
 ) {
 	const translations = await updateTranslations(
-		resolvePath('../../../avo2-client/src'),
+		resolvePath('../../../avo-client/src'),
 		App.AVO,
 		Component.FRONTEND,
 		'shared/translations/nl.json',
 		allOnlineTranslations,
-		resolvePath('../../../avo2-client/tsconfig.json'),
+		resolvePath('../../../avo-client/tsconfig.json'),
 		onProgress
 	);
 	onProgress?.(97, 'formatting...');
-	await formatCode(resolvePath('../../../avo2-client'));
+	await formatCode(resolvePath('../../../avo-client'));
 	onProgress?.(100, 'done');
 	return translations;
 }
@@ -801,16 +801,16 @@ async function extractAvoProxyTranslations(
 	onProgress?: ProgressCallback
 ) {
 	const translations = await updateTranslations(
-		resolvePath('../../../avo2-proxy/server/src'),
+		resolvePath('../../../avo-proxy/server/src'),
 		App.AVO,
 		Component.BACKEND,
 		'shared/translations/nl.json',
 		allOnlineTranslations,
-		resolvePath('../../../avo2-proxy/server/tsconfig.json'),
+		resolvePath('../../../avo-proxy/server/tsconfig.json'),
 		onProgress
 	);
 	onProgress?.(97, 'formatting...');
-	await formatCode(resolvePath('../../../avo2-proxy/server'));
+	await formatCode(resolvePath('../../../avo-proxy/server'));
 	onProgress?.(100, 'done');
 	return translations;
 }

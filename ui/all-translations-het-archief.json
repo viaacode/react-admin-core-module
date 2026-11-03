@@ -2646,7 +2646,7 @@
     "location": "modules/content-page/const/get-content-block-type-options",
     "key": "hero-carousel",
     "language": "nl",
-    "value": "Hero carrousel",
+    "value": "Hero carousel",
     "value_type": "TEXT"
   },
   {
@@ -2656,7 +2656,7 @@
     "location": "modules/content-page/const/get-content-block-type-options",
     "key": "hero-carousel",
     "language": "en",
-    "value": "Hero carousel",
+    "value": "Hero carrousel",
     "value_type": "TEXT"
   },
   {
@@ -2706,7 +2706,7 @@
     "location": "modules/content-page/const/get-content-block-type-options",
     "key": "carousel-met-afbeeldingen",
     "language": "nl",
-    "value": "Carrousel met afbeeldingen",
+    "value": "Carousel met afbeeldingen",
     "value_type": "TEXT"
   },
   {
@@ -2716,7 +2716,7 @@
     "location": "modules/content-page/const/get-content-block-type-options",
     "key": "carousel-met-afbeeldingen",
     "language": "en",
-    "value": "Carousel with images",
+    "value": "Carrousel with images",
     "value_type": "TEXT"
   },
   {
@@ -46866,7 +46866,7 @@
     "location": "modules/ie-objects/components/object-detail-page-ai-entities/ai-entity-interval-pills",
     "key": "page-van-pageCount",
     "language": "nl",
-    "value": "{{page}} van {{pageCount}}",
+    "value": "{{page}} van {{{{pageCount}}",
     "value_type": "TEXT"
   },
   {
@@ -46876,7 +46876,7 @@
     "location": "modules/ie-objects/components/object-detail-page-ai-entities/ai-entity-interval-pills",
     "key": "page-van-pageCount",
     "language": "en",
-    "value": "{{page}} of {{pageCount}}",
+    "value": "{{page}} of {{{{pageCount}}",
     "value_type": "TEXT"
   },
   {
@@ -48346,7 +48346,7 @@
     "location": "modules/ie-objects/components/object-detail-page-metadata-tab/object-detail-page-metadata-tab",
     "key": "metadata-worden-aangeleverd-door-partners-van-meemoo-meemoo-is-niet-verantwoordelijk-voor-onjuistheden-of-onvolledigheden-in-deze-gegevens-meer-info",
     "language": "nl",
-    "value": "<p>Metadata worden aangeleverd door partners van meemoo. Meemoo is niet verantwoordelijk voor onjuistheden of onvolledigheden in deze gegevens. <a target=\"_blank\" rel=\"noopener noreferrer nofollow\" href=\"https://hetarchief.be/vragen?label=Zoeken&amp;item=%2Fhoe-werkt-meemoo-aan-de-kwaliteit-van-metadata\">Meer info</a></p>",
+    "value": "Metadata worden aangeleverd door partners van meemoo. Meemoo is niet verantwoordelijk voor onjuistheden of onvolledigheden in deze gegevens. Meer info",
     "value_type": "HTML"
   },
   {
@@ -48356,7 +48356,7 @@
     "location": "modules/ie-objects/components/object-detail-page-metadata-tab/object-detail-page-metadata-tab",
     "key": "metadata-worden-aangeleverd-door-partners-van-meemoo-meemoo-is-niet-verantwoordelijk-voor-onjuistheden-of-onvolledigheden-in-deze-gegevens-meer-info",
     "language": "en",
-    "value": "<p>The metadata is provided by partners of meemoo. Meemoo is not responsible for inaccuracies or the incompleteness of data. <a target=\"_blank\" rel=\"noopener noreferrer nofollow\" href=\"https://hetarchief.be/en/questions?label=Search&amp;item=%2Fhow-does-meemoo-work-on-the-metadata-quality\">More info.</a></p>",
+    "value": "The metadata is provided by partners of meemoo. Meemoo is not responsible for inaccuracies or the incompleteness of data. More info.",
     "value_type": "HTML"
   },
   {
@@ -62303,6 +62303,26 @@
     "id": "",
     "app": "HET_ARCHIEF",
     "component": "BACKEND",
+    "location": "modules/campaign-monitor/services/campaign-monitor",
+    "key": "hergebruik-voor-sleutelgebruikers",
+    "language": "nl",
+    "value": "Hergebruik voor sleutelgebruikers",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "BACKEND",
+    "location": "modules/campaign-monitor/services/campaign-monitor",
+    "key": "hergebruik-voor-sleutelgebruikers",
+    "language": "en",
+    "value": "Hergebruik voor sleutelgebruikers",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "BACKEND",
     "location": "modules/material-request-messages/services/material-request-pdf-generator",
     "key": "volledig-materiaal",
     "language": "nl",
@@ -63837,26 +63857,6 @@
     "key": "pagina-url",
     "language": "en",
     "value": "Pagina url",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "BACKEND",
-    "location": "modules/campaign-monitor/services/campaign-monitor",
-    "key": "hergebruik-voor-sleutelgebruikers",
-    "language": "nl",
-    "value": "Hergebruik voor sleutelgebruikers",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "BACKEND",
-    "location": "modules/campaign-monitor/services/campaign-monitor",
-    "key": "hergebruik-voor-sleutelgebruikers",
-    "language": "en",
-    "value": "Hergebruik voor sleutelgebruikers",
     "value_type": "TEXT"
   }
 ]
