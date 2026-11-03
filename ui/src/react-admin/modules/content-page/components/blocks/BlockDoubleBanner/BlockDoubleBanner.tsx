@@ -1,4 +1,4 @@
-import { Image, LinkTarget } from '@viaa/avo2-components';
+import { LinkTarget } from '@viaa/avo2-components';
 import clsx from 'clsx';
 import { compact } from 'es-toolkit';
 import type { CSSProperties, FunctionComponent, ReactElement } from 'react';
@@ -9,8 +9,14 @@ import type {
 } from '~content-blocks/BlockDoubleBanner/BlockDoubleBanner.types';
 import { AdminCoreIconName } from '~core/config/config.types';
 import { ContentPageIcon, Icon } from '~shared/components/Icon/Icon';
+import { OptimizedImage } from '~shared/components/OptimizedImage/OptimizedImage';
 import { generateSmartLink } from '~shared/components/SmartLink/SmartLink';
 import './BlockDoubleBanner.scss';
+
+// Full width below 900px (see scss), otherwise half of a banner half (~320px) that covers a box
+// as high as the text, so a landscape photo needs about twice that
+const IMAGE_DISPLAY_WIDTH = 640;
+const IMAGE_SIZES = '(max-width: 900px) 100vw, 640px';
 
 /**
  * Two mirrored halves, each one clickable path to a search page or content page.
@@ -58,7 +64,14 @@ export const BlockDoubleBanner: FunctionComponent<BlockDoubleBannerProps> = ({
 				<div className="c-block-double-banner__image">
 					{/* Before an image is uploaded the value is empty, and an empty src makes the
 					    browser refetch the page. */}
-					{half.image ? <Image src={half.image} alt="" /> : null}
+					{half.image ? (
+						<OptimizedImage
+							src={half.image}
+							displayWidth={IMAGE_DISPLAY_WIDTH}
+							sizes={IMAGE_SIZES}
+							alt=""
+						/>
+					) : null}
 				</div>
 			</>
 		);

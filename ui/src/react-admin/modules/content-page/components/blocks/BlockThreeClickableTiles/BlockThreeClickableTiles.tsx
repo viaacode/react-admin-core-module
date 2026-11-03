@@ -1,5 +1,4 @@
 import type { ButtonAction } from '@viaa/avo2-components';
-import { Image } from '@viaa/avo2-components';
 import clsx from 'clsx';
 import { isNil } from 'es-toolkit';
 import type { FunctionComponent, ReactElement, ReactNode } from 'react';
@@ -9,6 +8,11 @@ import type { HeadingTypeOption } from '~modules/content-page/types/content-bloc
 import { SmartLink } from '~modules/shared/components/SmartLink/SmartLink';
 import type { DefaultComponentProps } from '~modules/shared/types/components';
 import { Icon } from '~shared/components/Icon/Icon';
+import { OptimizedImage } from '~shared/components/OptimizedImage/OptimizedImage';
+
+// Square tiles in 3 columns of the page content width (~405px), full width below 576px
+const IMAGE_DISPLAY_WIDTH = 420;
+const IMAGE_SIZES = '(max-width: 576px) 100vw, 420px';
 
 export interface BlockClickableTilesProps {
 	title: string;
@@ -30,7 +34,13 @@ export const BlockThreeClickableTiles: FunctionComponent<BlockThreeClickableTile
 			key={`c-block-three-clickable-tiles-${i}`}
 			className="c-block-three-clickable-tiles__tile"
 		>
-			<Image src={image} alt={title} className="c-block-three-clickable-tiles__image" />
+			<OptimizedImage
+				src={image}
+				displayWidth={IMAGE_DISPLAY_WIDTH}
+				sizes={IMAGE_SIZES}
+				alt={title}
+				className="c-block-three-clickable-tiles__image"
+			/>
 			<div className="c-block-three-clickable-tiles__content">
 				{title && titleType && (
 					<BlockHeading

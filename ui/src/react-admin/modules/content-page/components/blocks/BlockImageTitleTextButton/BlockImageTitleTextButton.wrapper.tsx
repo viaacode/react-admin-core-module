@@ -1,4 +1,4 @@
-import { Button, Column, Grid, Image } from '@viaa/avo2-components';
+import { Button, Column, Grid } from '@viaa/avo2-components';
 import clsx from 'clsx';
 import type { FC } from 'react';
 import React from 'react';
@@ -6,7 +6,12 @@ import { BlockHeading } from '~content-blocks/BlockHeading/BlockHeading';
 import { BlockRichTextWrapper } from '~content-blocks/BlockRichText/BlockRichText.wrapper';
 import type { ImageTitleTextButtonBlockComponentState } from '~modules/content-page/types/content-block.types';
 import { ContentPageIcon } from '~shared/components/Icon/Icon';
+import { OptimizedImage } from '~shared/components/OptimizedImage/OptimizedImage';
 import { generateSmartLink } from '~shared/components/SmartLink/SmartLink';
+
+// 7 of 12 columns of the page content width (~750px), full width when the columns stack
+const IMAGE_DISPLAY_WIDTH = 750;
+const IMAGE_SIZES = '(max-width: 700px) 100vw, 750px';
 
 export const BlockImageTitleTextButtonWrapper: FC<ImageTitleTextButtonBlockComponentState> = (
 	props
@@ -26,7 +31,15 @@ export const BlockImageTitleTextButtonWrapper: FC<ImageTitleTextButtonBlockCompo
 		imageSource,
 	} = props;
 
-	const image = imageSource && <Image src={imageSource} alt={imageAlt || headingTitle} wide />;
+	const image = imageSource && (
+		<OptimizedImage
+			src={imageSource}
+			displayWidth={IMAGE_DISPLAY_WIDTH}
+			sizes={IMAGE_SIZES}
+			alt={imageAlt || headingTitle}
+			wide
+		/>
+	);
 
 	return (
 		<Grid

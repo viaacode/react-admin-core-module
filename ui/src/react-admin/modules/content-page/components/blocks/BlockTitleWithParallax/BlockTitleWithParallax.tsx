@@ -2,6 +2,7 @@ import clsx from 'clsx';
 import React, { type FunctionComponent, type ReactElement, useEffect, useRef } from 'react';
 import type { TitleWithParallaxBlockComponentState } from '~modules/content-page/types/content-block.types';
 import type { DefaultComponentProps } from '~modules/shared/types/components';
+import { getBackgroundImage, SCREEN_IMAGE_WIDTH } from '~shared/helpers/images';
 
 import {
 	computeParallaxOffset,
@@ -113,7 +114,8 @@ export const BlockTitleWithParallax: FunctionComponent<BlockTitleWithParallaxPro
 					ref={imageRef}
 					className="c-block-title-with-parallax__image"
 					aria-hidden="true"
-					style={{ backgroundImage: `url("${image}")` }}
+					// Covers the full width of the screen
+					style={{ backgroundImage: getBackgroundImage(image, SCREEN_IMAGE_WIDTH) }}
 				/>
 			)}
 			<div className="c-block-title-with-parallax__content">
