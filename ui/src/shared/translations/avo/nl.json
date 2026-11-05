@@ -264,7 +264,7 @@
   "admin/content-block/helpers/generators/quote___quote": "Quote",
   "admin/content-block/helpers/generators/quote___quote-is-verplicht": "Quote is verplicht",
   "admin/content-block/helpers/generators/rich-text-two-columns___afbeelding": "Afbeelding",
-  "admin/content-block/helpers/generators/rich-text-two-columns___alignatie-afbeelding": "Alignatie afbeelding",
+  "admin/content-block/helpers/generators/rich-text-two-columns___alignatie-afbeelding": "Uitlijning afbeelding",
   "admin/content-block/helpers/generators/rich-text-two-columns___alt-tekst-voor-de-afbeelding": "Alt tekst voor de afbeelding",
   "admin/content-block/helpers/generators/rich-text-two-columns___alt-title-text": "Alt. titel tekst (verplicht)",
   "admin/content-block/helpers/generators/rich-text-two-columns___een-afbeelding-is-verplicht": "Een afbeelding is verplicht",
