@@ -2646,7 +2646,7 @@
     "location": "modules/content-page/const/get-content-block-type-options",
     "key": "hero-carousel",
     "language": "nl",
-    "value": "Hero carrousel",
+    "value": "Hero carousel",
     "value_type": "TEXT"
   },
   {
@@ -2656,7 +2656,7 @@
     "location": "modules/content-page/const/get-content-block-type-options",
     "key": "hero-carousel",
     "language": "en",
-    "value": "Hero carousel",
+    "value": "Hero carrousel",
     "value_type": "TEXT"
   },
   {
@@ -2706,7 +2706,7 @@
     "location": "modules/content-page/const/get-content-block-type-options",
     "key": "carousel-met-afbeeldingen",
     "language": "nl",
-    "value": "Carrousel met afbeeldingen",
+    "value": "Carousel met afbeeldingen",
     "value_type": "TEXT"
   },
   {
@@ -2716,7 +2716,7 @@
     "location": "modules/content-page/const/get-content-block-type-options",
     "key": "carousel-met-afbeeldingen",
     "language": "en",
-    "value": "Carousel with images",
+    "value": "Carrousel with images",
     "value_type": "TEXT"
   },
   {
@@ -62306,7 +62306,7 @@
     "location": "modules/campaign-monitor/services/campaign-monitor",
     "key": "hergebruik-voor-sleutelgebruikers",
     "language": "nl",
-    "value": "sleutelgebruiker",
+    "value": "Hergebruik voor sleutelgebruikers",
     "value_type": "TEXT"
   },
   {
@@ -62316,7 +62316,7 @@
     "location": "modules/campaign-monitor/services/campaign-monitor",
     "key": "hergebruik-voor-sleutelgebruikers",
     "language": "en",
-    "value": "key user",
+    "value": "Reuse for key users",
     "value_type": "TEXT"
   },
   {
