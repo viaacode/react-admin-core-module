@@ -7,6 +7,7 @@ import { Color } from '~modules/content-page/types/content-block.types.ts';
 import type { DefaultComponentProps } from '~modules/shared/types/components';
 import { Locale } from '~modules/translations/translations.core.types.ts';
 import { getFlowPlayerCustomControlColors } from '~shared/helpers/flowplayer-custom-control-colors.ts';
+import { getPlayerMimeType } from '~shared/helpers/ie-object-files.ts';
 import {
 	isAudioType,
 	isAudioVideoType,
@@ -109,7 +110,7 @@ export const IeObjectFlowPlayerWrapper: FunctionComponent<IeObjectFlowPlayerWrap
 				src={[
 					{
 						src: ieObject.playableUrl as string,
-						type: ieObject.mimeType as string,
+						type: getPlayerMimeType(ieObject.mimeType) as string,
 					},
 				]}
 				waveformData={ieObject.peakfileData || undefined}
