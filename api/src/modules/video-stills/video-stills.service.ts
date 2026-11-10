@@ -223,6 +223,14 @@ export class VideoStillsService {
 		if (!objectNameInfo) {
 			return null;
 		}
+		if (objectNameInfo.type === 'audio') {
+			// Audio items always use the DEFAULT_AUDIO_STILL, so never request keyframes for them.
+			// Their keyframes might not exist, eg: when the archive switches to m4a files. ARC-4178
+			return {
+				...objectNameInfo,
+				videoStills: [],
+			};
+		}
 		try {
 			return {
 				...objectNameInfo,
