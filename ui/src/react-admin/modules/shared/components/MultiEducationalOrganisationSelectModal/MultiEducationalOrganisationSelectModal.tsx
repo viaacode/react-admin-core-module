@@ -12,9 +12,11 @@ import {
 
 import clsx from 'clsx';
 import type { FunctionComponent, MouseEvent } from 'react';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { AdminConfigManager } from '~core/config/config.class';
 import { tHtml, tText } from '~shared/helpers/translation-functions';
 import { AVO } from '~shared/types';
+import { getEducationOrganisationKey } from '../../helpers/edu-org-string-to-client-org';
 import { NULL_FILTER } from '../../helpers/filters';
 import { EducationalOrganisationsSelect } from '../EducationalOrganisationsSelect/EducationalOrganisationsSelect';
 
@@ -38,10 +40,54 @@ export const MultiEducationalOrganisationSelectModal: FunctionComponent<
 	const [selectedOrganisations, setSelectedOrganisations] =
 		useState<AvoEducationOrganizationOrganization[]>(values);
 
+	// The values passed in only contain the organisation and unit ids (from the url), not the names.
+	// Remember the full organisations the user picked, so we can show their names again,
+	// and fetch the names of organisations we do not know yet (eg: after a page reload)
+	const knownOrganisations = useRef<Record<string, AvoEducationOrganizationOrganization>>({});
+
+	// values is a new array on every render, so only react to actual changes in the selected organisations
+	const valuesKey = values.map(getEducationOrganisationKey).join(',');
+
+	// biome-ignore lint/correctness/useExhaustiveDependencies: values is derived from valuesKey
 	useEffect(() => {
-		setSelectedOrganisations(values.filter((org) => org.organisationLabel !== NULL_FILTER));
+		const orgs = values
+			.filter((org) => org.organisationLabel !== NULL_FILTER)
+			.map((org) => knownOrganisations.current[getEducationOrganisationKey(org)] || org);
+		setSelectedOrganisations(orgs);
 		setIncludeEmpty(!!values.find((org) => org.organisationLabel === NULL_FILTER));
-	}, [values]);
+
+		orgs
+			.filter((org) => !knownOrganisations.current[getEducationOrganisationKey(org)])
+			.forEach(async (org) => {
+				try {
+					const name =
+						await AdminConfigManager.getConfig().services.educationOrganisationService.fetchEducationOrganisationName(
+							org.organisationId,
+							org.unitId || undefined
+						);
+					if (!name) {
+						return;
+					}
+					const key = getEducationOrganisationKey(org);
+					const namedOrg = { ...org, organisationLabel: name };
+					knownOrganisations.current[key] = namedOrg;
+					setSelectedOrganisations((selectedOrgs) =>
+						selectedOrgs.map((selectedOrg) =>
+							getEducationOrganisationKey(selectedOrg) === key ? namedOrg : selectedOrg
+						)
+					);
+				} catch (err) {
+					console.error('Failed to fetch educational organisation name', err, { org });
+				}
+			});
+	}, [valuesKey]);
+
+	const handleSelectedOrganisationsChanged = (orgs: AvoEducationOrganizationOrganization[]) => {
+		orgs.forEach((org) => {
+			knownOrganisations.current[getEducationOrganisationKey(org)] = org;
+		});
+		setSelectedOrganisations(orgs);
+	};
 
 	const closeModal = () => {
 		setIsOpen(false);
@@ -50,7 +96,7 @@ export const MultiEducationalOrganisationSelectModal: FunctionComponent<
 	const applyFilter = () => {
 		onChange(
 			[
-				...selectedOrganisations.map((org) => `${org.organisationId}:${org.unitId || ''}`),
+				...selectedOrganisations.map(getEducationOrganisationKey),
 				...(includeEmpty ? [NULL_FILTER] : []),
 			],
 			id
@@ -131,7 +177,7 @@ export const MultiEducationalOrganisationSelectModal: FunctionComponent<
 						</Spacer>
 						<EducationalOrganisationsSelect
 							organisations={selectedOrganisations}
-							onChange={setSelectedOrganisations}
+							onChange={handleSelectedOrganisationsChanged}
 						/>
 					</ModalBody>
 					<ModalFooterRight>
