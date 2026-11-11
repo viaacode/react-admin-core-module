@@ -98,7 +98,7 @@ export const generateWhereObjectAvo = (
 
 			eduOrgToClientOrg(without(filters.educationalOrganisations, NULL_FILTER)).forEach((org) => {
 				orFilters.push({
-					organisations: {
+					educational_organizations: {
 						organization_id: { _eq: org.organisationId },
 						unit_id: org.unitId ? { _eq: org.unitId } : { _is_null: true },
 					},
@@ -108,7 +108,7 @@ export const generateWhereObjectAvo = (
 			if (filters.educationalOrganisations.includes(NULL_FILTER)) {
 				orFilters.push({
 					_not: {
-						organisations: {},
+						educational_organizations: {},
 					},
 				});
 			}
