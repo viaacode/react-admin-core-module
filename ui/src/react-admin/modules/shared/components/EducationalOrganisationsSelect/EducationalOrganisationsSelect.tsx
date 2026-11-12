@@ -1,8 +1,7 @@
-import { Alert, Select, Spacer } from '@viaa/avo2-components';
+import { Alert, Select, Spacer, TagList } from '@viaa/avo2-components';
 import type { AvoEducationOrganizationOrganization } from '@viaa/avo2-types';
 import clsx from 'clsx';
-import { remove, uniq } from 'es-toolkit';
-import { pullAllBy } from 'es-toolkit/compat';
+import { uniqBy } from 'es-toolkit';
 import type { FunctionComponent } from 'react';
 import React, { useEffect, useState } from 'react';
 import { AdminConfigManager } from '~core/config/config.class';
@@ -10,7 +9,10 @@ import { ToastType } from '~core/config/config.types';
 import { AVO } from '~modules/shared/types';
 import { showToast } from '~shared/helpers/show-toast';
 import { tHtml, tText } from '~shared/helpers/translation-functions';
-import { stringsToTagList } from '../../helpers/strings-to-taglist';
+import {
+	getEducationOrganisationDisplayLabel,
+	getEducationOrganisationKey,
+} from '../../helpers/edu-org-string-to-client-org';
 
 export interface Tag {
 	label: string;
@@ -91,8 +93,12 @@ export const EducationalOrganisationsSelect: FunctionComponent<
 						...{ [selectedCity]: orgs },
 					});
 				}
-				pullAllBy(orgs, organisations, 'label');
-				setOrganisationsInCity(orgs);
+				// Hide the organisations that are already selected
+				// Do not mutate orgs, since it can be the array that is stored in the cache
+				const selectedKeys = new Set(organisations.map(getEducationOrganisationKey));
+				setOrganisationsInCity(
+					orgs.filter((org) => !selectedKeys.has(getEducationOrganisationKey(org)))
+				);
 				setOrganizationsLoadingState('loaded');
 			} catch (err) {
 				setOrganisationsInCity([]);
@@ -121,9 +127,9 @@ export const EducationalOrganisationsSelect: FunctionComponent<
 		setSelectedCity(cityAndZipCode);
 	};
 
-	const onSelectedOrganisationChanged = (orgLabel: string) => {
+	const onSelectedOrganisationChanged = (orgKey: string) => {
 		const selectedOrg = organisationsInCity.find(
-			(org: AvoEducationOrganizationOrganization) => org.organisationLabel === orgLabel
+			(org: AvoEducationOrganizationOrganization) => getEducationOrganisationKey(org) === orgKey
 		);
 		if (!selectedOrg) {
 			showToast({
@@ -145,13 +151,11 @@ export const EducationalOrganisationsSelect: FunctionComponent<
 			...organisations,
 			...[selectedOrg],
 		];
-		onChange(uniq(selectedOrgs));
+		onChange(uniqBy(selectedOrgs, getEducationOrganisationKey));
 	};
 
-	const removeOrganisation = async (orgLabel: ReactText) => {
-		const newOrganizations = [...organisations];
-		remove(newOrganizations, (org) => org.organisationLabel === orgLabel);
-		onChange(newOrganizations);
+	const removeOrganisation = (orgKey: ReactText) => {
+		onChange(organisations.filter((org) => getEducationOrganisationKey(org) !== orgKey));
 	};
 
 	const getOrganisationOptions = () => {
@@ -175,8 +179,8 @@ export const EducationalOrganisationsSelect: FunctionComponent<
 				disabled: true,
 			},
 			...organisationsInCity.map((org: AvoEducationOrganizationOrganization) => ({
-				label: org.organisationLabel,
-				value: org.organisationLabel,
+				label: getEducationOrganisationDisplayLabel(org),
+				value: getEducationOrganisationKey(org),
 			})),
 		];
 	};
@@ -184,7 +188,17 @@ export const EducationalOrganisationsSelect: FunctionComponent<
 	const renderOrganisationTagsAndSelects = () => {
 		return (
 			<>
-				{stringsToTagList(organisations, 'label', undefined, removeOrganisation)}
+				{!!organisations.length && (
+					<TagList
+						tags={organisations.map((org) => ({
+							id: getEducationOrganisationKey(org),
+							label: getEducationOrganisationDisplayLabel(org),
+						}))}
+						closable
+						onTagClosed={removeOrganisation}
+						swatches={false}
+					/>
+				)}
 				<Spacer margin="top-small">
 					<Select
 						options={[
