@@ -4,8 +4,7 @@ import type {
 } from '@viaa/avo2-types';
 
 /**
- * The audio list is ordered: the mp4 with the speaker still beats the mp3, and the backend
- * guarantees only one of the two exists. ARC-3121
+ * The proxy only returns the preferred audio rendition: m4a => mp3 => mp4 with speaker image. ARC-4178
  */
 const FLOWPLAYER_FORMATS = [
 	'video/mp4',
@@ -13,8 +12,10 @@ const FLOWPLAYER_FORMATS = [
 	'video/webm',
 	'video/m3u8',
 	'application/vnd.apple.mpegurl',
-	'audio/mp4',
+	'audio/m4a',
+	'audio/x-m4a',
 	'audio/mpeg',
+	'audio/mp4',
 ];
 
 /** The peak file that draws an audio object's waveform is the object's only json file. */
@@ -33,3 +34,14 @@ export const findPlayableFile = (ieObject: IeObject | undefined): IeObjectFile |
 
 export const findPeakFile = (ieObject: IeObject | undefined): IeObjectFile | undefined =>
 	findFileByFormat(ieObject, PEAK_FILE_FORMATS);
+
+/**
+ * audio/m4a is not a registered mime type, so browsers might refuse to play it.
+ * The m4a container is an mp4 container, so we pass audio/mp4 to the player instead. ARC-4178
+ */
+export const getPlayerMimeType = (mimeType: string | undefined | null): string | undefined => {
+	if (mimeType === 'audio/m4a' || mimeType === 'audio/x-m4a') {
+		return 'audio/mp4';
+	}
+	return mimeType || undefined;
+};
