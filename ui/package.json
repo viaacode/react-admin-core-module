@@ -1,6 +1,6 @@
 {
   "name": "@meemoo/admin-core-ui",
-  "version": "7.0.15",
+  "version": "7.0.16",
   "private": false,
   "type": "module",
   "files": [
@@ -67,8 +67,8 @@
     "translations:extract:avo": "node ./scripts/load-envs.mjs 'avo QAS admin-core env variables 2026' --overrides .env/.env tsx --tsconfig ./scripts/tsconfig.json scripts/extract-and-replace-translations.ts AVO",
     "list-of-changed-translations-hetarchief": "node ./scripts/load-envs.mjs 'hetarchief QAS admin-core env variables 2026' --overrides .env/.env tsx --tsconfig ./scripts/tsconfig.json scripts/get-list-of-changed-translations.ts HET_ARCHIEF v6.0.74 v6.0.76",
     "list-commit-messages-between-tags-hetarchief": "node ./scripts/load-envs.mjs 'hetarchief QAS admin-core env variables 2026' --overrides .env/.env tsx --tsconfig ./scripts/tsconfig.json scripts/get-list-of-commit-messages-between-tags.ts v6.0.74 v6.0.76",
-    "list-of-changed-translations-avo": "node ./scripts/load-envs.mjs 'avo QAS admin-core env variables 2026' --overrides .env/.env tsx --tsconfig ./scripts/tsconfig.json scripts/get-list-of-changed-translations.ts AVO v6.0.6 v7.0.14",
-    "list-commit-messages-between-tags-avo": "node ./scripts/load-envs.mjs 'avo QAS admin-core env variables 2026' --overrides .env/.env tsx --tsconfig ./scripts/tsconfig.json scripts/get-list-of-commit-messages-between-tags.ts v6.0.6 v7.0.14",
+    "list-of-changed-translations-avo": "node ./scripts/load-envs.mjs 'avo QAS admin-core env variables 2026' --overrides .env/.env tsx --tsconfig ./scripts/tsconfig.json scripts/get-list-of-changed-translations.ts AVO v6.0.6 v7.0.15",
+    "list-commit-messages-between-tags-avo": "node ./scripts/load-envs.mjs 'avo QAS admin-core env variables 2026' --overrides .env/.env tsx --tsconfig ./scripts/tsconfig.json scripts/get-list-of-commit-messages-between-tags.ts v6.0.6 v7.0.15",
     "check-bundled-files": "npx depcruise src/react-admin --config bundle-import-rules.json --include-only \"^src\" --exclude \"(.spec.tsx?|.test.tsx?|node_modules)\"",
     "check-bundled-files:admin.mts": "npx depcruise src/admin.ts --config bundle-import-rules.json --include-only \"^src\" --exclude \"(.spec.tsx?|.test.tsx?|node_modules)\"",
     "check-bundled-files:client.mts": "npx depcruise src/client.ts --config bundle-import-rules.json --include-only \"^src\" --exclude \"(.spec.tsx?|.test.tsx?|node_modules)\" --output-type dot | dot -T svg > dependency-graph.svg",
