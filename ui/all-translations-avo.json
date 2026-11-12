@@ -384,6 +384,16 @@
     "app": "AVO",
     "component": "ADMIN_CORE",
     "location": "modules/user/user",
+    "key": "alle-resultaten-exporteren",
+    "language": "nl",
+    "value": "Alle resultaten exporteren",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "modules/user/user",
     "key": "alles-exporteren",
     "language": "nl",
     "value": "Alles exporteren",
@@ -10086,7 +10096,7 @@
     "location": "admin/content-block/helpers/generators/rich-text-two-columns",
     "key": "alignatie-afbeelding",
     "language": "nl",
-    "value": "Alignatie afbeelding",
+    "value": "Uitlijning afbeelding",
     "value_type": "TEXT"
   },
   {
@@ -10637,16 +10647,6 @@
     "key": "error",
     "language": "nl",
     "value": "Error",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "modules/user/user",
-    "key": "alle-resultaten-exporteren",
-    "language": "nl",
-    "value": "Alle resultaten exporteren",
     "value_type": "TEXT"
   },
   {
@@ -12234,6 +12234,16 @@
     "app": "AVO",
     "component": "FRONTEND",
     "location": "admin/assignments/assignments",
+    "key": "alle-resultaten-exporteren",
+    "language": "nl",
+    "value": "Alle resultaten exporteren",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/assignments/assignments",
     "key": "alles-exporteren",
     "language": "nl",
     "value": "Alles exporteren",
@@ -12617,6 +12627,16 @@
     "key": "selectie-labels-aanpassen",
     "language": "nl",
     "value": "Selectie labels aanpassen",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/collections-or-bundles/collections-or-bundles",
+    "key": "alle-resultaten-exporteren",
+    "language": "nl",
+    "value": "Alle resultaten exporteren",
     "value_type": "TEXT"
   },
   {
@@ -13457,6 +13477,16 @@
     "key": "selectie-auteur-aanpassen",
     "language": "nl",
     "value": "Selectie auteur aanpassen",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/pupil-collection/pupil-collection",
+    "key": "alle-resultaten-exporteren",
+    "language": "nl",
+    "value": "Alle resultaten exporteren",
     "value_type": "TEXT"
   },
   {
@@ -22783,6 +22813,16 @@
     "id": "",
     "app": "AVO",
     "component": "FRONTEND",
+    "location": "collection/components/fragment/fragment-edit",
+    "key": "het-controleren-van-je-account-rechten-is-mislukt",
+    "language": "nl",
+    "value": "Het controleren van de rechten gekoppeld aan je account is mislukt. Contacteer ons via de Feedback-knop mocht dit probleem zich blijven voordoen.",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "AVO",
+    "component": "FRONTEND",
     "location": "settings/components/profile",
     "key": "het-ophalen-van-de-vakken-is-mislukt",
     "language": "nl",
@@ -23894,6 +23934,16 @@
     "app": "AVO",
     "component": "FRONTEND",
     "location": "admin/assignments/views/assignments-overview-admin",
+    "key": "dit-is-geen-bouw-opdracht-en-heeft-dus-geen-leerlingen-collecties",
+    "language": "nl",
+    "value": "Dit is geen bouw opdracht en heeft dus geen leerlingen collecties",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/assignments/views/assignments-overview-admin",
     "key": "nvt",
     "language": "nl",
     "value": "nvt",
@@ -24007,6 +24057,26 @@
     "key": "er-zijn-geen-opdracht-marcom-items-die-voldoen-aan-de-opgegeven-filters",
     "language": "nl",
     "value": "Er zijn geen opdrachten die voldoen aan de opgegeven filters.",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/assignments/views/assignment-marcom-overview",
+    "key": "alle-resultaten-exporteren",
+    "language": "nl",
+    "value": "Alle resultaten exporteren",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/assignments/views/assignment-marcom-overview",
+    "key": "alles-exporteren",
+    "language": "nl",
+    "value": "Alles exporteren",
     "value_type": "TEXT"
   },
   {
@@ -24514,6 +24584,26 @@
     "app": "AVO",
     "component": "FRONTEND",
     "location": "admin/collections-or-bundles/views/collection-or-bundle-actualisation-overview",
+    "key": "alle-resultaten-exporteren",
+    "language": "nl",
+    "value": "Alle resultaten exporteren",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/collections-or-bundles/views/collection-or-bundle-actualisation-overview",
+    "key": "alles-exporteren",
+    "language": "nl",
+    "value": "Alles exporteren",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/collections-or-bundles/views/collection-or-bundle-actualisation-overview",
     "key": "exporteren-van-alle-collecties-naar-csv",
     "language": "nl",
     "value": "Exporteren van alle collecties naar .csv",
@@ -24694,6 +24784,26 @@
     "app": "AVO",
     "component": "FRONTEND",
     "location": "admin/collections-or-bundles/views/collection-or-bundle-marcom-overview",
+    "key": "alle-resultaten-exporteren",
+    "language": "nl",
+    "value": "Alle resultaten exporteren",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/collections-or-bundles/views/collection-or-bundle-marcom-overview",
+    "key": "alles-exporteren",
+    "language": "nl",
+    "value": "Alles exporteren",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/collections-or-bundles/views/collection-or-bundle-marcom-overview",
     "key": "exporteren-van-alle-collecties-naar-csv",
     "language": "nl",
     "value": "Exporteren van alle collecties naar csv.",
@@ -24867,6 +24977,26 @@
     "key": "er-zijn-geen-bundel-kwaliteitscontrole-items-die-voldoen-aan-de-opgegeven-filters",
     "language": "nl",
     "value": "Er zijn geen bundels in dit overzicht die voldoen aan de opgegeven zoekterm of filters.",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/collections-or-bundles/views/collection-or-bundle-quality-check-overview",
+    "key": "alle-resultaten-exporteren",
+    "language": "nl",
+    "value": "Alle resultaten exporteren",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/collections-or-bundles/views/collection-or-bundle-quality-check-overview",
+    "key": "alles-exporteren",
+    "language": "nl",
+    "value": "Alles exporteren",
     "value_type": "TEXT"
   },
   {
@@ -26144,9 +26274,19 @@
     "app": "AVO",
     "component": "FRONTEND",
     "location": "admin/items/views/item-detail",
-    "key": "het-de-publiceren-van-het-item-is-mislukt",
+    "key": "het-depubliceren-van-het-item-is-mislukt",
     "language": "nl",
-    "value": "Het (de)publiceren van het item is mislukt.",
+    "value": "Het depubliceren van het item is mislukt.",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/items/views/item-detail",
+    "key": "het-publiceren-van-het-item-is-mislukt",
+    "language": "nl",
+    "value": "Het publiceren van het item is mislukt.",
     "value_type": "HTML"
   },
   {
@@ -26557,6 +26697,26 @@
     "key": "er-zijn-geen-items-doe-voldoen-aan-de-opgegeven-filters",
     "language": "nl",
     "value": "Er zijn geen items die voldoen aan de opgegeven filters.",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/items/views/items-overview-admin",
+    "key": "alle-resultaten-exporteren",
+    "language": "nl",
+    "value": "Alle resultaten exporteren",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/items/views/items-overview-admin",
+    "key": "alles-exporteren",
+    "language": "nl",
+    "value": "Alles exporteren",
     "value_type": "TEXT"
   },
   {
@@ -27548,36 +27708,6 @@
     "language": "nl",
     "value": "Nee",
     "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "admin/translations/views/translations-overview",
-    "key": "het-ophalen-van-de-vertalingen-is-mislukt",
-    "language": "nl",
-    "value": "Het ophalen van de vertalingen is mislukt.",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "admin/translations/views/translations-overview",
-    "key": "de-vertalingen-zijn-opgeslagen",
-    "language": "nl",
-    "value": "De vertalingen zijn opgeslagen.",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "admin/translations/views/translations-overview",
-    "key": "het-opslaan-van-de-vertalingen-is-mislukt",
-    "language": "nl",
-    "value": "Het opslaan van de vertalingen is mislukt.",
-    "value_type": "HTML"
   },
   {
     "id": "",
@@ -32556,7 +32686,7 @@
     "location": "shared/components/time-crop-controls/time-crop-controls-wrapper",
     "key": "start-tijd-van-de-video-audio-selectie-input-aria-label",
     "language": "nl",
-    "value": "start-tijd-van-de-video-audio-selectie-input-aria-label",
+    "value": "Hiermee kan je de starttijd van de video of audio aanduiden. ",
     "value_type": "TEXT"
   },
   {
@@ -32566,7 +32696,7 @@
     "location": "shared/components/time-crop-controls/time-crop-controls-wrapper",
     "key": "eind-tijd-van-de-video-audio-selectie-input-aria-label",
     "language": "nl",
-    "value": "eind-tijd-van-de-video-audio-selectie-input-aria-label",
+    "value": "Hiermee kan je de eindtijd van de video of audio aanduiden. ",
     "value_type": "TEXT"
   },
   {
@@ -33602,141 +33732,21 @@
   {
     "id": "",
     "app": "AVO",
-    "component": "FRONTEND",
-    "location": "admin/assignments/assignments",
-    "key": "alle-resultaten-exporteren",
+    "component": "BACKEND",
+    "location": "modules/auth/route",
+    "key": "het-koppelen-van-de-account-is-mislukt",
     "language": "nl",
-    "value": "Alle resultaten exporteren",
+    "value": "Het koppelen van de accounts is mislukt.",
     "value_type": "TEXT"
   },
   {
     "id": "",
     "app": "AVO",
-    "component": "FRONTEND",
-    "location": "admin/collections-or-bundles/collections-or-bundles",
-    "key": "alle-resultaten-exporteren",
+    "component": "BACKEND",
+    "location": "modules/auth/route",
+    "key": "het-ontkoppelen-van-de-account-is-mislukt",
     "language": "nl",
-    "value": "Alle resultaten exporteren",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "admin/pupil-collection/pupil-collection",
-    "key": "alle-resultaten-exporteren",
-    "language": "nl",
-    "value": "Alle resultaten exporteren",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "collection/components/fragment/fragment-edit",
-    "key": "het-controleren-van-je-account-rechten-is-mislukt",
-    "language": "nl",
-    "value": "Het controleren van de rechten gekoppeld aan je account is mislukt. Contacteer ons via de Feedback-knop mocht dit probleem zich blijven voordoen.",
-    "value_type": "HTML"
-  },
-  {
-    "id": "",
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "admin/assignments/views/assignment-marcom-overview",
-    "key": "alle-resultaten-exporteren",
-    "language": "nl",
-    "value": "Alle resultaten exporteren",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "admin/assignments/views/assignment-marcom-overview",
-    "key": "alles-exporteren",
-    "language": "nl",
-    "value": "Alles exporteren",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "admin/collections-or-bundles/views/collection-or-bundle-actualisation-overview",
-    "key": "alle-resultaten-exporteren",
-    "language": "nl",
-    "value": "Alle resultaten exporteren",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "admin/collections-or-bundles/views/collection-or-bundle-actualisation-overview",
-    "key": "alles-exporteren",
-    "language": "nl",
-    "value": "Alles exporteren",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "admin/collections-or-bundles/views/collection-or-bundle-marcom-overview",
-    "key": "alle-resultaten-exporteren",
-    "language": "nl",
-    "value": "Alle resultaten exporteren",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "admin/collections-or-bundles/views/collection-or-bundle-marcom-overview",
-    "key": "alles-exporteren",
-    "language": "nl",
-    "value": "Alles exporteren",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "admin/collections-or-bundles/views/collection-or-bundle-quality-check-overview",
-    "key": "alle-resultaten-exporteren",
-    "language": "nl",
-    "value": "Alle resultaten exporteren",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "admin/collections-or-bundles/views/collection-or-bundle-quality-check-overview",
-    "key": "alles-exporteren",
-    "language": "nl",
-    "value": "Alles exporteren",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "admin/items/views/items-overview-admin",
-    "key": "alle-resultaten-exporteren",
-    "language": "nl",
-    "value": "Alle resultaten exporteren",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "admin/items/views/items-overview-admin",
-    "key": "alles-exporteren",
-    "language": "nl",
-    "value": "Alles exporteren",
+    "value": "Het ontkoppelen van de accounts is mislukt.",
     "value_type": "TEXT"
   },
   {
@@ -33817,26 +33827,6 @@
     "key": "er-ging-iets-mis-bij-het-unlinken-van-de-idp-type-account",
     "language": "nl",
     "value": "Er ging iets mis bij het ontkoppelen van je {{idpType}} account.",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "AVO",
-    "component": "BACKEND",
-    "location": "modules/auth/route",
-    "key": "het-koppelen-van-de-account-is-mislukt",
-    "language": "nl",
-    "value": "Het koppelen van de accounts is mislukt.",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "AVO",
-    "component": "BACKEND",
-    "location": "modules/auth/route",
-    "key": "het-ontkoppelen-van-de-account-is-mislukt",
-    "language": "nl",
-    "value": "Het ontkoppelen van de accounts is mislukt.",
     "value_type": "TEXT"
   },
   {
@@ -34177,6 +34167,16 @@
     "key": "de-login-voor-deze-embed-is-mislukt-omdat-de-id-token-geen-sleutel-id-bevat",
     "language": "nl",
     "value": "De login voor deze embed is mislukt omdat de ID-token geen sleutel-ID bevat.",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "AVO",
+    "component": "BACKEND",
+    "location": "modules/auth/idps/lti/lti",
+    "key": "de-login-voor-deze-embed-is-tijdelijk-niet-mogelijk-omdat-de-sleutels-van-issuer-nog-niet-geladen-konden-worden-probeer-het-later-opnieuw",
+    "language": "nl",
+    "value": "De login voor deze embed is tijdelijk niet mogelijk omdat de sleutels van {{issuer}} nog niet geladen konden worden. Probeer het later opnieuw.",
     "value_type": "TEXT"
   },
   {
