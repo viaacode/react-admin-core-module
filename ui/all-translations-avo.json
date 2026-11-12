@@ -6623,16 +6623,6 @@
     "id": "",
     "app": "AVO",
     "component": "ADMIN_CORE",
-    "location": "modules/shared/components/content-picker/content-picker",
-    "key": "themas",
-    "language": "nl",
-    "value": "Themas",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "AVO",
-    "component": "ADMIN_CORE",
     "location": "admin/shared/components/content-picker/content-picker",
     "key": "plak-hier-uw-zoekpagina-url",
     "language": "nl",
@@ -8513,96 +8503,6 @@
     "id": "",
     "app": "AVO",
     "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel",
-    "key": "hero-carousel",
-    "language": "nl",
-    "value": "Hero carousel",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel-search",
-    "key": "alles",
-    "language": "nl",
-    "value": "Alles",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel-search",
-    "key": "zoek-in-alle-objecten",
-    "language": "nl",
-    "value": "Zoek in alle objecten",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel-search",
-    "key": "alle-video",
-    "language": "nl",
-    "value": "Alle video",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel-search",
-    "key": "zoek-in-video",
-    "language": "nl",
-    "value": "Zoek in video",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel-search",
-    "key": "alle-audio",
-    "language": "nl",
-    "value": "Alle audio",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel-search",
-    "key": "zoek-in-audio",
-    "language": "nl",
-    "value": "Zoek in audio",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel-search",
-    "key": "alle-kranten",
-    "language": "nl",
-    "value": "Alle kranten",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel-search",
-    "key": "zoek-in-kranten",
-    "language": "nl",
-    "value": "Zoek in kranten",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "AVO",
-    "component": "ADMIN_CORE",
     "location": "modules/content-page/components/blocks/block-het-archief-image-text-background/block-het-archief-image-text-background",
     "key": "titel-grootte",
     "language": "nl",
@@ -8667,26 +8567,6 @@
     "key": "achtergrond-kleur-blok",
     "language": "nl",
     "value": "Achtergrond kleur blok",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-highlight-text/block-highlight-text",
-    "key": "highlight-text",
-    "language": "nl",
-    "value": "Highlight text",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-homepage-banner/block-homepage-banner",
-    "key": "homepage-banner",
-    "language": "nl",
-    "value": "Homepage banner",
     "value_type": "TEXT"
   },
   {
@@ -9663,16 +9543,6 @@
     "id": "",
     "app": "AVO",
     "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-overview-with-carousel/block-overview-with-carousel",
-    "key": "overzicht-met-carrousel",
-    "language": "nl",
-    "value": "Overzicht met carrousel",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "AVO",
-    "component": "ADMIN_CORE",
     "location": "admin/content-block/helpers/generators/page-overview",
     "key": "lees-meer",
     "language": "nl",
@@ -10313,36 +10183,6 @@
     "id": "",
     "app": "AVO",
     "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-theme-reels/block-theme-reels",
-    "key": "alt-tekst-voor-de-afbeelding",
-    "language": "nl",
-    "value": "alt tekst voor de afbeelding",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-theme-reels/block-theme-reels",
-    "key": "masker",
-    "language": "nl",
-    "value": "Masker",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-theme-reels/block-theme-reels",
-    "key": "beschrijving",
-    "language": "nl",
-    "value": "Beschrijving",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "AVO",
-    "component": "ADMIN_CORE",
     "location": "admin/content-block/helpers/generators/three-clickable-tiles",
     "key": "three-clickable-tiles",
     "language": "nl",
@@ -10417,26 +10257,6 @@
     "key": "link",
     "language": "nl",
     "value": "Link",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-title-with-parallax/block-title-with-parallax",
-    "key": "titel-met-parallax",
-    "language": "nl",
-    "value": "Titel met parallax",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-title-with-parallax/block-title-with-parallax",
-    "key": "visualisatie",
-    "language": "nl",
-    "value": "Visualisatie",
     "value_type": "TEXT"
   },
   {

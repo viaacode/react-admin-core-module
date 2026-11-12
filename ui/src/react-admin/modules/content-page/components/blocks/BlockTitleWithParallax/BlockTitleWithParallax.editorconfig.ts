@@ -47,7 +47,9 @@ export const INITIAL_TITLE_WITH_PARALLAX_BLOCK_STATE = (): DefaultContentBlockSt
 export const TITLE_WITH_PARALLAX_CONFIG = (position = 0): ContentBlockConfig => ({
 	position,
 	name: tText(
-		'modules/content-page/components/blocks/block-title-with-parallax/block-title-with-parallax___titel-met-parallax'
+		'modules/content-page/components/blocks/block-title-with-parallax/block-title-with-parallax___titel-met-parallax',
+		{},
+		[HET_ARCHIEF]
 	),
 	type: ContentBlockType.TitleWithParallax,
 	components: {
@@ -55,7 +57,9 @@ export const TITLE_WITH_PARALLAX_CONFIG = (position = 0): ContentBlockConfig => 
 		fields: {
 			visualType: {
 				label: tText(
-					'modules/content-page/components/blocks/block-title-with-parallax/block-title-with-parallax___visualisatie'
+					'modules/content-page/components/blocks/block-title-with-parallax/block-title-with-parallax___visualisatie',
+					{},
+					[HET_ARCHIEF]
 				),
 				editorType: ContentBlockEditor.Select,
 				editorProps: {

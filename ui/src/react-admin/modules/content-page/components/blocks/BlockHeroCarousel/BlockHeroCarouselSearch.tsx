@@ -38,37 +38,53 @@ export const BlockHeroCarouselSearch: FunctionComponent<BlockHeroCarouselSearchP
 		{
 			id: 'all',
 			selectedLabel: tText(
-				'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel-search___alles'
+				'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel-search___alles',
+				{},
+				[HET_ARCHIEF]
 			),
 			label: tText(
-				'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel-search___zoek-in-alle-objecten'
+				'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel-search___zoek-in-alle-objecten',
+				{},
+				[HET_ARCHIEF]
 			),
 		},
 		{
 			id: 'video',
 			selectedLabel: tText(
-				'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel-search___alle-video'
+				'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel-search___alle-video',
+				{},
+				[HET_ARCHIEF]
 			),
 			label: tText(
-				'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel-search___zoek-in-video'
+				'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel-search___zoek-in-video',
+				{},
+				[HET_ARCHIEF]
 			),
 		},
 		{
 			id: 'audio',
 			selectedLabel: tText(
-				'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel-search___alle-audio'
+				'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel-search___alle-audio',
+				{},
+				[HET_ARCHIEF]
 			),
 			label: tText(
-				'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel-search___zoek-in-audio'
+				'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel-search___zoek-in-audio',
+				{},
+				[HET_ARCHIEF]
 			),
 		},
 		{
 			id: 'newspaper',
 			selectedLabel: tText(
-				'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel-search___alle-kranten'
+				'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel-search___alle-kranten',
+				{},
+				[HET_ARCHIEF]
 			),
 			label: tText(
-				'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel-search___zoek-in-kranten'
+				'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel-search___zoek-in-kranten',
+				{},
+				[HET_ARCHIEF]
 			),
 		},
 	];
