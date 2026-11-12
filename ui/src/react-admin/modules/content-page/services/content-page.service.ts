@@ -1,7 +1,6 @@
-import type { IPagination } from '@studiohyperdrive/pagination';
 import type { AvoContentPageType, AvoSearchOrderDirection } from '@viaa/avo2-types';
 import { kebabCase } from 'es-toolkit';
-import { stringifyUrl } from 'query-string';
+import queryString from 'query-string';
 import type { ContentPageOverviewParams } from '~content-blocks/BlockPageOverview/BlockPageOverview.types';
 import { AdminConfigManager } from '~core/config/config.class';
 import { PAGES_PER_PAGE } from '~modules/content-page/const/content-page.consts';
@@ -15,6 +14,7 @@ import type { Locale } from '~modules/translations/translations.core.types';
 import { CustomError } from '~shared/helpers/custom-error';
 import { fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
 import { getAdminCoreApiUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config';
+import type { IPagination } from '~shared/types/pagination.types';
 import type {
 	ContentOverviewTableCols,
 	ContentPageInfo,
@@ -68,7 +68,7 @@ export class ContentPageService {
 		limit?: number
 	): Promise<ContentPageInfo[]> {
 		const dbContentPages: DbContentPage[] = await fetchWithLogoutJson(
-			stringifyUrl({
+			queryString.stringifyUrl({
 				url: `${ContentPageService.getBaseUrl()}/nl-parent-pages`,
 				query: {
 					limit: limit ?? 20,
@@ -86,7 +86,7 @@ export class ContentPageService {
 		limit?: number
 	): Promise<ContentPageInfo[]> {
 		const dbContentPages: DbContentPage[] = await fetchWithLogoutJson(
-			stringifyUrl({
+			queryString.stringifyUrl({
 				url: `${ContentPageService.getBaseUrl()}/public`,
 				query: {
 					limit: limit ?? 20,
@@ -104,7 +104,7 @@ export class ContentPageService {
 		limit: number
 	): Promise<Partial<ContentPageInfo>[]> {
 		const dbContentPages: DbContentPage[] | null = await fetchWithLogoutJson(
-			stringifyUrl({
+			queryString.stringifyUrl({
 				url: `${ContentPageService.getBaseUrl()}/projects/public`,
 				query: {
 					limit,
@@ -135,7 +135,7 @@ export class ContentPageService {
 	public static async fetchLabelsByContentType(contentType: string): Promise<ContentPageLabel[]> {
 		return (
 			(await fetchWithLogoutJson(
-				stringifyUrl({
+				queryString.stringifyUrl({
 					url: `${ContentPageService.getBaseUrl()}/labels`,
 					query: {
 						contentType,
@@ -195,7 +195,7 @@ export class ContentPageService {
 		where: any
 	): Promise<[ContentPageInfo[], number]> {
 		const [dbContentPages, count] = await fetchWithLogoutJson<[DbContentPage[], number]>(
-			stringifyUrl({
+			queryString.stringifyUrl({
 				url: ContentPageService.getBaseUrl(),
 				query: {
 					offset: page * PAGES_PER_PAGE,
@@ -240,7 +240,7 @@ export class ContentPageService {
 	public static async duplicateContentPageImages(id: number | string): Promise<ContentPageInfo> {
 		try {
 			const responseContent = await fetchWithLogoutJson<DbContentPage>(
-				stringifyUrl({
+				queryString.stringifyUrl({
 					// This route lives in the proxy and not in the admin-core-api, so we use content-pages/duplicate instead of admin/content-pages/duplicate
 					url: `${getAdminCoreApiUrl()}/admin/content-pages/${id}/duplicate`,
 				}),
@@ -262,7 +262,7 @@ export class ContentPageService {
 		try {
 			// biome-ignore lint/suspicious/noExplicitAny: todo
 			return await fetchWithLogoutJson<any>(
-				stringifyUrl({
+				queryString.stringifyUrl({
 					// This route lives in the proxy and not in the admin-core-api, so we use content-pages/duplicate instead of admin/content-pages/duplicate
 					url: `${getAdminCoreApiUrl()}/admin/content-pages/blocks/duplicate`,
 				}),
@@ -348,7 +348,7 @@ export class ContentPageService {
 					AdminConfigManager.getConfig().services.getContentPageByLanguageAndPathEndpoint || url;
 			}
 			const dbContentPage = await fetchWithLogoutJson<DbContentPage | null>(
-				stringifyUrl({
+				queryString.stringifyUrl({
 					url,
 					query: {
 						language,
@@ -392,7 +392,7 @@ export class ContentPageService {
 				title: string;
 				id: number;
 			}>(
-				stringifyUrl({
+				queryString.stringifyUrl({
 					url: `${ContentPageService.getBaseUrl()}/path-exists`,
 					query: {
 						language,
@@ -414,7 +414,7 @@ export class ContentPageService {
 		path: string
 	): Promise<(string | number)[]> {
 		return fetchWithLogoutJson(
-			stringifyUrl({
+			queryString.stringifyUrl({
 				url: `${ContentPageService.getBaseUrl()}/access`,
 				query: {
 					path,

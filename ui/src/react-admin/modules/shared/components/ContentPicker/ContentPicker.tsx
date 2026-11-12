@@ -84,7 +84,7 @@ export const ContentPicker: FunctionComponent<ContentPickerProps> = ({
 	const fetchPickerOptions = useCallback(
 		async (keyword: string | null): Promise<PickerItem[]> => {
 			try {
-				if (!selectedType || !selectedType.fetch) {
+				if (!selectedType?.fetch) {
 					return []; // Search query and external link don't have a fetch function
 				}
 				let items: PickerItem[] = await selectedType.fetch(

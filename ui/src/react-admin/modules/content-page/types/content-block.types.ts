@@ -85,6 +85,7 @@ export enum Color {
 	Yellow = '#F3AA2E',
 	DarkOrange = '#D03F06',
 	FrenchRose = '#F33F67',
+	// biome-ignore lint/suspicious/noDuplicateEnumValues: Success intentionally shares its color with OceanGreen
 	Primary = '#25A4CF',
 	Success = '#00C8AA',
 	Error = '#DA3F34',

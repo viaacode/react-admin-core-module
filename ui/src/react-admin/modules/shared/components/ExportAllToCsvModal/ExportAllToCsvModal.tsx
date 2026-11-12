@@ -173,7 +173,6 @@ export const ExportAllToCsvModal: FunctionComponent<ExportAllToCsvModalProps> = 
 		fetchItems().then(noop);
 	});
 
-	// biome-ignore lint/correctness/useExhaustiveDependencies: effect events must not be listed as dependencies
 	useEffect(() => {
 		if (isOpen) {
 			startFetchingItems();

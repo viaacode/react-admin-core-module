@@ -323,24 +323,22 @@ export const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> 
 			);
 		}
 		return (
-			<>
-				<Table<TranslationEntry | MultiLanguageTranslationEntry>
-					options={{
-						columns: translationTableColumns,
-						data: filteredAndPaginatedTranslations,
-						initialState: {
-							pagination: {
-								pageSize: TRANSLATIONS_PER_PAGE,
-							},
-							sorting: sortFilters,
+			<Table<TranslationEntry | MultiLanguageTranslationEntry>
+				options={{
+					columns: translationTableColumns,
+					data: filteredAndPaginatedTranslations,
+					initialState: {
+						pagination: {
+							pageSize: TRANSLATIONS_PER_PAGE,
 						},
-					}}
-					onSortChange={handleSortChange}
-					sortingIcons={sortingIcons}
-					pagination={getPagination}
-					enableRowFocusOnClick={isHetArchief()}
-				/>
-			</>
+						sorting: sortFilters,
+					},
+				}}
+				onSortChange={handleSortChange}
+				sortingIcons={sortingIcons}
+				pagination={getPagination}
+				enableRowFocusOnClick={isHetArchief()}
+			/>
 		);
 	};
 

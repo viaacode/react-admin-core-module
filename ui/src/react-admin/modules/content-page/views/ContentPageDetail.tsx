@@ -13,7 +13,7 @@ import {
 
 import { type AvoUserCommonUser, PermissionName } from '@viaa/avo2-types';
 import { noop } from 'es-toolkit';
-import { stringifyUrl } from 'query-string';
+import queryString from 'query-string';
 import type { FC, ReactElement } from 'react';
 import React, { useCallback, useEffect, useState } from 'react';
 import { AdminConfigManager } from '~core/config/config.class';
@@ -215,7 +215,7 @@ export const ContentPageDetail: FC<ContentPageDetailProps> = ({
 		if (contentPageInfo?.path) {
 			if (contentPageInfo.language === Locale.Nl) {
 				// Do not add the locale to the path, since the default is Dutch
-				const path = stringifyUrl({
+				const path = queryString.stringifyUrl({
 					url: contentPageInfo.path,
 					query: {
 						[CONTENT_PAGE_PREVIEW_QUERY_PARAM]: true,
@@ -224,7 +224,7 @@ export const ContentPageDetail: FC<ContentPageDetailProps> = ({
 				navigateToAbsoluteOrRelativeUrl(path, LinkTarget.Blank);
 			} else {
 				// For english pages, add the locale to the path
-				const path = stringifyUrl({
+				const path = queryString.stringifyUrl({
 					url: `/${contentPageInfo.language}${contentPageInfo.path}`,
 					query: {
 						[CONTENT_PAGE_PREVIEW_QUERY_PARAM]: true,
@@ -420,7 +420,7 @@ export const ContentPageDetail: FC<ContentPageDetailProps> = ({
 	};
 
 	const getEditLink = () => {
-		return stringifyUrl({
+		return queryString.stringifyUrl({
 			url: buildLink(AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_EDIT'), {
 				id,
 			}),

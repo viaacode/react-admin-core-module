@@ -5,7 +5,7 @@ import type {
 	AvoUserCommonUser,
 	AvoUserUserDeleteOption,
 } from '@viaa/avo2-types';
-import { stringifyUrl } from 'query-string';
+import queryString from 'query-string';
 import { AdminConfigManager } from '~core/config/config.class';
 import { CustomError } from '~shared/helpers/custom-error';
 import { fetchWithLogout, fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
@@ -25,7 +25,7 @@ export class UserService {
 	static async getUserById(id: string): Promise<AvoUserCommonUser> {
 		try {
 			return fetchWithLogoutJson<AvoUserCommonUser>(
-				stringifyUrl({
+				queryString.stringifyUrl({
 					url: `${UserService.getBaseUrl()}/${id}`,
 				}),
 				{ throwOnNullResponse: true }
@@ -74,7 +74,7 @@ export class UserService {
 	static async getNamesByProfileIds(profileIds: string[]): Promise<Partial<AvoUserCommonUser>[]> {
 		try {
 			return fetchWithLogoutJson(
-				stringifyUrl({
+				queryString.stringifyUrl({
 					url: `${UserService.getBaseUrl()}/names`,
 					query: {
 						profileIds,
@@ -94,7 +94,7 @@ export class UserService {
 	): Promise<Partial<AvoUserCommonUser>[]> {
 		try {
 			return fetchWithLogoutJson(
-				stringifyUrl({
+				queryString.stringifyUrl({
 					url: `${UserService.getBaseUrl()}/search-names`,
 					query: {
 						name,
@@ -114,7 +114,7 @@ export class UserService {
 	static async getProfileIds(where?: any): Promise<string[]> {
 		try {
 			return fetchWithLogoutJson(
-				stringifyUrl({
+				queryString.stringifyUrl({
 					url: `${UserService.getBaseUrl()}/ids`,
 					query: {
 						where: JSON.stringify(where),
@@ -232,7 +232,7 @@ export class UserService {
 
 		try {
 			return fetchWithLogoutJson<DeleteContentCounts>(
-				stringifyUrl({
+				queryString.stringifyUrl({
 					url: `${UserService.getBaseUrl()}/counts`,
 					query: {
 						profileIds,

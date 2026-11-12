@@ -54,7 +54,7 @@ export function getBooleanFilters<T>(
 		// biome-ignore lint/suspicious/noExplicitAny: todo
 		(prop: string, value: any) => {
 			const orFilters = [];
-			if (!value || !value.length) {
+			if (!value?.length) {
 				return {};
 			}
 			if (value.includes(NULL_FILTER)) {

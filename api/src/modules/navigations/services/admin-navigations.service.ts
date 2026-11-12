@@ -86,10 +86,10 @@ export class AdminNavigationsService {
 		});
 
 		return this.adapt(
-			(response as NavigationQueryTypes['InsertNavigationItemMutationAvo'])
-				.insert_app_content_nav_elements_one ||
-				(response as NavigationQueryTypes['InsertNavigationItemMutationHetArchief'])
-					.insert_app_navigation_one
+			(response as NavigationQueryTypes['UpdateNavigationItemByIdMutationAvo'])
+				.update_app_content_nav_elements_by_pk ||
+				(response as NavigationQueryTypes['UpdateNavigationItemByIdMutationHetArchief'])
+					.update_app_navigation_by_pk
 		);
 	}
 

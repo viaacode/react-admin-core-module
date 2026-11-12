@@ -1,6 +1,7 @@
 import { Test, type TestingModule } from '@nestjs/testing';
 import { type MockInstance, vi } from 'vitest';
 
+import { AssetsService } from '../../assets/services/assets.service';
 import { DataService } from '../../data';
 import { AdminOrganisationsService } from '../../organisations';
 import { PlayerTicketService } from '../../player-ticket';
@@ -39,6 +40,10 @@ describe('ContentPagesService', () => {
 				{
 					provide: AdminOrganisationsService,
 					useValue: mockOrganisationsService,
+				},
+				{
+					provide: AssetsService,
+					useValue: {},
 				},
 			],
 		}).compile();

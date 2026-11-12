@@ -11,7 +11,7 @@ import { Icon } from '~shared/components/Icon';
 import { tText } from '~shared/helpers/translation-functions.ts';
 import 'swiper/css';
 import clsx from 'clsx';
-import { stringifyUrl } from 'query-string';
+import queryString from 'query-string';
 import { BlockHeading } from '~content-blocks/BlockHeading';
 import {
 	SearchDropdown,
@@ -94,7 +94,7 @@ export const BlockHeroCarouselSearch: FunctionComponent<BlockHeroCarouselSearchP
 		const baseQuery = {
 			format: mediaType,
 		};
-		const url = stringifyUrl({
+		const url = queryString.stringifyUrl({
 			url: AdminConfigManager.getConfig().routes.SEARCH || '/zoeken',
 			query: searchTerm
 				? {

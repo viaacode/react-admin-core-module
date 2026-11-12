@@ -3,7 +3,7 @@ import type {
 	HetArchiefPlayableDisplayIeObject,
 	HetArchiefUnsavedPlayableDisplayDataObject,
 } from '@viaa/avo2-types';
-import { stringifyUrl } from 'query-string';
+import queryString from 'query-string';
 import { CustomError } from '~shared/helpers/custom-error';
 import { fetchWithLogout, fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
 import { getProxyUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config';
@@ -20,7 +20,7 @@ export class IeObjectsService {
 	public static async getIeObjectsByIds(
 		schemaIdentifiers: string[]
 	): Promise<HetArchiefIeObject[]> {
-		const url = stringifyUrl({
+		const url = queryString.stringifyUrl({
 			url: IeObjectsService.getBaseUrl(),
 			// Without this the thumbnail comes back as a path the browser cannot load.
 			query: { schemaIdentifiers, resolveThumbnailUrl: 'true' },
@@ -40,7 +40,7 @@ export class IeObjectsService {
 		fileId: string,
 		schemaIdentifier: string
 	): Promise<string | null> {
-		const url = stringifyUrl({
+		const url = queryString.stringifyUrl({
 			url: `${IeObjectsService.getBaseUrl()}/player-ticket`,
 			query: { fileId, schemaIdentifier },
 		});

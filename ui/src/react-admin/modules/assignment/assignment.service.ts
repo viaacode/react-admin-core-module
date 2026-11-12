@@ -1,5 +1,5 @@
 import type { AvoAssignmentAssignment } from '@viaa/avo2-types';
-import { stringifyUrl } from 'query-string';
+import queryString from 'query-string';
 import { fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
 import { getAdminCoreApiUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config';
 
@@ -16,7 +16,7 @@ export class AssignmentService {
 		limit: number
 	): Promise<AvoAssignmentAssignment[]> {
 		return await fetchWithLogoutJson(
-			stringifyUrl({
+			queryString.stringifyUrl({
 				url: `${getAdminCoreApiUrl()}/admin/assignments/public`,
 				query: {
 					titleOrId,

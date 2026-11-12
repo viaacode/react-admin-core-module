@@ -1,4 +1,4 @@
-import { stringifyUrl } from 'query-string';
+import queryString from 'query-string';
 import { AdminConfigManager } from '~core/config/config.class';
 import type { Locale } from '~modules/translations/translations.core.types';
 
@@ -15,7 +15,7 @@ export class NavigationService {
 	public static async fetchNavigationItemById(id: string): Promise<NavigationItem | null> {
 		try {
 			return fetchWithLogoutJson(
-				stringifyUrl({
+				queryString.stringifyUrl({
 					url: `${NavigationService.getBaseUrl()}/items/${id}`,
 				})
 			);
@@ -35,7 +35,7 @@ export class NavigationService {
 	): Promise<NavigationItem[]> {
 		try {
 			return fetchWithLogoutJson(
-				stringifyUrl({
+				queryString.stringifyUrl({
 					url: NavigationService.getBaseUrl() + (placement ? `/${placement}` : ''),
 					query: {
 						languages: languages?.length ? languages.join(',') : undefined,
@@ -55,7 +55,7 @@ export class NavigationService {
 	public static async fetchNavigationBars(): Promise<NavigationItem[]> {
 		try {
 			return fetchWithLogoutJson(
-				stringifyUrl({
+				queryString.stringifyUrl({
 					url: NavigationService.getBaseUrl(),
 				})
 			);
@@ -98,7 +98,7 @@ export class NavigationService {
 				};
 
 				return fetchWithLogoutJson(
-					stringifyUrl({
+					queryString.stringifyUrl({
 						url: `${NavigationService.getBaseUrl()}/items/${navigationItem.id}`,
 					}),
 					{
@@ -120,7 +120,7 @@ export class NavigationService {
 	public static async deleteNavigationItem(id: string): Promise<void> {
 		try {
 			await fetchWithLogoutJson(
-				stringifyUrl({
+				queryString.stringifyUrl({
 					url: `${NavigationService.getBaseUrl()}/items/${id}`,
 				}),
 				{

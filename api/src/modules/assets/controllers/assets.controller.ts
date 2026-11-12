@@ -1,4 +1,3 @@
-import { addPrefix } from '../../shared/helpers/add-route-prefix';
 import path from 'node:path';
 import {
 	BadRequestException,
@@ -23,9 +22,7 @@ import {
 	PermissionName,
 } from '@viaa/avo2-types';
 import sharp from 'sharp';
-
 import { DataService } from '../../data';
-import { RequireAnyPermissions } from '../../shared/decorators/require-any-permissions.decorator';
 import { SessionUser } from '../../shared/decorators/user.decorator';
 import {
 	DeleteContentAssetDocument,
@@ -36,6 +33,7 @@ import {
 	type GetContentAssetOwnerIdQueryVariables,
 } from '../../shared/generated/graphql-db-types-hetarchief';
 import { LoggedInGuard } from '../../shared/guards/logged-in.guard';
+import { addPrefix } from '../../shared/helpers/add-route-prefix';
 import { TranslationsService } from '../../translations';
 import type { SessionUserEntity } from '../../users/classes/session-user';
 import { OPTIMIZE_INTO_WEBP_FORMATS, VALID_MIME_TYPES } from '../assets.consts';
@@ -49,7 +47,8 @@ import { AssetsService } from '../services/assets.service';
 @UseGuards(LoggedInGuard)
 @ApiTags('Assets')
 @Controller(addPrefix(process, 'assets'))
-@RequireAnyPermissions(PermissionName.EDIT_ANY_CONTENT_PAGES, PermissionName.EDIT_OWN_CONTENT_PAGES)
+// No permission decorators: assets are also uploaded by users that cannot edit content pages
+// eg: profile avatars, bundle covers, og images. Deleting an asset checks the ownership of the asset itself
 export class AssetsController {
 	private logger: Logger = new Logger(AssetsController.name, { timestamp: true });
 
@@ -80,10 +79,6 @@ export class AssetsController {
 		},
 	})
 	@UseGuards(LoggedInGuard)
-	@RequireAnyPermissions(
-		PermissionName.EDIT_ANY_CONTENT_PAGES,
-		PermissionName.EDIT_OWN_CONTENT_PAGES
-	)
 	async uploadAsset(
 		// biome-ignore lint/suspicious/noExplicitAny: todo
 		@UploadedFile() file: any & { originalname: string; mimetype: string },

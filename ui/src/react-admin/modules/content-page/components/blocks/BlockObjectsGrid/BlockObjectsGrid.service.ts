@@ -1,5 +1,5 @@
 import type { HetArchiefIeObjectType } from '@viaa/avo2-types';
-import { stringifyUrl } from 'query-string';
+import queryString from 'query-string';
 import { AdminConfigManager } from '~core/config/config.class';
 import type { IeObjectsSearchBody } from '~core/config/config.types';
 import { CustomError } from '~shared/helpers/custom-error';
@@ -92,7 +92,7 @@ const getFixedObjects = async (fixedItems: PickerItem[]): Promise<ObjectsGridIte
 		return [];
 	}
 
-	const url = stringifyUrl({
+	const url = queryString.stringifyUrl({
 		url: `${getProxyUrl()}/ie-objects`,
 		query: { schemaIdentifiers: identifiers, resolveThumbnailUrl: 'true' },
 	});

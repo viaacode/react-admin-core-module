@@ -3,7 +3,7 @@ import { LinkTarget } from '@viaa/avo2-components';
 import type { AvoCoreContentPickerType } from '@viaa/avo2-types';
 import { isNil, isString } from 'es-toolkit';
 import { isEmpty, map } from 'es-toolkit/compat';
-import { stringify } from 'query-string';
+import queryString from 'query-string';
 import type { ReactNode } from 'react';
 import { AdminConfigManager } from '~core/config/config.class';
 import { ToastType } from '~core/config/config.types';
@@ -45,7 +45,9 @@ export const buildLink = (
 	}
 
 	// Add search query if present
-	return search ? `${builtLink}?${isString(search) ? search : stringify(search)}` : builtLink;
+	return search
+		? `${builtLink}?${isString(search) ? search : queryString.stringify(search)}`
+		: builtLink;
 };
 
 export const navigate = async (
@@ -196,7 +198,7 @@ export const navigateToContentType = (action: ButtonAction) => {
 					buildLink(
 						AdminConfigManager.getConfig().routes.SEARCH || '/zoeken',
 						{},
-						stringify(
+						queryString.stringify(
 							Object.fromEntries(
 								map(queryParams, (queryParamValue, queryParam) => [
 									queryParam,

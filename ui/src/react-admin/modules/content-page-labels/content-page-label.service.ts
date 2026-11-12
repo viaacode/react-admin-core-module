@@ -1,6 +1,6 @@
 import type { AvoContentPageType, AvoSearchOrderDirection } from '@viaa/avo2-types';
 import { compact } from 'es-toolkit';
-import { stringifyUrl } from 'query-string';
+import queryString from 'query-string';
 import type { LabelObj } from '~content-blocks/BlockPageOverview/BlockPageOverview.types';
 import { LABELS_PER_PAGE } from '~modules/content-page-labels/content-page-label.const';
 import type {
@@ -26,7 +26,7 @@ export class ContentPageLabelService {
 	): Promise<[ContentPageLabel[], number]> {
 		try {
 			return fetchWithLogoutJson(
-				stringifyUrl({
+				queryString.stringifyUrl({
 					url: ContentPageLabelService.getBaseUrl(),
 					query: {
 						offset: page * itemsPerPage,

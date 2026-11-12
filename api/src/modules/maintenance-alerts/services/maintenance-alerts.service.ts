@@ -6,9 +6,7 @@ import {
 	Logger,
 	NotFoundException,
 } from '@nestjs/common';
-import { IPagination, Pagination } from '@studiohyperdrive/pagination';
 import { isEmpty, isNil, set } from 'lodash';
-
 import { DataService } from '../../data';
 import {
 	DeleteMaintenanceAlertDocument,
@@ -28,7 +26,9 @@ import {
 	UpdateMaintenanceAlertMutationVariables,
 } from '../../shared/generated/graphql-db-types-hetarchief';
 import { CustomError } from '../../shared/helpers/error';
+import { Pagination } from '../../shared/helpers/pagination';
 import { SortDirection } from '../../shared/types';
+import type { IPagination } from '../../shared/types/pagination';
 import { Locale } from '../../translations';
 import {
 	CreateMaintenanceAlertDto,

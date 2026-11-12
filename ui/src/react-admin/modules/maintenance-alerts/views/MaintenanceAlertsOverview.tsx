@@ -1,6 +1,4 @@
 import { Badge, Button } from '@meemoo/react-components';
-import type { IPagination } from '@studiohyperdrive/pagination';
-
 import { format, isAfter, isWithinInterval, parseISO } from 'date-fns';
 import { nlBE } from 'date-fns/locale';
 import type { FunctionComponent, ReactNode } from 'react';
@@ -29,6 +27,7 @@ import { parseAsIsoWithoutTimezone } from '~shared/helpers/formatters/date';
 import { isMultiLanguageEnabled } from '~shared/helpers/is-multi-language-enabled';
 import { showToast } from '~shared/helpers/show-toast';
 import { tHtml, tText } from '~shared/helpers/translation-functions';
+import type { IPagination } from '~shared/types/pagination.types';
 import { TableColumnDataType } from '~shared/types/table-column-data-type';
 import { TableFilterType } from '~shared/types/table-filter-types';
 import { App } from '../../../../../scripts/translation.types';

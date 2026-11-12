@@ -1,4 +1,3 @@
-import { addPrefix } from '../shared/helpers/add-route-prefix';
 import {
 	Body,
 	Controller,
@@ -12,14 +11,14 @@ import {
 	Query,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-
 import {
+	type AvoAuthIdpType,
 	type AvoSearchOrderDirection,
 	type AvoUserCommonUser,
 	PermissionName,
 } from '@viaa/avo2-types';
-
 import { RequireAnyPermissions } from '../shared/decorators/require-any-permissions.decorator';
+import { addPrefix } from '../shared/helpers/add-route-prefix';
 
 import { UsersService } from './users.service';
 import type { DeleteContentCounts, QueryProfilesBody, UserOverviewTableCol } from './users.types';
@@ -135,7 +134,7 @@ export class UsersController {
 
 	@Get('idps')
 	@RequireAnyPermissions(PermissionName.VIEW_USERS)
-	async fetchIdps() {
+	async fetchIdps(): Promise<AvoAuthIdpType[]> {
 		return this.usersService.fetchIdps();
 	}
 

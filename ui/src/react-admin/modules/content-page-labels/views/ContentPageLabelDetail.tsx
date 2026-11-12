@@ -118,60 +118,58 @@ export const ContentPageLabelDetail: FunctionComponent<ContentPageLabelDetailPro
 				: contentPageLabelInfo.color;
 
 		return (
-			<>
-				<Table horizontal variant="invisible" className="c-table_detail-page">
-					<tbody>
-						{renderSimpleDetailRows(contentPageLabelInfo, [
-							['label', tText('admin/content-page-labels/views/content-page-label-detail___label')],
-							[
-								'content_type',
-								tText('admin/content-page-labels/views/content-page-label-detail___type'),
-							],
-						])}
-						{renderDetailRow(
-							contentPageLabelInfo.language,
-							tText('modules/content-page-labels/views/content-page-label-detail___taal'),
-							isMultiLanguageEnabled()
-						)}
-						{renderDetailRow(
-							linkTo ? (
-								<Button
-									type="tertiary"
-									onClick={() => navigateToContentType(linkTo)}
-								>{`${labels[linkTo.type]} - ${decodeURIComponent(
-									String(linkTo.value)?.split('hetarchief.be')?.pop() || ''
-								)}`}</Button>
-							) : (
-								'-'
-							),
-							tText('admin/content-page-labels/views/content-page-label-detail___link')
-						)}
-						{renderDetailRow(
-							<div
-								className="c-content-page-label-detail__color-swatch"
-								// Not backgroundColor: one of the options is a gradient
-								style={{ background: swatchBackground }}
-							/>,
-							tText(
-								'modules/content-page-labels/views/content-page-label-detail___achtergrondkleur',
-								{},
-								[App.HET_ARCHIEF]
-							),
-							isHetArchief()
-						)}
-						{renderDateDetailRows(contentPageLabelInfo, [
-							[
-								'created_at',
-								tText('admin/content-page-labels/views/content-page-label-detail___aangemaakt-op'),
-							],
-							[
-								'updated_at',
-								tText('admin/content-page-labels/views/content-page-label-detail___aangepast-op'),
-							],
-						])}
-					</tbody>
-				</Table>
-			</>
+			<Table horizontal variant="invisible" className="c-table_detail-page">
+				<tbody>
+					{renderSimpleDetailRows(contentPageLabelInfo, [
+						['label', tText('admin/content-page-labels/views/content-page-label-detail___label')],
+						[
+							'content_type',
+							tText('admin/content-page-labels/views/content-page-label-detail___type'),
+						],
+					])}
+					{renderDetailRow(
+						contentPageLabelInfo.language,
+						tText('modules/content-page-labels/views/content-page-label-detail___taal'),
+						isMultiLanguageEnabled()
+					)}
+					{renderDetailRow(
+						linkTo ? (
+							<Button
+								type="tertiary"
+								onClick={() => navigateToContentType(linkTo)}
+							>{`${labels[linkTo.type]} - ${decodeURIComponent(
+								String(linkTo.value)?.split('hetarchief.be')?.pop() || ''
+							)}`}</Button>
+						) : (
+							'-'
+						),
+						tText('admin/content-page-labels/views/content-page-label-detail___link')
+					)}
+					{renderDetailRow(
+						<div
+							className="c-content-page-label-detail__color-swatch"
+							// Not backgroundColor: one of the options is a gradient
+							style={{ background: swatchBackground }}
+						/>,
+						tText(
+							'modules/content-page-labels/views/content-page-label-detail___achtergrondkleur',
+							{},
+							[App.HET_ARCHIEF]
+						),
+						isHetArchief()
+					)}
+					{renderDateDetailRows(contentPageLabelInfo, [
+						[
+							'created_at',
+							tText('admin/content-page-labels/views/content-page-label-detail___aangemaakt-op'),
+						],
+						[
+							'updated_at',
+							tText('admin/content-page-labels/views/content-page-label-detail___aangepast-op'),
+						],
+					])}
+				</tbody>
+			</Table>
 		);
 	};
 
@@ -213,13 +211,11 @@ export const ContentPageLabelDetail: FunctionComponent<ContentPageLabelDetailPro
 	};
 
 	return (
-		<>
-			<LoadingErrorLoadedComponent
-				loadingInfo={loadingInfo}
-				dataObject={contentPageLabelInfo}
-				render={renderPage}
-				locationId="content-page-label-detail"
-			/>
-		</>
+		<LoadingErrorLoadedComponent
+			loadingInfo={loadingInfo}
+			dataObject={contentPageLabelInfo}
+			render={renderPage}
+			locationId="content-page-label-detail"
+		/>
 	);
 };

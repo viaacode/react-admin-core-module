@@ -6,9 +6,6 @@ import {
 	InternalServerErrorException,
 	Logger,
 } from '@nestjs/common';
-import type { IPagination } from '@studiohyperdrive/pagination';
-import { Pagination } from '@studiohyperdrive/pagination';
-
 import {
 	type AvoContentPageType,
 	type AvoItemItem,
@@ -28,7 +25,6 @@ import {
 	uniqBy,
 	without,
 } from 'lodash';
-
 import { AssetsService } from '../../assets/services/assets.service';
 import { DataService } from '../../data';
 import { PlayerTicketService } from '../../player-ticket';
@@ -67,6 +63,8 @@ import { getOrderObject } from '../../shared/helpers/generate-order-gql-query';
 import { getDatabaseType } from '../../shared/helpers/get-database-type';
 import { isAvo } from '../../shared/helpers/is-avo';
 import { isHetArchief } from '../../shared/helpers/is-hetarchief';
+import { Pagination } from '../../shared/helpers/pagination';
+import type { IPagination } from '../../shared/types/pagination';
 import { Locale } from '../../translations';
 import type { ContentBlockType, DbContentBlock } from '../content-block.types';
 import {
