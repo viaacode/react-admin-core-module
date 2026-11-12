@@ -1,4 +1,4 @@
-import { Image, LinkTarget } from '@viaa/avo2-components';
+import { LinkTarget } from '@viaa/avo2-components';
 import clsx from 'clsx';
 import React, {
 	type CSSProperties,
@@ -27,7 +27,16 @@ import { AdminCoreIconName } from '~core/config/config.types';
 import { getBackgroundTextColorVariables } from '~modules/content-page/const/background-text-colors';
 import { Locale } from '~modules/translations/translations.core.types.ts';
 import { Icon } from '~shared/components/Icon/Icon.tsx';
+import { OptimizedImage } from '~shared/components/OptimizedImage/OptimizedImage';
 import { SmartLink } from '~shared/components/SmartLink/SmartLink.tsx';
+
+/**
+ * Width (css px) of the image covering a tile: a column of the 3-column grid is ~430px wide and a
+ * row 24rem high, so a landscape (16:9) photo in a tall tile (~500px high) is ~900px wide.
+ * Below 700px every tile is a full-width card.
+ */
+const getTileImageDisplayWidth = (span: ThemeTileSpan): number =>
+	span.rowSpan === 2 ? 900 : span.colSpan * 430;
 
 /**
  * Renders a single theme group with a full-bleed colored band behind the title and first grid
@@ -187,8 +196,10 @@ export const BlockOverviewThemesGroupSection: FunctionComponent<
 					const tileClassName = clsx('c-block-overview-themes__tile', getTileSpanClassName(span));
 					const tileContent = (
 						<>
-							<Image
+							<OptimizedImage
 								src={imageUrl}
+								displayWidth={getTileImageDisplayWidth(span)}
+								sizes={`(max-width: 700px) 100vw, ${getTileImageDisplayWidth(span)}px`}
 								alt={themeNameLocale}
 								className="c-block-overview-themes__tile-image"
 							/>

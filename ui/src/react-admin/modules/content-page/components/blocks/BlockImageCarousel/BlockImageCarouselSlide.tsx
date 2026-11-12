@@ -1,4 +1,4 @@
-import { type ButtonAction, Image } from '@viaa/avo2-components';
+import type { ButtonAction } from '@viaa/avo2-components';
 import clsx from 'clsx';
 import React, {
 	type CSSProperties,
@@ -10,9 +10,13 @@ import React, {
 import { useSwiper } from 'swiper/react';
 import type { CopyrightComponentState } from '~modules/content-page/types/content-block.types';
 import { CopyrightAttribution } from '~shared/components/CopyrightAttribution';
+import { OptimizedImage } from '~shared/components/OptimizedImage/OptimizedImage';
 import { generateSmartLink } from '~shared/components/SmartLink/SmartLink.tsx';
 
 import './BlockImageCarousel.scss';
+
+// The image is 48rem high (see scss), so a 3:2 to 16:9 landscape photo is 720 to 853px wide
+const IMAGE_DISPLAY_WIDTH = 960;
 
 export interface ImageCarouselSlideProps extends CopyrightComponentState {
 	title: string;
@@ -72,8 +76,9 @@ export const ImageCarouselSlide: FunctionComponent<ImageCarouselSlideProps> = ({
 			{generateSmartLink(
 				imageAction,
 				<div ref={setImageWrapperRef} className="c-block-image-carousel__slide-image-wrapper">
-					<Image
+					<OptimizedImage
 						src={image}
+						displayWidth={IMAGE_DISPLAY_WIDTH}
 						alt={imageAlt || title}
 						className={clsx('c-block-image-carousel__slide-image', {
 							'c-block-image-carousel__slide-image--link': !!imageAction,

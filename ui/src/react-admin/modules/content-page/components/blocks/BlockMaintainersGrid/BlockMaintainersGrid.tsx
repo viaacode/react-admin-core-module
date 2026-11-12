@@ -6,8 +6,12 @@ import { useGetMaintainerGrid } from '~content-blocks/BlockMaintainersGrid/hooks
 import type { HeadingTypeOption } from '~modules/content-page/types/content-block.types';
 import { SmartLink } from '~modules/shared/components/SmartLink/SmartLink';
 import type { DefaultComponentProps } from '~modules/shared/types/components';
+import { OptimizedImg } from '~shared/components/OptimizedImage/OptimizedImage';
 import { tText } from '~shared/helpers/translation-functions.ts';
 import { BlockHeading } from '../BlockHeading/BlockHeading';
+
+// Logos are contained in an 11rem x 8.5rem box
+const LOGO_DISPLAY_WIDTH = 110;
 
 export interface BlockMaintainerGridProps extends DefaultComponentProps {
 	title: string;
@@ -62,7 +66,12 @@ export const BlockMaintainersGrid: FunctionComponent<BlockMaintainerGridProps> =
 									}
 								)}
 							>
-								<img src={maintainer.logoUrl} alt="" className="c-block-maintainers-grid__image" />
+								<OptimizedImg
+									src={maintainer.logoUrl}
+									displayWidth={LOGO_DISPLAY_WIDTH}
+									alt=""
+									className="c-block-maintainers-grid__image"
+								/>
 							</SmartLink>
 						</li>
 					);
