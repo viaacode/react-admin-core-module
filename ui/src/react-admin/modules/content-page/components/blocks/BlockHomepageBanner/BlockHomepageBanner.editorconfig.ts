@@ -28,7 +28,9 @@ export const INITIAL_CONTENT_HOMEPAGE_BANNER_BLOCK_STATE = (): DefaultContentBlo
 export const CONTENT_HOMEPAGE_BANNER_CONFIG = (position = 0): ContentBlockConfig => ({
 	position,
 	name: tText(
-		'modules/content-page/components/blocks/block-homepage-banner/block-homepage-banner___homepage-banner'
+		'modules/content-page/components/blocks/block-homepage-banner/block-homepage-banner___homepage-banner',
+		{},
+		[HET_ARCHIEF]
 	),
 	type: ContentBlockType.HomepageBanner,
 	components: {

@@ -26,7 +26,9 @@ export const INITIAL_CONTENT_HIGHLIGHT_TEXT_BLOCK_STATE = (): DefaultContentBloc
 export const CONTENT_HIGHLIGHT_TEXT_CONFIG = (position = 0): ContentBlockConfig => ({
 	position,
 	name: tText(
-		'modules/content-page/components/blocks/block-highlight-text/block-highlight-text___highlight-text'
+		'modules/content-page/components/blocks/block-highlight-text/block-highlight-text___highlight-text',
+		{},
+		[HET_ARCHIEF]
 	),
 	type: ContentBlockType.HighlightText,
 	components: {
