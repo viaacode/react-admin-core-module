@@ -44,9 +44,9 @@ export const BlockSpotlight: FunctionComponent<BlockSpotlightProps> = ({
 			>
 				{renderLink(
 					buttonAction,
-					<p>
+					<div className="c-spotlight__item__label">
 						{element?.title} <Icon name={'chevronRight' as IconName} />
-					</p>,
+					</div>,
 					element?.title
 				)}
 			</div>
