@@ -124,7 +124,11 @@ const PublishContentPageModal: FC<PublishContentPageModalProps> = ({
 			)}
 			size="large"
 			onClose={closeModal}
+			// Not scrollable: the date picker popups would be clipped by the modal body.
+			// Instead, the modal context scrolls on small screens (see PublishContentPageModal.scss)
 			scrollable={false}
+			// Clicking the scrollbar of the modal context would otherwise close the modal
+			disableContextClick
 			className="p-content-page-publish-modal"
 		>
 			<ModalBody>
