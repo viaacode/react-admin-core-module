@@ -37,6 +37,28 @@ import {
 	PlayerTokenOptions,
 } from '../player-ticket.types';
 
+/**
+ * Converts the start or end time of a media fragment to whole seconds
+ * The graph stores them in the format HH:mm:ss.µµµ, eg: 00:20:00.400 => 1200
+ * @returns the number of seconds, or undefined if the value is missing or invalid
+ */
+export function mediaFragmentTimeToSeconds(
+	time: string | number | null | undefined
+): number | undefined {
+	if (isNil(time) || time === '') {
+		return undefined;
+	}
+	if (typeof time === 'number') {
+		return Number.isFinite(time) ? time : undefined;
+	}
+	const match = /^(\d+):([0-5]\d):([0-5]\d(?:\.\d+)?)$/.exec(time);
+	if (!match) {
+		return undefined;
+	}
+	const [, hours, minutes, seconds] = match;
+	return Math.round(Number(hours) * 3600 + Number(minutes) * 60 + Number(seconds));
+}
+
 @Injectable()
 export class PlayerTicketService {
 	private logger: Logger = new Logger(PlayerTicketService.name, {
@@ -185,9 +207,18 @@ export class PlayerTicketService {
 
 	/**
 	 * Get the url of the media file for the current representation or external id of an ie object
+	 *
+	 * The start and end time of a cut fragment are only returned when the representation id is passed:
+	 * every fragment cut from a video shares the same full video file, so file.hasMediaFragment lists the
+	 * windows of all of that file's fragments. Taking the first one returned the window of an arbitrary
+	 * sibling fragment. See https://meemoo.atlassian.net/browse/ARC-3690 and ARC-4185
 	 * @param fileOrExternalId
+	 * @param representationId the representation the file belongs to, used to find the window of its cut fragment (hetarchief only)
 	 */
-	public async getBrowseUrlAndType(fileOrExternalId: string): Promise<{
+	public async getBrowseUrlAndType(
+		fileOrExternalId: string,
+		representationId?: string | null
+	): Promise<{
 		browsePath: string;
 		type: 'audio' | 'video' | 'other';
 		startTime: number;
@@ -220,10 +251,15 @@ export class PlayerTicketService {
 			(response as GetItemBrowsePathByExternalIdQuery)?.app_item_meta?.[0]?.type_id ||
 			(response as GetFileByByIdQuery)?.graph_file?.[0]?.isRootOf?.[0]?.includes?.[0]
 				?.representation?.represents?.dctermsFormat?.[0]?.dcterms_format;
-		const startTime: number | undefined = (response as GetFileByByIdQuery)?.graph_file?.[0]
-			?.hasMediaFragment?.[0]?.schema_start_time;
-		const endTime: number | undefined = (response as GetFileByByIdQuery)?.graph_file?.[0]
-			?.hasMediaFragment?.[0]?.schema_end_time;
+		const mediaFragment = representationId
+			? (response as GetFileByByIdQuery)?.graph_file?.[0]?.hasMediaFragment?.find(
+					(fragment) => fragment.id === representationId
+				)
+			: undefined;
+		const startTime: number | undefined = mediaFragmentTimeToSeconds(
+			mediaFragment?.schema_start_time
+		);
+		const endTime: number | undefined = mediaFragmentTimeToSeconds(mediaFragment?.schema_end_time);
 
 		if (!browsePath) {
 			throw new NotFoundException({

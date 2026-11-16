@@ -263,3 +263,5 @@ CLAUDE.md
 ui/.claude/worktrees/
 
 *.tsbuildinfo
+api/.openidea/
+ui/.openidea/

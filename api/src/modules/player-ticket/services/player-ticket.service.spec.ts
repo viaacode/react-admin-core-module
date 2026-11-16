@@ -13,7 +13,7 @@ import {
 import { TestingLogger } from '../../shared/logging/test-logger';
 import { type PlayerTicket } from '../player-ticket.types';
 
-import { PlayerTicketService } from './player-ticket.service';
+import { mediaFragmentTimeToSeconds, PlayerTicketService } from './player-ticket.service';
 
 const FAKE_TICKET_SERVICE_URL = 'http://ticketservice';
 const FAKE_MEDIA_SERVICE_URL = 'http://mediaservice';
@@ -149,8 +149,42 @@ describe('PlayerTicketService', () => {
 						],
 						hasMediaFragment: [
 							{
-								schema_start_time: 10,
-								schema_end_time: 20,
+								id: 'sibling-fragment-representation',
+								schema_start_time: '00:40:00.000',
+								schema_end_time: '00:45:00.000',
+							},
+							{
+								id: 'fragment-representation',
+								schema_start_time: '00:20:00.400',
+								schema_end_time: '00:33:00.000',
+							},
+						],
+					},
+				],
+			};
+			mockDataService.execute.mockResolvedValueOnce(mockData);
+			const info = await playerTicketService.getBrowseUrlAndType(
+				'vrt-id',
+				'fragment-representation'
+			);
+			expect(info.browsePath).toEqual('vrt/item-1');
+			expect(info.type).toEqual('video');
+			// The window of the requested fragment, not the first one in the list. ARC-4185
+			expect(info.startTime).toEqual(1200);
+			expect(info.endTime).toEqual(1980);
+		});
+
+		it('returns no start and end time when no representation id is passed', async () => {
+			const mockData: GetFileByByIdQuery = {
+				graph_file: [
+					{
+						premis_stored_at: 'vrt/item-1',
+						isRootOf: [],
+						hasMediaFragment: [
+							{
+								id: 'fragment-representation',
+								schema_start_time: '00:20:00.000',
+								schema_end_time: '00:33:00.000',
 							},
 						],
 					},
@@ -158,10 +192,8 @@ describe('PlayerTicketService', () => {
 			};
 			mockDataService.execute.mockResolvedValueOnce(mockData);
 			const info = await playerTicketService.getBrowseUrlAndType('vrt-id');
-			expect(info.browsePath).toEqual('vrt/item-1');
-			expect(info.type).toEqual('video');
-			expect(info.startTime).toEqual(10);
-			expect(info.endTime).toEqual(20);
+			expect(info.startTime).toBeUndefined();
+			expect(info.endTime).toBeUndefined();
 		});
 
 		it('returns the browseUrl for an avo item', async () => {
@@ -372,5 +404,25 @@ describe('PlayerTicketService', () => {
 				statusCode: 404,
 			});
 		});
+	});
+});
+
+describe('mediaFragmentTimeToSeconds', () => {
+	it('converts the graph time format to whole seconds', () => {
+		expect(mediaFragmentTimeToSeconds('00:20:00.400')).toEqual(1200);
+		expect(mediaFragmentTimeToSeconds('01:02:03.600')).toEqual(3724);
+		expect(mediaFragmentTimeToSeconds('00:00:10')).toEqual(10);
+	});
+
+	it('passes numbers through', () => {
+		expect(mediaFragmentTimeToSeconds(42)).toEqual(42);
+	});
+
+	it('returns undefined for missing or invalid values', () => {
+		expect(mediaFragmentTimeToSeconds(null)).toBeUndefined();
+		expect(mediaFragmentTimeToSeconds(undefined)).toBeUndefined();
+		expect(mediaFragmentTimeToSeconds('')).toBeUndefined();
+		expect(mediaFragmentTimeToSeconds('invalid')).toBeUndefined();
+		expect(mediaFragmentTimeToSeconds(Number.NaN)).toBeUndefined();
 	});
 });
