@@ -46,7 +46,9 @@ const videoIsVisible: ContentBlockField['isVisible'] = (_config, formGroupState)
 export const HERO_CAROUSEL_CONFIG = (position = 0): ContentBlockConfig => ({
 	position,
 	name: tText(
-		'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel___hero-carousel'
+		'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel___hero-carousel',
+		{},
+		[HET_ARCHIEF]
 	),
 	type: ContentBlockType.HeroCarousel,
 	components: {

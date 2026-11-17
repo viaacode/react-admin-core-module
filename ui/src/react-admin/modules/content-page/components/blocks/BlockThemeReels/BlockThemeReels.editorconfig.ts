@@ -79,13 +79,17 @@ export const THEME_REELS_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 					},
 					imageAlt: TEXT_FIELD({
 						label: tText(
-							'modules/content-page/components/blocks/block-theme-reels/block-theme-reels___alt-tekst-voor-de-afbeelding'
+							'modules/content-page/components/blocks/block-theme-reels/block-theme-reels___alt-tekst-voor-de-afbeelding',
+							{},
+							[HET_ARCHIEF]
 						),
 						validator: undefined,
 					}),
 					imageMask: {
 						label: tText(
-							'modules/content-page/components/blocks/block-theme-reels/block-theme-reels___masker'
+							'modules/content-page/components/blocks/block-theme-reels/block-theme-reels___masker',
+							{},
+							[HET_ARCHIEF]
 						),
 						editorType: ContentBlockEditor.Select,
 						editorProps: {
@@ -128,7 +132,9 @@ export const THEME_REELS_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 					},
 					description: TEXT_FIELD({
 						label: tText(
-							'modules/content-page/components/blocks/block-theme-reels/block-theme-reels___beschrijving'
+							'modules/content-page/components/blocks/block-theme-reels/block-theme-reels___beschrijving',
+							{},
+							[HET_ARCHIEF]
 						),
 						validator: (value: string) => {
 							const errorArray: string[] = [];

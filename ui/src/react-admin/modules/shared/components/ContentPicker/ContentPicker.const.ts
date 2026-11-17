@@ -4,6 +4,7 @@ import { retrieveCustomNavigationElements } from '~shared/components/ContentPick
 import { retrieveIeObjects } from '~shared/components/ContentPicker/item-providers/ie-objects';
 import { retrieveNlParentContentPages } from '~shared/components/ContentPicker/item-providers/nl-content-page-parent';
 import { tText } from '~shared/helpers/translation-functions';
+import { HET_ARCHIEF } from '~shared/types';
 import type { PickerTypeOption } from '../../types/content-picker';
 import { retrieveAnchors } from './item-providers/anchors';
 import { retrieveBundles, retrieveCollections } from './item-providers/collection';
@@ -81,7 +82,9 @@ export const GET_CONTENT_TYPE_LABELS: () => Record<AvoCoreContentPickerType, str
 		'modules/shared/components/content-picker/content-picker___ie-objects'
 	),
 	[AvoCoreContentPickerType.IE_OBJECT_THEME]: tText(
-		'modules/shared/components/content-picker/content-picker___themas'
+		'modules/shared/components/content-picker/content-picker___themas',
+		{},
+		[HET_ARCHIEF]
 	),
 	/**
 	 * @deprecated, use CUSTOM_NAVIGATION_ELEMENTS instead

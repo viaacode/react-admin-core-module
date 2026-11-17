@@ -51,7 +51,9 @@ export const INITIAL_OVERVIEW_WITH_CAROUSEL_BLOCK_STATE = (): DefaultContentBloc
 export const OVERVIEW_WITH_CAROUSEL_CONFIG = (position = 0): ContentBlockConfig => ({
 	position,
 	name: tText(
-		'modules/content-page/components/blocks/block-overview-with-carousel/block-overview-with-carousel___overzicht-met-carrousel'
+		'modules/content-page/components/blocks/block-overview-with-carousel/block-overview-with-carousel___overzicht-met-carrousel',
+		{},
+		[HET_ARCHIEF]
 	),
 	type: ContentBlockType.OverviewWithCarousel,
 	components: {
