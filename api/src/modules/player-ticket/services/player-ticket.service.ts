@@ -25,6 +25,7 @@ import {
 	type GetThumbnailUrlByIdQuery,
 	type GetThumbnailUrlByIdQueryVariables,
 } from '../../shared/generated/graphql-db-types-hetarchief';
+import { formattedDurationToSeconds } from '../../shared/helpers/duration';
 import { cleanMultilineEnv } from '../../shared/helpers/env-vars';
 import { CustomError } from '../../shared/helpers/error';
 import { isHetArchief } from '../../shared/helpers/is-hetarchief';
@@ -36,28 +37,6 @@ import {
 	PlayerTicketServiceOptions,
 	PlayerTokenOptions,
 } from '../player-ticket.types';
-
-/**
- * Converts the start or end time of a media fragment to whole seconds
- * The graph stores them in the format HH:mm:ss.µµµ, eg: 00:20:00.400 => 1200
- * @returns the number of seconds, or undefined if the value is missing or invalid
- */
-export function mediaFragmentTimeToSeconds(
-	time: string | number | null | undefined
-): number | undefined {
-	if (isNil(time) || time === '') {
-		return undefined;
-	}
-	if (typeof time === 'number') {
-		return Number.isFinite(time) ? time : undefined;
-	}
-	const match = /^(\d+):([0-5]\d):([0-5]\d(?:\.\d+)?)$/.exec(time);
-	if (!match) {
-		return undefined;
-	}
-	const [, hours, minutes, seconds] = match;
-	return Math.round(Number(hours) * 3600 + Number(minutes) * 60 + Number(seconds));
-}
 
 @Injectable()
 export class PlayerTicketService {
@@ -256,10 +235,10 @@ export class PlayerTicketService {
 					(fragment) => fragment.id === representationId
 				)
 			: undefined;
-		const startTime: number | undefined = mediaFragmentTimeToSeconds(
+		const startTime: number | undefined = formattedDurationToSeconds(
 			mediaFragment?.schema_start_time
 		);
-		const endTime: number | undefined = mediaFragmentTimeToSeconds(mediaFragment?.schema_end_time);
+		const endTime: number | undefined = formattedDurationToSeconds(mediaFragment?.schema_end_time);
 
 		if (!browsePath) {
 			throw new NotFoundException({

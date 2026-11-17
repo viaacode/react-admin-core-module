@@ -13,7 +13,7 @@ import {
 import { TestingLogger } from '../../shared/logging/test-logger';
 import { type PlayerTicket } from '../player-ticket.types';
 
-import { mediaFragmentTimeToSeconds, PlayerTicketService } from './player-ticket.service';
+import { PlayerTicketService } from './player-ticket.service';
 
 const FAKE_TICKET_SERVICE_URL = 'http://ticketservice';
 const FAKE_MEDIA_SERVICE_URL = 'http://mediaservice';
@@ -408,25 +408,5 @@ describe('PlayerTicketService', () => {
 				statusCode: 404,
 			});
 		});
-	});
-});
-
-describe('mediaFragmentTimeToSeconds', () => {
-	it('converts the graph time format to whole seconds', () => {
-		expect(mediaFragmentTimeToSeconds('00:20:00.400')).toEqual(1200);
-		expect(mediaFragmentTimeToSeconds('01:02:03.600')).toEqual(3724);
-		expect(mediaFragmentTimeToSeconds('00:00:10')).toEqual(10);
-	});
-
-	it('passes numbers through', () => {
-		expect(mediaFragmentTimeToSeconds(42)).toEqual(42);
-	});
-
-	it('returns undefined for missing or invalid values', () => {
-		expect(mediaFragmentTimeToSeconds(null)).toBeUndefined();
-		expect(mediaFragmentTimeToSeconds(undefined)).toBeUndefined();
-		expect(mediaFragmentTimeToSeconds('')).toBeUndefined();
-		expect(mediaFragmentTimeToSeconds('invalid')).toBeUndefined();
-		expect(mediaFragmentTimeToSeconds(Number.NaN)).toBeUndefined();
 	});
 });
