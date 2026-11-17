@@ -149,8 +149,42 @@ describe('PlayerTicketService', () => {
 						],
 						hasMediaFragment: [
 							{
-								schema_start_time: 10,
-								schema_end_time: 20,
+								id: 'sibling-fragment-representation',
+								schema_start_time: '00:40:00.000',
+								schema_end_time: '00:45:00.000',
+							},
+							{
+								id: 'fragment-representation',
+								schema_start_time: '00:20:00.400',
+								schema_end_time: '00:33:00.000',
+							},
+						],
+					},
+				],
+			};
+			mockDataService.execute.mockResolvedValueOnce(mockData);
+			const info = await playerTicketService.getBrowseUrlAndType(
+				'vrt-id',
+				'fragment-representation'
+			);
+			expect(info.browsePath).toEqual('vrt/item-1');
+			expect(info.type).toEqual('video');
+			// The window of the requested fragment, not the first one in the list. ARC-4185
+			expect(info.startTime).toEqual(1200);
+			expect(info.endTime).toEqual(1980);
+		});
+
+		it('returns no start and end time when no representation id is passed', async () => {
+			const mockData: GetFileByByIdQuery = {
+				graph_file: [
+					{
+						premis_stored_at: 'vrt/item-1',
+						isRootOf: [],
+						hasMediaFragment: [
+							{
+								id: 'fragment-representation',
+								schema_start_time: '00:20:00.000',
+								schema_end_time: '00:33:00.000',
 							},
 						],
 					},
@@ -158,10 +192,8 @@ describe('PlayerTicketService', () => {
 			};
 			mockDataService.execute.mockResolvedValueOnce(mockData);
 			const info = await playerTicketService.getBrowseUrlAndType('vrt-id');
-			expect(info.browsePath).toEqual('vrt/item-1');
-			expect(info.type).toEqual('video');
-			expect(info.startTime).toEqual(10);
-			expect(info.endTime).toEqual(20);
+			expect(info.startTime).toBeUndefined();
+			expect(info.endTime).toBeUndefined();
 		});
 
 		it('returns the browseUrl for an avo item', async () => {
