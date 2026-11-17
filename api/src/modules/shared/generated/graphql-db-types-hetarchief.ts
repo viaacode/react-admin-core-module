@@ -38788,7 +38788,7 @@ export type GetFileByByIdQueryVariables = Exact<{
 }>;
 
 
-export type GetFileByByIdQuery = { __typename?: 'query_root', graph_file: Array<{ __typename?: 'graph_file', premis_stored_at?: string | null, isRootOf: Array<{ __typename?: 'graph_representation', includes: Array<{ __typename?: 'graph_includes', representation: { __typename?: 'graph_representation', represents?: { __typename?: 'graph_intellectual_entity', dctermsFormat: Array<{ __typename?: 'graph_dcterms_format', dcterms_format: string }> } | null } }> }>, hasMediaFragment: Array<{ __typename?: 'graph_representation', schema_start_time?: any | null, schema_end_time?: any | null }> }> };
+export type GetFileByByIdQuery = { __typename?: 'query_root', graph_file: Array<{ __typename?: 'graph_file', premis_stored_at?: string | null, isRootOf: Array<{ __typename?: 'graph_representation', includes: Array<{ __typename?: 'graph_includes', representation: { __typename?: 'graph_representation', represents?: { __typename?: 'graph_intellectual_entity', dctermsFormat: Array<{ __typename?: 'graph_dcterms_format', dcterms_format: string }> } | null } }> }>, hasMediaFragment: Array<{ __typename?: 'graph_representation', id: string, schema_start_time?: any | null, schema_end_time?: any | null }> }> };
 
 export type GetThumbnailUrlByIdQueryVariables = Exact<{
   id: Scalars['String']['input'];

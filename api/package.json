@@ -27,8 +27,8 @@
     "test:debug": "vitest --inspect-brk --run",
     "test:e2e": "vitest run --config ./vitest.config.e2e.ts",
     "i18n:extract": "ts-node --transpile-only --require dotenv/config scripts/extract-and-replace-translations.ts dotenv_config_path=.env/.env.local && npm run format:fix",
-    "generate-hetarchief-database-types": "dotenv -e ./.env/.env.local graphql-codegen -- --config codegen-hetarchief.ts",
-    "generate-avo-database-types": "dotenv -e ./.env/.env.local graphql-codegen -- --config codegen-avo.ts",
+    "generate-hetarchief-database-types": "node ./scripts/load-envs.mjs 'hetarchief QAS admin-core env variables 2026' --overrides .env/.env graphql-codegen -- --config codegen-hetarchief.ts",
+    "generate-avo-database-types": "node ./scripts/load-envs.mjs 'avo QAS admin-core env variables 2026' --overrides .env/.env  graphql-codegen -- --config codegen-avo.ts",
     "generate-database-types": "npm run generate-hetarchief-database-types && npm run generate-avo-database-types",
     "bump": "bump-package-versions --part=patch --strategy=highest ../package.json ../ui/package.json ./package.json",
     "find-circular-dependencies": "npx madge --circular --extensions ts ./"
