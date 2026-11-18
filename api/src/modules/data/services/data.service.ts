@@ -10,6 +10,8 @@ import { DuplicateKeyException } from '../../shared/exceptions/duplicate-key.exc
 import { CustomError } from '../../shared/helpers/error';
 import { GraphQlResponse } from '../types';
 
+const DEFAULT_GRAPHQL_TIMEOUT_MS = 30_000;
+
 @Injectable()
 export class DataService {
 	private logger: Logger = new Logger(DataService.name, { timestamp: true });
@@ -23,6 +25,10 @@ export class DataService {
 			},
 			resolveBodyOnly: true,
 			responseType: 'json',
+			// Without a timeout, a slow or hanging graphql request keeps the incoming request open indefinitely
+			timeout: {
+				request: Number(process.env.GRAPHQL_TIMEOUT_MS) || DEFAULT_GRAPHQL_TIMEOUT_MS,
+			},
 			https: {
 				// TODO remove once error in certificates has been fixed: https://meemoo.atlassian.net/browse/OPS-1835
 				rejectUnauthorized: false,

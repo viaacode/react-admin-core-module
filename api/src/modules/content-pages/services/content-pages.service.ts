@@ -65,6 +65,10 @@ import type {
 import { CustomError } from '../../shared/helpers/error';
 import { getOrderObject } from '../../shared/helpers/generate-order-gql-query';
 import { getDatabaseType } from '../../shared/helpers/get-database-type';
+import {
+	InMemoryCache,
+	NEAR_STATIC_LOOKUP_CACHE_TTL_MS,
+} from '../../shared/helpers/in-memory-cache';
 import { isAvo } from '../../shared/helpers/is-avo';
 import { isHetArchief } from '../../shared/helpers/is-hetarchief';
 import { Locale } from '../../translations';
@@ -100,6 +104,14 @@ export class ContentPagesService {
 	private logger: Logger = new Logger(ContentPagesService.name, {
 		timestamp: true,
 	});
+	/**
+	 * Caches the raw database response of getContentPageByLanguageAndPath per language and path,
+	 * since every visit to a content page (eg: the homepage) requests it
+	 * Checks for the user (user groups, publish dates) happen after the fetch, so the cache is shared by all users
+	 */
+	private contentPageByPathCache = new InMemoryCache<
+		ContentPageQueryTypes['GetContentPageByPathQuery']
+	>(NEAR_STATIC_LOOKUP_CACHE_TTL_MS);
 
 	constructor(
 		@Inject(forwardRef(() => DataService)) protected dataService: DataService,
@@ -480,13 +492,15 @@ export class ContentPagesService {
 		language: Locale,
 		path: string
 	): Promise<DbContentPage | null> {
-		const response = await this.dataService.execute<
-			ContentPageQueryTypes['GetContentPageByPathQuery'],
-			ContentPageQueryTypes['GetContentPageByPathQueryVariables']
-		>(CONTENT_PAGE_QUERIES[getDatabaseType()].GetContentPageByPathDocument, {
-			language,
-			path,
-		});
+		const response = await this.contentPageByPathCache.wrap(JSON.stringify([language, path]), () =>
+			this.dataService.execute<
+				ContentPageQueryTypes['GetContentPageByPathQuery'],
+				ContentPageQueryTypes['GetContentPageByPathQueryVariables']
+			>(CONTENT_PAGE_QUERIES[getDatabaseType()].GetContentPageByPathDocument, {
+				language,
+				path,
+			})
+		);
 		const contentPage: GqlContentPage | undefined =
 			(response as ContentPageQueryTypes['GetContentPageByPathQueryHetArchief'])
 				?.app_content_page?.[0] ||
@@ -669,6 +683,10 @@ export class ContentPagesService {
 				unpublishResult as UnpublishContentPageMutationHetArchief
 			).update_app_content_page?.returning?.map((page) => page.id) ||
 			[];
+
+		if (results.publishedCount || results.unpublishedCount) {
+			this.contentPageByPathCache.clear();
+		}
 
 		return results;
 	}
@@ -1014,6 +1032,7 @@ export class ContentPagesService {
 				ContentPageQueryTypes['InsertContentLabelLinksMutation'],
 				ContentPageQueryTypes['InsertContentLabelLinksMutationVariables']
 			>(CONTENT_PAGE_QUERIES[getDatabaseType()].InsertContentLabelLinksDocument, variables);
+			this.contentPageByPathCache.clear();
 		} catch (err) {
 			throw new CustomError('Failed to insert content label links in the database', err, {
 				variables,
@@ -1034,6 +1053,7 @@ export class ContentPagesService {
 				labelIds,
 				contentPageId,
 			});
+			this.contentPageByPathCache.clear();
 		} catch (err) {
 			throw new CustomError('Failed to insert content label links in the database', err, {
 				variables: {
@@ -1112,6 +1132,7 @@ export class ContentPagesService {
 				// biome-ignore lint/suspicious/noExplicitAny: todo
 				contentPage: dbContentPage as any,
 			});
+			this.contentPageByPathCache.clear();
 
 			const id: number | null =
 				(response as ContentPageQueryTypes['InsertContentMutationAvo']).insert_app_content
@@ -1189,6 +1210,7 @@ export class ContentPagesService {
 				contentBlocks: contentBlocks as any[], // Mismatch between block types for avo and hetarchief
 				contentLabelLinks: contentPageLabelLinks,
 			});
+			this.contentPageByPathCache.clear();
 
 			const updatedContent =
 				(response as ContentPageQueryTypes['UpdateContentPageWithBlocksAndLabelsMutationAvo'])
@@ -1231,6 +1253,7 @@ export class ContentPagesService {
 				id,
 				path: `${contentPage.path}-${id}`,
 			});
+			this.contentPageByPathCache.clear();
 		} catch (err) {
 			throw new CustomError('Failed to delete content page from the database', err, {
 				id,
@@ -1256,6 +1279,7 @@ export class ContentPagesService {
 				contentBlock: contentBlockConfig as any,
 				id: contentBlockConfig.id as number,
 			});
+			this.contentPageByPathCache.clear();
 		} catch (err) {
 			throw new CustomError('Failed to update content block', err, {
 				contentBlockConfig,
@@ -1270,12 +1294,14 @@ export class ContentPagesService {
 	 */
 	public async deleteContentBlock(id: number) {
 		try {
-			return await this.dataService.execute<
+			const response = await this.dataService.execute<
 				ContentPageQueryTypes['DeleteContentBlockMutation'],
 				ContentPageQueryTypes['DeleteContentBlockMutationVariables']
 			>(CONTENT_PAGE_QUERIES[getDatabaseType()].DeleteContentBlockDocument, {
 				id,
 			});
+			this.contentPageByPathCache.clear();
+			return response;
 		} catch (err) {
 			throw new CustomError('Failed to delete content block', err, { id });
 		}
@@ -1334,6 +1360,7 @@ export class ContentPagesService {
 				ContentPageQueryTypes['InsertContentBlocksMutation'],
 				ContentPageQueryTypes['InsertContentBlocksMutationVariables']
 			>(CONTENT_PAGE_QUERIES[getDatabaseType()].InsertContentBlocksDocument, variables);
+			this.contentPageByPathCache.clear();
 			const ids: number[] =
 				(
 					(response as ContentPageQueryTypes['InsertContentBlocksMutationAvo'])
