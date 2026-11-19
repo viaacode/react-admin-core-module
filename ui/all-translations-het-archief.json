@@ -21576,7 +21576,7 @@
     "location": "modules/content-page/components/blocks/block-objects-grid/block-objects-grid",
     "key": "toon-alle-objecten-voor-deze-zoekopdracht",
     "language": "en",
-    "value": "Show all objects for this search query",
+    "value": "Toon alle objecten voor deze zoekopdracht",
     "value_type": "TEXT"
   },
   {
@@ -24366,7 +24366,7 @@
     "location": "modules/content-page/components/blocks/block-theme-reels/block-theme-reel-section",
     "key": "toon-alle",
     "language": "nl",
-    "value": "Bekijk thema",
+    "value": "Toon alle",
     "value_type": "TEXT"
   },
   {
@@ -24376,7 +24376,7 @@
     "location": "modules/content-page/components/blocks/block-theme-reels/block-theme-reel-section",
     "key": "toon-alle",
     "language": "en",
-    "value": "Explore theme",
+    "value": "Toon alle",
     "value_type": "TEXT"
   },
   {
@@ -26016,7 +26016,7 @@
     "location": "modules/ie-objects/const/index",
     "key": "overzicht",
     "language": "en",
-    "value": "Overview",
+    "value": "overview",
     "value_type": "TEXT"
   },
   {
@@ -46296,7 +46296,7 @@
     "location": "modules/home/components/visitor-space-cards-with-search/visitor-space-cards-with-search",
     "key": "toon-alle-total-bezoekerruimtes",
     "language": "en",
-    "value": "Show all {{total}} visitor spaces",
+    "value": "Toon alle {{total}} bezoekerruimtes",
     "value_type": "TEXT"
   },
   {
@@ -47306,7 +47306,7 @@
     "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata",
     "key": "deze-titel-en-samenvatting-zijn-automatisch-gegenereerd-met-ai-en-kunnen-fouten-bevatten-meer-info",
     "language": "nl",
-    "value": "<p>Deze titel en samenvatting zijn automatisch gegenereerd met AI en kunnen fouten bevatten. <a target=\"_blank\" rel=\"noopener noreferrer nofollow\" href=\"/vragen?label=Materiaal&amp;item=%2Fhoe-kwamen-de-ai-ondertitels-tot-stand-kan-ik-fouten-of-onduidelijkheden-melden\">Meer info</a></p>",
+    "value": "<p>Deze titel en samenvatting zijn automatisch gegenereerd met AI en kunnen fouten bevatten. <a href=\"/vragen\">Meer info</a></p>",
     "value_type": "HTML"
   },
   {
@@ -47316,7 +47316,7 @@
     "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata",
     "key": "deze-titel-en-samenvatting-zijn-automatisch-gegenereerd-met-ai-en-kunnen-fouten-bevatten-meer-info",
     "language": "en",
-    "value": "<p>This title and description were automatically generated using AI and may contain errors. <a target=\"_blank\" rel=\"noopener noreferrer nofollow\" href=\"/en/questions?label=Digital+material&amp;item=%2Fhow-were-the-ai-generated-entities-created-how-can-i-search-for-them-can-i-report-mistakes-or-unclear-information\">More info</a></p>",
+    "value": "<p>This title and description were automatically generated using AI and may contain errors. <a target=\"_blank\" rel=\"noopener noreferrer nofollow\" href=\"/vragen\">Meer info</a></p>",
     "value_type": "HTML"
   },
   {
@@ -47376,7 +47376,7 @@
     "location": "modules/ie-objects/object-detail-page",
     "key": "deze-bronvermelding-is-automatisch-gegenereerd-en-kan-fouten-bevatten-a-href-bronvermelding-fouten-meer-info-a",
     "language": "en",
-    "value": "<p>This source citation is automatically generated and can contain mistakes. <a href=\"/en/questions?item=%2Fhow-do-i-cite-sources-i-found-on-thearchives-be&label=Rights+and+usage\" target=\"\">Read more</a></p>",
+    "value": "<p>This source citation is automatically generated and can contain mistakes. <a href=\"/en/questions?item=%2Fhow-do-i-cite-sources-i-found-on-thearchives-be&amp;label=Rights%20and%20usage&amp;page=0\" target=\"\">Read more</a></p>",
     "value_type": "TEXT"
   },
   {
@@ -48346,7 +48346,7 @@
     "location": "modules/ie-objects/components/object-detail-page-metadata-tab/object-detail-page-metadata-tab",
     "key": "metadata-worden-aangeleverd-door-partners-van-meemoo-meemoo-is-niet-verantwoordelijk-voor-onjuistheden-of-onvolledigheden-in-deze-gegevens-meer-info",
     "language": "nl",
-    "value": "<p>Metadata worden aangeleverd door partners van meemoo. Meemoo is niet verantwoordelijk voor onjuistheden of onvolledigheden in deze gegevens. <a target=\"_blank\" rel=\"noopener noreferrer nofollow\" href=\"https://hetarchief.be/vragen?item=%2Fde-beschrijvingen-van-een-fragment-zijn-onvolledig-of-fout-wat-nu&amp;label=Materiaal\">Meer info</a></p>",
+    "value": "<p>Metadata worden aangeleverd door partners van meemoo. Meemoo is niet verantwoordelijk voor onjuistheden of onvolledigheden in deze gegevens. <a target=\"_blank\" rel=\"noopener noreferrer nofollow\" href=\"https://hetarchief.be/vragen?label=Zoeken&amp;item=%2Fhoe-werkt-meemoo-aan-de-kwaliteit-van-metadata\">Meer info</a></p>",
     "value_type": "HTML"
   },
   {
@@ -48356,7 +48356,7 @@
     "location": "modules/ie-objects/components/object-detail-page-metadata-tab/object-detail-page-metadata-tab",
     "key": "metadata-worden-aangeleverd-door-partners-van-meemoo-meemoo-is-niet-verantwoordelijk-voor-onjuistheden-of-onvolledigheden-in-deze-gegevens-meer-info",
     "language": "en",
-    "value": "<p>Metadata is provided by meemoo’s partners. Meemoo is not responsible for any inaccuracies or omissions in this data. <a target=\"_blank\" rel=\"noopener noreferrer nofollow\" href=\"https://hetarchief.be/en/questions?item=%2Fthe-descriptions-of-an-item-are-incomplete-or-wrong-what-now&amp;label=Digital+material\">More info</a></p>",
+    "value": "<p>Metadata is provided by meemoo’s partners. Meemoo is not responsible for any inaccuracies or omissions in this data. <a target=\"_blank\" rel=\"noopener noreferrer nofollow\" href=\"https://hetarchief.be/en/questions?label=Search&amp;item=%2Fhow-does-meemoo-work-on-the-metadata-quality\">More info</a></p>",
     "value_type": "HTML"
   },
   {
@@ -48386,7 +48386,7 @@
     "location": "modules/ie-objects/object-detail-page",
     "key": "deze-ocr-kan-fouten-bevatten-a-href-ocr-betrouwbaarheid-info-meer-info-vind-je-hier-a",
     "language": "nl",
-    "value": "<p>Deze OCR kan fouten bevatten. <a target=\"_blank\" rel=\"noopener noreferrer nofollow\" href=\"https://hetarchief.be/vragen%3Fitem=%252Fhoe-betrouwbaar-is-tekstherkenning-ocr-op-hetarchief-be&amp;label=Zoeken&amp;page=0?label=Zoeken&amp;item=%2Fhoe-betrouwbaar-is-tekstherkenning-ocr-op-hetarchief-be\">Meer info</a></p>",
+    "value": "<p>Deze OCR kan fouten bevatten. <a href=\"/vragen?item=%2Fhoe-betrouwbaar-is-tekstherkenning-ocr-op-hetarchief-be&amp;label=Zoeken&amp;page=0\" target=\"\">Meer info vind je hier</a>.</p>",
     "value_type": "HTML"
   },
   {
@@ -48396,7 +48396,7 @@
     "location": "modules/ie-objects/object-detail-page",
     "key": "deze-ocr-kan-fouten-bevatten-a-href-ocr-betrouwbaarheid-info-meer-info-vind-je-hier-a",
     "language": "en",
-    "value": "<p>This OCR may contain errors.&nbsp;<a target=\"_blank\" rel=\"noopener noreferrer nofollow\" href=\"https://hetarchief.be/en/questions?label=Search&amp;item=%2Fhow-reliable-is-the-text-recognition-ocr-on-thearchives-be\">More info</a></p>",
+    "value": "<p>Deze OCR kan fouten bevatten. <a href=\"/vragen?item=%2Fhoe-betrouwbaar-is-tekstherkenning-ocr-op-hetarchief-be&amp;label=Zoeken&amp;page=0\" target=\"\">Meer info vind je hier</a>.</p>",
     "value_type": "HTML"
   },
   {
@@ -50646,7 +50646,7 @@
     "location": "modules/shared/components/audio-or-video-player/audio-or-video-player",
     "key": "ondertitels-zijn-ai-gegenereerd-door-meemoo-er-werd-geen-menselijke-controle-op-uitgevoerd",
     "language": "nl",
-    "value": "Ondertitels zijn AI-gegenereerd door meemoo, er werd geen menselijke controle op uitgevoerd.<a href=\"https://hetarchief.be/vragen?label=Materiaal&item=%2Fhoe-kwamen-de-ai-ondertitels-tot-stand-kan-ik-fouten-of-onduidelijkheden-melden\">meer info</a>",
+    "value": "Ondertitels zijn AI-gegenereerd door meemoo, er werd geen menselijke controle op uitgevoerd",
     "value_type": "TEXT"
   },
   {
@@ -50656,7 +50656,7 @@
     "location": "modules/shared/components/audio-or-video-player/audio-or-video-player",
     "key": "ondertitels-zijn-ai-gegenereerd-door-meemoo-er-werd-geen-menselijke-controle-op-uitgevoerd",
     "language": "en",
-    "value": "Subtitles were AI-generated by meemoo, no human check or edit has been performed.<a href=\"https://hetarchief.be/en/questions?label=Digital+material&item=%2Fhow-were-the-ai-generated-subtitles-created-can-i-report-mistakes-or-unclear-information\">more info</a>\n",
+    "value": "Subtitles were AI-generated by meemoo, no human check or edit has been performed",
     "value_type": "TEXT"
   },
   {
@@ -58226,7 +58226,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "wijziging-materiaal-geen-wijzigingen-omschrijving",
     "language": "nl",
-    "value": "<p>Ter verduidelijking: De volgende vormen van gebruik worden niet als wijziging beschouwd: </p><ul><li>Inkorting of hergebruik van slechts een deel van het aangevraagde materiaal. </li><li>Technische wijzigingen om de beeld- of audiokwaliteit van het materiaal te verbeteren. </li><li>Integratie van ongewijzigd bronmateriaal in een documentaire.</li><li>Aanbieden van materiaal in interactieve diensten waarbij gebruikers van die diensten zelf de weergave van het materiaal tijdelijk kunnen wijzigen voor eigen doeleinden (vb. binnen een app, kiosk, of binnen een interactieve website, bijvoorbeeld met gebruik van H5P-technologie).</li></ul>",
+    "value": "<p>Ter verduidelijking: De volgende vormen van gebruik worden niet als wijziging beschouwd: </p><ul><li>Inkorting of hergebruik van slechts een deel van het aangevraagde materiaal. </li><li>Technische wijzigingen om de beeld- of audiokwaliteit van het materiaal te verbeteren. </li><li>Integratie van ongewijzigd bronmateriaal in een documentaire.</li><li>Aanbieden van materiaal in interactieve diensten waarbij gebruikers van die diensten zelf de weergave van het materiaal tijdelijk kunnen wijzigen voor eigen doeleinden (vb. binnen een app, kiosk, of binnen een interactieve website, bijvoorbeeld met gebruik van H5P-technologie).</li></ul>",
     "value_type": "HTML"
   },
   {
