@@ -47364,26 +47364,6 @@
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
     "location": "modules/ie-objects/object-detail-page",
-    "key": "deze-bronvermelding-is-automatisch-gegenereerd-en-kan-fouten-bevatten-a-href-bronvermelding-fouten-meer-info-a",
-    "language": "nl",
-    "value": "<p>Deze bronvermelding is automatisch gegenereerd en kan fouten bevatten. <a href=\"/vragen?item=%2Fhoe-vermeld-ik-de-bronnen-die-ik-vind-via-hetarchief-be&amp;label=Rechten%20en%20gebruik&amp;page=0\" target=\"\">Meer info</a></p>",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/object-detail-page",
-    "key": "deze-bronvermelding-is-automatisch-gegenereerd-en-kan-fouten-bevatten-a-href-bronvermelding-fouten-meer-info-a",
-    "language": "en",
-    "value": "<p>This source citation is automatically generated and can contain mistakes. <a href=\"/en/questions?item=%2Fhow-do-i-cite-sources-i-found-on-thearchives-be&amp;label=Rights%20and%20usage&amp;page=0\" target=\"\">Read more</a></p>",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/object-detail-page",
     "key": "bronvermelding",
     "language": "nl",
     "value": "Bronvermelding",
@@ -61342,6 +61322,46 @@
   {
     "id": "",
     "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-metadata-tab/object-detail-page-metadata-tab",
+    "key": "deze-bronvermelding-is-automatisch-gegenereerd-en-kan-fouten-bevatten-aria",
+    "language": "nl",
+    "value": "Deze bronvermelding is automatisch gegenereerd en kan fouten bevatten. [ARIA]",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-metadata-tab/object-detail-page-metadata-tab",
+    "key": "deze-bronvermelding-is-automatisch-gegenereerd-en-kan-fouten-bevatten-aria",
+    "language": "en",
+    "value": "Deze bronvermelding is automatisch gegenereerd en kan fouten bevatten. [ARIA]",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-metadata-tab/object-detail-page-metadata-tab",
+    "key": "p-deze-bronvermelding-is-automatisch-gegenereerd-en-kan-fouten-bevatten-a-href-vragen-item-2-fhoe-vermeld-ik-de-bronnen-die-ik-vind-via-hetarchief-be-amp-label-rechten-20-en-20-gebruik-amp-page-0-target-meer-info-a-p",
+    "language": "nl",
+    "value": "<p>Deze bronvermelding is automatisch gegenereerd en kan fouten bevatten. <a href=\"/vragen?item=%2Fhoe-vermeld-ik-de-bronnen-die-ik-vind-via-hetarchief-be&amp;label=Rechten%20en%20gebruik&amp;page=0\" target=\"\">Meer info</a></p>",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-metadata-tab/object-detail-page-metadata-tab",
+    "key": "p-deze-bronvermelding-is-automatisch-gegenereerd-en-kan-fouten-bevatten-a-href-vragen-item-2-fhoe-vermeld-ik-de-bronnen-die-ik-vind-via-hetarchief-be-amp-label-rechten-20-en-20-gebruik-amp-page-0-target-meer-info-a-p",
+    "language": "en",
+    "value": "<p>Deze bronvermelding is automatisch gegenereerd en kan fouten bevatten. <a href=\"/vragen?item=%2Fhoe-vermeld-ik-de-bronnen-die-ik-vind-via-hetarchief-be&amp;label=Rechten%20en%20gebruik&amp;page=0\" target=\"\">Meer info</a></p>",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
     "component": "BACKEND",
     "location": "modules/campaign-monitor/services/campaign-monitor",
     "key": "ik-wil-dit-object-bekijken-beluisteren",
@@ -62183,6 +62203,46 @@
     "id": "",
     "app": "HET_ARCHIEF",
     "component": "BACKEND",
+    "location": "modules/auth/controllers/het-archief",
+    "key": "inloggen-mislukt",
+    "language": "nl",
+    "value": "Inloggen mislukt",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "BACKEND",
+    "location": "modules/auth/controllers/het-archief",
+    "key": "inloggen-mislukt",
+    "language": "en",
+    "value": "Inloggen mislukt",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "BACKEND",
+    "location": "modules/auth/controllers/het-archief",
+    "key": "er-ging-iets-mis-bij-het-inloggen-probeer-het-later-opnieuw",
+    "language": "nl",
+    "value": "Er ging iets mis bij het inloggen. Probeer het later opnieuw.",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "BACKEND",
+    "location": "modules/auth/controllers/het-archief",
+    "key": "er-ging-iets-mis-bij-het-inloggen-probeer-het-later-opnieuw",
+    "language": "en",
+    "value": "Er ging iets mis bij het inloggen. Probeer het later opnieuw.",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "BACKEND",
     "location": "modules/folders/controllers",
     "key": "default-collection-name",
     "language": "nl",
@@ -62217,6 +62277,86 @@
     "key": "account-configuratie",
     "language": "en",
     "value": "Account configuration",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "BACKEND",
+    "location": "modules/auth/controllers/het-archief",
+    "key": "registreren-mislukt",
+    "language": "nl",
+    "value": "Registreren mislukt",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "BACKEND",
+    "location": "modules/auth/controllers/het-archief",
+    "key": "registreren-mislukt",
+    "language": "en",
+    "value": "Registreren mislukt",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "BACKEND",
+    "location": "modules/auth/controllers/het-archief",
+    "key": "er-ging-iets-mis-bij-het-registreren-probeer-het-later-opnieuw",
+    "language": "nl",
+    "value": "Er ging iets mis bij het registreren. Probeer het later opnieuw.",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "BACKEND",
+    "location": "modules/auth/controllers/het-archief",
+    "key": "er-ging-iets-mis-bij-het-registreren-probeer-het-later-opnieuw",
+    "language": "en",
+    "value": "Er ging iets mis bij het registreren. Probeer het later opnieuw.",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "BACKEND",
+    "location": "modules/auth/controllers/het-archief",
+    "key": "uitloggen-mislukt",
+    "language": "nl",
+    "value": "Uitloggen mislukt",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "BACKEND",
+    "location": "modules/auth/controllers/het-archief",
+    "key": "uitloggen-mislukt",
+    "language": "en",
+    "value": "Uitloggen mislukt",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "BACKEND",
+    "location": "modules/auth/controllers/het-archief",
+    "key": "er-ging-iets-mis-bij-het-uitloggen-probeer-het-later-opnieuw",
+    "language": "nl",
+    "value": "Er ging iets mis bij het uitloggen. Probeer het later opnieuw.",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "BACKEND",
+    "location": "modules/auth/controllers/het-archief",
+    "key": "er-ging-iets-mis-bij-het-uitloggen-probeer-het-later-opnieuw",
+    "language": "en",
+    "value": "Er ging iets mis bij het uitloggen. Probeer het later opnieuw.",
     "value_type": "TEXT"
   },
   {
