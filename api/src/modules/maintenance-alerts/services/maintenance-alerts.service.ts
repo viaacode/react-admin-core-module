@@ -27,6 +27,10 @@ import {
 } from '../../shared/generated/graphql-db-types-hetarchief';
 import { CustomError } from '../../shared/helpers/error';
 import { Pagination } from '../../shared/helpers/pagination';
+import {
+	InMemoryCache,
+	NEAR_STATIC_LOOKUP_CACHE_TTL_MS,
+} from '../../shared/helpers/in-memory-cache';
 import { SortDirection } from '../../shared/types';
 import type { IPagination } from '../../shared/types/pagination';
 import { Locale } from '../../translations';
@@ -41,6 +45,13 @@ import { GqlMaintenanceAlert, MaintenanceAlert } from '../maintenance-alerts.typ
 @Injectable()
 export class MaintenanceAlertsService {
 	private logger: Logger = new Logger(MaintenanceAlertsService.name, { timestamp: true });
+	/**
+	 * Caches the raw database response for the active maintenance alerts, since every page load requests them
+	 * Filtering by user group happens after the fetch, so the cache is shared by all users
+	 */
+	private activeMaintenanceAlertsCache = new InMemoryCache<FindMaintenanceAlertsQuery>(
+		NEAR_STATIC_LOOKUP_CACHE_TTL_MS
+	);
 
 	constructor(@Inject(forwardRef(() => DataService)) protected dataService: DataService) {}
 
@@ -97,19 +108,28 @@ export class MaintenanceAlertsService {
 					}
 				: {};
 
-			const maintenanceAlertsResponse = await this.dataService.execute<
-				FindMaintenanceAlertsQuery,
-				FindMaintenanceAlertsQueryVariables
-			>(FindMaintenanceAlertsDocument, {
-				where,
-				offset,
-				limit: Number(size),
-				orderBy: set(
-					{},
-					ORDER_PROP_TO_DB_PROP[orderProp] || ORDER_PROP_TO_DB_PROP.fromDate,
-					orderDirection || SortDirection.desc
-				),
-			});
+			const fetchMaintenanceAlerts = () =>
+				this.dataService.execute<FindMaintenanceAlertsQuery, FindMaintenanceAlertsQueryVariables>(
+					FindMaintenanceAlertsDocument,
+					{
+						where,
+						offset,
+						limit: Number(size),
+						orderBy: set(
+							{},
+							ORDER_PROP_TO_DB_PROP[orderProp] || ORDER_PROP_TO_DB_PROP.fromDate,
+							orderDirection || SortDirection.desc
+						),
+					}
+				);
+			// Only cache the active alerts, so the admin overview always shows the latest data
+			// The where filter contains the current time, so the cache key is based on the input query instead
+			const maintenanceAlertsResponse = onlyActive
+				? await this.activeMaintenanceAlertsCache.wrap(
+						JSON.stringify([page, size, orderProp, orderDirection, languages, searchTerm]),
+						fetchMaintenanceAlerts
+					)
+				: await fetchMaintenanceAlerts();
 
 			return Pagination<MaintenanceAlert>({
 				items: maintenanceAlertsResponse.app_maintenance_alerts.map(this.adapt),
@@ -159,6 +179,7 @@ export class MaintenanceAlertsService {
 			>(InsertMaintenanceAlertDocument, {
 				newMaintenanceAlert,
 			});
+		this.activeMaintenanceAlertsCache.clear();
 
 		return this.adapt(createdMaintenanceAlert);
 	}
@@ -188,6 +209,7 @@ export class MaintenanceAlertsService {
 				maintenanceAlertId,
 				updateMaintenanceAlert,
 			});
+		this.activeMaintenanceAlertsCache.clear();
 
 		if (isEmpty(updatedMaintenanceAlert.returning[0])) {
 			throw new BadRequestException(
@@ -207,6 +229,7 @@ export class MaintenanceAlertsService {
 		>(DeleteMaintenanceAlertDocument, {
 			maintenanceAlertId,
 		});
+		this.activeMaintenanceAlertsCache.clear();
 
 		return response.delete_app_maintenance_alerts.affected_rows;
 	}

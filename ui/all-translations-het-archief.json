@@ -27543,46 +27543,6 @@
     "id": "",
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
-    "location": "pages/slug/ie/index",
-    "key": "breadcrumbs-home",
-    "language": "nl",
-    "value": "Start",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/slug/ie/index",
-    "key": "breadcrumbs-home",
-    "language": "en",
-    "value": "Home",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/slug/ie/index",
-    "key": "breadcrumbs-search",
-    "language": "nl",
-    "value": "Zoeken",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/slug/ie/index",
-    "key": "breadcrumbs-search",
-    "language": "en",
-    "value": "Search",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
     "location": "pages/slug/index",
     "key": "door-gebruik-te-maken-van-deze-applicatie-bevestigt-u-dat-u-het-beschikbare-materiaal-enkel-raadpleegt-voor-wetenschappelijk-of-prive-onderzoek",
     "language": "nl",
@@ -29257,26 +29217,6 @@
     "key": "error-er-is-iets-misgelopen",
     "language": "en",
     "value": "Something has gone wrong",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/slug/ie/index",
-    "key": "breadcrumbs-mijn-mappen",
-    "language": "nl",
-    "value": "Mijn mappen",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/slug/ie/index",
-    "key": "breadcrumbs-mijn-mappen",
-    "language": "en",
-    "value": "My folders",
     "value_type": "TEXT"
   },
   {
@@ -46426,7 +46366,7 @@
     "location": "modules/ie-objects/components/context-disclaimer/context-disclaimer",
     "key": "de-context-van-dit-archief-is-belangrijk-bij-het-begrip-van-deze-video-meer-weten",
     "language": "nl",
-    "value": "<p>De context van dit archief is belangrijk bij het begrip van deze video. <a target=\"_blank\" rel=\"noopener noreferrer nofollow\" href=\"/het-audio-of-videofragment-dat-ik-kan-bekijken-op-hetarchief-be-is-van-slechte-kwaliteit-of-bevat-beledigend-taalgebruik\">Meer weten.</a></p>",
+    "value": "<p><a target=\"_blank\" rel=\"noopener noreferrer nofollow\" href=\"https://hetarchief.be/vragen?label=Materiaal&amp;item=%2Fwat-moet-ik-weten-over-de-beeldkwaliteit-en-de-context-van-de-fragmenten-die-ik-kan-bekijken\">Lees meer</a>&nbsp;over beeldkwaliteit en context.</p>",
     "value_type": "HTML"
   },
   {
@@ -46436,7 +46376,7 @@
     "location": "modules/ie-objects/components/context-disclaimer/context-disclaimer",
     "key": "de-context-van-dit-archief-is-belangrijk-bij-het-begrip-van-deze-video-meer-weten",
     "language": "en",
-    "value": "<p>The context of this archive is important in understanding this video.&nbsp;<a target=\"_blank\" rel=\"noopener noreferrer nofollow\" href=\"/en/questions\">Learn more.</a></p>",
+    "value": "<p><a target=\"_blank\" rel=\"noopener noreferrer nofollow\" href=\"https://hetarchief.be/en/questions?label=Digital+material&amp;item=%2Fwhat-should-i-know-about-the-quality-and-the-context-of-the-clips-i-can-view\">Read more</a> about video quality and context.</p>",
     "value_type": "HTML"
   },
   {
@@ -47243,6 +47183,66 @@
     "id": "",
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
+    "location": "pages/slug/ie/index",
+    "key": "breadcrumbs-home",
+    "language": "nl",
+    "value": "Start",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "pages/slug/ie/index",
+    "key": "breadcrumbs-home",
+    "language": "en",
+    "value": "Home",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "pages/slug/ie/index",
+    "key": "breadcrumbs-search",
+    "language": "nl",
+    "value": "Zoeken",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "pages/slug/ie/index",
+    "key": "breadcrumbs-search",
+    "language": "en",
+    "value": "Search",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "pages/slug/ie/index",
+    "key": "breadcrumbs-mijn-mappen",
+    "language": "nl",
+    "value": "Mijn mappen",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "pages/slug/ie/index",
+    "key": "breadcrumbs-mijn-mappen",
+    "language": "en",
+    "value": "My folders",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
     "location": "modules/ie-objects/components/object-detail-page-header/object-detail-page-header",
     "key": "toon-details",
     "language": "nl",
@@ -47363,21 +47363,41 @@
     "id": "",
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
-    "location": "modules/ie-objects/object-detail-page",
-    "key": "deze-bronvermelding-is-automatisch-gegenereerd-en-kan-fouten-bevatten-a-href-bronvermelding-fouten-meer-info-a",
+    "location": "modules/ie-objects/components/object-detail-page-metadata-tab/object-detail-page-metadata-tab",
+    "key": "deze-bronvermelding-is-automatisch-gegenereerd-en-kan-fouten-bevatten-aria",
     "language": "nl",
-    "value": "<p>Deze bronvermelding is automatisch gegenereerd en kan fouten bevatten. <a href=\"/vragen?item=%2Fhoe-vermeld-ik-de-bronnen-die-ik-vind-via-hetarchief-be&amp;label=Rechten%20en%20gebruik&amp;page=0\" target=\"\">Meer info</a></p>",
+    "value": "Deze bronvermelding is automatisch gegenereerd en kan fouten bevatten. [ARIA]",
     "value_type": "TEXT"
   },
   {
     "id": "",
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
-    "location": "modules/ie-objects/object-detail-page",
-    "key": "deze-bronvermelding-is-automatisch-gegenereerd-en-kan-fouten-bevatten-a-href-bronvermelding-fouten-meer-info-a",
+    "location": "modules/ie-objects/components/object-detail-page-metadata-tab/object-detail-page-metadata-tab",
+    "key": "deze-bronvermelding-is-automatisch-gegenereerd-en-kan-fouten-bevatten-aria",
     "language": "en",
-    "value": "<p>This source citation is automatically generated and can contain mistakes. <a href=\"/en/questions?item=%2Fhow-do-i-cite-sources-i-found-on-thearchives-be&amp;label=Rights%20and%20usage&amp;page=0\" target=\"\">Read more</a></p>",
+    "value": "Deze bronvermelding is automatisch gegenereerd en kan fouten bevatten. [ARIA]",
     "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-metadata-tab/object-detail-page-metadata-tab",
+    "key": "p-deze-bronvermelding-is-automatisch-gegenereerd-en-kan-fouten-bevatten-a-href-vragen-item-2-fhoe-vermeld-ik-de-bronnen-die-ik-vind-via-hetarchief-be-amp-label-rechten-20-en-20-gebruik-amp-page-0-target-meer-info-a-p",
+    "language": "nl",
+    "value": "<p>Deze bronvermelding is automatisch gegenereerd en kan fouten bevatten. <a href=\"/vragen?item=%2Fhoe-vermeld-ik-de-bronnen-die-ik-vind-via-hetarchief-be&amp;label=Rechten%20en%20gebruik&amp;page=0\" target=\"\">Meer info</a></p>",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-metadata-tab/object-detail-page-metadata-tab",
+    "key": "p-deze-bronvermelding-is-automatisch-gegenereerd-en-kan-fouten-bevatten-a-href-vragen-item-2-fhoe-vermeld-ik-de-bronnen-die-ik-vind-via-hetarchief-be-amp-label-rechten-20-en-20-gebruik-amp-page-0-target-meer-info-a-p",
+    "language": "en",
+    "value": "<p>Deze bronvermelding is automatisch gegenereerd en kan fouten bevatten. <a href=\"/vragen?item=%2Fhoe-vermeld-ik-de-bronnen-die-ik-vind-via-hetarchief-be&amp;label=Rechten%20en%20gebruik&amp;page=0\" target=\"\">Meer info</a></p>",
+    "value_type": "HTML"
   },
   {
     "id": "",
@@ -48677,26 +48697,6 @@
     "key": "licentiegever",
     "language": "en",
     "value": "Licencor",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/ie-objects",
-    "key": "auteursrechthouder",
-    "language": "nl",
-    "value": "Auteursrechthouder",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/ie-objects",
-    "key": "auteursrechthouder",
-    "language": "en",
-    "value": "Copyright holder",
     "value_type": "TEXT"
   },
   {
