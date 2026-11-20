@@ -20,7 +20,7 @@ export function idpMapsToTagList(
 	key: string,
 	onTagClicked: (tagId: ReactText) => void = noop
 ) {
-	if (!idpMaps || !idpMaps.length) {
+	if (!idpMaps?.length) {
 		return null;
 	}
 	return (

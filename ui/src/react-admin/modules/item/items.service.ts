@@ -1,5 +1,5 @@
 import type { AvoItemItem } from '@viaa/avo2-types';
-import { stringifyUrl } from 'query-string';
+import queryString from 'query-string';
 import { fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
 import { getAdminCoreApiUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config';
 import { CustomError } from '../shared/helpers/custom-error';
@@ -13,7 +13,7 @@ export class ItemsService {
 	public static async fetchItemById(uuidOrExternalId: string): Promise<AvoItemItem> {
 		try {
 			const rawItem: AvoItemItem | null = await fetchWithLogoutJson<AvoItemItem>(
-				stringifyUrl({
+				queryString.stringifyUrl({
 					url: `${ItemsService.getBaseUrl()}/${uuidOrExternalId}`,
 				})
 			);
@@ -34,7 +34,7 @@ export class ItemsService {
 
 	public static async fetchPublicItems(limit: number): Promise<AvoItemItem[] | null> {
 		return fetchWithLogoutJson(
-			stringifyUrl({
+			queryString.stringifyUrl({
 				url: ItemsService.getBaseUrl(),
 				query: {
 					limit,
@@ -49,7 +49,7 @@ export class ItemsService {
 	): Promise<AvoItemItem[]> {
 		try {
 			return fetchWithLogoutJson(
-				stringifyUrl({
+				queryString.stringifyUrl({
 					url: ItemsService.getBaseUrl(),
 					query: {
 						titleOrExternalId,

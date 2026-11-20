@@ -3,6 +3,10 @@ import { compact } from 'lodash';
 
 import { DataService } from '../../data';
 import { getDatabaseType } from '../../shared/helpers/get-database-type';
+import {
+	InMemoryCache,
+	NEAR_STATIC_LOOKUP_CACHE_TTL_MS,
+} from '../../shared/helpers/in-memory-cache';
 import { DeleteResponse } from '../../shared/types/types';
 import { Locale } from '../../translations';
 import { CreateNavigationDto } from '../dto/navigations.dto';
@@ -15,6 +19,15 @@ import {
 
 @Injectable()
 export class AdminNavigationsService {
+	/**
+	 * Caches the raw database response of findAllNavigationBarItems per language,
+	 * since every page load requests the navigation items
+	 * Filtering by user group happens after the fetch, so the cache is shared by all users
+	 */
+	private allNavigationItemsCache = new InMemoryCache<
+		NavigationQueryTypes['GetAllNavigationItemsQuery']
+	>(NEAR_STATIC_LOOKUP_CACHE_TTL_MS);
+
 	constructor(@Inject(forwardRef(() => DataService)) protected dataService: DataService) {}
 
 	public adapt(navigationEntry: Partial<NavigationEntry>): NavigationItem {
@@ -64,6 +77,7 @@ export class AdminNavigationsService {
 		>(NAVIGATION_QUERIES[getDatabaseType()].InsertNavigationItemDocument, {
 			navigationItem: this.adaptToDbFormat(navigationItem),
 		});
+		this.allNavigationItemsCache.clear();
 
 		return this.adapt(
 			(response as NavigationQueryTypes['InsertNavigationItemMutationAvo'])
@@ -84,12 +98,13 @@ export class AdminNavigationsService {
 			id,
 			navigationItem: this.adaptToDbFormat(navigationItem),
 		});
+		this.allNavigationItemsCache.clear();
 
 		return this.adapt(
-			(response as NavigationQueryTypes['InsertNavigationItemMutationAvo'])
-				.insert_app_content_nav_elements_one ||
-				(response as NavigationQueryTypes['InsertNavigationItemMutationHetArchief'])
-					.insert_app_navigation_one
+			(response as NavigationQueryTypes['UpdateNavigationItemByIdMutationAvo'])
+				.update_app_content_nav_elements_by_pk ||
+				(response as NavigationQueryTypes['UpdateNavigationItemByIdMutationHetArchief'])
+					.update_app_navigation_by_pk
 		);
 	}
 
@@ -100,6 +115,7 @@ export class AdminNavigationsService {
 		>(NAVIGATION_QUERIES[getDatabaseType()].DeleteNavigationItemDocument, {
 			id,
 		});
+		this.allNavigationItemsCache.clear();
 
 		return {
 			affectedRows:
@@ -174,12 +190,14 @@ export class AdminNavigationsService {
 	}
 
 	public async findAllNavigationBarItems(language?: Locale): Promise<NavigationItem[]> {
-		const navigationsResponse = await this.dataService.execute<
-			NavigationQueryTypes['GetAllNavigationItemsQuery'],
-			NavigationQueryTypes['GetAllNavigationItemsQueryVariables']
-		>(NAVIGATION_QUERIES[process.env.DATABASE_APPLICATION_TYPE].GetAllNavigationItemsDocument, {
-			languages: compact([language]),
-		});
+		const navigationsResponse = await this.allNavigationItemsCache.wrap(language || '', () =>
+			this.dataService.execute<
+				NavigationQueryTypes['GetAllNavigationItemsQuery'],
+				NavigationQueryTypes['GetAllNavigationItemsQueryVariables']
+			>(NAVIGATION_QUERIES[process.env.DATABASE_APPLICATION_TYPE].GetAllNavigationItemsDocument, {
+				languages: compact([language]),
+			})
+		);
 
 		return (
 			(navigationsResponse as NavigationQueryTypes['GetAllNavigationItemsQueryAvo'])

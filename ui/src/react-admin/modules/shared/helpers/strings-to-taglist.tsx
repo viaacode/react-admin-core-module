@@ -11,7 +11,7 @@ export function stringsToTagList(
 	onTagClicked: (tagId: string | number, clickEvent: MouseEvent) => void = noop,
 	onTagClosed?: (tagId: string | number, clickEvent: MouseEvent) => void
 ): ReactNode {
-	if (!labelsOrObjs || !labelsOrObjs.length) {
+	if (!labelsOrObjs?.length) {
 		return null;
 	}
 	return (

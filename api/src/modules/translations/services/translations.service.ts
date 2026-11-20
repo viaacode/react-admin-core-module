@@ -138,7 +138,7 @@ export class TranslationsService implements OnApplicationBootstrap {
 				);
 			}
 
-			await this.cacheManager.reset();
+			await this.cacheManager.clear();
 			if (component === Component.BACKEND) {
 				await this.refreshBackendTranslations();
 			}
@@ -175,7 +175,7 @@ export class TranslationsService implements OnApplicationBootstrap {
 				}
 			);
 
-			await this.cacheManager.reset();
+			await this.cacheManager.clear();
 		} catch (err) {
 			throw new CustomError('Failed to insert the translation', err, {
 				component,
@@ -206,7 +206,7 @@ export class TranslationsService implements OnApplicationBootstrap {
 				}
 			);
 
-			await this.cacheManager.reset();
+			await this.cacheManager.clear();
 		} catch (err) {
 			throw new CustomError('Failed to update the translation', err, {
 				component,

@@ -130,11 +130,11 @@ describe('NavigationsService', () => {
 
 	describe('update', () => {
 		it('can update an existing navigation', async () => {
-			const mockData: NavigationQueryTypes['InsertNavigationItemMutationHetArchief'] = {
-				insert_app_navigation_one: {
+			const mockData: NavigationQueryTypes['UpdateNavigationItemByIdMutationHetArchief'] = {
+				update_app_navigation_by_pk: {
 					id: '1',
 					icon_name: 'plus',
-				} as NavigationQueryTypes['InsertNavigationItemMutationHetArchief']['insert_app_navigation_one'],
+				} as NavigationQueryTypes['UpdateNavigationItemByIdMutationHetArchief']['update_app_navigation_by_pk'],
 			};
 			mockDataService.execute.mockResolvedValueOnce(mockData);
 			const response = await navigationsService.updateElement('1', {

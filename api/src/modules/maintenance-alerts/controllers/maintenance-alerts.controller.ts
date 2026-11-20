@@ -1,14 +1,13 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post, Query } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
-import { IPagination } from '@studiohyperdrive/pagination';
 import { PermissionName } from '@viaa/avo2-types';
 import { isAfter } from 'date-fns';
 import { intersection, omit } from 'lodash';
-
 import { RequireAnyPermissions } from '../../shared/decorators/require-any-permissions.decorator';
 import { SessionUser } from '../../shared/decorators/user.decorator';
 import { addPrefix } from '../../shared/helpers/add-route-prefix';
 import { CustomError } from '../../shared/helpers/error';
+import type { IPagination } from '../../shared/types/pagination';
 import { SessionUserEntity } from '../../users/classes/session-user';
 import {
 	CreateMaintenanceAlertDto,

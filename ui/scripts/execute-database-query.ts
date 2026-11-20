@@ -8,49 +8,44 @@ export async function executeDatabaseQuery(
 	env: 'LOCAL' | 'QAS' = 'LOCAL'
 	// biome-ignore lint/suspicious/noExplicitAny: todo
 ): Promise<any> {
-	if (
-		env === 'LOCAL' &&
-		(!process.env.GRAPHQL_URL_AVO ||
-			!process.env.GRAPHQL_SECRET_AVO ||
-			!process.env.GRAPHQL_URL_HETARCHIEF ||
-			!process.env.GRAPHQL_SECRET_HETARCHIEF)
-	) {
+	// We need the QAS database environment variables to fetch the latest translations and QAS is the "master" of all translations
+	const envVars = {
+		AVO: {
+			LOCAL: {
+				urlName: 'GRAPHQL_URL_AVO',
+				url: process.env.GRAPHQL_URL_AVO,
+				secretName: 'GRAPHQL_SECRET_AVO',
+				secret: process.env.GRAPHQL_SECRET_AVO,
+			},
+			QAS: {
+				urlName: 'GRAPHQL_URL_AVO_QAS',
+				url: process.env.GRAPHQL_URL_AVO_QAS,
+				secretName: 'GRAPHQL_SECRET_AVO_QAS',
+				secret: process.env.GRAPHQL_SECRET_AVO_QAS,
+			},
+		},
+		HET_ARCHIEF: {
+			LOCAL: {
+				urlName: 'GRAPHQL_URL_HETARCHIEF',
+				url: process.env.GRAPHQL_URL_HETARCHIEF,
+				secretName: 'GRAPHQL_SECRET_HETARCHIEF',
+				secret: process.env.GRAPHQL_SECRET_HETARCHIEF,
+			},
+			QAS: {
+				urlName: 'GRAPHQL_URL_HETARCHIEF_QAS',
+				url: process.env.GRAPHQL_URL_HETARCHIEF_QAS,
+				secretName: 'GRAPHQL_SECRET_HETARCHIEF_QAS',
+				secret: process.env.GRAPHQL_SECRET_HETARCHIEF_QAS,
+			},
+		},
+	};
+
+	const { url: graphQlUrl, secret: graphQlPassword, urlName, secretName } = envVars[app][env];
+
+	if (!graphQlUrl || !graphQlPassword) {
 		throw new Error(
-			'Missing environment variables. One or more of these are missing: GRAPHQL_URL_AVO, GRAPHQL_SECRET_AVO, GRAPHQL_URL_HETARCHIEF, GRAPHQL_SECRET_HETARCHIEF'
+			`Missing environment variables. One or more of these are missing: ${urlName}, ${secretName}`
 		);
-	}
-	if (
-		env === 'QAS' &&
-		(!process.env.GRAPHQL_URL_AVO_QAS ||
-			!process.env.GRAPHQL_SECRET_AVO_QAS ||
-			!process.env.GRAPHQL_URL_HETARCHIEF_QAS ||
-			!process.env.GRAPHQL_SECRET_HETARCHIEF_QAS)
-	) {
-		throw new Error(
-			'Missing environment variables. One or more of these are missing: GRAPHQL_URL_AVO_QAS, GRAPHQL_SECRET_AVO_QAS, GRAPHQL_URL_HETARCHIEF_QAS, GRAPHQL_SECRET_HETARCHIEF_QAS'
-		);
-	}
-	let graphQlUrl = '';
-	let graphQlPassword = '';
-	if (env === 'QAS') {
-		if (env === 'QAS') {
-			// We need the QAS database environment variables to fetch the latest translations and QAS is the "master" of all translations
-			if (app === 'AVO') {
-				graphQlUrl = process.env.GRAPHQL_URL_AVO_QAS as string;
-				graphQlPassword = process.env.GRAPHQL_SECRET_AVO_QAS as string;
-			} else {
-				graphQlUrl = process.env.GRAPHQL_URL_HETARCHIEF_QAS as string;
-				graphQlPassword = process.env.GRAPHQL_SECRET_HETARCHIEF_QAS as string;
-			}
-		}
-	} else {
-		if (app === 'AVO') {
-			graphQlUrl = process.env.GRAPHQL_URL_AVO as string;
-			graphQlPassword = process.env.GRAPHQL_SECRET_AVO as string;
-		} else {
-			graphQlUrl = process.env.GRAPHQL_URL_HETARCHIEF as string;
-			graphQlPassword = process.env.GRAPHQL_SECRET_HETARCHIEF as string;
-		}
 	}
 	const requestHeaders = new Headers();
 	requestHeaders.append('Content-Type', 'application/json');

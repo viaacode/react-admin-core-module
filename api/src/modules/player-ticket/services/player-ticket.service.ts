@@ -10,7 +10,6 @@ import {
 import type { Cache } from 'cache-manager';
 import got from 'got';
 import { isNil, trimEnd } from 'lodash';
-import publicIp from 'public-ip';
 import type { ContentTypeNumber } from '../../collections';
 import { DataService } from '../../data';
 import {
@@ -26,10 +25,12 @@ import {
 	type GetThumbnailUrlByIdQuery,
 	type GetThumbnailUrlByIdQueryVariables,
 } from '../../shared/generated/graphql-db-types-hetarchief';
+import { formattedDurationToSeconds } from '../../shared/helpers/duration';
 import { cleanMultilineEnv } from '../../shared/helpers/env-vars';
 import { CustomError } from '../../shared/helpers/error';
 import { isHetArchief } from '../../shared/helpers/is-hetarchief';
 import { mapToMediaType } from '../../shared/helpers/mapToMediaType';
+import { getPublicIpV4 } from '../../shared/helpers/public-ip';
 import { PLAYER_TICKET_EXPIRY } from '../player-ticket.consts';
 import {
 	PlayerTicket,
@@ -66,7 +67,7 @@ export class PlayerTicketService {
 	 */
 	protected async getToken(path: string, options: PlayerTokenOptions): Promise<PlayerTicket> {
 		const resolvedIp = ['::1', '::ffff:127.0.0.1', '127.0.0.1'].includes(options.ip)
-			? await publicIp.v4()
+			? await getPublicIpV4()
 			: options.ip;
 		const resolvedReferer = trimEnd(options.referer || this.host, '/');
 		const resolvedMaxAge = this.ticketServiceMaxAge;
@@ -185,9 +186,18 @@ export class PlayerTicketService {
 
 	/**
 	 * Get the url of the media file for the current representation or external id of an ie object
+	 *
+	 * The start and end time of a cut fragment are only returned when the representation id is passed:
+	 * every fragment cut from a video shares the same full video file, so file.hasMediaFragment lists the
+	 * windows of all of that file's fragments. Taking the first one returned the window of an arbitrary
+	 * sibling fragment. See https://meemoo.atlassian.net/browse/ARC-3690 and ARC-4185
 	 * @param fileOrExternalId
+	 * @param representationId the representation the file belongs to, used to find the window of its cut fragment (hetarchief only)
 	 */
-	public async getBrowseUrlAndType(fileOrExternalId: string): Promise<{
+	public async getBrowseUrlAndType(
+		fileOrExternalId: string,
+		representationId?: string | null
+	): Promise<{
 		browsePath: string;
 		type: 'audio' | 'video' | 'other';
 		startTime: number;
@@ -220,10 +230,15 @@ export class PlayerTicketService {
 			(response as GetItemBrowsePathByExternalIdQuery)?.app_item_meta?.[0]?.type_id ||
 			(response as GetFileByByIdQuery)?.graph_file?.[0]?.isRootOf?.[0]?.includes?.[0]
 				?.representation?.represents?.dctermsFormat?.[0]?.dcterms_format;
-		const startTime: number | undefined = (response as GetFileByByIdQuery)?.graph_file?.[0]
-			?.hasMediaFragment?.[0]?.schema_start_time;
-		const endTime: number | undefined = (response as GetFileByByIdQuery)?.graph_file?.[0]
-			?.hasMediaFragment?.[0]?.schema_end_time;
+		const mediaFragment = representationId
+			? (response as GetFileByByIdQuery)?.graph_file?.[0]?.hasMediaFragment?.find(
+					(fragment) => fragment.id === representationId
+				)
+			: undefined;
+		const startTime: number | undefined = formattedDurationToSeconds(
+			mediaFragment?.schema_start_time
+		);
+		const endTime: number | undefined = formattedDurationToSeconds(mediaFragment?.schema_end_time);
 
 		if (!browsePath) {
 			throw new NotFoundException({

@@ -1,6 +1,6 @@
 import { TextInput } from '@meemoo/react-components';
 import clsx from 'clsx';
-import { stringifyUrl } from 'query-string';
+import queryString from 'query-string';
 import type { FunctionComponent, KeyboardEvent, ReactElement } from 'react';
 import React, { useEffect, useState } from 'react';
 import { AdminConfigManager } from '~core/config/config.class';
@@ -43,7 +43,7 @@ export const BlockHetArchiefHeaderSearch: FunctionComponent<BlockHetArchiefHeade
 	}, [subtitles.length]);
 
 	const navigateToSearchPage = async () => {
-		const url = stringifyUrl({
+		const url = queryString.stringifyUrl({
 			url: AdminConfigManager.getConfig().routes.SEARCH || '/zoeken',
 			query: searchTerm ? { zoekterm: searchTerm } : {},
 		});

@@ -4,6 +4,7 @@ import {
 	Delete,
 	ForbiddenException,
 	Get,
+	HttpException,
 	Ip,
 	NotFoundException,
 	Param,
@@ -16,7 +17,6 @@ import {
 	UseGuards,
 } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
-import type { IPagination } from '@studiohyperdrive/pagination';
 import {
 	type AvoContentPageType,
 	AvoFileUploadAssetType,
@@ -30,6 +30,7 @@ import { SessionUser } from '../../shared/decorators/user.decorator';
 import { ApiKeyGuard } from '../../shared/guards/api-key.guard';
 import { addPrefix } from '../../shared/helpers/add-route-prefix';
 import { CustomError } from '../../shared/helpers/error';
+import type { IPagination } from '../../shared/types/pagination';
 import type { Locale } from '../../translations';
 import type { SessionUserEntity } from '../../users/classes/session-user';
 import { CONTENT_PAGE_COPY, CONTENT_PAGE_COPY_REGEX } from '../content-pages.consts';
@@ -137,6 +138,10 @@ export class ContentPagesController {
 					},
 					404
 				);
+			}
+			if (err instanceof HttpException) {
+				// eg: BadRequestException with code CONTENT_PAGE_WRONG_USER_GROUP or CONTENT_PAGE_DEPUBLISHED
+				throw err;
 			}
 			const error = new CustomError('Failed to get content page by language and path', err, {
 				language,

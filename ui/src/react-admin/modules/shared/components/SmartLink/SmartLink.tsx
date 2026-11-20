@@ -3,7 +3,7 @@ import type { ButtonAction } from '@viaa/avo2-components';
 import type { AvoCoreContentPickerType } from '@viaa/avo2-types';
 import clsx from 'clsx';
 import { map } from 'es-toolkit/compat';
-import { stringify } from 'query-string';
+import queryString from 'query-string';
 import React, {
 	type FunctionComponent,
 	type KeyboardEvent,
@@ -258,7 +258,7 @@ export const SmartLink: FunctionComponent<SmartLinkProps> = ({
 						buildLink(
 							AdminConfigManager.getAdminRoute('SEARCH'),
 							{},
-							stringify(
+							queryString.stringify(
 								Object.fromEntries(
 									map(queryParams, (queryParamValue, queryParam) => [
 										queryParam,

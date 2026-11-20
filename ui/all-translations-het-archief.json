@@ -2646,7 +2646,7 @@
     "location": "modules/content-page/const/get-content-block-type-options",
     "key": "hero-carousel",
     "language": "nl",
-    "value": "Hero carrousel",
+    "value": "Hero carousel",
     "value_type": "TEXT"
   },
   {
@@ -2656,7 +2656,7 @@
     "location": "modules/content-page/const/get-content-block-type-options",
     "key": "hero-carousel",
     "language": "en",
-    "value": "Hero carousel",
+    "value": "Hero carrousel",
     "value_type": "TEXT"
   },
   {
@@ -2706,7 +2706,7 @@
     "location": "modules/content-page/const/get-content-block-type-options",
     "key": "carousel-met-afbeeldingen",
     "language": "nl",
-    "value": "Carrousel met afbeeldingen",
+    "value": "Carousel met afbeeldingen",
     "value_type": "TEXT"
   },
   {
@@ -2716,7 +2716,7 @@
     "location": "modules/content-page/const/get-content-block-type-options",
     "key": "carousel-met-afbeeldingen",
     "language": "en",
-    "value": "Carousel with images",
+    "value": "Carrousel with images",
     "value_type": "TEXT"
   },
   {
@@ -27516,7 +27516,7 @@
     "location": "pages/nieuwsbrief/index",
     "key": "nieuwsbrief-omschrijving",
     "language": "en",
-    "value": "I would like to receive a newsletter from thearchives.be at most 3 times a year with information about new possibilities on the platform and inspiration for my search for digital archival material. \n\nI agree with the processing of my personal data in accordance with the privacy policy.",
+    "value": "I would like to receive a newsletter from thearchives.be at most 3 times a year with information about new possibilities on the platform and inspiration for my search for digital archival material.\n\nI agree with the processing of my personal data in accordance with the privacy policy.",
     "value_type": "TEXT"
   },
   {
@@ -27537,46 +27537,6 @@
     "key": "pages-bezoekersruimte-publieke-catalogus",
     "language": "en",
     "value": "Public Catalogue",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/slug/ie/index",
-    "key": "breadcrumbs-home",
-    "language": "nl",
-    "value": "Start",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/slug/ie/index",
-    "key": "breadcrumbs-home",
-    "language": "en",
-    "value": "Home",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/slug/ie/index",
-    "key": "breadcrumbs-search",
-    "language": "nl",
-    "value": "Zoeken",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/slug/ie/index",
-    "key": "breadcrumbs-search",
-    "language": "en",
-    "value": "Search",
     "value_type": "TEXT"
   },
   {
@@ -29257,26 +29217,6 @@
     "key": "error-er-is-iets-misgelopen",
     "language": "en",
     "value": "Something has gone wrong",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/slug/ie/index",
-    "key": "breadcrumbs-mijn-mappen",
-    "language": "nl",
-    "value": "Mijn mappen",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/slug/ie/index",
-    "key": "breadcrumbs-mijn-mappen",
-    "language": "en",
-    "value": "My folders",
     "value_type": "TEXT"
   },
   {
@@ -46426,7 +46366,7 @@
     "location": "modules/ie-objects/components/context-disclaimer/context-disclaimer",
     "key": "de-context-van-dit-archief-is-belangrijk-bij-het-begrip-van-deze-video-meer-weten",
     "language": "nl",
-    "value": "<p>De context van dit archief is belangrijk bij het begrip van deze video. <a target=\"_blank\" rel=\"noopener noreferrer nofollow\" href=\"/het-audio-of-videofragment-dat-ik-kan-bekijken-op-hetarchief-be-is-van-slechte-kwaliteit-of-bevat-beledigend-taalgebruik\">Meer weten.</a></p>",
+    "value": "<p><a target=\"_blank\" rel=\"noopener noreferrer nofollow\" href=\"https://hetarchief.be/vragen?label=Materiaal&amp;item=%2Fwat-moet-ik-weten-over-de-beeldkwaliteit-en-de-context-van-de-fragmenten-die-ik-kan-bekijken\">Lees meer</a>&nbsp;over beeldkwaliteit en context.</p>",
     "value_type": "HTML"
   },
   {
@@ -46436,7 +46376,7 @@
     "location": "modules/ie-objects/components/context-disclaimer/context-disclaimer",
     "key": "de-context-van-dit-archief-is-belangrijk-bij-het-begrip-van-deze-video-meer-weten",
     "language": "en",
-    "value": "<p>The context of this archive is important in understanding this video.&nbsp;<a target=\"_blank\" rel=\"noopener noreferrer nofollow\" href=\"/en/questions\">Learn more.</a></p>",
+    "value": "<p><a target=\"_blank\" rel=\"noopener noreferrer nofollow\" href=\"https://hetarchief.be/en/questions?label=Digital+material&amp;item=%2Fwhat-should-i-know-about-the-quality-and-the-context-of-the-clips-i-can-view\">Read more</a> about video quality and context.</p>",
     "value_type": "HTML"
   },
   {
@@ -47243,6 +47183,66 @@
     "id": "",
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
+    "location": "pages/slug/ie/index",
+    "key": "breadcrumbs-home",
+    "language": "nl",
+    "value": "Start",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "pages/slug/ie/index",
+    "key": "breadcrumbs-home",
+    "language": "en",
+    "value": "Home",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "pages/slug/ie/index",
+    "key": "breadcrumbs-search",
+    "language": "nl",
+    "value": "Zoeken",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "pages/slug/ie/index",
+    "key": "breadcrumbs-search",
+    "language": "en",
+    "value": "Search",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "pages/slug/ie/index",
+    "key": "breadcrumbs-mijn-mappen",
+    "language": "nl",
+    "value": "Mijn mappen",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "pages/slug/ie/index",
+    "key": "breadcrumbs-mijn-mappen",
+    "language": "en",
+    "value": "My folders",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
     "location": "modules/ie-objects/components/object-detail-page-header/object-detail-page-header",
     "key": "toon-details",
     "language": "nl",
@@ -47363,21 +47363,41 @@
     "id": "",
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
-    "location": "modules/ie-objects/object-detail-page",
-    "key": "deze-bronvermelding-is-automatisch-gegenereerd-en-kan-fouten-bevatten-a-href-bronvermelding-fouten-meer-info-a",
+    "location": "modules/ie-objects/components/object-detail-page-metadata-tab/object-detail-page-metadata-tab",
+    "key": "deze-bronvermelding-is-automatisch-gegenereerd-en-kan-fouten-bevatten-aria",
     "language": "nl",
-    "value": "<p>Deze bronvermelding is automatisch gegenereerd en kan fouten bevatten. <a href=\"/vragen?item=%2Fhoe-vermeld-ik-de-bronnen-die-ik-vind-via-hetarchief-be&amp;label=Rechten%20en%20gebruik&amp;page=0\" target=\"\">Meer info</a></p>",
+    "value": "Deze bronvermelding is automatisch gegenereerd en kan fouten bevatten. [ARIA]",
     "value_type": "TEXT"
   },
   {
     "id": "",
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
-    "location": "modules/ie-objects/object-detail-page",
-    "key": "deze-bronvermelding-is-automatisch-gegenereerd-en-kan-fouten-bevatten-a-href-bronvermelding-fouten-meer-info-a",
+    "location": "modules/ie-objects/components/object-detail-page-metadata-tab/object-detail-page-metadata-tab",
+    "key": "deze-bronvermelding-is-automatisch-gegenereerd-en-kan-fouten-bevatten-aria",
     "language": "en",
-    "value": "<p>This source citation is automatically generated and can contain mistakes. <a href=\"/en/questions?item=%2Fhow-do-i-cite-sources-i-found-on-thearchives-be&amp;label=Rights%20and%20usage&amp;page=0\" target=\"\">Read more</a></p>",
+    "value": "Deze bronvermelding is automatisch gegenereerd en kan fouten bevatten. [ARIA]",
     "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-metadata-tab/object-detail-page-metadata-tab",
+    "key": "p-deze-bronvermelding-is-automatisch-gegenereerd-en-kan-fouten-bevatten-a-href-vragen-item-2-fhoe-vermeld-ik-de-bronnen-die-ik-vind-via-hetarchief-be-amp-label-rechten-20-en-20-gebruik-amp-page-0-target-meer-info-a-p",
+    "language": "nl",
+    "value": "<p>Deze bronvermelding is automatisch gegenereerd en kan fouten bevatten. <a href=\"/vragen?item=%2Fhoe-vermeld-ik-de-bronnen-die-ik-vind-via-hetarchief-be&amp;label=Rechten%20en%20gebruik&amp;page=0\" target=\"\">Meer info</a></p>",
+    "value_type": "HTML"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-metadata-tab/object-detail-page-metadata-tab",
+    "key": "p-deze-bronvermelding-is-automatisch-gegenereerd-en-kan-fouten-bevatten-a-href-vragen-item-2-fhoe-vermeld-ik-de-bronnen-die-ik-vind-via-hetarchief-be-amp-label-rechten-20-en-20-gebruik-amp-page-0-target-meer-info-a-p",
+    "language": "en",
+    "value": "<p>Deze bronvermelding is automatisch gegenereerd en kan fouten bevatten. <a href=\"/vragen?item=%2Fhoe-vermeld-ik-de-bronnen-die-ik-vind-via-hetarchief-be&amp;label=Rechten%20en%20gebruik&amp;page=0\" target=\"\">Meer info</a></p>",
+    "value_type": "HTML"
   },
   {
     "id": "",
@@ -48356,7 +48376,7 @@
     "location": "modules/ie-objects/components/object-detail-page-metadata-tab/object-detail-page-metadata-tab",
     "key": "metadata-worden-aangeleverd-door-partners-van-meemoo-meemoo-is-niet-verantwoordelijk-voor-onjuistheden-of-onvolledigheden-in-deze-gegevens-meer-info",
     "language": "en",
-    "value": "<p>The metadata is provided by partners of meemoo. Meemoo is not responsible for inaccuracies or the incompleteness of data. <a target=\"_blank\" rel=\"noopener noreferrer nofollow\" href=\"https://hetarchief.be/en/questions?label=Search&amp;item=%2Fhow-does-meemoo-work-on-the-metadata-quality\">More info.</a></p>",
+    "value": "<p>Metadata is provided by meemoo’s partners. Meemoo is not responsible for any inaccuracies or omissions in this data. <a target=\"_blank\" rel=\"noopener noreferrer nofollow\" href=\"https://hetarchief.be/en/questions?label=Search&amp;item=%2Fhow-does-meemoo-work-on-the-metadata-quality\">More info</a></p>",
     "value_type": "HTML"
   },
   {
@@ -48677,26 +48697,6 @@
     "key": "licentiegever",
     "language": "en",
     "value": "Licencor",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/ie-objects",
-    "key": "auteursrechthouder",
-    "language": "nl",
-    "value": "Auteursrechthouder",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/ie-objects",
-    "key": "auteursrechthouder",
-    "language": "en",
-    "value": "Copyright holder",
     "value_type": "TEXT"
   },
   {
@@ -50667,7 +50667,7 @@
     "key": "ondertitels-zijn-ai-gegenereerd-door-meemoo-er-werd-geen-menselijke-controle-op-uitgevoerd",
     "language": "nl",
     "value": "Ondertitels zijn AI-gegenereerd door meemoo, er werd geen menselijke controle op uitgevoerd",
-    "value_type": "TEXT"
+    "value_type": "HTML"
   },
   {
     "id": "",
@@ -50677,7 +50677,7 @@
     "key": "ondertitels-zijn-ai-gegenereerd-door-meemoo-er-werd-geen-menselijke-controle-op-uitgevoerd",
     "language": "en",
     "value": "Subtitles were AI-generated by meemoo, no human check or edit has been performed",
-    "value_type": "TEXT"
+    "value_type": "HTML"
   },
   {
     "id": "",
@@ -58246,7 +58246,7 @@
     "location": "modules/visitor-space/components/material-request-for-reuse-blade/material-request-for-reuse-blade",
     "key": "wijziging-materiaal-geen-wijzigingen-omschrijving",
     "language": "nl",
-    "value": "<p>Ter verduidelijking: De volgende vormen van gebruik worden niet als wijziging beschouwd: </p><ul><li>Inkorting of hergebruik van slechts een deel van het aangevraagde materiaal. </li><li>Technische wijzigingen om de beeld- of audiokwaliteit van het materiaal te verbeteren. </li><li>Integratie van ongewijzigd bronmateriaal in een documentaire.</li><li>Aanbieden van materiaal in interactieve diensten waarbij gebruikers van die diensten zelf de weergave van het materiaal tijdelijk kunnen wijzigen voor eigen doeleinden (vb. binnen een app, kiosk, of binnen een interactieve website, bijvoorbeeld met gebruik van H5P-technologie).</li></ul>",
+    "value": "<p>Ter verduidelijking: De volgende vormen van gebruik worden niet als wijziging beschouwd: </p><ul><li>Inkorting of hergebruik van slechts een deel van het aangevraagde materiaal. </li><li>Technische wijzigingen om de beeld- of audiokwaliteit van het materiaal te verbeteren. </li><li>Integratie van ongewijzigd bronmateriaal in een documentaire.</li><li>Aanbieden van materiaal in interactieve diensten waarbij gebruikers van die diensten zelf de weergave van het materiaal tijdelijk kunnen wijzigen voor eigen doeleinden (vb. binnen een app, kiosk, of binnen een interactieve website, bijvoorbeeld met gebruik van H5P-technologie).</li></ul>",
     "value_type": "HTML"
   },
   {
@@ -62303,6 +62303,26 @@
     "id": "",
     "app": "HET_ARCHIEF",
     "component": "BACKEND",
+    "location": "modules/campaign-monitor/services/campaign-monitor",
+    "key": "hergebruik-voor-sleutelgebruikers",
+    "language": "nl",
+    "value": "Hergebruik voor sleutelgebruikers",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "BACKEND",
+    "location": "modules/campaign-monitor/services/campaign-monitor",
+    "key": "hergebruik-voor-sleutelgebruikers",
+    "language": "en",
+    "value": "Reuse for key users",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "BACKEND",
     "location": "modules/material-request-messages/services/material-request-pdf-generator",
     "key": "volledig-materiaal",
     "language": "nl",
@@ -63837,26 +63857,6 @@
     "key": "pagina-url",
     "language": "en",
     "value": "Pagina url",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "BACKEND",
-    "location": "modules/campaign-monitor/services/campaign-monitor",
-    "key": "hergebruik-voor-sleutelgebruikers",
-    "language": "nl",
-    "value": "Hergebruik voor sleutelgebruikers",
-    "value_type": "TEXT"
-  },
-  {
-    "id": "",
-    "app": "HET_ARCHIEF",
-    "component": "BACKEND",
-    "location": "modules/campaign-monitor/services/campaign-monitor",
-    "key": "hergebruik-voor-sleutelgebruikers",
-    "language": "en",
-    "value": "Hergebruik voor sleutelgebruikers",
     "value_type": "TEXT"
   }
 ]

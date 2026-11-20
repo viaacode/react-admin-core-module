@@ -13,7 +13,7 @@ const mockDataService = {
 
 const mockCacheManager = {
 	wrap: vi.fn(),
-	reset: vi.fn(),
+	clear: vi.fn(),
 };
 
 describe('TranslationsService', () => {
@@ -22,7 +22,7 @@ describe('TranslationsService', () => {
 	beforeEach(async () => {
 		mockDataService.execute.mockReset();
 		mockCacheManager.wrap.mockReset();
-		mockCacheManager.reset.mockReset();
+		mockCacheManager.clear.mockReset();
 
 		const module: TestingModule = await Test.createTestingModule({
 			providers: [
@@ -101,7 +101,7 @@ describe('TranslationsService', () => {
 	describe('updateTranslation', () => {
 		it('can update the translations', async () => {
 			mockDataService.execute.mockResolvedValueOnce({});
-			mockCacheManager.reset.mockResolvedValueOnce(undefined);
+			mockCacheManager.clear.mockResolvedValueOnce(undefined);
 			await translationsService.updateTranslation(
 				Component.FRONTEND,
 				'modules/admin/const/requests',
@@ -110,7 +110,7 @@ describe('TranslationsService', () => {
 				'new value'
 			);
 			expect(mockDataService.execute).toHaveBeenCalled();
-			expect(mockCacheManager.reset).toHaveBeenCalled();
+			expect(mockCacheManager.clear).toHaveBeenCalled();
 		});
 	});
 });

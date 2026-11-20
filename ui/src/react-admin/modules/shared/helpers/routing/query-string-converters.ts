@@ -17,7 +17,7 @@ export const NumberParam: QueryParamEncoderDecoder<number> = {
 		if (isNil(value)) {
 			return undefined;
 		}
-		const parsed = Number.parseInt(value);
+		const parsed = Number.parseInt(value, 10);
 		return Number.isNaN(parsed) ? undefined : parsed;
 	},
 };

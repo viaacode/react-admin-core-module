@@ -2,6 +2,7 @@ import { Test, type TestingModule } from '@nestjs/testing';
 import { AvoAuthIdpType, type AvoUserHetArchiefUser, PermissionName } from '@viaa/avo2-types';
 import { type MockInstance, vi } from 'vitest';
 
+import { AssetsService } from '../../assets/services/assets.service';
 import { PlayerTicketService } from '../../player-ticket';
 import { SessionHelper } from '../../shared/auth/session-helper';
 import { ContentPagesService } from '../services/content-pages.service';
@@ -68,6 +69,10 @@ describe('ContentPagesController', () => {
 				{
 					provide: PlayerTicketService,
 					useValue: mockPlayerTicketService,
+				},
+				{
+					provide: AssetsService,
+					useValue: {},
 				},
 			],
 		}).compile();

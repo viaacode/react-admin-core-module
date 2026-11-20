@@ -19,7 +19,7 @@ import { mapLimit } from 'blend-promise-utils';
 import fse from 'fs-extra';
 import got, { type ExtendOptions, type Got } from 'got';
 import { escapeRegExp, isNil, kebabCase } from 'lodash';
-import { DataService } from 'src/modules/data/services/data.service';
+import { DataService } from '../../data/services/data.service';
 import {
 	GetContentAssetDocument,
 	type GetContentAssetQuery,
@@ -308,9 +308,21 @@ export class AssetsService {
 			url.pathname = `${process.env.ASSET_SERVER_BUCKET_NAME as string}/${key}`;
 			return url.href;
 		} catch (err) {
+			// got's HTTPError keeps response/message as non-enumerable properties,
+			// so JSON.stringify(err) drops the status code and body. Pull them out explicitly.
+			// biome-ignore lint/suspicious/noExplicitAny: error can be any type
+			const gotError = err as any;
 			const error = {
 				message: 'Failed to upload asset to the s3 asset service',
 				error: err,
+				additionalInfo: {
+					key,
+					fileSizeBytes: (file as UploadFileByBuffer).buffer?.length,
+					errorMessage: gotError?.message,
+					statusCode: gotError?.response?.statusCode,
+					responseBody: gotError?.response?.body,
+					retryCount: gotError?.response?.retryCount,
+				},
 			};
 			this.logger.error(error);
 			throw new InternalServerErrorException(

@@ -1,8 +1,8 @@
-import type { IPagination } from '@studiohyperdrive/pagination';
 import type { UseQueryResult } from '@tanstack/react-query';
 import { useQuery } from '@tanstack/react-query';
 import type { MaintenanceAlertsOverviewTableState } from '~modules/maintenance-alerts/maintenance-alerts.types';
 import { QUERY_KEYS } from '~modules/shared';
+import type { IPagination } from '~shared/types/pagination.types';
 import { MaintenanceAlertsService } from '../maintenance-alerts.service';
 import type {
 	MaintenanceAlert,

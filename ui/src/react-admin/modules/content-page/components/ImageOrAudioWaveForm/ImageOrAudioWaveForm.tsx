@@ -24,9 +24,9 @@ export const ImageOrAudioWaveForm: FunctionComponent<ImageOrAudioWaveFormProps> 
 	waveColor,
 	backgroundColor,
 	size = AudioWaveFormDisplaySize.Small,
-}): ReactElement => {
+}): ReactElement | null => {
 	if (!imageSrc) {
-		return <></>;
+		return null;
 	}
 
 	const isAudioStill = imageSrc === AdminConfigManager.getConfig().components.defaultAudioStill;

@@ -1,4 +1,4 @@
-import { stringifyUrl } from 'query-string';
+import queryString from 'query-string';
 import { AdminConfigManager } from '~core/config';
 import { CustomError } from '~shared/helpers/custom-error';
 import { fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
@@ -40,7 +40,7 @@ export class ThemesService {
 	): Promise<ThemesResponse> {
 		try {
 			return await fetchWithLogoutJson<ThemesResponse>(
-				stringifyUrl({
+				queryString.stringifyUrl({
 					url: ThemesService.getBaseUrl(),
 					query: {
 						searchTerm: searchTerm || undefined,
@@ -60,7 +60,7 @@ export class ThemesService {
 		}
 		try {
 			return await fetchWithLogoutJson<Theme[]>(
-				stringifyUrl({
+				queryString.stringifyUrl({
 					url: `${ThemesService.getBaseUrl()}/by-id`,
 					query: {
 						ids: ids.join(','),
@@ -80,7 +80,7 @@ export class ThemesService {
 		}
 		try {
 			return await fetchWithLogoutJson<ThemeWithObjects>(
-				stringifyUrl({
+				queryString.stringifyUrl({
 					url: `${ThemesService.getBaseUrl()}/${themeId}/ie-objects`,
 					query: {
 						orderDirection: 'random',

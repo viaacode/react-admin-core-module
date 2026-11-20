@@ -5,9 +5,7 @@ import { AdminConfigManager } from '~core/config/config.class';
 import { NavigationItemEdit } from '~modules/navigation/views/NavigationItemEdit';
 
 export const NavigationItemEditPage: FC = () => {
-	const match = useMatch<'navigationItemId' | 'navigationBarId', string>(
-		AdminConfigManager.getConfig().routes.ADMIN_NAVIGATION_ITEM_EDIT
-	);
+	const match = useMatch(AdminConfigManager.getConfig().routes.ADMIN_NAVIGATION_ITEM_EDIT);
 	const navigationBarId = match?.params.navigationBarId;
 	const navigationItemId = match?.params.navigationItemId;
 

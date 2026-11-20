@@ -166,7 +166,7 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 	};
 
 	const renderLabels = (page: ContentPageInfo) => {
-		if (!page.labels || !page.labels.length) {
+		if (!page.labels?.length) {
 			return '';
 		}
 		return ` in ${page.labels
@@ -395,9 +395,7 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 				})
 			);
 			// Put the pages that do not have a label under their own category
-			clientPagesByLabel[noLabelObj.id] = pages.filter(
-				(page) => !page.labels || !page.labels.length
-			);
+			clientPagesByLabel[noLabelObj.id] = pages.filter((page) => !page.labels?.length);
 			const labelsToShow: LabelObj[] = showAllLabels ? [...uniqueLabels, noLabelObj] : selectedTabs;
 
 			// Render each page under their label section (can have duplicates)
@@ -519,7 +517,7 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 			// Add "all" option to the front
 			const extendedTabs = [allLabelObj, ...tabs];
 			let extendedSelectedTabs: LabelObj[] = selectedTabs;
-			if (!extendedSelectedTabs || !extendedSelectedTabs.length) {
+			if (!extendedSelectedTabs?.length) {
 				// Select the "all" option if no tabs are selected
 				extendedSelectedTabs = [extendedTabs[0]];
 			}

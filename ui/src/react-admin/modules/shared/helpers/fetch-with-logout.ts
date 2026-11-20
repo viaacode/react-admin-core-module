@@ -19,9 +19,15 @@ export async function fetchWithLogout(
 	const { forceLogout, ...fetchOptions } = options || { forceLogout: true };
 	const response = await fetch(url, {
 		method: 'GET',
-		headers: {
-			'Content-Type': 'application/json',
-		},
+		// Only send a Content-Type when there is a body.
+		// "Content-Type: application/json" makes every cross-origin GET a non-simple request, which costs a CORS preflight (OPTIONS) request
+		...(fetchOptions.body
+			? {
+					headers: {
+						'Content-Type': 'application/json',
+					},
+				}
+			: {}),
 		credentials: 'include',
 		...fetchOptions,
 	});

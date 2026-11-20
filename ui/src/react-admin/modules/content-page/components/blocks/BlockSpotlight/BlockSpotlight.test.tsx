@@ -33,7 +33,7 @@ describe('<BlockSpotlight />', () => {
 
 	it('Should set the correct title', () => {
 		const { container } = render(BlockSpotlightExample);
-		const titleElement = container.querySelector('p');
+		const titleElement = container.querySelector('.c-spotlight__item__label');
 		expect(titleElement?.textContent).toEqual('Big item ');
 	});
 });

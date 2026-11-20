@@ -168,7 +168,7 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 
 	const bulkChangeSubjects = async (addOrRemove: AddOrRemove, subjects: string[]) => {
 		try {
-			if (!selectedProfileIds || !selectedProfileIds.length) {
+			if (!selectedProfileIds?.length) {
 				return;
 			}
 

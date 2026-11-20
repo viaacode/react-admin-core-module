@@ -1,4 +1,6 @@
 import { Test, type TestingModule } from '@nestjs/testing';
+import { afterEach, beforeEach, describe, expect, it, type MockInstance, vi } from 'vitest';
+import { DataService } from '../../data';
 import {
 	type DeleteMaintenanceAlertMutation,
 	type FindMaintenanceAlertByIdQuery,
@@ -6,9 +8,7 @@ import {
 	type InsertMaintenanceAlertMutation,
 	Lookup_Languages_Enum,
 	type UpdateMaintenanceAlertMutation,
-} from 'src/modules/shared/generated/graphql-db-types-hetarchief';
-import { afterEach, beforeEach, describe, expect, it, type MockInstance, vi } from 'vitest';
-import { DataService } from '../../data';
+} from '../../shared/generated/graphql-db-types-hetarchief';
 import { TestingLogger } from '../../shared/logging/test-logger';
 import { MaintenanceAlertType } from '../maintenance-alerts.types';
 import {
