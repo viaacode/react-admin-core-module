@@ -32,6 +32,9 @@ export interface BlockImageGridProps extends DefaultProps {
 	elements: GridItem[];
 	imageWidth?: CssSizeSetting;
 	imageHeight?: CssSizeSetting;
+	// Width (css px) the image is shown at, to load a resized version of it. With fill: cover a
+	// landscape (16:9) photo is wider than its box when the box is not as wide as 16:9.
+	imageDisplayWidth?: number;
 	itemWidth?: CssSizeSetting;
 	fill?: 'cover' | 'contain' | 'auto';
 	align?: AlignOptions;

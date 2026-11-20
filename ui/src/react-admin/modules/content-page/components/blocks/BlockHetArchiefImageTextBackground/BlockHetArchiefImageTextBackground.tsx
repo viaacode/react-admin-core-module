@@ -25,6 +25,8 @@ import './BlockHetArchiefImageTextBackground.scss';
 import type { ContentPageWidth } from '~modules/content-page/types/content-pages.types';
 import { CONTENT_PAGE_WIDTH_TO_REM } from '~modules/content-page/types/content-pages.types';
 import { CopyrightAttribution } from '~shared/components/CopyrightAttribution';
+import { OptimizedImg } from '~shared/components/OptimizedImage/OptimizedImage';
+import { PAGE_CONTENT_IMAGE_WIDTH } from '~shared/helpers/images';
 
 export interface BlockHetArchiefImageTextBackgroundProps extends DefaultComponentProps {
 	heading: string;
@@ -214,7 +216,15 @@ export const BlockHetArchiefImageTextBackground: FunctionComponent<
 					>
 						{image && (
 							<div className="c-block-het-archief-image-text-background__image">
-								<img ref={imgRef} src={image} alt={imageAltText} onLoad={updateMediaMeasurements} />
+								{/* Shown at its own size, up to the image column (at most ~1100px wide) */}
+								<OptimizedImg
+									ref={imgRef}
+									src={image}
+									displayWidth={PAGE_CONTENT_IMAGE_WIDTH}
+									intrinsicSize
+									alt={imageAltText}
+									onLoad={updateMediaMeasurements}
+								/>
 							</div>
 						)}
 						<div

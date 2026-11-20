@@ -1,10 +1,13 @@
 import type { ButtonAction } from '@viaa/avo2-components';
-import { Image } from '@viaa/avo2-components';
 import clsx from 'clsx';
 import type { FunctionComponent, ReactElement, ReactNode } from 'react';
 import type { CardWithoutDescriptionStyleOption } from '~modules/content-page/types/content-block.types';
 import type { DefaultComponentProps } from '~modules/shared/types/components';
+import { OptimizedImage } from '~shared/components/OptimizedImage/OptimizedImage';
 import { SmartLink } from '~shared/components/SmartLink/SmartLink';
+
+// The image is a 15.2rem circle or square
+const IMAGE_DISPLAY_WIDTH = 152;
 
 export interface BlockCardWithoutDescriptionProps {
 	title: string;
@@ -39,8 +42,9 @@ export const BlockCardsWithoutDescription: FunctionComponent<BlockCardsWithoutDe
 					{title}
 				</p>
 				{image && (
-					<Image
+					<OptimizedImage
 						src={image}
+						displayWidth={IMAGE_DISPLAY_WIDTH}
 						alt=""
 						className={`c-block-cards-without-description__image c-block-cards-without-description__image--${style}`}
 					/>
