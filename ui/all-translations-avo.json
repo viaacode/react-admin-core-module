@@ -16066,7 +16066,7 @@
     "location": "assignment/views/assignment-edit-marcom",
     "key": "publiceren-naar-klascement-gelukt",
     "language": "nl",
-    "value": "Publiceren naar KlasCement gelukt.",
+    "value": "Publiceren naar KlasCement is gelukt.",
     "value_type": "TEXT"
   },
   {
@@ -16076,7 +16076,7 @@
     "location": "assignment/views/assignment-edit-marcom",
     "key": "publiceren-naar-klascement-mislukt",
     "language": "nl",
-    "value": "Publiceren naar KlasCement mislukt",
+    "value": "Publiceren naar KlasCement is mislukt.",
     "value_type": "TEXT"
   },
   {
@@ -18536,7 +18536,7 @@
     "location": "collection/components/collection-or-bundle-edit-marcom",
     "key": "publiceren-naar-klascement-mislukt",
     "language": "nl",
-    "value": "Publiceren naar KlasCement is mislukt",
+    "value": "Publiceren naar KlasCement is mislukt.",
     "value_type": "TEXT"
   },
   {
