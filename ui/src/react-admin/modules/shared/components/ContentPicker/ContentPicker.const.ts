@@ -1,10 +1,11 @@
 import { AvoCoreContentPickerType, type AvoCoreLinkTarget } from '@viaa/avo2-types';
+import type { App } from '~modules/translations/translations.core.types';
 import { retrieveAssignments } from '~shared/components/ContentPicker/item-providers/assignment';
 import { retrieveCustomNavigationElements } from '~shared/components/ContentPicker/item-providers/custom-navigation-elements';
 import { retrieveIeObjects } from '~shared/components/ContentPicker/item-providers/ie-objects';
 import { retrieveNlParentContentPages } from '~shared/components/ContentPicker/item-providers/nl-content-page-parent';
 import { tText } from '~shared/helpers/translation-functions';
-import { HET_ARCHIEF } from '~shared/types';
+import { AVO, HET_ARCHIEF } from '~shared/types';
 import type { PickerTypeOption } from '../../types/content-picker';
 import { retrieveAnchors } from './item-providers/anchors';
 import { retrieveBundles, retrieveCollections } from './item-providers/collection';
@@ -95,6 +96,7 @@ export const GET_CONTENT_TYPE_LABELS: () => Record<AvoCoreContentPickerType, str
 });
 
 const getContentTypeForContentPage = (
+	apps: App[],
 	contentType:
 		| AvoCoreContentPickerType.CONTENT_PAGE
 		| AvoCoreContentPickerType.CONTENT_PAGE_NEWS_ITEM
@@ -110,6 +112,7 @@ const getContentTypeForContentPage = (
 	return {
 		value: contentType as AvoCoreContentPickerType,
 		label: labels[contentType],
+		apps,
 		disabled: false,
 		fetch: retrieveContentPages,
 		picker: 'SELECT',
@@ -119,10 +122,11 @@ const getContentTypeForContentPage = (
 export const GET_CONTENT_TYPES: () => PickerTypeOption[] = () => {
 	const labels = GET_CONTENT_TYPE_LABELS();
 	return [
-		getContentTypeForContentPage(AvoCoreContentPickerType.CONTENT_PAGE),
+		getContentTypeForContentPage([AVO, HET_ARCHIEF], AvoCoreContentPickerType.CONTENT_PAGE),
 		{
 			value: AvoCoreContentPickerType.NL_CONTENT_PAGE_PARENT_ID,
 			label: labels[AvoCoreContentPickerType.NL_CONTENT_PAGE_PARENT_ID],
+			apps: [HET_ARCHIEF],
 			disabled: false,
 			fetch: retrieveNlParentContentPages,
 			picker: 'SELECT',
@@ -130,6 +134,7 @@ export const GET_CONTENT_TYPES: () => PickerTypeOption[] = () => {
 		{
 			value: AvoCoreContentPickerType.INTERNAL_LINK,
 			label: labels[AvoCoreContentPickerType.INTERNAL_LINK],
+			apps: [AVO, HET_ARCHIEF],
 			disabled: false,
 			fetch: retrieveInternalLinks,
 			picker: 'SELECT',
@@ -137,6 +142,7 @@ export const GET_CONTENT_TYPES: () => PickerTypeOption[] = () => {
 		{
 			value: AvoCoreContentPickerType.COLLECTION,
 			label: labels[AvoCoreContentPickerType.COLLECTION],
+			apps: [AVO],
 			disabled: false,
 			fetch: retrieveCollections,
 			picker: 'SELECT',
@@ -144,6 +150,7 @@ export const GET_CONTENT_TYPES: () => PickerTypeOption[] = () => {
 		{
 			value: AvoCoreContentPickerType.ITEM,
 			label: labels[AvoCoreContentPickerType.ITEM],
+			apps: [AVO],
 			disabled: false,
 			fetch: retrieveItems,
 			picker: 'SELECT',
@@ -151,6 +158,7 @@ export const GET_CONTENT_TYPES: () => PickerTypeOption[] = () => {
 		{
 			value: AvoCoreContentPickerType.ITEM_WITH_CUE_POINTS,
 			label: labels[AvoCoreContentPickerType.ITEM_WITH_CUE_POINTS],
+			apps: [AVO],
 			disabled: false,
 			fetch: retrieveItems,
 			picker: 'SELECT',
@@ -158,6 +166,7 @@ export const GET_CONTENT_TYPES: () => PickerTypeOption[] = () => {
 		{
 			value: AvoCoreContentPickerType.BUNDLE,
 			label: labels[AvoCoreContentPickerType.BUNDLE],
+			apps: [AVO],
 			disabled: false,
 			fetch: retrieveBundles,
 			picker: 'SELECT',
@@ -165,6 +174,7 @@ export const GET_CONTENT_TYPES: () => PickerTypeOption[] = () => {
 		{
 			value: AvoCoreContentPickerType.ASSIGNMENT,
 			label: labels[AvoCoreContentPickerType.ASSIGNMENT],
+			apps: [AVO],
 			disabled: false,
 			fetch: retrieveAssignments,
 			picker: 'SELECT',
@@ -172,6 +182,7 @@ export const GET_CONTENT_TYPES: () => PickerTypeOption[] = () => {
 		{
 			value: AvoCoreContentPickerType.EXTERNAL_LINK,
 			label: labels[AvoCoreContentPickerType.EXTERNAL_LINK],
+			apps: [AVO, HET_ARCHIEF],
 			disabled: false,
 			picker: 'TEXT_INPUT',
 			placeholder: 'https://',
@@ -179,6 +190,7 @@ export const GET_CONTENT_TYPES: () => PickerTypeOption[] = () => {
 		{
 			value: AvoCoreContentPickerType.SEARCH_QUERY,
 			label: labels[AvoCoreContentPickerType.SEARCH_QUERY],
+			apps: [AVO],
 			disabled: false,
 			picker: 'TEXT_INPUT',
 			placeholder: tText(
@@ -188,6 +200,7 @@ export const GET_CONTENT_TYPES: () => PickerTypeOption[] = () => {
 		{
 			value: AvoCoreContentPickerType.PROJECTS,
 			label: labels[AvoCoreContentPickerType.PROJECTS],
+			apps: [AVO],
 			disabled: false,
 			fetch: retrieveProjectContentPages,
 			picker: 'SELECT',
@@ -195,6 +208,7 @@ export const GET_CONTENT_TYPES: () => PickerTypeOption[] = () => {
 		{
 			value: AvoCoreContentPickerType.PROFILE,
 			label: labels[AvoCoreContentPickerType.PROFILE],
+			apps: [AVO, HET_ARCHIEF],
 			disabled: false,
 			fetch: retrieveProfiles,
 			picker: 'SELECT',
@@ -202,6 +216,7 @@ export const GET_CONTENT_TYPES: () => PickerTypeOption[] = () => {
 		{
 			value: AvoCoreContentPickerType.ANCHOR_LINK,
 			label: labels[AvoCoreContentPickerType.ANCHOR_LINK],
+			apps: [AVO, HET_ARCHIEF],
 			disabled: false,
 			fetch: retrieveAnchors,
 			picker: 'SELECT',
@@ -209,12 +224,14 @@ export const GET_CONTENT_TYPES: () => PickerTypeOption[] = () => {
 		{
 			value: AvoCoreContentPickerType.FILE,
 			label: labels[AvoCoreContentPickerType.FILE],
+			apps: [AVO, HET_ARCHIEF],
 			disabled: false,
 			picker: 'FILE_UPLOAD',
 		},
 		{
 			value: AvoCoreContentPickerType.CUSTOM_NAVIGATION_ELEMENTS,
 			label: labels[AvoCoreContentPickerType.CUSTOM_NAVIGATION_ELEMENTS],
+			apps: [AVO, HET_ARCHIEF],
 			disabled: false,
 			fetch: retrieveCustomNavigationElements,
 			picker: 'SELECT',
@@ -222,6 +239,7 @@ export const GET_CONTENT_TYPES: () => PickerTypeOption[] = () => {
 		{
 			value: AvoCoreContentPickerType.IE_OBJECT,
 			label: labels[AvoCoreContentPickerType.IE_OBJECT],
+			apps: [HET_ARCHIEF],
 			disabled: false,
 			fetch: retrieveIeObjects,
 			picker: 'SELECT',
@@ -229,17 +247,18 @@ export const GET_CONTENT_TYPES: () => PickerTypeOption[] = () => {
 		{
 			value: AvoCoreContentPickerType.IE_OBJECT_THEME,
 			label: labels[AvoCoreContentPickerType.IE_OBJECT_THEME],
+			apps: [HET_ARCHIEF],
 			disabled: false,
 			fetch: retrieveThemes,
 			picker: 'SELECT',
 		},
-		getContentTypeForContentPage(AvoCoreContentPickerType.CONTENT_PAGE_NEWS_ITEM),
-		getContentTypeForContentPage(AvoCoreContentPickerType.CONTENT_PAGE_PAGE),
-		getContentTypeForContentPage(AvoCoreContentPickerType.CONTENT_PAGE_PROJECT),
-		getContentTypeForContentPage(AvoCoreContentPickerType.CONTENT_PAGE_OVERVIEW),
-		getContentTypeForContentPage(AvoCoreContentPickerType.CONTENT_PAGE_DOMAIN_DETAIL),
-		getContentTypeForContentPage(AvoCoreContentPickerType.CONTENT_PAGE_EVENT_DETAIL),
-		getContentTypeForContentPage(AvoCoreContentPickerType.CONTENT_PAGE_SCREENCAST),
+		getContentTypeForContentPage([AVO], AvoCoreContentPickerType.CONTENT_PAGE_NEWS_ITEM),
+		getContentTypeForContentPage([AVO], AvoCoreContentPickerType.CONTENT_PAGE_PAGE),
+		getContentTypeForContentPage([AVO], AvoCoreContentPickerType.CONTENT_PAGE_PROJECT),
+		getContentTypeForContentPage([AVO], AvoCoreContentPickerType.CONTENT_PAGE_OVERVIEW),
+		getContentTypeForContentPage([AVO], AvoCoreContentPickerType.CONTENT_PAGE_DOMAIN_DETAIL),
+		getContentTypeForContentPage([AVO], AvoCoreContentPickerType.CONTENT_PAGE_EVENT_DETAIL),
+		getContentTypeForContentPage([AVO], AvoCoreContentPickerType.CONTENT_PAGE_SCREENCAST),
 	];
 };
 
