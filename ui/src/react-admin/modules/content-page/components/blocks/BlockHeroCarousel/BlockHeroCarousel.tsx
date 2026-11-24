@@ -5,9 +5,11 @@ import './BlockHeroCarousel.scss';
 import 'swiper/css';
 import type { HetArchiefIeObjectType } from '@viaa/avo2-types';
 import clsx from 'clsx';
-import type {
-	HeroCarouselBlockComponentState,
-	HeroCarouselSlideItem,
+import {
+	DEFAULT_HERO_CAROUSEL_AUTOPLAY,
+	type HeroCarouselAutoplay,
+	type HeroCarouselBlockComponentState,
+	type HeroCarouselSlideItem,
 } from '~content-blocks/BlockHeroCarousel/BlockHeroCarousel.types.ts';
 import { BlockHeroCarouselCarousel } from '~content-blocks/BlockHeroCarousel/BlockHeroCarouselCarousel.tsx';
 import { BlockHeroCarouselSearch } from '~content-blocks/BlockHeroCarousel/BlockHeroCarouselSearch.tsx';
@@ -23,6 +25,7 @@ export interface BlockHeroCarouselProps extends DefaultComponentProps {
 	title: string;
 	searchAriaLabel: string;
 	subtitles: { label: string }[];
+	autoplay?: HeroCarouselAutoplay;
 	elements: HeroCarouselBlockComponentState[];
 }
 
@@ -33,6 +36,7 @@ export const BlockHeroCarousel: FunctionComponent<BlockHeroCarouselProps> = ({
 	title,
 	subtitles,
 	searchAriaLabel,
+	autoplay,
 	elements,
 }): ReactNode => {
 	// While this block is being put together in the editor it has no id yet, so its slides go
@@ -121,7 +125,16 @@ export const BlockHeroCarousel: FunctionComponent<BlockHeroCarouselProps> = ({
 			    their object has been resolved. Only the first fetch counts as loading -- a
 			    background refetch shouldn't turn a strip that already has content back into
 			    spinners. */}
-			{items.length > 0 && <BlockHeroCarouselCarousel elements={items} isLoading={isLoading} />}
+			{items.length > 0 && (
+				<BlockHeroCarouselCarousel
+					// Starts over when the editor picks another autoplay mode, so the preview shows
+					// that mode from its first slide.
+					key={autoplay || DEFAULT_HERO_CAROUSEL_AUTOPLAY}
+					elements={items}
+					isLoading={isLoading}
+					autoplay={autoplay || DEFAULT_HERO_CAROUSEL_AUTOPLAY}
+				/>
+			)}
 		</article>
 	);
 };

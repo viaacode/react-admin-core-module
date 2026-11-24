@@ -10,7 +10,10 @@ import React, {
 	useRef,
 	useState,
 } from 'react';
-import type { HeroCarouselSlideItem } from '~content-blocks/BlockHeroCarousel/BlockHeroCarousel.types.ts';
+import {
+	HeroCarouselAutoplay,
+	type HeroCarouselSlideItem,
+} from '~content-blocks/BlockHeroCarousel/BlockHeroCarousel.types.ts';
 import { BlockHeroCarouselActiveSlide } from '~content-blocks/BlockHeroCarousel/BlockHeroCarouselActiveSlide.tsx';
 import { BlockHeroCarouselInactiveSlide } from '~content-blocks/BlockHeroCarousel/BlockHeroCarouselInactiveSlide.tsx';
 import { CarouselButtons } from '~modules/content-page/components/CarouselButtons/CarouselButtons.tsx';
@@ -30,20 +33,28 @@ import './BlockHeroCarousel.scss';
 import { IeObjectMetadata } from '~modules/content-page/components/IeObjectMetadata/IeObjectMetadata.tsx';
 import { mapDcTermsFormatToSimpleType } from '~shared/helpers/map-format-to-type.ts';
 
-// The carousel moves on by itself for this many objects, then moves to the next slide without
-// starting it, and leaves the rest to the visitor: an endless loop of autoplaying media is distracting, and keeps
-// streaming for a visitor who may have long since stopped looking.
-const MAX_AUTOPLAYED_OBJECTS = 3;
+// How many objects may play to the end and move the carousel on by themselves, per autoplay mode.
+// Once that many have, the carousel moves to the next slide without starting it and leaves the
+// rest to the visitor: an endless loop of autoplaying media is distracting, and keeps streaming
+// for a visitor who may have long since stopped looking.
+const MAX_AUTO_ADVANCED_OBJECTS: Record<HeroCarouselAutoplay, number> = {
+	[HeroCarouselAutoplay.On]: Number.POSITIVE_INFINITY,
+	[HeroCarouselAutoplay.First3]: 3,
+	[HeroCarouselAutoplay.Off]: 0,
+};
 
 export interface BlockHeroCarouselCarouselProps extends DefaultComponentProps {
 	elements: HeroCarouselSlideItem[];
 	isLoading?: boolean;
+	autoplay: HeroCarouselAutoplay;
 }
 
 export const BlockHeroCarouselCarousel: FunctionComponent<BlockHeroCarouselCarouselProps> = ({
 	elements,
 	isLoading,
+	autoplay,
 }): ReactElement => {
+	const maxAutoAdvancedObjects = MAX_AUTO_ADVANCED_OBJECTS[autoplay];
 	const { strip, startIndex, itemsLength } = useMemo(
 		() => buildInfiniteStrip(elements),
 		[elements]
@@ -63,9 +74,10 @@ export const BlockHeroCarouselCarousel: FunctionComponent<BlockHeroCarouselCarou
 	// reaches the limit the carousel never moves on by itself again: a slide the visitor navigates
 	// to still starts playing, but it just stops when it's done.
 	const autoAdvancedObjectsCountRef = useRef<number>(0);
-	// Off only for the slide the carousel lands on when the limit is reached, so it waits for the
-	// visitor to press play. Any navigation by the visitor turns it back on.
-	const [isAutoplayEnabled, setIsAutoplayEnabled] = useState<boolean>(true);
+	// Off for the slide the carousel starts on when autoplay is off, and for the slide it lands on
+	// when the limit is reached, so those wait for the visitor to press play. Any navigation by the
+	// visitor turns it back on.
+	const [isAutoplayEnabled, setIsAutoplayEnabled] = useState<boolean>(maxAutoAdvancedObjects > 0);
 
 	useEffect(() => {
 		pxPerRemRef.current = pxPerRem;
@@ -97,11 +109,11 @@ export const BlockHeroCarouselCarousel: FunctionComponent<BlockHeroCarouselCarou
 	};
 
 	const handleSlideEnded = () => {
-		if (autoAdvancedObjectsCountRef.current >= MAX_AUTOPLAYED_OBJECTS) {
+		if (autoAdvancedObjectsCountRef.current >= maxAutoAdvancedObjects) {
 			return;
 		}
 		autoAdvancedObjectsCountRef.current += 1;
-		if (autoAdvancedObjectsCountRef.current >= MAX_AUTOPLAYED_OBJECTS) {
+		if (autoAdvancedObjectsCountRef.current >= maxAutoAdvancedObjects) {
 			setIsAutoplayEnabled(false);
 		}
 		goNext();
