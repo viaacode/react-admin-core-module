@@ -4,9 +4,7 @@ import { AdminConfigManager } from '~core/config/config.class';
 import { ContentPageLabelDetail } from '~modules/content-page-labels/views/ContentPageLabelDetail';
 
 export const ContentPageLabelsDetailPage: FC = () => {
-	const match = useMatch<'id', string>(
-		AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_LABEL_DETAIL')
-	);
+	const match = useMatch(AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_LABEL_DETAIL'));
 	const contentPageLabelId = match?.params.id;
 
 	if (!contentPageLabelId) {

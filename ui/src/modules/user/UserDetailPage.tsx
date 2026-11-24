@@ -5,7 +5,7 @@ import { UserDetail } from '~modules/user/views/UserDetail';
 import { getMockCommonUser } from '../../mock-common-user';
 
 export const UserDetailPage: FC = () => {
-	const match = useMatch<'id', string>(AdminConfigManager.getAdminRoute('ADMIN_USER_DETAIL'));
+	const match = useMatch(AdminConfigManager.getAdminRoute('ADMIN_USER_DETAIL'));
 	const userId = match?.params.id;
 
 	if (!userId) {

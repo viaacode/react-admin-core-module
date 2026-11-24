@@ -5,9 +5,7 @@ import { ContentPageDetail } from '~modules/content-page/views/ContentPageDetail
 import { getMockCommonUser } from '../../mock-common-user';
 
 export const ContentPageDetailPage: FC = () => {
-	const match = useMatch<'id', string>(
-		AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_DETAIL')
-	);
+	const match = useMatch(AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_DETAIL'));
 	const contentPageId = match?.params.id;
 
 	if (!contentPageId) {
