@@ -19,6 +19,8 @@ import { HET_ARCHIEF } from '~shared/types';
 export interface BlockHeroCarouselActiveSlideProps extends DefaultComponentProps {
 	item: HeroCarouselSlideItem;
 	onEnded: () => void;
+	/** Whether this slide starts playing by itself; when false it waits for the visitor to press play */
+	isAutoplayEnabled: boolean;
 	isMuted: boolean;
 	onMutedChange: (muted: boolean) => void;
 }
@@ -26,10 +28,14 @@ export interface BlockHeroCarouselActiveSlideProps extends DefaultComponentProps
 export const BlockHeroCarouselActiveSlide: FunctionComponent<BlockHeroCarouselActiveSlideProps> = ({
 	item,
 	onEnded,
+	isAutoplayEnabled,
 	isMuted,
 	onMutedChange,
 }): ReactElement => {
-	const [isPaused, setIsPaused] = useState(false);
+	// Read once, when the slide becomes active, so a later change can't restart or stop what this
+	// slide is already showing.
+	const [shouldAutoplay] = useState<boolean>(isAutoplayEnabled);
+	const [isPaused, setIsPaused] = useState<boolean>(!shouldAutoplay);
 
 	const imageSrc = getSlideImageSrc(item, true);
 
@@ -108,7 +114,7 @@ export const BlockHeroCarouselActiveSlide: FunctionComponent<BlockHeroCarouselAc
 		return (
 			<IeObjectFlowPlayerWrapper
 				ieObject={item}
-				autoplay={true}
+				autoplay={shouldAutoplay}
 				isMuted={isMuted}
 				onMutedChange={onMutedChange}
 				onEnded={onEnded}
