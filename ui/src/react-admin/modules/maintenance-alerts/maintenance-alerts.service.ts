@@ -1,6 +1,6 @@
 import type { IPagination } from '@studiohyperdrive/pagination';
 import { AvoSearchOrderDirection } from '@viaa/avo2-types';
-import { stringifyUrl } from 'query-string';
+import queryString from 'query-string';
 import { CustomError } from '~modules/shared/helpers/custom-error';
 import { fetchWithLogoutJson } from '~modules/shared/helpers/fetch-with-logout';
 import type { Locale } from '~modules/translations/translations.core.types';
@@ -26,7 +26,7 @@ export class MaintenanceAlertsService {
 	): Promise<IPagination<MaintenanceAlert[]>> {
 		try {
 			return fetchWithLogoutJson(
-				stringifyUrl({
+				queryString.stringifyUrl({
 					url: MaintenanceAlertsService.getBaseUrl(),
 					query: {
 						orderProp,

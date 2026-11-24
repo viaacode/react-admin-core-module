@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { AvoCoreContentPickerType } from '@viaa/avo2-types';
-import { stringifyUrl } from 'query-string';
+import queryString from 'query-string';
 import { AdminConfigManager } from '~core/config/config.class';
 import { fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
 import { getProxyUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config';
@@ -29,7 +29,7 @@ export const useGetStillsFromContentItem = (
 				return [];
 			}
 			const stills: string[] = await fetchWithLogoutJson(
-				stringifyUrl({
+				queryString.stringifyUrl({
 					url: `${getProxyUrl()}/video-stills/by-content`,
 					query: {
 						contentItemType,
