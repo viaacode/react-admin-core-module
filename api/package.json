@@ -1,6 +1,6 @@
 {
   "name": "@meemoo/admin-core-api",
-  "version": "7.0.20",
+  "version": "7.0.21",
   "description": "The backend routes to support the screens in the Admin Core dashboard",
   "author": "Bert Verhelst <bert.verhelst@studiohyperdrive.be>",
   "main": "./dist/src/index.js",
@@ -40,7 +40,7 @@
     "@smithy/node-http-handler": "^4.12.1",
     "@smithy/protocol-http": "^5.6.2",
     "@smithy/signature-v4": "^5.7.4",
-    "@viaa/avo2-types": "5.0.28",
+    "@viaa/avo2-types": "5.0.30",
     "blend-promise-utils": "^1.28.0",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.1",
