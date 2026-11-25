@@ -71,12 +71,12 @@ export const BlockHeroCarouselCarousel: FunctionComponent<BlockHeroCarouselCarou
 	const trackRef = useRef<HTMLDivElement | null>(null);
 	const [isMuted, setIsMuted] = useState<boolean>(true);
 	// How many objects have played to the end and moved the carousel on by themselves. Once that
-	// reaches the limit the carousel never moves on by itself again: a slide the visitor navigates
-	// to still starts playing, but it just stops when it's done.
+	// reaches the limit, every slide that ends still moves the carousel to the next one, but that
+	// next slide no longer starts by itself: it waits at its start for the visitor to press play.
 	const autoAdvancedObjectsCountRef = useRef<number>(0);
-	// Off for the slide the carousel starts on when autoplay is off, and for the slide it lands on
-	// when the limit is reached, so those wait for the visitor to press play. Any navigation by the
-	// visitor turns it back on.
+	// Off for the slide the carousel starts on when autoplay is off, and for every slide it moves on
+	// to by itself once the limit is reached, so those wait for the visitor to press play. Any
+	// navigation by the visitor turns it back on for the slide they land on.
 	const [isAutoplayEnabled, setIsAutoplayEnabled] = useState<boolean>(maxAutoAdvancedObjects > 0);
 
 	useEffect(() => {
@@ -108,10 +108,10 @@ export const BlockHeroCarouselCarousel: FunctionComponent<BlockHeroCarouselCarou
 		navigate();
 	};
 
+	// A slide that played to the end always moves the carousel on, so the visitor lands on the start
+	// of the next object instead of the end of the one they just watched. Past the limit that next
+	// slide just doesn't start by itself.
 	const handleSlideEnded = () => {
-		if (autoAdvancedObjectsCountRef.current >= maxAutoAdvancedObjects) {
-			return;
-		}
 		autoAdvancedObjectsCountRef.current += 1;
 		if (autoAdvancedObjectsCountRef.current >= maxAutoAdvancedObjects) {
 			setIsAutoplayEnabled(false);
