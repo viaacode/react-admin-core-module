@@ -404,7 +404,7 @@ export const ContentPicker: FunctionComponent<ContentPickerProps> = ({
 						setIsTargetSelf(!isTargetSelf);
 						propertyChanged('target', isTargetSelf ? LinkTarget.Blank : LinkTarget.Self);
 					}}
-					disabled={!(selectedType.picker === 'TEXT_INPUT' ? value?.value : selectedItem)}
+					disabled={!(selectedType?.picker === 'TEXT_INPUT' ? value?.value : selectedItem)}
 				/>
 			</FlexItem>
 		);
