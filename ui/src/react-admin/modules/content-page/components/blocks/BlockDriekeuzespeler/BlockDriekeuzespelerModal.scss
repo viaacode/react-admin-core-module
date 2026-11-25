@@ -114,6 +114,7 @@ $close-hover-shade: #505050;
 	}
 
 	&__media {
+		position: relative;
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -126,16 +127,23 @@ $close-hover-shade: #505050;
 		overflow: hidden;
 	}
 
-	&__player,
+	// Pinned to the edges of the media box rather than sized with `height: 100%`. When `max-height`
+	// clamps the 16:9 box (a 13"/15" laptop screen), Safari resolves a percentage height against
+	// the unclamped aspect-ratio height. The player then overflows, and `overflow: hidden` cuts off
+	// its control bar. Absolute insets resolve against the box as drawn, in every browser.
+	// The player is chained onto FlowPlayer's own root class, which sets `position: relative` and
+	// would otherwise tie this on specificity and win or lose on stylesheet order alone.
+	&__player.c-video-player,
 	&__newspaper,
 	&__iiif-viewer {
+		position: absolute;
+		inset: 0;
 		width: 100%;
 		height: 100%;
 	}
 
 	// The viewer sizes itself to its container, so it needs one with a height of its own.
 	&__iiif-viewer {
-		position: relative;
 		overflow: hidden;
 	}
 
