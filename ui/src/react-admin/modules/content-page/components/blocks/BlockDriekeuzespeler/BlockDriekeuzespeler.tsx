@@ -24,6 +24,10 @@ import { BlockDriekeuzespelerModal } from './BlockDriekeuzespelerModal';
 
 import './BlockDriekeuzespeler.scss';
 
+// The active tile is 250 / 950 of the tile band scaled by 1.34 (see scss): ~450px on a 1280px page,
+// ~350px on a phone
+const TILE_IMAGE_DISPLAY_WIDTH = 450;
+
 export interface BlockDriekeuzespelerProps extends DefaultComponentProps {
 	title: string;
 	tileColors: DriekeuzespelerTileColors[];
@@ -131,6 +135,7 @@ export const BlockDriekeuzespeler: FunctionComponent<BlockDriekeuzespelerProps> 
 						<ImageOrAudioWaveForm
 							imageSrc={selected?.interest?.image || ieObject.thumbnailUrl}
 							imageAlt={ieObject.name}
+							imageDisplayWidth={TILE_IMAGE_DISPLAY_WIDTH}
 							backgroundColor={backgroundColor}
 							className={clsx(
 								'c-driekeuzespeler__thumbnail',

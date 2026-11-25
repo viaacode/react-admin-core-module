@@ -1,5 +1,5 @@
 import type { ButtonAction, ButtonType, IconName, SpacerOption } from '@viaa/avo2-components';
-import { Button, Image } from '@viaa/avo2-components';
+import { Button } from '@viaa/avo2-components';
 import clsx from 'clsx';
 import type { FunctionComponent, ReactElement } from 'react';
 import { createRef, useEffect, useState } from 'react';
@@ -15,6 +15,8 @@ import type { ContentPageWidth } from '~modules/content-page/types/content-pages
 import { generateSmartLink } from '~modules/shared/components/SmartLink/SmartLink';
 import type { DefaultComponentProps } from '~modules/shared/types/components';
 import { ContentPageIcon } from '~shared/components/Icon/Icon';
+import { OptimizedImage } from '~shared/components/OptimizedImage/OptimizedImage';
+import { SCREEN_IMAGE_WIDTH } from '~shared/helpers/images';
 import { BlockHeading } from '../BlockHeading/BlockHeading';
 
 import './BlockAvoImageTextBackground.scss';
@@ -187,8 +189,13 @@ export const BlockAvoImageTextBackground: FunctionComponent<BlockAvoImageTextBac
 			return null;
 		}
 		return (
-			<Image
+			// Banner across the full width of the page
+			<OptimizedImage
 				src={image}
+				displayWidth={SCREEN_IMAGE_WIDTH}
+				sizes="100vw"
+				// Background behind the text, the block has no alt text for it
+				alt=""
 				className={clsx(
 					'c-block-avo-image-text-background__image-wrapper',
 					`c-block-avo-image-text-background__image-wrapper--${backgroundAlignment}`

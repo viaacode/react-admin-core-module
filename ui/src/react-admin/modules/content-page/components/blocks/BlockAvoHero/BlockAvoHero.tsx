@@ -11,12 +11,18 @@ import { isString } from 'es-toolkit';
 import type { FunctionComponent, ReactNode } from 'react';
 import React from 'react';
 import { ContentPageIcon } from '~shared/components/Icon/Icon';
+import { OptimizedImg } from '~shared/components/OptimizedImage/OptimizedImage';
+import { getPrimaryImageUrl } from '~shared/helpers/images';
 import { defaultRenderLinkFunction } from '~shared/helpers/routing/link';
 
 import { BlockHeading } from '../BlockHeading/BlockHeading';
 
 import './BlockAvoHero.scss';
 import Html from '~modules/shared/components/Html/Html';
+
+// The media takes 55% of the page content width (~700px), the full width below 700px
+const MEDIA_DISPLAY_WIDTH = 720;
+const MEDIA_SIZES = '(max-width: 700px) 100vw, 720px';
 
 export interface BlockAvoHeroProps extends DefaultProps {
 	title: string;
@@ -100,14 +106,21 @@ export const BlockAvoHero: FunctionComponent<BlockAvoHeroProps> = ({
 				{!!src && (
 					<FlowPlayer
 						src={src}
-						poster={poster}
+						poster={getPrimaryImageUrl(poster, MEDIA_DISPLAY_WIDTH)}
 						type="video"
 						title={altText || 'Hero video'}
 						token={token}
 						dataPlayerId={dataPlayerId}
 					/>
 				)}
-				{!src && poster && <img src={poster} alt={altText || 'Hero afbeelding'} />}
+				{!src && poster && (
+					<OptimizedImg
+						src={poster}
+						displayWidth={MEDIA_DISPLAY_WIDTH}
+						sizes={MEDIA_SIZES}
+						alt={altText || 'Hero afbeelding'}
+					/>
+				)}
 			</div>
 		</div>
 	</Container>

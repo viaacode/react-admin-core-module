@@ -33,6 +33,7 @@ import { ErrorView } from '~shared/components/error/ErrorView';
 import Html from '~shared/components/Html/Html';
 import { GET_DEFAULT_PAGINATION_BAR_PROPS } from '~shared/components/PaginationBar/PaginationBar.consts';
 import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner';
+import { getBackgroundImage } from '~shared/helpers/images';
 import { defaultRenderLinkFunction } from '~shared/helpers/routing/link';
 import { SanitizePreset } from '~shared/helpers/sanitize/presets';
 import { BlockHeading } from '../BlockHeading/BlockHeading';
@@ -42,6 +43,10 @@ import './BlockPageOverview.scss';
 import { AvoCoreContentPickerType } from '@viaa/avo2-types';
 import type { ContentPageLabel } from '~modules/content-page-labels/content-page-label.types.ts';
 import { ContentPageLabelChip } from '~shared/components/ContentPageLabelChip/ContentPageLabelChip';
+
+// Grid thumbnails are 30% of the page content width (~390px), list thumbnails 40-50% (~640px).
+// Both span the full width of the screen on mobile, where phones load the 2x image.
+const THUMBNAIL_DISPLAY_WIDTH = 640;
 
 export interface BlockPageOverviewProps extends DefaultProps {
 	tabs?: { label: string; id: number }[];
@@ -245,6 +250,7 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 				itemWidth="30.7rem"
 				imageHeight="17.2rem"
 				imageWidth="100%"
+				imageDisplayWidth={THUMBNAIL_DISPLAY_WIDTH}
 				renderLink={renderLink}
 				fill="cover"
 				textAlign="left"
@@ -277,7 +283,10 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 												style={
 													page.thumbnailPath
 														? {
-																backgroundImage: `url(${page.thumbnailPath})`,
+																backgroundImage: getBackgroundImage(
+																	page.thumbnailPath,
+																	THUMBNAIL_DISPLAY_WIDTH
+																),
 															}
 														: {}
 												}

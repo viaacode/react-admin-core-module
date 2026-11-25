@@ -17,6 +17,7 @@ import { FlowPlayerWrapper } from '~shared/components/FlowPlayerWrapper/FlowPlay
 import type { LoadingInfo } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
 import { LoadingErrorLoadedComponent } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
 import { CustomError } from '~shared/helpers/custom-error';
+import { getMediaImageDisplayWidth, getPrimaryImageUrl } from '~shared/helpers/images';
 import { tHtml, tText } from '~shared/helpers/translation-functions';
 import { useLocation } from '~shared/hooks/useLocation.ts';
 
@@ -150,7 +151,7 @@ export const BlockAvoVideoWrapper: FunctionComponent<MediaPlayerWrapperProps> = 
 							: undefined
 					}
 					src={src}
-					poster={videoStill}
+					poster={getPrimaryImageUrl(videoStill, getMediaImageDisplayWidth(width).displayWidth)}
 					topRight={
 						showCopyrightNotice &&
 						org && (
