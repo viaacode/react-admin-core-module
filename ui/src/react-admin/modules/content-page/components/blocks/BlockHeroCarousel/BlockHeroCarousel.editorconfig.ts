@@ -1,5 +1,9 @@
 import { AvoCoreContentPickerType } from '@viaa/avo2-types';
-import type { HeroCarouselBlockComponentState } from '~content-blocks/BlockHeroCarousel/BlockHeroCarousel.types.ts';
+import {
+	DEFAULT_HERO_CAROUSEL_AUTOPLAY,
+	HeroCarouselAutoplay,
+	type HeroCarouselBlockComponentState,
+} from '~content-blocks/BlockHeroCarousel/BlockHeroCarousel.types.ts';
 import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, TEXT_FIELD } from '~content-blocks/defaults';
 import { IE_OBJECT_WITH_SNIPPET_TIME_FIELDS } from '~modules/content-page/helpers/snippet-time-fields.ts';
 import {
@@ -30,8 +34,36 @@ export const INITIAL_HERO_CAROUSEL_COMPONENTS_STATE = () => ({
 	backgroundImage: '',
 	title: '',
 	subtitles: [],
+	autoplay: DEFAULT_HERO_CAROUSEL_AUTOPLAY,
 	elements: [INITIAL_HERO_CAROUSEL_ELEMENT_STATE()],
 });
+
+const GET_HERO_CAROUSEL_AUTOPLAY_OPTIONS = () => [
+	{
+		label: tText(
+			'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel___autoplay-aan',
+			undefined,
+			[HET_ARCHIEF]
+		),
+		value: HeroCarouselAutoplay.On,
+	},
+	{
+		label: tText(
+			'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel___autoplay-eerste-3',
+			undefined,
+			[HET_ARCHIEF]
+		),
+		value: HeroCarouselAutoplay.First3,
+	},
+	{
+		label: tText(
+			'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel___autoplay-uit',
+			undefined,
+			[HET_ARCHIEF]
+		),
+		value: HeroCarouselAutoplay.Off,
+	},
+];
 
 export const INITIAL_HERO_CAROUSEL_BLOCK_STATE = (): DefaultContentBlockState => ({
 	...BLOCK_STATE_DEFAULTS(),
@@ -126,6 +158,17 @@ export const HERO_CAROUSEL_CONFIG = (position = 0): ContentBlockConfig => ({
 					[HET_ARCHIEF]
 				)
 			),
+			autoplay: {
+				label: tText(
+					'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel___autoplay',
+					undefined,
+					[HET_ARCHIEF]
+				),
+				editorType: ContentBlockEditor.Select,
+				editorProps: {
+					options: GET_HERO_CAROUSEL_AUTOPLAY_OPTIONS(),
+				},
+			},
 			elements: {
 				label: tText(
 					'modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel___content-item',

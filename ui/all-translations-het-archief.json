@@ -7346,7 +7346,7 @@
     "location": "modules/maintenance-alerts/views/maintenance-alerts-edit-form",
     "key": "titel-melding-input-aria-label",
     "language": "nl",
-    "value": "Titel melding [INPUT_ARIA_LABEL]",
+    "value": "Titel melding",
     "value_type": "TEXT"
   },
   {
@@ -7356,7 +7356,7 @@
     "location": "modules/maintenance-alerts/views/maintenance-alerts-edit-form",
     "key": "titel-melding-input-aria-label",
     "language": "en",
-    "value": "Titel melding [INPUT_ARIA_LABEL]",
+    "value": "Titel melding",
     "value_type": "TEXT"
   },
   {
@@ -18464,6 +18464,66 @@
     "app": "HET_ARCHIEF",
     "component": "ADMIN_CORE",
     "location": "modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel",
+    "key": "autoplay-aan",
+    "language": "nl",
+    "value": "Aan",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel",
+    "key": "autoplay-aan",
+    "language": "en",
+    "value": "Aan",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel",
+    "key": "autoplay-eerste-3",
+    "language": "nl",
+    "value": "Eerste 3",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel",
+    "key": "autoplay-eerste-3",
+    "language": "en",
+    "value": "Eerste 3",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel",
+    "key": "autoplay-uit",
+    "language": "nl",
+    "value": "Uit",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel",
+    "key": "autoplay-uit",
+    "language": "en",
+    "value": "Uit",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel",
     "key": "hero-carousel",
     "language": "nl",
     "value": "Hero carrousel",
@@ -18657,6 +18717,26 @@
     "key": "aria-label-verplicht",
     "language": "en",
     "value": "aria label required",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel",
+    "key": "autoplay",
+    "language": "nl",
+    "value": "Autoplay",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-hero-carousel/block-hero-carousel",
+    "key": "autoplay",
+    "language": "en",
+    "value": "Autoplay",
     "value_type": "TEXT"
   },
   {
@@ -21576,7 +21656,7 @@
     "location": "modules/content-page/components/blocks/block-objects-grid/block-objects-grid",
     "key": "toon-alle-objecten-voor-deze-zoekopdracht",
     "language": "en",
-    "value": "Toon alle objecten voor deze zoekopdracht",
+    "value": "Show all objects for this search query",
     "value_type": "TEXT"
   },
   {
@@ -24336,7 +24416,7 @@
     "location": "modules/content-page/components/blocks/block-theme-reels/block-theme-reels",
     "key": "meer-suggesties",
     "language": "en",
-    "value": "Meer suggesties",
+    "value": "Show more",
     "value_type": "TEXT"
   },
   {
@@ -24366,7 +24446,7 @@
     "location": "modules/content-page/components/blocks/block-theme-reels/block-theme-reel-section",
     "key": "toon-alle",
     "language": "nl",
-    "value": "Toon alle",
+    "value": "Bekijk thema",
     "value_type": "TEXT"
   },
   {
@@ -24376,7 +24456,7 @@
     "location": "modules/content-page/components/blocks/block-theme-reels/block-theme-reel-section",
     "key": "toon-alle",
     "language": "en",
-    "value": "Toon alle",
+    "value": "Explore theme",
     "value_type": "TEXT"
   },
   {
@@ -25657,6 +25737,26 @@
     "key": "pagina-niet-gevonden",
     "language": "en",
     "value": "Page not found",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/cookie-policy/cookie-policy",
+    "key": "pas-cookie-instellingen-aan",
+    "language": "nl",
+    "value": "Pas cookie-instellingen aan.",
+    "value_type": "TEXT"
+  },
+  {
+    "id": "",
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/cookie-policy/cookie-policy",
+    "key": "pas-cookie-instellingen-aan",
+    "language": "en",
+    "value": "Change cookie settings.",
     "value_type": "TEXT"
   },
   {
@@ -30366,7 +30466,7 @@
     "location": "modules/account/views/account-my-application-list",
     "key": "aanvraaglijst-meta-titel",
     "language": "nl",
-    "value": "Aanvraaglijst meta titel",
+    "value": "Mijn aanvraaglijst",
     "value_type": "TEXT"
   },
   {
@@ -30376,7 +30476,7 @@
     "location": "modules/account/views/account-my-application-list",
     "key": "aanvraaglijst-meta-titel",
     "language": "en",
-    "value": "Request list meta title",
+    "value": "My request list",
     "value_type": "TEXT"
   },
   {
@@ -46296,7 +46396,7 @@
     "location": "modules/home/components/visitor-space-cards-with-search/visitor-space-cards-with-search",
     "key": "toon-alle-total-bezoekerruimtes",
     "language": "en",
-    "value": "Toon alle {{total}} bezoekerruimtes",
+    "value": "Show all {{total}} visitor spaces",
     "value_type": "TEXT"
   },
   {
@@ -47306,7 +47406,7 @@
     "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata",
     "key": "deze-titel-en-samenvatting-zijn-automatisch-gegenereerd-met-ai-en-kunnen-fouten-bevatten-meer-info",
     "language": "nl",
-    "value": "<p>Deze titel en samenvatting zijn automatisch gegenereerd met AI en kunnen fouten bevatten. <a href=\"/vragen\">Meer info</a></p>",
+    "value": "<p>Deze titel en samenvatting zijn automatisch gegenereerd met AI en kunnen fouten bevatten. <a target=\"_self\" rel=\"noopener noreferrer nofollow\" href=\"https://hetarchief.be/vragen?item=%2Fhoe-kwamen-de-ai-titels-en-beschrijvingen-tot-stand-kan-ik-fouten-of-onduidelijkheden-melden&amp;label=Materiaal\">Meer info</a></p>",
     "value_type": "HTML"
   },
   {
@@ -47316,7 +47416,7 @@
     "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata",
     "key": "deze-titel-en-samenvatting-zijn-automatisch-gegenereerd-met-ai-en-kunnen-fouten-bevatten-meer-info",
     "language": "en",
-    "value": "<p>This title and description were automatically generated using AI and may contain errors. <a target=\"_blank\" rel=\"noopener noreferrer nofollow\" href=\"/vragen\">Meer info</a></p>",
+    "value": "<p>This title and description were automatically generated using AI and may contain errors. <a target=\"_self\" rel=\"noopener noreferrer nofollow\" href=\"https://hetarchief.be/en/questions?item=%2Fhow-were-the-ai-generated-titles-and-descriptions-created-can-i-report-mistakes-or-unclear-information&amp;label=Digital+material\">More&nbsp;info</a></p>",
     "value_type": "HTML"
   },
   {
@@ -47366,7 +47466,7 @@
     "location": "modules/ie-objects/components/object-detail-page-metadata-tab/object-detail-page-metadata-tab",
     "key": "deze-bronvermelding-is-automatisch-gegenereerd-en-kan-fouten-bevatten-aria",
     "language": "nl",
-    "value": "Deze bronvermelding is automatisch gegenereerd en kan fouten bevatten. [ARIA]",
+    "value": "Deze bronvermelding is automatisch gegenereerd en kan fouten bevatten.",
     "value_type": "TEXT"
   },
   {
@@ -47376,7 +47476,7 @@
     "location": "modules/ie-objects/components/object-detail-page-metadata-tab/object-detail-page-metadata-tab",
     "key": "deze-bronvermelding-is-automatisch-gegenereerd-en-kan-fouten-bevatten-aria",
     "language": "en",
-    "value": "Deze bronvermelding is automatisch gegenereerd en kan fouten bevatten. [ARIA]",
+    "value": "This source citation is automatically generated and can contain mistakes. ",
     "value_type": "TEXT"
   },
   {
@@ -47386,7 +47486,7 @@
     "location": "modules/ie-objects/components/object-detail-page-metadata-tab/object-detail-page-metadata-tab",
     "key": "p-deze-bronvermelding-is-automatisch-gegenereerd-en-kan-fouten-bevatten-a-href-vragen-item-2-fhoe-vermeld-ik-de-bronnen-die-ik-vind-via-hetarchief-be-amp-label-rechten-20-en-20-gebruik-amp-page-0-target-meer-info-a-p",
     "language": "nl",
-    "value": "<p>Deze bronvermelding is automatisch gegenereerd en kan fouten bevatten. <a href=\"/vragen?item=%2Fhoe-vermeld-ik-de-bronnen-die-ik-vind-via-hetarchief-be&amp;label=Rechten%20en%20gebruik&amp;page=0\" target=\"\">Meer info</a></p>",
+    "value": "<p>Deze bronvermelding is automatisch gegenereerd en kan fouten bevatten. <a target=\"_blank\" rel=\"noopener noreferrer nofollow\" href=\"/vragen?item=%2Fhoe-vermeld-ik-de-bronnen-die-ik-vind-via-hetarchief-be&amp;label=Rechten%20en%20gebruik&amp;page=0\">Meer info</a></p>",
     "value_type": "HTML"
   },
   {
@@ -47396,7 +47496,7 @@
     "location": "modules/ie-objects/components/object-detail-page-metadata-tab/object-detail-page-metadata-tab",
     "key": "p-deze-bronvermelding-is-automatisch-gegenereerd-en-kan-fouten-bevatten-a-href-vragen-item-2-fhoe-vermeld-ik-de-bronnen-die-ik-vind-via-hetarchief-be-amp-label-rechten-20-en-20-gebruik-amp-page-0-target-meer-info-a-p",
     "language": "en",
-    "value": "<p>Deze bronvermelding is automatisch gegenereerd en kan fouten bevatten. <a href=\"/vragen?item=%2Fhoe-vermeld-ik-de-bronnen-die-ik-vind-via-hetarchief-be&amp;label=Rechten%20en%20gebruik&amp;page=0\" target=\"\">Meer info</a></p>",
+    "value": "<p>This source citation is automatically generated and can contain mistakes. <a target=\"_blank\" rel=\"noopener noreferrer nofollow\" href=\"https://hetarchief.be/en/questions?item=%2Fhow-do-i-cite-sources-i-found-on-thearchives-be&amp;label=Rights+and+usage\">More info</a></p>",
     "value_type": "HTML"
   },
   {
@@ -48416,7 +48516,7 @@
     "location": "modules/ie-objects/object-detail-page",
     "key": "deze-ocr-kan-fouten-bevatten-a-href-ocr-betrouwbaarheid-info-meer-info-vind-je-hier-a",
     "language": "en",
-    "value": "<p>Deze OCR kan fouten bevatten. <a href=\"/vragen?item=%2Fhoe-betrouwbaar-is-tekstherkenning-ocr-op-hetarchief-be&amp;label=Zoeken&amp;page=0\" target=\"\">Meer info vind je hier</a>.</p>",
+    "value": "<p>This OCR may contain errors. <a target=\"_blank\" rel=\"noopener noreferrer nofollow\" href=\"https://hetarchief.be/en/questions?item=%2Fhow-reliable-is-the-text-recognition-ocr-on-thearchives-be&amp;label=Search\">More information can be found here</a></p>",
     "value_type": "HTML"
   },
   {

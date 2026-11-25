@@ -165,7 +165,7 @@ const ContentBlockRenderer: FunctionComponent<ContentBlockPreviewProps> = ({
 	// the block it covers can carry one too.
 	const getZIndex = (): number | undefined => {
 		if (overlayNextBlock) {
-			return 3;
+			return 2;
 		}
 		if (blockState?.headerBackgroundColor !== Color.Transparent) {
 			return 1;

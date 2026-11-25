@@ -4,6 +4,23 @@ import type {
 	MediaItemComponentState,
 } from '~modules/content-page/types/content-block.types.ts';
 
+/**
+ * How the carousel plays its slides by itself:
+ * - ON: every slide starts playing and the carousel moves on when it ends, endlessly
+ * - FIRST_3: like ON for the first 3 objects, then the carousel moves to the next slide without
+ *   starting it and never moves on by itself again
+ * - OFF: no slide starts by itself and the carousel never moves on by itself
+ * In every mode, a slide the visitor navigates to starts playing.
+ */
+export enum HeroCarouselAutoplay {
+	On = 'ON',
+	First3 = 'FIRST_3',
+	Off = 'OFF',
+}
+
+// Blocks saved before the option existed have no value; they keep the behavior they had then.
+export const DEFAULT_HERO_CAROUSEL_AUTOPLAY = HeroCarouselAutoplay.First3;
+
 export interface HeroCarouselBlockComponentState extends MediaItemComponentState {
 	startTime?: string;
 	endTime?: string;

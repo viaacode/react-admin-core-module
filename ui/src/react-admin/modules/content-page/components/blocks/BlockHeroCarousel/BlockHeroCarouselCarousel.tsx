@@ -10,7 +10,10 @@ import React, {
 	useRef,
 	useState,
 } from 'react';
-import type { HeroCarouselSlideItem } from '~content-blocks/BlockHeroCarousel/BlockHeroCarousel.types.ts';
+import {
+	HeroCarouselAutoplay,
+	type HeroCarouselSlideItem,
+} from '~content-blocks/BlockHeroCarousel/BlockHeroCarousel.types.ts';
 import { BlockHeroCarouselActiveSlide } from '~content-blocks/BlockHeroCarousel/BlockHeroCarouselActiveSlide.tsx';
 import { BlockHeroCarouselInactiveSlide } from '~content-blocks/BlockHeroCarousel/BlockHeroCarouselInactiveSlide.tsx';
 import { CarouselButtons } from '~modules/content-page/components/CarouselButtons/CarouselButtons.tsx';
@@ -30,15 +33,28 @@ import './BlockHeroCarousel.scss';
 import { IeObjectMetadata } from '~modules/content-page/components/IeObjectMetadata/IeObjectMetadata.tsx';
 import { mapDcTermsFormatToSimpleType } from '~shared/helpers/map-format-to-type.ts';
 
+// How many objects may play to the end and move the carousel on by themselves, per autoplay mode.
+// Once that many have, the carousel moves to the next slide without starting it and leaves the
+// rest to the visitor: an endless loop of autoplaying media is distracting, and keeps streaming
+// for a visitor who may have long since stopped looking.
+const MAX_AUTO_ADVANCED_OBJECTS: Record<HeroCarouselAutoplay, number> = {
+	[HeroCarouselAutoplay.On]: Number.POSITIVE_INFINITY,
+	[HeroCarouselAutoplay.First3]: 3,
+	[HeroCarouselAutoplay.Off]: 0,
+};
+
 export interface BlockHeroCarouselCarouselProps extends DefaultComponentProps {
 	elements: HeroCarouselSlideItem[];
 	isLoading?: boolean;
+	autoplay: HeroCarouselAutoplay;
 }
 
 export const BlockHeroCarouselCarousel: FunctionComponent<BlockHeroCarouselCarouselProps> = ({
 	elements,
 	isLoading,
+	autoplay,
 }): ReactElement => {
+	const maxAutoAdvancedObjects = MAX_AUTO_ADVANCED_OBJECTS[autoplay];
 	const { strip, startIndex, itemsLength } = useMemo(
 		() => buildInfiniteStrip(elements),
 		[elements]
@@ -54,6 +70,14 @@ export const BlockHeroCarouselCarousel: FunctionComponent<BlockHeroCarouselCarou
 	const pxPerRemRef = useRef<number>(pxPerRem);
 	const trackRef = useRef<HTMLDivElement | null>(null);
 	const [isMuted, setIsMuted] = useState<boolean>(true);
+	// How many objects have played to the end and moved the carousel on by themselves. Once that
+	// reaches the limit the carousel never moves on by itself again: a slide the visitor navigates
+	// to still starts playing, but it just stops when it's done.
+	const autoAdvancedObjectsCountRef = useRef<number>(0);
+	// Off for the slide the carousel starts on when autoplay is off, and for the slide it lands on
+	// when the limit is reached, so those wait for the visitor to press play. Any navigation by the
+	// visitor turns it back on.
+	const [isAutoplayEnabled, setIsAutoplayEnabled] = useState<boolean>(maxAutoAdvancedObjects > 0);
 
 	useEffect(() => {
 		pxPerRemRef.current = pxPerRem;
@@ -78,6 +102,23 @@ export const BlockHeroCarouselCarousel: FunctionComponent<BlockHeroCarouselCarou
 	const goNext = () => setActiveIndex((current) => current + 1);
 	const goPrev = () => setActiveIndex((current) => current - 1);
 
+	// Navigation started by the visitor: whatever slide they land on starts playing.
+	const navigateByVisitor = (navigate: () => void) => {
+		setIsAutoplayEnabled(true);
+		navigate();
+	};
+
+	const handleSlideEnded = () => {
+		if (autoAdvancedObjectsCountRef.current >= maxAutoAdvancedObjects) {
+			return;
+		}
+		autoAdvancedObjectsCountRef.current += 1;
+		if (autoAdvancedObjectsCountRef.current >= maxAutoAdvancedObjects) {
+			setIsAutoplayEnabled(false);
+		}
+		goNext();
+	};
+
 	// What a slide shows before it has any object content of its own. Both leaf slides get to
 	// assume a resolved object, so neither has to carry these states.
 	const renderSlideContent = (item: HeroCarouselSlideItem, isSettledActive: boolean) => {
@@ -96,7 +137,8 @@ export const BlockHeroCarouselCarousel: FunctionComponent<BlockHeroCarouselCarou
 		return isSettledActive ? (
 			<BlockHeroCarouselActiveSlide
 				item={item}
-				onEnded={goNext}
+				onEnded={handleSlideEnded}
+				isAutoplayEnabled={isAutoplayEnabled}
 				isMuted={isMuted}
 				onMutedChange={setIsMuted}
 			/>
@@ -110,8 +152,8 @@ export const BlockHeroCarouselCarousel: FunctionComponent<BlockHeroCarouselCarou
 			<div className={clsx('c-block-hero-carousel__carousel-viewport')}>
 				<CarouselButtons
 					className={'c-block-hero-carousel__carousel-navigation'}
-					onPrev={goPrev}
-					onNext={goNext}
+					onPrev={() => navigateByVisitor(goPrev)}
+					onNext={() => navigateByVisitor(goNext)}
 				/>
 				<div
 					ref={trackRef}
@@ -143,7 +185,11 @@ export const BlockHeroCarouselCarousel: FunctionComponent<BlockHeroCarouselCarou
 							<div
 								// biome-ignore lint/suspicious/noArrayIndexKey: the strip contains clones of the same items, the position is the slide identity
 								key={`carousel-slide__${item?.schemaIdentifier}__${index}`}
-								onClick={() => goToSlide(index)}
+								onClick={() => {
+									if (index !== activeIndex) {
+										navigateByVisitor(() => goToSlide(index));
+									}
+								}}
 								aria-hidden={isClone ? true : undefined}
 								className={clsx(
 									'c-block-hero-carousel__carousel-slide',
