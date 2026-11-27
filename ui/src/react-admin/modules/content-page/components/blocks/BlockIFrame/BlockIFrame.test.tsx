@@ -1,11 +1,25 @@
-import { cleanup, render } from '@testing-library/react';
+import { act, cleanup, render } from '@testing-library/react';
 import React from 'react';
-import { afterEach, describe, expect, it } from 'vitest';
+import { afterEach, beforeAll, describe, expect, it } from 'vitest';
+import { AdminConfigManager } from '~core/config/config.class';
+import type { AdminConfig } from '~core/config/config.types';
 
-import { BlockIFrame } from './BlockIFrame';
+import { BlockIFrame, getRequiredCookieConsent } from './BlockIFrame';
+
+function setCookiebot(cookiebot: unknown) {
+	(window as unknown as { Cookiebot?: unknown }).Cookiebot = cookiebot;
+}
+
+beforeAll(() => {
+	AdminConfigManager.setConfig({
+		locale: 'nl',
+		services: { i18n: { tText: (key: string) => key } },
+	} as unknown as AdminConfig);
+});
 
 afterEach(() => {
 	cleanup();
+	setCookiebot(undefined);
 });
 
 describe('<BlockIFrame />', () => {
@@ -46,5 +60,58 @@ describe('<BlockIFrame />', () => {
 				expect(iframeElement).toHaveAttribute(key, value.toString());
 			}
 		}
+	});
+});
+
+describe('getRequiredCookieConsent', () => {
+	it('Should require statistics and marketing cookies for vimeo and youtube', () => {
+		expect(getRequiredCookieConsent('https://player.vimeo.com/video/1247911000')).toEqual([
+			'statistics',
+			'marketing',
+		]);
+		expect(getRequiredCookieConsent('player.vimeo.com/video/1247911000')).toEqual([
+			'statistics',
+			'marketing',
+		]);
+		expect(getRequiredCookieConsent('//www.youtube-nocookie.com/embed/abc')).toEqual([
+			'statistics',
+			'marketing',
+		]);
+	});
+
+	it('Should not require consent for other hosts', () => {
+		expect(getRequiredCookieConsent('https://hetarchief.be/embed')).toEqual([]);
+		expect(getRequiredCookieConsent('https://notvimeo.com/video/1')).toEqual([]);
+		expect(getRequiredCookieConsent(undefined)).toEqual([]);
+	});
+});
+
+describe('<BlockIFrame /> cookie consent', () => {
+	const vimeoSrc = 'https://player.vimeo.com/video/1247911000';
+
+	it('Should show a placeholder instead of the iframe without consent', () => {
+		setCookiebot({ consent: { statistics: false, marketing: false }, renew: () => {} });
+		const { container } = render(<BlockIFrame title="test" src={vimeoSrc} />);
+		expect(container.querySelector('iframe')).toBeNull();
+		expect(container.querySelector('.c-block-iframe__consent-message')).not.toBeNull();
+	});
+
+	it('Should load the iframe once the user accepts the cookies', () => {
+		const cookiebot = { consent: { statistics: false, marketing: false }, renew: () => {} };
+		setCookiebot(cookiebot);
+		const { container } = render(<BlockIFrame title="test" src={vimeoSrc} />);
+		expect(container.querySelector('iframe')).toBeNull();
+
+		act(() => {
+			cookiebot.consent = { statistics: true, marketing: true };
+			window.dispatchEvent(new Event('CookiebotOnAccept'));
+		});
+		expect(container.querySelector('iframe')).toHaveAttribute('src', vimeoSrc);
+	});
+
+	it('Should load iframes of other hosts without consent', () => {
+		setCookiebot({ consent: { statistics: false, marketing: false }, renew: () => {} });
+		const { container } = render(<BlockIFrame title="test" src="https://hetarchief.be/embed" />);
+		expect(container.querySelector('iframe')).toHaveAttribute('src', 'https://hetarchief.be/embed');
 	});
 });
