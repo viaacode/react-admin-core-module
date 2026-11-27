@@ -14,8 +14,8 @@ import type { LoadingInfo } from '~shared/components/LoadingErrorLoadedComponent
 import { LoadingErrorLoadedComponent } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
 import { GET_LANGUAGE_NAMES } from '~shared/consts/language-names';
 import { CustomError } from '~shared/helpers/custom-error';
-import { isAvo } from '~shared/helpers/is-avo';
 import { isHetArchief } from '~shared/helpers/is-hetarchief';
+import { isMultiLanguageEnabled } from '~shared/helpers/is-multi-language-enabled';
 import { navigateFunc } from '~shared/helpers/navigate-fnc';
 import {
 	renderDateDetailRows,
@@ -131,6 +131,46 @@ export const ContentPageLabelDetail: FunctionComponent<ContentPageLabelDetailPro
 		);
 	};
 
+	/**
+	 * Rows with the links between labels in different languages (ARC-4200)
+	 * A dutch label shows its translation per other language, a translated label shows its dutch version
+	 */
+	const renderTranslationRows = (contentPageLabel: ContentPageLabel) => {
+		if (!isMultiLanguageEnabled()) {
+			return null;
+		}
+
+		if (contentPageLabel.language !== Locale.Nl) {
+			return renderDetailRow(
+				renderLabelLink(contentPageLabel.nl_parent_label),
+				tText(
+					'modules/content-page-labels/views/content-page-label-detail___nederlandse-versie',
+					{},
+					[App.HET_ARCHIEF]
+				)
+			);
+		}
+
+		return otherLanguages.map((language) => {
+			const translatedLabel = (contentPageLabel.translated_labels || []).find(
+				(label) => label.language === language
+			);
+			const rowLabel =
+				language === Locale.En
+					? tText(
+							'modules/content-page-labels/views/content-page-label-detail___engelse-versie',
+							{},
+							[App.HET_ARCHIEF]
+						)
+					: GET_LANGUAGE_NAMES()[language] || String(language).toUpperCase();
+			return (
+				<Fragment key={`translated-label-${language}`}>
+					{renderDetailRow(renderLabelLink(translatedLabel), rowLabel)}
+				</Fragment>
+			);
+		});
+	};
+
 	const renderDetailPage = () => {
 		if (!contentPageLabelInfo) {
 			return;
@@ -159,8 +199,7 @@ export const ContentPageLabelDetail: FunctionComponent<ContentPageLabelDetailPro
 					{renderDetailRow(
 						contentPageLabelInfo.language,
 						tText('modules/content-page-labels/views/content-page-label-detail___taal'),
-						// Avo has no language specific labels
-						!isAvo()
+						isMultiLanguageEnabled()
 					)}
 					{renderDetailRow(
 						linkTo ? (
@@ -188,37 +227,7 @@ export const ContentPageLabelDetail: FunctionComponent<ContentPageLabelDetailPro
 						),
 						isHetArchief()
 					)}
-					{/* Links between labels in different languages (ARC-4200), avo has no language specific labels */}
-					{!isAvo() &&
-						contentPageLabelInfo.language !== Locale.Nl &&
-						renderDetailRow(
-							renderLabelLink(contentPageLabelInfo.nl_parent_label),
-							tText(
-								'modules/content-page-labels/views/content-page-label-detail___nederlandse-versie',
-								{},
-								[App.HET_ARCHIEF]
-							)
-						)}
-					{!isAvo() &&
-						contentPageLabelInfo.language === Locale.Nl &&
-						otherLanguages.map((language) => (
-							<Fragment key={`translated-label-${language}`}>
-								{renderDetailRow(
-									renderLabelLink(
-										(contentPageLabelInfo.translated_labels || []).find(
-											(translatedLabel) => translatedLabel.language === language
-										)
-									),
-									language === Locale.En
-										? tText(
-												'modules/content-page-labels/views/content-page-label-detail___engelse-versie',
-												{},
-												[App.HET_ARCHIEF]
-											)
-										: GET_LANGUAGE_NAMES()[language] || String(language).toUpperCase()
-								)}
-							</Fragment>
-						))}
+					{renderTranslationRows(contentPageLabelInfo)}
 					{renderDateDetailRows(contentPageLabelInfo, [
 						[
 							'created_at',

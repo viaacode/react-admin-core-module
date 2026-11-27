@@ -36,7 +36,7 @@ import type { LoadingInfo } from '~shared/components/LoadingErrorLoadedComponent
 import { LoadingErrorLoadedComponent } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
 import { GET_LANGUAGE_NAMES } from '~shared/consts/language-names';
 import { CustomError } from '~shared/helpers/custom-error';
-import { isAvo } from '~shared/helpers/is-avo';
+import { isMultiLanguageEnabled } from '~shared/helpers/is-multi-language-enabled';
 import { isHetArchief } from '~shared/helpers/is-hetarchief';
 import { navigateFunc } from '~shared/helpers/navigate-fnc';
 import { buildLink, navigate } from '~shared/helpers/routing/link';
@@ -81,8 +81,8 @@ export const ContentPageLabelEdit: FunctionComponent<ContentPageLabelEditProps> 
 
 	const isCreatePage = !contentPageLabelId;
 
-	// Avo has no language specific labels, only hetarchief shows the language fields
-	const showLanguageFields = !isAvo();
+	// Avo has no language specific labels, so it does not enable multi language
+	const showLanguageFields = isMultiLanguageEnabled();
 	const isDutchLabel = contentPageLabelInfo?.language === Locale.Nl;
 	const otherLanguages: Locale[] = (allLanguages || [])
 		.map((languageInfo) => languageInfo.languageCode as Locale)

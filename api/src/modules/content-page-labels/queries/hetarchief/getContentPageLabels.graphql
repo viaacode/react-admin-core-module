@@ -16,6 +16,11 @@ query getContentPageLabels(
 			label
 			language
 		}
+		translated_labels {
+			id
+			label
+			language
+		}
 		created_at
 		updated_at
 		id

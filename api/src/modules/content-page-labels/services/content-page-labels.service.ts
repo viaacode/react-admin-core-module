@@ -74,6 +74,7 @@ export class ContentPageLabelsService {
 					color: (labelObj as HetArchiefContentPageLabel)?.color,
 					nl_parent_label_id: (labelObj as HetArchiefContentPageLabel)?.nl_parent_label_id,
 					nl_parent_label: (labelObj as HetArchiefContentPageLabel)?.nl_parent_label,
+					translated_labels: (labelObj as HetArchiefContentPageLabel)?.translated_labels,
 					created_at: labelObj?.created_at,
 					updated_at: labelObj?.updated_at,
 				})

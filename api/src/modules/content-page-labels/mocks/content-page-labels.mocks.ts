@@ -9,6 +9,7 @@ import { Locale } from '../../translations';
 import { type ContentPageLabelDto } from '../dto/content-page-label.dto';
 
 export const mockGqlContentPageLabel1: GetContentPageLabelsQuery['app_content_label'][0] = {
+	translated_labels: [],
 	label: 'Gebruik van het materiaal',
 	content_type: Lookup_App_Content_Type_Enum.FaqItem,
 	language: Locale.Nl,
@@ -46,7 +47,7 @@ export const mockGqlContentPageLabel2: GetContentPageLabelByIdQuery['app_content
 // Avo has no color column on its content page labels, so the mapped color stays undefined
 export const mockGqlContentPageLabelWithoutColor: Omit<
 	GetContentPageLabelsQuery['app_content_label'][0],
-	'color' | 'nl_parent_label_id' | 'nl_parent_label'
+	'color' | 'nl_parent_label_id' | 'nl_parent_label' | 'translated_labels'
 > = {
 	label: 'Gebruik van het materiaal',
 	content_type: Lookup_App_Content_Type_Enum.FaqItem,
