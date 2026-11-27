@@ -10,8 +10,12 @@ import {
 	Spacer,
 	TextInput,
 } from '@viaa/avo2-components';
-import { type AvoContentPageType, AvoCoreContentPickerType } from '@viaa/avo2-types';
-import { isNil } from 'es-toolkit';
+import {
+	type AvoContentPageType,
+	AvoCoreContentPickerType,
+	AvoSearchOrderDirection,
+} from '@viaa/avo2-types';
+import { groupBy, isNil } from 'es-toolkit';
 import type { FunctionComponent } from 'react';
 import React, { useCallback, useEffect, useState } from 'react';
 import { AdminConfigManager, ToastType } from '~core/config';
@@ -32,8 +36,8 @@ import type { LoadingInfo } from '~shared/components/LoadingErrorLoadedComponent
 import { LoadingErrorLoadedComponent } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
 import { GET_LANGUAGE_NAMES } from '~shared/consts/language-names';
 import { CustomError } from '~shared/helpers/custom-error';
-import { isHetArchief } from '~shared/helpers/is-hetarchief';
 import { isMultiLanguageEnabled } from '~shared/helpers/is-multi-language-enabled';
+import { isHetArchief } from '~shared/helpers/is-hetarchief';
 import { navigateFunc } from '~shared/helpers/navigate-fnc';
 import { buildLink, navigate } from '~shared/helpers/routing/link';
 import { showToast } from '~shared/helpers/show-toast';
@@ -77,13 +81,133 @@ export const ContentPageLabelEdit: FunctionComponent<ContentPageLabelEditProps> 
 
 	const isCreatePage = !contentPageLabelId;
 
+	// Avo has no language specific labels, so it does not enable multi language
+	const showLanguageFields = isMultiLanguageEnabled();
+	const isDutchLabel = contentPageLabelInfo?.language === Locale.Nl;
+	const otherLanguages: Locale[] = (allLanguages || [])
+		.map((languageInfo) => languageInfo.languageCode as Locale)
+		.filter((languageCode) => languageCode !== Locale.Nl);
+
+	// Links between labels in different languages (ARC-4200), used to translate the label filter in the url
+	// when the user switches the language of the website
+	// - a dutch label shows a picker per other language with the labels that link to it
+	// - a label in another language shows a picker with its dutch version
+	const [labelOptionsByLanguage, setLabelOptionsByLanguage] = useState<
+		Partial<Record<Locale, ContentPageLabel[]>>
+	>({});
+
+	useEffect(() => {
+		if (
+			!showLanguageFields ||
+			!contentPageLabelInfo?.content_type ||
+			!contentPageLabelInfo?.language
+		) {
+			setLabelOptionsByLanguage({});
+			return;
+		}
+		ContentPageLabelService.fetchContentPageLabels(
+			0,
+			'label',
+			AvoSearchOrderDirection.ASC,
+			{
+				language: isDutchLabel ? { _neq: Locale.Nl } : { _eq: Locale.Nl },
+				content_type: { _eq: contentPageLabelInfo.content_type },
+			},
+			1000
+		)
+			.then(([labels]) => {
+				setLabelOptionsByLanguage(groupBy(labels, (label) => label.language));
+			})
+			.catch((err) => {
+				console.error(
+					new CustomError('Failed to get the content page labels in the other languages', err, {
+						contentType: contentPageLabelInfo.content_type,
+						isDutchLabel,
+					})
+				);
+			});
+	}, [
+		showLanguageFields,
+		isDutchLabel,
+		contentPageLabelInfo?.content_type,
+		contentPageLabelInfo?.language,
+	]);
+
+	const getLanguageVersionLabel = (language: Locale): string => {
+		if (language === Locale.Nl) {
+			return tText(
+				'modules/content-page-labels/views/content-page-label-edit___nederlandse-versie',
+				{},
+				[App.HET_ARCHIEF]
+			);
+		}
+		if (language === Locale.En) {
+			return tText(
+				'modules/content-page-labels/views/content-page-label-edit___engelse-versie',
+				{},
+				[App.HET_ARCHIEF]
+			);
+		}
+		return GET_LANGUAGE_NAMES()[language] || String(language).toUpperCase();
+	};
+
+	const getLanguageVersionOptions = (language: Locale): SelectOption[] => [
+		{
+			label: tText(
+				'modules/content-page-labels/views/content-page-label-edit___geen-vertaling',
+				{},
+				[App.HET_ARCHIEF]
+			),
+			value: '',
+		},
+		...(labelOptionsByLanguage[language] || []).map((label): SelectOption => {
+			// Mention when an english label is already linked to another dutch label, selecting it moves the link
+			const linkedToOtherLabel =
+				isDutchLabel &&
+				!!label.nl_parent_label_id &&
+				label.nl_parent_label_id !== String(contentPageLabelInfo?.id);
+			return {
+				label: linkedToOtherLabel
+					? tText(
+							'modules/content-page-labels/views/content-page-label-edit___label-gekoppeld-aan-ander-label',
+							{ label: label.label, otherLabel: label.nl_parent_label?.label || '' },
+							[App.HET_ARCHIEF]
+						)
+					: label.label,
+				value: String(label.id),
+			};
+		}),
+	];
+
+	const handleTranslatedLabelChange = (language: Locale, newLabelId: string | null) => {
+		if (!contentPageLabelInfo) {
+			return;
+		}
+		const newLabel = (labelOptionsByLanguage[language] || []).find(
+			(label) => String(label.id) === newLabelId
+		);
+		setContentPageLabelInfo({
+			...contentPageLabelInfo,
+			translated_labels: [
+				...(contentPageLabelInfo.translated_labels || []).filter(
+					(translatedLabel) => translatedLabel.language !== language
+				),
+				...(newLabel
+					? [{ id: newLabel.id, label: newLabel.label, language: newLabel.language }]
+					: []),
+			],
+		});
+	};
+
 	const initOrFetchContentPageLabel = useCallback(async () => {
 		if (isCreatePage) {
 			const contentLabel = {
 				label: '',
 				content_type: 'PAGINA',
 				language: Locale.Nl,
-				...(isHetArchief() ? { color: Color.White } : {}),
+				...(isHetArchief()
+					? { color: Color.White, nl_parent_label_id: null, translated_labels: [] }
+					: {}),
 				created_at: new Date().toISOString(),
 				updated_at: new Date().toISOString(),
 				permissions: [],
@@ -272,11 +396,14 @@ export const ContentPageLabelEdit: FunctionComponent<ContentPageLabelEditProps> 
 										setContentPageLabelInfo({
 											...contentPageLabelInfo,
 											content_type: newContentType as AvoContentPageType,
+											// Translations have to be labels of the same content type
+											nl_parent_label_id: null,
+											translated_labels: [],
 										})
 									}
 								/>
 							</FormGroup>
-							{isMultiLanguageEnabled() && (
+							{showLanguageFields && (
 								<FormGroup
 									label={tText('modules/content-page-labels/views/content-page-label-edit___taal')}
 									error={formErrors.language}
@@ -289,11 +416,50 @@ export const ContentPageLabelEdit: FunctionComponent<ContentPageLabelEditProps> 
 											setContentPageLabelInfo({
 												...contentPageLabelInfo,
 												language: newLanguage as Locale,
+												// A dutch label has translations, a label in another language has a dutch version
+												nl_parent_label_id: null,
+												translated_labels: [],
 											})
 										}
 									/>
 								</FormGroup>
 							)}
+							{showLanguageFields && !isDutchLabel && (
+								<FormGroup
+									label={getLanguageVersionLabel(Locale.Nl)}
+									className="c-multilanguage-controls"
+								>
+									<Select
+										options={getLanguageVersionOptions(Locale.Nl)}
+										value={contentPageLabelInfo.nl_parent_label_id || ''}
+										onChange={(newNlParentLabelId) =>
+											setContentPageLabelInfo({
+												...contentPageLabelInfo,
+												nl_parent_label_id: newNlParentLabelId || null,
+											})
+										}
+									/>
+								</FormGroup>
+							)}
+							{showLanguageFields &&
+								isDutchLabel &&
+								otherLanguages.map((language) => (
+									<FormGroup
+										key={`translated-label-${language}`}
+										label={getLanguageVersionLabel(language)}
+										className="c-multilanguage-controls"
+									>
+										<Select
+											options={getLanguageVersionOptions(language)}
+											value={String(
+												(contentPageLabelInfo.translated_labels || []).find(
+													(translatedLabel) => translatedLabel.language === language
+												)?.id || ''
+											)}
+											onChange={(newLabelId) => handleTranslatedLabelChange(language, newLabelId)}
+										/>
+									</FormGroup>
+								))}
 							{isHetArchief() && (
 								<FormGroup
 									label={tText(

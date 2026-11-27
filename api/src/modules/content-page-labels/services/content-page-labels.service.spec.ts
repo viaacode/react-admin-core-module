@@ -8,8 +8,10 @@ import {
 	type GetContentPageLabelsByTypeAndIdsQuery,
 	type GetContentPageLabelsByTypeAndLabelsQuery,
 	type GetContentPageLabelsQuery,
+	type GetContentPageLabelTranslationsQuery,
 	type InsertContentPageLabelMutation,
 	Lookup_App_Content_Type_Enum,
+	Lookup_Languages_Enum,
 	type UpdateContentPageLabelMutation,
 } from '../../shared/generated/graphql-db-types-hetarchief';
 import { TestingLogger } from '../../shared/logging/test-logger';
@@ -334,6 +336,155 @@ describe('ContentPageLabelsService', () => {
 			);
 			expect(response[0].id).toEqual(mockLabelObj.id);
 			expect(response[0].label).toEqual(mockLabelObj.label);
+		});
+	});
+
+	describe('translateContentPageLabels', () => {
+		const nl = Lookup_Languages_Enum.Nl;
+		const en = Lookup_Languages_Enum.En;
+		const nlLabel = { id: 'nl-1', label: 'Achter de schermen', language: nl };
+		const enLabel = { id: 'en-1', label: 'Behind the scenes', language: en };
+
+		const originalDatabaseType = process.env.DATABASE_APPLICATION_TYPE;
+		beforeEach(() => {
+			process.env.DATABASE_APPLICATION_TYPE = AvoCoreDatabaseType.hetArchief;
+			mockDataService.execute.mockReset();
+		});
+		afterAll(() => {
+			process.env.DATABASE_APPLICATION_TYPE = originalDatabaseType;
+		});
+
+		it('should translate a dutch label to its linked english label', async () => {
+			const mockData: GetContentPageLabelTranslationsQuery = {
+				app_content_label: [{ ...nlLabel, translated_labels: [enLabel], nl_parent_label: null }],
+			};
+			mockDataService.execute.mockResolvedValueOnce(mockData);
+
+			const response = await contentPageLabelsService.translateContentPageLabels(
+				[nlLabel.label],
+				nl,
+				en
+			);
+			expect(response).toEqual([enLabel.label]);
+			expect(mockDataService.execute.mock.calls[0][1]).toEqual({
+				labels: [nlLabel.label],
+				language: nl,
+			});
+		});
+
+		it('should translate an english label to its dutch parent label', async () => {
+			const mockData: GetContentPageLabelTranslationsQuery = {
+				app_content_label: [
+					{
+						...enLabel,
+						translated_labels: [],
+						nl_parent_label: { ...nlLabel, translated_labels: [enLabel] },
+					},
+				],
+			};
+			mockDataService.execute.mockResolvedValueOnce(mockData);
+
+			const response = await contentPageLabelsService.translateContentPageLabels(
+				[enLabel.label],
+				en,
+				nl
+			);
+			expect(response).toEqual([nlLabel.label]);
+		});
+
+		it('should leave out labels without a linked translation', async () => {
+			const mockData: GetContentPageLabelTranslationsQuery = {
+				app_content_label: [{ ...nlLabel, translated_labels: [], nl_parent_label: null }],
+			};
+			mockDataService.execute.mockResolvedValueOnce(mockData);
+
+			const response = await contentPageLabelsService.translateContentPageLabels(
+				[nlLabel.label, 'Onbekend label'],
+				nl,
+				en
+			);
+			expect(response).toEqual([]);
+		});
+
+		it('should not query the database for avo', async () => {
+			process.env.DATABASE_APPLICATION_TYPE = AvoCoreDatabaseType.avo;
+
+			const response = await contentPageLabelsService.translateContentPageLabels(
+				[nlLabel.label],
+				nl,
+				en
+			);
+			expect(response).toEqual([]);
+			expect(mockDataService.execute).not.toHaveBeenCalled();
+		});
+	});
+
+	describe('updateContentPageLabel with translated labels', () => {
+		const originalDatabaseType = process.env.DATABASE_APPLICATION_TYPE;
+		const updateResponse = (): UpdateContentPageLabelMutation => ({
+			update_app_content_label: {
+				// biome-ignore lint/suspicious/noExplicitAny: dto vs generated graphql row type
+				returning: [{ ...mockContentPageLabelDto, color: '', nl_parent_label_id: null } as any],
+			},
+		});
+		beforeEach(() => {
+			process.env.DATABASE_APPLICATION_TYPE = AvoCoreDatabaseType.hetArchief;
+			mockDataService.execute.mockReset();
+		});
+		afterAll(() => {
+			process.env.DATABASE_APPLICATION_TYPE = originalDatabaseType;
+		});
+
+		it('should link the translated labels to a dutch label', async () => {
+			mockDataService.execute.mockResolvedValueOnce(updateResponse());
+			mockDataService.execute.mockResolvedValueOnce({});
+
+			await contentPageLabelsService.updateContentPageLabel({
+				...mockContentPageLabelDto,
+				translated_label_ids: ['en-1'],
+			});
+
+			expect(mockDataService.execute).toHaveBeenCalledTimes(2);
+			expect(mockDataService.execute.mock.calls[1][1]).toEqual({
+				nlLabelId: mockContentPageLabelDto.id,
+				translatedLabelIds: ['en-1'],
+			});
+		});
+
+		it('should unlink all translations when an empty list is passed', async () => {
+			mockDataService.execute.mockResolvedValueOnce(updateResponse());
+			mockDataService.execute.mockResolvedValueOnce({});
+
+			await contentPageLabelsService.updateContentPageLabel({
+				...mockContentPageLabelDto,
+				translated_label_ids: [],
+			});
+
+			expect(mockDataService.execute.mock.calls[1][1]).toEqual({
+				nlLabelId: mockContentPageLabelDto.id,
+				translatedLabelIds: [],
+			});
+		});
+
+		it('should not touch the links when no translated label ids are passed', async () => {
+			mockDataService.execute.mockResolvedValueOnce(updateResponse());
+
+			await contentPageLabelsService.updateContentPageLabel(mockContentPageLabelDto);
+
+			expect(mockDataService.execute).toHaveBeenCalledTimes(1);
+		});
+
+		it('should not link translations to a non-dutch label', async () => {
+			mockDataService.execute.mockResolvedValueOnce(updateResponse());
+
+			await contentPageLabelsService.updateContentPageLabel({
+				...mockContentPageLabelDto,
+				// biome-ignore lint/suspicious/noExplicitAny: graphql enum vs translations locale enum
+				language: Lookup_Languages_Enum.En as any,
+				translated_label_ids: ['en-1'],
+			});
+
+			expect(mockDataService.execute).toHaveBeenCalledTimes(1);
 		});
 	});
 });

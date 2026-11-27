@@ -1,15 +1,18 @@
 import { Button, ButtonToolbar, IconName, Table } from '@viaa/avo2-components';
 import type { FunctionComponent } from 'react';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { Fragment, useCallback, useEffect, useState } from 'react';
 import { AdminConfigManager } from '~core/config/config.class';
 import { AdminCoreIconName } from '~core/config/config.types';
 import { Color, CustomBackground } from '~modules/content-page/types/content-block.types';
 import { ContentPageLabelService } from '~modules/content-page-labels/content-page-label.service';
 import type { DefaultComponentProps } from '~modules/shared/types/components';
+import { useGetAllLanguages } from '~modules/translations/hooks/use-get-all-languages';
+import { Locale } from '~modules/translations/translations.core.types';
 import { GET_CONTENT_TYPE_LABELS } from '~shared/components/ContentPicker/ContentPicker.const';
 import { Icon } from '~shared/components/Icon/Icon';
 import type { LoadingInfo } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
 import { LoadingErrorLoadedComponent } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
+import { GET_LANGUAGE_NAMES } from '~shared/consts/language-names';
 import { CustomError } from '~shared/helpers/custom-error';
 import { isHetArchief } from '~shared/helpers/is-hetarchief';
 import { isMultiLanguageEnabled } from '~shared/helpers/is-multi-language-enabled';
@@ -19,7 +22,7 @@ import {
 	renderDetailRow,
 	renderSimpleDetailRows,
 } from '~shared/helpers/render-detail-fields';
-import { buildLink, navigateToContentType } from '~shared/helpers/routing/link';
+import { buildLink, navigate, navigateToContentType } from '~shared/helpers/routing/link';
 import { tText } from '~shared/helpers/translation-functions';
 import { AdminLayout } from '~shared/layouts/AdminLayout/AdminLayout';
 import { App } from '../../../../../scripts/translation.types';
@@ -40,6 +43,10 @@ export const ContentPageLabelDetail: FunctionComponent<ContentPageLabelDetailPro
 	// Hooks
 	const [contentPageLabelInfo, setContentPageLabelInfo] = useState<ContentPageLabel | null>(null);
 	const [loadingInfo, setLoadingInfo] = useState<LoadingInfo>({ state: 'loading' });
+	const { data: allLanguages } = useGetAllLanguages();
+	const otherLanguages: Locale[] = (allLanguages || [])
+		.map((languageInfo) => languageInfo.languageCode as Locale)
+		.filter((languageCode) => languageCode !== Locale.Nl);
 
 	const initOrFetchContentPageLabel = useCallback(async () => {
 		try {
@@ -64,6 +71,9 @@ export const ContentPageLabelDetail: FunctionComponent<ContentPageLabelDetailPro
 				language: contentPageLabelObj.language,
 				link_to: contentPageLabelObj.link_to,
 				color: contentPageLabelObj.color,
+				nl_parent_label_id: contentPageLabelObj.nl_parent_label_id,
+				nl_parent_label: contentPageLabelObj.nl_parent_label,
+				translated_labels: contentPageLabelObj.translated_labels,
 				created_at: contentPageLabelObj.created_at,
 				updated_at: contentPageLabelObj.updated_at,
 			};
@@ -100,6 +110,65 @@ export const ContentPageLabelDetail: FunctionComponent<ContentPageLabelDetailPro
 				id: contentPageLabelId,
 			})
 		);
+	};
+
+	const renderLabelLink = (
+		label: Pick<ContentPageLabel, 'id' | 'label' | 'language'> | null | undefined
+	) => {
+		if (!label) {
+			return '-';
+		}
+		return (
+			<Button
+				type="tertiary"
+				onClick={() =>
+					navigate(AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_LABEL_DETAIL'), {
+						id: String(label.id),
+					})
+				}
+				label={label.label}
+			/>
+		);
+	};
+
+	/**
+	 * Rows with the links between labels in different languages (ARC-4200)
+	 * A dutch label shows its translation per other language, a translated label shows its dutch version
+	 */
+	const renderTranslationRows = (contentPageLabel: ContentPageLabel) => {
+		if (!isMultiLanguageEnabled()) {
+			return null;
+		}
+
+		if (contentPageLabel.language !== Locale.Nl) {
+			return renderDetailRow(
+				renderLabelLink(contentPageLabel.nl_parent_label),
+				tText(
+					'modules/content-page-labels/views/content-page-label-detail___nederlandse-versie',
+					{},
+					[App.HET_ARCHIEF]
+				)
+			);
+		}
+
+		return otherLanguages.map((language) => {
+			const translatedLabel = (contentPageLabel.translated_labels || []).find(
+				(label) => label.language === language
+			);
+			const rowLabel =
+				language === Locale.En
+					? tText(
+							'modules/content-page-labels/views/content-page-label-detail___engelse-versie',
+							{},
+							[App.HET_ARCHIEF]
+						)
+					: GET_LANGUAGE_NAMES()[language] || String(language).toUpperCase();
+			return (
+				<Fragment key={`translated-label-${language}`}>
+					{renderDetailRow(renderLabelLink(translatedLabel), rowLabel)}
+				</Fragment>
+			);
+		});
 	};
 
 	const renderDetailPage = () => {
@@ -158,6 +227,7 @@ export const ContentPageLabelDetail: FunctionComponent<ContentPageLabelDetailPro
 						),
 						isHetArchief()
 					)}
+					{renderTranslationRows(contentPageLabelInfo)}
 					{renderDateDetailRows(contentPageLabelInfo, [
 						[
 							'created_at',

@@ -10,6 +10,17 @@ query getContentPageLabels(
 		link_to
 		language
 		color
+		nl_parent_label_id
+		nl_parent_label {
+			id
+			label
+			language
+		}
+		translated_labels {
+			id
+			label
+			language
+		}
 		created_at
 		updated_at
 		id

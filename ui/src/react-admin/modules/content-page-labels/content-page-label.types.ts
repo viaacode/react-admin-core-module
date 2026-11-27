@@ -21,6 +21,12 @@ export interface ContentPageLabel {
 	link_to: PickerItem | null;
 	// The background colour of the generated visual label. Only exists on hetarchief
 	color?: string;
+	// Optional link to the dutch version of this label. Only exists on hetarchief (ARC-4200)
+	// Used to translate the label filter in the url when the user switches the language of the website
+	nl_parent_label_id?: string | null;
+	nl_parent_label?: Pick<ContentPageLabel, 'id' | 'label' | 'language'> | null;
+	// Only for dutch labels: the labels in other languages that link to this label
+	translated_labels?: Pick<ContentPageLabel, 'id' | 'label' | 'language'>[];
 	created_at: string;
 	updated_at: string;
 }

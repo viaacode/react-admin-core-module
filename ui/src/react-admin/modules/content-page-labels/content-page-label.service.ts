@@ -7,6 +7,7 @@ import type {
 	ContentPageLabel,
 	ContentPageLabelOverviewTableCols,
 } from '~modules/content-page-labels/content-page-label.types';
+import { Locale } from '~modules/translations/translations.core.types';
 import { CustomError } from '~shared/helpers/custom-error';
 import { fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
 import { getAdminCoreApiUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config';
@@ -74,6 +75,12 @@ export class ContentPageLabelService {
 						language: labelObj.language,
 						link_to: labelObj.link_to,
 						color: labelObj.color,
+						nl_parent_label_id: labelObj.nl_parent_label_id || null,
+						// Only dutch labels have translations, undefined leaves the links unchanged
+						translated_label_ids:
+							labelObj.language === Locale.Nl && labelObj.translated_labels
+								? labelObj.translated_labels.map((translatedLabel) => String(translatedLabel.id))
+								: undefined,
 					}))
 				),
 			});
@@ -97,6 +104,14 @@ export class ContentPageLabelService {
 					language: contentPageLabelInfo.language,
 					link_to: contentPageLabelInfo.link_to,
 					color: contentPageLabelInfo.color,
+					nl_parent_label_id: contentPageLabelInfo.nl_parent_label_id || null,
+					// Only dutch labels have translations, undefined leaves the links unchanged
+					translated_label_ids:
+						contentPageLabelInfo.language === Locale.Nl && contentPageLabelInfo.translated_labels
+							? contentPageLabelInfo.translated_labels.map((translatedLabel) =>
+									String(translatedLabel.id)
+								)
+							: undefined,
 				}),
 			});
 		} catch (err) {
@@ -167,6 +182,37 @@ export class ContentPageLabelService {
 					labelIds: compact(labelIds as any[]),
 				}
 			);
+		}
+	}
+
+	/**
+	 * Translate content page label values to another language, using the optional link between a label and its dutch version
+	 * Labels without a linked translation in the target language are left out
+	 * Only hetarchief has links between labels, avo always returns an empty list
+	 * eg: ['Achter de schermen'] from nl to en => ['Behind the scenes']
+	 * https://meemoo.atlassian.net/browse/ARC-4200
+	 */
+	public static async translateContentPageLabels(
+		labels: string[],
+		fromLanguage: Locale,
+		toLanguage: Locale
+	): Promise<string[]> {
+		if (!labels.length) {
+			return [];
+		}
+		try {
+			return (
+				(await fetchWithLogoutJson<string[]>(`${ContentPageLabelService.getBaseUrl()}/translate`, {
+					method: 'POST',
+					body: JSON.stringify({ labels, fromLanguage, toLanguage }),
+				})) || []
+			);
+		} catch (err) {
+			throw new CustomError('Failed to translate content page labels', err, {
+				labels,
+				fromLanguage,
+				toLanguage,
+			});
 		}
 	}
 }

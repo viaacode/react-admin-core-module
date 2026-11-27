@@ -52,6 +52,7 @@ export {
 	type ContentPageInfo,
 	ContentPageWidth,
 } from '~modules/content-page/types/content-pages.types';
+export { ContentPageLabelService } from '~modules/content-page-labels/content-page-label.service';
 export { UserBulkAction } from '~modules/user/user.types';
 export { SmartLink } from '~shared/components/SmartLink/SmartLink';
 export {
