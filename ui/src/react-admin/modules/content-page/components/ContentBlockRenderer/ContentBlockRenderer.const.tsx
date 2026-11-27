@@ -122,7 +122,9 @@ export function GET_BLOCK_COMPONENT(
 		[ContentBlockType.Search]: loadComponentFromConfig(ContentBlockType.Search),
 		[ContentBlockType.AvoImageTextBackground]: BlockAvoImageTextBackground,
 	};
-	return blocks[type];
+	// A component the app passes in the config content_blocks replaces the default one,
+	// eg: hetarchief wraps the IFrame block to only load the iframe after cookie consent
+	return AdminConfigManager.getConfig().content_blocks?.[type] || blocks[type];
 }
 
 /**

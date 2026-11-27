@@ -782,6 +782,8 @@
   "modules/content-page/components/blocks/block-homepage-banner/block-homepage-banner___text-alignatie": "Text alignatie",
   "modules/content-page/components/blocks/block-homepage-banner/block-homepage-banner___titel-is-verplicht": "Titel is verplicht",
   "modules/content-page/components/blocks/block-homepage-banner/block-homepage-banner___title": "Title",
+  "modules/content-page/components/blocks/block-i-frame/block-i-frame___cookie-instellingen-aanpassen": "Cookie-instellingen aanpassen",
+  "modules/content-page/components/blocks/block-i-frame/block-i-frame___deze-inhoud-wordt-aangeboden-door-een-externe-dienst-aanvaard-de-statistische-en-marketing-cookies-om-ze-te-bekijken": "Deze inhoud wordt aangeboden door een externe dienst. Aanvaard de statistische en marketing cookies om ze te bekijken.",
   "modules/content-page/components/blocks/block-image-carousel/block-image-carousel___Carousel-met-afbeeldingen": "Carousel met afbeeldingen",
   "modules/content-page/components/blocks/block-image-carousel/block-image-carousel___afbeelding-is-verplicht": "Afbeelding is verplicht",
   "modules/content-page/components/blocks/block-image-carousel/block-image-carousel___alt-tekst-voor-de-afbeelding": "Alt tekst voor de afbeelding",
