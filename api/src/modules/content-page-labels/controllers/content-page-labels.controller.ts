@@ -1,17 +1,16 @@
-import { addPrefix } from '../../shared/helpers/add-route-prefix';
 import { Body, Controller, Delete, Get, Param, Patch, Post, Put, Query } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-
 import { type AvoSearchOrderDirection, PermissionName } from '@viaa/avo2-types';
-
 import type { ContentPageLabel, LabelObj } from '../../content-pages';
 import { ContentLabelsRequestDto } from '../../content-pages/dto/content-labels-request.dto';
 import { RequireAnyPermissions } from '../../shared/decorators/require-any-permissions.decorator';
+import { addPrefix } from '../../shared/helpers/add-route-prefix';
 import { CustomError } from '../../shared/helpers/error';
 import type { ContentPageLabelOverviewTableCols } from '../content-page-labels.types';
 import {
 	ContentPageLabelDto,
 	InsertContentPageLabelDto,
+	TranslateContentPageLabelsDto,
 	UpdateContentPageLabelDto,
 } from '../dto/content-page-label.dto';
 import { ContentPageLabelsService } from '../services/content-page-labels.service';
@@ -109,6 +108,32 @@ export class ContentPageLabelsController {
 		} catch (err) {
 			throw new CustomError('Failed to delete the content page label from the database', err, {
 				id,
+			});
+		}
+	}
+
+	// Allowed for any user: used when switching the language of the website on a page with a label filter in the url
+	@ApiOperation({
+		description:
+			'Translate content page label values to another language, labels without a linked translation are left out',
+	})
+	@ApiResponse({
+		status: 200,
+		description: 'Returns the translated label values',
+		type: String,
+		isArray: true,
+	})
+	@Post('translate')
+	async translateContentPageLabels(@Body() body: TranslateContentPageLabelsDto): Promise<string[]> {
+		try {
+			return await this.contentPageLabelService.translateContentPageLabels(
+				body.labels,
+				body.fromLanguage,
+				body.toLanguage
+			);
+		} catch (err) {
+			throw new CustomError('Failed to translate content page labels', err, {
+				body,
 			});
 		}
 	}

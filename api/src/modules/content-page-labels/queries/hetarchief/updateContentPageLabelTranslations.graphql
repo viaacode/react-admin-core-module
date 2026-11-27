@@ -1,0 +1,16 @@
+# Link the given labels (in other languages) to a dutch label and unlink its previous translations (ARC-4200)
+# Both updates run in one transaction
+mutation updateContentPageLabelTranslations($nlLabelId: uuid!, $translatedLabelIds: [uuid!]!) {
+	unlinked: update_app_content_label(
+		where: { nl_parent_label_id: { _eq: $nlLabelId }, id: { _nin: $translatedLabelIds } }
+		_set: { nl_parent_label_id: null }
+	) {
+		affected_rows
+	}
+	linked: update_app_content_label(
+		where: { id: { _in: $translatedLabelIds } }
+		_set: { nl_parent_label_id: $nlLabelId }
+	) {
+		affected_rows
+	}
+}

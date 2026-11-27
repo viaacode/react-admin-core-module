@@ -10,6 +10,7 @@ mutation updateContentPageLabel(
 			link_to
 			language
 			color
+			nl_parent_label_id
 			created_at
 			updated_at
 		}

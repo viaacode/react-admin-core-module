@@ -1,12 +1,22 @@
 import { forwardRef, Inject } from '@nestjs/common';
 import type { AvoSearchOrderDirection } from '@viaa/avo2-types';
-import { isNil } from 'lodash';
+import { isNil, uniq } from 'lodash';
 import type { ContentPageLabel, ContentPageType, LabelObj } from '../../content-pages';
 import { DataService } from '../../data';
+import {
+	GetContentPageLabelTranslationsDocument,
+	type GetContentPageLabelTranslationsQuery,
+	type GetContentPageLabelTranslationsQueryVariables,
+	type Lookup_Languages_Enum,
+	UpdateContentPageLabelTranslationsDocument,
+	type UpdateContentPageLabelTranslationsMutation,
+	type UpdateContentPageLabelTranslationsMutationVariables,
+} from '../../shared/generated/graphql-db-types-hetarchief';
 import { CustomError } from '../../shared/helpers/error';
 import { getDatabaseType } from '../../shared/helpers/get-database-type';
 import { isAvo } from '../../shared/helpers/is-avo';
 import { isHetArchief } from '../../shared/helpers/is-hetarchief';
+import type { Locale } from '../../translations';
 import type {
 	ContentPageLabelOverviewTableCols,
 	HetArchiefContentPageLabel,
@@ -60,8 +70,10 @@ export class ContentPageLabelsService {
 					id: labelObj?.id,
 					language: labelObj?.language,
 					link_to: labelObj?.link_to,
-					// Only hetarchief content page labels have a color
+					// Only hetarchief content page labels have a color and a link to their dutch version
 					color: (labelObj as HetArchiefContentPageLabel)?.color,
+					nl_parent_label_id: (labelObj as HetArchiefContentPageLabel)?.nl_parent_label_id,
+					nl_parent_label: (labelObj as HetArchiefContentPageLabel)?.nl_parent_label,
 					created_at: labelObj?.created_at,
 					updated_at: labelObj?.updated_at,
 				})
@@ -119,8 +131,13 @@ export class ContentPageLabelsService {
 				id: contentPageLabelRaw.id,
 				language: contentPageLabelRaw.language,
 				link_to: contentPageLabelRaw.link_to,
-				// Only hetarchief content page labels have a color
+				// Only hetarchief content page labels have a color and a link to their dutch version
 				color: (contentPageLabelRaw as HetArchiefContentPageLabelById).color,
+				nl_parent_label_id: (contentPageLabelRaw as HetArchiefContentPageLabelById)
+					.nl_parent_label_id,
+				nl_parent_label: (contentPageLabelRaw as HetArchiefContentPageLabelById).nl_parent_label,
+				translated_labels: (contentPageLabelRaw as HetArchiefContentPageLabelById)
+					.translated_labels,
 				created_at: contentPageLabelRaw.created_at,
 				updated_at: contentPageLabelRaw.updated_at,
 			};
@@ -146,8 +163,13 @@ export class ContentPageLabelsService {
 					// biome-ignore lint/suspicious/noExplicitAny: locale from other repo complains about types
 					language: contentPageLabel.language as any,
 					link_to: contentPageLabel.link_to || null,
-					// The color column only exists on hetarchief
-					...(isHetArchief() ? { color: contentPageLabel.color } : {}),
+					// The color and nl_parent_label_id columns only exist on hetarchief
+					...(isHetArchief()
+						? {
+								color: contentPageLabel.color,
+								nl_parent_label_id: contentPageLabel.nl_parent_label_id || null,
+							}
+						: {}),
 					created_at: new Date().toISOString(),
 					updated_at: new Date().toISOString(),
 				})),
@@ -164,6 +186,16 @@ export class ContentPageLabelsService {
 					{ response }
 				);
 			}
+			// Link the translations of the new dutch labels
+			await Promise.all(
+				contentPageLabels.map((contentPageLabel, index) =>
+					this.updateTranslatedLabels(
+						String(contentPageLabelsResponse[index]?.id),
+						contentPageLabel.language,
+						contentPageLabel.translated_label_ids
+					)
+				)
+			);
 			return contentPageLabelsResponse as ContentPageLabelDto[];
 		} catch (err) {
 			throw new CustomError('Failed to insert content page labels in the database', err, {
@@ -187,8 +219,13 @@ export class ContentPageLabelsService {
 					content_type: contentPageLabelInfo.content_type as any,
 					language: contentPageLabelInfo.language,
 					link_to: contentPageLabelInfo.link_to || null,
-					// The color column only exists on hetarchief
-					...(isHetArchief() ? { color: contentPageLabelInfo.color } : {}),
+					// The color and nl_parent_label_id columns only exist on hetarchief
+					...(isHetArchief()
+						? {
+								color: contentPageLabelInfo.color,
+								nl_parent_label_id: contentPageLabelInfo.nl_parent_label_id || null,
+							}
+						: {}),
 					updated_at: new Date().toISOString(),
 				},
 				contentPageLabelId: contentPageLabelInfo.id,
@@ -205,6 +242,11 @@ export class ContentPageLabelsService {
 					{ response }
 				);
 			}
+			await this.updateTranslatedLabels(
+				contentPageLabelInfo.id,
+				contentPageLabelInfo.language,
+				contentPageLabelInfo.translated_label_ids
+			);
 			return contentPageLabelResponse as ContentPageLabelDto;
 		} catch (err) {
 			throw new CustomError('Failed to update content page label in the database', err, {
@@ -273,5 +315,89 @@ export class ContentPageLabelsService {
 				.app_content_labels ||
 			[]
 		);
+	}
+
+	/**
+	 * Link the given labels in other languages to a dutch label and unlink its previous translations (ARC-4200)
+	 * Only for dutch labels on hetarchief, undefined translatedLabelIds leaves the links unchanged
+	 * @param nlLabelId
+	 * @param language the language of the label with id nlLabelId
+	 * @param translatedLabelIds
+	 */
+	private async updateTranslatedLabels(
+		nlLabelId: string,
+		language: Locale,
+		translatedLabelIds: string[] | undefined
+	): Promise<void> {
+		if (!isHetArchief() || (language as string) !== 'nl' || !translatedLabelIds) {
+			return;
+		}
+		try {
+			await this.dataService.execute<
+				UpdateContentPageLabelTranslationsMutation,
+				UpdateContentPageLabelTranslationsMutationVariables
+			>(UpdateContentPageLabelTranslationsDocument, {
+				nlLabelId,
+				translatedLabelIds: translatedLabelIds.filter((id) => !!id && id !== nlLabelId),
+			});
+		} catch (err) {
+			throw new CustomError('Failed to update the translations of the content page label', err, {
+				nlLabelId,
+				translatedLabelIds,
+				query: 'updateContentPageLabelTranslations',
+			});
+		}
+	}
+
+	/**
+	 * Translate content page label values to another language, using the optional link between a label and its dutch version (ARC-4200)
+	 * eg: ['Achter de schermen'] from nl to en => ['Behind the scenes']
+	 * Labels without a linked translation in the target language are left out,
+	 * so the page overview shows all items in the new language instead of items in the old language
+	 * Only hetarchief has links between labels, avo always returns an empty list
+	 * @param labels label values in the fromLanguage
+	 * @param fromLanguage
+	 * @param toLanguage
+	 */
+	public async translateContentPageLabels(
+		labels: string[],
+		fromLanguage: Locale,
+		toLanguage: Locale
+	): Promise<string[]> {
+		if (!labels.length || !isHetArchief()) {
+			return [];
+		}
+		if (fromLanguage === toLanguage) {
+			return labels;
+		}
+		try {
+			const response = await this.dataService.execute<
+				GetContentPageLabelTranslationsQuery,
+				GetContentPageLabelTranslationsQueryVariables
+			>(GetContentPageLabelTranslationsDocument, {
+				labels,
+				language: fromLanguage as unknown as Lookup_Languages_Enum,
+			});
+
+			const translatedLabels = (response.app_content_label || []).flatMap((labelObj) => {
+				// A dutch label is linked from its translations, another language links to its dutch parent label
+				const candidates = [
+					...(labelObj.translated_labels || []),
+					...(labelObj.nl_parent_label ? [labelObj.nl_parent_label] : []),
+					...(labelObj.nl_parent_label?.translated_labels || []),
+				];
+				return candidates
+					.filter((candidate) => (candidate.language as string) === (toLanguage as string))
+					.map((candidate) => candidate.label);
+			});
+			return uniq(translatedLabels);
+		} catch (err) {
+			throw new CustomError('Failed to translate content page labels', err, {
+				labels,
+				fromLanguage,
+				toLanguage,
+				query: 'getContentPageLabelTranslations',
+			});
+		}
 	}
 }

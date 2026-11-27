@@ -1,0 +1,25 @@
+# Get the labels with these label values in a specific language, with their linked translations (ARC-4200)
+# - nl labels: their translations are the labels that point to them (translated_labels)
+# - other labels: their translations are the nl parent label and the other labels pointing to that nl parent label
+query getContentPageLabelTranslations($labels: [String!]!, $language: lookup_languages_enum!) {
+	app_content_label(where: { label: { _in: $labels }, language: { _eq: $language } }) {
+		id
+		label
+		language
+		translated_labels {
+			id
+			label
+			language
+		}
+		nl_parent_label {
+			id
+			label
+			language
+			translated_labels {
+				id
+				label
+				language
+			}
+		}
+	}
+}

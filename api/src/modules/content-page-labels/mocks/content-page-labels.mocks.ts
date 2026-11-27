@@ -18,12 +18,15 @@ export const mockGqlContentPageLabel1: GetContentPageLabelsQuery['app_content_la
 		target: '_self',
 	},
 	color: '#E694B3',
+	nl_parent_label_id: null,
+	nl_parent_label: null,
 	created_at: '2022-05-17T08:47:49.271562',
 	updated_at: '2022-05-17T08:47:49.271562',
 	id: '13d00f95-5597-4470-b5ce-d3ee96212ff4',
 };
 
 export const mockGqlContentPageLabel2: GetContentPageLabelByIdQuery['app_content_label'][0] = {
+	translated_labels: [],
 	label: 'Gebruik van het materiaal',
 	content_type: Lookup_App_Content_Type_Enum.FaqItem,
 	language: Locale.Nl,
@@ -33,6 +36,8 @@ export const mockGqlContentPageLabel2: GetContentPageLabelByIdQuery['app_content
 		target: '_self',
 	},
 	color: '#E694B3',
+	nl_parent_label_id: null,
+	nl_parent_label: null,
 	created_at: '2022-05-17T08:47:49.271562',
 	updated_at: '2022-05-17T08:47:49.271562',
 	id: '13d00f95-5597-4470-b5ce-d3ee96212ff4',
@@ -41,7 +46,7 @@ export const mockGqlContentPageLabel2: GetContentPageLabelByIdQuery['app_content
 // Avo has no color column on its content page labels, so the mapped color stays undefined
 export const mockGqlContentPageLabelWithoutColor: Omit<
 	GetContentPageLabelsQuery['app_content_label'][0],
-	'color'
+	'color' | 'nl_parent_label_id' | 'nl_parent_label'
 > = {
 	label: 'Gebruik van het materiaal',
 	content_type: Lookup_App_Content_Type_Enum.FaqItem,
